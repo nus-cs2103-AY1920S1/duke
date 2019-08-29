@@ -2,12 +2,13 @@ import java.util.Scanner;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
-    private String taskListPath = "./src/main/data/taskList.txt";
+    private String taskListPath;
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
-    public Duke() throws DukeException {
+    public Duke(String filePath) throws DukeException {
+        taskListPath = filePath;
         storage = new Storage(taskListPath);
         ui = new Ui();
         tasks = new TaskList(storage.load());
@@ -24,5 +25,10 @@ public class Duke {
                 Ui.printStr(e.getMessage());
             }
         }
+    }
+
+    public static void main (String args[]) throws DukeException {
+        Duke duke = new Duke("./src/main/data/taskList.txt");
+        duke.start();
     }
 }

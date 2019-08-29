@@ -15,7 +15,7 @@ public class Ui {
     }
 
     public void start(Parser parser) {
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         line = sc.nextLine();
@@ -58,6 +58,13 @@ public class Ui {
 
     public void printDone(Task currTask) {
         System.out.println("Nice! I've marked this task as done: \n  " + currTask);
+    }
+
+    public void printFind(ArrayList<Task> list) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println(i + ". " + list.get(i - 1));
+        }
     }
 
     public void showLoadingError() {

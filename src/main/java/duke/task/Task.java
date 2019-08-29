@@ -25,6 +25,10 @@ public class Task {
         }
     }
 
+    public String getDesc() {
+        return description;
+    }
+
     public String format() {
         return "|" + num + "|" + description;
     }

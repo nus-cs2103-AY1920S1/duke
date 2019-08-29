@@ -1,3 +1,5 @@
+package cs2103t.duke.exception;
+
 public class EmptyDescriptionException extends DukeException {
     private String type;
     public EmptyDescriptionException(String msg) {

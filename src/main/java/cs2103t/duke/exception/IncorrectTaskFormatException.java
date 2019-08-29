@@ -1,3 +1,5 @@
+package cs2103t.duke.exception;
+
 public class IncorrectTaskFormatException extends DukeException {
     private String keyword2;
     public IncorrectTaskFormatException(String msg) {

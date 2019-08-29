@@ -1,3 +1,9 @@
+package cs2103t.duke.task;
+
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.exception.InvalidKeywordException;
+import cs2103t.duke.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +19,7 @@ public class TaskList {
     public int getSize() {
         return this.taskList.size();
     }
-    protected List<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.taskList;
     }
 

@@ -1,3 +1,7 @@
+package cs2103t.duke.task;
+
+import cs2103t.duke.exception.EmptyDescriptionException;
+
 public class Todo extends Task {
 
     private Todo() {}

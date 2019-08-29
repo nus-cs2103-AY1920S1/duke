@@ -1,3 +1,5 @@
+package cs2103t.duke.ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -44,7 +46,7 @@ public class Ui {
         return this.scannerIn.nextLine();
     }
 
-    protected void closeScanner() {
+    public void closeScanner() {
         this.scannerIn.close();
     }
 }

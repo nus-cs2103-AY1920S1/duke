@@ -1,3 +1,12 @@
+package cs2103t.duke.command;
+
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.file.Storage;
+import cs2103t.duke.task.Task;
+import cs2103t.duke.task.TaskList;
+import cs2103t.duke.task.TaskType;
+import cs2103t.duke.ui.Ui;
+
 public class AddCommand extends Command {
     private TaskType taskType;
     private String fullDescription;

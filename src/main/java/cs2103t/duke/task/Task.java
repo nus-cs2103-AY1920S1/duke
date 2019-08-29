@@ -1,12 +1,10 @@
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
+package cs2103t.duke.task;
 
 public abstract class Task {
     public static String tick = "\u2713";
     public static String cross = "\u2717";
     //public static int totalNumOfTasks = 0;
-    //public static List<Task> taskList = new ArrayList<>();
+    //public static List<cs2103t.duke.task.Task> taskList = new ArrayList<>();
 
     protected String description;
     protected boolean completed;

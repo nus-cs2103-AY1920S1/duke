@@ -1,3 +1,11 @@
+package cs2103t.duke.parse;
+
+import cs2103t.duke.command.*;
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.exception.InvalidIDException;
+import cs2103t.duke.exception.InvalidKeywordException;
+import cs2103t.duke.task.TaskType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +18,7 @@ public class Parser {
         this.input = input;
     }
 
-    public TaskType getInputTaskType() throws DukeException{
+    public TaskType getInputTaskType() throws DukeException {
         String keyword = this.input.split("\\s+")[0];
         TaskType taskType = TaskType.convertToTaskType(keyword);
         if (taskType == null) {
@@ -59,7 +67,7 @@ public class Parser {
         return cmd;
     }
 
-    public String getDescriptionWithoutDate() { //only if input is entire description alr; aka for indiv Task classes
+    public String getDescriptionWithoutDate() { //only if input is entire description alr; aka for indiv cs2103t.duke.task.Task classes
         return "";
     }
 

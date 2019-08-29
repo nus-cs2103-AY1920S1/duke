@@ -1,3 +1,8 @@
+package cs2103t.duke.task;
+
+import cs2103t.duke.exception.EmptyDescriptionException;
+import cs2103t.duke.exception.IncorrectTaskFormatException;
+
 import java.util.Scanner;
 
 public class Event extends Task {

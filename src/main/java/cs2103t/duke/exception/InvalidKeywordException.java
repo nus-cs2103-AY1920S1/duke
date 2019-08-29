@@ -1,3 +1,5 @@
+package cs2103t.duke.exception;
+
 public class InvalidKeywordException extends DukeException {
     public InvalidKeywordException(String msg) {
         super(msg);

@@ -1,3 +1,5 @@
+package cs2103t.duke.task;
+
 public enum TaskType {
     T, D, E, LIST, DELETE, DONE, EXIT;
 

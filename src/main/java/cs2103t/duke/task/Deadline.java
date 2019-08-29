@@ -1,7 +1,11 @@
+package cs2103t.duke.task;
+
+import cs2103t.duke.exception.EmptyDescriptionException;
+import cs2103t.duke.exception.IncorrectTaskFormatException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Deadline extends Task {
     //Deadlines can have (notes)
@@ -11,7 +15,7 @@ public class Deadline extends Task {
     private Date date;
 
     private Deadline() {}
-    private Deadline(String descr, boolean completed) throws IncorrectTaskFormatException{
+    private Deadline(String descr, boolean completed) throws IncorrectTaskFormatException {
         super.completed = completed;
         super.taskType = TaskType.D;
 
@@ -26,15 +30,6 @@ public class Deadline extends Task {
             throw new IncorrectTaskFormatException("by");
         }
 
-        /*
-        Scanner tmp2 = new Scanner(tmp[1]);
-        String term = tmp2.next();
-        String date = "";
-        if (tmp2.hasNext()) {
-            date = tmp2.nextLine();
-        }
-        tmp2.close();
-         */
         String term = "by";
         String date = tmp[1];
 

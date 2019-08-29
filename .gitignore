@@ -18,6 +18,3 @@ bin/
 
 # Test Output
 text-ui-test/ACTUAL.TXT
-
-# data
-data/duke.txt

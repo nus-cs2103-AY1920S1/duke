@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
+    private File file;
 
     /**
      * Deals with loading tasks from the given file and saving tasks in the same file.
@@ -23,7 +23,7 @@ public class Storage {
      *                 either relative or absolute.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.file = new File(filePath);
     }
 
     /**
@@ -36,7 +36,6 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            File file = new File(filePath);
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String[] data = scanner.nextLine().split(" \\| ");
@@ -62,20 +61,21 @@ public class Storage {
             scanner.close();
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new DukeException("File not found.");
+            throw new DukeException("Data not found.");
         }
     }
 
     /**
      * Converts the current tasks in the list to serialized form and
-     * save the each task to the file.
+     * save the each task to the file. A new file is created if the
+     * destination file does not exits.
      *
-     * @param tasks The list of tasks to be saved to the destined file
+     * @param tasks The list of tasks to be saved to the destination file
      * @throws DukeException if file writing fails
      */
     public void save(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fw = new FileWriter(file);
             for (Task task : tasks.getTasks()) {
                 fw.write(task.serialize());
                 fw.write(System.lineSeparator());

@@ -56,7 +56,7 @@ public class Deadline extends Task {
      */
     @Override
     public String serialize() {
-        return String.format("D | %d | %s | %s %s",
+        return String.format("D | %d | %s | %s%s",
                 getStatusCode(),
                 description,
                 inputDateFormatter.format(byDate),

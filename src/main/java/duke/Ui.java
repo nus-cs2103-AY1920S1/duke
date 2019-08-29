@@ -106,7 +106,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Failed to load tasks. An empty list is created.");
+        System.out.println("An empty data file duke.txt is created in the current directory.");
     }
 
     public void showError(String message) {

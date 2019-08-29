@@ -50,7 +50,7 @@ public class Storage {
         return tasks;
     }
 
-    private Task parseStoredTask(String task) throws DukeException {
+    public Task parseStoredTask(String task) throws DukeException {
         String[] tokens = task.substring(3).split("\\s\\|\\s");
         if (tokens[0].equals("D")) {
             Deadline d = new Deadline(tokens[2], tokens[3]);

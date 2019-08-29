@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
@@ -25,6 +26,26 @@ public class Duke {
             // Bye
             if (firstWordOfCommand.equals("bye")) {
                 isExit = true;
+            }
+            // Find
+            else if (firstWordOfCommand.equals("find")) {
+                System.out.println("Here are the matching tasks in your list:");
+                String keyPhrase = Parser.excludeFirstWord(fullCommand, "find");
+                ArrayList<Task> matchingTasks = new ArrayList<>();
+                boolean hasMatch = false;
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task currentTask = tasks.get(i);
+                    int currentItemNumber = 0;
+                    if (currentTask.getName().contains(keyPhrase)) {
+                        hasMatch = true;
+                        currentItemNumber += 1;
+                        System.out.println(currentItemNumber + "." + currentTask);
+                    }
+                }
+                if (!hasMatch) {
+                    System.out.println("Nothing matches :(");
+                }
+
             }
             // List
             else if (firstWordOfCommand.equals("list")) {

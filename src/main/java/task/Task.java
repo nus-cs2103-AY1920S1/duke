@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * The abstract class that is a parent of Deadline, Event and ToDo tasks.
+ */
 public abstract class Task {
     public String description;
     public boolean isDone;

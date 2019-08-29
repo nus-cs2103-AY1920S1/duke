@@ -8,6 +8,9 @@ import misc.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a TaskList object that can add, delete, list and mark tasks as done upon user request.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
@@ -30,6 +33,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Marks a task to be done upon user request.
+     * @param taskNumber The position of the task to be marked "done" in the ArrayList.
+     * @throws DukeException if the task has already been marked done.
+     * @throws IOException if the completion status of the task cannot be updated in a local save file.
+     */
     public void markTaskAsDone(int taskNumber) throws DukeException, IOException {
         if (tasks.get(taskNumber).isDone) {
             String errorMessage = Ui.spaces(5) + "task.Task has already been marked done!";
@@ -43,6 +52,10 @@ public class TaskList {
                 + Ui.spaces(5) + tasks.get(taskNumber));
     }
 
+    /**
+     * Lists all tasks upon user request.
+     * @throws DukeException if there are no task to list.
+     */
     public void listAllTasks() throws DukeException {
         if (tasks.size() == 0) {
             String errorMessage = Ui.spaces(5) + "There are no task(s) to list!";
@@ -56,6 +69,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new task with its description and Date/Time (if any).
+     * @param description The description of the task to be created.
+     * @param dateTime The Date/Time of the task (if any) to be created.
+     * @param taskType The type of the task (e.g. Todo, Event etc)
+     * @throws IOException if task created cannot be saved to a local save file.
+     */
     public void makeNewTask(String description, String dateTime, String taskType) throws IOException {
         Task task;
 
@@ -83,6 +103,12 @@ public class TaskList {
         System.out.printf("%sNow you have %d task(s) in your list.\n", Ui.spaces(5), tasks.size());
     }
 
+    /**
+     * Deletes a task upon user request.
+     * @param taskNumber The position of the task in the ArrayList to be deleted.
+     * @throws IOException if a local save file cannot be overwritten to reflect changes in user tasks.
+     * @throws IncorrectDukeCommand if the task number given does not fall within the correct range.
+     */
     public void delete(int taskNumber) throws IOException, IncorrectDukeCommand {
         String errorMessage;
 

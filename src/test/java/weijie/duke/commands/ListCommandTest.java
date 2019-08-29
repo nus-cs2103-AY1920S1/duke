@@ -2,7 +2,7 @@ package weijie.duke.commands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import weijie.duke.exceptions.DukeIOException;
+import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Deadline;
 import weijie.duke.models.Event;
 import weijie.duke.models.Task;
@@ -35,7 +35,7 @@ class ListCommandTest {
     }
 
     @Test
-    void execute_listCommandWithFewTasksSaved_returnsCorrectListOfTasks() throws DukeIOException {
+    void execute_listCommandWithFewTasksSaved_returnsCorrectListOfTasks() throws DukeIoException {
         String[] args = "list".split(" ");
 
         Event event = new Event("2103 project due",

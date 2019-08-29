@@ -1,6 +1,6 @@
 package weijie.duke.db;
 
-import weijie.duke.exceptions.DukeIOException;
+import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class Storage {
 
     private File file;
 
-    public Storage(String path) throws DukeIOException {
+    public Storage(String path) throws DukeIoException {
         this.file = new File(path);
 
         if (!file.exists()) {
@@ -26,7 +26,7 @@ public class Storage {
         }
     }
 
-    public List<Task> read() throws DukeIOException {
+    public List<Task> read() throws DukeIoException {
         try (FileInputStream fileInputStream = new FileInputStream(file);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
 
@@ -34,14 +34,14 @@ public class Storage {
             return new ArrayList<>(Arrays.asList(tasks));
 
         } catch (FileNotFoundException e) {
-            throw new DukeIOException("☹ OOPS!!! Invalid file file provided.");
+            throw new DukeIoException("☹ OOPS!!! Invalid file file provided.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new DukeIOException("☹ OOPS!!! Unexpected IO error has occurred!");
+            throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
         }
     }
 
-    public void write(List<Task> tasks) throws DukeIOException {
+    public void write(List<Task> tasks) throws DukeIoException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(file);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
 
@@ -49,9 +49,9 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            throw new DukeIOException("☹ OOPS!!! Invalid file file provided.");
+            throw new DukeIoException("☹ OOPS!!! Invalid file file provided.");
         } catch (IOException e) {
-            throw new DukeIOException("☹ OOPS!!! Unexpected IO error has occurred!");
+            throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
         }
     }
 }

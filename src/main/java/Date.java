@@ -10,7 +10,6 @@ public class Date {
      * @return True if the format is valid.
      */
     public static boolean verifyDateTimeDeadline(String dateTime) {
-        System.out.println("Input: " + dateTime);
         if (dateTime.length() != 15) {
             return false;
         }
@@ -40,7 +39,6 @@ public class Date {
      * @return True if the date-time format is valid.
      */
     public static boolean verifyDateTimeEvent(String dateTime) {
-        System.out.println("Input: " + dateTime);
         if (dateTime.length() != 20) {
             return false;
         }

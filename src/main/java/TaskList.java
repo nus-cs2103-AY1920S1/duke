@@ -7,22 +7,19 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     //Lists out all the tasks in Duke
     public void list() throws IllegalArgumentException {
         if (tasks.size() == 0) {
             throw new IllegalArgumentException("Nothing found in list");
         }
-        int number = 1;
-        for (Task task : tasks) {
-            String outputString = number + ". " + task.toString();
-            System.out.println(outputString);
-            number++;
-        }
     }
 
     public void add(Task task) {
         tasks.add(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public void done(int number) throws IndexOutOfBoundsException {
@@ -31,7 +28,6 @@ public class TaskList {
         }
         Task task = tasks.get(number - 1);
         task.setDone();
-        System.out.println(task.toString());
     }
 
     public void delete(int number) throws IndexOutOfBoundsException {
@@ -40,8 +36,5 @@ public class TaskList {
         }
         Task task = tasks.get(number - 1);
         tasks.remove(number - 1);
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }
-
 }

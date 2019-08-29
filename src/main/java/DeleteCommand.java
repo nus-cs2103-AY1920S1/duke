@@ -8,8 +8,10 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) {
         int index = Integer.parseInt(commandSplit[1]);
-        ui.printMessage("Noted. I've removed this task:");
+        ui.printDeletedMessage();
         taskList.delete(index);
+        ui.printNumberOfTasks(taskList);
+        ui.printTask(taskList.getTasks().get(index-1));
     }
 
     @Override

@@ -29,18 +29,13 @@ public class Duke {
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
             } catch (InputMismatchException e) {
-                System.out.println("OOPS!!! " + e.getMessage());
+                ui.printErrorMessage(e.getMessage());
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! " + e.getMessage());
+                ui.printErrorMessage(e.getMessage());
             } catch (IllegalArgumentException e) {
-                System.out.println("OOPS!!! " + e.getMessage());
+                ui.printErrorMessage(e.getMessage());
             }
         }
-    }
-
-    public void end() {
-        ui.bye();
-        storage.rewriteData();
     }
 
     public static void main(String[] args) {

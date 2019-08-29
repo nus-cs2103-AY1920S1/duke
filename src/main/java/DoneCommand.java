@@ -8,8 +8,9 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) {
         int index = Integer.parseInt(commandSplit[1]);
-        ui.printMessage("Nice! I've marked this task as done: ");
+        ui.printDoneMessage();
         taskList.done(index);
+        ui.printTask(taskList.getTasks().get(index-1));
     }
 
     @Override

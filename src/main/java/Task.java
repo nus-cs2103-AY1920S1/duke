@@ -41,5 +41,4 @@ public class Task {
     public String toDataString() {
         return isDone ? "1 | " + getDescription() : "0 | " + getDescription();
     }
-    //...
 }

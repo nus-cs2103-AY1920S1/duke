@@ -6,7 +6,7 @@ package duke.support;
 @FunctionalInterface
 public interface PrintFunction {
     /**
-     * Print the things specified in the implementation of this method.
+     * Prints the things specified in the implementation of this method.
      * The implementation specifies what and how things should be printed.
      */
     void print();

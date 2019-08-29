@@ -8,20 +8,40 @@ import duke.task.Task;
 
 import java.util.ListIterator;
 
+/**
+ * Encapsulates a command which query the tasks list of Duke bot.
+ */
 public class QueryCommand extends Command {
     private QueryType queryType;
 
+    /**
+     * The type of query.
+     */
     public enum QueryType {
         LIST_ALL;
     }
 
+    /**
+     * Constructs a QueryCommand object.
+     *
+     * @param queryType type of query.
+     * @param input user's input.
+     */
     public QueryCommand(QueryType queryType, String input) {
         super(input);
         this.queryType = queryType;
     }
 
-    public void execute(TaskList tasks, Ui ui, DukeDatabase database) throws DukeException {
-        initialise(tasks, ui, database);
+    /**
+     * Executes the query command accordingly.
+     *
+     * @param tasksList the tasks list of Duke.
+     * @param ui the ui of Duke.
+     * @param database the database of Duke.
+     * @throws DukeException if the user's input is incorrect.
+     */
+    public void execute(TaskList tasksList, Ui ui, DukeDatabase database) throws DukeException {
+        initialise(tasksList, ui, database);
 
         if (QueryType.LIST_ALL.equals(queryType)) {
            list();
@@ -30,7 +50,9 @@ public class QueryCommand extends Command {
         }
     }
 
-    // List all the tasks in the taskList.
+    /**
+     * Lists all the tasks in the taskList.
+     */
     private void list() {
         ui.echo(() -> {
             System.out.print(Ui.INDENTATION_LVL1 + "Here are the tasks in your list:\n");

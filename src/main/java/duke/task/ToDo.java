@@ -5,7 +5,7 @@ package duke.task;
  */
 public class ToDo extends Task {
     /**
-     * Construct an ToDo object.
+     * Constructs a ToDo object.
      *
      * @param topic the topic of the ToDo.
      */

@@ -15,7 +15,7 @@ import java.util.Collections;
 
 public class AddEventCommand extends AddCommand {
 
-    public AddEventCommand(IRepository<Task> repo) {
+    AddEventCommand(IRepository<Task> repo) {
         super(repo);
     }
 

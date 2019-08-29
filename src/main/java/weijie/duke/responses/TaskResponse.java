@@ -19,6 +19,10 @@ public class TaskResponse {
         this.exception = exception;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     public String getFormattedResponse() {
         Object[] descriptions = tasks.stream()
                 .map(Task::getDescription)

@@ -26,4 +26,14 @@ public abstract class Task implements Serializable {
     public abstract String getDateTime();
 
     public abstract String getTaskIcon();
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this.getClass() == obj.getClass()) {
+            Task other = (Task) obj;
+            return this.description.equals(other.description)
+                    && this.isDone == other.isDone;
+        }
+        return false;
+    }
 }

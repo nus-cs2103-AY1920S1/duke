@@ -1,7 +1,6 @@
 package weijie.duke.views;
 
 import weijie.duke.exceptions.DukeException;
-import weijie.duke.presenters.ConsoleInputListener;
 import weijie.duke.responses.TaskResponse;
 import weijie.duke.utils.StringUtils;
 

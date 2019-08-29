@@ -1,6 +1,8 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String type = "";
+    protected String date = "";
 
     public Task(String description) {
         this.description = description;
@@ -11,8 +13,20 @@ public class Task {
         return this.description;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
+    public String getDate() {
+        return this.date;
+    };
+
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
+        return isDone ? "\u2713" : "\u2718";
+    }
+
+    public String getStatusNum() {
+        return isDone ? "1" : "0";
     }
 
     public void markAsDone() {

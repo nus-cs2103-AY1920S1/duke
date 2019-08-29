@@ -55,6 +55,11 @@ public class Duke {
                 current.markAsDone();
                 System.out.println(addDoubleLine("     Nice! I've marked this task as done:\n" + "    " + current.toString()));
             //make a todo task
+            }else if(check.equals("delete")){
+                String taskNum = splited[1];
+                Task current = list.get(Integer.parseInt(taskNum) - 1);
+                list.remove(Integer.parseInt(taskNum) - 1);
+                System.out.println(addDoubleLine("     Noted. I've removed this task: \n" + "    " + current.toString() + "\n     Now you have " + list.size() + " tasks in the list."));
             }else if(check.equals("todo")){
                 String description = line.replace("todo", "").trim();
                 //error handling

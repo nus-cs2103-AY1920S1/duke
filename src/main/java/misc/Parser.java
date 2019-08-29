@@ -86,11 +86,11 @@ public class Parser {
     }
 
     /**
-     * Reads Strings (from a local save file) as Tasks. These tasks retain information of
-     * all user tasks when the program last exits.
-     * @param stringTask The String to be parsed into a Task.
-     * @param taskType The type of task to be parsed into.
-     * @return A Task in the user's task list when the program last exits. 
+     * Parses an input String into a Date/Time format that can be easily deciphered.
+     * @param stringDate The String to be parsed.
+     * @param taskType The type of Task for the String to be parsed into.
+     * @return A clearer String representation of the Date/Time.
+     * @throws DateTimeParseException if the String cannot be parsed into a Date/Time format.
      */
     public String convertStringToTime(String stringDate, String taskType) throws DateTimeParseException {
         String convertedTime;

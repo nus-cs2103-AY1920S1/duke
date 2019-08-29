@@ -2,13 +2,13 @@ package duke.command;
 
 import duke.exception.FileSaveException;
 import duke.exception.WrongDateFormatException;
-import duke.storage.Storage;
+import duke.storage.DukeStorage;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 import duke.tasklist.MyList;
-import duke.ui.UserInterface;
+import duke.ui.DukeUserInterface;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(MyList taskList, UserInterface ui, Storage storage) throws FileSaveException,
+    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws FileSaveException,
             WrongDateFormatException {
         Task task;
         if (type.equals("todo")) {

@@ -3,8 +3,6 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.*;
 
-import java.time.format.DateTimeFormatter;
-
 public class Parser {
 
     public static Command parse(String input) throws DukeException {

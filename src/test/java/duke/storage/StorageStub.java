@@ -16,32 +16,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Storage implements DukeStorage {
+public class StorageStub implements DukeStorage {
     private String directory;
     private String filename;
 
-    public Storage(String directory) {
+    public StorageStub(String directory) {
         this.directory = directory;
         this.filename = "duke.txt";
     }
 
     //calls every time something is added or deleted
-    @Override
     public void updateList(MyList taskList) throws IOException {
-        FileWriter fw = new FileWriter(directory + filename, false);
-        for (Task task : taskList.getList()) {
-            StorageItem sI;
-            if (task.getType().equals("T")) {
-                sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription());
-            } else {
-                sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription(), task.getDateTime());
-            }
-            fw.write(sI.getData() + System.lineSeparator());
-        }
-        fw.close();
     }
 
-    @Override
     public MyList loadList() throws MissingFileExeception, CorruptedDataException, WrongDateFormatException {
         MyList taskList = new TaskList();
         File file = new File(directory + filename);

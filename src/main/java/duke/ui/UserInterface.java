@@ -7,7 +7,7 @@ import duke.tasklist.MyList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserInterface {
+public class UserInterface implements DukeUserInterface {
     private Scanner sc;
 
     public UserInterface() {

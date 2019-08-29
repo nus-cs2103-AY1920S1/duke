@@ -2,10 +2,10 @@ package duke.command;
 
 import duke.exception.FileSaveException;
 import duke.exception.TaskNotPresentException;
-import duke.storage.Storage;
+import duke.storage.DukeStorage;
 import duke.task.Task;
 import duke.tasklist.MyList;
-import duke.ui.UserInterface;
+import duke.ui.DukeUserInterface;
 
 import java.io.IOException;
 
@@ -17,7 +17,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(MyList taskList, UserInterface ui, Storage storage) throws TaskNotPresentException, FileSaveException {
+    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws TaskNotPresentException,
+            FileSaveException {
         if (taskNum < 1 || taskNum > taskList.getNumTasks()) {
             throw new TaskNotPresentException();
         }

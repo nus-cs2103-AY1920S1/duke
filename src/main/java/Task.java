@@ -72,14 +72,10 @@ public class Task {
      * Boolean value <code>isDone</code> is updated to <code>true</code>.
      */
     public void mark() {
-<<<<<<< HEAD
-        if (!isDone) this.isDone = true;
-=======
         // Update status of task
         if (!isDone) {
             this.isDone = true;
         }
->>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -88,10 +84,7 @@ public class Task {
      * @return string representation of tick or X symbols.
      */
     protected String getStatusIcon() {
-<<<<<<< HEAD
-=======
         // Return tick or X symbols
->>>>>>> branch-A-CodingStandard
         return (isDone ? "[\u2713] " : "[\u2718] ");
     }
 

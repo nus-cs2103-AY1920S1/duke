@@ -5,18 +5,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/* TODO Fix case when task loaded is done */
 public class Storage {
 
     private WriteFile txtFile;
     private String path;
     private TaskList tasks;
-    //private TaskList tasks;
+
     public Storage(WriteFile data, String path, TaskList t) {
+        /**
+         *  constructor for storage
+         *  saves writefile class to write into text file
+         *  saves path where file is
+         *  and tasklist to write to and call methods from it
+         *  @params WriteFile, String, TaskList
+         * @returns none
+         */
         txtFile = data;
         this.path = path;
         tasks = t;
     }
     public void initStorage() {
+        /**
+         *  reads text file from path saved
+         *  this is the reading method, it calls
+         *  load task method to load the task into tasklist
+         *  uses filereader and buffer reader to read file
+         *  line by line
+         *  handles both file not found and
+         *  IO exceptions.
+         *  @params WriteFile, String, TaskList
+         * @returns none
+         */
         String line = "";
         try {
             // FileReader reads text files in the default encoding.
@@ -36,9 +56,14 @@ public class Storage {
     }
     public void loadTask(String task) {
         /**
-         *  load task as from text file
-         *  mimics user input, params
+         *   string task is a line loaded from text file
+         *   line is unparsed, use scanner to parse it
+         *   function separates task info from
+         *   task done, task type, and date to do task by
+         *   @params String task: line of un-parsed task
+         *   @returns none
          */
+        // TODO Make parser class
         ArrayList<Task> taskArr = tasks.getList();
         // converts tasks in string from storage to taskarr
         if (task.equals("")) {
@@ -81,6 +106,18 @@ public class Storage {
         }
     }
     public void saveToTextFile() {
+        /**
+         *   saves all tasks in taskArr to textfile
+         *   as specified in tasklist
+         *   for each task parses to get diff parts
+         *   of task, info, do by and type.
+         *   writes to main textfile one at a time.
+         *   setappend of writefile to true only after firstline
+         *   since want to overwrite old file
+         *   @params none
+         *   @returns none
+         *
+         */
         ArrayList<Task> taskArr = tasks.getList();
         for (Task t: taskArr) {
             String mainTxt = "";

@@ -11,7 +11,7 @@ public class Deadline extends Task {
      * @param time time of the task by which it needs to be completed.
      */
     public Deadline(String s, String time) {
-        super(s);
+        super(s); //Call to Parent Class
         this.timeOfDeadline = time;
     }
 
@@ -20,6 +20,8 @@ public class Deadline extends Task {
      *
      * @return a String containing details of the task.
      */
+
+    @Override
     public String toString() {
         return "[D]" + this.getStatusIcon() + this.description + " (by: " + this.timeOfDeadline + ")";
     }

@@ -15,6 +15,12 @@ public class Event extends Task {
         //this.timeOfEvent = time;
     }
 
+    //private String timeOfEvent;
+    public Event(String description) {
+        super(description);
+        //this.timeOfEvent = time;
+    }
+
     /**
      * Returns a line with details of the Event task.
      *
@@ -22,7 +28,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + this.getStatusIcon() + this.description + " (at: " + this.timeLabel + ")";
+        return "[E]" + this.getStatusIcon() + this.getDescription() + " (at: " + this.getTimeLabel() + ")";
     }
 }
 

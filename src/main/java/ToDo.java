@@ -2,13 +2,15 @@
  * Represents of the task-type ToDo.
  */
 public class ToDo extends Task {
+
     /**
      * Creates an instance of ToDo with label 'T'.
      *
-     * @param s Stores the description of the task.
+     * @param description Stores the description of the task.
      */
-    public ToDo(String s) {
-        super(s);
+
+    public ToDo(String description) {
+        super(description);
         this.wordLabel = "T";
     }
 

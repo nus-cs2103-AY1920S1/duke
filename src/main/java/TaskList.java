@@ -41,8 +41,9 @@ public class TaskList {
      * @param i stores the position from where the task is to be extracted.
      * @return the element at ith position.
      */
-    public Task getElement(int i) {
-        return this.taskList.get(i);
+    public Task getElement(int position) {
+        return this.taskList.get(position);
+
     }
 
     /**

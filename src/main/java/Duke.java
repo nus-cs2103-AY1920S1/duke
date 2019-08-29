@@ -18,7 +18,7 @@ public class Duke {
      * @param filePath Stores file of the path in which list of tasks are stored.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        ui = new Ui(); //Creating user interface object.
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());

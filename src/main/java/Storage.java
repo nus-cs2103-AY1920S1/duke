@@ -34,17 +34,6 @@ public class Storage {
         fwrit.close();
     }
 
-    /*
-    public static void getFileText(ChatLike cl) throws FileNotFoundException, DukeException {
-        File f = new File(fPath); // create a File for the given file path
-        Scanner S = new Scanner(f); // create a Scanner using the File as the source
-        while (S.hasNext()) {
-            String temp = S.nextLine();
-            cl.readFromFile(temp);
-        }
-    }
-*/
-
     /**
      * Loads file from the file path and translates the lines into <code>Task</code> objects.
      *
@@ -52,14 +41,15 @@ public class Storage {
      * @throws FileNotFoundException Exception produced by failure of finding file.
      * @throws DukeException When empty file.
      */
+
     public List<Task> load() throws FileNotFoundException, DukeException {
-        File f = new File(fPath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        if (!s.hasNext())
+        File file = new File(fPath); // create a File for the given file path
+        Scanner sc = new Scanner(file); // create a Scanner using the File as the source
+        if (!sc.hasNext())
             throw new DukeException("Your task list is currently empty.");
 
-        while (s.hasNext()) {
-            String str = s.nextLine();
+        while (sc.hasNext()) {
+            String str = sc.nextLine();
             String arr[] = str.split(" \\| ");
             String tasksType = arr[0];
             int tasksInfo = Integer.valueOf(arr[1]);

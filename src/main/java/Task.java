@@ -34,6 +34,7 @@ public class Task {
      *
      * @return the letter of the task.
      */
+
     public String getLabel() {
         return wordLabel;
     }

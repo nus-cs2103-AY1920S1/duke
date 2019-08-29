@@ -11,15 +11,14 @@ import java.lang.StringBuilder;
  * they have, and even delete them after they are done.
  */
 public class Duke { // handles all input and output
-
-    public static ArrayList<Task> _task = new ArrayList<Task>();
-    public static DukeData _myData;
-    private static Ui _ui;
+    private DukeData _myData;
+    private Ui _ui;
+    private TaskList _tasks;
 
     public Duke() {
-        _ui = new Ui();
-        _myData = new DukeData();
-
+        this._ui = new Ui();
+        this._myData = new DukeData();
+        this._tasks = new TaskList();
     }
 
     /**
@@ -27,7 +26,7 @@ public class Duke { // handles all input and output
      * @param args Unused.
      */
     public static void main(String[] args) { // handles all input and output
-        new Duke();
+        Duke theDuke = new Duke();
         Scanner sc = new Scanner(System.in);
         System.out.println(_ui.showIntro());
 

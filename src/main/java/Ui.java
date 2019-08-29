@@ -9,6 +9,9 @@ public class Ui {
 
     private static final String LINE = "____________________________________________________________";
 
+    public Ui() {
+
+    }
     /**
      * Greets the users, and asks users what they want Duke to do.
      * @return String Returns a String of Greetings.
@@ -50,27 +53,29 @@ public class Ui {
     /**
      * Adds a new Task to the list of tasks, and informs the user of the task added.
      * @param t The Task to be added, which can be a ToDo, Deadline, or Event.
+     * @param list The TaskList which contains all Tasks in the list.
      * @return String Returns a String of information notifying the user of the added task.
      */
-    public static String newTask(Task t) {
-        _task.add(t);
-        String added = String.format("%s%n Got it! I've added this task:" +
-                        "%n   %s%n Now you have %d task in the list.%n%s%n",
-                line, t.toString(), _task.size(), line);
-        return added;
+    public String showTaskAdded(Task t, TaskList list) {
+        list.addTask(t);
+        String added = String.format("Got it! I've added this task:" +
+                        "%n   %s%n Now you have %d task in the list.%n",
+                t.toString(), list.getSize());
+        return addLines(added);
     }
 
     /**
      * Marks a Task as done, and notifies the user of the task marked as done.
      * @param n The task number, in the order of input.
+     * @param list The TaskList which contains all Tasks in the list.
      * @return String Returns a string to inform user of the task marked as done.
      */
-    public static String done(int n) {
-        Task t = _task.get(n - 1);
+    public String showDone(int n, TaskList list) {
+        Task t = list.getTask(n - 1);
         t.markAsDone();
-        String done = String.format("%s%n Nice! I've marked this task as done:%n [%s] %s%n%s%n",
-                line, t.getStatusIcon(), t.getDesc(), line);
-        return done;
+        String done = String.format("Nice! I've marked this task as done:%n [%s] %s%n",
+                t.getStatusIcon(), t.getDesc());
+        return addLines(done);
     }
 
     /**
@@ -79,16 +84,16 @@ public class Ui {
      * @param n The task number, in the order of input.
      * @return String Returns a string to inform user of the task removed from the list.
      */
-    public static String delete(int n) {
-        Task t = _task.get(n - 1);
-        _task.remove(n - 1);
-        String del = String.format("%s%n Noted. I've removed this task:%n   %s%n" +
-                        "Now you have %d tasks in the list.%n%s%n",
-                line, t.toString(), _task.size(), line);
-        return del;
+    public String showDelete(int n, TaskList list) {
+        Task t = list.getTask(n - 1);
+        list.removeTask(n - 1);
+        String del = String.format("Noted. I've removed this task:%n   %s%n" +
+                        "Now you have %d tasks in the list.%n",
+                t.toString(), list.getSize());
+        return addLines(del);
     }
 
-    public static String addLines(String cmd) {
+    public String addLines(String cmd) {
         String out = String.format("%s%n %s%n%s%n",
                 LINE, cmd, LINE);
         return out;

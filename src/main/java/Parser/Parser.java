@@ -7,6 +7,9 @@ import Tasks.Deadline;
 import Tasks.Event;
 import Tasks.Todo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
     public static Command parse(String command) throws InvalidDescriptionException, InvalidCommandException {
         String[] splitString = command.split(" ");
@@ -25,19 +28,23 @@ public class Parser {
             }
             return new AddCommand(new Todo(todoSplit[1].trim()));
         } else if (taskType.equals("deadline")) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             String[] deadlineSplit = command.split("/by ");
             String[] temp = deadlineSplit[0].split("deadline ");
             if (temp.length == 1 || temp[1].isEmpty()) {
                 throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             }
-            return new AddCommand(new Deadline(temp[1].trim(), deadlineSplit[1].trim()));
+            LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
+            return new AddCommand(new Deadline(temp[1].trim(), ldt, deadlineSplit[1].trim()));
         } else if (taskType.equals("event")) {
             String[] deadlineSplit = command.split("/at ");
             String[] temp = deadlineSplit[0].split("event ");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
             if (temp.length == 1 || temp[1].isEmpty()) {
                 throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a event cannot be empty.");
             }
-            return new AddCommand(new Event(temp[1].trim(), deadlineSplit[1].trim()));
+            LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
+            return new AddCommand(new Event(temp[1].trim(), ldt, deadlineSplit[1].trim()));
         } else if (taskType.equals("delete")) {
             int taskIndex = Integer.valueOf(splitString[1]) - 1;
             return new DeleteCommand(taskIndex);

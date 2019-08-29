@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Storage {
@@ -23,7 +25,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            String content = new String(Files.readAllBytes(Paths.get("data/duke.txt")), "UTF-8");
+            String content = new String(Files.readAllBytes(Paths.get(filePath)), "UTF-8");
             String[] storedTasks = content.split("\n");
             // Adding tasks stored in the text file
             for (String s: storedTasks) {
@@ -35,14 +37,18 @@ public class Storage {
                     tasks.add(todo);
                 } else if (s.charAt(0) == 'E') {
                     String[] tempSplit = s.substring(8).split("\\u007C ");
-                    Event event = new Event(tempSplit[0].trim(), tempSplit[1].trim());
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+                    LocalDateTime ldt = LocalDateTime.parse(tempSplit[1].trim(), dtf);
+                    Event event = new Event(tempSplit[0].trim(), ldt, tempSplit[1].trim());
                     if (s.charAt(4) != '0') {
                         event.markAsDone();
                     }
                     tasks.add(event);
                 } else if (s.charAt(0) == 'D') {
                     String[] tempSplit = s.substring(8).split("\\u007C ");
-                    Deadline deadline = new Deadline(tempSplit[0].trim(), tempSplit[1].trim());
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+                    LocalDateTime ldt = LocalDateTime.parse(tempSplit[1].trim(), dtf);
+                    Deadline deadline = new Deadline(tempSplit[0].trim(), ldt, tempSplit[1].trim());
                     if (s.charAt(4) != '0') {
                         deadline.markAsDone();
                     }
@@ -72,10 +78,10 @@ public class Storage {
 
                 } else if (tasks.get(i) instanceof Event) {
                     fw.append(type + " | " + isDone + " | " + tasks.get(i).getDescription() + " | "
-                            + ((Event) tasks.get(i)).getTimeFrame());
+                            + ((Event) tasks.get(i)).getEventDateString());
                 } else if (tasks.get(i) instanceof  Deadline) {
                     fw.append(type + " | " + isDone + " | " + tasks.get(i).getDescription() + " | "
-                            + ((Deadline) tasks.get(i)).getDeadline());
+                            + ((Deadline) tasks.get(i)).getTaskDeadlineString());
                 }
                 if (i != tasks.size() - 1) {
                     fw.append("\n");

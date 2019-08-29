@@ -1,20 +1,24 @@
 package Tasks;
 
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
+    protected LocalDateTime taskDeadline;
+    protected String taskDeadlineString;
 
-    protected String deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, LocalDateTime taskDeadline, String taskDeadlineString) {
         super(description);
-        this.deadline = deadline;
+        this.taskDeadline = taskDeadline;
+        this.taskDeadlineString = taskDeadlineString;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public String getTaskDeadlineString() {
+        return taskDeadlineString;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + taskDeadlineString + ")";
     }
 }

@@ -26,9 +26,9 @@ public class Ui {
     public void showAddTaskMsg(int numOfTasks, String taskDescription) {
         System.out.println("Got it. I've added this task:\n  " + taskDescription);
         if (numOfTasks == 1) {
-        System.out.println("Now you have " + numOfTasks + " task in the list.");
+            System.out.println("Now you have " + numOfTasks + " task in the list.");
         } else {
-        System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+            System.out.println("Now you have " + numOfTasks + " tasks in the list.");
         }
     }
 
@@ -50,6 +50,12 @@ public class Ui {
 
     public void showByeMessage() {
         System.out.println("Bye! Hope to see you again!");
+    }
+
+    public void showDoneMessage(Task task) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("    [" + task.getStatusIcon() + "] " +
+                task.getDescription());
     }
 
     public void showLoadingError() {

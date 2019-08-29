@@ -1,6 +1,7 @@
 package Commands;
 
 import Storage.Storage;
+import Tasks.Task;
 import Tasks.TaskList;
 import Ui.Ui;
 
@@ -17,6 +18,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.markAsDone(taskIndex);
         storage.uploadTasksToFile(taskList.getTasks());
+        ui.showDoneMessage(taskList.getTasks().get(taskIndex));
     }
 
     @Override

@@ -1,19 +1,23 @@
 package Tasks;
 
-public class Event extends Task{
-    protected String timeFrame;
+import java.time.LocalDateTime;
 
-    public Event(String description, String timeFrame) {
+public class Event extends Task{
+    protected LocalDateTime eventDate;
+    protected String eventDateString;
+
+    public Event(String description, LocalDateTime eventDate, String eventDateString) {
         super(description);
-        this.timeFrame = timeFrame;
+        this.eventDate = eventDate;
+        this.eventDateString = eventDateString;
     }
 
-    public String getTimeFrame() {
-        return timeFrame;
+    public String getEventDateString() {
+        return eventDateString;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timeFrame + ")";
+        return "[E]" + super.toString() + " (at: " + eventDateString + ")";
     }
 }

@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 public class Storage {
-    File directoryPath;
-    File saveFile;
+    private File directoryPath;
+    private File saveFile;
 
     public Storage(String filepath) {
         this.directoryPath = new File(filepath);
@@ -23,7 +23,8 @@ public class Storage {
             loadList.close();
             return taskList;
         } catch (Exception e) {
-            throw new DukeException("Existing save not found! Creating new task list.");
+            throw new DukeException("Existing save not found! "
+                    + "Creating new task list.");
         }
     }
 

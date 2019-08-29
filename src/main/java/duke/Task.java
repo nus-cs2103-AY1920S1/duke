@@ -12,14 +12,14 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
     protected String description;
-    protected boolean isDone;
+    private boolean isDone;
 
     public Task(String description) {
         this.isDone = false;
         this.description = description;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 

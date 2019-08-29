@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TaskList implements Serializable {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -33,6 +33,7 @@ public class TaskList implements Serializable {
 
         // List and print all items stored
         for (Task item: this.taskList) {
+            //noinspection StringConcatenationInsideStringBufferAppend
             output.append(count++ + "." + item + '\n');
         }
 

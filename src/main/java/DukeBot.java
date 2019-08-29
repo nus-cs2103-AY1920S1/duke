@@ -52,6 +52,9 @@ public class DukeBot {
         } else if (input.equals("list")) {
             // print list if "list"
             this.taskList.printList();
+        } else if (input.startsWith("done")) {
+            int taskId = Integer.parseInt(input.substring(5));
+            this.taskList.getTask(taskId).markAsDone();
         } else {
             // add to list otherwise
             this.taskList.addToList(input);

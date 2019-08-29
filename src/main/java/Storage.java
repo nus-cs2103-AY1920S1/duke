@@ -1,16 +1,13 @@
-import java.io.IOException;
+import java.io.*;
 import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
-        private ArrayList<Task> listOfTask = new ArrayList<Task>();
+    protected static ArrayList<Task> taskList = new ArrayList<Task>();
+    protected static String file = "todo.txt";
 
-    public Storage(ArrayList<Task> list) {
+    public Storage(String file) {
 
     }
 
@@ -86,4 +83,36 @@ public class Storage {
         }
     }
 
+    public ArrayList<Task> load() throws IOException, DukeException {
+        File f = new File(file);
+        Scanner sc = new Scanner(f);
+        ArrayList<Task> tempList;
+        if (countLines(file) == 0) {
+            throw new DukeException("Woah! There is nothing in this file!");
+        } else {
+            while (sc.hasNext()) {
+                String task = sc.nextLine();
+                String taskType = task.substring(1, 2);
+                switch (taskType) {
+                    case "T":
+                        Task toDo = new Todo(task.substring(7));
+                        taskList.add(toDo);
+                        break;
+                    case "D":
+                        int byIndex = task.indexOf("(");
+                        Task deadline = new Deadline(task.substring(7, byIndex - 1), task.substring(byIndex + 5));
+                        taskList.add(deadline);
+                        break;
+                    case "E":
+                        int atIndex = task.indexOf("(");
+                        Task event = new Event(task.substring(7, atIndex - 1), task.substring(atIndex + 5));
+                        taskList.add(event);
+                        break;
+                }
+            }
+            System.out.println("Your file has been loaded! :)");
+            tempList = new ArrayList<Task>(taskList);
+            return tempList;
+        }
+    }
 }

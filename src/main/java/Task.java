@@ -6,12 +6,17 @@ import java.util.Date;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected boolean isCorrectFormat;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.isCorrectFormat = false;
     }
 
+    public boolean getIsCorrectFormat() {
+        return isCorrectFormat;
+    }
     /**
      * Returns tick or cross symbol.
      *
@@ -34,9 +39,9 @@ public class Task {
      * has added the task into the list.
      */
     public static void printGI() {
-        //Duke temp = new Duke();
-        Duke.printLine();
-        Duke.printIndent();
+        //Ui temp = new Ui();
+        Ui.printLine();
+        Ui.printIndent();
         System.out.println("Got it. I've added this task:");
     }
 
@@ -47,9 +52,9 @@ public class Task {
      * does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public static void printNumOfTasks() throws IOException {
-        Duke.printIndent();
-        System.out.println("Now you have " + Duke.getNumOfTasks() + " tasks in the list.");
-        Duke.printLine();
+        Ui.printIndent();
+        System.out.println("Now you have " + Ui.getNumOfTasks() + " tasks in the list.");
+        Ui.printLine();
     }
 
     public String toString() {
@@ -60,12 +65,12 @@ public class Task {
      * Prints a statement to tell the user that the task has been removed.
      */
     public static void printRemove() {
-        Duke.printLine();
-        Duke.printIndent();
+        Ui.printLine();
+        Ui.printIndent();
         System.out.println("Noted. I've removed this task.");
     }
 
-    public static String formatDate(String date) {
+    public String formatDate(String date) {
         String formatted = date;
         try {
             Date d = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(date);
@@ -85,10 +90,12 @@ public class Task {
             } else {
                 endOfDate = "th";
             }
-
+            isCorrectFormat = true;
             formatted = dayInteger + endOfDate + " of " + month + " " + year + ", " + time;
         } catch (ParseException e) {
             System.out.println(e.getMessage());
+            Ui.printIndent();
+            System.out.println("That is the wrong date format! >:-(");
         }
         return formatted;
     }

@@ -9,6 +9,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + description + " (by: " + formatDate(by) + ")";
+        String date = formatDate(by);
+        if (getIsCorrectFormat()) {
+            return "[D]" + super.toString() + description + " (by: " + date + ")";
+        } else {
+            return "Invalid date format!";
+        }
     }
 }

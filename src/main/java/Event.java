@@ -4,6 +4,7 @@ import java.util.Date;
 public class Event extends Task {
 
     protected String when;
+    protected boolean isValid;
 
     public Event(String description, String when) {
         super(description);
@@ -13,6 +14,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + description +  " (at: " + formatDate(when) + ")";
+        String date = formatDate(when);
+        if (getIsCorrectFormat()) {
+            return "[E]" + super.toString() + description + " (at: " + date + ")";
+        } else {
+            return "Invalid date format!";
+        }
     }
 }

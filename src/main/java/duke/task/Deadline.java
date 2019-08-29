@@ -1,7 +1,8 @@
 package duke.task;
 
 /**
- * Deadline class to create the deadline task.
+ * Deadline class to create the deadline task
+ * input by user.
  *
  * @author TeoShyanJie
  *

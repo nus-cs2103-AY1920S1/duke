@@ -39,7 +39,6 @@ public class Ui {
         printStr(sb.toString());
     }
 
-    //final execution,
     public void bye() {
         printStr("Bye. Hope to see you again soon!");
     }

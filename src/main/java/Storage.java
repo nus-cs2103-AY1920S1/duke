@@ -19,7 +19,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() {
+    public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
             File f = new File(filePath); //hardCoded file directory
@@ -44,7 +44,7 @@ public class Storage {
     }
 
     //Creates task from reading the string from text file. Called in load()
-    private Task readAndCreateTask(String[] textArr) {
+    private Task readAndCreateTask(String[] textArr) throws DukeException {
         String type = textArr[0];
         Task task = null;
         boolean done = textArr[1].equals("1"); //1 means done

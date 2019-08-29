@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Parser {
     //example input: 2/12/2019 1800
-    public static LocalDateTime parseDateTime(String dateTimeStr) {
+    public static LocalDateTime parseDateTime(String dateTimeStr) throws DukeException {
         try {
             String[] strSplit = dateTimeStr.split(" ");
             String[] date = strSplit[0].split("/");
@@ -16,15 +16,10 @@ public class Parser {
             int hours = Integer.parseInt(time.substring(0, 2));
             int mins = Integer.parseInt(time.substring(2));
             return LocalDateTime.of(year, month, day, hours, mins);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Ui.printStr("Something went wrong: " + e.getMessage());
-        } catch (NullPointerException e) {
-
-        } catch (DateTimeException e) {
-            Ui.printStr("Invalid Date-Time format. Error Message: " + e.getMessage() +
-                    "\n" + "Please use DD/MM/YYYY HHMM E.g. [2/12/2019 1800]");
+        } catch (ArrayIndexOutOfBoundsException | DateTimeException | NumberFormatException e) {
+            throw new DukeException("Invalid Date-Time format.\n" +
+                    "Please use DD/MM/YYYY HHMM E.g. [2/12/2019 1800]");
         }
-        return null;
     }
 
     //method to convert date object to string to append to text file

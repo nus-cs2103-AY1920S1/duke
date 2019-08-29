@@ -7,7 +7,7 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
-    public Duke() {
+    public Duke() throws DukeException {
         storage = new Storage(taskListPath);
         ui = new Ui();
         tasks = new TaskList(storage.load());
@@ -25,5 +25,4 @@ public class Duke {
             }
         }
     }
-
 }

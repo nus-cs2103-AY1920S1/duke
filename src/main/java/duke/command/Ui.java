@@ -1,3 +1,8 @@
+package duke.main;
+
+import duke.excaptions.IllegalDukeArgumentException;
+import duke.excaptions.IllegalDukeFormatException;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -33,12 +38,14 @@ public class Ui {
                 System.out.println(e.getMessage());
             } catch (IllegalDukeFormatException e) {
                 System.out.println(e.getMessage());
+            } catch (IllegalDukeArgumentException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
 
     public void showLine() {
-        System.out.println("_________________________");
+        System.out.println("_________________________________________________________");
     }
 
     public void showError(String message) {

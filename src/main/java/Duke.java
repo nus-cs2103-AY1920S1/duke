@@ -1,3 +1,10 @@
+package duke.main;
+
+import duke.command.Storage;
+import duke.command.Ui;
+import duke.list.TaskList;
+import duke.excaptions.IllegalDukeArgumentException;
+
 public class Duke {
     private Storage storage;
     private TaskList taskList;

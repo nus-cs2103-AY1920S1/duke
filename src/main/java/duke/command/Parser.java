@@ -1,3 +1,13 @@
+package duke.main;
+import duke.excaptions.IllegalDukeArgumentException;
+import duke.excaptions.IllegalDukeFormatException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.text.ParseException;
 
 public class Parser {
@@ -10,29 +20,27 @@ public class Parser {
 
     public void parse(Storage storage) throws IllegalDukeFormatException, IllegalDukeArgumentException {
         switch (Command.valueOf(splitCommand[0])) {
-            case list:
-                commandList();
-                break;
-            case bye:
-                commandBye();
-                break;
-            case done:
-                commandDone(storage);
-                break;
-            case todo:
-                commandTodo(storage);
-                break;
-            case deadline:
-                commandDeadline(storage);
-                break;
-            case event:
-                commandEvent(storage);
-                break;
-            case delete:
-                commandDelete(storage);
-                break;
-            default:
-                System.out.println("No Such Command!");
+        case list:
+            commandList();
+            break;
+        case bye:
+            commandBye();
+            break;
+        case done:
+            commandDone(storage);
+            break;
+        case todo:
+            commandTodo(storage);
+            break;
+        case deadline:
+            commandDeadline(storage);
+            break;
+        case event:
+            commandEvent(storage);
+            break;
+        case delete:
+            commandDelete(storage);
+            break;
         }
     }
     private void commandList() {

@@ -1,13 +1,17 @@
+package duke.main;
+
+import duke.task.Task;
+
 import java.util.LinkedList;
 
-class TaskList extends LinkedList<Task> {
-    private static LinkedList<Task> taskList;
+class TaskList extends LinkedList<duke.task.Task> {
+    private static LinkedList<duke.task.Task> taskList;
 
     public TaskList() {
         taskList = new LinkedList<>();
     }
 
-    public TaskList(LinkedList<Task> taskList) {
+    public TaskList(LinkedList<duke.task.Task> taskList) {
         TaskList.taskList = taskList;
     }
 
@@ -24,18 +28,4 @@ class TaskList extends LinkedList<Task> {
 
 
     }
-
-    /*public Task get(int n) {
-        return texts.get(n);
-    }*/
-   /* public Task getLast() {
-        return texts.getLast();
-    }*/
-    /*public int getNumber() {
-        return texts.size();
-    }*/
-
-    /*public Task remove(int i) {
-        return texts.remove(i);
-    }*/
 }

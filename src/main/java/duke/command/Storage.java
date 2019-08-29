@@ -1,3 +1,5 @@
+package duke.main;
+
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedWriter;
@@ -26,27 +28,27 @@ public class Storage {
                 String commandStatus = fullCommand[1];
                 String commandContent = fullCommand[2];
                 switch(commandType) {
-                    case "T" :
-                        Task todo = new Todo(commandContent);
-                        if (commandStatus.equals("\u2713")) {
-                            todo.setDone();
-                        }
-                        taskList.add(todo);
-                        break;
-                    case "D" :
-                        Task deadline = new Deadline(commandContent, fullCommand[3]);
-                        if (commandStatus.equals("\u2713")) {
-                            deadline.setDone();
-                        }
-                        taskList.add(deadline);
-                        break;
-                    case "E" :
-                        Task event = new Event(commandContent, fullCommand[3]);
-                        if (commandStatus.equals("\u2713")) {
-                            event.setDone();
-                        }
-                        taskList.add(event);
-                        break;
+                case "T" :
+                    Task todo = new Todo(commandContent);
+                    if (commandStatus.equals("\u2713")) {
+                        todo.setDone();
+                    }
+                    taskList.add(todo);
+                    break;
+                case "D" :
+                    Task deadline = new Deadline(commandContent, fullCommand[3]);
+                    if (commandStatus.equals("\u2713")) {
+                        deadline.setDone();
+                    }
+                    taskList.add(deadline);
+                    break;
+                case "E" :
+                    Task event = new Event(commandContent, fullCommand[3]);
+                    if (commandStatus.equals("\u2713")) {
+                        event.setDone();
+                    }
+                    taskList.add(event);
+                    break;
                 }
             }
             return taskList;

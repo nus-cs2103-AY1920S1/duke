@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
+import duke.parser.IncorrectNumberOfArgumentsException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -66,6 +67,10 @@ public class Duke {
                 ui.showCommandNotFoundError();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (IncorrectFileFormatException i) {
+                ui.showLoadingError();
+            } catch (IncorrectNumberOfArgumentsException e) {
+                ui.showIncorrectNumberOfArgument();
             } finally {
                 ui.showLine();
             }

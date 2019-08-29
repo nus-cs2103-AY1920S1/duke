@@ -29,6 +29,8 @@ class Parser {
                 return new DoneCommand(parseToNumber(inputArr[1], "Done", uiManager));
             case DELETE :
                 return new DeleteCommand(parseToNumber(inputArr[1], "Done", uiManager));
+            case FIND :
+                return new FindCommand(inputArr[1]);
             default :
                 uiManager.throwGeneralError();
                 return null;
@@ -66,6 +68,9 @@ class Parser {
         case "Delete" :
         case "delete" :
             return Action.DELETE;
+        case "Find" :
+        case "find" :
+            return Action.FIND;
         default :
             uiManager.throwApologyError();
             return null;

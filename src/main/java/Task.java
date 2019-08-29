@@ -25,6 +25,10 @@ class Task implements Serializable{
         this.isCompleted = isCompleted;
     }
 
+    public String getTaskString() {
+        return this.task;
+    }
+
     @Override
     public String toString() {
         if (this.isCompleted) {

@@ -62,6 +62,10 @@ class Ui {
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
     }
 
+    public void printFinding(String findString) {
+        System.out.println("Finding for \'" + findString + "\' now...");
+    }
+
     public void printAddTask(Task task, int totalTasks) {
         printer.println("Got it. I've added this task: ");
         printer.println("  " + task.toString());
@@ -69,11 +73,15 @@ class Ui {
     }
 
     public void printTask(int index, Task task) {
-        printer.println((index + 1) + ". " + task.toString());
+        printer.println(index + ". " + task.toString());
     }
 
     public void exit() {
         System.out.println("Alright then. See you later.");
+    }
+
+    public void printNotFound() {
+        System.out.println("Nope, I found nothing.");
     }
 
     public void throwGeneralError() throws DukeException {
@@ -135,10 +143,10 @@ class Ui {
 
     public void printHelp() {
         System.out.println("Hello this is Duke's help page.");
-        System.out.println("There are 7 main features excluding help");
+        System.out.println("There are 8 main features excluding help");
         System.out.println("Type in the number respective to what you want to know. ");
         System.out.println("Otherwise, type in any other thing to return.");
-        System.out.println("1. list 2. todo 3. deadline 4. event 5. done 6. delete 7. bye");
+        System.out.println("1. list 2. todo 3. deadline 4. event 5. done 6. delete 7. find 8. bye");
         while (scanner.hasNextLine()) {
             switch(scanner.nextLine()) {
                 case "1" :
@@ -170,6 +178,10 @@ class Ui {
                     System.out.println("If unsure of the task's number, use \'list\' to check first.");
                     break;
                 case "7" :
+                    System.out.println("Type \'find myWord\' to find myWord in all of the Tasks");
+                    System.out.println("Finding ignores all capitalize words as well.");
+                    break;
+                case "8" :
                     System.out.println("Exits, what more?");
                     break;
                 default :

@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +20,10 @@ public class Duke {
         // Prints out greeting of the chatbot.
         printLine();
         printIndent();
-        System.out.println("Hello! My name is \n" + logo + "\n" + "    What can I do for you?");
+        System.out.println("Hello! My name is \n" + logo + "\n" + "    What can I do for you? \n");
+        printIndent();
+        System.out.println("I can only accept event and deadline dates in this following format: \n" +
+                "    dd/MM/yyyy hhmm. Please adhere to it! Thank you!" );
         printLine();
 
         Scanner scan = new Scanner(System.in);
@@ -181,5 +186,4 @@ public class Duke {
         }
         printLine();
     }
-
 }

@@ -21,6 +21,15 @@ public class TaskCommandFactory {
         this.commandMap = commandMap;
     }
 
+    /**
+     * <p>
+     *     Compares input command with a list of commands and returns the matching command, injecting any necessary
+     *     constructor dependencies if they have been registered.
+     * </p>
+     * @param command Command invoked.
+     * @return The matching command if any, and an InvalidCommand otherwise.
+     * @throws DukeException If dependency injection fails, ie if a required dependency is not added.
+     */
     public ITaskCommand tryMakeCommand(String command) throws DukeException {
         Class<? extends ITaskCommand> commandClass =
                 commandMap.getOrDefault(command, CommandList.INVALID_COMMAND.getCommandClass());
@@ -50,6 +59,15 @@ public class TaskCommandFactory {
         registeredDependencies.add(dependency);
     }
 
+    /**
+     * <p>
+     *     Compares an array of classes against the registered dependencies and outputs the matching dependencies in
+     *     an array.
+     * </p>
+     * @param constructorClasses Array of classes corresponding to a Command's constructor parameter types.
+     * @return Object array of concrete dependencies matching the constructor, or null if such an array cannot
+     *         be found.
+     */
     private Object[] generateConstructorDependencies(Class<?>[] constructorClasses) {
         Object[] dependencies = IntStream.range(0, constructorClasses.length)
                 .boxed()

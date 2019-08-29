@@ -16,6 +16,12 @@ public class TasksPresenter {
         this.factory = factory;
     }
 
+    /**
+     * <p>
+     *     Starts the main flow of the app. Presenter will start to listen for user input from the Ui, and will
+     *     create appropriate Commands and invoke them, returning any TaskResponses to the Ui to be displayed.
+     * </p>
+     */
     public void run() {
         ui.startDisplay();
         boolean isExit = false;

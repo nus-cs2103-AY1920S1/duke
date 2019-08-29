@@ -9,11 +9,13 @@ public class Task {
         this.description = description;
     }
 
+    /*
     public Task(String description, String timeLabel) { //Requires both type of parameterised constructors
         this.isDone = false;
         this.description = description;
         this.timeLabel = timeLabel;
     }
+    */
 
     public String getLabel() {
         return wordLabel;

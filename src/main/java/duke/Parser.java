@@ -8,7 +8,16 @@ import duke.command.CommandAdd;
 import duke.command.CommandExit;
 import java.time.LocalDateTime;
 
+/**
+ * Deals with making sense of user input.
+ */
 public class Parser {
+    /**
+     * Parses user input into a Command object.
+     * @param fullCommand The full user input.
+     * @return A Command object.
+     * @throws DukeException If the user input is an invalid or unknown command.
+     */
     public static Command parseCommand(String fullCommand) throws DukeException {
         String[] commandWords = fullCommand.split(" ");
         switch (commandWords[0]) {
@@ -45,6 +54,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a given date and time into a LocalDateTime object.
+     * @param dateTime A date and time string in the format: dd/MM/yyyy, hh:mmPM
+     * @return A LocalDateTime object representing the given date and time.
+     * @throws DukeException If the date and time are provided do not match the required format.
+     */
     public static LocalDateTime parseDateTimeString(String dateTime) throws DukeException {
         // ensure that dateTime string is in the format: "12/02/2019, 6:05pm"
         try {

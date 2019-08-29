@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import duke.DukeException;
 import java.text.ParseException;
@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * The event subclass of the Task superclass. They have a instance eventTime which is when is this event.
- * @Extends duke.Tasks.Task
+ * @Extends duke.tasks.Task
  */
 public class Event extends Task {
 

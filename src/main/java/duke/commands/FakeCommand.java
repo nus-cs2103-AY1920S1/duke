@@ -1,7 +1,7 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
 
 /**
@@ -12,7 +12,7 @@ public class FakeCommand extends Command {
 
     /**
      * Contructor of the class, nothing special.
-     * @Extends duke.Commands.Command
+     * @Extends duke.commands.Command
      */
     public FakeCommand() {
 

@@ -1,10 +1,10 @@
-package duke.Tasks;
+package duke.tasks;
 
 import duke.DukeException;
 
 /**
  * The Todo subclass of the Task superclass.
- * @Extends duke.Tasks.Task
+ * @Extends duke.tasks.Task
  */
 public class Todo extends Task {
 

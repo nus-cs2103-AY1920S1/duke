@@ -1,6 +1,6 @@
-package duke.DirectProcessor;
+package duke.directprocessor;
 
-import duke.Tasks.Task;
+import duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 

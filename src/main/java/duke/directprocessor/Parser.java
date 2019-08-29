@@ -1,13 +1,13 @@
-package duke.DirectProcessor;
+package duke.directprocessor;
 
-import duke.Commands.AddCommand;
-import duke.Commands.Command;
-import duke.Commands.DeleteCommand;
-import duke.Commands.ExitCommand;
-import duke.Commands.FakeCommand;
-import duke.Commands.FindCommand;
-import duke.Commands.FinishCommand;
-import duke.Commands.ListCommand;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FakeCommand;
+import duke.commands.FindCommand;
+import duke.commands.FinishCommand;
+import duke.commands.ListCommand;
 import duke.DukeException;
 
 /**

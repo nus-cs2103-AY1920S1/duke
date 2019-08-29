@@ -1,13 +1,13 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
 import java.io.IOException;
 
 /**
  * This is the Command subclass to exit duke.
- * @Extends duke.Commands.Command
+ * @Extends duke.commands.Command
  */
 public class ExitCommand extends Command {
 

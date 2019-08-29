@@ -1,11 +1,9 @@
 package duke;
 
-import duke.DirectProcessor.TaskList;
-import duke.DukeException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.Todo;
+import duke.directprocessor.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

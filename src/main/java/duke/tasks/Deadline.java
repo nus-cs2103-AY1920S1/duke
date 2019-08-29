@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import duke.DukeException;
 
@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * The deadline subclass of the Task superclass. They have a instance deathTime which is the due time.
- * @Extends duke.Tasks.Task
+ * @Extends duke.tasks.Task
  */
 public class Deadline extends Task {
 

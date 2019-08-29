@@ -1,11 +1,11 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 
 /**
  * This is the Command subclass to list out all tasks in the target task list.
- * @Extends duke.Commands.Command
+ * @Extends duke.commands.Command
  */
 public class ListCommand extends Command {
 

@@ -1,10 +1,12 @@
 package duke;
 
-import duke.Commands.*;
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
-import duke.DukeException;
-import duke.Tasks.Task;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.FakeCommand;
+import duke.commands.FindCommand;
+import duke.commands.FinishCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -67,8 +69,8 @@ public class CommandTest {
             ArrayList<String> check = tl.listAllTask();
             Assertions.assertEquals(1, 2);
         } catch (DukeException e) {
-            Assertions.assertEquals("The date input format is not correct, " +
-                    "it should be in the form dd/MM/yyyy HH:mm:ss", e.getMessage());
+            Assertions.assertEquals("The date input format is not correct, "
+                    + "it should be in the form dd/MM/yyyy HH:mm:ss", e.getMessage());
         }
     }
 

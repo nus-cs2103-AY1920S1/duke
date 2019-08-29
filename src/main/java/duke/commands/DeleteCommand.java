@@ -1,30 +1,30 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
-import duke.Tasks.Task;
+import duke.tasks.Task;
 
 /**
- * This is the Command subclass to set a target class in the task list as finish.
- * @Extends duke.Commands.Command
+ * This is the Command subclass to delete target task from the target task list.
+ * @Extends duke.commands.Command
  */
-public class FinishCommand extends Command {
+public class DeleteCommand extends Command {
 
-    /** The position of the task to be set as finish. */
+    /** The position of the task to delete. Note the first task in the list has position 1 */
     private int position;
 
     /**
-     * The constructor of the class, nothing special.
+     * Constructor of the class, nothing special.
      * @param position The position of the task to delete.
      */
-    public FinishCommand(int position) {
+    public DeleteCommand(int position) {
         this.position = position;
     }
 
     /**
-     * This method set the target task in the target task list as finished and let the target user end to
-     *     print out command message.
+     * This method deletes the task at the given position in the target task list and let the target
+     *     user end print out command message.
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
      * @throws DukeException If the position is out of bound of the task list.
@@ -34,7 +34,9 @@ public class FinishCommand extends Command {
         if (position > tl.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }
-        ui.showFinishMessage(tl.finishTask(position));
+        Task deletedTask = tl.deleteTask(position);
+        int totalTaskNumber = tl.getTotalNumber();
+        ui.showDeleteMessage(deletedTask, totalTaskNumber);
     }
 
     /**

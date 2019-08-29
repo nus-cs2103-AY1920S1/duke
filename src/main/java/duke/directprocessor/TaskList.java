@@ -1,6 +1,6 @@
-package duke.DirectProcessor;
+package duke.directprocessor;
 
-import duke.Tasks.Task;
+import duke.tasks.Task;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class TaskList {
 
     /**
      * This method delete the task at  a given position from the task list.
-     * Do not worry about IndexOutOfBoundException, it will be caught in the duke.Commands.DeleteCommand class.
+     * Do not worry about IndexOutOfBoundException, it will be caught in the duke.commands.DeleteCommand class.
      * @param position The position of the task to be deleted.
      * @return The deleted task.
      */
@@ -62,7 +62,7 @@ public class TaskList {
 
     /**
      * This method set the task at a given position from the task list.
-     * Do not worry about IndexOutOfBoundException, it will be caught in the duke.Commands.FinishCommand class.
+     * Do not worry about IndexOutOfBoundException, it will be caught in the duke.commands.FinishCommand class.
      * @param position The position of the task to be set as finish.
      * @return The finished task.
      */

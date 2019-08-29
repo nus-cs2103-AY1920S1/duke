@@ -1,16 +1,16 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.Ui;
 import duke.DukeException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.DirectProcessor.TaskList;
-import duke.Tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.directprocessor.TaskList;
+import duke.tasks.Todo;
 
 /**
  * This is the Command subclass for add new tasks into the target task list.
- * @Extend duke.Commands.Command
+ * @Extend duke.commands.Command
  */
 public class AddCommand extends Command {
 

@@ -10,8 +10,6 @@ import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;
 
-
-
 /**
  * Represents a storage function of duke.
  * Has loading from file and saving to hard disk function.
@@ -34,7 +32,6 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IncorrectFileFormatException, FileNotFoundException {
         File f;
-        //System.out.println(targetFilePath);
         f = new File(targetFilePath);
 
         Scanner s = new Scanner(f, "Unicode");
@@ -49,8 +46,10 @@ public class Storage {
         for (int i = 0; i < listInput.size(); i++) {
             try {
                 listTask.add(Parser.parseFromFile(listInput.get(i)));
+
             } catch (IncorrectFileFormatException f1) {
                 throw new IncorrectFileFormatException();
+
             } catch (NullPointerException n) {
                 throw new NullPointerException();
             }

@@ -24,7 +24,7 @@ public class AddCommand extends Command {
      * @param storage Storage interface.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage){
+    public void execute(TaskList list, Ui ui, Storage storage) {
         Task temp = getPendingTask();
         list.addNewTask(temp);
         list.increaseTaskCount();

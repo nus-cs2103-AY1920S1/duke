@@ -8,6 +8,7 @@ import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 import duke.component.Ui;
 
@@ -59,6 +60,10 @@ public class Parser {
 
         case "delete":
             return new DeleteCommand(rest, "delete");
+
+        case "find":
+            return new FindCommand(rest, "find");
+
 
         default:
             throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "

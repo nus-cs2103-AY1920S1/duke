@@ -1,21 +1,40 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The TaskList class handles the storage, adding and deleting of
+ * tasks in Duke program.
+ */
+
 public class TaskList {
 
     private ArrayList<Task> taskList;
 
+    /**
+     * Creates a new TaskList object initialised with tasks from
+     * the inputted array list of Tasks.
+     * @param taskList An array list of tasks with which the TaskList
+     * object is initialised.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * @return the taskList
+     * @return The current task List
      */
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
+    /**
+     * Adds a new Task into the task list and writes
+     * the changes back into the local file of tasks as well.
+     * @param task The task to be added into the task list.
+     * @param storage The Storage object handling the read and write from the
+     * local file storing the tasks.
+     * @throws IOException When the file to be written to is not found or does not exist.
+     */
     public void addTask (Task task, Storage storage) throws IOException {
         this.taskList.add(task);
         storage.addTaskToFile(task);
@@ -39,12 +58,21 @@ public class TaskList {
         return matches;
     }
 
+    /**
+     * Deletes a specific task from the task list and writes
+     * the changes back into the local file of tasks as well.
+     * @param index The index of the task to be deleted from the array list.
+     * @param storage The Storage object handling the read and write from the
+     * local file storing the tasks.
+     * @throws DukeException When the index specified by the user does not exist.
+     * @throws IOException When the file to be written to is not found or does not exist.
+     */
     public void deleteTask(int index, Storage storage) throws DukeException, IOException {
         try {
             this.taskList.get(index - 1);
         }
         catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
+            throw new DukeException("OOPS!!! The item specified does not exist.");
         }
         System.out.println("Noted. I've removed this task: ");
         System.out.println(taskList.get(index - 1).toString());
@@ -53,13 +81,23 @@ public class TaskList {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Sets the status of a particular task in the array list of tasks to 
+     * completed thereby signifying that the task has been completed.
+     * @param index The index of the task in the array list to be set to completed 
+     * to be marked as completed.
+     * @param storage The Storage object handling the read and write from the
+     * local file storing the tasks.
+     * @throws DukeException When the index specified by the user does not exist.
+     * @throws IOException When the file to be written to is not found or does not exist.
+     */
     public void markAsDone(int index, Storage storage) throws DukeException, IOException {
         try {
             taskList.get(index - 1).markAsDone();
             storage.writeToFile(storage.getFilePath(), taskList);
         } 
         catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
+            throw new DukeException("OOPS!!! The item specified does not exist.");
         }
     }
 

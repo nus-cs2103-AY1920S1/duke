@@ -98,6 +98,27 @@ public class Sheet {
     }
 
     /**
+     * Searches for tasks containing the keyword.
+     *
+     * @param keyword Keyword for searching.
+     * @throws IOException If errors occurs when accessing the file that contains the list.
+     */
+    public void find(String keyword) throws IOException {
+        ui.showSearchHeader();
+        int count = 0;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                count++;
+                ui.showTask(count, task.toString().trim());
+            }
+        }
+        if (count == 0) {
+            ui.showNotFound();
+        }
+        ui.showLine();
+    }
+
+    /**
      * ToString method of the sheet object.
      *
      * @return String representation of the sheet of task list.

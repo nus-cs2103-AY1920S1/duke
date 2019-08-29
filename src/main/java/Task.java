@@ -41,6 +41,15 @@ public class Task {
     }
 
     /**
+     * Outputs the description of the task.
+     *
+     * @return Description of the task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Outputs as a String the status of task.
      * Tick for done; Cross for not done.
      *

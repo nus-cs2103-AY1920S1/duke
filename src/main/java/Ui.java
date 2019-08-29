@@ -67,12 +67,26 @@ public class Ui {
     }
 
     /**
+     * Displays a header for the task search.
+     */
+    public void showSearchHeader() {
+        System.out.printf(LINE + INDENT + "Here are the matching tasks in your list:\n");
+    }
+
+    /**
      * Displays a task removed from the task list.
      *
      * @param removed Task removed.
      */
     public void showRemove(String removed) {
         System.out.printf(LINE + INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
+    }
+
+    /**
+     * Displays a no result found message for search.
+     */
+    public void showNotFound() {
+        System.out.printf(INDENT + "Hummm, nothing has been found.\n");
     }
 
     /**

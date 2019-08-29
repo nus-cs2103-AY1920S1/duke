@@ -89,12 +89,9 @@ public class Task_List {
             } else if (word_Arr[0].equals("deadline")) {
                 check_Decription(word_Arr, "deadline");
                 return new Deadline(word_Arr[1]);
-            } else if (word_Arr[0].equals("event")){
-            } else (word_Arr[0].equals("event")){
+            } else {
                 check_Decription(word_Arr, "event");
                 return new Event(word_Arr[1]);
-            } else {
-                throw new DukeException((new Border()) + "\n     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + (new Border()), new IllegalArgumentException());
             }
         } catch(DukeException e){
             throw e;

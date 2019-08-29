@@ -12,8 +12,14 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-    //test
+    
+    public Task() {	    //test
 
+    }
+
+    /**
+     * Setter for isDone field
+     */
     public void markAsDone() {
         this.isDone = true;
     }

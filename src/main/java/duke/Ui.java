@@ -18,6 +18,10 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints all the tasks in a given TaskList.
+     * @param tasks The TaskList containing the tasks to be printed.
+     */
     private void printTasks(TaskList tasks) {
         String task;
         for (int i = 1; i <= tasks.size(); i++) {
@@ -25,7 +29,7 @@ public class Ui {
             System.out.println(task);
         }
     }
-    
+
     /**
      * Prints the app's welcome message.
      */
@@ -60,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Prints each Task in the given TaskList.
+     * Prints each Task in the given TaskList, if any.
      * @param tasks The TaskList containing the tasks to print.
      */
     public void printTaskList(TaskList tasks) {
@@ -105,6 +109,10 @@ public class Ui {
         ));
     }
 
+    /**
+     * Prints the results of a user search query.
+     * @param results A TaskList of results matching the user's query.
+     */
     public void printSearchResults(TaskList results) {
         if (results.size() == 0) {
             System.out.println("No matching tasks found in your list.");

@@ -1,8 +1,18 @@
 public class ListCommand extends Command {
-    public ListCommand(String stringCommand){
+    /**
+     * Constructor for AddCommand
+     * @param stringCommand
+     */
+    public ListCommand(String stringCommand) {
         super(stringCommand);
     }
 
+    /**
+     * Executes the command by using the three arguments provided
+     * @param taskList
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) {
         ui.printListMessage();
@@ -10,6 +20,10 @@ public class ListCommand extends Command {
         taskList.list();
     }
 
+    /**
+     * Checks if Duke will end.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

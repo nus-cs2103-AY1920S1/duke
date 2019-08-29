@@ -10,4 +10,9 @@ public class Deadline extends Task {
         String statusIcon = getStatusIcon();
         return "[D][" + statusIcon + "] " + this.description + " (by: " + this.deadline + ")";
     }
+
+    public String getStorageFormat() {
+        String storageString = super.getStorageFormat() + " | " + this.deadline;
+        return storageString;
+    }
 }

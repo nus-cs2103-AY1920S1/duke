@@ -51,6 +51,21 @@ public class TaskList {
         System.out.println("    ____________________________________________________________");
     }
 
+    public void findTask(String[] words) throws DukeException {
+        if (words.length < 2) {
+            throw new DukeException("☹ OOPS!!! The task cannot be empty.");
+        }
+
+        String keyWord = words[1];
+        System.out.println("    ____________________________________________________________");
+        for (Task task: list) {
+            if (task.description.contains(keyWord)) {
+                System.out.println("       " + task);
+            }
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
     public void addEvent(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");

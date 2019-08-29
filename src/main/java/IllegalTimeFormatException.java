@@ -1,6 +1,6 @@
 public class IllegalTimeFormatException extends DukeException {
 
-    public IllegalTimeFormatException(String s) {
-        super(s);
+    public IllegalTimeFormatException(String msg) {
+        super(msg);
     }
 }

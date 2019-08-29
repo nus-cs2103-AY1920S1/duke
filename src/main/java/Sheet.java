@@ -1,14 +1,12 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.IOException;
-
+import java.util.List;
 
 public class Sheet {
     private List<Task> tasks;
-    private Storage storage = new Storage(myPaths.TASKLIST);
-    public int numOfTask;
-    Ui ui = new Ui();
+    private Storage storage = new Storage(myPaths.TASK_LIST);
+    private int numOfTask;
+    private Ui ui = new Ui();
 
     public Sheet(List<Task> tasks) {
         this.tasks = tasks;
@@ -42,6 +40,10 @@ public class Sheet {
         tasks.set(index - 1, doneTask);
         storage.save(tasks);
         ui.showDone(doneTask.toString().trim());
+    }
+
+    public int getNumOfTask() {
+        return numOfTask;
     }
 
     public void showList() throws FileNotFoundException{

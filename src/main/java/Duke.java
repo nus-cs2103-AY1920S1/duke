@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
@@ -12,7 +10,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage(myPaths.TASKLIST);
+        storage = new Storage(myPaths.TASK_LIST);
         try {
             sheet = new Sheet(storage.load());
         } catch (IOException e) {

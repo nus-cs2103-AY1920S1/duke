@@ -1,30 +1,30 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task{
-    protected LocalDateTime start;
-    protected LocalDateTime end;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
     public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.startTime = start;
+        this.endTime = end;
     }
 
-    public Event(String description, LocalDateTime start, LocalDateTime end, boolean done) {
-        super(description, done);
-        this.start = start;
-        this.end = end;
+    public Event(String description, LocalDateTime start, LocalDateTime end, boolean isDone) {
+        super(description, isDone);
+        this.startTime = start;
+        this.endTime = end;
     }
 
     @Override
     public Event finish() {
-        return new Event(description, start, end,true);
+        return new Event(description, startTime, endTime,true);
     }
 
     @Override
     public String toString() {
         TimeManager tm = new TimeManager();
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + tm.printTime(start)
-                + " , to " + tm.printTime(end)+ " )\n";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + tm.printTime(startTime)
+                + " , to " + tm.printTime(endTime)+ " )\n";
     }
 }

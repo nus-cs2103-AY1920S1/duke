@@ -1,3 +1,3 @@
 public class myPaths {
-    public static final String TASKLIST = "tasks.txt";
+    public static final String TASK_LIST = "tasks.txt";
 }

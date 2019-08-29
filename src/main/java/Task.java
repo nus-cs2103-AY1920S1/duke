@@ -11,9 +11,9 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, Boolean done) {
+    public Task(String description, Boolean isDone) {
         this.description = description.trim();
-        this.isDone = done;
+        this.isDone = isDone;
     }
 
     public Task finish() {

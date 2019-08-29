@@ -1,8 +1,6 @@
-import java.text.Format;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 
 public class TimeManager {
 
@@ -10,6 +8,7 @@ public class TimeManager {
         String[] dateTime = s.trim().split(" ");
         String[] date = dateTime[0].split("/");
         String[] temp = new String[5];
+
         for (int i = 0; i < 5; i++) {
             if (i < date.length) {
                 temp[i] = date[i];
@@ -17,6 +16,7 @@ public class TimeManager {
                 temp[i] = "00";
             }
         }
+
         date = temp;
         String time;
         if (date[0].length() > 2) {
@@ -29,15 +29,12 @@ public class TimeManager {
             if (dateTime.length > 1) {
                 // time is stored in dateTime[1]
                 time = dateTime[1];
-                try {
-                    date[3] = time.substring(0, 2);
-                    date[4] = time.substring(2);
-                } catch (StringIndexOutOfBoundsException e) {
+                if (time.length() < 3) {
                     throw new IllegalTimeFormatException(
                             "☹ Sorry, I couldn't recognise the time. Enter time in the format of 'hhmm' :D");
                 }
-            } else {
-                // no time value
+                date[3] = time.substring(0, 2);
+                date[4] = time.substring(2);
             }
         }
         return toTime(date);

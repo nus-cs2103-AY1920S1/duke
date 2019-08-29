@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -28,12 +29,13 @@ public class Parser {
                 } else if (command.equals("delete") || command.equals("done")) {
                     try {
                         int index = sc.nextInt();
-                        if (index > this.sheet.numOfTask) {
+                        if (index > this.sheet.getNumOfTask()) {
                             if (this.sheet.isEmpty()) {
                                 throw new TaskNotFoundException("☹ OOPS!!! The list is empty.");
                             } else {
                                 throw new TaskNotFoundException("☹ OOPS!!! The list contains only " +
-                                        this.sheet.numOfTask + (this.sheet.numOfTask == 1 ? " task." : " tasks."));
+                                        this.sheet.getNumOfTask() +
+                                        (this.sheet.getNumOfTask() == 1 ? " task." : " tasks."));
                             }
                         }
                         if (index < 1) {

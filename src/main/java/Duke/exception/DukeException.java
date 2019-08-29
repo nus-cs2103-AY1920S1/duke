@@ -9,7 +9,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String line = "____________________________________________________________";
-        return String.format("\t%s\n\t ☹ OOPS!!! %s\n\t%s",line, this.errorMsg, line);
+        return String.format("☹ OOPS!!! %s", this.errorMsg);
     }
 }

@@ -31,7 +31,7 @@ public class Ui {
 
     public void showError(String errorMsg) {
         showLine();
-        System.out.printf("\t ☹ OOPS!!! %s\n", errorMsg);
+        System.out.printf("\t %s\n", errorMsg);
         showLine();
     }
 

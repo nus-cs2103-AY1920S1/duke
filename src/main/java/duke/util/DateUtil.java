@@ -1,8 +1,8 @@
 package duke.util;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.util.Date;
 
 public class DateUtil {
     /**

@@ -2,11 +2,19 @@ package duke;
 
 import java.text.ParseException;
 
+import duke.command.Command;
+import duke.command.ListCommand;
+import duke.command.ByeCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.DeadlineCommand;
+import duke.command.ToDoCommand;
+import duke.error.DukeException;
+import duke.error.InvalidTaskArgumentException;
+import duke.error.InvalidIndexException;
+import duke.error.InvalidCommandException;
 import duke.util.DateUtil;
-//CHECKSTYLE:OFF
-import duke.command.*;
-import duke.error.*;
-//CHECKSTYLE:ON
 
 public class Parser {
     /**

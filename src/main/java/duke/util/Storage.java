@@ -1,13 +1,13 @@
 package duke.util;
 
-import java.util.List;
-import java.util.ArrayList;
 //CHECKSTYLE:OFF - Doing this because Paths need the * import
 import java.nio.file.*;
 //CHECKSTYLE:ON
-import java.lang.IndexOutOfBoundsException;
 import java.io.IOException;
+import java.lang.IndexOutOfBoundsException;
 import java.text.ParseException;
+import java.util.List;
+
 import duke.TaskList;
 import duke.task.Task;
 import duke.task.Event;

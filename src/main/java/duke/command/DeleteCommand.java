@@ -5,9 +5,9 @@ import java.io.IOException;
 import duke.error.DukeException;
 import duke.error.InvalidIndexException;
 import duke.TaskList;
+import duke.task.Task;
 import duke.util.Storage;
 import duke.util.Ui;
-import duke.task.Task;
 
 public class DeleteCommand implements Command {
     private int index;

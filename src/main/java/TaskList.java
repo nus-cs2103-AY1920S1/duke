@@ -21,6 +21,12 @@ public class TaskList {
         storage.addTaskToFile(task);
     }
 
+    /**
+     * Returns a list of all tasks which have the string 
+     * queried as the input present in them.
+     * @param query The string being searched for in each task.
+     * @return List of all tasks containing the queried string.
+     */
     public ArrayList<Task> matchingTasks(String query) {
         ArrayList<Task> matches = new ArrayList<>();
         for (Task t : this.taskList) {

@@ -37,7 +37,7 @@ public class Parser {
                 break;
             } else if (command.equals("list")) {
                 ui.list(tasks);
-            } else if (command.length() > 4 && command.substring(0, 4).equals("done")) {
+            } else if (command.length() > 5 && command.substring(0, 4).equals("done")) {
                 if (command.charAt(4) != ' ') {
                     try {
                         Task task = tasks.add(command);
@@ -60,8 +60,8 @@ public class Parser {
                                 "\n    ____________________________________________________________\n");
                     }
                 }
-            } else if (command.length() > 6 && command.substring(0, 6).equals("delete")) {
-                if (command.charAt(4) != ' ') {
+            } else if (command.length() > 7 && command.substring(0, 6).equals("delete")) {
+                if (command.charAt(6) != ' ') {
                     try {
                         Task task = tasks.add(command);
                         ui.add(task, tasks);
@@ -77,6 +77,30 @@ public class Parser {
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
+                    } catch (Exception e) {
+                        System.out.println("    ____________________________________________________________\n     " +
+                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                                "\n    ____________________________________________________________\n");
+                    }
+                }
+            } else if (command.length() > 5 && command.substring(0, 4).equals("find")) {
+                if (command.charAt(4) != ' ') {
+                    try {
+                        Task task = tasks.add(command);
+                        ui.add(task, tasks);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    try {
+                        ui.find(tasks, command.substring(5));
+                        try {
+                            storage.writeToFile(tasks.generateInfo());
+                        } catch (IOException e) {
+                            System.out.println("Something went wrong: " + e.getMessage());
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     } catch (Exception e) {
                         System.out.println("    ____________________________________________________________\n     " +
                                 "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +

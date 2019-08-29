@@ -57,6 +57,10 @@ public class Ui {
             print("    Here are the tasks in your list:");
             taskList.printList();
             break;
+        case "find":
+            print("    Here are the matching tasks in your list:");
+            taskList.find(task[1]);
+            break;
         case "todo":
         case "deadline":
         case "event":

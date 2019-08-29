@@ -3,7 +3,6 @@ public class Deadline extends Task {
     public Deadline(String task, String time) {
         super(task);
         this.time = Duke.toDateString(time);
-//        this.time = time;
     }
 
     @Override

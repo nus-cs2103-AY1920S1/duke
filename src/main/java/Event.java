@@ -3,7 +3,6 @@ public class Event extends Task {
     public Event(String task, String time){
         super(task);
         this.time = Duke.toDateString(time);
-//        this.time = time;
     }
 
     @Override

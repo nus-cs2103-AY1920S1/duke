@@ -12,34 +12,8 @@ public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
 
-    public Ui() {
-    }
-
-    private String readLine() {
+    public String readLine() {
         return sc.nextLine();
-    }
-
-    public void loadUi(Parser parser) {
-        printWelcome();
-
-        String text = readLine();
-        while (!text.equals("bye")) {
-
-            try {
-                parser.parseLine(text);
-            } catch (DukeException e) {
-                System.err.println(e.getMessage());
-            } catch (NumberFormatException e) {
-                System.err.println("Input must be an integer.");
-            } catch (ParseException e) {
-                System.err.println(e.getMessage());
-                System.err.println("Please use the format: dd/MM/yyyy hhmm");
-            } catch (Exception e) {
-                System.err.println("Something is wrong: " + e.getMessage());
-            }
-            text = readLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
     }
 
     public void printWelcome() {

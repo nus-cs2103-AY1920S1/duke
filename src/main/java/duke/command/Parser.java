@@ -19,7 +19,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    public void parseLine(String userInput) throws DukeException, ParseException {
+    public void processLine(String userInput) throws DukeException, ParseException {
         ArrayList<Task> list = tasks.list;
         String firstWord = userInput.split(" ")[0];
         if (firstWord.equals("list")) {

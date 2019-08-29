@@ -1,14 +1,16 @@
 import java.time.LocalDateTime;
 
 /**
- * Represents
+ * Event methods,extends Task.
  */
 public class Event extends Task {
 
     protected String at;
 
     protected LocalDateTime time = null;
-
+    /**
+     * Sets date and time method.
+     */
     public void setDateTime(LocalDateTime time) {
         this.time = time;
     }

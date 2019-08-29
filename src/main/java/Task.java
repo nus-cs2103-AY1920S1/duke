@@ -1,3 +1,6 @@
+/**
+ * Represents the Tasks csn handle by the application.
+ */
 public class Task {
     private boolean done;
     private String name;

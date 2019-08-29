@@ -1,3 +1,6 @@
+/**
+ * Deadline methods,extends Task.
+ */
 import java.time.LocalDateTime;
 public class Deadline extends Task {
 

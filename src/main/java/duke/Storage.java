@@ -12,13 +12,25 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filepath;
 
+    /**
+     * Instantiates Storage to load/save tasks to the disk.
+     * @param filepath The directory which holds the file this object will load/save tasks from/to.
+     */
     public Storage(String filepath) {
         this.filepath = System.getProperty("user.dir") + filepath;
     }
 
+    /**
+     * Reads tasks from a disk file into a virtual list.
+     * @return A Task ArrayList of the tasks from the disk file.
+     * @throws DukeException If the reading of the disk file fails.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -77,6 +89,7 @@ public class Storage {
 
                 // check if the task is marked as done
                 if (lineArray[1].equals("1")) {
+                    assert taskToRead != null;
                     taskToRead.markDone();
                 }
 
@@ -100,6 +113,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes tasks to a disk file from the app's virtual task list.
+     * @param tasks A TaskList representing the app's virtual task list.
+     * @throws DukeException If the writing to the disk file fails.
+     */
     public void save(TaskList tasks) throws DukeException {
         BufferedWriter writer = null;
         try {

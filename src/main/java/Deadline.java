@@ -1,7 +1,7 @@
 import java.text.ParseException;
 
 public class Deadline extends Task {
-    private String date;
+    private String _date;
     private DateTime _dateTime;
 
     /**
@@ -13,7 +13,7 @@ public class Deadline extends Task {
         super(desc);
         try {
             this._dateTime = new DateTime(date);
-            this.date = this._dateTime.getDateTime();
+            this._date = this._dateTime.getDateTime();
         } catch (ParseException e) {
             System.err.println("Cant parse Date: " + date);
         }
@@ -25,7 +25,7 @@ public class Deadline extends Task {
      */
     public String toString() {
         String d = String.format("[D][%s]%s(by: %s)",
-                    this.getStatusIcon(), this.description, this.date);
+                    this.getStatusIcon(), this._description, this._date);
         return d;
     }
 }

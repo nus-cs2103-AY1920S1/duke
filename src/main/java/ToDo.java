@@ -18,7 +18,7 @@ public class ToDo extends Task {
      */
     public String toString() {
         String t = String.format("[T][%s]%s",
-                this.getStatusIcon(), this.description);
+                this.getStatusIcon(), this._description);
         return t;
     }
 }

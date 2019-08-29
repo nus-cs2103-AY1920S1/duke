@@ -6,16 +6,16 @@
  * get its status icon and description, as well as its String representation.
  */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    protected String _description;
+    protected boolean _isDone;
 
     /**
      * Constructs a Task object (which cannot be initialised on its own)
      * @param description a Description of the Task.
      */
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        this._description = description;
+        this._isDone = false;
     }
 
     /**
@@ -25,14 +25,14 @@ public abstract class Task {
      * and a "X" if a Task is not marked as done.
      */
     public final String getStatusIcon() {
-        return (isDone ? "O" : "X");
+        return (_isDone ? "O" : "X");
     }
 
     /**
      * Marks the Task as done.
      */
     public final void markAsDone() {
-        this.isDone = true;
+        this._isDone = true;
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class Task {
      * @return String Returns a description of the current Task.
      */
     public final String getDesc() {
-        return this.description;
+        return this._description;
     }
 
     /**

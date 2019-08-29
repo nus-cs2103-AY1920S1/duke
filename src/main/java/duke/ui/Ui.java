@@ -58,6 +58,11 @@ public class Ui {
         showMsg(byeMsg);
     }
 
+    /**
+     * Show add task message.
+     *
+     * @param t Task to be shown
+     */
     public void showAddTaskMsg(Task t) {
         showMsg(addMsg);
         showTask(t);
@@ -69,6 +74,11 @@ public class Ui {
         showTask(t);
     }
 
+    /**
+     * Show message when task is deleted.
+     *
+     * @param t Task to be shown
+     */
     public void showTaskDelMsg(Task t) {
         showMsg(delMsg);
         showTask(t);
@@ -79,12 +89,21 @@ public class Ui {
         System.out.println(emptyListMsg);
     }
 
+    /**
+     * Show Welcome text.
+     */
     public void showWelcome() {
         showLine();
         showHiMsg();
         showLine();
         System.out.println();
     }
+
+    /**
+     * Shows all tasks in task list.
+     *
+     * @throws DukeException If there is no task in task list
+     */
     public void showTasks() throws DukeException {
         if (!tasks.isEmpty()) {
             showMsg("Here are the tasks in your list:");
@@ -95,6 +114,10 @@ public class Ui {
             showEmptyListMsg();
         }
     }
+
+    /**
+     * Shows size of list.
+     */
     public void showListSize() {
         if (!tasks.isEmpty()) {
             showMsg("Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list");
@@ -102,6 +125,7 @@ public class Ui {
             showEmptyListMsg();
         }
     }
+
     public void showTask(Task task) {
         showMsg("  " + task);
     }

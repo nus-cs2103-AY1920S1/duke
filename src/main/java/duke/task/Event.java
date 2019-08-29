@@ -9,14 +9,32 @@ public class Event extends Task {
     public Event(String desc) {
         super(desc);
     }
+
     public Event(String desc, boolean done) {
         super(desc, done);
     }
+
+    /**
+     * Constructor method.
+     *
+     * @param desc Event description
+     * @param startDate Event start datetime
+     * @param endDate Event end datetime
+     */
     public Event(String desc, LocalDateTime startDate, LocalDateTime endDate) {
         super(desc);
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    /**
+     * Constructor method.
+     *
+     * @param desc Event description
+     * @param startDate Event start datetime
+     * @param endDate Event end datetime
+     * @param done Event done state
+     */
     public Event(String desc, LocalDateTime startDate, LocalDateTime endDate, boolean done) {
         super(desc, done);
         this.startDate = startDate;

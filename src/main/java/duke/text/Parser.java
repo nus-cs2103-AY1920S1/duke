@@ -53,10 +53,10 @@ public class Parser {
                             command = new Command(commandWord, desc, deadline);
                         } catch (DateTimeParseException e) {
                             throw new DukeException(
-                                    "\u2754 OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
+                                    "OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
                         }
                     } else {
-                        throw new DukeException("\u2754 OOPS!!! The due date of a deadline cannot be empty");
+                        throw new DukeException("OOPS!!! The due date of a deadline cannot be empty");
                     }
                     break;
                 case "event":
@@ -69,23 +69,25 @@ public class Parser {
                                 LocalDateTime startDateTime = LocalDateTime.parse(dateTimeSplit[0], formatter);
                                 LocalDateTime endDateTime = LocalDateTime.parse(dateTimeSplit[1], formatter);
                                 if (!startDateTime.isBefore(endDateTime)) {
-                                    throw new DukeException("\u2754 OOPS!!! StartDate > EndDate");
+                                    throw new DukeException("OOPS!!! StartDate > EndDate");
                                 }
                                 command = new Command(commandWord, desc, startDateTime, endDateTime);
                             } catch (DateTimeParseException e) {
                                 throw new DukeException(
-                                        "\u2754 OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
+                                        "OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
                             }
                         } else {
-                            throw new DukeException("\u2754 OOPS!!! Please input startDate and EndDate");
+                            throw new DukeException("OOPS!!! Please input startDate and EndDate");
                         }
                     } else {
-                        throw new DukeException("\u2754 OOPS!!! Please input startDate and EndDate");
+                        throw new DukeException("OOPS!!! Please input startDate and EndDate");
                     }
+                    break;
+                default:
                     break;
                 }
             } else {
-                throw new DukeException("\u2754 OOPS!!! The description of a " + commandWord + " cannot be empty");
+                throw new DukeException("OOPS!!! The description of a " + commandWord + " cannot be empty");
             }
             break;
         case "done":
@@ -95,16 +97,16 @@ public class Parser {
                     taskListIndex = Integer.parseInt(fullCommandSplit[1]);
                     command = new Command(commandWord, taskListIndex);
                 } else {
-                    throw new DukeException("\u2754 OOPS!!! The index of " + commandWord
+                    throw new DukeException("OOPS!!! The index of " + commandWord
                             + " operation must be a positive integer.");
                 }
             } else {
-                throw new DukeException("\u2754 OOPS!!! The index of " + commandWord
+                throw new DukeException("OOPS!!! The index of " + commandWord
                         + " operation cannot be empty.");
             }
             break;
         default:
-            throw new DukeException("\u2754 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return command;
     }

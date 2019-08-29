@@ -1,7 +1,11 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.io.File;
@@ -47,7 +51,9 @@ public class Storage {
         inputs = new String[5];
         try {
             Scanner sc = new Scanner(file);
-            if (!sc.hasNext()) ui.noRecordsFoundMsg();
+            if (!sc.hasNext()) {
+                ui.noRecordsFoundMsg();
+            }
             while (sc.hasNext()) {
                 inputs = sc.nextLine().split(gap);
                 isDone = inputs[1].equals("1");
@@ -60,6 +66,8 @@ public class Storage {
                     break;
                 case "E":
                     task = new Event(inputs[2], LocalDateTime.parse(inputs[3]), LocalDateTime.parse(inputs[4]), isDone);
+                    break;
+                default:
                     break;
                 }
                 tasks.add(task);
@@ -77,11 +85,16 @@ public class Storage {
      * @param taskList List of tasks to be written to file.
      */
     public void save(TaskList taskList) {
-        String type, isDone, desc, time;
-        if (!taskList.isEmpty())
+        String type;
+        String isDone;
+        String desc;
+        String time;
+
+        if (!taskList.isEmpty()) {
             ui.showSaveDataMsg();
-        else
+        } else {
             ui.showNothingToSaveMsg();
+        }
         try {
             FileWriter fw = new FileWriter(file);
             for (Task t : taskList.getTasks()) {

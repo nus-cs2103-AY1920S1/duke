@@ -19,7 +19,7 @@ public class TaskList {
     /**
      * Getter for list of tasks.
      *
-     * @return List of tasks.
+     * @return List of tasks
      */
     public List<Task> getTasks() {
         return tasks;
@@ -28,7 +28,7 @@ public class TaskList {
     /**
      * Getter for size variable.
      *
-     * @return Size of task list.
+     * @return Size of task list
      */
     public int size() {
         return tasks.size();
@@ -37,7 +37,7 @@ public class TaskList {
     /**
      * Returns if TaskList is empty.
      *
-     * @return true if no task in list, true if there are tasks in list.
+     * @return true if no task in list, true if there are tasks in list
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
@@ -47,7 +47,7 @@ public class TaskList {
      * Returns index of a task if task is in list.
      * @param t Task
      * @return Index of task
-     * @throws DukeException If task not in taskList.
+     * @throws DukeException If task not in taskList
      */
     public int indexOf(Task t) throws DukeException {
         if (this.getTasks().contains(t)) {
@@ -58,37 +58,56 @@ public class TaskList {
     }
 
     /**
+     * Get Task from list at index.
      *
-     * @param index
-     * @return
-     * @throws DukeException
+     * @param index Index of task in list
+     * @return Task at index
+     * @throws DukeException If index is out of range of list
      */
     public Task get(int index) throws DukeException {
         if (isValidIndex(index)) {
             return tasks.get(index - 1);
         } else {
-            throw new DukeException("\u2754 OOPS!!! There is no task at index " + index + ".");
+            throw new DukeException("OOPS!!! There is no task at index " + index + ".");
         }
     }
 
+    /**
+     * Add task to list.
+     *
+     * @param t Task to be added to list
+     */
     public void add(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Remove task from task list.
+     *
+     * @param t Task to be removed
+     * @throws DukeException If task is not in task list
+     */
     public void remove(Task t) throws DukeException {
         if (tasks.contains(t)) {
             tasks.remove(t);
         } else {
-            throw new DukeException("\u2754 OOPS!!! There is no such task in taskList.");
+            throw new DukeException("OOPS!!! There is no such task in taskList.");
         }
     }
 
+    /**
+     * Remove task at index from list.
+     *
+     * @param index Index at which to remove task
+     * @return Removed task
+     * @throws DukeException If index is out of range of list
+     */
     public Task remove(int index) throws DukeException {
         Task task;
         if (isValidIndex(index)) {
             task = tasks.remove(index - 1);
         } else {
-            throw new DukeException("\u2754 OOPS!!! There is no such task in taskList.");
+            throw new DukeException("OOPS!!! There is no such task in taskList.");
         }
         return task;
     }

@@ -2,7 +2,11 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -18,7 +22,7 @@ public class Command {
     protected Task task;
 
     /**
-     * Initializes new Command object
+     * Initializes new Command object.
      * @param commandWord User inputted command word
      */
     public Command(String commandWord) {
@@ -26,7 +30,7 @@ public class Command {
     }
 
     /**
-     * Initializes new Command object
+     * Initializes new Command object.
      * @param commandWord User inputted command word
      * @param desc Description
      */
@@ -36,7 +40,7 @@ public class Command {
     }
 
     /**
-     * Initializes new Command object
+     * Initializes new Command object.
      * @param commandWord User inputted command word
      * @param taskListIndex User inputted index of list of tasks
      */
@@ -46,7 +50,7 @@ public class Command {
     }
 
     /**
-     * Initializes new Command object
+     * Initializes new Command object.
      * @param commandWord User inputted command word
      * @param desc Description
      * @param deadline User inputted param of deadline object
@@ -58,7 +62,7 @@ public class Command {
     }
 
     /**
-     * Initializes new Command object
+     * Initializes new Command object.
      * @param commandWord User inputted command word
      * @param desc Description
      * @param startDateTime User inputted param of event object
@@ -72,8 +76,9 @@ public class Command {
     }
 
     /**
+     * Execute the command.
      *
-     * @param tasks List of tasks is memory
+     * @param tasks List of tasks in memory
      * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException If command word is invalid
@@ -96,6 +101,8 @@ public class Command {
             case "event":
                 task = new Event(desc, startDateTime, endDateTime);
                 break;
+            default:
+                break;
             }
             tasks.add(task);
             ui.showAddTaskMsg(task);
@@ -117,7 +124,7 @@ public class Command {
             ui.showByeMsg();
             return;
         default:
-            throw new DukeException("\u2754 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

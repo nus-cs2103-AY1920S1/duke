@@ -1,9 +1,5 @@
 package duke.task;
 
-<<<<<<< HEAD
-public class Deadline extends duke.task.Task {
-    /** Deadline of the task. */
-=======
 /**
  * Deadline class to create the deadline task.
  *
@@ -12,7 +8,6 @@ public class Deadline extends duke.task.Task {
  */
 public class Deadline extends Task {
     /** Deadline of the task */
->>>>>>> origin/branch-A-JavaDoc
     protected String by;
 
     /**

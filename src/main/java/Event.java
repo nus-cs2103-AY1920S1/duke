@@ -1,27 +1,48 @@
-
+/**
+ * Event class
+ */
 public class Event extends Task {
-  private String date;
+    private String date;
 
-  public Event(String n, int index, String date) {
-    super(n, index);
-    this.date = date;
-  }
+    /**
+     * Constructor for Event object
+     * @param n name of event
+     * @param date date of event
+     */
+    public Event(String n, String date) {
+        super(n);
+        this.date = date;
+    }
 
-  public Event(String n, int index, String date, boolean completed) {
-    super(n, index, completed);
-    this.date = date;
-  }
+    /**
+     * Constructor for Event object when loading history
+     * @param n name of event
+     * @param date date of event
+     * @param completed true if event is already completed, false otherwise
+     */
+    public Event(String n, String date, boolean completed) {
+        super(n, completed);
+        this.date = date;
+    }
 
-  public String getDate() {
-    return date;
-  }
+    /**
+     * Returns date of event
+     * @return String of date
+     */
+    public String getDate() {
+        return date;
+    }
 
-  @Override
-  public String toString() {
-    String result = "[E][";
-    result = this.completed ? result + "\u2713" + "]" : result + "\u2718" + "]";
-    result += " " + this.name;
-    result += " (at: " + this.date + ")";
-    return result;
-  }
+    /**
+     * Returns string representation of Event object
+     * @return String representation of Event object
+     */
+    @Override
+    public String toString() {
+        String result = "[E][";
+        result = this.completed ? result + "\u2713" + "]" : result + "\u2718" + "]";
+        result += " " + this.name;
+        result += " (at: " + this.date + ")";
+        return result;
+    }
 }

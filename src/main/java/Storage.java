@@ -18,7 +18,6 @@ public class Storage {
         Scanner reader = new Scanner(f);
         while(reader.hasNext()) {
             String s = reader.nextLine();
-            System.out.println(s);
             String[] tempArray = s.split(" -- ");
             Task t;
             if (tempArray[0].equals("[D]")) {

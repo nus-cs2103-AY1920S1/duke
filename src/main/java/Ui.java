@@ -26,10 +26,10 @@ public class Ui {
     public void showNumberFormatError(String type) {
         switch(type) {
         case "done" : System.err.println(" :( OOPS!!! Invalid format." +
-                    "Please enter the number of the task to be marked as done.");
+                    " Please enter the number of the task to be marked as done.");
             break;
         case "delete" : System.err.println(" :( OOPS!!! Invalid format." +
-                    "Please enter the number of the task to be deleted.");
+                    " Please enter the number of the task to be deleted.");
             break;
         }
     }

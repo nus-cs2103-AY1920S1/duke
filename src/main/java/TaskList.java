@@ -60,7 +60,6 @@ public class TaskList {
                 Deadline d = (Deadline) t;
                 d.setDateTime(dateTime);
             }
-
             add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println(t);

@@ -43,37 +43,35 @@ public class Duke {
                 command = parser.parse(input);
 
                 switch (command.getTaskType()) {
-                    case "bye":
-                        isRunning = false;
-                        break;
-                    case "done":
-                        int index = command.getIndex() - 1;
-                        tasks.markTaskDone(index);
-                        ui.reportDone(tasks.getTask(index));
-                        break;
-                    case "list":
-                        ui.printFormattedText(tasks.generateList());
-                        break;
-                    case "delete":
-                        Task removedTask = tasks.removeTask(command.getIndex());
-                        ui.reportRemove(removedTask, tasks.getNumOfTasks());
-                        break;
-                    case "todo":
-                        Task addedTodo = tasks.addTask(command.getTask());
-                        ui.reportAdd(addedTodo, tasks.getNumOfTasks());
-                        break;
-                    case "deadline":
-                        Task addedDeadline = tasks.addTask("D", command.getTask(), command.getDate());
-                        ui.reportAdd(addedDeadline, tasks.getNumOfTasks());
-                        break;
-                    case "event":
-                        Task addedEvent = tasks.addTask("E", command.getTask(), command.getDate());
-                        ui.reportAdd(addedEvent, tasks.getNumOfTasks());
-                        break;
-                    case "find":
-                        ui.reportFound(tasks.findTask(command.getKeyword()));
-                    default:
-                        throw new DukeException("     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case "bye":
+                    isRunning = false;
+                    break;
+                case "done":
+                    int index = command.getIndex() - 1;
+                    tasks.markTaskDone(index);
+                    ui.reportDone(tasks.getTask(index));
+                    break;
+                case "list":
+                    ui.printFormattedText(tasks.generateList());
+                    break;
+                case "delete":
+                    Task removedTask = tasks.removeTask(command.getIndex());
+                    ui.reportRemove(removedTask, tasks.getNumOfTasks());
+                    break;
+                case "todo":
+                    Task addedTodo = tasks.addTask(command.getTask());
+                    ui.reportAdd(addedTodo, tasks.getNumOfTasks());
+                    break;
+                case "deadline":
+                    Task addedDeadline = tasks.addTask("D", command.getTask(), command.getDate());
+                    ui.reportAdd(addedDeadline, tasks.getNumOfTasks());
+                    break;
+                case "event":
+                    Task addedEvent = tasks.addTask("E", command.getTask(), command.getDate());
+                    ui.reportAdd(addedEvent, tasks.getNumOfTasks());
+                    break;
+                default:
+                    throw new DukeException("     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 ui.printError(e.getMessage());

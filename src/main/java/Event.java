@@ -28,4 +28,15 @@ public class Event extends Task {
                 this.getStatusIcon(), this._description, this._date);
         return e;
     }
+
+    /**
+     * Returns a string representation of the Event object to be saved
+     * into the hard disk file for the Duke program.
+     * @return String Returns a the data representation of the Event Task.
+     */
+    public String toData() {
+        String t = String.format("E | %s | %s | %s",
+                this.getStatusIcon(), this._description, this._date);
+        return t;
+    }
 }

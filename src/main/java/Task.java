@@ -49,4 +49,11 @@ public abstract class Task {
      */
     @Override
     public abstract String toString();
+
+    /**
+     * Returns a string representation of the Task object to be saved
+     * into the hard disk file for the Duke program.
+     * @return String Returns a the data representation of the Task.
+     */
+    public abstract String toData();
 }

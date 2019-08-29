@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
@@ -18,6 +20,7 @@ public class Duke { // handles all input and output
     final static String line = "____________________________________________________________";
 
     final static ArrayList<Task> _task = new ArrayList<Task>();
+    public static DukeData _myData;
 
     /**
      * Greets the users, and asks users what they want Duke to do.
@@ -81,7 +84,7 @@ public class Duke { // handles all input and output
     public static String done(int n) {
         Task t = _task.get(n - 1);
         t.markAsDone();
-        String done = String.format("%s%n Nice! I've marked this task as done:%n [%s] %s%n",
+        String done = String.format("%s%n Nice! I've marked this task as done:%n [%s] %s%n%s%n",
                         line, t.getStatusIcon(), t.getDesc(), line);
         return done;
     }
@@ -108,6 +111,7 @@ public class Duke { // handles all input and output
     public static void main(String[] args) { // handles all input and output
         Scanner sc = new Scanner(System.in);
         System.out.println(intro());
+        _myData = new DukeData();
 
         while (sc.hasNext()) {
             String cmdWord = sc.next(); // extract first only
@@ -118,15 +122,22 @@ public class Duke { // handles all input and output
                 case "list":
                     System.out.println(list());
                     break;
+                case "data":
+                    _myData.printDataFile();
+                    break;
                 case "bye":
+                    _myData.exit();
                     System.out.println(bye());
                     break;
                 case "done":
                     int taskNo = Integer.parseInt(cmdLine.substring(1));
-                    System.out.println(done(taskNo));
+                    String doned = done(taskNo);
+                    _myData.taskDone(taskNo, _task.get(taskNo - 1));
+                    System.out.println(doned);
                     break;
                 case "delete":
                     int taskNum = Integer.parseInt(cmdLine.substring(1));
+                    _myData.removeTask(taskNum);
                     System.out.println(delete(taskNum));
                     break;
                 case "todo":
@@ -134,6 +145,8 @@ public class Duke { // handles all input and output
                         throw new ToDoException(cmdLine);
                     } else {
                         ToDo td = new ToDo(cmdLine);
+                        int index = _task.size() + 1;
+                        _myData.addTask(index, td); // since index is -1 of size
                         System.out.println(newTask(td));
                     }
                     break;
@@ -150,6 +163,8 @@ public class Duke { // handles all input and output
                             throw new DeadlineException(cmdLine, 2);
                         } else {
                             Deadline dl = new Deadline(cmdSplit[0], cmdSplit[1]);
+                            int index = _task.size() + 1;
+                            _myData.addTask(index, dl); // since index is -1 of size
                             System.out.println(newTask(dl));
                         }
                     }
@@ -166,29 +181,35 @@ public class Duke { // handles all input and output
                         } else if (cmdSplitt[0].equals(" ")) {
                             throw new EventException(cmdLine, 2);
                         } else {
-                            Event e = new Event(cmdSplitt[0], cmdSplitt[1]);
-                            System.out.println(newTask(e));
+                            Event ev = new Event(cmdSplitt[0], cmdSplitt[1]);
+                            int index = _task.size() + 1;
+                            _myData.addTask(index, ev); // since index is -1 of size
+                            System.out.println(newTask(ev));
                         }
                     }
                     break;
                 default: // if it is not any of the above commands
                     throw new DukeException(cmdWord + cmdLine);
                 }
-            } catch(DukeException e) {
+            } catch (DukeException e) {
                 System.out.println(line);
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
                 System.out.println(line);
-            } catch(ToDoException e) {
+            } catch (ToDoException e) {
                 System.out.println(line);
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
                 System.out.println(line);
-            } catch(DeadlineException e) {
+            } catch (DeadlineException e) {
                 System.out.println(line);
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
                 System.out.println(line);
-            } catch(EventException e) {
+            } catch (EventException e) {
                 System.out.println(line);
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
+                System.out.println(line);
+            } catch (IOException ioe) {
+                System.out.println(line);
+                ioe.printStackTrace();
                 System.out.println(line);
             }
         }

@@ -18,18 +18,18 @@ public class Ui {
     public String delMsg = "Noted. I've removed this task:";
     public String emptyListMsg = "You have no task in the list";
 
+    /**
+     * Initialize a Ui object.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
-    public Ui(TaskList tasks) {
-        this.sc = new Scanner(System.in);
-    }
-
-    public void setTasks(TaskList tasks) {
-        this.tasks = tasks;
-    }
-
+    /**
+     * Read a line of input.
+     * @return Line of input.
+     * @throws DukeException If no next line.
+     */
     public String readCommand() throws DukeException {
         if (sc.hasNext()) {
             return sc.nextLine();
@@ -55,8 +55,7 @@ public class Ui {
     }
 
     public void showByeMsg() {
-        showMsg(
-                byeMsg);
+        showMsg(byeMsg);
     }
 
     public void showAddTaskMsg(Task t) {
@@ -86,7 +85,7 @@ public class Ui {
         showLine();
         System.out.println();
     }
-    public void showTasks() {
+    public void showTasks() throws DukeException {
         if (!tasks.isEmpty()) {
             showMsg("Here are the tasks in your list:");
             for (Task t: tasks.getTasks()) {
@@ -105,6 +104,10 @@ public class Ui {
     }
     public void showTask(Task task) {
         showMsg("  " + task);
+    }
+
+    public void setTasks(TaskList tasks) {
+        this.tasks = tasks;
     }
 
     public void showLoadTaskMsg() {

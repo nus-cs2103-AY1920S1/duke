@@ -19,12 +19,23 @@ public class Storage {
     Ui ui;
     String gap = "  ";
 
+    /**
+     * Initialize a Storage object.
+     *
+     * @param filePath Path of file whether data is stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
         ui = new Ui();
     }
 
+    /**
+     * Load data from file specified by filePath.
+     *
+     * @return ArrayList of tasks.
+     * @throws DukeException If no file is found at FilePath.
+     */
     public List<Task> load() throws DukeException {
         Task task;
         List<Task> tasks = new ArrayList<>();
@@ -60,6 +71,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save program data to file at filePath.
+     *
+     * @param taskList List of tasks to be written to file.
+     */
     public void save(TaskList taskList) {
         String type, isDone, desc, time;
         if (!taskList.isEmpty())

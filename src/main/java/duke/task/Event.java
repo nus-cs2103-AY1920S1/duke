@@ -23,18 +23,38 @@ public class Event extends Task {
         this.endDate = endDate;
     }
 
+    /**
+     * Getter for startDate variable.
+     *
+     * @return Start date of event.
+     */
     public LocalDateTime getStartDate() {
         return startDate;
     }
 
+    /**
+     * Setter for startDate variable.
+     *
+     * @param startDate Start date of event.
+     */
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * Getter for endDate variable.
+     *
+     * @return End date of event.
+     */
     public LocalDateTime getEndDate() {
         return endDate;
     }
 
+    /**
+     * Setter for endDate variable.
+     *
+     * @param endDate End date of event.
+     */
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }

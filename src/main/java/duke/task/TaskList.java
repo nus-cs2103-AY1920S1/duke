@@ -16,22 +16,53 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Getter for list of tasks.
+     *
+     * @return List of tasks.
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Getter for size variable.
+     *
+     * @return Size of task list.
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Returns if TaskList is empty.
+     *
+     * @return true if no task in list, true if there are tasks in list.
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
-    public int indexOf(Task t) {
-        return tasks.indexOf(t);
+    /**
+     * Returns index of a task if task is in list.
+     * @param t Task
+     * @return Index of task
+     * @throws DukeException If task not in taskList.
+     */
+    public int indexOf(Task t) throws DukeException {
+        if (this.getTasks().contains(t)) {
+            return tasks.indexOf(t);
+        } else {
+            throw new DukeException("Task not in taskList.");
+        }
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     * @throws DukeException
+     */
     public Task get(int index) throws DukeException {
         if (isValidIndex(index)) {
             return tasks.get(index - 1);

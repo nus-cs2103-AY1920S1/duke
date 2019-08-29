@@ -11,6 +11,13 @@ import java.util.Locale;
 public class Parser {
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm", Locale.ENGLISH);
 
+    /**
+     * Parse input string fullCommand, checks for invalid input format, and return a validated command.
+     *
+     * @param fullCommand Raw input string
+     * @return Initialized Command instance
+     * @throws DukeException If input string is of an invalid format.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] fullCommandSplit = fullCommand.split(" ", 2);
         String[] argumentsSplit;

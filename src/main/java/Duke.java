@@ -13,6 +13,11 @@ public class Duke {
     protected Storage storage;
     protected Ui ui;
 
+    /**
+     * Duke Constructor that takes in a filePath where application data would be stored.
+     *
+     * @param filePath Path of storage file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -31,16 +36,10 @@ public class Duke {
         newDuke.run();
     }
 
-    public void run1() {
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        System.out.println(list);
-        String a = list.get(1);
-        System.out.println(a);
-        a = "3";
-        System.out.println(list);
-    }
+    /**
+     * Main run method. Application is in a constant loop until bye command changes isExit to true and
+     * break out of the loop.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

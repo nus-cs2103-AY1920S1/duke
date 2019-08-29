@@ -10,7 +10,7 @@ public class Sheet {
     public int numOfTask;
     Ui ui = new Ui();
 
-    public Sheet(List<Task> tasks) throws IOException {
+    public Sheet(List<Task> tasks) {
         this.tasks = tasks;
         numOfTask = tasks.size();
     }
@@ -23,7 +23,6 @@ public class Sheet {
         ui.showCount(numOfTask);
         ui.showLine();
     }
-
 
     public void delete(int index) throws IOException{
         Task removed = tasks.remove(index - 1);
@@ -52,6 +51,15 @@ public class Sheet {
             ui.showTask(i + 1, tasks.get(i).toString().trim());
         }
         ui.showLine();
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < numOfTask; i++) {
+            output += (i + 1) + ". " + tasks.get(i).toString();
+        }
+        return output.trim();
     }
 
 }

@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.Duke;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
@@ -12,6 +13,8 @@ import duke.commands.TodoCommand;
 import duke.data.tasks.Deadline;
 import duke.data.tasks.Event;
 import duke.data.tasks.Todo;
+import duke.exceptions.DukeException;
+
 import java.util.regex.Pattern;
 import java.text.ParseException;
 
@@ -33,18 +36,18 @@ public class Parser {
         }
         String commandWord = getCommandWord(input);
         Command command;
-        switch(commandWord) {
+        switch (commandWord) {
         case DeadlineCommand.COMMAND_WORD:
-            command = prepareDeadlineCommand(getArguments(input));
+            command = prepareDeadlineCommand(input);
             break;
         case DeleteCommand.COMMAND_WORD:
-            command = prepareDeleteCommand(getArguments(input));
+            command = prepareDeleteCommand(input);
             break;
         case DoneCommand.COMMAND_WORD:
-            command = prepareDoneCommand(getArguments(input));
+            command = prepareDoneCommand(input);
             break;
         case EventCommand.COMMAND_WORD:
-            command = prepareEventCommand(getArguments(input));
+            command = prepareEventCommand(input);
             break;
         case ExitCommand.COMMAND_WORD:
             command = prepareExitCommand();
@@ -53,7 +56,7 @@ public class Parser {
             command = prepareListCommand();
             break;
         case TodoCommand.COMMAND_WORD:
-            command = prepareTodoCommand(getArguments(input));
+            command = prepareTodoCommand(input);
             break;
         default:
             command = prepareIncorrectCommand();
@@ -62,8 +65,12 @@ public class Parser {
         return command;
     }
 
-    private static String getArguments(String input) {
-        return input.split(" ", INPUT_STRING_SPLIT_LIMIT)[ARGUMENTS_INDEX];
+    private static String getArguments(String input) throws ArrayIndexOutOfBoundsException {
+        try {
+            return input.split(" ", INPUT_STRING_SPLIT_LIMIT)[ARGUMENTS_INDEX];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw e;
+        }
     }
 
     /**
@@ -76,12 +83,13 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a deadline command based on the specified arguments.
-     * @param arguments The specified arguments.
-     * @return A deadline command based on the specified arguments.
+     * Prepares and returns a deadline command based on the specified input.
+     * @param input The specified arguments.
+     * @return A deadline command based on the specified input.
      */
-    private static Command prepareDeadlineCommand(String arguments) {
+    private static Command prepareDeadlineCommand(String input) {
         try {
+            String arguments = getArguments(input);
             String[] deadlineInformation = arguments.split(" /by ");
             Deadline deadline = new Deadline(deadlineInformation[0], deadlineInformation[1]);
             return new DeadlineCommand(deadline);
@@ -96,12 +104,13 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a delete command based on the specified arguments.
-     * @param arguments The specified arguments.
-     * @return A delete command based on the specified arguments.
+     * Prepares and returns a delete command based on the specified input.
+     * @param input The specified input.
+     * @return A delete command based on the specified input.
      */
-    private static Command prepareDeleteCommand(String arguments) {
+    private static Command prepareDeleteCommand(String input) {
         try {
+            String arguments = getArguments(input);
             String[] taskInformation = arguments.split(" ");
             if (taskInformation.length > 1) {
                 throw new IllegalArgumentException();
@@ -120,12 +129,13 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a done command based on the specified arguments.
-     * @param arguments The specified arguments.
-     * @return A done command based on the specified arguments.
+     * Prepares and returns a done command based on the specified input.
+     * @param input The specified input.
+     * @return A done command based on the specified input.
      */
-    private static Command prepareDoneCommand(String arguments) {
+    private static Command prepareDoneCommand(String input) {
         try {
+            String arguments = getArguments(input);
             String[] taskInformation = arguments.split(" ");
             if (taskInformation.length > 1) {
                 throw new IllegalArgumentException();
@@ -152,12 +162,13 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns an event command based on the specified arguments.
-     * @param arguments The specified arguments.
-     * @return An event command based on the specified arguments.
+     * Prepares and returns an event command based on the specified input.
+     * @param input The specified input.
+     * @return An event command based on the specified input.
      */
-    private static Command prepareEventCommand(String arguments) {
+    private static Command prepareEventCommand(String input) {
         try {
+            String arguments = getArguments(input);
             String[] taskInformation = arguments.split(" /at ");
             Event event = new Event(taskInformation[0], taskInformation[1]);
             return new EventCommand(event);
@@ -189,15 +200,16 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a todo command based on the specified arguments.
-     * @param arguments The specified arguments.
-     * @return A todo command based on the specified arguments.
+     * Prepares and returns a todo command based on the specified input.
+     * @param input The specified input.
+     * @return A todo command based on the specified input.
      */
-    private static Command prepareTodoCommand(String arguments) {
+    private static Command prepareTodoCommand(String input) {
         try {
+            String arguments = getArguments(input);
             Todo todo = new Todo(arguments);
             return new TodoCommand(todo);
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
             String errorMessage = "todo command format: todo <description>\n";
             return new IncorrectCommand(errorMessage);
         }

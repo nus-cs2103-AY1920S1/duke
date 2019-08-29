@@ -1,0 +1,5 @@
+Additional date and time formats
+Move switch statement into command factory
+DukeException error message
+Event timing (from start time to end time)
+Throw exception if command's task list is not set

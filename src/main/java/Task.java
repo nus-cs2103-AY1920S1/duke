@@ -11,16 +11,9 @@ public class Task {
         isDone = true;
     }
 
-    public String toDisplay() {
+    @Override
+    public String toString() {
         return this.item;
-    }
-
-    public String mark() {
-        if (isDone) {
-            return ("\u2713");
-        } else {
-            return ("\u2718");
-        }
     }
 
 }

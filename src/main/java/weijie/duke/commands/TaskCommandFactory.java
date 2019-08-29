@@ -12,6 +12,5 @@ public class TaskCommandFactory {
 
     public ITaskCommand tryMakeCommand(String command) {
         return commandMap.getOrDefault(command, new InvalidCommand());
-
     }
 }

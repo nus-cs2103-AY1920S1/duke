@@ -4,19 +4,42 @@ import duke.task.Task;
 
 import java.util.List;
 
+/**
+ * Represents an interface of a task list. Provides methods to add a task to the list,
+ * getting a List, getting the size of the list, getting a task using the index and removing
+ * a task based on the index specified.
+ */
 public interface MyList {
-    //add a task to the list
+
+    /**
+     * Adds a task to the task list.
+     * @param task Task to be added.
+     */
     public abstract void add(Task task);
 
-    //returns list of task
+    /**
+     * Returns a List of type Task.
+     * @return List of tasks.
+     */
     public abstract List<Task> getList();
 
-    //returns total number of tasks
+    /**
+     * Returns the size of the list.
+     * @return Size of list.
+     */
     public abstract int getNumTasks();
 
-    //returns tasks by index
+    /**
+     * Returns a task based on the index specified.
+     * @param index Index of task tagged in the list.
+     * @return Task tagged with the index.
+     */
     public abstract Task getTask(int index);
 
-    //removes task by index
+    /**
+     * Removes a task from the list based on the index specified.
+     * @param index Index of task tagged in the list.
+     * @return Task that was removed.
+     */
     public abstract Task removeTask(int index);
 }

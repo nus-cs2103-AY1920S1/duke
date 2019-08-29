@@ -3,8 +3,19 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.*;
 
+/**
+ * Represents a class that takes in inputs and translates them into different commands.
+ */
 public class Parser {
 
+    /**
+     * Takes in a string input and convert the input into a command which performs a set of
+     * instructions on the task list, ui and storage.
+     *
+     * @param input String that contains the input of the user.
+     * @return A command that execute a set of instructions.
+     * @throws DukeException Thrown when there is a Duke exception.
+     */
     public static Command parse(String input) throws DukeException {
         String[] arguments = input.split(" ");
 

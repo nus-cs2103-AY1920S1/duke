@@ -1,5 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.regex.Pattern;
 
 public class Duke {
     public static void printAddedTask(Task task, int taskListSize) {
@@ -10,9 +15,57 @@ public class Duke {
         else System.out.println(" tasks in the list.");
     }
 
+    private static void writeToFile(String filePath, LinkedList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        String toWrite = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            toWrite += tasks.get(i).toSave();
+            if (i != tasks.size() - 1) toWrite += "\n";
+        }
+        fw.write(toWrite);
+        fw.close();
+    }
+
     public static void main(String[] args) throws DukeException {
+        String fileName = "data/duke.txt";
+        File file = new File(fileName);
+        file.getParentFile().mkdirs();
+
         Scanner sc = new Scanner(System.in);
         LinkedList<Task> tasks = new LinkedList<>();
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e){
+                System.out.println("Couldn't create file " + e.getMessage());
+            }
+        } else {
+            try {
+                Scanner readData = new Scanner(file);
+                while (readData.hasNext()) {
+                    String nextTask = readData.nextLine();
+                    String[] details = nextTask.split(Pattern.quote(" | "));
+                    String type = details[0];
+                    Task task;
+
+                    if (type.equals("T")) {
+                        task = new Todo(details[2]);
+                    } else if (type.equals("D")) {
+                        task = new Deadline(details[2], details[3]);
+                    } else {
+                        task = new Event(details[2], details[3]);
+                    }
+
+                    if (details[1].equals("1")) task.markAsDone();
+                    tasks.add(task);
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("File doesn't exist: " + e.getMessage());
+            }
+        }
+
+        boolean hasChanged = true;
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String userInput = sc.nextLine();
 
@@ -25,6 +78,7 @@ public class Duke {
                         for (int i = 0; i < tasks.size(); i++) {
                             System.out.println((i + 1) + "." + tasks.get(i));
                         }
+                        hasChanged = false;
                         break;
                     case "done":
                         int i = Integer.parseInt(command[1]) - 1;
@@ -73,11 +127,19 @@ public class Duke {
                         printAddedTask(event, tasks.size());
                         break;
                     default:
+                        hasChanged = false;
                         throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             } finally {
+                if (hasChanged) {
+                    try {
+                        writeToFile(file.getAbsolutePath(), tasks);
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    }
+                }
                 userInput = sc.nextLine();
             }
         }

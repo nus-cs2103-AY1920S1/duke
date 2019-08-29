@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Functionality.*;
-import Task.Events;
-import Task.Task;
+import logic.*;
+import task.Events;
+import task.Task;
 
 import java.time.LocalDateTime;
 

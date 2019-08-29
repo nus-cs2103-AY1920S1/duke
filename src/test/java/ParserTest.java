@@ -1,5 +1,5 @@
-import Functionality.DukeException;
-import Functionality.Parser;
+import logic.DukeException;
+import logic.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

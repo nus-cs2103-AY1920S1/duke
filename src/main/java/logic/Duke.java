@@ -1,5 +1,6 @@
-import Commands.Command;
-import Functionality.*;
+package logic;
+
+import commands.Command;
 
 import java.util.Scanner;
 

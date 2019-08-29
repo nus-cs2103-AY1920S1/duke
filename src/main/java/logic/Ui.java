@@ -1,6 +1,6 @@
-package Functionality;
+package logic;
 
-import Task.Task;
+import task.Task;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         sb.append(logo);
-        sb.append("Hello! I'm Duke\n");
+        sb.append("Hello! I'm logic.Duke\n");
         sb.append("What can I do for you?");
         printStr(sb.toString());
     }

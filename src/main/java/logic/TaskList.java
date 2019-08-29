@@ -1,11 +1,11 @@
-package Functionality;
+package logic;
 
-import Task.Task;
+import task.Task;
 
 import java.util.List;
 
 /**
- * Contains the Functionality.TaskList and has the operations to add/delete tasks in the list
+ * Contains the logic.TaskList and has the operations to add/delete tasks in the list
  */
 public class TaskList {
     private List<Task> taskList;

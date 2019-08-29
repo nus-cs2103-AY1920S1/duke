@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Functionality.DukeException;
+import logic.DukeException;
 
 public abstract class Task {
     String description;
@@ -13,7 +13,7 @@ public abstract class Task {
 
     public void markDone() throws DukeException {
         if (isDone) {
-            throw new DukeException("Task.Task is already done!");
+            throw new DukeException("task.task is already done!");
         } else {
             this.isDone = true;
         }

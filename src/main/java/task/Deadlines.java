@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Functionality.Parser;
+import logic.Parser;
 
 import java.time.LocalDateTime;
 

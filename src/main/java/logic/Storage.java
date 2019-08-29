@@ -1,6 +1,6 @@
-package Functionality;
+package logic;
 
-import Task.*;
+import task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

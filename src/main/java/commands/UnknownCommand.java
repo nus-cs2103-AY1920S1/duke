@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Functionality.*;
+import logic.*;
 
 public class UnknownCommand extends Command {
     @Override

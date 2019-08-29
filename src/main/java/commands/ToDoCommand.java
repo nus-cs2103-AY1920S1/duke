@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Functionality.*;
-import Task.Task;
-import Task.ToDo;
+import logic.*;
+import task.Task;
+import task.ToDo;
 
 public class ToDoCommand extends Command {
     private String args;

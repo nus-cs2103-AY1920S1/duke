@@ -35,31 +35,31 @@ public class TaskList {
         for (Task task : tasks) {
             TaskType type = task.getType();
             switch (type) {
-                case TODO:
-                    result.append("T | ");
-                    result.append(task.isDone);
-                    result.append(" | ");
-                    result.append(task.getDescription());
-                    result.append("\n");
-                    break;
-                case DEADLINE:
-                    result.append("D | ");
-                    result.append(task.isDone);
-                    result.append(" | ");
-                    result.append(task.getDescription());
-                    result.append(" | ");
-                    result.append(task.getTime());
-                    result.append("\n");
-                    break;
-                case EVENT:
-                    result.append("E | ");
-                    result.append(task.isDone);
-                    result.append(" | ");
-                    result.append(task.getDescription());
-                    result.append(" | ");
-                    result.append(task.getTime());
-                    result.append("\n");
-                    break;
+            case TODO:
+                result.append("T | ");
+                result.append(task.isDone);
+                result.append(" | ");
+                result.append(task.getDescription());
+                result.append("\n");
+                break;
+            case DEADLINE:
+                result.append("D | ");
+                result.append(task.isDone);
+                result.append(" | ");
+                result.append(task.getDescription());
+                result.append(" | ");
+                result.append(task.getTime());
+                result.append("\n");
+                break;
+            case EVENT:
+                result.append("E | ");
+                result.append(task.isDone);
+                result.append(" | ");
+                result.append(task.getDescription());
+                result.append(" | ");
+                result.append(task.getTime());
+                result.append("\n");
+                break;
             }
         }
 

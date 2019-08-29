@@ -44,42 +44,42 @@ public class Storage {
         while (scanner.hasNext()) {
             String keyword = scanner.next();
             switch (keyword) {
-                case "T":
-                    String[] todoLine = scanner.nextLine().split(" \\| ");
-                    boolean isDoneTodo = Boolean.parseBoolean(todoLine[1]);
-                    String todoDescription = todoLine[2];
-                    Task todoTask = new Task(todoDescription, TaskType.TODO);
-                    if (isDoneTodo) {
-                        todoTask.markAsDone();
-                    }
-                    result.add(todoTask);
-                    break;
-                case "D":
-                    String[] deadlineLine = scanner.nextLine().split(" \\| ");
-                    boolean isDoneDeadline = Boolean.parseBoolean(deadlineLine[1]);
-                    String deadlineDescription = deadlineLine[2];
-                    String deadlineTime = deadlineLine[3];
-                    Task deadlineTask = new Task(deadlineDescription, TaskType.DEADLINE);
-                    Calendar deadlineCalendar = new Calendar.Builder().setInstant(Long.parseLong(deadlineTime)).build();
-                    deadlineTask.setTime(deadlineCalendar);
-                    if (isDoneDeadline) {
-                        deadlineTask.markAsDone();
-                    }
-                    result.add(deadlineTask);
-                    break;
-                case "E":
-                    String[] eventLine = scanner.nextLine().split(" \\| ");
-                    boolean isDoneEvent = Boolean.parseBoolean(eventLine[1]);
-                    String eventDescription = eventLine[2];
-                    String eventTime = eventLine[3];
-                    Task eventTask = new Task(eventDescription, TaskType.EVENT);
-                    Calendar eventCalendar = new Calendar.Builder().setInstant(Long.parseLong(eventTime)).build();
-                    eventTask.setTime(eventCalendar);
-                    if (isDoneEvent) {
-                        eventTask.markAsDone();
-                    }
-                    result.add(eventTask);
-                    break;
+            case "T":
+                String[] todoLine = scanner.nextLine().split(" \\| ");
+                boolean isDoneTodo = Boolean.parseBoolean(todoLine[1]);
+                String todoDescription = todoLine[2];
+                Task todoTask = new Task(todoDescription, TaskType.TODO);
+                if (isDoneTodo) {
+                    todoTask.markAsDone();
+                }
+                result.add(todoTask);
+                break;
+            case "D":
+                String[] deadlineLine = scanner.nextLine().split(" \\| ");
+                boolean isDoneDeadline = Boolean.parseBoolean(deadlineLine[1]);
+                String deadlineDescription = deadlineLine[2];
+                String deadlineTime = deadlineLine[3];
+                Task deadlineTask = new Task(deadlineDescription, TaskType.DEADLINE);
+                Calendar deadlineCalendar = new Calendar.Builder().setInstant(Long.parseLong(deadlineTime)).build();
+                deadlineTask.setTime(deadlineCalendar);
+                if (isDoneDeadline) {
+                    deadlineTask.markAsDone();
+                }
+                result.add(deadlineTask);
+                break;
+            case "E":
+                String[] eventLine = scanner.nextLine().split(" \\| ");
+                boolean isDoneEvent = Boolean.parseBoolean(eventLine[1]);
+                String eventDescription = eventLine[2];
+                String eventTime = eventLine[3];
+                Task eventTask = new Task(eventDescription, TaskType.EVENT);
+                Calendar eventCalendar = new Calendar.Builder().setInstant(Long.parseLong(eventTime)).build();
+                eventTask.setTime(eventCalendar);
+                if (isDoneEvent) {
+                    eventTask.markAsDone();
+                }
+                result.add(eventTask);
+                break;
             }
         }
 

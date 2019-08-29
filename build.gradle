@@ -3,6 +3,8 @@ plugins {
     id 'application'
     // shadow: to create JAR files
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    // checkstyle
+    id 'checkstyle'
 }
 
 group 'seedu.duke'
@@ -33,6 +35,11 @@ shadowJar {
     archiveVersion = "0.1.3"
     archiveClassifier = null
     archiveAppendix = null
+}
+
+// checkstyle
+checkstyle {
+    toolVersion = '8.23'
 }
 
 run {

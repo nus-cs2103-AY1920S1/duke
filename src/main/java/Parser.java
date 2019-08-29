@@ -42,7 +42,8 @@ public class Parser {
                 } else {
                     taskList.get(taskNumber - 1).markAsDone();
                     String output = "Nice! I've marked this task as done:"
-                            + "\n  " + taskList.get(taskNumber - 1).toString();
+                            + "\n  "
+                            + taskList.get(taskNumber - 1).toString();
                     parent.print(output);
                 }
             } catch (IndexOutOfBoundsException | NumberFormatException e) {

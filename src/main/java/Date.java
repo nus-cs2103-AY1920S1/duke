@@ -1,7 +1,6 @@
 public class Date {
 
     public static boolean verifyDateTimeDeadline(String dateTime) {
-        System.out.println("Input: " + dateTime);
         if (dateTime.length() != 15) {
             return false;
         }
@@ -25,7 +24,6 @@ public class Date {
     }
 
     public static boolean verifyDateTimeEvent(String dateTime) {
-        System.out.println("Input: " + dateTime);
         if (dateTime.length() != 20) {
             return false;
         }

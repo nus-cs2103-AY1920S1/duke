@@ -141,8 +141,13 @@ public class Duke {
         }
         String desc = description.substring(5, indexOfAt).strip();
         String at = description.substring(indexOfAt + 3).strip();
-        tasks.add(new Event(desc, at));
-        printTaskAdded();
+        if (!Date.verifyDateTimeEvent(at)) {
+            dukeOutput("Invalid format! Please stick to DD/MM/YYYY HHMM-HHMM");
+        } else {
+            tasks.add(new Event(desc, at));
+            numberOfTasks++;
+            printTaskAdded();
+        }
     }
 
     public void addTodo(String description) throws DukeException {
@@ -163,8 +168,13 @@ public class Duke {
         }
         String desc = description.substring(8, indexOfBy).strip();
         String by = description.substring(indexOfBy + 3).strip();
-        tasks.add(new Deadline(desc, by));
-        printTaskAdded();
+        if (!Date.verifyDateTimeDeadline(by)) {
+            dukeOutput("Invalid time format! Please stick to DD/MM/YYYY HHMM");
+        } else {
+            tasks.add(new Deadline(desc, by));
+            numberOfTasks++;
+            printTaskAdded();
+        }
     }
 
     public void printTaskAdded() {

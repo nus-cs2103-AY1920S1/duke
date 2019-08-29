@@ -1,12 +1,23 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    public static final String saveFilePath = "data/savedTasks.txt";
     private ArrayList<Task> storedTasks;
+    private Storage s;
 
     public Duke() {
-        this.storedTasks = new ArrayList<Task>();
+        this.s = new Storage(Duke.saveFilePath);
+        try {
+            this.storedTasks = this.s.load();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("No saved tasks were found. Initialising with empty TaskList");
+            this.storedTasks = new ArrayList<Task>();
+        }
     }
 
     public static void main(String[] args) {
@@ -72,6 +83,15 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    public void saveUpdatedTasks() {
+        try {
+            this.s.saveToFile(this.storedTasks);
+        }
+        catch (IOException e) {
+            System.out.println("\u2639" + " OOPS!!! Seems like there was a problem saving your updated list!");
+        }
+    }
+
     /**
      * Method to delete a task from the storedTasks ArrayList
      * Method is invoked when "delete" is input to console
@@ -87,6 +107,8 @@ public class Duke {
             System.out.println("\t\t" + t);
             System.out.println("\tNow you have " + this.storedTasks.size() + " tasks in the list.");
             System.out.println("\t____________________________________________________________");
+
+            saveUpdatedTasks();
         }
         catch (IndexOutOfBoundsException e) {
             throw new DukeException("\u2639" + " OOPS!!! The task number is invalid!");
@@ -105,6 +127,7 @@ public class Duke {
         Task t = new ToDo(taskDescription);
         this.storedTasks.add(t);
         printAddTaskOutput(t);
+        saveUpdatedTasks();
     }
 
     /**
@@ -128,6 +151,7 @@ public class Duke {
             Task t = new Deadline(description, deadline);
             this.storedTasks.add(t);
             printAddTaskOutput(t);
+            saveUpdatedTasks();
         }
         catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\u2639" + " OOPS!!! The description/deadline of a deadline cannot be empty.");
@@ -155,6 +179,7 @@ public class Duke {
             Task t = new Event(description, duration);
             this.storedTasks.add(t);
             printAddTaskOutput(t);
+            saveUpdatedTasks();
         }
         catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\u2639" + " OOPS!!! The description/duration of an event cannot be empty.");
@@ -183,6 +208,7 @@ public class Duke {
         try {
             Task t = this.storedTasks.get(taskNum - 1); //Because storedTasks is zero-indexed
             t.markAsDone();
+            saveUpdatedTasks();
 
             System.out.println("\t____________________________________________________________");
             System.out.println("\tNice! I've marked this task as done: ");

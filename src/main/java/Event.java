@@ -10,4 +10,9 @@ public class Event extends Task {
         String statusIcon = getStatusIcon();
         return "[E][" + statusIcon + "] " + this.description + " (at: " + this.duration + ")";
     }
+
+    public String getStorageFormat() {
+        String storageString = super.getStorageFormat() + " | " + this.duration;
+        return storageString;
+    }
 }

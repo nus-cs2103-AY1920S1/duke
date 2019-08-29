@@ -1,32 +1,36 @@
-class DeadlineTask extends Task {
+package duke.task;
+
+import duke.date.DukeDate;
+
+public class DeadlineTask extends Task {
 
     private DukeDate dueDate;
 
-    DeadlineTask(String description, DukeDate dueDate) {
+    public DeadlineTask(String description, DukeDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
-    DeadlineTask(String description, boolean isDone, DukeDate dueDate) {
+    public DeadlineTask(String description, boolean isDone, DukeDate dueDate) {
         super(description, isDone);
         this.dueDate = dueDate;
     }
 
-    DukeDate getDueDate() {
+    public DukeDate getDueDate() {
         return this.dueDate;
     }
 
-    String getDateAsString() {
+    public String getDateAsString() {
         return this.dueDate.format();
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "D";
     }
 
     @Override
-    String getStatus() {
+    public String getStatus() {
         return String.format("[D]%s (by: %s)", super.getStatus(), this.dueDate);
     }
 

@@ -1,32 +1,36 @@
-class EventTask extends Task {
+package duke.task;
+
+import duke.date.DukeDate;
+
+public class EventTask extends Task {
 
     private DukeDate time;
 
-    EventTask(String description, DukeDate time) {
+    public EventTask(String description, DukeDate time) {
         super(description);
         this.time = time;
     }
 
-    EventTask(String description, boolean isDone, DukeDate time) {
+    public EventTask(String description, boolean isDone, DukeDate time) {
         super(description, isDone);
         this.time = time;
     }
 
-    DukeDate getTime() {
+    public DukeDate getTime() {
         return this.time;
     }
 
-    String getDateAsString() {
+    public String getDateAsString() {
         return this.time.format();
     }
 
     @Override
-    String getType() {
+    public String getType() {
         return "E";
     }
 
     @Override
-    String getStatus() {
+    public String getStatus() {
         return String.format("[E]%s (at: %s)", super.getStatus(), this.time);
     }
 

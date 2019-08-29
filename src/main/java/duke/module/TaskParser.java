@@ -1,3 +1,10 @@
+package duke.module;
+
+import duke.task.Task;
+import duke.task.TodoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+
 import java.io.IOException;
 
 class TaskParser {

@@ -1,6 +1,10 @@
+package duke.date;
+
+import duke.exception.DukeDateFormatException;
+
 import java.text.DecimalFormat;
 
-class DukeDate {
+public class DukeDate {
 
     private static final String ERROR_ILLEGAL_YEAR = "☹ OOPS!!! Year should be a number greater than 0";
     private static final String ERROR_ILLEGAL_MONTH = "☹ OOPS!!! Month should be a number between 1 and 12.";
@@ -16,7 +20,7 @@ class DukeDate {
     private int minute;
     private String amPmMarker;
 
-    DukeDate(int year, int month, int day, int hour, int minute)
+    public DukeDate(int year, int month, int day, int hour, int minute)
             throws DukeDateFormatException {
         if (year < 0) {
             throw new DukeDateFormatException(ERROR_ILLEGAL_YEAR);
@@ -100,7 +104,7 @@ class DukeDate {
         this.minute = minute;
     }
 
-    String format() {
+    public String format() {
         DecimalFormat df = new DecimalFormat("00");
         return String.format("%d %s, %d, %d:%s %s",
                              this.day,

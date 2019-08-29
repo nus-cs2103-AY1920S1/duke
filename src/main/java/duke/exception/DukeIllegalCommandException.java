@@ -1,8 +1,10 @@
-class DukeDateFormatException extends Exception {
+package duke.exception;
+
+class DukeIllegalCommandException extends Exception {
 
     private String message;
 
-    DukeDateFormatException(String message) {
+    public DukeIllegalCommandException(String message) {
         this.message = message;
     }
 

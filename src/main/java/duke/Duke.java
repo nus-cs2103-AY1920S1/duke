@@ -1,7 +1,25 @@
+package duke;
+
+import duke.date.DukeDate;
+
+import duke.exception.DukeDateFormatException;
+import duke.exception.DukeIllegalArgumentException;
+import duke.exception.DukeIllegalIndexException;
+
+import duke.module.Parser;
+import duke.module.SaveFile;
+import duke.module.TaskList;
+
+import duke.task.Task;
+import duke.task.TodoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+
 import java.io.IOException;
+
 import java.util.Scanner;
 
-class Duke {
+public class Duke {
 
     private static final String DUKE_HELLO = "Hello! I'm Duke!\n";
     private static final String DUKE_BYE = "Bye. Hope to see you again soon!\n";
@@ -46,7 +64,7 @@ class Duke {
         DELETE;
     }
 
-    Duke() throws IOException {
+    public Duke() throws IOException {
         this.taskList = new TaskList();
         this.saveFile = new SaveFile();
         this.recallTasks();
@@ -191,7 +209,7 @@ class Duke {
         this.saveFile.saveTasks(this.taskList);
     }
 
-    void run() {
+    public void run() {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"

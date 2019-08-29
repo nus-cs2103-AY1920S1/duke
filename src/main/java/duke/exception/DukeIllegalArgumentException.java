@@ -1,8 +1,10 @@
-class DukeIllegalIndexException extends Exception {
+package duke.exception;
+
+public class DukeIllegalArgumentException extends Exception {
 
     private String message;
 
-    DukeIllegalIndexException(String message) {
+    public DukeIllegalArgumentException(String message) {
         this.message = message;
     }
 

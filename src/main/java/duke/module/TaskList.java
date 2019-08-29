@@ -1,12 +1,17 @@
+package duke.module;
+
+import duke.task.Task;
+import duke.exception.DukeIllegalIndexException;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
     private List<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -21,7 +26,7 @@ class TaskList {
     }
 
     // Index starts from 1
-    void markAsDoneTaskAt(int index) throws DukeIllegalIndexException {
+    public void markAsDoneTaskAt(int index) throws DukeIllegalIndexException {
         try {
             this.taskList.get(index - 1).markAsDone();
         } catch (IndexOutOfBoundsException e) {
@@ -30,12 +35,12 @@ class TaskList {
     }
 
     // Add task to the back of list and return added Task object
-    void addTask(Task task) {
+    public void addTask(Task task) {
         this.taskList.add(task);
     }
 
     // Index starts from 1
-    Task getTaskAt(int index) throws DukeIllegalIndexException {
+    public Task getTaskAt(int index) throws DukeIllegalIndexException {
         try {
             return this.taskList.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -43,11 +48,11 @@ class TaskList {
         }
     }
 
-    int getSize() {
+    public int getSize() {
         return this.taskList.size();
     }
 
-    Task deleteTaskAt(int index) throws DukeIllegalIndexException {
+    public Task deleteTaskAt(int index) throws DukeIllegalIndexException {
         try {
             return this.taskList.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -55,15 +60,15 @@ class TaskList {
         }
     }
 
-    void addTasks(List<Task> tasksToAdd) {
+    public void addTasks(List<Task> tasksToAdd) {
         this.taskList.addAll(tasksToAdd);
     }
 
-    Iterator<Task> iterator() {
+    public Iterator<Task> iterator() {
         return this.taskList.iterator();
     }
 
-    List<Task> asList() {
+    public List<Task> asList() {
         return this.taskList;
     }
 

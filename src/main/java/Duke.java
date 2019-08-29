@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Driver class
@@ -29,6 +30,25 @@ public class Duke {
             if (firstWordOfCommand.equals("bye")) {
                 // Bye
                 isExit = true;
+            } else if (firstWordOfCommand.equals("find")) {
+                // Find
+                System.out.println("Here are the matching tasks in your list:");
+                String keyPhrase = Parser.excludeFirstWord(fullCommand, "find");
+                ArrayList<Task> matchingTasks = new ArrayList<>();
+                boolean hasMatch = false;
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task currentTask = tasks.get(i);
+                    int currentItemNumber = 0;
+                    if (currentTask.getName().contains(keyPhrase)) {
+                        hasMatch = true;
+                        currentItemNumber += 1;
+                        System.out.println(currentItemNumber + "." + currentTask);
+                    }
+                }
+                if (!hasMatch) {
+                    System.out.println("Nothing matches :(");
+                }
+
             } else if (firstWordOfCommand.equals("list")) {
                 // List
                 System.out.println("Here are the tasks in your list:");

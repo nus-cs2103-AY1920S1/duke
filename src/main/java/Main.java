@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Main {
@@ -23,6 +24,19 @@ public class Main {
         System.out.println(format(command));
     }
 
+    static Date parseDate(String date) {
+        String[] dayAndTime = date.trim().split(" ");
+        String[] ddMmYy = dayAndTime[0].split("/");
+        String hhSs = dayAndTime[1];
+        int day = Integer.parseInt(ddMmYy[0]);
+        int month = Integer.parseInt(ddMmYy[1]);
+        int year = Integer.parseInt(ddMmYy[2]);
+        int hour = Integer.parseInt(hhSs.substring(0, 2));
+        int min = Integer.parseInt(hhSs.substring(2));
+        System.out.println(String.format("%d %d %d %d %d", day, month, year, hour, min));
+        return new Date(year - 1900, month - 1, day, hour, min);
+    } 
+
     static Todo createTodo(String input) throws DukeException {
         String description = input.length() == 0
                 ? input
@@ -44,9 +58,9 @@ public class Main {
         String description = stringBuffer.length() == 0
                 ? stringBuffer.toString()
                 : stringBuffer.toString().substring(1);
-        String date = scanner.nextLine();
+        String date = scanner.nextLine().substring(1);
         scanner.close();
-        return new Deadline(description, date);
+        return new Deadline(description, parseDate(date));
     }
 
     static Event createEvent(String input) {
@@ -60,9 +74,9 @@ public class Main {
         String description = stringBuffer.length() == 0
                 ? stringBuffer.toString()
                 : stringBuffer.toString().substring(1);
-        String date = scanner.nextLine();
+        String date = scanner.nextLine().substring(1);
         scanner.close();
-        return new Event(description, date);
+        return new Event(description, parseDate(date));
     }
 
     static void addToList(Task task, ArrayList<Task> list) {

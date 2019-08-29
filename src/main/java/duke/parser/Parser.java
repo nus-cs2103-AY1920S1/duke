@@ -27,6 +27,7 @@ public class Parser  {
 
     public void readUserInput() {
         Scanner myScanner = new Scanner(System.in);
+        
         String argument = myScanner.nextLine();
         while (!argument.equals("bye") && !argument.equals("Bye")) {
             if (argument.equals("list")) {

@@ -1,6 +1,8 @@
 package duke;
 
-/*
+import java.io.File;
+
+/**
  * Duke.java
  * CS2103T
  * @author Gabriel Ong
@@ -10,15 +12,16 @@ package duke;
  * This class contains the main method and is responsible for all input/output and Task creation.
  *
  */
-
-import java.io.File;
-
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a instance of duke.
+     * @param filePath a filepath indicating the storage directory for duke
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs duke to start taking in input from user.
+     */
     public void run() {
         ui.greetHello();
 

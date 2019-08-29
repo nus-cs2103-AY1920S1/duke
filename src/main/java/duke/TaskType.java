@@ -1,13 +1,8 @@
 package duke;
-/*
- * TaskType.java
- * CS2103T
- * @author Gabriel Ong
- *
- * Task types are represented like this upon parsing input.
- *
- */
 
+/**
+ * Task representation upon parsing input.
+ */
 public enum TaskType {
     Todo,
     Deadline,

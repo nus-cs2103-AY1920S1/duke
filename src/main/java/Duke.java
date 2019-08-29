@@ -63,6 +63,10 @@ public class Duke {
                     tl.addTask(task);
                     this.ui.showTaskAddition(task, tl);
                     break;
+                case "find":
+                    TaskList newTl = tl.findTasks(input.split(" ", 2)[1]);
+                    this.ui.showTaskList(newTl);
+                    break;
                 default:
                     this.ui.printError(new DukeException("Unknown command. :("));
                     break;

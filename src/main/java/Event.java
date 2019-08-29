@@ -1,13 +1,18 @@
+import java.lang.reflect.Array;
+
 public class Event extends Task {
-    protected String duration;
+    protected Date atDate;
+    protected Time atTime;
 
     public Event(String description, String duration) {
         super(description);
-        this.duration = duration;
+        String[] temp = duration.split(" ");
+        atDate = new Date((String) Array.get(temp, 0));
+        atTime = new Time((String) Array.get(temp, 1));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + duration +")";
+        return "[E]" + super.toString() + " (at: " + this.atDate + ", " + this.atTime +")";
     }
 }

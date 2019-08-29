@@ -10,8 +10,8 @@ public class Time {
     @Override
     public String toString() {
         StringBuilder timeString = new StringBuilder();
-        if(this.hour <= 12) {
-            if(this.hour < 12) {
+        if(this.hour >= 12) {
+            if(this.hour > 12) {
                 timeString.append(this.hour - 12);
             } else {
                 timeString.append(this.hour);

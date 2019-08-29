@@ -74,7 +74,9 @@ public class Duke {
                             throw new DukeException("      ☹ OOPS!!! The description of a " +
                                     input + " cannot be empty.");
                         }
-                        String[] tempStringArr = tempString.split("/");
+                        //replace the first / so that the dates will not be split up
+                        tempString = tempString.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
+                        String[] tempStringArr = tempString.split(":");
                         String description = (String) Array.get(tempStringArr, 0);
                         String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
                         if (input.equals("deadline")) {

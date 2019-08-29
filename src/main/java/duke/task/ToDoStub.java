@@ -1,3 +1,5 @@
+package duke.task;
+
 public class ToDoStub extends ToDo {
 
     public ToDoStub() {

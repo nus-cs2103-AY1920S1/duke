@@ -1,11 +1,10 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.Stream;
+import duke.UI.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
+import java.util.ArrayList;
 
 public class Duke {
 

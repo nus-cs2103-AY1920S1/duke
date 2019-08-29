@@ -1,3 +1,12 @@
+package duke.tasklist;
+
+import duke.UI.Ui;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -122,7 +131,7 @@ public class TaskList {
     public void findTask(String query) {
         ArrayList<String> listOfAllDesc = new ArrayList<>();
         for (Task i : store) {
-            listOfAllDesc.add(i.description);
+            listOfAllDesc.add(i.getDescription());
         }
         TaskList temp = new TaskList(new ArrayList<Task>());
 

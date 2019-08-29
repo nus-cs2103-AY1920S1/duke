@@ -1,3 +1,5 @@
+package duke.UI;
+
 public class Ui {
 
     public static void showGreeting() {

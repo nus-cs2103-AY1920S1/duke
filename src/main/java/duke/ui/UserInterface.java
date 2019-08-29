@@ -54,7 +54,7 @@ public class UserInterface {
     }
 
     public void showTaskList(List<String> taskNames) {
-        showToUser(Message.MESSAGE_SHOW_TASK_LIST);
+        showToUser(String.format(Message.MESSAGE_SHOW_TASK_LIST, " matching"));
         for (String taskName : taskNames) {
             showToUser(taskName);
         }

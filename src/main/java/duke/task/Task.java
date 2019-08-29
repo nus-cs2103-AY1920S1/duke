@@ -9,6 +9,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public void setDone(boolean doneStatus) {
         this.isDone = doneStatus;
     }

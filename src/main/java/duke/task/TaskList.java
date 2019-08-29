@@ -42,6 +42,16 @@ public class TaskList {
         return taskNames;
     }
 
+    public List<String> getTaskNamesIfMatch(String keyword) {
+        List<String> taskNamesThatMatch = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getTaskName().contains(keyword)) {
+                taskNamesThatMatch.add((i + 1) + ". " + tasks.get(i));
+            }
+        }
+        return taskNamesThatMatch;
+    }
+
     public List<String> getSimplifiedTaskRepresentations() {
         List<String> simplifiedTaskRepresentations = new ArrayList<>();
         for (Task task : tasks) {

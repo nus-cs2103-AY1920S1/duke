@@ -10,6 +10,9 @@ public class DeleteCommand implements Command {
         return false;
     }
 
+    /**
+     * Deletes the index-th task from list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.deleteTask(index);

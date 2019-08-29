@@ -10,6 +10,9 @@ public class AddCommand implements Command {
         return false;
     }
 
+    /**
+     * Adds task to the list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);

@@ -18,6 +18,12 @@ public class Storage {
         file.getParentFile().mkdirs();
     }
 
+    /**
+     * Saves the list of task in hard disk.
+     *
+     * @param tasks List of tasks.
+     * @throws DukeException if there is an issue in writing to hard disk.
+     */
     public void save(TaskList tasks) throws DukeException {
         try(FileWriter writer = new FileWriter(storagePath)) {
             writer.write(tasks.printTasksForHardDisk());
@@ -26,6 +32,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads list of task from hard disk.
+     *
+     * @return List of tasks written in hard disk.
+     * @throws DukeException if there is an issue in reading from hard disk or in parsing them.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
 

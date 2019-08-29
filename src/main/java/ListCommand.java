@@ -4,6 +4,9 @@ public class ListCommand implements Command {
         return false;
     }
 
+    /**
+     * List down all the task in the list.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showMessage("Here are the task in your list:");

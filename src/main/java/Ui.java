@@ -57,16 +57,16 @@ public class Ui {
          *  returns all tasks in readable, formatted string
          *  @return string of all tasks with new line and spaces as required
          */
-        String s = "Here are the tasks in your list:\n";
+        String mainString = "Here are the tasks in your list:\n";
 
         for (int i = 0; i < taskArr.size(); i++) {
             // printInt to put number for printing
             int printInt = i + 1;
             Task currTask = taskArr.get(i);
-            s += currTask.printTask() + "\n";
+            mainString += currTask.printTask() + "\n";
         }
         printLine();
-        System.out.println(s);
+        System.out.println(mainString);
         printLine();
     }
 }

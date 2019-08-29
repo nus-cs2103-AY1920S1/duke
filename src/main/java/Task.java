@@ -58,10 +58,10 @@ public class Task {
          *  prints task in formatted string
          * @return formatted string
          */
-        String s = "[" + getType() + "]";
-        s += "[" + getStatus() + "] ";
-        s += getTaskInfo();
-        return s;
+        String taskString = "[" + getType() + "]";
+        taskString += "[" + getStatus() + "] ";
+        taskString += getTaskInfo();
+        return taskString;
     }
     public String getBy() {
         if (byString.equals("")) {

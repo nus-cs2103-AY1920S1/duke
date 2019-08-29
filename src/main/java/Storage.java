@@ -11,10 +11,10 @@ public class Storage {
     private String path;
     private TaskList tasks;
     //private TaskList tasks;
-    public Storage(WriteFile data, String path, TaskList t) {
+    public Storage(WriteFile data, String path, TaskList currTasks) {
         txtFile = data;
         this.path = path;
-        tasks = t;
+        tasks = currTasks;
     }
     public void initStorage() {
         String line = "";

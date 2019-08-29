@@ -51,11 +51,10 @@ public class Duke {
                 if (taskInfo.equals("")) {
                     System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                int sep = taskInfo.indexOf('/');
+                int seperator = taskInfo.indexOf('/');
                 // use sep to split string
-                String actualTask = taskInfo.substring(0,sep);
-                sep += 4; // put sep at space after /by
-                String time = taskInfo.substring(sep);
+                String actualTask = taskInfo.substring(0,seperator);
+                seperator += 4; // put sep at space after /by
                 Task newTask = taskList.addTodo(actualTask);
                 ui.addTask(newTask);
             } else if (input.equals("deadline")) {
@@ -63,11 +62,11 @@ public class Duke {
                 if (taskInfo.equals("")) {
                     System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                int sep = taskInfo.indexOf('/');
+                int seperator = taskInfo.indexOf('/');
                 // use sep to split string
-                String actualTask = taskInfo.substring(0,sep);
-                sep += 4; // put sep at space after /by
-                String time = taskInfo.substring(sep);
+                String actualTask = taskInfo.substring(0,seperator);
+                seperator += 4; // put sep at space after /by
+                String time = taskInfo.substring(seperator);
                 Task newTask = taskList.addDeadline(actualTask,time);
                 ui.addTask(newTask);
             } else if (input.equals("event")) {   // list command
@@ -75,21 +74,21 @@ public class Duke {
                 if (taskInfo.equals("")) {
                     System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                int sep = taskInfo.indexOf('/');
+                int seperator = taskInfo.indexOf('/');
                 // use sep to split string
-                String actualTask = taskInfo.substring(0,sep);
-                sep += 4; // put sep at space after /by
-                String time = taskInfo.substring(sep);
+                String actualTask = taskInfo.substring(0,seperator);
+                seperator += 4; // put sep at space after /by
+                String time = taskInfo.substring(seperator);
                 Task newTask = taskList.addEvent(actualTask,time);
                 ui.addTask(newTask);
             } else if (input.equals("done")) {   // list command
                 int taskNum = sc.nextInt();
-                Task doned = taskList.done(taskNum);
-                ui.markDone(doned);
+                Task doneTask = taskList.done(taskNum);
+                ui.markDone(doneTask);
             } else if (input.equals("delete")) {
                 int taskNum = sc.nextInt();
-                Task deledTask = taskList.delete(taskNum);
-                ui.delTask(deledTask);
+                Task delTask = taskList.delete(taskNum);
+                ui.delTask(delTask);
             } else { // turn into exception
                 // handle all other cases
                 ui.printLine();

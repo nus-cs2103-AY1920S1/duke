@@ -47,7 +47,7 @@ public class Parser {
                     }
                 }
             } else if (comm.length() > 6 && comm.substring(0, 6).equals("delete")) {
-                if (comm.charAt(7) != ' ') {
+                if (comm.charAt(6) != ' ') {
                     try {
                         Task task = taskList.add(comm);
                         ui.add(task, taskList);

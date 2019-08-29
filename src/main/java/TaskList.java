@@ -88,7 +88,7 @@ public class TaskList {
             }
             tasksTime = tasksTime.trim();
         } catch (ParseException e) {
-            return null;
+
         }
 
         Task task;

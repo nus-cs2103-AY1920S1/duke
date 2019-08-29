@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Unit test for event class.
  */
-public class EventTest {
+class EventTest {
 
     /**
      * Create an event object with correct input and format.
@@ -17,7 +17,7 @@ public class EventTest {
      * @result An event object is created successfully.
      */
     @Test
-    public void eventCreation_normalInput_outputMatches() {
+    void eventCreation_normalInput_outputMatches() {
         Task task = null;
         try {
             task = new Event("party", "29/08/2019 2200");
@@ -33,7 +33,7 @@ public class EventTest {
      * @result An exception will be thrown.
      */
     @Test
-    public void checkDateFormat_wrongDateFormat_exceptionThrown() {
+    void checkDateFormat_wrongDateFormat_exceptionThrown() {
         Task task = null;
         try {
             task = new Event("event", "20/09/2019");
@@ -48,7 +48,7 @@ public class EventTest {
      * @result The format matches correctly.
      */
     @Test
-    public void checkFileStringFormat_correctFormat_success() {
+    void checkFileStringFormat_correctFormat_success() {
         Task task = null;
         try {
             task = new Event("an event", "12/10/2020 0900");

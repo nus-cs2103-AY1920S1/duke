@@ -20,7 +20,7 @@ class TaskListTest {
      * A stub for to-do class.
      */
     protected static class ToDoStub extends Task {
-        public ToDoStub(String description) {
+        ToDoStub(String description) {
             super(description);
             this.isDone = false;
         }
@@ -42,7 +42,7 @@ class TaskListTest {
      * @result Task will be added without any error.
      */
     @Test
-    public void addToTaskList_inputTask_success() {
+    void addToTaskList_inputTask_success() {
         TaskList tasks =  new TaskList(new ArrayList<Task>());
         tasks.add(new ToDoStub("wash dishes"));
         assertEquals(1, tasks.getList().size());

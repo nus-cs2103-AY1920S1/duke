@@ -9,8 +9,8 @@ import java.util.Date;
  */
 public class Event extends Task {
 
-    protected String at;
-    protected Date date;
+    private String at;
+    private Date date;
 
     /**
      * Constructor for event, to be called for instantiating this object.

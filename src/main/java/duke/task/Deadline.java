@@ -9,8 +9,8 @@ import java.util.Date;
  */
 public class Deadline extends Task {
 
-    protected String by;
-    protected Date date;
+    private String by;
+    private Date date;
 
     /**
      * Constructor for deadline, to be called for instantiating this object.

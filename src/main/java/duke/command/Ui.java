@@ -42,7 +42,7 @@ public class Ui {
      *
      * @param list The list to be printed.
      */
-    public void printList(ArrayList<Task> list) {
+    void printList(ArrayList<Task> list) {
         System.out.println("Here are the tasks in your list:");
         IntStream.rangeClosed(1, list.size()).forEach(x -> {
             Task task = list.get(x - 1);
@@ -55,7 +55,7 @@ public class Ui {
      *
      * @param task The task to be marked as done.
      */
-    public void printTaskDone(Task task) {
+    void printTaskDone(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task.toString());
     }
@@ -66,7 +66,7 @@ public class Ui {
      * @param removed The deleted task.
      * @param list The list, in which the task has been removed from.
      */
-    public void printDeleteTask(Task removed, ArrayList<Task> list) {
+    void printDeleteTask(Task removed, ArrayList<Task> list) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + removed.toString());
         System.out.println("Now you have " + list.size() + " in the list.");
@@ -78,7 +78,7 @@ public class Ui {
      * @param task The task to be added.
      * @param list The list, to which the task is to be added to.
      */
-    public void printAddTask(Task task, ArrayList<Task> list) {
+    void printAddTask(Task task, ArrayList<Task> list) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
         System.out.println("Now you have " + list.size() + " tasks in the list");

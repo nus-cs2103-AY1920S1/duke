@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Unit test for Deadline class.
  */
-public class DeadlineTest {
+class DeadlineTest {
 
     /**
      * Create a deadline object with correct input and format.
@@ -17,7 +17,7 @@ public class DeadlineTest {
      * @result A deadline object is created successfully.
      */
     @Test
-    public void deadlineCreation_normalInput_outputMatches() {
+    void deadlineCreation_normalInput_outputMatches() {
         Task task = null;
         try {
             task = new Deadline("submit assignment", "29/08/2019 2359");
@@ -33,7 +33,7 @@ public class DeadlineTest {
      * @result An exception will be thrown.
      */
     @Test
-    public void checkDateFormat_wrongDateFormat_exceptionThrown() {
+    void checkDateFormat_wrongDateFormat_exceptionThrown() {
         Task task = null;
         try {
             task = new Deadline("submit quiz", "20/09/2019");
@@ -48,7 +48,7 @@ public class DeadlineTest {
      * @result The format matches correctly.
      */
     @Test
-    public void checkFileStringFormat_correctFormat_success() {
+    void checkFileStringFormat_correctFormat_success() {
         Task task = null;
         try {
             task = new Deadline("submit quiz", "20/09/2019 2359");

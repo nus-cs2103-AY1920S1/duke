@@ -22,7 +22,7 @@ public class Duke {
      *
      * @param filePath a string which stores the directory of the data to be loaded
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -37,7 +37,7 @@ public class Duke {
     /**
      * Run the program using CLI.
      */
-    public void run() {
+    private void run() {
         ui.printWelcome();
 
         // process input

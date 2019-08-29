@@ -19,8 +19,8 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public Task getElement(int i) {
-        return this.taskList.get(i);
+    public Task getElement(int position) {
+        return this.taskList.get(position);
     }
 
     private static String getTimeFormat(int n) {

@@ -26,26 +26,26 @@ public class Ui {
     }
 
     public void exit() {
-        //update response
+        //Updates response
         this.response = "Bye. Hope to see you again soon!";
         getResponseDirect();
     }
 
     public void greet() {
-        //update response
+        //Updates response
         this.response = "Hello! I'm Duke\n" +
                 "     What can I do for you?";
         getResponseDirect();
     }
 
     public void done(Task task) {
-        this.response = "Nice! I've marked this task as done:\n       " + task; //update response
+        this.response = "Nice! I've marked this task as done:\n       " + task; //Updates response
         getResponseDirect();
     }
 
     public void delete(Task task, TaskList taskList) {
         this.response = "Noted. I've removed this task: \n       " + task
-                + "\n     Now you have " + taskList.getSize() + " tasks in the list."; //update response
+                + "\n     Now you have " + taskList.getSize() + " tasks in the list."; //Updates response
         getResponseDirect();
     }
 }

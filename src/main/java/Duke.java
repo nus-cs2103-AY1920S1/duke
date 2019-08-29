@@ -7,7 +7,7 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
+        ui = new Ui(); //Creating user interface object.
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());

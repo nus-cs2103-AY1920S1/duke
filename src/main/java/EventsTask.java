@@ -1,15 +1,31 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 public class EventsTask extends Task {
     String taskName;
-    String taskDesc;
+    String taskTime;
 
     public EventsTask(String task) {
         super(task);
         String[] taskSplit = task.split("/at");
         if(taskSplit.length < 2) {
             throw new EmptyDescriptionDukeException("event", "/at");
+        } else if (taskSplit[0].equals("")) {
+            throw new EmptyDescriptionDukeException("event");
         }
         taskName = taskSplit[0].trim();
-        taskDesc = taskSplit[1];
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        taskTime = taskSplit[1];
+
+        try {
+            Date time = formatter.parse(taskTime);
+            formatter = new SimpleDateFormat("dd MMMM yyyy, ha");
+            taskTime = formatter.format(time);
+        } catch (ParseException err) {
+            throw new InvalidTimeDukeException();
+        }
     }
     public EventsTask(String isCompleted,String taskName, String taskDesc) {
         super(taskName, Boolean.parseBoolean(isCompleted));
@@ -25,7 +41,7 @@ public class EventsTask extends Task {
         } else {
             output += "[✗]";
         }
-        output += " " + this.taskName + " (At: " + this.taskDesc + ")";
+        output += " " + this.taskName + " (At: " + this.taskTime + ")";
         return output;
     }
 

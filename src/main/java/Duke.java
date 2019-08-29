@@ -11,7 +11,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-
     private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

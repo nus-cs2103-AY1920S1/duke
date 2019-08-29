@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.exception.DukeException;
+import duke.task.Task;
 
 public class Parser {
 
@@ -25,6 +27,8 @@ public class Parser {
             taskList.addTask(input);
         } else if (input.toLowerCase().startsWith("delete")) {
             taskList.deleteTask(input);
+        } else if (input.toLowerCase().startsWith("find")) {
+            evaluateFind(input);
         } else {
             throw new DukeException("OOPS!!! I don't know what this is :(");
         }
@@ -48,6 +52,23 @@ public class Parser {
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 throw new DukeException("OOPS!!! The Done command must be followed by a valid task ID.");
             }
+        }
+    }
+
+    public void evaluateFind(String input) throws DukeException {
+        String[] tokens = input.split("\\s");
+        if (tokens.length <= 1) {
+            throw new DukeException("Invalid find command");
+        } else {
+            ArrayList<Task> foundTasks = taskList.find(input.substring(4).strip());
+            StringBuilder output = new StringBuilder();
+            for (int i = 0; i < foundTasks.size(); i++) {
+                output.append((i + 1) + ". " + foundTasks.get(i).toString());
+                if (i != foundTasks.size() - 1) {
+                    output.append("\n");
+                }
+            }
+            parent.print(output.toString());
         }
     }
 }

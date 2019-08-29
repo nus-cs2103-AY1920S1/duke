@@ -1,16 +1,24 @@
-public class DeleteCommand extends Command {
+package duke.command;
 
-    private int index;
+import duke.Storage;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
-    DeleteCommand(int index) {
-        this.index = index;
+public class AddCommand extends Command {
+
+    Task t;
+
+    public AddCommand(Task t) {
+        this.t = t;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addTask(t);
 
-        Task t = tasks.removeTask(index);
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("Got it. I've added this task:");
         System.out.println(t);
         if (tasks.getSize() == 1) {
             System.out.println("Now you have 1 task in the list.");
@@ -20,10 +28,4 @@ public class DeleteCommand extends Command {
 
         persistState(tasks, storage);
     }
-
-    private void delete(int index) throws DukeException {
-
-    }
-
-
 }

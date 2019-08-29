@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
     protected String at;
 
@@ -6,7 +8,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }

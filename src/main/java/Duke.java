@@ -35,10 +35,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
-    private void printTotalTask() {
-        boolean isPlural = tasks.size() > 1;
-        System.out.println("Now you have " + tasks.size() + " task"
-                + (isPlural ? "s" : "") + " in the list.");
-    }
 }

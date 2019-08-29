@@ -7,7 +7,7 @@ package duke.task;
  *
  */
 public class Deadline extends Task {
-    /** Deadline of the task */
+    /** Deadline of the task. */
     protected String by;
 
     /**

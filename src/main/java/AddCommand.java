@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.exception.InvalidInputException;
+
 /**
  * AddCommand class which extends the abstract class Command.
  * This class handles any addition of tasks into the TaskList class and

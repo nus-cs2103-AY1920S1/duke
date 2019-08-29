@@ -1,11 +1,16 @@
+package duke.component;
 
-import java.io.IOException;
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDescriptionException;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * TaskList class contains the task list, and has operations to
@@ -150,7 +155,7 @@ public class TaskList {
 		String keyword = input.substring(5);
 		ArrayList<Task> filtered = copy(this.tasks);
 		System.out.println("Here are the matching tasks in your list.");
-		filtered.stream().filter(p -> p.description.contains(keyword)).forEach(System.out::println);
+		filtered.stream().filter(p -> p.getDescription().contains(keyword)).forEach(System.out::println);
 	}
 	
 	/**

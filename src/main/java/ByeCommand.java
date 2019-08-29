@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+
 /**
  * ByeCommand class which extends the abstract class Command.
  * This class handles the exit of the program.

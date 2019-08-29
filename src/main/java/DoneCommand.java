@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.component.Storage;
+import duke.component.TaskList;
 /**
  * DoneCommand class which extends the abstract class Command.
  * This class handles the completion of tasks, and subsequent updating

@@ -1,3 +1,6 @@
+package duke.exception;
+
+import duke.exception.DukeException;
 /**
  * EmptyDescriptionException class extends DukeException and deals with
  * tasks without any description given by the input in the program.

@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.task.Task;
 /**
  * To do class that can be created by the user. Handles all tasks with To do.
  */

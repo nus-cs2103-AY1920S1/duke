@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Task class includes Todo, Deadline and Event classes.
  * It is the task that is tracked by the TaskList.
@@ -13,6 +15,10 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
+    }
+    
+    public String getDescription() {
+        return description;
     }
     
     /**

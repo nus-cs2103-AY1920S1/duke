@@ -1,3 +1,8 @@
+package duke.component;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidInputException;
 import java.text.ParseException;
 import java.util.Scanner;
 

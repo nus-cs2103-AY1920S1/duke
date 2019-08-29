@@ -1,3 +1,12 @@
+package duke;
+
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.component.Parser;
+import duke.exception.DukeException;
+import duke.command.Command;
+
 import java.io.IOException;
 
 /**

@@ -1,3 +1,11 @@
+package duke.component;
+
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDescriptionException;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

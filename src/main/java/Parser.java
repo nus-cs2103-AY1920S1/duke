@@ -1,3 +1,13 @@
+package duke.component;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
+
 /**
  * Parser class deals with making sense of the user command.
  */

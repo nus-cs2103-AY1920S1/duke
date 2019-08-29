@@ -38,15 +38,15 @@ public class Task {
     public String getTypeIcon() {
         String result = "";
         switch (type) {
-            case TODO:
-                result = "T";
-                break;
-            case DEADLINE:
-                result = "D";
-                break;
-            case EVENT:
-                result = "E";
-                break;
+        case TODO:
+            result = "T";
+            break;
+        case DEADLINE:
+            result = "D";
+            break;
+        case EVENT:
+            result = "E";
+            break;
         }
 
         return "[" + result + "]";
@@ -65,14 +65,14 @@ public class Task {
         }
 
         switch (type) {
-            case TODO:
-                return description;
-            case DEADLINE:
-                return description + " (by: " + timeString + ")";
-            case EVENT:
-                return description + " (at: " + timeString + ")";
-            default:
-                return description;
+        case TODO:
+            return description;
+        case DEADLINE:
+            return description + " (by: " + timeString + ")";
+        case EVENT:
+            return description + " (at: " + timeString + ")";
+        default:
+            return description;
         }
     }
 }

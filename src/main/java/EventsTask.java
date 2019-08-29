@@ -27,10 +27,10 @@ public class EventsTask extends Task {
             throw new InvalidTimeDukeException();
         }
     }
-    public EventsTask(String isCompleted,String taskName, String taskDesc) {
+    public EventsTask(String isCompleted,String taskName, String taskTime) {
         super(taskName, Boolean.parseBoolean(isCompleted));
         this.taskName = taskName;
-        this.taskDesc = taskDesc;
+        this.taskTime = taskTime;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class EventsTask extends Task {
         } else {
             output += "false";
         }
-        output += " | " + this.taskName + " | " + this.taskDesc;
+        output += " | " + this.taskName + " | " + this.taskTime;
         return output;
     }
 }

@@ -10,6 +10,7 @@ public class Parser {
 
     /**
      * Returns a Command object to parse the command
+     *
      * @param fullCommand The full user command received from the ui.
      * @return A command object to parse the command
      */

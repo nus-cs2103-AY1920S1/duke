@@ -27,6 +27,7 @@ public class Helper {
 
     /**
      * Returns an array of allowable input formats
+     *
      * @return An array with the list of allowable input formats
      */
     public String[] getCommands() {

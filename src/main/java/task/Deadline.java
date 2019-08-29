@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object
+     *
      * @param name      The name of the Deadline task
      * @param dateTime  The date and time of the task, in DateTime format
      */
@@ -20,6 +21,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object
+     *
      * @param name      The name of the deadline task
      * @param isComplete The completion status of the deadline task (true/false)
      * @param dateTime  The date and time of the task, in DateTime format

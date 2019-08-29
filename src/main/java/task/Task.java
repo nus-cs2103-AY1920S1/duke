@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Creates a new Task object, with completion status set to false by default.
+     *
      * @param name          The name of the new task
      */
     Task(String name) {
@@ -19,6 +20,7 @@ public class Task {
 
     /**
      * Creates a new Task object
+     *
      * @param name          The name of the new task
      * @param isComplete    The completion status of the task (true/false)
      */
@@ -42,6 +44,7 @@ public class Task {
 
     /**
      * Returns the comprehensive task details to be written to the file.
+     *
      * @return the comprehensive task details to be written to the file.
      */
     public String publishTask() {
@@ -49,6 +52,12 @@ public class Task {
         return status + " | " + this.name;
     }
 
+    /**
+     * Returns true if task name contains a keyword
+     *
+     * @param keyword the keyword to be checked against the task name
+     * @return true if task name contains specified keyword
+     */
     public boolean containsKeyword(String keyword) {
         return this.name.toLowerCase().contains(keyword);
     }

@@ -10,6 +10,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event task
+     *
      * @param name      The name of the event
      * @param dateTime  The date and time of the event, in DateTime format
      */
@@ -20,6 +21,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event task
+     *
      * @param name      The name of the event
      * @param isComplete    The completion status of the event
      * @param dateTime  The date and time of the event, in DateTime format

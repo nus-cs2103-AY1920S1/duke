@@ -17,6 +17,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructs an AddCommand to deal with adding Tasks
+     *
      * @param taskType      The type of the task - Todo, Event, Deadline
      * @param taskDetails   Additional information of the task - task name, task date & time
      * @throws DukeException If input is in invalid format
@@ -39,6 +40,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the command to add a new task into task list.
+     *
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
@@ -68,6 +70,7 @@ public class AddCommand extends Command {
 
     /**
      * Overrides toString method
+     *
      * @return Add <taskType>: <taskName> <taskDate&Time>
      */
     @Override

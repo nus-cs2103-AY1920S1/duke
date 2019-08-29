@@ -21,6 +21,7 @@ public abstract class Command {
 
     /**
      * Executes a full command if valid.
+     *
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
@@ -30,6 +31,7 @@ public abstract class Command {
 
     /**
      * Indicates if the command is an exit command.
+     *
      * @return The boolean to indicate if the ui should exit.
      */
     public boolean isExit() {

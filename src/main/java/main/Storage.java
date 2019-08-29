@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Creates a new Storage object
+     *
      * @param filePath File path to read from and to write to.
      */
     public Storage(String filePath) {
@@ -27,6 +28,7 @@ public class Storage {
 
     /**
      * Loads existing task list from specified file path
+     *
      * @return An ArrayList containing the Tasks from the specified file
      * @throws DukeException If file does not exist
      */
@@ -46,6 +48,7 @@ public class Storage {
 
     /**
      * Reads from a specified File
+     *
      * @param sc    Scanner to read from file
      * @param f     File to be read from
      * @return      The ArrayList of task objects read from file.
@@ -109,6 +112,7 @@ public class Storage {
 
     /**
      * Saves current task list to file at specified file path.
+     *
      * @param tasks The task list to be written to file.
      * @throws DukeException If a file writing error arises
      */
@@ -131,6 +135,7 @@ public class Storage {
 
     /**
      * Clears the file found at filePath
+     *
      * @throws DukeException if file is not found.
      */
     public void clearAll() throws DukeException {

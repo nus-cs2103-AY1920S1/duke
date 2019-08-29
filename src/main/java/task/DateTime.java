@@ -14,6 +14,7 @@ public class DateTime {
 
     /**
      * Constructs a DateTime object
+     *
      * @param dateTime in LocalDateTime format.
      */
     DateTime(LocalDateTime dateTime) {
@@ -22,6 +23,7 @@ public class DateTime {
 
     /**
      * Constructs a DateTime object
+     *
      * @param rawDateTimeFormat A String with date and time information, with format dd/MM/yyyy HHmm,
      *                          e.g. 25/07/2019 2330
      * @throws DukeException If format is not recognized.
@@ -38,6 +40,7 @@ public class DateTime {
 
     /**
      * Makes sense of the task list date time format.
+     *
      * @param taskListDTformat A string with date and time information, with format LLLL dd yyyy hh:mm a,
      *                         e.g. Jul 25 2019 11:30pm
      * @return DateTime object which stores the date and time.

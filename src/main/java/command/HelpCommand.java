@@ -19,6 +19,7 @@ public class HelpCommand extends Command {
 
     /**
      * Executes the command to help the user print out a list of allowable input formats.
+     *
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file

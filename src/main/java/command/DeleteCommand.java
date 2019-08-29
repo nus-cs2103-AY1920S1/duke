@@ -15,6 +15,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a DeleteCommand object to deal with deleting tasks
+     *
      * @param taskID The task ID to be deleted.
      */
     public DeleteCommand(int taskID) {
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the command to delete a task identified by its task ID.
+     *
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file

@@ -1,6 +1,8 @@
 import command.Command;
 import main.*;
 
+import java.util.Scanner;
+
 /**
  * Main class
  */
@@ -42,6 +44,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt").run();
+        System.out.println("Enter filepath for task list:");
+        Scanner sc = new Scanner(System.in);
+        String filePath = sc.nextLine();
+        Duke duke;
+        if (filePath.equals("default")) {
+            duke = new Duke("/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt");
+        } else {
+            duke = new Duke(filePath);
+        }
+        duke.run();
     }
 }

@@ -18,6 +18,7 @@ public class Ui {
 
     /**
      * Reads the command from the user input.
+     *
      * @return The user input command, with leading and trailing whitespaces removed.
      * @throws DukeException In event of an empty command
      */
@@ -55,6 +56,7 @@ public class Ui {
 
     /**
      * Shows an error
+     *
      * @param message the error message to be displayed
      */
     public void showError(String message) {
@@ -63,6 +65,7 @@ public class Ui {
 
     /**
      * Outputs to the user.
+     *
      * @param messages The list of messages to be shown to the user.
      *                 Messages in separate lines should be fed in as different parameters, e.g.
      *                 dukeEcho("This is message 1", "Message 2 is on the next line");

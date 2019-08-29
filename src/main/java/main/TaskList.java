@@ -21,6 +21,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Creates a new TaskList object with existing tasks
+     *
      * @param existingTaskList ArrayList of existing tasks
      */
     public TaskList(ArrayList<Task> existingTaskList) {
@@ -29,6 +30,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Returns the Tasks stored in an ArrayList
+     *
      * @return The task list in ArrayList form.
      */
     public ArrayList<Task> getTasks() {
@@ -37,6 +39,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Adds a new task to the task list
+     *
      * @param newTask Task object to be added
      * @return The task that has been added
      */
@@ -47,6 +50,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Deletes a task from the task list given by its task ID (starting from 1)
+     *
      * @param taskNum task ID (index starts from 1)
      * @return The deleted task with specified task ID.
      */
@@ -57,6 +61,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Marks a task given by its task ID as completed.
+     *
      * @param taskNum The task ID of the task to be mark as completed.
      * @return The updated Task object, with completion status updated.
      */
@@ -68,6 +73,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Returns the current size of the task list
+     *
      * @return the current size of the task list
      */
     public int size() {
@@ -76,6 +82,7 @@ public class TaskList implements Iterable<Task>{
 
     /**
      * Returns the task with the corresponding task ID.
+     *
      * @param taskID is the ACTUAL task ID, with index starting from 1
      * @return Task Object with the corresponding task ID.
      */
@@ -90,6 +97,11 @@ public class TaskList implements Iterable<Task>{
         this.tasks.clear();
     }
 
+    /**
+     * Finds all tasks which contains a specific keyword
+     * @param keyword the keyword to be searched
+     * @return An ArrayList of tasks which contains the keyword
+     */
     public ArrayList<Task> findTasksByKeyword(String keyword) {
         ArrayList<Task> tasksFound = new ArrayList<>();
         for (Task task : tasks) {

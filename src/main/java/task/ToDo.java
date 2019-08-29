@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a new ToDo task
+     *
      * @param name The name of the ToDo task
      */
     public ToDo(String name) {
@@ -15,6 +16,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a new ToDo task
+     *
      * @param name The name of the ToDo task
      * @param isComplete The completion status of the task (true/false)
      */

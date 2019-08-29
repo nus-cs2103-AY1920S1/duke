@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Ui {
     // 79 characters, excluding \n. Line is of length 75 characters.
-    public static final String LINE = "    ___________________________________________________________________________\n";
+    public static final String LINE = "    ___________________________________________________________________________"
+            + "\n";
     public static final String INDENTATION_LVL1 = "     "; // 5 spaces, for first level indentation.
     public static final String INDENTATION_LVL2 = "       "; // 7 spaces, for second level indentation (i.e. more inner).
     public static final int CHARACTERS_LIMIT = 73; // length that a string to be printed should not exceed.

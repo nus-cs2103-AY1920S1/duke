@@ -24,7 +24,7 @@ public class QueryCommand extends Command {
         initialise(tasks, ui, database);
 
         if (QueryType.LIST_ALL.equals(queryType)) {
-           list();
+            list();
         } else {
             throw new DukeException("Internal logic bug occurs!");
         }

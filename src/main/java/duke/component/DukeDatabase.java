@@ -48,7 +48,7 @@ public class DukeDatabase {
             tasksFile = new File(databaseDirectory);
             tasksFile.getParentFile().mkdirs();
             tasksFile.createNewFile();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.printf("Fatal Database Error during initialization! Please restart the bot!");
         }
 
@@ -77,7 +77,7 @@ public class DukeDatabase {
                 }
             }
         } catch (FileNotFoundException e) {
-           System.out.println("Cannot find database file!");
+            System.out.println("Cannot find database file!");
         }
 
         return new TaskList(tasksList);

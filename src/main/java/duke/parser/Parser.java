@@ -1,7 +1,13 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.common.Message;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -25,24 +31,24 @@ public class Parser {
     public static Command parse(String inputLine) throws DukeException {
         String command = getCommandFrom(inputLine);
         switch (command) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                return new DoneCommand(getIndexFrom(inputLine));
-            case "todo":
-                return new AddCommand(createTodoFrom(inputLine));
-            case "deadline":
-                return new AddCommand(createDeadlineFrom(inputLine));
-            case "event":
-                return new AddCommand(createEventFrom(inputLine));
-            case "delete":
-                return new DeleteCommand(getIndexFrom(inputLine));
-            case "find":
-                return new FindCommand(getKeywordFrom(inputLine));
-            default:
-                throw new DukeException(Message.MESSAGE_INVALID_COMMAND_FORMAT);
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return new DoneCommand(getIndexFrom(inputLine));
+        case "todo":
+            return new AddCommand(createTodoFrom(inputLine));
+        case "deadline":
+            return new AddCommand(createDeadlineFrom(inputLine));
+        case "event":
+            return new AddCommand(createEventFrom(inputLine));
+        case "delete":
+            return new DeleteCommand(getIndexFrom(inputLine));
+        case "find":
+            return new FindCommand(getKeywordFrom(inputLine));
+        default:
+            throw new DukeException(Message.MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 

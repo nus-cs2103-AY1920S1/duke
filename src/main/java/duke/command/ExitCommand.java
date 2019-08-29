@@ -17,7 +17,6 @@ public class ExitCommand extends Command {
      * @param taskList list of tasks.
      * @param ui user interface displaying program exiting.
      * @param storage local storage of data.
-     * @throws DukeException
      */
     @Override
     public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {

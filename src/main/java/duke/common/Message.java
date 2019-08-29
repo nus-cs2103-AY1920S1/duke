@@ -3,7 +3,6 @@ package duke.common;
 /**
  * Contains messages displayed to user.
  */
-
 public class Message {
 
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\n%1$sWhat can I do for you?\n%2$s";

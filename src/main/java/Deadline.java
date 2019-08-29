@@ -21,6 +21,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         TimeManager tm = new TimeManager();
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + tm.printTime(deadline) + ")\n";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + tm.printTime(deadline) + " )\n";
     }
 }

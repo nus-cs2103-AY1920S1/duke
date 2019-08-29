@@ -51,21 +51,20 @@ public class TimeManager {
             int day = times[0].equals("00") ? current.getDayOfMonth() : Integer.parseInt(times[0]);
             int hour = Integer.parseInt(times[3]);
             int minute = Integer.parseInt(times[4]);
-            LocalDateTime t = LocalDateTime.of(year, month, day, hour, minute);
-            return t;
+            return LocalDateTime.of(year, month, day, hour, minute);
         } catch (DateTimeException e) {
             throw new IllegalTimeFormatException(
                     "☹ Sorry, I couldn't recognise the time.\n" +
-                            Formatter.INDENT + "Try enter in the format of 'dd/MM/yy hhmm' :D");
+                            "     Try enter in the format of 'dd/MM/yy hhmm' :D");
         } catch (NumberFormatException nfe) {
             throw new IllegalTimeFormatException(
                     "☹ Sorry, only numbers can be recognised for time.\n" +
-                            Formatter.INDENT + "Try enter in the format of 'dd/MM/yy hhmm' :D");
+                            "     Try enter in the format of 'dd/MM/yy hhmm' :D");
         }
     }
 
     public String printTime(LocalDateTime dt) {
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy', at' hh:mm a");
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
         return dt.format(customFormatter);
     }
 }

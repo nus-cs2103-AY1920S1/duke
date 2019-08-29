@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Listener {
+public class Parser {
 
     private Sheet sheet;
 
@@ -11,15 +11,17 @@ public class Listener {
 
         Scanner sc = new Scanner(System.in);
         TimeManager tm = new TimeManager();
+        Ui ui = new Ui();
         this.sheet = sheet;
 
-        System.out.print(Formatter.WELCOME);
+        ui.showLogo();
+        ui.showWelcome();
 
         while (sc.hasNext()) {
             String command = sc.next();
             try {
                 if (command.equals("bye")) {
-                    System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOODBYE + "\n" + Formatter.LINE);
+                    ui.showGoodbye();
                     break;
                 } else if (command.equals("list")) {
                     this.sheet.showList();
@@ -43,24 +45,22 @@ public class Listener {
                             this.sheet.delete(index);
                         }
                     } catch (TaskNotFoundException tfe) {
-                        System.out.printf(tfe.toString());
+                        ui.printDukeException(tfe);
                     } catch (InputMismatchException ime) {
-                        System.out.printf(
-                                Formatter.LINE + Formatter.INDENT +
-                                        "☹ OOPS!!! I cannot recognise that task index. :-(" + "\n"
-                                        + Formatter.LINE);
+                        ui.printTaskIndexMismatchException();
                         sc.nextLine();
                     }
                 } else if (command.equals("todo")) {
                     try {
                         String description = sc.nextLine().trim();
                         if (description.isBlank()) {
-                            throw new MissingDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new MissingDescriptionException(
+                                    "☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         Task todoTask = new Todo(description);
                         this.sheet.add(todoTask);
                     } catch (MissingDescriptionException e) {
-                        System.out.printf(e.toString());
+                        ui.printDukeException(e);
                     }
                 } else if (command.equals("deadline")) {
                     try {
@@ -82,9 +82,9 @@ public class Listener {
                         Task dlTask = new Deadline(description, tm.getTime(by));
                         this.sheet.add(dlTask);
                     } catch (MissingDescriptionException dl) {
-                        System.out.printf(dl.toString());
+                        ui.printDukeException(dl);
                     } catch (IllegalTimeFormatException itef){
-                        System.out.printf(itef.toString());
+                        ui.printDukeException(itef);
                     }
                 } else if (command.equals("event")) {
                     try {
@@ -105,21 +105,17 @@ public class Listener {
                         Task eventTask = new Event(description, tm.getTime(span[0]), tm.getTime(span[1]));
                         this.sheet.add(eventTask);
                     } catch (MissingDescriptionException mde) {
-                        System.out.printf(mde.toString());
+                        ui.printDukeException(mde);
                     } catch (IllegalTimeFormatException itef){
-                        System.out.printf(itef.toString());
+                        ui.printDukeException(itef);
                     }
                 } else {
-                    try {
-                        throw new IllegalCommandException(Formatter.UNKNOWN);
-                    } catch (IllegalCommandException ice) {
-                        System.out.printf(ice.toString());
-                    }
+                    ui.showUnknownError();
                 }
             } catch (FileNotFoundException e) {
-                System.out.println(Formatter.INDENT + "oops, task list is not found :o");
+                ui.printFileNotFoundException();
             } catch (IOException e) {
-                System.out.println(Formatter.INDENT + "oops, something went wrong :(");
+                ui.printIOException();
             }
         }
     }

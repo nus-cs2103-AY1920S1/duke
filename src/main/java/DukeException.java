@@ -11,6 +11,6 @@ public class DukeException extends Exception{
 
     @Override
     public String toString() {
-        return Formatter.LINE + Formatter.INDENT + s.toString() + "\n" + Formatter.LINE;
+        return s;
     }
 }

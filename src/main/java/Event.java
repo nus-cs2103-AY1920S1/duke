@@ -24,7 +24,7 @@ public class Event extends Task{
     @Override
     public String toString() {
         TimeManager tm = new TimeManager();
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + tm.printTime((start))
-                + ", to " + tm.printTime(end)+ ")\n";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + tm.printTime(start)
+                + " , to " + tm.printTime(end)+ " )\n";
     }
 }

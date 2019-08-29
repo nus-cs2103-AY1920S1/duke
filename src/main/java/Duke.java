@@ -3,26 +3,28 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        Listener listener = new Listener();
+    private Storage storage;
+    private Sheet sheet;
+    private Ui ui;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(myPaths.TASKLIST);
         try {
-            Sheet sheet = new Sheet(readTasks());
-            listener.start(sheet);
+            sheet = new Sheet(storage.load());
         } catch (IOException e) {
-            System.out.println(Formatter.INDENT + "oops, something went wrong");
+            ui.showLoadingError();
         }
     }
 
-    public static File readTasks() throws IOException {
-         File f = new File(myPaths.TASKLIST);
-         f.createNewFile();
-         return f;
+    public void run() {
+        parser.start(sheet);
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

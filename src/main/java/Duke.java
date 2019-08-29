@@ -1,7 +1,6 @@
 /**
  * Duke Class
  */
-
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Main method to run Duke
@@ -20,13 +20,10 @@ public class Duke {
         new Duke("./saved/taskList_history.txt").run();
     }
 
-    /**
-     * Constructor for Duke Object
-     * @param path Storage path to save/read history
-     */
     public Duke(String path) {
         storage = new Storage(path);
         ui = new Ui();
+        parser = new Parser();
         try {
             if (!storage.historyExists()) {
                 storage.createFile();
@@ -51,23 +48,8 @@ public class Duke {
                 String input = sc.nextLine();
                 String[] inputParts = input.split(" ", 2);
                 String command = inputParts[0];
-                if (command.equals("bye")) {
-                    storage.saveHistory(tasks.getTaskList());
-                    ui.byeMessage();
-                    shouldExit = true;
-                } else if (command.equals("list")) {
-                    ui.drawLine();
-                    tasks.displayList();
-                    ui.drawLineNewLine();
-                } else if (command.equals("done")) {
-                    tasks.markItemComplete(Integer.parseInt(inputParts[1]), ui);
-                } else if (command.equals("delete")) {
-                    tasks.deleteItem(Integer.parseInt(inputParts[1]), ui);
-                } else if (command.equals("find")) {
-                    tasks.findItem(inputParts[1], ui);
-                } else {
-                    tasks.registerNewTask(inputParts, ui);
-                }
+                Command c = Parser.parse(inputParts);
+                shouldExit = c.execute(storage, ui, tasks);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (DukeException e) {

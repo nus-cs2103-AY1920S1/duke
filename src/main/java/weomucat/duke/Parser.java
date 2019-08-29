@@ -6,82 +6,83 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
- * A Parser is responsible for deciphering user input into:
- * - Command
- * - Body (i.e default parameter)
+ * A Parser is responsible for deciphering user input into: - Command - Body (i.e default parameter)
  * - Parameters
  */
 public class Parser {
-	private String command;
-	private String body;
-	private String[] tokens;
 
-	/**
-	 * @param input User input to decipher.
-	 */
-	public Parser(String input) {
-		// Split input by whitespace.
-		this.tokens = input.trim().split(" ");
+  private String command;
+  private String body;
+  private String[] tokens;
 
-		LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
-		this.command = tokens.pollFirst();
-		this.body = String.join(" ", tokens).trim();
-	}
+  /**
+   * @param input User input to decipher.
+   */
+  public Parser(String input) {
+    // Split input by whitespace.
+    this.tokens = input.trim().split(" ");
 
-	/**
-	 * @return Deciphered command
-	 */
-	public String getCommand() {
-		return command;
-	}
+    LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
+    this.command = tokens.pollFirst();
+    this.body = String.join(" ", tokens).trim();
+  }
 
-	/**
-	 * If the command expects parameters, run this after parseParameters.
-	 * @return Deciphered body
-	 */
-	public String getBody() {
-		return body;
-	}
+  /**
+   * @return Deciphered command
+   */
+  public String getCommand() {
+    return command;
+  }
 
-	/**
-	 * Parse a list of parameters which the command uses.
-	 * @param parameters The list of parameters
-	 * @return A HashMap of (parameter name, parameter value)
-	 */
-	public HashMap<String, String> parseParameters(String... parameters) {
-		LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
+  /**
+   * If the command expects parameters, run this after parseParameters.
+   *
+   * @return Deciphered body
+   */
+  public String getBody() {
+    return body;
+  }
 
-		// Remove command from tokens.
-		tokens.pollFirst();
+  /**
+   * Parse a list of parameters which the command uses.
+   *
+   * @param parameters The list of parameters
+   * @return A HashMap of (parameter name, parameter value)
+   */
+  public HashMap<String, String> parseParameters(String... parameters) {
+    LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
 
-		// Put parameters into a HashSet for O(1) lookup.
-		HashSet<String> lookup = new HashSet<>(Arrays.asList(parameters));
-		HashMap<String, String> result = new HashMap<>();
+    // Remove command from tokens.
+    tokens.pollFirst();
 
-		// Initialize result parameters to empty string.
-		for (String p : lookup) {
-			result.put(p, "");
-		}
+    // Put parameters into a HashSet for O(1) lookup.
+    HashSet<String> lookup = new HashSet<>(Arrays.asList(parameters));
+    HashMap<String, String> result = new HashMap<>();
 
-		LinkedList<String> parameter = new LinkedList<>();
+    // Initialize result parameters to empty string.
+    for (String p : lookup) {
+      result.put(p, "");
+    }
 
-		while (!tokens.isEmpty()) {
-			String token = tokens.pollLast();
+    LinkedList<String> parameter = new LinkedList<>();
 
-			// If token is a parameter, put parameter in result.
-			if (lookup.contains(token)) {
-				result.put(token, String.join(" ", parameter).trim());
+    while (!tokens.isEmpty()) {
+      String token = tokens.pollLast();
 
-				// Clear for next parameter.
-				parameter.clear();
-			} else {
-				// Append token to the parameter.
-				parameter.addFirst(token);
-			}
-		}
+      // If token is a parameter, put parameter in result.
+      if (lookup.contains(token)) {
+        result.put(token, String.join(" ", parameter).trim());
 
-		// Last parameter is body.
-		this.body = String.join(" ", parameter).trim();
-		return result;
-	}
+        // Clear for next parameter.
+        parameter.clear();
+      } else {
+        // Append token to the parameter.
+        parameter.addFirst(token);
+      }
+    }
+
+    // Last parameter is body.
+    this.body = String.join(" ", parameter).trim();
+    return result;
+  }
 }

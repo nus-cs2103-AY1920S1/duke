@@ -1,5 +1,6 @@
 package weomucat.duke.task;
 
+import java.util.ArrayList;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
 import weomucat.duke.command.listener.DoneTaskCommandListener;
@@ -11,159 +12,166 @@ import weomucat.duke.task.listener.DeleteTaskListener;
 import weomucat.duke.task.listener.DoneTaskListener;
 import weomucat.duke.task.listener.ListTaskListener;
 
-import java.util.ArrayList;
-
 /**
  * A TaskList manages the addition, deletion, marking as done and listing of tasks.
  */
-public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListener, DoneTaskCommandListener, ListTaskCommandListener {
-	private TaskListTasks tasks;
-	private ArrayList<AddTaskListener> addTaskListeners;
-	private ArrayList<DeleteTaskListener> deleteTaskListeners;
-	private ArrayList<DoneTaskListener> doneTaskListeners;
-	private ArrayList<ListTaskListener> listTaskListeners;
+public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListener,
+    DoneTaskCommandListener, ListTaskCommandListener {
 
-	public TaskList() {
-		this.tasks = new TaskListTasks();
-		init();
-	}
+  private TaskListTasks tasks;
+  private ArrayList<AddTaskListener> addTaskListeners;
+  private ArrayList<DeleteTaskListener> deleteTaskListeners;
+  private ArrayList<DoneTaskListener> doneTaskListeners;
+  private ArrayList<ListTaskListener> listTaskListeners;
 
-	/**
-	 * Initialize a TaskList from an existing TaskListTasks.
-	 * @param tasks an existing list of tasks
-	 */
-	public TaskList(TaskListTasks tasks) {
-		this.tasks = tasks;
-		init();
-	}
+  public TaskList() {
+    this.tasks = new TaskListTasks();
+    init();
+  }
 
-	private void init() {
-		this.addTaskListeners = new ArrayList<>();
-		this.deleteTaskListeners = new ArrayList<>();
-		this.doneTaskListeners = new ArrayList<>();
-		this.listTaskListeners = new ArrayList<>();
-	}
+  /**
+   * Initialize a TaskList from an existing TaskListTasks.
+   *
+   * @param tasks an existing list of tasks
+   */
+  public TaskList(TaskListTasks tasks) {
+    this.tasks = tasks;
+    init();
+  }
 
-	/**
-	 * Add a AddTaskListener to the TaskList.
-	 * When addTask is called, this listener will be notified.
-	 * @param listener addTask listener
-	 */
-	public void newAddTaskListener(AddTaskListener listener) {
-		this.addTaskListeners.add(listener);
-	}
+  private void init() {
+    this.addTaskListeners = new ArrayList<>();
+    this.deleteTaskListeners = new ArrayList<>();
+    this.doneTaskListeners = new ArrayList<>();
+    this.listTaskListeners = new ArrayList<>();
+  }
 
-	/**
-	 * Add a DeleteTaskListener to the TaskList.
-	 * When deleteTask is called, this listener will be notified.
-	 * @param listener deleteTask listener
-	 */
-	public void newDeleteTaskListener(DeleteTaskListener listener) {
-		this.deleteTaskListeners.add(listener);
-	}
+  /**
+   * Add a AddTaskListener to the TaskList. When addTask is called, this listener will be notified.
+   *
+   * @param listener addTask listener
+   */
+  public void newAddTaskListener(AddTaskListener listener) {
+    this.addTaskListeners.add(listener);
+  }
 
-	/**
-	 * Add a DoneTaskListener to the TaskList.
-	 * When doneTask is called, this listener will be notified.
-	 * @param listener doneTask listener
-	 */
-	public void newDoneTaskListener(DoneTaskListener listener) {
-		this.doneTaskListeners.add(listener);
-	}
+  /**
+   * Add a DeleteTaskListener to the TaskList. When deleteTask is called, this listener will be
+   * notified.
+   *
+   * @param listener deleteTask listener
+   */
+  public void newDeleteTaskListener(DeleteTaskListener listener) {
+    this.deleteTaskListeners.add(listener);
+  }
 
-	/**
-	 * Add a ListTaskListener to the TaskList.
-	 * When listTask is called, this listener will be notified.
-	 * @param listener listTask listener
-	 */
-	public void newListTaskListener(ListTaskListener listener) {
-		this.listTaskListeners.add(listener);
-	}
+  /**
+   * Add a DoneTaskListener to the TaskList. When doneTask is called, this listener will be
+   * notified.
+   *
+   * @param listener doneTask listener
+   */
+  public void newDoneTaskListener(DoneTaskListener listener) {
+    this.doneTaskListeners.add(listener);
+  }
 
-	/**
-	 * Add a task to the task list.
-	 * @param task the task to add
-	 * @throws DukeException If any listeners throw a DukeException.
-	 */
-	public void addTask(Task task) throws DukeException {
-		// Add task to Tasks
-		this.tasks.add(task);
+  /**
+   * Add a ListTaskListener to the TaskList. When listTask is called, this listener will be
+   * notified.
+   *
+   * @param listener listTask listener
+   */
+  public void newListTaskListener(ListTaskListener listener) {
+    this.listTaskListeners.add(listener);
+  }
 
-		// Update AddTaskListeners
-		for (AddTaskListener listener : addTaskListeners) {
-			listener.addTaskUpdate(this.tasks, task);
-		}
-	}
+  /**
+   * Add a task to the task list.
+   *
+   * @param task the task to add
+   * @throws DukeException If any listeners throw a DukeException.
+   */
+  public void addTask(Task task) throws DukeException {
+    // Add task to Tasks
+    this.tasks.add(task);
 
-	/**
-	 * Delete a task from the task list.
-	 * @throws DukeException If the index is invalid or any listeners throw a DukeException.
-	 */
-	public void deleteTask(int i) throws DukeException {
-		try {
-			// Get task from tasks
-			Task task = this.tasks.get(i);
+    // Update AddTaskListeners
+    for (AddTaskListener listener : addTaskListeners) {
+      listener.addTaskUpdate(this.tasks, task);
+    }
+  }
 
-			// Remove task
-			this.tasks.remove(i);
+  /**
+   * Delete a task from the task list.
+   *
+   * @throws DukeException If the index is invalid or any listeners throw a DukeException.
+   */
+  public void deleteTask(int i) throws DukeException {
+    try {
+      // Get task from tasks
+      Task task = this.tasks.get(i);
 
-			// Update DeleteTaskListeners
-			for (DeleteTaskListener listener : deleteTaskListeners) {
-				listener.deleteTaskUpdate(this.tasks, task);
-			}
-		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidTaskIndexException();
-		}
-	}
+      // Remove task
+      this.tasks.remove(i);
 
-	/**
-	 * Mark a task as done in the task list.
-	 * @throws DukeException If the index is invalid or any listeners throw a DukeException.
-	 */
-	public void doneTask(int i) throws DukeException {
-		try {
-			// Get task from tasks
-			Task task = this.tasks.get(i);
+      // Update DeleteTaskListeners
+      for (DeleteTaskListener listener : deleteTaskListeners) {
+        listener.deleteTaskUpdate(this.tasks, task);
+      }
+    } catch (IndexOutOfBoundsException e) {
+      throw new InvalidTaskIndexException();
+    }
+  }
 
-			// Set task to done
-			task.setDone(true);
+  /**
+   * Mark a task as done in the task list.
+   *
+   * @throws DukeException If the index is invalid or any listeners throw a DukeException.
+   */
+  public void doneTask(int i) throws DukeException {
+    try {
+      // Get task from tasks
+      Task task = this.tasks.get(i);
 
-			// Update DoneTaskListeners
-			for (DoneTaskListener listener : doneTaskListeners) {
-				listener.doneTaskUpdate(this.tasks, task);
-			}
-		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidTaskIndexException();
-		}
-	}
+      // Set task to done
+      task.setDone(true);
 
-	/**
-	 * Notify listeners to list tasks.
-	 */
-	public void listTask() {
-		// Update ListTaskListeners
-		for (ListTaskListener listener : listTaskListeners) {
-			listener.listTaskUpdate(this.tasks);
-		}
-	}
+      // Update DoneTaskListeners
+      for (DoneTaskListener listener : doneTaskListeners) {
+        listener.doneTaskUpdate(this.tasks, task);
+      }
+    } catch (IndexOutOfBoundsException e) {
+      throw new InvalidTaskIndexException();
+    }
+  }
 
-	@Override
-	public void addTaskCommandUpdate(Task task) throws DukeException {
-		addTask(task);
-	}
+  /**
+   * Notify listeners to list tasks.
+   */
+  public void listTask() {
+    // Update ListTaskListeners
+    for (ListTaskListener listener : listTaskListeners) {
+      listener.listTaskUpdate(this.tasks);
+    }
+  }
 
-	@Override
-	public void deleteTaskCommandUpdate(int i) throws DukeException {
-		deleteTask(i);
-	}
+  @Override
+  public void addTaskCommandUpdate(Task task) throws DukeException {
+    addTask(task);
+  }
 
-	@Override
-	public void doneTaskCommandUpdate(int i) throws DukeException {
-		doneTask(i);
-	}
+  @Override
+  public void deleteTaskCommandUpdate(int i) throws DukeException {
+    deleteTask(i);
+  }
 
-	@Override
-	public void listTaskCommandUpdate() {
-		listTask();
-	}
+  @Override
+  public void doneTaskCommandUpdate(int i) throws DukeException {
+    doneTask(i);
+  }
+
+  @Override
+  public void listTaskCommandUpdate() {
+    listTask();
+  }
 }

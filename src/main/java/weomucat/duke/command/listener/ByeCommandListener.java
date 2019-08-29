@@ -5,8 +5,9 @@ package weomucat.duke.command.listener;
  */
 @FunctionalInterface
 public interface ByeCommandListener {
-	/**
-	 * When ByeCommand is run, this method will be called.
-	 */
-	void byeCommandUpdate();
+
+  /**
+   * When ByeCommand is run, this method will be called.
+   */
+  void byeCommandUpdate();
 }

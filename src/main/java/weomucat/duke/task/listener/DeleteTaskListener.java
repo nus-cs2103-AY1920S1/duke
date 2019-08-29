@@ -9,11 +9,13 @@ import weomucat.duke.task.TaskListTasks;
  */
 @FunctionalInterface
 public interface DeleteTaskListener {
-	/**
-	 * When a task is deleted, this method will be called.
-	 * @param tasks an ArrayList of all tasks
-	 * @param task the Task that was deleted
-	 * @throws DukeException If there is anything wrong with processing.
-	 */
-	void deleteTaskUpdate(TaskListTasks tasks, Task task) throws DukeException;
+
+  /**
+   * When a task is deleted, this method will be called.
+   *
+   * @param tasks an ArrayList of all tasks
+   * @param task  the Task that was deleted
+   * @throws DukeException If there is anything wrong with processing.
+   */
+  void deleteTaskUpdate(TaskListTasks tasks, Task task) throws DukeException;
 }

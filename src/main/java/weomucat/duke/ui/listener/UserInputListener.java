@@ -7,10 +7,12 @@ import weomucat.duke.exception.DukeException;
  */
 @FunctionalInterface
 public interface UserInputListener {
-	/**
-	 * When user input is received, this method will be called.
-	 * @param userInput user input
-	 * @throws DukeException If there is anything wrong with processing.
-	 */
-	void userInputUpdate(String userInput) throws DukeException;
+
+  /**
+   * When user input is received, this method will be called.
+   *
+   * @param userInput user input
+   * @throws DukeException If there is anything wrong with processing.
+   */
+  void userInputUpdate(String userInput) throws DukeException;
 }

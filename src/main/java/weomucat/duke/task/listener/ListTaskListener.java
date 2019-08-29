@@ -7,9 +7,11 @@ import weomucat.duke.task.TaskListTasks;
  */
 @FunctionalInterface
 public interface ListTaskListener {
-	/**
-	 * When all tasks need to be listed, this method will be called.
-	 * @param tasks an ArrayList of all tasks
-	 */
-	void listTaskUpdate(TaskListTasks tasks);
+
+  /**
+   * When all tasks need to be listed, this method will be called.
+   *
+   * @param tasks an ArrayList of all tasks
+   */
+  void listTaskUpdate(TaskListTasks tasks);
 }

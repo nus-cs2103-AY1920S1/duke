@@ -7,10 +7,12 @@ import weomucat.duke.exception.DukeException;
  */
 @FunctionalInterface
 public interface DoneTaskCommandListener {
-	/**
-	 * When DoneTaskCommand is run, this method will be called.
-	 * @param i index of the task to mark as done
-	 * @throws DukeException If there is anything wrong with processing.
-	 */
-	void doneTaskCommandUpdate(int i) throws DukeException;
+
+  /**
+   * When DoneTaskCommand is run, this method will be called.
+   *
+   * @param i index of the task to mark as done
+   * @throws DukeException If there is anything wrong with processing.
+   */
+  void doneTaskCommandUpdate(int i) throws DukeException;
 }

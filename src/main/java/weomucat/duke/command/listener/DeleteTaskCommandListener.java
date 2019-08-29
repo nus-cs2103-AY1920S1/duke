@@ -7,10 +7,12 @@ import weomucat.duke.exception.DukeException;
  */
 @FunctionalInterface
 public interface DeleteTaskCommandListener {
-	/**
-	 * When AddTaskCommand is run, this method will be called.
-	 * @param i index of task to delete
-	 * @throws DukeException If there is anything wrong with processing.
-	 */
-	void deleteTaskCommandUpdate(int i) throws DukeException;
+
+  /**
+   * When AddTaskCommand is run, this method will be called.
+   *
+   * @param i index of task to delete
+   * @throws DukeException If there is anything wrong with processing.
+   */
+  void deleteTaskCommandUpdate(int i) throws DukeException;
 }

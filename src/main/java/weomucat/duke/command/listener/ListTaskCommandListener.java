@@ -5,8 +5,9 @@ package weomucat.duke.command.listener;
  */
 @FunctionalInterface
 public interface ListTaskCommandListener {
-	/**
-	 * When ListTaskCommand is run, this method will be called.
-	 */
-	void listTaskCommandUpdate();
+
+  /**
+   * When ListTaskCommand is run, this method will be called.
+   */
+  void listTaskCommandUpdate();
 }

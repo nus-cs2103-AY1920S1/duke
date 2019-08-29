@@ -8,10 +8,12 @@ import weomucat.duke.task.Task;
  */
 @FunctionalInterface
 public interface AddTaskCommandListener {
-	/**
-	 * When AddTaskCommand is run, this method will be called.
-	 * @param task the Task that was added
-	 * @throws DukeException If there is anything wrong with processing.
-	 */
-	void addTaskCommandUpdate(Task task) throws DukeException;
+
+  /**
+   * When AddTaskCommand is run, this method will be called.
+   *
+   * @param task the Task that was added
+   * @throws DukeException If there is anything wrong with processing.
+   */
+  void addTaskCommandUpdate(Task task) throws DukeException;
 }

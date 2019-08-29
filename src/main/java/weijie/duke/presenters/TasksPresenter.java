@@ -2,6 +2,7 @@ package weijie.duke.presenters;
 
 import weijie.duke.commands.ITaskCommand;
 import weijie.duke.commands.TaskCommandFactory;
+import weijie.duke.exceptions.DukeException;
 import weijie.duke.responses.TaskResponse;
 import weijie.duke.views.ConsoleView;
 
@@ -26,10 +27,14 @@ public class TasksPresenter implements ConsoleInputListener {
 
         String[] args = input.split(" ");
 
-        ITaskCommand command = factory.tryMakeCommand(args[0]);
+        try {
+            ITaskCommand command = factory.tryMakeCommand(args[0]);
+            TaskResponse response = command.execute(args);
+            view.print(response);
 
-        TaskResponse response = command.execute(args);
-        view.print(response);
+        } catch (DukeException e) {
+            view.printError(e);
+        }
     }
 
     public void start() {

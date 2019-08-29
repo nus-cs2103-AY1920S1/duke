@@ -5,13 +5,14 @@ import weijie.duke.exceptions.DukeInvalidInputException;
 import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
 import weijie.duke.responses.TaskResponse;
+import weijie.duke.views.ConsoleView;
 
 import java.util.Collections;
 
 public class DoneCommand implements ITaskCommand {
     private IRepository<Task> repo;
 
-    public DoneCommand(IRepository<Task> repo) {
+    public DoneCommand(IRepository<Task> repo, ConsoleView view) {
         this.repo = repo;
     }
 

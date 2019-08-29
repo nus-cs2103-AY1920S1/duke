@@ -1,6 +1,6 @@
 package weijie.duke.commands;
 
-import weijie.duke.exceptions.DukeException;import weijie.duke.exceptions.DukeIOException;
+import weijie.duke.exceptions.DukeIOException;
 import weijie.duke.exceptions.DukeInvalidInputException;
 import weijie.duke.models.Deadline;
 import weijie.duke.models.Task;

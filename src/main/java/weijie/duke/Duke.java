@@ -13,32 +13,40 @@ import weijie.duke.views.ConsoleView;
 import java.util.HashMap;
 
 public class Duke {
+    private String filePath;
+    private TasksPresenter presenter;
 
-    public static void main(String[] args) {
+    private Duke(String filePath) {
+        this.filePath = filePath;
+    }
 
+    private void initDependencies() {
         ConsoleView view = new ConsoleView();
 
         try {
-            TaskFileStorage storage = new TaskFileStorage("data/duke.txt");
+            TaskFileStorage storage = new TaskFileStorage(filePath);
             IRepository<Task> repo = new TaskRepo(storage);
 
-            HashMap<String, ITaskCommand> commandMap = new HashMap<>();
-            commandMap.put("list", new ListCommand(repo));
-            commandMap.put("todo", new AddTodoCommand(repo));
-            commandMap.put("deadline", new AddDeadlineCommand(repo));
-            commandMap.put("event", new AddEventCommand(repo));
-            commandMap.put("done", new DoneCommand(repo));
-            commandMap.put("delete", new DeleteCommand(repo));
-            TaskCommandFactory factory = new TaskCommandFactory(commandMap);
+            TaskCommandFactory factory = new TaskCommandFactory();
+            factory.registerDependency(repo);
+            factory.registerDependency(view);
 
-            TasksPresenter presenter = new TasksPresenter(view, factory);
-            presenter.start();
+            presenter = new TasksPresenter(view, factory);
 
         } catch (DukeIOException e) {
             view.printError(e);
             view.exit();
         }
 
+    }
 
+    private void run() {
+        initDependencies();
+        presenter.start();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
     }
 }

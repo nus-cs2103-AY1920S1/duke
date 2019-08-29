@@ -7,23 +7,38 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Helper class for displaying user interface messages
+ */
 public class UI {
 
     private TaskList tasks;
     private List<Task> taskList;
     private Storage storage;
 
+    /**
+     * Default constructor for UI class
+     *
+     * @param tasks   A <code>TaskList</code> object
+     * @param storage A <code>Storage</code> object
+     */
     public UI(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.taskList = tasks.getList();
         this.storage = storage;
     }
 
-
+    /**
+     * Prints goodbye message to console
+     */
     public void sayBye() {
         System.out.println("\t Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints hello message to console
+     * and retrieves previously saved state from local file
+     */
     public void sayHi() {
         System.out.println("\t Hello! I'm Duke.");
 
@@ -52,21 +67,30 @@ public class UI {
         printLine();
     }
 
-
+    /**
+     * Prints line separator to console
+     */
     public static void printLine() {
         System.out.println("\t_______________________________");
     }
 
 
-    public void printAddTaskMessage(Task t) {
+    /**
+     * Prints addTask success message
+     *
+     * @param task Task that was successfully added
+     */
+    public void printAddTaskMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         List<Task> list = tasks.getList();
         System.out.println("\t Got it. I've added this task: \n" +
-                "\t  " + t.toString() + "\n" +
+                "\t  " + task.toString() + "\n" +
                 "\t Now you have " + list.size() + " " + pluralOrNot + " in the list");
     }
 
-
+    /**
+     * Prints list of <code>Task</code> objects
+     */
     public void printTasks() {
         if (taskList.size() == 0) System.out.println("\t No pending tasks");
         else {
@@ -79,15 +103,25 @@ public class UI {
         }
     }
 
-    public void printMarkTaskAsCompletedMessage(Task t) {
+    /**
+     * Prints markTaskAsCompleted success message
+     *
+     * @param task Task that was successfully marked as completed
+     */
+    public void printMarkTaskAsCompletedMessage(Task task) {
         System.out.println("\t Nice! I've marked this task as done: \n" +
-                "\t  [✓] " + t.getTaskName() + " " + t.getDetails());
+                "\t  [✓] " + task.getTaskName() + " " + task.getDetails());
     }
 
-    public void printDeleteTaskMessage(Task t) {
+    /**
+     * Prints deleteTask success message
+     *
+     * @param task Task that was successfully deleted
+     */
+    public void printDeleteTaskMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         System.out.println("\t I've removed this task: \n" +
-                "\t  [✓] " + t.getTaskName() + " " + t.getDetails() + "\n" +
+                "\t  [✓] " + task.getTaskName() + " " + task.getDetails() + "\n" +
                 "\t Now you have " + taskList.size() + " " + pluralOrNot + " in the list");
     }
 }

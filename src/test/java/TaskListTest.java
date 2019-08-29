@@ -1,6 +1,5 @@
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
 import duke.exception.TaskDoesNotExistException;
 import duke.task.Event;
 import duke.task.Task;
@@ -8,7 +7,6 @@ import duke.task.Todo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

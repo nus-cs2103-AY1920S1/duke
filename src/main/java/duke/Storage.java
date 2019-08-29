@@ -9,27 +9,48 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class deals with reading-write processes of disk files
+ */
 public class Storage {
     private File tasksFile;
 
+    /**
+     * Default constructor for Storage class, which creates a file given a filepath
+     *
+     * @param filePath A filepath in <code>String</code> format
+     */
     public Storage(String filePath) {
         this.tasksFile = new File(filePath);
     }
 
+    /**
+     * Write tasks from list into file
+     *
+     * @param tasks A <code>TaskList</code> object that will be the source to write into the file
+     */
     public void writeToTasksFile(TaskList tasks) {
         List<Task> taskList = tasks.getList();
         try {
-            FileWriter fw = new FileWriter(tasksFile);
-            for (Task t : taskList) {
-                String fileString = t.convertTaskToFileString() + "\n";
-                fw.write(fileString);
+            FileWriter fileWriter = new FileWriter(tasksFile);
+            for (Task task : taskList) {
+                String fileString = task.convertTaskToFileString() + "\n";
+                fileWriter.write(fileString);
             }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println( e.getMessage() );
+            fileWriter.close();
+        } catch (IOException error) {
+            System.out.println( error.getMessage() );
         }
     }
 
+
+    /**
+     * Read tasks from file into list
+     *
+     * @param tasks A <code>TaskList</code> object which will be the destination
+     *              for each <code>Task</code> read from file.
+     * @throws FileNotFoundException if file is not found
+     */
     public void readFromTasksFileToList (TaskList tasks) throws FileNotFoundException  {
         FileReaderHandler fileReaderHandler = new FileReaderHandler(tasks);
             Scanner sc = new Scanner(tasksFile);

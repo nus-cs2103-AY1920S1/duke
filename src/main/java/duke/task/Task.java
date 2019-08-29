@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * Task class as the parents of all task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class Task {
     /** Description of the task. */
     protected String description;

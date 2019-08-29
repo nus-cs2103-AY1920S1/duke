@@ -58,11 +58,11 @@ public class UI {
     }
 
 
-    public void printAddTaskMessage(Task t) {
+    public void printAddTaskMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         List<Task> list = tasks.getList();
         System.out.println("\t Got it. I've added this task: \n" +
-                "\t  " + t.toString() + "\n" +
+                "\t  " + task.toString() + "\n" +
                 "\t Now you have " + list.size() + " " + pluralOrNot + " in the list");
     }
 
@@ -79,15 +79,15 @@ public class UI {
         }
     }
 
-    public void printMarkTaskAsCompletedMessage(Task t) {
+    public void printMarkTaskAsCompletedMessage(Task task) {
         System.out.println("\t Nice! I've marked this task as done: \n" +
-                "\t  [✓] " + t.getTaskName() + " " + t.getDetails());
+                "\t  [✓] " + task.getTaskName() + " " + task.getDetails());
     }
 
-    public void printDeleteTaskMessage(Task t) {
+    public void printDeleteTaskMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         System.out.println("\t I've removed this task: \n" +
-                "\t  [✓] " + t.getTaskName() + " " + t.getDetails() + "\n" +
+                "\t  [✓] " + task.getTaskName() + " " + task.getDetails() + "\n" +
                 "\t Now you have " + taskList.size() + " " + pluralOrNot + " in the list");
     }
 }

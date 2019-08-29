@@ -19,12 +19,12 @@ public class Storage {
     public void writeToTasksFile(TaskList tasks) {
         List<Task> taskList = tasks.getList();
         try {
-            FileWriter fw = new FileWriter(tasksFile);
-            for (Task t : taskList) {
-                String fileString = t.convertTaskToFileString() + "\n";
-                fw.write(fileString);
+            FileWriter fileWriter = new FileWriter(tasksFile);
+            for (Task task : taskList) {
+                String fileString = task.convertTaskToFileString() + "\n";
+                fileWriter.write(fileString);
             }
-            fw.close();
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println( e.getMessage() );
         }

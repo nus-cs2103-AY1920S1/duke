@@ -1,7 +1,6 @@
 package duke;
 
 
-import duke.exception.DukeException;
 import duke.exception.EmptyTodoTextException;
 import duke.exception.TaskDoesNotExistException;
 import duke.task.Task;
@@ -24,10 +23,10 @@ public class TaskList {
     }
 
 
-    public void addTask(Task t, boolean printMessage) throws EmptyTodoTextException {
-        if (t.getTaskName().isBlank()) throw new EmptyTodoTextException("The description of a todo cannot be empty");
-        taskList.add(t);
-        if (printMessage) ui.printAddTaskMessage(t);
+    public void addTask(Task task, boolean printMessage) throws EmptyTodoTextException {
+        if (task.getTaskName().isBlank()) throw new EmptyTodoTextException("The description of a todo cannot be empty");
+        taskList.add(task);
+        if (printMessage) ui.printAddTaskMessage(task);
     }
 
     public void printTasks() {
@@ -37,17 +36,17 @@ public class TaskList {
     public void markTaskAsCompleted(int taskNumber, boolean printMessage) throws TaskDoesNotExistException {
         if (taskNumber < 1 || taskNumber > taskList.size()) throw new TaskDoesNotExistException("Task not found");
 
-        Task t = taskList.get(taskNumber - 1);
-        t.markAsCompleted();
-        if (printMessage) ui.printMarkTaskAsCompletedMessage(t);
+        Task task = taskList.get(taskNumber - 1);
+        task.markAsCompleted();
+        if (printMessage) ui.printMarkTaskAsCompletedMessage(task);
     }
 
     public void deleteTask(int taskNumber, boolean printMessage) throws TaskDoesNotExistException {
         if (taskNumber > taskList.size()) throw new TaskDoesNotExistException("Task not found");
 
-        Task t = taskList.get(taskNumber - 1);
-        taskList.remove(t);
-        if (printMessage) ui.printDeleteTaskMessage(t);
+        Task task = taskList.get(taskNumber - 1);
+        taskList.remove(task);
+        if (printMessage) ui.printDeleteTaskMessage(task);
     }
 
     public List<Task> getList() {

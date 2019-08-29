@@ -11,97 +11,15 @@ import java.lang.StringBuilder;
  * they have, and even delete them after they are done.
  */
 public class Duke { // handles all input and output
-    final static String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
 
-    final static String line = "____________________________________________________________";
-
-    final static ArrayList<Task> _task = new ArrayList<Task>();
+    public static ArrayList<Task> _task = new ArrayList<Task>();
     public static DukeData _myData;
+    private static Ui _ui;
 
-    /**
-     * Greets the users, and asks users what they want Duke to do.
-     * @return String Returns a String of Greetings.
-     */
-    public static String intro() {
-        String intro = String.format("%s%n%s%n Hello! I'm Duke%n What can I do for you?%n%s%n",
-                        line, logo, line);
-        return intro;
-    }
+    public Duke() {
+        _ui = new Ui();
+        _myData = new DukeData();
 
-    /**
-     * Lists out all the tasks the user has added, be it ToDo, Deadlines or Events,
-     * in the order of input.
-     * @return String Returns a Strings of all Tasks.
-     */
-    public static String list() {
-        StringBuilder s = new StringBuilder(line);
-        s.append(System.getProperty("line.separator"));
-        s.append(" Here are the tasks in your list:");
-        for (int i = 1; i <= _task.size(); i++) {
-            s.append(System.getProperty("line.separator"));
-            s.append(" ").append(i).append(".");
-            Task t = _task.get(i - 1);
-            s.append(t.toString());
-        }
-        s.append(System.getProperty("line.separator"));
-        s.append(line);
-        s.append(System.getProperty("line.separator"));
-        return s.toString();
-    }
-
-    /**
-     * Bids the user GoodBye after the user is done using Duke.
-     * @return String Returns a string of farewell words.
-     */
-    public static String bye() {
-        String bye = String.format("%s%n GoodBye! Hope to see you again soon!%n%s%n",
-                        line, line);
-        return bye;
-    }
-
-    /**
-     * Adds a new Task to the list of tasks, and informs the user of the task added.
-     * @param t The Task to be added, which can be a ToDo, Deadline, or Event.
-     * @return String Returns a String of information notifying the user of the added task.
-     */
-    public static String newTask(Task t) {
-        _task.add(t);
-        String added = String.format("%s%n Got it! I've added this task:" +
-                        "%n   %s%n Now you have %d task in the list.%n%s%n",
-                        line, t.toString(), _task.size(), line);
-        return added;
-    }
-
-    /**
-     * Marks a Task as done, and notifies the user of the task marked as done.
-     * @param n The task number, in the order of input.
-     * @return String Returns a string to inform user of the task marked as done.
-     */
-    public static String done(int n) {
-        Task t = _task.get(n - 1);
-        t.markAsDone();
-        String done = String.format("%s%n Nice! I've marked this task as done:%n [%s] %s%n%s%n",
-                        line, t.getStatusIcon(), t.getDesc(), line);
-        return done;
-    }
-
-    /**
-     * Deletes a given Task from the list of all Tasks, then notifies the user of the
-     * Task removed.
-     * @param n The task number, in the order of input.
-     * @return String Returns a string to inform user of the task removed from the list.
-     */
-    public static String delete(int n) {
-        Task t = _task.get(n - 1);
-        _task.remove(n - 1);
-        String del = String.format("%s%n Noted. I've removed this task:%n   %s%n" +
-                        "Now you have %d tasks in the list.%n%s%n",
-                        line, t.toString(), _task.size(), line);
-        return del;
     }
 
     /**
@@ -109,9 +27,9 @@ public class Duke { // handles all input and output
      * @param args Unused.
      */
     public static void main(String[] args) { // handles all input and output
+        new Duke();
         Scanner sc = new Scanner(System.in);
-        System.out.println(intro());
-        _myData = new DukeData();
+        System.out.println(_ui.showIntro());
 
         while (sc.hasNext()) {
             String cmdWord = sc.next(); // extract first only
@@ -120,14 +38,14 @@ public class Duke { // handles all input and output
             try {
                 switch (cmdWord) {
                 case "list":
-                    System.out.println(list());
+                    System.out.println(_ui.showList());
                     break;
                 case "data":
                     _myData.printDataFile();
                     break;
                 case "bye":
                     _myData.exit();
-                    System.out.println(bye());
+                    System.out.println(_ui.showFarewell());
                     break;
                 case "done":
                     int taskNo = Integer.parseInt(cmdLine.substring(1));
@@ -192,25 +110,15 @@ public class Duke { // handles all input and output
                     throw new DukeException(cmdWord + cmdLine);
                 }
             } catch (DukeException e) {
-                System.out.println(line);
-                System.err.println(e.getMessage());
-                System.out.println(line);
+                System.err.println(Ui.addLines(e.getMessage()));
             } catch (ToDoException e) {
-                System.out.println(line);
-                System.err.println(e.getMessage());
-                System.out.println(line);
+                System.err.println(Ui.addLines(e.getMessage()));
             } catch (DeadlineException e) {
-                System.out.println(line);
-                System.err.println(e.getMessage());
-                System.out.println(line);
+                System.err.println(Ui.addLines(e.getMessage()));
             } catch (EventException e) {
-                System.out.println(line);
-                System.err.println(e.getMessage());
-                System.out.println(line);
+                System.err.println(Ui.addLines(e.getMessage()));
             } catch (IOException ioe) {
-                System.out.println(line);
                 ioe.printStackTrace();
-                System.out.println(line);
             }
         }
     }

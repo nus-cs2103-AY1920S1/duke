@@ -62,7 +62,12 @@ public class Deadline extends Task {
         case 11 : nameOfMonth = "December";
             break;
         }
-        String hoursAndMinutes = "" + time.get(Calendar.HOUR) + ":";
+        String hoursAndMinutes = "";
+        if(time.get(Calendar.HOUR_OF_DAY) <= 12) {
+            hoursAndMinutes += time.get(Calendar.HOUR_OF_DAY) + ":";
+        } else {
+            hoursAndMinutes += time.get(Calendar.HOUR) + ":";
+        }
         if (time.get(Calendar.MINUTE) < 10) {
             hoursAndMinutes += "0";
         }

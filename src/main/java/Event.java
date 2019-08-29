@@ -74,7 +74,12 @@ public class Event extends Task {
         case 11 : nameOfMonth = "December";
             break;
         }
-        String hoursAndMinutes = "" + startTime.get(Calendar.HOUR) + ":";
+        String hoursAndMinutes;
+        if (startTime.get(Calendar.HOUR_OF_DAY) <= 12) {
+            hoursAndMinutes = startTime.get(Calendar.HOUR_OF_DAY) + ":";
+        } else {
+            hoursAndMinutes = startTime.get(Calendar.HOUR) + ":";
+        }
         if (startTime.get(Calendar.MINUTE) < 10) {
             hoursAndMinutes += "0";
         }
@@ -127,7 +132,12 @@ public class Event extends Task {
             case 11 : nameOfMonth = "December";
                 break;
         }
-        String hoursAndMinutes = "" + endTime.get(Calendar.HOUR) + ":";
+        String hoursAndMinutes;
+        if (endTime.get(Calendar.HOUR_OF_DAY) <= 12) {
+            hoursAndMinutes = endTime.get(Calendar.HOUR_OF_DAY) + ":";
+        } else {
+            hoursAndMinutes = endTime.get(Calendar.HOUR) + ":";
+        }
         if (endTime.get(Calendar.MINUTE) < 10) {
             hoursAndMinutes += "0";
         }

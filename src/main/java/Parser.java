@@ -16,6 +16,8 @@ public class Parser {
             type = "todo";
             if (command.split("todo ").length > 1) {
                 list.add(command.split("todo ")[1]);
+            } else {
+                throw new DukeException(" :( OOPS!!! Please provide description.");
             }
         } else if (order.equals("event")) {
             if (command.split("/at").length == 1) {
@@ -24,10 +26,27 @@ public class Parser {
             type = "event";
             String instruction = command.split("event ")[1];
             String[] details = instruction.split(" /at ");
+            if (details.length != 2) {
+                throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or Date" +
+                        "and start and end time not provided.");
+            }
             String[] dateAndTime = details[1].split(" ");
+            if (dateAndTime.length != 2) {
+                throw new DukeException(" :( OOPS!!! Invalid format. Please enter 'DD/MM/YYYY HHMM-HHMM'");
+            }
             String[] dateArray = dateAndTime[0].split("/");
-            int startTime = Integer.parseInt(dateAndTime[1].split("-")[0]);
-            int endTime = Integer.parseInt(dateAndTime[1].split("-")[1]);
+            if (dateAndTime[1].split("-").length != 2) {
+                throw new DukeException(" :( OOPS!!! Invalid format. Must enter start and end time.");
+            }
+            int startTime = 0;
+            int endTime = 0;
+            try {
+                startTime = Integer.parseInt(dateAndTime[1].split("-")[0]);
+                endTime = Integer.parseInt(dateAndTime[1].split("-")[1]);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException(" :( OOPS!!! Invalid Format. Please enter numbers for date and time in " +
+                        "'DD/MM/YYYY HHMM-HHMM' format");
+            }
             int startHours = startTime / 100;
             int startMinutes = startTime % 100;
             int endHours = endTime / 100;
@@ -43,13 +62,25 @@ public class Parser {
         } else if (order.equals("deadline")) {
             type = "deadline";
             if (command.split("/by").length == 1) {
-                throw new DukeException(" :( OOPS!!! An deadline must have a time. Use '/by'.");
+                throw new DukeException(" :( OOPS!!! An deadline must have date and time. Use '/by'.");
             }
             String instruction = command.split("deadline ")[1];
             String[] details = instruction.split(" /by ");
+            if (details.length != 2) {
+                throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or DateAndTime not provided.");
+            }
             String[] dateAndTime = details[1].split(" ");
+            if (dateAndTime.length != 2) {
+                throw new DukeException(" :( OOPS!!! Invalid format for date and time. Please enter 'DD/MM/YYYY HHMM'");
+            }
             String[] dateArray = dateAndTime[0].split("/");
-            int time = Integer.parseInt(dateAndTime[1]);
+            int time = 0;
+            try {
+                time = Integer.parseInt(dateAndTime[1]);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException(" :( OOPS!!! Invalid Format. Please enter numbers for date and time in " +
+                        "'DD/MM/YYYY HHMM' format");
+            }
             int hours = time / 100;
             int minutes = time % 100;
             list.add(details[0]);

@@ -40,7 +40,7 @@ public class Parser {
         }
     }
 
-    private static Date dateFormatter(String date) throws DukeException {
+    public static Date dateFormatter(String date) throws DukeException {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date parseDate = formatter.parse(date);

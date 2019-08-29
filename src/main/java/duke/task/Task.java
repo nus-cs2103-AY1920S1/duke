@@ -20,4 +20,6 @@ public class Task {
     public String toString() {
         return this.description;
     }
+
+    public boolean isDone() { return this.isDone; }
 }

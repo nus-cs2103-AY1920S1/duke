@@ -1,8 +1,8 @@
-import Duke.exception.DukeException;
-import Duke.parser.Parser;
-import Duke.storage.Storage;
-import Duke.task.*;
-import Duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.Ui;
 
 /**
  * Duke is a chat based task manager that keeps track of the Tasks keyed in by the user.
@@ -14,6 +14,7 @@ public class Duke {
 
     /**
      * Constructs a Duke object.
+     * 
      * @param filePath the file path of a file that is written to and from when the program is executed.
      */
     public Duke(String filePath) {

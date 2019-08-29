@@ -1,6 +1,6 @@
-package Duke.task;
+package duke.task;
 
-import Duke.exception.DukeException;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
@@ -19,6 +19,7 @@ public class TaskList {
 
     /**
      * Constructs a TaskList based on a list of Tasks.
+     *
      * @param tasks the Tasks that will populate the TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Gets a list of all the Tasks contained within the TaskList.
+     *
      * @return the list of all the Tasks in the TaskList.
      */
     public ArrayList<Task> getTaskList() {
@@ -35,7 +37,8 @@ public class TaskList {
 
     /**
      * Gets the number of Tasks that is stored in the TaskList.
-     * @return
+     *
+     * @return the number of Tasks in the TaskList.
      */
     public int getSize() {
         return this.tasks.size();
@@ -43,6 +46,7 @@ public class TaskList {
 
     /**
      * Executes a Task on the TaskList based on the position of the Task in the TaskList.
+     *
      * @param input the position of the Task on the TaskList.
      * @return the Task that has been executed.
      * @throws DukeException if the Task cannot be found on the TaskList, if the user did not enter
@@ -69,6 +73,7 @@ public class TaskList {
 
     /**
      * Adds a Todo Task to the TaskList.
+     *
      * @param todo the Todo Task to be added into the TaskList.
      */
     public void addTodo(Todo todo) {
@@ -77,6 +82,7 @@ public class TaskList {
 
     /**
      * Adds a Deadline task to the TaskList.
+     *
      * @param deadline the Deadline Task to be added into the TaskList.
      */
     public void addDeadline(Deadline deadline) {
@@ -85,6 +91,7 @@ public class TaskList {
 
     /**
      * Adds an Event task to the TaskList.
+     *
      * @param event the Event Task to be added into the TaskList.
      */
     public void addEvent(Event event) {
@@ -93,6 +100,7 @@ public class TaskList {
 
     /**
      * A Task is deleted based on the position of the Task on the TaskList.
+     *
      * @param input the position of the Task on the TaskList.
      * @return the Task that has been deleted from the TaskList.
      * @throws DukeException if the Task cannot be found on the TaskList, if the user did not enter

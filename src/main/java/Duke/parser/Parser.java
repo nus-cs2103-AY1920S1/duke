@@ -1,11 +1,11 @@
-package Duke.parser;
+package duke.parser;
 
-import Duke.exception.DukeException;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.TaskList;
-import Duke.task.Todo;
-import Duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -22,6 +22,7 @@ public class Parser {
 
     /**
      * Constructs a new Parser object to read and process the user's input.
+     *
      * @param taskList the latest TaskList stored in the hard disk.
      */
     public Parser(TaskList taskList) {
@@ -36,6 +37,7 @@ public class Parser {
      * <p>
      * This method scans the commands passed into duke and processes the commands
      * accordingly.
+     *
      * @return the TaskList after the Parser processes the commands.
      */
     public TaskList start() {
@@ -90,6 +92,7 @@ public class Parser {
 
     /**
      * Parses the user's date input to return a Date object.
+     *
      * @param formatter the SimpleDateFormat object containing the format of the date.
      * @param input the user's date input when they specify the date of a task.
      * @return a Date object which date has been parsed into the desired format obtained

@@ -1,8 +1,8 @@
-package Duke.storage;
+package duke.storage;
 
-import Duke.exception.DukeException;
-import Duke.task.*;
-import Duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.task.*;
+import duke.parser.Parser;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -22,6 +22,7 @@ public class Storage {
     /**
      * Constructs a new Storage object to read and write to a text file stored
      * on the hard disk.
+     *
      * @param filePath the file path of the file stored on the hard disk.
      */
     public Storage(String filePath) {
@@ -31,6 +32,7 @@ public class Storage {
 
     /**
      * Returns the file path of the file stored on the hard disk.
+     *
      * @return the file path.
      */
     public String getFilePath() {
@@ -40,6 +42,7 @@ public class Storage {
     /**
      * Loads the file from the hard disk and reads it's text. The text would then
      * be converted into Task objects and stored in an ArrayList for duke to process.
+     *
      * @return an ArrayList that contains the tasks stored on the hard disk.
      * @throws DukeException if the file stated in the file path does not exist.
      */
@@ -92,6 +95,7 @@ public class Storage {
      * Writes the TaskList onto the file stored on the hard disk. The TaskList is gone
      * through and the tasks stored in it are concatenated into a String before it is
      * written to the file stored on the hard disk.
+     *
      * @param taskList The TaskList that will be written to the file on the hard disk.
      */
     public void write(TaskList taskList) {

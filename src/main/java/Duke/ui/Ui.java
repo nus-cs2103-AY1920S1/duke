@@ -1,7 +1,7 @@
-package Duke.ui;
+package duke.ui;
 
-import Duke.task.Task;
-import Duke.task.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.ArrayList;
 
@@ -43,6 +43,7 @@ public class Ui {
 
     /**
      * Prints the error message contained within the exception.
+     *
      * @param errorMsg the error message to be printed.
      */
     public void showError(String errorMsg) {
@@ -53,6 +54,7 @@ public class Ui {
 
     /**
      * Prints the entire list in the TaskList.
+     *
      * @param list the list to be printed.
      */
     public void showList(ArrayList<Task> list) {
@@ -69,6 +71,7 @@ public class Ui {
     /**
      * Prints the Task that has been added into the TaskList and also the number of remaining Tasks in
      * the TaskList.
+     *
      * @param addedTask the Task that has been added.
      * @param taskList the TaskList which the Task is added to.
      */
@@ -83,6 +86,7 @@ public class Ui {
     /**
      * Prints the Task that has been deleted from the TaskList and also the number of remaining Tasks in
      * the TaskList.
+     *
      * @param deletedTask the Task that has been deleted.
      * @param taskList the TaskList which the Task is deleted from.
      */
@@ -96,6 +100,7 @@ public class Ui {
 
     /**
      * Prints the Task after it has been completed.
+     *
      * @param completed the Task that has been completed.
      */
     public void showCompletedTask(Task completed) {

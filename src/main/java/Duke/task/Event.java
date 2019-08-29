@@ -1,4 +1,4 @@
-package Duke.task;
+package duke.task;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event task.
+     *
      * @param description the description of the event task.
      * @param by the deadline of the event task.
      */

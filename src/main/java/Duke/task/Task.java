@@ -1,5 +1,6 @@
-package Duke.task;
-import Duke.exception.DukeException;
+package duke.task;
+
+import duke.exception.DukeException;
 
 /**
  * A class that represents a Task that the user wishes to complete.
@@ -18,6 +19,7 @@ public abstract class Task {
 
     /**
      * Constructs a Task with description.
+     *
      * @param description the description of the Task.
      */
     public Task(String description) {
@@ -27,6 +29,7 @@ public abstract class Task {
 
     /**
      * Marks that the Task has been done.
+     *
      * @throws DukeException if the Task has already been done and the user wants it
      * to be done again, the exception is thrown.
      */
@@ -48,6 +51,7 @@ public abstract class Task {
 
     /**
      * It represents a unicode representation of whether the Task has been done.
+     *
      * @return the String representation of the unicode.
      */
     public String getStatusIcon() {
@@ -57,6 +61,7 @@ public abstract class Task {
     /**
      * An abstract method that formats the Task into a format more suited to be written to the text
      * file stored on the hard disk.
+     *
      * @return the formatted string that represents the details of a Task.
      */
     public abstract String formatToWrite();

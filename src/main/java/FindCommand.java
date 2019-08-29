@@ -9,6 +9,9 @@ public class FindCommand implements Command {
         return false;
     }
 
+    /**
+     * Finds all task which description contains keyword.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showMessage("Here are the matching tasks in your list:");

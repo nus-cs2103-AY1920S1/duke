@@ -22,12 +22,11 @@ public class Duke {
             String fullCommand = ui.readCommand();
             String firstWordOfCommand = Parser.getFirstWord(fullCommand);
 
-            // Bye
             if (firstWordOfCommand.equals("bye")) {
+                // Bye
                 isExit = true;
-            }
-            // List
-            else if (firstWordOfCommand.equals("list")) {
+            } else if (firstWordOfCommand.equals("list")) {
+                // List
                 System.out.println("Here are the tasks in your list:");
                 // Output current items in list
                 for (int i = 0; i < tasks.size(); i++) {
@@ -35,16 +34,14 @@ public class Duke {
                     Task currentTask = tasks.get(i);
                     System.out.println(currentItemNumber + "." + currentTask);
                 }
-            }
-            // Done
-            else if (firstWordOfCommand.equals("done")) {
+            } else if (firstWordOfCommand.equals("done")) {
+                // Done
                 int itemId = Integer.parseInt(Parser.excludeFirstWord(fullCommand, "done"));
                 Task currentTask = tasks.get(itemId - 1);
                 currentTask.setDone(true);
                 System.out.println("Nice! I've marked this task as done:\n[1] " + currentTask.getName());
-            }
-            // Delete
-            else if (firstWordOfCommand.equals("delete")) {
+            } else if (firstWordOfCommand.equals("delete")) {
+                // Delete
                 int itemId = Integer.parseInt(Parser.excludeFirstWord(fullCommand, "delete"));
                 Task currentTask = tasks.get(itemId - 1);
                 tasks.remove(currentTask);
@@ -52,12 +49,11 @@ public class Duke {
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(currentTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            }
-            // Add
-            else {
+            } else {
+                // Add
                 try {
-                    // to do
                     if (firstWordOfCommand.equals("todo")) {
+                        // to do
                         // Remaining words
                         String name = Parser.excludeFirstWord(fullCommand, "todo");
                         if (name.equals("")) {
@@ -67,9 +63,8 @@ public class Duke {
                         // Add new task to list
                         Todo newTodo = new Todo(name, false);
                         tasks.add(newTodo);
-                    }
-                    // deadline
-                    else if (firstWordOfCommand.equals("deadline")) {
+                    } else if (firstWordOfCommand.equals("deadline")) {
+                        // deadline
                         // Remaining words
                         String remainingWords = Parser.excludeFirstWord(fullCommand, "deadline");
                         String name = Parser.splitIntoNameAndTime(remainingWords, " /by ")[0];
@@ -80,9 +75,8 @@ public class Duke {
                         // Add new task to list
                         Deadline newDeadline = new Deadline(name, false, dateTime, localDateTime);
                         tasks.add(newDeadline);
-                    }
-                    // event
-                    else if (firstWordOfCommand.equals("event")) {
+                    } else if (firstWordOfCommand.equals("event")) {
+                        // event
                         // Remaining words
                         String remainingWords = Parser.excludeFirstWord(fullCommand, "event");
                         String name = Parser.splitIntoNameAndTime(remainingWords, " /at ")[0];
@@ -93,9 +87,8 @@ public class Duke {
                         // Add new task to list
                         Event newEvent = new Event(name, false, dateTime, localDateTime);
                         tasks.add(newEvent);
-                    }
-                    // default
-                    else {
+                    } else {
+                        // default
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     // Print output of ADD

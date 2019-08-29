@@ -24,19 +24,16 @@ public class Storage {
                 boolean isDone;
                 if (words[1].equals("1")) {
                     isDone = true;
-                }
-                else {
+                } else {
                     isDone = false;
                 }
                 if (words[0].equals("T")) {
                     tasks.add(new Todo(words[2], isDone));
-                }
-                else if (words[0].equals("D")) {
+                } else if (words[0].equals("D")) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     LocalDateTime formatDateTime = LocalDateTime.parse(words[3], formatter);
                     tasks.add(new Deadline(words[2], isDone, words[3], formatDateTime));
-                }
-                else if (words[0].equals("E")) {
+                } else if (words[0].equals("E")) {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     LocalDateTime formatDateTime = LocalDateTime.parse(words[3], formatter);
                     tasks.add(new Event(words[2], isDone, words[3], formatDateTime));

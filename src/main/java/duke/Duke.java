@@ -2,11 +2,11 @@ package duke;
 
 import java.io.IOException;
 import java.text.ParseException;
-import duke.error.DukeException;
+
 import duke.command.Command;
-//CHECKSTYLE:OFF
-import duke.util.*;
-//CHECKSTYLE:ON
+import duke.error.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
 
 public class Duke {
     private TaskList tasks;

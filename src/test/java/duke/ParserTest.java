@@ -7,7 +7,7 @@ import duke.command.ToDoCommand;
 
 class ParserTest {
     @Test
-    void parseToDoCommand() {
+    void parse_parseTodo_none() {
         try {
             assertTrue(Parser.parse("todo eat") instanceof ToDoCommand);
         } catch (Exception e) {

@@ -2,12 +2,12 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.error.DukeException;
+import duke.error.InvalidIndexException;
 import duke.TaskList;
 import duke.task.Task;
 import duke.util.Storage;
 import duke.util.Ui;
-import duke.error.DukeException;
-import duke.error.InvalidIndexException;
 
 public class DoneCommand implements Command {
     private int index;

@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.Date;
 
 import duke.TaskList;
-import duke.task.Deadline;
 import duke.error.DukeException;
+import duke.task.Deadline;
 import duke.util.Storage;
 import duke.util.Ui;
 

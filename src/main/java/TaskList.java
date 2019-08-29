@@ -172,6 +172,16 @@ public class TaskList {
             parent.printTaskAdded();
         }
     }
+
+    public ArrayList<Task> find(String desc) {
+        ArrayList<Task> subList = new ArrayList<Task>();
+        for (Task t : taskList) {
+            if (t.getDescription().contains(desc)) {
+                subList.add(t);
+            }
+        }
+        return subList;
+    }
 }
 
 

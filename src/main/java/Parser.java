@@ -1,5 +1,6 @@
 import exception.DukeException;
 import exception.EmptyDescriptionException;
+import exception.WrongDateFormatException;
 import task.Task;
 import task.TaskList;
 import task.TaskType;
@@ -99,7 +100,7 @@ public class Parser {
                 if (messageDeadline.trim().length() == 0) {
                     throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
                 }
-                if (!userInput.split("deadline ")[1].contains("/by")) {
+                if (!userInput.split("deadline ")[1].contains(" /by ")) {
                     throw new DukeException("A deadline requires the '/by' keyword.");
                 }
                 Task newTaskDeadline = new Task(messageDeadline, TaskType.DEADLINE);
@@ -117,6 +118,11 @@ public class Parser {
                 System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
                 System.out.print(LINE);
                 ui.getUserInput(this);
+            } catch (WrongDateFormatException e) {
+                System.out.print(LINE);
+                System.out.println("     ☹ OOPS!!! The date format must be dd/mm/yyyy hhmm.");
+                System.out.print(LINE);
+                ui.getUserInput(this);
             } catch (DukeException e) {
                 System.out.print(LINE);
                 System.out.println("     ☹ OOPS!!! "  + e);
@@ -131,7 +137,7 @@ public class Parser {
                 if (messageEvent.trim().length() == 0) {
                     throw new EmptyDescriptionException("The description of an event cannot be empty.");
                 }
-                if (!userInput.split("event ")[1].contains("/at")) {
+                if (!userInput.split("event ")[1].contains(" /at ")) {
                     throw new DukeException("An event requires the '/at' keyword.");
                 }
                 Task newTaskEvent = new Task(messageEvent, TaskType.EVENT);
@@ -147,6 +153,11 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                 System.out.print(LINE);
                 System.out.println("     ☹ OOPS!!! The description of an event cannot be empty.");
+                System.out.print(LINE);
+                ui.getUserInput(this);
+            } catch (WrongDateFormatException e) {
+                System.out.print(LINE);
+                System.out.println("     ☹ OOPS!!! The date format must be dd/mm/yyyy hhmm.");
                 System.out.print(LINE);
                 ui.getUserInput(this);
             } catch (DukeException e) {
@@ -176,7 +187,7 @@ public class Parser {
             break;
         case "find":
             try {
-                String textToFind = userInput.split("find ")[1];
+                String textToFind = userInput.split("find ")[1].trim();
                 if (textToFind.trim().length() == 0) {
                     throw new EmptyDescriptionException("The description cannot be empty.");
                 }
@@ -188,7 +199,9 @@ public class Parser {
                 }
 
                 if (matchingTasks.size() == 0) {
-                    System.out.println("I'm sorry, but I can't find any matching tasks :-(");
+                    System.out.print(LINE);
+                    System.out.println("     I'm sorry, but I can't find any matching tasks :-(");
+                    System.out.print(LINE);
                 } else {
                     System.out.print(LINE);
                     System.out.println("     Here are the matching tasks in your list:");
@@ -225,21 +238,25 @@ public class Parser {
      * @param dateString String in the format of dd/mm/yyyy hhmm
      * @return Calendar that represents the given date
      */
-    private static Calendar convertStringToCalendar(String dateString) {
-        String[] dateAndTime = dateString.split("\\s");
-        String date = dateAndTime[0];
-        String time = dateAndTime[1];
-        int hour = Integer.parseInt(time) / 100;
-        int minute = Integer.parseInt(time) % 100;
+    private static Calendar convertStringToCalendar (String dateString) throws WrongDateFormatException {
+        try {
+            String[] dateAndTime = dateString.split("\\s");
+            String date = dateAndTime[0];
+            String time = dateAndTime[1];
+            int hour = Integer.parseInt(time) / 100;
+            int minute = Integer.parseInt(time) % 100;
 
-        String[] dateComponents = date.split("/");
-        int day = Integer.parseInt(dateComponents[0]);
-        int month = Integer.parseInt(dateComponents[1]);
-        int year = Integer.parseInt(dateComponents[2]);
+            String[] dateComponents = date.split("/");
+            int day = Integer.parseInt(dateComponents[0]);
+            int month = Integer.parseInt(dateComponents[1]);
+            int year = Integer.parseInt(dateComponents[2]);
 
-        Calendar calendar = new Calendar.Builder().setDate(year, month - 1, day)
-                .setTimeOfDay(hour, minute, 0).build();
+            Calendar calendar = new Calendar.Builder().setDate(year, month - 1, day)
+                    .setTimeOfDay(hour, minute, 0).build();
 
-        return calendar;
+            return calendar;
+        } catch (Exception e) {
+            throw new WrongDateFormatException("Wrong date format!");
+        }
     }
 }

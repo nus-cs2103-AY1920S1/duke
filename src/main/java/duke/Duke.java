@@ -2,10 +2,15 @@ package duke;
 
 import duke.commands.Command;
 import duke.commands.CommandResult;
+
 import duke.data.TaskList;
+
 import duke.exceptions.DukeException;
+
 import duke.parser.Parser;
+
 import duke.storage.Storage;
+
 import duke.ui.Ui;
 
 /**

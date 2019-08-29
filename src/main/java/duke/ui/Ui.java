@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.lang.StringBuilder;
+
 import java.util.Scanner;
 
 /**

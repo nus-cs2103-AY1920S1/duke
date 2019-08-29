@@ -16,6 +16,7 @@ public class Event extends Task {
     /**
      * Class constructor which specifies the description of the task and the time at which the
      * event takes place.
+     *
      * @param description The description of the event.
      * @param at The date and the time at which the event occurs
      */

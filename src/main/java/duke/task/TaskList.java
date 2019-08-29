@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * This method adds the <code>task</code> into the task list.
+     *
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -28,6 +29,7 @@ public class TaskList {
 
     /**
      * This method removes the <code>task</code> from the task list.
+     *
      * @param index The zero-based index of the task to be deleted.
      * @return The task that was removed in a string format.
      * @throws DukeException If there is a problem with data processing, loading or saving.
@@ -42,6 +44,7 @@ public class TaskList {
 
     /**
      * This method returns the number of tasks currently in the task list.
+     *
      * @return The size of the task list.
      */
     public int size() {

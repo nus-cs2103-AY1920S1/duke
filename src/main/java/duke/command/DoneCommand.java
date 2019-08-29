@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
 
     /**
      * Class constructor.
+     *
      * @param doneTask The zero-based index of the task to be marked as done from the task list.
      */
     public DoneCommand(int doneTask) {

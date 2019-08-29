@@ -23,6 +23,7 @@ public class Task {
 
     /**
      * Class constructor specifying the description of the task.
+     *
      * @param description The description of the task.
      */
     public Task(String description) {
@@ -32,6 +33,7 @@ public class Task {
 
     /**
      * This method displays to the user to show whether a task is done or not.
+     *
      * @return The symbol which signifies whether the task is done or not.
      */
     public String getStatusIcon() {
@@ -51,6 +53,7 @@ public class Task {
 
     /**
      * This method tells users whether the task has been completed or not.
+     *
      * @return <code>boolean</code> telling the user whether the task was done.
      */
     public boolean isDone() { return this.isDone; }

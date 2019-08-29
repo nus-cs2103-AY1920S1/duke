@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Class constructor.
+     *
      * @param deleted The zero-based index of the task to be deleted from the task list.
      */
     public DeleteCommand(int deleted) {
@@ -30,7 +31,7 @@ public class DeleteCommand extends Command {
 
     /**
      * This method allows for the execution of the delete command which deletes the stated task from the
-     * <code>TaskList tasks</code>
+     * <code>TaskList tasks</code>.
      *
      * @param tasks The task lists which contains all the user added tasks.
      * @param ui The user interface which deals with user input and interaction.

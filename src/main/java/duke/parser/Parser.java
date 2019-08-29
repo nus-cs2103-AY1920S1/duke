@@ -26,6 +26,7 @@ public class Parser {
      * This method checks the to-do
      * tasks to ensure that the user input
      * includes the task to be added into the task list.
+     *
      * @param tasks The user's input string in separated into an array.
      * @throws DukeException If there is a problem with data processing, loading or saving.
      */

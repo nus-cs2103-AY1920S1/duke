@@ -28,6 +28,7 @@ public class Ui {
 
     /**
      * This method reads user input and returns it in a String.
+     *
      * @return The string format of user input.
      */
     public String userInput() {
@@ -36,6 +37,7 @@ public class Ui {
 
     /**
      * This method displays messages to user.
+     *
      * @param message Message toi be displayed to user.
      */
     public void printFormat(String message) {
@@ -51,6 +53,7 @@ public class Ui {
 
     /**
      * This method prints out the tasks currently in the task list.
+     *
      * @param tasks The task list.
      */
     public void printTaskList(ArrayList<Task> tasks) {
@@ -71,6 +74,7 @@ public class Ui {
 
     /**
      * This method prints all the messages for marking task as done.
+     *
      * @param task The description of the task.
      */
     public void printDone(String task) {
@@ -80,6 +84,7 @@ public class Ui {
 
     /**
      * This method prints all the tasks removal messages.
+     *
      * @param task The description of the task.
      * @param size The size of the task list.
      */
@@ -91,6 +96,7 @@ public class Ui {
 
     /**
      * This method prints all tasks adding messages.
+     *
      * @param task The description of the task.
      * @param size The size of the task list.
      */

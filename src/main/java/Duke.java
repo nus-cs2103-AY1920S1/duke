@@ -36,6 +36,7 @@ public class Duke {
      * Class constructor of <code>Duke</code> that processes user input and outputs the tasks into a data file.
      * If a data file is already created in the given file path, the data file is updated according to
      * the user's input. If file does not exist in the given file path, a new date file is created.
+     *
      * @param filePath The path of the file to be read and written.
      */
     private Duke(String filePath) {

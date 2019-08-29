@@ -21,6 +21,7 @@ public class AddCommand extends Command {
 
     /**
      * Class constructor. Enables the addition of the <code>task</code> to the task list.
+     *
      * @param task The task to be added into the task list.
      */
     public AddCommand(Task task) {
@@ -28,7 +29,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * This method allows for the execution of the add command which adds the stated task into the <code>TaskList tasks</code>
+     * This method allows for the execution of the add command which adds the stated task
+     * into the <code>TaskList tasks</code>.
+     *
      * @param tasks The task lists which contains all the user added tasks.
      * @param ui The user interface which deals with user input and interaction.
      * @param storage The storage to load and save task data into the output file.

@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Class constructor.
+     *
      * @param description The description of the task.
      * @param by The date by which the task is to be completed.
      */

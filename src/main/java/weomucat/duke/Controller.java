@@ -8,12 +8,14 @@ import weomucat.duke.command.DeadlineCommand;
 import weomucat.duke.command.DeleteCommand;
 import weomucat.duke.command.DoneCommand;
 import weomucat.duke.command.EventCommand;
+import weomucat.duke.command.FindCommand;
 import weomucat.duke.command.ListCommand;
 import weomucat.duke.command.TodoCommand;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
 import weomucat.duke.command.listener.DoneTaskCommandListener;
+import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.UnknownCommandException;
@@ -31,6 +33,7 @@ public class Controller implements UserInputListener {
   private static final String COMMAND_TODO = "todo";
   private static final String COMMAND_DELETE = "delete";
   private static final String COMMAND_DONE = "done";
+  private static final String COMMAND_FIND = "find";
   private static final String COMMAND_LIST = "list";
   private static final String COMMAND_BYE = "bye";
 
@@ -38,6 +41,7 @@ public class Controller implements UserInputListener {
   private ArrayList<AddTaskCommandListener> addTaskCommandListeners;
   private ArrayList<DeleteTaskCommandListener> deleteTaskCommandListeners;
   private ArrayList<DoneTaskCommandListener> doneTaskCommandListeners;
+  private ArrayList<FindTaskCommandListener> findTaskCommandListeners;
   private ArrayList<ListTaskCommandListener> listTaskCommandListeners;
   private ArrayList<ByeCommandListener> byeCommandListeners;
 
@@ -89,6 +93,14 @@ public class Controller implements UserInputListener {
         }
       }
     });
+    this.commands.put(COMMAND_FIND, new FindCommand() {
+      @Override
+      public void updateListeners(String keyword) {
+        for (FindTaskCommandListener listener : findTaskCommandListeners) {
+          listener.findTaskCommandUpdate(keyword);
+        }
+      }
+    });
     this.commands.put(COMMAND_LIST, new ListCommand() {
       @Override
       public void updateListeners() {
@@ -135,6 +147,16 @@ public class Controller implements UserInputListener {
    */
   public void newDoneTaskCommandListener(DoneTaskCommandListener listener) {
     this.doneTaskCommandListeners.add(listener);
+  }
+
+  /**
+   * Add a FindTaskCommandListener to the Controller. When a FindTaskCommand is received, this
+   * listener will be notified.
+   *
+   * @param listener FindTaskCommand listener
+   */
+  public void newFindTaskCommandListener(FindTaskCommandListener listener) {
+    this.findTaskCommandListeners.add(listener);
   }
 
   /**

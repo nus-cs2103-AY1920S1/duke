@@ -1,5 +1,6 @@
 package weomucat.duke;
 
+import java.util.Locale;
 import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.StorageException;
@@ -18,6 +19,7 @@ public class Duke implements ByeCommandListener {
       + "	| |_| | |_| |   <  __/\n"
       + "	|____/ \\__,_|_|\\_\\___|\n";
 
+  public static final Locale LOCALE = Locale.ENGLISH;
   public static final String DATETIME_PARSE_PATTERN = "dd/MM/yy HHmm";
   public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
 
@@ -61,6 +63,7 @@ public class Duke implements ByeCommandListener {
     this.controller.newAddTaskCommandListener(this.taskList);
     this.controller.newDeleteTaskCommandListener(this.taskList);
     this.controller.newDoneTaskCommandListener(this.taskList);
+    this.controller.newFindTaskCommandListener(this.taskList);
     this.controller.newListTaskCommandListener(this.taskList);
     this.controller.newByeCommandListener(this);
 
@@ -71,6 +74,7 @@ public class Duke implements ByeCommandListener {
     this.taskList.newAddTaskListener(this.ui);
     this.taskList.newDeleteTaskListener(this.ui);
     this.taskList.newDoneTaskListener(this.ui);
+    this.taskList.newFindTaskListener(this.ui);
     this.taskList.newListTaskListener(this.ui);
 
     // Greet user

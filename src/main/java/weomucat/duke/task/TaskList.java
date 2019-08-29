@@ -1,27 +1,32 @@
 package weomucat.duke.task;
 
+import static weomucat.duke.Duke.LOCALE;
+
 import java.util.ArrayList;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
 import weomucat.duke.command.listener.DoneTaskCommandListener;
+import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidTaskIndexException;
 import weomucat.duke.task.listener.AddTaskListener;
 import weomucat.duke.task.listener.DeleteTaskListener;
 import weomucat.duke.task.listener.DoneTaskListener;
+import weomucat.duke.task.listener.FindTaskListener;
 import weomucat.duke.task.listener.ListTaskListener;
 
 /**
  * A TaskList manages the addition, deletion, marking as done and listing of tasks.
  */
 public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListener,
-    DoneTaskCommandListener, ListTaskCommandListener {
+    DoneTaskCommandListener, FindTaskCommandListener, ListTaskCommandListener {
 
   private TaskListTasks tasks;
   private ArrayList<AddTaskListener> addTaskListeners;
   private ArrayList<DeleteTaskListener> deleteTaskListeners;
   private ArrayList<DoneTaskListener> doneTaskListeners;
+  private ArrayList<FindTaskListener> findTaskListeners;
   private ArrayList<ListTaskListener> listTaskListeners;
 
   public TaskList() {
@@ -43,6 +48,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     this.addTaskListeners = new ArrayList<>();
     this.deleteTaskListeners = new ArrayList<>();
     this.doneTaskListeners = new ArrayList<>();
+    this.findTaskListeners = new ArrayList<>();
     this.listTaskListeners = new ArrayList<>();
   }
 
@@ -73,6 +79,16 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    */
   public void newDoneTaskListener(DoneTaskListener listener) {
     this.doneTaskListeners.add(listener);
+  }
+
+  /**
+   * Add a FindTaskListener to the TaskList. When findTask is called, this listener will be
+   * notified.
+   *
+   * @param listener findTask listener
+   */
+  public void newFindTaskListener(FindTaskListener listener) {
+    this.findTaskListeners.add(listener);
   }
 
   /**
@@ -146,6 +162,29 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
+   * Searches for a keyword in all tasks. Notify listeners tasks which description matches the
+   * keyword.
+   */
+  public void findTask(String keyword) {
+    TaskListTasks result = new TaskListTasks();
+
+    // Case insensitive search
+    // Use a single locale to prevent issues with case conversion.
+    keyword = keyword.toLowerCase(LOCALE);
+    for (Task task : this.tasks) {
+      String description = task.getDescription().toLowerCase(LOCALE);
+      if (description.contains(keyword)) {
+        result.add(task);
+      }
+    }
+
+    // Update FindTaskListeners
+    for (FindTaskListener listener : findTaskListeners) {
+      listener.findTaskUpdate(result);
+    }
+  }
+
+  /**
    * Notify listeners to list tasks.
    */
   public void listTask() {
@@ -168,6 +207,11 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   @Override
   public void doneTaskCommandUpdate(int i) throws DukeException {
     doneTask(i);
+  }
+
+  @Override
+  public void findTaskCommandUpdate(String keyword) {
+    findTask(keyword);
   }
 
   @Override

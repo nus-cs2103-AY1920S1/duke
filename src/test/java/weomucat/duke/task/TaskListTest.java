@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import weomucat.duke.exception.InvalidTaskIndexException;
 import weomucat.duke.task.listener.StubAddTaskListener;
 import weomucat.duke.task.listener.StubDeleteTaskListener;
+import weomucat.duke.task.listener.StubFindTaskListener;
 
 public class TaskListTest {
 
@@ -49,18 +50,16 @@ public class TaskListTest {
   }
 
   @Test
-  public void validUsage() {
+  public void validAddUsage() {
     StubTask taskOne = new StubTask("one");
     StubTask taskTwo = new StubTask("two");
     StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
     StubAddTaskListener addTaskListener = new StubAddTaskListener();
-    StubDeleteTaskListener deleteTaskListener = new StubDeleteTaskListener();
 
     // Initialize Listeners
     taskList.newAddTaskListener(addTaskListener);
-    taskList.newDeleteTaskListener(deleteTaskListener);
 
     /* Add Tasks */
     // Expect 1 task.
@@ -89,11 +88,29 @@ public class TaskListTest {
     assertTrue(addTaskListener.getTasks().contains(taskOne));
     assertTrue(addTaskListener.getTasks().contains(taskTwo));
     assertTrue(addTaskListener.getTasks().contains(taskThree));
+  }
+
+  @Test
+  public void validDeleteUsage() {
+    StubTask taskOne = new StubTask("one");
+    StubTask taskTwo = new StubTask("two");
+    StubTask taskThree = new StubTask("three");
+
+    TaskList taskList = new TaskList();
+    StubDeleteTaskListener deleteTaskListener = new StubDeleteTaskListener();
+
+    // Initialize Listeners
+    taskList.newDeleteTaskListener(deleteTaskListener);
+
+    /* Add Tasks */
+    assertDoesNotThrow(() -> taskList.addTask(taskOne));
+    assertDoesNotThrow(() -> taskList.addTask(taskTwo));
+    assertDoesNotThrow(() -> taskList.addTask(taskThree));
 
     /* Delete Tasks */
     // Expect 2 tasks.
     assertDoesNotThrow(() -> taskList.deleteTask(0));
-    assertEquals(2, addTaskListener.getTasks().size());
+    assertEquals(2, deleteTaskListener.getTasks().size());
 
     // Validate that the tasks are correct
     assertEquals(taskOne, deleteTaskListener.getTask());
@@ -102,7 +119,7 @@ public class TaskListTest {
 
     // Expect 1 task.
     assertDoesNotThrow(() -> taskList.deleteTask(0));
-    assertEquals(1, addTaskListener.getTasks().size());
+    assertEquals(1, deleteTaskListener.getTasks().size());
 
     // Validate that the tasks are correct
     assertEquals(taskTwo, deleteTaskListener.getTask());
@@ -110,9 +127,53 @@ public class TaskListTest {
 
     // Expect 0 tasks.
     assertDoesNotThrow(() -> taskList.deleteTask(0));
-    assertEquals(0, addTaskListener.getTasks().size());
+    assertEquals(0, deleteTaskListener.getTasks().size());
 
     // Validate that the tasks are correct
     assertEquals(taskThree, deleteTaskListener.getTask());
+  }
+
+  @Test
+  public void validFindUsage() {
+    StubTask taskOne = new StubTask("one");
+    StubTask taskTwo = new StubTask("two");
+    StubTask taskThree = new StubTask("three");
+
+    TaskList taskList = new TaskList();
+    StubFindTaskListener findTaskListener = new StubFindTaskListener();
+
+    // Initialize Listeners
+    taskList.newFindTaskListener(findTaskListener);
+
+    /* Add Tasks */
+    assertDoesNotThrow(() -> taskList.addTask(taskOne));
+    assertDoesNotThrow(() -> taskList.addTask(taskTwo));
+    assertDoesNotThrow(() -> taskList.addTask(taskThree));
+
+    /* Find Tasks */
+    // Empty string should return all tasks.
+    taskList.findTask("");
+    assertTrue(findTaskListener.getTasks().contains(taskOne));
+    assertTrue(findTaskListener.getTasks().contains(taskTwo));
+    assertTrue(findTaskListener.getTasks().contains(taskThree));
+
+    // Character should return tasks with that character.
+    taskList.findTask("o");
+    assertTrue(findTaskListener.getTasks().contains(taskOne));
+    assertTrue(findTaskListener.getTasks().contains(taskTwo));
+
+    taskList.findTask("t");
+    assertTrue(findTaskListener.getTasks().contains(taskTwo));
+    assertTrue(findTaskListener.getTasks().contains(taskThree));
+
+    // Should be case insensitive.
+    taskList.findTask("One");
+    assertTrue(findTaskListener.getTasks().contains(taskOne));
+
+    taskList.findTask("tWo");
+    assertTrue(findTaskListener.getTasks().contains(taskTwo));
+
+    taskList.findTask("thREE");
+    assertTrue(findTaskListener.getTasks().contains(taskThree));
   }
 }

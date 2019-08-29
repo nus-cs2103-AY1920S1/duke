@@ -1,6 +1,3 @@
-import java.io.FileNotFoundException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,6 +9,7 @@ public class Duke {
         taskList = FileSaver.loadTask();
 
         Scanner sc = new Scanner(System.in);
+        ArrayList<Task> commandList = new ArrayList<>();
         String line = "    ____________________________________________________________\n";
         System.out.println(line +
                 "     Hello! I'm Duke\n" + //duke greeting
@@ -69,9 +67,8 @@ public class Duke {
                     } else if (command.equals("event")) {
                         String wordsAfter = sc.nextLine();
                         int pos = wordsAfter.indexOf("/");
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                        Task eTask = new Event(wordsAfter.substring(0, pos), sdf.parse(wordsAfter.substring(pos + 3)));
-                        taskList.add(eTask);
+                        Task eTask = new Event(wordsAfter.substring(0, pos), wordsAfter.substring(pos + 3));
+                        commandList.add(eTask);
                         System.out.print(line + "     Got it. I've added this task: "
                                 + "\n       " + eTask.toString() + "\n" + "     Now you have "
                                 + taskList.size() + " tasks in the list." + "\n" + line);

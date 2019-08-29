@@ -1,12 +1,12 @@
 package slave.exception;
 
 /**
- * Missing Task exception, for when task is missing from input
+ * Missing Task exception, for when task is missing from input.
  */
 public class MissingTaskException extends DukeException {
 
     /**
-     * Constructor for MissingTaskException
+     * Constructor for MissingTaskException.
      */
     public MissingTaskException() {
         super("Task is missing! Please specify the task!");

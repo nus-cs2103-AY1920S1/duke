@@ -11,15 +11,16 @@ import slave.task.Task;
 import java.util.ArrayList;
 
 /**
- * Command that searches for tasks based on user input
+ * Command that searches for tasks based on user input.
  */
 public class FindCommand extends Command {
 
     private String term;
 
     /**
-     * Constructor for FindCommand
-     * @param term term to be searched
+     * Constructor for FindCommand.
+     *
+     * @param term Term to be searched.
      */
     public FindCommand(String term) {
         this.commandType = CommandType.FIND;
@@ -27,11 +28,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * executes by searching for task with the user input term,
-     * storing into a temp arraylist and then printing it to user interface
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException throws if searched term isn't in any of the task descriptions
+     * Executes by searching for task with the user input term,
+     * storing into a temp arraylist and then printing it to user interface.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException Throws if searched term isn't in any of the task descriptions.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

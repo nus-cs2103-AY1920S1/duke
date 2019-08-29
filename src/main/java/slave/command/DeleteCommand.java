@@ -9,15 +9,16 @@ import slave.exception.TaskNotFoundException;
 import slave.task.Task;
 
 /**
- * Represents a command to delete a particular task from storage or list
+ * Represents a command to delete a particular task from storage or list.
  */
 public class DeleteCommand extends Command {
 
     private int index;
 
     /**
-     * Constructor for creating a delete command
-     * @param index index of the task to be deleted
+     * Constructor for creating a delete command.
+     *
+     * @param index Index of the task to be deleted.
      */
     public DeleteCommand(int index) {
         this.commandType = CommandType.DELETE;
@@ -25,10 +26,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * executes by deleting a task from storage and taskList
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException for error in retrieving task from list due to invalid index
+     * Executes by deleting a task from storage and taskList.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException For error in retrieving task from list due to invalid index.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

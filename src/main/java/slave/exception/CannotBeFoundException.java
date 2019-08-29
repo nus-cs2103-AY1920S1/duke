@@ -1,13 +1,14 @@
 package slave.exception;
 
 /**
- * Represents an exception where the term cannot be found in the descriptions of any task in the list
+ * Represents an exception where the term cannot be found in the descriptions of any task in the list.
  */
 public class CannotBeFoundException extends DukeException {
 
     /**
-     * Constructor for CannotBeFoundException
-     * @param term term that was searched and cannot be found
+     * Constructor for CannotBeFoundException.
+     *
+     * @param term Term that was searched and cannot be found.
      */
     public CannotBeFoundException(String term){
         super(String.format("%s cannot be found!", term));

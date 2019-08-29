@@ -22,23 +22,25 @@ import java.util.List;
 import java.nio.file.Files;
 
 /**
- * Storage class that writes and loads data from local .txt file
+ * Storage class that writes and loads data from local .txt file.
  */
 public class Storage{
 
     private File file;
 
     /**
-     * Constructor that initialises a File object
-     * @param filePath filePath of .txt file to write/load
+     * Constructor that initialises a File object.
+     *
+     * @param filePath FilePath of .txt file to write/load.
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
     /**
-     * Clears storage of data
-     * @throws NoStorageFileDetectedException storagefile not found
+     * Clears storage of data.
+     *
+     * @throws NoStorageFileDetectedException When storage file not found.
      */
     void clearStorage() throws NoStorageFileDetectedException {
         try {
@@ -50,9 +52,10 @@ public class Storage{
     }
 
     /**
-     * Method which loads tasks from .txt file
-     * @return An arraylist of tasks parsed from .txt file
-     * @throws DukeException Throws if file cannot be found or input went wrong
+     * Loads tasks from .txt file.
+     *
+     * @return An ArrayList of tasks parsed from .txt file.
+     * @throws DukeException Throws if file cannot be found or input went wrong.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList;
@@ -71,9 +74,10 @@ public class Storage{
     }
 
     /**
-     * Refreshes storage and updates list of tasks to the stored local .txt file
-     * @param taskList current task list
-     * @throws DukeException throws if file cannot be found
+     * Refreshes storage and updates list of tasks to the stored local .txt file.
+     *
+     * @param taskList Current task list.
+     * @throws DukeException Throws if file cannot be found.
      */
     void refreshStorage(ArrayList<Task> taskList) throws DukeException {
         try {
@@ -88,9 +92,10 @@ public class Storage{
     }
 
     /**
-     * Method to encode task and add it to .txt file
-     * @param task task to store in .txt file
-     * @throws DukeException throws if input went wrong in writing file
+     * Encodes task and add it to .txt file.
+     *
+     * @param task Task to store in .txt file.
+     * @throws DukeException Throws if input went wrong in writing file.
      */
 
     void addTask(Task task) throws DukeException {
@@ -129,12 +134,13 @@ public class Storage{
     }
 
     /**
-     * Method which parses the line from local storage .txt file
-     * to a task to be added into current program's taskList
-     * @param line line to parse
-     * @param index current line of file
-     * @return Task that has been parsed
-     * @throws DukeException throws error in reading file
+     * Parses the line from local storage .txt file
+     * to a task to be added into current program's taskList.
+     *
+     * @param line Line to parse.
+     * @param index Current line of file.
+     * @return Task that has been parsed.
+     * @throws DukeException Throws error in reading file.
      */
 
     private Task formatFileToTask(String line, int index) throws DukeException {

@@ -4,7 +4,7 @@ import slave.exception.DukeException;
 import slave.exception.InvalidDateException;
 
 /**
- * Date object that represents a DD/MM/YYYY HHMM format
+ * Date object that represents a DD/MM/YYYY HHMM format.
  */
 public class Date {
 
@@ -17,7 +17,7 @@ public class Date {
     private int year;
 
     /**
-     * Helper Arrays for suffixes and month for each day or hour or month, corresponds to index
+     * Helper Arrays for suffixes and month for each day or hour or month, corresponds to index.
      */
     private static String[] timeSuffixes = {"am", "am", "am", "am", "am", "am", "am", "am", "am", "am", "am", "am",
             "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm"};
@@ -34,10 +34,11 @@ public class Date {
             "June", "July", "August", "September", "October", "November", "December" };
 
     /**
-     * Constructor to build a Date object
-     * @param dateFormat Takes in date in the form DD/MM/YYYY
-     * @param time Takes in time in the form HHMM
-     * @throws DukeException If date / time given is invalid and cannot be represented properly
+     * Constructor to build a Date object.
+     *
+     * @param dateFormat Takes in date in the form DD/MM/YYYY.
+     * @param time Takes in time in the form HHMM.
+     * @throws DukeException If date / time given is invalid and cannot be represented properly.
      */
     public Date(String dateFormat, String time) throws DukeException {
         this.dateFormat = dateFormat;
@@ -46,8 +47,9 @@ public class Date {
     }
 
     /**
-     * To format the date
-     * @throws DukeException throws if the date / time given is invalid
+     * Formats the date.
+     *
+     * @throws DukeException Throws if the date / time given is invalid.
      */
     private void format() throws DukeException {
         try {
@@ -69,9 +71,10 @@ public class Date {
     }
 
     /**
-     * converts "DD/MM/YYYY HHMM" to the form "Day of Month Year, 12H-Time"
-     * @return String in the appropriate format for date
-     * @throws DukeException throws if date is invalid
+     * Converts "DD/MM/YYYY HHMM" to the form "Day of Month Year, 12H-Time".
+     *
+     * @return String in the appropriate format for date.
+     * @throws DukeException Throws if date is invalid.
      */
     public String convertToString() throws DukeException {
         String result;

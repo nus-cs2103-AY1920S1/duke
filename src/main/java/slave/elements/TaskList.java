@@ -7,7 +7,7 @@ import slave.task.Task;
 import java.util.ArrayList;
 
 /**
- * Class which contains an list of tasks and methods to add/remove/set
+ * Class which contains an list of tasks and methods to add/remove/set.
  */
 public class TaskList {
 
@@ -15,8 +15,9 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Constructor to initialise TaskList
-     * @param storage Storage class where data is stored
+     * Constructor to initialise TaskList.
+     *
+     * @param storage Storage class where data is stored.
      */
     public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
@@ -24,9 +25,10 @@ public class TaskList {
     }
 
     /**
-     * Constructor to initialise TaskList with a given list
-     * @param list list to initialise with
-     * @param storage Storage class where data is stored
+     * Constructor to initialise TaskList with a given list.
+     *
+     * @param list List to initialise with.
+     * @param storage Storage class where data is stored.
      */
     public TaskList(ArrayList<Task> list, Storage storage) {
         this.taskList = list;
@@ -34,9 +36,10 @@ public class TaskList {
     }
 
     /**
-     * Adds task to list
-     * @param task Task to be added
-     * @throws DukeException throws when there's error in adding task to storage
+     * Adds task to list.
+     *
+     * @param task Task to be added.
+     * @throws DukeException Throws when there's error in adding task to storage.
      */
     public void addToList(Task task) throws DukeException {
         this.taskList.add(task);
@@ -44,26 +47,29 @@ public class TaskList {
     }
 
     /**
-     * Getter method for list
-     * @return An arraylist of tasks
+     * Gets current list of tasks.
+     *
+     * @return Current ArrayList of tasks.
      */
     public ArrayList<Task> getList() {
         return this.taskList;
     }
 
     /**
-     * Get task from list by index
-     * @param index index of task to be retrieved
-     * @return Task of the corresponding index
+     * Gets task from list by index.
+     *
+     * @param index Index of task to be retrieved.
+     * @return Task of the corresponding index.
      */
     public Task getTaskByIndex(int index) {
         return this.taskList.get(index - 1);
     }
 
     /**
-     * Removes task from list and storage
-     * @param index index of task to be removed
-     * @throws DukeException Throws when there is error in removing task from storage
+     * Removes task from list and storage.
+     *
+     * @param index Index of task to be removed.
+     * @throws DukeException Throws when there is error in removing task from storage.
      */
     public void removeFromList(int index) throws DukeException {
         this.taskList.remove(index - 1);
@@ -76,9 +82,10 @@ public class TaskList {
     }
 
     /**
-     * Sets task of input index to done
-     * @param index Task to be set as done
-     * @throws DukeException throws when there is error in setting task done in storage
+     * Sets task of input index to done.
+     *
+     * @param index Task to be set as done.
+     * @throws DukeException Throws when there is error in setting task done in storage.
      */
     public void setDoneInList(int index) throws DukeException {
         this.taskList.get(index - 1).setDone();
@@ -86,16 +93,18 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks in current list
-     * @return number of tasks in current list
+     * Returns the number of tasks in current list.
+     *
+     * @return Number of tasks in current list.
      */
     public int getSize(){
         return this.taskList.size();
     }
 
     /**
-     * Clears and wipes list and storage of tasks
-     * @throws DukeException throws if storage cannot be wiped
+     * Clears and wipes list and storage of tasks.
+     *
+     * @throws DukeException Throws if storage cannot be wiped.
      */
     public void clearList() throws DukeException {
         this.taskList.clear();
@@ -103,8 +112,9 @@ public class TaskList {
     }
 
     /**
-     * Reorders index of tasks accordingly after deletion/removal, done by decrementing by 1
-     * @param index index to start reordering
+     * Reorders index of tasks accordingly after deletion/removal, done by decrementing by 1.
+     *
+     * @param index Index to start reordering.
      */
     private void reorderIndex(int index) {
         if (this.taskList.size() == 0){

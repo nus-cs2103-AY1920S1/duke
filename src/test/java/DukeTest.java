@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,13 +10,14 @@ import slave.elements.Parser;
 import slave.exception.*;
 
 /**
- * Test method for Duke
+ * Test method for Duke.
  */
 class DukeTest {
 
     /**
-     * Test if the date has been converted properly as intended
-     * @throws DukeException for invalid dates
+     * Tests if the date has been converted properly as intended.
+     *
+     * @throws DukeException For invalid dates.
      */
     @Test
     void testDate() throws DukeException {
@@ -24,8 +26,9 @@ class DukeTest {
     }
 
     /**
-     * Test if the commands return the appropriate command type
-     * @throws DukeException any exception that is thrown from doing any valid commands
+     * Tests if the commands return the appropriate command type.
+     *
+     * @throws DukeException Any exception that is thrown from doing any valid commands.
      */
     @Test
     void testCommands() throws DukeException {
@@ -50,8 +53,9 @@ class DukeTest {
     }
 
     /**
-     * Test if the correct exceptions are thrown for invalid inputs
-     * @throws DukeException any exceptions that are thrown from doing any invalid commands
+     * Tests if the correct exceptions are thrown for invalid inputs
+     *
+     * @throws DukeException Any exceptions that are thrown from doing any invalid commands.
      */
     @Test
     void testExceptions() throws DukeException {

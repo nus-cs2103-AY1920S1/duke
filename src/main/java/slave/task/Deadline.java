@@ -1,7 +1,7 @@
 package slave.task;
 
 /**
- * Class representing a Deadline task
+ * Class representing a Deadline task.
  */
 public class Deadline extends Task {
 
@@ -9,10 +9,11 @@ public class Deadline extends Task {
     private String by;
 
     /**
-     * Constructor for Deadline task
-     * @param description description of deadline
-     * @param id id of deadline task
-     * @param by deadline date
+     * Constructor for Deadline task.
+     *
+     * @param description Description of deadline.
+     * @param id Id of deadline task.
+     * @param by Deadline date.
      */
     public Deadline(String description, int id, String by) {
         super(description, id);
@@ -21,8 +22,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * getter for date of deadline task
-     * @return date of deadline task
+     * Gets date of deadline task.
+     *
+     * @return date of deadline task.
      */
     @Override
     public String getDate() {
@@ -30,8 +32,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts deadline task to an appropriate String representation
-     * @return formatted string of deadline task to be printed
+     * Converts deadline task to an appropriate String representation.
+     *
+     * @return Formatted string of deadline task to be printed.
      */
     @Override
     public String toString() {

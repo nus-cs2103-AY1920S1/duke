@@ -9,7 +9,7 @@ import slave.exception.DukeException;
 import slave.task.Deadline;
 
 /**
- * Represents a command which adds a deadline into storage and task list
+ * Represents a command which adds a deadline into storage and task list.
  */
 public class AddDeadlineCommand extends Command {
 
@@ -17,9 +17,10 @@ public class AddDeadlineCommand extends Command {
     private String date;
 
     /**
-     * Constructor (date doesn't fit the DD/MM/YYYY HHMM format)
-     * @param task deadline description
-     * @param date date description
+     * Constructor (date doesn't fit the DD/MM/YYYY HHMM format).
+     *
+     * @param task Deadline description.
+     * @param date Date description.
      */
     public AddDeadlineCommand(String task, String date) {
         this.commandType = CommandType.ADDDEADLINE;
@@ -28,10 +29,11 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Constructor (date fits into DD/MM/YYYY HHMM format)
-     * @param task task description
-     * @param date date description
-     * @throws DukeException throws invalid date exception of DD/MM/YYYY HHMM format
+     * Constructor (date fits into DD/MM/YYYY HHMM format).
+     *
+     * @param task Task description
+     * @param date Date description
+     * @throws DukeException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
     public AddDeadlineCommand(String task, Date date) throws DukeException {
         this.commandType = CommandType.ADDDEADLINE;
@@ -40,10 +42,11 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * executes the command by adding deadline task to list and print to user
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException for error in adding to tasklist
+     * Executes the command by adding deadline task to list and print to user.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException For error in adding to taskList.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

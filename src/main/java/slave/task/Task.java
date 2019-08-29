@@ -11,9 +11,10 @@ public abstract class Task {
     TaskType type;
 
     /**
-     * Constructor for task
-     * @param description task description
-     * @param id task id
+     * Constructor for task.
+     *
+     * @param description Task description.
+     * @param id Task id.
      */
     public Task(String description, int id) {
         this.description = description;
@@ -22,70 +23,73 @@ public abstract class Task {
     }
 
     /**
-     * Decrement id of task
+     * Decrements id of task.
      */
     public void decrementId() {
         this.id--;
     }
 
     /**
-     * getter method for task id
-     * @return task id
+     * Gets task id.
+     *
+     * @return Task id.
      */
     public int getId() {
         return this.id;
     }
 
     /**
-     * getter method for task type
-     * @return task type
+     * Ges task type.
+     *
+     * @return Task type.
      */
     public TaskType getType() {
         return this.type;
     }
 
     /**
-     * getter method for task description
-     * @return task description
+     * Gets task description.
+     * @return Task description.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * getter method for task date
-     * @return task date
+     * Gets task date.
+     * @return Task date.
      */
     public String getDate() {
         return "";
     }
 
     /**
-     * getter method for appropriate status icon to represent whether a task has been done
-     * @return Corresponding status icon
+     * Gets appropriate status icon to represent whether a task has been done.
+     * @return Corresponding status icon.
      */
     public String getStatusIcon() {
         return (isDone ? "Done" : "X");
     }
 
     /**
-     * getter method for whether task is done
-     * @return boolean value of whether a task is done
+     * Gets a boolean value on whether task is done.
+     * @return Boolean value of whether a task is done.
      */
     public boolean getIsDone(){
         return this.isDone;
     }
 
     /**
-     * setter method for task to be done
+     * Sets task to be done.
      */
     public void setDone() {
         this.isDone = true;
     }
 
     /**
-     * Converts task to an appropriate String representation with the status
-     * @return formatted string
+     * Converts task to an appropriate String representation with the status.
+     *
+     * @return Formatted string.
      */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

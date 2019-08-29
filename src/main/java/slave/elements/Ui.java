@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * User Interface that prints to user
+ * User Interface that prints to user.
  */
 public class Ui {
 
     private Scanner scanner = new Scanner(System.in);
 
     /**
-     * Prints welcome Message on application start-up
+     * Prints welcome Message on application start-up.
      */
     public void showWelcomeMessage() {
         String message = "Hello! I'm Slave! Your very own productivity application.\n" +
@@ -26,7 +26,7 @@ public class Ui {
     }
 
     /**
-     * Displays goodbye message when exiting program
+     * Displays goodbye message when exiting program.
      */
     public void showByeMessage() {
         String message = "Bye! Thanks for using me! Will be right here when you need me.";
@@ -34,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * Displays help message when prompted
+     * Displays help message when prompted.
      */
     public void showHelpMessage() {
         String message = "Commands:\n" +
@@ -52,23 +52,25 @@ public class Ui {
     }
 
     /**
-     * Prints error message to the user
-     * @param e Error to be broadcasted
+     * Prints error message to the user.
+     *
+     * @param e Error to be printed.
      */
-    public void showErrorMessage(DukeException e){
+    public void showErrorMessage(DukeException e) {
         System.out.println(Formatter.formatMessage(e.getMessage()));
     }
 
     /**
-     * Read input from user
-     * @return returns user input
+     * Reads input from user
+     *
+     * @return User input.
      */
-    public String readCommand(){
+    public String readCommand() {
         return scanner.nextLine();
     }
 
     /**
-     * prints clear command message
+     * Prints clear command message.
      */
     public void printClearCommand() {
         Formatter.printLine();
@@ -77,9 +79,10 @@ public class Ui {
     }
 
     /**
-     * prints add deadline command
-     * @param deadlineTask deadline task to be added
-     * @param taskList current task list
+     * Prints add deadline command.
+     *
+     * @param deadlineTask Deadline task to be added.
+     * @param taskList Current task list.
      */
     public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList) {
         Formatter.printLine();
@@ -90,9 +93,10 @@ public class Ui {
     }
 
     /**
-     * prints add event command
-     * @param eventTask event task to be added
-     * @param taskList current task list
+     * Prints add event command.
+     *
+     * @param eventTask Event task to be added.
+     * @param taskList Current task list.
      */
     public void printAddEventCommand(Event eventTask, TaskList taskList) {
         Formatter.printLine();
@@ -104,11 +108,11 @@ public class Ui {
 
 
     /**
-     * prints add to-do command
-     * @param toDoTask to-do task to be added
-     * @param taskList current task list
+     * Prints add to-do command.
+     *
+     * @param toDoTask To-do task to be added.
+     * @param taskList Current task list.
      */
-
     public void printAddToDoCommand(ToDo toDoTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
@@ -118,9 +122,10 @@ public class Ui {
     }
 
     /**
-     * prints delete command
-     * @param toRemove task to be removed
-     * @param taskList current task list
+     * Prints delete command.
+     *
+     * @param toRemove Task to be removed.
+     * @param taskList Current task list.
      */
     public void printDeleteCommand(Task toRemove, TaskList taskList){
         Formatter.printLine();
@@ -131,8 +136,9 @@ public class Ui {
     }
 
     /**
-     * prints done command
-     * @param task task to be set as done
+     * Prints done command.
+     *
+     * @param task Task to be set as done.
      */
     public void printDoneCommand(Task task) {
         Formatter.printLine();
@@ -142,8 +148,9 @@ public class Ui {
     }
 
     /**
-     * prints a list of current tasks
-     * @param taskList current task list
+     * Prints a list of current tasks.
+     *
+     * @param taskList Current task list.
      */
     public void printListCommand(TaskList taskList) {
         Formatter.printLine();
@@ -155,8 +162,9 @@ public class Ui {
     }
 
     /**
-     * prints a list of matching results
-     * @param findList list of searched entries
+     * Prints a list of matching results.
+     *
+     * @param findList List of searched entries.
      */
     public void printFindCommand(ArrayList<Task> findList) {
         Formatter.printLine();

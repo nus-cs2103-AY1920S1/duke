@@ -1,7 +1,7 @@
 package slave.task;
 
 /**
- * Class representing a Event task
+ * Class representing a Event task.
  */
 public class Event extends Task {
 
@@ -9,10 +9,11 @@ public class Event extends Task {
     private String at;
 
     /**
-     * Constructor for Event task
-     * @param description description of event
-     * @param id id of event task
-     * @param at event date
+     * Constructor for Event task.
+     *
+     * @param description Description of event.
+     * @param id Id of event task.
+     * @param at Event date.
      */
     public Event(String description, int id, String at) {
         super(description, id);
@@ -21,8 +22,9 @@ public class Event extends Task {
     }
 
     /**
-     * getter for date of event task
-     * @return date of event task
+     * Gets date of event task.
+     *
+     * @return Date of event task.
      */
     @Override
     public String getDate() {
@@ -30,8 +32,9 @@ public class Event extends Task {
     }
 
     /**
-     * Converts event task to an appropriate String representation
-     * @return formatted string of event task to be printed
+     * Converts event task to an appropriate String representation.
+     *
+     * @return Formatted string of event task to be printed.
      */
     @Override
     public String toString() {

@@ -8,15 +8,16 @@ import slave.exception.MissingDescriptionException;
 import slave.exception.MissingTaskException;
 
 /**
- * A parser to take in input by user and returns the appropriate command
+ * A parser to take in input by user and returns the appropriate command,
  */
 public class Parser {
 
     /**
-     * static method which parses input by user and returns the corresponding command object
-     * @param fullCommand input by user
-     * @return Corresponding command based on user input
-     * @throws DukeException for invalid input
+     * Static method which parses input by user and returns the corresponding command object.
+     *
+     * @param fullCommand Input by user.
+     * @return Corresponding command based on user input.
+     * @throws DukeException For invalid input.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split(" ");
@@ -71,9 +72,10 @@ public class Parser {
     }
 
     /**
-     * Checks if it is a proper date in the form DD/MM/YYYY HHMM
-     * @param dateDescription date description
-     * @return true or false depending on the validity of the date description in that form
+     * Checks if it is a proper date in the form DD/MM/YYYY HHMM.
+     *
+     * @param dateDescription Date description.
+     * @return True or false depending on the validity of the date description in that form.
      */
     private static boolean isDate(String dateDescription) {
         String[] dateSplit = dateDescription.split(" ");
@@ -87,11 +89,12 @@ public class Parser {
 
 
     /**
-     * check validity of the deadline/event commands
-     * @param check what command to check
-     * @param input input from user
-     * @param tokens input split by space
-     * @throws DukeException throws exception if date or description is missing
+     * Check validity of the deadline/event commands.
+     *
+     * @param check What command to check.
+     * @param input Input from user.
+     * @param tokens Input split by space.
+     * @throws DukeException Throws exception if date or description is missing.
      */
     private static void checkValidity(String check, String input, String[] tokens) throws DukeException {
         switch(check) {

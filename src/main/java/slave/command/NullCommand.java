@@ -7,15 +7,16 @@ import slave.exception.DukeException;
 import slave.exception.InvalidCommandException;
 
 /**
- * A command representing null
+ * A command representing null.
  */
 public class NullCommand extends Command {
 
 
     private String command;
     /**
-     * Constructor for null command
-     * @param command Command that is illegal / invalid
+     * Constructor for null command.
+     *
+     * @param command Command that is illegal or invalid.
      */
     public NullCommand(String command) {
         this.commandType = CommandType.NULL;
@@ -23,11 +24,11 @@ public class NullCommand extends Command {
     }
 
     /**
-     * executes by throwing an exception which tells
-     * the user that the input command is not valid
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException for invalid commands by user
+     * Executes by throwing an exception which tells the user that the input command is not valid.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException For invalid commands by user.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

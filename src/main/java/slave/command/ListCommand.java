@@ -16,9 +16,10 @@ public class ListCommand extends Command {
     }
 
     /**
-     * executes by having the user interface print to the console all the tasks in the list
-     * @param taskList list containing current tasks
-     * @param ui user interface
+     * Executes by having the user interface print to the console all the tasks in the list.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {

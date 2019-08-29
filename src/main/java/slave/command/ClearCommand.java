@@ -6,22 +6,23 @@ import slave.elements.Ui;
 import slave.exception.DukeException;
 
 /**
- * Command that clears storage and tasklist
+ * Command that clears storage and taskList.
  */
 public class ClearCommand extends Command {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public ClearCommand() {
         this.commandType = CommandType.CLEAR;
     }
 
     /**
-     * executes command by clearing list and storage and printing a clear message to the user
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException if list is not found
+     * Executes command by clearing list and storage and printing a clear message to the user.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException If list is not found.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

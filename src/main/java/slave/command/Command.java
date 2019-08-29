@@ -6,25 +6,27 @@ import slave.elements.Ui;
 import slave.exception.DukeException;
 
 /**
- * abstract class Command that represents an action by the user
+ * Abstract class Command that represents an action by the user.
  */
 public abstract class Command {
 
     CommandType commandType;
 
     /**
-     * getter for type of command
-     * @return type of command
+     * Gets type of command.
+     *
+     * @return Type of command.
      */
     public CommandType getCommandType() {
         return commandType;
     }
 
     /**
+     * Abstract method execute which are actions the command should do.
      *
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException throws exception with error message in case anything goes wrong
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException Throws exception with error message in case anything goes wrong.
      */
     public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
 }

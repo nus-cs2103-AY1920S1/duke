@@ -9,18 +9,18 @@ import slave.exception.DukeException;
 import slave.task.Event;
 
 /**
- * Represents a command which adds an event into storage and task list
+ * Represents a command which adds an event into storage and task list.
  */
-
 public class AddEventCommand extends Command {
 
     private String task;
     private String date;
 
     /**
-     * Constructor (date doesn't fit the DD/MM/YYYY HHMM format)
-     * @param task event description
-     * @param date date description
+     * Constructor (date doesn't fit the DD/MM/YYYY HHMM format).
+     *
+     * @param task Event description
+     * @param date Date description
      */
     public AddEventCommand(String task, String date) {
         this.commandType = CommandType.ADDEVENT;
@@ -29,10 +29,11 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * Constructor (date fits into DD/MM/YYYY HHMM format)
-     * @param task event description
-     * @param date date description
-     * @throws DukeException throws invalid date exception of DD/MM/YYYY HHMM format
+     * Constructor (date fits into DD/MM/YYYY HHMM format).
+     *
+     * @param task Event description.
+     * @param date Date description.
+     * @throws DukeException Throws invalid date exception of DD/MM/YYYY HHMM format.
      */
     public AddEventCommand(String task, Date date) throws DukeException {
         this.commandType = CommandType.ADDEVENT;
@@ -41,10 +42,11 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * executes the command by adding event task to list and print to user
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException for error in adding to tasklist
+     * Executes the command by adding event task to list and print to user.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
+     * @throws DukeException For error in adding to taskList.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

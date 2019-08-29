@@ -4,21 +4,22 @@ import slave.elements.TaskList;
 import slave.elements.Ui;
 
 /**
- * A command which represents exiting the Slave program
+ * A command which represents exiting the Slave program.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Constructor for exit command
+     * Constructor for exit command.
      */
     public ExitCommand() {
         this.commandType = CommandType.EXIT;
     }
 
     /**
-     * executes by showing the goodbye message
-     * @param taskList list containing current tasks
-     * @param ui user interface
+     * Executes by showing the goodbye message.
+     *
+     * @param taskList List containing current tasks.
+     * @param ui User interface.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {

@@ -5,11 +5,16 @@ import duke.command.Command;
 import duke.parser.Parser;
 import duke.exception.DukeException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke Class.
  * Represents the main driver class of Duke.
  */
-public class Duke {
+public class Duke extends Application {
     /** Storage to data file access and writes.. */
     private Storage storage;
     /** TaskList to store user input. */
@@ -58,5 +63,13 @@ public class Duke {
             }
         }
         ui.close();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+        stage.setScene(scene);
+        stage.show();
     }
 }

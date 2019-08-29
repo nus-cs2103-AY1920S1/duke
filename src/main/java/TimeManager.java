@@ -2,8 +2,18 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Contains utility functions for managing LocalDataTime object.
+ */
 public class TimeManager {
 
+    /**
+     * Creates a LocalDateTime object form its String representation.
+     *
+     * @param s String representation of the LocalDateTime object.
+     * @return LocalDateTime object represented by the input String.
+     * @throws IllegalTimeFormatException If the input String is not convertible to a LocalDateTime object.
+     */
     public LocalDateTime getTime(String s) throws IllegalTimeFormatException{
         String[] dateTime = s.trim().split(" ");
         String[] date = dateTime[0].split("/");
@@ -60,6 +70,12 @@ public class TimeManager {
         }
     }
 
+    /**
+     * Output the String representation of the date and time stored in the LocalDateTime object in desired format.
+     *
+     * @param dt LocalDateTime object to be printed.
+     * @return Formatted String representation of the date and time stored in the LocalDateTime object.
+     */
     public String printTime(LocalDateTime dt) {
         DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
         return dt.format(customFormatter);

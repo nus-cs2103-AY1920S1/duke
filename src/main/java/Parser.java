@@ -4,10 +4,18 @@ import java.util.InputMismatchException;
 
 import java.util.Scanner;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
     private Sheet sheet;
 
+    /**
+     * Takes in user command and handle accordingly.
+     *
+     * @param sheet A task list to record user's input and changes.
+     */
     public void start(Sheet sheet) {
 
         Scanner sc = new Scanner(System.in);

@@ -89,6 +89,7 @@ public class Parser {
      * Reads Strings (from a local save file) as Tasks. These tasks retain information of
      * all user tasks when the program last exits.
      * @param stringTask The String to be parsed into a Task.
+     * @param taskType The type of task to be parsed into.
      * @return A Task in the user's task list when the program last exits. 
      */
     public String convertStringToTime(String stringDate, String taskType) throws DateTimeParseException {
@@ -178,7 +179,7 @@ public class Parser {
                 errorMessage = "The command \"list\" should not have anything after!\n"
                         + Ui.spaces(5) + "Please remove any additional words!";
             } else {
-                taskList.listAllTasks();
+                taskList.listAllTasks("list");
             }
             break;
         case "bye":
@@ -196,14 +197,11 @@ public class Parser {
             if (userInput.hasNextInt()) {
                 taskNumberDone = userInput.nextInt();
 
-                if (taskNumberDone <= 0) {
-                    errorMessage = String.format("%sNumber cannot be negative!", Ui.spaces(5));
-                } else if (taskList.size() == 0) {
-                    errorMessage = String.format("%sYou don't have any tasks yet!", Ui.spaces(5));
-                } else if (taskNumberDone > taskList.size()) {
-                    errorMessage = String.format("%sYou don't have that many tasks!", Ui.spaces(5));
+                if (taskList.temporarySearchList != null) {
+                    taskList.markTaskAsDone(taskNumberDone, true);
+                    taskList.temporarySearchList = null;
                 } else {
-                    taskList.markTaskAsDone(taskNumberDone - 1);
+                    taskList.markTaskAsDone(taskNumberDone, false);
                 }
             }
             break;
@@ -212,7 +210,22 @@ public class Parser {
 
             if (userInput.hasNextInt()) {
                 taskNumberDelete = userInput.nextInt();
-                taskList.delete(taskNumberDelete);
+
+                if (taskList.temporarySearchList != null) {
+                    taskList.delete(taskNumberDelete, true);
+                    taskList.temporarySearchList = null;
+                } else {
+                    taskList.delete(taskNumberDelete, false);
+                }
+
+            }
+            break;
+        case "find":
+            if (userInput.hasNext()) {
+                String keyword = userInput.nextLine().strip();
+                taskList.find(keyword);
+            } else {
+                errorMessage = "I need a keyword to look for matching tasks!";
             }
             break;
         case "todo":

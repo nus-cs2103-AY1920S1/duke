@@ -42,7 +42,7 @@ public class Duke {
             ui.welcomeBack();
 
             try {
-                taskList.listAllTasks();
+                taskList.listAllTasks("list");
             } catch (DukeException e) {
                 exceptionHandler.showDukeError(e);
             }

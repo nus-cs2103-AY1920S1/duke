@@ -1,9 +1,13 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Duke {
     public static ArrayList<Task> items = new ArrayList<>();
     public static int counter = 0;
+    public static String filePath = "../data/duke.txt";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -28,6 +32,34 @@ public class Duke {
         sc.close();
     }
 
+    public static void save() {
+        try {
+            File data = new File(filePath);
+            if (!data.getParentFile().exists()) {
+                data.getParentFile().mkdirs();
+            }
+
+            if (!data.exists()) {
+                data.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(data, false);
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < items.size(); i++) {
+                Task task = items.get(i);
+                sb.append(task.getFileLine());
+                sb.append('\n');
+            }
+
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+    }
+
     public static void handleInput(String next) throws DukeException {
         if (next.equals("list")) {
             StringBuilder sb = new StringBuilder();
@@ -45,6 +77,7 @@ public class Duke {
             task.setDone(true);
             String output = "Nice! I've marked this task as done:\n  " + task;
             System.out.println(output);
+            save();
         } else if (next.startsWith("delete")) {
             String[] parts = next.split(" ");
             int num = Integer.parseInt(parts[1]);
@@ -53,6 +86,7 @@ public class Duke {
             String output = "Noted. I've removed this task:\n  " + removed;
             output += "\nNow you have " + counter + " tasks in the list.";
             System.out.println(output);
+            save();
         } else {
             if (next.startsWith("todo")) {
                 if (next.length() < 6) {
@@ -74,6 +108,7 @@ public class Duke {
             output += "\nNow you have " + (counter + 1) + " tasks in the list.";
             System.out.println(output);
             counter++;
+            save();
         }
     }
 }

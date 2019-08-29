@@ -9,6 +9,10 @@ public class Events extends Task {
     }
 
     @Override
+    public String formatString() {
+        return "E-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.event[1];
+    }
+    @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + event[1] + ")";
     }

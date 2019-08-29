@@ -3,6 +3,11 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Initiates the main execution of the program.
+     *
+     * @param filePath The location of storage.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
@@ -14,6 +19,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

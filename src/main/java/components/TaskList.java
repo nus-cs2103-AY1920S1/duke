@@ -68,9 +68,29 @@ public class TaskList {
             return;
         }
         Ui.print("Here are the tasks in your list:");
+        printListOnly();
+
+    }
+
+    private void printListOnly() {
         int i = 0;
         for (Task t : arr) {
             Ui.print(++i + "." + t);
         }
+    }
+
+    public void findTaskByKeywordAndPrintList(String str) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task task : arr) {
+            if (task.getDescription().contains(str)) {
+                temp.add(task);
+            }
+        }
+        if (temp.size() == 0) {
+            Ui.print("I could not find any matching tasks with this keyword: " + str);
+            return;
+        }
+        Ui.print("Here are the matching tasks in your list:");
+        printListOnly();
     }
 }

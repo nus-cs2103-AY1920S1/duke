@@ -23,6 +23,13 @@ public class Parser {
         Scanner sc = new Scanner(fullCommand);
         String firstWord = sc.next();
         switch (firstWord) {
+            case "find":
+                try {
+                    String keyword = sc.nextLine();
+                    return new FindTasksByKeywordCommand(keyword);
+                } catch (NoSuchElementException e) {
+                    return new PrintUserInputErrorCommand("OOPS!!! You must give me a keyword to perform a search.");
+                }
             case "todo":
                 try {
                     String taskName = sc.nextLine();

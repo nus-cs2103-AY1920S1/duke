@@ -83,10 +83,19 @@ public class Duke {
         return true;
     }
 
-    public static void main(String[] args) {
-        greet();
+    /**
+     * Initializes task manager with data from harddisk
+     * 
+     * @return an initialized Task Manager
+     */
+    private static TaskManager initializeTaskManager() {
+        return new TaskManager();
+    }
 
-        TaskManager taskManager = new TaskManager();
+    public static void main(String[] args) {
+        TaskManager taskManager = initializeTaskManager();
+
+        greet();
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {

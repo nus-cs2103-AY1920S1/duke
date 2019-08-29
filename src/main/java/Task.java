@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Task {
+public class Task implements Serializable {
     protected String type;
     protected String description;
     protected String date;

@@ -8,6 +8,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getAscii() {
+        return "T | " + super.getAscii();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

@@ -11,6 +11,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getAscii() {
+        return "D | " + super.getAscii() + " | " + by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

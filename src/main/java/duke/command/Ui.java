@@ -26,11 +26,15 @@ public class Ui {
     }
 
     public void printList(ArrayList<Task> list) {
-        System.out.println("Here are the tasks in your list:");
-        IntStream.rangeClosed(1, list.size()).forEach(x -> {
-            Task task = list.get(x - 1);
-            System.out.println(x + "." + task.toString());
-        });
+        if (list.isEmpty()) {
+            System.out.println("No task found");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            IntStream.rangeClosed(1, list.size()).forEach(x -> {
+                Task task = list.get(x - 1);
+                System.out.println(x + "." + task.toString());
+            });
+        }
     }
 
     public void printTaskDone(Task task) {

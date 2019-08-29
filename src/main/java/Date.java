@@ -1,5 +1,14 @@
+/**
+ * Validates date-time formats.
+ */
 public class Date {
 
+    /**
+     * Verifies date-time format of a Deadline Task.
+     *
+     * @param dateTime The date-time component of a Deadline Task.
+     * @return True if the format is valid.
+     */
     public static boolean verifyDateTimeDeadline(String dateTime) {
         System.out.println("Input: " + dateTime);
         if (dateTime.length() != 15) {
@@ -24,6 +33,12 @@ public class Date {
         }
     }
 
+    /**
+     * Verifies the date-time format of an Event.
+     *
+     * @param dateTime The Date-time component of an Event.
+     * @return True if the date-time format is valid.
+     */
     public static boolean verifyDateTimeEvent(String dateTime) {
         System.out.println("Input: " + dateTime);
         if (dateTime.length() != 20) {

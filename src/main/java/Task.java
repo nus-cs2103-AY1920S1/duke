@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -28,11 +32,13 @@ public class Task {
 
 class Deadline extends Task {
 
-    protected String by;
+    protected Date by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
+        SimpleDateFormat date =new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Date date1=date.parse(by);
+        this.by = date1;
     }
 
     @Override
@@ -55,11 +61,13 @@ class Todo extends Task {
 
 class Event extends Task {
 
-    protected String at;
+    protected Date at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws ParseException {
         super(description);
-        this.at = at;
+        SimpleDateFormat date =new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Date date1=date.parse(at);
+        this.at = date1;
     }
 
     @Override

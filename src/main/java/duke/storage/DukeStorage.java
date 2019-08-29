@@ -9,6 +9,6 @@ import duke.tasklist.MyList;
 import java.io.IOException;
 
 public interface DukeStorage {
-    public void updateList(MyList taskList) throws IOException;
-    public MyList loadList() throws MissingFileExeception, CorruptedDataException, WrongDateFormatException;
+    void updateList(MyList taskList) throws IOException;
+    MyList loadList() throws MissingFileExeception, CorruptedDataException, WrongDateFormatException;
 }

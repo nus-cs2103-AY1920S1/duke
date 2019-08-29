@@ -12,12 +12,21 @@ import duke.commands.Command;
 
 import java.util.ArrayList;
 
+/**
+ * Main class that brings together all the implemented classes to execute the Duke
+ * tasking logic.
+ */
 public class Duke {
     public static String saveFilePath;
     private Storage storage;
     private TaskList allTasks;
     private Ui ui;
 
+    /**
+     * Constructor
+     * @param saveFilePath String representing the path to the file in which Tasks
+     *                     will be saved
+     */
     public Duke(String saveFilePath) {
         Duke.saveFilePath = saveFilePath;
         this.ui = new Ui();
@@ -31,6 +40,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Keeps looping through to check the console for user input. Will terminate
+     * when the user inputs "bye" to the console.
+     */
     public void run() {
         ui.printWelcomeMsg();
         boolean isExit = false;

@@ -12,7 +12,19 @@ import duke.commands.CompleteCommand;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Class used to parse all the string input coming from the user, manage error handling
+ * and generate Commands that can then be invoked via their .execute() methods to trigger certain
+ * behaviours. This class is meant as an abstraction to abstract away the details and complexities
+ * behind parsing using input.
+ */
 public class Parser {
+    /**
+     * Parses the entire line of user input and generates a Command object
+     * @param fullCommand entire line of user input
+     * @return Command object whose .execute() method can be called to achieve some desired behaviour
+     * @throws DukeException
+     */
     public static Command parse(String fullCommand) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
         String command = sc.next();
@@ -36,6 +48,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to parse the parameters of the ToDo object
+     * @param remainingParams remaining parameters required to initialise ToDo object
+     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
+     * @throws DukeException
+     */
     public static ArrayList<String> parseToDo(String remainingParams) throws DukeException {
         String taskDescription = remainingParams.trim();
         if (taskDescription.length() == 0) {
@@ -48,6 +66,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to parse the parameters of the Event object
+     * @param remainingParams remaining parameters required to initialise Event object
+     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
+     * @throws DukeException
+     */
     public static ArrayList<String> parseEvent(String remainingParams) throws DukeException {
         try {
             String[] strArr = remainingParams.split("/at");
@@ -72,6 +96,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to parse the parameters of the Deadline object
+     * @param remainingParams remaining parameters required to initialise Deadline object
+     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
+     * @throws DukeException
+     */
     public static ArrayList<String> parseDeadline(String remainingParams) throws DukeException {
         try {
             String[] strArr = remainingParams.split("/by");

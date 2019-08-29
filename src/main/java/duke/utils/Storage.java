@@ -18,13 +18,28 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Implements the logic required to save Tasks. This class abstracts away the details
+ * required for saving Tasks onto disk as well as reading the disk data and converting
+ * the data back into Task objects. The abstraction enables any user of the class to simply
+ * use the <code>save</code> and <code>load</code> methods.
+ */
 public class Storage {
     private File f;
 
+    /**
+     * Constructor
+     * @param filepath String representing the path to the file in which Task data will be saved
+     */
     public Storage(String filepath) {
         this.f = new File(filepath);
     }
 
+    /**
+     * Convenience method to save a TaskList onto disk
+     * @param allTasks TaskList representing a collection of Task objects
+     * @throws DukeException
+     */
     public void save(TaskList allTasks) throws DukeException {
         try {
             Files.deleteIfExists(Paths.get(Duke.saveFilePath));
@@ -43,6 +58,11 @@ public class Storage {
 
     }
 
+    /**
+     * Convenience method to load Task data from disk and re-created the TaskList object.
+     * @return TaskList representing a collection of Tasks saved on disk
+     * @throws DukeException
+     */
     public TaskList load() throws DukeException {
         try {
             Scanner sc = new Scanner(this.f);
@@ -59,6 +79,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Private method used to convert from the String format in the disk data
+     * into an actual Task object (ToDo, Event, Deadline)
+     * @param nextLine disk data (each field is seperated by the "|" character)
+     * @return Task object
+     * @throws DukeException
+     */
     private Task generateSavedTask(String nextLine) throws DukeException {
         String[] s = nextLine.split("\\|");
         String command = s[0].trim();

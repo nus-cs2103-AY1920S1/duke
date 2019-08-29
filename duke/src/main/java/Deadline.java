@@ -5,6 +5,18 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        this.type = "deadline";
+    }
+
+    public Deadline(boolean isDone, String description, String by) {
+    	super(isDone, description); // usually isDone = true here
+    	this.by = by;
+    	this.type = "deadline";
+    }
+
+    @Override
+    public String getDescription() {
+    	return this.description + " /by " + this.by;
     }
 
     @Override

@@ -11,20 +11,17 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the description of this task.
+     *
+     * @return The description of this task
+     */
     public String getDescription() {
         return this.description;
     }
 
-    private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-    }
-
-    protected int getStatusCode() {
-        return isDone ? 1 : 0;
-    }
-
     /**
-     * Sets the status of the task to be completed.
+     * Sets the status of this task to be completed.
      *
      * @throws DukeException if the task has already been marked as done before
      */
@@ -35,10 +32,18 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String serialize();
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 
-    public abstract String serialize();
+    private String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    protected int getStatusCode() {
+        return isDone ? 1 : 0;
+    }
 }

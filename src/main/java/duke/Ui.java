@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
     private Scanner scanner;
 
@@ -38,7 +41,7 @@ public class Ui {
     /**
      * Prints the list containing all tasks.
      *
-     * @param tasks All the tasks in the list
+     * @param tasks all the tasks in the list
      */
     public void showIndexMsg(TaskList tasks) {
         if (tasks.isEmpty()) {
@@ -52,7 +55,7 @@ public class Ui {
     /**
      * Prints the list containing all tasks matching keyword.
      *
-     * @param tasks Filtered tasks.
+     * @param tasks filtered tasks.
      */
     public void showFindMsg(TaskList tasks) {
         if (tasks.isEmpty()) {
@@ -76,16 +79,22 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints an acknowledge message upon successful marking complestion of a task
+     * in the list.
+     *
+     * @param task the task marked as done
+     */
     public void showTaskCompletionMsg(Task task) {
         System.out.println(MESSAGE_DONE);
         showSingleTask(task);
     }
 
     /**
-     * Prints a message upon successful addition of a task to the list.
+     * Prints an acknowledge message upon successful addition of a task to the list.
      *
-     * @param task  The task added to the list
-     * @param tasks The list of tasks after the addition
+     * @param task  the task added to the list
+     * @param tasks the list of tasks after the addition
      */
     public void showTaskAdditionMsg(Task task, TaskList tasks) {
         System.out.println(MESSAGE_ADD);
@@ -94,10 +103,10 @@ public class Ui {
     }
 
     /**
-     * Prints a message upon successful deletion of a task from the list.
+     * Prints an acknowledgement message upon successful deletion of a task from the list.
      *
-     * @param task  The task removed from the list
-     * @param tasks The list of tasks after the deletion
+     * @param task  the task removed from the list
+     * @param tasks the list of tasks after the deletion
      */
     public void showTaskDeletionMsg(Task task, TaskList tasks) {
         System.out.println(MESSAGE_DELETE);
@@ -113,8 +122,10 @@ public class Ui {
         System.out.printf("\u2639 OOPS!!! %s\n", message); //show frowning face
     }
 
+    /**
+     * Prints a platform independent line separator.
+     */
     public void showLine() {
-        // A platform independent line separator.
         System.out.print(System.lineSeparator());
     }
 

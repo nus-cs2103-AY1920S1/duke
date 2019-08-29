@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deals with date time parsing and formatting.
+ */
 public class DateTimeParser {
     public static DateTimeFormatter inputDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static DateTimeFormatter inputTimeFormatter = DateTimeFormatter.ofPattern("HHmm");

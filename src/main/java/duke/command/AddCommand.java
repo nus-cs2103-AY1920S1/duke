@@ -9,11 +9,19 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Adds a task to the task list.
+ */
 public class AddCommand extends Command {
     private String taskType;
     private String taskParams;
     private Task newTask;
 
+    /**
+     * Constructs an AddCommand object given task type and task parameters.
+     *
+     * @throws DukeException if any of the arguments are invalid
+     */
     public AddCommand(String taskType, String taskParams) {
         this.taskType = taskType;
         this.taskParams = taskParams;

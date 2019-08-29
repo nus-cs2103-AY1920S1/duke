@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task with both start time and end time.
+ */
 public class Event extends Task {
     private LocalDate startDate;
     private LocalTime startTime;
@@ -20,15 +23,18 @@ public class Event extends Task {
     private LocalTime endTime;
 
     /**
-     * Represents a task with both start time and end time.
+     * Constructs an Event object given a description and the start and end time (with date)
+     * of the event as a String.
      *
      * @param description The description of the event
-     * @param at          Date and time of both start and end of the event. If the dates of the start and
-     *                    end time of the event are the same, only the start date is required. (e.g. '11/10/2019
-     *                    1000 1100' means the event starts on 11th October 2019, 10AM and ends at 11AM on the
-     *                    same day.) However, if the start and end dates of the event are event, the end date
-     *                    should be specified. (e.g. '01/01/2019 0700 03/01/2019 1800' means the event starts
-     *                    on 1st January 2019, 6PM and ends on 3rd January 2019, 6PM. )
+     * @param at          a String containing date and time of both start and end of the event.
+     *                    If the dates of the start and end time of the event are the same,
+     *                    only the start date is required (e.g. '11/10/2019 1000 1100' means the event
+     *                    starts on 11th October 2019, 10AM and ends at 11AM on the same day).
+     *                    However, if the start and end dates of the event are event, the end date
+     *                    should be specified (e.g. '01/01/2019 0700 03/01/2019 1800' means
+     *                    the event starts on 1st January 2019, 6PM and ends on 3rd January 2019, 6PM).
+     * @throws DukeException if start time is before end time or invalid time format is passed in
      */
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -70,8 +76,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts an event into serialized form. (e.g.
-     * E | 0 | coding workshop | 11/10/2019 1000 11/10/2019 1100).
+     * Converts an event into serialized form (e.g.
+     * 'E | 0 | coding workshop | 11/10/2019 1000 11/10/2019 1100').
      */
     @Override
     public String serialize() {

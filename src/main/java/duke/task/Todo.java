@@ -2,10 +2,13 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+/**
+ * Represents a task with description only.
+ */
 public class Todo extends Task {
 
     /**
-     * Represents a task with description only.
+     * Constructs a Todo object given a description.
      *
      * @param description The description of the todo item
      * @throws DukeException if the description is empty string
@@ -17,6 +20,9 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Converts a todo into serialized form (e.g. 'T | 0 |  join sports club').
+     */
     @Override
     public String serialize() {
         return String.format("T | %d | %s", getStatusCode(), description);

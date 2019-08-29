@@ -13,14 +13,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the given file and saving tasks in the same file.
+ */
 public class Storage {
     private File file;
 
     /**
-     * Deals with loading tasks from the given file and saving tasks in the same file.
+     * Constructs a Storage object given the file path.
      *
-     * @param filePath The file path where the file is stored. It can be
-     *                 either relative or absolute.
+     * @param filePath the file path where the tasks are stored.
+     *                 It can be either relative or absolute.
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
@@ -29,9 +32,9 @@ public class Storage {
     /**
      * Loads the existing tasks from the data file.
      *
-     * @return An ArrayList of tasks which are stored as serialized string in the data file
-     * @throws DukeException if the file does not exit or the data in the file
-     *                       does not follow the correct format (i.e the serialized form of task objects)
+     * @return an ArrayList of tasks which are stored as serialized string in the data file
+     * @throws DukeException if the file does not exit or the data in the file does not
+     *                       follow the correct format (i.e the serialized form of task objects)
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -67,7 +70,7 @@ public class Storage {
 
     /**
      * Converts the current tasks in the list to serialized form and
-     * save the each task to the file. A new file is created if the
+     * save each task to the destination file. A new file is created if the
      * destination file does not exits.
      *
      * @param tasks The list of tasks to be saved to the destination file

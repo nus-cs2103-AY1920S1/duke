@@ -9,13 +9,16 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.exception.DukeException;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class CommandParser {
 
     /**
      * Parses raw input from user and returns its corresponding <code>Command</code> object.
      *
      * @param command The raw input from user
-     * @return An executable <code>Command</code> object
+     * @return an executable <code>Command</code> object
      * @throws DukeException if the command is undefined
      */
     public static Command parse(String command) throws DukeException {

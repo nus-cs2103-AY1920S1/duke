@@ -6,6 +6,9 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Mark a task as done.
+ */
 public class CompleteCommand extends Command {
     private int taskId;
 

@@ -1,5 +1,8 @@
 package misc;
 
+/**
+ * Creates a User Interface that interacts with and displays information to the user.
+ */
 public class Ui {
     static final String HORIZONTAL_LINE = spaces(5) + "____________________________________________________________\n";
     
@@ -18,6 +21,9 @@ public class Ui {
         return s.repeat(n);
     }
 
+    /**
+     * Displays a welcome message to the user.
+     */
     public void welcome() {
         System.out.print(HORIZONTAL_LINE);
         System.out.println(dukeLogo);
@@ -29,6 +35,10 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Displays a welcomeBack message to the user.
+     * This occurs if there are existing tasks in a local save file from last session.
+     */
     public void welcomeBack() {
         System.out.print(HORIZONTAL_LINE);
         System.out.println(dukeLogo);
@@ -40,6 +50,9 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE);
     }
 
+    /**
+     * Displays a goodbye message to the user.
+     */
     public void exit() {
         System.out.println(HORIZONTAL_LINE);
         System.out.printf("%sBye! Hope to see you again soon! \u263A\n", spaces(5));

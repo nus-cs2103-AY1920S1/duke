@@ -21,7 +21,18 @@ import task.Task;
 import task.TaskList;
 import task.ToDo;
 
+/**
+ * Represents a Parser object that converts a form a data input into another so that the
+ * program can function.
+ */
 public class Parser {
+    
+    /**
+     * Writes Tasks as Strings that are saved into a local save file. The parsed String
+     * contains information about the task's completion status, Task type and Date/Time (if any).
+     * @param task The Task to be parsed into a String and saved into a local save file.
+     * @return The parsed String of the Task's details, null if task is of unknown type.
+     */
     String writeTaskAsText(Task task) {
         int isDoneStatus = task.isDone ? 1 : 0;
         
@@ -38,6 +49,12 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Reads Strings (from a local save file) as Tasks. These tasks retain information of
+     * all user tasks when the program last exits.
+     * @param stringTask The String to be parsed into a Task.
+     * @return A Task in the user's task list when the program last exits. 
+     */
     Task readTextAsTask(String stringTask) {
         String[] taskContents = stringTask.split(" : ");
 
@@ -68,6 +85,12 @@ public class Parser {
         return outputTask;
     }
 
+    /**
+     * Reads Strings (from a local save file) as Tasks. These tasks retain information of
+     * all user tasks when the program last exits.
+     * @param stringTask The String to be parsed into a Task.
+     * @return A Task in the user's task list when the program last exits. 
+     */
     public String convertStringToTime(String stringDate, String taskType) throws DateTimeParseException {
         String convertedTime;
 
@@ -123,6 +146,16 @@ public class Parser {
         return convertedTime;
     }
 
+    /**
+     * Parses user input instruction into a command that Duke can act on.
+     * @param instruction The user instruction to be parsed.
+     * @param taskList The TaskList object that stores all of user's tasks.
+     * @throws VoidDukeCommand if there is no user input.
+     * @throws IncorrectDukeCommand if the input command exists, but Duke cannot understand parts of it.
+     * @throws InvalidDukeCommand if the input command does not exist.
+     * @throws IOException if local save file cannot be updated to reflect changes.
+     * @throws DukeException if an exception is thrown but not caught by any of the other exceptions.
+     */
     public void parseInstruction(String instruction, TaskList taskList) throws VoidDukeCommand,
             IncorrectDukeCommand, InvalidDukeCommand, IOException, DukeException {
         System.out.println(Ui.HORIZONTAL_LINE);

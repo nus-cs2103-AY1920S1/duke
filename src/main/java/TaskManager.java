@@ -1,7 +1,15 @@
 import java.util.ArrayList;
 
 public class TaskManager {
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private ArrayList<Task> tasks;
+
+    public TaskManager() {
+        tasks = new ArrayList<Task>();
+    }
+
+    public TaskManager(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public void addTask(Task task) {
         separator();
@@ -41,6 +49,15 @@ public class TaskManager {
             System.out.println((i + 1) + "." + tasks.get(i));
         }
         separator();
+    }
+
+    public String printTasksForHardDisk() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < tasks.size(); ++i) {
+            builder.append(tasks.get(i).toStringForHardDisk());
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
     public static void separator() {

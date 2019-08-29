@@ -1,4 +1,9 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke {
     static final String logo = " ____        _        \n"
@@ -6,6 +11,8 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+    static final String pathToHardDisk = "../../../data/duke.txt";
 
     private static void greet() {
         TaskManager.separator();
@@ -69,24 +76,87 @@ public class Duke {
             taskManager.printTasks();
         } else if (instruction.matches("^done \\d+$")) {
             parseDoneInstruction(taskManager, instruction);
+            saveToHardDisk(taskManager);
         } else if (instruction.matches("^delete \\d+$")) {
             parseDeleteInstruction(taskManager, instruction);
+            saveToHardDisk(taskManager);
         } else if (instruction.startsWith("deadline")) {
             taskManager.addTask(parseDeadlineTask(instruction));
+            saveToHardDisk(taskManager);
         } else if  (instruction.startsWith("todo")) {
             taskManager.addTask(parseTodoTask(instruction));
+            saveToHardDisk(taskManager);
         } else if (instruction.startsWith("event")) {
             taskManager.addTask(parseEventTask(instruction));
+            saveToHardDisk(taskManager);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+
         return true;
     }
 
-    public static void main(String[] args) {
-        greet();
+    private static void saveToHardDisk(TaskManager taskManager) {
+        try {
+            FileWriter writer = new FileWriter(pathToHardDisk);
+            writer.write(taskManager.printTasksForHardDisk());
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("There is an issue in updating the duke.txt");
+        }
+    }
 
-        TaskManager taskManager = new TaskManager();
+    /**
+     * Initializes task manager with data from harddisk
+     * 
+     * @return an initialized Task Manager
+     */
+    private static TaskManager initializeTaskManager() {
+        try {
+            ArrayList<Task> tasks = new ArrayList<Task>();
+
+            File file = new File(pathToHardDisk);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] datas = line.split(" \\| ");
+
+                Task task;
+                switch (datas[0]) {
+                case "E":
+                    task = new Event(datas[2], datas[3]);
+                    break;
+                case "D":
+                    task = new Deadline(datas[2], datas[3]);
+                    break;
+                case "T":
+                    task = new Todo(datas[2]);
+                    break;
+                default:
+                    throw new DukeException("Unrecognized tasks");
+                }
+
+                if (datas[1].equals("1")) {
+                    task.markAsDone();
+                }
+
+                tasks.add(task);
+            }
+            scanner.close();
+
+            return new TaskManager(tasks);
+        } catch (FileNotFoundException ex) {
+            return new TaskManager();
+        } catch (Exception ex) {
+            System.out.println("Failed to parse duke.txt");
+            return new TaskManager();
+        }
+    }
+
+    public static void main(String[] args) {
+        TaskManager taskManager = initializeTaskManager();
+
+        greet();
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {

@@ -15,6 +15,7 @@ public abstract class Task {
         isDone = true;
     }
 
+    public abstract String toStringForHardDisk();
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

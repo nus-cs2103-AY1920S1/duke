@@ -17,8 +17,8 @@ public class Ui {
 
     public void showGoodBye() {
         System.out.println("Bye. Hope to see you again soon!");
-        this.printLine();
     }
+
     public void showException (Exception e) {
         System.err.println(e.getMessage());
     }

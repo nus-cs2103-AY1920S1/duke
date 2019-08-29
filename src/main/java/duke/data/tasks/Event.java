@@ -45,8 +45,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns this event task's command String (the command used to create this event task).
-     * @return This event task's command String.
+     * Returns the command used to create this event task.
+     * @return The command used to create this event task.
      */
     @Override
     public String getCommandString() {

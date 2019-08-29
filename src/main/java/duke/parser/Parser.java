@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.Duke;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
@@ -13,7 +12,6 @@ import duke.commands.TodoCommand;
 import duke.data.tasks.Deadline;
 import duke.data.tasks.Event;
 import duke.data.tasks.Todo;
-import duke.exceptions.DukeException;
 
 import java.util.regex.Pattern;
 import java.text.ParseException;
@@ -65,6 +63,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Returns the arguments within the specified input.
+     * @param input The specified input.
+     * @return The arguments within the specified input.
+     * @throws ArrayIndexOutOfBoundsException
+     */
     private static String getArguments(String input) throws ArrayIndexOutOfBoundsException {
         try {
             return input.split(" ", INPUT_STRING_SPLIT_LIMIT)[ARGUMENTS_INDEX];

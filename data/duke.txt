@@ -3,3 +3,4 @@ E 1 project meeting /at 22nd of October 2017, 620pm
 T 0 read apple
 T 1 punch guys
 T 0 read guys
+T 0 raed book

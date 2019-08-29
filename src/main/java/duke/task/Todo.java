@@ -10,7 +10,7 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
-
+    
     /**
      * the Overriding method
      * @return String that in todo format

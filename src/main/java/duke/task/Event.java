@@ -2,6 +2,7 @@ package duke.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 /**
@@ -20,6 +21,7 @@ public class Event extends Task {
         super(description);
         this.at = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(at);
     }
+
     /**
      * the Overriding method
      * @return String that in event format

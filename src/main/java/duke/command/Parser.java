@@ -1,6 +1,8 @@
 package duke.command;
+
 import duke.excaptions.IllegalDukeArgumentException;
 import duke.excaptions.IllegalDukeFormatException;
+
 import duke.list.TaskList;
 
 
@@ -23,7 +25,6 @@ public class Parser {
      */
     public Parser(String[] splitCommand) {
         this.splitCommand = splitCommand;
-
     }
 
     /**
@@ -173,9 +174,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Selected index not exists");
         }
-
     }
-
 }
 
 

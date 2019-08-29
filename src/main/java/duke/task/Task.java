@@ -20,6 +20,13 @@ public abstract class Task {
     }
 
     /**
+     * @return the name of this task.
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    /**
      * Sets this task to the given done status.
      *
      * @param doneStatus true if done, otherwise false.

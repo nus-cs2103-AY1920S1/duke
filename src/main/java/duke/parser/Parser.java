@@ -39,6 +39,8 @@ public class Parser {
                 return new AddCommand(createEventFrom(inputLine));
             case "delete":
                 return new DeleteCommand(getIndexFrom(inputLine));
+            case "find":
+                return new FindCommand(getKeywordFrom(inputLine));
             default:
                 throw new DukeException(Message.MESSAGE_INVALID_COMMAND_FORMAT);
         }
@@ -96,5 +98,13 @@ public class Parser {
         } catch (java.time.format.DateTimeParseException e) {
             throw new DukeException((Message.MESSAGE_INVALID_DATE_FORMAT));
         }
+    }
+
+    private static String getKeywordFrom(String inputLine) throws DukeException {
+        String keyword = inputLine.substring("find".length()).strip();
+        if (keyword.isEmpty()) {
+            throw new DukeException(Message.MESSAGE_INVALID_KEYWORD_FORMAT);
+        }
+        return keyword;
     }
 }

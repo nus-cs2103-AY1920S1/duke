@@ -23,7 +23,6 @@ public class TaskList {
      *
      * @param tasks list of tasks.
      */
-
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -74,6 +73,20 @@ public class TaskList {
             taskNames.add((i + 1) + ". " + tasks.get(i));
         }
         return taskNames;
+    }
+
+    /**
+     * @param keyword keyword that is used for finding tasks.
+     * @return a list of task names and descriptions of tasks that contain this <code>keyword</code>.
+     */
+    public List<String> getTaskNamesIfMatch(String keyword) {
+        List<String> taskNamesThatMatch = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getTaskName().contains(keyword)) {
+                taskNamesThatMatch.add((i + 1) + ". " + tasks.get(i));
+            }
+        }
+        return taskNamesThatMatch;
     }
 
     /**

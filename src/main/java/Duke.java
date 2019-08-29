@@ -156,7 +156,7 @@ public class Duke { // handles all input and output
                     } else if (!cmdLine.contains("/by")) {
                         throw new DeadlineException(cmdLine, 1);
                     } else {
-                        String[] cmdSplit = cmdLine.split("/by");
+                        String[] cmdSplit = cmdLine.split("/by ");
                         if (cmdSplit.length <= 1) {
                             throw new DeadlineException(cmdLine, 3);
                         } else if (cmdSplit[0].equals(" ")) {
@@ -175,7 +175,7 @@ public class Duke { // handles all input and output
                     } else if (!cmdLine.contains("/at")) {
                         throw new EventException(cmdLine, 1);
                     } else {
-                        String[] cmdSplitt = cmdLine.split("/at");
+                        String[] cmdSplitt = cmdLine.split("/at ");
                         if (cmdSplitt.length <= 1) {
                             throw new EventException(cmdLine, 3);
                         } else if (cmdSplitt[0].equals(" ")) {

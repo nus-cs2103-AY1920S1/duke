@@ -1,26 +1,49 @@
-
+/**
+ * Task class
+ */
 public class Task {
-  protected boolean completed;
-  protected int index;
-  protected String name;
+    protected boolean completed;
+    protected String name;
 
-  public Task(String n, int index) {
-      this.name = n;
-      this.index = index;
-      completed = false;
-  }
+    /**
+     * Constructor for Task object
+     * @param n name of task
+     */
+    public Task(String n) {
+        this.name = n;
+        completed = false;
+    }
 
-  public Task(String n, int index, boolean completed) {
-      this.name = n;
-      this.index = index;
-      this.completed = completed;
-  }
+    /**
+     * Constructor for Task object when loading from history
+     * @param n name of task
+     * @param completed indicates if task is completed
+     */
+    public Task(String n, boolean completed) {
+        this.name = n;
+        this.completed = completed;
+    }
 
-  public boolean isCompleted() { return this.completed; }
+    /**
+     * Checks if a task is completed
+     * @return true if task is completed, false otherwise
+     */
+    public boolean isCompleted() {
+        return this.completed;
+    }
 
-  public String getName() { return this.name; }
+    /**
+     * Returns name of task
+     * @return name of task
+     */
+    public String getName() {
+        return this.name;
+    }
 
-  public void complete() {
-    this.completed = true;
-  }
+    /**
+     * Completes the task
+     */
+    public void complete() {
+        this.completed = true;
+    }
 }

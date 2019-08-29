@@ -2,8 +2,8 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner input;
-    Parser parser;
+    private Scanner input;
+    private Parser parser;
 
     public Ui() {
         this.input = new Scanner(System.in);
@@ -13,11 +13,12 @@ public class Ui {
         printOutput(e.getMessage());
     }
 
-    public void printOutput(String output) {
-        String line = "    ____________________________________________________________\n";
+    private void printOutput(String output) {
+        String line = "    ____________________________"
+                + "________________________________\n";
 
         // Indent and process output line
-        output = "      " + output.replaceAll("\n","\n      ") + '\n';
+        output = "      " + output.replaceAll("\n", "\n      ") + '\n';
 
         System.out.println(line + output + line);
     }

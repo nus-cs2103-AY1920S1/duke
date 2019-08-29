@@ -15,8 +15,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task implements Serializable {
-    protected LocalDateTime at;
-    protected static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private LocalDateTime at;
+    private static final DateTimeFormatter dateFormatter
+            = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Event(String description) throws DukeException {
         super(description);
@@ -24,17 +25,17 @@ public class Event extends Task implements Serializable {
         try {
             this.description = splitDescription[0];
             this.at = LocalDateTime.parse(splitDescription[1], dateFormatter);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please enter a deadline using \"/at\".");
-        }
-        catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a date with the format dd/MM/yyyy HHmm.\n" + e.getMessage());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter a date with the format "
+                    + "dd/MM/yyyy HHmm.\n" + e.getMessage());
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(dateFormatter) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + at.format(dateFormatter) + ")";
     }
 }

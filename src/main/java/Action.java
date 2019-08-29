@@ -27,6 +27,13 @@ public class Action {
             } else {
                 if (commandStrArray[0].equals("done")) {
                     list.get(Integer.parseInt(commandStrArray[1]) - 1).markAsDone();
+                } else if (commandStrArray[0].equals("delete")) {
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     Noted. I've removed this task: ");
+                    System.out.println("       " + list.get(Integer.parseInt(commandStrArray[1]) - 1));
+                    list.remove(Integer.parseInt(commandStrArray[1]) - 1);
+                    System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________\n");
                 } else {
                     if (commandStrArray[0].equals("todo")) {
                         if (commandStrArray.length == 1) {

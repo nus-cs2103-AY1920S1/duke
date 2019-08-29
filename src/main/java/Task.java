@@ -16,6 +16,10 @@ public class Task {
     public void setDone() {
         this.done = true;
     }
+    public String getTaskType() {
+        //to be reviewed
+        return null;
+    }
 
     @Override
     public String toString() {

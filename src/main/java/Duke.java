@@ -1,10 +1,84 @@
-
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 
 public class Duke {
+
+    private static void updateTasksToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    private static void arrayDataToFile(ArrayList<Task> list, String filePath) {
+        //Store all the latest data from the ArrayList
+        try {
+            updateTasksToFile(filePath, "");
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        for(Task task : list) {
+            StringBuilder temp = new StringBuilder();
+            temp.append(task.getTaskType());
+            temp.append(" | ");
+            if(task.isDone()) {
+                temp.append(1);
+            } else {
+                temp.append(0);
+            }
+            temp.append(" |");
+            temp.append(task.getDescription());
+            if((task instanceof Event) || (task instanceof Deadline)) {
+                temp.append("| ");
+                if(task instanceof Event) {
+                    temp.append(((Event) task).getDuration());
+                } else {
+                    temp.append(((Deadline) task).getBy());
+                }
+            }
+            try {
+                appendToFile(filePath, temp.toString() + System.lineSeparator());
+            } catch (IOException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
+    private static void loadTasksIntoArray(ArrayList<Task> list, String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while(s.hasNext()) {
+            String[] temp = s.nextLine().split(" ");
+            String task = (String)Array.get(temp, 0);
+            Task newTask;
+            if(task.equals("T")) {
+                newTask = new Todo((String)Array.get(temp,4));
+            } else if(task.equals("D")) {
+                newTask = new Deadline((String)Array.get(temp,4),
+                        (String)Array.get(temp, 6));
+            } else {
+                newTask = new Event((String)Array.get(temp,4),
+                        (String)Array.get(temp, 6));
+            }
+            if(((String)Array.get(temp, 2)).equals("1")) {
+                newTask.setDone();
+            }
+            list.add(newTask);
+        }
+    }
+
     public static void main(String[] args) {
+        //first prepare the file, defined as file1
+        String file1 = "data/tasks.txt";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,6 +89,14 @@ public class Duke {
 
         Scanner reader = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
+
+        //here, we should load previous data into the ArrayList, before we move on to allow user to
+        //interact with the programme
+        try {
+            loadTasksIntoArray(taskList, file1);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found");
+        }
 
         StringBuilder lineBuilder = new StringBuilder("     ");
         for(int i = 0; i < 59; i++) {
@@ -32,7 +114,7 @@ public class Duke {
                 System.out.println(horLine);
                 if(taskList.isEmpty()) {
                     System.out.println("Sorry, there are no tasks in the list");
-                } else { testing testing testing
+                } else {
                     System.out.println("     Here are the tasks in your list:");
                     int counter = 1;
                     for (Task task : taskList) {
@@ -50,6 +132,7 @@ public class Duke {
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + temp);
                 System.out.println(horLine + "\n");
+                arrayDataToFile(taskList, file1);
             } else if(input.equals("delete")) {
                 int number = reader.nextInt();
                 Task temp = taskList.get(number - 1);
@@ -59,6 +142,7 @@ public class Duke {
                 System.out.println("       " + temp);
                 System.out.println("      Now you have " + taskList.size() + " tasks in the list.");
                 System.out.println(horLine + "\n");
+                arrayDataToFile(taskList, file1);
             } else{  //all other commands
                 try {
                     if (input.equals("todo")) {
@@ -102,6 +186,7 @@ public class Duke {
                 System.out.println("      Now you have " + taskList.size() + " tasks in the list.");
                 System.out.println(horLine);
                 System.out.println();
+                arrayDataToFile(taskList, file1);
             }
         }
     }

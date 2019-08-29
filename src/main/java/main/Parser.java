@@ -4,14 +4,14 @@ import command.*;
 import command.Command;
 
 /**
- * deals with making sense of the user command
+ * Deals with making sense of the user command
  */
 public class Parser {
 
     /**
-     * Returns a Command object
-     * @param fullCommand
-     * @return
+     * Returns a Command object to parse the command
+     * @param fullCommand The full user command received from the ui.
+     * @return A command object to parse the command
      */
     public static Command parse(String fullCommand) throws DukeException {
 
@@ -55,12 +55,5 @@ public class Parser {
             throw new DukeException("I'm sorry I do not understand what you mean. " +
                     "Please enter 'help' to see all supported commands.");
         }
-
-
-        /*
-        The Parser parses the full command as such:
-        1. Identify the command type - is it an add command, a delete command, an exit command, a finish task command
-        2. Create a new Command object: e.g. return new AddCommand(tasktype, taskname);
-         */
     }
 }

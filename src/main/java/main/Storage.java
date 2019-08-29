@@ -13,15 +13,23 @@ import java.util.Scanner;
 /**
  * Deals with loading tasks from the file and saving tasks in the file
  */
-
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Creates a new Storage object
+     * @param filePath File path to read from and to write to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads existing task list from specified file path
+     * @return An ArrayList containing the Tasks from the specified file
+     * @throws DukeException If file does not exist
+     */
     public ArrayList<Task> load() throws DukeException {
         File f;
         Scanner sc;
@@ -36,6 +44,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Reads from a specified File
+     * @param sc    Scanner to read from file
+     * @param f     File to be read from
+     * @return      The ArrayList of task objects read from file.
+     * @throws DukeException If file is corrupted.
+     */
     private ArrayList<Task> readFromFile(Scanner sc, File f) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         while (sc.hasNextLine()) {
@@ -92,6 +107,11 @@ public class Storage {
         return newTask;
     }
 
+    /**
+     * Saves current task list to file at specified file path.
+     * @param tasks The task list to be written to file.
+     * @throws DukeException If a file writing error arises
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             new FileWriter(filePath); //create new file
@@ -109,6 +129,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Clears the file found at filePath
+     * @throws DukeException if file is not found.
+     */
     public void clearAll() throws DukeException {
         try {
             new FileWriter(filePath); //create new file

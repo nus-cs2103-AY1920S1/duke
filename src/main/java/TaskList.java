@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -52,6 +53,18 @@ class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeIllegalIndexException(this.generateIndexExceptionMessage(index));
         }
+    }
+
+    void addTasks(List<Task> tasksToAdd) {
+        this.taskList.addAll(tasksToAdd);
+    }
+
+    Iterator<Task> iterator() {
+        return this.taskList.iterator();
+    }
+
+    List<Task> asList() {
+        return this.taskList;
     }
 
 }

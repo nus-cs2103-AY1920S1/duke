@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,7 +9,11 @@ public class Main {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        (new Duke()).run();
+        try {
+            (new Duke()).run();
+        } catch (IOException e) {
+            System.err.println("An IOException was caught: " + e.getMessage());
+        }
     }
 
 }

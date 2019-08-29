@@ -1,10 +1,15 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 class Duke {
 
-    private static final String DUKE_HELLO = "Hello! I'm Duke\n    What can I do for you?\n";
+    private static final String DUKE_HELLO = "Hello! I'm Duke!\n";
     private static final String DUKE_BYE = "Bye. Hope to see you again soon!\n";
+    private static final String DUKE_NO_SAVED_TASKS = "You have no saved tasks!";
+    private static final String DUKE_EXISTS_SAVED_TASKS = "You have %d saved tasks!";
+    private static final String DUKE_START_COMMAND = "What can I do for you?\n";
     private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
+    private static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
     private static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:\n";
     private static final String DUKE_ADD_TASK = "Got it. I've added this task:\n";
     private static final String DUKE_DELETE_TASK = "Noted. I've removed this task:\n";
@@ -24,11 +29,13 @@ class Duke {
             + "specified after \"/by.\"";
     private static final String ERROR_MISSING_EVENT_DATE = "☹ OOPS!!! Deadline dates must be specified after \"/at.\"";
     private static final String ERROR_ILLEGAL_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String ERROR_IOEXCEPTION_MESSAGE = "☹ OOPS!!! An IOException was caught: ";
 
     private static final String DELIMITER_DEADLINE_DATE = "/by";
     private static final String DELIMITER_EVENT_DATE = "/at";
 
     private TaskList taskList;
+    private SaveFile saveFile;
 
     private enum Command {
         LIST,
@@ -39,14 +46,24 @@ class Duke {
         DELETE;
     }
 
-    Duke() {
+    Duke() throws IOException {
         this.taskList = new TaskList();
+        this.saveFile = new SaveFile();
+        this.recallTasks();
+    }
+
+    private void recallTasks() throws IOException {
+        this.taskList.addTasks(this.saveFile.parseFile());
     }
 
     private void listTasks() throws DukeIllegalIndexException {
+        if (this.taskList.getSize() == 0) {
+            System.out.println(DUKE_TAB4 + DUKE_NO_TASKS);
+            return;
+        }
         System.out.println(DUKE_TAB4 + DUKE_LIST_TASKS);
         for (int i = 1; i <= this.taskList.getSize(); i++) {
-            System.out.println(String.format("%s%d.%s",
+            System.out.println(String.format("  %s%d.%s",
                                              DUKE_TAB4,
                                              i,
                                              taskList.getTaskAt(i).getStatus()));
@@ -160,6 +177,10 @@ class Duke {
                 taskList.getSize()));
     }
 
+    private void saveTasks() throws IOException {
+        this.saveFile.saveTasks(this.taskList);
+    }
+
     void run() {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -170,9 +191,22 @@ class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Greet the user
-        System.out.println(DUKE_LINE
-                           + DUKE_TAB4 + DUKE_HELLO
-                           + DUKE_LINE);
+        System.out.println(DUKE_LINE + DUKE_TAB4 + DUKE_HELLO);
+
+        // Update information on saved tasks
+        if (this.taskList.getSize() == 0) {
+            System.out.println(DUKE_TAB4 + DUKE_NO_SAVED_TASKS);
+        } else {
+            try {
+                System.out.println(String.format(DUKE_TAB4 + DUKE_EXISTS_SAVED_TASKS, this.taskList.getSize()));
+                this.listTasks();
+            } catch (DukeIllegalIndexException e) {
+                System.out.println(DUKE_TAB4 + e.getMessage());
+            }
+        }
+
+        // Start user input
+        System.out.println("\n" + DUKE_TAB4 + DUKE_START_COMMAND + DUKE_LINE);
 
         // Handle user input
         String input;
@@ -186,24 +220,31 @@ class Duke {
                     break;
                 case DONE:
                     this.finishTask(command);
+                    this.saveTasks();
                     break;
                 case DELETE:
                     this.deleteTask(command);
+                    this.saveTasks();
                     break;
                 case TODO:
                     this.addTodoTask(command);
+                    this.saveTasks();
                     break;
                 case DEADLINE:
                     this.addDeadlineTask(command);
+                    this.saveTasks();
                     break;
                 case EVENT:
                     this.addEventTask(command);
+                    this.saveTasks();
                     break;
                 }
             } catch (DukeIllegalIndexException | DukeIllegalArgumentException e) {
                 System.out.println(DUKE_TAB4 + e);
             } catch (IllegalArgumentException e) {
                 System.out.println(DUKE_TAB4 + ERROR_ILLEGAL_COMMAND);
+            } catch (IOException e) {
+                System.out.println(DUKE_TAB4 + ERROR_IOEXCEPTION_MESSAGE + e.getMessage());
             } finally {
                 System.out.println(DUKE_LINE);
             }

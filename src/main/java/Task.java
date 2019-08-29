@@ -1,4 +1,4 @@
-class Task {
+abstract class Task {
 
     private String description;
     private boolean isDone;
@@ -8,6 +8,11 @@ class Task {
         this.isDone = false;
     }
 
+    Task(String description, boolean isDone) {
+        this(description);
+        this.isDone = isDone;
+    }
+
     String getDescription() {
         return this.description;
     }
@@ -15,6 +20,8 @@ class Task {
     boolean isDone() {
         return this.isDone;
     }
+
+    abstract String getType();
 
     String getStatus() {
         String icon = (isDone ? "\u2713" : "\u2718"); //tick or X symbol

@@ -7,8 +7,18 @@ class DeadlineTask extends Task {
         this.dueDate = dueDate;
     }
 
+    DeadlineTask(String description, boolean isDone, String dueDate) {
+        super(description, isDone);
+        this.dueDate = dueDate;
+    }
+
     String getDueDate() {
         return this.dueDate;
+    }
+
+    @Override
+    String getType() {
+        return "D";
     }
 
     @Override

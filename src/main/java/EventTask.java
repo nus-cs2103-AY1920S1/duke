@@ -7,8 +7,18 @@ class EventTask extends Task {
         this.time = time;
     }
 
+    EventTask(String description, boolean isDone, String time) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     String getTime() {
         return this.time;
+    }
+
+    @Override
+    String getType() {
+        return "E";
     }
 
     @Override

@@ -11,6 +11,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getAscii() {
+        return "E | " + super.getAscii() + " | " + at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

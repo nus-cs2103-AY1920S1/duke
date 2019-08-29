@@ -1,14 +1,32 @@
+import java.io.IOException;
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    private static Scanner sc;
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static int numberOfTasks = 0;
+    private Scanner sc;
+    private ArrayList<Task> tasks;
+    private Storage storage;
+
+    public Duke(String filePath) {
+        try {
+            setStorage(new Storage(filePath));
+            tasks = storage.loadTasks();
+        } catch (IOException e) {
+            System.out.println("Invalid file path!");
+        }
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
 
     public static void main(String[] args) {
+        new Duke("C:/CS2103/iP/data/duke.txt").run();
+    }
+
+    public void run() {
         /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,7 +38,7 @@ public class Duke {
         readInputs();
     }
 
-    public static void readInputs() {
+    public void readInputs() {
         sc = new Scanner(System.in);
         String input = "";
         while (!input.equalsIgnoreCase("bye")) {
@@ -34,32 +52,37 @@ public class Duke {
         sc.close();
     }
 
-    public static void evaluateInput(String input) throws DukeException {
-        if (input.equalsIgnoreCase("bye")) {
-            dukeOutput("Bye. Have a nice day!");
-        } else if (input.equalsIgnoreCase("list")) {
-            printTasks();
-        } else if (input.toLowerCase().startsWith("done")) {
-            evaluateDone(input);
-        } else if (input.toLowerCase().startsWith("todo")
-                || input.toLowerCase().startsWith("deadline")
-                || input.toLowerCase().startsWith("event")) {
-            addTask(input);
-        } else if (input.toLowerCase().startsWith("delete")) {
-            deleteTask(input);
-        } else {
-            throw new DukeException("OOPS!!! I don't know what this is :(");
+    public void evaluateInput(String input) throws DukeException {
+        try {
+            if (input.equalsIgnoreCase("bye")) {
+                dukeOutput("Bye. Have a nice day!");
+            } else if (input.equalsIgnoreCase("list")) {
+                printTasks();
+            } else if (input.toLowerCase().startsWith("done")) {
+                evaluateDone(input);
+            } else if (input.toLowerCase().startsWith("todo")
+                    || input.toLowerCase().startsWith("deadline")
+                    || input.toLowerCase().startsWith("event")) {
+                addTask(input);
+            } else if (input.toLowerCase().startsWith("delete")) {
+                deleteTask(input);
+            } else {
+                throw new DukeException("OOPS!!! I don't know what this is :(");
+            }
+            storage.writeTasks(getTasksAscii());
+        } catch (IOException e) {
+            dukeOutput("OOPS!!! Check your data file path :-(");
         }
     }
 
-    public static void evaluateDone(String input) throws DukeException {
+    public void evaluateDone(String input) throws DukeException {
         String number = input.substring(4, input.length()).strip();
         if (number.isEmpty()) {
             dukeOutput("Invalid input! Mention a valid task number.");
         } else {
             try {
                 int taskNumber = Integer.parseInt(number);
-                if (taskNumber > numberOfTasks) {
+                if (taskNumber > tasks.size()) {
                     dukeOutput("Task doesn't exist.");
                 } else {
                     tasks.get(taskNumber - 1).markAsDone();
@@ -73,7 +96,7 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(String input) throws DukeException {
+    public void deleteTask(String input) throws DukeException {
         String[] tokens = input.split("\\s+");
         if (tokens.length != 2) {
             throw new DukeException("OOPS!!! Invalid delete command.");
@@ -82,7 +105,6 @@ public class Duke {
                 int taskNumber = Integer.parseInt(tokens[1]);
                 Task removedTask = tasks.get(taskNumber - 1);
                 tasks.remove(taskNumber - 1);
-                numberOfTasks--; // House-keeping
                 String message = "Noted. I've deleted this task:\n"
                         + "  " + removedTask.toString()
                         + "\n" + getNumberOfTasks();
@@ -93,7 +115,7 @@ public class Duke {
         }
     }
 
-    public static void addTask(String description) {
+    public void addTask(String description) {
         String[] tokens = description.split("\\s+");
         String taskType = tokens[0];
         //System.out.println(taskType);
@@ -112,7 +134,7 @@ public class Duke {
         }
     }
 
-    public static void addEvent(String description) throws DukeException {
+    public void addEvent(String description) throws DukeException {
         int indexOfAt = description.indexOf("/at");
         if (indexOfAt == -1) {
             throw new DukeException("OOPS!!! The event description must contain a time following \"/at\"");
@@ -120,11 +142,10 @@ public class Duke {
         String desc = description.substring(5, indexOfAt).strip();
         String at = description.substring(indexOfAt + 3).strip();
         tasks.add(new Event(desc, at));
-        numberOfTasks++;
         printTaskAdded();
     }
 
-    public static void addTodo(String description) throws DukeException {
+    public void addTodo(String description) throws DukeException {
         String[] tokens = description.split("\\s+");
         StringBuilder desc = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
@@ -132,11 +153,10 @@ public class Duke {
         }
         String newDescription = desc.toString().strip();
         tasks.add(new Todo(newDescription));
-        numberOfTasks++;
         printTaskAdded();
     }
 
-    public static void addDeadline(String description) throws DukeException {
+    public void addDeadline(String description) throws DukeException {
         int indexOfBy = description.indexOf("/by");
         if (indexOfBy == -1) {
             throw new DukeException("OOPS!!! The deadline description must contain a time following \"/by\"");
@@ -144,22 +164,21 @@ public class Duke {
         String desc = description.substring(8, indexOfBy).strip();
         String by = description.substring(indexOfBy + 3).strip();
         tasks.add(new Deadline(desc, by));
-        numberOfTasks++;
         printTaskAdded();
     }
 
-    public static void printTaskAdded() {
+    public void printTaskAdded() {
         String output = "Got it. I've added this task:\n"
-                + "  " + tasks.get(numberOfTasks - 1).toString()
+                + "  " + tasks.get(tasks.size() - 1).toString()
                 + "\n" + getNumberOfTasks();
         dukeOutput(output);
     }
 
-    public static void printTasks() {
+    public void printTasks() {
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < numberOfTasks; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             output.append((i + 1) + ". " + tasks.get(i).toString());
-            if (i != numberOfTasks - 1) {
+            if (i != tasks.size() - 1) {
                 output.append("\n");
             }
         }
@@ -170,12 +189,23 @@ public class Duke {
         }
     }
 
-
-    public static String getNumberOfTasks() {
-        return "Now you have " + numberOfTasks + " tasks in the list.";
+    public String getTasksAscii() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            output.append((i + 1) + ". " + tasks.get(i).getAscii());
+            if (i != tasks.size() - 1) {
+                output.append("\n");
+            }
+        }
+        return output.toString();
     }
 
-    public static void dukeOutput(String out) {
+
+    public String getNumberOfTasks() {
+        return "Now you have " + tasks.size() + " tasks in the list.";
+    }
+
+    public void dukeOutput(String out) {
         String bound = "_______________________________________";
         String newOutput = out.replace("\n", "\n    ");
         System.out.println("    " + bound + "\n    "

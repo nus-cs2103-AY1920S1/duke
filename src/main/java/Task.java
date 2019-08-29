@@ -27,6 +27,11 @@ public class Task {
         setDone(true);
     }
 
+    public String getAscii() {
+        String doneOrNot = isDone() ? "1" : "0";
+        return doneOrNot + " | " + getDescription();
+    }
+
     @Override
     public String toString() {
         String value = "[" + getStatusIcon() + "]" + " " + getDescription();

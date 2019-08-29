@@ -16,7 +16,8 @@ public interface Command {
     /**
      * All commands will return false with the exception of EndSessionCommand. Used to determine if Ui should remain
      * active.
-     * @return
+     *
+     * @return whether Duke should continue staying active or terminate.
      */
     default boolean isExit() {
         return false;

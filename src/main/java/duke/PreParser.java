@@ -5,13 +5,13 @@ public class PreParser {
     public PreParser() {
         String[] dummyArgs = new String[0];
         commandMap = new CommandMap();
-        commandMap.register(new duke.commands.Bye(dummyArgs));
-        commandMap.register(new duke.commands.List(dummyArgs));
-        commandMap.register(new duke.commands.Done(dummyArgs));
-        commandMap.register(new duke.commands.Todo(dummyArgs));
-        commandMap.register(new duke.commands.Deadline(dummyArgs));
-        commandMap.register(new duke.commands.Event(dummyArgs));
-        commandMap.register(new duke.commands.Delete(dummyArgs));
+        commandMap.register(new duke.command.Bye(dummyArgs));
+        commandMap.register(new duke.command.List(dummyArgs));
+        commandMap.register(new duke.command.Done(dummyArgs));
+        commandMap.register(new duke.command.Todo(dummyArgs));
+        commandMap.register(new duke.command.Deadline(dummyArgs));
+        commandMap.register(new duke.command.Event(dummyArgs));
+        commandMap.register(new duke.command.Delete(dummyArgs));
     }
     public Command parse(String fullCommand) throws DukeException {
         String[] args = fullCommand.split(" ");

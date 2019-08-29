@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.command;
 
 import duke.*;
 
@@ -24,7 +24,7 @@ public class Event extends Command {
         String[] atArgs = switchArgs.get("/at");
         if(atArgs.length == 0) throw new DukeException("The date of an event cannot be empty.");
 
-        duke.tasks.Event e = new duke.tasks.Event(Parser.concatenate(comArgs), Parser.concatenate(atArgs));
+        duke.task.Event e = new duke.task.Event(Parser.concatenate(comArgs), Parser.concatenate(atArgs));
         tasks.add(e);
         ui.say("added: " + e);
     }

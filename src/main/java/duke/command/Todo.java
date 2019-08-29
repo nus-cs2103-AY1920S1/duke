@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.command;
 
 import duke.*;
 
@@ -21,7 +21,7 @@ public class Todo extends Command {
         String[] comArgs = switchArgs.get(getName());
         if(comArgs.length == 0) throw new DukeException("The description of a todo cannot be empty.");
 
-        duke.tasks.Todo t = new duke.tasks.Todo(Parser.concatenate(comArgs));
+        duke.task.Todo t = new duke.task.Todo(Parser.concatenate(comArgs));
         tasks.add(t);
         ui.say("added: " + t);
     }

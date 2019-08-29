@@ -1,6 +1,6 @@
 package duke;
 
-import duke.commands.Bye;
+import duke.command.Bye;
 
 abstract public class Command {
     protected Parser parser = new Parser();

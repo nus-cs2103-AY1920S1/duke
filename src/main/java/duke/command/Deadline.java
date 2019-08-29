@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.command;
 
 import duke.*;
 
@@ -24,7 +24,7 @@ public class Deadline extends Command {
         String[] byArgs = switchArgs.get("/by");
         if(byArgs.length == 0) throw new DukeException("The date of a deadline cannot be empty.");
 
-        duke.tasks.Deadline d = new duke.tasks.Deadline(Parser.concatenate(comArgs), Parser.concatenate(byArgs));
+        duke.task.Deadline d = new duke.task.Deadline(Parser.concatenate(comArgs), Parser.concatenate(byArgs));
         tasks.add(d);
         ui.say("added: " + d);
     }

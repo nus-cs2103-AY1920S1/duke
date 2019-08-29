@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Exception due to Duke's user's invalid input.
+ */
 public class DukeException extends Exception {
     protected String message;
 

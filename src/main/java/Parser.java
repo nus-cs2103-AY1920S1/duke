@@ -7,14 +7,27 @@ import task.TaskType;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Processes user's input text and executes corresponding commands.
+ */
 public class Parser {
     public static final String LINE = "    ____________________________________________________________\n";
     private Ui ui;
 
+    /**
+     * Returns a parser that parses user's input
+     *
+     * @param ui Ui object that Duke has initialised
+     */
     public Parser(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Parses user's input and executes the corresponding commands.
+     *
+     * @param userInput text that user sends to Duke
+     */
     public void parse(String userInput) {
         String addTaskMessage = "     Got it. I've added this task: ";
         TaskList taskList = Duke.getTasks();
@@ -170,6 +183,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts a date string in the format of dd/mm/yyyy hhmm into a <code>Calendar</code> object.
+     *
+     * @param dateString String in the format of dd/mm/yyyy hhmm
+     * @return Calendar that represents the given date
+     */
     private static Calendar convertStringToCalendar(String dateString) {
         String[] dateAndTime = dateString.split("\\s");
         String date = dateAndTime[0];

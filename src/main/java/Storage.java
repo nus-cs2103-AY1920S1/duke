@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
+/**
+ * Deals with storage related functionality, such as writing to a file or loading tasks from a file.
+ */
 public class Storage {
     private String filePath;
 
@@ -16,18 +19,24 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes a string to the file path of this Storage object.
+     *
+     * @param textToAdd String that the user wants to write to a file.
+     * @throws IOException
+     */
     public void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    public void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
-
+    /**
+     * Loads strings from a text file and parse them into an ArrayList of Tasks.
+     *
+     * @return ArrayList of Tasks stored in the file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner scanner = new Scanner(f); // create a Scanner using the File as the source

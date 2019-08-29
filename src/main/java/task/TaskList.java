@@ -2,6 +2,9 @@ package task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks that the user has.
+ */
 public class TaskList {
     private static ArrayList<Task> tasks;
 
@@ -17,6 +20,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Converts the list of tasks in this object into its String representation so as to be stored in a text file.
+     *
+     * @return String representation of this list of tasks.
+     */
     public String convertTasksToString() {
         if (tasks == null) {
             tasks = new ArrayList<>();

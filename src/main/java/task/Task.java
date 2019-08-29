@@ -3,6 +3,9 @@ package task;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Represents a task that the user wants Duke to keep track of.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -15,6 +18,11 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Sets the date and the time associated with this task.
+     *
+     * @param time String in the format of dd/mm/yyyy hhmm
+     */
     public void setTime(Calendar time) {
         this.time = time;
     }
@@ -31,6 +39,11 @@ public class Task {
         return time.getTimeInMillis() + "";
     }
 
+    /**
+     * Returns the status icon of this task.
+     *
+     * @return Status icon of this task. A tick means that the task is done and a cross otherwise.
+     */
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
@@ -52,10 +65,18 @@ public class Task {
         return "[" + result + "]";
     }
 
+    /**
+     * Marks this task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Returns the String representation of this task, which the user will see on the console.
+     *
+     * @return String representation of this task.
+     */
     @Override
     public String toString() {
         String timeString = "";

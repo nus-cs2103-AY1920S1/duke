@@ -49,9 +49,9 @@ public class Duke {
                 c.execute(this.tasks, this.ui, this.storage);
                 shouldRun = !c.isExit();
             } catch (DukeException e) {
-                ui.printError(e);
+                this.ui.printError(e);
             } catch (ParseException e) {
-                ui.print("Passed in an invalid date");
+                this.ui.print("Passed in an invalid date");
             } 
         }
     }

@@ -11,7 +11,11 @@ public abstract class Task {
 
     /**
      * Constructor.
+     *
      * @param name String
+     * @param time Optional of Date
+     * @param type TaskType
+     * @param isDone boolean
      */
     public Task(String name, Optional<Date> time, TaskType type, boolean isDone) {
         this.name = name;
@@ -29,6 +33,7 @@ public abstract class Task {
 
     /**
      * Get name.
+     *
      * @return String
      */
     public String getName() {
@@ -37,6 +42,7 @@ public abstract class Task {
 
     /**
      * Get time.
+     *
      * @return Optional of String
      */
     public Optional<Date> getTime() {
@@ -45,6 +51,7 @@ public abstract class Task {
 
     /**
      * Get type.
+     *
      * @return TaskType
      */
     public TaskType getType() {
@@ -53,6 +60,7 @@ public abstract class Task {
 
     /**
      * Get isDone.
+     *
      * @return boolean
      */
     public boolean getIsDone() {
@@ -61,6 +69,7 @@ public abstract class Task {
 
     /**
      * Get the status.
+     *
      * @return String
      */
     String getStatus() {

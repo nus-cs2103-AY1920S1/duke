@@ -14,6 +14,8 @@ public class DoneCommand implements Command {
 
     /**
      * Constructor.
+     *
+     * @param index int
      */
     public DoneCommand(int index) {
         this.index = index;

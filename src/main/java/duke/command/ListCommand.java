@@ -14,7 +14,7 @@ public class ListCommand implements Command {
     }
 
     /**
-     * Executes the command.
+     * Execute.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.prettyPrint4("Here are the tasks in your list:");

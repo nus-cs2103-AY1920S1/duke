@@ -1,16 +1,12 @@
 package duke.error;
 
 public class InvalidTaskArgumentException extends DukeException {
+    /**
+     * Constructor.
+     * 
+     * @param message String
+     */
     public InvalidTaskArgumentException(String message) {
         super(message);
-    }
-
-    @Override
-    /**
-     * Overrides the toString method.
-     * @return String
-     */
-    public String toString() {
-        return getMessage();
     }
 }

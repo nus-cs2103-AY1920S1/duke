@@ -19,8 +19,11 @@ import duke.util.DateUtil;
 public class Parser {
     /**
      * Handles the various commands.
+     * 
      * @param command String
      * @return boolean
+     * @throws DukeException if any of the functions it calls throws an error
+     * @throws ParseException if it fails to parse the date properly
      */
     public static Command parse(String command) throws DukeException, ParseException { 
         String keyword = command.split(" ")[0];
@@ -53,6 +56,7 @@ public class Parser {
 
     /**
      * parse Done command.
+     *
      * @param command String
      * @throws InvalidCommandException if the Done command is not correct
      */
@@ -67,6 +71,7 @@ public class Parser {
 
     /**
      * parse Delete command.
+     *
      * @param command String
      * @throws InvalidCommandException if the arguments provided are invalid
      */
@@ -81,6 +86,7 @@ public class Parser {
 
     /**
      * parse Deadline command.
+     *
      * @param command String
      * @throws InvalidTaskArgumentException if Deadline arguments are invalid
      * @throws ParseException if it fails to parse the date
@@ -96,6 +102,7 @@ public class Parser {
 
     /**
      * parse Event command.
+     * 
      * @param command String
      * @throws InvalidTaskArgumentException if Event arguments are invalid
      * @throws ParseException if it fails to parse the date
@@ -111,6 +118,7 @@ public class Parser {
 
     /**
      * parse ToDo command.
+     *
      * @param command String
      * @throws InvalidTaskArgumentException if ToDo arguments are invalid
      */

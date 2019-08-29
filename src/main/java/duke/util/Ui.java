@@ -1,7 +1,7 @@
 package duke.util;
 
 import java.util.Scanner;
-
+import java.lang.Exception;
 import duke.task.Task;
 
 public class Ui {
@@ -16,6 +16,7 @@ public class Ui {
 
     /**
      * Reads command from System.in.
+     *
      * @return String
      */
     public String readCommand() {
@@ -24,6 +25,7 @@ public class Ui {
 
     /**
      * Generic print.
+     *
      * @param str String
      */
     public void print(String str) {
@@ -32,6 +34,7 @@ public class Ui {
 
     /**
      * Pretty prints the output to the user with indentation of 4.
+     *
      * @param str the String to be printed
      */
     public void prettyPrint4(String str) {
@@ -40,6 +43,7 @@ public class Ui {
 
     /**
      * Pretty prints the output to the user with indentation of 4.
+     *
      * @param str the String to be printed 
      */
     public void prettyPrint6(String str) {
@@ -48,6 +52,7 @@ public class Ui {
 
     /**
      * Sends task acknowledgement.
+     *
      * @param task Task
      * @param size int the size of the task list
      */
@@ -87,6 +92,7 @@ public class Ui {
 
     /**
      * Print error.
+     *
      * @param e Exception
      */
     public void printError(Exception e) {

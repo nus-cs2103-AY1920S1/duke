@@ -17,7 +17,7 @@ fi
 find ../src/main -name *.java > sources.txt
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin @sources.txt
+if ! javac -cp ../src/main -Xlint:none -d ../bin @sources.txt
 then
     echo "********** BUILD FAILURE **********"
     exit 1

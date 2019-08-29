@@ -125,22 +125,11 @@ public class Events extends Task {
     }
 
     @Override
-<<<<<<< Updated upstream
-=======
     public String formatString() {
         return "E-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.event[1];
     }
 
-
     @Override
-<<<<<<< HEAD
-    public String formatString() {
-        return "E-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.event[1];
-    }
-    @Override
-=======
->>>>>>> Stashed changes
->>>>>>> branch-Level-8
     public String toString() {
         return "[E]" + super.toString() +
                 "(by: " + this.getdate() + ", " + this.gettime() + ")";

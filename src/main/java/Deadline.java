@@ -6,15 +6,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-<<<<<<< Updated upstream
         deadline = by.split(" ", 2);
-<<<<<<< HEAD
-    @Override
-    public String formatString() {
-        return "D-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.deadline[1];
-=======
-=======
-        this.deadline = by.split(" ", 2);
         this.datetime = deadline[1].split(" ");
     }
 
@@ -135,8 +127,6 @@ public class Deadline extends Task {
     @Override
     public String formatString() {
         return "D-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.deadline[1];
->>>>>>> Stashed changes
->>>>>>> branch-Level-8
     }
 
     @Override

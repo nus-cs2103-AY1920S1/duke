@@ -50,7 +50,7 @@ public class Duke {
     }
 
     /**
-     * closeDuke() will write data to data file and print goodbye
+     * closeDuke() will write data to data file and print goodbye.
      */
     private void closeDuke() {
         this.storage.save(this.tasks.getTaskList());

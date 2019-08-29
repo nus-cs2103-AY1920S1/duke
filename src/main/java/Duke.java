@@ -46,7 +46,7 @@ public class Duke {
 
 
     public static String dateToStringConverter(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy HHmm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
         String sDate = sdf.format(date);
         return sDate;
     }

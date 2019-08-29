@@ -1,23 +1,28 @@
 package duke.commands;
 
-import duke.Command;
-import duke.Duke;
-import duke.DukeException;
-import duke.Parser;
+import duke.*;
 
 import java.util.Map;
 
 public class Todo extends Command {
-    public Todo(Duke duke) {
-        super(duke);
-        name = "todo";
+    public Todo(String[] args) {
+        super(args);
     }
-    public void execute(String[] args) throws DukeException {
+
+    @Override
+    public String getName() {
+        return "todo";
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = parser.parse(args);
 
-        String[] comArgs = switchArgs.get(name);
+        String[] comArgs = switchArgs.get(getName());
         if(comArgs.length == 0) throw new DukeException("The description of a todo cannot be empty.");
 
-        duke.addTask(new duke.tasks.Todo(Parser.concatenate(comArgs)));
+        duke.tasks.Todo t = new duke.tasks.Todo(Parser.concatenate(comArgs));
+        tasks.add(t);
+        ui.say("added: " + t);
     }
 }

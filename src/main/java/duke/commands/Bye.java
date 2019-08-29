@@ -1,15 +1,17 @@
 package duke.commands;
 
-import duke.Command;
-import duke.Duke;
+import duke.*;
 
 public class Bye extends Command {
-    public Bye(Duke duke) {
-        super(duke);
-        name = "bye";
+    public Bye(String[] args) {
+        super(args);
     }
-    public void execute(String[] args) {
-        duke.say("Bye. Hope to see you again soon!");
-        duke.quit();
+    @Override
+    public String getName() {
+        return "bye";
+    }
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.say("Bye. Hope to see you again soon!");
     }
 }

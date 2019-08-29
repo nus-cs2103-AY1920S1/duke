@@ -5,19 +5,20 @@ import duke.*;
 import java.util.Map;
 
 public class Delete extends Command {
-    public Delete(Duke duke) {
-        super(duke);
-        name = "delete";
+    public Delete(String[] args) {
+        super(args);
     }
-
     @Override
-    public void execute(String[] args) throws DukeException {
+    public String getName() {
+        return "delete";
+    }
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = parser.parse(args);
 
-        String[] comArgs = switchArgs.get(name);
+        String[] comArgs = switchArgs.get(getName());
         if(comArgs.length == 0) throw new DukeException("An index must be specified.");
 
-        TaskList taskList = duke.getTaskList();
         int oneIndex;
         try {
             oneIndex = Integer.parseInt(comArgs[0]);
@@ -27,12 +28,12 @@ public class Delete extends Command {
         }
         Task task;
         try {
-            task = taskList.delete(oneIndex);
+            task = tasks.delete(oneIndex);
         }
         catch(IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
-        duke.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
-                task.toString(), taskList.size(), taskList.size() == 1 ? "" : "s"));
+        ui.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
+                task.toString(), tasks.size(), tasks.size() == 1 ? "" : "s"));
     }
 }

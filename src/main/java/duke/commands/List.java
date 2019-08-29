@@ -1,23 +1,22 @@
 package duke.commands;
 
-import duke.Command;
-import duke.Duke;
-import duke.TaskList;
+import duke.*;
 
 public class List extends Command {
-    public List(Duke duke) {
-        super(duke);
-        name = "list";
+    public List(String[] args) {
+        super(args);
     }
-
     @Override
-    public void execute(String[] args) {
-        TaskList taskList = duke.getTaskList();
-        if(taskList.size() > 0) {
-            duke.say(duke.getTaskList().toString());
+    public String getName() {
+        return "list";
+    }
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        if(tasks.size() > 0) {
+            ui.say(tasks.toString());
         }
         else {
-            duke.say("No tasks yet.");
+            ui.say("No tasks yet.");
         }
     }
 }

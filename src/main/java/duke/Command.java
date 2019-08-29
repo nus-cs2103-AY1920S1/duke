@@ -1,14 +1,18 @@
 package duke;
 
+import duke.commands.Bye;
+
 abstract public class Command {
     protected Parser parser = new Parser();
-    protected String name;
-    protected Duke duke;
-    public Command(Duke duke) {
-        this.duke = duke;
+
+    protected String[] args;
+    public Command(String[] args) {
+        this.args = args;
     }
-    public String getName() {
-        return name;
-    };
-    abstract public void execute(String[] args) throws DukeException;
+
+    public boolean isExit() {
+        return (this instanceof Bye);
+    }
+    abstract public String getName();
+    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

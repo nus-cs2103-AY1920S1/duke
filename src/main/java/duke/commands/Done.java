@@ -1,26 +1,24 @@
 package duke.commands;
 
-import duke.Command;
-import duke.Duke;
-import duke.DukeException;
-import duke.TaskList;
+import duke.*;
 
 import java.util.Map;
 
 public class Done extends Command {
-    public Done(Duke duke) {
-        super(duke);
-        name = "done";
+    public Done(String[] args) {
+        super(args);
     }
-
     @Override
-    public void execute(String[] args) throws DukeException {
+    public String getName() {
+        return "done";
+    }
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = parser.parse(args);
 
-        String[] comArgs = switchArgs.get(name);
+        String[] comArgs = switchArgs.get(getName());
         if(comArgs.length == 0) throw new DukeException("An index must be specified.");
 
-        TaskList taskList = duke.getTaskList();
         int oneIndex;
         try {
             oneIndex = Integer.parseInt(comArgs[0]);
@@ -29,11 +27,11 @@ public class Done extends Command {
             throw new DukeException("The index to be marked must be an integer.");
         }
         try {
-            taskList.markDone(oneIndex);
+            tasks.markDone(oneIndex);
         }
         catch(IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
-        duke.say("Nice! I've marked this task as done:\n" + taskList.get(oneIndex));
+        ui.say("Nice! I've marked this task as done:\n" + tasks.get(oneIndex));
     }
 }

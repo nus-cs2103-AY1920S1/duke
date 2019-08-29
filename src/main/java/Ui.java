@@ -28,7 +28,7 @@ public class Ui {
     }
 
     //returns numbered list of tasks
-    public String strList(List<Task> taskList) {
+    public void printList(List<Task> taskList) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             sb.append((i + 1) + ". " + taskList.get(i).toString());
@@ -36,7 +36,7 @@ public class Ui {
                 sb.append("\n");
             }
         }
-        return sb.toString();
+        printStr(sb.toString());
     }
 
     //final execution,

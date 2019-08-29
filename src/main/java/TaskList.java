@@ -6,6 +6,7 @@ public class TaskList {
 
     public void addToList(String taskDescription) {
         tasks.add(taskDescription);
+        System.out.println("added: " + taskDescription);
     }
 
     public void printList() {
@@ -15,6 +16,5 @@ public class TaskList {
             System.out.println(i + ". " + s);
             i++;
         }
-
     }
 }

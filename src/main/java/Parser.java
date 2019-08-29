@@ -83,6 +83,30 @@ public class Parser {
                                 "\n    ____________________________________________________________\n");
                     }
                 }
+            } else if (comm.length() > 5 && comm.substring(0, 4).equals("find")) {
+                if (comm.charAt(4) != ' ') {
+                    try {
+                        Task task = taskList.add(comm);
+                        ui.add(task, taskList);
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else {
+                    try {
+                        ui.find(taskList, comm.substring(5));
+                        try {
+                            storage.writeOnFile(taskList.genInfo());
+                        } catch (IOException e) {
+                            System.out.println("Something went wrong: " + e.getMessage());
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("    ____________________________________________________________\n     " +
+                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                                "\n    ____________________________________________________________\n");
+                    }
+                }
             } else {
                 try {
                     Task task = taskList.add(comm);

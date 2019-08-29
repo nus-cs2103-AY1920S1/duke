@@ -1,4 +1,8 @@
-import java.lang.reflect.Array;
+package seedu.duke.util;
+
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {

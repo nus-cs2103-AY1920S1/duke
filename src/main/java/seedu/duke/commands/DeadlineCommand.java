@@ -1,3 +1,11 @@
+package seedu.duke.commands;
+
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.tasks.Deadline;
+import seedu.duke.util.Storage;
+import seedu.duke.util.TaskList;
+import seedu.duke.util.UI;
+
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {

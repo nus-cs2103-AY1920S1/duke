@@ -1,4 +1,7 @@
-import java.util.Calendar;
+package seedu.duke.util;
+
+import seedu.duke.commands.*;
+import seedu.duke.exceptions.DukeException;
 
 public class Parser {
 
@@ -38,7 +41,7 @@ public class Parser {
         }
     }
 
-    private static String parseTodo(String[] keywords) throws DukeException {
+    public static String parseTodo(String[] keywords) throws DukeException {
         if (keywords.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {

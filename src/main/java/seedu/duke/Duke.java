@@ -1,7 +1,11 @@
-package duke.main;
+package seedu.duke;
 
-import duke.commands.Command;
-import duke.exceptions.DukeException;
+import seedu.duke.commands.Command;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.util.Parser;
+import seedu.duke.util.Storage;
+import seedu.duke.util.TaskList;
+import seedu.duke.util.UI;
 
 import java.util.Scanner;
 

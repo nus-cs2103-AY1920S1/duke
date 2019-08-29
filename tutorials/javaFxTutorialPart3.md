@@ -66,7 +66,7 @@ Verify that the `ScrollPane` scrolls as intended.
 
 ## Iteration 2 – Adding Dialog Boxes
 
-In the mockup of the UI, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
+In the mockup of the seedu.duke.util.UI, notice that the dialog boxes are composed of two different controls (`ImageView` and `Label`) and reused multiple times. In situations like this, it is often beneficial to create our own custom control.
 
 Let’s create our custom control `DialogBox`:
 ```java
@@ -115,7 +115,7 @@ Image|Filename
 public class Duke extends Application {
     // ...
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image seedu.duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     // ...
 }
 ```
@@ -132,7 +132,7 @@ private void handleUserInput() {
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             new DialogBox(userText, new ImageView(user)),
-            new DialogBox(dukeText, new ImageView(duke))
+            new DialogBox(dukeText, new ImageView(seedu.duke))
     );
     userInput.clear();
 }
@@ -213,7 +213,7 @@ private void handleUserInput() {
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(userText, new ImageView(user)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            DialogBox.getDukeDialog(dukeText, new ImageView(seedu.duke))
     );
     userInput.clear();
 }

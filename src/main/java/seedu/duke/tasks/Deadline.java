@@ -1,4 +1,6 @@
-//Solution below adapted from https://nus-cs2103-ay1920s1.github.io/website/schedule/week2/project.html
+package seedu.duke.tasks;//Solution below adapted from https://nus-cs2103-ay1920s1.github.io/website/schedule/week2/project.html
+
+import seedu.duke.exceptions.DukeException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

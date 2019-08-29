@@ -56,11 +56,5 @@ public class Parser {
                     "Please enter 'help' to see all supported commands.");
         }
 
-
-        /*
-        The Parser parses the full command as such:
-        1. Identify the command type - is it an add command, a delete command, an exit command, a finish task command
-        2. Create a new Command object: e.g. return new AddCommand(tasktype, taskname);
-         */
     }
 }

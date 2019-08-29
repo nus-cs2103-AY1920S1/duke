@@ -24,7 +24,10 @@ public class Task {
         return "[" + status + "] " + this.name;
     }
 
-    public void finishTask() { this.isComplete = true; }
+    public void finishTask() {
+        this.isComplete = true;
+    }
+
     public String publishTask() {
         String status = this.isComplete ? "1" : "0";
         return status + " | " + this.name;

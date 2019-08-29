@@ -6,6 +6,7 @@ import main.TaskList;
 import main.Ui;
 
 public class HelpCommand extends Command {
+
     public HelpCommand() {
         super();
     }

@@ -35,14 +35,14 @@ public class Duke {
             } else {
                 temp.append(0);
             }
-            temp.append(" |");
+            temp.append(" | ");
             temp.append(task.getDescription());
             if((task instanceof Event) || (task instanceof Deadline)) {
-                temp.append("| ");
+                temp.append(" | ");
                 if(task instanceof Event) {
-                    temp.append(((Event) task).getDuration());
+                    temp.append(((Event) task).getExactDuration());
                 } else {
-                    temp.append(((Deadline) task).getBy());
+                    temp.append(((Deadline) task).getExactBy());
                 }
             }
             try {
@@ -59,15 +59,20 @@ public class Duke {
         while(s.hasNext()) {
             String[] temp = s.nextLine().split(" ");
             String task = (String)Array.get(temp, 0);
+            for(int i = 0; i < temp.length; i++) {
+                System.out.println((String)Array.get(temp,i));
+            }
             Task newTask;
             if(task.equals("T")) {
                 newTask = new Todo((String)Array.get(temp,4));
             } else if(task.equals("D")) {
                 newTask = new Deadline((String)Array.get(temp,4),
-                        (String)Array.get(temp, 6));
+                        (String)Array.get(temp, 6) + " " +
+                                (String)Array.get(temp, 7));
             } else {
                 newTask = new Event((String)Array.get(temp,4),
-                        (String)Array.get(temp, 6));
+                        (String)Array.get(temp, 6) + " " +
+                                (String)Array.get(temp, 7));
             }
             if(((String)Array.get(temp, 2)).equals("1")) {
                 newTask.setDone();
@@ -146,13 +151,13 @@ public class Duke {
             } else{  //all other commands
                 try {
                     if (input.equals("todo")) {
-                            String tempString = reader.nextLine();
+                            String tempString = reader.nextLine().trim();  //to remove the leading whitespace.
                             if (tempString.equals("")) {
                                 throw new DukeException("      ☹ OOPS!!! The description of a todo cannot be empty.");
                             }
                             taskList.add(new Todo(tempString));
                     } else if (input.equals("deadline") || input.equals("event")) {
-                        String tempString = reader.nextLine();
+                        String tempString = reader.nextLine().trim();      //to remove the leading whitespace.
                         if(tempString.equals("")) {
                             throw new DukeException("      ☹ OOPS!!! The description of a " +
                                     input + " cannot be empty.");
@@ -160,7 +165,7 @@ public class Duke {
                         //replace the first / so that the dates will not be split up
                         tempString = tempString.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
                         String[] tempStringArr = tempString.split(":");
-                        String description = (String) Array.get(tempStringArr, 0);
+                        String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
                         String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
                         if (input.equals("deadline")) {
                             taskList.add(new Deadline(description, secondString));

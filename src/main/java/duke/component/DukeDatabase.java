@@ -2,15 +2,14 @@ package duke.component;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -25,7 +24,8 @@ public class DukeDatabase {
     }
 
     /**
-     * Return a DukeDatabase object.
+     * Returns a DukeDatabase object.
+     *
      * @return a DukeDatabase object.
      */
     public static DukeDatabase getDukeDatabaseInstance() {
@@ -33,17 +33,18 @@ public class DukeDatabase {
     }
 
     /**
-     * Initialise the database by loading the database file and attach it to a File object.
+     * Initializes the database by loading the database file and attach it to a File object.
+     *
      * @return the database object itself.
      */
     private DukeDatabase initialise() {
-        // Generate the directory for the database
+        // Generates the directory for the database
         String projectRoot = new File(System.getProperty("user.dir"))
                 .getParentFile()
                 .getPath();
         databaseDirectory = String.format("%s/data/duke.txt", projectRoot);
 
-        // Create the database file and the corresponding directories if it hasn't exist
+        // Creates the database file and the corresponding directories if they have not existed yet.
         try {
             tasksFile = new File(databaseDirectory);
             tasksFile.getParentFile().mkdirs();
@@ -57,10 +58,11 @@ public class DukeDatabase {
 
     /**
      * Returns all the tasks stored in the database.
+     *
      * @return a list of all the tasks stored in the database.
      */
     public TaskList getAllTasks() {
-        LinkedList<Task> tasksList = new LinkedList<>();
+        TaskList tasksList = new TaskList();
 
         try {
             File f = new File(databaseDirectory);
@@ -71,7 +73,7 @@ public class DukeDatabase {
                 try {
                     // Create the corresponding task object from the data in the database
                     // and add into the taskList.
-                    tasksList.add(createTask(sc.nextLine()));
+                    tasksList.addTask(createTask(sc.nextLine()));
                 } catch (DukeException | NullPointerException | NumberFormatException e) {
                     System.out.println("Database has corrupted data!");
                 }
@@ -80,11 +82,12 @@ public class DukeDatabase {
            System.out.println("Cannot find database file!");
         }
 
-        return new TaskList(tasksList);
+        return tasksList;
     }
 
     /**
-     * Create the corresponding task object from a line of data in the database.
+     * Creates the corresponding task object from a line of data in the database.
+     *
      * @param dataInput a line of data in the database.
      * @return the corresponding task object.
      * @throws DukeException If the given data is corrupted.
@@ -118,7 +121,8 @@ public class DukeDatabase {
     }
 
     /**
-     * Used at the end of program(Duke) to update the database file.
+     * Updates the database file (used at the end of the program).
+     *
      * @param tasks a list of tasks as updated at the point when the program ends.
      */
     public void update(TaskList tasks) {

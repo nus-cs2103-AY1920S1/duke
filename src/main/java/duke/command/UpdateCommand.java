@@ -6,27 +6,48 @@ import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Encapsulates a command which updates a task in the tasks list of Duke.
+ */
 public class UpdateCommand extends Command {
     private UpdateType updateType;
 
+    /**
+     * The type of update.
+     */
     public enum UpdateType {
         DONE;
     }
 
+    /**
+     * Constructs an UpdateCommand object.
+     * @param type the type of update.
+     * @param input user's input.
+     */
     public UpdateCommand(UpdateType type, String input) {
         super(input);
         updateType = type;
     }
 
-    public void execute(TaskList tasks, Ui ui, DukeDatabase database) throws DukeException {
-        initialise(tasks, ui, database);
+    /**
+     * Executes the update command accordingly.
+     *
+     * @param tasksList the tasks list of Duke.
+     * @param ui the ui of Duke.
+     * @param database the database of Duke.
+     * @throws DukeException if the user's input is incorrect.
+     */
+    public void execute(TaskList tasksList, Ui ui, DukeDatabase database) throws DukeException {
+        initialise(tasksList, ui, database);
 
         if (UpdateType.DONE.equals(updateType)) {
             markTaskAsDone();
         }
     }
 
-    // Mark a task in the task list as done.
+    /**
+     * Mark a task in the task list as done.
+     */
     private void markTaskAsDone() throws DukeException {
         try {
             int index = Integer.parseInt(input.substring(4).trim());

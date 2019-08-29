@@ -7,7 +7,7 @@ public class Event extends Task {
     private String date;
 
     /**
-     * Construct an Event object.
+     * Constructs an Event object.
      *
      * @param topic the topic of the event.
      * @param date the date of the event.

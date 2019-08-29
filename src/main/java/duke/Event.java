@@ -1,24 +1,24 @@
 package duke;
 
-/*
- * Event.java
- * CS2103T
- * @author Gabriel Ong
- *
- * This class represents a Event Task.
- *
- */
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class represents an Event task.
+ */
 public class Event extends Task implements Serializable {
     private LocalDateTime at;
     private static final DateTimeFormatter dateFormatter
             = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Creates an event task.
+     * @param description indicates what the task is about and when the event is
+     * @throws DukeException when input does not meet required format
+     * or '/at' is not specified.
+     */
     public Event(String description) throws DukeException {
         super(description);
         String[] splitDescription = description.split(" /at ", 2);
@@ -33,6 +33,10 @@ public class Event extends Task implements Serializable {
         }
     }
 
+    /**
+     * Returns a string representation of the Event Task.
+     * @return a string representation of the Event Task.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "

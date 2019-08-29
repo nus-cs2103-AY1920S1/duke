@@ -1,23 +1,25 @@
 package duke;
 
-/*
- * Deadline.java
- * CS2103T
- * @author Gabriel Ong
- *
- * This class represents a Deadline Task.
- *
- */
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class represents a Deadline task.
+ */
 public class Deadline extends Task implements Serializable {
     private LocalDateTime by;
     private static final DateTimeFormatter dateFormatter =
             DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Creates a deadline task.
+     * @param description indicates what the task is about
+     *                    and when the deadline is
+     * @throws DukeException if input does not meet required
+     * format or '/by' is not specified.
+     */
     public Deadline(String description) throws DukeException {
         super(description);
         String[] splitDescription = description.split(" /by ", 2);
@@ -33,6 +35,10 @@ public class Deadline extends Task implements Serializable {
         }
     }
 
+    /**
+     * Returns a string representation of the Deadline Task.
+     * @return a string representation of the deadline Task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString()

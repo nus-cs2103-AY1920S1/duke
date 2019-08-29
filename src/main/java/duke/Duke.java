@@ -2,7 +2,7 @@ package duke;
 
 import java.io.File;
 
-/*
+/**
  * Duke.java
  * CS2103T
  * @author Gabriel Ong
@@ -19,7 +19,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    private Duke(String filePath) {
+    /**
+     * Returns a instance of duke.
+     * @param filePath a filepath indicating the storage directory for duke
+     */
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -30,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs duke to start taking in input from user.
+     */
     public void run() {
         ui.greetHello();
 

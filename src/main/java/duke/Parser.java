@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * This class is responsible for parsing input from the UI, taking the
+ * String input and returning a String output.
+ */
 public class Parser {
     private TaskList taskList;
     private static final int DONE_SUFFIX_LENGTH = 5;
@@ -13,8 +17,13 @@ public class Parser {
         this.taskList = taskList;
     }
 
-    // Takes in a string, parses it and immediately runs the command as parsed.
-    // Returns a String output for the UI.
+    /**
+     * Takes in a string, parses it and immediately runs the command as parsed.
+     * @param input a String representation of the user's input.
+     * @return a String output for the result of the command.
+     * @throws DukeException for various input errors or if the
+     * command is invalid.
+     */
     public String parse(String input) throws DukeException {
         /*
          * Check if command suffix to parse, split accordingly and run command
@@ -85,11 +94,18 @@ public class Parser {
         }
     }
 
-    //Adds a list of a particular task type to the task list.
-    private String addToList(String input, TaskType type) throws DukeException {
+    /**
+     * Adds a list of a particular task type to the task list.
+     * @param input describes the task
+     * @param type indicates the type of task that was parsed by parse().
+     * @return a String indicating the successful adding of the task to
+     * the duke list.
+     * @throws DukeException when description is invalid.
+     */
+    public String addToList(String input, TaskType type) throws DukeException {
         Task task = null;
         // Process input string (Cut command suffix)
-        switch(type) {
+        switch (type) {
             case Todo:
                 if (input.length() > TODO_SUFFIX_LENGTH) {
                     task = new Todo(

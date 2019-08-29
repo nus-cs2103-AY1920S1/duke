@@ -6,28 +6,46 @@ abstract class Task {
     protected boolean done;
     protected TaskType type;
 
+    /**
+     * Constructor for the object.
+     * @param name Description of the task.
+     */
     public Task(String name) {
         this.name = name;
     }
 
-    // mark task as done
+    /**
+     * Mark a task as done.
+     */
     public void markDone() {
         this.done = true;
     }
 
-    // get task name
+    /**
+     * Get the task description.
+     * @return String representing task description.
+     */
     public String getName() {
         return this.name;
     }
 
-    // check if task is done
+    /**
+     * Check if task is marked done.
+     * @return Boolean representing task done status.
+     */
     public boolean isTaskDone() {
         return this.done;
     }
 
-    // get task type
+    /**
+     * Abstract method to represent the task type.
+     * @return TaskType of the task.
+     */
     public abstract TaskType getType();
 
-    // get task date
+    /**
+     * Abstract method representing the task date.
+     * @return Date of task.
+     */
     public abstract Date getDate();
 }

@@ -77,6 +77,10 @@ public class Duke {
         this.ui.printExit();
     }
 
+    /**
+     * Main method for the class.
+     * @param args Arguments passed while execution.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

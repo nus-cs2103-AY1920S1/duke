@@ -8,27 +8,40 @@ class UI {
     private static final String welcomeStr = "Hello! I'm Duke :)\n     What can I do for you?";
     private static final String endStr = "Bye. Hope to see you again soon!";
 
-    // class constructor
+    /**
+     * Constructor for the object.
+     */
     public UI() {
         sc = new Scanner(System.in);
     }
 
-    // print welcome string
+    /**
+     * Print welcome string.
+     */
     public void printWelcome() {
         prettyPrint(welcomeStr);
     }
 
-    // print exit string
+    /**
+     * Print exit string.
+     */
     public void printExit() {
         prettyPrint(endStr);
     }
 
-    // method to take input from user
+    /**
+     * Take input from user.
+     * @return User input.
+     */
     public String takeInput() {
         return sc.nextLine();
     }
 
-    // method to print during task addition
+    /**
+     * Method to display task addition.
+     * @param task Task added.
+     * @param tl TaskList of tasks.
+     */
     public void showTaskAddition(Task task, TaskList tl) {
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
         sb.append("       " + task + "\n");
@@ -36,7 +49,11 @@ class UI {
         prettyPrint(sb.toString());
     }
 
-    // method to show task deletion
+    /**
+     * Display a deletion of task.
+     * @param task Task deleted.
+     * @param tl TaskList deleted from.
+     */
     public void showTaskDeletion(Task task, TaskList tl) {
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
         sb.append(String.format("     %s\n", task.toString()));
@@ -44,24 +61,36 @@ class UI {
         prettyPrint(sb.toString());
     }
 
-    // method to show marking task as done
+    /**
+     * Display marking task as done.
+     * @param task Task marked done.
+     */
     public void showTaskMarkedDone(Task task) {
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
         sb.append(String.format("     %s", task.toString()));
         prettyPrint(sb.toString());
     }
 
-    // method to list tasks in TaskList
+    /**
+     * List the tasks in a TaskList.
+     * @param tl TaskList to list tasks from.
+     */
     public void showTaskList(TaskList tl) {
         prettyPrint(tl.listTasks());
     }
 
-    // method to print error
+    /**
+     * Display an error.
+     * @param e Error to be displayed.
+     */
     public void printError(DukeException e) {
         prettyPrint(String.format("☹ OOPS!!! %s", e.getMessage()));
     }
 
-    // pretty print a string
+    /**
+     * Pretty print a string.
+     * @param str String to be printed.
+     */
     private static void prettyPrint(String str) {
         System.out.println("    --------------------------------------------------");
         System.out.println("     " + str);

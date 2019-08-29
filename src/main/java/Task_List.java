@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Task_List {
+    String filePath = "data/duke.txt";
     ArrayList <Task> schedule = new ArrayList<> ();
     int task_Num = 0;
 
@@ -17,6 +18,7 @@ public class Task_List {
                         if (word_Arr.length < 2)
                             throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Which task did you complete again?\n" + (new Border()));
                         schedule.get(Integer.parseInt(word_Arr[1]) - 1).markAsDone();
+                        FileWriterClass.writeToFile(filePath, schedule.toString());
                         System.out.println(new Border());
                         System.out.println("     Nice! I've marked this task as done:");
                         System.out.println("       " + schedule.get(Integer.parseInt(word_Arr[1]) - 1).toString());
@@ -39,6 +41,7 @@ public class Task_List {
                             throw new DukeException((new Border()) + "\n     ☹ OOPS!!! What do you want to delete again?\n" + (new Border()));
                         Task removed_Task = schedule.get(Integer.parseInt(word_Arr[1]) - 1);
                         schedule.remove(removed_Task);
+                        FileWriterClass.writeToFile(filePath, schedule.toString());
                         task_Num --;
                         System.out.println(new Border());
                         System.out.println("     Noted. I've removed this task:");
@@ -59,6 +62,7 @@ public class Task_List {
                 try {
                     Task new_task = track(word_Arr);
                     schedule.add(new_task);
+                    FileWriterClass.writeToFile(filePath, schedule.toString());
                     task_Num ++;
                     System.out.println(new Border());
                     System.out.println("     Got it. I've added this task:");

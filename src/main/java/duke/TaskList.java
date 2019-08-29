@@ -95,8 +95,19 @@ public class TaskList {
     /**
      * Gets list from <code>TaskList</code> object
      *
-     * @return <code>List</code> object which contains list of tasks
+     * @return <code>List</code> object which contains list matching search results
      */
+
+    public List<Task> findMatchingTasks(String searchTerm) {
+        List<Task> searchResults = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getTaskName().toLowerCase().contains(searchTerm.toLowerCase())) {
+                searchResults.add(task);
+            }
+        }
+        return searchResults;
+    }
+
     public List<Task> getList() {
         return taskList;
     }

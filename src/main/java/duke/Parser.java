@@ -20,9 +20,7 @@ public class Parser {
         String command = parts[0];
         String commandInformation = fullCommand.substring(command.length()).stripLeading();
 
-
         switch (command) {
-
         case "bye":
             return new ExitCommand(commandInformation);
         case "list":
@@ -37,6 +35,8 @@ public class Parser {
             return new CreateDeadlineCommand(commandInformation);
         case "event":
             return new CreateEventCommand(commandInformation);
+        case "find":
+            return new FindTaskCommand(commandInformation);
         default:
             return new InvalidCommand();
         }

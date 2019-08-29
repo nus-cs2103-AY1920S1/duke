@@ -36,14 +36,12 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-        } catch (DukeException e) {
-            System.out.println("\t ☹ OOPS!!! " + e.getMessage());
-        } finally {
-            UI.printLine();
+
+            } catch (DukeException e) {
+                System.out.println("\t ☹ OOPS!!! " + e.getMessage());
+            } finally {
+                UI.printLine();
+            }
         }
-
-        }
-
-
     }
 }

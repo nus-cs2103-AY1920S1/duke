@@ -124,4 +124,16 @@ public class UI {
                 "\t  [✓] " + task.getTaskName() + " " + task.getDetails() + "\n" +
                 "\t Now you have " + taskList.size() + " " + pluralOrNot + " in the list");
     }
+
+    public void printSearchResults(List<Task> taskList) {
+        if (taskList.isEmpty()) {
+            System.out.println("\t You have no tasks that match the search query");
+        } else {
+            System.out.println("\t Here are your search results: ");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.print("\t " + (i + 1) + ".");
+                System.out.println(taskList.get(i));
+            }
+        }
+    }
 }

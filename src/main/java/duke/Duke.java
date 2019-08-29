@@ -9,7 +9,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Implements the Duke chatbot.
+ * Implements the Duke chat bot.
  * @author Lim Yong Shen, Kevin
  */
 public class Duke {
@@ -19,12 +19,12 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructs a new Duke chatbot with the specified data file path.
-     * @param filePath The specified data file path.
+     * Constructs a new Duke chat bot with the specified data file name.
+     * @param fileName The specified data file name.
      */
-    private Duke(String filePath) {
+    private Duke(String fileName) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(fileName);
         try {
             tasks = storage.load();
         } catch(DukeException e) {
@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chatbot until the exit command is given.
+     * Runs the Duke chat bot until the exit command is given.
      */
     private void run() {
         ui.showWelcome();
@@ -60,11 +60,11 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chatbot.
+     * Runs the Duke chat bot.
      * @param args Command line arguments (unused).
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("/Users/lyskevin/Desktop/Y2 Sem 1/CS2103T/duke/src/main/java/duke/data/tasks.txt").run();
     }
 
 }

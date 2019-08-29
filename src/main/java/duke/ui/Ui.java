@@ -11,7 +11,7 @@ public class Ui {
 
     private Scanner inputScanner;
     private static final String LOADING_ERROR_MESSAGE = "The data file could not be loaded."
-            + "Creating a new task list.\n";
+            + " Creating a new task list.\n";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

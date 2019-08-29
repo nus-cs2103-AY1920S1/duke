@@ -14,5 +14,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
-*.gitignore
-*/TODO.txt
+TODO.txt
+
+src/out/*
+
+*.MF

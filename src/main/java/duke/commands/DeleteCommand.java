@@ -8,7 +8,6 @@ import duke.data.tasks.Task;
  */
 public class DeleteCommand extends Command {
 
-    private Task task;
     private int taskNumber;
     private static final String SUCCESS_MESSAGE = "Noted. I've removed this task:\n"
             + "%s\nNow you have %d task(s) in the list.\n";

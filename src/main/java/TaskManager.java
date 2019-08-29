@@ -51,6 +51,15 @@ public class TaskManager {
         separator();
     }
 
+    public String printTasksForHardDisk() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < tasks.size(); ++i) {
+            builder.append(tasks.get(i).toStringForHardDisk());
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
     public static void separator() {
         System.out.println("____________________________________________________________");
     }

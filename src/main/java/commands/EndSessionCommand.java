@@ -2,7 +2,7 @@ package commands;
 
 import components.Storage;
 import components.Ui;
-import tasks.TaskList;
+import components.TaskList;
 
 public class EndSessionCommand implements Command {
     @Override

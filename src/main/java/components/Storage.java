@@ -2,10 +2,7 @@ package components;
 
 import tasks.Task;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
@@ -26,6 +23,9 @@ public class Storage {
         //Write the objects to file
         try (FileOutputStream fout = new FileOutputStream(filepath);
              ObjectOutputStream oos = new ObjectOutputStream(fout)) {
+            //First piece of data is how many objects there are
+            oos.writeInt(arr.size());
+            //Subsequently, all the tasks are written in
             for (Task task : arr) {
                 oos.writeObject(task);
             }
@@ -40,7 +40,27 @@ public class Storage {
      * @return an empty ArrayList if file has not been created or is empty, and the ArrayList of existing Tasks otherwise.
      */
     public ArrayList<Task> load() {
-        return null;
+        try (FileInputStream fi = new FileInputStream(new File(filepath));
+             ObjectInputStream oi = new ObjectInputStream(fi)) {
+            ArrayList<Task> tasks = new ArrayList<>();
+            //numObjects refers to how many Tasks were stored in this file.
+            int numObjects = oi.readInt();
+            for (int i = 0; i < numObjects; i++) {
+                Task t = (Task) oi.readObject();
+                tasks.add(t);
+            }
+            return tasks;
+
+        } catch (FileNotFoundException e) {
+            Ui.printErr("I could not find the file I saved your data to! I'll load an empty list first.");
+            return new ArrayList<>();
+        } catch (IOException e) {
+            Ui.printErr("I had an issue reading your items from memory! I'll load an empty list first.");
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            Ui.printErr("Your data does not resemble any format I know. I'll load an empty list first.");
+            return new ArrayList<>();
+        }
     }
 
 }

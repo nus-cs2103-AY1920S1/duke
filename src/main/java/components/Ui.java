@@ -5,12 +5,22 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_BLUE = "\u001B[34m";
 
     /**
-     * Prints a string.
+     * Prints a string in blue.
      */
     public static void print(String str) {
-        System.out.println(str);
+        System.out.println(ANSI_BLUE + str + ANSI_RESET);
+    }
+
+    /**
+     * Prints an error message in red.
+     */
+    public static void printErr(String str) {
+        System.out.println(ANSI_RED + str + ANSI_RESET);
     }
 
     public Ui() {
@@ -31,16 +41,8 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public int readIndex() {
-        try {
-            return scanner.nextInt() - 1;
-        } catch (InputMismatchException e) {
-            print("OOPS!!! You need to enter a natural number.");
-            return -1;
-        }
-    }
 
     public void showLine() {
-        print("_________________________");
+        print("_________________________________");
     }
 }

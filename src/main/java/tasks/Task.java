@@ -20,7 +20,7 @@ public abstract class Task implements Serializable {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 

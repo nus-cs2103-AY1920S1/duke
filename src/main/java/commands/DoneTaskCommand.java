@@ -2,14 +2,18 @@ package commands;
 
 import components.Storage;
 import components.Ui;
-import tasks.TaskList;
+import components.TaskList;
 
 public class DoneTaskCommand implements Command {
+    private int index;
+
+    public DoneTaskCommand(int index) {
+        this.index = index;
+    }
+
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
-        // InputMismatchException is handled in the Ui class
-        int whichTask = ui.readIndex();
-        //IndexOutOfBoundsException is handled in the tasks.TaskList class
-        taskList.markAsDone(whichTask);
+        //IndexOutOfBoundsException is handled in the components.TaskList class
+        taskList.markAsDone(index);
     }
 }

@@ -5,6 +5,7 @@ import commands.*;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -53,35 +54,45 @@ public class Parser {
                 }
             case "event":
                 taskName = "";
-                String timeframe = "";
+                String timeFrame = "";
                 if (sc.hasNext()) {
                     while (sc.hasNext()) {
                         String s = sc.next();
                         if (s.equals("/at")) {
-                            timeframe = sc.nextLine().strip();
+                            timeFrame = sc.nextLine().strip();
                             taskName = taskName.stripTrailing();
                             break;
                         } else {
                             taskName += s + " ";
                         }
                     }
-                    if (!timeframe.isBlank()) {
-                        Date date = parseAsDate(timeframe);
+                    if (!timeFrame.isBlank()) {
+                        Date date = parseAsDate(timeFrame);
                         return new AddEventCommand(taskName,date);
                     } else {
-                        return new PrintUserInputErrorCommand("OOPS!!! The timeframe of an event cannot be empty.");
+                        return new PrintUserInputErrorCommand("OOPS!!! The time frame of an event cannot be empty.");
                     }
                 } else {
                     return new PrintUserInputErrorCommand("OOPS!!! The description of an event cannot be empty.");
                 }
             case "delete":
-                return new DeleteCommand();
+                try {
+                    int index = sc.nextInt() - 1;
+                    return new DeleteCommand(index);
+                } catch (InputMismatchException e) {
+                    return new PrintUserInputErrorCommand("OOPS!!! You need to enter a natural number.");
+                }
             case "bye":
                 return new EndSessionCommand();
             case "list":
                 return new DisplayTasksCommand();
             case "done":
-                return new DoneTaskCommand();
+                try {
+                    int index = sc.nextInt() - 1;
+                    return new DoneTaskCommand(index);
+                } catch (InputMismatchException e) {
+                    return new PrintUserInputErrorCommand("OOPS!!! You need to enter a natural number.");
+                }
             default:
                 return new UnrecognisedInputCommand();
         }

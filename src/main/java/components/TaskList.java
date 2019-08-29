@@ -1,6 +1,6 @@
-package tasks;
+package components;
 
-import components.Ui;
+import tasks.Task;
 
 import java.util.ArrayList;
 
@@ -9,13 +9,6 @@ public class TaskList {
 
     public ArrayList<Task> getArr() {
         return arr;
-    }
-
-    /**
-     * Prints a string.
-     */
-    void print(String str) {
-        System.out.println(str);
     }
 
     /**
@@ -31,10 +24,10 @@ public class TaskList {
      * @param task refers to the task to add.
      */
     public void addTask(Task task) {
-        print("Got it. I've added this task:");
-        print(task.toString());
+        Ui.print("Got it. I've added this task:");
+        Ui.print(task.toString());
         arr.add(task);
-        print("Now you have " + arr.size() + (arr.size() > 1 ? " tasks" : " task") + " in the list.");
+        Ui.print("Now you have " + arr.size() + (arr.size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -47,7 +40,7 @@ public class TaskList {
         try {
             return arr.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            print("Oops! You have entered a number out of range.");
+            Ui.printErr("Oops! You have entered a number out of range.");
             return null;
         }
     }
@@ -59,10 +52,10 @@ public class TaskList {
     public void markAsDone(int index) {
         try {
             arr.get(index).markAsDone();
-            print("Nice! I've marked this task as done:");
-            print(arr.get(index).toString());
+            Ui.print("Nice! I've marked this task as done:");
+            Ui.print(arr.get(index).toString());
         } catch (IndexOutOfBoundsException e) {
-            print("Oops! You have entered a number out of range.");
+            Ui.printErr("Oops! You have entered a number out of range.");
         }
     }
 
@@ -70,6 +63,10 @@ public class TaskList {
      * Display all tasks on the list.
      */
     public void displayList() {
+        if (arr.size() == 0) {
+            Ui.print("You have no tasks in your list!");
+            return;
+        }
         Ui.print("Here are the tasks in your list:");
         int i = 0;
         for (Task t : arr) {

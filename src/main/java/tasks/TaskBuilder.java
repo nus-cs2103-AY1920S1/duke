@@ -2,6 +2,7 @@ package tasks;
 
 import java.util.Date;
 
+// TODO: 29/8/2019 Validation of required fields before building 
 public class TaskBuilder {
     private String description;
     private Date deadline;

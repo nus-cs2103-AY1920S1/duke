@@ -1,9 +1,11 @@
-public class Deadline extends Task {
-    protected String by;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected Date by;
+
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        this.by = parseDate(by);
     }
 
 
@@ -14,6 +16,6 @@ public class Deadline extends Task {
 
     @Override
     public String textFormat() {
-        return String.format("D | %d | %s | %s", getStatusCode(), description, by);
+        return String.format("D | %d | %s | %s", getStatusCode(), description, formatDate(by));
     }
 }

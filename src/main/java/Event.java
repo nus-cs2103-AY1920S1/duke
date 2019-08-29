@@ -1,9 +1,11 @@
-public class Event extends Task {
-    protected String at;
+import java.util.Date;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    protected Date at;
+
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        this.at = parseDate(at);
     }
 
     @Override
@@ -13,6 +15,6 @@ public class Event extends Task {
 
     @Override
     public String textFormat() {
-        return String.format("E | %d | %s | %s", getStatusCode(), description, at);
+        return String.format("E | %d | %s | %s", getStatusCode(), description, formatDate(at));
     }
 }

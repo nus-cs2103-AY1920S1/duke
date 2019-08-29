@@ -1,4 +1,10 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public abstract class Task {
+    protected static final SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
     protected String description;
     protected boolean isDone;
 
@@ -16,6 +22,15 @@ public abstract class Task {
     }
 
     public abstract String toStringForHardDisk();
+
+    protected Date parseDate(String date) throws DukeException {
+        try {
+            return parser.parse(date);
+        } catch(ParseException ex) {
+            throw new DukeException("There is an error in parsing date.");
+        }
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

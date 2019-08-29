@@ -145,7 +145,6 @@ public class Duke {
             dukeOutput("Invalid format! Please stick to DD/MM/YYYY HHMM-HHMM");
         } else {
             tasks.add(new Event(desc, at));
-            numberOfTasks++;
             printTaskAdded();
         }
     }
@@ -172,7 +171,6 @@ public class Duke {
             dukeOutput("Invalid time format! Please stick to DD/MM/YYYY HHMM");
         } else {
             tasks.add(new Deadline(desc, by));
-            numberOfTasks++;
             printTaskAdded();
         }
     }

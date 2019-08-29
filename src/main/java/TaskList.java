@@ -60,7 +60,7 @@ public class TaskList {
     }
 
     static void checkCommandValidity(String type) throws DukeException {
-        if ( !type.equals("todo") && !type.equals("deadline") && !type.equals("event")) {
+        if (!type.equals("todo") && !type.equals("deadline") && !type.equals("event")) {
             throw new DukeException("I don't know what that means :(");
         }
     }
@@ -140,19 +140,19 @@ public class TaskList {
     static String createDate(String date) {
         String[] parts = date.split("/");
         String[] month = {
-                "",
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December"
+            "",
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
         };
         boolean validDate = true;
         if (parts.length == 3) {

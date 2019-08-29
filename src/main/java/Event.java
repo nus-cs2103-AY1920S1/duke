@@ -6,21 +6,36 @@ class Event extends Task {
 
     protected Date date;
 
+    /**
+     * Constructor for the event.
+     * @param name Description of event.
+     * @param date Date of event.
+     */
     public Event(String name, Date date) {
         super(name);
         this.date = date;
     }
 
-    // get task type
+    /**
+     * Get the task type of the task.
+     * @return EVENT value of the enum TaskType.
+     */
     public TaskType getType() {
         return TaskType.EVENT;
     }
 
-    // get task date
+    /**
+     * Get the date of event.
+     * @return Date of event.
+     */
     public Date getDate() {
         return this.date;
     }
 
+    /**
+     * String method to override the toString() in java.lang.Object.
+     * @return String representation of the object.
+     */
     @Override
     public String toString() {
         String doneStr = this.done ? "✓" : "✗";

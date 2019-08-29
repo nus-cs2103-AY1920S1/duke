@@ -7,12 +7,21 @@ class Parser {
     // static SimpleDateFormat needed to create tasks
     static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    // determine the command
+    /**
+     * Parse the string to determine the command type.
+     * @param input Command string.
+     * @return String representing the type of command.
+     */
     public String parseCommand(String input) {
         return input.split(" ", 2)[0];
     }
 
-    // parse the to-do task
+    /**
+     * Parse a to-do task from a string.
+     * @param taskStr String representing the task.
+     * @return A To-Do task.
+     * @throws DukeException Exception in case to-do is incomplete.
+     */
     public ToDo parseTodo(String taskStr) throws DukeException {
         if (taskStr.isEmpty()) {
             throw new DukeException("Please enter the to-do description.");
@@ -20,7 +29,12 @@ class Parser {
         return new ToDo(taskStr);
     }
 
-    // parse the deadline
+    /**
+     * Parse a deadline task from a string.
+     * @param taskStr String representing the task.
+     * @return A Deadline task.
+     * @throws DukeException Exception in case deadline is incomplete.
+     */
     public Deadline parseDeadline(String taskStr) throws DukeException {
         if (taskStr.split(" /by ").length < 1) {
             throw new DukeException("Please enter deadline description and date.");
@@ -36,7 +50,12 @@ class Parser {
         }
     }
 
-    // parse the event
+    /**
+     * Parse an event task from a string.
+     * @param taskStr String representing the task.
+     * @return An Event task.
+     * @throws DukeException Exception in case event is incomplete.
+     */
     public Event parseEvent(String taskStr) throws DukeException {
         if (taskStr.split(" /at ").length < 1) {
             throw new DukeException("Please enter event description and date.");
@@ -52,7 +71,12 @@ class Parser {
         }
     }
 
-    // parse an integer from the input
+    /**
+     * Parse an integer from the string.
+     * @param indexStr String representing the index.
+     * @return Integer representing the index.
+     * @throws DukeException Exception in case command is incomplete.
+     */
     public int parseInteger(String indexStr) throws DukeException {
         if (indexStr.isEmpty()) {
             throw new DukeException("Please provide an index.");

@@ -17,11 +17,19 @@ class Storage {
     // date formatting is a constant
     static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+    /**
+     * Constructor for the object.
+     * @param path Path to the storage file.
+     */
     public Storage(String path) {
         this.path = Paths.get(path);
     }
 
-    // function to read tasks from a file
+    /**
+     * Function to read tasks from the storage file.
+     * @return A list of read tasks.
+     * @throws DukeException Exception in case cannot read tasks.
+     */
     public ArrayList<Task> readTasksFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
@@ -36,7 +44,11 @@ class Storage {
         return tasks;
     }
 
-    // function to write tasks to a file
+    /**
+     * Function to write tasks to the storage file.
+     * @param tl TaskList representing the list of tasks.
+     * @throws DukeException Exception in case cannot write tasks.
+     */
     public void writeTasksToFile(TaskList tl) throws DukeException {
         try {
             Path path = Paths.get("data/duke.txt");
@@ -50,7 +62,12 @@ class Storage {
         }
     }
 
-    // function to read tasks from a single line
+    /**
+     * Static method to read task from a string.
+     * @param task String representing the task.
+     * @return The parsed task.
+     * @throws DukeException Exception in case cannot read task.
+     */
     public static Task readTask(String task) throws DukeException {
         String[] taskParams = task.split(" - ");
         Task returnTask = null;
@@ -90,7 +107,11 @@ class Storage {
         return returnTask;
     }
 
-    // generate string to represent task
+    /**
+     * Static method to generate a string representing the task.
+     * @param task The Task to convert to String.
+     * @return String representing the task.
+     */
     public static String writeTask(Task task) {
         String taskStr = "";
         String doneStr = task.isTaskDone() ? "1" : "0";

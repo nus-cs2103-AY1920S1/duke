@@ -6,21 +6,36 @@ class Deadline extends Task {
 
     protected Date date;
 
+    /**
+     * Class constructor for Deadline.
+     * @param name Description of the deadline.
+     * @param date Date of the deadline.
+     */
     public Deadline(String name, Date date) {
         super(name);
         this.date = date;
     }
 
-    // get task type
+    /**
+     * Get the task type of the task.
+     * @return DEADLINE value of the enum TaskType.
+     */
     public TaskType getType() {
         return TaskType.DEADLINE;
     }
 
-    // get task date
+    /**
+     * Get the date of deadline.
+     * @return Date of deadline.
+     */
     public Date getDate() {
         return this.date;
     }
 
+    /**
+     * String method to override the toString() in java.lang.Object.
+     * @return String representation of the object.
+     */
     @Override
     public String toString() {
         String doneStr = this.done ? "✓" : "✗";

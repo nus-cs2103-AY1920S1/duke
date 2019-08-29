@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Deadline extends duke.task.Task {
+public class Deadline extends Task {
     /** Deadline of the task. */
     protected String by;
 

@@ -74,4 +74,20 @@ public class Ui {
     public void showCommandNotFoundError() {
         System.out.println("Command not found. Please check command again.");
     }
+
+    public void showMatchingTaskList(ArrayList<String> listFound) {
+        if (listFound.size() == 0) {
+            System.out.println("No matching result from your list.");
+            return;
+        }
+
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < listFound.size(); i++) {
+            System.out.println((i + 1) + "." + listFound.get(i));
+        }
+    }
+
+    public void showIncorrectNumberOfArgument() {
+        System.out.println("Incorrect number of arguments in command.");
+    }
 }

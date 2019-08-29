@@ -26,7 +26,7 @@ public class Parser {
         commandList.add("DONE");
         commandList.add("LIST");
         commandList.add("BYE");
-
+        commandList.add("FIND");
     }
 
     /**
@@ -37,7 +37,7 @@ public class Parser {
      * @return Lateral location.
      * @throws CommandNotFoundException If zone is <= 0.
      */
-    public static Command parse(String input) throws CommandNotFoundException {
+    public static Command parse(String input) throws CommandNotFoundException, IncorrectFileFormatException, IncorrectNumberOfArgumentsException {
         Task task;
         Command command;
         boolean isFound = false;
@@ -93,6 +93,15 @@ public class Parser {
             command = new DeleteCommand(commandName, task, numberDone);
         } else if (type == COMMAND_TYPE.LIST) {
             command = new ListCommand(commandName);
+        } else if (type == COMMAND_TYPE.FIND) {
+            if (input.toLowerCase().equals("find")) throw new IncorrectNumberOfArgumentsException();
+
+            String keyword = input.substring("Find ".length()).trim();
+
+            if (keyword.equals("")) {
+                throw new IncorrectNumberOfArgumentsException();
+            }
+            command = new FindCommand(commandName, keyword, new Task());
         } else throw new CommandNotFoundException();
 
 

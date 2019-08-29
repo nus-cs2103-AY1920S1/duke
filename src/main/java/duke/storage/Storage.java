@@ -12,7 +12,6 @@ import duke.parser.Parser;
 import duke.task.Task;
 
 
-
 // This class loads task from file and saves tasks to file.
 
 /**

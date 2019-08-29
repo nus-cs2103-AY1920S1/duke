@@ -100,7 +100,7 @@ public class TaskList {
             throw new IncorrectDukeCommand(errorMessage);
         }
         
-        Task removedTask = tasks.remove(taskNumber);
+        Task removedTask = tasks.remove(taskNumber - 1);
         
         storage.overwriteLocalSave(tasks);
 

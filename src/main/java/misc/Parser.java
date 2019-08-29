@@ -175,7 +175,7 @@ public class Parser {
 
             if (userInput.hasNextInt()) {
                 taskNumberDelete = userInput.nextInt();
-                taskList.delete(taskNumberDelete - 1);
+                taskList.delete(taskNumberDelete);
             }
             break;
         case "todo":

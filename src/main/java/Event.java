@@ -1,10 +1,17 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Represents an Event object that has a description, start-time and end-time to depict a duration.
+ */
 public class Event extends Task {
     private Calendar startTime;
     private Calendar endTime;
 
+    /**
+     * Creates Event object taking info from Parser's arrayList.
+     * @param parser
+     */
     public Event(Parser parser) {
         super(parser.getList().get(0));
         startTime = Calendar.getInstance();
@@ -22,20 +29,38 @@ public class Event extends Task {
                 Integer.parseInt(inputArray.get(7)));
     }
 
+    /**
+     * Creates Event object using description, start, and end-time.
+     * @param des description of Task.
+     * @param startTime startTime of Event.
+     * @param endTime endTime of Event.
+     */
     public Event(String des, Calendar startTime, Calendar endTime) {
         super(des);
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * Return startTime of event.
+     * @return startTime.
+     */
     public Calendar getStartTime() {
         return startTime;
     }
 
+    /**
+     * Return endTime of event.
+     * @return endTime.
+     */
     public Calendar getEndTime() {
         return endTime;
     }
 
+    /**
+     * Returns a string representing startTime in a particular user-friendly format.
+     * @return string representing the startTime in a printing friendly format.
+     */
     public String printStartTime() {
         String jargon = "";
         switch (startTime.get(Calendar.DAY_OF_MONTH) % 10) {
@@ -94,6 +119,10 @@ public class Event extends Task {
                 + startTime.get(Calendar.YEAR) + ". "
                 + hoursAndMinutes;
     }
+    /**
+     * Returns a string representing endTime in a particular user-friendly format.
+     * @return string representing the endTime in a printing friendly format.
+     */
     public String printEndTime() {
         String jargon = "";
         switch (endTime.get(Calendar.DAY_OF_MONTH) % 10) {

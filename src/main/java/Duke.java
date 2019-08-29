@@ -1,11 +1,20 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Represents an application that that manages <code>ToDo</code>s, <code>Event</code>s, and <code>Deadline</code>s.
+ * A Duke object can add <code>Task</code>s, delete them, mark them as Done, and maintain a history of Tasks entered
+ * during earlier execution.
+ */
 public class Duke {
     private Ui UI;
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Constructs a Duke object that saves Tasks in the provided filePath.
+     * @param filePath the path of the text file which is a directory for the Tasks.
+     */
     public Duke(String filePath) {
         UI = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +28,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Integrates <code>Parser</code>, <code>TaskList</code>, <code>Storage</code>, and <code>Ui</code> to
+     * deal with User's commands and accordingly manage database.
+     */
     public void run(){
         Scanner sc = new Scanner(System.in);
         UI.showWelcome();

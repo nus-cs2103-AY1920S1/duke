@@ -1,10 +1,19 @@
 import java.util.ArrayList;
 
+/**
+ * Makes sense of user commands and holds and arrayList containing information of how to process commands.
+ */
 public class Parser {
     private boolean valid = true;
     private ArrayList<String> list = new ArrayList<>();
     private String type;
 
+    /**
+     * Creates a Parser object that takes a command and processes an arrayList containing information to be used to
+     * declare and initialize Tasks.
+     * @param command command provided by user.
+     * @throws DukeException exception returned when format of command not right.
+     */
     public Parser(String command) throws DukeException{
         String[] commandWords = command.split(" ");
         String order = commandWords[0];
@@ -99,14 +108,26 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the type of command to execute.
+     * @return type of command according to which Duke's run can perform certain roles.
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Returns information about the command to be executed.
+     * @return arrayList that contains particular command information at each index.
+     */
     public ArrayList<String> getList() {
         return list;
     }
 
+    /**
+     * Determines whether the command is Valid or not.
+     * @return boolean to determine if illegal command provided by user.
+     */
     public boolean isValid() {
         return valid;
     }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
+/**
+ * Manages the file that acts as a database for the tasks provided by User.
+ */
 public class Storage {
     String filePath;
 
@@ -12,6 +15,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Processes data in the history file and creates an arrayList holding the User's tasks.
+     * @return arrayList holding the Tasks retrieved from history file.
+     * @throws DukeException thrown if a task is of invalid format.
+     * @throws IOException thrown id filePath is non-Existent.
+     */
     public ArrayList<Task> load() throws DukeException, IOException{
         ArrayList<Task> result = new ArrayList<>();
         File f = new File(filePath);
@@ -69,6 +78,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Uses TaskList holding all current Tasks to update history file to hold their information.
+     * @param tasks the TaskList that the history file must reflect.
+     * @throws IOException thrown if filePath of history file is non-Existent.
+     */
     public void update(TaskList tasks) throws IOException{
         FileWriter fw = new FileWriter(filePath);
         String textToAdd = "";

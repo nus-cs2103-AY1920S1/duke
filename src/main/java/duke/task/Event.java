@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * Event class to create event task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class Event extends Task {
     /** The event deadline of the task */
     protected String at;

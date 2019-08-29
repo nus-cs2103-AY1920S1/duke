@@ -1,6 +1,12 @@
 package duke.task;
 
-public class Deadline extends duke.task.Task {
+/**
+ * Deadline class to create the deadline task.
+ *
+ * @author TeoShyanJie
+ *
+ */
+public class Deadline extends Task {
     /** Deadline of the task */
     protected String by;
 

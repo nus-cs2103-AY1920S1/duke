@@ -21,15 +21,15 @@ public class Duke {
     }
 
     private static void greet() {
-        TaskManager.separator();
+        TaskList.separator();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        TaskManager.separator();
+        TaskList.separator();
     }
 
     private static void closing() {
-        TaskManager.separator();
+        TaskList.separator();
         System.out.println("Bye. Hope to see you again soon!");
-        TaskManager.separator();
+        TaskList.separator();
     }
 
     private static Deadline parseDeadlineTask(String instruction) throws DukeException{
@@ -64,37 +64,37 @@ public class Duke {
         }
     }
 
-    private static void parseDoneInstruction(TaskManager taskManager, String instruction) throws DukeException {
+    private static void parseDoneInstruction(TaskList tasks, String instruction) throws DukeException {
         int index = Integer.parseInt(instruction.split(" ")[1]);
-        taskManager.markAsDone(index);
+        tasks.markAsDone(index);
     }
 
-    private static void parseDeleteInstruction(TaskManager taskManager, String instruction) throws DukeException {
+    private static void parseDeleteInstruction(TaskList tasks, String instruction) throws DukeException {
         int index = Integer.parseInt(instruction.split(" ")[1]);
-        taskManager.deleteTask(index);
+        tasks.deleteTask(index);
     }
 
-    private static boolean parseInstruction(TaskManager taskManager, String instruction) throws DukeException{
+    private static boolean parseInstruction(TaskList tasks, String instruction) throws DukeException{
         if (instruction.equals("bye")) {
             closing();
             return false;
         } else if (instruction.equals("list")) {
-            taskManager.printTasks();
+            tasks.printTasks();
         } else if (instruction.matches("^done \\d+$")) {
-            parseDoneInstruction(taskManager, instruction);
-            saveToHardDisk(taskManager);
+            parseDoneInstruction(tasks, instruction);
+            saveToHardDisk(tasks);
         } else if (instruction.matches("^delete \\d+$")) {
-            parseDeleteInstruction(taskManager, instruction);
-            saveToHardDisk(taskManager);
+            parseDeleteInstruction(tasks, instruction);
+            saveToHardDisk(tasks);
         } else if (instruction.startsWith("deadline")) {
-            taskManager.addTask(parseDeadlineTask(instruction));
-            saveToHardDisk(taskManager);
+            tasks.addTask(parseDeadlineTask(instruction));
+            saveToHardDisk(tasks);
         } else if  (instruction.startsWith("todo")) {
-            taskManager.addTask(parseTodoTask(instruction));
-            saveToHardDisk(taskManager);
+            tasks.addTask(parseTodoTask(instruction));
+            saveToHardDisk(tasks);
         } else if (instruction.startsWith("event")) {
-            taskManager.addTask(parseEventTask(instruction));
-            saveToHardDisk(taskManager);
+            tasks.addTask(parseEventTask(instruction));
+            saveToHardDisk(tasks);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -102,10 +102,10 @@ public class Duke {
         return true;
     }
 
-    private static void saveToHardDisk(TaskManager taskManager) throws DukeException {
+    private static void saveToHardDisk(TaskList tasks) throws DukeException {
         try {
             FileWriter writer = new FileWriter(getHardDiskFile());
-            writer.write(taskManager.printTasksForHardDisk());
+            writer.write(tasks.printTasksForHardDisk());
             writer.close();
         } catch (IOException ex) {
             throw new DukeException("There is an issue in updating duke.txt.");
@@ -117,7 +117,7 @@ public class Duke {
      * 
      * @return an initialized Task Manager
      */
-    private static TaskManager initializeTaskManager() {
+    private static TaskList initializeTaskList() {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -150,20 +150,20 @@ public class Duke {
             }
             scanner.close();
 
-            return new TaskManager(tasks);
+            return new TaskList(tasks);
         } catch (FileNotFoundException ex) {
-            return new TaskManager();
+            return new TaskList();
         } catch (Exception ex) {
-            TaskManager.separator();
+            TaskList.separator();
             System.out.println("Failed to parse duke.txt");
-            TaskManager.separator();
+            TaskList.separator();
 
-            return new TaskManager();
+            return new TaskList();
         }
     }
 
     public static void main(String[] args) {
-        TaskManager taskManager = initializeTaskManager();
+        TaskList tasks = initializeTaskList();
 
         greet();
 
@@ -171,13 +171,13 @@ public class Duke {
         while (scanner.hasNextLine()) {
             try {
                 String instruction = scanner.nextLine();
-                if (!parseInstruction(taskManager, instruction)) {
+                if (!parseInstruction(tasks, instruction)) {
                     break;
                 }
             } catch (DukeException ex) {
-                TaskManager.separator();
+                tasks.separator();
                 System.out.println(ex);
-                TaskManager.separator();
+                tasks.separator();
             }
         }
         scanner.close();

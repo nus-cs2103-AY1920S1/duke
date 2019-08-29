@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
     private ArrayList<Task> tasks;
 
-    public TaskManager() {
+    public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
-    public TaskManager(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 

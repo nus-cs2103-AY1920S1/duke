@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String description;
     protected boolean isDone;
+
     private static Ui ui = new Ui();
 
     /**
@@ -76,7 +77,7 @@ public class Task {
                 return new Task(s.substring(7));
         }
     }
-
+    
     /**
      * ToString method for printing.
      *

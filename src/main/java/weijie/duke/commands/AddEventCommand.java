@@ -36,7 +36,7 @@ public class AddEventCommand extends AddCommand {
             return new TaskResponse(new DukeInvalidInputException("☹ OOPS!!! Date and time must be in the format DD/MM/YYYY HHMM"));
         }
 
-        Task task = new Event(descriptionAndDate[0], descriptionAndDate[1]);
+        Task task = new Event(descriptionAndDate[0], dateTime);
         try {
             repo.create(task);
         } catch (DukeIOException e) {

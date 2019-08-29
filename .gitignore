@@ -14,3 +14,7 @@ src/main/resources/docs/
 bin/
 *.class
 src/main/java/input.txt
+src/main/java/Duke_LOCAL_151.java
+src/main/java/Duke_BACKUP_151.java
+src/main/java/Duke_BASE_151.java
+src/main/java/Duke_REMOTE_151.java

@@ -6,7 +6,7 @@ public class Todo extends Task {
     @Override
     public String toStringForHardDisk() {
         String[] datas = new String[3];
-        datas[0] = "D";
+        datas[0] = "T";
         datas[1] = isDone ? "1" : "0";
         datas[2] = description;
 

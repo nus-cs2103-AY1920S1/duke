@@ -29,6 +29,18 @@ public class Duke {
                 sendLine();
                 sendTasks();
                 sendLine();
+            } else if (input.startsWith("done")) {
+                String[] splitStr = input.split(" ");
+                if (splitStr.length < 2) {
+                    sendLine();
+                    sendMessage("Please indicate task index!");
+                    sendLine();
+                } else {
+                    String itemIndex = splitStr[1];
+                    sendLine();
+                    doneTask(itemIndex);
+                    sendLine();
+                }
             } else {
                 sendLine();
                 addTask(input);
@@ -42,20 +54,20 @@ public class Duke {
     }
 
     public static void sendLine() {
-        System.out.println("____________________________________________________________");
+        System.out.println("    ____________________________________________________________");
     }
 
     public static void sendGreet() {
-        System.out.println(" Hello! I'm Duke");
-        System.out.println(" What can I do for you?");
+        System.out.println("     Hello! I'm Duke");
+        System.out.println("     What can I do for you?");
     }
 
     public static void sendBye() {
-        System.out.println(" Bye. Hope to see you again soon!");
+        System.out.println("     Bye. Hope to see you again soon!");
     }
 
     public static void sendMessage(String input) {
-        System.out.println(" " + input);
+        System.out.println("     " + input);
     }
 
     public static void addTask(String item) {
@@ -69,9 +81,23 @@ public class Duke {
     }
 
     public static void sendTasks() {
+        sendMessage("Here are the tasks in your list: ");
         for (int i = 0; i < count; i ++) {
-            String item = tasks[i].toDisplay();
-            sendMessage((i + 1) + ". " + item);
+            Task item = tasks[i];
+            sendMessage((i + 1) + ".[" + item.mark() + "] " + item.toDisplay());
         }
     }
+
+    public static void doneTask(String itemIndex) {
+        int index = Integer.parseInt(itemIndex) - 1;
+        if (index < 0 || index >= count) {
+            sendMessage("Invalid index!");
+        } else {
+            Task item = tasks[index];
+            item.setDone();
+            sendMessage("Nice! I've marked this task as done: ");
+            sendMessage("  [" + "\u2713" + "] " + item.toDisplay());
+        }
+    }
+
 }

@@ -29,26 +29,22 @@ public class Duke {
             if ((Objects.equals(inputString, BYE))) {
                 System.out.println("\t\tBye. Hope to see you again soon!\n");
                 return;
-            }
-            else if ((Objects.equals(wordSplit[0], "done") && (Integer.parseInt(wordSplit[1]) <= numOfItems))){
+            }else if ((Objects.equals(wordSplit[0], "done") && (Integer.parseInt(wordSplit[1]) <= numOfItems))){
                 int numbering = Integer.parseInt((TempInputString.split(" "))[1]) - 1;
                 listOfItems[numbering].setDone();
                 System.out.println("\t\t" + listOfItems[numbering].toStringDone() + "\n");
-            }
-            else if (Objects.equals(inputString, "list")) {
+            }else if (Objects.equals(inputString, "list")) {
                 for (int i=0; i<numOfItems; i++ ) {
                     System.out.println("\t\t" + listOfItems[i].toString() + "\n" );
                 }
-            }
-            else if (Objects.equals(wordSplit[0], "delete")) {
+            }else if (Objects.equals(wordSplit[0], "delete")) {
                 int numbering = Integer.parseInt((TempInputString.split(" "))[1]) - 1;
                 Task tempTask = listOfItems[numbering];
                 listOfItems = removeElements(listOfItems, listOfItems[numbering]);
                 numOfItems--;
                 System.out.println("\t\tNoted I have removed this task:\n\t\t" + tempTask.toString() + "\n");
                 System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
-            }
-            else {
+            }else {
                 if (Objects.equals(wordSplit[0], "Deadline")){
 //                    if (Objects.equals(wordSplit[0], "Todo") || inputString == "Deadline ") {
 //                        System.out.println("Please add an argument after the word!");
@@ -61,24 +57,20 @@ public class Duke {
                         listOfItems[numOfItems++] = item;
                         System.out.println("\t\tGot it. I've added this task: \n\t\t" + listOfItems[numOfItems - 1].toString() + "\n");
                         System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
-                    }
-                    catch (Exception StringIndexOutOfBoundsException) {
+                    }catch (Exception StringIndexOutOfBoundsException) {
                         System.out.println("Please follow the proper format!");
                     }
-                }
-                else if (Objects.equals(wordSplit[0], "Todo")){
+                }else if (Objects.equals(wordSplit[0], "Todo")){
                     try {
                         String newInputString = inputString.substring(5);
                         Task item = new Todo(newInputString);
                         listOfItems[numOfItems++] = item;
                         System.out.println("\t\tGot it. I've added this task: \n\t\t" + listOfItems[numOfItems - 1].toString() + "\n");
                         System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
-                    }
-                    catch (Exception StringIndexOutOfBoundsException) {
+                    }catch (Exception StringIndexOutOfBoundsException) {
                         System.out.println("Please follow the proper format!");
                     }
-                }
-                else if (Objects.equals(wordSplit[0], "Event")){
+                }else if (Objects.equals(wordSplit[0], "Event")){
                     try {
                         String newInputString = inputString.substring(6);
                         String splitString[] = newInputString.split("/at");
@@ -86,12 +78,10 @@ public class Duke {
                         listOfItems[numOfItems++] = item;
                         System.out.println("\t\tGot it. I've added this task: \n\t\t" + listOfItems[numOfItems - 1].toString() + "\n");
                         System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
-                    }
-                    catch (Exception StringIndexOutOfBoundsException) {
+                    }catch (Exception StringIndexOutOfBoundsException) {
                         System.out.println("Please follow the proper format!");
                     }
-                }
-                else {
+                }else {
                     System.out.println("\t\tHey Heyyyy, sorry but I have no idea what are you saying, please try again!");
                 }
             }

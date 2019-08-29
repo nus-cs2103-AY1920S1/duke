@@ -1,3 +1,6 @@
-ToDo|0|make coffee
-Deadline|0|hey yo |02/12/2019 1800
-Deadline|0|mai lai |02/12/2019 1800
+Deadline|1|mai lai |02/12/2019 1800
+ToDo|1|finish 2103
+ToDo|1|qwef
+ToDo|0|hey yo
+Deadline|0|submit due |02/12/2019 1800
+ToDo|0|hey yo

@@ -74,7 +74,6 @@ public class UI {
         System.out.println("\t_______________________________");
     }
 
-
     /**
      * Prints addTask success message
      *
@@ -118,6 +117,7 @@ public class UI {
      *
      * @param task Task that was successfully deleted
      */
+
     public void printDeleteTaskMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         System.out.println("\t I've removed this task: \n" +

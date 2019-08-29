@@ -39,20 +39,19 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException error) {
-            System.out.println( error.getMessage() );
+            System.out.println(error.getMessage());
         }
     }
 
-
-    /**
-     * Read tasks from file into list
-     *
-     * @param tasks A <code>TaskList</code> object which will be the destination
-     *              for each <code>Task</code> read from file.
-     * @throws FileNotFoundException if file is not found
-     */
-    public void readFromTasksFileToList (TaskList tasks) throws FileNotFoundException  {
-        FileReaderHandler fileReaderHandler = new FileReaderHandler(tasks);
+        /**
+         * Read tasks from file into list
+         *
+         * @param tasks A <code>TaskList</code> object which will be the destination
+         *              for each <code>Task</code> read from file.
+         * @throws FileNotFoundException if file is not found
+         */
+        public void readFromTasksFileToList (TaskList tasks) throws FileNotFoundException {
+            FileReaderHandler fileReaderHandler = new FileReaderHandler(tasks);
             Scanner sc = new Scanner(tasksFile);
             while (sc.hasNext()) {
                 String fileLine = sc.nextLine();
@@ -65,7 +64,7 @@ public class Storage {
                 fileReaderHandler.readLineFromFileToList(taskType, isCompleted, taskString);
             }
 
+        }
+
+
     }
-
-
-}

@@ -38,11 +38,10 @@ public class CreateEventCommand extends Command {
         String at = eventParts[1];
 
         try {
-            tasks.addTask(new Event(eventText, at), true);
+            tasks.addTask(new Event(eventText, at),true);
         } catch (ParseException error) {
             System.out.println("\t " + error.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM");
         }
-
         storage.writeToTasksFile(tasks);
     }
 

@@ -6,6 +6,6 @@ public class ByeCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        return;
+        ui.showMessage("Bye. Hope to see you again soon!");
     }
 }

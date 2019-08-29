@@ -10,14 +10,18 @@ public class Duke {
     private Scanner sc;
     private boolean isExit;
 
-    public Duke() {
+    /**
+     * Reads file containing a list of tasks.
+     * Updates and changes this file according to user input.
+     */
+    private Duke() {
         greeter = new MessageGenerator();
         sc = new Scanner(System.in);
         ui = new UI("files/tasks.text");
         isExit = false;
     }
 
-    public void run() {
+    private void run() {
         greeter.greet();
         ui.processFile();
         while (!isExit) {

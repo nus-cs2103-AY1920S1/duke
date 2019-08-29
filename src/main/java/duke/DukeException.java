@@ -1,20 +1,33 @@
 package duke;
 
-public abstract class DukeException extends Exception {
+abstract class DukeException extends Exception {
     Formatter formatter = new Formatter();
-    ErrorType type;
     String message = "☹ OOPS!!! ";
     String taskType;
 
-    public DukeException() { }
+    /**
+     * Creates Duke Exception for exceptions in programs.
+     */
+    DukeException() { }
 
-    public DukeException(String taskType) {
+    /**
+     * Creates DukeException that are related to tasks.
+     * @param taskType String taken in for error printing purposes.
+     */
+    DukeException(String taskType) {
         this.taskType = taskType;
     }
 
-    public abstract String errorMessage();
+    /**
+     * Creates String for error message.
+     * @return error message.
+     */
+    abstract String errorMessage();
 
-    public void printError() {
+    /**
+     * Prints formatted error message.
+     */
+    void printError() {
         formatter.printFormat(errorMessage());
     }
 }

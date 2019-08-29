@@ -6,9 +6,16 @@ public class InvalidItemException extends DukeException {
 
     String message = "☹ OOPS!!! ";
 
-    public InvalidItemException() {
+    /**
+     * Creates InvalidItemException when an invalid list item is given.
+     */
+    InvalidItemException() {
     }
 
+    /**
+     * Creates String for error message.
+     * @return error message.
+     */
     @Override
     public String errorMessage() {
         message += "This item does not exist on the list";

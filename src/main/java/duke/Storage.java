@@ -10,14 +10,18 @@ import java.util.Scanner;
 
 public class Storage {
 
-    Scanner sc;
-    String filePath;
+    private Scanner sc;
+    private String filePath;
     List<String> inputs = new ArrayList<>();
-    TaskList tasks = new TaskList();
-    File f;
+    private TaskList tasks = new TaskList();
+    private File f;
     FileWriter fw;
 
-    public Storage (String filePath) {
+    /**
+     * Loads and writes into given file.
+     * @param filePath String that indicates path to file.
+     */
+    Storage (String filePath) {
         this.filePath = filePath;
         f = new File(filePath);
         try {
@@ -29,7 +33,11 @@ public class Storage {
         }
     }
 
-    public TaskList loadTasks() {
+    /**
+     * Loads tasks from file into the program.
+     * @return TaskList that will be used in the program for further modifications by user.
+     */
+    TaskList loadTasks() {
         int counter = 0;
         try {
             sc = new Scanner(f);
@@ -70,17 +78,12 @@ public class Storage {
         return tasks;
     }
 
-    public void writeToFile(String text) throws IOException {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            fw.write(text);
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong");
-        }
-    }
-
-    public void updateTaskList(TaskList tasks) throws IOException {
+    /**
+     * Writes formatted task list into file.
+     * @param tasks Task list that has been processed and updated.
+     * @throws IOException
+     */
+    void updateTaskList(TaskList tasks) throws IOException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks.taskList) {

@@ -2,16 +2,23 @@ package duke;
 
 public class Time {
 
-    Period period;
-    int hour;
-    int minutes;
-    int time;
+    private Period period;
+    private int hour;
+    private int minutes;
+    private int time;
 
+    /**
+     * Documents whether given time is am or pm.
+     */
     public enum Period {
         AM, PM;
     }
 
-    public Time(int time) {
+    /**
+     * Creates time object with hour, minute and period components.
+     * @param time in military format.
+     */
+    private Time(int time) {
         this.time = time;
         hour = time / 100;
         minutes = time % 100;
@@ -22,10 +29,19 @@ public class Time {
         }
     }
 
-    public static Time processTime(String timeString) {
+    /**
+     * Processes a given String and converts String to a time object.
+     * @param timeString String in form HHMM.
+     * @return Time object.
+     */
+    static Time processTime(String timeString) {
         return new Time(Integer.parseInt(timeString));
     }
 
+    /**
+     * Formats Time object.
+     * @return A string in the form HHMM.
+     */
     @Override
     public String toString() {
         return time + "";

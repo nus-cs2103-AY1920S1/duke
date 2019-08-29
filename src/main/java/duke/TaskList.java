@@ -3,36 +3,59 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskList {
+class TaskList {
 
-    Formatter formatter = new Formatter();
     List<Task> taskList = new ArrayList<>();
     MessageGenerator msgGenerator = new MessageGenerator();
 
-    public TaskList() {
+    /**
+     * Creates task list and adds a placeholder value for easier tracking.
+     */
+    TaskList() {
         //placeholder value in task
         taskList.add(null);
     }
 
-    public int noTasks() {
+    /**
+     * @return Number of tasks in list.
+     */
+    private int noTasks() {
         return taskList.size() - 1;
     }
 
-    public void addTask(Task task) {
+    /**
+     * Adds task to task list.
+     * Prints message when task is added via user input.
+     * @param task task to be added.
+     */
+    void addTask(Task task) {
         taskList.add(task);
         msgGenerator.printAdd(task, noTasks());
     }
 
-    public void loadTask(Task task) {
+    /**
+     * Adds task to task List when task is loaded from the file.
+     * @param task task loaded from the file that is to be added.
+     */
+    void loadTask(Task task) {
         taskList.add(task);
     }
 
-    public void removeTask(int taskNo) {
+    /**
+     * Removes task of given identification number from list.
+     * Prints message when task is removed.
+     * @param taskNo identification number of task in list.
+     */
+    private void removeTask(int taskNo) {
         msgGenerator.printRemove(taskList.get(taskNo), noTasks()-1);
         taskList.remove(taskNo);
     }
 
-    public List<String> listify() {
+    /**
+     * Formats task list into list of strings for printing/writing.
+     * @return List of Strings.
+     */
+    private List<String> listify() {
         List<String> list = new ArrayList<String>();
         for (Task task: taskList) {
             if (task != null) {
@@ -42,15 +65,34 @@ public class TaskList {
         return list;
     }
 
-    public void printList() {
+    /**
+     * @return task list.
+     */
+    List<Task> getTaskList() {
+        return this.taskList;
+    }
+
+    /**
+     * Prints list of tasks using the message generator.
+     */
+    void printList() {
         msgGenerator.printList(listify());
     }
 
-    public boolean invalidTaskNo(int taskNo) {
+    /**
+     * Checks if given task number exists in task list.
+     * @param taskNo identification number for task.
+     * @return whether or not task number exists.
+     */
+    private boolean invalidTaskNo(int taskNo) {
         return taskNo >= taskList.size();
     }
 
-    public void setDone(int taskNo) {
+    /**
+     * Marks a task as done.
+     * @param taskNo identification number for task.
+     */
+    void setDone(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();
@@ -62,7 +104,11 @@ public class TaskList {
         }
     }
 
-    public void deleteTask(int taskNo) {
+    /**
+     * Deletes task with given identification number.
+     * @param taskNo identification number for task.
+     */
+    void deleteTask(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();

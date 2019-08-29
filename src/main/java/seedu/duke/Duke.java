@@ -51,13 +51,20 @@ public class Duke {
     }
 
     /**
+     * Print horizontal line
+     */
+    private static void printLine() {
+        System.out.println("\t" + HORIZONTAL_LINE);
+    }
+
+    /**
      * Prints the greeting message.
      */
     private static void greet() {
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
         System.out.println("\t" + "Hello! I'm Duke\n\t"
                 + "What can I do for you?");
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
     }
 
     /**
@@ -65,18 +72,18 @@ public class Duke {
      * @param command the command entered by user.
      */
     private static void echo(String command) {
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
         System.out.println("\t" + command);
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
     }
 
     /**
      * Prints the exit message.
      */
     private static void exit() {
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
         System.out.println("\t" + "Bye. Hope to see you again soon!");
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
     }
 
     /**
@@ -92,11 +99,11 @@ public class Duke {
      * Lists all the tasks into console.
      */
     private static void listAllTasks() {
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
         }
-        System.out.println("\t" + HORIZONTAL_LINE);
+        printLine();
 
     }
 }

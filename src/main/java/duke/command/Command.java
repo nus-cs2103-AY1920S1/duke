@@ -5,8 +5,8 @@ package duke.command;
  * passed to the logic executing these command.
  */
 public abstract class Command {
-    private final Type type;
-    private final String[] parameters;
+    private Type type;
+    private String[] parameters;
 
     /**
      * Constructs the command

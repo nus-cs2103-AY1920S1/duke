@@ -1,83 +1,93 @@
-import java.util.Scanner;
-
 public class Duke {
     private TaskList tasks;
     private Storage storage;
+    private Ui ui;
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
+        ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException ex) {
-            TaskList.separator();
-            System.out.println(ex);
-            TaskList.separator();
-
+            ui.showLoadingError(ex);
             tasks = new TaskList();
         }
     }
 
     public void run() {
-        greet();
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
+        ui.showWelcome();
+        while (true) {
             try {
-                String instruction = scanner.nextLine();
+                ui.showLine();
+                String instruction = ui.readCommand();
                 if (!parseInstruction(tasks, instruction)) {
                     break;
                 }
             } catch (DukeException ex) {
-                TaskList.separator();
-                System.out.println(ex);
-                TaskList.separator();
+                ui.showErrorMessage(ex);
+            } finally {
+                ui.showLine();
             }
         }
-        scanner.close();
     }
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
-    private void greet() {
-        TaskList.separator();
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        TaskList.separator();
+    private void printTotalTask() {
+        boolean isPlural = tasks.size() > 1;
+        System.out.println("Now you have " + tasks.size() + " task"
+                + (isPlural ? "s" : "") + " in the list.");
     }
 
-    private void closing() {
-        TaskList.separator();
-        System.out.println("Bye. Hope to see you again soon!");
-        TaskList.separator();
-    }
-
-    private Deadline parseDeadlineTask(String instruction) throws DukeException{
+    private void parseDeadlineTask(String instruction) throws DukeException{
         try {
             String suffix = instruction.split(" ", 2)[1];
             String description = suffix.split(" /by ", 2)[0];
             String by = suffix.split(" /by ", 2)[1];
-            return new Deadline(description, by);
+
+            Task task = new Deadline(description, by);
+            tasks.addTask(task);
+            storage.save(tasks);
+
+            ui.showMessage("Got it. I've added this task:");
+            ui.showMessage("  " + task);
+            printTotalTask();
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Deadline task formatting error.");
         }
     }
 
-    private Todo parseTodoTask(String instruction) throws DukeException {
+    private void parseTodoTask(String instruction) throws DukeException {
         try {
             String description = instruction.split(" ", 2)[1];
-            return new Todo(description);
+
+            Task task = new Todo(description);
+            tasks.addTask(task);
+            storage.save(tasks);
+
+            ui.showMessage("Got it. I've added this task:");
+            ui.showMessage("  " + task);
+            printTotalTask();
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
     }
 
-    private Event parseEventTask(String instruction) throws DukeException {
+    private void parseEventTask(String instruction) throws DukeException {
         try {
             String suffix = instruction.split(" ", 2)[1];
             String description = suffix.split(" /at ", 2)[0];
             String at = suffix.split(" /at ", 2)[1];
 
-            return new Event(description, at);
+            Task task = new Event(description, at);
+            tasks.addTask(task);
+            storage.save(tasks);
+
+            ui.showMessage("Got it. I've added this task:");
+            ui.showMessage("  " + task);
+            printTotalTask();
         } catch(IndexOutOfBoundsException ex) {
             throw new DukeException("Event task formatting error.");
         }
@@ -86,34 +96,41 @@ public class Duke {
     private void parseDoneInstruction(TaskList tasks, String instruction) throws DukeException {
         int index = Integer.parseInt(instruction.split(" ")[1]);
         tasks.markAsDone(index);
+        storage.save(tasks);
+
+        ui.showMessage("Nice! I've marked this task as done:");
+        ui.showMessage("  " + tasks.get(index));
     }
 
     private void parseDeleteInstruction(TaskList tasks, String instruction) throws DukeException {
         int index = Integer.parseInt(instruction.split(" ")[1]);
-        tasks.deleteTask(index);
+        Task task = tasks.deleteTask(index);
+        storage.save(tasks);
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
+        printTotalTask();
     }
 
     private boolean parseInstruction(TaskList tasks, String instruction) throws DukeException{
         if (instruction.equals("bye")) {
-            closing();
+            ui.showMessage("Bye. Hope to see you again soon!");
             return false;
         } else if (instruction.equals("list")) {
-            tasks.printTasks();
+            ui.showMessage("Here are the task in your list:");
+            for (int i = 1; i <= tasks.size(); ++i) {
+                ui.showMessage(i + "." + tasks.get(i));
+            }
         } else if (instruction.matches("^done \\d+$")) {
             parseDoneInstruction(tasks, instruction);
-            storage.save(tasks);
         } else if (instruction.matches("^delete \\d+$")) {
             parseDeleteInstruction(tasks, instruction);
-            storage.save(tasks);
         } else if (instruction.startsWith("deadline")) {
-            tasks.addTask(parseDeadlineTask(instruction));
-            storage.save(tasks);
+            parseDeadlineTask(instruction);
         } else if  (instruction.startsWith("todo")) {
-            tasks.addTask(parseTodoTask(instruction));
-            storage.save(tasks);
+            parseTodoTask(instruction);
         } else if (instruction.startsWith("event")) {
-            tasks.addTask(parseEventTask(instruction));
-            storage.save(tasks);
+            parseEventTask(instruction);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

@@ -7,7 +7,16 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Represents a JUnit test for Deadline.
+ */
+
 class DeadlineTest {
+
+    /**
+     * Test toString method in deadline.
+     */
+
     @Test
     public void deadlineToStringFormat_validInput_success() {
         try {

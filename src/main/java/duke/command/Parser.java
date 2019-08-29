@@ -8,6 +8,10 @@ import duke.task.ToDos;
 
 import java.text.ParseException;
 
+/**
+ * Deals with making sense of the user command.
+ */
+
 public class Parser {
     TaskList taskList;
     Ui ui;
@@ -16,6 +20,14 @@ public class Parser {
         this.taskList = taskList;
         this.ui = ui;
     }
+
+    /**
+     * Deals with processing the user command and taking actions accordingly.
+     *
+     * @param line line being processed.
+     * @throws DukeException  If input is incorrect.
+     * @throws ParseException  If date is not in date format.
+     */
 
     public void process(String line) throws DukeException, ParseException {
         Integer num; //number in list which is done

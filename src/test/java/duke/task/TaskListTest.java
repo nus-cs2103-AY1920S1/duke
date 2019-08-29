@@ -8,9 +8,22 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Represents a JUnit test for TaskList.
+ */
+
 class TaskListTest {
+
+    /**
+     * Test add method in TaskList.
+     */
+
     @Test
     public void taskList_invalidCommand_exceptionThrown() {
+
+        /**
+         * Stub for Task.
+         */
         class TaskStub extends Task {
             public TaskStub(String desc) {
                 description = desc;
@@ -21,6 +34,10 @@ class TaskListTest {
                 return null;
             }
         }
+
+        /**
+         * Stub for ToDos
+         */
 
         class ToDosStub extends TaskStub {
             public ToDosStub(String desc) {

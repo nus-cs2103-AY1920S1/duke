@@ -31,8 +31,6 @@ public class Duke {
     public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
-
-
         while(sc.hasNextLine()){
             String s = sc.nextLine();
             String[] a = Parser.parse(s);
@@ -77,6 +75,9 @@ public class Duke {
                 case "delete":
                     int m = Integer.parseInt(a[1]);
                     delete(tasks.getlist(), m-1);
+                    break;
+                case "find":
+                    find(tasks.getlist(),s);
                     break;
 
                 default:
@@ -216,6 +217,20 @@ public class Duke {
         System.out.println("     [✓]"+list.get(k).getName());
         ui.drawline();
         storage.addtask(tasks.getlist());
+    }
+    public void find(ArrayList<Task>list,String s){
+        String td = s.substring(5);
+        ArrayList<Task> l = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getName().contains(td)==true){
+                l.add(list.get(i));
+            }
+        }
+        for (int i = 0; i < l.size(); i++) {
+            int itemIndex = i + 1;
+            String itemDisplay = itemIndex + "." + l.get(i).toString();
+            System.out.println(itemDisplay);
+        }
     }
 
 }

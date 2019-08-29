@@ -1,4 +1,4 @@
-package duke.main;
+package duke.command;
 
 import duke.excaptions.IllegalDukeArgumentException;
 import duke.excaptions.IllegalDukeFormatException;
@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
     private static boolean isExit = false;
     private Storage storage;
-    Ui(Storage storage) {
+    public Ui(Storage storage) {
         this.storage = storage;
     }
     public void showWelcome() {

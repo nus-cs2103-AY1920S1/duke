@@ -1,8 +1,9 @@
-package duke.main;
+package duke.command;
 import duke.excaptions.IllegalDukeArgumentException;
 import duke.excaptions.IllegalDukeFormatException;
-import duke.main.Storage;
-import duke.main.TaskList;
+import duke.list.TaskList;
+
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

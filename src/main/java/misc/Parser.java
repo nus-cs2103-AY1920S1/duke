@@ -5,8 +5,6 @@ import exception.IncorrectDukeCommand;
 import exception.InvalidDukeCommand;
 import exception.VoidDukeCommand;
 
-import task.*;
-
 import java.io.IOException;
 
 import java.time.LocalDate;
@@ -16,6 +14,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import java.util.Scanner;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
 
 public class Parser {
     String writeTaskAsText(Task task) {
@@ -87,8 +91,8 @@ public class Parser {
 
             DateTimeFormatter eventDateInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
             DateTimeFormatter eventDateOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-            LocalDate eventDateLDT = LocalDate.parse(eventDate, eventDateInputFormatter);
-            String dateOutput = eventDateLDT.format(eventDateOutputFormatter);
+            LocalDate eventDateLdt = LocalDate.parse(eventDate, eventDateInputFormatter);
+            String dateOutput = eventDateLdt.format(eventDateOutputFormatter);
 
             if (!eventTime.contains("-")) {
                 String errorMessage = "You seem to be missing the Start/End time of your event!\n"
@@ -104,10 +108,10 @@ public class Parser {
             DateTimeFormatter eventTimeInputFormatter = DateTimeFormatter.ofPattern("HHmm");
             DateTimeFormatter eventTimeOutputFormatter = DateTimeFormatter.ofPattern("hh:mma");
 
-            LocalTime startTimeLDT = LocalTime.parse(startTime, eventTimeInputFormatter);
-            LocalTime endTimeLDT = LocalTime.parse(endTime, eventTimeInputFormatter);
-            String startTimeOutput = startTimeLDT.format(eventTimeOutputFormatter);
-            String endTimeOutput = endTimeLDT.format(eventTimeOutputFormatter);
+            LocalTime startTimeLdt = LocalTime.parse(startTime, eventTimeInputFormatter);
+            LocalTime endTimeLdt = LocalTime.parse(endTime, eventTimeInputFormatter);
+            String startTimeOutput = startTimeLdt.format(eventTimeOutputFormatter);
+            String endTimeOutput = endTimeLdt.format(eventTimeOutputFormatter);
 
             convertedTime = String.format("%s %s to %s", dateOutput, startTimeOutput, endTimeOutput);
             break;

@@ -31,7 +31,7 @@ public class ExceptionHandler {
         System.out.println(errorMessage);
     }
 
-    public void showDukeIOError() {
+    public void showDukeIoError() {
         String errorMessage = Ui.spaces(5) + "File could not be read/saved.";
 
         System.out.println(errorMessage);

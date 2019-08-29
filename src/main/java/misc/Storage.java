@@ -1,7 +1,5 @@
 package misc;
 
-import task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Task;
 
 public class Storage {
     private String filePath;

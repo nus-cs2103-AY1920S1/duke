@@ -1,12 +1,13 @@
 package task;
 
-import misc.Storage;
 import exception.DukeException;
 import exception.IncorrectDukeCommand;
-import misc.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import misc.Storage;
+import misc.Ui;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -23,7 +24,7 @@ public class TaskList {
     }
 
     public boolean hasTask() {
-        return tasks.size() != 0 ;
+        return tasks.size() != 0;
     }
 
     public int size() {
@@ -60,22 +61,21 @@ public class TaskList {
         Task task;
 
         switch (taskType) {
-            case "event":
-                task = new Event(description, dateTime);
-                break;
-            case "deadline":
-                task = new Deadline(description, dateTime);
-                break;
-            case "todo":
-                task = new ToDo(description);
-                break;
-            default:
-                task = null;
-                break;
+        case "event":
+            task = new Event(description, dateTime);
+            break;
+        case "deadline":
+            task = new Deadline(description, dateTime);
+            break;
+        case "todo":
+            task = new ToDo(description);
+            break;
+        default:
+            task = null;
+            break;
         }
 
         tasks.add(task);
-
         storage.addToLocalSave(task);
 
         System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", Ui.spaces(5));

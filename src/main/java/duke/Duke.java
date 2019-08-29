@@ -1,14 +1,20 @@
 package duke;
 
-import exception.*;
-import misc.Parser;
-import misc.Storage;
-import misc.Ui;
-import task.TaskList;
+import exception.DukeException;
+import exception.ExceptionHandler;
+import exception.IncorrectDukeCommand;
+import exception.InvalidDukeCommand;
+import exception.VoidDukeCommand;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import misc.Parser;
+import misc.Storage;
+import misc.Ui;
+
+import task.TaskList;
 
 public class Duke {
     private Ui ui;
@@ -64,7 +70,7 @@ public class Duke {
                 exceptionHandler.showUnknownDukeCommandError();
                 Ui.showLine();
             } catch (IOException e) {
-                exceptionHandler.showDukeIOError();
+                exceptionHandler.showDukeIoError();
                 Ui.showLine();
             } catch (DukeException e) {
                 exceptionHandler.showDukeError(e);   

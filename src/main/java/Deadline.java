@@ -1,9 +1,11 @@
-public class Deadline extends Task {
-    private String deadline;
+import java.text.ParseException;
 
-    public Deadline(String description, String deadline) {
+public class Deadline extends Task {
+    private DukeDate deadline;
+
+    public Deadline(String description, String deadline) throws ParseException {
         super(description);
-        this.deadline = deadline;
+        this.deadline = new DukeDate(deadline);
     }
 
     public String toString() {

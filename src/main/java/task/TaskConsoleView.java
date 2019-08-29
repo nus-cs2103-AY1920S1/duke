@@ -11,7 +11,7 @@ import java.util.List;
  * View in charge of printing all task related information and output.
  * </p>
  */
-class TaskListView {
+class TaskConsoleView {
     /***
      * <p>
      * Prints tasks.

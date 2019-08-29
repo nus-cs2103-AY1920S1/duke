@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class TaskListController {
     private List<Task> tasks;
-    private TaskListView view;
+    private TaskConsoleView view;
 
     /***
      * <p>
@@ -22,7 +22,7 @@ public class TaskListController {
      */
     public TaskListController(List<Task> tasks) {
         this.tasks = tasks;
-        view = new TaskListView();
+        view = new TaskConsoleView();
     }
 
     /***

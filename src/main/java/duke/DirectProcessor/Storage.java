@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    private static BufferedWriter recorder;
     private static BufferedReader reader;
 
     /**

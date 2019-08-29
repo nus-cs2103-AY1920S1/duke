@@ -11,6 +11,14 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    private void printTasks(TaskList tasks) {
+        String task;
+        for (int i = 1; i <= tasks.size(); i++) {
+            task = String.format("%d.%s", i, tasks.get(i));
+            System.out.println(task);
+        }
+    }
+
     public void showWelcomeMessage() {
         String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?\n" +
                 "To input dates and times for deadlines and events, " +
@@ -31,17 +39,11 @@ public class Ui {
     }
 
     public void printTaskList(TaskList tasks) {
-
-        System.out.println("Here are the task(s) in your list:");
-
-        String task;
-        for (int i = 1; i <= tasks.size(); i++) {
-            task = String.format("%d.%s", i, tasks.get(i));
-            System.out.println(task);
-        }
-
         if (tasks.size() == 0) {
             System.out.println("There are no tasks in your list right now.");
+        } else {
+            System.out.println("Here are the task(s) in your list:");
+            printTasks(tasks);
         }
     }
 
@@ -62,5 +64,14 @@ public class Ui {
                 "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
                 task, tasks.size()
         ));
+    }
+
+    public void printSearchResults(TaskList results) {
+        if (results.size() == 0) {
+            System.out.println("No matching tasks found in your list.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            printTasks(results);
+        }
     }
 }

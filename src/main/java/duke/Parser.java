@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandFind;
 import duke.command.CommandList;
 import duke.command.CommandMark;
 import duke.command.CommandDelete;
@@ -37,6 +38,12 @@ public class Parser {
                 throw new DukeException("To add tasks, please use the format: type description\n" +
                         "e.g. todo read book"
                 );
+            }
+        case "find":
+            try {
+                return new CommandFind(commandWords[1]);
+            } catch (Exception e) {
+                throw new DukeException("Invalid search term.");
             }
         case "bye":
             return new CommandExit();

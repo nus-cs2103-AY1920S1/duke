@@ -12,6 +12,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.text.ParseException;
+import java.util.LinkedList;
 
 /**
  * The Parser class is one of the class in command package which used to deal with making sense of the user command
@@ -55,6 +56,9 @@ public class Parser {
             break;
         case delete:
             commandDelete(storage);
+            break;
+        case find:
+            commandFind();
             break;
         }
     }
@@ -175,6 +179,26 @@ public class Parser {
             System.out.println("Selected index not exists");
         }
     }
+    private void commandFind() {
+        String target = splitCommand[1];
+        boolean isFound = false;
+        LinkedList<Task> targetList = new LinkedList<>();
+        for (Task task : TaskList.getList()) {
+            if (task.toString().contains(target)) {
+                targetList.add(task);
+                isFound = true;
+            }
+        }
+        if (isFound) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < targetList.size(); i++) {
+                int index = i + 1;
+                System.out.println("  " + index + "." + targetList.get(i).toString());
+            }
+        } else {
+            System.out.println("OOPS! No such key word detected.");
+        }
+    }
 }
 
 
@@ -182,5 +206,5 @@ public class Parser {
  * the enum class with all types of command
  */
 enum Command {
-    list,bye,done,todo,deadline,event,delete;
+    list,bye,done,todo,deadline,event,delete,find;
 }

@@ -49,6 +49,7 @@ public class Controller implements UserInputListener {
     this.addTaskCommandListeners = new ArrayList<>();
     this.deleteTaskCommandListeners = new ArrayList<>();
     this.doneTaskCommandListeners = new ArrayList<>();
+    this.findTaskCommandListeners = new ArrayList<>();
     this.listTaskCommandListeners = new ArrayList<>();
     this.byeCommandListeners = new ArrayList<>();
 

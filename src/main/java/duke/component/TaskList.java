@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class TaskList {
     /** Array list of task. */
-    public List<Task> task;
+    private List<Task> task;
 
     /** Total number of task. */
-    public int itemNo;
+    private int itemNo;
 
     /**
      * TaskList Constructor enter by user.

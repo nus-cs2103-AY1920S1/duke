@@ -17,7 +17,7 @@ public class Ui {
     public final String INDENT_TASK = "      ";
 
     /** Scan user input. */
-    public Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
     /**
      * Print the horizontal line.

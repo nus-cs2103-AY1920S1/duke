@@ -1,14 +1,17 @@
 todo borrow book
 list
-deadline CS2103T Project /by Today
+deadline CS2103T Project /by 29/08/2019 17:37:00
 done 1
 list
-deadline return book /by Sunday
+deadline return book /by 01/09/2019 23:59:00
 done 3
-event project meeting /at Mon 2-4pm
+event project meeting /at 02/09/2019 14:00:00
 list
 todo
 blah
-delete 2
 done 100
+delete 3
+delete 2
+delete 1
+delete 1
 bye

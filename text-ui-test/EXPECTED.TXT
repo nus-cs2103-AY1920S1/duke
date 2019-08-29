@@ -13,7 +13,7 @@ Here are the task in your list:
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][✘] CS2103T Project (by: Today)
+  [D][✘] CS2103T Project (by: Thu Aug 29 17:37:00 SGT 2019)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -23,28 +23,28 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the task in your list:
 1.[T][✓] borrow book
-2.[D][✘] CS2103T Project (by: Today)
+2.[D][✘] CS2103T Project (by: Thu Aug 29 17:37:00 SGT 2019)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][✘] return book (by: Sunday)
+  [D][✘] return book (by: Sun Sep 01 23:59:00 SGT 2019)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [D][✓] return book (by: Sunday)
+  [D][✓] return book (by: Sun Sep 01 23:59:00 SGT 2019)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][✘] project meeting (at: Mon 2-4pm)
+  [E][✘] project meeting (at: Mon Sep 02 14:00:00 SGT 2019)
 Now you have 4 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the task in your list:
 1.[T][✓] borrow book
-2.[D][✘] CS2103T Project (by: Today)
-3.[D][✓] return book (by: Sunday)
-4.[E][✘] project meeting (at: Mon 2-4pm)
+2.[D][✘] CS2103T Project (by: Thu Aug 29 17:37:00 SGT 2019)
+3.[D][✓] return book (by: Sun Sep 01 23:59:00 SGT 2019)
+4.[E][✘] project meeting (at: Mon Sep 02 14:00:00 SGT 2019)
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! The description of a todo cannot be empty.
@@ -53,12 +53,27 @@ ____________________________________________________________
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 ____________________________________________________________
+☹ OOPS!!! Invalid task index.
+____________________________________________________________
+____________________________________________________________
 Noted. I've removed this task:
-  [D][✘] CS2103T Project (by: Today)
+  [D][✓] return book (by: Sun Sep 01 23:59:00 SGT 2019)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! Invalid task index.
+Noted. I've removed this task:
+  [D][✘] CS2103T Project (by: Thu Aug 29 17:37:00 SGT 2019)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+  [T][✓] borrow book
+Now you have 1 task in the list.
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+  [E][✘] project meeting (at: Mon Sep 02 14:00:00 SGT 2019)
+Now you have 0 task in the list.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

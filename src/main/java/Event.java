@@ -1,13 +1,19 @@
-public class Event extends Task {
-    private String duration;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 
-    public Event(String description, String duration) {
+public class Event extends Task {
+    private DukeDate startTime;
+    private DukeDate endTime;
+
+    public Event(String description, String startTime, String endTime) throws ParseException {
         super(description);
-        this.duration = duration;
+        this.startTime = new DukeDate(startTime);
+        this.endTime = new DukeDate(endTime);
     }
 
     public String toString() {
         String statusIcon = getStatusIcon();
-        return "[E][" + statusIcon + "] " + this.description + " (at: " + this.duration + ")";
+        return "[E][" + statusIcon + "] " + this.description + " (at: " + this.startTime + " - " + this.endTime +  ")";
     }
 }

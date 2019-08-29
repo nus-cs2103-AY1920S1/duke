@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -102,7 +103,7 @@ public class Duke {
             throw new DukeException("\u2639" + " OOPS!!! The description of a todo cannot be empty.");
         }
 
-        Task t = new ToDo(taskDescription);
+        Task t = new ToDo(taskDescription.trim());
         this.storedTasks.add(t);
         printAddTaskOutput(t);
     }
@@ -132,6 +133,9 @@ public class Duke {
         catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\u2639" + " OOPS!!! The description/deadline of a deadline cannot be empty.");
         }
+        catch (ParseException e) {
+            throw new DukeException("\u2639" + " OOPS!!! The format of the deadline is wrong!");
+        }
     }
 
     /**
@@ -146,18 +150,22 @@ public class Duke {
             String[] strArr = taskDescriptionwithDuration.split("/at");
             String description = strArr[0].trim();
             String duration = strArr[1].trim();
+            String[] durationArr = duration.split("-");
 
             //Either description or duration is missing, but /at is possibly present
             if (description.length() == 0 || duration.length() == 0) {
                 throw new DukeException("\u2639" + " OOPS!!! The description/duration of a deadline cannot be empty.");
             }
 
-            Task t = new Event(description, duration);
+            Task t = new Event(description, durationArr[0].trim(), durationArr[1].trim());
             this.storedTasks.add(t);
             printAddTaskOutput(t);
         }
         catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("\u2639" + " OOPS!!! The description/duration of an event cannot be empty.");
+        }
+        catch (ParseException e) {
+            throw new DukeException("\u2639" + " OOPS!!! The format of the duration is wrong!");
         }
     }
 

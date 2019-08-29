@@ -53,7 +53,6 @@ public class Duke {
         }catch(Exception e){return null;}
 
     }
->>>>>>> branch-Level-8
     public static void list(ArrayList<Task> tasks){
         int size = tasks.size();
         //may have to catch error if no items in list

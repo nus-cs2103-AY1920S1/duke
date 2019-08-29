@@ -1,16 +1,11 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Collections;
 
 public class Duke {
 
     static final String HORIZONTAL_LINE = "______________________________"
             + "______________________________";
-
-    private static List<String> taskList = new ArrayList<String>();
 
 
     /**
@@ -23,8 +18,6 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
-
         System.out.println("Hello from\n" + logo);
 
         greet();
@@ -35,17 +28,11 @@ public class Duke {
         while (continueRunning) {
             String command  = in.nextLine();
 
-            switch (command) {
-            case "list":
-                listAllTasks();
-                break;
-            case "bye":
+            if (!command.equals("bye")) {
+                echo(command);
+            } else {
                 exit();
                 continueRunning = false;
-                break;
-            default:
-                addToList(command);
-                break;
             }
         }
     }
@@ -77,26 +64,5 @@ public class Duke {
         System.out.println("\t" + HORIZONTAL_LINE);
         System.out.println("\t" + "Bye. Hope to see you again soon!");
         System.out.println("\t" + HORIZONTAL_LINE);
-    }
-
-    /**
-     * Adds the items to list.
-     * @param task The task to add to the list.
-     */
-    private static void addToList(String task) {
-        taskList.add(task);
-        echo("added: " + task);
-    }
-
-    /**
-     * Lists all the tasks into console.
-     */
-    private static void listAllTasks() {
-        System.out.println("\t" + HORIZONTAL_LINE);
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
-        }
-        System.out.println("\t" + HORIZONTAL_LINE);
-
     }
 }

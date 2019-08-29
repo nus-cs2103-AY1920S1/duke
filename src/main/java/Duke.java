@@ -1,7 +1,4 @@
 import java.util.Scanner;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Duke {
     private Storage storage;
@@ -40,11 +37,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-}
-
-class DukeException extends Exception {
-    public DukeException(String message) {
-        super(message);
     }
 }

@@ -17,7 +17,6 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-            System.out.println(tasks.size());
         } catch (DukeException e) {
             ui.dukeEcho(e.getMessage());
             tasks = new TaskList();
@@ -44,6 +43,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt").run();
     }
 }

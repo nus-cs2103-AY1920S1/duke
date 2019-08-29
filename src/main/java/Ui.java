@@ -1,3 +1,8 @@
+/**
+ * The Ui class deals with user interaction.
+ * It will call the Parser class and the TaskList class to handle user inputs.
+ */
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -8,6 +13,9 @@ public class Ui {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Constructor for Ui class.
+     */
     public Ui() {
         sc = new Scanner(System.in);
         String f = "data/duke.txt";
@@ -19,6 +27,14 @@ public class Ui {
         System.out.println("    Hello from\n" + logo + "    Hello! I'm Duke\n    What can I do for you?");
     }
 
+    /**
+     * Scans for user input, parse if necessary and edit the task list accordingly.
+     * It also stores the task list in the hard drive when it changes.
+     *
+     * @param taskList Task list that users modifies.
+     * @param storage For storing the taskList into the hard drive.
+     * @throws IOException Throws if an unpredicted error occurs.
+     */
     public void scan(TaskList taskList, Storage storage) throws IOException {
         this.taskList = taskList;
         this.storage = storage;

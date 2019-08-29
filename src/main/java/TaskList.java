@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
+import duke.exception.DukeException;
+
 public class TaskList {
 
     private Duke parent;

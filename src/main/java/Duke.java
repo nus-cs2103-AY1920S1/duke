@@ -1,3 +1,7 @@
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.Deadline;
+
 import java.io.IOException;
 import java.util.IllegalFormatException;
 import java.util.Scanner;

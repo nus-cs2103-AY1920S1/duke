@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+
 public class Ui {
 
     private Duke parent;

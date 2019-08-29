@@ -1,5 +1,7 @@
 import java.io.IOException;
 
+import duke.exception.DukeException;
+
 public class Parser {
 
     private Duke parent;

@@ -1,9 +1,12 @@
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.text.Parser;
 import duke.ui.Ui;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
     protected TaskList tasks;
@@ -28,6 +31,16 @@ public class Duke {
         newDuke.run();
     }
 
+    public void run1() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        System.out.println(list);
+        String a = list.get(1);
+        System.out.println(a);
+        a = "3";
+        System.out.println(list);
+    }
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

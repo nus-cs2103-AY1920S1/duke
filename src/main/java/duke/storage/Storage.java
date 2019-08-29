@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.task.*;
 import duke.ui.Ui;
 

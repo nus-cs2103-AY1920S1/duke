@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     boolean completed = false;
     String task;
 
@@ -6,6 +6,10 @@ public class Task {
         this.task = task;
     }
 
+    public Task(String task, boolean isCompleted) {
+        this.task = task;
+        this.completed = isCompleted;
+    }
     public void complete() {
         this.completed = true;
     }
@@ -18,4 +22,6 @@ public class Task {
             return "[✗] " + this.task;
         }
     }
+
+    abstract String toFileFormat();
 }

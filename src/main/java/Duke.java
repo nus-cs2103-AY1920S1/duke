@@ -1,8 +1,12 @@
+import java.io.FileNotFoundException;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static final String filePath= "data/dukeData.txt";
 
     private enum Commands {
         bye,
@@ -29,10 +33,21 @@ public class Duke {
         System.out.println("    Got it. I've added this task: ");
         System.out.println("      " + newTask.toString());
         System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+        try {
+            DukeFileWriter.writeToFile(filePath, tasks);
+        } catch (IOException err){
+            System.out.println("Error reading/Writing file");
+        }
+
         straightLine();
     }
 
     public static void main(String[] args) {
+        try {
+            tasks = DukeFileReader.getData(filePath);
+        } catch (FileNotFoundException err) {
+            System.out.println("    OOPS! Couldn't read file");
+        }
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -59,52 +74,58 @@ public class Duke {
                 String description = input.substring(command.length()).trim();
 
                 switch (commandEnum) {
-                case bye:
-                    System.out.println("    Bye! See you again soon!!");
-                    straightLine();
-                    shouldStop = true;
-                    break;
-                case list:
-                    System.out.println("    Here are the tasks in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println("      " + (i + 1) + "." + tasks.get(i).toString());
-                    }
-                    straightLine();
-                    break;
-                case done:
-                    try {
-                        int taskNumber = Integer.parseInt(description) - 1;
-                        tasks.get(taskNumber).complete();
-                        System.out.println("    Nice! I've marked this task as done:");
-                        System.out.println("      " + tasks.get(taskNumber).toString());
+                    case bye:
+                        System.out.println("    Bye! See you again soon!!");
                         straightLine();
-                    } catch (IndexOutOfBoundsException | NumberFormatException err) {
-                        throw new InvalidDescriptionDukeException(command, description);
-                    }
-                    break;
-                case delete:
-                    try {
-                        int taskNumber = Integer.parseInt(description) - 1;
-                        System.out.println("    Noted. I've removed this task:");
-                        System.out.println("      " + tasks.get(taskNumber).toString());
-                        tasks.remove(taskNumber);
-                        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                        shouldStop = true;
+                        break;
+                    case list:
+                        System.out.println("    Here are the tasks in your list:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println("      " + (i + 1) + "." + tasks.get(i).toString());
+                        }
                         straightLine();
-                    } catch (IndexOutOfBoundsException | NumberFormatException err) {
-                        throw new InvalidDescriptionDukeException(command, description);
-                    }
-                    break;
-                case todo:
-                    addTask(new ToDoTask(description));
-                    break;
-                case event:
-                    addTask(new EventsTask(description));
-                    break;
-                case deadline:
-                    addTask(new DeadlinesTask(description));
-                    break;
-                default:
-                    throw new InvalidCommandDukeException(command);
+                        break;
+                    case done:
+                        try {
+                            int taskNumber = Integer.parseInt(description) - 1;
+                            tasks.get(taskNumber).complete();
+                            System.out.println("    Nice! I've marked this task as done:");
+                            System.out.println("      " + tasks.get(taskNumber).toString());
+                            DukeFileWriter.writeToFile(filePath, tasks);
+                            straightLine();
+                        } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                            throw new InvalidDescriptionDukeException(command, description);
+                        } catch (IOException err) {
+                            System.out.println("Error Reading/Writing file");
+                        }
+                        break;
+                    case delete:
+                        try {
+                            int taskNumber = Integer.parseInt(description) - 1;
+                            System.out.println("    Noted. I've removed this task:");
+                            System.out.println("      " + tasks.get(taskNumber).toString());
+                            tasks.remove(taskNumber);
+                            System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                            straightLine();
+                            DukeFileWriter.writeToFile(filePath, tasks);
+                        } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                            throw new InvalidDescriptionDukeException(command, description);
+                        } catch (IOException err) {
+                            System.out.println("Error Reading/Writing file");
+                        }
+                        break;
+                    case todo:
+                        addTask(new ToDoTask(description));
+                        break;
+                    case event:
+                        addTask(new EventsTask(description));
+                        break;
+                    case deadline:
+                        addTask(new DeadlinesTask(description));
+                        break;
+                    default:
+                        throw new InvalidCommandDukeException(command);
                 }
             } catch(DukeException err) {
                 System.out.println("    " + err.toString());

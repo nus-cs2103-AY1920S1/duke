@@ -11,7 +11,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    /**
+     * Sets up the required objects, loads up the data from the storage file.
 
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,7 +25,9 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
+    /**
+     * Prints the welcome message,and scan user input.
+     */
     public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
@@ -86,13 +91,21 @@ public class Duke {
             }
         }
     }
+    /**
+     * Entry point of the application.
+     * Initializes the application and starts the interaction with the user.
+     */
 
     public static void main(String[] args) {
         File f = new File("data");
         f.mkdir();
         new Duke("data/tasks.txt").run();
     }
-
+    /**
+     * Executes the command and returns the result.
+     * @param s user command
+     * @return result of the command
+     */
     public void todo(ArrayList<Task>list,String s) throws ErrorException{
         if (s.length() == 4) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -109,6 +122,11 @@ public class Duke {
             storage.addtask(tasks.getlist());
         }
     }
+    /**
+     * Executes the command and returns the result.
+     * @param s user command
+     * @return result of the command
+     */
     public void deadline(ArrayList<Task>list,String s) throws ErrorException{
         if (s.length() == 8) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -123,6 +141,11 @@ public class Duke {
             tasks.timeform(deadlineBy,d);
         }
     }
+    /**
+     * Executes the command and returns the result.
+     * @param s user command
+     * @return result of the command
+     */
     public void event(ArrayList<Task>list,String s) throws ErrorException{
         if (s.length() == 5) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -140,9 +163,19 @@ public class Duke {
 
         }
     }
+    /**
+     * Executes the command and returns the result.
+     * @param s user command
+     * @return result of the command
+     */
     public void other(String s) throws ErrorException{
         throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+    /**
+     * Executes the command and returns the result.
+     * @param p user command
+     * @return result of the command
+     */
     public void delete(ArrayList<Task>list,int p){
         Task rt = list.get(p);
         ui.drawline();
@@ -153,19 +186,29 @@ public class Duke {
         ui.drawline();
         storage.addtask(tasks.getlist());
     }
-
+    /**
+     * Executes the command and returns the result.
+     */
     public void list(ArrayList<Task>list){
         ui.drawline();
         System.out.println("     Here are the tasks in your list:");
         tasks.showlist();
         ui.drawline();
     }
+    /**
+     * Executes the command and returns the result.
+     */
     public void echo(ArrayList<Task>list,Task t){
         list.add(t);
         ui.drawline();
         System.out.println("     added: "+t.getName());
         ui.drawline();
     }
+    /**
+     * Executes the command and returns the result.
+     * @param k user command
+     * @return result of the command
+     */
     public void done(ArrayList<Task>list,int k){
         ui.drawline();
         list.get(k).setDone();

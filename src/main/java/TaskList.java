@@ -1,7 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+/**
+ * Represents the methods of application.
+ */
 public class TaskList {
 
     private static DateTimeFormatter time = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

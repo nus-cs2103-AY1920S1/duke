@@ -1,4 +1,4 @@
 T | 1 | read book
 D | 1 | return book | 02/12/2019 1800
 E | 1 | project meeting | 02/12/2019 1800
-T | 0 | finish homework
+T | 1 | finish homework

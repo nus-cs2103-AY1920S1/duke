@@ -13,40 +13,6 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    public void readList(Scanner sc) {
-        while(sc.hasNext()) {
-            try {
-                String command = sc.nextLine();
-                String[] words = command.split(" ", 2);
-                String action = words[0];
-
-                if (command.equals("bye")) {
-                    printBye();
-                    return;
-                } else if (action.equals("done")) {
-                    doneTask(words);
-                } else if (action.equals("delete")) {
-                    deleteTask(words);
-                } else if (action.equals("todo")) {
-                    addTodo(words);
-                } else if (action.equals("deadline")) {
-                    addDeadline(words);
-                } else if (action.equals("event")) {
-                    addEvent(words);
-                } else if (command.equals("list")) {
-                    printList();
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch(DukeException ex) {
-                System.out.println("    ____________________________________________________________");
-                System.err.println("     " + ex);
-                System.out.println("    ____________________________________________________________");
-            }
-
-        }
-    }
-
     public void doneTask(String[] words) throws DukeException {
         if (words.length < 2) {
             throw new DukeException("☹ OOPS!!! The index of a done task cannot be empty.");

@@ -7,12 +7,15 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     public Duke(String filePath) {
+        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
+            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -20,29 +23,19 @@ public class Duke {
     public static void main(String[] args) {
 
         Duke duke = new Duke("../data/duke.txt");
+        duke.run();
+    }
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
-
-        Scanner sc = new Scanner(System.in);
+    public void run() {
         try {
-            duke.run(sc);
+            Scanner sc = new Scanner(System.in);
+            ui.showWelcome();
+            Parser.readList(sc, tasks);
+            storage.save(tasks);
         } catch (DukeException ex) {
             System.out.println(ex);
         }
     }
 
-    public void run(Scanner sc) throws DukeException {
-        tasks.readList(sc);
-        storage.save(tasks);
-    }
 
 }

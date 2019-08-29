@@ -51,7 +51,7 @@ class Storage {
     }
 
     // function to read tasks from a single line
-    private static Task readTask(String task) throws DukeException {
+    public static Task readTask(String task) throws DukeException {
         String[] taskParams = task.split(" - ");
         Task returnTask = null;
         switch (taskParams[0]) {
@@ -91,7 +91,7 @@ class Storage {
     }
 
     // generate string to represent task
-    private static String writeTask(Task task) {
+    public static String writeTask(Task task) {
         String taskStr = "";
         String doneStr = task.isTaskDone() ? "1" : "0";
         switch (task.getType()) {

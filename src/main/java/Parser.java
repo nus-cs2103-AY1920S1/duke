@@ -10,6 +10,7 @@ class Parser {
 
     /**
      * Returns a Command, and each command created is of a different class from the user's input.
+     * <p>
      * There are 2 types of commands, 1-word String command, and 2-or-more-word command.
      * E.g. of 1-word String: list, bye, help
      * E.g. of 2-or-more-word String, todo, deadline, event, done, delete
@@ -17,14 +18,13 @@ class Parser {
      * If the user inputs something that is not of the correct Input type, a DukeException is thrown
      * 
      * @param input String inputted by the user to be parsed into a Command
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
      * @throws DukeException When the user Inputs something unreadable by the program.
      * @return A Command that is executed by DukeManager
      * @see {@link Command#execute(Ui, TaskList, Storage)}
      */
-    public Command parseToCommand(String input, Ui uiManager) throws DukeException {
+    public Command parseToCommand(String input) throws DukeException {
         String[] inputArr = input.split(" ", 2);
-        Action action = getAction(inputArr[0], uiManager);
+        Action action = getAction(inputArr[0]);
 
         if (inputArr.length == 1) {
             switch (action) {
@@ -35,95 +35,145 @@ class Parser {
             case HELP :
                 return new HelpCommand();      
             default :
-                uiManager.throwInputError(action);
+                throwInputError(action);
                 return null;
             }
         } else if (inputArr.length == 2) {
             switch (action) {
             case TODO :
-                // Fallthrough
+                return new AddCommand(new Todo(inputArr[1]));
             case DEADLINE :
-                // Fallthrough
+                return new AddCommand(createDeadline(inputArr[1]));
             case EVENT :
-                return new AddCommand(action, inputArr[1]);
+                return new AddCommand(createEvent(inputArr[1]));
             case DONE :
-                return new DoneCommand(parseToNumber(inputArr[1], "Done", uiManager));
+                return new DoneCommand(parseToNumber(inputArr[1], "Done"));
             case DELETE :
-                return new DeleteCommand(parseToNumber(inputArr[1], "Delete", uiManager));
+                return new DeleteCommand(parseToNumber(inputArr[1], "Delete"));
             case FIND :
                 return new FindCommand(inputArr[1]);
             default :
-                uiManager.throwGeneralError();
-                return null;
+                throw new DukeException("Oof. I apologize, but I do not understand.");
             }
         } else {
-            uiManager.throwGeneralError();
-            return null;
+            // Not suppose to happen
+            throw new DukeException("Oof. I apologize, but I do not understand.");
         }
     } 
 
     /**
      * Returns an Action enum from a single word String
      * @param action The first word that is input by the user
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
      * @throws DukeException When the single word String is not of the stipulated cases
      * @return An Action enum
      */
-    private Action getAction(String action, Ui uiManager) throws DukeException {
+    private Action getAction(String action) throws DukeException {
         // Fallthrough are made for the Capitalized versions of the String
-        switch (action) {
-        case "List" :
+        switch (action.toLowerCase()) {
         case "list" :
             return Action.LIST;
-        case "Bye" :
         case "bye" :
             return Action.EXIT;
-        case "Help" :
         case "help" :
             return Action.HELP;
-        case "Todo" :
         case "todo" :
             return Action.TODO;
-        case "Deadline" :
         case "deadline" :
             return Action.DEADLINE;
-        case "Event" :
         case "event" :
             return Action.EVENT;
-        case "Done" :
         case "done" :
             return Action.DONE;
-        case "Delete" :
         case "delete" :
             return Action.DELETE;
-        case "Find" :
         case "find" :
             return Action.FIND;
         default :
-            uiManager.throwApologyError();
-            return null;
+            throw new DukeException("Oof. I apologize, but no such command exists.");
         }
     }
-
+    
     /**
      * Returns the parsed task number given by the user 
      * used for certain commands E.g. Done and Delete
      * 
-     * @param taskNumber The 
+     * @param taskNumber The number given by the user that is parsed into the respective task.
      * @param action The first word that is input by the user
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
      * @return An Integer that is, taskNumber that is pased
      * @throws DukeException When the action
      */
-    private Integer parseToNumber(
-            String taskNumber, String action, Ui uiManager) throws DukeException {
-        Integer taskNo = null;
+    private Integer parseToNumber(String taskNumber, String action) throws DukeException {
         try {
-            taskNo = Integer.parseInt(taskNumber);
-            return taskNo;
+            return Integer.parseInt(taskNumber);
         } catch (Exception e) {
-            uiManager.throwMissingNumberError(action);
-            return null;
+            throw new DukeException("Oof. " + action + " requires a number behind.");
+        }
+    }
+
+    /**
+     * Returns a Task, or specifically, a Deadline.
+     * <p>
+     * The taskArr string is split with ' /by ', which the taskArr[0] is the given
+     * task, while taskArr[1] is the date, time or both.
+     * Otherwise, it will throw a DukeException, if the format is wrong.
+     * 
+     * @param taskString A String that contain the task including the date to be split
+     * @return A Deadline Task to be added.
+     * @throws DukeException When the format of Deadline is wrong.
+     * @see {@link Deadline#Deadline(String, String)}
+     */
+    private Task createDeadline(String taskString) throws DukeException {
+        String[] taskArr = taskString.split(" /by ", 2);
+        if (taskArr.length == 1) {
+            throw new DukeException("Oof. There seems to be an error with your deadline format. "
+                    + "Here's an example: \'deadline Handup Quiz /by 17/05/2019 14:05\'");
+        } else {
+            return new Deadline(taskArr[0], taskArr[1]);
+        }
+    }
+
+    /**
+     * Returns a Task, or specifically, an Event.
+     * <p>
+     * The taskArr string is split with ' /by ', which the taskArr[0] is the given
+     * task, while taskArr[1] is the date, time or both.
+     * Otherwise, it will throw a DukeException, if the format is wrong.
+     * 
+     * @param taskString A String that contain the task including the date to be split
+     * @return An Event Task to be added.
+     * @throws DukeException When the format of the Event is wrong.
+     * @see {@link Event#Event(String, String)}
+     */
+    private Task createEvent(String taskString) throws DukeException {
+        String[] taskArr = taskString.split(" /at ", 2);
+        if (taskArr.length == 1) {
+            throw new DukeException("Oof. There seems to be an eror with your event format" 
+                    + "Here's an example: \'event Go to class /at 17/05/2019 14:05\'");
+        } else {
+            return new Event(taskArr[0], taskArr[1]);
+        }
+    }
+
+    /**
+     * Method throws a Input Exception when a 2-or-more-Words String has only the word itself
+     * 
+     * @param action The input Command/Action
+     * @throws DukeException
+     */
+    private void throwInputError(Action action) throws DukeException {
+        switch (action) {
+            case TODO :
+                throw new DukeException("Oof. The description of a todo cannot be empty.");
+            case DEADLINE :
+                throw new DukeException("Oof. The description of a deadline cannot be empty.");
+            case EVENT :
+                throw new DukeException("Oof. The description of a event cannot be empty."); 
+            case DONE :
+                throw new DukeException("Oof. The description of a done cannot be empty.");
+            case DELETE :
+                throw new DukeException("Oof. The description of a delete cannot be empty.");
+            default :
+                throw new DukeException("Oof. I apologize but I don't understand.");
         }
     }
 

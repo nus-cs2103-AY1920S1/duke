@@ -12,7 +12,7 @@ class ListCommand implements Command {
      * This method executes the List Command, which uses uiManager to list out
      * each line of the task from the taskList.
      * 
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
+     * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file. - Not in use
      */
@@ -23,7 +23,7 @@ class ListCommand implements Command {
         } else {
             uiManager.printListStarter();
             for (int i = 0; i < taskList.listSize(); i++) {
-                uiManager.printTask(i + 1, taskList.getTask(i, uiManager));
+                uiManager.printTask(i + 1, taskList.getTask(i));
             }
         }
     }

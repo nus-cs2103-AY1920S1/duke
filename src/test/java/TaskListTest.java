@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class TaskListTest {
     @Test
     public void addDeleteTest() {
-        Ui uiManager = new Ui();
         TaskList taskList = new TaskList();
         try {
             taskList.addTask(new Todo("This is a Todo."));
@@ -17,15 +16,15 @@ public class TaskListTest {
         }
 
         try {
-            taskList.deleteTask(2, uiManager);
-            taskList.deleteTask(0, uiManager);
-            taskList.deleteTask(0, uiManager);
+            taskList.deleteTask(2);
+            taskList.deleteTask(0);
+            taskList.deleteTask(0);
         } catch (DukeException e) {
             fail(e.getMessage());
         }
 
         try {
-            taskList.deleteTask(3, uiManager);
+            taskList.deleteTask(3);
             fail();
         } catch (DukeException e) {
             // Pass

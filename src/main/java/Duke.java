@@ -5,8 +5,7 @@ import java.io.IOException;
  */
 public class Duke {
     /**
-     * This program is Duke, which is an artifical chat bot for storing tasks 
-     * inputted by the user.
+     * This program is Duke, which stores task for users.
      * 
      * @param args
      * @throws DukeException

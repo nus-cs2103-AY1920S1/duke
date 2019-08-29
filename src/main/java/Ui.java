@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * Represents the UI system of the program, which obtains inputs from the user, and displays outputs
- * to the user, as well as throwing errors to the user.
  */
 class Ui {
     private Scanner scanner;
@@ -147,114 +146,8 @@ class Ui {
         System.out.println("Alright then. See you later.");
     }
 
-<<<<<<< HEAD
     public void printNotFound() {
         System.out.println("Nope, I found nothing.");
-    }
-
-=======
-    /**
-     * Method throws a general exception that is used when the user 
-     * inputs something that is not understandable
-     * 
-     * @throws DukeException
-     */
->>>>>>> branch-A-JavaDoc
-    public void throwGeneralError() throws DukeException {
-        throw new DukeException("Oof. I apologize, but I do not understand.");
-    }
-
-    /**
-     * Methods throws an exception to apologize when the first word of the String inputted
-     * by the user is not understandable.
-     * 
-     * @throws DukeException
-     */
-    public void throwApologyError() throws DukeException {
-        throw new DukeException("Oof. I apologize, but no such command exists.");
-    }
-
-    /**
-     * Method throws an exception when the given Done or Delete Command has parsable String
-     * to Integer.
-     * 
-     * @param action The Action - Either Done or Delete
-     * @throws DukeException
-     */
-    public void throwMissingNumberError(String action) throws DukeException {
-        throw new DukeException("Oof. " + action + " requires a number behind.");
-    }
-
-    /**
-     * Method throws a missing task exception when the task is not found in the tasklist
-     * 
-     * @throws DukeException
-     */
-    public void throwMissingTaskError() throws DukeException {
-        throw new DukeException("Oof. The given task number is not found.");
-    }
-
-    /**
-     * Method throws a serialization exception when failing to serialize the list.
-     * 
-     * @throws DukeException
-     */
-    public void throwSerializeError() throws DukeException {
-        throw new DukeException("Oof. Unable to serialize the list to Tasks.sav. " 
-                + "If there is already a Tasks.sav, please delete it.");
-    }
-
-    /**
-     * Method throws a corrupted save file exception when encountered with an unreadable save file.
-     * @throws DukeException
-     */
-    public void throwCorruptedSavFileError() throws DukeException {
-        throw new DukeException("Oof. Corrupted save file. "
-                    + "I have rewrote the old save file with a new one. "
-                    + "Please restart me again.");
-    }
-
-    /**
-     * Method throws a task format exception when the format that the user input for Deadline
-     * and Event is wrong.
-     * 
-     * @param action The Action enum - Either Deadline or Event.
-     * @throws DukeException
-     */
-    public void throwTaskFormatError(Action action) throws DukeException {
-        switch (action) {
-            case DEADLINE :
-                throw new DukeException("Oof. There seems to be an error with your deadline format. "
-                        + "Here's an example: \'deadline Handup Quiz /by 17/05/2019 14:05\'");
-            case EVENT :
-                throw new DukeException("Oof. There seems to be an eror with your event format" 
-                        + "Here's an example: \'event Go to class /at 17/05/2019 14:05\'");
-            default :
-                throw new DukeException("Oof. I apologize but I don't understand.");
-        }
-    }
-
-    /**
-     * Method throws a Input Exception when a 2-or-more-Words String has only the word itself
-     * 
-     * @param action The input Command/Action
-     * @throws DukeException
-     */
-    public void throwInputError(Action action) throws DukeException {
-        switch (action) {
-            case TODO :
-                throw new DukeException("Oof. The description of a todo cannot be empty.");
-            case DEADLINE :
-                throw new DukeException("Oof. The description of a deadline cannot be empty.");
-            case EVENT :
-                throw new DukeException("Oof. The description of a event cannot be empty."); 
-            case DONE :
-                throw new DukeException("Oof. The description of a done cannot be empty.");
-            case DELETE :
-                throw new DukeException("Oof. The description of a delete cannot be empty.");
-            default :
-                throw new DukeException("Oof. I apologize but I don't understand.");
-        }
     }
 
     /**

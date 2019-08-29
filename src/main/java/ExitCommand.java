@@ -12,7 +12,7 @@ class ExitCommand implements Command {
      * It calls uiManager to print out the exit, and the instance of this class will
      * stop the recursion in DukeManager
      * 
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
+     * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks. - Not in use.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file. - Not in use
      * @see {@link DukeManager#initializeDuke()}

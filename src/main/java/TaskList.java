@@ -32,16 +32,14 @@ class TaskList implements Serializable {
      * Returns a task that is deleted from the Tasklist/ArrayList
      * 
      * @param index The index of the task to be deleted
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
      * @return The task that is deleted
      * @throws DukeException When failing to delete a task due to out-of-bound error.
      */
-    public Task deleteTask(int index, Ui uiManager) throws DukeException {
+    public Task deleteTask(int index) throws DukeException {
         try {
             return this.taskList.remove(index);
         } catch (Exception e) {
-            uiManager.throwMissingTaskError();
-            return null;
+            throw new DukeException("Oof. The given task number is not found.");
         }
     }
 
@@ -58,17 +56,15 @@ class TaskList implements Serializable {
      * Returns the task of the given index.
      * 
      * @param index The index of the task to be retrieve
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
      * @return The task from the task list of the given index
      * @throws DukeException When the Task index is not found
      */
-    public Task getTask(int index, Ui uiManager) throws DukeException {
+    public Task getTask(int index) throws DukeException {
         try {
             return this.taskList.get(index);
         } catch (Exception e) {
-            uiManager.throwMissingTaskError();
+            throw new DukeException("Oof. The given task number is not found.");
         }
-        return this.taskList.get(index);
     }
 
 }

@@ -18,7 +18,7 @@ class DoneCommand implements Command {
      * <p>
      * If the task is already completed, then we use uiManager to print out the given situation
      * 
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
+     * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
      * @see {@link TaskList#getTask(int, Ui)}
@@ -26,12 +26,12 @@ class DoneCommand implements Command {
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
-        Task task = taskList.getTask(this.taskNumber - 1, uiManager);
+        Task task = taskList.getTask(this.taskNumber - 1);
         if (task.hasCompleted()) {
             uiManager.printAlreadyCompleted();
         } else {
             task.setCompleted(true);
-            storeManager.store(taskList, uiManager);
+            storeManager.store(taskList);
             uiManager.printDone(task);
         }
     }

@@ -17,15 +17,15 @@ class DeleteCommand implements Command {
      * This method executes the Delete Command, which deletes a task from the taskList
      * The deletion by the taskList, has to be 0 base, hence our decrement in this.taskNumber
      * 
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
+     * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
      * @see {@link TaskList#deleteTask(int, Ui)}
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
-        Task task = taskList.deleteTask(this.taskNumber - 1, uiManager);
-        storeManager.store(taskList, uiManager);
+        Task task = taskList.deleteTask(this.taskNumber - 1);
+        storeManager.store(taskList);
         uiManager.printDelete(task, taskList.listSize());
     }
 }

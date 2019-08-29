@@ -44,6 +44,11 @@ class Task implements Serializable{
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * A method for getting the task itself in String form
+     * 
+     * @return A task itself in String form
+     */
     public String getTaskString() {
         return this.task;
     }

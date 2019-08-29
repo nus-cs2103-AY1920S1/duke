@@ -7,10 +7,10 @@ interface Command {
      * in the DukeManager class. 
      * <p>
      * There is 6 different classes which implements this class.
-     * AddCommand, DoneCommand, DeleteCommand, ListCommand, HelpCommand, ExitCommand
+     * AddCommand, DoneCommand, DeleteCommand, ListCommand, FindCommand, HelpCommand, ExitCommand
      * Each of them have different execution to this method representative to their names.
      * 
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
+     * @param uiManager Ui System which scans and print for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
      * @throws DukeException

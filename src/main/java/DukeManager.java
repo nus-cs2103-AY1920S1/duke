@@ -15,7 +15,7 @@ class DukeManager {
     /**
      * Constructor for DukeManager, which instantiates several other classes as well.
      * 
-     * @throws DukeException
+     * @throws DukeException If there is an error retrieving information.
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -23,7 +23,7 @@ class DukeManager {
         this.uiManager = new Ui();
         this.storeManager = new Storage("Tasks.sav");
         this.parseManager = new Parser();
-        this.taskList = this.storeManager.retrieve(this.uiManager);
+        this.taskList = this.storeManager.retrieve();
         this.isActive = false;
     }
 
@@ -40,10 +40,10 @@ class DukeManager {
     public void initializeDuke() throws DukeException {
         uiManager.printWelcome();
         this.isActive = true;
-        while(isActive) {
+        while (isActive) {
             uiManager.printWhatToDo();
             String input = uiManager.readLine();
-            Command command = parseManager.parseToCommand(input, uiManager);
+            Command command = parseManager.parseToCommand(input);
             command.execute(this.uiManager, this.taskList, this.storeManager);
             if (command instanceof ExitCommand) {
                 isActive = false;

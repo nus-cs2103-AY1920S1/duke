@@ -28,10 +28,9 @@ class Storage {
      * This method serializes the Task List so it can be used again the file is opened.
      * 
      * @param taskList TaskList, an ArrayList which stores Tasks, is being serialized
-     * @param uiManager Ui System which scans, prints and throws DukeExceptions for the User.
      * @throws DukeException When there is an error serializing the file.
      */
-    public void store(TaskList taskList, Ui uiManager) throws DukeException {
+    public void store(TaskList taskList) throws DukeException {
         try {
             FileOutputStream fileOut = new FileOutputStream(tasks.getPath());
             ObjectOutputStream out =  new ObjectOutputStream(fileOut);
@@ -39,7 +38,8 @@ class Storage {
             out.close();
             fileOut.close();
         } catch (IOException error) {
-            uiManager.throwSerializeError();
+            throw new DukeException("Oof. Unable to serialize the list to Tasks.sav. " 
+                    + "If there is already a Tasks.sav, please delete it.");
         }
     }
 
@@ -47,19 +47,17 @@ class Storage {
      * Returns a Tasklist that is deserialized from the file.
      * However, if the file is corrupted, it will throw a DukeException error
      * 
-     * @param uiManager
      * @return a Tasklist that is deserialized from the  file.
      * @throws DukeException When the file is corrupted
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public TaskList retrieve(
-        Ui uiManager) throws DukeException, IOException, ClassNotFoundException {
+    public TaskList retrieve() throws DukeException, IOException, ClassNotFoundException {
         if (!this.tasks.exists()) {
             // If the Tasks file does not exist
             tasks.createNewFile();
             TaskList taskList = new TaskList();
-            store(taskList, uiManager);
+            store(taskList);
             return taskList;
         } else {
             try {
@@ -75,17 +73,19 @@ class Storage {
                     // The Tasks file has wrong type when deserializing. Hence corrupted
                     tasks.createNewFile();
                     TaskList taskList = new TaskList();
-                    store(taskList, uiManager);
-                    uiManager.throwCorruptedSavFileError();
-                    return null;
+                    store(taskList);
+                    throw new DukeException("Oof. Corrupted save file. "
+                            + "I have rewrote the old save file with a new one. "
+                            + "Please restart me again.");
                 }
             } catch (IOException error) {
                 // If the Tasks file is corrupted
                 tasks.createNewFile();
                 TaskList taskList = new TaskList();
-                store(taskList, uiManager);
-                uiManager.throwCorruptedSavFileError();
-                return null;
+                store(taskList);
+                throw new DukeException("Oof. Corrupted save file. "
+                        + "I have rewrote the old save file with a new one. "
+                        + "Please restart me again.");
             }
         }
     }

@@ -199,6 +199,7 @@ public class Parser {
                     }
                     System.out.print(LINE);
                 }
+                ui.getUserInput(this);
             } catch (EmptyDescriptionException e) {
                 System.out.print(LINE);
                 System.out.println("     ☹ OOPS!!! " + e);

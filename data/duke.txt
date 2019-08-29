@@ -1,2 +1,4 @@
 E | true | orbital | 1205301600000
 E | false | yo how are yoy im fin thank you | 4124671200000
+T | false | buy bread
+D | true | readings for lcc tomorrow | 1567036800000

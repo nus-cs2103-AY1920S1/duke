@@ -40,18 +40,22 @@ public class Parser {
             Task temp;
 
             switch(command) {
-
+            case "find":
+                if (!moreThanOne) {
+                    throw new DukeException("Sorry, you need to input something to find what you're looking for.");
+                }
+                ui.displayList(findAllTaskWithName(words[1]), "Here are the matching tasks in your list:");
+                break;
             case "bye":
                 ui.display("Bye. Hope to see you again soon!");
                 isExit = true;
-                return;
-
+                break;
             case "list":
                 ArrayList<Task> list = taskList.getList();
                 if (list.isEmpty()) {
                     throw new DukeException("Oh looks like there's nothing in your list so far.");
                 }
-                ui.displayList(list);
+                ui.displayList(list, "Here are the tasks in your list:");
                 break;
 
             case "done":
@@ -67,27 +71,24 @@ public class Parser {
                 break;
 
             case "delete":
-                if (moreThanOne) {
-                    String secondWord = words[1];
-                    int index = Integer.parseInt(secondWord);
-                    ui.display(taskList.delete(index).toString(),
-                            "Noted. I've removed this task:",
-                            "Now you have " + taskList.getSize() + " tasks in the list.");
-                }
-                else {
+                if (!moreThanOne) {
                     throw new DukeException("I'm sorry, you didn't specify which index of the list you want to delete.");
                 }
+                String secondWord = words[1];
+                int index = Integer.parseInt(secondWord);
+                ui.display(taskList.delete(index).toString(),
+                        "Noted. I've removed this task:",
+                        "Now you have " + taskList.getSize() + " tasks in the list.");
                 break;
 
             case "todo":
-                if (moreThanOne) {
-                    temp = new ToDo(words[1]);
-                    taskList.store(temp);
-                    ui.display(temp.toString(), "Got it. I've added this task:",
-                            "Now you have " + taskList.getSize() + " tasks in the list.");
-                } else {
+                if (!moreThanOne) {
                     throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
                 }
+                temp = new ToDo(words[1]);
+                taskList.store(temp);
+                ui.display(temp.toString(), "Got it. I've added this task:",
+                        "Now you have " + taskList.getSize() + " tasks in the list.");
                 break;
 
             case "deadline":
@@ -131,6 +132,20 @@ public class Parser {
             throw new DukeException("I'm sorry please give a number instead.");
         }
         updateStorage();
+    }
+
+    private ArrayList<Task> findAllTaskWithName(String name) throws DukeException {
+        ArrayList<Task> tempTaskList = taskList.getList();
+        ArrayList<Task> listWithMatchingName = new ArrayList<>();
+        for (Task t : tempTaskList) {
+            if (t.getName().contains(name)) {
+                listWithMatchingName.add(t);
+            }
+        }
+        if (listWithMatchingName.isEmpty()) {
+            throw new DukeException("Oh looks like there's no tasks with that name in your list");
+        }
+        return listWithMatchingName;
     }
 
     private void updateStorage() throws DukeException {

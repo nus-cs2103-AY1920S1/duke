@@ -1,3 +1,5 @@
+import duke.Ui;
+
 public class TestUi extends Ui {
     private String output;
 

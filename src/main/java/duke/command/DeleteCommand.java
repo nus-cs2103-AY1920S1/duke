@@ -1,8 +1,17 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.IndexFormatDukeException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     private int index;
 
     /**
-     * Command for TaskList to remove Task at index.
+     * duke.command.Command for duke.TaskList to remove duke.task.Task at index.
      *
      * @param indexString Index String
      * @throws IndexFormatDukeException On unable to parse string
@@ -16,13 +25,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes delete command which remove task, of index parsed by constructor, from TaskList.
-     * Then Storage rewrite using TaskList.
+     * Executes delete command which remove task, of index parsed by constructor, from duke.TaskList.
+     * Then duke.Storage rewrite using duke.TaskList.
      *
-     * @param tasks   TaskList
-     * @param ui      Ui
-     * @param storage Storage
-     * @throws DukeException On index out of bound or problems with Storage writing
+     * @param tasks   duke.TaskList
+     * @param ui      duke.Ui
+     * @param storage duke.Storage
+     * @throws DukeException On index out of bound or problems with duke.Storage writing
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.remove(index);

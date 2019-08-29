@@ -1,10 +1,26 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ExitCommand;
+import duke.exception.DukeException;
+import duke.exception.EmptyFieldDukeException;
+import duke.exception.InvalidCommandDukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 public class Parser {
 
     /**
-     * Looks at first token, determine & construct Command sub-classes as per parsed.
+     * Looks at first token, determine & construct duke.command.Command sub-classes as per parsed.
      *
-     * @param str Expects string to be parse as Command.
-     * @return Command object as per parsed.
+     * @param str Expects string to be parse as duke.command.Command.
+     * @return duke.command.Command object as per parsed.
      * @throws DukeException if command can't be parsed.
      */
     public static Command parse(String str) throws DukeException {

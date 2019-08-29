@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.IndexOutOfBoundsDukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,9 +22,9 @@ public class TaskList {
     }
 
     /**
-     * Returns a serialised TaskList.
+     * Returns a serialised duke.TaskList.
      *
-     * @return Serialised TaskList as String
+     * @return Serialised duke.TaskList as String
      */
     public String getSerialized() {
         StringBuilder sb = new StringBuilder();
@@ -35,9 +40,9 @@ public class TaskList {
     }
 
     /**
-     * Returns String with all items to be displayed on Ui.
+     * Returns String with all items to be displayed on duke.Ui.
      *
-     * @return String with all items to be displayed on Ui
+     * @return String with all items to be displayed on duke.Ui
      */
     public String toUiString() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
@@ -56,10 +61,10 @@ public class TaskList {
     }
 
     /**
-     * Remove the task from TaskList, then returns the task.
+     * Remove the task from duke.TaskList, then returns the task.
      *
      * @param index index as int
-     * @return Task that is being removed from TaskList
+     * @return duke.task.Task that is being removed from duke.TaskList
      * @throws IndexOutOfBoundsDukeException On index out of bound
      */
     public Task remove(int index) throws IndexOutOfBoundsDukeException {
@@ -74,7 +79,7 @@ public class TaskList {
      * Sets the task at index as done, then returns the task.
      *
      * @param index index as int
-     * @return Task that is being set as done
+     * @return duke.task.Task that is being set as done
      * @throws IndexOutOfBoundsDukeException On index out of bound
      */
     public Task setDone(int index) throws IndexOutOfBoundsDukeException {

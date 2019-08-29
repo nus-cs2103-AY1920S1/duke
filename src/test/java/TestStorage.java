@@ -1,3 +1,5 @@
+import duke.Storage;
+
 public class TestStorage extends Storage {
     public TestStorage() {
         super("");

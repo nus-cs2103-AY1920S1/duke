@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exception.CorruptedFileDukeException;
+import duke.exception.DukeException;
+import duke.exception.EmptyFieldDukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -8,7 +14,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * DateTimeFormatter meant for Ui output.
+     * DateTimeFormatter meant for duke.Ui output.
      */
     protected static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");
 
@@ -20,7 +26,7 @@ public abstract class Task {
 
 
     /**
-     * Constructs an abstract Task with description.
+     * Constructs an abstract duke.task.Task with description.
      *
      * @param description Description
      * @throws EmptyFieldDukeException On empty description
@@ -46,7 +52,7 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    protected String toFileString() {
+    public String toFileString() {
         return (char) 31 + (this.isDone ? "1" : "0") + (char) 31 + this.description;
     }
 
@@ -54,10 +60,10 @@ public abstract class Task {
 
 
     /**
-     * Parses FileString representing Serialised Task into Task.
+     * Parses FileString representing Serialised duke.task.Task into duke.task.Task.
      *
      * @param str Serialised task to be parsed
-     * @return Task as parsed
+     * @return duke.task.Task as parsed
      * @throws DukeException On parsing problem
      */
     public static Task parseFileTask(String str) throws DukeException {

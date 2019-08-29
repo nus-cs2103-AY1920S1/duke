@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DateTimeParseDukeException extends DukeException {
     /**
      * Used to notify DateTime cannot be parsed and hint user with correct usage.

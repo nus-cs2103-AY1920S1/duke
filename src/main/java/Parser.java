@@ -28,11 +28,21 @@ public class Parser {
         }
         this.taskDetails = taskDetails;
     }
-
+    /**
+     * Returns command or the first word of user input
+     *
+     * @return command/ first word.
+     */
     public String getCommand() {
         return command;
     }
 
+    /**
+     * Execute the command that user typed in, together with the
+     * additional tasks details given
+     *
+     * @throws ParseException If date given is in the incorrect format and not dd/MM/yyyy HHmm.
+     */
     public void doCommand() throws ParseException {
         if (taskDetails.equals("")) {
             if (command.equals("bye") || command.equals("list") ) {

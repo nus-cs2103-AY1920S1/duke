@@ -2,3 +2,4 @@ todo>>0>>run
 deadline>>1>>run again >>12/12/2012 2000
 todo>>0>>run faster
 deadline>>0>>party hard >>13/12/1111 1200
+deadline>>0>>midterms >>12/12/2012 2300

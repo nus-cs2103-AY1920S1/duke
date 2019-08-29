@@ -18,11 +18,23 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns File object from a string.
+     *
+     * @param filePath location of the file as a string.
+     * @return File object.
+     */
     public File getFile(String filePath) {
         File f = new File(filePath);
         return f;
     }
 
+    /**
+     * Updates the .txt with the most recent changes.
+     *
+     * @param filePath location of the file as a string.
+     * @param list The existing ArrayList of Tasks after user has made changes to it.
+     */
     public void updateTasks(String filePath, ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String result = "";
@@ -62,6 +74,13 @@ public class Storage {
         fw.write(result);
         fw.close();
     }
+
+    /**
+     * Reads the .txt file where the Tasks are stored and returns
+     * an ArrayList of Tasks.
+     *
+     * @return ArrayList of Tasks
+     */
 
     public ArrayList<Task> getTasks() throws FileNotFoundException, ParseException {
         File file = getFile(filePath);

@@ -1,22 +1,20 @@
 package duke.utils;
 
-import duke.exceptions.DukeException;
 import duke.Duke;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.tasks.Event;
-import duke.tasks.Deadline;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
     private File f;

@@ -1,16 +1,15 @@
 package duke;
 
-import java.util.NoSuchElementException;
-
-import duke.utils.Ui;
-import duke.utils.Storage;
-import duke.utils.TaskList;
-import duke.utils.Parser;
+import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-import duke.commands.Command;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Duke {
 
@@ -30,6 +29,11 @@ public class Duke {
             ui.printErrorMsg(e);
             this.allTasks = new TaskList(new ArrayList<Task>());
         }
+    }
+
+    public static void main(String[] args) {
+        Duke d = new Duke("data/savedTasks.txt");
+        d.run();
     }
 
     public void run() {
@@ -54,11 +58,6 @@ public class Duke {
         }
 
         ui.printExitMsg();
-    }
-
-    public static void main(String[] args) {
-        Duke d = new Duke("data/savedTasks.txt");
-        d.run();
     }
 
 }

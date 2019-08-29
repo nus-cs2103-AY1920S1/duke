@@ -6,9 +6,9 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EventTest {
+class EventTest {
     @Test
-    public void eventCreation_normalInput_outputMatches() {
+    void eventCreation_normalInput_outputMatches() {
         Task task = null;
         try {
             task = new Event("party", "29/08/2019 2200");
@@ -19,7 +19,7 @@ public class EventTest {
     }
 
     @Test
-    public void checkDateFormat_wrongDateFormat_exceptionThrown() {
+    void checkDateFormat_wrongDateFormat_exceptionThrown() {
         Task task = null;
         try {
             task = new Event("event", "20/09/2019");
@@ -29,7 +29,7 @@ public class EventTest {
     }
 
     @Test
-    public void checkFileStringFormat_correctFormat_success() {
+    void checkFileStringFormat_correctFormat_success() {
         Task task = null;
         try {
             task = new Event("an event", "12/10/2020 0900");

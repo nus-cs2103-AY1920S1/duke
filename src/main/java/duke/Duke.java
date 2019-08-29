@@ -15,7 +15,7 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -27,7 +27,7 @@ public class Duke {
         parser = new Parser(tasks, ui);
     }
 
-    public void run() {
+    private void run() {
         ui.printWelcome();
 
         // process input

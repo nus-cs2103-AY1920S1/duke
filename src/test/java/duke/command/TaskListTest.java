@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskListTest {
 
     protected static class ToDoStub extends Task {
-        public ToDoStub(String description) {
+        ToDoStub(String description) {
             super(description);
             this.isDone = false;
         }
@@ -31,7 +31,7 @@ class TaskListTest {
     }
 
     @Test
-    public void addToTaskList_inputTask_success() {
+    void addToTaskList_inputTask_success() {
         TaskList tasks =  new TaskList(new ArrayList<Task>());
         tasks.add(new ToDoStub("wash dishes"));
         assertEquals(1, tasks.getList().size());

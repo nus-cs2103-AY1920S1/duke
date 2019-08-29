@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> list;
+    ArrayList<Task> list;
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -19,7 +19,7 @@ public class TaskList {
         list.add(task);
     }
 
-    public Task delete(int index) {
+    Task delete(int index) {
         return list.remove(index);
     }
 

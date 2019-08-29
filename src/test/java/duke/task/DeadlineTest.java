@@ -6,9 +6,9 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DeadlineTest {
+class DeadlineTest {
     @Test
-    public void deadlineCreation_normalInput_outputMatches() {
+    void deadlineCreation_normalInput_outputMatches() {
         Task task = null;
         try {
             task = new Deadline("submit assignment", "29/08/2019 2359");
@@ -19,7 +19,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void checkDateFormat_wrongDateFormat_exceptionThrown() {
+    void checkDateFormat_wrongDateFormat_exceptionThrown() {
         Task task = null;
         try {
             task = new Deadline("submit quiz", "20/09/2019");
@@ -29,7 +29,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void checkFileStringFormat_correctFormat_success() {
+    void checkFileStringFormat_correctFormat_success() {
         Task task = null;
         try {
             task = new Deadline("submit quiz", "20/09/2019 2359");

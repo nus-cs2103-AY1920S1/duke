@@ -7,7 +7,7 @@ import duke.commands.ByeCommand;
 import duke.commands.AddCommand;
 import duke.commands.ListCommand;
 import duke.commands.DoneCommand;
-import duke.commands.CompleteCommand;
+import duke.commands.FindCommand;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -31,6 +31,8 @@ public class Parser {
             return new DoneCommand(sc.nextInt());
         case "delete":
             return new DeleteCommand(sc.nextInt());
+        case "find":
+            return new FindCommand(sc.nextLine());
         default:
             throw new DukeException("Unrecognised command: " + command);
         }

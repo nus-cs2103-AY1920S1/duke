@@ -1,4 +1,8 @@
+import java.text.SimpleDateFormat;
+
 public abstract class Task {
+    protected static final SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
     protected String description;
     protected boolean isDone;
 

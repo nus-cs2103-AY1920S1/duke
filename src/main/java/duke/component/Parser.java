@@ -14,6 +14,8 @@ public class Parser {
             return new AddCommand(AddCommand.AddType.EVENT, input);
         } else if ("list".equals(input)) {
             return new QueryCommand(QueryCommand.QueryType.LIST_ALL, "");
+        } else if (input.startsWith("find")) {
+            return new QueryCommand(QueryCommand.QueryType.FIND_BY_KEYWORD, input);
         } else if (input.startsWith("done")) {
             return new UpdateCommand(UpdateCommand.UpdateType.DONE, input);
         } else if (input.startsWith("delete")) {

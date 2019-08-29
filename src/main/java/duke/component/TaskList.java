@@ -3,12 +3,17 @@ package duke.component;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.function.Consumer;
 
 public class TaskList {
     private List<Task> tasks;
+
+    public TaskList() {
+        tasks = new LinkedList<>();
+    }
 
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;

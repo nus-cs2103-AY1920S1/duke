@@ -7,26 +7,71 @@ Hello from
 
 What can I do for you?
 
-		buy bread
+		Got it. I've added this task: 
+		[E][?] project meeting  (at:  30 April 4pm)
 
-		buy fish
+		You have 1 items in the list now.
+		Got it. I've added this task: 
+		[T][?] buy fish
 
-		clear thrash
+		You have 2 items in the list now.
+		Got it. I've added this task: 
+		[D][?] clear thrash  (by:  2 Aug 2pm)
 
-		[?] buy bread
+		You have 3 items in the list now.
+		Got it. I've added this task: 
+		[D][?] submit 2103 assignment  (by:  midnight)
 
-		[?] buy fish
+		You have 4 items in the list now.
+		[E][?] project meeting  (at:  30 April 4pm)
 
-		[?] clear thrash
+		[T][?] buy fish
+
+		[D][?] clear thrash  (by:  2 Aug 2pm)
+
+		[D][?] submit 2103 assignment  (by:  midnight)
 
 		Nice, I've marked this item as done
-		[?] buy bread
+		[?] project meeting 
 
-		[?] buy bread
+		Got it. I've added this task: 
+		[E][?] attend national day parade  (at:  9 Aug 6pm)
 
+		You have 5 items in the list now.
+		[E][?] project meeting  (at:  30 April 4pm)
+
+		[T][?] buy fish
+
+		[D][?] clear thrash  (by:  2 Aug 2pm)
+
+		[D][?] submit 2103 assignment  (by:  midnight)
+
+		[E][?] attend national day parade  (at:  9 Aug 6pm)
+
+		Got it. I've added this task: 
+		[T][?] charge laptop
+
+		You have 6 items in the list now.
+		Got it. I've added this task: 
+		[E][?] Attend wedding  (at:  wedding day)
+
+		You have 7 items in the list now.
+		Nice, I've marked this item as done
 		[?] buy fish
 
-		[?] clear thrash
+		[E][?] project meeting  (at:  30 April 4pm)
+
+		[T][?] buy fish
+
+		[D][?] clear thrash  (by:  2 Aug 2pm)
+
+		[D][?] submit 2103 assignment  (by:  midnight)
+
+		[E][?] attend national day parade  (at:  9 Aug 6pm)
+
+		[T][?] charge laptop
+
+		[E][?] Attend wedding  (at:  wedding day)
 
 		Bye. Hope to see you again soon!
 

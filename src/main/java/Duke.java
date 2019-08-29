@@ -21,7 +21,6 @@ public class Duke {
             inputString = scanner.nextLine();
             String TempInputString = inputString;
             String wordSplit[] = TempInputString.split(" ");
-            //System.out.println("\n" + TempInputString +"\n" + wordSplit[0] + "\n" + wordSplit[1]);
             if ((Objects.equals(inputString, BYE))) {
                 System.out.println("\t\tBye. Hope to see you again soon!\n");
                 return;
@@ -29,18 +28,37 @@ public class Duke {
             else if ((Objects.equals(wordSplit[0], "done") && (Integer.parseInt(wordSplit[1]) <= numOfItems))){
                 int numbering = Integer.parseInt((TempInputString.split(" "))[1]) - 1;
                 listOfItems[numbering].setDone();
-                System.out.println("\t\tNice, I've marked this item as done\n\t\t["
-                        + listOfItems[numbering].getStatusIcon() + "] " + listOfItems[numbering].description + "\n");
+                System.out.println("\t\t" + listOfItems[numbering].toStringDone() + "\n");
             }
             else if (Objects.equals(inputString, "list")) {
                 for (int i=0; i<numOfItems; i++ ) {
-                    System.out.println("\t\t[" + listOfItems[i].getStatusIcon() + "] " + listOfItems[i].description + "\n" );
+                    System.out.println("\t\t" + listOfItems[i].toString() + "\n" );
                 }
             }
             else {
-                Task item = new Task(inputString);
-                listOfItems[numOfItems++] = item;
-                System.out.println("\t\t" + inputString + "\n");
+                if (Objects.equals(wordSplit[0], "Deadline")){
+                    String newInputString = inputString.substring(9);
+                    String splitString[] = newInputString.split("/by");
+                    Task item = new Deadline(splitString[0], splitString[1]);
+                    listOfItems[numOfItems++] = item;
+                    System.out.println("\t\tGot it. I've added this task: \n\t\t" + listOfItems[numOfItems-1].toString() + "\n");
+                    System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
+                }
+                else if (Objects.equals(wordSplit[0], "Todo")){
+                    String newInputString = inputString.substring(5);
+                    Task item = new Todo (newInputString);
+                    listOfItems[numOfItems++] = item;
+                    System.out.println("\t\tGot it. I've added this task: \n\t\t" + listOfItems[numOfItems-1].toString() + "\n");
+                    System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
+                }
+                else if (Objects.equals(wordSplit[0], "Event")){
+                    String newInputString = inputString.substring(6);
+                    String splitString[] = newInputString.split("/at");
+                    Task item = new Event(splitString[0], splitString[1]);
+                    listOfItems[numOfItems++] = item;
+                    System.out.println("\t\tGot it. I've added this task: \n\t\t" + listOfItems[numOfItems-1].toString() + "\n");
+                    System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
+                }
             }
         }
     }

@@ -1,7 +1,13 @@
-buy bread
-buy fish
-clear thrash
+Event project meeting /at 30 April 4pm
+Todo buy fish
+Deadline clear thrash /by 2 Aug 2pm
+Deadline submit 2103 assignment /by midnight
 list
 done 1
+Event attend national day parade /at 9 Aug 6pm
+list
+Todo charge laptop
+Event Attend wedding /at wedding day
+done 2
 list
 bye

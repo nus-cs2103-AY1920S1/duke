@@ -27,4 +27,6 @@ What can I do for you
     Here are the tasks in your list:
     1.[T][✓] Eat
     2.[E][✘] project meeting (at: Mon Jan 29 19:00:00 SGT 2018)
+    Here are the matching tasks in your list:
+    1.[T][✓] Eat
 Bye. Hope to see you again soon!

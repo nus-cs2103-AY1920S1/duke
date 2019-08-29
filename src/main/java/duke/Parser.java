@@ -26,7 +26,7 @@ public class Parser {
      * @throws ParseException if it fails to parse the date properly
      */
     public static Command parse(String command) throws DukeException, ParseException { 
-        String keyword = command.split(" ")[0];
+        String keyword = command.split(" ")[0].trim();
         switch (keyword) {
         case "bye": {
             return new ByeCommand();
@@ -49,14 +49,16 @@ public class Parser {
         case "delete": {
             return parseDeleteCommand(command);
         }
+        case "find": {
+            return parseFindCommand(command);
+        }
         default:
             throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
     /**
-     * parse Done command.
-     *
+     * Parse Done command.
      * @param command String
      * @throws InvalidCommandException if the Done command is not correct
      */
@@ -70,8 +72,7 @@ public class Parser {
     }
 
     /**
-     * parse Delete command.
-     *
+     * Parse Delete command.
      * @param command String
      * @throws InvalidCommandException if the arguments provided are invalid
      */
@@ -85,8 +86,7 @@ public class Parser {
     }
 
     /**
-     * parse Deadline command.
-     *
+     * Parse Deadline command.
      * @param command String
      * @throws InvalidTaskArgumentException if Deadline arguments are invalid
      * @throws ParseException if it fails to parse the date
@@ -101,8 +101,7 @@ public class Parser {
     }
 
     /**
-     * parse Event command.
-     * 
+     * Parse Event command.
      * @param command String
      * @throws InvalidTaskArgumentException if Event arguments are invalid
      * @throws ParseException if it fails to parse the date
@@ -117,8 +116,7 @@ public class Parser {
     }
 
     /**
-     * parse ToDo command.
-     *
+     * Parse ToDo command.
      * @param command String
      * @throws InvalidTaskArgumentException if ToDo arguments are invalid
      */
@@ -128,5 +126,18 @@ public class Parser {
             throw new InvalidTaskArgumentException("\u2639 OOPS!!! The description of a todo cannot be empty."); 
         }
         return new ToDoCommand(name);
+    }
+
+    /**
+     * Parse Find Command.
+     * @param command String
+     * @throws InvalidTaskArgumentException if arguments are invalid
+     */
+    private static Command parseFindCommand(String command) throws InvalidTaskArgumentException {
+        String keyword = command.replace("find", "").trim();
+        if ("".equals(keyword)) {
+            throw new InvalidTaskArgumentException("\u2639 OOPS!!! The description of a find cannot be empty."); 
+        }
+        return new FindCommand(keyword);
     }
 }

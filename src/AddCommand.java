@@ -1,8 +1,8 @@
-package duke.command;
+package main.java.command;
 
-import duke.component.Storage;
-import duke.component.TaskList;
-import duke.exception.InvalidInputException;
+import main.java.components.Storage;
+import main.java.components.TaskList;
+import main.java.exception.InvalidInputException;
 
 /**
  * AddCommand class which extends the abstract class Command.

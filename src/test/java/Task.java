@@ -1,4 +1,4 @@
-package duke.task;
+package main.java.tasks;
 
 /**
  * Task class includes Todo, Deadline and Event classes.

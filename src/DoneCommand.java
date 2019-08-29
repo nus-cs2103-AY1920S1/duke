@@ -1,7 +1,7 @@
-package duke.command;
+package main.java.command;
 
-import duke.component.Storage;
-import duke.component.TaskList;
+import main.java.components.Storage;
+import main.java.components.TaskList;
 /**
  * DoneCommand class which extends the abstract class Command.
  * This class handles the completion of tasks, and subsequent updating

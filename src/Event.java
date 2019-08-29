@@ -1,6 +1,5 @@
-package duke.task;
+package main.java.tasks;
 
-import duke.task.Task;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 

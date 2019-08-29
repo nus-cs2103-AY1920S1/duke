@@ -1,6 +1,6 @@
-package duke.exception;
-
-import duke.exception.DukeException;
+package main.java.exception;
+//
+//import duke.exception.DukeException;
 /**
  * InvalidInputException class extends DukeException and deals with
  * any random inputs that is not within the function of the program.

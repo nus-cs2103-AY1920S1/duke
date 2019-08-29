@@ -1,6 +1,6 @@
-package duke.exception;
-
-import duke.exception.DukeException;
+package main.java.exception;
+//
+//import duke.exception.DukeException;
 /**
  * InvalidDescriptionException class extends DukeException and deals with
  * tasks with the wrong description given by the input in the program.

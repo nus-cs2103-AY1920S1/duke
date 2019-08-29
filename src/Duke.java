@@ -1,12 +1,7 @@
-package duke;
+package main.java.components;
 
-import duke.component.Storage;
-import duke.component.TaskList;
-import duke.component.Ui;
-import duke.component.Parser;
-import duke.exception.DukeException;
-import duke.command.Command;
-
+import main.java.exception.DukeException;
+import main.java.command.Command;
 import java.io.IOException;
 
 /**
@@ -38,7 +33,7 @@ public class Duke {
     }
     
     public static void main(String[] args) throws IOException {
-        new Duke("/users/junhup/desktop/duke/src/main/java/duke.txt").run();
+        new Duke("/users/junhup/desktop/duke/src/duke.txt").run();
     }
     
     /**

@@ -1,4 +1,4 @@
-package duke.exception;
+package main.java.exception;
 
 /**
  * DukeException class handles all the exception that can be thrown by the program.

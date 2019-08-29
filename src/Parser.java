@@ -1,12 +1,12 @@
-package duke.component;
+package main.java.components;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.FindCommand;
+import main.java.command.AddCommand;
+import main.java.command.ByeCommand;
+import main.java.command.Command;
+import main.java.command.DeleteCommand;
+import main.java.command.DoneCommand;
+import main.java.command.ListCommand;
+import main.java.command.FindCommand;
 
 /**
  * Parser class deals with making sense of the user command.

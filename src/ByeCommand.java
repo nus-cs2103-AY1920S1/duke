@@ -1,7 +1,7 @@
-package duke.command;
+package main.java.command;
 
-import duke.component.Storage;
-import duke.component.TaskList;
+import main.java.components.Storage;
+import main.java.components.TaskList;
 
 /**
  * ByeCommand class which extends the abstract class Command.

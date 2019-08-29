@@ -1,3 +1,7 @@
+package duke.utils;
+
+import duke.exceptions.DukeException;
+
 import java.util.Scanner;
 
 public class Ui {

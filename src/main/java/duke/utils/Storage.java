@@ -1,3 +1,9 @@
+package duke.utils;
+
+import duke.exceptions.DukeException;
+import duke.Duke;
+import duke.tasks.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,8 +14,6 @@ import java.nio.file.Paths;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-
-import java.text.ParseException;
 
 public class Storage {
     private File f;
@@ -82,41 +86,4 @@ public class Storage {
 
         return t;
     }
-
-    public static void main(String[] args) {
-        System.out.println("testing");
-//        try {
-//            Storage store = new Storage(Duke.saveFilePath);
-//            ArrayList<Task> allStoredTasks = store.load();
-//            for (Task t : allStoredTasks) {
-//                System.out.println(t);
-//            }
-//        }
-//        catch (FileNotFoundException e) {
-//            System.out.println("file not found!");
-//        }
-//        catch (ParseException e) {
-//            System.out.println("Invalid date format: " + e.getMessage());
-//        }
-//
-//        try {
-//            Task t1 = new ToDo("Return Library Books");
-//            t1.markAsDone();
-//            Task t2 = new Event("Project Meeting", "26/02/1997 18:00", "26/02/1997 22:00");
-//            Task t3 = new Deadline("Complete Project Work", "26/02/1997 18:00");
-//            ArrayList<Task> allTasks = new ArrayList<>();
-//            allTasks.add(t1);
-//            allTasks.add(t2);
-//            allTasks.add(t3);
-//            Storage s = new Storage(Duke.saveFilePath);
-//            s.saveToFile(allTasks);
-//        }
-//        catch (IOException e) {
-//            System.out.println("Problem!");
-//        }
-//        catch (ParseException e){
-//            System.out.println("Unable to parse dates!");
-//        }
-    }
-
 }

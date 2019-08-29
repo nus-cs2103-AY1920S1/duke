@@ -1,3 +1,11 @@
+package duke.commands;
+
+import duke.exceptions.DukeException;
+import duke.utils.Ui;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class AddCommand extends Command {

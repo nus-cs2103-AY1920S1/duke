@@ -1,6 +1,10 @@
+package duke.utils;
+
+import duke.exceptions.DukeException;
+import duke.commands.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.text.ParseException;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {

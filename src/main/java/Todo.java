@@ -2,6 +2,7 @@
  * Todo class
  */
 public class Todo extends Task {
+
     /**
      * Constructor for Todo Object
      * @param name task

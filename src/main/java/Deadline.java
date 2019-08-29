@@ -4,6 +4,7 @@
 public class Deadline extends Task {
     private String date;
 
+
     /**
      * Contructor for Deadline object
      * @param n name of task
@@ -13,6 +14,7 @@ public class Deadline extends Task {
         super(n);
         this.date = date;
     }
+
 
     /**
      * Cosntructor for Deadline object when loading from history

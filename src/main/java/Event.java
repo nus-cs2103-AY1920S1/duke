@@ -4,6 +4,7 @@
 public class Event extends Task {
     private String date;
 
+
     /**
      * Constructor for Event object
      * @param n name of event
@@ -13,6 +14,7 @@ public class Event extends Task {
         super(n);
         this.date = date;
     }
+
 
     /**
      * Constructor for Event object when loading history

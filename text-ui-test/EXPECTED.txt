@@ -13,21 +13,28 @@
     ____________________________________________________________
      Got it. I've added this task:
       [T][✘] buy bread
-     Now you have 1 task in the taskList.
+     Now you have 1 task in the list.
     ____________________________________________________________
 
 
     ____________________________________________________________
      Got it. I've added this task:
-      [D][✘] submit project (by: Thursday afternoon)
-     Now you have 2 tasks in the taskList.
+      [D][✘] submit project (by: 31 August 2019)
+     Now you have 2 tasks in the list.
     ____________________________________________________________
 
 
     ____________________________________________________________
      Got it. I've added this task:
       [E][✘] lecture (at: Friday 2pm)
-     Now you have 3 tasks in the taskList.
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+
+    ____________________________________________________________
+     Got it. I've added this task:
+      [T][✘] eat bread
+     Now you have 4 tasks in the list.
     ____________________________________________________________
 
 
@@ -38,14 +45,26 @@
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-     [D][✓] submit project (by: Thursday afternoon)
+     [D][✓] submit project (by: 31 August 2019)
     ____________________________________________________________
 
 
     ____________________________________________________________
      Noted. I've removed this task:
       [E][✘] lecture (at: Friday 2pm)
-     Now you have 2 tasks in the taskList
+     Now you have 3 tasks in the list
+    ____________________________________________________________
+
+
+    ____________________________________________________________
+     Here are the matching tasks in your list:
+    1.[T][✘] buy bread
+    4.[T][✘] eat bread
+    ____________________________________________________________
+
+
+    ____________________________________________________________
+     Here are the matching tasks in your list:
     ____________________________________________________________
 
 

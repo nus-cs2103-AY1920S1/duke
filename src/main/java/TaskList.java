@@ -30,9 +30,8 @@ public class TaskList {
      */
     public void displayList() {
         System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < count; i++) {
-            int taskListNumber = i + 1;
-            System.out.println("    " + taskListNumber + "." + taskList.get(i));
+        for (Task t : taskList) {
+            System.out.println("    " + t.getIndex() + "." + t);
         }
     }
 
@@ -52,6 +51,7 @@ public class TaskList {
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("     " + t);
         ui.drawLineNewLine();
+        System.out.println();
     }
 
     /**
@@ -78,6 +78,7 @@ public class TaskList {
                         : "     Now you have " + count + " tasks in the list";
         System.out.println(message);
         ui.drawLineNewLine();
+        System.out.println();
     }
 
     /**
@@ -270,5 +271,22 @@ public class TaskList {
             System.out.println(message);
         }
         ui.drawLineNewLine();
+        System.out.println();
+    }
+
+    public void findItem(String name, Ui ui) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.getName().contains(name)) {
+                results.add(t);
+            }
+        }
+        ui.drawLine();
+        System.out.println("     Here are the matching tasks in your list:");
+        for (Task t : results) {
+            System.out.println("    " + t.getIndex() + "." + t);
+        }
+        ui.drawLineNewLine();
+        System.out.println();
     }
 }

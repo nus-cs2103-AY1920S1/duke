@@ -1,224 +1,30 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-
 
 /*
- TO DO:
- ADD EXCEPTION SUPPORT
+ TODO: ADD EXCEPTION SUPPORT
  */
 public class Duke {
-    // define arraylist to store tasks
+
+    private Storage storage;
+    private Ui ui;
+    private TaskList taskList;
+
     private ArrayList<Task> taskArr = new ArrayList<>();
-    private static final String FILEPATH = "C:\\Users\\Seb\\duke\\storage\\duke.txt";
-    private WriteFile data = new WriteFile(FILEPATH,false);
-    public Duke() {
+    private WriteFile data;
+    public Duke(String path) {
         /**
-         *  prints Intro message in between 2 solid lines
+         *  init 3 main components
+         * @params String of path where tasks text file is
          *  @return none
          */
-        String line = "";
-        try {
-            // FileReader reads text files in the default encoding.
-            FileReader fileReader = new FileReader(FILEPATH);
-            // always need to wrap file reader in buffer reader
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while((line = bufferedReader.readLine()) != null) {
-                store(line);
-            }
-            // close file
-            bufferedReader.close();
-        } catch(FileNotFoundException ex) {
-            System.out.println("I can't see");
-        } catch(IOException ex) {
-            System.out.println("That sign will stop me, cos I can't read!");
-        }
-        printLine();
-        System.out.println("Hello, I'm Duke\nWhat can I do for you?");
-        printLine();
-    }
-    private void store(String task) {
-        // converts tasks in string from storage to taskarr
-        //System.out.println(task);
-        if (task.equals("")) {
-            return;
-        }
-        Scanner stringSc = new Scanner(task);
-        String type = stringSc.next();
-        stringSc.next();
-        int isDone = stringSc.nextInt();
-        stringSc.next();
-        String mainInfo = "";
-        String info = stringSc.next();
-        while (!info.equals("|")) {
-
-            mainInfo = mainInfo + info;
-            info = stringSc.next();
-        }
-        if (type.equals("D")) {
-            // take up empty input
-            String by = "";
-            String curr = stringSc.next();
-            while (!curr.equals("|")) {
-                by = by + " " + curr;
-                curr = stringSc.next();
-            }
-            Deadline newTask = new Deadline(mainInfo,"D",by);
-            taskArr.add(newTask);
-        } else if (type.equals("E")) {
-
-            String by = "";
-            String curr = stringSc.next();
-            while (!curr.equals("|")) {
-                by = by + " " + curr;
-                curr = stringSc.next();
-            }
-            Event newTask = new Event(mainInfo,"E",by);
-            taskArr.add(newTask);
-        } else {
-            ToDo newTask = new ToDo(mainInfo, "T","");
-            taskArr.add(newTask);
-        }
-    }
-    private void save() {
-
-        for (Task t: taskArr) {
-            String mainTxt = "";
-            String type = t.getType();
-            String status = (t.getDone() ? "1" : "0");
-            String info = t.getTaskInfo();
-            String by = t.getByOrig();
-            if (type == "T") {
-                mainTxt = mainTxt + type + " | " + status + " | "
-                        + info + " | " + by + " | ";
-            } else {
-                mainTxt = mainTxt + type + " | " + status + " | "
-                        + info + " | " + by + " | ";
-            }
-            data.writeToFile(mainTxt);
-            data.setAppend(true);
-        }
-        data.setAppend(false);
-    }
-    private void printLine() {
-        /**
-         *  helper function, prints formatted solid line
-         *  @return none
-         */
-        System.out.println("____________________________________________________________");
-    }
-    private String list() {
-        /**
-         *  returns all tasks in readable, formatted string
-         *  @return string of all tasks with new line and spaces as required
-         */
-        String s = "Here are the tasks in your list:\n";
-
-        for (int i = 0; i < taskArr.size(); i++) {
-            // printInt to put number for printing
-            int printInt = i + 1;
-            Task currTask = taskArr.get(i);
-            s += currTask.printTask() + "\n";
-        }
-        return s;
-    }
-    private void todo(String taskInfo) {
-        // TODO add DukeException for this
-        /**
-         *  creates new To Do, add to tasklist
-         *  prints confirmation message
-         *  and prints formatted to do string
-         *  then total num of current tasks
-         *  @params String that describes task
-         *  @return none
-         *  @throws DukeException if taskInfo is empty
-         */
-        if (taskInfo.equals("")) {
-            // error handling
-            System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
-            return;
-        }
-        ToDo newToDo = new ToDo(taskInfo,"T","");
-        taskArr.add(newToDo);
-        System.out.println("Got it. I've added this task:");
-        System.out.print(" " + newToDo.printTask() + "\n");
-        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
-    }
-    private void deadline(String taskInfo) {
-        // TODO add DukeException for this
-        /**
-         *  creates new Deadline, add to tasklist
-         *  prints confirmation message
-         *  and prints formatted deadline string
-         *  then total num of current tasks
-         *  @param String that describes task
-         *  @return none
-         *  @throws DukeException if taskInfo is empty
-         */
-        int sep = taskInfo.indexOf('/');
-        // use sep to split string
-        String actualTask = taskInfo.substring(0,sep);
-        sep += 4; // put sep at space after /by
-        String time = taskInfo.substring(sep);
-        Deadline newTing = new Deadline(actualTask,"D",time);
-        taskArr.add(newTing);
-        System.out.println("Got it. I've added this task:");
-        System.out.print(" " + newTing.printTask() + "\n");
-        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
-    }
-    private void event(String taskInfo) {
-        // TODO add DukeException for this
-        /**
-         *  creates new event, add to tasklist
-         *  prints confirmation message
-         *  and prints formatted event string
-         *  then total num of current tasks
-         *  @params String that describes task
-         *  @return none
-         *  @throws DukeException if taskInfo is empty
-         */
-        int sep = taskInfo.indexOf('/');
-        // use sep to split string
-        String actualTask = taskInfo.substring(0,sep);
-        sep += 4; // put sep at space after /by
-        String time = taskInfo.substring(sep);
-        Event newTing = new Event(actualTask,"E",time);
-        taskArr.add(newTing);
-        System.out.println("Got it. I've added this task:");
-        System.out.print(" " + newTing.printTask() + "\n");
-        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
-    }
-    private void done(int t) {
-        /**
-         *  helper function, marks tasks as done
-         *  then prints confirmation,
-         *  then prints the done task in formatted string
-         *  (formatted string from task itself)
-         *  @return none
-         */
-        Task doneTask = taskArr.get(t-1);
-        doneTask.markDone();
-        System.out.print("Nice! I've marked this task as done:\n");
-        System.out.println(doneTask.printTask());
-    }
-    private void delete(int taskNum) {
-        /**
-         *  helper function, deletes task
-         *  based on number provided
-         *  prints confirmation and formatted task
-         *  as per specified within task printTask method
-         *  then prints number of remaining tasks
-         *
-         *  @return none
-         */
-        Task doneTask = taskArr.get(taskNum-1);
-        System.out.print("Noted. I've removed this task: \n");
-        System.out.println(" " + doneTask.printTask());
-        taskArr.remove(taskNum-1);
-        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
+        data = new WriteFile(path,false);
+        ui = new Ui();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage(data,path,taskList);
+        storage.initStorage();
+        ui.link(taskList,storage);
+        ui.showWelcome();
     }
     private void run() {
         // TODO add DukeException for this
@@ -239,50 +45,63 @@ public class Duke {
 
             if (input.equals("list")) {
                 // list all tasks
-                printLine();
-                System.out.print(list());
-                printLine();
+                ui.list();
             } else if (input.equals("todo")) {
-                // basic
-                String info = sc.nextLine();
-                printLine();
-                todo(info);
-                printLine();
+                String taskInfo = sc.nextLine();
+                if (taskInfo.equals("")) {
+                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                int sep = taskInfo.indexOf('/');
+                // use sep to split string
+                String actualTask = taskInfo.substring(0,sep);
+                sep += 4; // put sep at space after /by
+                String time = taskInfo.substring(sep);
+                Task newTask = taskList.addTodo(actualTask);
+                ui.addTask(newTask);
             } else if (input.equals("deadline")) {
-                String info = sc.nextLine();
-                printLine();
-                deadline(info);
-                printLine();
+                String taskInfo = sc.nextLine();
+                if (taskInfo.equals("")) {
+                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                int sep = taskInfo.indexOf('/');
+                // use sep to split string
+                String actualTask = taskInfo.substring(0,sep);
+                sep += 4; // put sep at space after /by
+                String time = taskInfo.substring(sep);
+                Task newTask = taskList.addDeadline(actualTask,time);
+                ui.addTask(newTask);
             } else if (input.equals("event")) {   // list command
-                String info = sc.nextLine();
-                printLine();
-                event(info);
-                printLine();
+                String taskInfo = sc.nextLine();
+                if (taskInfo.equals("")) {
+                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                int sep = taskInfo.indexOf('/');
+                // use sep to split string
+                String actualTask = taskInfo.substring(0,sep);
+                sep += 4; // put sep at space after /by
+                String time = taskInfo.substring(sep);
+                Task newTask = taskList.addEvent(actualTask,time);
+                ui.addTask(newTask);
             } else if (input.equals("done")) {   // list command
                 int taskNum = sc.nextInt();
-                printLine();
-                done(taskNum);
-                printLine();
+                Task doned = taskList.done(taskNum);
+                ui.markDone(doned);
             } else if (input.equals("delete")) {
                 int taskNum = sc.nextInt();
-                printLine();
-                delete(taskNum);
-                printLine();
-            } else {
+                Task deledTask = taskList.delete(taskNum);
+                ui.delTask(deledTask);
+            } else { // turn into exception
                 // handle all other cases
-                printLine();
+                ui.printLine();
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                printLine();
+                ui.printLine();
             }
             input = sc.next();
         }
-        save();
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        ui.goodBye();
     }
     public static void main(String[] args) {
-        Duke d = new Duke();
+        Duke d = new Duke("C:\\Users\\Seb\\duke\\storage\\duke.txt");
         d.run();
     }
 }

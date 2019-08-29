@@ -1,10 +1,17 @@
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    protected static ArrayList<Task> taskList = new ArrayList<>();
+
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
+        taskList = FileSaver.loadTask();
+
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> commandList = new ArrayList<>();
         String line = "    ____________________________________________________________\n";
         System.out.println(line +
                 "     Hello! I'm Duke\n" + //duke greeting
@@ -21,55 +28,68 @@ public class Duke {
                         break;
                     } else if (command.equals("list")) {
                         String str = line + "     Here are the tasks in your list:\n";
-                        for (int i = 0; i < commandList.size(); i++) {
+                        for (int i = 0; i < taskList.size(); i++) {
                             String num = "" + (i + 1);
-                            str += "     " + num + ".[" + commandList.get(i).getStatusIcon() + "] "
-                                    + commandList.get(i).toString() + "\n";
+                            str += "     " + num + ".[" + taskList.get(i).getStatusIcon() + "] "
+                                    + taskList.get(i).toString() + "\n";
                         }
                         System.out.print(str + line);
+
                     } else if (command.equals("done")) {
                         int taskNum = sc.nextInt();
-                        commandList.get(taskNum - 1).markAsDone();
+                        taskList.get(taskNum - 1).markAsDone();
                         System.out.println(line + "     Nice! I've marked this task as done:\n"
-                                + "     [" + commandList.get(taskNum - 1).getStatusIcon() + "]"
-                                + commandList.get(taskNum - 1).toString() + "\n" + line);
+                                + "     [" + taskList.get(taskNum - 1).getStatusIcon() + "]"
+                                + taskList.get(taskNum - 1).toString() + "\n" + line);
+                        FileSaver.saveTaskList(taskList); //save file
+
                     } else if (command.equals("todo")) {
                         String wordsAfter = sc.nextLine();
                         if (wordsAfter.isEmpty()) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         Task todoTask = new Todo(wordsAfter);
-                        commandList.add(todoTask);
+                        taskList.add(todoTask);
                         System.out.print(line + "     Got it. I've added this task: "
                                 + "\n       " + todoTask.toString() + "\n");
-                        System.out.print("     Now you have " + commandList.size() + " tasks in the list." + "\n" + line);
+                        System.out.print("     Now you have " + taskList.size() + " tasks in the list." + "\n" + line);
+                        FileSaver.saveTaskList(taskList); //save file
+
                     } else if (command.equals("deadline")) {
                         String wordsAfter = sc.nextLine();
                         int pos = wordsAfter.indexOf("/");
-                        Task dlTask = new Deadline(wordsAfter.substring(0, pos), wordsAfter.substring(pos + 3));
-                        commandList.add(dlTask);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                        Task dlTask = new Deadline(wordsAfter.substring(0, pos), sdf.parse(wordsAfter.substring(pos + 3)));
+                        taskList.add(dlTask);
                         System.out.print(line + "     Got it. I've added this task: "
                                 + "\n       " + dlTask.toString() + "\n");
-                        System.out.print("     Now you have " + commandList.size() + " tasks in the list." + "\n" + line);
+                        System.out.print("     Now you have " + taskList.size() + " tasks in the list." + "\n" + line);
+                        FileSaver.saveTaskList(taskList); //save file
+
                     } else if (command.equals("event")) {
                         String wordsAfter = sc.nextLine();
                         int pos = wordsAfter.indexOf("/");
-                        Task eTask = new Event(wordsAfter.substring(0, pos), wordsAfter.substring(pos + 3));
-                        commandList.add(eTask);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                        Task eTask = new Event(wordsAfter.substring(0, pos), sdf.parse(wordsAfter.substring(pos + 3)));
+                        taskList.add(eTask);
                         System.out.print(line + "     Got it. I've added this task: "
                                 + "\n       " + eTask.toString() + "\n" + "     Now you have "
-                                + commandList.size() + " tasks in the list." + "\n" + line);
+                                + taskList.size() + " tasks in the list." + "\n" + line);
+                        FileSaver.saveTaskList(taskList); //save file
+
                     } else if (command.equals("delete")) {
                         int taskNum = sc.nextInt();
                         System.out.println(line + "     Noted. I've removed this task: ");
-                        System.out.println("       " + commandList.get(taskNum - 1). toString());
-                        commandList.remove(taskNum - 1);
-                        System.out.print("     Now you have " + commandList.size() + "tasks in the list.\n" + line);
+                        System.out.println("       " + taskList.get(taskNum - 1). toString());
+                        taskList.remove(taskNum - 1);
+                        System.out.print("     Now you have " + taskList.size() + "tasks in the list.\n" + line);
+                        FileSaver.saveTaskList(taskList); //save file
+
                     } else {
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
-            } catch (DukeException error) {
+            } catch (DukeException | ParseException error) {
                 System.out.print(line + "     " + error.getMessage() + "\n" + line);
             }
         } while (x==1);

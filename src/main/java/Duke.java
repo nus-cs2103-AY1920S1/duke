@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.FileWriter;
 
@@ -60,6 +62,19 @@ public class Duke {
         }
     }
 
+    public static Date handleDateTime(String input) {
+        Date date = new Date();
+
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(input);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+
+        return date;
+    }
+
     public static void handleInput(String next) throws DukeException {
         if (next.equals("list")) {
             StringBuilder sb = new StringBuilder();
@@ -96,10 +111,11 @@ public class Duke {
                 }
             } else if (next.startsWith("deadline")) {
                 String[] parts = next.split(" /by ");
-                items.add(new Deadline(parts[0].substring(9), parts[1]));
+                items.add(new Deadline(parts[0].substring(9), handleDateTime(parts[1])));
             } else if (next.startsWith("event")) {
                 String[] parts = next.split(" /at ");
-                items.add(new Event(parts[0].substring(6), parts[1]));
+                String[] fromTo = parts[1].split(" - ");
+                items.add(new Event(parts[0].substring(6), handleDateTime(fromTo[0]), handleDateTime(fromTo[1])));
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }

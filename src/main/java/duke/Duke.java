@@ -1,11 +1,15 @@
 package duke;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    private CommandMap commandMap = new CommandMap();
-    private TaskList taskList = new TaskList();
-    public Duke() {
+    private CommandMap commandMap;
+    private TaskList taskList;
+    private Storage storage;
+
+    public Duke(String filePath) {
+        commandMap = new CommandMap();
         commandMap.register(new duke.commands.Bye(this));
         commandMap.register(new duke.commands.List(this));
         commandMap.register(new duke.commands.Done(this));
@@ -13,6 +17,15 @@ public class Duke {
         commandMap.register(new duke.commands.Deadline(this));
         commandMap.register(new duke.commands.Event(this));
         commandMap.register(new duke.commands.Delete(this));
+
+        storage = new Storage(filePath);
+        try {
+            taskList = storage.load();
+        } catch(IOException | ClassNotFoundException e) {
+            System.err.println(e);
+            showLoadingError();
+            taskList = new TaskList();
+        }
     }
     public void run() {
         say("Hello! I'm Duke\nWhat can I do for you?");
@@ -51,7 +64,16 @@ public class Duke {
     public void oops(String text) {
         say("☹ OOPS!!! " + text);
     }
+    public void showLoadingError() {
+        oops("Couldn't load tasks from disk.");
+    }
     public void quit() {
+        try {
+            storage.write(taskList);
+        } catch(IOException e) {
+            System.err.println(e);
+            oops("Couldn't save tasks to disk.");
+        }
         System.exit(0);
     }
 }

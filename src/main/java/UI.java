@@ -27,7 +27,8 @@ public class UI {
      * @param taskList
      */
     public void printNumberOfTasks(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.getTasks().size()
+                + " tasks in the list.");
     }
 
     /**
@@ -107,5 +108,14 @@ public class UI {
      */
     public void showLoadingError() {
         System.out.println("Error, file not found");
+    }
+
+    public void printFindMessage(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+        for (Task t : tasks) {
+            System.out.println(count + "." + t.toString());
+            count++;
+        }
     }
 }

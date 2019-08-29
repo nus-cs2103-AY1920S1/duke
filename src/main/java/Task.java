@@ -1,4 +1,7 @@
-public class Task {
+import java.io.Serializable;
+import java.text.DateFormatSymbols;
+
+public class Task implements Serializable {
     private String task;
     private boolean status = false;
     public Task(String task){
@@ -12,6 +15,7 @@ public class Task {
                 this + "\n" +
                 "    ____________________________________________________________\n");
     }
+
     @Override
     public String toString() {
         String logo;

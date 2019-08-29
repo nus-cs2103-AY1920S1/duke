@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,8 +19,13 @@ public class Duke {
         printLine();
         printIndent();
         System.out.println("Hello! My name is \n" + logo + "\n" + "    What can I do for you? \n");
+        printIndent();
         System.out.println("I can only do these functions for now: \n \n" + "  Todo \n" + "  Event \n" + "  Deadline \n" + "  Delete \n" + "  Done \n" + "  List \n");
+        printIndent();
         System.out.println("Ill be adding in more features soon! Please be patient! :)");
+        printIndent();
+        System.out.println("I can only accept dates in this following format: \n" +
+                "    dd/MM/yyyy hhmm. Please adhere to it! Thank you!" );
         printLine();
 
         Scanner scan = new Scanner(System.in);
@@ -262,7 +265,4 @@ public class Duke {
     public static int getNumOfTasks() throws IOException {
         return Storage.countLines(file);
     }
-
-
-
 }

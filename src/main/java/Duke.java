@@ -17,47 +17,18 @@ public class Duke {
     }
 
     public void run() {
-        //start listening for user input
-        Scanner sc = new Scanner(System.in);
-        String userCmd = sc.nextLine();
-
-        boolean resaveData = false;
-
-        while (!userCmd.equalsIgnoreCase("bye") &&
-                !userCmd.equalsIgnoreCase("exit")) {
+        this.ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                switch (userCmd.split("\\s+")[0].toLowerCase()) {
-                    case "list":
-                        this.tasks.listTasks(this.ui);
-                        break;
-                    case "done":
-                        this.tasks.markDone(this.ui, userCmd);
-                        resaveData = true;
-                        break;
-                    case "delete":
-                        this.tasks.deleteTask(this.ui, userCmd);
-                        resaveData = true;
-                        break;
-                    default:
-                        this.tasks.addData(this.ui, userCmd);
-                        resaveData = true;
-                        break;
-                }
-
-                if (resaveData) {
-                    this.storage.updateFile(this.tasks);
-                }
-                //}
-            } catch (IllegalArgumentException e) {
-                this.ui.dukeRespond(e.toString());
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(this.tasks, this.ui, this.storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                this.ui.showError(e.toString());
             }
-
-            userCmd = sc.nextLine();
         }
-        this.ui.dukeRespond("Bye. Hope to see you again soon!");
-
-        //clear resources
-        sc.close();
     }
 
     public static void main(String[] args) {

@@ -10,12 +10,15 @@ public class TaskList {
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
+    public int getSize() {
+        return this.taskList.size();
+    }
     protected List<Task> getTaskList() {
         return this.taskList;
     }
 
     public void listTasks(Ui ui) {
-        String[] taskStrings = new String[this.taskList.size() + 1];
+        String[] taskStrings = new String[this.getSize() + 1];
         taskStrings[0] = "Here are the tasks in your list:";
         int listIndex = 0;
         for (Task t : this.taskList) {
@@ -27,16 +30,19 @@ public class TaskList {
         ui.dukeRespond(taskStrings);
     }
 
-    public void addData(Ui ui, String input) throws DukeException {
-            //InvalidKeywordException, EmptyDescriptionException, IncorrectTaskFormatException {
-        Parser ps = new Parser(input);
-        Task newTask = createTask(ps.getInputTaskType(), ps.getInputEntireDescription());
+    public void addData(Task task) {
+        this.taskList.add(task);
+    }
 
-        this.taskList.add(newTask);
+    public Task markDone(int id) {
+        Task task = this.taskList.get(id - 1);
+        task.setCompleted();
+        return task;
+    }
 
-        ui.dukeRespond("Got it. I've added this task:",
-                "  " + newTask.toString(),
-                String.format("Now you have %d tasks in the list", this.taskList.size()));
+    public Task deleteTask(int id) {
+        Task task = this.taskList.remove(id - 1);
+        return task;
     }
 
     public static Task createTask(TaskType taskType, String description) throws DukeException {
@@ -55,50 +61,5 @@ public class TaskList {
             throw new InvalidKeywordException("");
         }
         return t;
-    }
-
-    public void markDone(Ui ui, String cmd) throws InvalidIDException, NoIDGivenException {
-        String[] tmp = cmd.split("\\s+");
-
-        if (tmp.length < 2)
-            throw new NoIDGivenException("done");
-
-        int id;
-        try {
-            id = Integer.parseInt(tmp[1]);
-        } catch (NumberFormatException e) {
-            throw new InvalidIDException(tmp[1]);
-        }
-
-        if (id > this.taskList.size() || id < 1) {
-            throw new InvalidIDException(""+id);
-        }
-
-        Task task = this.taskList.get(id - 1);
-        task.setCompleted();
-        ui.dukeRespond("Nice! I've marked this task as done:",
-                "  " + task.toString());
-    }
-    public void deleteTask(Ui ui, String cmd) {
-        String[] tmp = cmd.split("\\s+");
-
-        if (tmp.length < 2)
-            throw new NoIDGivenException("delete");
-
-        int id;
-        try {
-            id = Integer.parseInt(tmp[1]);
-        } catch (NumberFormatException e) {
-            throw new InvalidIDException(tmp[1]);
-        }
-
-        if (id > this.taskList.size() || id < 1) {
-            throw new InvalidIDException(""+id);
-        }
-
-        Task task = this.taskList.remove(id - 1);
-        ui.dukeRespond("Noted. I've removed this task:",
-                "  " + task.toString(),
-                String.format("Now you have %d tasks in the list.", this.taskList.size()));
     }
 }

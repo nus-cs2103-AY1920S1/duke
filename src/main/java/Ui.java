@@ -1,7 +1,14 @@
+import java.util.Scanner;
+
 public class Ui {
-    private static String divider = "    " + "-".repeat(61);
+    private static final String DIVIDER = "    " + "-".repeat(61);
+    private Scanner scannerIn;
 
     public Ui() {
+        this.scannerIn = new Scanner(System.in);
+    }
+
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -13,14 +20,31 @@ public class Ui {
     }
 
     public void dukeRespond(String... inputs) {
-        System.out.println(divider);
+        showLine();
         for (String str : inputs) {
             System.out.println("     " + str);
         }
-        System.out.println(divider);
+        showLine();
+    }
+
+    private void showLine() {
+        System.out.println(DIVIDER);
     }
 
     public void showLoadingError() {
+        dukeRespond("Cannot read from file! Check if it exists?");
+    }
 
+    public void showError(String msg) {
+        dukeRespond(msg);
+    }
+
+    public String readCommand() {
+        //start listening for user input
+        return this.scannerIn.nextLine();
+    }
+
+    protected void closeScanner() {
+        this.scannerIn.close();
     }
 }

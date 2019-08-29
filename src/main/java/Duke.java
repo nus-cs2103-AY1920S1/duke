@@ -25,18 +25,18 @@ public class Duke {
      * which are then processed into understandable commands which help Duke run.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
         ui.showGreetingMessage();
+
+        Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         Parser parser = new Parser();
+
         while (! input.equals("bye")) {
             try {
                 parser.processCommand(input, taskList, ui, storage);
-            } 
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println(e);
-            }
-            finally {
+            } finally {
                 input = scanner.nextLine();
             }
         }

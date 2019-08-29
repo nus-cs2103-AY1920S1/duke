@@ -35,7 +35,7 @@ public class TaskList {
      * local file storing the tasks.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public void addTask (Task task, Storage storage) throws IOException {
+    public void addTask(Task task, Storage storage) throws IOException {
         this.taskList.add(task);
         storage.addTaskToFile(task);
     }
@@ -70,9 +70,8 @@ public class TaskList {
     public void deleteTask(int index, Storage storage) throws DukeException, IOException {
         try {
             this.taskList.get(index - 1);
-        }
-        catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The item specified does not exist.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
         System.out.println("Noted. I've removed this task: ");
         System.out.println(taskList.get(index - 1).toString());
@@ -95,9 +94,8 @@ public class TaskList {
         try {
             taskList.get(index - 1).markAsDone();
             storage.writeToFile(storage.getFilePath(), taskList);
-        } 
-        catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The item specified does not exist.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
     }
 

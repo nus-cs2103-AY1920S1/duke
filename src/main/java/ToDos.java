@@ -10,7 +10,7 @@ public class ToDos extends Task {
      * @param task Detail of what the ToDo 
      * requires to be done.
      */
-    public ToDos (String task) {
+    public ToDos(String task) {
         super(task);
     }
 
@@ -22,7 +22,7 @@ public class ToDos extends Task {
      * @param complete Boolean to determine whether the ToDo
      * has been completed or not.
      */
-    public ToDos (String task, boolean complete) {
+    public ToDos(String task, boolean complete) {
         super(task, complete);
     }
 

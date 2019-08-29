@@ -12,7 +12,7 @@ public class Deadline extends Task {
      * @param task Description of the deadline task
      * @param dueDate Description of the time the deadline needs to be finished
      */
-    public Deadline (String task, String dueDate) {
+    public Deadline(String task, String dueDate) {
         super(task);
         this.dueDate = dueDate;
     }
@@ -23,7 +23,7 @@ public class Deadline extends Task {
      * @param dueDate Description of the time the deadline needs to be finished
      * @param complete Boolean variable to determine if the deadline has been finished or not
      */
-    public Deadline (String task, String dueDate, boolean complete) {
+    public Deadline(String task, String dueDate, boolean complete) {
         super(task, complete);
         this.dueDate = dueDate;
     }

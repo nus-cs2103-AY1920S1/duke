@@ -31,13 +31,12 @@ public class Storage {
      * @throws DukeException When the line of string being read does not describe any
      * particular type of task.
      */
-    public static Task createTaskFromFile (String line) throws DukeException{
-        String[] command = line.split(" \\| ");
+    public static Task createTaskFromFile(String s) throws DukeException {
+        String[] command = s.split(" \\| ");
         boolean isPending = command[1].equals("1") ? true : false;
         switch (command[0]) {
         case "T":
             return new ToDos(command[2], isPending);
-        
         case "D":
             return new Deadline(command[2], command[3], isPending);
         case "E":

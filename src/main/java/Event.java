@@ -4,6 +4,7 @@
  */
 
 public class Event extends Task {
+
     String timeline;
 
     /**
@@ -11,7 +12,7 @@ public class Event extends Task {
      * @param task Description of the event to take place
      * @param timeline Description of the duration of the event
      */
-    public Event (String task, String timeline) {
+    public Event(String task, String timeline) {
         super(task);
         this.timeline = timeline;
     }
@@ -24,7 +25,7 @@ public class Event extends Task {
      * @param timeline Description of the duration of the event
      * @param complete Boolean variable to determine if the deadline has been finished or not
      */
-    public Event (String task, String timeline, boolean complete) {
+    public Event(String task, String timeline, boolean complete) {
         super(task, complete);
         this.timeline = timeline;
     }

@@ -34,8 +34,8 @@ public class Task {
      * back onto the file.
      * @return String representation of a task.
      */
-    public String toStringForFile () {
-        return "";
+    public String toStringForFile() {
+        return "wrong because of this";
     }
 
     /**

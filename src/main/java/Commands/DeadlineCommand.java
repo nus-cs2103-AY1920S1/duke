@@ -1,3 +1,9 @@
+package Commands;
+
+import Functionality.*;
+import Task.Deadlines;
+import Task.Task;
+
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
@@ -8,7 +14,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] splitStr = args.split("/by");
         if (splitStr.length == 1) {
             throw new DukeException("Invalid format. Please include '/by' to state your deadline"

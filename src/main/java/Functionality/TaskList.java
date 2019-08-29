@@ -1,9 +1,12 @@
-/**
- * Contains the TaskList and has the operations to add/delete tasks in the list
- */
+package Functionality;
+
+import Task.Task;
 
 import java.util.List;
 
+/**
+ * Contains the Functionality.TaskList and has the operations to add/delete tasks in the list
+ */
 public class TaskList {
     private List<Task> taskList;
 

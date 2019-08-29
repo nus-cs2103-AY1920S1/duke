@@ -1,3 +1,8 @@
+package Functionality;
+
+import Commands.*;
+import Task.Task;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -63,13 +68,13 @@ public class Parser {
             try {
                 return new DoneCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a Task Number");
+                throw new DukeException("Please enter a Task.Task Number");
             }
         case "delete":
             try {
                 return new DeleteCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a Task Number");
+                throw new DukeException("Please enter a Task.Task Number");
             }
 
         case "todo":

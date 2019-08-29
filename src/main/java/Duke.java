@@ -1,3 +1,6 @@
+import Commands.Command;
+import Functionality.*;
+
 import java.util.Scanner;
 
 public class Duke {

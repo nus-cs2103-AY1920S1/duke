@@ -1,3 +1,9 @@
+package Commands;
+
+import Functionality.*;
+import Task.Events;
+import Task.Task;
+
 import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
@@ -8,7 +14,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] splitStr = args.split("/at");
         String[] dateString = splitStr[1].trim().split(" - "); //e.g. 2/12/2019 1800 - 2/12/2019 1800
         if (splitStr.length == 1) {

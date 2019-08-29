@@ -62,31 +62,7 @@ public class Duke {
         }
         print(listOfTask.toString());
     }
-    public static void save(ArrayList<Task> tasks) throws Exception{
-        int size = tasks.size();
-        //may have to catch error if no items in list
-        StringBuilder listOfTask = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            listOfTask.append(i+1+". " +tasks.get(i)+"\n" + "     ");
-        }
-        PrintWriter writer = new PrintWriter(new FileOutputStream("list.txt", false));
-        writer.print("     " + listOfTask);
-        writer.close();
 
-        FileOutputStream fos = new FileOutputStream("t.tmp", false);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(tasks);
-        oos.close();
-    }
-    public static void load(ArrayList<Task> tasks) throws Exception {
-        FileInputStream fis = new FileInputStream("t.tmp");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        ArrayList<Task> temp = (ArrayList<Task>) ois.readObject();
-        for (Task task : temp) {
-            tasks.add(task);
-        }
-        ois.close();
-    }
     public static void print(String message) {
         System.out.println(
                 "    ____________________________________________________________\n" +
@@ -94,20 +70,20 @@ public class Duke {
                 "    ____________________________________________________________");
     }
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-       print("Hello! I am Duke\n" +
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        print("Hello! I am Duke\n" +
                 "     What can I do for you?");
-        String input = "";
         ArrayList<Task> tasks = new ArrayList<>();
-        load(tasks);
+        storage.load(tasks);
         list(tasks);
 
-        while (!input.equals("bye")) {
-            input = sc.nextLine();
-            String[] temp = input.split(" ");
-            if (input.equals("list")) {
+        while (!ui.getInput().equals("bye")) {
+            ui.setInput();
+            String[] temp = ui.getInput().split(" ");
+            if (ui.getInput().equals("list")) {
                list(tasks);
-            } else if(input.equals("bye")) {
+            } else if(ui.getInput().equals("bye")) {
                 print("Bye. Hope to see you again soon!");
 
             }else if (temp[0].equals("done")) {
@@ -122,7 +98,7 @@ public class Duke {
                         throw new NumberFormatException();
                     } else {
                         tasks.get(num - 1).markAsDone();
-                        save(tasks);
+                        storage.save(tasks);
                     }
                 }catch(NumberFormatException e){
                     print("☹ OOPS!!! Please input a valid number.");
@@ -132,7 +108,7 @@ public class Duke {
                 Task task = null;
                 if(temp[0].equals("todo")){
                     //trim so that cannot pass with just spaces
-                    String desc = input.substring(4).trim();
+                    String desc = ui.getInput().substring(4).trim();
                     if (desc.equals("")) {
                         print("☹ OOPS!!! The description of a todo cannot be empty.");
                     } else {
@@ -141,7 +117,7 @@ public class Duke {
                     }
 
                 } else if (temp[0].equals("deadline")) {
-                    int num = input.indexOf("/by");
+                    int num = ui.getInput().indexOf("/by");
                     //length == 1 means only has 'deadline', and temp[1] equal /by means no desc as well
                     if (temp.length == 1 || temp[1].equals("/by")) {
                         print("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -151,9 +127,9 @@ public class Duke {
                        print("☹ OOPS!!! Please type /by before inputting the deadline.");
 
                     }else {
-                        String desc = input.substring(9, num);
+                        String desc = ui.getInput().substring(9, num);
                         //trim so that cannot pass with just spaces
-                        String by = input.substring(num + 3).trim();
+                        String by = ui.getInput().substring(num + 3).trim();
                         //no input time after /by
                         if (by.equals("")) {
                            print("☹ OOPS!!! Please input a deadline after /by");
@@ -162,7 +138,7 @@ public class Duke {
                         }
                     }
                 } else if (temp[0].equals("event")) {
-                    int num = input.indexOf("/at");
+                    int num = ui.getInput().indexOf("/at");
                     //length == 1 means only has 'event', and temp[1] equal /at means no desc as well
                     if (temp.length == 1 || temp[1].equals("/at")) {
                         print("☹ OOPS!!! The description of a event cannot be empty.");
@@ -171,9 +147,9 @@ public class Duke {
                     else if (num == -1) {
                         print("☹ OOPS!!! Please type /at before inputting the time.");
                     } else {
-                        String desc = input.substring(6, num);
+                        String desc = ui.getInput().substring(6, num);
                         //trim so that cannot pass with just spaces
-                        String at = input.substring(num + 3).trim();
+                        String at = ui.getInput().substring(num + 3).trim();
                         //no input time after /at
                         if (at.equals("")) {
                             print("☹ OOPS!!! Please input a time after /at");
@@ -214,7 +190,7 @@ public class Duke {
                             "     Now you have " + tasks.size() + " tasks in the list.");
 
                 }
-                save(tasks);
+                storage.save(tasks);
 
             }
         }

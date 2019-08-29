@@ -11,6 +11,7 @@ public enum CommandList {
     ADD_EVENT_COMMAND("event", AddEventCommand.class),
     DONE_COMMAND("done", DoneCommand.class),
     DELETE_COMMAND("delete", DeleteCommand.class),
+    FIND_COMMAND("find", FindCommand.class),
     INVALID_COMMAND(null, InvalidCommand.class);
 
 

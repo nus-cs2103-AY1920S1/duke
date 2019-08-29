@@ -6,6 +6,7 @@ import weijie.duke.repos.IRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class MockTaskRepo implements IRepository<Task> {
 
@@ -28,6 +29,13 @@ class MockTaskRepo implements IRepository<Task> {
     @Override
     public Task get(int id) {
         return tasks.get(id);
+    }
+
+    @Override
+    public List<Task> find(String searchParam) {
+        return tasks.stream()
+                .filter(task -> task.getDescription().contains(searchParam))
+                .collect(Collectors.toList());
     }
 
     @Override

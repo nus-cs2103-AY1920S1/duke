@@ -26,7 +26,7 @@ public class TaskCommandFactory {
                 commandMap.getOrDefault(command, CommandList.INVALID_COMMAND.getCommandClass());
 
         try {
-            Constructor<?>[] constructors = commandClass.getConstructors();
+            Constructor<?>[] constructors = commandClass.getDeclaredConstructors();
             Arrays.sort(constructors, (constructor1, constructor2) ->
                     Integer.compare(constructor2.getParameterCount(), constructor1.getParameterCount()));
 

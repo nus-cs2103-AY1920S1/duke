@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class ListCommand implements ITaskCommand {
     private IRepository<Task> repo;
 
-    public ListCommand(IRepository<Task> repo) {
+    ListCommand(IRepository<Task> repo) {
         this.repo = repo;
     }
 

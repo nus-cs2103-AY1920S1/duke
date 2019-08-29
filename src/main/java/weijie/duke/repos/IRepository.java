@@ -8,6 +8,7 @@ public interface IRepository<T> {
     List<T> getAll();
     int getSize();
     T get(int id);
+    List<T> find(String searchParam);
     void create(T entity) throws DukeIOException;
     void update(int id, T entity) throws DukeIOException;
     void delete(int id);

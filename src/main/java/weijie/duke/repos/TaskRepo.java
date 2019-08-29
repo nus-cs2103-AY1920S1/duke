@@ -5,6 +5,7 @@ import weijie.duke.exceptions.DukeIOException;
 import weijie.duke.models.Task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskRepo implements IRepository<Task> {
 
@@ -29,6 +30,13 @@ public class TaskRepo implements IRepository<Task> {
     @Override
     public Task get(int id) {
         return tasks.get(id);
+    }
+
+    @Override
+    public List<Task> find(String searchParam) {
+        return tasks.stream()
+                .filter(task -> task.getDescription().contains(searchParam))
+                .collect(Collectors.toList());
     }
 
     @Override

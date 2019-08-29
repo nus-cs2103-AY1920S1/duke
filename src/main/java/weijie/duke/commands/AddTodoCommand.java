@@ -13,7 +13,7 @@ import java.util.Collections;
 
 public class AddTodoCommand extends AddCommand {
 
-    public AddTodoCommand(IRepository<Task> repo) {
+    AddTodoCommand(IRepository<Task> repo) {
         super(repo);
     }
 

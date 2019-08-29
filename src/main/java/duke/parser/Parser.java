@@ -1,14 +1,15 @@
 package duke.parser;
 
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import duke.command.*;
-import duke.exception.*;
-import duke.task.Task;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Parser {
     private static void todoCheck(String[] tasks) throws DukeException {

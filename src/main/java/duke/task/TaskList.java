@@ -1,8 +1,8 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
-import java.lang.IndexOutOfBoundsException;
-import duke.exception.*;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -11,7 +11,7 @@ public class TaskList {
         this.tasks = loadedTasks;
     }
 
-    public void add(Task task) {
+    public void add(duke.task.Task task) {
         this.tasks.add(task);
     }
 

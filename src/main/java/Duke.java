@@ -1,12 +1,9 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.nio.file.Files;
 import duke.command.Command;
-import duke.task.TaskList;
 import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private Storage storage;

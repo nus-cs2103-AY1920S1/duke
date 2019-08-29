@@ -1,17 +1,16 @@
 package duke.storage;
 
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+import java.io.*;
 import java.text.ParseException;
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import duke.exception.*;
-import duke.task.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Storage {
     private String filePath;

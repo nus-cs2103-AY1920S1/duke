@@ -33,6 +33,7 @@ public class Event extends Task {
         return date;
     }
 
+
     /**
      * Returns string representation of Event object
      * @return String representation of Event object

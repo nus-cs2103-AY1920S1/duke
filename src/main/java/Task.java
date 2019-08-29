@@ -3,6 +3,7 @@
  */
 public class Task {
     protected boolean completed;
+    protected int index;
     protected String name;
 
     /**

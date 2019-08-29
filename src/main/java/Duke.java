@@ -23,6 +23,16 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
+     * Creates an instance of duke.
+     * Defaults set the file path for storage to "data/tasks.txt".
+     */
+    public Duke() {
+        storage = new Storage("data/tasks.txt");
+        ui = new Ui();
+        taskList = new TaskList(storage);
+    }
+
+    /**
      * Creates an instance of Duke.
      *
      * @param filePath File path of data file.

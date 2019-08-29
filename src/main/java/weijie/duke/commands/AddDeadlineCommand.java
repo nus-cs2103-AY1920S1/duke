@@ -1,6 +1,6 @@
 package weijie.duke.commands;
 
-import weijie.duke.exceptions.DukeIOException;
+import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.exceptions.DukeInvalidInputException;
 import weijie.duke.models.Deadline;
 import weijie.duke.models.Task;
@@ -34,13 +34,14 @@ public class AddDeadlineCommand extends AddCommand {
         try {
             dateTime = LocalDateTime.parse(descriptionAndDate[1].trim(), DateUtils.DUKE_DATETIME_PARSE_FORMAT);
         } catch (DateTimeParseException e) {
-            return new TaskResponse(new DukeInvalidInputException("☹ OOPS!!! Date and time must be in the format DD/MM/YYYY HHMM"));
+            return new TaskResponse(
+                    new DukeInvalidInputException("☹ OOPS!!! Date and time must be in the format DD/MM/YYYY HHMM"));
         }
 
         Task task = new Deadline(descriptionAndDate[0], dateTime);
         try {
             repo.create(task);
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             return new TaskResponse(e);
         }
 

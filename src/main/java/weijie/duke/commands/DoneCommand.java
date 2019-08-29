@@ -1,6 +1,6 @@
 package weijie.duke.commands;
 
-import weijie.duke.exceptions.DukeIOException;
+import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.exceptions.DukeInvalidInputException;
 import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
@@ -34,7 +34,7 @@ public class DoneCommand implements ITaskCommand {
         task.markAsDone();
         try {
             repo.update(id, task);
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             return new TaskResponse(e);
         }
 

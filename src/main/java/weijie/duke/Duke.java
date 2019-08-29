@@ -1,8 +1,9 @@
 package weijie.duke;
 
-import weijie.duke.commands.*;
+import weijie.duke.commands.CommandList;
+import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.db.Storage;
-import weijie.duke.exceptions.DukeIOException;
+import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 import weijie.duke.presenters.TasksPresenter;
 import weijie.duke.repos.IRepository;
@@ -31,7 +32,7 @@ public class Duke {
 
             presenter = new TasksPresenter(ui, factory);
 
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             ui.printError(e);
             ui.printExit();
         }

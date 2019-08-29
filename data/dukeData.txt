@@ -3,4 +3,6 @@ event| false | project meeting | Aug 6th 2-4pm
 todo | true | join sports club
 todo | false | sleep
 todo | true | eat
-deadline | false | homework math | 12 December 2100, 6PM
+deadline | true | homework math | 12 December 2100, 6PM
+todo | false | sleep
+deadline | false | homework | 12 February 2100, 7PM

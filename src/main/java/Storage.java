@@ -19,7 +19,7 @@ public class Storage {
     }
 
     public void save(TaskList tasks) throws DukeException {
-        try(FileWriter writer = new FileWriter(storagePath)) {
+        try (FileWriter writer = new FileWriter(storagePath)) {
             writer.write(tasks.printTasksForHardDisk());
         } catch (IOException ex) {
             throw new DukeException("There is an issue in updating duke.txt.");

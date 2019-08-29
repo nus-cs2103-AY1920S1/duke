@@ -22,71 +22,72 @@ public class Duke {
         boolean isTerminated = false;
 
         while (!isTerminated) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                isTerminated = true;
-            } else if (input.equals("list")) {
+            try {
+                String input = sc.nextLine();
+                if (input.equals("bye")) {
+                    isTerminated = true;
+                } else if (input.equals("list")) {
+                    sendLine();
+                    sendTasks();
+                    sendLine();
+                } else if (input.startsWith("done")) {
+                    String[] splitStr = input.split(" "); // to identify which task completed, split command at space
+                    if (splitStr.length < 2) { // if less than 2 words
+                        sendLine();
+                        sendMessage("Please indicate task index!");
+                        sendLine();
+                    } else {
+                        String itemIndex = splitStr[1]; // take 2nd word
+                        sendLine();
+                        doneTask(itemIndex);
+                        sendLine();
+                    }
+                } else if (input.startsWith("todo")) {
+                    String[] splitStr = input.split(" ", 2); // split command at first space
+                    if (splitStr.length < 2) { // if less than 2 words
+                        throw new MissingTodoException();
+                    } else {
+                        String item = splitStr[1]; // take 2nd word onwards
+                        sendLine();
+                        addTodo(item);
+                        sendLine();
+                    }
+                } else if (input.startsWith("deadline")) {
+                    String[] splitStr = input.split(" ", 2); // split command at first space
+                    if (splitStr.length < 2) { // if less than 2 words
+                        sendLine();
+                        sendMessage("Please indicate task to do with deadline!");
+                        sendLine();
+                    } else {
+                        String item = splitStr[1]; // take 2nd word onwards
+                        String[] data = item.split("/by", 2);
+                        String task = data[0];
+                        String deadline = data[1];
+                        sendLine();
+                        addDeadline(task, deadline);
+                        sendLine();
+                    }
+                } else if (input.startsWith("event")) {
+                    String[] splitStr = input.split(" ", 2); // split command at first space
+                    if (splitStr.length < 2) { // if less than 2 words
+                        sendLine();
+                        sendMessage("Please indicate task to do with start and end time!");
+                        sendLine();
+                    } else {
+                        String item = splitStr[1]; // take 2nd word onwards
+                        String[] data = item.split("/at", 2);
+                        String task = data[0];
+                        String time = data[1];
+                        sendLine();
+                        addEvent(task, time);
+                        sendLine();
+                    }
+                } else {
+                    throw new InvalidCommandException();
+                }
+            } catch (Exception error) {
                 sendLine();
-                sendTasks();
-                sendLine();
-            } else if (input.startsWith("done")) {
-                String[] splitStr = input.split(" "); // to identify which task completed, split command at space
-                if (splitStr.length < 2) { // if less than 2 words
-                    sendLine();
-                    sendMessage("Please indicate task index!");
-                    sendLine();
-                } else {
-                    String itemIndex = splitStr[1]; // take 2nd word
-                    sendLine();
-                    doneTask(itemIndex);
-                    sendLine();
-                }
-            } else if (input.startsWith("todo")) {
-                String[] splitStr = input.split(" ", 2); // split command at first space
-                if (splitStr.length < 2) { // if less than 2 words
-                    sendLine();
-                    sendMessage("Please indicate task to do!");
-                    sendLine();
-                } else {
-                    String item = splitStr[1]; // take 2nd word onwards
-                    sendLine();
-                    addTodo(item);
-                    sendLine();
-                }
-            } else if (input.startsWith("deadline")) {
-                String[] splitStr = input.split(" ", 2); // split command at first space
-                if (splitStr.length < 2) { // if less than 2 words
-                    sendLine();
-                    sendMessage("Please indicate task to do with deadline!");
-                    sendLine();
-                } else {
-                    String item = splitStr[1]; // take 2nd word onwards
-                    String[] data = item.split("/by", 2);
-                    String task = data[0];
-                    String deadline = data[1];
-                    sendLine();
-                    addDeadline(task, deadline);
-                    sendLine();
-                }
-            } else if (input.startsWith("event")) {
-                String[] splitStr = input.split(" ", 2); // split command at first space
-                if (splitStr.length < 2) { // if less than 2 words
-                    sendLine();
-                    sendMessage("Please indicate task to do with start and end time!");
-                    sendLine();
-                } else {
-                    String item = splitStr[1]; // take 2nd word onwards
-                    String[] data = item.split("/at", 2);
-                    String task = data[0];
-                    String time = data[1];
-                    sendLine();
-                    addEvent(task, time);
-                    sendLine();
-                }
-            }
-            else {
-                sendLine();
-                addTodo(input);
+                sendMessage(error.toString());
                 sendLine();
             }
         }

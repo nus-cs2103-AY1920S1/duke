@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;

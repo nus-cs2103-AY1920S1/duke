@@ -1,6 +1,4 @@
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.Date;
 
 public class Deadline extends Task {
     private DukeDate deadline;

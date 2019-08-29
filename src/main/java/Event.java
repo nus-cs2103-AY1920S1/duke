@@ -1,6 +1,4 @@
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.Date;
 
 public class Event extends Task {
     private DukeDate startTime;

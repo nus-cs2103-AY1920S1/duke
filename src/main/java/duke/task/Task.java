@@ -1,5 +1,6 @@
-package Duke.task;
-import Duke.exception.DukeException;
+package duke.task;
+
+import duke.exception.DukeException;
 
 public abstract class Task {
     protected String description;
@@ -10,7 +11,7 @@ public abstract class Task {
         this.done = false;
     }
 
-    public void doTask() throws DukeException{
+    public void doTask() throws DukeException {
         if (this.done) {
             throw new DukeException("The task specified has already been done.");
         } else {
@@ -23,13 +24,13 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return done ? "[\u2713]" : "[\u2718]";
+        return done ? "[\u2713]" : "[\u2718]";  //return tick or x symbols
     }
 
     public abstract String formatToWrite();
 
     @Override
     public String toString() {
-       return String.format("%s %s", this.getStatusIcon(), this.description);
+        return String.format("%s %s", this.getStatusIcon(), this.description);
     }
 }

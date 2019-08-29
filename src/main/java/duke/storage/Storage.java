@@ -1,8 +1,12 @@
-package Duke.storage;
+package duke.storage;
 
-import Duke.exception.DukeException;
-import Duke.task.*;
-import Duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.parser.Parser;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -34,34 +38,34 @@ public class Storage {
                 String[] line = sc.nextLine().split(" \\| ");
                 switch (line[0]) {
                 case "T":
-                Todo todo = new Todo(line[2]);
-                if (line[1].equals("1")) {
-                    todo.markDone();
-                    tasks.add(todo);
-                } else {
-                    tasks.add(todo);
-                }
-                break;
+                    Todo todo = new Todo(line[2]);
+                    if (line[1].equals("1")) {
+                        todo.markDone();
+                        tasks.add(todo);
+                    } else {
+                        tasks.add(todo);
+                    }
+                    break;
                 case "D":
-                Deadline deadline = new Deadline(line[2], Parser.parseDate(formatter, line[3]));
-                if (line[1].equals("1")) {
-                    deadline.markDone();
-                    tasks.add(deadline);
-                } else {
-                    tasks.add(deadline);
-                }
-                break;
+                    Deadline deadline = new Deadline(line[2], Parser.parseDate(formatter, line[3]));
+                    if (line[1].equals("1")) {
+                        deadline.markDone();
+                        tasks.add(deadline);
+                    } else {
+                        tasks.add(deadline);
+                    }
+                    break;
                 case "E":
-                Event event = new Event(line[2], Parser.parseDate(formatter, line[3]));
-                if (line[1].equals("1")) {
-                    event.markDone();
-                    tasks.add(event);
-                } else {
-                    tasks.add(event);
-                }
-                break;
+                    Event event = new Event(line[2], Parser.parseDate(formatter, line[3]));
+                    if (line[1].equals("1")) {
+                        event.markDone();
+                        tasks.add(event);
+                    } else {
+                        tasks.add(event);
+                    }
+                    break;
                 default:
-                break;
+                    break;
                 }
             }
             return tasks;

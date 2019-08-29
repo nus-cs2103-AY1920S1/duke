@@ -1,8 +1,8 @@
-import Duke.exception.DukeException;
-import Duke.parser.Parser;
-import Duke.storage.Storage;
-import Duke.task.*;
-import Duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private Ui ui;

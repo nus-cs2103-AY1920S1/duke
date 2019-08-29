@@ -1,11 +1,11 @@
-package Duke.parser;
+package duke.parser;
 
-import Duke.exception.DukeException;
-import Duke.task.Deadline;
-import Duke.task.Event;
-import Duke.task.TaskList;
-import Duke.task.Todo;
-import Duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -29,7 +29,7 @@ public class Parser {
 
         ui.showWelcome();
 
-        while(!bye) {
+        while (!bye) {
             String input = sc.nextLine();
             String[] command = input.split(" ");
             try {

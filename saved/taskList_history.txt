@@ -1,3 +1,0 @@
-T|0|eat breakfast
-D|1|drink tea|31 February 1
-E|1|splashdown|last night

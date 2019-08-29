@@ -1,6 +1,19 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'Duke'
+        )
+    }
 }
 
 group 'seedu.duke'
@@ -11,6 +24,5 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke"
 }

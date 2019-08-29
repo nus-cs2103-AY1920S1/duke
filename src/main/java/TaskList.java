@@ -4,25 +4,53 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * Contains the task list of tasks.
+ */
 public class TaskList {
     private List<Task> taskList;
 
+    /**
+     * Creates an instance of TaskList.
+     */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Creates an instance of TaskList and initialises.
+     *
+     * @param taskList list of tasks.
+     */
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns size of the list.
+     *
+     * @return size of the list.
+     */
     public int getSize() {
         return this.taskList.size();
     }
 
+    /**
+     * Returns the element at ith position.
+     *
+     * @param i stores the position from where the task is to be extracted.
+     * @return the element at ith position.
+     */
     public Task getElement(int i) {
         return this.taskList.get(i);
     }
 
+    /**
+     * Returns the information of time with a particular time format.
+     *
+     * @param n Stores the information of time in a String forma.
+     * @return proper date format.
+     */
     private static String getTimeFormat(int n) {
         if (n >= 11 && n <= 13) {
             return n + "th";
@@ -39,6 +67,14 @@ public class TaskList {
             return n + "th of";
         }
     }
+
+    /**
+     * Converts command of users into Task objects with details.
+     *
+     * @param s String used by user for creating a new task.
+     * @return Task object with extracted input details
+     * @throws DukeException Exception thrown when input is in invalid format.
+     */
 
     public Task add(String s) throws DukeException {
         String arr[] = s.split(" ");
@@ -109,19 +145,34 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Marks the nth task in the task list as done by changing status.
+     *
+     * @param n the position of task in the list of tasks.
+     * @return task marked as done.
+     */
     public Task done(int n) {
         Task task = this.taskList.get(n - 1);
         task.mark(); //Marks the corresponding task as done
         return task;
     }
 
+    /**
+     * Deletes nth task from the list of tasks.
+     *
+     * @param n the position of task in the list of tasks.
+     * @return task deleted from the list.
+     */
     public Task delete(int n) {
         Task task = this.taskList.get(n - 1);
         this.taskList.remove(task); //Deletes task from list
         return task;
     }
 
+    /**
+     * COnverts task into a required String to store in the data file.
+     * @return String with details of the task.
+     */
     public String genInfo() {
         //Convert Task object into a String which will be stored in the data file
         String taskData = "";

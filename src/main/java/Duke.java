@@ -12,7 +12,13 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    static final String pathToHardDisk = "../../../data/duke.txt";
+    static final String pathToHardDisk = "/data/duke.txt";
+
+    private static File getHardDiskFile() {
+        File file = new File(System.getProperty("user.dir") + pathToHardDisk);
+        file.getParentFile().mkdirs();
+        return file;
+    }
 
     private static void greet() {
         TaskManager.separator();
@@ -98,7 +104,7 @@ public class Duke {
 
     private static void saveToHardDisk(TaskManager taskManager) throws DukeException {
         try {
-            FileWriter writer = new FileWriter(pathToHardDisk);
+            FileWriter writer = new FileWriter(getHardDiskFile());
             writer.write(taskManager.printTasksForHardDisk());
             writer.close();
         } catch (IOException ex) {
@@ -115,7 +121,7 @@ public class Duke {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
 
-            File file = new File(pathToHardDisk);
+            File file = getHardDiskFile();
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

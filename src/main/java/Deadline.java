@@ -4,7 +4,7 @@ import java.util.Calendar;
 public class Deadline extends Task {
     private Calendar time;
 
-    public Deadline(Parser parser) throws DukeException {
+    public Deadline(Parser parser) {
         super(parser.getList().get(0));
         time = Calendar.getInstance();
         ArrayList<String> inputArray = parser.getList();
@@ -62,7 +62,7 @@ public class Deadline extends Task {
         case 11 : nameOfMonth = "December";
             break;
         }
-        String hoursAndMinutes = "" + time.get(Calendar.HOUR_OF_DAY) + ":";
+        String hoursAndMinutes = "" + time.get(Calendar.HOUR) + ":";
         if (time.get(Calendar.MINUTE) < 10) {
             hoursAndMinutes += "0";
         }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,9 +20,11 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
+
         if (f.length() == 0) {
             throw new DukeException();
         }
+
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] task = input.split(" \\| ");

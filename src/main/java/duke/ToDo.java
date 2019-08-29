@@ -1,6 +1,8 @@
+package duke;
+
 public class ToDo extends Task {
 
-    protected String by;
+    private String by;
 
     public ToDo(String description) {
         super(description);

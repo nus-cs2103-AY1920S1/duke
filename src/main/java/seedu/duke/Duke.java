@@ -1,17 +1,40 @@
 package seedu.duke;
 
+import seedu.duke.Commands.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Duke {
 
     static final String HORIZONTAL_LINE = "______________________________"
             + "______________________________";
 
-    private static List<String> taskList = new ArrayList<String>();
+    enum CommandName {
+        ADD("add"),
+        LIST("list"),
+        DONE("done"),
+        BYE("bye");
 
+        private final String command;
+
+        CommandName(String command) {
+            this.command = command;
+        }
+    }
+
+    static final String LIST_PATTERN = "(list)";
+    static final String BYE_PATTERN = "(bye)";
+    static final String ADD_PATTERN = "(add)\\s([\\s\\w]+)";
+    static final String DONE_PATTERN = "(done)(?=\\s)\\s(\\d+)";
+
+    static boolean continueRunning = true;
+
+    private static List<Task> taskList = new ArrayList<Task>();
 
     /**
      * Main Method.
@@ -30,28 +53,63 @@ public class Duke {
         greet();
 
         Scanner in = new Scanner(System.in);
-        boolean continueRunning = true;
 
         while (continueRunning) {
-            String command  = in.nextLine();
-
-            switch (command) {
-                case "list":
-                    listAllTasks();
-                    break;
-                case "bye":
-                    exit();
-                    continueRunning = false;
-                    break;
-                default:
-                    addToList(command);
-                    break;
-            }
+            String input  = in.nextLine();
+            parseCommand(input);
         }
     }
 
     /**
-     * Print horizontal line
+     * Parses the input command into the specific Command object to execute
+     * @param input
+     */
+    private static void parseCommand(String input) {
+
+        // Identify Command
+        String pattern = "";
+        CommandName command = CommandName.valueOf(input.split(" ")[0].toUpperCase());
+        switch (command) {
+        case ADD:
+            pattern = ADD_PATTERN;
+            break;
+        case LIST:
+            pattern = LIST_PATTERN;
+            break;
+        case DONE:
+            pattern = DONE_PATTERN;
+            break;
+        case BYE:
+            pattern = BYE_PATTERN;
+            break;
+        }
+
+        Command commandToExecute = null;
+        Matcher matcher = Pattern.compile(pattern).matcher(input);
+
+        if (matcher.matches()) {
+
+            if (command == CommandName.ADD) {
+                commandToExecute = new AddCommand(new Task(matcher.group(2)));
+            } else if (command == CommandName.LIST) {
+                commandToExecute = new ListCommand();
+            } else if (command == CommandName.DONE) {
+                commandToExecute = new DoneCommand(Integer.parseInt(matcher.group(2)));
+            } else if (command == CommandName.BYE) {
+                commandToExecute = new ByeCommand();
+            } else {
+                System.out.println("Invalid Command");
+                return;
+            }
+        }
+
+        if (commandToExecute != null) {
+            commandToExecute.execute(taskList);
+        }
+    }
+
+    /**
+     * Print horizontal line.
      */
     private static void printLine() {
         System.out.println("\t" + HORIZONTAL_LINE);
@@ -66,45 +124,4 @@ public class Duke {
                 + "What can I do for you?");
         printLine();
     }
-
-    /**
-     * Echos the input command back to console with formatting.
-     * @param command the command entered by user.
-     */
-    private static void echo(String command) {
-        printLine();
-        System.out.println("\t" + command);
-        printLine();
-    }
-
-    /**
-     * Prints the exit message.
-     */
-    private static void exit() {
-        printLine();
-        System.out.println("\t" + "Bye. Hope to see you again soon!");
-        printLine();
-    }
-
-    /**
-     * Adds the items to list.
-     * @param task The task to add to the list.
-     */
-    private static void addToList(String task) {
-        taskList.add(task);
-        echo("added: " + task);
-    }
-
-    /**
-     * Lists all the tasks into console.
-     */
-    private static void listAllTasks() {
-        printLine();
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
-        }
-        printLine();
-
-    }
-
 }

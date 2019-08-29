@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class Event extends Task {
+public class Event extends Task {
     Date time;
 
     public Event(String content, String time) {

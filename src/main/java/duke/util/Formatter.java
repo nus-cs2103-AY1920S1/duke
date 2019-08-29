@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.Task;
+
 public class Formatter {
 
     public static String formatTaskForWriting(Task task) {
@@ -5,22 +9,18 @@ public class Formatter {
         String className = task.getClass().getSimpleName();
         sb.append(className);
         sb.append("|");
-        if (task.done) {
+        if (task.isDone()) {
             sb.append("1");
         } else {
             sb.append("0");
         }
         sb.append("|");
-        sb.append(task.content);
+        sb.append(task.getContent());
         if (className.equals("ToDo")) {
 
         } else {
             sb.append("|");
-            if (task instanceof Deadline) {
-                sb.append(task.getTime());
-            } else {
-                sb.append(task.getTime());
-            }
+            sb.append(task.getTime());
         }
         return sb.toString();
     }

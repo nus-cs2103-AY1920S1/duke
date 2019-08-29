@@ -1,7 +1,9 @@
+package duke.task;
+
 import java.text.ParseException;
 import java.util.Date;
 
-class Deadline extends Task {
+public class Deadline extends Task {
     Date deadline;
 
     public Deadline(String content, String deadline) {

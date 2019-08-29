@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 
-class Task {
+public class Task {
     String content;
     boolean done;
     static final int tick = '\u2713';
@@ -23,5 +25,17 @@ class Task {
 
     public String toString() {
         return this.content;
+    }
+
+    public void toggleState() {
+        this.done = true;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public String getContent() {
+        return content;
     }
 }

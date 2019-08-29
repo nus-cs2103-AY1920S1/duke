@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.UI;
+import duke.storage.Storage;
+
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String command) {

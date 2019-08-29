@@ -1,3 +1,10 @@
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.UI;
+import duke.util.Parser;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -6,7 +13,7 @@ public class Duke {
     private UI ui;
 
     public static void main(String[] args) throws Exception {
-        Duke duke = new Duke("../../../data/duke.txt");
+        Duke duke = new Duke("./data/duke.txt");
         duke.run();
     }
 
@@ -27,7 +34,6 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parseUserInput(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();

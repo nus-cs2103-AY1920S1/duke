@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.util.Scanner;
 
 public class UI {
@@ -14,7 +16,9 @@ public class UI {
 
     //read user input
     public String readCommand() {
-        return sc.nextLine();
+
+        String result = sc.nextLine();
+        return result;
     }
 
     //show error message

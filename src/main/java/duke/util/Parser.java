@@ -1,3 +1,17 @@
+package duke.util;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+
 public class Parser {
 
     // this method parse string from txt file and creates task objects when duke is initiated
@@ -7,19 +21,19 @@ public class Parser {
         case ("ToDo"):
             Task todo = new ToDo(strs[2]);
             if (strs[1].equals("1")) {
-                todo.done = true;
+                todo.toggleState();
             }
             return todo;
         case ("Deadline"):
             Task deadline = new Deadline(strs[2], strs[3]);
             if (strs[1].equals("1")) {
-                deadline.done = true;
+                deadline.toggleState();
             }
             return deadline;
         case ("Event"):
             Task event = new Event(strs[2], strs[3]);
             if (strs[1].equals("1")) {
-                event.done = true;
+                event.toggleState();
             }
             return event;
         default:

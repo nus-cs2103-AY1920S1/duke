@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        /* Adding some lines of 
+         * comments to this to practice 
+         * java coding practices.
+         */
         String BYE = "bye";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

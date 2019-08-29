@@ -46,7 +46,7 @@ public class TaskList {
         }
     }
 
-    public Task completeTask(int taskNum) throws DukeException{
+    public Task completeTask(int taskNum) throws DukeException {
         try {
             Task t = this.allTasks.get(taskNum - 1); //Because storedTasks is zero-indexed
             t.markAsDone();

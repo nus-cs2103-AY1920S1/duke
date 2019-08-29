@@ -24,7 +24,7 @@ public class Event extends Task {
      * @return String Returns a string representation of a Event object.
      */
     public String toString() {
-        String e = String.format("[E][%s]%s(at:%s)",
+        String e = String.format("[E][%s]%s(at: %s)",
                 this.getStatusIcon(), this.description, this.date);
         return e;
     }

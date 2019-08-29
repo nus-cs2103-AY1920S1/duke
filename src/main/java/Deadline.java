@@ -24,7 +24,7 @@ public class Deadline extends Task {
      * @return String Returns a string representation of a Deadline object.
      */
     public String toString() {
-        String d = String.format("[D][%s]%s(by:%s)",
+        String d = String.format("[D][%s]%s(by: %s)",
                     this.getStatusIcon(), this.description, this.date);
         return d;
     }

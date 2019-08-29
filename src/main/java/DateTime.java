@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class DateTime {
     private final SimpleDateFormat _formatGiven = new SimpleDateFormat(
-            "d/MM/yyyy HHmm");
-    private final String _formatToShow = " of MMM yyyy, ha";
+            "d/M/yyyy HHmm");
+    private final String _formatToShow = " 'of' MMMM yyyy, ha";
     private final SimpleDateFormat _formatter = new SimpleDateFormat(
             _formatToShow);
     private String _dateTime;

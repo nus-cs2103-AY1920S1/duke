@@ -6,6 +6,9 @@ import task.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates command to create an Event Task to be added to List of Tasks
+ */
 public class EventCommand extends Command {
     private String args;
 
@@ -13,6 +16,14 @@ public class EventCommand extends Command {
         this.args = args;
     }
 
+    /**
+     * Overridden Method to execute the EventCommand
+     *
+     * @param tasks   list of tasks
+     * @param ui      User Interface
+     * @param storage File Storage and Management
+     * @throws DukeException If command arguments is invalid
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] splitStr = args.split("/at");

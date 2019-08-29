@@ -23,6 +23,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads and scans text file, convert them to Task Objs to be added
+     *
+     * @return List of Tasks loaded from text file
+     * @throws DukeException If encounter file creation/parsing problems
+     */
     public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -47,7 +53,13 @@ public class Storage {
         return taskList;
     }
 
-    //Creates task from reading the string from text file. Called in load()
+    /**
+     * Creates task from reading the string from text file. Called from load()
+     *
+     * @param textArr String Array obtained after splitted
+     * @return Task Object to be added to TaskList
+     * @throws DukeException If unable to parse
+     */
     private Task readAndCreateTask(String[] textArr) throws DukeException {
         String type = textArr[0];
         Task task = null;
@@ -72,7 +84,11 @@ public class Storage {
         return task;
     }
 
-    //Updates files after command is entered/called
+    /**
+     * Updates text file after command execution
+     *
+     * @param taskList List of Tasks in logic.TaskList
+     */
     public void updateFile(TaskList taskList) {
         List<Task> list = taskList.getTaskList();
         StringBuilder sb = new StringBuilder();

@@ -1,10 +1,16 @@
 package main;
 
+/**
+ * Helper class for the user
+ */
 public class Helper {
 
     private static int NUMBER_OF_COMMANDS = 9;
     String[] arr;
 
+    /**
+     * Constructs a new Helper object
+     */
     public Helper() {
         arr = new String[NUMBER_OF_COMMANDS+1];
         arr[0] = "Here are the list of commands and their allowable input formats";
@@ -19,6 +25,10 @@ public class Helper {
         arr[9] = "clear";
     }
 
+    /**
+     * Returns an array of allowable input formats
+     * @return An array with the list of allowable input formats
+     */
     public String[] getCommands() {
         return arr;
     }

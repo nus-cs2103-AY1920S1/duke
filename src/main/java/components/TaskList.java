@@ -5,6 +5,8 @@ import tasks.Task;
 import java.util.ArrayList;
 
 public class TaskList {
+    final String ANSI_RESET = "\u001B[0m";
+    final String ANSI_YELLOW = "\u001B[33m";
     private ArrayList<Task> arr;
 
     public ArrayList<Task> getArr() {
@@ -87,7 +89,7 @@ public class TaskList {
             }
         }
         if (temp.size() == 0) {
-            Ui.print("I could not find any matching tasks with this keyword: " + str);
+            Ui.print("I could not find any matching tasks with this keyword: " + ANSI_YELLOW + str + ANSI_RESET);
             return;
         }
         Ui.print("Here are the matching tasks in your list:");

@@ -5,6 +5,7 @@ import duke.Ui;
 import duke.Parser;
 import duke.Storage;
 import duke.DukeException;
+
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
@@ -45,7 +46,8 @@ public class CommandAdd extends Command {
         case "deadline":
             String[] descriptionAndDeadline = taskDescription.split(" /by ", 2);
             if (descriptionAndDeadline.length != 2) {
-                throw new DukeException("Deadline format incorrect, should be e.g. deadline description /by time");
+                throw new DukeException("Deadline format incorrect, should be "
+                        + "e.g. deadline description /by time");
             }
             newTask = new Deadline(
                     descriptionAndDeadline[0],
@@ -55,7 +57,8 @@ public class CommandAdd extends Command {
         case "event":
             String[] descriptionAndTime = taskDescription.split(" /at ", 2);
             if (descriptionAndTime.length != 2) {
-                throw new DukeException("Event format incorrect, should be e.g. event description /at time");
+                throw new DukeException("Event format incorrect, should be "
+                        + "e.g. event description /at time");
             }
             newTask = new Event(
                     descriptionAndTime[0],

@@ -6,6 +6,7 @@ import duke.command.CommandMark;
 import duke.command.CommandDelete;
 import duke.command.CommandAdd;
 import duke.command.CommandExit;
+
 import java.time.LocalDateTime;
 
 /**
@@ -43,8 +44,8 @@ public class Parser {
                 String taskDescription = fullCommand.split(" ", 2)[1];
                 return new CommandAdd(taskType, taskDescription);
             } catch (Exception e) {
-                throw new DukeException("To add tasks, please use the format: type description\n" +
-                        "e.g. todo read book"
+                throw new DukeException("To add tasks, please use the format: type description\n"
+                        + "e.g. todo read book"
                 );
             }
         case "bye":
@@ -73,9 +74,13 @@ public class Parser {
             String time = dateTime.split(", ")[1];
             int minute = Integer.parseInt(time.split(":")[1].substring(0, 2));
             int hour = Integer.parseInt(time.split(":")[0]);
+
+            // check if given hour is valid
             if (hour <= 0) {
                 throw new DukeException("Hour cannot be less than or equal to 0");
             }
+
+            // convert hour to 24-hour format (0 - 23) based on given AM/PM
             boolean isPastNoon = time.substring(time.length() - 2).equalsIgnoreCase("pm");
             if (isPastNoon && hour != 12) {
                 // convert to 24 hour format (except for 12pm)

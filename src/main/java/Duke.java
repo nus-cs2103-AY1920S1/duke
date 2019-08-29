@@ -44,7 +44,18 @@ public class Duke {
                 numOfItems--;
                 System.out.println("\t\tNoted I have removed this task:\n\t\t" + tempTask.toString() + "\n");
                 System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
+<<<<<<< HEAD
             }else {
+=======
+            }else if (Objects.equals(wordSplit[0], "find")) {
+                String findWord = wordSplit[1];
+                for (int i=0; i<numOfItems; i++ ) {
+                    if (listOfItems[i].description.contains(findWord)) {
+                        System.out.println("\t\t" + listOfItems[i].toString() + "\n" );                    }
+                    }
+            }
+            else {
+>>>>>>> branch-Level-9
                 if (Objects.equals(wordSplit[0], "Deadline")){
 //                    if (Objects.equals(wordSplit[0], "Todo") || inputString == "Deadline ") {
 //                        System.out.println("Please add an argument after the word!");

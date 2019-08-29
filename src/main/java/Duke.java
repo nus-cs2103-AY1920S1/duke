@@ -96,13 +96,13 @@ public class Duke {
         return true;
     }
 
-    private static void saveToHardDisk(TaskManager taskManager) {
+    private static void saveToHardDisk(TaskManager taskManager) throws DukeException {
         try {
             FileWriter writer = new FileWriter(pathToHardDisk);
             writer.write(taskManager.printTasksForHardDisk());
             writer.close();
         } catch (IOException ex) {
-            System.out.println("There is an issue in updating the duke.txt");
+            throw new DukeException("There is an issue in updating duke.txt.");
         }
     }
 
@@ -148,7 +148,10 @@ public class Duke {
         } catch (FileNotFoundException ex) {
             return new TaskManager();
         } catch (Exception ex) {
+            TaskManager.separator();
             System.out.println("Failed to parse duke.txt");
+            TaskManager.separator();
+
             return new TaskManager();
         }
     }

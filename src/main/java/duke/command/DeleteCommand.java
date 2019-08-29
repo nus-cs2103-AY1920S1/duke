@@ -58,10 +58,11 @@ public class DeleteCommand extends Command {
             ui.echo(() -> {
                 System.out.printf("%sNoted. I've removed this task:\n", Ui.INDENTATION_LVL1);
                 System.out.printf(ui.indentAndSplit(task.toString(), Ui.INDENTATION_LVL2)); // task details
-                System.out.printf("%sNow you have %s in the list.\n", Ui.INDENTATION_LVL1, ui.getTaskPhrase(taskList.size()));
+                System.out.printf("%sNow you have %s in the list.\n", Ui.INDENTATION_LVL1,
+                        ui.getTaskPhrase(taskList.size()));
             });
         } catch (NumberFormatException e) {
-            ui.echo(String.format("%s There can only be an integer after the word \"delete\"", DukeException.PREFIX ));
+            ui.echo(String.format("%s There can only be an integer after the word \"delete\"", DukeException.PREFIX));
         }
     }
 }

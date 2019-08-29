@@ -60,7 +60,7 @@ public class UpdateCommand extends Command {
                 System.out.printf(ui.indentAndSplit(task.toString(), Ui.INDENTATION_LVL2)); // task details
             });
         } catch (NumberFormatException e) {
-            ui.echo(String.format("%s There can only be an integer after the word \"done\"", DukeException.PREFIX ));
+            ui.echo(String.format("%s There can only be an integer after the word \"done\"", DukeException.PREFIX));
         }
     }
 }

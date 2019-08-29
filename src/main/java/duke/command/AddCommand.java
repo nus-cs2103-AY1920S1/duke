@@ -51,11 +51,11 @@ public class AddCommand extends Command {
         initialise(tasksList, ui, database);
 
         if (AddType.TODO.equals(addType)) {
-           addToDo();
+            addToDo();
         } else if (AddType.DEADLINE.equals(addType)) {
-           addDeadline();
+            addDeadline();
         } else if (AddType.EVENT.equals(addType)) {
-           addEvent();
+            addEvent();
         } else {
             throw new DukeException("Internal logic bug occurred!");
         }

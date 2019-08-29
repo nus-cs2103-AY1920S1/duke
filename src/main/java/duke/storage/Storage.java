@@ -5,9 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,17 +21,25 @@ public class Storage {
      * @param filePath file to be saved to
      */
     public Storage(String filePath) {
-        try{
+        try {
             this.tempFile = new File(filePath);
-            Stream<String> stream = Files.lines(Paths.get(filePath));
-            stream.forEach(storingStrings::add);
-        } catch (IOException e) {
-            e.printStackTrace();
+            BufferedReader br = new BufferedReader(new FileReader(tempFile));
+            String line = br.readLine();
+            while ( line != null) {
+                storingStrings.add(line);
+                line = br.readLine();
+            }
+            //Stream<String> stream = Files.lines(Paths.get(tempFile.getAbsolutePath()));
+            //stream.forEach(storingStrings::add);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
 
-    /**
+        /**
      * Saves given arrayList of Tasks to file
      * @param list ArrayList of Task
      */

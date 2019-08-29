@@ -6,7 +6,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String getDateTimeInfo() {
+    public String getDateTime() {
         return "";
     }
 

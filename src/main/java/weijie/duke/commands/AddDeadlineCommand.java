@@ -5,7 +5,10 @@ import weijie.duke.models.Deadline;
 import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
 import weijie.duke.responses.TaskResponse;
+import weijie.duke.utils.DateUtils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -16,15 +19,23 @@ public class AddDeadlineCommand extends AddCommand {
     }
 
     @Override
+    @SuppressWarnings("Duplicates")
     public TaskResponse execute(String... args) {
         String input = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
         String[] descriptionAndDate = input.split(" /by ");
 
         if (descriptionAndDate.length <= 1) {
-            return new TaskResponse(new DukeException("☹ OOPS!!! Must specify date/time for deadline"));
+            return new TaskResponse(new DukeException("☹ OOPS!!! Must specify date and time for deadline"));
         }
 
-        Task task = new Deadline(descriptionAndDate[0], descriptionAndDate[1]);
+        LocalDateTime dateTime;
+        try {
+            dateTime = LocalDateTime.parse(descriptionAndDate[1].trim(), DateUtils.DUKE_DATETIME_PARSE_FORMAT);
+        } catch (DateTimeParseException e) {
+            return new TaskResponse(new DukeException("☹ OOPS!!! Date and time must be in the format DD/MM/YYYY HHMM"));
+        }
+
+        Task task = new Deadline(descriptionAndDate[0], dateTime);
         repo.create(task);
 
         return new TaskResponse(getResponseFormat(), Collections.singletonList(task));

@@ -1,16 +1,20 @@
 package weijie.duke.models;
 
-public class Deadline extends Task {
-    private final String dateTimeInfo;
+import weijie.duke.utils.DateUtils;
 
-    public Deadline(String description, String dateTimeInfo) {
+import java.time.LocalDateTime;
+
+public class Deadline extends Task {
+    private final LocalDateTime dateTime;
+
+    public Deadline(String description, LocalDateTime dateTime) {
         super(description);
-        this.dateTimeInfo = dateTimeInfo;
+        this.dateTime = dateTime;
     }
 
     @Override
-    public String getDateTimeInfo() {
-        return "(by: " + dateTimeInfo + ")";
+    public String getDateTime() {
+        return "(by: " + dateTime.format(DateUtils.DUKE_DATETIME_OUTPUT_FORMAT) + ")";
     }
 
     @Override

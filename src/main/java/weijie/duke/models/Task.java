@@ -10,7 +10,7 @@ public abstract class Task {
     }
 
     public String getDescription() {
-        return getTaskIcon() + "[" + getStatusIcon() + "] " + description + " " + getDateTimeInfo();
+        return getTaskIcon() + "[" + getStatusIcon() + "] " + description + " " + getDateTime();
     }
 
     private String getStatusIcon() {
@@ -21,7 +21,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public abstract String getDateTimeInfo();
+    public abstract String getDateTime();
 
     public abstract String getTaskIcon();
 }

@@ -12,12 +12,12 @@ public class Task {
     public void markAsDone(){
         this.isDone = true;
     }
-    public String getListItem(){
-        return getStatusIcon() + " " + taskName;
-    }
-
     //returns the tick or cross
     public String getStatusIcon(){
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
+    }
+    @Override 
+    public String toString(){
+        return getStatusIcon() + " " + this.taskName;
     }
 }

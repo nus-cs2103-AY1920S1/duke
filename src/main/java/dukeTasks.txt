@@ -1,5 +1,3 @@
-T | 1 | meet parents
-D | 0 | return book | Sunday
-E | 1 | project meeting | Mon 2-4pm
-T | 0 | finish todo list
-D | 0 | return book | Sunday
+D | 0 | return book | 2nd of December 2019, 6pm
+E | 0 | attend party | 4th of June 2019, 6.30pm-10.30pm
+T | 0 | meet parents

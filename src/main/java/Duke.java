@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormatSymbols;
 
 public class Duke {
 
@@ -41,6 +42,59 @@ public class Duke {
         scan.close();
     }
 
+    public static String getMonth(String month) throws DukeException {
+        int monthIndex = Integer.parseInt(month);
+        if (monthIndex > 12) {
+            throw new DukeException("☹ OOPS!!! The month you inputted is not valid.");
+        }
+        return new DateFormatSymbols().getMonths()[monthIndex - 1];
+    }
+
+    public static void validateHour(int hour) throws DukeException {
+        if (hour > 24 || hour < 1) {
+            throw new DukeException("☹ OOPS!!! The time you inputted is not valid.");
+        }
+    }
+
+    public static void validateMinute(int minute) throws DukeException {
+        if (minute > 59 || minute < 0) {
+            throw new DukeException("☹ OOPS!!! The time you inputted is not valid.");
+        }
+    }
+
+    public static String parseTime(String timeDetail) throws DukeException {
+        int hour = (Integer.parseInt(timeDetail)/100);
+        validateHour(hour);
+        String actualHour = hour % 12 == 0 ? "12" : String.valueOf(hour % 12); 
+        int minute = Integer.parseInt(timeDetail) % 100;
+        validateMinute(minute);
+        String meridiem = hour >= 12 && hour < 24 ? "pm" : "am";
+        String processedMinute = minute == 0 ? "" : "." + String.valueOf(minute);
+        return actualHour + processedMinute + meridiem;
+    }
+
+    public static String parseDate(String dateDetail) throws DukeException {
+        String[] dateBreakup = dateDetail.split("/");
+        String month = getMonth(dateBreakup[1]);    
+        int lastDigitOfDay = Integer.parseInt(dateBreakup[0]) % 10;
+        String dayEnding = lastDigitOfDay == 1 ? "st" : lastDigitOfDay == 2 ? "nd" : 
+                lastDigitOfDay == 3 ? "rd" : "th";
+        return dateBreakup[0] + dayEnding + " of " + month + " " + dateBreakup[2]; 
+    }
+
+    public static String processDeadlineDate(String dateDetails) throws DukeException {
+        String date = dateDetails.split(" ")[0];
+        String time = dateDetails.split(" ")[1];
+        return parseDate(date) + ", " + parseTime(time);
+    }
+
+    public static String processEventDate(String dateDetails) throws DukeException {
+        String date = dateDetails.split(" ")[0];
+        String time = dateDetails.split(" ")[1];
+        String[] timeDetails = time.split("-");
+        return parseDate(date) + ", " + parseTime(timeDetails[0]) + "-" + parseTime(timeDetails[1]);
+    }
+
     public static void taskDone(int i, ArrayList<Task> list, File file) throws DukeException, IOException {
         try {
             list.get(i - 1).markAsDone();
@@ -62,7 +116,7 @@ public class Duke {
     public static void addTaskToFile(File file, Task task) throws IOException {
         String name = file.getName();
         FileWriter fw = new FileWriter(name, true);
-        fw.write(task.toStringForFile());
+        fw.write(task.toStringForFile() + System.lineSeparator());
         fw.close();
     }
 
@@ -87,6 +141,12 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (detail.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a " + detail[0] + " cannot be empty.");
+        }
+    }
+
+    public static void validateHour(String[] detail) throws DukeException {
+        if (detail.length != 2) {
+            throw new DukeException("☹ OOPS!!! The due date of a deadline must be specified.");
         }
     }
 
@@ -120,7 +180,7 @@ public class Duke {
             validateDeadlineDetails(detAsArr);
             detail = detAsArr[0];
             dueDetail = detAsArr[1];
-            task = new Deadline(detail, dueDetail);
+            task = new Deadline(detail, processDeadlineDate(dueDetail));
             list.add(task);
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task.toString());
@@ -129,7 +189,7 @@ public class Duke {
             validateEventDetails(detAsArr);
             detail = detAsArr[0];
             dueDetail = detAsArr[1];
-            task = new Event(detail, dueDetail);
+            task = new Event(detail, processEventDate(dueDetail));
             list.add(task);
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task);

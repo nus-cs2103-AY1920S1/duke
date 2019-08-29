@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class AddList {
     List<Mission> ls;
@@ -36,5 +39,33 @@ public class AddList {
 
     public void deleteMission(int index) {
         ls.remove(index);
+    }
+
+    public void saveToFile() {
+        try {
+            FileWriter fw = new FileWriter("duke.txt");
+            int counter = 1;
+            for (Mission a : ls) {
+                int x = a.state.contentEquals("✗") ? 0 : 1;
+                String str = a.type + "|" + x + "|" + a.content + (a.time==null ? "" : ("|" + a.time)) + "\n";
+                fw.write(str);
+        }
+        fw.close();
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+}
+
+    public void readFromFile() {
+        String path = "duke.txt";
+        try {
+            List<String> contents = Files.readAllLines(Paths.get(path));
+            for(String s : contents) {
+                // System.out.println("&&&&&&&&&" + s);
+                ls.add(Mission.newMission(s));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

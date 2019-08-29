@@ -4,6 +4,7 @@ public class Duke {
         int book = 1;
         Scanner sc = new Scanner(System.in);
         AddList adl = new AddList();
+        adl.readFromFile();
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -20,10 +21,12 @@ public class Duke {
                 System.out.println("Hope to see you again soon!");
                 System.out.println();
                 book = 0;
+                adl.saveToFile();
             } else if(in.contentEquals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 adl.printAllEvent();
                 System.out.println();
+                adl.saveToFile();
             } else if(subin1.contentEquals("done")) {
                 if(in.split(" ").length == 1) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -34,6 +37,7 @@ public class Duke {
                     adl.changeEvent(index - 1);
                     // System.out.print("\t");
                     adl.printEvent(index - 1);
+                    adl.saveToFile();
                 }
             } else if(subin1.contentEquals("delete")) {
                 if (in.split(" ").length == 1) {
@@ -46,6 +50,7 @@ public class Duke {
                     adl.deleteMission(index - 1);
                     counter -= 1;
                     System.out.println("Now you have " + counter + " tasks in the list.");
+                    adl.saveToFile();
                 }
             } else if(subin1.contentEquals("event") ||  subin1.contentEquals("deadline") || subin1.contentEquals("todo")) {
                 if(in.split(" ").length == 1) {
@@ -61,6 +66,7 @@ public class Duke {
                     System.out.println("Got it. I have added this task:");
                     adl.printEvent(counter - 1);
                     System.out.println("Now you have " + counter + " tasks in the list.");
+                    adl.saveToFile();
                 }
             }
             else {

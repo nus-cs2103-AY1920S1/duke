@@ -4,6 +4,7 @@ import task.Task;
 import task.TaskList;
 import task.TaskType;
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -173,6 +174,38 @@ public class Parser {
                 ui.getUserInput(this);
             }
             break;
+        case "find":
+            try {
+                String textToFind = userInput.split("find ")[1];
+                if (textToFind.trim().length() == 0) {
+                    throw new EmptyDescriptionException("The description cannot be empty.");
+                }
+                ArrayList<Task> matchingTasks = new ArrayList<>();
+                for (Task task : tasks) {
+                    if (task.getDescription().contains(textToFind)) {
+                        matchingTasks.add(task);
+                    }
+                }
+
+                if (matchingTasks.size() == 0) {
+                    System.out.println("I'm sorry, but I can't find any matching tasks :-(");
+                } else {
+                    System.out.print(LINE);
+                    System.out.println("     Here are the matching tasks in your list:");
+                    for (int i = 0; i < matchingTasks.size(); i++) {
+                        Task currentTask = matchingTasks.get(i);
+                        System.out.println("     " + Integer.toString(i + 1) + "." + currentTask.getTypeIcon()
+                                + currentTask.getStatusIcon() + " " + currentTask);
+                    }
+                    System.out.print(LINE);
+                }
+            } catch (EmptyDescriptionException e) {
+                System.out.print(LINE);
+                System.out.println("     ☹ OOPS!!! " + e);
+                System.out.print(LINE);
+                ui.getUserInput(this);
+            }
+        break;
         default:
             try {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");

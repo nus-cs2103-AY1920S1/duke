@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String description;
     protected boolean isDone;
+
     private static Ui ui = new Ui();
 
     public Task(String description) {
@@ -23,7 +24,6 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
-
 
     public static Task toTask(String s) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
@@ -46,7 +46,6 @@ public class Task {
                 return new Task(s.substring(7));
         }
     }
-
 
     public static String markStringDone(String taskString) {
         return taskString.replace("\u2718", "\u2713");

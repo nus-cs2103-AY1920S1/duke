@@ -8,6 +8,7 @@ public class Deadline extends Task {
         super(description);
         this.deadline = deadline;
     }
+
     public Deadline(String description, LocalDateTime deadline, boolean isDone) {
         super(description, isDone);
         this.deadline = deadline;
@@ -21,6 +22,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         TimeManager tm = new TimeManager();
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + tm.printTime(deadline) + " )\n";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description +
+                " (by: " + tm.printTime(deadline) + " )\n";
     }
 }

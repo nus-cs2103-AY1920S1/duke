@@ -1,7 +1,7 @@
 public class Ui {
 
-    public static final String LINE = "    ____________________________________________________________\n";
-    public static final String INDENT = "     ";
+    private static final String LINE = "    ____________________________________________________________\n";
+    private static final String INDENT = "     ";
 
     public void showLogo() {
         String logo = " ____        _        \n"

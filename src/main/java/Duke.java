@@ -1,6 +1,7 @@
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
-import java.lang.String;
 
 public class Duke {
     public static void main(String[] args) {
@@ -34,6 +35,14 @@ public class Duke {
                 for (int i=0; i<numOfItems; i++ ) {
                     System.out.println("\t\t" + listOfItems[i].toString() + "\n" );
                 }
+            }
+            else if (Objects.equals(wordSplit[0], "delete")) {
+                int numbering = Integer.parseInt((TempInputString.split(" "))[1]) - 1;
+                Task tempTask = listOfItems[numbering];
+                listOfItems = removeElements(listOfItems, listOfItems[numbering]);
+                numOfItems--;
+                System.out.println("\t\tNoted I have removed this task:\n\t\t" + tempTask.toString() + "\n");
+                System.out.println("\t\tYou have " + numOfItems + " items in the list now.");
             }
             else {
                 if (Objects.equals(wordSplit[0], "Deadline")){
@@ -83,6 +92,15 @@ public class Duke {
                 }
             }
         }
+    }
+    public static Task[] removeElements(Task[] input, Task deleteMe) {
+        List result = new LinkedList();
+
+        for(Task item : input)
+            if(!deleteMe.equals(item))
+                result.add(item);
+
+        return (Task[]) result.toArray(input);
     }
 }
 

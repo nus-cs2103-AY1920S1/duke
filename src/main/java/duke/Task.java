@@ -43,6 +43,13 @@ public abstract class Task {
     }
 
     /**
+     * @return task description
+     */
+    String getTaskInfo() {
+        return this.task;
+    }
+
+    /**
      * Formats task to be written in given file.
      * @return formatted string for writing in file.
      */

@@ -47,6 +47,13 @@ public class MessageGenerator {
     }
 
     /**
+     * @return String for header of finding matching tasks.
+     */
+    private String matchingTasks() {
+        return "Here are the matching tasks in your list:";
+    }
+
+    /**
      * @return String to greet user.
      */
     private String greeting() {
@@ -104,6 +111,14 @@ public class MessageGenerator {
      */
     void printList(List<String> list) {
         formatter.printFormat(listTasks(), list);
+    }
+
+    /**
+     * Prints matching tasks in a task list.
+     * @param list list of tasks in their string form.
+     */
+    void printMatchingList(List<String> list) {
+        formatter.printFormat(matchingTasks(), list);
     }
 
     /**

@@ -55,9 +55,9 @@ class TaskList {
      * Formats task list into list of strings for printing/writing.
      * @return List of Strings.
      */
-    private List<String> listify() {
+    private List<String> listify(List<Task> tasks) {
         List<String> list = new ArrayList<String>();
-        for (Task task: taskList) {
+        for (Task task: tasks) {
             if (task != null) {
                 list.add(task.toString());
             }
@@ -76,7 +76,7 @@ class TaskList {
      * Prints list of tasks using the message generator.
      */
     void printList() {
-        msgGenerator.printList(listify());
+        msgGenerator.printList(listify(this.taskList));
     }
 
     /**
@@ -117,6 +117,20 @@ class TaskList {
         } catch (DukeException e) {
             e.printError();
         }
+    }
+
+    /**
+     * Searches and prints matching tasks in task list.
+     * @param keyword word that task must contain to be printed.
+     */
+    void findMatchingTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task != null && task.getTaskInfo().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        msgGenerator.printMatchingList(listify(matchingTasks));
     }
 
 }

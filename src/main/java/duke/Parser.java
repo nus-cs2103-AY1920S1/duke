@@ -34,6 +34,8 @@ class Parser {
                 return new Command(CommandType.DONE, line);
             case "delete":
                 return new Command(CommandType.DELETE, line);
+            case "find":
+                return new Command(CommandType.FIND, line);
             default:
                 throw new InvalidCommandException();
             }
@@ -41,6 +43,17 @@ class Parser {
             e.printError();
         }
         return new Command();
+    }
+
+    /**
+     * Processes String to retrieve keyword for search.
+     * @param command command for finding matching tasks.
+     * @return keyword for matching tasks.
+     */
+    String getKeyword(Command command) {
+        String line = command.getDescription();
+        String[] description = line.split(" ");
+        return description[1];
     }
 
     /**

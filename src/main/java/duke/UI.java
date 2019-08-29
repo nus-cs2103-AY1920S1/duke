@@ -80,6 +80,9 @@ public class UI {
                 case DONE:
                     tasks.setDone(parser.getTaskNo(command));
                     break;
+                case FIND:
+                    tasks.findMatchingTasks(parser.getKeyword(command));
+                    break;
                 default:
                     throw new InvalidCommandException();
                 }

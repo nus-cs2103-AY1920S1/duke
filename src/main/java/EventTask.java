@@ -11,8 +11,8 @@ public class EventTask extends Task {
     @Override
     public String formattedString() {
         return "E | " + super.formattedString() + " | " + time.getDayOfMonth() + "/" + time.getMonthValue() + "/"
-                + time.getYear() + " " + String.format("%02d", time.getHour()) + String.format("%02d", time.getMinute())
-                + "\n";
+                + String.format("%04d", time.getYear()) + " " + String.format("%02d", time.getHour())
+                + String.format("%02d", time.getMinute()) + "\n";
     }
 
     @Override

@@ -11,13 +11,13 @@ public class DeadlineTask extends Task {
     @Override
     public String formattedString() {
         return "D | " + super.formattedString() + " | " + time.getDayOfMonth() + "/" + time.getMonthValue() + "/"
-                + time.getYear() + " " + String.format("%02d", time.getHour()) + String.format("%02d", time.getMinute())
-                + "\n";
+                + String.format("%04d", time.getYear()) + " " + String.format("%02d", time.getHour())
+                + String.format("%02d", time.getMinute()) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (at: " + time.getDayOfMonth() + " of " + time.getMonth() + ", "
+        return "[D]" + super.toString() + " (by: " + time.getDayOfMonth() + " of " + time.getMonth() + ", "
                 + time.getYear() + ", at " + String.format("%02d", time.getHour())
                 + String.format("%02d", time.getMinute()) + " hrs)";
     }

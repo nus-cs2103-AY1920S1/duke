@@ -4,4 +4,7 @@ public class DukeException extends Exception {
         super(s);
     }
 
+    public DukeException() {
+    }
+
 }

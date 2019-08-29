@@ -51,7 +51,8 @@ public class Parser {
             }
         case "find":
             try {
-                return new CommandFind(commandWords[1]);
+                String query = fullCommand.split(" ", 2)[1];
+                return new CommandFind(query);
             } catch (Exception e) {
                 throw new DukeException("Invalid search term.");
             }

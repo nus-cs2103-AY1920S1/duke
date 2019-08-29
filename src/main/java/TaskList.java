@@ -34,6 +34,21 @@ class TaskList {
     }
 
     /**
+     * Return a new TaskList filtered with the searched task.
+     * @param findStr String to be searched for in the tasks.
+     * @return TaskList where only the filtered tasks are included.
+     */
+    public TaskList findTasks(String findStr) {
+        ArrayList<Task> newTasks = new ArrayList<Task>();
+        for (Task task : this.tasks) {
+            if (task.getName().contains(findStr)) {
+                newTasks.add(task);
+            }
+        }
+        return new TaskList(newTasks);
+    }
+
+    /**
      * Mark a task as done in the list.
      * @param index Index of task to mark done.
      * @return Task marked as done.

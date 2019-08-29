@@ -18,6 +18,8 @@ public class Parser {
                     tasks.doneTask(words);
                 } else if (action.equals("delete")) {
                     tasks.deleteTask(words);
+                } else if (action.equals("find")) {
+                    tasks.findTask(words);
                 } else if (action.equals("todo")) {
                     tasks.addTodo(words);
                 } else if (action.equals("deadline")) {

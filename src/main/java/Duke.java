@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Represents a duke object.
+ */
 public class Duke {
 
     private Storage storage;
@@ -26,6 +29,9 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         try {
             Scanner sc = new Scanner(System.in);

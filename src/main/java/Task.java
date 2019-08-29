@@ -2,6 +2,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Encapsulates task as the abstract class.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

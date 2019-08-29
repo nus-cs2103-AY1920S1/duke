@@ -1,5 +1,8 @@
 import java.util.Date;
 
+/**
+ * Represents a deadline task object.
+ */
 public class Deadline extends Task {
     protected Date by;
 

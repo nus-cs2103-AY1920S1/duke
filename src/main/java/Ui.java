@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a Ui object to handle user interaction.
+ */
 public class Ui {
 
     public void showWelcome() {

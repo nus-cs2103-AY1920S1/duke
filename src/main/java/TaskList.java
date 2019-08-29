@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a tasklist object which handles list update.
+ */
 public class TaskList {
 
     static ArrayList<Task> list;

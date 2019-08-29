@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Represents a parser to parse user command.
+ */
 public class Parser {
     public static void readList(Scanner sc, TaskList tasks) {
         while(sc.hasNext()) {

@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a todo task object.
+ */
 public class ToDo extends Task {
     protected String by;
 

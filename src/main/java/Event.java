@@ -1,5 +1,8 @@
 import java.util.Date;
 
+/**
+ * Represents an event task object.
+ */
 public class Event extends Task {
     protected Date at;
 

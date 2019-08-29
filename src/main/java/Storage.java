@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a storage object to handle file input/output.
+ */
 public class Storage {
     private String filepath;
 

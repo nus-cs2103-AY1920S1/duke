@@ -5,11 +5,18 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList class store the task arraylist and allow
+ * update, modify, delete and add of task by user.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class TaskList {
-    /** Array list of task */
+    /** Array list of task. */
     public List<Task> task;
 
-    /** Total number of task */
+    /** Total number of task. */
     public int itemNo;
 
     /**

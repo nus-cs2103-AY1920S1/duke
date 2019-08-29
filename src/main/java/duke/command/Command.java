@@ -5,14 +5,21 @@ import duke.component.Ui;
 import duke.component.TaskList;
 import duke.database.Storage;
 
+/**
+ * This Command class is the abstract class with execute method
+ * and isExit() method.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public abstract class Command {
-    /** Task enter by user */
+    /** Task enter by user. */
     protected String input;
 
-    /** The type of task enter by user */
+    /** The type of task enter by user. */
     protected String type;
 
-    /** The exit status */
+    /** The exit status. */
     protected boolean exit = false;
 
     /**
@@ -25,7 +32,13 @@ public abstract class Command {
         this.type = type;
     }
 
-    /** Execute method */
+    /**
+     * Abstract method for executed method.
+     * @param tasks List of task.
+     * @param ui Ui of Duke Program.
+     * @param storage Database of the Duke Program.
+     * @throws DukeException If execute method fail to run the intended method.
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**

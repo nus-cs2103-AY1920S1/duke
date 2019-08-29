@@ -11,6 +11,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This Deadline Command class get the input of the task description
+ * and execute the deadline method to add deadline for task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class DeadlineCommand extends Command {
     /**
      * Constructor of DeadlineCommand class.
@@ -36,17 +43,20 @@ public class DeadlineCommand extends Command {
     /**
      * "deadline" command to enter deadline description and deadline time.
      * @param data deadline description and deadline of task.
+     * @param tasks Task arraylist that contain list of task.
+     * @param ui Ui of Duke Program.
      * @throws DukeException If description and time of deadline is empty.
      */
     public static void deadline(String data, TaskList tasks, Ui ui) throws DukeException {
         if (data.isEmpty()) {
-            throw new DukeException(ui.INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a deadline cannot be empty.");
+            throw new DukeException(ui.INDENT_COMMENT
+                    + "\u2639 OOPS !!! " + "The description of a deadline cannot be empty.");
         }
 
         String[] result = data.split("/by");
 
         if (result.length <= 1) {
-            throw new DukeException(ui.INDENT_COMMENT +"\u2639 OOPS !!! " + "Deadline is needed.");
+            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Deadline is needed.");
         }
 
         String achieve = result[0].trim();
@@ -55,15 +65,16 @@ public class DeadlineCommand extends Command {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
         DateFormat outputformat = new SimpleDateFormat("d MMMM yyyy',' h:mm a");
         Date date = null;
-        String formatted_Date = null;
+        String formattedDate = null;
         try {
-            date= df.parse(timeline);
-            formatted_Date = outputformat.format(date);
-            tasks.getTask().add(new Deadline(achieve, formatted_Date));
+            date = df.parse(timeline);
+            formattedDate = outputformat.format(date);
+            tasks.getTask().add(new Deadline(achieve, formattedDate));
             System.out.println(ui.INDENT_COMMENT + "Got it. I've added this task: ");
             System.out.println(ui.INDENT_TASK + tasks.getTask().get(tasks.getItemNo()));
             tasks.setItemNo(tasks.getItemNo() + 1);
-            System.out.println(ui.INDENT_COMMENT + "Now you have " + tasks.getItemNo() + " tasks in the list.");
+            System.out.println(ui.INDENT_COMMENT + "Now you have "
+                    + tasks.getItemNo() + " tasks in the list.");
         } catch (ParseException pe) {
             System.out.println(ui.INDENT_COMMENT + "Invalid Data and Time Format");
         }

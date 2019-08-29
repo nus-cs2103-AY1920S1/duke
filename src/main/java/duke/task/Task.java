@@ -1,10 +1,10 @@
 package duke.task;
 
 public class Task {
-    /** Description of the task */
+    /** Description of the task. */
     protected String description;
 
-    /** The status of the task */
+    /** The status of the task. */
     protected boolean isDone;
 
     /**

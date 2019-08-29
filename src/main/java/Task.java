@@ -17,10 +17,16 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Marks this task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * Returns the string presentation of this task in hard disk.
+     */
     public abstract String toStringForHardDisk();
 
     protected Date parseDate(String date) throws DukeException {

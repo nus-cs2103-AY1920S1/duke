@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -5,7 +6,7 @@ public class Duke {
     /**
      * This class tests for chatbot Duke.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,6 +20,7 @@ public class Duke {
         ArrayList<Task> arr = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         int i = 0;
+        //PrintWriter writer = new PrintWriter("duke.txt", "UTF-8");
 
         while(sc.hasNext()) {
             String input = sc.next();
@@ -26,10 +28,17 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) { //go through the arrayList
+                PrintWriter writer = new PrintWriter("duke.txt", "UTF-8");
                 System.out.println("Here are the tasks in your list: ");
+                String output = "";
                 for (int j = 0; j < arr.size(); j++) {
                     System.out.println((j + 1) + "." + arr.get(j));
+                    output += ((j+1) + "." + arr.get(j));
+                    output += "\n";
                 }
+                //PrintWriter writer = new PrintWriter("duke.txt", "UTF-8"));
+                writer.print(output);
+                writer.close();
             } else if (input.equals("done")) {
                 int num = sc.nextInt();
                 System.out.println("Nice! I've marked this task as done: ");
@@ -45,6 +54,7 @@ public class Duke {
                 System.out.println(" " + arr.get(i));
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
                 i++;
+                //writer.println("" + arr.get(i));
             } else if (input.equals("deadline")) {
                 String rem = sc.nextLine();
                 String[] descriptionNDate = rem.split("/by");
@@ -55,6 +65,7 @@ public class Duke {
                 System.out.println(" " + arr.get(i));
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
                 i++;
+                //writer.println(arr.get(i));
             } else if (input.equals("event")) {
                 String rest = sc.nextLine();
                 String[] descriptionNAt = rest.split("/at");
@@ -65,6 +76,7 @@ public class Duke {
                 System.out.println(" " + arr.get(i));
                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
                 i++;
+                //writer.println(arr.get(i));
             } else if (input.equals("delete")) {
                 int deleteNum = sc.nextInt();
                 Task toRemove = arr.get(deleteNum - 1);

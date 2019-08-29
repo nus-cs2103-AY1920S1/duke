@@ -1,9 +1,5 @@
 import java.time.LocalDateTime;
 
-/**
- * Represents a Task with a deadline time attached
- */
-
 public class Deadline extends Task {
     private String time;
     private LocalDateTime localDateTime;

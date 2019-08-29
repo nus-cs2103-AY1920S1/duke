@@ -6,22 +6,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * A storage class to handle loading and saving user data
- */
-
 public class Storage {
-    private String filePath;
+    String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    /**
-     * Add initial stored tasks into ArrayList and return it
-     *
-     * @return Returns an ArrayList containing the stored data
-     */
+    /* Add initial stored tasks into ArrayList and return it */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -56,9 +48,6 @@ public class Storage {
         return tasks;
     }
 
-    /**
-     * Save stored tasks into text file
-     */
     public void save(TaskList tasks) {
         try {
             PrintWriter out = new PrintWriter(new File(filePath));

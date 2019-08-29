@@ -10,12 +10,13 @@ import java.util.Scanner;
  */
 public class Ui {
     /** A line used to enclose message to be printed. 79 characters, excluding \n. Line is of length 75 characters. **/
-    public static final String LINE = "    ___________________________________________________________________________\n";
+    public static final String LINE = "    ___________________________________________________________________________"
+            + "\n";
     /** 5 spaces, for first level indentation. **/
     public static final String INDENTATION_LVL1 = "     ";
     /** 7 spaces, for second level indentation (i.e. more inner). */
     public static final String INDENTATION_LVL2 = "       ";
-    /** The number of characters allowed in each printed line */
+    /** The number of characters allowed in each printed line. */
     public static final int CHARACTERS_LIMIT = 73;
     private Scanner scanner;
 
@@ -109,7 +110,7 @@ public class Ui {
         String indentation = getIndentationString(indentationLength);
 
         // Remove the spaces in front of the given string first.
-        String string_to_be_treated = string.trim();
+        String stringToBeTreated = string.trim();
 
         // Calculate the character limits of a line after taking the indentation into account.
         int lengthLimit = getLengthLimit(indentationLength);
@@ -117,15 +118,15 @@ public class Ui {
             // Split the front part of the string until the character that the string becomes too long,
             // then append that front part to the string builder.
             builder.append(indentation);
-            builder.append(string_to_be_treated.substring(0, lengthLimit));
+            builder.append(stringToBeTreated.substring(0, lengthLimit));
             builder.append("\n");
 
             // Update the string to be treated to be the remaining part of the string.
             // Stops processing the string if the length of the string does not exceed the characters limit.
-            string_to_be_treated = string_to_be_treated.substring(lengthLimit);
-            if (string_to_be_treated.length() <= lengthLimit) {
+            stringToBeTreated = stringToBeTreated.substring(lengthLimit);
+            if (stringToBeTreated.length() <= lengthLimit) {
                 builder.append(indentation);
-                builder.append(string_to_be_treated);
+                builder.append(stringToBeTreated);
                 builder.append("\n");
                 break;
             }

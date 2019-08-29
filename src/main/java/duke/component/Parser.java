@@ -19,7 +19,7 @@ public class Parser {
      * @param input the input from the console.
      * @return the appropriate action to the input, encapsulated in a Command object.
      * @throws DukeException if the parser cannot understand the user's input, i.e. the user's input or command
-     * is not supported by Duke bot.
+     *     is not supported by Duke bot.
      */
     public Command parse(String input) throws DukeException {
         if (input.startsWith("todo")) {

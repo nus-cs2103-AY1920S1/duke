@@ -36,7 +36,7 @@ public class TaskList {
      * @param i index of the task to be removed.
      * @return The task that has been removed from the list.
      * @throws DukeException if the index given is < 0 or > size - 1, where size is the
-     * number of tasks in the list.
+     *     number of tasks in the list.
      */
     public Task removeTask(int i) throws DukeException {
         if (!indexIsValid(i)) {

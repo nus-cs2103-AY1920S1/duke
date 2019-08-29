@@ -8,7 +8,7 @@ public class DukeException extends Exception {
     /**
      * The prefix of the error message of all DukeException objects.
      */
-    public static final String PREFIX =  "\u2639  OOPS!!!";
+    public static final String PREFIX =  "\u2639  OOPS!!!"; // The unicode is a sad face symbol.
 
     public DukeException() {
         super(String.format("%s DukeException occurs!", PREFIX));

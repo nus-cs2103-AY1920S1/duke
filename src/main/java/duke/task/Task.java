@@ -19,7 +19,7 @@ public abstract class Task {
      */
     protected Task(String s) {
         title = s;
-        status = "\u2717";
+        status = "\u2717"; // A cross symbol indicating the task has not been done.
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class Task {
      */
     public Task markAsDone() {
         isDone = true;
-        status = "\u2713";
+        status = "\u2713"; // A tick symbol indicating the task is done.
 
         return this;
     }

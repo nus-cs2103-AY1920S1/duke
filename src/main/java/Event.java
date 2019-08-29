@@ -14,7 +14,7 @@ public class Event extends Task {
         datas[0] = "E";
         datas[1] = isDone ? "1" : "0";
         datas[2] = description;
-        datas[3] = at;
+        datas[3] = dateToStringForHardDisk(at);
 
         return String.join(" | ", datas);
     }

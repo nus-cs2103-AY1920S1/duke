@@ -31,6 +31,10 @@ public abstract class Task {
         }
     }
 
+    protected String dateToStringForHardDisk(Date date) {
+        return parser.format(date);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

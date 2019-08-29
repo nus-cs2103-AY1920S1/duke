@@ -14,7 +14,7 @@ public class Deadline extends Task {
         datas[0] = "D";
         datas[1] = isDone ? "1" : "0";
         datas[2] = description;
-        datas[3] = by;
+        datas[3] = dateToStringForHardDisk(by);
 
         return String.join(" | ", datas);
     }

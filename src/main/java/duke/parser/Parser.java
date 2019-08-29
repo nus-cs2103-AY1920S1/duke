@@ -1,19 +1,19 @@
 package duke.parser;
 
-import duke.Duke;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
+
 import duke.data.tasks.Deadline;
 import duke.data.tasks.Event;
 import duke.data.tasks.Todo;
-import duke.exceptions.DukeException;
 
 import java.util.regex.Pattern;
 import java.text.ParseException;
@@ -51,6 +51,9 @@ public class Parser {
             break;
         case ExitCommand.COMMAND_WORD:
             command = prepareExitCommand();
+            break;
+        case FindCommand.COMMAND_WORD:
+            command = prepareFindCommand(input);
             break;
         case ListCommand.COMMAND_WORD:
             command = prepareListCommand();
@@ -179,6 +182,21 @@ public class Parser {
         } catch (ParseException e) {
             String errorMessage = "Please enter a valid date format.\n"
                     + "Date and time: dd/mm/YYYY HH:mm:ss\n";
+            return new IncorrectCommand(errorMessage);
+        }
+    }
+
+    /**
+     * Prepares and returns a find command based on the specified input.
+     * @param input The specified input.
+     * @return A find command based on the specified input.
+     */
+    private static Command prepareFindCommand(String input) {
+        try {
+            String arguments = getArguments(input);
+            return new FindCommand(arguments);
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+            String errorMessage = "find command format: find <keyword>\n";
             return new IncorrectCommand(errorMessage);
         }
     }

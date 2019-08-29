@@ -60,4 +60,20 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Returns a sub task list containing the specified keyword.
+     * @param keyword The specified keyword.
+     * @return A sub task list containing the specified keyword.
+     */
+    public TaskList subTaskListContainingKeyWord(String keyword) {
+        TaskList subTaskList = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().contains(keyword)) {
+                subTaskList.add(task);
+            }
+        }
+        return subTaskList;
+    }
+
 }

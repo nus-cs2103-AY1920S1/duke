@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.DeadlineCommand;
 import duke.command.ToDoCommand;
+import duke.command.FindCommand;
 import duke.error.DukeException;
 import duke.error.InvalidTaskArgumentException;
 import duke.error.InvalidIndexException;

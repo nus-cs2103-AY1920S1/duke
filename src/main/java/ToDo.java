@@ -4,6 +4,7 @@ public class ToDo extends Task {
         this.label = "T";
     }
 
+    @Override
     public String toString() {
         return "[" + this.label + "]" + this.getStatusIcon() + this.description;
     }

@@ -44,16 +44,16 @@ class TaskListTest {
     @org.junit.jupiter.api.Test
     void done_integerInput_success() {
         assertEquals("[E][\u2713] testing (at: tomorrow)", new TaskList(List.of(new Event("testing", "tomorrow"),
-                new DeadLine("testing2", "tomorrow"), new ToDo("testing3"))).done(1).toString());
+                new Deadline("testing2", "tomorrow"), new ToDo("testing3"))).done(1).toString());
         assertEquals("[T][\u2713] testing3", new TaskList(List.of(new Event("testing", "tomorrow"),
-                new DeadLine("testing2", "tomorrow"), new ToDo("testing3"))).done(3).toString());
+                new Deadline("testing2", "tomorrow"), new ToDo("testing3"))).done(3).toString());
     }
 
     @org.junit.jupiter.api.Test
     void delete_integerInput_success() {
         List<Task> ls = new ArrayList<>();
         ls.add(new Event("testing", "tomorrow"));
-        ls.add(new DeadLine("testing2", "tomorrow"));
+        ls.add(new Deadline("testing2", "tomorrow"));
         ls.add(new ToDo("testing3"));
         assertEquals("[E][\u2718] testing (at: tomorrow)", new TaskList(ls).delete(1).toString());
         assertEquals("[T][\u2718] testing3", new TaskList(ls).delete(2).toString());
@@ -63,7 +63,7 @@ class TaskListTest {
     void generateInfo() {
         List<Task> ls = new ArrayList<>();
         ls.add(new Event("testing", "tomorrow"));
-        ls.add(new DeadLine("testing2", "tomorrow"));
+        ls.add(new Deadline("testing2", "tomorrow"));
         ls.add(new ToDo("testing3"));
         assertEquals("E | 0 | testing | tomorrow\n" +
                 "D | 0 | testing2 | tomorrow\n" +

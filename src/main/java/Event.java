@@ -5,7 +5,9 @@ public class Event extends Task {
         this.label = "E";
     }
 
+    @Override
     public String toString() {
         return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (at: " + this.time + ")";
     }
+
 }

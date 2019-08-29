@@ -16,13 +16,14 @@ public class Ui {
     }
 
     public void list(TaskList tasks) {
-        //get the list of tasks in the arraylist
+        // Get the list of tasks in the Arraylist
         String listOfTasks = "Here are the tasks in your list:\n     ";
         for (int i = 0; i < tasks.getSize(); i++) {
             listOfTasks += (i + 1) + "." + tasks.getElement(i);
             if (i != tasks.getSize() - 1) listOfTasks += "\n     ";
         }
-        this.response = listOfTasks; //update response
+        // Update response
+        this.response = listOfTasks;
         getResponse();
     }
 
@@ -33,20 +34,22 @@ public class Ui {
     }
 
     public void greet() {
-        //update response
+        // Update response
         this.response = "Hello! I'm Duke\n" +
                 "     What can I do for you?";
         getResponse();
     }
 
     public void done(Task task) {
-        this.response = "Nice! I've marked this task as done:\n       " + task; //update response
+        // Update response
+        this.response = "Nice! I've marked this task as done:\n       " + task;
         getResponse();
     }
 
     public void delete(Task task, TaskList tasks) {
+        // Update response
         this.response = this.response = "Noted. I've removed this task: \n       " + task
-                + "\n     Now you have " + tasks.getSize() + " tasks in the list."; //update response
+                + "\n     Now you have " + tasks.getSize() + " tasks in the list.";
         getResponse();
     }
 }

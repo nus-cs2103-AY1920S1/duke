@@ -1,4 +1,5 @@
 public class Task {
+
     private boolean isDone;
     protected String description;
     protected String time;
@@ -36,11 +37,15 @@ public class Task {
     }
 
     public void mark() {
-        if (!isDone) this.isDone = true; //update status of task
+        // Update status of task
+        if (!isDone) {
+            this.isDone = true;
+        }
     }
 
     protected String getStatusIcon() {
-        return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
+        // Return tick or X symbols
+        return (isDone ? "[\u2713] " : "[\u2718] ");
     }
 
 }

@@ -17,6 +17,8 @@ public class Parser {
             String todo = "todo";
             if (commandSplit[0].equalsIgnoreCase("done")) {
                 return new DoneCommand(stringCommand);
+            } else if (commandSplit[0].equalsIgnoreCase("find")) {
+                return new FindCommand(stringCommand);
             } else if (commandSplit[0].equalsIgnoreCase("delete")) {
                 return new DeleteCommand(stringCommand);
             } else if (commandSplit[0].equalsIgnoreCase(deadline) || commandSplit[0].equalsIgnoreCase(event)

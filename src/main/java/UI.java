@@ -64,4 +64,13 @@ public class UI {
     public void showLoadingError() {
         System.out.println("Error, file not found");
     }
+
+    public void printFindMessage(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+        for (Task t : tasks) {
+            System.out.println(count + "." + t.toString());
+            count++;
+        }
+    }
 }

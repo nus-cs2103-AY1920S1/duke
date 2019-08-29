@@ -1,6 +1,5 @@
 package components;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ui {
@@ -11,6 +10,8 @@ public class Ui {
 
     /**
      * Prints a string in blue.
+     *
+     * @param str is the string to print.
      */
     public static void print(String str) {
         System.out.println(ANSI_BLUE + str + ANSI_RESET);
@@ -31,6 +32,9 @@ public class Ui {
         print("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Closes the scanner.
+     */
     public void closeUi() {
         print("Bye. Hope to see you again soon!");
         scanner.close();
@@ -43,6 +47,6 @@ public class Ui {
 
 
     public void showLine() {
-        print("_________________________________");
+        print("_______________________________________________");
     }
 }

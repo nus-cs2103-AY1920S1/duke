@@ -1,14 +1,8 @@
 import commands.Command;
 import components.Parser;
 import components.Storage;
-import components.Ui;
 import components.TaskList;
-import tasks.Task;
-import tasks.TaskBuilder;
-import tasks.TaskType;
-import tasks.ToDo;
-
-import java.util.ArrayList;
+import components.Ui;
 
 public class Duke {
     private Storage storage;

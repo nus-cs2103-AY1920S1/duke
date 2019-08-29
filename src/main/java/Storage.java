@@ -18,29 +18,41 @@ public class Storage {
         this.f = new File(filepath);
     }
 
-    public void saveToFile(ArrayList<Task> allTasksForStorage) throws IOException {
-        Files.deleteIfExists(Paths.get(Duke.saveFilePath));
-        FileWriter fw = new FileWriter(Duke.saveFilePath, true);
+    public void save(TaskList allTasks) throws DukeException {
+        try {
+            Files.deleteIfExists(Paths.get(Duke.saveFilePath));
+            FileWriter fw = new FileWriter(Duke.saveFilePath, true);
 
-        for (Task t : allTasksForStorage) {
-            fw.write(t.getStorageFormat() + "\n");
+            ArrayList<Task> allTasksArrList = allTasks.getArrayList();
+            for (Task t : allTasksArrList) {
+                fw.write(t.getStorageFormat() + "\n");
+            }
+
+            fw.close();
+        }
+        catch (IOException e) {
+            throw new DukeException("Could not save to file!");
         }
 
-        fw.close();
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException, ParseException {
-        Scanner sc = new Scanner(this.f);
-        ArrayList<Task> allStoredTasks = new ArrayList<Task>();
-        while (sc.hasNext()) {
-            Task t = generateSavedTask(sc.nextLine());
-            allStoredTasks.add(t);
+    public TaskList load() throws DukeException {
+        try {
+            Scanner sc = new Scanner(this.f);
+            ArrayList<Task> allStoredTasks = new ArrayList<Task>();
+            while (sc.hasNext()) {
+                Task t = generateSavedTask(sc.nextLine());
+                allStoredTasks.add(t);
+            }
+
+            return new TaskList(allStoredTasks);
         }
-
-        return allStoredTasks;
+        catch (FileNotFoundException e) {
+            throw new DukeException("No existing tasks found!");
+        }
     }
 
-    private Task generateSavedTask(String nextLine) throws ParseException {
+    private Task generateSavedTask(String nextLine) throws DukeException {
         String[] s = nextLine.split("\\|");
         String command = s[0].trim();
         Task t = new Task("Uninitialised Task");
@@ -72,38 +84,39 @@ public class Storage {
     }
 
     public static void main(String[] args) {
-        try {
-            Storage store = new Storage(Duke.saveFilePath);
-            ArrayList<Task> allStoredTasks = store.load();
-            for (Task t : allStoredTasks) {
-                System.out.println(t);
-            }
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("file not found!");
-        }
-        catch (ParseException e) {
-            System.out.println("Invalid date format: " + e.getMessage());
-        }
-
-        try {
-            Task t1 = new ToDo("Return Library Books");
-            t1.markAsDone();
-            Task t2 = new Event("Project Meeting", "26/02/1997 18:00", "26/02/1997 22:00");
-            Task t3 = new Deadline("Complete Project Work", "26/02/1997 18:00");
-            ArrayList<Task> allTasks = new ArrayList<>();
-            allTasks.add(t1);
-            allTasks.add(t2);
-            allTasks.add(t3);
-            Storage s = new Storage(Duke.saveFilePath);
-            s.saveToFile(allTasks);
-        }
-        catch (IOException e) {
-            System.out.println("Problem!");
-        }
-        catch (ParseException e){
-            System.out.println("Unable to parse dates!");
-        }
+        System.out.println("testing");
+//        try {
+//            Storage store = new Storage(Duke.saveFilePath);
+//            ArrayList<Task> allStoredTasks = store.load();
+//            for (Task t : allStoredTasks) {
+//                System.out.println(t);
+//            }
+//        }
+//        catch (FileNotFoundException e) {
+//            System.out.println("file not found!");
+//        }
+//        catch (ParseException e) {
+//            System.out.println("Invalid date format: " + e.getMessage());
+//        }
+//
+//        try {
+//            Task t1 = new ToDo("Return Library Books");
+//            t1.markAsDone();
+//            Task t2 = new Event("Project Meeting", "26/02/1997 18:00", "26/02/1997 22:00");
+//            Task t3 = new Deadline("Complete Project Work", "26/02/1997 18:00");
+//            ArrayList<Task> allTasks = new ArrayList<>();
+//            allTasks.add(t1);
+//            allTasks.add(t2);
+//            allTasks.add(t3);
+//            Storage s = new Storage(Duke.saveFilePath);
+//            s.saveToFile(allTasks);
+//        }
+//        catch (IOException e) {
+//            System.out.println("Problem!");
+//        }
+//        catch (ParseException e){
+//            System.out.println("Unable to parse dates!");
+//        }
     }
 
 }

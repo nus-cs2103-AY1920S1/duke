@@ -3,9 +3,15 @@ import java.text.ParseException;
 public class Deadline extends Task {
     private DukeDate deadline;
 
-    public Deadline(String description, String deadline) throws ParseException {
+    public Deadline(String description, String deadline) throws DukeException {
         super(description);
-        this.deadline = new DukeDate(deadline);
+        try {
+            this.deadline = new DukeDate(deadline);
+        }
+        catch (ParseException e) {
+            throw new DukeException("Unable to created Deadline object. Time in invalid format: " + e.getMessage());
+        }
+
     }
 
     public String toString() {

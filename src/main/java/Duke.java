@@ -1,270 +1,76 @@
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<Task> tasks;
-    static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    Ui ui;
+    ExceptionHandler exceptionHandler;
+    Storage storage;
+    TaskList taskList;
 
     public Duke() {
-        IOHandler ioHandler = new IOHandler();
+        this.ui = new Ui();
+        this.exceptionHandler = new ExceptionHandler();
+        this.storage = new Storage("C:\\Users\\NINGS\\OneDrive\\Documents\\duke\\data");
+    }
 
+    void run() {
         try {
-            tasks = ioHandler.readSaveFile();
+            taskList = new TaskList(storage.readSaveFile(), storage);
         } catch (IOException e) {
-            System.out.println("Something went wrong while reading save file... Continuing...");
+            taskList = new TaskList(storage);
         }
-    }
-    
-    private String makeSpace(int n) {
-        StringBuilder str = new StringBuilder();
 
-        for (int i = 0; i < n; i++) {
-            str.append(' ');
-        }
-        return str.toString();
-    }
-    
-    public void greet() {
-        System.out.print(HORIZONTAL_LINE);
-        
-        String logo = makeSpace(5) + " ____        _        \n"
-                + makeSpace(5) + "|  _ \\ _   _| | _____ \n"
-                + makeSpace(5) + "| | | | | | | |/ / _ \\\n"
-                + makeSpace(5) + "| |_| | |_| |   <  __/\n"
-                + makeSpace(5) + "|____/ \\__,_|_|\\_\\___|\n";
-
-        String welcomeMessage;
-
-        if (tasks.size() == 0) {
-            welcomeMessage = String.format("%s\n%sHello! I'm Duke!\n%sWhat can I do for you?", logo, makeSpace(5), 
-                    makeSpace(5));
+        if (!taskList.hasTask()) {
+            ui.welcome();
         } else {
-            welcomeMessage = String.format("%s\n%sHello! Welcome back!\n", logo, makeSpace(5))
-            + String.format("%sCarrying off from where you left behind the last time...", makeSpace(5));
-        }
-        
-        System.out.printf("%s\n%s\n", welcomeMessage, HORIZONTAL_LINE);
+            ui.welcomeBack();
 
-        if (tasks.size() > 0) {
-            listAllTasks();
-            System.out.println(HORIZONTAL_LINE);
-        }
-    }
-
-    public void exit() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.printf("%sBye! Hope to see you again soon! \u263A\n", makeSpace(5));
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    public void evaluate(String instruction) throws VoidDukeCommand, IncorrectDukeCommand, IOException {
-        System.out.println(HORIZONTAL_LINE);
-
-        Scanner userInput = new Scanner(instruction);
-        String command;
-
-        if (userInput.hasNext()) {
-            command = userInput.next();
-        } else {
-            userInput.close();
-            throw new VoidDukeCommand();
-        }
-
-        String errorMessage = null;
-
-        if (command.equals("list")) {
-
-            if (userInput.hasNext()) {
-                errorMessage = makeSpace(5) + "The command \"list\" should not have anything after!\n"
-                        + makeSpace(5) + "Please remove any additional words!";
-            } else {
-                listAllTasks();
+            try {
+                taskList.listAlltasks();
+            } catch (DukeException e) {
+                exceptionHandler.showDukeError(e);
             }
 
-        } else if (command.equals("bye")) {
-
-            if (userInput.hasNext()) {
-                errorMessage = makeSpace(5) + "The command \"bye\" should not have anything after!\n"
-                        + makeSpace(5) + "Do you really intend to quit?";
-            } else {
-                userInput.close();
-                return;
-            }
-
-        } else if (command.equals("done") || command.equals("delete")) {
-            int taskNumber;
-
-            if (userInput.hasNextInt()) {
-                taskNumber = userInput.nextInt();
-
-                if (taskNumber <= 0) {
-                    errorMessage = String.format("%sNumber cannot be negative!", makeSpace(5));
-                } else if (tasks.size() == 0) {
-                    errorMessage = String.format("%sYou don't have any tasks yet!", makeSpace(5));
-                } else if (taskNumber > tasks.size()) {
-                    errorMessage = String.format("%sYou don't have that many tasks!", makeSpace(5));
-                } else {
-                    switch (command) {
-                    case "done":
-                        markTaskAsDone(taskNumber - 1);
-                        break;
-                    case "delete":
-                        delete(taskNumber - 1);
-                        break;
-                    default:
-                        break;
-                    }
-                }
-
-            } else {
-                errorMessage = makeSpace(5) + "Please input a non-negative Integer after the \"done\" command!\n"
-                            + makeSpace(5) + "Also do ensure that the Integer is not out of range!";
-            }
-
-        } else if (command.equals("todo")) {
-
-            if (userInput.hasNext()) {
-                String details = userInput.nextLine().strip();
-                makeNewTodo(details);
-            } else {
-                errorMessage = makeSpace(5) + "The description of a todo cannot be empty!";
-            }
-
-        } else if (command.equals("deadline")) {
-            if (userInput.hasNext()) {
-                
-                if (instruction.contains(" by ")) {
-                    String[] contentDateTime = userInput.nextLine().strip().split(" by ");
-
-                    if (contentDateTime.length == 0 || contentDateTime.length == 1) {
-                        errorMessage = makeSpace(5) + "You are missing the details/date&time of your Deadline!";
-                    } else if (contentDateTime[0].isBlank()) {
-                        errorMessage = makeSpace(5) + "The details of your deadline cannot be empty!";
-                    } else if (contentDateTime[1].isBlank()) {
-                        errorMessage = makeSpace(5) + "The date/time of your deadline cannot be empty!";
-                    } else {
-                        String taskDescription = contentDateTime[0].strip();
-                        String dateTime = contentDateTime[1].strip();
-
-                        makeNewDeadline(taskDescription, dateTime);
-                    }
-                } else {
-                    errorMessage = makeSpace(5) + "Sorry but I can't seem to detect the due date of the deadline!";
-                }
-
-            } else {
-                errorMessage = makeSpace(5) + "The description of a Deadline cannot be empty!";
-            }
-
-        }  else if (command.equals("event")) {
-            if (userInput.hasNext()) {
-                
-                if (instruction.contains(" at ")) {
-                    String[] contentDateTime = userInput.nextLine().strip().split(" at ");
-
-                    if (contentDateTime.length == 0 || contentDateTime.length == 1) {
-                        errorMessage = makeSpace(5) + "You are missing the details/date&time of your Event!";
-                    } else if (contentDateTime[0].isBlank()) {
-                        errorMessage = makeSpace(5) + "The details of your Event cannot be empty!";
-                    } else if (contentDateTime[1].isBlank()) {
-                        errorMessage = makeSpace(5) + "The date/time of your Event cannot be empty!";
-                    } else {
-                        String taskDescription = contentDateTime[0].strip();
-                        String dateTime = contentDateTime[1].strip();
-
-                        makeNewEvent(taskDescription, dateTime);
-                    }
-                } else {
-                    errorMessage = makeSpace(5) + "Sorry but I can't seem to detect the Date & Time of the event!";
-                }
-
-            } else {
-                errorMessage = makeSpace(5) + "The description of an Event cannot be empty!";
-            }
-        } else {
-            userInput.close();
-            throw new InvalidDukeCommand();
+            Ui.showLine();
         }
 
-        if (errorMessage != null) {
-            userInput.close();
-            throw new IncorrectDukeCommand(errorMessage);
+        Scanner sc = new Scanner(System.in);
+        String instruction = sc.nextLine();
+        Parser parser = new Parser();
+
+        while (!instruction.equals("bye")) {
+            try {
+                parser.parseInstruction(instruction, taskList);
+            } catch (DateTimeParseException e) {
+                exceptionHandler.showParseDateTimeError();
+                Ui.showLine();
+            } catch (VoidDukeCommand e) {
+                exceptionHandler.showVoidDukeCommandError();
+                Ui.showLine();
+            } catch (IncorrectDukeCommand e) {
+                exceptionHandler.showDukeCommandEvaluationError(e);       
+                Ui.showLine();
+            } catch (InvalidDukeCommand e) {
+                exceptionHandler.showUnknownDukeCommandError();
+                Ui.showLine();
+            } catch (IOException e) {
+                exceptionHandler.showDukeIOError();
+                Ui.showLine();
+            } catch (DukeException e) {
+                exceptionHandler.showDukeError(e);   
+                Ui.showLine();
+            } 
+
+            instruction = sc.nextLine();
         }
 
-        userInput.close();
-        System.out.println(HORIZONTAL_LINE);
+        sc.close();
+        ui.exit();
     }
 
-    private void markTaskAsDone(int taskNumber) throws IOException {
-        if (tasks.get(taskNumber).isDone) {
-            System.out.println(makeSpace(5) + "Task has already been marked done!");
-            return;
-        }
-        
-        tasks.get(taskNumber).isDone = true;
-        IOHandler ioHandler = new IOHandler();
-        ioHandler.overwriteLocalSave(tasks);
-        
-        System.out.printf("%sNice! I've marked this task as done:\n", makeSpace(5));
-        System.out.printf("%s%s\n", makeSpace(7), tasks.get(taskNumber));
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
-
-    private void listAllTasks() {
-        if (tasks.size() == 0) {
-            System.out.printf("%sThere are no task(s) to list!\n", makeSpace(5));
-        } else {
-            System.out.printf("%sHere are the tasks in your list:\n", makeSpace(5));
-    
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%s%d. %s\n", makeSpace(7), i + 1, tasks.get(i));
-            }
-        }
-    }
-
-    private void makeNewTodo(String description) throws IOException {
-        IOHandler ioHandler = new IOHandler();
-        ToDo currentTodo = new ToDo(description);
-
-        tasks.add(currentTodo);
-        ioHandler.addToLocalSave(currentTodo);
-
-        System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
-        System.out.printf("%s%s\n\n", makeSpace(7), currentTodo);
-        System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
-    }
-
-    private void makeNewDeadline(String desc, String dateTime) throws IOException {
-        IOHandler ioHandler = new IOHandler();
-        Deadline currentDeadline = new Deadline(desc, dateTime);
-        tasks.add(currentDeadline);
-        ioHandler.addToLocalSave(currentDeadline);
-
-        System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
-        System.out.printf("%s%s\n\n", makeSpace(7), currentDeadline);
-        System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
-    }
-
-    
-    private void makeNewEvent(String desc, String dateTime) throws IOException {
-        IOHandler ioHandler = new IOHandler();
-        Event currentEvent = new Event(desc, dateTime);
-        tasks.add(currentEvent);
-        ioHandler.addToLocalSave(currentEvent);
-
-        System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
-        System.out.printf("%s%s\n\n", makeSpace(7), currentEvent);
-        System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
-    }
-
-    private void delete(int taskNumber) throws IOException {
-        IOHandler ioHandler = new IOHandler();
-        
-        Task removedTask = tasks.remove(taskNumber);
-        ioHandler.overwriteLocalSave(tasks);
-
-        System.out.println(makeSpace(5) + "Noted. I've removed this task:\n"
-                + makeSpace(7) + removedTask + "\n\n"
-                + makeSpace(5) + String.format("Now you have %d task(s) in your list.", tasks.size()));
-        }
 }

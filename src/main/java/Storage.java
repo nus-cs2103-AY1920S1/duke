@@ -6,16 +6,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class IOHandler {
-    private String saveFileName;
+public class Storage {
+    String filePath;
 
-    public IOHandler() {
-        saveFileName = "C:\\Users\\NINGS\\OneDrive\\Documents\\duke\\data\\duketasks.txt";
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     void addToLocalSave(Task task) throws IOException {
         PrintWriter printWriter = null;
         Parser parser = new Parser();
+        String saveFileName = filePath + "\\duketasks.txt";
 
         FileWriter fileWriter = new FileWriter(saveFileName, true);
         printWriter = new PrintWriter(fileWriter);
@@ -27,6 +28,7 @@ public class IOHandler {
     void overwriteLocalSave(ArrayList<Task> listOfTasks) throws IOException {
         PrintWriter printWriter = null;
         Parser parser = new Parser();
+        String saveFileName = filePath + "\\duketasks.txt";
 
         FileWriter fileWriter = new FileWriter(saveFileName, false);
         printWriter = new PrintWriter(fileWriter);
@@ -39,7 +41,9 @@ public class IOHandler {
     }
 
     ArrayList<Task> readSaveFile() throws IOException {
+        String saveFileName = filePath + "\\duketasks.txt";
         File saveFile = new File(saveFileName);
+        
         ArrayList<Task> listOfExistingTasks = new ArrayList<>();
 
         if (saveFile.exists()) {

@@ -7,6 +7,9 @@ import duke.ui.Ui;
 import duke.command.Command;
 import duke.todo.Task;
 
+/**
+ * Duke class.
+ */
 public class Duke {
 
     private Storage storage;

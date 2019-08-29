@@ -17,6 +17,7 @@ import duke.task.EventTask;
 
 import java.io.IOException;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -28,6 +29,8 @@ public class Duke {
     private static final String DUKE_START_COMMAND = "What can I do for you?\n";
     private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
     private static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
+    private static final String DUKE_FOUND_TASKS = "Here are the matching tasks in your list:";
+    private static final String DUKE_NO_FOUND_TASKS = "There were no matching tasks.";
     private static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:\n";
     private static final String DUKE_ADD_TASK = "Got it. I've added this task:\n";
     private static final String DUKE_DELETE_TASK = "Noted. I've removed this task:\n";
@@ -40,6 +43,7 @@ public class Duke {
     private static final String ERROR_MISSING_INDEX = "☹ OOPS!!! Please include the index of the task.";
     private static final String ERROR_ILLEGAL_INDEX = "☹ OOPS!!! The index must be a number "
             + "separated by one whitespace.";
+    private static final String ERROR_MISSING_CHAR_SEQUENCE = "☹ OOPS!!! Please include a phrase to search for.";
     private static final String ERROR_MISSING_TASK_DESCRIPTION = "☹ OOPS!!! The description of a task "
             + "cannot be empty.";
     private static final String ERROR_MISSING_DESCRIPTION_AND_DATE = "☹ OOPS!!! Description and dates of a task "
@@ -59,6 +63,7 @@ public class Duke {
     private enum Command {
         LIST,
         DONE,
+        FIND,
         TODO,
         EVENT,
         DEADLINE,
@@ -86,6 +91,20 @@ public class Duke {
                                              DUKE_TAB4,
                                              i,
                                              taskList.getTaskAt(i).getStatus()));
+        }
+    }
+
+    private void listTasks(List<Task> taskList) {
+        if (taskList.size() == 0) {
+            System.out.println(DUKE_TAB4 + DUKE_NO_FOUND_TASKS);
+            return;
+        }
+        System.out.println(DUKE_TAB4 + DUKE_FOUND_TASKS);
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(String.format("  %s%d.%s",
+                    DUKE_TAB4,
+                    i + 1,
+                    taskList.get(i).getStatus()));
         }
     }
 
@@ -119,6 +138,18 @@ public class Duke {
                 throw new DukeIllegalIndexException(ERROR_ILLEGAL_INDEX);
             }
         }
+    }
+
+    private void findTask(String[] command) throws DukeIllegalArgumentException {
+        if (command.length == 1) {
+            throw new DukeIllegalArgumentException(ERROR_MISSING_CHAR_SEQUENCE);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < command.length; i++) {
+            sb.append(command[i].trim()).append(" ");
+        }
+        List<Task> foundTasks = this.taskList.findAllTasksContaining(sb.toString().trim());
+        listTasks(foundTasks);
     }
 
     private void addTodoTask(String[] command) throws DukeIllegalArgumentException{
@@ -259,6 +290,9 @@ public class Duke {
                 case DELETE:
                     this.deleteTask(command);
                     this.saveTasks();
+                    break;
+                case FIND:
+                    this.findTask(command);
                     break;
                 case TODO:
                     this.addTodoTask(command);

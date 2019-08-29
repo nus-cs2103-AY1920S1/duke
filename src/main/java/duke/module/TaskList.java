@@ -39,6 +39,10 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    public void addTasks(List<Task> tasksToAdd) {
+        this.taskList.addAll(tasksToAdd);
+    }
+
     // Index starts from 1
     public Task getTaskAt(int index) throws DukeIllegalIndexException {
         try {
@@ -64,8 +68,14 @@ public class TaskList {
         this.taskList.clear();
     }
 
-    public void addTasks(List<Task> tasksToAdd) {
-        this.taskList.addAll(tasksToAdd);
+    public List<Task> findAllTasksContaining(String charSequence) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getDescription().contains(charSequence)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
     }
 
     public Iterator<Task> iterator() {

@@ -24,14 +24,13 @@ public class TasksPresenter {
      */
     public void run() {
         ui.startDisplay();
-        boolean isExit = false;
 
-        while (!isExit) {
+        while (true) {
             String input = ui.readCommand();
 
             if (input.equals("bye")) {
                 ui.printExit();
-                isExit = true;
+                break;
             }
 
             String[] args = input.split(" ");

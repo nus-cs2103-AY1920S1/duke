@@ -1,15 +1,12 @@
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
 public class Deadline extends Task {
 
-    private String midcommand; private String informalDate; private String formattedDate;
+    private String midcommand; private String formattedDate;
 
-    public Deadline(String command) throws ParseException, DukeException {
+    public Deadline(String command) throws DukeException {
         super(command);
         this.done = false;
         String[]splitteddate = command.split("/",2);
@@ -48,7 +45,7 @@ public class Deadline extends Task {
             }
     }
 
-    public static Task outputAsDeadline(String s) throws ParseException, DukeException {
+    public static Task outputAsDeadline(String s) throws DukeException {
         String[]segments = s.split("\\|");
         String taskCommand = segments[2] + "/by: " + segments[3];
         Deadline newTask = new Deadline(taskCommand);

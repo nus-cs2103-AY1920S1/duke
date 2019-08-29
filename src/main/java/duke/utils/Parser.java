@@ -1,7 +1,13 @@
 package duke.utils;
 
 import duke.exceptions.DukeException;
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ByeCommand;
+import duke.commands.AddCommand;
+import duke.commands.ListCommand;
+import duke.commands.DoneCommand;
+import duke.commands.CompleteCommand;
 
 import java.util.Scanner;
 import java.util.ArrayList;

@@ -14,7 +14,7 @@ public class Deadline extends Task {
     }
 
     public String getStorageFormat() {
-        String storageString = super.getStorageFormat() + " | " + this.deadline;
+        String storageString = "D | " + super.getStorageFormat() + " | " + this.deadline;
         return storageString;
     }
 }

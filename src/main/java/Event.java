@@ -16,7 +16,7 @@ public class Event extends Task {
     }
 
     public String getStorageFormat() {
-        String storageString = super.getStorageFormat() + " | " + this.duration;
+        String storageString = "E | " + super.getStorageFormat() + " | " + this.startTime + " | " + this.endTime;
         return storageString;
     }
 }

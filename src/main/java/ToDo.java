@@ -7,4 +7,9 @@ public class ToDo extends Task {
         String statusIcon = getStatusIcon();
         return "[T][" + statusIcon + "] " + this.description;
     }
+
+    public String getStorageFormat() {
+        String storageString = "T | " + super.getStorageFormat();
+        return storageString;
+    }
 }

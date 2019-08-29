@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.text.ParseException;
+
 public class Storage {
     private File f;
 
@@ -27,7 +29,7 @@ public class Storage {
         fw.close();
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException, ParseException {
         Scanner sc = new Scanner(this.f);
         ArrayList<Task> allStoredTasks = new ArrayList<Task>();
         while (sc.hasNext()) {
@@ -38,7 +40,7 @@ public class Storage {
         return allStoredTasks;
     }
 
-    private Task generateSavedTask(String nextLine) {
+    private Task generateSavedTask(String nextLine) throws ParseException {
         String[] s = nextLine.split("\\|");
         String command = s[0].trim();
         Task t = new Task("Uninitialised Task");
@@ -52,8 +54,9 @@ public class Storage {
             t = new ToDo(description);
             break;
         case "E":
-            String duration = s[3].trim();
-            t = new Event(description, duration);
+            String startTime = s[3].trim();
+            String endTime = s[4].trim();
+            t = new Event(description, startTime, endTime);
             break;
         case "D":
             String deadline = s[3].trim();
@@ -79,12 +82,15 @@ public class Storage {
         catch (FileNotFoundException e) {
             System.out.println("file not found!");
         }
+        catch (ParseException e) {
+            System.out.println("Invalid date format: " + e.getMessage());
+        }
 
         try {
             Task t1 = new ToDo("Return Library Books");
             t1.markAsDone();
-            Task t2 = new Event("Project Meeting", "Sunday 2-4pm");
-            Task t3 = new Deadline("Complete Project Work", "Sunday 3pm");
+            Task t2 = new Event("Project Meeting", "26/02/1997 18:00", "26/02/1997 22:00");
+            Task t3 = new Deadline("Complete Project Work", "26/02/1997 18:00");
             ArrayList<Task> allTasks = new ArrayList<>();
             allTasks.add(t1);
             allTasks.add(t2);
@@ -95,8 +101,9 @@ public class Storage {
         catch (IOException e) {
             System.out.println("Problem!");
         }
-
-
+        catch (ParseException e){
+            System.out.println("Unable to parse dates!");
+        }
     }
 
 }

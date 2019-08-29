@@ -18,6 +18,9 @@ public class Duke {
             System.out.println("No saved tasks were found. Initialising with empty TaskList");
             this.storedTasks = new ArrayList<Task>();
         }
+        catch (ParseException e) {
+            System.out.println("Unable to parse date string: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {

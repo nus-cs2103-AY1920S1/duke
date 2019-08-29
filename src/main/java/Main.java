@@ -1,8 +1,7 @@
-import java.io.IOException;
+import javafx.application.Application;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("./data/duketasks.txt");
-        duke.start();
+    public static void main(String[] args) {
+        Application.launch(Duke.class, args);
     }
 }

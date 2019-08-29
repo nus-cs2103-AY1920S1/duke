@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class DoneCommand extends Command {
     private int doneIdx;
 
@@ -11,13 +9,13 @@ public class DoneCommand extends Command {
         this.doneIdx = idx;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidTaskException, IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeInvalidTaskException, DukeIoException {
         if (doneIdx < 1 || doneIdx > tasks.size()) {
             throw new DukeInvalidTaskException(doneIdx);
         }
         tasks.get(doneIdx).markAsDone();
-        ui.dukePrint("Nice! I've marked this task as done:\n  " + tasks.get(doneIdx));
         storage.writeToFile(tasks);
+        return "Nice! I've marked this task as done:\n  " + tasks.get(doneIdx);
     }
 
     boolean isExit() {

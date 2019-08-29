@@ -1,7 +1,5 @@
-import java.io.IOException;
-
 public abstract class Command {
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     abstract boolean isExit();
 }

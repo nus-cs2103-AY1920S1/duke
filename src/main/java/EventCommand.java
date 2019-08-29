@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class EventCommand extends Command {
     private String description;
     private String at;
@@ -14,14 +12,14 @@ public class EventCommand extends Command {
         this.at = at;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidDateException, IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeInvalidDateException, DukeIoException {
         Task t = new EventTask(description, at);
         tasks.add(t);
         String result = "Got it. I've added this task:\n";
         result += "  " + t + "\n";
         result += "Now you have " + tasks.size() + " tasks in the list.";
-        ui.dukePrint(result);
         storage.writeToFile(tasks);
+        return result;
     }
 
     boolean isExit() {

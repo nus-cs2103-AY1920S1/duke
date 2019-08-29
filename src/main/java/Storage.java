@@ -14,15 +14,19 @@ public class Storage {
      * @param filePath The location of the text file to be used.
      *                 If the file does not exist, it will create the file.
      */
-    Storage(String filePath) throws IOException {
+    Storage(String filePath) throws DukeIoException {
         this.filePath = filePath;
         File file = new File(filePath);
-        if (file.exists()) {
-            this.fileSc = new Scanner(new File(filePath));
-        } else {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-            this.fileSc = new Scanner(file);
+        try {
+            if (file.exists()) {
+                this.fileSc = new Scanner(new File(filePath));
+            } else {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                this.fileSc = new Scanner(file);
+            }
+        } catch (IOException e) {
+            throw new DukeIoException();
         }
     }
 
@@ -34,12 +38,16 @@ public class Storage {
         return tasks;
     }
 
-    void writeToFile(TaskList tasks) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-        for (int i = 1; i <= tasks.size(); i++) {
-            bw.write(tasks.get(i).toFileString());
+    void writeToFile(TaskList tasks) throws DukeIoException {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
+            for (int i = 1; i <= tasks.size(); i++) {
+                bw.write(tasks.get(i).toFileString());
+            }
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeIoException();
         }
-        bw.close();
     }
 
     private Task parseFileLine(String line) throws DukeException {

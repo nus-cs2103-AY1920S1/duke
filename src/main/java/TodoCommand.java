@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class TodoCommand extends Command {
     private String description;
 
@@ -7,14 +5,14 @@ public class TodoCommand extends Command {
         this.description = description;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeIoException {
         Task t = new TodoTask(description);
         tasks.add(t);
         String result = "Got it. I've added this task:\n";
         result += "  " + t + "\n";
         result += "Now you have " + tasks.size() + " tasks in the list.";
-        ui.dukePrint(result);
         storage.writeToFile(tasks);
+        return result;
     }
 
     boolean isExit() {

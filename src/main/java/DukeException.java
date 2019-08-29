@@ -1,5 +1,5 @@
 public class DukeException extends Exception {
-    protected String oops = "☹ OOPS!!! ";
+    protected String oops = "OOPS!!! ";
 
     @Override
     public String toString() {

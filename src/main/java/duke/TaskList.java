@@ -76,11 +76,36 @@ public class TaskList {
     }
 
     /**
+     * Searches for the given keyword in the task list.
+     * @param s The keyword.
+     */
+    public void find(String s) {
+        List<Task> temp = new ArrayList<>();
+        for (Task task : list ) {
+            String[] descriptionArray = task.getDescription().split(" ");
+            for (int i = 0; i < descriptionArray.length; i++) {
+                if (s.equals(descriptionArray[i])) {
+                    temp.add(task);
+                }
+            }
+        }
+        printList(temp);
+    }
+
+    /**
      * Prints the task list in order of which task is added first.
      */
     public void printList() {
         int i = 1;
         for (Task task : list) {
+            System.out.println("    " + i + ". " + task);
+            i++;
+        }
+    }
+
+    private void printList(List<Task> t) {
+        int i = 1;
+        for (Task task : t) {
             System.out.println("    " + i + ". " + task);
             i++;
         }

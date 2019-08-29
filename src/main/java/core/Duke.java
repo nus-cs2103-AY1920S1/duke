@@ -1,7 +1,6 @@
+package core;
+
 import command.Command;
-import core.Parser;
-import core.Storage;
-import core.Ui;
 import exception.DukeException;
 import task.TaskList;
 

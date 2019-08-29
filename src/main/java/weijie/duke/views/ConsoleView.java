@@ -1,5 +1,6 @@
 package weijie.duke.views;
 
+import weijie.duke.exceptions.DukeException;
 import weijie.duke.presenters.ConsoleInputListener;
 import weijie.duke.responses.TaskResponse;
 import weijie.duke.utils.StringUtils;
@@ -41,6 +42,10 @@ public class ConsoleView {
         }
         String output = response.getFormattedResponse();
         System.out.println(StringUtils.indentf("%s" + output + "\n%s", DIVIDER, DIVIDER));
+    }
+
+    public void printError(DukeException e) {
+        System.out.println(StringUtils.indentf("%s" + e.getMessage() + "\n%s", DIVIDER, DIVIDER));
     }
 
     public void exit() {

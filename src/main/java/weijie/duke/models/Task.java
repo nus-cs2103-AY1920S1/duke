@@ -1,6 +1,8 @@
 package weijie.duke.models;
 
-public abstract class Task {
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
     private final String description;
     private boolean isDone;
 

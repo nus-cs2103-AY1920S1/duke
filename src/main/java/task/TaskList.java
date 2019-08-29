@@ -17,30 +17,40 @@ public class TaskList {
     private Storage storage;
     public ArrayList<Task> temporarySearchList;
 
+    /**
+     * Constructs a TaskList with an empty ArrayList of tasks and Storage.
+     * @param storage The storage.
+     */
     public TaskList(Storage storage) {
         tasks = new ArrayList<>();
         this.storage = storage;
         temporarySearchList = null;
     }
 
+    /**
+     * Constructs a TaskList with the specified ArrayList of tasks and Storage.
+     * @param tasks The ArrayList of tasks.
+     * @param storage The Storage.
+     */
     public TaskList(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
         temporarySearchList = null;
     }
 
+    /**
+     * Indicates if there are existing tasks in the task list.
+     * @return A boolean.
+     */
     public boolean hasTask() {
         return tasks.size() != 0;
-    }
-
-    public int size() {
-        return tasks.size();
     }
 
     /**
      * Marks a task to be done upon user request.
      * @param taskNumber The position of the task to be marked "done" in the ArrayList.
-     * @param useTempSearchList A boolean that determines if a task is to be marked done off the original or search result list.
+     * @param useTempSearchList A boolean that determines if a task is to be marked done
+     *     off the original or search result list.
      * @throws DukeException if the task has already been marked done.
      * @throws IOException if the completion status of the task cannot be updated in a local save file.
      */
@@ -61,15 +71,16 @@ public class TaskList {
         } else if (taskNumber > taskListToUse.size()) {
             errorMessage = "You don't have that many tasks!";
         }
-        
-        if (taskListToUse.get(taskNumber - 1).isDone) {
-            errorMessage = Ui.spaces(5) + "task.Task has already been marked done!";
-        }
 
         if (errorMessage != null) {
+            throw new DukeException(Ui.spaces(5) + errorMessage);
+        }
+
+        if (taskListToUse.get(taskNumber - 1).isDone) {
+            errorMessage = Ui.spaces(5) + "Task has already been marked done!";
             throw new DukeException(errorMessage);
         }
-        
+
         taskListToUse.get(taskNumber - 1).isDone = true;
         storage.overwriteLocalSave(tasks);
 
@@ -170,6 +181,10 @@ public class TaskList {
         }
         
         Task removedTask = taskListToUse.remove(taskNumber - 1);
+
+        if(taskListToUse == temporarySearchList) {
+            tasks.remove(removedTask);
+        }
         
         storage.overwriteLocalSave(tasks);
 
@@ -178,9 +193,14 @@ public class TaskList {
                 + Ui.spaces(5) + String.format("Now you have %d task(s) in your list.", tasks.size()));
     }
 
+    /**
+     * Searches matching tasks with user specified keyword.
+     * @param keyword The keyword to search for in all tasks.
+     * @throws DukeException if the original task list is empty or there are no search results.
+     */
     public void find(String keyword) throws DukeException {
         if (tasks.isEmpty()) {
-            throw new DukeException("There is nothing to search from!");
+            throw new DukeException(Ui.spaces(5) + "There is nothing to search from!");
         }
         
         ArrayList<Task> tempList = new ArrayList<>();
@@ -192,7 +212,7 @@ public class TaskList {
         }
 
         if (tempList.isEmpty()) {
-            throw new DukeException("There isn't a task that can be found with that keyword!");
+            throw new DukeException(Ui.spaces(5) + "There isn't a task that can be found with that keyword!");
         } else {
             temporarySearchList = tempList;
             listAllTasks("find");

@@ -55,6 +55,21 @@ public class Sheet {
         ui.showLine();
     }
 
+    public void find(String keyword) throws IOException {
+        ui.showSearchHeader();
+        int count = 0;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                count++;
+                ui.showTask(count, task.toString().trim());
+            }
+        }
+        if (count == 0) {
+            ui.showNotFound();
+        }
+        ui.showLine();
+    }
+
     @Override
     public String toString() {
         String output = "";

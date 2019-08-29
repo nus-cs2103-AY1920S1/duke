@@ -108,8 +108,19 @@ public class Parser {
                         this.sheet.add(eventTask);
                     } catch (MissingDescriptionException mde) {
                         ui.printDukeException(mde);
-                    } catch (IllegalTimeFormatException itef){
+                    } catch (IllegalTimeFormatException itef) {
                         ui.printDukeException(itef);
+                    }
+                } else if (command.equals("find")) {
+                    try {
+                        String keyword = sc.nextLine().trim();
+                        if (keyword.isBlank()) {
+                            throw new MissingDescriptionException(
+                                    "☹ Sorry, I did not catch your search keyword.");
+                        }
+                        this.sheet.find(keyword);
+                    } catch (MissingDescriptionException e) {
+                        ui.printDukeException(e);
                     }
                 } else {
                     ui.showUnknownError();

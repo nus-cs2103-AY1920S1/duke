@@ -38,8 +38,16 @@ public class Ui {
         System.out.printf(LINE + INDENT + "Here are the tasks in your list:\n");
     }
 
+    public void showSearchHeader() {
+        System.out.printf(LINE + INDENT + "Here are the matching tasks in your list:\n");
+    }
+
     public void showRemove(String removed) {
         System.out.printf(LINE + INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
+    }
+
+    public void showNotFound() {
+        System.out.printf(INDENT + "Hummm, nothing has been found.\n");
     }
 
     public void showUnknownError() {

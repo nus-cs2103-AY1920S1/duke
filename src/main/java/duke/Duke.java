@@ -31,6 +31,7 @@ public class Duke {
     private static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:\n";
     private static final String DUKE_ADD_TASK = "Got it. I've added this task:\n";
     private static final String DUKE_DELETE_TASK = "Noted. I've removed this task:\n";
+    private static final String DUKE_DELETE_ALL_TASKS = "Noted. I've removed all tasks.";
     private static final String DUKE_NUMBER_OF_TASKS = "Now you have %d tasks in the list.";
     private static final String DUKE_LINE = "    ____________________________________________________________\n";
     private static final String DUKE_TAB4 = "    ";
@@ -106,12 +107,17 @@ public class Duke {
         try {
             int index = Integer.parseInt(command[1]);
             System.out.println(DUKE_TAB4 + DUKE_DELETE_TASK
-                    + DUKE_TAB4 + DUKE_TAB2 + taskList.deleteTaskAt(index).getStatus()
+                    + DUKE_TAB4 + DUKE_TAB2 + this.taskList.deleteTaskAt(index).getStatus()
                     + String.format("\n" + DUKE_TAB4 + DUKE_NUMBER_OF_TASKS, taskList.getSize()));
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeIllegalIndexException(ERROR_ILLEGAL_INDEX);
+            if (command[1].equals("all")) {
+                this.taskList.deleteAllTasks();
+                System.out.println(DUKE_TAB4 + DUKE_DELETE_ALL_TASKS);
+            } else {
+                throw new DukeIllegalIndexException(ERROR_ILLEGAL_INDEX);
+            }
         }
     }
 

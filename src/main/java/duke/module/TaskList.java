@@ -60,6 +60,10 @@ public class TaskList {
         }
     }
 
+    public void deleteAllTasks() {
+        this.taskList.clear();
+    }
+
     public void addTasks(List<Task> tasksToAdd) {
         this.taskList.addAll(tasksToAdd);
     }

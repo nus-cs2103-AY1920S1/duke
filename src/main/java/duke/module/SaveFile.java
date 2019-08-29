@@ -67,7 +67,7 @@ public class SaveFile {
         BufferedReader br = new BufferedReader(new FileReader(this.savedFile));
         String line;
         while ((line = br.readLine()) != null) {
-            lines.add(TaskParser.parse(line.replace(" | ", "-")));
+            lines.add(Parser.parseToTask(line.replace(" | ", "-")));
         }
         br.close();
         return lines;

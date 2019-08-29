@@ -14,11 +14,42 @@ public class DukeDate {
             + "              and minute must be between 0 and 59.";
 
     private int year;
-    private String month;
+    private Month month;
     private int day;
     private int hour;
     private int minute;
     private String amPmMarker;
+
+    public enum Month {
+        JANUARY(1),
+        FEBRUARY(2),
+        MARCH(3),
+        APRIL(4),
+        MAY(5),
+        JUNE(6),
+        JULY(7),
+        AUGUST(8),
+        SEPTEMBER(9),
+        OCTOBER(10),
+        NOVEMBER(11),
+        DECEMBER(12);
+
+        private int monthInt;
+
+        Month(int monthInt) {
+            this.monthInt = monthInt;
+        }
+
+        public int getMonthInt() {
+            return this.monthInt;
+        }
+
+        @Override
+        public String toString() {
+            String month = super.toString();
+            return month.charAt(0) + month.substring(1).toLowerCase();
+        }
+    }
 
     public DukeDate(int year, int month, int day, int hour, int minute)
             throws DukeDateFormatException {
@@ -34,32 +65,46 @@ public class DukeDate {
         this.setTime(hour, minute);
     }
 
-    private String getMonth(int monthInt) throws DukeDateFormatException {
+    public DukeDate(int year, Month month, int day, int hour, int minute)
+            throws DukeDateFormatException {
+        if (year < 0) {
+            throw new DukeDateFormatException(ERROR_ILLEGAL_YEAR);
+        }
+        this.year = year;
+        this.month = month;
+        if (!dayIsValid(month.getMonthInt(), day)) {
+            throw new DukeDateFormatException(ERROR_DAY_MONTH_MISMATCH);
+        }
+        this.day = day;
+        this.setTime(hour, minute);
+    }
+
+    private Month getMonth(int monthInt) throws DukeDateFormatException {
         switch (monthInt) {
         case 1:
-            return "January";
+            return Month.JANUARY;
         case 2:
-            return "February";
+            return Month.FEBRUARY;
         case 3:
-            return "March";
+            return Month.MARCH;
         case 4:
-            return "April";
+            return Month.APRIL;
         case 5:
-            return "May";
+            return Month.MAY;
         case 6:
-            return "June";
+            return Month.JUNE;
         case 7:
-            return "July";
+            return Month.JULY;
         case 8:
-            return "August";
+            return Month.AUGUST;
         case 9:
-            return "September";
+            return Month.SEPTEMBER;
         case 10:
-            return "October";
+            return Month.OCTOBER;
         case 11:
-            return "November";
+            return Month.NOVEMBER;
         case 12:
-            return "December";
+            return Month.DECEMBER;
         default:
             throw new DukeDateFormatException(ERROR_ILLEGAL_MONTH);
         }

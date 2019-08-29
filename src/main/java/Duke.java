@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IncompleteCommandException, InvalidCommandException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<Task>();
 

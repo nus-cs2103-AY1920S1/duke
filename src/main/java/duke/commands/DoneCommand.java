@@ -6,7 +6,7 @@ import duke.data.tasks.Task;
  * Implements the done command.
  * @author Lim Yong Shen, Kevin
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends ListCommand {
 
     private Task taskToSetAsDone;
     private int taskNumber;

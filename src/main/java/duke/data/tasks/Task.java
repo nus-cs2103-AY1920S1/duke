@@ -51,12 +51,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns the String representation of this task's type.
-     * @return The String representation of this task's type.
-     */
-    public abstract String getType();
-
-    /**
      * Sets this task as done.
      */
     public void setAsDone() {

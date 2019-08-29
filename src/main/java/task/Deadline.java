@@ -1,8 +1,12 @@
-public class Deadline extends Task {
-    protected String unformattedDateTime;
-    protected String formattedDateTime;
+package task;
 
-    public Deadline(String desc, String dateTime) {
+import misc.Parser;
+
+public class Deadline extends Task {
+    public String unformattedDateTime;
+    private String formattedDateTime;
+
+    Deadline(String desc, String dateTime) {
         super(desc);
         unformattedDateTime = dateTime;
 
@@ -21,9 +25,5 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, formattedDateTime);
-    }
-
-    public String toText() {
-        return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, unformattedDateTime);
     }
 }

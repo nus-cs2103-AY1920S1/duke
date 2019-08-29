@@ -1,20 +1,27 @@
+import exception.*;
+import misc.Parser;
+import misc.Storage;
+import misc.Ui;
+import task.TaskList;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
-    Ui ui;
-    ExceptionHandler exceptionHandler;
-    Storage storage;
-    TaskList taskList;
+    private Ui ui;
+    private ExceptionHandler exceptionHandler;
+    private Storage storage;
 
-    public Duke() {
+    private Duke() {
         this.ui = new Ui();
         this.exceptionHandler = new ExceptionHandler();
-        this.storage = new Storage("C:\\Users\\NINGS\\OneDrive\\Documents\\duke\\data");
+        this.storage = new Storage("data");
     }
 
-    void run() {
+    private void run() {
+        TaskList taskList;
+
         try {
             taskList = new TaskList(storage.readSaveFile(), storage);
         } catch (IOException e) {
@@ -27,7 +34,7 @@ public class Duke {
             ui.welcomeBack();
 
             try {
-                taskList.listAlltasks();
+                taskList.listAllTasks();
             } catch (DukeException e) {
                 exceptionHandler.showDukeError(e);
             }

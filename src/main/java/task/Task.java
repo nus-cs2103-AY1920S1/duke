@@ -1,13 +1,15 @@
-public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+package task;
 
-    public Task(String desc) {
+public abstract class Task {
+    public String description;
+    public boolean isDone;
+
+    Task(String desc) {
         description = desc;
         isDone = false;
     }
 
-    public Task(String desc, boolean isDone) {
+    Task(String desc, boolean isDone) {
         description = desc;
         this.isDone = isDone;
     }

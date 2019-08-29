@@ -1,3 +1,7 @@
+package misc;
+
+import task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,31 +11,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    void addToLocalSave(Task task) throws IOException {
-        PrintWriter printWriter = null;
+    public void addToLocalSave(Task task) throws IOException {
         Parser parser = new Parser();
-        String saveFileName = filePath + "\\duketasks.txt";
+        String saveFileName = filePath + File.separator + "duketasks.txt";
 
         FileWriter fileWriter = new FileWriter(saveFileName, true);
-        printWriter = new PrintWriter(fileWriter);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.println(parser.writeTaskAsText(task));
 
         printWriter.close();
     }
 
-    void overwriteLocalSave(ArrayList<Task> listOfTasks) throws IOException {
-        PrintWriter printWriter = null;
+    public void overwriteLocalSave(ArrayList<Task> listOfTasks) throws IOException {
         Parser parser = new Parser();
-        String saveFileName = filePath + "\\duketasks.txt";
+        String saveFileName = filePath + File.separator + "duketasks.txt";
 
         FileWriter fileWriter = new FileWriter(saveFileName, false);
-        printWriter = new PrintWriter(fileWriter);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
         
         for (Task task : listOfTasks) {
             printWriter.println(parser.writeTaskAsText(task));
@@ -40,8 +42,8 @@ public class Storage {
         printWriter.close();
     }
 
-    ArrayList<Task> readSaveFile() throws IOException {
-        String saveFileName = filePath + "\\duketasks.txt";
+    public ArrayList<Task> readSaveFile() throws IOException {
+        String saveFileName = filePath + File.separator + "duketasks.txt";
         File saveFile = new File(saveFileName);
         
         ArrayList<Task> listOfExistingTasks = new ArrayList<>();
@@ -57,8 +59,6 @@ public class Storage {
             }
 
             sc.close();
-        } else {
-            saveFile.createNewFile();
         }
 
         return listOfExistingTasks;

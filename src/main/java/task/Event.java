@@ -1,8 +1,12 @@
-public class Event extends Task {
-    protected String unformattedDateTime;
-    protected String formattedDateTime;
+package task;
 
-    public Event(String desc, String dateTime) {
+import misc.Parser;
+
+public class Event extends Task {
+    public String unformattedDateTime;
+    private String formattedDateTime;
+
+    Event(String desc, String dateTime) {
         super(desc);
         unformattedDateTime = dateTime;
 
@@ -21,9 +25,5 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description, formattedDateTime);
-    }
-
-    public String toText() {
-        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description, unformattedDateTime);
     }
 }

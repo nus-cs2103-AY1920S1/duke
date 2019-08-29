@@ -1,5 +1,9 @@
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Task with a time of event attached
+ */
+
 public class Event extends Task {
     private String time;
     private LocalDateTime localDateTime;

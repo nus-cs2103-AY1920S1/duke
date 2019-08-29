@@ -2,7 +2,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class Task {
-    public static final DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
+    public static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
+    public static final DateTimeFormatter FILE_DATE_TIME = DateTimeFormatter.ofPattern("dd/MM/yy hhmm");
+    
     protected String name;
     protected boolean done;
     protected String type;
@@ -26,6 +28,10 @@ public class Task {
         } else {
             this.done = false;
         }
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public String done() {

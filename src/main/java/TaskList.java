@@ -45,4 +45,17 @@ public class TaskList {
             System.out.println("Now you have " + (list.size() - 1) + " tasks in the list.");
         }
     }
+
+    public void findTasks(String keyword) {
+        ArrayList<Task> tasksMatched = new ArrayList<>();
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i).getName().contains(keyword)) {
+                tasksMatched.add(list.get(i));
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int j = 0; j < tasksMatched.size(); j++) {
+            System.out.println(j+1 + "." + tasksMatched.get(j));
+        }
+    }
 }

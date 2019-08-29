@@ -72,6 +72,14 @@ public class Parser {
                         resultCommand = new DeleteCommand(num);
                     }
                     break;
+                case "find":
+                    if (arr.length == 1) {
+                        throw new DukeException("OOPS!!! Please enter a keyword to find!");
+                    } else {
+                        String phraseToFind = arr[1];
+                        resultCommand = new FindCommand(phraseToFind);
+                    }
+                    break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

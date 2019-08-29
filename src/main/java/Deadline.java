@@ -16,13 +16,13 @@ public class Deadline extends Task {
 
     @Override
     public String fileFormat() {
-        return String.format("%s | %s | %s | %s\n", type, done ? "1" : "0", name, dateTime.format(date).toString());
+        return String.format("%s | %s | %s | %s\n", type, done ? "1" : "0", name, FILE_DATE_TIME.format(date).toString());
     }
 
     @Override
     public String toString() {
 
-        return String.format("[D][%s] %s(by: %s)", done ? "v" : "x", name, dateTime.format(date).toString());
+        return String.format("[D][%s] %s(by: %s)", done ? "v" : "x", name, DATE_TIME.format(date).toString());
 
     }
 }

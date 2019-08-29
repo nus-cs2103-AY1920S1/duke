@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Scanner;
 
 class Duke {
@@ -92,10 +93,11 @@ class Duke {
         this.addTask(new TodoTask(task.toString().trim()));
     }
 
-    private void addDeadlineTask(String[] command) throws DukeIllegalArgumentException {
+    private void addDeadlineTask(String[] command) throws DukeIllegalArgumentException, DukeDateFormatException {
         StringBuilder[] task = new StringBuilder[2];
         task[0] = new StringBuilder();
         task[1] = new StringBuilder();
+
         int index = 0;
         boolean hasDescription = false;
         boolean hasDeadlineDate = false;
@@ -111,6 +113,7 @@ class Duke {
             }
             task[index].append(command[i]).append(" ");
         }
+
         if (!hasDescription && !hasDeadlineDate) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_DESCRIPTION_AND_DATE);
         } else if (!hasDescription) {
@@ -118,14 +121,18 @@ class Duke {
         } else if (!hasDeadlineDate) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_DEADLINE_DATE);
         }
+
+        // Have Duke parse the String into date and time
+        DukeDate dueDate = Parser.parseToDate(task[1].toString().trim());
         this.addTask(new DeadlineTask(task[0].toString().trim(),
-                                      task[1].toString().trim()));
+                                      dueDate));
     }
 
-    private void addEventTask(String[] command) throws DukeIllegalArgumentException {
+    private void addEventTask(String[] command) throws DukeIllegalArgumentException, DukeDateFormatException {
         StringBuilder[] task = new StringBuilder[2];
         task[0] = new StringBuilder();
         task[1] = new StringBuilder();
+
         int index = 0;
         boolean hasDescription = false;
         boolean hasEventDate = false;
@@ -141,6 +148,7 @@ class Duke {
             }
             task[index].append(command[i]).append(" ");
         }
+
         if (!hasDescription && !hasEventDate) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_DESCRIPTION_AND_DATE);
         } else if (!hasDescription) {
@@ -148,8 +156,11 @@ class Duke {
         } else if (!hasEventDate) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_EVENT_DATE);
         }
+
+        // Have Duke parse the string into date and time
+        DukeDate eventDate = Parser.parseToDate(task[1].toString().trim());
         this.addTask(new EventTask(task[0].toString().trim(),
-                                   task[1].toString().trim()));
+                                   eventDate));
     }
 
     private void addTask(Task task) {
@@ -200,7 +211,7 @@ class Duke {
                     this.addEventTask(command);
                     break;
                 }
-            } catch (DukeIllegalIndexException | DukeIllegalArgumentException e) {
+            } catch (DukeIllegalIndexException | DukeIllegalArgumentException | DukeDateFormatException e) {
                 System.out.println(DUKE_TAB4 + e);
             } catch (IllegalArgumentException e) {
                 System.out.println(DUKE_TAB4 + ERROR_ILLEGAL_COMMAND);

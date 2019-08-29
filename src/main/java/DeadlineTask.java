@@ -1,14 +1,18 @@
 class DeadlineTask extends Task {
 
-    private String dueDate;
+    private DukeDate dueDate;
 
-    DeadlineTask(String description, String dueDate) {
+    DeadlineTask(String description, DukeDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
-    String getDueDate() {
+    DukeDate getDueDate() {
         return this.dueDate;
+    }
+
+    String getDateAsString() {
+        return this.dueDate.format();
     }
 
     @Override

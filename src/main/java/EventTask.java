@@ -1,14 +1,18 @@
 class EventTask extends Task {
 
-    private String time;
+    private DukeDate time;
 
-    EventTask(String description, String time) {
+    EventTask(String description, DukeDate time) {
         super(description);
         this.time = time;
     }
 
-    String getTime() {
+    DukeDate getTime() {
         return this.time;
+    }
+
+    String getDateAsString() {
+        return this.time.format();
     }
 
     @Override

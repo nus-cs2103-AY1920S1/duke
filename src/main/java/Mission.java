@@ -7,6 +7,7 @@ public class Mission {
     String time;
     String atby;
     MissionType type;
+    Time realtime;
     public Mission(String content, String type) {
         this.time = null;
         this.content = content;
@@ -47,6 +48,7 @@ public class Mission {
     }
     public Mission(String content, String type, String time, String atby) {
         this.time = time;
+        realtime = new Time(time);
         this.content = content;
         this.state = "✗";
         this.atby = atby;

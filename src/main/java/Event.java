@@ -1,9 +1,9 @@
 public class Event extends Task {
-    protected String at;
+    protected DateAndTime at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = new DateAndTime(at);
     }
 
     @Override

@@ -30,7 +30,8 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         Iterator<Task> it = ls.iterator();
         while (it.hasNext()) {
-            sb.append(it.next().toFileString())
+            sb.append(it.next()
+                .toFileString())
                 .append((char) 30);
         }
         if (sb.length() > 0) {
@@ -104,7 +105,8 @@ public class TaskList {
         int i = 1;
         Iterator<Task> it = ls.iterator();
         while (it.hasNext()) {
-            String taskString = it.next().toString();
+            String taskString = it.next()
+                .toString();
             if (taskString.contains(str)) {
                 sb.append(i++)
                     .append(".")

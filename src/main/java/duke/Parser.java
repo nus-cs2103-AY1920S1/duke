@@ -42,7 +42,8 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "deadline":
-            temp = str.substring(8).split(" /by ");
+            temp = str.substring(8)
+                .split(" /by ");
             if (temp.length < 1 || temp[0].isBlank()) {
                 throw new EmptyFieldDukeException("description", "deadline");
             }
@@ -51,7 +52,8 @@ public class Parser {
             }
             return new AddCommand(new Deadline(temp[0], temp[1]));
         case "event":
-            temp = str.substring(5).split(" /at ");
+            temp = str.substring(5)
+                .split(" /at ");
             if (temp.length < 1 || temp[0].isBlank()) {
                 throw new EmptyFieldDukeException("description", "event");
             }

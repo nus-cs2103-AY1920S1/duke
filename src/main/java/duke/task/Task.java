@@ -90,8 +90,7 @@ public abstract class Task {
 
     protected static DateTimeFormatter inDateTimeFormat() {
         LocalDateTime dt = LocalDateTime.now();
-        return new DateTimeFormatterBuilder()
-            .parseCaseInsensitive()
+        return new DateTimeFormatterBuilder().parseCaseInsensitive()
             .appendPattern("[MMMM][MMM][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ ]['T'][HH[':']mm]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, dt.getHour())
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, dt.getMinute())

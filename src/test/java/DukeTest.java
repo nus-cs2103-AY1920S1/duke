@@ -20,8 +20,7 @@ public class DukeTest {
     private Ui ui;
     private TaskList tasks;
 
-    private StringBuilder tests = new StringBuilder()
-        .append("todo borrow book\n")
+    private StringBuilder tests = new StringBuilder().append("todo borrow book\n")
         .append("list\n")
         .append("deadline D1 Project Assignment /by 2dect1900\n")
         .append("done 0\n")
@@ -30,22 +29,18 @@ public class DukeTest {
         .append("bye\n");
 
     private String[] expected = {
-        "Got it. I've added this task:\n"
-            + "  [T][✘] borrow book\n"
-            + "Now you have 1 tasks in the list.\n",
+        "Got it. I've added this task:\n  [T][✘] borrow book\nNow you have 1 tasks in the list.\n",
 
-        "Here are the tasks in your list:\n"
-            + "1.[T][✘] borrow book\n",
+        "Here are the tasks in your list:\n1.[T][✘] borrow book\n",
 
-        "Got it. I've added this task:\n"
-            + "  [D][✘] D1 Project Assignment (by: December 2 2019, 7:00 PM)\n"
-            + "Now you have 2 tasks in the list.\n",
+        "Got it. I've added this task:\n  [D][✘] D1 Project Assignment (by: December 2 2019, 7:00 PM)\nNow you have 2"
+            + " tasks in the list.\n",
 
         "Index given is out of bound.\nUse from 1 to last index of list only.\n",
 
         "Index given is out of bound.\nUse from 1 to last index of list only.\n",
 
-        "☹ OOPS!!! The time of a event cannot be empty.\n",
+        "☹ OOPS!!! The time of an event cannot be empty.\n",
 
         "Bye. Hope to see you again soon!\n"
     };
@@ -66,7 +61,8 @@ public class DukeTest {
 
     @Test
     public void runTest() {
-        System.setIn(new ByteArrayInputStream(tests.toString().getBytes()));
+        System.setIn(new ByteArrayInputStream(tests.toString()
+            .getBytes()));
 
         int i = 0;
 

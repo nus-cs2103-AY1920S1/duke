@@ -30,7 +30,8 @@ public class Storage {
     public ArrayList<Task> load() throws LoadFileFailDukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
-            for (String record : new BufferedReader(new FileReader(filePath)).readLine().split("\\x1e")) {
+            for (String record : new BufferedReader(new FileReader(filePath)).readLine()
+                .split("\\x1e")) {
                 tasks.add(Task.parseFileTask(record));
             }
             return tasks;

@@ -7,107 +7,34 @@ import java.io.IOException;
 import java.io.File;
 
 public class Duke {
-
-    private static void updateTasksToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
-
-    private static void arrayDataToFile(ArrayList<Task> list, String filePath) {
-        //Store all the latest data from the ArrayList
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            updateTasksToFile(filePath, "");
-        } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-        for(Task task : list) {
-            StringBuilder temp = new StringBuilder();
-            temp.append(task.getTaskType());
-            temp.append(" | ");
-            if(task.isDone()) {
-                temp.append(1);
-            } else {
-                temp.append(0);
-            }
-            temp.append(" | ");
-            temp.append(task.getDescription());
-            if((task instanceof Event) || (task instanceof Deadline)) {
-                temp.append(" | ");
-                if(task instanceof Event) {
-                    temp.append(((Event) task).getExactDuration());
-                } else {
-                    temp.append(((Deadline) task).getExactBy());
-                }
-            }
-            try {
-                appendToFile(filePath, temp.toString() + System.lineSeparator());
-            } catch (IOException e) {
-                System.err.println("Error: " + e.getMessage());
-            }
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();  //if the file is corrupted, the tasks list will start fresh
         }
     }
 
-    private static void loadTasksIntoArray(ArrayList<Task> list, String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while(s.hasNext()) {
-            String[] temp = s.nextLine().split(" ");
-            String task = (String)Array.get(temp, 0);
-            for(int i = 0; i < temp.length; i++) {
-                System.out.println((String)Array.get(temp,i));
+    public void run() {
+        ui.introduction();
+        while(true) {
+            try {
+                String commandLine = ui.getNextLine();
+                Parser p = new Parser(commandLine);
             }
-            Task newTask;
-            if(task.equals("T")) {
-                newTask = new Todo((String)Array.get(temp,4));
-            } else if(task.equals("D")) {
-                newTask = new Deadline((String)Array.get(temp,4),
-                        (String)Array.get(temp, 6) + " " +
-                                (String)Array.get(temp, 7));
-            } else {
-                newTask = new Event((String)Array.get(temp,4),
-                        (String)Array.get(temp, 6) + " " +
-                                (String)Array.get(temp, 7));
-            }
-            if(((String)Array.get(temp, 2)).equals("1")) {
-                newTask.setDone();
-            }
-            list.add(newTask);
         }
     }
 
     public static void main(String[] args) {
-        //first prepare the file, defined as file1
-        String file1 = "data/tasks.txt";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?" );
+        new Duke("data/tasks.txt").run();
 
-        Scanner reader = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<>();
 
-        //here, we should load previous data into the ArrayList, before we move on to allow user to
-        //interact with the programme
-        try {
-            loadTasksIntoArray(taskList, file1);
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found");
-        }
-
-        StringBuilder lineBuilder = new StringBuilder("     ");
-        for(int i = 0; i < 59; i++) {
-            lineBuilder.append("_");
-        }
-        String horLine = lineBuilder.toString();
         while(reader.hasNextLine()) {
             String input = reader.next();
             if(input.equals("bye")) {
@@ -137,44 +64,20 @@ public class Duke {
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + temp);
                 System.out.println(horLine + "\n");
-                arrayDataToFile(taskList, file1);
+                storage.arrayDataToFile(taskList);
             } else if(input.equals("delete")) {
                 int number = reader.nextInt();
-                Task temp = taskList.get(number - 1);
-                taskList.remove(number - 1);
+                tasks.deleteTask(number);
                 System.out.println(horLine);
                 System.out.println("     Nice! I've removed this task:");
                 System.out.println("       " + temp);
                 System.out.println("      Now you have " + taskList.size() + " tasks in the list.");
                 System.out.println(horLine + "\n");
-                arrayDataToFile(taskList, file1);
+                storage.arrayDataToFile(taskList);
             } else{  //all other commands
                 try {
-                    if (input.equals("todo")) {
-                            String tempString = reader.nextLine().trim();  //to remove the leading whitespace.
-                            if (tempString.equals("")) {
-                                throw new DukeException("      ☹ OOPS!!! The description of a todo cannot be empty.");
-                            }
-                            taskList.add(new Todo(tempString));
-                    } else if (input.equals("deadline") || input.equals("event")) {
-                        String tempString = reader.nextLine().trim();      //to remove the leading whitespace.
-                        if(tempString.equals("")) {
-                            throw new DukeException("      ☹ OOPS!!! The description of a " +
-                                    input + " cannot be empty.");
-                        }
-                        //replace the first / so that the dates will not be split up
-                        tempString = tempString.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
-                        String[] tempStringArr = tempString.split(":");
-                        String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
-                        String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
-                        if (input.equals("deadline")) {
-                            taskList.add(new Deadline(description, secondString));
-                        } else {
-                            taskList.add(new Event(description, secondString));
-                        }
-                    } else {//all other keywords not part of Duke's task handling schedule
-                        throw new DukeException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
+                    String taskDetails = reader.nextLine().trim();
+                    tasks.addTask(input, taskDetails);
                 } catch (DukeException de) {
                     System.out.println(horLine);
                     System.err.println(de.getMessage());
@@ -193,7 +96,7 @@ public class Duke {
                 System.out.println("      Now you have " + taskList.size() + " tasks in the list.");
                 System.out.println(horLine);
                 System.out.println();
-                arrayDataToFile(taskList, file1);
+                storage.arrayDataToFile(taskList);
             }
         }
     }

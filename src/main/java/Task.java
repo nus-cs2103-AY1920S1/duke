@@ -12,13 +12,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
-    public Task() {
-
-    }
-
-    /**
-     * Setter for isDone field
-     */
+    //test
 
     public void markAsDone() {
         this.isDone = true;

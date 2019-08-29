@@ -37,8 +37,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns this task's command String (the command used to create this task).
-     * @return This task's command String.
+     * Returns the command used to create this task.
+     * @return The command used to create this task.
      */
     public abstract String getCommandString();
 

@@ -29,36 +29,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs a deadline task with the specified description and isDone status.
-     * @param description The specified description.
-     * @param isDone The specified isDone status.
-     */
-    public Deadline(String description, boolean isDone, String dateAndTime) throws ParseException {
-        super(description, isDone);
-        try {
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            dateFormat.setLenient(false);
-            this.dateAndTime = dateFormat.parse(dateAndTime);
-        } catch (ParseException e) {
-            throw e;
-        }
-    }
-
-    /**
-     * Returns this deadline task's command String (the command used to create this deadline task).
-     * @return This deadline task's command String.
+     * Returns the command used to create this deadline task.
+     * @return The command used to create this deadline task.
      */
     @Override
     public String getCommandString() {
         return String.format("deadline %s /by %s", description, dateFormat.format(dateAndTime));
-    }
-
-    /**
-     * Returns the String representation of this deadline task's date.
-     * @return The String representation of this deadline task's date.
-     */
-    public String getDateAndTime() {
-        return dateFormat.format(dateAndTime);
     }
 
     /**

@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a DoneCommand with the specified task number.
-     * @param taskNumber The specified task number
+     * @param taskNumber The specified task number.
      */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;

@@ -1,7 +1,8 @@
 package duke.commands;
 
 /**
- * Implements the add command.
+ * Provides a framework for commands to be built upon;
+ * specifically those that add to the list of tasks.
  * @author Lim Yong Shen, Kevin
  */
 public abstract class AddCommand extends Command{

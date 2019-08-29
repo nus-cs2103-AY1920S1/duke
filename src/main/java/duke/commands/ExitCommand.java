@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true since this is an ExitCommand.
-     * @return true
+     * @return true.
      */
     @Override
     public boolean isExit() {

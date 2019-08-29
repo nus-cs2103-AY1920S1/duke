@@ -24,8 +24,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns this todo task's command String (the command used to create this todo task).
-     * @return This todo task's command String.
+     * Returns the command used to create this todo task.
+     * @return The command used to create this todo task.
      */
     @Override
     public String getCommandString() {

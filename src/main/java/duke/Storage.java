@@ -4,12 +4,14 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 public class Storage {
@@ -77,6 +79,7 @@ public class Storage {
 
                 // check if the task is marked as done
                 if (lineArray[1].equals("1")) {
+                    assert taskToRead != null;
                     taskToRead.markDone();
                 }
 
@@ -104,16 +107,20 @@ public class Storage {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(filepath));
+
             // empty file before writing
             FileWriter overwrite = new FileWriter(filepath);
             overwrite.close();
+
             // write all tasks in virtual list to file
             for (int i = 1; i <= tasks.size(); i++) {
                 Task task = tasks.get(i);
+
                 // task string structured as [D][+] description (by: datetime)
                 char type = task.toString().toCharArray()[1];
                 char done = task.toString().toCharArray()[4] == '+' ? '1' : '0';
                 String description = task.toString().split("] ", 2)[1];
+
                 // write task to file
                 writer.write(String.format("%s ~ %s ~ %s", type, done, description));
                 writer.newLine();

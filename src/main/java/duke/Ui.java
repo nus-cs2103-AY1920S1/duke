@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -12,9 +13,9 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?\n" +
-                "To input dates and times for deadlines and events, " +
-                "please use the format: 29/03/2019, 6:05pm";
+        String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?\n"
+                + "To input dates and times for deadlines and events, "
+                + "please use the format: 29/03/2019, 6:05pm";
         System.out.println(welcomeMessage);
     }
 

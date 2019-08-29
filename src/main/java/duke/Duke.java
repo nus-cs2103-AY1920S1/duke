@@ -8,7 +8,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filepath) {
+    private Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
         try {
@@ -19,7 +19,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {

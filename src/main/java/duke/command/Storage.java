@@ -16,6 +16,10 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.LinkedList;
 
+/**
+ *The Storage class is one of the class in command package which
+ * used to deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private static String filePath;
     //private String filePath;
@@ -23,6 +27,13 @@ public class Storage {
     public Storage(String filePath) {
         Storage.filePath = filePath;
     }
+
+    /**
+     * method to read the information in file and convert them to Task object,
+     * then add to the LinkedList abd finally return the list
+     * @return LinkedList which contains the data in the text file
+     * @throws IllegalDukeArgumentException
+     */
     public LinkedList<Task> textRead() throws IllegalDukeArgumentException {
         try {
             FileReader reader = new FileReader("/Users/xutunan/duke/data/duke.txt");
@@ -65,6 +76,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method write  tasks into the text file as strings
+     * @param task the task that in String format
+     * @param isAppend check where need append
+     */
     public void textWrite(String task, boolean isAppend) {
         File file = new File("/Users/xutunan/duke/data/duke.txt");
         try {

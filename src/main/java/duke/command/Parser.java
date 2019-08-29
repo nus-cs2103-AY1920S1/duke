@@ -11,14 +11,27 @@ import duke.task.Todo;
 
 import java.text.ParseException;
 
+/**
+ * The Parser class is one of the class in command package which used to deal with making sense of the user command
+ */
 public class Parser {
     private String[] splitCommand;
 
+    /**
+     * Constructor to write in command line
+     * @param splitCommand
+     */
     public Parser(String[] splitCommand) {
         this.splitCommand = splitCommand;
 
     }
 
+    /**
+     * this method is to deal with different commands
+     * @param storage the object to interact with
+     * @throws IllegalDukeFormatException
+     * @throws IllegalDukeArgumentException
+     */
     public void parse(Storage storage) throws IllegalDukeFormatException, IllegalDukeArgumentException {
         switch (Command.valueOf(splitCommand[0])) {
         case list:
@@ -44,16 +57,28 @@ public class Parser {
             break;
         }
     }
+
+    /**
+     * method for "list" command, print the list out
+     */
     private void commandList() {
         String tasks = "Here are the tasks in your list:";
         System.out.println(tasks);
         TaskList.print();
     }
+    /**
+     * method for "bye" command, print ending and set isExit to true
+     */
     private void commandBye() {
         String Exit = "Bye. Hope to see you again soon!";
         System.out.println(Exit);
         Ui.setIsExit(true);
     }
+
+    /**
+     * method for "done" command, set the task done, and rewrite them to text file with the status updated.
+     * @param storage the object to interact with
+     */
     private void commandDone(Storage storage) {
         try {
             int index = Integer.parseInt(splitCommand[1]);
@@ -68,6 +93,12 @@ public class Parser {
         }
 
     }
+
+    /**
+     * method for "todo" command, add the todo task into the list and write it in text file
+     * @param storage the object to interact with
+     * @throws IllegalDukeArgumentException
+     */
     private void commandTodo(Storage storage) throws IllegalDukeArgumentException {
         try {
             String descriptionT = splitCommand[1];
@@ -81,6 +112,12 @@ public class Parser {
         }
 
     }
+
+    /**
+     * method for "deadline" command, add the deadline task into the list and write it in text file
+     * @param storage the object to interact with
+     * @throws IllegalDukeFormatException
+     */
     private void commandDeadline(Storage storage) throws IllegalDukeFormatException {
         try {
             String[] fullCommand = splitCommand[1].split(" /by ");
@@ -97,6 +134,12 @@ public class Parser {
             System.out.println("OOPS!!! Wrong time format!");
         }
     }
+
+    /**
+     * method for "event" command, add the event task into the list and write it in text file
+     * @param storage  the object to interact with
+     * @throws IllegalDukeFormatException
+     */
     private void commandEvent(Storage storage) throws IllegalDukeFormatException {
         try {
             String[] fullCommand = splitCommand[1].split(" /at ");
@@ -113,6 +156,11 @@ public class Parser {
             throw new IllegalDukeFormatException("event");
         }
     }
+
+    /**
+     * method for "delete" command, delete the task by remove it from the taskList and rewrite list to file
+     * @param storage the object to interact with
+     */
     private void commandDelete(Storage storage) {
         try {
             int indexD = Integer.parseInt(splitCommand[1]) - 1;
@@ -131,7 +179,9 @@ public class Parser {
 }
 
 
-
+/**
+ * the enum class with all types of command
+ */
 enum Command {
     list,bye,done,todo,deadline,event,delete;
 }

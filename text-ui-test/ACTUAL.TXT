@@ -4,101 +4,61 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[T][✓] borrow book
-2.[T][✘] borrow book
-3.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-4.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
 ____________________________________________________________
-____________________________________________________________
-seedu.duke.exception.DukeException: Entered index is out of bound: 0
-____________________________________________________________
+seedu.duke.exception.TaskListEmptyException: list is empty
 ____________________________________________________________
 Got it. I've added this task:
   [T][✘] borrow book
-Now you have 5 tasks in the list.
-____________________________________________________________
+Now you have 1 tasks in the list.
 ____________________________________________________________
 Got it. I've added this task:
   [D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-Now you have 6 tasks in the list.
-____________________________________________________________
+Now you have 2 tasks in the list.
 ____________________________________________________________
 Got it. I've added this task:
   [E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-Now you have 7 tasks in the list.
-____________________________________________________________
+Now you have 3 tasks in the list.
 ____________________________________________________________
 seedu.duke.exception.DukeException: OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
-____________________________________________________________
 Here are the tasks in your list:
-1.[T][✓] borrow book
-2.[T][✘] borrow book
-3.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-4.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-5.[T][✘] borrow book
-6.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-7.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-____________________________________________________________
+1.[T][✘] borrow book
+2.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
+3.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
 ____________________________________________________________
 Nice! I've marked this task as done:
 [T][✓] borrow book
 ____________________________________________________________
-____________________________________________________________
-Here are the tasks in your list:
-1.[T][✓] borrow book
-2.[T][✘] borrow book
-3.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-4.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-5.[T][✘] borrow book
-6.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-7.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-____________________________________________________________
-____________________________________________________________
-Noted. I've removed this task:
-  [T][✘] borrow book
-Now you have 6 tasks in the list.
-____________________________________________________________
-____________________________________________________________
 Here are the tasks in your list:
 1.[T][✓] borrow book
 2.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
 3.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-4.[T][✘] borrow book
-5.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-6.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
   [D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-Now you have 5 tasks in the list.
-____________________________________________________________
-____________________________________________________________
-seedu.duke.exception.DukeException: Entered index is out of bound: -1
-____________________________________________________________
+Now you have 2 tasks in the list.
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][✓] borrow book
-2.[D][✘] return book (by: Mon Aug 28 18:00:00 SGT 19)
-3.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
-4.[T][✘] borrow book
-5.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
+2.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
 ____________________________________________________________
+seedu.duke.exception.DukeException: Entered index is out of bound: 4
 ____________________________________________________________
-seedu.duke.exception.DukeException: Oops! please specify task description
+seedu.duke.exception.DukeException: Entered index is out of bound: -1
 ____________________________________________________________
-____________________________________________________________
-seedu.duke.exception.DukeException: Oops! please specify time (/at, /by ...
-____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] borrow book
+2.[E][✘] project meeting (at: Sat Sep 23 12:00:00 SGT 19)
 ____________________________________________________________
 seedu.duke.exception.DukeException: Oops! please specify task description
 ____________________________________________________________
-____________________________________________________________
 seedu.duke.exception.DukeException: Oops! please specify time (/at, /by ...
 ____________________________________________________________
+seedu.duke.exception.DukeException: Oops! please specify task description
+____________________________________________________________
+seedu.duke.exception.DukeException: Oops! please specify time (/at, /by ...
 ____________________________________________________________
 seedu.duke.exception.DukeException: oops! you entered cmd/desc/time empty..
-____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

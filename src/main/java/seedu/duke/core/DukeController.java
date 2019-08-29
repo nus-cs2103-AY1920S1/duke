@@ -37,7 +37,7 @@ public class DukeController {
                 if (input.equals("bye")) {
                     exit = true;
                 } else {
-                    command.parseCommand(input, cmd, description, list, storage);
+                    command.parseCommand(input, cmd, description, list, storage, ui);
                 }
             } catch (DukeException e) {
                 System.out.println(e);

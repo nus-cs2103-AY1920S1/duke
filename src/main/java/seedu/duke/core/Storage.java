@@ -127,6 +127,28 @@ public class Storage {
     }
 
     /**
+     * searches any given keyword from the task description in the task list.
+     * @param list Task List (ArrayList) that contains all tasks.
+     * @param description task description.
+     * @return Task List (ArrayList) based on the search keyword.
+     */
+    public List<Task> searchTask(List<Task> list, String description) {
+        Task task = new Task();
+        List<Task> searchResultList = new ArrayList<>();
+
+        for (Task t : list) {
+            String[] arr = t.getDescription().split(" ");
+
+            for (String word : arr) {
+                if (arr.equals(description)) {
+                    searchResultList.add(t);
+                }
+            }
+        }
+        return searchResultList;
+    }
+
+    /**
      * removes the task from the task list and from text file, duke.txt.
      * @param list Task List (ArrayList) which includes all tasks.
      * @param index index number that user wants to remove from the task list.

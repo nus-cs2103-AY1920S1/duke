@@ -1,5 +1,9 @@
 package seedu.duke.core;
 
+import seedu.duke.model.Task;
+
+import java.util.List;
+
 public class Ui {
     private static String LOGO =
                       " ____        _        \n"
@@ -32,5 +36,18 @@ public class Ui {
 
     public void showLoadingError() {
 
+    }
+
+    /**
+     * Prints all the tasks inside task list.
+     * @param list Task list (ArrayList) where all tasks are stored.
+     */
+    public void displayList(List<Task> list) {
+        System.out.println("Here are the tasks in your list:");
+        int index = 0;
+        for (Task task : list) {
+            index++;
+            System.out.println(index + "." + task);
+        }
     }
 }

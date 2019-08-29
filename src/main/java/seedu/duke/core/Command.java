@@ -22,10 +22,10 @@ public class Command {
      * @throws IOException when file is not found or cannot be opened.
      */
     public void parseCommand(String input, String cmd, String description,
-                             List<Task> list, Storage storage) throws DukeException,
+                             List<Task> list, Storage storage, Ui ui) throws DukeException,
             ParseException, IOException {
         if (input.equals("list")) {
-            displayList(list);
+            ui.displayList(list);
         } else if (cmd.equals("delete")) {
             try {
                 if (description.equals("") || description == null) {
@@ -60,6 +60,8 @@ public class Command {
 
             System.out.println("Nice! I've marked this task as done:");
             displayTask(list, index);
+        } else if (cmd.equals("find")) {
+            ui.displayList(storage.searchTask(list, description));
         } else {
             //incorrect command
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -79,18 +81,7 @@ public class Command {
         }
     }
 
-    /**
-     * Prints all the tasks inside task list.
-     * @param list Task list (ArrayList) where all tasks are stored.
-     */
-    public void displayList(List<Task> list) {
-        System.out.println("Here are the tasks in your list:");
-        int index = 0;
-        for (Task task : list) {
-            index++;
-            System.out.println(index + "." + task);
-        }
-    }
+
 
     /**
      * Prints only the specified task from task list.

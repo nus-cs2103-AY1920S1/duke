@@ -30,4 +30,7 @@ public class Task {
         return status + " | " + this.name;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return this.name.toLowerCase().contains(keyword);
+    }
 }

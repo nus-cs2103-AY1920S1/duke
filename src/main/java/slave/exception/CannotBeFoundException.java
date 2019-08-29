@@ -10,7 +10,7 @@ public class CannotBeFoundException extends DukeException {
      *
      * @param term Term that was searched and cannot be found.
      */
-    public CannotBeFoundException(String term){
+    public CannotBeFoundException(String term) {
         super(String.format("%s cannot be found!", term));
     }
 }

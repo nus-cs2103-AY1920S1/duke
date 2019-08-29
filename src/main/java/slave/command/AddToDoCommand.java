@@ -28,14 +28,14 @@ public class AddToDoCommand extends Command {
     /**
      * Executes the command by adding to-do task to list and print to user.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws DukeException For error in adding to taskList.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        ToDo toDoTask = new ToDo(this.task, taskList.getSize() + 1);
-        taskList.addToList(toDoTask);
-        ui.printAddToDoCommand(toDoTask, taskList);
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
+        ToDo toDoTask = new ToDo(this.task, tasks.getSize() + 1);
+        tasks.addToList(toDoTask);
+        ui.printAddToDoCommand(toDoTask, tasks);
     }
 }

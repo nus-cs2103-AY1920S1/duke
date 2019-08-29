@@ -31,14 +31,14 @@ public class FindCommand extends Command {
      * Executes by searching for task with the user input term,
      * storing into a temp arraylist and then printing it to user interface.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws DukeException Throws if searched term isn't in any of the task descriptions.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         ArrayList<Task> findList = new ArrayList<>();
-        for (Task task: taskList.getList()){
+        for (Task task: tasks.getList()){
             if (task.getDescription().contains(this.term)){
                 findList.add(task);
             }

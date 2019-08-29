@@ -26,12 +26,12 @@ public class NullCommand extends Command {
     /**
      * Executes by throwing an exception which tells the user that the input command is not valid.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws DukeException For invalid commands by user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         throw new InvalidCommandException(command);
     }
 }

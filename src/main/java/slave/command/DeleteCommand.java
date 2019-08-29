@@ -28,19 +28,19 @@ public class DeleteCommand extends Command {
     /**
      * Executes by deleting a task from storage and taskList.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws DukeException For error in retrieving task from list due to invalid index.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         try {
-            taskList.getTaskByIndex(this.index);
+            tasks.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
             throw new TaskNotFoundException("Task " + this.index );
         }
-        Task toRemove = taskList.getTaskByIndex(this.index);
-        taskList.removeFromList(this.index);
-        ui.printDeleteCommand(toRemove, taskList);
+        Task toRemove = tasks.getTaskByIndex(this.index);
+        tasks.removeFromList(this.index);
+        ui.printDeleteCommand(toRemove, tasks);
     }
 }

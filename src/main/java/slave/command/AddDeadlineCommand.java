@@ -44,14 +44,14 @@ public class AddDeadlineCommand extends Command {
     /**
      * Executes the command by adding deadline task to list and print to user.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For error in adding to taskList.
+     * @throws DukeException For error in adding to TaskList.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        Deadline deadlineTask = new Deadline(this.task, taskList.getSize() + 1, this.date);
-        taskList.addToList(deadlineTask);
-        ui.printAddDeadlineCommand(deadlineTask, taskList);
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
+        Deadline deadlineTask = new Deadline(this.task, tasks.getSize() + 1, this.date);
+        tasks.addToList(deadlineTask);
+        ui.printAddDeadlineCommand(deadlineTask, tasks);
     }
 }

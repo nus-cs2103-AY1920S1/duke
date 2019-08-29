@@ -30,7 +30,7 @@ public class Date {
             "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
             "th", "st" };
 
-    private static String[] monthString = { "Placeholder", "January", "February", "March", "April", "May",
+    private static String[] monthStrings = { "Placeholder", "January", "February", "March", "April", "May",
             "June", "July", "August", "September", "October", "November", "December" };
 
     /**
@@ -53,11 +53,11 @@ public class Date {
      */
     private void format() throws DukeException {
         try {
-            String[] splitDate = this.dateFormat.split("/");
+            String[] splitDateTimeTokens = this.dateFormat.split("/");
 
-            this.day = Integer.parseInt(splitDate[0]);
-            this.month = Integer.parseInt(splitDate[1]);
-            this.year = Integer.parseInt(splitDate[2]);
+            this.day = Integer.parseInt(splitDateTimeTokens[0]);
+            this.month = Integer.parseInt(splitDateTimeTokens[1]);
+            this.year = Integer.parseInt(splitDateTimeTokens[2]);
 
             String hour = time.substring(0, 2);
             String minute = time.substring(2);
@@ -80,7 +80,7 @@ public class Date {
         String result;
         try {
             result = this.day + daySuffixes[this.day] +
-                    " of " + monthString[this.month] +
+                    " of " + monthStrings[this.month] +
                     " " + this.year + ", " + timeFormat;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidDateException();

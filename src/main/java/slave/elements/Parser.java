@@ -44,25 +44,24 @@ public class Parser {
             return new AddToDoCommand(fullCommand.substring(5));
         case "deadline":
             checkValidity("deadline", fullCommand, tokens);
-            String[] deadlineSplit = fullCommand.split(" /by ");
-            String deadlineDesc = deadlineSplit[0].substring(9);
-            String deadlineDate = deadlineSplit[deadlineSplit.length - 1];
+            String[] deadlineSplitByTokens = fullCommand.split(" /by ");
+            String deadlineDesc = deadlineSplitByTokens[0].substring(9);
+            String deadlineDate = deadlineSplitByTokens[deadlineSplitByTokens.length - 1];
 
             if (isDate(deadlineDate)) {
-                String[] dateSplitter = deadlineDate.split(" ");
-                Date validDeadlineDate = new Date(dateSplitter[0], dateSplitter[1]);
+                String[] dateSplitTokens = deadlineDate.split(" ");
+                Date validDeadlineDate = new Date(dateSplitTokens[0], dateSplitTokens[1]);
                 return new AddDeadlineCommand(deadlineDesc, validDeadlineDate);
             }
-
             return new AddDeadlineCommand(deadlineDesc, deadlineDate);
         case "event":
             checkValidity("event", fullCommand, tokens);
-            String[] eventSplit = fullCommand.split(" /at ");
-            String eventDesc = eventSplit[0].substring(6);
-            String eventDate = eventSplit[eventSplit.length - 1];
+            String[] eventSplitByTokens = fullCommand.split(" /at ");
+            String eventDesc = eventSplitByTokens[0].substring(6);
+            String eventDate = eventSplitByTokens[eventSplitByTokens.length - 1];
             if (isDate(eventDate)) {
-                String[] eventSplitter = eventDate.split(" ");
-                Date validEventDate = new Date(eventSplitter[0], eventSplitter[1]);
+                String[] eventSplitTokens = eventDate.split(" ");
+                Date validEventDate = new Date(eventSplitTokens[0], eventSplitTokens[1]);
                 return new AddEventCommand(eventDesc, validEventDate);
             }
             return new AddEventCommand(eventDesc, eventDate);

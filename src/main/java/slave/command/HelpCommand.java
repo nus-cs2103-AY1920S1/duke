@@ -18,11 +18,11 @@ public class HelpCommand extends Command {
     /**
      * Executes by showing the help message from user interface.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(TaskList tasks, Ui ui) {
         ui.showHelpMessage();
     }
 }

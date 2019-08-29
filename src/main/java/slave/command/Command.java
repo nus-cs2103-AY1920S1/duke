@@ -24,9 +24,9 @@ public abstract class Command {
     /**
      * Abstract method execute which are actions the command should do.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws DukeException Throws exception with error message in case anything goes wrong.
      */
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui) throws DukeException;
 }

@@ -82,13 +82,13 @@ public class Ui {
      * Prints add deadline command.
      *
      * @param deadlineTask Deadline task to be added.
-     * @param taskList Current task list.
+     * @param tasks Current task list.
      */
-    public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList) {
+    public void printAddDeadlineCommand(Deadline deadlineTask, TaskList tasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + deadlineTask));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
+        System.out.println(Formatter.indentLine("Now you have " + tasks.getSize() + " tasks in the list."));
         Formatter.printLine();
     }
 
@@ -96,13 +96,13 @@ public class Ui {
      * Prints add event command.
      *
      * @param eventTask Event task to be added.
-     * @param taskList Current task list.
+     * @param tasks Current task list.
      */
-    public void printAddEventCommand(Event eventTask, TaskList taskList) {
+    public void printAddEventCommand(Event eventTask, TaskList tasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + eventTask));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
+        System.out.println(Formatter.indentLine("Now you have " + tasks.getSize() + " tasks in the list."));
         Formatter.printLine();
     }
 
@@ -111,13 +111,13 @@ public class Ui {
      * Prints add to-do command.
      *
      * @param toDoTask To-do task to be added.
-     * @param taskList Current task list.
+     * @param tasks Current task list.
      */
-    public void printAddToDoCommand(ToDo toDoTask, TaskList taskList) {
+    public void printAddToDoCommand(ToDo toDoTask, TaskList tasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + toDoTask));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
+        System.out.println(Formatter.indentLine("Now you have " + tasks.getSize() + " tasks in the list."));
         Formatter.printLine();
     }
 
@@ -125,13 +125,13 @@ public class Ui {
      * Prints delete command.
      *
      * @param toRemove Task to be removed.
-     * @param taskList Current task list.
+     * @param tasks Current task list.
      */
-    public void printDeleteCommand(Task toRemove, TaskList taskList){
+    public void printDeleteCommand(Task toRemove, TaskList tasks){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Noted. I've removed this task:"));
         System.out.println(Formatter.indentLine("  " + toRemove));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
+        System.out.println(Formatter.indentLine("Now you have " + tasks.getSize() + " tasks in the list."));
         Formatter.printLine();
     }
 
@@ -150,12 +150,12 @@ public class Ui {
     /**
      * Prints a list of current tasks.
      *
-     * @param taskList Current task list.
+     * @param tasks Current task list.
      */
-    public void printListCommand(TaskList taskList) {
+    public void printListCommand(TaskList tasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Here are the tasks in your list:"));
-        for (Task task: taskList.getList()){
+        for (Task task: tasks.getList()){
             System.out.println(Formatter.indentLine(task.getId() + "." + task.toString()));
         }
         Formatter.printLine();
@@ -164,13 +164,13 @@ public class Ui {
     /**
      * Prints a list of matching results.
      *
-     * @param findList List of searched entries.
+     * @param findTasks List of searched entries.
      */
-    public void printFindCommand(ArrayList<Task> findList) {
+    public void printFindCommand(ArrayList<Task> findTasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Here are the matching tasks in your list:"));
         int index = 1;
-        for (Task task: findList) {
+        for (Task task: findTasks) {
             System.out.println(Formatter.indentLine(index + ") " + task.getId() + "." + task.toString()));
             index++;
         }

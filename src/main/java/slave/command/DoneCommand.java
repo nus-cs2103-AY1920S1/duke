@@ -29,22 +29,22 @@ public class DoneCommand extends Command {
     /**
      * Executes by marking a particular task as done and prints to the user.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      * @throws DukeException For tasks that cannot be found or have already been done.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         try {
-            taskList.getTaskByIndex(this.index);
+            tasks.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
             throw new TaskNotFoundException("Task " + this.index);
         }
-        if (taskList.getTaskByIndex(this.index).getIsDone()) {
+        if (tasks.getTaskByIndex(this.index).getIsDone()) {
             throw new TaskAlreadyDoneException("Task " + this.index);
         }
-        taskList.setDoneInList(this.index);
-        Task task = taskList.getTaskByIndex(this.index);
+        tasks.setDoneInList(this.index);
+        Task task = tasks.getTaskByIndex(this.index);
         ui.printDoneCommand(task);
     }
 }

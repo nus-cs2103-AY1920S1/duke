@@ -44,14 +44,14 @@ public class AddEventCommand extends Command {
     /**
      * Executes the command by adding event task to list and print to user.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
-     * @throws DukeException For error in adding to taskList.
+     * @throws DukeException For error in adding to TaskList.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        Event eventTask = new Event(this.task, taskList.getSize() + 1, this.date);
-        taskList.addToList(eventTask);
-        ui.printAddEventCommand(eventTask, taskList);
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
+        Event eventTask = new Event(this.task, tasks.getSize() + 1, this.date);
+        tasks.addToList(eventTask);
+        ui.printAddEventCommand(eventTask, tasks);
     }
 }

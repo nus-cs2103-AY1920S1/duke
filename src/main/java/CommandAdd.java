@@ -1,14 +1,40 @@
+/**
+ * Represents the adder command to add the task to the task list.
+ */
 public class CommandAdd extends Command {
 
+    /**
+     * The description of the command.
+     */
     private String description;
+
+    /**
+     * The type of command.
+     */
     private String type;
+
+    /**
+     * The date stored.
+     */
     private Date date;
+
+    /**
+     * The task stored.
+     */
     private Task task;
 
+    /**
+     * Gets the task stored.
+     * @return the task stored.
+     */
     public Task getTask() {
         return task;
     }
 
+    /**
+     * Constructor of the adder command.
+     * @param str the string of full command
+     */
     public CommandAdd(String str) {
         this.type = str.split(" ", 2)[0];
         if (type.equals("todo")) {
@@ -45,6 +71,12 @@ public class CommandAdd extends Command {
         this.string = type + description + date;
     }
 
+    /**
+     * Executes the add command.
+     * @param tasks the task list
+     * @param ui the UI
+     * @param storage the storage writer
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printString("Got it. I've added this task:");
@@ -56,6 +88,10 @@ public class CommandAdd extends Command {
         storage.save(tasks.getList(), tasks.getNoOfTasks());
     }
 
+    /**
+     * Returns the string representation of the task command.
+     * @return the task stored.
+     */
     @Override
     public String toString() {
         return this.string;

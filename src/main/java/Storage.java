@@ -2,21 +2,50 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
+/**
+ * Represents the loader and the file saver.
+ */
 public class Storage {
+
+    /**
+     * The path of the file.
+     */
     private String filePath;
+
+    /**
+     * The saved file.
+     */
     private File file;
+
+    /**
+     * The list of tasks.
+     */
     private List<Task> storageList;
+
+    /**
+     * Number of tasks.
+     */
     private int noOfTasks;
 
+    /**
+     * Constructs the loader cum file saver.
+     * @param filepath path of the file
+     */
     public Storage (String filepath) {
         this.filePath = filepath;
     }
 
     //create new storage before saving
+
+    /**
+     * Saves the state of the manager.
+     * @param list list of tasks
+     * @param noOfTasks number of tasks
+     */
     public void save(List<Task> list, int noOfTasks) {
         //Write file
         this.storageList = list;
@@ -45,6 +74,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads the manager from a saved file.
+     * @return list of tasks
+     * @throws FileNotFoundException error exceptions
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         List<Task> list = new ArrayList<>();
         int pos = 0;

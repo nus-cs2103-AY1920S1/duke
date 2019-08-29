@@ -1,9 +1,35 @@
+/**
+ * Represents the date.
+ */
 public class Date {
+
+    /**
+     * The day of the date.
+     */
     private int day;
+
+    /**
+     * The month of the date.
+     */
     private int month;
+
+    /**
+     * The year of the date.
+     */
     private int year;
+
+    /**
+     * The time of the date.
+     */
     private int time;
 
+    /**
+     * Constructs the date.
+     * @param day the day
+     * @param month the month
+     * @param year the year
+     * @param time the time
+     */
     public Date(int day, int month, int year, int time) {
         this.day = day;
         this.month = month;
@@ -11,6 +37,10 @@ public class Date {
         this.time = time;
     }
 
+    /**
+     * Returns the date.
+     * @return the date
+     */
     @Override
     public String toString() {
         String str = "";

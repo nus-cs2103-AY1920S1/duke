@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileSaver {
+public class Storage {
     private static File file = new File("../duke.txt");
 
-    public static ArrayList<Task> loadTask() throws FileNotFoundException {
+    public static ArrayList<Task> load() throws FileNotFoundException {
 
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -20,7 +20,7 @@ public class FileSaver {
 
                 String[] task = sc.nextLine().split("\\|");
                 String taskType = task[0].trim();
-                boolean isTaskDone = task[2].trim().equals("1") ? true : false;
+                boolean isTaskDone = task[2].trim().equals("1");
 
                 switch(taskType) {
                     case "T":

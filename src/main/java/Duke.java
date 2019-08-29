@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+    private boolean isOngoing;
+    private TaskList taskList;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,16 +18,16 @@ public class Duke {
     /**
      * Reads input from the user and passes it to process().
      */
-    public static void read() {
+    private void read() {
         String inputString; // stores input from user
         Scanner in = new Scanner(System.in);
 
+        this.isOngoing = true;
+        this.taskList = new TaskList();
+
         // continuously take in user input until terminated
-        while(true) {
+        while(isOngoing) {
             inputString = in.nextLine();
-            if (inputString.equals("bye")) {
-                break;
-            }
             process(inputString);
         }
 
@@ -38,8 +41,18 @@ public class Duke {
      *
      * @param input input string given by user.
      */
-    public static void process(String input) {
-        // print given input to console
-        System.out.println(input);
+    private void process(String input) {
+        // terminate if "bye"
+        if (input.equals("bye")) {
+            this.isOngoing = false;
+        }
+
+        // print list if "list"
+        if (input.equals("list")) {
+            this.taskList.printList();
+        }
+
+        // add to list otherwise
+        this.taskList.addToList(input);
     }
 }

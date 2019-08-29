@@ -4,7 +4,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,6 +18,13 @@ public class Duke {
     private static String filePath = "/Users/joannayap/Downloads/duke/src/main/data/duke.txt";
 
 
+    public Date parseDate(String date) throws Exception {
+        Date twentyFourHourFormat = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(date);
+        String twelveHourFormat = new SimpleDateFormat("dd/MM/yyy hh:mm").format(twentyFourHourFormat);
+
+        return new SimpleDateFormat("dd/MM/yyy hh:mm").parse(twelveHourFormat);
+    }
+
     public void writeToFile(String textToAdd) throws IOException {
         //Create a file writer object to represent the hard disk
         FileWriter fw = new FileWriter(filePath, true);
@@ -24,12 +33,12 @@ public class Duke {
     }
 
 
-    public void appendToFile(String type, String desc, String date) {
+    public void appendToFile(String type, String desc, Date date) {
         try {
-           if(date == null)
-               writeToFile(type + " | 1 | " + desc + "\n");
-           else
-               writeToFile(type + " | 1 | " + desc + " | " + date +"\n");
+            if (date == null)
+                writeToFile(type + " | 1 | " + desc + "\n");
+            else
+                writeToFile(type + " | 1 | " + desc + " | " + date + "\n");
 
         } catch (IOException e) {
             System.out.println("Something went wrong " + e.getMessage());
@@ -98,7 +107,7 @@ public class Duke {
     }
 
 
-    public void addDeadlineTask(String input) throws EmptyDescException {
+    public void addDeadlineTask(String input) throws EmptyDescException, Exception {
         if (input.length() < 9) {
             throw new EmptyDescException("deadline");
         } else {
@@ -107,11 +116,14 @@ public class Duke {
             int deadlineIndex = input.indexOf('/') + 4;
             String deadline = input.substring(deadlineIndex);
             String desc = input.substring(9, deadlineIndex - 5);
+            Date deadlineDate = null;
+
+            deadlineDate = parseDate(deadline);
 
 
-            appendToFile("D", desc, deadline);
+            appendToFile("D", desc, deadlineDate);
 
-            Deadline newDeadline = new Deadline(desc, deadline);
+            Deadline newDeadline = new Deadline(desc, deadlineDate);
 
             toDoList.add(newDeadline);
 
@@ -124,20 +136,22 @@ public class Duke {
         }
     }
 
-    public void addEventTask(String input) throws EmptyDescException {
+    public void addEventTask(String input) throws EmptyDescException, Exception {
         if (input.length() < 6) {
             throw new EmptyDescException("event");
         } else {
 
             int timeIndex = input.indexOf('/') + 4;
             String time = input.substring(timeIndex);
-
             String desc = input.substring(6, timeIndex - 5);
+            Date timeDate = null;
 
-            appendToFile("E", desc, time);
+            timeDate = parseDate(time);
+
+            appendToFile("E", desc, timeDate);
 
 
-            Event newEvent = new Event(desc, time);
+            Event newEvent = new Event(desc, timeDate);
 
             toDoList.add(newEvent);
 
@@ -193,16 +207,25 @@ public class Duke {
 
         } else if (input.contains("todo")) {
 
+
             addTodoTask(input);
 
 
         } else if (input.contains("deadline")) {
 
-            addDeadlineTask(input);
+            try {
+                addDeadlineTask(input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
         } else if (input.contains("event")) {
 
-            addEventTask(input);
+            try {
+                addEventTask(input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
         } else if (input.contains("delete")) {
             deleteTask(input);
@@ -243,4 +266,3 @@ public class Duke {
     }
 
 }
-

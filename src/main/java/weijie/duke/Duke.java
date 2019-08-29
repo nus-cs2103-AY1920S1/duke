@@ -33,14 +33,14 @@ public class Duke {
 
         } catch (DukeIOException e) {
             ui.printError(e);
-            ui.exit();
+            ui.printExit();
         }
 
     }
 
     private void run() {
         initDependencies();
-        presenter.start();
+        presenter.run();
     }
 
     public static void main(String[] args) {

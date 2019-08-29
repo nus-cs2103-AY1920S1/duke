@@ -16,23 +16,19 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String DIVIDER = "____________________________________________________________\n";
 
-    private ConsoleInputListener inputListener;
+    private Scanner consoleInput;
 
-    public void registerListener(ConsoleInputListener inputListener) {
-        this.inputListener = inputListener;
+    public Ui() {
+        consoleInput = new Scanner(System.in);
     }
 
     public void startDisplay() {
         System.out.println(
                 StringUtils.indentf("%s%sHello! I'm Duke\nWhat can I do for you?\n%s", DIVIDER, LOGO, DIVIDER));
+    }
 
-        Scanner consoleInput = new Scanner(System.in);
-
-        //noinspection InfiniteLoopStatement
-        while (true) {
-            String input = consoleInput.nextLine();
-            inputListener.onInputReceived(input);
-        }
+    public String readCommand() {
+        return consoleInput.nextLine();
     }
 
     public void print(TaskResponse response) {
@@ -48,8 +44,7 @@ public class Ui {
         System.out.println(StringUtils.indentf("%s" + e.getMessage() + "\n%s", DIVIDER, DIVIDER));
     }
 
-    public void exit() {
+    public void printExit() {
         System.out.println(StringUtils.indentf("%sBye. Hope to see you again soon!\n%s", DIVIDER, DIVIDER));
-        System.exit(0);
     }
 }

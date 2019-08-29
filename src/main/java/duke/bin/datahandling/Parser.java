@@ -1,12 +1,15 @@
-package duke.bin;
+package duke.bin.datahandling;
 
-import duke.bin.storage.DataStorage;
+import duke.bin.TaskList;
+import duke.bin.UI;
+import duke.bin.common.DukeException;
+import duke.bin.common.Time;
+import duke.bin.datahandling.DataStorage;
 import duke.bin.task.Deadline;
 import duke.bin.task.Event;
 import duke.bin.task.Task;
 import duke.bin.task.ToDo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Parser {

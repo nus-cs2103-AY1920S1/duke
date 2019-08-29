@@ -1,6 +1,6 @@
 package duke.bin.task;
 
-import duke.bin.Time;
+import duke.bin.common.Time;
 
 public class Event extends Task {
     protected Time time;

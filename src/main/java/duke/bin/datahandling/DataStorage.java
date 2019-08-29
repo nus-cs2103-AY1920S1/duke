@@ -1,7 +1,7 @@
-package duke.bin.storage;
+package duke.bin.datahandling;
 
-import duke.bin.DukeException;
-import duke.bin.Time;
+import duke.bin.common.DukeException;
+import duke.bin.common.Time;
 import duke.bin.task.Deadline;
 import duke.bin.task.Event;
 import duke.bin.task.Task;
@@ -9,7 +9,6 @@ import duke.bin.task.ToDo;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class DataStorage {

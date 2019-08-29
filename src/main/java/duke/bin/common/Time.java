@@ -1,6 +1,5 @@
-package duke.bin;
+package duke.bin.common;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

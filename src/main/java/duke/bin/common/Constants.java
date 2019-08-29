@@ -1,4 +1,4 @@
-package duke.bin;
+package duke.bin.common;
 
 public class Constants {
     public static final String INDENTATION = "     ";

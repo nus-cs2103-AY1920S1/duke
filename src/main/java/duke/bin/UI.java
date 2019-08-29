@@ -1,12 +1,9 @@
 package duke.bin;
 
-import duke.bin.storage.DataStorage;
-import duke.bin.task.Deadline;
-import duke.bin.task.Event;
+import duke.bin.common.Constants;
+import duke.bin.common.DukeException;
 import duke.bin.task.Task;
-import duke.bin.task.ToDo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 

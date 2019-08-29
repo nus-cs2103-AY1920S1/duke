@@ -1,4 +1,4 @@
-package duke.bin.task;
+package duke.bin.datahandling;
 
 public class CommandHandler {
 

@@ -1,10 +1,10 @@
 package duke;
 
-import duke.bin.DukeException;
-import duke.bin.Parser;
+import duke.bin.common.DukeException;
+import duke.bin.datahandling.Parser;
 import duke.bin.TaskList;
 import duke.bin.UI;
-import duke.bin.storage.DataStorage;
+import duke.bin.datahandling.DataStorage;
 
 public class Duke {
     private DataStorage storage;

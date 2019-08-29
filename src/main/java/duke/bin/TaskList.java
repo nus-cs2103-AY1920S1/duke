@@ -1,5 +1,6 @@
 package duke.bin;
 
+import duke.bin.common.DukeException;
 import duke.bin.task.Task;
 
 import java.util.ArrayList;

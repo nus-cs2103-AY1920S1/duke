@@ -7,6 +7,7 @@ import duke.task.Task;
 import duke.task.ToDos;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  * Deals with making sense of the user command.
@@ -73,6 +74,15 @@ public class Parser {
         } else if (words[0].equals("delete")) {
             currTask = taskList.delete(words[1]);
             ui.printDelete(currTask, taskList);
+        } else if(words[0].equals("find")) {
+            ArrayList<Task> temp = new ArrayList<>();
+            for (int i = 0; i < taskList.list.size(); i++) {
+                String currDesc = taskList.list.get(i).getDesc();
+                if (currDesc.contains(words[1])) {
+                    temp.add(taskList.list.get(i));
+                }
+            }
+            ui.printFind(temp);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

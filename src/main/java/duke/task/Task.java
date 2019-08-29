@@ -1,13 +1,13 @@
 package duke.task;
 
+/**
+ * Represents a task.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected int num;
-
-    /**
-     * Represents a task.
-     */
 
     public Task() {
     }
@@ -27,6 +27,10 @@ public class Task {
         if (isDone) {
             num = 1;
         }
+    }
+
+    public String getDesc() {
+        return description;
     }
 
     /**

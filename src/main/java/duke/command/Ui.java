@@ -23,6 +23,7 @@ public class Ui {
      *
      * @param parser parser to process the input.
      */
+
     public void start(Parser parser) {
         System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
@@ -93,6 +94,19 @@ public class Ui {
 
     public void printDone(Task currTask) {
         System.out.println("Nice! I've marked this task as done: \n  " + currTask);
+    }
+
+    /**
+     * Prints list of tasks which contains keyword.
+     *
+     * @param list list of task to be printed.
+     */
+
+    public void printFind(ArrayList<Task> list) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println(i + ". " + list.get(i - 1));
+        }
     }
 
     /**

@@ -1,1 +1,3 @@
-Event | F | Project Meeting (at: 28/08/19 1600 - 28/08/19 1800)
+Todo | F | borrow books
+Todo | F | read books
+Todo | F | pay attention

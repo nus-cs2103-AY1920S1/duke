@@ -26,6 +26,8 @@ public class Parser {
                     return new CreateDeadlineCommand(commandInformation);
                 case "event":
                     return new CreateEventCommand(commandInformation);
+                case "find":
+                    return new FindTaskCommand(commandInformation);
                 default:
                     return new InvalidCommand();
             }

@@ -13,12 +13,23 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
+
 public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Deals with loading task from the file.
+     *
+     * @return list of tasks from file.
+     * @throws IOException If file is corrupted or not found.
+     */
 
     public ArrayList<Task> load() throws IOException {
         File dir = new File("data");
@@ -41,11 +52,24 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Deals with writing text to the file.
+     *
+     * @throws IOException If file is corrupted or not found.
+     */
+
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
+
+    /**
+     * Deals with reading task from the file.
+     *
+     * @throws FileNotFoundException  If file is not found.
+     * @throws ParseException If date is not in date format.
+     */
 
     private static void readFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException, ParseException {
         File f = new File(filePath); // create a File for the given file path
@@ -76,11 +100,23 @@ public class Storage {
         }
     }
 
+    /**
+     * Deals with appending task from the file.
+     *
+     * @throws IOException If file is corrupted or not found.
+     */
+
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
+
+    /**
+     * Deals with saving tasks to the file.
+     *
+     * @throws IOException If file is corrupted or not found.
+     */
 
     public void save(TaskList taskList) throws IOException {
         StringBuilder sb = new StringBuilder();

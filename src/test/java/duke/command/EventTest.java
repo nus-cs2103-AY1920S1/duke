@@ -7,7 +7,16 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Represents a JUnit test for Event.
+ */
+
 class EventTest {
+
+    /**
+     * Test format method in event.
+     */
+
     @Test
     public void eventToFileFormat_validInput_success() {
         try {

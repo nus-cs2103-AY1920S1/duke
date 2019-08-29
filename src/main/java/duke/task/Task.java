@@ -5,6 +5,10 @@ public class Task {
     protected boolean isDone;
     protected int num;
 
+    /**
+     * Represents a task.
+     */
+
     public Task() {
     }
 
@@ -25,9 +29,21 @@ public class Task {
         }
     }
 
+    /**
+     * Deals with changing the task to file format string.
+     *
+     * @return task as string.
+     */
+
     public String format() {
         return "|" + num + "|" + description;
     }
+
+    /**
+     * Deals with changing the task to print format string.
+     *
+     * @return task as string.
+     */
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

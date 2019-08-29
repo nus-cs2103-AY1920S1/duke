@@ -7,6 +7,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getFileLine() {
+        return super.getFileLine() + " | " + this.at;
+    }
+
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";
     }

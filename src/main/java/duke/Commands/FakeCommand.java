@@ -11,19 +11,21 @@ import duke.DukeException;
 public class FakeCommand extends Command {
 
     /**
-     * Contructor of the class, nothing special
+     * Contructor of the class, nothing special.
      * @Extends duke.Commands.Command
      */
-    public FakeCommand() {}
+    public FakeCommand() {
+
+    }
 
     /**
      * This method directly throw out an DukeException to tell the user that this command is invalid.
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
-     * @throws DukeException
+     * @throws DukeException Throw it anyway sinc ethe command is invalid.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException{
+    public void execute(TaskList tl, Ui ui) throws DukeException {
         throw new DukeException("Please input a valid command.");
     }
 

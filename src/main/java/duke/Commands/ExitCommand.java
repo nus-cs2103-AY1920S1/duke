@@ -14,7 +14,9 @@ public class ExitCommand extends Command {
     /**
      * Constructor of the class, nothing special.
      */
-    public ExitCommand() {}
+    public ExitCommand() {
+
+    }
 
     /**
      * This method calls the target task list to save itself to a file and let the target user end
@@ -24,8 +26,8 @@ public class ExitCommand extends Command {
      * @throws DukeException If IOException occurs in the saving process.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException{
-        try{
+    public void execute(TaskList tl, Ui ui) throws DukeException {
+        try {
             tl.rewrite();
             ui.showExitMessage();
         } catch (IOException e) {

@@ -32,7 +32,8 @@ public class AddCommand extends Command {
      * This is the constructor when the task to add is an event or deadline task.
      * @param taskType This parameter should be "E" or "D", to show whether it is an event or a deadline task.
      * @param taskName The task name.
-     * @param taskTime The time of the task, should be in the form "dd/MM/yyyy HH:mm:ss" to avoid exception in execute method.
+     * @param taskTime The time of the task, should be in the form "dd/MM/yyyy HH:mm:ss"
+     *                 to avoid exception in execute method.
      */
     public AddCommand(String taskType, String taskName, String taskTime) {
         this.taskName = taskName;

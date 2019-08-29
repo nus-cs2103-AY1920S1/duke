@@ -7,12 +7,14 @@ import duke.DirectProcessor.Ui;
  * This is the Command subclass to list out all tasks in the target task list.
  * @Extends duke.Commands.Command
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Constructor of the class, nothing special.
      */
-    public ListCommand() {}
+    public ListCommand() {
+
+    }
 
     /**
      * The override method execute from the superclass Command.

@@ -23,7 +23,9 @@ public class Ui {
      */
     public void drawLine() {
         System.out.print("    ");
-        for (int i = 0; i < 70; i++) System.out.print("_");
+        for (int i = 0; i < 70; i++) {
+            System.out.print("_");
+        }
         System.out.print("\n");
     }
 

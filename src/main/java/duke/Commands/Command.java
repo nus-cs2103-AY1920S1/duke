@@ -19,7 +19,7 @@ public abstract class Command {
      * Execute the command on target task list and print command information through target user end.
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
-     * @throws DukeException
+     * @throws DukeException Based on requirements of a Command subclass.
      */
     public abstract void execute(TaskList tl, Ui ui) throws DukeException;
 

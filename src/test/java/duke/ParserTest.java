@@ -1,3 +1,5 @@
+package duke;
+
 import duke.Commands.Command;
 import duke.DirectProcessor.Parser;
 import duke.DirectProcessor.TaskList;

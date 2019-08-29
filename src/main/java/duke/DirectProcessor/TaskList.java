@@ -28,7 +28,9 @@ public class TaskList {
      * This constructor is used when Storage class successfully read from the file.
      * @param taskList The task list read from the input file.
      */
-    public TaskList(ArrayList<Task> taskList) { this.taskList = taskList; }
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     /**
      * This methods return how many tasks are there in this task list.
@@ -69,9 +71,8 @@ public class TaskList {
         return taskList.get(position - 1);
     }
 
-
     /**
-     * This method returns all tasks whose task name contains the given message s in the form of a string array list
+     * This method returns all tasks whose task name contains the given message s in the form of a string array list.
      * @param s The target string we want to find inside the task name.
      * @return All tasks whose task name matches the target string in the form of a string array list.
      */

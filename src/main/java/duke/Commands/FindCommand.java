@@ -5,10 +5,10 @@ import duke.DirectProcessor.Ui;
 import duke.DukeException;
 
 /**
- * This is the command subclass to list out all tasks whose task name contains the targeting string s
+ * This is the command subclass to list out all tasks whose task name contains the targeting string s.
  * @Extends Command
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String target;
 

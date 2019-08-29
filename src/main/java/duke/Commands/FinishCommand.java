@@ -30,7 +30,7 @@ public class FinishCommand extends Command {
      * @throws DukeException If the position is out of bound of the task list.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException{
+    public void execute(TaskList tl, Ui ui) throws DukeException {
         if (position > tl.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }

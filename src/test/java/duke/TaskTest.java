@@ -1,3 +1,5 @@
+package duke;
+
 import duke.Duke;
 import duke.DukeException;
 import duke.Tasks.Deadline;

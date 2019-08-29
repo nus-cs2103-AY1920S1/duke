@@ -27,8 +27,8 @@ public class Deadline extends Task {
         try {
             this.deathTime = myFormat.parse(deathTime);
         } catch (ParseException e) {
-            throw new DukeException("The date input format is not correct, " +
-                    "it should be in the form dd/MM/yyyy HH:mm:ss");
+            throw new DukeException("The date input format is not correct, "
+                    + "it should be in the form dd/MM/yyyy HH:mm:ss");
         }
     }
 
@@ -40,8 +40,11 @@ public class Deadline extends Task {
     @Override
     public String taskInfo() {
         String indicator;
-        if (isFinished()) indicator = "[\u2713] ";
-        else indicator = "[\u2715] ";
+        if (isFinished()) {
+            indicator = "[\u2713] ";
+        } else {
+            indicator = "[\u2715] ";
+        }
         return "[D]" + indicator + getName() + " (by: " + myFormat.format(deathTime) + ")";
     }
 
@@ -52,7 +55,10 @@ public class Deadline extends Task {
      */
     @Override
     public String recordInfo() {
-        if (isFinished()) return "D|" + "1|" + getName() + "|" + myFormat.format(deathTime);
-        else return "D|" + "0|" + getName() + "|" + myFormat.format(deathTime);
+        if (isFinished()) {
+            return "D|" + "1|" + getName() + "|" + myFormat.format(deathTime);
+        } else {
+            return "D|" + "0|" + getName() + "|" + myFormat.format(deathTime);
+        }
     }
 }

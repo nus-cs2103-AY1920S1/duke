@@ -5,6 +5,7 @@ import duke.DirectProcessor.Parser;
 import duke.DirectProcessor.Storage;
 import duke.DirectProcessor.TaskList;
 import duke.DirectProcessor.Ui;
+
 import java.io.IOException;
 
 /**
@@ -17,6 +18,15 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Do not use this constructor, it is written simply for executing javafx.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList();
+    }
+
+    /**
      * The constructor of the class, to be called at the beginning when the system is activated.
      * It initializes the storage class, user end.
      * The previously saved task list will be reloaded through the storage class and used to initialize the task list.
@@ -27,10 +37,10 @@ public class Duke {
         storage = new Storage();
         try {
             tasks = new TaskList(storage.reload(fileName));
-        } catch(IOException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -49,7 +59,7 @@ public class Duke {
     private void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.takeCommand();
                 ui.drawLine();
@@ -66,9 +76,10 @@ public class Duke {
 
     /**
      * The main method of class, as well as the entrance method of the whole system.
-     * @param args
+     * @param args Required by a valid main method.
      */
     public static void main(String[] args) {
         new Duke("taskfile.txt").run();
     }
+
 }

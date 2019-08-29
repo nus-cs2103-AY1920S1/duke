@@ -25,8 +25,11 @@ public class Todo extends Task {
     @Override
     public String taskInfo() {
         String indicator;
-        if (isFinished()) indicator = "[\u2713] ";
-        else indicator = "[\u2715] ";
+        if (isFinished()) {
+            indicator = "[\u2713] ";
+        } else {
+            indicator = "[\u2715] ";
+        }
         return "[T]" + indicator + getName();
     }
 
@@ -37,7 +40,10 @@ public class Todo extends Task {
      */
     @Override
     public String recordInfo() {
-        if (isFinished()) return "T|" + "1|" + getName();
-        else return "T|" + "0|" + getName();
+        if (isFinished()) {
+            return "T|" + "1|" + getName();
+        } else {
+            return "T|" + "0|" + getName();
+        }
     }
 }

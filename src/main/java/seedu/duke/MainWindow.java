@@ -30,6 +30,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // make scroll bar always visible
     }
 
     public void setDuke(Duke d) {

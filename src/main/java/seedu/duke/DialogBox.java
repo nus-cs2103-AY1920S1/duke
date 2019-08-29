@@ -40,6 +40,10 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
+//        String cssLayout = "-fx-border-color: grey;\n" +
+//                "-fx-border-insets: 5;\n" +
+//                "-fx-border-width: 1;\n";
+//        this.setStyle(cssLayout);
     }
 
     /**

@@ -27,7 +27,7 @@ public class Duke {
             TaskFileStorage storage = new TaskFileStorage(filePath);
             IRepository<Task> repo = new TaskRepo(storage);
 
-            TaskCommandFactory factory = new TaskCommandFactory();
+            TaskCommandFactory factory = new TaskCommandFactory(CommandList.getCommandMap());
             factory.registerDependency(repo);
             factory.registerDependency(view);
 

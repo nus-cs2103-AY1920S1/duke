@@ -1,5 +1,6 @@
 package weijie.duke.commands;
 
+import weijie.duke.exceptions.DukeDependencyNotFoundException;
 import weijie.duke.exceptions.DukeException;
 
 import java.lang.reflect.Constructor;
@@ -7,19 +8,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class TaskCommandFactory {
 
     private List<Object> registeredDependencies;
+    private Map<String, Class<? extends ITaskCommand>> commandMap;
 
-    public TaskCommandFactory() {
-        registeredDependencies = new ArrayList<>();
+    public TaskCommandFactory(Map<String, Class<? extends ITaskCommand>> commandMap) {
+        this.registeredDependencies = new ArrayList<>();
+        this.commandMap = commandMap;
     }
 
     public ITaskCommand tryMakeCommand(String command) throws DukeException {
-        Class<? extends ITaskCommand> commandClass = CommandList.getCommandMap()
-                .getOrDefault(command, CommandList.INVALID_COMMAND.getCommandClass());
+        Class<? extends ITaskCommand> commandClass =
+                commandMap.getOrDefault(command, CommandList.INVALID_COMMAND.getCommandClass());
 
         try {
             Constructor<?>[] constructors = commandClass.getConstructors();
@@ -35,11 +39,10 @@ public class TaskCommandFactory {
                 }
             }
 
-            throw new DukeException("dependency not found");
+            throw new DukeDependencyNotFoundException("☹ OOPS!!! This command is not working properly");
 
-        } catch (DukeException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            e.printStackTrace();
-            throw new DukeException("help");
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            throw new DukeException("☹ OOPS!!! An unexpected error has occurred.");
         }
     }
 

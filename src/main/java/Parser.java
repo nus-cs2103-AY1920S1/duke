@@ -2,9 +2,6 @@ import java.io.IOException;
 
 import duke.exception.DukeException;
 
-/**
- * Represents the class responsible for parsing and evaluating user input.
- */
 public class Parser {
 
     private Duke parent;
@@ -15,13 +12,7 @@ public class Parser {
         this.taskList = taskList;
     }
 
-    /**
-     * Evaluates the input entered by the user.
-     *
-     * @param input The user input
-     * @throws DukeException If the input is invalid.
-     */
-    public void evaluateInput(String input) throws DukeException {
+    public void evaluateInput(String input) throws DukeException, IOException {
         if (input.equalsIgnoreCase("bye")) {
             parent.print("Bye. Have a nice day!");
         } else if (input.equalsIgnoreCase("list")) {
@@ -39,12 +30,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Evaluates the "Done" command.
-     *
-     * @param input The input with a "Done" command.
-     * @throws DukeException If "Done" command is invalid.
-     */
     public void evaluateDone(String input) throws DukeException {
         String number = input.substring(4, input.length()).strip();
         if (number.isEmpty()) {

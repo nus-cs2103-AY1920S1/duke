@@ -7,9 +7,6 @@ import duke.task.Todo;
 
 import duke.exception.DukeException;
 
-/**
- * Deals with the storage and manipulation of tasks.
- */
 public class TaskList {
 
     private Duke parent;
@@ -19,58 +16,26 @@ public class TaskList {
         this.parent = parent;
     }
 
-    /**
-     * Sets the task list to the input list.
-     *
-     * @param taskList The task list to be used by Duke.
-     */
     public void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    /**
-     * Retrieves the task at the specified index.
-     *
-     * @param index ID of the task.
-     * @return The corresponding task.
-     */
     public Task get(int index) {
         return taskList.get(index);
     }
 
-    /**
-     * The number of tasks in the list.
-     *
-     * @return The number of tasks.
-     */
     public int size() {
         return taskList.size();
     }
 
-    /**
-     * Adds a Task to the list of tasks.
-     *
-     * @param task The task to be added.
-     */
     public void add(Task task) {
         taskList.add(task);
     }
 
-    /**
-     * Removes the task from the specified index.
-     *
-     * @param index The index from which a task should be removed.
-     */
     public void remove(int index) {
         taskList.remove(index);
     }
 
-    /**
-     * Deletes the task specified by ID.
-     *
-     * @param input The Delete command
-     * @throws DukeException If the Delete command is invalid.
-     */
     public void deleteTask(String input) throws DukeException {
         String[] tokens = input.split("\\s+");
         if (tokens.length != 2) {
@@ -90,11 +55,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Adds the specified task to the list of tasks.
-     *
-     * @param description The description of the task.
-     */
     public void addTask(String description) {
         String[] tokens = description.split("\\s+");
         String taskType = tokens[0];
@@ -114,12 +74,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Adds an Event to the list of tasks.
-     *
-     * @param description Description of the event.
-     * @throws DukeException If the description is invalid.
-     */
     public void addEvent(String description) throws DukeException {
         int indexOfAt = description.indexOf("/at");
         if (indexOfAt == -1) {
@@ -135,12 +89,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * Adds a "To do" to the task list.
-     *
-     * @param description Description of the To do task.
-     * @throws DukeException If the description is invalid.
-     */
     public void addTodo(String description) throws DukeException {
         String[] tokens = description.split("\\s+");
         StringBuilder desc = new StringBuilder();
@@ -152,12 +100,6 @@ public class TaskList {
         parent.printTaskAdded();
     }
 
-    /**
-     * Adds a deadline to the task list.
-     *
-     * @param description Description of the deadline.
-     * @throws DukeException If description is invalid.
-     */
     public void addDeadline(String description) throws DukeException {
         int indexOfBy = description.indexOf("/by");
         if (indexOfBy == -1) {

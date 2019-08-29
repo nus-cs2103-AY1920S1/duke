@@ -36,7 +36,9 @@ public class Task {
     /**
      * Sets the status of the task to complete
      */
-    public void finishTask() { this.isComplete = true; }
+    public void finishTask() {
+        this.isComplete = true;
+    }
 
     /**
      * Returns the comprehensive task details to be written to the file.

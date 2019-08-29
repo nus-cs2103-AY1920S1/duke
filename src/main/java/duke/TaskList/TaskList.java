@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
-// This class contains the task list and operations to work with task list.
+/**
+ * Represents a task list
+ * Contains functions to interact with task list
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     private int taskCount;
@@ -21,18 +24,32 @@ public class TaskList {
         this.taskCount = list.size();
     }
 
+    /** Add new task to task list
+     *
+     * @param task To add to the task list.
+     */
     public void addNewTask(Task task) {
         taskList.add(task);
     }
 
+    /** Increase task count of task list.
+     */
     public void increaseTaskCount() {
         taskCount++;
     }
 
+    /** Get task count of task list.
+     *
+     * @return int Number of tasks in task list.
+     */
     public int getTaskCount() {
         return taskCount;
     }
 
+    /** Get list of print format of task list.
+     *
+     * @return ArrayList<String> List of strings representing task.
+     */
     public ArrayList<String> printList() {
         ArrayList<String> temp = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -41,6 +58,10 @@ public class TaskList {
         return temp;
     }
 
+    /** Delete the task, and return deleted task.
+     *
+     * @return Task Deleted task.
+     */
     public Task deleteTask(int indexToDelete) throws IndexOutOfBoundsException {
         Task t;
         try {
@@ -53,6 +74,10 @@ public class TaskList {
         return t;
     }
 
+    /** Set task as done given index.
+     *
+     * @return Task Done task
+     */
     public Task setTaskDone(int indexSetDone) throws IndexOutOfBoundsException {
         Task t;
         try {

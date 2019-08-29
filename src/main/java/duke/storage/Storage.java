@@ -6,18 +6,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
-
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;
 
 
 
-// This class loads task from file and saves tasks to file.
-
 /**
- * Represents a location in a 2D space. A <code>Point</code> object corresponds to
- * a coordinate represented by two integers e.g., <code>3,6</code>
+ * Represents a storage function of duke.
+ * Has loading from file and saving to hard disk function.
  */
 public class Storage {
     private String targetFilePath;
@@ -28,9 +25,13 @@ public class Storage {
         targetFilePath = filePath;
     }
 
-    // Method loads a file and process
-    // Returns object TaskList
-
+    /** Returns task list of tasks from file,
+     *  convert input from file to task objects.
+     *
+     * @return task list from file.
+     * @throws IncorrectFileFormatException If file format is incorrect.
+     * @throws FileNotFoundException if file is not found.
+     */
     public ArrayList<Task> load() throws IncorrectFileFormatException, FileNotFoundException {
         File f;
         //System.out.println(targetFilePath);
@@ -54,18 +55,13 @@ public class Storage {
                 throw new NullPointerException();
             }
         }
-
-        /*
-        System.out.println("test print");
-        for (int i = 0; i < listTask.size(); i++) {
-            System.out.println(listTask.get(i).printTask());
-        }
-
-         */
-
         return listTask;
     }
 
+    /** Obtain list of tasks to print, save to hard disk
+     *
+     * @param l  List containing all string format tasks to save.
+     */
     public void save(ArrayList<String> l) {
         try {
             FileWriter fw = new FileWriter(printFilePath);

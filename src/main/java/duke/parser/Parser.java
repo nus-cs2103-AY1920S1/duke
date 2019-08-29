@@ -5,18 +5,22 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
 import java.util.ArrayList;
 
-// This class deals with deciphering the user commands
 
 /**
- * Represents a location in a 2D space. A <code>Point</code> object corresponds to
- * a coordinate represented by two integers e.g., <code>3,6</code>
+ * Represents a parser to parse user input.
+ * Has parse functions for user input and file.
  */
 public class Parser {
     private static ArrayList<String> commandList;
 
+    /**
+     * Initialize the parser,
+     * by preparing command list to cross check if command input by user/file
+     * is valid.
+     * @throws CommandNotFoundException If zone is <= 0.
+     */
     public static void initialize() {
         commandList = new ArrayList<>();
         commandList.add("DEADLINE");
@@ -26,16 +30,16 @@ public class Parser {
         commandList.add("DONE");
         commandList.add("LIST");
         commandList.add("BYE");
-
     }
 
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Checks if user input follows format of <command> <description> <time>
+     * Throws CommandNotFoundException if command is not found.
+     * Return user command in command object.
      *
-     * @param input X coordinate of position.
-     * @return Lateral location.
-     * @throws CommandNotFoundException If zone is <= 0.
+     * @param input String input of command from user.
+     * @return Command object of the user.
+     * @throws CommandNotFoundException If command entered by user is not found.
      */
     public static Command parse(String input) throws CommandNotFoundException {
         Task task;
@@ -99,12 +103,16 @@ public class Parser {
         return command;
     }
 
-
+    /**
+     * Checks if file input follows format of <command> <done> <description> <time>
+     * Throws IncorrectFileFormatException if command is not found.
+     * Return task in task object.
+     *
+     * @param input String input of command from user.
+     * @return task object of the file.
+     * @throws IncorrectFileFormatException If input entered by user is not recognized.
+     */
     public static Task parseFromFile(String input) throws IncorrectFileFormatException {
-        // Split the entire line of task using "\"
-        // Assumes format of file to be same as saved in arraylist
-        // [T][tick] jrjrf fwjeiojf  /by 2/12/2019 180
-
         Task task = new Task();
         String subsequent;
         boolean isDone = false;

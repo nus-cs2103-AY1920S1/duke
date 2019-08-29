@@ -5,6 +5,11 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents an Event task.
+ * Has functions to print the task information to a standard form,
+ * to set and get the given time of the deadline.
+ */
 public class Event extends Task {
     private Date givenTime;
     private SimpleDateFormat df;
@@ -36,16 +41,30 @@ public class Event extends Task {
         }
     }
 
+    /** Returns string representation of task,
+     *  in terms of initial, icon of done, task description and given deadline.
+     *
+     * @return String representation of task.
+     */
     @Override
     public String printTask() {
         return "[" + getFirstCharTask() +
                 "][" + getIcon() + "] " + getTaskDescription() + " (at: " + getGivenTime() + ")";
     }
 
+    /** Set time for given deadline,
+     *
+     * @param time String representation of time.
+     * @throws ParseException If format of time in string does not match specified format.
+     */
     public void setGivenTime(String time) throws ParseException {
         this.givenTime = df.parse(time);
     }
 
+    /** Get time for given deadline
+     *
+     * @return String of formatted time.
+     */
     public String getGivenTime() {
         return df.format(givenTime);
     }

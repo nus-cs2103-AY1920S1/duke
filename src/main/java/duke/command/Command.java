@@ -8,17 +8,16 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 
-// General Command class
+/**
+ * General command class,
+ * contains basic abstract command actions, such as execute, check if exit command
+ * and get command type and pending tasks of command.
+ */
 public abstract class Command {
     private COMMAND_TYPE commandType;
     private Task pendingTask;
 
-    // Init new command object
     public Command(String command, Task pendingTask) {
-        // Exception handling
-        // IllegalArgumentException - if the specified enum type has no constant with the specified name, or the specified class object does not represent an enum type
-        // NullPointerException - if enumType or name is null
-
         try {
             this.commandType = COMMAND_TYPE.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException i) {
@@ -31,14 +30,32 @@ public abstract class Command {
         else this.pendingTask = pendingTask;
     }
 
+    /**
+     * Perform command actions.
+     */
     public abstract void execute(TaskList list, Ui ui, Storage storage) throws IOException;
 
+    /**
+     * Return boolean indicating if command is exit command.
+     *
+     * @return boolean flag indicating if is exit command.
+     */
     public abstract boolean isExit();
 
+    /**
+     * Return task object held by command.
+     *
+     * @return task held in pendingTask.
+     */
     public Task getPendingTask() {
         return pendingTask;
     }
 
+    /**
+     * Return type of command from enum COMMAND_TYPE.
+     *
+     * @return COMMAND_TYPE enum constant of commandType.
+     */
     public COMMAND_TYPE getCommandType() {
         return commandType;
     }

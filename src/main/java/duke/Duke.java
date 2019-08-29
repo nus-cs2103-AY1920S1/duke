@@ -3,7 +3,6 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
-
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.storage.Storage;
@@ -12,6 +11,10 @@ import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.command.Command;
 
+/**
+ * Represents a Duke - interactive bot
+ * Contains functions to operate the bot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -37,6 +40,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke bot.
+     */
     public void run() {
         ui.showWelcome();
 

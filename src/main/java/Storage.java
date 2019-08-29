@@ -1,14 +1,17 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class Storage {
-    public ArrayList<Task> tasks = null;
-    public void save(ArrayList<Task> tasks) throws Exception{
-        int size = tasks.size();
+//    public String filePath;
+    public TaskList tasks = null;
+//    public Storage (String filePath) {
+//        this.filePath = filePath;
+//    }
+    public void save(TaskList tasks) throws Exception{
+        int size = tasks.getSize();
         //may have to catch error if no items in list
         StringBuilder listOfTask = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            listOfTask.append(i+1+". " +tasks.get(i)+"\n" + "     ");
+            listOfTask.append(i+1+". " +tasks.getTask(i)+"\n" + "     ");
         }
         PrintWriter writer = new PrintWriter(new FileOutputStream("list.txt", false));
         writer.print("     " + listOfTask);
@@ -19,12 +22,13 @@ public class Storage {
         oos.writeObject(tasks);
         oos.close();
     }
-    public void load(ArrayList<Task> tasks) throws Exception{
+    public void load(TaskList tasks) throws Exception{
         FileInputStream fis = new FileInputStream("t.tmp");
         ObjectInputStream ois = new ObjectInputStream(fis);
-        ArrayList<Task> temp = (ArrayList<Task>) ois.readObject();
-        for (Task task : temp) {
-            tasks.add(task);
+        TaskList temp = new TaskList();
+        temp = (TaskList) ois.readObject();
+        for (Task task : temp.getTasks()) {
+            tasks.addTask(task);
         }
         ois.close();
     }

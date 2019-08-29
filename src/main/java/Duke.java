@@ -53,16 +53,6 @@ public class Duke {
         } catch (Exception e) {
             return datetime;
         }
-
-    }
-    public static void list(ArrayList<Task> tasks) {
-        int size = tasks.size();
-        //may have to catch error if no items in list
-        StringBuilder listOfTask = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            listOfTask.append(i + 1 + ". " + tasks.get(i) + "\n" + "     ");
-        }
-        print(listOfTask.toString());
     }
 
     public static void print(String message) {
@@ -72,139 +62,42 @@ public class Duke {
                         "    ____________________________________________________________");
     }
 
-    public static void main(String[] args) throws Exception {
-        Ui ui = new Ui();
+    private Storage storage;
+    private TaskList tasks = new TaskList();
+    private Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        try {
+            storage.load(tasks);
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void run() {
         Parser parser = new Parser();
-        Storage storage = new Storage();
         print("Hello! I am Duke\n" +
                 "     What can I do for you?");
-        ArrayList<Task> tasks = new ArrayList<>();
-        storage.load(tasks);
-        list(tasks);
-
-        while (parser.getType() != Actions.BYE) {
-            ui.setInput();
-            parser.parse(ui.getInput());
-            Actions action = parser.getType();
-            int num;
-            String desc;
-            Task task = null;
-            switch (action) {
-                case LIST:
-                    list(tasks);
-                    break;
-                case BYE:
-                    print("Bye. Hope to see you again soon!");
-                    break;
-                case DONE:
-                    try {
-                        //no input number
-                        if (ui.getInputArr().length == 1) {
-                            throw new NumberFormatException();
-                        }
-                        num = Integer.parseInt(ui.getInputArr()[1]);
-                        //invalid num, will index out of bounds
-                        if (num > tasks.size()) {
-                            throw new NumberFormatException();
-                        } else {
-                            tasks.get(num - 1).markAsDone();
-                            storage.save(tasks);
-                        }
-                    } catch (NumberFormatException e) {
-                        print("☹ OOPS!!! Please input a valid number.");
-                    }
-                    break;
-                case TODO:
-                        //trim so that cannot pass with just spaces
-                        desc = ui.getTodoDesc();
-                        if (desc.equals("")) {
-                            print("☹ OOPS!!! The description of a todo cannot be empty.");
-                        } else {
-                            task = new Todo(desc);
-                        }
-                    break;
-                case DEADLINE:
-                    num = ui.getInput().indexOf("/by");
-                    //length == 1 means only has 'deadline', and temp[1] equal /by means no desc as well
-                    if (ui.getInputArr().length == 1 || ui.getInputArr()[1].equals("/by")) {
-                        print("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    }
-                    //-1 means /by is not found
-                    else if (num == -1) {
-                        print("☹ OOPS!!! Please type /by before inputting the deadline.");
-
-                    } else {
-                        desc = ui.getInput().substring(9, num);
-                        //trim so that cannot pass with just spaces
-                        String by = ui.getInput().substring(num + 3).trim();
-                        //no input time after /by
-                        if (by.equals("")) {
-                            print("☹ OOPS!!! Please input a deadline after /by");
-                        } else {
-                            task = new Deadline(desc, by);
-                        }
-                    }
-                    break;
-                case EVENT:
-                    num = ui.getInput().indexOf("/at");
-                    //length == 1 means only has 'event', and temp[1] equal /at means no desc as well
-                    if (ui.getInputArr().length == 1 || ui.getInputArr()[1].equals("/at")) {
-                        print("☹ OOPS!!! The description of a event cannot be empty.");
-                    }
-                    //-1 means /at is not found
-                    else if (num == -1) {
-                        print("☹ OOPS!!! Please type /at before inputting the time.");
-                    } else {
-                        desc = ui.getInput().substring(6, num);
-                        //trim so that cannot pass with just spaces
-                        String at = ui.getInput().substring(num + 3).trim();
-                        //no input time after /at
-                        if (at.equals("")) {
-                            print("☹ OOPS!!! Please input a time after /at");
-                        } else {
-                            task = new Event(desc, at);
-                        }
-                    }
-                    break;
-                case DELETE:
-                    try {
-                        //no input number
-                        if (ui.getInputArr().length == 1) {
-                            throw new NumberFormatException();
-                        }
-                        num = Integer.parseInt(ui.getInputArr()[1]);
-                        //invalid num, will index out of bounds
-                        if (num > tasks.size()) {
-                            throw new NumberFormatException();
-                        } else {
-                            print("Noted. I've removed this task:\n" +
-                                    "     " + tasks.get(num - 1) + "\n" +
-                                    "     Now you have " + (tasks.size() - 1) + " tasks in the list.");
-                            tasks.remove(num - 1);
-                        }
-                    } catch (NumberFormatException e) {
-                        print("☹ OOPS!!! Please input a valid number.");
-                    }
-                    break;
-                case NONE:
-                    print("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    break;
-                default:
-                    break;
-
+        this.tasks.listTasks();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                ui.setInput();
+                String input = ui.getInput();
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+                storage.save(tasks);
+            } catch (Exception e) {
+//                System.out.println(e);
             }
-            if (task == null) {
-                // if task is still null do nothing
-            } else {
-                tasks.add(task);
-                print("Got it. I've added this task:\n" +
-                        "       " + task + "\n" +
-                        "     Now you have " + tasks.size() + " tasks in the list.");
-            }
-            storage.save(tasks);
-
-
         }
     }
+    public static void main(String[] args) throws Exception {
+        new Duke().run();
+    }
+
 
 }

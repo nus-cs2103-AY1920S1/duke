@@ -1,28 +1,36 @@
 public class Parser {
-    public Actions type = Actions.NONE;
-    public void parse(String input){
+    public static Command parse(String input){
         String[] inputArr = input.split(" ");
+        Actions type;
+        Command command = new WrongCommand(input);
         if (input.equals("bye")){
-            this.type = Actions.BYE;
+            type = Actions.BYE;
+            command = new ExitCommand(input);
         } else if (inputArr[0].equals("done")){
-            this.type = Actions.DONE;
+            type = Actions.DONE;
+            command = new UpdateCommand(input,type);
         } else if (input.equals("list")){
-            this.type = Actions.LIST;
+            type = Actions.LIST;
+            command = new UpdateCommand(input,type);
         } else if (inputArr[0].equals("todo")){
-            this.type = Actions.TODO;
-        } else if (inputArr[0].equals("deadline")){
-            this.type = Actions.DEADLINE;
-        } else if (inputArr[0].equals("event")){
-            this.type = Actions.EVENT;
-        }else if (inputArr[0].equals("delete")){
-            this.type = Actions.DELETE;
-        } else {
-            this.type = Actions.NONE;
-        }
-    }
-    public Actions getType(){
-        return this.type;
-    }
+            type = Actions.TODO;
+            command = new AddCommand(input,type);
 
+        } else if (inputArr[0].equals("deadline")){
+            type = Actions.DEADLINE;
+            command = new AddCommand(input,type);
+
+        } else if (inputArr[0].equals("event")){
+            type = Actions.EVENT;
+            command = new AddCommand(input,type);
+
+        }else if (inputArr[0].equals("delete")){
+            type = Actions.DELETE;
+            command = new DeleteCommand(input);
+        } else {
+            type = Actions.NONE;
+        }
+        return command;
+    }
 //method takes input, returns type of output --> compare to java enums
 }

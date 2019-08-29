@@ -1,5 +1,3 @@
-//package mypackage;
-
 /**
  * Represents the adder command to delete the task from the task list.
  */

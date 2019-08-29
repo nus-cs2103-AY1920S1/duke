@@ -1,5 +1,3 @@
-//package mypackage;
-
 /**
  * Represents the list command to list the task(s) in the task list.
  */

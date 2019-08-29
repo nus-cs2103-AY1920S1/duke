@@ -1,5 +1,3 @@
-//package mypackage;
-
 /**
  * Represents the exit command to exit the program.
  */

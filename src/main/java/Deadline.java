@@ -1,5 +1,3 @@
-//package mypackage;
-
 /**
  * Represents the deadline task.
  */

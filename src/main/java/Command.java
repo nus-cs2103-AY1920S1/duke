@@ -1,10 +1,7 @@
-//package mypackage;
-
 /**
  * Represents a command.
  * A command can be of different types.
  */
-
 public abstract class Command {
 
     /**

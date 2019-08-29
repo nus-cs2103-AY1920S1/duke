@@ -1,5 +1,3 @@
-//package mypackage;
-
 /**
  * Represents the done command to complete a task.
  */

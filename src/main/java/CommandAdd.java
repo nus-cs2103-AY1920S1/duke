@@ -1,5 +1,3 @@
-//package mypackage;
-
 /**
  * Represents the adder command to add the task to the task list.
  */

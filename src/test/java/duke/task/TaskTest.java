@@ -22,7 +22,7 @@ public class TaskTest {
 
     @Test
     void stringConversion() {
-        assertEquals("[\u2718] Test", task.toString());
+        assertEquals("[✘] Test", task.toString());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class TaskTest {
             task.markAsDone();
             task.markAsDone();
             fail();
-        } catch (Exception e) {
+        } catch (DukeException e) {
             assertEquals("This task was marked as done before.", e.getMessage());
         }
     }

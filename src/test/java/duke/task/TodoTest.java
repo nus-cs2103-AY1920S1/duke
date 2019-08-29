@@ -12,7 +12,7 @@ public class TodoTest {
         try {
             new Todo("");
             fail();
-        } catch (Exception e) {
+        } catch (DukeException e) {
             assertEquals("The description of a todo cannot be empty.", e.getMessage());
         }
     }
@@ -20,7 +20,7 @@ public class TodoTest {
     @Test
     void stringConversion() throws DukeException {
         Todo todo = new Todo("Test");
-        assertEquals("[T][\u2718] Test", todo.toString());
+        assertEquals("[T][✘] Test", todo.toString());
     }
 
     @Test

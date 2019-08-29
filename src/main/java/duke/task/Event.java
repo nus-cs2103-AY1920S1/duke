@@ -43,6 +43,12 @@ public class Event extends Task {
                 this.endDate = parseDate(dateTimeArr[2]);
                 this.endTime = parseTime(dateTimeArr[3]);
             }
+
+            if (startDate.isAfter(endDate)) {
+                throw new DukeException("Start date cannot be after end date");
+            } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
+                throw new DukeException("Start time cannot be after end time");
+            }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid time format.");
         }

@@ -57,4 +57,26 @@ public class UiTest {
         ui.showExit();
         assertEquals("Bye. Hope to see you again soon!\n", getOutput());
     }
+
+    @Test
+    void showLoadingError() {
+        ui = new Ui();
+        ui.showLoadingError();
+        assertEquals("An empty data file duke.txt is created in the current directory.\n",
+                getOutput());
+    }
+
+    @Test
+    void showError() {
+        ui = new Ui();
+        ui.showError("Test error message.");
+        assertEquals("☹ OOPS!!! Test error message.\n", getOutput());
+    }
+
+    @Test
+    void showLine() {
+        ui = new Ui();
+        ui.showLine();
+        assertEquals(System.lineSeparator(), getOutput());
+    }
 }

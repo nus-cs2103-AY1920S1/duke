@@ -14,6 +14,8 @@ public class Parser {
             return parseTodoTask(command);
         } else if (command.startsWith("event")) {
             return parseEventTask(command);
+        } else if (command.startsWith("find")) {
+            return parseFindCommand(command);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -27,6 +29,14 @@ public class Parser {
     private static DeleteCommand parseDeleteCommand(String command) throws DukeException {
         int index = Integer.parseInt(command.split(" ")[1]);
         return new DeleteCommand(index);
+    }
+
+    private static FindCommand parseFindCommand(String command) throws DukeException {
+        try {
+            return new FindCommand(command.split(" ", 2)[1]);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("Find command needs a keyword");
+        }
     }
 
     private static AddCommand parseDeadlineTask(String command) throws DukeException {

@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Loading error");
+        System.out.println("Error loading data from file");
     }
 
     public void showError(String errorMessage) {

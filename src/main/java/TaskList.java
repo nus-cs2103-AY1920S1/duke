@@ -24,7 +24,7 @@ public class TaskList {
         tasks.add(t);
     }
 
-    public Task markAsDone(int index) throws DukeException {
+    public Task setIsDone(int index) throws DukeException {
         try {
             tasks.get(index).isDone = true;
             return tasks.get(index);
@@ -48,7 +48,7 @@ public class TaskList {
         return tasks;
     }
 
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 }

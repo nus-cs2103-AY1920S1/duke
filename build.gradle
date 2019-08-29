@@ -16,6 +16,15 @@ application {
     mainClassName = "Duke"
 }
 
+//JUnit testing unit
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
 run {
     standardInput = System.in
 }

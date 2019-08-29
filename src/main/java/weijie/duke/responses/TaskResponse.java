@@ -23,6 +23,10 @@ public class TaskResponse {
         return tasks;
     }
 
+    /**
+     * Returns the Task response formatted for human readability on the console.
+     * @return A String of the formatted response.
+     */
     public String getFormattedResponse() {
         Object[] descriptions = tasks.stream()
                 .map(Task::getDescription)

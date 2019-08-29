@@ -29,6 +29,15 @@ public class Parser {
                 throw new DukeException("The description of a done cannot be empty.");
             }
         }
+        //"find" commands
+        else if (input.startsWith("find ")) {
+            if (input.length() > 5) {
+                String regex = input.substring(5);
+                return this.taskList.getSearchList(regex);
+            } else {
+                throw new DukeException("The description of a find cannot be empty");
+            }
+        }
         // "delete" commands
         else if (input.startsWith("delete ")) {
             // Process input

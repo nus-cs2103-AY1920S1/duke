@@ -1,6 +1,8 @@
 package duke;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TaskList implements Serializable {
     ArrayList<Task> taskList;
@@ -43,5 +45,16 @@ public class TaskList implements Serializable {
         } else {
             throw new DukeException("The task list is empty.");
         }
+    }
+
+    public String getSearchList(String regex) throws DukeException {
+        String listOutput = this.getList();
+        List<String> tasks =
+                new ArrayList<>(Arrays.asList(listOutput.split("\n")));
+
+        tasks.removeIf(x -> !x.contains(regex));
+
+        return "Here are the matching tasks in your list:\n"
+                + String.join("\n", tasks);
     }
 }

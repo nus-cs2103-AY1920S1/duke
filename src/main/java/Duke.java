@@ -33,9 +33,6 @@ public class Duke {
             if (s[0].equals("list")) {
                 Duke.checkList();
             } else {
-//                case "done":
-//                    ps.println(Duke.completed(2));
-//                    break;
                 Duke.echo(s); //now passing in an array
             }
             s = Duke.sc.nextLine().split(" ");
@@ -59,7 +56,8 @@ public class Duke {
     static void echo(String[] s) throws Exception {
         PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         String[] task = processTask(s);
-        switch (task[0]) {
+        try {
+            switch (task[0]) {
             case "todo":
                 if (validTask(task)) {
                     ToDo td = new ToDo(task[1]);
@@ -89,6 +87,9 @@ public class Duke {
             default:
                 ps.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
+            }
+        } catch (DukeException de) {
+            ps.println(de.getMessage());
         }
     }
 
@@ -106,7 +107,14 @@ public class Duke {
         task[0] = s[0];
         s[0] = "";
         String s2 = String.join(" ", s);
-        String[] s3 = s2.split("/"); // now there might be trailing spaces infront of the words
+        String[] s3 = new String[2];
+        if (task[0].equals("deadline")) {
+            s3 = s2.split("/by");
+        } else if (task[0].equals("event")) {
+            s3 = s2.split("/at"); // now there might be trailing spaces infront of the words
+        } else {
+            s3[0] = s2;
+        }
         if (s3.length == 2) { // deadline and event
             task[1] = s3[0];
             task[2] = s3[1];
@@ -130,9 +138,9 @@ public class Duke {
         PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         try {
             if (s[1].equals("")) {
-                throw new DukeException(s);
+                throw new DukeEmptyException(s[0]);
             } else if (!s[0].equals("todo") && s[2].equals("")) {
-                throw new DukeException(s, "date");
+                throw new DukeEmptyException(s[0], s[0]);
             }
             return true;
         } catch (DukeException de) {

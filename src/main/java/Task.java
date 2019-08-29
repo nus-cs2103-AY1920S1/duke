@@ -36,7 +36,7 @@ public abstract class Task {
     protected Date parseDate(String date) throws DukeException {
         try {
             return parser.parse(date);
-        } catch(ParseException ex) {
+        } catch (ParseException ex) {
             throw new DukeException("There is an error in parsing date.");
         }
     }

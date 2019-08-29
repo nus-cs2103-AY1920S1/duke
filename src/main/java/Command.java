@@ -8,7 +8,7 @@ public interface Command {
 
     /**
      * Executes command.
-     * 
+     *
      * @param tasks List of task.
      * @param ui User Interface to interact with users.
      * @param storage Storage to write datas to hard disk.

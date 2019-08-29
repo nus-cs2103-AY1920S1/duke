@@ -25,7 +25,7 @@ public class Storage {
      * @throws DukeException if there is an issue in writing to hard disk.
      */
     public void save(TaskList tasks) throws DukeException {
-        try(FileWriter writer = new FileWriter(storagePath)) {
+        try (FileWriter writer = new FileWriter(storagePath)) {
             writer.write(tasks.printTasksForHardDisk());
         } catch (IOException ex) {
             throw new DukeException("There is an issue in updating duke.txt.");

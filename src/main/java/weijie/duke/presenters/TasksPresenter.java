@@ -4,24 +4,24 @@ import weijie.duke.commands.ITaskCommand;
 import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.exceptions.DukeException;
 import weijie.duke.responses.TaskResponse;
-import weijie.duke.views.ConsoleView;
+import weijie.duke.views.Ui;
 
 
 public class TasksPresenter implements ConsoleInputListener {
 
-    private ConsoleView view;
+    private Ui ui;
     private TaskCommandFactory factory;
 
-    public TasksPresenter(ConsoleView view, TaskCommandFactory factory) {
-        view.registerListener(this);
-        this.view = view;
+    public TasksPresenter(Ui ui, TaskCommandFactory factory) {
+        ui.registerListener(this);
+        this.ui = ui;
         this.factory = factory;
     }
 
     @Override
     public void onInputReceived(String input) {
         if (input.equals("bye")) {
-            view.exit();
+            ui.exit();
             return;
         }
 
@@ -30,15 +30,15 @@ public class TasksPresenter implements ConsoleInputListener {
         try {
             ITaskCommand command = factory.tryMakeCommand(args[0]);
             TaskResponse response = command.execute(args);
-            view.print(response);
+            ui.print(response);
 
         } catch (DukeException e) {
-            view.printError(e);
+            ui.printError(e);
         }
     }
 
     public void start() {
-        view.startDisplay();
+        ui.startDisplay();
     }
 }
 

@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TaskFileStorage {
+public class Storage {
 
     private File file;
 
-    public TaskFileStorage(String path) throws DukeIOException {
+    public Storage(String path) throws DukeIOException {
         this.file = new File(path);
 
         if (!file.exists()) {

@@ -1,6 +1,9 @@
 /* Name: Ang Kai Qi
    MatricNo: A0190206N
  */
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -95,6 +98,7 @@ public class Duke {
         t.setDone();
         ps.println("Nice! I've marked this task as done: ");
         ps.println("  " + t);
+        Duke.save();
     }
 
     static String[] processTask(String[] s) {
@@ -119,6 +123,7 @@ public class Duke {
         ps.println("Got it. I've added this task:");
         ps.println("  " + t);
         ps.println("Now you have " + Task.getTotal() + " tasks in the list.");
+        Duke.save();
     }
 
     static boolean validTask(String[] s) throws Exception {
@@ -144,5 +149,16 @@ public class Duke {
         ps.println("  " + t);
         Task.setTotal();
         ps.println("Now you have " + Task.getTotal() + " tasks in the list.");
+        Duke.save();
+    }
+
+    static void save() throws Exception {
+        File file = new File("C:\\Users\\AngKa\\duke\\data\\duke.txt");
+        BufferedWriter out = new BufferedWriter(new FileWriter(file));
+        for (Task t : taskList) {
+            out.write(t.saveString());
+            out.write("\n");
+        }
+        out.close();
     }
 }

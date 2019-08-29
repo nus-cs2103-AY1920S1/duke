@@ -17,6 +17,14 @@ public class Task {
         total--;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getDone() {
+        return this.isDone;
+    }
+
     public void setDone() {
         this.isDone = true;
     }
@@ -28,5 +36,10 @@ public class Task {
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
+    }
+
+    public String saveString() {
+        int done = this.isDone ? 1 : 0;
+        return " | " + done + " | " + this.description;
     }
 }

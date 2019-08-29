@@ -49,5 +49,7 @@ public class Event extends Task {
      * @return formatted string for writing in file.
      */
     @Override
-    public String fileFormat() { return String.format("E | %s | %s | %s %s", done ? "1" : "0", task, date, time); }
+    public String fileFormat() {
+        return String.format("E | %s | %s | %s %s", done ? "1" : "0", task, date, time);
+    }
 }

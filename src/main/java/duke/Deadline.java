@@ -48,6 +48,8 @@ public class Deadline extends Task {
      * @return String in the form writing in text file.
      */
     @Override
-    public String fileFormat() { return String.format("D | %s | %s | %s %s", done ? "1" : "0", task, date, time); }
+    public String fileFormat() {
+        return String.format("D | %s | %s | %s %s", done ? "1" : "0", task, date, time);
+    }
 
 }

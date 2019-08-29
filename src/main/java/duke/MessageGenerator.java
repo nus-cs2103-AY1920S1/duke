@@ -14,49 +14,49 @@ public class MessageGenerator {
     /**
      * @return String for header of task list.
      */
-    String listTasks() {
+    private String listTasks() {
         return "Here are the tasks in your list: ";
     }
 
     /**
      * @return String for header of removing task action.
      */
-   String removeTask() {
+    private String removeTask() {
         return "Noted. I've removed this task: ";
     }
 
     /**
      * @return String for header of adding task action.
      */
-    String addTask() {
+    private String addTask() {
         return "Got it. I've added this task: ";
     }
 
     /**
      * @return String for header of marking task as done.
      */
-    public String markDone() {
+    private String markDone() {
         return "Nice! I've marked this task as done:";
     }
 
     /**
      * @return String to indicate number of tasks in list.
      */
-    String numTask(int n) {
+    private String numTask(int n) {
         return "Now you have " + n + " task(s) in the list.";
     }
 
     /**
      * @return String to greet user.
      */
-    String greeting() {
+    private String greeting() {
         return "Hello I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * @return String when program is exited.
      */
-    String byeString() {
+    private String byeString() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -64,7 +64,7 @@ public class MessageGenerator {
      * Formats task with proper indentations.
      * @return String for formatted task.
      */
-    String formatTask(Task task) {
+    private String formatTask(Task task) {
         if (task == null) {
             return "";
         } else {

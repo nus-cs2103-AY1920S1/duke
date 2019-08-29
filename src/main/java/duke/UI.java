@@ -65,23 +65,23 @@ public class UI {
     private void processCommand(Command command) {
             try {
                 switch (command.type) {
-                    case EXIT:
-                        exit();
-                        break;
-                    case PRINTLIST:
-                        tasks.printList();
-                        break;
-                    case ADD:
-                        tasks.addTask(parser.createTask(command));
-                        break;
-                    case DELETE:
-                        tasks.deleteTask(parser.getTaskNo(command));
-                        break;
-                    case DONE:
-                        tasks.setDone(parser.getTaskNo(command));
-                        break;
-                    default:
-                        throw new InvalidCommandException();
+                case EXIT:
+                    exit();
+                    break;
+                case PRINTLIST:
+                    tasks.printList();
+                    break;
+                case ADD:
+                    tasks.addTask(parser.createTask(command));
+                    break;
+                case DELETE:
+                    tasks.deleteTask(parser.getTaskNo(command));
+                    break;
+                case DONE:
+                    tasks.setDone(parser.getTaskNo(command));
+                    break;
+                default:
+                    throw new InvalidCommandException();
                 }
             } catch (InvalidCommandException|MissingInputException e) {
                 e.printError();

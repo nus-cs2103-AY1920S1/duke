@@ -2,7 +2,7 @@ package duke;
 
 class InvalidCommandException extends DukeException {
 
-    String message = "☹ OOPS!!! ";
+    private String message = "☹ OOPS!!! ";
 
     /**
      * Creates InvalidCommandException when commands that are not understood by program are given.

@@ -2,7 +2,7 @@ package duke;
 
 public class InvalidInputException extends DukeException {
 
-    String message = "☹ OOPS!!! ";
+    private String message = "☹ OOPS!!! ";
 
     /**
      * Creates String for error message.

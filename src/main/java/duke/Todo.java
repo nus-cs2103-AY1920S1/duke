@@ -20,7 +20,7 @@ public class Todo extends Task {
      * @param type String indicates task type, in this case "T".
 
      */
-    Todo(int num, String task, String type) {
+    public Todo(int num, String task, String type) {
         super(num, task, type);
     }
 
@@ -38,5 +38,7 @@ public class Todo extends Task {
      * @return formatted string for writing in file.
      */
     @Override
-    public String fileFormat() { return String.format("T | %s | %s", done ? "1" : "0", task); }
+    public String fileFormat() {
+        return String.format("T | %s | %s", done ? "1" : "0", task);
+    }
 }

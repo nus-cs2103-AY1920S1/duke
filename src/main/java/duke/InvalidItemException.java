@@ -1,16 +1,13 @@
 package duke;
 
-import duke.DukeException;
-
 public class InvalidItemException extends DukeException {
 
-    String message = "☹ OOPS!!! ";
+    private String message = "☹ OOPS!!! ";
 
     /**
      * Creates InvalidItemException when an invalid list item is given.
      */
-    InvalidItemException() {
-    }
+    InvalidItemException() {}
 
     /**
      * Creates String for error message.

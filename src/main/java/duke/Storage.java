@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage {
+class Storage {
 
     private Scanner sc;
     private String filePath;
     List<String> inputs = new ArrayList<>();
     private TaskList tasks = new TaskList();
     private File f;
-    FileWriter fw;
 
     /**
      * Loads and writes into given file.
@@ -52,21 +51,21 @@ public class Storage {
                 counter++;
                 try {
                     switch (details[0]) {
-                        case "T":
-                            tasks.loadTask(new Todo(counter, details[2], "T", done));
-                            break;
-                        case "D":
-                            date = Date.processDate(details[3].split(" ")[0]);
-                            time = Time.processTime(details[3].split(" ")[1]);
-                            tasks.loadTask(new Deadline(counter, details[2], date, time, "D", done));
-                            break;
-                        case "E":
-                            date = Date.processDate(details[3].split(" ")[0]);
-                            time = Time.processTime(details[3].split(" ")[1]);
-                            tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
-                            break;
-                        default:
-                            throw new InvalidInputException();
+                    case "T":
+                        tasks.loadTask(new Todo(counter, details[2], "T", done));
+                        break;
+                    case "D":
+                        date = Date.processDate(details[3].split(" ")[0]);
+                        time = Time.processTime(details[3].split(" ")[1]);
+                        tasks.loadTask(new Deadline(counter, details[2], date, time, "D", done));
+                        break;
+                    case "E":
+                        date = Date.processDate(details[3].split(" ")[0]);
+                        time = Time.processTime(details[3].split(" ")[1]);
+                        tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
+                        break;
+                    default:
+                        throw new InvalidInputException();
                     }
                 } catch (InvalidInputException e) {
                     e.printError();
@@ -81,7 +80,7 @@ public class Storage {
     /**
      * Writes formatted task list into file.
      * @param tasks Task list that has been processed and updated.
-     * @throws IOException
+     * @throws IOException when there are input problems.
      */
     void updateTaskList(TaskList tasks) throws IOException {
         try {

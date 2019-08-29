@@ -24,7 +24,7 @@ import java.util.Scanner;
  */
 public class Storage {
     /** Declaration of file as File type. */
-    public File file;
+    private File file;
 
     /** Ui of the Duke Program. */
     private Ui ui;

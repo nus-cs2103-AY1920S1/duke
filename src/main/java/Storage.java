@@ -5,16 +5,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class deals with retrieving tasks from the local file
+ * and writing back to the file in the case of any modifications to the tasks.
+ */
+
 public class Storage {
     
     private String filePath;
 
+    /**
+     * Constructs a new Storage object which obtains its data for initialisation
+     * from a specified file.  
+     * @param filePath File path of the file wherein tasks are stored. 
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public static Task createTaskFromFile (String s) throws DukeException{
-        String[] command = s.split(" \\| ");
+    /**
+     * Returns a new Task object created from an individual line of description
+     * of the task.
+     * @param line The string which, in a single line, describes a particular task.
+     * @return The task constructed from the inputted task detail line.
+     * @throws DukeException When the line of string being read does not describe any
+     * particular type of task.
+     */
+    public static Task createTaskFromFile (String line) throws DukeException{
+        String[] command = line.split(" \\| ");
         boolean isPending = command[1].equals("1") ? true : false;
         switch (command[0]) {
         case "T":
@@ -29,12 +47,25 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the inputted task back into the file at the bottom of the file.
+     * @param task The task being stored in the file.
+     * @throws IOException When the file being written to cannot be found.
+     */
     public void addTaskToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(task.toStringForFile() + System.lineSeparator());
         fw.close();
     }
 
+    /**
+     * Returns an array list of tasks constructed from the tasks saved locally on
+     * the file.
+     * @return An array list of tasks.
+     * @throws FileNotFoundException When the file being written to cannot be found.
+     * @throws DukeException When a particular task saved in the file is of the wrong 
+     * format or does not describe an existing type of task.
+     */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(this.filePath);
@@ -46,6 +77,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes all the tasks from an array list back into the file on the local system.
+     * @param filePath Location of the file where the tasks are to be stored.
+     * @param list The array list containing the tasks to be written back onto the file.
+     * @throws IOException When the file being written to be cannot be found.
+     */
     public void writeToFile(String filePath, ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : list) {

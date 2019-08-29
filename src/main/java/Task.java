@@ -1,12 +1,16 @@
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Task object that can represent todos, deadlines or events.
+ * Every task object can be marked as done when it's completed.
+ */
 public class Task {
     public static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
     public static final DateTimeFormatter FILE_DATE_TIME = DateTimeFormatter.ofPattern("dd/MM/yy hhmm");
     
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
     protected String type;
 
 
@@ -14,36 +18,69 @@ public class Task {
 
     }
 
+    /**
+     * Creates a task object that stores the type of task it is, i.e todos, deadlines or events and its description.
+     *
+     * @param type Type of task, represented by "T", "D" or "E".
+     * @param name Description of the task.
+     */
     public Task(String type, String name) {
         this.type = type;
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public Task(String type, String done, String name) {
+    /**
+     * Creates a task object that stores the type of task it is, i.e todos, deadlines or events and its description.
+     * This constructor is used when loading tasks from the datafile as it checks if the task has already been marked
+     * as done.
+     *
+     * @param type Type of task, represented by "T", "D" or "E".
+     * @param isDone Boolean representing whether the task is done.
+     * @param name Description of the task.
+     */
+
+    public Task(String type, String isDone, String name) {
         this.type = type;
         this.name = name;
-        if (done.equals("1")) {
-            this.done = true;
+        if (isDone.equals("1")) {
+            this.isDone = true;
         } else {
-            this.done = false;
+            this.isDone = false;
         }
     }
+
 
     public String getName() {
         return this.name;
     }
 
-    public String done() {
-        this.done = true;
+    /**
+     * Marks a task as done and returns a string telling users that the task has been marked as done.
+     *
+     * @return Message displaying the task that has been marked as done.
+     */
+    public String markAsDone() {
+        this.isDone = true;
+
         return String.format("Nice! I've marked this task as done:\n  [%s] %s", "v", name);
     }
 
+    /**
+     * Returns a formatted string representing the state of the task to be stored in a data file.
+     *
+     * @return String formatted for storing in a file.
+     */
     public String fileFormat() {
-        return String.format("%s | %s | %s\n", type, done ? "1" : "0", name);
+        return String.format("%s | %s | %s\n", type, isDone ? "1" : "0", name);
     }
 
+    /**
+     * String representing a task and its state when user lists all tasks.
+     *
+     * @return String in the format for the list command.
+     */
     public String toString() {
-        return String.format("[%s][%s] %s", type, done ? "v" : "x", name);
+        return String.format("[%s][%s] %s", type, isDone ? "v" : "x", name);
     }
 }

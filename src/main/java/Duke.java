@@ -1,20 +1,21 @@
 
-import java.io.*;
+import java.io.IOException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-
-
+/**
+ * Duke is a to-do list that allows users to store todos, deadlines and events. Users are able to enter several
+ * commands, such as list to list all tasks, done to mark certain tasks as done, and add and delete tasks.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates Duke that contains its own UI, storage and TaskList.
+     *
+     * @param filePath The path at which the storage file is stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke UI and executes commands based on user input.
+     */
     public void run() {
         ui.showWelcome();
         String fullCommand = ui.readCommand();

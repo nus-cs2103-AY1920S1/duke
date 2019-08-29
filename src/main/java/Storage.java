@@ -22,11 +22,11 @@ public class Storage {
             count++;
             String[] parts = line.split("\\|");
             if (parts[0].equals("T")) {
-                taskList.add(new Todo(parts[2], count, parts[1].equals("1")));
+                taskList.add(new Todo(parts[2], parts[1].equals("1")));
             } else if (parts[0].equals("D")) {
-                taskList.add(new Deadline(parts[2], count, parts[3], parts[1].equals("1")));
+                taskList.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
             } else if (parts[0].equals("E")) {
-                taskList.add(new Event(parts[2], count, parts[3], parts[1].equals("1")));
+                taskList.add(new Event(parts[2], parts[3], parts[1].equals("1")));
             }
         }
         return taskList;

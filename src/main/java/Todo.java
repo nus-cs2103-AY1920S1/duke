@@ -1,11 +1,11 @@
 
 public class Todo extends Task {
-    public Todo(String name, int index) {
-        super(name, index);
+    public Todo(String name) {
+        super(name);
     }
 
-    public Todo(String name, int index, boolean completed) {
-        super(name, index, completed);
+    public Todo(String name, boolean completed) {
+        super(name, completed);
     }
 
     @Override

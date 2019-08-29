@@ -2,13 +2,13 @@
 public class Deadline extends Task {
     private String date;
 
-    public Deadline(String n, int index, String date) {
-        super(n, index);
+    public Deadline(String n, String date) {
+        super(n);
         this.date = date;
     }
 
-    public Deadline(String n, int index, String date, boolean completed) {
-        super(n, index, completed);
+    public Deadline(String n, String date, boolean completed) {
+        super(n, completed);
         this.date = date;
     }
 

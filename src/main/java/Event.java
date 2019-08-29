@@ -1,13 +1,13 @@
 public class Event extends Task {
     private String date;
 
-    public Event(String n, int index, String date) {
-        super(n, index);
+    public Event(String n, String date) {
+        super(n);
         this.date = date;
     }
 
-    public Event(String n, int index, String date, boolean completed) {
-        super(n, index, completed);
+    public Event(String n, String date, boolean completed) {
+        super(n, completed);
         this.date = date;
     }
 

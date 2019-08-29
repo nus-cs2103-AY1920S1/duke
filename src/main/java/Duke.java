@@ -48,6 +48,8 @@ public class Duke {
                     tasks.markItemComplete(Integer.parseInt(inputParts[1]), ui);
                 } else if (command.equals("delete")) {
                     tasks.deleteItem(Integer.parseInt(inputParts[1]), ui);
+                } else if (command.equals("find")) {
+                    tasks.findItem(inputParts[1], ui);
                 } else {
                     tasks.registerNewTask(inputParts, ui);
                 }

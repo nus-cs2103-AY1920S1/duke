@@ -1,2 +1,0 @@
-T|0|buy bread
-D|1|submit project|Thursday afternoon

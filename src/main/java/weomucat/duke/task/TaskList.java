@@ -6,6 +6,9 @@ import weomucat.duke.exception.InvalidTaskIndexException;
 import weomucat.duke.task.listener.*;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import static weomucat.duke.Duke.LOCALE;
 
 public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListener, DoneTaskCommandListener, FindTaskCommandListener, ListTaskCommandListener {
 	private TaskListTasks tasks;
@@ -109,8 +112,12 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 	public void findTask(String keyword) {
 		TaskListTasks result = new TaskListTasks();
 
+		// Case insensitive search
+		// Use a single locale to prevent issues with case conversion.
+		keyword = keyword.toLowerCase(LOCALE);
 		for (Task task : this.tasks) {
-			if (task.getDescription().contains(keyword)) {
+			String description = task.getDescription().toLowerCase(LOCALE);
+			if (description.contains(keyword)) {
 				result.add(task);
 			}
 		}

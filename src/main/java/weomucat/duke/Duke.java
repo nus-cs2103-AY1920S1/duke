@@ -7,6 +7,8 @@ import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.TaskList;
 import weomucat.duke.ui.Ui;
 
+import java.util.Locale;
+
 public class Duke implements ByeCommandListener {
 	private static final String LOGO = " ____        _        \n"
 			+ "	|  _ \\ _   _| | _____ \n"
@@ -14,6 +16,7 @@ public class Duke implements ByeCommandListener {
 			+ "	| |_| | |_| |   <  __/\n"
 			+ "	|____/ \\__,_|_|\\_\\___|\n";
 
+	public static final Locale LOCALE = Locale.ENGLISH;
 	public static final String DATETIME_PARSE_PATTERN = "dd/MM/yy HHmm";
 	public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
 

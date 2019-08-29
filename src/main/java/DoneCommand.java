@@ -10,6 +10,9 @@ public class DoneCommand implements Command {
         return false;
     }
 
+    /**
+     * Marks the index-th task to be done.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.markAsDone(index);

@@ -3,11 +3,12 @@ package main;
 import task.Task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Used to store tasks
  */
-public class TaskList{
+public class TaskList implements Iterable<Task>{
 
     private ArrayList<Task> tasks;
 
@@ -87,6 +88,46 @@ public class TaskList{
      */
     public void clearAll() {
         this.tasks.clear();
+    }
+
+    public ArrayList<Task> findTasksByKeyword(String keyword) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.containsKeyword(keyword)) {
+                tasksFound.add(task);
+            }
+        }
+        return tasksFound;
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<Task> iterator() {
+
+        Iterator<Task> iter = new Iterator<>() {
+
+            private int currIdx = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currIdx < tasks.size() && tasks.get(currIdx) != null;
+            }
+
+            @Override
+            public Task next() {
+                return tasks.get(currIdx++);
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+        return iter;
     }
     /*
     Note to self: the out of bounds exception should be caught earlier under the part where you process command!

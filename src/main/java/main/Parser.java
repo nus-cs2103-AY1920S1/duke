@@ -43,6 +43,13 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Please enter a numerical value for the task ID");
             }
+        case "find":
+            try {
+                String keyword = arr[1].trim().toLowerCase();
+                return new FindCommand(keyword);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException ("Please enter a keyword to find");
+            }
         case "todo":
         case "event":
         case "deadline":

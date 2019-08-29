@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     static final String logo = " ____        _        \n"
@@ -69,18 +71,34 @@ public class Duke {
             taskManager.printTasks();
         } else if (instruction.matches("^done \\d+$")) {
             parseDoneInstruction(taskManager, instruction);
+            saveToHardDisk(taskManager);
         } else if (instruction.matches("^delete \\d+$")) {
             parseDeleteInstruction(taskManager, instruction);
+            saveToHardDisk(taskManager);
         } else if (instruction.startsWith("deadline")) {
             taskManager.addTask(parseDeadlineTask(instruction));
+            saveToHardDisk(taskManager);
         } else if  (instruction.startsWith("todo")) {
             taskManager.addTask(parseTodoTask(instruction));
+            saveToHardDisk(taskManager);
         } else if (instruction.startsWith("event")) {
             taskManager.addTask(parseEventTask(instruction));
+            saveToHardDisk(taskManager);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+
         return true;
+    }
+
+    private static void saveToHardDisk(TaskManager taskManager) {
+        try {
+            FileWriter writer = new FileWriter("../../../data/duke.txt");
+            writer.write(taskManager.printTasksForHardDisk());
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("There is an issue in updating the duke.txt");
+        }
     }
 
     /**

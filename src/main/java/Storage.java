@@ -5,10 +5,19 @@ public class Storage {
     private ArrayList<Task> tasks = new ArrayList<>();
     private String filePath;
 
+    /**
+     * Constructor for storage that reads and writes to data file
+     * @param filePath where the data file is stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads data from filepath and creates an arraylist of Task
+     * @return an arraylist of Task from read data
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException{
         try {
             File file = new File(filePath);
@@ -35,10 +44,18 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts number into boolean. 1 for true and 0 for false
+     * @param number number to be determined
+     * @return
+     */
     public boolean changeStringToBoolean(String number) {
         return (number.equals("1"));
     }
 
+    /**
+     * Writes the data into filepath
+     */
     public void rewriteData() {
         try {
             FileWriter fw = new FileWriter(filePath);

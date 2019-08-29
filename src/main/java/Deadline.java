@@ -4,11 +4,22 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDateTime by;
 
+    /**
+     * Constructor for Deadline
+     * @param description
+     * @param by time in the format of dd/MM/yyyy HHmm
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDateTime.parse(by, Task.TIME_FORMATTER);
     }
 
+    /**
+     * Another constructor for Deadline
+     * @param description
+     * @param by time in the format of dd/MM/yyyy HHmm
+     * @param isDone whether Deadline is completed or not
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = LocalDateTime.parse(by, Task.TIME_FORMATTER);
@@ -19,6 +30,9 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * @return String that would be written into data file
+     */
     @Override
     public String toDataString() {
         String[] dateTimeSplit = by.toString().split("T");

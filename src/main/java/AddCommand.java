@@ -6,10 +6,20 @@ public class AddCommand extends Command {
     String event = "event";
     String todo = "todo";
 
+    /**
+     * Constructor for AddCommand
+     * @param stringCommand
+     */
     public AddCommand(String stringCommand) {
         super(stringCommand);
     }
 
+    /**
+     * Executes the command by using the three arguments provided
+     * @param taskList
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) {
         Task addTask;
@@ -46,6 +56,10 @@ public class AddCommand extends Command {
         ui.printNumberOfTasks(taskList);
     }
 
+    /**
+     * Checks if Duke will end.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

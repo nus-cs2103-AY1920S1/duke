@@ -39,7 +39,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("C:\\Users\\hooncp\\Desktop\\duke\\data\\data.txt");
+        Duke duke = new Duke("./data/data.txt");
         duke.run();
     }
 }

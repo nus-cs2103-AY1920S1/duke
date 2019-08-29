@@ -7,15 +7,21 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Parser object that deals with making sense of the user command.
  */
 public class Parser {
 
+    private Ui ui;
+
     /**
      * An empty constructor for a Parser object.
      */
-    public Parser() {}
+    public Parser() {
+        this.ui = new Ui();
+    }
 
     /**
      * Executes the specified command by the user.
@@ -33,7 +39,8 @@ public class Parser {
 
         switch (commandType) {
         case "list":
-            taskList.printList();
+            ArrayList<Task> tasks = taskList.getTaskList();
+            ui.printList(tasks);
             break;
         case "done":
             int taskNumber = Integer.parseInt(commandWords[1]);
@@ -43,6 +50,9 @@ public class Parser {
             int taskNumber2 = Integer.parseInt(commandWords[1]);
             taskList.deleteTask(taskNumber2);
             break;
+        case "find":
+            taskList.findMatchingTasks(commandWords[1]);
+            break;
         case "todo":
             // Fallthrough
         case "deadline":
@@ -51,11 +61,10 @@ public class Parser {
             addTask(command, commandType);
             break;
         case "bye":
-            Ui ui = new Ui();
-            ui.exit();
+            this.ui.exit();
             break;
         default:
-            throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }

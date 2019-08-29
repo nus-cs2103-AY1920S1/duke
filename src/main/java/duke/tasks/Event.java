@@ -1,12 +1,18 @@
 package duke.tasks;
 
+import duke.DukeException;
+import duke.Parser;
 import duke.Task;
 
 public class Event extends Task {
     protected String date;
     public Event(String desc, String date) {
         super(desc);
-        this.date = date;
+        try {
+            this.date = Parser.parseDateOrDateTimeToString(date);
+        } catch(DukeException e) {
+            this.date = date;
+        }
     }
 
     @Override

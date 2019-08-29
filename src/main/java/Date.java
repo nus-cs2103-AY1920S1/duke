@@ -1,11 +1,11 @@
 public class Date {
-    protected int day;
-    protected int month;
-    protected int year;
-    protected String dayOutput;
-    protected String monthOutput;
-    protected String yearOutput;
-    protected boolean validFormat = true;
+    private int day;
+    private int month;
+    private int year;
+    private String dayOutput;
+    private String monthOutput;
+    private String yearOutput;
+    private boolean validFormat = true;
     public Date(int day, int month, int year) throws DukeException {
         String dayString = String.valueOf(day);
         String monthString = String.valueOf(month);

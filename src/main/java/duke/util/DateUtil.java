@@ -7,6 +7,7 @@ import java.text.ParseException;
 public class DateUtil {
     /**
      * Parse String from File into Date.
+     *
      * @param strDate the date in the form of a string
      * @throws ParseException if it fails to parse the date
      */
@@ -16,6 +17,7 @@ public class DateUtil {
 
     /**
      * Parse String into Date.
+     *
      * @param strDate the date in the form of a String
      * @throws ParseException if it fails to parse the date
      */

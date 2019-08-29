@@ -16,6 +16,8 @@ public class TaskList {
 
     /**
      * Constuctor.
+     *
+     * @param list List of Task
      */
     public TaskList(List<Task> list) {
         this.list = list;
@@ -23,6 +25,7 @@ public class TaskList {
 
     /**
      * Adds an item top the list.
+     *
      * @param task Task
      */
     public void add(Task task) {
@@ -31,6 +34,8 @@ public class TaskList {
 
     /**
      * Removes an item from the list based on 1-indexed index.
+     *
+     * @param index int
      * @return Task
      */
     public Task remove(int index) {
@@ -39,15 +44,18 @@ public class TaskList {
 
     /**
      * Gets the element based on 1-indexed index.
+     *
+     * @param index int
      * @return Task
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return this.list.get(index - 1);
     }
 
     /**
      * Gets the size of the list.
-     * @returns int the size of the list
+     *
+     * @return int the size of the list
      */
     public int getSize() {
         return this.list.size();

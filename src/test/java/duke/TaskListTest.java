@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.task.ToDo;
 
-class MyFirstJUnitJupiterTests {
+class TaskListTest {
 
     TaskList tasks = new TaskList();
 

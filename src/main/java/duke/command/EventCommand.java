@@ -15,6 +15,9 @@ public class EventCommand implements Command {
     
     /**
      * Constructor.
+     *
+     * @param name String
+     * @param time Date
      */
     public EventCommand(String name, Date time) {
         this.name = name; 

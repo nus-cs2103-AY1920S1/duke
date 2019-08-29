@@ -1,7 +1,6 @@
 package duke.util;
 
 import java.util.List;
-import java.util.ArrayList;
 //CHECKSTYLE:OFF - Doing this because Paths need the * import
 import java.nio.file.*;
 //CHECKSTYLE:ON
@@ -20,6 +19,8 @@ public class Storage {
     
     /**
      * Constructor.
+     *
+     * @param path String
      */
     public Storage(String path) {
         this.path = Paths.get(path);
@@ -28,6 +29,7 @@ public class Storage {
     /**
      * Save data to file and assumes that this destination is fixed.
      * Also overwrite file if it already exists.
+     *
      * @param data List of Task
      * @throws IOException if an error appears
      */
@@ -42,6 +44,7 @@ public class Storage {
 
     /**
      * Load data from file.
+     *
      * @return List of Task
      * @throws IOException if an error appears
      */
@@ -51,6 +54,7 @@ public class Storage {
 
     /**
      * Transform the Task List into Strings.
+     *
      * @param data List of Task
      * @return String
      */
@@ -71,6 +75,7 @@ public class Storage {
 
     /**
      * Decode the data.
+     *
      * @param data List of String
      * @return List of Task
      */

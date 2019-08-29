@@ -13,6 +13,8 @@ public class ToDoCommand implements Command {
 
     /**
      * Constructor.
+     *
+     * @param name String
      */
     public ToDoCommand(String name) {
         this.name = name;

@@ -43,4 +43,8 @@ public class Task {
     public String toSave() {
         return this.description + this.isDone;
     }
+
+    public boolean match(String str) {
+        return description.contains(str);
+    }
 }

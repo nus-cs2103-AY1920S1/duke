@@ -35,6 +35,9 @@ public class Parser {
                             System.out.println("OOPS!!! " + exp.getMessage());
                         }
                         break;
+                    case "find":
+                        tasks.find(cmdSc.nextLine());
+                        break;
                     //list
                     case "list":
                         tasks.list();

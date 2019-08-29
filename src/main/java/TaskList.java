@@ -103,4 +103,17 @@ public class TaskList {
         return lines;
     }
 
+    public void find(String str) {
+        List<Task> ls = new LinkedList<>();
+        for (Task t : taskList) {
+            if (t.match(str)) {
+                ls.add(t);
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= ls.size(); i++) {
+            Task tsk = ls.get(i-1);
+            System.out.println(i + ". " + tsk);
+        }
+    }
 }

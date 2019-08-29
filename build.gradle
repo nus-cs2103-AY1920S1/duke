@@ -17,6 +17,10 @@ application {
     mainClassName = "duke.Duke"
 }
 
+run {
+    standardInput = System.in
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
@@ -34,8 +38,4 @@ shadowJar {
     archiveVersion = "0.1"
     archiveClassifier = null
     archiveAppendix = null
-}
-
-run {
-    standardInput = System.in
 }

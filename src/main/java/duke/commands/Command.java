@@ -17,7 +17,8 @@ public class Command {
         this.isExit = false;
     }
 
-    /**Getter for <code>isExit</code> boolean.
+    /**
+     * Getter for <code>isExit</code> boolean.
      * Used to determine whether to exit the while loop in Duke
      * @return boolean determining whether to exit the while loop in Duke
      */
@@ -25,7 +26,8 @@ public class Command {
         return this.isExit;
     }
 
-    /**Will save the Tasks in the TaskList via Storage's provided methods.
+    /**
+     * Will save the Tasks in the TaskList via Storage's provided methods.
      * This method is useful as it can be called by child classes should they
      * require saving functionality.
      * @param ui Ui object that is responsible for printing output as a response

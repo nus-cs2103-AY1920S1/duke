@@ -6,17 +6,20 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.tasks.Task;
 
+/** Command invoked when the "delete" command is encountered */
 public class DeleteCommand extends Command {
     int taskNum;
 
-    /**Constructor
+    /**
+     * Constructor
      * @param taskNum 1-indexed number associated with a given task
      */
     public DeleteCommand(int taskNum) {
         this.taskNum = taskNum;
     }
 
-    /**Deletes the task associated with <code>taskNum</code> and will save the
+    /**
+     * Deletes the task associated with <code>taskNum</code> and will save the
      * TaskList.
      * @param ui Ui object that is responsible for printing output as a response
      * @param storage Storage object respnsible for saving the Tasks into a pre-defined format

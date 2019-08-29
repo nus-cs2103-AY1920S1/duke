@@ -8,9 +8,10 @@ import duke.utils.Ui;
 
 import java.util.ArrayList;
 
-/**Command invoked when the "list" command is encountered*/
+/** Command invoked when the "list" command is encountered */
 public class ListCommand extends Command {
-    /**Will iterate through the Tasks in TaskList and print out the
+    /**
+     * Will iterate through the Tasks in TaskList and print out the
      * tasks one by one with a counter. This method will not cause the
      * TaskList to be saved.
      * @param ui Ui object that is responsible for printing output as a response

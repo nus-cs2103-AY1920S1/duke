@@ -5,11 +5,12 @@ import duke.utils.Ui;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 
-/**Command invoked when the "done" command is encountered*/
+/** Command invoked when the "done" command is encountered */
 public class CompleteCommand extends Command {
     int taskNum;
 
-    /**Constructor
+    /**
+     * Constructor
      * @param taskNum the 1-indexed task number to be marked as complete
      */
     public CompleteCommand(int taskNum) {
@@ -17,7 +18,8 @@ public class CompleteCommand extends Command {
     }
 
 
-    /**Will mark the task associated with <code>taskNum</code> as complete and
+    /**
+     * Will mark the task associated with <code>taskNum</code> as complete and
      * save the current TaskList.
      * @param ui Ui object that is responsible for printing output as a response
      * @param storage Storage object respnsible for saving the Tasks into a pre-defined format

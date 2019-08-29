@@ -4,11 +4,12 @@ import duke.exceptions.DukeException;
 import duke.utils.DukeDate;
 import java.text.ParseException;
 
-/**Implements the logic behind an Deadline Task*/
+/** Implements the logic behind an Deadline Task */
 public class Deadline extends Task {
     private DukeDate deadline;
 
-    /**Constructor
+    /**
+     * Constructor
      * @param description String describing title/details of Deadline
      * @param deadline String describing time of Deadline (in the format specified in DukeDate.dateFormatString)
      * @throws DukeException
@@ -24,7 +25,8 @@ public class Deadline extends Task {
 
     }
 
-    /**String representation of Deadline object
+    /**
+     * String representation of Deadline object
      * @return String representation of Deadline object
      */
     public String toString() {
@@ -32,7 +34,8 @@ public class Deadline extends Task {
         return "[D][" + statusIcon + "] " + this.description + " (by: " + this.deadline + ")";
     }
 
-    /**Generates a String representation of the Deadline Task in a format
+    /**
+     * Generates a String representation of the Deadline Task in a format
      * that is compatible for the Storage object to read and write.
      * @return String representation of the Task (compatibility with Storage class)
      */

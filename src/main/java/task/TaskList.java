@@ -2,6 +2,7 @@ package task;
 
 import misc.Storage;
 import exception.DukeException;
+import exception.IncorrectDukeCommand;
 import misc.Ui;
 
 import java.io.IOException;
@@ -82,7 +83,23 @@ public class TaskList {
         System.out.printf("%sNow you have %d task(s) in your list.\n", Ui.spaces(5), tasks.size());
     }
 
-    public void delete(int taskNumber) throws IOException {
+    public void delete(int taskNumber) throws IOException, IncorrectDukeCommand {
+        String errorMessage;
+
+        if (taskNumber <= 0) {
+            errorMessage = "Number cannot be negative!";
+        } else if (tasks.size() == 0) {
+            errorMessage = "You don't have any tasks yet!";
+        } else if (taskNumber > tasks.size()) {
+            errorMessage = "You don't have that many tasks!";
+        } else {
+            errorMessage = null;
+        }
+
+        if (errorMessage != null) {
+            throw new IncorrectDukeCommand(errorMessage);
+        }
+        
         Task removedTask = tasks.remove(taskNumber);
         
         storage.overwriteLocalSave(tasks);

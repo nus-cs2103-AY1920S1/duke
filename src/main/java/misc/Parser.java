@@ -175,16 +175,7 @@ public class Parser {
 
             if (userInput.hasNextInt()) {
                 taskNumberDelete = userInput.nextInt();
-
-                if (taskNumberDelete <= 0) {
-                    errorMessage = String.format("%sNumber cannot be negative!", Ui.spaces(5));
-                } else if (taskList.size() == 0) {
-                    errorMessage = String.format("%sYou don't have any tasks yet!", Ui.spaces(5));
-                } else if (taskNumberDelete > taskList.size()) {
-                    errorMessage = String.format("%sYou don't have that many tasks!", Ui.spaces(5));
-                } else {
-                    taskList.delete(taskNumberDelete - 1);
-                }
+                taskList.delete(taskNumberDelete - 1);
             }
             break;
         case "todo":

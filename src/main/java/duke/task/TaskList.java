@@ -72,4 +72,23 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return this.tasks;
     }
+
+    /**
+     * This method when called will go through <code>tasks</code>
+     * to find <code>Task</code> with the keyword specified <code>word</code>.
+     *
+     * @param word Keyword to search.
+     * @return ArrayList of tasks.
+     */
+    public ArrayList<Task> findTaskWithWord(String word) {
+        ArrayList<Task> tasksWithWord = new ArrayList<>();
+        int numberOfTask = this.tasks.size();
+        for (int i = 0; i < numberOfTask; i++) {
+            Task task = this.tasks.get(i);
+            if (task.getDescription().contains(word)) {
+                tasksWithWord.add(task);
+            }
+        }
+        return tasksWithWord;
+    }
 }

@@ -28,7 +28,7 @@ public class Parser {
      * includes the task to be added into the task list.
      *
      * @param tasks The user's input string in separated into an array.
-     * @throws DukeException If there is a problem with data processing, loading or saving.
+     * @throws DukeException If there is no description of the tasks.
      */
     private static void todoCheck(String[] tasks) throws DukeException {
         if (tasks.length <= 1) {
@@ -44,7 +44,7 @@ public class Parser {
      *
      * @param tasks The user's input string in separated into an array.
      * @param userInput The user's input string.
-     * @throws DukeException If there is a problem with data processing, loading or saving.
+     * @throws DukeException If there is no specified date or task.
      */
     private static void deadlineCheck(String[] tasks, String userInput) throws DukeException {
         if (tasks.length <= 1) {
@@ -65,7 +65,7 @@ public class Parser {
      *
      * @param tasks The user's input string in separated into an array.
      * @param userInput The user's input string.
-     * @throws DukeException If there is a problem with data processing, loading or saving.
+     * @throws DukeException If there is no specified date or task.
      */
     private static void eventCheck(String[] tasks, String userInput) throws DukeException {
         if (tasks.length <= 1) {
@@ -75,6 +75,19 @@ public class Parser {
         } else if (userInput.substring(userInput.indexOf("/at") + 3).equals("")
                 || userInput.substring(userInput.indexOf("/at") + 4).equals("")) {
             throw new DukeException("OOPS!!! Please include the time of event after /at.");
+        }
+    }
+
+    /**
+     * This method checks to ensure that the user provides
+     * a keyword to search for from the task list.
+     *
+     * @param tasks The user's input split into an array of strings.
+     * @throws DukeException If there is no keyword to search for.
+     */
+    private static void findCheck(String[] tasks) throws DukeException {
+        if (tasks.length <= 1) {
+            throw new DukeException("OOPS!!! Please tell me what you want to find!!");
         }
     }
 
@@ -157,6 +170,15 @@ public class Parser {
                         break;
                     }
                 }
+                    case "find": {
+                        try {
+                            findCheck(task);
+                            return new FindTaskCommand(command.substring(5).trim());
+                        } catch (DukeException e) {
+                            System.err.println("Something went wrong: " + e.getMessage());
+                            break;
+                        }
+                    }
                 default: {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

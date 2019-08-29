@@ -1,12 +1,13 @@
-/**
- * The Ui class deals with user interaction.
- * It will call the Parser class and the TaskList class to handle user inputs.
- */
+package duke;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * The Ui class deals with user interaction.
+ * It will call the Parser class and the TaskList class to handle user inputs.
+ */
 public class Ui {
 
     private Scanner sc;
@@ -38,8 +39,10 @@ public class Ui {
     public void scan(TaskList taskList, Storage storage) throws IOException {
         this.taskList = taskList;
         this.storage = storage;
+
         String input = sc.nextLine();
         String[] task = input.split(" ");
+
         while (!task[0].equals("bye")) {
             try {
                 handleInput(task, input);
@@ -74,7 +77,9 @@ public class Ui {
             taskList.printList();
             break;
         case "todo":
+            // Fallthrough
         case "deadline":
+            // Fallthrough
         case "event":
             handleTasks(task[0], input);
             break;
@@ -85,6 +90,7 @@ public class Ui {
 
     private void handleTasks(String taskType, String t) {
         Parser p = new Parser(t);
+
         try {
             Task parsedTask = p.parse();
             taskList.addToList(parsedTask);
@@ -92,11 +98,13 @@ public class Ui {
             System.out.println("        " + parsedTask);
             System.out.println("    Now you have " + taskList.getListSize() + " tasks in the list.");
         } catch (DukeException e) {
-            print("    ☹ OOPS!!! The description of a " + taskType + " cannot be empty."); // check in parser
+            print("    ☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
         } catch (ParseException e) {
-            print("    ☹ OOPS!!! The date/time of a " + taskType + " does not follow the specified format of dd/MM/yyyy HHmm.");
+            print("    ☹ OOPS!!! The date/time of a " + taskType
+                    + " does not follow the specified format of dd/MM/yyyy HHmm.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            print("    ☹ OOPS!!! The description of a " + taskType + " does not follow the specified format.");
+            print("    ☹ OOPS!!! The description of a " + taskType
+                    + " does not follow the specified format.");
         }
     }
 

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * DukeException handles exceptions specific to Duke.
  */

@@ -1,11 +1,13 @@
-/**
- * The Duke class runs Duke, the personal assistant chatbot
- * that helps a person keeps track of various things.
- */
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+/**
+ * The Duke class runs Duke, the personal assistant chatbot
+ * that helps a person keeps track of various things.
+ */
 
 public class Duke {
 

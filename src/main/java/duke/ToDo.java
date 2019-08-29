@@ -1,10 +1,12 @@
+package duke;
+
 /**
  * The ToDo class creates a ToDo task
  * that extends from the Task class.
  */
 public class ToDo extends Task {
 
-    protected String by;
+    private String by;
 
     /**
      * Constructor for class ToDo.

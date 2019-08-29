@@ -1,10 +1,13 @@
+package duke;
+
 /**
  * The Task class contains methods for query of the tasks
  * as well as to set tasks as done.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task class.

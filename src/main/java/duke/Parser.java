@@ -1,12 +1,13 @@
-/**
- * The Parser class takes in a string, parses it to the required
- * date and time format before returning it.
- */
+package duke;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Parser class takes in a string, parses it to the required
+ * date and time format before returning it.
+ */
 public class Parser {
 
     private String str;

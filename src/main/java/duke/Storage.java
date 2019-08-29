@@ -1,7 +1,4 @@
-/**
- * The Storage class deals with storing tasks from the task list
- * and loading tasks from the hard drive.
- */
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Storage class deals with storing tasks from the task list
+ * and loading tasks from the hard drive.
+ */
 public class Storage {
 
     private String filePath;
@@ -35,9 +36,11 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
+
         if (f.length() == 0) {
             throw new DukeException();
         }
+
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] task = input.split(" \\| ");

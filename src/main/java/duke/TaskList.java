@@ -1,10 +1,11 @@
-/**
- * The TaskList deals with operations pertaining to the task list.
- */
+package duke;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TaskList deals with operations pertaining to the task list.
+ */
 public class TaskList {
 
     private List<Task> list;

@@ -1,10 +1,12 @@
+package duke;
+
 /**
  * The Deadline class creates a Deadline task
  * that extends from the Task class.
  */
 public class Deadline extends Task {
 
-    protected String by;
+    private String by;
 
     /**
      * Constructor for class Deadline.

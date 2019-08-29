@@ -1,10 +1,12 @@
+package duke;
+
 /**
  * The Event class creates a Event task
  * that extends from the Task class.
  */
 public class Event extends Task {
 
-    protected String at;
+    private String at;
 
     /**
      * Constructor for class Event.

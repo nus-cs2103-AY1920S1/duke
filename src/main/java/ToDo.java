@@ -18,6 +18,7 @@ public class ToDo extends Task {
      *
      * @return String representing the task.
      */
+    @Override
     public String toString() {
         return "[" + this.label + "]" + this.getStatusIcon() + this.description;
     }

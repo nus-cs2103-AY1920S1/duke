@@ -8,6 +8,7 @@ import java.util.List;
  * Contains the task list.
  */
 public class TaskList {
+
     private List<Task> tasks;
 
     /**
@@ -57,14 +58,18 @@ public class TaskList {
             return n + "th";
         }
         switch (n % 10) {
-            case 1:
-                return n + "st of";
-            case 2:
-                return n + "nd of";
-            case 3:
-                return n + "rd of";
-            default:
-                return n + "th of";
+        case 1:
+            return n + "st of";
+            // Fallthrough
+        case 2:
+            return n + "nd of";
+            // Fallthrough
+        case 3:
+            return n + "rd of";
+            // Fallthrough
+        default:
+            return n + "th of";
+            // Fallthrough
         }
     }
 
@@ -81,10 +86,11 @@ public class TaskList {
         String taskDes = "";
         String taskTime = "";
 
-        //read input strings.
-        for (int i = 1; i < arr.length; i++) {//get task description
+        // Get task description
+        for (int i = 1; i < arr.length; i++) {
             if (arr[i].length() >= 1 && arr[i].charAt(0) == '/') {
-                for (int j = i + 1; j < arr.length; j++) { //get task time
+                // Get task time
+                for (int j = i + 1; j < arr.length; j++) {
                     taskTime += " " + arr[j];
                 }
                 break;
@@ -95,7 +101,7 @@ public class TaskList {
         taskDes = taskDes.trim();
         taskTime = taskTime.trim();
 
-        //handle exceptions
+        // Handle exceptions
         if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
             throw new DukeException("    ____________________________________________________________\n     " +
                     "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
@@ -111,7 +117,7 @@ public class TaskList {
                             "\u2639" + " OOPS!!! The time of a " + taskType + " cannot be empty." +
                             "\n    ____________________________________________________________\n");
 
-        //converts date format.
+        // Converts date format.
         try {
             Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime);
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
@@ -128,14 +134,14 @@ public class TaskList {
 
         }
 
-        //creates new task.
+        // Creates new task.
         Task task;
         if (taskType.equals("todo")) {
             task = new ToDo(taskDes);
             tasks.add(task);
             return task;
         } else if (taskType.equals("deadline")) {
-            task = new DeadLine(taskDes, taskTime);
+            task = new Deadline(taskDes, taskTime);
             tasks.add(task);
             return task;
         } else if (taskType.equals("event")) {
@@ -156,9 +162,9 @@ public class TaskList {
      */
     public Task done(int n) {
         Task task = this.tasks.get(n - 1);
-        task.mark(); //mark the corresponding task as done
+        // Mark the corresponding task as done
+        task.mark();
         return task;
-
     }
 
     /**
@@ -169,9 +175,9 @@ public class TaskList {
      */
     public Task delete(int n) {
         Task task = this.tasks.get(n - 1);
-        this.tasks.remove(task); //delete task from list
+        // Delete task from list
+        this.tasks.remove(task);
         return task;
-
     }
 
     /**
@@ -180,6 +186,7 @@ public class TaskList {
      * @return a String representation to be stored in the task list file.
      */
     public String generateInfo() {
+        // Convert Task into a String which can be stored in the data file
         String taskFile = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -187,7 +194,8 @@ public class TaskList {
             if (task.getTime().equals("")) {
                 current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription();
             } else {
-                current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription() + " | " + task.getTime();
+                current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription()
+                        + " | " + task.getTime();
             }
             if (i != tasks.size() - 1) {
                 taskFile += current + System.lineSeparator();
@@ -195,7 +203,6 @@ public class TaskList {
                 taskFile += current;
             }
         }
-
         return taskFile;
     }
 }

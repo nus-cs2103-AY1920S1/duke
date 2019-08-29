@@ -10,6 +10,7 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
+
     private List<Task> tasks = new ArrayList<Task>();
     private String filePath;
 
@@ -30,7 +31,7 @@ public class Storage {
      * @throws IOException exception produced by failed or interrupted I/O operations.
      */
     public void writeToFile(String text) throws IOException {
-
+        // Create a FileWriter for the given file path
         FileWriter fw = new FileWriter(filePath);
         fw.write(text);
         fw.close();
@@ -45,8 +46,10 @@ public class Storage {
      * @throws DukeException exception produced by reading empty file.
      */
     public List<Task> load() throws FileNotFoundException, DukeException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        // Create a File for the given file path
+        File f = new File(filePath);
+        // Create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
         if (!s.hasNext()) throw new DukeException(
                 "Your task list is currently empty.");
         while (s.hasNext()) {
@@ -63,7 +66,7 @@ public class Storage {
                 if (taskStatus == 1) task.mark();
             } else if (taskType.equals("D")) {
                 taskTime = arr[3];
-                task = new DeadLine(taskDes, taskTime);
+                task = new Deadline(taskDes, taskTime);
                 tasks.add(task);
                 if (taskStatus == 1) task.mark();
             } else if (taskType.equals("E")) {
@@ -73,9 +76,7 @@ public class Storage {
                 if (taskStatus == 1) task.mark();
             }
         }
-
         return tasks;
     }
-
 
 }

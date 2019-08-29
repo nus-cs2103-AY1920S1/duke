@@ -30,7 +30,8 @@ public class Parser {
     public void parse() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.nextLine();//read user input
+            String command = sc.nextLine();
+            // Read user input
             if (command.equals("bye")) {
                 ui.exit();
                 break;

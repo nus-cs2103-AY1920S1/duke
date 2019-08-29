@@ -21,6 +21,18 @@ public class TaskList {
         storage.addTaskToFile(task);
     }
 
+    public ArrayList<Task> matchingTasks(String query) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (Task t : this.taskList) {
+            String queryLowerCase = query.toLowerCase();
+            String stringUnderCheck = t.toString().toLowerCase();
+            if (stringUnderCheck.indexOf(queryLowerCase) != -1) {
+                matches.add(t);
+            }
+        }
+        return matches;
+    }
+
     public void deleteTask(int index, Storage storage) throws DukeException, IOException {
         try {
             this.taskList.get(index - 1);

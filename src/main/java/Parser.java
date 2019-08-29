@@ -68,6 +68,11 @@ public class Parser {
             deleteTask(input, taskList, storage);
         } else if (command[0].equals("done")) {
             taskDone(input, taskList, storage);
+        } else if (command[0].equals("find")) {
+            if (command.length == 1) {
+                throw new DukeException("Find query must be specified!!!");
+            } 
+            ui.printTasks(taskList.matchingTasks(command[1]));
         } else {
             addTask(input, taskList, storage);
         }

@@ -97,4 +97,15 @@ public class Ui {
         System.out.println("☹ OOPS!!! " + e.getMessage());
     }
 
+    /**
+     * printMatches() will print all tasks that match given keyword.
+     * @param matchingTasks ArrayList of matching Tasks
+     */
+    public void printMatches(ArrayList<Task> matchingTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= matchingTasks.size(); i++) {
+            System.out.println(i + "." + matchingTasks.get(i - 1));
+        }
+    }
+
 }

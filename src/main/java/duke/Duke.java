@@ -5,9 +5,11 @@ import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
 
-import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * The main driver of Duke program.
+ */
 public class Duke {
 
     private Storage storage;
@@ -15,6 +17,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath a string which stores the directory of the data to be loaded
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +34,9 @@ public class Duke {
         parser = new Parser(tasks, ui);
     }
 
+    /**
+     * Run the program using CLI.
+     */
     public void run() {
         ui.printWelcome();
 
@@ -51,7 +61,6 @@ public class Duke {
         // save to text file
         storage.save(tasks);
     }
-
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();

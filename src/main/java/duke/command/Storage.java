@@ -14,13 +14,27 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class which deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for storage.
+     *
+     * @param filePath The string representing the path of the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads saved data before the program runs, if there is any saved data.
+     *
+     * @return A list of tasks which is saved locally.
+     * @throws DukeException If an error occurs when loading.
+     */
     public ArrayList<Task> load() throws DukeException {
         // check for directory existence
         File dir = new File("data");
@@ -35,7 +49,7 @@ public class Storage {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                throw new DukeException("IOException creating new file");
+                throw new DukeException(e.getMessage());
             }
         }
 
@@ -65,9 +79,15 @@ public class Storage {
         } catch (FileNotFoundException | ParseException e) {
             throw new DukeException(e.getMessage());
         }
+
         return list;
     }
 
+    /**
+     * Save the tasks to the file in the directory provided.
+     *
+     * @param tasks The tasks to be saved after running duke.
+     */
     public void save(TaskList tasks) {
         try {
             ArrayList<Task> list = tasks.list;

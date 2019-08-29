@@ -6,12 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
-    static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     static final String pathToHardDisk = "/data/duke.txt";
 
     private static File getHardDiskFile() {

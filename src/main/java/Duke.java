@@ -20,7 +20,7 @@ public class Duke extends Application {
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
     /**
-     * Constructor for Duke instance
+     * Constructor for Duke instance.
      * @param filepath file path giving the location of the file
      */
     public Duke(String filepath) {
@@ -31,7 +31,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Driver method for Duke instance
+     * Driver method for Duke instance.
      * calls parser to parse user input accordingly
      */
 
@@ -40,11 +40,9 @@ public class Duke extends Application {
     }
 
     /**
-     * Entry point of program, instantiates Duke instance
+     * Entry point of program, instantiates Duke instance.
      * file input/output is loaded from data/duke.txt
-     * @param
      * @return void
-     *
      */
     public static void main(String[] args) {
         Duke temp = new Duke("data/duke.txt");

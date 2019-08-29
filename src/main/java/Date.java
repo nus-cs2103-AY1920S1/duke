@@ -1,3 +1,7 @@
+/**
+ *  Represents a timing on a specific date. A <code>Date</code> object corresponds
+ *  to a date and a time. e.g.<code>27/08/2019 1800</code>
+ */
 public class Date {
     protected int day;
     protected String mon;
@@ -5,6 +9,12 @@ public class Date {
     protected double time;
     protected String meridian;
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+
+    /**
+     * @param str The string in the format of "dd/mm/yyyy 0000"
+     * @return a Date object.
+     */
+
     public Date(String str) {
         try {
             String[] strs = str.split(" ");
@@ -25,6 +35,11 @@ public class Date {
         }
     }
 
+    /**
+     * Returns whether a string is in a "dd/mm/yyyy 0000" format
+     * @param str The string in question
+     * @return A boolean indicating whether the string is in a Date format
+     */
     public static boolean isDate(String str) {
         String[] strs = str.split(" ");
         if (strs.length != 2) {

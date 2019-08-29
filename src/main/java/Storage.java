@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a storage of the task list.
+ */
 public class Storage {
 
     protected String filePath;
@@ -15,6 +18,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Retrieve the list of tasks from local file.
+     * @return A list of current tasks in record.
+     */
     public List<Task> load() {
         Path file = Paths.get(filePath);
         List<Task> tasks = new LinkedList<>();
@@ -47,6 +54,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current task list to local file.
+     * @param taskList the list of tasks.
+     */
     public void save(TaskList taskList) {
         Path file = Paths.get(filePath);
         try {

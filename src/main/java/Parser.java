@@ -1,5 +1,7 @@
 import java.util.Scanner;
-
+/**
+ * Represents a parser of user commands in Duke chat bot.
+ */
 public class Parser {
     protected Scanner sc;
 
@@ -7,6 +9,10 @@ public class Parser {
         this.sc = sc;
     }
 
+    /**
+     * Reads and react to user command
+     * @param tasks Current task list.
+     */
     public void read(TaskList tasks) {
         while(true) {
             String cmd = sc.nextLine();

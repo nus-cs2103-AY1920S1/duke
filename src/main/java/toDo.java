@@ -1,3 +1,6 @@
+/**
+ * Represents some task to do.
+ */
 public class toDo extends Task{
     public toDo(String description) {
         super(description);
@@ -10,6 +13,10 @@ public class toDo extends Task{
         return "[T]["+ this.getStatusIcon() +"] " + super.toString();
     }
 
+    /**
+     * Returns a string representing this task to be saved in local file.
+     * @return A string representing this task
+     */
     @Override
     public String toSave() {
         String done = isDone ? "1 | " : "0 | ";

@@ -1,6 +1,8 @@
-import java.io.File;
 import java.util.Scanner;
 
+/**
+ * Represents a chat bot that manages your daily tasks.
+ */
 public class Duke {
 
     private Storage storage;

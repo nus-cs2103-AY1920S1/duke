@@ -1,3 +1,7 @@
+/**
+ * Represents a task. A <code>Task</code> object corresponds to a thing we need to note down
+ * e.g. toDo return book
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -12,10 +16,17 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Retrieves the done/not done status of the task
+     * @return 0 representing "not done" and 1 representing "done"
+     */
     public String getStatusIcon() {
         return (isDone ? "1" : "0");
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void mardAsDone() {
         this.isDone = true;
     }
@@ -25,6 +36,10 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Converts the task to a format for saving in local file.
+     * @return
+     */
     public String toSave() {
         return this.description + this.isDone;
     }

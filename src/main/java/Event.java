@@ -23,6 +23,10 @@ public class Event extends Task{
         return "[E]["+ this.getStatusIcon() +"] " + super.toString() + " (at: " + str + ")";
     }
 
+    /**
+     * Returns a string representing the task list to be saved in local file.
+     * @return A string representation of task list
+     */
     @Override
     public String toSave() {
         String done = isDone ? "1 | " : "0 | ";

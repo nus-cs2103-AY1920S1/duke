@@ -1,15 +1,18 @@
 public class Task {
     private String description;
     private Boolean isDone;
+    protected String type;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String printTask() {
-        String taskString = "[" + this.getStatusIcon() + "] " + this.description;
-        return taskString;
+    @Override
+    public String toString() {
+        String type = "[" + this.type + "] ";
+        String status = "[" + this.getStatusIcon() + "] ";
+        return type + status + this.description;
     }
 
     public String getStatusIcon() {
@@ -19,6 +22,6 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(this.printTask());
+        System.out.println(this.toString());
     }
 }

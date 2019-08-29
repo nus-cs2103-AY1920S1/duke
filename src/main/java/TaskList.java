@@ -4,7 +4,24 @@ import java.util.Iterator;
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    public void addToList(String taskDescription) {
+    public enum TaskType {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
+
+    public void addToList(String input) {
+        // determine type of task
+        TaskType taskType;
+        if (input.startsWith("todo")) {
+            taskType = TaskType.TODO;
+        } else if (input.startsWith("deadline")) {
+            taskType = TaskType.DEADLINE;
+        } else if (input.startsWith("event")) {
+            taskType = TaskType.EVENT;
+        }
+
+        // todo: split description and other info
         tasks.add(new Task(taskDescription));
         System.out.println("added: " + taskDescription);
     }
@@ -12,7 +29,7 @@ public class TaskList {
     public void printList() {
         int i = 1;
         for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); ) {
-            String s = iterator.next().printTask();
+            String s = iterator.next().toString();
             System.out.println(i + ". " + s);
             i++;
         }

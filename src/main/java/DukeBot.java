@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class DukeBot {
     private TaskList taskList = new TaskList();
     private Boolean isOngoing;
+    private String welcomeMessage = "What can I do for you?";
 
     /**
      * Starts DukeBot and prints welcome message.
@@ -15,7 +16,7 @@ public class DukeBot {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?"); // todo: replace with configurable message
+        System.out.println(welcomeMessage);
         run();
     }
 
@@ -41,22 +42,23 @@ public class DukeBot {
 
     /**
      * Creates the given input string.
-     * For Level-1, simply echoes the string.
      *
      * @param input input string given by user.
      */
     private void process(String input) {
+        // todo: extract list and done into TaskList class
         if (input.equals("bye")) {
-            // terminate if "bye"
+            // if "bye", terminate
             this.isOngoing = false;
         } else if (input.equals("list")) {
-            // print list if "list"
+            // if "list", print list
             this.taskList.printList();
         } else if (input.startsWith("done")) {
-            int taskId = Integer.parseInt(input.substring(5));
+            String s = input.substring(5); // extract the task ID entered by user
+            int taskId = Integer.parseInt(s);
             this.taskList.getTask(taskId).markAsDone();
         } else {
-            // add to list otherwise
+            // otherwise, add to list
             this.taskList.addToList(input);
         }
     }

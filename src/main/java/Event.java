@@ -1,12 +1,13 @@
 public class Event extends Task {
+
     String timeline;
 
-    public Event (String task, String timeline) {
+    public Event(String task, String timeline) {
         super(task);
         this.timeline = timeline;
     }
 
-    public Event (String task, String timeline, boolean complete) {
+    public Event(String task, String timeline, boolean complete) {
         super(task, complete);
         this.timeline = timeline;
     }

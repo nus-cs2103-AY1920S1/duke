@@ -13,13 +13,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public static Task createTaskFromFile (String s) throws DukeException{
+    public static Task createTaskFromFile(String s) throws DukeException {
         String[] command = s.split(" \\| ");
         boolean isPending = command[1].equals("1") ? true : false;
         switch (command[0]) {
         case "T":
             return new ToDos(command[2], isPending);
-        
         case "D":
             return new Deadline(command[2], command[3], isPending);
         case "E":

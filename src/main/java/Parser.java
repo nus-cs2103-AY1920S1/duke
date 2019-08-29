@@ -5,6 +5,7 @@ public class Parser {
 
 
     public Parser() {
+
     }
 
     public static String getMonth(String month) throws DukeException {
@@ -42,8 +43,8 @@ public class Parser {
         String[] dateBreakup = dateDetail.split("/");
         String month = getMonth(dateBreakup[1]);    
         int lastDigitOfDay = Integer.parseInt(dateBreakup[0]) % 10;
-        String dayEnding = lastDigitOfDay == 1 ? "st" : lastDigitOfDay == 2 ? "nd" : 
-                lastDigitOfDay == 3 ? "rd" : "th";
+        String dayEnding = lastDigitOfDay == 1 ? "st" : lastDigitOfDay == 2 ? "nd" 
+                : lastDigitOfDay == 3 ? "rd" : "th";
         return dateBreakup[0] + dayEnding + " of " + month + " " + dateBreakup[2]; 
     }
 
@@ -80,8 +81,7 @@ public class Parser {
         } else {
             try {
                 taskList.deleteTask(Integer.parseInt(command[1]), storage);;
-            } 
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! The index of task to be deleted must be a number.");
             }
         }
@@ -94,8 +94,7 @@ public class Parser {
         } else {
             try {
                 taskList.markAsDone(Integer.parseInt(command[1]), storage);
-            } 
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! The completed task's index must be a number.");
             }
         }

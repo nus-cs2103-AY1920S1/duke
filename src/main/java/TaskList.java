@@ -16,7 +16,7 @@ public class TaskList {
         return taskList;
     }
 
-    public void addTask (Task task, Storage storage) throws IOException {
+    public void addTask(Task task, Storage storage) throws IOException {
         this.taskList.add(task);
         storage.addTaskToFile(task);
     }
@@ -24,8 +24,7 @@ public class TaskList {
     public void deleteTask(int index, Storage storage) throws DukeException, IOException {
         try {
             this.taskList.get(index - 1);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
         System.out.println("Noted. I've removed this task: ");
@@ -39,8 +38,7 @@ public class TaskList {
         try {
             taskList.get(index - 1).markAsDone();
             storage.writeToFile(storage.getFilePath(), taskList);
-        } 
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
     }

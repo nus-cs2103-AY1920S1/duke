@@ -1,10 +1,10 @@
 public class ToDos extends Task {
 
-    public ToDos (String task) {
+    public ToDos(String task) {
         super(task);
     }
 
-    public ToDos (String task, boolean complete) {
+    public ToDos(String task, boolean complete) {
         super(task, complete);
     }
 

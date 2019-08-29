@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.utils.Ui;
 import duke.utils.Storage;
 import duke.utils.TaskList;
+import duke.utils.Ui;
 
 /** Command invoked when "bye" command is encountered */
 public class ByeCommand extends Command {

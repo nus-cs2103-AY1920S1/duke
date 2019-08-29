@@ -7,7 +7,6 @@ import duke.commands.ByeCommand;
 import duke.commands.AddCommand;
 import duke.commands.ListCommand;
 import duke.commands.DoneCommand;
-import duke.commands.CompleteCommand;
 
 import java.util.Scanner;
 import java.util.ArrayList;

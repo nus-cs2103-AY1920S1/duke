@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.utils.Ui;
 import duke.utils.Storage;
 import duke.utils.TaskList;
+import duke.utils.Ui;
 
 /**
  * Parent class for all Commands.

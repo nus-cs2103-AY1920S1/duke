@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.utils.Ui;
+import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.tasks.Task;
+import duke.utils.Ui;
 
 /** Command invoked when the "delete" command is encountered */
 public class DeleteCommand extends Command {

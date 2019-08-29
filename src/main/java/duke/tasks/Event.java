@@ -2,6 +2,7 @@ package duke.tasks;
 
 import duke.exceptions.DukeException;
 import duke.utils.DukeDate;
+
 import java.text.ParseException;
 
 /** Implements the logic behind an Event Task */
@@ -34,7 +35,7 @@ public class Event extends Task {
      */
     public String toString() {
         String statusIcon = getStatusIcon();
-        return "[E][" + statusIcon + "] " + this.description + " (at: " + this.startTime + " - " + this.endTime +  ")";
+        return "[E][" + statusIcon + "] " + this.description + " (at: " + this.startTime + " - " + this.endTime + ")";
     }
 
     /**

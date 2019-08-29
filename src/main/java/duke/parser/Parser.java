@@ -10,7 +10,18 @@ import duke.task.Todo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param inputLine entire text input entered by the user.
+     * @return the command based on user input.
+     * @throws DukeException if invalid command is entered by the user.
+     */
     public static Command parse(String inputLine) throws DukeException {
         String command = getCommandFrom(inputLine);
         switch (command) {

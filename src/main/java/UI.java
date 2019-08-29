@@ -16,7 +16,8 @@ public class UI {
     }
 
     public void printNumberOfTasks(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.getTasks().size()
+                + " tasks in the list.");
     }
 
     public void printTask(Task t) {

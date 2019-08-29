@@ -9,16 +9,35 @@ import duke.task.ToDo;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * A class which deals with making sense of the user command.
+ *
+ * <p>This class uses Ui to help interact with user using CLI, by printing helpful messages.</p>
+ */
 public class Parser {
 
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for class Parser
+     *
+     * @param tasks An object which consists of a list of tasks
+     * @param ui An object that deals with user interaction (printing, querying)
+     */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
     }
 
+    /**
+     * Processes the string command by user and carries out its corresponding actions, such as
+     * adding into task list and marking a task as done.
+     *
+     * @param userInput a string command by user
+     * @throws DukeException If a command is invalid
+     * @throws ParseException If input date format is invalid
+     */
     public void processLine(String userInput) throws DukeException, ParseException {
         ArrayList<Task> list = tasks.list;
         String firstWord = userInput.split(" ")[0];

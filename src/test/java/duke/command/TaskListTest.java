@@ -11,8 +11,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit test for TaskList class.
+ */
 class TaskListTest {
 
+    /**
+     * A stub for to-do class.
+     */
     protected static class ToDoStub extends Task {
         public ToDoStub(String description) {
             super(description);
@@ -30,6 +36,11 @@ class TaskListTest {
         }
     }
 
+    /**
+     * Add a task to TaskList.
+     *
+     * @result Task will be added without any error.
+     */
     @Test
     public void addToTaskList_inputTask_success() {
         TaskList tasks =  new TaskList(new ArrayList<Task>());

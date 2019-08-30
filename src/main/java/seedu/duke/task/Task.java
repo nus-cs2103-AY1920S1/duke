@@ -11,7 +11,7 @@ public class Task {
         this.taskType = possibleTaskTypes.DEFAULT;
     }
 
-    public String getTask(){
+    public String getTaskName(){
         return this.description;
     }
 

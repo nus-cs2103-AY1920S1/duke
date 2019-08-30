@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Storage { private String filepath;
+public class Storage {
+    private String filepath;
 
     public Storage(String filepath){
         this.filepath = filepath;

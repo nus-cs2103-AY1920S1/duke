@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Duke {
 
     private Storage storage;
-    private ArrayList<Task> tasks;
+    private TaskList tasks;
     private Ui ui;
 
     public Duke(String filePath){
@@ -31,7 +31,8 @@ public class Duke {
         ui.showWelcome();
 
         try {
-            this.tasks = this.storage.load();
+            tasks = new TaskList(this.storage.load());
+            // this.tasks.task = this.storage.load();
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
@@ -48,8 +49,9 @@ public class Duke {
                 if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) {
 
                     output = underscore + "     Here are the tasks in your list:\n";
-                    for (int i = 0; i < tasks.size(); i++) {
-                        output += "     " + (i + 1) + "." + tasks.get(i).toString() + "\n";
+
+                    for (int i = 0; i < tasks.getSize(); i++){
+                        output += "     " + (i + 1) + "." + tasks.getTask(i).toString() + "\n";
                     }
                     output += underscore;
 
@@ -60,11 +62,12 @@ public class Duke {
 
                     taskNum = Integer.parseInt(inputLine.substring(5)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
-                    tasks.get(taskNum).setDone();
+
+                    tasks.getTask(taskNum).setDone();
 
                     output = underscore + "     Nice! I've marked this task as done:\n" +
-                            "       [" + tasks.get(taskNum).getStatusIcon() + "] " + tasks.get(taskNum).getTask() +
-                            "\n" + underscore;
+                           "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName() +
+                           "\n" + underscore;
 
                     System.out.println(output);
 
@@ -78,11 +81,12 @@ public class Duke {
                     description = inputLine.substring(5);
 
                     Todo newTodo = new Todo(description);
-                    tasks.add(newTodo);
+
+                    tasks.addTask(newTodo);
 
                     output = underscore + "     Got it. I've added this task:\n       "
                             + newTodo.toString() + "\n     Now you have " +
-                            tasks.size() + " tasks in the list.\n" + underscore;
+                            tasks.getSize() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
 
@@ -99,11 +103,18 @@ public class Duke {
                     extraDescription = inputLine.substring(4 + inputLine.indexOf('/'));
 
                     Deadline newDeadline = new Deadline(description, extraDescription);
-                    tasks.add(newDeadline);
+                    // taskArrayList.add(newDeadline);
+
+                    //output = underscore + "     Got it. I've added this task:\n       "
+                    //        + newDeadline.toString() + "\n     Now you have " +
+                    //        taskArrayList.size() + " tasks in the list.\n" + underscore;
+
+                    tasks.addTask(newDeadline);
 
                     output = underscore + "     Got it. I've added this task:\n       "
                             + newDeadline.toString() + "\n     Now you have " +
-                            tasks.size() + " tasks in the list.\n" + underscore;
+                            tasks.getSize() + " tasks in the list.\n" + underscore;
+
 
                     System.out.println(output);
 
@@ -120,11 +131,18 @@ public class Duke {
                     extraDescription = inputLine.substring(4 + inputLine.lastIndexOf('/'));
 
                     Event newEvent = new Event(description, extraDescription);
-                    tasks.add(newEvent);
+                    //taskArrayList.add(newEvent);
+
+                    //output = underscore + "     Got it. I've added this task:\n       "
+                    //        + newEvent.toString() + "\n     Now you have " +
+                    //        taskArrayList.size() + " tasks in the list.\n" + underscore;
+
+                    tasks.addTask(newEvent);
 
                     output = underscore + "     Got it. I've added this task:\n       "
                             + newEvent.toString() + "\n     Now you have " +
-                            tasks.size() + " tasks in the list.\n" + underscore;
+                            tasks.getSize() + " tasks in the list.\n" + underscore;
+
 
                     System.out.println(output);
 
@@ -134,16 +152,24 @@ public class Duke {
                     taskNum = Integer.parseInt(inputLine.substring(7)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
 
-                    if (taskNum >= tasks.size()){
+                    if (taskNum >= tasks.getSize()){
                         throw new DukeException("seedu.duke.task.Task no. " + (taskNum+1) + " does not exist");
                     }
 
-                    Task taskToDelete = tasks.get(taskNum);
-                    tasks.remove(taskNum);
+                    //Task taskToDelete = taskArrayList.get(taskNum);
+
+                    //taskArrayList.remove(taskNum);
+
+                    //output = underscore + "     Noted. I've removed this task.\n       " +
+                    //        taskToDelete.toString() + "\n     Now you have " +
+                    //        taskArrayList.size() + " tasks in the list.\n" + underscore;
+
+                    Task taskToDelete = tasks.getTask(taskNum);
+                    tasks.deleteTask(taskNum);
 
                     output = underscore + "     Noted. I've removed this task.\n       " +
                             taskToDelete.toString() + "\n     Now you have " +
-                            tasks.size() + " tasks in the list.\n" + underscore;
+                            tasks.getSize() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
                     taskToDelete = null;
@@ -157,8 +183,13 @@ public class Duke {
 
                     // Saves the task arraylist to the txt file
                     storage.clearFileBeforeSaving();
-                    for ( Task task:tasks){
-                        storage.writeToFile(task.toSaveString());
+
+                    // for ( Task task: taskArrayList){
+                    //    storage.writeToFile(task.toSaveString());
+                    //}
+
+                    for (int i = 0; i < tasks.getSize(); i++){
+                        storage.writeToFile(tasks.getTask(i).toSaveString());
                     }
 
                     break;
@@ -183,7 +214,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\seedu.duke\\data\\tasks.txt").run();
+        // new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\seedu.duke\\data\\tasks.txt").run();
+        new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
+
     }
 
     enum possibleTasks{

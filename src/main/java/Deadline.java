@@ -1,13 +1,9 @@
-import java.util.Date;
-
 public class Deadline extends Task {
-    protected String by;
-    protected Date date;
+    protected DateTime by;
 
-    public Deadline(String description, String by, Date date) {
+    public Deadline(String description, DateTime by) {
         super(description);
         this.by = by;
-        this.date = date;
     }
 
     @Override

@@ -28,8 +28,7 @@ public class Duke {
         while (!input.equals("bye")) {
             String command = getCommand(input);
             String description;
-            String detail;
-            Date date;
+            DateTime dateTime;
 
             switch (command) {
                 case "list":
@@ -45,15 +44,13 @@ public class Duke {
                     break;
                 case "deadline":
                     description = getDescription(input, command);
-                    detail = getDateAndTime(input, command);
-                    date = understandDateAndTime(detail);
-                    updateAdd(deadline(description, detail, date));
+                    dateTime = getDateAndTime(input, command);
+                    updateAdd(deadline(description, dateTime));
                     break;
                 case "event":
                     description = getDescription(input, command);
-                    detail = getDateAndTime(input, command);
-                    date = understandDateAndTime(detail);
-                    updateAdd(event(description, detail, date));
+                    dateTime = getDateAndTime(input, command);
+                    updateAdd(event(description, dateTime));
                     break;
                 case "delete":
                     description = getDescription(input, command);
@@ -103,8 +100,9 @@ public class Duke {
         return action;
     }
 
-    public static String getDateAndTime(String input, String command) throws DukeException {
+    public static DateTime getDateAndTime(String input, String command) throws DukeException {
         String detail = "";
+        DateTime dateTime;
 
         if (input.contains(" ") && input.contains("/")) {
             int index = input.indexOf(" ");
@@ -116,22 +114,12 @@ public class Duke {
 
         if (detail.equals("")) {
             throw new DukeException("OOPS!!! The time and date of a " + command + " cannot be empty.");
+        } else {
+            dateTime = new DateTime(detail);
+            dateTime.setDateAndTime();
         }
 
-        return detail;
-    }
-
-    public static Date understandDateAndTime(String input) throws DukeException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        Date date;
-
-        try {
-            date = formatter.parse(input);
-        } catch (ParseException e) {
-            throw new DukeException("OOPS!!! Invalid time and date format.");
-        }
-
-        return date;
+        return dateTime;
     }
 
     public static void updateAdd(Task task) {
@@ -179,15 +167,15 @@ public class Duke {
         return task;
     }
 
-    public static Task deadline(String action, String detail, Date date) {
-        Task task = new Deadline(action, detail, date);
+    public static Task deadline(String action, DateTime dateTime) {
+        Task task = new Deadline(action, dateTime);
         taskList.add(task);
 
         return task;
     }
 
-    public static Task event(String action, String detail, Date date) {
-        Task task = new Event(action, detail, date);
+    public static Task event(String action, DateTime dateTime) {
+        Task task = new Event(action, dateTime);
         taskList.add(task);
 
         return task;

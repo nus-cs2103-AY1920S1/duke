@@ -1,13 +1,9 @@
-import java.util.Date;
-
 public class Event extends Task {
-    protected String at;
-    protected Date date;
+    protected DateTime at;
 
-    public Event(String description, String at, Date date) {
+    public Event(String description, DateTime at) {
         super(description);
         this.at = at;
-        this.date = date;
     }
 
     @Override

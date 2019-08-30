@@ -27,6 +27,10 @@ public class Event extends Task {
                 "at", Duke.dateTimeFormatter.format(this.at), "is_done", this.isDone);
     }
 
+    public LocalDateTime getAt() {
+        return at;
+    }
+
     /**
      * Parse to an Event object from JSONObject.
      *

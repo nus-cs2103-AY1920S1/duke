@@ -27,6 +27,10 @@ public class Deadline extends Task {
                 "by", Duke.dateTimeFormatter.format(this.by), "is_done", this.isDone);
     }
 
+    public LocalDateTime getBy() {
+        return by;
+    }
+
     /**
      * Parse to a Deadline object from JSONObject.
      *

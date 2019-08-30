@@ -13,3 +13,7 @@ repositories {
 application {
     mainClassName = "duke.main.Duke"
 }
+
+run {
+    standardInput = System.in
+}

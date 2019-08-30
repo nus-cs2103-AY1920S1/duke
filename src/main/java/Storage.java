@@ -40,7 +40,7 @@ public class Storage {
                 Task t;
                 if (str.charAt(1) == 'T') {
                     t = new Todo(str.substring(7));
-                    if (str.charAt(4) == '\u2713') {//mark task as done
+                    if (str.charAt(4) == '\u2713') { //mark task as done
                         t.markAsDone();
                     }
                     tasks.add(t);

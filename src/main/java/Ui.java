@@ -3,6 +3,9 @@
  */
 public class Ui {
 
+    /**
+     * Prints out welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,6 +18,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints out goodbye message.
+     */
     public void showGoodbye() {
         showLine();
         System.out.println("\tBye. Hope to see you again soon!");
@@ -23,18 +29,21 @@ public class Ui {
 
     /**
      * Print out the TaskList in order.
-     * @param TaskList The list of task.
+     * @param tasks The list of task.
      */
-    public void showTaskList(TaskList TaskList) {
+    public void showTaskList(TaskList tasks) {
         System.out.println("\tHere are the tasks in your list:");
 
         int i = 1;
-        for (Task t : TaskList.getList()) {
+        for (Task t : tasks.getList()) {
             System.out.println("\t" + i + ". " + t);
             i++;
         }
     }
 
+    /**
+     * Prints out line.
+     */
     public void showLine() {
         System.out.println("\t____________________________________________________________________");
     }
@@ -42,53 +51,71 @@ public class Ui {
     /**
      * Takes in Command, parse it and returns the changed list.
      * @param str The String of command.
-     * @param list The list of task.
+     * @param tasks The list of task.
      * @return The list of task.
      * @throws Exception If command is missing input.
      */
-    public TaskList input(String str, TaskList list) throws Exception {
+    public TaskList input(String str, TaskList tasks) throws Exception {
         String[] strArr = str.split(" ");
         Parser parser = new Parser();
 
         if (strArr[0].equals("list")) {
-            showTaskList(list);
+            showTaskList(tasks);
         } else if (strArr[0].equals("done")) {
-            list = parser.parseDone(str, list);
+            tasks = parser.parseDone(str, tasks);
         } else if (strArr[0].equals("todo")) {
-            list = parser.parseTodo(str, list);
+            tasks = parser.parseTodo(str, tasks);
         } else if (strArr[0].equals("deadline")) {
-            list = parser.parseDeadline(str, list);
+            tasks = parser.parseDeadline(str, tasks);
         } else if (strArr[0].equals("event")) {
-            list = parser.parseEvent(str, list);
+            tasks = parser.parseEvent(str, tasks);
         } else if (strArr[0].equals("delete")) {
-            list = parser.parseDelete(str, list);
+            tasks = parser.parseDelete(str, tasks);
         } else if (strArr[0].equals("find")) {
-            showMatchingTask(parser.parseFind(str, list));
+            showMatchingTask(parser.parseFind(str, tasks));
         } else {
             throw new DukeException("OOPS!!! I,m sorry, but I don't know what that means :-(");
         }
 
-        return list;
+        return tasks;
     }
 
-    public void showAddTask(Task t, TaskList list) {
+    /**
+     * Prints out task added.
+     * @param t The Task that is added into TaskList.
+     * @param tasks The TaskList of user.
+     */
+    public void showAddTask(Task t, TaskList tasks) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + t);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
 
     }
 
+    /**
+     * Prints out task mark as done.
+     * @param t The Task that is marked as done.
+     */
     public void showTaskDone(Task t) {
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t" + t);
     }
 
-    public void showDeleteTask(Task t, TaskList list) {
+    /**
+     * Prints out task that is deleted.
+     * @param t The Task deleted.
+     * @param tasks The TaskList of user.
+     */
+    public void showDeleteTask(Task t, TaskList tasks) {
         System.out.println("\tNoted! I've removed this task:");
         System.out.println("\t" + t);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Prints out all Task that match the keyword.
+     * @param tasks The TaskList of matched Task.
+     */
     public void showMatchingTask(TaskList tasks) {
         System.out.println("\tHere are the matching tasks in your list:");
 

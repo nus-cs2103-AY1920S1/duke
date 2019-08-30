@@ -17,7 +17,7 @@ public class Parser {
      * @return The TaskList that has been changed.
      * @throws Exception If user do not input index.
      */
-    public TaskList parseDone(String str, TaskList tasks) throws Exception{
+    public TaskList parseDone(String str, TaskList tasks) throws Exception {
         String[] strArr = str.split(" ");
 
         if (strArr.length == 1) { //no description
@@ -181,6 +181,13 @@ public class Parser {
 
     }
 
+    /**
+     * Making sense of Find command.
+     * @param str The String of command.
+     * @param tasks THe lis of Task in TaskList.
+     * @return The TaskList that contains the keyword.
+     * @throws Exception If user do not input keyword.
+     */
     public TaskList parseFind(String str, TaskList tasks) throws Exception {
         String[] strArr = str.split(" ");
 

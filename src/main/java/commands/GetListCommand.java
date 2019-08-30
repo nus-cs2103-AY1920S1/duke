@@ -16,6 +16,6 @@ public class GetListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks.getTaskList());
+        ui.printList(tasks.getTaskList(), false);
     }
 }

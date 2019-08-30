@@ -130,6 +130,12 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
             }
+        case "find":
+            try {
+                return new FindCommand(strSplit[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("☹ OOPS!!! Please enter a keyword");
+            }
         default:
             return new UnknownCommand();
         }

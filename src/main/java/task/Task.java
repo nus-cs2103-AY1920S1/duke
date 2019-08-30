@@ -24,10 +24,15 @@ public abstract class Task {
         }
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Converts to String to be written onto text file
      * @return String
      */
     public abstract String toFileString();
+
     public abstract String toString();
 }

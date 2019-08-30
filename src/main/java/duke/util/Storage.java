@@ -3,7 +3,6 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.io.FileNotFoundException;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;

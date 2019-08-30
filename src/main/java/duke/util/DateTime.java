@@ -24,7 +24,7 @@ public class DateTime implements Serializable {
      *
      * @param input String to be parsed into date and time
      * @return java.util.Date object
-     * @throws ParseException
+     * @throws DukeException
      */
     static public DateTime parseString(String input) throws DukeException {
         try {
@@ -47,7 +47,7 @@ public class DateTime implements Serializable {
     /**
      * Overridden toString() method for this object.
      * Returns the date and time in a standardized format
-     * of "ddth MMM yyyy", eg. 17th FEB 1996
+     * of "ddth MMM yyyy", eg. 17th FEB 1996.
      * @return string representation of DateTime object
      */
     @Override

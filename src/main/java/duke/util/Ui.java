@@ -79,11 +79,10 @@ public class Ui {
         this.showLine();
     }
 
-    /*
-     Prints out a formatted goodbye greeting on the
-     screen. It is a implemented as a thin wrapper
-     around duke.formattedPrintln()
-    */
+    /**
+     * Prints out a formatted goodbye greeting on the screen.
+     * It is a implemented as a thin wrapper around duke.formattedPrintln()
+     */
     public void greetGoodbye() {
         String goodbye = "Bye. Hope to see you again soon!";
         //this.showLine();
@@ -101,7 +100,7 @@ public class Ui {
     /*
      Prints the target string between two horizontal
      bars. Adds a newline to the input string
-     before printing.
+     before printing. Currently not used.
 
      @param output  The string to be printed
      */
@@ -115,6 +114,7 @@ public class Ui {
     /*
      Prints the target string between two horizontal
      bars. Newline is not added to input string.
+     Currently not used.
 
      @param output  The string to be printed
     */

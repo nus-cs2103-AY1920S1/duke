@@ -1,6 +1,7 @@
+/**
+ * An unchecked exception class.
+ */
 class DukeException extends Exception {
-    protected String display;
-
     public DukeException(String message) {
         super(message);
     }

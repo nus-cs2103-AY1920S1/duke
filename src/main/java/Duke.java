@@ -1,13 +1,36 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Duke is the main class that launches the chat bot when it is run.
+ */
 public class Duke {
 
+    /**
+     * This is the path of the file where the tasks are saved to and loaded from.
+     */
     private String filePath;
+
+    /**
+     * This is the storage class which does the saving and loading of the files.
+     */
     private Storage storage;
+
+    /**
+     * This is the task list class that contains the list of tasks.
+     */
     private TaskList tasks;
+
+    /**
+     * The ui class handles the output to the user.
+     */
     private Ui ui;
 
+    /**
+     * Creates a new chat bot with a specified file path.
+     * If the specified file contains pre-saved tasks, it will be loaded.
+     * @param filePath The path of the file that is used to save and load the tasks.
+     */
     public Duke(String filePath) {
         this.filePath = filePath;
         ui = new Ui();
@@ -31,7 +54,7 @@ public class Duke {
             switch (parser.command) {
             case "bye":
                 this.ui.showByeResponse();
-                this.tasks.save(this.filePath);
+                this.storage.save(tasks.list, filePath);
                 chat = false;
                 break;
             case "list":
@@ -55,7 +78,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The command format is invalid.");
                     }
                     int num = Integer.parseInt(parser.inputArr[1]);
-                    Task task = this.tasks.getTask(num - 1);
+                    Task task = this.tasks.list.get(num - 1);
                     task.markAsDone();
                     this.ui.showDoneResponse();
                     this.ui.printLine();

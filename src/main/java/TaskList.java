@@ -1,35 +1,30 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The TaskList contains the list of current tasks.
+ */
 public class TaskList {
     ArrayList<Task> list = new ArrayList<>();
 
+    /**
+     * Contructs a TaskList instance with a pre-existing list of tasks.
+     * @param list The list of tasks that already existed.
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
+    /**
+     * Constructs a TaskList instance with no tasks added to the list yet.
+     */
     public TaskList() {
     }
 
+    /**
+     * A getter for the list of tasks.
+     * @return The list of tasks.
+     */
     public ArrayList<Task> getList() {
         return this.list;
-    }
-
-    public Task getTask(int i) {
-        return this.list.get(i);
-    }
-
-    public void save(String filePath) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            if (i > 0) {
-                writer.newLine();
-            }
-            writer.write(task.toString());
-        }
-        writer.close();
     }
 }

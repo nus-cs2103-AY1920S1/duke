@@ -40,7 +40,8 @@ public class Ui {
      * @return A single line of user input.
      */
     public static String getNextLine() {
-        return sc.nextLine();
+        String nextLine = sc.nextLine();
+        return nextLine;
     }
 
     /**

@@ -1,20 +1,3 @@
-import java.text.ParseException;
-
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-
-import java.lang.StringBuilder;
-
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.FileInputStream;
-import java.io.File;
-import java.io.IOException;
-
-
 /**
  * CLI Chat assistant that keep tracks of tasks.
  * Will be developed incrementally over the course
@@ -32,13 +15,18 @@ public class Duke {
      * @param args command line arguments. Not used.
      */
     public static void main(String[] args) {
+        Duke duke;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        Duke duke = new Duke();
+        if (args.length > 1) {
+            duke = new Duke(args[1]);
+        } else {
+            duke = new Duke();
+        }
         duke.start();
     }
 
@@ -87,17 +75,12 @@ public class Duke {
                 c.initialize(this.storage, this.taskList, this.ui);
                 c.execute();
                 isNotShutdown = !c.isExit();
-            } catch (DukeShutDownException e) {
-                isNotShutdown = false; // sets flag to end loop
-            } catch (NumberFormatException e) {
-                ui.displaySingleLine("You need to provide me " +
-                        "with a valid task index! (That means integer numbers only!)");
             } catch (DukeException e) {
-                ui.displaySingleLine(e.getMessage());
+                ui.displayMessage(e.getMessage());
+            } finally {
+                this.ui.showLine();
             }
-            this.ui.showLine();
         } while (isNotShutdown);
         //ui.greetGoodbye(); // greet user before exiting
     }
-
 }

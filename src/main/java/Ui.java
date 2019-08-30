@@ -46,13 +46,13 @@ public class Ui {
     public String indentMessage(String s, int extraIndent) {
         String[] lines = s.split("\n");
         StringBuilder indented_output = new StringBuilder();
-        StringBuilder in = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
-        in.append(INDENT);
+        sb.append(INDENT);
         for (int i = 0; i < extraIndent; i++) {
-            in.append(" ");
+            sb.append(" ");
         }
-        String indent = in.toString();
+        String indent = sb.toString();
 
         for (String line : lines) {
             indented_output.append(indent);
@@ -61,28 +61,6 @@ public class Ui {
         }
         return indented_output.toString();
     }
-
-//    // Print out all tasks in the current list
-//    private void printList() {
-//        if (this.list.size() == 0) {
-//            this.formattedPrintln("Hey! There's nothing in your list!");
-//        } else {
-//            int index = 1;
-//            Iterator iter = this.list.iterator();
-//            StringBuilder output = new StringBuilder();
-//
-//            output.append("Here are the tasks in your list:\n");
-//            while (iter.hasNext()) {
-//                output.append("  ");
-//                output.append(index);
-//                output.append(".");
-//                output.append(iter.next());
-//                output.append("\n");
-//                index++;
-//            }
-//            this.formattedPrint(output.toString());
-//        }
-//    }
 
     /*
      Prints out a formatted hello greeting on the
@@ -116,30 +94,29 @@ public class Ui {
         this.showLine();
     }
 
+    /*
+     Prints the target string between two horizontal
+     bars. Adds a newline to the input string
+     before printing.
 
-//    /*
-//     Prints the target string between two horizontal
-//     bars. Adds a newline to the input string
-//     before printing.
-//
-//     @param output  The string to be printed
-//     */
-//    private void formattedPrintln(String output) {
-//        System.out.println("____________________________________________________________\n"
-//                + output
-//                + "\n"
-//                + "____________________________________________________________\n");
-//    }
-//
-//    /*
-//     Prints the target string between two horizontal
-//     bars. Newline is not added to input string.
-//
-//     @param output  The string to be printed
-//    */
-//    private void formattedPrint(String output) {
-//        System.out.println("____________________________________________________________\n"
-//                + output
-//                + "____________________________________________________________\n");
-//    }
+     @param output  The string to be printed
+     */
+    private void formattedPrintln(String output) {
+        System.out.println("____________________________________________________________\n"
+                + output
+                + "\n"
+                + "____________________________________________________________\n");
+    }
+
+    /*
+     Prints the target string between two horizontal
+     bars. Newline is not added to input string.
+
+     @param output  The string to be printed
+    */
+    private void formattedPrint(String output) {
+        System.out.println("____________________________________________________________\n"
+                + output
+                + "____________________________________________________________\n");
+    }
 }

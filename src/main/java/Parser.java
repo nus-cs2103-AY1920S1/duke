@@ -32,24 +32,27 @@ public class Parser {
             return new DoneCommand(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I'm not psychic! You need"
-                    + " to tell me the id of the task you're done with!");
+                    + " to tell me the id of the task\n"
+                    + "you're done with!");
         } catch (NumberFormatException e) {
-            throw new DukeException("You need to provide me " +
-                    "with a valid task index! (That means integer numbers only!)");
+            throw new DukeException("You need to provide me "
+                    + "with a valid task index!\n"
+                    + "(That means integer numbers only!)");
         }
     }
 
     private static DeleteCommand parseDeleteCommand(String[] parameters) throws DukeException {
         try {
-            String taskStr = parameters[1].split(" ")[1];
-            int taskIndex = Integer.parseInt(taskStr);
+            int taskIndex = Integer.parseInt(parameters[1]);
             return new DeleteCommand(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I'm not psychic! You need"
-                    + " to tell me the id of the task you want to delete!");
+                    + " to tell me the id of the task\n"
+                    + "you want to delete!");
         } catch (NumberFormatException e) {
-            throw new DukeException("You need to provide me " +
-                    "with a valid task index! (That means integer numbers only!)");
+            throw new DukeException("You need to provide me "
+                    + "with a valid task index!\n"
+                    + "(That means integer numbers only!)");
         }
     }
 
@@ -68,7 +71,7 @@ public class Parser {
             DateTime at = DateTime.parseString(deadlineParams[1]);
             return new EventCommand(deadlineParams[0], at);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! You need to give me both description AND time"
+            throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
                     + " to create an event task.");
         } catch (ParseException e) {
             throw new DukeException("I couldn't decipher the date and time"
@@ -84,7 +87,7 @@ public class Parser {
             DateTime by = DateTime.parseString(deadlineParams[1]);
             return new DeadlineCommand(deadlineParams[0], by);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! You need to give me both description AND time"
+            throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
                     + " to create a deadline task.");
         } catch (ParseException e) {
             throw new DukeException("I couldn't decipher the date and time"

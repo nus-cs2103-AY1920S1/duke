@@ -11,7 +11,7 @@ public class Task {
     static final SimpleDateFormat outputFormatter = new SimpleDateFormat("E, dd MMM yyyy ha");
 
     public Task(String content) {
-        this.content = content;
+        this.content = content.trim();
     }
 
     public void complete() {

@@ -12,10 +12,15 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Parser {
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     // this method parse string from txt file and creates task objects when duke is initiated
-    public static Task parseTaskString(String str) {
+    public static Task parseTaskString(String str) throws Exception {
         String[] strs = str.split("\\|");
         switch (strs[0]) {
         case ("ToDo"):
@@ -25,13 +30,15 @@ public class Parser {
             }
             return todo;
         case ("Deadline"):
-            Task deadline = new Deadline(strs[2], strs[3]);
+            Date date = FORMATTER.parse(strs[3]);
+            Task deadline = new Deadline(strs[2], date);
             if (strs[1].equals("1")) {
                 deadline.toggleState();
             }
             return deadline;
         case ("Event"):
-            Task event = new Event(strs[2], strs[3]);
+            Date time = FORMATTER.parse(strs[3]);
+            Task event = new Event(strs[2], time);
             if (strs[1].equals("1")) {
                 event.toggleState();
             }
@@ -47,37 +54,40 @@ public class Parser {
     // of task if the task requires datetime if not it will be empty string
     public static Command parseUserInput(String str) throws Exception {
         if (str.equals("list")) {
-            return new ListCommand(str);
+            return new ListCommand();
         } else if (str.contains("done")) {
+            String[] afterSplit = str.trim().split(" ");
+            if (afterSplit.length == 1) {
+                throw new DukeException("\u2639 OOPS!!! Please input a number for done.");
+            }
             return new DoneCommand(str);
         } else if (str.contains("delete")) {
+            String[] afterSplit = str.trim().split(" ");
+            if (afterSplit.length == 1) {
+                throw new DukeException("\u2639 OOPS!!! Please input a number for delete.");
+            }
             return new DeleteCommand(str);
-        } else if (str.equals("bye")) {
+        } else if (str.trim().equals("bye")) {
             return new ExitCommand();
         } else {
-            // it should be an add command
-            String[] result = new String[3];
             // info splits the string into description and datetime if available
-            String[] info = str.split(" ", 2);
+            String[] info = str.trim().split(" ", 2);
 
             boolean isAddCommand = info[0].equals("todo") || info[0].equals("deadline") || info[0].equals("event");
-            // if info has length 1 it means that only the type of item is there but no description
-            if (info.length == 1) {
-                if (info[0].equals("todo") || info[0].equals("deadline") || info[0].equals("event")) {
-                    throw new DukeException("\u2639 OOPS!!! The description of a task cannot be empty.");
-                } else {
-                    throw new DukeException("\u2639 OOPS!!! I do not understand what did you just typed.");
-                }
+            if (!isAddCommand) {
+                throw new DukeException("\u2639 OOPS!!! I do not understand what did you just typed.");
             }
-
-            if (isAddCommand && info.length == 2 && info[1].isBlank()) {
+            // if info has length 1 it means that only the type of item is there but no description
+            if (info.length == 1 && isAddCommand) {
                 throw new DukeException("\u2639 OOPS!!! The description of a task cannot be empty.");
             }
+
+            String[] result = new String[2];
+            Date date = null;
 
             if (info[0].equals("todo")) {
                 result[0] = "todo";
                 result[1] = info[1];
-                result[2] = "nil";
             } else if (info[0].equals("deadline")) {
                 String[] dateTimeArr = info[1].split("/by");
                 // if it is a deadline event but no slash the info will be just 1 string after split
@@ -85,21 +95,21 @@ public class Parser {
                     throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this task.");
                 }
                 result[0] = "deadline";
-                result[1] = dateTimeArr[0];
-                result[2] = dateTimeArr[1];
+                result[1] = dateTimeArr[0].trim();
+                date = FORMATTER.parse(dateTimeArr[1].trim());
             } else if (info[0].equals("event")) {
-                String[] dateTimeArr = info[1].split("/by");
+                String[] dateTimeArr = info[1].split("/at");
                 // if it is a deadline event but no slash the info will be just 1 string after split
                 if (dateTimeArr.length <= 1) {
-                    throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this task.");
+                    throw new DukeException("\u2639 OOPS!!! You need a /at to separate out the date time for this task.");
                 }
                 result[0] = "event";
-                result[1] = dateTimeArr[0];
-                result[2] = dateTimeArr[1];
+                result[1] = dateTimeArr[0].trim();
+                date = FORMATTER.parse(dateTimeArr[1].trim());
             } else {
                 throw new DukeException("There is an unknown error parsing your message");
             }
-            return new AddCommand(result);
+            return date == null ? new AddCommand(result) : new AddCommand(result, date);
         }
     }
 }

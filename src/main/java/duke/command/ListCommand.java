@@ -7,10 +7,6 @@ import duke.storage.Storage;
 
 public class ListCommand extends Command {
 
-    public ListCommand (String command) {
-        this.command = command;
-    }
-
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) {
         int index = 0;
@@ -24,5 +20,23 @@ public class ListCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof ListCommand)) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }

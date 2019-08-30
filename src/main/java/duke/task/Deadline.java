@@ -1,20 +1,13 @@
 package duke.task;
 
-import java.text.ParseException;
 import java.util.Date;
 
 public class Deadline extends Task {
     Date deadline;
 
-    public Deadline(String content, String deadline) {
+    public Deadline(String content, Date deadline) {
         super(content);
-        Date date = new Date();
-        try {
-            date = inputFormatter.parse(deadline);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.deadline = date;
+        this.deadline = deadline;
     }
 
     @Override

@@ -9,4 +9,5 @@ public abstract class Command {
 
     public abstract void execute(TaskList tasks, UI ui, Storage storage) throws Exception;
     public abstract boolean isExit();
+    public abstract boolean equals(Object o);
 }

@@ -1,3 +1,4 @@
+import javax.swing.border.Border;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.util.Date;
 
 public class Duke {
 
-    private static String border = "-------------------------------------";
+    final public String BORDER = "-------------------------------------";
     private static ArrayList<Task> items;
     private Ui user;
 
@@ -45,6 +46,7 @@ public class Duke {
      */
     public void run() throws FileNotFoundException {
         //Start of program
+        user.welcome();
         user.greeting();
 
         StringBuilder sb = new StringBuilder();
@@ -129,9 +131,9 @@ public class Duke {
                 message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException e) {
-                sb.append(border + "\n");
+                sb.append(BORDER + "\n");
                 sb.append("Todo must have valid description\n");
-                sb.append(border + "\n");
+                sb.append(BORDER + "\n");
                 message = sb.toString();
                 System.out.println(message);
                 sb.setLength(0);
@@ -146,9 +148,9 @@ public class Duke {
                 message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
-                sb.append(border + "\n");
+                sb.append(BORDER + "\n");
                 sb.append("Invalid Deadline's arguments \n");
-                sb.append(border + "\n");
+                sb.append(BORDER + "\n");
                 message = sb.toString();
                 System.out.println(message);
                 sb.setLength(0);
@@ -166,17 +168,17 @@ public class Duke {
                 message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
-                sb.append(border + "\n");
+                sb.append(BORDER + "\n");
                 sb.append("Invalid Event's arguments \n");
-                sb.append(border + "\n");
+                sb.append(BORDER + "\n");
                 message = sb.toString();
                 System.out.println(message);
                 sb.setLength(0);
             }
         } else {
-            sb.append(border + "\n");
+            sb.append(BORDER + "\n");
             sb.append("Unable to understand. Invalid Input. \n");
-            sb.append(border + "\n");
+            sb.append(BORDER + "\n");
             message = sb.toString();
             System.out.println(message);
             sb.setLength(0);
@@ -189,7 +191,7 @@ public class Duke {
      * Load past tasks to current ArrayList.
      * @param stored Scanner obj scanning local text file containing past tasks
      */
-    private static void loadExisting(Scanner stored) {
+    private void loadExisting(Scanner stored) {
         StringBuilder sb = new StringBuilder();
         while (stored.hasNextLine()) {
             String input = stored.nextLine();
@@ -202,9 +204,9 @@ public class Duke {
                     }
                     items.add(newTask);
                 } catch (StringIndexOutOfBoundsException e) {
-                    sb.append(border + "\n");
+                    sb.append(BORDER + "\n");
                     sb.append("Todo must have valid description\n");
-                    sb.append(border + "\n");
+                    sb.append(BORDER + "\n");
                     System.out.println(sb.toString());
                     sb.setLength(0);
                 }
@@ -219,9 +221,9 @@ public class Duke {
                     }
                     items.add(newTask);
                 } catch (StringIndexOutOfBoundsException | ParseException e) {
-                    sb.append(border + "\n");
+                    sb.append(BORDER + "\n");
                     sb.append("Invalid Deadline's arguments \n");
-                    sb.append(border + "\n");
+                    sb.append(BORDER + "\n");
                     System.out.println(sb.toString());
                     sb.setLength(0);
                 }
@@ -239,9 +241,9 @@ public class Duke {
                     }
                     items.add(newTask);
                 } catch (StringIndexOutOfBoundsException | ParseException e) {
-                    sb.append(border + "\n");
+                    sb.append(BORDER + "\n");
                     sb.append("Invalid Event's arguments \n");
-                    sb.append(border + "\n");
+                    sb.append(BORDER + "\n");
                     System.out.println(sb.toString());
                     sb.setLength(0);
                 }

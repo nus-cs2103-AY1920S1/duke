@@ -1,11 +1,10 @@
 package duke;
 
-import duke.command.Command;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.json.JSONException;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -16,9 +15,9 @@ import java.time.format.DateTimeFormatter;
 public class Duke extends Application {
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
 
     /**
@@ -58,40 +57,17 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        // Create the FXMLLoader
+        FXMLLoader loader = new FXMLLoader(Launcher.class.getResource("/view/MainWindow.fxml"));
 
+        // Create the Pane and all Details
+        AnchorPane root = loader.load();
+
+        Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Duke");
+        loader.<MainWindowController>getController().setDuke(this);
+        this.ui.setController(loader.getController());
         primaryStage.show();
-    }
-
-    /**
-     * Method to start Duke app.
-     * @throws IOException
-     */
-    public void run() throws IOException {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
-
-    /**
-     * Main function where the app launches.
-     * @param args
-     * @throws JSONException
-     * @throws IOException
-     */
-    public static void main(String[] args) throws JSONException, IOException {
-        new Duke().run();
     }
 }

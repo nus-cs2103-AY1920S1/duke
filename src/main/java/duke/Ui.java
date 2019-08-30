@@ -7,6 +7,11 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner sc;
+    private MainWindowController controller;
+
+    public void setController(MainWindowController controller) {
+        this.controller = controller;
+    }
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -21,8 +26,8 @@ public class Ui {
      *
      * @param content
      */
-    public static void formattedPrint(String content) {
-        System.out.println("    ____________________________________________________________\n"
+    public void formattedPrint(String content) {
+        this.controller.updateOutputArea("    ____________________________________________________________\n"
                 + "     " + content + "\n"
                 + "    ____________________________________________________________\n    ");
     }
@@ -125,7 +130,7 @@ public class Ui {
     /**
      * Prompt user of successfully creating a new save data file.
      */
-    public static void showCreateSaveFileMessage() {
+    public void showCreateSaveFileMessage() {
         formattedPrint("data.json not found. Created a new one for you~");
     }
 

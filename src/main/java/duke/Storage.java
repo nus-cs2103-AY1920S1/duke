@@ -53,7 +53,6 @@ public class Storage {
             throw new IOException();
         }
         writeToSaveFile("{\"data\":[]}");
-        Ui.showCreateSaveFileMessage();
     }
 
     /**

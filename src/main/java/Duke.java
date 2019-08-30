@@ -1,11 +1,11 @@
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
+
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
-import java.io.File;
 
 public class Duke {
     
@@ -87,9 +87,13 @@ public class Duke {
             } else if (firstWord.equals("delete")){
                 int taskNum = Integer.parseInt(split.getDesc().get(0));
                 int taskNumb = taskNum - 1;
-                
-                ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
-                tasks.remove(taskNumb);
+
+                if(taskNumb >= tasks.size()){
+                    error = "taskDoNotExist";
+                } else {
+                    ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
+                    tasks.remove(taskNumb);
+                }
 
             } else {
                 String actual =  "";

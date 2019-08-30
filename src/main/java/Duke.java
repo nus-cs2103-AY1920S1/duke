@@ -8,10 +8,10 @@ public class Duke {
     // Classes used in Duke
     private Storage storage;
     private Ui ui;
-    private TaskList taskList;
+    private TaskList taskList = new TaskList();
     private WriteFile data;
 
-    public Duke(String path) {
+    private Duke(String path) {
         /**
          *  init 3 main components, ui storage and tasklist
          *  then init storage: load tasks into tasklist
@@ -22,7 +22,6 @@ public class Duke {
          */
         data = new WriteFile(path,false);
         ui = new Ui();
-        TaskList taskList = new TaskList();
         Storage storage = new Storage(data,path,taskList);
         storage.initStorage();
         ui.link(taskList,storage);
@@ -56,11 +55,7 @@ public class Duke {
                 if (taskInfo.equals("")) {
                     System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                int seperator = taskInfo.indexOf('/');
-                // use sep to split string
-                String actualTask = taskInfo.substring(0,seperator);
-                seperator += 4; // put sep at space after /by
-                Task newTask = taskList.addTodo(actualTask);
+                Task newTask = taskList.addTodo(taskInfo,0);
                 ui.addTask(newTask);
             } else if (input.equals("deadline")) { // deadline command
                 String taskInfo = sc.nextLine();
@@ -72,7 +67,7 @@ public class Duke {
                 String actualTask = taskInfo.substring(0,seperator);
                 seperator += 4; // put sep at space after /by
                 String time = taskInfo.substring(seperator);
-                Task newTask = taskList.addDeadline(actualTask,time);
+                Task newTask = taskList.addDeadline(actualTask,time,0);
                 ui.addTask(newTask);
             } else if (input.equals("event")) {   // event command
                 String taskInfo = sc.nextLine();
@@ -84,7 +79,7 @@ public class Duke {
                 String actualTask = taskInfo.substring(0,seperator);
                 seperator += 4; // put sep at space after /by
                 String time = taskInfo.substring(seperator);
-                Task newTask = taskList.addEvent(actualTask,time);
+                Task newTask = taskList.addEvent(actualTask,time,0);
                 ui.addTask(newTask);
             } else if (input.equals("done")) {   // mark done
                 int taskNum = sc.nextInt();

@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /* TODO Fix case when task loaded is done */
 public class Storage {
@@ -70,40 +70,19 @@ public class Storage {
         if (task.equals("")) {
             return;
         }
-        Scanner stringSc = new Scanner(task);
-        String type = stringSc.next();
-        stringSc.next();
-        int isDone = stringSc.nextInt();
-        stringSc.next();
-        String mainInfo = "";
-        String info = stringSc.next();
-        while (!info.equals("|")) {
-
-            mainInfo = mainInfo + info;
-            info = stringSc.next();
-        }
+        String[] splitTask = task.split("-");
+        String type = splitTask[0];
+        int isDone = Integer.parseInt(splitTask[1]);
+        String mainInfo = splitTask[2];
         if (type.equals("D")) {
             // take up empty input
-            String by = "";
-            String curr = stringSc.next();
-            while (!curr.equals("|")) {
-                by = by + " " + curr;
-                curr = stringSc.next();
-            }
-            tasks.addDeadline(mainInfo,by);
-
+            String by = splitTask[3];
+            tasks.addDeadline(mainInfo,by,isDone);
         } else if (type.equals("E")) {
-
-            String by = "";
-            String curr = stringSc.next();
-            while (!curr.equals("|")) {
-                by = by + " " + curr;
-                curr = stringSc.next();
-            }
-            tasks.addEvent(mainInfo,by);
+            String by = splitTask[3];
+            tasks.addEvent(mainInfo,by,isDone);
         } else {
-            ToDo newTask = new ToDo(mainInfo, "T","");
-            taskArr.add(newTask);
+            tasks.addTodo(mainInfo,isDone);
         }
     }
     public void saveToTextFile() {
@@ -127,11 +106,11 @@ public class Storage {
             String info = t.getTaskInfo();
             String by = t.getByOrig();
             if (type == "T") {
-                mainTxt = mainTxt + type + " | " + status + " | "
-                        + info + " | " + by + " | ";
+                mainTxt = mainTxt + type + "-" + status + "-"
+                        + info + "-" + by;
             } else {
-                mainTxt = mainTxt + type + " | " + status + " | "
-                        + info + " | " + by + " | ";
+                mainTxt = mainTxt + type + "-" + status + "-"
+                        + info + "-" + by;
             }
             txtFile.writeToFile(mainTxt);
             txtFile.setAppend(true);

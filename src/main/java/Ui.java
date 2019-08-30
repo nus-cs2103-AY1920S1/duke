@@ -3,8 +3,7 @@ import java.util.ArrayList;
 public class Ui {
     private TaskList tasks;
     private Storage storage;
-    public void Ui() {
-    }
+
     public void link(TaskList dukeTaskList, Storage dukeStorage) {
         /**
          *  links ui to tasklist and storage
@@ -99,7 +98,8 @@ public class Ui {
             // printInt to put number for printing
             int printInt = i + 1;
             Task currTask = taskArr.get(i);
-            mainString += currTask.printTask() + "\n";
+            String numAsString = printInt + ".";
+            mainString += numAsString + currTask.printTask() + "\n";
         }
         printLine();
         System.out.println(mainString);
@@ -115,9 +115,12 @@ public class Ui {
          * @return none
          */
         printLine();
+        System.out.println("Here are the matching tasks in your list:");
         ArrayList<Task> matchingTasks = tasks.findTasks(keyWord);
+        int taskCount = 1;
         for (Task match: matchingTasks) {
-            System.out.println(match.printTask());
+            System.out.println(taskCount + "." + match.printTask());
+            taskCount++;
         }
         printLine();
     }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
+
     private ArrayList<Task> taskArr = taskArr = new ArrayList<>();
 
     public void TaskList() {
@@ -12,7 +13,7 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return taskArr;
     }
-    public ToDo addTodo(String taskInfo) {
+    public ToDo addTodo(String taskInfo, int isDone) {
         // TODO add DukeException for this
         /**
          *  creates new To Do, add to tasklist
@@ -24,10 +25,13 @@ public class TaskList {
          *  @throws DukeException if taskInfo is empty
          */
         ToDo newToDo = new ToDo(taskInfo,"T","");
+        if (isDone == 1) {
+            newToDo.markDone();
+        }
         taskArr.add(newToDo);
         return newToDo;
     }
-    public Deadline addDeadline(String taskInfo, String by) {
+    public Deadline addDeadline(String taskInfo, String by,int isDone) {
         // TODO add DukeException for this
         /**
          *  creates new Deadline, add to tasklist
@@ -39,10 +43,13 @@ public class TaskList {
          *  @throws DukeException if taskInfo is empty
          */
         Deadline newDeadline = new Deadline(taskInfo,"D",by);
+        if (isDone == 1) {
+            newDeadline.markDone();
+        }
         taskArr.add(newDeadline);
         return newDeadline;
     }
-    public Event addEvent(String taskInfo, String by) {
+    public Event addEvent(String taskInfo, String by, int isDone) {
         // TODO add DukeException for this
         /**
          *  creates new event, add to tasklist
@@ -54,6 +61,9 @@ public class TaskList {
          *  @throws DukeException if taskInfo is empty
          */
         Event newEvent = new Event(taskInfo,"E",by);
+        if (isDone == 1) {
+            newEvent.markDone();
+        }
         taskArr.add(newEvent);
         return newEvent;
     }
@@ -94,9 +104,7 @@ public class TaskList {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: taskArr) {
             String taskInfo = task.getTaskInfo();
-            //String test = "byby";
-            //System.out.println(test.contains(keyWord));
-            if (taskInfo.contains(keyWord)) {
+            if (taskInfo.contains(keyWord) || taskInfo.equalsIgnoreCase(keyWord)) {
                 matchingTasks.add(task);
             }
         }

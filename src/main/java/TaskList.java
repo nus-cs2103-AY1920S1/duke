@@ -1,14 +1,31 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a TaskList which manipulates the list of tasks.
+ * @author Ang Kai Qi
+ * @version 0.1.3
+ */
 public class TaskList {
     protected ArrayList<Task> tasklist;
     protected Storage storage;
 
+    /**
+     * Creates a TaskList object with the Storage object to be read from or written to.
+     * @param storage To be read from or written to.
+     */
     public TaskList(Storage storage) {
         this.tasklist = new ArrayList<Task>();
         this.storage = storage;
     }
 
+    /**
+     * Based on what processed task returns from the Parser, the TaskList would return and act accordingly.
+     * If its adding or modifying of tasks, the UI and Storage would be activated. Bye statement would terminate
+     * the TaskList object.
+     *
+     * @param s String from the Storage input file.
+     * @return A task string for the UI and Storage to either echo or save.
+     */
     public String addTask(String s) {
         String[] task = s.split(" ");
         String statement = "";
@@ -42,10 +59,10 @@ public class TaskList {
             statement = complete(Integer.parseInt(modifiedTask[1]));
             storage.save(tasklist);
             break;
-            case "delete":
-            statement = delete(Integer.parseInt(modifiedTask[1]));
-            storage.save(tasklist);
-            break;
+        case "delete":
+        statement = delete(Integer.parseInt(modifiedTask[1]));
+        storage.save(tasklist);
+        break;
         case "bye":
             statement = "bye";
             break;

@@ -1,8 +1,19 @@
-import java.io.PrintStream;
-import java.text.ParseException;
-
+/**
+ * Represents a Parser which makes sense of user-input.
+ * @author Ang Kai Qi
+ * @version 0.1.3
+ */
 public class Parser {
 
+    /**
+     * Processes the user-input's statement for TaskList to make-sense of.
+     * This method throws DukeExceptions because of error in input.
+     * Exceptions caught would return an error message, otherwise a formatted
+     * and processed user-input string would be returned.
+     *
+     * @param s User-input from TaskList.
+     * @return A formatted and processed user-input string for TaskList to use.
+     */
     public static String[] processTask(String[] s) {
         String[] task = new String[3];// [todo/deadline/event], [desc], [dateline if applicable];
         task[0] = s[0];

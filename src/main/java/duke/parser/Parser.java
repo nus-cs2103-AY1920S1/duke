@@ -1,50 +1,78 @@
 package duke.parser;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
-import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.command.UnknownCommand;
+import duke.exception.DukeException;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
+import static duke.task.Task.DATE_TIME_FORMATTER;
 
 public class Parser {
+    // Parser is for static use only
+    private Parser() {
+    }
+
+    private static LocalDateTime parseDateTime(final String dateTime) throws DukeException {
+        try {
+            return LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Failed to parse date time: " + e.getMessage());
+        }
+    }
+
+    private static Integer parseTaskNumber(final String taskNumber) throws DukeException {
+        try {
+            return Integer.parseInt(taskNumber) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Failed to parse task number: " + e.getMessage());
+        }
+    }
+
     /**
      * Parses input to construct a Command.
      *
      * @param input the input String to parse
      * @return the constructed Command
+     * @throws DukeException if an parsing error occurs
      */
-    public static Command parse(final String input) {
-        String[] split = input.trim().split("\\s+", 2);
-        String command = split[0].toLowerCase();
-        // If split.length == 1, there are no arguments
-        String arguments = (split.length == 1) ? "" : split[1];
-        CommandType type;
+    public static Command parse(final String input) throws DukeException {
+        String[] tokens = input.trim().split("\\s+", 2);
+        String command = tokens[0].toLowerCase();
+        // If tokens.length == 1, there are no arguments
+        String arguments = (tokens.length == 1) ? "" : tokens[1];
         switch (command) {
             case "list":
-                type = CommandType.LIST;
-                break;
+                return new ListCommand();
             case "bye":
-                type = CommandType.BYE;
-                break;
+                return new ByeCommand();
             case "todo":
-                type = CommandType.TODO;
-                break;
-            case "deadline":
-                type = CommandType.DEADLINE;
-                break;
-            case "event":
-                type = CommandType.EVENT;
-                break;
+                return new TodoCommand(arguments);
+            case "event": {
+                String[] toks = arguments.split("\\s*/at\\s*", 2);
+                return new EventCommand(toks[0], toks.length == 1 ? null : parseDateTime(toks[1]));
+            }
+            case "deadline": {
+                String[] toks = arguments.split("\\s*/by\\s*", 2);
+                return new DeadlineCommand(toks[0], toks.length == 1 ? null : parseDateTime(toks[1]));
+            }
             case "done":
-                type = CommandType.DONE;
-                break;
-            case "find":
-                type = CommandType.FIND;
-                break;
+                return new DoneCommand(parseTaskNumber(arguments));
             case "delete":
-                type = CommandType.DELETE;
-                break;
+                return new DeleteCommand(parseTaskNumber(arguments));
+            case "find":
+                return new FindCommand(arguments.isBlank() ? null : arguments.split("\\s+"));
             default:
-                type = CommandType.UNKNOWN;
-
+                return new UnknownCommand();
         }
-        return new Command(type, arguments);
     }
 }

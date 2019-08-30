@@ -37,8 +37,7 @@ public class Duke {
             try {
                 String input = ui.readCommand();
                 if (input == null) {
-                    isExit = true;
-                    continue;
+                    input = "bye";
                 }
                 ui.showSeparator();
                 Command command = Parser.parse(input);

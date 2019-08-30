@@ -23,8 +23,8 @@ public class ListCommand extends Command {
      * @param ui The target user end to print command information.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) {
-        ui.showListMessage(tl.listAllTask());
+    public String execute(TaskList tl, Ui ui) {
+        return ui.showListMessage(tl.listAllTask());
     }
 
     /**

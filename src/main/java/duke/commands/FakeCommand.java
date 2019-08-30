@@ -25,7 +25,7 @@ public class FakeCommand extends Command {
      * @throws DukeException Throw it anyway sinc ethe command is invalid.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException {
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         throw new DukeException("Please input a valid command.");
     }
 

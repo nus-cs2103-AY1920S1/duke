@@ -21,7 +21,7 @@ public abstract class Command {
      * @param ui The target user end to print command information.
      * @throws DukeException Based on requirements of a Command subclass.
      */
-    public abstract void execute(TaskList tl, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tl, Ui ui) throws DukeException;
 
     /**
      * Determines whether this is an exit command.

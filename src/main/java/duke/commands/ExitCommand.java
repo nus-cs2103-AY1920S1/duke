@@ -26,12 +26,11 @@ public class ExitCommand extends Command {
      * @throws DukeException If IOException occurs in the saving process.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException {
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         try {
             tl.rewrite();
-            ui.showExitMessage();
+            return ui.showExitMessage();
         } catch (IOException e) {
-            ui.showExitMessage();
             throw new DukeException("Unable to rewrite task list. Modification this time cannot be saved.");
         }
 

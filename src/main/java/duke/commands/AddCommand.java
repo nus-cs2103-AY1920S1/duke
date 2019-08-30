@@ -48,7 +48,7 @@ public class AddCommand extends Command {
      * @throws DukeException If the taskName is empty or the taskTime is not in form "dd/MM/yyyy HH:mm:ss".
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException {
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         Task toAdd;
         if (taskType.equals("T")) {
             toAdd = new Todo(taskName);
@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             toAdd = new Deadline(taskName, taskTime);
         }
         tl.addTask(toAdd);
-        ui.showAddMessage(toAdd, tl.getTotalNumber());
+        return ui.showAddMessage(toAdd, tl.getTotalNumber());
     }
 
     /**

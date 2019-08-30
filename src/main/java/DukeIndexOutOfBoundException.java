@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Ui;
+import seedu.duke.PrettyPrint;
 
 public class DukeIndexOutOfBoundException extends DukeException {
 
@@ -15,7 +15,7 @@ public class DukeIndexOutOfBoundException extends DukeException {
 
     @Override
     public void printMessage() {
-        Ui.printBlock(this.errorMessage);
+        PrettyPrint.printBlock(this.errorMessage);
     }
 
 }

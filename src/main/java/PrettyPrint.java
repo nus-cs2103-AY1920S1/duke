@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class Ui {
+public class PrettyPrint {
     static String line = "--------------------------------------------";
     static String indent = "    ";
 

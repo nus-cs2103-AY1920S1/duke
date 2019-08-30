@@ -33,7 +33,6 @@ public class Duke {
 
         try {
             tasks = new TaskList(this.storage.load());
-            // this.tasks.task = this.storage.load();
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
@@ -43,15 +42,13 @@ public class Duke {
         String inputLine = in.nextLine().trim();
 
         while ( true ){
-            // taskType = inputLine.split(" ")[0]; // taskType contains the first word of the command input string
-
-            taskType = Parser.parseCommand(inputLine);
+            taskType = Parser.parseCommand(inputLine); // taskType contains the first word of the command input string
 
             try {
-
                 // LIST case
                 if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) {
 
+                    /*
                     output = underscore + "     Here are the tasks in your list:\n";
 
                     for (int i = 0; i < tasks.getSize(); i++){
@@ -60,6 +57,8 @@ public class Duke {
                     output += underscore;
 
                     System.out.println(output);
+                    */
+                     ui.printList(tasks);
 
                     // DONE case
                 } else if (taskType.equals(possibleTasks.DONE.toString().toLowerCase())) {
@@ -102,7 +101,7 @@ public class Duke {
                     } else if ( (inputLine.lastIndexOf('/') < 1) || (  4+inputLine.lastIndexOf('/') > inputLine.length()   ) )  {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
-                    
+
                     description = Parser.getDeadlineDescription(inputLine);
                     extraDescription = Parser.getDeadlineDateTime(inputLine);
 

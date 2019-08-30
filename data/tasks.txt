@@ -1,5 +1,5 @@
 event type | isDone | description | extra description
 E | 0 | Run | ERC
 D | 0 | IPPT | 21st of December 2004, 8.15am
-E | 0 | Breakfast  | Macs
-E | 0 | AWS Workshop  | LT7A
+E | 0 | Breakfast | Macs
+E | 0 | AWS Workshop | LT7A

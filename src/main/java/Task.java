@@ -8,13 +8,25 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(boolean isDone, String description){
+        this.isDone = isDone;
+        this.description = description;
+    }
+
+    public Task(String isDone, String description){
+        int a = Integer.parseInt(isDone.trim());
+        this.isDone = a == 0? true : false;
+        this.description = description;
+    }
+
+
     public String getDescription() {
         return this.description;
     }
 
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.isDone ?  "v" : "x"); // "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public void markAsDone() {

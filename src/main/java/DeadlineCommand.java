@@ -1,10 +1,9 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.ParseException;
-import java.io.IOException;
 
 
-public class DeadlineCommand extends Command {
+public class DeadlineCommand extends AddCommand {
     boolean isDone;
     String description;
     Date deadline;
@@ -22,23 +21,22 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    public void runCommand(TaskList taskList, Storage storage, Ui ui) {
-        try {
-            storage.appendToFile("D", this.deadline, this.description);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
-            Deadline newDeadline = new Deadline(this.description, this.deadline);
+        storage.appendToFile("D", this.deadline, this.description);
 
-            taskList.addTask(newDeadline);
+        Deadline newDeadline = new Deadline(this.description, this.deadline);
 
-            int numTask = taskList.size();
+        taskList.addTask(newDeadline);
+
+        int numTask = taskList.size();
 
 
-            ui.printText("Got it. I've added this task: \n" + "  "
-                    + newDeadline + "Now you have " +
-                    numTask + " tasks in the list.");
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+        ui.printText("Got it. I've added this task: \n" + "  "
+                + newDeadline + "Now you have " +
+                numTask + " tasks in the list.");
 
     }
+
+
 }

@@ -1,6 +1,6 @@
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Deadline extends Task {
     protected Date deadline;
@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     }
 
-    public Deadline(String isDone, String description, String deadline){
+    public Deadline(String isDone, String description, String deadline) {
         super(isDone, description);
         try {
             this.deadline = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy").parse(deadline.trim());

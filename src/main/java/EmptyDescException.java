@@ -5,7 +5,7 @@ public class EmptyDescException extends DukeException {
         this.type = type;
     }
 
-    public String toString(){
+    public String getMessage() {
         return " OOPS!!! The description of a " + type + " cannot be empty.";
     }
 }

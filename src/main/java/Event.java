@@ -1,6 +1,7 @@
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
     protected Date time;
     private boolean isDone;
@@ -11,10 +12,10 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public Event(String isDone, String description, String time){
+    public Event(String isDone, String description, String time) {
         super(isDone, description);
         try {
-           this.time = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy").parse(time.trim());
+            this.time = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy").parse(time.trim());
 
 
         } catch (ParseException e) {

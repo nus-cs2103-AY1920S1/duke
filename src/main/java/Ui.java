@@ -1,45 +1,46 @@
 import java.util.Scanner;
 
-public class Ui{
+public class Ui {
     private Parser inputParser = new Parser();
     Scanner scanner = new Scanner(System.in);
     boolean isExit = false;
 
-    public void respond(TaskList taskList, Storage storage, Ui ui) {
-
-
-        this.printText("Hello! I'm Duke\n" +
-                "What can I do for you?");
-
-        while (!isExit && scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-            Command current = null;
-
-            try {
-               current =  inputParser.parseCommand(input);
-               current.runCommand(taskList, storage, ui);
-            } catch (IllegalArgumentException e1) {
-                System.out.println(e1);
-            } catch (EmptyDescException e2) {
-                System.out.println(e2);
-            }
-
-        }
+    public String readCommand() {
+        return scanner.nextLine();
     }
 
-    public void showLoadingError(){
+    public void showWelcome() {
+        this.showLine();
+        this.printText("Hello! I'm Duke\n" +
+                "What can I do for you?");
+        this.showLine();
+    }
+
+    public void showLine() {
+        System.out.println("____________________________________________________________");
+    }
+
+
+    public void showLoadingError() {
         System.out.println("Unable to load");
     }
 
-    public void closeUi(){
+    public void closeUi() {
         this.isExit = true;
         this.scanner.close();
     }
 
 
-    public void printText(String text){
-        String line = "\n____________________________________________________________\n";
-        System.out.println(line + text + line);
+    public void printText(String text) {
+
+        System.out.println(text);
 
     }
+
+
+    public void showError(String message) {
+        System.out.println(message);
+    }
 }
+
+

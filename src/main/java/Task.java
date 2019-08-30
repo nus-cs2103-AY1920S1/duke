@@ -8,14 +8,14 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public Task(boolean isDone, String description){
+    public Task(boolean isDone, String description) {
         this.isDone = isDone;
         this.description = description;
     }
 
-    public Task(String isDone, String description){
+    public Task(String isDone, String description) {
         int a = Integer.parseInt(isDone.trim());
-        this.isDone = a == 0? true : false;
+        this.isDone = a == 0 ? true : false;
         this.description = description;
     }
 
@@ -26,7 +26,7 @@ public abstract class Task {
 
 
     public String getStatusIcon() {
-        return (this.isDone ?  "v" : "x"); // "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.isDone ? "v" : "x"); // "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public void markAsDone() {

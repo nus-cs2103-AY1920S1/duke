@@ -1,6 +1,4 @@
 
-
-
 public class Parser {
 
 
@@ -8,154 +6,89 @@ public class Parser {
     }
 
 
-    public Command parseCommand(String input) throws IllegalArgumentException, EmptyDescException {
+    public static Command parse(String input) throws DukeException {
         switch (input) {
 
-            case "bye":
-                return new ByeCommand();
+        case "bye":
+            return new ExitCommand();
 
 
-            case "list":
-                return new ListCommand();
+        case "list":
+            return new ListCommand();
 
 
-            default:
-               return determineInputType(input);
+        default:
+            return determineInputType(input);
 
         }
     }
 
-        public Command determineInputType (String input) throws IllegalArgumentException, EmptyDescException {
-            if (input.contains("done")) {
-
-
-                int taskNum = -1;
-                try{
-                   taskNum = Integer.parseInt(input.substring(5));
-                    return new DoneCommand(taskNum);
-
-                } catch(ArrayIndexOutOfBoundsException e){
-                    throw new EmptyDescException("done");
-                }
-
-
-
-
-            } else if (input.contains("todo")) {
-
-               try {
-                   return new TodoCommand(false, input.substring(5));
-               } catch(ArrayIndexOutOfBoundsException e){
-                   throw new EmptyDescException("todo");
-               }
-
-
-            } else if (input.contains("deadline")) {
-
-                if (input.length() < 9) {
-                    throw new EmptyDescException("deadline");
-                } else {
-
-                    String[] parts = input.split("/by");
-
-                    return new DeadlineCommand(false, parts[0].substring(9), parts[1]);
-                }
-
-            } else if (input.contains("event")) {
-                if (input.length() < 9) {
-                    throw new EmptyDescException("event");
-                } else {
-
-                    String[] parts = input.split("/at");
-
-                    return new EventCommand(false, parts[0].substring(5), parts[1]);
-                }
-            } else if (input.contains("delete")) {
-
-                int taskNum;
-                  try {
-                      taskNum = Integer.parseInt(input.substring(7));
-                      return new DeleteCommand(taskNum);
-
-                  } catch(ArrayIndexOutOfBoundsException e){
-                    throw new EmptyDescException("delete");
-                }
-
-
-            } else {
-                throw new IllegalArgumentException();
-            }
-        }
-
-
-    }
-
-
-
-
-
-
-
-    /*private boolean exited;
-    private TaskList tasklist
-
-    public Parser(tasklist){
-        this.exited = false;
-        this.tasklist = tasklist
-    }
-
-
-
-    public void giveRespond(String input) throws IllegalArgumentException, EmptyDescException {
-        switch (input) {
-
-            case "bye":
-
-                exited = true;
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-
-            case "list":
-
-                System.out.println("Here are the tasks in your list:");
-                int index = 1;
-                for (Task s : toDoList) {
-                    System.out.print(index + ". " + s);
-                    index++;
-                }
-                break;
-
-            default:
-                determineInputType(input);
-        }
-    }
-
-
-    public void determineInputType(String input) throws IllegalArgumentException, EmptyDescException {
+    public static Command determineInputType(String input) throws DukeException {
         if (input.contains("done")) {
 
 
-            tasklist.markTaskDone(input);
+            try {
+                int taskNum = -1;
+
+                taskNum = Integer.parseInt(input.substring(5));
+                return new DoneCommand(taskNum);
+            } catch (StringIndexOutOfBoundsException e1) {
+                throw new EmptyDescException("done");
+            }
 
 
         } else if (input.contains("todo")) {
 
-            tasklist.addTodoTask(input);
+
+            try {
+                return new TodoCommand(false, input.substring(5));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new EmptyDescException("todo");
+            }
 
 
         } else if (input.contains("deadline")) {
 
-            tasklist.addDeadlineTask(input);
+            try {
+
+                String[] parts = input.split("/by");
+
+                return new DeadlineCommand(false, parts[0].substring(9), parts[1]);
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                throw new EmptyDescException("deadline");
+            }
 
         } else if (input.contains("event")) {
+            try {
 
-            tasklist.addEventTask(input);
+                String[] parts = input.split("/at");
 
+                return new EventCommand(false, parts[0].substring(5), parts[1]);
+            } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+                throw new EmptyDescException("event");
+            }
         } else if (input.contains("delete")) {
-            tasklist.deleteTask(input);
+
+            int taskNum;
+            try {
+                taskNum = Integer.parseInt(input.substring(7));
+                return new DeleteCommand(taskNum);
+
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new EmptyDescException("delete");
+            }
+
+
         } else {
-            throw new IllegalArgumentException();
+            throw new InvalidArgumentException();
         }
-    } */
+    }
+
+
+}
+
+
+
+
 
 

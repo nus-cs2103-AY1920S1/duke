@@ -1,6 +1,4 @@
-import java.io.IOException;
-
-public class TodoCommand extends Command {
+public class TodoCommand extends AddCommand {
     boolean isDone;
     String description;
 
@@ -10,22 +8,22 @@ public class TodoCommand extends Command {
 
     }
 
-    public void runCommand(TaskList taskList, Storage storage, Ui ui) {
-        try {
-            storage.appendToFile("T", null, this.description);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
-            Todo newTodo = new Todo(this.description);
+        storage.appendToFile("T", null, this.description);
 
-            taskList.addTask(newTodo);
+        Todo newTodo = new Todo(this.description);
 
-            int numTask = taskList.size();
+        taskList.addTask(newTodo);
 
-            ui.printText("Got it. I've added this task: \n" + "  "
-                    + newTodo + "Now you have " +
-                    numTask + " tasks in the list.");
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+        int numTask = taskList.size();
+
+        ui.printText("Got it. I've added this task: \n" + "  "
+                + newTodo + "Now you have " +
+                numTask + " tasks in the list.");
+
 
     }
+
+
 }

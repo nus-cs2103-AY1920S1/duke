@@ -1,6 +1,6 @@
-public abstract class Command{
+public abstract class Command {
 
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
-
-    public abstract void runCommand(TaskList taskList, Storage storage, Ui ui);
+    public abstract boolean isExit();
 }

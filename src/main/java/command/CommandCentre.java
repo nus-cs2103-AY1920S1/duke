@@ -1,6 +1,7 @@
 package command;
 
 import exception.InvalidCommandException;
+import utils.Ui;
 
 import java.util.HashMap;
 
@@ -46,7 +47,7 @@ public class CommandCentre {
             commands.get(commandName).execute();
             return true;
         } catch (InvalidCommandException e) {
-            System.out.print("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            Ui.getInstance().addWarningMessage("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             return false;
         }
     }

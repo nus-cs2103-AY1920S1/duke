@@ -11,19 +11,35 @@ import duke.bin.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Parser class handles all parsing of commands and execution.
+ */
 public class Parser {
     private DataStorage storage;
     private TaskList taskList;
     private UI ui;
     private boolean isExit;
 
+    /**
+     * Public constructor of Parser to be used to parse and execute.
+     *
+     * @param taskList Tasklist used by the duke program
+     * @param storage Storage of where the save file is located
+     * @param ui a ui to display the output from the commands
+     */
     public Parser(TaskList taskList, DataStorage storage, UI ui) {
         this.storage = storage;
         this.taskList = taskList;
         this.ui = ui;
         this.isExit = false;
     }
-    
+
+    /**
+     * Parse the command given which will then be executed.
+     *
+     * @param fullCommand the command input given by the user
+     * @throws DukeException multiple cases of wrong input
+     */
     public void parse(String fullCommand) throws DukeException {
         try {
             String[] words = fullCommand.split(" ", 2);

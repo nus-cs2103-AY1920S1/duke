@@ -4,11 +4,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Time class to hold value of time with correct display.
+ */
 public class Time {
     private final String DATE_PATTERN = "dd MMMM yyyy, hh:mm a";
     private LocalDateTime date;
     private String format;
 
+    /**
+     * Constructor of time parsed from the proper string format.
+     *
+     * @param dateString date format given in string.
+     * @throws DukeException will be thrown when string is not in correct format.
+     */
     public Time(String dateString) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         try {
@@ -29,6 +38,11 @@ public class Time {
         }
     }
 
+    /**
+     * Overrides toString.
+     *
+     * @return the proper string format of this time object.
+     */
     @Override
     public String toString() {
         return format;

@@ -27,6 +27,9 @@ public class Parser {
         case "bye":
             return new ExitCommand();
 
+        case "find":
+            return new FindCommand(arr[1]);
+
         default :
             return new InvalidCommand();
         }

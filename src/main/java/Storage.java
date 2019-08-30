@@ -16,13 +16,13 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
 
                 String[] task = sc.nextLine().split("\\|");
                 String taskType = task[0].trim();
                 boolean isTaskDone = task[2].trim().equals("1");
 
-                switch(taskType) {
+                switch (taskType) {
                     case "T":
                         Todo newTask = new Todo(task[2].trim());
                         if (isTaskDone) newTask.markAsDone();

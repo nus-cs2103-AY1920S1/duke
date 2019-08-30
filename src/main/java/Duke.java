@@ -81,7 +81,7 @@ public class Duke {
                     } else if (command.equals("delete")) {
                         int taskNum = sc.nextInt();
                         System.out.println(line + "     Noted. I've removed this task: ");
-                        System.out.println("       " + taskList.get(taskNum - 1). toString());
+                        System.out.println("       " + taskList.get(taskNum - 1).toString());
                         taskList.remove(taskNum - 1);
                         System.out.print("     Now you have " + taskList.size() + "tasks in the list.\n" + line);
                         Storage.saveTaskList(taskList); //save file
@@ -93,6 +93,6 @@ public class Duke {
             } catch (DukeException | ParseException error) {
                 System.out.print(line + "     " + error.getMessage() + "\n" + line);
             }
-        } while (x==1);
+        } while (x == 1);
     }
 }

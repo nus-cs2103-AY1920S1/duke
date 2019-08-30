@@ -71,8 +71,7 @@ public class DukeTaskList {
                 DukeTask deletedTask = userDukeTasks.get(taskIndex - 1);
                 userDukeTasks.remove(taskIndex - 1);
                 sb.setLength(0);
-                sb.append("Noted. I've removed this task:\n\t   ");
-                sb.append(deletedTask.toString());
+                sb.append("Noted. I've removed this task:\n\t   " + deletedTask.toString());
                 sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
                 ui.displayToUser(sb.toString());
                 storage.save(userDukeTasks);

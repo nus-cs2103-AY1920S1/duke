@@ -23,8 +23,8 @@ import java.util.List;
 public class Duke extends Application {
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    private Storage storage;
-    private TaskList tasks;
+    protected Storage storage;
+    protected TaskList tasks;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

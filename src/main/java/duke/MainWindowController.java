@@ -45,10 +45,34 @@ public class MainWindowController {
     @FXML
     private MenuItem fileOpen;
     private Duke duke;
+
     public void setDuke(Duke duke) {
         this.duke = duke;
         displayTaskList.addAll(duke.getTasks());
         middleListView.setItems(displayTaskList);
+    }
+
+    protected Duke getDuke() {
+        return duke;
+    }
+
+    protected void refreshView() {
+        switch (masterListView.getSelectionModel().getSelectedItem()) {
+        case "To-Do":
+            displayTaskList.setAll(duke.getTodos());
+            break;
+        case "Deadline":
+            displayTaskList.setAll(duke.getDeadlines());
+            break;
+        case "Event":
+            displayTaskList.setAll(duke.getEvent());
+            break;
+        case "All":
+            displayTaskList.setAll(duke.getTasks());
+            break;
+        default:
+            break;
+        }
     }
 
     private class CustomListCell extends ListCell<Task> {
@@ -107,25 +131,10 @@ public class MainWindowController {
         masterListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                switch (masterListView.getSelectionModel().getSelectedItem()) {
-                    case "To-Do":
-                        displayTaskList.setAll(duke.getTodos());
-                        break;
-                    case "Deadline":
-                        displayTaskList.setAll(duke.getDeadlines());
-                        break;
-                    case "Event":
-                        displayTaskList.setAll(duke.getEvent());
-                        break;
-                    case "All":
-                        displayTaskList.setAll(duke.getTasks());
-                        break;
-                    default:
-                        break;
-                }
-//                System.out.println("clicked on " + masterListView.getSelectionModel().getSelectedItem());
+                refreshView();
             }
         });
+        masterListView.getSelectionModel().select(3);
     }
 
     @FXML
@@ -136,9 +145,11 @@ public class MainWindowController {
     @FXML
     void createNewTask(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Launcher.class.getResource("/view/NewTaskWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(Launcher.class.getResource("/view/NewTaskWindow.fxml"));
+            Parent root = loader.load();
+            loader.<NewTaskWindowController>getController().setParentController(this);
             Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
+            stage.setTitle("Create New Task");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

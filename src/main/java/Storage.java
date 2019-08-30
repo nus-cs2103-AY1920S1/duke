@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,6 +8,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    /** String representing the path of the storage file */
     private String filePath;
 
     /**
@@ -31,6 +31,11 @@ public class Storage {
         ArrayList<Task> fileContent = new ArrayList<>();
         fileContent.add(new Task("T", "Task 0"));
         File file = new File(filePath);
+        try {
+            file.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
         Scanner fileScan = new Scanner(file);
         while (fileScan.hasNext()) {
             String fileLine = fileScan.nextLine();

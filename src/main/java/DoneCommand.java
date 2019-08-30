@@ -3,6 +3,7 @@
  */
 public class DoneCommand extends Command {
 
+    /** Integer representing number of task to be marked as done. */
     private int taskNum;
 
     /**

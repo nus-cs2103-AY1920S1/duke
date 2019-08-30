@@ -6,10 +6,6 @@ import java.time.LocalDateTime;
  */
 public class Parser {
 
-    public Parser() {
-
-    }
-
     /**
      * Parses a String representing user input of time and returns a LocalDateTime object representing
      * the input time.
@@ -23,7 +19,8 @@ public class Parser {
         System.out.println(splitDate[0]);
         LocalDateTime local = LocalDateTime.of(
                 Integer.parseInt(splitDate[2]),  Integer.parseInt(splitDate[1]),  Integer.parseInt(splitDate[0]),
-                Integer.parseInt(splitDateTime[1].substring(0, 2)), Integer.parseInt(splitDateTime[1].substring(2, 4)));
+                Integer.parseInt(splitDateTime[1].substring(0, 2)),
+                Integer.parseInt(splitDateTime[1].substring(2, 4)));
         return local;
 
     }

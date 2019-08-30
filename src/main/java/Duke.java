@@ -7,8 +7,13 @@ import java.io.IOException;
  */
 public class Duke {
 
+    /** Storage object that access the data file. */
     private Storage storage;
+
+    /** TaskList object that accesses the ArrayList of Tasks */
     private TaskList tasks;
+
+    /** UI interface of Duke */
     private Ui ui;
 
     /**

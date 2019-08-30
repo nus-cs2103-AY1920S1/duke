@@ -6,17 +6,17 @@ import java.time.format.FormatStyle;
  * Every task object can be marked as done when it's completed.
  */
 public class Task {
+    /** DateTimeFormatter that parses user input of date & time to format to be displayed in Duke. */
     public static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
+    /** DateTimeFormatter that parses the LocalDateTime to a format to be stored in the data file */
     public static final DateTimeFormatter FILE_DATE_TIME = DateTimeFormatter.ofPattern("dd/MM/yy hhmm");
-    
+
+    /** Description of the task */
     protected String name;
+    /** Boolean representing whether the task is done */
     protected boolean isDone;
+    /** Type of the task: Todo, Deadline or Event */
     protected String type;
-
-
-    public Task() {
-
-    }
 
     /**
      * Creates a task object that stores the type of task it is, i.e todos, deadlines or events and its description.
@@ -39,7 +39,6 @@ public class Task {
      * @param isDone Boolean representing whether the task is done.
      * @param name Description of the task.
      */
-
     public Task(String type, String isDone, String name) {
         this.type = type;
         this.name = name;
@@ -50,7 +49,11 @@ public class Task {
         }
     }
 
-
+    /**
+     * Returns the description of the task.
+     *
+     * @return String representing the task description.
+     */
     public String getName() {
         return this.name;
     }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
  * e.g 18/02/2019 1800.
  */
 public class Deadline extends Task {
+    /** LocalDateTime object representing date of the deadline */
     private LocalDateTime date;
 
     /**

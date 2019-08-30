@@ -3,6 +3,7 @@
  */
 public class AddCommand extends Command {
 
+    /** Task object representing task to be added */
     private Task taskToAdd;
 
     /**

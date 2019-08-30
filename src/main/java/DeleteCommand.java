@@ -2,6 +2,8 @@
  * Represents the deleting of tasks.
  */
 public class DeleteCommand extends Command {
+
+    /** Integer representing index of task to be deleted. */
     private int taskNum;
 
     /**

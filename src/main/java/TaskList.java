@@ -6,6 +6,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
+    /** ArrayList of task objects */
     private ArrayList<Task> list;
 
     /**
@@ -82,6 +83,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds and prints out tasks that contains a given String.
+     *
+     * @param keyword String to be searched for in the tasks.
+     */
     public void findTasks(String keyword) {
         ArrayList<Task> tasksMatched = new ArrayList<>();
         for (int i = 1; i < list.size(); i++) {

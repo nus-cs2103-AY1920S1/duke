@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
  * The date can be added in the Duke UI by adding /at , followed by a date in the format of e.g 18/02/2019 1800.
  */
 public class Event extends Task {
+    /** LocalDateTime object representing date of the event */
     private LocalDateTime date;
 
     /**

@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.DukeCommand;
 import duke.command.DukeCommandExit;
 import duke.util.DukeParser;

@@ -12,6 +12,7 @@ public enum Response {
     BYE("(?i)^bye\\s*", (i, s) -> {
         Printer.printString("Bye. Hope to see you again soon!");
         s.toExit = true;
+        return true;
     }),
     LIST("(?i)^list\\s*", (j, s) -> {
         String finalString = IntStream.range(0, s.list.size()).boxed().reduce("",
@@ -20,6 +21,7 @@ public enum Response {
                 String::concat
         );
         Printer.printString(finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString);
+        return true;
     }),
     DONE("(?i)^done [0-9]+", (i, s) -> {
         int index = getNumber(i) - 1;
@@ -27,7 +29,9 @@ public enum Response {
             s.list.get(index).markAsDone();
             Printer.printString("Nice! I've marked this task as done:\n  "
                     + s.list.get(index).toString());
+            return true;
         }
+        return false;
     }),
     DELETE("(?i)^delete [0-9]+", (i, s) -> {
         int index = getNumber(i) - 1;
@@ -38,36 +42,47 @@ public enum Response {
                     + (s.list.size() - 1)
                     + " tasks in the list.");
             s.list.remove(index);
+            return true;
         }
+        return false;
     }),
     TODO_NO_NAME("(?i)^todo\\s*", (i, s) -> {
         Printer.printError("The description of a todo cannot be empty");
+        return true;
     }),
     TODO("(?i)^todo .+", (i, s) -> {
         addTask(new Todo(i.split("todo ", 2)[1]), s);
+        return true;
     }),
     EVENT_NO_NAME("(?i)^event\\s*", (i, s) -> {
         Printer.printError("The description of an event cannot be empty");
+        return true;
     }),
     EVENT_NO_TIME("^(?i)event (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
         Printer.printError("The date range of an event cannot be empty");
+        return true;
     }),
     EVENT("(?i)^event .+ /at .+", (i, s) -> {
         String[] parts = splitTwoDelimiters(i, "(?i)^event ", "(?i)/at ");
         addTask(new Event(parts[0], parts[1]), s);
+        return true;
     }),
     DEADLINE_NO_NAME("(?i)^deadline\\s*", (i, s) -> {
         Printer.printError("The description of a deadline cannot be empty");
+        return true;
     }),
     DEADLINE_NO_TIME("(?i)^deadline (((?!/by).)+$)|(.+ /by\\s*$)", (i, s) -> {
         Printer.printError("The due date of a deadline cannot be empty");
+        return true;
     }),
     DEADLINE("(?i)^deadline .+ /by .+", (i, s) -> {
         String[] parts = splitTwoDelimiters(i, "(?i)^deadline ", "(?i)/by ");
         addTask(new Deadline(parts[0], parts[1]), s);
+        return true;
     }),
     UNKNOWN(".*", (i, s) -> {
         Printer.printError("I'm sorry but I don't know what that means :-(");
+        return true;
     });
 
     private String regex;
@@ -88,8 +103,7 @@ public enum Response {
      */
     public boolean call(String i, State s) {
         if (i.matches(regex)) {
-            func.f(i, s);
-            return true;
+            return func.f(i, s);
         }
         return false;
     }

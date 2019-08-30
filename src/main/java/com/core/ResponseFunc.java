@@ -10,5 +10,5 @@ public interface ResponseFunc {
      * @param i input string
      * @param s state object
      */
-    void f(String i, State s);
+    boolean f(String i, State s);
 }

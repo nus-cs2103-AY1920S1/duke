@@ -27,10 +27,10 @@ public class Storage {
      * @throws DukeIoException If an IO exception occurs.
      */
     public Storage(String path) throws DukeIoException {
-        this.file = new File(path);
+        file = new File(path);
 
         if (!file.exists()) {
-            write(new ArrayList<>());
+            createDirWithFile(path);
         }
     }
 
@@ -51,7 +51,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeIoException("☹ OOPS!!! Invalid file file provided.");
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
             throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
         }
     }
@@ -73,6 +72,22 @@ public class Storage {
             throw new DukeIoException("☹ OOPS!!! Invalid file file provided.");
         } catch (IOException e) {
             throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
+        }
+    }
+
+    private void createDirWithFile(String path) throws DukeIoException {
+        int lastSlashPos = path.lastIndexOf('/');
+        boolean createdDirs = false;
+
+        if (lastSlashPos >= 0) {
+            File directory = new File(path.substring(0, lastSlashPos));
+            if (!directory.exists()) {
+                createdDirs = directory.mkdirs();
+            }
+        }
+
+        if (createdDirs) {
+            write(new ArrayList<>());
         }
     }
 }

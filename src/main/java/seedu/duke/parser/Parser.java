@@ -29,4 +29,12 @@ public class Parser {
         return ( fullCommand.substring(4 + fullCommand.lastIndexOf('/')) );
     }
 
+    public static int getFinishedTaskNum(String fullCommand){
+        return ( Integer.parseInt(fullCommand.substring(5)) ) ;
+    }
+
+    public static int getDeletedTaskNum(String fullCommand){
+        return ( Integer.parseInt(fullCommand.substring(7)) );
+    }
+
 }

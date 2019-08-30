@@ -48,22 +48,13 @@ public class Duke {
                 // LIST case
                 if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) {
 
-                    /*
-                    output = underscore + "     Here are the tasks in your list:\n";
-
-                    for (int i = 0; i < tasks.getSize(); i++){
-                        output += "     " + (i + 1) + "." + tasks.getTask(i).toString() + "\n";
-                    }
-                    output += underscore;
-
-                    System.out.println(output);
-                    */
                      ui.printList(tasks);
 
                     // DONE case
                 } else if (taskType.equals(possibleTasks.DONE.toString().toLowerCase())) {
 
-                    taskNum = Integer.parseInt(inputLine.substring(5)); // NTS: check for index outofbounds
+                    //taskNum = Integer.parseInt(inputLine.substring(5)); // NTS: check for index outofbounds
+                    taskNum = Parser.getFinishedTaskNum(inputLine);
                     taskNum--; // ArrayList index == taskNum - 1
 
                     tasks.getTask(taskNum).setDone();
@@ -142,7 +133,8 @@ public class Duke {
                     // DELETE case
                 } else if (taskType.equals(possibleTasks.DELETE.toString().toLowerCase())){
 
-                    taskNum = Integer.parseInt(inputLine.substring(7)); // NTS: check for index outofbounds
+                    //taskNum = Integer.parseInt(inputLine.substring(7)); // NTS: check for index outofbounds
+                    taskNum = Parser.getDeletedTaskNum(inputLine);
                     taskNum--; // ArrayList index == taskNum - 1
 
                     if (taskNum >= tasks.getSize()){

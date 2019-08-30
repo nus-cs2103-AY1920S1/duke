@@ -1,16 +1,16 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.Ui;
 import duke.DukeException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.DirectProcessor.TaskList;
-import duke.Tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.directprocessor.TaskList;
+import duke.tasks.Todo;
 
 /**
  * This is the Command subclass for add new tasks into the target task list.
- * @Extend duke.Commands.Command
+ * @Extend duke.commands.Command
  */
 public class AddCommand extends Command {
 
@@ -32,7 +32,8 @@ public class AddCommand extends Command {
      * This is the constructor when the task to add is an event or deadline task.
      * @param taskType This parameter should be "E" or "D", to show whether it is an event or a deadline task.
      * @param taskName The task name.
-     * @param taskTime The time of the task, should be in the form "dd/MM/yyyy HH:mm:ss" to avoid exception in execute method.
+     * @param taskTime The time of the task, should be in the form "dd/MM/yyyy HH:mm:ss"
+     *                 to avoid exception in execute method.
      */
     public AddCommand(String taskType, String taskName, String taskTime) {
         this.taskName = taskName;
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
      * @throws DukeException If the taskName is empty or the taskTime is not in form "dd/MM/yyyy HH:mm:ss".
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException {
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         Task toAdd;
         if (taskType.equals("T")) {
             toAdd = new Todo(taskName);
@@ -57,7 +58,7 @@ public class AddCommand extends Command {
             toAdd = new Deadline(taskName, taskTime);
         }
         tl.addTask(toAdd);
-        ui.showAddMessage(toAdd, tl.getTotalNumber());
+        return ui.showAddMessage(toAdd, tl.getTotalNumber());
     }
 
     /**

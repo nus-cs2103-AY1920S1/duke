@@ -1,14 +1,14 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
 
 /**
- * This is the command subclass to list out all tasks whose task name contains the targeting string s
+ * This is the command subclass to list out all tasks whose task name contains the targeting string s.
  * @Extends Command
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String target;
 
@@ -28,11 +28,11 @@ public class FindCommand extends Command{
      * @throws DukeException If the target string is empty.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException {
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         if (target.equals("")) {
             throw new DukeException("The finding message cannot be empty");
         }
-        ui.showFindMessage(tl.listMatchTask(target));
+        return ui.showFindMessage(tl.listMatchTask(target));
     }
 
     /**

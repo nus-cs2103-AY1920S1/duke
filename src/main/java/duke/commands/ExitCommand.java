@@ -1,20 +1,22 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
 import java.io.IOException;
 
 /**
  * This is the Command subclass to exit duke.
- * @Extends duke.Commands.Command
+ * @Extends duke.commands.Command
  */
 public class ExitCommand extends Command {
 
     /**
      * Constructor of the class, nothing special.
      */
-    public ExitCommand() {}
+    public ExitCommand() {
+
+    }
 
     /**
      * This method calls the target task list to save itself to a file and let the target user end
@@ -24,12 +26,11 @@ public class ExitCommand extends Command {
      * @throws DukeException If IOException occurs in the saving process.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException{
-        try{
+    public String execute(TaskList tl, Ui ui) throws DukeException {
+        try {
             tl.rewrite();
-            ui.showExitMessage();
+            return ui.showExitMessage();
         } catch (IOException e) {
-            ui.showExitMessage();
             throw new DukeException("Unable to rewrite task list. Modification this time cannot be saved.");
         }
 

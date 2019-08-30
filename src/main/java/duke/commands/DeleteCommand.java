@@ -1,15 +1,15 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
-import duke.Tasks.Task;
+import duke.tasks.Task;
 
 /**
  * This is the Command subclass to delete target task from the target task list.
- * @Extends duke.Commands.Command
+ * @Extends duke.commands.Command
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     /** The position of the task to delete. Note the first task in the list has position 1 */
     private int position;
@@ -30,13 +30,13 @@ public class DeleteCommand extends Command{
      * @throws DukeException If the position is out of bound of the task list.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException{
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         if (position > tl.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }
         Task deletedTask = tl.deleteTask(position);
         int totalTaskNumber = tl.getTotalNumber();
-        ui.showDeleteMessage(deletedTask, totalTaskNumber);
+        return ui.showDeleteMessage(deletedTask, totalTaskNumber);
     }
 
     /**

@@ -1,8 +1,13 @@
-import duke.Commands.*;
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
-import duke.DukeException;
-import duke.Tasks.Task;
+package duke;
+
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.FakeCommand;
+import duke.commands.FindCommand;
+import duke.commands.FinishCommand;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,11 +25,11 @@ public class CommandTest {
         AddCommand ac = new AddCommand("T", "Eat dinner");
         try {
             ac.execute(tl, ui);
-            assertFalse(ac.isExit());
-            assertEquals("1.[T][\u2715] Eat dinner", tl.listAllTask().get(0));
+            Assertions.assertFalse(ac.isExit());
+            Assertions.assertEquals("1.[T][\u2715] Eat dinner", tl.listAllTask().get(0));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         }
     }
 
@@ -40,13 +45,13 @@ public class CommandTest {
             ac2.execute(tl, ui);
             ac3.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals("1.[D][\u2715] Software Engineering project (by: 19/08/2019 00:00:00)",
+            Assertions.assertEquals("1.[D][\u2715] Software Engineering project (by: 19/08/2019 00:00:00)",
                     check.get(0));
-            assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
-            assertEquals("3.[T][\u2715] Eat dinner", check.get(2));
+            Assertions.assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
+            Assertions.assertEquals("3.[T][\u2715] Eat dinner", check.get(2));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         }
     }
 
@@ -62,10 +67,10 @@ public class CommandTest {
             ac2.execute(tl, ui);
             ac3.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         } catch (DukeException e) {
-            assertEquals("The date input format is not correct, " +
-                    "it should be in the form dd/MM/yyyy HH:mm:ss", e.getMessage());
+            Assertions.assertEquals("The date input format is not correct, "
+                    + "it should be in the form dd/MM/yyyy HH:mm:ss", e.getMessage());
         }
     }
 
@@ -81,9 +86,9 @@ public class CommandTest {
             ac2.execute(tl, ui);
             ac3.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         } catch (DukeException e) {
-            assertEquals("Input task name cannot be empty.", e.getMessage());
+            Assertions.assertEquals("Input task name cannot be empty.", e.getMessage());
         }
     }
 
@@ -101,11 +106,11 @@ public class CommandTest {
             ac3.execute(tl, ui);
             dc1.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals("1.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(0));
-            assertEquals("2.[T][\u2715] Eat dinner", check.get(1));
+            Assertions.assertEquals("1.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(0));
+            Assertions.assertEquals("2.[T][\u2715] Eat dinner", check.get(1));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         }
     }
 
@@ -114,9 +119,9 @@ public class CommandTest {
         FakeCommand fc  = new FakeCommand();
         try {
             fc.execute(tl, ui);
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         } catch (DukeException e) {
-            assertEquals("Please input a valid command.", e.getMessage());
+            Assertions.assertEquals("Please input a valid command.", e.getMessage());
         }
     }
 
@@ -134,13 +139,13 @@ public class CommandTest {
             ac3.execute(tl, ui);
             fc.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals("1.[D][\u2715] Software Engineering project (by: 19/08/2019 00:00:00)",
+            Assertions.assertEquals("1.[D][\u2715] Software Engineering project (by: 19/08/2019 00:00:00)",
                     check.get(0));
-            assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
-            assertEquals("3.[T][\u2713] Eat dinner", check.get(2));
+            Assertions.assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
+            Assertions.assertEquals("3.[T][\u2713] Eat dinner", check.get(2));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         }
     }
 
@@ -160,11 +165,11 @@ public class CommandTest {
             fc.execute(tl, ui);
             fdc.execute(tl, ui);
             ArrayList<String> check = tl.listMatchTask("dinner");
-            assertEquals("1.[T][\u2713] Eat dinner", check.get(0));
-            assertEquals(1, check.size());
+            Assertions.assertEquals("1.[T][\u2713] Eat dinner", check.get(0));
+            Assertions.assertEquals(1, check.size());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            assertEquals(1, 2);
+            Assertions.assertEquals(1, 2);
         }
     }
 }

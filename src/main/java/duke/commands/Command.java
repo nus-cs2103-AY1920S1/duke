@@ -1,7 +1,7 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
 
 /**
@@ -19,9 +19,9 @@ public abstract class Command {
      * Execute the command on target task list and print command information through target user end.
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
-     * @throws DukeException
+     * @throws DukeException Based on requirements of a Command subclass.
      */
-    public abstract void execute(TaskList tl, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tl, Ui ui) throws DukeException;
 
     /**
      * Determines whether this is an exit command.

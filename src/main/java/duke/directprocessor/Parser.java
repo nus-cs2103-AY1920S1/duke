@@ -1,6 +1,13 @@
-package duke.DirectProcessor;
+package duke.directprocessor;
 
-import duke.Commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FakeCommand;
+import duke.commands.FindCommand;
+import duke.commands.FinishCommand;
+import duke.commands.ListCommand;
 import duke.DukeException;
 
 /**
@@ -19,24 +26,20 @@ public class Parser {
     public static Command parse(String s) throws DukeException {
         String[] splitInput = splitInput(s);
 
-        // Call list command
-        if (splitInput[0].equals("list")) return new ListCommand();
-
-        // Call exit command
-        else if (splitInput[0].equals("bye")) return new ExitCommand();
-
-        // Call add command: adding todo
-        else if (splitInput[0].equals("todo")) {
+        if (splitInput[0].equals("list")) {
+            return new ListCommand();
+        } else if (splitInput[0].equals("bye")) {
+            return new ExitCommand();
+        } else if (splitInput[0].equals("todo")) {
             String taskName = "";
             for (int i = 1; i < splitInput.length; i++) {
                 taskName = taskName + splitInput[i];
-                if (i != splitInput.length - 1) taskName = taskName + " ";
+                if (i != splitInput.length - 1) {
+                    taskName = taskName + " ";
+                }
             }
             return new AddCommand("T", taskName);
-        }
-
-        // Call add command adding event
-        else if (splitInput[0].equals("event")) {
+        } else if (splitInput[0].equals("event")) {
             String taskName = "";
             String taskTime = "";
             int timeStartFrom = 0;
@@ -45,20 +48,21 @@ public class Parser {
                     timeStartFrom = i + 1;
                     break;
                 }
-                if (i != 1) taskName = taskName + " ";
+                if (i != 1) {
+                    taskName = taskName + " ";
+                }
                 taskName = taskName + splitInput[i];
             }
             if (timeStartFrom != 0) {
                 for (int i = timeStartFrom; i < splitInput.length; i++) {
                     taskTime = taskTime + splitInput[i];
-                    if (i != splitInput.length - 1) taskTime = taskTime + " ";
+                    if (i != splitInput.length - 1) {
+                        taskTime = taskTime + " ";
+                    }
                 }
             }
             return new AddCommand("E", taskName, taskTime);
-        }
-
-        // Call add command adding deadline
-        else if (splitInput[0].equals("deadline")) {
+        } else if (splitInput[0].equals("deadline")) {
             String taskName = "";
             String taskTime = "";
             int timeStartFrom = 0;
@@ -67,46 +71,44 @@ public class Parser {
                     timeStartFrom = i + 1;
                     break;
                 }
-                if (i != 1) taskName = taskName + " ";
+                if (i != 1) {
+                    taskName = taskName + " ";
+                }
                 taskName = taskName + splitInput[i];
             }
             if (timeStartFrom != 0) {
                 for (int i = timeStartFrom; i < splitInput.length; i++) {
                     taskTime = taskTime + splitInput[i];
-                    if (i != splitInput.length - 1) taskTime = taskTime + " ";
+                    if (i != splitInput.length - 1) {
+                        taskTime = taskTime + " ";
+                    }
                 }
             }
             return new AddCommand("D", taskName, taskTime);
-        }
-
-        // Call finish command
-        else if (splitInput[0].equals("done")) {
+        } else if (splitInput[0].equals("done")) {
             try {
                 return new FinishCommand(Integer.parseInt(splitInput[1]));
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Please specify which task is finished by its order in the task list.");
             }
-        }
-
-        // Call delete command
-        else if (splitInput[0].equals("delete")) {
+        } else if (splitInput[0].equals("delete")) {
             try {
                 return new DeleteCommand(Integer.parseInt(splitInput[1]));
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Plase specify which task needs to be deleted by its order in the task list.");
             }
-        }
-
-        else if (splitInput[0].equals("find")) {
+        } else if (splitInput[0].equals("find")) {
             String target = "";
             for (int i = 1; i < splitInput.length; i++) {
                 target = target + splitInput[i];
-                if (i != splitInput.length - 1) target = target + " ";
+                if (i != splitInput.length - 1) {
+                    target = target + " ";
+                }
             }
             return new FindCommand(target);
+        } else {
+            return new FakeCommand();
         }
-
-        else return new FakeCommand();
     }
 
     private static String[] splitInput(String s) {

@@ -1,13 +1,12 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 import duke.DukeException;
-import duke.Tasks.Task;
 
 /**
  * This is the Command subclass to set a target class in the task list as finish.
- * @Extends duke.Commands.Command
+ * @Extends duke.commands.Command
  */
 public class FinishCommand extends Command {
 
@@ -30,11 +29,11 @@ public class FinishCommand extends Command {
      * @throws DukeException If the position is out of bound of the task list.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) throws DukeException{
+    public String execute(TaskList tl, Ui ui) throws DukeException {
         if (position > tl.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }
-        ui.showFinishMessage(tl.finishTask(position));
+        return ui.showFinishMessage(tl.finishTask(position));
     }
 
     /**

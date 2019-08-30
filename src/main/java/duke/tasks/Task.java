@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import duke.DukeException;
 
@@ -8,10 +8,10 @@ import duke.DukeException;
  */
 public abstract class Task {
 
-    /** Indicate whether this task is finished or not */
+    /** Indicate whether this task is finished or not. */
     private boolean finished;
 
-    /** The task name */
+    /** The task name. */
     private String taskName;
 
     /**

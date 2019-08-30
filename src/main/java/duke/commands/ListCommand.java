@@ -1,18 +1,20 @@
-package duke.Commands;
+package duke.commands;
 
-import duke.DirectProcessor.TaskList;
-import duke.DirectProcessor.Ui;
+import duke.directprocessor.TaskList;
+import duke.directprocessor.Ui;
 
 /**
  * This is the Command subclass to list out all tasks in the target task list.
- * @Extends duke.Commands.Command
+ * @Extends duke.commands.Command
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Constructor of the class, nothing special.
      */
-    public ListCommand() {}
+    public ListCommand() {
+
+    }
 
     /**
      * The override method execute from the superclass Command.
@@ -21,8 +23,8 @@ public class ListCommand extends Command{
      * @param ui The target user end to print command information.
      */
     @Override
-    public void execute(TaskList tl, Ui ui) {
-        ui.showListMessage(tl.listAllTask());
+    public String execute(TaskList tl, Ui ui) {
+        return ui.showListMessage(tl.listAllTask());
     }
 
     /**

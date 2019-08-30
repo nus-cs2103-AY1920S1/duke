@@ -10,8 +10,6 @@ import duke.bin.datahandling.DataStorage;
  * The main class of duke, which manages the running of the program.
  */
 public class Duke {
-    private DataStorage storage;
-    private TaskList tasks;
     private UI ui;
     private Parser parser;
 
@@ -22,7 +20,8 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new UI();
-        storage = new DataStorage(filePath);
+        DataStorage storage = new DataStorage(filePath);
+        TaskList tasks;
         try {
             tasks = new TaskList();
             tasks.store(storage.load());

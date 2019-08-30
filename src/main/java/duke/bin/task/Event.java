@@ -5,6 +5,12 @@ import duke.bin.common.Time;
 public class Event extends Task {
     protected Time time;
 
+    /**
+     * Constructor for event object.
+     *
+     * @param task the name of the task.
+     * @param time the time at which it will be held at.
+     */
     public Event(String task, Time time) {
         super(task);
         this.time = time;

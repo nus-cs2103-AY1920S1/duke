@@ -21,8 +21,8 @@ class TaskParserTest {
     void testTodo_ValidInput() throws DukeException {
         Task task = TaskParser.parse("todo do homework");
         assertTrue(task instanceof Todo);
-        assertEquals(task.getDescription(), "do homework");
-        assertEquals(task.getType(), "T");
+        assertEquals("do homework", task.getDescription());
+        assertEquals("T", task.getType());
     }
 
     @Test
@@ -32,9 +32,9 @@ class TaskParserTest {
         assertTrue(task instanceof Deadline);
 
         Deadline deadline = (Deadline)task;
-        assertEquals(deadline.getDescription(), "finish project");
-        assertEquals(deadline.getBy(), formatter.parse("31/12/2019 2359"));
-        assertEquals(deadline.getType(), "D");
+        assertEquals("finish project", deadline.getDescription());
+        assertEquals(formatter.parse("31/12/2019 2359"), deadline.getBy());
+        assertEquals("D", deadline.getType());
     }
 
     @Test
@@ -44,9 +44,9 @@ class TaskParserTest {
         assertTrue(task instanceof Event);
 
         Event event = (Event)task;
-        assertEquals(event.getDescription(), "open presents");
-        assertEquals(event.getAt(), formatter.parse("25/12/2019 0000"));
-        assertEquals(event.getType(), "E");
+        assertEquals("open presents", event.getDescription());
+        assertEquals(formatter.parse("25/12/2019 0000"), event.getAt());
+        assertEquals("E", event.getType());
     }
 
     @Test

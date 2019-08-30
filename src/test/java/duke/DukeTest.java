@@ -21,7 +21,7 @@ class DukeTest {
         Command command;
         command = CommandParser.parse("todo read book");
         command.execute(tasks, ui, storage);
-        assertEquals(tasks.getTask(0).getDescription(), "read book");
+        assertEquals("read book", tasks.getTask(0).getDescription());
 
         command = CommandParser.parse("done 1");
         command.execute(tasks, ui, storage);
@@ -29,6 +29,6 @@ class DukeTest {
 
         command = CommandParser.parse("delete 1");
         command.execute(tasks, ui, storage);
-        assertEquals(tasks.size(), 0);
+        assertEquals(0, tasks.size());
     }
 }

@@ -14,7 +14,7 @@ class TaskListTest {
     void testTaskList_CreateOneElement() {
         TaskList tasks = new TaskList();
         tasks.addTask(new TaskStub());
-        assertEquals(tasks.size(), 1);
+        assertEquals(1, tasks.size());
     }
 
     @Test
@@ -22,7 +22,7 @@ class TaskListTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new TaskStub());
         tasks.deleteTask(0);
-        assertEquals(tasks.size(), 0);
+        assertEquals(0, tasks.size());
     }
 
     @Test
@@ -34,14 +34,14 @@ class TaskListTest {
     @Test
     void testTaskList_NoElementAtStart()  {
         TaskList tasks = new TaskList();
-        assertEquals(tasks.size(), 0);
+        assertEquals(0, tasks.size());
     }
 
     @Test
     void testTaskList_AddTodo() throws DukeException {
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("Test 1"));
-        assertEquals(tasks.getTask(0).getDescription(), "Test 1");
+        assertEquals("Test 1", tasks.getTask(0).getDescription());
     }
 
     @Test
@@ -55,7 +55,7 @@ class TaskListTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("hi"));
         tasks.addTask(new Todo("bye"));
-        assertEquals(tasks.findTasksByKeyword("bye").size(), 1);
-        assertEquals(tasks.findTasksByKeyword("bye").get(0).getDescription(), "bye");
+        assertEquals(1, tasks.findTasksByKeyword("bye").size());
+        assertEquals("bye", tasks.findTasksByKeyword("bye").get(0).getDescription());
     }
 }

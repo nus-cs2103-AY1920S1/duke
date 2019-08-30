@@ -7,6 +7,12 @@ public class DukeException extends Exception {
 		this.inputMessage = inputMessage;
 	}
 
+
+	/**
+	 * Returns the exception message.
+	 *
+	 * @return String of the exception message.
+	 */
 	@Override
 	public String toString() {
 

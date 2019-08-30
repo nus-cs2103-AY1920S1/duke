@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
-    protected Date at;
+    private Date at;
 
     public Event(String description, boolean isDone, Date at) {
         super(description, isDone);

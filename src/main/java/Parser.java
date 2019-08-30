@@ -11,77 +11,77 @@ public class Parser {
      * Exceptions caught would return an error message, otherwise a formatted
      * and processed user-input string would be returned.
      *
-     * @param s User-input from TaskList.
+     * @param raw User-input from TaskList.
      * @return A formatted and processed user-input string for TaskList to use.
      */
-    public static String[] processTask(String[] s) {
+    public static String[] processTask(String[] raw) {
         String[] task = new String[3];// [todo/deadline/event], [desc], [dateline if applicable];
-        task[0] = s[0];
+        task[0] = raw[0];
         try {
             switch (task[0]) {
             case "todo":
-                if (s.length == 1) {
+                if (raw.length == 1) {
                     throw new DukeEmptyException(task[0]);
                 } else {
-                    s[0] = "";
-                    task[1] = String.join(" ", s);
+                    raw[0] = "";
+                    task[1] = String.join(" ", raw);
                     task[1] = task[1].substring(1);
                     task[2] = "";
                     return task;
                 }
             case "deadline":
-                if (s.length == 1) {
-                    throw new DukeEmptyException(s[0]);
+                if (raw.length == 1) {
+                    throw new DukeEmptyException(raw[0]);
                 } else {
-                    s[0] = "";
-                    String d2 = String.join(" ", s);
-                    String[] d3 = d2.split("/by");
-                    if (d3.length == 1) {
+                    raw[0] = "";
+                    String d2 = String.join(" ", raw);
+                    String[] desc_By = d2.split("/by");
+                    if (desc_By.length == 1) {
                         throw new DukeDeadlineException("The date of a deadline must be in the format"
                                                         + " \"dd/MM/yyyy HHmm\"");
                     }
-                    String[] d4 = d3[1].split("/");
-                    String[] d5 = d3[1].split("-");
-                    if (d4.length != 3 && d5.length != 0) {
+                    String[] dDate = desc_By[1].split("/");
+                    String[] dTime = desc_By[1].split("-");
+                    if (dDate.length != 3 && dTime.length != 0) {
                         throw new DukeDeadlineException("The date of a deadline must be in the format"
                                                         + " \"dd/MM/yyyy HHmm\"");
                     }
-                    task[1] = d3[0];
+                    task[1] = desc_By[0];
                     task[1] = task[1].substring(1).trim();
-                    task[2] = d3[1];
+                    task[2] = desc_By[1];
                     task[2] = task[2].substring(1);
                     return task;
                 }
             case "event":
-                if (s.length == 1) {
-                    throw new DukeEmptyException(s[0]);
+                if (raw.length == 1) {
+                    throw new DukeEmptyException(raw[0]);
                 } else {
-                    s[0] = "";
-                    String e2 = String.join(" ", s);
-                    String[] e3 = e2.split("/at");
-                    if (e3.length == 1) {
+                    raw[0] = "";
+                    String e2 = String.join(" ", raw);
+                    String[] desc_At = e2.split("/at");
+                    if (desc_At.length == 1) {
                         throw new DukeDeadlineException("The date of a event must be in the format"
                                                         + " \"dd/MM/yyyy HHmm-HHmm\"");
                     }
-                    String[] e4 = e3[1].split("/");
-                    String[] e5 = e3[1].split("-");
-                    if (e4.length != 3 && e5.length != 2) {
+                    String[] eDate = desc_At[1].split("/");
+                    String[] eTime = desc_At[1].split("-");
+                    if (eDate.length != 3 && eTime.length != 2) {
                         throw new DukeDeadlineException("The date of a event must be in the format"
                                                         + " \"dd/MM/yyyy HHmm-HHmm\"");
                     }
-                    task[1] = e3[0];
+                    task[1] = desc_At[0];
                     task[1] = task[1].substring(1).trim();
-                    task[2] = e3[1];
+                    task[2] = desc_At[1];
                     task[2] = task[2].substring(1);
                     return task;
                 }
             case "list":
                 return task;
             case "done":
-                task[1] = s[1];
+                task[1] = raw[1];
                 return task;
             case "delete":
-                task[1] = s[1];
+                task[1] = raw[1];
                 return task;
             case "bye":
                 task[0] = "bye";

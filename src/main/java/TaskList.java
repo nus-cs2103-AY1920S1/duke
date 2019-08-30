@@ -34,34 +34,34 @@ public class TaskList {
         case "todo":
             ToDo todo = new ToDo(modifiedTask[1]);
             tasklist.add(todo);
-            statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getTotal()
+            statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "deadline":
             Deadline deadline = new Deadline(modifiedTask[1], modifiedTask[2]);
             tasklist.add(deadline);
-            statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getTotal()
+            statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "event":
             Event event = new Event(modifiedTask[1], modifiedTask[2]);
             tasklist.add(event);
-            statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getTotal()
+            statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "list":
-            statement =  checkList();
+            statement = checkList();
             break;
         case "done":
             statement = complete(Integer.parseInt(modifiedTask[1]));
             storage.save(tasklist);
             break;
         case "delete":
-        statement = delete(Integer.parseInt(modifiedTask[1]));
-        storage.save(tasklist);
+            statement = delete(Integer.parseInt(modifiedTask[1]));
+            storage.save(tasklist);
         break;
         case "bye":
             statement = "bye";
@@ -94,8 +94,8 @@ public class TaskList {
 
     protected String delete(int i) {
         Task t = this.tasklist.remove(i - 1);
-        Task.decTotal();
-        String statement = "Noted. I've removed this task:\n  " + t + "\nNow you have " + Task.getTotal()
+        Task.decCurrTotal();
+        String statement = "Noted. I've removed this task:\n  " + t + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
         return statement;
     }

@@ -22,11 +22,11 @@ public class Duke {
         ui.greet();
         String[] inputArr = storage.getInput().split("\\n");
         for (String s : inputArr) {
-            String reply = tasks.addTask(s);
-            if (reply.equals("bye")) {
+            String input = tasks.addTask(s);
+            if (input.equals("bye")) {
                 break;
             }
-            ui.echo(reply);
+            ui.echo(input);
         }
         ui.bye();
     }

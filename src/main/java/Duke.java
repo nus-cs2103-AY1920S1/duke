@@ -1,3 +1,8 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.DataParser;
@@ -9,7 +14,7 @@ import duke.ui.Ui;
 /**
  * Main Class of the Application, which requires the workings of all packages.
  */
-public class Duke {
+public class Duke extends Application {
 
     /**
      * Represents the reader and the writer for the output text file.
@@ -81,6 +86,15 @@ public class Duke {
             }
         }
         ui.sendFarewell();;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Duke: To-Do");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

@@ -14,41 +14,37 @@ public class Duke {
         System.out.println("    Hello, I'm Duke!\n    What can I do for you?");
         System.out.println(blankLines);
 
-        ArrayList<String> myList = new ArrayList<String>();
+        ArrayList<Task> myList = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         String command = input.nextLine();
 
 
-        while(!command.equals("bye")){
-            switch(command){
+        while(!command.equals("bye")) {
+            System.out.println(blankLines);
+            switch(command) {
                 case "list":
-                    System.out.println(blankLines);
-                    if (myList.isEmpty()){
+                    if (Task.tasks.isEmpty()) {
                         System.out.println("    List is empty");
                     } else {
-                        int index = 1;
-                        for (String x : myList) {
-                            System.out.println("    " + index + "." + x);
-                            index++;
-                        }
+                        Task.printTaskList();
                     }
                     command = input.nextLine();
                     break;
 
-                case "blah":
-                    System.out.println(blankLines);
-                    System.out.println("    blah");
-                    command = input.nextLine();
-                    break;
-
                 default:
-                    System.out.println(blankLines);
-                    System.out.println("    added: " + command);
-                    myList.add(command);
+
+                    if (command.contains("done")) {
+                        //Mark tasks as done
+                        Task.markAsDone(command);
+                    } else {
+                        //Add tasks
+                        System.out.println("    added: " + command);
+                        Task.addTask(command);
+                    }
                     command = input.nextLine();
                     break;
             }
         }
-        System.out.println("    Bye. Hope to see you again!");
+        System.out.println(blankLines + "\n    Bye. Hope to see you again!");
     }
 }

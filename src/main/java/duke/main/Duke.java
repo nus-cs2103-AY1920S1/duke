@@ -14,13 +14,15 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates an object of type Duke and performs setup for program.
+     */
     public Duke() {
         storage = new Storage(LIST_PATH);
         ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
-        }
-        catch (DukeException ex) {
+        } catch (DukeException ex) {
             tasks = new TaskList();
             ui.showError(ex.getMessage());
         }
@@ -42,8 +44,7 @@ public class Duke {
                     c.execute(tasks, ui, storage);
                     isExit = c.isExit();
                 }
-            }
-            catch (DukeException ex) {
+            } catch (DukeException ex) {
                 ui.showError(ex.getMessage());
             }
         }

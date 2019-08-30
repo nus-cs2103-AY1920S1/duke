@@ -22,6 +22,11 @@ public class Ui {
         System.out.println(string);
     }
 
+    /**
+     * Reads a user command if it exists and returns to user.
+     *
+     * @return the user command
+     */
     public String readCommand() {
         if (scanner.hasNextLine()) {
             lastCommand = scanner.nextLine();
@@ -33,12 +38,18 @@ public class Ui {
         printLine(string);
     }
 
+    /**
+     * Notifies the user that a particular task has been added to a list of certain size.
+     */
     public void notifyTaskAdded(Task task, int listSize) {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + task);
         System.out.printf("Now you have %d tasks in the list.\n", listSize);
     }
 
+    /**
+     * Notifies the user that a particular task has been deleted from a list of certain size.
+     */
     public void notifyTaskDeleted(Task task, int listSize) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("\t" + task);

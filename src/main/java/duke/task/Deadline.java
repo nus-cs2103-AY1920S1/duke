@@ -8,6 +8,12 @@ public class Deadline extends Task {
 
     protected String by;
 
+    /**
+     * Creates a Task of type Deadline and formats deadline if possible.
+     *
+     * @param description Description information about the Deadline object.
+     * @param by The timeline to complete the deadline task by.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -20,8 +26,8 @@ public class Deadline extends Task {
      */
     //Regex below adapted from https://stackoverflow.com/questions/23360599/regular-expression-for-dd-mm-yyyy-hhmm
     public void humanizeDeadline() {
-        String dateRegex = "^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\\d\\d\\d\\d [012]{0,1}[0-9][0-6][0-9]$";
-        if (by.matches(dateRegex)) {
+        String pat = "^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\\d\\d\\d\\d [012]{0,1}[0-9][0-6][0-9]$";
+        if (by.matches(pat)) {
             String hoursMin = by.split(" ")[1].trim();
             String[] dayMonthYear = by.split(" ")[0].trim().split("/");
             String day = formatDate(dayMonthYear[0]);
@@ -92,7 +98,7 @@ public class Deadline extends Task {
             return "December";
         default:
             return "Invalid Date";
-         }
+        }
     }
 
     public String getBy() {

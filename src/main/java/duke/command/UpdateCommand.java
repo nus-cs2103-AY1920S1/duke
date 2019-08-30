@@ -15,6 +15,12 @@ public class UpdateCommand extends Command {
     private String directive;
     private int position;
 
+    /**
+     * Creates an object of type UpdateCommand to update task information.
+     *
+     * @param directive Specified type of update action.
+     * @param position position of task in a task list.
+     */
     public UpdateCommand(String directive, int position) {
         super();
         this.directive = directive;

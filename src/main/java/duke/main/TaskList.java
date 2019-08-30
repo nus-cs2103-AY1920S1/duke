@@ -28,6 +28,11 @@ public class TaskList {
         return tasksList.size();
     }
 
+    /**
+     * Updates a task number in the list with status of done.
+     *
+     * @param number the task number in the list to update
+     */
     public Task markNumberedTaskAsDone(int number) {
         Task task = getTaskAtIndex(number - 1);
         task.markAsDone();

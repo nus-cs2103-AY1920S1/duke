@@ -25,6 +25,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates an ArrayList of tasks by reading a file.
+     *
+     * @throws DukeException  If error occurs while creating the list.
+     */
     public ArrayList<Task> load() throws DukeException {
         planner = new File(filePath);
         setPlannerPermissions(planner);
@@ -43,10 +48,10 @@ public class Storage {
         ArrayList<Task> tasksList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String[] taskDetails = sc.nextLine().split("\\|");
                 Task task;
-                switch(taskDetails[0].trim()) {
+                switch (taskDetails[0].trim()) {
                 case "T":
                     task = new ToDo(taskDetails[2].trim());
                     setDoneFlag(task, taskDetails[1].trim());
@@ -64,15 +69,16 @@ public class Storage {
                 }
                 tasksList.add(task);
             }
-        }
-        catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             throw new DukeException(ex.getMessage());
-        }
-        finally {
+        } finally {
             return tasksList;
         }
     }
 
+    /**
+     * Checks if a task is done and sets its status accordingly.
+     */
     public void setDoneFlag(Task task, String flag) {
         if (flag.equals("+")) {
             task.markAsDone();
@@ -96,8 +102,7 @@ public class Storage {
             FileWriter fw = new FileWriter(planner); //creates FileWriter in overwrite mode
             fw.write(textToAdd + "\n");
             fw.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new DukeException(ex.getMessage());
         }
     }
@@ -130,8 +135,7 @@ public class Storage {
             FileWriter fw = new FileWriter(planner, true); // create a FileWriter in append mode
             fw.write(task + "\n");
             fw.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new DukeException(ex.getMessage());
         }
     }

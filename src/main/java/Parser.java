@@ -83,6 +83,9 @@ public class Parser {
             case "delete":
                 task[1] = raw[1];
                 return task;
+            case "find":
+                task[1] = raw[1];
+                return task;
             case "bye":
                 task[0] = "bye";
                 task[1] = "";

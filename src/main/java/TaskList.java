@@ -63,6 +63,9 @@ public class TaskList {
             statement = delete(Integer.parseInt(modifiedTask[1]));
             storage.save(tasklist);
         break;
+        case "find":
+            statement = findList(modifiedTask[1]);
+            break;
         case "bye":
             statement = "bye";
             break;
@@ -80,7 +83,22 @@ public class TaskList {
         String s = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasklist.size(); i++) {
             Task t = this.tasklist.get(i);
-           s += ((i+1) + "." + t + "\n");
+            s += ((i+1) + "." + t + "\n");
+        }
+        return s.substring(0, s.length() - 1);
+    }
+
+    protected String findList(String keyword) {
+        if (this.tasklist.isEmpty()) {
+            return "\u2639 OOPS!!! There are no tasks in your list.";
+        }
+        String s = "Here are the matching tasks in your list:\n";
+        int idx = 1;
+        for (Task t : tasklist) {
+            if (t.getDescription().contains(keyword)) {
+                s += ("" + idx + t + "\n");
+                idx++;
+            }
         }
         return s.substring(0, s.length() - 1);
     }

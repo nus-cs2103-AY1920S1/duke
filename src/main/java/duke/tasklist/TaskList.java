@@ -12,8 +12,8 @@ public class TaskList {
     private List<Task> list;
 
     /**
-     * Constructor of TaskList
-     * 
+     * Constructor of TaskList.
+     *
      * @param list Initial list of tasks, loaded from storage file or otherwise.
      */
     public TaskList(List<Task> list) {
@@ -29,7 +29,7 @@ public class TaskList {
 
     /**
      * Method to add a new task to the TaskList.
-     * 
+     *
      * @param t Task to be added.
      */
     public void add(Task t) {
@@ -38,7 +38,7 @@ public class TaskList {
 
     /**
      * Method to check if TaskList is empty.
-     * 
+     *
      * @return true if empty, false if otherwise.
      */
     public boolean isEmpty() {
@@ -46,8 +46,8 @@ public class TaskList {
     }
 
     /**
-     * Method to remove Task of given index from TaskList
-     * 
+     * Method to remove Task of given index from TaskList.
+     *
      * @param index given index to be removed.
      * @return Task that is removed.
      */
@@ -56,8 +56,8 @@ public class TaskList {
     }
 
     /*
-     * Returns current size of TaskList
-     * 
+     * Returns current size of TaskList.
+     *
      * @return current size
      */
     public int size() {
@@ -65,8 +65,8 @@ public class TaskList {
     }
 
     /**
-     * Returns Task t at given index
-     * 
+     * Returns Task t at given index.
+     *
      * @param index to be queried
      * @return Task at index
      */
@@ -77,8 +77,8 @@ public class TaskList {
     /**
      * Returns a new TaskList that contains all tasks with name that contains the
      * given string.
-     * 
-     * @param string to be queried.
+     *
+     * @param tofind - string to be queried.
      * @return TaskList that contains corresponding tasks.
      */
 
@@ -93,8 +93,8 @@ public class TaskList {
     }
 
     /**
-     * For every task in the TaskList, prints its corresponding string
-     * 
+     * For every task in the TaskList, prints its corresponding string.
+     *
      * @return String containing all tasks in the TaskList
      */
     public String printAllTasks() {

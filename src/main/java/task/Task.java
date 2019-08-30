@@ -65,9 +65,9 @@ public abstract class Task {
 
     private String getStatusSymbol() {
         if (status == DONE) {
-            return "[✓]";
+            return "\u2713";
         } else {
-            return "[✗]";
+            return "\u2718";
         }
     }
 

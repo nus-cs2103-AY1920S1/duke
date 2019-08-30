@@ -9,12 +9,14 @@ import utils.Storage;
 import utils.Ui;
 
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Duke {
 
     private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
     private static final String STORAGE_PATH = "\\data\\duke.txt";
+    public static final String EXIT_MESSAGE = "main.Duke.EXIT_MESSAGE";
     private static final boolean RESET_TASK_LIST = false;
 
     private final TaskList taskList;
@@ -24,17 +26,18 @@ public class Duke {
     private final CommandCentre commandCentre;
     private boolean isExiting;
 
+
     /**
      * <p>
-     *     Initializes TaskList, Storage, Ui, Parser objects. Initializes all
-     *     commands. Clears the existing TaskList in Storage if RESET_TASK_LIST
-     *     is true.
+     * Initializes TaskList, Storage, Ui, Parser objects. Initializes all
+     * commands. Clears the existing TaskList in Storage if RESET_TASK_LIST
+     * is true.
      * </p>
      */
     public Duke() {
         taskList = TaskList.newInstance();
         storage = new Storage(ROOT + STORAGE_PATH);
-        ui = new Ui();
+        ui = Ui.getInstance();
         parser = new Parser();
         commandCentre = new CommandCentre();
         isExiting = false;
@@ -45,30 +48,36 @@ public class Duke {
         }
     }
 
+
     /**
-     * Main entry point for the Duke Chatbot.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    private void run()  {
-        ui.printHelloMessage();
-
-        while (parser.hasNext()) {
-            String action = parser.getNextAction();
-            ui.printDivider();
-            boolean isSuccessful = commandCentre.execute(action);
-            if (!isSuccessful) {
-                parser.nextLine();
-            }
-            ui.printDivider();
-            if (isExiting) {
-                break;
-            }
+    public String getResponse(String input) {
+        parser.setScanner(new Scanner(input));
+        String action = parser.getNextAction();
+        ui.printDivider();
+        commandCentre.execute(action);
+        ui.printDivider();
+        if (isExiting) {
+            return EXIT_MESSAGE;
         }
+        String output = ui.getOutput();
+        ui.resetOutputBuilder();
+        return output;
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    /**
+     * Gets a String of the Duke welcome message.
+     *
+     * @return The String containing the message.
+     */
+    public String getWelcomeMessage() {
+        ui.printWelcomeMessage();
+        String output = ui.getOutput();
+        ui.resetOutputBuilder();
+        return output;
     }
-
 
     /**
      * Initialize all commands with their command names and store
@@ -165,11 +174,10 @@ public class Duke {
             @Override
             public void execute() {
                 String keyword = parser.parseFindKeyword();
-                if (keyword == null) {
-                    return;
+                if (keyword != null) {
+                    List<Task> findResult = taskList.generateListByKeyword(keyword);
+                    ui.printTaskList(findResult, Ui.FIND_ACTION_TITLE);
                 }
-                List<Task> findResult = taskList.generateListByKeyword(keyword);
-                ui.printTaskList(findResult, Ui.FIND_ACTION_TITLE);
             }
         });
     }

@@ -1,8 +1,13 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * The Deadline class extends Task. It is a type of task that also has a deadline.
+ */
 public class Deadline extends Task {
-
+    /**
+     * The deadline for the task to be completed.
+     */
     protected String by;
 
     public Deadline(String description, String dateTime) {

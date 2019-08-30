@@ -1,13 +1,45 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 
+/**
+ * The Storage class deals with the saving and loading of data into Duke.
+ * The data are the tasks that the user specified.
+ */
 public class Storage {
+    /**
+     * The path of the file where data are stored.
+     */
     protected String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the data into the specified filepath.
+     * @param list The list of tasks to be saved.
+     * @throws IOException
+     */
+    public void save(ArrayList<Task> list) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            if (i > 0) {
+                writer.newLine();
+            }
+            writer.write(task.toString());
+        }
+        writer.close();
+    }
+
+    /**
+     * Loads data from the specified filepath.
+     * @return The list of tasks that were loaded.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         try {

@@ -23,10 +23,11 @@ public class Storage {
     /**
      * Saves the data into the specified filepath.
      * @param list The list of tasks to be saved.
+     * @param filePath
      * @throws IOException
      */
-    public void save(ArrayList<Task> list) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+    public void save(ArrayList<Task> list, String filePath) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             if (i > 0) {

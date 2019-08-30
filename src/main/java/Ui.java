@@ -104,6 +104,11 @@ public class Ui {
         System.out.println(indent + "Now you have " + list.size() + " task(s) in the list.");
     }
 
+    /**
+     * Prints tasks that match the search keyword.
+     * @param list The list of tasks.
+     * @param search The search keyword or phrase.
+     */
     public void printQuerySet(ArrayList<Task> list, String search) {
         System.out.println(indent + "Here are the matching tasks in your list:");
         for (int i = 0; i < list.size(); i++) {

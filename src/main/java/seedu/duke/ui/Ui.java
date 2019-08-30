@@ -1,6 +1,10 @@
 package seedu.duke.ui;
 
 import seedu.duke.DukeException;
+import seedu.duke.task.Todo;
+import seedu.duke.task.Event;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Task;
 import seedu.duke.tasklist.TaskList;
 
 public class Ui {
@@ -37,5 +41,46 @@ public class Ui {
         System.out.println(output);
     }
 
+    public void printDoneSequence(TaskList tasks, int taskNum){
+        String output = underscore + "     Nice! I've marked this task as done:\n" +
+                "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName() +
+                "\n" + underscore;
+        System.out.println(output);
+    }
+
+    public void printTodoSequence(TaskList tasks, Todo newTodo){
+        String output = underscore + "     Got it. I've added this task:\n       "
+                + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
+        System.out.println(output);
+    }
+
+    public void printDeadlineSequence(TaskList tasks, Deadline newDeadline){
+        String output = underscore + "     Got it. I've added this task:\n       "
+                + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
+        System.out.println(output);
+    }
+
+    public void printEventSequence(TaskList tasks, Event newEvent ){
+        String output = underscore + "     Got it. I've added this task:\n       "
+                + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
+        System.out.println(output);
+    }
+
+    public void printDeleteSequence(TaskList tasks, Task taskToDelete){
+        String output = underscore + "     Noted. I've removed this task.\n       " +
+                taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
+        System.out.println(output);
+    }
+
+    public void printByeSequence(){
+        String output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
+        System.out.print(output);
+    }
+
+    public String getTasksRemainingSequence(int numOFTaskRemaining){
+        String output = "\n     Now you have " +
+                numOFTaskRemaining + " tasks in the list.\n" + underscore;
+        return output;
+    }
 
 }

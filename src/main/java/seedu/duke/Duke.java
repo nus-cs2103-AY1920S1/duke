@@ -18,7 +18,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private final String underscore = "    ____________________________________________________________" + "\n" ;
 
     public Duke(String filePath){
         ui = new Ui();
@@ -50,23 +49,18 @@ public class Duke {
 
                      ui.printList(tasks);
 
-                    // DONE case
                 } else if (taskType.equals(possibleTasks.DONE.toString().toLowerCase())) {
+                    // DONE case
 
-                    //taskNum = Integer.parseInt(inputLine.substring(5)); // NTS: check for index outofbounds
                     taskNum = Parser.getFinishedTaskNum(inputLine);
                     taskNum--; // ArrayList index == taskNum - 1
 
                     tasks.getTask(taskNum).setDone();
 
-                    output = underscore + "     Nice! I've marked this task as done:\n" +
-                           "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName() +
-                           "\n" + underscore;
+                    ui.printDoneSequence(tasks, taskNum);
 
-                    System.out.println(output);
-
-                    // TODO case
                 } else if (taskType.equals(possibleTasks.TODO.toString().toLowerCase())) {
+                    // TODO case
 
                     if (inputLine.length() < 5){
                         throw new DukeException ("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -78,11 +72,7 @@ public class Duke {
 
                     tasks.addTask(newTodo);
 
-                    output = underscore + "     Got it. I've added this task:\n       "
-                            + newTodo.toString() + "\n     Now you have " +
-                            tasks.getSize() + " tasks in the list.\n" + underscore;
-
-                    System.out.println(output);
+                    ui.printTodoSequence(tasks, newTodo);
 
                     // DEADLINE case
                 } else if (taskType.equals(possibleTasks.DEADLINE.toString().toLowerCase())) {
@@ -100,12 +90,7 @@ public class Duke {
 
                     tasks.addTask(newDeadline);
 
-                    output = underscore + "     Got it. I've added this task:\n       "
-                            + newDeadline.toString() + "\n     Now you have " +
-                            tasks.getSize() + " tasks in the list.\n" + underscore;
-
-
-                    System.out.println(output);
+                    ui.printDeadlineSequence(tasks, newDeadline);
 
                     // EVENT case
                 } else if (taskType.equals(possibleTasks.EVENT.toString().toLowerCase())) {
@@ -123,12 +108,7 @@ public class Duke {
 
                     tasks.addTask(newEvent);
 
-                    output = underscore + "     Got it. I've added this task:\n       "
-                            + newEvent.toString() + "\n     Now you have " +
-                            tasks.getSize() + " tasks in the list.\n" + underscore;
-
-
-                    System.out.println(output);
+                    ui.printEventSequence(tasks, newEvent);
 
                     // DELETE case
                 } else if (taskType.equals(possibleTasks.DELETE.toString().toLowerCase())){
@@ -144,23 +124,18 @@ public class Duke {
                     Task taskToDelete = tasks.getTask(taskNum);
                     tasks.deleteTask(taskNum);
 
-                    output = underscore + "     Noted. I've removed this task.\n       " +
-                            taskToDelete.toString() + "\n     Now you have " +
-                            tasks.getSize() + " tasks in the list.\n" + underscore;
-
-                    System.out.println(output);
+                    ui.printDeleteSequence(tasks, taskToDelete);
                     taskToDelete = null;
 
                     //BYE case
                 } else if (taskType.equals(possibleTasks.BYE.toString().toLowerCase())){
 
-                    // Prints goodbye sequence
-                    output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
-                    System.out.print(output);
+                    ui.printByeSequence();
 
-                    // Saves the task arraylist to the txt file
+                    // Clear the txt file and adds headers
                     storage.clearFileBeforeSaving();
 
+                    // Saves the task list to the file, following the pre-defined format
                     for (int i = 0; i < tasks.getSize(); i++){
                         storage.writeToFile(tasks.getTask(i).toSaveString());
                     }

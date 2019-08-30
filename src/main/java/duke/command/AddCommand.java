@@ -19,8 +19,8 @@ public class AddCommand extends Command {
     /**
      * Added new task to task list, perform Ui display and save to hard disk
      *
-     * @param list  List containing all tasks.
-     * @param ui Ui interface of duke.
+     * @param list    List containing all tasks.
+     * @param ui      Ui interface of duke.
      * @param storage Storage interface.
      */
     @Override
@@ -31,8 +31,7 @@ public class AddCommand extends Command {
 
         storage.save(list.printList());
 
-        ui.showAddedTask(temp.getFirstCharTask(),
-                temp.getIsDone(), temp.getTaskDescription(), list.getTaskCount());
+        ui.showAddedTask(temp.getFirstCharTask(),temp.getIsDone(), temp.getTaskDescription(), list.getTaskCount());
     }
 
     /**

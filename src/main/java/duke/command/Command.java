@@ -26,8 +26,11 @@ public abstract class Command {
             throw new NullPointerException();
         }
 
-        if (pendingTask == null) throw new NullPointerException();
-        else this.pendingTask = pendingTask;
+        if (pendingTask == null) {
+            throw new NullPointerException();
+        } else {
+            this.pendingTask = pendingTask;
+        }
     }
 
     /**

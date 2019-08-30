@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A simple sub-class of Task in which there is
  * no given time period or deadline by which

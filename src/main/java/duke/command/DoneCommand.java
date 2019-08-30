@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
     private int taskId;
 

@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.DateTime;
+
 /**
  * A sub-class of Task that adds a time
  * by which the task must be completed by.

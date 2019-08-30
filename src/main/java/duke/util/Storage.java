@@ -1,3 +1,9 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
+import java.io.FileNotFoundException;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -7,7 +13,7 @@ import java.io.IOException;
 
 public class Storage {
     // static attributes
-    final static private String DEFAULT_SAVE_PATH = "../saved/savestate.tmp";
+    final static private String DEFAULT_SAVE_PATH = "./saved_lists/savestate.tmp";
 
     // object attributes
     private File file;
@@ -28,8 +34,9 @@ public class Storage {
             list = (TaskList) ois.readObject();
             ois.close();
         } catch (IOException e) {
-            System.out.println(e);
-            ; // no action needs to be done here, return value will indicate failure
+            throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
+                    + "to the disk!\n"
+                    + "Any changes might not be saved ):");
         } catch (ClassNotFoundException e) {
             throw new DukeException("I'm sorry, I couldn't decipher the saved list.\n"
                     + "It seems to be corrupted...\n"

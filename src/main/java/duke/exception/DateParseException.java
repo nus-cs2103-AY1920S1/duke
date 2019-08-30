@@ -1,3 +1,5 @@
+package duke.exception;
+
 import java.text.ParseException;
 
 /** Custom sub-class of ParseException to denote a

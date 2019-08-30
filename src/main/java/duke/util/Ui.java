@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -89,7 +93,7 @@ public class Ui {
 
     public void showLoadingError(DukeException e) {
         this.showLine();
-        this.displayMessage("I'm couldn't find a saved task list...\n"
+        this.displayMessage("I couldn't find a saved task list...\n"
                 + "Let me start up a brand new list!");
         this.showLine();
     }

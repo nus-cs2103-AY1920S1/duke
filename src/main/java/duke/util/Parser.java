@@ -1,3 +1,15 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+
 import java.text.ParseException;
 
 public class Parser {
@@ -32,7 +44,7 @@ public class Parser {
             return new DoneCommand(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I'm not psychic! You need"
-                    + " to tell me the id of the task\n"
+                    + " to tell me the ID of the task\n"
                     + "you're done with!");
         } catch (NumberFormatException e) {
             throw new DukeException("You need to provide me "
@@ -47,7 +59,7 @@ public class Parser {
             return new DeleteCommand(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I'm not psychic! You need"
-                    + " to tell me the id of the task\n"
+                    + " to tell me the ID of the task\n"
                     + "you want to delete!");
         } catch (NumberFormatException e) {
             throw new DukeException("You need to provide me "

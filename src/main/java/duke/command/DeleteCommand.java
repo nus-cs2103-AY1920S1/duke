@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     private int taskId;
 
@@ -9,7 +14,7 @@ public class DeleteCommand extends Command {
         Task task = this.taskList.delete(taskId);
         this.ui.displaySingleLine("Noted. I've removed this task:");
         this.ui.displayMessage(task.toString(), 2);
-        this.ui.displaySingleLine("\nNow you have "
+        this.ui.displaySingleLine("Now you have "
                 + this.taskList.getSize()
                 + " task(s) in the list.");
         this.storage.saveToDisk(this.taskList);

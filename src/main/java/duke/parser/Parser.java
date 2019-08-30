@@ -61,7 +61,6 @@ public class Parser  {
                         for (int i = 1; i < argumentArray.length; i++) {
                             toDoTaskString += argumentArray[i];
                             toDoTaskString += " ";
-
                         }
                         //.trim() to remove trailing space
 

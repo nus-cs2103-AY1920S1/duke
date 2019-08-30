@@ -4,6 +4,10 @@ import commands.Command;
 
 import java.util.Scanner;
 
+/**
+ * Driver Class for Program
+ */
+
 public class Duke {
     private Scanner sc = new Scanner(System.in);
     private String taskListPath;
@@ -18,8 +22,12 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Continuously scans for User Input, Creates Command Objects and execute accordingly
+     */
     void start() {
         ui.greet();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             try {
@@ -31,7 +39,7 @@ public class Duke {
         }
     }
 
-    public static void main (String args[]) throws DukeException {
+    public static void main(String args[]) throws DukeException {
         Duke duke = new Duke("./src/main/data/taskList.txt");
         duke.start();
     }

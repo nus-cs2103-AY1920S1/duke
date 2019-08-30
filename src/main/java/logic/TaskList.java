@@ -18,6 +18,11 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Adds Tasks to Task List
+     *
+     * @param task Task Obj to be added
+     */
     public void addTask(Task task) {
         taskList.add(task);
         StringBuilder sb = new StringBuilder();
@@ -27,6 +32,12 @@ public class TaskList {
         Ui.printStr(sb.toString());
     }
 
+    /**
+     * Task to be marked as done
+     *
+     * @param taskNumStr String to be parsed as int
+     * @throws DukeException If cannot parse string to int
+     */
     public void markTask(String taskNumStr) throws DukeException { //mark as done. Need to check if already done, and if so throw exception
         int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();
@@ -37,6 +48,12 @@ public class TaskList {
         Ui.printStr(sb.toString());
     }
 
+    /**
+     * Task to be deleted from list of tasks
+     *
+     * @param taskNumStr String to be parsed as int
+     * @throws DukeException If cannot parse string to int
+     */
     public void deleteTask(String taskNumStr) throws DukeException {
         int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();

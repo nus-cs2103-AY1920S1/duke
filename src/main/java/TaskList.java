@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskList {
+
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public enum TaskType {
@@ -20,7 +21,7 @@ public class TaskList {
         } else if (input.startsWith("event")) {
             taskType = TaskType.EVENT;
         }
-
+        // todo: how to create corresponding subclass object based on enum?
         // todo: split description and other info
         tasks.add(new Task(taskDescription));
         System.out.println("added: " + taskDescription);
@@ -28,10 +29,9 @@ public class TaskList {
 
     public void printList() {
         int i = 1;
-        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); ) {
+        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); i++) {
             String s = iterator.next().toString();
             System.out.println(i + ". " + s);
-            i++;
         }
     }
 

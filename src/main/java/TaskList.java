@@ -21,7 +21,7 @@ public class TaskList {
     }
 
     void printList() throws EmptyTaskListException {
-        if (taskList.size() == 0) { // if 'list' is called with no tasks currently stored
+        if (taskList.size() == 0) {
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
         }
         System.out.println("Here are the tasks in your list:");
@@ -31,35 +31,35 @@ public class TaskList {
     }
 
     void markTask(int index) throws DukeException {
-        if (taskList.size() == 0) { // if 'list' is empty, 'done' cannot be called
+        if (taskList.size() == 0) {
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
         }
         try {
             taskList.get(index - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
-        } catch (NumberFormatException e) { // if not a number is entered after 'done'
+        } catch (NumberFormatException e) {
             throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
-        } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'done'
+        } catch (IndexOutOfBoundsException e) {
             throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
         }
     }
 
     void deleteTask(int index) throws DukeException {
-        if (taskList.size() == 0) { // if 'list' is empty, 'delete' cannot be called
+        if (taskList.size() == 0) {
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
         }
         try {
             Task currentTask = taskList.remove(index - 1);
             System.out.println("Noted. I've removed this task:\n  " + currentTask);
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        } catch (NumberFormatException e) { // if not a number is entered after 'delete'
+        } catch (NumberFormatException e) {
             throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
-        } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'delete'
+        } catch (IndexOutOfBoundsException e) {
             throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
         }
     }
 
-    void addTask(Task currentTask) {
+    private void addTask(Task currentTask) {
         taskList.add(currentTask);
         System.out.println("Got it. I've added this task:\n  " + currentTask);
     }

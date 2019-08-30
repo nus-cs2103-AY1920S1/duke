@@ -34,8 +34,9 @@ public class Ui {
     }
 
     void testTimeFormat(String taskDescription) throws IncorrectTaskTimeFormatException {
-        if (!(taskDescription.contains(" /by ") || taskDescription.contains(" /at "))) { // if '/by' and '/at' are absent
-            throw new IncorrectTaskTimeFormatException("OOPS!!! No ' /by ' or ' /at ' detected! Please use the correct format!");
+        if (!(taskDescription.contains(" /by ") || taskDescription.contains(" /at "))) {
+            throw new IncorrectTaskTimeFormatException("OOPS!!! No ' /by ' or ' /at ' detected! "
+                    + "Please use the correct format!");
         }
     }
 }

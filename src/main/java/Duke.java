@@ -19,24 +19,26 @@ public class Duke {
 
     public void run() {
         ui.printHello();
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String input = ui.getNextLine();
                 String instruction = Parser.parseInstruction(input);
-                if (instruction.equals("bye")) { // First, check if 'bye' is called
+                if (instruction.equals("bye")) {
                     ui.printBye();
-                    break;
-                } else if (instruction.equals("list")) { // Then, check if 'list' is called
+                    isExit = true;
+                } else if (instruction.equals("list")) {
                     taskList.printList();
-                } else if (instruction.equals("done")) { // Then, check if task is marked done
+                } else if (instruction.equals("done")) {
                     int index = Parser.parseIndex(input);
                     taskList.markTask(index);
                     storage.writeSavedList(taskList.getList());
-                } else if (instruction.equals("delete")) { // Then, check if task is marked delete
+                } else if (instruction.equals("delete")) {
                     int index = Parser.parseIndex(input);
                     taskList.deleteTask(index);
                     storage.writeSavedList(taskList.getList());
-                } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")) {
+                } else if (instruction.equals("todo") || instruction.equals("deadline")
+                        || instruction.equals("event")) {
                     try {
                         if (instruction.equals("todo")) {
                             String taskDescription = Parser.parseDescription(input, true);
@@ -56,11 +58,11 @@ public class Duke {
                             }
                             storage.writeSavedList(taskList.getList());
                         }
-                    } catch (IndexOutOfBoundsException e) { // if the task description is empty
+                    } catch (IndexOutOfBoundsException e) {
                         throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
                     }
                     ui.printSize(taskList.getSize());
-                } else { // if an invalid instruction is entered
+                } else {
                     throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (IOException | DukeException e) {

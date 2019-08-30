@@ -41,8 +41,19 @@ public class UI {
         System.out.println(Constants.INDENTATION + endingPhrase + "\n" + Constants.HORIZONTAL_LINE);
     }
 
-    public void displayList(ArrayList<Task> tasks) {
-        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + "Here are the tasks in your list:");
+//    public void displayList(ArrayList<Task> tasks) {
+//        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + "Here are the tasks in your list:");
+//        int i = 1;
+//        while( i < tasks.size()) {
+//            System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));
+//            i++;
+//        }
+//        System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));
+//        System.out.println(Constants.HORIZONTAL_LINE);
+//    }
+
+    public void displayList(ArrayList<Task> tasks, String startPhrase) {
+        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + startPhrase);
         int i = 1;
         while( i < tasks.size()) {
             System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));

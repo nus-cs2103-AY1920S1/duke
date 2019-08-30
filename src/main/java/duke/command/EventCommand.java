@@ -8,6 +8,8 @@ import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 
+import static duke.ui.Messages.EVENT_MISSING_TIME;
+
 public class EventCommand extends AddCommandWithTime {
     public EventCommand(final String description, final LocalDateTime time) {
         super(description, time);
@@ -17,7 +19,7 @@ public class EventCommand extends AddCommandWithTime {
     protected void check(final TaskList tasks) throws DukeException {
         super.check(tasks);
         if (this.time == null) {
-            throw new DukeException("Event time cannot be empty");
+            throw new DukeException(EVENT_MISSING_TIME);
         }
     }
 

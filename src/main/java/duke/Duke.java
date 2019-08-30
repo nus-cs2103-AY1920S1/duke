@@ -29,7 +29,7 @@ public class Duke {
         try {
             tasks = storage.loadTasks();
         } catch (DukeException e) {
-            ui.showWarning("Failed to load tasks from disk. " + e.getMessage());
+            ui.showWarning(e.getMessage());
         }
 
         boolean isExit = false;

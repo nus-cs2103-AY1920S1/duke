@@ -8,6 +8,8 @@ import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 
+import static duke.ui.Messages.DEADLINE_MISSING_TIME;
+
 public class DeadlineCommand extends AddCommandWithTime {
     public DeadlineCommand(final String description, final LocalDateTime time) {
         super(description, time);
@@ -17,7 +19,7 @@ public class DeadlineCommand extends AddCommandWithTime {
     protected void check(final TaskList tasks) throws DukeException {
         super.check(tasks);
         if (this.time == null) {
-            throw new DukeException("Deadline cannot be empty");
+            throw new DukeException(DEADLINE_MISSING_TIME);
         }
     }
 

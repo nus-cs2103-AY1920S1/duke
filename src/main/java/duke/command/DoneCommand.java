@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import static duke.ui.Messages.TASK_ALREADY_DONE;
+import static duke.ui.Messages.TASK_MARKED_AS_DONE;
+
 public class DoneCommand extends CommandWithNumber {
     public DoneCommand(final Integer taskNumber) {
         super(taskNumber);
@@ -16,11 +19,11 @@ public class DoneCommand extends CommandWithNumber {
         check(tasks);
         Task task = tasks.getTask(this.taskNumber);
         if (task.isDone()) {
-            ui.showMessage("This task is already done");
+            ui.showMessage(TASK_ALREADY_DONE);
         } else {
             task.markAsDone();
             storage.writeTasks(tasks);
-            ui.showMessage("Nice! I've marked this duke.task as done:");
+            ui.showMessage(TASK_MARKED_AS_DONE);
             ui.showIndented(task.toString());
         }
     }

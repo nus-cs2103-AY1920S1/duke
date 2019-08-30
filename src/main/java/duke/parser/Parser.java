@@ -66,9 +66,9 @@ public class Parser {
                 return new DeadlineCommand(toks[0], toks.length == 1 ? null : parseDateTime(toks[1]));
             }
             case "done":
-                return new DoneCommand(parseTaskNumber(arguments));
+                return new DoneCommand(arguments.isBlank() ? null : parseTaskNumber(arguments));
             case "delete":
-                return new DeleteCommand(parseTaskNumber(arguments));
+                return new DeleteCommand(arguments.isBlank() ? null : parseTaskNumber(arguments));
             case "find":
                 return new FindCommand(arguments.isBlank() ? null : arguments.split("\\s+"));
             default:

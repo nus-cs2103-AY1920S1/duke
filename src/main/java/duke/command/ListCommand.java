@@ -5,18 +5,21 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import static duke.ui.Messages.LIST_NO_TASKS;
+import static duke.ui.Messages.LIST_TASKS;
+
 public class ListCommand extends Command {
     @Override
-    protected void check(TaskList tasks) throws DukeException {
+    protected void check(TaskList tasks) {
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         check(tasks);
         if (tasks.size() == 0) {
-            ui.showMessage("There are currently no tasks in your list");
+            ui.showMessage(LIST_NO_TASKS);
         } else {
-            ui.showMessage("Here are the tasks in your list:");
+            ui.showMessage(LIST_TASKS);
             ui.showIndented(tasks.toString().split("\\n"));
         }
     }

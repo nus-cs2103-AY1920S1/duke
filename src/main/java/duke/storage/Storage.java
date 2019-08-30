@@ -13,9 +13,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import static duke.task.Task.DATE_TIME_FORMATTER;
+import static duke.ui.Messages.LOAD_TASK_FILE_CORRUPTED;
+import static duke.ui.Messages.WRITE_TASK_FAILED;
 
 public class Storage {
     private File file;
@@ -37,47 +40,47 @@ public class Storage {
      * Loads tasks from the data file.
      *
      * @return tasks loaded from the date file
-     * @throws DukeException if data file is not found
+     * @throws DukeException if an parsing error occurs
      */
     public TaskList loadTasks() throws DukeException {
         TaskList tasks = new TaskList();
-        if (!this.file.isFile()) {
-            return tasks;
-        }
-
         Scanner scanner;
         try {
             scanner = new Scanner(this.file);
         } catch (FileNotFoundException e) {
-            // Should not reach here
-            throw new DukeException("Cannot find data file.");
+            return tasks;
         }
 
-        while (scanner.hasNextLine()) {
-            String[] tokens = scanner.nextLine().split(" \\| ");
-            String type = tokens[0];
-            boolean isDone = !tokens[1].equals("0");
-            String description = tokens[2];
-            Task task;
-            switch (type) {
-                case "T": {
-                    task = new Todo(description, isDone);
-                    break;
+        try {
+            while (scanner.hasNextLine()) {
+                String[] tokens = scanner.nextLine().split(" \\| ");
+                String type = tokens[0];
+                boolean isDone = !tokens[1].equals("0");
+                String description = tokens[2];
+
+                Task task;
+                switch (type) {
+                    case "T": {
+                        task = new Todo(description, isDone);
+                        break;
+                    }
+                    case "D": {
+                        LocalDateTime by = LocalDateTime.parse(tokens[3], DATE_TIME_FORMATTER);
+                        task = new Deadline(description, by, isDone);
+                        break;
+                    }
+                    case "E": {
+                        LocalDateTime at = LocalDateTime.parse(tokens[3], DATE_TIME_FORMATTER);
+                        task = new Event(description, at, isDone);
+                        break;
+                    }
+                    default:
+                        throw new DukeException(LOAD_TASK_FILE_CORRUPTED);
                 }
-                case "D": {
-                    LocalDateTime by = LocalDateTime.parse(tokens[3], DATE_TIME_FORMATTER);
-                    task = new Deadline(description, by, isDone);
-                    break;
-                }
-                case "E": {
-                    LocalDateTime at = LocalDateTime.parse(tokens[3], DATE_TIME_FORMATTER);
-                    task = new Event(description, at, isDone);
-                    break;
-                }
-                default:
-                    throw new DukeException("Data file is corrupted.");
+                tasks.addTask(task);
             }
-            tasks.addTask(task);
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+            throw new DukeException(LOAD_TASK_FILE_CORRUPTED);
         }
         scanner.close();
         return tasks;
@@ -95,7 +98,7 @@ public class Storage {
             writer.write(tasks.toStorageString());
             writer.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to update duke.task list on disk. " + e.getMessage());
+            throw new DukeException(WRITE_TASK_FAILED + e.getMessage());
         }
     }
 

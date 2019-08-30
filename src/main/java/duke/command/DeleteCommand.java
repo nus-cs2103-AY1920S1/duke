@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import static duke.ui.Messages.TASKS_COUNT;
+import static duke.ui.Messages.TASK_DELETED;
+
 public class DeleteCommand extends CommandWithNumber {
     public DeleteCommand(final Integer taskNumber) {
         super(taskNumber);
@@ -16,8 +19,8 @@ public class DeleteCommand extends CommandWithNumber {
         check(tasks);
         Task task = tasks.deleteTask(this.taskNumber);
         storage.writeTasks(tasks);
-        ui.showMessage("Noted. I've removed this duke.task:");
+        ui.showMessage(TASK_DELETED);
         ui.showIndented(task.toString());
-        ui.showMessage("Now you have " + tasks.size() + " tasks in the list");
+        ui.showMessage(String.format(TASKS_COUNT, tasks.size()));
     }
 }

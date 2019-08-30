@@ -5,11 +5,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String LOGO = " ____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO =
+        " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String SEPARATOR = "-".repeat(60);
     private static final String INDENTATION = "  ";
     private Scanner input;

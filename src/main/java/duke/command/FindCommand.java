@@ -6,6 +6,10 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import static duke.ui.Messages.FIND_TASKS;
+import static duke.ui.Messages.FIND_MISSING_QUERY;
+import static duke.ui.Messages.FIND_NO_TASKS;
+
 public class FindCommand extends Command {
     private String[] queries;
 
@@ -16,7 +20,7 @@ public class FindCommand extends Command {
     @Override
     protected void check(TaskList tasks) throws DukeException {
         if (queries == null || queries.length == 0) {
-            throw new DukeException("Find query cannot be empty");
+            throw new DukeException(FIND_MISSING_QUERY);
         }
     }
 
@@ -34,9 +38,9 @@ public class FindCommand extends Command {
             }
         }
         if (matches.size() == 0) {
-            ui.showMessage("There are no matching tasks in your list");
+            ui.showMessage(FIND_NO_TASKS);
         } else {
-            ui.showMessage("Here are the matching tasks in your list:");
+            ui.showMessage(FIND_TASKS);
             ui.showIndented(matches.toString().split("\\n"));
         }
     }

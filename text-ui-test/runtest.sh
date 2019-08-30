@@ -16,7 +16,8 @@ if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java; then
     exit 1
 fi
 
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+# clear the duke data file, run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+echo -n > ../data/duke.txt
 java -classpath ../bin duke.Duke < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output

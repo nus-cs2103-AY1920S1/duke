@@ -1,10 +1,47 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final ArrayList<Task> TASKS = new ArrayList<>();
+    private static final List<Task> TASKS = new ArrayList<>();
+
+    private static void loadData() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(
+                "/home/niclausliu/CS/Java/CS2103/duke/data/duke.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] task = line.split("|");
+            switch (task[0]) {
+            case "T":
+                TASKS.add(new Todo(task[2], Boolean.parseBoolean(task[1])));
+                break;
+            case "D":
+                TASKS.add(new Deadline(task[2], Boolean.parseBoolean(task[1]), task[3]));
+                break;
+            case "E":
+                TASKS.add(new Event(task[2], Boolean.parseBoolean(task[1]), task[3]));
+                break;
+            default:
+                throw new IOException("Data file is corrupted");
+            }
+        }
+    }
+
+    private static void saveData() throws IOException {
+        FileWriter fileWriter = new FileWriter("/home/niclausliu/CS/Java/CS2103/duke/data/duke.txt");
+        for (Task task: TASKS) {
+            fileWriter.write(task.toSaveFormat());
+        }
+        fileWriter.flush();
+        fileWriter.close();
+    }
 
     private static void handleList() {
         if (TASKS.size() == 0) {
@@ -24,6 +61,9 @@ public class Duke {
             task.markAsDone();
             System.out.println("     Nice! I've marked this task as done: ");
             System.out.printf("       %s\n", task);
+            saveData();
+        } catch (IOException e) {
+            throw new DukeException("Oops! The task is not updated.");
         } catch (Exception e) {
             throw new DukeException("Oops! Please enter a valid task number.");
         }
@@ -34,9 +74,12 @@ public class Duke {
             String[] input = line.split(" ");
             Task task = TASKS.get(Integer.parseInt(input[1]) - 1);
             TASKS.remove(task);
+            saveData();
             System.out.println("     Noted. I've removed this task: ");
             System.out.printf("       %s\n", task);
             System.out.printf("     Now you have %d tasks in the list.\n", TASKS.size());
+        } catch (IOException e) {
+            throw new DukeException("Oops! The task is not deleted.");
         } catch (Exception e) {
             throw new DukeException("Oops! Please enter a valid task number.");
         }
@@ -57,6 +100,11 @@ public class Duke {
         System.out.println("     Got it. I've added this task: ");
         System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list.\n", TASKS.size());
+        try {
+            saveData();
+        } catch (IOException e) {
+            throw new DukeException("Oops! The task is not added.");
+        }
     }
 
     private static void handleDeadLine(String line) throws DukeException {
@@ -88,6 +136,11 @@ public class Duke {
         System.out.println("     Got it. I've added this task: ");
         System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list.\n", TASKS.size());
+        try {
+            saveData();
+        } catch (IOException e) {
+            throw new DukeException("Oops! The task is not added.");
+        }
     }
 
     private static void handleEvent(String line) throws DukeException {
@@ -119,6 +172,11 @@ public class Duke {
         System.out.println("     Got it. I've added this task: ");
         System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list.\n", TASKS.size());
+        try {
+            saveData();
+        } catch (IOException e) {
+            throw new DukeException("Oops! The task is not added.");
+        }
     }
 
     private static void handleException() {
@@ -128,15 +186,16 @@ public class Duke {
     /**
      * Main method of duke project.
      */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
 
+        loadData();
         String greeting = "     Hello! I'm Duke\n"
                 + "     What can I do for you?";
         System.out.println(greeting);
 
-        while (sc.hasNext()) {
-            String line = sc.nextLine();
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
             if (line.equals("bye")) {
                 System.out.println("     Bye. Hope to see you again soon!");
                 break;

@@ -8,6 +8,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -22,6 +24,8 @@ import duke.ui.Ui;
  */
 public class Duke extends Application {
 
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
      *  Represents the scroll pane for the application.
      */
@@ -167,13 +171,11 @@ public class Duke extends Application {
 
         // Set Handling of User Input
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         // Ensures scrolling to the end
@@ -191,6 +193,30 @@ public class Duke extends Application {
         textReceived.setWrapText(true);
 
         return textReceived;
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply.
+     * Follwong which, appends them to the dialog container.
+     * Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(returnResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     *  Takes in a input and returns a response which duke says.
+     * @param input the input received from the user.
+     * @return a response in the form of a String.
+     */
+    private String returnResponse(String input) {
+        return "Duke says again: " + input;
     }
 
 }

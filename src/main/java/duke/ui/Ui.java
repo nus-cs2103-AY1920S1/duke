@@ -114,7 +114,12 @@ public class Ui {
      */
     public void listTasks() {
         sendLine();
-        sendMessage("Here are the tasks in your list:");
+        if (TaskList.getNumberOfTasks() ==  0) {
+            sendMessage(" You have no tasks in the list!" );
+        } else {
+            sendMessage("Here are the tasks in your list:");
+        }
+
         for (int tasknum = 0; tasknum < TaskList.getNumberOfTasks(); tasknum++) {
             Task task = TaskList.getTask(tasknum);
             String todo = task.toString();

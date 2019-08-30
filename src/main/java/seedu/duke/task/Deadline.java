@@ -2,42 +2,42 @@ package seedu.duke.task;
 
 public class Deadline extends Task {
 
-    protected String by; // hour;
+    protected String dateTime; // hour;
     // protected int day, month, year;
 
-    public Deadline(String description, String by) { //sets idDone to the default value, false
+    public Deadline(String description, String dateTime) { //sets idDone to the default value, false
         // by = 2/12/2019 1800
         // deadline cs /by 21/12/2019 0800
         super(description);
-        this.by = by;
+        this.dateTime = dateTime;
 
-        if (!by.contains("of")) { // If string by contains the word "of", by string is already formatted
+        if (!dateTime.contains("of")) { // If string by contains the word "of", by string is already formatted
                                  // For use when reading from saved file
-            this.by = parseBy(by);
+            this.dateTime = parseBy(dateTime);
         }
 
     }
 
-    public Deadline(String description, String by, Boolean isDone) {
+    public Deadline(String description, String dateTime, Boolean isDone) {
         // by = 2/12/2019 1800
         // deadline cs /by 21/12/2019 0800
         super(description, isDone);
-        this.by = by;
+        this.dateTime = dateTime;
 
-        if (!by.contains("of")) { // If string by contains the word "of", by string is already formatted
+        if (!dateTime.contains("of")) { // If string by contains the word "of", by string is already formatted
             // For use when reading from saved file
-            this.by = parseBy(by);
+            this.dateTime = parseBy(dateTime);
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + dateTime + ")";
     }
 
     @Override
     public String toSaveString(){
-        return ("D" + super.toSaveString() + " | " + this.by);
+        return ("D" + super.toSaveString() + " | " + this.dateTime);
     }
 
     public String parseBy(String by){

@@ -1,8 +1,8 @@
 package seedu.duke.parser;
 
 public class Parser {
-    public Parser (){
 
+    public Parser (){
     }
 
     public static String parseCommand(String fullCommand){
@@ -28,6 +28,5 @@ public class Parser {
     public static String getEventLocation(String fullCommand){
         return ( fullCommand.substring(4 + fullCommand.lastIndexOf('/')) );
     }
-
 
 }

@@ -2,28 +2,28 @@ package seedu.duke.task;
 
 public class Event extends Task {
 
-    protected String at;
+    protected String location;
 
-    public Event (String description, String at){
+    public Event (String description, String location){
         super(description);
-        this.at = at;
+        this.location = location;
         taskType = possibleTaskTypes.EVENT;
     }
 
-    public Event(String description, String at, Boolean isDone){
+    public Event(String description, String location, Boolean isDone){
         super(description, isDone);
-        this.at = at;
+        this.location = location;
         taskType = possibleTaskTypes.EVENT;
     }
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + location + ")";
     }
 
     @Override
     public String toSaveString(){
-        return ( "E" + super.toSaveString() + " | " + this.at );
+        return ( "E" + super.toSaveString() + " | " + this.location);
     }
 
 }

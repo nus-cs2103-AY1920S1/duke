@@ -5,6 +5,13 @@ import seedu.duke.exceptions.DukeException;
 
 public class Parser {
 
+    /**
+     * Parses commands from the user. Transfers the line into logic that will be executed by the commands.
+     *
+     * @param input String input from the user.
+     * @return Command corresponding to the first word in user input.
+     * @throws DukeException Throws if user does not input any existing keyword.
+     */
     public static Command parse(String input) throws DukeException {
         String[] keywords = input.split(" ");
         try {
@@ -41,6 +48,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the todo command to see if it has a valid input.
+     *
+     * @param keywords String array consisting of "todo" as entry 0 and the rest of the message for the rest.
+     * @return A string consisting of the original input string but without "todo".
+     * @throws DukeException Throws if user did not supply a description for Todo.
+     */
     public static String parseTodo(String[] keywords) throws DukeException {
         if (keywords.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -50,6 +64,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses commands that have both a description and time.
+     *
+     * @param keywords String array consisting of "deadline" or "event" as entry 0 and
+     *                 the rest of the message for the rest of the array with a separator
+     *                 for the time and date.
+     * @param dateTimeType Either "deadline" or "event" to determine the separator to look out for.
+     * @return A string array with the description of the task in entry 0 and the time in entry 1.
+     * @throws DukeException Throws if either the description is empty or there is no separator.
+     */
     public static String[] parseTaskTime(String[] keywords, String dateTimeType) throws DukeException {
         if (keywords.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a " + dateTimeType + " cannot be empty.");

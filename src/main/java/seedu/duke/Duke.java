@@ -9,12 +9,21 @@ import seedu.duke.util.UI;
 
 import java.util.Scanner;
 
+/**
+ * Main class to drive the Duke application.
+ */
 public class Duke {
     private UI ui;
     private Storage storageHandler;
     private TaskList taskList;
     private static final String savedPath = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
 
+
+    /**
+     * Main constructor for Duke that specifies the path of the save file.
+     *
+     * @param savedPath Path of the duke.txt file used to store information.
+     */
     public Duke(String savedPath) {
         ui = new UI();
         storageHandler = new Storage(savedPath);
@@ -26,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main logic of the application.
+     */
     public void run() {
         ui.greet();
 
@@ -44,6 +56,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Public static void main method.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke(savedPath).run();
     }

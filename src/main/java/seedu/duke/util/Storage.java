@@ -13,16 +13,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to handle the saving and loading of data to a specified text file.
+ */
 public class Storage {
     private ArrayList<Task> taskList = new ArrayList<Task>();
     private File file;
     private Scanner fileReader;
     private FileWriter writer;
 
+    /**
+     * Constructor to handle saving and loading takes in a path to create the file to operate on.
+     *
+     * @param savedPath Path of the text file in local storage.
+     */
     public Storage(String savedPath) {
         file = new File(savedPath);
     }
 
+    /**
+     * Method to load from the text file.
+     *
+     * @return Returns the ArrayList for use in the TaskList class.
+     * @throws DukeException Throws if there is no file.
+     */
     public ArrayList<Task> loadFromFile() throws DukeException {
         try {
             fileReader = new Scanner(file);
@@ -103,6 +117,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to write to the text file.
+     *
+     * @param taskList The TaskList to write into the file.
+     * @throws IOException Throws if FileWriter takes in an invalid file.
+     */
     public void writeToFile(TaskList taskList) throws IOException {
         writer = new FileWriter(file);
         ArrayList<Task> tempList = taskList.getTaskList();

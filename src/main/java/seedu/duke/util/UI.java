@@ -26,26 +26,45 @@ public class UI {
     private static final String NOW_YOU_HAVE = "Now you have ";
     private static final String TASK_WRAPPER_LOWER = " tasks in the list.\n" + LOWER_BORDER;
 
-    public UI() {
-
-    }
-
+    /**
+     * Prints out a welcome message.
+     */
     public void greet() {
         System.out.println(WELCOME_MESSAGE);
     }
 
+    /**
+     * Prints out an error if file cannot be loaded.
+     */
     public void cannotLoad() {
         System.out.println(ERROR_CANNOT_LOAD);
     }
 
+    /**
+     * Displays the TaskList in order of addition.
+     *
+     * @param taskList TaskList to print out.
+     */
     public void showTaskList(TaskList taskList) {
         System.out.println(UPPER_BORDER + taskList + LOWER_BORDER);
     }
 
+    /**
+     * Lets the user know that a task has been marked done.
+     *
+     * @param task Task to be marked done.
+     */
     public void showDone(Task task) {
         System.out.println(UPPER_BORDER + DONE + task + "\n" + LOWER_BORDER);
     }
 
+    /**
+     * Displays the Task that was operated on, other than done.
+     *
+     * @param task Task that was operated on
+     * @param taskList TaskList of the Task that was operated on.
+     * @param isAdd Type of operation that was done.
+     */
     public void operateTask(Task task, TaskList taskList, boolean isAdd) {
         if (isAdd) {
             System.out.println(TASK_WRAPPER_UPPER + task + "\n" + NOW_YOU_HAVE + taskList.getTaskListSize()
@@ -56,11 +75,18 @@ public class UI {
         }
     }
 
+    /**
+     * Show error to the user.
+     *
+     * @param e Error to be shown.
+     */
     public void showError(String e) {
         System.out.println(UPPER_BORDER + e + LOWER_BORDER);
     }
 
-
+    /**
+     * Prints bye message.
+     */
     public void bye() {
         System.out.println(BYE);
     }

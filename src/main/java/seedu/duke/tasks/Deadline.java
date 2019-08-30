@@ -6,6 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Task that includes a description and a deadline to complete the task.
+ */
 public class Deadline extends Task {
 
     protected Date by;
@@ -13,6 +16,13 @@ public class Deadline extends Task {
     protected static final String dateFormat = "dd/MM/yyyy HHmm";
     protected SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
+    /**
+     * Constructor that specifies the description and the deadline.
+     *
+     * @param description Description of the task.
+     * @param dateInString Deadline of the task in the same format as "dd/mm/yyyy hhmm".
+     * @throws DukeException Throws if the date and time are not in the format described above.
+     */
     public Deadline(String description, String dateInString) throws DukeException {
         super(description);
         this.dateInString = dateInString;

@@ -8,14 +8,33 @@ import seedu.duke.util.UI;
 
 import java.io.IOException;
 
+/**
+ * Command to add an Event task to the TaskList class.
+ */
 public class EventCommand extends Command {
 
     private Event eventToAdd;
 
+    /**
+     * Constructor that primes the event to be added to TaskList.
+     *
+     * @param description Description of event.
+     * @param dateTime Date and time of event.
+     * @throws DukeException Throws if dateTime is not of the valid format.
+     */
     public EventCommand(String description, String dateTime) throws DukeException {
         eventToAdd = new Event(description, dateTime);
     }
 
+    /**
+     * Adds the event to the TaskList, inform the user that it has been done and writes the new change
+     * to the text file.
+     *
+     * @param tasks TaskList of tasks to add the event to.
+     * @param ui UI to display that event has been added.
+     * @param storage Storage to write files.
+     * @throws DukeException Throws if storage cannot find the file to write to.
+     */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         tasks.addToList(eventToAdd);

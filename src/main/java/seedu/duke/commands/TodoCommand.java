@@ -8,14 +8,31 @@ import seedu.duke.util.UI;
 
 import java.io.IOException;
 
+/**
+ * Command to add an Event task to the TaskList class.
+ */
 public class TodoCommand extends Command {
 
     private Todo todoToAdd;
 
+    /**
+     * Constructor that primes the todo to be added to TaskList.
+     *
+     * @param description Description of todo.
+     */
     public TodoCommand(String description) {
         todoToAdd = new Todo(description);
     }
 
+    /**
+     * Adds the todo to the TaskList, inform the user that it has been done and writes the
+     * new change to the text file.
+     *
+     * @param tasks TaskList of tasks to be operated on.
+     * @param ui UI to display messages to the user.
+     * @param storage Storage to write or read files if applicable.
+     * @throws DukeException Throws if storage cannot find the file to write to.
+     */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         tasks.addToList(todoToAdd);

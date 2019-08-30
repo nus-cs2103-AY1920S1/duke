@@ -8,14 +8,33 @@ import seedu.duke.util.UI;
 
 import java.io.IOException;
 
+/**
+ * Command to add a Deadline task to the TaskList class.
+ */
 public class DeadlineCommand extends Command {
 
     private Deadline deadlineToAdd;
 
+    /**
+     * Constructor that primes the deadline to be added to TaskList.
+     *
+     * @param description Description of deadline.
+     * @param dateTime Date and time of deadline.
+     * @throws DukeException Throws if dateTime is not of the valid format.
+     */
     public DeadlineCommand(String description, String dateTime) throws DukeException {
         deadlineToAdd = new Deadline(description, dateTime);
     }
 
+    /**
+     * Adds the deadline to the TaskList, inform the user that it has been done and writes the new change
+     * to the text file.
+     *
+     * @param tasks TaskList of tasks to add the deadline to.
+     * @param ui UI to display that deadline has been added.
+     * @param storage Storage to write files.
+     * @throws DukeException Throws if storage cannot find the file to write to.
+     */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         tasks.addToList(deadlineToAdd);

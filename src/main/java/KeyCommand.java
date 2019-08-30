@@ -7,8 +7,9 @@ public class KeyCommand extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine("Here are the matching tasks in your list: ");
+    public String execute(TaskList tasks, Storage storage) {
+        String printable = "";
+        printable = "Here are the matching tasks in your list: " + "\n";
         ArrayList<String> resultList = new ArrayList<String>();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -23,8 +24,10 @@ public class KeyCommand extends Command {
         }
 
         for (int i = 0; i < resultList.size(); i++) {
-            ui.showLine(i + 1 + ". " + resultList.get(i));
+            printable += i + 1 + ". " + resultList.get(i) + "\n";
         }
+
+        return printable;
     }
 
     public boolean isExit() {

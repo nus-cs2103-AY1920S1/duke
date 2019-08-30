@@ -16,7 +16,7 @@ public abstract class Command {
      * @param storage stores the added task to the specified file
      * @throws DukeException if task requirements is not met
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Determines whether the program stops running.

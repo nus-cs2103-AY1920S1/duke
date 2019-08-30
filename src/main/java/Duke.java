@@ -88,8 +88,8 @@ public class Duke {
                 ui.markDone(doned);
             } else if (input.equals("delete")) {
                 int taskNum = sc.nextInt();
-                Task deledTask = taskList.delete(taskNum);
-                ui.delTask(deledTask);
+                Task delTask = taskList.delete(taskNum);
+                ui.delTask(delTask);
             } else if (input.equals("find")) { // turn into exception
                 String keyWord = sc.nextLine();
                 ui.find(keyWord);

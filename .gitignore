@@ -18,3 +18,4 @@ bin/
 
 # duke.txt file
 data/duke.txt
+.vscode/settings.json

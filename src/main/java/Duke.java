@@ -1,20 +1,12 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String[] welcomeMessage = {
-        "Hello! I'm",
-        " ____        _        ",
-        "|  _ \\ _   _| | _____ ",
-        "| | | | | | | |/ / _ \\",
-        "| |_| | |_| |   <  __/",
-        "|____/ \\__,_|_|\\_\\___|",
-        "What can I do for you?"
-    };
+    private static Storage storage = new Storage("./data/duke.txt");
+    private static Ui ui = new Ui();
+    private static TaskList taskList = new TaskList(storage, ui);
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        Ui.print(welcomeMessage);
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -23,17 +15,17 @@ public class Duke {
             try {
                 switch (command) {
                 case "bye":
-                    Ui.print("Bye! Hope to see you again soon!");
+                    ui.print("Bye! Hope to see you again soon!");
                     return;
                 case "list":
-                    Task.printList();
+                    taskList.printList();
                     break;
                 case "done":
                     if (inputArr.length <= 1) {
                         throw new DukeException("☹ OOPS! Task number missing!");
                     }
                     try {
-                        Task.doTask(Integer.parseInt(inputArr[1]));
+                        taskList.doTask(Integer.parseInt(inputArr[1]));
                     } catch (NumberFormatException e) {
                         throw new DukeException("☹ OOPS! Task number format invalid!");
                     } catch (IndexOutOfBoundsException e) {
@@ -45,7 +37,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS! Task number missing!");
                     }
                     try {
-                        Task.deleteTask(Integer.parseInt(inputArr[1]));
+                        taskList.deleteTask(Integer.parseInt(inputArr[1]));
                     } catch (NumberFormatException e) {
                         throw new DukeException("☹ OOPS! Task number format invalid!");
                     } catch (IndexOutOfBoundsException e) {
@@ -56,7 +48,7 @@ public class Duke {
                     if (inputArr.length <= 1) {
                         throw new DukeException("☹ OOPS! Todo description missing!");
                     }
-                    Task.addNewTask(new ToDo(inputArr[1]));
+                    taskList.addNewTask(new ToDo(inputArr[1]));
                     break;
                 case "deadline":
                     if (inputArr.length <= 1) {
@@ -70,7 +62,7 @@ public class Duke {
                             throw new DukeException("☹ OOPS! Deadline due date missing!");
                         }
                     }
-                    Task.addNewTask(new Deadline(deadlineInputArr[0], deadlineInputArr[1]));
+                    taskList.addNewTask(new Deadline(deadlineInputArr[0], deadlineInputArr[1]));
                     break;
                 case "event":
                     if (inputArr.length <= 1) {
@@ -84,13 +76,13 @@ public class Duke {
                             throw new DukeException("☹ OOPS! Event timing missing!");
                         }
                     }
-                    Task.addNewTask(new Event(eventInputArr[0], eventInputArr[1]));
+                    taskList.addNewTask(new Event(eventInputArr[0], eventInputArr[1]));
                     break;
                 default:
                     throw new DukeException("☹ OOPS! I can't do it!");
                 }
             } catch (DukeException e) {
-                Ui.print(e.getMessage());
+                ui.print(e.getMessage());
             }
         }
 

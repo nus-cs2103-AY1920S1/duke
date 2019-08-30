@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Storage {
     private File file;
-    
+
     public Storage(String location) {
         this.file = new File(location);
     }
@@ -26,7 +26,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         try {
             Scanner sc = new Scanner(this.file);
             ArrayList<Task> taskList = new ArrayList<Task>();
@@ -53,8 +53,8 @@ public class Storage {
             }
             sc.close();
             return taskList;
-        } catch (DukeException | FileNotFoundException e) {
-            return new ArrayList<Task>();
+        } catch (FileNotFoundException e) {
+            throw new DukeException("☹ OOPS! File not found!");
         }
     }
 

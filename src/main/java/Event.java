@@ -15,6 +15,7 @@ public class Event extends Task {
 
 	/**
 	 * Returns the formatted date and/or time of the event.
+	 *
 	 * @return Formatted string of the date and/or time.
 	 */
 	public String getVenue() {
@@ -25,6 +26,7 @@ public class Event extends Task {
 	/**
 	 * Formats the date and/or time of the event to the
 	 * specified format.
+	 *
 	 * @param time Date/time of the event.
 	 * @return The formatted time/date.
 	 */
@@ -32,17 +34,17 @@ public class Event extends Task {
 		DateAndTime eventDateTime = new DateAndTime();
 		String[] timeAndDate = time.split(" ");
 		String formatDeadline = "";
-		for(int i = 0; i < timeAndDate.length; i++) {
+		for (int i = 0; i < timeAndDate.length; i++) {
 			String[] date = timeAndDate[i].split("/");
-			if(date.length == 3) {
+			if (date.length == 3) {
 				if (i == 0) {
 					formatDeadline += eventDateTime.formatDate(timeAndDate[i] + ", ");
 				} else {
 					formatDeadline += ", " + eventDateTime.formatDate(timeAndDate[i]);
 				}
 
-			} else if(timeAndDate[i].length() == 4) {
-				if( i == 0) {
+			} else if (timeAndDate[i].length() == 4) {
+				if (i == 0) {
 					formatDeadline += eventDateTime.formatTime(timeAndDate[i]);
 				} else {
 					formatDeadline += " " + eventDateTime.formatTime(timeAndDate[i]);
@@ -60,6 +62,7 @@ public class Event extends Task {
 	/**
 	 * Returns a string with the event symbol [E] as well as the
 	 * description and date/time of the event.
+	 *
 	 * @return String of the event and date/time.
 	 */
 	@Override

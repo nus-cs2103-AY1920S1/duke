@@ -6,7 +6,7 @@ public class DukeInvalidArgumentException extends DukeException {
 
 	protected String inputMessage;
 
-	public DukeInvalidArgumentException (String message, String inputMessage) {
+	public DukeInvalidArgumentException(String message, String inputMessage) {
 
 		super(message);
 		this.inputMessage = inputMessage;
@@ -15,6 +15,7 @@ public class DukeInvalidArgumentException extends DukeException {
 	/**
 	 * Returns the exception message together with the
 	 * input the user has entered.
+	 *
 	 * @return String of error message and input by user.
 	 */
 	@Override

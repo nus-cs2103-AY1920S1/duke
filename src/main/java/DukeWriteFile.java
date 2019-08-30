@@ -16,6 +16,7 @@ public class DukeWriteFile {
 
 	/**
 	 * Writes the current task in the list to the text document.
+	 *
 	 * @param textToaAdd Current tasks in the list.
 	 * @throws IOException
 	 */
@@ -28,6 +29,7 @@ public class DukeWriteFile {
 	/**
 	 * Appends new tasks to the text document instead of overwriting
 	 * the current content.
+	 *
 	 * @param textToAppend New task to be appended to the text document.
 	 * @throws IOException
 	 */

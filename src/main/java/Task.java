@@ -16,6 +16,7 @@ public class Task {
 	/**
 	 * Returns a icon to let the user know that
 	 * the tasks has been labelled 'done'.
+	 *
 	 * @return An icon.
 	 */
 	public String getStatusIcon() {
@@ -27,13 +28,14 @@ public class Task {
 	 * Changes the boolean from false to true to mark
 	 * the task as completed.
 	 */
-	public void markAsDone(){
+	public void markAsDone() {
 
 		this.isDone = true;
 	}
 
 	/**
 	 * Returns the description of the task.
+	 *
 	 * @return Description of the task.
 	 */
 	public String getDescription() {
@@ -45,6 +47,7 @@ public class Task {
 	 * Returns an integer 1 or 0 to indicate
 	 * whether the task is completed when the task list is
 	 * being written to a text document.
+	 *
 	 * @return 1 or 0 to indicate completion of task.
 	 */
 	public int getStatus() {
@@ -53,10 +56,11 @@ public class Task {
 
 	/**
 	 * Returns the status icon as well as the description of the task.
+	 *
 	 * @return String of the task.
 	 */
 	@Override
-	public String toString(){
+	public String toString() {
 
 		return "[" + this.getStatusIcon() + "] " + this.description;
 	}

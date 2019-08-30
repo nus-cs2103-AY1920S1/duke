@@ -22,6 +22,7 @@ public class TaskList {
 
 	/**
 	 * Adds the current task to the task list.
+	 *
 	 * @param task Current task.
 	 */
 	public void addTask(Task task) {
@@ -32,9 +33,10 @@ public class TaskList {
 
 	/**
 	 * Deletes the specified task in the task list.
+	 *
 	 * @param index Index of the tasks to be deleted.
 	 */
-	public void deleteTask (int index) {
+	public void deleteTask(int index) {
 
 		tasks.remove(index);
 		counter--;
@@ -42,14 +44,16 @@ public class TaskList {
 
 	/**
 	 * Returns the number of tasks currently in the task list.
+	 *
 	 * @return
 	 */
-	public int getCounter () {
+	public int getCounter() {
 		return counter;
 	}
 
 	/**
 	 * Returns the tasks at the specified index in the task list.
+	 *
 	 * @param index Index of the task to be retrieved.
 	 * @return The task
 	 */
@@ -59,6 +63,7 @@ public class TaskList {
 
 	/**
 	 * Returns the arraylist of tasks.
+	 *
 	 * @return List of task.
 	 */
 	public ArrayList<Task> getTaskList() {

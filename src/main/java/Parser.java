@@ -26,6 +26,7 @@ public class Parser {
 	/**
 	 * Main bullk of the program where evaluation of the input
 	 * by the user takes place.
+	 *
 	 * @param input Input of the tasks of the user.
 	 */
 	public void evaluate(String input) {
@@ -37,9 +38,9 @@ public class Parser {
 			int itemNumber = 1;
 			counter = tasks.getCounter();
 			if (counter == 0) {
-				System.out.println(ui.NOTASK);
+				System.out.println(ui.NO_TASK);
 			} else {
-				System.out.println(ui.OUTPUTTASKLIST);
+				System.out.println(ui.OUTPUT_TASK_LIST);
 				for (int i = 0; i < counter; i++) {
 					System.out.println(itemNumber + "." + tasks.getTask(i).toString());
 					itemNumber++;
@@ -51,15 +52,15 @@ public class Parser {
 			try {
 				String[] taskDone = input.split(" ");
 				if (taskDone.length == 1) {
-					throw new DukeException(ui.WRONGOP);
+					throw new DukeException(ui.WRONG_OP);
 				}
 				if (taskDone.length > 2) {
-					throw new DukeInvalidArgumentException(ui.DONEFORMAT, input);
+					throw new DukeInvalidArgumentException(ui.DONE_FORMAT, input);
 				}
 
 				int taskIndex = Integer.parseInt(taskDone[1]);
 				tasks.getTask(taskIndex - 1).markAsDone();
-				System.out.println(ui.MARKDONE);
+				System.out.println(ui.MARK_DONE);
 				System.out.println(tasks.getTask(taskIndex - 1).toString() + "\n" + ui.BORDER);
 				wf.writeToFile(Duke.writeFile(tasks.getTaskList()));
 
@@ -84,12 +85,12 @@ public class Parser {
 		} else if (input.startsWith("deadline")) {
 			try {
 				if (input.length() < 9) {
-					throw new DukeException(ui.EMPTYINPUT);
+					throw new DukeException(ui.EMPTY_INPUT);
 				}
 
 				String[] deadLineDate = input.substring(9).split(" /by ");
 				if (deadLineDate.length != 2) {
-					throw new  DukeInvalidArgumentException(ui.DEADLINEFORMAT,
+					throw new DukeInvalidArgumentException(ui.DEADLINE_FORMAT,
 							input);
 				}
 				String taskD = deadLineDate[0];
@@ -101,11 +102,11 @@ public class Parser {
 				System.out.println(newDeadLine.toString());
 				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
 				wf.appendToFile("D/" + newDeadLine.getStatus() + "/" +
-						newDeadLine.getDescription() + "/" +newDeadLine.getDeadline() + "\n");
+						newDeadLine.getDescription() + "/" + newDeadLine.getDeadline() + "\n");
 
 			} catch (DukeInvalidArgumentException e) {
 
-				System.out.println(ui.BORDER +"\n" + e + "\n" + ui.BORDER);
+				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 
 			} catch (DukeException e) {
 
@@ -119,12 +120,12 @@ public class Parser {
 
 			try {
 				if (input.length() < 6) {
-					throw new DukeException(ui.EMPTYINPUT);
+					throw new DukeException(ui.EMPTY_INPUT);
 				}
 
 				String[] eventDate = input.substring(6).split(" /at ");
 				if (eventDate.length != 2) {
-					throw new  DukeInvalidArgumentException("OOPS!! Wrong format! Format: event [Task] /at [time]",
+					throw new DukeInvalidArgumentException("OOPS!! Wrong format! Format: event [Task] /at [time]",
 							input);
 				}
 				String taskE = eventDate[0];
@@ -136,11 +137,11 @@ public class Parser {
 				System.out.println(newEvent.toString());
 				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
 				wf.appendToFile("E/" + newEvent.getStatus() + "/" +
-						newEvent.getDescription() + "/" +newEvent.getVenue() + "\n");
+						newEvent.getDescription() + "/" + newEvent.getVenue() + "\n");
 
 			} catch (DukeInvalidArgumentException e) {
 
-				System.out.println(ui.BORDER +"\n" + e + "\n" + ui.BORDER);
+				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 
 			} catch (DukeException e) {
 
@@ -153,7 +154,7 @@ public class Parser {
 		} else if (input.startsWith("todo")) {
 			try {
 				if (input.length() < 5) {
-					throw new DukeException(ui.EMPTYINPUT);
+					throw new DukeException(ui.EMPTY_INPUT);
 				}
 
 				String taskToDo = input.substring(5);
@@ -181,7 +182,7 @@ public class Parser {
 				}
 
 				if (taskDelete.length > 2) {
-					throw new DukeInvalidArgumentException(ui.DELETEFORMAT, input);
+					throw new DukeInvalidArgumentException(ui.DELETE_FORMAT, input);
 				}
 
 				int taskIndex = Integer.parseInt(taskDelete[1]);
@@ -218,7 +219,7 @@ public class Parser {
 		} else {
 			try {
 				throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-			} catch (DukeException e){
+			} catch (DukeException e) {
 				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			}
 		}
@@ -227,9 +228,11 @@ public class Parser {
 	/**
 	 * Returns a boolean true when the user has entered
 	 * an input 'bye'.
+	 *
 	 * @return Boolean
 	 */
 	public boolean isExit() {
-			return isEndLoop;
-		}
+		
+		return isEndLoop;
+	}
 }

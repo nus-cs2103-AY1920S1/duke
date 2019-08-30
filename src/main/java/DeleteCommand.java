@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.component.*;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
 
     int taskNum;

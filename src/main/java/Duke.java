@@ -1,3 +1,9 @@
+package duke.main;
+
+import duke.exception.*;
+import duke.command.*;
+import duke.component.*;
+
 public class Duke {
 
     private Storage storage;

@@ -1,3 +1,5 @@
+package duke.component;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import duke.exception.*;
+import duke.task.*;
 
 
 public class Storage {

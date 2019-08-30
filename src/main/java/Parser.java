@@ -1,3 +1,7 @@
+package duke.component;
+
+import duke.exception.*;
+import duke.command.*;
 
 public class Parser {
 

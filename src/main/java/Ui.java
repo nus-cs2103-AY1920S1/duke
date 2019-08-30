@@ -1,3 +1,5 @@
+package duke.component;
+
 import java.util.Scanner;
 
 public class Ui {

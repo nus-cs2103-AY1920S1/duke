@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.component.*;
+
 public class ListCommand extends Command {
 
 

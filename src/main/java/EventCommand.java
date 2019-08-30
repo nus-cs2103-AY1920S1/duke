@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.component.*;
+import duke.exception.*;
+import duke.task.Event;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

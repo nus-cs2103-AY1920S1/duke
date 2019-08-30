@@ -81,6 +81,11 @@ public class TaskList {
         Ui.outputTaskDone(task);
     }
 
+    /**
+     * Finds existing tasks that contain a provided keyword.
+     *
+     * @param keyword The keyword to search for.
+     */
     public void findTasks(String keyword) {
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {

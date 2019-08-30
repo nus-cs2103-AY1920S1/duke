@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Models the storage system that retrieves and store task data.
+ */
 public class Storage {
     SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
     String filePath;

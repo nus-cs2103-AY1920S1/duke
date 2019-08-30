@@ -43,8 +43,10 @@ public class Parser {
             case ("todo"):
                 try {
                     String description = sc.nextLine().trim();
-                    if (description.equals("")) throw new EmptyDescriptionException(
-                            "☹ OOPS!!! The description of a todo cannot be empty.");
+                    if (description.equals("")) {
+                        throw new EmptyDescriptionException(
+                                "☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     ToDo newToDo = new ToDo(description);
                     taskList.addTask(newToDo);
                 } catch (EmptyDescriptionException e) {

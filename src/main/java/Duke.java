@@ -5,7 +5,7 @@ public class Duke {
     private static Task[] tasks = new Task[100];
     private static int tasksCount = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -35,19 +35,31 @@ public class Duke {
                 printAndEvaluateTaskDone(completedTask);
                 break;
             case "event":
-                Event newEvent = parseAndEvaluateEvent(newTaskSplit);
-                addEvent(newEvent);
+                try {
+                    Event newEvent = parseAndEvaluateEvent(newTaskSplit);
+                    addEvent(newEvent);
+                } catch (DukeException e) {
+                    addBorder(e.getMessage());
+                }
                 break;
             case "deadline":
-                Deadline newDeadline = parseAndEvaluateDeadline(newTaskSplit);
-                addDeadline(newDeadline);
+                try {
+                    Deadline newDeadline = parseAndEvaluateDeadline(newTaskSplit);
+                    addDeadline(newDeadline);
+                } catch (DukeException e) {
+                    addBorder(e.getMessage());
+                }
                 break;
             case "todo":
-                ToDo newToDo = parseAndEvaluateToDo(newTaskSplit);
-                addToDo(newToDo);
+                try {
+                    ToDo newToDo = parseAndEvaluateToDo(newTaskSplit);
+                    addToDo(newToDo);
+                } catch (DukeException e) {
+                    addBorder(e.getMessage());
+                }
                 break;
             default:
-                addTask(newTaskLine);
+                addBorder(new DukeIllegalArgumentException().getMessage());
                 break;
             }
         }
@@ -55,7 +67,7 @@ public class Duke {
 
     static void addBorder(String input) {
         String border = "__________________________________________________________";
-        System.out.print(border + "\n\n" + input + "\n" + border + "\n\n");
+        System.out.print(border + "\n" + input + "\n" + border + "\n\n");
     }
 
     static void printGreetingMessage() {
@@ -71,6 +83,8 @@ public class Duke {
         addBorder("Bye. Hope to see you again soon!");
     }
 
+    //Old unused method for adding generic tasks
+    /*
     static void addTask(String newTaskLine) {
         Task newTask = new Task(newTaskLine);
         tasks[tasksCount] = newTask;
@@ -78,18 +92,17 @@ public class Duke {
         addBorder(output);
         tasksCount++;
     }
-
-    static ToDo parseAndEvaluateToDo(String[] newTaskSplit) {
-        int newTaskLen = newTaskSplit.length;
-        if (newTaskLen < 2) {
-            System.out.println("Error");
-            return null;
-        } else {
+    */
+    static ToDo parseAndEvaluateToDo(String[] newTaskSplit) throws DukeException {
+        try {
+            int newTaskLen = newTaskSplit.length;
             String description = newTaskSplit[1];
-            for (int i = 2; i < newTaskLen; i ++) {
+            for (int i = 2; i < newTaskLen; i++) {
                 description += " " + newTaskSplit[i];
             }
             return new ToDo(description);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeToDoIllegalArgumentException();
         }
     }
     static void addToDo(ToDo newToDo) {
@@ -101,16 +114,11 @@ public class Duke {
         addBorder(output);
     }
 
-    static Deadline parseAndEvaluateDeadline(String[] newTaskSplit) {
-        int newTaskLen = newTaskSplit.length;
-        if (newTaskLen < 3) {
-            System.out.println("Error");
-            return null;
-        } else {
+    static Deadline parseAndEvaluateDeadline(String[] newTaskSplit) throws DukeException {
+        try {
+            int newTaskLen = newTaskSplit.length;
             boolean foundDeadline = false;
-            boolean isFirstDeadlineWord = true;
-            int index = 1;
-            String description = newTaskSplit[index];
+            String description = newTaskSplit[1];
             String by = "";
             for (int i = 2; i < newTaskLen; i++) {
                 if (foundDeadline) {
@@ -130,9 +138,10 @@ public class Duke {
             if (foundDeadline) {
                 return new Deadline(description, by);
             } else {
-                System.out.println("Error");
-                return null;
+                throw new DukeDeadlineIllegalArgumentException("deadline");
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeDeadlineIllegalArgumentException("description");
         }
     }
 
@@ -145,15 +154,11 @@ public class Duke {
         addBorder(output);
     }
 
-    static Event parseAndEvaluateEvent(String[] newTaskSplit) {
+    static Event parseAndEvaluateEvent(String[] newTaskSplit) throws DukeException {
         int newTaskLen = newTaskSplit.length;
-        if (newTaskLen < 3) {
-            System.out.println("Error");
-            return null;
-        } else {
+        try {
             boolean foundEvent = false;
-            int index = 1;
-            String description = newTaskSplit[index];
+            String description = newTaskSplit[1];
             String at = "";
             for (int i = 2; i < newTaskLen; i++) {
                 if (foundEvent) {
@@ -173,9 +178,10 @@ public class Duke {
             if (foundEvent) {
                 return new Event(description, at);
             } else {
-                System.out.println("Error");
-                return null;
+                throw new DukeEventIllegalArgumentException("timing");
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeEventIllegalArgumentException("description");
         }
     }
 

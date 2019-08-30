@@ -14,11 +14,11 @@ public class Task {
 
     @Override
     public String toString() {
-        String output = "";
+        String output;
         if (doneStatus == true) {
-            output += "[✓]";
+            output = "[✓]";
         } else {
-            output += "[✗]";
+            output = "[✗]";
         }
         output += " " + description;
         return output;

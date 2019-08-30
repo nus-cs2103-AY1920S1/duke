@@ -9,6 +9,10 @@ public class Parser {
         return Integer.parseInt(input.split(" ", 2)[1]);
     }
     
+    static String parseTaskToFind(String input) {
+        return input.split(" ", 2)[1];
+    }
+    
     static String parseDescription(String input, boolean isToDo) {
         return isToDo
                 ? input.split(" ", 2)[1]

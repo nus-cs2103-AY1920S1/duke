@@ -78,4 +78,14 @@ public class TaskList {
         Task currentTask = new EventTask(taskContent, taskTime);
         this.addTask(currentTask);
     }
+    
+    ArrayList<Task> findTasks(String taskToFind) {
+        ArrayList<Task> listOfFoundTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(taskToFind)) {
+                listOfFoundTasks.add(task);
+            }
+        }
+        return listOfFoundTasks;
+    }
 }

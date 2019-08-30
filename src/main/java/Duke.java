@@ -36,6 +36,9 @@ public class Duke {
                     int index = Parser.parseIndex(input);
                     taskList.deleteTask(index);
                     storage.writeSavedList(taskList.getList());
+                } else if (instruction.equals("find")) {
+                    String taskToFind = Parser.parseTaskToFind(input);
+                    ui.printFoundTasks(taskList.findTasks(taskToFind));
                 } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")) {
                     try {
                         if (instruction.equals("todo")) {

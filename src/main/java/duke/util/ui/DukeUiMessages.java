@@ -1,42 +1,52 @@
-package duke.util;
+package duke.util.ui;
 
 import java.util.Scanner;
 
-public class DukeUi {
+public class DukeUiMessages {
 
-    private static final String DUKE_ASCII_LOGO = " ____        _        \n"
+    public static final String DUKE_ASCII_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String SEPARATOR = "____________________________________________________________";
+    private static final String SEPARATOR = "_________________________________________________________________";
     private static final String DUKE_WELCOME_MESSAGE = "Hello! I'm Duke\n\t What can I do for you?";
     private static final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task"
+    private static final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task "
             + "cannot be empty.";
     private static final String DUKE_ERR_EMPTY_SEARCH_TERM = "☹ OOPS!!! The search term is missing.";
     private static final String DUKE_ERR_FILE_IO_EXCEPTION = "☹ OOPS!!! Failed to open file! Is the path correct?";
     private static final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
     private static final String DUKE_ERR_INVALID_DATE_FORMAT = "☹ OOPS!!! Please input the deadline in the following "
             + "format: \"dd/mm/yyyy hhmm\".";
-    private static final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task"
-            + " index.";
+    private static final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task "
+            + "index.";
     private static final String DUKE_ERR_MISSING_DEADLINE_PARAM = "☹ OOPS!!! The deadline for the task must be "
             + "specified with \"/by\".";
-    private static final String DUKE_ERR_MISSING_EVENT_PARAM = "\"☹ OOPS!!! The event parameter must be specified"
+    private static final String DUKE_ERR_MISSING_EVENT_PARAM = "\"☹ OOPS!!! The event parameter must be specified "
             + "with \\\"/at\\\".\"";
     private static final String DUKE_ERR_MISSING_INDEX = "☹ OOPS!!! The index of the completed task is missing.";
-    private static final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what"
+    private static final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what "
             + "that means :-(";
-    private static final String DUKE_ERR_UNKNOWN_TASK = "An error occurred when trying to re-create a task from the"
+    private static final String DUKE_ERR_UNKNOWN_TASK = "An error occurred when trying to re-create a task from the "
             + "saved file!";
 
     private StringBuilder sb;
     private Scanner scanner;
+    private DukeUi ui;
 
-    public DukeUi() {
+    public DukeUiMessages() {
         sb = new StringBuilder();
         scanner = new Scanner(System.in);
+        ui = new DukeUi();
+    }
+
+    /**
+     * Initializes the ui context to the main GUI object.
+     * @param ui GUI object for setting the context.
+     */
+    public void initUiComponents(DukeUi ui) {
+        this.ui = ui;
     }
 
     /**
@@ -56,7 +66,7 @@ public class DukeUi {
      * Displays the Duke ASCII logo and the welcome message to the user through {@link #displayToUser(String)}.
      */
     public void displayWelcomeMessage() {
-        System.out.println(DUKE_ASCII_LOGO);
+        displayToUserUnformatted(DUKE_ASCII_LOGO);
         displayToUser(DUKE_WELCOME_MESSAGE);
     }
 
@@ -73,7 +83,15 @@ public class DukeUi {
      * @param input String to be displayed to the user.
      */
     public void displayToUser(String input) {
-        System.out.println(encapsulateOutputWithSeparator(input));
+        ui.addAsLabelToDisplay(encapsulateOutputWithSeparator(input));
+    }
+
+    /**
+     * Prints supplied input in the supplied raw format
+     * @param input String to be displayed to the user without the separator formatting.
+     */
+    public void displayToUserUnformatted(String input) {
+        ui.addAsLabelToDisplay(input);
     }
 
     /**
@@ -154,9 +172,5 @@ public class DukeUi {
      */
     public void displayUnknownTask() {
         displayToUser(DUKE_ERR_UNKNOWN_TASK);
-    }
-
-    public String readCommand() {
-        return scanner.nextLine();
     }
 }

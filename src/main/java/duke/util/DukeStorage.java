@@ -4,8 +4,8 @@ import duke.task.DukeTask;
 import duke.task.DukeTaskDeadline;
 import duke.task.DukeTaskEvent;
 import duke.task.DukeTaskToDo;
+import duke.util.ui.DukeUiMessages;
 
-import javax.swing.text.html.Option;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -53,12 +53,12 @@ public class DukeStorage {
     /**
      * Reads the specified file in {@link #taskFilePath} and initializes a List&lt;duke.task.DukeTask&gt;
      * object to be returned.
-     * @param ui Instance of {@link DukeUi} which will show output to the user.
+     * @param ui Instance of {@link DukeUiMessages} which will show output to the user.
      * @return An initialized List of duke.task.DukeTask objects, can be an empty List if there are no
      *     tasks in the read file.
      * @throws IOException File parsing error.
      */
-    private List<DukeTask> readDukeTasks(DukeUi ui) throws IOException {
+    private List<DukeTask> readDukeTasks(DukeUiMessages ui) throws IOException {
         List<DukeTask> userTasks = new ArrayList<>();
         String line;
         while ((line = taskFileInputBuffer.readLine()) != null) { //readLine until EOF
@@ -76,11 +76,11 @@ public class DukeStorage {
     /**
      * Loads the data file and reads it, initializing a List&lt;duke.task.DukeTask&gt; to be returned to the caller.
      * This List will be populated with {@link duke.task.DukeTask} from the data file.
-     * @param ui Instance of {@link DukeUi} which will show output to the user.
+     * @param ui Instance of {@link DukeUiMessages} which will show output to the user.
      * @return Optional&lt;duke.task.DukeTask&gt; which could be Optional.empty() if there are file parsing errors.
      * @throws IOException File parsing error.
      */
-    public List<DukeTask> load(DukeUi ui) throws IOException {
+    public List<DukeTask> load(DukeUiMessages ui) throws IOException {
         initializeFileInputStream();
         List<DukeTask> retrievedTasks = readDukeTasks(ui);
         taskFileInputBuffer.close();

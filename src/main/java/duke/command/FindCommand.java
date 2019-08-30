@@ -37,7 +37,7 @@ public class FindCommand extends Command {
             ui.showMessage("There are no matching tasks in your list");
         } else {
             ui.showMessage("Here are the matching tasks in your list:");
-            ui.showMessage(matches.toString());
+            ui.showIndented(matches.toString().split("\\n"));
         }
     }
 }

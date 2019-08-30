@@ -15,7 +15,7 @@ public class Duke {
     private Duke() {
         storage = new Storage("duke.txt");
         tasks = new TaskList();
-        ui = new Ui();
+        ui = new Ui(System.in, System.out);
     }
 
     public static void main(String[] args) {

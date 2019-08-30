@@ -17,7 +17,7 @@ public class DeleteCommand extends CommandWithNumber {
         Task task = tasks.deleteTask(this.taskNumber);
         storage.writeTasks(tasks);
         ui.showMessage("Noted. I've removed this duke.task:");
-        ui.showMessage("  " + task);
+        ui.showIndented(task.toString());
         ui.showMessage("Now you have " + tasks.size() + " tasks in the list");
     }
 }

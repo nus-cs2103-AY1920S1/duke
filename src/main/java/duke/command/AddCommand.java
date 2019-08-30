@@ -24,7 +24,7 @@ public abstract class AddCommand extends Command {
         if (tasks.addTask(task)) {
             storage.writeTasks(tasks);
             ui.showMessage("Got it. I've added this task:");
-            ui.showMessage("  " + task.toString());
+            ui.showIndented(task.toString());
             ui.showMessage("Now you have " + tasks.size() + " tasks in the list");
         } else {
             throw new DukeException("Failed to add task");

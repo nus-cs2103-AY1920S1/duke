@@ -17,7 +17,7 @@ public class ListCommand extends Command {
             ui.showMessage("There are currently no tasks in your list");
         } else {
             ui.showMessage("Here are the tasks in your list:");
-            ui.showMessage(tasks.toString());
+            ui.showIndented(tasks.toString().split("\\n"));
         }
     }
 }

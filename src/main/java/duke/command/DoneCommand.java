@@ -15,9 +15,13 @@ public class DoneCommand extends CommandWithNumber {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         check(tasks);
         Task task = tasks.getTask(this.taskNumber);
-        task.markAsDone();
-        storage.writeTasks(tasks);
-        ui.showMessage("Nice! I've marked this duke.task as done:");
-        ui.showMessage("  " + task);
+        if (task.isDone()) {
+            ui.showMessage("This task is already done");
+        } else {
+            task.markAsDone();
+            storage.writeTasks(tasks);
+            ui.showMessage("Nice! I've marked this duke.task as done:");
+            ui.showIndented(task.toString());
+        }
     }
 }

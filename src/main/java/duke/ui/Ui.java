@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -10,26 +11,61 @@ public class Ui {
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String SEPARATOR = "-".repeat(60);
-    private Scanner scanner = new Scanner(System.in);
+    private static final String INDENTATION = "  ";
+    private Scanner input;
+    private PrintStream output;
 
-    private void show(final PrintStream output, final String message) {
-        output.println(message.stripTrailing());
+    public Ui(final InputStream input, final PrintStream output) {
+        this.input = new Scanner(input);
+        this.output = output;
+    }
+
+    private void show(final String message) {
+        this.output.println(message.stripTrailing());
     }
 
     public void showSeparator() {
-        System.out.println(SEPARATOR);
+        show(SEPARATOR);
     }
 
-    public void showMessage(final String message) {
-        show(System.out, message);
+    /**
+     * Shows each message on a new line.
+     * @param messages the messages to show
+     */
+    public void showMessage(final String... messages) {
+        for (final String message : messages) {
+            show(message);
+        }
     }
 
-    public void showWarning(final String warning) {
-        show(System.err, "Warning: " + warning);
+    /**
+     * Shows each warning on a new line.
+     * @param warnings the warnings to show
+     */
+    public void showWarning(final String... warnings) {
+        for (final String warning : warnings) {
+            show("Warning: " + warning);
+        }
     }
 
-    public void showError(final String error) {
-        show(System.err, "Error: " + error);
+    /**
+     * Shows each error on a new line.
+     * @param errors the errors to show
+     */
+    public void showError(final String... errors) {
+        for (final String error : errors) {
+            show("Error: " + error);
+        }
+    }
+
+    /**
+     * Shows each line, preceded by a preset level of indentation.
+     * @param lines the lines to show
+     */
+    public void showIndented(final String... lines) {
+        for (final String line : lines) {
+            show(INDENTATION + line);
+        }
     }
 
     /**
@@ -37,9 +73,11 @@ public class Ui {
      */
     public void showWelcome() {
         showSeparator();
-        showMessage("Hello from\n" + LOGO + "What can I do for you?");
+        showMessage("Hello from");
+        showIndented(LOGO.split("\\n"));
+        showMessage("What can I do for you?");
         showSeparator();
-        System.out.println();
+        showMessage("");
     }
 
     /**
@@ -48,10 +86,10 @@ public class Ui {
      * @return the String input from the user
      */
     public String readCommand() {
-        if (!scanner.hasNextLine()) {
+        if (!input.hasNextLine()) {
             return null;
         }
 
-        return scanner.nextLine();
+        return input.nextLine();
     }
 }

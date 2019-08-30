@@ -34,7 +34,11 @@ class UI {
      * @return User input.
      */
     public String takeInput() {
-        return sc.nextLine();
+        if (this.sc.hasNextLine()) {
+            return sc.nextLine();
+        }
+
+        return null;
     }
 
     /**

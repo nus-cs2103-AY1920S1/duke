@@ -115,8 +115,8 @@ public class Ui {
     public void listTasks() {
         sendLine();
         if (TaskList.getNumberOfTasks() ==  0) {
-            sendMessage("" +
-                    "You have no tasks in the list!");
+            sendMessage(""
+                    + "You have no tasks in the list!");
         } else {
             sendMessage("Here are the tasks in your list:");
         }

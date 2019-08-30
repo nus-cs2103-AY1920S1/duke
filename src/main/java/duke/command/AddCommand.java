@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeInvalidCommandException;
+import duke.exception.DukeStorageException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -19,20 +20,20 @@ public abstract class AddCommand extends Command {
     }
 
     @Override
-    protected void check(final TaskList tasks) throws DukeException {
+    protected void check(final TaskList tasks) throws DukeInvalidCommandException {
         if (this.description.isBlank()) {
-            throw new DukeException(TASK_MISSING_DESCRIPTION);
+            throw new DukeInvalidCommandException(TASK_MISSING_DESCRIPTION);
         }
     }
 
-    protected void addTask(final Task task, TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    protected void addTask(final Task task, TaskList tasks, Ui ui, Storage storage) {
         if (tasks.addTask(task)) {
             ui.showMessage(TASK_ADD_SUCCESS);
             ui.showIndented(task.toString());
             ui.showMessage(String.format(TASKS_COUNT, tasks.size()));
             try {
                 storage.writeTasks(tasks);
-            } catch (DukeException e) {
+            } catch (DukeStorageException e) {
                 ui.showWarning(e.getMessage());
             }
         } else {

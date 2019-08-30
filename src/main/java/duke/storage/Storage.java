@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.exception.DukeException;
+import duke.exception.DukeStorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -40,9 +40,9 @@ public class Storage {
      * Loads tasks from the data file.
      *
      * @return tasks loaded from the date file
-     * @throws DukeException if an parsing error occurs
+     * @throws DukeStorageException if an parsing error occurs
      */
-    public TaskList loadTasks() throws DukeException {
+    public TaskList loadTasks() throws DukeStorageException {
         TaskList tasks = new TaskList();
         Scanner scanner;
         try {
@@ -51,6 +51,7 @@ public class Storage {
             return tasks;
         }
 
+        DukeStorageException fileCorruptedException = new DukeStorageException(LOAD_TASK_FILE_CORRUPTED);
         try {
             while (scanner.hasNextLine()) {
                 String[] tokens = scanner.nextLine().split(" \\| ");
@@ -75,12 +76,12 @@ public class Storage {
                         break;
                     }
                     default:
-                        throw new DukeException(LOAD_TASK_FILE_CORRUPTED);
+                        throw fileCorruptedException;
                 }
                 tasks.addTask(task);
             }
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new DukeException(LOAD_TASK_FILE_CORRUPTED);
+            throw fileCorruptedException;
         }
         scanner.close();
         return tasks;
@@ -90,15 +91,15 @@ public class Storage {
      * Write tasks to data file.
      *
      * @param tasks The tasks to write to the data file
-     * @throws DukeException if the data file cannot be written
+     * @throws DukeStorageException if the data file cannot be written
      */
-    public void writeTasks(final TaskList tasks) throws DukeException {
+    public void writeTasks(final TaskList tasks) throws DukeStorageException {
         try {
             FileWriter writer = new FileWriter(this.file, false);
             writer.write(tasks.toStorageString());
             writer.close();
         } catch (IOException e) {
-            throw new DukeException(WRITE_TASK_FAILED + e.getMessage());
+            throw new DukeStorageException(WRITE_TASK_FAILED + e.getMessage());
         }
     }
 

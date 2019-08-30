@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.DukeStorageException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -28,7 +29,7 @@ public class Duke {
 
         try {
             tasks = storage.loadTasks();
-        } catch (DukeException e) {
+        } catch (DukeStorageException e) {
             ui.showWarning(e.getMessage());
         }
 

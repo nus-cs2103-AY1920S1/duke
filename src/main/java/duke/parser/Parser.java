@@ -10,7 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UnknownCommand;
-import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -22,19 +22,19 @@ public class Parser {
     private Parser() {
     }
 
-    private static LocalDateTime parseDateTime(final String dateTime) throws DukeException {
+    private static LocalDateTime parseDateTime(final String dateTime) throws DukeParseException {
         try {
             return LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Failed to parse date time: " + e.getMessage());
+            throw new DukeParseException("Failed to parse date time: " + e.getMessage());
         }
     }
 
-    private static Integer parseTaskNumber(final String taskNumber) throws DukeException {
+    private static Integer parseTaskNumber(final String taskNumber) throws DukeParseException {
         try {
             return Integer.parseInt(taskNumber) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Failed to parse task number: " + e.getMessage());
+            throw new DukeParseException("Failed to parse task number: " + e.getMessage());
         }
     }
 
@@ -43,9 +43,9 @@ public class Parser {
      *
      * @param input the input String to parse
      * @return the constructed Command
-     * @throws DukeException if an parsing error occurs
+     * @throws DukeParseException if an parsing error occurs
      */
-    public static Command parse(final String input) throws DukeException {
+    public static Command parse(final String input) throws DukeParseException {
         String[] tokens = input.trim().split("\\s+", 2);
         String command = tokens[0].toLowerCase();
         // If tokens.length == 1, there are no arguments

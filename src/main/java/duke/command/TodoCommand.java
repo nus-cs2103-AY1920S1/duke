@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeExecutionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -12,7 +12,7 @@ public class TodoCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
         addTask(new Todo(this.description), tasks, ui, storage);
     }

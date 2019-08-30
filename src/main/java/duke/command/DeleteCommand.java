@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeExecutionException;
+import duke.exception.DukeStorageException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -15,7 +16,7 @@ public class DeleteCommand extends CommandWithNumber {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
         Task task = tasks.deleteTask(this.taskNumber);
         ui.showMessage(TASK_DELETED);
@@ -23,7 +24,7 @@ public class DeleteCommand extends CommandWithNumber {
         ui.showMessage(String.format(TASKS_COUNT, tasks.size()));
         try {
             storage.writeTasks(tasks);
-        } catch (DukeException e) {
+        } catch (DukeStorageException e) {
             ui.showWarning(e.getMessage());
         }
     }

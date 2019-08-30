@@ -15,6 +15,7 @@ public abstract class Task {
 
     /**
      * Returns this Task's description.
+     *
      * @return this Task's description
      */
     public String getDescription() {
@@ -23,6 +24,7 @@ public abstract class Task {
 
     /**
      * Returns tick or cross depending on whether this Task is done.
+     *
      * @return tick if this Task is done, cross otherwise
      */
     public String getStatusIcon() {
@@ -31,6 +33,7 @@ public abstract class Task {
 
     /**
      * Returns true if this Task is done.
+     *
      * @return true if this Task is done
      */
     public boolean isDone() {

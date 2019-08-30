@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeExecutionException;
+import duke.exception.DukeInvalidCommandException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -15,7 +16,7 @@ public abstract class Command {
         return false;
     }
 
-    protected abstract void check(final TaskList tasks) throws DukeException;
+    protected abstract void check(final TaskList tasks) throws DukeInvalidCommandException;
 
     /**
      * Executes this command.
@@ -23,7 +24,7 @@ public abstract class Command {
      * @param tasks   the existing tasks
      * @param ui      the current Ui
      * @param storage the data file
-     * @throws DukeException if the command cannot be executed
+     * @throws DukeExecutionException if the command cannot be executed
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException;
 }

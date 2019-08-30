@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeExecutionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -13,8 +13,8 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
-        throw new DukeException(UNKNOWN_COMMAND);
+        throw new DukeExecutionException(UNKNOWN_COMMAND);
     }
 }

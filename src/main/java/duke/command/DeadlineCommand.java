@@ -1,6 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeExecutionException;
+import duke.exception.DukeInvalidCommandException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
@@ -16,15 +17,15 @@ public class DeadlineCommand extends AddCommandWithTime {
     }
 
     @Override
-    protected void check(final TaskList tasks) throws DukeException {
+    protected void check(final TaskList tasks) throws DukeInvalidCommandException {
         super.check(tasks);
         if (this.time == null) {
-            throw new DukeException(DEADLINE_MISSING_TIME);
+            throw new DukeInvalidCommandException(DEADLINE_MISSING_TIME);
         }
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
         addTask(new Deadline(this.description, this.time), tasks, ui, storage);
     }

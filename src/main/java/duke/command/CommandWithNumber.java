@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.DukeException;
+import duke.exception.DukeInvalidCommandException;
 import duke.task.TaskList;
 
 import static duke.ui.Messages.MISSING_TASK_NUMBER;
@@ -14,12 +14,12 @@ public abstract class CommandWithNumber extends Command {
     }
 
     @Override
-    protected void check(final TaskList tasks) throws DukeException {
+    protected void check(final TaskList tasks) throws DukeInvalidCommandException {
         if (this.taskNumber == null) {
-            throw new DukeException(MISSING_TASK_NUMBER);
+            throw new DukeInvalidCommandException(MISSING_TASK_NUMBER);
         }
         if (this.taskNumber < 1 || this.taskNumber >= tasks.size()) {
-            throw new DukeException(TASK_DOES_NOT_EXIST);
+            throw new DukeInvalidCommandException(TASK_DOES_NOT_EXIST);
         }
     }
 }

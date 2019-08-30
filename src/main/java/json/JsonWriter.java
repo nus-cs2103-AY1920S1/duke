@@ -190,10 +190,14 @@ public class JsonWriter implements AutoCloseable {
 		protected char blockEnd() {
 			return '}';
 		}
-		public <T> void writeField(String name, Consumer<ValueContext> coder) {
+		public void writeField(String name, Consumer<ValueContext> coder) {
 			this.startObject();
 			JsonWriter.this.appendQuoted(name).append(": ");
 			coder.accept(JsonWriter.this.valueContext);
+		}
+
+		public <T> void writeField(String name, T value) {
+			this.writeField(name, vctx -> vctx.writeValue(value));
 		}
 	}
 	public class ArrayContext extends BlockContext {

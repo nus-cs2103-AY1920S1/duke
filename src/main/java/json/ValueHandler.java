@@ -20,6 +20,12 @@ public interface ValueHandler<T> {
 		throw new UnsupportedOperationException();
 	}
 
+	public class BooleanValue implements ValueHandler<Boolean> {
+		public static final BooleanValue INSTANCE = new BooleanValue();
+		public Boolean handleString(boolean val) {
+			return val;
+		}
+	}
 	public class StringValue implements ValueHandler<String> {
 		public static final StringValue INSTANCE = new StringValue();
 		public String handleString(String val) {

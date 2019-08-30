@@ -1,4 +1,6 @@
-import tasks.Task;
+package duke.command;
+
+import duke.tasks.Task;
 
 import java.util.LinkedList;
 
@@ -24,7 +26,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        String name = "Duke";
+        String name = "duke";
         printline();
         System.out.println("\tHello, I'm " + name);
         System.out.println("\tWhat can I do for you?");
@@ -36,17 +38,17 @@ public class Ui {
             printline();
             System.out.println("\tGot it. I've added this task:");
             System.out.println("\t\t" + t);
-            System.out.println("\tNow you have " + i + " tasks in the list");
+            System.out.println("\tNow you have " + i + " Duke.tasks in the list");
             printline();
         }
     
         //prints out the list of task on hand
         public void printList(LinkedList<Task> li){
             printline();
-            System.out.println("\tHere are the tasks in your list:");
+            System.out.println("\tHere are the Duke.tasks in your list:");
             for(int i = 0; i < li.size(); i++){
                 int j = i+1;
-                System.out.println("\t" + j + ". " + li.get(i));
+                System.out.println("\t" + j + " " + li.get(i));
             }
             printline();
         }
@@ -64,7 +66,7 @@ public class Ui {
             printline();
             System.out.println("\tNoted. I've removed this task:");
             System.out.println("\t\t" + task);
-            System.out.println("\tNow you have " + i + " tasks in the list");
+            System.out.println("\tNow you have " + i + " Duke.tasks in the list");
             printline();
         }
 

@@ -1,23 +1,23 @@
-package tasks;
+package duke.tasks;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
-    protected Date at;
+    protected Date by;
 
-    public Event(String description, Date at){
+    public Deadline(String description, Date by){
         super(description);
-        this.at = at;
+        this.by = by;
     }
 
-    public Event(String description, Date at, int doner){
+    public Deadline(String description, Date by, int doner){
         super(description);
         if(doner == 1){
             super.completed();
         }
-        this.at = at;
+        this.by = by;
     }
 
     @Override
@@ -27,12 +27,12 @@ public class Event extends Task {
             a = 1;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
-        return "E|" + a + "|" +  super.description + "|" + formatter.format(at);
+        return "D|" + a + "|" + super.description + "|" + formatter.format(by);
     }
 
     @Override
     public String toString(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy hh:mm a");
-        return "[E]" + super.toString() + "(at: " + formatter.format(at) + ")";
+        return "[D]" + super.toString() + "(by: " + formatter.format(by) + ")";
     }
 }

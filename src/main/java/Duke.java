@@ -1,7 +1,13 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import duke.command.AException;
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -34,7 +40,7 @@ public class Duke {
         //LinkedList used to store all the String given by the user;
         // LinkedList<Task> li = new LinkedList<Task>();
 
-        //read the existing task from the file and create the tasks to put
+        //read the existing task from the file and create the Duke.tasks to put
         //into the list. 
 
         // try{
@@ -61,7 +67,7 @@ public class Duke {
                 break;
 
             } else if(firstWord.equals("list")){
-                //if list, print the list of tasks
+                //if list, print the list of Duke.tasks
 
                 tasks.printList();
 

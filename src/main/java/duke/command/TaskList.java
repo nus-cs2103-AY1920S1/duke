@@ -1,4 +1,6 @@
-import tasks.Task;
+package duke.command;
+
+import duke.tasks.Task;
 
 import java.util.LinkedList;
 
@@ -12,10 +14,10 @@ public class TaskList {
     public void printList(){
         String line =  "\t____________________________________________________________";
         System.out.println(line);
-        System.out.println("\tHere are the tasks in your list:");
+        System.out.println("\tHere are the Duke.tasks in your list:");
         for(int i = 0; i < li.size(); i++){
             int j = i+1;
-            System.out.println("\t" + j + ". " + li.get(i));
+            System.out.println("\t" + j + " " + li.get(i));
         }
         System.out.println(line);
     }

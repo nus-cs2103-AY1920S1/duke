@@ -1,3 +1,5 @@
+package duke.command;
+
 import java.util.LinkedList;
 
 public class Parser {

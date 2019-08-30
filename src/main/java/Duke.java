@@ -39,8 +39,13 @@ public class Duke {
                     this.ui.showNoTaskResponse();
                 } else {
                     this.ui.showListResponse();
-                    this.ui.printTasks(this.tasks);
+                    this.ui.printTasks(tasks);
                 }
+                break;
+            case "find":
+                parser.parseFind();
+                String search = parser.search;
+                this.ui.printQuerySet(tasks.list, search);
                 break;
             case "done":
                 try {

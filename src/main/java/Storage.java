@@ -15,7 +15,6 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new FileReader(this.filePath));
             String read;
             while ((read = reader.readLine()) != null) {
-                System.out.println(read);
                 String type = read.substring(1, 2);
                 String status = read.substring(4, 5);
                 String info = read.substring(7);

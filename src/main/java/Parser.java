@@ -13,6 +13,8 @@ public class Parser {
     protected String deadlineDescript;
     protected String by;
 
+    protected String search;
+
     public Parser(String input) {
         input = input.trim();
         String[] inputArr = input.split("\\s+");
@@ -36,5 +38,9 @@ public class Parser {
 
     public void parseToDo() {
         this.todoDescript = this.input.substring(5);
+    }
+
+    public void parseFind() {
+        this.search = this.input.substring(5);
     }
 }

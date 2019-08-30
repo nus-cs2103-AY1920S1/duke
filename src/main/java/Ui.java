@@ -57,6 +57,17 @@ public class Ui {
         System.out.println(indent + "Now you have " + list.size() + " task(s) in the list.");
     }
 
+    public void printQuerySet(ArrayList<Task> list, String search) {
+        System.out.println(indent + "Here are the matching tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            int k = i + 1;
+            if (task.description.contains(search)) {
+                System.out.println(indent + k + ". " + task);
+            }
+        }
+    }
+
     public void printTasks(TaskList tasks) {
         for (int i = 0; i < tasks.getList().size(); i++) {
             int k = i + 1;

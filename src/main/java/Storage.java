@@ -7,31 +7,36 @@ import java.util.List;
 
 public class Storage {
     private String filePath;
-    private ArrayList<Task> returnTaskList = new ArrayList<>(100);
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     ArrayList<Task> loadSavedList() throws IOException {
+        ArrayList<Task> returnTaskList = new ArrayList<>(100);
         File file = new File(filePath);
         file.createNewFile();
         List<String> savedList = Files.readAllLines(file.toPath());
         for (String line : savedList) {
             String[] lineElements = Parser.parseStoredLine(line);
             String lineType = Parser.parseStoredInstruction(lineElements);
-            if (lineType.equals("T")) {
-                Task currentTask = new ToDoTask(lineElements[2]);
+            Task currentTask;
+            switch (lineType) {
+            case "T":
+                currentTask = new ToDoTask(lineElements[2]);
                 Parser.parseTaskForMarking(lineElements, currentTask);
                 returnTaskList.add(currentTask);
-            } else if (lineType.equals("D")) {
-                Task currentTask = new DeadlineTask(lineElements[2], Parser.parseStoredTime(lineElements));
+                break;
+            case "D":
+                currentTask = new DeadlineTask(lineElements[2], Parser.parseStoredTime(lineElements));
                 Parser.parseTaskForMarking(lineElements, currentTask);
                 returnTaskList.add(currentTask);
-            } else if (lineType.equals("E")) {
-                Task currentTask = new EventTask(lineElements[2], Parser.parseStoredTime(lineElements));
+                break;
+            case "E":
+                currentTask = new EventTask(lineElements[2], Parser.parseStoredTime(lineElements));
                 Parser.parseTaskForMarking(lineElements, currentTask);
                 returnTaskList.add(currentTask);
+                break;
             }
         }
         return returnTaskList;

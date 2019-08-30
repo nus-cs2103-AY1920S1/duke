@@ -11,7 +11,7 @@ import jermi.task.Task;
  * A representation of the command for marking a task as completed in the list.
  */
 public class DoneCommand extends Command {
-    /** Index of the task to be marked as done */
+    /** Index of the task to be marked as done. */
     private int index;
 
     /**

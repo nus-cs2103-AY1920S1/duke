@@ -11,7 +11,7 @@ import jermi.task.Task;
  * A representation of the command for deleting task from the list.
  */
 public class DeleteCommand extends Command {
-    /** Index of the task to be deleted */
+    /** Index of the task to be deleted. */
     private int index;
 
     /**
@@ -43,9 +43,9 @@ public class DeleteCommand extends Command {
         Task task = taskList.getTask(index);
         taskList.remove(index);
         int numOfTasks = taskList.getSize();
-        ui.echo("Noted. I've removed this task:"
-                , "  " + task
-                , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
+        ui.echo("Noted. I've removed this task:",
+                "  " + task,
+                String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
         storage.taskListToFile();
     }
 

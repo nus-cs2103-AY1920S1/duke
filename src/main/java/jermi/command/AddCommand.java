@@ -14,9 +14,9 @@ import jermi.type.TaskType;
  * A representation of the command for adding task to the list.
  */
 public class AddCommand extends Command {
-    /** Task type of the task to be added */
+    /** Task type of the task to be added. */
     private TaskType taskType;
-    /** Description of the task to be added */
+    /** Description of the task to be added. */
     private String description;
 
     /**
@@ -55,8 +55,12 @@ public class AddCommand extends Command {
             case EVENT:
                 task = new Event(activity, dateTime);
                 break;
+            default:
+                assert (false);
             }
             break;
+        default:
+            assert (false);
         }
         return task;
     }
@@ -74,9 +78,9 @@ public class AddCommand extends Command {
         Task task = this.createTask();
         taskList.add(task);
         int numOfTasks = taskList.getSize();
-        ui.echo("Got it. I've added this task:"
-                , "  " + task
-                , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
+        ui.echo("Got it. I've added this task:",
+                "  " + task,
+                String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
         storage.taskListToFile();
     }
 

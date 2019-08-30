@@ -16,9 +16,9 @@ import java.util.List;
  * A class that deals with loading tasks from the data file and saving tasks in the data file.
  */
 public class Storage {
-    /** File */
+    /** File. */
     private File file;
-    /** Task list */
+    /** Task list. */
     private TaskList taskList;
 
     /**
@@ -55,6 +55,8 @@ public class Storage {
         case "E":
             task = new Event(components[2], components[3], components[1]);
             break;
+        default:
+            assert (false);
         }
         return task;
     }

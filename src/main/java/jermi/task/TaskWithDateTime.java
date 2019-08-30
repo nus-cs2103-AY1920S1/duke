@@ -1,4 +1,5 @@
 package jermi.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * A representation of task with date and time.
  */
 abstract class TaskWithDateTime extends Task {
-    /** Date and time */
+    /** Date and time. */
     private String dateTime;
 
     /**

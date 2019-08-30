@@ -6,7 +6,7 @@ import java.util.Scanner;
  * A class that deals with interaction with the user.
  */
 public class Ui {
-    /** Keyboard input reader */
+    /** Keyboard input reader. */
     private Scanner scanner;
 
     /**

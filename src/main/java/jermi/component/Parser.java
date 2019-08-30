@@ -66,6 +66,9 @@ public class Parser {
                 break;
             case "find":
                 command = new FindCommand(inputDetails);
+                break;
+            default:
+                assert (false);
             }
             break;
         default:

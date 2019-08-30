@@ -4,10 +4,10 @@ package jermi.type;
  * Available types of task.
  */
 public enum TaskType {
-    /** todo task */
+    /** todo task. */
     TO_DO,
-    /** deadline task */
+    /** deadline task. */
     DEADLINE,
-    /** event task */
+    /** event task. */
     EVENT;
 }

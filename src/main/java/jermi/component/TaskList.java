@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  * A class to represent a list of tasks.
  */
 public class TaskList {
-    /** List of tasks */
+    /** List of tasks. */
     private List<Task> list;
 
     /**

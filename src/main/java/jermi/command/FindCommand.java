@@ -8,7 +8,7 @@ import jermi.exception.JermiException;
 import java.util.List;
 
 public class FindCommand extends Command {
-    /** Keyword used for finding */
+    /** Keyword used for finding. */
     private String keyword;
 
     /**

@@ -12,17 +12,17 @@ import jermi.exception.JermiException;
  * The Client program manages the workflow of the application.
  */
 public class Client {
-    /** Client object reference */
+    /** Client object reference. */
     private static Client client = null;
-    /** Ui object reference */
+    /** Ui object reference. */
     private Ui ui;
-    /** Parser object reference */
+    /** Parser object reference. */
     private Parser parser;
-    /** TaskList object reference */
+    /** TaskList object reference. */
     private TaskList taskList;
-    /** Storage object reference */
+    /** Storage object reference. */
     private Storage storage;
-    /** ExceptionHandler object reference */
+    /** ExceptionHandler object reference. */
     private ExceptionHandler exceptionHandler;
 
     /**

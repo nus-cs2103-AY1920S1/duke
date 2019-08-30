@@ -1,10 +1,10 @@
 package jermi.command;
+
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.component.Ui;
 import jermi.exception.JermiException;
 import jermi.task.Task;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

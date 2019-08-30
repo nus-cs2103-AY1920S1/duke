@@ -6,7 +6,7 @@ import jermi.exception.JermiException;
  * A class that deals with handling exceptions.
  */
 public class ExceptionHandler {
-    /** UI */
+    /** UI. */
     Ui ui;
 
     /**

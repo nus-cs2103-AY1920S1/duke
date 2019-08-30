@@ -6,11 +6,11 @@ package jermi.exception;
 public abstract class JermiException extends Exception {
 
     /**
-     * Constructor for class
+     * Constructor for class.
      *
      * @param message Error message.
      */
     JermiException(String message) {
-        super("\u2639 OOPS! " + message);
+        super("☹ OOPS! " + message);
     }
 }

@@ -4,12 +4,12 @@ package jermi.task;
  * Base class for task.
  */
 public abstract class Task {
-    /** Description of the task */
+    /** Description of the task. */
     private String description;
-    /** State of the task: true if completed, else false */
+    /** State of the task: true if completed, else false. */
     private boolean isDone;
 
-    /** Constructor for class */
+    /** Constructor for class. */
     Task(String description, String isDone) {
         this.description = description;
         this.isDone = isDone.equals("1");
@@ -21,7 +21,7 @@ public abstract class Task {
      * @return Tick if task is completed, else cross.
      */
     private String getStatusIcon() {
-        return this.isDone ? "\u2713" : "\u2718";
+        return this.isDone ? "✓" : "✘";
     }
 
     /**

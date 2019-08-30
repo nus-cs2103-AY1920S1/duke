@@ -16,7 +16,7 @@ public abstract class Command {
 
     /**
      * Performs operations of type Create, Read, Update, Delete and Exit
-     * on Task objects and directs action of file storage and user interaction
+     * on Task objects and directs action of file storage and user interaction.
      *
      * @param taskList  List of Task objects.
      * @param ui Interface for user interaction.

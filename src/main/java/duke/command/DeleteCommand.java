@@ -35,8 +35,7 @@ public class DeleteCommand extends Command {
             Task task = taskList.deleteTaskAtNumber(position);
             ui.notifyTaskDeleted(task, taskList.size());
             storage.writeListToFile(taskList);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new DukeException(ex.getMessage());
         }
     }

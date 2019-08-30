@@ -24,6 +24,13 @@ public class CreateCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Creates an object of type CreateCommand with information about task to create.
+     *
+     * @param directive  Information about task type.
+     * @param description Description of specified task.
+     * @param addOn Additional information about task.
+     */
     public CreateCommand(String directive, String description, String addOn) {
         this.directive = directive;
         this.description = description;

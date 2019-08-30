@@ -21,6 +21,12 @@ public class ReadCommand extends Command {
         this.directive = directive;
     }
 
+    /**
+     * Creates an object of type ReadCommand to read task information.
+     *
+     * @param directive Specified if read should be of type list or find.
+     * @param keyword Keyword to find tasks.
+     */
     public ReadCommand(String directive, String keyword) {
         super();
         this.directive = directive;
@@ -40,8 +46,7 @@ public class ReadCommand extends Command {
         if (directive.equals("list")) {
             ui.printLine("Here are the tasks in your list:");
             printTaskList(taskList.getTasksList(), ui);
-        }
-        else { //directive.equals("find")
+        } else { //directive.equals("find")
             ui.printLine("Here are the matching tasks in your list:");
             ArrayList<Task> tempList = new ArrayList<>();
             for (Task task : taskList.getTasksList()) {

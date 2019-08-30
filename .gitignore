@@ -14,4 +14,4 @@ src/main/resources/docs/
 bin/
 
 # Text UI Text files
-/text-ui-test/ACTUAL.txt
+/text-ui-test/actual.txt

@@ -1,29 +1,26 @@
 #!/bin/bash
 
-# create bin directory if it doesn't exist
-if [ ! -d "../bin" ]; then
-    mkdir ../bin
+# Backup existing data file
+data_dir="$HOME/.local/share/Duke"
+if [ -f "$data_dir/duke.txt" ]; then
+  mv "$data_dir/duke.txt" "$data_dir/duke.bak"
 fi
 
-# delete output from previous run
-if [ -e "./ACTUAL.txt" ]; then
-    rm ACTUAL.txt
+# Delete output from previous run
+if [ -e "./actual.txt" ]; then
+    rm actual.txt
 fi
 
-# compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/duke/*.java; then
-    echo "********** BUILD FAILURE **********"
-    exit 1
-fi
-
-# run the program, feed commands from input.txt file and redirect the output to the ACTUAL.txt
-java -classpath ../bin duke.Duke < input.txt > ACTUAL.txt
+# run the program, feed commands from input.txt file and redirect the output to the actual.txt
+java -classpath ../build/classes/java/main duke.Duke < input.txt > actual.txt
 
 # compare the output to the expected output
-if diff ACTUAL.txt EXPECTED.txt; then
-    echo "Test result: PASSED"
-    exit 0
-else
-    echo "Test result: FAILED"
-    exit 1
+diff actual.txt expected.txt
+result="$?"
+
+# Move the old data file back
+if [ -f "$data_dir/duke.bak" ]; then
+  mv "$data_dir/duke.bak" "$data_dir/duke.txt"
 fi
+
+exit "$result"

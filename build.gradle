@@ -39,3 +39,14 @@ shadowJar {
     archiveClassifier = null
     archiveAppendix = null
 }
+
+task textUiText(type: Exec) {
+    description = 'Runs text UI tests'
+    group = 'verification'
+    shouldRunAfter test
+
+    workingDir "$projectDir/text-ui-test"
+    commandLine 'bash', '-c', './runtest.sh'
+}
+
+check.dependsOn textUiText

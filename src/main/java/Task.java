@@ -1,14 +1,29 @@
+import json.JsonWriter;
+import json.Registry;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.function.Function;
+
 public class Task {
 	private final String description;
 	private boolean completed;
 
 	public Task(String description) {
+		this(description, false);
+	}
+
+	private Task(String description, boolean completed) {
 		if(description == null || description.isEmpty()) {
 			String message = String.format("The description of a %s cannot be empty.", this.getTaskType());
 			throw new DukeException(message);
 		}
 		this.description = description;
 		this.completed = false;
+	}
+
+	Task(Map<String, Object> dict) {
+		this((String) dict.get("description"),
+			(Boolean) dict.getOrDefault("completed", false));
 	}
 
 	public void markComplete() {
@@ -23,11 +38,11 @@ public class Task {
 	private static final String incompleteMarker = "[✗]";
 
 	protected String getTypeMarker() {
-		return "[T]";
+		return getTaskType().getMarker();
 	}
 
-	protected String getTaskType() {
-		return "todo";
+	protected TaskType getTaskType() {
+		return TaskType.ToDo;
 	}
 
 	private String getCompleteMarker() {
@@ -36,6 +51,25 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return this.getTypeMarker() + this.getCompleteMarker() + ' ' + this.description;
+		return String.format("[%s]%s %s",
+				this.getTypeMarker(),
+				this.getCompleteMarker(),
+				this.description);
+	}
+
+
+
+	protected void toJson(JsonWriter.ObjectContext ctx) {
+		ctx.writeField("type", this.getTaskType());
+		ctx.writeField("description", this.description);
+		ctx.writeField("completed", this.completed);
+	}
+
+	public static void serialize(JsonWriter.ValueContext ctx, Task value) {
+		ctx.writeObject(value::toJson);
+	}
+
+	static {
+		Registry.register(Task.class, Task::serialize);
 	}
 }

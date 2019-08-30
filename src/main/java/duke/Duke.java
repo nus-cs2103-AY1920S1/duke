@@ -1,13 +1,19 @@
 package duke;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main class for Duke app.
@@ -15,10 +21,8 @@ import java.time.format.DateTimeFormatter;
 public class Duke extends Application {
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    protected Storage storage;
-    protected TaskList tasks;
-    protected Ui ui;
-
+    private Storage storage;
+    private TaskList tasks;
 
     /**
      * Constructor for Duke when save file path is known.
@@ -26,15 +30,12 @@ public class Duke extends Application {
      * @param filePath file path
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadFromSaveFile());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         } catch (IOException e) {
-            ui.showError(e.getMessage());
         }
     }
 
@@ -43,15 +44,12 @@ public class Duke extends Application {
      *
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage();
         try {
             tasks = new TaskList(storage.loadFromSaveFile());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         } catch (IOException e) {
-            ui.showError(e.getMessage());
         }
     }
 
@@ -61,13 +59,46 @@ public class Duke extends Application {
         FXMLLoader loader = new FXMLLoader(Launcher.class.getResource("/view/MainWindow.fxml"));
 
         // Create the Pane and all Details
-        AnchorPane root = loader.load();
+        VBox root = loader.load();
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Duke");
         loader.<MainWindowController>getController().setDuke(this);
-        this.ui.setController(loader.getController());
         primaryStage.show();
+    }
+
+    public List<ToDo> getTodos() {
+        List<ToDo> todos = new ArrayList<>();
+        for (Task t : tasks.getList()) {
+            if (t instanceof ToDo) {
+                todos.add((ToDo) t);
+            }
+        }
+        return todos;
+    }
+
+    public List<Deadline> getDeadlines() {
+        List<Deadline> deadlines = new ArrayList<>();
+        for (Task t : tasks.getList()) {
+            if (t instanceof Deadline) {
+                deadlines.add((Deadline) t);
+            }
+        }
+        return deadlines;
+    }
+
+    public List<Event> getEvent() {
+        List<Event> events = new ArrayList<>();
+        for (Task t : tasks.getList()) {
+            if (t instanceof Event) {
+                events.add((Event) t);
+            }
+        }
+        return events;
+    }
+
+    public List<Task> getTasks() {
+        return tasks.getList();
     }
 }

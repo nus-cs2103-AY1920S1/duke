@@ -101,11 +101,11 @@ public class Duke {
                 user.findTask(items, searchTerm);
                 input = sc.nextLine();
             } else {
-                    //generate task and store into list
-                    generateTask(input);
-                    input = sc.nextLine();
-                }
+                //generate task and store into list
+                generateTask(input);
+                input = sc.nextLine();
             }
+        }
 
         //store current tasks into local file for future reference
         storeCurrent(items);

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    final private String BORDER = "-------------------------------------";
+    public static final String BORDER = "-------------------------------------";
 
     /**
      * Welcome message when program is executed.
@@ -61,6 +61,10 @@ public class Ui {
         return emptyError;
     }
 
+    /**
+     * Message when input for event is invalid.
+     * @return String message generated
+     */
     public String eventError() {
         //error message for empty input
         StringBuilder sb = new StringBuilder();
@@ -72,6 +76,10 @@ public class Ui {
         return eventMessage;
     }
 
+    /**
+     * Message when input for deadline is invalid.
+     * @return String message generated
+     */
     public String deadlineError() {
         //error message for empty input
         StringBuilder sb = new StringBuilder();
@@ -83,6 +91,10 @@ public class Ui {
         return deadlineMessage;
     }
 
+    /**
+     * Message when no details is provided for todo.
+     * @return String message generated
+     */
     public String todoError() {
         //error message for empty input
         StringBuilder sb = new StringBuilder();
@@ -94,6 +106,10 @@ public class Ui {
         return todoMessage;
     }
 
+    /**
+     * Message when user does not input any term that is valid for system.
+     * @return String message generated
+     */
     public String invalidInput() {
         //error message for empty input
         StringBuilder sb = new StringBuilder();

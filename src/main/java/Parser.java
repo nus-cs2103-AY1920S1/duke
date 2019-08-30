@@ -10,10 +10,11 @@ public class Parser {
             switch (task[0]) {
             case "todo":
                 if (s.length == 1) {
-                    throw new DukeEmptyException(s[0]);
+                    throw new DukeEmptyException(task[0]);
                 } else {
                     s[0] = "";
                     task[1] = String.join(" ", s);
+                    task[1] = task[1].substring(1);
                     task[2] = "";
                     return task;
                 }
@@ -25,17 +26,19 @@ public class Parser {
                     String d2 = String.join(" ", s);
                     String[] d3 = d2.split("/by");
                     if (d3.length == 1) {
-                        throw new DukeDeadlineException("The date of a Deadline must be in the format"
-                                                            + " \"dd/MM/yyyy HHmm\"");
+                        throw new DukeDeadlineException("The date of a deadline must be in the format"
+                                                        + " \"dd/MM/yyyy HHmm\"");
                     }
                     String[] d4 = d3[1].split("/");
                     String[] d5 = d3[1].split("-");
                     if (d4.length != 3 && d5.length != 0) {
-                        throw new DukeDeadlineException("The date of a Deadline must be in the format"
-                                                            + " \"dd/MM/yyyy HHmm\"");
+                        throw new DukeDeadlineException("The date of a deadline must be in the format"
+                                                        + " \"dd/MM/yyyy HHmm\"");
                     }
                     task[1] = d3[0];
+                    task[1] = task[1].substring(1).trim();
                     task[2] = d3[1];
+                    task[2] = task[2].substring(1);
                     return task;
                 }
             case "event":
@@ -46,17 +49,19 @@ public class Parser {
                     String e2 = String.join(" ", s);
                     String[] e3 = e2.split("/at");
                     if (e3.length == 1) {
-                        throw new DukeDeadlineException("The date of a Deadline must be in the format"
-                                                            + " \"dd/MM/yyyy HHmm-HHmm\"");
+                        throw new DukeDeadlineException("The date of a event must be in the format"
+                                                        + " \"dd/MM/yyyy HHmm-HHmm\"");
                     }
                     String[] e4 = e3[1].split("/");
                     String[] e5 = e3[1].split("-");
-                    if (e4.length != 3 && e4.length != 2) {
-                        throw new DukeDeadlineException("The date of a Deadline must be in the format"
-                                + " \"dd/MM/yyyy HHmm-HHmm\"");
+                    if (e4.length != 3 && e5.length != 2) {
+                        throw new DukeDeadlineException("The date of a event must be in the format"
+                                                        + " \"dd/MM/yyyy HHmm-HHmm\"");
                     }
                     task[1] = e3[0];
+                    task[1] = task[1].substring(1).trim();
                     task[2] = e3[1];
+                    task[2] = task[2].substring(1);
                     return task;
                 }
             case "list":
@@ -84,21 +89,5 @@ public class Parser {
             task[2] = "";
             return task;
         }
-    }
-
-    public static boolean isValidTask(String[] s) throws DukeException {
-        if (s.length == 1) {
-            throw new DukeEmptyException(s[0]);
-        } else if (!s[0].equals("todo")) {
-            String s2 = String.join(" ", s);
-            String[] s3 = s2.split("/");
-            String[] s4 = s3[s3.length - 1].split("-");
-            if (s3.length < 4 && s4.length < 2) {
-                throw new DukeDeadlineException("The date of a Deadline must be in the format \"dd/MM/yyyy HHmm\"");
-            } else if (s3.length < 4 && s4.length == 2) {
-                throw new DukeEventException("The date of an Event must be in the format \"dd/MM/yyyy HHmm-HHmm");
-            }
-        }
-        return true;
     }
 }

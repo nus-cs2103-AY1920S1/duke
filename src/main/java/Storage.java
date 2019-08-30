@@ -49,14 +49,4 @@ public class Storage {
             System.out.println("Output: Something serious happened here...");
         }
     }
-
-//    public static void main(String[] args) {
-//        Storage storage = new Storage("C:\\Users\\AngKa\\duke\\src\\main\\java\\test.txt");
-//        try {
-//            storage.readInputFile();
-//            storage.save(storage.input);
-//        } catch (IOException e) {
-//            System.out.println("broke");
-//        }
-//    }
 }

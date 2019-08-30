@@ -12,18 +12,19 @@ public class Storage {
     private String path;
     private TaskList tasks;
 
-    public Storage(WriteFile data, String path, TaskList t) {
-        /**
-         *  constructor for storage
-         *  saves writefile class to write into text file
-         *  saves path where file is
-         *  and tasklist to write to and call methods from it
-         *  @params WriteFile, String, TaskList
-         * @returns none
-         */
+    //private TaskList tasks;
+    public Storage(WriteFile data, String path, TaskList currTasks) {
+            /**
+             *  constructor for storage
+             *  saves writefile class to write into text file
+             *  saves path where file is
+             *  and tasklist to write to and call methods from it
+             *  @params WriteFile, String, TaskList
+             * @returns none
+             */
         txtFile = data;
         this.path = path;
-        tasks = t;
+        tasks = currTasks;
     }
     public void initStorage() {
         /**

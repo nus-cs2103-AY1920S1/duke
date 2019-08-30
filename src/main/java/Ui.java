@@ -93,16 +93,16 @@ public class Ui {
          * @params none
          *  @return none
          */
-        String s = "Here are the tasks in your list:\n";
+        String mainString = "Here are the tasks in your list:\n";
 
         for (int i = 0; i < taskArr.size(); i++) {
             // printInt to put number for printing
             int printInt = i + 1;
             Task currTask = taskArr.get(i);
-            s += currTask.printTask() + "\n";
+            mainString += currTask.printTask() + "\n";
         }
         printLine();
-        System.out.println(s);
+        System.out.println(mainString);
         printLine();
     }
     public void find(String keyWord) {

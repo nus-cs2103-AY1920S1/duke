@@ -85,11 +85,6 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
                     + " to create an event task.");
-        } catch (ParseException e) {
-            throw new DukeException("I couldn't decipher the date and time"
-                    + " that you gave me...\n"
-                    + "Please write it in <dd/mm/yyyy HHmm> format for me to"
-                    + "\nunderstand!");
         }
     }
 
@@ -101,11 +96,6 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
                     + " to create a deadline task.");
-        } catch (ParseException e) {
-            throw new DukeException("I couldn't decipher the date and time"
-                    + " that you gave me...\n"
-                    + "Please write it in <dd/mm/yyyy HHmm> format for me to"
-                    + "\nunderstand!");
         }
     }
 }

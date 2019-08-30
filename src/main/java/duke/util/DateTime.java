@@ -1,5 +1,7 @@
 package duke.util;
 
+import duke.exception.DukeException;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,11 +26,18 @@ public class DateTime implements Serializable {
      * @return java.util.Date object
      * @throws ParseException
      */
-    static public DateTime parseString(String input) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        Date dateTime;
-        dateTime = format.parse(input);
-        return new DateTime(dateTime);
+    static public DateTime parseString(String input) throws DukeException {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date dateTime;
+            dateTime = format.parse(input);
+            return new DateTime(dateTime);
+        } catch (ParseException e) {
+            throw new DukeException("I couldn't decipher the date and time"
+                    + " that you gave me...\n"
+                    + "Please write it in <dd/mm/yyyy HHmm> format for me to"
+                    + "\nunderstand!");
+        }
     }
 
     private DateTime (Date dateTime) {

@@ -15,6 +15,6 @@ public class AddCommand extends Command {
     @Override
     public void execute(List<Task> tasks) {
         tasks.add(task);
-        echo(new String[]{"added: " + task.getDescription()});
+        echo(new String[]{"added: " + task.toString()});
     }
 }

@@ -13,19 +13,16 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDescriptionWithStatus() {
-        return "[" + getStatusIcon() + "] " + description;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    private String getStatusIcon() {
+        //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

@@ -15,7 +15,7 @@ public class ListCommand extends Command {
         String[] message = new String[tasks.size()];
 
         for (int i = 0; i < tasks.size(); i++) {
-            message[i] = "\t" + (i + 1) + "." + tasks.get(i).getDescriptionWithStatus();
+            message[i] = "\t" + (i + 1) + "." + tasks.get(i).toString();
         }
         echo(message);
     }

@@ -9,8 +9,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +22,6 @@ public class Storage {
 
     public Storage(String filepath){
         this.filepath = filepath;
-
     }
 
     public void createFile(String filepath) throws IOException{
@@ -66,6 +67,7 @@ public class Storage {
         while (scanner.hasNextLine()){
             inputsFromFile.add(scanner.nextLine());
         }
+
         for (String input: inputsFromFile){
             // possible input string: "D | 0 | CS2103 Ip  | Wed 2359"
             String[] words = input.split("\\|") ;
@@ -74,7 +76,7 @@ public class Storage {
             if (words[0].length() < 3 ){
 
                 if (words[0].contains("T")) { // Will avoid header
-                    // Create a seedu.duke.task.Todo class
+                    // Create a Todo class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -87,7 +89,7 @@ public class Storage {
                     tasks.add(newTodo);
 
                 } else if (words[0].contains("E")) {
-                    // Create an seedu.duke.task.Event class
+                    // Create an Event class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -101,7 +103,7 @@ public class Storage {
                     tasks.add(newEvent);
 
                 } else if (words[0].contains("D")) {
-                    // Create a seedu.duke.task.Deadline class
+                    // Create a Deadline class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -117,6 +119,5 @@ public class Storage {
             }
         }
         return tasks;
-
     }
 }

@@ -2,31 +2,26 @@ package seedu.duke.task;
 
 public class Deadline extends Task {
 
-    protected String dateTime; // hour;
-    // protected int day, month, year;
+    private String dateTime;
 
-    public Deadline(String description, String dateTime) { //sets idDone to the default value, false
+    public Deadline(String description, String dateTime) { //sets isDone to the default value, false
         // by = 2/12/2019 1800
         // deadline cs /by 21/12/2019 0800
         super(description);
         this.dateTime = dateTime;
 
-        if (!dateTime.contains("of")) { // If string by contains the word "of", by string is already formatted
-                                 // For use when reading from saved file
-            this.dateTime = parseBy(dateTime);
+        if (!dateTime.contains("of")) {        // If string by contains the word "of", by string is already formatted
+            this.dateTime = parseDateTime(dateTime); // For use when reading from saved file
         }
-
     }
 
     public Deadline(String description, String dateTime, Boolean isDone) {
-        // by = 2/12/2019 1800
-        // deadline cs /by 21/12/2019 0800
+        // Sample commandLine input: "deadline cs /by 21/12/2019 0800"
         super(description, isDone);
         this.dateTime = dateTime;
 
-        if (!dateTime.contains("of")) { // If string by contains the word "of", by string is already formatted
-            // For use when reading from saved file
-            this.dateTime = parseBy(dateTime);
+        if (!dateTime.contains("of")) {        // If string by contains the word "of", by string is already formatted
+            this.dateTime = parseDateTime(dateTime); // For use when reading from saved file
         }
     }
 
@@ -40,11 +35,11 @@ public class Deadline extends Task {
         return ("D" + super.toSaveString() + " | " + this.dateTime);
     }
 
-    public String parseBy(String by){
+    public String parseDateTime(String dateTime){
         taskType = possibleTaskTypes.DEADLINE;
 
-        String[] words = by.split("/");
-        String[] years = by.split(" ");
+        String[] words = dateTime.split("/");
+        String[] years = dateTime.split(" ");
 
         int day = Integer.parseInt(words[0]);
         int month = Integer.parseInt(words[1]);

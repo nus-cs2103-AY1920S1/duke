@@ -1,11 +1,13 @@
 package seedu.duke.ui;
 
-import seedu.duke.DukeException;
 import seedu.duke.task.Todo;
 import seedu.duke.task.Event;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Task;
+
 import seedu.duke.tasklist.TaskList;
+
+import seedu.duke.DukeException;
 
 public class Ui {
     private final String underscore = "    ____________________________________________________________" + "\n" ;

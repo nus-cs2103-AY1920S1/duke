@@ -2,7 +2,7 @@ package seedu.duke.task;
 
 public class Event extends Task {
 
-    protected String location;
+    private String location;
 
     public Event (String description, String location){
         super(description);

@@ -31,7 +31,7 @@ public class Duke {
 
     /**
      * Run the whole program for main class.
-     * @throws IOException when file cannot be found.
+     * @throws IOException when file cannot be found.ls
      */
 
     public void run() throws IOException {

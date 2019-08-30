@@ -22,7 +22,7 @@ public abstract class Task {
 
         public String toFile() {
             String doneState = isDone ? "1" : "0";
-            return String.format("%s //| %s //| %s", type, doneState, description);
+            return String.format("%s | %s | %s", type, doneState, description);
         }
 }
 

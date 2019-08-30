@@ -25,6 +25,7 @@ public class Deadline extends Task{
     @Override
     public String toFile() {
         String doneState = isDone ? "1" : "0";
-        return String.format("%s //| %s //| %s //| %s", type, doneState, description, time);
+        SimpleDateFormat formatter =new SimpleDateFormat("dd/MM/yyyy HHmm");
+        return String.format("%s | %s | %s | %s", type, doneState, description, formatter.format(time));
     }
 }

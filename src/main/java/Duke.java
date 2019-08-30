@@ -24,7 +24,7 @@ public class Duke {
 
 
         try {
-            File f = new File("data/fruits.txt");
+            File f = new File("src/main/java/data/duke.txt");
             if (!f.exists()) {
                 throw new DukeException("File not found.");
             }
@@ -34,33 +34,31 @@ public class Duke {
                 String[] todoTask = readFileScanner.nextLine().split(" \\| ");
                 switch (todoTask[0]) {
                     case "T":
-                        Task task = new Todo(todoTask[2]);
-                        if (todoTask[1] == "1") {
-                            task.markAsDone();
+                        Task task1 = new Todo(todoTask[2]);
+                        if (todoTask[1].equals("1")) {
+                            task1.markAsDone();
                         }
-                        todolist.add(task);
+                        todolist.add(task1);
                         break;
                     case "D":
-                        Task task = new Deadline(todoTask[2], todoTask[3]);
-                        if (todoTask[1] == "1") {
-                            task.markAsDone();
+                        Task task2 = new Deadline(todoTask[2], todoTask[3]);
+                        if (todoTask[1].equals("1")) {
+                            task2.markAsDone();
                         }
-                        todolist.add(task);
+                        todolist.add(task2);
                         break;
                     case "E":
-                        Task task = new Event(todoTask[2], todoTask[3]);
-                        if (todoTask[1] == "1") {
-                            task.markAsDone();
+                        Task task3 = new Event(todoTask[2], todoTask[3]);
+                        if (todoTask[1].equals("1")) {
+                            task3.markAsDone();
                         }
-                        todolist.add(task);
-                        addTask(task);
+                        todolist.add(task3);
                         break;
                     default:
                         throw new DukeException("Something in file go wrong.");
                 }
             }
             readFileScanner.close();
-
 
             Scanner scanner = new Scanner(System.in);
 
@@ -155,7 +153,7 @@ public class Duke {
 
     private static void saveFile() throws DukeException {
         try {
-            FileWriter fw = new FileWriter("../data/duke.txt");
+            FileWriter fw = new FileWriter("src/main/java/data/duke.txt");
             String data = todolist.get(0).toFile();
             if (todolist.size() > 1) {
                 for (int i = 1; i < todolist.size(); i++) {

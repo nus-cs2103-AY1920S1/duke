@@ -13,7 +13,6 @@ import java.util.Date;
 
 public class Duke {
 
-    final public String BORDER = "-------------------------------------";
     private static ArrayList<Task> items;
     private Ui user;
 
@@ -131,12 +130,7 @@ public class Duke {
                 message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException e) {
-                sb.append(BORDER + "\n");
-                sb.append("Todo must have valid description\n");
-                sb.append(BORDER + "\n");
-                message = sb.toString();
-                System.out.println(message);
-                sb.setLength(0);
+                user.todoError();
             }
         } else if (input.toLowerCase().contains("deadline")) {
             try {
@@ -148,12 +142,7 @@ public class Duke {
                 message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
-                sb.append(BORDER + "\n");
-                sb.append("Invalid Deadline's arguments \n");
-                sb.append(BORDER + "\n");
-                message = sb.toString();
-                System.out.println(message);
-                sb.setLength(0);
+                user.deadlineError();
             }
 
         } else if (input.toLowerCase().contains("event")) {
@@ -168,20 +157,10 @@ public class Duke {
                 message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
-                sb.append(BORDER + "\n");
-                sb.append("Invalid Event's arguments \n");
-                sb.append(BORDER + "\n");
-                message = sb.toString();
-                System.out.println(message);
-                sb.setLength(0);
+                user.eventError();
             }
         } else {
-            sb.append(BORDER + "\n");
-            sb.append("Unable to understand. Invalid Input. \n");
-            sb.append(BORDER + "\n");
-            message = sb.toString();
-            System.out.println(message);
-            sb.setLength(0);
+            user.invalidInput();
         }
         return message;
     }
@@ -204,11 +183,7 @@ public class Duke {
                     }
                     items.add(newTask);
                 } catch (StringIndexOutOfBoundsException e) {
-                    sb.append(BORDER + "\n");
-                    sb.append("Todo must have valid description\n");
-                    sb.append(BORDER + "\n");
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
+                    user.todoError();
                 }
 
             } else if (input.toLowerCase().contains("[d]")) {
@@ -221,11 +196,7 @@ public class Duke {
                     }
                     items.add(newTask);
                 } catch (StringIndexOutOfBoundsException | ParseException e) {
-                    sb.append(BORDER + "\n");
-                    sb.append("Invalid Deadline's arguments \n");
-                    sb.append(BORDER + "\n");
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
+                    user.deadlineError();
                 }
 
             } else if (input.toLowerCase().contains("[e]")) {
@@ -241,11 +212,7 @@ public class Duke {
                     }
                     items.add(newTask);
                 } catch (StringIndexOutOfBoundsException | ParseException e) {
-                    sb.append(BORDER + "\n");
-                    sb.append("Invalid Event's arguments \n");
-                    sb.append(BORDER + "\n");
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
+                    user.eventError();
                 }
             }
         }

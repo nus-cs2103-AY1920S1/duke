@@ -20,6 +20,7 @@ public class Duke {
 
     void start() {
         ui.greet();
+
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             try {
@@ -31,7 +32,7 @@ public class Duke {
         }
     }
 
-    public static void main (String args[]) throws DukeException {
+    public static void main(String args[]) throws DukeException {
         Duke duke = new Duke("./src/main/data/taskList.txt");
         duke.start();
     }

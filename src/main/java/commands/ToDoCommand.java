@@ -16,6 +16,7 @@ public class ToDoCommand extends Command {
         if (args.trim().isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
         }
+
         Task task = new ToDo(false, args); //args is the description string
         tasks.addTask(task);
         storage.updateFile(tasks);

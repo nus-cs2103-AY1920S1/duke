@@ -33,10 +33,14 @@ public class Duke {
         this.ui.showTaskList(this.tl);
 
         String input = this.ui.takeInput();
-        try {
-            while (!input.equalsIgnoreCase("bye")) {
+        while (input != null) {
+            try {
                 Task task;
                 switch (this.parser.parseCommand(input)) {
+                case "bye":
+                    this.ui.printExit();
+                    System.exit(0);
+                    break;
                 case "list":
                     this.ui.showTaskList(this.tl);
                     break;
@@ -73,12 +77,13 @@ public class Duke {
                 }
                 this.storage.writeTasksToFile(this.tl);
                 input = this.ui.takeInput();
+            } catch (DukeException e) {
+                this.ui.printError(e);
             }
-        } catch (DukeException e) {
-            this.ui.printError(e);
         }
 
         this.ui.printExit();
+        System.exit(0);
     }
 
     /**

@@ -11,6 +11,12 @@ import java.util.Scanner;
 public class Storage {
     private static File file = new File("../duke.txt");
 
+    /**
+     * Loads a file to add tasks into taskList
+     *
+     * @return taskList
+     */
+
     public static ArrayList<Task> load() throws FileNotFoundException {
 
         ArrayList<Task> taskList = new ArrayList<>();
@@ -52,6 +58,13 @@ public class Storage {
         }
         return taskList;
     }
+
+    /**
+     * Saves the current taskList onto the hard drive
+     *
+     * @param taskList
+     */
+
 
     public static void saveTaskList(List<Task> taskList) {
         try {

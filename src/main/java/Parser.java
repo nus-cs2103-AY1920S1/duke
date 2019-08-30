@@ -1,7 +1,87 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * Deals with making sense of the user command.
  */
 public class Parser {
+
+    private static Optional<Command> findOneParameterCommand(String action) throws DukeException {
+        Optional<Command> command;
+        List<String> validActions = Arrays.asList(
+                new String[]{"bye", "list", "done", "delete", "find", "todo", "deadline", "event"});
+
+        if (!validActions.contains(action)) {
+            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        switch (action) {
+        case "bye":
+            command = Optional.of(new ExitCommand());
+            break;
+        case "list":
+            command = Optional.of(new PrintListCommand());
+            break;
+        default:
+            command = Optional.empty();
+        }
+        return command;
+    }
+
+    private static Optional<Command> findTwoParameterCommand(String[] parameters) throws DukeException {
+        String action = parameters[0];
+
+        if (parameters.length == 1) {
+            throw new EmptyDescriptionException("☹ OOPS!!! The description of a " +
+                    action + " command cannot be empty.");
+        }
+
+        Optional<Command> command;
+        switch (action) {
+        case "done":
+            command = Optional.of(new MarkAsDoneCommand(Integer.parseInt(parameters[1]) - 1));
+            break;
+        case "delete":
+            command = Optional.of(new DeleteTaskCommand(Integer.parseInt(parameters[1]) - 1));
+            break;
+        case "find":
+            command = Optional.of(new FindTaskCommand(parameters[1]));
+            break;
+        case "todo":
+            command = Optional.of(new AddTaskCommand(new Todo(parameters[1])));
+            break;
+        default:
+            command = Optional.empty();
+        }
+        return command;
+    }
+
+    private static Command findThreeParameterCommand(String[] parameters) throws DukeException {
+        String action = parameters[0];
+        Command command;
+
+        switch (action) {
+        case "deadline":
+            String[] description;
+            description = parameters[1].split(" /by ");
+            if (description.length == 1) {
+                throw new EmptyDescriptionException("☹ OOPS!!! You missed out the time of the deadline task.");
+            }
+            command = new AddTaskCommand(new Deadline(description[0], description[1]));
+            break;
+        case "event":
+            description = parameters[1].split(" /at ");
+            if (description.length == 1) {
+                throw new EmptyDescriptionException("☹ OOPS!!! You missed out the time of the event task.");
+            }
+            command = new AddTaskCommand(new Event(description[0], description[1]));
+            break;
+        default:
+            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        return command;
+    }
 
     /**
      * Parses the user command.
@@ -11,41 +91,17 @@ public class Parser {
      * @throws DukeException If the user input is invalid.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        if (fullCommand.equals("bye")) {
-            return new ExitCommand();
-        } else if (fullCommand.equals("list")) {
-            return new PrintListCommand();
-        } else if (fullCommand.startsWith("done ")) {
-            return new MarkAsDoneCommand(Integer.parseInt(fullCommand.substring(5)) - 1);
-        } else if (fullCommand.startsWith("delete ")) {
-            return new DeleteTaskCommand(Integer.parseInt(fullCommand.substring(7)) - 1);
-        } else if (fullCommand.startsWith("find")) {
-            if (fullCommand.equals("find") || fullCommand.equals("find ")) {
-                throw new EmptyDescriptionException("☹ OOPS!!! The description of a find command cannot be empty.");
+        String[] parameters = fullCommand.split(" ", 2);
+        Optional<Command> command = Parser.findOneParameterCommand(parameters[0]);
+        if (command.isEmpty()) {
+            command = Parser.findTwoParameterCommand(parameters);
+            if (command.isEmpty()) {
+                return Parser.findThreeParameterCommand(parameters);
             } else {
-                return new FindTaskCommand(fullCommand.substring(5));
+                return command.get();
             }
         } else {
-            try {
-                Task newTask;
-                if (fullCommand.equals("deadline") || fullCommand.equals("event") || fullCommand.equals("todo")) {
-                    throw new EmptyDescriptionException("☹ OOPS!!! The description of a "
-                            + fullCommand + " cannot be empty.");
-                } else if (fullCommand.startsWith("deadline")) {
-                    String[] phrases = fullCommand.substring(9).split(" /by ");
-                    newTask = new Deadline(phrases[0], phrases[1]);
-                } else if (fullCommand.startsWith("event")) {
-                    String[] phrases = fullCommand.substring(6).split(" /at ");
-                    newTask = new Event(phrases[0], phrases[1]);
-                } else if (fullCommand.startsWith("todo")) {
-                    newTask = new Todo(fullCommand.substring(5));
-                } else {
-                    throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-                return new AddTaskCommand(newTask);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidInputException("Improper formatting of task description!");
-            }
+            return command.get();
         }
     }
 }

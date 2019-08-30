@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.DukeCommandExit;
 import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
 import duke.util.ui.DukeUi;
@@ -42,21 +41,6 @@ public class Duke {
             System.exit(0);
         }
     }
-
-    /**
-     * Run method will first display Duke's welcome message {@link DukeUiMessages#displayWelcomeMessage()} and then run
-     * continuously until a {@link DukeCommandExit} is executed.
-     */
-//    public void run() {
-//        ui.displayWelcomeMessage();
-//        while (true) {
-//            String inputLine = ui.readCommand();
-//            Optional<DukeCommand> command = DukeParser.parseCommand(inputLine, ui);
-//            if (!command.isEmpty()) {
-//                command.get().execute(tasks, ui, storage);
-//            }
-//        }
-//    }
 
     public static void main(String[] args) {
         Application.launch(DukeUi.class);

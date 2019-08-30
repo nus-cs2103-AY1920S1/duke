@@ -31,39 +31,24 @@ public class DukeUi extends Application {
     private Button sendButton;
     private Scene scene;
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
+    /**
+     * Initializes all the UI elements and sets their sizes. A Scene object will be initialized and have every element
+     * added to it at the end.
+     */
+    private void initUIElements() {
         /* The container for the content of the chat to scroll.
-            |-----ScrollPane-----|
-            ||-------VBox-------||
-            ||                  ||
-            ||------------------||
-            |--------------------|
+           |------AnchorPane------|
+           ||-----ScrollPane-----||
+           |||-------VBox-------|||
+           |||                  |||
+           |||------------------|||
+           ||--------------------||
+           |<---TextField---><Btn>|
+           |----------------------|
          */
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-
-        //Input textfield
-        userInput = new TextField();
-
-        //Send button
-        sendButton = new Button("Send");
-
-        //Add all elements into the main window
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
 
         //Dialog area size and responsiveness
         scrollPane.setPrefSize(385, 535);
@@ -75,27 +60,54 @@ public class DukeUi extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //Input textfield
+        userInput = new TextField();
         userInput.setPrefWidth(325.0);
 
         //Send button
+        sendButton = new Button("Send");
         sendButton.setPrefWidth(55.0);
 
-        //Main window
-        mainLayout.setPrefSize(400.0, 600.0);
+        //Add all elements into the main window
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.setPrefSize(385.0, 600.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        scene = new Scene(mainLayout);
+    }
+
+    /**
+     * Prepares the main application GUI window.
+     * @param stage Stage object that will be run with.
+     */
+    private void prepareStage(Stage stage) {
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+    }
+
+    /**
+     * Obtains the context of the logic components.
+     */
+    private void initLogicElements() {
         duke = new Duke(Duke.DUKE_TASK_FILE_PATH);
         storage = duke.getStorage();
         tasks = duke.getTasks();
         ui = duke.getUi();
         ui.initUiComponents(this);
-        ui.displayWelcomeMessage();
+    }
 
-        //Wait for user input
+    /**
+     * Initializes all the events for the program's GUI.
+     */
+    private void initEventHandling() {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -103,6 +115,23 @@ public class DukeUi extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+    }
+
+    /**
+     * Duke Program entry point. Initializes the main window UI, as well as the underlying logic components.
+     * The event handling is also initialized. Finally, the program will print the welcome message and continuously
+     * wait for user input.
+     * @param stage Stage object that will be run with.
+     */
+    @Override
+    public void start(Stage stage) {
+        initUIElements();
+        prepareStage(stage);
+        initLogicElements();
+        initEventHandling();
+
+        //Print the welcome logo
+        ui.displayWelcomeMessage();
     }
 
     /**
@@ -118,7 +147,7 @@ public class DukeUi extends Application {
     /**
      * Reads the input from the input textfield and returns it as a String. Clears the user input after processing.
      */
-    public void handleUserInput() {
+    private void handleUserInput() {
         String input = userInput.getText();
         userInput.clear();
         addAsLabelToDisplay(input);

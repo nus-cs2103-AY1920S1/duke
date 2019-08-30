@@ -41,6 +41,10 @@ public class DukeUiMessages {
         ui = new DukeUi();
     }
 
+    /**
+     * Initializes the ui context to the main GUI object.
+     * @param ui GUI object for setting the context.
+     */
     public void initUiComponents(DukeUi ui) {
         this.ui = ui;
     }

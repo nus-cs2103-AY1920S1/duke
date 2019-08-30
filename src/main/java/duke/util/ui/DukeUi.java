@@ -1,32 +1,39 @@
 package duke.util.ui;
 
+import duke.Duke;
+import duke.command.DukeCommand;
+import duke.util.DukeParser;
+import duke.util.DukeStorage;
+import duke.util.DukeTaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Optional;
+
 public class DukeUi extends Application {
+
+    private Duke duke;
+    private DukeUiMessages ui;
+    private DukeStorage storage;
+    private DukeTaskList tasks;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-
         /* The container for the content of the chat to scroll.
             |-----ScrollPane-----|
             ||-------VBox-------||
@@ -81,7 +88,14 @@ public class DukeUi extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Step 3. Add functionality to handle user input.
+        duke = new Duke(Duke.DUKE_TASK_FILE_PATH);
+        storage = duke.getStorage();
+        tasks = duke.getTasks();
+        ui = duke.getUi();
+        ui.initUiComponents(this);
+        ui.displayWelcomeMessage();
+
+        //Wait for user input
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -92,38 +106,26 @@ public class DukeUi extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * Adds the specified String into the dialog container as a Label.
+     * @param input String to add to the dialog container as a Label.
      */
-    public Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    public void addAsLabelToDisplay(String input) {
+        Label output = new Label(input);
+        output.setWrapText(true);
+        dialogContainer.getChildren().add(output);
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Reads the input from the input textfield and returns it as a String. Clears the user input after processing.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+    public void handleUserInput() {
+        String input = userInput.getText();
         userInput.clear();
+        addAsLabelToDisplay(input);
+        Optional<DukeCommand> command = DukeParser.parseCommand(input, ui);
+        if (!command.isEmpty()) {
+            command.get().execute(tasks, ui, storage);
+        }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 }

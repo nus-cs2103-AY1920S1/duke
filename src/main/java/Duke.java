@@ -81,10 +81,20 @@ public class Duke {
                     } else if (command.equals("delete")) {
                         int taskNum = sc.nextInt();
                         System.out.println(line + "     Noted. I've removed this task: ");
-                        System.out.println("       " + taskList.get(taskNum - 1). toString());
+                        System.out.println("       " + taskList.get(taskNum - 1).toString());
                         taskList.remove(taskNum - 1);
                         System.out.print("     Now you have " + taskList.size() + "tasks in the list.\n" + line);
                         Storage.saveTaskList(taskList); //save file
+
+                    } else if (command.equals("find")) {
+                        String wordToFind = sc.nextLine();
+                        ArrayList<Task> relatedTasks = new ArrayList<>();
+                        for (Task task : taskList) {
+                            if (task.getDescription().contains(wordToFind)) {
+                                relatedTasks.add(task);
+                            }
+                        }
+                        ui.printFindTasks(relatedTasks);
 
                     } else {
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

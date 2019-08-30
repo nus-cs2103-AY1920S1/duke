@@ -96,6 +96,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows tasks in a list of tasks that match a given filter string.
+     * @param tasks A list of tasks
+     * @param filter Filter string
+     */
     public void showFilteredTasks(List<Task> tasks, String filter) {
         showMessage("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

@@ -10,6 +10,10 @@ public class Deadline extends Task{
         date_Time = DateTime.setDeadline(description.substring(divider + 4, description.length()));
         super.description = super.description.substring(0, divider);
     }
+    public Deadline(String description, DateTime date_Time){
+        super(description);
+        this.date_Time = date_Time;
+    }
 
     @Override
     public String toString(){

@@ -8,17 +8,20 @@ public class DateTime{
     private LocalDateTime start;
     private LocalTime endTime;
     private String display;
-    private static DateTimeFormatter getDay = DateTimeFormatter.ofPattern("dd");
-    private static DateTimeFormatter getTime = DateTimeFormatter.ofPattern("HH:mm");
-    private static DateTimeFormatter getMonth= DateTimeFormatter.ofPattern("MMM");
+    private static DateTimeFormatter getStart = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static DateTimeFormatter getTime = DateTimeFormatter.ofPattern("HHmm");
 
     public static DateTime setDeadline(String date_time){
         DateTime deadline = new DateTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        deadline.start = LocalDateTime.parse(date_time, formatter);
-        deadline.display = deadline.start.format(getMonth) + " "
-                + getDayOfMonth(deadline.start.format(getDay)) + " "
-                + deadline.start.format(getTime);
+        deadline.start = LocalDateTime.parse(date_time, getStart);
+        deadline.display = deadline.start.format(getStart);
+        return deadline;
+    }
+
+    public static DateTime readDeadLine(String date_time){
+        DateTime deadline = new DateTime();
+        deadline.start = LocalDateTime.parse(date_time, getStart);
+        deadline.display = deadline.start.format(getStart);
         return deadline;
     }
 
@@ -29,15 +32,24 @@ public class DateTime{
             throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Need to have end time.\n" + (new Border()));
         }
         String end = date_time.substring(divider + 1, date_time.length());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        event.start = LocalDateTime.parse(date_time.substring(0, divider), formatter);
+        event.start = LocalDateTime.parse(date_time.substring(0, divider), getStart);
         event.endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern("HHmm"));
-        event.display = event.start.format(getMonth) + " "
-                + getDayOfMonth(event.start.format(getDay)) + " "
-                + event.start.format(getTime) + "-" + event.endTime.format(getTime);
+        event.display = event.start.format(getStart) + "-" + event.endTime.format(getTime);
         return event;
     }
 
+    public static DateTime readEventTime(String date_time) throws DukeException{
+        DateTime event = new DateTime();
+        int divider = date_time.indexOf("-");
+        if (divider == -1 || (divider == date_time.length() -1)){
+            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Need to have end time.\n" + (new Border()));
+        }
+        String end = date_time.substring(divider + 1, date_time.length());
+        event.start = LocalDateTime.parse(date_time.substring(0, divider), getStart);
+        event.endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern("HHmm"));
+        event.display = event.start.format(getStart) + "-" + event.endTime.format(getTime);
+        return event;
+    }
     private static String getDayOfMonth(String dd) {
         if (dd.substring(0,1).equals("0")){
             dd = dd.substring(1,dd.length());

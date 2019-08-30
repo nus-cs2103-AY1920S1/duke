@@ -1,11 +1,82 @@
 import java.util.ArrayList;
 
-public class Task_List {
+
+public class TaskList {
     String filePath = "data/duke.txt";
     ArrayList <Task> schedule = new ArrayList<> ();
-    int task_Num = 0;
+    Storage storage;
+    public int task_Num;
+    boolean isFirst ;
 
-    public void add(String task){
+    public TaskList(Storage storage){
+        try {
+            this.storage = storage;
+            this.schedule = storage.getSchedule();
+            task_Num = schedule.size();
+            if (task_Num == 0){
+                isFirst = true;
+            } else {
+                isFirst = false;
+            }
+            System.out.println(task_Num);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public TaskList(){
+        try {
+            storage = new Storage(filePath);
+            this.schedule = schedule;
+            task_Num = schedule.size();
+            if (task_Num == 0){
+                isFirst = true;
+            } else {
+                isFirst = false;
+            }
+            System.out.println(task_Num);
+        } catch (DukeException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Task getTask(int index){
+
+        return schedule.get(index);
+    }
+
+    public void complete(int index)
+            throws NullPointerException, IndexOutOfBoundsException, NumberFormatException, DukeException{
+        schedule.get(index).markAsDone();
+        storage.editFile(schedule.toString());
+    }
+
+    public void addTask(Task task) throws DukeException{
+        schedule.add(task);
+        String input = "";
+        if (isFirst){
+            isFirst = !isFirst;
+        } else {
+            storage.writeToFile(System.lineSeparator());
+        }
+        storage.writeToFile(task.toString());
+        task_Num++;
+    }
+
+    public Task remove(int index)
+            throws NullPointerException, IndexOutOfBoundsException, NumberFormatException, DukeException{
+        Task removed_Task = schedule.get(index);
+        schedule.remove(index);
+        storage.editFile(schedule.toString());
+        task_Num --;
+        return removed_Task;
+    }
+
+    public void stop() throws DukeException{
+        storage.closeWriter();
+    }
+
+    /*public void add(String task){
         String[] word_Arr = task.split(" ", 2);
         try {
             Commands command = Commands.getByName(word_Arr[0]);
@@ -102,7 +173,7 @@ public class Task_List {
         if (word_Arr.length < 2) {
             throw new DukeException((new Border()) + "\n     ☹ OOPS!!! The description of a " + task_Type + " cannot be empty.\n" + (new Border()));
         }
-    }
+    }*/
 
 
     public String toString(){

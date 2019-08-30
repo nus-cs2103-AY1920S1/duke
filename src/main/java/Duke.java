@@ -1,24 +1,35 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
 
-        Task_List schedule = new Task_List();
-        Scanner sc = new Scanner(System.in);
-        System.out.println(new Border());
-        System.out.println("    Hello! I'm \n" + logo + "\n    What can I do for you?");
-        System.out.println(new Border() + "\n");
-        String input = sc.nextLine();
-        while (!input.equals("bye")){
-            schedule.add(input);
-            input = sc.nextLine();
+    public Duke(String filePath) {
+        ui = new Ui();
+        try {
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.load());
+            parser = new Parser(tasks);
+        } catch (DukeException e) {
+            //ui.showLoadingError();
         }
-        System.out.println((new Border()) + "\n     Bye. Hope to see you again soon! \n" + (new Border()));
+    }
 
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            ui.showLine(); // show the divider line ("_______")
+            parser.parse(fullCommand);
+            ui.showLine();
+            isExit = fullCommand.equals("bye");
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

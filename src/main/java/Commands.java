@@ -1,5 +1,6 @@
 public enum Commands {
-    LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline"), EVENT("event");
+    LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline")
+        , EVENT("event"), BYE("bye");
 
     private String name;
 
@@ -11,9 +12,6 @@ public enum Commands {
         return name;
     }
 
-
-
-
     public static Commands getByName(String keyword) throws DukeException{
         for(Commands command : values()){
             if(command.getName().equals(keyword)){
@@ -24,3 +22,4 @@ public enum Commands {
         throw new DukeException((new Border()) + "\n     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + (new Border()) + "\n");
     }
 }
+

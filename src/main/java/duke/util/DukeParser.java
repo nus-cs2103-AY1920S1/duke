@@ -5,6 +5,7 @@ import duke.command.DukeCommandAdd;
 import duke.command.DukeCommandExit;
 import duke.command.DukeCommandList;
 import duke.command.DukeCommandUpdate;
+import duke.util.ui.DukeUiMessages;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -97,12 +98,12 @@ public class DukeParser {
      * {@link DukeCommandList} class will be instantiated and returned. If the command is to "BYE", a
      * {@link DukeCommandExit} class will be instantiated and returned. An Optional.empty() will be returned if the
      *     user input cannot be parsed.
-     * @param input Raw user input String obtained from {@link DukeUi#readCommand()}.
-     * @param ui Instance of {@link DukeUi} which will show output to the user.
+     * @param input Raw user input String obtained from {@link DukeUiMessages#readCommand()}.
+     * @param ui Instance of {@link DukeUiMessages} which will show output to the user.
      * @return Optional&lt;DukeCommand&gt; which is empty if the user input cannot be parsed, or a {@link DukeCommand}
-     *     sub-class which has a {@link DukeCommand#execute(DukeTaskList, DukeUi, DukeStorage)} method.
+     *     sub-class which has a {@link DukeCommand#execute(DukeTaskList, DukeUiMessages, DukeStorage)} method.
      */
-    public static Optional<DukeCommand> parseCommand(String input, DukeUi ui) {
+    public static Optional<DukeCommand> parseCommand(String input, DukeUiMessages ui) {
         String[] inputTokens = input.split(" ");
         try {
             DukeCommandEnum inputCommand = DukeCommandEnum.valueOf(inputTokens[0].toUpperCase());

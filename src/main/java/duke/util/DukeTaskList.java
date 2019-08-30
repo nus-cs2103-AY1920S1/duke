@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.task.DukeTask;
+import duke.util.ui.DukeUiMessages;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,10 +39,10 @@ public class DukeTaskList {
      * is then saved to the hard disk via {@link DukeStorage#save}.
      * @param inputTask User specified input that will be the name of the {@link duke.task.DukeTask}
      *                  to be added to the current list of {@link duke.task.DukeTask}.
-     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param ui duke.util.ui.DukeUiMessages object for displaying output to the user.
      * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
      */
-    public void addToDukeTasks(DukeTask inputTask, DukeUi ui, DukeStorage storage) {
+    public void addToDukeTasks(DukeTask inputTask, DukeUiMessages ui, DukeStorage storage) {
         try {
             userDukeTasks.add(inputTask);
             sb.setLength(0);
@@ -59,10 +60,10 @@ public class DukeTaskList {
      * Deletes the specified task index.
      * @param taskIndexString Raw String index of the task to be deleted, following the printed list index from
      *                        the "list" command.
-     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param ui duke.util.ui.DukeUiMessages object for displaying output to the user.
      * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
      */
-    public void deleteDukeTask(String taskIndexString, DukeUi ui, DukeStorage storage) {
+    public void deleteDukeTask(String taskIndexString, DukeUiMessages ui, DukeStorage storage) {
         try {
             int taskIndex = Integer.parseInt(taskIndexString);
             if (taskIndex < 1 || taskIndex > userDukeTasks.size()) {
@@ -86,10 +87,10 @@ public class DukeTaskList {
     /**
      * Displays the user-supplied list of tasks in a formatted style. This method will prepare the list by looping
      * through the List of tasks and printing each task with its index. Then it will call
-     * {@link DukeUi#displayToUser(String)} to display the final formatted list.
-     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * {@link DukeUiMessages#displayToUser(String)} to display the final formatted list.
+     * @param ui duke.util.ui.DukeUiMessages object for displaying output to the user.
      */
-    public void displayDukeTasks(DukeUi ui) {
+    public void displayDukeTasks(DukeUiMessages ui) {
         sb.setLength(0);
         sb.append("Here are the tasks in your list:\n\t ");
         for (int index = 0; index < userDukeTasks.size(); index++) {
@@ -106,9 +107,9 @@ public class DukeTaskList {
      * Searches the user-supplied list of tasks for the input search terms. Then prints out tasks that matches the
      * search terms.
      * @param searchTerms Substring to search for in the entire task list.
-     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param ui duke.util.ui.DukeUiMessages object for displaying output to the user.
      */
-    public void findDukeTasks(String searchTerms, DukeUi ui) {
+    public void findDukeTasks(String searchTerms, DukeUiMessages ui) {
         sb.setLength(0);
         sb.append("Here are the matching tasks in your list:\n\t ");
         for (int index = 0; index < userDukeTasks.size(); index++) {
@@ -128,10 +129,10 @@ public class DukeTaskList {
      * Checks if the specified task index has already been marked as complete. If it is not then mark the task as
      * complete and print out the name of this task.
      * @param taskIndexString Raw String index of the task following the printed list from running the "list" command.
-     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param ui duke.util.ui.DukeUiMessages object for displaying output to the user.
      * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
      */
-    public void markDukeTaskComplete(String taskIndexString, DukeUi ui, DukeStorage storage) {
+    public void markDukeTaskComplete(String taskIndexString, DukeUiMessages ui, DukeStorage storage) {
         try {
             int taskIndex = Integer.parseInt(taskIndexString);
             if (taskIndex < 1 || taskIndex >= userDukeTasks.size()) {

@@ -1,8 +1,8 @@
-package duke.util;
+package duke.util.ui;
 
 import java.util.Scanner;
 
-public class DukeUi {
+public class DukeUiMessages {
 
     private static final String DUKE_ASCII_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -34,7 +34,7 @@ public class DukeUi {
     private StringBuilder sb;
     private Scanner scanner;
 
-    public DukeUi() {
+    public DukeUiMessages() {
         sb = new StringBuilder();
         scanner = new Scanner(System.in);
     }

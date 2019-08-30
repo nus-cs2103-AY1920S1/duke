@@ -1,9 +1,11 @@
-import duke.util.DukeParser;
-import duke.util.DukeStorage;
-import duke.util.DukeUi;
 import duke.command.DukeCommand;
 import duke.command.DukeCommandExit;
+import duke.util.DukeParser;
+import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
+import duke.util.ui.DukeUi;
+import duke.util.ui.DukeUiMessages;
+import javafx.application.Application;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -14,14 +16,14 @@ public class Duke {
 
     private DukeStorage storage;
     private DukeTaskList tasks;
-    private DukeUi ui;
+    private DukeUiMessages ui;
 
     /**
      * Constructor takes in a file path String which specifies the location of the data file to save to/load from.
      * @param filePath Relative/Absolute file path where the data file is stored on the hard disk.
      */
     public Duke(String filePath) {
-        ui = new DukeUi();
+        ui = new DukeUiMessages();
         try {
             storage = new DukeStorage(filePath);
             tasks = new DukeTaskList(storage.load(ui));
@@ -32,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Run method will first display Duke's welcome message {@link DukeUi#displayWelcomeMessage()} and then run
+     * Run method will first display Duke's welcome message {@link DukeUiMessages#displayWelcomeMessage()} and then run
      * continuously until a {@link DukeCommandExit} is executed.
      */
     public void run() {
@@ -47,6 +49,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        Application.launch(DukeUi.class, args);
         new Duke(DUKE_TASK_FILE_PATH).run();
     }
 }

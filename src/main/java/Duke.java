@@ -19,7 +19,9 @@ public class Duke {
         try {
             readFileContents(filePath);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("File not found!!!");
+        } catch (DukeException e) {
+            System.out.println("OOPS!!! Invalid time and date format read.");
         }
 
         while (!byeFlag) {
@@ -42,25 +44,34 @@ public class Duke {
 
         while (!input.equals("bye")) {
             String command = getCommand(input);
+            String description;
+            DateTime dateTime;
 
             switch (command) {
                 case "list":
                     list();
                     break;
                 case "done":
-                    done(getDescription(input, command));
+                    description = getDescription(input, command);
+                    done(description);
                     break;
                 case "todo":
-                    updateAdd(todo(getDescription(input, command)));
+                    description = getDescription(input, command);
+                    updateAdd(todo(description));
                     break;
                 case "deadline":
-                    updateAdd(deadline(getDescription(input, command), getDetail(input, command)));
+                    description = getDescription(input, command);
+                    dateTime = getDateAndTime(input, command);
+                    updateAdd(deadline(description, dateTime));
                     break;
                 case "event":
-                    updateAdd(event(getDescription(input, command), getDetail(input, command)));
+                    description = getDescription(input, command);
+                    dateTime = getDateAndTime(input, command);
+                    updateAdd(event(description, dateTime));
                     break;
                 case "delete":
-                    updateRemove(delete(getDescription(input, command)));
+                    description = getDescription(input, command);
+                    updateRemove(delete(description));
                     break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -106,8 +117,9 @@ public class Duke {
         return action;
     }
 
-    public static String getDetail(String input, String command) throws DukeException {
+    public static DateTime getDateAndTime(String input, String command) throws DukeException {
         String detail = "";
+        DateTime dateTime;
 
         if (input.contains(" ") && input.contains("/")) {
             int index = input.indexOf(" ");
@@ -119,9 +131,12 @@ public class Duke {
 
         if (detail.equals("")) {
             throw new DukeException("OOPS!!! The time and date of a " + command + " cannot be empty.");
+        } else {
+            dateTime = new DateTime(detail);
+            dateTime.setDateAndTime();
         }
 
-        return detail;
+        return dateTime;
     }
 
     public static void updateAdd(Task task) {
@@ -174,15 +189,15 @@ public class Duke {
         return task;
     }
 
-    public static Task deadline(String action, String detail) {
-        Task task = new Deadline(action, detail);
+    public static Task deadline(String action, DateTime dateTime) {
+        Task task = new Deadline(action, dateTime);
         taskList.add(task);
 
         return task;
     }
 
-    public static Task event(String action, String detail) {
-        Task task = new Event(action, detail);
+    public static Task event(String action, DateTime dateTime) {
+        Task task = new Event(action, dateTime);
         taskList.add(task);
 
         return task;
@@ -211,7 +226,7 @@ public class Duke {
         fw.close();
     }
 
-    public static void readFileContents(String filePath) throws FileNotFoundException {
+    public static void readFileContents(String filePath) throws FileNotFoundException, DukeException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
@@ -219,25 +234,29 @@ public class Duke {
         }
     }
 
-    public static void readAsObject(String item) {
+    public static void readAsObject(String item) throws DukeException {
         char type = item.charAt(0);
         String[] split = item.split(" \\| ");
+        boolean isValidTask = false;
 
         switch (type) {
             case 'T':
                 todo(split[2]);
+                isValidTask = true;
                 break;
             case 'D':
-                deadline(split[2], split[3]);
+                deadline(split[2], new DateTime(split[3]));
+                isValidTask = true;
                 break;
             case 'E':
-                event(split[2], split[3]);
+                event(split[2], new DateTime(split[3]));
+                isValidTask = true;
                 break;
             default:
                 System.out.println("OOPS!!! There is an invalid task in the file!");
         }
 
-        if (split[1].equals("+")) {
+        if (split[1].equals("+") && isValidTask) {
             int lastIndex = taskList.size() - 1;
             (taskList.get(lastIndex)).setDone(true);
         }

@@ -3,7 +3,7 @@ public class Task {
     protected boolean isDone;
     protected char fileFormatType;
     protected String fileFormatDescription;
-    protected String fileFormatDetail;
+    protected DateTime fileFormatDateTime;
 
     public Task(String description) {
         this.description = description;
@@ -24,17 +24,17 @@ public class Task {
 
     }
 
-    public void changeToFileFormat(char type, String description, String detail) {
+    public void changeToFileFormat(char type, String description, DateTime dateTime) {
         this.fileFormatType = type;
         this.fileFormatDescription = description;
-        this.fileFormatDetail = detail;
+        this.fileFormatDateTime = dateTime;
     }
 
     public String getFileFormat() {
         if (fileFormatType == 'T') {
             return fileFormatType + " | " + getStatusIcon() + " | " + fileFormatDescription;
         } else {
-            return fileFormatType + " | " + getStatusIcon() + " | " + fileFormatDescription + " | " + fileFormatDetail;
+            return fileFormatType + " | " + getStatusIcon() + " | " + fileFormatDescription + " | " + fileFormatDateTime.toString();
         }
     }
 

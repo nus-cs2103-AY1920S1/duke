@@ -7,14 +7,14 @@ public class Deadline extends Task {
     protected  String by;
     protected Date date;
 
-    public Deadline(String description, String by) throws DukeDeadlineException {
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             this.date = formatter.parse(by);
         } catch (ParseException pe){
-            throw new DukeDeadlineException("The date of a Deadline must be in the format \"dd/MM/yyyy HHmm\"");
+            System.out.println("Something serious happened here...");
         }
     }
 

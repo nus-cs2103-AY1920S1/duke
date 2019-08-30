@@ -9,7 +9,7 @@ public class Event extends Task {
     protected Date startTime;
     protected Date endTime;
 
-    public Event(String description, String on) throws Exception {
+    public Event(String description, String on) {
         super(description);
         this.on = on;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -19,7 +19,7 @@ public class Event extends Task {
             this.startTime = formatter.parse(on.substring(10, 14));
             this.endTime = formatter.parse(on.substring(15));
         } catch (ParseException pe) {
-            throw new DukeEventException("The date of an Event must be in the format \"dd/MM/yyyy HHmm-HHmm");
+            System.out.println("Something serious happened here...");
         }
     }
 

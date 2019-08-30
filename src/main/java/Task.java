@@ -13,7 +13,7 @@ public class Task {
         return total;
     }
 
-    public static void setTotal() {
+    public static void decTotal() {
         total--;
     }
 

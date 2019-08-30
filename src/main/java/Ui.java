@@ -61,6 +61,50 @@ public class Ui {
         return emptyError;
     }
 
+    public String eventError() {
+        //error message for empty input
+        StringBuilder sb = new StringBuilder();
+        sb.append(BORDER + "\n");
+        sb.append("Invalid Event's arguments \n");
+        sb.append(BORDER + "\n");
+        String eventMessage = sb.toString();
+        System.out.println(eventMessage);
+        return eventMessage;
+    }
+
+    public String deadlineError() {
+        //error message for empty input
+        StringBuilder sb = new StringBuilder();
+        sb.append(BORDER + "\n");
+        sb.append("Invalid Deadline's arguments \n");
+        sb.append(BORDER + "\n");
+        String deadlineMessage = sb.toString();
+        System.out.println(deadlineMessage);
+        return deadlineMessage;
+    }
+
+    public String todoError() {
+        //error message for empty input
+        StringBuilder sb = new StringBuilder();
+        sb.append(BORDER + "\n");
+        sb.append("Todo must have valid description\n");
+        sb.append(BORDER + "\n");
+        String todoMessage = sb.toString();
+        System.out.println(todoMessage);
+        return todoMessage;
+    }
+
+    public String invalidInput() {
+        //error message for empty input
+        StringBuilder sb = new StringBuilder();
+        sb.append(BORDER + "\n");
+        sb.append("Unable to understand. Invalid Input. \n");
+        sb.append(BORDER + "\n");
+        String invalidMessage = sb.toString();
+        System.out.println(invalidMessage);
+        return invalidMessage;
+    }
+
     /**
      * Ending message when user input bye.
      */

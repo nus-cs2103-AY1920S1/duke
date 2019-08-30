@@ -3,6 +3,7 @@ package logic;
 import task.Task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Contains the logic.TaskList and has the operations to add/delete tasks in the list
@@ -48,4 +49,10 @@ public class TaskList {
         Ui.printStr(sb.toString());
     }
 
+    public List<Task> findTask(String taskDescription) {
+        return taskList.stream()
+                .filter(task -> task.getDescription()
+                        .contains(taskDescription)).collect(Collectors.toList());
+
+    }
 }

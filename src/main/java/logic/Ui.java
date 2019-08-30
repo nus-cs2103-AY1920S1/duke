@@ -26,14 +26,20 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         sb.append(logo);
-        sb.append("Hello! I'm logic.Duke\n");
+        sb.append("Hello! I'm Duke\n");
         sb.append("What can I do for you?");
         printStr(sb.toString());
     }
 
     //returns numbered list of tasks
-    public void printList(List<Task> taskList) {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+    public void printList(List<Task> taskList, boolean isMatching) {
+        StringBuilder sb = new StringBuilder();
+        if (isMatching) {
+            sb.append("Here are the matching tasks in your list:\n");
+        } else {
+            sb.append("Here are the tasks in your list:\n");
+        }
+
         for (int i = 0; i < taskList.size(); i++) {
             sb.append((i + 1) + ". " + taskList.get(i).toString());
             if (i != taskList.size() - 1) { //last item

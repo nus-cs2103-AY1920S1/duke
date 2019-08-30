@@ -27,6 +27,21 @@ public class TaskList {
         tasks.remove(num - 1);
     }
 
+    /**
+     * Finds tasks that have matching words in their descriptions.
+     * @param target searching term
+     * @return TaskList of matching tasks
+     */
+    public TaskList find(String target) {
+        ArrayList<Task> targets = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(target)) {
+                targets.add(t);
+            }
+        }
+        return new TaskList(targets);
+    }
+
     public void add(String type, String description) throws DukeException {
         Task newTask;
         switch (type) {

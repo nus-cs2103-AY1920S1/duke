@@ -96,7 +96,8 @@ public class Task {
      * @return String symbol of whether the task is done.
      */
     private String getStatusIcon() {
-        return isDone ? "✓" : "✗";
+//        return isDone ? "✓" : "✗";
+        return isDone ? "Y" : "N";
     }
 
     /**

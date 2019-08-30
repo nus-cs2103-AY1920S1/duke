@@ -34,9 +34,10 @@ public class AddCommand extends Command {
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
+     * @return Returns a string of the response from duke after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String message = "";
         String indent = ui.getIndent();
         try {
@@ -47,8 +48,9 @@ public class AddCommand extends Command {
         } catch (TaskException e) {
             message = indent + e.getMessage();
         } finally {
-            System.out.println(message);
+//            System.out.println(message);
             storage.write(taskList);
+            return message;
         }
     }
 }

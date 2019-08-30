@@ -18,8 +18,9 @@ public abstract class Command {
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
+     * @return Returns a string of the response from duke after executing this command.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Checks if command is an exit command.

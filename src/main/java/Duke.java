@@ -177,7 +177,13 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            String response = c.execute(taskList, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
 }

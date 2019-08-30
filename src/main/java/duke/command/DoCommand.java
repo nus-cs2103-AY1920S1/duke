@@ -31,13 +31,15 @@ public class DoCommand extends Command {
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
+     * @return Returns a string of the response from duke after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.doTask(index);
         String indent = ui.getIndent();
         String message = indent + "Nice! I've marked this task as done:\n" + indent + "  " + taskList.getTask(index);
-        System.out.println(message);
+//        System.out.println(message);
         storage.write(taskList);
+        return message;
     }
 }

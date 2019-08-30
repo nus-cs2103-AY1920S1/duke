@@ -27,10 +27,12 @@ public class FindCommand extends Command {
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
+     * @return Returns a string of the response from duke after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filteredTaskList = taskList.filterByString(substring);
-        System.out.println(filteredTaskList);
+//        System.out.println(filteredTaskList);
+        return filteredTaskList.toString();
     }
 }

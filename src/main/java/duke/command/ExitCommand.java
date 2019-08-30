@@ -24,11 +24,13 @@ public class ExitCommand extends Command {
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
+     * @return Returns a string of the response from duke after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String indent = ui.getIndent();
         String message = indent + "Bye. Hope to see you again soon!";
-        System.out.println(message);
+//        System.out.println(message);
+        return message;
     }
 }

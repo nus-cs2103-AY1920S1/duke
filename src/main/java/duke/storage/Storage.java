@@ -15,6 +15,8 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import static duke.task.Task.DATE_TIME_FORMATTER;
+
 public class Storage {
     private File file;
 
@@ -63,12 +65,12 @@ public class Storage {
                     break;
                 }
                 case "D": {
-                    LocalDateTime by = LocalDateTime.parse(tokens[3], Task.DATE_TIME_FORMATTER);
+                    LocalDateTime by = LocalDateTime.parse(tokens[3], DATE_TIME_FORMATTER);
                     task = new Deadline(description, by, isDone);
                     break;
                 }
                 case "E": {
-                    LocalDateTime at = LocalDateTime.parse(tokens[3], Task.DATE_TIME_FORMATTER);
+                    LocalDateTime at = LocalDateTime.parse(tokens[3], DATE_TIME_FORMATTER);
                     task = new Event(description, at, isDone);
                     break;
                 }

@@ -15,7 +15,7 @@ public class Event extends Task {
     }
 
     private String getAtString() {
-        return Task.DATE_TIME_FORMATTER.format(this.at);
+        return DATE_TIME_FORMATTER.format(this.at);
     }
 
     @Override

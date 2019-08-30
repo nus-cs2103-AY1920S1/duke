@@ -12,6 +12,8 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import static duke.task.Task.DATE_TIME_FORMATTER;
+
 public class Command {
     private CommandType type;
     private String arguments;
@@ -81,7 +83,7 @@ public class Command {
 
     private LocalDateTime parseDateTime(final String dateTime) throws DukeException {
         try {
-            return LocalDateTime.parse(dateTime, Task.DATE_TIME_FORMATTER);
+            return LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("Failed to parse date time: " + e.getMessage());
         }

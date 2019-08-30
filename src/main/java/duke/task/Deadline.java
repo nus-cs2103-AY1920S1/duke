@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     private String getByString() {
-        return Task.DATE_TIME_FORMATTER.format(this.by);
+        return DATE_TIME_FORMATTER.format(this.by);
     }
 
     @Override

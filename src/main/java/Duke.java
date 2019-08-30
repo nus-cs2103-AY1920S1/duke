@@ -1,6 +1,18 @@
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 
 public class Duke {
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // boolean param to append and not overwrite
+        fw.append(textToAdd);
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,13 +24,47 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         ArrayList<Task> tasks = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
+        try {
+            File loadupFile = new File("C:\\repos\\duke\\out\\data\\TaskList.txt");
+            Scanner scLoad = new Scanner(loadupFile);
+            while (scLoad.hasNextLine()) {
+                String sentence = scLoad.nextLine();
+                String[] taskInfo = sentence.split(" \\u007C ");
+                if (taskInfo[0].equals("T")) {
+                    Task t = new ToDo(taskInfo[2]);
+                    if (taskInfo[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                } else if (taskInfo[0].equals("D")) {
+                    Task t = new Deadline(taskInfo[2], taskInfo[3]);
+                    if (taskInfo[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                } else if (taskInfo[0].equals("E")) {
+                    Task t = new Event(taskInfo[2], taskInfo[3]);
+                    if (taskInfo[1].equals("1")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                } else {
 
-        while (true) {
+                }
+            }
+            scLoad.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Scanner sc = new Scanner(System.in);
+        boolean dukeIsRunning = true;
+
+        while (dukeIsRunning) {
             String next = sc.nextLine();
-            String firstWord = next.split(" ")[0];
+            String firstWord = next.split(" ")[0]; // captures first word of user input
             if (next.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                dukeIsRunning = false;
             } else if (next.equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println(i + 1 + ". " + tasks.get(i));
@@ -80,5 +126,29 @@ public class Duke {
                 }
             }
         }
+
+        // loop terminated, write to file output
+        try {
+            String taskListFilePath = "C:\\repos\\duke\\out\\data\\TaskList.txt";
+            FileWriter fw = new FileWriter (taskListFilePath);
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i) instanceof Deadline) {
+                    writeToFile(taskListFilePath, "D | " + tasks.get(i).isDone() + " | "
+                            + tasks.get(i).getTask() + " | " + ((Deadline) tasks.get(i)).getDueDate());
+                } else if (tasks.get(i) instanceof Event) {
+                    writeToFile(taskListFilePath, "E | " + tasks.get(i).isDone() + " | "
+                            + tasks.get(i).getTask() + " | " + ((Event) tasks.get(i)).getDueDate());
+                } else {
+                    writeToFile(taskListFilePath, "T | " + tasks.get(i).isDone() + " | "
+                            + tasks.get(i).getTask());
+                }
+                if (i != tasks.size() - 1) {
+                    writeToFile(taskListFilePath, "\n");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred " + e.getMessage());
+        }
+
     }
 }

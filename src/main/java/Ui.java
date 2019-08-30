@@ -105,4 +105,20 @@ public class Ui {
         System.out.println(s);
         printLine();
     }
+    public void find(String keyWord) {
+        /**
+         *  uses task list to find tasks
+         *  that have the keywords as a substring
+         *  then prints results wrapped inside
+         *  2 solid lines
+         * @params keyword to search
+         * @return none
+         */
+        printLine();
+        ArrayList<Task> matchingTasks = tasks.findTasks(keyWord);
+        for (Task match: matchingTasks) {
+            System.out.println(match.printTask());
+        }
+        printLine();
+    }
 }

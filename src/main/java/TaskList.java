@@ -64,7 +64,7 @@ public class TaskList {
          *  prints confirmation and formatted task
          *  as per specified within task printTask method
          *  then prints number of remaining tasks
-         *
+         * @param integer indicating task number to delete
          *  @return none
          */
         Task doneTask = taskArr.get(taskNum-1);
@@ -82,5 +82,24 @@ public class TaskList {
         Task doneTask = taskArr.get(t-1);
         doneTask.markDone();
         return doneTask;
+    }
+    public ArrayList<Task> findTasks(String keyWord) {
+        /**
+         * iterates through taskarr to find
+         * tasks that have keyword inside the task description
+         * uses contains method to find matching tasks
+         * @params String which is the keyword to search for
+         * @return arraylist of tasks whose descriptions match
+         */
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: taskArr) {
+            String taskInfo = task.getTaskInfo();
+            //String test = "byby";
+            //System.out.println(test.contains(keyWord));
+            if (taskInfo.contains(keyWord)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
     }
 }

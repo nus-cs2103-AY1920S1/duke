@@ -66,8 +66,9 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        // First,  Set up the required components.
+    public void start(Stage stage) {
+
+        // 1.  Set up the required components.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -99,28 +100,25 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(ui.showWelcome()), new ImageView(duke))
+        );
 
         // 3. Handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
         userInput.setOnAction((event) -> {
-            boolean canExit = handleUserInput();
-            if (canExit) {
+            if (handleUserInput()) {
                 Platform.exit();
-            }
+            };
         });
     }
 
     private boolean handleUserInput() {
-
         String dukeResponse;
         boolean canExit = false;
-
-        // The place to accept user's input.
         Label userText = new Label(userInput.getText());
-
-        // The place to put Duke's response.
         try {
             Command c = Parser.parse(userInput.getText());
             dukeResponse = c.execute(tasks, ui);

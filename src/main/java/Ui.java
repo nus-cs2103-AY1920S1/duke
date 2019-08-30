@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -25,6 +26,13 @@ public class Ui {
 
     void printSize(int size) {
         System.out.println("Now you have " + size + " tasks in the list.");
+    }
+    
+    void printFoundTasks(ArrayList<Task> listOfFoundTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : listOfFoundTasks) {
+            System.out.println(task);
+        }
     }
 
     void testEmptyDescription(String taskDescription) throws EmptyTaskDescriptionException {

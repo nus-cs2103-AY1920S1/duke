@@ -1,16 +1,25 @@
 package duke;
 
 import command.Command;
+import task.TaskList;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * Runs the program skeleton: Event flow.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private UserInterface ui;
 
+    /**
+     * Constructs Duke object.
+     * @param filePath Specified file destination.
+     */
     private Duke(String filePath) {
         ui = new UserInterface();
         storage = new Storage(filePath);
@@ -24,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the logic flow of the system.
+     */
     private void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -43,6 +55,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to run the system.
+     * @param args Arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/dukeData.txt").run();
     }

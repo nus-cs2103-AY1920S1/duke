@@ -14,13 +14,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads, parses and saves data from/to specified file destination.
+ */
 public class Storage {
     private String filepath;
 
+    /**
+     * Creates Storage object with specified file destination.
+     * @param filepath File destination.
+     */
     Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads the tasks from existing list in the file.
+     * @return List of existing tasks.
+     * @throws FileNotFoundException Specified file is not found.
+     * @throws ParseException Invalid variable to parse.
+     * @throws DukeException Invalid actions / missing values.
+     */
     ArrayList<Task> load() throws FileNotFoundException, ParseException, DukeException {
         // pass the path to the file as a parameter
         File file = new File(filepath);
@@ -52,6 +66,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current list of tasks into the file.
+     * @param tasks List of tasks.
+     * @throws IOException Error in writing to file.
+     */
     void save(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter("data/duke.txt");
         for(Task task: tasks) {

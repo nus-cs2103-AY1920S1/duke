@@ -7,7 +7,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
+/**
+ * Parses the command string from the user and check its validity.
+ */
 public class Parser {
+    /**
+     * @param command Command string.
+     * @return Command object.
+     * @throws DukeException Invalid actions / missing values.
+     * @throws ParseException Invalid variable to parse.
+     */
     public static Command parse(String command) throws DukeException, ParseException {
         String[] task = command.split(" ", 2);
         int taskSize = task.length;

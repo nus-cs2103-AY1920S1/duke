@@ -1,21 +1,37 @@
 package command;
 
 import task.Task;
-import duke.TaskList;
+import task.TaskList;
 import duke.UserInterface;
 import duke.Storage;
 
+/**
+ * Specifies the 'add' action to add user-specified tasks.
+ */
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Constructs the Add Command object with specified task.
+     * @param task Specified task.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * @return Specified task.
+     */
     public Task getTask() {
         return task;
     }
 
+    /**
+     * Executes the command and runs the related logic flow.
+     * @param tasks List of tasks.
+     * @param ui User interface.
+     * @param storage Tasks storage: load & save.
+     */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         //add task into the task list
         tasks.add(task);

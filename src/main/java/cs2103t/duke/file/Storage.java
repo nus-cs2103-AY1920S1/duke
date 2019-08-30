@@ -22,10 +22,10 @@ public class Storage {
     public void updateFile(TaskList taskList) {
         List<Task> tasks = taskList.getTaskList();
         try {
-            Path p = Paths.get(filepath);
-            FileWriter fr = new FileWriter(p.toRealPath().toString());
-            fr.write("");
-            fr.flush();
+            File file = new File(filepath);
+            FileWriter fr = new FileWriter(file);
+            file.mkdirs();
+            file.createNewFile();
             fr.close();
 
             fr = new FileWriter(new File(filepath), true);
@@ -48,9 +48,8 @@ public class Storage {
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         try {
-            Path p = Paths.get(filepath);
             BufferedReader br = new BufferedReader(
-                    new FileReader(p.toRealPath().toString()));
+                    new FileReader(filepath));
             String line = br.readLine();
             while (line != null) {
                 //handle line

@@ -1,5 +1,4 @@
 event type | isDone | description | extra description
-D | 1 | CS2107 Assignment 01 | 1st of October 2018, 10.18pm
-T | 0 | bring ext
-D | 0 | sleep | 20th of December 2012, 6.09pm
-E | 1 | run | ERC
+E | 0 | Run  | ERC
+T | 0 | Laundry
+D | 0 | IPPT  | 21st of December 2004, 8.15am

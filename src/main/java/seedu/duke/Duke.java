@@ -1,22 +1,24 @@
 package seedu.duke;
 
+import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
+import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private final String underscore = "    ____________________________________________________________" + "\n" ;
 
     public Duke(String filePath){
         ui = new Ui();
@@ -25,7 +27,6 @@ public class Duke {
 
     public void run(){
         // Variable initialization
-        String underscore = "    ____________________________________________________________" + "\n" ;
         String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
 
         ui.showWelcome();
@@ -42,7 +43,10 @@ public class Duke {
         String inputLine = in.nextLine().trim();
 
         while ( true ){
-            taskType = inputLine.split(" ")[0]; // taskType contains the first word of the command input string
+            // taskType = inputLine.split(" ")[0]; // taskType contains the first word of the command input string
+
+            taskType = Parser.parseCommand(inputLine);
+
             try {
 
                 // LIST case
@@ -78,7 +82,7 @@ public class Duke {
                         throw new DukeException ("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
 
-                    description = inputLine.substring(5);
+                    description = Parser.getTodoDescription(inputLine);
 
                     Todo newTodo = new Todo(description);
 
@@ -98,16 +102,11 @@ public class Duke {
                     } else if ( (inputLine.lastIndexOf('/') < 1) || (  4+inputLine.lastIndexOf('/') > inputLine.length()   ) )  {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
-
-                    description = inputLine.substring(9, inputLine.indexOf('/'));
-                    extraDescription = inputLine.substring(4 + inputLine.indexOf('/'));
+                    
+                    description = Parser.getDeadlineDescription(inputLine);
+                    extraDescription = Parser.getDeadlineDateTime(inputLine);
 
                     Deadline newDeadline = new Deadline(description, extraDescription);
-                    // taskArrayList.add(newDeadline);
-
-                    //output = underscore + "     Got it. I've added this task:\n       "
-                    //        + newDeadline.toString() + "\n     Now you have " +
-                    //        taskArrayList.size() + " tasks in the list.\n" + underscore;
 
                     tasks.addTask(newDeadline);
 
@@ -127,15 +126,10 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
 
-                    description = inputLine.substring(6, inputLine.lastIndexOf('/'));
-                    extraDescription = inputLine.substring(4 + inputLine.lastIndexOf('/'));
+                    description = Parser.getEventDescription(inputLine);
+                    extraDescription = Parser.getEventLocation(inputLine);
 
                     Event newEvent = new Event(description, extraDescription);
-                    //taskArrayList.add(newEvent);
-
-                    //output = underscore + "     Got it. I've added this task:\n       "
-                    //        + newEvent.toString() + "\n     Now you have " +
-                    //        taskArrayList.size() + " tasks in the list.\n" + underscore;
 
                     tasks.addTask(newEvent);
 
@@ -156,14 +150,6 @@ public class Duke {
                         throw new DukeException("seedu.duke.task.Task no. " + (taskNum+1) + " does not exist");
                     }
 
-                    //Task taskToDelete = taskArrayList.get(taskNum);
-
-                    //taskArrayList.remove(taskNum);
-
-                    //output = underscore + "     Noted. I've removed this task.\n       " +
-                    //        taskToDelete.toString() + "\n     Now you have " +
-                    //        taskArrayList.size() + " tasks in the list.\n" + underscore;
-
                     Task taskToDelete = tasks.getTask(taskNum);
                     tasks.deleteTask(taskNum);
 
@@ -183,10 +169,6 @@ public class Duke {
 
                     // Saves the task arraylist to the txt file
                     storage.clearFileBeforeSaving();
-
-                    // for ( Task task: taskArrayList){
-                    //    storage.writeToFile(task.toSaveString());
-                    //}
 
                     for (int i = 0; i < tasks.getSize(); i++){
                         storage.writeToFile(tasks.getTask(i).toSaveString());

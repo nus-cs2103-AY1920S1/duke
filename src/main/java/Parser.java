@@ -7,6 +7,13 @@ import java.util.Optional;
  */
 public class Parser {
 
+    /**
+     * Attempts to find within the user input, a Command that takes in one parameter.
+     *
+     * @param action The action keyword from the user input.
+     * @return An Optional Command that contains a Command if a command was found; otherwise it is empty.
+     * @throws DukeException If the action keyword is invalid.
+     */
     private static Optional<Command> findOneParameterCommand(String action) throws DukeException {
         Optional<Command> command;
         List<String> validActions = Arrays.asList(
@@ -29,6 +36,13 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Attempts to find within the user input, a Command that takes in two parameters.
+     *
+     * @param parameters The description of the action from the user input.
+     * @return An Optional Command that contains a Command if a command was found; otherwise it is empty.
+     * @throws DukeException If the parameters are invalid.
+     */
     private static Optional<Command> findTwoParameterCommand(String[] parameters) throws DukeException {
         String action = parameters[0];
 
@@ -57,6 +71,13 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Attempts to find within the user input, a Command that takes in three parameters.
+     *
+     * @param parameters The description of the action from the user input.
+     * @return A Command that takes in three parameters.
+     * @throws DukeException If the parameters are invalid.
+     */
     private static Command findThreeParameterCommand(String[] parameters) throws DukeException {
         String action = parameters[0];
         Command command;
@@ -86,7 +107,7 @@ public class Parser {
     /**
      * Parses the user command.
      *
-     * @param fullCommand The input given by the user.
+     * @param fullCommand The raw input given by the user.
      * @return A Command that varies based on the user input.
      * @throws DukeException If the user input is invalid.
      */

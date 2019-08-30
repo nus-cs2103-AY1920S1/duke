@@ -1,0 +1,9 @@
+diff a/src/main/java/task/Todo.java b/src/main/java/task/Todo.java	(rejected hunks)
+@@ -6,7 +6,6 @@
+  * Defines the simple tasks and provides it's completion status.
+  */
+ public class Todo extends Task {
+-    public Todo(String description) {
+     /**
+          * Constructs the object with specified completion status.
+      * @param description Task description.

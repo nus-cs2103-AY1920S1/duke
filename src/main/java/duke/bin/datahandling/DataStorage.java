@@ -10,12 +10,14 @@ import duke.bin.task.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 
-
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class DataStorage {
     private String filePath;
     private ArrayList<Task> tasks;
 
-    private String newLine = System.getProperty("line.separator");
+    private final String newLine = System.getProperty("line.separator");
 
     /**
      * Public constructor for the storage of the list of tasks.
@@ -26,6 +28,12 @@ public class DataStorage {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes the list of task into the save file.
+     *
+     * @param taskList the list to be saved.
+     * @throws DukeException thrown if file cannot be found.
+     */
     public void write(ArrayList<Task> taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -81,6 +89,12 @@ public class DataStorage {
         }
     }
 
+    /**
+     * Loads the list of tasks from the save file.
+     *
+     * @return the list of task from the save file.
+     * @throws DukeException if the file cannot be found or parsed correctly.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             readFromFile();

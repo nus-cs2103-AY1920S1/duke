@@ -1,5 +1,14 @@
+/**
+ * Represents a class for understanding the input.
+ */
 public class Parser {
 
+    /**
+     * Extracts a command from input.
+     * @param input a line of user input
+     * @return a Command object
+     * @throws DukeException if the input doesn't fit the format of a standard command
+     */
     static Command parse(String input) throws DukeException {
         if (input.equals("bye")) { // exit
             return new Bye();

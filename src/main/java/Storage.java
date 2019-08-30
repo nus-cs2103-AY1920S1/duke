@@ -1,10 +1,17 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Represents interaction between temporary duke data and hard disk.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Initiates a Storage object.
+     * @param filePath path of the file where data is stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
@@ -17,6 +24,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes tasks to hard disk.
+     * @param list a Tasklist object containing tasks
+     * @throws DukeException if IOException occurs
+     */
     public void write(TaskList list) throws DukeException {
         ArrayList<Task> tasks = list.tasks;
         try (FileWriter fileWriter = new FileWriter(filePath, false)) {
@@ -34,6 +46,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Extracts information of tasks from hard disk.
+     * @return an ArrayList of tasks that is stored in the file
+     * @throws DukeException if IOException occurs
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<Task>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.command.DukeCommand;
 import duke.command.DukeCommandAdd;
+import duke.command.DukeCommandClear;
 import duke.command.DukeCommandExit;
 import duke.command.DukeCommandList;
 import duke.command.DukeCommandUpdate;
@@ -22,7 +23,7 @@ public class DukeParser {
     private static final String DUKE_DATETIME_OUTPUT_FORMAT = "MMMM uuuu, h:mma";
 
     private enum DukeCommandEnum {
-        BYE, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO
+        BYE, CLEAR, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO
     }
 
     /**
@@ -98,7 +99,7 @@ public class DukeParser {
      * {@link DukeCommandList} class will be instantiated and returned. If the command is to "BYE", a
      * {@link DukeCommandExit} class will be instantiated and returned. An Optional.empty() will be returned if the
      *     user input cannot be parsed.
-     * @param input Raw user input String obtained from {@link DukeUiMessages#readCommand()}.
+     * @param input Raw user input String obtained from the input TextField.
      * @param ui Instance of {@link DukeUiMessages} which will show output to the user.
      * @return Optional&lt;DukeCommand&gt; which is empty if the user input cannot be parsed, or a {@link DukeCommand}
      *     sub-class which has a {@link DukeCommand#execute(DukeTaskList, DukeUiMessages, DukeStorage)} method.
@@ -111,13 +112,16 @@ public class DukeParser {
             case BYE:
                 return Optional.of(new DukeCommandExit());
 
-            case TODO:
+            case CLEAR:
+                return Optional.of(new DukeCommandClear());
+
             case DEADLINE:
             case EVENT:
+            case TODO:
                 return Optional.of(new DukeCommandAdd(inputTokens));
 
-            case DONE:
             case DELETE:
+            case DONE:
                 return Optional.of(new DukeCommandUpdate(inputTokens));
 
             case FIND:

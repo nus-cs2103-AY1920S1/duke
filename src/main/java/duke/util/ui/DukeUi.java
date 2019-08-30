@@ -2,6 +2,7 @@ package duke.util.ui;
 
 import duke.Duke;
 import duke.command.DukeCommand;
+import duke.command.DukeCommandClear;
 import duke.util.DukeParser;
 import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
@@ -30,6 +31,48 @@ public class DukeUi extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    /**
+     * Reads the input from the input textfield and processes the input command. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        String input = userInput.getText();
+        userInput.clear();
+        addAsLabelToDisplay(input);
+        Optional<DukeCommand> optionalCommand = DukeParser.parseCommand(input, ui);
+        if (!optionalCommand.isEmpty()) {
+            DukeCommand command = optionalCommand.get();
+            if (command instanceof DukeCommandClear) {
+                ((DukeCommandClear) command).execute(this);
+            } else {
+                command.execute(tasks, ui, storage);
+            }
+        }
+    }
+
+    /**
+     * Initializes all the events for the program's GUI.
+     */
+    private void initEventHandling() {
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
+
+    /**
+     * Obtains the context of the logic components.
+     */
+    private void initLogicElements() {
+        duke = new Duke(Duke.DUKE_TASK_FILE_PATH);
+        storage = duke.getStorage();
+        tasks = duke.getTasks();
+        ui = duke.getUi();
+        ui.initUiComponents(this);
+    }
 
     /**
      * Initializes all the UI elements and sets their sizes. A Scene object will be initialized and have every element
@@ -94,30 +137,6 @@ public class DukeUi extends Application {
     }
 
     /**
-     * Obtains the context of the logic components.
-     */
-    private void initLogicElements() {
-        duke = new Duke(Duke.DUKE_TASK_FILE_PATH);
-        storage = duke.getStorage();
-        tasks = duke.getTasks();
-        ui = duke.getUi();
-        ui.initUiComponents(this);
-    }
-
-    /**
-     * Initializes all the events for the program's GUI.
-     */
-    private void initEventHandling() {
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    }
-
-    /**
      * Duke Program entry point. Initializes the main window UI, as well as the underlying logic components.
      * The event handling is also initialized. Finally, the program will print the welcome message and continuously
      * wait for user input.
@@ -145,16 +164,12 @@ public class DukeUi extends Application {
     }
 
     /**
-     * Reads the input from the input textfield and returns it as a String. Clears the user input after processing.
+     * Clears the textArea of all Labels.
      */
-    private void handleUserInput() {
-        String input = userInput.getText();
-        userInput.clear();
-        addAsLabelToDisplay(input);
-        Optional<DukeCommand> command = DukeParser.parseCommand(input, ui);
-        if (!command.isEmpty()) {
-            command.get().execute(tasks, ui, storage);
-        }
+    public void clearTextRegion() {
+        dialogContainer.getChildren().clear();
     }
+
+
 
 }

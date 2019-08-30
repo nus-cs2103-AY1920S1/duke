@@ -8,4 +8,12 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public String taskSavedTextFormat() {
+        String done = "0";
+        if (super.isDone) {
+            done = "1";
+        }
+        return "T | " + done + " | " + super.description;
+    }
 }

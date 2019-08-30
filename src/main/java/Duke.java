@@ -1,11 +1,17 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static Storage storage = new Storage("./data/duke.txt");
-    private static Ui ui = new Ui();
-    private static TaskList taskList = new TaskList(storage, ui);
+    private Storage storage;
+    private Ui ui;
+    private TaskList taskList;
 
-    public static void main(String[] args) {
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        this.ui = new Ui();
+        this.taskList = new TaskList(storage, ui);
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -87,5 +93,9 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

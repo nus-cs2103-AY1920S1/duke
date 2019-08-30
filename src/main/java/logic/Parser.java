@@ -28,6 +28,7 @@ public class Parser {
             int day = Integer.parseInt(date[0]);
             int hours = Integer.parseInt(time.substring(0, 2));
             int mins = Integer.parseInt(time.substring(2));
+
             return LocalDateTime.of(year, month, day, hours, mins);
         } catch (ArrayIndexOutOfBoundsException | DateTimeException | NumberFormatException e) {
             throw new DukeException("Invalid Date-Time format.\n" +
@@ -42,7 +43,8 @@ public class Parser {
      * @return DateTime string E.g. 10/12/2019 0830
      */
     public static String toFileDateTime(LocalDateTime dateObj) {
-        return dateObj.getDayOfMonth() + "/" + dateObj.getMonthValue() + "/" + dateObj.getYear() + " "
+        return dateObj.getDayOfMonth() + "/" + dateObj.getMonthValue()
+                + "/" + dateObj.getYear() + " "
                 + String.format("%02d", dateObj.getHour())
                 + String.format("%02d", dateObj.getMinute());
     }
@@ -69,6 +71,7 @@ public class Parser {
      */
     public static int parseTaskInt(String str, List<Task> taskList) throws DukeException {
         int taskInt;
+
         try {
             taskInt = Integer.parseInt(str);
             if (taskInt > taskList.size() || taskInt <= 0) {
@@ -109,7 +112,6 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please enter a task.task Number");
             }
-
         case "todo":
             try {
                 return new ToDoCommand(strSplit[1]);
@@ -128,7 +130,6 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
             }
-
         default:
             return new UnknownCommand();
         }

@@ -44,12 +44,14 @@ public class Ui {
      */
     public void printList(List<Task> taskList) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+
         for (int i = 0; i < taskList.size(); i++) {
             sb.append((i + 1) + ". " + taskList.get(i).toString());
             if (i != taskList.size() - 1) { //last item
                 sb.append("\n");
             }
         }
+       
         printStr(sb.toString());
     }
 

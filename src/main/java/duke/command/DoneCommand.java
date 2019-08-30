@@ -22,9 +22,13 @@ public class DoneCommand extends CommandWithNumber {
             ui.showMessage(TASK_ALREADY_DONE);
         } else {
             task.markAsDone();
-            storage.writeTasks(tasks);
             ui.showMessage(TASK_MARKED_AS_DONE);
             ui.showIndented(task.toString());
+            try {
+                storage.writeTasks(tasks);
+            } catch (DukeException e) {
+                ui.showWarning(e.getMessage());
+            }
         }
     }
 }

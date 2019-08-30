@@ -18,9 +18,13 @@ public class DeleteCommand extends CommandWithNumber {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         check(tasks);
         Task task = tasks.deleteTask(this.taskNumber);
-        storage.writeTasks(tasks);
         ui.showMessage(TASK_DELETED);
         ui.showIndented(task.toString());
         ui.showMessage(String.format(TASKS_COUNT, tasks.size()));
+        try {
+            storage.writeTasks(tasks);
+        } catch (DukeException e) {
+            ui.showWarning(e.getMessage());
+        }
     }
 }

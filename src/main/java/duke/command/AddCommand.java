@@ -27,10 +27,14 @@ public abstract class AddCommand extends Command {
 
     protected void addTask(final Task task, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.addTask(task)) {
-            storage.writeTasks(tasks);
             ui.showMessage(TASK_ADD_SUCCESS);
             ui.showIndented(task.toString());
             ui.showMessage(String.format(TASKS_COUNT, tasks.size()));
+            try {
+                storage.writeTasks(tasks);
+            } catch (DukeException e) {
+                ui.showWarning(e.getMessage());
+            }
         } else {
             throw new RuntimeException(TASK_ADD_FAILURE);
         }

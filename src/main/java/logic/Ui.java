@@ -5,10 +5,14 @@ import task.Task;
 import java.util.List;
 
 /**
- * Deals with interactions with the user
+ * Deals with interactions with the user and output on CLI
  */
 public class Ui {
-    //Wraps strings for style and formatting
+    /**
+     * Wraps strings for style and formatting
+     *
+     * @param input String parameter to be wrapped and printed
+     */
     public static void printStr(String input) {
         StringBuilder sb = new StringBuilder();
         sb.append("____________________________________________________________\n");
@@ -17,7 +21,9 @@ public class Ui {
         System.out.println(sb.toString());
     }
 
-    //Runs at the start of app
+    /**
+     * Prints out greeting string at start of app
+     */
     public void greet() {
         StringBuilder sb = new StringBuilder();
         String logo = " ____        _        \n"
@@ -31,7 +37,11 @@ public class Ui {
         printStr(sb.toString());
     }
 
-    //returns numbered list of tasks
+    /**
+     * Prints out ordered list of tasks
+     *
+     * @param taskList List of Tasks
+     */
     public void printList(List<Task> taskList) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
 
@@ -45,6 +55,9 @@ public class Ui {
         printStr(sb.toString());
     }
 
+    /**
+     * Exit Message to be printed
+     */
     public void bye() {
         printStr("Bye. Hope to see you again soon!");
     }

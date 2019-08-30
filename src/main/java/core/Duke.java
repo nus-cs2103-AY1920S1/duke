@@ -2,10 +2,6 @@ package core;
 
 import command.Command;
 import exception.DukeException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import task.TaskList;
 
 /**
@@ -15,7 +11,7 @@ import task.TaskList;
  *
  * @author Marcus Ong
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -23,25 +19,10 @@ public class Duke extends Application {
 
     /**
      * Duke Constructor.
-     */
-    public Duke() {}
-
-    /**
-     * Duke Constructor, auto-initialized.
      *
      * @param filePath String containing path of data file for Duke.
      */
     public Duke(String filePath) {
-        initialize(filePath);
-    }
-
-    /**
-     * Initializes Duke.
-     *
-     * @param filePath String containing path of data file for Duke.
-     * @return reference to Duke object.
-     */
-    private Duke initialize(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -50,11 +31,10 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        return this;
     }
 
     public static void main(String[] args) {
-        new Duke().initialize(System.getProperty("user.dir") + "/data/duke.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
     }
 
     /**
@@ -75,18 +55,4 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Starts JavaFX application.
-     *
-     * @param stage
-     */
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Create a new Label control
-        helloWorld.setStyle("-fx-font-size: 50");
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage
-    }
 }

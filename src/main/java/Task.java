@@ -2,16 +2,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a task.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initiates a Task object.
+     * @param description content of a task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Initiates a Task object.
+     * @param description content of a task
+     * @param isDone mark if the task is already done
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -37,6 +49,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Expresses a Task object in natural language.
+     * @return string representation of a task
+     * @throws ParseException if description cannot be parsed
+     */
     public String repr() throws ParseException {
         return "[" + getStatusIcon() + "] " + description;
     }

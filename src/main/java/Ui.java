@@ -1,7 +1,9 @@
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ * Represents an interface for user interaction.
+ */
 public class Ui {
 
     private String line = "    ____________________________________________________________";
@@ -34,14 +36,25 @@ public class Ui {
         formatPrint(s);
     }
 
+    /**
+     * Sends greetings to user.
+     */
     public void greet() {
         formatPrint(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
+    /**
+     * Says goodbye to user.
+     */
     public void bye() {
         formatPrint("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints all tasks.
+     * @param list a TaskList object that contains a list of tasks
+     * @throws DukeException if description of tasks cannot be parsed
+     */
     public void printList(TaskList list) throws DukeException {
         ArrayList<Task> tasks = list.tasks;
         if (tasks.size() == 0) {
@@ -60,12 +73,24 @@ public class Ui {
         }
     }
 
+    /**
+     * Tells user a task has been marked as done.
+     * @param list a TaskList object that contains a list of tasks
+     * @param num number of task to be marked as done
+     * @throws ParseException if description of task connot be parsed
+     */
     public void done(TaskList list, int num) throws ParseException {
         ArrayList<Task> tasks = list.tasks;
         String[] listToPrint = {"Nice! I've marked this task as done: ", "  " + tasks.get(num - 1).repr()};
         formatPrint(listToPrint);
     }
 
+    /**
+     * Tells user a task has been deleted.
+     * @param list a TaskList object that contains a list of tasks
+     * @param num number of task to be deleted
+     * @throws ParseException if description of task connot be parsed
+     */
     public void delete(TaskList list, int num) throws ParseException {
         ArrayList<Task> tasks = list.tasks;
         Task t = tasks.get(num - 1);
@@ -86,6 +111,11 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Tells user a task has been added.
+     * @param list a TaskList object that contains a list of tasks
+     * @throws DukeException if description of task connot be parsed
+     */
     public void add(TaskList list) throws DukeException {
         ArrayList<Task> tasks = list.tasks;
         try {
@@ -105,14 +135,24 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Tells user tasks connot be loaded from hard disk.
+     */
     public void showLoadingError() {
         formatPrint("Cannot load files");
     }
 
+    /**
+     * Tells user a DukeException has occurred.
+     * @param ex
+     */
     public void showDukeException(DukeException ex) {
         formatPrint(ex.getMessage());
     }
 
+    /**
+     * Tells user a ParseError has occurred.
+     */
     public void showParseError() {
         formatPrint("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
     }

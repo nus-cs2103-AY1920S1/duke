@@ -14,41 +14,40 @@ public class Duke {
     /**
      * Represents the reader and the writer for the output text file.
      */
-    Storage storage;
+    private Storage storage;
 
     /**
      * Represents the list of tasks stored in the application.
      */
-    TaskList taskList;
+    private TaskList taskList;
 
     /**
      * Represents the interface which handles user input and interactions.
      */
-    Ui ui;
+    private Ui ui;
 
     /**
      * Parses out the user input for ui recognition.
      */
-    DataParser parser;
+    private DataParser parser;
 
     /**
      * Parses out the date to a readable format for the ui.
      */
-    DateParser dateHelper;
+    private DateParser dateHelper;
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
     /**
      * Creates a new Duke class which contains all packages to process user input and file input.
      * If no file is found, a new task list is created instead.
      * If a file is found, data is retrieved from the file.
-     * @param filePath The path of the file to be read and written.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         parser = new DataParser();
         dateHelper = new DateParser();
         try {

@@ -24,10 +24,6 @@ public class DoneCommand extends Command {
         }
         int id = Parser.parseStrToInt(this.taskId);
 
-        if (id > tasks.getSize() || id < 1) {
-            throw new InvalidIDException(this.taskId);
-        }
-
         Task task = tasks.markDone(id);
 
         storage.updateFile(tasks);

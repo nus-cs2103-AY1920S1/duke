@@ -1,6 +1,7 @@
 package cs2103t.duke.task;
 
 import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.exception.InvalidIDException;
 import cs2103t.duke.exception.InvalidKeywordException;
 import cs2103t.duke.ui.Ui;
 
@@ -36,22 +37,52 @@ public class TaskList {
         ui.dukeRespond(taskStrings);
     }
 
+    /**
+     * Adds given task into current list of tasks.
+     * @param task the task to be added
+     */
     public void addData(Task task) {
         this.taskList.add(task);
     }
 
-    public Task markDone(int id) {
+    /**
+     * Marks task at position id as done.
+     * @param id the position at which the corresponding task in list is to be marked as done
+     * @return the completed task
+     * @throws DukeException
+     */
+    public Task markDone(int id) throws DukeException {
+        if (id > getSize() || id < 1) {
+            throw new InvalidIDException("" + id);
+        }
+
+
         Task task = this.taskList.get(id - 1);
         task.setCompleted();
         return task;
     }
 
-    public Task deleteTask(int id) {
+    /**
+     * Deletes task at position id from list of tasks
+     * Pre-condition: id is always valid.
+     * @param id the position at which the corresponding task in list is to be deleted
+     * @return the removed task
+     * @throws DukeException
+     */
+    public Task deleteTask(int id) throws DukeException {
+        if (id > getSize() || id < 1) {
+            throw new InvalidIDException(""+id);
+        }
+
         Task task = this.taskList.remove(id - 1);
         return task;
     }
 
     public static Task createTask(TaskType taskType, String description) throws DukeException {
+        if (taskType == null) {
+            throw new InvalidKeywordException("wrong keyword");
+        }
+
         Task t = null;
         switch (taskType) {
         case T:
@@ -64,7 +95,7 @@ public class TaskList {
             t = Event.create(description);
             break;
         default:
-            throw new InvalidKeywordException("");
+            throw new InvalidKeywordException("wrong keyword");
         }
         return t;
     }

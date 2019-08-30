@@ -2,6 +2,7 @@ package cs2103t.duke.task;
 
 import cs2103t.duke.exception.EmptyDescriptionException;
 import cs2103t.duke.exception.IncorrectTaskFormatException;
+import cs2103t.duke.parse.Parser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,11 +41,7 @@ public class Deadline extends Task {
         super.description = String.format("%s (%s)", this.description, this.notesInBrackets);
 
         this.datetime = date;
-        try {
-            this.date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        this.date = Parser.convertToDate(date);
     }
 
     public static Deadline create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {

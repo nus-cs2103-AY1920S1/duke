@@ -71,12 +71,12 @@ public class Parser {
         return "";
     }
 
-    public Date convertToDate() {
+    public static Date convertToDate(String input) throws DukeException{
         Date date = null;
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.input);
+            date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(input);
         } catch (ParseException e) {
-            e.printStackTrace();
+            throw new DukeException("Date is wrong format, try again");
         } finally {
             return date;
         }

@@ -19,18 +19,14 @@ public class Event extends Task {
         setupDetails(descr);
     }
     private void setupDetails(String input) throws IncorrectTaskFormatException {
-        String[] tmp = input.split("/");
+        String[] tmp = input.split("\\s+/at\\s+");
+        this.description = tmp[0];
         //inputs should only have <=1 '/' characters
         if (tmp.length < 2)
             throw new IncorrectTaskFormatException("at");
 
-        this.description = tmp[0].trim();
-        Scanner tmp2 = new Scanner(tmp[1]);
-        String term = tmp2.next().trim();
-        String datetime = "";
-        if (tmp2.hasNext())
-            datetime = tmp2.nextLine().trim();
-        tmp2.close();
+        String term = "at";
+        String datetime = tmp[1];
 
         if (datetime.equals(""))
             throw new IncorrectTaskFormatException("at");

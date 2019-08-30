@@ -23,10 +23,6 @@ public class DeleteCommand extends Command {
             throw new NoIDGivenException("delete");
         }
         int id = Parser.parseStrToInt(this.taskId);
-
-        if (id > tasks.getSize() || id < 1) {
-            throw new InvalidIDException(this.taskId);
-        }
         Task task = tasks.deleteTask(id);
 
         storage.updateFile(tasks);

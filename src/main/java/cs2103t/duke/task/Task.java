@@ -1,10 +1,8 @@
 package cs2103t.duke.task;
 
 public abstract class Task {
-    public static String tick = "\u2713";
-    public static String cross = "\u2717";
-    //public static int totalNumOfTasks = 0;
-    //public static List<cs2103t.duke.task.Task> taskList = new ArrayList<>();
+    public static final String TICK = "\u2713";
+    public static final String CROSS = "\u2717";
 
     protected String description;
     protected boolean completed;
@@ -28,9 +26,9 @@ public abstract class Task {
     public String toString() {
         String checked;
         if (this.completed) {
-            checked = tick;
+            checked = TICK;
         } else {
-            checked = cross;
+            checked = CROSS;
         }
         return String.format("[%s][%s] %s", this.taskType, checked, this.description);
     }

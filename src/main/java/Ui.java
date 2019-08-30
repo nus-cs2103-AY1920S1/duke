@@ -8,19 +8,19 @@ public class Ui {
     /**
      * Welcome message when program is executed.
      */
-    public void welcome() {
+    public String welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        return "Hello from\n" + logo;
     }
 
     /**
      * Greeting message before user input is required.
      */
-    public void greeting() {
+    public String greeting() {
         //Greetings before program
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER + "\n");
@@ -29,6 +29,7 @@ public class Ui {
         sb.append(BORDER + "\n");
         String greetings = sb.toString();
         System.out.println(greetings);
+        return greetings;
     }
 
     /**
@@ -124,13 +125,14 @@ public class Ui {
     /**
      * Ending message when user input bye.
      */
-    public void conclusion() {
+    public String conclusion() {
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER + "\n");
         sb.append("Bye. Hope to see you again soon!\n");
         sb.append(BORDER + "\n");
         String conclude = sb.toString();
         System.out.println(conclude);
+        return conclude;
     }
 
     /**
@@ -170,8 +172,9 @@ public class Ui {
     /**
      * Listing all tasks stored in list.
      * @param items ArrayList containing current tasks
+     * @return String message collating all tasks
      */
-    public void listTask(ArrayList<Task> items) {
+    public String listTask(ArrayList<Task> items) {
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER + "\n");
         //list out all items in arraylist items
@@ -180,7 +183,9 @@ public class Ui {
             sb.append(i + "." + curr + "\n");
         }
         sb.append(BORDER + "\n");
+        String output = sb.toString();
         System.out.println(sb.toString());
+        return output;
     }
 
     /**
@@ -188,7 +193,7 @@ public class Ui {
      * @param items ArrayList containing current tasks
      * @param key search term provided by user
      */
-    public void findTask(ArrayList<Task> items, String key) {
+    public String findTask(ArrayList<Task> items, String key) {
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER + "\n");
         sb.append("Here are the matching tasks in your list: \n");
@@ -200,7 +205,9 @@ public class Ui {
             }
         }
         sb.append(BORDER + "\n");
-        System.out.println(sb.toString());
+        String output = sb.toString();
+        System.out.println(output);
+        return output;
     }
 
     /**

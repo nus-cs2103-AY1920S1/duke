@@ -83,4 +83,14 @@ public class TaskList {
         doneTask.markDone();
         return doneTask;
     }
+    public ArrayList<Task> findTasks(String keyWord) {
+        /**
+         * iterates through taskarr to find
+         * tasks that have keyword inside the task description
+         * uses substring to find matching tasks
+         * @params String which is the keyword to search for
+         * @return arraylist of tasks whose descrips match
+         */
+        return taskArr;
+    }
 }

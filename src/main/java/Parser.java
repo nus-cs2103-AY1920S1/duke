@@ -24,13 +24,13 @@ public class Parser {
 
     public void parseEvent() {
         this.eventCommand = this.input.split("/at");
-        this.eventDescript = this.eventCommand[0].substring(6);
+        this.eventDescript = this.eventCommand[0].trim().substring(6);
         this.at = this.eventCommand[1].substring(1);
     }
 
     public void parseDeadline() {
         this.deadlineCommand = this.input.split("/by");
-        this.deadlineDescript = deadlineCommand[0].substring(9);
+        this.deadlineDescript = deadlineCommand[0].trim().substring(9);
         this.by = deadlineCommand[1].substring(1);
     }
 

@@ -38,10 +38,10 @@ public class Duke {
 
         // Creates scanner object to handle input
         Scanner in = new Scanner(System.in);
-        String inputLine = in.nextLine().trim();
+        String fullCommand = in.nextLine().trim();
 
         while ( true ){
-            taskType = Parser.parseCommand(inputLine); // taskType contains the first word of the command input string
+            taskType = Parser.parseCommand(fullCommand); // taskType contains the first word of the command input string
 
             try {
                 // LIST case
@@ -52,7 +52,7 @@ public class Duke {
                 } else if (taskType.equals(possibleTasks.DONE.toString().toLowerCase())) {
                     // DONE case
 
-                    taskNum = Parser.getFinishedTaskNum(inputLine);
+                    taskNum = Parser.getFinishedTaskNum(fullCommand);
                     taskNum--; // ArrayList index == taskNum - 1
 
                     tasks.getTask(taskNum).setDone();
@@ -62,11 +62,11 @@ public class Duke {
                 } else if (taskType.equals(possibleTasks.TODO.toString().toLowerCase())) {
                     // TODO case
 
-                    if (inputLine.length() < 5){
+                    if (fullCommand.length() < 5){
                         throw new DukeException ("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
 
-                    description = Parser.getTodoDescription(inputLine);
+                    description = Parser.getTodoDescription(fullCommand);
 
                     Todo newTodo = new Todo(description);
 
@@ -77,14 +77,14 @@ public class Duke {
                     // DEADLINE case
                 } else if (taskType.equals(possibleTasks.DEADLINE.toString().toLowerCase())) {
 
-                    if ( ( inputLine.length() < 9 )){ // Input is only "deadline"
+                    if ( ( fullCommand.length() < 9 )){ // Input is only "deadline"
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-                    } else if ( (inputLine.lastIndexOf('/') < 1) || (  4+inputLine.lastIndexOf('/') > inputLine.length()   ) )  {
+                    } else if ( (fullCommand.lastIndexOf('/') < 1) || (  4+fullCommand.lastIndexOf('/') > fullCommand.length()   ) )  {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
 
-                    description = Parser.getDeadlineDescription(inputLine);
-                    extraDescription = Parser.getDeadlineDateTime(inputLine);
+                    description = Parser.getDeadlineDescription(fullCommand);
+                    extraDescription = Parser.getDeadlineDateTime(fullCommand);
 
                     Deadline newDeadline = new Deadline(description, extraDescription);
 
@@ -95,14 +95,14 @@ public class Duke {
                     // EVENT case
                 } else if (taskType.equals(possibleTasks.EVENT.toString().toLowerCase())) {
 
-                    if ( ( inputLine.length() < 6 )){ // Input is only "event"
+                    if ( ( fullCommand.length() < 6 )){ // Input is only "event"
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-                    } else if ( (inputLine.lastIndexOf('/') < 1) || (  4+inputLine.lastIndexOf('/') > inputLine.length()   ) )  {
+                    } else if ( (fullCommand.lastIndexOf('/') < 1) || (  4+fullCommand.lastIndexOf('/') > fullCommand.length()   ) )  {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
 
-                    description = Parser.getEventDescription(inputLine);
-                    extraDescription = Parser.getEventLocation(inputLine);
+                    description = Parser.getEventDescription(fullCommand);
+                    extraDescription = Parser.getEventLocation(fullCommand);
 
                     Event newEvent = new Event(description, extraDescription);
 
@@ -113,12 +113,11 @@ public class Duke {
                     // DELETE case
                 } else if (taskType.equals(possibleTasks.DELETE.toString().toLowerCase())){
 
-                    //taskNum = Integer.parseInt(inputLine.substring(7)); // NTS: check for index outofbounds
-                    taskNum = Parser.getDeletedTaskNum(inputLine);
+                    taskNum = Parser.getDeletedTaskNum(fullCommand);
                     taskNum--; // ArrayList index == taskNum - 1
 
                     if (taskNum >= tasks.getSize()){
-                        throw new DukeException("seedu.duke.task.Task no. " + (taskNum+1) + " does not exist");
+                        throw new DukeException("Task no. " + (taskNum+1) + " does not exist");
                     }
 
                     Task taskToDelete = tasks.getTask(taskNum);
@@ -155,16 +154,14 @@ public class Duke {
                 System.out.println(e.getCause());
             }
 
-            inputLine = in.nextLine().trim();
+            fullCommand = in.nextLine().trim();
             output = "";
         }
 
     }
 
     public static void main(String[] args) {
-        // new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\seedu.duke\\data\\tasks.txt").run();
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
-
     }
 
     enum possibleTasks{

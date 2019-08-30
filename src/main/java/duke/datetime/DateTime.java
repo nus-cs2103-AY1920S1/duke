@@ -87,7 +87,7 @@ public class DateTime {
             if (y < 0) {
                 throw new InvalidDateTimeException("Invalid Date");
             }
-            day = tokens[0];
+            day = String.format("%d", d);
             month = monthMap.get(m);
             year = tokens[2];
         } catch (NumberFormatException e) {

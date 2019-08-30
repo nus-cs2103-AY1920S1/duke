@@ -32,9 +32,10 @@ public class DeleteCommand extends Command {
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
+     * @return Returns a string of the response from duke after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.deleteTask(index);
         Task.minusFromTotalTasks();
         String indent = ui.getIndent();
@@ -46,7 +47,8 @@ public class DeleteCommand extends Command {
                     + indent + "  " + task + "\n"
                     + indent + "Now you have " + taskList.getTotalTasks() + " tasks in the list.";
         }
-        System.out.println(message);
+//        System.out.println(message);
         storage.write(taskList);
+        return message;
     }
 }

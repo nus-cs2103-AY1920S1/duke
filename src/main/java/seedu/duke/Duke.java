@@ -1,11 +1,16 @@
 package seedu.duke;
 
-import seedu.duke.Commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.ByeCommand;
+import seedu.duke.commands.DoneCommand;
+import seedu.duke.commands.ListCommand;
+
+import seedu.duke.trackables.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,14 +66,21 @@ public class Duke {
     }
 
     /**
-     * Parses the input command into the specific Command object to execute
-     * @param input
+     * Parses the input command into the specific Command object to execute.
+     * @param input Input from the console.
      */
     private static void parseCommand(String input) {
 
         // Identify Command
         String pattern = "";
-        CommandName command = CommandName.valueOf(input.split(" ")[0].toUpperCase());
+        CommandName command = null;
+        try {
+            command = CommandName.valueOf(input.split(" ")[0].toUpperCase());
+        }
+        catch (IllegalArgumentException iae) {
+            System.out.println("No such command");
+            return;
+        }
         switch (command) {
         case ADD:
             pattern = ADD_PATTERN;
@@ -81,6 +93,9 @@ public class Duke {
             break;
         case BYE:
             pattern = BYE_PATTERN;
+            break;
+        default:
+            System.out.println("No such command");
             break;
         }
 

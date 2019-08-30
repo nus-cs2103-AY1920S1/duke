@@ -1,6 +1,6 @@
-package seedu.duke.Commands;
+package seedu.duke.commands;
 
-import seedu.duke.Task;
+import seedu.duke.trackables.Task;
 
 import java.util.List;
 

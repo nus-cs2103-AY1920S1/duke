@@ -6,6 +6,19 @@ import java.util.Scanner;
 
 public class Ui {
 
+    private static final String LINE_PREFIX = "|| ";
+
+    private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\\\___|\n";
+
+    private static final String DUKE_STARTUP = "Hello from\n" + LOGO;
+
+    private static final String DUKE_SAYS_HI = "Hello! I'm Duke\n" + "What can I do for you?";
+
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+
+    private static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
+
     private final Scanner in;
 
     private final PrintStream out;
@@ -23,6 +36,7 @@ public class Ui {
      * Read a command from the user.
      */
     public String readCommand() {
+        out.print(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }
@@ -42,32 +56,34 @@ public class Ui {
      * Greet the user when they start up Duke.
      */
     public void welcomeMessage() {
-        addBorder("Hello! I'm Duke\n" + "What can I do for you?");
+
+        out.println(DUKE_STARTUP);
+        addBorder(DUKE_SAYS_HI);
     }
 
     /**
      * Display exit message to user when they leave Duke.
      */
     public void exitMessage () {
-        addBorder("Bye. Hope to see you again soon!");
+        addBorder(EXIT_MESSAGE);
     }
 
     /**
      * Show user the list of tasks they have.
-     * @param tasks ArrayList of tasks.
+     * @param tasks TaskList object.
      */
     public void printList (TaskList tasks) {
-        String str = "Here are the tasks in your list:\n";
+        StringBuilder str = new StringBuilder(LIST_MESSAGE);
 
         for (int i = 1; i < tasks.getSize() + 1; i++) {
             if (i == tasks.getSize()) {
-                str += i + "." + tasks.getTask(i - 1);
+                str.append(i).append(".").append(tasks.getTask(i - 1));
             } else {
-                str += i + "." + tasks.getTask(i - 1) + "\n";
+                str.append(i).append(".").append(tasks.getTask(i - 1)).append("\n");
             }
         }
 
-        addBorder(str);
+        addBorder(str.toString());
     }
 
     /**

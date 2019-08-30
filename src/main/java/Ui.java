@@ -58,7 +58,7 @@ public class Ui {
     public void printList(TaskList list) throws DukeException {
         ArrayList<Task> tasks = list.tasks;
         if (tasks.size() == 0) {
-            throw new DukeException("There are no task in your list");
+            throw new DukeException("There is no task in your list");
         }
         try {
             System.out.println(line);
@@ -133,6 +133,29 @@ public class Ui {
             System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
         }
         System.out.println(line);
+    }
+
+
+    /** Prints matching list.
+     * @param targets a TaskList of matching tasks
+     * @throws DukeException if there is no matching task or task description cannot be parsed
+     */
+    public void printFind(TaskList targets) throws DukeException {
+        ArrayList<Task> tasks = targets.tasks;
+        if (tasks.size() == 0) {
+            throw new DukeException("There is no matching task in your list");
+        }
+        try {
+            System.out.println(line);
+            System.out.println(format("Here are the matching tasks in your list:"));
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                System.out.println("  " + format(i + 1 + "." + t.repr()));
+            }
+            System.out.println(line);
+        } catch (ParseException e) {
+            throw new DukeException("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
+        }
     }
 
     /**

@@ -48,11 +48,28 @@ public class TaskList {
     }
 
     /**
+<<<<<<< HEAD
      * Adds a task.
      * @param type type of task to be added
      * @param description description of new task
      * @throws DukeException if type of task connot be recognised or task description cannot be parsed
      */
+=======
+     * Finds tasks that have matching words in their descriptions.
+     * @param target searching term
+     * @return TaskList of matching tasks
+     */
+    public TaskList find(String target) {
+        ArrayList<Task> targets = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(target)) {
+                targets.add(t);
+            }
+        }
+        return new TaskList(targets);
+    }
+
+>>>>>>> branch-level-9
     public void add(String type, String description) throws DukeException {
         Task newTask;
         switch (type) {

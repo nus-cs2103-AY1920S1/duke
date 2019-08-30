@@ -80,6 +80,10 @@ public class Duke {
                 } else if (command instanceof Add) {
                     Add add = (Add) command;
                     add(add.type, add.description);
+                } else if (command instanceof  Find) {
+                    Find find = (Find) command;
+                    TaskList targets = tasks.find(find.target);
+                    ui.printFind(targets);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

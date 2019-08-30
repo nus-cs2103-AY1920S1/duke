@@ -28,6 +28,11 @@ public class Parser {
             } catch (NumberFormatException ex) {
                 throw new DukeException("Task number should be integer.");
             }
+        } else if (input.split(" ")[0].equals("find")) { // find a task
+            if (input.split(" ").length == 1) {
+                throw new DukeException("Item to be find should not be empty.");
+            }
+            return new Find(input.substring(input.indexOf(" ") + 1));
         } else { // add new task
             if (input.split(" ").length == 1) {
                 String type = input.split(" ")[0];

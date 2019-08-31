@@ -16,11 +16,14 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void printTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public List<Task> getTasksWithKeywords(String keyword) {
+        List<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            if (tasks.get(i).hasKeywordsInDescription(keyword)) {
+                foundTasks.add(tasks.get(i));
+            }
         }
+        return foundTasks;
     }
 
     public void addTask(Task t) {

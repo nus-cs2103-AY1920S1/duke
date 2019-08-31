@@ -58,6 +58,14 @@ public class Parser {
             int displayNumber = Integer.parseInt(fullCommand.substring(5));
             return new DoneCommand(displayNumber - 1);
 
+        } else if (fullCommand.startsWith("find")) {
+            try {
+                fullCommand = fullCommand.substring(5);
+                return new FindCommand(fullCommand);
+            }catch (IndexOutOfBoundsException e) {
+                throw new DukeException(" ☹ OOPS!!! You must input a search term");
+            }
+
         } else {
             return new UnknownCommand();
         }

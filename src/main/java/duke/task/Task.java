@@ -18,8 +18,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    protected void markAsDone() {
-        isDone = true;
+    public boolean hasKeywordsInDescription(String keyword) {
+        if (description.contains(keyword)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

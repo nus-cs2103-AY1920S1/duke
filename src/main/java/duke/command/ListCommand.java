@@ -7,6 +7,6 @@ import duke.task.TaskList;
 public class ListCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.printTasks();
+        ui.printList(tasks.getAllTasks());
     }
 }

@@ -131,7 +131,7 @@ public class Storage {
         try {
             String temp = tempList.get(0).toString();
             for (int i = 1; i < tempList.size(); i++) {
-                temp = temp + "\n" + tempList.get(0).toString();
+                temp = temp + "\n" + tempList.get(i).toString();
             }
             writer.write(temp);
         } catch (IndexOutOfBoundsException ex) {

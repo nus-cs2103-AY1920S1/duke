@@ -9,7 +9,7 @@ import seedu.duke.util.UI;
 import java.io.IOException;
 
 /**
- * Command to add an Event task to the TaskList class.
+ * Command to add a Todo task to the TaskList class.
  */
 public class TodoCommand extends Command {
 

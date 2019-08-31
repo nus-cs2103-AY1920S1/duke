@@ -76,6 +76,11 @@ public class UI {
         }
     }
 
+    /**
+     * Displays the found items to the user.
+     *
+     * @param foundItems The result of finding the taskList.
+     */
     public void showFound(TaskList foundItems) {
         System.out.println(UPPER_BORDER + FOUND + foundItems + LOWER_BORDER);
     }

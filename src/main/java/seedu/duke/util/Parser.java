@@ -60,7 +60,6 @@ public class Parser {
      * @return A string consisting of the original input string but without the first term.
      * @throws DukeException Throws if user did not supply the requirements for the task.
      */
-    public static String parseTodo(String[] keywords) throws DukeException {
     public static String parseTask(String[] keywords, String taskType) throws DukeException {
         if (keywords.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a " + taskType + " cannot be empty.");

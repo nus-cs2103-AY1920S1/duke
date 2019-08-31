@@ -25,7 +25,7 @@ public class Storage {
         this.list = new ArrayList<Task>();
     }
 
-    protected ArrayList<Task> load() throws DukeException, FileNotFoundException, ParseException, IOException {
+    public ArrayList<Task> load() throws DukeException, FileNotFoundException, ParseException, IOException {
         if (this.file.exists()) {
             Scanner scannerTask = new Scanner(this.file);
             while (scannerTask.hasNext()) {
@@ -39,7 +39,7 @@ public class Storage {
         }
     }
 
-    protected void setList(TaskList taskList) {
+    public void setList(TaskList taskList) {
         this.list = taskList.getList();
     }
 
@@ -54,9 +54,9 @@ public class Storage {
             String descriptionAndTime = taskText.substring(8);
             int index = descriptionAndTime.indexOf('|');
             String description = descriptionAndTime.substring(0, index - 1);
-            String time = descriptionAndTime.substring(index + 3);
+            String time = descriptionAndTime.substring(index + 2);
             Task task = new Deadline(description, time);
-            if (taskText.substring(3,4).equals("1")) {
+            if (taskText.substring(4,5).equals("1")) {
                 task.markAsDone();
             }
             this.list.add(task);
@@ -64,9 +64,9 @@ public class Storage {
             String descriptionAndTime = taskText.substring(8);
             int index = descriptionAndTime.indexOf('|');
             String description = descriptionAndTime.substring(0, index - 1);
-            String time = descriptionAndTime.substring(index + 3);
+            String time = descriptionAndTime.substring(index + 2);
             Task task = new Event(description, time);
-            if (taskText.substring(3,4).equals("1")) {
+            if (taskText.substring(4,5).equals("1")) {
                 task.markAsDone();
             }
             this.list.add(task);

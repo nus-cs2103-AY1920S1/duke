@@ -1,10 +1,9 @@
-package duke;
-
 import java.io.FileNotFoundException;
 import duke.command.TaskList;
 import duke.command.Ui;
 import duke.command.Parser;
 import duke.command.Storage;
+import duke.DukeException;
 
 public class Duke {
 
@@ -27,7 +26,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+        Duke duke = new Duke("tasks.txt");
+        duke.run();
     }
 
     public void run() {

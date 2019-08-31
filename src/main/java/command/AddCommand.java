@@ -20,6 +20,7 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Returns the specified task.
      * @return Specified task.
      */
     public Task getTask() {

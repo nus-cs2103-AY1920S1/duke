@@ -73,7 +73,7 @@ public class Storage {
      */
     void save(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter("data/duke.txt");
-        for(Task task: tasks) {
+        for (Task task: tasks) {
             writer.write(task.toFile() + System.lineSeparator());
         }
         writer.close();

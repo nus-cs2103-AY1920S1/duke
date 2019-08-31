@@ -1,7 +1,16 @@
 package duke;
 
-import command.*;
-import task.*;
+import command.Command;
+import command.FindCommand;
+import command.ListCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.AddCommand;
+import command.EndCommand;
+
+import task.Deadline;
+import task.Todo;
+import task.Event;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +20,7 @@ import java.text.SimpleDateFormat;
  */
 public class Parser {
     /**
+     * Parse the command string given.
      * @param command Command string.
      * @return Command object.
      * @throws DukeException Invalid actions / missing values.

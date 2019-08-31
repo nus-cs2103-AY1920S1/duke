@@ -97,6 +97,7 @@ public class TaskList {
     }
 
     /**
+     * Returns the total number of tasks in the list.
      * @return Number of tasks in the list.
      */
     public int getSize() {
@@ -104,6 +105,7 @@ public class TaskList {
     }
 
     /**
+     * Returns the list of tasks.
      * @return List of tasks.
      */
     public ArrayList<Task> getAllTasks() {

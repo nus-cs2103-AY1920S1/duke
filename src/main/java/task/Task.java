@@ -58,6 +58,7 @@ public class Task {
     }
 
     /**
+     * Returns the specific task's description.
      * @return Task's description.
      */
     String getDescription() {

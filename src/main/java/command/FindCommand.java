@@ -10,9 +10,19 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Constructs the Find Command object to look for specific tasks.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
+
+    /**
+     * Executes the command and runs the related logic flow.
+     * @param tasks List of tasks.
+     * @param ui User interface.
+     * @param storage Tasks storage: load & save.
+     */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         ArrayList<Task> taskList = tasks.find(keyword);
 
@@ -22,6 +32,5 @@ public class FindCommand extends Command {
             System.out.println("\tHere are the matching tasks in your list:");
             tasks.list(taskList);
         }
-
     }
 }

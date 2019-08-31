@@ -11,7 +11,9 @@ public class ListCommand extends Command {
     /**
      * Constructs the List Command object.
      */
-    public ListCommand() {}
+    public ListCommand() {
+
+    }
 
     /**
      * Executes the command and runs the related logic flow.

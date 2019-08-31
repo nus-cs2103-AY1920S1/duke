@@ -10,7 +10,9 @@ public class UserInterface {
     /**
      * Constructs the UserInterface object.
      */
-    UserInterface() {}
+    UserInterface() {
+
+    }
 
     /**
      * Displays the welcome message for the user and prompts their inputs.
@@ -20,7 +22,6 @@ public class UserInterface {
         System.out.println("\tHello! I'm duke.Duke\n\tWhat can I do for you?");
         showLine();
     }
-
 
     /**
      * Beautifies the interface with line dividers.

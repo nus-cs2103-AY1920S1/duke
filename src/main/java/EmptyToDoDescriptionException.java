@@ -1,3 +1,5 @@
 public class EmptyToDoDescriptionException extends DukeException{
-    public EmptyToDoDescriptionException(String exceptionMsg) { super(exceptionMsg); }
+    public EmptyToDoDescriptionException(String exceptionMsg) {
+        super(exceptionMsg);
+    }
 }

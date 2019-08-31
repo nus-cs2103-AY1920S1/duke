@@ -1,0 +1,3 @@
+D//CS2103T project//false//2/12/1997 2359
+E//McDonalds//true//1/12/2019 0050
+T//sleep//true

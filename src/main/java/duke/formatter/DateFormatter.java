@@ -1,3 +1,5 @@
+package duke.formatter;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

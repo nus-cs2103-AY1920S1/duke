@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.InvalidParameterException;
+import duke.task.Event;
+
 public class AddEventCommand extends AddCommand {
 
     public AddEventCommand(String line) {

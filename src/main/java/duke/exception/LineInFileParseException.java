@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class LineInFileParseException extends DukeException {
 
     int lineCount;

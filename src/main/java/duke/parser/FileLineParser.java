@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.exception.InvalidDateTimeException;
+import duke.exception.LineInFileParseException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class FileLineParser {
 
     static int lineCount;

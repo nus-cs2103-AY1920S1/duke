@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.InvalidParameterException;
+import duke.task.Todo;
+
 public class AddTodoCommand extends AddCommand {
 
     public AddTodoCommand(String line) {

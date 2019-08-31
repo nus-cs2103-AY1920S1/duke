@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidParameterException extends DukeException {
     String parameter;
 

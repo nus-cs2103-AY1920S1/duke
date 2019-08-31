@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.exception.LineInFileParseException;
+import duke.parser.FileLineParser;
+import duke.parser.TaskParser;
+import duke.ui.Ui;
 import java.lang.StringBuffer;
 import java.util.ArrayList;
 import java.util.List;

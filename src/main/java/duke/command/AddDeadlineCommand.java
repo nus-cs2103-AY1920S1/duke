@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.InvalidParameterException;
+import duke.task.Deadline;
+
 public class AddDeadlineCommand extends AddCommand {
 
     public AddDeadlineCommand(String line) {

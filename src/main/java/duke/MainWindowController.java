@@ -44,6 +44,8 @@ public class MainWindowController {
     @FXML
     private MenuItem fileOpen;
     @FXML
+    private Label detailLabel;
+    @FXML
     private Label detailTypeLabel;
     @FXML
     private Label detailDescriptionLabel;
@@ -154,6 +156,30 @@ public class MainWindowController {
 
     @FXML
     private void initialize() {
+
+        assert menuBar != null : "fx:id=\"menuBar\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert fileNew != null : "fx:id=\"fileNew\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert fileOpen != null : "fx:id=\"fileOpen\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert masterPane != null : "fx:id=\"masterPane\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert masterListView != null :
+                "fx:id=\"masterListView\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailPane != null : "fx:id=\"detailPane\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert middleListView != null :
+                "fx:id=\"middleListView\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailLabel != null : "fx:id=\"detailLabel\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailTypeLabel != null :
+                "fx:id=\"detailTypeLabel\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailDescriptionLabel != null :
+                "fx:id=\"detailDescriptionLabel\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailTimeLabel != null :
+                "fx:id=\"detailTimeLabel\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailTypeText != null :
+                "fx:id=\"detailTypeText\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailDescriptionTextArea != null :
+                "fx:id=\"detailDescriptionTextArea\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert detailTimeText != null :
+                "fx:id=\"detailTimeText\" was not injected: check your FXML file 'MainWindow.fxml'.";
+
         setDetailVisible(false);
         middleListView.setCellFactory(new Callback<ListView<Task>, ListCell<Task>>() {
             @Override

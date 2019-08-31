@@ -69,6 +69,18 @@ public class NewTaskWindowController {
 
     @FXML
     void initialize() {
+
+        assert descriptionTextField != null :
+                "fx:id=\"descriptionTextField\" was not injected: check your FXML file 'NewTaskWindow.fxml'.";
+        assert confirmButton != null :
+                "fx:id=\"confirmButton\" was not injected: check your FXML file 'NewTaskWindow.fxml'.";
+        assert typeSelector != null :
+                "fx:id=\"typeSelector\" was not injected: check your FXML file 'NewTaskWindow.fxml'.";
+        assert dateLabel != null :
+                "fx:id=\"dateLabel\" was not injected: check your FXML file 'NewTaskWindow.fxml'.";
+        assert datePicker != null :
+                "fx:id=\"datePicker\" was not injected: check your FXML file 'NewTaskWindow.fxml'.";
+
         dateLabel.setVisible(false);
         datePicker.setVisible(false);
         ObservableList<String> items = FXCollections.observableArrayList("To-Do", "Deadline", "Event");

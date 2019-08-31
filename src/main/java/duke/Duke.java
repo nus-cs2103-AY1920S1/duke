@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 /**
  * The main class.
  */
-public class Main extends Application {
+public class Duke extends Application {
     private TaskList tasks;
     private Storage storage;
 
@@ -60,7 +60,7 @@ public class Main extends Application {
     /**
      * Initializes a new Duke session.
      */
-    public Main() {
+    public Duke() {
         storage = new Storage("tasks.txt");
         try {
             tasks = new TaskList(storage.read());

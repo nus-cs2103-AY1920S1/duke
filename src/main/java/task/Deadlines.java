@@ -1,3 +1,7 @@
+package task;
+
+import main.DateTime;
+
 public class Deadlines extends Task {
 
     protected DateTime date;

@@ -1,3 +1,10 @@
+package main;
+
+import task.Deadlines;
+import task.Events;
+import task.Task;
+import task.ToDos;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 

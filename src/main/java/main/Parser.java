@@ -1,8 +1,16 @@
+package main;
+
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ListCommand;
+import command.AddCommand;
+
 import java.io.IOException;
 
 public class Parser {
 
-    public static Command parse(String input) throws IOException{
+    public static Command parse(String input) throws IOException {
 
         if (input.equals("list")) {
             return new ListCommand();

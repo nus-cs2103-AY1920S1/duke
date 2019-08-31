@@ -1,4 +1,11 @@
+package command;
+
+import main.Storage;
+import main.TaskList;
+import main.Ui;
+
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 public class DoneCommand extends Command {
     String[] temp;
@@ -13,6 +20,8 @@ public class DoneCommand extends Command {
             ui.printDone(task.getList(), index);
             storage.arrayToFile(task.getList());
         } catch (NullPointerException e) {
+            ui.printError("Please input a valid task number.");
+        } catch (ArrayIndexOutOfBoundsException e) {
             ui.printError("Please input a valid task number.");
         }
 

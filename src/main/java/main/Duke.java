@@ -1,9 +1,26 @@
-import java.util.Scanner;
+package main;
+
+import command.*;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
-public class ToDoList {
+public class Duke {
+    public static void main(String[] args) {
+        Ui ui = new Ui();
 
-    public void run() throws IOException {
+        ui.printMessage("Hello! I'm Duke\n     What can i do for you?");
+
+        try {
+            run();
+        } catch (IOException e) {
+            ui.printError(e.getMessage());
+        }
+
+    }
+
+    public static void run() throws IOException {
 
         Scanner sc = new Scanner(System.in);
         Ui ui = new Ui();

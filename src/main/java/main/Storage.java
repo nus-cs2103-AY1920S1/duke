@@ -1,3 +1,10 @@
+package main;
+
+import task.Deadlines;
+import task.Events;
+import task.Task;
+import task.ToDos;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

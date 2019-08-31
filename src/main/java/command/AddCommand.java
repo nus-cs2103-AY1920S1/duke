@@ -1,10 +1,15 @@
+package command;
+
+import command.*;
+import main.*;
+
 import java.io.IOException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     String input;
     String[] temp;
 
-    public AddCommand(String input, String[] temp){
+    public AddCommand(String input, String[] temp) {
         this.input = input;
         this.temp = temp;
     }

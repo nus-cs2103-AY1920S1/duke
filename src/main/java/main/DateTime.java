@@ -1,3 +1,5 @@
+package main;
+
 public class DateTime {
     private int day, month, year, time;
 

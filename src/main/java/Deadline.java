@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * Represents a Deadline object that contains a description and time by which it must be completed.
+ */
 public class Deadline extends Task {
     private Calendar time;
 
+    /**
+     * Creates a Deadline object using information from the arrayList of the Parser.
+     * @param parser parser which is used to get information to make the obejct.
+     */
     public Deadline(Parser parser) {
         super(parser.getList().get(0));
         time = Calendar.getInstance();
@@ -15,15 +22,28 @@ public class Deadline extends Task {
                 Integer.parseInt(inputArray.get(5)));
     }
 
+    /**
+     * Creates a deadline object using description and time at which Deadline to be done by.
+     * @param des string to represent description of the Task.
+     * @param time time that deadline must be completed by.
+     */
     public Deadline(String des, Calendar time) {
         super(des);
         this.time = time;
     }
 
+    /**
+     * Return time by which deadline to be completed.
+     * @return time by which deadline should be completed.
+     */
     public Calendar getTime() {
         return time;
     }
 
+    /**
+     * Prints time of the deadline in a user-friendly readable format.
+     * @return string representing time of the deadline in a particular format.
+     */
     public String printTime() {
         String jargon = "";
         switch (time.get(Calendar.DAY_OF_MONTH) % 10) {

@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Ui {
     private static String[] WELCOME_MESSAGE = {
         "Hello! I'm",

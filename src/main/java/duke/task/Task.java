@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     private String description;
     private boolean isDone = false;
@@ -14,7 +16,7 @@ public class Task {
         }
     }
 
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 

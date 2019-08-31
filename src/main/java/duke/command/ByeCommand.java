@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.util.Ui;
+
 public class ByeCommand extends Command {
     public void execute(TaskList taskList, Ui ui) {
         ui.print("Bye! Hope to see you again soon!");

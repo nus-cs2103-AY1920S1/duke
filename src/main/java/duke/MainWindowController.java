@@ -58,7 +58,7 @@ public class MainWindowController {
 
     private Duke duke;
 
-    public void setDuke(Duke duke) {
+    protected void setDuke(Duke duke) {
         this.duke = duke;
         displayTaskList.addAll(duke.getTasks());
         middleListView.setItems(displayTaskList);
@@ -121,9 +121,8 @@ public class MainWindowController {
             super();
             title = new Text();
             subtitle = new Text();
-            VBox vBox = new VBox(title, subtitle);
             hboxLead = new Label("Status");
-            content = new HBox(hboxLead, vBox);
+            content = new HBox(hboxLead, new VBox(title, subtitle));
             content.setSpacing(10);
         }
 
@@ -161,7 +160,6 @@ public class MainWindowController {
             public ListCell<Task> call(ListView<Task> param) {
 
                 ListCell<Task> cell = new CustomListCell();
-                ContextMenu contextMenu = new ContextMenu();
                 // MenuItem for delete task
                 MenuItem deleteItem = new MenuItem();
                 deleteItem.setText("Delete");
@@ -189,6 +187,7 @@ public class MainWindowController {
                     refreshView();
                 });
                 // TODO: MenuItem for edit task
+                ContextMenu contextMenu = new ContextMenu();
                 contextMenu.getItems().add(deleteItem);
                 contextMenu.getItems().add(doneItem);
                 cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
@@ -259,6 +258,5 @@ public class MainWindowController {
         File selectedFile = fileChooser.showOpenDialog(stage);
         duke = new Duke(selectedFile.getAbsolutePath());
         refreshView();
-//        System.out.println(selectedFile.getAbsolutePath());
     }
 }

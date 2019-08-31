@@ -26,6 +26,11 @@ public class Duke extends Application {
     protected Storage storage;
     protected TaskList tasks;
 
+    /**
+     * Constructs a Duke object with save file located at filePath.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         try {
@@ -71,6 +76,10 @@ public class Duke extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Gets tasks of type ToDo.
+     * @return a list of ToDo objects
+     */
     public List<ToDo> getTodos() {
         List<ToDo> todos = new ArrayList<>();
         for (Task t : tasks.getList()) {
@@ -81,6 +90,10 @@ public class Duke extends Application {
         return todos;
     }
 
+    /**
+     * Gets tasks of type Deadline.
+     * @return a list of Deadline objects
+     */
     public List<Deadline> getDeadlines() {
         List<Deadline> deadlines = new ArrayList<>();
         for (Task t : tasks.getList()) {
@@ -91,6 +104,10 @@ public class Duke extends Application {
         return deadlines;
     }
 
+    /**
+     * Gets tasks of type Event.
+     * @return a list of Event objects
+     */
     public List<Event> getEvent() {
         List<Event> events = new ArrayList<>();
         for (Task t : tasks.getList()) {
@@ -101,6 +118,10 @@ public class Duke extends Application {
         return events;
     }
 
+    /**
+     * Gets all tasks in storage.
+     * @return a list of Task
+     */
     public List<Task> getTasks() {
         return tasks.getList();
     }

@@ -18,9 +18,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainWindowController {
@@ -33,8 +35,6 @@ public class MainWindowController {
     private ListView<String> masterListView;
     @FXML
     private ScrollPane listPane;
-    @FXML
-    private Button randomButton;
     @FXML
     private AnchorPane detailPane;
     @FXML
@@ -178,6 +178,7 @@ public class MainWindowController {
                 MenuItem doneItem = new MenuItem();
                 doneItem.setText("Done");
                 doneItem.setOnAction(event -> {
+                    // TODO: Add undone feature
                     int index = duke.getTasks().indexOf(cell.getItem());
                     duke.getTasks().get(index).markAsDone();
                     try {
@@ -237,11 +238,6 @@ public class MainWindowController {
     }
 
     @FXML
-    void addListItem(ActionEvent event) {
-
-    }
-
-    @FXML
     void createNewTask(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Launcher.class.getResource("/view/NewTaskWindow.fxml"));
@@ -258,7 +254,11 @@ public class MainWindowController {
 
     @FXML
     void openFile(ActionEvent event) {
-        System.out.println("open");
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        duke = new Duke(selectedFile.getAbsolutePath());
+        refreshView();
+//        System.out.println(selectedFile.getAbsolutePath());
     }
-
 }

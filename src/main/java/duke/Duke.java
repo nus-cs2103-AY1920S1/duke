@@ -26,6 +26,21 @@ public class Duke extends Application {
     protected Storage storage;
     protected TaskList tasks;
 
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadFromSaveFile());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Duke() {
+
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         storage = new Storage();
@@ -34,6 +49,7 @@ public class Duke extends Application {
         } catch (DukeException e) {
             tasks = new TaskList();
         } catch (IOException e) {
+            e.printStackTrace();
         }
 
         // Create the FXMLLoader

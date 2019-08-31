@@ -1,4 +1,6 @@
-import java.util.Scanner;
+/**
+ * Contains exceptions specific to Duke
+ */
 
 public class DukeException extends Exception{
 

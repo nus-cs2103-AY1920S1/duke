@@ -1,7 +1,5 @@
 class ToDo extends Task {
 
-    protected String by;
-
     public ToDo(String description) {
         super(description);
     }
@@ -12,5 +10,7 @@ class ToDo extends Task {
     }
 
     @Override
-    public String toSave() { return "T | " + (isDone ? "1" : "0") + " | " + this.description; }
+    public String toSave() {
+        return "T | " + (isDone ? "1" : "0") + " | " + this.description;
+    }
 }

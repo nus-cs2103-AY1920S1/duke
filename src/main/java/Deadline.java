@@ -28,16 +28,18 @@ class Deadline extends Task {
             try {
                 this.dateTime = dateTime.parse(by);
             } catch (ParseException e) {
+                System.out.println("Unable to convert String to SimpleDateFormat.");
             }
         }
     }
 
     @Override
     public String toString() {
-        if (dateTime != null)
+        if (dateTime != null) {
             return "[D]" + super.toString() + " (by: " + dateTime + ")";
-        else
+        } else {
             return "[D]" + super.toString() + " (by: " + by + ")";
+        }
     }
 
     public String toSave() {

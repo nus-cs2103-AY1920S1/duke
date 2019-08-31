@@ -31,8 +31,8 @@ public class DoneCommand extends Command {
         } else {
             int taskToBeDone = Integer.parseInt(input[1]);
             if (tasks.getTaskList().size() < taskToBeDone) {
-                throw new DoneException("OOPS!!! There is no such task in your list!\n" +
-                        "Current number of tasks = " + tasks.getTaskList().size());
+                throw new DoneException("OOPS!!! There is no such task in your list!\n"
+                        + "Current number of tasks = " + tasks.getTaskList().size());
             } else {
                 Task task = tasks.getTaskList().get(taskToBeDone - 1);
                 if (task.isDone()) {

@@ -32,7 +32,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeParseException, DeadlineException {
         if (input.length <= 1) {
             throw new DeadlineException();
-        } else if (input.length <=4 ) {
+        } else if (input.length <= 4) {
             throw new DeadlineException("OOPS!!! Did you type something wrong?\n"
                     + "     Make sure to type </by> and state the datetime in 'dd/M/yyyy hh:mm' format!");
         } else {

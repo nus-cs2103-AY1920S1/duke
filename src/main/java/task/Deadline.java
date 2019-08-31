@@ -12,6 +12,12 @@ public class Deadline extends Task {
     protected Date date;
     protected SimpleDateFormat formatter;
 
+    /**
+     * Constructor for Deadline Task.
+     * @param description description of this task.
+     * @param date date of this deadline.
+     * @throws ParseException is thrown when date format is wrong.
+     */
     public Deadline(String description, String date) throws ParseException {
         super(description);
         formatter = new SimpleDateFormat("dd/M/yyyy hh:mm");

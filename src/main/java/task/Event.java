@@ -12,7 +12,12 @@ public class Event extends Task {
     protected Date date;
     protected SimpleDateFormat formatter;
 
-
+    /**
+     * Constructor for Event Task.
+     * @param description description for the event.
+     * @param date date of the event.
+     * @throws ParseException is thrown when date format is incorrect.
+     */
     public Event(String description, String date) throws ParseException {
         super(description);
         formatter = new SimpleDateFormat("dd/M/yyyy hh:mm");

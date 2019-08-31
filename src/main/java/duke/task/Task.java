@@ -57,6 +57,15 @@ public abstract class Task {
     }
 
     /**
+     * Checks if the task's description contain the specified sequence of <code>char</code> values in the keyword.
+     * @param keyword the specified sequence of <code>char</code> values
+     * @return <code>true</code> if task's description contains <code>query</code>,<code>false</code> otherwise
+     */
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
+    /**
      * Returns a string representation of the task. The string representation consist of the status icon with the
      * task description.
      * @return a string representation of the task

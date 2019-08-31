@@ -1,12 +1,13 @@
 package duke.parser;
 
-import duke.command.AddTodoCommand;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.InvalidCommandException;
 import java.util.Arrays;
@@ -42,6 +43,8 @@ public class CommandParser {
                 return new AddEventCommand(parameter);
             case "delete":
                 return new DeleteCommand(parameter);
+            case "find":
+                return new FindCommand(parameter);
             case "bye":
                 return new ExitCommand();
             default:

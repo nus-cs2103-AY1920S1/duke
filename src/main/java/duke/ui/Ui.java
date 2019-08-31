@@ -83,6 +83,18 @@ public class Ui {
     }
 
     /**
+     * Prints the results of tasks found in the list.
+     * @param list the list of tasks to be printed
+     */
+    public void showResultsFound(String list) {
+        System.out.println("    ============================================================");
+        System.out.println("    Here are the matching tasks in your list:");
+        System.out.println("    ------------------------------------------------------------");
+        System.out.print(list);
+        System.out.println("    ============================================================");
+    }
+
+    /**
      * Prints a message that informs the user that a task has been added into the list.
      * @param task the task to be added into the list
      * @param size the number of tasks in the list

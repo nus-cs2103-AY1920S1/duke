@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- *  The <code>DeleteCommand</code> is created when the user enters <code>"delete"</code>. The dolete command will delete
+ *  The <code>DeleteCommand</code> is created when the user enters <code>"delete"</code>. The delete command will delete
  *  a specified task entered by the user. The user interface will display the information of the deleted task if
  *  successful.
  */

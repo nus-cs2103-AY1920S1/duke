@@ -95,6 +95,19 @@ public class TaskList {
         return buffer.toString();
     }
 
+    /**
+     * Finds all matching tasks with the given keyword.
+     * @param keyword the keyword to look out for in tasks' description
+     * @return a string representation of the list of tasks that match the keyword
+     */
+    public String find(String keyword) {
+        return new TaskList(taskList.stream()
+                .filter(taskDescrptn -> taskDescrptn.contains(keyword))
+                .map(task -> task.encode())).list();
+
+
+    }
+
     /** Returns a stream of string to be saved into the {@link duke.storage.Storage}. Each task is parsed using a task
      * parser. See {@link TaskParser} for more information.
      * @return a stream of string to be saved into storage

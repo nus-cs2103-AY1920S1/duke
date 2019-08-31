@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
 
-    Ui() { }
+    Ui() {
+
+    }
 
     /**
      * Greets user.
@@ -82,8 +84,8 @@ public class Ui {
      * Prints done command message.
      */
     void printDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done: \n" +
-                "[" + task.getStatusIcon() + "] " + task.description);
+        System.out.println("Nice! I've marked this task as done: \n"
+                + "[" + task.getStatusIcon() + "] " + task.description);
     }
 
     /**

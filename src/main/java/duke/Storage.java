@@ -25,39 +25,41 @@ class Storage {
      * @throws DukeException If there is input output exception.
      */
     ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> aList = new ArrayList<>();
+        ArrayList<Task> alist = new ArrayList<>();
         String line;
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(filepath));
+            char tick = '\u2713';
             while ((line = br.readLine()) != null) {
                 String description = line.substring(7);
                 if (line.charAt(1) == 'T') {
                     Todo todo = new Todo(description);
-                    if (line.charAt(4) == '\u2713') {
+                    if (line.charAt(4) == tick) {
                         todo.markDone();
                     }
-                    aList.add(todo);
+                    alist.add(todo);
                 } else if (line.charAt(1) == 'D') {
                     Deadline deadline = new Deadline(description);
-                    if (line.charAt(4) == '\u2713') {
+                    if (line.charAt(4) == tick) {
                         deadline.markDone();
                     }
-                    aList.add(deadline);
+                    alist.add(deadline);
                 } else {
                     Event event = new Event(description);
-                    if (line.charAt(4) == '\u2713') {
+                    if (line.charAt(4) == tick) {
                         event.markDone();
                     }
-                    aList.add(event);
+                    alist.add(event);
                 }
             }
             br.close();
         } catch (IOException ex) {
             throw new DukeException(ex.getMessage());
         }
-        return aList;
+        return alist;
     }
+
     /**
      * Saves all tasks to the file.
      * If there is input output exception, Duke Exception is thrown.
@@ -65,7 +67,8 @@ class Storage {
      * @param tasks  TaskList containing list of tasks
      * @throws DukeException  If there is input output exception.
      */
-     void writeToHardDisk(TaskList tasks) throws DukeException {
+    void writeToHardDisk(TaskList tasks) throws DukeException {
+
         try {
             FileWriter fileWriter = new FileWriter(filepath);
             for (Task t: tasks.taskList) {

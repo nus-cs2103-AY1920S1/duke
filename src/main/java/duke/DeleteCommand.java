@@ -35,7 +35,8 @@ public class DeleteCommand extends Command {
         }
 
         ui.printDeleteMessage(task, tasks);
-}
+    }
+
     /**
      * Returns false for exit status.
      * If exit status is false, Duke continues operating.
@@ -43,6 +44,7 @@ public class DeleteCommand extends Command {
      * @return false.
      */
     public boolean isExit() {
+
         return false;
     }
 

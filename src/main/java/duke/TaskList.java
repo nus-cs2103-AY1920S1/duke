@@ -12,7 +12,10 @@ public class TaskList {
     TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
-    TaskList() { }
+
+    TaskList() {
+
+    }
 
     /**
      * Removes task from the task list.

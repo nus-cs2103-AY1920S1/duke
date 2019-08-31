@@ -5,19 +5,25 @@ public class Parser {
 
     public static Command parse(String fullCommand) {
         String[] currArray = fullCommand.split("\\s+", 2);
-        if (fullCommand.equals("bye")) {
+        switch (currArray[0]) {
+        case "bye":
             return new ExitCommand();
-        } else if (fullCommand.equals("list")) {
+        case "list":
             return new ListCommand();
-        } else if (currArray[0].equals("done")) {
+        case "done":
             return new DoneCommand(currArray[1]);
-        } else if (currArray[0].equals("delete")) {
+        case "delete":
             return new DeleteCommand(currArray[1]);
-        } else if (currArray[0].equals("find")) {
+        case "find":
             return new FindCommand(currArray[1]);
-        } else {
+        case "todo":
+        case "deadline":
+        case "event":
             return new AddCommand(currArray);
+        default:
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    "
+                    + "____________________________________________________________\n");
         }
     }
-
 }

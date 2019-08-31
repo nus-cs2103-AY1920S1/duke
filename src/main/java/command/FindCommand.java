@@ -29,8 +29,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Prints the list of Tasks with the defined keyword.
+     * Loops through the task array to find tasks with descriptions that
+     * contain the keyword. Found tasks are added to an ArrayList which
+     * is printed.
      *
+     * @param task    The working TaskList object.
+     * @param ui      The working Ui object.
+     * @param storage The working storage object.
      */
     public void execute(TaskList task, Ui ui, Storage storage) {
         if (keywords.equals("")) {

@@ -55,6 +55,11 @@ public class Parser {
                 String dateTime = parseArguments(arguments, index + 1, arguments.length);
                 return new AddCommand(arguments[0], description, dateTime);
             }
+        case "find":
+            if (arguments.length == 1) {
+                throw new MissingKeywordException();
+            }
+            return new FindCommand(arguments[1]);
         default:
             throw new UnknownCommandException();
         }

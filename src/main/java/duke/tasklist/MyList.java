@@ -19,4 +19,6 @@ public interface MyList {
 
     //removes task by index
     public abstract Task removeTask(int index);
+
+    public abstract MyList findTasks(String word);
 }

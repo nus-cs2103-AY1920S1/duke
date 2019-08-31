@@ -13,4 +13,5 @@ public interface DukeUserInterface {
     public void printDoneMsg(Task task);
     public void printException(String msg);
     public void printDeleteMsg(Task task, MyList taskList);
+    public void printFindList(MyList resultList);
 }

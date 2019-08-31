@@ -37,6 +37,18 @@ public class TaskList implements MyList {
 
     @Override
     public Task removeTask(int index) {
+        Task task = list.remove(index - 1);
+
         return list.remove(index - 1);
+    }
+
+    public TaskList findTasks(String word) {
+        TaskList taskList = new TaskList();
+        for (Task task : list) {
+            if (task.getDescription().contains(word)) {
+                taskList.add(task);
+            }
+        }
+        return taskList;
     }
 }

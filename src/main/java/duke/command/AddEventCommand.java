@@ -1,10 +1,19 @@
+package duke.command;
+
+import duke.Ui;
+import duke.exceptions.DukeException;
+import duke.formats.DateTime;
+import duke.storage.Storage;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+
 import java.io.IOException;
 
 public class AddEventCommand extends Command {
 
     private Event event;
 
-    public AddEventCommand(String [] commandArray) throws DukeException{
+    public AddEventCommand(String [] commandArray) throws DukeException {
         String eventName = "";
         int i = 1;
         while(!commandArray[i].equals("/at")){

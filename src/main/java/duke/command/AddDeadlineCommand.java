@@ -1,10 +1,19 @@
+package duke.command;
+
+import duke.Ui;
+import duke.exceptions.DukeException;
+import duke.formats.DateTime;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.TaskList;
+
 import java.io.IOException;
 
 public class AddDeadlineCommand extends Command{
 
     private Deadline deadline;
 
-    public AddDeadlineCommand(String [] commandArray) throws DukeException{
+    public AddDeadlineCommand(String [] commandArray) throws DukeException {
         String deadlineName = "";
         int i = 1;
         while(!commandArray[i].equals("/by")){

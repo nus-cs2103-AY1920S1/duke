@@ -1,8 +1,10 @@
+package duke.tasks;
+
 public class Deadline extends Task {
 
     String deadline;
 
-    Deadline(String taskName, boolean isDone, String deadline) {
+    public Deadline(String taskName, boolean isDone, String deadline) {
         super(taskName, isDone);
         this.deadline = deadline;
     }

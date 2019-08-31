@@ -12,9 +12,9 @@ public class AddToDoCommand extends Command {
 
     private Task task;
 
-    public AddToDoCommand(String [] commandArray){
+    public AddToDoCommand(String[] commandArray) {
         String taskLine = "";
-        for(int i = 1; i < commandArray.length; i++){
+        for (int i = 1; i < commandArray.length; i++) {
             taskLine += " " + commandArray[i];
         }
         this.task = new Task(taskLine, false);
@@ -24,9 +24,9 @@ public class AddToDoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         ui.showAddTask(task, tasks.getSize());
-        try{
+        try {
             storage.writeToFile(task.toFile());
-        } catch (IOException e){
+        } catch (IOException e) {
             ui.showIOException(e);
         }
     }

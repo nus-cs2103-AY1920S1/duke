@@ -19,7 +19,7 @@ public class Storage {
 
     private String filePath;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -27,10 +27,10 @@ public class Storage {
         File taskFile = new File(filePath);
         Scanner s = new Scanner(taskFile);
         ArrayList<Task> tasksList = new ArrayList<>();
-        while(s.hasNext()){
+        while (s.hasNext()) {
             String line = s.nextLine();
             String[] details = line.split(" \\| ");
-            switch (details[0]){
+            switch (details[0]) {
                 case "T":
                     String taskName = " " + details[2];
                     Task newTask = new Task(taskName, details[1].equals("1"));
@@ -58,7 +58,7 @@ public class Storage {
     public void writeToFile(String text) throws IOException {
         String textToAppend = text;
         File appendingFile = new File(filePath);
-        if(appendingFile.length() != 0){
+        if (appendingFile.length() != 0) {
             textToAppend = System.lineSeparator() + text;
         }
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
@@ -69,7 +69,7 @@ public class Storage {
     public void writeToFile(String text, String pathName) throws IOException {
         String textToAppend = text;
         File appendingFile = new File(pathName);
-        if(appendingFile.length() != 0){
+        if (appendingFile.length() != 0) {
             textToAppend = System.lineSeparator() + text;
         }
         FileWriter fw = new FileWriter(pathName, true); // create a FileWriter in append mode
@@ -82,7 +82,7 @@ public class Storage {
         File tempFile = new File(tempPath);
         tempFile.createNewFile();
         ArrayList<Task> tasksList = tasks.getTasks();
-        for (Task task: tasksList) {
+        for (Task task : tasksList) {
             writeToFile(task.toFile(), tempPath);
         }
         Files.copy(Paths.get(tempPath), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);

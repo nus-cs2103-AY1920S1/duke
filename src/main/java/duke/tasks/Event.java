@@ -10,13 +10,13 @@ public class Event extends Task {
     }
 
     @Override
-    public String toFile(){
+    public String toFile() {
         String mark = isDone ? "1" : "0";
         return "E | " + mark + " |" + taskName + "|" + duration;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String mark = isDone ? "✓" : "✗";
         return "[E][" + mark + "]" + taskName +
                 "(at:" + duration + ")";

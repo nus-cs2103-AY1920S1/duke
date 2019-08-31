@@ -13,11 +13,11 @@ public class AddEventCommand extends Command {
 
     private Event event;
 
-    public AddEventCommand(String [] commandArray) throws DukeException {
+    public AddEventCommand(String[] commandArray) throws DukeException {
         String eventName = "";
         int i = 1;
-        while(!commandArray[i].equals("/at")){
-            if(i >= commandArray.length - 1){
+        while (!commandArray[i].equals("/at")) {
+            if (i >= commandArray.length - 1) {
                 throw new DukeException("☹ OOPS!!! The '/at' sequence couldn't be found.");
             }
             eventName += " " + commandArray[i];
@@ -26,12 +26,12 @@ public class AddEventCommand extends Command {
         eventName += " ";
         i++;
         String eventDuration = "";
-        if(i >= commandArray.length){
+        if (i >= commandArray.length) {
             throw new DukeException("☹ OOPS!!! The event timing must be specified.");
         }
         boolean isFirstWord = true;
-        while(i < commandArray.length){
-            if(!isFirstWord){
+        while (i < commandArray.length) {
+            if (!isFirstWord) {
                 eventDuration += " ";
             }
             eventDuration += commandArray[i];
@@ -46,9 +46,9 @@ public class AddEventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(event);
         ui.showAddTask(event, tasks.getSize());
-        try{
+        try {
             storage.writeToFile(event.toFile());
-        } catch (IOException e){
+        } catch (IOException e) {
             ui.showIOException(e);
         }
     }

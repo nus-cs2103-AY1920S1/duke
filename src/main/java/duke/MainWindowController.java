@@ -3,6 +3,7 @@ package duke;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.ToDo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,13 +38,24 @@ public class MainWindowController {
     @FXML
     private AnchorPane detailPane;
     @FXML
-    private TextArea middleTextArea;
-    @FXML
     private ListView<Task> middleListView;
     @FXML
     private MenuItem fileNew;
     @FXML
     private MenuItem fileOpen;
+    @FXML
+    private Label detailTypeLabel;
+    @FXML
+    private Label detailDescriptionLabel;
+    @FXML
+    private Label detailTimeLabel;
+    @FXML
+    private Text detailTypeText;
+    @FXML
+    private TextArea detailDescriptionTextArea;
+    @FXML
+    private Text detailTimeText;
+
     private Duke duke;
 
     public void setDuke(Duke duke) {
@@ -51,6 +63,30 @@ public class MainWindowController {
         displayTaskList.addAll(duke.getTasks());
         middleListView.setItems(displayTaskList);
     }
+
+    private void setDetailVisible(boolean visible) {
+        detailTypeLabel.setVisible(visible);
+        detailTypeText.setVisible(visible);
+        detailDescriptionLabel.setVisible(visible);
+        detailDescriptionTextArea.setVisible(visible);
+        if (!visible) {
+            detailTimeLabel.setVisible(false);
+            detailTimeText.setVisible(false);
+        }
+    }
+
+    private void setDetailTime(String label, String time) {
+        detailTimeLabel.setText(label);
+        detailTimeText.setText(time);
+        detailTimeLabel.setVisible(true);
+        detailTimeText.setVisible(true);
+    }
+
+    private void hideDetailTime() {
+        detailTimeLabel.setVisible(false);
+        detailTimeText.setVisible(false);
+    }
+
 
     protected Duke getDuke() {
         return duke;
@@ -119,6 +155,7 @@ public class MainWindowController {
 
     @FXML
     private void initialize() {
+        setDetailVisible(false);
         middleListView.setCellFactory(new Callback<ListView<Task>, ListCell<Task>>() {
             @Override
             public ListCell<Task> call(ListView<Task> param) {
@@ -137,13 +174,49 @@ public class MainWindowController {
                     }
                     refreshView();
                 });
+                // MenuItem for finish task
+                MenuItem doneItem = new MenuItem();
+                doneItem.setText("Done");
+                doneItem.setOnAction(event -> {
+                    int index = duke.getTasks().indexOf(cell.getItem());
+                    duke.getTasks().get(index).markAsDone();
+                    try {
+                        duke.updateStorage();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    refreshView();
+                });
                 // TODO: MenuItem for edit task
                 contextMenu.getItems().add(deleteItem);
+                contextMenu.getItems().add(doneItem);
                 cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
                     if (isNowEmpty) {
                         cell.setContextMenu(null);
                     } else {
                         cell.setContextMenu(contextMenu);
+                    }
+                });
+
+                cell.setOnMouseClicked(event -> {
+                    if (!cell.isEmpty()) {
+                        setDetailVisible(true);
+                        Task item = cell.getItem();
+                        detailDescriptionTextArea.setText(item.getDescription());
+                        String type;
+                        if (item instanceof ToDo) {
+                            type = "To-Do";
+                            hideDetailTime();
+                        } else if (item instanceof Deadline) {
+                            type = "Deadline";
+                            setDetailTime("by", ((Deadline) item).getBy().toString());
+                        } else if (item instanceof Event) {
+                            type = "Event";
+                            setDetailTime("at", ((Event) item).getAt().toString());
+                        } else {
+                            type = "Unknown";
+                        }
+                        detailTypeText.setText(type);
                     }
                 });
 
@@ -156,6 +229,7 @@ public class MainWindowController {
         masterListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                setDetailVisible(false);
                 refreshView();
             }
         });

@@ -30,12 +30,17 @@ public class DateTime {
      * @return DateTime object created.
      */
     public static DateTime create(String dateTimeString) {
-        String[] currArray = dateTimeString.split("\\s+", 2);
-        String dateString = currArray[0];
-        String timeString = currArray[1];
-        String[] dateArray = dateString.split("/", 3);
-        return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]),
-                Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
+        try {
+            String[] currArray = dateTimeString.split("\\s+", 2);
+            String dateString = currArray[0];
+            String timeString = currArray[1];
+            String[] dateArray = dateString.split("/", 3);
+            return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]),
+                    Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("    OOPS!!! Please indicate the date/time in the format DD/MM/YYYY "
+                    + "HHMM.");
+        }
     }
 
     /**

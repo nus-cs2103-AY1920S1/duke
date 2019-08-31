@@ -61,6 +61,9 @@ public class Ui {
             Task temp = arr.get(i);
             System.out.println((i + 1) + ". " + temp);
         }
+        if (taskList.isEmpty()) {
+            System.out.println("There are no Tasks to show.");
+        }
     }
 
     public void showLoadingError() {

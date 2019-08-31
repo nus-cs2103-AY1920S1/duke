@@ -48,6 +48,8 @@ public class Duke {
                         break;
                     } else if (command.equals("list")) {
                         UI.showTasks(tasks);
+                    } else if (commandAnalyzer.getType().equals("find")) {
+                        UI.showTasks(tasks.find(commandAnalyzer.getList().get(0)));
                     } else {
                         if (commandAnalyzer.getType().equals("todo")) {
                             try {

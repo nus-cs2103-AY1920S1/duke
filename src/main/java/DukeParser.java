@@ -23,6 +23,8 @@ public class DukeParser {
             return new EventCommand();
         case "help":
             return new HelpCommand();
+        case "find":
+            return new FindCommand();
         default:
             throw new InvalidCommandDukeException(command);
         }

@@ -10,6 +10,8 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {}
+
     /**
      * Creates an instance of Duke, setting up the UI, storage, and task list.
      * @param filePath Path to the data file for tasks, used by storage
@@ -53,10 +55,18 @@ public class Duke {
     }
 
     /**
-     * This is the main method and entry point for the duke.Duke program.
-     * @param args duke.command.Command line arguments
+     * This is the main method and entry point for the Duke program.
+     * @param args Command line arguments
      */
     public static void main(String[] args) {
         new Duke(DATA_FILE_TASKS).run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

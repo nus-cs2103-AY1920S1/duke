@@ -1,9 +1,11 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
 
+/**
+ * Class that handles all Duke Ui elements, which includes formatting output
+ * and printing them to the screen.
+ */
 public class Ui {
     // Class attributes
     final static private String INDENT = "      ";
@@ -11,31 +13,70 @@ public class Ui {
     // Object attributes
     private Scanner sc;
 
+    /**
+     * Returns a Ui object.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Returns a string containing input prompt from the user.
+     *
+     * @return String containing user input
+     */
     public String getUserCommand() {
         System.out.println(); // Injects a spacing for future user input
         return sc.nextLine();
     }
 
+    /**
+     * Prints a formatted String to the screen. This method first calls
+     * indentMessage() to indent all lines within the output.
+     *
+     * @param message String containing message to be displayed.
+     */
     public void displayMessage(String message) {
         System.out.print(this.indentMessage(message));
     }
 
+    /**
+     * Prints a formatted String to the screen. This overloaded method provides
+     * an additional field for specifiying additional indents to pass to
+     * indentMessage().
+     *
+     * @param message
+     * @param extraIndent
+     */
     public void displayMessage(String message, int extraIndent) {
         System.out.print(this.indentMessage(message, extraIndent));
     }
 
+    /**
+     * Prints a single-line formatted String with default indent to the screen.
+     *
+     * @param message
+     */
     public void displaySingleLine(String message) {
         System.out.println(INDENT + message);
     }
 
+    /**
+     * Prints a line with default indents to the screen. Used to demarcate
+     * Duke output from user input.
+     */
     public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Returns a String padded with default indentation. This method
+     * looks for all newlines within the String and pads the default indentation
+     * of 4 spaces to the front.
+     *
+     * @param s String to be formatted
+     * @return String formatted with indentation.
+     */
     public String indentMessage(String s) {
         String[] lines = s.split("\n");
         StringBuilder indented_output = new StringBuilder();
@@ -47,6 +88,16 @@ public class Ui {
         return indented_output.toString();
     }
 
+    /**
+     * Returns a String padded with user-specified indentation. This method
+     * looks for all newlines within the String and pre-pads each line with
+     * (4 + extraIdent) amount of spaces.
+     *
+     * @param s String to be formatted
+     * @param extraIndent additional number of spaces to be added after
+     *                    the default indent
+     * @return formatted String
+     */
     public String indentMessage(String s, int extraIndent) {
         String[] lines = s.split("\n");
         StringBuilder indented_output = new StringBuilder();
@@ -66,11 +117,11 @@ public class Ui {
         return indented_output.toString();
     }
 
-    /*
-     Prints out a formatted hello greeting on the
-     screen. It is a implemented as a thin wrapper
-     around duke.formattedPrintln()
-    */
+
+    /**
+     * Prints out a formatted hello message with its
+     * own enclosing lines.
+     */
     public void greetHello() {
         String hello = "Hello! I'm Duke\n"
                 + "What can I do for you?";
@@ -81,7 +132,6 @@ public class Ui {
 
     /**
      * Prints out a formatted goodbye greeting on the screen.
-     * It is a implemented as a thin wrapper around duke.formattedPrintln()
      */
     public void greetGoodbye() {
         String goodbye = "Bye. Hope to see you again soon!";
@@ -90,7 +140,10 @@ public class Ui {
         //this.showLine();
     }
 
-    public void showLoadingError(DukeException e) {
+    /**
+     * Prints out a formatted saved list loading error message.
+     */
+    public void showLoadingError() {
         this.showLine();
         this.displayMessage("I couldn't find a saved task list...\n"
                 + "Let me start up a brand new list!");

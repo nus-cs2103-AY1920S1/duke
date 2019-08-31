@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /** Basic constructor for the Deadline sub-class.
      * Takes in a description and a task deadline
+     *
      * @param description details of the task.
      * @param by time by which task should be completed.
      */
@@ -19,9 +20,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /** Override toString() function for the Deadline
-     * sub-class. Prefixes a "[D]" to indicate the
-     * type of task.
+    /**
+     * Returns a string representation of the Deadline object and
+     * its various details.
+     *
      * @return a string representation of the Deadline object.
      */
     @Override

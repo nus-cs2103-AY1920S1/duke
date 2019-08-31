@@ -16,9 +16,10 @@ public class Todo extends Task {
         super(description);
     }
 
-    /** Override toString() function for the Todo
-     * sub-class. Prefixes a "[T]" to indicate the
-     * type of task.
+    /**
+     * Returns a string representation of the Todo object and
+     * its various details.
+     *
      * @return a string representation of the Todo object.
      */
     @Override

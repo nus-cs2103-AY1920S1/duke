@@ -8,28 +8,48 @@ import java.util.List;
 
 import java.lang.IndexOutOfBoundsException;
 
+
+/**
+ * Class that encapsulates a list of Tasks and various methods
+ * to manipulate the list.
+ * @see {@link Task}, {@link Event}, {@link Deadline}, {@link Todo}
+ */
 public class TaskList implements Serializable {
     private List<Task> list; // List of all tasks
 
+    /**
+     * Returns a TaskList object with an empty task list
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Returns a TaskList object initialized with Task objects found
+     * in a List<Task> object
+     * @param list Existing List object containing Task objects.
+     */
     public TaskList(List<Task> list) {
         this.list = list;
     }
 
+    /**
+     * Returns a TaskList object initialized with Task objects found
+     * in a TaskList object
+     *
+     * @param taskList Existing TaskList object containing Task objects.
+     */
     public TaskList(TaskList taskList) {
         this.list = taskList.list;
     }
 
-    /*
-     * Given an index, deletes the corresponding task from the stored list
-     * in Duke.
+    /**
+     * Deletes the task corresponding to the given taskIndex from the stored list
+     * in the TaskList object.
      *
-     * @param taskIndex index of task to be deleted.
+     * @param taskIndex index of task to be deleted. Uses 1-indexing.
      * @throws DukeException if index is invalid or refers to a non-existent task.
-     */
+     **/
     public Task delete(int taskIndex) throws DukeException {
         try {
             taskIndex--; // convert to zero-indexing
@@ -39,6 +59,14 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Returns the task corresponding to the given taskIndex from the stored list
+     * in the TaskList object.
+     *
+     * @param taskIndex index of task to be deleted. Uses 1-indexing.
+     * @throws DukeException if index is invalid or refers to a non-existent task.
+     * @return Task object corresponding to taskIndex
+     **/
     public Task at(int taskIndex) throws DukeException {
         try {
             taskIndex--; // convert to zero-indexing
@@ -48,14 +76,28 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Adds a task to the list stored in the TaskList object.
+     * @param task
+     */
     public void add(Task task) {
         this.list.add(task);
     }
 
+    /**
+     * Returns the current number of Task objects in the TaskList object.
+     * @return integer representing the number of Tasks in the TaskList object.
+     */
     public int getSize() {
         return this.list.size();
     }
 
+    /**
+     * Returns a string representation of the TaskList object formatted with one
+     * Task on each line, prepended by their respective indexes (1-indexed)
+     *
+     * @return String representation of the TaskList object
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

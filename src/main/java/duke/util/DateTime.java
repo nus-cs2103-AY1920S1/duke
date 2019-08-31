@@ -40,14 +40,16 @@ public class DateTime implements Serializable {
         }
     }
 
+    // private constructor called by the static parser method DateTime.parseString()
+    // returns a DateTime object.
     private DateTime (Date dateTime) {
         this.dateTime = dateTime;
     }
 
     /**
-     * Overridden toString() method for this object.
      * Returns the date and time in a standardized format
      * of "ddth MMM yyyy", eg. 17th FEB 1996.
+     *
      * @return string representation of DateTime object
      */
     @Override

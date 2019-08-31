@@ -18,10 +18,11 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Drives the main code to start up Duke. It is the CLI entry
+     * Drives the main code to create a Duke object and run it. It is the CLI entry
      * point.
      *
-     * @param args command line arguments. Not used.
+     * @param args command line parameters for Duke. First one is the saved
+     *             filepath.
      */
     public static void main(String[] args) {
         Duke duke;
@@ -49,11 +50,18 @@ public class Duke {
         try {
             this.taskList = new TaskList(this.storage.loadFromDisk());
         } catch (DukeException e) {
-            ui.showLoadingError(e);
+            ui.showLoadingError();
             this.taskList = new TaskList();
         }
     }
 
+    /**
+     * Returns a Duke object with a specified load file path.
+     * Its internal task list will be loaded from the filepath
+     * specified by the first command line argument.
+     *
+     * @param filePath path to saved file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -61,17 +69,16 @@ public class Duke {
         try {
             this.taskList = new TaskList(this.storage.loadFromDisk());
         } catch (DukeException e) {
-            ui.showLoadingError(e);
+            ui.showLoadingError();
             this.taskList = new TaskList();
         }
     }
 
-    /*
-     Main driver function for the program -
-     Greets user, then repeatedly takes in
-     user input and processes them.
-    */
-    private void start() {
+    /**
+     * Starts the main loop for the chat assistant to take in
+     * inputs and process them.
+     */
+    public void start() {
         boolean isNotShutdown = true;
 
         this.ui.greetHello(); // greet user on startup
@@ -90,6 +97,5 @@ public class Duke {
                 this.ui.showLine();
             }
         } while (isNotShutdown);
-        //ui.greetGoodbye(); // greet user before exiting
     }
 }

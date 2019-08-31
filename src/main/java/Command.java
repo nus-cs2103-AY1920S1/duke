@@ -15,9 +15,7 @@ public abstract class Command {
      * @param storage Class dealing with local storage of tasks
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
-    }
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * To check if "bye" command is issued

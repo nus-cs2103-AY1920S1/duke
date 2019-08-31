@@ -19,8 +19,8 @@ public class DoneCommand extends Command {
      * @throws DukeException If task does not exist
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.completeTask(this.id);
-        ui.showComplete(tasks.getTask(this.id));
+        return ui.showComplete(tasks.getTask(this.id));
     }
 }

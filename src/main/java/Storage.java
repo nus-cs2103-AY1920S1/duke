@@ -45,7 +45,7 @@ public class Storage {
                     }
 
                     if (s.contains("[✓]")) {
-                        curr.markAsDone();
+                        curr.setDone();
                     }
 
                     result.add(curr);
@@ -69,9 +69,14 @@ public class Storage {
         try {
             File saveFile = new File(filePath);
             FileWriter fw = new FileWriter(saveFile, false);
+            int i = 1;
+            //StringBuilder result = new StringBuilder();
             for (Task t : tasks) {
-                fw.write(t.toString() + "\n");
+                fw.write(i + ". " + t + "\n");
+                i++;
             }
+
+
 
             fw.close();
         } catch (IOException e) {

@@ -1,4 +1,6 @@
 public class Deadline extends Task {
+    protected String description;
+    protected boolean isDone;
     /**
      * Constructor
      *

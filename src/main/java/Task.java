@@ -21,6 +21,7 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+
     /**
      * Mark task as completed
      */
@@ -34,8 +35,11 @@ public class Task {
      * @return formatted String
      */
     public String toString() {
+        System.out.println(getStatusIcon());
         return "[" + getStatusIcon() + "] " + this.description;
     }
+
+
 
 
 }

@@ -15,9 +15,9 @@ public class ExitCommand extends Command {
      * @throws DukeException If fails to save file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.updateSaveFile(tasks.getAllTasks());
-        ui.showGoodbye();
+        return ui.showGoodbye();
     }
 
     /**

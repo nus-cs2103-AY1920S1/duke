@@ -1,10 +1,6 @@
 package main;
 
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ListCommand;
-import command.AddCommand;
+import command.*;
 
 import java.io.IOException;
 
@@ -30,10 +26,12 @@ public class Parser {
             if (temp[0].equals("done")) {
                 return new DoneCommand(temp);
 
-            } else if (temp[0].equals("delete")) { //command to delete task
+            } else if (temp[0].equals("delete")) {
                 return new DeleteCommand(temp);
 
-            } else { //command to add task to list
+            } else if (temp[0].equals("find")){
+                return new FindCommand(temp);
+            } else {
                 return new AddCommand(input, temp);
             }
         }

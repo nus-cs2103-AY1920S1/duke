@@ -2,7 +2,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+/**
+ * Represents a ParserJUnitTesting which tests Parser.
+ * @author Ang Kai Qi
+ * @version 0.1.3
+ */
 public class ParserTest {
+
+    /**
+     * Tests Parser.processTask with successful todo, deadline and event inputs.
+     */
     @Test
     public void testProcessTask_success() {
         String[] test1 = new String[]{"todo", "borrow", "book"};
@@ -18,6 +27,9 @@ public class ParserTest {
         assertArrayEquals(res3, Parser.processTask(test3));
     }
 
+    /**
+     * Tests Parser.processTask with todo, deadline and event inputs that are bound to fail.
+     */
     @Test
     public void testProcessTask_fail() {
         String[] test1 = new String[]{"todo"};

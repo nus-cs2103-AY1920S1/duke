@@ -2,7 +2,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Represents a TaskListJUnitTesting which tests TaskList.
+ * @author Ang Kai Qi
+ * @version 0.1.3
+ */
 public class TaskListTest {
+
+    /**
+     * Tests addTask of TaskList object with successful todo, deadline, event, bye and unknown inputs.
+     */
     @Test
     public void testAddTask() {
         String todo = "todo borrow book";

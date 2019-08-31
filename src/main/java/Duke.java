@@ -1,18 +1,17 @@
-/* Name: Ang Kai Qi
-   MatricNo: A0190206N
+/**
+ * Represents a Duke object from which all process run from.
+ * @author Ang Kai Qi
+ * @version 0.1.3
  */
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private UI ui;
 
+    /**
+     * Creates a Duke object to run and mediate all other components.
+     * @param path Is the path of the file to be read.
+     */
     public Duke(String path) {
         this.ui = new UI();
         this.storage = new Storage(path);
@@ -29,7 +28,7 @@ public class Duke {
             }
             ui.echo(reply);
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        ui.bye();
     }
 
     public static void main(String[] args) {

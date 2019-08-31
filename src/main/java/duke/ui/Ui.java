@@ -169,7 +169,7 @@ public class Ui {
 
     public void showFoundTasks(List<Task> foundTasks) throws DukeException {
         if (!foundTasks.isEmpty()) {
-            showMsg("Here are the tasks in your list:");
+            showMsg("Here are the matching tasks in your list:");
             for (Task t: foundTasks) {
                 showMsg((foundTasks.indexOf(t) + 1) + ". " + t);
             }

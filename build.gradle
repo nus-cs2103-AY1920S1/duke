@@ -13,7 +13,10 @@ version '0.1.0'
 repositories {
     mavenCentral()
 }
-
+dependencies {
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.4.2')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+}
 application {
     // Change this to your main class.
     mainClassName = "Duke";

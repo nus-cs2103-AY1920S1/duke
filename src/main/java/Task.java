@@ -137,7 +137,7 @@ public class Task {
     }
 
     /**
-     * Marks a task as done
+     * Deletes a task from the task list
      *
      * @param index  Index of the task to be deleted from task list
      */
@@ -154,7 +154,6 @@ public class Task {
         if (tasks.isEmpty()) {
             System.out.println("    Congratulations, your last task has been deleted!");
         }
-
     }
 
     /**

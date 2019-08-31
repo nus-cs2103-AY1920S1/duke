@@ -35,10 +35,15 @@ public class DeleteCommand implements Command {
      * @param tasks the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
+     * @throws duke.exception.InvalidParameterException if the index is out of range
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String task = tasks.delete(index);
-        ui.showDeletedMessage(task, tasks.size());
+        try {
+            String task = tasks.delete(index);
+            ui.showDeletedMessage(task, tasks.size());
+        } catch(IndexOutOfBoundsException aioube) {
+            throw new InvalidParameterException("" + index);
+        }
     }
 
     /**

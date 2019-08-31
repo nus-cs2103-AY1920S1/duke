@@ -28,14 +28,14 @@ public class FileLineParser {
         lineCount++;
         String[] arr = line.split(",");
         try {
-            boolean isDone = arr[2].equals("true");
+            boolean isDone = arr[1].equals("true");
             switch (arr[0]) {
                 case "todo":
-                    return new Todo(arr[1], isDone);
+                    return new Todo(arr[2], isDone);
                 case "deadline":
-                    return new Deadline(arr[1], DateParser.parse(arr[3]), isDone);
+                    return new Deadline(arr[2], DateParser.parse(arr[3]), isDone);
                 case "event":
-                    return new Event(arr[1], DateParser.parse(arr[3]), isDone);
+                    return new Event(arr[2], DateParser.parse(arr[3]), isDone);
                 default:
                     throw new LineInFileParseException(lineCount, line);
             }

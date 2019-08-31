@@ -42,7 +42,7 @@ public class Event extends Task {
      * @return a string representation of the encoded event task
      */
     public String encode() {
-        return "event," + super.description + "," + super.isDone + "," + DateFormatter.format(at);
+        return "event," + super.isDone + "," + super.description + "," + DateFormatter.format(at);
     }
 
     /**

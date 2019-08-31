@@ -27,7 +27,7 @@ public class Todo extends Task {
      * @return a string representation of the encoded todo task
      */
     public String encode() {
-        return "todo," + super.description + "," + super.isDone;
+        return "todo," + super.isDone + "," + super.description;
     }
 
     /**

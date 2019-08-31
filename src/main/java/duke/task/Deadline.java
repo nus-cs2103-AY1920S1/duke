@@ -42,7 +42,7 @@ public class Deadline extends Task {
      * @return a string representation of the encoded deadline task
      */
     public String encode() {
-        return "deadline," + super.description + "," + super.isDone + "," + DateFormatter.format(by);
+        return "deadline," + super.isDone + "," + super.description + "," + DateFormatter.format(by);
     }
 
     /**

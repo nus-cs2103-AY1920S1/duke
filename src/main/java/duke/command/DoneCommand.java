@@ -36,10 +36,15 @@ public class DoneCommand implements Command {
      * @param tasks the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
+     * @throws duke.exception.InvalidParameterException if the index is out of range
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String task = tasks.done(index);
-        ui.showMarkedAsDone(task);
+        try {
+            String task = tasks.done(index);
+            ui.showMarkedAsDone(task);
+        } catch(IndexOutOfBoundsException aioube) {
+            throw new InvalidParameterException("" + index);
+        }
     }
 
     /**

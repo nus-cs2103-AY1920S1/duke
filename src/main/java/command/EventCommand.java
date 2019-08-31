@@ -28,7 +28,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeParseException, EventException {
         if (input.length <= 1) {
             throw new EventException();
-        } else if (input.length <=4 ) {
+        } else if (input.length <= 4) {
             throw new EventException("OOPS!!! Did you type something wrong?\n"
                     + "     Make sure to type </at> and state the datetime in 'dd/M/yyyy hh:mm' format!");
         } else {

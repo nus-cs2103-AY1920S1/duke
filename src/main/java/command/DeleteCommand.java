@@ -31,8 +31,8 @@ public class DeleteCommand extends Command {
         } else {
             int taskToDelete = Integer.parseInt(input[1]);
             if (tasks.getTaskList().size() < taskToDelete) { //check if it's a valid delete
-                throw new DeleteException("OOPS!!! There is no such task in your list!" +
-                        "Current number of tasks = " + tasks.getTaskList().size());
+                throw new DeleteException("OOPS!!! There is no such task in your list!"
+                        + "Current number of tasks = " + tasks.getTaskList().size());
             } else {
                 Task task = tasks.getTaskList().get(taskToDelete - 1);
                 tasks.getTaskList().remove(taskToDelete - 1);

@@ -9,8 +9,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for a task
-     * @param description the task's description
+     * Constructor for a task.
+     * @param description the task's description.
      */
     public Task(String description) {
         this.description = description;
@@ -41,9 +41,6 @@ public class Task {
         return isDone;
     }
 
-    /**
-     * @return status and description of this task
-     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

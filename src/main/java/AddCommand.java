@@ -29,36 +29,35 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (enumType) {
-            case TODO: {
-                Task newTask = new Todo(this.taskDesc);
-                tasks.add(newTask);
-                int numTasks = tasks.size();
-                ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString() +
-                            "\n" + "Now you have " + numTasks + " tasks in the list.");
-            }
+        case TODO: {
+            Task newTask = new Todo(this.taskDesc);
+            tasks.add(newTask);
+            int numTasks = tasks.size();
+            ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString()
+                    + "\n" + "Now you have " + numTasks + " tasks in the list.");
+        }
             break;
 
-            case DEADLINE: {
-                Task newTask = new Deadline(this.taskDesc, this.timeDesc);
-                tasks.add(newTask);
-                int numTasks = tasks.size();
-                ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString() +
-                            "\n" + "Now you have " + numTasks + " tasks in the list.");
+        case DEADLINE: {
+            Task newTask = new Deadline(this.taskDesc, this.timeDesc);
+            tasks.add(newTask);
+            int numTasks = tasks.size();
+            ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString()
+                    + "\n" + "Now you have " + numTasks + " tasks in the list.");
 
-            }
+        }
             break;
 
-            case EVENT:
-                Task newTask = new Events(this.taskDesc, this.timeDesc);
-                tasks.add(newTask);
-                int numTasks = tasks.size();
-                System.out.println("Got it. I've added this task:" + "\n" + newTask.toString() +
-                        "\n" + "Now you have " + numTasks + " tasks in the list.");
+        case EVENT:
+            Task newTask = new Events(this.taskDesc, this.timeDesc);
+            tasks.add(newTask);
+            int numTasks = tasks.size();
+            System.out.println("Got it. I've added this task:" + "\n" + newTask.toString()
+                    + "\n" + "Now you have " + numTasks + " tasks in the list.");
+            break;
 
-                break;
-
-            default:
-                throw new DukeException("This doesn't make sense!");
+        default:
+            throw new DukeException("This doesn't make sense!");
         }
 
         storage.save(tasks.getTaskList());

@@ -9,9 +9,10 @@ import duke.ui.UserInterface;
  * Represents an executable command.
  */
 public abstract class Command {
-
     /**
-     * @return false by default.
+     * Returns true or false depending whether application is terminated or not.
+     *
+     * @return boolean false by default.
      */
     public boolean isTerminated() {
         return false;
@@ -25,5 +26,4 @@ public abstract class Command {
      * @param storage local storage of data.
      */
     public abstract void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException;
-
 }

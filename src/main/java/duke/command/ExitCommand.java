@@ -8,9 +8,7 @@ import duke.ui.UserInterface;
 /**
  * Terminates the program.
  */
-
 public class ExitCommand extends Command {
-
     /**
      * Executes exit program on user interface.
      *
@@ -24,7 +22,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * @return true as program has terminated upon program exiting.
+     * Returns true as program has terminated upon program exiting.
+     * @return boolean true.
      */
     @Override
     public boolean isTerminated() {

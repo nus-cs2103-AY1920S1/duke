@@ -20,7 +20,6 @@ import java.time.format.DateTimeFormatter;
  * Parses user input.
  */
 public class Parser {
-
     /**
      * Parses user input into command for execution.
      *

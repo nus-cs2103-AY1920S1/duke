@@ -10,7 +10,6 @@ import duke.ui.UserInterface;
  * Adds a task to storage file.
  */
 public class AddCommand extends Command {
-
     private Task task;
 
     /**

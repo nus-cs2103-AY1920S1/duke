@@ -5,7 +5,6 @@ package duke.task;
  * Task can take the form of a to-do, deadline or event.
  */
 public abstract class Task {
-
     protected String taskName;
     protected boolean isDone;
 
@@ -20,7 +19,9 @@ public abstract class Task {
     }
 
     /**
-     * @return the name of this task.
+     * Returns the name of this task.
+     *
+     * @return the task name.
      */
     public String getTaskName() {
         return this.taskName;
@@ -37,16 +38,18 @@ public abstract class Task {
 
     /**
      * Returns a simplified summary of this task.
+     *
      * @return simplified string representation.
      */
     public abstract String getSimplifiedRepresentation();
 
     /**
      * Returns a string representation of this task.
+     *
      * @return string representation.
      */
     @Override
     public String toString() {
-        return (isDone ? "[\u2713] " : "[\u2718] ") + this.taskName;
+        return (isDone ? "[+] " : "[-] ") + this.taskName;
     }
 }

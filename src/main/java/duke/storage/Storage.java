@@ -26,7 +26,6 @@ import static duke.common.Message.MESSAGE_STORAGE_FILE_CREATED;
  * Represents local storage of data from Duke application.
  */
 public class Storage {
-
     private final String filePath;
 
     /**
@@ -72,7 +71,7 @@ public class Storage {
         File file = new File(this.filePath);
         Scanner scanner = new Scanner(file);
         List<String> storageLines = new ArrayList<>();
-        while(scanner.hasNextLine()) {
+        while (scanner.hasNextLine()) {
             storageLines.add(scanner.nextLine());
         }
         return storageLines;

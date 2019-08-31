@@ -11,7 +11,6 @@ import duke.ui.UserInterface;
  * Deletes a task from the storage file.
  */
 public class DeleteCommand extends Command {
-
     private int index;
 
     /**

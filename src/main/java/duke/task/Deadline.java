@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline which is a task needed to be done by a given date and time.
  */
 public class Deadline extends Task {
-
     private LocalDateTime by;
 
     /**
@@ -23,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a simplified summary of this deadline.
+     *
      * @return simplified string representation.
      */
     @Override
@@ -33,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Returns an expressive string representation of this deadline.
+     *
      * @return expressive string representation.
      */
     @Override

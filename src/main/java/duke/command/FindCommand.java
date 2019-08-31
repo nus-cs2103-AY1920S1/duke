@@ -9,7 +9,6 @@ import duke.ui.UserInterface;
  * Finds all tasks in the task list that matches given keyword.
  */
 public class FindCommand extends Command {
-
     private String keyword;
 
     /**
@@ -27,10 +26,9 @@ public class FindCommand extends Command {
      * @param taskList list of tasks.
      * @param ui user interface displaying all tasks that matches this keyword.
      * @param storage local storage of data.
-     * @throws DukeException
      */
     @Override
     public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
-        ui.showTaskList(taskList.getTaskNamesIfMatch(this.keyword));
+        ui.showMatchingTaskList(taskList.getTaskNamesIfMatch(this.keyword));
     }
 }

@@ -13,7 +13,6 @@ import duke.ui.UserInterface;
  * @author Ng Jun Hao
  */
 public class Duke {
-
     private Storage storage;
     private TaskList taskList;
     private UserInterface ui;

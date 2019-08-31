@@ -10,9 +10,7 @@ import duke.ui.UserInterface;
 /**
  * Marks a task in the storage file as done using an index.
  */
-
 public class DoneCommand extends Command {
-
     private int index;
 
     /**

@@ -10,8 +10,8 @@ public class DateTime {
 
     public DateTime(String toDateTime){
         String[] dateAndTime = toDateTime.split(" ");
-        String date = dateAndTime[1];
-        String time = dateAndTime[2];
+        String date = dateAndTime[0];
+        String time = dateAndTime[1];
         String[] dayMonthYear = date.split("/");
         int dayInt = Integer.valueOf(dayMonthYear[0]);
         switch (dayInt){

@@ -23,8 +23,13 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    /**
+     * Looks through tasks in the task list for tasks that contain the user entered keyword.
+     * Puts such tasks in a HashMap.
+     * @param searchDescription keyword user entered to find a task
+     * @return HashMap with task number as key and corresponding task as value
+     */
     public HashMap<Integer, Task> search(String searchDescription) {
-        System.out.println("in search method");
         HashMap<Integer, Task> searchResults = new HashMap<Integer, Task>();
         Integer index = 1;
 

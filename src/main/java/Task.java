@@ -24,7 +24,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String statusIcon = isDone ? "[\u2713]" : "[\u2718]";
+        String statusIcon = isDone ? "[\u2713]" : "[\u2718]"; // \u2713 represents a tick, \u2718 represents a cross
         return String.format("%s%s %s", typeOfTask, statusIcon, description);
     }
 

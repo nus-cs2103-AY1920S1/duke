@@ -77,6 +77,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays tasks in the taskList argument supplied to the screen.
+     * The taskList argument is derived from the search() method in the TaskList class.
+     * @param taskList taskList containing tasks which has task descriptions matching a user supplied keyword.
+     */
     public void showSearchResults(HashMap<Integer, Task> taskList) {
         System.out.println(TABS + "Here are the matching tasks in your list:");
 

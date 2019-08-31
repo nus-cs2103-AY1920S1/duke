@@ -4,70 +4,70 @@ import java.util.Scanner;
 public class Parser {
 
     /**
-     * Handles and parses text commands input by user.
-     *
-     * @param in The input from user.
-     * @param sc Scanner object from UI class.
-     * @return false signals that user wants to quit.
-     */
-    public static boolean handleCommand(String in, Scanner sc) throws DukeException {
+    * Handles and parses text commands input by user.
+    *
+    * @param in The input from user.
+    * @param sc Scanner object from UI class.
+    * @return false signals that user wants to quit.
+    */
+    public static String handleCommand(String input) throws DukeException {
+        String[] arr = input.split(" ");
+        String in = arr[0].trim();
+        String others = "";
+        if (arr.length > 1) {
+            others = arr[1].trim(); // extra info
+        }
+
         switch (in) {
             case "bye":
-                System.out.println("Bye!");
-                return false;
+                return "Bye!";
             case "list":
-                System.out.println("Here are the tasks in your list:");
-                TaskList.printTasks();
-                break;
+                return "Here are the tasks in your list:\n" +
+                    TaskList.stringifyTasks();
             case "done":
                 {
-                    Task t = TaskList.get(sc.nextInt());
+                    Task t = TaskList.get(Integer.parseInt(others));
                     t.markDone();
-                    System.out.println(
-                            String.format(
-                                    "Nice! I've marked this task as done:\n  %s", t.toString()));
-                    break;
+                    return String.format(
+                        "Nice! I've marked this task as done:\n  %s",
+                        t.toString()
+                    );
                 }
             case "delete":
-                TaskList.removeTask(sc.nextInt());
-                break;
+                TaskList.removeTask(Integer.parseInt(others));
+                return "Deleted!";
             case "todo":
                 {
-                    String details = sc.nextLine().trim();
-                    if (details.isEmpty()) {
+                    if (others.isEmpty()) {
                         throw new DukeException("Todo name cannot be empty!");
                     }
-                    TaskList.addTask(new ToDo(details));
-                    break;
+                    return TaskList.addTask(new ToDo(others));
                 }
             case "deadline":
                 {
-                    String[] details = sc.nextLine().trim().split(" /by ");
+                    String[] details = others.split(" /by ");
                     try {
-                        TaskList.addTask(new Deadline(details[0], details[1]));
+                        return TaskList.addTask(new Deadline(details[0], details[1]));
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Too few details for deadline!");
+                        throw new DukeException(
+                            "Too few details for deadline!"
+                        );
                     }
-                    break;
                 }
             case "event":
                 {
-                    String[] details = sc.nextLine().trim().split(" /at ");
+                    String[] details = others.split(" /at ");
                     try {
-                        TaskList.addTask(new Event(details[0], details[1]));
+                        return TaskList.addTask(new Event(details[0], details[1]));
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Too few details for event!");
                     }
-                    break;
                 }
             case "find":
-                String s = sc.nextLine().trim();
-                System.out.println("Here are matching tasks in your list:");
-                TaskList.printTasks(TaskList.query(s));
-                break;
+                return ("Here are matching tasks in your list:") +
+                    TaskList.stringifyTasks(TaskList.query(others));
             default:
                 throw new DukeException("Unknown command " + in);
         }
-        return true;
     }
 }

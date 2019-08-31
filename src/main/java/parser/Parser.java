@@ -1,3 +1,8 @@
+package parser;
+
+import command.*;
+import exception.DukeException;
+
 public class Parser {
 
     public static Command parse(String instruction) throws DukeException {

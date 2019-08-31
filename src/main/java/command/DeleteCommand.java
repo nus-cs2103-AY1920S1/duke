@@ -1,3 +1,11 @@
+package command;
+
+import exception.DukeException;
+import filewriter.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
 public class DeleteCommand extends Command {
     int index;
 
@@ -9,7 +17,7 @@ public class DeleteCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task removed_Task = tasks.remove(index);
             ui.readDelete(removed_Task, tasks.task_Num);

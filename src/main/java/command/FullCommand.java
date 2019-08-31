@@ -1,3 +1,7 @@
+package command;
+
+import exception.DukeException;
+
 public enum FullCommand {
     LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline")
         , EVENT("event"), BYE("bye");
@@ -12,7 +16,7 @@ public enum FullCommand {
         return name;
     }
 
-    public static FullCommand getByName(String keyword) throws DukeException{
+    public static FullCommand getByName(String keyword) throws DukeException {
         for(FullCommand command : values()){
             if(command.getName().equals(keyword)){
                 return command;

@@ -1,3 +1,10 @@
+package command;
+
+import exception.DukeException;
+import filewriter.Storage;
+import task.*;
+import ui.Ui;
+
 public class AddCommand extends Command {
     String specifics;
     public AddCommand(FullCommand taskType, String specifics){
@@ -9,7 +16,7 @@ public class AddCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask;
         switch(type){
             case TODO:

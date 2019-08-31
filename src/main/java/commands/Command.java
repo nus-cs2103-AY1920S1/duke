@@ -12,6 +12,14 @@ public abstract class Command {
         return this.isExit;
     }
 
+    /**
+     * Execute different behaviors based on the nature of the command.
+     *
+     * @param tasks to access the list of tasks
+     * @param ui to give feedback to user
+     * @param storage to write changes to file
+     * @throws DukeException
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

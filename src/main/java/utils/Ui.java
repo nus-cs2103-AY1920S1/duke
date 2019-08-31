@@ -23,17 +23,27 @@ public class Ui {
 
     private final PrintStream out;
 
+    /**
+     * Public constructor that triggers user input and output from Duke.
+     */
     public Ui() {
         this(System.in, System.out);
     }
 
-    public Ui(InputStream in, PrintStream out) {
+    /**
+     * Overridden constructor, enables user input as well as feedback from Duke.
+     *
+     * @param in scanner object
+     * @param out printstream object
+     */
+    private Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
     }
 
     /**
      * Read a command from the user.
+     *
      */
     public String readCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
@@ -42,7 +52,8 @@ public class Ui {
     }
 
     /**
-     * Add a border to all inputs.
+     * Add line borders to all feedback to user.
+     *
      * @param input String input
      */
     public void addBorder (String input){
@@ -54,6 +65,7 @@ public class Ui {
 
     /**
      * Greet the user when they start up Duke.
+     *
      */
     public void welcomeMessage() {
 
@@ -63,6 +75,7 @@ public class Ui {
 
     /**
      * Display exit message to user when they leave Duke.
+     *
      */
     public void exitMessage () {
         addBorder(EXIT_MESSAGE);
@@ -70,6 +83,7 @@ public class Ui {
 
     /**
      * Show user the list of tasks they have.
+     *
      * @param tasks TaskList object.
      */
     public void printList (TaskList tasks) {
@@ -88,6 +102,7 @@ public class Ui {
 
     /**
      * Relay errors during execution of Duke to user.
+     *
      * @param input String input.
      */
     public void showErrors(String input) {

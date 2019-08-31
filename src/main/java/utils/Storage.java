@@ -12,12 +12,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/* Concerned with reading from and writing to the data file */
 public class Storage {
     private List<Task> tasks;
     private File file;
     private String filePath;
 
+    /**
+     * Enable read and write access to retrieve and store tasks.
+     *
+     * @param filePath the local path to storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -25,7 +29,12 @@ public class Storage {
 
     }
 
-    /* Takes the current data and populates the task list */
+
+    /**
+     *  Takes the stored data and populates the task list.
+     *
+     * @return list of tasks
+     */
     public List<Task> readFromFile() {
         Scanner sc = null;
         try {
@@ -93,6 +102,8 @@ public class Storage {
 
     /**
      * Takes the current list of task objects and adds them in the correct format to the data file.
+     *
+     * @throws DukeException in case of error writing to file
      */
     public void writeToFile() throws DukeException {
         FileWriter fw = null;

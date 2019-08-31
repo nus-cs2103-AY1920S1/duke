@@ -9,7 +9,6 @@ import tasks.Todo;
 import java.text.ParseException;
 
 public class Parser {
-    private static int counter;
 
     private static final String ERROR_EMPTY_INPUT = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private static final String ERROR_DATE_FORMAT = "Please enter the date in the format dd-MMM-yyyy HH:mm";
@@ -18,17 +17,18 @@ public class Parser {
     private static final String ERROR_TIME_EMPTY = "Please input the time as well!";
 
     /**
-     * Parses user input into command for execution.
+     * Parses user input into command for execution, and creates the
+     * relevant command based on the said input.
      *
-     * @param fullCommand the user input to parse.
-     * @throws DukeException for user input errors.
-     * @return Command to execute.
+     * @param fullCommand the user input to parse
+     * @return command to execute
+     * @throws DukeException in event of errors
      */
     public static Command parse(String fullCommand) throws DukeException {
-        Command c = null;
+        Command c;
         String[] commandArr = fullCommand.split(" ");
-        String[] keywords = {};
-        int i; // skip the task type
+        String[] keywords;
+        int i;
         int taskId;
 
         try {
@@ -77,15 +77,15 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ERROR_INPUT_FORMAT);
         }
-        counter++;
         return c;
 
     }
 
     /**
-     * Check specifically for invalid inputs related to todo.
-     * @param commandArr array of commands.
-     * @throws DukeException for invalid input.
+     * Check specifically for invalid inputs related to todo events.
+     *
+     * @param commandArr array of commands from user
+     * @throws DukeException for invalid input
      */
     private static void checkCommand(String[] commandArr) throws DukeException {
         if (commandArr.length < 2) {
@@ -93,7 +93,16 @@ public class Parser {
         }
     }
 
-    /* Parser class: the commands to obtain task name and time for deadline/event tasks */
+    /**
+     * Parse the deadline and event input to obtain name of task
+     * and time.
+     *
+     * @param commandArr array of commands from user
+     * @param keyword to look for
+     * @param taskType the type of task
+     * @return the name of task and time
+     * @throws DukeException in case of invalid input
+     */
     public static String[] splitCommands (String[]commandArr, String keyword, String taskType) throws DukeException {
         String name = "";
         String time = "";
@@ -117,8 +126,7 @@ public class Parser {
         } else if (time.isEmpty()) {
             throw new DukeException(ERROR_TIME_EMPTY);
         } else {
-            String[] output = {name.trim(), time.trim()};
-            return output;
+            return new String[]{name.trim(), time.trim()};
         }
     }
 }

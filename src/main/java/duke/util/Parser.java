@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -32,9 +33,19 @@ public class Parser {
                 return Parser.parseEventCommand(parameters);
             case "deadline":
                 return Parser.parseDeadlineCommand(parameters);
+            case "find":
+                return Parser.parseFindCommand(parameters);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, "
                         + "but I don't know what that means :-(");
+        }
+    }
+
+    private static FindCommand parseFindCommand(String[] parameters) throws DukeException {
+        try {
+            return new FindCommand(parameters[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Hey! You need to give me a search word to look for!");
         }
     }
 

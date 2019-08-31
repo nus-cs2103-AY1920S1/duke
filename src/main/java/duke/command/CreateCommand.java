@@ -47,7 +47,7 @@ public class CreateCommand extends Command {
      * @throws DukeException  Error while executing command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         boolean isAdd = true;
         Task task = new Task(description);
         switch (directive) {
@@ -65,9 +65,9 @@ public class CreateCommand extends Command {
         }
         if (isAdd) {
             taskList.addItem(task);
-            ui.notifyTaskAdded(task, taskList.size());
+            String notification = ui.getNotifyTaskAdded(task, taskList.size());
             storage.addTaskToFile(task);
-            return;
+            return notification;
         }
         throw new DukeException("Error Executing Create Command");
     }

@@ -47,6 +47,13 @@ public class Ui {
         System.out.printf("Now you have %d tasks in the list.\n", listSize);
     }
 
+    public String getNotifyTaskAdded(Task task, int listSize) {
+        String notification = "Got it. I've added this task:\n";
+        notification += "\t" + task + "\n";
+        notification += String.format("Now you have %d tasks in the list.\n", listSize);
+        return notification;
+    }
+
     /**
      * Notifies the user that a particular task has been deleted from a list of certain size.
      */
@@ -56,9 +63,22 @@ public class Ui {
         System.out.printf("Now you have %d tasks in the list.\n", listSize);
     }
 
+    public String getNotifyTaskDeleted(Task task, int listSize) {
+        String notification = "Noted. I've removed this task:\n";
+        notification += "\t" + task + "\n";
+        notification += String.format("Now you have %d tasks in the list.\n", listSize);
+        return notification;
+    }
+
     public void notifyMarkedAsDone(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + task.toString());
+    }
+
+    public String getNotifyMarkedAsDone(Task task) {
+        String notification = "Nice! I've marked this task as done:\n";
+        notification += String.format("\t" + task.toString());
+        return notification;
     }
 
     public void print(String string) {
@@ -67,6 +87,10 @@ public class Ui {
 
     public void printLine(String string) {
         System.out.println(string);
+    }
+
+    public String getPrintLine(String string) {
+        return string + "\n";
     }
 
     public void greetings() {

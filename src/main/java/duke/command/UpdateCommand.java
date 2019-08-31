@@ -37,10 +37,11 @@ public class UpdateCommand extends Command {
      * @throws DukeException  Error while executing command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task task = taskList.markNumberedTaskAsDone(position);
-        ui.notifyMarkedAsDone(task);
+        String notification = ui.getNotifyMarkedAsDone(task);
         storage.writeListToFile(taskList);
+        return notification;
     }
 
 }

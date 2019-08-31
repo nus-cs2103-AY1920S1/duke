@@ -23,7 +23,8 @@ public class ExitCommand extends Command {
      * @param storage Interface for read and write operations on file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printLine("Bye. Hope to see you again soon!");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String output = ui.getPrintLine("Bye. Hope to see you again soon!");
+        return output;
     }
 }

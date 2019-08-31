@@ -42,28 +42,33 @@ public class ReadCommand extends Command {
      * @param storage Interface for read and write operations on file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String output;
         if (directive.equals("list")) {
-            ui.printLine("Here are the tasks in your list:");
-            printTaskList(taskList.getTasksList(), ui);
+            output = ui.getPrintLine("Here are the tasks in your list:");
+            output += printTaskList(taskList.getTasksList(), ui);
+            return output;
         } else { //directive.equals("find")
-            ui.printLine("Here are the matching tasks in your list:");
+            output = ui.getPrintLine("Here are the matching tasks in your list:");
             ArrayList<Task> tempList = new ArrayList<>();
             for (Task task : taskList.getTasksList()) {
                 if (task.getDescription().contains(keyword)) {
                     tempList.add(task);
                 }
             }
-            printTaskList(tempList, ui);
+            output += printTaskList(tempList, ui);
         }
+        return output;
     }
 
-    private void printTaskList(ArrayList<Task> tasks, Ui ui) {
+    private String printTaskList(ArrayList<Task> tasks, Ui ui) {
+        String list = "";
         int i = 0;
         for (Task task : tasks) {
-            ui.printLine(String.format("%d. %s", (i + 1), task));
+            list += ui.getPrintLine(String.format("%d. %s", (i + 1), task));
             i++;
         }
+        return list;
     }
 
 }

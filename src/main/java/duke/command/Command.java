@@ -23,7 +23,7 @@ public abstract class Command {
      * @param storage Interface for read and write operations on file.
      * @throws DukeException  Error while executing command.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public Command() {
         isExit = false;

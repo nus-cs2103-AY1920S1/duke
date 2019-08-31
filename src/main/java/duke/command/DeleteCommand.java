@@ -30,11 +30,12 @@ public class DeleteCommand extends Command {
      * @throws DukeException  Error while executing command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = taskList.deleteTaskAtNumber(position);
-            ui.notifyTaskDeleted(task, taskList.size());
+            String notification = ui.getNotifyTaskDeleted(task, taskList.size());
             storage.writeListToFile(taskList);
+            return notification;
         } catch (Exception ex) {
             throw new DukeException(ex.getMessage());
         }

@@ -10,9 +10,10 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Storage storage = new Storage("src/main/java/data/duke.txt");
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\nHere are the current tasks in your list:");
-        ArrayList<Task> taskList = storage.load(new ArrayList<Task>());
-        Parser p = new Parser(taskList, storage);
+        Ui ui = new Ui();
+        ui.hi();
+        TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
+        Parser p = new Parser(commands, storage, ui);
         while(scanner.hasNextLine()) {
             String x = scanner.nextLine();
             p.parse(x);
@@ -22,6 +23,5 @@ public class Duke {
             }
 
         }
-        scanner.close();
     }
 }

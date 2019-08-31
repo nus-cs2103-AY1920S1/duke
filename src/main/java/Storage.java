@@ -34,6 +34,9 @@ public class Storage {
             String x;
             int counter = 1;
             while((x = br.readLine()) != null) {
+                if (counter == 1) {
+                    System.out.println("Here are the tasks in your list:");
+                }
                 String[] data = x.split("/");
                 if (data[0].equals("T")) {
                     Todo t = new Todo(data[2]);
@@ -69,8 +72,8 @@ public class Storage {
     }
 
     /**
-     * Saves the lastest task in the .txt file
-     * @param task t
+     * Saves the latest task in the .txt file
+     * @param Task t
      */
     public void save(Task t) {
         try {
@@ -125,6 +128,14 @@ public class Storage {
             ff.close();
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get("src/main/java/data/duke.txt"), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void close() {
+        try {
+            this.fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

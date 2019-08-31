@@ -1,6 +1,14 @@
 /**
  * Duke Class
  */
+
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Command;
+import duke.util.DukeException;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;

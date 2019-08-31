@@ -1,3 +1,4 @@
+package duke.util;
 /**
  * Custom DukeException to handle exception that arise purely from Duke
  */

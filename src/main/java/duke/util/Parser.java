@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Parser {
     public static Command parse(String[] inputParts) {
         switch (inputParts[0]) {

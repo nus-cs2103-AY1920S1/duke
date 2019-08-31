@@ -1,3 +1,4 @@
+package duke.util;
 /**
  * Ui class to print display items
  */

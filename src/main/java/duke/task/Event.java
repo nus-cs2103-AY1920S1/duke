@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * Event class
  */

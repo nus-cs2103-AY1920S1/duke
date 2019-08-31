@@ -1,11 +1,11 @@
 package duke.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import duke.common.Message;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Text User Interface of the application.

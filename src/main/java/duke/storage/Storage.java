@@ -1,11 +1,9 @@
 package duke.storage;
 
-import duke.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.ui.UserInterface;
+import static duke.common.Message.MESSAGE_ERROR_CREATING_STORAGE_FILE;
+import static duke.common.Message.MESSAGE_ERROR_MISSING_STORAGE_FILE;
+import static duke.common.Message.MESSAGE_ERROR_READING_FROM_FILE;
+import static duke.common.Message.MESSAGE_STORAGE_FILE_CREATED;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,10 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static duke.common.Message.MESSAGE_ERROR_CREATING_STORAGE_FILE;
-import static duke.common.Message.MESSAGE_ERROR_MISSING_STORAGE_FILE;
-import static duke.common.Message.MESSAGE_ERROR_READING_FROM_FILE;
-import static duke.common.Message.MESSAGE_STORAGE_FILE_CREATED;
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.UserInterface;
 
 /**
  * Represents local storage of data from Duke application.

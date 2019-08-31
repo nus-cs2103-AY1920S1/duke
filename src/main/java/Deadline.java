@@ -1,17 +1,22 @@
-public class Deadline extends Task{
-    protected String by;
+import java.text.ParseException;
+import java.util.Date;
 
-    public Deadline(String description, String by){
+public class Deadline extends Task{
+    protected String strBy;
+    protected Date by;
+
+    public Deadline(String description, String strBy){
         super(description);
-        this.by = by;
+        this.strBy = strBy;
+        this.by = new DateParser().parseDate(strBy);
     }
 
     @Override
     public String toFile(){
-        return "D @ " + (isDone?"1":"0") + " @ " + this.description + " @ " + this.by + "\n";
+        return "D | " + (isDone?"1":"0") + " | " + this.description + " | " + this.by + "\n";
     }
     @Override
     public String toString(){
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + strBy + ")";
     }
 }

@@ -1,19 +1,22 @@
+import java.util.Date;
+
 public class Event extends Task {
-    protected String at;
-    protected Date date;
+    protected String strAt;
+    protected Date at;
 
-    public Event(String description, String at){
+    public Event(String description, String strAt) {
         super(description);
-        this.at = at;
+        this.strAt = strAt;
+        this.at = new DateParser().parseDate(strAt);
     }
 
+    @Override
+    public String toFile() {
+        return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.at + "\n";
+    }
 
     @Override
-    public String toFile(){
-        return "E @ " + (isDone?"1":"0") + " @ " + this.description + " @ " + this.at + "\n";
-    }
-    @Override
-    public String toString(){
-        return "[E]" + super.toString() + " (at: " + at + ")";
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + strAt + ")";
     }
 }

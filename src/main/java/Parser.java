@@ -43,8 +43,9 @@ public class Parser {
         String reply = "Here are the tasks in your list:\n\t ";
         for(int i=0; i<taskList.size(); i++) {
             reply += (i + 1) + "." + taskList.get(i);
-            if (i != taskList.size() - 1)
+            if (i != taskList.size() - 1) {
                 reply += "\n\t ";
+            }
         }
         ui.printReply(reply);
     }
@@ -56,12 +57,13 @@ public class Parser {
         String replyToFile = task.toFile();
         try {
             fw.write(replyToFile);
-        } catch (IOException e) {
-        }
+        } catch (IOException e) { }
     }
 
     public static void removeFromList(TaskList taskList, int taskIndex, UI ui) throws DukeException{
-        if(taskIndex > taskList.size()) throw new DukeException("");
+        if(taskIndex > taskList.size()){
+            throw new DukeException("");
+        }
         String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex-1) + "\n\tNow you have " + taskList.size()
                 + ((taskList.size() == 1)?" task":" tasks") + " in the list.";
         ui.printReply(reply);

@@ -9,6 +9,12 @@ public class Duke {
     private Ui ui = new Ui();
     private int size;
 
+    /**
+     * Instantiates a new Duke object.
+     * Load an existing .txt file for the list of tasks stored.
+     *
+     * @param filePath The file path of the list .txt file
+     */
     public Duke(String filePath) {
         try {
             storage = new Storage(filePath);
@@ -23,11 +29,17 @@ public class Duke {
             File file = new File(filePath); // create new .txt file with provided filepath
             try {
                 file.createNewFile();
+            } catch (Exception err) {
+                System.out.println("Unable to create new file."); // Unlikely
             }
-            catch (Exception err){}
         }
     }
 
+    /**
+     * Run the Duke application.
+     * Accepted commands: list, done, delete, find
+     * Accepted tasks: todo, event, deadline
+     */
     public void run() {
 
         String logo = " ____        _        \n"
@@ -60,8 +72,9 @@ public class Duke {
             input = scanner.nextLine().trim(); //Remove blank space
 
             // Store whatever text entered, except "bye", exit loop
-            if (input.equals("bye")) break;
-
+            if (input.equals("bye")) {
+                break;
+            }
             ui.separator();
 
             if (input.equals("list")) {
@@ -96,14 +109,11 @@ public class Duke {
                     System.out.println(err.getMessage());
                 }
 
-            } else if (input.contains("find")){
+            } else if (input.contains("find")) {
                 String keyword = parser.parseDescription("find", input);
                 ui.matchingList();
                 tasks.getList(keyword);
-            }
-
-
-            else {
+            } else {
                 // Do not fit any commands
                 try {
                     throw new DukeException(ui.invalidCommand());

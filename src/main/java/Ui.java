@@ -19,6 +19,10 @@ public class Ui {
     public Ui() {
     }
 
+    /**
+     * Opening statement, introduction of Duke.
+     * Includes a user prompt for input
+     */
     public void openingStatement() {
         System.out.println(SEPARATOR);
         System.out.println(INTRODUCTION);
@@ -27,34 +31,55 @@ public class Ui {
         System.out.println("");
     }
 
+    /**
+     * Closing statement.
+     */
     public void closingStatement() {
         System.out.println(SEPARATOR);
         System.out.println(CLOSING_STATEMENT);
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Invalid entry of the list.
+     * When user tries to delete/mark done an entry
+     * that does not exist.
+     */
     public void invalidEntry() {
         System.out.println(INVALID_LIST_ENTRY);
     }
 
+    /**
+     * Create a .txt file as list.
+     * Happens when existing .txt file does not exist.
+     */
     public void createFile() {
         System.out.println(SEPARATOR);
         System.out.println(CREATE_FILE);
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Load error occurs when file does not exist.
+     */
     public void loadError() {
         System.out.println(SEPARATOR);
         System.out.println(LOAD_ERROR);
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Save error occurs when filepath is invalid.
+     */
     public void saveError() {
         System.out.println(SEPARATOR);
         System.out.println(SAVE_ERROR);
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Mark a specific task as done.
+     */
     public void completedTask() {
         System.out.println(MARK_TASK_COMPLETE);
         System.out.print("       "); //indentation
@@ -77,9 +102,11 @@ public class Ui {
     public void separator() {
         System.out.println(SEPARATOR);
     }
+
     public void matchingList() {
         System.out.println(MATCHING_LIST);
     }
+
     public void noMatch() {
         System.out.println(NO_MATCH);
     }

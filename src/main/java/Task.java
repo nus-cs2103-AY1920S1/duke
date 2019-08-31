@@ -10,7 +10,7 @@ class Task {
     // Invalid task throws DukeException
     public Task(String action, int size) throws DukeException {
         if (size == 1) {
-            throw new DukeException("    ☹ OOPS!!! The description of a " + action + " cannot be empty."); //empty description
+            throw new DukeException("    ☹ OOPS!!! The description of a " + action + " cannot be empty.");
         }
     }
 

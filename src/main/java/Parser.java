@@ -17,10 +17,10 @@ public class Parser {
         String[] substrings = input.split(" ");
         String action = substrings[0];
 
-        if (substrings.length == 0) {
-            throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-("); //no valid command given
-        } else if (substrings.length == 1) {
-            throw new DukeException("    ☹ OOPS!!! The description of a " + action + " cannot be empty."); //empty description
+        if (substrings.length == 0) { // Invalid command
+            throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (substrings.length == 1) { // No description
+            throw new DukeException("    ☹ OOPS!!! The description of a " + action + " cannot be empty.");
         }
 
         return action;
@@ -33,24 +33,23 @@ public class Parser {
      *
      * @param input  The entire user input with action and task full description
      * @param action The designated user action,
-     * @return description The description of the Event or Deadline task, without action and dateTime
-     * @return substring The description of the to do task, without action and dateTime
+     * @return description/substring The description of the task, without action and dateTime
      */
     public String parseDescription(String action, String input) {
         String substring = input.replace(action, "");
         //Split task and date or time
         String[] parts = substring.split("\\/..");
         String description;
-        if (action.equals("todo") || action.equals("find"))
+        if (action.equals("todo") || action.equals("find")) {
             return substring; //no date or time
-        else
+        } else {
             description = parts[0].trim(); // Remove blank spaces
-
+        }
         return description;
     }
 
     /**
-     * Parse the date or time as a String
+     * Parse the date or time as a String.
      *
      * @param input  The entire user input with action and task full description
      * @param action The designated user action,

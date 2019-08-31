@@ -48,8 +48,9 @@ public class Storage {
     public ArrayList loadFile() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
-            if (!file.hasNext()) // Check if file is empty
+            if (!file.hasNext()) { // Check if file is empty
                 throw new DukeException("File is empty.");
+            }
         } catch (Exception e) {
             throw new DukeException("File is empty.");
         }
@@ -60,21 +61,24 @@ public class Storage {
                 String status = file.next();
                 String description = file.next().trim();
                 list.add(new ToDo(description));
-                if (status.contains("1"))
+                if (status.contains("1")) {
                     list.get(index).isDone = true;
+                }
                 index += 1;
             } else {
                 String status = file.next();
                 String description = file.next().trim();
                 String time = file.next().trim();
 
-                if (action.equals("E"))
+                if (action.equals("E")) {
                     list.add(new Event(description, time));
-                else if (action.equals("D"))
+                } else if (action.equals("D")) {
                     list.add(new Deadline(description, time));
+                }
 
-                if (status.contains("1"))
+                if (status.contains("1")) {
                     list.get(index).isDone = true;
+                }
                 index += 1;
             }
 

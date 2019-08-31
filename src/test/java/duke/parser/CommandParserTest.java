@@ -35,26 +35,32 @@ class CommandParserTest {
 
     @Test
     public void parse_failed_with_ExceptionThrown() {
-        Assertions.assertThrows(InvalidCommandException.class, () -> CommandParser.parse("hello"));
-        Assertions.assertThrows(InvalidParameterException.class, () -> CommandParser.parse("todo "));
+        Assertions.assertThrows(InvalidCommandException.class, () ->
+                CommandParser.parse("hello"));
+        Assertions.assertThrows(InvalidParameterException.class, () ->
+                CommandParser.parse("todo "));
+        Assertions.assertThrows(InvalidParameterException.class, () ->
+                CommandParser.parse("deadline sdfdsf"));
+        Assertions.assertThrows(InvalidParameterException.class, () ->
+                CommandParser.parse("deadline meeting /by "));
+        Assertions.assertThrows(InvalidDateTimeException.class, () ->
+                CommandParser.parse("deadline meeting /by 123456789"));
         Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("deadline sdfdsf"));
+            () -> CommandParser.parse("event sdfdsf"));
         Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("deadline meeting /by "));
+            () -> CommandParser.parse("event meeting /at "));
         Assertions.assertThrows(InvalidDateTimeException.class,
-                () -> CommandParser.parse("deadline meeting /by 123456789"));
+            () -> CommandParser.parse("event meeting /at 123456789"));
         Assertions.assertThrows(InvalidParameterException.class,
-                () -> CommandParser.parse("event sdfdsf"));
+            () -> CommandParser.parse("delete task"));
         Assertions.assertThrows(InvalidParameterException.class,
-                () -> CommandParser.parse("event meeting /at "));
-        Assertions.assertThrows(InvalidDateTimeException.class,
-                () -> CommandParser.parse("event meeting /at 123456789"));
-        Assertions.assertThrows(InvalidParameterException.class,
-                () -> CommandParser.parse("delete task"));
-        Assertions.assertThrows(InvalidParameterException.class,
-                () -> CommandParser.parse("done task"));
-        Assertions.assertThrows(InvalidCommandException.class, () -> CommandParser.parse("helloWorld"));
-        Assertions.assertThrows(InvalidCommandException.class, () -> CommandParser.parse(""));
-        Assertions.assertThrows(NullPointerException.class, () ->  CommandParser.parse(null));
+            () -> CommandParser.parse("done task"));
+        Assertions.assertThrows(InvalidCommandException.class,
+            () -> CommandParser.parse("helloWorld"));
+        Assertions.assertThrows(InvalidCommandException.class,
+            () -> CommandParser.parse(""));
+        Assertions.assertThrows(NullPointerException.class,
+            () ->  CommandParser.parse(null));
     }
+
 }

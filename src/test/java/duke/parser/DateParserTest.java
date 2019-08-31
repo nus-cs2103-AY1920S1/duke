@@ -18,17 +18,18 @@ class DateParserTest {
             assertEquals(DateParser.parse("12/03/2301 1200").toString(),
                          formatter.parse("12/03/2301 1200").toString());
             assertEquals(DateParser.parse("12/03/2301 2359").toString(),
-                    formatter.parse("12/03/2301 2359").toString());
+                         formatter.parse("12/03/2301 2359").toString());
             assertEquals(DateParser.parse("01/01/0532 1200").toString(),
-                    formatter.parse("01/01/0532 1200").toString());
+                         formatter.parse("01/01/0532 1200").toString());
             assertEquals(DateParser.parse("01/01/0000 0000").toString(),
-                    formatter.parse("01/01/0000 0000").toString());
+                         formatter.parse("01/01/0000 0000").toString());
             assertEquals(DateParser.parse("12/31/9999 2359").toString(),
-                    formatter.parse("12/31/9999 2359").toString());
-        } catch(ParseException pe) {
+                         formatter.parse("12/31/9999 2359").toString());
+        } catch (ParseException pe) {
             fail();
         }
     }
+
     @Test
     public void parse_fail_with_ExceptionThrow() {
         Assertions.assertThrows(InvalidDateTimeException.class, () -> DateParser.parse("233555"));

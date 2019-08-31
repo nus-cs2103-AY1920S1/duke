@@ -7,9 +7,10 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * The <code>ExitCommand</code> is created when the user enters <code>"bye"</code>. The exit command will show the exit message and
- * save all tasks in the list of tasks in the {@link TaskList} class object to the {@link duke.storage.Storage}. The
- * storage is the file path specified by {@link duke.main.Duke} and {@link duke.storage.Storage}.
+ * The <code>ExitCommand</code> is created when the user enters <code>"bye"</code>. The exit command will show the exit
+ * message and save all tasks in the list of tasks in the {@link TaskList} class object to the
+ * {@link duke.storage.Storage}. The storage is the file path specified by {@link duke.main.Duke} and
+ * {@link duke.storage.Storage}.
  */
 public class ExitCommand implements Command {
 
@@ -23,7 +24,7 @@ public class ExitCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             storage.save(tasks.save());
-        } catch(IOException io) {
+        } catch (IOException io) {
             ui.showError("I/O Error occurred");
         } finally {
             ui.showExitMessage();

@@ -42,4 +42,5 @@ public class LineInFileParseException extends DukeException {
     public int getLineCount() {
         return lineCount;
     }
+
 }

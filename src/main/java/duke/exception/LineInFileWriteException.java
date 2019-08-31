@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * This is a runtime exception that occur when there is failed or interrupted operations in the writer.
  */
-public class LineInFileWriteException extends DukeException{
+public class LineInFileWriteException extends DukeException {
 
     /**
      * This is the line number that the write error occcured.
@@ -41,4 +41,5 @@ public class LineInFileWriteException extends DukeException{
     public int getLineCount() {
         return lineCount;
     }
+
 }

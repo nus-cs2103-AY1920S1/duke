@@ -30,19 +30,20 @@ public class FileLineParser {
         try {
             boolean isDone = arr[1].equals("true");
             switch (arr[0]) {
-                case "todo":
-                    return new Todo(arr[2], isDone);
-                case "deadline":
-                    return new Deadline(arr[2], DateParser.parse(arr[3]), isDone);
-                case "event":
-                    return new Event(arr[2], DateParser.parse(arr[3]), isDone);
-                default:
-                    throw new LineInFileParseException(lineCount, line);
+            case "todo":
+                return new Todo(arr[2], isDone);
+            case "deadline":
+                return new Deadline(arr[2], DateParser.parse(arr[3]), isDone);
+            case "event":
+                return new Event(arr[2], DateParser.parse(arr[3]), isDone);
+            default:
+                throw new LineInFileParseException(lineCount, line);
             }
-        } catch(ArrayIndexOutOfBoundsException aiobe) {
+        } catch (ArrayIndexOutOfBoundsException aiobe) {
             throw new LineInFileParseException(lineCount, line);
-        } catch(InvalidDateTimeException idte) {
+        } catch (InvalidDateTimeException idte) {
             throw new LineInFileParseException(lineCount, line);
         }
     }
+
 }

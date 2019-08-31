@@ -16,4 +16,5 @@ public class DateFormatter {
     public static String format(Date date) {
         return new SimpleDateFormat("dd/MM/yyyy HHmm").format(date);
     }
+
 }

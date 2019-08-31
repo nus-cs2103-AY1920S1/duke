@@ -25,7 +25,7 @@ public class DoneCommand implements Command {
     public DoneCommand(String index) {
         try {
             this.index = Integer.parseInt(index);
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new InvalidParameterException(index);
         }
     }
@@ -42,7 +42,7 @@ public class DoneCommand implements Command {
         try {
             String task = tasks.done(index);
             ui.showMarkedAsDone(task);
-        } catch(IndexOutOfBoundsException aioube) {
+        } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
         }
     }

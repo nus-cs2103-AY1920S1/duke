@@ -20,8 +20,9 @@ public class DateParser {
     public static Date parse(String dateTime) {
         try {
             return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(dateTime);
-        }  catch(ParseException pe) {
+        }  catch (ParseException pe) {
             throw new InvalidDateTimeException(dateTime);
         }
     }
+
 }

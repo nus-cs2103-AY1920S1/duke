@@ -13,7 +13,7 @@ import duke.ui.Ui;
 public class DeleteCommand implements Command {
 
     /**
-     * This is the index of task to be deleted in the list of tasks
+     * This is the index of task to be deleted in the list of tasks.
      */
     int index;
 
@@ -25,7 +25,7 @@ public class DeleteCommand implements Command {
     public DeleteCommand(String index) {
         try {
             this.index = Integer.parseInt(index);
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new InvalidParameterException(index);
         }
     }
@@ -41,7 +41,7 @@ public class DeleteCommand implements Command {
         try {
             String task = tasks.delete(index);
             ui.showDeletedMessage(task, tasks.size());
-        } catch(IndexOutOfBoundsException aioube) {
+        } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
         }
     }

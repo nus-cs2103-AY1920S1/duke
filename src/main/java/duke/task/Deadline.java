@@ -14,6 +14,7 @@ public class Deadline extends Task {
      * This is the date where the deadline task is due by.
      */
     private Date by;
+
     /**
      * Constructs a new deadline task with description and the date where the deadline task is due by that has not been
      * done.
@@ -42,12 +43,14 @@ public class Deadline extends Task {
      * @return a string representation of the encoded deadline task
      */
     public String encode() {
-        return "deadline," + super.isDone + "," + super.description + "," + DateFormatter.format(by);
+        return "deadline," + super.isDone + "," + super.description + ","
+               + DateFormatter.format(by);
     }
 
     /**
-     * Returns a string representation of the deadline task. The string representation consist of ("[D]") with the string
-     * representation of the task.
+     * Returns a string representation of the deadline task. The string
+     * representation consist of ("[D]") with the string representation of the
+     * task.
      * @return a string representation of the deadline task
      */
     @Override

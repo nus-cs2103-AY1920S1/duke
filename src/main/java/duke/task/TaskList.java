@@ -34,7 +34,7 @@ public class TaskList {
      */
     public TaskList(Stream<String> lines) {
         this.taskList = new ArrayList<>();
-        lines.forEach(line-> {
+        lines.forEach(line -> {
             try {
                 taskList.add(FileLineParser.parse(line));
             } catch (LineInFileParseException lifpe) {
@@ -82,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a string representation of the list of tasks
+     * Returns a string representation of the list of tasks.
      * @return a string representation of the list of tasks
      */
     public String list() {
@@ -100,7 +100,7 @@ public class TaskList {
      * @return a stream of string to be saved into storage
      */
     public Stream<String> save() {
-        return taskList.stream().map(x->TaskParser.parse(x));
+        return taskList.stream().map(x -> TaskParser.parse(x));
     }
 
 }

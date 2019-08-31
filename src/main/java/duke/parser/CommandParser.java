@@ -25,7 +25,7 @@ public class CommandParser {
      * @return a command
      * @throws InvalidCommandException if a invalid command is entered by the user
      */
-    public static Command parse (String fullCommand) {
+    public static Command parse(String fullCommand) {
         String[] arr = fullCommand.split(" ");
         String parameter = Arrays.stream(arr).skip(1).collect(Collectors.joining(" ")).trim();
         try {
@@ -51,4 +51,5 @@ public class CommandParser {
             throw new InvalidCommandException();
         }
     }
+
 }

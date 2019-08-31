@@ -21,7 +21,7 @@ public class AddDeadlineCommand extends AddCommand {
         try {
             String[] arr = super.line.split(" /by ");
             super.task = new Deadline(arr[0], arr[1]);
-        } catch(ArrayIndexOutOfBoundsException aioobe) {
+        } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new InvalidParameterException(line.isBlank() ? null : line);
         }
     }

@@ -27,10 +27,11 @@ public class InvalidParameterException extends DukeException {
     }
 
     /**
-     * Gets the invalid parameter that is entered by the user
+     * Gets the invalid parameter that is entered by the user.
      * @return the invalid parameter
      */
     public String getInvalidParameter() {
         return parameter;
     }
+
 }

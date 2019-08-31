@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class Storage {
 
     /**
-     * This is a string representation of the file path for storage
+     * This is a string representation of the file path for storage.
      */
     private String filePath;
 
@@ -35,7 +35,7 @@ public class Storage {
      * @return a stream of lines inside the file
      * @throws IOException if an I/O error occurs
      */
-    public Stream<String> load() throws IOException{
+    public Stream<String> load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         return reader.lines();
     }
@@ -47,10 +47,10 @@ public class Storage {
      */
     public void save(Stream<String> stream) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        stream.forEach(line-> {
+        stream.forEach(line -> {
             try {
                 writer.write(line);
-            } catch(IOException io) {
+            } catch (IOException io) {
                 new Ui().showLineError(new LineInFileWriteException(line).getLineCount(), line);
             }
         });

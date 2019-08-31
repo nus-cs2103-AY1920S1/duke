@@ -35,14 +35,13 @@ public class Ui {
         System.out.println("    ------------------------------------------------------------");
     }
 
-
     /** Prints a error message for the user when an error has occurred.
      * @param message the error message for the error
      */
     public void showError(String message) {
         String output = "    ------------------------------------------------------------\n"
-                + "    \uD83D\uDE41 OOPS!! " + message + " \uD83D\uDE41 \n"
-                + "    ------------------------------------------------------------";
+                        + "    🙁 OOPS!! " + message + " 🙁\n"
+                        + "    ------------------------------------------------------------";
         System.out.println(output);
     }
 
@@ -54,14 +53,13 @@ public class Ui {
         System.out.println("* FAILED TO LOAD DATA");
     }
 
-
     /**
      * Prints a error message for the user with the constituent line number and the its content.
      * @param lineCount the line number of the error
      * @param line the contents of the line itself
      */
     public void showLineError(int lineCount, String line) {
-        System.out.println("* Unable to parse line " +lineCount + " : " + line);
+        System.out.println("* Unable to parse line " + lineCount + " : " + line);
     }
 
     /**
@@ -92,7 +90,7 @@ public class Ui {
     public void showAddInformation(String task, int size) {
         System.out.println("     ------------------------------------------------------------");
         System.out.println("     Got it. I've added this task:");
-        System.out.println("     \u2795  " + task);
+        System.out.println("     ➕  " + task);
         System.out.println("     Now you have " + size + " tasks in the list.");
         System.out.println("     ------------------------------------------------------------");
     }
@@ -116,7 +114,7 @@ public class Ui {
     public void showDeletedMessage(String task, int size) {
         System.out.println("    ------------------------------------------------------------");
         System.out.println("    Noted. I've removed this task:");
-        System.out.println("    \uD83D\uDDD1  " + task);
+        System.out.println("    🗑  " + task);
         System.out.println("    Now you have " + size + " tasks in the list.");
         System.out.println("    ------------------------------------------------------------");
     }

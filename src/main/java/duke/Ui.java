@@ -81,7 +81,7 @@ public class Ui {
     public void printDeleteMessage(Task task, int numberOfTasks) {
         printMessage("\t Noted. I've removed this task: ");
         printMessage("\t\t " + task);
-        printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task": " tasks") + " in the list.");
+        printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -101,13 +101,13 @@ public class Ui {
     public void printAddedMessage(Task task, int numberOfTasks) {
         printMessage("\t Got it. I've added this task: ");
         printMessage("\t\t " + task);
-        printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task": " tasks") + " in the list.");
+        printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
      * Prints the error when the information in storage could not be loaded.
      */
     public void showLoadingError() {
-        printMessage("\t \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+        printMessage("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

@@ -34,7 +34,7 @@ public class Time {
             int hour = time / 100;
             int minute = time % 100;
             if (hour > 23 || minute > 59) {
-                throw new DukeException("\u2639 OOPS!!! Please input a valid time.");
+                throw new DukeException("☹ OOPS!!! Please input a valid time.");
             }
             if (hour > 11) {
                 hour = hour % 12;
@@ -54,7 +54,7 @@ public class Time {
             }
             processedTime = timing.toString();
         } else {
-            throw new DukeException("\u2639 OOPS!!! Please input a valid time e.g. 1800.");
+            throw new DukeException("☹ OOPS!!! Please input a valid time e.g. 1800.");
         }
     }
 

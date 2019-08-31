@@ -35,7 +35,8 @@ public class ParserTest {
 
     @Test
     public void parse_deadline() throws DukeException {
-        assertEquals(new AddDeadlineCommand("read book /by 2/12/2019 1800"), Parser.parse("deadline read book /by 2/12/2019 1800"));
+        assertEquals(new AddDeadlineCommand("read book /by 2/12/2019 1800"),
+                Parser.parse("deadline read book /by 2/12/2019 1800"));
     }
 
     @Test
@@ -60,7 +61,7 @@ public class ParserTest {
             Parser.parse("blah");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }

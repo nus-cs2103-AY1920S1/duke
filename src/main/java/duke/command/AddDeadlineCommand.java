@@ -40,10 +40,10 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] detailsSplit = details.split("/by");
         if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
-            throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         if (detailsSplit.length < 2 || detailsSplit[1].trim().length() == 0) {
-            throw new DukeException("\u2639 OOPS!!! The description of a deadline requires a task and/or a due date");
+            throw new DukeException("☹ OOPS!!! The description of a deadline requires a task and/or a due date");
         }
         String action = detailsSplit[0].trim();
         String deadline = detailsSplit[1].trim();
@@ -54,10 +54,10 @@ public class AddDeadlineCommand extends Command {
             Time deadlineTime;
             if (dateAndTimeSplit.length == 1) {
                 deadlineTime = new Time("");
-            } else if (dateAndTimeSplit.length == 2){
+            } else if (dateAndTimeSplit.length == 2) {
                 deadlineTime = new Time(dateAndTimeSplit[1]);
             } else {
-                throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             Task taskDeadline = new Deadline(action, deadlineDate, deadlineTime);
             tasks.addTask(taskDeadline);

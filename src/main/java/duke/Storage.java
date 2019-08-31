@@ -69,7 +69,8 @@ public class Storage {
                     String startTime = information.length > 4 ? information[4] : "";
                     String endDate = information.length > 5 ? information[5] : "";
                     String endTime = information.length > 6 ? information[6] : "";
-                    Event event = new Event(description, new Date(startDate), new Time(startTime), new Date(endDate), new Time(endTime));
+                    Event event = new Event(description, new Date(startDate), new Time(startTime), new Date(endDate),
+                            new Time(endTime));
                     if (isDone) {
                         event.setDone();
                     }
@@ -78,7 +79,7 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException exception) {
-            throw new DukeException("\u2639 OOPS!!! Storage not found");
+            throw new DukeException("☹ OOPS!!! Storage not found");
         }
     }
 
@@ -110,14 +111,14 @@ public class Storage {
                     String startTime = event.getUnprocessedStartTime();
                     String endDate = event.getUnprocessedEndDate();
                     String endTime = event.getUnprocessedEndTime();
-                    taskInformation.append(type + " | " + isDone + " | " + description + " | " );
+                    taskInformation.append(type + " | " + isDone + " | " + description + " | ");
                     taskInformation.append(startDate + " | " + startTime + " | " + endDate + " | " + endTime);
                 }
                 fileWriter.write(taskInformation.toString() + "\n");
             }
             fileWriter.close();
         } catch (IOException exception) {
-            throw new DukeException("\u2539 OOPS!!! Something went wrong :" + exception.getMessage());
+            throw new DukeException("☹ OOPS!!! Something went wrong :" + exception.getMessage());
         }
     }
 }

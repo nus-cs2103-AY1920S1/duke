@@ -40,7 +40,7 @@ public class Parser {
         } else if (userInput.contains("done")) {
             String[] doneDetails = userInput.split(" ");
             if (doneDetails.length < 2) {
-                throw new DukeException("\u2639 OOPS!!! The description of done cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description of done cannot be empty.");
             }
             String listActionIndex = doneDetails[1].trim();
             int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
@@ -48,7 +48,7 @@ public class Parser {
         } else if (userInput.contains("delete")) {
             String[] deleteDetails = userInput.split(" ");
             if (deleteDetails.length < 2) {
-                throw new DukeException("\u2639 OOPS!!! The description of delete cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description of delete cannot be empty.");
             }
             String listActionIndex = deleteDetails[1].trim();
             int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
@@ -57,7 +57,7 @@ public class Parser {
             String details = userInput.replaceFirst("find", "");
             return new FindCommand(details.trim());
         } else {
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

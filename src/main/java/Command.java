@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Command {
     protected String command; // list, done, bye, todo, deadline, event
     protected boolean isFinished; // Whether command terminates program or not
+
     public Command(String commandWord) {
         this.command = commandWord;
         this.isFinished = false;
@@ -22,8 +23,7 @@ public class Command {
     }
 
     /**
-     * All commands return true except for
-     * <code>exit</code> which terminates program
+     * All commands return true except for <code>exit</code> which terminates program.
      * @return Whether program should still continue after command executed
      */
     public boolean toContinueProgram() {
@@ -37,12 +37,16 @@ public class Command {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) { return true; }
+        if (o == this) {
+            return true;
+        }
         // Not even the same class
-        if (!(o instanceof Command)) { return false; }
+        if (!(o instanceof Command)) {
+            return false;
+        }
         Command c = (Command) o;
-        return c.command == command &&
-                c.isFinished == isFinished;
+        return c.command == command
+                && c.isFinished == isFinished;
     }
 
 }
@@ -51,6 +55,7 @@ class AddCommand extends Command {
     protected String description;
     // Whether command has meta info (like /by, /at)
     protected boolean hasSubCommand;
+
     public AddCommand(String commandWord, String description, boolean hasSubCommand) {
         super(commandWord);
         this.description = description;
@@ -58,11 +63,11 @@ class AddCommand extends Command {
     }
 
     /**
-     * Executes commands <code>todo</code>
+     * Executes commands <code>todo</code>.
      * Adds ToDo task to list, saves new list to txt file, shows user message
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList AL of tasks
+     * @param ui Deals with console input and outputs
+     * @param storage Deals with data in hard disk
      * @throws IOException
      * @throws DukeException If no description of ToDo task provided
      */

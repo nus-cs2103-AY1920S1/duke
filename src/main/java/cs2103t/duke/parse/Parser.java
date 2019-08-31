@@ -85,6 +85,9 @@ public class Parser {
         case EXIT:
             cmd = new ExitCommand();
             break;
+        case FIND:
+            cmd = new FindCommand(descr);
+            break;
         default: //add or wrong
             cmd = new AddCommand(taskType, descr);
         }

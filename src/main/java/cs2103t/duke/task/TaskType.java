@@ -12,7 +12,7 @@ package cs2103t.duke.task;
  * EXIT represents exit duke.
  */
 public enum TaskType {
-    T, D, E, LIST, DELETE, DONE, EXIT;
+    T, D, E, LIST, DELETE, DONE, EXIT, FIND;
 
     /**
      * Converts command keyword to task type.
@@ -50,6 +50,9 @@ public enum TaskType {
             //Fallthrough
         case "BYE":
             type = EXIT;
+            break;
+        case "FIND":
+            type = FIND;
             break;
         default:
             type = null;

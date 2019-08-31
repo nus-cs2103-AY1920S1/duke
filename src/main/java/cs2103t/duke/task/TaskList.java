@@ -134,4 +134,15 @@ public class TaskList {
         }
         return t;
     }
+
+    public List<Task> findTasks(String wordToFind) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task task : this.taskList) {
+            //find in task.toString()
+            if (task.toString().contains(wordToFind)) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
+    }
 }

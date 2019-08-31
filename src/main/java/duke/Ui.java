@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Ui {
 
     /** Scanner to receive user input */
-    Scanner s;
+    private Scanner s;
 
     /**
      * Class constructor.
@@ -25,7 +25,7 @@ public class Ui {
     /**
      * Prints Duke welcome message.
      */
-    public void showWelcome() {
+    void showWelcome() {
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -41,14 +41,14 @@ public class Ui {
      *
      * @return String trimmed user input.
      */
-    public String readCommand() {
+    String readCommand() {
         return s.nextLine().trim();
     }
 
     /**
      * Prints a loading error message.
      */
-    public void showLoadingError() {
+    void showLoadingError() {
         System.out.println("Error loading data from file");
     }
 
@@ -57,7 +57,7 @@ public class Ui {
      *
      * @param errorMessage errorMessage to print.
      */
-    public void showError(String errorMessage) {
+    void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 

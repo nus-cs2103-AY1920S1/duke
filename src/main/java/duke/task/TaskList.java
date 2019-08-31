@@ -32,9 +32,9 @@ public class TaskList {
 
     public List<Task> getTasksWithKeywords(String keyword) {
         List<Task> foundTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).hasKeywordsInDescription(keyword)) {
-                foundTasks.add(tasks.get(i));
+        for (Task task : tasks) {
+            if (task.hasKeywordsInDescription(keyword)) {
+                foundTasks.add(task);
             }
         }
         return foundTasks;

@@ -33,7 +33,7 @@ public abstract class Command {
      * @param storage storage.
      * @throws DukeException If error saving data to file.
      */
-    protected void persistState(TaskList tasks, Storage storage) throws DukeException {
+    void persistState(TaskList tasks, Storage storage) throws DukeException {
         storage.saveDataToFile(tasks.getAllTasks());
     }
 }

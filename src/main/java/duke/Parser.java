@@ -11,7 +11,7 @@ import duke.task.Todo;
  *
  * @author scwaterbear
  */
-public class Parser {
+class Parser {
 
     /**
      * Categorizes a broad range of user input to a narrower set of commands.
@@ -20,7 +20,7 @@ public class Parser {
      * @return Command user command.
      * @throws DukeException If IndexOutOfBoundException has occurred or user input is invalid or unknown.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    static Command parse(String fullCommand) throws DukeException {
 
         if (fullCommand.equals("list")) {
             return new ListCommand();

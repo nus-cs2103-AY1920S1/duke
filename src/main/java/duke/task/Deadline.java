@@ -6,13 +6,8 @@ package duke.task;
  * @author scwaterbear
  */
 public class Deadline extends Task {
-<<<<<<< HEAD
+
     private String by;
-=======
-
-
-    protected String by;
->>>>>>> branch-A-JavaDoc
 
     /**
      * Class constructor.

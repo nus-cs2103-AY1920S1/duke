@@ -20,7 +20,7 @@ public class Duke {
      *
      * @param filePath location of file to load and store data.
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

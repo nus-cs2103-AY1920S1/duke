@@ -34,11 +34,8 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public boolean hasKeywordsInDescription(String keyword) {
-        if (description.contains(keyword)) {
-            return true;
-        }
-        return false;
+    boolean hasKeywordsInDescription(String keyword) {
+        return description.contains(keyword);
     }
 
     /**
@@ -56,7 +53,7 @@ public class Task {
      *
      * @return String task status and description.
      */
-    public String dataFormat() {
+    public String toDataFormat() {
         int isDoneInt;
         if (isDone) {
             isDoneInt = 1;

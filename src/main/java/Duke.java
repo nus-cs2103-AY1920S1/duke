@@ -1,19 +1,19 @@
 import java.util.Scanner;
 
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Parser parser;
 
     public Duke(String filePath) {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
-            parser = new Parser(tasks);
         } catch (DukeException e) {
-            //ui.showLoadingError();
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
@@ -21,12 +21,17 @@ public class Duke {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine(); // show the divider line ("_______")
-            parser.parse(fullCommand);
-            ui.showLine();
-            isExit = fullCommand.equals("bye");
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
         }
+        ui.showGoodbye();
     }
 
     public static void main(String[] args) {

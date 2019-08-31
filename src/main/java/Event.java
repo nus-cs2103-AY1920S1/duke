@@ -4,9 +4,8 @@ public class Event extends Task{
         super(description);
         int divider = description.indexOf("/at");
         if (divider == -1 || (divider == description.length() - 3)){
-            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Incorrect Event format\n" +
-                    "    Please key in Deadline (taskname) /by date(d/MM/yyyy) start_time(HHmm)-end_time(HHmm) \n"
-                    + (new Border()));
+            throw new DukeException("Incorrect Event format" + System.lineSeparator()
+                    + "    Please key in Deadline (taskname) /by date(d/MM/yyyy) start_time(HHmm)-end_time(HHmm)");
         }
         date_Time = DateTime.setEventTime(description.substring(divider + 4, description.length()));
         super.description = super.description.substring(0, divider);

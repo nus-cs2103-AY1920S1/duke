@@ -25,6 +25,11 @@ public class Deadline extends Task {
                     + "____________________________________________________________\n");
         }
         String[] detailsArray = fullCommand[1].split(" /by ", 2);
+        if (detailsArray.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! Please specify a date and time for your deadline :-(\n" + "    "
+                    + "____________________________________________________________\n");
+        }
         return new Deadline(detailsArray[0], detailsArray[1]);
     }
 

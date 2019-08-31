@@ -25,6 +25,11 @@ public class Event extends Task {
                     + "____________________________________________________________\n");
         }
         String[] detailsArray = fullCommand[1].split(" /at ", 2);
+        if (detailsArray.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! Please specify a date and time for your event :-(\n" + "    "
+                    + "____________________________________________________________\n");
+        }
         return new Event(detailsArray[0], detailsArray[1]);
     }
 

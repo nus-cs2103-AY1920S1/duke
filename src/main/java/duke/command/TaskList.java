@@ -6,11 +6,18 @@ import java.util.LinkedList;
 
 public class TaskList {
     private LinkedList<Task> li;
-    
+
+    /**
+     * Creates an object that stores all the tasks information
+     * @param li list of that tasks
+     */
     public TaskList(LinkedList<Task> li){
         this.li = li;
     }
 
+    /**
+     * Prints the tasks that are in the list
+     */
     public void printList(){
         String line =  "\t____________________________________________________________";
         System.out.println(line);
@@ -22,22 +29,48 @@ public class TaskList {
         System.out.println(line);
     }
 
+    /**
+     * Gives the size of the TaskList which in
+     * this case is the number of tasks in the TaskList
+     *
+     * @return size of the TaskList
+     */
     public int size(){
         return li.size();
     }
 
+    /**
+     * Get a certain task in the TaskList
+     *
+     * @param i the task number in the TaskList
+     * @return Task that is at index i
+     */
     public Task getTask(int i){
         return li.get(i);
     }
 
+    /**
+     * Removes the task from the TaskList
+     *
+     * @param i index which user wants to remove
+     */
     public void remove(int i){
         li.remove(i);
     }
 
+    /**
+     * Adds tasks to the TaskList
+     * @param t Task that is added to the TaskList
+     */
     public void add(Task t){
         li.add(t);
     }
 
+    /**
+     * Gets the list in TaskList
+     *
+     * @return the list of all task that are in the TaskList
+     */
     public LinkedList<Task> getList(){
         return li;
     }

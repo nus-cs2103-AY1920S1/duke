@@ -19,11 +19,24 @@ import java.util.Scanner;
 public class Storage {
     
     String filePath;
-    
+
+    /**
+     * Creates a Storage object that stores all the data of the
+     * task list when Duke is stopped
+     *
+     * @param filePath is the file path to the file you want to save to
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Writes the tasks in the TaskList to a certain file path
+     * for later retrieval when Duke restarts
+     *
+     * @param li list that is written to the file
+     * @throws FileNotFoundException
+     */
     public void writeFile(LinkedList<Task> li) throws FileNotFoundException{
         PrintWriter outputStream = new PrintWriter(filePath);
         for(int i = 0; i < li.size(); i++){
@@ -33,7 +46,13 @@ public class Storage {
         //System.out.println("File saved");
     }
 
-    //read exsiting file
+    /**
+     * Reads the file that contains the list of task
+     * and uploads it into the TaskList in Duke
+     *
+     * @return returns a list of all the tasks in the file
+     * @throws FileNotFoundException
+     */
     public LinkedList<Task> printFileContents() throws FileNotFoundException{
         LinkedList<Task> li = new LinkedList<>();
         File f = new File(filePath);
@@ -64,6 +83,12 @@ public class Storage {
         return li;
     }
 
+    /**
+     * Converts a string to a date object
+     * @param dateTime the date and time that needs to be converted
+     *                 to a date object
+     * @return a date object from the string given
+     */
     //print the line for fromatting
     public Date dateTimeConversion(String dateTime){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");

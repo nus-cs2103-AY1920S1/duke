@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/le0tan/duke.svg?branch=master)](https://travis-ci.org/le0tan/duke)
+
 # Setting up
 
 **Prerequisites**

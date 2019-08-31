@@ -1,27 +1,29 @@
-package seedu.duke;
+package seedu.duke.task;
 
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeWrongDateFormatException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
-public class Event extends Task {
+public class Deadline extends Task {
 
-    private Date at;
+    protected Date by;
     SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public Event(String task, String at) throws DukeException {
+    public Deadline(String task, String by) throws DukeException {
         super(task);
         try {
-            this.at = dateFormatter.parse(at);
+            this.by = dateFormatter.parse(by);
         } catch (ParseException e) {
             throw new DukeWrongDateFormatException();
         }
     }
 
-    public Event(String task, String done, String at) throws DukeException {
+    public Deadline(String task, String done, String by) throws DukeException {
         super(task);
         try {
-            this.at = dateFormatter.parse(at);
+            this.by = dateFormatter.parse(by);
         } catch (ParseException e) {
             throw new DukeWrongDateFormatException();
         }
@@ -31,18 +33,18 @@ public class Event extends Task {
     }
 
     public String toStorageString() {
-        String output = "E|";
+        String output = "D|";
         if (super.isDone) {
             output = output + "1|";
         } else {
             output = output + "0|";
         }
-        output = output + super.taskName + "|" + dateFormatter.format(this.at);
+        output = output + super.taskName + "|" + dateFormatter.format(this.by);
         return output;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateFormatter.format(at) + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormatter.format(by) + ")";
     }
 }

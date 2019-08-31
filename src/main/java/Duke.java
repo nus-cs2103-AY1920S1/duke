@@ -14,7 +14,7 @@ public class Duke {
      * @param filePath A Path instance for where Tasks should be loaded from and saved to.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        ui = new UiCli();
         loadStoreFromFile(filePath);
     }
 
@@ -38,7 +38,7 @@ public class Duke {
 
         boolean isDone = false;
         while (!isDone) {
-            final String input = ui.nextLine();
+            final String input = ((UiCli) ui).nextLine();
             try {
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);

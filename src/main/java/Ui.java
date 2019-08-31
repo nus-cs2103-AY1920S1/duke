@@ -1,22 +1,8 @@
-import java.io.PrintStream;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Scanner;
 import java.util.StringJoiner;
-import java.util.regex.Pattern;
 
-public class Ui {
-    private static final String LINE_INDENT = "\t";
-    private static final String HORIZONTAL_LINE = LINE_INDENT + "_".repeat(60);
-    private static final Pattern LINE_START_PATTERN = Pattern.compile("^", Pattern.MULTILINE);
-
-    private final Scanner scanner;
-    protected PrintStream output = System.out;
-
-    Ui() {
-        scanner = new Scanner(System.in);
-    }
-
+public abstract class Ui {
     /**
      * A convenience method to create a {@code StringJoiner} using the system's newline separator.
      *
@@ -72,37 +58,16 @@ public class Ui {
     }
 
     /**
-     * Gets a line of input from the user.
-     *
-     * @return A line of input from the user.
-     */
-    public String nextLine() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Prints a horizontal line to the user.
-     */
-    public void printHorizontalLine() {
-        output.println(HORIZONTAL_LINE);
-    }
-
-    /**
      * Prints an empty line to the user.
      */
-    public void println() {
-        output.println();
-    }
+    public abstract void println();
 
     /**
      * Prints the content argument with indentation.
      *
      * @param content Text to display to the user.
      */
-    public void println(String content) {
-        content = LINE_START_PATTERN.matcher(content).replaceAll(LINE_INDENT);
-        output.println(content);
-    }
+    public abstract void println(String content);
 
     /**
      * Prints a horizontal line, the argument and another horizontal line
@@ -110,11 +75,7 @@ public class Ui {
      *
      * @param content Text to display to the user.
      */
-    public void printBlock(String content) {
-        printHorizontalLine();
-        println(content);
-        printHorizontalLine();
-    }
+    public abstract void printBlock(String content);
 
     /**
      * Convenience method to display the welcome message to the user.

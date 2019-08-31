@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class UiTest {
+class UiCliTest {
     private static final String HORIZONTAL_LINE = "\t" + "_".repeat(60) + "\n";
     private final OutputStream mockedSysOut = new ByteArrayOutputStream();
     private final OutputStream realSysOut = System.out;
-    private Ui ui;
+    private UiCli uiCli;
 
     static List<Arguments> getTasksWithExpectedStringDisplays() {
         return List.of(
@@ -59,7 +59,7 @@ class UiTest {
     @BeforeEach
     void setUp() {
         System.setOut(new PrintStream(mockedSysOut));
-        ui = new Ui();
+        uiCli = new UiCli();
     }
 
     @AfterEach
@@ -73,19 +73,19 @@ class UiTest {
 
     @Test
     void printHorizontalLine_horizontalLineDisplayed() {
-        ui.printHorizontalLine();
+        uiCli.printHorizontalLine();
         Assertions.assertEquals(HORIZONTAL_LINE, mockedSysOut.toString());
     }
 
     @Test
     void println_newLineDisplayed() {
-        ui.println();
+        uiCli.println();
         Assertions.assertEquals("\n", mockedSysOut.toString());
     }
 
     @Test
     void printlnContent_contentDisplayed() {
-        ui.println("Here's some text");
+        uiCli.println("Here's some text");
         Assertions.assertEquals("\tHere's some text\n", mockedSysOut.toString());
     }
 
@@ -94,28 +94,28 @@ class UiTest {
         String expected = HORIZONTAL_LINE
                 + "\tHere's some text\n"
                 + HORIZONTAL_LINE;
-        ui.printBlock("Here's some text");
+        uiCli.printBlock("Here's some text");
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
     @Test
     void createStringJoiner_singleLineOfContent_oneContentLineDisplayed() {
         String expected = "Here's some text";
-        String actual = Ui.createStringJoiner("Here's some text").toString();
+        String actual = UiCli.createStringJoiner("Here's some text").toString();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void createStringJoiner_multilineContent_multipleContentLinesDisplayed() {
         String expected = "Here's some text\nHere's more text";
-        String actual = Ui.createStringJoiner("Here's some text").add("Here's more text").toString();
+        String actual = UiCli.createStringJoiner("Here's some text").add("Here's more text").toString();
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
     void formatTask_taskImplementingInstance_userFriendlyTaskString(Task t, String expectedTaskString) {
-        Assertions.assertEquals(expectedTaskString, Ui.formatTask(t));
+        Assertions.assertEquals(expectedTaskString, UiCli.formatTask(t));
     }
 
     @Test
@@ -125,7 +125,7 @@ class UiTest {
                 + "\n\tWhat can I do for you?\n"
                 + HORIZONTAL_LINE
                 + "\n";
-        ui.displayWelcome();
+        uiCli.displayWelcome();
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -139,7 +139,7 @@ class UiTest {
                 + "\n" + HORIZONTAL_LINE
                 + "\n";
         Throwable exc = new OutOfMemoryError("how many layers of abstraction are you on?");
-        ui.displayLoadingError(exc);
+        uiCli.displayLoadingError(exc);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -155,7 +155,7 @@ class UiTest {
                 + "\n";
         Throwable cause = new OutOfMemoryError("how many layers of abstraction are you on?");
         Throwable exc = new RuntimeException("watch this", cause);
-        ui.displayLoadingError(exc);
+        uiCli.displayLoadingError(exc);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -167,7 +167,7 @@ class UiTest {
                 + "\n" + HORIZONTAL_LINE
                 + "\n";
         DukeException exc = new UnknownCommandException("egads!");
-        ui.displayError(exc);
+        uiCli.displayError(exc);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -177,7 +177,7 @@ class UiTest {
                 + "\t ☹ OOPS!!! egads!"
                 + "\n" + HORIZONTAL_LINE
                 + "\n";
-        ui.displayError("egads!");
+        uiCli.displayError("egads!");
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -197,7 +197,7 @@ class UiTest {
         }
         expected += HORIZONTAL_LINE;
 
-        ui.displayTasks(tasks);
+        uiCli.displayTasks(tasks);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -218,7 +218,7 @@ class UiTest {
         }
         expected += HORIZONTAL_LINE;
 
-        ui.displayTasks("Here's a title!", tasks);
+        uiCli.displayTasks("Here's a title!", tasks);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -231,7 +231,7 @@ class UiTest {
                 + "\t  " + expectedTaskString + "\n"
                 + HORIZONTAL_LINE;
 
-        ui.displaySuccessfullyDoneTask("Here's a title!", t);
+        uiCli.displaySuccessfullyDoneTask("Here's a title!", t);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -245,7 +245,7 @@ class UiTest {
                 + "\tNow you have 100 tasks in the list.\n"
                 + HORIZONTAL_LINE;
 
-        ui.displaySuccessfullyRemovedTask("Here's a title!", t, 100);
+        uiCli.displaySuccessfullyRemovedTask("Here's a title!", t, 100);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 
@@ -259,7 +259,7 @@ class UiTest {
                 + "\tNow you have 100 tasks in the list.\n"
                 + HORIZONTAL_LINE + "\n";
 
-        ui.displaySuccessfullyAddedTask("Here's a title!", t, 100);
+        uiCli.displaySuccessfullyAddedTask("Here's a title!", t, 100);
         Assertions.assertEquals(expected, mockedSysOut.toString());
     }
 }

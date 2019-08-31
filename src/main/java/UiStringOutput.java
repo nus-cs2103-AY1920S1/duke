@@ -1,7 +1,7 @@
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class UiStringOutput extends Ui {
+public class UiStringOutput extends UiCli {
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     UiStringOutput() {

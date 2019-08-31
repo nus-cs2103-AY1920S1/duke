@@ -17,7 +17,7 @@ abstract class CommandTest {
     private final OutputStream mockedSysOut = new ByteArrayOutputStream();
     private final OutputStream realSysOut = System.out;
     protected Storage store;
-    protected Ui ui;
+    protected UiCli ui;
     protected Command command;
     private Path storeOutputPath;
 
@@ -27,7 +27,7 @@ abstract class CommandTest {
         store = new Storage(storeOutputPath);
 
         System.setOut(new PrintStream(mockedSysOut));
-        ui = new Ui();
+        ui = new UiCli();
     }
 
     @AfterEach

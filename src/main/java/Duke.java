@@ -14,53 +14,13 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNextLine()) {
+        boolean isExit = false;
+        while (!isExit && sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] inputArr = Parser.parseCommand(input);
-            String command = inputArr[0];
             try {
-                switch (command) {
-                case "bye":
-                    ui.print("Bye! Hope to see you again soon!");
-                    return;
-                case "list":
-                    taskList.printList();
-                    break;
-                case "done":
-                    if (inputArr.length <= 1) {
-                        throw new DukeException("☹ OOPS! Task number missing!");
-                    }
-                    taskList.doTask(Parser.parseInt(inputArr[1]));
-                    break;
-                case "delete":
-                    if (inputArr.length <= 1) {
-                        throw new DukeException("☹ OOPS! Task number missing!");
-                    }
-                    taskList.deleteTask(Parser.parseInt(inputArr[1]));
-                    break;
-                case "todo":
-                    if (inputArr.length <= 1) {
-                        throw new DukeException("☹ OOPS! Todo description missing!");
-                    }
-                    taskList.addNewTask(new ToDo(inputArr[1]));
-                    break;
-                case "deadline":
-                    if (inputArr.length <= 1) {
-                        throw new DukeException("☹ OOPS! Deadline description missing!");
-                    }
-                    String[] deadlineInputArr = Parser.parseDeadline(inputArr[1]);
-                    taskList.addNewTask(new Deadline(deadlineInputArr[0], deadlineInputArr[1]));
-                    break;
-                case "event":
-                    if (inputArr.length <= 1) {
-                        throw new DukeException("☹ OOPS! Event description missing!");
-                    }
-                    String[] eventInputArr = Parser.parseEvent(inputArr[1]);
-                    taskList.addNewTask(new Event(eventInputArr[0], eventInputArr[1]));
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS! I can't do it!");
-                }
+                Command command = Parser.parseCommand(input);
+                command.execute(taskList, ui);
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.print(e.getMessage());
             }

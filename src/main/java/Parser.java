@@ -5,8 +5,49 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public static String[] parseCommand(String commandString) {
-        return commandString.split("\\s+", 2);
+    public static Command parseCommand(String commandString) throws DukeException {
+        String[] commandArr = commandString.split("\\s+", 2);
+        CommandEnum commandEnum;
+        try {
+            commandEnum = CommandEnum.valueOf(commandArr[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("☹ OOPS! I can't do it!");
+        }
+        switch (commandEnum) {
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            if (commandArr.length <= 1) {
+                throw new DukeException("☹ OOPS! Task number missing!");
+            }
+            return new DoneCommand(parseTaskNumber(commandArr[1]));
+        case DELETE:
+            if (commandArr.length <= 1) {
+                throw new DukeException("☹ OOPS! Task number missing!");
+            }
+            return new DeleteCommand(parseTaskNumber(commandArr[1]));
+        case TODO:
+            if (commandArr.length <= 1) {
+                throw new DukeException("☹ OOPS! Todo description missing!");
+            }
+            return new TodoCommand(commandArr[1]);
+        case DEADLINE:
+            if (commandArr.length <= 1) {
+                throw new DukeException("☹ OOPS! Deadline description missing!");
+            }
+            String[] deadlineInputArr = parseDeadline(commandArr[1]);
+            return new DeadlineCommand(deadlineInputArr[0], deadlineInputArr[1]);
+        case EVENT:
+            if (commandArr.length <= 1) {
+                throw new DukeException("☹ OOPS! Deadline description missing!");
+            }
+            String[] eventInputArr = parseEvent(commandArr[1]);
+            return new EventCommand(eventInputArr[0], eventInputArr[1]);
+        default:
+            throw new DukeException("☹ OOPS! I can't do it!");
+        }
     }
 
     public static LocalDateTime parseDateTime(String dateTimeString) throws DukeException {
@@ -17,7 +58,7 @@ public class Parser {
         }
     }
 
-    public static String[] parseDeadline(String deadlineString) throws DukeException {
+    private static String[] parseDeadline(String deadlineString) throws DukeException {
         String[] deadlineArr = deadlineString.split(" /by ");
         if (deadlineArr.length <= 1) {
             if (deadlineString.indexOf("/by") == 0) {
@@ -29,7 +70,7 @@ public class Parser {
         return deadlineArr;
     }
 
-    public static String[] parseEvent(String eventString) throws DukeException {
+    private static String[] parseEvent(String eventString) throws DukeException {
         String[] eventArr = eventString.split(" /at ");
         if (eventArr.length <= 1) {
             if (eventString.indexOf("/at") == 0) {
@@ -41,7 +82,7 @@ public class Parser {
         return eventArr;
     }
 
-    public static int parseInt(String intString) throws DukeException {
+    private static int parseTaskNumber(String intString) throws DukeException {
         int result;
         try {
             result = Integer.parseInt(intString);

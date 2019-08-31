@@ -51,7 +51,10 @@ public class Storage {
                 case 'E':
                     String eventLine = line.substring(2, line.length());
                     taskList.add(new Event(
-                        eventLine.split("/")[0], dateParser.parse(eventLine.split("/")[1])
+                        eventLine.split("/")[0],
+                        dateParser.parse(
+                            eventLine.split("/")[1]
+                        )
                     ));
                     break;
 
@@ -59,7 +62,9 @@ public class Storage {
                     String deadlineLine = line.substring(2, line.length());
                     taskList.add(new Deadline(
                         deadlineLine.split("/")[0],
-                        dateParser.parse(deadlineLine.split("/")[1])
+                        dateParser.parse(
+                            deadlineLine.split("/")[1]
+                        )
                     ));
                     break;
                     
@@ -68,7 +73,9 @@ public class Storage {
                 }
 
                 if (line.charAt(1) == '1') {
-                    taskList.get(taskList.size() - 1).markAsDone();
+                    taskList
+                    .get(taskList.size() - 1)
+                        .markAsDone();
                 }
             }
 
@@ -122,9 +129,13 @@ public class Storage {
         }
 
         if (t instanceof Event) {
-            timeStr = "/" + dateParser.format(((Event)t).getAt());
+            timeStr = "/" + dateParser.format(
+                ((Event)t).getAt()
+            );
         } else if (t instanceof Deadline) {
-            timeStr = "/" + dateParser.format(((Deadline)t).getBy());
+            timeStr = "/" + dateParser.format(
+                ((Deadline)t).getBy()
+            );
         } else {
             timeStr = "";
         }

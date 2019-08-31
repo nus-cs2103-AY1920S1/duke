@@ -5,12 +5,12 @@ import java.util.Scanner;
  */
 public class Ui {
     // Strings that Duke will output
-    private static final String LONG_LINE = "____________________________________________________________";
-    private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String BYE_STR = "Bye. Hope to see you again soon!";
-    private static final String LIST_STR = "Here are the tasks in your list:";
-    private static final String DONE_STR = "Nice! I've marked this task as done:";
-    private static final String SEARCH_STR = "Here are the tasks matching the following query: ";
+    private static final String PRINTED_LONG_LINE = "____________________________________________________________";
+    private static final String PRINTED_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String PRINTED_BYE = "Bye. Hope to see you again soon!";
+    private static final String PRINTED_HEADER_LIST = "Here are the tasks in your list:";
+    private static final String PRINTED_HEADER_DONE = "Nice! I've marked this task as done:";
+    private static final String PRINTED_HEADER_SEARCH = "Here are the tasks matching the following query: ";
 
     private Scanner input = new Scanner(System.in);
 
@@ -18,7 +18,7 @@ public class Ui {
      * Prints a goodbye message to the user, and closes off the input Scanner.
      */
     public void printGoodbye() {
-        printWithLongLines(BYE_STR);
+        printWithLongLines(PRINTED_BYE);
         input.close();
     }
 
@@ -26,7 +26,7 @@ public class Ui {
      * Prints a greeting to the user.
      */
     public void printGreeting() {
-        printWithLongLines(GREETING);
+        printWithLongLines(PRINTED_GREETING);
     }
 
     /**
@@ -61,7 +61,7 @@ public class Ui {
      */
     public void ackDone(Task doneTask) {
         printWithLongLines(
-            DONE_STR
+            PRINTED_HEADER_DONE
             + "\n"
             + doneTask
         );
@@ -89,11 +89,11 @@ public class Ui {
      * @param taskList The TaskList to be printed
      */
     public void printList(TaskList taskList) {
-        printListWithPreamble(taskList, LIST_STR);
+        printListWithPreamble(taskList, PRINTED_HEADER_LIST);
     }
 
     public void displaySearchResults(TaskList taskList, String query) {
-        printListWithPreamble(taskList, SEARCH_STR + query + "\n");
+        printListWithPreamble(taskList, PRINTED_HEADER_SEARCH + query + "\n");
     }
 
     /**
@@ -116,11 +116,11 @@ public class Ui {
 
     private void printWithLongLines(String stringToPrint) {
         System.out.println(
-            LONG_LINE
+            PRINTED_LONG_LINE
             + "\n"
             + stringToPrint
             + "\n"
-            + LONG_LINE
+            + PRINTED_LONG_LINE
             + "\n"
         );
     }

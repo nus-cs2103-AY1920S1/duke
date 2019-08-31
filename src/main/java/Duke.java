@@ -6,14 +6,14 @@ import java.util.Date;
  */
 public class Duke {
     
-    public static final String OOPS_STR = "OOPS!!! ";
-    public static final String INVALID_COMMAND_STR = "I'm sorry, but I don't know what that means :-(";
-    public static final String EMPTY_DESCRIPTION_STR_1 = "The description of a ";
-    public static final String EMPTY_DESCRIPTION_STR_2 = " cannot be empty.";
+    public static final String PRINTED_OOPS = "OOPS!!! ";
+    public static final String PRINTED_INVALID_COMMAND = "I'm sorry, but I don't know what that means";
+    public static final String PRINTED_DESCRIPTION_EMPTY_1 = "The description of a ";
+    public static final String PRINTED_DESCRIPTION_EMPTY_2 = " cannot be empty.";
     
     // Delimiters
-    public static final String BY_DELIM = "/by";
-    public static final String AT_DELIM = "/at";
+    public static final String DELIM_BY = "/by";
+    public static final String DELIM_AT = "/at";
 
     public static final String DATE_FORMAT = "dd-MM-yy HHmm";
 
@@ -68,31 +68,39 @@ public class Duke {
             ui.printList(taskList);
             break;
         case DONE:
-            markTaskAsDone(parser.getIndexFromLine(line));
+            markTaskAsDone(
+                parser.getIndexFromLine(line)
+            );
             break;
         case DEADLINE:
             addDeadline(
-                parser.getBeforeDelim(line, commandText, BY_DELIM),
-                parser.getAfterDelim(line, commandText, BY_DELIM)
+                parser.getBeforeDelim(line, commandText, DELIM_BY),
+                parser.getAfterDelim(line, commandText, DELIM_BY)
             );
             break;
         case EVENT:
             addEvent(
-                parser.getBeforeDelim(line, commandText, AT_DELIM),
-                parser.getAfterDelim(line, commandText, AT_DELIM)
+                parser.getBeforeDelim(line, commandText, DELIM_AT),
+                parser.getAfterDelim(line, commandText, DELIM_AT)
             );
             break;
         case TODO:
-            addTodo(parser.getArg(line, commandText));
+            addTodo(
+                parser.getArg(line, commandText)
+            );
             break;
         case DELETE:
-            deleteTask(parser.getIndexFromLine(line));
+            deleteTask(
+                parser.getIndexFromLine(line)
+            );
             break;
         case FIND:
-            findTask(parser.getArg(line, commandText));
+            findTask(
+                parser.getArg(line, commandText)
+            );
             break;
         default:
-            throw new InvalidCommandException(OOPS_STR + INVALID_COMMAND_STR);
+            throw new InvalidCommandException(PRINTED_OOPS + PRINTED_INVALID_COMMAND);
         }
     }
 
@@ -140,10 +148,10 @@ public class Duke {
 
     private void throwEmptyDescriptionException(Command cmd) throws EmptyDescriptionException {
         throw new EmptyDescriptionException(
-            OOPS_STR 
-            + EMPTY_DESCRIPTION_STR_1
+            PRINTED_OOPS 
+            + PRINTED_DESCRIPTION_EMPTY_1
             + cmd.toString()
-            + EMPTY_DESCRIPTION_STR_2
+            + PRINTED_DESCRIPTION_EMPTY_2
         );
     }
 

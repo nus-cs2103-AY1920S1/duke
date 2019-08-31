@@ -43,6 +43,6 @@ enum Command {
             }
         }
 
-        throw new InvalidCommandException(Duke.OOPS_STR + Duke.INVALID_COMMAND_STR);
+        throw new InvalidCommandException(Duke.PRINTED_OOPS + Duke.PRINTED_INVALID_COMMAND);
     }
 }

@@ -135,6 +135,7 @@ public class Duke {
                             } else {
                                 //System.out.println(task);
                                 newTask = new Deadline(task, storage.dateTimeConversion(time));
+                                System.out.println(time);
                             }
                         }
 

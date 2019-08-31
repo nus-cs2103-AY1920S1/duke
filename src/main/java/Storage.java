@@ -12,7 +12,7 @@ public class Storage {
      * Creates a storage object with a specified file path.
       * @param filePath the absolute path of the file which stores user data
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -26,5 +26,4 @@ public class Storage {
         fw.write(content);
         fw.close();
     }
-
 }

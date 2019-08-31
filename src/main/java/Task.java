@@ -18,14 +18,14 @@ public class Task {
      *
      * @return an icon to indicate the status of the task.
      */
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
      * Changes the task status as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -34,7 +34,7 @@ public class Task {
      * @return the description of the task along with the status icon.
      */
     @Override
-    public String toString(){
+    public String toString() {
 
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

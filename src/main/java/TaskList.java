@@ -7,7 +7,6 @@ import java.util.Date;
 /**
  * Contains the methods to execute user's commands and store the information while the program runs.
  */
-
 public class TaskList {
 
     public ArrayList<Task> taskList;
@@ -21,20 +20,21 @@ public class TaskList {
      *
      *  @param t the task to be added.
      */
-    protected void Add(Task t){
+    protected void add(Task t) {
         taskList.add(t);
     }
 
     /**
      * Prints the addition of a task and number of tasks in the list after addition.
      */
-    protected void addMessage(){
-        System.out.println(" Got it. I've added this task: " );
+    protected void addMessage() {
+        System.out.println(" Got it. I've added this task: ");
         System.out.println(taskList.get(taskList.size() - 1));
-        if(taskList.size() == 1)
+        if (taskList.size() == 1) {
             System.out.println("Now you have 1 task in your list.");
-        else
+        } else {
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        }
     }
 
     /**
@@ -42,7 +42,7 @@ public class TaskList {
      *
      * @param x the position of the task in the list.
      */
-    protected void MarkAsDone(int x){
+    protected void markAsDone(int x) {
         taskList.get(x).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println( taskList.get(x) );
@@ -54,17 +54,19 @@ public class TaskList {
      * @param y the position of the task in the list
      */
     protected void deleteTask(int y) {
-        if (taskList.size() == 0)
+        if (taskList.size() == 0) {
             System.out.println("The task list is empty");
-        else {
+        } else {
             System.out.println("Noted. I've removed this task:");
             System.out.println(taskList.get(y - 1));
             taskList.remove(y - 1);
-            if (taskList.size() == 1)
+            if (taskList.size() == 1) {
                 System.out.println("Now you have 1 task in your list.");
-            else
+            } else {
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            }
         }
+
     }
 
     /**
@@ -72,25 +74,26 @@ public class TaskList {
      *
      * @param s The word that the user wants to find.
      */
-    protected void Find(String s){
+    protected void find(String s) {
         int count = 0;
         System.out.println("Here are the matching tasks in your list:");
-        for(Task t : taskList){
-            if(t.description.contains(s)){
+        for (Task t : taskList) {
+            if (t.description.contains(s)) {
                 System.out.println(t);
-                count+=1;
+                count += 1;
             }
         }
-        if(count == 0)
+        if (count == 0) {
             System.out.println("There are no matching tasks in your list");
+        }
     }
 
     /**
      *Prints all the tasks in the list.
      */
-    protected void getList(){
+    protected void getList() {
         System.out.println("Here are the tasks in your list:");
-        for(int i = 1; i <= taskList.size(); i+=1){
+        for (int i = 1; i <= taskList.size(); i+=1) {
             System.out.println(i + ". " + taskList.get(i-1) );
         }
     }
@@ -113,7 +116,7 @@ public class TaskList {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date at = df.parse(on);
             Task t1 = new Event(desc, at, false);
-            this.Add(t1);
+            this.add(t1);
             this.addMessage();
         }
     }
@@ -124,7 +127,7 @@ public class TaskList {
      *
      * @param s the information of the Deadline input by the user.
      */
-    protected void readDeadline(String s){
+    protected void readDeadline(String s) {
 
         if (s.length() == 0) {
             System.out.println("\u2639" + " OOPS!!! the description of a deadline cannot be empty. ");
@@ -133,7 +136,7 @@ public class TaskList {
             String descr = s.substring(0, first - 1);
             String byTime = s.substring(first + 4);
             Task t1 = new Deadline(descr, byTime, false);
-            this.Add(t1);
+            this.add(t1);
             this.addMessage();
         }
     }
@@ -143,14 +146,13 @@ public class TaskList {
      *
      * @param s The information regarding the todo task.
      */
-    protected void readTodo(String s){
-        if (s.length() == 0)
+    protected void readTodo(String s) {
+        if (s.length() == 0) {
             System.out.println("\u2639" + " OOPS!!! the description of a todo cannot be empty. ");
-        else {
+        } else {
             Task t1 = new ToDo(s, false);
-            this.Add(t1);
+            this.add(t1);
             this.addMessage();
         }
     }
-
 }

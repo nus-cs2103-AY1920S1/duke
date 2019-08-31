@@ -69,6 +69,14 @@ public class Ui {
         }
     }
 
+
+    /**
+     * Prints a message once the command find has been entered.
+     */
+    public void showFindMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
     /**
      * Displays a message once command 'Bye' has been entered.
      */

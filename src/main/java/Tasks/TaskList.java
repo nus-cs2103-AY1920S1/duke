@@ -3,6 +3,7 @@ package Tasks;
 import Exceptions.DukeException;
 import Tasks.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -26,6 +27,21 @@ public class TaskList {
 
     public String getTaskString(int index) {
         return tasks.get(index).toString();
+    }
+
+    /**
+     * Finds the task of which description contains the key string.
+     * @param key keyword inputted by user
+     * @return list of tasks that contains the keyword
+     */
+    public ArrayList<Task> findTasks (String key) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task t: tasks) {
+            if (t.getDescription().contains(key)) {
+                temp.add(t);
+            }
+        }
+        return temp;
     }
 
     /**

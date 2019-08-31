@@ -57,7 +57,14 @@ public class Parser {
         } else if (taskType.equals("delete")) {
             int taskIndex = Integer.valueOf(splitString[1]) - 1;
             return new DeleteCommand(taskIndex);
-        } else {
+        } else if (taskType.equals("find")) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 1; i < splitString.length; i++) {
+                builder.append(splitString[i] + " ");
+            }
+            return new FindCommand(builder.toString().trim());
+        }
+        else {
             throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

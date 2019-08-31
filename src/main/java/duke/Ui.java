@@ -2,6 +2,8 @@ package duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +14,15 @@ public class Ui {
     }
     public Ui(InputStream inputStream, PrintStream printStream) {
         this.in = inputStream;
-        this.out = printStream;
+
+        try {
+            // Set UTF-8 encoding to print characters like ✓ and ☹
+            Charset utf8Charset = Charset.forName("UTF-8");
+            PrintStream out = new PrintStream(printStream, true, utf8Charset.name());
+            this.out = out;
+        } catch(UnsupportedEncodingException e) {
+            this.out = printStream;
+        }
     }
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -25,7 +35,7 @@ public class Ui {
         out.println("");
     }
     public void oops(String text) {
-        say("☹ OOPS!!! " + text);
+        say("\u2639 OOPS!!! " + text); // ☹
     }
     public void showLoadingError() {
         oops("Couldn't load tasks from disk.");

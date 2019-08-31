@@ -24,6 +24,10 @@ public abstract class Task implements Serializable {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Depending on the completion state of task,
      * returns a ticked box (completed) or a

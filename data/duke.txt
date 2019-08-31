@@ -2,3 +2,6 @@
 [D] | [✓] | eat breakfast | by: 10am
 [E] | [✓] | meeting | at: 2pm
 [T] | [✘] | eat
+[D] | [✘] | return book | by: 15 of February 2020, 12:00 AM
+[D] | [✘] | return book | by: 15 of February 2020, 12:00 AM
+[D] | [✘] | return book | by: 2 of December 2019, 6:00 PM

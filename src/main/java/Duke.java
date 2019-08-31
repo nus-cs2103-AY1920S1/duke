@@ -1,4 +1,5 @@
 import duke.command.Command;
+import duke.command.EndCommand;
 import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
@@ -35,6 +36,11 @@ public class Duke {
      */
     private DateParser dateHelper;
 
+    /**
+     * Represents if the boolean has terminated or not.
+     */
+    protected boolean hasTerminated;
+
     public static void main(String[] args) {
         new Duke().run();
     }
@@ -49,6 +55,7 @@ public class Duke {
         storage = new Storage("data/tasks.txt");
         parser = new DataParser();
         dateHelper = new DateParser();
+        hasTerminated = false;
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -63,8 +70,6 @@ public class Duke {
      */
     public void run() {
         ui.sendGreeting();
-        boolean hasTerminated = false;
-
         while (!hasTerminated) {
             if (!parser.hasAnymoreData()) {
                 break;
@@ -88,7 +93,22 @@ public class Duke {
      * @return a response in the form of a String.
      */
     protected String getResponse(String input) {
-        return "Duke says again: " + input;
-    }
+        if (hasTerminated) {
+            return ".";
+        }
 
+        ui.reset();
+        try {
+            parser.readInput(input);
+            Command c = parser.findCommand();
+            if (c instanceof EndCommand) {
+                hasTerminated = true;
+            }
+            c.execute(taskList, ui, storage, parser, dateHelper);
+            return ui.print();
+        } catch (DukeException error) {
+            ui.sendErrorMessage(error);
+            return ui.print();
+        }
+    }
 }

@@ -52,6 +52,14 @@ public class DataParser {
     }
 
     /**
+     * Reads the given input line.
+     * @param input The given input line.
+     */
+    public void readInput(String input) {
+        this.input = input;
+    }
+
+    /**
      * Parses the User Input data and returns a Command based on the first word given by the user.
      * Inputs should start with "bye", "delete", "done" etc.
      * @return A Command based on the user input.

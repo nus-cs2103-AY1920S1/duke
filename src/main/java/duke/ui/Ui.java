@@ -10,11 +10,27 @@ import duke.task.TaskList;
  */
 public class Ui {
 
+    private String output;
+
     /**
-     * Sends a simple line for formatting.
+     * Prints the output message to be sent and resets the output message.
      */
-    public void sendLine() {
-        System.out.println("____________________________________________________________");
+    public String print() {
+        return output;
+    }
+
+    /**
+     * Resets the output message
+     */
+    public void reset() {
+        output = "";
+    }
+
+    /**
+     * Appends the string to the output meesage.
+     */
+    public void append(String message) {
+        output += (message + "\n");
     }
 
     /**
@@ -22,10 +38,8 @@ public class Ui {
      * @param task The completed task.
      */
     public void showCompletedTask(Task task) {
-        sendLine();
-        sendMessage("Nice! I've marked this task as done:");
-        sendMessage("  " + task.toString());
-        sendLine();
+        append("Nice! I've marked this task as done:");
+        append(task.toString());
     }
 
     /**
@@ -33,11 +47,9 @@ public class Ui {
      * @param task The deleted task.
      */
     public void showDeletedTask(Task task) {
-        sendLine();
-        sendMessage("Noted. I've removed this task: ");
-        sendMessage("  " + task.toString());
-        sendMessage("Now you have " +  TaskList.getNumberOfTasks() + " tasks in the list.");
-        sendLine();
+        append("Noted. I've removed this task: ");
+        append(task.toString());
+        append("Now you have " +  TaskList.getNumberOfTasks() + " tasks in the list.");
     }
 
     /**
@@ -45,31 +57,24 @@ public class Ui {
      * @param task The added task.
      */
     public void showAddedTask(Task task) {
-        sendLine();
-        sendMessage("Got it. I've added this task: ");
-        sendMessage("  " + task.toString());
-        sendMessage("Now you have " + TaskList.getNumberOfTasks() + " tasks in the list");
-        sendLine();
+        append("Got it. I've added this task: ");
+        append(task.toString());
+        append("Now you have " + TaskList.getNumberOfTasks() + " tasks in the list!");
     }
 
     /**
      * Sends a simple greeting to the user.
      */
     public void sendGreeting() {
-        sendLine();
-        System.out.println(" Hello! I'm Duke");
-        System.out.println(" I'm created by @seanlowjk");
-        System.out.println(" What can I do for you?");
-        sendLine();
+        append("Hello! Martin here!\nWhat can I do");
     }
 
     /**
      * Sends a simple farewell message to the user.
      */
     public void sendFarewell() {
-        sendLine();
-        System.out.println(" Bye. Hope to see you again soon!");
-        sendLine();
+        append("Bye. Hope to see you again soon!");
+        append("Press enter to keep the app closed.");
     }
 
     /**
@@ -77,17 +82,11 @@ public class Ui {
      * @param taskIndexes Represents the list of matching tasks indexes.
      */
     public void showMatchingTasks(ArrayList<Integer> taskIndexes) {
-        sendLine();
-        sendMessage("Here are the matching tasks in your list:");
+        append("Here are the matching tasks in your list:");
         for (int i = 0; i < taskIndexes.size(); i++) {
             Task task = TaskList.getTask(taskIndexes.get(i));
-            sendMessage(" " + task.toString());
+            append(task.toString());
         }
-        sendLine();
-    }
-
-    public void sendMessage(String input) {
-        System.out.println(" " + input);
     }
 
     /**
@@ -95,40 +94,33 @@ public class Ui {
      * @param error The error which has arised.
      */
     public void sendErrorMessage(DukeException error) {
-        sendLine();
-        sendMessage(error.toString());
-        sendLine();
+        append(error.toString());
     }
 
     /**
      * Sends a Loading error in the event where there is no tasks to be read from the file.
      */
     public void showLoadingError() {
-        sendLine();
-        System.out.println(" OOPS !!! Loading Error! Creating a New List...");
-        sendLine();
+        append("OOPS !!! Loading Error! Creating a New List...");
     }
 
     /**
      * Lists all the tasks involved in the TaskList.
      */
     public void listTasks() {
-        sendLine();
         if (TaskList.getNumberOfTasks() ==  0) {
-            sendMessage(""
-                    + "You have no tasks in the list!");
+            append("You have no tasks in the list!");
         } else {
-            sendMessage("Here are the tasks in your list:");
+            append("Here are the tasks in your list:");
         }
         for (int tasknum = 0; tasknum < TaskList.getNumberOfTasks(); tasknum++) {
             Task task = TaskList.getTask(tasknum);
             String todo = task.toString();
             if (task.isCompleted) {
-                sendMessage((tasknum + 1) + "." + todo);
+                append((tasknum + 1) + ". " + todo);
             } else {
-                sendMessage((tasknum + 1) + "." + todo);
+                append((tasknum + 1) + ". " + todo);
             }
         }
-        sendLine();
     }
 }

@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -22,11 +23,14 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Martin.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog("Hello! Martin here!\nWhat can I do?", dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -42,10 +46,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String in = userInput.getText();
         String out = duke.getResponse(in);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(in, userImage),
-                DialogBox.getDukeDialog(out, dukeImage)
-        );
-        userInput.clear();
+        if (out.equals(".")) {
+            System.exit(0);
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(in, userImage),
+                    DialogBox.getDukeDialog(out, dukeImage)
+            );
+            userInput.clear();
+        }
     }
 }

@@ -37,7 +37,7 @@ public class Deadline extends Task {
         } else {
             output = output + "0|";
         }
-        output = output + super.taskName + "|" + this.by;
+        output = output + super.taskName + "|" + dateFormatter.format(this.by);
         return output;
     }
 

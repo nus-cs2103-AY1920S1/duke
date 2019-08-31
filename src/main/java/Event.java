@@ -37,7 +37,7 @@ public class Event extends Task {
         } else {
             output = output + "0|";
         }
-        output = output + super.taskName + "|" + this.at;
+        output = output + super.taskName + "|" + dateFormatter.format(this.at);
         return output;
     }
 

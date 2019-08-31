@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 public class Storage {
 
@@ -15,17 +16,17 @@ public class Storage {
     FileWriter fileWriter;
     BufferedReader bufferedReader;
     BufferedWriter bufferedWriter;
-
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     protected Storage(String dir) {
         directory = dir;
     }
 
-    public ArrayList<Task> load() {
+    public TaskList load() {
         try {
             fileReader = new FileReader(directory);
         } catch (FileNotFoundException e) {
-            return new ArrayList<Task>();
+            return new TaskList();
         }
         bufferedReader = new BufferedReader(fileReader);
         String[] tokens;
@@ -72,7 +73,7 @@ public class Storage {
                 break;
 
             default:
-                PrettyPrint.print("Error reading task from save file.\n");
+                Ui.print("Error reading task from save file.\n");
             }
             try {
                 nextLine = bufferedReader.readLine();
@@ -81,10 +82,10 @@ public class Storage {
             }
         }
 
-        return taskList;
+        return new TaskList(taskList);
     }
 
-    public void save(ArrayList<Task> taskList) throws DukeSaveFailedException {
+    public void save(TaskList taskListObject) throws DukeSaveFailedException {
         try {
             fileWriter = new FileWriter(directory);
         } catch (IOException e) {
@@ -92,12 +93,15 @@ public class Storage {
         }
         bufferedWriter = new BufferedWriter(fileWriter);
 
+        ArrayList<Task> taskList = taskListObject.getTaskArray();
+
         for (int z = 0; z < taskList.size(); z++) {
             try {
                 bufferedWriter.write(taskList.get(z).toStorageString());
                 bufferedWriter.write("\n");
                 bufferedWriter.flush();
             } catch (IOException e) {
+                System.out.println(e);
                 throw new DukeSaveFailedException();
             }
         }

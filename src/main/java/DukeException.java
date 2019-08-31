@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.PrettyPrint;
+import seedu.duke.Ui;
 
 public class DukeException extends Exception {
 
@@ -12,7 +12,7 @@ public class DukeException extends Exception {
     }
 
     public void printMessage() {
-        PrettyPrint.printBlock(message);
+        Ui.printBlock(message);
     }
 
 

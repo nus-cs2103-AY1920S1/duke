@@ -1,9 +1,8 @@
 package seedu.duke;
 
-import java.util.Scanner;
-import seedu.duke.PrettyPrint;
-import seedu.duke.EventHandler;
+import seedu.duke.Ui;
 import seedu.duke.Storage;
+import seedu.duke.Parser;
 
 /**
  * Main class of this project.
@@ -12,7 +11,16 @@ import seedu.duke.Storage;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    private Ui ui;
+    private Parser parser;
+    private TaskList taskList;
+    private Storage storage;
+
+    public Duke() {
+
+        ui = new Ui();
+        storage = new Storage("save.txt");
+        this.taskList = storage.load();
 
         String logo = " ____        _        \n"
                                 + "|  _ \\ _   _| | _____ \n"
@@ -21,24 +29,62 @@ public class Duke {
                                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        PrettyPrint.printBlock(new String[] {"Hello! I'm Duke.", "What can I do for you?"});
+        Ui.printBlock(new String[] {"Hello! I'm Duke.", "What can I do for you?"});
 
-        // Begin input handling
-        Scanner sc = new Scanner(System.in);
-        String input;
-        input = sc.nextLine();
-        EventHandler eventHandler = new EventHandler();
+        // Initializes the parser so that the loop runs at least once
+        try {
+            this.parser = new Parser("list");
+        } catch (Exception e) {
+            Ui.printBlock("Unexpected Error");
+        }
 
-        while (!input.equals("bye")) {
+    }
+
+    public void run() {
+
+        while (!parser.getType().equals("bye")) {
             try {
-                eventHandler.run(input);
+                parser = ui.readCommand();
+
+                switch (parser.getType()) {
+                case "bye":
+                    return;
+                case "list":
+                    taskList.list();
+                    break;
+                case "done":
+                    taskList.markAsDone(parser);
+                    break;
+                case "todo":
+                    taskList.addTodo(parser);
+                    break;
+                case "deadline":
+                    taskList.addDeadline(parser);
+                    break;
+                case "event":
+                    taskList.addEvent(parser);
+                    break;
+                case "delete":
+                    taskList.deleteTask(parser);
+                    break;
+                default:
+                    throw new DukeNoSuchCommandException();
+                }
+
+                storage.save(taskList);
+
             } catch (DukeException e) {
                 e.printMessage();
             }
-            input = sc.nextLine();
         }
 
-        PrettyPrint.printBlock("Bye. Hope to see you again soon!");
+        Ui.printBlock("Bye. Hope to see you again soon!");
+    }
+
+    public static void main(String[] args) {
+
+        Duke duke = new Duke();
+        duke.run();
 
     }
 }

@@ -6,16 +6,18 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline task with description, deadline and status (done or not done) .
+     *
      * @param description the description of the task.
      * @param by the deadline for the task.
      * @param b the status of the task.
      */
-    public Deadline(String description, String by, boolean b){
+    public Deadline(String description, String by, boolean b) {
         super(description);
         this.by = by;
         this.isDone = b;
     }
-    public Deadline(String description, String by){
+
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }

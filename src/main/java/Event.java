@@ -14,12 +14,13 @@ public class Event extends Task {
      * @param on time of the event.
      * @param b status of the event.
      */
-    public Event(String description, Date on, boolean b){
+    public Event(String description, Date on, boolean b) {
         super(description);
         this.on = on;
         this.isDone = b;
     }
-    public Event(String description, Date on){
+
+    public Event(String description, Date on) {
         super(description);
         this.on = on;
     }
@@ -33,5 +34,4 @@ public class Event extends Task {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
         return "[E]" + super.toString() + " (at: " + df.format(on) + ")";
     }
-
 }

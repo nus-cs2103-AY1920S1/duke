@@ -1,4 +1,9 @@
+package duke.main;
+
 import java.text.ParseException;
+import duke.command.*;
+import duke.io.*;
+import duke.task.*;
 
 /**
  *  CS2103 iP Deliverable, Duke
@@ -9,13 +14,13 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
-    public Duke(String filePath) {
+    Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.loadTasks(ui);
     }
 
-    public void run() {
+    void run() {
         boolean isExit = false;
         ui.out("What can I do for you?");
         ui.showLine();

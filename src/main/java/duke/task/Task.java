@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a general task
  */
@@ -15,7 +17,7 @@ public class Task {
         this.isDone = done;
     }
 
-    void setDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
@@ -27,7 +29,7 @@ public class Task {
         return (this.isDone ? 1 : 0);
     }
 
-    String store(){
+    public String store(){
         return getStatus() + "|" + this.description;
     }
 

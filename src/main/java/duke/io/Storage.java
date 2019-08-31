@@ -1,3 +1,5 @@
+package duke.io;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,12 +8,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Scanner;
+import duke.task.*;
 
 public class Storage {
     private String filePath;
     private File file;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
     }
@@ -39,15 +42,15 @@ public class Storage {
             if (taskList.isEmpty() && file.exists()) {
                 Files.delete(Paths.get(filePath));
             } else if (!taskList.isEmpty()) {
-                String allTasks = "";
+                StringBuilder allTasks = new StringBuilder();
                 for (int i = 0; i < taskList.size(); i++) {
-                    allTasks += taskList.get(i).store() + System.lineSeparator();
+                    allTasks.append(taskList.get(i).store()).append(System.lineSeparator());
                 }
                 if (!file.exists()) {
                     file.createNewFile();
                 }
                 FileWriter fileWriter = new FileWriter(file);
-                fileWriter.write(allTasks);
+                fileWriter.write(allTasks.toString());
                 fileWriter.close();
             }
         } catch (IOException ex) {

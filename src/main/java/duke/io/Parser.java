@@ -1,6 +1,10 @@
+package duke.io;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import duke.command.*;
+import duke.task.*;
 
 public class Parser {
     public static Command parse(String input) throws UnsupportedOperationException, ArrayIndexOutOfBoundsException {
@@ -65,7 +69,7 @@ public class Parser {
      * @return Task
      * @throws ParseException Error in stored date data
      */
-    public static Task init(String[] code) throws ParseException {
+    static Task init(String[] code) throws ParseException {
         boolean done = "1".equals(code[1]);
         switch (code[0]) {
         case "T":

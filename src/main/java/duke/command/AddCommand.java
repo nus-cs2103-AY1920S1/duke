@@ -1,18 +1,20 @@
+package duke.command;
+
 import java.text.ParseException;
+import duke.task.*;
+import duke.io.*;
 
-public class AddEventCommand extends AddCommand {
+public class AddCommand extends Command {
     private String input;
-    private String[] details;
 
-    public AddEventCommand(String input) throws ArrayIndexOutOfBoundsException {
-        super(input);
-        details = Parser.getDetails(input);
+    public AddCommand(String input) {
+        this.input = input;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ParseException {
         ui.showLine();
-        taskList.add(new Event(details[0], Parser.getAsDate(details[1])));
+        taskList.add(new Todo(input));
         ui.out("Got it. I've added this task:");
         ui.out(taskList.get(taskList.size() - 1).toString());
         ui.out("Now you have " + taskList.size() + " tasks in the list.");

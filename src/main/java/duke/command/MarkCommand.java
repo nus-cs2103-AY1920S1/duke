@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.*;
+import duke.io.*;
+
 public class MarkCommand extends Command {
     private String input;
 

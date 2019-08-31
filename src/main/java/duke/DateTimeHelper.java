@@ -5,14 +5,13 @@ import duke.exception.DukeException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Month;
-import java.util.Date;
 
-public class DateTimeHelper {
+class DateTimeHelper {
 
-    private static final String[] ordinals = {  "0th",  "1st",  "2nd",  "3rd",  "4th",  "5th",  "6th",  "7th",  "8th",  "9th",
-            "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th",
-            "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th",
-            "30th", "31st" };
+    private static final String[] ORDINALS = {"0th", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th",
+        "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th",
+        "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th",
+        "30th", "31st"};
 
     public static String convertDateToString(String dateAndTime) throws DukeException {
         String date = dateAndTime.split(" ")[0];
@@ -32,10 +31,10 @@ public class DateTimeHelper {
 
         String[] ddmmyyyy = date.split("/");
         String month = (Month.of(Integer.parseInt(ddmmyyyy[1]))).toString().toLowerCase();
-        return ordinals[Integer.parseInt(ddmmyyyy[0])] + " of "
-                + month.substring(0,1).toUpperCase()
-                + month.substring(1)
-                + " " + ddmmyyyy[2];
+        return ORDINALS[Integer.parseInt(ddmmyyyy[0])] + " of "
+            + month.substring(0, 1).toUpperCase()
+            + month.substring(1)
+            + " " + ddmmyyyy[2];
     }
 
     private static String parseTime(String time) throws DukeException {
@@ -47,11 +46,11 @@ public class DateTimeHelper {
         int timeInt = Integer.parseInt(time);
         if (timeInt < 100) {
             return formatTime(timeInt + 1200, "am");
-        } else if (timeInt < 1200 ){
+        } else if (timeInt < 1200) {
             return formatTime(timeInt, "am");
         } else if (timeInt < 1300) { // && timeInt >= 1200
             return formatTime(timeInt, "pm");
-        }else { // > 1300 pm
+        } else { // > 1300 pm
             return formatTime(timeInt - 1200, "pm");
         }
     }

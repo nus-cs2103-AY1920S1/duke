@@ -8,7 +8,7 @@ import duke.task.TaskList;
 
 public class AddCommand extends Command {
 
-    Task t;
+    private Task t;
 
     public AddCommand(Task t) {
         this.t = t;

@@ -1,8 +1,8 @@
 package duke.task;
 
 public class Task {
-    protected boolean isDone;
-    protected String description;
+    boolean isDone;
+    private String description;
 
     Task(String description) {
         this.isDone = false;
@@ -14,7 +14,7 @@ public class Task {
         this.description = description;
     }
 
-    protected String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -27,7 +27,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String dataFormat() {
+    public String toDataFormat() {
         int isDoneInt;
         if (isDone) {
             isDoneInt = 1;

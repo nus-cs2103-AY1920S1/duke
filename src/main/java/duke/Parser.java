@@ -6,9 +6,9 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-public class Parser {
+class Parser {
 
-    public static Command parse(String fullCommand) throws DukeException {
+    static Command parse(String fullCommand) throws DukeException {
 
         if (fullCommand.equals("list")) {
             return new ListCommand();

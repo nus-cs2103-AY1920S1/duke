@@ -6,7 +6,8 @@ import duke.task.TaskList;
 
 public class ExitCommand extends Command {
 
-    public ExitCommand() { }
+    public ExitCommand() {
+    }
 
     @Override
     public boolean isExit() {

@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  * Represents an event at a given date and time.
  */
 public class Event extends Task {
-
     private LocalDateTime at;
 
     /**
@@ -23,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Returns a simplified summary of this event.
+     *
      * @return simplified string representation.
      */
     @Override
@@ -33,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Returns an expressive string representation of this event.
+     *
      * @return expressive string representation.
      */
     @Override

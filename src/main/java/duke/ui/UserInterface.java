@@ -1,17 +1,16 @@
 package duke.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import duke.common.Message;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Text User Interface of the application.
  */
 public class UserInterface {
-
     private static final Scanner SCANNER = new Scanner(System.in);
     public static final String LINE = "____________________________________________________________";
     public static final String LINE_PREFIX = "     ";
@@ -23,17 +22,17 @@ public class UserInterface {
 
     /**
      * Reads the user input.
+     *
      * @return entire text input entered by the user.
      */
     public String readLine() {
-        String nextLine = SCANNER.nextLine().strip();
-        return nextLine;
+        return SCANNER.nextLine().strip();
     }
 
     /**
      * Echos the user input back to the user.
      *
-     * @param inputLine
+     * @param inputLine given input line to be echoed.
      */
     public void echo(String inputLine) {
         System.out.println(inputLine);
@@ -96,6 +95,18 @@ public class UserInterface {
      * @param taskNames names of the tasks.
      */
     public void showTaskList(List<String> taskNames) {
+        showToUser(String.format(Message.MESSAGE_SHOW_TASK_LIST, ""));
+        for (String taskName : taskNames) {
+            showToUser(taskName);
+        }
+    }
+
+    /**
+     * Shows the matching list of task descriptions to the user.
+     *
+     * @param taskNames names of the matching tasks.
+     */
+    public void showMatchingTaskList(List<String> taskNames) {
         showToUser(String.format(Message.MESSAGE_SHOW_TASK_LIST, " matching"));
         for (String taskName : taskNames) {
             showToUser(taskName);
@@ -123,6 +134,7 @@ public class UserInterface {
 
     /**
      * Shows the exception message to the user.
+     *
      * @param message exception message.
      */
     public void showExceptionMessage(String message) {

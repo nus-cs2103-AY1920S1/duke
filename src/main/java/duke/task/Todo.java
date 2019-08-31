@@ -4,7 +4,6 @@ package duke.task;
  * Represents a to-do without date and time.
  */
 public class Todo extends Task {
-
     /**
      * Constructs a to-do with a description.
      *
@@ -16,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Returns a simplified summary of this to-do.
+     *
      * @return simplified string representation.
      */
     @Override
@@ -25,6 +25,7 @@ public class Todo extends Task {
 
     /**
      * Returns a string representation of this to-do.
+     *
      * @return string representation.
      */
     @Override

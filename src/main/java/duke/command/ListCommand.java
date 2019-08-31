@@ -9,7 +9,6 @@ import duke.ui.UserInterface;
  * Lists all tasks in the task list.
  */
 public class ListCommand extends Command {
-
     /**
      * Executes listing of task list on user interface.
      *

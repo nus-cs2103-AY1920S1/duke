@@ -182,7 +182,7 @@ class StorageTest {
                             });
         } catch (IOException ex) {
             fail("Failed to clean test directory for StorageTest.\n"
-                + ex.getMessage());
+                    + ex.getMessage());
         }
     }
 }

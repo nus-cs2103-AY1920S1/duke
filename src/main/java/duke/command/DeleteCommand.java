@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.task.Task;
 
 /**
@@ -27,16 +27,16 @@ class DeleteCommand extends WritableCommand {
      * Deletes the task from the task list, then saves to disk.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      */
     @Override
-    void run(TaskList tasks, Ui ui, Storage storage) {
+    void run(TaskList tasks, MainWindow ui, Storage storage) {
         Task taskDeleted = tasks.deleteTaskByIndex(taskIndex);
 
-        ui.printMsgLine(" Noted. I've removed this task:");
-        ui.printMsgLine(String.format("   %s", taskDeleted.getStatusText()));
-        ui.printMsgLine(String.format(" Now you have %d tasks in the list.", tasks.getSize()));
+        ui.showMessage(" Noted. I've removed this task:"
+                + String.format("   %s", taskDeleted.getStatusText())
+                + String.format(" Now you have %d tasks in the list.", tasks.getSize()));
     }
 
     /**
@@ -45,12 +45,12 @@ class DeleteCommand extends WritableCommand {
      * is valid number within the size of the task list.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      * @throws DukeInvalidArgumentException If the arguments are invalid as described.
      */
     @Override
-    void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
+    void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         if (commandArgs.length > 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after delete command",

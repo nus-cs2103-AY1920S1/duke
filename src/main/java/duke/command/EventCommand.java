@@ -2,10 +2,9 @@ package duke.command;
 
 import duke.DukeUtil;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.storage.Storage;
 import duke.task.EventTask;
-import duke.task.TaskUtil;
 
 import java.util.Arrays;
 
@@ -32,12 +31,12 @@ class EventCommand extends AddTaskCommand {
      * for use in run.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      * @throws DukeInvalidArgumentException If the arguments are invalid as described.
      */
     @Override
-    void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
+    void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         int atIndex = DukeUtil.getIndexOfPattern(commandArgs, "/at");
         if (atIndex == -1) {
             throw new DukeInvalidArgumentException(

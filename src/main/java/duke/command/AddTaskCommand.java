@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.task.Task;
 
 /**
@@ -26,15 +26,15 @@ abstract class AddTaskCommand extends WritableCommand {
      * Generic implementation of run for any (for now) type of tasks.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      */
     @Override
-    void run(TaskList tasks, Ui ui, Storage storage) {
+    void run(TaskList tasks, MainWindow ui, Storage storage) {
         tasks.addTask(taskToAdd);
 
-        ui.printMsgLine(" Got it. I've added this task:");
-        ui.printMsgLine(String.format("   %s", taskToAdd.getStatusText()));
-        ui.printMsgLine(String.format(" Now you have %d tasks in the list.", tasks.getSize()));
+        ui.showMessage(" Got it. I've added this task:"
+                + String.format("   %s", taskToAdd.getStatusText())
+                + String.format(" Now you have %d tasks in the list.", tasks.getSize()));
     }
 }

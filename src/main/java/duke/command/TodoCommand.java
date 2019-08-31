@@ -2,9 +2,8 @@ package duke.command;
 
 import duke.DukeUtil;
 import duke.storage.Storage;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.task.TaskList;
-import duke.task.TaskUtil;
 import duke.task.TodoTask;
 
 /**
@@ -28,12 +27,12 @@ class TodoCommand extends AddTaskCommand {
      * for use in run.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      * @throws DukeInvalidArgumentException If the description provided is empty.
      */
     @Override
-    void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
+    void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         String description = DukeUtil.concatStrings(commandArgs, " ");
         taskToAdd = new TodoTask(description);
     }

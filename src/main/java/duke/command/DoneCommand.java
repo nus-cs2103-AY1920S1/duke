@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.task.Task;
 
 /**
@@ -27,14 +27,14 @@ class DoneCommand extends WritableCommand {
      * Marks the task as done, then displays the confirmation.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      */
     @Override
-    void run(TaskList tasks, Ui ui, Storage storage) {
+    void run(TaskList tasks, MainWindow ui, Storage storage) {
         task.setDone(true);
-        ui.printMsgLine(" Nice! I've marked this task as done:");
-        ui.printMsgLine(String.format("   %s", task.getStatusText()));
+        ui.showMessage(" Nice! I've marked this task as done:"
+                + String.format("   %s", task.getStatusText()));
     }
 
     /**
@@ -44,12 +44,12 @@ class DoneCommand extends WritableCommand {
      * the task list size.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      * @throws DukeInvalidArgumentException If the arguments are invalid as described.
      */
     @Override
-    void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
+    void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         if (commandArgs.length > 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after done command",

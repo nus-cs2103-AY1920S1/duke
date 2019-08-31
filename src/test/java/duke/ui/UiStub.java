@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 //custom ui stub class for changing output stream or using dummy scanner for testing purposes
-public class UiStub extends Ui {
+public class UiStub {
     private PrintStream testInputStream;
     private PrintStream testPrintStream;
     private final PrintStream originalPrintStream = System.out;

@@ -7,7 +7,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Tasks have a description and are initialised as undone.
+     * Creates a task that is initialised as incomplete.
      *
      * @param description An activity that the user should attend/complete.
      */

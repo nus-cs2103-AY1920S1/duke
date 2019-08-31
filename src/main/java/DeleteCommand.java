@@ -1,9 +1,17 @@
 import java.io.IOException;
 
+/**
+ * Command to delete tasks from the task list.
+ */
 public class DeleteCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Creates a DeleteCommand object with the specified task number to be deleted assigned.
+     *
+     * @param command Contains the index of the task to be deleted.
+     */
     public DeleteCommand(String command) {
         try {
             this.taskNumber = Integer.parseInt(command);
@@ -12,6 +20,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Executes the delete command.
+     *
+     * @param tasks Task list where the task should be deleted from.
+     * @param ui User interface that assists with printing.
+     * @param storage Storage to be updated with the task deleted.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

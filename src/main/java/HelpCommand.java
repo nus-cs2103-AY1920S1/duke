@@ -1,7 +1,17 @@
+/**
+ * Command to guide users on how to use Duke.
+ */
 public class HelpCommand extends Command {
 
     private Ui ui;
 
+    /**
+     * Executes the help command with instructions for all possible commands.
+     *
+     * @param tasks Unused.
+     * @param ui User interface that assists with printing.
+     * @param storage Unused.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         this.ui = ui;
@@ -16,6 +26,12 @@ public class HelpCommand extends Command {
                 + "done");
     }
 
+    /**
+     * Creates a printing format for the instructions.
+     *
+     * @param command Command to be explained.
+     * @param description Explanation of command.
+     */
     public void print(String command, String description) {
         ui.show(Ui.TAB + command + " - " + description);
     }

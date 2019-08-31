@@ -9,7 +9,7 @@ public class DateTime {
     private int time;
 
     /**
-     * How Duke understands date and times.
+     * Initialises appropriate date and time fields for Duke to understand.
      *
      * @param year 4-digit integer.
      * @param month Integer value of the month.

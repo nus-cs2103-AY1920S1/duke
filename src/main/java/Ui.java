@@ -35,10 +35,18 @@ public class Ui {
         show(DIVIDER);
     }
 
+    /**
+     * Prints a divider for formatting.
+     */
     public void showLine() {
         show(DIVIDER);
     }
 
+    /**
+     * Ensures all messages are indented.
+     *
+     * @param message Message to be indented.
+     */
     public void show(String message) {
         System.out.println(TAB + message);
     }

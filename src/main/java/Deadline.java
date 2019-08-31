@@ -7,10 +7,10 @@ public class Deadline extends Task {
     protected String timeInFile;
 
     /**
-     * Assigns description, date and time to the deadline.
+     * Creates a deadline task with the specified description and date/time.
      *
-     * @param description Activity that the user should complete.
-     * @param dateTimeString String input to create a DateTime object for the deadline.
+     * @param description Deadline to complete.
+     * @param dateTimeString Date/time of the deadline.
      */
     public Deadline(String description, String dateTimeString) {
         super(description);
@@ -18,7 +18,14 @@ public class Deadline extends Task {
         this.timeInFile = dateTimeString;
     }
 
-    public static Deadline parse(String[] fullCommand) {
+    /**
+     * Parses the command given to Duke and creates a deadline task if possible.
+     *
+     * @param fullCommand Full command split by the word "deadline".
+     * @return Deadline object created.
+     * @throws DukeException If the deadline has no description, or no date/time.
+     */
+    public static Deadline parse(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("     OOPS!!! The description of a deadline cannot be empty :-(");
         }

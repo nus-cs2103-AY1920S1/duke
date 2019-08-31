@@ -3,6 +3,13 @@
  */
 public class Parser {
 
+    /**
+     * Reads commands give to Duke.
+     * Creates the appropriate command object.
+     *
+     * @param fullCommand Whole command where the first word will be extracted.
+     * @return Command object that is created according to the type of command.
+     */
     public static Command parse(String fullCommand) {
         String[] currArray = fullCommand.split("\\s+", 2);
         switch (currArray[0]) {

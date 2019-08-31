@@ -7,10 +7,10 @@ public class Event extends Task {
     protected String timeInFile;
 
     /**
-     * Assigns description, date and time to the event.
+     * Creates an event task with the specified description and date/time.
      *
-     * @param description Activity that the user should attend.
-     * @param dateTimeString String input to create a DateTime object for the event.
+     * @param description Event to attend to.
+     * @param dateTimeString Date/time of the event.
      */
     public Event(String description, String dateTimeString) {
         super(description);
@@ -18,7 +18,14 @@ public class Event extends Task {
         this.timeInFile = dateTimeString;
     }
 
-    public static Event parse(String[] fullCommand) {
+    /**
+     * Parses the command given to Duke and creates a event task if possible.
+     *
+     * @param fullCommand Full command split by the word "event".
+     * @return Event object created.
+     * @throws DukeException If the deadline has no description, or no date/time.
+     */
+    public static Event parse(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("     OOPS!!! The description of an event cannot be empty :-(");
         }

@@ -1,9 +1,17 @@
 import java.io.IOException;
 
+/**
+ * Command to mark a task as completed.
+ */
 public class DoneCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Creates a DoneCommand object with the specified task number to be marked as completed assigned.
+     *
+     * @param command Contains the index of the task to be marked as completed.
+     */
     public DoneCommand(String command) {
         try {
             this.taskNumber = Integer.parseInt(command);
@@ -12,6 +20,13 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Executes the completion of the task.
+     *
+     * @param tasks Task list where the task will be marked as completed.
+     * @param ui User interface that assists with printing.
+     * @param storage Storage to be updated with the task completed.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

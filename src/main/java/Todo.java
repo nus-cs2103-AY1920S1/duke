@@ -4,14 +4,21 @@
 public class Todo extends Task {
 
     /**
-     * Todos can be initialised from the parent class Task constructor.
+     * Creates a todo task with a specific description.
      *
-     * @param description Activity that the user should complete.
+     * @param description Task to do.
      */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Parses the command given to Duke and creates a Todo task if possible.
+     *
+     * @param fullCommand Full command split by the word "todo".
+     * @return Todo task created.
+     * @throws DukeException If the description of the todo is empty.
+     */
     public static Todo parse(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("     OOPS!!! The description of a todo cannot be empty :-(");

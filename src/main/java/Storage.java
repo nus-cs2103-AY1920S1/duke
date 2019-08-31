@@ -13,7 +13,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Allows Duke to load and store tasks.
+     * Creates a Storage object with the file path assigned.
      *
      * @param filePath Location of task list to load from and store to.
      */
@@ -63,6 +63,7 @@ public class Storage {
     /**
      * Stores the task list in the hard disk.
      *
+     * @param tasks Task list to retrieve.
      * @throws IOException If hard disk cannot be found in the given file path.
      */
     public void store(TaskList tasks) throws IOException {
@@ -73,7 +74,7 @@ public class Storage {
 
     /**
      * Formats the task list to be stored.
-     *
+     * @param tasks Task list to retrieve.
      * @return All tasks in the list in a simplified format.
      */
     public static String getSavedListString(TaskList tasks) {

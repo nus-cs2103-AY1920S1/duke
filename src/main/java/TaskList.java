@@ -8,14 +8,14 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Empty task list is created if there is no previous session of Duke, or no tasks in the task list.
+     * Creates an empty task list if there is no previous session of Duke, or no tasks in the task list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * New task list is filled with tasks from previous session of Duke.
+     * Fills the new  task list with tasks from previous session of Duke.
      *
      * @param savedTasks Task list from the previous session of Duke.
      */
@@ -24,12 +24,19 @@ public class TaskList {
         tasks.addAll(savedTasks);
     }
 
+    /**
+     * Retrieves the task list.
+     *
+     * @return Task list.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
     /**
-     * Prints out the task list for the user.
+     * Displays the contents of the task list to the user.
+     *
+     * @param ui User interface that assists with printing.
      */
     public void printTasks(Ui ui) {
         ui.show("Here are the tasks in your list:");
@@ -38,12 +45,24 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task as completed and informs the user.
+     *
+     * @param taskNumber Index of the task to be marked as completed.
+     * @param ui User interface that assists with printing.
+     */
     public void completeTask(int taskNumber, Ui ui) {
         tasks.get(taskNumber - 1).markAsDone();
         ui.show("Nice! I've marked this task as done:");
         ui.show(tasks.get(taskNumber - 1).toString());
     }
 
+    /**
+     * Deletes the task an informs the user.
+     *
+     * @param taskNumber Index of the task to be deleted.
+     * @param ui User interface that assists with printing.
+     */
     public void deleteTask(int taskNumber, Ui ui) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
@@ -52,6 +71,12 @@ public class TaskList {
         ui.show(getListSize());
     }
 
+    /**
+     * Searches for tasks matching the search term and displays the matching tasks to the user.
+     *
+     * @param searchTerm Key word/phrase to search for.
+     * @param ui User interface that assists with printing.
+     */
     public void findTasks(String searchTerm, Ui ui) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : tasks) {
@@ -70,7 +95,22 @@ public class TaskList {
     }
 
     /**
-     * Prints out a message informing user of the current list size.
+     * Adds the task to the task list.
+     *
+     * @param task Task to be added.
+     * @param ui User interface that assists with printing.
+     */
+    public void addTask(Task task, Ui ui) {
+        tasks.add(task);
+        ui.show("Got it. I've added this task:");
+        ui.show(task.toString());
+        ui.show(getListSize());
+    }
+
+    /**
+     * Informs users of the size of their task list.
+     *
+     * @return Number of tasks in the list.
      */
     public String getListSize() {
         if (tasks.size() == 1) {
@@ -78,13 +118,6 @@ public class TaskList {
         } else {
             return "Now you have " + tasks.size() + " tasks in the list.";
         }
-    }
-
-    public void addTask(Task task, Ui ui) {
-        tasks.add(task);
-        ui.show("Got it. I've added this task:");
-        ui.show(task.toString());
-        ui.show(getListSize());
     }
 
 }

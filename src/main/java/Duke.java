@@ -35,6 +35,9 @@ public class Duke {
     }
 
 
+    /**
+     * Reads the program until termination.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

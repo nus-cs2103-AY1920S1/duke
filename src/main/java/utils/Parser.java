@@ -1,11 +1,13 @@
 package utils;
 
 import commands.Command;
+import commands.ListCommand;
 import commands.AddCommand;
 import commands.DeleteCommand;
-import commands.ListCommand;
 import commands.ExitCommand;
 import commands.DoneCommand;
+import commands.FindCommand;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
@@ -69,6 +71,11 @@ public class Parser {
             case "delete":
                 taskId = Integer.parseInt(commandArr[1]);
                 c = new DeleteCommand(taskId);
+                break;
+
+            case "find":
+                String keyword = commandArr[1];
+                c = new FindCommand(keyword);
                 break;
 
             case "bye":

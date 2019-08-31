@@ -1,6 +1,9 @@
 package utils;
 
+import exceptions.DukeException;
 import tasks.Task;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -46,5 +49,25 @@ public class TaskList {
      */
     public Task deleteTask(int taskId) {
         return this.tasks.remove(taskId);
+    }
+
+    /**
+     * Finds the matching tasks from the current list of tasks,
+     * which match the keywords given keyword.
+     *
+     * @param keyword to match
+     * @return list of tasks that match with keyword
+     */
+    public List<Task> findMatchingTasks(String keyword) {
+        // create dummy list
+        List<Task> matchingTasks = new ArrayList<>();
+        // look through existing task list
+        for (Task task: tasks) {
+            if (task.toString().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
     }
 }

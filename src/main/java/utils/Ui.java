@@ -1,7 +1,10 @@
 package utils;
 
+import tasks.Task;
+
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -19,6 +22,8 @@ public class Ui {
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
+
+    private static final String MATCHING_LIST_MESSAGE = "Here are the matching tasks in your list:\n";
 
     private final Scanner in;
 
@@ -95,6 +100,25 @@ public class Ui {
                 str.append(i).append(".").append(tasks.getTask(i - 1));
             } else {
                 str.append(i).append(".").append(tasks.getTask(i - 1)).append("\n");
+            }
+        }
+
+        addBorder(str.toString());
+    }
+
+    /**
+     * Show the users the tasks that match their query.
+     *
+     * @param taskList list of tasks that match query
+     */
+    public void printMatchingTasks(List<Task> taskList) {
+        StringBuilder str = new StringBuilder(MATCHING_LIST_MESSAGE);
+
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            if (i == taskList.size()) {
+                str.append(i).append(".").append(taskList.get(i - 1));
+            } else {
+                str.append(i).append(".").append(taskList.get(i - 1)).append("\n");
             }
         }
 

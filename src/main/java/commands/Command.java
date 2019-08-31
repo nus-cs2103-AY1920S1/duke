@@ -18,7 +18,7 @@ public abstract class Command {
      * @param tasks to access the list of tasks
      * @param ui to give feedback to user
      * @param storage to write changes to file
-     * @throws DukeException
+     * @throws DukeException in case of errors writing to file
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 

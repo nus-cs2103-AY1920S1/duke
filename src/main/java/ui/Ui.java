@@ -2,11 +2,12 @@ package com.leeyiyuan.ui;
 
 
 import java.util.Scanner;
+import com.leeyiyuan.ui.UserOutputInterface;
 
 /**
  * Represents a console based user interface for interacting with the user.
  */
-public class Ui {
+public class Ui implements UserOutputInterface {
 
     /** Scanner object used to communicate with console. */
     protected Scanner scanner;

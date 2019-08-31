@@ -5,7 +5,7 @@ import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.task.TodoTask;
-import com.leeyiyuan.ui.Ui;
+import com.leeyiyuan.ui.UserOutputInterface;
 
 /** 
  * Represents a Command to add a TodoTask. 
@@ -28,14 +28,14 @@ public class AddTodoTaskCommand extends Command {
      * {@inheritDoc} 
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, UserOutputInterface uoi, Storage storage)
             throws CommandExecuteException, StorageException {
         TodoTask task = new TodoTask();
         task.setTitle(this.title);
         tasks.add(task);
         storage.save(tasks);
-        ui.showLine("Got it. I've added this task:");
-        ui.showLine("  " + task.toString());
-        ui.showNumTasks(tasks.size());
+        uoi.showLine("Got it. I've added this task:");
+        uoi.showLine("  " + task.toString());
+        uoi.showNumTasks(tasks.size());
     }
 }

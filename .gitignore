@@ -21,3 +21,6 @@ text-ui-test/ACTUAL.TXT
 
 # Save file
 save.txt
+
+# Class build files
+*.class

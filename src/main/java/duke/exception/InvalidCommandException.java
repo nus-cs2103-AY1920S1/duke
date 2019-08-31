@@ -1,7 +1,8 @@
 package duke.exception;
 
 public class InvalidCommandException extends DukeException {
-    String command;
+
+    private String command;
 
     public InvalidCommandException() {
         super();

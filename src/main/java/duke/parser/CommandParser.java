@@ -12,8 +12,19 @@ import duke.exception.InvalidCommandException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * This is a parser used to parse a string representation of a command into a <code>Command</code> class object in
+ * {@link duke.command.Command}. These <code>Command</code> can be executed in the <code>run</code> method of
+ * {@link duke.main.Duke}.
+ */
 public class CommandParser {
 
+    /**
+     * Parses the string representation of a command into a <code>Command</code> class object.
+     * @param fullCommand the full command to be parse
+     * @return a command
+     * @throws InvalidCommandException if a invalid command is entered by the user
+     */
     public static Command parse (String fullCommand) {
         String[] arr = fullCommand.split(" ");
         String parameter = Arrays.stream(arr).skip(1).collect(Collectors.joining(" ")).trim();

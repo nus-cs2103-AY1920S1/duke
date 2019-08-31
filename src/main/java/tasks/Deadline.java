@@ -5,11 +5,22 @@ import utils.StringToDate;
 public class Deadline extends Task {
     private StringToDate time;
 
+    /**
+     *Create a deadline task.
+     *
+     * @param name the description of the task
+     * @param time the time by which to complete it
+     */
     public Deadline(String name, StringToDate time) {
         super(name);
         this.time = time;
     }
 
+    /**
+     * Print in the correct format for storage and retrieval.
+     *
+     * @return the task in the required format for storage
+     */
     @Override
     public String printForStorage() {
         String borderAndSpace = " | ";
@@ -24,6 +35,11 @@ public class Deadline extends Task {
         return str;
     }
 
+    /**
+     * Show the user the task.
+     *
+     * @return string representation of task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.time.toString() + ")";

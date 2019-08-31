@@ -15,15 +15,24 @@ public class Duke {
         duke.run();
     }
 
-    public Duke(String filePath) {
+    /**
+     * Create a Duke object.
+     * Initialise the storage, task list and ui objects.
+     *
+     * @param filePath the local path to the storage file
+     */
+    private Duke(String filePath) {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.readFromFile());
         ui = new Ui();
     }
 
-    public void run() {
-
-
+    /**
+     * Obtains user input, parses it and executes the commands.
+     * Shows errors to the user in case of invalid input.
+     *
+     */
+    private void run() {
         ui.welcomeMessage();
 
         boolean isExit = false;

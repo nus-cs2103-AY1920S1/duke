@@ -1,18 +1,23 @@
 package tasks;
 
-/*
-A task class to represent a task object.
-Properties: id, name, done
-*/
 public class Task {
-    protected String name;
-    protected boolean isDone;
+    String name;
+    boolean isDone;
 
+    /**
+     * Create a task object, is called by task, deadline and event.
+     *
+     * @param name description of task
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
+    /**
+     * Mark the task as complete.
+     *
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -21,6 +26,11 @@ public class Task {
         return "";
     }
 
+    /**
+     * Show the user the task. Called by task, deadline and event classes.
+     *
+     * @return string representation of task
+     */
     @Override
     public String toString() {
         String str = "";

@@ -13,7 +13,7 @@ import duke.ui.Ui;
 /**
  * The Duke Program is a command line interface for a simple task manager. Users can add a todo item with just its
  * description, a deadline item with description and the date to complete it by, an event item with description and
- * the date is the event is held at. The Duke Program has its own user interface, with its own storage and a lsit of
+ * the date the event is held at. The Duke Program has its own user interface, with its own storage and a list of
  * tasks list to provide easy tracking for the user.
  */
 public class Duke {

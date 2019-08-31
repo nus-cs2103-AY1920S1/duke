@@ -45,9 +45,10 @@ public class TaskList {
     }
 
     public void deleteTask(int taskNumber, Ui ui) {
+        String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
         ui.show("Noted. I've removed this task:");
-        ui.show(tasks.get(taskNumber).toString());
+        ui.show(taskDescription);
         ui.show(getListSize());
     }
 

@@ -5,7 +5,7 @@ import java.util.*;
 public class StorageTest {
     @Test
     public void testLoad() throws DukeException {
-        Storage storage = new Storage("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\dukenew\\src\\main\\java\\TaskList");
+        Storage storage = new Storage("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\iP\\dukenew\\src\\main\\java\\TaskList");
         ArrayList<String> expectedOutput = new ArrayList<String>();
         expectedOutput.add("D | [✗] | return books  |  02/12/2019 1900");
         expectedOutput.add("E | [✗] | team meeting  |  02/12/19 1700-1800");

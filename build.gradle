@@ -6,6 +6,11 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
+buildScan {
+    licenseAgreementUrl = "https://gradle.com/terms-of-service"
+    licenseAgree = "yes"
+}
+
 javafx {
     version = "11.0.2"
     modules = [ 'javafx.controls', 'javafx.fxml' ]

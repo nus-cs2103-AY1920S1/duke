@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -86,7 +87,7 @@ public class Ui {
     }
 
     public void showEmptyListMsg() {
-        System.out.println(emptyListMsg);
+        showMsg(emptyListMsg);
     }
 
     /**
@@ -164,5 +165,20 @@ public class Ui {
 
     public void showLoadingError() {
         showMsg("Error loading tasks from file");
+    }
+
+    public void showFoundTasks(List<Task> foundTasks) throws DukeException {
+        if (!foundTasks.isEmpty()) {
+            showMsg("Here are the tasks in your list:");
+            for (Task t: foundTasks) {
+                showMsg((foundTasks.indexOf(t) + 1) + ". " + t);
+            }
+        } else {
+            showNothingFoundMsg();
+        }
+    }
+
+    private void showNothingFoundMsg() {
+        showMsg("No tasks found.");
     }
 }

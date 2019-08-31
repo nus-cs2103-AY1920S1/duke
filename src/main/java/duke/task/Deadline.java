@@ -1,8 +1,18 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Deadline extends Task {
+    private static final Pattern PAT = Pattern.compile("(.+) /by (.+)");
+    private static final DateTimeFormatter readFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm", Locale.ENGLISH);
+    private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm", Locale.ENGLISH);
     protected LocalDateTime by;
 
     public Deadline(String desc) {
@@ -36,6 +46,21 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public static Task parse(String commandContent) throws DukeException {
+        Matcher matcher = PAT.matcher(commandContent);
+
+        if (!matcher.matches()) {
+            throw new DukeException("OOPS!!! Arguments is in wrong format");
+        }
+        try {
+            LocalDateTime dueDate = LocalDateTime.parse(matcher.group(2), readFormatter);
+            Task task = new Deadline(matcher.group(1), dueDate);
+            return task;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
+        }
+    }
+
     /**
      * Getter for by variable.
      *
@@ -56,6 +81,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getDateBy() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getDateBy().format(displayFormatter) + ")";
     }
 }

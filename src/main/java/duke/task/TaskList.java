@@ -115,4 +115,15 @@ public class TaskList {
     private boolean isValidIndex(int index) {
         return index >= 1 && index <= tasks.size();
     }
+
+
+    public List<Task> find(String keyword) {
+        List<Task> tasks = new ArrayList<>();
+        this.getTasks().forEach(x -> {
+            if (x.desc.contains(keyword)) {
+                tasks.add(x);
+            }
+        });
+        return tasks;
+    }
 }

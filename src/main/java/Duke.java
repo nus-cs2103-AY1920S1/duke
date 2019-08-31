@@ -1,3 +1,8 @@
+import ui.UI;
+import task.*;
+import storage.Storage;
+import exception.DukeException;
+import parser.Parser;
 
 public class Duke {
     private Storage storage;
@@ -23,6 +28,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\duke\\data\\tasklist.txt").run();
+        new Duke("C:\\duke\\src\\data\\tasklist.txt").run();
     }
 }

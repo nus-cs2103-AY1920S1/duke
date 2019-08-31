@@ -1,7 +1,10 @@
+package task;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import exception.DukeException;
 
 public class TaskList extends ArrayList<Task>{
     public TaskList(){}

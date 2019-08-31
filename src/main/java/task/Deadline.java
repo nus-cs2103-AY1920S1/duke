@@ -1,5 +1,8 @@
+package task;
+
 import java.text.ParseException;
 import java.util.Date;
+import parser.DateParser;
 
 public class Deadline extends Task{
     protected String strBy;
@@ -13,7 +16,7 @@ public class Deadline extends Task{
 
     @Override
     public String toFile(){
-        return "D | " + (isDone?"1":"0") + " | " + this.description + " | " + this.by + "\n";
+        return "D | " + (isDone?"1":"0") + " | " + this.description + " | " + this.strBy + "\n";
     }
     @Override
     public String toString(){

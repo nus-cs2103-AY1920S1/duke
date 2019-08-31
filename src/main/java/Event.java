@@ -98,6 +98,7 @@ public class Event extends Task {
             break;
         case 11 : nameOfMonth = "December";
             break;
+        default : nameOfMonth = "Invalid Start Month";
         }
         String hoursAndMinutes;
         if (startTime.get(Calendar.HOUR_OF_DAY) <= 12) {
@@ -119,6 +120,7 @@ public class Event extends Task {
                 + startTime.get(Calendar.YEAR) + ". "
                 + hoursAndMinutes;
     }
+    
     /**
      * Returns a string representing endTime in a particular user-friendly format.
      * @return string representing the endTime in a printing friendly format.
@@ -126,40 +128,41 @@ public class Event extends Task {
     public String printEndTime() {
         String jargon = "";
         switch (endTime.get(Calendar.DAY_OF_MONTH) % 10) {
-            case 1 : jargon = "st ";
-                break;
-            case 2 : jargon = "nd ";
-                break;
-            case 3 : jargon = "rd ";
-                break;
-            default : jargon = "th ";
+        case 1 : jargon = "st ";
+            break;
+        case 2 : jargon = "nd ";
+            break;
+        case 3 : jargon = "rd ";
+            break;
+        default : jargon = "th ";
         }
         String nameOfMonth = "";
         switch (endTime.get(Calendar.MONTH)) {
-            case 0 : nameOfMonth = "January";
-                break;
-            case 1 : nameOfMonth = "February";
-                break;
-            case 2 : nameOfMonth = "March";
-                break;
-            case 3 : nameOfMonth = "April";
-                break;
-            case 4 : nameOfMonth = "May";
-                break;
-            case 5 : nameOfMonth = "June";
-                break;
-            case 6 : nameOfMonth = "July";
-                break;
-            case 7 : nameOfMonth = "August";
-                break;
-            case 8 : nameOfMonth = "September";
-                break;
-            case 9 : nameOfMonth = "October";
-                break;
-            case 10 : nameOfMonth = "November";
-                break;
-            case 11 : nameOfMonth = "December";
-                break;
+        case 0 : nameOfMonth = "January";
+            break;
+        case 1 : nameOfMonth = "February";
+            break;
+        case 2 : nameOfMonth = "March";
+            break;
+        case 3 : nameOfMonth = "April";
+            break;
+        case 4 : nameOfMonth = "May";
+            break;
+        case 5 : nameOfMonth = "June";
+            break;
+        case 6 : nameOfMonth = "July";
+            break;
+        case 7 : nameOfMonth = "August";
+            break;
+        case 8 : nameOfMonth = "September";
+            break;
+        case 9 : nameOfMonth = "October";
+            break;
+        case 10 : nameOfMonth = "November";
+            break;
+        case 11 : nameOfMonth = "December";
+            break;
+        default : nameOfMonth = "Invalid End Time";
         }
         String hoursAndMinutes;
         if (endTime.get(Calendar.HOUR_OF_DAY) <= 12) {
@@ -181,9 +184,9 @@ public class Event extends Task {
                 + endTime.get(Calendar.YEAR) + ". "
                 + hoursAndMinutes;
     }
+
     @Override
     public String toString() {
-
         return "[E]" + super.toString() + " (at: "
                 + this.printStartTime() + " - "
                 + this.printEndTime()

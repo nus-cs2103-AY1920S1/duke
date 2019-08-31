@@ -19,7 +19,7 @@ public class Task {
      * Returns an icon according to whether the task is done or not.
      * @return '+' if task is done and '-' if task is not done.
      */
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return isDone ? "+" : "-";
     }
 

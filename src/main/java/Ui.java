@@ -32,7 +32,7 @@ public class Ui {
      * Prints exception's message.
      * @param e exception that needs to be printed.
      */
-    public void showException (Exception e) {
+    public void showException(Exception e) {
         System.err.println(e.getMessage());
     }
 
@@ -41,13 +41,15 @@ public class Ui {
      * @param type type of command for which the error message needs to be generated.
      */
     public void showNumberFormatError(String type) {
-        switch(type) {
-        case "done" : System.err.println(" :( OOPS!!! Invalid format." +
-                    " Please enter the number of the task to be marked as done.");
+        switch (type) {
+        case "done" : System.err.println(" :( OOPS!!! Invalid format."
+                + " Please enter the number of the task to be marked as done.");
             break;
-        case "delete" : System.err.println(" :( OOPS!!! Invalid format." +
-                    " Please enter the number of the task to be deleted.");
+        case "delete" : System.err.println(" :( OOPS!!! Invalid format."
+                + " Please enter the number of the task to be deleted.");
             break;
+        default : System.err.println(" :( OOPS!!! Invalid format."
+            + " Please enter a number.");
         }
     }
 
@@ -95,7 +97,7 @@ public class Ui {
      */
     public void showTasks(TaskList taskList) {
         ArrayList<Task> arr = taskList.getArr();
-        for(int i = 0; i < arr.size(); i++) {
+        for (int i = 0; i < arr.size(); i++) {
             Task temp = arr.get(i);
             System.out.println((i + 1) + ". " + temp);
         }

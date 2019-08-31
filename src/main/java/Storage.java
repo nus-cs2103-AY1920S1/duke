@@ -21,11 +21,11 @@ public class Storage {
      * @throws DukeException thrown if a task is of invalid format.
      * @throws IOException thrown id filePath is non-Existent.
      */
-    public ArrayList<Task> load() throws DukeException, IOException{
+    public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> result = new ArrayList<>();
         File f = new File(filePath);
         Scanner reader = new Scanner(f);
-        while(reader.hasNext()) {
+        while (reader.hasNext()) {
             String s = reader.nextLine();
             String[] tempArray = s.split(" -- ");
             Task t;
@@ -65,7 +65,7 @@ public class Storage {
                         endHours,
                         endMinutes);
                 t = new Event(tempArray[2], startDateAndTime, endDateAndTime);
-            }else if (tempArray[0].equals("[T]")) {
+            } else if (tempArray[0].equals("[T]")) {
                 t = new ToDo(tempArray[2]);
             } else {
                 throw new DukeException(" :( OOPS!!! Not a valid Task type.");
@@ -83,7 +83,7 @@ public class Storage {
      * @param tasks the TaskList that the history file must reflect.
      * @throws IOException thrown if filePath of history file is non-Existent.
      */
-    public void update(TaskList tasks) throws IOException{
+    public void update(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String textToAdd = "";
         for (Task t : tasks.getArr()) {
@@ -98,9 +98,8 @@ public class Storage {
             textToAdd += "[" + type + "] -- " + "[" + t.getStatusIcon() + "] -- " + t.getDescription();
             if (t instanceof Event) {
                 Calendar startTime = ((Event) t).getStartTime();
-                Calendar endTime = ((Event) t).getEndTime();
-                textToAdd += " -- " + startTime.get(Calendar.DAY_OF_MONTH) + "/" +
-                        startTime.get(Calendar.MONTH) + "/" + startTime.get(Calendar.YEAR) + " ";
+                textToAdd += " -- " + startTime.get(Calendar.DAY_OF_MONTH) + "/"
+                        + startTime.get(Calendar.MONTH) + "/" + startTime.get(Calendar.YEAR) + " ";
                 if (startTime.get(Calendar.HOUR_OF_DAY) < 10) {
                     textToAdd += "0";
                 }
@@ -110,6 +109,7 @@ public class Storage {
                 }
                 textToAdd += startTime.get(Calendar.MINUTE);
                 textToAdd += "-";
+                Calendar endTime = ((Event) t).getEndTime();
                 if (endTime.get(Calendar.HOUR_OF_DAY) < 10) {
                     textToAdd += "0";
                 }
@@ -121,8 +121,8 @@ public class Storage {
             }
             if (t instanceof Deadline) {
                 Calendar time = ((Deadline) t).getTime();
-                textToAdd += " -- " + time.get(Calendar.DAY_OF_MONTH) + "/" +
-                        time.get(Calendar.MONTH) + "/" + time.get(Calendar.YEAR) + " ";
+                textToAdd += " -- " + time.get(Calendar.DAY_OF_MONTH) + "/"
+                        + time.get(Calendar.MONTH) + "/" + time.get(Calendar.YEAR) + " ";
                 if (time.get(Calendar.HOUR_OF_DAY) < 10) {
                     textToAdd += "0";
                 }

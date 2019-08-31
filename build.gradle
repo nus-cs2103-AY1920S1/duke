@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 group 'seedu.duke'
@@ -13,11 +14,16 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 checkstyle {
     toolVersion = '8.23'
+}
+
+javafx {
+    modules = ['javafx.controls', 'javafx.fxml']
+    version = '11.0.2'
 }
 
 dependencies {

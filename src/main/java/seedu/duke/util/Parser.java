@@ -19,7 +19,7 @@ public class Parser {
                     return new DoneCommand(Integer.parseInt(keywords[1]));
                 }
             } else if (keywords[0].equals("todo")) {
-                String temp = parseTodo(keywords);
+                String temp = parseTask(keywords, "todo");
                 return new TodoCommand(temp);
             } else if (keywords[0].equals("deadline")) {
                 String[] temp = parseTaskTime(keywords, "deadline");
@@ -33,17 +33,22 @@ public class Parser {
                 } else {
                     return new DeleteCommand(Integer.parseInt(keywords[1]));
                 }
+            } else if (keywords[0].equals("find")) {
+                String temp = parseTask(keywords, "find");
+                return new FindCommand(temp);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("☹ OOPS!!! I can't mark or delete without an entry :-(");
+        } catch (NumberFormatException ex) {
+            throw new DukeException("☹ OOPS!!! That's not a valid entry :-(");
         }
     }
 
-    public static String parseTodo(String[] keywords) throws DukeException {
+    public static String parseTask(String[] keywords, String taskType) throws DukeException {
         if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
         } else {
             keywords[0] = "";
             return String.join(" ", keywords).strip();

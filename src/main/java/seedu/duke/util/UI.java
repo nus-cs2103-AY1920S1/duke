@@ -25,6 +25,7 @@ public class UI {
     private static final String TASK_WRAPPER_UPPER_DELETE = UPPER_BORDER + "Got it. I've removed this task:\n";
     private static final String NOW_YOU_HAVE = "Now you have ";
     private static final String TASK_WRAPPER_LOWER = " tasks in the list.\n" + LOWER_BORDER;
+    private static final String FOUND = "Here are the matching tasks in your list:\n";
 
     public UI() {
 
@@ -54,6 +55,10 @@ public class UI {
             System.out.println(TASK_WRAPPER_UPPER_DELETE + task + "\n" + NOW_YOU_HAVE + (taskList.getTaskListSize() - 1)
                     + TASK_WRAPPER_LOWER);
         }
+    }
+
+    public void showFound(TaskList foundItems) {
+        System.out.println(UPPER_BORDER + FOUND + foundItems + LOWER_BORDER);
     }
 
     public void showError(String e) {

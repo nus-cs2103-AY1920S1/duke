@@ -1,7 +1,9 @@
 package duke.command;
 
-import duke.task.*;
-import duke.io.*;
+import duke.io.Parser;
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
     private String input;

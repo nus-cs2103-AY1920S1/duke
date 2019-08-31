@@ -1,11 +1,14 @@
 package duke.command;
 
+import duke.io.Parser;
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.task.Deadline;
+import duke.task.TaskList;
+
 import java.text.ParseException;
-import duke.task.*;
-import duke.io.*;
 
 public class AddDeadlineCommand extends AddCommand {
-    private String input;
     private String[] details;
 
     public AddDeadlineCommand(String input) throws ArrayIndexOutOfBoundsException {

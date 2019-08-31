@@ -29,7 +29,7 @@ public class Task {
         return (this.isDone ? 1 : 0);
     }
 
-    public String store(){
+    public String store() {
         return getStatus() + "|" + this.description;
     }
 

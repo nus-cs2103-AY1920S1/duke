@@ -1,7 +1,8 @@
 package duke.io;
 
+import duke.task.TaskList;
+
 import java.util.Scanner;
-import duke.task.*;
 
 public class Ui {
     private Scanner scanner;
@@ -25,7 +26,7 @@ public class Ui {
     }
 
     public void showLine() {
-        out("=====================");
+        out("========================");
     }
 
     /**

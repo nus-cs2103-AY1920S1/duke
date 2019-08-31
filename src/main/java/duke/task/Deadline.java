@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String store(){
+    public String store() {
         return "D|" + getStatus() + "|" + description + "|" + details;
     }
 }

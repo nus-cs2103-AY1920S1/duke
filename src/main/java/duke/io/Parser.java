@@ -1,11 +1,18 @@
 package duke.io;
 
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import duke.command.*;
-import duke.task.*;
 
+/**
+ * Represents parser for IO operations.
+ */
 public class Parser {
     public static Command parse(String input) throws UnsupportedOperationException, ArrayIndexOutOfBoundsException {
         String command = input.split(" ")[0];
@@ -31,7 +38,7 @@ public class Parser {
     }
 
     /**
-     * Returns the index of the list to be managed
+     * Returns the index of the list to be managed.
      * @param input User command
      * @param size Size of task list
      * @return User value specified
@@ -46,7 +53,7 @@ public class Parser {
     }
 
     /**
-     * Processes Input Event/Deadline to Description & Details
+     * Processes Input Event/Deadline to Description & Details.
      * @param input Task String (without command)
      * @return Array. Index 0 = Description. Index 1  = Details
      * @throws ArrayIndexOutOfBoundsException Command missing details
@@ -64,7 +71,7 @@ public class Parser {
     }
 
     /**
-     * Creates Task from stored task data
+     * Creates Task from stored task data.
      * @param code Stored task data
      * @return Task
      * @throws ParseException Error in stored date data
@@ -73,11 +80,11 @@ public class Parser {
         boolean done = "1".equals(code[1]);
         switch (code[0]) {
         case "T":
-            return new Todo(code[2], done);
+            return new TodoTask(code[2], done);
         case "D":
             return new Deadline(code[2], Parser.getAsDate(code[3]), done);
         case "E":
-            return new Event(code[2], Parser.getAsDate(code[3]), done);
+            return new EventTask(code[2], Parser.getAsDate(code[3]), done);
         default:
             return null;
         }

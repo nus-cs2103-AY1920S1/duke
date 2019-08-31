@@ -1,11 +1,14 @@
 package duke.command;
 
+import duke.io.Parser;
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.task.EventTask;
+import duke.task.TaskList;
+
 import java.text.ParseException;
-import duke.task.*;
-import duke.io.*;
 
 public class AddEventCommand extends AddCommand {
-    private String input;
     private String[] details;
 
     public AddEventCommand(String input) throws ArrayIndexOutOfBoundsException {
@@ -16,7 +19,7 @@ public class AddEventCommand extends AddCommand {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ParseException {
         ui.showLine();
-        taskList.add(new Event(details[0], Parser.getAsDate(details[1])));
+        taskList.add(new EventTask(details[0], Parser.getAsDate(details[1])));
         ui.out("Got it. I've added this task:");
         ui.out(taskList.get(taskList.size() - 1).toString());
         ui.out("Now you have " + taskList.size() + " tasks in the list.");

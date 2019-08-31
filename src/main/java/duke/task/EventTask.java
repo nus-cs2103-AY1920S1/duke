@@ -5,15 +5,15 @@ import java.util.Date;
 /**
  * Represents an Event Task
  */
-public class Event extends Task {
+public class EventTask extends Task {
     private Date details;
 
-    public Event(String description, Date details) {
+    public EventTask(String description, Date details) {
         super(description);
         this.details = details;
     }
 
-    public Event(String description, Date details, boolean done) {
+    public EventTask(String description, Date details, boolean done) {
         super(description, done);
         this.details = details;
     }
@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String store(){
+    public String store() {
         return "E|" + getStatus() + "|" + description + "|" + details;
     }
 }

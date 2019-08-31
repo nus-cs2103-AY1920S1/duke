@@ -1,5 +1,7 @@
 package duke.io;
 
+import duke.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Scanner;
-import duke.task.*;
 
 public class Storage {
     private String filePath;

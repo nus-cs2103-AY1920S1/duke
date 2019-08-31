@@ -3,13 +3,13 @@ package duke.task;
 /**
  * Represents a To-do Task
  */
-public class Todo extends Task {
+public class TodoTask extends Task {
 
-    public Todo(String description) {
+    public TodoTask(String description) {
         super(description);
     }
 
-    public Todo(String description, boolean done) {
+    public TodoTask(String description, boolean done) {
         super(description, done);
     }
 
@@ -19,7 +19,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String store(){
+    public String store() {
         return "T|" + getStatus() + "|" + this.description;
     }
 }

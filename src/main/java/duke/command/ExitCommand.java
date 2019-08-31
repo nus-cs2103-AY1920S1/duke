@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.task.*;
-import duke.io.*;
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.task.TaskList;
 
 public class ExitCommand extends Command {
     @Override

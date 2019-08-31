@@ -1,8 +1,10 @@
 package duke.command;
 
+import duke.io.Storage;
+import duke.io.Ui;
+import duke.task.TaskList;
+
 import java.text.ParseException;
-import duke.task.*;
-import duke.io.*;
 
 public abstract class Command {
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws ParseException;

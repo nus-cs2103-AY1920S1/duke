@@ -2,4 +2,4 @@ T | 1 | read book
 D | 1 | return book | 02/12/2019 1800
 E | 0 | project meeting | Aug 6th 2-4pm
 T | 1 | join sports club
-E | 0 | swimming | Wensday
+E | 0 | swimming | Wednesday

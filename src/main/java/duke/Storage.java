@@ -15,7 +15,7 @@ public class Storage {
 
     private File f;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         f = new File(filePath);
     }
 

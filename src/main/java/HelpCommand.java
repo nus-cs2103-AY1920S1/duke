@@ -1,11 +1,28 @@
+/**
+ * Represents the Help command, which is responsible for showing all possible commands
+ */
 public class HelpCommand extends Command {
+    /**
+     * Constructs the Help Command Object.
+     */
     public HelpCommand() {
 
     }
+
+    /**
+     * Determines whether or should the Duke App should terminate.
+     * @return returns false
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the command to display all possible commands.
+     * @param tasks The TaskList of the current Duke App
+     * @param ui The Ui being used by the Duke App
+     * @param storage The Storage unit being used by the Duke app.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         //do something
         ui.showMessage("List of available commands");

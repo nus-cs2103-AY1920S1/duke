@@ -3,10 +3,17 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+/**
+ * Represents an Event task. An event task is defined by its name and a time.
+ */
 public class EventsTask extends Task {
     String taskName;
     String taskTime;
 
+    /**
+     * Constructs an event Task which is not completed.
+     * @param task a string that defines the deadline task. a deadline task requires a /by to split it's name and time.
+     */
     public EventsTask(String task) {
         super(task);
         String[] taskSplit = task.split("/at");
@@ -27,12 +34,23 @@ public class EventsTask extends Task {
             throw new InvalidTimeDukeException();
         }
     }
+
+    /**
+     * Constructs an event task.
+     * @param isCompleted Whether or not the task is completed yet.
+     * @param taskName The name of the task.
+     * @param taskTime The Time of the task represented by a string.
+     */
     public EventsTask(String isCompleted,String taskName, String taskTime) {
         super(taskName, Boolean.parseBoolean(isCompleted));
         this.taskName = taskName;
         this.taskTime = taskTime;
     }
 
+    /**
+     * Returns a string which represents this task.
+     * @return a String detailing the task's name and time.
+     */
     @Override
     public String toString() {
         String output = "[E]";
@@ -45,6 +63,10 @@ public class EventsTask extends Task {
         return output;
     }
 
+    /**
+     * returns a string that is used to store it in the save file.
+     * @return a string specifically formatted for storage.
+     */
     @Override
     public String toFileFormat() {
         String output = "event| ";

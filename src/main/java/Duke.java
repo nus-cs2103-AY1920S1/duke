@@ -1,15 +1,12 @@
-import java.io.FileNotFoundException;
-
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
-
+/**
+ * The driver class of the entire Duke Project
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath, ui);
         try {
@@ -19,6 +16,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
     private void run() {
         ui.showWelcome();
         ui.straightLine();

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'jxd.duke'
@@ -14,11 +15,18 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
 test {
     useJUnitPlatform()
 }
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "Duke"
 }

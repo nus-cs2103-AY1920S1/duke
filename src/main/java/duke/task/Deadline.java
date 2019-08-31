@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -19,7 +19,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String dataFormat() {
-        return "D" + super.dataFormat() + " | " + by;
+    public String toDataFormat() {
+        return "D" + super.toDataFormat() + " | " + by;
     }
 }

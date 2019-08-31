@@ -1,7 +1,7 @@
 package duke.task;
 
 public class Event extends Task {
-    protected String at;
+    private String at;
 
     public Event(String description, String at) {
         super(description);
@@ -19,7 +19,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String dataFormat() {
-        return "E" + super.dataFormat() + " | " + at;
+    public String toDataFormat() {
+        return "E" + super.toDataFormat() + " | " + at;
     }
 }

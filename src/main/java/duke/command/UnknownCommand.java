@@ -7,7 +7,8 @@ import duke.task.TaskList;
 
 public class UnknownCommand extends Command {
 
-    public UnknownCommand() {}
+    public UnknownCommand() {
+    }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

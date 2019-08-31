@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner s;
+    private Scanner s;
     Ui() {
         this.s = new Scanner(System.in);
     }
 
-    public void showWelcome() {
+    void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -24,15 +24,15 @@ public class Ui {
     }
 
     //WHY IS THIS GIVING PROBLEMS?
-    public String readCommand() {
+    String readCommand() {
        return s.nextLine().trim();
     }
 
-    public void showLoadingError() {
+    void showLoadingError() {
         System.out.println("Error loading data from file");
     }
 
-    public void showError(String errorMessage) {
+    void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 

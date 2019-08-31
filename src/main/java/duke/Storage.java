@@ -8,7 +8,6 @@ import duke.task.Todo;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Storage {
@@ -67,9 +66,8 @@ public class Storage {
         //write to a completely new file
         try {
             FileWriter fw = new FileWriter(f, false);
-            Iterator<Task> itr = tasks.iterator();
-            while (itr.hasNext()) {
-                String s = itr.next().dataFormat();
+            for (Task task : tasks) {
+                String s = task.toDataFormat();
                 fw.write(s + "\n");
             }
 

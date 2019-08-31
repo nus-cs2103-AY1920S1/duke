@@ -13,7 +13,7 @@ public abstract class Command {
         return false;
     }
 
-    protected void persistState(TaskList tasks, Storage storage) throws DukeException {
+    void persistState(TaskList tasks, Storage storage) throws DukeException {
         storage.saveDataToFile(tasks.getAllTasks());
     }
 }

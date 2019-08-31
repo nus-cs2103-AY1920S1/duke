@@ -38,6 +38,9 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
+    /**
+     * Prints a welcome message by Duke. Used in main.Main when Duke is started up.
+     */
     public void printWelcomeMessage() {
         String response = duke.getWelcomeMessage();
         dialogContainer.getChildren().addAll(

@@ -1,9 +1,7 @@
 package task;
 
 /**
- * <p>
- *     A standard Task with a name and no additional info.
- * </p>
+ * A standard Task with a name and no additional info.
  */
 public class Todo extends Task {
 

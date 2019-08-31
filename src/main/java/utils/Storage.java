@@ -13,10 +13,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * <p>
- *     Manages the I/O for accessing and updating of a stored task list in
- *     the file directory.
- * </p>
+ * Manages the I/O for accessing and updating of a stored task list in
+ * the file directory.
  */
 public class Storage {
     private static final String SEPARATOR = " | ";
@@ -24,10 +22,8 @@ public class Storage {
     private static File file;
 
     /**
-     * <p>
-     *     Loads data into the TaskList if the storage file already exists. Else
-     *     creates a new file.
-     * </p>
+     * Loads data into the TaskList if the storage file already exists. Else
+     * creates a new file.
      *
      * @param absolutePathName The full path name of the file to specify its
      *                         stored location.
@@ -54,12 +50,10 @@ public class Storage {
     }
 
     /**
-     * <p>
-     *     Parse the storage file and stores all the tasks listed within it
-     *     into TaskList.
-     * </p>
+     * Parse the storage file and stores all the tasks listed within it
+     * into TaskList.
      */
-    void loadData()  {
+    void loadData() {
         Scanner sc;
         try {
             sc = new Scanner(file);
@@ -72,36 +66,34 @@ public class Storage {
         while (sc.hasNext()) {
             String[] taskInfo = sc.nextLine().split("\\s*\\|\\s*");
             switch (taskInfo[0]) {
-                case "T":
-                    taskList.addNewTodoTask(taskInfo[2],
-                            taskInfo[1].equals("1"));
-                    break;
+            case "T":
+                taskList.addNewTodoTask(taskInfo[2],
+                        taskInfo[1].equals("1"));
+                break;
 
-                case "D":
-                    taskList.addNewDeadlineTask(taskInfo[2],
-                            taskInfo[3],
-                            taskInfo[1].equals("1"));
-                    break;
+            case "D":
+                taskList.addNewDeadlineTask(taskInfo[2],
+                        taskInfo[3],
+                        taskInfo[1].equals("1"));
+                break;
 
-                case "E":
-                    taskList.addNewEventTask(taskInfo[2],
-                            taskInfo[3],
-                            taskInfo[1].equals("1"));
-                    break;
+            case "E":
+                taskList.addNewEventTask(taskInfo[2],
+                        taskInfo[3],
+                        taskInfo[1].equals("1"));
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
 
     /**
-     * <p>
-     *     Rewrites the whole storage file based on the current TaskList
-     *     contents.
-     * </p>
+     * Rewrites the whole storage file based on the current TaskList
+     * contents.
      */
-    public void updateData()  {
+    public void updateData() {
         try {
             FileWriter fw = new FileWriter(file.getAbsolutePath());
             TaskList taskList = TaskList.newInstance();

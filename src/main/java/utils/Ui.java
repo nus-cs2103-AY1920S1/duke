@@ -14,12 +14,13 @@ public class Ui {
             "Here are the tasks in your list:\n";
     public static final String FIND_ACTION_TITLE =
             "Here are the matching tasks in your list:\n";
+    public static final String SAD_EMOTICON = "\u2639"; // "☹"
     private static final String LOGO =
-              " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String DIVIDER = "____________________________________________________\n";
 
@@ -100,7 +101,7 @@ public class Ui {
      * Prints all the tasks in the given task list.
      *
      * @param taskList The list of tasks to be printed.
-     * @param title The preamble to be printed before listing the tasks.
+     * @param title    The preamble to be printed before listing the tasks.
      */
     public void printTaskList(List<Task> taskList, String title) {
         outputBuilder.append(title);
@@ -121,12 +122,10 @@ public class Ui {
     }
 
     /**
-     * <p>
-     *     Prints a message that the given task has been deleted and then
-     *     prints the total number of tasks remaining.
-     * </p>
+     * Prints a message that the given task has been deleted and then
+     * prints the total number of tasks remaining.
      *
-     * @param task The task that is deleted.
+     * @param task         The task that is deleted.
      * @param taskListSize The total number of tasks remaining in the task list
      */
     public void printTaskDeletedMessage(Task task, int taskListSize) {
@@ -136,12 +135,10 @@ public class Ui {
     }
 
     /**
-     * <p>
-     *     Prints a message that the given task has been added and then
-     *     prints the total number of tasks currently.
-     * </p>
+     * Prints a message that the given task has been added and then
+     * prints the total number of tasks currently.
      *
-     * @param task The task that has been added.
+     * @param task         The task that has been added.
      * @param taskListSize The total number of tasks currently in the task list.
      */
     public void printTaskAddedMessage(Task task, int taskListSize) {

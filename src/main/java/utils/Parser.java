@@ -9,9 +9,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 /**
- * <p>
- *     Helps to scan user input and process them into information.
- * </p>
+ * Helps to scan user input and process them into information.
  */
 public class Parser {
 
@@ -52,19 +50,13 @@ public class Parser {
     }
 
     /**
-     * <p>
-     *     Reads and breaks down the content after the "event" action keyword.
-     *     Invalid input argument types or format will be highlighted to the
-     *     user.
-     * </p>
+     * Reads and breaks down the content after the "event" action keyword.
+     * Invalid input argument types or format will be highlighted to the
+     * user.
      *
-     * @return <p>
-     *     If successful, an array of String of length 2 consisting of the Event's
-     *     name and additional info.
-     *
-     *     Else, a null object.
-     * </p>
-     *
+     * @return If successful, an array of String of length 2 consisting of the
+     *     Event Task's name and deadline, a String in the format "DD/MM/YYYY
+     *     HHmm". Else, a null object.
      */
     public String[] parseEventDetail() {
         try {
@@ -80,35 +72,33 @@ public class Parser {
             }
             return taskInfo;
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.addWarningMessage(String.format("\u2639 OOPS!!! There must be exactly one argument before and "
-                    + "one argument after the keyword %s.\n", "/at"));
+            ui.addWarningMessage(String.format("%s OOPS!!! There must be exactly one argument before and "
+                    + "one argument after the keyword %s.\n",
+                    Ui.SAD_EMOTICON,
+                    "/at"));
             return null;
 
         } catch (ParseException e) {
-            ui.addWarningMessage("\u2639 OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\""
+            ui.addWarningMessage(Ui.SAD_EMOTICON
+                    + " OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\""
                     + " and must be valid.\n");
             return null;
 
         } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(String.format("\u2639 OOPS!!! The description of a %s cannot be empty.\n",
+            ui.addWarningMessage(String.format("%s OOPS!!! The description of a %s cannot be empty.\n",
+                    Ui.SAD_EMOTICON,
                     "event"));
             return null;
         }
     }
 
     /**
-     * <p>
-     *     Reads and breaks down the content after the "deadline" action keyword.
-     *     Invalid input argument types or format will be highlighted to the user.
-     * </p>
+     * Reads and breaks down the content after the "deadline" action keyword.
+     * Invalid input argument types or format will be highlighted to the user.
      *
-     * @return <p>
-     *     If successful, an array of String of length 2 consisting of the Deadline
-     *     Task's name and deadline, a String in the format "DD/MM/YYYY HHmm".
-     *
-     *     Else, a null object.
-     * </p>
-     *
+     * @return If successful, an array of String of length 2 consisting of the
+     *     Deadline Task's name and deadline, a String in the format "DD/MM/YYYY
+     *     HHmm". Else, a null object.
      */
     public String[] parseDeadlineDetail() {
         try {
@@ -125,35 +115,33 @@ public class Parser {
             return taskInfo;
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.addWarningMessage(String.format("\u2639 OOPS!!! There must be exactly one argument before and "
-                    + "one argument after the keyword %s.\n", "/by"));
+            ui.addWarningMessage(String.format("%s OOPS!!! There must be exactly one argument before and "
+                    + "one argument after the keyword %s.\n",
+                    Ui.SAD_EMOTICON,
+                    "/by"));
             return null;
 
         } catch (ParseException e) {
-            ui.addWarningMessage("\u2639 OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\" "
+            ui.addWarningMessage(Ui.SAD_EMOTICON
+                    + " OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\" "
                     + "and must be valid.\n");
             return null;
 
         } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(String.format("\u2639 OOPS!!! The description of a %s cannot be empty.\n",
+            ui.addWarningMessage(String.format("%s OOPS!!! The description of a %s cannot be empty.\n",
+                    Ui.SAD_EMOTICON,
                     "deadline"));
             return null;
         }
     }
 
     /**
-     * <p>
-     *     Reads and breaks down the content after the "todo" action keyword.
-     *     Invalid input argument types or format will be highlighted to the
-     *     user.
-     * </p>
+     * Reads and breaks down the content after the "todo" action keyword.
+     * Invalid input argument types or format will be highlighted to the
+     * user.
      *
-     * @return <p>
-     *     If successful, a String representing the Task's name.
-     *
+     * @return If successful, a String representing the Task's name.
      *     Else, a null object.
-     * </p>
-     *
      */
     public String parseTodoDetail() {
         try {
@@ -163,21 +151,18 @@ public class Parser {
             }
             return taskName;
         } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(String.format("\u2639 OOPS!!! The description of a %s cannot be empty.\n", "todo"));
+            ui.addWarningMessage(String.format("%s OOPS!!! The description of a %s cannot be empty.\n",
+                    Ui.SAD_EMOTICON,
+                    "todo"));
             return null;
         }
     }
 
     /**
-     * <p>
-     *     Reads the next integer from user input where the integer must be
-     *     a valid index for the tasks in TaskList.
-     * </p>
+     * Reads the next integer from user input where the integer must be
+     * a valid index for the tasks in TaskList.
      *
-     * @return
-     *     If successful, an Integer representing the task index.
-     *     Else, a null object.
-     *
+     * @return If successful, an Integer representing the task index. Else, a null object.
      */
     public Integer getTaskIdx() {
 
@@ -190,24 +175,33 @@ public class Parser {
 
         } catch (IndexOutOfBoundsException e) {
             if (taskList.isEmpty()) {
-                ui.addWarningMessage(String.format("\u2639 OOPS!!! You have no task at the moment.\n",
+                ui.addWarningMessage(String.format("%s OOPS!!! You have no task at the moment.\n",
+                        Ui.SAD_EMOTICON,
                         1,
                         taskList.size()));
             } else {
-                ui.addWarningMessage(String.format("\u2639 OOPS!!! Task index number must be a number from %d to %d.\n",
+                ui.addWarningMessage(String.format("%s OOPS!!! Task index number must be a number from %d to %d.\n",
+                        Ui.SAD_EMOTICON,
                         1,
                         taskList.size()));
             }
             return null;
 
         } catch (NumberFormatException e) {
-            ui.addWarningMessage(String.format("\u2639 OOPS!!! Task index number must be a number from %d to %d.\n",
+            ui.addWarningMessage(String.format("%s OOPS!!! Task index number must be a number from %d to %d.\n",
+                    Ui.SAD_EMOTICON,
                     1,
                     taskList.size()));
             return null;
         }
     }
 
+    /**
+     * Reads the remaining String from Scanner as the keyword for 'Find' action.
+     * Invalid input argument types or format will be highlighted to the user.
+     *
+     * @return If successful, the keyword in String. Else, a null object.
+     */
     public String parseFindKeyword() {
         try {
             String keyword = sc.nextLine().trim();
@@ -216,7 +210,7 @@ public class Parser {
             }
             return keyword;
         } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage("\u2639 OOPS!!! The keyword for \"find\" cannot be empty.\n");
+            ui.addWarningMessage(Ui.SAD_EMOTICON + " OOPS!!! The keyword for \"find\" cannot be empty.\n");
             return null;
         }
     }

@@ -60,10 +60,11 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Returns a new dialog box with the specified message and image for the user.
+     *
      * @param label     The view object that contains the string of text sent by the user.
      * @param imageView The image representing the user profile.
-     * @return The dialog box showing the user profile imageView and the message content specified
-     * in the label. Dialog box will have imageView on the right and text on the left.
+     * @return A Dialog box with the user's imageView on the right and text on the left.
      */
     public static DialogBox getUserDialog(String label, Image imageView) {
         DialogBox dialogBox = new DialogBox(label, imageView);
@@ -72,10 +73,11 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Returns a new dialog box with the specified message and image for Duke.
+     *
      * @param label     The view object that contains the string of text sent by Duke.
      * @param imageView The image representing Duke's profile.
-     * @return The dialog box showing Duke's profile imageView and the message content specified
-     * in the label. Dialog box will have imageView on the left and text on the right.
+     * @return A Dialog box with Duke's imageView on the left and text on the right.
      */
     public static DialogBox getDukeDialog(String label, Image imageView) {
         var dialogBox = new DialogBox(label, imageView);

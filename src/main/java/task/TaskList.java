@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- *     A singleton that helps to manage the list of task and provides
- *     various operations on tasks.
- * </p>
+ * A singleton that helps to manage the list of task and provides
+ * various operations on tasks.
  */
 public class TaskList {
     private static List<Task> tasks;
@@ -19,10 +17,8 @@ public class TaskList {
     }
 
     /**
-     * <p>
-     *     Returns a new TaskList object that holds a reference to the
-     *     working list.
-     * </p>
+     * Returns a new TaskList object that holds a reference to the
+     * working list.
      *
      * @return an instance of a TaskList object
      */
@@ -55,7 +51,7 @@ public class TaskList {
      * done status.
      *
      * @param taskName The task name of the task.
-     * @param isDone The done status of the newly added task.
+     * @param isDone   The done status of the newly added task.
      * @return The new Todo task.
      */
     public Task addNewTodoTask(String taskName, boolean isDone) {
@@ -73,9 +69,9 @@ public class TaskList {
      * Adds a new Event Task to TaskList with the given task name, additional
      * info and done status.
      *
-     * @param taskName The task name of the task.
+     * @param taskName       The task name of the task.
      * @param additionalInfo The additional info of the Event task.
-     * @param isDone The done status of the newly added task.
+     * @param isDone         The done status of the newly added task.
      * @return The new Event task.
      */
     public Task addNewEventTask(String taskName, String additionalInfo, boolean isDone) {
@@ -93,10 +89,10 @@ public class TaskList {
      * Adds a new Deadline Task to TaskList with the given task name, additional
      * info and done status.
      *
-     * @param taskName The task name of the task.
+     * @param taskName       The task name of the task.
      * @param additionalInfo The additional info of the Deadline task in "DD/MM/YYYY HHmm"
      *                       format.
-     * @param isDone The done status of the newly added task.
+     * @param isDone         The done status of the newly added task.
      * @return The new Deadline task.
      */
     public Task addNewDeadlineTask(String taskName, String additionalInfo, boolean isDone) {
@@ -159,7 +155,7 @@ public class TaskList {
 
     @Override
     public boolean equals(Object obj) {
-        return tasks.equals(((TaskList)obj).getTasks());
+        return tasks.equals(((TaskList) obj).getTasks());
     }
 
 }

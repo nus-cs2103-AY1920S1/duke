@@ -8,10 +8,8 @@ import java.util.HashMap;
 public class CommandCentre {
 
     /**
-     * <p>
-     *     A collection to store and map command names to their
-     *     respective Command.
-     * </p>
+     * A collection to store and map command names to their
+     * respective Command.
      */
     private HashMap<String, Command> commands;
 
@@ -26,7 +24,7 @@ public class CommandCentre {
      * Adds a new Command with its command name into the collection of commands.
      *
      * @param commandName The name of the command to be registered.
-     * @param command The Command object this commandName will map to.
+     * @param command     The Command object this commandName will map to.
      */
     public void register(String commandName, Command command) {
         commands.put(commandName, command);
@@ -47,7 +45,8 @@ public class CommandCentre {
             commands.get(commandName).execute();
             return true;
         } catch (InvalidCommandException e) {
-            Ui.getInstance().addWarningMessage("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            Ui.getInstance().addWarningMessage(Ui.SAD_EMOTICON
+                    + " OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             return false;
         }
     }

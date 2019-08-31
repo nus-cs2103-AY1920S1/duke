@@ -28,11 +28,9 @@ public class Duke {
 
 
     /**
-     * <p>
      * Initializes TaskList, Storage, Ui, Parser objects. Initializes all
      * commands. Clears the existing TaskList in Storage if RESET_TASK_LIST
      * is true.
-     * </p>
      */
     public Duke() {
         taskList = TaskList.newInstance();

@@ -3,16 +3,15 @@ package task;
 public abstract class Task {
     public static int NOT_DONE = 0;
     public static int DONE = 1;
+    private static final String TICK_SYMBOL = "\u2713"; // "✓"
+    private static final String CROSS_SYMBOL = "\u2718"; // "✘"
 
     private String name;
     private int status;
 
     /**
-     * <p>
-     *     Represents a single Task object in TaskList. Newly created Tasks are
-     *     set to NOT_DONE by default.
-     * </p>
-     *
+     * Represents a single Task object in TaskList. Newly created Tasks are
+     * set to NOT_DONE by default.
      *
      * @param name The name of the Task.
      */
@@ -38,10 +37,8 @@ public abstract class Task {
     public abstract String getAdditionalInfo();
 
     /**
-     * <p>
-     *     Returns the additional info in a manner used for printing directly
-     *     to the UI.
-     * </p>
+     * Returns the additional info in a manner used for printing directly
+     * to the UI.
      *
      * @return The additional information of the task in formatted style.
      */
@@ -65,17 +62,17 @@ public abstract class Task {
 
     private String getStatusSymbol() {
         if (status == DONE) {
-            return "\u2713";
+            return TICK_SYMBOL;
         } else {
-            return "\u2718";
+            return CROSS_SYMBOL;
         }
     }
 
     @Override
     public String toString() {
         return String.format("%s%s %s %s", getTypeSymbol(),
-                                           getStatusSymbol(),
-                                           name,
-                                           displayAdditionalInfo());
+                getStatusSymbol(),
+                name,
+                displayAdditionalInfo());
     }
 }

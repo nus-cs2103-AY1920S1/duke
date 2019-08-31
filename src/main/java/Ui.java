@@ -6,6 +6,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    public static final String TAB = "    ";
+    public static final String DIVIDER = "____________________________________________________________";
     public Scanner sc;
 
     /**
@@ -19,21 +21,24 @@ public class Ui {
      * Prints a welcome message to the user.
      */
     public void showWelcome() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________\n");
+        show(DIVIDER);
+        show("Hello! I'm Duke");
+        show("What can I do for you?");
+        show(DIVIDER);
     }
 
     /**
      * Prints a goodbye message to the user.
      */
     public void showBye() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________\n");
+        show(DIVIDER);
+        show("Bye. Hope to see you again soon!");
+        show(DIVIDER);
     }
 
+    public void show(String message) {
+        System.out.println(TAB + message);
+    }
     /**
      * Retrieves error message if file cannot be loaded.
      *

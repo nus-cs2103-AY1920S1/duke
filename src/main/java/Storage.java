@@ -65,9 +65,9 @@ public class Storage {
      *
      * @throws IOException If hard disk cannot be found in the given file path.
      */
-    public void store() throws IOException {
+    public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(getSavedListString());
+        fw.write(getSavedListString(tasks));
         fw.close();
     }
 
@@ -76,10 +76,10 @@ public class Storage {
      *
      * @return All tasks in the list in a simplified format.
      */
-    public static String getSavedListString() {
+    public static String getSavedListString(TaskList tasks) {
         String allTasks = "";
-        for (int i = 0; i < TaskList.myTasks.size(); i++) {
-            allTasks += TaskList.myTasks.get(i).toSave() + "\n";
+        for (int i = 0; i < tasks.getTasks().size() ; i++) {
+            allTasks += tasks.getTasks().get(i).toSave() + "\n";
         }
         return allTasks;
     }

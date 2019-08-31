@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
  */
 public class Duke {
 
+    private Boolean isExit;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -34,14 +35,15 @@ public class Duke {
         new Duke("../../../data/duke.txt").run();
     }
 
-    /**
-     * Enables Duke to read and parse inputs continuously.
-     */
+
     public void run() {
         ui.showWelcome();
-        while (ui.sc.hasNextLine()) {
-            String command = ui.readCommand();
-            Parser.parse(command, tasks, storage, ui);
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
         }
     }
 

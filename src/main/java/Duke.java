@@ -98,7 +98,8 @@ public class Duke {
 
     private void findTask(String searchStr) {
         ui.displaySearchResults(
-            taskList.search(searchStr)
+            taskList.search(searchStr),
+            searchStr
         );
     }
 

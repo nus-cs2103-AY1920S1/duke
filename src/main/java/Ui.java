@@ -10,7 +10,7 @@ public class Ui {
     private static final String BYE_STR = "Bye. Hope to see you again soon!";
     private static final String LIST_STR = "Here are the tasks in your list:";
     private static final String DONE_STR = "Nice! I've marked this task as done:";
-    private static final String SEARCH_STR = "Here are the matching tasks in your list:";
+    private static final String SEARCH_STR = "Here are the tasks matching the following query: ";
 
     private Scanner input = new Scanner(System.in);
 
@@ -92,8 +92,8 @@ public class Ui {
         printListWithPreamble(taskList, LIST_STR);
     }
 
-    public void displaySearchResults(TaskList taskList) {
-        printListWithPreamble(taskList, SEARCH_STR);
+    public void displaySearchResults(TaskList taskList, String query) {
+        printListWithPreamble(taskList, SEARCH_STR + query + "\n");
     }
 
     /**

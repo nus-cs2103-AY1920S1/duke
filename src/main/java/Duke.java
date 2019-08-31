@@ -2,27 +2,50 @@ import Tasks.Deadline;
 import Tasks.Event;
 import Tasks.Task;
 import Tasks.Todo;
+import Tasks.TaskList;
 
+import Exception.DukeException;
 import Exception.IncorrectTaskNameException;
 import Exception.EmptyDeadlineDescriptionException;
 import Exception.EmptyEventDescriptionException;
 import Exception.EmptyTodoDescriptionException;
 
-import java.util.Scanner;
+import Util.Parser;
+import Util.Storage;
+import Util.Ui;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     //variables
     public static ArrayList<Task> storedTasks = new ArrayList<>();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     //main
     public static void main(String[] args) throws Exception {
-        Duke.greet();
-        readInput();
+        new Duke("data/duke.txt").run();
     }
 
     //implementation methods
+    public Duke(String filePath) throws Exception, DukeException {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.readFile());
+            ui = new Ui(tasks, storage);
+        } catch (Exception e) {
+            throw new DukeException("File is empty");
+        }
+    }
+
+    public void run() throws Exception{
+        ui.readInput();
+        storage.closeFile();
+    }
+
+
     public static void readInput() throws IncorrectTaskNameException, EmptyTodoDescriptionException,
             EmptyEventDescriptionException, EmptyDeadlineDescriptionException {
         Scanner scanner = new Scanner(System.in);
@@ -45,7 +68,7 @@ public class Duke {
                 continue;
             }  else if (input.equals("list")){
                 Duke.showList();
-            } else if((input.length() > 5) && input.substring(0, 7).equals("delete ")) {
+            } else if((input.length() > 7) && input.substring(0, 7).equals("delete ")) {
                 int itemIndex = Integer.parseInt(input.substring(7)) - 1;
                 if ((itemIndex + 1) > Duke.storedTasks.size()){
                     System.out.println("failed to delete item, closing now.");
@@ -140,4 +163,5 @@ public class Duke {
     public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
 }

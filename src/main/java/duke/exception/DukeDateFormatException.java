@@ -1,16 +1,9 @@
 package duke.exception;
 
-public class DukeDateFormatException extends Exception {
-
-    private String message;
+public class DukeDateFormatException extends DukeException {
 
     public DukeDateFormatException(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String toString() {
-        return this.message;
+        super(message);
     }
 
 }

@@ -9,10 +9,17 @@ import java.util.ArrayList;
 
 public class TaskList {
 
+    private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
+    private static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
+
     private List<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this(new ArrayList<>());
+    }
+
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     private String generateIndexExceptionMessage(int index) {
@@ -34,13 +41,15 @@ public class TaskList {
         }
     }
 
+    public void markAsDoneAllTasks() throws DukeIllegalIndexException {
+        for (int i = 1; i <= this.taskList.size(); i++) {
+            this.markAsDoneTaskAt(i);
+        }
+    }
+
     // Add task to the back of list and return added Task object
     public void addTask(Task task) {
         this.taskList.add(task);
-    }
-
-    public void addTasks(List<Task> tasksToAdd) {
-        this.taskList.addAll(tasksToAdd);
     }
 
     // Index starts from 1
@@ -82,8 +91,19 @@ public class TaskList {
         return this.taskList.iterator();
     }
 
-    public List<Task> asList() {
-        return this.taskList;
+    public String[] listAll() {
+        if (this.taskList.size() == 0) {
+            return new String[] { DUKE_NO_TASKS };
+        }
+
+        List<String> lines = new ArrayList<>();
+        lines.add(DUKE_LIST_TASKS);
+        for (int i = 0; i < this.taskList.size(); i++) {
+            lines.add(String.format("  %d.%s",
+                    i + 1,
+                    this.taskList.get(i).getStatus()));
+        }
+        return lines.toArray(new String[0]);
     }
 
 }

@@ -1,5 +1,5 @@
 import duke.Duke;
-import java.io.IOException;
+import duke.exception.DukeIOException;
 
 public class Main {
 
@@ -12,7 +12,7 @@ public class Main {
 //        System.out.println("Hello from\n" + logo);
         try {
             (new Duke()).run();
-        } catch (IOException e) {
+        } catch (DukeIOException e) {
             System.err.println("An IOException was caught: " + e.getMessage());
         }
     }

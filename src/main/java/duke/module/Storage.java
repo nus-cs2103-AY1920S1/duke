@@ -1,5 +1,6 @@
 package duke.module;
 
+import duke.exception.DukeIOException;
 import duke.task.Task;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -15,24 +16,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SaveFile {
+public class Storage {
 
     private String cwd;
     private String fileName;
     private File savedFile;
 
-    public SaveFile() throws IOException {
+    public Storage() throws DukeIOException {
         this.cwd = System.getProperty("user.dir") + File.separator + "save-file";
         this.fileName = "tasks.txt";
         this.savedFile = new File(this.cwd + File.separator + this.fileName);
-        this.savedFile.createNewFile();
+        try {
+            this.savedFile.createNewFile();
+        } catch (IOException e) {
+            throw new DukeIOException(e.getMessage());
+        }
     }
 
     public String getAddress() {
         return this.cwd + this.fileName;
     }
 
-    public void saveTasks(TaskList taskList) throws IOException {
+    public void saveTasks(TaskList taskList) throws DukeIOException {
         StringBuilder lines = new StringBuilder();
 
         // Each task's information delimited by " | "
@@ -57,20 +62,28 @@ public class SaveFile {
             lines.append("\n");
         }
 
-        BufferedWriter bw = new BufferedWriter(new FileWriter(this.savedFile));
-        bw.write(lines.toString());
-        bw.close();
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(this.savedFile));
+            bw.write(lines.toString());
+            bw.close();
+        } catch (IOException e) {
+            throw new DukeIOException(e.getMessage());
+        }
     }
 
-    public List<Task> parseFile() throws IOException {
-        List<Task> lines = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(this.savedFile));
-        String line;
-        while ((line = br.readLine()) != null) {
-            lines.add(Parser.parseToTask(line.replace(" | ", "-")));
+    public List<Task> load() throws DukeIOException {
+        try {
+            List<Task> lines = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader(this.savedFile));
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(Parser.parseToTask(line.replace(" | ", "-")));
+            }
+            br.close();
+            return lines;
+        } catch (IOException e) {
+            throw new DukeIOException(e.getMessage());
         }
-        br.close();
-        return lines;
     }
 
 }

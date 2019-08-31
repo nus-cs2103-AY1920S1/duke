@@ -125,6 +125,7 @@ public class MainWindowController {
 
                 ListCell<Task> cell = new CustomListCell();
                 ContextMenu contextMenu = new ContextMenu();
+                // MenuItem for delete task
                 MenuItem deleteItem = new MenuItem();
                 deleteItem.setText("Delete");
                 deleteItem.setOnAction(event -> {
@@ -136,6 +137,7 @@ public class MainWindowController {
                     }
                     refreshView();
                 });
+                // TODO: MenuItem for edit task
                 contextMenu.getItems().add(deleteItem);
                 cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
                     if (isNowEmpty) {

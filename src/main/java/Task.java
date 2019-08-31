@@ -10,6 +10,7 @@ abstract class Task {
         this.task = task;
         this.completed = isCompleted;
     }
+
     public void complete() {
         this.completed = true;
     }

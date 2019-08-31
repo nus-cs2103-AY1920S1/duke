@@ -9,6 +9,7 @@ public class Ui {
     public String getLastCommand() {
         return this.lastCommand;
     }
+
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         this.lastCommand = sc.nextLine();
@@ -18,15 +19,18 @@ public class Ui {
     void showLoadingError() {
         System.out.println("    Error Reading File");
     }
+
     void showMessage(String msg) {
         System.out.println("    " + msg);
     }
+
     void showMessage(int numOfSpace, String msg) {
-        for(int i = 0; i < numOfSpace; i++) {
+        for (int i = 0; i < numOfSpace; i++) {
             System.out.print(" ");
         }
         System.out.println(msg);
     }
+
     void showError(String err) {
         System.out.println("    " + err);
     }

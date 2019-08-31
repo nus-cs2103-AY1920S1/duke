@@ -1,15 +1,16 @@
 public class InvalidDescriptionDukeException extends DukeException {
     String command;
-    String descrption;
+    String description;
+
     public InvalidDescriptionDukeException(String command, String description) {
         super("command:" + command + " description: " + description);
         this.command = command;
-        this.descrption = description;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "OOPS!!! invalid description '" + this.descrption + "' for command '" + this.command + "'";
+        return "OOPS!!! invalid description '" + this.description + "' for command '" + this.command + "'";
     }
 
 }

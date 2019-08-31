@@ -2,6 +2,7 @@ public class DeadlineCommand extends AddCommand {
     public DeadlineCommand() {
 
     }
+
     public boolean isExit() {
         return false;
     }

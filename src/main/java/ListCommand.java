@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public ListCommand() {
 
     }

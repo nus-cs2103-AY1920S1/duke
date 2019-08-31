@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Storage {
     String filePath;
     Ui ui;
+
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
@@ -16,7 +17,7 @@ public class Storage {
                 new File("data").mkdir();
                 file.createNewFile();
                 //ui.showMessage("created new save file");
-            } catch (IOException err){
+            } catch (IOException err) {
                 throw new FileErrorDukeException(filePath);
             }
         } else {
@@ -35,7 +36,7 @@ public class Storage {
     public void writeList(TaskList tasks) {
         try {
             DukeFileWriter.writeToFile(this.filePath, tasks.getList());
-        } catch (IOException err){
+        } catch (IOException err) {
             throw new FileErrorDukeException(filePath);
         }
     }

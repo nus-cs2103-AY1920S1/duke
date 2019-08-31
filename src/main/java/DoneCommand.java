@@ -1,10 +1,11 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     public DoneCommand() {
 
     }
+
     public boolean isExit() {
         return false;
     }

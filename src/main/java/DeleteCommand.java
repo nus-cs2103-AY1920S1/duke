@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     public DeleteCommand() {
     }
 

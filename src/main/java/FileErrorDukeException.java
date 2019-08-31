@@ -1,5 +1,6 @@
-public class FileErrorDukeException extends DukeException{
+public class FileErrorDukeException extends DukeException {
     String filePath;
+
     public FileErrorDukeException(String filePath) {
         super(filePath);
         this.filePath = filePath;

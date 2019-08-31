@@ -1,9 +1,3 @@
-import java.io.FileNotFoundException;
-
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -19,6 +13,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
     private void run() {
         ui.showWelcome();
         ui.straightLine();
@@ -39,7 +34,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filePath= "data/dukeData.txt";
+        String filePath = "data/dukeData.txt";
         new Duke(filePath).run();
     }
 }

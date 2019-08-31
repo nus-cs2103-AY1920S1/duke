@@ -7,7 +7,7 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Enable access to the curent lists of task
+     * Enable access to the current lists of tasks.
      *
      * @param tasks list of tasks created from stored data
      */
@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Adds tasks to the list
+     * Adds tasks to the list.
      *
      * @param task to add to list
      */
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * Delete tasks from the list
+     * Delete tasks from the list.
      *
      * @param taskId the task to delete
      * @return task that was deleted

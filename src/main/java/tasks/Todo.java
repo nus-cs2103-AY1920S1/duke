@@ -3,7 +3,7 @@ package tasks;
 public class Todo extends Task {
 
     /**
-     * Create a new Todo task
+     * Create a new Todo task.
      * @param name description of the task
      */
     public Todo(String name) {
@@ -11,7 +11,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Print in the correct format for storage and retrieval
+     * Print in the correct format for storage and retrieval.
      *
      * @return the task in the required format for storage
      */

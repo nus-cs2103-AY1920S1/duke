@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Print in the correct format for storage and retrieval
+     * Print in the correct format for storage and retrieval.
      *
      * @return the task in the required format for storage
      */

@@ -1,8 +1,8 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
-button {
+.button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
@@ -44,4 +44,24 @@ button {
 
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color, 30%);
+}
+
+.text-field {
+     -fx-background-color: derive(#1d1d1d, 15%);
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #d8d8d8;
+}
+
+.text-box {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #d8d8d8;
+    -fx-border-right: 10px;
+}
+
+.pane-with-border {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-top-width: 1px;
 }

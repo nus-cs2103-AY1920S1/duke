@@ -3,10 +3,8 @@ package duke.command;
 import duke.exception.IllegalDescriptionException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class representing a find command.
@@ -30,17 +28,17 @@ public class FindCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list task to work on.
-     * @param ui an user interface to show messages.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        List<Task> taskList = tasks.getTasks();
-        List<Task> matchingTasks = new ArrayList<>();
+    public CommandResult execute(TaskList tasks) {
+        ArrayList<Task> taskList = tasks.getTasks();
+        ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task: taskList) {
             if (task.toString().toLowerCase().indexOf(keyword) != -1) {
                 matchingTasks.add(task);
             }
         }
-        ui.showMatchingTasks(matchingTasks);
+        return new CommandResult(CommandType.Find, matchingTasks);
     }
 }

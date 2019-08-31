@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.*;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDescriptionException;
 
@@ -18,15 +11,6 @@ import java.time.LocalDateTime;
  */
 public class Parser {
     /**
-     * Returns true if the command is going to terminate the program.
-     * @param command the command to be checked
-     * @return true if the command is going to terminate the program.
-     */
-    public boolean isTerminatingCommand(String command) {
-        return command.equals("bye");
-    }
-
-    /**
      * Returns the command by parsing the command string that typed by the user.
      * @param command the command typed by the user
      * @return the command by parsing the command string that typed by the user.
@@ -36,7 +20,9 @@ public class Parser {
     public Command parseCommand(String command)
             throws IllegalDescriptionException, IllegalCommandException {
         Command cmd;
-        if (command.equals(ListCommand.COMMAND_WORD)) {
+        if (command.equals(ExitCommand.COMMAND_WORD)) {
+            cmd = new ExitCommand();
+        } else if (command.equals(ListCommand.COMMAND_WORD)) {
             cmd = new ListCommand();
         } else {
             int indexOfSpace = command.indexOf(' ');

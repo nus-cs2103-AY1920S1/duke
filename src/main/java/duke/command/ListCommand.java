@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * A class representing a list command.
@@ -18,10 +17,10 @@ public class ListCommand extends Command {
     /**
      * Executes the command.
      * @param tasks a list task to work on.
-     * @param ui an user interface to show messages.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.showTasks(tasks);
+    public CommandResult execute(TaskList tasks) {
+        return new CommandResult(CommandType.List, tasks.getTasks());
     }
 }

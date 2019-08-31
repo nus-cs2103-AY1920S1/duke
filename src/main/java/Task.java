@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * Represents a task to be completed.
+ * Represents a task
+ * Contains a description of the task
  * Contains the list of tasks in an ArrayList
  */
 public class Task {
@@ -20,7 +21,23 @@ public class Task {
      * @param command  Description of task to be added
      */
     public static void addTask(String command) {
-        tasks.add(new Task(command));
+        Task newTask;
+        if (command.contains("event") && command.contains("/at")) {
+            newTask = new Event(command);
+            tasks.add(newTask);
+        } else if (command.contains("deadline") && command.contains("/by")) {
+            newTask = new Deadline(command);
+            tasks.add(newTask);
+        } else if (command.contains("todo")) {
+            newTask = new ToDo(command);
+            tasks.add(newTask);
+        } else {
+            System.out.println("Invalid Entry Format");
+            newTask = new Task(" ");
+        }
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + newTask);
+        System.out.println("    Now you have " + tasks.size() + " tasks in the list");
     }
 
     /**

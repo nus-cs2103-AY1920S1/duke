@@ -38,7 +38,6 @@ public class Duke {
                         Task.markAsDone(command);
                     } else {
                         //Add tasks
-                        System.out.println("    added: " + command);
                         Task.addTask(command);
                     }
                     command = input.nextLine();

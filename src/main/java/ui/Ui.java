@@ -58,7 +58,7 @@ public class Ui {
     }
 
     public void readList(TaskList tasks){
-        System.out.println("     Here are the tasks in your list: ");
+        System.out.println("     Here are the task(s) in your list: ");
         System.out.println(tasks);
         showLine();
     }

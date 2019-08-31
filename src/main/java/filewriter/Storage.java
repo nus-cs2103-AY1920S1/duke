@@ -46,9 +46,9 @@ public class Storage {
             //System.out.println(textToAdd);
         } catch (IOException e) {
             throw new DukeException("failed to write to file");
-<<<<<<< HEAD:src/main/java/filewriter/Storage.java
         }
     }
+
 
     public void editFile(TaskList schedule) throws DukeException{
         try {
@@ -61,22 +61,6 @@ public class Storage {
         }
     }
 
-=======
-        }
-    }
-
-    public void editFile(TaskList schedule) throws DukeException{
-        try {
-            checkAppend(false);
-            for (Task task: schedule.getList()) {
-                fw.write(task.toString() + "\n");
-            }
-        } catch (IOException e) {
-            throw new DukeException("failed to write to file");
-        }
-    }
-
->>>>>>> c15043ac81860360c58b39a9b432b0229f5d4d30:src/main/java/Storage.java
     private void checkAppend(boolean toAppend) throws DukeException{
         closeWriter();
         willAppend = toAppend;

@@ -26,8 +26,6 @@ public class Duke {
             }
         } catch (DukeException exp) {
             ui.showErrorMsg(exp.getMessage());
-        } finally {
-
         }
     }
 
@@ -42,22 +40,22 @@ public class Duke {
         if (sc.hasNextLine()) {
             echo = sc.nextLine();
             while (!echo.equals("bye")) {
-                Command c = (new Parser()).parse(echo);
+                Command cmd = (new Parser()).parse(echo);
                 ui.showLine();
                 try {
                     if (echo.equals("list")) {
                         ui.showTasksInList(tasks);
-                    } else if (c.getCommandType().equals("find")) {
-                      ui.showFoundItems(c.getInstruction(), tasks);
-                    } else if (c.getCommandType().equals("done")) {
+                    } else if (cmd.getCommandType().equals("find")) {
+                      ui.showFoundItems(cmd.getInstruction(), tasks);
+                    } else if (cmd.getCommandType().equals("done")) {
                         try {
-                            if(c.getInstruction().equals("")) {
+                            if(cmd.getInstruction().equals("")) {
                                 throw new DukeException("☹ OOPS!!! Please specify which task is done");
-                            } else if (Integer.parseInt(c.getInstruction()) > tasks.getListSize()) {
-                                throw new DukeException("☹ OOPS!!! Task " + c.getInstruction() + " does not exist");
+                            } else if (Integer.parseInt(cmd.getInstruction()) > tasks.getListSize()) {
+                                throw new DukeException("☹ OOPS!!! Task " + cmd.getInstruction() + " does not exist");
                             } else {
-                                tasks.markAsDone(Integer.parseInt(c.getInstruction()) - 1);
-                                ui.showTaskIsDoneMsg(tasks.getItemAtIndex(Integer.parseInt(c.getInstruction()) - 1));
+                                tasks.markAsDone(Integer.parseInt(cmd.getInstruction()) - 1);
+                                ui.showTaskIsDoneMsg(tasks.getItemAtIndex(Integer.parseInt(cmd.getInstruction()) - 1));
                                 try {
                                     storage.update(tasks.getList());
                                 } catch (Exception exp) {
@@ -68,14 +66,14 @@ public class Duke {
                             ui.showErrorMsg(exp.getMessage());
                         }
 
-                    } else if (c.getCommandType().equals("delete")) {
+                    } else if (cmd.getCommandType().equals("delete")) {
                         try {
-                            if(c.getInstruction().equals("")) {
+                            if(cmd.getInstruction().equals("")) {
                                 throw new DukeException("☹ OOPS!!! Please specify which task is to be deleted");
-                            } else if (Integer.parseInt(c.getInstruction()) > tasks.getListSize()) {
-                                throw new DukeException("☹ OOPS!!! Task " + c.getInstruction() + " does not exist");
+                            } else if (Integer.parseInt(cmd.getInstruction()) > tasks.getListSize()) {
+                                throw new DukeException("☹ OOPS!!! Task " + cmd.getInstruction() + " does not exist");
                             } else {
-                                Task tsk = tasks.removeFromList(Integer.parseInt(c.getInstruction()) - 1);
+                                Task tsk = tasks.removeFromList(Integer.parseInt(cmd.getInstruction()) - 1);
                                 ui.showTaskDeletedMsg(tsk, tasks.getListSize());
                                 try {
                                     storage.update(tasks.getList());
@@ -87,18 +85,18 @@ public class Duke {
                             ui.showErrorMsg(exp.getMessage());
                         }
 
-                    } else if (c.getCommandType().equals("deadline") || c.getCommandType().equals("todo") || c.getCommandType().equals("event")) {
-                        if (c.getCommandType().equals("deadline")) {
+                    } else if (cmd.getCommandType().equals("deadline") || cmd.getCommandType().equals("todo") || cmd.getCommandType().equals("event")) {
+                        if (cmd.getCommandType().equals("deadline")) {
                             try {
-                                if (c.getInstruction().equals("") || c.getInstruction().equals("deadline")) {
+                                if (cmd.getInstruction().equals("") || cmd.getInstruction().equals("deadline")) {
                                     throw new DukeException("☹ OOPS!!! The description of deadline cannot be empty");
                                 } else if (!echo.contains("/by")) {
                                     throw new DukeException("☹ OOPS!!! The deadline must be completed by a certain date");
                                 } else {
                                     try {
                                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                                        tasks.addItemToList(new Deadline(c.getInstruction(),
-                                                formatter.parse(c.getDate())));
+                                        tasks.addItemToList(new Deadline(cmd.getInstruction(),
+                                                formatter.parse(cmd.getDate())));
                                     } catch (java.text.ParseException exp) {
                                         exp.printStackTrace();
                                         break;
@@ -112,12 +110,12 @@ public class Duke {
                             } catch (DukeException exp) {
                                 ui.showErrorMsg(exp.getMessage());
                             }
-                        } else if (c.getCommandType().equals("todo")) {
+                        } else if (cmd.getCommandType().equals("todo")) {
                             try {
-                                if (c.getInstruction().equals("") || c.getInstruction().equals("todo")) {
+                                if (cmd.getInstruction().equals("") || cmd.getInstruction().equals("todo")) {
                                     throw new DukeException("☹ OOPS!!! The description of todo cannot be empty");
                                 } else {
-                                    tasks.addItemToList(new Todo(c.getInstruction()));
+                                    tasks.addItemToList(new Todo(cmd.getInstruction()));
                                     try {
                                         storage.append(tasks.getLastItem());
                                     } catch (Exception exp) {
@@ -127,17 +125,17 @@ public class Duke {
                             } catch (DukeException exp) {
                                 ui.showErrorMsg(exp.getMessage());
                             }
-                        } else if (c.getCommandType().equals("event") || c.getInstruction().equals("event")) {
+                        } else if (cmd.getCommandType().equals("event") || cmd.getInstruction().equals("event")) {
                             try {
-                                if (c.getInstruction().equals("")) {
+                                if (cmd.getInstruction().equals("")) {
                                     throw new DukeException("☹ OOPS!!! The description of event cannot be empty");
                                 } else if (!echo.contains("/at")) {
                                     throw new DukeException("☹ OOPS!!! The event must be at by a certain date");
                                 } else {
                                     try {
                                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                                        tasks.addItemToList(new Event(c.getInstruction(),
-                                                formatter.parse(c.getDate())));
+                                        tasks.addItemToList(new Event(cmd.getInstruction(),
+                                                formatter.parse(cmd.getDate())));
                                     } catch (java.text.ParseException exp) {
                                         exp.printStackTrace();
                                         break;

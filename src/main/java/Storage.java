@@ -25,18 +25,26 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<Task> load() throws IOException {
-        File f = new File(filePath);
+        File file = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
-        Scanner s = new Scanner(f);
-        while(s.hasNextLine()) {
-            String[] task = s.nextLine().replaceAll(", ", ",").split(",");
-            Task tsk;
+        Scanner sc = new Scanner(file);
+        while(sc.hasNextLine()) {
+            String[] task = sc.nextLine().replaceAll(", ", ",").split(",");
+
             if(task[0].equals("T")) {
-                tsk = new Todo(task[2]);
+                Task tsk = new Todo(task[2]);
+                if(task[1].equals("1")) {
+                    tsk.markAsDone();
+                }
+                list.add(tsk);
             } else if(task[0].equals("D")) {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("EEEEE MMMMM dd HH:mm:ss z yyyy");
-                    tsk = new Deadline(task[2], formatter.parse(task[3]));
+                    Task tsk = new Deadline(task[2], formatter.parse(task[3]));
+                    if(task[1].equals("1")) {
+                        tsk.markAsDone();
+                    }
+                    list.add(tsk);
                 } catch (java.text.ParseException exp) {
                     exp.printStackTrace();
                     break;
@@ -44,20 +52,18 @@ public class Storage {
             } else {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("EEEEE MMMMM dd HH:mm:ss z yyyy");
-                    tsk = new Event(task[2], formatter.parse(task[3]));
+                    Task tsk = new Event(task[2], formatter.parse(task[3]));
+                    if(task[1].equals("1")) {
+                        tsk.markAsDone();
+                    }
+                    list.add(tsk);
                 } catch (java.text.ParseException exp) {
                     exp.printStackTrace();
                     break;
                 }
-
             }
-
-            if(task[1].equals("1")) {
-                tsk.markAsDone();
-            }
-            list.add(tsk);
         }
-        s.close();
+        sc.close();
         return list;
     }
 
@@ -67,23 +73,23 @@ public class Storage {
      * @throws IOException
      */
     public void append(Task tsk) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
+        FileWriter fileWriter = new FileWriter(filePath, true);
         String status = tsk.getIsDone() ? "1" : "0";
 
         try {
             if (tsk instanceof Todo) {
-                fw.write("T, " + status + ", " + tsk.getDescription() + "\n");
+                fileWriter.write("T, " + status + ", " + tsk.getDescription() + "\n");
             } else if (tsk instanceof Deadline) {
-                fw.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy() + "\n");
+                fileWriter.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy() + "\n");
             } else if (tsk instanceof Event) {
-                fw.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt() + "\n");
+                fileWriter.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt() + "\n");
             } else {
                 throw new DukeException("☹ OOPS! Error in file handling");
             }
         } catch (DukeException exp) {
-            System.out.println(exp);
+            System.out.println(exp.getMessage());
         }
-        fw.close();
+        fileWriter.close();
     }
 
     /**
@@ -93,23 +99,23 @@ public class Storage {
      */
     public void update(ArrayList<Task> list) throws IOException {
 
-        BufferedWriter bfw = new BufferedWriter(new FileWriter(filePath));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
         int counter = 0;
         while(counter < list.size()) {
             Task tsk = list.get(counter);
             String status = tsk.getIsDone() ? "1" : "0";
             try {
                 if (tsk instanceof Todo) {
-                    bfw.write("T, " + status + ", " + tsk.getDescription());
-                    bfw.newLine();
+                    bufferedWriter.write("T, " + status + ", " + tsk.getDescription());
+                    bufferedWriter.newLine();
                     counter++;
                 } else if (tsk instanceof Deadline) {
-                    bfw.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy());
-                    bfw.newLine();
+                    bufferedWriter.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy());
+                    bufferedWriter.newLine();
                     counter++;
                 } else if (tsk instanceof Event) {
-                    bfw.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt());
-                    bfw.newLine();
+                    bufferedWriter.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt());
+                    bufferedWriter.newLine();
                     counter++;
                 } else {
                     throw new DukeException("☹ OOPS! Error in file handling");
@@ -118,6 +124,6 @@ public class Storage {
                 System.out.println(exp);
             }
         }
-        bfw.close();
+        bufferedWriter.close();
     }
 }

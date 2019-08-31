@@ -20,6 +20,8 @@ public class Parser {
             switch ( details[0] ) {
             case "list":
                 return new ListCommand();
+            case "find":
+                return new FindCommand(details[1]);
             case "done":
                 return new DoneCommand(Integer.parseInt(details[1]) - 1);
             case "delete":
@@ -34,7 +36,19 @@ public class Parser {
                 throw new DukeException("I'm sorry, but I don't know what that means :-( ");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Incorrect format. Missing a task index. \nPlease try again with the following format: " + details[0] + " 3");
+            // If the command misses a description entirely
+            switch ( details[0] ) {
+            case "done":
+            case "delete":
+                throw new DukeException("Incorrect format. Missing a task index. \nPlease try again with the following format: " + details[0] + " 3");
+            case "find":
+                throw new DukeException("Incorrect format. Missing a keyword to find. \nPlease try again with the following format: " + details[0] + " book");
+            default:
+                throw new DukeException("Incorrect format. Please try again.");
+            }
+        } catch (NumberFormatException e) {
+            // If the delete/done commands are followed by strings instead of a number index
+            throw new DukeException("Incorrect format. \n" + details[0] + " should be followed by a number index not a string. \ne.g. " + details[0] + " 3");
         }
     }
 }

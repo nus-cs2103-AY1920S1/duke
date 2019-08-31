@@ -61,7 +61,7 @@ public class Parser {
             throw new DukeException("Hey! You need to give me a search word to look for!");
         }
     }
-    
+
     // parses the arguments for remaining parameters to construct a DoneCommand object
     private static DoneCommand parseDoneCommand(String[] parameters) throws DukeException {
         try {

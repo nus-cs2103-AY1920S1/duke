@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Deals with making sense of user input.
  */
@@ -53,8 +55,14 @@ public class Parser {
                         + "you are looking for!");
             }
 
-            return new KeyCommand(commandSplit[1]);
-
+            ArrayList<String> findWords = new ArrayList<>();
+            for(int i=1; i<commandSplit.length; i++) {
+                findWords.add(commandSplit[i]);
+            }
+            String[] wordsArray = new String[findWords.size()];
+            findWords.toArray(wordsArray);
+            return new KeyCommand(wordsArray);
+            
         case "todo":
         case "deadline":
         case "event":

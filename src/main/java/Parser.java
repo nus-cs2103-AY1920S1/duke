@@ -103,6 +103,9 @@ public class Parser {
             list.add(command.split(order + " ")[1]);
         } else if (order.equals("list") || order.equals("bye")) {
             type = order;
+        } else if (order.equals("find")) {
+            type = "find";
+            list.add(command.split("find ")[1]);
         } else {
             valid = false;
         }

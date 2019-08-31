@@ -27,8 +27,8 @@ public class Duke {
         boolean isExit = false;
         ui.out("What can I do for you?");
         ui.showLine();
-        while(!isExit) {
-            try{
+        while (!isExit) {
+            try {
                 String input = ui.read();
                 Command command = Parser.parse(input);
                 command.execute(taskList, ui, storage);

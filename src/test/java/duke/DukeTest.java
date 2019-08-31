@@ -51,15 +51,14 @@ class DukeTest {
     @Test
     void testCommand() {
         StorageStub storageStub = new StorageStub();
-        UiStub uiStub = new UiStub();
         TaskListStub tasksStub = new TaskListStub();
 
         Command c = new AddCommand(new TaskStub());
-        c.execute(tasksStub, uiStub, storageStub);
+        c.execute(tasksStub, storageStub);
         assertEquals(tasksStub.size(), 1);
 
         c = new DeleteCommand("1");
-        c.execute(tasksStub, uiStub, storageStub);
+        c.execute(tasksStub, storageStub);
         assertEquals(tasksStub.size(), 0);
     }
 }

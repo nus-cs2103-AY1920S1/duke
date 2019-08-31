@@ -1,7 +1,5 @@
 package duke.textual;
 
-import java.util.Scanner;
-
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -14,26 +12,30 @@ import duke.task.Event;
 import duke.task.Todo;
 
 /**
- * Parser for commands entered by the Duke user. It reads from standard input and
- * returns Command objects.
+ * Parser for commands entered by the Duke user, returning Command objects.
  */
 public class Parser {
-    private final Scanner sc = new Scanner(System.in);
-
     /**
-     * Parses a command from its two parts and returns a Command object.
+     * Parses a command, returning a corresponding Command object.
      *
-     * @param cmd The command's first word, which dictates the rest of the
-     *            command's structure.
-     * @param data The data associated with the command, which may be the empty string.
+     * @param cmd The command input from the GUI's entry field.
      * @return The corresponding Command object.
      */
-    private Command parse(String cmd, String data) {
-        switch (cmd) {
-        case "bye":
+    public Command parse(String cmd) {
+        if (cmd.equals("bye")) {
             return new ExitCommand();
-        case "list":
+        }
+        if (cmd.equals("list")) {
             return new ListCommand();
+        }
+
+        String[] parts = cmd.split(" ", 2);
+        if (parts.length == 1) {
+            throw new IllegalArgumentException("Yes, but what comes next?");
+        }
+        String data = parts[1];
+
+        switch (parts[0]) {
         case "done":
             return new DoneCommand(data);
         case "delete":
@@ -47,19 +49,7 @@ public class Parser {
         case "find":
             return new FindCommand(data);
         default:
-            throw new IllegalArgumentException("I'm sorry, but I don't know what that means :-(");
+            throw new IllegalArgumentException("I don't know what that command is.");
         }
-    }
-
-    /**
-     * Scans the next line from standard input, returning a Command. This removes the dependency
-     * on the Scanner class from other classes using this class.
-     *
-     * @return The Command object corresponding to the scanned line.
-     */
-    public Command parseLine() {
-        String cmd = sc.next();
-        String data = sc.nextLine().trim();
-        return parse(cmd, data);
     }
 }

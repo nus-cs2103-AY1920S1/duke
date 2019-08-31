@@ -9,14 +9,14 @@ class AddCommand implements Command {
     }
 
     /**
-     * This method executes the Add Command, which execute the addTask method from the taskList,
-     * adding the task that was given when instantiating the class
+     * Executes the Add Command, which execute the addTask method from the taskList,
+     * adding the task that was given when instantiating the class.
      * 
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
-     * @throws DukeException When error storing.
-     * @see {@link Command#execute(Ui, TaskList, Storage)}
+     * @throws DukeException When there is an error serializing.
+     * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {

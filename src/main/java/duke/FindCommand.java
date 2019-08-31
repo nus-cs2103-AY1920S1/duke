@@ -3,6 +3,7 @@
  */
 class FindCommand implements Command {
     private String findString;
+
     /**
      * Constructor for FindCommand.
      * @param findString The String the user wants to find.
@@ -18,7 +19,8 @@ class FindCommand implements Command {
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file. - Not in use
-     * @throws DukeException
+     * @throws DukeException When failing to get the task.
+     * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
@@ -39,7 +41,7 @@ class FindCommand implements Command {
     }
 
     /**
-     * Returns a boolean whether the current iteration of the task contain the given String
+     * Returns a boolean whether the current iteration of the task contain the given String.
      * 
      * @param task The current iteration of a Task in the task list.
      * @param findString The given String to be found by the user

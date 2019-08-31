@@ -13,10 +13,8 @@ DoneCommand.class
 Duke.class
 DukeManager.class
 Parser.class
-AddCommand$1.class
 ExitCommand.class
 Action.class
 DukeException.class
 ListCommand.class
 Storage.class
-Ui$1.class

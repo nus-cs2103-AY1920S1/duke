@@ -8,15 +8,15 @@ import java.io.File;
 /**
  * Represents a store manager which helps to serialize and deserialize a file.
  * This class is used whenever we change an item in the TaskList, 
- * or when the program starts up initially
+ * or when the program starts up initially.
  */
 class Storage {
     private File tasks;
 
     /**
      * Constructor for Storage. 
-     * <p>
-     * In the DukeManager, the filepath is given "Tasks.sav"
+     * 
+     * <p>In the DukeManager, the filepath is given "Tasks.sav"
      * 
      * @param filePath Indicates the path of the file to be stored at.
      */
@@ -25,7 +25,7 @@ class Storage {
     }
 
     /**
-     * This method serializes the Task List so it can be used again the file is opened.
+     * Serializes the Task List so it can be used again the file is opened.
      * 
      * @param taskList TaskList, an ArrayList which stores Tasks, is being serialized
      * @throws DukeException When there is an error serializing the file.
@@ -45,17 +45,19 @@ class Storage {
 
     /**
      * Returns a Tasklist that is deserialized from the file.
-     * However, if the file is corrupted, it will throw a DukeException error
+     * However, if the file is corrupted, it will throw a DukeException error.
      * 
      * @return a Tasklist that is deserialized from the  file.
      * @throws DukeException When the file is corrupted
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public TaskList retrieve() throws DukeException, IOException, ClassNotFoundException {
+    public TaskList retrieve() throws DukeException {
         if (!this.tasks.exists()) {
             // If the Tasks file does not exist
-            tasks.createNewFile();
+            try {
+                tasks.createNewFile();
+            } catch (Exception e) {
+                throw new DukeException("Oof. Unable to create new sav file.");
+            }
             TaskList taskList = new TaskList();
             store(taskList);
             return taskList;
@@ -63,8 +65,15 @@ class Storage {
             try {
                 // If the Tasks file exist
                 FileInputStream fileIn = new FileInputStream(tasks.getPath());
-                ObjectInputStream in = new ObjectInputStream(fileIn);       
-                Object ob = in.readObject();
+                ObjectInputStream in = new ObjectInputStream(fileIn);     
+                Object ob;  
+                try {
+                    ob = in.readObject();
+                } catch (ClassNotFoundException error) {
+                    fileIn.close();
+                    in.close();
+                    throw new DukeException("Oof. Unable to read the sav file.");
+                }
                 fileIn.close();
                 in.close();
                 if (ob instanceof TaskList) {
@@ -80,7 +89,11 @@ class Storage {
                 }
             } catch (IOException error) {
                 // If the Tasks file is corrupted
-                tasks.createNewFile();
+                try {
+                    tasks.createNewFile();
+                } catch (IOException errorAgain) {
+                    throw new DukeException("Oof. Unable to create new sav file.");
+                }
                 TaskList taskList = new TaskList();
                 store(taskList);
                 throw new DukeException("Oof. Corrupted save file. "

@@ -5,7 +5,7 @@ class DeleteCommand implements Command {
     private Integer taskNumber;
 
     /**
-     * Constructor for Delete Command, which instantiates an Integer of the task to be deleted
+     * Constructor for Delete Command, which instantiates an Integer of the task to be deleted.
      * 
      * @param taskNumber Indicates the task number as in the Task List
      */
@@ -20,7 +20,8 @@ class DeleteCommand implements Command {
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
-     * @see {@link TaskList#deleteTask(int, Ui)}
+     * @see TaskList#deleteTask(int, Ui)
+     * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {

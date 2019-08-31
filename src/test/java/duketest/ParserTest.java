@@ -17,14 +17,14 @@ public class ParserTest {
             Command find = parseManager.parseToCommand("find A TaSk");
             
             // Check if the command is of the correct type
-            if(!(list instanceof ListCommand) ||
-               !(bye instanceof ExitCommand) ||
-               !(done instanceof DoneCommand) ||
-               !(delete instanceof DeleteCommand) ||
-               !(todo instanceof AddCommand) ||
-               !(deadline instanceof AddCommand) ||
-               !(event instanceof AddCommand) ||
-               !(find instanceof FindCommand)) {
+            if (!(list instanceof ListCommand) 
+                    || !(bye instanceof ExitCommand) 
+                    || !(done instanceof DoneCommand) 
+                    || !(delete instanceof DeleteCommand) 
+                    || !(todo instanceof AddCommand) 
+                    || !(deadline instanceof AddCommand) 
+                    || !(event instanceof AddCommand) 
+                    || !(find instanceof FindCommand)) {
                 fail();
             }
         } catch (DukeException e) {
@@ -38,7 +38,7 @@ public class ParserTest {
         String[] failTestCases = {"Fail", "todo", "deadline", "event", "done", "delete",
             "Fail Again", "list list", "exti", "help me", "exit again", "Fail Fail Fail"};
         
-        for(String tests : failTestCases) {
+        for (String tests : failTestCases) {
             try {
                 parseManager.parseToCommand(tests);
                 fail(tests);

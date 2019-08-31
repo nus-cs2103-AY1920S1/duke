@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlineTest {
 
-    private final String TICK = "\u2713";
-    private final String CROSS = "\u2717";
+    private static final String TICK = "✓";     // \u2713
+    private static final String CROSS = "✗";    // \u2717
 
     @Test
     public void instanceTest() {

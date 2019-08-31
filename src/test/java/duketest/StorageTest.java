@@ -2,8 +2,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 
 public class StorageTest { 
     @Test
@@ -18,20 +18,20 @@ public class StorageTest {
     }
 
     @Test
-    public void retreiveTest() throws IOException {
+    public void retreiveTest() throws DukeException {
         File file = new File("RetreiveTest.sav");
-        if(!file.exists()) {
-            file.createNewFile();
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException(e.getMessage());
+            }
         }
         Storage storage = new Storage("RetreiveTest.sav");
         try {
             storage.retrieve();
         } catch (DukeException e) {
             fail();
-        } catch (IOException e) {
-            fail("IOException occured");
-        } catch (ClassNotFoundException e) {
-            fail("ClassNotFoundException occured");
         }
     }
 

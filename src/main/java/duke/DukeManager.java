@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 /**
  * Represents a manager to manage all of the different classes, and act's as the
  * initialization stage of the program.
@@ -16,10 +14,8 @@ class DukeManager {
      * Constructor for DukeManager, which instantiates several other classes as well.
      * 
      * @throws DukeException If there is an error retrieving information.
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public DukeManager() throws DukeException, IOException, ClassNotFoundException {
+    public DukeManager() throws DukeException {
         this.uiManager = new Ui();
         this.storeManager = new Storage("Tasks.sav");
         this.parseManager = new Parser();
@@ -28,14 +24,14 @@ class DukeManager {
     }
 
     /**
-     * This method initializes the Duke program, and recursively reads input
+     * Initializes the Duke program, and recursively reads input
      * and produces and output, unless encountered with a DukeException.
-     * <p>
-     * There are 8 different Commands the user can input:
+     * 
+     * <p>There are 8 different Commands the user can input:
      * list, done, delete, todo, deadline, event, help, bye.
      * This method will end when the user inputs 'bye' or anything else which causes a DukeException.
      * 
-     * @throws DukeException
+     * @throws DukeException When parsing user's input and executing commands.
      */
     public void initializeDuke() throws DukeException {
         uiManager.printWelcome();

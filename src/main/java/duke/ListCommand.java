@@ -3,18 +3,13 @@
  */
 class ListCommand implements Command {
     /**
-     * Default Constructor
-     */
-    public ListCommand() {}
-
-    
-    /**
      * This method executes the List Command, which uses uiManager to list out
      * each line of the task from the taskList.
      * 
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file. - Not in use
+     * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {

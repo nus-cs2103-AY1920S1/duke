@@ -1,4 +1,8 @@
-public class Deadline extends Task{
+package task;
+
+import tool.DateTime;
+
+public class Deadline extends Task {
     protected DateTime by;
 
     public Deadline(String description, DateTime by) {

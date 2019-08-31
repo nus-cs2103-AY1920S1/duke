@@ -1,8 +1,14 @@
+package task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected int status;
 
+    /**
+     * Constructor for task.Task
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -26,7 +32,7 @@ public class Task {
      * @return String to save in the .txt file
      */
     public String storageString() {
-        return "Task|" + status + "|" + description;
+        return "task.Task|" + status + "|" + description;
     }
 
     @Override

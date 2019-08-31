@@ -1,7 +1,11 @@
+package tool;
+
+import task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task>  commands;
+    public ArrayList<Task> commands;
 
     public TaskList(ArrayList<Task> commands) {
         this.commands = commands;

@@ -1,3 +1,7 @@
+package task;
+
+import tool.DateTime;
+
 public class Event extends Task {
     protected DateTime at;
 

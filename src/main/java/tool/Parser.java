@@ -1,4 +1,10 @@
-import java.util.ArrayList;
+package tool;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 
 public class Parser {
     protected TaskList commands;
@@ -13,7 +19,8 @@ public class Parser {
     }
 
     /**
-     * Parses and handles the output for all the commands
+     * Parses the user's input to make sense of all the commands, and hands it over
+     * to tool.TaskList
      * @param command
      */
     public void parse(String command) {
@@ -22,10 +29,9 @@ public class Parser {
             try {
                 if (userCommand.equals("bye")) {
                     this.ui.bye();
-                    this.storage.close();
+                    this.storage.close(this.commands);
                 } else if (userCommand.equals("list")) {
                     this.ui.list();
-                    int count = 1;
                     this.commands.list();
                 } else if (userCommand.equals("done")) {
                     try {

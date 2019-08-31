@@ -1,3 +1,10 @@
+package tool;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -6,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+
 
 public class Storage {
     protected String filePath;
@@ -133,9 +141,19 @@ public class Storage {
         }
     }
 
-    public void close() {
+    public void close(TaskList tasks) {
         try {
-            this.fw.close();
+            FileReader fr = new FileReader(filePath);
+            BufferedReader br = new BufferedReader(fr);
+            FileWriter ff = new FileWriter("src/main/java/data/temp.txt", true);
+            String x;
+            for (Task t : tasks.commands) {
+                    ff.write(t.storageString() + System.lineSeparator());
+                    ff.flush();
+            }
+            ff.close();
+            Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get("src/main/java/data/temp.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }

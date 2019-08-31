@@ -20,12 +20,14 @@ public class Parser {
         switch (command) {
         case "bye":
             return new ExitCommand();
-        case "list":
-            return new ListCommand();
         case "done":
             return new MarkCommand(input);
         case "delete":
             return new DeleteCommand(input);
+        case "find":
+            return new FindCommand(input);
+        case "list":
+            return new ListCommand();
         case "todo":
             return new AddCommand(input);
         case "event":

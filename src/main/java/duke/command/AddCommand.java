@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ParseException {
         ui.showLine();
-        taskList.add(new TodoTask(input));
+        taskList.add(new TodoTask(input.trim()));
         ui.out("Got it. I've added this task:");
         ui.out(taskList.get(taskList.size() - 1).toString());
         ui.out("Now you have " + taskList.size() + " tasks in the list.");

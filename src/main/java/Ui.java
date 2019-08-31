@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Ui {
+
     private Scanner sc;
 
     public Ui() {
@@ -19,12 +20,19 @@ public class Ui {
         System.out.println("    ------------------------------------------------------------");
     }
 
-    public void showError() {
-        System.out.println("    *** Error ***");
+    public void showError(String message) {
+        String output = "    ------------------------------------------------------------\n"
+                + "    \uD83D\uDE41 OOPS!! " + message + " \uD83D\uDE41 \n"
+                + "    ------------------------------------------------------------";
+        System.out.println(output);
     }
 
     public void showLoadingError() {
-        System.out.println("    *** Loading Error ***");
+        System.out.println("* FAILED TO LOAD DATA");
+    }
+
+    public void showLineError(int lineCount, String line) {
+        System.out.println("* Unable to parse line " +lineCount + " : " + line);
     }
 
     public String readCommand() {

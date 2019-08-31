@@ -2,13 +2,12 @@ public class AddEventCommand extends AddCommand {
 
     public AddEventCommand(String line) {
         super(line);
-    }
-
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] arr = super.line.split(" /at ");
-        Task event = new Event(arr[0], arr[1]);
-        tasks.add(event);
-        ui.showAddInformation(event.toString(), tasks.size());
+        try {
+            String[] arr = super.line.split(" /at ");
+            super.task = new Event(arr[0], arr[1]);
+        } catch(ArrayIndexOutOfBoundsException aioobe) {
+            throw new InvalidParameterException(line.isBlank() ? null : line);
+        }
     }
 
     public boolean isExit() {

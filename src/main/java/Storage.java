@@ -6,26 +6,28 @@ import java.io.FileWriter;
 import java.util.stream.Stream;
 
 public class Storage {
+
     private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public Stream<String> load() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            return reader.lines();
-        } catch (IOException io) {
-            System.out.println(io);
-            return Stream.of();
-        }
+    public Stream<String> load() throws IOException{
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        return reader.lines();
     }
 
-    public void save(String db) {
+    public void save(Stream<String> stream) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            writer.write(db);
+            stream.forEach(line-> {
+                try {
+                    writer.write(line);
+                } catch(IOException io) {
+                    System.out.println(io);
+                }
+            });
             writer.close();
         } catch (IOException io) {
             System.out.println(io);

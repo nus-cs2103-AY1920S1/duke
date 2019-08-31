@@ -1,6 +1,6 @@
 public interface Command {
 
-    public void execute(TaskList task, Ui ui, Storage storage);
+    void execute(TaskList task, Ui ui, Storage storage);
 
-    public boolean isExit();
+    boolean isExit();
 }

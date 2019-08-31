@@ -1,9 +1,10 @@
-import java.util.List;
 import java.lang.StringBuffer;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TaskList {
+
     private final List<Task> taskList;
 
     public TaskList() {
@@ -12,7 +13,13 @@ public class TaskList {
 
     public TaskList(Stream<String> lines) {
         this.taskList = new ArrayList<>();
-        lines.forEach(line->taskList.add(Parser.parseLine(line)));
+        lines.forEach(line-> {
+            try {
+                taskList.add(FileLineParser.parse(line));
+            } catch (LineInFileParseException lifpe) {
+                new Ui().showLineError(lifpe.getLineCount(), line);
+            }
+        });
     }
 
     public void add(Task task) {
@@ -45,12 +52,8 @@ public class TaskList {
         return buffer.toString();
     }
 
-    public String save() {
-        StringBuffer buffer = new StringBuffer();
-        for (Task task : taskList) {
-            buffer.append(task.encode() + "\n");
-        }
-        return buffer.toString();
+    public Stream<String> save() {
+        return taskList.stream().map(x->TaskParser.parse(x));
     }
 
 }

@@ -1,11 +1,12 @@
 import java.util.Date;
 
 public class Event extends Task {
+
     private Date at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = Parser.parseDate(at);
+        this.at = DateParser.parse(at);
     }
 
     public Event(String description, Date at, boolean isDone) {
@@ -14,7 +15,7 @@ public class Event extends Task {
     }
 
     public String encode() {
-        return "event," + super.description + "," + super.isDone + "," + Parser.format(at);
+        return "event," + super.description + "," + super.isDone + "," + DateFormatter.format(at);
     }
 
     @Override

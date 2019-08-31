@@ -1,4 +1,5 @@
 public class Todo extends Task {
+
     public Todo(String description) {
         super(description);
     }
@@ -8,7 +9,7 @@ public class Todo extends Task {
     }
 
     public String encode() {
-        return "todo," + super.description + "," + super.isDone + ",null";
+        return "todo," + super.description + "," + super.isDone;
     }
 
     @Override

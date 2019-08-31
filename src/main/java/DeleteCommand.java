@@ -1,5 +1,7 @@
 public class DeleteCommand implements Command {
+
     int index;
+
     public DeleteCommand(String index) {
         this.index = Integer.parseInt(index);
     }

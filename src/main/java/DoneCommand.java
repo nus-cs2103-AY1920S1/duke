@@ -1,5 +1,7 @@
 public class DoneCommand implements Command {
+
     int index;
+
     public DoneCommand(String index) {
         this.index = Integer.parseInt(index);
     }

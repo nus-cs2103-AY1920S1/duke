@@ -5,7 +5,6 @@ package duke.task;
  * the <code>Task</code>.
  */
 public class Todo extends Task {
-
     /**
      * Constructor for <code>Todo</code>.
      * @param description Details about the <code>Todo</code> task.
@@ -26,5 +25,4 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
-
 }

@@ -3,10 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Loads the tasks that were saved in a text document
- * when the program starts up.
- */
 public class DukeReadFile {
 
 	protected static String filePath;
@@ -14,29 +10,22 @@ public class DukeReadFile {
 	protected static ArrayList<Task> ct = new ArrayList<>();
 	static String border = "____________________________________________________________";
 
-	public DukeReadFile(String filePath) {
+	public DukeReadFile (String filePath) {
 
 		this.filePath = filePath;
 	}
 
-	/**
-	 * Creates a file object to read the data saved in a text
-	 * document and loading the tasks to be included in the task
-	 * list when the program starts up.
-	 *
-	 * @throws FileNotFoundException
-	 */
 	public static void readFileContent() throws FileNotFoundException {
 		File savedTask = new File(filePath);
 		Scanner scanner = new Scanner(savedTask);
-		while (scanner.hasNext()) {
+		while(scanner.hasNext()) {
 			currentTask += scanner.nextLine() + "\n";
 		}
 
 
 		String[] addTask = currentTask.split("\n");
 
-		for (int i = 0; i < addTask.length; i++) {
+		for (int i = 0; i < addTask.length; i ++) {
 			if (addTask[i].startsWith("T")) {
 				String[] at = addTask[i].split("/");
 				Todo td = new Todo(at[2]);
@@ -61,19 +50,16 @@ public class DukeReadFile {
 				}
 				ct.add(e);
 			} else {
-
+//				try {
+//					throw new DukeException("OOPS!! Invalid format.");
+//				} catch (DukeException e) {
+//					System.out.println(border + "\n" + e + "\n" + border);
+//				}
 			}
 
 		}
 	}
 
-
-	/**
-	 * Returns an arraylist of the tasks that were loaded
-	 * from the text file.
-	 *
-	 * @return
-	 */
 	public static ArrayList<Task> myTask() {
 
 		return ct;

@@ -1,7 +1,3 @@
-/**
- * Conversion for date and time from dd/mm/yyyy to [date] of [month] [year] format
- * and 24 hour to 12 hour format respectively.
- */
 public class DateAndTime {
 
 	protected String date;
@@ -13,14 +9,7 @@ public class DateAndTime {
 		time = "";
 	}
 
-	/**
-	 * Changing the format of the date from dd/mm/yyyy to
-	 * [date] of [month] [year]
-	 *
-	 * @param date Date of the deadline or event.
-	 * @return Formatted date.
-	 */
-	public String formatDate(String date) {
+	public String formatDate (String date) {
 		String formattedDate = "";
 
 		try {
@@ -41,27 +30,20 @@ public class DateAndTime {
 		return formattedDate;
 	}
 
-	/**
-	 * Changing the format of time from 24-hour clock
-	 * to 12-hour clock.
-	 *
-	 * @param time Time of the deadline or event.
-	 * @return Formatted time.
-	 */
 	public String formatTime(String time) {
 		boolean isString = false;
 		String formattedTime = "";
 		try {
 			int twentyFourTime = Integer.parseInt(time);
-			int twelveHour = (twentyFourTime / 100) % 12;
+			int twelveHour = (twentyFourTime/100) % 12;
 			int twelveMin = twentyFourTime % 100;
-			if (twelveMin > 59 || (twentyFourTime / 100) > 24) {
+			if(twelveMin > 59 || (twentyFourTime/100) >24) {
 				throw new DukeException("Wrong time");
 			}
-			if (twelveMin == 0) {
-				if (twentyFourTime < 1200) {
+			if(twelveMin == 0) {
+				if(twentyFourTime < 1200) {
 					formattedTime = twelveHour + "am";
-				} else {
+				} else{
 					formattedTime = twelveHour + "pm";
 				}
 
@@ -90,16 +72,10 @@ public class DateAndTime {
 
 	}
 
-	/**
-	 * Formatting of the date.
-	 *
-	 * @param day day of the date.
-	 * @return Formatted day.
-	 */
 	public String formatDay(int day) {
 		String dayFormat = "";
 
-		if (day % 10 == 1) {
+		if(day % 10 == 1) {
 			if (day == 11) {
 				dayFormat = day + "th";
 			} else {
@@ -134,12 +110,6 @@ public class DateAndTime {
 		return dayFormat;
 	}
 
-	/**
-	 * Formatting of the month from number form to the name of the month.
-	 *
-	 * @param month
-	 * @return Formatted month.
-	 */
 	public String formatMonth(String month) {
 
 		String translatedMonth = "";
@@ -148,7 +118,7 @@ public class DateAndTime {
 			case "1":
 				translatedMonth = "January";
 				break;
-			case "2":
+		 	case "2":
 				translatedMonth = "February";
 				break;
 			case "3":

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Represents a Find Command.
- * A <code>FindCommand/code> object corresponds to a command with a
+ * A <code>FindCommand</code> object corresponds to a command with a
  * description that starts with "find" and a keyword.
  */
 public class FindCommand extends Command {
@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     private String keyword;
 
     /**
-     * Constructor of FindCommand
+     * Constructor of FindCommand.
      *
      * @param keyword the keyword to find
      */
@@ -27,10 +27,10 @@ public class FindCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
-     * @throws IOException
+     * @throws IOException upon wrong input
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
         ui.printMatchingMsg();
         ArrayList<Task> matchingList = list.findMatching(keyword);
         ui.printMatchingList(matchingList);

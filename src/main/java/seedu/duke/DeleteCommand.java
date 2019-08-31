@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * Represents a Delete Command.
- * A <code>DeleteCommand/code> object corresponds to a command with a description that starts with "delete" and
+ * A <code>DeleteCommand</code> object corresponds to a command with a description that starts with "delete" and
  * contains the index of the task to be deleted.
  */
 public class DeleteCommand extends Command {
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
-     * @throws IOException
+     * @throws IOException upon wrong input
      */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws IOException {

@@ -8,7 +8,7 @@ package seedu.duke;
 public class EmptyDescriptionException extends DukeException {
 
     /**
-     * Constructor of the EmptyDescriptionException class
+     * Constructor of the EmptyDescriptionException class.
      *
      * @param errorMessage the error message to be thrown
      */

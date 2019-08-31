@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Constructor of the Ui class
+     * Constructor of the Ui class.
      */
     public Ui() {
     }
@@ -19,8 +19,8 @@ public class Ui {
      * Prints the greeting message.
      */
     public static void greet() {
-        String message = "Hello! I'm Duke\n" +
-                "What can I do for you?";
+        String message = "Hello! I'm Duke\n"
+                + "What can I do for you?";
         System.out.println(message);
     }
 
@@ -99,7 +99,7 @@ public class Ui {
      * @param list the list of tasks
      */
     public static void printLatest(TaskList list) {
-        System.out.println(list.getTask(list.getSize()-1));
+        System.out.println(list.getTask(list.getSize() - 1));
     }
 
     /**

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * Represents a Done Command.
- * A <code>DoneCommand/code> object corresponds to a command with a description that starts with "done" and
+ * A <code>DoneCommand</code> object corresponds to a command with a description that starts with "done" and
  * contains the index of the task to be marked as done.
  */
 public class DoneCommand extends Command {

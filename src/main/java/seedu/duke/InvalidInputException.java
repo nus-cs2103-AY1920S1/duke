@@ -3,7 +3,7 @@ package seedu.duke;
 /**
  * Represents the exception thrown when the user input is invalid.
  */
-public class InvalidInputException extends DukeException{
+public class InvalidInputException extends DukeException {
 
     /**
      * Constructor of InvalidInputException class.

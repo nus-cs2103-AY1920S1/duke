@@ -2,12 +2,12 @@ package seedu.duke;
 
 /**
  * Represents a List Command.
- * A <code>ListCommand/code> object corresponds to a command with a description "list".
+ * A <code>ListCommand</code> object corresponds to a command with a description "list".
  */
 public class ListCommand extends Command {
 
     /**
-     * Constructor of the ListCommand class
+     * Constructor of the ListCommand class.
      */
     public ListCommand() {
     }

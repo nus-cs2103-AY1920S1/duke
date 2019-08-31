@@ -10,14 +10,14 @@ public class TaskList {
     private static ArrayList<Task> taskList;
 
     /**
-     * Constructor of the Tasklist class
+     * Constructor of the Tasklist class.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();;
     }
 
     /**
-     * Another constructor of the Tasklist class with the list of tasks as parameter
+     * Another constructor of the Tasklist class with the list of tasks as parameter.
      *
      * @param taskList the arraylist of tasks
      */
@@ -72,7 +72,7 @@ public class TaskList {
         ArrayList<Task> matchingList = new ArrayList<>();
 
         for (int i = 0; i < taskList.size(); i++) {
-            if(taskList.get(i).getDescription().contains(keyword)) {
+            if (taskList.get(i).getDescription().contains(keyword)) {
                 matchingList.add(taskList.get(i));
             }
         }

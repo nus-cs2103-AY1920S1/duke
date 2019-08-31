@@ -2,7 +2,7 @@ package seedu.duke;
 
 /**
  * Represents a Exit Command.
- * A <code>ExitCommand/code> object corresponds to a command with a description "bye".
+ * A <code>ExitCommand</code> object corresponds to a command with a description "bye".
  */
 public class ExitCommand extends Command {
 

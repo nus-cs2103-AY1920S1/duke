@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Represents a Deadline Command.
- * A <code>DeadlineCommand/code> object corresponds to a command with a description that starts with "deadline" and
+ * A <code>DeadlineCommand</code> object corresponds to a command with a description that starts with "deadline" and
  * contains a date and time.
  */
 public class DeadlineCommand extends Command {

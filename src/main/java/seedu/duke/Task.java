@@ -12,7 +12,7 @@ public class Task {
     int doneIcon;
 
     /**
-     * Constructor of the Task class
+     * Constructor of the Task class.
      *
      * @param description the description of the task
      */
@@ -38,8 +38,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
         this.doneIcon = 1;
-        System.out.println("Nice! I've marked this task as done:\n" +
-                this);
+        System.out.println("Nice! I've marked this task as done:\n"
+                + this);
     }
 
     /**

@@ -4,14 +4,14 @@ import java.io.IOException;
 
 /**
  * Represents the Todo Command.
- * A <code>TodoCommand/code> object corresponds to a command with a description that starts with "todo".
+ * A <code>TodoCommand</code> object corresponds to a command with a description that starts with "todo".
  */
 public class TodoCommand extends Command {
 
     String command;
 
     /**
-     * Constructor of the Todo command
+     * Constructor of the Todo command.
      *
      * @param command the description of the command
      */

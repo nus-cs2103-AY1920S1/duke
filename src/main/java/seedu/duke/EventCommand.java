@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Represents a Event Command.
- * A <code>EventCommand/code> object corresponds to a command with a description that starts with "event" and
+ * A <code>EventCommand</code> object corresponds to a command with a description that starts with "event" and
  * contains a date and time.
  */
 public class EventCommand extends Command {
@@ -14,7 +14,7 @@ public class EventCommand extends Command {
     Date dateTime;
 
     /**
-     * Constructor of the EventCommand
+     * Constructor of the EventCommand.
      *
      * @param command the description of the command
      * @param dateTime the date and time of the task

@@ -15,7 +15,7 @@ public class Parser {
     private static Date dateTime;
 
     /**
-     * Constructor of the Parser class
+     * Constructor of the Parser class.
      */
     public Parser() {
         indexOfByAt = 0;
@@ -47,8 +47,8 @@ public class Parser {
             return new ExitCommand();
         }
         String[] detailsArray = command.split(" ");
-        if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline") ||
-                detailsArray[0].equals("event"))) {
+        if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline")
+                || detailsArray[0].equals("event"))) {
             throw new EmptyDescriptionException(ui.emptyDescriptionMsg(detailsArray[0]));
         } else {
             switch (detailsArray[0]) {
@@ -80,7 +80,7 @@ public class Parser {
 
 
     /**
-     * Updates the indexOfByAt variable and the dateTime variable according to the array
+     * Updates the indexOfByAt variable and the dateTime variable according to the array.
      *
      * @param detailsArray the array containing the description of the command
      * @throws ParseException if the timestamp is of incorrect format

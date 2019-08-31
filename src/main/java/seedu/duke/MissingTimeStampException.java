@@ -9,7 +9,7 @@ public class MissingTimeStampException extends DukeException {
     /**
      * Constructor of the MissingTimeStampException.
      *
-     * @param errorMessage
+     * @param errorMessage the error message of missing timestamp
      */
     public MissingTimeStampException(String errorMessage) {
         super(errorMessage);

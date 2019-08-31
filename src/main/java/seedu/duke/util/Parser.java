@@ -82,43 +82,43 @@ public class Parser {
             String date = "";
             boolean flag = false;
             switch (dateTimeType) {
-                case "deadline":
-                    for (int i = 1; i < keywords.length; i++) {
-                        if (flag) {
-                            date = date + " " + keywords[i];
-                        } else if (keywords[i].equals("/by")) {
-                            flag = true;
-                        } else {
-                            temp = temp + " " + keywords[i];
-                        }
+            case "deadline":
+                for (int i = 1; i < keywords.length; i++) {
+                    if (flag) {
+                        date = date + " " + keywords[i];
+                    } else if (keywords[i].equals("/by")) {
+                        flag = true;
+                    } else {
+                        temp = temp + " " + keywords[i];
                     }
-                    break;
+                }
+                break;
 
-                case "event":
-                    for (int i = 1; i < keywords.length; i++) {
-                        if (flag) {
-                            date = date + " " + keywords[i];
-                        } else if (keywords[i].equals("/at")) {
-                            flag = true;
-                        } else {
-                            temp = temp + " " + keywords[i];
-                        }
+            case "event":
+                for (int i = 1; i < keywords.length; i++) {
+                    if (flag) {
+                        date = date + " " + keywords[i];
+                    } else if (keywords[i].equals("/at")) {
+                        flag = true;
+                    } else {
+                        temp = temp + " " + keywords[i];
                     }
-                    break;
+                }
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
             if (date.equals("")) {
                 switch (dateTimeType) {
-                    case "deadline":
-                        throw new DukeException("☹ OOPS!!! Your deadline does not have a /by.");
+                case "deadline":
+                    throw new DukeException("☹ OOPS!!! Your deadline does not have a /by.");
 
-                    case "event":
-                        throw new DukeException("☹ OOPS!!! Your event does not have an /at.");
+                case "event":
+                    throw new DukeException("☹ OOPS!!! Your event does not have an /at.");
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             }
             return new String[] {temp.strip(), date.strip()};

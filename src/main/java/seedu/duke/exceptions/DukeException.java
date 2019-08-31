@@ -20,5 +20,5 @@ public class DukeException extends Exception {
      * Overloaded constructor that does not take in a message.
      */
     public DukeException() { }
-    
+
 }

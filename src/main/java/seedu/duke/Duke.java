@@ -16,7 +16,8 @@ public class Duke {
     private UI ui;
     private Storage storageHandler;
     private TaskList taskList;
-    private static final String savedPath = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
+    private static final String savedPath
+            = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
 
 
     /**

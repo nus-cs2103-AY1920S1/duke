@@ -8,7 +8,7 @@ public class UI {
     private Scanner sc;
     private static final String BORDER = "____________________________________________________________";
     private static final String UPPER_BORDER = BORDER + "\n\n";
-    private static final String LOWER_BORDER ="\n" + BORDER + "\n";
+    private static final String LOWER_BORDER = "\n" + BORDER + "\n";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

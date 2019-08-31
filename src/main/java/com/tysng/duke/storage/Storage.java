@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class Storage {
     private final static String FILENAME = "duke.txt";
     private static Path DATA_FOLDER = Path.of(".", "data");
-    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy"); // TODO
+    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
     private Path storageFilePath;
 

@@ -1,7 +1,9 @@
 package duke.command;
 
+import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -25,7 +27,17 @@ public class ByeCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-
+    public Response execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.closeInput();
+        Response toReturn = ui.getGoodByeResponse();
+        if (storage.storageUpdated()) {
+            try {
+                storage.writeToDisk(taskList);
+                toReturn = ui.getDoneWritingAndByeResponse();
+            } catch (DukeException de) {
+                return ui.getWritingErrorAndByeResponse();
+            }
+        }
+        return toReturn;
     }
 }

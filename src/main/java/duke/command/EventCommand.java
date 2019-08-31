@@ -3,6 +3,7 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -30,10 +31,9 @@ public class EventCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printGotIt(newTask);
+    public Response execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(newTask);
-        ui.printNumTasks();
+        return ui.getGotItAddedResponse(newTask);
     }
 
     /**

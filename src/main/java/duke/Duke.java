@@ -5,7 +5,9 @@ import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Response;
 import duke.ui.Ui;
+
 
 /**
  * Class that serves as the main driver for the Duke application.
@@ -14,6 +16,15 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+
+//    /** JavaFX variables. */
+//    private ScrollPane scrollPane;
+//    private VBox dialogContainer;
+//    private TextField userInput;
+//    private Button sendButton;
+//    private Scene scene;
+//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Class constructor that specifies file path to load storage from.
@@ -25,50 +36,35 @@ public class Duke {
         this.storage = new Storage(filepath);
     }
 
-    private void run() {
+    public Duke(){
+        this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
         try {
-            taskList = new TaskList(storage.load());
+            this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
-            taskList = new TaskList();
+            ui.getLoadingErrorResponse();
+            this.taskList = new TaskList();
         }
-        ui.printLogoAndGreet();
-        String command = ui.readLine();
-        Command c;
-        boolean isDone = false;
-        while (!isDone) {
-            try {
-                c = Parser.parse(command);
-                isDone = c.isExit();
-                c.execute(taskList, ui, storage);
-            } catch (DukeException de) {
-                ui.printDukeError(de.getMessage());
-            }
-            if (!isDone) {
-                command = ui.readLine();
-            }
+    }
 
+    private Response process(String input) {
+        Response response;
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(taskList, ui, storage);
+        } catch (DukeException de) {
+            response = ui.getErrorResponse(de.getMessage());
         }
-        //exit program
-        ui.closeInput();
-        if (storage.storageUpdated()) {
-            try {
-                ui.printWritingChanges();
-                storage.writeToDisk(taskList);
-                ui.printDoneWriting();
-            } catch (DukeException de) {
-                ui.showWritingError();
-            }
-        }
-        ui.printGoodbye();
+
+        return response;
     }
 
     /**
-     * Runs the main Duke program.
-     *
-     * @param args Command line arguments.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    public Response getResponse(String input) {
+        Response response = process(input);
+        return response;
     }
 }

@@ -4,6 +4,7 @@ import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -28,17 +29,17 @@ public class DoneCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public Response execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (toComplete >= taskList.size() || toComplete < 0) {
                 throw new DukeException("OOPS! duke.task.Task " + (toComplete + 1) + " doesn't exist!");
             }
             Task curr = taskList.get(toComplete);
             taskList.get(toComplete).setTaskCompleted();
-            ui.printNice(curr);
             storage.setChangedTrue();
+            return ui.getNiceDoneResponse(curr);
         } catch (DukeException de) {
-            ui.printDukeError(de.getMessage());
+            return ui.getErrorResponse(de.getMessage());
         }
     }
 

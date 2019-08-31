@@ -1,3 +1,5 @@
+package duke;
+
 import task.Task;
 import task.TaskType;
 
@@ -20,7 +22,7 @@ public class Storage {
     }
 
     /**
-     * Writes a string to the file path of this Storage object.
+     * Writes a string to the file path of this duke.Storage object.
      *
      * @param textToAdd String that the user wants to write to a file.
      * @throws IOException

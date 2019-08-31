@@ -1,4 +1,9 @@
+import command.Command;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import task.TaskList;
+import exception.DukeException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,8 +15,6 @@ import java.io.IOException;
  * @author Liu Zechu
  */
 public class Duke {
-    public static final String LINE = "    ____________________________________________________________\n";
-    // private static ArrayList<task.Task> tasks;
     private static Storage storage;
     private static Ui ui;
     private static Parser parser;
@@ -41,13 +44,26 @@ public class Duke {
 
     private void run() {
         ui.greet();
-        ui.getUserInput(parser);
+
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.getUserInput();
+                Command c = parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (Exception e) {
+                ui.println("      OOPS!!!");
+            }
+        }
+
+        exitDuke();
     }
 
     /**
      * Saves tasks into hard disk and exits the Duke programme.
      */
-    public static void exitDuke() {
+    private static void exitDuke() {
         String toSave = tasks.convertTasksToString();
         try {
             storage.writeToFile(toSave);
@@ -55,9 +71,5 @@ public class Duke {
             e.printStackTrace();
             System.out.println("FILE NOT SAVED PROPERLY");
         }
-    }
-
-    public static TaskList getTasks() {
-        return tasks;
     }
 }

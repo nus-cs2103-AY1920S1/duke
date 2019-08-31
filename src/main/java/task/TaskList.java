@@ -20,6 +20,18 @@ public class TaskList {
         return tasks;
     }
 
+    public int size() {
+        return tasks.size();
+    }
+
+    public void add(Task task) {
+        tasks.add(task);
+    }
+
+    public Task remove(int index) {
+        return tasks.remove(index);
+    }
+
     /**
      * Converts the list of tasks in this object into its String representation so as to be stored in a text file.
      *

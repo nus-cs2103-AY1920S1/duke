@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
  */
 public class Duke {
 
-    private Boolean isExit;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

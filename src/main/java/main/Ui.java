@@ -55,4 +55,13 @@ public class Ui {
         System.out.println("     " + message);
         System.out.println(border);
     }
+
+    public void printFound(ArrayList<Task> arr) {
+        System.out.println(border);
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < arr.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + arr.get(i));
+        }
+        System.out.println(border);
+    }
 }

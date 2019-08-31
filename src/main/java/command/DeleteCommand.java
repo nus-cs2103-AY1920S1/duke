@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
-    String[] temp;
+    private String[] temp;
 
     public DeleteCommand(String[] temp) {
         this.temp = temp;

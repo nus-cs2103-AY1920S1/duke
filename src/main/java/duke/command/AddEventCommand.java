@@ -9,10 +9,21 @@ import duke.tasks.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Represents the actions to execute when the command 'event' is
+ * triggered.
+ */
+
 public class AddEventCommand extends Command {
 
     private Event event;
 
+    /**
+     * Returns an AddEventCommand object from the commandArray,
+     * an array of words which make up the initial user input
+     * @param commandArray Array of Strings that form the initial user input
+     * @throws DukeException if input doesn't match the format expected
+     */
     public AddEventCommand(String [] commandArray) throws DukeException {
         String eventName = "";
         int i = 1;
@@ -42,6 +53,12 @@ public class AddEventCommand extends Command {
         this.event = new Event(eventName, false, dateTime.toString());
     }
 
+    /**
+     * Adds an Event object into the TaskList as per the command inputted
+     * @param tasks List of Tasks
+     * @param ui User Interface displaying the tasks in the TaskList
+     * @param storage External storage where the list of tasks is stored
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(event);

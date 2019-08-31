@@ -8,11 +8,20 @@ import duke.tasks.TaskList;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Main class of Duke programme
+ */
+
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Inititalises the Duke programme
+     * @param filePath The directory where storage file is stored
+     */
 
     private Duke(String filePath) {
         ui = new Ui();
@@ -24,6 +33,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Main run of the Duke Programme
+     */
 
     private void run() {
         ui.showWelcomeMessage();

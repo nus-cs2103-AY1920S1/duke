@@ -2,6 +2,10 @@ package duke.formats;
 
 import java.text.DateFormatSymbols;
 
+/**
+ * Represents the Date and Time
+ */
+
 public class DateTime {
 
     private String day;
@@ -10,6 +14,10 @@ public class DateTime {
     private String time;
     private String ampm;
 
+    /**
+     * Constructs the DateTime object from a formatted String
+     * @param toDateTime formatted string representing date and time
+     */
     public DateTime(String toDateTime){
         String[] dateAndTime = toDateTime.split(" ");
         String date = dateAndTime[0];
@@ -40,6 +48,10 @@ public class DateTime {
         this.time = hours + "." + String.format("%02d", minutes);
     }
 
+    /**
+     * Returns a formatted String based on the required DateTime format
+     * @return formatted String
+     */
     @Override
     public String toString(){
         return " " + day + " of " + month + " " + year + ", " + time + ampm;

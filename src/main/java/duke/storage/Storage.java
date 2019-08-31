@@ -15,14 +15,28 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage manager of Duke which maintains task data
+ * in a txt file
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructs a storage object
+     * @param filePath the path to the txt file to be maintained
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the information from the file specified by the filepath
+     * and turns it into an ArrayList of tasks
+     * @return ArrayList of tasks
+     * @throws FileNotFoundException if filepath does not direct to a file
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File taskFile = new File(filePath);
         Scanner s = new Scanner(taskFile);
@@ -55,6 +69,12 @@ public class Storage {
         return tasksList;
     }
 
+    /**
+     * Adds a Task into the txt file specified by filepath
+     * @param text String representing tasks in file form
+     * @throws IOException if file cannot be found
+     */
+
     public void writeToFile(String text) throws IOException {
         String textToAppend = text;
         File appendingFile = new File(filePath);
@@ -65,7 +85,12 @@ public class Storage {
         fw.write(textToAppend);
         fw.close();
     }
-
+    /**
+     * Adds a Task into the txt file specified by the pathName param
+     * @param text String representing tasks in file form
+     * @param pathName txt file to write to
+     * @throws IOException if file cannot be found
+     */
     public void writeToFile(String text, String pathName) throws IOException {
         String textToAppend = text;
         File appendingFile = new File(pathName);
@@ -77,6 +102,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Updates the txt file with the current TaskList
+     * @param tasks most recent TaskList
+     * @throws IOException if file cannot be found
+     */
     public void updateFile(TaskList tasks) throws IOException {
         String tempPath = "C:\\Users\\Khairul\\Desktop\\Computing Resources\\CS2103T\\duke\\data\\temp.txt";
         File tempFile = new File(tempPath);

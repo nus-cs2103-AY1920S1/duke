@@ -2,23 +2,33 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 public class Duke {
-    protected Storage storage;
-    protected Ui ui;
-    protected TaskList tasks;
+    private Storage storage;
+    private Ui ui;
+    private TaskList tasks;
 
     /**
-     * Creates a new Duke instance which will load and save Tasks to the provided filePath.
+     * Creates a new Duke instance, operating with a CLI which will load and save Tasks to the provided filePath.
      * Immediately tries to load the tasks from a filePath on instantiation.
      * A loading error will appear if Duke fails to load the tasks located at the filePath.
      *
      * @param filePath A Path instance for where Tasks should be loaded from and saved to.
      */
     public Duke(String filePath) {
-        ui = new UiCli();
-        loadStoreFromFile(filePath);
+        this(new UiCli(), filePath);
     }
 
-    protected Duke() {
+    /**
+     * Creates a new Duke instance with a custom Ui implementation, and will load & save Tasks to the provided filePath.
+     * Immediately tries to load the tasks from a filePath on instantiation.
+     * A loading error will appear if Duke fails to load the tasks located at the filePath.
+     *
+     * @param ui A swappable Ui implementation, could be CLI, curses TUI, JavaFX GUI, Swing GUI, AWT GUI etc.
+     * @param filePath A Path instance for where Tasks should be loaded from and saved to.
+     */
+    public Duke(Ui ui, String filePath) {
+        this.ui = ui;
+        loadStoreFromFile(filePath);
+        ui.displayWelcome();
     }
 
     public static void main(String[] args) {
@@ -34,19 +44,34 @@ public class Duke {
             throw new IllegalStateException("loadStoreFromFile() needs to be called first");
         }
 
-        ui.displayWelcome();
+        if (!(ui instanceof UiCli)) {
+            throw new IllegalStateException(
+                    "ui must be a UiCli instance as the run() function is intended for cli usage"
+            );
+        }
 
         boolean isDone = false;
         while (!isDone) {
             final String input = ((UiCli) ui).nextLine();
-            try {
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isDone = c.isExit();
-            } catch (DukeException exc) {
-                ui.displayError(exc);
-            }
+            isDone = consumeUserInput(input);
         }
+    }
+
+    /**
+     * Executes a user command.
+     *
+     * @param userInput A string representing the user command to execute.
+     * @return Whether Duke should exit.
+     */
+    public boolean consumeUserInput(String userInput) {
+        try {
+            Command c = Parser.parse(userInput);
+            c.execute(tasks, ui, storage);
+            return c.isExit();
+        } catch (DukeException exc) {
+            ui.displayError(exc);
+        }
+        return false;
     }
 
     protected void loadStoreFromFile(String filePath) {

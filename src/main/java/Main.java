@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private DukeGui duke = new DukeGui("./data/duke.txt");
+    private Duke duke;
 
     @Override
     public void start(Stage stage) {
@@ -21,7 +21,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Duke");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+
+            MainWindow mainWindowController = fxmlLoader.getController();
+            duke = new Duke(new UiJavaFx(mainWindowController), "./data/duke.txt");
+            mainWindowController.setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

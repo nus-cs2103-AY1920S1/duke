@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,7 +19,7 @@ public class MainWindow extends VBox {
     @FXML
     private Button sendButton;
 
-    private DukeGui duke;
+    private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -28,7 +29,7 @@ public class MainWindow extends VBox {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(DukeGui d) {
+    public void setDuke(Duke d) {
         duke = d;
     }
 
@@ -39,11 +40,15 @@ public class MainWindow extends VBox {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         userInput.clear();
+        boolean shouldExit = duke.consumeUserInput(input);
+        if (shouldExit) {
+            Platform.exit();
+        }
+    }
+
+    public void addDukeMessage(String dukeOutput) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeOutput, dukeImage));
     }
 }

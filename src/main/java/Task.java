@@ -16,25 +16,74 @@ public class Task {
     }
 
     /**
+     * Determines the type of the task.
+     * Throws exceptions if command input is invalid
+     *
+     * @param command  Description of task to be added
+     * @return type Type of task to be added to task list
+     */
+    public static String checkTaskType(String command) throws DukeException {
+        String type = "";
+        if (command.contains("event")) {
+            if (command.contains("/at")) {
+                type = "event";
+                command = command.substring(5, command.length());
+            } else {
+                throw new DukeException("    OOPS!! The event must include a time after the keyword /at");
+            }
+        } else if (command.contains("deadline")) {
+            if  (command.contains("/by")) {
+                type = "deadline";
+                command = command.substring(8, command.length());
+            } else {
+                throw new DukeException("    OOPS!! The deadline must include a time after the keyword /by");
+            }
+
+        } else if (command.contains("todo")) {
+            type = "todo";
+            command = command.substring(4, command.length());
+            if (command.isEmpty()) {
+                throw new DukeException("    OOPS!! The description of a todo cannot be empty.");
+            }
+        } else {
+            throw new DukeException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (command.equals(" ")) {
+            throw new DukeException("    No command received, please re-enter command.");
+        }
+        return type;
+    }
+
+    /**
      * Adds a new task to the task list
      *
      * @param command  Description of task to be added
+     * @param type Type of task to be added to task list
      */
-    public static void addTask(String command) {
+    public static void addTask(String command, String type) {
+
         Task newTask;
-        if (command.contains("event") && command.contains("/at")) {
-            newTask = new Event(command);
-            tasks.add(newTask);
-        } else if (command.contains("deadline") && command.contains("/by")) {
-            newTask = new Deadline(command);
-            tasks.add(newTask);
-        } else if (command.contains("todo")) {
-            newTask = new ToDo(command);
-            tasks.add(newTask);
-        } else {
-            System.out.println("Invalid Entry Format");
-            newTask = new Task(" ");
+        switch(type) {
+            case "event":
+                newTask = new Event(command);
+                tasks.add(newTask);
+                break;
+
+            case "deadline":
+                newTask = new Deadline(command);
+                tasks.add(newTask);
+                break;
+
+            case "todo":
+                newTask = new ToDo(command);
+                tasks.add(newTask);
+                break;
+
+            default:
+                newTask = new Task(command);
         }
+
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + newTask);
         System.out.println("    Now you have " + tasks.size() + " tasks in the list");

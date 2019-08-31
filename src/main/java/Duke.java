@@ -38,7 +38,12 @@ public class Duke {
                         Task.markAsDone(command);
                     } else {
                         //Add tasks
-                        Task.addTask(command);
+                        try {
+                            String type = Task.checkTaskType(command);
+                            Task.addTask(command, type);
+                        } catch (DukeException e) {
+                            System.out.println(e);
+                        }
                     }
                     command = input.nextLine();
                     break;

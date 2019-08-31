@@ -65,6 +65,8 @@ public class CommandAdd extends Command {
                     Parser.parseDateTimeString(descriptionAndTime[1])
             );
             break;
+        default:
+            throw new DukeException("Unknown task type.");
         }
 
         tasks.add(newTask);

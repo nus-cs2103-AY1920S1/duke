@@ -87,6 +87,8 @@ public class Storage {
                     // read task with deadline
                     taskToRead = new Event(taskDescription, Parser.parseDateTimeString(time));
                     break;
+                default:
+                    throw new DukeException("Unknown task type detected.");
                 }
 
                 // check if the task is marked as done

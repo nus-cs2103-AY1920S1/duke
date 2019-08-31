@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+
 public class Deadline extends Task {
 
     protected String by;
@@ -29,6 +31,9 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        tasks.addItemsToList(new Deadline(c.getInstruction), formatter */
+
         String[] arr = this.by.split(" ");
         timeInString = arr[2];
         time = Integer.parseInt(timeInString);
@@ -65,10 +70,22 @@ public class Deadline extends Task {
             this.by = formattedDateAndTime;
         }
     }
-
+    public String getDescription() {
+        return super.getDescription();
+    }
+    public String getBy() {
+        return by;
+    }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + by + ")";
+    }
+
+    public static Deadline outputAsDeadline(String lineToRead) {
+        String[] descriptionNDate = lineToRead.split("/by");
+        String description = descriptionNDate[0];
+        String by = descriptionNDate[1];
+        return new Deadline(description, by);
     }
 }

@@ -19,23 +19,23 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<Task>();
             Scanner sc = new Scanner(new File(filePath));
             while (sc.hasNextLine()) {
-                String[] task = sc.nextLine().split(" | ");
+                String[] task = sc.nextLine().split(" \\| ");
                 switch (task[0]) {
                 case "[T]":
-                    tasks.add(new Todo(task[2], (task[1].equals("\u2713") ? true : false)));
+                    tasks.add(new Todo(task[2], (task[1].equals("[\u2713]") ? true : false)));
                     break;
                 case "[D]":
-                    tasks.add(new Deadline(task[2], task[3].substring(4), (task[1].equals("\u2713") ? true : false)));
+                    tasks.add(new Deadline(task[2], task[3].substring(4), (task[1].equals("[\u2713]") ? true : false)));
                     break;
                 case "[E]":
-                    tasks.add(new Event(task[2], task[3].substring(4), (task[1].equals("\u2713") ? true : false)));
+                    tasks.add(new Event(task[2], task[3].substring(4), (task[1].equals("[\u2713]") ? true : false)));
                     break;
                 }
             }
             return tasks;
         }
         catch (Exception e) {
-            throw new DukeException("OOPS!!!" + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
     }
 

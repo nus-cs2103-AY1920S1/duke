@@ -9,18 +9,33 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns a tick or a cross as a string depending on whether task is completed.
+     * @return string or cross as a string
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Returns a boolean indicating whether task is completed.
+     * @return boolean if task is completed or not
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Returns description of task as a String.
+     * @return task description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets the boolean isDone as true.
+     */
     public void markAsDone() {
         this.isDone = true;
     }

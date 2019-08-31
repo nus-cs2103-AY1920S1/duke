@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.taskDeadlineString = taskDeadlineString;
     }
 
+    /**
+     * Returns the deadline date as a String as per user input.
+     * @return dateline date as a string
+     */
     public String getTaskDeadlineString() {
         return taskDeadlineString;
     }

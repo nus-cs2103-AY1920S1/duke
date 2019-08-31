@@ -22,6 +22,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks stored in the file and returns them as a list of tasks.
+     * @return list of tasks stored in the text document.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -64,6 +69,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the tasks into the text document.
+     * @param tasks list of tasks
+     */
     public void uploadTasksToFile(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(new File("data/duke.txt"));

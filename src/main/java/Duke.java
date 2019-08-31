@@ -10,6 +10,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor of the program Duke.
+     * @param filePath path of the file that contains the list of stored tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Displays a welcome message and receives user commands continuously until command 'Bye' is entered.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

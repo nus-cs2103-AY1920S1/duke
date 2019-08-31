@@ -11,6 +11,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+
+    /**
+     * Interprets the user's input and returns the respective command.
+     * @param command user's input string
+     * @return command according to user's input
+     * @throws InvalidDescriptionException empty description of task
+     * @throws InvalidCommandException unknown command
+     */
     public static Command parse(String command) throws InvalidDescriptionException, InvalidCommandException {
         String[] splitString = command.split(" ");
         String taskType = splitString[0];

@@ -12,6 +12,10 @@ public class Event extends Task{
         this.eventDateString = eventDateString;
     }
 
+    /**
+     * Returns the event date as a String as per user input.
+     * @return event date as a string
+     */
     public String getEventDateString() {
         return eventDateString;
     }

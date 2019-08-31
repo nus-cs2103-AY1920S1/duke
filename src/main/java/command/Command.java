@@ -6,6 +6,9 @@ import main.Ui;
 
 import java.io.IOException;
 
+/**
+ * Abstract class for command.
+ */
 public abstract class Command {
 
     public abstract void execute(TaskList task, Ui ui, Storage storage) throws IOException;

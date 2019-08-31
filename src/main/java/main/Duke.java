@@ -2,10 +2,12 @@ package main;
 
 import command.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The main driver of the program.
+ */
 public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();
@@ -20,6 +22,9 @@ public class Duke {
 
     }
 
+    /**
+     * Starts the program sequence.
+     */
     public static void run() throws IOException {
 
         Scanner sc = new Scanner(System.in);

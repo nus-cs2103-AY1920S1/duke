@@ -1,19 +1,38 @@
 package command;
 
-import command.*;
 import main.*;
 
 import java.io.IOException;
 
+/**
+ * Represents the command to add a task.
+ */
 public class AddCommand extends Command {
     String input;
     String[] temp;
 
+    /**
+     * Creates an AddCommand object.
+     *
+     * @param input User input taken from the scanner.
+     * @param temp  Parsed String array derived from input.
+     */
     public AddCommand(String input, String[] temp) {
         this.input = input;
         this.temp = temp;
     }
 
+    /**
+     * Adds the given command by creating the associated object and
+     * adding it to the array within task, writing the updated list
+     * to storage and printing the current list size. If no task is added,
+     * input is considered invalid and an error is displayed.
+     *
+     * @param task    The working TaskList object.
+     * @param ui      The working Ui object.
+     * @param storage The working storage object.
+     * @throws IOException If file is not found.
+     */
     public void execute(TaskList task, Ui ui, Storage storage) throws IOException {
 
         DateTime date;

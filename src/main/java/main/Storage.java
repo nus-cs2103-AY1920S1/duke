@@ -12,11 +12,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of tasks on local text file.
+ */
 public class Storage {
 
     String filePath;
     File f;
 
+    /**
+     * Creates a storage object, attempts to read text
+     * file or create the text file if not found.
+     *
+     * @param filePath path of .txt file to be read or saved.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
 
@@ -27,6 +36,13 @@ public class Storage {
         this.f = f;
     }
 
+    /**
+     * Initialize the txt file by copying the contents of the text file
+     * onto a Task array.
+     *
+     * @return Task array.
+     * @throws FileNotFoundException If file is not found.
+     */
     public ArrayList<Task> fileInitialization() throws FileNotFoundException {
 
         Scanner s = new Scanner(f);
@@ -63,12 +79,25 @@ public class Storage {
         return clone;
     }
 
+    /**
+     * Replaces text file with new text file.
+     *
+     * @param textToAdd Content of the new text file.
+     * @throws IOException If the file is not found.
+     */
     public void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Converts the given array of Task into a string that is written onto
+     * the text file.
+     *
+     * @param arr Array of Task to be translated into the text file.
+     * @throws IOException If the file is not found.
+     */
     public void arrayToFile(ArrayList<Task> arr) throws IOException {
         String memo = "";
 

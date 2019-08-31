@@ -5,15 +5,30 @@ import main.TaskList;
 import main.Ui;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 
+/**
+ * Represents the command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     String[] temp;
 
-    public DoneCommand(String[] temp){
+    /**
+     * Creates an DoneCommand object.
+     *
+     * @param temp Parsed String array derived from input.
+     */
+    public DoneCommand(String[] temp) {
         this.temp = temp;
     }
 
+    /**
+     * Marks a task as done, updates the file in storage.
+     *
+     * @param task    The working TaskList object.
+     * @param ui      The working Ui object.
+     * @param storage The working storage object.
+     * @throws IOException If file is not found.
+     */
     public void execute(TaskList task, Ui ui, Storage storage) throws IOException {
         try {
             int index = Integer.parseInt(temp[1]) - 1;

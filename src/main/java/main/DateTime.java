@@ -1,8 +1,16 @@
 package main;
 
+/**
+ * Represents the date and time of a task in the DD/MM/YYYY TTTT format.
+ */
 public class DateTime {
     private int day, month, year, time;
 
+    /**
+     * Constructs the DateTime object.
+     *
+     * @param input the date and time in DD/MM/YYYY TTTT format.
+     */
     public DateTime(String input) throws IndexOutOfBoundsException, DukeException, NumberFormatException {
         String[] rawInput = input.split(" ");
         String[] date = rawInput[0].split("/");

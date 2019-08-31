@@ -6,7 +6,7 @@ public class Parser {
      * @param fullCommand command which is read as a string by the UI.
      * @return Command command which can be executed by application.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) {
         String[] input = fullCommand.split(" ", 2);
         if (input[0].equals("bye")) {
             return new ExitCommand();
@@ -20,9 +20,15 @@ public class Parser {
             return new DeleteCommand(num);
         } else if (input[0].equals("find")) {
             return new FindCommand(input[1].trim());
+        } else if (input[0].length() < 4) {
+            return new ErrorCommand("Invalid input!");
         } else {
             if (input[1].equals("")) {
-                throw new DukeException("The description of a " + input[0] + " cannot be empty.");
+                try {
+                    throw new DukeException("The description of a " + input[0] + " cannot be empty.");
+                } catch (DukeException e) {
+                    return new ErrorCommand(e.toString());
+                }
             }
             Task t;
             switch (input[0]) {
@@ -40,7 +46,11 @@ public class Parser {
                 break;
             }
             default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                try {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                } catch (DukeException e) {
+                    return new ErrorCommand(e.toString());
+                }
             }
             return new AddCommand(t);
 

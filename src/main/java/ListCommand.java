@@ -2,9 +2,9 @@ import java.io.FileNotFoundException;
 
 public class ListCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         //tasks.addTask(taskToAdd);
         storage.updateList(tasks.getList());
-        ui.printList(tasks.getList());
+        return ui.printList(tasks.getList());
     }
 }

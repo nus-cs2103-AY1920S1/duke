@@ -7,10 +7,10 @@ public class DeleteCommand extends Command {
         this.taskNumToDelete = taskNumToDelete;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.deleteTask(taskNumToDelete);
         storage.updateList(tasks.getList());
-        ui.print("Noted. I've removed this task: \n" + t + "\nNow you have "
+        return ("Noted. I've removed this task: \n" + t + "\nNow you have "
                 + tasks.getList().size() + " tasks in the list.");
     }
 }

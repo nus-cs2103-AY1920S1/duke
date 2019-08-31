@@ -3,10 +3,10 @@ import java.io.FileNotFoundException;
 
 public class ExitCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         //tasks.addTask(taskToAdd);
         storage.updateList(tasks.getList());
-        ui.print("Bye. Hope to see you again soon!");
+        return ui.print("Bye. Hope to see you again soon!");
     }
 
     @Override

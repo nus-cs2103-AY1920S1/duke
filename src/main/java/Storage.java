@@ -18,7 +18,9 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
-        Scanner sc1 = new Scanner(file);
+        Scanner sc1 = null;
+        sc1 = new Scanner(file);
+
         while (sc1.hasNextLine()) {
             String[] oldList = sc1.nextLine().split(" / ");
             //System.out.println(Arrays.toString(oldList));
@@ -46,17 +48,20 @@ public class Storage {
      * @param list the current task list
      * @return Nothing
      */
-    public void updateList(ArrayList<Task> list) throws FileNotFoundException {
+    public void updateList(ArrayList<Task> list) {
         File file = new File("C:\\duke\\src\\main\\java\\data\\duke.txt");
-        PrintWriter out = new PrintWriter(file);
-        for (int i = 1; i <= list.size(); i++) {
-            Task t = list.get(i - 1);
-            if (t.symbol.equals("T")) {
-                out.println(t.symbol + " / " + (t.isDone ? 1 : 0) + " / " + t.getDescription());
-            } else {
-                out.println(t.symbol + " / " + (t.isDone ? 1 : 0) + " / " + t.getDescription() + " / " + t.getExtraInfo());
+        try (PrintWriter out = new PrintWriter(file)) {
+            for (int i = 1; i <= list.size(); i++) {
+                Task t = list.get(i - 1);
+                if (t.symbol.equals("T")) {
+                    out.println(t.symbol + " / " + (t.isDone ? 1 : 0) + " / " + t.getDescription());
+                } else {
+                    out.println(t.symbol + " / " + (t.isDone ? 1 : 0) + " / " + t.getDescription() + " / " + t.getExtraInfo());
+                }
             }
+            out.close();
+        } catch (FileNotFoundException e) {
+
         }
-        out.close();
     }
 }

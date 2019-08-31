@@ -7,10 +7,10 @@ public class AddCommand extends Command {
         this.taskToAdd = taskToAdd;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(taskToAdd);
         storage.updateList(tasks.getList());
-        ui.print("Got it. I've added this task: \n" + taskToAdd + "\nNow you have "
+        return ui.print("Got it. I've added this task: \n" + taskToAdd + "\nNow you have "
                 + tasks.getList().size() + " tasks in the list.");
     }
 }

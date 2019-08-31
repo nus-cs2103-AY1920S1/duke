@@ -53,7 +53,7 @@ public class Duke extends Application{
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -62,41 +62,38 @@ public class Duke extends Application{
      * This method runs the application
      */
 
-    public void run() throws FileNotFoundException {
+    public void run() {
         ArrayList<Task> list = tasks.getList();
-        ui.showWelcome();
+        //ui.showWelcome();
         boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+        /*while (!isExit) {
+
+            /*String fullCommand = ui.readCommand();
+            ui.showLine(); // show the divider line ("_______")
+            Command command = Parser.parse(fullCommand);
+            command.execute(tasks, ui, storage);
+            isExit = command.isExit();
+            ui.showLine();
+        }*/
+
     }
 
     /**
      * This is the main method which makes use of run method.
      * @param args Unused.
      * @return Nothing.
-     * @exception FileNotFoundException On file not found error.
-     * @see FileNotFoundException
      */
 
-    public static void main(String[] args) throws FileNotFoundException {
-        new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt").run();
+    public static void main(String[] args) {
+        //new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt").run();
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws FileNotFoundException {
         //Step 1. Setting up required components
 
+
+        //storage.updateList(tasks);
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -188,7 +185,8 @@ public class Duke extends Application{
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = null;
+        dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -203,7 +201,13 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return Parser.parse(input).execute(tasks, ui, storage);
-        //return "Duke heard: " + input;
+        //TaskList taskList = new TaskList(storage.load());;
+        //return Parser.parse(input).execute(tasks, ui, storage);
+        Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
+        //return " " + (storage==null);
+        if (!input.contains("bye"))
+            return Parser.parse(input).execute(duke.tasks, duke.ui, duke.storage);
+        else
+            return "Goodbye!";
     }
 }

@@ -22,6 +22,8 @@ public class Parser {
             return new AddCommand(Deadline.parse(currArray));
         case "event":
             return new AddCommand(Event.parse(currArray));
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException("     OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

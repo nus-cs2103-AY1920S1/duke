@@ -3,7 +3,6 @@ package duke;
 import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.textual.Parser;
 import java.io.FileNotFoundException;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -24,7 +23,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private TaskList tasks;
-    private Parser parser;
     private Storage storage;
 
     private ScrollPane scrollPane;
@@ -41,7 +39,7 @@ public class Main extends Application {
         String resp;
 
         try {
-            Command c = parser.parse(cmd);
+            Command c = Command.parse(cmd);
             resp = c.execute(tasks, storage);
             if (c.isExit()) {
                 Platform.exit();
@@ -64,7 +62,6 @@ public class Main extends Application {
      */
     public Main() {
         storage = new Storage("tasks.txt");
-        parser = new Parser();
         try {
             tasks = new TaskList(storage.read());
         } catch (FileNotFoundException e) {

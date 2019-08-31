@@ -1,14 +1,14 @@
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-import duke.parser.Parser;
 
 public class Duke {
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
+    private TaskList tasks;
 
     /**
      * Initialise new Duke session.
@@ -22,6 +22,10 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     /**
@@ -43,9 +47,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

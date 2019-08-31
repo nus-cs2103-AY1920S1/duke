@@ -18,7 +18,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the Delete Command and removes the task from the Linked List and file.
-     *  @param tasks   The TaskList containing all existing tasks.
+     *
+     * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      */
@@ -28,9 +29,13 @@ public class DeleteCommand extends Command {
         storage.deleteTaskFromFile(tasks.allTasks.get(index));
         tasks.allTasks.remove(index);
         if (tasks.allTasks.size() == 1) {
-            sb.append("\nNow you have ").append(tasks.allTasks.size()).append(" task in the list.");
+            sb.append("\nNow you have ")
+              .append(tasks.allTasks.size())
+              .append(" task in the list.");
         } else {
-            sb.append("\nNow you have ").append(tasks.allTasks.size()).append(" tasks in the list.");
+            sb.append("\nNow you have ")
+              .append(tasks.allTasks.size())
+              .append(" tasks in the list.");
         }
         ui.printMessage(sb.toString());
     }

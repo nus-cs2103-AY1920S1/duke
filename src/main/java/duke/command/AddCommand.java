@@ -5,7 +5,6 @@ import duke.storage.Storage;
 import duke.tasks.*;
 import duke.ui.Ui;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,18 +28,18 @@ public class AddCommand extends Command {
             String[] details;
             this.description = description[1].trim();
             this.type = type;
-            switch (type) {
-                case "todo":
-                    t = new ToDo(parseDescription());
-                    break;
-                case "deadline":
-                    t = new Deadline(parseDescription("/by"), parseDate());
-                    break;
-                case "event":
-                    t = new Event(parseDescription("/at"), parseDate());
-                    break;
-                default:
-                    break;
+            switch ( type ) {
+            case "todo":
+                t = new ToDo(parseDescription());
+                break;
+            case "deadline":
+                t = new Deadline(parseDescription("/by"), parseDate());
+                break;
+            case "event":
+                t = new Event(parseDescription("/at"), parseDate());
+                break;
+            default:
+                break;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The description of a " + type + " cannot be empty");
@@ -49,7 +48,8 @@ public class AddCommand extends Command {
 
     /**
      * Executes the AddCommand, adds the task to the LinkedList and saves it to the file.
-     *  @param tasks   The TaskList containing all existing tasks.
+     *
+     * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      */
@@ -58,9 +58,13 @@ public class AddCommand extends Command {
         tasks.allTasks.add(t);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + t);
         if (tasks.allTasks.size() == 1) {
-            sb.append("\nNow you have ").append(tasks.allTasks.size()).append(" task in the list.");
+            sb.append("\nNow you have ")
+              .append(tasks.allTasks.size())
+              .append(" task in the list.");
         } else {
-            sb.append("\nNow you have ").append(tasks.allTasks.size()).append(" tasks in the list.");
+            sb.append("\nNow you have ")
+              .append(tasks.allTasks.size())
+              .append(" tasks in the list.");
         }
         storage.appendTaskToFile(t);
         ui.printMessage(sb.toString());
@@ -77,6 +81,7 @@ public class AddCommand extends Command {
 
     /**
      * Parses a string and reformats it as a date.
+     *
      * @return The string representation of the new date object.
      */
     public String parseDate() {
@@ -92,6 +97,7 @@ public class AddCommand extends Command {
 
     /**
      * Parses the command description for to-dos and checks if it is empty/null.
+     *
      * @return The parsed description only if it is not empty/null.
      */
     public String parseDescription() {
@@ -104,6 +110,7 @@ public class AddCommand extends Command {
 
     /**
      * Parses the command description with delimiters for events and deadlines, and checks if it is in the correct format.
+     *
      * @param delimiter The delimiter that splits the description.
      * @return The parsed description.
      * @throws DukeException In the event that the command is in the wrong format.

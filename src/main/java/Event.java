@@ -5,16 +5,16 @@ public class Event extends Task {
 
     public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = Parser.parse(at);
+        this.at = Parser.parseDateTime(at);
     }
 
     @Override
     public String toDataString() {
-        return "E | " + super.toDataString() + " | " + Formatter.standardFormat(this.at);
+        return "E | " + super.toDataString() + " | " + Formatter.standardFormatDateTime(this.at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Formatter.prettyFormat(at) + ")";
+        return "[E]" + super.toString() + " (at: " + Formatter.prettyFormatDateTime(at) + ")";
     }
 }

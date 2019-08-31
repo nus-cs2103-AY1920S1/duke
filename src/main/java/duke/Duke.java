@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import javafx.scene.layout.VBox;
 
 public class Duke {
 
@@ -10,21 +11,22 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke() {}
-
     /**
      * Creates an instance of Duke, setting up the UI, storage, and task list.
-     * @param filePath Path to the data file for tasks, used by storage
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        ui = new SystemUi();
+        storage = new Storage(DATA_FILE_TASKS);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public void setupGuiUi(VBox dialogContainer) {
+        ui = new GuiUi(dialogContainer);
     }
 
     /**
@@ -35,17 +37,8 @@ public class Duke {
         ui.showLine();
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command cmd = Parser.parse(fullCommand);
-                cmd.execute(tasks, ui);
-                isExit = cmd.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            } finally {
-                ui.showLine();
-            }
+            String fullCommand = ui.readCommand();
+            isExit = respond(fullCommand);
         }
         try {
             storage.save(tasks.dump());
@@ -59,14 +52,26 @@ public class Duke {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        new Duke(DATA_FILE_TASKS).run();
+        new Duke().run();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns whether the program should exit
+     * @param input Input string
+     * @return Boolean indicating of program should exit
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public boolean respond(String input) {
+        boolean isExit = false;
+        try {
+            ui.showLine();
+            Command cmd = Parser.parse(input);
+            cmd.execute(tasks, ui);
+            isExit = cmd.isExit();
+        } catch (DukeException e) {
+            ui.showError(e);
+        } finally {
+            ui.showLine();
+        }
+        return isExit;
     }
 }

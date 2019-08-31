@@ -5,11 +5,11 @@ public class Parser {
     private ArrayList<String> list = new ArrayList<>();
     private String type;
 
-    public Parser(String command) throws DukeException{
+    public Parser(String command) throws DukeException {
         String[] commandWords = command.split(" ");
         String order = commandWords[0];
-        if (command.split(order  + " ").length == 1 &&
-                (order.equals("event") || order.equals("todo") || order.equals("deadline"))) {
+        if (command.split(order  + " ").length == 1
+                && (order.equals("event") || order.equals("todo") || order.equals("deadline"))) {
             throw new DukeException(" :( OOPS!!! The description of " + order + "s cannot be empty.");
         }
         if (order.equals("todo")) {
@@ -27,14 +27,13 @@ public class Parser {
             String instruction = command.split("event ")[1];
             String[] details = instruction.split(" /at ");
             if (details.length != 2) {
-                throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or Date" +
-                        "and start and end time not provided.");
+                throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or Date"
+                        + "and start and end time not provided.");
             }
             String[] dateAndTime = details[1].split(" ");
             if (dateAndTime.length != 2) {
                 throw new DukeException(" :( OOPS!!! Invalid format. Please enter 'DD/MM/YYYY HHMM-HHMM'");
             }
-            String[] dateArray = dateAndTime[0].split("/");
             if (dateAndTime[1].split("-").length != 2) {
                 throw new DukeException(" :( OOPS!!! Invalid format. Must enter start and end time.");
             }
@@ -44,13 +43,14 @@ public class Parser {
                 startTime = Integer.parseInt(dateAndTime[1].split("-")[0]);
                 endTime = Integer.parseInt(dateAndTime[1].split("-")[1]);
             } catch (NumberFormatException nfe) {
-                throw new DukeException(" :( OOPS!!! Invalid Format. Please enter numbers for date and time in " +
-                        "'DD/MM/YYYY HHMM-HHMM' format");
+                throw new DukeException(" :( OOPS!!! Invalid Format. Please enter numbers for date and time in "
+                        + "'DD/MM/YYYY HHMM-HHMM' format");
             }
             int startHours = startTime / 100;
             int startMinutes = startTime % 100;
             int endHours = endTime / 100;
             int endMinutes = endTime % 100;
+            String[] dateArray = dateAndTime[0].split("/");
             list.add(details[0]);
             list.add(dateArray[0]);
             list.add(dateArray[1]);
@@ -78,8 +78,8 @@ public class Parser {
             try {
                 time = Integer.parseInt(dateAndTime[1]);
             } catch (NumberFormatException nfe) {
-                throw new DukeException(" :( OOPS!!! Invalid Format. Please enter numbers for date and time in " +
-                        "'DD/MM/YYYY HHMM' format");
+                throw new DukeException(" :( OOPS!!! Invalid Format. Please enter numbers for date and time in "
+                        + "'DD/MM/YYYY HHMM' format");
             }
             int hours = time / 100;
             int minutes = time % 100;

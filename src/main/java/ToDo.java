@@ -1,4 +1,4 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
     public ToDo(Parser parser) {
         super(parser.getList().get(0));
     }

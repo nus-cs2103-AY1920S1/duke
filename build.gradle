@@ -6,6 +6,14 @@ plugins {
 group 'seedu.duke'
 version '0.1.0'
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
 repositories {
     mavenCentral()
 }

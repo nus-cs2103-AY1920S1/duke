@@ -31,4 +31,10 @@ public class ListCommand extends Command {
         return false;
     }
 
+    @Override
+    //for testing purpose
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
+
 }

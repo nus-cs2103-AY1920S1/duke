@@ -36,7 +36,9 @@ public abstract class Task implements Serializable {
      * @return string icon depicting a ticked or crossed box.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone
+                ? "\u2713"   // return tick symbol
+                : "\u2718"); // return x symbol
     }
 
     /**
@@ -54,6 +56,9 @@ public abstract class Task implements Serializable {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] "  + description;
+        return "["
+                + this.getStatusIcon()
+                + "] "
+                + description;
     }
 }

@@ -15,22 +15,23 @@ import java.lang.IndexOutOfBoundsException;
  * @see {@link Task}, {@link Event}, {@link Deadline}, {@link Todo}
  */
 public class TaskList implements Serializable {
-    private List<Task> list; // List of all tasks
+    private List<Task> tasks; // List of all tasks
 
     /**
      * Returns a TaskList object with an empty task list
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
+
 
     /**
      * Returns a TaskList object initialized with Task objects found
      * in a List<Task> object
-     * @param list Existing List object containing Task objects.
+     * @param tasks Existing List object containing Task objects.
      */
-    public TaskList(List<Task> list) {
-        this.list = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -40,7 +41,7 @@ public class TaskList implements Serializable {
      * @param taskList Existing TaskList object containing Task objects.
      */
     public TaskList(TaskList taskList) {
-        this.list = taskList.list;
+        this.tasks = taskList.tasks;
     }
 
     /**
@@ -53,7 +54,7 @@ public class TaskList implements Serializable {
     public Task delete(int taskIndex) throws DukeException {
         try {
             taskIndex--; // convert to zero-indexing
-            return this.list.remove(taskIndex);
+            return this.tasks.remove(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Hey! There's no such task!");
         }
@@ -70,7 +71,7 @@ public class TaskList implements Serializable {
     public Task at(int taskIndex) throws DukeException {
         try {
             taskIndex--; // convert to zero-indexing
-            return this.list.get(taskIndex);
+            return this.tasks.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Hey! There's no such task!");
         }
@@ -81,7 +82,7 @@ public class TaskList implements Serializable {
      * @param task
      */
     public void add(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -89,12 +90,12 @@ public class TaskList implements Serializable {
      * @return integer representing the number of Tasks in the TaskList object.
      */
     public int getSize() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     public TaskList getTaskSubsetMatching(String searchWord) {
         List<Task> resultList = new ArrayList<>();
-        this.list.forEach((task) -> {
+        this.tasks.forEach((task) -> {
             if (task.getDescription().contains(searchWord)) {
                 resultList.add(task);
             }
@@ -112,7 +113,7 @@ public class TaskList implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (Task task : this.list) {
+        for (Task task : this.tasks) {
             sb.append(i++);
             sb.append(". ");
             sb.append(task);

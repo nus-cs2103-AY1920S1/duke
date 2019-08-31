@@ -3,9 +3,18 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a storage class which is responsible for saving and loading to and from the save file.
+ */
 public class Storage {
     String filePath;
     Ui ui;
+
+    /**
+     * Constructs a Storage Object to handle saving or loading.
+     * @param filePath the location of the save file.
+     * @param ui the Ui object that is responsible for displaying things.
+     */
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
@@ -24,6 +33,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an arrayList that has all currently stored tasks.
+     * @return an ArrayList containing all the tasks stored.
+     */
     public ArrayList<Task> getData() {
         try {
             return DukeFileReader.getData(filePath);
@@ -32,6 +45,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the given TaskList to the save file.
+     * @param tasks The Tasklist that has all the tasks to be saved.
+     */
     public void writeList(TaskList tasks) {
         try {
             DukeFileWriter.writeToFile(this.filePath, tasks.getList());

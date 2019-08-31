@@ -1,9 +1,19 @@
+/**
+ * Represents a parser that needs to make sense of the user input.
+ */
 public class DukeParser {
-
+    /**
+     * Constructs a Duke Object.
+     */
     public DukeParser() {
 
     }
 
+    /**
+     * Makes sense of the String given to the parser.
+     * @param input The user input
+     * @return returns one the possible commands interpreted from the user input.
+     */
     public static Command parse(String input) {
         String command = input.split(" ")[0].trim(); //get the first word;
         switch (command) {

@@ -1,13 +1,19 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * Represents a deadline task. A deadline task is represented by a name and a time.
+ */
 public class DeadlineTask extends Task {
     String taskName;
     String taskTime;
 
+    /**
+     * Constructs a Deadline Task which is not completed.
+     * @param task a string that defines the deadline task. a deadline task requires a /by to split it's name and time.
+     */
     public DeadlineTask(String task) {
         super(task);
         String[] taskSplit = task.split("/by");
@@ -28,12 +34,23 @@ public class DeadlineTask extends Task {
             throw new InvalidTimeDukeException();
         }
     }
+
+    /**
+     * Constructs a Deadline task.
+     * @param isCompleted Whether or not the task is completed yet.
+     * @param taskName The name of the task.
+     * @param taskTime The Time of the task represented by a string.
+     */
     public DeadlineTask(String isCompleted, String taskName, String taskTime) {
         super(taskName, Boolean.parseBoolean(isCompleted));
         this.taskName = taskName;
         this.taskTime = taskTime;
     }
 
+    /**
+     * Returns a string which represents this task.
+     * @return a String detailing the task's name and time.
+     */
     @Override
     public String toString() {
         String output = "[D]";
@@ -46,6 +63,10 @@ public class DeadlineTask extends Task {
         return output;
     }
 
+    /**
+     * returns a string that is used to store it in the save file.
+     * @return a string specifically formatted for storage.
+     */
     @Override
     public String toFileFormat() {
         String output = "deadline | ";

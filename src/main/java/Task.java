@@ -1,18 +1,28 @@
 public class Task {
     protected String task;
-    protected String status;
+    protected boolean isDone;
 
     public Task (String task) {
         this.task = task;
-        this.status = "\u2718";
+        this.isDone = false;
     }
 
     public void markAsDone() {
-        this.status = "\u2713";
+        this.isDone = true;
+    }
+
+    /**
+     * Returns tick if the task is done,
+     * otherwise returns X.
+     * @return Tick or X string symbol
+     */
+
+    public String getStatusIcon() {
+        return isDone ? "\u2713" : "\u2718";
     }
 
     @Override
     public String toString() {
-        return "[" + this.status + "] " + this.task;
+        return "[" + this.getStatusIcon() + "] " + this.task;
     }
 }

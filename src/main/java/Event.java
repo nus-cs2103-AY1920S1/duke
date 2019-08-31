@@ -1,14 +1,33 @@
-public class Event extends Task {
-    protected String at;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
-    public Event(String desc, String at) {
+public class Event extends Task {
+    private Date date;
+
+    public Event(String desc, String date) {
         super(desc);
-        this.at = at;
+        try {
+            parseTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Reading the date as entered by the user.
+     * Throws ParseException if the format is not met.
+     * @param time of the event in String
+     * @throws ParseException when unable to Parse the date
+     */
+
+    public void parseTime(String time) throws ParseException {
+        this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at : " + at + ")";
+        return "[E]" + super.toString() + " (at : " + this.date + ")";
     }
 
 }

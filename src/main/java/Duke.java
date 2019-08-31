@@ -13,12 +13,14 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        boolean dukeIsRunning = true;
 
-        while (true) {
+        while (dukeIsRunning) {
             String next = sc.nextLine();
             String firstWord = next.split(" ")[0];
             if (next.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                dukeIsRunning = false;
             } else if (next.equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println(i + 1 + ". " + tasks.get(i));

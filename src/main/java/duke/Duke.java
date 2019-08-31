@@ -88,4 +88,8 @@ public class Duke extends Application {
     public List<Task> getTasks() {
         return tasks.getList();
     }
+
+    protected void updateStorage() throws IOException {
+        storage.syncSaveFile(tasks);
+    }
 }

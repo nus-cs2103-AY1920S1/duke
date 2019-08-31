@@ -122,7 +122,30 @@ public class MainWindowController {
         middleListView.setCellFactory(new Callback<ListView<Task>, ListCell<Task>>() {
             @Override
             public ListCell<Task> call(ListView<Task> param) {
-                return new CustomListCell();
+
+                ListCell<Task> cell = new CustomListCell();
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem deleteItem = new MenuItem();
+                deleteItem.setText("Delete");
+                deleteItem.setOnAction(event -> {
+                    duke.getTasks().remove(cell.getItem());
+                    try {
+                        duke.updateStorage();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    refreshView();
+                });
+                contextMenu.getItems().add(deleteItem);
+                cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
+                    if (isNowEmpty) {
+                        cell.setContextMenu(null);
+                    } else {
+                        cell.setContextMenu(contextMenu);
+                    }
+                });
+
+                return cell;
             }
         });
         ObservableList<String> items = FXCollections.observableArrayList(

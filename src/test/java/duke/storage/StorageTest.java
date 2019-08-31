@@ -1,23 +1,18 @@
 package duke.storage;
 
 import duke.task.TaskList;
-import duke.ui.UiStub;
+import duke.ui.MainWindowStub;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -73,20 +68,10 @@ class StorageTest {
     @Test
     void setFilePath_fallbackDirNameInvalid_dirCreationFail() {
         final String INVALID_DIR_NAME = Paths.get("anInvalid","dirName").toString();
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        UiStub outputUi = new UiStub(new PrintStream(outputStream));
+        MainWindowStub outputUi = new MainWindowStub();
         new Storage(INVALID_DIR_NAME, outputUi);
 
-        Scanner uiOutputScanner = new Scanner(new ByteArrayInputStream(outputStream.toByteArray()));
-        StringBuilder uiOutput = new StringBuilder();
-
-        while (uiOutputScanner.hasNextLine()) {
-            uiOutput.append(uiOutputScanner.nextLine());
-            uiOutput.append('\n');
-        }
-        uiOutputScanner.close();
-
-        assertTrue(uiOutput.toString().contains(
+        assertTrue(outputUi.getMessages().contains(
                 String.format(" ☹  Oops! I failed to find a %s directory upwards\n", INVALID_DIR_NAME)));
     }
 
@@ -124,8 +109,7 @@ class StorageTest {
     @Test
     void loadTasksToList_invalidTaskCases_uiErrorMsg() {
         TaskList listOfTasks = new TaskList(); // implementation is simple enough.
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        UiStub outputUi = new UiStub(new PrintStream(outputStream));
+        MainWindowStub outputUi = new MainWindowStub();
 
         final String TEST_TASK_CASE_INVALID_ARGUMENT =
                 "{ type: unknown, done: false, description: 2103ip, time: 01/12/1997 0000 }";
@@ -147,17 +131,8 @@ class StorageTest {
             Storage storage = new Storage(TEST_DIR_NAME + "1", outputUi);
             storage.loadTasksToList(listOfTasks);
 
-            Scanner uiOutputScanner = new Scanner(new ByteArrayInputStream(outputStream.toByteArray()));
-            StringBuilder uiOutput = new StringBuilder();
-
-            while (uiOutputScanner.hasNextLine()) {
-                uiOutput.append(uiOutputScanner.nextLine());
-                uiOutput.append('\n');
-            }
-            uiOutputScanner.close();
-
             assertEquals(0, listOfTasks.getSize());
-            assertTrue(uiOutput.toString().contains(
+            assertTrue(outputUi.getMessages().contains(
                     " ☹  Oops! I encountered an invalid task type value while\n"));
         } catch (IOException ex) {
             fail("IOException encountered when trying to create loadTasksToList test files.\n"

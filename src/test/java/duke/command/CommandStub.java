@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 
 class CommandStub extends Command {
 
@@ -14,12 +14,12 @@ class CommandStub extends Command {
     }
 
     @Override
-    void run(TaskList tasks, Ui ui, Storage storage) {
+    void run(TaskList tasks, MainWindow ui, Storage storage) {
         didRun = true;
     }
 
     @Override
-    void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
+    void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         didValidate = true;
     }
 }

@@ -50,6 +50,12 @@ public class Parser {
                 String[] e = task[1].split(" /at ", 2);
                 return new AddCommand(new Event(e[0].trim(), formatter.parse(e[1])));
             }
+        case "find":
+            if (taskSize < 2) {
+                throw new DukeException(command);
+            } else {
+                return new FindCommand(task[1]);
+            }
         default:
             throw new DukeException();
         }

@@ -1,17 +1,15 @@
-package duke;
-
-import task.Task;
+package task;
 
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -35,18 +33,37 @@ public class TaskList {
         int counter = 1;
 
         //list out all the texts from the user
-        System.out.println("\tHere are the tasks in your list:");
         for (Task t: tasks) {
             System.out.println("\t" + counter + "." + t.toString());
             counter++;
         }
     }
 
+    public void list(ArrayList<Task> taskList) {
+        int counter = 1;
+
+        //list according to given list
+        for (Task t: taskList) {
+            System.out.println("\t" + counter + "." + t.toString());
+            counter++;
+        }
+    }
+
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                taskList.add(task);
+            }
+        }
+        return taskList;
+    }
+
     public int getSize() {
         return tasks.size();
     }
 
-    ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 }

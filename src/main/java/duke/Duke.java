@@ -1,6 +1,8 @@
 package duke;
 
 import command.Command;
+import task.TaskList;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;

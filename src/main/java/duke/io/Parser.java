@@ -11,9 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Represents parser for IO operations.
+ * Interface used by duke to parse information.
  */
 public class Parser {
+    /**
+     * Parses input text into respective command representation.
+     * @param input User input string.
+     * @return Appropriate command representation.
+     * @throws UnsupportedOperationException If command not understood.
+     * @throws ArrayIndexOutOfBoundsException If Event/Deadline details left blank.
+     */
     public static Command parse(String input) throws UnsupportedOperationException, ArrayIndexOutOfBoundsException {
         String command = input.split(" ")[0];
         input = input.replace(command, "").trim();
@@ -65,6 +72,12 @@ public class Parser {
         return desc;
     }
 
+    /**
+     * Returns java date object from input string.
+     * @param details String representation of date.
+     * @return Date object.
+     * @throws ParseException If string representation not in proper format.
+     */
     public static Date getAsDate(String details) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm");
         return format.parse(details);
@@ -72,9 +85,9 @@ public class Parser {
 
     /**
      * Creates Task from stored task data.
-     * @param code Stored task data
-     * @return Task
-     * @throws ParseException Error in stored date data
+     * @param code Stored task data.
+     * @return Appropriate Task.
+     * @throws ParseException Error in stored date data.
      */
     static Task init(String[] code) throws ParseException {
         boolean done = "1".equals(code[1]);

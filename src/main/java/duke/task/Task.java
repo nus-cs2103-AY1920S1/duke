@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a general task
+ * Represents a general task.
  */
 public class Task {
     String description;

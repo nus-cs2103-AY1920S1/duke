@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * Interface used by duke to interact with files.
+ */
 public class Storage {
     private String filePath;
     private File file;
@@ -20,6 +23,11 @@ public class Storage {
         file = new File(filePath);
     }
 
+    /**
+     * Loads all data from file into task list.
+     * @param ui User-Interface for display/messages.
+     * @return TaskList for Duke.
+     */
     public TaskList loadTasks(Ui ui) {
         TaskList taskList = new TaskList();
         try {
@@ -38,6 +46,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes all data from task list to file.
+     * @param taskList from Duke.
+     */
     public void writeTasks(TaskList taskList) {
         try {
             if (taskList.isEmpty() && file.exists()) {

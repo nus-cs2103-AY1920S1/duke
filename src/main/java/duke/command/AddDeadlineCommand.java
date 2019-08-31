@@ -8,6 +8,9 @@ import duke.task.TaskList;
 
 import java.text.ParseException;
 
+/**
+ * Represents an AddCommand, execution creates a new DeadlineTask.
+ */
 public class AddDeadlineCommand extends AddCommand {
     private String[] details;
 

@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Date;
 
 /**
- * Represents a Deadline Task
+ * Represents a Deadline Task.
  */
 public class Deadline extends Task {
     private Date details;

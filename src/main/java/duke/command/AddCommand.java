@@ -7,6 +7,9 @@ import duke.task.TodoTask;
 
 import java.text.ParseException;
 
+/**
+ * Represents an AddCommand, execution creates a new TodoTask.
+ */
 public class AddCommand extends Command {
     private String input;
 

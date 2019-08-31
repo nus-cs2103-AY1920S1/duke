@@ -8,6 +8,9 @@ import duke.task.TaskList;
 
 import java.text.ParseException;
 
+/**
+ * Represents an AddCommand, execution creates a new EventTask.
+ */
 public class AddEventCommand extends AddCommand {
     private String[] details;
 

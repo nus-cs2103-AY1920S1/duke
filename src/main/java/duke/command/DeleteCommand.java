@@ -5,6 +5,9 @@ import duke.io.Storage;
 import duke.io.Ui;
 import duke.task.TaskList;
 
+/**
+ * Represents a delete command, execution removes desired task from list.
+ */
 public class DeleteCommand extends Command {
     private String input;
 

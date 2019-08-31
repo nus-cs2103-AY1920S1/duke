@@ -5,6 +5,9 @@ import duke.io.Storage;
 import duke.io.Ui;
 import duke.task.TaskList;
 
+/**
+ * Represents a 'mark as done' command, execution marks the task as done.
+ */
 public class MarkCommand extends Command {
     private String input;
 

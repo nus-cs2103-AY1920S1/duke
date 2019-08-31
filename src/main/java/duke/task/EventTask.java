@@ -3,7 +3,7 @@ package duke.task;
 import java.util.Date;
 
 /**
- * Represents an Event Task
+ * Represents an Event Task.
  */
 public class EventTask extends Task {
     private Date details;

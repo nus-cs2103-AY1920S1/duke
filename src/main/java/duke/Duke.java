@@ -9,7 +9,7 @@ import duke.task.TaskList;
 import java.text.ParseException;
 
 /**
- *  CS2103 iP Deliverable, Duke
+ *  CS2103 iP Deliverable, Duke.
  *  @author Ahmed Bahajjaj
  */
 public class Duke {
@@ -17,18 +17,25 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Constructor creates ui, storage, and taskList.
+     * @param filePath Path for duke data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.loadTasks(ui);
     }
 
+    /**
+     * Runs the duke To-do Application.
+     */
     public void run() {
         boolean isExit = false;
         ui.out("What can I do for you?");
         ui.showLine();
-        while(!isExit) {
-            try{
+        while (!isExit) {
+            try {
                 String input = ui.read();
                 Command command = Parser.parse(input);
                 command.execute(taskList, ui, storage);

@@ -4,9 +4,15 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * User Interface for Duke.
+ */
 public class Ui {
     private Scanner scanner;
 
+    /**
+     * Constructor creates new scanner to read System-in.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
         showLine();
@@ -30,7 +36,7 @@ public class Ui {
     }
 
     /**
-     * Prints out list of tasks
+     * Prints out list of tasks.
      * @param taskList List of tasks
      */
     public void list(TaskList taskList) {

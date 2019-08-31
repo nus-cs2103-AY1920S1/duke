@@ -9,15 +9,15 @@ import java.util.ArrayList;
  * Class representing a command to delete an item from the task list.
  */
 public class DeleteCommand extends Command {
-    private final String s;
+    private final String str;
 
     /**
      * Creates a new DeleteCommand with the specified index.
      *
-     * @param s The index of the task to delete, where the first task is 1.
+     * @param str The index of the task to delete, where the first task is 1.
      */
-    public DeleteCommand(String s) {
-        this.s = s;
+    public DeleteCommand(String str) {
+        this.str = str;
     }
 
     /**
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tl, Storage storage) {
         int ind;
         try {
-            ind = Integer.parseInt(s);
+            ind = Integer.parseInt(str);
         } catch (NumberFormatException e) {
             return "The task index must be an integer. I didn't do anything.";
         }

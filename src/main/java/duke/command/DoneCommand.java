@@ -9,15 +9,15 @@ import java.util.ArrayList;
  * Class representing a command to mark an item in the task list as done.
  */
 public class DoneCommand extends Command {
-    private final String s;
+    private final String str;
 
     /**
      * Creates a new DoneCommand with the specified index.
      *
-     * @param s The index of the task to mark as done, where the first task is 1.
+     * @param str The index of the task to mark as done, where the first task is 1.
      */
-    public DoneCommand(String s) {
-        this.s = s;
+    public DoneCommand(String str) {
+        this.str = str;
     }
 
     /**
@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tl, Storage storage) {
         int ind;
         try {
-            ind = Integer.parseInt(s);
+            ind = Integer.parseInt(str);
         } catch (NumberFormatException e) {
             return "The task index must be an integer. I didn't do anything.";
         }

@@ -34,35 +34,36 @@ public class NewTaskWindowController {
 
     @FXML
     void confirm(ActionEvent event) {
-        if (datePicker.isVisible()) System.out.println(datePicker.getValue());
-        System.out.println(descriptionTextField.getText());
         TaskList taskList = parentController.getDuke().tasks;
         Storage storage = parentController.getDuke().storage;
-        String selected = typeSelector.getSelectionModel().getSelectedItem();
-        try {
-            switch (selected) {
-            case "To-Do":
-                taskList.addTask(new ToDo(descriptionTextField.getText()), storage);
-                break;
-            case "Deadline":
-                taskList.addTask(
-                        new Deadline(descriptionTextField.getText(),
-                                datePicker.getValue().atTime(0, 0)),
-                        storage);
-                break;
-            case "Event":
-                taskList.addTask(
-                        new Event(descriptionTextField.getText(),
-                                datePicker.getValue().atTime(0, 0)),
-                        storage);
-                break;
-            default:
-                break;
+        if (!typeSelector.getSelectionModel().isEmpty()) {
+            String selected = typeSelector.getSelectionModel().getSelectedItem();
+            try {
+                switch (selected) {
+                case "To-Do":
+                    taskList.addTask(new ToDo(descriptionTextField.getText()), storage);
+                    break;
+                case "Deadline":
+                    taskList.addTask(
+                            new Deadline(descriptionTextField.getText(),
+                                    datePicker.getValue().atTime(0, 0)),
+                            storage);
+                    break;
+                case "Event":
+                    taskList.addTask(
+                            new Event(descriptionTextField.getText(),
+                                    datePicker.getValue().atTime(0, 0)),
+                            storage);
+                    break;
+                default:
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            System.out.println(e);
+            parentController.refreshView();
         }
-        parentController.refreshView();
+
         ((Stage) confirmButton.getScene().getWindow()).close();
     }
 
@@ -94,7 +95,6 @@ public class NewTaskWindowController {
                 default:
                     break;
                 }
-                System.out.println();
             }
         });
     }

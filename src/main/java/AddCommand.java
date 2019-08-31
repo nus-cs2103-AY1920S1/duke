@@ -9,7 +9,7 @@ public class AddCommand extends Command {
     final String timePattern = "d MMMM yyyy, h:mma";
     DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(timePattern);
 
-    public AddCommand(String taskCmd){
+    public AddCommand(String taskCmd) {
         super();
         this.taskCmd = taskCmd;
     }
@@ -18,7 +18,7 @@ public class AddCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
         String taskName;
         String[] userWords;
-        switch(taskCmd) {
+        switch (taskCmd) {
         case "todo":
             taskName = ui.readDesc().trim();
             if (taskName.isEmpty()) {
@@ -36,10 +36,11 @@ public class AddCommand extends Command {
                 throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty or is wrongly typed.");
             }
             try {
-                LocalDateTime dateObj = LocalDateTime.parse(userWords[1].trim(), DateTimeFormatter.ofPattern("d/MM/yyyy Hmm"));
+                LocalDateTime dateObj = LocalDateTime.parse(userWords[1].trim(),
+                        DateTimeFormatter.ofPattern("d/MM/yyyy Hmm"));
                 String date = dateObj.format(dateTimeFormat);
                 tasks.addTask(new Deadline(userWords[0].trim(), date));
-            }catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 throw new DukeException("Could not recognise date and time. Please follow the format: dd/mm/yyyy HHmm");
             }
             break;
@@ -54,6 +55,8 @@ public class AddCommand extends Command {
             }
             tasks.addTask(new Event(userWords[0].trim(), userWords[1].trim()));
             break;
+        default:
+            throw new DukeException("Wrong type of command entered");
         }
     }
 }

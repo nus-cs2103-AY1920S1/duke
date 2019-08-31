@@ -1,7 +1,7 @@
 public class Parser {
 
     public static Command parse(String userCmd) throws DukeException {
-        switch(userCmd){
+        switch (userCmd) {
         case "list":
             return new ListCommand();
         case "done":

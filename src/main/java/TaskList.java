@@ -33,13 +33,13 @@ public class TaskList {
         }
     }
 
-    public void setDoneTask(int doneIndex){
+    public void setDoneTask(int doneIndex) {
         list.get(doneIndex - 1).markAsDone();
         System.out.println("Nice! I've marked this task as done:\n"
                 + list.get(doneIndex - 1));
     }
 
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return list;
     }
 }

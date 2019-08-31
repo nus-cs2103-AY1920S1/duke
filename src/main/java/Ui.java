@@ -5,7 +5,7 @@ public class Ui {
     final String lineSpace = "_______________________________\n";
     private Scanner sc;
 
-    public Ui(){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
@@ -19,30 +19,30 @@ public class Ui {
         System.out.println("Hello from\n" + logo + startMessage);
     }
 
-    public void showGoodbye(){
+    public void showGoodbye() {
         String endMessage = "Bye. Hope to see you again!";
         System.out.println(endMessage);
     }
 
-    public void showLine(){
+    public void showLine() {
         System.out.print(lineSpace);
     }
 
-    public void showError(String error){
+    public void showError(String error) {
         System.out.println(error);
     }
 
-    public String readCommand(){
+    public String readCommand() {
         String userCmd = sc.next();
         return userCmd;
     }
 
-    public String readDesc(){
+    public String readDesc() {
         String desc = sc.nextLine();
         return desc;
     }
 
-    public int readIndex(){
+    public int readIndex() {
         int index = sc.nextInt();
         return index;
     }

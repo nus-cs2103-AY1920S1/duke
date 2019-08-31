@@ -13,12 +13,12 @@ public class Event extends Task {
     }
 
     @Override
-    public String writeFormat(){
+    public String writeFormat() {
         return "E " + isDone + " " + description + "/" + at;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + super.getTask() + " (at: " + at + ")";
     }
 }

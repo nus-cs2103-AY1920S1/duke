@@ -9,7 +9,7 @@ public class Storage {
 
     private String filePath;
 
-    public Storage (String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -40,10 +40,12 @@ public class Storage {
                     userWords = taskName.split("/");
                     list.add(new Event(userWords[0], userWords[1], done));
                     break;
+                default:
+                    throw new DukeException("Wrong type used inside of save file");
                 }
             }
             return list;
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new DukeException("File not found. Generating empty list...");
         }
     }
@@ -57,7 +59,7 @@ public class Storage {
             }
             fw.write(data);
             fw.close();
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new DukeException("Error writing file.");
         }
     }

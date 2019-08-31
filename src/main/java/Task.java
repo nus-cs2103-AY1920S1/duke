@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String desc, boolean isDone){
+    public Task(String desc, boolean isDone) {
         this.description = desc;
         this.isDone = isDone;
     }
@@ -20,17 +20,17 @@ public class Task {
         isDone = true;
     }
 
-    public String getTask(){
+    public String getTask() {
         String output = "[" + getStatusIcon() + "] " + description;
         return output;
     }
 
-    public String writeFormat(){
+    public String writeFormat() {
         return "T " + isDone + " " + description;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + getTask();
     }
 }

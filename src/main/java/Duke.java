@@ -77,6 +77,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, IOException, ParseException {
-       new Duke("/Users/sairo/OneDrive/Desktop/Duke/Data/Duke.txt").run();
+        new Duke("/Users/sairo/OneDrive/Desktop/Duke/Data/Duke.txt").run();
     }
 }

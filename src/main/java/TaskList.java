@@ -94,7 +94,7 @@ public class TaskList {
     protected void getList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i += 1) {
-            System.out.println(i + ". " + taskList.get(i - 1) );
+            System.out.println(i + ". " + taskList.get(i - 1));
         }
     }
 

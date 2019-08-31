@@ -30,10 +30,10 @@ public class Parser {
             }
         } else if (s.contains("[E]")) {
             int start = s.indexOf('(');
-            String e = s.substring(7,start-1);
+            String e = s.substring(7,start - 1);
             String dl = s.substring(start + 5, start + 27);
             Date at = df.parse(dl);
-            if (s.contains( "[" + "1" + "]")) {
+            if (s.contains("[" + "1" + "]")) {
                 t.add(new Event(e,at, true));
             } else {
                 t.add(new Event(e,at));

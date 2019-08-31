@@ -24,8 +24,8 @@ public class Storage {
 
     /**
      * Loads the tasks stored in the file and returns them as a list of tasks.
-     * @return list of tasks stored in the text document.
-     * @throws DukeException
+     * @return list of tasks stored in the text document
+     * @throws DukeException err i not v sure
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();

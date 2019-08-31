@@ -13,15 +13,6 @@ public abstract class Command {
     protected Storage storage;
     protected TaskList taskList;
     protected Ui ui;
-    protected boolean isExit;
-
-    /**
-     * Returns a Command object
-     * @returns Command object
-     */
-    public Command() {
-        this.isExit = false; // commands are non-exiting by default
-    }
 
     /**
      * Passes in essential Duke util objects for the Commands to act on.
@@ -43,14 +34,4 @@ public abstract class Command {
      * @throws DukeException for generic recoverable errors
      */
     public abstract void execute() throws DukeException;
-
-    /**
-     * Returns a boolean isExit that tells duke whether the command involves shutting down
-     * the system.
-     *
-     * @return True if shutdown is requested by command, False otherwise
-     */
-    public boolean isExit() {
-        return this.isExit;
-    }
 }

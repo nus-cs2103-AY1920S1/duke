@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeShutDownException;
+
 /**
  * Class representing a command that initiates shut down of the Duke
  * system.
@@ -7,12 +9,10 @@ package duke.command;
 public class ByeCommand extends Command {
 
     /**
-     * Sets the isExit attribute to true,
-     * indicating that this command requires Duke
-     * to shut down.
+     * Throws a DukeShutDownException, which should be handled by the
+     * main Duke program as it sees fit.
      */
-    public void execute() {
-        this.isExit = true;
-        this.ui.greetGoodbye();
+    public void execute() throws DukeShutDownException {
+        throw new DukeShutDownException("Shutting down...");
     }
 }

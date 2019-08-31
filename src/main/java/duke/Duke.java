@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.DukeShutDownException;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -82,7 +83,6 @@ public class Duke {
      * inputs and process them.
      */
     public void start() {
-        boolean isNotShutdown = true;
 
         this.ui.greetHello(); // greet user on startup
 
@@ -93,12 +93,14 @@ public class Duke {
                 Command c = Parser.parseForCommands(input); // send it off to be parsed
                 c.initialize(this.storage, this.taskList, this.ui);
                 c.execute();
-                isNotShutdown = !c.isExit();
+            } catch (DukeShutDownException e) {
+                ui.greetGoodbye();
+                break;
             } catch (DukeException e) {
                 ui.displayMessage(e.getMessage());
             } finally {
                 this.ui.showLine();
             }
-        } while (isNotShutdown);
+        } while (true);
     }
 }

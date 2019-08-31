@@ -1,26 +1,27 @@
+import java.util.Date;
 /**
  * Represents a Deadline Task
  */
 public class Deadline extends Task {
-    private String details;
+    private Date details;
 
-    Deadline(String description, String details) {
+    Deadline(String description, Date details) {
         super(description);
         this.details = details;
     }
 
-    Deadline(String description, String details, boolean done) {
+    Deadline(String description, Date details, boolean done) {
         super(description, done);
         this.details = details;
     }
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + this.description + " (by: " + this.details + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (by: " + details + ")";
     }
 
     @Override
     String store(){
-        return "D|" + getStatus() + "|" + this.description + "|" + this.details;
+        return "D|" + getStatus() + "|" + description + "|" + details;
     }
 }

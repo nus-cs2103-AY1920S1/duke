@@ -14,18 +14,20 @@ public class Storage {
     }
     public ArrayList<Task> load() throws IOException {
         File file = new File(filename);
+        System.out.println(file.getCanonicalPath());
+        System.out.println(file.exists());
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc = new Scanner(file);
         while(sc.hasNextLine()) {
-            String lineToRead = sc.nextLine();
-            if(!lineToRead.equals("") && lineToRead.charAt(0) == 'T') {
-                Task newTask = Todo.outputAsTodo(lineToRead);
+            String[] task = sc.nextLine().replaceAll(", ", ",").split(",");
+            if(task[0].equals("T")) {
+                Task newTask = new Todo(task[2]);
                 list.add(newTask);
-            } else if (!lineToRead.equals("") && lineToRead.charAt(0) == 'D') {
-                Task newTask = Deadline.outputAsDeadline(lineToRead);
+            } else if (task[0].equals("D")) {
+                Task newTask = new Deadline(task[2], task[3]);
                 list.add(newTask);
-            } else if(!lineToRead.equals("") && lineToRead.charAt(0) == 'E') {
-                Task newTask = Event.outputAsEvent(lineToRead);
+            } else if(task[0].equals("E")) {
+                Task newTask = new Event(task[2], task[3]);
                 list.add(newTask);
             }
         }
@@ -36,11 +38,11 @@ public class Storage {
         String status = task.getIsDone() ? "1" : "0";
         try {
             if(task instanceof Todo) {
-                writer.write("T " + status + " " + task.getDescription() + "\n");
+                writer.write("T, " + status + ", " + task.getDescription() + "\n");
             } else if(task instanceof Deadline) {
-                writer.write("D " + status + " " + task.getDescription() + " " + ((Deadline) task).getBy() +  "\n");
+                writer.write("D, " + status + ", " + task.getDescription() + ", " + ((Deadline) task).getBy() +  "\n");
             } else if (task instanceof Event) {
-                writer.write("E " + status + " " + task.getDescription() + " " + ((Event) task).getAt() +  "\n");
+                writer.write("E, " + status + ", " + task.getDescription() + ", " + ((Event) task).getAt() +  "\n");
             }
         } catch(Exception ex) {
             System.out.println("Error in file handling");

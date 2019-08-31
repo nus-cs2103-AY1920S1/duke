@@ -30,7 +30,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = by.trim();
         /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         tasks.addItemsToList(new Deadline(c.getInstruction), formatter */
 
@@ -83,7 +83,7 @@ public class Deadline extends Task {
     }
 
     public static Deadline outputAsDeadline(String lineToRead) {
-        String[] descriptionNDate = lineToRead.split("/by");
+        String[] descriptionNDate = lineToRead.split(",");
         String description = descriptionNDate[0];
         String by = descriptionNDate[1];
         return new Deadline(description, by);

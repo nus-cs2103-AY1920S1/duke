@@ -12,6 +12,7 @@ public class Parser {
     }
 
     public void read (String command, Scanner sc) {
+        System.out.println(command.equals("deadline"));
         if (command.equals("done")) {
 
             try {
@@ -47,7 +48,6 @@ public class Parser {
                     }
                 } else if (command.equals("deadline")) {
                     String rem = sc.nextLine();
-                    System.out.println(rem);
                     if (!rem.isEmpty()) {
                         String[] descriptionNDate = rem.split("/by");
                         String description = descriptionNDate[0];
@@ -77,6 +77,7 @@ public class Parser {
             } catch(IllegalArgumentException e) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch(Exception e) {
+                System.out.println(command);
                 System.out.println("OOPS!!! The description of a todo cannot be empty.");
             }
         }

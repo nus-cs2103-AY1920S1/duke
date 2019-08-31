@@ -12,7 +12,7 @@ public class AddDeadline extends AddCommand {
     }
 
     @Override
-    public boolean isActive() {
+    public boolean isExit() {
         return false;
     }
 }

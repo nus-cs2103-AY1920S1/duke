@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Storage {
@@ -21,12 +22,14 @@ public class Storage {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String[] code = scanner.nextLine().split("\\|");
-                taskList.add(AddCommand.create(code));
+                taskList.add(AddCommand.init(code));
             }
             scanner.close();
             Ui.list(taskList);
         } catch (FileNotFoundException ex) {
             Ui.out("You do not have any outstanding tasks.");
+        } catch (ParseException ex) {
+            Ui.out("There was an error with the data file.");
         }
         return taskList;
     }

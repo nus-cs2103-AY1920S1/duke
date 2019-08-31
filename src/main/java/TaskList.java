@@ -19,6 +19,10 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public void remove(int index) {
+        taskList.remove(index);
+    }
+
     public boolean isEmpty() {
         return taskList.isEmpty();
     }

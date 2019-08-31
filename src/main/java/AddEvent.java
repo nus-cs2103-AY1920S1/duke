@@ -12,7 +12,7 @@ public class AddEvent extends AddCommand {
     }
 
     @Override
-    public boolean isActive() {
+    public boolean isExit() {
         return false;
     }
 }

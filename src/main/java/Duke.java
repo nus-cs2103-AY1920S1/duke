@@ -1,6 +1,3 @@
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 /**
  *  CS2103 iP Deliverable, Duke
  *  @author Ahmed Bahajjaj
@@ -17,12 +14,15 @@ public class Duke {
     }
 
     public void run() {
-        boolean isActive = true;
+        boolean isExit = false;
         Ui.out("What can I do for you?");
-        while(isActive) {
+        while(!isExit) {
             try{
                 String input = ui.read();
-                String task = input.split(" ")[0];
+                Command command = Parser.parse(input);
+                command.execute(taskList, ui, storage);
+                isExit = (command instanceof ExitCommand);
+                /*String task = input.split(" ")[0];
                 int value;
                 switch (task) {
                 case "bye":
@@ -51,32 +51,17 @@ public class Duke {
                     Ui.out(taskList.get(taskList.size() - 1));
                     Ui.out("Now you have " + taskList.size() + " tasks in the list.");
                     break;
-                }
+                }*/
             } catch (ArrayIndexOutOfBoundsException ex) {
-                Ui.out("OOPS!!! The details of an Event/Deadline cannot be empty! :(");
+                Ui.out("The details of an Event/Deadline cannot be empty.");
             } catch (UnsupportedOperationException ex) {
-                Ui.out("OOPS!!! I'm sorry, but I don't know what that means! :(");
+                Ui.out("I'm sorry, but I don't know what that means.");
             } catch (NumberFormatException ex) {
-                Ui.out("Please only complete/delete tasks on the list! D:");
+                Ui.out("Please only complete/delete tasks on the list.");
             }
         }
         ui.close();
         storage.writeTasks(taskList);
-    }
-
-    /**
-     * Returns the index of the list to be managed
-     * @param input User command
-     * @param size Size of task list
-     * @return User value specified
-     * @throws NumberFormatException If number out of range or invalid input
-     */
-    private int index(String input, int size) throws NumberFormatException {
-        int value = Integer.parseInt(input.substring(input.length() - 1));
-        if (value < 0 || value > size) {
-            throw new NumberFormatException();
-        }
-        return value;
     }
 
     /**

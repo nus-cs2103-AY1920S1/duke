@@ -1,7 +1,7 @@
 package cs2103t.duke.task;
 
 import cs2103t.duke.exception.DukeException;
-import cs2103t.duke.exception.InvalidIDException;
+import cs2103t.duke.exception.InvalidIdException;
 import cs2103t.duke.exception.InvalidKeywordException;
 import cs2103t.duke.ui.Ui;
 
@@ -53,7 +53,7 @@ public class TaskList {
      */
     public Task markDone(int id) throws DukeException {
         if (id > getSize() || id < 1) {
-            throw new InvalidIDException("" + id);
+            throw new InvalidIdException("" + id);
         }
 
 
@@ -71,7 +71,7 @@ public class TaskList {
      */
     public Task deleteTask(int id) throws DukeException {
         if (id > getSize() || id < 1) {
-            throw new InvalidIDException(""+id);
+            throw new InvalidIdException(""+id);
         }
 
         Task task = this.taskList.remove(id - 1);

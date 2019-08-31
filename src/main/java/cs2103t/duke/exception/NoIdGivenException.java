@@ -1,8 +1,8 @@
 package cs2103t.duke.exception;
 
-public class NoIDGivenException extends DukeException {
+public class NoIdGivenException extends DukeException {
     private String cmd;
-    public NoIDGivenException(String msg) {
+    public NoIdGivenException(String msg) {
         super(msg);
         this.cmd = msg;
     }

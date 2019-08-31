@@ -1,8 +1,8 @@
 package cs2103t.duke.exception;
 
-public class InvalidIDException extends DukeException {
+public class InvalidIdException extends DukeException {
     private String id;
-    public InvalidIDException(String msg) {
+    public InvalidIdException(String msg) {
         super(msg);
         this.id = msg;
     }

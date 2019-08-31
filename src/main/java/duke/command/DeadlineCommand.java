@@ -13,13 +13,6 @@ public class DeadlineCommand implements Command {
         this.time = time;
     }
 
-    /**
-     * Executes the deadline comment
-     * @param storage
-     * @param ui
-     * @param tasks
-     * @throws DukeException
-     */
     public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
         Deadline dl = new Deadline(task, time, false);
         tasks.addTask(dl);

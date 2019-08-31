@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventTest {
     @Test
-    public void dummyTest(){
-        assertEquals("[E][✘] Basketball Competition (at: 03/11/2018 1700)", new Event("Basketball Competition", "03/11/2018 1700").toString());
+    public void dummyTest() {
+        assertEquals("[E][✘] Basketball Competition (at: 03/11/2018 1700)",
+                new Event("Basketball Competition", "03/11/2018 1700").toString());
     }
 }

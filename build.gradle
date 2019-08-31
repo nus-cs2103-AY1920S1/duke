@@ -20,6 +20,10 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+}
+
 run {
     standardInput = System.in
 }

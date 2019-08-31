@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class TaskList {
      *
      * @param number the task number in the list to update
      */
-    public Task markNumberedTaskAsDone(int number) {
+    public Task markNumberedTaskAsDone(int number) throws DukeException {
         Task task = getTaskAtIndex(number - 1);
         task.markAsDone();
         return task;
@@ -47,8 +48,12 @@ public class TaskList {
         return tasksList.remove(position - 1);
     }
 
-    public Task getTaskAtIndex(int position) {
-        return tasksList.get(position);
+    public Task getTaskAtIndex(int position) throws DukeException {
+        try {
+            return tasksList.get(position);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException(ex.getMessage());
+        }
     }
 
 }

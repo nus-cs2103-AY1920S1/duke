@@ -88,12 +88,11 @@ public class Duke extends Application {
 
         //Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
-
     }
 
     /**
@@ -101,19 +100,19 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
 
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response of Duke program to user request
      */
     private String getResponse(String input) {
         String output = "";
@@ -135,10 +134,8 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -178,5 +175,7 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
+
+
 
 }

@@ -1,15 +1,18 @@
+package duke.task;
+
+import duke.command.Parser;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Represents an Event object that has a description, start-time and end-time to depict a duration.
+ * Represents an duke.task.Event object that has a description, start-time and end-time to depict a duration.
  */
 public class Event extends Task {
     private Calendar startTime;
     private Calendar endTime;
 
     /**
-     * Creates Event object taking info from Parser's arrayList.
+     * Creates duke.task.Event object taking info from Parser's arrayList.
      * @param parser
      */
     public Event(Parser parser) {
@@ -30,10 +33,10 @@ public class Event extends Task {
     }
 
     /**
-     * Creates Event object using description, start, and end-time.
+     * Creates duke.task.Event object using description, start, and end-time.
      * @param des description of Task.
-     * @param startTime startTime of Event.
-     * @param endTime endTime of Event.
+     * @param startTime startTime of duke.task.Event.
+     * @param endTime endTime of duke.task.Event.
      */
     public Event(String des, Calendar startTime, Calendar endTime) {
         super(des);

@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a Task object.
  * Super class of ToDos, Events, and Deadlines.

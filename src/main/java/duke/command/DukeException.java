@@ -1,3 +1,5 @@
+package duke.command;
+
 /**
  * Represents an Exception that is encountered when dealing with Duke objects.
  */

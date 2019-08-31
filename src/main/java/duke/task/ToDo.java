@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.command.Parser;
 /**
  * Represents ToDo object with a description.
  */

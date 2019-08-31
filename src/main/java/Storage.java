@@ -16,20 +16,20 @@ public class Storage {
         file = new File(filePath);
     }
 
-    public TaskList loadTasks() {
+    public TaskList loadTasks(Ui ui) {
         TaskList taskList = new TaskList();
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String[] code = scanner.nextLine().split("\\|");
-                taskList.add(AddCommand.init(code));
+                taskList.add(Parser.init(code));
             }
             scanner.close();
-            Ui.list(taskList);
+            ui.list(taskList);
         } catch (FileNotFoundException ex) {
-            Ui.out("You do not have any outstanding tasks.");
+            ui.out("You do not have any outstanding tasks.");
         } catch (ParseException ex) {
-            Ui.out("There was an error with the data file.");
+            ui.out("There was an error with the data file.");
         }
         return taskList;
     }
@@ -51,7 +51,7 @@ public class Storage {
                 fileWriter.close();
             }
         } catch (IOException ex) {
-            Ui.out("Something went wrong: " + ex.getMessage());
+            System.out.println("Something went wrong: " + ex.getMessage());
         }
     }
 }

@@ -7,10 +7,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws NumberFormatException {
+        ui.showLine();
         int value = Parser.getIndex(input, taskList.size());
-        Ui.out("Noted. I've removed this task:");
-        Ui.out(taskList.get(value - 1).toString());
+        ui.out("Noted. I've removed this task:");
+        ui.out(taskList.get(value - 1).toString());
         taskList.remove(value - 1);
-        Ui.out("Now you have " + taskList.size() + " tasks in the list.");
+        ui.out("Now you have " + taskList.size() + " tasks in the list.");
+        ui.showLine();
     }
 }

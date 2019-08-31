@@ -4,7 +4,8 @@ public class Ui {
     private Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
+        showLine();
         out("Hello! I'm Duke");
     }
 
@@ -16,15 +17,19 @@ public class Ui {
         scanner.close();
     }
 
-    public static void out(String output) {
-        System.out.println(output);
+    public void out(String output) {
+        System.out.println("\t" + output);
+    }
+
+    public void showLine() {
+        out("=====================");
     }
 
     /**
      * Prints out list of tasks
      * @param taskList List of tasks
      */
-    public static void list(TaskList taskList) {
+    public void list(TaskList taskList) {
         if (taskList.size() == 0) {
             out("List is empty!");
         } else {

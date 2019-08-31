@@ -5,7 +5,12 @@ import Tasks.Event;
 import Tasks.Task;
 import Tasks.Todo;
 import Tasks.TaskList;
+
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import Exception.DukeException;
@@ -20,12 +25,18 @@ public class Ui {
     private TaskList tasksList;
     private Storage storage;
 
+    static String[] suffixes =
+            { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
+                    "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+                    "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
+                    "th", "st" };
+
     public Ui(TaskList taskList, Storage storage) {
         this.tasksList = taskList;
         this.storage = storage;
     }
 
-    public void readInput() throws Exception, DukeException{
+    public void readInput() throws Exception, DukeException {
         Scanner scanner = new Scanner(System.in);
         showWelcome();
         while(scanner.hasNextLine()) {
@@ -130,24 +141,37 @@ public class Ui {
         System.out.println("  " + todo);
     }
 
-    public void showDeadline(String input){
+    public void showDeadline(String input) throws Exception{
         String inputAddArr[] = input.split(" /by ");
         String inputAdd1 = inputAddArr[0].substring(9);
-        String inputAdd2 = inputAddArr[1];
+        String inputAdd2 = readDate(inputAddArr[1]);
         Deadline deadline = new Deadline(inputAdd1, inputAdd2);
         tasksList.addTask(deadline);
         storage.writeDeadline(deadline);
         System.out.println("  " + deadline);
     }
 
-    public void showEvent(String input){
+    public void showEvent(String input) throws Exception{
         String inputAddArr[] = input.split(" /at ");
         String inputAdd1 = inputAddArr[0].substring(6);
-        String inputAdd2 = inputAddArr[1];
+        String inputAdd2 = readDate(inputAddArr[1]);
         Event event = new Event(inputAdd1, inputAdd2);
         tasksList.addTask(event);
         storage.writeEvent(event);
         System.out.println("  " + event);
+    }
+
+    public String readDate(String input) throws Exception{
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Date d = formatter.parse(input);
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        System.out.println(d);
+        String[] dateArr = d.toString().split(" ");
+        String day = ((d.getDay() + 1) + suffixes[d.getDay() + 1]);
+        String month = (dfs.getMonths()[d.getMonth()]);
+        String year = (dateArr[5]);
+        String incorrectTime = dateArr[3].substring(0, 5).replace(":", "").trim();
+        return day + " of " + month + " " + year + ", " + incorrectTime + "hours";
     }
 
 }

@@ -1,0 +1,4 @@
+event type | isDone | description | extra description
+E | 0 | meeting | LT19
+D | 1 | Assignment | 20th of December 2012, 6.42pm
+T | 1 | <Task Description>

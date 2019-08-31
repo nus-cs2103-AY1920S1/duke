@@ -1,7 +1,11 @@
+package duke.frontend;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import duke.exception.*;
+import duke.task.*;
 
-public class dukeBot {
+public class DukeBot {
     private static int cnt = 0;
     // a utility function for performing actions based on commands
     public static void action(String cmd, ArrayList<Task> list) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {

@@ -1,3 +1,5 @@
+package duke.task;
+
 public class toDo extends Task {
 
     public toDo(String description) {

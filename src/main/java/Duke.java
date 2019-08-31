@@ -1,9 +1,12 @@
+import duke.frontend.DukeBot;
+import duke.exception.EmptyListException;
+
 public class Duke {
-    public dukeBot bot;
+    public DukeBot bot;
 
     public void run() throws EmptyListException {
         // initialize a duke bot to take input and perform actions
-        bot = new dukeBot();
+        bot = new DukeBot();
         bot.start();
     }
 

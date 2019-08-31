@@ -6,7 +6,8 @@ import duke.task.Event;
 /**
  * Class representing a command issued by the user to create an
  * Event object. Inherits from the NewTaskCommand abstract class.
- * @see {@link NewTaskCommand} {@link Event}
+ * @see NewTaskCommand
+ * @see Event
  */
 public class EventCommand extends NewTaskCommand {
 

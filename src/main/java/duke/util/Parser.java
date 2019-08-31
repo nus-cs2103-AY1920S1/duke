@@ -14,7 +14,8 @@ import duke.command.TodoCommand;
 /**
  * Class that encapsulates various parsing methods to parse
  * input Strings and return the appropriate Command Objects.
- * @see {@link Command}, {@link DateTime}
+ * @see duke.command.Command
+ * @see DateTime
  */
 public class Parser {
 
@@ -23,34 +24,33 @@ public class Parser {
      *
      * @param input String containing full user input
      * @return Command objects.
-     * @throws DukeException recoverable exception thrown containing the error message
-     * to be printed to the screen.
-     * @see {@link Command}
+     * @throws DukeException if a generic recoverable runtime error is detected
+     * @see Command
      */
     public static Command parseForCommands(String input) throws DukeException {
         String[] parameters = input.split(" ", 2);
         String command = parameters[0];
 
         switch (command) {
-            case "list":
-                return new ListCommand();
-            case "bye":
-                return new ByeCommand();
-            case "done":
-                return Parser.parseDoneCommand(parameters);
-            case "delete":
-                return Parser.parseDeleteCommand(parameters);
-            case "todo":
-                return Parser.parseTodoCommand(parameters);
-            case "event":
-                return Parser.parseEventCommand(parameters);
-            case "deadline":
-                return Parser.parseDeadlineCommand(parameters);
-            case "find":
-                return Parser.parseFindCommand(parameters);
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, "
-                        + "but I don't know what that means :-(");
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new ByeCommand();
+        case "done":
+            return Parser.parseDoneCommand(parameters);
+        case "delete":
+            return Parser.parseDeleteCommand(parameters);
+        case "todo":
+            return Parser.parseTodoCommand(parameters);
+        case "event":
+            return Parser.parseEventCommand(parameters);
+        case "deadline":
+            return Parser.parseDeadlineCommand(parameters);
+        case "find":
+            return Parser.parseFindCommand(parameters);
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");
         }
     }
 

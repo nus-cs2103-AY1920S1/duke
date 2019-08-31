@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Ui {
     // Class attributes
-    final static private String INDENT = "      ";
+    private static final String INDENT = "      ";
 
     // Object attributes
     private Scanner sc;
@@ -45,8 +45,8 @@ public class Ui {
      * an additional field for specifiying additional indents to pass to
      * indentMessage().
      *
-     * @param message
-     * @param extraIndent
+     * @param message String to be formatted and printed to screen
+     * @param extraIndent number of extra leading spaces on top of default indent
      */
     public void displayMessage(String message, int extraIndent) {
         System.out.print(this.indentMessage(message, extraIndent));
@@ -55,7 +55,7 @@ public class Ui {
     /**
      * Prints a single-line formatted String with default indent to the screen.
      *
-     * @param message
+     * @param message String to be formatted and printed to screen
      */
     public void displaySingleLine(String message) {
         System.out.println(INDENT + message);
@@ -79,13 +79,13 @@ public class Ui {
      */
     public String indentMessage(String s) {
         String[] lines = s.split("\n");
-        StringBuilder indented_output = new StringBuilder();
+        StringBuilder indentedOutput = new StringBuilder();
         for (String line : lines) {
-            indented_output.append(INDENT);
-            indented_output.append(line);
-            indented_output.append("\n");
+            indentedOutput.append(INDENT);
+            indentedOutput.append(line);
+            indentedOutput.append("\n");
         }
-        return indented_output.toString();
+        return indentedOutput.toString();
     }
 
     /**
@@ -100,7 +100,7 @@ public class Ui {
      */
     public String indentMessage(String s, int extraIndent) {
         String[] lines = s.split("\n");
-        StringBuilder indented_output = new StringBuilder();
+        StringBuilder indentedOutput = new StringBuilder();
         StringBuilder sb = new StringBuilder();
 
         sb.append(INDENT);
@@ -110,11 +110,11 @@ public class Ui {
         String indent = sb.toString();
 
         for (String line : lines) {
-            indented_output.append(indent);
-            indented_output.append(line);
-            indented_output.append("\n");
+            indentedOutput.append(indent);
+            indentedOutput.append(line);
+            indentedOutput.append("\n");
         }
-        return indented_output.toString();
+        return indentedOutput.toString();
     }
 
 

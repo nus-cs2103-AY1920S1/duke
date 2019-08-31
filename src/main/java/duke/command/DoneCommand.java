@@ -7,7 +7,7 @@ import duke.task.Task;
  * Class representing a command that marks a specified task
  * within the stored task list as done. Inherits from the Command abstract
  * class.
- * @see {@link Command}
+ * @see Command
  */
 public class DoneCommand extends Command {
     private int taskId;

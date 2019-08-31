@@ -24,9 +24,9 @@ public class DateTime implements Serializable {
      *
      * @param input String to be parsed into date and time
      * @return java.util.Date object
-     * @throws DukeException
+     * @throws DukeException if this method fails to parse the input String
      */
-    static public DateTime parseString(String input) throws DukeException {
+    public static DateTime parseString(String input) throws DukeException {
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date dateTime;
@@ -42,7 +42,7 @@ public class DateTime implements Serializable {
 
     // private constructor called by the static parser method DateTime.parseString()
     // returns a DateTime object.
-    private DateTime (Date dateTime) {
+    private DateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

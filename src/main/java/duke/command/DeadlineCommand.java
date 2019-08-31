@@ -6,7 +6,8 @@ import duke.task.Deadline;
 /**
  * Class representing a command issued by the user to create a
  * Deadline object. Inherits from the NewTaskCommand abstract class.
- * @see {@link NewTaskCommand} {@link Deadline}
+ * @see NewTaskCommand
+ * @see Deadline
  */
 public class DeadlineCommand extends NewTaskCommand {
 

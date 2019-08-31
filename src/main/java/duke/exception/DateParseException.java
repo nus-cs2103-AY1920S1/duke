@@ -14,9 +14,9 @@ public class DateParseException extends ParseException {
      * Returns a DateParseException object with an associated error message
      * and the error offset that triggered the exception during parsing.
      *
-     * @param error_message description of error.
+     * @param errorMessage description of error.
      */
-    public DateParseException(String error_message, int errorOffset) {
-        super(error_message, errorOffset);
+    public DateParseException(String errorMessage, int errorOffset) {
+        super(errorMessage, errorOffset);
     }
 }

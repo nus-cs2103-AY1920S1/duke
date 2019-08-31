@@ -8,7 +8,7 @@ import duke.task.Task;
  * current task list. Implements the execute() method for all
  * sub-classes that inherits from it. Inherits from the Command abstract
  * class.
- * @see {@link Command}
+ * @see Command
  */
 public abstract class NewTaskCommand extends Command {
     private Task task;

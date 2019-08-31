@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class Storage {
     // static attributes
-    final static private String DEFAULT_SAVE_PATH = "./saved_lists/savestate.tmp";
+    private static final String DEFAULT_SAVE_PATH = "./saved_lists/savestate.tmp";
 
     // object attributes
     private File file;
@@ -32,7 +32,7 @@ public class Storage {
     /**
      * Returns a Storage object that uses the filePath provided by the user
      * for storing and loading the task list.
-     * @param filePath
+     * @param filePath String containing os filepath
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
@@ -75,7 +75,7 @@ public class Storage {
      * @param list TaskList object to be saved.
      * @throws DukeException if saving was unsuccessful.
      */
-    public void saveToDisk(TaskList list) throws DukeException{
+    public void saveToDisk(TaskList list) throws DukeException {
         try {
             this.file.getParentFile().mkdirs();
             FileOutputStream fos = new FileOutputStream(this.file, false);

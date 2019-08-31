@@ -4,7 +4,7 @@ package duke.command;
  * Class representing a command that lists out the contents
  * of the current task list. Inherits from the Command abstract
  * class.
- * @see {@link Command}
+ * @see Command
  */
 public class ListCommand extends Command {
 

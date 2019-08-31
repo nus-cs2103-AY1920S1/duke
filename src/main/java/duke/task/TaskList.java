@@ -10,15 +10,19 @@ import java.lang.IndexOutOfBoundsException;
 
 
 /**
- * Class that encapsulates a list of Tasks and various methods
+ * Class that encapsulates a list of Tasks. Contains various methods
  * to manipulate the list.
- * @see {@link Task}, {@link Event}, {@link Deadline}, {@link Todo}
+ *
+ * @see Task
+ * @see Event
+ * @see Deadline
+ * @see Todo
  */
 public class TaskList implements Serializable {
     private List<Task> tasks; // List of all tasks
 
     /**
-     * Returns a TaskList object with an empty task list
+     * Returns a TaskList object with an empty task list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -27,7 +31,7 @@ public class TaskList implements Serializable {
 
     /**
      * Returns a TaskList object initialized with Task objects found
-     * in a List<Task> object
+     * in a List of Task objects.
      * @param tasks Existing List object containing Task objects.
      */
     public TaskList(List<Task> tasks) {
@@ -36,7 +40,7 @@ public class TaskList implements Serializable {
 
     /**
      * Returns a TaskList object initialized with Task objects found
-     * in a TaskList object
+     * in a TaskList object.
      *
      * @param taskList Existing TaskList object containing Task objects.
      */
@@ -65,8 +69,8 @@ public class TaskList implements Serializable {
      * in the TaskList object.
      *
      * @param taskIndex index of task to be deleted. Uses 1-indexing.
-     * @throws DukeException if index is invalid or refers to a non-existent task.
      * @return Task object corresponding to taskIndex
+     * @throws DukeException if index is invalid or refers to a non-existent task.
      **/
     public Task at(int taskIndex) throws DukeException {
         try {
@@ -79,7 +83,7 @@ public class TaskList implements Serializable {
 
     /**
      * Adds a task to the list stored in the TaskList object.
-     * @param task
+     * @param task Task object to be added to list
      */
     public void add(Task task) {
         this.tasks.add(task);
@@ -93,6 +97,13 @@ public class TaskList implements Serializable {
         return this.tasks.size();
     }
 
+    /**
+     * Returns a TaskList containing subset of Task objects matching
+     * the provided searchWord. This method is case-insensitive.
+     *
+     * @param searchWord String to search for
+     * @return TaskList containing Tasks that match searchWord
+     */
     public TaskList getTaskSubsetMatching(String searchWord) {
         List<Task> resultList = new ArrayList<>();
         this.tasks.forEach((task) -> {
@@ -105,8 +116,9 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Returns a string representation of the TaskList object formatted with one
-     * Task on each line, prepended by their respective indexes (1-indexed)
+     * Returns a string representation of the TaskList object. The output will
+     * be formatted with one Task on each line, prepended by their respective
+     * indexes (1-indexed).
      *
      * @return String representation of the TaskList object
      */

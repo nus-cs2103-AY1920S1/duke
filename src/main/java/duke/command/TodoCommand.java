@@ -5,7 +5,8 @@ import duke.task.Todo;
 /**
  * Class representing a command issued by the user to create an
  * Todo object. Inherits from the NewTaskCommand abstract class.
- * @see {@link NewTaskCommand} {@link Todo}
+ * @see NewTaskCommand
+ * @see Todo
  */
 public class TodoCommand extends NewTaskCommand {
 

@@ -5,6 +5,7 @@ import duke.ui.MainWindowStub;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,24 +24,27 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class StorageTest {
     //randomly generated uuid to ensure it is conflict free
-    private static final String TEST_DIR_NAME = "c1834a65-3269-45d1-815b-3ae7130a6988";
+    private static final String TEST_DIR_NAME = "c1834a65-3269-45d1-815b-3ae7130a6980";
+    private static final String TRUNCATED_TEST_DIR =
+            TEST_DIR_NAME.substring(0, TEST_DIR_NAME.length() - 1);
     private static String originalWorkingDirectory;
+    @TempDir
+    static Path testTempDir;
 
     @BeforeAll
     static void setUpTestDirectory() {
         originalWorkingDirectory = System.getProperty("user.dir");
 
         try {
-            Path path = Paths.get(originalWorkingDirectory, TEST_DIR_NAME);
-            Files.createDirectory(path);
+            Path path = testTempDir;
+            System.out.println(path.toString());
 
-            for (int i = 1; i <= 3; i++) {
-                path = Paths.get(path.toString(), TEST_DIR_NAME + i);
+            for (int i = 0; i <= 3; i++) {
+                path = path.resolve(TRUNCATED_TEST_DIR + i);
                 Files.createDirectory(path);
             }
 
             System.setProperty("user.dir", path.toString());
-
         } catch (IOException ex) {
             fail(ex.getMessage());
         }
@@ -85,7 +91,7 @@ class StorageTest {
         try {
             File testFile = Files.createFile(
                     Paths.get(
-                        originalWorkingDirectory,
+                        testTempDir.toString(),
                         TEST_DIR_NAME,
                         "taskData.txt"))
                     .toFile();
@@ -117,9 +123,9 @@ class StorageTest {
         try {
             File testFile = Files.createFile(
                     Paths.get(
-                            originalWorkingDirectory,
+                            testTempDir.toString(),
                             TEST_DIR_NAME,
-                            TEST_DIR_NAME + "1",
+                            TRUNCATED_TEST_DIR + "1",
                             "taskData.txt"))
                     .toFile();
 
@@ -128,7 +134,7 @@ class StorageTest {
             fileWriter.write(TEST_TASK_CASE_INVALID_ARGUMENT);
             fileWriter.close();
 
-            Storage storage = new Storage(TEST_DIR_NAME + "1", outputUi);
+            Storage storage = new Storage(TRUNCATED_TEST_DIR + "1", outputUi);
             storage.loadTasksToList(listOfTasks);
 
             assertEquals(0, listOfTasks.getSize());
@@ -140,7 +146,6 @@ class StorageTest {
         }
     }
 
-    @AfterAll
     static void cleanUpTestDirectory() {
         System.setProperty("user.dir", originalWorkingDirectory);
         try {
@@ -149,7 +154,7 @@ class StorageTest {
                     .forEach(
                             pathToDelete -> {
                                 try {
-                                    Files.deleteIfExists(pathToDelete);
+                                    Files.delete(pathToDelete);
                                 } catch (IOException ex) {
                                     fail("Failed to clean test directory for StorageTest."
                                             + ex.getMessage());

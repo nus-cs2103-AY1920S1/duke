@@ -42,7 +42,7 @@ class FindCommand extends Command {
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      */
     @Override
-    public void run(TaskList tasks, MainWindow ui, Storage storage) {
+    void run(TaskList tasks, MainWindow ui, Storage storage) {
         StringBuilder displayMessage = new StringBuilder(
                 " Here are the matching tasks in your list:\n");
 

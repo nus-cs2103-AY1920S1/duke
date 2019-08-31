@@ -27,7 +27,7 @@ class ByeCommand extends Command {
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      */
     @Override
-    public void run(TaskList tasks, MainWindow ui, Storage storage) {
+    void run(TaskList tasks, MainWindow ui, Storage storage) {
         ui.showMessage(" Bye. Hope to see you again soon!");
     }
 

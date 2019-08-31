@@ -4,6 +4,7 @@ package duke.command;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
+import duke.TestUtils;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
@@ -33,7 +34,7 @@ class CommandParserTest {
                                 () -> CommandParser.parseCommand(
                                         commandType.toString()
                                                 + " "
-                                                + generateRandomString(20))));
+                                                + TestUtils.generateRandomString(0, 20))));
     }
 
     @TestFactory
@@ -50,25 +51,4 @@ class CommandParserTest {
                                                 " " + commandType.toString()))));
     }
 
-    private String generateRandomString(int maxChars) {
-        final int minAsciiChar = 33;
-        final int maxAsciiChar = 126;
-
-        if (maxChars < 0) {
-            throw new IllegalArgumentException(
-                    "argument to generateRandomString cannot be negative.");
-        }
-
-        int length = (int) (Math.random() * maxChars);
-        StringBuilder string = new StringBuilder(length);
-
-        for (int i = 0; i < length; i++) {
-            string.append(
-                    (char) (
-                            Math.random() * (maxAsciiChar - minAsciiChar)
-                            + minAsciiChar));
-        }
-
-        return string.toString();
-    }
 }

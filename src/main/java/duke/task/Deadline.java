@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 import duke.Parser;
-import duke.Task;
 
 public class Deadline extends Task {
     protected String date;

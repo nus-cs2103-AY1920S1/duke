@@ -1,4 +1,7 @@
-package duke;
+package duke.task;
+
+import duke.DukeException;
+import duke.task.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;

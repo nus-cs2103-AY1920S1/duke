@@ -1,6 +1,7 @@
-package duke;
+package duke.command;
 
-import duke.command.Bye;
+import duke.*;
+import duke.task.TaskList;
 
 abstract public class Command {
     protected Parser parser = new Parser();

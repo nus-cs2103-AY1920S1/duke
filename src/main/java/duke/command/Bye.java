@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.*;
+import duke.task.TaskList;
 
 public class Bye extends Command {
     public Bye(String[] args) {

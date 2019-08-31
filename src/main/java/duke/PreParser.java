@@ -1,5 +1,8 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.CommandMap;
+
 public class PreParser {
     private CommandMap commandMap;
     public PreParser() {

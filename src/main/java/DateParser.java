@@ -1,6 +1,6 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.ParseException;
 
 /**
  * Class to help with parsing Dates to and from Strings.

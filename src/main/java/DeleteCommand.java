@@ -14,8 +14,7 @@ public class DeleteCommand extends Command {
         try {
             storage.store(tasks);
         } catch (IOException e) {
-            System.out.println("    ____________________________________________________________\n     OOPS!!! "
-                    + e.getMessage() + "\n    ____________________________________________________________\n\n");
+            System.out.println("    OOPS!!! " + e.getMessage());
         }
     }
 }

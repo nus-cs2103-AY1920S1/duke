@@ -31,14 +31,18 @@ public class Ui {
      * Prints a goodbye message to the user.
      */
     public void showBye() {
-        show(DIVIDER);
         show("Bye. Hope to see you again soon!");
+        show(DIVIDER);
+    }
+
+    public void showLine() {
         show(DIVIDER);
     }
 
     public void show(String message) {
         System.out.println(TAB + message);
     }
+
     /**
      * Retrieves error message if file cannot be loaded.
      *

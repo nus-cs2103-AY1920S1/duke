@@ -32,29 +32,23 @@ public class TaskList {
      * Prints out the task list for the user.
      */
     public void printTasks(Ui ui) {
-        ui.show(Ui.DIVIDER);
         ui.show("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             ui.show((i + 1) + "." + tasks.get(i));
         }
-        ui.show(Ui.DIVIDER);
     }
 
     public void completeTask(int taskNumber, Ui ui) {
         tasks.get(taskNumber - 1).markAsDone();
-        ui.show(Ui.DIVIDER);
         ui.show("Nice! I've marked this task as done:");
         ui.show(tasks.get(taskNumber - 1).toString());
-        ui.show(Ui.DIVIDER);
     }
 
     public void deleteTask(int taskNumber, Ui ui) {
         tasks.remove(taskNumber - 1);
-        ui.show(Ui.DIVIDER);
         ui.show("Noted. I've removed this task:");
         ui.show(tasks.get(taskNumber).toString());
         ui.show(getListSize());
-        ui.show(Ui.DIVIDER);
     }
 
     public void findTasks(String searchTerm, Ui ui) {
@@ -64,12 +58,10 @@ public class TaskList {
                 searchResults.add(task);
             }
         }
-        ui.show(Ui.DIVIDER);
         ui.show("Here are the matching tasks in your list:");
         for (int i = 0; i < searchResults.size(); i++) {
             ui.show((i + 1) + "." + searchResults.get(i));
         }
-        ui.show(Ui.DIVIDER);
     }
 
     /**
@@ -85,11 +77,9 @@ public class TaskList {
 
     public void addTask(Task task, Ui ui) {
         tasks.add(task);
-        ui.show(Ui.DIVIDER);
         ui.show("Got it. I've added this task:");
         ui.show(task.toString());
         ui.show(getListSize());
-        ui.show(Ui.DIVIDER);
     }
 
 }

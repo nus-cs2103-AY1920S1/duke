@@ -14,9 +14,7 @@ public class Todo extends Task {
 
     public static Todo parse(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n"
-                    + "     OOPS!!! The description of a todo cannot be empty :-(\n" + "    "
-                    + "____________________________________________________________\n");
+            throw new DukeException("     OOPS!!! The description of a todo cannot be empty :-(");
         }
         return new Todo(fullCommand[1]);
     }

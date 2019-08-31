@@ -20,15 +20,11 @@ public class Event extends Task {
 
     public static Event parse(String[] fullCommand) {
         if (fullCommand.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n"
-                    + "     OOPS!!! The description of an event cannot be empty :-(\n" + "    "
-                    + "____________________________________________________________\n");
+            throw new DukeException("     OOPS!!! The description of an event cannot be empty :-(");
         }
         String[] detailsArray = fullCommand[1].split(" /at ", 2);
         if (detailsArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n"
-                    + "     OOPS!!! Please specify a date and time for your event :-(\n" + "    "
-                    + "____________________________________________________________\n");
+            throw new DukeException("     OOPS!!! Please specify a date and time for your event :-(");
         }
         return new Event(detailsArray[0], detailsArray[1]);
     }

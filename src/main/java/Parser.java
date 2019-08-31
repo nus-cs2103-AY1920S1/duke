@@ -23,9 +23,7 @@ public class Parser {
         case "event":
             return new AddCommand(Event.parse(currArray));
         default:
-            throw new DukeException("    ____________________________________________________________\n"
-                    + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    "
-                    + "____________________________________________________________\n");
+            throw new DukeException("     OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

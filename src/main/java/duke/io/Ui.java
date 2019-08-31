@@ -43,7 +43,6 @@ public class Ui {
         if (taskList.size() == 0) {
             out("List is empty!");
         } else {
-            out("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 out((i + 1) + "." + taskList.get(i));
             }

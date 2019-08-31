@@ -21,32 +21,34 @@ public class Duke {
 
         while(!command.equals("bye")) {
             System.out.println(blankLines);
-            switch(command) {
-                case "list":
-                    if (Task.tasks.isEmpty()) {
-                        System.out.println("    List is empty");
-                    } else {
-                        Task.printTaskList();
-                    }
-                    command = input.nextLine();
-                    break;
 
-                default:
-
-                    if (command.contains("done")) {
-                        //Mark tasks as done
-                        Task.markAsDone(command);
-                    } else {
-                        //Add tasks
-                        try {
-                            String type = Task.checkTaskType(command);
-                            Task.addTask(command, type);
-                        } catch (DukeException e) {
-                            System.out.println(e);
+            try {
+                String type = Task.checkCommandType(command);
+                switch(type) {
+                    case "list":
+                        if (Task.tasks.isEmpty()) {
+                            System.out.println("    Congratulations! You have no tasks remaining!");
+                        } else {
+                            Task.printTaskList();
                         }
-                    }
-                    command = input.nextLine();
-                    break;
+                        break;
+
+                    case "done":
+                        Task.markAsDone(command);
+                        break;
+
+                    case "delete":
+                        Task.deleteTask(command);
+                        break;
+
+                    default:
+                        Task.addTask(command, type);
+                        break;
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
+            } finally {
+                command = input.nextLine();
             }
         }
         System.out.println(blankLines + "\n    Bye. Hope to see you again!");

@@ -22,9 +22,31 @@ public class Task {
      * @param command  Description of task to be added
      * @return type Type of task to be added to task list
      */
-    public static String checkTaskType(String command) throws DukeException {
+    public static String checkCommandType(String command) throws DukeException {
         String type = "";
-        if (command.contains("event")) {
+        if (command.equals("list")) {
+            type = "list";
+        } else if (command.contains("delete")) {
+            type = "delete";
+            command = command.substring(6, command.length());
+            if (command.isEmpty()) {
+                throw new DukeException("    OOPS!! Please specify which task to delete");
+            }
+            command = command.substring(1, command.length());
+            if (command.charAt(0) < '0' || command.charAt(0) > '9') {
+                throw new DukeException("    OOPS!! Please enter a number for task number to be deleted");
+            }
+        } else if (command.contains("done")) {
+            type = "done";
+            command = command.substring(4, command.length());
+            if (command.isEmpty()) {
+                throw new DukeException("    OOPS!! Please specify which task is done");
+            }
+            command = command.substring(1, command.length());
+            if (command.charAt(0) < '0' || command.charAt(0) > '9') {
+                    throw new DukeException("    OOPS!! Please enter a number for task number that is done");
+            }
+        } else if (command.contains("event")) {
             if (command.contains("/at")) {
                 type = "event";
                 command = command.substring(5, command.length());
@@ -38,7 +60,6 @@ public class Task {
             } else {
                 throw new DukeException("    OOPS!! The deadline must include a time after the keyword /by");
             }
-
         } else if (command.contains("todo")) {
             type = "todo";
             command = command.substring(4, command.length());
@@ -113,6 +134,27 @@ public class Task {
             System.out.println("    " + index + ". " + x);
             index++;
         }
+    }
+
+    /**
+     * Marks a task as done
+     *
+     * @param index  Index of the task to be deleted from task list
+     */
+    public static void deleteTask(String command) {
+        command = command.substring(7, command.length());
+        int index = Integer.parseInt(command);
+        if (index <= tasks.size() && index >0) {
+            Task removedTask = tasks.remove(index - 1);
+            System.out.println("    Noted. I've removed this task:\n      " + removedTask);
+            System.out.println("    Now you have " + tasks.size() + " tasks left in the list");
+        } else {
+            System.out.println("     Index of task to be deleted not found");
+        }
+        if (tasks.isEmpty()) {
+            System.out.println("    Congratulations, your last task has been deleted!");
+        }
+
     }
 
     /**

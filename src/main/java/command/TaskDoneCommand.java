@@ -5,7 +5,7 @@ import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TaskList;
-import com.leeyiyuan.ui.Ui;
+import com.leeyiyuan.ui.UserOutputInterface;
 
 /** 
  * Represents a Command to mark an existing Task as done. 
@@ -28,7 +28,7 @@ public class TaskDoneCommand extends Command {
      * {@inheritDoc} 
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, UserOutputInterface uoi, Storage storage)
             throws CommandExecuteException, StorageException {
         if (tasks.size() >= this.index) {
             if (tasks.get(this.index - 1).getIsDone()) {
@@ -37,8 +37,8 @@ public class TaskDoneCommand extends Command {
             Task task = tasks.get(this.index - 1);
             task.setIsDone(true);
             storage.save(tasks);
-            ui.showLine("Nice! I've marked this task as done:");
-            ui.showLine(task.toString());
+            uoi.showLine("Nice! I've marked this task as done:");
+            uoi.showLine(task.toString());
         } else {
             throw new CommandExecuteException("Task does not exist at index.");
         }

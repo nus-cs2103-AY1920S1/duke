@@ -4,7 +4,16 @@ plugins {
     id 'checkstyle'
     id 'com.diffplug.gradle.spotless' version '3.24.2'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
+
+group 'leeyiyuan'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
@@ -26,15 +35,20 @@ checkstyle {
     toolVersion = '8.23'
 }
 
-group 'leeyiyuan'
-version '0.1.0'
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
 
-repositories {
-    mavenCentral()
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 application {
-    mainClassName = "com.leeyiyuan.Duke"
+    mainClassName = "com.leeyiyuan.Launcher"
 }
 
 run {
@@ -43,11 +57,4 @@ run {
 
 test {
     useJUnitPlatform()
-}
-
-shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.0"
-    archiveClassifier = null
-    archiveAppendix = null
 }

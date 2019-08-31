@@ -59,7 +59,7 @@ public class Storage {
                         task = taskFormatter.parse(line);
                         break;
                     } catch (TaskParseException e) {
-
+                        // Cannot parse with current TaskFormatter. Suppress error and move to next.
                     }
                 }
                 if (task == null) {
@@ -99,7 +99,7 @@ public class Storage {
                         line = taskFormatter.format(task);
                         break;
                     } catch (TaskFormatException e) {
-
+                        // Cannot format with current TaskFormatter. Suppress error and move to next.
                     }
                 }
                 if (line == null) {

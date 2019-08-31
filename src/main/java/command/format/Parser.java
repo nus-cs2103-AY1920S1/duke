@@ -42,7 +42,7 @@ public class Parser {
                 command = commandFormatter.parse(text);
                 break;
             } catch (UnsupportedCommandException e) {
-
+                // Cannot parse with current CommandFormatter. Suppress error and move to next.
             } catch (CommandParseException e) {
                 throw e;
             }

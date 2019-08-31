@@ -150,15 +150,6 @@ class User {
 
     }
 
-    boolean oneWordNotBye() {
-        String s = this.getCurrentInput();
-        if (s.equalsIgnoreCase("bye") || s.equalsIgnoreCase("list")) { //bye and list should not be checked
-            return false;
-        } else {
-            return (s.length() > 0 && s.split("\\s+").length == 1);
-        }
-    }
-
     void setCurrentInput(String currentInput) {
         this.currentInput = currentInput;
     }
@@ -255,6 +246,28 @@ class User {
         return this.currentTaskType;
     }
 
+    public void setTaskDone () {
+        String temp;
+        //get 2nd number
+        temp = this.currentInput.substring(this.currentInput.indexOf(" "));
+        //remove space infront of number, causing errors
+        temp = temp.replaceAll("\\s+", "");
+
+        int taskNumber = Integer.parseInt(temp);
+        int count = 1;
+        //getDescription to output date for event/deadline
+        for (Task task : userTasks) {
+            if (count == taskNumber) {
+                task.markIsDone();
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Nice! I've marked this task as done: \n" + "       [" + task.getTaskTypeLetter()
+                        + "][" + task.getStatusIcon() + "] " + task.getDescription() + "\n"
+                        + ("    ____________________________________________________________\n"));
+            }
+            count++;
+        }
+    }
+
     private void increaseTaskCount() {
         this.numOfTasks++;
     }
@@ -286,31 +299,18 @@ class User {
                 "    ____________________________________________________________");
     }
 
+    boolean oneWordNotBye() {
+        String s = this.getCurrentInput();
+        if (s.equalsIgnoreCase("bye") || s.equalsIgnoreCase("list")) { //bye and list should not be checked
+            return false;
+        } else {
+            return (s.length() > 0 && s.split("\\s+").length == 1);
+        }
+    }
+
     public boolean inputIsBye() {
         String EXIT_COMMAND = "bye";
         return this.currentInput.equalsIgnoreCase(EXIT_COMMAND);
-    }
-
-    public void setTaskDone () {
-        String temp;
-        //get 2nd number
-        temp = this.currentInput.substring(this.currentInput.indexOf(" "));
-        //remove space infront of number, causing errors
-        temp = temp.replaceAll("\\s+", "");
-
-        int taskNumber = Integer.parseInt(temp);
-        int count = 1;
-        //getDescription to output date for event/deadline
-        for (Task task : userTasks) {
-            if (count == taskNumber) {
-                task.markIsDone();
-                System.out.println("    ____________________________________________________________\n"
-                        + "     Nice! I've marked this task as done: \n" + "       [" + task.getTaskTypeLetter()
-                        + "][" + task.getStatusIcon() + "] " + task.getDescription() + "\n"
-                        + ("    ____________________________________________________________\n"));
-            }
-            count++;
-        }
     }
 
     public void printUserInputs () { //catch empty list?

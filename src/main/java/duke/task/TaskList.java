@@ -9,18 +9,18 @@ import java.util.List;
 import java.lang.IndexOutOfBoundsException;
 
 public class TaskList implements Serializable {
-    private List<Task> list; // List of all tasks
+    private List<Task> tasks; // List of all tasks
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public TaskList(List<Task> list) {
-        this.list = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public TaskList(TaskList taskList) {
-        this.list = taskList.list;
+        this.tasks = taskList.tasks;
     }
 
     /*
@@ -33,7 +33,7 @@ public class TaskList implements Serializable {
     public Task delete(int taskIndex) throws DukeException {
         try {
             taskIndex--; // convert to zero-indexing
-            return this.list.remove(taskIndex);
+            return this.tasks.remove(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Hey! There's no such task!");
         }
@@ -42,25 +42,25 @@ public class TaskList implements Serializable {
     public Task at(int taskIndex) throws DukeException {
         try {
             taskIndex--; // convert to zero-indexing
-            return this.list.get(taskIndex);
+            return this.tasks.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Hey! There's no such task!");
         }
     }
 
     public void add(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
     public int getSize() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (Task task : this.list) {
+        for (Task task : this.tasks) {
             sb.append(i++);
             sb.append(". ");
             sb.append(task);

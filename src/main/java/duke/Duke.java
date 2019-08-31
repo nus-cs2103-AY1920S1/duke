@@ -25,12 +25,14 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke;
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
         if (args.length > 1) {
             duke = new Duke(args[1]);
         } else {
@@ -46,6 +48,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
+
         try {
             this.taskList = new TaskList(this.storage.loadFromDisk());
         } catch (DukeException e) {

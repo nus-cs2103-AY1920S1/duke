@@ -10,8 +10,6 @@ import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
-import java.text.ParseException;
-
 public class Parser {
     public static Command parseForCommands(String input) throws DukeException {
         String[] parameters = input.split(" ", 2);

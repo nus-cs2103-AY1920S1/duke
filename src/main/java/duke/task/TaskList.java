@@ -53,7 +53,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in this list.
      *
-     * @returns The size of this instance's list, which is zero if and only if
+     * @return The size of this instance's list, which is zero if and only if
      *     said list is empty.
      */
     public int size() {

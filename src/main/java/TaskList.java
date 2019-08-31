@@ -3,7 +3,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
+
+/**
+ * Contains the methods to execute user's commands and store the information while the program runs.
+ */
 
 public class TaskList {
 
@@ -12,9 +15,19 @@ public class TaskList {
     public TaskList(){
         taskList = new ArrayList<>();
     }
+
+    /**
+     *Adds the task to the list.
+     *
+     *  @param t the task to be added.
+     */
     protected void Add(Task t){
         taskList.add(t);
     }
+
+    /**
+     * Prints the addition of a task and number of tasks in the list after addition.
+     */
     protected void addMessage(){
         System.out.println(" Got it. I've added this task: " );
         System.out.println(taskList.get(taskList.size() - 1));
@@ -24,11 +37,22 @@ public class TaskList {
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     *Marks the task as done upon user's request and prints the message upon successful completion.
+     *
+     * @param x the position of the task in the list.
+     */
     protected void MarkAsDone(int x){
         taskList.get(x).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println( taskList.get(x) );
     }
+
+    /**
+     *Deletes the task in the list upon user's request and prints the number of tasks remaining upon deletion.
+     *
+     * @param y the position of the task in the list
+     */
     protected void deleteTask(int y) {
         if (taskList.size() == 0)
             System.out.println("The task list is empty");
@@ -42,6 +66,12 @@ public class TaskList {
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         }
     }
+
+    /**
+     *Finds and prints all the tasks containing the word requested by the user.
+     *
+     * @param s The word that the user wants to find.
+     */
     protected void Find(String s){
         int count = 0;
         System.out.println("Here are the matching tasks in your list:");
@@ -55,12 +85,23 @@ public class TaskList {
             System.out.println("There are no matching tasks in your list");
     }
 
+    /**
+     *Prints all the tasks in the list.
+     */
     protected void getList(){
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= taskList.size(); i+=1){
             System.out.println(i + ". " + taskList.get(i-1) );
         }
     }
+
+    /**
+     *Reads and processes the event given by the user.
+     * Stores the information in the list after processing.
+     *
+     * @param b The information of the event being processed.
+     * @throws ParseException If the data is not in the required format i.e. MM/dd/yyyy HH:mm.
+     */
     protected void readEvent(String b) throws ParseException {
 
         if (b.length() == 0) {
@@ -76,6 +117,13 @@ public class TaskList {
             this.addMessage();
         }
     }
+
+    /**
+     *Reads and processes the deadline given by the user.
+     * Stores the information in the list after processing.
+     *
+     * @param s the information of the Deadline input by the user.
+     */
     protected void readDeadline(String s){
 
         if (s.length() == 0) {
@@ -89,6 +137,12 @@ public class TaskList {
             this.addMessage();
         }
     }
+
+    /**
+     *Reads and processes the ToDo task given by the user.
+     *
+     * @param s The information regarding the todo task.
+     */
     protected void readTodo(String s){
         if (s.length() == 0)
             System.out.println("\u2639" + " OOPS!!! the description of a todo cannot be empty. ");

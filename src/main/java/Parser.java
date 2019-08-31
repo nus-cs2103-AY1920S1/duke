@@ -2,11 +2,20 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * Represents the class used to read data from the file and process it.
+ */
 public class Parser {
 
     public Parser(){}
 
+    /**
+     * Contains the methods to read the input and process it into the form required for the algorithm.
+     *
+     * @param s The information to be read and processed
+     * @param t The list where the information is stored after being processed
+     * @throws ParseException If date for event is not in the specified format i.e. MM/dd/yyyy HH:mm
+     */
     public void readTask(String s, TaskList t) throws ParseException {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
 

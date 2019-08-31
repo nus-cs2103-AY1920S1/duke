@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * Represents the personal assistant and contains the main method.
+ */
 public class Duke {
 
     private TaskList list;
@@ -10,6 +13,10 @@ public class Duke {
     private Parser parser;
     private Storage storage;
 
+    /**
+     * Creates a duke object which stores data in the specified path .
+     * @param s the absolute path of the file where the data is stored.
+     */
     public Duke(String s){
         list = new TaskList();
         ui = new Ui();

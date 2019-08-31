@@ -4,7 +4,9 @@ public class AddCommand extends Command {
 
     private Task task;
 
-    public AddCommand(String[] fullCommand) {
+    public AddCommand(Task task) {
+        this.task = task;
+        /*
         if (fullCommand[0].equals("todo")) {
             task = new Todo(fullCommand[1]);
         } else if (fullCommand[0].equals("deadline")) {
@@ -14,6 +16,8 @@ public class AddCommand extends Command {
             String[] detailsArray = fullCommand[1].split(" /at ", 2);
             task = new Event(detailsArray[0], detailsArray[1]);
         }
+
+         */
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {

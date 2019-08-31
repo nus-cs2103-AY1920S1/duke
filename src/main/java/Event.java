@@ -18,6 +18,16 @@ public class Event extends Task {
         this.timeInFile = dateTimeString;
     }
 
+    public static Event parse(String[] fullCommand) {
+        if (fullCommand.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! The description of an event cannot be empty :-(\n" + "    "
+                    + "____________________________________________________________\n");
+        }
+        String[] detailsArray = fullCommand[1].split(" /at ", 2);
+        return new Event(detailsArray[0], detailsArray[1]);
+    }
+
     /**
      * Formats the event to be stored in the hard disk.
      *

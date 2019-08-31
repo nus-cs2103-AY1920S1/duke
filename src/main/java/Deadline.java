@@ -18,6 +18,16 @@ public class Deadline extends Task {
         this.timeInFile = dateTimeString;
     }
 
+    public static Deadline parse(String[] fullCommand) {
+        if (fullCommand.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! The description of a deadline cannot be empty :-(\n" + "    "
+                    + "____________________________________________________________\n");
+        }
+        String[] detailsArray = fullCommand[1].split(" /by ", 2);
+        return new Deadline(detailsArray[0], detailsArray[1]);
+    }
+
     /**
      * Formats the deadline to be stored in the hard disk.
      *

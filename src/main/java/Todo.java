@@ -12,6 +12,15 @@ public class Todo extends Task {
         super(description);
     }
 
+    public static Todo parse(String[] fullCommand) throws DukeException {
+        if (fullCommand.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! The description of a todo cannot be empty :-(\n" + "    "
+                    + "____________________________________________________________\n");
+        }
+        return new Todo(fullCommand[1]);
+    }
+
     /**
      * Formats the todo to be stored in the hard disk.
      *

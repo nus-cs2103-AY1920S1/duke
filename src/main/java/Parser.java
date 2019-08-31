@@ -17,9 +17,11 @@ public class Parser {
         case "find":
             return new FindCommand(currArray[1]);
         case "todo":
+            return new AddCommand(Todo.parse(currArray));
         case "deadline":
+            return new AddCommand(Deadline.parse(currArray));
         case "event":
-            return new AddCommand(currArray);
+            return new AddCommand(Event.parse(currArray));
         default:
             throw new DukeException("    ____________________________________________________________\n"
                     + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    "

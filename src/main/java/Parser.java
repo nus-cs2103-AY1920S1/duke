@@ -2,7 +2,8 @@ public class Parser {
 
     /**
      * This method is used to parse the user command the task list from disk.
-     * @param  fullCommand command which is read as a string by the UI.
+     *
+     * @param fullCommand command which is read as a string by the UI.
      * @return Command command which can be executed by application.
      */
     public static Command parse(String fullCommand) throws DukeException {
@@ -25,21 +26,21 @@ public class Parser {
             }
             Task t;
             switch (input[0]) {
-                case "todo":
-                    t = new Todo(input[1].trim());
-                    break;
-                case "deadline": {
-                    String[] str = input[1].trim().split("/");
-                    t = new Deadline(str[0], str[1].substring(3));
-                    break;
-                }
-                case "event": {
-                    String[] str = input[1].trim().split("/", 2);
-                    t = new Event(str[0], str[1].substring(3));
-                    break;
-                }
-                default:
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            case "todo":
+                t = new Todo(input[1].trim());
+                break;
+            case "deadline": {
+                String[] str = input[1].trim().split("/");
+                t = new Deadline(str[0], str[1].substring(3));
+                break;
+            }
+            case "event": {
+                String[] str = input[1].trim().split("/", 2);
+                t = new Event(str[0], str[1].substring(3));
+                break;
+            }
+            default:
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             return new AddCommand(t);
 

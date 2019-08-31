@@ -2,11 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+    Scanner scanner;
+
+    public Ui() {
+        scanner = new Scanner(System.in);
+    }
+
 
     /**
      * This method is used to print loading error to user.
-     *
-     * @return Nothing
      */
     public void showLoadingError() {
         System.out.println("File cannot be loaded.");
@@ -14,8 +18,6 @@ public class Ui {
 
     /**
      * This method is used to print welcome message to user.
-     *
-     * @return Nothing
      */
     public void showWelcome() {
         System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
@@ -30,9 +32,9 @@ public class Ui {
      *
      * @return String This returns user command as a string.
      */
-    public String readCommand() throws DukeException {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+    public String readCommand() {
+
+        return scanner.nextLine();
     }
 
     public void print(String msg) {

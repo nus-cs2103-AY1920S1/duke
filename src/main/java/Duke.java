@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    private static Task[] tasks = new Task[100];
-    private static int tasksCount = 0;
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static final String indent = "    ";
 
     public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
@@ -31,29 +32,33 @@ public class Duke {
                 return;
             case "done":
                 int completedTaskNum = Integer.parseInt(newTaskSplit[1]) - 1;
-                Task completedTask = tasks[completedTaskNum];
+                Task completedTask = tasks.get(completedTaskNum);
                 printAndEvaluateTaskDone(completedTask);
                 break;
             case "event":
                 try {
-                    Event newEvent = parseAndEvaluateEvent(newTaskSplit);
-                    addEvent(newEvent);
+                    parseAndEvaluateEvent(newTaskSplit);
                 } catch (DukeException e) {
                     addBorder(e.getMessage());
                 }
                 break;
             case "deadline":
                 try {
-                    Deadline newDeadline = parseAndEvaluateDeadline(newTaskSplit);
-                    addDeadline(newDeadline);
+                    parseAndEvaluateDeadline(newTaskSplit);
                 } catch (DukeException e) {
                     addBorder(e.getMessage());
                 }
                 break;
             case "todo":
                 try {
-                    ToDo newToDo = parseAndEvaluateToDo(newTaskSplit);
-                    addToDo(newToDo);
+                    parseAndEvaluateToDo(newTaskSplit);
+                } catch (DukeException e) {
+                    addBorder(e.getMessage());
+                }
+                break;
+            case "delete":
+                try {
+                    parseAndEvaluateDelete(newTaskSplit);
                 } catch (DukeException e) {
                     addBorder(e.getMessage());
                 }
@@ -66,7 +71,7 @@ public class Duke {
     }
 
     static void addBorder(String input) {
-        String border = "__________________________________________________________";
+        String border = "____________________________________________________________";
         System.out.print(border + "\n" + input + "\n" + border + "\n\n");
     }
 
@@ -93,39 +98,65 @@ public class Duke {
         tasksCount++;
     }
     */
-    static ToDo parseAndEvaluateToDo(String[] newTaskSplit) throws DukeException {
+
+    static void parseAndEvaluateDelete(String[] newTaskSplit) throws DukeException {
+        int newTaskLen = newTaskSplit.length;
+        if (newTaskLen < 2) {
+            throw new DukeDeleteIllegalArgumentException("You have not entered a number for deletion");
+        } else if (newTaskLen > 2) {
+            throw new DukeDeleteIllegalArgumentException("You have entered too many arguments for deletion");
+        } else {
+            try {
+                int deletionNum = Integer.parseInt(newTaskSplit[1]) - 1;
+                deleteTask(deletionNum);
+            } catch (NumberFormatException e) {
+                throw new DukeDeleteIllegalArgumentException("Please enter a valid number for deletion");
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeDeleteIllegalArgumentException("Please enter a valid number within the range");
+            }
+        }
+    }
+
+    static void deleteTask(int deletionNum) throws IndexOutOfBoundsException {
+        Task deletedTask = tasks.remove(deletionNum);
+        String output = "Noted. I've removed this task: \n"
+                + deletedTask.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.\n";
+        addBorder(output);
+    }
+
+    static void parseAndEvaluateToDo(String[] newTaskSplit) throws DukeException {
         try {
             int newTaskLen = newTaskSplit.length;
             String description = newTaskSplit[1];
             for (int i = 2; i < newTaskLen; i++) {
                 description += " " + newTaskSplit[i];
             }
-            return new ToDo(description);
+            addToDo(new ToDo(description));
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeToDoIllegalArgumentException();
         }
     }
     static void addToDo(ToDo newToDo) {
-        tasks[tasksCount] = newToDo;
-        tasksCount++;
+        tasks.add(newToDo);
         String output = "Got it. I've added this task:\n"
                 + newToDo.toString()
-                + "\nNow you have " + tasksCount + " tasks in the list.";
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
         addBorder(output);
     }
 
-    static Deadline parseAndEvaluateDeadline(String[] newTaskSplit) throws DukeException {
+    static void parseAndEvaluateDeadline(String[] newTaskSplit) throws DukeException {
         try {
             int newTaskLen = newTaskSplit.length;
             boolean foundDeadline = false;
             String description = newTaskSplit[1];
-            String by = "";
+            String deadlineTime = "";
             for (int i = 2; i < newTaskLen; i++) {
                 if (foundDeadline) {
                     if (i == newTaskLen - 1) {
-                        by += newTaskSplit[i];
+                        deadlineTime += newTaskSplit[i];
                     } else {
-                        by += newTaskSplit[i] + " ";
+                        deadlineTime += newTaskSplit[i] + " ";
                     }
                 } else {
                     if (newTaskSplit[i].equals("/by")) {
@@ -136,7 +167,7 @@ public class Duke {
                 }
             }
             if (foundDeadline) {
-                return new Deadline(description, by);
+                addDeadline(new Deadline(description, deadlineTime));
             } else {
                 throw new DukeDeadlineIllegalArgumentException("deadline");
             }
@@ -146,26 +177,25 @@ public class Duke {
     }
 
     static void addDeadline(Deadline newDeadline) {
-        tasks[tasksCount] = newDeadline;
-        tasksCount++;
+        tasks.add(newDeadline);
         String output = "Got it. I've added this task:\n"
                 + newDeadline.toString()
-                + "\nNow you have " + tasksCount + " tasks in the list.";
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
         addBorder(output);
     }
 
-    static Event parseAndEvaluateEvent(String[] newTaskSplit) throws DukeException {
+    static void parseAndEvaluateEvent(String[] newTaskSplit) throws DukeException {
         int newTaskLen = newTaskSplit.length;
         try {
             boolean foundEvent = false;
             String description = newTaskSplit[1];
-            String at = "";
+            String eventTime = "";
             for (int i = 2; i < newTaskLen; i++) {
                 if (foundEvent) {
                     if (i == newTaskLen - 1) {
-                        at += newTaskSplit[i];
+                        eventTime += newTaskSplit[i];
                     } else {
-                        at += newTaskSplit[i] + " ";
+                        eventTime += newTaskSplit[i] + " ";
                     }
                 } else {
                     if (newTaskSplit[i].equals("/at")) {
@@ -176,7 +206,7 @@ public class Duke {
                 }
             }
             if (foundEvent) {
-                return new Event(description, at);
+                addEvent(new Event(description, eventTime));
             } else {
                 throw new DukeEventIllegalArgumentException("timing");
             }
@@ -186,26 +216,24 @@ public class Duke {
     }
 
     static void addEvent(Event newEvent) {
-        tasks[tasksCount] = newEvent;
-        tasksCount++;
+        tasks.add(newEvent);
         String output = "Got it. I've added this task:\n"
                 + newEvent.toString()
-                + "\nNow you have " + tasksCount + " tasks in the list.";
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
         addBorder(output);
     }
 
     static void printList() {
         String str = "";
-
-        for (int i = 1; i < tasksCount + 1; i++) {
-            String newTask = tasks[i-1].toString();
-            if (i == tasksCount) {
-                str += i + ". " + newTask;
+        int numTasks = tasks.size();
+        for (int i = 0; i < numTasks; i++) {
+            String newTask = tasks.get(i).toString();
+            if (i == numTasks - 1) {
+                str += (i + 1) + ". " + newTask;
             } else {
-                str += i + ". " + newTask + "\n";
+                str += (i + 1) + ". " + newTask + "\n";
             }
         }
-
         addBorder(str);
     }
 

@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.Ui;
 import seedu.duke.Storage;
 import seedu.duke.Parser;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeNoSuchCommandException;
 
 /**
  * Main class of this project.

@@ -1,5 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeMissingDescriptionException;
+import seedu.duke.exception.DukeDeadlineMissingDateException;
+import seedu.duke.exception.DukeNoSuchCommandException;
+import seedu.duke.exception.DukeEventMissingDateException;
+
 /**
  * Reads in the input line, and parses accordingly.
  * Will return null if trying to access information that doesn't exist for that command.

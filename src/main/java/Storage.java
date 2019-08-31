@@ -1,5 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeSaveFailedException;
+import seedu.duke.task.Task;
+import seedu.duke.task.Event;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Todo;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;

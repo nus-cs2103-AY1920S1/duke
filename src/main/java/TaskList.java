@@ -1,5 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeDoneEmptyListException;
+import seedu.duke.exception.DukeIndexOutOfBoundException;
 import java.util.ArrayList;
 
 public class TaskList {

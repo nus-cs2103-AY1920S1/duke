@@ -3,22 +3,26 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
     private static TaskList tasks = new TaskList();
-    private Ui ui;
     private Storage storage;
 
     /**
      * Entry class to program.
-     * @param filePath Path to save file.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
+        String filePath = "./data/duke.txt";
+        Ui ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
         } catch (FileNotFoundException ignore) {
-            // Make use of default created empty Duke.Duke.TaskList if no save file is found
+            // Make use of default created empty TaskList if no save file is found
             ui.showSaveFileNotFoundError();
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
@@ -50,6 +54,15 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

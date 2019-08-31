@@ -20,7 +20,7 @@ public class Storage {
                 throw new FileErrorDukeException(filePath);
             }
         } else {
-            ui.showMessage("Save file Detected");
+            //ui.showMessage("Save file Detected");
         }
     }
 

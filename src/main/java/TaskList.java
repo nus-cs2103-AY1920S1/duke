@@ -34,35 +34,38 @@ public class TaskList {
         case "todo":
             ToDo todo = new ToDo(modifiedTask[1]);
             tasklist.add(todo);
-            statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getTotal()
+            statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "deadline":
             Deadline deadline = new Deadline(modifiedTask[1], modifiedTask[2]);
             tasklist.add(deadline);
-            statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getTotal()
+            statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "event":
             Event event = new Event(modifiedTask[1], modifiedTask[2]);
             tasklist.add(event);
-            statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getTotal()
+            statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "list":
-            statement =  checkList();
+            statement = checkList();
             break;
         case "done":
             statement = complete(Integer.parseInt(modifiedTask[1]));
             storage.save(tasklist);
             break;
         case "delete":
-        statement = delete(Integer.parseInt(modifiedTask[1]));
-        storage.save(tasklist);
+            statement = delete(Integer.parseInt(modifiedTask[1]));
+            storage.save(tasklist);
         break;
+        case "find":
+            statement = findList(modifiedTask[1]);
+            break;
         case "bye":
             statement = "bye";
             break;
@@ -80,7 +83,22 @@ public class TaskList {
         String s = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasklist.size(); i++) {
             Task t = this.tasklist.get(i);
-           s += ((i+1) + "." + t + "\n");
+            s += ((i+1) + "." + t + "\n");
+        }
+        return s.substring(0, s.length() - 1);
+    }
+
+    protected String findList(String keyword) {
+        if (this.tasklist.isEmpty()) {
+            return "\u2639 OOPS!!! There are no tasks in your list.";
+        }
+        String s = "Here are the matching tasks in your list:\n";
+        int idx = 1;
+        for (Task t : tasklist) {
+            if (t.getDescription().contains(keyword)) {
+                s += ("" + idx + t + "\n");
+                idx++;
+            }
         }
         return s.substring(0, s.length() - 1);
     }
@@ -94,8 +112,8 @@ public class TaskList {
 
     protected String delete(int i) {
         Task t = this.tasklist.remove(i - 1);
-        Task.decTotal();
-        String statement = "Noted. I've removed this task:\n  " + t + "\nNow you have " + Task.getTotal()
+        Task.decCurrTotal();
+        String statement = "Noted. I've removed this task:\n  " + t + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
         return statement;
     }

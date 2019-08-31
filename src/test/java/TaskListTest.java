@@ -19,14 +19,14 @@ public class TaskListTest {
         assertEquals(resTodo, new TaskList(new Storage("C:\\Users\\AngKa\\duke\\src\\main\\java\\test.txt"))
                         .addTask(todo));
 
-        Task.decTotal();
+        Task.decCurrTotal();
         String deadline = "deadline return book /by 18/8/2019 2000";
         String resDeadline = "Got it. I've added this task:\n  [D][\u2718] return book (by: 18/8/2019 2000)\nNow you "
                                + "have 1 tasks in the list.";
         assertEquals(resDeadline, new TaskList(new Storage("C:\\Users\\AngKa\\duke\\src\\main\\java\\test.txt"))
                         .addTask(deadline));
 
-        Task.decTotal();
+        Task.decCurrTotal();
         String event = "event reading circle /at 18/8/8/2019 1700-1900";
         String resEvent = "Got it. I've added this task:\n  [E][\u2718] reading circle (at: 18/8/8/2019 1700-1900)\n"
                             + "Now you have 1 tasks in the list.";

@@ -4,7 +4,7 @@
  * @version 0.1.3
  */
 public class Task {
-    protected static int total;
+    protected static int currTotal;
     protected String description;
     protected boolean isDone;
 
@@ -13,7 +13,7 @@ public class Task {
      * @param description Description of task.
      */
     public Task(String description) {
-        total++;
+        currTotal++;
         this.description = description;
         this.isDone = false;
     }
@@ -22,12 +22,12 @@ public class Task {
      * Returns the total number of tasks currently.
      * @return The total number of tasks currently
      */
-    public static int getTotal() {
-        return total;
+    public static int getCurrTotal() {
+        return currTotal;
     }
 
-    protected static void decTotal() {
-        total--;
+    protected static void decCurrTotal() {
+        currTotal--;
     }
 
     /**

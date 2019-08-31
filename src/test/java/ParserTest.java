@@ -15,16 +15,16 @@ public class ParserTest {
     @Test
     public void testProcessTask_success() {
         String[] test1 = new String[]{"todo", "borrow", "book"};
-        String[] res1 = new String[]{"todo", "borrow book", ""};
-        assertArrayEquals(res1, Parser.processTask(test1));
+        String[] result1 = new String[]{"todo", "borrow book", ""};
+        assertArrayEquals(result1, Parser.processTask(test1));
 
         String[] test2 = new String[]{"deadline", "return", "book", "/by", "18/8/2019", "2000"};
-        String[] res2 = new String[]{"deadline", "return book", "18/8/2019 2000"};
-        assertArrayEquals(res2, Parser.processTask(test2));
+        String[] result2 = new String[]{"deadline", "return book", "18/8/2019 2000"};
+        assertArrayEquals(result2, Parser.processTask(test2));
 
         String[] test3 = new String[]{"event", "reading", "circle", "/at", "18/8/8/2019", "1700-1900"};
-        String[] res3 = new String[]{"event", "reading circle", "18/8/8/2019 1700-1900"};
-        assertArrayEquals(res3, Parser.processTask(test3));
+        String[] result3 = new String[]{"event", "reading circle", "18/8/8/2019 1700-1900"};
+        assertArrayEquals(result3, Parser.processTask(test3));
     }
 
     /**

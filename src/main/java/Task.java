@@ -12,14 +12,16 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // returns check mark if done, cross symbol if undone
+        return (isDone ? "[\u2713] " : "[\u2718] "); // returns check mark if done, cross symbol if undone
     }
 
     public String getDescription() {
+
         return (description);
     }
 
     public void markAsDone(Task t) {
+
         t.isDone = true;
     }
 }

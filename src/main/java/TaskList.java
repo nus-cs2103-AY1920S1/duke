@@ -26,7 +26,13 @@ public class TaskList extends ArrayList<Task> {
         for (int i = 0; i < super.size(); i++) {
             Task current = super.get(i);
 
-            if (current.getDescription().contains(searchStr)) {
+            if (current
+                .getDescription()
+                .toLowerCase()
+                .contains(
+                    searchStr.toLowerCase()
+                )
+            ) {
                 newList.add(current);
             } else {
                 continue;

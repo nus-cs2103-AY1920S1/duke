@@ -23,11 +23,12 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the command to add new To-do task to list of Tasks.
+     * Executes the command to add new To-do task to list of Tasks and returns Duke's response.
      *
      * @param taskList List of Tasks to be modified by command.
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
+     * @return Response to be sent to the GUI.
      */
     public Response execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(newTask);

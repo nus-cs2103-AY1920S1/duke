@@ -11,13 +11,13 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /**
-     * Executes the command that is intended by the user.
+     * Executes the command that is intended by the user and returns Duke's response.
      *
      * @param taskList List of Tasks to be modified by command.
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      *
-     * @return Message to be output
+     * @return Response to be sent to the GUI.
      */
     public abstract Response execute(TaskList taskList, Ui ui, Storage storage);
 

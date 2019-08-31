@@ -25,8 +25,18 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDukeUI(duke.getUI());
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stop(){
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

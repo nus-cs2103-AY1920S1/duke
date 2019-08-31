@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.dukeexception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import java.io.BufferedReader;
@@ -31,6 +32,7 @@ public class Ui {
         this.userInput = new BufferedReader(new InputStreamReader(System.in));
     }
 
+
     private String getTotalTasks() {
         return "Now you have " + Task.totalTasks + " tasks in the list.";
     }
@@ -50,25 +52,29 @@ public class Ui {
     }
 
     /**
-     * Prints the Duke goodbye message.
+     * Returns a response representing an goodbye message.
+     *
+     * @return Response to be sent to the GUI.
      */
     public Response getGoodByeResponse() {
         return new Response(GOODBYE, true);
     }
 
     /**
-     * Prints message to indicate successful completion of task.
+     * Returns response indicating that a task has been completed.
      *
      * @param doneTask Task that has just been completed.
+     * @return Response to be sent to the GUI.
      */
     public Response getNiceDoneResponse(Task doneTask) {
         return new Response((NICE_ADDED) + "\n" + doneTask);
     }
 
     /**
-     * Prints message to indicate successful addition of task.
+     * Returns a response to indicate successful addition of task.
      *
      * @param newTask New Task that has just been added.
+     * @return Response to be sent to the GUI.
      */
     public Response getGotItAddedResponse(Task newTask) {
         return new Response((GOT_IT) + "\n" + " " + newTask.toString()
@@ -76,9 +82,10 @@ public class Ui {
     }
 
     /**
-     * Prints message to indicate successful deletion of task.
+     * Returns a response to indicate successful deletion of task.
      *
      * @param deletedTask Task that has been deleted.
+     * @return Response to be sent to the GUI.
      */
     public Response getDeletedResponse(Task deletedTask) {
         return new Response(DELETED + "\n" + deletedTask +
@@ -86,23 +93,19 @@ public class Ui {
     }
 
     /**
-     * Prints an error message when reading input fails.
-     */
-    private void showReadingError() {
-        System.err.println("Error reading user input");
-    }
-
-    /**
-     * Prints an error message when closing input stream fails.
+     * Returns a response indicating failure to close input stream.
+     *
+     * @return Response to be sent to the GUI.
      */
     private Response getCloseInputErrorResponse() {
         return new Response("Error close user input stream");
     }
 
     /**
-     * Prints all the tasks that Duke has recorded so far.
+     * Returns a response with all Tasks to print.
      *
      * @param tasklist TaskList containing all Tasks to print.
+     * @return Response to be sent to the GUI.
      */
     public Response getPrintTaskResponse(TaskList tasklist) {
         return new Response((TASKS) + "\n" + tasklist.toString());
@@ -120,45 +123,70 @@ public class Ui {
     }
 
     /**
-     * Prints all matching tasks.
+     * Reads user input by line, returns as a String.
+     *
+     * @return Returns user's input line.
+     */
+    public String readLine(){
+        try {
+            return userInput.readLine();
+        } catch (Exception e){
+            return "Error reading input";
+        }
+    }
+
+    /**
+     * Returns response with all Tasks matching input string.
+     *
+     * @return Response to be sent to the GUI.
      */
     public Response getMatchingResponse(TaskList taskList) {
        return new Response(MATCHING + "\n" + taskList.toString());
     }
 
     /**
-     * Prints message indicating no matching tasks.
+     * Returns response. indicating no matching tasks.
+     *
+     * @return Response to be sent to the GUI.
      */
     public Response getNoMatchResponse() {
         return new Response(NO_MATCHING);
     }
 
     /**
-     * Prints an error message when loading from Storage fails.
+     * Returns a response indicating failure to load from Storage.
+     *
+     * @return Response to be sent to the GUI.
      */
     public Response getLoadingErrorResponse() {
         return new Response("Error loading from specified file path");
     }
 
     /**
-     * Prints an error message when writing to file path fails.
+     * Returns a goodbye response that indicates failure to write to file path.
+     *
+     * @return Response to be sent to the GUI.
      */
     public Response getWritingErrorAndByeResponse() {
-        return new Response("Error writing to specified file path" + "\n" + GOODBYE, true);
+        return new Response("Error writing to specified file path"
+                + "\n" + GOODBYE, true);
     }
 
 
     /**
-     * Prints message indicating successful writing to file path.
+     * Returns a goodbye response that indicates successful writing to file path.
+     *
+     * @return Response to be sent to the GUI.
      */
     public Response getDoneWritingAndByeResponse() {
         return new Response("Writing new changes done!" + "\n" + GOODBYE, true);
     }
 
     /**
-     * Prints error message of DukeException caught.
+     * Returns a response to the GUI containing the error to be printed.
      *
      * @param errorMessage Error Message to be printed.
+     * @return Response to be sent to the GUI.
      */
     public Response getErrorResponse(String errorMessage) {
         return new Response(errorMessage);

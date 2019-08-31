@@ -19,13 +19,14 @@ public class DeadlineCommand extends Command {
      * @param description Description of deadline.
      * @param date Date of Deadline to be completed by.
      * @param timing Timing of Deadline to be completed by.
+     * @return Response to be sent to the GUI.
      */
     public DeadlineCommand(String description, String date, String timing) {
         this.newTask = new Deadline(description, date, timing);
     }
 
     /**
-     * Executes the command to add the new Deadline.
+     * Executes the command to add the new Deadline and returns Duke's response.
      *
      * @param taskList List of Tasks to be modified by command.
      * @param ui Ui object to be called by the command.

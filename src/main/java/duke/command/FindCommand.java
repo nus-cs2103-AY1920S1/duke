@@ -31,11 +31,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command.
+     * Executes the find command and returns Duke's response.
      *
      * @param taskList TaskList of Tasks to find keyword in.
      * @param ui Ui to print matching Tasks.
      * @param storage Storage to modify.
+     * @return Response to be sent to the GUI.
      */
     public Response execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();

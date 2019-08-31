@@ -23,11 +23,12 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the Done command.
+     * Executes the Done command and returns Duke's response.
      *
      * @param taskList List of Tasks to be modified by command.
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
+     * @return Response to be sent to the GUI.
      */
     public Response execute(TaskList taskList, Ui ui, Storage storage) {
         try {

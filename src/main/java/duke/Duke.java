@@ -17,15 +17,6 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
-//    /** JavaFX variables. */
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
     /**
      * Class constructor that specifies file path to load storage from.
      *
@@ -36,6 +27,10 @@ public class Duke {
         this.storage = new Storage(filepath);
     }
 
+    /**
+     * Class constructor that assumes file path to load storage from is in
+     * data/duke.txt.
+     */
     public Duke(){
         this.ui = new Ui();
         this.storage = new Storage("data/duke.txt");
@@ -45,6 +40,15 @@ public class Duke {
             ui.getLoadingErrorResponse();
             this.taskList = new TaskList();
         }
+    }
+
+    /**
+     * Returns the Ui object handle inputs and outputs for this Duke instance.
+     *
+     * @return This Duke instance's Ui object.
+     */
+    public Ui getUI(){
+        return ui;
     }
 
     private Response process(String input) {
@@ -60,8 +64,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response after passing user input through Duke's logic.
+     *
+     * @param input User input from GUI.
+     * @return Response returned by Duke's logic.
      */
     public Response getResponse(String input) {
         Response response = process(input);

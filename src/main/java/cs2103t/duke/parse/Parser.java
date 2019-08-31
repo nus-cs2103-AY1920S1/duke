@@ -11,13 +11,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents parsing logic for commands. A full command will have the first word as one of the valid keywords (matching
+ * a TaskType, and subsequent words should match the required format (@see Duke), or an Exception may be thrown.
+ */
 public class Parser {
+    /** Full command. */
     private String input;
 
+    /**
+     * Constucts a parser on input.
+     * @param input full command.
+     */
     public Parser(String input) {
         this.input = input;
     }
 
+    /**
+     * Gets the TaskType of the command.
+     * @return the task type.
+     * @throws DukeException if keyword is invalid.
+     */
     public TaskType getInputTaskType() throws DukeException {
         String keyword = this.input.split("\\s+")[0];
         TaskType taskType = TaskType.convertToTaskType(keyword);
@@ -27,6 +41,11 @@ public class Parser {
         return taskType;
     }
 
+    /**
+     * Gets the String of command after the keyword.
+     * Returns an empty string if full command contains <2 words.
+     * @return description.
+     */
     public String getInputEntireDescription() {
         Scanner sc = new Scanner(this.input);
         sc.next(); //scan past taskType
@@ -38,6 +57,12 @@ public class Parser {
         return description;
     }
 
+    /**
+     * Parses fullCommand String input into a Command.
+     * @param fullCommand user input.
+     * @return Command corresponding to user input.
+     * @throws DukeException if no valid input is given.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("")) {
             throw new DukeException("Please give me a command master! (You didn't input any command, but entered...");
@@ -67,10 +92,18 @@ public class Parser {
         return cmd;
     }
 
+    /*
     public String getDescriptionWithoutDate() { //only if input is entire description alr; aka for indiv cs2103t.duke.task.Task classes
         return "";
     }
+     */
 
+    /**
+     * Converts string to Date.
+     * @param input string containing date.
+     * @return Date object representing the date.
+     * @throws DukeException if input is not in "dd/MM/yyyy HHmm" format.
+     */
     public static Date convertToDate(String input) throws DukeException{
         Date date = null;
         try {
@@ -82,6 +115,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts string to int.
+     * @param input string containing only the id.
+     * @return id.
+     * @throws DukeException if string is not in parsable format.
+     */
     public static int parseStrToInt(String input) throws DukeException {
         int id = 0;
         try {

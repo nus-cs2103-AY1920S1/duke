@@ -3,12 +3,16 @@ package cs2103t.duke.task;
 import cs2103t.duke.exception.EmptyDescriptionException;
 import cs2103t.duke.exception.IncorrectTaskFormatException;
 
-import java.util.Scanner;
-
+/**
+ * Represents an event task. Event tasks have 4 main attributes: their type, description, at when, and
+ * whether it is completed.
+ */
 public class Event extends Task {
-    //Deadlines can have (notes)
+    /** Description of event task without the date time. */
     private String description;
+    /** Date time information in the following format: (at: date time). */
     private String notesInBrackets;
+    /** String containing only date and time. */
     private String datetime;
 
     private Event() {}
@@ -37,6 +41,13 @@ public class Event extends Task {
         this.datetime = datetime;
     }
 
+    /**
+     * Creates an event task with the description of task (including date time information).
+     * @param descr Description of task including date and time.
+     * @return Event object representing task with the description.
+     * @throws EmptyDescriptionException if description is empty.
+     * @throws IncorrectTaskFormatException if task format is incorrect.
+     */
     public static Event create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {
         if (descr.equals(""))
             throw new EmptyDescriptionException("an event");

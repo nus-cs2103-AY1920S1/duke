@@ -115,22 +115,22 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "todo":
-            commandType = Type.ADD_TODO;
+            commandType = Type.TYPE_ADD_TODO;
             break;
         case "event":
-            commandType = Type.ADD_EVENT;
+            commandType = Type.TYPE_ADD_EVENT;
             break;
         case "deadline":
-            commandType = Type.ADD_DEADLINE;
+            commandType = Type.TYPE_ADD_DEADLINE;
             break;
         case "delete":
-            commandType = Type.DELETE;
+            commandType = Type.TYPE_DELETE;
             break;
         case "done":
-            commandType = Type.COMPLETE;
+            commandType = Type.TYPE_COMPLETE;
             break;
         case "find":
-            commandType = Type.SEARCH;
+            commandType = Type.TYPE_SEARCH;
             break;
         default:
             throw new DukeUnknownCommandException();
@@ -186,17 +186,17 @@ public class Parser {
         }
 
         switch (commandType) {
-        case DELETE:
+        case TYPE_DELETE:
             return new DeleteTaskCommand(parametersProvided[0]);
-        case COMPLETE:
+        case TYPE_COMPLETE:
             return new CompleteTaskCommand(parametersProvided[0]);
-        case SEARCH:
+        case TYPE_SEARCH:
             return new SearchCommand(parametersProvided[0]);
-        case ADD_TODO:
+        case TYPE_ADD_TODO:
             //Fallthrough
-        case ADD_DEADLINE:
+        case TYPE_ADD_DEADLINE:
             //Fallthrough
-        case ADD_EVENT:
+        case TYPE_ADD_EVENT:
             return new AddTaskCommand(commandType, parametersProvided);
         default:
             return null; //unreachable

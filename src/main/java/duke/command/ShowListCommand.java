@@ -9,6 +9,6 @@ public class ShowListCommand extends Command {
      * Constructs the command which displays the list of tasks in the task list
      */
     public ShowListCommand() {
-        super(Type.LIST);
+        super(Type.TYPE_LIST);
     }
 }

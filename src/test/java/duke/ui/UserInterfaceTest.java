@@ -1,11 +1,13 @@
 import org.junit.jupiter.api.Test;
+
 import duke.io.Parser;
-import duke.command.DukeMissingCommandException;
+
 import duke.command.DeleteTaskCommand;
 import duke.command.CompleteTaskCommand;
+import duke.command.DukeMissingCommandException;
 import duke.command.DukeIncorrectParameterTypeException;
 
-import duke.frontend.UserInterface;
+import duke.ui.UserInterface;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,7 +18,7 @@ public class UserInterfaceTest {
     UserInterface ui = new UserInterface();
 
     /**
-     * Test whether an exception is thrown when the wrong type of arguement is used for the commands to delete a task
+     * Test whether an exception is thrown when the wrong type of argument is used for the commands to delete a task
      * or mark a task as done
      */
     @Test

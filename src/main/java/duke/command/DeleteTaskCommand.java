@@ -11,6 +11,6 @@ public class DeleteTaskCommand extends Command {
      * @param taskNumber The number corresponding position of the task in the task list to be marked deleted
      */
     public DeleteTaskCommand(String taskNumber) {
-        super(Type.DELETE, taskNumber);
+        super(Type.TYPE_DELETE, taskNumber);
     }
 }

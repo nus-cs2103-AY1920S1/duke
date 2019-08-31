@@ -11,6 +11,6 @@ public class CompleteTaskCommand extends Command {
      * @param taskNumber The number corresponding position of the task in the task list to be marked as done
      */
     public CompleteTaskCommand(String taskNumber) {
-        super(Type.COMPLETE, taskNumber);
+        super(Type.TYPE_COMPLETE, taskNumber);
     }
 }

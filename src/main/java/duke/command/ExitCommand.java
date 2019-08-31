@@ -9,6 +9,6 @@ public class ExitCommand extends Command {
      * Constructs the command which tells Duke to close
      */
     public ExitCommand() {
-        super(Type.EXIT);
+        super(Type.TYPE_EXIT);
     }
 }

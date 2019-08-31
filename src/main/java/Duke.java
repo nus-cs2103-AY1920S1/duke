@@ -37,7 +37,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filePath= "data/dukeData.txt";
+        String filePath = "data/dukeData.txt";
         new Duke(filePath).run();
     }
 }

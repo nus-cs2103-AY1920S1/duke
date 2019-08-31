@@ -52,7 +52,7 @@ public class Ui {
      * @param msg The message to be displayed.
      */
     void showMessage(int numOfSpace, String msg) {
-        for(int i = 0; i < numOfSpace; i++) {
+        for (int i = 0; i < numOfSpace; i++) {
             System.out.print(" ");
         }
         System.out.println(msg);

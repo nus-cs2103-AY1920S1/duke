@@ -14,7 +14,7 @@ public class DukeFileReader {
      * Returns the Task data present in the file path in the form of an arrayList.
      * @param filePath the filepath to obtain data from
      * @return an arrayList that contains task data from the file path
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException The exception when a file is not found.
      */
     public static ArrayList<Task> getData(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
@@ -28,10 +28,12 @@ public class DukeFileReader {
                     tasks.add(new ToDoTask(lineSplit[1].trim(), lineSplit[2].trim()));
                     break;
                 case "event":
-                    tasks.add(new EventsTask(lineSplit[1].trim(), lineSplit[2].trim(), lineSplit[3].trim()));
+                    tasks.add(new EventsTask(lineSplit[1].trim(), lineSplit[2].trim(),
+                                lineSplit[3].trim()));
                     break;
                 case "deadline":
-                    tasks.add(new DeadlineTask(lineSplit[1].trim(), lineSplit[2].trim(), lineSplit[3].trim()));
+                    tasks.add(new DeadlineTask(lineSplit[1].trim(), lineSplit[2].trim(),
+                                lineSplit[3].trim()));
                     break;
                 default:
                     throw new FileErrorDukeException(file.getAbsolutePath());

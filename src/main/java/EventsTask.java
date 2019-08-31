@@ -17,7 +17,7 @@ public class EventsTask extends Task {
     public EventsTask(String task) {
         super(task);
         String[] taskSplit = task.split("/at");
-        if(taskSplit.length < 2) {
+        if (taskSplit.length < 2) {
             throw new EmptyDescriptionDukeException("event", "/at");
         } else if (taskSplit[0].equals("")) {
             throw new EmptyDescriptionDukeException("event");

@@ -17,7 +17,7 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String task) {
         super(task);
         String[] taskSplit = task.split("/by");
-        if(taskSplit.length < 2) {
+        if (taskSplit.length < 2) {
             throw new EmptyDescriptionDukeException("deadline", "/by");
         } else if (taskSplit[0].equals("")) {
             throw new EmptyDescriptionDukeException("deadline");

@@ -1,10 +1,10 @@
-package task;
+package seedu.duke.task;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
-import exception.DukeException;
+import seedu.duke.exception.DukeException;
 
 public class TaskList extends ArrayList<Task>{
     public TaskList(){}

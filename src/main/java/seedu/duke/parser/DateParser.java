@@ -1,4 +1,4 @@
-package parser;
+package seedu.duke.parser;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;

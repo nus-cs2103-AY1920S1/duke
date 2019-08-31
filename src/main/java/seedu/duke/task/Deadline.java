@@ -1,8 +1,8 @@
-package task;
+package seedu.duke.task;
 
 import java.text.ParseException;
 import java.util.Date;
-import parser.DateParser;
+import seedu.duke.parser.DateParser;
 
 public class Deadline extends Task{
     protected String strBy;

@@ -1,8 +1,8 @@
-package parser;
+package seedu.duke.parser;
 
-import ui.UI;
-import exception.DukeException;
-import task.*;
+import seedu.duke.ui.UI;
+import seedu.duke.exception.DukeException;
+import seedu.duke.task.*;
 import java.io.FileWriter;
 import java.io.IOException;
 

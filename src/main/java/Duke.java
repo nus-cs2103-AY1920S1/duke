@@ -38,7 +38,10 @@ public class Duke {
             }
         }
         ui.showGoodbye();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c15043ac81860360c58b39a9b432b0229f5d4d30
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,8 +16,8 @@ public class DukeFileReader {
      */
     public static ArrayList<Task> getData(String filePath) throws FileNotFoundException {
         ArrayList<Task> Tasks = new ArrayList<Task>();
-        File f = new File(filePath);
-        Scanner sc = new Scanner(f);
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             String[] lineSplit = line.split("\\|");
@@ -29,10 +30,10 @@ public class DukeFileReader {
                     tasks.add(new EventsTask(lineSplit[1].trim(), lineSplit[2].trim(), lineSplit[3].trim()));
                     break;
                 case "deadline":
-                    tasks.add(new DeadlinesTask(lineSplit[1].trim(), lineSplit[2].trim(), lineSplit[3].trim()));
+                    tasks.add(new DeadlineTask(lineSplit[1].trim(), lineSplit[2].trim(), lineSplit[3].trim()));
                     break;
                 default:
-                    throw new FileErrorDukeException(f.getAbsolutePath());
+                    throw new FileErrorDukeException(file.getAbsolutePath());
             }
         }
         return tasks;

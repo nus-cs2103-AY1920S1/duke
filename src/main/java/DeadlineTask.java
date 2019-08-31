@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-public class DeadlinesTask extends Task {
+public class DeadlineTask extends Task {
     String taskName;
     String taskTime;
 
-    public DeadlinesTask(String task) {
+    public DeadlineTask(String task) {
         super(task);
         String[] taskSplit = task.split("/by");
         if(taskSplit.length < 2) {
@@ -28,11 +28,12 @@ public class DeadlinesTask extends Task {
             throw new InvalidTimeDukeException();
         }
     }
-    public DeadlinesTask(String isCompleted, String taskName, String taskTime) {
+    public DeadlineTask(String isCompleted, String taskName, String taskTime) {
         super(taskName, Boolean.parseBoolean(isCompleted));
         this.taskName = taskName;
         this.taskTime = taskTime;
     }
+
     @Override
     public String toString() {
         String output = "[D]";

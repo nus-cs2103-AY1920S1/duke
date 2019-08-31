@@ -4,15 +4,20 @@ import cs2103t.duke.exception.EmptyDescriptionException;
 import cs2103t.duke.exception.IncorrectTaskFormatException;
 import cs2103t.duke.parse.Parser;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a task with deadline. Deadline tasks have 4 main attributes: their type, description, by when, and
+ * whether it is completed.
+ */
 public class Deadline extends Task {
-    //Deadlines can have (notes)
+    /** Description of deadline task without the date time. */
     private String description;
+    /** Date time information in the following format: (by: date time). */
     private String notesInBrackets;
+    /** String containing only date and time. */
     private String datetime;
+    /** Date object representing date and time. */
     private Date date;
 
     private Deadline() {}
@@ -44,6 +49,13 @@ public class Deadline extends Task {
         this.date = Parser.convertToDate(date);
     }
 
+    /**
+     * Creates a deadline task with the description of task (including date time information).
+     * @param descr Description of task including date and time.
+     * @return Deadline object representing task with the description.
+     * @throws EmptyDescriptionException if description is empty.
+     * @throws IncorrectTaskFormatException if task format is incorrect.
+     */
     public static Deadline create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {
         if (descr.equals(""))
             throw new EmptyDescriptionException("a deadline");

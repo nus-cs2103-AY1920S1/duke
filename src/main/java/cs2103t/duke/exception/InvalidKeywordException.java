@@ -1,6 +1,13 @@
 package cs2103t.duke.exception;
 
+/**
+ * Represents exceptions where an invalid keyword (of command) is given.
+ */
 public class InvalidKeywordException extends DukeException {
+    /**
+     * Constructs an InvalidKeywordException.
+     * @param msg error message.
+     */
     public InvalidKeywordException(String msg) {
         super(msg);
     }

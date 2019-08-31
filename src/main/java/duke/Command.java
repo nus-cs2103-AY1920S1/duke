@@ -3,7 +3,7 @@
  */
 interface Command {
     /**
-     * This method executes a certain command or action that is read by the Parser and is called
+     * Executes a certain command or action that is read by the Parser and is called
      * in the DukeManager class.
      * 
      * <p>There is 6 different classes which implements this class.

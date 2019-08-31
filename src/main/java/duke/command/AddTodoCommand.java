@@ -27,7 +27,8 @@ public class AddTodoCommand extends Command {
     /**
      * Creates a new <code>Todo</code> object and adds it into input <code>TaskList</code>.
      * Calls the method in the <code>Ui</code> object to output a message.
-     * Calls the method in the <code>Storage</code> object to write all <code>Task</code> objects in the <code>TaskList</code> to the hard disk.
+     * Calls the method in the <code>Storage</code> object to write all <code>Task</code> objects
+     * in the <code>TaskList</code> to the hard disk.
      * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> which handles user input and outputs.
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
@@ -36,7 +37,7 @@ public class AddTodoCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (details.trim().length() == 0) {
-            throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         Task todo = new Todo(details.trim());
         tasks.addTask(todo);

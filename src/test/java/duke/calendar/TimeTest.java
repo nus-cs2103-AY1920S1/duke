@@ -20,7 +20,7 @@ public class TimeTest {
             Time time = new Time("2450");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Please input a valid time.", e.getMessage());
+            assertEquals("☹ OOPS!!! Please input a valid time.", e.getMessage());
         }
     }
 
@@ -30,7 +30,7 @@ public class TimeTest {
             Time time = new Time("2361");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Please input a valid time.", e.getMessage());
+            assertEquals("☹ OOPS!!! Please input a valid time.", e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class TimeTest {
             Time time = new Time("17092");
             fail();
         } catch (Exception e) {
-            assertEquals("\u2639 OOPS!!! Please input a valid time e.g. 1800.", e.getMessage());
+            assertEquals("☹ OOPS!!! Please input a valid time e.g. 1800.", e.getMessage());
         }
     }
 }

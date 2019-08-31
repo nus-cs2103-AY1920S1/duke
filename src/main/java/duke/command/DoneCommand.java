@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task action = tasks.getTask(index);
         if (index + 1 > tasks.getListSize()) {
-            throw new DukeException("\u2639 OOPS!!! This item does not exist.");
+            throw new DukeException("☹ OOPS!!! This item does not exist.");
         }
         action.setDone();
         ui.printDoneMessage(action);

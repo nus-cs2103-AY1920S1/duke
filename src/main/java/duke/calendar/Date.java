@@ -35,21 +35,21 @@ public class Date {
         }
         String[] dateSplit = unprocessedDate.split("/");
         if (dateSplit.length < 3) {
-            throw new DukeException("\u2639 OOPS!!! Please specify the date" +
-                    " in the format date/month/year e.g. 2/12/2019.");
+            throw new DukeException("☹ OOPS!!! Please specify the date"
+                    + " in the format date/month/year e.g. 2/12/2019.");
         }
         int monthNumber = Integer.parseInt(dateSplit[1]);
         if (isValidMonth(monthNumber)) {
             this.month = Month.of(monthNumber);
         } else {
-            throw new DukeException("\u2639 OOPS!!! Please input a valid month.");
+            throw new DukeException("☹ OOPS!!! Please input a valid month.");
         }
         this.year = Integer.parseInt(dateSplit[2]);
         int inputDay = Integer.parseInt(dateSplit[0]);
         if (isValidDay(inputDay, monthNumber, year)) {
             this.day = inputDay;
         } else {
-            throw new DukeException("\u2639 OOPS!!! Please input a valid day.");
+            throw new DukeException("☹ OOPS!!! Please input a valid day.");
         }
     }
 
@@ -74,7 +74,7 @@ public class Date {
      * @return Whether the input day is valid.
      */
     public boolean isValidDay(int day, int monthNumber, int year) {
-        switch(monthNumber) {
+        switch (monthNumber) {
         case 1:
         case 3:
         case 5:

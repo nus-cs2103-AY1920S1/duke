@@ -39,19 +39,20 @@ public class AddEventCommand extends Command {
      * @throws DukeException If insufficient or incorrect details are provided.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] detailsSplit = details.split( "/at");
+        String[] detailsSplit = details.split("/at");
         if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
-            throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
         if (detailsSplit.length < 2 || detailsSplit[1].trim().length() == 0) {
-            throw new DukeException("\u2639 OOPS!!! The description of an event requires a task and/or a scheduled time");
+            throw new DukeException("☹ OOPS!!! The description of an event requires a task and/or"
+                    + "a scheduled time");
         }
         String event = detailsSplit[0].trim();
         String timings = detailsSplit[1].trim();
         try {
             String[] startAndEndSplit = timings.split("/to");
             if (startAndEndSplit[0].trim().length() == 0) {
-                throw new DukeException("\u2639 OOPS!!! Please input a start time.");
+                throw new DukeException("☹ OOPS!!! Please input a start time.");
             }
             String startDetails = startAndEndSplit[0].trim();
             String[] startDateAndTimeSplit = startDetails.split(" ");
@@ -60,7 +61,7 @@ public class AddEventCommand extends Command {
             if (startDateAndTimeSplit.length == 2) {
                 startTime = startDateAndTimeSplit[1];
             } else if (startDateAndTimeSplit.length > 2) {
-                throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             String endDetails = "";
             String endDate = "";
@@ -71,8 +72,8 @@ public class AddEventCommand extends Command {
                 endDate = endDateAndTimeSplit[0];
                 if (endDateAndTimeSplit.length == 2) {
                     endTime = endDateAndTimeSplit[1];
-                } else if (endDateAndTimeSplit.length > 2){
-                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } else if (endDateAndTimeSplit.length > 2) {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
             Date eventStartDate = new Date(startDate);

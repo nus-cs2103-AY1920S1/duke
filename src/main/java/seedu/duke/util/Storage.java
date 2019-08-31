@@ -31,67 +31,69 @@ public class Storage {
                 String[] keywords = line.split(" ");
                 boolean isDone = false;
                 switch (keywords[1]) {
-                    case "[+]":
-                        isDone = true;
-                    case "[-]":
-                        if (keywords[0].equals("[T]")) {
-                            keywords[0] = "";
-                            keywords[1] = "";
-                            String desc = String.join(" ", keywords).strip();
-                            Todo temp = new Todo(desc);
-                            if (isDone) {
-                                temp.setDone();
-                            }
-                            taskList.add(temp);
-                        } else if (keywords[0].equals("[D]")) {
-                            keywords[0] = "";
-                            String desc = "";
-                            String time = "";
-                            boolean flag = false;
-                            for (int i = 2; i < keywords.length; i++) {
-                                if (flag) {
-                                    if (keywords[i].equals(")")) {
-                                        break;
-                                    } else {
-                                        time = time + " " + keywords[i];
-                                    }
-                                } else if (keywords[i].equals("(by:")) {
-                                    flag = true;
-                                } else {
-                                    desc = desc + " " + keywords[i];
-                                }
-                            }
-                            Deadline temp = new Deadline(desc.strip(), time.strip());
-                            if (isDone) {
-                                temp.setDone();
-                            }
-                            taskList.add(temp);
-                        } else if (keywords[0].equals("[E]")) {
-                            keywords[0] = "";
-                            String desc = "";
-                            String time = "";
-                            boolean flag = false;
-                            for (int i = 2; i < keywords.length; i++) {
-                                if (flag) {
-                                    if (keywords[i].equals(")")) {
-                                        break;
-                                    } else {
-                                        time = time + " " + keywords[i];
-                                    }
-                                } else if (keywords[i].equals("(at:")) {
-                                    flag = true;
-                                } else {
-                                    desc = desc + " " + keywords[i];
-                                }
-                            }
-                            Event temp = new Event(desc.strip(), time.strip());
-                            if (isDone) {
-                                temp.setDone();
-                            }
-                            taskList.add(temp);
-                        } else {
-                            throw new DukeException();
+                case "[+]":
+                    isDone = true;
+                case "[-]":
+                    if (keywords[0].equals("[T]")) {
+                        keywords[0] = "";
+                        keywords[1] = "";
+                        String desc = String.join(" ", keywords).strip();
+                        Todo temp = new Todo(desc);
+                        if (isDone) {
+                            temp.setDone();
                         }
+                        taskList.add(temp);
+                    } else if (keywords[0].equals("[D]")) {
+                        keywords[0] = "";
+                        String desc = "";
+                        String time = "";
+                        boolean flag = false;
+                        for (int i = 2; i < keywords.length; i++) {
+                            if (flag) {
+                                if (keywords[i].equals(")")) {
+                                    break;
+                                } else {
+                                    time = time + " " + keywords[i];
+                                }
+                            } else if (keywords[i].equals("(by:")) {
+                                flag = true;
+                            } else {
+                                desc = desc + " " + keywords[i];
+                            }
+                        }
+                        Deadline temp = new Deadline(desc.strip(), time.strip());
+                        if (isDone) {
+                            temp.setDone();
+                        }
+                        taskList.add(temp);
+                    } else if (keywords[0].equals("[E]")) {
+                        keywords[0] = "";
+                        String desc = "";
+                        String time = "";
+                        boolean flag = false;
+                        for (int i = 2; i < keywords.length; i++) {
+                            if (flag) {
+                                if (keywords[i].equals(")")) {
+                                    break;
+                                } else {
+                                    time = time + " " + keywords[i];
+                                }
+                            } else if (keywords[i].equals("(at:")) {
+                                flag = true;
+                            } else {
+                                desc = desc + " " + keywords[i];
+                            }
+                        }
+                        Event temp = new Event(desc.strip(), time.strip());
+                        if (isDone) {
+                            temp.setDone();
+                        }
+                        taskList.add(temp);
+                    } else {
+                        throw new DukeException();
+                    }
+                default:
+                    break;
                 }
             }
             fileReader.close();
@@ -113,7 +115,7 @@ public class Storage {
             }
             writer.write(temp);
         } catch (IndexOutOfBoundsException ex) {
-
+            throw new IOException();
         }
         writer.close();
     }

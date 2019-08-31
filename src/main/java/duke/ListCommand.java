@@ -3,7 +3,7 @@
  */
 class ListCommand implements Command {
     /**
-     * This method executes the List Command, which uses uiManager to list out
+     * Executes the List Command, which uses uiManager to list out
      * each line of the task from the taskList.
      * 
      * @param uiManager Ui System which scans and prints for the User.

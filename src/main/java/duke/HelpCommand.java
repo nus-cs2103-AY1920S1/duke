@@ -3,8 +3,7 @@
  */
 class HelpCommand implements Command {
     /**
-     * This simple method executes the Help Command, which provides a user help.
-     * It calls uiManager to print help.
+     * Executes the Help Command, which provides a user help, calling uiManager to print help.
      * 
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks. - Not in use.

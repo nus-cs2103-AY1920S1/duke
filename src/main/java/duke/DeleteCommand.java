@@ -14,7 +14,7 @@ class DeleteCommand implements Command {
     }
 
     /**
-     * This method executes the Delete Command, which deletes a task from the taskList
+     * Executes the Delete Command, which deletes a task from the taskList
      * The deletion by the taskList, has to be 0 base, hence our decrement in this.taskNumber
      * 
      * @param uiManager Ui System which scans and prints for the User.

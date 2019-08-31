@@ -13,7 +13,7 @@ class DoneCommand implements Command {
     }
     
     /**
-     * This method executes the Done Command, which completes a task from the taskList.
+     * Executes the Done Command, which completes a task from the taskList.
      * The completion by the taskList, has to be 0 base, hence the decrement in this.taskNumber.
      * 
      * <p>If the task is already completed, then we use uiManager to print out the given situation

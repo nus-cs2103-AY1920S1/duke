@@ -5,7 +5,7 @@
  */
 public class Duke {
     /**
-     * This is the main for the program, Duke.
+     * Runs the main for the program, Duke.
      * 
      * @param args For main
      * @throws DukeException Certain methods throws DukeException

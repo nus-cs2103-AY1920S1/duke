@@ -110,6 +110,10 @@ class Ui {
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
     }
 
+    /**
+     * Prints to user that Duke is currently searching the tasks for the String.
+     * @param findString The String the user is searching for
+     */
     public void printFinding(String findString) {
         System.out.println("Finding for \'" + findString + "\' now...");
     }
@@ -144,6 +148,10 @@ class Ui {
         System.out.println("Alright then. See you later.");
     }
 
+    /**
+     * Prints to the user that nothing is found during the command for find.
+     * @see FindCommand#execute(Ui, TaskList, Storage)
+     */
     public void printNotFound() {
         System.out.println("Nope, I found nothing.");
     }

@@ -45,10 +45,11 @@ public abstract class Command {
      * @param tasks the TaskList object storing all recorded Tasks.
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
+     * @return String output reply from Duke.
      * @throws DukeException  If there is invalid input.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return "execute Command";
     }
 
 }

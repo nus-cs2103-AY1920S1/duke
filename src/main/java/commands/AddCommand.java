@@ -41,8 +41,9 @@ public class AddCommand extends Command {
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
      * @throws DukeException  If there is invalid input.
+     * @return String output reply from Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
         sc.next();
         ArrayList<Task> taskLst = tasks.getTaskLst();
@@ -92,7 +93,7 @@ public class AddCommand extends Command {
             throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
                     + "but I don't know what that means :-(");
         }
-        System.out.printf("     Got it. I've added this task:\n       %s\n"
+        return String.format("     Got it. I've added this task:\n       %s\n"
                         + "     Now you have %d tasks in the list.\n",
             taskLst.get(taskLst.size() - 1), taskLst.size());
     }

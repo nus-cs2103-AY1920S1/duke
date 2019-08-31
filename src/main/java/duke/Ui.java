@@ -13,15 +13,18 @@ public class Ui {
     /** Scanner object that redirects the input to user input. */
     private Scanner scanner = new Scanner(System.in);
     /** Horizontal line to be used extensively in printed messages and responses. */
-    private String hrzLine = "    ____________________________________________________________";
+    private String hrzLine = "    ____________________________________________________________\n";
 
     /**
      * Prints a welcome message.
+     *
+     * @return String welcome message.
      */
-    public void showWelcome() {
-        System.out.println(hrzLine);
-        System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        System.out.printf("%s\n\n", hrzLine);
+    public String showWelcome() {
+        String store = hrzLine;
+        store += "     Hello! I'm Duke\n     What can I do for you?\n";
+        store += String.format("%s\n", hrzLine);
+        return store;
     }
 
     /**
@@ -36,15 +39,15 @@ public class Ui {
     /**
      * Prints the Opening Line.
      */
-    public void showOpeningLine() {
-        System.out.println(hrzLine);
+    public String showOpeningLine() {
+        return hrzLine;
     }
 
     /**
      * Prints the Closing Line.
      */
-    public void showClosingLine() {
-        System.out.printf("%s\n\n", hrzLine);
+    public String showClosingLine() {
+        return String.format("%s\n", hrzLine);
     }
 
     /**

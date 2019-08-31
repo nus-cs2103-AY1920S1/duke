@@ -34,14 +34,15 @@ public class DoneCommand extends Command {
      * @param tasks the TaskList object storing all recorded Tasks.
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
+     * @return String output reply from Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Scanner sc = new Scanner(fullCommand);
         sc.next();
         ArrayList<Task> taskLst = tasks.getTaskLst();
         int taskDoneIndex = sc.nextInt() - 1;
         taskLst.get(taskDoneIndex).setDone();
-        System.out.printf("     Nice! I've marked this task as done:\n       %s\n",
+        return String.format("     Nice! I've marked this task as done:\n       %s\n",
                 taskLst.get(taskDoneIndex));
     }
 

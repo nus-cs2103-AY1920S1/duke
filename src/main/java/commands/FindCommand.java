@@ -50,19 +50,21 @@ public class FindCommand extends Command {
      * @param tasks the TaskList object storing all recorded Tasks.
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
+     * @return String output reply from Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Scanner sc = new Scanner(fullCommand);
         sc.next();
         String keyword = sc.next();
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        System.out.println("     Here are the matching tasks in your list:");
+        String store = "     Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskLst.size(); i++) {
             if (containsWord(taskLst.get(i).getDescription(), keyword)) {
-                System.out.printf("     %d.%s\n",
+                store += String.format("     %d.%s\n",
                         i + 1, taskLst.get(i));
             }
         }
+        return store;
     }
 
 }

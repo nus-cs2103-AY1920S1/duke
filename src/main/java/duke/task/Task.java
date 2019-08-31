@@ -29,9 +29,9 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Depending on the completion state of task,
-     * returns a ticked box (completed) or a
-     * crossed box (uncompleted).
+     * Returns a ticked icon (completed) or a
+     * crossed icon (uncompleted), depending on the completion
+     * status of the Task object.
      *
      * @return string icon depicting a ticked or crossed box.
      */
@@ -47,8 +47,10 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Overridden toString() method for the
-     * Task class.
+     * Returns a String representation of the Task object, along with
+     * its completion status.
+     *
+     * @return String representation of Task object
      */
     @Override
     public String toString() {

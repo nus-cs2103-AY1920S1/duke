@@ -1,14 +1,14 @@
 package duke.exception;
 
-/** Exception class for representing cases where
- * an input command is not recognized by the Duke
- * program.
+/**
+ * Exception class specific to Duke that represents
+ * recoverable errors encountered during Duke execution.
  */
 public class DukeException extends Exception {
+
     /**
-     * Basic constructor for the DukeException class
-     * that takes in an error message.
-     * @param errorMessage error message to be associated.
+     * Returns a DukeException object with an associated error message.
+     * @param errorMessage error message to be associated with exception
      */
     public DukeException(String errorMessage) {
         super(errorMessage);

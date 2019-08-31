@@ -3,13 +3,29 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Class representing a command that deletes a specified task from
+ * the stored list in Duke.
+ */
 public class DeleteCommand extends Command {
     private int taskId;
 
+    /**
+     * Returns a DeleteCommand that executes the deletion of the task
+     * specified by taskId.
+     * @param taskId index of the task to be deleted. Uses 1-indexing
+     */
     public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
 
+    /**
+     * Deletes the Task object specified by the input taskId supplied during
+     * initialization.
+     *
+     * @throws DukeException if taskIndex is out of bounds or refers to the index
+     *                       of a non-existent Task
+     */
     public void execute() throws DukeException {
         Task task = this.taskList.delete(taskId);
         this.ui.displaySingleLine("Noted. I've removed this task:");

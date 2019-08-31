@@ -11,9 +11,22 @@ import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
-import java.text.ParseException;
-
+/**
+ * Class that encapsulates various parsing methods to parse
+ * input Strings and return the appropriate Command Objects.
+ * @see {@link Command}, {@link DateTime}
+ */
 public class Parser {
+
+    /**
+     * Returns a Command object that was parsed from the user input.
+     *
+     * @param input String containing full user input
+     * @return Command objects.
+     * @throws DukeException recoverable exception thrown containing the error message
+     * to be printed to the screen.
+     * @see {@link Command}
+     */
     public static Command parseForCommands(String input) throws DukeException {
         String[] parameters = input.split(" ", 2);
         String command = parameters[0];
@@ -48,7 +61,8 @@ public class Parser {
             throw new DukeException("Hey! You need to give me a search word to look for!");
         }
     }
-
+    
+    // parses the arguments for remaining parameters to construct a DoneCommand object
     private static DoneCommand parseDoneCommand(String[] parameters) throws DukeException {
         try {
             int taskIndex = Integer.parseInt(parameters[1]);
@@ -64,6 +78,7 @@ public class Parser {
         }
     }
 
+    // parses the arguments for remaining parameters to construct a DeleteCommand object
     private static DeleteCommand parseDeleteCommand(String[] parameters) throws DukeException {
         try {
             int taskIndex = Integer.parseInt(parameters[1]);
@@ -79,6 +94,7 @@ public class Parser {
         }
     }
 
+    // parses the arguments for remaining parameters to construct a TodoCommand object
     private static TodoCommand parseTodoCommand(String[] parameters) throws DukeException {
         try {
             return new TodoCommand(parameters[1]);
@@ -88,6 +104,7 @@ public class Parser {
         }
     }
 
+    // parses the arguments for remaining parameters to construct a EventCommand object
     private static EventCommand parseEventCommand(String[] parameters) throws DukeException {
         try {
             String[] deadlineParams = parameters[1].split(" /at ", 2);
@@ -99,6 +116,7 @@ public class Parser {
         }
     }
 
+    // parses the arguments for remaining parameters to construct a DeadlineCommand object
     private static DeadlineCommand parseDeadlineCommand(String[] parameters) throws DukeException {
         try {
             String[] deadlineParams = parameters[1].split(" /by ", 2);

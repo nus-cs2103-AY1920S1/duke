@@ -20,9 +20,10 @@ public class Event extends Task {
         this.at = at;
     }
 
-    /** Override toString() function for the Event
-     * sub-class. Prefixes a "[E]" to indicate the
-     * type of task.
+    /**
+     * Returns a string representation of the Event object and
+     * its various details.
+     *
      * @return a string representation of the Event object.
      */
     @Override

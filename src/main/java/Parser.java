@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
+/** Handles user input and decides on what to do. */
 public class Parser {
 
     /**
      * Handles and parses text commands input by user.
+     *
      * @param in The input from user.
      * @param sc Scanner object from UI class.
      * @return false signals that user wants to quit.
      */
-    public static boolean handleCommand(String in, Scanner sc)
-        throws DukeException {
+    public static boolean handleCommand(String in, Scanner sc) throws DukeException {
         switch (in) {
             case "bye":
                 System.out.println("Bye!");
@@ -23,11 +24,8 @@ public class Parser {
                     Task t = TaskList.get(sc.nextInt());
                     t.markDone();
                     System.out.println(
-                        String.format(
-                            "Nice! I've marked this task as done:\n  %s",
-                            t.toString()
-                        )
-                    );
+                            String.format(
+                                    "Nice! I've marked this task as done:\n  %s", t.toString()));
                     break;
                 }
             case "delete":
@@ -48,9 +46,7 @@ public class Parser {
                     try {
                         TaskList.addTask(new Deadline(details[0], details[1]));
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException(
-                            "Too few details for deadline!"
-                        );
+                        throw new DukeException("Too few details for deadline!");
                     }
                     break;
                 }

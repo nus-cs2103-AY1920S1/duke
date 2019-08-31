@@ -1,12 +1,14 @@
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/** A task. */
 public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
+    /** Constructor. */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -14,25 +16,25 @@ public class Task implements Serializable {
 
     /**
      * Gets the description
+     *
      * @return The description.
      */
     public String getDesc() {
         return this.description;
     }
 
-    /**
-     * Mark the task as done.
-     */
+    /** Mark the task as done. */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
      * Gets the status icon for the task.
+     *
      * @return String of either a tick or cross.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     public String toString() {
@@ -41,6 +43,7 @@ public class Task implements Serializable {
 
     /**
      * Parses string date into Date object according to our format.
+     *
      * @param s Input string to be parsed.
      * @return The parsed Date object.
      */
@@ -49,22 +52,19 @@ public class Task implements Serializable {
         try {
             return parser.parse(s);
         } catch (ParseException e) {
-            System.out.println(
-                "Your date needs to be in dd/mm/yyyy hhmm format!"
-            );
+            System.out.println("Your date needs to be in dd/mm/yyyy hhmm format!");
         }
         return new Date();
     }
 
     /**
      * Converts Date object into string of our format.
+     *
      * @param d The Date object in question.
      * @return The string representation in our format.
      */
     protected static String stringifyDate(Date d) {
-        SimpleDateFormat formatter = new SimpleDateFormat(
-            "dd MMM yyyy, hh:mm aaa"
-        );
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy, hh:mm aaa");
         return formatter.format(d);
     }
 }

@@ -1,8 +1,8 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import java.util.ArrayList;
+
 import duke.*;
+import java.util.ArrayList;
 
 class DukeTest {
 
@@ -20,9 +20,8 @@ class DukeTest {
             fail();
         } catch (Exception e) {
             assertEquals(
-                "java.io.FileNotFoundException: data/notexist/asd.tmp (No such file or directory)",
-                e.getMessage()
-            );
+                    "java.io.FileNotFoundException: data/notexist/asd.tmp (No such file or directory)",
+                    e.getMessage());
         }
     }
 }

@@ -47,6 +47,8 @@ public class Duke {
                 ui.printException(e);
             } catch (ParseException e) {
                 ui.adviseDateFormat(DATE_FORMAT);
+            } catch (IndexOutOfBoundsException e) {
+                ui.printIndexOutOfBoundsException();
             }
 
             line = ui.nextLine();

@@ -8,9 +8,12 @@ public class Ui {
     private static final String PRINTED_LONG_LINE = "____________________________________________________________";
     private static final String PRINTED_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String PRINTED_BYE = "Bye. Hope to see you again soon!";
+
     private static final String PRINTED_HEADER_LIST = "Here are the tasks in your list:";
     private static final String PRINTED_HEADER_DONE = "Nice! I've marked this task as done:";
     private static final String PRINTED_HEADER_SEARCH = "Here are the tasks matching the following query: ";
+    private static final String PRINTED_INDEX_OUT_OF_BOUNDS_EXCEPTION =
+        "You have entered an invalid index. Please try again.";
 
     private Scanner input = new Scanner(System.in);
 
@@ -84,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * Print the provided TaskList to the user.
+     * Prints the provided TaskList to the user.
      * 
      * @param taskList The TaskList to be printed
      */
@@ -97,7 +100,7 @@ public class Ui {
     }
 
     /**
-     * Advise the user of the required date format.
+     * Advises the user of the required date format.
      * 
      * @param format The expected date format
      */
@@ -106,12 +109,19 @@ public class Ui {
     }
 
     /**
-     * Display an Exception's message to the user.
+     * Displays an Exception's message to the user.
      * 
      * @param e The Exception to be displayed
      */
     public void printException(Exception e) {
         printWithLongLines(e.getMessage());
+    }
+
+    /**
+     * Displays an explanatory note to the user that explains an IndexOutOfBoundsException.
+     */
+    public void printIndexOutOfBoundsException() {
+        printWithLongLines(PRINTED_INDEX_OUT_OF_BOUNDS_EXCEPTION);
     }
 
     private void printWithLongLines(String stringToPrint) {

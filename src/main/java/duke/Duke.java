@@ -3,13 +3,24 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Duke class is the driver class.
+ *
+ * @author scwaterbear
+ */
 public class Duke {
 
+    /** References to important objects */
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    private Duke(String filePath) {
+    /**
+     * Class constructor.
+     *
+     * @param filePath location of file to load and store data.
+     */
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -36,6 +47,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke.
+     */
     public static void main(String[] args) {
         new Duke("/Users/stephenchua/duke/src/main/data/duke.txt").run();
     }

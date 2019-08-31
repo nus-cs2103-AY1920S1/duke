@@ -5,34 +5,59 @@ import duke.task.Task;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Ui class deals with interactions with the user.
+ *
+ * @author scwaterbear
+ */
 public class Ui {
 
-    private Scanner s;
+    /** Scanner to receive user input */
+    Scanner s;
+
+    /**
+     * Class constructor.
+     */
     Ui() {
         this.s = new Scanner(System.in);
     }
 
-    void showWelcome() {
+    /**
+     * Prints Duke welcome message.
+     */
+    public void showWelcome() {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
-    //WHY IS THIS GIVING PROBLEMS?
-    String readCommand() {
-       return s.nextLine().trim();
+    /**
+     * Returns trimmed user input.
+     *
+     * @return String trimmed user input.
+     */
+    public String readCommand() {
+        return s.nextLine().trim();
     }
 
-    void showLoadingError() {
+    /**
+     * Prints a loading error message.
+     */
+    public void showLoadingError() {
         System.out.println("Error loading data from file");
     }
 
-    void showError(String errorMessage) {
+    /**
+     * Prints an error message.
+     *
+     * @param errorMessage errorMessage to print.
+     */
+    public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 

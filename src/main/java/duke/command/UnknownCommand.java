@@ -5,10 +5,18 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * UnknownCommand class triggers a response to a user's unknown input.
+ *
+ * @author scwaterbear
+ */
 public class UnknownCommand extends Command {
 
-    public UnknownCommand() {
-    }
+    /**
+     * Class Constructor.
+     */
+    public UnknownCommand() {}
+
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

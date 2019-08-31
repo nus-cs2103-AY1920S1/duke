@@ -1,14 +1,30 @@
 package duke.task;
 
+/**
+ * Task class represents an act a user wants to perform.
+ *
+ * @author scwaterbear
+ */
 public class Task {
     boolean isDone;
     private String description;
 
+    /**
+     * Class constructor.
+     *
+     * @param description description of task.
+     */
     Task(String description) {
         this.isDone = false;
         this.description = description;
     }
 
+    /**
+     * Class constructor that must set task status when instantiated.
+     *
+     * @param description description of task.
+     * @param isDone set status of task.
+     */
     Task(String description, boolean isDone) {
         this.isDone = isDone;
         this.description = description;
@@ -25,12 +41,22 @@ public class Task {
         return false;
     }
 
+    /**
+     * Returns a string representation of the task status and description.
+     *
+     * @return String task status and description.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toDataFormat() {
+    /**
+     * Returns a string representation of the task status and description for data storage.
+     *
+     * @return String task status and description.
+     */
+    public String dataFormat() {
         int isDoneInt;
         if (isDone) {
             isDoneInt = 1;

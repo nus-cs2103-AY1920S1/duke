@@ -11,7 +11,7 @@ public class Duke {
     private TaskList tasks;
 
     public static void main(String[] args) {
-        Duke duke = new Duke("/home/abhinav/Desktop/2103T/duke/data/duke.txt");
+        Duke duke = new Duke("/home/abhinav/Desktop/2103T/duke/data/dukeTest.txt");
         duke.run();
     }
 
@@ -23,8 +23,12 @@ public class Duke {
      */
     private Duke(String filePath) {
         storage = new Storage(filePath);
-        tasks = new TaskList(storage.readFromFile());
         ui = new Ui();
+        try {
+            tasks = new TaskList(storage.readFromFile());
+        } catch (DukeException e) {
+            ui.showErrors(e.getMessage());
+        }
     }
 
     /**

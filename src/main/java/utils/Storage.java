@@ -6,7 +6,6 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
 
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
@@ -32,24 +31,28 @@ public class Storage {
 
     }
 
-
     /**
      *  Takes the stored data and populates the task list.
      *
      * @return list of tasks
+     * @throws DukeException if local file not found or invalid date in saved file
      */
-    public List<Task> readFromFile() {
-        Scanner sc = null;
+    public List<Task> readFromFile() throws DukeException {
+        Scanner sc;
         try {
+            if (file.createNewFile()) {
+                System.out.println("File created!");
+            } else {
+                System.out.println("File already exists");
+            }
             sc = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+        } catch (IOException e) {
+            throw new DukeException("File cannot be created, please try again soon!");
         }
-        String name = "";
-        String time = "";
-        String done = "";
+        String name;
+        String time;
+        String done;
         // parse input and create tasks
-        assert sc != null;
         while (sc.hasNextLine()) {
             try {
                 String line = sc.nextLine();
@@ -96,7 +99,8 @@ public class Storage {
                     break;
                 }
             } catch (ParseException e) {
-                System.out.print("Format of date when writing to file is incorrect!");
+                throw new DukeException("Format of date or time in tasks "
+                        + "saved in file is invalid!");
             }
         }
         sc.close();

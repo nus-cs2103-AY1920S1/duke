@@ -1,7 +1,10 @@
 package utils;
 
 import exceptions.DukeException;
-import tasks.*;
+import tasks.Task;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -57,40 +60,40 @@ public class Storage {
                 }
 
                 switch (savedTask[0]) {
-                    case "T":
-                        name = savedTask[2];
-                        done = savedTask[1];
-                        Task todo = new Todo(name);
-                        if (done.equals("1")) {
-                            todo.markAsDone();
-                        }
-                        tasks.add(todo);
-                        break;
+                case "T":
+                    name = savedTask[2];
+                    done = savedTask[1];
+                    Task todo = new Todo(name);
+                    if (done.equals("1")) {
+                        todo.markAsDone();
+                    }
+                    tasks.add(todo);
+                    break;
 
-                    case "D":
-                        name = savedTask[2];
-                        done = savedTask[1];
-                        time = savedTask[3];
-                        Task deadline = new Deadline(name, new StringToDate(time));
-                        if (done.equals("1")) {
-                            deadline.markAsDone();
-                        }
-                        tasks.add(deadline);
-                        break;
+                case "D":
+                    name = savedTask[2];
+                    done = savedTask[1];
+                    time = savedTask[3];
+                    Task deadline = new Deadline(name, new StringToDate(time));
+                    if (done.equals("1")) {
+                        deadline.markAsDone();
+                    }
+                    tasks.add(deadline);
+                    break;
 
-                    case "E":
-                        name = savedTask[2];
-                        done = savedTask[1];
-                        time = savedTask[3];
-                        Task event = new Event(name, new StringToDate(time));
-                        if (done.equals("1")) {
-                            event.markAsDone();
-                        }
-                        tasks.add(event);
-                        break;
+                case "E":
+                    name = savedTask[2];
+                    done = savedTask[1];
+                    time = savedTask[3];
+                    Task event = new Event(name, new StringToDate(time));
+                    if (done.equals("1")) {
+                        event.markAsDone();
+                    }
+                    tasks.add(event);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             } catch (ParseException e) {
                 System.out.print("Format of date when writing to file is incorrect!");

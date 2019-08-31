@@ -1,10 +1,15 @@
 package utils;
 
-import commands.*;
+import commands.Command;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.ListCommand;
+import commands.ExitCommand;
+import commands.DoneCommand;
 import tasks.Deadline;
-import exceptions.DukeException;
 import tasks.Event;
 import tasks.Todo;
+import exceptions.DukeException;
 
 import java.text.ParseException;
 
@@ -22,7 +27,7 @@ public class Parser {
      *
      * @param fullCommand the user input to parse
      * @return command to execute
-     * @throws DukeException in event of errors
+     * @throws DukeException for user input errors.
      */
     public static Command parse(String fullCommand) throws DukeException {
         Command c;
@@ -103,7 +108,7 @@ public class Parser {
      * @return the name of task and time
      * @throws DukeException in case of invalid input
      */
-    public static String[] splitCommands (String[]commandArr, String keyword, String taskType) throws DukeException {
+    private static String[] splitCommands(String[] commandArr, String keyword, String taskType) throws DukeException {
         String name = "";
         String time = "";
         boolean flag = false;

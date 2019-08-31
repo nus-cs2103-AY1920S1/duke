@@ -1,6 +1,10 @@
 package utils;
 
-import commands.*;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.ListCommand;
+import commands.ExitCommand;
+import commands.Command;
 import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +35,6 @@ class ParserTest {
     @Test
     void parse_deadlineCommand_AddCommand() {
         String testPass = "deadline Description /by 18-10-2019 18:00";
-        String testFailOne = "deadline Description";
-        String testFailTwo = "deadline Description 18-10-2019 18:00";
-        String testFailThree = "deadline Description /by";
         try {
             Command c = Parser.parse(testPass);
             assertNotNull(c);
@@ -41,9 +42,15 @@ class ParserTest {
         } catch (Exception e) {
             fail("I want an addCommand object!");
         }
+        String testFailOne = "deadline Description";
+
         assertThrows(DukeException.class, () -> Parser.parse(testFailOne));
 
+        String testFailTwo = "deadline Description 18-10-2019 18:00";
+
         assertThrows(DukeException.class, () -> Parser.parse(testFailTwo));
+
+        String testFailThree = "deadline Description /by";
 
         assertThrows(DukeException.class, () -> Parser.parse(testFailThree));
 
@@ -52,9 +59,6 @@ class ParserTest {
     @Test
     void parse_eventCommand_AddCommand() {
         String testPass = "event Description /at 18-10-2019 18:00";
-        String testFailOne = "event Description";
-        String testFailTwo = "event Description 18-10-2019 18:00";
-        String testFailThree = "event Description /at";
         try {
             Command c = Parser.parse(testPass);
             assertNotNull(c);
@@ -62,12 +66,17 @@ class ParserTest {
         } catch (Exception e) {
             fail("I want an addCommand object!");
         }
+        String testFailOne = "event Description";
+
         assertThrows(DukeException.class, () -> Parser.parse(testFailOne));
+
+        String testFailTwo = "event Description 18-10-2019 18:00";
 
         assertThrows(DukeException.class, () -> Parser.parse(testFailTwo));
 
-        assertThrows(DukeException.class, () -> Parser.parse(testFailThree));
+        String testFailThree = "event Description /at";
 
+        assertThrows(DukeException.class, () -> Parser.parse(testFailThree));
     }
 
 

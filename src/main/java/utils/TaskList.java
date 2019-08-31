@@ -12,7 +12,7 @@ public class TaskList {
      * @param tasks list of tasks created from stored data
      */
     public TaskList(List<Task> tasks) {
-       this.tasks = tasks;
+        this.tasks = tasks;
     }
 
     public int getSize() {
@@ -45,6 +45,6 @@ public class TaskList {
      * @return task that was deleted
      */
     public Task deleteTask(int taskId) {
-       return this.tasks.remove(taskId);
+        return this.tasks.remove(taskId);
     }
 }

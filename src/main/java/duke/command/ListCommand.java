@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -25,7 +26,7 @@ public class ListCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printTasks(taskList);
+    public Response execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.getPrintTaskResponse(taskList);
     }
 }

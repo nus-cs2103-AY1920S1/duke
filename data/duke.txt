@@ -1,5 +1,4 @@
 T|1|read book
 D|0|return book|6/6/2019 1800
-E|0|project meeting|6/8/2019 0000
+E|1|project meeting|6/8/2019 0000
 T|1|join sports club
-E|1|Workshop|26/7/2020 1500

@@ -4,6 +4,7 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -28,11 +29,10 @@ public class TodoCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printGotIt(newTask);
+    public Response execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(newTask);
-        ui.printNumTasks();
         storage.setChangedTrue();
+        return ui.getGotItAddedResponse(newTask);
     }
 
     /**

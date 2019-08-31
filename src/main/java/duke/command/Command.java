@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -15,8 +16,10 @@ public abstract class Command {
      * @param taskList List of Tasks to be modified by command.
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
+     *
+     * @return Message to be output
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract Response execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Returns true if the command is to exit Duke.

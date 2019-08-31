@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 public class Ui {
 
     /** Messages that will be printed by the Ui object. */
-    private static final String GREET = "Hello! I'm duke.Duke\nWhat can I do for you?";
+    private static final String GREET = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE = "Bye. Hope to see you again!";
     private static final String NICE_ADDED = "Nice! I've marked this task as done:";
     private static final String GOT_IT = "Got it. I've added this task:";
@@ -31,31 +31,29 @@ public class Ui {
         this.userInput = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    /**
-    * Prints the total number of tasks that the user has so far.
-    */
-    public void printNumTasks() {
-        System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
+    private String getTotalTasks() {
+        return "Now you have " + Task.totalTasks + " tasks in the list.";
     }
 
     /**
-    * Prints the Duke logo and greeting message.
-    */
-    public void printLogoAndGreet() {
+     * Returns the logo and greeting string.
+     *
+     * @return Logo and Greeting to print
+     */
+    public String printLogoAndGreet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(GREET);
+        return logo + "\n" + GREET;
     }
 
     /**
      * Prints the Duke goodbye message.
      */
-    public void printGoodbye() {
-        System.out.println(GOODBYE);
+    public Response getGoodByeResponse() {
+        return new Response(GOODBYE, true);
     }
 
     /**
@@ -63,9 +61,8 @@ public class Ui {
      *
      * @param doneTask Task that has just been completed.
      */
-    public void printNice(Task doneTask) {
-        System.out.println(NICE_ADDED);
-        System.out.println(doneTask);
+    public Response getNiceDoneResponse(Task doneTask) {
+        return new Response((NICE_ADDED) + "\n" + doneTask);
     }
 
     /**
@@ -73,9 +70,9 @@ public class Ui {
      *
      * @param newTask New Task that has just been added.
      */
-    public void printGotIt(Task newTask) {
-        System.out.println(GOT_IT);
-        System.out.println(" " + newTask.toString());
+    public Response getGotItAddedResponse(Task newTask) {
+        return new Response((GOT_IT) + "\n" + " " + newTask.toString()
+                + "\n" + getTotalTasks());
     }
 
     /**
@@ -83,23 +80,9 @@ public class Ui {
      *
      * @param deletedTask Task that has been deleted.
      */
-    public void printDeleted(Task deletedTask) {
-        System.out.println(DELETED);
-        System.out.println(deletedTask);
-    }
-
-    /**
-     * Reads user's input for Duke to process.
-     *
-     * @return User's input as a String.
-     */
-    public String readLine() {
-        try {
-            return userInput.readLine();
-        } catch (Exception e) {
-            showReadingError();
-            return null;
-        }
+    public Response getDeletedResponse(Task deletedTask) {
+        return new Response(DELETED + "\n" + deletedTask +
+                "\n" + getTotalTasks());
     }
 
     /**
@@ -112,8 +95,8 @@ public class Ui {
     /**
      * Prints an error message when closing input stream fails.
      */
-    private void showCloseInputError() {
-        System.err.println("Error close user input stream");
+    private Response getCloseInputErrorResponse() {
+        return new Response("Error close user input stream");
     }
 
     /**
@@ -121,9 +104,8 @@ public class Ui {
      *
      * @param tasklist TaskList containing all Tasks to print.
      */
-    public void printTasks(TaskList tasklist) {
-        System.out.println(TASKS);
-        System.out.println(tasklist.toString());
+    public Response getPrintTaskResponse(TaskList tasklist) {
+        return new Response((TASKS) + "\n" + tasklist.toString());
     }
 
     /**
@@ -133,51 +115,44 @@ public class Ui {
         try {
             userInput.close();
         } catch (IOException e) {
-            showCloseInputError();
+            getCloseInputErrorResponse();
         }
     }
 
     /**
      * Prints all matching tasks.
      */
-    public void printMatching(TaskList taskList) {
-        System.out.println(MATCHING);
-        System.out.println(taskList.toString());
+    public Response getMatchingResponse(TaskList taskList) {
+       return new Response(MATCHING + "\n" + taskList.toString());
     }
 
     /**
      * Prints message indicating no matching tasks.
      */
-    public void printNoMatching() {
-        System.out.println(NO_MATCHING);
+    public Response getNoMatchResponse() {
+        return new Response(NO_MATCHING);
     }
 
     /**
      * Prints an error message when loading from Storage fails.
      */
-    public void showLoadingError() {
-        System.err.println("Error loading from specified file path");
+    public Response getLoadingErrorResponse() {
+        return new Response("Error loading from specified file path");
     }
 
     /**
      * Prints an error message when writing to file path fails.
      */
-    public void showWritingError() {
-        System.err.println("Error writing to specified file path");
+    public Response getWritingErrorAndByeResponse() {
+        return new Response("Error writing to specified file path" + "\n" + GOODBYE, true);
     }
 
-    /**
-     * Prints message indicating writing process started.
-     */
-    public void printWritingChanges() {
-        System.out.println("Writing new changes to disk...");
-    }
 
     /**
      * Prints message indicating successful writing to file path.
      */
-    public void printDoneWriting() {
-        System.out.println("Writing done!");
+    public Response getDoneWritingAndByeResponse() {
+        return new Response("Writing new changes done!" + "\n" + GOODBYE, true);
     }
 
     /**
@@ -185,7 +160,7 @@ public class Ui {
      *
      * @param errorMessage Error Message to be printed.
      */
-    public void printDukeError(String errorMessage) {
-        System.err.println(errorMessage);
+    public Response getErrorResponse(String errorMessage) {
+        return new Response(errorMessage);
     }
 }

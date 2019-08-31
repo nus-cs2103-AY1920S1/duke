@@ -3,6 +3,7 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Task;
+import duke.ui.Response;
 import duke.ui.Ui;
 
 /**
@@ -36,7 +37,7 @@ public class FindCommand extends Command {
      * @param ui Ui to print matching Tasks.
      * @param storage Storage to modify.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public Response execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             Task currTask = taskList.get(i);
@@ -53,9 +54,9 @@ public class FindCommand extends Command {
             }
         }
         if (matchingTasks.size() != 0) {
-            ui.printMatching(matchingTasks);
+            return ui.getMatchingResponse(matchingTasks);
         } else {
-            ui.printNoMatching();
+            return ui.getNoMatchResponse();
         }
 
     }

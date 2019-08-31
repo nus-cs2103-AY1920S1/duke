@@ -20,10 +20,11 @@ public class FindCommand extends Command {
      * @param tasks TaskList object to search in.
      * @param ui Duke object's Ui object to display any results from the search.
      * @param storage Duke object's Storage object to access file for loading/saving tasks.
+     * @return String list of tasks found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        ui.showFindTasksMessage(tasks.findTasks(this.keyWord));
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+        return ui.showFindTasksMessage(tasks.findTasks(this.keyWord));
     }
 
     /**

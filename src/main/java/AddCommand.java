@@ -15,16 +15,17 @@ public class AddCommand extends Command {
 
     /**
      * Executes the adding of the Task object into a Duke object's TaskList object.
-     * The add task message is displayed.
+     * The add task message is returned.
      *
      * @param tasks TaskList object to add the task to.
      * @param ui Duke object's Ui object to display add task message.
      * @param storage Duke object's Storage object to access file for loading/saving tasks.
+     * @return String add task message.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
-        ui.showAddTaskMessage(this.task, tasks.taskListSize());
+        return ui.showAddTaskMessage(this.task, tasks.taskListSize());
     }
 
     /**

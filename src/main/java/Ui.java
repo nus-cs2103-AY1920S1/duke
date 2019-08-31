@@ -4,9 +4,9 @@ import java.util.Scanner;
  * Takes in the user input into a Duke object and displays output to the user.
  */
 public class Ui {
-    protected String line = "    ____________________________________________________________";
-    protected String welcomeMessage = "     Hello! I'm Duke\n     What can I do for you?";
-    protected String byeMessage = "     Bye. Hope to see you again soon!";
+    protected String line = "    ____________________________________________________________" + "\n";
+    protected String welcomeMessage = "     Hello! I'm Duke\n     What can I do for you?\n";
+    protected String byeMessage = "     Bye. Hope to see you again soon!\n";
     Scanner scanner;
 
     /**
@@ -26,102 +26,98 @@ public class Ui {
     }
 
     /**
-     * Displays the welcome message when a Duke object is started.
+     * Returns the welcome message when a Duke object is started.
+     *
+     * @return String welcome message when Duke is started.
      */
-    public void showWelcomeMessage() {
-        System.out.println(line);
-        System.out.println(this.welcomeMessage);
-        System.out.println(line);
+    public String showWelcomeMessage() {
+        return line + welcomeMessage + line;
     }
 
     /**
-     * Displays the list of tasks in the TaskList object argument.
+     * Returns the list of tasks in the TaskList object argument.
      *
      * @param tasks TaskList object with tasks to be displayed to the user in a list.
+     * @return String list of tasks in TaskList.
      */
-    public void showListMessage(TaskList tasks) {
-        System.out.println(line);
-        System.out.println("     Here are the tasks in your list:");
+    public String showListMessage(TaskList tasks) {
+        String list = line + "     Here are the tasks in your list:" + "\n";
         for (int i = 0; i < tasks.taskListSize(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.getTask(i));
+            list = list + "     " + (i + 1) + "." + tasks.getTask(i) + "\n";
         }
-        System.out.println(line);
+        list = list + line;
+
+        return list;
     }
 
     /**
-     * Displays te exception message of the argument exception to the user.
+     * Returns the exception message of the argument exception to the user.
      *
      * @param e Exception whose message needs to be displayed.
+     * @return String exception message of the argument exception.
      */
-    public void showExceptionError(Exception e) {
-        System.out.println(line);
-        System.out.println("     " + e.getMessage());
-        System.out.println(line);
+    public String showExceptionError(Exception e) {
+        return line + "     " + e.getMessage() + line;
     }
 
     /**
-     * Displays message when a task is added to the TaskList object arugment.
+     * Returns message when a task is added to the TaskList object arugment.
      *
      * @param task Task object to be added to TaskList object.
      * @param taskListSize Number of Task objects in TaskList object after the Task object is added.
+     * @return String message when a task is added to the TaskList.
      */
-    public void showAddTaskMessage(Task task, int taskListSize) {
-        System.out.println(line);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + taskListSize
-                + (taskListSize > 1 ? " tasks in the list." : " task in the list."));
-        System.out.println(line);
+    public String showAddTaskMessage(Task task, int taskListSize) {
+        String output = line + "     Got it. I've added this task: \n" + "       " + task.toString() + "\n"
+                + "     Now you have " + taskListSize + " task(s) in the list.\n" + line;
+
+        return output;
     }
 
     /**
-     * Displays message when a Task object is marked as done.
+     * Returns message when a Task object is marked as done.
      *
      * @param task Task object that is marked as done.
+     * @return String message when a Task object is marked as done.
      */
-    public void showMarkTaskAsDoneMessage(Task task) {
-        System.out.println(line);
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + task);
-        System.out.println(line);
+    public String showMarkTaskAsDoneMessage(Task task) {
+        return line + "     Nice! I've marked this task as done:\n       " + task.toString() + "\n" + line;
     }
 
     /**
-     * Displays message when a Task object is deleted.
+     * Returns String message when a Task object is deleted.
      *
      * @param taskListSize Number of Task objects in TaskList object after the Task object is deleted.
+     * @return String message when a Task object is deleted.
      */
-    public void showDeleteTaskMessage(Task task, int taskListSize) {
-        System.out.println(line);
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + taskListSize
-                + (taskListSize > 1 ? " tasks in the list." : " task in the list."));
-        System.out.println(line);
+    public String showDeleteTaskMessage(Task task, int taskListSize) {
+        return line + "     Noted. I've removed this task:\n       " + task.toString()
+                + "\n     Now you have " + taskListSize + " task(s) in the list.\n" + line;
     }
 
     /**
-     * Dsiplays exit message when a Duke object stops running.
+     * Returns exit message when a Duke object stops running.
+     *
+     * @return String exit message when a Duke object stops running.
      */
-    public void showByeMessage() {
-        System.out.println(line);
-        System.out.println(this.byeMessage);
-        System.out.println(line);
+    public String showByeMessage() {
+        return line + byeMessage + line;
     }
 
     /**
-     * Displays the list of tasks in the TaskList object argument.
+     * Returns the list of tasks in the TaskList object argument.
      * The tasks in the TaskList object argument contains the keyword entered by the user.
      *
      * @param tasks TaskList object with tasks to be displayed to the user in a list.
+     * @return String list of tasks in the TaskList object argument.
      */
-    public void showFindTasksMessage(TaskList tasks) {
-        System.out.println(line);
-        System.out.println("     Here are the matching tasks in your list:");
+    public String showFindTasksMessage(TaskList tasks) {
+        String list = line + "     Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.taskListSize(); i++) {
-            System.out.println("     " + (i + 1) + "." + tasks.getTask(i));
+            list = list + "     " + (i + 1) + "." + tasks.getTask(i).toString() + "\n";
         }
-        System.out.println(line);
+        list = list + line;
+        return list;
     }
 
     public String getLine() {

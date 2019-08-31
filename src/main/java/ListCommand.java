@@ -9,10 +9,11 @@ public class ListCommand extends Command {
      * @param tasks TaskList object with tasks to be displayed.
      * @param ui Duke object's Ui object to display the tasks.
      * @param storage Duke object's Storage object to access file for loading/saving tasks.
+     * @return String list of all tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        ui.showListMessage(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+        return ui.showListMessage(tasks);
     }
 
     /**

@@ -15,12 +15,12 @@ public class ExitCommand extends Command {
      * Adds the program task inputted by the user to the task list.
      * and prints out corresponding response
      * @param tasks holds the list of tasks currently in the program
-     * @param ui displays the output from execution
      * @param storage stores the added task to the specified file
+     * @return String to be displayed as Duke response in GUI
      * @throws DukeException if task requirements is not met
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

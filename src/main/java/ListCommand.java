@@ -15,14 +15,15 @@ public class ListCommand extends Command {
      * Adds the program task inputted by the user to the task list.
      * and prints out corresponding response
      * @param tasks holds the list of tasks currently in the program
-     * @param ui displays the output from execution
      * @param storage stores the added task to the specified file
+     * @return String to be displayed as Duke response in GUI
      * @throws DukeException if task requirements is not met
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Storage storage) {
+        String printable = "Here are the tasks in your list:" + "\n";
 
-        ui.showLine(tasks.printTaskList());
+        printable += tasks.printTaskList();
+        return printable;
     }
 
     /**

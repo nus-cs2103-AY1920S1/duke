@@ -19,12 +19,13 @@ public class KeyCommand extends Command {
      * Adds the program task inputted by the user to the task list.
      * and prints out corresponding response
      * @param tasks holds the list of tasks currently in the program
-     * @param ui displays the output from execution
      * @param storage stores the added task to the specified file
+     * @return String to be displayed as Duke response in GUI
      * @throws DukeException if task requirements is not met
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine("Here are the matching tasks in your list: ");
+    public String execute(TaskList tasks, Storage storage) {
+        String printable = "";
+        printable = "Here are the matching tasks in your list: " + "\n";
         ArrayList<String> resultList = new ArrayList<String>();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -39,8 +40,10 @@ public class KeyCommand extends Command {
         }
 
         for (int i = 0; i < resultList.size(); i++) {
-            ui.showLine(i + 1 + ". " + resultList.get(i));
+            printable += i + 1 + ". " + resultList.get(i) + "\n";
         }
+
+        return printable;
     }
 
     /**

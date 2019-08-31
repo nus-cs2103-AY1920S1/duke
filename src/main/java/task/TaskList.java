@@ -1,11 +1,5 @@
-<<<<<<< .merge_file_a08036
-package duke;
-
-import task.Task;
-=======
 package task;
 
->>>>>>> .merge_file_a08088
 import java.util.ArrayList;
 
 /**
@@ -13,7 +7,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-
 
     /**
      * Constructs TaskList object with empty list.
@@ -68,11 +61,39 @@ public class TaskList {
         int counter = 1;
 
         //list out all the texts from the user
-        System.out.println("\tHere are the tasks in your list:");
         for (Task t: tasks) {
             System.out.println("\t" + counter + "." + t.toString());
             counter++;
         }
+    }
+
+    /**
+     * Lists all the tasks in the list provided by the user.
+     * @param taskList List of tasks.
+     */
+    public void list(ArrayList<Task> taskList) {
+        int counter = 1;
+
+        //list according to given list
+        for (Task t: taskList) {
+            System.out.println("\t" + counter + "." + t.toString());
+            counter++;
+        }
+    }
+
+    /**
+     * Finds specific tasks in the existing list of tasks.
+     * @param keyword Keyword to search in description.
+     * @return List of tasks according to the keyword.
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                taskList.add(task);
+            }
+        }
+        return taskList;
     }
 
     /**

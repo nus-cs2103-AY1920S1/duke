@@ -1,14 +1,5 @@
 package command;
 
-<<<<<<< .merge_file_a08140
-import duke.TaskList;
-import duke.UserInterface;
-import duke.Storage;
-
-public class ListCommand extends Command {
-    public ListCommand() {}
-
-=======
 import task.TaskList;
 import duke.UserInterface;
 import duke.Storage;
@@ -28,8 +19,8 @@ public class ListCommand extends Command {
      * @param ui User interface.
      * @param storage Tasks storage: load & save.
      */
->>>>>>> .merge_file_a11384
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
+        System.out.println("\tHere are the tasks in your list:");
         tasks.list();
     }
 }

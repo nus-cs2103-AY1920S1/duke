@@ -1,16 +1,5 @@
 package command;
 
-<<<<<<< .merge_file_a06712
-import duke.TaskList;
-import duke.UserInterface;
-import duke.Storage;
-
-public abstract class Command {
-    boolean isExit = false;
-
-    public abstract void execute(TaskList tasks, UserInterface ui, Storage storage);
-
-=======
 import task.TaskList;
 import duke.UserInterface;
 import duke.Storage;
@@ -35,7 +24,6 @@ public abstract class Command {
     /**
      * @return Indicates if the command is to exit or not.
      */
->>>>>>> .merge_file_a02696
     public boolean isExit() {
         return isExit;
     }

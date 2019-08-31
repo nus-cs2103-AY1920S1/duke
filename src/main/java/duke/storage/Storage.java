@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,11 +16,11 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> load() throws DukeException, FileNotFoundException {
+    public ArrayList<Task> load() throws DukeException, FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         File f = new File(filePath);
@@ -54,7 +62,7 @@ public class Storage {
         return tasks;
     }
 
-    void saveFile(ArrayList<Task> tasks) throws DukeException {
+    public void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
             String data = tasks.get(0).toFile();

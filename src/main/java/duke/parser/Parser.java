@@ -1,5 +1,14 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Parser {
-    static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             return new exitCommand();
         } else if (fullCommand.equals("list")) {

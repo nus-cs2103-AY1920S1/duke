@@ -1,9 +1,17 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 public class addCommand implements Command{
     Task task;
     boolean isExit = false;
-    addCommand(Task task) {
+    public addCommand(Task task) {
         this.task = task;
     }
 

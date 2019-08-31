@@ -1,8 +1,16 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class doneCommand implements Command{
     private int doneIndex;
     boolean isExist = false;
 
-    doneCommand(int doneIndex) {
+    public doneCommand(int doneIndex) {
         this.doneIndex = doneIndex;
     }
 

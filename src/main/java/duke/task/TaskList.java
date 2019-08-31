@@ -1,17 +1,20 @@
+package duke.task;
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 public class TaskList {
     ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    Task deleteTask(int n) throws DukeException {
+    public Task deleteTask(int n) throws DukeException {
         if (n > tasks.size()) {
             throw new DukeException(" ☹ OOPS!!! Do not exist that task.");
         }
@@ -20,11 +23,11 @@ public class TaskList {
         return removeItem;
     }
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    Task doneTask(int n) throws DukeException {
+    public Task doneTask(int n) throws DukeException {
         if (n > tasks.size()) {
             throw new DukeException(" ☹ OOPS!!! Do not exist that task.");
         }
@@ -32,7 +35,7 @@ public class TaskList {
         return tasks.get(n - 1);
     }
 
-    ArrayList<Task> getList() {
+    public ArrayList<Task> getList() {
         return tasks;
     }
 }

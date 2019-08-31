@@ -3,7 +3,7 @@ package cs2103t.duke.exception;
 /**
  * Represents exceptions where done or delete command is given an invalid id.
  */
-public class InvalidIDException extends DukeException {
+public class InvalidIdException extends DukeException {
     /** Position of task in list. */
     private String id;
 
@@ -11,7 +11,7 @@ public class InvalidIDException extends DukeException {
      * Constructs an InvalidIDException.
      * @param msg position of task in list (1-based).
      */
-    public InvalidIDException(String msg) {
+    public InvalidIdException(String msg) {
         super(msg);
         this.id = msg;
     }

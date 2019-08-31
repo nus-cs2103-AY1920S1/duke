@@ -1,7 +1,7 @@
 package cs2103t.duke.command;
 
 import cs2103t.duke.exception.DukeException;
-import cs2103t.duke.exception.NoIDGivenException;
+import cs2103t.duke.exception.NoIdGivenException;
 import cs2103t.duke.file.Storage;
 import cs2103t.duke.parse.Parser;
 import cs2103t.duke.task.Task;
@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskId.equals("")) {
-            throw new NoIDGivenException("done");
+            throw new NoIdGivenException("done");
         }
         int id = Parser.parseStrToInt(this.taskId);
 

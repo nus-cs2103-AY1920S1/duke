@@ -3,7 +3,7 @@ package cs2103t.duke.exception;
 /**
  * Represents exceptions where no id is given with the done or delete command.
  */
-public class NoIDGivenException extends DukeException {
+public class NoIdGivenException extends DukeException {
     /** Command (done or delete). */
     private String cmd;
 
@@ -11,7 +11,8 @@ public class NoIDGivenException extends DukeException {
      * Constructs a NoIdGivenException.
      * @param msg command keyword that caused this exception.
      */
-    public NoIDGivenException(String msg) {
+    public NoIdGivenException(String msg) {
+
         super(msg);
         this.cmd = msg;
     }

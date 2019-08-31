@@ -2,7 +2,7 @@ package cs2103t.duke.parse;
 
 import cs2103t.duke.command.*;
 import cs2103t.duke.exception.DukeException;
-import cs2103t.duke.exception.InvalidIDException;
+import cs2103t.duke.exception.InvalidIdException;
 import cs2103t.duke.exception.InvalidKeywordException;
 import cs2103t.duke.task.TaskType;
 
@@ -126,7 +126,7 @@ public class Parser {
         try {
             id = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new InvalidIDException(input);
+            throw new InvalidIdException(input);
         }
         return id;
     }

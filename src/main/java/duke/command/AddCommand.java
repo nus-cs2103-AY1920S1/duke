@@ -6,14 +6,24 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * AddCommand class adds a task to the list.
+ *
+ * @author scwaterbear
+ */
 public class AddCommand extends Command {
 
     Task t;
 
+    /**
+     * Class Constructor.
+     *
+     * @param t task to add.
+     */
     public AddCommand(Task t) {
         this.t = t;
     }
-
+    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(t);

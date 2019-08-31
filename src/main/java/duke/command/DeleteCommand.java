@@ -6,10 +6,20 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DeleteCommand class deletes a task.
+ *
+ * @author scwaterbear
+ */
 public class DeleteCommand extends Command {
 
     private int index;
 
+    /**
+     * Class Constructor.
+     *
+     * @param index list task identifier.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

@@ -6,10 +6,20 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DoneCommand class sets a task to be done.
+ *
+ * @author scwaterbear
+ */
 public class DoneCommand extends Command {
 
     private int index;
 
+    /**
+     * Class Constructor.
+     *
+     * @param index list task identifier.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }

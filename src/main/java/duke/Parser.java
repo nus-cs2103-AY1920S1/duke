@@ -6,8 +6,20 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Parser class deals with making sense of the user command.
+ *
+ * @author scwaterbear
+ */
 public class Parser {
 
+    /**
+     * Categorizes a broad range of user input to a narrower set of commands.
+     *
+     * @param fullCommand user input.
+     * @return Command user command.
+     * @throws DukeException If IndexOutOfBoundException has occurred or user input is invalid or unknown.
+     */
     public static Command parse(String fullCommand) throws DukeException {
 
         if (fullCommand.equals("list")) {

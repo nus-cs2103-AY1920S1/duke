@@ -4,9 +4,18 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
+/**
+ * ExitCommand class exits the program.
+ *
+ * @author scwaterbear
+ */
 public class ExitCommand extends Command {
 
-    public ExitCommand() { }
+    /**
+     * Class Constructor.
+     */
+    public ExitCommand() {
+    }
 
     @Override
     public boolean isExit() {

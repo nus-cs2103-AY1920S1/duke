@@ -11,14 +11,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Storage class deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author scwaterbear
+ */
 public class Storage {
 
     private File f;
 
+    /**
+     * Class constructor.
+     *
+     * @param filePath location of file to load and store data.
+     */
     public Storage(String filePath) {
         f = new File(filePath);
     }
 
+    /**
+     * Loads a list of tasks from a file.
+     * If no file is present, a new file is created and an empty list is returned.
+     *
+     * @return List<Task> list of tasks.
+     * @throws DukeException  If there has been IOException while performing an operation on the file.
+     */
     public List<Task> load() throws DukeException {
 
         List<Task> tasks = new ArrayList<>(100);
@@ -63,6 +80,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a list of tasks to a file.
+     *
+     * @param tasks a list of tasks.
+     * @throws DukeException If there has been IOException while performing an operation on the file.
+     */
     public void saveDataToFile(List<Task> tasks) throws DukeException {
         //write to a completely new file
         try {

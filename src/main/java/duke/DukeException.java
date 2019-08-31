@@ -3,8 +3,9 @@ package duke;
 /**
  * Specifies duke-defined exceptions for invalid commands.
  */
-public class DukeException extends Exception {
-    private String message = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+public class DukeException extends Exception{
+    private String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+
 
     /**
      * Constructs DukeException object for invalid commands.
@@ -18,7 +19,7 @@ public class DukeException extends Exception {
      * @param message Specified command.
      */
     DukeException(String message) {
-        this.message = "\t☹ OOPS!!! The description of a " + message + " cannot be empty.";
+        this.message = "OOPS!!! The description of a " + message + " cannot be empty.";
     }
 
     /**

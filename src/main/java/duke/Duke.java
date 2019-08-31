@@ -1,8 +1,8 @@
 package duke;
 
 import command.Command;
-
 import task.TaskList;
+import ui.UserInterface;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,11 +17,40 @@ public class Duke {
     private TaskList tasks;
     private UserInterface ui;
 
+    public Duke(String filepath) {
+        startup(filepath);
+    }
+
+    /**
+     * Parses user inputs and return appropriate replies.
+     * @param input User's action.
+     * @return Reply from duke.
+     */
+    public String getResponse(String input) {
+        try {
+            boolean isExit = false;
+
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            storage.save(tasks.getAllTasks());
+
+            if(isExit) {
+                return ui.goodbye();
+            } else {
+                return c.toString();
+            }
+
+        } catch (DukeException | ParseException | IOException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * Constructs Duke object.
      * @param filePath Specified file destination.
      */
-    private Duke(String filePath) {
+    public void startup(String filePath) {
         ui = new UserInterface();
         storage = new Storage(filePath);
         try {
@@ -34,33 +63,7 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the logic flow of the system.
-     */
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-                storage.save(tasks.getAllTasks());
-            } catch (DukeException | ParseException | IOException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
-     * Main method to run the system.
-     * @param args Arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/dukeData.txt").run();
+    public UserInterface getUi() {
+        return ui;
     }
 }

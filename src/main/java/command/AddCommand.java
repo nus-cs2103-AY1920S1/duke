@@ -1,7 +1,7 @@
 package command;
 
 import task.Task;
-import duke.UserInterface;
+import ui.UserInterface;
 import duke.Storage;
 import task.TaskList;
 
@@ -38,8 +38,8 @@ public class AddCommand extends Command {
         tasks.add(task);
 
         //display successful message and task count
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t " + task.toString());
-        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
+        super.message = "Got it. I've added this task:\n";
+        super.message += task.toString() + "\n";
+        super.message += "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 }

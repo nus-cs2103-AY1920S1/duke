@@ -1,7 +1,7 @@
 package command;
 
 import task.TaskList;
-import duke.UserInterface;
+import ui.UserInterface;
 import duke.Storage;
 
 /**
@@ -11,6 +11,7 @@ import duke.Storage;
 public abstract class Command {
     //Only TRUE if commands = bye which indicates the end of session.
     boolean isExit = false;
+    String message = "";
 
     /**
      * Executes the command and runs the related logic flow.
@@ -23,6 +24,14 @@ public abstract class Command {
 
     /**
      * Returns boolean value of TRUE/FALSE.
+     * Displays the description of the command.
+     * @return String of message.
+     */
+    public String toString() {
+        return message;
+    }
+
+    /**
      * @return Indicates if the command is to exit or not.
      */
     public boolean isExit() {

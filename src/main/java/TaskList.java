@@ -1,4 +1,9 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class TaskList {
 
@@ -56,6 +61,42 @@ public class TaskList {
             System.out.println(i + ". " + taskList.get(i-1) );
         }
     }
+    protected void readEvent(String b) throws ParseException {
 
+        if (b.length() == 0) {
+            System.out.println("\u2639" + " OOPS!!! the description of a event cannot be empty. ");
+        } else {
+            int first = b.indexOf('/');
+            String desc = b.substring(0, first - 1);
+            String on = b.substring(first + 4);
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date at = df.parse(on);
+            Task t1 = new Event(desc, at, false);
+            this.Add(t1);
+            this.addMessage();
+        }
+    }
+    protected void readDeadline(String s){
+
+        if (s.length() == 0) {
+            System.out.println("\u2639" + " OOPS!!! the description of a deadline cannot be empty. ");
+        } else {
+            int first = s.indexOf('/');
+            String descr = s.substring(0, first - 1);
+            String byTime = s.substring(first + 4);
+            Task t1 = new Deadline(descr, byTime, false);
+            this.Add(t1);
+            this.addMessage();
+        }
+    }
+    protected void readTodo(String s){
+        if (s.length() == 0)
+            System.out.println("\u2639" + " OOPS!!! the description of a todo cannot be empty. ");
+        else {
+            Task t1 = new ToDo(s, false);
+            this.Add(t1);
+            this.addMessage();
+        }
+    }
 
 }

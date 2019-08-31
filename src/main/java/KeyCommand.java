@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class KeyCommand extends Command {
-    protected String keyword;
+    protected String[] keyword;
 
-    public KeyCommand(String keyword) {
+    public KeyCommand(String... keyword) {
         this.keyword = keyword;
     }
 
@@ -15,10 +15,18 @@ public class KeyCommand extends Command {
             String[] taskDesc = tasks.get(i).getDesc().split(" ");
 
             for (int j = 0; j < taskDesc.length; j++) {
-                if (taskDesc[j].equals(this.keyword)) {
-                    resultList.add(tasks.get(i).toString());
-                    break;
+                for(int k=0; k<keyword.length; k++) {
+                    if (taskDesc[j].equals(keyword[k])) {
+                        String toAdd = tasks.get(i).toString();
+
+                        if(!resultList.contains(toAdd)) {
+                            resultList.add(toAdd);
+                        }
+
+                        break;
+                    }
                 }
+
             }
         }
 

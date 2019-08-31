@@ -29,7 +29,7 @@ public class DateTime{
         DateTime event = new DateTime();
         int divider = date_time.indexOf("-");
         if (divider == -1 || (divider == date_time.length() -1)){
-            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Need to have end time.\n" + (new Border()));
+            throw new DukeException("Need to have end time.");
         }
         String end = date_time.substring(divider + 1, date_time.length());
         event.start = LocalDateTime.parse(date_time.substring(0, divider), getStart);
@@ -42,7 +42,7 @@ public class DateTime{
         DateTime event = new DateTime();
         int divider = date_time.indexOf("-");
         if (divider == -1 || (divider == date_time.length() -1)){
-            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Need to have end time.\n" + (new Border()));
+            throw new DukeException("Need to have end time.");
         }
         String end = date_time.substring(divider + 1, date_time.length());
         event.start = LocalDateTime.parse(date_time.substring(0, divider), getStart);

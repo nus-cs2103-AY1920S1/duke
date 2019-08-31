@@ -2,15 +2,12 @@ import java.util.ArrayList;
 
 
 public class TaskList {
-    String filePath = "data/duke.txt";
     ArrayList <Task> schedule = new ArrayList<> ();
-    Storage storage;
     public int task_Num;
-    boolean isFirst ;
+    public boolean isFirst ;
 
     public TaskList(Storage storage){
         try {
-            this.storage = storage;
             this.schedule = storage.getSchedule();
             task_Num = schedule.size();
             if (task_Num == 0){
@@ -18,48 +15,35 @@ public class TaskList {
             } else {
                 isFirst = false;
             }
-            System.out.println(task_Num);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
     public TaskList(){
-        try {
-            storage = new Storage(filePath);
-            this.schedule = schedule;
-            task_Num = schedule.size();
-            if (task_Num == 0){
-                isFirst = true;
-            } else {
-                isFirst = false;
-            }
-            System.out.println(task_Num);
-        } catch (DukeException e){
-            System.out.println(e.getMessage());
+        this.schedule = schedule;
+        task_Num = schedule.size();
+        if (task_Num == 0){
+            isFirst = true;
+        } else {
+            isFirst = false;
         }
+        System.out.println(task_Num);
     }
 
     public Task getTask(int index){
-
         return schedule.get(index);
     }
 
-    public void complete(int index)
+    public Task complete(int index)
             throws NullPointerException, IndexOutOfBoundsException, NumberFormatException, DukeException{
-        schedule.get(index).markAsDone();
-        storage.editFile(schedule.toString());
+        Task completedTask = schedule.get(index);
+        completedTask.markAsDone();
+        return completedTask;
     }
 
     public void addTask(Task task) throws DukeException{
         schedule.add(task);
-        String input = "";
-        if (isFirst){
-            isFirst = !isFirst;
-        } else {
-            storage.writeToFile(System.lineSeparator());
-        }
-        storage.writeToFile(task.toString());
         task_Num++;
     }
 
@@ -67,13 +51,13 @@ public class TaskList {
             throws NullPointerException, IndexOutOfBoundsException, NumberFormatException, DukeException{
         Task removed_Task = schedule.get(index);
         schedule.remove(index);
-        storage.editFile(schedule.toString());
         task_Num --;
         return removed_Task;
     }
 
-    public void stop() throws DukeException{
-        storage.closeWriter();
+
+    public ArrayList<Task> getList(){
+        return schedule;
     }
 
     /*public void add(String task){
@@ -177,11 +161,11 @@ public class TaskList {
 
 
     public String toString(){
-        String output = (new Border()) + "\n" + "     Here are the tasks in your list: \n";
+        String output = "";
         for (int index = 0; index < task_Num; index ++){
             Task task = schedule.get(index);
             output += ("     " + (index + 1) + "." + task.toString() + "\n");
         }
-        return output + (new Border()) + "\n";
+        return output.substring(0, output.length() - 1);
     }
 }

@@ -1,10 +1,10 @@
-public enum Commands {
+public enum FullCommand {
     LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline")
         , EVENT("event"), BYE("bye");
 
     private String name;
 
-    private Commands(String name) {
+    private FullCommand(String name) {
         this.name = name;
     }
 
@@ -12,14 +12,14 @@ public enum Commands {
         return name;
     }
 
-    public static Commands getByName(String keyword) throws DukeException{
-        for(Commands command : values()){
+    public static FullCommand getByName(String keyword) throws DukeException{
+        for(FullCommand command : values()){
             if(command.getName().equals(keyword)){
                 return command;
             }
         }
 
-        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + (new Border()) + "\n");
+        throw new DukeException("no such command");
     }
 }
 

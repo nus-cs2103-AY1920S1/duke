@@ -42,7 +42,7 @@ public class Parser {
         String[] parts = substring.split("\\/..");
         String description;
         if (action.equals("todo") || action.equals("find"))
-            return substring; //no date or time
+            return substring.trim(); //no date or time
         else
             description = parts[0].trim(); // Remove blank spaces
 

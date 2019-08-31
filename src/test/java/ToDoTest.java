@@ -8,7 +8,7 @@ class ToDoTest {
 
     @Test
     void testToString() {
-        String expected = "[T][✘] read book";
+        String expected = "[T][" + "\u2718" + "] read book";
         assertEquals(expected, check.toString());
     }
 

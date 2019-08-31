@@ -8,7 +8,7 @@ class EventTest {
 
     @Test
     void testToString() {
-        String expected = "[E][✘] project meeting (at: Tue Jun 04 10:30:00 SGT 2019)";
+        String expected = "[E][" + "\u2718" + "] project meeting (at: Tue Jun 04 10:30:00 SGT 2019)";
         assertEquals(expected, check.toString());
     }
 

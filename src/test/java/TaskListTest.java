@@ -44,9 +44,9 @@ class TaskListTest {
         list.add(three);
         tasks = new TaskList(list);
         // Set string as CRLF line separators
-        String check = "     1.[T][✘] read book\r\n" +
-                "     2.[D][✘] return book (by: June 6th)\r\n" +
-                "     3.[E][✘] project meeting (at: Aug 6th 2-4pm)\r\n";
+        String check = "     1.[T][" + "\u2718" + "] read book\r\n" +
+                "     2.[D][" + "\u2718" + "] return book (by: June 6th)\r\n" +
+                "     3.[E][" + "\u2718" + "] project meeting (at: Aug 6th 2-4pm)\r\n";
 
         // Get print statement as String
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -69,8 +69,8 @@ class TaskListTest {
         list.add(two);
         list.add(three);
         tasks = new TaskList(list);
-        String notDone = "[D][✘] return book (by: June 6th)";
-        String done = "[D][✓] return book (by: June 6th)";
+        String notDone = "[D][" + "\u2718" + "] return book (by: June 6th)";
+        String done = "[D][" + "\u2713" + "] return book (by: June 6th)";
 
         assertEquals(notDone, two.toString()); // Before marked as done
         tasks.setDone("done 2");

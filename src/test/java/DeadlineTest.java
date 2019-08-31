@@ -8,7 +8,7 @@ class DeadlineTest {
 
     @Test
     void ToString() {
-        String expected = "[D][✘] return book (by: Tue Jun 04 10:30:00 SGT 2019)";
+        String expected = "[D][" + "\u2718" + "] return book (by: Tue Jun 04 10:30:00 SGT 2019)";
         assertEquals(expected, check.toString());
     }
 

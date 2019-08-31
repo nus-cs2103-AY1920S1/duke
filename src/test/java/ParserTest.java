@@ -23,13 +23,13 @@ class ParserTest {
 
     @Test
     void parseDescription() {
-        String des = parser.parseDescription(inputEvent, "event");
+        String des = parser.parseDescription("event", inputEvent);
         assertEquals("classes", des);
     }
 
     @Test
     void parseDateTime() {
-        String dateTime = parser.parseDateTime(inputEvent, "event");
+        String dateTime = parser.parseDateTime("event", inputEvent);
         assertEquals("12pm", dateTime);
     }
 }

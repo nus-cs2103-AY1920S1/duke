@@ -8,7 +8,8 @@ public class Ui {
 
     private static final String LINE_PREFIX = "|| ";
 
-    private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+    private static final String LOGO = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\\\___|\n";
 
     private static final String DUKE_STARTUP = "Hello from\n" + LOGO;
@@ -45,7 +46,7 @@ public class Ui {
      * Add a border to all inputs.
      * @param input String input
      */
-    public void addBorder (String input){
+    public void addBorder(String input) {
 
         String border = "____________________________________________________________";
 
@@ -64,7 +65,7 @@ public class Ui {
     /**
      * Display exit message to user when they leave Duke.
      */
-    public void exitMessage () {
+    public void exitMessage() {
         addBorder(EXIT_MESSAGE);
     }
 
@@ -72,7 +73,7 @@ public class Ui {
      * Show user the list of tasks they have.
      * @param tasks TaskList object.
      */
-    public void printList (TaskList tasks) {
+    public void printList(TaskList tasks) {
         StringBuilder str = new StringBuilder(LIST_MESSAGE);
 
         for (int i = 1; i < tasks.getSize() + 1; i++) {

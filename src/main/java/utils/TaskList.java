@@ -7,7 +7,7 @@ public class TaskList {
     private List<Task> tasks;
 
     public TaskList(List<Task> tasks) {
-       this.tasks = tasks;
+        this.tasks = tasks;
     }
 
     public int getSize() {
@@ -31,6 +31,6 @@ public class TaskList {
      * @return Task that was deleted
      */
     public Task deleteTask(int taskId) {
-       return this.tasks.remove(taskId);
+        return this.tasks.remove(taskId);
     }
 }

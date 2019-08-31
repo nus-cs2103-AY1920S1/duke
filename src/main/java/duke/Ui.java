@@ -5,8 +5,8 @@ import duke.task.Task;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ui {
-    private static final String prefix = "☹ OOPS!!!";
+public abstract class Ui {
+    protected static final String prefix = "☹ OOPS!!!";
 
     private Scanner sc;
 
@@ -19,9 +19,7 @@ public class Ui {
      * All printing of error messages should be routed through this method.
      * @param errorMessage Error message to be printed
      */
-    private void showError(String errorMessage) {
-        System.out.println(prefix + " " + errorMessage);
-    }
+    protected abstract void showError(String errorMessage);
 
     public void showError(DukeException e) {
         showError(e.getMessage());
@@ -32,12 +30,12 @@ public class Ui {
      * All printing of messages should be routed through this method.
      * @param message Message to be printed
      */
-    private void showMessage(String message) {
-        System.out.println(message);
-    }
+    protected abstract void showMessage(String message);
 
-    public void showLine() {
-        System.out.println();
+    public abstract void showLine();
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 
     public void showLoadingError() {
@@ -109,9 +107,5 @@ public class Ui {
                 showMessage((i + 1) + "." + task);
             }
         }
-    }
-
-    public String readCommand() {
-        return sc.nextLine();
     }
 }

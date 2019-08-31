@@ -3,7 +3,7 @@ package command;
 import duke.Storage;
 import task.Task;
 import task.TaskList;
-import duke.UserInterface;
+import ui.UserInterface;
 
 import java.util.ArrayList;
 
@@ -17,10 +17,10 @@ public class FindCommand extends Command {
         ArrayList<Task> taskList = tasks.find(keyword);
 
         if (taskList.isEmpty()) {
-            System.out.println("\tNo tasks matched your description.");
+            super.message = "No tasks matched your description.";
         } else {
-            System.out.println("\tHere are the matching tasks in your list:");
-            tasks.list(taskList);
+            super.message = "Here are the matching tasks in your list:\n";
+            super.message += tasks.list(taskList);
         }
 
     }

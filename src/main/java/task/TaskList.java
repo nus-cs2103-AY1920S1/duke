@@ -57,28 +57,34 @@ public class TaskList {
     /**
      * Lists all the tasks in the list.
      */
-    public void list() {
+    public String list() {
         int counter = 1;
+        StringBuilder str = new StringBuilder();
 
         //list out all the texts from the user
         for (Task t: tasks) {
-            System.out.println("\t" + counter + "." + t.toString());
+            str.append(counter).append(".").append(t.toString()).append("\n");
             counter++;
         }
+
+        return str.toString();
     }
 
     /**
      * Lists all the tasks in the list provided by the user.
      * @param taskList List of tasks.
      */
-    public void list(ArrayList<Task> taskList) {
+    public String list(ArrayList<Task> taskList) {
         int counter = 1;
+        StringBuilder str = new StringBuilder();
 
         //list according to given list
         for (Task t: taskList) {
-            System.out.println("\t" + counter + "." + t.toString());
+            str.append(counter).append(".").append(t.toString()).append("\n");
             counter++;
         }
+
+        return str.toString();
     }
 
     /**

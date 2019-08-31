@@ -2,7 +2,7 @@ package command;
 
 import task.Task;
 import task.TaskList;
-import duke.UserInterface;
+import ui.UserInterface;
 import duke.Storage;
 
 /**
@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
         Task task = tasks.done(index);
 
         //display successful message
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  " + task.toString());
+        super.message = "Nice! I've marked this task as done:\n";
+        super.message += task.toString();
     }
 }

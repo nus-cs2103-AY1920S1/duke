@@ -96,7 +96,8 @@ public class TaskList implements Serializable {
     public TaskList getTaskSubsetMatching(String searchWord) {
         List<Task> resultList = new ArrayList<>();
         this.tasks.forEach((task) -> {
-            if (task.getDescription().contains(searchWord)) {
+            if (task.getDescription().toLowerCase()
+                    .contains(searchWord.toLowerCase())) {
                 resultList.add(task);
             }
         });

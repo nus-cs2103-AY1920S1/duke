@@ -22,7 +22,7 @@ public class ToDo extends Task {
     }
 
     /**
-     *
+     *Method to display information in the required format.
      * @return The task description with the prefix letter T indicating the type of task which corresponds to Todo here.
      */
     @Override

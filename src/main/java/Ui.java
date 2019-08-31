@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Prints a hello message at the beginning of the program.
      */
-    void Greet() {
+    void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
 
     }
@@ -18,7 +18,7 @@ public class Ui {
      * Prints a bye message when the user leaves.
      *
      */
-    void Exit() {
+    void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 

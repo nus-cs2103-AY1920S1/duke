@@ -5,21 +5,23 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-    public Task(String description, boolean b){
+
+    public Task(String description, boolean b) {
         this.description = description;
         this.isDone = b;
     }
 
     /**
+     *Method to get the status of the task.
      *
      * @return an icon to indicate the status of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "1" : "0");
     }
 
     /**
@@ -30,6 +32,7 @@ public class Task {
     }
 
     /**
+     *Method to display information in the required format.
      *
      * @return the description of the task along with the status icon.
      */

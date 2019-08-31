@@ -2,7 +2,7 @@
  * Inherits from the Task class and contains information about the Deadline tasks.
  */
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     /**
      * Creates a deadline task with description, deadline and status (done or not done) .
@@ -23,11 +23,12 @@ public class Deadline extends Task {
     }
 
     /**
+     *Method to display the information in the required form.
      *
      * @return the description of the task with a prefix D indicating the nature of task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

@@ -11,7 +11,7 @@ public class TaskList {
 
     public ArrayList<Task> taskList;
 
-    public TaskList(){
+    public TaskList() {
         taskList = new ArrayList<>();
     }
 
@@ -45,7 +45,7 @@ public class TaskList {
     protected void markAsDone(int x) {
         taskList.get(x).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println( taskList.get(x) );
+        System.out.println(taskList.get(x));
     }
 
     /**
@@ -93,8 +93,8 @@ public class TaskList {
      */
     protected void getList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= taskList.size(); i+=1) {
-            System.out.println(i + ". " + taskList.get(i-1) );
+        for (int i = 1; i <= taskList.size(); i += 1) {
+            System.out.println(i + ". " + taskList.get(i - 1) );
         }
     }
 
@@ -108,7 +108,7 @@ public class TaskList {
     protected void readEvent(String b) throws ParseException {
 
         if (b.length() == 0) {
-            System.out.println("\u2639" + " OOPS!!! the description of a event cannot be empty. ");
+            System.out.println(" OOPS!!! the description of a event cannot be empty. ");
         } else {
             int first = b.indexOf('/');
             String desc = b.substring(0, first - 1);
@@ -130,7 +130,7 @@ public class TaskList {
     protected void readDeadline(String s) {
 
         if (s.length() == 0) {
-            System.out.println("\u2639" + " OOPS!!! the description of a deadline cannot be empty. ");
+            System.out.println(" OOPS!!! the description of a deadline cannot be empty. ");
         } else {
             int first = s.indexOf('/');
             String descr = s.substring(0, first - 1);
@@ -148,7 +148,7 @@ public class TaskList {
      */
     protected void readTodo(String s) {
         if (s.length() == 0) {
-            System.out.println("\u2639" + " OOPS!!! the description of a todo cannot be empty. ");
+            System.out.println(" OOPS!!! the description of a todo cannot be empty. ");
         } else {
             Task t1 = new ToDo(s, false);
             this.add(t1);

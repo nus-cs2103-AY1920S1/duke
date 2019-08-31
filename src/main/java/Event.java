@@ -1,12 +1,13 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  * Inherits from the Task class and contains information about the Event tasks.
  */
 public class Event extends Task {
 
-    protected Date on;
+    private Date on;
 
     /**
      * Creates a event task with description, event time and status (done or not done) .
@@ -26,11 +27,12 @@ public class Event extends Task {
     }
 
     /**
+     *Method to display information in the required format.
      *
      * @return the description of the event along with time and prefix E to indicate the nature of the event.
      */
     @Override
-    public String toString(){
+    public String toString() {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
         return "[E]" + super.toString() + " (at: " + df.format(on) + ")";
     }

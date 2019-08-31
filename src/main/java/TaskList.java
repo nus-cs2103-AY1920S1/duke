@@ -58,9 +58,13 @@ public class TaskList {
                 searchResults.add(task);
             }
         }
-        ui.show("Here are the matching tasks in your list:");
-        for (int i = 0; i < searchResults.size(); i++) {
-            ui.show((i + 1) + "." + searchResults.get(i));
+        if (searchResults.isEmpty()) {
+            ui.show("OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".");
+        } else {
+            ui.show("Here are the matching tasks in your list:");
+            for (int i = 0; i < searchResults.size(); i++) {
+                ui.show((i + 1) + "." + searchResults.get(i));
+            }
         }
     }
 

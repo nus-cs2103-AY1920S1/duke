@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
-    final String taskType = "[D]";
+    private static final String TASK_TYPE = "[D]";
     protected LocalDateTime deadlineTime;
 
     /**
      * Constructor for Deadline which inherits from Task.
      *
      * @param description String that is passed from the commands containing info about the Deadline.
-     * @param LocalDateTime contains information about the deadlineTime from the user.
+     * @param by contains information about the deadlineTime from the user.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -20,6 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a string based on the deadline descriptions and formats the LocalDateTime output.
      * Abstract method implemented from parent Task.
      *
      * @return the description of the task to be placed into Storage class.
@@ -29,22 +30,22 @@ public class Deadline extends Task {
     }
 
     /**
-     * Abstract method implemented from parent Task.
+     * Returns a string, referring to the type of task. Abstract method implemented from parent Task.
      *
      * @return the symbol for type of task, "[D]".
      */
     public String getType() {
-        return taskType;
+        return TASK_TYPE;
     }
 
     /**
-     * toString() method.
+     * Returns a string containing full description of the deadline.
      *
      * @return string containing information of task to be printed out by ListCommand and Ui.
      */
     @Override
     public String toString() {
-        return taskType + super.getStatusIcon() + " " + super.toString()
+        return TASK_TYPE + super.getStatusIcon() + " " + super.toString()
                 + " (by: " + DateTimeHelper.formatOutput(deadlineTime)  + ")";
     }
 }

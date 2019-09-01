@@ -23,9 +23,9 @@ public class AddCommandTest {
     }
 
     @Test
-    public void addCommandTest() throws DukeException {
-        String printedAssert = "Got it. I've added this task: \n  [T]" + "[" + "\u2718" + "]"
-                              + "borrow book\nNow you have 1 tasks in the list.";
+    public void executeToDo() throws DukeException {
+        String printedAssert = "Got it. I've added this task: \n" + "  [T]"
+                              + " borrow book\nNow you have 1 tasks in the list.";
         Command a = new AddCommand("todo borrow book");
         TaskList tl = new TaskList(new ArrayList<Task>());
         a.execute(tl ,new Ui() , new Storage());

@@ -26,8 +26,8 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList passed from the Duke main class, containing Array of Tasks.
      * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.
      * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
-     * @throws DukeException which can come from two sources, itself when the description passed in by the user is not complete
-     * and if the values for delete is invalid or the Storage Class.
+     * @throws DukeException which can come from two sources, itself when the description passed in by the user is not
+     * complete and if the values for delete is invalid or the Storage Class.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = inputCommand.split(" ", 2);

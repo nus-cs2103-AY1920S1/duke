@@ -12,7 +12,7 @@ import duke.helper.DukeException;
 public class Parser {
 
     /**
-     * Understands the user's input command from class Ui.
+     * Reads and Understands the user's input command from class Ui.
      * public method called by Duke.run() in the for loop as part of the Command Pattern.
      *
      * @param inputCommand String that is obtained from the scanner which is located in Ui.
@@ -25,15 +25,15 @@ public class Parser {
             return new ListCommand(inputCommand);
         } else if (inputsplit[0].equalsIgnoreCase("done")) {
             return new DoneCommand(inputCommand);
-        } else if (inputsplit[0].equalsIgnoreCase("todo") ||
-                inputsplit[0].equalsIgnoreCase("deadline") ||
-                inputsplit[0].equalsIgnoreCase("event")) {
+        } else if (inputsplit[0].equalsIgnoreCase("todo")
+                || inputsplit[0].equalsIgnoreCase("deadline")
+                || inputsplit[0].equalsIgnoreCase("event")) {
             return new AddCommand(inputCommand);
         } else if (inputsplit[0].equalsIgnoreCase("delete")) {
             return new DeleteCommand(inputCommand);
         } else if (inputsplit[0].equalsIgnoreCase("find")) {
             return new FindCommand(inputCommand);
-        } else if (inputsplit[0].equalsIgnoreCase("bye")){
+        } else if (inputsplit[0].equalsIgnoreCase("bye")) {
             return new ExitCommand(inputCommand);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

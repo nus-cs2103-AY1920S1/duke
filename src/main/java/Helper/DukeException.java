@@ -14,7 +14,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Called by to print the error.
+     * Returns a string containing the error message. Called by to print the error.
      *
      * @return the error message for the Exception.
      */

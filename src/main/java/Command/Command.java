@@ -21,7 +21,7 @@ public abstract class Command {
     }
 
     /**
-     * public method called by Duke.run() in the for loop to check if the for loop should continue.
+     * Checks if the for loop should continue.public method called by Duke.run() in the for loop to
      * Inherited by all child classes as all Command classes need to check if should end for loop.
      *
      * @return shouldExit is the boolean that will stop the for loop and exit the program.

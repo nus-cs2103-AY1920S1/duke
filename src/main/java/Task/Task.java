@@ -19,14 +19,14 @@ public abstract class Task {
      *
      * @return boolean of whether task is completed.
      */
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return this.isDone;
     }
 
     /**
      * Called to change information if the task is completed. Modifies the isDone boolean value to true.
      */
-    public void markIsDone(){
+    public void markIsDone() {
         this.isDone = true;
     }
 
@@ -44,7 +44,7 @@ public abstract class Task {
      *
      * @return description of event.
      */
-    public String toString(){
+    public String toString() {
         return this.description;
     }
 

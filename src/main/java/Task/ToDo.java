@@ -2,7 +2,7 @@ package duke.task;
 
 public class ToDo extends Task {
 
-    final String TASK_TYPE = "[T]";
+    private static final String TASK_TYPE = "[T]";
 
     /**
      * Constructor for ToDo which inherits from Task.

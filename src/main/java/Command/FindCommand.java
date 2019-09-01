@@ -7,7 +7,7 @@ import duke.task.TaskList;
 import duke.task.Task;
 import java.util.ArrayList;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     /**
      * Constructor for FindCommand which inherits from Command.
@@ -32,7 +32,7 @@ public class FindCommand extends Command{
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = this.inputCommand.split(" ");
-        if (inputsplit.length <= 1 ) {
+        if (inputsplit.length <= 1) {
             throw new DukeException("OOPS!!! The description of a find Command cannot be empty.");
         } else if (inputsplit.length > 2) {
             throw new DukeException("OOPS!!! The find Command can only accept one keyword.");

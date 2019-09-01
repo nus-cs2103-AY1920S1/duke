@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 
 public class Event extends Task {
 
-    final String TASK_TYPE = "[E]";
+    private static final String TASK_TYPE = "[E]";
     protected LocalDateTime eventTime;
 
     /**
      * Constructor for Event which inherits from Task.
      *
      * @param description String that is passed from the commands containing info about the Task.
-     * @param LocalDateTime contains information about the eventTime from the user.
+     * @param eventTime contains information about the eventTime from the user.
      */
     public Event(String description, LocalDateTime eventTime) {
         super(description);

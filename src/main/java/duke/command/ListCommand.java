@@ -29,7 +29,7 @@ public class ListCommand extends Command {
      * @throws DukeException DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Ui.printLine(tasks.printAllTasks());
+        ui.printLine(tasks.printAllTasks());
     }
 
     /**

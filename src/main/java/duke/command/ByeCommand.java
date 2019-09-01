@@ -28,7 +28,7 @@ public class ByeCommand extends Command {
      * @throws DukeException DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Ui.printLine("Bye. Hope to see you again soon!");
+        ui.printLine("Bye. Hope to see you again soon!");
     }
 
     /**

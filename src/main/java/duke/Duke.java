@@ -1,11 +1,15 @@
+package duke;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -13,6 +17,7 @@ public class Duke {
 
     /**
      * Constructor for the Duke class.
+     *
      * @param filePath Local filePath to the data storage file.
      */
     public Duke(String filePath) {
@@ -24,6 +29,10 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Duke() {
+        this("src/main/data/duke.txt");
     }
 
     /**
@@ -44,7 +53,8 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("src/main/data/duke.txt").run();
+    @Override
+    public void start(Stage stage) throws Exception {
+        ui.start(stage);
     }
 }

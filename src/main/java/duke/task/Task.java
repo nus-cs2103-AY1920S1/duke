@@ -20,8 +20,8 @@ public abstract class Task {
         return this.name;
     }
 
-    boolean getDone() {
-        return this.isDone;
+    public boolean getDone() {
+        return isDone;
     }
 
     /**

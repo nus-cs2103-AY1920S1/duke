@@ -1,14 +1,33 @@
-public class AddCommand extends Command{
-    public Actions action;
-    public AddCommand(String input, Actions action){
+/**
+ * Adds a Task to the TaskList.
+ */
+public class AddCommand extends Command {
+
+    private Actions action;
+
+    /**
+     * Constructs a new AddCommand object.
+     *
+     * @param input  input from the user.
+     * @param action action to be performed.
+     */
+    public AddCommand(String input, Actions action) {
         super(input);
         this.action = action;
     }
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+
+    /**
+     * Executes the action to be performed.
+     *
+     * @param tasks   current list of tasks.
+     * @param ui      Ui object.
+     * @param storage Storage object to save and load files.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         int num;
         String desc;
         Task task = null;
-        switch(action) {
+        switch (action) {
             case TODO:
                 //trim so that cannot pass with just spaces
                 desc = ui.getTodoDesc();
@@ -64,16 +83,15 @@ public class AddCommand extends Command{
             default:
                 break;
         }
+        // if task is still null do nothing
         if (task == null) {
-            // if task is still null do nothing
         } else {
             tasks.addTask(task);
-           Duke.print("Got it. I've added this task:\n" +
+            Duke.print("Got it. I've added this task:\n" +
                     "       " + task + "\n" +
                     "     Now you have " + tasks.getSize() + " tasks in the list.");
         }
     }
-
 
 
 }

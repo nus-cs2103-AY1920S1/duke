@@ -1,12 +1,28 @@
+/**
+ * Event task that inherits from Task.
+ */
 public class Event extends Task {
-    public String time;
-    public Event(String task, String time){
+
+    public String dateTime;
+
+    /**
+     * Constructs a new Event object.
+     *
+     * @param task     description of task.
+     * @param dateTime date and time of task.
+     */
+    public Event(String task, String dateTime) {
         super(task);
-        this.time = Duke.toDateString(time);
+        this.dateTime = Duke.toDateString(dateTime);
     }
 
+    /**
+     * Returns a string representation of an Event object.
+     *
+     * @return a string representation of an Event object.
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.time + ")";
+        return "[E]" + super.toString() + "(at: " + this.dateTime + ")";
     }
 }

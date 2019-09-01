@@ -32,7 +32,7 @@ public class Ui {
         System.out.println(addTaskMessage);
     }
 
-    public void printAddedTask(Task task) {
+    public String printAddedTask(Task task) {
         String result = "";
         switch (task.getType()) {
         case TODO:
@@ -46,7 +46,9 @@ public class Ui {
             break;
         }
         result += task;
-        System.out.println(result);
+        // System.out.println(result);
+
+        return result;
     }
 
     public void println(String string) {

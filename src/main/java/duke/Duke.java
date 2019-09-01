@@ -8,9 +8,13 @@ import duke.exception.DukeException;
  * <code>TaskList</code> and <code>Ui</code>.
  */
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    public Duke() {
+    }
 
     /**
      * Constructor for <code>Duke</code>.
@@ -52,5 +56,13 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("C:\\Users\\Yi Wai\\Documents\\Year 2 Semester 1\\CS2103\\duke\\data\\duke.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

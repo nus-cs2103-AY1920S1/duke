@@ -1,9 +1,17 @@
 public class ToDo extends Task {
-    //protected Boolean done;
+    /**
+     * constructor for the child class
+     * @param command is the user input
+     */
     public ToDo(String command){
         super(command);
         this.done = false;
     }
+
+    /**
+     * to print for "list" command
+     * @return string in the format required
+     */
     public String printer(){
         if(done){
             String result = "[T][✓] " + command;
@@ -14,6 +22,10 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * to print for text file
+     * @return string in the format required
+     */
     public String printToOutput(){
         if(done){
             String result = "T | 1 | " + command;
@@ -24,6 +36,11 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * read user input as convert it into a Task
+     * @param s is the user input string
+     * @return a Task (ToDo) object
+     */
     public static Task outputAsToDo(String s){
         String[]segments = s.split("\\|");
         ToDo newTask = new ToDo(segments[2]);
@@ -34,6 +51,9 @@ public class ToDo extends Task {
         return newTask;
     }
 
+    /**
+     * marks task as done
+     */
     public void taskDone(){
         done = true;
     }

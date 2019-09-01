@@ -4,8 +4,18 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
+    /**
+     * midcommand is attribute for the string command after "deadline"
+     * formattedDate is attribute for the date
+     */
     private String midcommand; private String formattedDate;
 
+    /**
+     * constructor for child class
+     * defines the midcommand, and calculates the formattedDate
+     * @param command is the user input string
+     * @throws DukeException in case date is not entered in the correct format
+     */
     public Deadline(String command) throws DukeException {
         super(command);
         this.done = false;
@@ -25,6 +35,10 @@ public class Deadline extends Task {
         midcommand = splitteddate[0];
     }
 
+    /**
+     * to print for "list" command
+     * @return string in the format required
+     */
     public String printer(){
             if(done){
                 String result = "[D][✓] " + midcommand + "(by: " + formattedDate + ")";
@@ -35,6 +49,10 @@ public class Deadline extends Task {
             }
     }
 
+    /**
+     * to print for text file
+     * @return string in the format required
+     */
     public String printToOutput(){
             if(done){
                 String result = "D | 1 | " + midcommand + " | " + formattedDate;
@@ -45,6 +63,12 @@ public class Deadline extends Task {
             }
     }
 
+    /**
+     * read user input as convert it into a Task
+     * @param s is the user input string
+     * @return a Task (Deadline) object
+     * @throws DukeException in case segments[3] is not in the proper date format
+     */
     public static Task outputAsDeadline(String s) throws DukeException {
         String[]segments = s.split("\\|");
         String taskCommand = segments[2] + "/by: " + segments[3];
@@ -55,6 +79,9 @@ public class Deadline extends Task {
         return newTask;
     }
 
+    /**
+     * marks when task is done
+     */
     public void taskDone(){
         done = true;
     }

@@ -1,3 +1,5 @@
-T | 1 | read book
-E | 1 | party  | 04/07/2019 2359
+T | 1 |  read book
+E | 1 |  party   | 04/07/2019 2359
+D | 0 | buy groceries  | 06/07/2018 2311
+E | 1 | tutorial  | 02/02/2023 1200
 

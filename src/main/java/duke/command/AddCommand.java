@@ -57,8 +57,9 @@ public class AddCommand extends Command {
      * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
+     * @return The response string.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         tasks.allTasks.add(task);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + task);
@@ -72,7 +73,7 @@ public class AddCommand extends Command {
                 .append(" tasks in the list.");
         }
         storage.appendTaskToFile(task);
-        ui.printMessage(sb.toString());
+        return (sb.toString());
     }
 
     /**

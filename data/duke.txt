@@ -2,4 +2,5 @@ T | 1 | buy bread
 T | 0 | SEP application
 T | 1 | fix bugs
 T | 0 | download gradle
-E | 0 | 2103 meeting | 3rd of September 2019, 4pm-6pm
+E | 1 | 2103 meeting | 3rd of September 2019, 4pm-6pm
+T | 0 | rerun gradle 

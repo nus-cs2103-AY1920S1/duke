@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
+    private Queue<String> messageQueue = new LinkedList<>();
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -25,45 +28,88 @@ public class Ui {
     }
 
     public void showLine() {
-        print("____________________________________________________________");
+        printToConsole("____________________________________________________________");
     }
 
     public void showError(String message) {
-        print(" " + message);
+        printToConsole(message);
     }
 
     /**
      * Shows a welcome message.
      */
     public void showWelcome() {
-        showLine();
-        print(" Hello! I'm Duke");
-        print(" What can I do for you?");
-        showLine();
+        printToConsole(getWelcomeMessage());
+    }
+
+    /**
+     * Gets a preset welcome message.
+     *
+     * @return Welcome message
+     */
+    public static String getWelcomeMessage() {
+        return "Hello! I'm Duke"
+                + System.lineSeparator()
+                + "What can I do for you?";
     }
 
     /**
      * Shows a loading error.
      */
     public void showLoadingError() {
-        showLine();
-        print(" The save file doesn't seem to be there or is incorrect!");
-        print(" Let's start afresh.");
-        showLine();
+        String output = "The save file doesn't seem to be there or is incorrect!"
+                + System.lineSeparator()
+                + "Let's start afresh.";
+    }
+
+    /**
+     * Queues a message to be printed in a buffer.
+     * Call getMessage() to obtain the message.
+     *
+     * @param message To be printed.
+     */
+    public void printLine(String message) {
+        messageQueue.offer(message);
+    }
+
+    /**
+     * Queues a message to be printed in a buffer.
+     * Call getMessage() to obtain the messages.
+     *
+     * @param message To be printed.
+     */
+    public void printLine(Object message) {
+        messageQueue.offer(message.toString());
+    }
+
+    /**
+     * De-queues all messages from the message queue into a single string.
+     *
+     * @return Message to be printed.
+     */
+    public String getMessage() {
+        StringBuilder output = new StringBuilder();
+        while (!messageQueue.isEmpty()) {
+            output.append(messageQueue.poll());
+            output.append(System.lineSeparator());
+        }
+
+        return output.toString().trim();
     }
 
     /**
      * Prints a message.
      */
-    public void print() {
+    public void printToConsole() {
         System.out.println();
     }
 
     /**
-     * Prints a message.
+     * Prints a message to console.
+     *
      * @param message To be printed.
      */
-    public void print(String message) {
+    public void printToConsole(String message) {
         System.out.println(message);
     }
 }

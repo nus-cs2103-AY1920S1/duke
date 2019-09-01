@@ -21,9 +21,9 @@ public class AddCommand extends Command {
         tasks.addTask(task);
         storage.save(tasks);
 
-        ui.print(" Got it. I've added this task: ");
-        ui.print("  " + task);
-        ui.print(" Now you have "
+        ui.printLine("Got it. I've added this task: ");
+        ui.printLine(task);
+        ui.printLine("Now you have "
                 + tasks.size()
                 + " tasks in the list.");
     }

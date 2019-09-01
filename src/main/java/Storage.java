@@ -32,16 +32,16 @@ public class Storage {
         String lineToRead;
 
         while ((lineToRead = br.readLine()) != null) {
-            if( (!lineToRead.equals("")) && (lineToRead.charAt(0)=='T') ) {
+            if ( (!lineToRead.equals("")) && (lineToRead.charAt(0) == 'T') ) {
                 Task newTask = ToDo.outputAsToDo(lineToRead);
                 list.add(newTask);
-            }else if( (!lineToRead.equals("")) && (lineToRead.charAt(0)=='D')){
+            } else if ( (!lineToRead.equals("")) && (lineToRead.charAt(0) == 'D') ) {
                 Task newTask = Deadline.outputAsDeadline(lineToRead);
                 list.add(newTask);
-            }else if((!lineToRead.equals("")) && (lineToRead.charAt(0)=='E')){
+            } else if ( (!lineToRead.equals("")) && (lineToRead.charAt(0) == 'E') ) {
                 Task newTask = Event.outputAsEvent(lineToRead);
                 list.add(newTask);
-            }else{}
+            } else {}
         }
         return list;
 

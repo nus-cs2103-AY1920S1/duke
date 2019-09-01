@@ -25,7 +25,7 @@ public class TaskList {
      * prints the tasks on the list in the format of list required
      */
     public void printForList(){
-        for(int i=1; i<=list.size(); i++){
+        for (int i=1; i<=list.size(); i++) {
             System.out.println(i + ". " + list.get(i-1).printer());
         }
     }
@@ -36,9 +36,11 @@ public class TaskList {
      */
     public String printForOutput(){
         StringBuilder result= new StringBuilder();
-        for(int i=1; i<=list.size(); i++){
+
+        for (int i = 1; i <= list.size(); i++) {
             result.append(list.get(i - 1).printToOutput()).append("\n");
         }
+
         return result.toString();
     }
 
@@ -64,7 +66,7 @@ public class TaskList {
      * @return task details in string format
      */
     public String printLatest(){
-        return list.get(list.size()-1).printer();
+        return list.get(list.size() - 1).printer();
     }
 
     /**

@@ -27,10 +27,10 @@ public class ToDo extends Task {
      * @return string in the format required
      */
     public String printToOutput(){
-        if(done){
+        if (done) {
             String result = "T | 1 | " + command;
             return result;
-        }else{
+        } else {
             String result = "T | 0 | " + command;
             return result;
         }
@@ -38,16 +38,17 @@ public class ToDo extends Task {
 
     /**
      * read user input as convert it into a Task
-     * @param s is the user input string
+     * @param command is the user input string
      * @return a Task (ToDo) object
      */
-    public static Task outputAsToDo(String s){
-        String[]segments = s.split("\\|");
+    public static Task outputAsToDo(String command){
+        String[]segments = command.split("\\|");
         ToDo newTask = new ToDo(segments[2]);
-        //System.out.println(segments[0] + "," + segments[1] + "," + segments[2]);
+
         if (segments[1].equals(" 1 ")) {
             newTask.taskDone();
-        }else{}
+        } else {}
+
         return newTask;
     }
 

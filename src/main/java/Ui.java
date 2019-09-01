@@ -10,23 +10,23 @@ public class Ui {
      * @throws FileNotFoundException
      */
     public void run(TaskList tasks, Storage storage) throws FileNotFoundException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        final String DUKE_LOGO = " ____        _        \n"
+                               + "|  _ \\ _   _| | _____ \n"
+                               + "| | | | | | | |/ / _ \\\n"
+                               + "| |_| | |_| |   <  __/\n"
+                               + "|____/ \\__,_|_|\\_\\___|\n";
         final String LINE_BORDER = "____________________________________________________________";
-        System.out.println(LINE_BORDER + "\n" + "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n" + LINE_BORDER);
 
+        System.out.println("Hello from\n" + DUKE_LOGO);
+        System.out.println(LINE_BORDER + "\n" + "Hello! I'm Duke" + "\n" +
+                            "What can I do for you?" + "\n" + LINE_BORDER);
 
         Parser parser = new Parser(storage, tasks);
-                Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-        while(true){
+        while (true) {
             String command = sc.nextLine();
             String[]words = command.split(" ");
-
             System.out.println(LINE_BORDER);
 
             if (command.equals("bye")) {                                                                                //IF BYE
@@ -42,25 +42,26 @@ public class Ui {
                 tasks.printForList();
             } else {
                 try {
-                    String[]splitwords = command.trim().split("\\s",2);
+                    String[]splitWords = command.trim().split("\\s",2);
 
-                    if (splitwords[0].equals("todo")) {                                                                 //IF TODO
-                        parser.todo(command);
-                    } else if (splitwords[0].equals("deadline")) {                                                      //IF DEADLINE
-                        parser.deadline(command);
-                    } else if (splitwords[0].equals("event")) {                                                         //IF EVENT
-                        parser.event(command);
+                    if (splitWords[0].equals("todo")) {                                                                 //IF TODO
+                        parser.createTodo(command);
+                    } else if (splitWords[0].equals("deadline")) {                                                      //IF DEADLINE
+                        parser.createDeadline(command);
+                    } else if (splitWords[0].equals("event")) {                                                         //IF EVENT
+                        parser.createEvent(command);
                     } else {
                         throw new IllegalArgumentException();
                     }
 
                     System.out.println("Got it. I've added this task:" + "\n" + tasks.printLatest()
                             + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
-                }catch(IllegalArgumentException e){
+
+                } catch (IllegalArgumentException e){
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
-                }catch(DukeException e){
+                } catch (DukeException e){
                     System.out.println("☹ OOPS!!! The date format is wrong.");
-                }catch(Exception e){
+                } catch (Exception e){
                     System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
                 }
             }
@@ -84,7 +85,7 @@ public class Ui {
         try {
             Integer.parseInt(str);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }

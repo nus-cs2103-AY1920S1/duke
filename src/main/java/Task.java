@@ -4,7 +4,8 @@ public class Task {
     /**
      * attributes for the user input string and to flag whether task is done
      */
-    protected String command; protected Boolean done;
+    protected String command;
+    protected Boolean done;
 
     /**
      * constructor
@@ -20,10 +21,10 @@ public class Task {
      * @return the string to print
      */
     public String printer(){
-        if(done){
+        if (done) {
             String result = "[✓] " + command;
             return result;
-        }else{
+        } else {
             String result = "[✗]" + command;
             return result;
         }
@@ -33,7 +34,7 @@ public class Task {
      * dummy method to be overriden by child class
      * @return dummy String
      */
-    public String printToOutput(){
+    public String printToOutput() {
         return "";
     }
 

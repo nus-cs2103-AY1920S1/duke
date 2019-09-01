@@ -5,10 +5,11 @@ import java.util.Date;
 public class Deadline extends Task {
 
     /**
-     * midcommand is attribute for the string command after "deadline"
+     * midCommand is attribute for the string command after "deadline"
      * formattedDate is attribute for the date
      */
-    private String midcommand; private String formattedDate;
+    private String midCommand;
+    private String formattedDate;
 
     /**
      * constructor for child class
@@ -19,20 +20,20 @@ public class Deadline extends Task {
     public Deadline(String command) throws DukeException {
         super(command);
         this.done = false;
-        String[]splitteddate = command.split("/",2);
+        String[]splitUpDate = command.split("/",2);
 
         try {
             SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            Date formalDate = ft.parse(splitteddate[1].substring(3));
+            Date formalDate = ft.parse(splitUpDate[1].substring(3));
 
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             formattedDate = dateFormat.format(formalDate);
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException("");
         }
 
-        midcommand = splitteddate[0];
+        midCommand = splitUpDate[0];
     }
 
     /**
@@ -40,11 +41,11 @@ public class Deadline extends Task {
      * @return string in the format required
      */
     public String printer(){
-            if(done){
-                String result = "[D][✓] " + midcommand + "(by: " + formattedDate + ")";
+            if (done) {
+                String result = "[D][✓] " + midCommand + "(by: " + formattedDate + ")";
                 return result;
-            }else{
-                String result = "[D][✗] " + midcommand + "(by: " + formattedDate + ")";
+            } else {
+                String result = "[D][✗] " + midCommand + "(by: " + formattedDate + ")";
                 return result;
             }
     }
@@ -54,11 +55,11 @@ public class Deadline extends Task {
      * @return string in the format required
      */
     public String printToOutput(){
-            if(done){
-                String result = "D | 1 | " + midcommand + " | " + formattedDate;
+            if (done) {
+                String result = "D | 1 | " + midCommand + " | " + formattedDate;
                 return result;
-            }else{
-                String result = "D | 0 | " + midcommand + " | " + formattedDate;
+            } else {
+                String result = "D | 0 | " + midCommand + " | " + formattedDate;
                 return result;
             }
     }
@@ -73,9 +74,11 @@ public class Deadline extends Task {
         String[]segments = s.split("\\|");
         String taskCommand = segments[2] + "/by: " + segments[3];
         Deadline newTask = new Deadline(taskCommand);
+
         if (segments[1].equals(" 1 ")) {
             newTask.taskDone();
-        }else{}
+        } else {}
+
         return newTask;
     }
 

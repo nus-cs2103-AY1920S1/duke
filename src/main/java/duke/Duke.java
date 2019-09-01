@@ -41,8 +41,18 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Constructs a Duke object with default location for save file.
+     */
     public Duke() {
-
+        this.storage = new Storage();
+        try {
+            tasks = new TaskList(storage.loadFromSaveFile());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -76,7 +86,7 @@ public class Duke extends Application {
      * Gets tasks of type ToDo.
      * @return a list of ToDo objects
      */
-    List<ToDo> getTodos() {
+    public List<ToDo> getTodos() {
         List<ToDo> todos = new ArrayList<>();
         for (Task t : tasks.getList()) {
             if (t instanceof ToDo) {
@@ -90,7 +100,7 @@ public class Duke extends Application {
      * Gets tasks of type Deadline.
      * @return a list of Deadline objects
      */
-    List<Deadline> getDeadlines() {
+    public List<Deadline> getDeadlines() {
         List<Deadline> deadlines = new ArrayList<>();
         for (Task t : tasks.getList()) {
             if (t instanceof Deadline) {
@@ -104,7 +114,7 @@ public class Duke extends Application {
      * Gets tasks of type Event.
      * @return a list of Event objects
      */
-    List<Event> getEvent() {
+    public List<Event> getEvent() {
         List<Event> events = new ArrayList<>();
         for (Task t : tasks.getList()) {
             if (t instanceof Event) {
@@ -118,7 +128,7 @@ public class Duke extends Application {
      * Gets all tasks in storage.
      * @return a list of Task
      */
-    List<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks.getList();
     }
 

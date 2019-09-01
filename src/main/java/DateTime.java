@@ -16,7 +16,7 @@ public class DateTime {
         this._date = _formatGiven.parse(dt);
     }
 
-    public String getDateTime() {
+    public String getDateTimeString() {
         String[] splitDate = this._dateTime.split("/");
         String suffix = getSuffix(Integer.parseInt(splitDate[0]));
         String dateTime = suffix + _formatter.format(this._date);

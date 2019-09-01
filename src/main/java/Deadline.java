@@ -4,7 +4,6 @@ public class Deadline extends Task {
     private String _date;
     private DateTime _dateTime;
 
-
     /**
      * Creates a Deadline object, which is also a Task.
      * @param desc a description of the Deadline Task.
@@ -14,7 +13,7 @@ public class Deadline extends Task {
         super(desc);
         try {
             this._dateTime = new DateTime(date);
-            this._date = this._dateTime.getDateTime();
+            this._date = this._dateTime.getDateTimeString();
         } catch (ParseException e) {
             System.err.println("Cant parse Date: " + date);
         }
@@ -39,5 +38,9 @@ public class Deadline extends Task {
         String t = String.format("E | %s | %s | %s",
                 this.getStatusIcon(), this._description, this._date);
         return t;
+    }
+
+    public String getDeadline() {
+        return this._date;
     }
 }

@@ -13,7 +13,7 @@ public class Event extends Task {
         super(desc);
         try {
             this._dateTime = new DateTime(date);
-            this._date = this._dateTime.getDateTime();
+            this._date = this._dateTime.getDateTimeString();
         } catch (ParseException e) {
             System.err.println("Cant parse Date: " + date);
         }

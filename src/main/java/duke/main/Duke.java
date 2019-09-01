@@ -8,15 +8,28 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import java.io.FileNotFoundException;
 
+/**
+ * The duke robot's main class.
+ */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private Storage storage; //The place of storage.
+    private TaskList tasks; //The list of tasks.
+    private Ui ui; //The user interaction.
 
+    /**
+     * The main function of the class.
+     *
+     * @param args Input arguments.
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
 
+    /**
+     * Initiates the object.
+     *
+     * @param filePath The path root of the file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +41,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Operates the object.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

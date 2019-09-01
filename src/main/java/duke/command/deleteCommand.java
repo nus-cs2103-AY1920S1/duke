@@ -8,17 +8,39 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class deleteCommand implements Command{
-    private int deleteIndex;
+/**
+ * Represents a delete command that Duke will operate.
+ */
+public class deleteCommand implements Command {
+    private int deleteIndex; //The index in tasklist that should delete.
+
+    /**
+     * Initiates object.
+     *
+     * @param deleteIndex The index should delete.
+     */
     public deleteCommand(int deleteIndex) {
         this.deleteIndex = deleteIndex;
     }
 
+    /**
+     * Returns should the command exit.
+     *
+     * @return whether should exit.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks  Tasks store in tasklist.
+     * @param ui User interaction.
+     * @param storage The storage area.
+     * @throws DukeException  If there is mistake in operation.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task removedTask = tasks.deleteTask(deleteIndex);

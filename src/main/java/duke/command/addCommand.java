@@ -8,18 +8,39 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class addCommand implements Command{
-    Task task;
-    boolean isExit = false;
+/**
+ * Represents an add command that Duke will operate.
+ */
+public class addCommand implements Command {
+    Task task; //The task should add.
+
+    /**
+     * The initiate constructor.
+     *
+     * @param task Task should add.
+     */
     public addCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Returns should the command exit.
+     *
+     * @return whether should exit.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks  Tasks store in tasklist.
+     * @param ui User interaction.
+     * @param storage The storage area.
+     * @throws DukeException  If there is mistake in operation.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);

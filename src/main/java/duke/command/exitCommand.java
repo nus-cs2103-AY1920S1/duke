@@ -8,14 +8,29 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class exitCommand implements Command{
-    boolean isExist = true;
+/**
+ * Represents an exit command that Duke will operate.
+ */
+public class exitCommand implements Command {
 
+    /**
+     * Returns should the command exit.
+     *
+     * @return whether should exit.
+     */
     @Override
     public boolean isExit() {
         return true;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks  Tasks store in tasklist.
+     * @param ui User interaction.
+     * @param storage The storage area.
+     * @throws DukeException  If there is mistake in operation.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> list = tasks.getList();

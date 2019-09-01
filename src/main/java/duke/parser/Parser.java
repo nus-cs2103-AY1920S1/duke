@@ -7,7 +7,18 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * The parser of the user command.
+ */
 public class Parser {
+
+    /**
+     * Parses the input command.
+     *
+     * @param fullCommand The full string of user's command.
+     * @return The Command object to react.
+     * @throws DukeException When input is in wrong format.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             return new exitCommand();

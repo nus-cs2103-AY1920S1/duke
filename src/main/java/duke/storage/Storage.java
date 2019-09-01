@@ -13,13 +13,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The object to read and store the file.
+ */
 public class Storage {
-    private String filePath;
+    private String filePath; // The file's path.
 
+    /**
+     * Initiates the object.
+     *
+     * @param filePath The file's path.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the file.
+     *
+     * @return Tasks loaded from the file.
+     * @throws DukeException When cannot found file or format incorrect.
+     * @throws FileNotFoundException Would not happen.
+     */
     public ArrayList<Task> load() throws DukeException, FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -62,6 +77,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks to file.
+     *
+     * @param tasks The tasks to save.
+     * @throws DukeException When file does not exist.
+     */
     public void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

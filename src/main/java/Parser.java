@@ -24,6 +24,24 @@ public class Parser {
 		if (input.equals("bye")) {
 			System.out.println(ui.OUTRO);
 			isEndLoop = true;
+		} else if (input.startsWith("find")) {
+			try {
+				if (input.length() < 5) {
+					throw new DukeException(ui.EMPTYINPUT);
+				}
+				String findTask = input.substring(5);
+				System.out.println(ui.BORDER + "\nHere are the matching tasks in your list:");
+				int taskNumber = 1;
+				for(int i = 0; i < tasks.getTaskList().size(); i ++) {
+					if (tasks.getTask(i).toString().contains(findTask)) {
+						System.out.println(taskNumber + "." + tasks.getTask(i).toString());
+						taskNumber++;
+					}
+				}
+				System.out.println(ui.BORDER);
+			} catch (DukeException e) {
+				System.out.println(e);
+			}
 		} else if (input.equals("list")) {
 			int itemNumber = 1;
 			counter = tasks.getCounter();

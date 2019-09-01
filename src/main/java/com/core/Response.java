@@ -1,5 +1,7 @@
 package com.core;
 
+import com.util.json.JsonArray;
+import com.util.json.SaveData;
 import java.util.stream.IntStream;
 
 import com.util.Printer;
@@ -29,6 +31,7 @@ public enum Response {
             s.list.get(index).markAsDone();
             Printer.printString("Nice! I've marked this task as done:\n  "
                     + s.list.get(index).toString());
+            save(s);
             return true;
         }
         return false;
@@ -42,6 +45,7 @@ public enum Response {
                     + (s.list.size() - 1)
                     + " tasks in the list.");
             s.list.remove(index);
+            save(s);
             return true;
         }
         return false;
@@ -160,5 +164,14 @@ public enum Response {
                 + t.toString()
                 + "\nNow you have " + s.list.size()
                 + " tasks in the list.");
+        save(s);
+    }
+
+    private static void save(State s) {
+        JsonArray arr = new JsonArray();
+        for (DoableTask t : s.list) {
+            arr.put(t.toJson());
+        }
+        SaveData.write(arr.toString());
     }
 }

@@ -1,4 +1,2 @@
 T | 0 | SEP application
-T | 1 | fix bugs
 E | 1 | 2103 meeting | 3rd of September 2019, 4pm-6pm
-T | 0 | check normal run 

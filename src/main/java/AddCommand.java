@@ -3,8 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the Command for adding Tasks and its subclasses
- * A subclass of Command
+ * Represents the Command for adding Tasks and its subclasses.
+ * A subclass of Command.
  */
 public class AddCommand extends Command {
 
@@ -13,7 +13,7 @@ public class AddCommand extends Command {
     DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(timePattern);
 
     /**
-     * Constructor for AddCommand to set the Task command
+     * Constructor for AddCommand to set the Task command.
      * @param taskCmd User input of what Task is being generated
      */
     public AddCommand(String taskCmd) {
@@ -29,8 +29,7 @@ public class AddCommand extends Command {
      * @param storage Storage object for saving purposes
      * @param tasks Contains the list of tasks
      * @param ui Holds Ui printing methods and user input field
-     * @throws DukeException If taskCmd and taskName is invalid and format of subsequent fields,
-     * such as /by, /at and dateTime, is wrong
+     * @throws DukeException If taskCmd and taskName is invalid and format of subsequent fields is wrong
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {

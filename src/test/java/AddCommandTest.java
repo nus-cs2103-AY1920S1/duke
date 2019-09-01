@@ -21,15 +21,15 @@ public class AddCommandTest {
 
     @ParameterizedTest
     @CsvSource({"todo, dance", "deadline, homework /by 01/09/2019 2359", "event, party /at NUS"})
-    public void testExecute(String cmd, String task) {
+    void testExecute(String cmd, String task) {
         String input = task;
         InputStream in = new ByteArrayInputStream((input.getBytes()));
         System.setIn(in);
         ui = new Ui();
-        try{
+        try {
             AddCommand ac = new AddCommand(cmd);
             ac.execute(storage, taskList, ui);
-        }catch(DukeException e){
+        } catch (DukeException e) {
             fail("failed to add item into list");
         }
     }

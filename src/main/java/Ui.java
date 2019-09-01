@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Represents the User Interface of Duke, including the user input fields
+ * Represents the User Interface of Duke, including the user input fields.
  */
 public class Ui {
 
@@ -9,14 +9,14 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Default Constructor to initialise Scanner object for user input
+     * Default Constructor to initialise Scanner object for user input.
      */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
     /**
-     * Prints out Welcome Message for the launch of Duke Chatbot
+     * Prints out Welcome Message for the launch of Duke Chatbot.
      */
     public void showWelcome() {
         final String logo = " ____        _        \n"
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * Prints Goodbye Message when user closes the Duke Chatbot
+     * Prints Goodbye Message when user closes the Duke Chatbot.
      */
     public void showGoodbye() {
         String endMessage = "Bye. Hope to see you again!";
@@ -37,14 +37,14 @@ public class Ui {
     }
 
     /**
-     * Prints a straight line for clarity purposes
+     * Prints a straight line for clarity purposes.
      */
     public void showLine() {
         System.out.print(lineSpace);
     }
 
     /**
-     * Prints a specified error message
+     * Prints a specified error message.
      * @param error Message of error
      */
     public void showError(String error) {
@@ -52,7 +52,7 @@ public class Ui {
     }
 
     /**
-     * Reads the user input and returns a String
+     * Reads the user input and returns a String.
      * @return User input
      */
     public String readCommand() {
@@ -61,8 +61,8 @@ public class Ui {
     }
 
     /**
-     * Returns the description of Task specified in the user input
-     * Use only after reading the initial command input of the user
+     * Returns the description of Task specified in the user input.
+     * Use only after reading the initial command input of the user.
      */
     public String readDesc() {
         String desc = sc.nextLine();
@@ -70,8 +70,8 @@ public class Ui {
     }
 
     /**
-     * Returns the index of the Task specified in the user input
-     * Use only after reading the initial command input of the user
+     * Returns the index of the Task specified in the user input.
+     * Use only after reading the initial command input of the user.
      */
     public int readIndex() {
         int index = sc.nextInt();

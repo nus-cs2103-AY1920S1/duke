@@ -1,5 +1,6 @@
-package Task;
+package DukeTest;
 
+import Task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;

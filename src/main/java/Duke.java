@@ -31,7 +31,7 @@ public class Duke {
                 System.out.println("Something went wrong :( Please try again");
             }
         }
-        String filePath = "C:\\Users\\johnn\\CS2103\\Week2\\tasks.txt";
+        String filePath = "C:\\Users\\johnn\\CS2103\\duke\\tasks.txt";
         try {
             storage.updateTasks(filePath, tasks.getList());
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class Duke {
     }
 
     public static void main(String[] args)  {
-        String filePath = "C:\\Users\\johnn\\CS2103\\Week2\\tasks.txt";
+        String filePath = "C:\\Users\\johnn\\CS2103\\duke\\tasks.txt";
         new Duke(filePath).run();
     }
 

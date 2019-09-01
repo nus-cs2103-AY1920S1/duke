@@ -20,6 +20,10 @@ public class Task {
         return reply;
     }
 
+    public String getDescription(){
+        return this.description;
+    }
+
     public String toFile(){
         return "";
     }

@@ -8,14 +8,6 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command {
     /**
-     * Creates a new ExitCommand. In particular, sets the exit variable of its superclass
-     * to true so the application can exit.
-     */
-    public ExitCommand() {
-        exit = true;
-    }
-
-    /**
      * Executes this command on the given task list.
      *
      * @param tl The task list.

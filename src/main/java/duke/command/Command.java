@@ -10,18 +10,6 @@ import duke.task.Todo;
  * Abstract class representing individual commands.
  */
 public abstract class Command {
-    boolean exit = false;
-
-    /**
-     * Determines whether this command is exiting, i.e. whether the program should exit
-     * after executing this command.
-     *
-     * @return Whether this command is exiting.
-     */
-    public boolean isExit() {
-        return exit;
-    }
-    
     /**
      * Executes this command on the given task list and user interface.
      * Returns the response to this input, which is seen by the user.

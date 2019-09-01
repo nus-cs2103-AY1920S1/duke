@@ -31,6 +31,7 @@ public class Deadline extends DoableTask {
 
     @Override
     public JsonObject toJson() {
-        return new JsonObject().put("deadline", super.toJson().put("due", deadline));
+        return new JsonObject().put("deadline", super.toJson()
+                .put("due", deadline.replaceAll("\"", "\\\\\"")));
     }
 }

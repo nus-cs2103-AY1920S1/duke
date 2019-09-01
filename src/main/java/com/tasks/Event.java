@@ -31,6 +31,7 @@ public class Event extends DoableTask {
 
     @Override
     public JsonObject toJson() {
-        return new JsonObject().put("event", super.toJson().put("start", dateRange).put("end", ""));
+        return new JsonObject().put("event", super.toJson()
+                .put("start", dateRange.replaceAll("\"", "\\\\\"")).put("end", ""));
     }
 }

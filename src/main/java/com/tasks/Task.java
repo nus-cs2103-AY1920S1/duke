@@ -33,7 +33,7 @@ public class Task {
 
     public JsonObject toJson() {
         JsonObject obj = new JsonObject();
-        obj.put("name", name);
+        obj.put("name", name.replaceAll("\"", "\\\\\""));
         return obj;
     }
 }

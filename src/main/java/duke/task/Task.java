@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -21,6 +25,10 @@ public abstract class Task {
 
     public int getStatusCode() {
         return isDone ? 1 : 0;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public void markAsDone() {

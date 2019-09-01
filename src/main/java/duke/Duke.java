@@ -1,4 +1,8 @@
-import java.util.Scanner;
+package duke;
+
+import duke.exception.DukeException;
+import duke.command.Command;
+import duke.parser.Parser;
 
 /**
  * Represents a duke object.
@@ -30,15 +34,20 @@ public class Duke {
      * Runs the program.
      */
     public void run() {
-        try {
-            Scanner sc = new Scanner(System.in);
-            ui.showWelcome();
-            Parser.readList(sc, tasks);
-            storage.save(tasks);
-        } catch (DukeException ex) {
-            System.out.println(ex);
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
         }
+
     }
-
-
 }

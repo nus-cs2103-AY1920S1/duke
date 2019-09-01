@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.*;
+import duke.exception.DukeException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -20,8 +25,6 @@ public class Storage {
 
         try {
             File file = new File(filepath);
-            //testing
-            System.out.println(filepath);
             Scanner sc = new Scanner(file);
 
             while (sc.hasNextLine()) {
@@ -48,8 +51,6 @@ public class Storage {
                 }
 
                 tasks.add(task);
-                //testing
-                System.out.println(task);
             }
 
             return tasks;
@@ -66,9 +67,6 @@ public class Storage {
 
             for (Task task : tasklist.list) {
                 filewriter.write(task.textFormat());
-                //testing
-                System.out.println(task.textFormat());
-
                 filewriter.write(System.lineSeparator());
             }
 

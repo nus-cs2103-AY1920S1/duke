@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulates a todo task object.
  */

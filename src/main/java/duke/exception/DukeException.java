@@ -1,3 +1,4 @@
+package duke.exception;
 /**
  * Encapsulates duke exception.
  */

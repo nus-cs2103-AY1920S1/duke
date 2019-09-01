@@ -1,10 +1,10 @@
-/*
+/**
  * Represents the Command for setting Tasks as completed
  * A sub-class of Command
  */
 public class DoneCommand extends Command {
 
-    /*
+    /**
      * Overridden execute method from Command to mark a Task object as completed.
      * The method will check the user input for a valid index and change the selected
      * Task object's isDone boolean variable to true.

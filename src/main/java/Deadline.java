@@ -1,4 +1,4 @@
-/*
+/**
  * Represents a different type of Task called Deadline that holds an additional
  * parameter for date and time
  * A sub-class of Task
@@ -6,7 +6,7 @@
 public class Deadline extends Task {
     protected String by;
 
-    /*
+    /**
      * Constructor to set the description of deadline and due date and time
      * @param desc The description of the Deadline
      * @param by The due date and time of the Deadline
@@ -16,7 +16,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /*
+    /**
      * Constructor with additional parameter to set its completion status
      * @param desc The description of the Deadline
      * @param by The due date and time of the Deadline
@@ -27,7 +27,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /*
+    /**
      * Overridden writeFormat method to specify that it is a Deadline
      * when saving the data
      * @return Format for saving data
@@ -37,7 +37,7 @@ public class Deadline extends Task {
         return "D " + isDone + " " + description + "/" + by;
     }
 
-    /*
+    /**
      * Overridden toString method to print out Deadline object
      * @return Printing format of Deadline
      */

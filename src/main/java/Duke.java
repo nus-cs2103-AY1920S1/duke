@@ -1,4 +1,4 @@
-/*
+/**
  * Main class responsible for running Duke Chatbot
  */
 public class Duke {
@@ -7,9 +7,9 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    /*
+    /**
      * Constructor of Duke class
-     * @param filepath The directory of the text file for populating task list
+     * @param filePath The directory of the text file for populating task list
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -22,7 +22,7 @@ public class Duke {
         }
     }
 
-    /*
+    /**
      * Method to start up Duke Chatbot
      */
     public void run() {

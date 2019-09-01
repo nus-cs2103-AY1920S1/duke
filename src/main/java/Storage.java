@@ -5,14 +5,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-/*
+/**
  * Represents the read and write of data into a text file
  */
 public class Storage {
 
     private String filePath;
 
-    /*
+    /**
      * Constructor to specify the file path of the text file used
      * for saving and loading of Tasks for the list
      * @param filePath directory of text file
@@ -21,7 +21,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /*
+    /**
      * Returns a ArrayList of Task type for Duke to use as an initial list.
      * Data is obtained from a text file with a specific format
      * @return List of Tasks to be used
@@ -64,7 +64,7 @@ public class Storage {
         }
     }
 
-    /*
+    /**
      * Saves all of the Tasks inside the list into a text file for future usage.
      * It will throw an exception if the file path was not specified in storage upon initialisation.
      * However, an IOException is thrown instead of DukeException to be able

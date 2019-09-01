@@ -1,9 +1,9 @@
-/*
+/**
  * Responsible for interpreting Commands
  */
 public class Parser {
 
-    /*
+    /**
      * Checks user input for a Command and returns the associated Command class
      * @param userCmd The command from user input
      * @return Command object

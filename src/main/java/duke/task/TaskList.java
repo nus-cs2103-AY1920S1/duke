@@ -4,8 +4,9 @@ import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private Storage storage;
     private Ui ui;
     private ArrayList<Task> taskList;
@@ -56,5 +57,18 @@ public class TaskList {
         for (Task task : this.taskList) {
             this.ui.print(counter++ + "." + task);
         }
+    }
+
+    public static void printExternalList(ArrayList<Task> taskList, Ui ui, String message) {
+        ui.print(message);
+        int counter = 1;
+        for (Task task : taskList) {
+            ui.print(counter++ + "." + task);
+        }
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return taskList.iterator();
     }
 }

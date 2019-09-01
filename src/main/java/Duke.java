@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -38,6 +39,9 @@ public class Duke {
                     storage.save(tasks.getTasklist());
                     ui.byemessage();
                     break;
+                } else if (command.contains("find")) {
+                    ArrayList<Task> foundTask = tasks.findTasks(command);
+                    ui.showFoundMessage(foundTask);
                 } else {
                     throw new IllegalCommandException("I'm sorry, but I don't know what that means :-(");
                 }

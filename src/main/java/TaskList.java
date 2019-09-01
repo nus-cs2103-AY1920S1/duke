@@ -51,6 +51,21 @@ public class TaskList {
         }
     }
 
+    protected ArrayList<Task> findTasks(String command) throws IllegalCommandException {
+        if (!command.contains(" ")) {
+            throw new IllegalCommandException("There must be an input to find.");
+        } else {
+            String[] splitString = command.split(" ",  2);
+            ArrayList<Task> foundTasks = new ArrayList<>();
+            for (Task task : this.tasklist) {
+                if (task.toString().contains(splitString[1])) {
+                    foundTasks.add(task);
+                }
+            }
+            return foundTasks;
+        }
+    }
+
     public ArrayList<Task> getTasklist() {
         return this.tasklist;
     }

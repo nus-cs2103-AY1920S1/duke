@@ -69,6 +69,14 @@ public class Ui {
                 + "____________________________________________________________");
     }
 
+    protected void showFoundMessage(ArrayList<Task> foundTasklist) {
+        System.out.println("____________________________________________________________");
+        for (int x = 0; x < foundTasklist.size(); x++) {
+            System.out.println(x + 1 + ". " + foundTasklist.get(x));
+        }
+        System.out.println("____________________________________________________________");
+    }
+
     public void illegalcommanderror(IllegalCommandException errormsg) {
         System.err.println(errormsg);
     }

@@ -73,7 +73,7 @@ public class Parser {
                 throw new DukeException("Please specify what you are searching for!");
             }
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I'm sorry, but I don't know what that means!");
         }
     }
 }

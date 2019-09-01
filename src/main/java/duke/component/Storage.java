@@ -5,10 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,15 +15,18 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+    private String directoryPath;
     private File inputFile;
+    private File directory;
 
     /**
      * Constructor for storage object.
-     *
-     * @param filePath path to the location of the file in hard disk.
+     * @param currentWorkingDirectoryPath path to the current working directory of the program
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String currentWorkingDirectoryPath) {
+        this.directoryPath = currentWorkingDirectoryPath + "\\data";
+        this.filePath = currentWorkingDirectoryPath + "\\data\\Duke.txt";
+        this.directory = new File(directoryPath);
         this.inputFile = new File(filePath);
     }
 
@@ -35,9 +35,18 @@ public class Storage {
      *
      * @return list of tasks loaded with task from hard disk.
      * @throws FileNotFoundException when input file cannot be found.
+     * @throws IOException when fails to create new file
      */
-    public List<Task> load() throws FileNotFoundException {
+    public List<Task> load() throws FileNotFoundException, IOException {
         List<Task> taskList = new ArrayList<>();
+
+        if(!this.directory.exists()) {
+            this.directory.mkdir();
+        }
+
+        if(!this.inputFile.exists()) {
+            this.inputFile.createNewFile();
+        }
         Scanner txtSC = new Scanner(inputFile);
 
         while (txtSC.hasNext()) {

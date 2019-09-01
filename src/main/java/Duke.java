@@ -6,6 +6,7 @@ import duke.component.TaskList;
 import duke.component.Ui;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,8 +18,9 @@ public class Duke {
      * Constructor for Duke Object.
      * @param filePath path to the text file located on the hard disk.
      * @throws FileNotFoundException while input text file cannot be found.
+     * @throws IOException while input text file cannot be created.
      */
-    public Duke(String filePath) throws FileNotFoundException {
+    public Duke(String filePath) throws FileNotFoundException, IOException {
 
         ui = new Ui();
         storage = new Storage(filePath);
@@ -55,7 +57,7 @@ public class Duke {
     public static void main(String[] args) {
 
         try {
-            new Duke(System.getProperty("user.dir") + "\\data\\Duke.txt").run();
+            new Duke(System.getProperty("user.dir")).run();
         } catch (Exception e) {
             Ui.printErrorMessage(e);
             return;

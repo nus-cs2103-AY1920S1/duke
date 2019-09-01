@@ -16,6 +16,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
+
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -28,16 +29,17 @@ public class Task {
     }
 
     public  String getTaskType() {
+
         return this.taskType;
     }
 
     public void setTaskType(String type) {
+
         this.taskType = type;
     }
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n" + "[" + this.getStatusIcon() + "]" + " " + this.description);
     }
 
     public void setTime(String time) {
@@ -91,4 +93,9 @@ public class Task {
     public String toString() {
         return this.taskType;
     }
+
+    public String toActionString() {
+        return null;
+    }
+
 }

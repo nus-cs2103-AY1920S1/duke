@@ -8,4 +8,9 @@ public class Deadlines extends Task {
     public String toString() {
         return "D | " + this.getStatusNumber() + " | " + this.description + " | " + this.time;
     }
+
+    @Override
+    public String toActionString() {
+        return "[" + this.taskType + "][" + this.getStatusIcon() + "] " + this.description + " (by: " + this.time + ")";
+    }
 }

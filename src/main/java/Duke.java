@@ -6,6 +6,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,6 +40,8 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    boolean isExit = false;
+
     public Duke() {
         ui = new Ui();
         tasks = new TaskList();
@@ -67,7 +70,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -81,10 +84,14 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    private String getResponse(String input) throws DukeException {
         String response;
         Command c = Parser.parse(input);
         response = c.execute(tasks, ui, storage);
+        isExit = c.isExit();
+        if (isExit) {
+            storage.save();
+        }
         return response;
     }
 
@@ -135,6 +142,9 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        dialogContainer.getChildren().add(getDialogLabel(ui.showWelcome()));
+        dialogContainer.getChildren().add(getDialogLabel(ui.list(tasks.getTasks())));
+
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -148,11 +158,19 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
 
         dialogContainer.setPadding(new Insets(10, 10, 10, 10));
@@ -160,6 +178,13 @@ public class Duke extends Application {
         dialogContainer.setStyle("-fx-background-color: #A6FFEA");
 
         userInput.setPadding(new Insets(10, 10, 10, 10));
+
+        if (isExit) {
+            stage.setOnCloseRequest(e -> {
+                Platform.exit();
+                System.exit(0);
+            });
+        }
     }
 
     /**
@@ -179,7 +204,6 @@ public class Duke extends Application {
     public void run() {
         ui.showWelcome();
         ui.list(tasks.getTasks());
-        boolean isExit = false;
         while(!isExit) {
             try {
                 String fullCommand = ui.readCommand();

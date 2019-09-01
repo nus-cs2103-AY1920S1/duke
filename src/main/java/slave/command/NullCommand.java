@@ -11,8 +11,8 @@ import slave.exception.InvalidCommandException;
  */
 public class NullCommand extends Command {
 
-
     private String command;
+
     /**
      * Constructor for null command.
      *

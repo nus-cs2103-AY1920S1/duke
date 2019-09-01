@@ -20,8 +20,8 @@ public class Ui {
      * Prints welcome Message on application start-up.
      */
     public void showWelcomeMessage() {
-        String message = "Hello! I'm Slave! Your very own productivity application.\n" +
-                "     What can I do for you? Type 'help' for commands!";
+        String message = "Hello! I'm Slave! Your very own productivity application.\n"
+                + "     What can I do for you? Type 'help' for commands!";
         System.out.println(Formatter.formatMessage(message));
     }
 
@@ -37,17 +37,17 @@ public class Ui {
      * Displays help message when prompted.
      */
     public void showHelpMessage() {
-        String message = "Commands:\n" +
-                "     todo <task description> : To add task to list\n" +
-                "     event <task description> /at <date> : To add event to list\n" +
-                "     deadline <task description> /by <date> : To add deadline to list\n" +
-                "     list : Retrieves all the tasks you have so far\n" +
-                "     done <task index> : Checks task as done\n" +
-                "     delete <task index> : Deletes task at a particular index\n" +
-                "     clear : clear all tasks in the list and wipe all data\n" +
-                "     bye : Exit program\n" +
-                "     Note: Currently, Slave can only read date in the form 'DD/MM/YYYY HHMM'\n" +
-                "     (E.g. 2/1/2020 1254 will be read as 2nd of January 2020 12.54pm)";
+        String message = "Commands:\n"
+                + "     todo <task description> : To add task to list\n"
+                + "     event <task description> /at <date> : To add event to list\n"
+                + "     deadline <task description> /by <date> : To add deadline to list\n"
+                + "     list : Retrieves all the tasks you have so far\n"
+                + "     done <task index> : Checks task as done\n"
+                + "     delete <task index> : Deletes task at a particular index\n"
+                + "     clear : clear all tasks in the list and wipe all data\n"
+                + "     bye : Exit program\n"
+                + "     Note: Currently, Slave can only read date in the form 'DD/MM/YYYY HHMM'\n"
+                + "     (E.g. 2/1/2020 1254 will be read as 2nd of January 2020 12.54pm)";
         System.out.println(Formatter.formatMessage(message));
     }
 
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Reads input from user
+     * Reads input from user.
      *
      * @return User input.
      */
@@ -127,7 +127,7 @@ public class Ui {
      * @param toRemove Task to be removed.
      * @param tasks Current task list.
      */
-    public void printDeleteCommand(Task toRemove, TaskList tasks){
+    public void printDeleteCommand(Task toRemove, TaskList tasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Noted. I've removed this task:"));
         System.out.println(Formatter.indentLine("  " + toRemove));
@@ -155,7 +155,7 @@ public class Ui {
     public void printListCommand(TaskList tasks) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Here are the tasks in your list:"));
-        for (Task task: tasks.getList()){
+        for (Task task: tasks.getList()) {
             System.out.println(Formatter.indentLine(task.getId() + "." + task.toString()));
         }
         Formatter.printLine();

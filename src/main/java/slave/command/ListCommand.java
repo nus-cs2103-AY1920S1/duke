@@ -4,12 +4,12 @@ import slave.elements.TaskList;
 import slave.elements.Ui;
 
 /**
- * Command which lists all the current tasks
+ * Command which lists all the current tasks.
  */
 public class ListCommand extends Command {
 
     /**
-     * Constructor for list command
+     * Constructor for list command.
      */
     public ListCommand() {
         this.commandType = CommandType.LIST;

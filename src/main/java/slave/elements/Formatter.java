@@ -5,19 +5,19 @@ package slave.elements;
  */
 class Formatter {
 
-    final private static String HORIZONTAL_LINE = "    ____________________________________________________________";
-    final private static String INDENTATION = "     ";
+    private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
+    private static final String INDENTATION = "     ";
 
     /**
-     * Formats input message
+     * Formats input message.
      *
      * @param text Message to be formatted.
      * @return Formatted message.
      */
     static String formatMessage(String text) {
-        return HORIZONTAL_LINE + "\n" +
-                INDENTATION + text + "\n" +
-                HORIZONTAL_LINE + "\n";
+        return HORIZONTAL_LINE + "\n"
+                + INDENTATION + text + "\n"
+                + HORIZONTAL_LINE + "\n";
     }
 
     /**

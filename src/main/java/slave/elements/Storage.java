@@ -6,7 +6,7 @@ import slave.task.Event;
 import slave.task.ToDo;
 
 import slave.exception.DukeException;
-import slave.exception.IOWentWrongException;
+import slave.exception.InOutWentWrongException;
 import slave.exception.NoStorageFileDetectedException;
 import slave.exception.UnableToReadFileException;
 
@@ -24,7 +24,7 @@ import java.nio.file.Files;
 /**
  * Storage class that writes and loads data from local .txt file.
  */
-public class Storage{
+public class Storage {
 
     private File file;
 
@@ -46,7 +46,7 @@ public class Storage{
         try {
             PrintWriter writer = new PrintWriter(this.file);
             writer.close();
-        } catch ( FileNotFoundException e ) {
+        } catch (FileNotFoundException e) {
             throw new NoStorageFileDetectedException();
         }
     }
@@ -67,9 +67,9 @@ public class Storage{
                 taskList.add(formatFileToTask(line, index));
                 index++;
             }
-        } catch ( IOException e ) {
-            throw new IOWentWrongException();
-            }
+        } catch (IOException e) {
+            throw new InOutWentWrongException();
+        }
         return taskList;
     }
 
@@ -86,7 +86,7 @@ public class Storage{
             for (Task task : taskList) {
                 addTask(task);
             }
-        } catch ( FileNotFoundException e ) {
+        } catch (FileNotFoundException e) {
             throw new NoStorageFileDetectedException();
         }
     }
@@ -103,33 +103,35 @@ public class Storage{
             FileWriter fw = new FileWriter(this.file, true);
             switch (task.getType()) {
             case TODO:
-                fw.write(task.getId() + " ~ " +
-                        "ToDo" + " ~ " +
-                        task.getStatusIcon() + " ~ " +
-                        task.getDescription() +
-                        System.lineSeparator());
+                fw.write(task.getId() + " ~ "
+                        + "ToDo" + " ~ "
+                        + task.getStatusIcon() + " ~ "
+                        + task.getDescription()
+                        + System.lineSeparator());
                 fw.close();
                 break;
             case DEADLINE:
-                fw.write(task.getId() + " ~ " +
-                        "Deadline" + " ~ " +
-                        task.getStatusIcon() + " ~ " +
-                        task.getDescription() + " ~ " +
-                        task.getDate() +
-                        System.lineSeparator());
+                fw.write(task.getId() + " ~ "
+                        + "Deadline" + " ~ "
+                        + task.getStatusIcon() + " ~ "
+                        + task.getDescription() + " ~ "
+                        + task.getDate()
+                        + System.lineSeparator());
                 fw.close();
                 break;
             case EVENT:
-                fw.write(task.getId() + " ~ " +
-                        "Event" + " ~ " +
-                        task.getStatusIcon() + " ~ " +
-                        task.getDescription() + " ~ " +
-                        task.getDate() +
-                        System.lineSeparator());
+                fw.write(task.getId() + " ~ "
+                        + "Event" + " ~ "
+                        + task.getStatusIcon() + " ~ "
+                        + task.getDescription() + " ~ "
+                        + task.getDate()
+                        + System.lineSeparator());
                 fw.close();
+                break;
+            default:
             }
-        } catch ( IOException error) {
-            throw new IOWentWrongException();
+        } catch (IOException error) {
+            throw new InOutWentWrongException();
         }
     }
 
@@ -145,7 +147,7 @@ public class Storage{
 
     private Task formatFileToTask(String line, int index) throws DukeException {
         String[] tokens = line.split(" ~ ");
-        switch(tokens[1]){
+        switch (tokens[1]) {
         case "ToDo":
             ToDo toDoTask = new ToDo(tokens[3], Integer.parseInt(tokens[0]));
             if (tokens[2].equals("Done")) {

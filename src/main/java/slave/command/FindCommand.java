@@ -38,12 +38,12 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         ArrayList<Task> findList = new ArrayList<>();
-        for (Task task: tasks.getList()){
-            if (task.getDescription().contains(this.term)){
+        for (Task task: tasks.getList()) {
+            if (task.getDescription().contains(this.term)) {
                 findList.add(task);
             }
         }
-        if ( findList.size() == 0 ) {
+        if (findList.size() == 0) {
             throw new CannotBeFoundException(this.term);
         }
         ui.printFindCommand(findList);

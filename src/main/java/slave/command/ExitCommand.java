@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
     /**
      * Executes by showing the goodbye message.
      *
-     * @param taskList List containing current tasks.
+     * @param tasks List containing current tasks.
      * @param ui User interface.
      */
     @Override

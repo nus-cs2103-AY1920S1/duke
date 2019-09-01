@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         try {
             tasks.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
-            throw new TaskNotFoundException("Task " + this.index );
+            throw new TaskNotFoundException("Task " + this.index);
         }
         Task toRemove = tasks.getTaskByIndex(this.index);
         tasks.removeFromList(this.index);

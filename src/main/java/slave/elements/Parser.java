@@ -1,6 +1,17 @@
 package slave.elements;
 
-import slave.command.*;
+import slave.command.AddToDoCommand;
+import slave.command.NullCommand;
+import slave.command.ListCommand;
+import slave.command.HelpCommand;
+import slave.command.ExitCommand;
+import slave.command.DoneCommand;
+import slave.command.DeleteCommand;
+import slave.command.ClearCommand;
+import slave.command.AddEventCommand;
+import slave.command.Command;
+import slave.command.AddDeadlineCommand;
+import slave.command.FindCommand;
 
 import slave.exception.DukeException;
 import slave.exception.MissingDateException;
@@ -8,7 +19,7 @@ import slave.exception.MissingDescriptionException;
 import slave.exception.MissingTaskException;
 
 /**
- * A parser to take in input by user and returns the appropriate command,
+ * A parser to take in input by user and returns the appropriate command.
  */
 public class Parser {
 
@@ -22,7 +33,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split(" ");
         String firstWord = tokens[0];
-        switch(firstWord){
+        switch (firstWord) {
         case "bye":
             return new ExitCommand();
         case "list":
@@ -81,8 +92,8 @@ public class Parser {
         if (dateSplit.length != 2) {
             return false;
         } else {
-            return dateSplit[0].contains("/") &&
-                    dateSplit[0].chars().filter(ch -> ch == '/').count() == 2;
+            return dateSplit[0].contains("/")
+                    && dateSplit[0].chars().filter(ch -> ch == '/').count() == 2;
         }
     }
 
@@ -96,7 +107,7 @@ public class Parser {
      * @throws DukeException Throws exception if date or description is missing.
      */
     private static void checkValidity(String check, String input, String[] tokens) throws DukeException {
-        switch(check) {
+        switch (check) {
         case "deadline":
             if (tokens.length <= 1) {
                 throw new MissingDescriptionException();

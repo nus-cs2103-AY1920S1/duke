@@ -16,7 +16,7 @@ public class AddToDoCommand extends Command {
     private String task;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param task To-do description.
      */

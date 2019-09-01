@@ -73,7 +73,7 @@ public class TaskList {
      */
     public void removeFromList(int index) throws DukeException {
         this.taskList.remove(index - 1);
-        if (this.getSize() == index - 1){
+        if (this.getSize() == index - 1) {
             this.storage.refreshStorage(taskList);
             return;
         }
@@ -97,7 +97,7 @@ public class TaskList {
      *
      * @return Number of tasks in current list.
      */
-    public int getSize(){
+    public int getSize() {
         return this.taskList.size();
     }
 
@@ -117,10 +117,10 @@ public class TaskList {
      * @param index Index to start reordering.
      */
     private void reorderIndex(int index) {
-        if (this.taskList.size() == 0){
+        if (this.taskList.size() == 0) {
             return;
         }
-        for (int i = index - 1; i < this.getSize(); i++){
+        for (int i = index - 1; i < this.getSize(); i++) {
             taskList.get(i).decrementId();
         }
     }

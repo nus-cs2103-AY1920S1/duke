@@ -10,7 +10,7 @@ public class TaskNotFoundException extends DukeException {
      *
      * @param task Description of task that cannot be found.
      */
-    public TaskNotFoundException(String task){
+    public TaskNotFoundException(String task) {
         super(String.format("%s cannot be found.", task));
     }
 }

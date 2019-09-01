@@ -1,7 +1,7 @@
 package slave.task;
 
 /**
- * Abstract class which represents a task
+ * Abstract class which represents a task.
  */
 public abstract class Task {
 
@@ -75,7 +75,7 @@ public abstract class Task {
      * Gets a boolean value on whether task is done.
      * @return Boolean value of whether a task is done.
      */
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return this.isDone;
     }
 

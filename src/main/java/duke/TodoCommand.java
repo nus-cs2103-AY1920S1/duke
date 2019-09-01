@@ -6,7 +6,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         String todoDescription;
         try {
             todoDescription = fullCommand.substring(5);
@@ -15,6 +15,9 @@ public class TodoCommand extends Command {
         }
         Todo todo = new Todo(todoDescription);
         tasks.addTask(todo);
-        ui.showAddTask(todo, tasks.numberOfTasks());
+        String output = "Got it. I've added this task: \n"
+                + todo.toString()
+                + String.format("\nNow you have %d tasks in the list.", tasks.getNumberOfTasks());
+        return output;
     }
 }

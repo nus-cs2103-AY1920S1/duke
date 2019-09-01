@@ -6,7 +6,8 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
-        ui.showGenericError();
+    public String execute(TaskList tasks) throws DukeException {
+        String output = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return output;
     }
 }

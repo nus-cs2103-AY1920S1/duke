@@ -3,29 +3,9 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 public class Duke {
     private static TaskList tasks = new TaskList();
     private Storage storage;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Entry class to program.
@@ -56,7 +36,7 @@ public class Duke {
         while (!(input = ui.readCommand()).equals("bye")) {
             try {
                 Command c = Parser.parse(input);
-                c.execute(tasks, ui);
+                c.execute(tasks);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -74,6 +54,20 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = "";
+        if (!input.equals("bye")) {
+            try {
+                Command c = Parser.parse(input);
+                output = c.execute(tasks);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+            try {
+                storage.save(tasks);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return output;
     }
 }

@@ -1,12 +1,14 @@
 package duke;
 
+import java.util.StringJoiner;
+
 public class FindCommand extends Command {
     FindCommand(String fullCommand) {
         super(fullCommand);
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         String searchString;
         try {
             searchString = fullCommand.substring(5);
@@ -14,6 +16,12 @@ public class FindCommand extends Command {
             throw new DukeException("Find command needs an argument");
         }
         TaskList filteredTasks = tasks.search(searchString);
-        ui.showFindResult(filteredTasks);
+
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add("Here are the matching tasks in your list:");
+        for (int i = 0; i < filteredTasks.getTasks().size(); i++) {
+            sj.add((i + 1) + ". " + filteredTasks.getTasks().get(i));
+        }
+        return sj.toString();
     }
 }

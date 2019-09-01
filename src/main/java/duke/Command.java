@@ -5,7 +5,7 @@ public abstract class Command {
     String[] splitInput;
 
     /**
-     * Contructor for general Duke.Duke.Command class.
+     * Constructor for general Command class.
      * @param fullCommand The line that the user types.
      */
     Command(String fullCommand) {
@@ -14,10 +14,10 @@ public abstract class Command {
     }
 
     /**
-     * Carries out implementation of Duke.Duke.Command.
-     * @param tasks Duke.Duke.TaskList of all added tasks.
-     * @param ui Duke.Duke.Ui to print output.
+     * Carries out implementation of Command.
+     * @param tasks TaskList of all added tasks.
+     * @return Duke output string.
      * @throws DukeException When command cannot execute due to wrong user input.
      */
-    public abstract void execute(TaskList tasks, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks) throws DukeException;
 }

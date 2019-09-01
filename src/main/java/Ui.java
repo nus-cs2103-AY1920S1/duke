@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner scanner;
+    private Scanner scanner;
 
-    public Ui() {
+    protected Ui() {
         scanner = new Scanner(System.in);
     }
 
-    public void showWelcome() {
+    protected void showWelcome() {
         String logo = "  ____        _        \n"
                 + " |  _ \\ _   _| | _____ \n"
                 + " | | | | | | | |/ / _ \\\n"
@@ -25,51 +25,51 @@ public class Ui {
         System.out.println(welcome);
     }
 
-    public String entercommand() {
+    protected String enterCommand() {
         return scanner.nextLine();
     }
 
-    public void showlist(ArrayList<Task> tasklist) {
+    protected void showList(ArrayList<Task> taskList) {
         System.out.println("____________________________________________________________");
-        for (int x = 0; x < tasklist.size(); x++) {
-            System.out.println(x + 1 + ". " + tasklist.get(x));
+        for (int x = 0; x < taskList.size(); x++) {
+            System.out.println(x + 1 + ". " + taskList.get(x));
         }
         System.out.println("____________________________________________________________");
     }
 
-    public void showloadingerror(DukeException e) {
-        System.out.println(e);
+    protected void showLoadingError(DukeException e) {
+        System.err.println(e);
     }
 
-    public void addedmessage(ArrayList<Task> tasklist) {
+    protected void getAddedMessage(ArrayList<Task> taskList) {
         System.out.println("____________________________________________________________\n"
-                + " Got it. I've added this task:\n" + "   " + tasklist.get(tasklist.size()-1)
-                + "\n Now you have " + tasklist.size() + " tasks in the list."
+                + " Got it. I've added this task:\n" + "   " + taskList.get(taskList.size()-1)
+                + "\n Now you have " + taskList.size() + " tasks in the list."
                 + "\n____________________________________________________________");
     }
 
-    public void deletedmessage(ArrayList<Task> tasklist, String deleted) {
+    protected void getDeletedMessage(ArrayList<Task> taskList, String deleted) {
         System.out.println("____________________________________________________________\n"
                 + "Noted. I've removed this task: \n"
-                + "  " + deleted + "Now you have " + tasklist.size()
+                + "  " + deleted + "Now you have " + taskList.size()
                 + " tasks in the list "
                 + "\n____________________________________________________________");
     }
 
-    public void donemessage (String taskdonestr) {
+    protected void getDoneMessage(String taskDoneStr) {
         System.out.println("____________________________________________________________\n"
                 + " Nice! I've marked this tasked as done:\n"
-                + taskdonestr
+                + taskDoneStr
                 + "\n____________________________________________________________");
     }
 
-    public void byemessage() {
+    protected void getByeMessage() {
         System.out.println("____________________________________________________________\n"
                 + " Bye. Hope to see you again soon!\n\n"
                 + "____________________________________________________________");
     }
 
-    public void illegalcommanderror(IllegalCommandException errormsg) {
-        System.err.println(errormsg);
+    protected void getIllegalCommandError(IllegalCommandException errorMsg) {
+        System.err.println(errorMsg);
     }
 }

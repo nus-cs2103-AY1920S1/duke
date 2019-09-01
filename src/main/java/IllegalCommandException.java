@@ -1,13 +1,13 @@
 public class IllegalCommandException extends Exception {
-    protected String errormessage;
+    private String errorMessage;
 
-    public IllegalCommandException (String errormessage) {
-        this.errormessage = errormessage;
+    protected IllegalCommandException (String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public String toString() {
         return "____________________________________________________________\n"
-                + " OOPS!!! " + this.errormessage
+                + " OOPS!!! " + this.errorMessage
                 + "\n____________________________________________________________";
     }
 }

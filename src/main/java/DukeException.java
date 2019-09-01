@@ -1,14 +1,14 @@
 public class DukeException extends Exception {
-    protected String errormessage;
+    private String errorMessage;
 
-    public DukeException(String errormessage) {
-        this.errormessage = errormessage;
+    protected DukeException(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     @Override
     public String toString() {
         return "____________________________________________________________\n"
-                + this.errormessage
+                + this.errorMessage
                 + "\n____________________________________________________________";
     }
 }

@@ -2,20 +2,20 @@ public abstract class Task {
     protected String description;
     protected Boolean isdone;
 
-    public Task (String description) {
+    protected Task (String description) {
         this.description = description;
         this.isdone = false;
     }
 
-    public String getDescription() {
+    protected String getDescription() {
         return this.description;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isdone ? "\u2713" : "\u2718");
     }
 
-    public String checkStatus() {
+    protected String checkStatus() {
         if (isdone == true) {
             return "1";
         } else {
@@ -23,7 +23,7 @@ public abstract class Task {
         }
     }
 
-    public void recoverStatus(String status) {
+    protected void recoverStatus(String status) {
         if (status.equals("1")) {
             isdone = true ;
         } else {
@@ -31,7 +31,7 @@ public abstract class Task {
         }
     }
 
-    public void markasdone() {
+    protected void markAsDone() {
         isdone = true;
     }
 

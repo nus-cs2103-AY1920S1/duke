@@ -16,10 +16,15 @@ public class Printer {
     private static final int HORIZONTAL_LINE_LENGTH = 64;
 
     /**
+     * Text to be inserted as indent (used by JSON printing)
+     */
+    private static final String INDENT = repeatChar(4, ' ');
+    /**
      * Text to be inserted before every line of text.
      */
     private static final String MARGIN_AND_PADDING = repeatChar(MARGIN_LENGTH + PADDING_LENGTH,
             ' ');
+
     /**
      * Text to be inserted before the start of the first line and after the last line.
      */
@@ -57,6 +62,20 @@ public class Printer {
         System.out.print(formatString(str));
     }
 
+    public static String indentString(String str) {
+        return indentString(str, INDENT);
+    }
+
+    public static String indentString(String str, String ind) {
+        StringBuilder formattedString = new StringBuilder();
+        for (String s: str.split("\n")) {
+            formattedString.append(ind);
+            formattedString.append(s);
+            formattedString.append("\n");
+        }
+        return formattedString.toString();
+    }
+
     /**
      * Builds a string with borders and margin and padding for each line.
      *
@@ -66,11 +85,7 @@ public class Printer {
     private static String formatString(String str) {
         StringBuilder formattedString = new StringBuilder();
         formattedString.append(HORIZONTAL_LINE);
-        for (String s : str.split("\n")) {
-            formattedString.append(MARGIN_AND_PADDING);
-            formattedString.append(s);
-            formattedString.append("\n");
-        }
+        formattedString.append(indentString(str, MARGIN_AND_PADDING));
         formattedString.append(HORIZONTAL_LINE);
         formattedString.append("\n");
         return formattedString.toString();

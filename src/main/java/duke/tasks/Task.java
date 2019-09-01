@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Represents a Task
+ * Represents a Task.
  */
 
 public class Task {
@@ -10,7 +10,7 @@ public class Task {
     boolean isDone;
 
     /**
-     * Creates a task object
+     * Creates a task object.
      * 
      * @param taskName name of the task
      * @param isDone   whether the deadline task has been completed
@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Sets isDone boolean
+     * Sets isDone boolean.
      * 
      * @param done boolean to set the isDone boolean to
      */
@@ -32,7 +32,7 @@ public class Task {
     }
 
     /**
-     * Returns a string to represent the task in the storage file
+     * Returns a string to represent the task in the storage file.
      * 
      * @return Task String in file form
      */
@@ -44,7 +44,7 @@ public class Task {
 
     /**
      * Checks if the Task contains a substring with the same sequence as the string
-     * toSearch
+     * toSearch.
      * 
      * @param toSearch string to be searched in taskname
      * @return true only if taskName String contains the toSearch subString
@@ -55,7 +55,7 @@ public class Task {
     }
 
     /**
-     * Returns Task in string form to be printed
+     * Returns Task in string form to be printed.
      * 
      * @return Task String in print form
      */

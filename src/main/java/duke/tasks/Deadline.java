@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Represents a Deadline Task
+ * Represents a Deadline Task.
  */
 
 public class Deadline extends Task {
@@ -9,7 +9,7 @@ public class Deadline extends Task {
     String deadline;
 
     /**
-     * Creates a deadline object
+     * Creates a deadline object.
      * @param taskName name of the deadline
      * @param isDone whether the deadline task has been completed
      * @param deadline due date of task
@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string to represent the deadline in the storage file
+     * Returns a string to represent the deadline in the storage file.
      * @return Deadline String in file form
      */
 
@@ -32,15 +32,15 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns deadline in string form to be printed
+     * Returns deadline in string form to be printed.
      * @return Deadline String in print form
      */
 
     @Override
     public String toString() {
         String mark = isDone ? "✓" : "✗";
-        return "[D][" + mark + "]" + taskName +
-                "(by:" + deadline + ")";
+        return "[D][" + mark + "]" + taskName
+                + "(by:" + deadline + ")";
     }
 
 }

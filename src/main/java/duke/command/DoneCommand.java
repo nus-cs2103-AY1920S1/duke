@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
 
     /**
      * Returns an AddDoneCommand object from the commandArray, an array of the
-     * command and an index which make up the initial user input
+     * command and an index which make up the initial user input.
      * 
      * @param commandArray Array of the command and an index that from initial user
      *                     input
@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks a task with specified index as completed
+     * Marks a task with specified index as completed.
      * 
      * @param tasks   List of Tasks
      * @param ui      User Interface displaying the tasks in the TaskList

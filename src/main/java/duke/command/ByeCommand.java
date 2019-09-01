@@ -14,7 +14,7 @@ import duke.tasks.TaskList;
 public class ByeCommand extends Command {
 
     /**
-     * Prints goodbye message
+     * Prints goodbye message.
      * @param tasks List of Tasks
      * @param ui User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
@@ -26,7 +26,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Returns the boolean true to signal termination of program
+     * Returns the boolean true to signal termination of program.
      * @return returns the boolean true to mark the end of the program
      */
     @Override

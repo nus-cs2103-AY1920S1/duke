@@ -17,14 +17,14 @@ import java.util.Scanner;
 
 /**
  * Represents the storage manager of Duke which maintains task data in a txt
- * file
+ * file.
  */
 public class Storage {
 
     private String filePath;
 
     /**
-     * Constructs a storage object
+     * Constructs a storage object.
      * 
      * @param filePath the path to the txt file to be maintained
      */
@@ -35,7 +35,7 @@ public class Storage {
 
     /**
      * Reads the information from the file specified by the filepath and turns it
-     * into an ArrayList of tasks
+     * into an ArrayList of tasks.
      * 
      * @return ArrayList of tasks
      * @throws FileNotFoundException if filepath does not direct to a file
@@ -72,7 +72,7 @@ public class Storage {
     }
 
     /**
-     * Adds a Task into the txt file specified by filepath
+     * Adds a Task into the txt file specified by filepath.
      * 
      * @param text String representing tasks in file form
      * @throws IOException if file cannot be found
@@ -90,7 +90,7 @@ public class Storage {
     }
 
     /**
-     * Adds a Task into the txt file specified by the pathName param
+     * Adds a Task into the txt file specified by the pathName param.
      * 
      * @param text     String representing tasks in file form
      * @param pathName txt file to write to
@@ -109,7 +109,7 @@ public class Storage {
     }
 
     /**
-     * Updates the txt file with the current TaskList
+     * Updates the txt file with the current TaskList.
      * 
      * @param tasks most recent TaskList
      * @throws IOException if file cannot be found

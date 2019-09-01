@@ -17,7 +17,7 @@ public class AddToDoCommand extends Command {
 
     /**
      * Returns an AddEventCommand object from the commandArray, an array of words
-     * which make up the initial user input
+     * which make up the initial user input.
      * 
      * @param commandArray Array of Strings that form the initial user input
      */
@@ -30,7 +30,7 @@ public class AddToDoCommand extends Command {
     }
 
     /**
-     * Adds a Task object into the TaskList as per the command inputted
+     * Adds a Task object into the TaskList as per the command inputted.
      * 
      * @param tasks   List of Tasks
      * @param ui      User Interface displaying the tasks in the TaskList
@@ -43,7 +43,7 @@ public class AddToDoCommand extends Command {
         try {
             storage.writeToFile(task.toFile());
         } catch (IOException e) {
-            ui.showIOException(e);
+            ui.showIoException(e);
         }
     }
 }

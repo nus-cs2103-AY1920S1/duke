@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Represents the User Interface object which handles user interactions
+ * Represents the User Interface object which handles user interactions.
  */
 public class Ui {
 
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Reads a line of user input
+     * Reads a line of user input.
      * 
      * @return a line of user input
      */
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     /**
-     * Prints out loading error
+     * Prints out loading error.
      */
 
     public void showLoadingError() {
@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message
+     * Prints welcome message.
      */
 
     public void showWelcomeMessage() {
@@ -43,7 +43,7 @@ public class Ui {
     }
 
     /**
-     * Prints the TaskList
+     * Prints the TaskList.
      * 
      * @param tasks TaskList to be printed
      */
@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Prints a line
+     * Prints a line.
      */
 
     public void showLine() {
@@ -62,7 +62,7 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye message
+     * Prints goodbye message.
      */
 
     public void showGoodbyeMessage() {
@@ -70,7 +70,7 @@ public class Ui {
     }
 
     /**
-     * Prints exception arising from running Duke
+     * Prints exception arising from running Duke.
      * 
      * @param ex Duke exception to be printed
      */
@@ -80,7 +80,7 @@ public class Ui {
     }
 
     /**
-     * Prints the completion of a Task
+     * Prints the completion of a Task.
      * 
      * @param doneTask Task that is completed
      */
@@ -91,7 +91,7 @@ public class Ui {
     }
 
     /**
-     * Prints that task has been successfully been added
+     * Prints that task has been successfully been added.
      * 
      * @param newTask      Task that has been added successfully
      * @param taskListSize Current number of tasks in TaskList
@@ -104,16 +104,16 @@ public class Ui {
     }
 
     /**
-     * Prints exceptions arisen from file management when running Duke
+     * Prints exceptions arisen from file management when running Duke.
      * 
      * @param e IO Exception to be printed
      */
-    public void showIOException(IOException e) {
+    public void showIoException(IOException e) {
         System.out.println("Something went wrong: " + e.getMessage());
     }
 
     /**
-     * Prints the successful deletion of task
+     * Prints the successful deletion of task.
      * 
      * @param toRemove     task to be deleted
      * @param taskListSize Current size of TaskList after deletion

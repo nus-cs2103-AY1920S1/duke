@@ -3,7 +3,7 @@ package duke.formats;
 import java.text.DateFormatSymbols;
 
 /**
- * Represents the Date and Time
+ * Represents the Date and Time.
  */
 
 public class DateTime {
@@ -15,7 +15,7 @@ public class DateTime {
     private String ampm;
 
     /**
-     * Constructs the DateTime object from a formatted String
+     * Constructs the DateTime object from a formatted String.
      * 
      * @param toDateTime formatted string representing date and time
      */
@@ -23,7 +23,6 @@ public class DateTime {
     public DateTime(String toDateTime) {
         String[] dateAndTime = toDateTime.split(" ");
         String date = dateAndTime[0];
-        String time = dateAndTime[1];
         String[] dayMonthYear = date.split("/");
         int dayInt = Integer.valueOf(dayMonthYear[0]);
         switch (dayInt) {
@@ -42,6 +41,7 @@ public class DateTime {
         int monthInt = Integer.valueOf(dayMonthYear[1]);
         this.month = new DateFormatSymbols().getMonths()[monthInt - 1];
         this.year = dayMonthYear[2];
+        String time = dateAndTime[1];
         int timeInt = Integer.valueOf(time);
         this.ampm = timeInt >= 1200 ? "pm" : "am";
         int minutes = timeInt % 100;
@@ -51,7 +51,7 @@ public class DateTime {
     }
 
     /**
-     * Returns a formatted String based on the required DateTime format
+     * Returns a formatted String based on the required DateTime format.
      * 
      * @return formatted String
      */

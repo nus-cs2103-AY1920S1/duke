@@ -7,7 +7,7 @@ import duke.tasks.TaskList;
 
 /**
  * Represents an abstract class Command which executes certain actions based on
- * command type
+ * command type.
  */
 
 public abstract class Command {

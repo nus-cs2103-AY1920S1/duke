@@ -22,7 +22,7 @@ public class Duke {
      * @param args arguments passed into main
      */
     public static void main(String[] args) {
-        new Duke("C:\\Users\\Botak\\Desktop\\Projects\\duke\\src\\main\\java\\data\\duke.txt").run();
+        new Duke("C:\\Users\\User\\Desktop\\Y2S1\\CS2103T\\IP\\duke\\src\\main\\java\\data\\duke.txt").run();
     }
 
     private void run() {

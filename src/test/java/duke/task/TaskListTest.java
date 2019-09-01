@@ -1,8 +1,9 @@
-package duke;
+package duke.task;
 
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskImplStub;
+import duke.task.TaskList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

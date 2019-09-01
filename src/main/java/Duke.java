@@ -29,7 +29,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException | ParseException e) {
-            ui.showLoadingError();
+            ui.showMessage(ui.showLoadingError());
             tasks = new TaskList();
         }
     }
@@ -53,7 +53,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
 
-        ui.showWelcomeMessage();
+        ui.showMessage(ui.getWelcomeMessage());
 
         while (!exit) {
             try {

@@ -13,7 +13,7 @@ public class FindCommand extends Command {
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
         String taskMessage = tasks.find(kw);
-        ui.showFoundMessage(taskMessage);
+        ui.showMessage(ui.showFoundMessage(taskMessage));
     }
 
     public boolean isExit() {

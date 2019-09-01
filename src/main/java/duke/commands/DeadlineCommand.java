@@ -32,7 +32,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.addDeadline(dl);
-            ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+            ui.showMessage(ui.showAddedMessage(taskMessage, tasks.getTasksSize()));
             storage.save(tasks.getTasks());
         } catch (IOException e) {
             ui.showMessage(e.getMessage());

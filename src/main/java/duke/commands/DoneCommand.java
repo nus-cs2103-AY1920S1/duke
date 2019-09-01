@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.done(index);
-            ui.showDoneMessage(taskMessage);
+            ui.showMessage(ui.showDoneMessage(taskMessage));
             storage.save(tasks.getTasks());
         } catch (IOException e) {
             ui.showMessage(e.getMessage());

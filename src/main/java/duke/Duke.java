@@ -3,7 +3,6 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
-
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.IncorrectNumberOfArgumentsException;
@@ -12,15 +11,23 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.command.Command;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents a Duke - interactive bot.
  * Contains functions to operate the bot.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    public Duke(){
+
+    }
 
     /**
      * Constructor for class Duke.
@@ -83,6 +90,14 @@ public class Duke {
         new Duke("C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt").run();
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 }
 
 

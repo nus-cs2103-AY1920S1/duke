@@ -12,7 +12,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialises a new Duke object including objects such as storage, ui and task list.
+     * Initialises a new Duke object including new objects such as storage, ui and task list.
      * @param filePath a String containing the file path of the input file where data is stored and loaded from
      */
     public Duke(String filePath) {

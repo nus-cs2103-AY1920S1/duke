@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DukeTest {
-    DateTime dT = new DateTime();
+    DateTime dt = new DateTime();
 
     /* this is the naming convention for the features
     @Test
@@ -25,7 +25,7 @@ public class DukeTest {
 
     @Test
     public void dateTimeFormatting_dateGiven_dateFormatReturned() throws DateException {
-        assertEquals("12th of December 2019, ", dT.getDate("12/12/2019"));
+        assertEquals("12th of December 2019, ", dt.getDate("12/12/2019"));
     }
 
     @Test

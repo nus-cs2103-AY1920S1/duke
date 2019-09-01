@@ -2,23 +2,24 @@ package com.tasks;
 
 import com.util.json.JsonObject;
 import com.util.json.Schema;
+import com.util.datetime.DateTime;
 
 public class Deadline extends DoableTask {
 
     /**
-     * The task's deadline string.
+     * The task's deadline datetime.
      */
-    private String deadline;
+    private DateTime deadline;
 
     /**
      * Create DoableTask of this type with deadline string.
      *
      * @param taskName name of task
-     * @param due      deadline string
+     * @param cal      deadline string
      */
-    public Deadline(String taskName, String due) {
+    public Deadline(String taskName, DateTime cal) {
         super(taskName);
-        deadline = due;
+        deadline = cal;
     }
 
     /**
@@ -27,12 +28,12 @@ public class Deadline extends DoableTask {
      * @return string
      */
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline + ")";
+        return "[D]" + super.toString() + "(by: " + deadline.toString() + ")";
     }
 
     @Override
     public JsonObject toJson() {
         return new JsonObject().put(Schema.TASK_DEADLINE, super.toJson()
-                .put(Schema.ATTR_DEADLINE_DUE, deadline.replaceAll("\"", "\\\\\"")));
+                .put(Schema.ATTR_DEADLINE_DUE, deadline.toString()));
     }
 }

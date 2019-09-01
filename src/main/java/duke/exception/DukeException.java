@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * This is the class for exceptions in Duke.
+ */
 public class DukeException extends Exception {
 
     private String message;

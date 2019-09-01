@@ -5,6 +5,10 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is the Ui class. It handles all the strings displayed to the user.
+ */
+
 public class Ui {
 
     private final Scanner in;

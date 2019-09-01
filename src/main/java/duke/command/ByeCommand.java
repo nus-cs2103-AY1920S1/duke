@@ -6,6 +6,9 @@ import duke.ui.Ui;
 
 import java.text.ParseException;
 
+/**
+ * This class controls the bye command.
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand() {

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * This is the superclass for Task.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;

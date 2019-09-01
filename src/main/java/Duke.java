@@ -5,6 +5,10 @@ import duke.storage.Storage;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 
+/**
+ * This is the main Duke class
+ */
+
 public class Duke {
 
     private Ui ui;

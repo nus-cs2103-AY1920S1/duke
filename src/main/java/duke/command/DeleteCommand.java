@@ -7,6 +7,10 @@ import duke.ui.Ui;
 
 import java.text.ParseException;
 
+/**
+ * This class controls the delete command.
+ */
+
 public class DeleteCommand extends Command {
 
     private int indexToDelete;

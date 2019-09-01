@@ -8,6 +8,10 @@ import duke.ui.Ui;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * This class controls the find command.
+ */
+
 public class FindCommand extends Command {
 
     String word;

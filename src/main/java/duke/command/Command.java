@@ -6,6 +6,10 @@ import duke.ui.Ui;
 
 import java.text.ParseException;
 
+/**
+ * This is the superclass for Command.
+ */
+
 public class Command {
 
     protected boolean isExit;
@@ -14,10 +18,21 @@ public class Command {
         isExit = false;
     }
 
+    /**
+     * This method executes the command
+     * @param tasks this is the list of tasks.
+     * @param ui this is the ui.
+     * @param storage this is the storage.
+     * @throws ParseException when there is an invalid command.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
 
     }
 
+    /**
+     * This checks whether the program should terminate.
+     * @return true when bye command is entered.
+     */
     public boolean isExit() {
         return isExit;
     }

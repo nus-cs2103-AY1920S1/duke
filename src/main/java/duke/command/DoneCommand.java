@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.text.ParseException;
 
+/**
+ * This class controls the done command.
+ */
 public class DoneCommand extends Command {
 
     private int indexToDone;

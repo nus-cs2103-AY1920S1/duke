@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This is the Deadline class. It is a type of Task.
+ */
 public class Deadline extends Task {
 
     protected String by;

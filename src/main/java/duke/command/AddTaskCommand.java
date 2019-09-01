@@ -6,6 +6,9 @@ import duke.ui.Ui;
 
 import java.text.ParseException;
 
+/**
+ * This class controls the logic of adding the tasks.
+ */
 public class AddTaskCommand extends Command {
 
     private String instruction;

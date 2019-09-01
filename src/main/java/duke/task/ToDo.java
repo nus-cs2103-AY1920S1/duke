@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * This is the ToDo class. It is a type of Task.
+ */
+
 public class ToDo extends Task {
 
     public ToDo(String description) {

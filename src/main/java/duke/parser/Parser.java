@@ -3,6 +3,9 @@ package duke.parser;
 
 import duke.command.*;
 
+/**
+ * This is the parser class. It parses each line of instruction and invokes the respective commands.
+ */
 public class Parser {
 
     public Parser(){}

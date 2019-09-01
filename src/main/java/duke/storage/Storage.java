@@ -12,6 +12,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ * This is the storage class. It loads and writes into a txt file to keep the task list even when the program is terminated.
+ */
+
 public class Storage {
 
     private String filePath;

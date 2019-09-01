@@ -8,6 +8,9 @@ import duke.ui.Ui;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * This class controls the list command.
+ */
 public class ListCommand extends Command {
     public ListCommand() {}
 

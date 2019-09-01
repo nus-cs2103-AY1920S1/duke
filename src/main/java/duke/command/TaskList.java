@@ -4,6 +4,9 @@ import duke.tasks.Task;
 
 import java.util.LinkedList;
 
+/**
+ * Represents the list that contains every task
+ */
 public class TaskList {
     private LinkedList<Task> li;
 

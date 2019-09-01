@@ -4,6 +4,10 @@ import duke.tasks.Task;
 
 import java.util.LinkedList;
 
+/**
+ * Represents the things that the user sees
+ * on Duke
+ */
 public class Ui {
 
     /**

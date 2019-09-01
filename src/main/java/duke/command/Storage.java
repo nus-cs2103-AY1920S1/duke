@@ -16,6 +16,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Represents the text file we are storing
+ * the data in.
+ */
 public class Storage {
     
     String filePath;

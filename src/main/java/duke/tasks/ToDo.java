@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Represent the task with to do specifications.
+ * Represents the task with to do specifications.
  */
 public class ToDo extends Task {
 

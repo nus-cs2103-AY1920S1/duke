@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Represent the tasks which has a description and the
+ * Represents the tasks which has a description and the
  * completion status of the task
  */
 public class Task{

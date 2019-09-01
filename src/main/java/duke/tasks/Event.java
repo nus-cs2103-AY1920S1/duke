@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Represent the task with event specifications.
+ * Represents the task with event specifications.
  */
 public class Event extends Task {
 

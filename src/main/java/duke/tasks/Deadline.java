@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Represent the task with deadline specifications.
+ * Represents the task with deadline specifications.
  */
 public class Deadline extends Task {
 

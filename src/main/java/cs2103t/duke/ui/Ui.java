@@ -1,5 +1,7 @@
 package cs2103t.duke.ui;
 
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 /**
@@ -39,8 +41,14 @@ public class Ui {
      */
     public void dukeRespond(String... inputs) {
         showLine();
-        for (String str : inputs) {
-            System.out.println("     " + str);
+        PrintStream out;
+        try {
+            out = new PrintStream(System.out, false, "UTF-8");
+            for (String str : inputs) {
+                out.println("     " + str);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace(); //shouldnt happen?
         }
         showLine();
     }

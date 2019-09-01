@@ -1,64 +1,48 @@
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-import java.util.Scanner;
-
 public class Duke {
 
-    public static void main(String[] args) throws FileNotFoundException, DukeException, IOException {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        // Scanner object
-        Scanner sc = new Scanner(System.in);
-        boolean printed = false;
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
 
-        // Create a Ui & show welcome message
-        Ui ui = new Ui();
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
+        } catch (IOException e) {
+            ui.showLoadingError();
+        }
+    }
+
+    public void run() {
+
         ui.showWelcome();
+        ui.showTopBorder();
+        System.out.println("\n\tHere are the tasks in your list: ");
+        ui.printTasks(tasks.getTaskList());
+        ui.showBottomBorder();
 
-        // Create file under Storage
-        Storage s = new Storage("data/taskList.txt");
-
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                TaskList t = new TaskList(s);
-
-                // If previous list has been loaded
-                if (printed) {
-                    String command = sc.next();
-
-                    if (command.equals("bye")) {
-
-                        // Create Parser & Execute
-                        Parser p = new Parser(command, "");
-                        p.executeAndSave(t, s);
-                        break;
-
-                    } else if (command.equals("list") || command.equals("deadline") || command.equals("todo")
-                            || command.equals("event") || command.equals("done") || command.equals("delete")
-                            || command.equals("find")) {
-
-                        String description = sc.nextLine().stripLeading();
-                        Parser p = new Parser(command, description);
-                        p.executeAndSave(t, s);
-
-                    } else {
-                        throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
-                    }
-                } else {
-                    // If previous list not loaded, print Tasks
-                    t.printTasks();
-                    printed = true;
-                }
-            } catch (DukeException e) {
-                System.out.println("\t____________________________________________________________");
-                System.out.println("\n\t" + e.getMessage());
-                System.out.println("\t____________________________________________________________\n");
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (IOException e) {
-                System.out.println("\t____________________________________________________________");
-                System.out.println("\n\t" + e.getMessage());
-                System.out.println("\t____________________________________________________________\n");
+                System.out.println("Input / Output error!");
             }
         }
-        sc.close();
+
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

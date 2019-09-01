@@ -1,21 +1,18 @@
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 /**
  * Parser object handles all input reading and prints the respective output.
  */
 public class Parser {
 
-  private String command;
-  private String taskDescription;
-  private int taskNum;
-  private boolean taskNumChanged = false;
-  private String date;
-  private String dateBeforeFormat;
-
+  /**
+   * A method to determine the suffix, given the date
+   * 
+   * @param dateTime
+   * @return String representing the suffix: "st", "nd", "rd" or "th"
+   */
   private static String getSuffix(LocalDateTime dateTime) {
 
     int day = dateTime.getDayOfMonth();
@@ -32,6 +29,14 @@ public class Parser {
     }
   }
 
+  /**
+   * A method to convert dates into the correct format of type: "1st November
+   * 2019, 2.30pm"
+   * 
+   * @param dateTimeString
+   * @return String representing dates in the format: "1st November 2019, 2.30pm"
+   * @throws DateTimeParseException
+   */
   private static String getDate(String dateTimeString) throws DateTimeParseException {
 
     // Create formatter to recognise input pattern and convert to LocalDateTime
@@ -45,274 +50,64 @@ public class Parser {
     return formattedDate;
   }
 
-  public Parser(String command, String description)
-      throws DukeException, NumberFormatException, DateTimeParseException {
+  public static Command parse(String fullCommand) {
+    String[] arr = fullCommand.split(" ", 2);
+    String keyCommand = arr[0].trim();
 
     try {
+      if (keyCommand.equals("list")) {
+        return new ListCommand();
+      } else if (keyCommand.equals("bye")) {
+        return new ExitCommand();
+      } else if (keyCommand.equals("find")) {
+        String description = arr[1].trim();
+        return new FindCommand(description);
+      } else if (keyCommand.equals("done")) {
+        int index = Integer.parseInt(arr[1].trim());
+        return new DoneCommand(index);
+      } else if (keyCommand.equals("delete")) {
+        int index = Integer.parseInt(arr[1].trim());
+        return new DeleteCommand(index);
+      } else if (keyCommand.equals("todo")) {
 
-      if (command.equals("list")) {
+        if (arr.length != 2) {
+          return new InvalidCommand("Description for todo should not be empty!");
+        } else {
+          String description = arr[1].trim();
+          return new AddCommand(keyCommand, description);
+        }
+      } else if (keyCommand.equals("deadline")) {
 
-        this.command = command;
+        String info = arr[1].trim();
+        String[] wordArr = info.split("/by", 2);
 
-      } else if (command.equals("done")) {
-
-        this.command = command;
-        this.taskNum = Integer.valueOf(description);
-        this.taskNumChanged = true;
-
-      } else if (command.equals("bye")) {
-
-        this.command = command;
-
-      } else if (command.equals("todo")) {
-
-        this.command = command;
-        this.taskDescription = description;
-
-      } else if (command.equals("deadline")) {
-
-        this.command = command;
-        String[] wordArr = description.split("/by", 2);
-
-        if (wordArr.length == 1) {
-          throw new DukeException("OOPS! Deadlines should be followed by a /by.");
+        if (wordArr.length != 2) {
+          return new InvalidCommand("Deadlines should be followed with a /by.");
         }
 
-        this.taskDescription = wordArr[0];
-        this.dateBeforeFormat = wordArr[1];
-        this.date = getDate(wordArr[1].stripLeading());
+        String formattedDate = getDate(wordArr[1].trim());
+        return new AddCommand(keyCommand, wordArr[0].trim(), formattedDate);
+      } else if (keyCommand.equals("event")) {
 
-      } else if (command.equals("event")) {
+        String info = arr[1].trim();
+        String[] wordArr = info.split("/at", 2);
 
-        this.command = command;
-        String[] wordArr = description.split("/at", 2);
-
-        if (wordArr.length == 1) {
-          throw new DukeException("OOPS! Deadlines should be followed by a /at.");
+        if (wordArr.length != 2) {
+          return new InvalidCommand("Events should be followed with a /at.");
         }
 
-        this.taskDescription = wordArr[0];
-        this.dateBeforeFormat = wordArr[1];
-        this.date = getDate(wordArr[1].stripLeading());
-
-      } else if (command.equals("delete")) {
-
-        this.command = command;
-        this.taskNum = Integer.valueOf(description);
-        this.taskNumChanged = true;
-
-      } else if (command.equals("find")) {
-
-        this.command = command;
-        this.taskDescription = description;
+        String formattedDate = getDate(wordArr[1].trim());
+        return new AddCommand(keyCommand, wordArr[0].trim(), formattedDate);
 
       } else {
-        throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
+        return new InvalidCommand("Sorry! I don't understand what that means :(");
       }
-    } catch (DukeException e) {
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\t" + e.getMessage());
-      System.out.println("\t____________________________________________________________\n");
     } catch (NumberFormatException e) {
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tOOPS! An integer is expected after done / delete.");
-      System.out.println("\t____________________________________________________________\n");
+      return new InvalidCommand("An integer should be followed by done / delete.");
     } catch (DateTimeParseException e) {
-      System.out.println("\t____________________________________________________________");
-      System.out.println("OOPS! Dates should be in the format mm/dd/yyyy (24-hour time format)");
-      System.out.println("\t____________________________________________________________\n");
-    }
-  }
-
-  /**
-   * Executes the commands only.
-   * 
-   * @param taskList
-   * @throws DukeException
-   * @throws IOException
-   */
-  public void executeOnly(TaskList taskList) throws DukeException, IOException {
-
-    ArrayList<Task> tasks = taskList.getTaskList();
-
-    if (command.equals("todo")) {
-
-      if (taskDescription == "") {
-        throw new DukeException("OOPS! The description for todo should not be empty.");
-      }
-      // Create a ToDo task and add to to tasks
-      ToDo task = new ToDo(taskDescription);
-      tasks.add(task);
-
-    } else if (command.equals("deadline")) {
-
-      DeadLine task = new DeadLine(taskDescription, date);
-      tasks.add(task);
-
-    } else if (command.equals("event")) {
-
-      Event task = new Event(taskDescription, date);
-      tasks.add(task);
-
-    } else if (command.equals("delete")) {
-
-      if (taskNum < 0 || taskNum >= tasks.size()) {
-        throw new DukeException("OOPS! Integer is out of range of list.");
-      }
-
-      tasks.remove(taskNum);
-
-    } else if (command.equals("done")) {
-
-      if (taskNum < 0 || taskNum >= tasks.size()) {
-        throw new DukeException("OOPS! Integer is out of range of list.");
-      }
-
-      tasks.get(taskNum).setAsDone();
-
-    } else if (command.equals("bye")) {
-
-      return;
-
-    } else if (command.equals("list")) {
-
-      taskList.printTasks();
-
-    } else {
-      throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
+      return new InvalidCommand("Dates should be supplied in the format: dd/mm/yyyy hhmm.");
     }
 
-    taskList.setTaskList(tasks);
-  }
-
-  /**
-   * Executes the commands and save them into the file in Storage
-   * 
-   * @param taskList TaskList containing all tasks.
-   * @param s        Storage object.
-   * @throws DukeException
-   * @throws IOException
-   */
-  public void executeAndSave(TaskList taskList, Storage s) throws DukeException, IOException {
-
-    ArrayList<Task> tasks = taskList.getTaskList();
-
-    if (command.equals("todo")) {
-
-      if (taskDescription == "") {
-        throw new DukeException("OOPS! The description for todo should not be empty.");
-      }
-
-      ToDo task = new ToDo(taskDescription);
-      tasks.add(task);
-
-      // Printing Output
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tGot it! I've added this task: ");
-      System.out.println("\n\t" + task.toString());
-      System.out.println("\n\tNow you have " + tasks.size() + " tasks in the list.");
-      System.out.println("\t____________________________________________________________\n");
-
-      // Save the command in taskList.txt
-      String text = "todo " + taskDescription + "\n";
-      s.appendToFile(text);
-
-    } else if (command.equals("deadline")) {
-
-      DeadLine task = new DeadLine(taskDescription, date);
-      tasks.add(task);
-
-      // Printing Output
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tGot it! I've added this task: ");
-      System.out.println("\n\t" + task.toString());
-      System.out.println("\n\tNow you have " + tasks.size() + " tasks in the list.");
-      System.out.println("\t____________________________________________________________\n");
-
-      // Save the command in taskList.txt
-      String text = "deadline " + taskDescription + " /by " + dateBeforeFormat + "\n";
-      s.appendToFile(text);
-
-    } else if (command.equals("event")) {
-
-      Event task = new Event(taskDescription, date);
-      tasks.add(task);
-
-      // Printing Output
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tGot it! I've added this task: ");
-      System.out.println("\n\t" + task.toString());
-      System.out.println("\n\tNow you have " + tasks.size() + " tasks in the list.");
-      System.out.println("\t____________________________________________________________\n");
-
-      // Save the command in taskList.txt
-      String text = "event " + taskDescription + " /at " + dateBeforeFormat + "\n";
-      s.appendToFile(text);
-
-    } else if (command.equals("delete")) {
-
-      if (taskNum < 0 || taskNum >= tasks.size()) {
-        throw new DukeException("OOPS! Integer is out of range of list.");
-      }
-
-      if (taskNumChanged) {
-        Task removed = tasks.get(taskNum);
-        tasks.remove(taskNum);
-
-        // Printing Output
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\n\tNoted. I have removed this task: ");
-        System.out.println("\n\t" + removed);
-        System.out.println("\n\tNow you have " + tasks.size() + " tasks in the list.");
-        System.out.println("\t____________________________________________________________\n");
-
-        // Save the command in taskList.txt
-        String text = "delete " + taskNum + "\n";
-        s.appendToFile(text);
-      }
-
-    } else if (command.equals("done")) {
-
-      if (taskNum < 0 || taskNum >= tasks.size()) {
-        throw new DukeException("OOPS! Integer is out of range of list.");
-      }
-
-      if (taskNumChanged) {
-
-        tasks.get(taskNum).setAsDone();
-
-        // Printing Output
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\n\tNice! I have marked this task as done: ");
-        System.out.println("\n\t" + tasks.get(taskNum));
-        System.out.println("\t____________________________________________________________\n");
-
-        // Save the command in taskList.txt
-        String text = "done " + taskNum + "\n";
-        s.appendToFile(text);
-      }
-
-    } else if (command.equals("bye")) {
-
-      // Printing Output
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tBye. Hope to see you again soon!");
-      System.out.println("\t____________________________________________________________\n");
-      return;
-
-    } else if (command.equals("list")) {
-
-      taskList.printTasks();
-
-    } else if (command.equals("find")) {
-
-      taskList.printFoundTasks(taskDescription);
-
-    } else {
-      throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
-    }
-
-    taskList.setTaskList(tasks);
   }
 
 }

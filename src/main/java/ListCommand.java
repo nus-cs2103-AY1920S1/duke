@@ -7,7 +7,7 @@ public class ListCommand extends Command {
         String title = " Here are the tasks in your list:\n";
         int tasksSize = tasks.size();
         if (tasksSize == 0) {
-            System.out.println(" You have no tasks in your list.");
+            System.out.println(Ui.frontSpace + " You have no tasks in your list.");
         } else {
             for (int i = 0; i < tasksSize; i++) {
                 if ((i + 1) < 10) {

@@ -40,3 +40,16 @@ javafx {
     version = "11.0.2"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
+
+run{
+    standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'myduke.Duke'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

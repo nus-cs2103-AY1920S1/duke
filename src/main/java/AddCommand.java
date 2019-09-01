@@ -61,7 +61,8 @@ public class AddCommand extends Command {
         try {
             storage.save(tasks);
         } catch (Exception e) {
-            System.out.println(Ui.frontSpace + " duke.txt has problem");
+            System.out.println();
+            System.out.println(Ui.frontSpace + " duke.txt not exist");
         }
     }
 }

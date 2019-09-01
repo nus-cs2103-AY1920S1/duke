@@ -11,7 +11,9 @@ public class Message {
     public static final String MESSAGE_DELETE = "Noted. I've removed this task:";
     public static final String MESSAGE_DONE = "Nice! I've marked this task as done:";
     public static final String MESSAGE_NO_TASKS_IN_LIST = "There are currently no tasks in your list.";
-    public static final String MESSAGE_LOADING_ERROR = "An empty data file duke.txt is created in the current directory.";
+    public static final String MESSAGE_LOADING_ERROR = "An empty data file duke.txt is "
+            + "created in the current directory.";
+    public static final String MESSAGE_NO_MATCHING_TASKS = "There are no matching tasks for the key word.";
 
     public static String getTaskTotalMsg(TaskList tasks) {
         int total = tasks.getSize();
@@ -19,7 +21,7 @@ public class Message {
     }
 
     public static String formatErrorMsg(String errorMsg) {
-        return String.format("\u2639 OOPS!!! %s", errorMsg);
+        return String.format("\u2639 OOPS!!! %s", errorMsg); // show the frowning face
     }
 
     public static String concatLines(String... lines) {

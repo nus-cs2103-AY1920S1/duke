@@ -66,7 +66,7 @@ public class AddCommand extends Command {
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-        tasks.add(newTask);
+        tasks.addTask(newTask);
         storage.save(tasks);
         return concatLines(MESSAGE_ADD, newTask.getIndentedFormat(), getTaskTotalMsg(tasks));
     }

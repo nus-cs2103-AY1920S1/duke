@@ -19,7 +19,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and return the response message as a String.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

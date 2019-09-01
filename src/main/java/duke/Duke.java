@@ -19,6 +19,11 @@ public class Duke {
         this(Storage.DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * Constructs a Duke object.
+     *
+     * @param filePath file path where the data is (to be) stored
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -31,7 +36,7 @@ public class Duke {
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      */
     public String getResponse(String input) {
         // TODO: Terminate the program when ExitCommand is triggered

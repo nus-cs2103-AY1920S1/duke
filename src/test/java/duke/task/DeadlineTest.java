@@ -19,8 +19,8 @@ public class DeadlineTest {
     }
 
     @Test
-    void serialize() throws DukeException {
+    void encode() throws DukeException {
         Deadline deadline = new Deadline("Test", "01/01/2019 0700");
-        assertEquals("D | 0 | Test | 01/01/2019 0700", deadline.serialize());
+        assertEquals("D | 0 | Test | 01/01/2019 0700", deadline.encode());
     }
 }

@@ -58,11 +58,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts a deadline into serialized form (e.g.
+     * Converts a deadline into encoded form (e.g.
      * 'D | 0 | return book | 11/10/2019 1100').
      */
     @Override
-    public String serialize() {
+    public String encode() {
         return String.format("D | %d | %s | %s%s",
                 getStatusCode(),
                 description,

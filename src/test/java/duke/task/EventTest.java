@@ -52,8 +52,8 @@ public class EventTest {
     }
 
     @Test
-    void serialize() throws DukeException {
+    void encode() throws DukeException {
         Event event = new Event("Test", "01/01/2019 0700 1500");
-        assertEquals("E | 0 | Test | 01/01/2019 0700 01/01/2019 1500", event.serialize());
+        assertEquals("E | 0 | Test | 01/01/2019 0700 01/01/2019 1500", event.encode());
     }
 }

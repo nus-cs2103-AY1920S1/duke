@@ -21,10 +21,10 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts a todo into serialized form (e.g. 'T | 0 |  join sports club').
+     * Converts a todo into encoded form (e.g. 'T | 0 |  join sports club').
      */
     @Override
-    public String serialize() {
+    public String encode() {
         return String.format("T | %d | %s", getStatusCode(), description);
     }
 

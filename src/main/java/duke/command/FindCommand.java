@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import static duke.ui.Message.MESSAGE_FIND;
-import static duke.ui.Message.MESSAGE_NO_TASKS_IN_LIST;
+import static duke.ui.Message.MESSAGE_NO_MATCHING_TASKS;
 import static duke.ui.Message.concatLines;
 
 /**
@@ -21,9 +21,9 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList result = tasks.filter(keyWord);
+        TaskList result = tasks.filterByKeyWord(keyWord);
         if (tasks.isEmpty()) {
-            return MESSAGE_NO_TASKS_IN_LIST;
+            return MESSAGE_NO_MATCHING_TASKS;
         } else {
             return concatLines(MESSAGE_FIND, tasks.toString());
         }

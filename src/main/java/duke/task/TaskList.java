@@ -28,6 +28,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns an ArrayList of tasks in the list.
+     *
+     * @return all the tasks in the list
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
@@ -39,7 +44,7 @@ public class TaskList {
      * @return the task at the specified position in this task list
      * @throws DukeException if the index is out of range (index < 0 || index >= size())
      */
-    public Task get(int index) throws DukeException {
+    public Task getTaskByIndex(int index) throws DukeException {
         try {
             return tasks.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -54,7 +59,7 @@ public class TaskList {
      *
      * @param task the task to be appended to the end of this task list
      */
-    public void add(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
@@ -66,8 +71,8 @@ public class TaskList {
      * @return the task that was removed from the list
      * @throws DukeException if the index is out of range (index < 0 || index >= size())
      */
-    public Task remove(int index) throws DukeException {
-        Task task = get(index);
+    public Task deleteTaskByIndex(int index) throws DukeException {
+        Task task = getTaskByIndex(index);
         tasks.remove(task);
         return task;
     }
@@ -97,7 +102,7 @@ public class TaskList {
      * @param keyWord the keyword to be used for filtering this task list
      * @return a TaskList with all the tasks containing the keyWord
      */
-    public TaskList filter(String keyWord) {
+    public TaskList filterByKeyWord(String keyWord) {
         ArrayList<Task> newList = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyWord)) {

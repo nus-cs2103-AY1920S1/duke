@@ -18,7 +18,7 @@ public class TaskListTest {
     }
 
     void addTask() {
-        taskList.add(new TaskImplStub("Test"));
+        taskList.addTask(new TaskImplStub("Test"));
     }
 
     @Test
@@ -27,9 +27,9 @@ public class TaskListTest {
     }
 
     @Test
-    void getTask_invalidTaskId_exceptionThrown() {
+    void getTaskByIndex_invalidTaskId_exceptionThrown() {
         try {
-            taskList.get(1);
+            taskList.getTaskByIndex(1);
             fail();
         } catch (DukeException e) {
             assertEquals("Task No.1 is not present in your list. "
@@ -38,24 +38,24 @@ public class TaskListTest {
     }
 
     @Test
-    void add() {
+    void addTask_increaseSize() {
         assertEquals(0, taskList.getTasks().size());
         addTask();
         assertEquals(1, taskList.getTasks().size());
     }
 
     @Test
-    void remove_validTaskId_success() throws DukeException {
+    void deleteTaskByIndex_validTaskId_success() throws DukeException {
         addTask();
         assertEquals(1, taskList.getTasks().size());
-        taskList.remove(1);
+        taskList.deleteTaskByIndex(1);
         assertEquals(0, taskList.getTasks().size());
     }
 
     @Test
-    void remove_invalidTaskId_exceptionThrow() {
+    void deleteTaskByIndex_invalidTaskId_exceptionThrow() {
         try {
-            taskList.remove(1);
+            taskList.deleteTaskByIndex(1);
             fail();
         } catch (DukeException e) {
             assertEquals("Task No.1 is not present in your list. "
@@ -64,7 +64,7 @@ public class TaskListTest {
     }
 
     @Test
-    void size() {
+    void getSize() {
         assertEquals(0, taskList.getSize());
         addTask();
         assertEquals(1, taskList.getSize());

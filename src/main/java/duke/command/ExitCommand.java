@@ -11,6 +11,9 @@ import static duke.ui.Message.MESSAGE_EXIT;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Constructs an ExitCommand object.
+     */
     public ExitCommand() {
         this.isExit = true;
     }

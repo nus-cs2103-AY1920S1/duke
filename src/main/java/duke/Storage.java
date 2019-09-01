@@ -69,6 +69,8 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException("Data not found.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Failed to load tasks.");
         }
     }
 
@@ -84,7 +86,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks.getTasks()) {
-                fw.write(task.serialize());
+                fw.write(task.encode());
                 fw.write(System.lineSeparator());
             }
             fw.close();

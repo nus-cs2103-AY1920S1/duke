@@ -5,7 +5,7 @@ import duke.command.CompleteCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.IndexCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +21,8 @@ public class CommandParserTest {
     }
 
     @Test
-    void parse_index() throws DukeException {
-        assertTrue(CommandParser.parse("list") instanceof IndexCommand);
+    void parse_list() throws DukeException {
+        assertTrue(CommandParser.parse("list") instanceof ListCommand);
     }
 
     @Test

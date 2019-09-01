@@ -7,7 +7,7 @@ public class TaskImplStub extends Task {
     }
 
     @Override
-    public String serialize() {
+    public String encode() {
         return null;
     }
 }

@@ -2,7 +2,7 @@ package duke.parser;
 
 import duke.command.Command;
 import duke.command.ExitCommand;
-import duke.command.IndexCommand;
+import duke.command.ListCommand;
 import duke.command.CompleteCommand;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
@@ -25,7 +25,7 @@ public class CommandParser {
         if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("list")) {
-            return new IndexCommand();
+            return new ListCommand();
         } else if (command.matches("^done\\s+\\d+$")) {
             int taskId = Integer.parseInt(command.split("\\s+")[1]);
             return new CompleteCommand(taskId);

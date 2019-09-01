@@ -76,11 +76,11 @@ public class Event extends Task {
     }
 
     /**
-     * Converts an event into serialized form (e.g.
+     * Converts an event into encoded form (e.g.
      * 'E | 0 | coding workshop | 11/10/2019 1000 11/10/2019 1100').
      */
     @Override
-    public String serialize() {
+    public String encode() {
         return String.format("E | %d | %s | %s %s %s %s",
                 getStatusCode(),
                 description,

@@ -11,7 +11,7 @@ import static duke.ui.Message.concatLines;
 /**
  * List all the tasks in the task list.
  */
-public class IndexCommand extends Command {
+public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

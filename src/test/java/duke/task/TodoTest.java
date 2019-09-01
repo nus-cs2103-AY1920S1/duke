@@ -24,8 +24,8 @@ public class TodoTest {
     }
 
     @Test
-    void serialize() throws DukeException {
+    void encode() throws DukeException {
         Todo todo = new Todo("Test");
-        assertEquals("T | 0 | Test", todo.serialize());
+        assertEquals("T | 0 | Test", todo.encode());
     }
 }

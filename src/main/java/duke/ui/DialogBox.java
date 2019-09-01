@@ -53,6 +53,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox object containing duke avatar and duke response.
+     *
+     * @param text response from Duke
+     * @param img an image representing Duke's face
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();

@@ -1,4 +1,5 @@
 To-Do    | Not done | task1 
 Event    | Not done | task2 /at 11pm |
 Deadline | Not done | task3 /by 11.30pm |
+Event    | Not done | task4 /at Wed Dec 11 18:00:00 SGT 2019 |
 End of file

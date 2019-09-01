@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents a task with a deadline
  * Contains a description of the task
@@ -15,11 +18,33 @@ public class Deadline extends Task {
         String[] splitString = descriptionAndTime.split("/by");
         this.description = splitString[0].substring(9, splitString[0].length() - 1);
         this.time = splitString[1].substring(1);
+        try {
+            understandDate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override
     public String getTime() {
         return (" /by " + this.time + " |");
+    }
+    /**
+     * Determines date from time input if format fits "DD/MM/YYYY HHMM"
+     *
+     */
+    public void understandDate() throws Exception{
+        String[] splitString = time.split(" ");
+        if (splitString.length == 2) {
+            if (splitString[1].length() == 4) {
+                Date date = new SimpleDateFormat("dd/MM/yyyy").parse(splitString[0]);
+                long hour = Long.parseLong(splitString[1].substring(0,2));
+                long min = Long.parseLong(splitString[1].substring(2,4));
+                date.setTime(date.getTime() + ((hour * 60 + min)*60000));
+                this.time = date.toString();
+            }
+        }
+
     }
 
     @Override

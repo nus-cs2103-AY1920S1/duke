@@ -39,53 +39,72 @@ public class TaskList {
 
     /**
      * Displays all the tasks in the list.
+     *
+     * @return String of all the tasks in the list.
      */
-    public void displayAllTasks() {
+    public String displayAllTasks() {
         Iterator<Task> iter = tasks.iterator();
         int i = 1;
+        String response = "";
         while (iter.hasNext()) {
             Task task = iter.next();
-            System.out.println(task.toString());
+            response += i + ". " + task.toString();
             i++;
         }
+        return response;
     }
 
     /**
      * Adds a task to the list.
      *
      * @param task Task to be added.
+     * @return String of added task.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
-        Ui.outputTaskAdded(task, this);
+        return Ui.outputTaskAdded(task, this);
     }
 
     /**
      * Deletes a task from the list.
      *
      * @param index Index position of task to be deleted.
+     * @return String of removed task.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task removedTask = tasks.remove(index - 1);
-        Ui.outputTaskRemoved(removedTask, this);
+        return Ui.outputTaskRemoved(removedTask, this);
     }
 
     /**
      * Marks a task in the list as done.
      *
      * @param index Index position of task to be marked as done.
+     * @return String of task marked as done.
      */
-    public void markTaskAsDone(int index) {
+    public String markTaskAsDone(int index) {
         Task task = tasks.get(index - 1);
         task.markAsDone();
-        Ui.outputTaskDone(task);
+        return Ui.outputTaskDone(task);
     }
 
-    public void findTasks(String keyword) {
+    /**
+     * Finds existing tasks that contain a provided keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return String of tasks that match keyword.
+     */
+    public String findTasks(String keyword) {
+        String response = "";
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
-                Ui.outputTaskDetails(task);
+                response += task.toString();
             }
+        }
+        if (response.equals("")) {
+            return "No matching tasks found.";
+        } else {
+            return response;
         }
     }
 }

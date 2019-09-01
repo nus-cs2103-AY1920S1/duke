@@ -12,7 +12,7 @@ public class Event extends Task {
      * Constructor for Event. Assumes it is undone.
      *
      * @param description Description of the Event.
-     * @param by Date and time when the Event occurs.
+     * @param at Date and time when the Event occurs.
      */
     public Event(String description, Date at) {
         super(description);
@@ -24,7 +24,7 @@ public class Event extends Task {
      *
      * @param description Description of Event.
      * @param isDone Boolean representing whether the Event is done.
-     * @param by Date and time when the Event occurs.
+     * @param at Date and time when the Event occurs.
      */
     public Event(String description, boolean isDone, Date at) {
         super(description, isDone);

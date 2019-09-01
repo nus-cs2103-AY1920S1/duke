@@ -40,7 +40,8 @@ public class Ui {
      * @return A single line of user input.
      */
     public static String getNextLine() {
-        return sc.nextLine();
+        String nextLine = sc.nextLine();
+        return nextLine;
     }
 
     /**
@@ -48,11 +49,12 @@ public class Ui {
      *
      * @param task Task that was added.
      * @param taskList List of existing tasks.
+     * @return String of task added.
      */
-    public static void outputTaskAdded(Task task, TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + taskList.getSize() + " task in the list.");
+    public static String outputTaskAdded(Task task, TaskList taskList) {
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\n"
+                +("Now you have " + taskList.getSize() + " task in the list.");
     }
 
     /**
@@ -60,24 +62,22 @@ public class Ui {
      *
      * @param task Task that was deleted.
      * @param taskList List of existing tasks.
+     * @return String of task removed.
      */
-    public static void outputTaskRemoved(Task task, TaskList taskList) {
-        System.out.println("Got it. I've removed this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+    public static String outputTaskRemoved(Task task, TaskList taskList) {
+        return "Got it. I've removed added this task:\n"
+                + task.toString() + "\n"
+                +("Now you have " + taskList.getSize() + " task in the list.");
     }
 
     /**
      * Displays a message informing the user that a task has been marked as done.
      *
      * @param task Task that was marked as done.
+     * @return String of task marked as done.
      */
-    public static void outputTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
-    }
-
-    public static void outputTaskDetails(Task task) {
-        System.out.println(task.toString());
+    public static String outputTaskDone(Task task) {
+        return "Nice! I've marked this task as done:"
+                + "[" + task.getStatusIcon() + "] " + task.getDescription();
     }
 }

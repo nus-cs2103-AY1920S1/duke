@@ -61,7 +61,14 @@ public class Ui {
      * Display added task message.
      */
     public void showAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
-        char icon = isDone ? '✓' : '❌';
+        char icon;
+        if(isDone){
+            icon = '✓';
+        }
+        else{
+            icon = '❌';
+        }
+
         System.out.println("Got it. I've added this task: ");
         System.out.println("\t[" + firstAlphabet + "][" + icon + "] " + taskDescription);
         System.out.println("Now you have " + numberOfItems + " in the list.");

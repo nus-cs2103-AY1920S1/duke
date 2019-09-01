@@ -10,6 +10,11 @@ import java.util.Scanner;
 
 import Exception.DukeException;
 
+/**
+ * Storage class to handle all interactions between saving, reading and writing
+ * the file onto local disk. The interactions will be based on what is stored on
+ * TaskList
+ */
 public class Storage {
 
     private Scanner scanner;
@@ -20,6 +25,12 @@ public class Storage {
     private ArrayList<Task> storedList = new ArrayList<>();
     private String filePath;
 
+    /**
+     * Constructs a Storage object to interact with given file
+     *
+     * @param filePath represents the file path/directory for which the
+     * writer/reader interacts with
+     */
     public Storage(String filePath) throws Exception{
         this.filePath = filePath;
         File file = new File(filePath);
@@ -37,7 +48,11 @@ public class Storage {
         pw = new PrintWriter(bw);
     }
 
-    //returns arrayList of Tasks
+    /**
+     * Reads all data from the file filePath
+     *
+     * @return ArrayList of tasks to be stored under TaskList
+     */
     public ArrayList<Task> readFile() {
         while (scanner.hasNextLine()) {
             String str = scanner.nextLine();
@@ -68,10 +83,20 @@ public class Storage {
         return storedList;
     }
 
+    /**
+     * Closes off both the scanner and printwrite instances.
+     */
     public void closeFile() {
         scanner.close();
         pw.close();
     }
+
+    /**
+     * Deletes the file in filePath and rewrites the entire file through iterating
+     * the inputted TaskList
+     *
+     * @param taskList is the object for which the method will get data from
+     */
 
     public void rewriteWriter(TaskList taskList) throws Exception{
         String str = "";
@@ -110,6 +135,11 @@ public class Storage {
 //        pw = new PrintWriter(bw);
     }
 
+    /**
+     * Write a Todo task into the file from filePath
+     *
+     * @param task the Todo task which will be analysed
+     */
     public void writeTodo(Task task) {
         String status = "";
         if(task.getStatusIcon().equals("O")) status = "1";
@@ -121,6 +151,11 @@ public class Storage {
         pw.flush();
     }
 
+    /**
+     * Write a Deadline task into the file from filePath
+     *
+     * @param task the Deadline task which will be analysed
+     */
     public void writeDeadline(Deadline task) {
         String status = "";
         if(task.getStatusIcon().equals("O")) status = "1";
@@ -133,6 +168,11 @@ public class Storage {
         pw.flush();
     }
 
+    /**
+     * Write a Event task into the file from filePath
+     *
+     * @param task the Event task which will be analysed
+     */
     public void writeEvent(Event task) {
         String status = "";
         if(task.getStatusIcon().equals("O")) status = "1";

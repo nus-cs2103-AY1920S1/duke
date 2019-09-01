@@ -6,11 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -39,10 +37,6 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
-//        String cssLayout = "-fx-border-color: grey;\n" +
-//                "-fx-border-insets: 5;\n" +
-//                "-fx-border-width: 1;\n";
-//        this.setStyle(cssLayout);
     }
 
     /**
@@ -57,10 +51,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a <code>DialogBox</code> for the User
+     * Returns a {@code DialogBox} for the User
      * @param text The text.
      * @param img The image.
-     * @return The <code>DialogBox</code>.
+     * @return The {@code DialogBox}.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db =  new DialogBox(text, img);
@@ -68,10 +62,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a <code>DialogBox</code> for the Duke
+     * Returns a {@code DialogBox} for the Duke
      * @param text The text.
      * @param img The image.
-     * @return The <code>DialogBox</code>.
+     * @return The {@code DialogBox}.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

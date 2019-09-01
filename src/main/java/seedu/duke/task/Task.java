@@ -18,7 +18,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Parses and returns the object representation of <code>str</code>.
+     * Parses and returns the object representation of {@code str}.
      * @param str The string to be parsed.
      * @return The corresponding task.
      * @throws DukeException If the initial does not match any Task's subclasses' initials.
@@ -85,7 +85,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the status icon that describes <code>isDone</code>.
+     * Returns the status icon that describes {@code isDone}.
      * @return The status icon.
      */
     public String getStatusIcon() {

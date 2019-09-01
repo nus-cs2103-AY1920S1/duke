@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * Constructor.
      * @param desc The description of the deadline.
      * @param by The date of the deadline as a string.
-     * @throws DateParseException If <code>by</code> cannot be parsed to a Date.
+     * @throws DateParseException If {@code by} cannot be parsed to a Date.
      */
     public Deadline(String desc, String by) throws DateParseException {
         super(desc.trim());

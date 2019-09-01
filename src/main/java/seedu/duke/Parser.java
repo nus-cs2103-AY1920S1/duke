@@ -81,7 +81,7 @@ public class Parser {
     }
 
     /**
-     * Finds and lists the tasks containing <code>keyword</code>.
+     * Finds and lists the tasks containing {@code keyword}
      * @param keyword The keyword to find.
      * @return The response.
      */
@@ -103,8 +103,8 @@ public class Parser {
      * Marks a task as done.
      * @param s The index of the task to be marked as done, represented as a String
      * @return The response.
-     * @throws DukeException If <code>s</code> cannot be parsed to an Integer, or if the integer as an index is not
-     *         within the <code>TaskList</code> bound.
+     * @throws DukeException If {@code s} cannot be parsed to an Integer, or if the integer as an index is not
+     *         within the {@code TaskList} bound.
      */
     private String done(String s) throws DukeException {
         try {
@@ -131,8 +131,8 @@ public class Parser {
      * Deletes a task.
      * @param s The index of the task to be deleted, represented as a String.
      * @return The response.
-     * @throws DukeException If <code>s</code> cannot be parsed to an Integer, or if the integer as an index is not
-     *         within the <code>TaskList</code> bound.
+     * @throws DukeException If {@code s} cannot be parsed to an Integer, or if the integer as an index is not
+     *         within the {@code TaskList} bound.
      */
     private String delete(String s) throws DukeException {
         try {
@@ -173,7 +173,7 @@ public class Parser {
      * Adds a Todo to the list of tasks.
      * @param desc The description of the todo
      * @return The response.
-     * @throws DukeException If <code>desc</code> is empty.
+     * @throws DukeException If {@code desc} is empty.
      */
     private String addTodo(String desc) throws DukeException {
         if (desc.isEmpty()) {
@@ -188,7 +188,7 @@ public class Parser {
      * Adds a Deadline to the list of tasks.
      * @param desc The description of the Deadline
      * @return The response.
-     * @throws DukeException If <code>desc</code> is empty, or does not contain the second argument separated by
+     * @throws DukeException If {@code desc} is empty, or does not contain the second argument separated by
      *         the regex "/by"
      */
     private String addDeadline(String desc) throws DukeException {
@@ -209,7 +209,7 @@ public class Parser {
      * Adds an Event to the list of tasks.
      * @param desc The description of the Deadline
      * @return The response.
-     * @throws DukeException If <code>desc</code> is empty, or does not contain the second argument separated by
+     * @throws DukeException If {@code desc} is empty, or does not contain the second argument separated by
      *         the regex "/at"
      */
     private String addEvent(String desc) throws DukeException {

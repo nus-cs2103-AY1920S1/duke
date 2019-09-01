@@ -19,7 +19,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Returns an AddDeadlineCommand object from the commandArray, an array of words
-     * which make up the initial user input
+     * which make up the initial user input.
      * 
      * @param commandArray Array of Strings that form the initial user input
      * @throws DukeException if input doesn't match the format expected
@@ -55,7 +55,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Adds a Deadline object into the TaskList as per the command inputted
+     * Adds a Deadline object into the TaskList as per the command inputted.
      * 
      * @param tasks   List of Tasks
      * @param ui      User Interface displaying the tasks in the TaskList
@@ -69,7 +69,7 @@ public class AddDeadlineCommand extends Command {
         try {
             storage.writeToFile(deadline.toFile());
         } catch (IOException e) {
-            ui.showIOException(e);
+            ui.showIoException(e);
         }
     }
 }

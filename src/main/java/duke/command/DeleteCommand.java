@@ -18,7 +18,8 @@ public class DeleteCommand extends Command {
     int index;
     /**
      * Returns an AddDeleteCommand object from the commandArray,
-     * an array of the command and an index which make up the initial user input
+     * an array of the command and an index which make up the initial user input.
+     *
      * @param commandArray Array of the command and an index that from initial user input
      */
 
@@ -28,7 +29,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task with specified index
+     * Deletes a task with specified index.
      * @param tasks List of Tasks
      * @param ui User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
@@ -46,7 +47,7 @@ public class DeleteCommand extends Command {
         try {
             storage.updateFile(tasks);
         } catch (IOException e) {
-            ui.showIOException(e);
+            ui.showIoException(e);
         }
     }
 }

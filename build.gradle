@@ -19,6 +19,10 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 application {
     // Change this to your main class.
     mainClassName = "duke.Duke"

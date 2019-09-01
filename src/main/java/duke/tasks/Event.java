@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * Represents an Event Task
+ * Represents an Event Task.
  */
 
 public class Event extends Task {
@@ -9,7 +9,7 @@ public class Event extends Task {
     String duration;
 
     /**
-     * Creates a deadline object
+     * Creates a deadline object.
      * @param taskName name of the event
      * @param isDone whether the event has been completed
      * @param duration timing of event
@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string to represent the event in the storage file
+     * Returns a string to represent the event in the storage file.
      * @return Event String in file form
      */
 
@@ -32,14 +32,14 @@ public class Event extends Task {
     }
 
     /**
-     * Returns event in string form to be printed
+     * Returns event in string form to be printed.
      * @return Event String in print form
      */
 
     @Override
     public String toString() {
         String mark = isDone ? "✓" : "✗";
-        return "[E][" + mark + "]" + taskName +
-                "(at:" + duration + ")";
+        return "[E][" + mark + "]" + taskName
+                + "(at:" + duration + ")";
     }
 }

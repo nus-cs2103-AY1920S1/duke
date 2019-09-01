@@ -27,12 +27,10 @@ public class DoneCommand extends Command {
         try {
             int index = Integer.parseInt(this.detail);
             taskList.markAsDoneTaskAt(index);
-//            storage.saveTasks(taskList);
             ui.printToUser(DUKE_MARK_AS_DONE, "  " + taskList.getTaskAt(index).getStatus());
         } catch (NumberFormatException e) {
             if (this.detail.equals("all")) {
                 taskList.markAsDoneAllTasks();
-//                storage.saveTasks(taskList);
                 String[] lines = taskList.listAll();
                 lines[0] = DUKE_DONE_ALL_TASKS;
                 ui.printToUser(lines);

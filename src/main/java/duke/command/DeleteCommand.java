@@ -29,11 +29,9 @@ public class DeleteCommand extends Command {
             ui.printToUser(DUKE_DELETE_TASK,
                            "  " + taskList.deleteTaskAt(index).getStatus(),
                            String.format(DUKE_NUMBER_OF_TASKS, taskList.getSize()));
-//            storage.saveTasks(taskList);
         } catch (NumberFormatException e) {
             if (this.detail.equals("all")) {
                 taskList.deleteAllTasks();
-//                storage.saveTasks(taskList);
                 ui.printToUser(DUKE_DELETE_ALL_TASKS);
             } else {
                 throw new DukeIllegalIndexException(ERROR_ILLEGAL_INDEX);

@@ -14,7 +14,6 @@ import duke.date.DukeDate;
 
 import duke.exception.DukeDateFormatException;
 import duke.exception.DukeIOException;
-import duke.exception.DukeIllegalArgumentException;
 
 import duke.exception.DukeIllegalCommandException;
 import duke.task.Task;
@@ -94,8 +93,7 @@ public class Parser {
         }
     }
 
-    public static Command parseToCommand(String command, String description)
-            throws DukeIllegalArgumentException, DukeIllegalCommandException {
+    public static Command parseToCommand(String command, String description) throws DukeIllegalCommandException {
         try {
             switch (CommandType.valueOf(command.toUpperCase())) {
             case LIST:

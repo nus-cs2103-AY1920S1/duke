@@ -9,6 +9,10 @@ import com.core.Response;
 
 public class Duke {
 
+    /**
+     * Main for program.
+     * @param args  command line arguments
+     */
     public static void main(String[] args) {
         Printer.printString("Hello! I'm Duke\nWhat can I do for you?");
         // greet
@@ -25,6 +29,7 @@ public class Duke {
                 }
             }
         } catch (NoSuchElementException ignored) {
+            System.out.print("");
         }
     }
 }

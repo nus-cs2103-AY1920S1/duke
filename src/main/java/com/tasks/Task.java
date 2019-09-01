@@ -28,6 +28,10 @@ public class Task {
         return name;
     }
 
+    /**
+     * Returns a JsonObject representation of this task.
+     * @return  JsonObject
+     */
     public JsonObject toJson() {
         JsonObject obj = new JsonObject();
         obj.put(Schema.ATTR_NAME, name.replaceAll("\"", "\\\\\""));

@@ -14,6 +14,10 @@ public class SaveData {
     private static final String DIRECTORY = "/data";
     private static final String FILE_NAME = "duke.json";
 
+    /**
+     * Write file and create directory and file if necessary.
+     * @param str   string to write to save data file
+     */
     public static void write(String str) {
         File directory = new File(CURRENT_PATH + DIRECTORY);
         if (!directory.exists()) {
@@ -33,6 +37,10 @@ public class SaveData {
         }
     }
 
+    /**
+     * Read file if exists otherwise empty string.
+     * @return  file contents as string or empty string if doesn't exist
+     */
     public static String read() {
         File file = new File(CURRENT_PATH + DIRECTORY + "/" + FILE_NAME);
         try {
@@ -57,7 +65,7 @@ public class SaveData {
                 System.exit(-1);
             }
         } catch (FileNotFoundException ignored) {
-
+            System.out.print("");
         }
         return "";
     }

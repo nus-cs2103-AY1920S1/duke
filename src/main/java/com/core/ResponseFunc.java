@@ -10,5 +10,5 @@ public interface ResponseFunc {
      * @param i input string
      * @param s state object
      */
-    boolean f(String i, State s);
+    boolean funcCall(String i, State s);
 }

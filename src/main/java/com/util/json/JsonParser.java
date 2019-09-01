@@ -12,6 +12,13 @@ import java.util.HashMap;
 
 public class JsonParser {
 
+    /**
+     * Given save file's input string, generate list. Empty list if erroneous or empty string does
+     * not exist.
+     *
+     * @param input json file string
+     * @return list
+     */
     public static ArrayList<DoableTask> parseJsonFile(String input) {
         if (input.length() == 0) {
             return new ArrayList<>();
@@ -85,6 +92,8 @@ public class JsonParser {
                                     attributes.get(Schema.ATTR_DEADLINE_DUE).getString()));
                         }
                         break;
+                    default:
+                        throw new SaveFileFormatException("Unexpected task type");
                     }
 
                     if (t == null) {
@@ -112,7 +121,7 @@ public class JsonParser {
      *
      * @param input input character array
      * @param i     index to start parsing
-     * @return resulting index and objects array
+     * @return resulting index and array
      * @throws SaveFileFormatException file format error
      */
     private static Pair<Integer,ArrayList<DynamicValue>> parseJsonArray(char[] input, int i)
@@ -158,6 +167,14 @@ public class JsonParser {
         return new Pair<>(i + 1, arr);
     }
 
+    /**
+     * Parses from input[i] onwards as a json object.
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and object / key value pairs HashMap
+     * @throws SaveFileFormatException file format error
+     */
     private static Pair<Integer,HashMap<String,DynamicValue>> parseJsonObject(char[] input, int i)
             throws SaveFileFormatException {
         HashMap<String,DynamicValue> obj = new HashMap<>();
@@ -217,6 +234,15 @@ public class JsonParser {
         return new Pair<>(i + 1, obj);
     }
 
+    /**
+     * Parses from input[i] onwards as a json value, which can be of type specified in ValueTypes
+     * enum.
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and DynamicValue; algebraic sum type of all possible ValueTypes
+     * @throws SaveFileFormatException file format error
+     */
     private static Pair<Integer,DynamicValue> processDynamicValue(char[] input, int i)
             throws SaveFileFormatException {
         Pair<Integer,DynamicValue> obj;
@@ -246,16 +272,16 @@ public class JsonParser {
                                         i);
                                 obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
                             } catch (SaveFileFormatException e6) {
-                                if (e3.errorCode() == 2 && e4.errorCode() == 2
-                                        && e5.errorCode() == 2 && e6.errorCode() == 2) {
+                                if (e3.getErrorCode() == 2 && e4.getErrorCode() == 2
+                                        && e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
                                     throw new SaveFileFormatException(
                                             "input at " + i + " is of unknown format");
-                                } else if (e4.errorCode() == 2 && e5.errorCode() == 2
-                                        && e6.errorCode() == 2) {
+                                } else if (e4.getErrorCode() == 2 && e5.getErrorCode() == 2
+                                        && e6.getErrorCode() == 2) {
                                     throw e3;
-                                } else if (e5.errorCode() == 2 && e6.errorCode() == 2) {
+                                } else if (e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
                                     throw e4;
-                                } else if (e6.errorCode() == 2) {
+                                } else if (e6.getErrorCode() == 2) {
                                     throw e5;
                                 } else {
                                     throw e6;
@@ -269,6 +295,14 @@ public class JsonParser {
         return obj;
     }
 
+    /**
+     * Parses from input[i] onwards as an int.
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and int
+     * @throws SaveFileFormatException file format error
+     */
     private static Pair<Integer,Integer> parseJsonInt(char[] input, int i)
             throws SaveFileFormatException {
         StringBuilder value = new StringBuilder();
@@ -287,6 +321,14 @@ public class JsonParser {
                 "Expected Integer but encountered something else at " + i);
     }
 
+    /**
+     * Parses from input[i] onwards as a double.
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and double
+     * @throws SaveFileFormatException file format error
+     */
     private static Pair<Integer,Double> parseJsonDouble(char[] input, int i)
             throws SaveFileFormatException {
         StringBuilder value = new StringBuilder();
@@ -305,6 +347,14 @@ public class JsonParser {
         throw new SaveFileFormatException("Expected Double but encountered something else at " + i);
     }
 
+    /**
+     * Parses from input[i] onwards as a boolean.
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and boolean
+     * @throws SaveFileFormatException file format error
+     */
     private static Pair<Integer,Boolean> parseJsonBoolean(char[] input, int i)
             throws SaveFileFormatException {
         boolean value;
@@ -312,8 +362,8 @@ public class JsonParser {
             throw new SaveFileFormatException(
                     "Expected Boolean but encountered something else at " + i, 2);
         }
-        if (i + 3 < input.length && input[i] == 't' && input[i + 1] == 'r' &&
-                input[i + 2] == 'u' && input[i + 3] == 'e') {
+        if (i + 3 < input.length && input[i] == 't' && input[i + 1] == 'r'
+                && input[i + 2] == 'u' && input[i + 3] == 'e') {
             value = true;
             i += 4;
         } else if (i + 4 < input.length && input[i] == 'f' && input[i + 1] == 'a'
@@ -333,6 +383,15 @@ public class JsonParser {
         return new Pair<>(i, value);
     }
 
+    /**
+     * Parses from input[i] onwards as a string with double quotes surround. Escaped double quotes
+     * are also replaced with regular double quotes
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and string
+     * @throws SaveFileFormatException file format error
+     */
     private static Pair<Integer,String> parseJsonString(char[] input, int i)
             throws SaveFileFormatException {
         StringBuilder value = new StringBuilder();
@@ -368,10 +427,23 @@ public class JsonParser {
         return new Pair<>(i, value.toString());
     }
 
+    /**
+     * Check if character is a legal possibility after non object, array values.
+     *
+     * @param c character to test
+     * @return True if legal
+     */
     private static boolean checkIfLegalAfterValue(char c) {
         return Character.isWhitespace(c) || c == ',' || c == ']' || c == '}' || c == ':';
     }
 
+    /**
+     * Skip whitespace input[i] onwards till non whitespace encountered.
+     *
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index
+     */
     private static int skipWhiteSpace(char[] input, int i) {
         while (i < input.length && Character.isWhitespace(input[i])) {
             i++;

@@ -18,11 +18,12 @@ public enum Response {
         return true;
     }),
     LIST("(?i)^list\\s*", (j, s) -> {
-        String finalString = IntStream.range(0, s.list.size()).boxed().reduce("",
-                (acc, ti) -> acc + ((acc.equalsIgnoreCase("") ? "" : "\n")
-                        + (ti + 1) + "." + s.list.get(ti).toString()),
-                String::concat
-        );
+        String finalString = IntStream.range(0, s.list.size()).boxed()
+                .reduce("", (acc, ti) -> acc
+                        + ((acc.equalsIgnoreCase("") ? "" : "\n")
+                        + (ti + 1)
+                        + "."
+                        + s.list.get(ti).toString()), String::concat);
         Printer.printString(finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString);
         return true;
     }),
@@ -71,11 +72,13 @@ public enum Response {
         String[] parts = splitTwoDelimiters(i, "(?i)^event ", "(?i)/at ");
 
         String[] dates = parts[1].split(" to ", 2);
-        addTask(new Event(parts[0], DateTime.parseString(dates[0]), DateTime.parseString(dates[1])), s);
+        addTask(new Event(parts[0], DateTime.parseString(dates[0]),
+                DateTime.parseString(dates[1])), s);
         return true;
     }),
     EVENT_WRONG_TIME("(?i)^event .+ /at .+", (i, s) -> {
-        Printer.printError("The date range must be in the format 'DD/MM/YYYY HHMM to DD/MM/YYYY HHMM'");
+        Printer.printError(
+                "The date range must be in the format 'DD/MM/YYYY HHMM to DD/MM/YYYY HHMM'");
         return true;
     }),
     DEADLINE_NO_NAME("(?i)^deadline\\s*", (i, s) -> {
@@ -118,7 +121,7 @@ public enum Response {
      */
     public boolean call(String i, State s) {
         if (i.matches(regex)) {
-            return func.f(i, s);
+            return func.funcCall(i, s);
         }
         return false;
     }

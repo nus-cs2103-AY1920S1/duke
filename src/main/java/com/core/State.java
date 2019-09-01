@@ -18,6 +18,10 @@ public class State {
      */
     public ArrayList<DoableTask> list = new ArrayList<>();
 
+    /**
+     * Initialize with a list of doableTasks.
+     * @param initialList   initial list
+     */
     public State(ArrayList<DoableTask> initialList) {
         list = initialList;
     }

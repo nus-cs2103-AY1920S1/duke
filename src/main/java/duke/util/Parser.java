@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter STANDARD_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public static Command parseCommand(String commandString) throws DukeException {
         String[] commandArr = commandString.split("\\s+", 2);
@@ -64,7 +64,7 @@ public class Parser {
 
     public static LocalDateTime parseDateTime(String dateTimeString) throws DukeException {
         try {
-            return LocalDateTime.parse(dateTimeString, standardFormat);
+            return LocalDateTime.parse(dateTimeString, STANDARD_FORMAT);
         } catch (DateTimeParseException e) {
             throw new DukeException("☹ OOPS! Date Time format invalid!");
         }

@@ -21,7 +21,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     *
+     * Executes the operation of looking for keyword matches inside the task list.
      * @param taskList list of tasks.
      * @param storage storage to store inside hard disk.
      * @param ui ui for user interaction.
@@ -31,9 +31,9 @@ public class FindCommand extends Command {
     public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) {
         TaskList tempTaskList = new TaskList();
 
-        for(int i = 0; i < taskList.getSize(); i++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             Task t = taskList.getAtIndex(i);
-            if(t.getDescription().contains(keyword)) {
+            if (t.getDescription().contains(keyword)) {
                 tempTaskList.add(t);
             }
         }

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ExitCommand extends Command {
 
     /**
-     * Executing the operation of exiting Duke program.
+     * Executes the operation of exiting Duke program.
      * @param taskList list of tasks.
      * @param storage storage to store inside hard disk.
      * @param ui ui for user interaction.

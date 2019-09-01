@@ -5,7 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,11 +45,11 @@ public class Storage {
     public List<Task> load() throws FileNotFoundException, IOException {
         List<Task> taskList = new ArrayList<>();
 
-        if(!this.directory.exists()) {
+        if (!this.directory.exists()) {
             this.directory.mkdir();
         }
 
-        if(!this.inputFile.exists()) {
+        if (!this.inputFile.exists()) {
             this.inputFile.createNewFile();
         }
         Scanner txtSC = new Scanner(inputFile);

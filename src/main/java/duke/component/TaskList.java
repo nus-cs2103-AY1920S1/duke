@@ -13,7 +13,9 @@ public class TaskList {
     /**
      * Constructor for empty TaskList object.
      */
-    public TaskList() { this.taskList = new ArrayList<>(); }
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
 
     /**
      * Constructor for TaskList object loaded with tasks from hard disk.

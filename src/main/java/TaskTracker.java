@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 
-public class TaskTracker {
+class TaskTracker {
 
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    public TaskTracker(File data) {
+    TaskTracker(File data) {
         try {
             Scanner scanFile = new Scanner(data);
             while (scanFile.hasNext()) {
@@ -46,7 +46,7 @@ public class TaskTracker {
         }
     }
 
-    public void process(String command) {
+    void process(String command) {
         String action = command.split(" ")[0];
         try {
             switch (action) {
@@ -146,14 +146,14 @@ public class TaskTracker {
                 "    ____________________________________________________________");
     }
 
-    public String end() {
+    String end() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             if (i == taskList.size() - 1) {
                 output.append(taskList.get(i).saveData());
                 break;
             }
-            output.append(taskList.get(i ).saveData() + "\n");
+            output.append(taskList.get(i).saveData()).append("\n");
         }
         return output.toString();
     }

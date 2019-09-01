@@ -34,10 +34,9 @@ public class Ui {
 
     public void printList(TaskList tasks){
         String output = underscore + "     Here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.getSize(); i++){
-            output += "     " + (i + 1) + "." + tasks.getTask(i).toString() + "\n";
-        }
-        output += underscore;
+
+        output += getTasksInList(tasks);
+
         System.out.println(output);
     }
 
@@ -82,5 +81,33 @@ public class Ui {
                 numOFTaskRemaining + " tasks in the list.\n" + underscore;
         return output;
     }
+
+    /**
+     * Returns the string containing tasks in a pre-formatted form.
+     * Eg. "1.[E][✘] Run (at: ERC)
+     *      2.[D][✓] IPPT (by: 21st of December 2004, 8.15am)
+     *      3.[E][✓] Lecture (at: LT7A)".
+     *
+     * @param tasks TaskList object
+     * @return String of tasks
+     */
+    public String getTasksInList(TaskList tasks){
+        String output = "";
+        for (int i = 0; i < tasks.getSize(); i++){
+            output += "     " + (i + 1) + "." + tasks.getTask(i).toString() + "\n";
+        }
+        output += underscore;
+        return (output);
+    }
+
+    public void printFoundTasks(TaskList tasks){
+        String output = underscore + "     Here are the matching tasks in your list:\n";
+
+        output += getTasksInList(tasks);
+
+        System.out.println(output);
+    }
+
+
 
 }

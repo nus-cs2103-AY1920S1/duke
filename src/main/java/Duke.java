@@ -1,6 +1,14 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Exception;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+
 
 class DukeException extends Exception {
     public DukeException(String s) {
@@ -10,9 +18,51 @@ class DukeException extends Exception {
 
 public class Duke {
     private ArrayList<Task> todoList;
+    File saveList;
+    FileWriter editor;
 
     public Duke() {
         this.todoList = new ArrayList<Task>();
+    }
+
+    private void initialize(){
+        saveList=new File("src/main/data/list.txt");
+        boolean isNew;
+        try {
+            isNew = saveList.createNewFile();
+            if(!isNew){
+                Scanner sc = new Scanner(saveList);
+                this.transferSavedFile(sc);
+                editor = new FileWriter(saveList, true);
+                print("Save file loaded");
+            }
+        }catch(IOException e){
+            print("Directory search error. No save file loaded. Initialized with blank list. No commands will be saved to hard disk");
+
+        }
+    }
+
+    private void transferSavedFile(Scanner sc){
+        int index = 0;
+        while(sc.hasNext()){
+            String saveEntry = sc.nextLine();
+            String instruction[] = saveEntry.split(" \\| ");
+            if(instruction[0].equals("T")){
+                Todo task = new Todo(instruction[2]);
+                todoList.add(task);
+            }else if(instruction[0].equals("E")){
+                Event task = new Event(instruction[2], instruction[3]);
+                todoList.add(task);
+            }else if(instruction[0].equals("D")){
+                Deadline task = new Deadline(instruction[2], instruction[3]);
+                todoList.add(task);
+            }
+            if(instruction[1].equals("1")){
+                todoList.get(index).silentSetDone();
+            }
+            index++;
+        }
+        sc.close();
     }
 
     private static void print(String message) {
@@ -61,10 +111,29 @@ public class Duke {
         try {
             int doneInt = Integer.parseInt(doneIndex);
             this.todoList.get(doneInt - 1).setDone();
+            this.fileSetDone(doneInt - 1);
         } catch (NumberFormatException e) {
             Duke.print("Error: bad task index"); // for wrong index provided
         } catch (IndexOutOfBoundsException e) {
             Duke.print("Error: no such task index");  //for index>array length
+        }
+    }
+
+    private void fileSetDone(int doneIndex){
+        StringBuilder finalInput = new StringBuilder();
+        try {
+            ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(saveList.toPath(), StandardCharsets.UTF_8));
+            StringBuilder editString = new StringBuilder(fileContent.get(doneIndex));
+            editString.setCharAt(4, '1');
+            fileContent.set(doneIndex, editString.toString());
+            for(String s: fileContent){
+                finalInput.append(s + "\n");
+            }
+            FileWriter overwriteEditor = new FileWriter(saveList, false);
+            overwriteEditor.write(finalInput.toString());
+            overwriteEditor.close();
+        } catch (IOException e){
+            print("File write error");
         }
     }
 
@@ -75,10 +144,27 @@ public class Duke {
             outputMessageMessage.append("\n  " + (this.todoList.size() - 1) + " tasks left in the list");
             this.todoList.remove(deleteInt - 1);
             Duke.print(outputMessageMessage.toString());
+            this.fileDelete(deleteInt - 1);
         } catch (NumberFormatException e) {
             Duke.print("Error: bad task index");
         } catch (IndexOutOfBoundsException e) {
             Duke.print("Error: no such task index");
+        }
+    }
+
+    private void fileDelete(int deleteIndex){
+        StringBuilder finalInput = new StringBuilder();
+        try {
+            ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(saveList.toPath(), StandardCharsets.UTF_8));
+            fileContent.remove(deleteIndex);
+            for(String s: fileContent){
+                finalInput.append(s + "\n");
+            }
+            FileWriter overwriteEditor = new FileWriter(saveList, false);
+            overwriteEditor.write(finalInput.toString());
+            overwriteEditor.close();
+        } catch (IOException e){
+            print("File write error");
         }
     }
 
@@ -89,6 +175,12 @@ public class Duke {
         StringBuilder outputMessage = new StringBuilder("Task added:\n");
         outputMessage.append("    " + td);
         outputMessage.append("\n  There are " + this.todoList.size() + " tasks in the list");
+        try {
+            editor.write("T | 0 | " + task + "\n");
+            editor.flush();
+        }catch(IOException e){
+            Duke.print("File write error");
+        }
         Duke.print(outputMessage.toString());
     }
 
@@ -107,9 +199,13 @@ public class Duke {
                 StringBuilder outputMessage = new StringBuilder("Task added:\n");
                 outputMessage.append("    " + e);
                 outputMessage.append("\n  There are " + this.todoList.size() + " tasks in the list.");
+                editor.write("E | 0 | " + description + " | " + deadline + "\n");
+                editor.flush();
                 Duke.print(outputMessage.toString());
             } catch (IndexOutOfBoundsException e) { // happens when input is "event xx /at" with no time given
                 Duke.print("Error: no event time provided");
+            } catch (IOException e){
+                Duke.print("File write error");
             }
         }
     }
@@ -129,9 +225,13 @@ public class Duke {
                 StringBuilder outputMessage = new StringBuilder("Task added:\n");
                 outputMessage.append("    " + d);
                 outputMessage.append("\n  There are " + this.todoList.size() + " tasks in the list.");
+                editor.write("D | 0 | " + description + " | " + deadline + "\n");
+                editor.flush();
                 Duke.print(outputMessage.toString());
             } catch (IndexOutOfBoundsException e) { //same as event time
                 Duke.print("Error: no deadline provided");
+            } catch (IOException e){
+                Duke.print("File write error");
             }
         }
     }
@@ -159,6 +259,10 @@ public class Duke {
             this.isDone = true;
             String message = "The following task has been marked as done:\n    " + this;
             Duke.print(message);
+        }
+
+        public void silentSetDone(){
+            this.isDone = true;
         }
 
         @Override
@@ -231,6 +335,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
         Duke process = new Duke();
+        process.initialize();
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {

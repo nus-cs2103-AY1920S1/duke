@@ -6,7 +6,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task taskToMarkAsDone;
         int selectedIndex;
         try {
@@ -20,6 +20,8 @@ public class DoneCommand extends Command {
             throw new DukeException("Selected task number does not exist.");
         }
         taskToMarkAsDone.markAsDone();
-        ui.showMarkAsDone(taskToMarkAsDone);
+        String output = "Nice! I've marked this task as done: \n"
+                + taskToMarkAsDone.toString();
+        return output;
     }
 }

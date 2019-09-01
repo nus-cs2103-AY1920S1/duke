@@ -7,7 +7,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         int atIndex = fullCommand.indexOf(" /at ");
         if (atIndex < 0) {
             throw new DukeException("Duke.Duke.Command event requires an argument /at, followed by event date");
@@ -16,6 +16,9 @@ public class EventCommand extends Command {
         String at = fullCommand.substring(atIndex + 5);
         Event event = new Event(eventDescription, at);
         tasks.addTask(event);
-        ui.showAddTask(event, tasks.numberOfTasks());
+        String output = "Got it. I've added this task: \n"
+                + event.toString()
+                + String.format("\nNow you have %d tasks in the list.", tasks.getNumberOfTasks());
+        return output;
     }
 }

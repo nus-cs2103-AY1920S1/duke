@@ -6,7 +6,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task taskToDelete;
         int deleteIndex;
         try {
@@ -20,6 +20,9 @@ public class DeleteCommand extends Command {
             throw new DukeException("Selected task number does not exist.");
         }
         tasks.deleteTaskAt(deleteIndex);
-        ui.showDeleteTask(taskToDelete, tasks.numberOfTasks());
+        String output = "Noted. I've removed this task: \n"
+                + taskToDelete.toString()
+                + String.format("\nNow you have %d tasks in the list.", tasks.getNumberOfTasks());
+        return output;
     }
 }

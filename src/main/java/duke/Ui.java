@@ -12,7 +12,7 @@ public class Ui {
      * Prints welcome message.
      */
     public void showWelcome() {
-        String intro = "Hello! I'm Duke.Duke\n"
+        String intro = "Hello! I'm Duke\n"
                 + "What can I do for you?";
         System.out.println(indent(wrapWithHorizontalLines(intro)));
     }
@@ -39,7 +39,7 @@ public class Ui {
 
     /**
      * Prints message after markAsDone command executed.
-     * @param task Duke.Duke.Task marked as done.
+     * @param task Task marked as done.
      */
     public void showMarkAsDone(Task task) {
         String output = "Nice! I've marked this task as done: \n"
@@ -68,7 +68,7 @@ public class Ui {
 
     /**
      * Prints message after add task command executed.
-     * @param task Duke.Duke.Task added.
+     * @param task Task added.
      * @param numberOfTasksLeft Number of tasks left.
      */
     public void showAddTask(Task task, int numberOfTasksLeft) {
@@ -80,7 +80,7 @@ public class Ui {
 
     /**
      * Prints message after delete task command executed.
-     * @param task Duke.Duke.Task deleted.
+     * @param task Task deleted.
      * @param numberOfTasksLeft Number of tasks left.
      */
     public void showDeleteTask(Task task, int numberOfTasksLeft) {

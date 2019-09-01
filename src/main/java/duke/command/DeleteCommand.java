@@ -31,11 +31,11 @@ public class DeleteCommand extends Command {
         if (tasks.allTasks.size() == 1) {
             sb.append("\nNow you have ")
               .append(tasks.allTasks.size())
-              .append(" task in the list.");
+                .append(" task in the list.");
         } else {
             sb.append("\nNow you have ")
               .append(tasks.allTasks.size())
-              .append(" tasks in the list.");
+                .append(" tasks in the list.");
         }
         ui.printMessage(sb.toString());
     }

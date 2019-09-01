@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -11,7 +13,7 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Initialise new Duke session.
+     * Initialise new duke.Duke session.
      */
     public Duke() {
         ui = new Ui();

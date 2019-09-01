@@ -6,7 +6,12 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Storage {
@@ -32,31 +37,29 @@ public class Storage {
         LinkedList<Task> allTasks = new LinkedList<>();
         try {
             File f = new File(filepath);
-            if (f.exists()) {
-
-            } else {
+            if (!f.exists()) {
                 f.createNewFile();
             }
             BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
             String currLine;
             while ((currLine = bufferedReader.readLine()) != null) {
-                String[] formatted_text = currLine.split("\\|");
+                String[] formattedText = currLine.split("\\|");
                 Task t;
-                switch ( formatted_text[0] ) {
+                switch (formattedText[0]) {
                 case "T":
-                    t = new ToDo(formatted_text[2]);
+                    t = new ToDo(formattedText[2]);
                     break;
                 case "D":
-                    t = new Deadline(formatted_text[2], formatted_text[3]);
+                    t = new Deadline(formattedText[2], formattedText[3]);
                     break;
                 case "E":
-                    t = new Event(formatted_text[2], formatted_text[3]);
+                    t = new Event(formattedText[2], formattedText[3]);
                     break;
                 default:
                     t = new Task("");
                     break;
                 }
-                if (formatted_text[1].equals("1")) {
+                if (formattedText[1].equals("1")) {
                     t.markAsDone();
                 }
                 allTasks.add(t);
@@ -100,7 +103,9 @@ public class Storage {
             while ((currentLine = reader.readLine()) != null) {
                 // trim newline when comparing with lineToRemove
                 String trimmedLine = currentLine.trim();
-                if (trimmedLine.equals(lineToRemove)) continue;
+                if (trimmedLine.equals(lineToRemove)) {
+                    continue;
+                }
                 writer.write(currentLine + "\n");
             }
             writer.close();

@@ -68,8 +68,8 @@ public class AddCommandTest {
         try {
             ((AddCommand) Parser.parse("event Make the bed")).parseDescription("/at");
         } catch (DukeException e) {
-            String expected = "☹ OOPS!!! Incorrect format. \nPlease try again with the format below: \n" +
-                    "event ($task_name) /at ($date/day)";
+            String expected = "☹ OOPS!!! Incorrect format. \nPlease try again with the format below: \n"
+                    + "event ($task_name) /at ($date/day)";
             assertEquals(expected, e.getMessage());
         }
     }
@@ -79,8 +79,8 @@ public class AddCommandTest {
         try {
             ((AddCommand) Parser.parse("event Make the bed /at")).parseDescription("/at");
         } catch (DukeException e) {
-            String expected = "☹ OOPS!!! Incorrect format. \nPlease try again with the format below: \n" +
-                    "event ($task_name) /at ($date/day)";
+            String expected = "☹ OOPS!!! Incorrect format. \nPlease try again with the format below: \n"
+                    + "event ($task_name) /at ($date/day)";
             assertEquals(expected, e.getMessage());
         }
     }

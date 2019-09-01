@@ -10,10 +10,17 @@ public class Event extends Task {
 
     public Event (String descriptionAndTime) {
         super(descriptionAndTime);
+        this.type = "E";
         String[] splitString = descriptionAndTime.split("/at");
         this.description = splitString[0].substring(6, splitString[0].length() - 1);
-        this.time = splitString[1].substring(1, splitString[1].length());
+        this.time = splitString[1].substring(1);
     }
+
+    @Override
+    public String getTime() {
+        return (" /at " + this.time + " |");
+    }
+
 
     @Override
     public String toString() {

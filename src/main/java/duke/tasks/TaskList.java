@@ -80,6 +80,24 @@ public class TaskList {
     }
 
     /**
+     * Searches the TaskList for any Task that contains the toSearch String and
+     * returns a TaskList containing all these Tasks
+     * 
+     * @param toSearch substring to be searched
+     * @return a TaskList of tasks with the toSearch substring
+     */
+
+    public TaskList search(String toSearch) {
+        ArrayList<Task> matchingTask = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.contains(toSearch)) {
+                matchingTask.add(task);
+            }
+        }
+        return new TaskList(matchingTask);
+    }
+
+    /**
      * Returns the list of Tasks to be printed
      * 
      * @return String of the list of task

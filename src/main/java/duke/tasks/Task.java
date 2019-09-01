@@ -43,6 +43,18 @@ public class Task {
     }
 
     /**
+     * Checks if the Task contains a substring with the same sequence as the string
+     * toSearch
+     * 
+     * @param toSearch string to be searched in taskname
+     * @return true only if taskName String contains the toSearch subString
+     */
+
+    public boolean contains(String toSearch) {
+        return taskName.contains(toSearch);
+    }
+
+    /**
      * Returns Task in string form to be printed
      * 
      * @return Task String in print form

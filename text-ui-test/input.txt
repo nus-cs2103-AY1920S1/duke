@@ -1,0 +1,14 @@
+todo event
+deadline homework /by 11/11/2019 1032
+event party /at 23/12/2018 0924
+list
+done 1
+done 3
+list
+delete 2
+list
+delete 1
+list
+delete 1
+list
+bye

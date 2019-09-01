@@ -15,7 +15,7 @@ public class Duke {
                 "    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
+                "    ____________________________________________________________");
         TaskTracker tracker = new TaskTracker(data);
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();

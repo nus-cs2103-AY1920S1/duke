@@ -1,6 +1,5 @@
 package seedu.duke.core;
 
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.DukeException;
 import seedu.duke.model.Task;
@@ -13,7 +12,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    @Tag("basic")
     @Test
     void addTask() throws IOException, DukeException, ParseException {
         Storage storage = new Storage();
@@ -21,7 +19,6 @@ public class StorageTest {
                 "event", "project meeting", "28/08/19 12:00").getType());
     }
 
-    @Tag("basic")
     @Test
     void loadTask() throws IOException, ParseException {
         //create a new text file with dummy task values. then load it and then assertEqual with the

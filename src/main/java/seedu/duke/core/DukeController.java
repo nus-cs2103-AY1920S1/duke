@@ -15,7 +15,7 @@ public class DukeController {
      * Command.
      * @param ui UI of the system.
      * @param list Task List (ArrayList) where all tasks are stored.
-     * @param storage storage unit which handles saving & updating the task list.
+     * @param storage storage unit which handles saving and updating the task list.
      * @param command command unit which handles parsing the input.
      * @param sc Scanner object
      * @throws IOException when file is corrupted or cannot be opened.

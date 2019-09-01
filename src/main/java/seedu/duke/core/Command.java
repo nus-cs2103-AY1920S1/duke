@@ -16,7 +16,8 @@ public class Command {
      * @param cmd cmd which is already parsed from input string.
      * @param description task description.
      * @param list task list
-     * @param storage storage unit which handles saving & updating the task list.
+     * @param ui UI object.
+     * @param storage storage unit which handles saving and updating the task list.
      * @throws DukeException when user does not write full command input.
      * @throws ParseException when user inputs the date in incorrect format.
      * @throws IOException when file is not found or cannot be opened.

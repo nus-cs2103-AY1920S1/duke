@@ -1,5 +1,7 @@
 package com.tasks;
 
+import com.util.json.JsonObject;
+
 public class Task {
 
     /**
@@ -23,5 +25,15 @@ public class Task {
      */
     public String toString() {
         return name;
+    }
+
+    protected String toJsonContent() {
+        return "\"name\": \"" + name + "\"";
+    }
+
+    public JsonObject toJson() {
+        JsonObject obj = new JsonObject();
+        obj.put("name", name);
+        return obj;
     }
 }

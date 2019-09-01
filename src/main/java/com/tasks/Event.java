@@ -1,5 +1,7 @@
 package com.tasks;
 
+import com.util.json.JsonObject;
+
 public class Event extends DoableTask {
 
     /**
@@ -25,5 +27,10 @@ public class Event extends DoableTask {
      */
     public String toString() {
         return "[E]" + super.toString() + "(at: " + dateRange + ")";
+    }
+
+    @Override
+    public JsonObject toJson() {
+        return new JsonObject().put("event", super.toJson().put("start", dateRange).put("end", ""));
     }
 }

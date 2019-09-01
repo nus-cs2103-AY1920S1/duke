@@ -1,5 +1,7 @@
 package com.tasks;
 
+import com.util.json.JsonObject;
+
 public class DoableTask extends Task {
 
     /**
@@ -40,5 +42,10 @@ public class DoableTask extends Task {
      */
     public String toString() {
         return "[" + getStatusIcon() + "] " + super.toString();
+    }
+
+    @Override
+    public JsonObject toJson() {
+        return super.toJson().put("done", isDone);
     }
 }

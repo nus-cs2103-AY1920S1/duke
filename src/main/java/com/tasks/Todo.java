@@ -1,5 +1,7 @@
 package com.tasks;
 
+import com.util.json.JsonObject;
+
 public class Todo extends DoableTask {
 
     /**
@@ -18,5 +20,10 @@ public class Todo extends DoableTask {
      */
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public JsonObject toJson() {
+        return new JsonObject().put("todo", super.toJson());
     }
 }

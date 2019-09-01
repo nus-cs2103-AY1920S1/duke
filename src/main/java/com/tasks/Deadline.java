@@ -1,5 +1,7 @@
 package com.tasks;
 
+import com.util.json.JsonObject;
+
 public class Deadline extends DoableTask {
 
     /**
@@ -25,5 +27,10 @@ public class Deadline extends DoableTask {
      */
     public String toString() {
         return "[D]" + super.toString() + "(by: " + deadline + ")";
+    }
+
+    @Override
+    public JsonObject toJson() {
+        return new JsonObject().put("deadline", super.toJson().put("due", deadline));
     }
 }

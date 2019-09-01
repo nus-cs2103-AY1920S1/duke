@@ -29,16 +29,15 @@ public class DoneCommand extends Command {
      * Executes the Command: Sets task in taskList done, and updates the storage file.
      *
      * @param tasks   current TaskList instance
-     * @param ui      current UI instance
      * @param storage current Storage instance
      * @throws DukeException DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String current = tasks.get(index).storageString();
-        tasks.get(index).setDone();
         String res = tasks.get(index).storageString();
         storage.replaceLine(current, res);
+        return tasks.get(index).setDone();
     }
 
     /**

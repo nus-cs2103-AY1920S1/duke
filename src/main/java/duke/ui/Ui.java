@@ -67,8 +67,9 @@ public class Ui extends AnchorPane {
 
     public void handleInput()  {
         try {
-            boolean exit = this.duke.execute(this.readCommand());
-            if (exit) {
+            String exit = this.duke.execute(this.readCommand());
+            this.printLine(exit);
+            if (exit.equals("Bye. Hope to see you again soon!")) {
                 Platform.exit();
             }
         } catch (DukeException e) {

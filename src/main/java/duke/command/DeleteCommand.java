@@ -34,12 +34,10 @@ public class DeleteCommand extends Command {
      * @param storage current Storage instance
      * @throws DukeException DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task deleted = tasks.remove(index);
         storage.deleteLine(deleted.storageString());
-        ui.printLine("Noted. I've removed this task:");
-        ui.printLine("  " + deleted);
-        ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
+        return ("Noted. I've removed this task:\n  " + deleted + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
     /**

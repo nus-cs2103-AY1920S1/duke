@@ -63,12 +63,10 @@ public class AddCommand extends Command {
      * @param storage current Storage instance
      * @throws DukeException DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.add(task);
         storage.addTask(task);
-        ui.printLine("Got it. I've added this task: ");
-        ui.printLine("  " + task);
-        ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
+        return "Got it. I've added this task: \n + task\n + Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**

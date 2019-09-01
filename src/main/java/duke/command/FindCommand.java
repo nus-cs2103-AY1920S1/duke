@@ -34,9 +34,8 @@ public class FindCommand extends Command {
      * @throws DukeException DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         TaskList containsList = tasks.find(this.tofind);
-        ui.printLine("Here are the matching tasks in your list:");
-        ui.printLine(containsList.printAllTasks());
+        return ("Here are the matching tasks in your list:\n" + containsList.printAllTasks());
     }
 }

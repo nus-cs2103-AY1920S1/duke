@@ -36,10 +36,9 @@ public class Duke extends Application {
         this("src/main/data/duke.txt");
     }
 
-    public boolean execute(String command) throws DukeException {
+    public String execute(String command) throws DukeException {
         Command c = Parser.parse(command);
-        c.execute(tasks, ui, storage);
-        return c.isExit();
+        return c.execute(tasks, storage);
     }
 
     @Override

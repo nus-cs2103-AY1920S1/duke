@@ -4,5 +4,7 @@ T,1,return book
 E,1,asd,1/2/1231 1231
 T,1,return book
 T,0,return book
-T,0,bb
+T,1,bb
 D,0,bb,01/12/1029 1212
+T,0,return books
+D,0,qwer,11/11/1111 1111

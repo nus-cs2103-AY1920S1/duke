@@ -29,7 +29,8 @@ test {
     useJUnitPlatform()
 }
 
-group 'seedu.duke'
+//group 'seedu.duke'
+group ''
 version '0.1.0'
 
 repositories {

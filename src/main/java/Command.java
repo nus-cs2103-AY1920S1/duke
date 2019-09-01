@@ -5,6 +5,7 @@ public abstract class Command {
     public Command(String input) {
         this.input = input;
     }
+
     abstract void execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
 
 

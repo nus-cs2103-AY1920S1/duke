@@ -1,5 +1,6 @@
 package com.core;
 
+import com.util.datetime.DateTime;
 import java.util.stream.IntStream;
 
 import com.util.Printer;
@@ -62,9 +63,15 @@ public enum Response {
         Printer.printError("The date range of an event cannot be empty");
         return true;
     }),
-    EVENT("(?i)^event .+ /at .+", (i, s) -> {
+    EVENT("(?i)^event .+ /at \\d{1,2}/\\d{1,2}/\\d{4} \\d{4} to \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}", (i, s) -> {
         String[] parts = splitTwoDelimiters(i, "(?i)^event ", "(?i)/at ");
-        addTask(new Event(parts[0], parts[1]), s);
+
+        String[] dates = parts[1].split(" to ", 2);
+        addTask(new Event(parts[0], DateTime.parseString(dates[0]), DateTime.parseString(dates[1])), s);
+        return true;
+    }),
+    EVENT_WRONG_TIME("(?i)^event .+ /at .+", (i, s) -> {
+        Printer.printError("The date range must be in the format 'DD/MM/YYYY HHMM to DD/MM/YYYY HHMM'");
         return true;
     }),
     DEADLINE_NO_NAME("(?i)^deadline\\s*", (i, s) -> {
@@ -77,7 +84,11 @@ public enum Response {
     }),
     DEADLINE("(?i)^deadline .+ /by .+", (i, s) -> {
         String[] parts = splitTwoDelimiters(i, "(?i)^deadline ", "(?i)/by ");
-        addTask(new Deadline(parts[0], parts[1]), s);
+        addTask(new Deadline(parts[0], DateTime.parseString(parts[1])), s);
+        return true;
+    }),
+    DEADLINE_WRONG_TIME("(?i)^deadline .+ /by .+", (i, s) -> {
+        Printer.printError("The date must be in the format 'DD/MM/YYYY HHMM'");
         return true;
     }),
     UNKNOWN(".*", (i, s) -> {

@@ -1,11 +1,13 @@
 package com.tasks;
 
+import com.util.datetime.DateTime;
+
 public class Deadline extends DoableTask {
 
     /**
-     * The task's deadline string.
+     * The task's deadline datetime.
      */
-    private String deadline;
+    private DateTime deadline;
 
     /**
      * Create DoableTask of this type with deadline string.
@@ -13,9 +15,9 @@ public class Deadline extends DoableTask {
      * @param taskName name of task
      * @param due      deadline string
      */
-    public Deadline(String taskName, String due) {
+    public Deadline(String taskName, DateTime cal) {
         super(taskName);
-        deadline = due;
+        deadline = cal;
     }
 
     /**
@@ -24,6 +26,6 @@ public class Deadline extends DoableTask {
      * @return string
      */
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline + ")";
+        return "[D]" + super.toString() + "(by: " + deadline.toString() + ")";
     }
 }

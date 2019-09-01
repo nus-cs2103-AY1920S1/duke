@@ -7,16 +7,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-
 public class Duke {
 
-	private static ArrayList<Task> list = new ArrayList<>();
-	private static SimpleDateFormat formatterIn = new SimpleDateFormat("d/M/yyyy HHmm");
-	private static SimpleDateFormat formatterOut = new SimpleDateFormat("d MMM yyyy ha");
+	// private static ArrayList<Task> list = new ArrayList<>();
+	private Storage storage;
+	private TaskList tasks;
+	private Ui ui;
+
 	private static String filename = "./data/duke.txt"; // todo isDone? description
 
+	public Duke(String filename) {
+		ui = new Ui();
+		storage = new Storage(filename);
+
+		try {
+			tasks = TaskList(storage.load());
+			// load returns a stream of string, form supplier scanner
+			// TastList parses stream, forEach.loadLine()
+		} catch (DukeException e) {
+			ui.showLoadingError(); // i suppose this just says file is corrupted therefore creating new or sth
+			tasks = new TaskList();
+		}
+	}
+
+	/*
 	private static void initialLoad() throws DukeException {
 		String line = null; // in case file is empty
 
@@ -97,10 +111,6 @@ public class Duke {
 		return event;
 	}
 
-	/**
-	 * Writes updated todo list to file.
-	 */
-
 	private static void update(ArrayList<Task> list, String filename) throws IOException {
 		// writes into file
 		FileWriter fw = new FileWriter(filename, false); // rewrites the entire doc
@@ -112,24 +122,24 @@ public class Duke {
 		}
 		fw.close();
 	}
+	*/
 
-    public static void main(String[] args) throws DukeException {
-		/*
-		String logo = " ____        _        \n"
-				+ "|  _ \\ _   _| | _____ \n"
-				+ "| | | | | | | |/ / _ \\\n"
-				+ "| |_| | |_| |   <  __/\n"
-				+ "|____/ \\__,_|_|\\_\\___|\n";
-		System.out.println("Hello from\n" + logo);
-		*/
-
-		initialLoad();
-		 
-		
-		System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-		Scanner scanner = new Scanner(System.in);
-		String next = scanner.next(); // no longer need nextline because adding comes with type of task
+	public void run() {
+		ui.showWelcome();
+		boolean isExit = false;
+		while (!isExit) {
+	        try {
+	            String fullCommand = ui.readCommand();
+	            ui.showLine(); // show the divider line ("_______")
+	            Command c = Parser.parse(fullCommand);
+	            c.execute(tasks, ui, storage);
+	            isExit = c.isExit();
+	        } catch (DukeException e) {
+	            ui.showError(e.getMessage());
+	        } finally {
+	            ui.showLine();
+	        }
+	    }
 
 		while (!next.equals("bye")) {
 			try {
@@ -216,5 +226,9 @@ public class Duke {
 		System.out.println("Bye. Hope to see you again soon!");
 		
 		scanner.close();
+	}
+
+    public static void main(String[] args) throws DukeException {
+		new Duke(filename).run();
     }
 }

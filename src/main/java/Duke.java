@@ -25,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke task manager.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

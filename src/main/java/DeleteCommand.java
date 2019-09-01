@@ -20,6 +20,14 @@ public class DeleteCommand extends Command {
         return this.index - 1;
     }
 
+    /**
+     * Deletes a specific task from the task list.
+     *
+     * @param tasks List of tasks.
+     * @param ui User Interface.
+     * @param storage Storage of tasks.txt files.
+     * @throws DukeException If index is not within the list.
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         //check if the index is out of bound
         if (this.getIndex() < tasks.getTaskCount()) {

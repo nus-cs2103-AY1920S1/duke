@@ -10,7 +10,8 @@ public class Storage {
 
     /**
      * Construct a object that streamlines loading and saving of file.
-     * @param filePath
+     *
+     * @param filePath Directory of the file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -20,6 +21,12 @@ public class Storage {
         return this.filePath;
     }
 
+    /**
+     * Loads tasks.txt file from the directory given.
+     *
+     * @return List of tasks.
+     * @throws DukeException If file cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException {
         LoadFile lf = new LoadFile(this.getFilePath());
         ArrayList<Task> taskArr = lf.loadTaskFromFile();

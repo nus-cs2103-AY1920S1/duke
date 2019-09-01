@@ -1,3 +1,12 @@
+ import duke.Parser;
+
+ import duke.command.DeleteCommand;
+ import duke.command.PrintListCommand;
+
+ import duke.exception.EmptyTaskDukeException;
+ import duke.exception.InvalidInputDukeException;
+ import duke.exception.InvalidTaskDukeException;
+
  import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -51,7 +51,7 @@ public class PreParser {
             Class<? extends Command> cls = commandMap.get(args[0]);
             Command command = cls.getConstructor(String[].class).newInstance(new Object[]{args});
             return command;
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }

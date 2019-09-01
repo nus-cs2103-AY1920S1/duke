@@ -2,9 +2,15 @@ package duke;
 
 import duke.task.TaskList;
 
-import java.io.*;
-
-import java.nio.file.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * This class provides all file input/output functionality needed for persistent storage of Duke tasks.
@@ -34,7 +40,7 @@ public class Storage {
      *                                 was saved by an earlier incompatible version of Duke.
      */
     public TaskList load() throws IOException, ClassNotFoundException {
-        if(!Files.exists(path)) {
+        if (!Files.exists(path)) {
             return new TaskList();
         }
         FileInputStream fis = new FileInputStream(path.toString());
@@ -53,7 +59,9 @@ public class Storage {
      *                      file cannot be accessed.
      */
     public void save(TaskList taskList) throws IOException {
-        if(path.getParent() != null) Files.createDirectories(path.getParent());
+        if(path.getParent() != null) {
+            Files.createDirectories(path.getParent());
+        }
         FileOutputStream fos = new FileOutputStream(path.toString());
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(taskList);

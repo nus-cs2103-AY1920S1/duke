@@ -58,7 +58,7 @@ public class TodoTest {
             todo.markDone();
             todo.markDone();
             fail();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             assertEquals("Task is already done!", e.getMessage());
         }
     }

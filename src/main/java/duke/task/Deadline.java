@@ -5,11 +5,12 @@ import duke.Parser;
 
 public class Deadline extends Task {
     protected String date;
+
     public Deadline(String desc, String date) {
         super(desc);
         try {
             this.date = Parser.parseDateOrDateTimeToString(date);
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             this.date = date;
         }
     }

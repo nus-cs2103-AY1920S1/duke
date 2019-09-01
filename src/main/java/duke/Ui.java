@@ -35,7 +35,7 @@ public class Ui {
             Charset utf8Charset = Charset.forName("UTF-8");
             PrintStream out = new PrintStream(printStream, true, utf8Charset.name());
             this.out = out;
-        } catch(UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             this.out = printStream;
         }
     }

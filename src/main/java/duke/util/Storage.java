@@ -12,13 +12,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parser class, to handle disk storage in Duke application.
+ */
 public class Storage {
     private File file;
 
-    public Storage(String location) {
-        this.file = new File(location);
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath File path for disk storage.
+     */
+    public Storage(String filePath) {
+        this.file = new File(filePath);
     }
 
+    /**
+     * Initializes the file for disk storage.
+     */
     private void setup() throws DukeException {
         try {
             if (!this.file.exists()) {
@@ -33,6 +44,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved tasks from disk storage.
+     *
+     * @return an ArrayList of tasks corresponding to saved file in disk storage.
+     * @throws DukeException if no file found in disk storage.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             Scanner sc = new Scanner(this.file);
@@ -65,6 +82,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks in disk storage.
+     *
+     * @param taskList ArrayList of tasks to be saved.
+     * @throws DukeException if errors occurred due to IO exceptions.
+     */
     public void store(ArrayList<Task> taskList) throws DukeException {
         try {
             this.setup();

@@ -14,9 +14,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class, to handle various parsing in Duke application.
+ */
 public class Parser {
     private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Converts the input string to a Command object.
+     *
+     * @param commandString Input string representing a command.
+     * @return a Command object corresponding to the input string.
+     * @throws DukeException if the command is invalid.
+     */
     public static Command parseCommand(String commandString) throws DukeException {
         String[] commandArr = commandString.split("\\s+", 2);
         CommandEnum commandEnum;
@@ -62,6 +72,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts the input string to a DateTime object.
+     *
+     * @param dateTimeString Input string representing a datetime.
+     * @return a DateTime object corresponding to the input string.
+     * @throws DukeException if the datetime is invalid.
+     */
     public static LocalDateTime parseDateTime(String dateTimeString) throws DukeException {
         try {
             return LocalDateTime.parse(dateTimeString, standardFormat);
@@ -70,6 +87,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the input string to an array of useful information.
+     *
+     * @param deadlineString Input string representing a deadline.
+     * @return an array of useful information corresponding to the input string.
+     * @throws DukeException if the string format is invalid.
+     */
     private static String[] parseDeadline(String deadlineString) throws DukeException {
         String[] deadlineArr = deadlineString.split(" /by ");
         if (deadlineArr.length <= 1) {
@@ -82,6 +106,13 @@ public class Parser {
         return deadlineArr;
     }
 
+    /**
+     * Parses the input string to an array of useful information.
+     *
+     * @param eventString Input string representing a event.
+     * @return an array of useful information corresponding to the input string.
+     * @throws DukeException if the string format is invalid.
+     */
     private static String[] parseEvent(String eventString) throws DukeException {
         String[] eventArr = eventString.split(" /at ");
         if (eventArr.length <= 1) {
@@ -94,6 +125,13 @@ public class Parser {
         return eventArr;
     }
 
+    /**
+     * Parses the input string to an array of useful information.
+     *
+     * @param intString Input string representing a task number.
+     * @return a task number corresponding to the input string.
+     * @throws DukeException if the task number or format is invalid.
+     */
     private static int parseTaskNumber(String intString) throws DukeException {
         int result;
         try {

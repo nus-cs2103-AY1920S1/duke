@@ -11,22 +11,22 @@ public abstract class Command {
     protected TaskList tasks;
 
     /**
-     * Executes this Command and returns its CommandResult.
-     * @return This Command's CommandResult.
+     * Executes this command and returns its command result.
+     * @return This command's command result.
      */
     public abstract CommandResult execute();
 
     /**
-     * Returns true if this Command is an ExitCommand.
-     * @return true if this Command is an ExitCommand.
+     * Returns true if this command is an exit command.
+     * @return true if this command is an exit command.
      */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Sets this command's TaskList to execute on to the specified TaskList.
-     * @param tasks The specified TaskList.
+     * Sets this command to execute on the specified task list.
+     * @param tasks The specified task list.
      */
     public void setTaskListToExecuteOn(TaskList tasks) {
         this.tasks = tasks;

@@ -9,8 +9,8 @@ public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
     /**
-     * Executes this ExitCommand and returns its CommandResult.
-     * @return This ExitCommand's CommandResult.
+     * Executes this exit command and returns its command result.
+     * @return This exit command's command result.
      */
     @Override
     public CommandResult execute() {
@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns true since this is an ExitCommand.
+     * Returns true.
      * @return true.
      */
     @Override

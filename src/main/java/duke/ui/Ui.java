@@ -23,14 +23,14 @@ public class Ui {
     private static final int HORIZONTAL_BORDER_LENGTH = 80;
 
     /**
-     * Constructs a Ui.
+     * Constructs a ui.
      */
     public Ui() {
         inputScanner = new Scanner(System.in);
     }
 
     /**
-     * Closes the Ui.
+     * Closes the ui.
      */
     public void close() {
         inputScanner.close();

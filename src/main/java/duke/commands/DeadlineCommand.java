@@ -12,7 +12,7 @@ public class DeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";
 
     /**
-     * Constructs a DeadlineCommand with the specified deadline task.
+     * Constructs a deadline command with the specified deadline task.
      * @param deadline The specified deadline task.
      */
     public DeadlineCommand(Deadline deadline) {
@@ -20,8 +20,8 @@ public class DeadlineCommand extends AddCommand {
     }
 
     /**
-     * Executes this DeadlineCommand and returns its CommandResult.
-     * @return This DeadlineCommand's CommandResult.
+     * Executes this deadline command and returns its command result.
+     * @return This deadline command's command result.
      */
     @Override
     public CommandResult execute() {

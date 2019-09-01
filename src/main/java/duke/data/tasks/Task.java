@@ -37,8 +37,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns the command used to create this task.
-     * @return The command used to create this task.
+     * Returns the command String (user input) used to create this task.
+     * @return The command String (user input) used to create this task.
      */
     public abstract String getCommandString();
 

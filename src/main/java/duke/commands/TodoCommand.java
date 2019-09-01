@@ -12,7 +12,7 @@ public class TodoCommand extends AddCommand {
     public static final String COMMAND_WORD = "todo";
 
     /**
-     * Constructs a TodoCommand with the specified todo task.
+     * Constructs a todo command with the specified todo task.
      * @param todo The specified todo task.
      */
     public TodoCommand(Todo todo) {
@@ -20,8 +20,8 @@ public class TodoCommand extends AddCommand {
     }
 
     /**
-     * Executes this TodoCommand and returns its CommandResult.
-     * @return This TodoCommand's CommandResult.
+     * Executes this todo command and returns its command result.
+     * @return This todo command's command result.
      */
     @Override
     public CommandResult execute() {

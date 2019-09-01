@@ -9,7 +9,7 @@ public class CommandResult {
     private String result;
 
     /**
-     * Constructs a CommandResult with the specified result.
+     * Constructs a command result with the specified result.
      * @param result The specified result.
      */
     public CommandResult(String result) {
@@ -17,8 +17,8 @@ public class CommandResult {
     }
 
     /**
-     * Returns this CommandResult's message.
-     * @return This CommandResult's message.
+     * Returns this command result's message.
+     * @return This command result's message.
      */
     public String getMessage() {
         return result;

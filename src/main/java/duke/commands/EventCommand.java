@@ -12,7 +12,7 @@ public class EventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";
 
     /**
-     * Constructs an EventCommand with the specified event task.
+     * Constructs an event command with the specified event task.
      * @param event The specified event task.
      */
     public EventCommand(Event event) {
@@ -20,8 +20,8 @@ public class EventCommand extends AddCommand {
     }
 
     /**
-     * Executes this EventCommand and returns its CommandResult.
-     * @return This EventCommand's CommandResult.
+     * Executes this event command and returns its command result.
+     * @return This event command's command result.
      */
     @Override
     public CommandResult execute() {

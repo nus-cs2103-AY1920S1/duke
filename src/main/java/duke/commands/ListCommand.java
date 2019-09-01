@@ -11,8 +11,8 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     /**
-     * Executes this ListCommand and returns its CommandResult.
-     * @return This ListCommand's CommandResult.
+     * Executes this list command and returns its command result.
+     * @return This list command's command result.
      */
     @Override
     public CommandResult execute() {

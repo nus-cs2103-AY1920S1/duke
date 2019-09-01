@@ -31,8 +31,8 @@ public class Event extends Task {
 
 
     /**
-     * Returns the command used to create this event task.
-     * @return The command used to create this event task.
+     * Returns the command String (user input) used to create this event task.
+     * @return The command String (user input) used to create this event task.
      */
     @Override
     public String getCommandString() {
@@ -40,8 +40,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of this event task.
-     * @return The string representation of this event task.
+     * Returns the String representation of this event task.
+     * @return The String representation of this event task.
      */
     @Override
     public String toString() {

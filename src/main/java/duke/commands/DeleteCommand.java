@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     /**
-     * Constructs a DeleteCommand with the specified task number.
+     * Constructs a delete command with the specified task number.
      * @param taskNumber The specified task number.
      */
     public DeleteCommand(int taskNumber) {
@@ -22,8 +22,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes this DeadlineCommand and returns its CommandResult.
-     * @return This DeadlineCommand's CommandResult.
+     * Executes this delete command and returns its command result.
+     * @return This delete command's command result.
      */
     @Override
     public CommandResult execute() {

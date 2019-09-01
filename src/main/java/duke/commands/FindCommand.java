@@ -22,8 +22,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes this FindCommand and returns its CommandResult.
-     * @return This FindCommand's CommandResult.
+     * Executes this find command and returns its command result.
+     * @return This find command's command result.
      */
     @Override
     public CommandResult execute() {

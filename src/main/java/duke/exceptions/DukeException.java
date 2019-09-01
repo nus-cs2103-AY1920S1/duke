@@ -7,14 +7,14 @@ package duke.exceptions;
 public class DukeException extends Exception {
 
     /**
-     * Constructs a DukeException.
+     * Constructs a Duke exception.
      */
     public DukeException() {
         super();
     }
 
     /**
-     * Constructs a DukeException with the specified error message.
+     * Constructs a Duke exception with the specified error message.
      * @param errorMessage The specified error message.
      */
     public DukeException(String errorMessage) {

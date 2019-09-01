@@ -14,7 +14,7 @@ public class DoneCommand extends ListCommand {
     public static final String COMMAND_WORD = "done";
 
     /**
-     * Constructs a DoneCommand with the specified task number.
+     * Constructs a done command with the specified task number.
      * @param taskNumber The specified task number.
      */
     public DoneCommand(int taskNumber) {
@@ -22,8 +22,8 @@ public class DoneCommand extends ListCommand {
     }
 
     /**
-     * Executes this DoneCommand and returns its CommandResult.
-     * @return This DoneCommand's CommandResult.
+     * Executes this done command and returns its command result.
+     * @return This done command's command result.
      */
     @Override
     public CommandResult execute() {

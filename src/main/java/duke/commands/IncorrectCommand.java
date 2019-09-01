@@ -1,7 +1,7 @@
 package duke.commands;
 
 /**
- * Implements the incorrect command.
+ * Implements the incorrect command, which handles invalid user input.
  * @author Lim Yong Shen, Kevin
  */
 public class IncorrectCommand extends Command {
@@ -12,14 +12,14 @@ public class IncorrectCommand extends Command {
     private boolean hasErrorMessage;
 
     /**
-     * Constructs an IncorrectCommand.
+     * Constructs an incorrect command.
      */
     public IncorrectCommand() {
         hasErrorMessage = false;
     }
 
     /**
-     * Constructs an IncorrectCommand with the specified error message.
+     * Constructs an incorrect command with the specified error message.
      * @param errorMessage The specified error message.
      */
     public IncorrectCommand(String errorMessage) {
@@ -28,8 +28,8 @@ public class IncorrectCommand extends Command {
     }
 
     /**
-     * Executes this IncorrectCommand and returns its CommandResult.
-     * @return This IncorrectCommand's CommandResult.
+     * Executes this incorrect command and returns its command result.
+     * @return This incorrect command's command result.
      */
     @Override
     public CommandResult execute() {

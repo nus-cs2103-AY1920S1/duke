@@ -18,6 +18,10 @@ import duke.data.tasks.Todo;
 import java.util.regex.Pattern;
 import java.text.ParseException;
 
+/**
+ * Implements the Parser class which parses user input and returns commands to execute.
+ * @author Lim Yong Shen, Kevin
+ */
 public class Parser {
 
     private static final String BASIC_COMMAND_FORMAT = "[\\w\\/\\:\\-\\s]+";
@@ -61,7 +65,7 @@ public class Parser {
      * Returns the arguments within the specified input.
      * @param input The specified input.
      * @return The arguments within the specified input.
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws ArrayIndexOutOfBoundsException If the specified input does not contain any arguments.
      */
     private static String getArguments(String input) throws ArrayIndexOutOfBoundsException {
         try {
@@ -82,7 +86,7 @@ public class Parser {
 
     /**
      * Prepares and returns a deadline command based on the specified input.
-     * @param input The specified arguments.
+     * @param input The specified input.
      * @return A deadline command based on the specified input.
      */
     private static Command prepareDeadlineCommand(String input) {
@@ -205,8 +209,8 @@ public class Parser {
     }
 
     /**
-     * Prepares and returns a list command based on the specified arguments.
-     * @return A list command based on the specified arguments.
+     * Prepares and returns a list command.
+     * @return A list command.
      */
     private static Command prepareListCommand() {
         return new ListCommand();

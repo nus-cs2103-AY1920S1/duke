@@ -30,8 +30,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the command used to create this deadline task.
-     * @return The command used to create this deadline task.
+     * Returns the command String (user input) used to create this deadline task.
+     * @return The command String (user input) used to create this deadline task.
      */
     @Override
     public String getCommandString() {
@@ -39,8 +39,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of this deadline task.
-     * @return The string representation of this deadline task.
+     * Returns the String representation of this deadline task.
+     * @return The String representation of this deadline task.
      */
     @Override
     public String toString() {

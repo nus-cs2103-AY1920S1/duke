@@ -1,7 +1,7 @@
 package duke.commands;
 
 /**
- * Provides a framework for commands to be built upon;
+ * Provides a framework for commands to be built upon,
  * specifically those that add to the list of tasks.
  * @author Lim Yong Shen, Kevin
  */

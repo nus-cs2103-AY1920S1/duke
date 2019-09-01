@@ -13,7 +13,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructs an empty TaskList.
+     * Constructs an empty task list.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -28,43 +28,43 @@ public class TaskList {
     }
 
     /**
-     * Returns true if this TaskList is empty.
-     * @return true if this TaskList is empty.
+     * Returns true if this task list is empty.
+     * @return true if this task list is empty.
      */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
     /**
-     * Returns the task at the specified index of the task list.
+     * Returns the task at the specified index of this task list.
      * @param index The specified index.
-     * @return The task at the specified index of the task list.
+     * @return The task at the specified index of this task list.
      */
     public Task get(int index) {
         return tasks.get(index);
     }
 
     /**
-     * Removes and returns the task at the specified index of the task list.
+     * Removes and returns the task at the specified index of this task list.
      * @param index The specified index.
-     * @return The task at the specified index of the task list.
+     * @return The task at the specified index of this task list.
      */
     public Task remove(int index) {
         return tasks.remove(index);
     }
 
     /**
-     * Returns the size of this TaskList.
-     * @return The size of this TaskList.
+     * Returns the size of this task list.
+     * @return The size of this task list.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Returns a sub task list containing the specified keyword.
+     * Returns a sub task list withs tasks containing the specified keyword.
      * @param keyword The specified keyword.
-     * @return A sub task list containing the specified keyword.
+     * @return A sub task list with tasks containing the specified keyword.
      */
     public TaskList subTaskListContainingKeyWord(String keyword) {
         TaskList subTaskList = new TaskList();

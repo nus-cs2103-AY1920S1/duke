@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 /**
  * Implements the Storage class that reads from and writes to the hard disk.
+ * @author Lim Yong Shen, Kevin
  */
 public class Storage {
 
@@ -37,6 +38,7 @@ public class Storage {
     /**
      * Returns an ArrayList of tasks which is the result of reading data from the hard disk.
      * @return An ArrayList of tasks which is the result of reading data from the hard disk.
+     * @throws DukeException If the hard disk file cannot be found.
      */
     public TaskList load() throws DukeException {
         try {
@@ -80,8 +82,9 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks in the specified TaskList to the hard disk.
-     * @param tasks The specified TaskList.
+     * Saves the tasks in the specified task list to the hard disk.
+     * @param tasks The specified task list.
+     * @throws DukeException If the hard disk file cannot be found.
      */
     public void save(TaskList tasks) throws DukeException {
         try {

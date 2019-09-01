@@ -14,7 +14,8 @@ public class Duke {
         System.out.println("    Hello, I'm Duke!\n    What can I do for you?");
         System.out.println(blankLines);
 
-        ArrayList<Task> myList = new ArrayList<>();
+        Task.displayTaskList();
+
         Scanner input = new Scanner(System.in);
         String command = input.nextLine();
 
@@ -43,6 +44,10 @@ public class Duke {
 
                     case "delete":
                         Task.deleteTask(command);
+                        break;
+
+                    case "save":
+                        Task.saveTaskList();
                         break;
 
                     default:

@@ -5,9 +5,11 @@
 
 
 public class ToDo extends Task {
+
     public ToDo (String description) {
         super(description);
-        this.description = description.substring(5, description.length());
+        this.type = "T";
+        this.description = description.substring(5);
     }
 
     @Override

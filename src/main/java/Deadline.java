@@ -8,11 +8,18 @@
 public class Deadline extends Task {
     protected String time;
 
+
     public Deadline (String descriptionAndTime) {
         super(descriptionAndTime);
+        this.type = "D";
         String[] splitString = descriptionAndTime.split("/by");
         this.description = splitString[0].substring(9, splitString[0].length() - 1);
-        this.time = splitString[1].substring(1, splitString[1].length());
+        this.time = splitString[1].substring(1);
+    }
+
+    @Override
+    public String getTime() {
+        return (" /by " + this.time + " |");
     }
 
     @Override

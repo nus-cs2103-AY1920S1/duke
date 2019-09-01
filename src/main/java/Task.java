@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -8,11 +12,13 @@ import java.util.ArrayList;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.type = "";
     }
 
     /**
@@ -24,12 +30,14 @@ public class Task {
      */
     public static String checkCommandType(String command) throws DukeException {
         String type = "";
-        if (command.contains("find")){
+        if (command.contains("find")) {
             type = "find";
             command = command.substring(4, command.length());
             if (command.isEmpty()) {
                 throw new DukeException("    OOPS!! Please specify keyword for search");
             }
+        } else if (command.equals("save")){
+            type = "save";
         } else if (command.equals("list")) {
             type = "list";
         } else if (command.contains("delete")) {
@@ -122,7 +130,7 @@ public class Task {
      * @param command  Command that includes the index of task to be marked
      */
     public static void markAsDone(String command) {
-        String commandStub = command.substring(5, command.length());
+        String commandStub = command.substring(5);
         int completedTaskNumber = Integer.parseInt(commandStub);
         tasks.get(completedTaskNumber - 1).isDone = true;
         System.out.println("    Nice! I've marked this task as done: ");
@@ -148,7 +156,7 @@ public class Task {
      * @param index  Index of the task to be deleted from task list
      */
     public static void deleteTask(String command) {
-        command = command.substring(7, command.length());
+        command = command.substring(7);
         int index = Integer.parseInt(command);
         if (index <= tasks.size() && index >0) {
             Task removedTask = tasks.remove(index - 1);
@@ -193,6 +201,95 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
+    public String getTime() {
+        return "";
+    }
+
+
+    public static void saveTaskList() {
+        StringBuilder sb = new StringBuilder();
+        String strLine = "";
+        try
+        {
+            String filename= "duke.txt";
+            FileWriter fw = new FileWriter(filename,false);
+            //appends the string to the file
+            int index = 1;
+            for (Task x : tasks) {
+                String type = "";
+                switch (x.type) {
+                    case "T":
+                        type = "To-Do   ";
+                        break;
+                    case "E":
+                        type = "Event   ";
+                        break;
+                    case "D":
+                        type = "Deadline";
+                }
+                String isDone = "";
+                if (x.isDone) {
+                    isDone = "Done    ";
+                } else {
+                    isDone = "Not done";
+                }
+                String description = x.description;
+                String time = x.getTime();
+                strLine = type + " | " + isDone + " | " + description + time + "\n";
+                fw.write(strLine);
+                index++;
+            }
+            fw.write("End of file");
+            fw.close();
+            System.out.println("    Task list has been saved!");
+        }
+        catch(IOException ioe)
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
+    }
+
+    public static void loadFromFile(String fileInput) {
+        String newCommand = fileInput.substring(22, fileInput.length());
+        if (fileInput.contains("/by")) {
+            newCommand = "deadline " + newCommand.substring(0, newCommand.length() - 2);
+            tasks.add(new Deadline(newCommand));
+        } else if (fileInput.contains ("/at")) {
+            newCommand = "event " + newCommand.substring(0, newCommand.length() - 2);
+            tasks.add(new Event(newCommand));
+        } else {
+            newCommand = "todo " + newCommand;
+            tasks.add(new ToDo(newCommand));
+        }
+    }
+
+    public static void displayTaskList() {
+        StringBuilder sb = new StringBuilder();
+        String strLine = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("duke.txt"));
+            //read the file content
+            System.out.println("Here is your task list:");
+            System.out.println("Type     | Status   | Description (with time)\n");
+            while (strLine != null) {
+                sb.append(strLine);
+                sb.append(System.lineSeparator());
+                strLine = br.readLine();
+
+                if (strLine.contains("End of file")) {
+                    break;
+                }
+                loadFromFile(strLine);
+                System.out.println(strLine);
+            }
+            br.close();
+        } catch(IOException ioe) {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
+
+    }
+
 
     @Override
     public String toString() {

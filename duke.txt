@@ -1,0 +1,4 @@
+To-Do    | Not done | task1 
+Event    | Not done | task2 /at 11pm |
+Deadline | Not done | task3 /by 11.30pm |
+End of file

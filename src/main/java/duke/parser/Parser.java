@@ -27,7 +27,7 @@ public class Parser {
     private static final String BASIC_COMMAND_FORMAT = "[\\w\\/\\:\\-\\s]+";
     private static final int COMMAND_WORD_INDEX = 0;
     private static final int ARGUMENTS_INDEX = 1;
-    private static final int INPUT_STRING_SPLIT_LIMIT = 2;
+    private static final int INPUT_STRING_SPLIT_LENGTH_LIMIT = 2;
 
     /**
      * Parses the specified input and returns the appropriate command.
@@ -69,7 +69,7 @@ public class Parser {
      */
     private static String getArguments(String input) throws ArrayIndexOutOfBoundsException {
         try {
-            return input.split(" ", INPUT_STRING_SPLIT_LIMIT)[ARGUMENTS_INDEX];
+            return input.split(" ", INPUT_STRING_SPLIT_LENGTH_LIMIT)[ARGUMENTS_INDEX];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw e;
         }
@@ -81,7 +81,7 @@ public class Parser {
      * @return The command word in the specified input.
      */
     private static String getCommandWord(String input) {
-        return input.split(" ", INPUT_STRING_SPLIT_LIMIT)[COMMAND_WORD_INDEX];
+        return input.split(" ", INPUT_STRING_SPLIT_LENGTH_LIMIT)[COMMAND_WORD_INDEX];
     }
 
     /**

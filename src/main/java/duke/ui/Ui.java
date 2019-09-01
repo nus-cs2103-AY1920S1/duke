@@ -108,4 +108,16 @@ public class Ui {
         System.out.println(String.format("  %s", task.toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", listSize));
     }
+
+    /**
+     * Prints find message.
+     *
+     * @param tasklist The tasks contains keyword.
+     */
+    public void showFind(ArrayList<String> tasklist) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasklist.size(); i++) {
+            System.out.println(tasklist.get(i));
+        }
+    }
 }

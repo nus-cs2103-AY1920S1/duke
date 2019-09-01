@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 import duke.exception.DukeException;
 
@@ -66,6 +61,9 @@ public class Parser {
             }
             Task task = new Deadline(event[0], event[1]);
             return new AddCommand(task);
+        } else if (fullCommand.startsWith("find")) {
+            String keyword = fullCommand.substring(5);
+            return new FindCommand(keyword);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

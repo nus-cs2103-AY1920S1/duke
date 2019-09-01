@@ -1,9 +1,9 @@
-public class Task {
-    protected String name;
+public abstract class Task {
+    protected String Description;
     protected boolean isDone;
 
-    public Task(String name , boolean completionStatus) {
-        this.name = name;
+    public Task(String description , boolean completionStatus) {
+        this.Description = description;
         this.isDone = completionStatus;
     }
 
@@ -12,14 +12,11 @@ public class Task {
     }
 
     public String getOverallStatus() {
-        return getCurrentStatus() + name;
+        return getCurrentStatus() + Description;
     }
-
-    public String getName() {
-    return name;
-    }
-
     public void checkIfCompleted() {
         isDone = true;
     }
+
+    public abstract String encodeForStorage();
 }

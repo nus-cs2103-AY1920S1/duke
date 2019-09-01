@@ -16,7 +16,6 @@ public class Storage {
     private PrintWriter pw;
     private BufferedWriter bw;
     private FileWriter fw;
-
     private ArrayList<Task> storedList = new ArrayList<>();
     private String filePath;
 
@@ -73,9 +72,9 @@ public class Storage {
         pw.close();
     }
 
-    public void rewriteWriter(TaskList taskList) throws Exception{
+    public void rewriteWriter(TaskList taskList) throws Exception {
         String str = "";
-        for(int i = 0; i < taskList.getTaskList().size(); i++){
+        for(int i = 0; i < taskList.getTaskList().size(); i++) {
             Task task = taskList.getTaskList().get(i);
             String taskType = taskList.getTaskList().get(i).toString().substring(1,2) +" | ";
             String doneType = "";
@@ -84,15 +83,13 @@ public class Storage {
             String after = taskList.getTaskList().get(i).toString().substring(7);
             String desc = taskList.getTaskList().get(i).getDescription();
             String atby;
-
-            if(taskList.getTaskList().get(i) instanceof Todo){
+            if(taskList.getTaskList().get(i) instanceof Todo) {
                 atby = "";
-            } else if(taskList.getTaskList().get(i) instanceof Deadline){
-                String[] strArr = after.split( " \\(by:" );
+            } else if(taskList.getTaskList().get(i) instanceof Deadline) {
+                String[] strArr = after.split( " \\(by:");
                 atby = " |" + strArr[1].replace(")", "");
-
-            } else if(taskList.getTaskList().get(i) instanceof Event){
-                String[] strArr = after.split( " \\(at:" );
+            } else if(taskList.getTaskList().get(i) instanceof Event) {
+                String[] strArr = after.split( " \\(at:");
                 atby = " |" + strArr[1].replace(")", "");
             } else {
                 throw new DukeException("task instance not declared yet");
@@ -106,8 +103,6 @@ public class Storage {
         pw.flush();
         fw.close();
         fw = new FileWriter(new File(this.filePath), true);
-//        bw = new BufferedWriter(fw);
-//        pw = new PrintWriter(bw);
     }
 
     public void writeTodo(Task task) {

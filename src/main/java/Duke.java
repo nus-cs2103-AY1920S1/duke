@@ -18,18 +18,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    //variables
     public static ArrayList<Task> storedTasks = new ArrayList<>();
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    //main
     public static void main(String[] args) throws Exception {
         new Duke("data/duke.txt").run();
     }
 
-    //implementation methods
     public Duke(String filePath) throws Exception, DukeException {
         storage = new Storage(filePath);
         try {
@@ -40,7 +37,7 @@ public class Duke {
         }
     }
 
-    public void run() throws Exception{
+    public void run() throws Exception {
         ui.readInput();
         storage.closeFile();
     }

@@ -13,7 +13,7 @@ public class ParserTest {
             Parser.parse("test");
             fail();
         } catch (Exception e) {
-            assertEquals(" ☹ OOPS!!!  I'm sorry, but I don't know what that means :-(", e.toString());
+            assertEquals(" \u2639 OOPS!!!  I'm sorry, but I don't know what that means :-(", e.toString());
         }
     }
 }

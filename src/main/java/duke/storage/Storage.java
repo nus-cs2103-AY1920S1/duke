@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.exception.CorruptedDataException;
-import duke.exception.MissingFileExeception;
+import duke.exception.MissingFileException;
 import duke.exception.WrongDateFormatException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -16,16 +16,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of the application. Has methods that support the updating
+ * of file and loading data from the file.
+ */
 public class Storage implements DukeStorage {
     private String directory;
     private String filename;
 
+    /**
+     * Initialises the Storage with the directory of which the file resides and the name
+     * of the file.
+     *
+     * @param directory String of the directory the file is in.
+     */
     public Storage(String directory) {
         this.directory = directory;
         this.filename = "duke.txt";
     }
 
-    //calls every time something is added or deleted
+    /**
+     * Updates the data in the file by writing to the file.
+     *
+     * @param taskList Current task list stored in the application.
+     * @throws IOException Thrown when writing to file fails.
+     */
     @Override
     public void updateList(MyList taskList) throws IOException {
         FileWriter fw = new FileWriter(directory + filename, false);
@@ -41,8 +56,17 @@ public class Storage implements DukeStorage {
         fw.close();
     }
 
+    /**
+     * Reads the data stored in the file which would then be use to generate a task list
+     * that would be returned.
+     *
+     * @return A list from the data loaded from the file.
+     * @throws MissingFileException Thrown when the file does not exist.
+     * @throws CorruptedDataException Thrown when the data of the file is corrupted.
+     * @throws WrongDateFormatException Thrown when the datetime Format is wrong.
+     */
     @Override
-    public MyList loadList() throws MissingFileExeception, CorruptedDataException, WrongDateFormatException {
+    public MyList loadList() throws MissingFileException, CorruptedDataException, WrongDateFormatException {
         MyList taskList = new TaskList();
         File file = new File(directory + filename);
         try {
@@ -53,7 +77,7 @@ public class Storage implements DukeStorage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            throw new MissingFileExeception();
+            throw new MissingFileException();
         }
         return taskList;
     }

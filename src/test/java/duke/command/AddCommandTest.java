@@ -18,7 +18,7 @@ public class AddCommandTest {
                     new UserInterfaceStub(), new StorageStub(""));
             fail();
         } catch (Exception e) {
-            assertEquals(" ☹ OOPS!!!  Please follow the correct datetime format(dd/mm/yyyy HHMM)",
+            assertEquals(" \u2639 OOPS!!!  Please follow the correct datetime format(dd/mm/yyyy HHMM)",
                     e.toString());
         }
     }

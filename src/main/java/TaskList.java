@@ -9,18 +9,35 @@ import seedu.duke.exception.DukeDoneEmptyListException;
 import seedu.duke.exception.DukeIndexOutOfBoundException;
 import java.util.ArrayList;
 
+/**
+ * Class containing the list of Tasks, and methods to modify it.
+ * @author Lim Daekoon
+ */
 public class TaskList {
 
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Constructs a TaskList with the content passed in.
+     * @param taskList Array containing list of Tasks to be loaded in.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Marks a task with the specified index as done.
+     * @param parser Parser object containing a valid "done" command.
+     * @throws DukeDoneEmptyListException If the list is empty and there is nothing to mark as done.
+     * @throws DukeIndexOutOfBoundException If index specified in the command is out of bound.
+     */
     public void markAsDone(Parser parser) throws DukeException {
 
         int index = parser.getIndex();
@@ -46,7 +63,11 @@ public class TaskList {
         Ui.printBlock(outputs);
     }
 
-    public void addTodo(Parser parser) throws DukeException {
+    /**
+     * Adds a new Todo object.
+     * @param parser Parser object containing a valid "todo" command.
+     */
+    public void addTodo(Parser parser) {
         Todo newTodo = new Todo(parser.getDescription());
         taskList.add(newTodo);
 
@@ -58,13 +79,14 @@ public class TaskList {
         Ui.printBlock(outputs);
     }
 
+    /**
+     * Lists the existing tasks.
+     */
     public void list() {
-
         if (taskList.size() == 0) {
             Ui.printBlock("There is nothing to list - the todo list is empty.");
             return;
         }
-
         Ui.printBlock(toStringArray());
     }
 
@@ -72,6 +94,11 @@ public class TaskList {
         return this.taskList;
     }
 
+    /**
+     * Adds a new Deadline Task to the TaskList.
+     * @param parser Parser object containing a "deadline" command.
+     * @throws DukeException If the command is invalid.
+     */
     public void addDeadline(Parser parser) throws DukeException {
 
         Deadline newDeadline = new Deadline(parser.getDescription(), parser.getTime());
@@ -86,6 +113,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Adds a new Event Task to the TaskList.
+     * @param parser Parser object containing a "deadline" command.
+     * @throws DukeException If the command is invalid.
+     */
     public void addEvent(Parser parser) throws DukeException {
 
         Event newEvent = new Event(parser.getDescription(), parser.getTime());
@@ -100,6 +132,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Deletes the task with the specified index.
+     * @param parser Parser object containing a valid "delete" command.
+     * @throws DukeDoneEmptyListException If the list is empty and there is nothing to delete.
+     * @throws DukeIndexOutOfBoundException If index specified in the command is out of bound.
+     */
     public void deleteTask(Parser parser) throws DukeException {
 
         int index = parser.getIndex();

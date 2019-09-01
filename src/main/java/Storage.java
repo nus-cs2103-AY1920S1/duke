@@ -15,6 +15,10 @@ import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
+/**
+ * Class used to load/save from the save file specified.
+ * @author Lim Daekoon
+ */
 public class Storage {
 
     private String directory;

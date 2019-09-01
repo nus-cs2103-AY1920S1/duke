@@ -9,6 +9,7 @@ import seedu.duke.exception.DukeEventMissingDateException;
 /**
  * Reads in the input line, and parses accordingly.
  * Will return null if trying to access information that doesn't exist for that command.
+ * @author Lim Daekoon
  */
 
 public class Parser {

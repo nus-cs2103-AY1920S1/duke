@@ -10,10 +10,20 @@ class TimeTask extends Task {
         time = LocalDateTime.parse(timeString, formatter);
     }
 
+    /**
+     * Returns the time attached to this task as a string for saving.
+     *
+     * @return Time as a string.
+     */
     String getSaveTimeString() {
         return formatter.format(time);
     }
 
+    /**
+     * Returns the time attached to this task as a string to display to the user.
+     *
+     * @return Time as a string.
+     */
     String getTimeString() {
         return DateTimeFormatter.ofPattern("yyyy MMMM dd HHmm").format(time);
     }

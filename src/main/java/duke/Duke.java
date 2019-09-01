@@ -10,10 +10,10 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean isExit = false;
 
     /**
      * Constructor for the Duke class.
@@ -22,6 +22,7 @@ public class Duke extends Application {
      */
     public Duke(String filePath) {
         ui = new Ui();
+        ui.setDuke(this);
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -35,26 +36,14 @@ public class Duke extends Application {
         this("src/main/data/duke.txt");
     }
 
-    /**
-     * Runs the Duke programme.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    public boolean execute(String command) throws DukeException {
+        Command c = Parser.parse(command);
+        c.execute(tasks, ui, storage);
+        return c.isExit();
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         ui.start(stage);
     }
 }

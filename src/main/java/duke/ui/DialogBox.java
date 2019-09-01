@@ -29,8 +29,7 @@ public class DialogBox extends HBox {
         return fxmlLoader.getRoot();
     }
 
-
-    public static DialogBox getUserDialog(String text) {
+    static DialogBox getUserDialog(String text) {
         return new DialogBox(text);
     }
 }

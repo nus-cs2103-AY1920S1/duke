@@ -1,14 +1,16 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,19 +19,21 @@ import java.io.IOException;
 /**
  * Ui class that handles all IO for the Duke application.
  */
-public class Ui {
+public class Ui extends AnchorPane {
+    public TextField commandTextField;
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
-    private CommandBox commandBox;
     private Duke duke;
 
     /**
      * Constructor for the Ui class, initiates a new Scanner instance.
      */
     public Ui() {
-        commandBox = new CommandBox();
+        dialogContainer = new VBox();
+        scrollPane = new ScrollPane();
+        commandTextField = new TextField();
     }
 
     @FXML
@@ -58,11 +62,25 @@ public class Ui {
      * Prints out welcome message.
      */
     public void showWelcome() {
-//        resultDisplay.setFeedbackToUser("Hello! I'm Duke\n" + "What can I do for you?");
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm Duke\n" + "What can I do for you?"));
+    }
+
+    public void handleInput()  {
+        try {
+            boolean exit = this.duke.execute(this.readCommand());
+            if (exit) {
+                Platform.exit();
+            }
+        } catch (DukeException e) {
+            this.printLine(e.toString());
+        }
     }
 
     public String readCommand() {
-        return commandBox.handleCommandEntered();
+        String command = commandTextField.getText();
+        commandTextField.setText("");
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(command));
+        return command;
     }
 
     /**
@@ -71,7 +89,7 @@ public class Ui {
      * @param line line to be printed.
      */
     public void printLine(String line) {
-//        resultDisplay.setFeedbackToUser(line);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(line));
     }
 
     /**
@@ -80,13 +98,13 @@ public class Ui {
      * @param err to be printed.
      */
     public void showError(String err) {
-//        resultDisplay.setFeedbackToUser(err);
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(err));
     }
 
     /**
      * Print error when storage file is empty.
      */
     public void showLoadingError() {
-//        resultDisplay.setFeedbackToUser("You have not stored any tasks!");
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("You have not stored any tasks!"));
     }
 }

@@ -3,3 +3,6 @@ D,1,carnival23,2/12/2011 1010
 T,1,return book
 E,1,asd,1/2/1231 1231
 T,1,return book
+T,0,return book
+T,0,bb
+D,0,bb,01/12/1029 1212

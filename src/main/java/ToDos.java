@@ -1,5 +1,14 @@
+/**
+ * Creates a ToDos object which extends from the Task class.
+ * A <code>description</code> is passed into this class to
+ * instantiate a todos task.
+ */
 public class ToDos extends Task {
 
+    /**
+     * Instantiate a ToDos object by passing a String of description
+     * @param description Description of the todos task.
+     */
     public ToDos (String description) {
         super(description);
     }

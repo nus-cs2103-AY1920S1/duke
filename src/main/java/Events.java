@@ -1,8 +1,18 @@
+/**
+ * Creates a Events object which extends from the Task class.
+ * A <code>description</code> is passed into this class to
+ * instantiate a Events task.
+ */
 public class Events extends Task {
     protected String at;
     protected String event[];
     protected String[] datetime;
 
+    /**
+     * Instantiate a Events object by passing a String of description and time
+     * @param description Description of the event task.
+     * @param at The date and time of the event.
+     */
     public Events(String description, String at) {
         super(description);
         this.at = at;
@@ -10,7 +20,12 @@ public class Events extends Task {
         this.datetime = event[1].split(" ");
     }
 
-    public String getdate() {
+    /**
+     * Get the date from a numeric format eg. (23/05/2019) and convert it
+     * into words (23rd of May 2019).
+     * @return a String consisting the date in wording format
+     */
+    private String getdate() {
         String splitdates[] = this.datetime[0].split("/");
         String day = splitdates[0];
         String month = splitdates[1];
@@ -103,7 +118,12 @@ public class Events extends Task {
         return editedday + " of " + editedmonth + " " + year;
     }
 
-    public String gettime() {
+    /**
+     * Get the time format from 24Hr eg.(2300) to a 12Hr HH:MM format
+     * eg.(11.00pm).
+     * @return Time in 12Hr HH:MM format.
+     */
+    private String gettime() {
         String time = this.datetime[1];
         String timestr;
         int timeint = Integer.parseInt(time);

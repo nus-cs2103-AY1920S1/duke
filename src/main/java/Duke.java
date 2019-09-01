@@ -1,12 +1,20 @@
 import java.io.IOException;
 
+/**
+ * The main class for managing all the java files.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke (String filePath) throws IOException, IllegalCommandException {
+    /**
+     * Instantiate a Duke object when a directory parameter is passed
+     * into it. Will also instantiate the Ui, Storage and TaskList objects.
+     * @param filePath the directory for the designated path to store the tasks.
+     */
+    public Duke (String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -18,6 +26,9 @@ public class Duke {
 
     }
 
+    /**
+     * Run the application Duke.
+     */
     public void run() {
         ui.showWelcome();
         try {
@@ -49,7 +60,10 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) throws IOException, IllegalCommandException {
+    /**
+     * Passed in the file path for the .txt file to instantiate the Duke object
+     */
+    public static void main(String[] args) {
         new Duke("/Users/kchensheng/Documents/NUS/Y2" +
                 "/Sem1/CS2103/chen_sheng_duke/data/data.txt").run();
     }

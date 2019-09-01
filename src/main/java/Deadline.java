@@ -1,8 +1,18 @@
+/**
+ * Creates a Deadline object which extends from the Task class.
+ * A <code>description</code> is passed into this class to
+ * instantiate a Deadline task.
+ */
 public class Deadline extends Task {
     protected String by;
     protected String[] deadline;
     protected String[] datetime;
 
+    /**
+     * Instantiate a Events object by passing a String of description and time
+     * @param description Description of the deadline task.
+     * @param by The date and time of the deadline.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -10,8 +20,13 @@ public class Deadline extends Task {
         this.datetime = deadline[1].split(" ");
     }
 
-    public String getdate() {
-        String splitdates[] = this.datetime[0].split("/");
+    /**
+     * Get the date from a numeric format eg. (23/05/2019) and convert it
+     * into words (23rd of May 2019).
+     * @return a String consisting the date in wording format
+     */
+    private String getdate() {
+        String[] splitdates = this.datetime[0].split("/");
         String day = splitdates[0];
         String month = splitdates[1];
         String year = splitdates[2];
@@ -103,7 +118,12 @@ public class Deadline extends Task {
         return editedday + " of " + editedmonth + " " + year;
     }
 
-    public String gettime() {
+    /**
+     * Get the time format from 24Hr eg.(2300) to a 12Hr HH:MM format
+     * eg.(11.00pm).
+     * @return Time in 12Hr HH:MM format.
+     */
+    private String gettime() {
         String time = this.datetime[1];
         String timestr;
         int timeint = Integer.parseInt(time);

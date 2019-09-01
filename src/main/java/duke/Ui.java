@@ -1,18 +1,11 @@
 package duke;
 
 import duke.task.Task;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
     /**
      * Gets a String of all the tasks in a given TaskList.
@@ -31,57 +24,28 @@ public class Ui {
     }
 
     /**
-     * Shows the welcome message as a message from Duke.
-     * @param dialogContainer The VBox container for all dialog boxes.
+     * Gets the welcome message to be displayed when the app starts.
+     * @return The welcome message as a String.
      */
-    public void showWelcomeMessage(VBox dialogContainer) {
-        String welcomeMessage = "Hello! I'm Duke. What can I do for you?";
-
-        DialogBox dukeDialogBox = DialogBox.getDukeDialog(
-                new Label(welcomeMessage), new ImageView(duke)
-        );
-
-        dialogContainer.getChildren().add(dukeDialogBox);
+    public static String getWelcomeMessage() {
+        return "Hello! I'm Duke. What can I do for you?";
     }
 
     /**
-     * Shows information about how the user should format datetime inputs.
-     * @param dialogContainer The VBox container for all dialog boxes.
+     * Gets information about how the user should format datetime inputs.
+     * @return The datetime format information as a String.
      */
-    public void showDateTimeFormatMessage(VBox dialogContainer) {
-        String datetimeInfo = "To input dates and times for deadlines and events, "
+    public static String getDatetimeFormatMessage() {
+        return "To input dates and times for deadlines and events, "
                 + "please use the format: 29/03/2019, 6:05pm";
-        showDukeMessage(datetimeInfo, dialogContainer);
     }
 
     /**
      * Gets the app's exit message.
      * @return The exit message as a String.
      */
-    public String getExitMessage() {
-        return "Bye! Hope to see you again soon :)";
-    }
-
-    /**
-     * Shows the user's input as a message from the user.
-     * @param input The user's input as a String.
-     * @param dialogContainer The VBox container for all dialog boxes.
-     */
-    public void showUserInput(String input, VBox dialogContainer) {
-        Label userText = new Label(input);
-        DialogBox userDialogBox = DialogBox.getUserDialog(userText, new ImageView(user));
-        dialogContainer.getChildren().add(userDialogBox);
-    }
-
-    /**
-     * Shows a message from Duke to the user.
-     * @param message Duke's message as a String.
-     * @param dialogContainer The VBox container for all dialog boxes.
-     */
-    public void showDukeMessage(String message, VBox dialogContainer) {
-        Label dukeMessage = new Label(message);
-        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeMessage, new ImageView(duke));
-        dialogContainer.getChildren().add(dukeDialogBox);
+    public static String getExitMessage() {
+        return "Bye! Hope to see you again soon :)\nExiting...";
     }
 
     /**

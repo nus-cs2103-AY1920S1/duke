@@ -17,7 +17,7 @@ public class CommandExit extends Command {
      * @return Duke's response to the Command as a String.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.getExitMessage();
+        return Ui.getExitMessage();
     }
 
     /**

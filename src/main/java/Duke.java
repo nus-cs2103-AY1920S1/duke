@@ -13,6 +13,7 @@ import java.util.Scanner;
  * (Essentially a to do list...)
  */
 public class Duke {
+
     private TaskList tasks;
     private UI ui;
     private Storage storage;
@@ -31,6 +32,10 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Duke() {
+        tasks = new TaskList();
     }
 
     /**
@@ -60,5 +65,13 @@ public class Duke {
             }
         }
         sc.close();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

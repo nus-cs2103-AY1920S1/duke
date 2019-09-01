@@ -32,6 +32,10 @@ repositories {
     mavenCentral()
 }
 
+run {
+    standardInput = System.in
+}
+
 application {
     mainClassName = "Duke"
 }

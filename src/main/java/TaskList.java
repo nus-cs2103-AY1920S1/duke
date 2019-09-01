@@ -161,6 +161,10 @@ public class TaskList {
         Ui.printBlock(outputs);
     }
 
+    /**
+     * Finds the task that matches the specified search term, and lists them out.
+     * @param parser Parser object containing a valid "find" command.
+     */
     public void find(Parser parser) {
         ArrayList <Task> matches = new ArrayList<Task>();
         Task currentTask;

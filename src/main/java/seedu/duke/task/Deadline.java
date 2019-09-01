@@ -1,41 +1,91 @@
 package seedu.duke.task;
 
+/**
+ * Deadline class is a subclass of Task class.
+ * Additional attribute is the String dateTime, which holds the dateTime of the Deadline task.
+ */
 public class Deadline extends Task {
 
-    private String dateTime;
 
-    public Deadline(String description, String dateTime) { //sets isDone to the default value, false
-        // by = 2/12/2019 1800
-        // deadline cs /by 21/12/2019 0800
+    protected String dateTime;
+
+    /**
+     * Returns a Deadline object after initializing with 2 Strings, description and dateTime.
+     *
+     * @param description Description String of the task.
+     * @param dateTime dateTime String of the task.
+     */
+    public Deadline(String description, String dateTime) {
+        // Sets isDone to the default value, false.
+        // Possible String for dateTime = 2/12/2019 1800.
+        // Sample fullCommand = "deadline cs /by 21/12/2019 0800".
         super(description);
         this.dateTime = dateTime;
 
-        if (!dateTime.contains("of")) {        // If string by contains the word "of", by string is already formatted
-            this.dateTime = parseDateTime(dateTime); // For use when reading from saved file
+        if (!dateTime.contains("of")) {
+            // Checks if the String has already been formatted.
+            // If "of" is present, this indicated that dateTime has already been formatted.
+            // Main purpose if for creating Deadline objects when reading from saved data.
+            this.dateTime = parseBy(dateTime);
         }
     }
 
+    /**
+     * Returns a Deadline object after initializing with 2 Strings, description and dateTime;
+     * and Boolean status of the task.
+     *
+     * @param description Description String of the task.
+     * @param dateTime dateTime String of the task.
+     * @param isDone isDone Boolean status of the task.
+     */
     public Deadline(String description, String dateTime, Boolean isDone) {
-        // Sample commandLine input: "deadline cs /by 21/12/2019 0800"
+
         super(description, isDone);
         this.dateTime = dateTime;
 
-        if (!dateTime.contains("of")) {        // If string by contains the word "of", by string is already formatted
-            this.dateTime = parseDateTime(dateTime); // For use when reading from saved file
+        if (!dateTime.contains("of")) {
+            // Checks if the String has already been formatted.
+            // If "of" is present, this indicated that dateTime has already been formatted.
+            // Main purpose if for creating Deadline objects when reading from saved data.
+            this.dateTime = parseBy(dateTime);
+
         }
     }
 
+    /**
+     * Returns a parsed String of the Deadline object.
+     * Eg. description = "Assignment", dateTime = "0th of December 2012, 6.42pm", isDone = false.
+     * Parsed String = "[D][✘] Assignment  (by: 20th of December 2012, 6.42pm)".
+     *
+     * @return Parsed String of the Deadline object.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateTime + ")";
     }
 
+    /**
+     * Returns a parsed String, meant for saving, of the Task object.
+     *Eg. description = "Assignment", dateTime = "0th of December 2012, 6.42pm", isDone = true.
+     * Parsed saved String = "D | 1 | Assignment  | 20th of December 2012, 6.42pm".
+     *
+     * @return Parsed string for saving.
+     */
     @Override
     public String toSaveString(){
         return ("D" + super.toSaveString() + " | " + this.dateTime);
     }
 
-    public String parseDateTime(String dateTime){
+    /**
+     * Returns a parsed dateTime String.
+     * String "by" must be of the format DD/MM/YYYY HHHH Eg. "31/08/2019 1215".
+     * Will be converted to "31st of August 2019, 12.15pm".
+     *
+     * @param by Unparsed dateTime String.
+     * @return Parsed dateTime String.
+     */
+    public String parseBy(String by){
+
         taskType = possibleTaskTypes.DEADLINE;
 
         String[] words = dateTime.split("/");

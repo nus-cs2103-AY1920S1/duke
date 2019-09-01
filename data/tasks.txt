@@ -4,5 +4,5 @@ D | 1 | IPPT | 21st of December 2004, 8.15am
 E | 1 | AWS Workshop | LT7A
 T | 0 | sleep at nine
 E | 0 | Birthday | home
-T | 0 | sleep at ten
-E | 0 | sleep  | home
+T | 1 | sleep at ten
+E | 0 | sleep | home

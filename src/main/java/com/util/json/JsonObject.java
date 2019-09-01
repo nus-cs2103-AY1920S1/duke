@@ -24,10 +24,6 @@ public class JsonObject {
         return putLiteral(key, value.toString());
     }
 
-    public JsonObject put(String key, JsonObject value) {
-        return putLiteral(key, value.toString());
-    }
-
     public String toString() {
         return "{\n" + Printer.indentString(formattedString) + "}";
     }

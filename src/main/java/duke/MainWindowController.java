@@ -273,7 +273,11 @@ public class MainWindowController {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
-        duke = new Duke(selectedFile.getAbsolutePath());
-        refreshView();
+        try {
+            duke = new Duke(selectedFile.getAbsolutePath());
+            refreshView();
+        } catch (NullPointerException e) {
+            // Do nothing here...
+        }
     }
 }

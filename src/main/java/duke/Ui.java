@@ -41,11 +41,31 @@ public class Ui {
     }
 
     /**
+     * Gets a list of the application's commands.
+     * @return A list of the application's commands as a String.
+     */
+    public static String getHelpMessage() {
+        return String.format("%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s",
+                "Here are the commands I understand:",
+                "list\n  See the current tasks in your list",
+                "todo [description]\n  Add a new task of type 'todo'",
+                "deadline [description] /by [time]\n  Add a new task of type 'deadline'",
+                "event [description] /at [time]\n  Add a new task of type 'event'",
+                "done [task number]\n  Mark a task as done",
+                "delete [task number]\n  Delete a task from your list",
+                "find [search terms]\n  Find a tasks in your list",
+                "bye\n  Exits the app",
+                "help\n  See the list of possible commands",
+                getDatetimeFormatMessage()
+                );
+    }
+
+    /**
      * Gets the app's exit message.
      * @return The exit message as a String.
      */
     public static String getExitMessage() {
-        return "Bye! Hope to see you again soon :)\nExiting...";
+        return "Bye! Hope to see you again soon :)\n\nExiting...";
     }
 
     /**

@@ -5,20 +5,24 @@ import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -31,7 +35,9 @@ import java.util.Collections;
 public class DialogBox extends HBox {
 
     @FXML
-    private Label dialog;
+    private Text dialog;
+    @FXML
+    private StackPane dialogWrapper;
     @FXML
     private ImageView displayPicture;
 
@@ -51,12 +57,18 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        // set background color of messages
-        dialog.setBackground(new Background(
+        // set width of text message
+        double currWrappingWidth = dialog.getLayoutBounds().getWidth();
+        double maxWrappingWidth = this.getPrefWidth() - displayPicture.getFitWidth() * 2;
+        dialog.setWrappingWidth(Math.min(currWrappingWidth, maxWrappingWidth));
+
+        dialogWrapper.setAlignment(Pos.TOP_RIGHT);
+        // set background color of text message
+        dialogWrapper.setBackground(new Background(
                 new BackgroundFill(
-                        Paint.valueOf(Color.GAINSBORO.toString()),
-                        CornerRadii.EMPTY,
-                        new Insets(0, 5, 0, 5)
+                    Paint.valueOf(Color.GAINSBORO.toString()),
+                    CornerRadii.EMPTY,
+                    Insets.EMPTY
                 )
         ));
 
@@ -67,7 +79,6 @@ public class DialogBox extends HBox {
                 displayPicture.getFitHeight() / 2,
                 displayPicture.getFitWidth() / 2
         ));
-
     }
 
     /**
@@ -100,5 +111,6 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialogWrapper.setAlignment(Pos.TOP_LEFT);
     }
 }

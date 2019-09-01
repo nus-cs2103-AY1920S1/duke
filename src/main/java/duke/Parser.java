@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandFind;
+import duke.command.CommandHelp;
 import duke.command.CommandList;
 import duke.command.CommandMark;
 import duke.command.CommandDelete;
@@ -56,13 +57,16 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("Invalid search term.");
             }
+        case "help":
+            return new CommandHelp();
         case "bye":
             return new CommandExit();
         default:
             String unknownCommand = commandWords[0].length() > 20
                     ? commandWords[0].substring(0, 20) + "..."
                     : commandWords[0];
-            throw new DukeException("I'm sorry, I don't know what '" + unknownCommand + "' means :(");
+            throw new DukeException("I'm sorry, I don't know what '" + unknownCommand + "' means :(\n\n"
+                    + "Type 'help' to get a list of commands I can read.");
         }
     }
 

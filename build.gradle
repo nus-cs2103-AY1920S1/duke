@@ -23,9 +23,6 @@ run {
 
 test {
     useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
 }
 
 shadowJar {

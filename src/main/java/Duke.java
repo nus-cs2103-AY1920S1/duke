@@ -69,6 +69,9 @@ public class Duke {
                 case "delete":
                     taskList.deleteTask(parser);
                     break;
+                case "find":
+                    taskList.find(parser);
+                    break;
                 default:
                     throw new DukeNoSuchCommandException();
                 }

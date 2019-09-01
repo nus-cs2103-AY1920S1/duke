@@ -126,6 +126,28 @@ public class TaskList {
 
     }
 
+    public void find(Parser parser) {
+        ArrayList <Task> matches = new ArrayList<Task>();
+        Task currentTask;
+        String regex = String.format("(.*)%s(.*)", parser.getSearchTerm());
+        for (int z = 0; z < taskList.size(); z++) {
+            currentTask = taskList.get(z);
+            if (currentTask.getTaskName().matches(regex)) {
+                matches.add(currentTask);
+            }
+        }
+
+        if (matches.size() < 1) {
+            Ui.printBlock("There were no matching tasks in your list.");
+        } else {
+            String[] stringArray = new String[matches.size()];
+            for (int z = 0; z < matches.size(); z++) {
+                stringArray[z] = String.format("%3d." + matches.get(z).toString(), z + 1);
+            }
+            Ui.printBlock(stringArray);
+        }
+    }
+
     // Converts taskList into a String Array
     private String[] toStringArray() {
         String[] stringArray = new String[taskList.size()];

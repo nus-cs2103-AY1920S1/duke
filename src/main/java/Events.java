@@ -132,6 +132,6 @@ public class Events extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() +
-                "(by: " + this.getdate() + ", " + this.gettime() + ")";
+                "(at: " + this.getdate() + ", " + this.gettime() + ")";
     }
 }

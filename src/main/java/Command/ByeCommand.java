@@ -1,4 +1,10 @@
-public class ByeCommand extends Command{
+package Command;
+
+import Storage.Storage;
+import TaskList.TaskList;
+import Ui.Ui;
+
+public class ByeCommand extends Command {
 
     public ByeCommand() {
 

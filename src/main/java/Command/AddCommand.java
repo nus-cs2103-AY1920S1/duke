@@ -1,9 +1,17 @@
+package Command;
+
+import Storage.Storage;
+import TaskList.TaskList;
+import TaskList.Task;
+import Ui.Ui;
+
 import java.io.IOException;
 
 public class AddCommand extends Command {
     protected Task task;
 
     public AddCommand(Task task) {
+
         this.task = task;
     }
 

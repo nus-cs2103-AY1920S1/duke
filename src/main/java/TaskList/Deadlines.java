@@ -1,3 +1,7 @@
+package TaskList;
+
+import TaskList.Task;
+
 public class Deadlines extends Task {
 
     public Deadlines(String description) {

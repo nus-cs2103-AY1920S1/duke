@@ -1,3 +1,5 @@
+package TaskList;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -5,10 +7,10 @@ import java.util.Date;
 
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
-    protected String taskType;
-    protected String time;
+    public String taskType;
+    public String description;
+    public boolean isDone;
+    public String time;
 
     public Task(String description) {
         this.description = description;
@@ -63,21 +65,22 @@ public class Task {
         String aa;
         int time;
 
-        if (Integer.parseInt(str[0]) == 1 ) {
+        switch (Integer.parseInt(str[0])) {
+            case 1:
             day = "1st";
-        } else if (Integer.parseInt(str[0]) == 2) {
+            case 2:
             day = "2nd";
-        } else if (Integer.parseInt(str[0]) == 3) {
+            case 3:
             day = "3rd";
-        } else {
+            default:
             day = str[0] + "th";
         }
 
+        switch (str[5]) {
 
-
-        if (str[5].equals("AM")) {
+            case "AM":
             aa = "am";
-        } else {
+            default:
             aa = "pm";
         }
 

@@ -79,14 +79,11 @@ public class Duke {
                 e.printMessage();
             }
         }
-
         Ui.printBlock("Bye. Hope to see you again soon!");
     }
 
     public static void main(String[] args) {
-
         Duke duke = new Duke();
         duke.run();
-
     }
 }

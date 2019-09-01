@@ -24,10 +24,14 @@ public class TaskList {
     public void printList(){
         String line =  "\t____________________________________________________________";
         System.out.println(line);
-        System.out.println("\tHere are the Duke.tasks in your list:");
-        for(int i = 0; i < li.size(); i++){
-            int j = i+1;
-            System.out.println("\t" + j + " " + li.get(i));
+        if(!li.isEmpty()) {
+            System.out.println("\tHere are the Duke.tasks in your list:");
+            for (int i = 0; i < li.size(); i++) {
+                int j = i + 1;
+                System.out.println("\t" + j + " " + li.get(i));
+            }
+        } else {
+            System.out.println("\tThe task list is empty");
         }
         System.out.println(line);
     }

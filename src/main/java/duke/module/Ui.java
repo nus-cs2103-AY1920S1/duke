@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String DUKE_LOGO = " ____        _        \n"
-                                          + "|  _ \\ _   _| | _____ \n"
-                                          + "| | | | | | | |/ / _ \\\n"
-                                          + "| |_| | |_| |   <  __/\n"
-                                          + "|____/ \\__,_|_|\\_\\___|\n";
+                                      + "    |  _ \\ _   _| | _____ \n"
+                                      + "    | | | | | | | |/ / _ \\\n"
+                                      + "    | |_| | |_| |   <  __/\n"
+                                      + "    |____/ \\__,_|_|\\_\\___|\n";
     private static final String DUKE_HELLO = "Hello! I'm Duke!\n    What can I do for you?";
     private static final String DUKE_BYE = "Bye. Hope to see you again soon!";
     private static final String DUKE_LINE = "    _________________________________________________________________";

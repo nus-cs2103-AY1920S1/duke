@@ -1,8 +1,108 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-		ArrayList<Task> list = new ArrayList<>();
+
+	private static ArrayList<Task> list = new ArrayList<>();
+	private static String filename = "./data/duke.txt"; // todo isDone? description
+
+	private static void initialLoad() throws DukeException {
+		
+
+		String line = null; // in case file is empty
+
+		try {
+			File f = new File(filename);
+			Scanner s = new Scanner(f);
+
+			while (s.hasNext()) { // assumes duke.txt has correct format
+				boolean isDone;
+				String type = s.next();
+				int binary = Integer.valueOf(s.next());
+				if (binary == 1) {
+					isDone = true;
+				} else {
+					isDone = false;
+				}
+				String description = s.nextLine().trim();
+				loadLine(type, isDone, description);
+			}
+
+			s.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found!");
+		}
+	}
+
+	private static void loadLine(String type, boolean isDone, String description) throws DukeException {
+		switch(type) {
+		case "todo":
+		    loadTodo(isDone, description);
+		    break;
+
+		case "deadline":
+		    loadDeadline(isDone, description);
+		    break;
+
+		case "event":
+		    loadEvent(isDone, description);
+		    break;
+		}
+	}
+
+	private static Task loadTodo(boolean isDone, String description) {
+		Todo todo = new Todo(isDone, description);
+		list.add(todo);
+		return todo;
+	}
+
+	private static Task loadDeadline (boolean isDone, String description) throws DukeException {
+		int indexBy = description.indexOf("/"); // potential source of error
+		if (indexBy == -1) {
+			throw new DukeException("Put / before by!");
+		}
+		String taskDesc = description.substring(0, indexBy - 1); // start after space, end before space before /
+		String by = description.substring(indexBy + 4);
+		Deadline dead = new Deadline(isDone, taskDesc, by);
+		list.add(dead);
+		return dead;
+	}
+
+	private static Task loadEvent(boolean isDone, String description) throws DukeException {
+		int indexAt = description.indexOf("/");
+		if (indexAt == -1) {
+			throw new DukeException("Put / before at!");
+		}
+		String taskDesc = description.substring(0, indexAt - 1); // start after space, end before space before /
+		String at = description.substring(indexAt + 4);
+		Event event = new Event(isDone, taskDesc, at);
+		list.add(event);
+		return event;
+	}
+
+	/**
+	 * Writes updated todo list to file.
+	 */
+
+	private static void update(ArrayList<Task> list, String filename) throws IOException {
+		// writes into file
+		FileWriter fw = new FileWriter(filename, false); // rewrites the entire doc
+		for (Task task: list) {
+			String type = task.getType();
+			int binary = task.isDone ? 1 : 0;
+			String toWrite = type + " " + binary + " " + task.getDescription();
+			fw.write(toWrite + System.lineSeparator());
+		}
+		fw.close();
+	}
+
+    public static void main(String[] args) throws DukeException {
 		/*
 		String logo = " ____        _        \n"
 				+ "|  _ \\ _   _| | _____ \n"
@@ -11,6 +111,10 @@ public class Duke {
 				+ "|____/ \\__,_|_|\\_\\___|\n";
 		System.out.println("Hello from\n" + logo);
 		*/
+
+		initialLoad();
+		 
+		
 		System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
 		Scanner scanner = new Scanner(System.in);
@@ -28,7 +132,7 @@ public class Duke {
 						scanner.nextLine(); // just to clear whatever's left on the line
 						throw new DukeException("You have no task to do!");
 					} else if (!scanner.hasNextInt()) {
-						throw new DukeException("Which task have you done?");
+						throw new DukeException("Do include the task number that you have done!");
 					}
 					int index = scanner.nextInt(); // since scanner only took in the word done
 					Task task = list.get(index - 1);
@@ -47,45 +151,38 @@ public class Duke {
 					System.out.println("Noted. I've removed this task:\n  " + task.toString());
 					System.out.println("Now you have " + list.size() + " tasks in the list.");
 				} else {
-					Task task = new Task("");
-					String desc = "";
+					Task task;
 					String line = scanner.nextLine().trim(); // would be \n if incorrect input
 					switch (next) {
-						case "todo":
-							if (line.isEmpty())
-								throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
-							desc = line; // assuming it takes whatever remains on the line before crossing over \n
-							task = new Todo(desc);
-							break;
+					case "todo":
+						if (line.isEmpty()) {
+							throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+						}
+						task = loadTodo(false, line);
+						break;
 
-						case "deadline":
-							if (line.isEmpty())
-								throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
-							int indexBy = line.indexOf("/"); // potential source of error
-							if (indexBy == -1) {
-								throw new DukeException("Put / before by!");
-							}
-							desc = line.substring(0, indexBy - 1); // start after space, end before space before /
-							String by = line.substring(indexBy + 4);
-							task = new Deadline(desc, by);
-							break;
+					case "deadline":
+						if (line.isEmpty()) {
+							throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+						}
+						task = loadDeadline(false, line);
+						break;
 
-						case "event":
-							if (line.isEmpty())
-								throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
-							int indexAt = line.indexOf("/");
-							if (indexAt == -1) {
-								throw new DukeException("Put / before at!");
-							}
-							desc = line.substring(0, indexAt - 1); // start after space, end before space before /
-							String at = line.substring(indexAt + 4);
-							task = new Event(desc, at);
-							break;
+					case "event":
+						if (line.isEmpty()) {
+							throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+						}
+						task = loadEvent(false, line);
+						break;
 
-						default:
-							throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+					default:
+						throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 					}
-					list.add(task);
+
+					if (task == null) {
+						throw new DukeException("There is no new task!");
+					}
+
 					System.out.println("Got it. I've added this task:\n  " + task.toString());
 					System.out.println("Now you have " + list.size() + " tasks in the list.");
 				}
@@ -95,6 +192,17 @@ public class Duke {
 			next = scanner.next();
 		}
 
+		// bye invoked
+		// update duke.txt with list
+
+		try {
+			update(list, filename);
+		} catch (IOException e) {
+			System.out.println("Something went wrong: " + e.getMessage());
+		}
+
 		System.out.println("Bye. Hope to see you again soon!");
+		
+		scanner.close();
     }
 }

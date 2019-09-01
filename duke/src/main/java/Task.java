@@ -1,10 +1,26 @@
 public class Task {
     protected String description;
-    protected boolean isDone;
+    boolean isDone; // deliberate, else need overload with method for isDone
+    protected String type;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.type = "task";
+    }
+
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+        this.type = "task";
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public void markAsDone() {

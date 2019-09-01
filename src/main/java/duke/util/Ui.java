@@ -37,7 +37,6 @@ public class Ui {
      */
     public void printError(DukeException e) {
         System.out.println(horizontalLine);
-//        System.out.println("     \u2639 OOPS!!! " + e.getMessage());
         System.out.println("     :( OOPS!!! " + e.getMessage());
         System.out.println(horizontalLine);
         System.out.println();

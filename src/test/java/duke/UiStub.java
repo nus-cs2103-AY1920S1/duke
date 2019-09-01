@@ -13,10 +13,14 @@ public class UiStub extends Ui {
     }
 
     @Override
-    public void print() {
+    public void printLine(String message) {
     }
 
     @Override
-    public void print(String message) {
+    public void printToConsole() {
+    }
+
+    @Override
+    public void printToConsole(String message) {
     }
 }

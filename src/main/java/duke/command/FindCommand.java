@@ -26,15 +26,15 @@ public class FindCommand extends Command {
         List<Task> matchingTasks = tasks.findTasksByKeyword(keyword);
 
         if (matchingTasks.size() == 0) {
-            ui.print(" No matching tasks in your list.");
+            ui.printLine("No matching tasks in your list.");
             return;
         }
 
-        ui.print(" Here are the matching tasks in your list:");
+        ui.printLine("Here are the matching tasks in your list:");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
-            String output = String.format(" %d.%s", i + 1, matchingTasks.get(i));
-            ui.print(output);
+            String output = String.format("%d.%s", i + 1, matchingTasks.get(i));
+            ui.printLine(output);
         }
     }
 }

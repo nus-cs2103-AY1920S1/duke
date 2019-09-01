@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+
 /**
  * Represents the task manager.
  */
@@ -55,7 +56,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit;
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.showError(e.description);
             } finally {
                 ui.showLine();
             }

@@ -3,6 +3,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.lang.StringBuilder; //beats String for performance
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 enum TaskType {
     TODO,
     EVENT,
@@ -35,15 +41,18 @@ public class Duke {
                 case EVENT:
                 case DEADLINE:
                     user.addTask();
+                    user.updateSaveFile();
                     break;
                 case DONE:
                     user.setTaskDone();
+                    user.updateSaveFile();
                     break;
                 case LIST:
                     user.printUserInputs();
                     break;
                 case DELETE:
                     user.deleteTask();
+                    user.updateSaveFile();
                     break;
                 case BYE: //do nothing and wait to exit loop
                     break;
@@ -61,23 +70,22 @@ public class Duke {
 }
 
 class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
-    protected String typeOfTask;
+    private String typeOfTask;
 
     public Task() {}
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    String getStatusIcon() {
+        return (isDone ? "1" : "0"); //return tick or X symbols
     }
-    //cant see symbols in intellji. isDone ? "\u2713" : "\u2718"
 
-    public void markIsDone() {
+    void markIsDone() {
         this.isDone = true;
     }
 
@@ -92,8 +100,8 @@ class Task {
 
 class Deadline extends Task {
     //formatting of inputs is left in User class
-    protected String by;
-    public Deadline(String description, String by) {
+    private String by;
+    Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
@@ -108,8 +116,8 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    protected String at;
-    public Event(String description, String at) {
+    private String at;
+    Event(String description, String at) {
         super(description);
         this.at = at;
     }
@@ -124,7 +132,7 @@ class Event extends Task {
 }
 
 class ToDo extends Task {
-    public ToDo(String description) {
+    ToDo(String description) {
         super(description);
     }
     public String getDescription() {
@@ -142,7 +150,7 @@ class User {
     private ArrayList<Task> userTasks = new ArrayList<Task>();
     private int numOfTasks = 0;
 
-    public User() {
+    User() {
         System.out.println("    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
@@ -238,15 +246,15 @@ class User {
         }
     }
 
-    public int getTaskCount() {
+    int getTaskCount() {
         return this.numOfTasks;
     }
 
-    public TaskType getTaskType () {
+    TaskType getTaskType () {
         return this.currentTaskType;
     }
 
-    public void setTaskDone () {
+    void setTaskDone () {
         String temp;
         //get 2nd number
         temp = this.currentInput.substring(this.currentInput.indexOf(" "));
@@ -278,7 +286,7 @@ class User {
         }
     }
 
-    public void deleteTask() {
+    void deleteTask() {
         /*print task, delete task, decrease task count, then declare new task count. */
         String j = this.getCurrentInput();
         int taskNum = Integer.parseInt(j.substring(j.indexOf(" ")+ 1)) - 1;
@@ -308,12 +316,12 @@ class User {
         }
     }
 
-    public boolean inputIsBye() {
+    boolean inputIsBye() {
         String EXIT_COMMAND = "bye";
         return this.currentInput.equalsIgnoreCase(EXIT_COMMAND);
     }
 
-    public void printUserInputs () { //catch empty list?
+    void printUserInputs () { //catch empty list?
         int count = 1;
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
@@ -325,7 +333,34 @@ class User {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public void sayByeToUser () {
+    void updateSaveFile() {
+        String temp = this.generateListForFile();
+        this.writeStringToFile(temp);
+    }
+
+    String generateListForFile() {
+        StringBuilder sb = new StringBuilder();
+        for (Task temp : userTasks) {
+            sb.append(temp.getTaskTypeLetter()).append(" | ").append(temp.getStatusIcon()).append(" | ")
+                    .append(temp.getDescription()).append("\n");
+        }
+        return sb.toString();
+    }
+
+
+    void writeStringToFile(String temp) {
+        try {
+            File file = new File("duke.txt");
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(temp);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void sayByeToUser () {
         System.out.println("    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________\n");
@@ -333,7 +368,7 @@ class User {
 }
 
 class UnknownInputException extends Exception {
-    public UnknownInputException() {
+    UnknownInputException() {
         System.out.println("    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                 "    ____________________________________________________________");
@@ -341,7 +376,7 @@ class UnknownInputException extends Exception {
 }
 
 class BadInputException extends Exception {
-    public BadInputException(TaskType temp) {
+    BadInputException(TaskType temp) {
         String i = "";
         switch(temp) {
         case TODO:

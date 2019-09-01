@@ -23,6 +23,11 @@ public class Event extends Task {
         return this.at;
     }
 
+    /**
+     * Returns a date and time object of the specific date.
+     *
+     * @return Date and time Object.
+     */
     public LocalDateTime getLocalDateTime() {
         String dateStr = this.getDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -31,6 +36,11 @@ public class Event extends Task {
         return dateTime;
     }
 
+    /**
+     * Returns a formatted date and time for printing.
+     *
+     * @return Formatted date and time.
+     */
     public String getDateTimePrint() {
         LocalDateTime dateTime = this.getLocalDateTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

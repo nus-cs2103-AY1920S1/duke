@@ -14,18 +14,22 @@ public class WriteFile {
 
     /**
      * Construct a object to specific the location for saving of file.
+     *
      * @param filePath Directory of the file
      */
     public WriteFile(String filePath) {
         this.filePath = filePath;
     }
 
-    //get methods
     public String getPath() {
         return this.filePath;
     }
 
-    //set methods
+    /**
+     * Saves list of tasks into a text file.
+     *
+     * @param taskArr List of tasks.
+     */
     public void writeTaskToFile(ArrayList<Task> taskArr) {
         try {
             //create a new file or overwrite existing file

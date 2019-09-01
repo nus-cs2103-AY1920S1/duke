@@ -24,6 +24,12 @@ public class LoadFile {
         return this.filePath;
     }
 
+    /**
+     * Loads the tasks.txt file via the file path.
+     *
+     * @return List of tasks.
+     * @throws DukeException If file cannot be found.
+     */
     public ArrayList<Task> loadTaskFromFile() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
         try {

@@ -37,6 +37,13 @@ public class AddCommand extends Command {
         return this.dateTime;
     }
 
+    /**
+     * Creates and adds the specific type of task into the task list.
+     *
+     * @param tasks List of tasks.
+     * @param ui User Interface.
+     * @param storage Storage of tasks.txt files.
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         String cmd = this.getCommand();
         Task newTask;

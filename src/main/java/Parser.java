@@ -7,6 +7,13 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
 
+    /**
+     * Interprets the user input and returns a specific command.
+     *
+     * @param input User input.
+     * @return Specific command in relation to user input.
+     * @throws DukeException if user input fields are incorrect.
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ", 2);
 

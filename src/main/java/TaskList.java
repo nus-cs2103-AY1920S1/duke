@@ -26,6 +26,12 @@ public class TaskList {
         return this.getTaskArr().size();
     }
 
+    /**
+     * Marks a specific task as done.
+     *
+     * @param index Task index in task list.
+     * @throws DukeException If the task is already marked.
+     */
     public void markTaskDone(int index) throws DukeException {
         Task task = this.getTaskArr().get(index);
         if (!task.isDone()) {

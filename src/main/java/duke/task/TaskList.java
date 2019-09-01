@@ -40,6 +40,12 @@ public class TaskList {
         return save;
     }
 
+    /**
+     * Converts the given task into a string for saving.
+     *
+     * @param task Task to convert into a string.
+     * @return String for saving.
+     */
     private String getSaveString(Task task) {
         StringJoiner joiner = new StringJoiner("|");
         for (String field : task.getSaveList()) {
@@ -48,6 +54,12 @@ public class TaskList {
         return joiner.toString();
     }
 
+    /**
+     * Parses the given string as a task.
+     *
+     * @param line Line to parse.
+     * @return Parsed task.
+     */
     private Task parseTask(String line) {
         String[] data = line.split("\\|");
         Task task;
@@ -70,10 +82,22 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Escapes a string to use for saving a task.
+     *
+     * @param str String to escape.
+     * @return Escaped string.
+     */
     private String escape(String str) {
         return str.replace("\\", "\\\\").replace("|", "\\p");
     }
 
+    /**
+     * Unescapes an escaped string to use for reconstructing a task.
+     *
+     * @param str String to unescape.
+     * @return Original string.
+     */
     private String unescape(String str) {
         // Split the array at double backslashes, keeping trailing empty strings
         String[] parts = str.split("\\\\\\\\", -1);

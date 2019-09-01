@@ -17,6 +17,9 @@ import java.util.Scanner;
  * Deals with loading tasks from the given file and saving tasks in the same file.
  */
 public class Storage {
+    /** Default file path used if the user doesn't provide the file name. */
+    public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
+
     private File file;
 
     /**

@@ -52,7 +52,7 @@ public class TaskList {
     /**
      * Appends the specified task to the end of this task list.
      *
-     * @param task
+     * @param task the task to be appended to the end of this task list
      */
     public void add(Task task) {
         tasks.add(task);
@@ -62,7 +62,7 @@ public class TaskList {
      * Removes the task at the specified position in this task list.
      * Shifts any subsequent tasks to the left (subtracts one from their indices).
      *
-     * @param taskId the 1-based index of the task to be removed
+     * @param index the 1-based index of the task to be removed
      * @return the task that was removed from the list
      * @throws DukeException if the index is out of range (index < 0 || index >= size())
      */

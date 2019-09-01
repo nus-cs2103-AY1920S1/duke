@@ -4,13 +4,13 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.PrintStream;
+import java.io.InputStream;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
-    private Scanner scanner;
-
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
     private static final String MESSAGE_INDEX = "Here are the tasks in your list:";
@@ -19,23 +19,31 @@ public class Ui {
     private static final String MESSAGE_DELETE = "Noted. I've removed this task:";
     private static final String MESSAGE_DONE = "Nice! I've marked this task as done:";
 
+    private final Scanner in;
+    private final PrintStream out;
+
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        this(System.in, System.out);
+    }
+
+    public Ui(InputStream in, PrintStream out) {
+        this.in = new Scanner(in);
+        this.out = out;
     }
 
     public String readCommand() {
-        String command = scanner.nextLine().trim();
+        String command = in.nextLine().trim();
         return command;
     }
 
     public void showWelcome() {
-        System.out.println(MESSAGE_WELCOME);
+        out.println(MESSAGE_WELCOME);
         showLine();
     }
 
     public void showExit() {
-        System.out.println(MESSAGE_EXIT);
-        scanner.close();
+        out.println(MESSAGE_EXIT);
+        in.close();
     }
 
     /**
@@ -47,7 +55,7 @@ public class Ui {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
         } else {
-            System.out.println(MESSAGE_INDEX);
+            out.println(MESSAGE_INDEX);
             showTaskList(tasks);
         }
     }
@@ -61,7 +69,7 @@ public class Ui {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
         } else {
-            System.out.println(MESSAGE_FIND);
+            out.println(MESSAGE_FIND);
         }
         showTaskList(tasks);
     }
@@ -75,7 +83,7 @@ public class Ui {
         ArrayList<Task> allTasks = tasks.getTasks();
         for (int i = 1; i <= allTasks.size(); i++) {
             Task task = allTasks.get(i - 1);
-            System.out.printf("%d.%s\n", i, task);
+            out.printf("%d.%s\n", i, task);
         }
     }
 
@@ -86,7 +94,7 @@ public class Ui {
      * @param task the task marked as done
      */
     public void showTaskCompletionMsg(Task task) {
-        System.out.println(MESSAGE_DONE);
+        out.println(MESSAGE_DONE);
         showSingleTask(task);
     }
 
@@ -97,7 +105,7 @@ public class Ui {
      * @param tasks the list of tasks after the addition
      */
     public void showTaskAdditionMsg(Task task, TaskList tasks) {
-        System.out.println(MESSAGE_ADD);
+        out.println(MESSAGE_ADD);
         showSingleTask(task);
         showTaskTotal(tasks);
     }
@@ -109,36 +117,36 @@ public class Ui {
      * @param tasks the list of tasks after the deletion
      */
     public void showTaskDeletionMsg(Task task, TaskList tasks) {
-        System.out.println(MESSAGE_DELETE);
+        out.println(MESSAGE_DELETE);
         showSingleTask(task);
         showTaskTotal(tasks);
     }
 
     public void showLoadingError() {
-        System.out.println("An empty data file duke.txt is created in the current directory.");
+        out.println("An empty data file duke.txt is created in the current directory.");
     }
 
     public void showError(String message) {
-        System.out.printf("\u2639 OOPS!!! %s\n", message); //show frowning face
+        out.printf("\u2639 OOPS!!! %s\n", message); //show frowning face
     }
 
     /**
      * Prints a platform independent line separator.
      */
     public void showLine() {
-        System.out.print(System.lineSeparator());
+        out.print(System.lineSeparator());
     }
 
     private void showNoTasksMsg() {
-        System.out.println("There are currently no tasks in your list.");
+        out.println("There are currently no tasks in your list.");
     }
 
     private void showSingleTask(Task task) {
-        System.out.printf("  %s\n", task);
+        out.printf("  %s\n", task);
     }
 
     private void showTaskTotal(TaskList tasks) {
         int total = tasks.size();
-        System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+        out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
     }
 }

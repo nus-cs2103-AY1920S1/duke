@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidTaskDukeException;
+
 /**
  * Represents an Event task.
  */

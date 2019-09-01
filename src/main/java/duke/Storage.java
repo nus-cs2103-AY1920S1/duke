@@ -1,3 +1,14 @@
+package duke;
+
+import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidTaskDukeException;
+import duke.exception.LoadingErrorDukeException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +35,7 @@ public class Storage {
      * @return TaskList loaded from disk.
      * @throws LoadingErrorDukeException If no file found.
      */
-    public List<Task> loadList() throws LoadingErrorDukeException{
+    public List<Task> loadList() throws LoadingErrorDukeException {
         List<Task> loadedList = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(filePath);

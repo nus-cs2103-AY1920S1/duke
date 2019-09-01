@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents an exception when Task is created without input.
  */

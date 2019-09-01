@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidTaskDukeException;
+
 /**
  * Represents a Deadline task.
  */
@@ -15,7 +20,7 @@ public class Deadline extends Task {
      * @throws EmptyTaskDukeException If name is empty.
      * @throws InvalidTaskDukeException If byWhen input does not follow DD/MM/YYYY HHMM.
      */
-    public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException  {
+    public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException {
         super(name);
         if (name == null) {
             throw new EmptyTaskDukeException("deadline");

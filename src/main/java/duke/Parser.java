@@ -1,3 +1,22 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.PrintListCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+
+import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidInputDukeException;
+import duke.exception.InvalidTaskDukeException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.Arrays;
 import java.util.Scanner;
 

@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents an exception when Task has incorrect input. Used when Deadline or Event has incorrect DateTime format.
  */

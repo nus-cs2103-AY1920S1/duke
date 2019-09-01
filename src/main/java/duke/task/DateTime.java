@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents Date and Time of an Event or Deadline.
  */

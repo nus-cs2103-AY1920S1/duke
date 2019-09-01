@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
+import duke.task.Task;
+
 /**
  * Represents a DeleteCommand which deletes Tasks from the TaskList.
  */

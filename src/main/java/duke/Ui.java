@@ -1,3 +1,9 @@
+package duke;
+
+import duke.exception.EmptyTaskDukeException;
+import duke.exception.InvalidInputDukeException;
+import duke.exception.InvalidTaskDukeException;
+
 import java.util.Scanner;
 
 /**

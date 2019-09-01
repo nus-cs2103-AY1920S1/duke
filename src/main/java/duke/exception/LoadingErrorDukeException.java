@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Represents exception when failed to load saved tasks.
  */

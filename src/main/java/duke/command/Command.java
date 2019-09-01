@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 /**
  * Represents a command that handles requests in Duke.
  */

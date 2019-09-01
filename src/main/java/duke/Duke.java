@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.Command;
+
+import duke.exception.LoadingErrorDukeException;
+
 /**
  * Represents the Duke bot. Allows for easy and organised management of tasks.
  */

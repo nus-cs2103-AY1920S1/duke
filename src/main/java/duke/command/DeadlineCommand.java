@@ -17,7 +17,7 @@ public class DeadlineCommand extends AddCommand {
             String[] deadlineArr = getDesc().split("/by");
             Deadline deadlineTask = Deadline.of(deadlineArr[0], deadlineArr[1]);
             taskList.addTask(deadlineTask);
-//            storage.store(deadlineTask);
+            // storage.store(deadlineTask);
             ui.showAddedTask(deadlineTask.toString(), taskList.getNumTasks());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! Please follow correct format of \"deadline [description] /by [date]\".");

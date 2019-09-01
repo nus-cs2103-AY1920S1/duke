@@ -17,7 +17,7 @@ public class EventCommand extends AddCommand {
             String[] eventArr = getDesc().split("/at");
             Event eventTask = Event.of(eventArr[0], eventArr[1]);
             taskList.addTask(eventTask);
-//            storage.store(eventTask);
+            // storage.store(eventTask);
             ui.showAddedTask(eventTask.toString(), taskList.getNumTasks());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! Please follow correct format of \"event [description] /at [date]\".");

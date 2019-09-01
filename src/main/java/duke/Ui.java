@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class Ui {
     private Scanner sc;
 
@@ -12,7 +15,7 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message during startup
+     * Prints welcome message during startup.
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -29,39 +32,48 @@ public class Ui {
     }
 
     /**
-     * Prints farewell message when "bye" is entered
+     * Prints farewell message when "bye" is entered.
      */
     public void showExit() {
         printStandard("Bye. Hope to see you again soon!");
     }
 
+    /**
+     *
+     */
     public void showLoadingError() {
 
     }
 
     /**
-     * Prints the standard line output for visual differentiation between user input and system output
+     * Prints the standard line output for visual differentiation between user input and system output.
      */
     public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
     /**
-     * Reads a line of user input via a Scanner variable whenever the "enter" key is pressed
+     * Reads a line of user input via a Scanner variable whenever the "enter" key is pressed.
+     *
+     * @return
      */
     public String readCommand() {
         return sc.nextLine();
     }
 
     /**
-     * Prints the error message of the DukeException being thrown
+     * Prints the error message of the DukeException being thrown.
+     *
+     * @param s
      */
     public void showError(String s) {
         printStandard(s);
     }
 
     /**
-     * Prints all matching tasks to the keyword
+     * Prints all matching tasks to the keyword.
+     *
+     * @param matches
      */
     public void showMatches(ArrayList<String> matches) {
         printStandard("Here are the matching tasks in your list:");
@@ -71,7 +83,10 @@ public class Ui {
     }
 
     /**
-     * Prints the most recent task that was added
+     * Prints the most recent task that was added.
+     *
+     * @param task
+     * @param lstSize
      */
     public void showAddedTask(String task, int lstSize) {
         printStandard("Got it. I've added this task:");
@@ -80,7 +95,10 @@ public class Ui {
     }
 
     /**
-     * Prints the most recent task that was deleted
+     * Prints the most recent task that was deleted.
+     *
+     * @param task
+     * @param lstSize
      */
     public void showDeletedTask(String task, int lstSize) {
         printStandard("Noted. I've removed this task:");
@@ -89,7 +107,9 @@ public class Ui {
     }
 
     /**
-     * Prints the most recent task that was marked as done
+     * Prints the most recent task that was marked as done.
+     *
+     * @param task
      */
     public void showDoneTask(String task) {
         printStandard("Nice! I've marked this task as done:");
@@ -97,14 +117,18 @@ public class Ui {
     }
 
     /**
-     * Prints the task list size for both add & delete
+     * Prints the task list size for both add & delete.
+     *
+     * @param size
      */
     private void showTaskSize(int size) {
         printStandard(String.format("Now you have %d tasks in the list.", size));
     }
 
     /**
-     * Prints all the tasks in the TaskList and numbers them
+     * Prints all the tasks in the TaskList and numbers them.
+     *
+     * @param taskLst
      */
     public void showAllTasks(LinkedList<String> taskLst) {
         printStandard("Here are the tasks in your list:");
@@ -114,7 +138,9 @@ public class Ui {
     }
 
     /**
-     * Converts and prints any given String into the correct output format
+     * Converts and prints any given String into the correct output format.
+     *
+     * @param string
      */
     private void printStandard(String string) {
         System.out.println("     " + string);

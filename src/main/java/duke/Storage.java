@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class Storage {
     private File file;
 
@@ -15,10 +18,10 @@ public class Storage {
     }
 
     /**
-     * Reads the file with the given filePath and saves it as a LinkedList<String> to be
+     * Reads the file with the given filePath and saves it as a LinkedList to be
      * processed by the TaskList. Creates the relevant directory and files if none are present.
      *
-     * @return LinkedList<String> which contains the list of tasks in the saved format
+     * @return LinkedList which contains the list of tasks in the saved format
      * @throws DukeException
      */
     public LinkedList<String> load() throws DukeException {
@@ -31,7 +34,6 @@ public class Storage {
                 lst.addLast(next);
             }
         } catch (Exception e) {
-//            e.printStackTrace();
             file.getParentFile().mkdir();
             throw new DukeException("File not found");
         }
@@ -40,10 +42,10 @@ public class Storage {
     }
 
     /**
-     * Saves the LinkedList<String> element by element separated by a lineSeparator
+     * Saves the LinkedList element by element separated by a lineSeparator
      * into the given filePath.
      *
-     * @param lst The LinkedList<String> to be saved
+     * @param lst The LinkedList to be saved
      * @throws DukeException
      */
     public void save(LinkedList<String> lst) throws DukeException {

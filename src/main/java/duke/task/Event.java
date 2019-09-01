@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ *
+ */
 public class Event extends DatedTask {
 
     public static Event of(String description, String dateTime) throws DukeException {

@@ -9,9 +9,17 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+/**
+ *
+ */
 public class TaskList {
     private LinkedList<Task> lst;
 
+    /**
+     *
+     * @param list
+     * @throws DukeException
+     */
     public TaskList(LinkedList<String> list) throws DukeException {
         lst = new LinkedList<>();
         for (String s : list) {
@@ -41,6 +49,8 @@ public class TaskList {
                 }
                 lst.addLast(event);
                 break;
+            default:
+                break;
             }
         }
     }
@@ -49,10 +59,19 @@ public class TaskList {
         lst = new LinkedList<>();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumTasks() {
         return lst.size();
     }
 
+    /**
+     *
+     * @param keyword
+     * @return
+     */
     public ArrayList<String> findTask(String keyword) {
         ArrayList<String> matches = new ArrayList<>();
         for (Task task : lst) {
@@ -64,20 +83,39 @@ public class TaskList {
         return matches;
     }
 
+    /**
+     *
+     * @param task
+     */
     public void addTask(Task task) {
         lst.addLast(task);
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public String deleteTask(int index) {
         return lst.remove(index).toString();
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public String doneTask(int index) {
         Task task = lst.get(index);
         task.markAsDone();
         return task.toString();
     }
 
+    /**
+     *
+     * @param isSaveFormat
+     * @return
+     */
     public LinkedList<String> tasksToStringList(boolean isSaveFormat) {
         LinkedList<String> stringLst = new LinkedList<>();
         int i = 1;

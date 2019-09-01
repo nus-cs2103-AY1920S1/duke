@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ *
+ */
 public class Deadline extends DatedTask {
 
     public static Deadline of(String description, String date) throws DukeException {

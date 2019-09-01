@@ -6,11 +6,20 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+/**
+ * Class used to create and store Event tasks.
+ * @author Lim Daekoon
+ */
 public class Event extends Task {
 
     private Date at;
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
+    /**
+     * Constructs a new Event object with 'done' status set to false.
+     * @param task Description of the task.
+     * @param at Time this event occurs, in String form
+     */
     public Event(String task, String at) throws DukeException {
         super(task);
         try {
@@ -20,6 +29,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Constructs a new Event object with the 'done' status passed in as a parameter.
+     * Used when loading data from saved file.
+     * @param task Description of the task.
+     * @param done Status of the task.
+     * @param at Time this event occurs, in String form.
+     */
     public Event(String task, String done, String at) throws DukeException {
         super(task);
         try {
@@ -32,6 +48,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Converts this Event object into storage string form.
+     * @return Data of this object, in storage string form.
+     */
     public String toStorageString() {
         String output = "E|";
         if (super.isDone) {

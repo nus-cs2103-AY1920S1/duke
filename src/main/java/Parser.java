@@ -36,6 +36,9 @@ public class Parser {
         } else if (inputArr[0].equals("delete")) {
             type = Actions.DELETE;
             command = new DeleteCommand(input);
+        } else if (inputArr[0].equals("find")) {
+            type = Actions.FIND;
+            command = new FindCommand(input);
         } else {
             type = Actions.NONE;
         }

@@ -52,6 +52,9 @@ public class Task implements Serializable {
      *
      * @return a string representation of a Task object.
      */
+    public boolean contains(String s) {
+        return task.contains(s);
+    }
     @Override
     public String toString() {
         String logo;

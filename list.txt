@@ -1,2 +1,4 @@
-     1. [T][✗] that
+     1. [D][✗] t (by: t)
+     2. [D][✗] book (by: t)
+     3. [E][✗] read book (at: now)
      

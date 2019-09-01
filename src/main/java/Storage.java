@@ -14,7 +14,7 @@ public class Storage {
     /**
      * This method is used to load the task list from disk.
      *
-     * @return ArrayList<Task> task list
+     * @return list of tasks
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Storage {
      * @return Nothing
      */
     public void updateList(ArrayList<Task> list) {
-        File file = new File("C:\\duke\\src\\main\\java\\data\\duke.txt");
+        //File file = new File("C:\\duke\\src\\main\\java\\data\\duke.txt");
         try (PrintWriter out = new PrintWriter(file)) {
             for (int i = 1; i <= list.size(); i++) {
                 Task t = list.get(i - 1);
@@ -59,9 +59,9 @@ public class Storage {
                     out.println(t.symbol + " / " + (t.isDone ? 1 : 0) + " / " + t.getDescription() + " / " + t.getExtraInfo());
                 }
             }
-            out.close();
         } catch (FileNotFoundException e) {
-
+            e.printStackTrace();
         }
+
     }
 }

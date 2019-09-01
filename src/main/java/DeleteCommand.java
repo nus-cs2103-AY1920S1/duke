@@ -7,6 +7,12 @@ public class DeleteCommand extends Command {
         this.taskNumToDelete = taskNumToDelete;
     }
 
+    /**
+     * This method is used to delete one item from the task list
+     * after user request.
+     *
+     * @return duke response after deletion
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.deleteTask(taskNumToDelete);
         storage.updateList(tasks.getList());

@@ -1,23 +1,34 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Deadline extends Task {
 
     protected String by;
+    LocalDateTime date1;
 
-
+    /**
+     * This is a constructor for Deadline.
+     * @param description description of task
+     * @param by due date of deadline
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
         super.symbol = "D";
     }
-
-    public Date getDate() throws ParseException {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy hhmm");
-        Date date = format.parse(by);
-        return date;
+    /**
+     * This method is used to return the task list.
+     *
+     * @return date
+     */
+    public LocalDateTime getDate() throws ParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        date1 = date1.parse(by,formatter);
+        return date1;
     }
 
     @Override

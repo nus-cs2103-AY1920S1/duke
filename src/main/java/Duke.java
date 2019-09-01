@@ -19,12 +19,12 @@ import java.util.ArrayList;
  * The Duke program implements an application that
  * acts like a digital notebook for the user.
  *
- * @author  Calvin
+ * @author Calvin
  * @version 1.0
- * @since   2019-08-20
+ * @since 2019-08-20
  */
 
-public class Duke extends Application{
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -34,17 +34,19 @@ public class Duke extends Application{
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-   // private Image user = new Image(this.getClass().getResourceAsStream("/user.png"));
-   // private Image dukebot = new Image(this.getClass().getResourceAsStream("/pikachu.png"));
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    // private Image dukebot = new Image(this.getClass().getResourceAsStream("/pikachu.png"));
+    //private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
 
-    public Duke(){}
+    public Duke() {
+    }
 
 
     /**
      * This constructor takes in the filePath and initiates the necessary
      * classes required.
+     *
      * @param filePath the local directory of the file
      */
     public Duke(String filePath) {
@@ -80,6 +82,7 @@ public class Duke extends Application{
 
     /**
      * This is the main method which makes use of run method.
+     *
      * @param args Unused.
      * @return Nothing.
      */
@@ -89,11 +92,9 @@ public class Duke extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) {
         //Step 1. Setting up required components
 
-
-        //storage.updateList(tasks);
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -115,7 +116,6 @@ public class Duke extends Application{
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-
         mainLayout.setPrefSize(400.0, 600.0);
 
         scrollPane.setPrefSize(385, 535);
@@ -135,7 +135,7 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -167,6 +167,7 @@ public class Duke extends Application{
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -174,7 +175,6 @@ public class Duke extends Application{
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -195,7 +195,6 @@ public class Duke extends Application{
     }
 
 
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -205,9 +204,10 @@ public class Duke extends Application{
         //return Parser.parse(input).execute(tasks, ui, storage);
         Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
         //return " " + (storage==null);
-        if (!input.contains("bye"))
+        if (!input.contains("bye")) {
             return Parser.parse(input).execute(duke.tasks, duke.ui, duke.storage);
-        else
+        } else {
             return "Goodbye!";
+        }
     }
 }

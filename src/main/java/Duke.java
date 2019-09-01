@@ -4,16 +4,24 @@ import duke.task.TaskList;
 import duke.storage.Storage;
 import duke.exception.DukeException;
 import duke.parser.Parser;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * This is the main Duke class
  */
 
-public class Duke {
+public class Duke extends Application {
 
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
+
+    public Duke() {
+        new Duke("C:/Users/Low Cheng Yi/Desktop/CS2103/duke/src/data/tasks.txt").run();
+    }
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -25,6 +33,15 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     public void run() {

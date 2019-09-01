@@ -9,8 +9,9 @@ import seedu.duke.exception.DukeNoSuchCommandException;
 /**
  * Main class of this project.
  * Personal assistant bot to help you keep track of tasks.
+ * To run this program, create the Duke object, and use the .run() method.
+ * @author Lim Daekoon
  */
-
 public class Duke {
 
     private Ui ui;
@@ -18,6 +19,9 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Creates a new Duke object to run.
+     */
     public Duke() {
 
         ui = new Ui();
@@ -42,6 +46,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
 
         while (!parser.getType().equals("bye")) {
@@ -83,6 +90,9 @@ public class Duke {
         Ui.printBlock("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Default static main method of this project.
+     */
     public static void main(String[] args) {
 
         Duke duke = new Duke();

@@ -24,10 +24,18 @@ public class Storage {
     private BufferedWriter bufferedWriter;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
+    /**
+     * Constructs the Storage object with the directory of save file.
+     * @param dir Directory of the save file.
+     */
     public Storage(String dir) {
         directory = dir;
     }
 
+    /**
+     * Loads the file from the save file.
+     * @return TaskList object that has everything in the save file loaded in.
+     */
     public TaskList load() {
         try {
             fileReader = new FileReader(directory);
@@ -91,6 +99,10 @@ public class Storage {
         return new TaskList(taskList);
     }
 
+    /**
+     * Saves the current TaskList into the save file.
+     * @param taskListObject TaskList object to be saved.
+     */
     public void save(TaskList taskListObject) throws DukeSaveFailedException {
         try {
             fileWriter = new FileWriter(directory);

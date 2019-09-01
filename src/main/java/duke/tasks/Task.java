@@ -68,6 +68,10 @@ public class Task{
         return "Saving";
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Converts a string to a date object
      * @param dateTime the date and time that needs to be converted

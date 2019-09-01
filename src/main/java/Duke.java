@@ -101,6 +101,17 @@ public class Duke {
                     tasks.remove(taskNumb);
                 }
 
+            } else if(firstWord.equals("find")){
+                String searchWord = split.getDesc().get(0);
+                LinkedList<Task> listWord = new LinkedList<>();
+                TaskList containsWord = new TaskList(listWord);
+                for(int i = 0; i < tasks.size(); i++){
+                    Task taskInList = tasks.getTask(i);
+                    if(taskInList.getDescription().contains(searchWord)){
+                        containsWord.add(taskInList);
+                    }
+                }
+                containsWord.printList();
             } else {
                 String actual =  "";
                 Task newTask = null;

@@ -8,7 +8,6 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    public static int total = 0;
 
     /**
      * Constructor for Task object. Takes in task description
@@ -17,7 +16,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        total++;
     }
 
     /**

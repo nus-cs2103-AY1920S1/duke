@@ -83,7 +83,7 @@ public class Ui {
                 System.setOut(new PrintStream(buffer));
                 System.out.println("___________________________________");
                 System.out.println("Got it. I've added this task:\n" + newTask);
-                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("Now you have " + currentTaskList.getNoOfTask() + " tasks in the list.");
                 System.out.println("___________________________________");
                 storage.writeToFile(newTask + "\n");
                 System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -113,7 +113,7 @@ public class Ui {
                 System.setOut(new PrintStream(buffer));
                 System.out.println("___________________________________");
                 System.out.println("Got it. I've added this task:\n" + newTask);
-                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("Now you have " + currentTaskList.getNoOfTask() + " tasks in the list.");
                 System.out.println("___________________________________");
                 storage.writeToFile(newTask + "\n");
                 System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -143,7 +143,7 @@ public class Ui {
                 System.setOut(new PrintStream(buffer));
                 System.out.println("___________________________________");
                 System.out.println("Got it. I've added this task:\n" + newTask);
-                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("Now you have " + currentTaskList.getNoOfTask() + " tasks in the list.");
                 System.out.println("___________________________________");
                 storage.writeToFile(newTask + "\n");
                 System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -174,8 +174,7 @@ public class Ui {
                 Task currentTask = currentTaskList.getTask(taskNum - 1);
                 currentTaskList.removeTask(taskNum - 1);
                 System.out.println(currentTask);
-                Task.total--;
-                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("Now you have " + currentTaskList.getNoOfTask() + " tasks in the list.");
                 System.out.println("___________________________________");
                 storage.updateTaskToFile(currentTaskList.getEntireList());
                 System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));

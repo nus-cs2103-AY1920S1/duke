@@ -28,7 +28,6 @@ public class Storage {
                 if (firstWord.equals("T") && oneLine.length == 3) {
                     myList.add(new Todo(oneLine[2], oneLine[1]));
                 } else if (firstWord.equals("D") && oneLine.length == 4) {
-                    System.out.println(oneLine[2] + "; " + oneLine[3] + "; " + oneLine[1]);
                     myList.add(new Deadline(oneLine[2], oneLine[3], oneLine[1]));
                 } else if (firstWord.equals("E") && oneLine.length == 4) {
                     myList.add(new Event(oneLine[2], oneLine[3], oneLine[1]));

@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Obtain list of tasks to print, perform Ui display and save to hard disk
+     * Obtain list of tasks to print, perform Ui display and save to hard disk.
      *
      * @param list    List containing all tasks.
      * @param ui      Ui interface of duke.

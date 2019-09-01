@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 /**
- * Represents a task list
+ * Represents a task list.
  * Contains functions to interact with task list
  */
 public class TaskList {
@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Add new task to task list
+     * Add new task to task list.
      *
      * @param task To add to the task list.
      */
@@ -52,7 +52,7 @@ public class TaskList {
     /**
      * Get list of print format of task list.
      *
-     * @return ArrayList<String> List of strings representing task.
+     * @return ArrayList [String] List of strings representing task.
      */
     public ArrayList<String> printList() {
         ArrayList<String> temp = new ArrayList<>();
@@ -94,6 +94,12 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Set task as done given index.
+     *
+     * @param keyword String of keyword to search in tasks.
+     * @return ArrayList of String to print for tasks containing keyword.
+     */
     public ArrayList<String> find(String keyword) {
         ArrayList<String> listFound = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {

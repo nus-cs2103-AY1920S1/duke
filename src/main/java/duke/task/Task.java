@@ -10,11 +10,20 @@ public class Task {
     protected String taskDescription;
     protected boolean isDone;
 
+    /**
+     * Constructor to create Task object.
+     */
     public Task() {
         this.taskDescription = "";
         this.isDone = false;
     }
 
+    /**
+     * Constructor to create Task object.
+     *
+     * @param taskDescription String input of command from user.
+     * @param isDone          Boolean indicating if task is completed.
+     */
     public Task(String taskDescription, boolean isDone) throws NullPointerException {
         this.isDone = isDone;
 
@@ -24,6 +33,13 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
+    /**
+     * Constructor to create Event task object.
+     *
+     * @param taskDescription String input of command from user.
+     * @param isDone          Boolean indicating if task is completed.
+     * @param taskType        Character of first letter of task.
+     */
     public Task(char taskType, String taskDescription, boolean isDone) throws NullPointerException {
         this.isDone = isDone;
         this.taskType = taskType;
@@ -51,7 +67,7 @@ public class Task {
      * @return char icon.
      */
     public char getIcon() {
-        return isDone ? '\u2713' : '\u274C';
+        return isDone ? '✓' : '❌';
     }
 
     /**

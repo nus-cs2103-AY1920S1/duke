@@ -61,7 +61,8 @@ public class Deadline extends Task {
      */
     @Override
     public String printTask() {
-        return "[" + getFirstCharTask() + "][" + getIcon() + "] " + getTaskDescription() + " (by: " + getGivenTime() + ")";
+        return "[" + getFirstCharTask()
+               + "][" + getIcon() + "] " + getTaskDescription() + " (by: " + getGivenTime() + ")";
     }
 
     /**

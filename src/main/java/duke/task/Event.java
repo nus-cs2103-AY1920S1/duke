@@ -67,7 +67,7 @@ public class Event extends Task {
     }
 
     /**
-     * Set time for given deadline,
+     * Set time for given deadline.
      *
      * @param time String representation of time.
      * @throws ParseException If format of time in string does not match specified format.
@@ -77,7 +77,7 @@ public class Event extends Task {
     }
 
     /**
-     * Get time for given deadline
+     * Get time for given deadline.
      *
      * @return String of formatted time.
      */

@@ -20,25 +20,25 @@ public class Ui {
      * Display welcome message.
      */
     public void showWelcome() {
-        final String UI_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(UI_GREETING);
+        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+        System.out.println(greeting);
     }
 
     /**
      * Display line.
      */
     public void showLine() {
-        final String UI_HORIZONTAL_LINE = "____________________________________________________________";
-        System.out.println(UI_HORIZONTAL_LINE);
+        final String horizontalLine = "____________________________________________________________";
+        System.out.println(horizontalLine);
     }
 
     /**
      * Display bye message.
      */
     public void showBye() {
-        final String UI_GOODBYE = "Bye. Hope to see you again soon!";
+        final String goodbye = "Bye. Hope to see you again soon!";
         sc.close();
-        System.out.println(UI_GOODBYE);
+        System.out.println(goodbye);
     }
 
     /**
@@ -49,20 +49,19 @@ public class Ui {
     }
 
     /**
-     * Read user input from system input
+     * Read user input from system input.
      *
      * @return String User input.
      */
     public String readCommand() {
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     /**
      * Display added task message.
      */
     public void showAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
-        char icon = isDone ? '\u2713' : '\u274C';
+        char icon = isDone ? '✓' : '❌';
         System.out.println("Got it. I've added this task: ");
         System.out.println("\t[" + firstAlphabet + "][" + icon + "] " + taskDescription);
         System.out.println("Now you have " + numberOfItems + " in the list.");
@@ -116,6 +115,9 @@ public class Ui {
         System.out.println("Command not found. Please check command again.");
     }
 
+    /**
+     * Display list of tasks found with matching keyword.
+     */
     public void showMatchingTaskList(ArrayList<String> listFound) {
         if (listFound.size() == 0) {
             System.out.println("No matching result from your list.");

@@ -6,12 +6,15 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a done command
+ * Represents a done command.
  * To set task from task list as done, perform Ui task and save updated list to hard disk.
  */
 public class DoneCommand extends Command {
     private int taskNumberDone;
 
+    /**
+     * Constructor for DoneCommand.
+     */
     public DoneCommand(String command, Task pending, int taskNumberDone) {
         super(command, pending);
 
@@ -19,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Set task from task list as done, perform Ui display and save to hard disk
+     * Set task from task list as done, perform Ui display and save to hard disk.
      *
      * @param list    List containing all tasks.
      * @param ui      Ui interface of duke.

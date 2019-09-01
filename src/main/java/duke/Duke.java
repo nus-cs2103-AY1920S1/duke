@@ -23,7 +23,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for class Duke
+     * Constructor for class Duke.
      *
      * @param filePath String of file path to read.
      */

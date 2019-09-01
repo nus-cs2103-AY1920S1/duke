@@ -20,9 +20,8 @@ public abstract class Command {
     /**
      * Constructor for class Duke.
      *
-     * @param command String command input from user.
+     * @param command     String command input from user.
      * @param pendingTask Task object from information given by user.
-     *
      */
     public Command(String command, Task pendingTask) {
         try {

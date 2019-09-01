@@ -81,7 +81,7 @@ public class Parser {
         if (type == CommandType.ADD) {
             if (commandName.equals("TODO")) {
                 task = new ToDo(commandName.toUpperCase().charAt(0),
-                        input.substring("Todo".length()).trim(), false);
+                input.substring("Todo".length()).trim(), false);
 
             } else if (commandName.equals("DEADLINE")) {
                 String subsequent = input.substring("Deadline".length());
@@ -98,7 +98,7 @@ public class Parser {
                 String date = subsequent.substring(lastIndexSlash + 1);
 
                 String taskInfo = subsequent.substring(0, lastIndexSlash
-                        + "at ".length() + 1).trim();
+                                                          + "at ".length() + 1).trim();
                 task = new Event(commandName.toUpperCase().charAt(0), taskInfo, false, date);
             }
             command = new AddCommand(commandType, task);

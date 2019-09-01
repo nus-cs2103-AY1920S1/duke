@@ -7,7 +7,10 @@ import cs2103t.duke.exception.EmptyDescriptionException;
  * whether it is completed.
  */
 public class Todo extends Task {
-    private Todo() {}
+    private Todo() {
+
+    }
+
     private Todo(String descr, boolean completed) {
         super.description = descr;
         super.completed = completed;
@@ -18,11 +21,12 @@ public class Todo extends Task {
      * Creates new todo task with the description.
      * @param descr description of todo.
      * @return new todo task.
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException if description is empty.
      */
     public static Todo create(String descr) throws EmptyDescriptionException {
-        if (descr.equals(""))
+        if (descr.equals("")) {
             throw new EmptyDescriptionException("a todo");
+        }
 
         Todo newTask = new Todo(descr.trim(), false);
         return newTask;

@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -104,5 +105,18 @@ public class TaskList {
             }
         }
         return new TaskList(newList);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task task = tasks.get(i - 1);
+            sb.append(String.format("%d.%s", i, task));
+            if (i != tasks.size()) {
+                sb.append(Ui.LS);
+            }
+        }
+        return sb.toString();
     }
 }

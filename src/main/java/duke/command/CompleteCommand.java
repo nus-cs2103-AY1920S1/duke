@@ -1,10 +1,13 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+import static duke.ui.Message.MESSAGE_DONE;
+import static duke.ui.Message.concatLines;
 
 /**
  * Mark a task as done.
@@ -17,10 +20,10 @@ public class CompleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.get(this.taskId);
         task.markAsDone();
         storage.save(tasks);
-        ui.showTaskCompletionMsg(task);
+        return concatLines(MESSAGE_DONE, task.getIndentedFormat());
     }
 }

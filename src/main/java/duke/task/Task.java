@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import static duke.ui.Ui.INDENT;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -45,5 +47,9 @@ public abstract class Task {
 
     protected int getStatusCode() {
         return isDone ? 1 : 0;
+    }
+
+    public String getIndentedFormat() {
+        return INDENT + this.toString();
     }
 }

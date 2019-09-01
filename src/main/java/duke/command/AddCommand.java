@@ -1,13 +1,17 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
+
+import static duke.ui.Message.MESSAGE_ADD;
+import static duke.ui.Message.concatLines;
+import static duke.ui.Message.getTaskTotalMsg;
 
 /**
  * Adds a task to the task list.
@@ -28,7 +32,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (taskType) {
         case "todo":
             this.newTask = new Todo(taskParams);
@@ -64,6 +68,6 @@ public class AddCommand extends Command {
         }
         tasks.add(newTask);
         storage.save(tasks);
-        ui.showTaskAdditionMsg(newTask, tasks);
+        return concatLines(MESSAGE_ADD, newTask.getIndentedFormat(), getTaskTotalMsg(tasks));
     }
 }

@@ -6,6 +6,10 @@ import duke.parser.CommandParser;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import static duke.ui.Message.MESSAGE_LOADING_ERROR;
+import static duke.ui.Message.MESSAGE_WELCOME;
+import static duke.ui.Message.formatErrorMsg;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -21,7 +25,7 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.printResponse(MESSAGE_LOADING_ERROR);
             this.tasks = new TaskList();
         }
     }
@@ -30,9 +34,14 @@ public class Duke {
      * Generate a response to user input.
      */
     public String getResponse(String input) {
-        //TODO: implement getResponse
-        Command c = CommandParser.parse(input);
-        return "Duke heard: " + input;
+        // TODO: Terminate the program when ExitCommand is triggered
+        try {
+            String fullCommand = input;
+            Command c = CommandParser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return formatErrorMsg(e.getMessage());
+        }
     }
 
     /**
@@ -43,16 +52,17 @@ public class Duke {
     }
 
     private void run() {
-        ui.showWelcome();
+        ui.printResponse(MESSAGE_WELCOME);
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = CommandParser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                ui.printResponse(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.printResponse(formatErrorMsg(e.getMessage()));
             } finally {
                 ui.showLine();
             }

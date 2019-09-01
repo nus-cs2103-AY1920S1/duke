@@ -18,8 +18,8 @@ public class ByeCommand extends Command {
     /**
      * Shows Ui screen of bye.
      *
-     * @param list  List containing all tasks.
-     * @param ui Ui interface of duke.
+     * @param list    List containing all tasks.
+     * @param ui      Ui interface of duke.
      * @param storage Storage interface.
      */
     @Override

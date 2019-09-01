@@ -18,7 +18,9 @@ public class Task {
     public Task(String taskDescription, boolean isDone) throws NullPointerException {
         this.isDone = isDone;
 
-        if (taskDescription == null) throw new NullPointerException();
+        if (taskDescription == null) {
+            throw new NullPointerException();
+        }
         this.taskDescription = taskDescription;
     }
 
@@ -26,12 +28,15 @@ public class Task {
         this.isDone = isDone;
         this.taskType = taskType;
 
-        if (taskDescription == null) throw new NullPointerException();
+        if (taskDescription == null) {
+            throw new NullPointerException();
+        }
         this.taskDescription = taskDescription;
     }
 
-    /** Returns string representation of task,
-     *  in terms of initial, icon of done, task description.
+    /**
+     * Returns string representation of task,
+     * in terms of initial, icon of done, task description.
      *
      * @return String representation of task.
      */
@@ -39,7 +44,8 @@ public class Task {
         return "[" + getFirstCharTask() + "][" + getIcon() + "] " + getTaskDescription();
     }
 
-    /** Returns char icon.
+    /**
+     * Returns char icon.
      * Returns tick if isDone is true, else returns cross.
      *
      * @return char icon.
@@ -48,14 +54,16 @@ public class Task {
         return isDone ? '\u2713' : '\u274C';
     }
 
-    /** Indicate that task is done.
+    /**
+     * Indicate that task is done.
      * Set isDone true when function is called.
      */
     public void setIsDone() {
         this.isDone = true;
     }
 
-    /** Returns char of first letter in task name.
+    /**
+     * Returns char of first letter in task name.
      *
      * @return char of first letter in task name.
      */
@@ -63,7 +71,8 @@ public class Task {
         return taskType;
     }
 
-    /** Get isDone,
+    /**
+     * Get isDone,
      * indicating done status of the task.
      *
      * @return boolean true if done, else false.
@@ -72,7 +81,8 @@ public class Task {
         return isDone;
     }
 
-    /** Get task description for task.
+    /**
+     * Get task description for task.
      *
      * @return String task description.
      */
@@ -80,7 +90,8 @@ public class Task {
         return taskDescription;
     }
 
-    /** Set task description of task.
+    /**
+     * Set task description of task.
      *
      * @param input task description from user.
      */

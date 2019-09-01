@@ -24,7 +24,8 @@ public class TaskList {
         this.taskCount = list.size();
     }
 
-    /** Add new task to task list
+    /**
+     * Add new task to task list
      *
      * @param task To add to the task list.
      */
@@ -32,13 +33,15 @@ public class TaskList {
         taskList.add(task);
     }
 
-    /** Increase task count of task list.
+    /**
+     * Increase task count of task list.
      */
     public void increaseTaskCount() {
         taskCount++;
     }
 
-    /** Get task count of task list.
+    /**
+     * Get task count of task list.
      *
      * @return int Number of tasks in task list.
      */
@@ -46,7 +49,8 @@ public class TaskList {
         return taskCount;
     }
 
-    /** Get list of print format of task list.
+    /**
+     * Get list of print format of task list.
      *
      * @return ArrayList<String> List of strings representing task.
      */
@@ -58,7 +62,8 @@ public class TaskList {
         return temp;
     }
 
-    /** Delete the task, and return deleted task.
+    /**
+     * Delete the task, and return deleted task.
      *
      * @return Task Deleted task.
      */
@@ -69,12 +74,12 @@ public class TaskList {
         } catch (IndexOutOfBoundsException o) {
             throw new IndexOutOfBoundsException();
         }
-
         taskCount--;
         return t;
     }
 
-    /** Set task as done given index.
+    /**
+     * Set task as done given index.
      *
      * @return Task Done task
      */
@@ -93,7 +98,6 @@ public class TaskList {
         ArrayList<String> listFound = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
-
             String[] taskToken = t.getTaskDescription().split(" ");
             for (int j = 0; j < taskToken.length; j++) {
                 if (taskToken[j].equals(keyword)) {
@@ -101,7 +105,6 @@ public class TaskList {
                     break;
                 }
             }
-
         }
         return listFound;
     }

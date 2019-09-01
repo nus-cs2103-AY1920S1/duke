@@ -5,6 +5,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+
 import java.util.ArrayList;
 
 
@@ -19,6 +20,7 @@ public class Parser {
      * Initialize the parser,
      * by preparing command list to cross check if command input by user/file
      * is valid.
+     *
      * @throws CommandNotFoundException If zone is <= 0.
      */
     public static void initialize() {
@@ -61,7 +63,9 @@ public class Parser {
 
         if (commandName.equals("TODO") || commandName.equals("DEADLINE") || commandName.equals("EVENT")) {
             commandType = "ADD";
-        } else commandType = commandName;
+        } else {
+            commandType = commandName;
+        }
 
         COMMAND_TYPE type = COMMAND_TYPE.valueOf(commandType);
 
@@ -77,8 +81,7 @@ public class Parser {
                 String date = subsequent.substring(lastIndexSlash + 1);
                 String taskInfo = subsequent.substring(0, lastIndexSlash + "by ".length() + 1).trim();
 
-                task = new Deadline(commandName.toUpperCase().charAt(0),
-                        taskInfo, false, date);
+                task = new Deadline(commandName.toUpperCase().charAt(0), taskInfo, false, date);
 
             } else {
                 String subsequent = input.substring("Event".length());
@@ -87,8 +90,7 @@ public class Parser {
 
                 String taskInfo = subsequent.substring(0, lastIndexSlash
                         + "at ".length() + 1).trim();
-                task = new Event(commandName.
-                        toUpperCase().charAt(0), taskInfo, false, date);
+                task = new Event(commandName.toUpperCase().charAt(0), taskInfo, false, date);
             }
             command = new AddCommand(commandType, task);
 
@@ -114,7 +116,9 @@ public class Parser {
             command = new ListCommand(commandName);
 
         } else if (type == COMMAND_TYPE.FIND) {
-            if (input.toLowerCase().equals("find")) throw new IncorrectNumberOfArgumentsException();
+            if (input.toLowerCase().equals("find")) {
+                throw new IncorrectNumberOfArgumentsException();
+            }
 
             String keyword = input.substring("Find ".length()).trim();
 
@@ -122,7 +126,10 @@ public class Parser {
                 throw new IncorrectNumberOfArgumentsException();
             }
             command = new FindCommand(commandName, keyword, new Task());
-        } else throw new CommandNotFoundException();
+        } else {
+
+            throw new CommandNotFoundException();
+        }
 
         return command;
     }
@@ -154,7 +161,9 @@ public class Parser {
             } else if (subsequent.startsWith("[0]")) {
                 isDone = false;
 
-            } else throw new IncorrectFileFormatException();
+            } else {
+                throw new IncorrectFileFormatException();
+            }
 
             // Move to after cross/tick and space
             subsequent = subsequent.substring(4).trim();
@@ -164,7 +173,9 @@ public class Parser {
 
             } else if (input.startsWith("[D]") || input.startsWith("[E]")) {
                 int slashIndex = subsequent.indexOf('/');
-                if (slashIndex == -1) throw new IncorrectFileFormatException();
+                if (slashIndex == -1) {
+                    throw new IncorrectFileFormatException();
+                }
 
                 String taskDescription = subsequent.substring(0, slashIndex).trim();
                 String date = subsequent.substring(slashIndex + "xx: ".length() + 1);
@@ -175,7 +186,9 @@ public class Parser {
                 } else if (input.startsWith("[E]")) {
                     task = new Event('E', taskDescription, isDone, date);
 
-                } else throw new IncorrectFileFormatException();
+                } else {
+                    throw new IncorrectFileFormatException();
+                }
             }
         }
         return task;

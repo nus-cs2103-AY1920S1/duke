@@ -17,10 +17,11 @@ public class DeleteCommand extends Command {
         this.taskNumberToDelete = taskNumberToDelete;
     }
 
-    /** Delete task from task list, perform Ui display and save to hard disk
+    /**
+     * Delete task from task list, perform Ui display and save to hard disk
      *
-     * @param list  List containing all tasks.
-     * @param ui Ui interface of duke.
+     * @param list    List containing all tasks.
+     * @param ui      Ui interface of duke.
      * @param storage Storage interface.
      */
     @Override

@@ -48,7 +48,8 @@ public class Ui {
         System.out.println("Error in loading tasks into Duke.");
     }
 
-    /** Read user input from system input
+    /**
+     * Read user input from system input
      *
      * @return String User input.
      */

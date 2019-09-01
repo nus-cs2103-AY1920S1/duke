@@ -22,7 +22,6 @@ public class Event extends Task {
             this.givenTime = df.parse(givenTime, new ParsePosition(0));
             System.out.println(this.givenTime);
 
-            //System.out.println(this.givenTime);
         } catch (NullPointerException n) {
             throw new NullPointerException();
         }
@@ -35,24 +34,24 @@ public class Event extends Task {
             df = new SimpleDateFormat("dd/mm/yyyy Hm");
             this.givenTime = df.parse(givenTime, new ParsePosition(0));
 
-            //System.out.println(this.givenTime);
         } catch (NullPointerException n) {
             throw new NullPointerException();
         }
     }
 
-    /** Returns string representation of task,
-     *  in terms of initial, icon of done, task description and given deadline.
+    /**
+     * Returns string representation of task,
+     * in terms of initial, icon of done, task description and given deadline.
      *
      * @return String representation of task.
      */
     @Override
     public String printTask() {
-        return "[" + getFirstCharTask() +
-                "][" + getIcon() + "] " + getTaskDescription() + " (at: " + getGivenTime() + ")";
+        return "[" + getFirstCharTask() + "][" + getIcon() + "] " + getTaskDescription() + " (at: " + getGivenTime() + ")";
     }
 
-    /** Set time for given deadline,
+    /**
+     * Set time for given deadline,
      *
      * @param time String representation of time.
      * @throws ParseException If format of time in string does not match specified format.
@@ -61,7 +60,8 @@ public class Event extends Task {
         this.givenTime = df.parse(time);
     }
 
-    /** Get time for given deadline
+    /**
+     * Get time for given deadline
      *
      * @return String of formatted time.
      */

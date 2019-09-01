@@ -18,10 +18,11 @@ public class DoneCommand extends Command {
         this.taskNumberDone = taskNumberDone;
     }
 
-    /** Set task from task list as done, perform Ui display and save to hard disk
+    /**
+     * Set task from task list as done, perform Ui display and save to hard disk
      *
-     * @param list  List containing all tasks.
-     * @param ui Ui interface of duke.
+     * @param list    List containing all tasks.
+     * @param ui      Ui interface of duke.
      * @param storage Storage interface.
      */
     @Override

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
+
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -23,12 +24,13 @@ public class Storage {
         targetFilePath = filePath;
     }
 
-    /** Returns task list of tasks from file,
-     *  convert input from file to task objects.
+    /**
+     * Returns task list of tasks from file,
+     * convert input from file to task objects.
      *
      * @return task list from file.
      * @throws IncorrectFileFormatException If file format is incorrect.
-     * @throws FileNotFoundException if file is not found.
+     * @throws FileNotFoundException        if file is not found.
      */
     public ArrayList<Task> load() throws IncorrectFileFormatException, FileNotFoundException {
         File f;
@@ -57,9 +59,10 @@ public class Storage {
         return listTask;
     }
 
-    /** Obtain list of tasks to print, save to hard disk
+    /**
+     * Obtain list of tasks to print, save to hard disk
      *
-     * @param l  List containing all string format tasks to save.
+     * @param l List containing all string format tasks to save.
      */
     public void save(ArrayList<String> l) {
         try {

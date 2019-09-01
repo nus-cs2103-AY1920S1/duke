@@ -3,6 +3,7 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
+
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.IncorrectNumberOfArgumentsException;
@@ -21,8 +22,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    // Initialising Duke
-    // Do Loading of tasks, greeting message, set up tasks list
     public Duke(String filePath) {
         Parser.initialize();
         storage = new Storage(filePath);

@@ -110,7 +110,6 @@ public class TaskList {
         outputs[2] = String.format("Now you have %d tasks in the list.", taskList.size());
 
         Ui.printBlock(outputs);
-
     }
 
     /**
@@ -129,7 +128,6 @@ public class TaskList {
         outputs[2] = String.format("Now you have %d tasks in the list.", taskList.size());
 
         Ui.printBlock(outputs);
-
     }
 
     /**
@@ -161,7 +159,6 @@ public class TaskList {
         outputs[2] = String.format("Now you have %d tasks in the list.", taskList.size());
 
         Ui.printBlock(outputs);
-
     }
 
     // Converts taskList into a String Array
@@ -172,6 +169,4 @@ public class TaskList {
         }
         return stringArray;
     }
-
-
 }

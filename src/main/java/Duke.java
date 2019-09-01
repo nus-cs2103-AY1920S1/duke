@@ -86,7 +86,6 @@ public class Duke {
                 e.printMessage();
             }
         }
-
         Ui.printBlock("Bye. Hope to see you again soon!");
     }
 
@@ -94,9 +93,7 @@ public class Duke {
      * Default static main method of this project.
      */
     public static void main(String[] args) {
-
         Duke duke = new Duke();
         duke.run();
-
     }
 }

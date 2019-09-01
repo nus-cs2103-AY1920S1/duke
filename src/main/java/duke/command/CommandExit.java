@@ -14,9 +14,10 @@ public class CommandExit extends Command {
      * @param tasks The TaskList containing the user's added Tasks.
      * @param ui The UI to interact with the user by printing instructions/messages.
      * @param storage Storage to use for loading/saving tasks from/to a file on the hard disk.
+     * @return Duke's response to the Command as a String.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showExitMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getExitMessage();
     }
 
     /**

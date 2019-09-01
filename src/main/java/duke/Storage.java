@@ -93,7 +93,6 @@ public class Storage {
 
                 // check if the task is marked as done
                 if (lineArray[1].equals("1")) {
-                    assert taskToRead != null;
                     taskToRead.markDone();
                 }
 

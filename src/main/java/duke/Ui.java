@@ -1,78 +1,98 @@
 package duke;
 
 import duke.task.Task;
-
-import java.util.Scanner;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
 
-    private Scanner sc;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
     /**
-     * Instantiates a new Scanner object to read user input.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Prints all the tasks in a given TaskList.
+     * Gets a String of all the tasks in a given TaskList.
      * @param tasks The TaskList containing the tasks to be printed.
+     * @return A String of all given tasks, with each task on one row.
      */
-    private void printTasks(TaskList tasks) {
-        String task;
+    private String getTasksString(TaskList tasks) {
+        StringBuilder tasksString = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            task = String.format("%d.%s", i, tasks.get(i));
-            System.out.println(task);
+            tasksString.append(String.format("%d.%s", i, tasks.get(i)));
+            if (i != tasks.size()) {
+                tasksString.append("\n");
+            }
         }
+        return tasksString.toString();
     }
 
     /**
-     * Prints the app's welcome message.
+     * Shows the welcome message as a message from Duke.
+     * @param dialogContainer The VBox container for all dialog boxes.
      */
-    public void showWelcomeMessage() {
-        String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?\n"
-                + "To input dates and times for deadlines and events, "
+    public void showWelcomeMessage(VBox dialogContainer) {
+        String welcomeMessage = "Hello! I'm Duke. What can I do for you?";
+
+        DialogBox dukeDialogBox = DialogBox.getDukeDialog(
+                new Label(welcomeMessage), new ImageView(duke)
+        );
+
+        dialogContainer.getChildren().add(dukeDialogBox);
+    }
+
+    /**
+     * Shows information about how the user should format datetime inputs.
+     * @param dialogContainer The VBox container for all dialog boxes.
+     */
+    public void showDateTimeFormatMessage(VBox dialogContainer) {
+        String datetimeInfo = "To input dates and times for deadlines and events, "
                 + "please use the format: 29/03/2019, 6:05pm";
-        System.out.println(welcomeMessage);
+        showDukeMessage(datetimeInfo, dialogContainer);
     }
 
     /**
-     * Prints the app's exit message.
+     * Gets the app's exit message.
+     * @return The exit message as a String.
      */
-    public void showExitMessage() {
-        System.out.println("Bye! Hope to see you again soon :)");
+    public String getExitMessage() {
+        return "Bye! Hope to see you again soon :)";
     }
 
     /**
-     * Prints the given error message.
-     * @param errorMessage The error message to print.
+     * Shows the user's input as a message from the user.
+     * @param input The user's input as a String.
+     * @param dialogContainer The VBox container for all dialog boxes.
      */
-    public void showError(String errorMessage) {
-        System.err.println(errorMessage);
+    public void showUserInput(String input, VBox dialogContainer) {
+        Label userText = new Label(input);
+        DialogBox userDialogBox = DialogBox.getUserDialog(userText, new ImageView(user));
+        dialogContainer.getChildren().add(userDialogBox);
     }
 
     /**
-     * Reads the next user input using Scanner.
-     * @return The user input as a String.
+     * Shows a message from Duke to the user.
+     * @param message Duke's message as a String.
+     * @param dialogContainer The VBox container for all dialog boxes.
      */
-    public String readCommand() {
-        return sc.nextLine();
+    public void showDukeMessage(String message, VBox dialogContainer) {
+        Label dukeMessage = new Label(message);
+        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeMessage, new ImageView(duke));
+        dialogContainer.getChildren().add(dukeDialogBox);
     }
 
     /**
      * Prints each Task in the given TaskList, if any.
      * @param tasks The TaskList containing the tasks to print.
      */
-    public void printTaskList(TaskList tasks) {
+    public String getTaskList(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("There are no tasks in your list right now.");
+            return "There are no tasks in your list right now.";
         } else {
-            System.out.println("Here are the task(s) in your list:");
-            printTasks(tasks);
+            return "Here are the task(s) in your list:" + getTasksString(tasks);
         }
     }
 
@@ -80,9 +100,8 @@ public class Ui {
      * Prints the confirmation message for marking a Task as done.
      * @param task The Task marked as done.
      */
-    public void printTaskMarkedDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(String.format("  %s", task));
+    public String getTaskMarkedDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n  " + task;
     }
 
     /**
@@ -90,11 +109,11 @@ public class Ui {
      * @param tasks The TaskList, containing the remaining tasks.
      * @param task The deleted Task.
      */
-    public void printTaskDeleted(TaskList tasks, Task task) {
-        System.out.println(String.format(
+    public String getTaskDeletedMessage(TaskList tasks, Task task) {
+        return String.format(
                 "Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.",
                 task, tasks.size()
-        ));
+        );
     }
 
     /**
@@ -102,23 +121,22 @@ public class Ui {
      * @param tasks The TaskList, containing all tasks including the newly added Task.
      * @param task The newly added Task.
      */
-    public void printTaskAdded(TaskList tasks, Task task) {
-        System.out.println(String.format(
+    public String getTaskAddedMessage(TaskList tasks, Task task) {
+        return String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
                 task, tasks.size()
-        ));
+        );
     }
 
     /**
      * Prints the results of a user search query.
      * @param results A TaskList of results matching the user's query.
      */
-    public void printSearchResults(TaskList results) {
+    public String getSearchResults(TaskList results) {
         if (results.size() == 0) {
-            System.out.println("No matching tasks found in your list.");
+            return "No matching tasks found in your list.";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            printTasks(results);
+            return "Here are the matching tasks in your list:\n" + getTasksString(results);
         }
     }
 }

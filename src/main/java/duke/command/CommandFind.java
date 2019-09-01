@@ -28,9 +28,10 @@ public class CommandFind extends Command {
      * @param tasks The TaskList containing the user's added Tasks.
      * @param ui The UI to interact with the user by printing instructions/messages.
      * @param storage Storage to use for loading/saving tasks from/to a file on the hard disk.
+     * @return Duke's response to the Command as a String.
      * @throws DukeException If the search fails (error in search method).
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             for (int i = 1; i <= tasks.size(); i++) {
                 Task task = tasks.get(i);
@@ -42,6 +43,6 @@ public class CommandFind extends Command {
             throw new DukeException("Search of task list failed.");
         }
 
-        ui.printSearchResults(results);
+        return ui.getSearchResults(results);
     }
 }

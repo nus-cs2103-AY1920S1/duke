@@ -5,11 +5,20 @@ import duke.util.Storage;
 import duke.util.Ui;
 import java.util.ArrayList;
 
+/**
+ * TaskList class, for in memory storage of tasks.
+ */
 public class TaskList {
     private Storage storage;
     private Ui ui;
     private ArrayList<Task> taskList;
 
+    /**
+     * Constructs a TaskList object.
+     *
+     * @param storage Disk storage for task list.
+     * @param ui Ui for task list to write output.
+     */
     public TaskList(Storage storage, Ui ui) {
         this.storage = storage;
         this.ui = ui;
@@ -21,10 +30,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates task list in disk storage.
+     *
+     * @throws DukeException if encountered IO exceptions.
+     */
     private void updateDatabase() throws DukeException {
         this.storage.store(this.taskList);
     }
 
+    /**
+     * Adds the given task to task list.
+     *
+     * @param task Task to be added to task list.
+     *
+     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     */
     public void addNewTask(Task task) throws DukeException {
         this.taskList.add(task);
         this.ui.print("Got it! I've added this task:", task.toString());
@@ -34,6 +55,13 @@ public class TaskList {
         this.updateDatabase();
     }
 
+    /**
+     * Marks the given task as done in task list.
+     *
+     * @param index Index of task to be marked as done.
+     *
+     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     */
     public void doTask(int index) throws DukeException {
         Task task = taskList.get(index - 1);
         task.markAsDone();
@@ -41,6 +69,13 @@ public class TaskList {
         this.updateDatabase();
     }
 
+    /**
+     * Deletes the given task in task list.
+     *
+     * @param index Index of task to be deleted.
+     *
+     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     */
     public void deleteTask(int index) throws DukeException {
         Task task = taskList.remove(index - 1);
         this.ui.print("Noted! I've removed this task:", task.toString());
@@ -50,6 +85,9 @@ public class TaskList {
         this.updateDatabase();
     }
 
+    /**
+     * Prints the entire task list to ui.
+     */
     public void printList() {
         this.ui.print("Here are the tasks in your list:");
         int counter = 1;

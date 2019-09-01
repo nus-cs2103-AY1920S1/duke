@@ -17,7 +17,7 @@ public class Duke {
     private Duke() {
         greeter = new MessageGenerator();
         sc = new Scanner(System.in);
-        ui = new UI("files/tasks.text");
+        ui = new UI("files/tasks.txt");
         isExit = false;
     }
 

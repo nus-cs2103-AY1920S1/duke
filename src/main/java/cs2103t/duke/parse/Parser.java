@@ -1,6 +1,12 @@
 package cs2103t.duke.parse;
 
-import cs2103t.duke.command.*;
+import cs2103t.duke.command.AddCommand;
+import cs2103t.duke.command.Command;
+import cs2103t.duke.command.DeleteCommand;
+import cs2103t.duke.command.DoneCommand;
+import cs2103t.duke.command.ExitCommand;
+import cs2103t.duke.command.FindCommand;
+import cs2103t.duke.command.ListCommand;
 import cs2103t.duke.exception.DukeException;
 import cs2103t.duke.exception.InvalidIdException;
 import cs2103t.duke.exception.InvalidKeywordException;
@@ -95,19 +101,13 @@ public class Parser {
         return cmd;
     }
 
-    /*
-    public String getDescriptionWithoutDate() { //only if input is entire description alr; aka for indiv cs2103t.duke.task.Task classes
-        return "";
-    }
-     */
-
     /**
      * Converts string to Date.
      * @param input string containing date.
      * @return Date object representing the date.
      * @throws DukeException if input is not in "dd/MM/yyyy HHmm" format.
      */
-    public static Date convertToDate(String input) throws DukeException{
+    public static Date convertToDate(String input) throws DukeException {
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(input);

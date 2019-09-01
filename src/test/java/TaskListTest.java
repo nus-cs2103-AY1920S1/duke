@@ -19,6 +19,9 @@ public class TaskListTest {
     List<Task> tasks;
     TaskList taskList;
 
+    /**
+     * Initialises arguments for function calls.
+     */
     @BeforeEach
     public void init() {
         tasks = new ArrayList<>();

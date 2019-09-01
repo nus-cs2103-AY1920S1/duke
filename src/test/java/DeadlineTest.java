@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class DeadlineTest {
     @Test
     public void createCorrectDeadline() {
-        assertEquals("[D][\u2717] a deadline task (by: 29/8/2019 1817)", Deadline.create("a deadline task /by 29/8/2019 1817").toString());
+        assertEquals("[D][\u2717] a deadline task (by: 29/8/2019 1817)",
+                Deadline.create("a deadline task /by 29/8/2019 1817").toString());
     }
 
     @Test
@@ -23,6 +24,7 @@ public class DeadlineTest {
 
     @Test
     public void getDeadlineDescription() {
-        assertEquals("some deadline | 29/8/2019 1817", Deadline.create("some deadline /by 29/8/2019 1817").getDescription());
+        assertEquals("some deadline | 29/8/2019 1817",
+                Deadline.create("some deadline /by 29/8/2019 1817").getDescription());
     }
 }

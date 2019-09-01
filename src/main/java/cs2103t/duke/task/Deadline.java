@@ -20,13 +20,17 @@ public class Deadline extends Task {
     /** Date object representing date and time. */
     private Date date;
 
-    private Deadline() {}
+    private Deadline() {
+
+    }
+
     private Deadline(String descr, boolean completed) throws IncorrectTaskFormatException {
         super.completed = completed;
         super.taskType = TaskType.D;
 
         setupDetails(descr);
     }
+
     private void setupDetails(String input) throws IncorrectTaskFormatException {
         String[] tmp = input.split("\\s+/by\\s+");
         //inputs should only have <=1 '/' characters
@@ -39,8 +43,9 @@ public class Deadline extends Task {
         String term = "by";
         String date = tmp[1];
 
-        if (date.equals(""))
+        if (date.equals("")) {
             throw new IncorrectTaskFormatException("by");
+        }
         this.notesInBrackets = String.format("%s: %s", term, date);
 
         super.description = String.format("%s (%s)", this.description, this.notesInBrackets);
@@ -57,8 +62,9 @@ public class Deadline extends Task {
      * @throws IncorrectTaskFormatException if task format is incorrect.
      */
     public static Deadline create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {
-        if (descr.equals(""))
+        if (descr.equals("")) {
             throw new EmptyDescriptionException("a deadline");
+        }
 
         Deadline newTask = new Deadline(descr.trim(), false);
         return newTask;

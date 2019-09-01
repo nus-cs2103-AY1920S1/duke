@@ -99,7 +99,7 @@ public class TaskList {
      */
     public Task deleteTask(int id) throws DukeException {
         if (id > getSize() || id < 1) {
-            throw new InvalidIdException(""+id);
+            throw new InvalidIdException("" + id);
         }
 
         Task task = this.taskList.remove(id - 1);
@@ -135,6 +135,11 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Finds tasks that have words matching keyword.
+     * @param wordToFind keyword to find in task descriptions.
+     * @return list of tasks that contain that keyword.
+     */
     public List<Task> findTasks(String wordToFind) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : this.taskList) {

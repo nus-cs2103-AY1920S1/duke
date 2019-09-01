@@ -1,6 +1,8 @@
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Exception;
+import java.time.LocalDateTime;
 
 class DukeException extends Exception {
     public DukeException(String s) {
@@ -71,7 +73,8 @@ public class Duke {
     private void delete(String deleteIndex) {  //exception same as done method
         try {
             int deleteInt = Integer.parseInt(deleteIndex);
-            StringBuilder outputMessageMessage = new StringBuilder("Following task removed:\n    " + this.todoList.get(deleteInt - 1));
+            StringBuilder outputMessageMessage = new StringBuilder("Following task removed:\n    "
+                    + this.todoList.get(deleteInt - 1));
             outputMessageMessage.append("\n  " + (this.todoList.size() - 1) + " tasks left in the list");
             this.todoList.remove(deleteInt - 1);
             Duke.print(outputMessageMessage.toString());
@@ -117,7 +120,7 @@ public class Duke {
     private void addDeadline(String task) {
         int split = task.indexOf(" /by");
         if (split == -1) {
-            Duke.print("Error: deadline not given. Specify deadline using \"/by\""); // i dont know abt this
+            Duke.print("Error: deadline not given. Specify deadline using \"/by\"");
         } else {
             try {
                 String description = task.substring(0, split);
@@ -187,37 +190,73 @@ public class Duke {
     }
 
     public class Event extends Task {
-        String deadline;
+        private LocalDateTime startDateTime;   // DD/MM/YYYY
+        private LocalDateTime endDateTime;
 
-        public Event(String description, String deadline) {
+        public Event(String description, String timePeriod) {
             super(description);
-            this.deadline = deadline;
+            this.setDateTime(timePeriod);
         }
 
+        private void setDateTime(String timePeriod){
+            String datetimeInput[] = timePeriod.split(" ");
+            String dateInput[] = datetimeInput[0].split("/");
+            String timeInput[] = datetimeInput[1].split("-");
+            int year, month, day, startHour, startMinute, endHour, endMinute;
+            year = Integer.parseInt(dateInput[2]);
+            month = Integer.parseInt(dateInput[1]);
+            day = Integer.parseInt(dateInput[0]);
+            startHour = Integer.parseInt(timeInput[0])/100;
+            startMinute = Integer.parseInt(timeInput[0])%100;
+            endHour = Integer.parseInt(timeInput[1])/100;
+            endMinute = Integer.parseInt(timeInput[1])%100;
+            this.startDateTime = LocalDateTime.of(year, month, day, startHour, startMinute);
+            this.endDateTime = LocalDateTime.of(year, month, day, endHour, endMinute);
+        }
         @Override
         public String toString() {
             if (isDone) {
-                return "[E]" + "[" + "\u2713" + "]" + this.description + " (at: " + this.deadline + ")";
+                return "[E]" + "[" + "\u2713" + "]" + this.description + " (at: " + this.startDateTime.toLocalDate()
+                        + " " + this.startDateTime.toLocalTime() + "-" + this.endDateTime.toLocalTime() + ")";
             } else {
-                return "[E]" + "[" + "\u2718" + "]" + this.description + " (at: " + this.deadline + ")";
+                return "[E]" + "[" + "\u2718" + "]" + this.description + " (at: " + this.startDateTime.toLocalDate()
+                        + " " + this.startDateTime.toLocalTime() + "-" + this.endDateTime.toLocalTime() + ")";
             }
         }
     }
 
     public class Deadline extends Task {
-        String deadline;
+        private LocalDateTime deadline; //   DD/MM/YYYY
 
-        public Deadline(String description, String deadline) {
+        protected Deadline(String description, String deadline) {
             super(description);
-            this.deadline = deadline;
+            try {
+                this.setDateTime(deadline);
+            }catch(NumberFormatException e){
+                print("Bad time input");
+            }
         }
 
+        private void setDateTime(String deadline){
+            String datetimeInput[] = deadline.split(" ");
+            String dateInput[] = datetimeInput[0].split("/");
+            String timeInput = datetimeInput[1];
+            int year, month, day, hour, minute;
+            year = Integer.parseInt(dateInput[2]);
+            month = Integer.parseInt(dateInput[1]);
+            day = Integer.parseInt(dateInput[0]);
+            hour = Integer.parseInt(timeInput)/100;
+            minute = Integer.parseInt(timeInput)%100;
+            this.deadline = LocalDateTime.of(year, month, day, hour, minute);
+        }
         @Override
         public String toString() {
             if (isDone) {
-                return "[D]" + "[" + "\u2713" + "]" + this.description + " (by: " + this.deadline + ")";
+                return "[D]" + "[" + "\u2713" + "]" + this.description + " (by: " + this.deadline.toLocalDate() + " "
+                        + this.deadline.toLocalTime() + ")";
             } else {
-                return "[D]" + "[" + "\u2718" + "]" + this.description + " (by: " + this.deadline + ")";
+                return "[D]" + "[" + "\u2718" + "]" + this.description + " (by: " + this.deadline.toLocalDate() + " "
+                        + this.deadline.toLocalTime() + ")";
             }
         }
     }

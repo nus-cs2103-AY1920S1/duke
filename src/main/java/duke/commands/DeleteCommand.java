@@ -1,7 +1,9 @@
 /**
  * This class represents a specific command of deleting a task from Duke.
  */
+
 package duke.commands;
+
 import duke.exceptions.DukeException;
 import duke.managers.TaskList;
 import duke.managers.Ui;
@@ -20,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * This method removes the target task from the list and prompts the user the number of remaining tasks saved.
+     * Removes the target task from the list and prompts the user the number of remaining tasks saved.
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

@@ -1,8 +1,16 @@
 /**
  * This class deals with making sense of the user command. Commands are processed individually and specifically.
  */
+
 package duke.managers;
-import duke.commands.*;
+
+import duke.commands.Command;
+import duke.commands.AddCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ListCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.exceptions.DukeException;
 
 public class Parser {
@@ -12,7 +20,7 @@ public class Parser {
     }
 
     /**
-     * This method generates and returns the corresponding command according to the entire String that has been taken
+     * Generates and returns the corresponding command according to the entire String that has been taken
      * in.
      * @param c a String containing the unprocessed input command to Duke
      * @exception DukeException is thrown when there is an error with the input
@@ -23,7 +31,7 @@ public class Parser {
         if (key.equals("delete")) {
             return new DeleteCommand(Integer.parseInt(comm[1]));
         } else if (key.equals("find")) {
-            return new FindCommand(comm[1]) ;
+            return new FindCommand(comm[1]);
         } else if (key.equals("done")) {
             return new DoneCommand(Integer.parseInt(comm[1]));
         } else if (key.equals("list")) {

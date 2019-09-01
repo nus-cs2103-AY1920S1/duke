@@ -1,7 +1,9 @@
 /**
  * This class represents a specific command of marking a task in Duke as done.
  */
+
 package duke.commands;
+
 import duke.exceptions.DukeException;
 import duke.managers.TaskList;
 import duke.managers.Ui;
@@ -20,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * This method marks the target task as done and prompts the user which task has been marked done.
+     * Marks the target task as done and prompts the user which task has been marked done.
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

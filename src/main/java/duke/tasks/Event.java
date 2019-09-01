@@ -2,6 +2,7 @@
  * This child class of Task contains the same attributes as its parent class but with an additional field (the timing of
  * that event, which is stored as 'eventTime').
  */
+
 package duke.tasks;
 
 public class Event extends Task {

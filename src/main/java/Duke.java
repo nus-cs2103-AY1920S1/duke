@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises a new Duke object including objects such as storage, ui and task list.
+     * @param filePath a String containing the file path of the input file where data is stored and loaded from
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +26,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke object to start the chat bot. This method will call on other methods to load previously saved
+     * information.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

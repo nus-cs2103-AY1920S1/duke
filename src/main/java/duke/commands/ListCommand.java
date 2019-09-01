@@ -1,7 +1,9 @@
 /**
  * This class represents a specific command of listing tasks stored in Duke.
  */
+
 package duke.commands;
+
 import duke.exceptions.DukeException;
 import duke.managers.TaskList;
 import duke.managers.Ui;
@@ -13,10 +15,11 @@ public class ListCommand extends Command {
     private TaskList tasks;
     private Ui ui;
 
-    public ListCommand() {}
+    public ListCommand() {
+    }
 
     /**
-     * This method prints all the tasks that is stored in Duke at that point in time.
+     * Prints all the tasks that is stored in Duke at that point in time.
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

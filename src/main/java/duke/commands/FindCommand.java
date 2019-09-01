@@ -1,7 +1,9 @@
 /**
  * This class represents a specific command of finding a particular task in Duke.
  */
+
 package duke.commands;
+
 import duke.exceptions.DukeException;
 import duke.managers.Storage;
 import duke.managers.TaskList;
@@ -18,7 +20,7 @@ public class FindCommand extends Command {
     private ArrayList<Task> matchedTasks = new ArrayList<>();
 
     /**
-     * This constructor processes the keyword that has been input into Duke chat bot.
+     * Processes the keyword that has been input into Duke chat bot.
      * @param keyword that the user has input to search all his tasks for
      */
     public FindCommand(String keyword) {
@@ -26,7 +28,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * This method searches for tasks with that specific keyword and returns all matching tasks to the user.
+     * Searches for tasks with that specific keyword and returns all matching tasks to the user.
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file
@@ -52,7 +54,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * This method prints all the tasks that match the keyword given by the user. If there are no matching tasks,
+     * Prints all the tasks that match the keyword given by the user. If there are no matching tasks,
      * the user will be advised as such.
      */
     private void printAllMatches() {

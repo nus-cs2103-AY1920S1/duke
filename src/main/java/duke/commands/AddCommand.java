@@ -1,7 +1,9 @@
 /**
  * This class represents a specific command of adding a task to Duke.
  */
+
 package duke.commands;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DateException;
 import duke.managers.TaskList;
@@ -22,8 +24,8 @@ public class AddCommand extends Command {
     private String[] allDetails;
 
     /**
-     * This constructor loads the entire input command into the object for further processing of its details, such as type
-     * of task added and other details (e.g. description and time).
+     * Loads the entire input command into the object for further processing of its details, such as
+     * type of task added and other details (e.g. description and time).
      * @param allDetails a String array containing all the details to create the appropriate task
      */
     public AddCommand(String[] allDetails) {
@@ -31,7 +33,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * This method checks for the type of task that has been added and passes along processed String of information
+     * Checks for the type of task that has been added and passes along processed String of information
      * containing details about the task for the task to be created.
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
@@ -64,7 +66,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * This method creates a TD object and adds it into memory.
+     * Creates a TD object and adds it into memory.
      * @param a a String of information containing details for the To Do task
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
@@ -76,7 +78,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * This method creates a deadlineTask and adds it into memory.
+     * Creates a deadlineTask and adds it into memory.
      * If command does not include a deadline, then user is prompted to enter the command again.
      * @param b a String of information containing details for the Deadline task
      * @exception DukeException is thrown when there is an error with the input
@@ -98,14 +100,15 @@ public class AddCommand extends Command {
                     printAddedTask(newDeadline);
                     storage.save(tasks);
                 } catch (DateException e) {
-                    throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as 29/2/2019 1800");
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as "
+                            + "29/2/2019 1800");
                 }
             }
         }
     }
 
     /**
-     * This method creates an Event object and adds it into memory.
+     * Creates an Event object and adds it into memory.
      * If command does not include a timing, then user is prompted to enter the command again.
      * @param c a String of information containing details for the Event task
      * @exception DukeException is thrown when there is an error with the input
@@ -125,22 +128,23 @@ public class AddCommand extends Command {
                     if (hoursMin.length < 2) {
                         throw new DukeException("Oops! Please write the event timing such as 29/2/2019 1800-2000");
                     } else {
-                        String hM = dateTime.getTime(hoursMin[0]) + "-" + dateTime.getTime(hoursMin[1]);
-                        String formattedTime = dateTime.getDate(eventTime[0]) + hM;
+                        String hm = dateTime.getTime(hoursMin[0]) + "-" + dateTime.getTime(hoursMin[1]);
+                        String formattedTime = dateTime.getDate(eventTime[0]) + hm;
                         Event newEvent = new Event(details[0].trim(), formattedTime);
                         tasks.addTask(newEvent);
                         printAddedTask(newEvent);
                         storage.save(tasks);
                     }
                 } catch (DateException e) {
-                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as 29/2/2019 1800-2000");
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as "
+                            + "29/2/2019 1800-2000");
                 }
             }
         }
     }
 
     /**
-     * This method prints the task that was just added to the list.
+     * Prints the task that was just added to the list.
      * @param task the Task to be printed after it has been added
     */
     private void printAddedTask(Task task) {

@@ -2,7 +2,9 @@
  * This class deals with the interactions with the user. It contains methods to return responses to the user when
  * the user gives an input.
  */
+
 package duke.managers;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -25,6 +27,9 @@ public class Ui {
         System.out.println(errorMessage);
     }
 
+    /**
+     * Prints formatted dotted line to differentiate between user input and responses generated from Duke.
+     */
     public static void showLine() {
         String border = "";
         for (int i = 0; i < 80; i++) {

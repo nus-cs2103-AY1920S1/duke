@@ -2,7 +2,9 @@
  * This method deals with loading tasks from the file and saving tasks in the file. It contains methods that process
  * the information to and from the hard disk to the existing memory of the Duke chat bot.
  */
+
 package duke.managers;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.tasks.Deadline;
@@ -24,7 +26,7 @@ public class Storage {
     }
 
     /**
-     * This method is called when Duke starts in order to load previously saved information on the hard disk.
+     * Loads previously saved information on the hard disk when Duke starts.
      * @exception DukeException is thrown when there is an error with the location where the information was stored
      */
     public ArrayList<Task> load() throws DukeException {

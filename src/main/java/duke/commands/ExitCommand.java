@@ -1,7 +1,9 @@
 /**
  * This class represents a specific command of exiting from Duke.
  */
+
 package duke.commands;
+
 import duke.managers.TaskList;
 import duke.managers.Ui;
 import duke.managers.Storage;
@@ -11,10 +13,11 @@ public class ExitCommand extends Command {
     private TaskList tasks;
     private Ui ui;
 
-    public ExitCommand() {}
+    public ExitCommand() {
+    }
 
     /**
-     * This method prints the exit line from Duke and closes the chatbot.
+     * Prints the exit line from Duke and closes the chatbot.
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

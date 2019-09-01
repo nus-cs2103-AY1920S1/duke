@@ -1,29 +1,29 @@
 import java.util.ArrayList;
 
-/*
- * Represents the list of tasks that Duke holds
+/**
+ * Represents the list of tasks that Duke holds.
  */
 public class TaskList {
 
     private ArrayList<Task> list;
 
-    /*
-     * Default Constructor to generate an empty ArrayList of Task type
+    /**
+     * Default Constructor to generate an empty ArrayList of Task type.
      */
     public TaskList() {
         list = new ArrayList<>();
     }
 
-    /*
-     * Constructor to take in a populated ArrayList of Task type (i.e. from text file)
+    /**
+     * Constructor to take in a populated ArrayList of Task type (i.e. from text file).
      * @param list ArrayList of Task Type
      */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
-    /*
-     * Adds a Task object into the list
+    /**
+     * Adds a Task object into the list.
      * @param task A Task object
      */
     public void addTask(Task task) {
@@ -32,8 +32,8 @@ public class TaskList {
                 + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    /*
-     * Deletes a Task from the list
+    /**
+     * Deletes a Task from the list.
      * @param deleteIndex Index of selected Task Object, 1-based index
      */
     public void deleteTask(int deleteIndex) {
@@ -42,8 +42,8 @@ public class TaskList {
                 + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    /*
-     * Returns selected Task object from list
+    /**
+     * Returns selected Task object from list.
      * @param taskIndex Index of selected Task object, 1-based index
      * @return Task object
      */
@@ -51,8 +51,8 @@ public class TaskList {
         return list.get(taskIndex - 1);
     }
 
-    /*
-     * Prints out the list of tasks that Duke holds
+    /**
+     * Prints out the list of tasks that Duke holds.
      */
     public void showTaskList() {
         System.out.println("Here are the tasks in your list:");
@@ -61,8 +61,8 @@ public class TaskList {
         }
     }
 
-    /*
-     * Sets boolean variable isDone of selected Task object to true
+    /**
+     * Sets boolean variable isDone of selected Task object to true.
      * @param doneIndex Index of selected Task object, 1-based index
      */
     public void setDoneTask(int doneIndex) {
@@ -71,8 +71,8 @@ public class TaskList {
                 + list.get(doneIndex - 1));
     }
 
-    /*
-     * Returns the list of tasks that Duke holds as an object
+    /**
+     * Returns the list of tasks that Duke holds as an object.
      * @return ArrayList of Task type
      */
     public ArrayList<Task> getTaskList() {

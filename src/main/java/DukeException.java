@@ -1,10 +1,10 @@
-/*
- * Represents Exceptions from the Duke project
+/**
+ * Represents Exceptions from the Duke project.
  */
 public class DukeException extends Exception {
 
-    /*
-     * Constructor to print custom error messages
+    /**
+     * Constructor to print custom error messages.
      * @param error Error message
      */
     public DukeException(String error) {

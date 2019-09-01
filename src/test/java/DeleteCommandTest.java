@@ -20,16 +20,16 @@ public class DeleteCommandTest {
     }
 
     @Test
-    void testExecute(){
+    void testExecute() {
         String input = "1";
         InputStream in = new ByteArrayInputStream((input.getBytes()));
         System.setIn(in);
         ui = new Ui();
-        try{
+        try {
             DeleteCommand dc = new DeleteCommand();
             dc.execute(storage, taskList, ui);
             assertTrue(taskList.getTaskList().size() == 0);
-        }catch(DukeException e){
+        } catch (DukeException e) {
             fail("failed to delete item in list");
         }
     }

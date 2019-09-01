@@ -20,16 +20,16 @@ public class DoneCommandTest {
     }
 
     @Test
-    void testExecute(){
+    void testExecute() {
         String input = "1";
         InputStream in = new ByteArrayInputStream((input.getBytes()));
         System.setIn(in);
         ui = new Ui();
-        try{
+        try {
             DoneCommand dc = new DoneCommand();
             dc.execute(storage, taskList, ui);
             assertTrue(taskList.getTask(1).getIsDone());
-        }catch(DukeException e){
+        } catch (DukeException e) {
             fail("failed to change item in list to done");
         }
     }

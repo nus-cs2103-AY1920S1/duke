@@ -59,7 +59,10 @@ public class Parser {
         case "bye":
             return new CommandExit();
         default:
-            throw new DukeException("I'm sorry, I don't know what '" + commandWords[0] + "' means :(");
+            String unknownCommand = commandWords[0].length() > 20
+                    ? commandWords[0].substring(0, 20) + "..."
+                    : commandWords[0];
+            throw new DukeException("I'm sorry, I don't know what '" + unknownCommand + "' means :(");
         }
     }
 

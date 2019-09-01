@@ -26,9 +26,10 @@ public class CommandMark extends Command {
      * @param tasks The TaskList containing the user's added Tasks.
      * @param ui The UI to interact with the user by printing instructions/messages.
      * @param storage Storage to use for loading/saving tasks from/to a file on the hard disk.
+     * @return Duke's response to the Command as a String.
      * @throws DukeException If marking as done or file saving to disk fails.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task taskToMark;
 
         try {
@@ -40,6 +41,6 @@ public class CommandMark extends Command {
 
         storage.save(tasks);
 
-        ui.printTaskMarkedDone(taskToMark);
+        return ui.getTaskMarkedDoneMessage(taskToMark);
     }
 }

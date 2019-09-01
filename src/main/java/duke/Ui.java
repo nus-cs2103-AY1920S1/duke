@@ -2,77 +2,61 @@ package duke;
 
 import duke.task.Task;
 
-import java.util.Scanner;
-
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
 
-    private Scanner sc;
-
     /**
-     * Instantiates a new Scanner object to read user input.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Prints all the tasks in a given TaskList.
+     * Gets a String of all the tasks in a given TaskList.
      * @param tasks The TaskList containing the tasks to be printed.
+     * @return A String of all given tasks, with each task on one row.
      */
-    private void printTasks(TaskList tasks) {
-        String task;
+    private String getTasksString(TaskList tasks) {
+        StringBuilder tasksString = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            task = String.format("%d.%s", i, tasks.get(i));
-            System.out.println(task);
+            tasksString.append(String.format("%d.%s", i, tasks.get(i)));
+            if (i != tasks.size()) {
+                tasksString.append("\n");
+            }
         }
+        return tasksString.toString();
     }
 
     /**
-     * Prints the app's welcome message.
+     * Gets the welcome message to be displayed when the app starts.
+     * @return The welcome message as a String.
      */
-    public void showWelcomeMessage() {
-        String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?\n"
-                + "To input dates and times for deadlines and events, "
+    public static String getWelcomeMessage() {
+        return "Hello! I'm Duke. What can I do for you?";
+    }
+
+    /**
+     * Gets information about how the user should format datetime inputs.
+     * @return The datetime format information as a String.
+     */
+    public static String getDatetimeFormatMessage() {
+        return "To input dates and times for deadlines and events, "
                 + "please use the format: 29/03/2019, 6:05pm";
-        System.out.println(welcomeMessage);
     }
 
     /**
-     * Prints the app's exit message.
+     * Gets the app's exit message.
+     * @return The exit message as a String.
      */
-    public void showExitMessage() {
-        System.out.println("Bye! Hope to see you again soon :)");
-    }
-
-    /**
-     * Prints the given error message.
-     * @param errorMessage The error message to print.
-     */
-    public void showError(String errorMessage) {
-        System.err.println(errorMessage);
-    }
-
-    /**
-     * Reads the next user input using Scanner.
-     * @return The user input as a String.
-     */
-    public String readCommand() {
-        return sc.nextLine();
+    public static String getExitMessage() {
+        return "Bye! Hope to see you again soon :)\nExiting...";
     }
 
     /**
      * Prints each Task in the given TaskList, if any.
      * @param tasks The TaskList containing the tasks to print.
      */
-    public void printTaskList(TaskList tasks) {
+    public String getTaskList(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("There are no tasks in your list right now.");
+            return "There are no tasks in your list right now.";
         } else {
-            System.out.println("Here are the task(s) in your list:");
-            printTasks(tasks);
+            return "Here are the task(s) in your list:" + getTasksString(tasks);
         }
     }
 
@@ -80,9 +64,8 @@ public class Ui {
      * Prints the confirmation message for marking a Task as done.
      * @param task The Task marked as done.
      */
-    public void printTaskMarkedDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(String.format("  %s", task));
+    public String getTaskMarkedDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n  " + task;
     }
 
     /**
@@ -90,11 +73,11 @@ public class Ui {
      * @param tasks The TaskList, containing the remaining tasks.
      * @param task The deleted Task.
      */
-    public void printTaskDeleted(TaskList tasks, Task task) {
-        System.out.println(String.format(
+    public String getTaskDeletedMessage(TaskList tasks, Task task) {
+        return String.format(
                 "Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.",
                 task, tasks.size()
-        ));
+        );
     }
 
     /**
@@ -102,23 +85,22 @@ public class Ui {
      * @param tasks The TaskList, containing all tasks including the newly added Task.
      * @param task The newly added Task.
      */
-    public void printTaskAdded(TaskList tasks, Task task) {
-        System.out.println(String.format(
+    public String getTaskAddedMessage(TaskList tasks, Task task) {
+        return String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
                 task, tasks.size()
-        ));
+        );
     }
 
     /**
      * Prints the results of a user search query.
      * @param results A TaskList of results matching the user's query.
      */
-    public void printSearchResults(TaskList results) {
+    public String getSearchResults(TaskList results) {
         if (results.size() == 0) {
-            System.out.println("No matching tasks found in your list.");
+            return "No matching tasks found in your list.";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            printTasks(results);
+            return "Here are the matching tasks in your list:\n" + getTasksString(results);
         }
     }
 }

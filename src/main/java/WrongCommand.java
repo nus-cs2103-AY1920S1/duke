@@ -9,6 +9,5 @@ public class WrongCommand extends Command {
     }
 
 
-
 }
 

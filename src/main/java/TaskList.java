@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class TaskList implements Serializable {
     public ArrayList<Task> tasks = new ArrayList<>();
 
-    public void listTasks(){
+    public void listTasks() {
         int size = this.tasks.size();
         StringBuilder listOfTask = new StringBuilder();
         for (int i = 0; i < size; i++) {

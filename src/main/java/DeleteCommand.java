@@ -1,9 +1,9 @@
 public class DeleteCommand extends Command {
-    public DeleteCommand(String input){
+    public DeleteCommand(String input) {
         super(input);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //no input number
             if (ui.getInputArr().length == 1) {
@@ -21,8 +21,8 @@ public class DeleteCommand extends Command {
             }
         } catch (NumberFormatException e) {
             Duke.print("☹ OOPS!!! Please input a valid number.");
-        }    }
-
+        }
+    }
 
 
 }

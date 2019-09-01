@@ -1,14 +1,16 @@
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     public Actions action;
-    public AddCommand(String input, Actions action){
+
+    public AddCommand(String input, Actions action) {
         super(input);
         this.action = action;
     }
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         int num;
         String desc;
         Task task = null;
-        switch(action) {
+        switch (action) {
             case TODO:
                 //trim so that cannot pass with just spaces
                 desc = ui.getTodoDesc();
@@ -68,12 +70,11 @@ public class AddCommand extends Command{
             // if task is still null do nothing
         } else {
             tasks.addTask(task);
-           Duke.print("Got it. I've added this task:\n" +
+            Duke.print("Got it. I've added this task:\n" +
                     "       " + task + "\n" +
                     "     Now you have " + tasks.getSize() + " tasks in the list.");
         }
     }
-
 
 
 }

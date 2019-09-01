@@ -12,8 +12,7 @@ public class Duke {
     private Parser parser;
 
     public Duke() {
-        String filePath = "./data/duke.txt";
-        storage = new Storage(filePath);
+        storage = new Storage();
         parser = new Parser();
     }
 

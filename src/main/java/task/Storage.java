@@ -9,11 +9,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private String filePath;
-
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
+    private final static String FILE_PATH = "data/duke.txt";
 
     /**
      * Reads data from data file.
@@ -22,9 +18,10 @@ public class Storage {
      * @throws FileNotFoundException Occurs when path of file is invalid.
      */
     public TaskList readData() throws FileNotFoundException {
-        File f = new File(filePath);
+        File f = new File(Storage.FILE_PATH);
         Scanner sc = new Scanner(f);
         ArrayList<Task> task = new ArrayList<>();
+
         while (sc.hasNext()) {
             String taskLine = sc.nextLine();
             String[] taskLineSplit = taskLine.split(":");
@@ -57,9 +54,10 @@ public class Storage {
      */
     public void writeData(TaskList taskList) throws IOException {
         ArrayList<Task> task = taskList.getTasks();
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(Storage.FILE_PATH);
         String stringToWrite = "";
         int counter = task.size();
+
         for (int i = 0; i < counter; i++) {
             Task taskToWrite = task.get(i);
             if (taskToWrite instanceof Todo) {
@@ -84,6 +82,7 @@ public class Storage {
                 stringToWrite += System.lineSeparator();
             }
         }
+
         fw.write(stringToWrite);
         fw.close();
     }

@@ -1,6 +1,8 @@
 /**
  * The main class for managing all the java files.
  */
+import java.util.ArrayList;
+
 public class Duke {
 
     private Storage storage;
@@ -47,8 +49,10 @@ public class Duke {
                     storage.save(tasks.getTaskList());
                     ui.getByeMessage();
                     break;
-                }
-                else {
+                } else if (command.contains("find")) {
+                    ArrayList<Task> foundTask = tasks.findTasks(command);
+                    ui.showFoundMessage(foundTask);
+                } else {
                     throw new IllegalCommandException("I'm sorry, but I don't know what that means :-(");
                 }
             }

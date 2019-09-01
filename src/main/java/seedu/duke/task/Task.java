@@ -21,7 +21,7 @@ public abstract class Task {
      * Parses and returns the object representation of {@code str}.
      * @param str The string to be parsed.
      * @return The corresponding task.
-     * @throws DukeException If the initial does not match any Task's subclasses' initials.
+     * @throws DukeException If the initial does not match any {@code Task}'s subclasses' initials.
      */
     public static Task parse(String str) throws DukeException {
         String[] data = str.split(DELIMITER);
@@ -55,7 +55,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns a unique initial of the subtype of Task.
+     * Returns a unique initial of the subtype of {@code Task}.
      * @return The initial.
      */
     abstract String getInitial();

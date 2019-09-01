@@ -18,7 +18,7 @@ public class Event extends Task {
      * Constructor.
      * @param desc The description of the event.
      * @param at The date of the event as a string.
-     * @throws DateParseException If {@code at} cannot be parsed to a Date.
+     * @throws DateParseException If {@code at} cannot be parsed to a {@code Date}.
      */
     public Event(String desc, String at) throws DateParseException {
         super(desc.trim());

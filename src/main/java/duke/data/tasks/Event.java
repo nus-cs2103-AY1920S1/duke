@@ -29,21 +29,6 @@ public class Event extends Task {
         }
     }
 
-    /**
-     * Constructs an event task with the specified description and isDone status.
-     * @param description The specified description.
-     * @param isDone The specified isDone status.
-     */
-    public Event(String description, boolean isDone, String dateAndTime) throws ParseException {
-        super(description, isDone);
-        try {
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            dateFormat.setLenient(false);
-            this.dateAndTime = dateFormat.parse(dateAndTime);
-        } catch (ParseException e) {
-            throw e;
-        }
-    }
 
     /**
      * Returns the command used to create this event task.
@@ -52,22 +37,6 @@ public class Event extends Task {
     @Override
     public String getCommandString() {
         return String.format("event %s /at %s", description, dateFormat.format(dateAndTime));
-    }
-
-    /**
-     * Returns the String representation of this event task's date and time.
-     * @return The String representation of this event task's date and time.
-     */
-    public String getDateAndTime() {
-        return dateFormat.format(dateAndTime);
-    }
-
-    /**
-     * Returns the String representation of this event task's type.
-     * @return The String representation of this event task's type.
-     */
-    public String getType() {
-        return "event";
     }
 
     /**

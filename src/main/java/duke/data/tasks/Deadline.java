@@ -39,14 +39,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of this deadline task's type.
-     * @return The String representation of this deadline task's type.
-     */
-    public String getType() {
-        return "deadline";
-    }
-
-    /**
      * Returns the string representation of this deadline task.
      * @return The string representation of this deadline task.
      */

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +37,15 @@ class Storage {
      * @return default file path specific to platform
      */
     private String getSaveFilePath() {
+        URL url = getClass().getResource("/storage/data.json");
+        return url.getPath();
+        /*
         if (System.getProperty("os.name").equals("Windows 10")) {
             return "/Users/uicfa/Downloads/data.json";
         } else {
             return "/Users/leo/Downloads/data.json";
         }
+         */
     }
 
     /**

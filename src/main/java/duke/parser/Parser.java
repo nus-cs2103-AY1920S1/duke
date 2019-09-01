@@ -35,37 +35,26 @@ public class Parser {
             return prepareIncorrectCommand();
         }
         String commandWord = getCommandWord(input);
-        Command command;
         switch (commandWord) {
         case DeadlineCommand.COMMAND_WORD:
-            command = prepareDeadlineCommand(input);
-            break;
+            return prepareDeadlineCommand(input);
         case DeleteCommand.COMMAND_WORD:
-            command = prepareDeleteCommand(input);
-            break;
+            return prepareDeleteCommand(input);
         case DoneCommand.COMMAND_WORD:
-            command = prepareDoneCommand(input);
-            break;
+            return prepareDoneCommand(input);
         case EventCommand.COMMAND_WORD:
-            command = prepareEventCommand(input);
-            break;
+            return prepareEventCommand(input);
         case ExitCommand.COMMAND_WORD:
-            command = prepareExitCommand();
-            break;
+            return prepareExitCommand();
         case FindCommand.COMMAND_WORD:
-            command = prepareFindCommand(input);
-            break;
+            return prepareFindCommand(input);
         case ListCommand.COMMAND_WORD:
-            command = prepareListCommand();
-            break;
+            return prepareListCommand();
         case TodoCommand.COMMAND_WORD:
-            command = prepareTodoCommand(input);
-            break;
+            return prepareTodoCommand(input);
         default:
-            command = prepareIncorrectCommand();
-            break;
+            return prepareIncorrectCommand();
         }
-        return command;
     }
 
     /**

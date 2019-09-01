@@ -69,7 +69,7 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Label welcomeText = new Label("Hello! I'm Duke\nWhat can I do for you?\n");
+        Label welcomeText = new Label("Hello! I'm Quack.\nWhat can I do for you?\n");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeText, new ImageView(duke)));
 

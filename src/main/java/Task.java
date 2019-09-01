@@ -57,6 +57,14 @@ public class Task {
     }
 
     /**
+     * Returns the Task's description
+     * @return description of Task
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns the Task object in a String format for saving into a text file.
      * @return description and status of Task for saving
      */

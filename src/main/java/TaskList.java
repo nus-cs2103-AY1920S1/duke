@@ -166,7 +166,7 @@ public class TaskList {
      * @param parser Parser object containing a valid "find" command.
      */
     public void find(Parser parser) {
-        ArrayList <Task> matches = new ArrayList<Task>();
+        ArrayList<Task> matches = new ArrayList<Task>();
         Task currentTask;
         String regex = String.format("(.*)%s(.*)", parser.getSearchTerm());
         for (int z = 0; z < taskList.size(); z++) {

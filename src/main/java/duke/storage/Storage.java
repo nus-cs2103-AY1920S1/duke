@@ -60,7 +60,7 @@ public class Storage {
     }
 
     /**
-     * Obtain list of tasks to print, save to hard disk
+     * Obtain list of tasks to print, save to hard disk.
      *
      * @param l List containing all string format tasks to save.
      */

@@ -14,12 +14,19 @@ import java.io.IOException;
  * and get command type and pending tasks of command.
  */
 public abstract class Command {
-    private COMMAND_TYPE commandType;
+    private CommandType commandType;
     private Task pendingTask;
 
+    /**
+     * Constructor for class Duke.
+     *
+     * @param command String command input from user.
+     * @param pendingTask Task object from information given by user.
+     *
+     */
     public Command(String command, Task pendingTask) {
         try {
-            this.commandType = COMMAND_TYPE.valueOf(command.toUpperCase());
+            this.commandType = CommandType.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException i) {
             throw new IllegalArgumentException();
         } catch (NullPointerException n) {
@@ -59,7 +66,7 @@ public abstract class Command {
      *
      * @return COMMAND_TYPE enum constant of commandType.
      */
-    public COMMAND_TYPE getCommandType() {
+    public CommandType getCommandType() {
         return commandType;
     }
 

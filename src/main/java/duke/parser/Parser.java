@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
+import duke.command.CommandNotFoundException;
+import duke.command.FindCommand;
+import duke.command.DoneCommand;
+import duke.command.CommandType;
+import duke.command.Command;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -36,7 +44,7 @@ public class Parser {
     }
 
     /**
-     * Checks if user input follows format of <command> <description> <time>
+     * Checks if user input follows format of: command description time
      * Throws CommandNotFoundException if command is not found.
      * Return user command in command object.
      *
@@ -44,11 +52,12 @@ public class Parser {
      * @return Command object of the user.
      * @throws CommandNotFoundException If command entered by user is not found.
      */
-    public static Command parse(String input) throws CommandNotFoundException, IncorrectFileFormatException, IncorrectNumberOfArgumentsException {
+    public static Command parse(String input) throws CommandNotFoundException, IncorrectNumberOfArgumentsException {
         Task task;
         Command command;
         boolean isFound = false;
-        String commandName = "", commandType = "";
+        String commandName = "";
+        String commandType = "";
 
         for (int i = 0; i < commandList.size(); i++) {
             if (input.toUpperCase().startsWith(commandList.get(i))) {
@@ -67,9 +76,9 @@ public class Parser {
             commandType = commandName;
         }
 
-        COMMAND_TYPE type = COMMAND_TYPE.valueOf(commandType);
+        CommandType type = CommandType.valueOf(commandType);
 
-        if (type == COMMAND_TYPE.ADD) {
+        if (type == CommandType.ADD) {
             if (commandName.equals("TODO")) {
                 task = new ToDo(commandName.toUpperCase().charAt(0),
                         input.substring("Todo".length()).trim(), false);
@@ -94,28 +103,28 @@ public class Parser {
             }
             command = new AddCommand(commandType, task);
 
-        } else if (type == COMMAND_TYPE.BYE) {
+        } else if (type == CommandType.BYE) {
             task = new Task();
             command = new ByeCommand(commandName, task);
 
-        } else if (type == COMMAND_TYPE.DELETE) {
+        } else if (type == CommandType.DELETE) {
             String subsequent = input.substring("Delete ".length()).trim();
 
             int numberToDelete = Integer.parseInt(subsequent);
             task = new Task();
             command = new DeleteCommand(commandName, task, numberToDelete);
 
-        } else if (type == COMMAND_TYPE.DONE) {
+        } else if (type == CommandType.DONE) {
             String subsequent = input.substring("Done ".length()).trim();
 
             int numberDone = Integer.parseInt(subsequent);
             task = new Task();
             command = new DoneCommand(commandName, task, numberDone);
 
-        } else if (type == COMMAND_TYPE.LIST) {
+        } else if (type == CommandType.LIST) {
             command = new ListCommand(commandName);
 
-        } else if (type == COMMAND_TYPE.FIND) {
+        } else if (type == CommandType.FIND) {
             if (input.toLowerCase().equals("find")) {
                 throw new IncorrectNumberOfArgumentsException();
             }
@@ -135,7 +144,7 @@ public class Parser {
     }
 
     /**
-     * Checks if file input follows format of <command> <done> <description> <time>
+     * Checks if file input follows format of: command description time
      * Throws IncorrectFileFormatException if command is not found.
      * Return task in task object.
      *

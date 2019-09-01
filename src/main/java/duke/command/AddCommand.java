@@ -6,18 +6,17 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents an add command
+ * Represents an add command.
  * To add task to task list, perform Ui task and save to hard disk.
  */
 public class AddCommand extends Command {
 
     public AddCommand(String command, Task pendingTask) {
         super(command, pendingTask);
-
     }
 
     /**
-     * Added new task to task list, perform Ui display and save to hard disk
+     * Added new task to task list, perform Ui display and save to hard disk.
      *
      * @param list    List containing all tasks.
      * @param ui      Ui interface of duke.
@@ -31,7 +30,7 @@ public class AddCommand extends Command {
 
         storage.save(list.printList());
 
-        ui.showAddedTask(temp.getFirstCharTask(),temp.getIsDone(), temp.getTaskDescription(), list.getTaskCount());
+        ui.showAddedTask(temp.getFirstCharTask(), temp.getIsDone(), temp.getTaskDescription(), list.getTaskCount());
     }
 
     /**

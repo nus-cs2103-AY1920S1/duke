@@ -14,7 +14,7 @@ import duke.parser.Parser;
 import duke.command.Command;
 
 /**
- * Represents a Duke - interactive bot
+ * Represents a Duke - interactive bot.
  * Contains functions to operate the bot.
  */
 public class Duke {
@@ -22,6 +22,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for class Duke
+     *
+     * @param filePath String of file path to read.
+     */
     public Duke(String filePath) {
         Parser.initialize();
         storage = new Storage(filePath);
@@ -66,8 +71,6 @@ public class Duke {
                 ui.showCommandNotFoundError();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (IncorrectFileFormatException i) {
-                ui.showLoadingError();
             } catch (IncorrectNumberOfArgumentsException e) {
                 ui.showIncorrectNumberOfArgument();
             } finally {

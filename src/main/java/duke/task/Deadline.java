@@ -14,6 +14,14 @@ public class Deadline extends Task {
     private Date givenTime;
     private SimpleDateFormat df;
 
+    /**
+     * Constructor to create Deadline task object.
+     *
+     * @param taskType        Character of first letter of task.
+     * @param taskDescription String input of command from user.
+     * @param isDone          Boolean indicating if task is completed.
+     * @param givenTime       String of given time of deadline.
+     */
     public Deadline(char taskType, String taskDescription, boolean isDone, String givenTime) {
         super(taskType, taskDescription, isDone);
 
@@ -26,6 +34,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Constructor to create deadline task object.
+     *
+     * @param taskDescription String input of command from user.
+     * @param isDone          Boolean indicating if task is completed.
+     * @param givenTime       String of given time of deadline.
+     */
     public Deadline(String taskDescription, boolean isDone, String givenTime) {
         super(taskDescription, isDone);
 
@@ -50,7 +65,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Set time for given deadline,
+     * Set time for given deadline.
      *
      * @param time String representation of time.
      * @throws ParseException If format of time in string does not match specified format.
@@ -60,7 +75,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get time for given deadline,
+     * Get time for given deadline.
      */
     public String getGivenTime() {
         return df.format(givenTime);

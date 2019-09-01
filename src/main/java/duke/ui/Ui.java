@@ -20,7 +20,7 @@ public class Ui {
      * Display welcome message.
      */
     public void showWelcome() {
-        String UI_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+        final String UI_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(UI_GREETING);
     }
 
@@ -28,7 +28,7 @@ public class Ui {
      * Display line.
      */
     public void showLine() {
-        String UI_HORIZONTAL_LINE = "____________________________________________________________";
+        final String UI_HORIZONTAL_LINE = "____________________________________________________________";
         System.out.println(UI_HORIZONTAL_LINE);
     }
 
@@ -36,7 +36,7 @@ public class Ui {
      * Display bye message.
      */
     public void showBye() {
-        String UI_GOODBYE = "Bye. Hope to see you again soon!";
+        final String UI_GOODBYE = "Bye. Hope to see you again soon!";
         sc.close();
         System.out.println(UI_GOODBYE);
     }

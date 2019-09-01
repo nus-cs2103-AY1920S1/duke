@@ -8,7 +8,7 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 /**
- * Represents a list command
+ * Represents a list command.
  * To obtain list of task to print, perform Ui task.
  */
 public class ListCommand extends Command {

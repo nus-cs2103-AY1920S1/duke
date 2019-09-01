@@ -14,6 +14,13 @@ public class Event extends Task {
     private Date givenTime;
     private SimpleDateFormat df;
 
+    /**
+     * Constructor to create Event task object.
+     *
+     * @param taskDescription String input of command from user.
+     * @param isDone          Boolean indicating if task is completed.
+     * @param givenTime       String of given time of deadline.
+     */
     public Event(String taskDescription, boolean isDone, String givenTime) {
         super(taskDescription, isDone);
 
@@ -27,6 +34,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Constructor to create Event task object.
+     *
+     * @param taskType        Character of first letter of task.
+     * @param taskDescription String input of command from user.
+     * @param isDone          Boolean indicating if task is completed.
+     * @param givenTime       String of given time of deadline.
+     */
     public Event(char taskType, String taskDescription, boolean isDone, String givenTime) {
         super(taskType, taskDescription, isDone);
 
@@ -47,7 +62,8 @@ public class Event extends Task {
      */
     @Override
     public String printTask() {
-        return "[" + getFirstCharTask() + "][" + getIcon() + "] " + getTaskDescription() + " (at: " + getGivenTime() + ")";
+        return "[" + getFirstCharTask() + "][" + getIcon() + "] "
+               + getTaskDescription() + " (at: " + getGivenTime() + ")";
     }
 
     /**

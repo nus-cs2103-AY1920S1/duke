@@ -2,7 +2,10 @@ public class Deadline extends Task{
     protected String deadline;
 
     public Deadline(String sentence) throws DukeException{
-        this(sentence.split("/by", 2)[0], (sentence.split("/by", 2).length > 1 ? sentence.split("/by", 2)[1] : "" ));
+        this(sentence.split("/by", 2)[0],
+                (sentence.split("/by", 2).length > 1
+                        ? sentence.split("/by", 2)[1]
+                        : "" ));
         this.taskType = "D";
     }
 

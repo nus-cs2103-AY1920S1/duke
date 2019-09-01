@@ -14,25 +14,36 @@ public abstract class Task{
     }
 
     public String parseDate(String input){
-        SimpleDateFormat parser = new SimpleDateFormat("d/MM/yyyy HHmm");
+        SimpleDateFormat userInputParser = new SimpleDateFormat("d/MM/yyyy HHmm");
+        SimpleDateFormat storageInputParser = new SimpleDateFormat("d 'of' MMMM yyyy',' h'.'mma");
         try{
-            Date parsedDate = parser.parse(input);
+            Date parsedDate;
+            try{
+                parsedDate = userInputParser.parse(input);
+            }catch(ParseException e){
+                try{
+                    String inputWithRemovedOrdinal = input.replaceAll("(?<=\\d)(st|nd|rd|th)", "");
+                    parsedDate = storageInputParser.parse(inputWithRemovedOrdinal);
+                }catch(ParseException f){
+                    throw f;
+                }
+            }
             Calendar cal = Calendar.getInstance();
             cal.setTime(parsedDate);
             int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
             if(dayOfMonth < 10 || dayOfMonth > 19){
                 switch (dayOfMonth % 10) {
                     case 1:
-                        return new SimpleDateFormat("d'st' 'of' MMMM yyyy',' ha").format(parsedDate);
+                        return new SimpleDateFormat("d'st' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
                     case 2:
-                        return new SimpleDateFormat("d'nd' 'of' MMMM yyyy',' ha").format(parsedDate);
+                        return new SimpleDateFormat("d'nd' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
                     case 3:
-                        return new SimpleDateFormat("d'rd' 'of' MMMM yyyy',' ha").format(parsedDate);
+                        return new SimpleDateFormat("d'rd' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
                     default:
-                        return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' ha").format(parsedDate);
+                        return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
                 }
             }else{
-                return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' ha").format(parsedDate);
+                return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
             }
         } catch(ParseException e){
             System.out.println("ERROR PARSING DATE");

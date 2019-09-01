@@ -3,7 +3,10 @@ public class Event extends Task{
     protected String eventDate;
 
     public Event(String sentence) throws DukeException{
-        this(sentence.split("/at", 2)[0],(sentence.split("/at", 2).length > 1 ? sentence.split("/at", 2)[1] : ""));
+        this(sentence.split("/at", 2)[0],
+                (sentence.split("/at", 2).length > 1
+                        ? sentence.split("/at", 2)[1]
+                        : ""));
         this.taskType = "E";
     }
 

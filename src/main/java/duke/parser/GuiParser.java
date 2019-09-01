@@ -42,7 +42,7 @@ public class GuiParser  {
                         String result = storeTaskList.doneTask(index);
                         return result;
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println("invalid number not in current list");
+                        return "invalid number not in current list , please enter input again";
                     } catch (DukeException e) {
                         return e.toString();
                     }

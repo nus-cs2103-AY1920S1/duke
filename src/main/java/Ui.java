@@ -20,12 +20,15 @@ public class Ui {
         printIndent();
         System.out.println("Hello! My name is \n" + logo + "\n" + "    What can I do for you? \n");
         printIndent();
-        System.out.println("I can only do these functions for now: \n \n" + "  Todo \n" + "  Event \n" + "  Deadline \n" + "  Delete \n" + "  Done \n" + "  List \n");
+        System.out.println("I can only do these functions for now: \n \n" +
+                "    Todo \n" + "        Eg. todo __(task)__\n" +
+                "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n" +
+                "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n" +
+                "    Delete \n" + "        Eg. delete __(number)__ or delete all\n" +
+                "    Done \n" + "        Eg. done __(number)__\n" +
+                "    List \n");
         printIndent();
         System.out.println("Ill be adding in more features soon! Please be patient! :)");
-        printIndent();
-        System.out.println("I can only accept dates in this following format: \n" +
-                "    dd/MM/yyyy hhmm. Please adhere to it! Thank you!" );
         printLine();
     }
 
@@ -40,8 +43,8 @@ public class Ui {
                 } else if (text.equals("list")) {
                     printList();
                 } else if (text.equals("delete all")) {
-                    deleteAll();
-                } else if (text.indexOf(" ") > -1) {
+                    tL.deleteAllCommand(text);
+                } else if (text.contains(" ")) {
 
                     String[] splittedText = text.split(" ");
 
@@ -50,73 +53,23 @@ public class Ui {
                         int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
                         if (taskNumber > 0 && taskNumber <= TaskList.listOfTasks.size()) {
                             printDone(taskNumber);
-                            //tasking[num] = arrayList.get((taskNumber - 1));
                         } else {
                             throw new DukeException("☹ OOPS!!! There is no such task number in your list of tasks!! " +
                                     "Please enter a valid number!");
                         }
                     } else if (splittedText[0].equals("delete")) {
-                        int num = text.indexOf(" ");
-                        int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
-                        Task.printRemove();
-                        printDelete(taskNumber);
-                        TaskList.listOfTasks.remove(taskNumber - 1);
-                        Storage.writeToFile(Storage.file, "");
-                        for (Task task : TaskList.listOfTasks) {
-                            Storage.addToFile(Storage.file, task.toString());
-                        }
-                        Task.printNumOfTasks();
+                        tL.deleteCommand(text);
                     } else {
                         if (splittedText[0].equals("todo")) {
-                            Task.printGI();
-                            printIndent();
-                            int num = text.indexOf(" ");
-                            Task task = new Todo(text.substring(num + 1));
-                            System.out.println("  " + task.toString());
-                            TaskList.listOfTasks.add(task);
-                            Storage.addToFile(Storage.file, task.toString());
-                            Task.printNumOfTasks();
-
+                            tL.toDoCommand(text);
 
                         } else if (splittedText[0].equals("deadline") &&
                                 text.contains("/") && text.contains("by")) { // what if there is no deadline
-                            int num = text.indexOf("/");
-                            int num1 = text.indexOf(" ");
-                            Task task = new Deadline(text.substring(num1, num - 1),
-                                    text.substring(num + 4));
-                            String taskers = task.toString();
-                            if (!taskers.equals("Invalid date format!")) {
-                                Task.printGI();
-                                printIndent();
-                                System.out.println("  " + taskers);
-                                TaskList.listOfTasks.add(task);
-                                Storage.addToFile(Storage.file, taskers);
-                                Task.printNumOfTasks();
-                            } else {
-                                printIndent();
-                                throw new DukeException(taskers);
-                            }
-
+                            tL.deadlineCommand(text);
 
                         } else if (splittedText[0].equals("event") &&
                                 text.contains("/") && text.contains("at")) { // what if there is no date
-                            int num = text.indexOf("/");
-                            int num1 = text.indexOf(" ");
-                            Task task = new Event(text.substring(num1, num - 1),
-                                    text.substring(num + 4));
-                            String taskers = task.toString();
-                            if (!taskers.equals("Invalid date format!")) {
-
-                                Task.printGI();
-                                printIndent();
-                                System.out.println("  " + taskers);
-                                TaskList.listOfTasks.add(task);
-                                Storage.addToFile(Storage.file, taskers);
-                                Task.printNumOfTasks();
-                            } else {
-                                printIndent();
-                                throw new DukeException(taskers);
-                            }
+                            tL.eventCommand(text);
                         } else {
                             printLine();
                             printIndent();
@@ -197,7 +150,7 @@ public class Ui {
      *
      * @param i Indicates the task number that is done.
      */
-    private static void printDelete(int i) {
+    public static void printDelete(int i) {
         printIndent();
         System.out.println(TaskList.listOfTasks.get(i-1).toString());
         printLine();

@@ -72,30 +72,36 @@ public class Task {
 
     public String formatDate(String date) {
         String formatted = date;
-        try {
-            Date d = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(date);
-            String day = new SimpleDateFormat("dd").format(d);
-            String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(d);
-            String year = new SimpleDateFormat("yyyy").format(d);
-            String time = new SimpleDateFormat("h:mm a").format(d).toLowerCase();
-            String endOfDate;
-            int dayInteger = Integer.parseInt(day);
+        if (!date.contains(")")) {
+            try {
+                Date d = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(date);
+                String day = new SimpleDateFormat("dd").format(d);
+                String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(d);
+                String year = new SimpleDateFormat("yyyy").format(d);
+                String time = new SimpleDateFormat("h:mm a").format(d).toLowerCase();
+                String endOfDate;
+                int dayInteger = Integer.parseInt(day);
 
-            if (dayInteger % 10 == 1 && dayInteger != 11) {
-                endOfDate = "st";
-            } else if (dayInteger % 10 == 2 && dayInteger != 12) {
-                endOfDate = "nd";
-            } else if (dayInteger % 10 == 3 && dayInteger != 13) {
-                endOfDate = "rd";
-            } else {
-                endOfDate = "th";
+                if (dayInteger % 10 == 1 && dayInteger != 11) {
+                    endOfDate = "st";
+                } else if (dayInteger % 10 == 2 && dayInteger != 12) {
+                    endOfDate = "nd";
+                } else if (dayInteger % 10 == 3 && dayInteger != 13) {
+                    endOfDate = "rd";
+                } else {
+                    endOfDate = "th";
+                }
+                isCorrectFormat = true;
+                formatted = dayInteger + endOfDate + " of " + month + " " + year + ", " + time;
+
+            } catch (ParseException e) {
+                Ui.printIndent();
+                System.out.println(e.getMessage());
+                Ui.printIndent();
+                System.out.println("That is the wrong date format! >:-(");
             }
+        } else {
             isCorrectFormat = true;
-            formatted = dayInteger + endOfDate + " of " + month + " " + year + ", " + time;
-        } catch (ParseException e) {
-            System.out.println(e.getMessage());
-            Ui.printIndent();
-            System.out.println("That is the wrong date format! >:-(");
         }
         return formatted;
     }

@@ -88,7 +88,7 @@ public class Storage {
         Scanner sc = new Scanner(f);
         ArrayList<Task> tempList;
         if (countLines(file) == 0) {
-            throw new DukeException("Woah! There is nothing in this file!");
+            throw new DukeException("Woahsies wavy! There is nothing in this file!");
         } else {
             while (sc.hasNext()) {
                 String task = sc.nextLine();
@@ -100,16 +100,17 @@ public class Storage {
                         break;
                     case "D":
                         int byIndex = task.indexOf("(");
-                        Task deadline = new Deadline(task.substring(7, byIndex - 1), task.substring(byIndex + 5));
+                        Task deadline = new Deadline(task.substring(7, byIndex - 1), task.substring(byIndex + 4));
                         taskList.add(deadline);
                         break;
                     case "E":
                         int atIndex = task.indexOf("(");
-                        Task event = new Event(task.substring(7, atIndex - 1), task.substring(atIndex + 5));
+                        Task event = new Event(task.substring(7, atIndex - 1), task.substring(atIndex + 4));
                         taskList.add(event);
                         break;
                 }
             }
+            Ui.printIndent();
             System.out.println("Your file has been loaded! :)");
             tempList = new ArrayList<Task>(taskList);
             return tempList;

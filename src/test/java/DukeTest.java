@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import slave.command.FindCommand;
 import slave.command.AddDeadlineCommand;
@@ -97,62 +96,53 @@ class DukeTest {
         boolean c8 = false;
         try {
             Parser.parse(command1);
-            c1 = true;
         } catch (MissingDescriptionException ignored) {
-            System.out.println(ignored.getMessage());
+            c1 = true;
         }
         try {
             Parser.parse(command2);
-            c2 = true;
         } catch (MissingDescriptionException ignored) {
-            System.out.println(ignored.getMessage());
+            c2 = true;
         }
         try {
             Parser.parse(command3);
-            c3 = true;
         } catch (MissingDescriptionException ignored) {
-            System.out.println(ignored.getMessage());
+            c3 = true;
         }
         try {
             Parser.parse(command4);
-            c4 = true;
         } catch (MissingTaskException ignored) {
-            System.out.println(ignored.getMessage());
+            c4 = true;
         }
         try {
             Parser.parse(command5);
-            c5 = true;
         } catch (MissingTaskException ignored) {
-            System.out.println(ignored.getMessage());
+            c5 = true;
         }
         try {
             Parser.parse(command6);
-            c6 = true;
         } catch (MissingDateException ignored) {
-            System.out.println(ignored.getMessage());
+            c6 = true;
         }
         try {
             Parser.parse(command7);
-            c7 = true;
         } catch (MissingDateException ignored) {
-            System.out.println(ignored.getMessage());
+            c7 = true;
         }
         try {
             Parser.parse(command8);
-            c8 = true;
         } catch (InvalidDateException ignored) {
-            System.out.println(ignored.getMessage());
+            c8 = true;
         }
 
-        assertFalse(c1);
-        assertFalse(c2);
-        assertFalse(c3);
-        assertFalse(c4);
-        assertFalse(c5);
-        assertFalse(c6);
-        assertFalse(c7);
-        assertFalse(c8);
-
+        assertTrue(c1);
+        assertTrue(c2);
+        assertTrue(c3);
+        assertTrue(c4);
+        assertTrue(c5);
+        assertTrue(c6);
+        assertTrue(c7);
+        assertTrue(c8);
 
     }
 

@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents the task manager.
  */
-public class Duke {
+public class Duke extends Application {
 
     /**
      * The storage that loads and save tasks.
@@ -39,6 +43,25 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Constructs the Duke file.
+     */
+    public Duke () {
+    }
+
+    /**
+     * Starts the program.
+     * @param stage stage used
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**

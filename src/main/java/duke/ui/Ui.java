@@ -1,4 +1,5 @@
-import java.util.List;
+package duke.ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -14,7 +15,8 @@ public class Ui {
             + "     What can I do for you?   \n"
             + line;
 
-    public Ui() {}
+    public Ui() {
+    }
 
     public void printLogo() {
         System.out.println(logo);

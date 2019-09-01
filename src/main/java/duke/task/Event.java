@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private LocalDateTime dateTime;
 
-    public Deadline(String description, String date) {
+    public Event(String description, String date) {
         super(description);
         String[] dateSplit = date.split("\\s");
         String[] d = dateSplit[0].split("/");
@@ -22,11 +24,11 @@ public class Deadline extends Task {
 
     @Override
     public String toFile() {
-        return "D|" + getStatusIcon() + "|" + description + "|" + getDate();
+        return "E|" + getStatusIcon() + "|" + description + "|" + getDate();
     }
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + "(by: " + getDate() + ")";
+        return "[E][" + getStatusIcon() + "] " + description + "(at: " + getDate() + ")";
     }
 }

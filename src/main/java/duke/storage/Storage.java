@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -6,6 +8,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Storage {
     final static Charset ENCODING = StandardCharsets.UTF_8;
@@ -26,7 +33,7 @@ public class Storage {
     public ArrayList<Task> readDuke() throws IOException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         List<String> lines = read();
-        for(String s : lines) {
+        for (String s : lines) {
             String[] split = s.split("\\|");
             Task task = new Task();
             if (split[0].contains("T")) {

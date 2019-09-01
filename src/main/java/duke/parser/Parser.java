@@ -1,5 +1,8 @@
+package duke.parser;
+
 public class Parser {
-    public Parser() {}
+    public Parser() {
+    }
 
     public int getCommand(String input) {
         String[] i = input.split("\\s");

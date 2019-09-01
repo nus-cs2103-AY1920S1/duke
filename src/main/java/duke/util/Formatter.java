@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Formatter class, to handle various formatting in Duke application.
  */
 public class Formatter {
-    private static final DateTimeFormatter prettyFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
-    private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter PRETTY_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
+    private static final DateTimeFormatter STANDARD_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * Converts the given datetime to human readable format.
@@ -17,7 +17,7 @@ public class Formatter {
      * @return the given datetime in human readable format.
      */
     public static String prettyFormatDateTime(LocalDateTime dateTime) {
-        return dateTime.format(prettyFormat);
+        return dateTime.format(PRETTY_FORMAT);
     }
 
     /**
@@ -27,6 +27,6 @@ public class Formatter {
      * @return the given datetime in standard format for disk storage.
      */
     public static String standardFormatDateTime(LocalDateTime dateTime) {
-        return dateTime.format(standardFormat);
+        return dateTime.format(STANDARD_FORMAT);
     }
 }

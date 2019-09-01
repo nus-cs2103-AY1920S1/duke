@@ -27,11 +27,13 @@ public class DoneCommand extends Command {
      *
      * @throws DukeException if taskId refers to a non-existent task.
      */
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         Task task = this.taskList.at(taskId);
         task.markAsDone();
-        this.ui.displaySingleLine("Nice! I've marked this task as done:");
-        this.ui.displayMessage(task.toString(), 2);
+        //this.ui.displaySingleLine("Nice! I've marked this task as done:");
+        //this.ui.displayMessage(task.toString(), 2);
         this.storage.saveToDisk(this.taskList);
+        return "Nice! I've marked this task as done:" +
+                ui.indentMessage(task.toString());
     }
 }

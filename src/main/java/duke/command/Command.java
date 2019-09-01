@@ -33,5 +33,5 @@ public abstract class Command {
      *
      * @throws DukeException for generic recoverable errors
      */
-    public abstract void execute() throws DukeException;
+    public abstract String execute() throws DukeException;
 }

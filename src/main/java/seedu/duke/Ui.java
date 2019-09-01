@@ -33,8 +33,8 @@ public class Ui {
     /**
      * Prints the exception of loading data file into arraylist error.
      */
-    public void showLoadingError() {
-        System.out.println("\u2639 OOPS!!! There is an error loading data file");
+    public String showLoadingError() {
+        return "\u2639 OOPS!!! There is an error loading data file";
     }
 
     /**
@@ -51,8 +51,8 @@ public class Ui {
      *
      * @param task Task that is deleted.
      */
-    public void printDeletedTaskMsg(Task task) {
-        System.out.println("Noted. I've removed this task:\n" + task);
+    public String printDeletedTaskMsg(Task task) {
+        return "Noted. I've removed this task:\n" + task;
     }
 
     /**
@@ -60,14 +60,15 @@ public class Ui {
      *
      * @param tasks TaskList of the tasks in the list currently.
      */
-    public void printNoOfTaskInList(TaskList tasks) {
+    public String printNoOfTaskInList(TaskList tasks) {
         String statusOfList;
         if (tasks.size() == 1) {
             statusOfList = "Now you have 1 task in the list.\n";
         } else {
             statusOfList = "Now you have " + tasks.size() + " tasks in the list.\n";
         }
-        System.out.println(statusOfList);
+        //System.out.println(statusOfList);
+        return statusOfList;
     }
 
     /**
@@ -230,9 +231,10 @@ public class Ui {
      *
      * @param task Task that is added to the list.
      */
-    public void printAddedTask(Task task) {
+    public String printAddedTask(Task task) {
         String commandMsg = "Got it. I've added this task:\n" + task;
-        System.out.println(commandMsg);
+        //System.out.println(commandMsg);
+        return commandMsg;
     }
 
     /**
@@ -272,10 +274,11 @@ public class Ui {
      *
      * @param task Task that is marked as done.
      */
-    public void printMarkDoneMsg(Task task) {
+    public String printMarkDoneMsg(Task task) {
         String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
                 "[" + task.getStatusIcon() + "] " + task.getDescription() + "\n";
-        System.out.println(markAsDoneMsg);
+        //System.out.println(markAsDoneMsg);
+        return markAsDoneMsg;
     }
 
     /**
@@ -283,24 +286,26 @@ public class Ui {
      *
      * @param tasks TaskList of all the tasks currently.
      */
-    public void printAllTasks(TaskList tasks) {
-        String listMsg = "Here are the tasks in your list:";
-        System.out.println(listMsg);
+    public String printAllTasks(TaskList tasks) {
+        String listMsg = "Here are the tasks in your list:\n";
+        //System.out.println(listMsg);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String taskMsg = (i + 1) + ". " + task;
-            System.out.println(taskMsg);
+            String taskMsg = (i + 1) + ". " + task + "\n";
+            listMsg = listMsg + taskMsg;
+            //System.out.println(taskMsg);
         }
-        System.out.println();
+        //System.out.println();
+        return listMsg;
     }
 
     /**
      * Prints the exception message for a parse error caused by an
      * incorrectly input date and time format.
      */
-    public void showParseError() {
-        System.out.println("\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
-                "and time in 24hr format or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n");
+    public String showParseError() {
+        return "\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
+                "and time in 24hr format or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n";
     }
 
     /**
@@ -308,16 +313,16 @@ public class Ui {
      *
      * @param e Exception that was thrown to be printed.
      */
-    public void showExceptionMsg(Exception e) {
-        System.out.println(e);
+    public String showExceptionMsg(Exception e) {
+        return e.toString();
     }
 
     /**
      * Prints the goodbye message of duke when the bye command is input.
      */
-    public void printGoodbyeMsg() {
+    public String printGoodbyeMsg() {
         String exitMsg = "Bye. Hope to see you again soon!\n";
-        System.out.println(exitMsg);
+        return exitMsg;
     }
 
     /**
@@ -345,15 +350,17 @@ public class Ui {
      *
      * @param tasks TaskList of all the tasks matching keyword.
      */
-    public void printAllMatchingTasks(TaskList tasks) {
-        String listMsg = "Here are the matching tasks in your list:";
-        System.out.println(listMsg);
+    public String printAllMatchingTasks(TaskList tasks) {
+        String listMsg = "Here are the matching tasks in your list:\n";
+       // System.out.println(listMsg);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String taskMsg = (i + 1) + ". " + task;
-            System.out.println(taskMsg);
+            String taskMsg = (i + 1) + ". " + task + "\n";
+            listMsg = listMsg + taskMsg;
+            //System.out.println(taskMsg);
         }
-        System.out.println();
+        //System.out.println();
+        return listMsg;
     }
 
     /**

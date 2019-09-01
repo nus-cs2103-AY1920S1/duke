@@ -26,15 +26,16 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there is incorrect user input.
      * @throws Exception If unable to overwrite data file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         //deleting task
         ui.checkErrorForDeleteCommand(command, tasks);
         int curr = Parser.taskToDelete(command);
         tasks.remove(curr - 1);
-        ui.printDeletedTaskMsg(tasks.get(curr - 1));
-        ui.printNoOfTaskInList(tasks);
+
         //write 'tasks' into data file, overwriting all contents
         storage.writeFile(tasks);
+        return ui.printDeletedTaskMsg(tasks.get(curr - 1)) + "\n" +
+            ui.printNoOfTaskInList(tasks);
     }
 
     /**

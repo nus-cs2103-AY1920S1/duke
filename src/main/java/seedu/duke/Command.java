@@ -23,7 +23,7 @@ public abstract class Command {
      * @throws java.io.IOException If there is problems reading/writing or appending to file.
      * @throws Exception If there is problems with Parser reading in file line.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
 
     /**
      * Returns if duke should end.

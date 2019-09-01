@@ -23,8 +23,8 @@ public class ListCommand extends Command {
      * @param ui Ui initialized in <code>Duke</code> to interact with user.
      * @param storage Storage to append to data file after updating tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printAllTasks(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printAllTasks(tasks);
     }
 
     /**

@@ -1,9 +1,6 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.TaskImplStub;
-import duke.task.TaskList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -68,9 +65,9 @@ public class TaskListTest {
 
     @Test
     void size() {
-        assertEquals(0, taskList.size());
+        assertEquals(0, taskList.getSize());
         addTask();
-        assertEquals(1, taskList.size());
+        assertEquals(1, taskList.getSize());
     }
 
     @Test

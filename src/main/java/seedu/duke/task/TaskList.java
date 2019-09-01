@@ -6,12 +6,21 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskList extends ArrayList<Task> {
+/**
+ * Represents an ArrayList that takes in objects of type Task and its subclasses.
+ */
+public class TaskList extends ArrayList<Task>{
+    /** This is the first constructor which is used to initialise an empty TaskList */
+    public TaskList(){}
 
-    public TaskList() { }
-
-    public TaskList(File f) throws DukeException {
-        try {
+    /** This is the second constructor which is used to initialise a non-empty TaskList.
+     * It reads the existing Task objects from a file and adds them to the TaskList.
+     *
+     * @param f Represents the file to be read.
+     * @throws DukeException  If f cannot be found.
+     */
+    public TaskList(File f) throws DukeException{
+        try{
             Scanner sc = new Scanner(f);
             while(sc.hasNext()) {
                 String line = sc.nextLine();

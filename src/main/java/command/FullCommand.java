@@ -2,9 +2,14 @@ package command;
 
 import exception.DukeException;
 
+/**
+ * Enum detailing all the valid commands Duke understands.
+ * Used by Parser to generate Command Object.
+ * Easy way to check if user types invalid command.
+ */
 public enum FullCommand {
     LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline")
-        , EVENT("event"), BYE("bye");
+        , EVENT("event"), BYE("bye"), FIND("find");
 
     private String name;
 
@@ -16,6 +21,12 @@ public enum FullCommand {
         return name;
     }
 
+    /**
+     * Generates FullCommand based on String user input.
+     * @param keyword Specifies the type of FullCommand).
+     * @return return FullCommand to be parsed by parser.
+     * @throws DukeException Thrown when user enters invalid command.
+     */
     public static FullCommand getByName(String keyword) throws DukeException {
         for(FullCommand command : values()){
             if(command.getName().equals(keyword)){

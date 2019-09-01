@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Used for testing purposes.
+ */
 public class TaskStub extends Task{
     public TaskStub(String description) {
         super(description);

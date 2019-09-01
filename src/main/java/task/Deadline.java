@@ -3,8 +3,17 @@ package task;
 import datetime.DateTime;
 import exception.DukeException;
 
+/**
+ * Deadline task object. Has an task name, date and time.
+ */
 public class Deadline extends Task{
     DateTime date_Time;
+
+    /**
+     * Constructor for Deadline object. Called when generating TaskList based on user input.
+     * @param description includes task name, date and time.
+     * @throws DukeException thrown when description format is incorrect. or when setDeadline throws DukeException.
+     */
     public Deadline(String description) throws DukeException{
         super(description);
         int divider = description.indexOf("/by");
@@ -16,12 +25,12 @@ public class Deadline extends Task{
         date_Time = DateTime.setDeadline(description.substring(divider + 4, description.length()));
         super.description = super.description.substring(0, divider);
     }
-    public Deadline(String description, DateTime date_Time){
-        super(description);
-        System.out.println(date_Time);
-        this.date_Time = date_Time;
-    }
 
+
+    /**
+     * toString method of DeadLine
+     * @return String denoting task name, status date and time of Deadline task.
+     */
     @Override
     public String toString(){
         String output = "[D][" + super.getStatusIcon() + "]" + " " + super.description

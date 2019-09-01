@@ -1,15 +1,16 @@
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+/*
+ * Main class responsible for running Duke Chatbot
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /*
+     * Constructor of Duke class
+     * @param filepath The directory of the text file for populating task list
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +22,9 @@ public class Duke {
         }
     }
 
+    /*
+     * Method to start up Duke Chatbot
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.shared.Messages;
+import javafx.stage.Stage;
 
 import java.util.Scanner;
 
@@ -14,6 +15,8 @@ public class Ui {
             + "___\n";
 
     private Scanner scanner;
+
+    private DukeWindow mainUi;
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -60,5 +63,15 @@ public class Ui {
             System.out.println(line);
         }
         System.out.println(END_HORIZONTAL_LINE);
+    }
+
+    /**
+     * Displays the UI.
+     * @param primaryStage main stage of the application
+     */
+    public void run(Stage primaryStage) {
+        mainUi = new DukeWindow(primaryStage);
+        mainUi.show();
+        showWelcome();
     }
 }

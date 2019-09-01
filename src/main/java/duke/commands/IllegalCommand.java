@@ -15,9 +15,10 @@ public class IllegalCommand extends Command {
      * @param tasks   tasks
      * @param ui      ui
      * @param storage storage
+     * @return Illegal Command Message
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.showMessage(ui.showIllegalCommandMessage());
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        return ui.getIllegalCommandMessage();
     }
 
     /**

@@ -15,9 +15,10 @@ public class ByeCommand extends Command {
      * @param tasks   tasks
      * @param ui      ui
      * @param storage storage
+     * @return bye message
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.showMessage(ui.showByeMessage());
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        return ui.getByeMessage();
     }
 
     /**

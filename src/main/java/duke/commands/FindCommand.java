@@ -11,9 +11,16 @@ public class FindCommand extends Command {
         this.kw = kw;
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    /**
+     * Finds task
+     * @param tasks
+     * @param ui       ui
+     * @param storage  storage
+     * @return Found task
+     */
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         String taskMessage = tasks.find(kw);
-        ui.showMessage(ui.showFoundMessage(taskMessage));
+        return ui.getFoundMessage(taskMessage);
     }
 
     public boolean isExit() {

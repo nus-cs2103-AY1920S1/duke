@@ -28,13 +28,13 @@ public class DeleteCommand extends Command {
      * @param ui      ui
      * @param storage storage
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.delete(index);
-            ui.showMessage(ui.showDeleteMessage(taskMessage, tasks.getTasksSize()));
             storage.save(tasks.getTasks());
+            return ui.getDeleteMessage(taskMessage, tasks.getTasksSize());
         } catch (IOException e) {
-            ui.showMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 

@@ -21,20 +21,20 @@ public class UI {
     }
 
     /**
-     * Shows bye message.
+     * Returns bye message.
      * @return bye message
      */
-    public String showByeMessage() {
+    public String getByeMessage() {
         String exitMessage = "Bye. Hope to see you again soon!";
         return padMessage(exitMessage);
     }
 
     /**
-     * Shows done message.
+     * Gets done message.
      * @param taskMessage done task
      * @return done message
      */
-    public String showDoneMessage(String taskMessage) {
+    public String getDoneMessage(String taskMessage) {
         String doneMessage = "Nice! I've marked this task as done:";
         StringJoiner result = new StringJoiner("\n");
         result.add(doneMessage);
@@ -43,12 +43,12 @@ public class UI {
     }
 
     /**
-     * Shows deleted message.
+     * Gets deleted message.
      * @param taskMessage deleted task
      * @param tasksSize task size after deletion
      * @return deleted message
      */
-    public String showDeleteMessage(String taskMessage, int tasksSize) {
+    public String getDeleteMessage(String taskMessage, int tasksSize) {
         String deleteMessage = "Noted. I've removed this task: ";
         StringJoiner result = new StringJoiner("\n");
         result.add(deleteMessage);
@@ -58,12 +58,12 @@ public class UI {
     }
 
     /**
-     * Shows added message.
+     * Gets added message.
      * @param taskMessage added task
      * @param tasksSize task size after adding
      * @return added message
      */
-    public String showAddedMessage(String taskMessage, int tasksSize) {
+    public String getAddedMessage(String taskMessage, int tasksSize) {
         String addedMessage = "Got it. I've added this task:";
         StringJoiner result = new StringJoiner("\n");
         result.add(addedMessage);
@@ -73,10 +73,10 @@ public class UI {
     }
 
     /**
-     * Shows illegal command message.
+     * Gets illegal command message.
      * @return illegal command message
      */
-    public String showIllegalCommandMessage() {
+    public String getIllegalCommandMessage() {
         String illegalCommandMessage = "____________________________________________________________\n"
                 + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                 + "____________________________________________________________";
@@ -84,10 +84,10 @@ public class UI {
     }
 
     /**
-     * Shows loading error.
+     * Gets loading error.
      * @return loading error
      */
-    public String showLoadingError() {
+    public String getLoadingError() {
         String loadingError = "\u2639 OOPS!!! I'm sorry, but file was not loaded :-(\n";
         return padMessage(loadingError);
     }
@@ -102,12 +102,12 @@ public class UI {
 
 
     /**
-     * Show found message.
+     * Gets found message.
      *
      * @param taskMessage tasks found
      * @return Found Message
      */
-    public String showFoundMessage(String taskMessage) {
+    public String getFoundMessage(String taskMessage) {
         String foundMessage = "Here are the matching tasks in your list:";
         StringJoiner result = new StringJoiner("\n");
         result.add(foundMessage);

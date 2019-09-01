@@ -29,7 +29,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException | ParseException e) {
-            ui.showMessage(ui.showLoadingError());
+            ui.showMessage(ui.getLoadingError());
             tasks = new TaskList();
         }
     }
@@ -58,7 +58,7 @@ public class Duke {
         while (!exit) {
             try {
                 command = Parser.parse(sc.nextLine());
-                command.execute(tasks, ui, storage);
+                ui.showMessage(command.execute(tasks, ui, storage));
                 exit = command.isExit();
             } catch (Exception e) {
                 ui.showMessage(e.getMessage());
@@ -71,7 +71,9 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
+//    public String getResponse(String input) {
+//        command = Parser.parse(input);
+//        command.execute(tasks, ui, storage);
+//
+//    }
 }

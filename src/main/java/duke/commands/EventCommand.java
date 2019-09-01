@@ -28,14 +28,15 @@ public class EventCommand extends Command {
      * @param tasks   tasks
      * @param ui      ui
      * @param storage storage
+     * @return Added message or error message
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.addEvent(event);
-            ui.showMessage(ui.showAddedMessage(taskMessage, tasks.getTasksSize()));
             storage.save(tasks.getTasks());
+            return ui.getAddedMessage(taskMessage, tasks.getTasksSize());
         } catch (IOException e) {
-            ui.showMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 

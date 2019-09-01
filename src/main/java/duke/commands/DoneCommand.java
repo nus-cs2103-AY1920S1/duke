@@ -27,14 +27,15 @@ public class DoneCommand extends Command {
      * @param tasks   tasks
      * @param ui      ui
      * @param storage storage
+     * @return Done message or error message
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.done(index);
-            ui.showMessage(ui.showDoneMessage(taskMessage));
             storage.save(tasks.getTasks());
+            return ui.getDoneMessage(taskMessage);
         } catch (IOException e) {
-            ui.showMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 

@@ -10,13 +10,14 @@ import duke.ui.UI;
 public abstract class Command {
 
     /**
-     * Executes command.
+     * Executes and returns command.
      *
      * @param toDoList to do list
      * @param ui       ui
      * @param storage  storage
+     * @return Command string
      */
-    public abstract void execute(TaskList toDoList, UI ui, Storage storage);
+    public abstract String execute(TaskList toDoList, UI ui, Storage storage);
 
     /**
      * Determines if command exits.

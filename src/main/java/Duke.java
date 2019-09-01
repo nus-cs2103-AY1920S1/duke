@@ -37,18 +37,7 @@ public class Duke {
     public String getResponse(String inputInstruction) throws IOException {
         String outputContent;
         String inputCommand = Parser.getInputCommand(inputInstruction);
-        if (inputCommand.equals("bye")) {
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(buffer));
-            System.out.println("___________________________________");
-            System.out.println("Bye. Hope to see you again soon!!");
-            System.out.println("___________________________________");
-            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-            outputContent = buffer.toString();
-            buffer.reset();
-        } else {
-            outputContent = ui.executeInstructions(inputInstruction, inputCommand, storage, tasks);
-        }
+        outputContent = ui.executeInstructions(inputInstruction, inputCommand, storage, tasks);
         return outputContent;
     }
 

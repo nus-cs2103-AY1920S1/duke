@@ -60,6 +60,17 @@ public class Ui {
             return outputContent;
         } else if (inputCommand.equals("done")) {
             int taskNum = Parser.getTaskNum(inputInstruction);
+            if (currentTaskList.getNoOfTask() < taskNum) {
+                System.setOut(new PrintStream(buffer));
+                System.out.println("___________________________________");
+                System.out.println("Unable to do so, the list does have contain such an index");
+                System.out.println("___________________________________");
+                storage.updateTaskToFile(currentTaskList.getEntireList());
+                System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+                outputContent = buffer.toString();
+                buffer.reset();
+                return outputContent;
+            }
             Task currentTask = currentTaskList.getTask(taskNum - 1);
             currentTask.markAsDone();
             System.setOut(new PrintStream(buffer));
@@ -213,6 +224,15 @@ public class Ui {
                 buffer.reset();
                 return outputContent;
             }
+        } else if (inputCommand.equals("bye")) {
+            System.setOut(new PrintStream(buffer));
+            System.out.println("___________________________________");
+            System.out.println("Bye. Hope to see you again soon!!");
+            System.out.println("___________________________________");
+            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+            outputContent = buffer.toString();
+            buffer.reset();
+            return outputContent;
         } else {
             try {
                 throw new DukeException("invalid");

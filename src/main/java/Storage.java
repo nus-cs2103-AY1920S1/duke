@@ -24,7 +24,7 @@ public class Storage {
      * @throws IOException returns exception if invalid input is entered
      */
     public void writeToFile(String inputString) throws IOException {
-        FileWriter fw = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt", true);
+        FileWriter fw = new FileWriter("duke.txt", true);
         fw.write(inputString);
         fw.close();
     }
@@ -35,8 +35,7 @@ public class Storage {
      * @throws IOException throws exception when user input is invalid
      */
     public void updateTaskToFile(ArrayList<Task> inputTaskList) throws IOException {
-        FileWriter fileWriter = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main"
-                + "\\java\\duke.txt", false);
+        FileWriter fileWriter = new FileWriter("duke.txt", false);
         for (int i = 0; i < inputTaskList.size(); i++) {
             fileWriter.write(inputTaskList.get(i) + System.getProperty("line.separator"));
         }

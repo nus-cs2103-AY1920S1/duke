@@ -11,6 +11,14 @@ public abstract class Task {
         this.deleted = false;
     }
 
+    public boolean findWord(String keyword){
+        if (description.indexOf(keyword) == -1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

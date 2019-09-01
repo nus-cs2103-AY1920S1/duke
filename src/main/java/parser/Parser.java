@@ -18,6 +18,8 @@ public class Parser {
                     return new EditCommand(Integer.parseInt(word_Arr[1]) - 1);
                 case DELETE:
                     return new DeleteCommand(Integer.parseInt(word_Arr[1]) - 1);
+                case FIND:
+                    return new FindCommand(word_Arr[1]);
                 default:
                     if (word_Arr[1].equals("")){
                         throw new DukeException("");

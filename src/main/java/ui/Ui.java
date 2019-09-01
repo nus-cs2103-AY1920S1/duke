@@ -63,6 +63,12 @@ public class Ui {
         showLine();
     }
 
+    public void showMatches(TaskList tasks){
+        System.out.println("     Here are the matching task(s) in your list: ");
+        System.out.println(tasks);
+        showLine();
+    }
+
     public void showError(String error_msg) {
         System.out.println("     ☹ OOPS!!! " + error_msg);
         showLine();

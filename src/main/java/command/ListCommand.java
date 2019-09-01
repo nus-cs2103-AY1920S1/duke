@@ -6,6 +6,9 @@ import task.TaskList;
 import ui.Ui;
 
 public class ListCommand extends Command {
+    public ListCommand(){
+        super.type = FullCommand.LIST;
+    }
     public boolean isExit(){
         return false;
     }

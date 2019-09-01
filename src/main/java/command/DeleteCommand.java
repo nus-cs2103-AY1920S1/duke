@@ -10,6 +10,7 @@ public class DeleteCommand extends Command {
     int index;
 
     public DeleteCommand(int index){
+        super.type = FullCommand.DELETE;
         this.index = index;
     }
 

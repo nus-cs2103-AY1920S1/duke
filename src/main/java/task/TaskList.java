@@ -27,14 +27,23 @@ public class TaskList {
     }
 
     public TaskList(){
-        this.schedule = schedule;
+        this.schedule = new ArrayList<Task>();
         task_Num = schedule.size();
         if (task_Num == 0){
             isFirst = true;
         } else {
             isFirst = false;
         }
-        System.out.println(task_Num);
+    }
+
+    public TaskList(ArrayList<Task> schedule){
+        this.schedule = schedule;
+        task_Num = schedule.size();
+        if(task_Num == 0){
+            isFirst = true;
+        } else {
+            isFirst = false;
+        }
     }
 
     public Task getTask(int index){

@@ -14,6 +14,7 @@ public class EditCommand extends Command {
     }
 
     public EditCommand(int index){
+        super.type = FullCommand.DONE;
         this.index = index;
     }
 

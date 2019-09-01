@@ -4,7 +4,7 @@ import exception.DukeException;
 
 public enum FullCommand {
     LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline")
-        , EVENT("event"), BYE("bye");
+        , EVENT("event"), BYE("bye"), FIND("find");
 
     private String name;
 

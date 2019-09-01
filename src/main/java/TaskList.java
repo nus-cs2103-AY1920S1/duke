@@ -51,7 +51,7 @@ public class TaskList {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public void addEvent(Event newEvent) {
+    void addEvent(Event newEvent) {
         taskList.add(newEvent);
         System.out.println("Got it. I've added this task: ");
         System.out.println(newEvent);

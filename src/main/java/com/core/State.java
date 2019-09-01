@@ -17,4 +17,9 @@ public class State {
      * List of DoableTask.
      */
     public ArrayList<DoableTask> list = new ArrayList<>();
+
+    public State(ArrayList<DoableTask> initialList) {
+        list = initialList;
+    }
+
 }

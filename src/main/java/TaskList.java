@@ -6,22 +6,22 @@ import java.util.ArrayList;
  * to the different Task classes.
  */
 public class TaskList {
-    ArrayList<Task> tasklist;
+    protected ArrayList<Task> taskList;
 
     /**
      * Instantiate the TaskList class by passing an Arraylist as a parameter.
-     * @param tasklist A list to store all the tasks written by the User.
+     * @param taskList A list to store all the tasks written by the User.
      */
-    public TaskList(ArrayList<Task> tasklist) {
-        this.tasklist = tasklist;
+    protected TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**
      * Instantiate the TaskList class when there are no existing tasks in the .txt file.
      * A new Arraylist is created to store the tasks.
      */
-    public TaskList() {
-        this.tasklist = new ArrayList<Task>();
+    protected TaskList() {
+        this.taskList = new ArrayList<Task>();
     }
 
     /**
@@ -29,20 +29,20 @@ public class TaskList {
      * @param command The description of task and date/time(if applicable) from the User
      * @throws IllegalCommandException If the User inputs a wrong/invalid command.
      */
-    public void addtask(String command) throws IllegalCommandException {
+    protected void addTask(String command) throws IllegalCommandException {
         if (!command.contains(" ")) {
             throw new IllegalCommandException("The description of a todo cannot be empty.");
         } else if (command.contains("todo")) {
-            String[] splitcommand = command.split(" ", 2);
-            tasklist.add(new ToDos(splitcommand[1]));
+            String[] splitCommand = command.split(" ", 2);
+            taskList.add(new ToDos(splitCommand[1]));
         } else if (command.contains("event")) {
-            String[] splitcommand = command.split(" ", 2);
-            String[] splitevent = (splitcommand[1].split("/", 2));
-            tasklist.add(new Events(splitevent[0], splitevent[1]));
+            String[] splitCommand = command.split(" ", 2);
+            String[] splitEvent = (splitCommand[1].split("/", 2));
+            taskList.add(new Events(splitEvent[0], splitEvent[1]));
         } else if (command.contains("deadline")) {
-            String[] splitcommand = command.split(" ", 2);
-            String[] splitdeadline = (splitcommand[1].split("/", 2));
-            tasklist.add(new Deadline(splitdeadline[0], splitdeadline[1]));
+            String[] splitCommand = command.split(" ", 2);
+            String[] splitDeadline = (splitCommand[1].split("/", 2));
+            taskList.add(new Deadline(splitDeadline[0], splitDeadline[1]));
         }
     }
 
@@ -54,14 +54,14 @@ public class TaskList {
      * @throws IllegalCommandException if User did not enter a number after delete or invalid
      * command.
      */
-    public String deletetask(String command) throws IllegalCommandException {
+    protected String deleteTask(String command) throws IllegalCommandException {
         if (!command.contains(" ")) {
             throw new IllegalCommandException("Give a task to delete.");
         } else  {
-            String[] splitcommand = command.split(" ");
-            int taskdelete = Integer.valueOf(splitcommand[1]);
-            String deleted = tasklist.get(taskdelete - 1).getDescription();
-            tasklist.remove(taskdelete-1);
+            String[] splitCommand = command.split(" ");
+            int taskDelete = Integer.valueOf(splitCommand[1]);
+            String deleted = taskList.get(taskDelete - 1).getDescription();
+            taskList.remove(taskDelete-1);
             return deleted;
         }
     }
@@ -74,14 +74,14 @@ public class TaskList {
      * @throws IllegalCommandException if User did not enter a number after delete or invalid
      * command.
      */
-    public String donetask(String command) throws IllegalCommandException {
+    protected String doneTask(String command) throws IllegalCommandException {
         if (!command.contains(" ")) {
             throw new IllegalCommandException("There must be a number after done.");
         } else {
-            String splitstring[] = command.split(" ");
-            int taskdone = Integer.valueOf(splitstring[1]);
-            tasklist.get(taskdone - 1).markasdone();
-            return tasklist.get(taskdone - 1).getDescription();
+            String[] splitString = command.split(" ");
+            int taskDone = Integer.valueOf(splitString[1]);
+            taskList.get(taskDone - 1).markAsDone();
+            return taskList.get(taskDone - 1).getDescription();
         }
     }
 
@@ -89,7 +89,7 @@ public class TaskList {
      * Other classes can retrieve the tasks list
      * @return The tasks list.
      */
-    public ArrayList<Task> getTasklist() {
-        return this.tasklist;
+    protected ArrayList<Task> getTaskList() {
+        return this.taskList;
     }
 }

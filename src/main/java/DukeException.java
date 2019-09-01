@@ -4,21 +4,21 @@
  * it will print an error message.
  */
 public class DukeException extends Exception {
-    protected String errormessage;
+    private String errorMessage;
 
     /**
      * An DukeException object will be instantiated and will be thrown to
      * Duke main class.
      * @param errormessage a String to display the error.
      */
-    public DukeException(String errormessage) {
-        this.errormessage = errormessage;
+    protected DukeException(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     @Override
     public String toString() {
         return "____________________________________________________________\n"
-                + this.errormessage
+                + this.errorMessage
                 + "\n____________________________________________________________";
     }
 }

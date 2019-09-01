@@ -9,7 +9,7 @@ public abstract class Task {
      * Task object is instantiated when User enters the description of task.
      * @param description Description of tasks.
      */
-    public Task (String description) {
+    protected Task (String description) {
         this.description = description;
         this.isdone = false;
     }
@@ -18,7 +18,7 @@ public abstract class Task {
      * For other classes to retrieve the description information.
      * @return Description of task.
      */
-    public String getDescription() {
+    protected String getDescription() {
         return this.description;
     }
 
@@ -27,7 +27,7 @@ public abstract class Task {
      * completed or not.
      * @return Status of task.
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isdone ? "\u2713" : "\u2718");
     }
 
@@ -35,7 +35,7 @@ public abstract class Task {
      * A method to check the status when saving the tasks into the .txt file.
      * @return Status of task, "1" means its done and "0" means its yet to be completed.
      */
-    public String checkStatus() {
+    protected String checkStatus() {
         if (isdone == true) {
             return "1";
         } else {
@@ -47,7 +47,7 @@ public abstract class Task {
      * A method to revert the numerical status back to the boolean.
      * @param status The number "1" or "0".
      */
-    public void recoverStatus(String status) {
+    protected void recoverStatus(String status) {
         if (status.equals("1")) {
             isdone = true ;
         } else {
@@ -58,7 +58,7 @@ public abstract class Task {
     /**
      * A flag to toggle when a task is done.
      */
-    public void markasdone() {
+    protected void markAsDone() {
         isdone = true;
     }
 

@@ -9,7 +9,7 @@ public class ToDos extends Task {
      * Instantiate a ToDos object by passing a String of description
      * @param description Description of the todos task.
      */
-    public ToDos (String description) {
+    protected ToDos (String description) {
         super(description);
     }
 

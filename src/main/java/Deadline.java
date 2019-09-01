@@ -4,16 +4,16 @@
  * instantiate a Deadline task.
  */
 public class Deadline extends Task {
-    protected String by;
-    protected String[] deadline;
-    protected String[] datetime;
+    private String by;
+    private String[] deadline;
+    private String[] datetime;
 
     /**
      * Instantiate a Events object by passing a String of description and time
      * @param description Description of the deadline task.
      * @param by The date and time of the deadline.
      */
-    public Deadline(String description, String by) {
+    protected Deadline(String description, String by) {
         super(description);
         this.by = by;
         deadline = by.split(" ", 2);
@@ -25,97 +25,97 @@ public class Deadline extends Task {
      * into words (23rd of May 2019).
      * @return a String consisting the date in wording format
      */
-    private String getdate() {
-        String[] splitdates = this.datetime[0].split("/");
-        String day = splitdates[0];
-        String month = splitdates[1];
-        String year = splitdates[2];
-        String editedday;
-        String editedmonth;
+    private String getDate() {
+        String[] splitDates = this.datetime[0].split("/");
+        String day = splitDates[0];
+        String month = splitDates[1];
+        String year = splitDates[2];
+        String editedDay; //String to store the day from numerical to words
+        String editedMonth; //String to store the month from numerical to words
 
         if (day.equals("1") || day.equals("01")) {
-            editedday = "1st";
+            editedDay = "1st";
         } else if (day.equals("2") || day.equals("02")) {
-            editedday = "2nd";
+            editedDay = "2nd";
         } else if (day.equals("3") || day.equals("03")) {
-            editedday = "3rd";
+            editedDay = "3rd";
         } else if (day.equals("21")) {
-            editedday = "21st";
+            editedDay = "21st";
         } else if (day.equals("22")) {
-            editedday = "22nd";
+            editedDay = "22nd";
         } else if (day.equals("23")) {
-            editedday = "23rd";
+            editedDay = "23rd";
         } else if (day.equals("31")) {
-            editedday = "31st";
+            editedDay = "31st";
         } else {
-            editedday = day + "th";
+            editedDay = day + "th";
         }
 
         switch (month) {
             case "1":
             case "01":
-                editedmonth = "January";
+                editedMonth = "January";
                 break;
 
             case "2":
             case "02":
-                editedmonth = "Febuary";
+                editedMonth = "Febuary";
                 break;
 
             case "3":
             case "03":
-                editedmonth = "March";
+                editedMonth = "March";
                 break;
 
             case "4":
             case "04":
-                editedmonth = "April";
+                editedMonth = "April";
                 break;
 
             case "5":
             case "05":
-                editedmonth = "May";
+                editedMonth = "May";
                 break;
 
             case "6":
             case "06":
-                editedmonth = "June";
+                editedMonth = "June";
                 break;
 
             case "7":
             case "07":
-                editedmonth = "July";
+                editedMonth = "July";
                 break;
 
             case "8":
             case "08":
-                editedmonth = "August";
+                editedMonth = "August";
                 break;
 
             case "9":
             case "09":
-                editedmonth = "September";
+                editedMonth = "September";
                 break;
 
             case "10":
-                editedmonth = "October";
+                editedMonth = "October";
                 break;
 
             case "11":
-                editedmonth = "November";
+                editedMonth = "November";
                 break;
 
             case "12":
-                editedmonth = "December";
+                editedMonth = "December";
                 break;
 
             default:
-                editedmonth = "Invalid";
+                editedMonth = "Invalid";
                 break;
 
         }
 
-        return editedday + " of " + editedmonth + " " + year;
+        return editedDay + " of " + editedMonth + " " + year;
     }
 
     /**
@@ -123,25 +123,25 @@ public class Deadline extends Task {
      * eg.(11.00pm).
      * @return Time in 12Hr HH:MM format.
      */
-    private String gettime() {
+    private String getTime() {
         String time = this.datetime[1];
-        String timestr;
-        int timeint = Integer.parseInt(time);
-        int hours = timeint/100;
-        int minutes = timeint % 100;
+        String timeStr;
+        int timeInt = Integer.parseInt(time);
+        int hours = timeInt/100;
+        int minutes = timeInt % 100;
         if (hours >= 12) {
-            timestr = Integer.toString(hours - 12) + "."
+            timeStr = Integer.toString(hours - 12) + "."
                     + String.format("%02d", minutes) + "pm";
         } else if (hours == 0) {
-            timestr = "12."
+            timeStr = "12."
                     + String.format("%02d", minutes) + "am";
         }
         else {
-            timestr = Integer.toString(hours) + "."
+            timeStr = Integer.toString(hours) + "."
                     + String.format("%02d", minutes) + "am";
         }
 
-        return timestr;
+        return timeStr;
     }
 
     @Override
@@ -152,6 +152,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() +
-                "(by: " + this.getdate() + ", " + this.gettime() + ")";
+                "(by: " + this.getDate() + ", " + this.getTime() + ")";
     }
 }

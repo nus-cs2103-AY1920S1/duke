@@ -6,19 +6,19 @@ import java.util.Scanner;
  * after the User's command.
  */
 public class Ui {
-    Scanner scanner;
+    private Scanner scanner;
 
     /**
      * Instantiate a Ui object.
      */
-    public Ui() {
+    protected Ui() {
         scanner = new Scanner(System.in);
     }
 
     /**
      * Display a welcome message for the User.
      */
-    public void showWelcome() {
+    protected void showWelcome() {
         String logo = "  ____        _        \n"
                 + " |  _ \\ _   _| | _____ \n"
                 + " | | | | | | | |/ / _ \\\n"
@@ -39,18 +39,18 @@ public class Ui {
      * Prompt the user to enter command.
      * @return the Users command.
      */
-    public String entercommand() {
+    protected String enterCommand() {
         return scanner.nextLine();
     }
 
     /**
      * Display the list of tasks to the User.
-     * @param tasklist The tasks list.
+     * @param taskList The tasks list.
      */
-    public void showlist(ArrayList<Task> tasklist) {
+    protected void showList(ArrayList<Task> taskList) {
         System.out.println("____________________________________________________________");
-        for (int x = 0; x < tasklist.size(); x++) {
-            System.out.println(x + 1 + ". " + tasklist.get(x));
+        for (int x = 0; x < taskList.size(); x++) {
+            System.out.println(x + 1 + ". " + taskList.get(x));
         }
         System.out.println("____________________________________________________________");
     }
@@ -59,49 +59,49 @@ public class Ui {
      * Display the error when there is an empty .txt file.
      * @param e
      */
-    public void showloadingerror(DukeException e) {
-        System.out.println(e);
+    protected void showLoadingError(DukeException e) {
+        System.err.println(e);
     }
 
     /**
      * Display message when a task is added.
-     * @param tasklist The tasks list.
+     * @param taskList The tasks list.
      */
-    public void addedmessage(ArrayList<Task> tasklist) {
+    protected void getAddedMessage(ArrayList<Task> taskList) {
         System.out.println("____________________________________________________________\n"
-                + " Got it. I've added this task:\n" + "   " + tasklist.get(tasklist.size()-1)
-                + "\n Now you have " + tasklist.size() + " tasks in the list."
+                + " Got it. I've added this task:\n" + "   " + taskList.get(taskList.size()-1)
+                + "\n Now you have " + taskList.size() + " tasks in the list."
                 + "\n____________________________________________________________");
     }
 
     /**
      * Display message when a task is deleted.
-     * @param tasklist The tasks list.
+     * @param taskList The tasks list.
      * @param deleted The task deleted.
      */
-    public void deletedmessage(ArrayList<Task> tasklist, String deleted) {
+    protected void getDeletedMessage(ArrayList<Task> taskList, String deleted) {
         System.out.println("____________________________________________________________\n"
                 + "Noted. I've removed this task: \n"
-                + "  " + deleted + "Now you have " + tasklist.size()
+                + "  " + deleted + "Now you have " + taskList.size()
                 + " tasks in the list "
                 + "\n____________________________________________________________");
     }
 
     /**
      * Display message and also the change in status icon to show the task is done.
-     * @param taskdonestr String of the task done.
+     * @param taskDoneStr String of the task done.
      */
-    public void donemessage (String taskdonestr) {
+    protected void getDoneMessage(String taskDoneStr) {
         System.out.println("____________________________________________________________\n"
                 + " Nice! I've marked this tasked as done:\n"
-                + taskdonestr
+                + taskDoneStr
                 + "\n____________________________________________________________");
     }
 
     /**
      * Display a goodbye message when User exits the Duke application.
      */
-    public void byemessage() {
+    protected void getByeMessage() {
         System.out.println("____________________________________________________________\n"
                 + " Bye. Hope to see you again soon!\n\n"
                 + "____________________________________________________________");
@@ -109,9 +109,9 @@ public class Ui {
 
     /**
      * Display the error message to User when User inputs an invalid command.
-     * @param errormsg
+     * @param errorMsg
      */
-    public void illegalcommanderror(IllegalCommandException errormsg) {
-        System.err.println(errormsg);
+    protected void getIllegalCommandError(IllegalCommandException errorMsg) {
+        System.err.println(errorMsg);
     }
 }

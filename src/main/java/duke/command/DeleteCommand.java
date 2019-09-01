@@ -1,5 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 /**
- * Represents a command which deletes Task specified in an index in the Tasklist.
+ * Represents a command which deletes duke.task.Task specified in an index in the Tasklist.
  * @see TaskList
  * @see Task
  */
@@ -8,7 +15,7 @@ public class DeleteCommand extends Command {
     String[] commandSplit = super.stringCommand.split(" ");
 
     /**
-     * Constructor for DeleteCommand.
+     * Constructor for duke.command.DeleteCommand.
      * @param stringCommand
      */
     public DeleteCommand(String stringCommand) {
@@ -31,7 +38,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return false
      */
     @Override

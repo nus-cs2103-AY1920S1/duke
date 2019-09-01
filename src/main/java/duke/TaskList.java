@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -54,7 +58,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes Task at number in task list.
+     * Deletes duke.task.Task at number in task list.
      * @param number number for task to be deleted
      * @throws IndexOutOfBoundsException index is less than 0 or greater than task size
      */

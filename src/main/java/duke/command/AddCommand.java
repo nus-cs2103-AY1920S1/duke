@@ -1,6 +1,14 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.InputMismatchException;
 /**
- * Represents a command which adds Task to the Tasklist.
+ * Represents a command which adds duke.task.Task to the Tasklist.
  * @see TaskList
  * @see Task
  */
@@ -11,7 +19,7 @@ public class AddCommand extends Command {
     String todo = "todo";
 
     /**
-     * Constructor for AddCommand
+     * Constructor for duke.command.AddCommand
      * @param stringCommand String representation of the user input
      */
     public AddCommand(String stringCommand) {
@@ -61,7 +69,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return false
      */
     @Override

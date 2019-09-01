@@ -1,15 +1,16 @@
+package duke.task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a type of Task object with a fixed time format.
+ * Represents a type of duke.task.Task object with a fixed time format.
  * @see Task
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor for Deadline
+     * Constructor for duke.task.Deadline
      * @param description
      * @param by time in the format of dd/MM/yyyy HHmm
      */
@@ -19,7 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Another constructor for Deadline
+     * Another constructor for duke.task.Deadline
      * @param description
      * @param by time in the format of dd/MM/yyyy HHmm
      * @param isDone boolean value on whether it is done or not

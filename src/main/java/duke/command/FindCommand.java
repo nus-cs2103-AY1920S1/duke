@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +16,7 @@ public class FindCommand extends Command{
     private String findKeywork;
 
     /**
-     * Constructor for FindCommand
+     * Constructor for duke.command.FindCommand
      * @param stringCommand String representation of the user input
      */
     public FindCommand(String stringCommand) {
@@ -28,7 +35,7 @@ public class FindCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : taskList.getTasks()) {
-            if (t.description.contains(findKeywork)) {
+            if (t.getDescription().contains(findKeywork)) {
                 tasks.add(t);
             }
         }
@@ -36,7 +43,7 @@ public class FindCommand extends Command{
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return false
      */
     @Override

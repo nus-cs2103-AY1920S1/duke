@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * Represents a command which has specific uses.
  * @see TaskList
@@ -14,7 +21,7 @@ public abstract class Command {
     String stringCommand;
 
     /**
-     * Constructor for ByeCommand
+     * Constructor for duke.command.ByeCommand
      * @param stringCommand String representation of the user input
      */
     public Command(String stringCommand) {
@@ -30,7 +37,7 @@ public abstract class Command {
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return
      */
     public abstract boolean isExit();

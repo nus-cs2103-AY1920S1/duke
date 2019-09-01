@@ -1,11 +1,13 @@
+package duke.task;
+
 /**
- * Represents a type of Task object.
+ * Represents a type of duke.task.Task object.
  * @see Task
  */
 
 public class Todo extends Task{
     /**
-     * Constructor for Todo
+     * Constructor for duke.task.Todo
      * @param description
      */
     public Todo(String description) {
@@ -13,7 +15,7 @@ public class Todo extends Task{
     }
 
     /**
-     * Another constructor for Todo
+     * Another constructor for duke.task.Todo
      * @param description
      * @param isDone boolean value on whether it is done or not
      */

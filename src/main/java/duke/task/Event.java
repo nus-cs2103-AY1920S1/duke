@@ -1,7 +1,9 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 /**
- * Represents a type of Task object with a fixed time format.
+ * Represents a type of duke.task.Task object with a fixed time format.
  * @see Task
  */
 public class Event extends Task{

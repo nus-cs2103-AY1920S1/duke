@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -9,7 +11,7 @@ public class Task {
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
-     * Constructor for Task.
+     * Constructor for duke.task.Task.
      * @param description String representation of the description
      */
     public Task(String description) {
@@ -18,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Constructor for Task which takes in a String description and whether it is done or not.
+     * Constructor for duke.task.Task which takes in a String description and whether it is done or not.
      * @param description String representation of the description
      * @param isDone whether it is done or not
      */
@@ -44,7 +46,7 @@ public class Task {
     }
 
     /**
-     * Sets Task to be done.
+     * Sets duke.task.Task to be done.
      */
     public void setDone() {
         isDone = true;

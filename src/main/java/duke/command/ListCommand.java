@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * Represents a command which lists out the Tasks in the Tasklist.
  * @see TaskList
@@ -6,7 +13,7 @@
 
 public class ListCommand extends Command {
     /**
-     * Constructor for ListCommand
+     * Constructor for duke.command.ListCommand
      * @param stringCommand String representation of the user input
      */
     public ListCommand(String stringCommand) {
@@ -27,7 +34,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return false
      */
     @Override

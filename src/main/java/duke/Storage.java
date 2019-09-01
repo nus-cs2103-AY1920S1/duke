@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -17,8 +24,8 @@ public class Storage {
     }
 
     /**
-     * Reads data from filepath and creates an arraylist of Task.
-     * @return an arraylist of Task from read data
+     * Reads data from filepath and creates an arraylist of duke.task.Task.
+     * @return an arraylist of duke.task.Task from read data
      * @throws IOException file is not found
      */
     public ArrayList<Task> load() throws IOException{

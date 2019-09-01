@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 import java.util.InputMismatchException;
 
 /**
@@ -7,7 +11,7 @@ import java.util.InputMismatchException;
 public class Parser {
 
     /**
-     * Default constructor for Parser.
+     * Default constructor for duke.Parser.
      */
     public Parser() {
     }
@@ -15,8 +19,8 @@ public class Parser {
     /**
      * Converts a string given by user into actual command to be executed.
      * @param stringCommand String representation of the user input
-     * @return Command which would be executed
-     * @throws InputMismatchException Command is not recognised
+     * @return duke.command.Command which would be executed
+     * @throws InputMismatchException duke.command.Command is not recognised
      */
     public Command parse(String stringCommand) throws InputMismatchException {
         if (stringCommand.equalsIgnoreCase("bye")) {

@@ -1,11 +1,18 @@
+package duke.command;
+
+import duke.Duke;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 /**
- * Represents a command which shuts down Duke.
+ * Represents a command which shuts down duke.Duke.
  * @see Duke
  */
 
 public class ByeCommand extends Command{
     /**
-     * Constructor for ByeCommand
+     * Constructor for duke.command.ByeCommand
      * @param stringCommand String representation of the user input
      */
     public ByeCommand(String stringCommand){
@@ -25,7 +32,7 @@ public class ByeCommand extends Command{
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return true
      */
     @Override

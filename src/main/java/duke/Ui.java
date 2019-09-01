@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +40,7 @@ public class Ui {
 
     /**
      * Prints out the string representation of task t.
-     * @param t Task to be printed out
+     * @param t duke.task.Task to be printed out
      */
     public void printTask(Task t) {
         System.out.println(t.toString());
@@ -93,7 +97,7 @@ public class Ui {
     }
 
     /**
-     * Prints out greetings for Duke bot.
+     * Prints out greetings for duke.Duke bot.
      */
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");

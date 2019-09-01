@@ -1,5 +1,12 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 /**
- * Represents a command which changes Task specified in an index in the Tasklist to be done.
+ * Represents a command which changes duke.task.Task specified in an index in the Tasklist to be done.
  * @see TaskList
  * @see Task
  */
@@ -8,7 +15,7 @@ public class DoneCommand extends Command {
     String[] commandSplit = super.stringCommand.split(" ");
 
     /**
-     * Constructor for DoneCommand.
+     * Constructor for duke.command.DoneCommand.
      * @param stringCommand String representation of the user input
      */
     public DoneCommand(String stringCommand) {
@@ -30,7 +37,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      * @return false
      */
     @Override

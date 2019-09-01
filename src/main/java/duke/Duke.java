@@ -1,9 +1,14 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
 
 /**
- * The Duke program implements an application that helps users to keep track of their tasks.
+ * The duke.Duke program implements an application that helps users to keep track of their tasks.
  *
  * @author hooncp
  */

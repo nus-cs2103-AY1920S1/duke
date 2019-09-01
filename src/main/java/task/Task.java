@@ -24,6 +24,10 @@ public abstract class Task {
     // Method used to convert this object into a storable string form.
     public abstract String toStorageString();
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

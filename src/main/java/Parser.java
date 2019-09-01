@@ -5,6 +5,8 @@ import seedu.duke.exception.DukeMissingDescriptionException;
 import seedu.duke.exception.DukeDeadlineMissingDateException;
 import seedu.duke.exception.DukeNoSuchCommandException;
 import seedu.duke.exception.DukeEventMissingDateException;
+import seedu.duke.exception.DukeMissingIndexException;
+import seedu.duke.exception.DukeMissingSearchTermException;
 
 /**
  * Reads in the input line, and parses accordingly.
@@ -18,6 +20,7 @@ public class Parser {
     private String description;
     private String time;
     private Integer index;
+    private String searchTerm;
 
     /**
      * Constructs a Parser object based on input string.
@@ -31,12 +34,23 @@ public class Parser {
         this.type = inputs[0];
         switch (type) {
         case "bye":
+            this.description = null;
+            this.time = null;
+            this.index = null;
+            this.searchTerm = null;
             break;
 
         case "list":
+            this.description = null;
+            this.time = null;
+            this.index = null;
+            this.searchTerm = null;
             break;
 
         case "done":
+            if (inputs.length <= 1) {
+                throw new DukeMissingIndexException();
+            }
             try {
                 this.index = Integer.parseInt(inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -46,6 +60,7 @@ public class Parser {
             }
             this.description = null;
             this.time = null;
+            this.searchTerm = null;
             break;
 
         case "todo":
@@ -56,6 +71,7 @@ public class Parser {
             }
             this.description = inputs[1];
             this.time = null;
+            this.searchTerm = null;
             break;
 
         case "deadline":
@@ -70,6 +86,7 @@ public class Parser {
             }
             this.description = params[0];
             this.time = params[1];
+            this.searchTerm = null;
             break;
 
         case "event":
@@ -84,9 +101,13 @@ public class Parser {
             }
             this.description = params[0];
             this.time = params[1];
+            this.searchTerm = null;
             break;
 
         case "delete":
+            if (inputs.length <= 1) {
+                throw new DukeMissingIndexException();
+            }
             try {
                 this.index = Integer.parseInt(inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -94,6 +115,18 @@ public class Parser {
             } catch (NumberFormatException e) {
                 Ui.printBlock("Please input a number");
             }
+            this.description = null;
+            this.time = null;
+            this.searchTerm = null;
+            break;
+
+        case "find":
+            this.index = null;
+
+            if (inputs.length <= 1) {
+                throw new DukeMissingSearchTermException();
+            }
+            this.searchTerm = inputs[1];
             this.description = null;
             this.time = null;
             break;
@@ -133,5 +166,9 @@ public class Parser {
      */
     public String getTime() {
         return this.time;
+    }
+
+    public String getSearchTerm() {
+        return this.searchTerm;
     }
 }

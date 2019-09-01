@@ -6,6 +6,12 @@ plugins {
 group 'seedu.duke'
 version '0.1.0'
 
+apply plugin: 'java'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 repositories {
     mavenCentral()
 }

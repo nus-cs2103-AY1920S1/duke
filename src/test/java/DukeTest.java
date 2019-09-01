@@ -8,6 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DukeTest {
     @Test
     public void dummyTest(){
-        assertEquals(2, 2);
+        assertEquals(1, 2);
     }
 }

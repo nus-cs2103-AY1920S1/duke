@@ -11,7 +11,8 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = "./data/duke.txt";
         storage = new Storage(filePath);
         parser = new Parser();
     }
@@ -22,7 +23,7 @@ public class Duke {
      * @param args arguments passed into main
      */
     public static void main(String[] args) {
-        new Duke("C:\\Users\\User\\Desktop\\Y2S1\\CS2103T\\IP\\duke\\src\\main\\java\\data\\duke.txt").run();
+        new Duke().run();
     }
 
     private void run() {

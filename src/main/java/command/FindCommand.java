@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     /**
      * Execute the command according to the command type.
      *
-     * @param taskList The list of tasks maintained in Duke
+     * @param taskList The list of tasks maintained in duke.Duke
      * @param ui       Ui module
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the command is invalid

@@ -1,3 +1,5 @@
+package duke;
+
 import command.Command;
 import storage.Storage;
 import exception.DukeException;
@@ -11,7 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * constructor for Duke.
+     * constructor for duke.Duke.
      *
      * @param filePath which specifies the path for the .txt file
      */
@@ -27,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Instantiate a Duke object and run it.
+     * Instantiate a duke.Duke object and run it.
      *
      * @param args standard main args
      */
@@ -36,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Run process of Duke.
+     * Run process of duke.Duke.
      */
     public void run() {
         ui.showWelcome();

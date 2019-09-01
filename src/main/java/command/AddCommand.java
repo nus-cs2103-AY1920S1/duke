@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     /**
      * Add the new task into task list.
      *
-     * @param taskList The list of tasks maintained in Duke
+     * @param taskList The list of tasks maintained in duke.Duke
      * @param ui       Ui module
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the command is invalid

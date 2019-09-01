@@ -33,7 +33,7 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         showLine();
-        print("Hello! I'm Duke\nWhat can I do for you?");
+        print("Hello! I'm duke.Duke\nWhat can I do for you?");
         showLine();
     }
 
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        print("This is your first time using Duke, no history loaded.");
+        print("This is your first time using duke.Duke, no history loaded.");
     }
 
     public void showLine() {

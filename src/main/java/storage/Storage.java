@@ -20,7 +20,7 @@ public class Storage {
     }
 
     /**
-     * load the history of Duke.
+     * load the history of duke.Duke.
      *
      * @return return an arraylist of tasks
      * @throws DukeException when loading encounters exception

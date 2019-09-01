@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
+
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //no input number
@@ -39,4 +40,5 @@ public class DeleteCommand extends Command {
             Duke.print("☹ OOPS!!! Please input a valid number.");
         }
     }
+
 }

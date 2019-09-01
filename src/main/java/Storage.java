@@ -36,6 +36,7 @@ public class Storage {
      * @param tasks performs a deep copy of the loaded TaskList into this tasks parameter.
      * @throws Exception in case of file not found exception.
      */
+
     public void load(TaskList tasks) throws Exception {
         FileInputStream fis = new FileInputStream("t.tmp");
         ObjectInputStream ois = new ObjectInputStream(fis);

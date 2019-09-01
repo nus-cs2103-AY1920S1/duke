@@ -7,6 +7,7 @@ public class ExitCommand extends Command {
      *
      * @param input input from user.
      */
+
     public ExitCommand(String input) {
         super(input);
     }

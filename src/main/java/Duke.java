@@ -21,13 +21,11 @@ import java.util.Scanner;
  * Represents the main class for the project where the main method will run
  */
 public class Duke {
-    //variables
     public static ArrayList<Task> storedTasks = new ArrayList<>();
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    //main
     public static void main(String[] args) throws Exception {
         new Duke("data/duke.txt").run();
     }

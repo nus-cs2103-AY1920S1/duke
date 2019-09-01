@@ -55,15 +55,15 @@ public class Ui {
         showWelcome();
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            if (input.equals("bye")){
+            if(input.equals("bye")) {
                 showExit();
                 break;
             }
-            if (input.equals("list")){
+            if(input.equals("list")) {
                 tasksList.showAllTasks();
                 continue;
             }
-            if ((input.length() > 5) && input.substring(0, 5).equals("done ")){
+            if((input.length() > 5) && input.substring(0, 5).equals("done ")) {
                 showDone(input);
                 continue;
             }
@@ -77,26 +77,26 @@ public class Ui {
             }
             else {
                 // just to catch wrong input
-                try{
+                try {
                     input.substring(0,4).equals("todo");
                     input.substring(0,8).equals("deadline");
                     input.substring(0,5).equals("event");
-                } catch (Exception e){
+                } catch(Exception e) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 //handles the todo, deadline and event tasks
                 System.out.println("Got it. I've added this task:");
 
                 if(input.substring(0,4).equals("todo")) {
-                    try{
+                    try {
                         input.substring(5,6);
-                    } catch (Exception e) {
+                    } catch(Exception e) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, todo cannot be empty");
                     }
                     showTodo(input);
                     continue;
                 }
-                if(input.substring(0,8).equals("deadline")){
+                if(input.substring(0,8).equals("deadline")) {
                     try {
                         input.substring(9,10);
                     } catch (Exception e){
@@ -105,7 +105,7 @@ public class Ui {
                     showDeadline(input);
                     continue;
                 }
-                if(input.substring(0,5).equals("event")){
+                if(input.substring(0,5).equals("event")) {
                     try {
                         input.substring(6,7);
                     } catch (Exception e){
@@ -140,7 +140,7 @@ public class Ui {
     public void showDone(String input) throws Exception{
         int itemIndex = Integer.parseInt(input.substring(5)) - 1;
         // close if item number don't exist
-        if ((itemIndex + 1) > tasksList.getTaskList().size()){
+        if((itemIndex + 1) > tasksList.getTaskList().size()) {
             System.out.println("failed to done item, please try again");
         } else {
             tasksList.markTaskDone(itemIndex);
@@ -154,7 +154,7 @@ public class Ui {
      */
     public void showDelete(String input) throws Exception{
         int itemIndex = Integer.parseInt(input.substring(7)) - 1;
-        if ((itemIndex + 1) > tasksList.getTaskList().size()){
+        if((itemIndex + 1) > tasksList.getTaskList().size()) {
             System.out.println("failed to delete item, please try again.");
         } else {
             System.out.println("Noted. I've removed this task:");

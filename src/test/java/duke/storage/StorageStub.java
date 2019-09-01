@@ -48,11 +48,7 @@ public class StorageStub implements DukeStorage {
     private Task dataParser(String data) throws CorruptedDataException, WrongDateFormatException {
         String[] arguments = data.split(" \\| ");
         boolean isDone;
-        if (arguments[1].equals("1")) {
-            isDone = true;
-        } else {
-            isDone = false;
-        }
+        isDone = arguments[1].equals("1");
 
         switch (arguments[0]) {
         case "T":

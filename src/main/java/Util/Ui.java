@@ -57,6 +57,10 @@ public class Ui {
                 showDelete(input);
                 continue;
             }
+            if((input.length() > 5) && input.substring(0, 5).equals("find ")) {
+                showFind(input);
+                continue;
+            }
             else {
                 // just to catch wrong input
                 try{
@@ -174,4 +178,20 @@ public class Ui {
         return day + " of " + month + " " + year + ", " + incorrectTime + "hours";
     }
 
+    public void showFind(String input) throws Exception {
+        String toMatch = input.substring(5).trim();
+        TaskList tempTaskList = new TaskList(new ArrayList<Task>());
+        for(int i = 0; i < tasksList.getTaskList().size(); i++) {
+            String desc = tasksList.getTaskList().get(i).getDescription();
+            if((toMatch.length() < desc.length()) && desc.contains(toMatch)) {
+                tempTaskList.addTask(tasksList.getTaskList().get(i));
+            } else {
+                continue;
+            }
+        }
+        for(int i = 0; i < tempTaskList.getTaskList().size(); i++) {
+            System.out.print((i + 1) + ".");
+            System.out.println(tempTaskList.getTaskList().get(i));
+        }
+    }
 }

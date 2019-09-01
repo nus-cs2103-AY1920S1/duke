@@ -14,11 +14,10 @@ public class Deadline extends Task {
     protected int hour;
     protected int minute;
 
-    public Deadline(String description, String by) throws ParseException {
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
         String[] words = by.split(" ");
-        date = new SimpleDateFormat("dd/MM/yyyy").parse(words[0]);
         hour = (Integer.parseInt(words[1])/100)%12;
         minute = (Integer.parseInt(words[1])%100);
     }

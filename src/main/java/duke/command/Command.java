@@ -25,8 +25,8 @@ public class Command {
      * @param storage this is the storage.
      * @throws ParseException when there is an invalid command.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
-
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "This shouldn't appear.";
     }
 
     /**

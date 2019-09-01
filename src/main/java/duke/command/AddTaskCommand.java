@@ -20,7 +20,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         Task task;
         String[] words = description.split(" ");
@@ -30,8 +30,7 @@ public class AddTaskCommand extends Command {
             case "todo":
                 task = new ToDo(description);
                 tasks.addTask(task);
-                ui.addTask(task, tasks.getNumber());
-                break;
+                return ui.addTask(task, tasks.getNumber());
 
             case "event":
 
@@ -51,8 +50,7 @@ public class AddTaskCommand extends Command {
                 }
                 task = new Event(descriptions.toString().trim(), at.toString().trim());
                 tasks.addTask(task);
-                ui.addTask(task, tasks.getNumber());
-                break;
+                return ui.addTask(task, tasks.getNumber());
 
             case "deadline":
                 StringBuilder by = new StringBuilder();
@@ -71,10 +69,10 @@ public class AddTaskCommand extends Command {
                 }
                 task = new Deadline(descriptions.toString().trim(), by.toString().trim());
                 tasks.addTask(task);
-                ui.addTask(task, tasks.getNumber());
-                break;
+                return ui.addTask(task, tasks.getNumber());
 
             default:
+                return "This shouldn't appear.";
         }
 
     }

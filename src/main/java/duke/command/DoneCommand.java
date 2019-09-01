@@ -19,10 +19,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
-        super.execute(tasks, ui, storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTasks().get(indexToDone);
         task.markAsDone();
-        ui.done(task);
+        return ui.done(task);
     }
 }

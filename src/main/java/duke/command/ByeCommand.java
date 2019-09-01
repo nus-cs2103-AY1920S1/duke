@@ -16,8 +16,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
-        super.execute(tasks, ui, storage);
-        ui.bye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        //System.out.println(ui.bye());
+        return ui.bye();
     }
 }

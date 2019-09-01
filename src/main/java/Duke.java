@@ -6,11 +6,14 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -33,8 +36,19 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     public Duke() {
-        new Duke("C:/Users/Low Cheng Yi/Desktop/CS2103/duke/src/data/tasks.txt").run();
+        ui = new Ui();
+        tasks = new TaskList();
+        storage = new Storage("C:/Users/Low Cheng Yi/Desktop/CS2103/duke/src/data/tasks.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public Duke(String filePath) {
@@ -48,6 +62,32 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
     }
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        String response;
+        Command c = Parser.parse(input);
+        response = c.execute(tasks, ui, storage);
+        return response;
+    }
+
 
     @Override
     public void start(Stage stage) {
@@ -94,6 +134,46 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.setPadding(new Insets(10, 10, 10, 10));
+        dialogContainer.setSpacing(10);
+        dialogContainer.setStyle("-fx-background-color: #A6FFEA");
+
+        userInput.setPadding(new Insets(10, 10, 10, 10));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
     public void run() {

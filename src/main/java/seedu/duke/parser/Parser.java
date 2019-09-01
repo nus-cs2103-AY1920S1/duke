@@ -6,7 +6,18 @@ import seedu.duke.task.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/** Represents a command checker to verify if a command is valid. If valid, the command will be
+ * executed accordingly.
+ */
 public class Parser {
+
+    /** Checks if a command is valid and execute command. If command is incomplete, throws
+     * ArrayOutOfBoundException. If command is invalid, throws DukeException.
+     * @param command Represents the command to be executedd.
+     * @param ui Represents the user input Object.
+     * @param tasks Represents the TaskList object to add or remove Task objects.
+     * @param filePath Represents the file for the tasks to be recorded in.
+     */
     public void parse(String command, UI ui, TaskList tasks, String filePath){
         try {
             FileWriter fw = new FileWriter(filePath, true);
@@ -44,6 +55,11 @@ public class Parser {
             System.out.println("File not found.");
         }
     }
+
+    /** Prints out all the tasks in the Task list.
+     * @param taskList The list that contains/may not contain tasks.
+     * @param ui User input that handles the printing.
+     */
     public static void printList(TaskList taskList, UI ui){
         String reply = "Here are the tasks in your list:\n\t ";
         for(int i=0; i<taskList.size(); i++) {
@@ -54,6 +70,13 @@ public class Parser {
         }
         ui.printReply(reply);
     }
+
+    /** Adds a task to the Task list.
+     * @param task Task to be added to the list. Prints out a reply when task is added.
+     * @param taskList Task list for the task to be added to.
+     * @param fw File to record the tasks in Task list.
+     * @param ui Handles the printing of reply.
+     */
     public static void addToList(Task task, TaskList taskList, FileWriter fw, UI ui) {
         taskList.add(task);
         String reply = "Got it. I've added this task:\n\t  " + task + "\n\tNow you have " + taskList.size()
@@ -65,6 +88,12 @@ public class Parser {
         } catch (IOException e) { }
     }
 
+    /** Removes a task from the Task list. If task index is out of the list, throws DukeException.
+     * @param taskList Task list for the task to be removed from.
+     * @param taskIndex Index of the task to be removed.
+     * @param ui Handles the printing of reply.
+     * @throws DukeException If task index is more than the size of Task list.
+     */
     public static void removeFromList(TaskList taskList, int taskIndex, UI ui) throws DukeException{
         if(taskIndex > taskList.size()){
             throw new DukeException("");

@@ -5,18 +5,22 @@ import duke.command.Parser;
 import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke class. Creates a new Ui, TaskList and Storage object, then runs the main method of the program.
  */
-public class Duke {
+public class Duke extends Application{
 
     /** Stores the Ui object used to display messages to the user. */
-    private Ui ui;
-    /** Stores the TaskList object used to add/delete tasks. */
-    private TaskList taskList;
+    private Ui ui = new Ui();
     /** Stores the Storage object used to read/write from file. */
-    private Storage storage;
+    private Storage storage = new Storage("data/duke.txt");;
+    /** Stores the TaskList object used to add/delete tasks. */
+    private TaskList taskList = new TaskList(storage);;
 
     /**
      * This method runs the Duke chat bot. In particular, it prints the intro, and determines which command should
@@ -89,16 +93,17 @@ public class Duke {
             }
 
         }
+
+        System.exit(0);
     }
 
-    /**
-     * This method initialises the Duke class variables by creating a new Storage, TaskList and Ui object.
-     * @param filepath The path to save Duke data to.
-     */
-    private Duke(String filepath) {
-        storage = new Storage(filepath);
-        taskList = new TaskList(storage);
-        ui = new Ui();
+    @Override
+    public void start (Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
@@ -106,7 +111,7 @@ public class Duke {
      * @param args Not in use.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 
 }

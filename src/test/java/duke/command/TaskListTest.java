@@ -60,7 +60,7 @@ public class TaskListTest {
             assertEquals("\t ☹ OOPS!!! The description and due date of a deadline cannot be empty.\n", e.toString());
         }
     }
-    
+
     @Test
     void createEvent_normalInput_createdSuccessfully() {
         try {

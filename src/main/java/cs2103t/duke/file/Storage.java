@@ -115,6 +115,7 @@ public class Storage {
     private static int boolToInt(boolean b) {
         return b ? 1 : 0;
     }
+
     private static boolean intStrToBool(String intStr) {
         return intStr.equals("1");
     }

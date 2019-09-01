@@ -1,14 +1,13 @@
 package seedu.duke.task;
 
-import java.text.ParseException;
-import java.util.Date;
 import seedu.duke.parser.DateParser;
+import java.util.Date;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String strBy;
     protected Date by;
 
-    public Deadline(String description, String strBy){
+    public Deadline(String description, String strBy) {
         super(description);
         this.strBy = strBy;
         this.by = new DateParser().parseDate(strBy);

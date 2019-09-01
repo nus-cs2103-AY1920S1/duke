@@ -11,18 +11,18 @@ public class Duke {
     private TaskList tasks;
     private UI ui;
 
-    public Duke(String filePath){
+    public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        }catch (DukeException e){
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    public void run(){
+    public void run() {
         ui.showWelcome();
         String command = ui.readCommand();
         new Parser().parse(command, ui, tasks, storage.path);

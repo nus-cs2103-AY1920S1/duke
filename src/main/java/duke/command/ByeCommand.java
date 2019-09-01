@@ -30,7 +30,7 @@ public class ByeCommand extends Command {
      * @return returns the boolean true to mark the end of the program
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

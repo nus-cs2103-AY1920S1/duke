@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param commandArray Array of the command and an index that from initial user input
      */
 
-    public DeleteCommand(String[] commandArray){
+    public DeleteCommand(String[] commandArray) {
         String indexString = commandArray[1];
         this.index = Integer.parseInt(indexString);
     }
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(index < 1 || tasks.getSize() < index){
+        if (index < 1 || tasks.getSize() < index) {
             throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
         }
         Task toRemove = tasks.getTask(index - 1);

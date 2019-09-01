@@ -26,7 +26,7 @@ public class Deadline extends Task {
      */
 
     @Override
-    public String toFile(){
+    public String toFile() {
         String mark = isDone ? "1" : "0";
         return "D | " + mark + " |" + taskName + "|" + deadline;
     }
@@ -37,7 +37,7 @@ public class Deadline extends Task {
      */
 
     @Override
-    public String toString(){
+    public String toString() {
         String mark = isDone ? "✓" : "✗";
         return "[D][" + mark + "]" + taskName +
                 "(by:" + deadline + ")";

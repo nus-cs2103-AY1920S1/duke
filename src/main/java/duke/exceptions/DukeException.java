@@ -1,8 +1,7 @@
 package duke.exceptions;
 
 /**
- * Represents exceptions that may arise when running the Duke
- * programme
+ * Represents exceptions that may arise when running the Duke programme
  */
 
 public class DukeException extends Exception {
@@ -10,20 +9,23 @@ public class DukeException extends Exception {
     String exceptionString;
 
     /**
-     * Constructs a DukeException object from an exception
-     * message string
+     * Constructs a DukeException object from an exception message string
+     * 
      * @param exceptionString The exception message
      */
-    public DukeException(String exceptionString){
+
+    public DukeException(String exceptionString) {
         this.exceptionString = exceptionString;
     }
 
     /**
      * Returns the DukeException message
+     * 
      * @return DukeException message
      */
+    
     @Override
-    public String toString(){
+    public String toString() {
         return exceptionString;
     }
 

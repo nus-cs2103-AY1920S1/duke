@@ -1,12 +1,15 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.task.TaskList;
 
-abstract public class Command {
+public abstract class Command {
     protected Parser parser = new Parser();
-
     protected String[] args;
+
     public Command(String[] args) {
         this.args = args;
     }
@@ -14,6 +17,8 @@ abstract public class Command {
     public boolean isExit() {
         return (this instanceof Bye);
     }
-    abstract public String getName();
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    public abstract String getName();
+
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

@@ -34,14 +34,14 @@ public class Duke extends Application {
     private static Parser parser;
     private static TaskList tasks;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
+//    private ScrollPane scrollPane;
+//    private VBox dialogContainer;
+//    private TextField userInput;
+//    private Button sendButton;
+//    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Returns a Duke programme whose tasks are stored in the given file path.
@@ -90,7 +90,7 @@ public class Duke extends Application {
     /**
      * Saves tasks into hard disk and exits the Duke programme.
      */
-    private static void exitDuke() {
+    public static void exitDuke() {
         String toSave = tasks.convertTasksToString();
         try {
             storage.writeToFile(toSave);
@@ -103,34 +103,34 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         // initialize Duke object
-        ui = new Ui();
-        storage = new Storage("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt");
-        parser = new Parser(ui);
-        try {
-            tasks = new TaskList(storage.loadTasksFromFile());
-        } catch (FileNotFoundException e) {
-            System.out.println("FILE NOT FOUND");
-            tasks = new TaskList();
-        }
+//        ui = new Ui();
+//        storage = new Storage("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt");
+//        parser = new Parser(ui);
+//        try {
+//            tasks = new TaskList(storage.loadTasksFromFile());
+//        } catch (FileNotFoundException e) {
+//            System.out.println("FILE NOT FOUND");
+//            tasks = new TaskList();
+//        }
 
 
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox();
+//        scrollPane.setContent(dialogContainer);
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+//
+//        stage.setScene(scene);
+//        stage.show();
 
 //        //Step 2. Formatting the window to look as expected
 //        stage.setTitle("Duke");
@@ -163,20 +163,20 @@ public class Duke extends Application {
 //        AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-            //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            //userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-            //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            //userInput.clear();
-        });
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//            //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            //userInput.clear();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//            //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            //userInput.clear();
+//        });
 
         //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        // dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
@@ -185,13 +185,13 @@ public class Duke extends Application {
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
+//    private Label getDialogLabel(String text) {
+//        // You will need to import `javafx.scene.control.Label`.
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
 
     /**
      * Iteration 2:
@@ -207,38 +207,32 @@ public class Duke extends Application {
 //        );
 //        userInput.clear();
 //    }
-    private void handleUserInput() {
-        //Label userText = new Label(userInput.getText());
-        //Label dukeText = new Label(getResponse(userInput.getText()));
-        String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
-        );
-        userInput.clear();
-    }
+//    private void handleUserInput() {
+//        //Label userText = new Label(userInput.getText());
+//        //Label dukeText = new Label(getResponse(userInput.getText()));
+//        String userText = userInput.getText();
+//        String dukeText = getResponse(userInput.getText());
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, user),
+//                DialogBox.getDukeDialog(dukeText, duke)
+//        );
+//        userInput.clear();
+//    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        String toReturn = "";
-//        try {
-//            Command c = parser.parse(input);
-//            toReturn = c.execute(tasks, ui, storage);
-//        } catch (Exception e) {
-//            // toReturn = "      OOPS!!!";
-//            toReturn = e.toString();
-//        }
+        try {
+            Command c = parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (Exception e) {
 
-        Command c = parser.parse(input);
-        toReturn = c.execute(tasks, ui, storage);
-
-        if (toReturn == null || toReturn.equals("")) {
-            toReturn = "I'm sorry, but I don't know what that means :-(";
         }
+
+        String toReturn = Main.getBaos().toString();
+        Main.getBaos().reset();
 
         return toReturn;
     }

@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Task("placeholder", TaskType.TODO);
 
         switch (taskType) {
@@ -48,17 +48,17 @@ public class AddCommand extends Command {
             break;
         }
 
-//        ui.showLine();
-//        ui.showAddTaskMessage();
-//        ui.printAddedTask(task);
-//        ui.println("     Now you have " + tasks.size() + " tasks in the list.");
-//        ui.showLine();
-        //ui.getUserInput();
+        ui.showLine();
+        ui.showAddTaskMessage();
+        ui.printAddedTask(task);
+        ui.println("     Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
+//        ui.getUserInput();
 
-        String result = "Got it. I've added this task: \n"
-                + ui.printAddedTask(task) + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.";
-
-        return result;
+//        String result = "Got it. I've added this task: \n"
+//                + ui.printAddedTask(task) + "\n"
+//                + "Now you have " + tasks.size() + " tasks in the list.";
+//
+//        return result;
     }
 }

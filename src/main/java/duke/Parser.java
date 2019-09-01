@@ -16,7 +16,6 @@ import java.util.Calendar;
  * Processes user's input text and executes corresponding commands.
  */
 public class Parser {
-    public static final String LINE = "    ____________________________________________________________\n";
     private Ui ui;
 
     /**
@@ -54,7 +53,6 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The task you want to mark as done doesn't exist.");
                 ui.showLine();
-                //ui.getUserInput();
             }
             break;
         case "todo":
@@ -69,7 +67,6 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
                 ui.showLine();
-                //ui.getUserInput();
             }
             break;
         case "deadline":
@@ -89,17 +86,14 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
                 ui.showLine();
-                //ui.getUserInput();
             } catch (WrongDateFormatException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The date format must be dd/mm/yyyy hhmm.");
                 ui.showLine();
-                //ui.getUserInput();
             } catch (DukeException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! "  + e);
                 ui.showLine();
-                //ui.getUserInput();
             }
             break;
         case "event":
@@ -120,17 +114,14 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description of an event cannot be empty.");
                 ui.showLine();
-                //ui.getUserInput();
             } catch (WrongDateFormatException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The date format must be dd/mm/yyyy hhmm.");
                 ui.showLine();
-                //ui.getUserInput();
             } catch (DukeException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! " + e);
                 ui.showLine();
-                //ui.getUserInput();
             }
             break;
         case "delete":
@@ -142,7 +133,6 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The task you want to delete doesn't exist.");
                 ui.showLine();
-                //ui.getUserInput();
             }
             break;
         case "find":
@@ -158,7 +148,6 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description cannot be empty.");
                 ui.showLine();
-                //ui.getUserInput();
             }
         break;
         default:
@@ -168,7 +157,6 @@ public class Parser {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! " + e);
                 ui.showLine();
-                //ui.getUserInput();
             }
         }
 

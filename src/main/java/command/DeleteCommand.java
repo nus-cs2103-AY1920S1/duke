@@ -14,12 +14,19 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskRemoved = tasks.remove(index - 1);
-        String result = "Noted. I've removed this task: \n"
-                +  taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon()
-                + " " + taskRemoved + "\n" + "Now you have " + tasks.size() + " tasks in the list.";
+//        String result = "Noted. I've removed this task: \n"
+//                +  taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon()
+//                + " " + taskRemoved + "\n" + "Now you have " + tasks.size() + " tasks in the list.";
+//
+//        return result;
 
-        return result;
+        ui.showLine();
+        ui.println("     Noted. I've removed this task: ");
+        ui.println("       " + taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon()
+                + " " + taskRemoved);
+        ui.println("     Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
     }
 }

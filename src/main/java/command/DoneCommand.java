@@ -13,11 +13,17 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskDone = tasks.getTasks().get(index - 1);
         taskDone.markAsDone();
-        String result = "Nice! I've marked this task as done: \n"
-                + taskDone.getTypeIcon() + taskDone.getStatusIcon() + " " + taskDone + "\n";
-        return result;
+
+        ui.showLine();
+        ui.println("     Nice! I've marked this task as done: ");
+        ui.println("       " + taskDone.getTypeIcon() + taskDone.getStatusIcon() + " " + taskDone);
+        ui.showLine();
+
+//        String result = "Nice! I've marked this task as done: \n"
+//                + taskDone.getTypeIcon() + taskDone.getStatusIcon() + " " + taskDone + "\n";
+//        return result;
     }
 }

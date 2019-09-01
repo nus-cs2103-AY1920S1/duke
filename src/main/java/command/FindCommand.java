@@ -15,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void  execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks.getTasks()) {
             if (task.getDescription().contains(textToFind)) {
@@ -23,19 +23,37 @@ public class FindCommand extends Command {
             }
         }
 
-        StringBuilder result = new StringBuilder("");
 
         if (matchingTasks.size() == 0) {
-            result.append("I'm sorry, but I can't find any matching tasks :-(");
+            ui.showLine();
+            ui.println("     I'm sorry, but I can't find any matching tasks :-(");
+            ui.showLine();
         } else {
-            result.append("Here are the matching tasks in your list:\n");
+            ui.showLine();
+            ui.println("     Here are the matching tasks in your list:");
             for (int i = 0; i < matchingTasks.size(); i++) {
                 Task currentTask = matchingTasks.get(i);
-                result.append("     " + Integer.toString(i + 1) + "." + currentTask.getTypeIcon()
-                        + currentTask.getStatusIcon() + " " + currentTask + "\n");
+                System.out.println("     " + Integer.toString(i + 1) + "." + currentTask.getTypeIcon()
+                        + currentTask.getStatusIcon() + " " + currentTask);
             }
+            ui.showLine();
         }
 
-        return result.toString();
+
+
+        // StringBuilder result = new StringBuilder("");
+
+//        if (matchingTasks.size() == 0) {
+//            result.append("I'm sorry, but I can't find any matching tasks :-(");
+//        } else {
+//            result.append("Here are the matching tasks in your list:\n");
+//            for (int i = 0; i < matchingTasks.size(); i++) {
+//                Task currentTask = matchingTasks.get(i);
+//                result.append("     " + Integer.toString(i + 1) + "." + currentTask.getTypeIcon()
+//                        + currentTask.getStatusIcon() + " " + currentTask + "\n");
+//            }
+//        }
+//
+//        return result.toString();
     }
 }

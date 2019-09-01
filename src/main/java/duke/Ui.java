@@ -24,7 +24,8 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.print(LINE);
+        // do nothing
+        // System.out.print(LINE);
     }
 
     public void showAddTaskMessage() {
@@ -32,7 +33,7 @@ public class Ui {
         System.out.println(addTaskMessage);
     }
 
-    public String printAddedTask(Task task) {
+    public void printAddedTask(Task task) {
         String result = "";
         switch (task.getType()) {
         case TODO:
@@ -46,9 +47,9 @@ public class Ui {
             break;
         }
         result += task;
-        // System.out.println(result);
+        System.out.println(result);
 
-        return result;
+        // return result;
     }
 
     public void println(String string) {

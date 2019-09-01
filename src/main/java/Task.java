@@ -25,6 +25,9 @@ public class Task implements Serializable {
         return this.task;
     }
 
+    public boolean contains(String s) {
+        return task.contains(s);
+    }
     @Override
     public String toString() {
         String logo;

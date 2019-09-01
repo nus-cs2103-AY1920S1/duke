@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.io.IOException;
 
 /**
  * Represents an Ui class which handles all the display and I/O
@@ -11,6 +15,8 @@ public class Ui {
 
     /**
      * Runs the start of the Ui, by introducing Duke.
+     *
+     * @return a String format welcome message to display
      */
     public String initiate() {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -34,6 +40,8 @@ public class Ui {
      * @param inputCommand a String command (Deadline, Event, List etc) that helps the program process the instruction
      * @param storage a storage object that will be used during the program
      * @param currentTaskList a taskList object that will be used to store the different task objects
+     *
+     * @return returns a String reply for Duke to display
      * @throws IOException throws exception if user input is invalid
      */
     public String executeInstructions(String inputInstruction, String inputCommand,
@@ -161,10 +169,10 @@ public class Ui {
                 if (taskNum > currentTaskList.getNoOfTask()) {
                     throw new DukeException("index");
                 }
-                Task currentTask = currentTaskList.getTask(taskNum - 1);
-                currentTaskList.removeTask(taskNum - 1);
                 System.setOut(new PrintStream(buffer));
                 System.out.println("___________________________________\n" + "Noted. I've removed this task:");
+                Task currentTask = currentTaskList.getTask(taskNum - 1);
+                currentTaskList.removeTask(taskNum - 1);
                 System.out.println(currentTask);
                 Task.total--;
                 System.out.println("Now you have " + Task.total + " tasks in the list.");
@@ -186,10 +194,10 @@ public class Ui {
             }
         } else if (inputCommand.equals("find")) {
             try {
-                String subInput = inputInstruction.substring(5);
                 System.setOut(new PrintStream(buffer));
                 System.out.println("__________________________________");
                 System.out.println("Here are the tasks in your list:");
+                String subInput = inputInstruction.substring(5);
                 currentTaskList.findTask(subInput);
                 System.out.println("___________________________________");
                 System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));

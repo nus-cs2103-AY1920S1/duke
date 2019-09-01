@@ -20,9 +20,9 @@ import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Command;
 import duke.util.DukeException;
+import duke.javafx.control.DialogBox;
 
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke extends Application {
@@ -38,20 +38,14 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    /**
-     * Main method to run Duke
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("./saved/taskList_history.txt").run();
-    }
+    private final String path = "./saved/taskList_history.txt";
 
     public Duke() {
 
     }
 
-    public Duke(String path) {
+    @Override
+    public void start(Stage stage) {
         storage = new Storage(path);
         ui = new Ui();
         parser = new Parser();
@@ -65,35 +59,11 @@ public class Duke extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Run method for Duke Object
-     */
-    private void run() {
-        ui.welcomeMessage();
-        Scanner sc = new Scanner(System.in);
-        boolean shouldExit = false;
-        while (!shouldExit) {
-            try {
-                String input = sc.nextLine();
-                String[] inputParts = input.split(" ", 2);
-                String command = inputParts[0];
-                Command c = Parser.parse(inputParts);
-                shouldExit = c.execute(storage, ui, tasks);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (DukeException e) {
-                ui.printErrorMessage(e.getMessage());
-            }
-        }
-        sc.close();
-    }
-
-    @Override
-    public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        String style = "-fx-background-color: #494e58";
+        dialogContainer.setStyle(style);
+
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -107,14 +77,14 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Perry");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -134,6 +104,10 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(new Label(ui.welcomeMessage()), new ImageView(duke))
+        );
 
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -184,11 +158,16 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            String[] inputParts = input.split(" ", 2);
+            Command c = Parser.parse(inputParts);
+            return c.execute(storage, ui, tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DukeException e) {
+            return e.getMessage() + "\nType 'commands' to view a list of commands you can use";
+        }
+        return "";
     }
 }

@@ -13,6 +13,8 @@ public class Parser {
             return new Command(inputParts, 3);
         case "find":
             return new Command(inputParts, 4);
+        case "commands":
+            return new Command(inputParts, -1);
         }
         return new Command(inputParts, 5);
     }

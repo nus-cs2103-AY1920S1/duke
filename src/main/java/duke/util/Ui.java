@@ -3,20 +3,16 @@ package duke.util;
  * Ui class to print display items
  */
 public class Ui {
+    public static final String line = "    ________________________"
+            + "____________________________________";
+
     /**
      * Print welcome message
      */
-    public void welcomeMessage() {
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|\n";
-        drawLine();
-        System.out.println("    Hello from\n" + logo);
-        System.out.println("    What can I do for you?");
-        drawLine();
-        System.out.println("\n");
+    public String welcomeMessage() {
+        String result = "Hello!\nWhat can I do for you?";
+        result += "\nType 'commands' to view a list of commands you can use.";
+        return result;
     }
 
     /**
@@ -33,11 +29,9 @@ public class Ui {
     /**
      * Prints bye message
      */
-    public void byeMessage() {
-        drawLine();
-        System.out.println("     Bye. Hope to see you again soon!");
-        drawLine();
-        System.out.println("\n");
+    public String byeMessage() {
+        String result = "Bye. Hope to see you again soon!";
+        return result;
     }
 
     /**

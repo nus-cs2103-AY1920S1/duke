@@ -34,69 +34,63 @@ public class TaskList {
     /**
      * Displays the tasklist
      */
-    public void displayList() {
-        System.out.println("    Here are the tasks in your list:");
+    public String getListAsString() {
+        String result = "Here are the tasks in your list:\n";
         for (Task t : taskList) {
-            System.out.println("    " + t.getIndex() + "." + t);
+            String current = t.getIndex() + "." + t + "\n";
+            result += current;
         }
+        return result;
     }
 
     /**
      * Marks the task item as complete in the list
      * @param index Index of task in the list
-     * @param ui Ui Object to draw ui components
      * @throws DukeException if invalid task number is passed to this method
      */
-    public void markItemComplete(int index, Ui ui) throws DukeException {
+    public String markItemComplete(int index) throws DukeException {
         if (index <= 0 || index > count) {
             throw new DukeException("Invalid task number!");
         }
         Task t = taskList.get(index - 1);
         t.complete();
-        ui.drawLine();
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("     " + t);
-        ui.drawLineNewLine();
-        System.out.println();
+        String result = "Nice! I've marked this task as done:\n";
+        result += t;
+        return result;
     }
 
     /**
      * Deletes a task item from the list
      * @param index Index of task in the list
-     * @param ui Ui object to draw ui components
      * @throws DukeException if invalid task number is passed to this method
      */
-    public void deleteItem(int index, Ui ui) throws DukeException {
-
+    public String deleteItem(int index) throws DukeException {
         if (index <= 0 || index > count) {
             throw new DukeException("Invalid task number!");
         }
         index--;
         Task t = taskList.get(index);
         taskList.remove(index);
-        ui.drawLine();
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("      " + t);
+        String result = "Noted. I've removed this task:\n";
+        result += t + "\n";
         count -= 1;
-        String message =
-                count == 1
-                        ? "     Now you have 1 task in the list"
-                        : "     Now you have " + count + " tasks in the list";
-        System.out.println(message);
-        ui.drawLineNewLine();
-        System.out.println();
+        if (count == 1) {
+            result += "Now you have 1 task in the list";
+        } else {
+            result += "Now you have " + count + " tasks in the list";
+        }
+        return result;
     }
 
     /**
      * Creates a new task from a given input
      * @param inputParts An array of <code>String</code> split into type of task, name of task and date (if required)
-     * @param ui Ui Object to draw ui components
      * @throws DukeException if command is invalid
      */
-    public void registerNewTask(String[] inputParts, Ui ui) throws DukeException {
+    public String registerNewTask(String[] inputParts) throws DukeException {
         checkCommandValidity(inputParts[0]);
         Task t = addToList(inputParts[1], inputParts[0]);
-        echo(t, ui);
+        return echo(t);
     }
 
     /**
@@ -127,7 +121,7 @@ public class TaskList {
         } else if (type.equals("deadline")) {
             String[] parts = s.split("\\/" + "by");
             if (parts.length < 2) {
-                String message = "Date required! ";
+                String message = "Date required!\n";
                 message += "Format: deadline YOUR_TASK_NAME /by YOUR_DEADLINE";
                 throw new DukeException(message);
             } else if (parts.length != 2) {
@@ -141,7 +135,7 @@ public class TaskList {
         } else if (type.equals("event")) {
             String[] parts = s.split("\\/" + "at");
             if (parts.length < 2) {
-                String message = "Date required! ";
+                String message = "Date required!\n";
                 message += "Format: event YOUR_TASK_NAME /at YOUR_EVENT_DATE";
                 throw new DukeException(message);
             } else if (parts.length != 2) {
@@ -264,35 +258,30 @@ public class TaskList {
     /**
      * Echos the task in a fixed format
      * @param t Task object
-     * @param ui Ui Object to draw ui components
      */
-    public void echo(Task t, Ui ui) {
-        ui.drawLine();
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("      " + t);
+    public String echo(Task t) {
+        String result = "Got it. I've added this task:\n";
+        result += t + "\n";
         if (count == 1) {
-            System.out.println("     Now you have 1 task in the list.");
+            result += "Now you have 1 task in the list.";
         } else {
-            String message = "     Now you have " + count + " tasks in the list.";
-            System.out.println(message);
+            result += "Now you have " + count + " tasks in the list.";
         }
-        ui.drawLineNewLine();
-        System.out.println();
+        return result;
     }
 
-    public void findItem(String name, Ui ui) {
+    public String findItem(String name) {
         ArrayList<Task> results = new ArrayList<>();
         for (Task t : taskList) {
             if (t.getName().contains(name)) {
                 results.add(t);
             }
         }
-        ui.drawLine();
-        System.out.println("     Here are the matching tasks in your list:");
+        String result = "Here are the matching tasks in your list:\n";
         for (Task t : results) {
-            System.out.println("    " + t.getIndex() + "." + t);
+            String current = t.getIndex() + "." + t + "\n";
+            result += current;
         }
-        ui.drawLineNewLine();
-        System.out.println();
+        return result;
     }
 }

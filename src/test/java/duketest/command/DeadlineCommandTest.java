@@ -1,7 +1,8 @@
-package duke.command.test;
+package duketest.command;
 
 import duke.command.DeadlineCommand;
-import duke.exception.DukeException;
+import duke.exception.*;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

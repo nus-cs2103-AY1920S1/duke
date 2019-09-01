@@ -15,6 +15,13 @@ public class Task {
         isDone = true;
     }
 
+    public String saveData() {
+        if (isDone) {
+            return "1 | " + description;
+        }
+        return "0 | " + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

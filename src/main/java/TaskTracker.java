@@ -1,8 +1,50 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
 
 public class TaskTracker {
 
     private ArrayList<Task> taskList = new ArrayList<>();
+
+    public TaskTracker(File data) {
+        try {
+            Scanner scanFile = new Scanner(data);
+            while (scanFile.hasNext()) {
+                String[] taskItem = scanFile.nextLine().split(" | ");
+                processData(taskItem);
+            }
+        } catch (Exception err) {
+            System.err.println(err);
+        }
+    }
+
+    private void processData(String[] task) {
+        String action = task[0];
+        boolean isDone = task[2].equals("1");
+        switch (action) {
+        case "T":
+            Task todo = new Todo(task[4]);
+            if (isDone) {
+                todo.markAsDone();
+            }
+            taskList.add(todo);
+            break;
+        case "E":
+            Task event = new Event(task[4], task[6]);
+            if (isDone) {
+                event.markAsDone();
+            }
+            taskList.add(event);
+            break;
+        case "D":
+            Task deadline = new Deadline(task[4], task[6]);
+            if (isDone) {
+                deadline.markAsDone();
+            }
+            taskList.add(deadline);
+            break;
+        }
+    }
 
     public void process(String command) {
         String action = command.split(" ")[0];
@@ -27,7 +69,7 @@ public class TaskTracker {
                 delete(command);
                 break;
             default:
-                throw new DukeException("    ____________________________________________________________\n" +
+                throw new DukeException("\n    ____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "    ____________________________________________________________");
             }
@@ -72,7 +114,7 @@ public class TaskTracker {
             taskList.add(task);
             notifyAdded(task);
         } catch (Exception err) {
-            throw new DukeException("    ____________________________________________________________\n" +
+            throw new DukeException("\n    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
                     "    ____________________________________________________________");
         }
@@ -102,5 +144,17 @@ public class TaskTracker {
                 "       " + task + "\n" +
                 "     Now you have " + taskList.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________");
+    }
+
+    public String end() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (i == taskList.size() - 1) {
+                output.append(taskList.get(i).saveData());
+                break;
+            }
+            output.append(taskList.get(i ).saveData() + "\n");
+        }
+        return output.toString();
     }
 }

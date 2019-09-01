@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.geometry.Insets;
 
 public class Duke extends Application {
 
@@ -75,6 +76,7 @@ public class Duke extends Application {
         // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setPadding(new Insets(15, 15, 15, 15));
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();

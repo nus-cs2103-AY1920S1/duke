@@ -5,6 +5,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.CornerRadii;
+import javafx.geometry.Insets;
 
 public class DialogBox extends HBox {
 
@@ -15,9 +21,14 @@ public class DialogBox extends HBox {
         text = l;
         displayPicture = iv;
 
+        Circle background = new Circle(50, 50, 50);
+
         text.setWrapText(true);
+
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+
+        displayPicture.setClip(background);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -35,10 +46,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
+        l.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
         return new DialogBox(l, iv);
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        l.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
         var db = new DialogBox(l, iv);
         db.flip();
         return db;

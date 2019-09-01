@@ -15,6 +15,7 @@ public class PreParser {
         commandMap.register(new duke.command.Deadline(dummyArgs));
         commandMap.register(new duke.command.Event(dummyArgs));
         commandMap.register(new duke.command.Delete(dummyArgs));
+        commandMap.register(new duke.command.Find(dummyArgs));
     }
     public Command parse(String fullCommand) throws DukeException {
         String[] args = fullCommand.split(" ");

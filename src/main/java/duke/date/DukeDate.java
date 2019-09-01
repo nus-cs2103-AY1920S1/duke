@@ -51,6 +51,14 @@ public class DukeDate {
         }
     }
 
+    public DukeDate() {
+        this.year = 2020;
+        this.month = Month.JANUARY;
+        this.day = 1;
+        this.hour = 12;
+        this.minute = 0;
+    }
+
     public DukeDate(int year, int month, int day, int hour, int minute)
             throws DukeDateFormatException {
         if (year < 0) {

@@ -30,7 +30,7 @@ public class Task {
         }
     }
 
-    public  String getTaskType() {
+    public String getTaskType() {
 
         return this.taskType;
     }

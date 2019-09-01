@@ -1,1 +1,3 @@
 T | 0 | read book
+D | 0 | return book | Sunday
+E | 1 | project meeting | 2th of December 2019, 6pm

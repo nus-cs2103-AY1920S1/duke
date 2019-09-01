@@ -41,9 +41,12 @@ public class Storage {
     }
 
     public void save(TaskList taskList) throws IOException {
-        writeToFile(filepath, taskList.list.get(0).toString() + System.lineSeparator());
-        for (int i = 1; i < taskList.list.size(); i++) {
-            appendToFile(filepath, taskList.list.get(i).toString() + System.lineSeparator());
+        if(taskList.list.size() != 0) {
+            writeToFile(filepath, taskList.list.get(0).toString() + System.lineSeparator());
+
+            for (int i = 1; i < taskList.list.size(); i++) {
+                appendToFile(filepath, taskList.list.get(i).toString() + System.lineSeparator());
+            }
         }
     }
 

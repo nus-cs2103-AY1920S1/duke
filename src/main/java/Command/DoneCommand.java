@@ -10,13 +10,14 @@ public class DoneCommand extends Command {
     private int taskNo;
 
     public DoneCommand(int taskNo) {
+
         this.taskNo = taskNo;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        taskList.list.get(taskNo).markAsDone();
-        ui.showDoneMessage(taskList.list.get(taskNo));
+        taskList.list.get(taskNo - 1).markAsDone();
+        ui.showDoneMessage(taskList.list.get(taskNo - 1));
         storage.save(taskList);
     }
 

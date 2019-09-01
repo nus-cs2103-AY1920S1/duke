@@ -6,6 +6,7 @@ import com.tasks.Event;
 import com.tasks.TaskTypes;
 import com.tasks.Todo;
 import com.util.Printer;
+import com.util.datetime.DateTime;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -71,6 +72,9 @@ public class SaveData {
     }
 
     public static ArrayList<DoableTask> parseJsonFile(String input) {
+        if (input.length() == 0) {
+            return new ArrayList<>();
+        }
         try {
             ArrayList<DoableTask> arr = new ArrayList<>();
             for (DynamicValue o : parseJsonArray(input.toCharArray(), 0).snd) {
@@ -123,13 +127,15 @@ public class SaveData {
                                 && attributes.get(Schema.ATTR_EVENT_START).getType() == ValueTypes.STRING
                                 && attributes.get(Schema.ATTR_EVENT_END) != null
                                 && attributes.get(Schema.ATTR_EVENT_END).getType() == ValueTypes.STRING) {
-                            t = new Event(name, attributes.get(Schema.ATTR_EVENT_START).getString());
+                            t = new Event(name,
+                                    DateTime.parseString(attributes.get(Schema.ATTR_EVENT_START).getString()),
+                                    DateTime.parseString(attributes.get(Schema.ATTR_EVENT_END).getString()));
                         }
                         break;
                     case DEADLINE:
                         if (attributes.get(Schema.ATTR_DEADLINE_DUE) != null
                                 && attributes.get(Schema.ATTR_DEADLINE_DUE).getType() == ValueTypes.STRING) {
-                            t = new Deadline(name, attributes.get(Schema.ATTR_DEADLINE_DUE).getString());
+                            t = new Deadline(name, DateTime.parseString(attributes.get(Schema.ATTR_DEADLINE_DUE).getString()));
                         }
                         break;
                     }

@@ -3,59 +3,59 @@ import java.util.HashMap;
 import java.util.Date;
 
 public class Parser {
-    public static final int BYE = 0;
-    public static final int LIST = 1;
-    public static final int DONE = 2;
-    public static final int DELETE = 3;
-    public static final int TASK = 4;
-
-    protected HashMap<String, Integer> cmdMap;
+    protected static HashMap<String, Command> keywordToCommand;
 
     public Parser() {
-        this.cmdMap = new HashMap<>();
-        cmdMap.put("bye", BYE);
-        cmdMap.put("list", LIST);
-        cmdMap.put("done", DONE);
-        cmdMap.put("delete", DELETE);
-        cmdMap.put("todo", TASK);
-        cmdMap.put("deadline", TASK);
-        cmdMap.put("event", TASK);
+        keywordToCommand = new HashMap<>();
+        keywordToCommand.put("bye", new ExitCommand());
+        keywordToCommand.put("list", new ListCommand());
+        keywordToCommand.put("done", new DoneCommand());
+        keywordToCommand.put("delete", new DeleteCommand());
+        keywordToCommand.put("todo", new AddCommand());
+        keywordToCommand.put("deadline", new AddCommand());
+        keywordToCommand.put("event", new AddCommand());
     }
 
-    public int parseInput(String input) {
-        if(cmdMap.get(input) != null) {
-            return cmdMap.get(input);
+    public static Command parse(String input) throws DukeException {
+        if(keywordToCommand.get(input) != null) {
+            return keywordToCommand.get(input);
         } else {
             Scanner scanner = new Scanner(input);
-            String cmd = scanner.next();
+            String keyword = scanner.next();
             scanner.close();
-            return (cmdMap.get(cmd) != null) ? cmdMap.get(cmd) : -1;
+            Command command;
+            try {
+                command = keywordToCommand.get(keyword).clone(input);
+            } catch(NullPointerException e) {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            return command;
         }
     }
 
-    public int parseDone(String input) throws AssertionError {
+    public static int parseDone(String input) throws AssertionError {
         Scanner scanner = new Scanner(input);
         
-        String cmd = scanner.next();
-        assert(cmd.equals("done"));
+        String command = scanner.next();
+        assert(command.equals("done"));
 
         int itemId = scanner.nextInt();
         scanner.close();
         return itemId;
     }
 
-    public int parseDelete(String input) throws AssertionError {
+    public static int parseDelete(String input) throws AssertionError {
         Scanner scanner = new Scanner(input);
         
-        String cmd = scanner.next();
-        assert(cmd.equals("delete"));
+        String command = scanner.next();
+        assert(command.equals("delete"));
 
         int itemId = scanner.nextInt();
         scanner.close();
         return itemId;
     }
 
-    public Task parseTask(String input) throws DukeException {
+    public static Task parseTask(String input) throws DukeException {
         Scanner scanner = new Scanner(input);
         String type = scanner.next();
         scanner.close();
@@ -68,10 +68,10 @@ public class Parser {
         case "event":
             return createEvent(input.substring("event".length()));
         }
-        throw new DukeException("Invalid task input");
+        throw new DukeException("Invalid task input.");
     }
 
-    static Todo createTodo(String input) throws DukeException {
+    public static Todo createTodo(String input) throws DukeException {
         String description = input.length() == 0
                 ? input
                 : input.substring(1);
@@ -81,7 +81,7 @@ public class Parser {
         return new Todo(description);
     }
 
-    static Deadline createDeadline(String input) {
+    public static Deadline createDeadline(String input) {
         StringBuffer stringBuffer = new StringBuffer();
         Scanner scanner = new Scanner(input);
 
@@ -101,7 +101,7 @@ public class Parser {
         return new Deadline(description, parseDate(date));
     }
 
-    static Event createEvent(String input) {
+    public static Event createEvent(String input) {
         StringBuffer stringBuffer = new StringBuffer();
         Scanner scanner = new Scanner(input);
         
@@ -121,7 +121,7 @@ public class Parser {
         return new Event(description, parseDate(date));
     }
 
-    static Date parseDate(String date) {
+    public static Date parseDate(String date) {
         String[] dayAndTime = date.trim().split(" ");
         String[] ddMmYy = dayAndTime[0].split("/");
         String hhSs = dayAndTime[1];

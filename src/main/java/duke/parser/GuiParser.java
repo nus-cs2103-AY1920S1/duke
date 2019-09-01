@@ -22,13 +22,11 @@ public class GuiParser  {
     /**
      * main driver method for Parser class
      * calls and links to other objects to execute the entire program
+     * returns a String
      */
-
     public String readUserInput(String string) {
         //Scanner myScanner = new Scanner(System.in);
-
         String argument = string;
-
             if (argument.equals("list")) {
                 String result = storeTaskList.listTask();
                 return result;
@@ -43,12 +41,10 @@ public class GuiParser  {
                         int index = Integer.valueOf(argumentArray[1]) - 1;
                         String result = storeTaskList.doneTask(index);
                         return result;
-                    } catch(IndexOutOfBoundsException e) {
+                    } catch (IndexOutOfBoundsException e) {
                         System.out.println("invalid number not in current list");
-                    }catch (DukeException e) {
-                        System.out.println(e);
-                    } finally {
-    
+                    } catch (DukeException e) {
+                        return e.toString();
                     }
                 } else if (argumentArray[0].equals("todo")) {
                     try {
@@ -63,14 +59,10 @@ public class GuiParser  {
                             toDoTaskString += " ";
                         }
                         //.trim() to remove trailing space
-
                         String result = storeTaskList.addToDoTask(toDoTaskString.trim());
                         return result;
-
                     } catch (DukeException e) {
-                        System.out.println(e);
-                    } finally {
-    
+                        return e.toString();
                     }
                 } else if (argumentArray[0].equals("deadline")) {
                     try {
@@ -78,18 +70,15 @@ public class GuiParser  {
                         if (argumentArray.length == 1) {
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
-
-
                         //form back string , description stops at /by
                         //date time starts from /by
                         String deadlineTaskDescriptionString = "";
                         String deadlineTaskDateAndTimeString = "";
                         boolean createDesc = true;
                         //catch error of no specific date time after /by
-                        if (argumentArray[argumentArray.length -1].matches("/by")) {
+                        if (argumentArray[argumentArray.length - 1].matches("/by")) {
                             throw new DukeException("Oops, no specific date/time supplied");
                         }
-
                         for (int i = 1; i < argumentArray.length; i++) {
                             if (argumentArray[i].equals("/by")) {
                                 createDesc = false;
@@ -99,17 +88,13 @@ public class GuiParser  {
                             } else {
                                 deadlineTaskDateAndTimeString += argumentArray[i];
                                 deadlineTaskDateAndTimeString += " ";
-
                             }
                         }
-                        //System.out.println(deadlineTaskDateAndTimeString);
                         deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
                         String result = storeTaskList.addDeadlineTask(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
                         return result;
                     } catch (DukeException e) {
-                        System.out.println(e);
-                    } finally {
-    
+                        return e.toString();
                     }
                 } else if (argumentArray[0].equals("event")) {
                     try {
@@ -123,10 +108,9 @@ public class GuiParser  {
                         String eventTaskDateAndTimeString = "";
                         boolean createDesc = true;
                         //catch error of no specific date time after /at
-                        if (argumentArray[argumentArray.length -1].matches("/at")) {
+                        if (argumentArray[argumentArray.length - 1].matches("/at")) {
                             throw new DukeException("Oops, no specific duration supplied");
                         }
-
                         for (int i = 1; i < argumentArray.length; i++) {
                             if (argumentArray[i].equals("/at")) {
                                 createDesc = false;
@@ -136,43 +120,31 @@ public class GuiParser  {
                             } else {
                                 eventTaskDateAndTimeString += argumentArray[i];
                                 eventTaskDateAndTimeString += " ";
-
                             }
                         }
-
                         eventTaskDateAndTimeString = convertStringToDateEvent(eventTaskDateAndTimeString);
                         String result = storeTaskList.addEventTask(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
                         return result;
-            
                     } catch (DukeException e) {
-                        System.out.println(e);
-                    } finally {
-    
+                        return e.toString();
                     }
-                }else if (argumentArray[0].equals("delete")) {
-                    try{
+                } else if (argumentArray[0].equals("delete")) {
+                    try {
                         if (argumentArray.length == 1) {
                             throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
                         }
                         int index = Integer.valueOf(argumentArray[1]) - 1;
                         String result = storeTaskList.deleteTask(index);
                         return result;
-
                         //catch task number not in list error
-                    }catch(IndexOutOfBoundsException e) {
+                    } catch (IndexOutOfBoundsException e) {
                         System.out.println("invalid number not in current list");
-
-                    }catch (DukeException e) {
-                        System.out.println(e);
-                    } finally {
-    
+                    } catch (DukeException e) {
+                        return e.toString();
                     }
-
-
                 } else if (argumentArray[0].equals("find")) {
                     String result = storeTaskList.findTask(argumentArray[1]);
                     return result;
-
                 } else if (argumentArray[0].equals("bye")) {
                     System.exit(0);
                 } else {
@@ -180,18 +152,11 @@ public class GuiParser  {
                         //handles error for not recognized command
                         throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
                     } catch (DukeException e) {
-                        System.out.println(e);
-                    } finally {
-    
+                        return e.toString();
                     }
                 }
             }
-
-        //test
-        //exiting program
-        //System.out.println("Bye. Hope to see you again soon!");
-       // myScanner.close();
-        return "☹  OOPS!!! I'm sorry, but I don't know what that means :-( please try again!";
+            return "Oops, please enter input again";
     }
 
     /**
@@ -217,7 +182,6 @@ public class GuiParser  {
         } catch (DukeException e ) {
             System.out.println(e);
         }
-
         return " ";
     }
 

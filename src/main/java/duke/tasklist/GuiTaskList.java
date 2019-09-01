@@ -20,7 +20,6 @@ public class GuiTaskList {
      * @param listOfTasks
      * @param storage
      */
-
     public GuiTaskList(ArrayList<Task> listOfTasks, Storage storage) {
         this.store = listOfTasks;
         this.storage = storage;

@@ -1,6 +1,4 @@
-import duke.UI.Ui;
 import duke.parser.GuiParser;
-import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.GuiTaskList;
@@ -11,17 +9,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
 
 public class Duke  {
 
+    
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private GuiParser parser;
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
@@ -42,34 +39,21 @@ public class Duke  {
         this.parser = new GuiParser(store);
     }
 
-    /**
-     * Driver method for Duke instance.
-     * calls parser to parse user input accordingly
-     */
-
-   /* public void run() {
-        parser.readUserInput();
-    }*/
 
     /**
-     * Entry point of program, instantiates Duke instance.
-     * file input/output is loaded from data/duke.txt
-     * @return void
-     */
-    /*public static void main(String[] args) {
-        Duke temp = new Duke("data/duke.txt");
-        Ui.showGreeting();
-        temp.run();
-    }*/
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generate a response to user input.
+     * Calls Parser object to read current input from GUI
      */
     private String getResponse(String input) {
         return parser.readUserInput(input);
     }
 
+
+    /**
+     * accessor to getResponse() method
+     * @param input
+     * @return
+     */
     public String getPublicResponse(String input) {
         return this.getResponse(input);
     }

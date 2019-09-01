@@ -31,6 +31,10 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Another instance of Dialog box constructor to call on UserDialogBox FXML file
+     * @param img
+    */
     private DialogBox(String text, Image img, boolean test) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));

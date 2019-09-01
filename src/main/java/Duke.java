@@ -153,7 +153,7 @@ public class Duke {
                 taskIndex++;
                 System.out.println("Now you have " + taskIndex + ((taskIndex == 1) ? " task in the list" : " tasks in the list."));
             } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                printInvalidCommand();
                 return;
             }
         }
@@ -176,9 +176,16 @@ public class Duke {
                     System.out.println(i + 1 + "." + t.toString());
                 }
             } else if (s.contains("done")) {
-                int index = Integer.parseInt(s.substring(5));
-                if (index < 1 || index >= taskList.size()) {
-                    throw new ArrayIndexOutOfBoundsException("Out of range, the task does not exist");
+                int index;
+                try {
+                    index = Integer.parseInt(s.substring(5));
+                } catch (NumberFormatException e) {
+                    System.out.println("☹ OOPS!!! You have entered an invalid number");
+                    continue;
+                }
+                if (index < 1 || index > taskList.size()) {
+                    System.out.println("☹ OOPS!!! Out of range, the task does not exist");
+                    continue;
                 } else {
                     System.out.println("Nice! I've marked this task as done: ");
                     taskList.get(index - 1).markAsDone();
@@ -187,7 +194,7 @@ public class Duke {
             } else if (s.contains("todo")) {
                 if (s.substring(4).isEmpty()) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                    return;
+                    continue;
                 }
                 Task toDo = new ToDo(s.substring(5));
                 taskList.add(toDo);
@@ -197,7 +204,7 @@ public class Duke {
             } else if (s.contains("event")) {
                 if (s.substring(5).isEmpty()) {
                     System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
-                    return;
+                    continue;
                 }
                 int dateStartIndex = s.indexOf("/at") + 4;
                 String event = s.substring(dateStartIndex);
@@ -209,7 +216,7 @@ public class Duke {
             } else if (s.contains("deadline")) {
                 if (s.substring(8).isEmpty()) {
                     System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    return;
+                    continue;
                 }
                 int dateStartIndex = s.indexOf("/by") + 4;
                 String deadline = s.substring(dateStartIndex);
@@ -220,21 +227,32 @@ public class Duke {
                 System.out.println("Now you have " + taskList.size() + ((taskList.size() == 1) ? " task in the list" : " tasks in the list."));
             } else if (s.contains("delete")) {
                 if (s.substring(6).isEmpty()) {
-                    System.out.println("☹ OOPS!!! You cannot delete an empty entry");
-                    return;
+                    System.out.println("☹ OOPS!!! You cannot delete an empty entry.");
+                    continue;
                 }
-                Task task = taskList.get(Integer.parseInt(s.substring(7)) - 1);
+                Task task;
+                try {
+                    task = taskList.get(Integer.parseInt(s.substring(7)) - 1);
+                } catch (NumberFormatException e) {
+                    System.out.println("☹ OOPS!!! You have entered an invalid number");
+                    continue;
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! Out of range, the task does not exist");
+                    continue;
+                }
                 taskList.remove(task);
                 System.out.println("Noted. I've removed this task: ");
                 System.out.println(task.toString());
                 System.out.println("Now you have " + taskList.size() + ((taskList.size() == 1) ? " task in the list" : " tasks in the list."));
             } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                return;
+                printInvalidCommand();
             }
         }
     }
-
+    
+    private void printInvalidCommand() {
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
 }
 
 class Task {

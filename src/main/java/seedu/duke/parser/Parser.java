@@ -83,4 +83,7 @@ public class Parser {
         return ( Integer.parseInt(fullCommand.substring(7)) );
     }
 
+    public static String getFindTask(String fullCommand){
+        return (fullCommand.substring(5)) ;
+    }
 }

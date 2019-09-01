@@ -169,9 +169,16 @@ public class Duke {
                     ui.printDeleteSequence(tasks, taskToDelete);
                     taskToDelete = null;
 
-                } else if (taskType.equals(possibleTasks.BYE.toString().toLowerCase())){
-                    // BYE command.
+                } else if (taskType.equals(possibleTasks.FIND.toString().toLowerCase())){
 
+                    // Parser will parse the command and obtain the searchString.
+                    // findSimilarTasks will return a TaskList containing only matching tasks.
+                    TaskList similarTasks = tasks.findSimilarTasks( Parser.getFindTask(fullCommand) ) ;
+
+                    ui.printFoundTasks(similarTasks);
+
+                } else if (taskType.equals(possibleTasks.BYE.toString().toLowerCase())){
+                    // BYE command
                     ui.printByeSequence();
 
                     storage.clearFileBeforeSaving();
@@ -232,7 +239,8 @@ public class Duke {
         DELETE,
         EVENT,
         TODO,
-        DEADLINE
+        DEADLINE,
+        FIND
     }
 
 }

@@ -71,7 +71,7 @@ public class AddCommand extends Command {
     private void toDoTask(String a) throws IOException {
         ToDo newTodo = new ToDo(a);
         tasks.addTask(newTodo);
-        //printAddedTask(newTodo);
+        printAddedTask(newTodo);
         storage.save(tasks);
     }
 

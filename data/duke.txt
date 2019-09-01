@@ -1,2 +1,4 @@
-D | 1 | return book | 27th of August 2019, 7pm
 T | 1 | buy bread
+T | 0 | SEP application
+T | 0 | fix bugs
+T | 0 | download gradle 

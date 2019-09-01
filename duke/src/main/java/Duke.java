@@ -1,7 +1,14 @@
 import java.util.*;
+import java.util.TimeZone;
+
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class Duke {
-    public static void main(String[] args) {
+	private static SimpleDateFormat formatterIn = new SimpleDateFormat("d/M/yyyy HHmm");
+	private static SimpleDateFormat formatterOut = new SimpleDateFormat("d MMM yyyy ha");
+
+    public static void main(String[] args) throws ParseException {
 		ArrayList<Task> list = new ArrayList<>();
 		/*
 		String logo = " ____        _        \n"
@@ -48,7 +55,9 @@ public class Duke {
 					System.out.println("Now you have " + list.size() + " tasks in the list.");
 				} else {
 					Task task = new Task("");
-					String desc = "";
+					String dateInString;
+					String desc;
+					Date date;
 					String line = scanner.nextLine().trim(); // would be \n if incorrect input
 					switch (next) {
 						case "todo":
@@ -66,7 +75,10 @@ public class Duke {
 								throw new DukeException("Put / before by!");
 							}
 							desc = line.substring(0, indexBy - 1); // start after space, end before space before /
-							String by = line.substring(indexBy + 4);
+							dateInString = line.substring(indexBy + 4);
+							date = formatterIn.parse(dateInString);
+						    System.out.println(date);
+							String by = formatterOut.format(date);
 							task = new Deadline(desc, by);
 							break;
 
@@ -78,7 +90,9 @@ public class Duke {
 								throw new DukeException("Put / before at!");
 							}
 							desc = line.substring(0, indexAt - 1); // start after space, end before space before /
-							String at = line.substring(indexAt + 4);
+							dateInString = line.substring(indexAt + 4);
+							date = formatterIn.parse(dateInString);
+							String at = formatterOut.format(date);
 							task = new Event(desc, at);
 							break;
 

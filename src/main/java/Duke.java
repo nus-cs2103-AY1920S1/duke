@@ -8,6 +8,11 @@ public class Duke {
     private UI ui;
     private boolean isExit;
 
+    /**
+     * Default constructor.
+     * Initialises the duke bot and if data file is not found, creates a new file
+     * @param filePath String representation of where the data file is stored
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new UI();
@@ -20,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * runs duke.
+     */
     public void run() {
         ui.greet();
         while (!isExit) {

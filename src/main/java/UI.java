@@ -5,14 +5,14 @@ public class UI {
     Scanner scanner = new Scanner(System.in);
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public UI() {
     }
 
     /**
-     * Returns the user string that is inputted.
-     * @return user string.
+     * Returns String representation of user input.
+     * @return String representation of user input
      */
     public String readCommand() {
         String command = "";
@@ -23,7 +23,7 @@ public class UI {
     }
 
     /**
-     * Prints out the number of tasks in the taskList
+     * Prints out the number of tasks in the taskList.
      * @param taskList
      */
     public void printNumberOfTasks(TaskList taskList) {
@@ -32,15 +32,15 @@ public class UI {
     }
 
     /**
-     * Prints out task t
-     * @param t
+     * Prints out the string representation of task t.
+     * @param t Task to be printed out
      */
     public void printTask(Task t) {
         System.out.println(t.toString());
     }
 
     /**
-     * Prints out all the tasks in taskList
+     * Prints out the string representation of all the tasks in taskList
      * @param taskList
      */
     public void printTaskList(TaskList taskList) {
@@ -54,7 +54,7 @@ public class UI {
     }
 
     /**
-     * Prints out the error message
+     * Prints out the error message.
      * @param error
      */
     public void printErrorMessage(String error) {
@@ -62,54 +62,57 @@ public class UI {
     }
 
     /**
-     * Prints out the pre-message for add
+     * Prints out the pre-message for the add command.
      */
     public void printAddedMessage() {
         System.out.println("Got it. I've added this task:");
     }
 
     /**
-     * Prints out the pre-message for delete
+     * Prints out the pre-message for the delete command.
      */
     public void printDeletedMessage() {
         System.out.println("Noted. I've removed this task:");
     }
 
     /**
-     * Prints out the pre-message for done
+     * Prints out the pre-message for the done command.
      */
     public void printDoneMessage() {
         System.out.println("Nice! I've marked this task as done: ");
     }
 
     /**
-     * Prints out the pre-message for list
+     * Prints out the pre-message for the list command.
      */
     public void printListMessage() {
         System.out.println("Here are the tasks in your list: ");
     }
 
     /**
-     * Prints out the greetings
+     * Prints out greetings for Duke bot.
      */
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /**
-     * Prints out the bye message
+     * Prints out the message for the bye command.
      */
     public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints out the loading message
+     * Prints out the loading message error
      */
     public void showLoadingError() {
         System.out.println("Error, file not found");
     }
 
+    /**
+     * Prints out the message for the find command.
+     */
     public void printFindMessage(ArrayList<Task> tasks) {
         System.out.println("Here are the matching tasks in your list:");
         int count = 1;

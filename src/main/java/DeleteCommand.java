@@ -2,7 +2,7 @@ public class DeleteCommand extends Command {
     String[] commandSplit = super.stringCommand.split(" ");
 
     /**
-     * Constructor for DeleteCommand
+     * Constructor for DeleteCommand.
      * @param stringCommand
      */
     public DeleteCommand(String stringCommand) {
@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command by using the three arguments provided
+     * Executes the command by using the three arguments provided.
      * @param taskList
      * @param ui
      * @param storage

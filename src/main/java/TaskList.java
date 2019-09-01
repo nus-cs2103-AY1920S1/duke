@@ -1,21 +1,18 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    /**
-     * Stores list of Task
-     */
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor that takes in a Arraylist of tasks
-     * @param tasks
+     * Constructor that takes in a Arraylist of tasks.
+     * @param tasks Arraylist of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Gets the list of tasks
+     * Gets the list of tasks.
      * @return list of task
      */
     public ArrayList<Task> getTasks() {
@@ -23,8 +20,8 @@ public class TaskList {
     }
 
     /**
-     * Catches error when list is called with 0 items in Arraylist of tasks
-     * @throws IllegalArgumentException
+     * Checks the list of tasks.
+     * @throws IllegalArgumentException list is called with 0 items
      */
     public void list() throws IllegalArgumentException {
         if (tasks.size() == 0) {
@@ -33,15 +30,16 @@ public class TaskList {
     }
 
     /**
-     * Adds a task into list of task
+     * Adds a task into list of task.
      * @param task task to be added
      */
     public void add(Task task) {
         tasks.add(task);
     }
+
     /**
-     * Sets task at number to be done in task list
-     * @throws IllegalArgumentException catches negative numbers input other arguments.
+     * Sets task at number to be done in task list.
+     * @throws IndexOutOfBoundsException index is less than 0 or greater than task size
      */
     public void done(int number) throws IndexOutOfBoundsException {
         if (number > tasks.size() || number <= 0) {
@@ -52,9 +50,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes Task at number in task list
-     * @param number number shown
-     * @throws IndexOutOfBoundsException
+     * Deletes Task at number in task list.
+     * @param number number for task to be deleted
+     * @throws IndexOutOfBoundsException index is less than 0 or greater than task size
      */
     public void delete(int number) throws IndexOutOfBoundsException {
         if (number > tasks.size() || number <= 0) {

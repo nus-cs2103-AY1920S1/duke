@@ -8,7 +8,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand
-     * @param stringCommand
+     * @param stringCommand String representation of the user input
      */
     public AddCommand(String stringCommand) {
         super(stringCommand);

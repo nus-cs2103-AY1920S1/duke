@@ -16,13 +16,17 @@ public class Todo extends Task{
         super(description, isDone);
     }
 
+    /**
+     * Gets the String representation of the todo.
+     * @return the String representation of the todo
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
     /**
-     * @return String that would be written into data file
+     * @return String representation that would be written into data file
      */
     @Override
     public String toDataString() {

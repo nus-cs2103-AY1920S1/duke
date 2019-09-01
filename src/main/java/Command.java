@@ -3,7 +3,7 @@ public abstract class Command {
 
     /**
      * Constructor for ByeCommand
-     * @param stringCommand
+     * @param stringCommand String representation of the user input
      */
     public Command(String stringCommand) {
         this.stringCommand = stringCommand;

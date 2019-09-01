@@ -14,5 +14,3 @@ src/main/resources/docs/
 bin/
 
 # Test files
-/test-ui-test/
-/data/

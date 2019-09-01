@@ -17,20 +17,24 @@ public class Event extends Task{
      * Constructor for event
      * @param description
      * @param at time in the format of dd/MM/yyyy HHmm
-     * @param isDone whether Event is completed or not
+     * @param isDone boolean value on whether it is done or not
      */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = LocalDateTime.parse(at, Task.TIME_FORMATTER);
     }
 
+    /**
+     * Gets the String representation of the event.
+     * @return the String representation of the event
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
     /**
-     * @return String that would be written into data file
+     * @return String representation that would be written into data file
      */
     @Override
     public String toDataString() {

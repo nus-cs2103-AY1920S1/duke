@@ -1,7 +1,7 @@
 public class ByeCommand extends Command{
     /**
      * Constructor for ByeCommand
-     * @param stringCommand
+     * @param stringCommand String representation of the user input
      */
     public ByeCommand(String stringCommand){
         super(stringCommand);

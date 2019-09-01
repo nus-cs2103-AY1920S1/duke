@@ -18,13 +18,17 @@ public class Deadline extends Task {
      * Another constructor for Deadline
      * @param description
      * @param by time in the format of dd/MM/yyyy HHmm
-     * @param isDone whether Deadline is completed or not
+     * @param isDone boolean value on whether it is done or not
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = LocalDateTime.parse(by, Task.TIME_FORMATTER);
     }
 
+    /**
+     * Gets the String representation of the deadline.
+     * @return the String representation of the deadlnie
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

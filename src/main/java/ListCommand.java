@@ -1,7 +1,7 @@
 public class ListCommand extends Command {
     /**
-     * Constructor for AddCommand
-     * @param stringCommand
+     * Constructor for ListCommand
+     * @param stringCommand String representation of the user input
      */
     public ListCommand(String stringCommand) {
         super(stringCommand);

@@ -3,16 +3,16 @@ import java.util.InputMismatchException;
 public class Parser {
 
     /**
-     * Default constructor for Parser
+     * Default constructor for Parser.
      */
     public Parser() {
     }
 
     /**
      * Converts a string given by user into actual command to be executed.
-     * @param stringCommand
+     * @param stringCommand String representation of the user input
      * @return Command which would be executed
-     * @throws InputMismatchException String is not written in a good form
+     * @throws InputMismatchException Command is not recognised
      */
     public Command parse(String stringCommand) throws InputMismatchException {
         if (stringCommand.equalsIgnoreCase("bye")) {

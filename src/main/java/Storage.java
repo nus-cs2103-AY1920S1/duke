@@ -6,17 +6,17 @@ public class Storage {
     private String filePath;
 
     /**
-     * Constructor for storage that reads and writes to data file
-     * @param filePath where the data file is stored.
+     * Constructor for storage that reads and writes to data file.
+     * @param filePath where the data file is stored
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Reads data from filepath and creates an arraylist of Task
+     * Reads data from filepath and creates an arraylist of Task.
      * @return an arraylist of Task from read data
-     * @throws IOException
+     * @throws IOException file is not found
      */
     public ArrayList<Task> load() throws IOException{
         try {
@@ -45,16 +45,16 @@ public class Storage {
     }
 
     /**
-     * Converts number into boolean. 1 for true and 0 for false
+     * Converts number into boolean. 1 for true and 0 for false.
      * @param number number to be determined
-     * @return
+     * @return true or false
      */
     public boolean changeStringToBoolean(String number) {
         return (number.equals("1"));
     }
 
     /**
-     * Writes the data into filepath
+     * Writes the data into filepath.
      */
     public void rewriteData() {
         try {

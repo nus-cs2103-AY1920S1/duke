@@ -6,8 +6,8 @@ public class Task {
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
-     * Constructor for Task
-     * @param description
+     * Constructor for Task.
+     * @param description String representation of the description
      */
     public Task(String description) {
         this.description = description;
@@ -15,8 +15,8 @@ public class Task {
     }
 
     /**
-     * Another constructor for Task which takes in description and whether it is done or not
-     * @param description
+     * Constructor for Task which takes in a String description and whether it is done or not.
+     * @param description String representation of the description
      * @param isDone whether it is done or not
      */
     public Task(String description, boolean isDone) {
@@ -25,15 +25,15 @@ public class Task {
     }
 
     /**
-     * Gets the description
-     * @return description of task
+     * Gets the String description of the task.
+     * @return the String description of the task
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Gets whether task is done or not
+     * Gets the boolean value whether task is done or not.
      * @return boolean on task is done or not
      */
     public boolean getDone() {
@@ -41,21 +41,25 @@ public class Task {
     }
 
     /**
-     * Sets Task to be done
+     * Sets Task to be done.
      */
     public void setDone() {
         isDone = true;
     }
 
     /**
-     * Converts whether task is done or not to a status
+     * Converts whether task is done or not to a status.
      * + symbols means done - symbol means not done
-     * @return String on whether task is done or not
+     * @return String representation on whether task is done or not
      */
     public String getStatusIcon() {
         return (isDone ? "+" : "-");
     }
 
+    /**
+     * Gets the String representation of the task.
+     * @return the String representation of the task
+     */
     @Override
     public String toString() {
         String mark = "[" + getStatusIcon() + "] " + getDescription();
@@ -63,7 +67,6 @@ public class Task {
     }
 
     /**
-     *
      * @return String that would be written into data file
      */
     public String toDataString() {

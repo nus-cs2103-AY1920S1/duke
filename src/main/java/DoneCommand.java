@@ -2,15 +2,15 @@ public class DoneCommand extends Command {
     String[] commandSplit = super.stringCommand.split(" ");
 
     /**
-     * Constructor for DoneCommand
-     * @param stringCommand
+     * Constructor for DoneCommand.
+     * @param stringCommand String representation of the user input
      */
     public DoneCommand(String stringCommand) {
         super(stringCommand);
     }
 
     /**
-     * Executes the command by using the three arguments provided
+     * Executes the command by using the three arguments provided.
      * @param taskList
      * @param ui
      * @param storage

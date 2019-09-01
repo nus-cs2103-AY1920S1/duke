@@ -1,6 +1,7 @@
 package com.tasks;
 
 import com.util.json.JsonObject;
+import com.util.json.Schema;
 
 public class Todo extends DoableTask {
 
@@ -24,6 +25,6 @@ public class Todo extends DoableTask {
 
     @Override
     public JsonObject toJson() {
-        return new JsonObject().put("todo", super.toJson());
+        return new JsonObject().put(Schema.TASK_TODO, super.toJson());
     }
 }

@@ -1,6 +1,7 @@
 package com.tasks;
 
 import com.util.json.JsonObject;
+import com.util.json.Schema;
 
 public class Task {
 
@@ -27,13 +28,9 @@ public class Task {
         return name;
     }
 
-    protected String toJsonContent() {
-        return "\"name\": \"" + name + "\"";
-    }
-
     public JsonObject toJson() {
         JsonObject obj = new JsonObject();
-        obj.put("name", name.replaceAll("\"", "\\\\\""));
+        obj.put(Schema.ATTR_NAME, name.replaceAll("\"", "\\\\\""));
         return obj;
     }
 }

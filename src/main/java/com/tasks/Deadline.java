@@ -1,6 +1,7 @@
 package com.tasks;
 
 import com.util.json.JsonObject;
+import com.util.json.Schema;
 
 public class Deadline extends DoableTask {
 
@@ -31,7 +32,7 @@ public class Deadline extends DoableTask {
 
     @Override
     public JsonObject toJson() {
-        return new JsonObject().put("deadline", super.toJson()
-                .put("due", deadline.replaceAll("\"", "\\\\\"")));
+        return new JsonObject().put(Schema.TASK_DEADLINE, super.toJson()
+                .put(Schema.ATTR_DEADLINE_DUE, deadline.replaceAll("\"", "\\\\\"")));
     }
 }

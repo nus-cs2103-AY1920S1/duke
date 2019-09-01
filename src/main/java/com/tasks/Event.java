@@ -1,6 +1,7 @@
 package com.tasks;
 
 import com.util.json.JsonObject;
+import com.util.json.Schema;
 
 public class Event extends DoableTask {
 
@@ -31,7 +32,7 @@ public class Event extends DoableTask {
 
     @Override
     public JsonObject toJson() {
-        return new JsonObject().put("event", super.toJson()
-                .put("start", dateRange.replaceAll("\"", "\\\\\"")).put("end", ""));
+        return new JsonObject().put(Schema.TASK_EVENT, super.toJson()
+                .put(Schema.ATTR_EVENT_START, dateRange.replaceAll("\"", "\\\\\"")).put(Schema.ATTR_EVENT_END, ""));
     }
 }

@@ -36,7 +36,7 @@ public class Duke {
     }
 
     /**
-     * Running process of Duke.
+     * Run process of Duke.
      */
     public void run() {
         ui.showWelcome();

@@ -7,29 +7,33 @@ import task.Task;
 import task.ToDoTask;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public String filePath;
+    private String filePath;
     private Scanner sc;
 
     /**
      * Initialises a storage object which handles with loading tasks from the file
      * and saving tasks in the file.
      * @param filePath a string storing the location of the text file which stores the tasks' data.
-     * @throws IOException IOException if an I/O error occurs opening the source
+     * @throws DukeException informing where an IOException has occurred.
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         File file = new File(filePath);
-        if (file.exists()) {
-            sc = new Scanner(file);
-        } else {
-            file.createNewFile();
+        try {
+            if (file.exists()) {
+                sc = new Scanner(file);
+            } else {
+                file.createNewFile();
+                sc = new Scanner(file);
+            }
+        } catch (IOException e) {
+            throw new DukeException("IOException from invalid filePath");
         }
     }
 
@@ -38,7 +42,7 @@ public class Storage {
      * @return an ArrayList of tasks.
      * @throws DukeException DukeException that may arise from invalid inputs.
      */
-    public ArrayList<Task> load() throws DukeException {
+    ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (sc.hasNext()) {
             String tokenString = sc.nextLine();
@@ -72,17 +76,20 @@ public class Storage {
     /**
      * Saves tasks in the text file given a TaskList.
      * @param tasks TaskList to be saved into the text file.
-     * @throws IOException IOException if an I/O error occurs when writing onto the file.
      */
-    public void save(TaskList tasks) throws IOException {
-        FileWriter fw1 = new FileWriter(filePath);
-        fw1.write("");
-        fw1.close();
-        FileWriter fw2 = new FileWriter(filePath);
-        for (Task task : tasks.getList()) {
-            String s = task.toFileString() + "\n";
-            fw2.write(s);
+    public void save(TaskList tasks) throws DukeException {
+        try {
+            FileWriter fw1 = new FileWriter(filePath);
+            fw1.write("");
+            fw1.close();
+            FileWriter fw2 = new FileWriter(filePath);
+            for (Task task : tasks.getList()) {
+                String s = task.toFileString() + "\n";
+                fw2.write(s);
+            }
+            fw2.close();
+        } catch (IOException e) {
+            throw new DukeException("IOException from Storage save method");
         }
-        fw2.close();
     }
 }

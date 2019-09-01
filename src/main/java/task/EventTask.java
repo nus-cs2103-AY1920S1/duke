@@ -10,8 +10,8 @@ import java.util.Date;
  * Represents a task which has an event time.
  */
 public class EventTask extends Task {
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    protected Date time;
+    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private Date time;
 
     /**
      * Creates a EventTime with a given description and time.
@@ -33,6 +33,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" +  time  + ")";
+        return "[E]" + super.toString() + " (at: " +  time  + ")";
     }
 }

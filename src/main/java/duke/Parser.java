@@ -14,7 +14,7 @@ import exception.DukeInvalidTaskDescriptionException;
 import exception.DukeInvalidTaskTimeException;
 import task.Task;
 
-public class Parser {
+class Parser {
 
     /**
      * Returns a Command that is converted from user's input.
@@ -22,11 +22,10 @@ public class Parser {
      * @return a Command for the main logic in Duke to execute.
      * @throws DukeException DukeException that may arise from invalid inputs.
      */
-    public static Command parse(String input) throws DukeException {
+    static Command parse(String input) throws DukeException {
         String[] token = input.split(" ");
         String[] temp;
         String taskDesc;
-        Task t;
         switch (token[0]) {
         case "bye":
             return new ExitCommand();

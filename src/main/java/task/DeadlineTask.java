@@ -10,8 +10,8 @@ import java.util.Date;
  * Represents a Task which has a deadline.
  */
 public class DeadlineTask extends Task {
-    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    protected Date time;
+    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private Date time;
 
     /**
      * Creates a DeadlineTask with a given description and time.
@@ -33,7 +33,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + time + ")";
+        return "[D]" + super.toString() + " (by: " + time + ")";
     }
 
 }

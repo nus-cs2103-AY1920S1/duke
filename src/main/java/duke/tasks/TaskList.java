@@ -32,6 +32,16 @@ public class TaskList {
         return tasks;
     }
 
+    public TaskList search(String toSearch){
+        ArrayList<Task> matchingTask = new ArrayList<>();
+        for (Task task : tasks){
+            if (task.contains(toSearch)){
+                matchingTask.add(task);
+            }
+        }
+        return new TaskList(matchingTask);
+    }
+
     @Override
     public String toString(){
         String toReturn = "";

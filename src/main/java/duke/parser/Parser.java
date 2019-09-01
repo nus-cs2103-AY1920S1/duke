@@ -47,6 +47,12 @@ public class Parser {
             case "list":
                 return new ListCommand();
 
+            case "find":
+                if(words.length <= 1){
+                    throw new DukeException("☹ OOPS!!! The description of the task to find must be specified");
+                }
+                return new FindCommand(words);
+
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

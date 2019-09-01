@@ -14,6 +14,10 @@ public class Task {
         isDone = done;
     }
 
+    public boolean contains(String toSearch){
+        return taskName.contains(toSearch);
+    }
+
     public String toFile(){
         String mark = isDone ? "1" : "0";
         return "T | " + mark + " |" + taskName;

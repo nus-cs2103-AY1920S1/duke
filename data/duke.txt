@@ -6,4 +6,4 @@ T | 0 | Minh
 E | 0 | Rally | 2nd of September 2019, 8.00pm
 T | 0 | duke
 E | 0 | sleep | 18th of September 1997, 6.00pm
-D | 0 | sleep | 18th of September 1997, 6.00pm
+D | 1 | sleep | 18th of September 1997, 6.00pm

@@ -9,8 +9,8 @@ import java.text.SimpleDateFormat;
 public class Task {
     String content;
     boolean done;
-    static final char tick = '☹';
-    static final char cross = '☹';
+    static final char tick = '✓';
+    static final char cross = '✗';
     static final SimpleDateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
     static final SimpleDateFormat outputFormatter = new SimpleDateFormat("E, dd MMM yyyy ha");
 

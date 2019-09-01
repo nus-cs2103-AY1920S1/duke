@@ -18,7 +18,6 @@ import duke.exception.DukeException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 
 public class ParserTest {

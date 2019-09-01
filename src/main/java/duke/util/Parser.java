@@ -1,15 +1,10 @@
 package duke.util;
 
+import duke.command.*;
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
 import duke.exception.DukeException;
 
 import java.text.ParseException;
@@ -71,18 +66,24 @@ public class Parser {
     public static Command parseUserInput(String str) throws DukeException, ParseException {
         if (str.equals("list")) {
             return new ListCommand();
-        } else if (str.contains("done")) {
+        } else if (str.contains("done") && str.split(" ", 2)[0].equals("done")) {
             String[] afterSplit = str.trim().split(" ");
-            if (afterSplit.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please input a number for done.");
+            if (afterSplit.length <= 1 || afterSplit[1].split(" ").length > 2) {
+                throw new DukeException("☹ OOPS!!! Please input a number after done and nothing else.");
             }
-            return new DoneCommand(str);
-        } else if (str.contains("delete")) {
+            return new DoneCommand(afterSplit[1]);
+        } else if (str.contains("delete") && str.split(" ", 2)[0].equals("delete")) {
             String[] afterSplit = str.trim().split(" ");
-            if (afterSplit.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please input a number for delete.");
+            if (afterSplit.length <= 1 || afterSplit[1].split(" ").length > 2) {
+                throw new DukeException("☹ OOPS!!! Please input a number after delete and nothing else.");
             }
-            return new DeleteCommand(str);
+            return new DeleteCommand(afterSplit[1]);
+        } else if (str.contains("find") && str.split(" ", 2)[0].equals("find")) {
+            String[] afterSplit = str.trim().split(" ", 2);
+            if (afterSplit.length == 1) {
+                throw new DukeException("☹ OOPS!!! Please input a search term after find.");
+            }
+            return new FindCommand(afterSplit[1]);
         } else if (str.trim().equals("bye")) {
             return new ExitCommand();
         } else {

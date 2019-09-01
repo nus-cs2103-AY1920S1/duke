@@ -24,7 +24,7 @@ public class ListCommand extends Command {
         System.out.println("Here are the tasks in your list: ");
         for (Task task : tasks.getList()) {
             index++;
-            System.out.println(index + " " + task.toString());
+            System.out.println(index + ". " + task.toString());
         }
     }
 

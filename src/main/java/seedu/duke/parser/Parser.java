@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Parser {
+
     public void parse(String command, UI ui, TaskList tasks, String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
@@ -48,6 +49,7 @@ public class Parser {
             System.out.println("File not found.");
         }
     }
+
     public static void printList(TaskList taskList, UI ui){
         String reply = "Here are the tasks in your list:\n\t ";
         for(int i=0; i<taskList.size(); i++) {
@@ -58,6 +60,7 @@ public class Parser {
         }
         ui.printReply(reply);
     }
+
     public static void addToList(Task task, TaskList taskList, FileWriter fw, UI ui) {
         taskList.add(task);
         String reply = "Got it. I've added this task:\n\t  " + task + "\n\tNow you have " + taskList.size()

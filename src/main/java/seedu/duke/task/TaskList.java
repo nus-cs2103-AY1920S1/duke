@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList extends ArrayList<Task> {
+
     public TaskList() { }
 
     public TaskList(File f) throws DukeException {

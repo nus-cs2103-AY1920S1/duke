@@ -10,6 +10,7 @@ import com.tasks.Deadline;
 import com.tasks.DoableTask;
 import com.tasks.Event;
 import com.tasks.Todo;
+import java.util.stream.Stream;
 
 public enum Response {
     BYE("(?i)^bye\\s*", (i, s) -> {
@@ -18,13 +19,19 @@ public enum Response {
         return true;
     }),
     LIST("(?i)^list\\s*", (j, s) -> {
-        String finalString = IntStream.range(0, s.list.size()).boxed()
-                .reduce("", (acc, ti) -> acc
-                        + ((acc.equalsIgnoreCase("") ? "" : "\n")
-                        + (ti + 1)
-                        + "."
-                        + s.list.get(ti).toString()), String::concat);
+        String finalString = listIndexStreamToString(IntStream.range(0, s.list.size()).boxed(), s);
         Printer.printString(finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString);
+        return true;
+    }),
+    FIND_BLANK("(?i)^find\\s*", (i, s) -> {
+        Printer.printString("Did not specify substring to find");
+        return true;
+    }),
+    FIND("(?i)^find .+", (i, s) -> {
+        String substr = i.split(" ", 2)[1];
+        String finalString = listIndexStreamToString(IntStream.range(0,
+                s.list.size()).boxed().filter((ti) -> s.list.get(ti).getName().contains(substr)), s);
+        Printer.printString(finalString.equalsIgnoreCase("") ? "No results" : finalString);
         return true;
     }),
     DONE("(?i)^done [0-9]+", (i, s) -> {
@@ -181,6 +188,18 @@ public enum Response {
         save(s);
     }
 
+    private static String listIndexStreamToString(Stream<Integer> indices, State s) {
+        return indices.reduce("", (acc, ti) -> acc
+                + ((acc.equalsIgnoreCase("") ? "" : "\n")
+                + (ti + 1)
+                + "."
+                + s.list.get(ti).toString()), String::concat);
+    }
+
+    /**
+     * Save state to JsonFile.
+     * @param s state
+     */
     private static void save(State s) {
         JsonArray arr = new JsonArray();
         for (DoableTask t : s.list) {

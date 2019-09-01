@@ -29,6 +29,14 @@ public class Task {
     }
 
     /**
+     * get name string only.
+     * @return  name string
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns a JsonObject representation of this task.
      * @return  JsonObject
      */

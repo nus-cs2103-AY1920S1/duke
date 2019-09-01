@@ -65,7 +65,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chat bot.
+     * Executes the program.
      * @param args Command line arguments (unused).
      */
     public static void main(String[] args) {

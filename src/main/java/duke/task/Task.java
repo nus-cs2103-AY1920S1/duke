@@ -25,7 +25,6 @@ public abstract class Task {
      * @return Tick symbol if task is done, otherwise return cross symbol.
      */
     public String getStatusIcon() {
-//        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
         return isDone ? "+" : " ";
     }
 

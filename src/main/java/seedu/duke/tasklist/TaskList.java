@@ -27,4 +27,37 @@ public class TaskList {
     public void deleteTask(int i){
         this.listOfTasks.remove(i);
     }
+
+    public ArrayList<Task> getArrayList(){
+        return this.listOfTasks;
+    }
+
+    /**
+     * Returns another TaskLIst object which contains Task objects that is similar to the search string.
+     *
+     * @param searchTerm
+     * @return
+     */
+    public TaskList findSimilarTasks (String searchTerm){
+
+        ArrayList<Task> listOfTasks = this.getArrayList();
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        Task task = null; String taskDescription = "";
+
+        for (int i = 0; i < listOfTasks.size(); i++){
+
+            task = listOfTasks.get(i);
+            taskDescription = task.getTaskName();
+
+            if ( taskDescription.contains(searchTerm) ){
+                matchingTasks.add(task);
+            }
+        }
+
+        // Create a TaskList object to encapsulate the ArrayList<Task>
+        TaskList a = new TaskList(matchingTasks);
+
+        return a;
+
+    }
 }

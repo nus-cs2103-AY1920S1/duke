@@ -1,3 +1,5 @@
+package duke;
+
 class Todo extends Task {
     /**
      * Creates a new todo.

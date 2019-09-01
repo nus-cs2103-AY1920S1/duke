@@ -1,3 +1,5 @@
+package duke;
+
 class DukeException extends Exception {
     /**
      * Creates a new Duke exception.

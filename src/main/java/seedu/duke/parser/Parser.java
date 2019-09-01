@@ -2,12 +2,16 @@ package seedu.duke.parser;
 
 import seedu.duke.ui.UI;
 import seedu.duke.exception.DukeException;
-import seedu.duke.task.*;
+import seedu.duke.task.TaskList;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Parser {
-    public void parse(String command, UI ui, TaskList tasks, String filePath){
+    public void parse(String command, UI ui, TaskList tasks, String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             while (!command.equals("bye")) {
@@ -65,12 +69,12 @@ public class Parser {
         } catch (IOException e) { }
     }
 
-    public static void removeFromList(TaskList taskList, int taskIndex, UI ui) throws DukeException{
-        if(taskIndex > taskList.size()){
+    public static void removeFromList(TaskList taskList, int taskIndex, UI ui) throws DukeException {
+        if(taskIndex > taskList.size()) {
             throw new DukeException("");
         }
-        String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex-1) + "\n\tNow you have " + taskList.size()
-                + ((taskList.size() == 1)?" task":" tasks") + " in the list.";
+        String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex-1) + "\n\t" +
+                "Now you have " + taskList.size() + ((taskList.size() == 1)? " task": " tasks") + " in the list.";
         ui.printReply(reply);
     }
 }

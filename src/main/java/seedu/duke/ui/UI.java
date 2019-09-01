@@ -34,7 +34,7 @@ public class UI {
         printReply("No file found.");
     }
 
-    public void printReply(String reply){
+    public void printReply(String reply) {
         System.out.println("\t" + REPLY_WRAPPER + "\n\t" + reply + "\n\t" + REPLY_WRAPPER);
     }
 }

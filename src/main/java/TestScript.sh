@@ -4,10 +4,10 @@ echo "Changing to correct directory..."
 cd /Users/larrylaw/Learn/Uni/Y2S1/CS2103/duke/src/main/java;
 
 echo "Removing saved data..."
-rm Data/duke.txt
+rm ../data/duke.txt
 
 echo "Compiling all java files in this directory..."
-if ! javac $(find . -name "*.java");
+if ! javac $(find duke/. -name "*.java") && javac Duke.java;
 then
     echo "Compilation Failed"
     exit 0;
@@ -21,7 +21,7 @@ java Duke < Test/Input.txt > Test/Output.txt
 colordiff Test/Output.txt Test/Expected.txt
 
 echo "Checking data saved..."
-colordiff Data/duke.txt Data/Expected.txt
+colordiff ../data/duke.txt ../data/Expected.txt
 
 echo "Removing saved data..."
-rm Data/duke.txt
+rm ../data/duke.txt

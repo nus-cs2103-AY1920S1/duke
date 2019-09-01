@@ -61,6 +61,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out the Tasks whose description matches the search term
+     * @param searchTerm Keyword by user for search
+     */
+    public void searchTaskList(String searchTerm) {
+        System.out.println("Here are the matching tasks in your list:");
+        int noOfSearches = 1;
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getDescription().contains(searchTerm)){
+                System.out.println((noOfSearches) + "." + list.get(i));
+                noOfSearches += 1;
+            }
+        }
+    }
+
     /*
      * Sets boolean variable isDone of selected Task object to true
      * @param doneIndex Index of selected Task object, 1-based index

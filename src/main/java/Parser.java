@@ -17,6 +17,8 @@ public class Parser {
             return new DoneCommand();
         case "delete":
             return new DeleteCommand();
+        case "find":
+            return new FindCommand();
         case "exit":
             return new ExitCommand();
         case "todo":

@@ -4,22 +4,37 @@ import duke.task.TaskList;
 import duke.ui.UI;
 import duke.storage.Storage;
 
+/**
+ * Represents a ExitCommand. Upon execution will exit the chatbot.
+ *
+ */
 public class ExitCommand extends Command {
 
-    public ExitCommand() {
-        this.command = "bye";
-    }
-
+    /**
+     * Does nothing because the logic will terminate.
+     *
+     */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) {
 
     }
 
+    /**
+     * Checks if this is the exit command.
+     *
+     * @return true as it is an ExitCommand.
+     */
     @Override
     public boolean isExit() {
         return true;
     }
 
+    /**
+     * Compare another object with this object to see if the other object is ExitCommand.
+     *
+     * @param o The other object that is going to be compared to this.
+     * @return true or false based on the execution of the method.
+     */
     @Override
     public boolean equals(Object o) {
 

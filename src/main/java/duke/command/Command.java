@@ -4,6 +4,10 @@ import duke.task.TaskList;
 import duke.ui.UI;
 import duke.storage.Storage;
 
+/**
+ * Represents a command that the user typed
+ */
+
 public abstract class Command {
     String command;
 

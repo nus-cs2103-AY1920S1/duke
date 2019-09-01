@@ -7,6 +7,9 @@ import duke.util.Parser;
 
 import java.util.Scanner;
 
+/**
+ * Driver class.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -17,12 +20,12 @@ public class Duke {
         duke.run();
     }
 
-    public Duke(String filePath) throws Exception {
+    public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new UI(new Scanner(System.in));
         try {
             tasks = new TaskList(storage.readFile());
-        } catch (DukeException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             tasks = new TaskList();
         }

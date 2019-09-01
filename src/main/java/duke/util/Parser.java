@@ -16,11 +16,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a parser object that helps to parse input from data file and user input.
+ */
 public class Parser {
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    // this method parse string from txt file and creates task objects when duke is initiated
-    public static Task parseTaskString(String str) throws Exception {
+    /**
+     * This method parse sa string and creates task objects base on the information.
+     * @param str String in the format task type|done state|description|datetime if applicable.
+     * @return Task object created.
+     * @throws ParseException When the input string format is wrong.
+     */
+    public static Task parseTaskString(String str) throws ParseException {
         String[] strs = str.split("\\|");
         switch (strs[0]) {
         case ("ToDo"):
@@ -44,15 +52,23 @@ public class Parser {
             }
             return event;
         default:
-            return new Task("shouldn't come to here");
+            return new ToDo("shouldn't come to here");
         }
     }
 
+    /**
+     * Takes in string from user and decide what does the user wish to do. According to the
+     * user's input, return the appropriate command object.
+     * @param str User input.
+     * @return Command object inferred from input.
+     * @throws DukeException If the user input is not in the correct format
+     * @throws ParseException If the date format cannot be parsed
+     */
     // this method takes in string from user and decide which type it is and respective information
     // needed to create an object
     // return a string arr of length 3, index 0 is type of task, index 1 is content of task, index 2 is datetime
     // of task if the task requires datetime if not it will be empty string
-    public static Command parseUserInput(String str) throws Exception {
+    public static Command parseUserInput(String str) throws DukeException, ParseException {
         if (str.equals("list")) {
             return new ListCommand();
         } else if (str.contains("done")) {

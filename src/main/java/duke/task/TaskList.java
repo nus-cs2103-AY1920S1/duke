@@ -1,16 +1,24 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+/**
+ * Represents the collection of the tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
+    /**
+     * Initializes the object with an ArrayList of tasks.
+     * @param list ArrayList of tasks.
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
+    /**
+     * Initializes the object with an empty ArrayList.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }

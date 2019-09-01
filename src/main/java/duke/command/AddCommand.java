@@ -12,27 +12,68 @@ import duke.exception.DukeException;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * Represents an add command when the user typed todo, deadline or event.
+ * It has an execution method to add which ever task needed for it.
+ */
+
 public class AddCommand extends Command {
     private String[] parsedString;
     private Date date;
 
+    /**
+     * Returns the string array parsedString
+     *
+     * @return Parsed string.
+     */
     public String[] getParsedString() {
         return parsedString;
     }
 
+    /**
+     * Returns the date of the task
+     * If task does not have date return null
+     *
+     * @return Date of the task
+     */
     public Date getDate() {
-        return date;
+        if (date != null) {
+            return date;
+        } else {
+            return null;
+        }
     }
 
+    /**
+     * Initializes an AddCommand instance with date and command.
+     * Since it must have a date it will be either a deadline or event task.
+     *
+     * @param command Include type of task and content of the task
+     * @param date A Date object which specifies the date for the task
+     */
     public AddCommand(String[] command, Date date) {
         this.parsedString = command;
         this.date = date;
     }
 
+    /**
+     * Initializes an AddCommand instance with and command only.
+     * Since it does not have a date it will be a todo task.
+     *
+     * @param command Include type of task and content of the task.
+     */
     public AddCommand(String[] command) {
         this.parsedString = command;
     }
 
+    /**
+     * Creates a Task object from the command and date information.
+     * Add the newly created object to task list and update the storage file.
+     *
+     * @param tasks The list of task currently recorded.
+     * @param ui An UI object.
+     * @param storage Storage of the current list of tasks.
+     */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws Exception {
         Task task;
@@ -61,10 +102,24 @@ public class AddCommand extends Command {
         storage.updateFile(tasks);
     }
 
+    /**
+     * Checks if this is the exit command.
+     *
+     * @return false as it is an AddCommand.
+     */
+
     @Override
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Compare another object with this object to see if they have the same
+     * information.
+     *
+     * @param o The other object that is going to be compared to this.
+     * @return true or false based on the execution of the method.
+     */
 
     // Overriding equals() to compare two AddCommand objects
     @Override

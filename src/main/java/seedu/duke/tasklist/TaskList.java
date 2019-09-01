@@ -1,8 +1,6 @@
 package seedu.duke.tasklist;
 
-import seedu.duke.storage.Storage;
 import seedu.duke.task.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {

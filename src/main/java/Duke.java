@@ -17,6 +17,9 @@ import Util.Ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the main class for the project where the main method will run
+ */
 public class Duke {
     //variables
     public static ArrayList<Task> storedTasks = new ArrayList<>();
@@ -29,7 +32,11 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
-    //implementation methods
+    /**
+     * Constructs a Duke object which will initialise 1)storage, 2)tasks 3)Ui class..
+     *
+     * @param filePath is the file directory for where duke.txt is saved
+     */
     public Duke(String filePath) throws Exception, DukeException {
         storage = new Storage(filePath);
         try {
@@ -39,6 +46,11 @@ public class Duke {
             throw new DukeException("File is empty");
         }
     }
+
+    /**
+     * runs the Ui read input to take in data from user.
+     *
+     */
 
     public void run() throws Exception{
         ui.readInput();

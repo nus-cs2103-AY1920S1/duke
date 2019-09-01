@@ -19,12 +19,21 @@ import Exception.EmptyDeadlineDescriptionException;
 import Exception.EmptyEventDescriptionException;
 import Exception.EmptyTodoDescriptionException;
 
+/**
+ * Handles the User Interface for the program where the user will interact with
+ * by inputting data into the console. The class will then take this input and
+ * interact with the associated TaskList and Storage classes
+ */
 public class Ui {
 
     private Parser parser;
     private TaskList tasksList;
     private Storage storage;
 
+    /**
+     * To store the several suffixed that will be used in a month starting from
+     * 0 ending at 31. (i.e 2nd, 11th, 23rd)
+     */
     static String[] suffixes =
             { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
                     "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
@@ -36,6 +45,11 @@ public class Ui {
         this.storage = storage;
     }
 
+    /**
+     * take in input from user and then perform relevant methods to read/write
+     * into local storage and save into TaskList
+     * Takes in only the follow inputs (bye, list, done, delete, todo, deadline, event)
+     */
     public void readInput() throws Exception, DukeException {
         Scanner scanner = new Scanner(System.in);
         showWelcome();
@@ -100,15 +114,25 @@ public class Ui {
         }
     }
 
+    /**
+     * shows Welcome message when called
+     */
     public void showWelcome() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
+    /**
+     * shows Exit message when called
+     */
     public void showExit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * shows done message when called and performs rewrite on storage
+     * and done on that task in TaskList
+     */
     public void showDone(String input) throws Exception{
         int itemIndex = Integer.parseInt(input.substring(5)) - 1;
         // close if item number don't exist
@@ -120,6 +144,10 @@ public class Ui {
         }
     }
 
+    /**
+     * shows delete message when called and performs rewrite on storage
+     * and delete that task from TaskList
+     */
     public void showDelete(String input) throws Exception{
         int itemIndex = Integer.parseInt(input.substring(7)) - 1;
         if ((itemIndex + 1) > tasksList.getTaskList().size()){
@@ -133,6 +161,10 @@ public class Ui {
         }
     }
 
+    /**
+     * shows todo message when called and performs read on storage
+     * and appends a todo task in TaskList
+     */
     public void showTodo(String input){
         String inputAdd = input.substring(5);
         Todo todo = new Todo(inputAdd, "");
@@ -141,6 +173,10 @@ public class Ui {
         System.out.println("  " + todo);
     }
 
+    /**
+     * shows deadline message when called and performs read on storage
+     * and appends a deadline task in TaskList
+     */
     public void showDeadline(String input) throws Exception{
         String inputAddArr[] = input.split(" /by ");
         String inputAdd1 = inputAddArr[0].substring(9);
@@ -151,6 +187,10 @@ public class Ui {
         System.out.println("  " + deadline);
     }
 
+    /**
+     * shows event message when called and performs read on storage
+     * and appends a event task in TaskList
+     */
     public void showEvent(String input) throws Exception{
         String inputAddArr[] = input.split(" /at ");
         String inputAdd1 = inputAddArr[0].substring(6);
@@ -161,6 +201,13 @@ public class Ui {
         System.out.println("  " + event);
     }
 
+    /**
+     * Reads an input in the stipulated format and returns a string of the
+     * expected date format
+     *
+     * @param input format of date input (i.e 2/12/2019 1800)
+     * @return a string of a formatted Date. (i.e 2nd of December 2019, 1800hours)
+     */
     public String readDate(String input) throws Exception{
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         Date d = formatter.parse(input);

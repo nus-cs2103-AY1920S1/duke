@@ -29,7 +29,7 @@ public class Parser {
             int num;
             try {
                 num = Integer.parseInt(arguments[1]);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new IntFormatException(arguments[0]);
             }
             if (arguments[0].equals("done")) {

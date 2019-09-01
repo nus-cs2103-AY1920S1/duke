@@ -41,8 +41,7 @@ public class DeleteCommand extends Command {
         if (taskNum < 1 || taskNum > taskList.getNumTasks()) {
             throw new TaskNotPresentException();
         }
-        Task task = taskList.getTask(taskNum);
-        task = taskList.removeTask(taskNum);
+        Task task = taskList.removeTask(taskNum);
         try {
             storage.updateList(taskList);
         } catch (IOException e) {

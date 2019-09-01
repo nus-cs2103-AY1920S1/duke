@@ -64,8 +64,6 @@ public class TaskList implements MyList {
      */
     @Override
     public Task removeTask(int index) {
-        Task task = list.remove(index - 1);
-
         return list.remove(index - 1);
     }
 

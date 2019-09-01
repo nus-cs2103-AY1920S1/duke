@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +30,19 @@ public class TaskListTest {
     public void listTaskTest() {
         //i dont think Ui need to test cus its so simple
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        //after this all Sop will go out here?
-        Ui ui = new Ui();
-        String expectedOut = divider
-                + "     Here are the tasks in your list:\r\n"
-                + "     1.[T][\u2717] some description\r\n"
-                + divider;
-        taskList.listTasks(ui);
-        assertEquals(expectedOut, outContent.toString());
+        try {
+            System.setOut(new PrintStream(outContent, false, "UTF-8"));
+            //after this all Sop will go out here?
+            Ui ui = new Ui();
+            String expectedOut = divider
+                    + "     Here are the tasks in your list:\r\n"
+                    + "     1.[T][✗] some description\r\n"
+                    + divider;
+            taskList.listTasks(ui);
+            assertEquals(expectedOut, outContent.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace(); //shouldnt happen
+        }
     }
 
     @Test

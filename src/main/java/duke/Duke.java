@@ -39,7 +39,7 @@ public class Duke {
         }
 
         try {
-            storage.write(taskList);
+            storage.save(taskList);
         } catch(IOException e) {
             System.err.println(e);
             ui.oops("Couldn't save tasks to disk.");

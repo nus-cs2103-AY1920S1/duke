@@ -1,6 +1,7 @@
 package duke;
 
-import javafx.application.Platform;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -52,7 +53,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         // This response is only produced by an ExitCommand
         if (response.equals("Bye!")) {
-            Platform.exit();
+            // Wait for 0.5 seconds and exit
+            Timer tm = new Timer();
+            tm.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 500);
         }
     }
 }

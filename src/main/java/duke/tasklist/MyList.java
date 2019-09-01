@@ -42,4 +42,6 @@ public interface MyList {
      * @return Task that was removed.
      */
     public abstract Task removeTask(int index);
+
+    public abstract MyList findTasks(String word);
 }

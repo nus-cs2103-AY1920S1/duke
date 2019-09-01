@@ -127,6 +127,19 @@ public class UserInterface implements DukeUserInterface {
         printSection(array);
     }
 
+    public void printFindList(MyList myList) {
+        List<Task> list = myList.getList();
+        int listNum = 1;
+
+        String[] array = new String[myList.getNumTasks() + 1];
+        array[0] = " Here are the matching tasks in your list:";
+        for (Task task : list) {
+            array[listNum] = String.format(" %d.%s", listNum, task);
+            listNum++;
+        }
+        printSection(array);
+    }
+
     /**
      * Prints out a message when a task is marked as done.
      * @param task Task that was marked as done.

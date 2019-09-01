@@ -68,4 +68,5 @@ public interface DukeUserInterface {
      * @param taskList Task list that the Task was removed from.
      */
     public void printDeleteMsg(Task task, MyList taskList);
+    public void printFindList(MyList resultList);
 }

@@ -24,7 +24,13 @@ public class Task {
      */
     public static String checkCommandType(String command) throws DukeException {
         String type = "";
-        if (command.equals("list")) {
+        if (command.contains("find")){
+            type = "find";
+            command = command.substring(4, command.length());
+            if (command.isEmpty()) {
+                throw new DukeException("    OOPS!! Please specify keyword for search");
+            }
+        } else if (command.equals("list")) {
             type = "list";
         } else if (command.contains("delete")) {
             type = "delete";
@@ -153,6 +159,29 @@ public class Task {
         }
         if (tasks.isEmpty()) {
             System.out.println("    Congratulations, your last task has been deleted!");
+        }
+    }
+    /**
+     * Searchs the task list with a keyword and prints all that matches
+     * Prints "There are no matching tasks in your list" if no match is found
+     *
+     * @param command  Command that includes the keyword to be searched for
+     */
+    public static void searchByKeyword(String command) {
+        command = command.substring(5, command.length());
+        boolean hasMatch = false;
+        for (Task x : tasks) {
+            if (x.description.contains(command)) {
+                int index = tasks.indexOf(x) + 1;
+                if (!hasMatch) {
+                    System.out.println("    Here are the matching tasks in your list");
+                    hasMatch = true;
+                }
+                System.out.println("      " + Integer.toString(index) + "." + x);
+            }
+        }
+        if (!hasMatch) {
+            System.out.println("    There are no matching tasks in your list");
         }
     }
 

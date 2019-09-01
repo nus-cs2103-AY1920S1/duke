@@ -25,6 +25,10 @@ public class Duke {
             try {
                 String type = Task.checkCommandType(command);
                 switch(type) {
+                    case "find":
+                        Task.searchByKeyword(command);
+                        break;
+
                     case "list":
                         if (Task.tasks.isEmpty()) {
                             System.out.println("    Congratulations! You have no tasks remaining!");

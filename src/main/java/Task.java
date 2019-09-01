@@ -2,6 +2,7 @@ public class Task {
     public String item;
     public boolean isDone;
 
+    // Constructor
     public Task(String item) {
         this.item = item;
         this.isDone = false;

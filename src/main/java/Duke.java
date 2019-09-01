@@ -1,8 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    public static Task[] tasks = new Task[100]; // Created list of tasks
-    public static int count = 0; // keep track of number of tasks
+
+    // create array of tasks
+    public static ArrayList<Task> tasks = new ArrayList<>();
+    // keep track of number of tasks
+    public static int count = 0;
 
     public static void main(String[] args) {
 
@@ -31,35 +35,44 @@ public class Duke {
                     sendTasks();
                     sendLine();
                 } else if (input.startsWith("done")) {
-                    String[] splitStr = input.split(" "); // to identify which task completed, split command at space
-                    if (splitStr.length < 2) { // if less than 2 words
+                    // to identify which task completed, split command at space
+                    String[] splitStr = input.split(" ");
+                    // if less than 2 words
+                    if (splitStr.length < 2) {
                         sendLine();
                         sendMessage("Please indicate task index!");
                         sendLine();
                     } else {
-                        String itemIndex = splitStr[1]; // take 2nd word
+                        // take 2nd word
+                        String itemIndex = splitStr[1];
                         sendLine();
                         doneTask(itemIndex);
                         sendLine();
                     }
                 } else if (input.startsWith("todo")) {
-                    String[] splitStr = input.split(" ", 2); // split command at first space
-                    if (splitStr.length < 2) { // if less than 2 words
+                    // split command at first space
+                    String[] splitStr = input.split(" ", 2);
+                    // if less than 2 words
+                    if (splitStr.length < 2) {
                         throw new MissingTodoException();
                     } else {
-                        String item = splitStr[1]; // take 2nd word onwards
+                        // take 2nd word onwards
+                        String item = splitStr[1];
                         sendLine();
                         addTodo(item);
                         sendLine();
                     }
                 } else if (input.startsWith("deadline")) {
-                    String[] splitStr = input.split(" ", 2); // split command at first space
-                    if (splitStr.length < 2) { // if less than 2 words
+                    // split command at first space
+                    String[] splitStr = input.split(" ", 2);
+                    // if less than 2 words
+                    if (splitStr.length < 2) {
                         sendLine();
                         sendMessage("Please indicate task to do with deadline!");
                         sendLine();
                     } else {
-                        String item = splitStr[1]; // take 2nd word onwards
+                        // take 2nd word onwards
+                        String item = splitStr[1];
                         String[] data = item.split("/by", 2);
                         String task = data[0];
                         String deadline = data[1];
@@ -68,18 +81,36 @@ public class Duke {
                         sendLine();
                     }
                 } else if (input.startsWith("event")) {
-                    String[] splitStr = input.split(" ", 2); // split command at first space
-                    if (splitStr.length < 2) { // if less than 2 words
+                    // split command at first space
+                    String[] splitStr = input.split(" ", 2);
+                    // if less than 2 words
+                    if (splitStr.length < 2) {
                         sendLine();
                         sendMessage("Please indicate task to do with start and end time!");
                         sendLine();
                     } else {
-                        String item = splitStr[1]; // take 2nd word onwards
+                        // take 2nd word onwards
+                        String item = splitStr[1];
                         String[] data = item.split("/at", 2);
                         String task = data[0];
                         String time = data[1];
                         sendLine();
                         addEvent(task, time);
+                        sendLine();
+                    }
+                } else if (input.startsWith("delete")) {
+                    // to identify which task completed, split command at space
+                    String[] splitStr = input.split(" ");
+                    // if less than 2 words
+                    if (splitStr.length < 2) {
+                        sendLine();
+                        sendMessage("Please indicate task index!");
+                        sendLine();
+                    } else {
+                        // take 2nd word
+                        String itemIndex = splitStr[1];
+                        sendLine();
+                        deleteTask(itemIndex);
                         sendLine();
                     }
                 } else {
@@ -118,8 +149,8 @@ public class Duke {
         if (count >= 100) {
             sendMessage("You can add no more than 100 tasks!");
         } else {
-            tasks[count] = new Todo(item);
-            Task thing = tasks[count];
+            tasks.add(new Todo(item));
+            Task thing = tasks.get(count);
             count ++;
             sendMessage("Got it. I've added this task: ");
             sendMessage("  " + thing.toString());
@@ -131,8 +162,8 @@ public class Duke {
         if (count >= 100) {
             sendMessage("You can add no more than 100 tasks!");
         } else {
-            tasks[count] = new Deadline(task, deadline);
-            Task thing = tasks[count];
+            tasks.add(new Deadline(task, deadline));
+            Task thing = tasks.get(count);
             count ++;
             sendMessage("Got it. I've added this task: ");
             sendMessage("  " + thing.toString());
@@ -145,8 +176,8 @@ public class Duke {
         if (count >= 100) {
             sendMessage("You can add no more than 100 tasks!");
         } else {
-            tasks[count] = new Event(task, time);
-            Task thing = tasks[count];
+            tasks.add(new Event(task, time));
+            Task thing = tasks.get(count);
             count ++;
             sendMessage("Got it. I've added this task: ");
             sendMessage("  " + thing.toString());
@@ -157,20 +188,38 @@ public class Duke {
     public static void sendTasks() {
         sendMessage("Here are the tasks in your list: ");
         for (int i = 0; i < count; i ++) {
-            Task item = tasks[i];
+            Task item = tasks.get(i);
             sendMessage((i + 1) + "." + item.toString());
         }
     }
 
     public static void doneTask(String itemIndex) {
-        int index = Integer.parseInt(itemIndex) - 1; // convert string to int
+        // convert string to int
+        int index = Integer.parseInt(itemIndex) - 1;
         if (index < 0 || index >= count) {
             sendMessage("Invalid index!");
         } else {
-            Task item = tasks[index];
+            Task item = tasks.get(index);
+            // tick completed task
             item.setDone();
             sendMessage("Nice! I've marked this task as done: ");
-            sendMessage("  " + item.toString()); // tick completed item
+            sendMessage("  " + item.toString());
+        }
+    }
+
+    public static void deleteTask(String itemIndex) {
+        // convert string to int
+        int index = Integer.parseInt(itemIndex) - 1;
+        if (index < 0 || index >= count) {
+            sendMessage("Invalid index!");
+        } else {
+            Task item = tasks.get(index);
+            // delete task
+            tasks.remove(index);
+            count --;
+            sendMessage("Noted. I've removed this task: ");
+            sendMessage("  " + item.toString());
+            sendMessage(String.format("Now you have %d tasks in the list.", count));
         }
     }
 

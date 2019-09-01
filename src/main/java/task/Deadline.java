@@ -8,7 +8,8 @@ public class Deadline extends Task{
     public Deadline(String description) throws DukeException{
         super(description);
         int divider = description.indexOf("/by");
-        if (divider == -1 || (divider == description.length() - 3)){
+        if (divider == -1 || (divider == description.length() - 3)
+                ||description.substring(divider + 4).replace(" ", "").equals("")){
             throw new DukeException("Incorrect Deadline format." + System.lineSeparator()
                     + "    Please key in Deadline (taskname) /by date(d/MM/yyyy) time(HHmm)");
         }

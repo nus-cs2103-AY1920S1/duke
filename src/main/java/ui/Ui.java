@@ -47,7 +47,7 @@ public class Ui {
     public void readDelete(Task removed_Task, int task_Num){
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + removed_Task.toString());
-        System.out.println("      Now you have " + task_Num + " tasks in the list.");
+        System.out.println("     Now you have " + task_Num + " tasks in the list.");
         showLine();
     }
 

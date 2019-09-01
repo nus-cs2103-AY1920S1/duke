@@ -5,7 +5,7 @@ import exception.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
-
+import java.time.format.DateTimeParseException;
 
 
 public class DateTime{
@@ -15,11 +15,16 @@ public class DateTime{
     private static DateTimeFormatter getStart = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private static DateTimeFormatter getTime = DateTimeFormatter.ofPattern("HHmm");
 
-    public static DateTime setDeadline(String date_time){
-        DateTime deadline = new DateTime();
-        deadline.start = LocalDateTime.parse(date_time, getStart);
-        deadline.display = deadline.start.format(getStart);
-        return deadline;
+    public static DateTime setDeadline(String date_time) throws DukeException{
+        try {
+            DateTime deadline = new DateTime();
+            deadline.start = LocalDateTime.parse(date_time, getStart);
+            deadline.display = deadline.start.format(getStart);
+            return deadline;
+        } catch (DateTimeParseException e){
+            throw new DukeException("Incorrect Deadline date/time format." + System.lineSeparator() +
+                    "    Please key in date(d/MM/yyyy) time(HHmm)");
+        }
     }
 
     public static DateTime readDeadLine(String date_time){
@@ -30,22 +35,28 @@ public class DateTime{
     }
 
     public static DateTime setEventTime (String date_time) throws DukeException{
-        DateTime event = new DateTime();
-        int divider = date_time.indexOf("-");
-        if (divider == -1 || (divider == date_time.length() -1)){
-            throw new DukeException("Need to have end time.");
+        try {
+            DateTime event = new DateTime();
+            int divider = date_time.indexOf("-");
+            if (divider == -1 || (divider == date_time.length() - 1)) {
+                throw new DukeException("Need to have end time.");
+            }
+            String end = date_time.substring(divider + 1, date_time.length());
+            event.start = LocalDateTime.parse(date_time.substring(0, divider), getStart);
+            event.endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern("HHmm"));
+            event.display = event.start.format(getStart) + "-" + event.endTime.format(getTime);
+            return event;
+        } catch (DateTimeParseException e){
+            throw new DukeException("Incorrect Event date/time format." + System.lineSeparator() +
+                    "    Please key in date(d/MM/yyyy) start_time(HHmm)-end_time(HHmm)");
         }
-        String end = date_time.substring(divider + 1, date_time.length());
-        event.start = LocalDateTime.parse(date_time.substring(0, divider), getStart);
-        event.endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern("HHmm"));
-        event.display = event.start.format(getStart) + "-" + event.endTime.format(getTime);
-        return event;
     }
 
     public static DateTime readEventTime(String date_time) throws DukeException{
         DateTime event = new DateTime();
         int divider = date_time.indexOf("-");
-        if (divider == -1 || (divider == date_time.length() -1)){
+        if (divider == -1 || (divider == date_time.length() -1)
+            || date_time.substring(divider + 1).replace(" ", "").equals("")){
             throw new DukeException("Need to have end time.");
         }
         String end = date_time.substring(divider + 1, date_time.length());

@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 public class Duke {
     private Storage storage;
-    private Parser parser;
     private UI ui;
     private TaskList taskList;
 
@@ -14,17 +13,17 @@ public class Duke {
         }
 
         this.ui = new UI(taskList);
-        this.parser = new Parser(taskList, storage, ui);
     }
 
     public void run() throws Exception {
         ui.printIntro();
         storage.loadTasks();
-        storage.loadTasks();
         boolean programRunning = true;
         while(programRunning) {
             try {
-                parser.parse();
+                String input = ui.readLine();
+                Command inputCommand = Parser.parse(input);
+                inputCommand.execute(taskList, storage, ui);
             } catch (DukeException error) {
                 ui.printError(error);
             }

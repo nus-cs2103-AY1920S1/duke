@@ -26,6 +26,10 @@ public class TaskList {
                 + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
+    public Task getTask(int taskIndex) {
+        return list.get(taskIndex - 1);
+    }
+
     public void showTaskList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {

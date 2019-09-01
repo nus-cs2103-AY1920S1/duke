@@ -25,6 +25,10 @@ public class Task {
         return output;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public String writeFormat() {
         return "T " + isDone + " " + description;
     }

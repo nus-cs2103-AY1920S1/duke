@@ -56,7 +56,7 @@ public class AddCommand extends Command {
             tasks.addTask(new Event(userWords[0].trim(), userWords[1].trim()));
             break;
         default:
-            throw new DukeException("Wrong type of command entered");
+            throw new DukeException("Wrong type of command entered" + taskCmd);
         }
     }
 }

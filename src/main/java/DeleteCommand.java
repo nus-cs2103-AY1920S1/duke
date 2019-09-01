@@ -1,9 +1,25 @@
+/**
+ * Delete command that inherits from Command, deletes a task from TaskList.
+ */
 public class DeleteCommand extends Command {
-    public DeleteCommand(String input){
+
+    /**
+     * Constructs a new DeleteCommand object.
+     *
+     * @param input input from user.
+     */
+    public DeleteCommand(String input) {
         super(input);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    /**
+     * Deletes a Task from the current TaskList.
+     *
+     * @param tasks   current list of tasks.
+     * @param ui      Ui object.
+     * @param storage Storage object to save and load files.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //no input number
             if (ui.getInputArr().length == 1) {
@@ -21,8 +37,6 @@ public class DeleteCommand extends Command {
             }
         } catch (NumberFormatException e) {
             Duke.print("☹ OOPS!!! Please input a valid number.");
-        }    }
-
-
-
+        }
+    }
 }

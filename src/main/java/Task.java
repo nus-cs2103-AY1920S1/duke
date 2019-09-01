@@ -1,13 +1,24 @@
 import java.io.Serializable;
 
+/**
+ * Task that can be in the form of Todo, Deadline or Event.
+ */
 public class Task implements Serializable {
     private String task;
     private boolean status = false;
 
+    /**
+     * Constructs a new Task object.
+     *
+     * @param task description of the task.
+     */
     public Task(String task) {
         this.task = task;
     }
 
+    /**
+     * Marks a Task as done.
+     */
     public void markAsDone() {
         this.status = true;
         System.out.println(
@@ -17,14 +28,29 @@ public class Task implements Serializable {
                         "    ____________________________________________________________\n");
     }
 
+    /**
+     * Returns the status of the Task.
+     *
+     * @return status of the Task.
+     */
     public boolean getStatus() {
         return this.status;
     }
 
-    public String getTask(){
+    /**
+     * Returns description of the Task.
+     *
+     * @return description of the Task.
+     */
+    public String getTask() {
         return this.task;
     }
 
+    /**
+     * Returns a string representation of a Task object. Example: "[x] task description".
+     *
+     * @return a string representation of a Task object.
+     */
     @Override
     public String toString() {
         String logo;

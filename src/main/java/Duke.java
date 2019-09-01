@@ -10,11 +10,21 @@ import java.util.Arrays;
 //import javafx.scene.control.Label;
 //import javafx.stage.Stage;
 
+/**
+ * Main class that runs the Duke program.
+ */
 public class Duke {
-    public static String toDateString(String datetime) {
+
+    /**
+     * Converts a date and time string from dd/mm/yy hh:mm format to Day of Month, Year hh.mm(am/pm) format.
+     *
+     * @param dateTime date and time in dd/mm/yy hh:mm format.
+     * @return Day of Month, Year hh.mm(am/pm) format. Example: 2nd of December 2019, 6pm.
+     */
+    public static String toDateString(String dateTime) {
         try {
             String result = "";
-            String[] s = datetime.split(" ");
+            String[] s = dateTime.split(" ");
             String[] date = s[0].split("/");
             int intDay = Integer.parseInt(date[0]);
             int intMonth = Integer.parseInt(date[1]);
@@ -36,7 +46,6 @@ public class Duke {
             if (intMinutes / 10 == 0) {
                 minutes = "0" + intMinutes;
             }
-
             if (intTime > 1259) {
                 intTime -= 1200;
                 time = intTime / 100 + "." + minutes + "pm";
@@ -45,16 +54,19 @@ public class Duke {
             } else if (intTime < 1159) {
                 time = intTime / 100 + "." + minutes + "am";
             }
-
             String month = new DateFormatSymbols().getMonths()[intMonth - 1];
             result = day + " of " + month + " " + year + ", " + time;
             return result;
-
         } catch (Exception e) {
-            return datetime;
+            return dateTime;
         }
     }
 
+    /**
+     * Prints message wrapped in "_______".
+     *
+     * @param message message before formatting with "_____".
+     */
     public static void print(String message) {
         System.out.println(
                 "    ____________________________________________________________\n" +
@@ -66,6 +78,9 @@ public class Duke {
     private TaskList tasks = new TaskList();
     private Ui ui;
 
+    /**
+     * Constructs a new Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -76,6 +91,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         Parser parser = new Parser();
         print("Hello! I am Duke\n" +
@@ -95,6 +113,7 @@ public class Duke {
             }
         }
     }
+
     public static void main(String[] args) throws Exception {
         new Duke().run();
     }

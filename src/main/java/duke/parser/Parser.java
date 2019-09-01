@@ -8,6 +8,7 @@ import duke.command.ListTasksCommand;
 import duke.command.CreateCommand;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 
 
 import duke.exception.DukeException;

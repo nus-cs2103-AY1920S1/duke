@@ -1,0 +1,7 @@
+D|0| return book |Mon, 2 Dec 2019, 06:00 PM
+T|1|make my bed
+D|0|Quiz 1 | tomorrow
+T|0|Make bed
+T|0|make bed
+T|0|read book
+D|0|return my stuff |tomorrow

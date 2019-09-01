@@ -2,7 +2,12 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.tasks.*;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 import duke.ui.Ui;
 
 import java.text.ParseException;
@@ -10,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddCommand extends Command {
-    private Task t;
+    private Task task;
     private String type;
     private String description;
     private String time;
@@ -28,15 +33,15 @@ public class AddCommand extends Command {
             String[] details;
             this.description = description[1].trim();
             this.type = type;
-            switch ( type ) {
+            switch (type) {
             case "todo":
-                t = new ToDo(parseDescription());
+                task = new ToDo(parseDescription());
                 break;
             case "deadline":
-                t = new Deadline(parseDescription("/by"), parseDate());
+                task = new Deadline(parseDescription("/by"), parseDate());
                 break;
             case "event":
-                t = new Event(parseDescription("/at"), parseDate());
+                task = new Event(parseDescription("/at"), parseDate());
                 break;
             default:
                 break;
@@ -55,18 +60,18 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
 
-        tasks.allTasks.add(t);
-        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + t);
+        tasks.allTasks.add(task);
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + task);
         if (tasks.allTasks.size() == 1) {
             sb.append("\nNow you have ")
               .append(tasks.allTasks.size())
-              .append(" task in the list.");
+                .append(" task in the list.");
         } else {
             sb.append("\nNow you have ")
               .append(tasks.allTasks.size())
-              .append(" tasks in the list.");
+                .append(" tasks in the list.");
         }
-        storage.appendTaskToFile(t);
+        storage.appendTaskToFile(task);
         ui.printMessage(sb.toString());
     }
 
@@ -109,7 +114,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Parses the command description with delimiters for events and deadlines, and checks if it is in the correct format.
+     * Parses the command description with delimiters for events and deadlines and checks if it is in
+     * the correct format.
      *
      * @param delimiter The delimiter that splits the description.
      * @return The parsed description.
@@ -119,8 +125,8 @@ public class AddCommand extends Command {
         String[] details = description.split(delimiter);
         if (details.length == 1) {
             if (details[0].length() != 0) {
-                throw new DukeException("Incorrect format. \nPlease try again with the format below: \n" +
-                        type + " ($task_name) " + delimiter + " ($date/day)");
+                throw new DukeException("Incorrect format. \nPlease try again with the format below: \n"
+                        + type + " ($task_name) " + delimiter + " ($date/day)");
             }
         }
         this.time = details[1];

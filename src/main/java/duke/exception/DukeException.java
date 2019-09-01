@@ -8,7 +8,7 @@ public class DukeException extends Exception {
      * @param message The error message
      */
     public DukeException(String message) {
-        super("\u2639 OOPS!!! " + message);
+        super("☹ OOPS!!! " + message);
     }
 
 }

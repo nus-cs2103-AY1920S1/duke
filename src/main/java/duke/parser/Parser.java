@@ -1,6 +1,12 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -17,7 +23,7 @@ public class Parser {
         String[] details = fullCommand.trim().split("\\s+");
 
         try {
-            switch ( details[0] ) {
+            switch (details[0]) {
             case "list":
                 return new ListCommand();
             case "find":
@@ -37,18 +43,21 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             // If the command misses a description entirely
-            switch ( details[0] ) {
+            switch (details[0]) {
             case "done":
             case "delete":
-                throw new DukeException("Incorrect format. Missing a task index. \nPlease try again with the following format: " + details[0] + " 3");
+                throw new DukeException("Incorrect format. Missing a task index. \n"
+                        + "Please try again with the following format: " + details[0] + " 3");
             case "find":
-                throw new DukeException("Incorrect format. Missing a keyword to find. \nPlease try again with the following format: " + details[0] + " book");
+                throw new DukeException("Incorrect format. Missing a keyword to find. \n"
+                        + "Please try again with the following format: " + details[0] + " book");
             default:
                 throw new DukeException("Incorrect format. Please try again.");
             }
         } catch (NumberFormatException e) {
             // If the delete/done commands are followed by strings instead of a number index
-            throw new DukeException("Incorrect format. \n" + details[0] + " should be followed by a number index not a string. \ne.g. " + details[0] + " 3");
+            throw new DukeException("Incorrect format. \n" + details[0]
+                    + " should be followed by a number index not a string. \ne.g. " + details[0] + " 3");
         }
     }
 }

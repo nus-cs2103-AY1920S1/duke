@@ -26,7 +26,6 @@ public class AddDeadlineCommand extends AddCommand {
         String[] descriptionAndDate = input.split(" /by ");
 
         if (descriptionAndDate.length <= 1) {
-            System.out.println("help");
             return new TaskResponse(new DukeInvalidInputException("☹ OOPS!!! Must specify date and time for deadline"));
         }
 

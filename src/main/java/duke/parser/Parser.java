@@ -20,6 +20,8 @@ public class Parser {
             return 5;
         } else if (i[0].equals("event")) {
             return 6;
+        } else if (i[0].equals("find")) {
+            return 7;
         } else {
             return -1;
         }

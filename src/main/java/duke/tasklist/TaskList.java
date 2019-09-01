@@ -139,6 +139,33 @@ public class TaskList {
                     System.out.println(Ui.line);
                 }
                 return tasks;
+            case 7:
+                try {
+                    if (s.length <= 1) {
+                        throw new DukeException("The description cannot be empty.\n");
+                    }
+                    ArrayList<Task> foundTasks = new ArrayList<Task>();
+                    String search = input.substring(5).toLowerCase();
+                    for (Task t : tasks) {
+                        if (t.getDescription().toLowerCase().contains(search)) {
+                            foundTasks.add(t);
+                        }
+                    }
+                    System.out.print(Ui.line);
+                    if (foundTasks.isEmpty()) {
+                        System.out.println(Ui.indent + " There are no matching tasks.");
+                    } else {
+                        for (int i = 0; i < foundTasks.size(); i++) {
+                            System.out.println(Ui.indent + " " + (i + 1) + "." + foundTasks.get(i));
+                        }
+                    }
+                    System.out.println(Ui.line);
+                } catch (DukeException ex) {
+                    System.out.print(Ui.line);
+                    System.out.print(Ui.indent + ex.getMessage());
+                    System.out.println(Ui.line);
+                }
+                return tasks;
             default:
                 System.out.print(Ui.line);
                 System.out.print(Ui.indent + "Wrong input.\n");

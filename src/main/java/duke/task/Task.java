@@ -17,6 +17,10 @@ public class Task {
         return (isDone ? "Y" : "N");
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void markAsDone() {
         isDone = true;
     }

@@ -17,7 +17,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testImplementation('org.junit.jupiter:junit-jupiter-engine:5.5.0')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.5.0')
 }
 
 checkstyle{
@@ -30,10 +31,6 @@ run{
 
 test {
     useJUnitPlatform()
-
-    filter {
-        includeTestsMatching "myduke.*"
-    }
 }
 
 shadowJar {

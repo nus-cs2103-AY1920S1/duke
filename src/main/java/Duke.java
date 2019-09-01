@@ -42,7 +42,7 @@ public class Duke {
      * Main method.
      */
     public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
+        new Duke("/Users/larrylaw/Learn/Uni/Y2S1/CS2103/duke/src/main/data/duke.txt").run();
     }
 
     /**
@@ -68,12 +68,17 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns response to be shown to user
+     * @param input
+     * @return response to be shown to user
      */
-//    public String getResponse(String input) {
-//        command = Parser.parse(input);
-//        command.execute(tasks, ui, storage);
-//
-//    }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String response = command.execute(tasks, ui, storage);
+            return response;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }

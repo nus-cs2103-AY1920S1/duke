@@ -97,6 +97,13 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Prints an external task list to ui.
+     *
+     * @param taskList External task list to be printed.
+     * @param ui Ui to be used for output.
+     * @param message Message to be printed with the task items.
+     */
     public static void printExternalList(ArrayList<Task> taskList, Ui ui, String message) {
         ui.print(message);
         int counter = 1;

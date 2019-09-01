@@ -1,3 +1,16 @@
+package parser;
+
+import commands.PrintCommand;
+import commands.Command;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ExitCommand;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
+import util.TaskList;
+
 import java.text.ParseException;
 /**
  * Encapsulates a handler that tries to make sense of user commands.
@@ -8,17 +21,17 @@ import java.text.ParseException;
 public class Parser {
 
     /**
-     * Enumeration of all command types supported by Duke.
+     * Enumeration of all command types supported by ui.Duke.
      */
     private enum Imperative {
         BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO
     }
 
     /**
-     * Parses user input into a command executed by Duke.
+     * Parses user input into a command executed by ui.Duke.
      *
      * @param fullCommand the string entered by the user as a command
-     * @return a Duke-executable command
+     * @return a ui.Duke-executable command
      * @throws IllegalArgumentException if command not supported by duke
      * @throws IndexOutOfBoundsException if incomplete commands
      * @throws ParseException if incorrect date/time format
@@ -31,7 +44,7 @@ public class Parser {
         // if the imperative entered is unrecognised, inform the user
 
         // extract the imperative specified by the user to identify which
-        // command is to be executed by Duke
+        // command is to be executed by ui.Duke
         String[] splitCommand = fullCommand.split(" ", 2);
         String imperative = splitCommand[0].toUpperCase();
 
@@ -80,7 +93,7 @@ public class Parser {
     }
 
     /**
-     * Reads text file containing saved tasks, converts them into Task objects,
+     * Reads text file containing saved tasks, converts them into tasks.Task objects,
      * and adds to the task list in order to load the last saved task list.
      *
      * @param line string containing one line from the text file
@@ -90,7 +103,7 @@ public class Parser {
     public static void parseTextToTask(String line, TaskList emptyList) throws
             ParseException {
         String[] splitLine = line.split("-", 3);
-        boolean isTaskDone = splitLine[1].equals("Y") ? true : false;
+        boolean isTaskDone = splitLine[1].equals("Y");
 
         switch(splitLine[0]) {
         case "D":

@@ -1,9 +1,11 @@
+package tasks;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /**
- * Encapsulates a event-type task handled by Duke.
+ * Encapsulates a event-type task handled by ui.Duke.
  *
  * A event differs from other tasks because it has a date on which it is to
  * occur.

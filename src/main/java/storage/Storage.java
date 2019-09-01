@@ -1,3 +1,9 @@
+package storage;
+
+import parser.Parser;
+import tasks.Task;
+import util.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -30,7 +36,7 @@ public class Storage {
     }
 
     /**
-     * Loads tasks into the task list from the saved file, every time Duke is
+     * Loads tasks into the task list from the saved file, every time ui.Duke is
      * re-initialised.
      *
      * @param emptyList the list the tasks are to be loaded into
@@ -83,7 +89,7 @@ public class Storage {
      * @param textToAdd the text to be added
      * @throws IOException if file not found
      */
-    public void writeToFile(String textToAdd) throws IOException {
+    private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);
         fw.write("\n"); // add newline

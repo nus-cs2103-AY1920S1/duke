@@ -1,19 +1,26 @@
+package ui;
+
+import commands.Command;
+import parser.Parser;
+import storage.Storage;
+import util.TaskList;
+
 import java.io.IOException;
 import java.text.ParseException;
 
 /**
- * Encapsulates attributes and behaviour of Duke, a personal assistant chatbot.
+ * Encapsulates attributes and behaviour of ui.Duke, a personal assistant chatbot.
  *
- * Duke manages a user's list of tasks. It can store, add to, remove from, or
+ * ui.Duke manages a user's list of tasks. It can store, add to, remove from, or
  * modify the contents of the list. User input must come either in the form of
  * commands 'list', 'bye' 'done <task index>', 'delete <task index>' or storage
- * requests beginning with the type of task to be stored. Duke supports three
+ * requests beginning with the type of task to be stored. ui.Duke supports three
  * types of tasks - todos, deadlines, and events. Deadlines and events need to
  * be supplied with additional date or time information, which is parsed by
- * Duke using Java's SimpleDateFormat library. The input format for
+ * ui.Duke using Java's SimpleDateFormat library. The input format for
  * todos is 'todo <task description>' and that for deadlines and events is
  * '<task type> <task description> / <day/month/year hh:mm>'. Deviating from this
- * input format results in Duke supplying error messages to the user.
+ * input format results in ui.Duke supplying error messages to the user.
  *
  * @author atharvjoshi
  * @contributors j-lum, damithc
@@ -36,11 +43,11 @@ public class Duke {
      */
     private Ui ui;
 
-    /** flag to indicate if Duke is listening to commands from the user */
+    /** flag to indicate if ui.Duke is listening to commands from the user */
     private boolean isListening;
 
     /**
-     * Initialises Duke with a user-interface, storage, and task
+     * Initialises ui.Duke with a user-interface, storage, and task
      * handler
      *
      * @param filePath the hard disk file containing the saved list
@@ -59,7 +66,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke by asking the Parser to parse the user command and
+     * Runs ui.Duke by asking the parser.Parser to parse the user command and
      * then executing the command, whilst handling exceptions.
      */
     public void run() {

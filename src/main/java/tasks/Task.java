@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- * Encapsulates a task handled by Duke.
+ * Encapsulates a task handled by ui.Duke.
  *
  * A task has a description and a status, for each of which getter methods have
  * been provided. The task status can also be updated when a task is done.

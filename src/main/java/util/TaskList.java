@@ -1,3 +1,7 @@
+package util;
+
+import tasks.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -14,7 +18,7 @@ public class TaskList {
      * Creates new task list.
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     /**

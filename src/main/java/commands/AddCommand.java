@@ -1,3 +1,10 @@
+package commands;
+
+import tasks.Task;
+import storage.Storage;
+import util.TaskList;
+import ui.Ui;
+
 import java.io.IOException;
 
 /**
@@ -26,8 +33,8 @@ public class AddCommand extends Command {
      * to be printed on the user interface, and asking storage to update the
      * task list on the hard drive.
      * @param tasks the task list the task is to be added to
-     * @param ui the user interface associated with this run of Duke
-     * @param storage the storage handler associated with this run of Duke
+     * @param ui the user interface associated with this run of ui.Duke
+     * @param storage the storage handler associated with this run of ui.Duke
      * @throws IOException when file the list is to be written to is not found
      */
     @Override

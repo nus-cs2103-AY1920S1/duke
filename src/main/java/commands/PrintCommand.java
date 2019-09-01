@@ -1,3 +1,9 @@
+package commands;
+
+import storage.Storage;
+import ui.Ui;
+import util.TaskList;
+
 /**
  * Encapsulates command to print all tasks in the task list.
  *
@@ -20,8 +26,8 @@ public class PrintCommand extends Command {
      * to print all the tasks in the lists to the terminal.
      *
      * @param tasks the task list the task is to be added to
-     * @param ui the user interface associated with this run of Duke
-     * @param storage the storage handler associated with this run of Duke
+     * @param ui the user interface associated with this run of ui.Duke
+     * @param storage the storage handler associated with this run of ui.Duke
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

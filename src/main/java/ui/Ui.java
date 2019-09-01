@@ -1,3 +1,8 @@
+package ui;
+
+import util.TaskList;
+import tasks.Task;
+
 import java.util.Scanner;
 
 /**
@@ -10,7 +15,7 @@ public class Ui {
     /** welcome message */
     private String welcomeMessage;
 
-    /** logo for Duke */
+    /** logo for ui.Duke */
     private String logo;
 
     /** exit message */
@@ -19,28 +24,28 @@ public class Ui {
     /**
      *  Instantiates the user interface handler.
      */
-    public Ui() {
+    Ui() {
         this.logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        this.welcomeMessage = "Hello! I'm Duke\n";
+        this.welcomeMessage = "Hello! I'm Duke!!!\n";
         this.exitMessage = "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Welcomes the user with specified welcome message and logo.
      */
-    public void welcomeUser() {
+    void welcomeUser() {
         System.out.println(logo);
         System.out.print(welcomeMessage);
     }
 
     /**
-     * Wishes the user goodbye upon exiting Duke.
+     * Wishes the user goodbye upon exiting ui.Duke.
      */
-    public void farewellUser() {
+    void farewellUser() {
         System.out.print(exitMessage);
         this.showLine();
     }
@@ -48,7 +53,7 @@ public class Ui {
     /**
      * Prints startup error.
      */
-    public void showStartupError() {
+    void showStartupError() {
         System.out.println("Unable to load tasks from hard disk");
         this.showLine();
     }
@@ -58,7 +63,7 @@ public class Ui {
      *
      * @return a line entered by the user
      */
-    public String readCommand() {
+    String readCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -67,7 +72,7 @@ public class Ui {
      * Prints line separator between commands and outputs for better
      * readability.
      */
-    public void showLine() {
+    void showLine() {
         System.out.println("################################################");
     }
 
@@ -128,7 +133,7 @@ public class Ui {
     /**
      * Prints error message when user enters invalid command.
      */
-    public void showInvalidCommandError() {
+    void showInvalidCommandError() {
         System.out.println("You entered a command I do not understand :-(");
         System.out.println("Let's speak the same language! Type 'help' to "
                 + "see the list of commands I understand :-)");
@@ -138,7 +143,7 @@ public class Ui {
     /**
      * Prints error message when user enters incorrect date/time format.
      */
-    public void showInvalidDateTimeFormattingError() {
+    void showInvalidDateTimeFormattingError() {
         System.out.println("Looks like you entered the incorrect Date/Time " +
                 "format. Please follow <dd>/<mm>/<yyyy> <hhmm>");
         this.showLine();
@@ -147,7 +152,7 @@ public class Ui {
     /**
      * Prints error message when user enters incorrect task attributes format.
      */
-    public void showInvalidFormattingError() {
+    void showInvalidFormattingError() {
         System.out.println("Wrong format! Please try again.");
         this.showLine();
     }

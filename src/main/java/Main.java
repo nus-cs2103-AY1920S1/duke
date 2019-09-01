@@ -1,3 +1,5 @@
+import ui.Duke;
+
 /**
  *
  * @author atharvjoshi
@@ -5,14 +7,14 @@
  */
 public class Main {
     /**
-     * The main method for Duke.
+     * The main method for ui.Duke.
      *
-     * Creates a new instance of Duke and runs it.
+     * Creates a new instance of ui.Duke and runs it.
      *
      * @param args command(s) from the user
      */
     public static void main(String[] args) {
-        // create an instance of Duke with the file containing the task list
+        // create an instance of ui.Duke with the file containing the task list
         new Duke("../../../data/tasks.txt").run();
     }
 }

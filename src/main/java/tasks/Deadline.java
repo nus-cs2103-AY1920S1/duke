@@ -1,9 +1,11 @@
+package tasks;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /**
- * Encapsulates a deadline-type task handled by Duke.
+ * Encapsulates a deadline-type task handled by ui.Duke.
  *
  * A deadline differs from other tasks because it has a due date.
  *

@@ -1,3 +1,10 @@
+package commands;
+
+import tasks.Task;
+import storage.Storage;
+import util.TaskList;
+import ui.Ui;
+
 import java.lang.Integer;
 import java.io.IOException;
 
@@ -29,8 +36,8 @@ public class DeleteCommand extends Command {
      * the storage handler to update the task list on the hard disk.
      *
      * @param tasks the task list the task is to be added to
-     * @param ui the user interface associated with this run of Duke
-     * @param storage the storage handler associated with this run of Duke
+     * @param ui the user interface associated with this run of ui.Duke
+     * @param storage the storage handler associated with this run of ui.Duke
      * @throws IOException when file the list is to be written to is not found
      */
     @Override

@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- * Encapsulates a todo-type task handled by Duke.
+ * Encapsulates a todo-type task handled by ui.Duke.
  *
  * A todo differs from other tasks because it has no due date, it simply has
  * a task description.

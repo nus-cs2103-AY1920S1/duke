@@ -1,5 +1,9 @@
 package duke.command;
 
+/**
+ * Represents every exception that Duke may encounter
+ * when the user uses Duke
+ */
 public class AException{
 
     /**

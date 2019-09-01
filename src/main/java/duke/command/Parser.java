@@ -2,6 +2,11 @@ package duke.command;
 
 import java.util.LinkedList;
 
+/**
+ * Represents the parser that will take a string
+ * input and make sense of what command the user
+ * is using.
+ */
 public class Parser {
     private String[] split;
     private String type;

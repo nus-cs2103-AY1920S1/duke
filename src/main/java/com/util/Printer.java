@@ -63,6 +63,14 @@ public class Printer {
     }
 
     /**
+     * Surround a string with double quotes.
+     * @param str   string to be formatted
+     * @return      formatted string
+     */
+    public static String surroundQuotes(String str) {
+        return "\"" + str + "\"";
+    }
+    /**
      * Indent each line with INDENT string.
      * @param str   string to be indented
      * @return      formatted string

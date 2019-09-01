@@ -11,20 +11,16 @@ public class JsonObject {
         if (!empty) {
             formattedString += ",\n";
         }
-        formattedString += surroundQuotes(key) + ": " + value;
+        formattedString += Printer.surroundQuotes(key) + ": " + value;
         empty = false;
         return this;
     }
 
     public JsonObject put(String key, String value) {
-        return putLiteral(key, surroundQuotes(value));
+        return putLiteral(key, Printer.surroundQuotes(value));
     }
 
-    public JsonObject put(String key, Integer value) {
-        return putLiteral(key, value.toString());
-    }
-
-    public JsonObject put(String key, Double value) {
+    public JsonObject put(String key, Object value) {
         return putLiteral(key, value.toString());
     }
 
@@ -34,9 +30,5 @@ public class JsonObject {
 
     public String toString() {
         return "{\n" + Printer.indentString(formattedString) + "}";
-    }
-
-    private String surroundQuotes(String str) {
-        return "\"" + str + "\"";
     }
 }

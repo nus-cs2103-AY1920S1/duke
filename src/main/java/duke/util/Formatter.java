@@ -4,12 +4,13 @@ import duke.task.Task;
 
 /**
  * Initialize a formatter object which helps to format task.
+ *
  */
 public class Formatter {
 
     /**
      * Takes in a task object and format it in the format:
-     * type of task|description|datetime if available
+     * type of task|description|datetime if available.
      * @param task A task object.
      * @return The formatted string that represents the task.
      */
@@ -25,9 +26,7 @@ public class Formatter {
         }
         sb.append("|");
         sb.append(task.getContent());
-        if (className.equals("ToDo")) {
-
-        } else {
+        if (!className.equals("ToDo")) {
             sb.append("|");
             sb.append(task.getTime());
         }

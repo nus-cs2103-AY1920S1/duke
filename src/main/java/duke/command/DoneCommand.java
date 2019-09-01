@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) throws Exception {
         int index = Integer.valueOf(command.split(" ")[1]);
         if (index >= tasks.size() || index < 1) {
-            throw new DukeException("\u2639 OOPS!!! That number you put in does not exit");
+            throw new DukeException("☹ OOPS!!! That number you put in does not exit");
         }
         tasks.get(index - 1).toggleState();
         System.out.println("Nice! I've marked this task as done: \n  " + tasks.get(index - 1).toString());

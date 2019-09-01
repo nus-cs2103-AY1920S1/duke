@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks, UI ui, Storage storage) throws Exception {
         int index = Integer.parseInt(command.split(" ")[1]);
         if (index >= tasks.size() || index < 1) {
-            throw new DukeException("\u2639 OOPS!!! That number you put in does not exit");
+            throw new DukeException("☹ OOPS!!! That number you put in does not exit");
         }
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);

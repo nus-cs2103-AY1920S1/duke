@@ -20,6 +20,10 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Initializes the duke chatbot with a file path for storage purpose.
+     * @param filePath The path to storage file.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new UI(new Scanner(System.in));
@@ -31,7 +35,10 @@ public class Duke {
         }
     }
 
-    public void run() throws Exception {
+    /**
+     * Logic of the program.
+     */
+    public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

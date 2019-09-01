@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     private Date date;
 
     /**
-     * Returns the string array parsedString
+     * Returns the string array parsedString.
      *
      * @return Parsed string.
      */
@@ -31,8 +31,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns the date of the task
-     * If task does not have date return null
+     * Returns the date of the task.
+     * If task does not have date return null.
      *
      * @return Date of the task
      */
@@ -89,7 +89,7 @@ public class AddCommand extends Command {
             break;
         default:
             // if the user type anything besides the three types of item
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
         System.out.println("Got it. I've added this task");

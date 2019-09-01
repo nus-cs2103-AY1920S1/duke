@@ -28,9 +28,9 @@ public class FormatterTest {
         String actualStringC = Formatter.formatTaskForWriting(taskC);
 
         assertAll("Ouput",
-                () -> assertEquals(expectedStringA, actualStringA),
-                () -> assertEquals(expectedStringB, actualStringB),
-                () -> assertEquals(expectedStringC, actualStringC)
+            () -> assertEquals(expectedStringA, actualStringA),
+            () -> assertEquals(expectedStringB, actualStringB),
+            () -> assertEquals(expectedStringC, actualStringC)
         );
 
     }

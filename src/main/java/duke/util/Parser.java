@@ -74,13 +74,13 @@ public class Parser {
         } else if (str.contains("done")) {
             String[] afterSplit = str.trim().split(" ");
             if (afterSplit.length == 1) {
-                throw new DukeException("\u2639 OOPS!!! Please input a number for done.");
+                throw new DukeException("☹ OOPS!!! Please input a number for done.");
             }
             return new DoneCommand(str);
         } else if (str.contains("delete")) {
             String[] afterSplit = str.trim().split(" ");
             if (afterSplit.length == 1) {
-                throw new DukeException("\u2639 OOPS!!! Please input a number for delete.");
+                throw new DukeException("☹ OOPS!!! Please input a number for delete.");
             }
             return new DeleteCommand(str);
         } else if (str.trim().equals("bye")) {
@@ -91,11 +91,11 @@ public class Parser {
 
             boolean isAddCommand = info[0].equals("todo") || info[0].equals("deadline") || info[0].equals("event");
             if (!isAddCommand) {
-                throw new DukeException("\u2639 OOPS!!! I do not understand what did you just typed.");
+                throw new DukeException("☹ OOPS!!! I do not understand what did you just typed.");
             }
             // if info has length 1 it means that only the type of item is there but no description
             if (info.length == 1 && isAddCommand) {
-                throw new DukeException("\u2639 OOPS!!! The description of a task cannot be empty.");
+                throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
             }
 
             String[] result = new String[2];
@@ -108,7 +108,8 @@ public class Parser {
                 String[] dateTimeArr = info[1].split("/by");
                 // if it is a deadline event but no slash the info will be just 1 string after split
                 if (dateTimeArr.length <= 1) {
-                    throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this task.");
+                    throw new DukeException("☹ OOPS!!! You need a "
+                            + "/by to separate out the date time for this task.");
                 }
                 result[0] = "deadline";
                 result[1] = dateTimeArr[0].trim();
@@ -117,7 +118,8 @@ public class Parser {
                 String[] dateTimeArr = info[1].split("/at");
                 // if it is a deadline event but no slash the info will be just 1 string after split
                 if (dateTimeArr.length <= 1) {
-                    throw new DukeException("\u2639 OOPS!!! You need a /at to separate out the date time for this task.");
+                    throw new DukeException("☹ OOPS!!! You need a "
+                            + "/at to separate out the date time for this task.");
                 }
                 result[0] = "event";
                 result[1] = dateTimeArr[0].trim();

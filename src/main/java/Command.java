@@ -1,3 +1,15 @@
+/**
+ * Represents a command which has specific uses.
+ * @see TaskList
+ * @see Task
+ * @see AddCommand
+ * @see ByeCommand
+ * @see DeleteCommand
+ * @see DoneCommand
+ * @see FindCommand
+ * @see ListCommand
+ */
+
 public abstract class Command {
     String stringCommand;
 
@@ -15,7 +27,7 @@ public abstract class Command {
      * @param ui
      * @param storage
      */
-    public abstract void execute(TaskList taskList, UI ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Checks if Duke will end.

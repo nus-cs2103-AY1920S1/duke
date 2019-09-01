@@ -1,3 +1,8 @@
+/**
+ * Represents a command which shuts down Duke.
+ * @see Duke
+ */
+
 public class ByeCommand extends Command{
     /**
      * Constructor for ByeCommand
@@ -14,7 +19,7 @@ public class ByeCommand extends Command{
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.bye();
         storage.rewriteData();
     }

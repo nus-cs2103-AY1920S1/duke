@@ -1,5 +1,9 @@
 import java.time.LocalDateTime;
 
+/**
+ * Represents a type of Task object with a fixed time format.
+ * @see Task
+ */
 public class Event extends Task{
     protected LocalDateTime at;
 

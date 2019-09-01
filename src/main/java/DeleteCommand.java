@@ -1,3 +1,9 @@
+/**
+ * Represents a command which deletes Task specified in an index in the Tasklist.
+ * @see TaskList
+ * @see Task
+ */
+
 public class DeleteCommand extends Command {
     String[] commandSplit = super.stringCommand.split(" ");
 
@@ -16,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         int index = Integer.parseInt(commandSplit[1]);
         ui.printDeletedMessage();
         taskList.delete(index);

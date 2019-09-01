@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a command which finds the Tasks in the Tasklist which contains the same use input String.
+ * @see TaskList
+ * @see Task
+ */
 public class FindCommand extends Command{
     private String findKeywork;
 
@@ -20,7 +25,7 @@ public class FindCommand extends Command{
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : taskList.getTasks()) {
             if (t.description.contains(findKeywork)) {

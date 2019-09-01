@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage object which will read and write files into specific file path.
+ */
 public class Storage {
     private ArrayList<Task> tasks = new ArrayList<>();
     private String filePath;

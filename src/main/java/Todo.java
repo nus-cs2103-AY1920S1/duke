@@ -1,3 +1,8 @@
+/**
+ * Represents a type of Task object.
+ * @see Task
+ */
+
 public class Todo extends Task{
     /**
      * Constructor for Todo

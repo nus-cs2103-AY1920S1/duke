@@ -1,5 +1,8 @@
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task object.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

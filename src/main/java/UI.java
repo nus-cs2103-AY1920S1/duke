@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UI {
+/**
+ * Represents a user interface which interacts with the user.
+ */
+public class Ui {
     Scanner scanner = new Scanner(System.in);
 
     /**
      * Default constructor.
      */
-    public UI() {
+    public Ui() {
     }
 
     /**

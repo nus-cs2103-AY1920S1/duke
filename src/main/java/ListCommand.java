@@ -1,3 +1,9 @@
+/**
+ * Represents a command which lists out the Tasks in the Tasklist.
+ * @see TaskList
+ * @see Task
+ */
+
 public class ListCommand extends Command {
     /**
      * Constructor for ListCommand
@@ -14,7 +20,7 @@ public class ListCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printListMessage();
         ui.printTaskList(taskList);
         taskList.list();

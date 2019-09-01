@@ -1,5 +1,9 @@
 import java.util.InputMismatchException;
-
+/**
+ * Represents a command which adds Task to the Tasklist.
+ * @see TaskList
+ * @see Task
+ */
 public class AddCommand extends Command {
     String[] commandSplit = super.stringCommand.split(" ");
     String deadline = "deadline";
@@ -21,7 +25,7 @@ public class AddCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, UI ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task addTask;
         if (commandSplit[0].equalsIgnoreCase(deadline)) {
             String details = super.stringCommand.substring(deadline.length()).trim();

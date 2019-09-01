@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a task list that would be populated by task objects.
+ * @see Task
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

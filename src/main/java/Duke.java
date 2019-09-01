@@ -2,10 +2,15 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
 
+/**
+ * The Duke program implements an application that helps users to keep track of their tasks.
+ *
+ * @author hooncp
+ */
 public class Duke {
     private TaskList taskList;
     private Storage storage;
-    private UI ui;
+    private Ui ui;
     private boolean isExit;
 
     /**
@@ -15,7 +20,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
-        ui = new UI();
+        ui = new Ui();
         isExit = false;
         try {
             taskList = new TaskList(storage.load());

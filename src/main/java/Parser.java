@@ -1,5 +1,9 @@
 import java.util.InputMismatchException;
 
+/**
+ * Represents a parser object which takes in user input and changes them into command for duke to understand.
+ * @see Command
+ */
 public class Parser {
 
     /**

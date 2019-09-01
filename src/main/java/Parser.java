@@ -24,11 +24,11 @@ public class Parser {
         case "find":
             return new FindCommand(currArray[1]);
         case "todo":
-            return new AddCommand(Todo.parse(currArray));
+            return new AddCommand(Todo.process(currArray));
         case "deadline":
-            return new AddCommand(Deadline.parse(currArray));
+            return new AddCommand(Deadline.process(currArray));
         case "event":
-            return new AddCommand(Event.parse(currArray));
+            return new AddCommand(Event.process(currArray));
         case "help":
             return new HelpCommand();
         default:

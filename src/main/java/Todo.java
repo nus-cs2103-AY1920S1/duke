@@ -19,7 +19,7 @@ public class Todo extends Task {
      * @return Todo task created.
      * @throws DukeException If the description of the todo is empty.
      */
-    public static Todo parse(String[] fullCommand) throws DukeException {
+    public static Todo process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("     OOPS!!! The description of a todo cannot be empty :-(");
         }

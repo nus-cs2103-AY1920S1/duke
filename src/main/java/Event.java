@@ -25,7 +25,7 @@ public class Event extends Task {
      * @return Event object created.
      * @throws DukeException If the deadline has no description, or no date/time.
      */
-    public static Event parse(String[] fullCommand) throws DukeException {
+    public static Event process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("     OOPS!!! The description of an event cannot be empty :-(");
         }

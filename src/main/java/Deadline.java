@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @return Deadline object created.
      * @throws DukeException If the deadline has no description, or no date/time.
      */
-    public static Deadline parse(String[] fullCommand) throws DukeException {
+    public static Deadline process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("     OOPS!!! The description of a deadline cannot be empty :-(");
         }

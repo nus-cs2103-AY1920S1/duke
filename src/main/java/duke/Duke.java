@@ -5,11 +5,16 @@ import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  * Main Driver class housing the infinite loop.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -24,6 +29,9 @@ public class Duke {
             this.taskList = new TaskList(); // only load the taskList if no error
         }
     }
+
+    // JavaFX GUI won't run without this.
+    public Duke() { }
 
     /**
      * The main loop for Duke.
@@ -49,5 +57,20 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
+    }
+
+    /**
+     * The entry point for the JavaFX application.
+     *
+     * @param primaryStage the stage to render the JavaFX nodes.
+     */
+    @Override
+    public void start(Stage primaryStage) {
+        Label helloWorld = new Label("Hello World!"); // Create a new label control
+        helloWorld.setFont(new Font("Arial", 50));
+        Scene scene = new Scene(helloWorld); // Set the scene to be our Label
+
+        primaryStage.setScene(scene); // Set the stage to show our screen
+        primaryStage.show(); // Render the stage
     }
 }

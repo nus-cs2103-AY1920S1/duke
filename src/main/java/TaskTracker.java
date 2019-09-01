@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class TaskTracker {
+class TaskTracker {
 
     private ArrayList<Task> taskList = new ArrayList<>();
 
-    public void process(String command) {
+    void process(String command) {
         String action = command.split(" ")[0];
         try {
             switch (action) {
@@ -103,4 +103,5 @@ public class TaskTracker {
                 "     Now you have " + taskList.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________");
     }
+
 }

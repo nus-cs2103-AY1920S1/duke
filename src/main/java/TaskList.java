@@ -30,14 +30,17 @@ public class TaskList {
 	}
 
 	public int getCounter () {
+
 		return counter;
 	}
 
 	public Task getTask(int index) {
+
 		return tasks.get(index);
 	}
 
 	public ArrayList<Task> getTaskList() {
+
 		return tasks;
 	}
 }

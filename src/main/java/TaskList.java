@@ -28,51 +28,41 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    void displayTaskList() {
-        System.out.println("Here are the tasks in your list:");
+    String displayTaskList() {
+        String output = "Here are the tasks in your list:\n";
         int numCommands = 0;
         for (Task i : taskList) {
             numCommands += 1;
-            System.out.println(numCommands + "." + i);
+            output += (numCommands + "." + i + "\n");
         }
+        return output;
     }
 
     void addToDo(Todo newTodo) {
         taskList.add(newTodo);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(newTodo);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     void addDeadline(Deadline newDeadline) {
         taskList.add(newDeadline);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(newDeadline);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     void addEvent(Event newEvent) {
         taskList.add(newEvent);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(newEvent);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     void deleteTask(int taskNumber) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(taskList.get(taskNumber - 1));
         taskList.remove(taskNumber - 1);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    void findTasks(String taskName) {
-        System.out.println("Here are the matching tasks in your list");
+    String findTasks(String taskName) {
+        String output = "Here are the matching tasks in your list\n";
         int numCommands = 0;
         for (Task i : taskList) {
             numCommands += 1;
             if (i.description.toLowerCase().contains(taskName.toLowerCase())) {
-                System.out.println(numCommands + "." + i);
+                output += (numCommands + "." + i + "\n");
             }
         }
+        return output;
     }
 }

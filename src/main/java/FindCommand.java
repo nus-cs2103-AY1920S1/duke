@@ -11,14 +11,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         try {
             /*Check if description is empty (does not check when user input
               multiple spaces as the description.
             */
             if (!commandDesc.substring(5).equals((""))) {
-
-                tasks.findTasks(commandDesc.substring(5));
+                String output = tasks.findTasks(commandDesc.substring(5));
+                return output;
             } else {
                 throw new EmptyDescDukeException("find");
             }

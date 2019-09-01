@@ -6,6 +6,7 @@
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,7 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -32,7 +33,8 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Quack.png"));
 
-    public Duke(String filePath) throws IOException {
+    public Duke() throws IOException {
+        String filePath = "/data/tasks.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         //Load tasks from hard disk if file exists
@@ -44,33 +46,9 @@ public class Duke extends Application{
         }
     }
 
-    public Duke() {
-
-    }
-
-    public void run() throws IOException {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-        ui.exit();
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
-    }
-
+    /**
+     * Sets up GUI.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -91,8 +69,12 @@ public class Duke extends Application{
         stage.setScene(scene);
         stage.show();
 
+        Label welcomeText = new Label("Hello! I'm Duke\nWhat can I do for you?\n");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeText, new ImageView(duke)));
+
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Quack");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -118,7 +100,7 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -154,12 +136,16 @@ public class Duke extends Application{
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        String text = userInput.getText();
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        if (text.equals("bye")) {
+            userInput.setEditable(false);
+        }
         userInput.clear();
     }
 
@@ -168,6 +154,11 @@ public class Duke extends Application{
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
 }

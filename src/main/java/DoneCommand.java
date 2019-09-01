@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         try {
             //Error if user inputs spaces
             if (commandDesc.substring(5).split(" ")[0].equals("")) {
@@ -27,8 +27,9 @@ public class DoneCommand extends Command {
             if (taskNumber > 0 && taskNumber <= tasks.taskList.size()) {
                 storage.editsFile(System.getProperty("user.dir"), tasks.taskList.get(taskNumber - 1).stringForAppend());
                 tasks.taskList.get(taskNumber - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(tasks.taskList.get(taskNumber - 1));
+                String output = "Nice! I've marked this task as done: \n";
+                output += tasks.taskList.get(taskNumber - 1) + "\n";
+                return output;
             } else {
                 throw new InvalidTaskNumberDukeException("invalid");
             }

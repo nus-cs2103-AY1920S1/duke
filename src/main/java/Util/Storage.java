@@ -107,17 +107,12 @@ public class Storage {
             else doneType = "0 | ";
             String after = taskList.getTaskList().get(i).toString().substring(7);
             String desc = taskList.getTaskList().get(i).getDescription();
-            String atby;
-            if(taskList.getTaskList().get(i) instanceof Todo){
+            String atby = "";
             if(taskList.getTaskList().get(i) instanceof Todo) {
                 atby = "";
-            } else if(taskList.getTaskList().get(i) instanceof Deadline){
-                String[] strArr = after.split( " \\(by:" );
             } else if(taskList.getTaskList().get(i) instanceof Deadline) {
-                String[] strArr = after.split( " \\(by:");
+                String[] strArr = after.split(" \\(by:");
                 atby = " |" + strArr[1].replace(")", "");
-            } else if(taskList.getTaskList().get(i) instanceof Event){
-                String[] strArr = after.split( " \\(at:" );
             } else if(taskList.getTaskList().get(i) instanceof Event) {
                 String[] strArr = after.split( " \\(at:");
                 atby = " |" + strArr[1].replace(")", "");

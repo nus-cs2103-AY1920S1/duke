@@ -5,6 +5,10 @@ import seedu.duke.Storage;
 import seedu.duke.Parser;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.DukeNoSuchCommandException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Main class of this project.
@@ -12,7 +16,7 @@ import seedu.duke.exception.DukeNoSuchCommandException;
  * To run this program, create the Duke object, and use the .run() method.
  * @author Lim Daekoon
  */
-public class Duke {
+public class Duke extends Application {
 
     private Ui ui;
     private Parser parser;
@@ -98,5 +102,14 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

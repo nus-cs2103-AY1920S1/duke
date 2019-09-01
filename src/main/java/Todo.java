@@ -1,6 +1,6 @@
 package duke.task;
 
-
+import duke.task.Todo;
 
 public class Todo extends Task {
     String description;

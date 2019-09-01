@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.*;
 import duke.exception.*;
-import duke.task.Todo;
+import duke.task.*;
 
 public class TodoCommand extends AddCommand {
     boolean isDone;

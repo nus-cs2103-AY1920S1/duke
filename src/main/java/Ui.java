@@ -17,7 +17,7 @@ public class Ui {
     /**
      * Prints greeting message to user on application launch.
      */
-    public void printGreeting() {
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -34,7 +34,7 @@ public class Ui {
      * Reads user input.
      * @return
      */
-    public String getUserInput() {
+    public String readCommand() {
         String userInput = sc.nextLine();
         return userInput;
     }
@@ -43,9 +43,8 @@ public class Ui {
      * Prints exit message and exists the application.
      */
     public static void handleBye() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________");
+        System.out.println("     Bye. Hope to see you again soon!");
+        showLine();
         System.exit(0);
     }
 
@@ -57,46 +56,25 @@ public class Ui {
      */
     public static void handleList(String input, TaskList tasks) throws DukeException {
         String[] inputStringArr = input.split(" ");
-        try {
-            if (inputStringArr.length > 1) {
-                throw new DukeException("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! The list command should not be followed by other text!\n" +
-                        "    ____________________________________________________________\n");
-            } else {
-                System.out.println("    ____________________________________________________________\n" +
-                        "     Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    int listNum = i + 1;
-                    Task t = tasks.get(i);
-                    if (t.getType().equals("todo")) {
-                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
-                                + t.toString());
-                    } else if (t.getType().equals("event")) {
-                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
-                                + t.toString() + " (at: " + t.getDate() + ")");
-                    } else {
-                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
-                                + t.toString() + " (by: " + t.getDate() + ")");
-                    }
+        if (inputStringArr.length > 1) {
+            throw new DukeException("     ☹ OOPS!!! The list command should not be followed by other " +
+                    "text!");
+        } else {
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                int listNum = i + 1;
+                Task t = tasks.get(i);
+                if (t.getType().equals("todo")) {
+                    System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                            + t.toString());
+                } else if (t.getType().equals("event")) {
+                    System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                            + t.toString() + " (at: " + t.getDate() + ")");
+                } else {
+                    System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                            + t.toString() + " (by: " + t.getDate() + ")");
                 }
-                System.out.println("    ____________________________________________________________\n");
             }
-        } catch(DukeException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
-
-    /**
-     * Print error message when user input does not match any valid command.
-     * @throws DukeException When user input does not match any valid command
-     */
-    public static void handleBadCommand() throws DukeException {
-        try {
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "    ____________________________________________________________\n");
-        } catch(DukeException ex) {
-            System.err.println(ex.getMessage());
         }
     }
 
@@ -109,37 +87,26 @@ public class Ui {
      */
     public static void handleDone(String input, TaskList tasks, Storage storage) throws DukeException {
         String[] inputStringArr = input.split(" ");
-        try {
-            if (inputStringArr.length > 1) {
-                int taskNum = Integer.parseInt(inputStringArr[1]);
-                int totalTasks = tasks.size();
-                if (taskNum < 1 || taskNum > totalTasks) {
-                    throw new DukeException("    ____________________________________________________________\n" +
-                            "     ☹ OOPS!!! The number provided is not within the range of the list.\n" +
-                            "    ____________________________________________________________\n");
-                } else {
-                    Task t = tasks.get(taskNum - 1);
-                    boolean isDone = t.getStatus();
-                    if (isDone) {
-                        throw new DukeException("    ____________________________________________________________\n" +
-                                "     ☹ OOPS!!! The task has already been marked as completed.\n" +
-                                "    ____________________________________________________________\n");
-                    } else {
-                        t.setDone();
-                        System.out.println("    ____________________________________________________________\n" +
-                                "     Nice! I've marked this task as done: \n" +
-                                "       [" + '+' + "] " + t + '\n' +
-                                "    ____________________________________________________________\n");
-                        storage.rewriteFile(tasks);
-                    }
-                }
+        if (inputStringArr.length > 1) {
+            int taskNum = Integer.parseInt(inputStringArr[1]);
+            int totalTasks = tasks.size();
+            if (taskNum < 1 || taskNum > totalTasks) {
+                throw new DukeException("     ☹ OOPS!!! The number provided is not within the range of the " +
+                        "list.");
             } else {
-                throw new DukeException("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! Please specify the completed task's number.\n" +
-                        "    ____________________________________________________________\n");
+                Task t = tasks.get(taskNum - 1);
+                boolean isDone = t.getStatus();
+                if (isDone) {
+                    throw new DukeException("     ☹ OOPS!!! The task has already been marked as completed.");
+                } else {
+                    t.setDone();
+                    System.out.println("     Nice! I've marked this task as done: \n" +
+                            "       [" + '+' + "] " + t);
+                    storage.rewriteFile(tasks);
+                }
             }
-        } catch(DukeException ex) {
-            System.err.println(ex.getMessage());
+        } else {
+            throw new DukeException("     ☹ OOPS!!! Please specify the completed task's number.");
         }
     }
 
@@ -152,24 +119,16 @@ public class Ui {
      */
     public static void handleTodo(String input, TaskList tasks, Storage storage) throws DukeException {
         String[] inputStringArr = input.split(" ");
-        try {
-            if (inputStringArr.length > 1) {
-                String taskName = ((input.split(" ", 2))[1]).strip();
-                Todo t = new Todo(taskName);
-                tasks.add(t);
-                System.out.println("    ____________________________________________________________\n" +
-                        "     Got it. I've added this task: \n" +
-                        "       [T]" + "[ ]" + ' ' + t+ '\n' +
-                        "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                        "    ____________________________________________________________\n");
-                storage.appendToFile("T | 0 | " + taskName + '\n');
-            } else {
-                throw new DukeException("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
-                        "    ____________________________________________________________\n");
-            }
-        } catch(DukeException ex) {
-            System.err.println(ex.getMessage());
+        if (inputStringArr.length > 1) {
+            String taskName = ((input.split(" ", 2))[1]).strip();
+            Todo t = new Todo(taskName);
+            tasks.add(t);
+            System.out.println("     Got it. I've added this task: \n" +
+                    "       [T]" + "[ ]" + ' ' + t+ '\n' +
+                    "     Now you have " + tasks.size() + " tasks in the list.");
+            storage.appendToFile("T | 0 | " + taskName + '\n');
+        } else {
+            throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
@@ -186,11 +145,9 @@ public class Ui {
         DateTime dt = new DateTime(date);
         Deadline d = new Deadline(taskName, dt.toString());
         tasks.add(d);
-        System.out.println("    ____________________________________________________________\n" +
-                "     Got it. I've added this task: \n" +
+        System.out.println("     Got it. I've added this task: \n" +
                 "       [D][ ] " + d + " (by: " + dt + ")\n" +
-                "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                "    ____________________________________________________________\n");
+                "     Now you have " + tasks.size() + " tasks in the list.");
         storage.appendToFile("D | 0 | " + taskName + " | " + date + '\n');
     }
 
@@ -207,11 +164,9 @@ public class Ui {
         DateTime dt = new DateTime(date);
         Event e = new Event(taskName, dt.toString());
         tasks.add(e);
-        System.out.println("    ____________________________________________________________\n" +
-                "     Got it. I've added this task: \n" +
+        System.out.println("     Got it. I've added this task: \n" +
                 "       [E][ ] " + e + " (at: " + dt + ")\n" +
-                "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                "    ____________________________________________________________\n");
+                "     Now you have " + tasks.size() + " tasks in the list.");
         storage.appendToFile("E | 0 | " + taskName + " | " + date + '\n');
     }
 
@@ -226,8 +181,7 @@ public class Ui {
         int taskNum = Integer.parseInt(inputStringArr[1]);
         Task t = tasks.get(taskNum - 1);
         tasks.remove(taskNum - 1);
-        System.out.println("    ____________________________________________________________\n" +
-                "     Noted. I've removed this task: ");
+        System.out.println("     Noted. I've removed this task: ");
         if (t.getType().equals("todo")) {
             System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t);
         } else if (t.getType().equals("event")) {
@@ -237,16 +191,14 @@ public class Ui {
             System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + " (by: "
                     + t.getDate() + ")");
         }
-        System.out.println("     Now you have " + tasks.size() + " tasks in the list.\n" +
-                "    ____________________________________________________________\n");
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
         storage.rewriteFile(tasks);
     }
 
     public static void handleFind(String input, TaskList tasks) {
         String[] inputStringArr = input.split(" ", 2);
         String searchTerm = inputStringArr[1];
-        System.out.println("    ____________________________________________________________\n" +
-                "     Here are the matching tasks in your list:");
+        System.out.println("     Here are the matching tasks in your list:");
         int listNum = 1;
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -263,6 +215,13 @@ public class Ui {
                 }
             }
         }
+    }
+
+    public static void showLine() {
         System.out.println("    ____________________________________________________________");
+    }
+
+    public void showError(String errorMsg) {
+        System.out.println(errorMsg);
     }
 }

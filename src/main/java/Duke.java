@@ -38,47 +38,23 @@ public class Duke {
         }
     }
 
-    /**
-     * This method executes the program until the user issues an exit command.
-     */
-    public void run() {
-        ui.printGreeting();
-        String command = "";
-        do {
-            String userInput = ui.getUserInput();
-            Parser p = new Parser(userInput);
-            command = p.getCommand();
-            executeCommand(command, userInput, tasks, storage);
-        } while (!command.equals("bye"));
-    }
 
-    /**
-     * This is the method that executes the command processed by the Parser class and uses the
-     * methods in the Ui class to interact with the user.
-     * @param command Command derived from user input by the Parser class
-     * @param input Original input by user
-     * @param tasks List of tasks
-     * @param storage Loads and saves tasks from the file specified in the filepath
-     */
-    public void executeCommand(String command, String input, TaskList tasks, Storage storage) {
-        if (command.equals("bye")) {
-            ui.handleBye();
-        } else if (command.equals("list")) {
-            ui.handleList(input, tasks);
-        } else if (command.equals("done")) {
-            ui.handleDone(input, tasks, storage);
-        } else if (command.equals("todo")) {
-            ui.handleTodo(input, tasks, storage);
-        } else if (command.equals("deadline")) {
-            ui.handleDeadline(input, tasks, storage);
-        } else if (command.equals("event")) {
-            ui.handleEvent(input, tasks, storage);
-        } else if (command.equals("delete")) {
-            ui.handleDelete(input, tasks, storage);
-        } else if (command.equals("find")) {
-            ui.handleFind(input, tasks);
-        } else {
-            ui.handleBadCommand();
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+                System.out.println();
+            }
         }
     }
 

@@ -56,9 +56,10 @@ public class TaskList {
     }
 
     /**
-     * Returns the ArrayList<Task> inside the TaskList object
+     * Returns the ArrayList<Task> inside the TaskList object.
+     * Is a getter function to get the private attribute, listOfTasks.
      *
-     * @return ArrayList<Task>
+     * @return ArrayList<Task? object.
      */
     public ArrayList<Task> getArrayList(){
         return this.listOfTasks;
@@ -67,8 +68,8 @@ public class TaskList {
     /**
      * Returns another TaskLIst object which contains Task objects that is similar to the search string.
      *
-     * @param searchTerm
-     * @return
+     * @param searchTerm String that needs to be inside the Task description of similar Tasks.
+     * @return Tasklist object, which has an ArrayList <Task> that only contains matching Task objects.
      */
     public TaskList findSimilarTasks (String searchTerm){
 
@@ -86,7 +87,7 @@ public class TaskList {
             }
         }
 
-        // Create a TaskList object to encapsulate the ArrayList<Task>
+        // Create a TaskList object to encapsulate the ArrayList<Task>.
         return  new TaskList(matchingTasks);
     }
 

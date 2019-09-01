@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * The deadline task the user does.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected Date time; //The deadline.
 
     /**
@@ -23,7 +23,7 @@ public class Deadline extends Task{
         super(description);
         this.type = Type.D;
         try {
-            SimpleDateFormat formatter =new SimpleDateFormat("dd/MM/yyyy HHmm");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
             this.time = formatter.parse(time);
         } catch (ParseException e) {
             throw new DukeException("Time format wrong");
@@ -49,7 +49,7 @@ public class Deadline extends Task{
     @Override
     public String toFile() {
         String doneState = isDone ? "1" : "0";
-        SimpleDateFormat formatter =new SimpleDateFormat("dd/MM/yyyy HHmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         return String.format("%s | %s | %s | %s", type, doneState, description, formatter.format(time));
     }
 }

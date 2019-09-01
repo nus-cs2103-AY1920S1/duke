@@ -7,7 +7,7 @@ import duke.ui.Ui;
 /**
  * Represents a list command that Duke will operate.
  */
-public class listCommand implements Command {
+public class ListCommand implements Command {
 
     /**
      * Returns should the command exit.

@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a command that Duke will operate
+ * Represents a command that Duke will operate.
  */
 public interface Command {
     /**

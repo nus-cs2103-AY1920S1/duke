@@ -44,7 +44,7 @@ public class Storage {
         }
 
         Scanner readFileScanner = new Scanner(f);
-        while(readFileScanner.hasNext()) {
+        while (readFileScanner.hasNext()) {
             String[] todoTask = readFileScanner.nextLine().split(" \\| ");
             switch (todoTask[0]) {
                 case "T":

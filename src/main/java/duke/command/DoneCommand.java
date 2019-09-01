@@ -6,21 +6,19 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
 /**
- * Represents an add command that Duke will operate.
+ * Represents a delete command that Duke will operate.
  */
-public class addCommand implements Command {
-    Task task; //The task should add.
+public class DoneCommand implements Command {
+    private int doneIndex; //The index in tasklist that should be done.
 
     /**
-     * The initiate constructor.
+     * Initiates object.
      *
-     * @param task Task should add.
+     * @param doneIndex The index should be done.
      */
-    public addCommand(Task task) {
-        this.task = task;
+    public DoneCommand(int doneIndex) {
+        this.doneIndex = doneIndex;
     }
 
     /**
@@ -43,9 +41,8 @@ public class addCommand implements Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(task);
-        ArrayList<Task> list = tasks.getList();
-        ui.showAdd(task, list.size());
-        storage.saveFile(list);
+        Task doneTask = tasks.doneTask(doneIndex);
+        ui.showDone(doneTask);
+        storage.saveFile(tasks.getList());
     }
 }

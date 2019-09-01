@@ -14,7 +14,7 @@ public abstract class Task {
      * @param description The task's description.
      */
     public Task(String description) {
-            this.description = description;
+        this.description = description;
     }
 
     /**

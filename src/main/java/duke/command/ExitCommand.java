@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Represents an exit command that Duke will operate.
  */
-public class exitCommand implements Command {
+public class ExitCommand implements Command {
 
     /**
      * Returns should the command exit.

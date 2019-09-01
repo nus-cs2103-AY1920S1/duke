@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class Duke {
 
 	private static ArrayList<Task> list = new ArrayList<>();
+	private static SimpleDateFormat formatterIn = new SimpleDateFormat("d/M/yyyy HHmm");
+	private static SimpleDateFormat formatterOut = new SimpleDateFormat("d MMM yyyy ha");
 	private static String filename = "./data/duke.txt"; // todo isDone? description
 
 	private static void initialLoad() throws DukeException {
-		
-
 		String line = null; // in case file is empty
 
 		try {
@@ -68,7 +71,11 @@ public class Duke {
 			throw new DukeException("Put / before by!");
 		}
 		String taskDesc = description.substring(0, indexBy - 1); // start after space, end before space before /
-		String by = description.substring(indexBy + 4);
+
+		String dateInString = line.substring(indexBy + 4);
+		Date date = formatterIn.parse(dateInString);
+		String by = formatterOut.format(date);
+
 		Deadline dead = new Deadline(isDone, taskDesc, by);
 		list.add(dead);
 		return dead;
@@ -80,7 +87,11 @@ public class Duke {
 			throw new DukeException("Put / before at!");
 		}
 		String taskDesc = description.substring(0, indexAt - 1); // start after space, end before space before /
-		String at = description.substring(indexAt + 4);
+
+		String dateInString = line.substring(indexAt + 4);
+		Date date = formatterIn.parse(dateInString);
+		String at = formatterOut.format(date);
+
 		Event event = new Event(isDone, taskDesc, at);
 		list.add(event);
 		return event;
@@ -153,6 +164,7 @@ public class Duke {
 				} else {
 					Task task;
 					String line = scanner.nextLine().trim(); // would be \n if incorrect input
+
 					switch (next) {
 					case "todo":
 						if (line.isEmpty()) {

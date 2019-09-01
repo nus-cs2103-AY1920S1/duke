@@ -2,8 +2,8 @@ package seedu.duke.task;
 
 public abstract class Task {
 
-    protected String taskName;
-    protected boolean isDone;
+    private String taskName;
+    private boolean isDone;
 
     public Task(String task) {
         this.taskName = task;

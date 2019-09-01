@@ -8,7 +8,7 @@ public class Ui {
     private static final String LINE = "--------------------------------------------";
     private static final String INDENT = "    ";
 
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);

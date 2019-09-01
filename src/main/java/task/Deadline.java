@@ -8,8 +8,8 @@ import java.text.ParseException;
 
 public class Deadline extends Task {
 
-    protected Date by;
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private Date by;
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public Deadline(String task, String by) throws DukeException {
         super(task);

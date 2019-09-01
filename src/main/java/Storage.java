@@ -17,14 +17,14 @@ import java.text.SimpleDateFormat;
 
 public class Storage {
 
-    String directory;
-    FileReader fileReader;
-    FileWriter fileWriter;
-    BufferedReader bufferedReader;
-    BufferedWriter bufferedWriter;
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private String directory;
+    private FileReader fileReader;
+    private FileWriter fileWriter;
+    private BufferedReader bufferedReader;
+    private BufferedWriter bufferedWriter;
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    protected Storage(String dir) {
+    public Storage(String dir) {
         directory = dir;
     }
 

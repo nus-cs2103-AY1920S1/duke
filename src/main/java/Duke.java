@@ -38,7 +38,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * This method contains the main logic of the program. Program is executed until exit command is issued
+     * by the user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

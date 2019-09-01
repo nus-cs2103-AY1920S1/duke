@@ -6,7 +6,7 @@ public class Parser {
 
     /**
      * This method is used to retrieve the command from the user input.
-     * @return String Command after processing user input
+     * @return Command Command object after processing user input
      */
     public static Command parse(String input) {
         String[] inputStringArr = input.split(" ");

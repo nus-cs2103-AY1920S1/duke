@@ -8,10 +8,15 @@ import duke.util.Ui;
 
 import java.io.FileNotFoundException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
  */
-public class Duke {
+public class Duke extends Application {
     /** User Interface of Duke that handles input and output to and from the command line. */
     private Ui ui;
     /** Storage where the Tasks are retrieved from and stored to. */
@@ -21,16 +26,23 @@ public class Duke {
 
     /**
      * Constructor for Duke that instantiates the Ui and Storage classes.
-     *
-     * @param filePath Path to .txt file for Storage of tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**

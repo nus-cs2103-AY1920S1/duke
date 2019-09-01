@@ -1,3 +1,7 @@
+/**
+ * Creates a deadline for a task which has to be done.
+ * A sub class of Task.
+ */
 public class Deadline extends Task {
 
 	protected String by;

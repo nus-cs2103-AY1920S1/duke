@@ -3,6 +3,11 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * The individual project portion for CS2103T which act as a task list
+ * manager where you are able to input deadlines, events or things that needs
+ * to be done.
+ */
 public class Duke {
 
 	DukeReadFile rf;

@@ -1,3 +1,7 @@
+/**
+ * Creates a DukeInvalidArgumentException which extends
+ * DukeException to handle invalid arguments.
+ */
 public class DukeInvalidArgumentException extends DukeException {
 
 	protected String inputMessage;

@@ -3,6 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads the tasks that were saved in a text document
+ * when the program starts up.
+ */
 public class DukeReadFile {
 
 	protected static String filePath;

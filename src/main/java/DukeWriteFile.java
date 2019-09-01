@@ -1,6 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Writes the current tasks in the lst to a text document
+ * whenever the task list changes.
+ */
 public class DukeWriteFile {
 
 	protected static String filePath;

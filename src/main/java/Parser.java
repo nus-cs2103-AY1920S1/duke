@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Deals with making sense of the user command and formats
+ * the input by the user to a specified format.
+ */
 public class Parser {
 
 	Ui ui;

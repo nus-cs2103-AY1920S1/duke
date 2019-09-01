@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Stores the text for output and exception messages.
+ */
 public class Ui {
 	Scanner scanner;
 	String BORDER = "____________________________________________________________";

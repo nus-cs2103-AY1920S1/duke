@@ -1,3 +1,7 @@
+/**
+ * Creates a task with a description which is to be added
+ * to the task list.
+ */
 public class Task {
 
 	protected String description;

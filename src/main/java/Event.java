@@ -1,3 +1,6 @@
+/**
+ * Creates an event which will be added to the task list for reminders.
+ */
 public class Event extends Task {
 
 	protected String at;

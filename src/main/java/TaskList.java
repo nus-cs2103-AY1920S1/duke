@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Creates a task list for users to add new task.
+ */
 public class TaskList {
 
 	ArrayList<Task> tasks;

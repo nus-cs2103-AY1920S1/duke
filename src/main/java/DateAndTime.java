@@ -1,3 +1,7 @@
+/**
+ * Conversion for date and time from dd/mm/yyyy to [date] of
+ * [month] and 24 hour to 12 hour format respectively.
+ */
 public class DateAndTime {
 
 	protected String date;

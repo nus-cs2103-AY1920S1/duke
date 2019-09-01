@@ -1,3 +1,7 @@
+/**
+ * Creates a DukeException as a subclass of Exception to
+ * handle certain edge cases.
+ */
 public class DukeException extends Exception {
 
 	protected String inputMessage;

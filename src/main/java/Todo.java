@@ -1,3 +1,6 @@
+/**
+ * Creates a todo task which will be added to the task list.
+ */
 public class Todo extends Task {
 
 	public Todo(String description) {

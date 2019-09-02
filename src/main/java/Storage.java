@@ -91,7 +91,7 @@ public class Storage {
                 break;
 
             default:
-                Ui.print("Error reading task from save file.\n");
+                Ui.printBlock("Error reading task from save file.\n");
             }
             try {
                 nextLine = bufferedReader.readLine();

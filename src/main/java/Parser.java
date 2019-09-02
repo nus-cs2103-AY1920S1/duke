@@ -33,13 +33,6 @@ public class Parser {
 
         this.type = inputs[0];
         switch (type) {
-        case "bye":
-            this.description = null;
-            this.time = null;
-            this.index = null;
-            this.searchTerm = null;
-            break;
-
         case "list":
             this.description = null;
             this.time = null;

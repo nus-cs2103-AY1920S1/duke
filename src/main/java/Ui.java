@@ -1,7 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.exception.DukeException;
-import java.util.Scanner;
+import seedu.duke.DialogBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Class handling pretty printing and input reading for the program.
@@ -10,54 +15,68 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String LINE = "--------------------------------------------";
-    private static final String INDENT = "    ";
-
-    private Scanner sc;
+    private static VBox dialogContainer;
+    private static TextField userInput;
+    private static Image user;
+    private static Image duke;
 
     /**
-     * Constructs the new UI Object.
+     * Initializes the UI class.
+     * Must be run once every time.
+     * @param vBox vBox object that handles the dialogue.
+     * @param textField TextField object that contains user's input
+     * @param user Image object to represent user
+     * @param dukeImage Image object to represent duke
      */
-    public Ui() {
-        sc = new Scanner(System.in);
+    public static void initialize(VBox vBox, TextField textField, Image user, Image dukeImage) {
+        dialogContainer = vBox;
+        userInput = textField;
+        user = user;
+        duke = dukeImage;
     }
 
     /**
-     * Prints out the specified String with indentation.
-     * @param output String to be printed out.
-     */
-    public static void print(String output) {
-        System.out.println(INDENT + output);
-    }
-
-    /**
-     * Prints out multiple Strings with proper indenting and top and bottom horizontal lines.
-     * @param outputs Array containing all the strings to be printed out in a single block.
-     */
-    public static void printBlock(String[] outputs) {
-        print(LINE);
-        for (String output : outputs) {
-            print(" " + output);
-        }
-        print(LINE);
-    }
-
-    /**
-     * Prints out a single line of String within a block.
-     * @param output String to be printed out in a block.
-     */
-    public static void printBlock(String output) {
-        print(LINE);
-        print(" " + output);
-        print(LINE);
-    }
-
-    /**
-     * Reads in a line of input, and parses it.
+     * Reads in the user's command, and create a dialog box containing user's reply.
+     * Clears the user input after processing.
      * @return Parser object that parsed the line of input.
      * @throws DukeException If there is a problem with the command read in.
      */
-    public Parser readCommand() throws DukeException {
-        return new Parser(sc.nextLine());
+
+    public static Parser readCommand() throws DukeException {
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        dialogContainer.getChildren().addAll(
+            new DialogBox(userText, new ImageView(user))
+        );
+        userInput.clear();
+        return new Parser(input);
     }
+
+    /**
+     * Prints out multiple Strings onto a single dialog box (Duke).
+     * @param outputs Array containing all the strings to be printed out in a single block.
+     */
+    public static void printBlock(String[] outputs) {
+        String completeOutput = "";
+        for (String output : outputs) {
+            completeOutput = completeOutput + output + "\n";
+        }
+        Label dukeText = new Label(completeOutput);
+        dialogContainer.getChildren().addAll(
+            new DialogBox(dukeText, new ImageView(duke))
+        );
+
+    }
+
+    /**
+     * Prints out a single line of String onto a dialog box (Duke).
+     * @param output String to be printed out in a block.
+     */
+    public static void printBlock(String output) {
+        Label dukeText = new Label(output);
+        dialogContainer.getChildren().addAll(
+            new DialogBox(dukeText, new ImageView(duke))
+        );
+    }
+
 }

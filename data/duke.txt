@@ -1,2 +1,0 @@
-D|true|CS2103 iP|today
-E|false|birthday party|tmr 6pm-8pm

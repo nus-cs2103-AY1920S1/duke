@@ -23,7 +23,7 @@ public class Task {
     }
 
     public String toSaveFormat() {
-        return isDone + "|" + description;
+        return isDone + "`" + description;
     }
 
     @Override

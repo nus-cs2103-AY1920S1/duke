@@ -11,7 +11,7 @@ public class Todo extends Task {
     }
 
     public String toSaveFormat() {
-        return "T" + "|" + super.toSaveFormat() + '\n';
+        return "T" + "`" + super.toSaveFormat() + '\n';
     }
 
     @Override

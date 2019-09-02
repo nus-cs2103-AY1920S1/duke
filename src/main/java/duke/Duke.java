@@ -1,23 +1,22 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    public static final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private static final List<Task> TASKS = new ArrayList<>();
 
-    private static void loadData() throws IOException {
+    private static void loadData() throws DukeException, IOException {
         BufferedReader reader = new BufferedReader(new FileReader(
                 "/home/niclausliu/CS/Java/CS2103/duke/data/duke.txt"));
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] task = line.split("|");
+            String[] task = line.split("`");
             switch (task[0]) {
             case "T":
                 TASKS.add(new Todo(task[2], Boolean.parseBoolean(task[1])));
@@ -29,7 +28,7 @@ public class Duke {
                 TASKS.add(new Event(task[2], Boolean.parseBoolean(task[1]), task[3]));
                 break;
             default:
-                throw new IOException("Data file is corrupted");
+                throw new DukeException("Data file is corrupted");
             }
         }
     }
@@ -186,7 +185,7 @@ public class Duke {
     /**
      * Main method of duke project.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         Scanner scanner = new Scanner(System.in);
 
         loadData();

@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -21,6 +22,9 @@ import javafx.stage.Stage;
  * Main Driver class housing the infinite loop.
  */
 public class Duke extends Application {
+    private final Image IMAGE_USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image IMAGE_DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;

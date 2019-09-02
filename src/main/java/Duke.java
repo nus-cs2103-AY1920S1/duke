@@ -1,18 +1,18 @@
-import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Parser p = new Parser();
-        ArrayList<Tasks> listOfTasks = new ArrayList<Tasks>();
-
+        ArrayList<Tasks> listOfTasks = new ArrayList<>();
+        SaveToFile sf = new SaveToFile();
+        
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
-
         while(sc.hasNext()) {
-            String nextCmd = sc.nextLine(); 
+            String nextCmd = sc.nextLine();
             ArrayList<String> descriptions = p.parse(nextCmd);
             ArrayList<String> taskDescriptions = new ArrayList<>();
             String keyword = descriptions.get(0);
@@ -52,6 +52,7 @@ public class Duke {
                     taskDescriptions.add(descriptions.get(1));
                     Tasks todo = new Tasks(taskDescriptions);
                     listOfTasks.add(todo);
+                    sf.updateFile(listOfTasks);
                     System.out.println("Got it, todo added to tasks");
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("OOPS!! The description for todo cannot be empty!");
@@ -65,6 +66,7 @@ public class Duke {
                     taskDescriptions.add(descriptions.get(2));
                     Tasks deadline = new Tasks(taskDescriptions);
                     listOfTasks.add(deadline);
+                    sf.updateFile(listOfTasks);
                     System.out.println("Got it, new deadline added to list");
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
@@ -78,6 +80,7 @@ public class Duke {
                     taskDescriptions.add(descriptions.get(2));
                     Tasks event = new Tasks(taskDescriptions);
                     listOfTasks.add(event);
+                    sf.updateFile(listOfTasks);
                     System.out.println("Got it, new event added to schedule");
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
@@ -88,7 +91,9 @@ public class Duke {
                 System.out.println("OOPS!! I'm sorry, but I don't know what that means :-("); 
                 
             }
+
+
+            
         }
-           
     }
 }

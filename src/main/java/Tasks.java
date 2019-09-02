@@ -22,31 +22,19 @@ public class Tasks {
             this.taskDetails = inputList.get(1);
             this.time = inputList.get(2);
         }
+        this.status = 1;
+    }
+
+    protected void finishTask() {
         this.status = 0;
-    }
-
-    int getStatus() {
-        return status;
-    }
-
-    public void finishTask() {
-        status = 1;
-    }
-
-    String formatTime() {
-        String output = "";
-        if(time.length() > 1) {
-            output = time.substring(1);
-        }
-        return output;
     }
 
     @Override 
     public String toString() {
-        if(formatTime().length() < 1) {
-            return typeOfTask + " | " + status + " |" + taskDetails;
-        }
-        return typeOfTask + " | " + status + " |" + taskDetails + " | " + formatTime();
-    } 
+        if(this.typeOfTask.equals("T")) {
+            return typeOfTask + " | " + status + " | " + taskDetails;
+        }  
+        return typeOfTask + " | " + status + " | " + taskDetails + " | " + time;
+    }
 
 }

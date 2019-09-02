@@ -7,7 +7,12 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -15,9 +20,19 @@ import javafx.stage.Stage;
  * Main Driver class housing the infinite loop.
  */
 public class Duke extends Application {
+    private static final String FONT_NAME = "Arial";
+    private static final int FONT_SIZE = 50;
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+
+    // JavaFX
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     public Duke(String filePath) {
         this.ui = new Ui();
@@ -66,11 +81,20 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        Label helloWorld = new Label("Hello World!"); // Create a new label control
-        helloWorld.setFont(new Font("Arial", 50));
-        Scene scene = new Scene(helloWorld); // Set the scene to be our Label
+        // Step 1: Setting up required components
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
-        primaryStage.setScene(scene); // Set the stage to show our screen
-        primaryStage.show(); // Render the stage
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

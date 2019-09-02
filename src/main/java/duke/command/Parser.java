@@ -1,19 +1,6 @@
-package duke.io;
+package duke.command;
 
-import duke.command.Command;
-import duke.command.AddTaskCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.CompleteTaskCommand;
-import duke.command.ShowListCommand;
-import duke.command.ExitCommand;
-import duke.command.SearchCommand;
-import duke.command.Type;
-
-import duke.command.DukeMissingCommandException;
-import duke.command.DukeUnknownCommandException;
-import duke.command.DukeMissingParameterException;
-
-import duke.DukeException;
+import duke.error.DukeException;
 
 import java.util.Iterator;
 
@@ -45,7 +32,7 @@ public class Parser {
             int hour = dateAndTime.getHour();
             int minute = dateAndTime.getMinute();
 
-            StringBuffer dateTime = new StringBuffer();
+            StringBuilder dateTime = new StringBuilder();
 
             dateTime.append(getIntegerOrdinal(day));
             dateTime.append(" of ");
@@ -115,22 +102,22 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "todo":
-            commandType = Type.ADD_TODO;
+            commandType = Type.COMMAND_ADD_TODO;
             break;
         case "event":
-            commandType = Type.ADD_EVENT;
+            commandType = Type.COMMAND_ADD_EVENT;
             break;
         case "deadline":
-            commandType = Type.ADD_DEADLINE;
+            commandType = Type.COMMAND_ADD_DEADLINE;
             break;
         case "delete":
-            commandType = Type.DELETE;
+            commandType = Type.COMMAND_DELETE_TASK;
             break;
         case "done":
-            commandType = Type.COMPLETE;
+            commandType = Type.COMMAND_COMPLETE_TASK;
             break;
         case "find":
-            commandType = Type.SEARCH;
+            commandType = Type.COMMAND_SEARCH;
             break;
         default:
             throw new DukeUnknownCommandException();
@@ -151,7 +138,7 @@ public class Parser {
             // since split by whitespaces there will not be a word that is " "
         }
 
-        StringBuffer currentParameter = new StringBuffer();
+        StringBuilder currentParameter = new StringBuilder();
 
         for (int i = 1; i <= split.length; i++) {
             if (i == split.length || split[i].equals(nextDelimiter)) {
@@ -171,7 +158,7 @@ public class Parser {
                     }
                 }
 
-                currentParameter = new StringBuffer();
+                currentParameter = new StringBuilder();
                 parameterCount++;
             } else {
                 currentParameter.append(split[i]);
@@ -186,17 +173,17 @@ public class Parser {
         }
 
         switch (commandType) {
-        case DELETE:
+        case COMMAND_DELETE_TASK:
             return new DeleteTaskCommand(parametersProvided[0]);
-        case COMPLETE:
+        case COMMAND_COMPLETE_TASK:
             return new CompleteTaskCommand(parametersProvided[0]);
-        case SEARCH:
+        case COMMAND_SEARCH:
             return new SearchCommand(parametersProvided[0]);
-        case ADD_TODO:
+        case COMMAND_ADD_TODO:
             //Fallthrough
-        case ADD_DEADLINE:
+        case COMMAND_ADD_DEADLINE:
             //Fallthrough
-        case ADD_EVENT:
+        case COMMAND_ADD_EVENT:
             return new AddTaskCommand(commandType, parametersProvided);
         default:
             return null; //unreachable

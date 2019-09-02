@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 /**
- * Exception to be thrown when no command is given when one is expected
+ * A DukeException which can be thrown when no command is given.
  */
 public class DukeMissingCommandException extends DukeException {
 

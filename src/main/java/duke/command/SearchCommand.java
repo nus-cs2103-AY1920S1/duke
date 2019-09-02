@@ -1,10 +1,10 @@
 package duke.command;
 
 /**
- * Data structure to wrap the command to search for a task in the task list
+ * A Command which is used to tell Duke to search for a Task containing some given keyword in the TaskList.
  */
 public class SearchCommand extends Command {
-    public SearchCommand(String keyword) {
-        super(Type.SEARCH, keyword);
+    SearchCommand(String keyword) {
+        super(Type.COMMAND_SEARCH, keyword);
     }
 }

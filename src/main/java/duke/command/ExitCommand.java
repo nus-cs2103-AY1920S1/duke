@@ -1,14 +1,14 @@
 package duke.command;
 
 /**
- * Data structure to wrap the command to tell Duke to close
+ * The Command which is used to tell Duke to shut down.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Constructs the command which tells Duke to close
+     * Constructs the Command which tells Duke to shut down
      */
-    public ExitCommand() {
-        super(Type.EXIT);
+    ExitCommand() {
+        super(Type.COMMAND_EXIT);
     }
 }

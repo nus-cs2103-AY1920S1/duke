@@ -6,24 +6,27 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class DoneCommand extends Command {
-    private int taskId;
+import java.util.Arrays;
 
-    private static final String MESSAGE_DONE     = "Nice! I've marked this task as done:\n  %s";
+public class DoneCommand extends Command {
+    private int[] taskIds;
+
+    private static final String MESSAGE_DONE     = "Nice! I've marked the following tasks as done:";
 
     private static final String ERROR_INVALID_TASK_ID = "The id of the task must be a number. e.g. done 1";
 
     /**
      * Constructs a Done command.
      *
-     * @param taskId Id of task to mark as done.
+     * @param taskIds Ids of task to mark as done.
      */
-    public DoneCommand(int taskId) {
-        this.taskId = taskId;
+    public DoneCommand(int... taskIds) {
+        Arrays.sort(taskIds);
+        this.taskIds = taskIds;
     }
 
     /**
-     * Executes Done command to mark a task from the given TaskList as done.
+     * Executes Done command to mark tasks from the given TaskList as done.
      *
      * @param tasks Current TaskList.
      * @param ui Current Ui.
@@ -31,11 +34,14 @@ public class DoneCommand extends Command {
      * @throws DukeException If invalid id.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (taskId < 1 || taskId > tasks.size()) {
+        if (taskIds[0] < 1 || taskIds[taskIds.length - 1] > tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
-        Task task = tasks.get(taskId - 1);
-        task.markAsDone();
-        ui.append(String.format(MESSAGE_DONE, task.toString()));
+        ui.append(MESSAGE_DONE);
+        for (int taskId : taskIds) {
+            Task task = tasks.get(taskId - 1);
+            task.markAsDone();
+            ui.append(task.toString());
+        }
     }
 }

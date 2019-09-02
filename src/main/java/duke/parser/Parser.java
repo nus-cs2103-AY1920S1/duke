@@ -1,14 +1,7 @@
 package duke.parser;
 
 import duke.DukeException;
-
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.FindCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -46,9 +39,9 @@ public class Parser {
             }
             return new FindCommand(line[1]);
         case "done":
-            return new DoneCommand(getId(line));
+            return new DoneCommand(getIds(line));
         case "delete":
-            return new DeleteCommand(getId(line));
+            return new DeleteCommand(getIds(line));
         case "bye":
             if (line.length != 1) {
                 throw new DukeException(ERROR_TOO_MANY_ARGUMENTS);
@@ -66,17 +59,19 @@ public class Parser {
      * @return Number in rest of input.
      * @throws DukeException If rest of input is not a number.
      */
-    private static int getId(String[] input) throws DukeException {
+    private static int[] getIds(String[] input) throws DukeException {
         if (input.length == 1) {
             throw new DukeException(ERROR_MISSING_TASK_ID);
         }
-        int taskId;
+        String[] ids = input[1].split(" ");
+        int[] taskIds = new int[ids.length];
         try {
-            taskId = Integer.parseInt(input[1]);
+            for (int i = 0; i < taskIds.length; i++) {
+                taskIds[i] = Integer.parseInt(ids[i]);
+            }
         } catch (NumberFormatException ex) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
-        return taskId;
-
+        return taskIds;
     }
 }

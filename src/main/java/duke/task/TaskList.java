@@ -27,7 +27,7 @@ public class TaskList {
         if (input.split(" ").length > 1) {
             try {
                 int itemIndex = Integer.parseInt(input.split(" ")[1]);
-                if(itemIndex > tasks.size() || itemIndex < 1) {
+                if (itemIndex > tasks.size() || itemIndex < 1) {
                     throw new DukeException("The task number specified is not within the list.");
                 } else {
                     Task currTask = tasks.get(itemIndex - 1);

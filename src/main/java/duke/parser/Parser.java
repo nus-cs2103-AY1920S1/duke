@@ -29,7 +29,7 @@ public class Parser {
 
         ui.showWelcome();
 
-        while(!bye) {
+        while (!bye) {
             String input = sc.nextLine();
             String[] command = input.split(" ");
             try {

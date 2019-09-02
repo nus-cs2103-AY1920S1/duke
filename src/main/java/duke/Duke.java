@@ -1,6 +1,8 @@
 package duke;
 
 import duke.command.Command;
+import duke.ui.Main;
+import javafx.application.Application;
 
 public class Duke {
 
@@ -20,6 +22,7 @@ public class Duke {
     /**
      * Start the program execution.
      */
+    /*
     public void run() {
         boolean shouldContinue = true;
 
@@ -31,9 +34,18 @@ public class Duke {
         }
         ui.printExit();
     }
+     */
+
+    public String getResponse(String input) {
+        Command command = Parser.parse(input); // Parse and perform logic
+        return command.execute(ui, storage, taskList);
+    }
 
     public static void main(String[] args) {
+        /*
         Duke duke = new Duke();
         duke.run();
+         */
+        Application.launch(Main.class, args);
     }
 }

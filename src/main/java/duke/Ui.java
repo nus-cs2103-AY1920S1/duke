@@ -10,7 +10,11 @@ public class Ui {
      * Creates a new Ui object.
      */
     public Ui() {
-        printOutput("Hello! I'm Duke\nWhat can i do for you?");
+        //printOutput("Hello! I'm Duke\nWhat can i do for you?");
+    }
+
+    public static String getGreeting(){
+        return "Hello! I'm Duke\nWhat can i do for you?";
     }
 
     /**
@@ -53,5 +57,13 @@ public class Ui {
         System.out.println("    " + s.replace("\n", "\n    "));
         System.out.println("    " + "Now you have " + listSize + " tasks in the list.");
         System.out.println("    ____________________________________________________________");
+    }
+
+    public static String returnOutput(String s){
+        return s.replace("\n", "\n    ");
+    }
+
+    public static String returnOutput(String s, String taskMessage, int listSize) {
+        return taskMessage + "\n" + s.replace("\n", "\n    ") + "\n" + "Now you have " + listSize + " tasks in the list.";
     }
 }

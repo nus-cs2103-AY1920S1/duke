@@ -13,7 +13,8 @@ public class ListCommand extends Command {
      * @param storage  Storage object.
      * @param taskList TaskList object.
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
-        ui.printOutput(taskList.list());
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
+        //ui.printOutput(taskList.list());
+        return ui.returnOutput(taskList.list());
     }
 }

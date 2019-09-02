@@ -13,6 +13,7 @@ public class EmptyCommand extends Command {
      * @param storage  Storage object.
      * @param taskList TaskList object.
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
+        return null;
     }
 }

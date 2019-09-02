@@ -13,7 +13,7 @@ public abstract class Command {
      * @param storage  Storage object.
      * @param taskList TaskList object.
      */
-    public abstract void execute(Ui ui, Storage storage, TaskList taskList);
+    public abstract String execute(Ui ui, Storage storage, TaskList taskList);
 
     /**
      * Returns if commands should continue being read.

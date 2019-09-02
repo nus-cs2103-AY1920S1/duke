@@ -43,7 +43,7 @@ public class AddCommand extends Command {
      * @param storage Storage object.
      * @param taskList TaskList object.
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         Task task = null;
         switch (taskType) {
         case TODO:
@@ -61,10 +61,18 @@ public class AddCommand extends Command {
         }
 
         if (task != null) {
+            /*
             ui.printOutput("  " + task,
                 "Got it. I've added this task: ",
                 taskList.getTaskList().size());
+             */
+
             storage.save(taskList.getTaskList());
+
+            return ui.returnOutput("  " + task,
+                "Got it. I've added this task: ",
+                taskList.getTaskList().size());
         }
+        return null;
     }
 }

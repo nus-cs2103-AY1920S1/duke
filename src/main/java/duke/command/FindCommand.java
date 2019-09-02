@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @param storage  Storage object.
      * @param taskList TaskList object.
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         ArrayList<Task> taskArrList = taskList.getTaskList();
 
         int counter = 1;
@@ -45,6 +45,7 @@ public class FindCommand extends Command {
                 listOutput = listOutput.substring(0, listOutput.length() - 1);
             }
         }
-        ui.printOutput(listOutput);
+        //ui.printOutput(listOutput);
+        return ui.returnOutput(listOutput);
     }
 }

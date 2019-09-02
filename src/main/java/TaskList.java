@@ -30,6 +30,7 @@ public class TaskList {
                 }
 
                 this.taskList.add(add);
+                break;
 
             case "D":
                 add = new Deadline(listItem[2], listItem[3]);
@@ -39,6 +40,7 @@ public class TaskList {
                 }
 
                 this.taskList.add(add);
+                break;
 
             case "E":
                 add = new Events(listItem[2], listItem[3]);
@@ -48,6 +50,10 @@ public class TaskList {
                 }
 
                 this.taskList.add(add);
+                break;
+
+            default:
+                throw new DukeException("The input is not a task!");
             }
         }
     }

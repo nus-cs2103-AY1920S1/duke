@@ -14,7 +14,7 @@ public class Parser {
         Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
                 + "\\s*(?<completionstatus>(\\[[01]\\])?)"
                 + "\\s*(?<description>([\\w\\s\\d]+)?)"
-                + "(?:(/by|/at))?(?<date>([\\w\\s\\d+]+)?)");
+                + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
         if (!matcher.find()) {
             System.out.println("    ____________________________________________________________\n" +

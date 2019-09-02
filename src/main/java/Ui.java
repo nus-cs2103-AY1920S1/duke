@@ -28,10 +28,10 @@ public class Ui {
      * @param user Image object to represent user
      * @param dukeImage Image object to represent duke
      */
-    public static void initialize(VBox vbox, TextField textField, Image user, Image dukeImage) {
+    public static void initialize(VBox vbox, TextField textField, Image userImage, Image dukeImage) {
         dialogContainer = vbox;
         userInput = textField;
-        user = user;
+        user = userImage;
         duke = dukeImage;
     }
 
@@ -46,7 +46,7 @@ public class Ui {
         String input = userInput.getText();
         Label userText = new Label(input);
         dialogContainer.getChildren().addAll(
-            new DialogBox(userText, new ImageView(user))
+            DialogBox.getUserDialog(userText, new ImageView(user))
         );
         userInput.clear();
         return new Parser(input);
@@ -63,7 +63,7 @@ public class Ui {
         }
         Label dukeText = new Label(completeOutput);
         dialogContainer.getChildren().addAll(
-            new DialogBox(dukeText, new ImageView(duke))
+            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
 
     }
@@ -75,8 +75,7 @@ public class Ui {
     public static void printBlock(String output) {
         Label dukeText = new Label(output);
         dialogContainer.getChildren().addAll(
-            new DialogBox(dukeText, new ImageView(duke))
+            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
     }
-
 }

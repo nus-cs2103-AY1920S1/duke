@@ -1,5 +1,14 @@
+/**
+ * The Parser class makes sense of the user command taken in, it
+ decides the next methods executed by the application.
+ */
 public class Parser {
-
+    /**
+     * A static method used for reading in user command and deciding
+     the next method to be executed.
+     * @param commandText The command text entered by a user.
+     * @return Returns the corresponding type of Command to be executed.
+     */
     public static Command parse(String commandText) {
         String[] arr = commandText.split(" ", 2);
         String command = arr[0];

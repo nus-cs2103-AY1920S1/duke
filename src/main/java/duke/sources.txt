@@ -18,6 +18,7 @@
 ./duke/command/FindCommand.java
 ./duke/command/DoneCommand.java
 ./duke/Duke.java
+./duke/Launcher.java
 ./duke/error/InvalidCommandException.java
 ./duke/error/InvalidFileException.java
 ./duke/error/InvalidIndexException.java

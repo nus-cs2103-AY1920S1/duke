@@ -2,13 +2,19 @@ package duke;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.NoSuchElementException;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import duke.command.Command;
 import duke.error.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
 
-public class Duke {
+public class Duke extends Application {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
@@ -52,7 +58,18 @@ public class Duke {
                 this.ui.printError(e);
             } catch (ParseException e) {
                 this.ui.print("Passed in an invalid date");
-            } 
+            } catch (NoSuchElementException e) {
+                shouldRun = false;
+            }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); 
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene); 
+        stage.show(); 
     }
 }

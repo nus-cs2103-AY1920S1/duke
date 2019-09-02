@@ -19,30 +19,34 @@ public class TaskList {
         for (int i = 0; i < fileList.size(); i++) {
             String[] listItem = fileList.get(i).split(" \\| ");
             String type = listItem[0];
+            Task add;
 
-            if (type.equals("T")) {
-                Task add = new Todo(listItem[2]);
-
-                if(listItem[1] == "✓") {
-                    add.markAsDone();
-                }
-
-                this.taskList.add(add);
-            } else if (type.equals("D")) {
-                Task add = new Deadline(listItem[2], listItem[3]);
+            switch(type) {
+            case "T":
+                add = new Todo(listItem[2]);
 
                 if(listItem[1] == "✓") {
                     add.markAsDone();
                 }
 
                 this.taskList.add(add);
-            } else {
-                Task add = new Events(listItem[2], listItem[3]);
+
+            case "D":
+                add = new Deadline(listItem[2], listItem[3]);
 
                 if(listItem[1] == "✓") {
                     add.markAsDone();
                 }
-                
+
+                this.taskList.add(add);
+
+            case "E":
+                add = new Events(listItem[2], listItem[3]);
+
+                if(listItem[1] == "✓") {
+                    add.markAsDone();
+                }
+
                 this.taskList.add(add);
             }
         }

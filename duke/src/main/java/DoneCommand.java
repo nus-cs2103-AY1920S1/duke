@@ -12,6 +12,7 @@ class DoneCommand extends Command {
 		} else if (remainingCommand.isEmpty()) {
 			throw new DukeException("Do include the task number that you have done!");
 		}
+		
 		int index = Integer.valueOf(remainingCommand); // assuming only has number left
 		Task task = list.get(index - 1);
 		task.markAsDone();

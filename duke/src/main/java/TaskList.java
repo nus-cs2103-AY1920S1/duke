@@ -26,6 +26,7 @@ class TaskList {
 	 * Adds new tasks to list.
 	 * @param Task task
 	 */
+	
 	public void addTask(Task task) {
 		list.add(task);
 	}

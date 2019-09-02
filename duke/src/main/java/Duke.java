@@ -10,8 +10,6 @@ import java.util.Scanner;
 import java.text.ParseException;
 
 public class Duke {
-
-	// private static ArrayList<Task> list = new ArrayList<>();
 	private Storage storage;
 	private TaskList tasks;
 	private Ui ui;
@@ -28,7 +26,7 @@ public class Duke {
 			ui.showError(fe.getMessage());
 		} catch (DukeException e) {
 			tasks = new TaskList();
-			ui.showLoadingError(); // i suppose this just says file is corrupted therefore creating new or sth
+			ui.showLoadingError();
 		} catch (ParseException pe) {
 			ui.showError(pe.getMessage());
 		}

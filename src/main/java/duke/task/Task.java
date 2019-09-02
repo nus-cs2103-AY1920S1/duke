@@ -64,5 +64,5 @@ public abstract class Task {
      *
      * @return Returns a string which is formatted to be stored in local storage.
      */
-    abstract public String getFileStringFormat();
+    public abstract String getFileStringFormat();
 }

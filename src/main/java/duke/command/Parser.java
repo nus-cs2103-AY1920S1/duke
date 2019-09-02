@@ -20,7 +20,7 @@ public class Parser {
     private Ui ui;
 
     /**
-     * Constructor for class Parser
+     * Constructor for class Parser.
      *
      * @param tasks An object which consists of a list of tasks
      * @param ui An object that deals with user interaction (printing, querying)

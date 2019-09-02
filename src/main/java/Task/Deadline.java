@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 public class Deadline extends Task {
 
@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * @param type String indicates task type, in this case "D".
      * @param done boolean indicates whether the task is done.
      */
-    Deadline(int num, String task, Date date, Time time, String type, boolean done) {
+    public Deadline(int num, String task, Date date, Time time, String type, boolean done) {
         super(num, task, type, done);
         this.date = date;
         this.time = time;
@@ -28,7 +28,7 @@ public class Deadline extends Task {
      * @param time Time at which deadline occurs.
      * @param type String indicates task type, in this case "D".
      */
-    Deadline(int num, String task, Date date, Time time, String type) {
+    public Deadline(int num, String task, Date date, Time time, String type) {
         super(num, task, type);
         this.date = date;
         this.time = time;

@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 public class Time {
 
@@ -34,7 +34,7 @@ public class Time {
      * @param timeString String in form HHMM.
      * @return Time object.
      */
-    static Time processTime(String timeString) {
+    public static Time processTime(String timeString) {
         return new Time(Integer.parseInt(timeString));
     }
 

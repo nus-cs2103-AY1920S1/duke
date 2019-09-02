@@ -1,4 +1,4 @@
-package duke;
+package Data;
 
 /**
  * Documents types of commands available

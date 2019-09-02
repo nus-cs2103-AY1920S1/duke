@@ -1,6 +1,8 @@
-package duke;
+package Exceptions;
 
-abstract class DukeException extends Exception {
+import Data.Formatter;
+
+public abstract class DukeException extends Exception {
     Formatter formatter = new Formatter();
     String message = "☹ OOPS!!! ";
     String taskType;
@@ -27,7 +29,7 @@ abstract class DukeException extends Exception {
     /**
      * Prints formatted error message.
      */
-    void printError() {
+    public void printError() {
         formatter.printFormat(errorMessage());
     }
 }

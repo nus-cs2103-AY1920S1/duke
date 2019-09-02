@@ -1,4 +1,7 @@
-package duke;
+package UI;
+
+import Data.Formatter;
+import Task.Task;
 
 import java.util.List;
 
@@ -84,7 +87,7 @@ public class MessageGenerator {
      * @param task Task that is to be removed.
      * @param n Number tagged to task.
      */
-    void printRemove(Task task, int n) {
+    public void printRemove(Task task, int n) {
         formatter.printFormat(removeTask(), formatTask(task), numTask(n));
     }
 
@@ -93,7 +96,7 @@ public class MessageGenerator {
      * @param task Task that is to be added.
      * @param n Number tagged to task.
      */
-    void printAdd(Task task, int n) {
+    public void printAdd(Task task, int n) {
         formatter.printFormat(addTask(), formatTask(task), numTask(n));
     }
 
@@ -101,7 +104,7 @@ public class MessageGenerator {
      * Prints the program response when a task is set as done.
      * @param task Task that is set as done.
      */
-    void printDone(Task task) {
+    public void printDone(Task task) {
         formatter.printFormat(markDone(), formatTask(task));
     }
 
@@ -109,7 +112,7 @@ public class MessageGenerator {
      * Prints the program response when user asks for list of tasks.
      * @param list List of tasks in their string form.
      */
-    void printList(List<String> list) {
+    public void printList(List<String> list) {
         formatter.printFormat(listTasks(), list);
     }
 
@@ -117,7 +120,7 @@ public class MessageGenerator {
      * Prints matching tasks in a task list.
      * @param list list of tasks in their string form.
      */
-    void printMatchingList(List<String> list) {
+    public void printMatchingList(List<String> list) {
         formatter.printFormat(matchingTasks(), list);
     }
 

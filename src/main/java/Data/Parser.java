@@ -1,15 +1,19 @@
-package duke;
+package Data;
 
-class Parser {
+import Exceptions.DukeException;
+import Exceptions.InvalidCommandException;
+import Exceptions.MissingInputException;
+import Task.*;
 
-    private String desc;
+public class Parser {
+
     private Task task = null;
     private static int count = 0;
 
     /**
      * Constructor for a Parser object used to process input and strings.
      */
-    Parser(){};
+    public Parser(){};
 
     /**
      * Takes in line of information to process into commands for program to read.
@@ -17,7 +21,7 @@ class Parser {
      * @return command used for updating tasks.
      * @throws InvalidCommandException when program gives an invalid command type.
      */
-    Command process(String line) throws InvalidCommandException {
+    public Command process(String line) throws InvalidCommandException {
         String[] commands = line.split(" ");
         String first = commands[0];
         try {
@@ -50,7 +54,7 @@ class Parser {
      * @param command command for finding matching tasks.
      * @return keyword for matching tasks.
      */
-    String getKeyword(Command command) {
+    public String getKeyword(Command command) {
         String line = command.getDescription();
         String[] description = line.split(" ");
         return description[1];
@@ -62,7 +66,7 @@ class Parser {
      * @return task created from the command.
      * @throws MissingInputException when command's description is incomplete.
      */
-    Task createTask(Command command) throws MissingInputException {
+    public Task createTask(Command command) throws MissingInputException {
         String line = command.getDescription();
         String[] description = line.split(" ");
         String eventType = description[0];
@@ -83,7 +87,7 @@ class Parser {
      * @return task number
      * @throws MissingInputException when command's description is incomplete.
      */
-    int getTaskNo(Command command) throws MissingInputException {
+    public int getTaskNo(Command command) throws MissingInputException {
         String line = command.getDescription();
         String[] description = line.split(" ");
         String eventType = description[0];
@@ -107,6 +111,7 @@ class Parser {
      */
     Task createNewTask(int taskNo, String taskType, String[] arr) {
         boolean firstInDescription = true;
+        String desc = "";
         Date date = null;
         Time time = null;
         for (int i = 1; i < arr.length; i++) {
@@ -134,6 +139,7 @@ class Parser {
             task = new Deadline(taskNo, desc, date, time, "D");
             break;
         }
+        System.out.println(desc);
         return task;
     }
 

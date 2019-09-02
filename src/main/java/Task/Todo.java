@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 public class Todo extends Task {
 
@@ -9,7 +9,7 @@ public class Todo extends Task {
      * @param type String indicates task type, in this case "T".
      * @param done boolean indicates whether the task is done.
      */
-    Todo(int num, String task, String type, boolean done) {
+    public Todo(int num, String task, String type, boolean done) {
         super(num, task, type, done);
     }
 

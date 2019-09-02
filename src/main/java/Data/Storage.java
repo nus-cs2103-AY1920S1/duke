@@ -1,4 +1,7 @@
-package duke;
+package Data;
+
+import Exceptions.InvalidInputException;
+import Task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
 
     private Scanner sc;
     private String filePath;
@@ -20,7 +23,7 @@ class Storage {
      * Loads and writes into given file.
      * @param filePath String that indicates path to file.
      */
-    Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         f = new File(filePath);
         try {
@@ -36,7 +39,7 @@ class Storage {
      * Loads tasks from file into the program.
      * @return TaskList that will be used in the program for further modifications by user.
      */
-    TaskList loadTasks() {
+    public TaskList loadTasks() {
         int counter = 0;
         try {
             sc = new Scanner(f);
@@ -82,10 +85,10 @@ class Storage {
      * @param tasks Task list that has been processed and updated.
      * @throws IOException when there are input problems.
      */
-    void updateTaskList(TaskList tasks) throws IOException {
+    public void updateTaskList(TaskList tasks) throws IOException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : tasks.taskList) {
+            for (Task task : tasks.getTaskList()) {
                 if (task != null) {
                     fw.write( task.fileFormat() + System.lineSeparator());
                 }

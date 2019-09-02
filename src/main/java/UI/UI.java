@@ -1,4 +1,12 @@
-package duke;
+package UI;
+
+import Data.Command;
+import Data.Parser;
+import Data.Storage;
+import Exceptions.InvalidCommandException;
+import Exceptions.MissingInputException;
+import Task.Task;
+import Task.TaskList;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -46,14 +54,10 @@ public class UI {
      * Processes input from the Command Line made by user.
      * This makes changes to the program's task list and file.
      */
-    public void processInput() {
-        try {
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                processCommand(parser.process(line));
-            }
-        } catch (InvalidCommandException e) {
-            e.printError();
+    public void processInput() throws InvalidCommandException {
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            processCommand(parser.process(line));
         }
     }
 
@@ -86,7 +90,7 @@ public class UI {
                 default:
                     throw new InvalidCommandException();
                 }
-            } catch (InvalidCommandException|MissingInputException e) {
+            } catch (InvalidCommandException| MissingInputException e) {
                 e.printError();
             }
             try {

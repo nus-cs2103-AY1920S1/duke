@@ -1,9 +1,9 @@
-package duke;
+package Data;
 
-class Command {
+public class Command {
 
     private String command;
-    CommandType type;
+    public CommandType type;
 
     /**
      * Constructs a Command.

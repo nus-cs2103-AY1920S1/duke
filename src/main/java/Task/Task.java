@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 public abstract class Task {
 

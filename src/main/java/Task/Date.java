@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 public class Date {
     int day;
@@ -23,6 +23,7 @@ public class Date {
     public Date(int day, int monthNum, int year) {
         this.day = day;
         this.year = year;
+        this.monthNum = monthNum;
         switch (monthNum) {
         case 1:
             this.month = Month.JANUARY;

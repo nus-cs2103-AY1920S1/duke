@@ -1,4 +1,4 @@
-package duke;
+package Exceptions;
 
 public class InvalidItemException extends DukeException {
 
@@ -7,7 +7,7 @@ public class InvalidItemException extends DukeException {
     /**
      * Creates InvalidItemException when an invalid list item is given.
      */
-    InvalidItemException() {}
+    public InvalidItemException() {}
 
     /**
      * Creates String for error message.

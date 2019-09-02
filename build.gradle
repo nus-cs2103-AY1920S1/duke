@@ -1,6 +1,12 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }
 
 group 'seedu.duke'
@@ -11,7 +17,6 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
     mainClassName = "Duke"
 }
 
@@ -21,4 +26,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+run {
+    standardInput = System.in
 }

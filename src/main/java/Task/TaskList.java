@@ -1,9 +1,13 @@
-package duke;
+package Task;
+
+import Exceptions.DukeException;
+import Exceptions.InvalidItemException;
+import UI.MessageGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskList {
+public class TaskList {
 
     List<Task> taskList = new ArrayList<>();
     MessageGenerator msgGenerator = new MessageGenerator();
@@ -11,7 +15,7 @@ class TaskList {
     /**
      * Creates task list and adds a placeholder value for easier tracking.
      */
-    TaskList() {
+    public TaskList() {
         //placeholder value in task
         taskList.add(null);
     }
@@ -28,7 +32,7 @@ class TaskList {
      * Prints message when task is added via user input.
      * @param task task to be added.
      */
-    void addTask(Task task) {
+    public void addTask(Task task) {
         taskList.add(task);
         msgGenerator.printAdd(task, noTasks());
     }
@@ -37,7 +41,7 @@ class TaskList {
      * Adds task to task List when task is loaded from the file.
      * @param task task loaded from the file that is to be added.
      */
-    void loadTask(Task task) {
+    public void loadTask(Task task) {
         taskList.add(task);
     }
 
@@ -68,14 +72,14 @@ class TaskList {
     /**
      * @return task list.
      */
-    List<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.taskList;
     }
 
     /**
      * Prints list of tasks using the message generator.
      */
-    void printList() {
+    public void printList() {
         msgGenerator.printList(listify(this.taskList));
     }
 
@@ -92,7 +96,7 @@ class TaskList {
      * Marks a task as done.
      * @param taskNo identification number for task.
      */
-    void setDone(int taskNo) {
+    public void setDone(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();
@@ -108,7 +112,7 @@ class TaskList {
      * Deletes task with given identification number.
      * @param taskNo identification number for task.
      */
-    void deleteTask(int taskNo) {
+    public void deleteTask(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();
@@ -123,7 +127,7 @@ class TaskList {
      * Searches and prints matching tasks in task list.
      * @param keyword word that task must contain to be printed.
      */
-    void findMatchingTasks(String keyword) {
+    public void findMatchingTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task: taskList) {
             if (task != null && task.getTaskInfo().contains(keyword)) {

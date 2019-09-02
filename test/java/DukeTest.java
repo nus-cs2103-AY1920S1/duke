@@ -16,6 +16,7 @@ class DukeTest {
         assertEquals("15/07/2019", date.toString());
     }
 
+
     /**
      * Tests if a ToDo object returns the correct string format for printing.
      */

@@ -1,6 +1,6 @@
-package duke;
+package Exceptions;
 
-class InvalidCommandException extends DukeException {
+public class InvalidCommandException extends DukeException {
 
     private String message = "☹ OOPS!!! ";
 

@@ -1,4 +1,4 @@
-package duke;
+package Task;
 
 public class Event extends Task {
 
@@ -14,7 +14,7 @@ public class Event extends Task {
      * @param type String indicates task type, in this case "E".
      * @param done boolean indicates whether the task is done.
      */
-    Event(int num, String task, Date date, Time time, String type, boolean done) {
+    public Event(int num, String task, Date date, Time time, String type, boolean done) {
         super(num, task, type, done);
         this.time = time;
         this.date = date;
@@ -29,7 +29,7 @@ public class Event extends Task {
      * @param time Time at which deadline occurs.
      * @param type String indicates task type, in this case "E".
      */
-    Event(int num, String task, Date date, Time time, String type) {
+    public Event(int num, String task, Date date, Time time, String type) {
         super(num, task, type);
         this.time = time;
         this.date = date;

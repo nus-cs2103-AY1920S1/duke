@@ -1,4 +1,4 @@
-package duke;
+package Data;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class Formatter {
     /**
      * Creates new Formatter used to format printing.
      */
-   Formatter() {}
+    public Formatter() {}
 
     /**
      * Adds 4 spaces for indentation for printing.
@@ -29,7 +29,7 @@ public class Formatter {
      * Prints strings in their respective lines with format.
      * @param s String with line breaks.
      */
-    void printFormat(String s) {
+    public void printFormat(String s) {
         printLine();
         String[] lines = s.split("\n");
         for (String line: lines) {
@@ -42,7 +42,7 @@ public class Formatter {
      * Prints strings in their respective lines with format.
      * @param strings variable number of strings to be printed line by line.
      */
-    void printFormat(String...strings) {
+    public void printFormat(String... strings) {
         printLine();
         for (String string: strings) {
             System.out.println(format(string));
@@ -68,7 +68,7 @@ public class Formatter {
      * Prints strings in their respective lines with format.
      * @param list list of Strings to be printed line by line.
      */
-    void printFormat(String s, List<String> list) {
+    public void printFormat(String s, List<String> list) {
         printLine();
         System.out.println(format(s));
         printFormat(list);

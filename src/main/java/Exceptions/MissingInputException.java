@@ -1,4 +1,4 @@
-package duke;
+package Exceptions;
 
 public class MissingInputException extends DukeException {
 
@@ -8,7 +8,7 @@ public class MissingInputException extends DukeException {
      * Creates MissingInputException when input is not complete for program to process.
      * @param taskType String to be used for printing error message.
      */
-    MissingInputException(String taskType) {
+    public MissingInputException(String taskType) {
         super(taskType);
     }
 

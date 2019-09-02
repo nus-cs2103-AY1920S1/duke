@@ -1,5 +1,6 @@
-import duke.MessageGenerator;
-import duke.UI;
+import Exceptions.InvalidCommandException;
+import UI.MessageGenerator;
+import UI.UI;
 
 import java.util.Scanner;
 
@@ -14,14 +15,14 @@ public class Duke {
      * Reads file containing a list of tasks.
      * Updates and changes this file according to user input.
      */
-    private Duke() {
+    public Duke() {
         greeter = new MessageGenerator();
         sc = new Scanner(System.in);
         ui = new UI("files/tasks.txt");
         isExit = false;
     }
 
-    private void run() {
+    private void run() throws InvalidCommandException {
         greeter.greet();
         ui.processFile();
         while (!isExit) {
@@ -31,7 +32,7 @@ public class Duke {
         greeter.bye();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCommandException {
         new Duke().run();
     }
 }

@@ -49,11 +49,11 @@ public class DateTime {
      * @return Date with suffix -st, -nd, -rd and -th when appropriate.
      */
     private String getDate() {
-        if (day % 10 == 1) {
+        if (day == 1 || day == 21 || day == 31) {
             return day + "st";
-        } else if (day % 10 == 2) {
+        } else if (day == 2 || day == 22) {
             return day + "nd";
-        } else if (day % 10 == 3) {
+        } else if (day == 3 || day == 23) {
             return day + "rd";
         } else {
             return day + "th";

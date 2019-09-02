@@ -5,8 +5,12 @@ import duke.task.TaskList;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.StageStyle;
 
 /**
  * Main class for the Duke application.
@@ -49,10 +53,12 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Welcome to Duke!");
+        helloWorld.setFont(Font.font("serif", FontWeight.BOLD,
+                FontPosture.REGULAR, 50));
         Scene scene = new Scene(helloWorld);
 
         stage.setScene(scene);
-        stage.show(); 
+        stage.show();
     }
 
     /**

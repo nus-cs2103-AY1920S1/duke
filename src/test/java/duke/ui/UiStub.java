@@ -12,6 +12,12 @@ public class UiStub extends Ui {
     private PrintStream testPrintStream;
     private final PrintStream originalPrintStream = System.out;
 
+    /**
+     * Constructor of UiStub that initializes a scanner with a dummy InputStream.
+     * Outputs ui output to the print stream provided.
+     *
+     * @param testPrintStream Output print stream to use.
+     */
     public UiStub(PrintStream testPrintStream) {
         this(
                 new Scanner(

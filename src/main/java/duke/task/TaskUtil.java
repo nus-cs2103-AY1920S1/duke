@@ -18,11 +18,11 @@ public abstract class TaskUtil {
     /** The output format for displaying dates and times. */
     private static final String DISPLAY_FORMAT = "EEE, d MMM y h:mma";
     /** The dateTime formatter that uses the DATE_FORMAT pattern. */
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     /** The dateTime formatter that uses the TIME_FORMAT pattern. */
-    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
     /** The dateTime formatter that uses the DISPLAY_FORMAT pattern. */
-    private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
 
     /**
      * Utility method for validating the input task description.
@@ -50,7 +50,7 @@ public abstract class TaskUtil {
      */
     static LocalDateTime getDateFromString(String dateString) throws DukeInvalidArgumentException {
         try {
-            return LocalDateTime.parse(dateString.trim(), dateFormatter);
+            return LocalDateTime.parse(dateString.trim(), DATE_TIME_FORMATTER);
         } catch (DateTimeParseException ex) {
             throw new DukeInvalidArgumentException(
                     "Invalid date format inputted by user",
@@ -69,7 +69,7 @@ public abstract class TaskUtil {
      */
     static LocalTime getTimeFromString(String timeString) throws DukeInvalidArgumentException {
         try {
-            return LocalTime.parse(timeString.trim(), timeFormatter);
+            return LocalTime.parse(timeString.trim(), TIME_FORMATTER);
         } catch (DateTimeParseException ex) {
             throw new DukeInvalidArgumentException(
                     "Invalid time format inputted by user",
@@ -86,6 +86,6 @@ public abstract class TaskUtil {
      * @return The string representation of the localDateTime.
      */
     static String getDisplayTime(LocalDateTime dateTime) {
-        return displayFormatter.format(dateTime);
+        return DISPLAY_FORMATTER.format(dateTime);
     }
 }

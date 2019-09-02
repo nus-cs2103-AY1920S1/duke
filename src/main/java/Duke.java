@@ -1,23 +1,22 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) throws DukeException, IOException {
 
+        Ui ui = new Ui();
         Bot bot = new Bot();
 
-        bot.greeting();
 
+
+        ui.greeting();
 
         try {
             bot.retrieve();
         } catch (FileNotFoundException e) {
-            FileWriterClass.makeDirectory(FileWriterClass.DATA_FOLDER_PATH);
+            Storage.makeDirectory(Storage.DATA_FOLDER_PATH);
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -27,23 +26,50 @@ public class Duke {
 
             String command = scanner.nextLine();
 
-            String[] words = command.split(" ", 2);
+            TaskType taskType = Parser.returnsTaskType(command);
+
+            if (taskType == TaskType.TODO || taskType == TaskType.DEADLINE || taskType == TaskType.EVENT) {
+
+                bot.add(command, taskType);
+                bot.save();
+
+            } else {
+                switch (taskType) {
+                case DONE:
+                    bot.done(command);
+                    bot.save();
+                    continue;
+                case DELETE:
+                    bot.delete(command);
+                    bot.save();
+                    continue;
+
+                case LIST:
+                    bot.list();
+                    break;
+                case BYE:
+                    ui.bye();
+                    break;
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
 
-            switch (words[0]) {
-            case "todo":
+            }
 
+            /*
+            switch (taskType) {
+            case TODO, EVENT:
                 try {
-                    bot.add(command, Bot.TaskType.TODO);
+                    bot.add(command, TaskType.TODO);
                     bot.save();
                 } catch (DukeException | IOException e) {
                     System.out.println(e.getMessage());
                 }
 
                 continue;
-            case "deadline":
+            case DEADLINE:
                 try {
-                    bot.add(command, Bot.TaskType.DEADLINE);
+                    bot.add(command, TaskType.DEADLINE);
                     bot.save();
                 } catch (DukeException | IOException e) {
                     System.out.println(e.getMessage());
@@ -51,7 +77,7 @@ public class Duke {
                 continue;
             case "event":
                 try {
-                    bot.add(command, Bot.TaskType.EVENT);
+                    bot.add(command, TaskType.EVENT);
                     bot.save();
                 } catch (DukeException | IOException e) {
                     System.out.println(e.getMessage());
@@ -72,7 +98,7 @@ public class Duke {
                 bot.list();
                 break;
             case "bye":
-                bot.bye();
+                ui.bye();
                 return;
             default:
                 try {
@@ -83,7 +109,7 @@ public class Duke {
                 break;
             }
 
-        }
+        }*/
 
 
     }

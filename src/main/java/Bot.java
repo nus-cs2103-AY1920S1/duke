@@ -1,26 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Bot {
 
     DukeException emptyDescription = new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
 
-    enum TaskType {
-        TODO, DEADLINE, EVENT;
-    }
 
     ArrayList<Task> list = new ArrayList<>();
-
-    public void greeting () {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
 
     public Task add (String command, TaskType taskType) throws DukeException {
 
@@ -120,7 +108,7 @@ public class Bot {
     }
 
     public void retrieve () throws FileNotFoundException {
-        File f = new File(FileWriterClass.DUKE_TXT_PATH); // create a File for the given file path
+        File f = new File(Storage.DUKE_TXT_PATH); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             String text = s.nextLine();
@@ -160,6 +148,6 @@ public class Bot {
             s += t.saveFormat() + System.lineSeparator();
         }
 
-        FileWriterClass.writeToFile(FileWriterClass.DUKE_TXT_PATH, s);
+        Storage.writeToFile(Storage.DUKE_TXT_PATH, s);
     }
 }

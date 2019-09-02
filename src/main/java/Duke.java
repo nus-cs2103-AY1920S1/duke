@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
+
 
 public class Duke {
 	static Scanner sc = new Scanner(System.in);
@@ -117,7 +121,7 @@ public class Duke {
             				}
             			}
             		}
-            		tasks.add(new Event(com, eventdate));
+            		tasks.add(new Event(com, getDateTime(eventdate)));
             		printLine();
             		System.out.println("Got it. I've added this task:");
             		System.out.println(tasks.get(count));
@@ -144,7 +148,7 @@ public class Duke {
             				}
             			}
             		}
-            		tasks.add(new Deadline(com, deadline));
+            		tasks.add(new Deadline(com, getDateTime(deadline)));
             		printLine();
             		System.out.println("Got it. I've added this task:");
             		System.out.println(tasks.get(count));
@@ -272,5 +276,31 @@ public class Duke {
 
 	public static boolean isDone(String op) {
     	return (op.equals("\u2713"));
+
+    public static String getDateTime(String deadline) {
+    	String[] datetime = deadline.split(" ");
+    	String[] date = datetime[0].split("/");
+    	String time = datetime[1];
+    	int day = Integer.parseInt(date[0]);
+    	int month = Integer.parseInt(date[1]);
+    	int year = Integer.parseInt(date[2]);
+    	DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+    	LocalDate datef = LocalDate.parse(datetime[0], dateformatter);
+    	String dates = datef.format(DateTimeFormatter.ofPattern("LLLL uuuu"));
+    	String days = datef.format(DateTimeFormatter.ofPattern("d"));
+		DateTimeFormatter timeformatter = DateTimeFormatter.ofPattern("Hmm");
+		LocalTime timef = LocalTime.parse(time, timeformatter);
+		String times = timef.format(DateTimeFormatter.ofPattern("h.mma"));
+		if (day == 1) {
+			days = days + "st";
+		} else if (day == 2) {
+			days = days + "nd";
+		} else if (day == 3) {
+			days = days + "rd";
+		} else {
+			days = days + "th";
+		}
+		String output = days + " of " + dates + ", " + times;
+		return output;
 	}
 }

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -20,9 +21,6 @@ import javafx.stage.Stage;
  * Main Driver class housing the infinite loop.
  */
 public class Duke extends Application {
-    private static final String FONT_NAME = "Arial";
-    private static final int FONT_SIZE = 50;
-
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -94,7 +92,66 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
+        // 2. Format the window to look as expected
+        // stage configuration
+        primaryStage.setTitle("Duke");
+        primaryStage.setResizable(false);
+        primaryStage.setMinHeight(600.0);
+        primaryStage.setMinWidth(400.0);
+
+        // Anchor pane configuration
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        // Scroll pane configuration
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0); // set scrolled all the way down
+        scrollPane.setFitToWidth(true);
+
+        // Vertical box configuration
+        // scroll down to the end when VBox's height changes
+        dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        // Text field configuration
+        userInput.setPrefWidth(325.0);
+
+        // Button configuration
+        sendButton.setPrefWidth(55.0);
+
+        // Anchor nodes in specified positions
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    /**
+     * Iteration 1: Creates a label with the specified text and adds it to the dialog container.
+     *
+     * @param text String containing text to add.
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 }

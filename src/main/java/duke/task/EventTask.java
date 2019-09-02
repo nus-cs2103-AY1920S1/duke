@@ -38,4 +38,16 @@ public class EventTask extends Task {
     public String toString() {
         return super.toString() + " (at: " + this.duration + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof EventTask) {
+            EventTask eventTask = (EventTask) obj;
+            return (eventTask.getName().equals(this.getName())
+                    && (eventTask.getTaskType().equals(this.getTaskType()))
+                    && (eventTask.isDone() == this.isDone())
+                    && (eventTask.getDuration().equals(this.getDuration())));
+        }
+        return false;
+    }
 }

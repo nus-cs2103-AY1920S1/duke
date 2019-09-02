@@ -33,4 +33,20 @@ public class AddCommand extends Command {
         System.out.println("  " + this.task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
+
+    /* Returns stored task of comment */
+    public Task getTask() {
+        return this.task;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof AddCommand) {
+            AddCommand addCommand = (AddCommand) obj;
+            if(addCommand.getTask().equals(this.task)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

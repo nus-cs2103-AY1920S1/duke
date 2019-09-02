@@ -63,4 +63,15 @@ public abstract class Task {
     public String toString() {
         return this.getTaskIcon() + "[" + this.getDoneSymbol() + "] " + this.getName();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Task) {
+            Task task = (Task) obj;
+            return (task.getName().equals(this.getName())
+                    && (task.getTaskType().equals(this.getTaskType()))
+                    && (task.isDone() == this.isDone()));
+        }
+        return false;
+    }
 }

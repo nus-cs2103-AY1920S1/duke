@@ -38,4 +38,16 @@ public class DeadlineTask extends Task {
     public String toString() {
         return super.toString() + " (by: " + this.deadLine + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof DeadlineTask) {
+            DeadlineTask deadlineTask = (DeadlineTask) obj;
+            return (deadlineTask.getName().equals(this.getName())
+                    && (deadlineTask.getTaskType().equals(this.getTaskType()))
+                    && (deadlineTask.isDone() == this.isDone())
+                    && (deadlineTask.getDeadline().equals(this.getDeadline())));
+        }
+        return false;
+    }
 }

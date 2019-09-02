@@ -7,6 +7,8 @@ class AddCommand extends Command {
 	private static SimpleDateFormat formatterIn = new SimpleDateFormat("d/M/yyyy HHmm");
 	private static SimpleDateFormat formatterOut = new SimpleDateFormat("d MMM yyyy ha");
 
+	private boolean isLoading = false;
+
 	public AddCommand(String command, String remainingCommand) {
 		super(command, remainingCommand);
 	}
@@ -26,21 +28,24 @@ class AddCommand extends Command {
 
 	/**
 	 * Caches task associated with command, returns it when queried
-	 * @return Task to be added using the addCommand
+	 * Only called when loading tasks from storage
+	 * @return Task to be added to list using the addCommand
 	 * @throws DukeException  could be thrown by createTask
-	 * @throws ParseException could be thrown by could be thrown by unparseable datetime in createTask
+	 * @throws ParseException thrown when datetime is unparseable in createTask
 	 */
 
-	public Task getTask() throws DukeException, ParseException { // only called when loading
+	public Task getTask() throws DukeException, ParseException {
 		if (this.task == null) {
 			// remainingCommand contains [1/0] [description]
+			isLoading = true;
 			String[] parts = remainingCommand.split(" ");
 			int binary = Integer.valueOf(parts[0]);
-			String description = parts[1];
+			String description = remainingCommand.substring(2);
 			boolean isDone = (binary == 1);
 			this.task = createTask(command, isDone, description);
 		}
 
+		isLoading = false;
 		return this.task;
 	}
 
@@ -102,8 +107,15 @@ class AddCommand extends Command {
 		String taskDesc = description.substring(0, indexBy - 1); // start after space, end before space before /
 
 		String dateInString = description.substring(indexBy + 4);
-		Date date = formatterIn.parse(dateInString);
-		String by = formatterOut.format(date);
+
+		Date date;
+		String by;
+		if (isLoading) {
+			by = dateInString;
+		} else {
+			date = formatterIn.parse(dateInString);
+			by = formatterOut.format(date);
+		}
 
 		Deadline dead = new Deadline(isDone, taskDesc, by);
 		return dead;
@@ -117,8 +129,15 @@ class AddCommand extends Command {
 		String taskDesc = description.substring(0, indexAt - 1); // start after space, end before space before /
 
 		String dateInString = description.substring(indexAt + 4);
-		Date date = formatterIn.parse(dateInString);
-		String at = formatterOut.format(date);
+
+		Date date;
+		String at;
+		if (isLoading) {
+			at = dateInString;
+		} else {
+			date = formatterIn.parse(dateInString);
+			at = formatterOut.format(date);
+		}
 
 		Event event = new Event(isDone, taskDesc, at);
 		return event;

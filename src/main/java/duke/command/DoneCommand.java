@@ -34,10 +34,10 @@ public class DoneCommand extends Command {
      * @throws DukeException If non-existent index is provided.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task action = tasks.getTask(index);
         if (index + 1 > tasks.getListSize()) {
             throw new DukeException("☹ OOPS!!! This item does not exist.");
         }
+        Task action = tasks.getTask(index);
         action.setDone();
         ui.printDoneMessage(action);
         try {

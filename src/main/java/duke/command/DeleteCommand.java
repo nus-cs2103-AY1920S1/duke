@@ -34,10 +34,10 @@ public class DeleteCommand extends Command {
      * @throws DukeException If non-existent index is provided.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.getTask(index);
-        if (index + 1 > tasks.getListSize()) {
+        if (index >= tasks.getListSize()) {
             throw new DukeException("☹ OOPS!!! This item does not exist.");
         }
+        Task task = tasks.getTask(index);
         tasks.deleteTask(index);
         int numberOfTasks = tasks.getListSize();
         ui.printDeleteMessage(task, numberOfTasks);

@@ -9,14 +9,14 @@ import duke.task.TaskList;
  * Abstract class that consolidates common operations for Commands that add
  * tasks, such as EventCommand and TodoCommand.
  */
-abstract class AddCommand extends Command {
+public abstract class AddCommand extends Command {
 
     /**
      * Constructs an AddCommand with the given details.
      *
      * @param details   Details of task to be added
      */
-    AddCommand(String details) {
+    public AddCommand(String details) {
         super(details);
     }
 

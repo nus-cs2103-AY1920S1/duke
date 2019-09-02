@@ -12,7 +12,7 @@ public class TaskList {
     /** List of tasks. */
     private final List<Task> tasks;
 
-    /** Creates a new, empty TaskList */
+    /** Creates a new, empty TaskList. */
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to the TaskList
+     * Adds a Task to the TaskList.
      *
      * @param newTask   Task to be added
      */

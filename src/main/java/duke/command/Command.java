@@ -12,13 +12,13 @@ import java.io.IOException;
  * once user input has been parsed.
  */
 public abstract class Command {
-    /** Details of the command */
+    /** Details of the command. */
     protected String details;
 
-    /** Whether the command is an exit command */
+    /** Whether the command is an exit command. */
     protected boolean isExit;
 
-    /** Whether the command marks a task as done */
+    /** Whether the command marks a task as done. */
     protected boolean isDone;
 
     /**
@@ -27,7 +27,7 @@ public abstract class Command {
      *
      * @param details   Details of the command
      */
-    Command(String details) {
+    public Command(String details) {
         this.details = details;
         this.isExit = false;
         this.isDone = false;
@@ -81,7 +81,7 @@ public abstract class Command {
      * @param storage           Storage to save task list in
      * @throws DukeException    If file does not get written properly.
      */
-    void save(TaskList tasks, Storage storage) throws DukeException {
+    protected void save(TaskList tasks, Storage storage) throws DukeException {
         try {
             storage.store(tasks);
         } catch (IOException e) {
@@ -103,7 +103,7 @@ public abstract class Command {
      * @return                  The requested task index
      * @throws DukeException    Exception message indicating task not found
      */
-    int getTaskIndex(String number, int numberOfTasks) throws DukeException {
+    public int getTaskIndex(String number, int numberOfTasks) throws DukeException {
         try {
             int taskIndex = Integer.parseInt(number);
             if (taskIndex < 1 || taskIndex > numberOfTasks) {

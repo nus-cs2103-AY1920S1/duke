@@ -30,10 +30,10 @@ public class Task {
         new SimpleDateFormat("EEE")
     };
 
-    /** Description of task */
+    /** Description of task. */
     private String description;
 
-    /** Whether the task has been completed */
+    /** Whether the task has been completed. */
     private boolean isDone;
 
     /**

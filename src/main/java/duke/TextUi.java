@@ -11,21 +11,21 @@ public class TextUi {
 
     /* STATIC VARIABLES */
 
-    /** Scanner for user input */
+    /** Scanner for user input. */
     private static final Scanner scanner = new Scanner(System.in);
 
-    /** Duke logo for display */
+    /** Duke logo for display. */
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    /** Horizontal line of width 60 characters */
+    /** Horizontal line of width 60 characters. */
     private static final String HORIZONTAL_LINE =
             "____________________________________________________________";
 
-    /** Four space indentation */
+    /** Four space indentation. */
     private static final String INDENT = "    ";
 
     /* METHODS TO READ INPUT */

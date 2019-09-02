@@ -12,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# saved data.ser
+/src/main/data/duke.ser

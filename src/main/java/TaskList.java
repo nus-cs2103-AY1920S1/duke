@@ -56,4 +56,12 @@ public class TaskList {
             System.out.println(i + 1 + ". " + tasks.get(i));
         }
     }
+
+    /**
+     * Gets the whole tasklist
+     * @return an arraylist of tasks
+     */
+    public ArrayList<Task> getWholeList() {
+        return this.tasks;
+    }
 }

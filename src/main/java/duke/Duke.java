@@ -3,6 +3,9 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 /**
  * Represents a personal assistant chat bot. A <code>Duke</code> object corresponds to a specific <code>Storage</code>,
  * <code>TaskList</code> and <code>Ui</code>.
@@ -63,6 +66,21 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(outputStream);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        try {
+            ui.printLine();
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException exception) {
+            ui.printExceptionMessage(exception);
+        } finally {
+            ui.printLine();
+        }
+        System.out.flush();
+        System.setOut(old);
+        return outputStream.toString();
     }
 }

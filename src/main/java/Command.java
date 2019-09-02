@@ -12,7 +12,7 @@ public abstract class Command {
     /**
      * Description of the command, the necessary information of the command.
      */
-    protected String desc;
+    protected String description;
 
     /**
      * Constructs and initializes the attributes of a new Command object,

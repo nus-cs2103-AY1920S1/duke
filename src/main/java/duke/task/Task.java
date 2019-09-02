@@ -45,7 +45,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return isDone ? "✓" : "✗";
+        return isDone ? "O" : "X";
     }
 
     public abstract char getShortForm();

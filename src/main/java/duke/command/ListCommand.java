@@ -3,7 +3,6 @@ package duke.command;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class ListCommand extends Command {
     /**
@@ -18,14 +17,14 @@ public class ListCommand extends Command {
     /**
      * Executes List command.
      * @param taskList TaskList object for the duke program
-     * @param ui ui object for the duke program
      * @param storage storage object for the duke program
-     * @return true
+     * @return String to be printed
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         String formattedString = taskList.getTasksInString(taskList.getTaskList());
-        ui.showMessage(Messages.LIST_MESSAGE, Messages.COMMAND_INDENTATION + formattedString);
-        return true;
+        String message = String.join("\n", Messages.LIST_MESSAGE,
+                Messages.COMMAND_INDENTATION + formattedString);
+        return message;
     }
 }

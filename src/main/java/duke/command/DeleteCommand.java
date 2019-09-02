@@ -4,7 +4,6 @@ import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
 
@@ -27,21 +26,18 @@ public class DeleteCommand extends Command {
     /**
      * Executes Delete command.
      * @param taskList TaskList object for the duke program
-     * @param ui ui object for the duke program
      * @param storage storage object for the duke program
-     * @return true if the command executes successfully, else false
+     * @return String to be printed
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             Task removedTask = taskList.deleteFromTaskList(itemNum - 1);
-            ui.showMessage(Messages.DELETE_TASK_MESSAGE,
+            return String.join("\n", Messages.DELETE_TASK_MESSAGE,
                     Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + removedTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
-            return true;
         } catch (IndexOutOfBoundsException e) {
-            ui.showError(Messages.INVALID_SIZE_EXCEPTION);
-            return false;
+            return Messages.INVALID_SIZE_EXCEPTION;
         }
     }
 }

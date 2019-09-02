@@ -3,7 +3,6 @@ package duke.command;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -21,19 +20,16 @@ public class ExitCommand extends Command {
     /**
      * Executes Exit command.
      * @param taskList TaskList object for the duke program
-     * @param ui ui object for the duke program
      * @param storage storage object for the duke program
-     * @return true if the command executes successfully, else false
+     * @return String to be printed
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             storage.saveData(taskList.getTaskList());
-            ui.showMessage(Messages.BYE_MESSAGE);
-            return true;
+            return Messages.BYE_MESSAGE;
         } catch (IOException e) {
-            ui.showError(e.getMessage());
-            return false;
+            return e.getMessage();
         }
 
     }

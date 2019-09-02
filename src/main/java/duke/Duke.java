@@ -26,8 +26,6 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Donald.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Pooh.png"));
 
     /**
      * Constructor for <code>Duke</code>.

@@ -1,10 +1,11 @@
 package duke.command;
 
+import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventCommandTest {
     private TaskList taskList1;
-    private Ui ui;
     private Storage storage;
 
 
@@ -34,11 +34,11 @@ public class EventCommandTest {
         taskList.add(task1);
         taskList.add(task2);
         taskList1 = new TaskList(taskList);
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("data/dukeTest.txt");
 
-        assertEquals(false, new EventCommand("event a".split("\\s+")).execute(taskList1, ui, storage));
-        assertEquals(false, new EventCommand("event a /at".split("\\s+")).execute(taskList1, ui, storage));
-        assertEquals(true, new EventCommand("event a /at SG".split("\\s+")).execute(taskList1, ui, storage));
+        assertEquals(String.join("\n", Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
+                + Messages.COMPLETION_INDENTATION + new Event("a", "SG", false),
+                String.format(Messages.LIST_SIZE_FORMAT, 3)),
+                new EventCommand("event a /at SG".split("\\s+")).execute(taskList1, storage));
     }
 }

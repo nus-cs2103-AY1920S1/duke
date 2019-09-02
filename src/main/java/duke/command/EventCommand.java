@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 public class EventCommand extends AddCommand {
     private String[] commands;
@@ -28,23 +27,20 @@ public class EventCommand extends AddCommand {
     /**
      * Executes Event command.
      * @param taskList TaskList object for the duke program
-     * @param ui ui object for the duke program
      * @param storage storage object for the duke program
-     * @return true if the command executes successfully, else false
+     * @return String to be printed
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             String[] args = GetArgumentsUtil.getTwoCommandArgs(1, "/at", commands);
             Task eventTask = new Event(args[0], args[1]);
             taskList.addToTaskList(eventTask);
-            ui.showMessage(Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
+            return String.join("\n", Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
                     + Messages.COMPLETION_INDENTATION + eventTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
-            return true;
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
-            return false;
+            return e.getMessage();
         }
     }
 }

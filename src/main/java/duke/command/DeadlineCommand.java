@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,28 +34,25 @@ public class DeadlineCommand extends AddCommand {
     /**
      * Executes Deadline command.
      * @param taskList TaskList object for the duke program
-     * @param ui ui object for the duke program
      * @param storage storage object for the duke program
-     * @return true if the command executes successfully, else false
+     * @return String to be printed
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
             String[] args = GetArgumentsUtil.getTwoCommandArgs(1, "/by", commands);
             LocalDateTime dateTime = LocalDateTime.parse(args[1], formatter);
             Task deadlineTask = new Deadline(args[0], dateTime);
             taskList.addToTaskList(deadlineTask);
-            ui.showMessage(Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
-                    + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
+            String message = String.join("\n", Messages.ADDED_TASK_MESSAGE,
+                    Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
-            return true;
+            return message;
         } catch (DateTimeParseException e) {
-            ui.showError(Messages.DATETIME_PARSE_EXCEPTION);
-            return false;
+            return Messages.DATETIME_PARSE_EXCEPTION;
         } catch (DukeException e1) {
-            ui.showError(e1.getMessage());
-            return false;
+            return e1.getMessage();
         }
     }
 }

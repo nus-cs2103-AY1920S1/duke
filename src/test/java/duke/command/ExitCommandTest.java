@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExitCommandTest {
     private TaskList taskList1;
-    private Ui ui;
     private Storage storage;
 
 
@@ -32,9 +31,8 @@ public class ExitCommandTest {
         taskList.add(task1);
         taskList.add(task2);
         taskList1 = new TaskList(taskList);
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("data/dukeTest.txt");
 
-        assertEquals(true, new ExitCommand().execute(taskList1, ui, storage));
+        assertEquals(Messages.BYE_MESSAGE, new ExitCommand().execute(taskList1, storage));
     }
 }

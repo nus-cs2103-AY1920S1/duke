@@ -6,7 +6,6 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 import java.util.Arrays;
 
@@ -20,18 +19,16 @@ public class ToDoCommand extends AddCommand {
     /**
      * Executes ToDo command.
      * @param taskList TaskList object for the duke program
-     * @param ui ui object for the duke program
      * @param storage storage object for the duke program
-     * @return true 
+     * @return String to be printed
      */
     @Override
-    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         String arg = GetArgumentsUtil.concatStrings(Arrays.copyOfRange(commands, 1, commands.length));
         Task toDoTask = new Todo(arg);
         taskList.addToTaskList(toDoTask);
-        ui.showMessage(Messages.ADDED_TASK_MESSAGE,
+        return String.join("\n", Messages.ADDED_TASK_MESSAGE,
                 Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + toDoTask.toString(),
                 String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
-        return true;
     }
 }

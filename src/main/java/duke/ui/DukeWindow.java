@@ -1,5 +1,11 @@
 package duke.ui;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.shared.Messages;
+import duke.storage.Storage;
+import duke.task.TaskList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +21,9 @@ import java.io.IOException;
 
 public class DukeWindow extends AnchorPane {
     private Stage stage;
+    private Storage storage;
+    private TaskList tasks;
+
 
     @FXML
     private ScrollPane scrollPane;
@@ -37,8 +46,16 @@ public class DukeWindow extends AnchorPane {
 
     }
 
-    public DukeWindow(Stage stage) {
+    /**
+     * Constructor to create DukeWindow Ui.
+     * @param stage primary stage
+     * @param storage storage object for this Ui
+     * @param tasks a list of tasks for this Ui
+     */
+    public DukeWindow(Stage stage, Storage storage, TaskList tasks) {
         this.stage = stage;
+        this.storage = storage;
+        this.tasks = tasks;
     }
 
     @FXML
@@ -46,6 +63,9 @@ public class DukeWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Loads the DukeWindows.fxml
+     */
     public void show()  {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DukeWindow.fxml"));
@@ -56,25 +76,44 @@ public class DukeWindow extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        showWelcome();
     }
 
+    /**
+     * Reads user input and run the commands.
+     */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, user),
-                DialogBox.getDukeDialog(response, duke)
-        );
+        String fullCommand = userInput.getText().trim();
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("Command enter: " + fullCommand, user));
+        boolean isExit = false;
+        try {
+            Command c = Parser.parse(fullCommand);
+            String outputString = c.execute(tasks, storage);
+            if (c.isExit()) {
+                System.exit(0);
+            }
+            outputToUi(outputString);
+        } catch (DukeException e) {
+            outputToUi(e.getMessage());
+        } catch (NumberFormatException e) {
+            outputToUi(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "number"));
+        }
         userInput.clear();
     }
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    /**
+     * Prints the message in the Ui.
+     * @param message message to be printed
+     */
+    public void outputToUi(String message) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, duke));
     }
 
-    private void outputToUi() {
-        
+    /**
+     * Print welcome message to user.
+     */
+    public void showWelcome() {
+        outputToUi(Messages.GREETING_MESSAGE);
     }
-
 }

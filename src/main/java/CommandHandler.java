@@ -7,7 +7,13 @@ public class CommandHandler {
     private Storage storage;
     private TaskList tl;
 
-    // class constructor
+    /**
+     * Class constructor to define a CommandHandler instance.
+     * @param ui UI to generate output.
+     * @param parser Parser to parse commands.
+     * @param storage Storage to store stuff.
+     * @param tl TaskList to maintain tasks.
+     */
     public CommandHandler(UI ui, Parser parser, Storage storage, TaskList tl) {
         this.ui = ui;
         this.parser = parser;
@@ -15,7 +21,12 @@ public class CommandHandler {
         this.tl = tl;
     }
 
-    // execute a command
+    /**
+     * Execute a user input.
+     * @param input Input to be executed.
+     * @return String showing the output.
+     * @throws DukeException Possible eception which can be thrown during runtime.
+     */
     public String execute(String input) throws DukeException {
         Task task;
         String returnString = "";
@@ -28,30 +39,30 @@ public class CommandHandler {
             returnString = this.ui.showTaskList(this.tl);
             break;
         case "done":
-            task = this.tl.taskDone(this.parser.parseInteger(input.split(" ")[1]));
+            task = this.tl.taskDone(this.parser.parseInteger(input));
             returnString = this.ui.showTaskMarkedDone(task);
             break;
         case "delete":
-            task = this.tl.removeTask(this.parser.parseInteger(input.split(" ")[1]));
+            task = this.tl.removeTask(this.parser.parseInteger(input));
             returnString = this.ui.showTaskDeletion(task, this.tl);
             break;
         case "todo":
-            task = this.parser.parseTodo(input.split(" ", 2)[1]);
+            task = this.parser.parseTodo(input);
             tl.addTask(task);
             returnString = this.ui.showTaskAddition(task, this.tl);
             break;
         case "event":
-            task = this.parser.parseEvent(input.split(" ", 2)[1]);
+            task = this.parser.parseEvent(input);
             tl.addTask(task);
             returnString = this.ui.showTaskAddition(task, tl);
             break;
         case "deadline":
-            task = this.parser.parseDeadline(input.split(" ", 2)[1]);
+            task = this.parser.parseDeadline(input);
             tl.addTask(task);
             returnString = this.ui.showTaskAddition(task, tl);
             break;
         case "find":
-            TaskList newTl = tl.findTasks(input.split(" ", 2)[1]);
+            TaskList newTl = tl.findTasks(input);
             returnString = this.ui.showTaskList(newTl);
             break;
         default:

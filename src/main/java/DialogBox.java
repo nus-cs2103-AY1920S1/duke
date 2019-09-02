@@ -49,10 +49,16 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
     }
 
+    /**
+     * Return a DialogBox for user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Return a DialogBox for Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();

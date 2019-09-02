@@ -22,11 +22,13 @@ class Parser {
      * @return A To-Do task.
      * @throws DukeException Exception in case to-do is incomplete.
      */
-    public ToDo parseTodo(String taskStr) throws DukeException {
-        if (taskStr.isEmpty()) {
-            throw new DukeException("Please enter the to-do description.");
+    public ToDo parseTodo(String input) throws DukeException {
+        try {
+            String description = input.split(" ", 2)[1];
+            return new ToDo(description);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please enter a to-do description.");
         }
-        return new ToDo(taskStr);
     }
 
     /**
@@ -35,16 +37,14 @@ class Parser {
      * @return A Deadline task.
      * @throws DukeException Exception in case deadline is incomplete.
      */
-    public Deadline parseDeadline(String taskStr) throws DukeException {
-        if (taskStr.split(" /by ").length < 1) {
-            throw new DukeException("Please enter deadline description and date.");
-        } else if (taskStr.split(" /by ").length < 2) {
-            throw new DukeException("Please provide a deadline date.");
-        }
-        String desc = taskStr.split(" /by ")[0];
+    public Deadline parseDeadline(String input) throws DukeException {
         try {
+            String taskStr = input.split(" ", 2)[1];
+            String desc = taskStr.split(" /by ")[0];
             Date date = format.parse(taskStr.split(" /by ")[1]);
             return new Deadline(desc, date);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please provide both deadline description and date.");
         } catch (ParseException e) {
             throw new DukeException("Could not parse the deadline. :(");
         }
@@ -56,16 +56,14 @@ class Parser {
      * @return An Event task.
      * @throws DukeException Exception in case event is incomplete.
      */
-    public Event parseEvent(String taskStr) throws DukeException {
-        if (taskStr.split(" /at ").length < 1) {
-            throw new DukeException("Please enter event description and date.");
-        } else if (taskStr.split(" /at ").length < 2) {
-            throw new DukeException("Please provide a event date.");
-        }
-        String desc = taskStr.split(" /at ")[0];
+    public Event parseEvent(String input) throws DukeException {
         try {
+            String taskStr = input.split(" ", 2)[1];
+            String desc = taskStr.split(" /at ")[0];
             Date date = format.parse(taskStr.split(" /at ")[1]);
             return new Event(desc, date);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please provide both event description and date.");
         } catch (ParseException e) {
             throw new DukeException("Could not parse the event. :(");
         }

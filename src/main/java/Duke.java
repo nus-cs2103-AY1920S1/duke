@@ -26,8 +26,7 @@ public class Duke {
 
     /**
      * Method to generate the welcome string for Duke.
-     * @param input
-     * @return
+     * @return Welcome string to be returned.
      */
     public String getWelcomeString() {
         return this.ui.printWelcome() + "\n" + this.ui.showTaskList(this.tl);

@@ -20,10 +20,10 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Returns the result of executing the command.
      * @param tasks a list task to work on.
      * @throws IllegalIndexOfTaskException If the index of the task is out of range.
-     * @return
+     * @return the result of executing the command.
      */
     @Override
     public CommandResult execute(TaskList tasks) throws IllegalIndexOfTaskException {

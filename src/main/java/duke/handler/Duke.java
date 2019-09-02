@@ -3,7 +3,6 @@ package duke.handler;
 import duke.command.Command;
 import duke.command.CommandResult;
 import duke.command.CommandType;
-import duke.exception.IllegalDescriptionException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -13,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * A class representing the Duke App.
+ * A class manages duke operation.
  */
 public class Duke {
     private static final String FILEPATH = "/Users/jiangyuxin/Documents/sem1/cs2103/duke/data/duke.txt";
@@ -27,16 +26,33 @@ public class Duke {
      * Class constructor specifying the file path for storage.
      * @param filePath the file path for storage.
      */
-    public Duke(String filePath){
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
     }
 
-    public void loadTask() throws FileNotFoundException, IllegalDescriptionException {
+    /**
+     * Loads tasks from the disk.
+     * @throws FileNotFoundException If the file from which to load task is not found.
+     */
+    public void loadTask() throws FileNotFoundException {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Stores all tasks in the task list to disk.
+     * @throws IOException If an input or output exception occurred.
+     */
+    public void storeTasks() throws IOException {
+        storage.store(tasks);
+    }
+
+    /**
+     * Parses the command.
+     * @param command command to be parsed.
+     * @return a string representation of the response to the command.
+     */
     public String parse(String command) {
         while (true) {
             try {
@@ -44,7 +60,7 @@ public class Duke {
                 CommandResult result = cmd.execute(tasks);
                 if (result.getCommandType() == CommandType.Exit) {
                     try {
-                        storage.store(tasks);
+                        storeTasks();
                     } catch (IOException e) {
                         return ui.showStoringError(e);
                     }
@@ -54,12 +70,5 @@ public class Duke {
                 return ui.showParsingError(e);
             }
         }
-    }
-
-    /**
-     * Main method.
-     * @param args Unused.
-     */
-    public static void main(String[] args) {
     }
 }

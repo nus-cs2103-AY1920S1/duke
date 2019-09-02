@@ -18,10 +18,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Returns the result of executing the command.
      * Add the task to the list.
      * @param tasks a list task to work on.
-     * @return
+     * @return the result of executing the command.
      */
     @Override
     public CommandResult execute(TaskList tasks) {

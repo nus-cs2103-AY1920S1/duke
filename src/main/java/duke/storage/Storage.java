@@ -33,9 +33,8 @@ public class Storage {
      * Returns a list of tasks that are stored in disk.
      *
      * @throws FileNotFoundException If the file specified by the filePath is not found.
-     * @throws IllegalDescriptionException If the description of tasks is illegal.
      */
-    public ArrayList<Task> load() throws FileNotFoundException, IllegalDescriptionException {
+    public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
 
@@ -43,23 +42,27 @@ public class Storage {
         while (in.hasNextLine()) {
             String[] str = in.nextLine().split(" \\| ");
             Task task;
-            switch (str[0]) {
-            case "T":
-                task = new ToDo(str[2]);
-                break;
-            case "E":
-                task = new Event(str[2], LocalDateTime.parse(str[3]));
-                break;
-            case "D":
-                task = new Deadline(str[2], LocalDateTime.parse(str[3]));
-                break;
-            default:
-                continue;
+            try {
+                switch (str[0]) {
+                case "T":
+                    task = new ToDo(str[2]);
+                    break;
+                case "E":
+                    task = new Event(str[2], LocalDateTime.parse(str[3]));
+                    break;
+                case "D":
+                    task = new Deadline(str[2], LocalDateTime.parse(str[3]));
+                    break;
+                default:
+                    continue;
+                }
+                if (str[1].equals("1")) {
+                    task.setDone();
+                }
+                list.add(task);
+            } catch (IllegalDescriptionException e) {
+                e.printStackTrace();
             }
-            if (str[1].equals("1")) {
-                task.setDone();
-            }
-            list.add(task);
         }
         return list;
     }
@@ -67,7 +70,7 @@ public class Storage {
     /**
      * Stores tasks in a task list into the file.
      * @param tasks a list of tasks.
-     * @throws IOException If  an input or output exception occurred.
+     * @throws IOException If an input or output exception occurred.
      */
     public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);

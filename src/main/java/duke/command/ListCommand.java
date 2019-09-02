@@ -15,9 +15,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Returns the result of executing the command.
      * @param tasks a list task to work on.
-     * @return
+     * @return the result of executing the command.
      */
     @Override
     public CommandResult execute(TaskList tasks) {

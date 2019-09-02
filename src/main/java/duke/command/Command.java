@@ -11,9 +11,9 @@ import duke.storage.Storage;
 /**
  * Represents a Command to be executed during the running of the Duke Application.
  */
-public class Command {
+public abstract class Command {
 
-    public boolean isExit;
+    private boolean isExit;
 
     /**
      * Constructs a new Command where it does not terminate the Duke Application.
@@ -21,6 +21,14 @@ public class Command {
      */
     public Command(boolean isExit) {
         this.isExit =  isExit;
+    }
+
+    /**
+     * Checks if the command signals the exit of a program or not.
+     * @return whether the exit signal is given or not.
+     */
+    public boolean checkIfExit() {
+        return this.isExit;
     }
 
     /**
@@ -32,9 +40,7 @@ public class Command {
      * @param dateParser Parser date data.
      * @throws DukeException If there is a problem with data processing, loading or saving.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage,
-                        DataParser dataParser, DateParser dateParser) throws DukeException {
-
-    }
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage,
+                        DataParser dataParser, DateParser dateParser) throws DukeException;
 
 }

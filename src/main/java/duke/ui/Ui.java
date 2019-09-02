@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Resets the output message
+     * Resets the output message.
      */
     public void reset() {
         output = "";

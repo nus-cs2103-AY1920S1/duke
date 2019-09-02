@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Martin.png"));
 
+    /**
+     * Initializes the window with a greeting dialog box.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -33,6 +36,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets the duke class required for the main to the specific duke instance.
+     * @param d The specified duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

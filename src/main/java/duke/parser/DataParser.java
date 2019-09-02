@@ -65,7 +65,7 @@ public class DataParser {
      * @return A Command based on the user input.
      * @throws DukeException If the user input is invalid.
      */
-    public Command findCommand() throws DukeException {
+    public Command findTaskCommand() throws DukeException {
         if (shouldEndParsing()) {
             return new EndCommand();
         } else if (shouldListTasks()) {

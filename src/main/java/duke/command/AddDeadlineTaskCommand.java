@@ -32,7 +32,7 @@ public class AddDeadlineTaskCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        if (TaskList.getNumberOfTasks() >= 100) {
+        if (TaskList.hasHitTaskLimit()) {
             throw new TooManyTasksException();
         }
         String[] deadlineData = dataParser.parseDeadlineData();

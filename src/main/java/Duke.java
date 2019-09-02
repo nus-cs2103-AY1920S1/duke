@@ -77,8 +77,8 @@ public class Duke {
 
             try {
                 parser.readInput();
-                Command c = parser.findCommand();
-                hasTerminated = c.isExit;
+                Command c = parser.findTaskCommand();
+                hasTerminated = c.checkIfExit();
                 c.execute(taskList, ui, storage, parser, dateHelper);
             } catch (DukeException error) {
                 ui.sendErrorMessage(error);
@@ -100,7 +100,7 @@ public class Duke {
         ui.reset();
         try {
             parser.readInput(input);
-            Command c = parser.findCommand();
+            Command c = parser.findTaskCommand();
             if (c instanceof EndCommand) {
                 hasTerminated = true;
             }

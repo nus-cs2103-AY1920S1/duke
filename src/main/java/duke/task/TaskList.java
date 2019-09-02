@@ -28,6 +28,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public static boolean hasHitTaskLimit() {
+        return tasks.size() >= 100;
+    }
+
     /**
      * Adds the ToDo Task based on the data given, and returns the index of the new task.
      * @param toDoData The name of the ToDo Task.
@@ -100,8 +104,9 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks in the list.
-     * @return The number of tasks in the list.
+     * Returns a list of indexes of matching tasks which contain specific keywords.
+     * @param keyword The matching keyword or keywords.
+     * @return A list of indexes of tasks containing the keywords.
      */
     public ArrayList<Integer> findMatchingTasks(String keyword) {
         ArrayList<Integer> matchingIndexes = new ArrayList<>();
@@ -115,6 +120,10 @@ public class TaskList {
         return matchingIndexes;
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     * @return The number of tasks in the list.
+     */
     public static int getNumberOfTasks() {
         return tasks.size();
     }

@@ -50,10 +50,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets a string and an image and returns a Dialog Bax based on user input.
+     * @param text The specified user input.
+     * @param img The specified user image.
+     * @return A dialog box with the specific string and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets a string and an image and returns a Dialog Bax based on duke input.
+     * @param text The specified duke input.
+     * @param img The specified duke image.
+     * @return A dialog box with the specific string and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

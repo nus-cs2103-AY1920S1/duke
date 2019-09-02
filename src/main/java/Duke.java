@@ -13,13 +13,13 @@ public class Duke {
      * Will load a list of tasks from the .txt file and modify it
      * as the user keys in new tasks and manipulates existing ones
      * @param filePath refers to the path of the .txt file
-     * @throws IOException
+     * @throws IOException thrown if unable to load file
      */
     public Duke(String filePath) throws IOException {
         ui = new UI();
         storage = new Storage(filePath);
         try {
-            if(storage.load() != null) {
+            if (storage.load() != null) {
                 tasks = new TaskList(storage.load());
             } else {
                 throw new DukeException("Unable to load data from file");
@@ -29,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main program.
+     */
     public void run() {
 
         ui.showGreeting();
@@ -46,10 +49,10 @@ public class Duke {
                     if (echo.equals("list")) {
                         ui.showTasksInList(tasks);
                     } else if (cmd.getCommandType().equals("find")) {
-                      ui.showFoundItems(cmd.getInstruction(), tasks);
+                        ui.showFoundItems(cmd.getInstruction(), tasks);
                     } else if (cmd.getCommandType().equals("done")) {
                         try {
-                            if(cmd.getInstruction().equals("")) {
+                            if (cmd.getInstruction().equals("")) {
                                 throw new DukeException("☹ OOPS!!! Please specify which task is done");
                             } else if (Integer.parseInt(cmd.getInstruction()) > tasks.getListSize()) {
                                 throw new DukeException("☹ OOPS!!! Task " + cmd.getInstruction() + " does not exist");
@@ -68,7 +71,7 @@ public class Duke {
 
                     } else if (cmd.getCommandType().equals("delete")) {
                         try {
-                            if(cmd.getInstruction().equals("")) {
+                            if (cmd.getInstruction().equals("")) {
                                 throw new DukeException("☹ OOPS!!! Please specify which task is to be deleted");
                             } else if (Integer.parseInt(cmd.getInstruction()) > tasks.getListSize()) {
                                 throw new DukeException("☹ OOPS!!! Task " + cmd.getInstruction() + " does not exist");
@@ -85,13 +88,15 @@ public class Duke {
                             ui.showErrorMsg(exp.getMessage());
                         }
 
-                    } else if (cmd.getCommandType().equals("deadline") || cmd.getCommandType().equals("todo") || cmd.getCommandType().equals("event")) {
+                    } else if (cmd.getCommandType().equals("deadline") || cmd.getCommandType().equals("todo")
+                                || cmd.getCommandType().equals("event")) {
                         if (cmd.getCommandType().equals("deadline")) {
                             try {
                                 if (cmd.getInstruction().equals("") || cmd.getInstruction().equals("deadline")) {
                                     throw new DukeException("☹ OOPS!!! The description of deadline cannot be empty");
                                 } else if (!echo.contains("/by")) {
-                                    throw new DukeException("☹ OOPS!!! The deadline must be completed by a certain date");
+                                    throw new DukeException("☹ OOPS!!! The deadline must be completed "
+                                            + "by a certain date");
                                 } else {
                                     try {
                                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -179,9 +184,9 @@ public class Duke {
     }
 
     /**
-     * The Main function for the Duke chatbot
-     * @param args
-     * @throws IOException
+     * The Main function for the Duke chatbot.
+     * @param args during runtime
+     * @throws IOException when unable to load file
      */
     public static void main(String[] args) throws IOException {
         new Duke("../../../data/duke.txt").run();

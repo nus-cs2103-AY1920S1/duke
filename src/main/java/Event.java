@@ -4,7 +4,7 @@ public class Event extends Task {
     protected Date at;
 
     /**
-     * Represents the upcoming event the user wants to add to his tasklist
+     * Represents the upcoming event the user wants to add to his tasklist.
      * @param description refers to the details of the event
      * @param at refers to the date when the event is happening
      */
@@ -14,7 +14,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the event date
+     * Returns the event date.
      * @return Date at
      */
     public Date getAt() {
@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the stringified form the Event task
+     * Returns the stringified form the Event task.
      * @return String event
      */
     @Override

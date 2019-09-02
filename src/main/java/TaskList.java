@@ -32,10 +32,12 @@ public class TaskList {
      * Returns the last item in the list of tasks.
      * @return last task item
      */
-    public Task getLastItem() { return list.get(list.size() - 1); }
+    public Task getLastItem() {
+        return list.get(list.size() - 1);
+    }
 
     /**
-     * Returns the tasklist
+     * Returns the tasklist.
      * @return Arraylist of Task
      */
     public ArrayList<Task> getList() {
@@ -60,7 +62,7 @@ public class TaskList {
     }
 
     /**
-     * Removed the specified task from the list
+     * Removed the specified task from the list.
      * @param i refers to the index of the task which needs to
      *          be removed from the list
      * @return the task removed

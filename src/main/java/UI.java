@@ -24,7 +24,7 @@ public class UI {
         System.out.println(line);
     }
 
-     /**
+    /**
      * Displays goodbye message on exit.
      */
     public void showGoodbye() {
@@ -34,7 +34,7 @@ public class UI {
     }
 
     /**
-     * Displays all the items in the tasklist
+     * Displays all the items in the tasklist.
      * @param tasks refers to the tasklist
      */
     public void showTasksInList(TaskList tasks) {
@@ -92,7 +92,7 @@ public class UI {
         System.out.println("    Here are the matching tasks in your list: ");
         int counter = 1;
         for (int i = 0; i < tasks.getListSize(); i++) {
-            if(tasks.getItemAtIndex(i).getDescription().contains(toFind)) {
+            if (tasks.getItemAtIndex(i).getDescription().contains(toFind)) {
                 System.out.println("    " + counter + ". " + tasks.getItemAtIndex(i));
                 counter++;
             }

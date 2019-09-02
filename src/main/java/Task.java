@@ -12,7 +12,7 @@ public class Task {
     }
 
     /**
-     * Returns the details of the task
+     * Returns the details of the task.
      * @return String description
      */
     public String getDescription() {
@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Returns whether a task is marked complete
+     * Returns whether a task is marked complete.
      * @return boolean isDone
      */
     public boolean getIsDone() {
@@ -37,14 +37,14 @@ public class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Stringified representation of the task
+     * Stringified representation of the task.
      * @return String task
      */
     public String toString() {

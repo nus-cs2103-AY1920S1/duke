@@ -1,2 +1,3 @@
-todo [1]johns birthday
-deadline [1]return book/by02/12/2019 1800
+todo [0]johns birthday
+event [1]return book/at02/12/2019 1800
+event [0]birthday party/at02/12/2019 0800

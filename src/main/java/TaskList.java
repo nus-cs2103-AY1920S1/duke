@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class TaskList {
@@ -45,11 +46,11 @@ public class TaskList {
         taskList.addLast(new ToDos(toDoName,completionStatus));
     }
 
-    public void addDeadline(String deadlineName , boolean completionStatus , String date ) {
+    public void addDeadline(String deadlineName , boolean completionStatus , LocalDateTime date ) {
         taskList.addLast(new Deadlines(deadlineName,completionStatus,date));
     }
 
-    public void addEvent(String eventName , boolean completionStatus, String date){
+    public void addEvent(String eventName , boolean completionStatus, LocalDateTime date){
         taskList.addLast(new Events(eventName,completionStatus,date));
     }
 

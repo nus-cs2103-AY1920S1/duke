@@ -1,5 +1,9 @@
+package duke;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import duke.command.Command;
 
 class Parser {
     private Map<String, Command> commands = new HashMap<>();

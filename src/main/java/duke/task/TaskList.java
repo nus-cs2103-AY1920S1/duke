@@ -1,36 +1,38 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-class TaskList {
+public class TaskList {
     private List<Task> tasks = new ArrayList<>();
 
-    TaskList() {
+    public TaskList() {
     }
 
-    TaskList(List<String> lines) {
+    public TaskList(List<String> lines) {
         for (String line : lines) {
             tasks.add(parseTask(line));
         }
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         tasks.add(task);
     }
 
-    Task remove(int index) {
+    public Task remove(int index) {
         return tasks.remove(index);
     }
 
-    Task get(int index) {
+    public Task get(int index) {
         return tasks.get(index);
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 
-    List<String> getAsLines() {
+    public List<String> getAsLines() {
         List<String> save = new ArrayList<>();
         for (Task task : tasks) {
             save.add(getSaveString(task));

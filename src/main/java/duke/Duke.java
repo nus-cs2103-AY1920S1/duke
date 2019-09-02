@@ -1,5 +1,17 @@
+package duke;
+
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class Duke {
     private Parser parser;

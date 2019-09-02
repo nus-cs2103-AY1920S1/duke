@@ -1,11 +1,17 @@
+package duke.command;
+
 import java.io.IOException;
 import java.util.List;
 
-class DeleteCommand implements Command {
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
+public class DeleteCommand implements Command {
     private final TaskList tasks;
     private Storage storage;
 
-    DeleteCommand(TaskList tasks, Storage storage) {
+    public DeleteCommand(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
     }

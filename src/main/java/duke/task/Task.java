@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.List;
 
 public class Task {
@@ -9,7 +11,7 @@ public class Task {
         this.isDone = false;
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -17,7 +19,7 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    List<String> getSaveList() {
+    public List<String> getSaveList() {
         return List.of(isDone ? "1" : "0", description);
     }
 

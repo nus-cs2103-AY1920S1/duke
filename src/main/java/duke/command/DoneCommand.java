@@ -1,11 +1,17 @@
+package duke.command;
+
 import java.io.IOException;
 import java.util.List;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class DoneCommand implements Command {
     private final TaskList tasks;
     private Storage storage;
 
-    DoneCommand(TaskList tasks, Storage storage) {
+    public DoneCommand(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
     }

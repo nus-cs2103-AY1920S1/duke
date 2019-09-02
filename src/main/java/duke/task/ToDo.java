@@ -1,13 +1,19 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.command.Command;
 
 public class ToDo extends Task {
     ToDo(String description) {
         super(description);
     }
 
-    static Command getCommand(TaskList tasks, Storage storage) {
+    public static Command getCommand(TaskList tasks, Storage storage) {
         return words -> {
             if (words.length == 1) {
                 throw new DukeException("The description of a todo cannot be empty.");
@@ -22,7 +28,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    List<String> getSaveList() {
+    public List<String> getSaveList() {
         List<String> list = new ArrayList<>();
         list.add("T");
         list.addAll(super.getSaveList());

@@ -1,12 +1,18 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.command.Command;
 
 public class Deadline extends TimeTask {
     Deadline(String description, String time) {
         super(description, time);
     }
 
-    static Command getCommand(TaskList tasks, Storage storage) {
+    public static Command getCommand(TaskList tasks, Storage storage) {
         return words -> {
             List<String> wordList = List.of(words);
             int separator = wordList.indexOf("/by");
@@ -28,7 +34,7 @@ public class Deadline extends TimeTask {
     }
 
     @Override
-    List<String> getSaveList() {
+    public List<String> getSaveList() {
         List<String> list = new ArrayList<>();
         list.add("D");
         list.addAll(super.getSaveList());

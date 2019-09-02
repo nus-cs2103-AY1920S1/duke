@@ -1,10 +1,14 @@
+package duke.command;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class ListCommand implements Command {
+import duke.task.TaskList;
+
+public class ListCommand implements Command {
     private final TaskList tasks;
 
-    ListCommand(TaskList tasks) {
+    public ListCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 

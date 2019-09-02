@@ -3,12 +3,8 @@ package duke.component;
 import duke.task.Task;
 
 import java.util.ArrayList;
-
-
-
-import java.util.stream.Collectors;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList object that stores all task in a list.
@@ -95,17 +91,17 @@ public class TaskList {
 
     /**
      * Finds a specific task from list of task.
+     *
      * @param keyword Keyword to find tasks that matches keyword.
      * @return List of string representation of task.
      */
-    public List<String> findTask(String keyword){
+    public List<String> findTask(String keyword) {
 
         return this.todoList
                 .stream()
-                .map( x -> x.toString())
+                .map(x -> x.toString())
                 .filter(y -> y.contains(keyword))
                 .collect(Collectors.toList());
-
 
 
     }

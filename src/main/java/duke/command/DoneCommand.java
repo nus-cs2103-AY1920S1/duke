@@ -1,17 +1,21 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.component.*;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
- *  Represents user's "done" commmand to chatbot.
+ * Represents user's "done" commmand to chatbot.
  * The 'DoneCommand' class supports operators (i) executing the command
  * and (ii) checking if the bot has exited its conversation with the user.
  */
 public class DoneCommand extends Command {
 
-    /** The task number to be marked done */
+    /**
+     * The task number to be marked done
+     */
     int taskNum;
 
     /**
@@ -28,8 +32,8 @@ public class DoneCommand extends Command {
      * Prints response in console.
      *
      * @param taskList List of the things user needs to do
-     * @param ui Interface that interacts with the user
-     * @param storage Stores the user input in a file
+     * @param ui       Interface that interacts with the user
+     * @param storage  Stores the user input in a file
      * @throws DukeException IOException if there is an error writing or reading file
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

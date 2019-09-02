@@ -1,5 +1,11 @@
 package duke.component;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,24 +16,26 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import duke.exception.*;
-import duke.task.*;
 
 /**
  * Represents Storage object that stores tasks user need to do.
  * Tasks are stored in a test file.
  * The 'Storage' class supports operators (i) loading TaskList object from text file,
- *  (ii) converting a line of text to Task object,
- *  (iii) adding text to text file,
- *  (iv) changig text in text file and
- *  (v) amending text in text file.
+ * (ii) converting a line of text to Task object,
+ * (iii) adding text to text file,
+ * (iv) changig text in text file and
+ * (v) amending text in text file.
  */
 public class Storage {
 
-    /** File path */
+    /**
+     * File path
+     */
     private String filePath;
 
-    /** Text file */
+    /**
+     * Text file
+     */
     private File textFile;
 
     /**
@@ -45,7 +53,7 @@ public class Storage {
      * Returns ArrayList of Tasks converted from tasks in text file.
      *
      * @return ArrayList of Tasks
-     * @throws DukeException  If there is IOException when reading or writing from text file.
+     * @throws DukeException If there is IOException when reading or writing from text file.
      */
     public ArrayList<Task> load() throws DukeException {
 
@@ -71,6 +79,7 @@ public class Storage {
 
     /**
      * Returns task converted from String representation of text in text file.
+     *
      * @param line String representation of a task, from text file.
      * @return Task
      */
@@ -98,8 +107,9 @@ public class Storage {
 
     /**
      * Adds text to text file.
+     *
      * @param textToAdd Text to be added into text file.
-     * @throws DukeException  If there is IOException when reading or writing from text file.
+     * @throws DukeException If there is IOException when reading or writing from text file.
      */
     public void writeToFile(String textToAdd) throws DukeException {
         try {//Create a file writer object to represent the hard disk
@@ -124,6 +134,7 @@ public class Storage {
 
     /**
      * Updates text that is already in text file.
+     *
      * @param taskNum Task Number of the task to be updated.
      * @throws DukeException If there is IOException when reading or writing from text file.
      */
@@ -143,6 +154,7 @@ public class Storage {
 
     /**
      * Deletes text that is already in text file.
+     *
      * @param taskNum Task Number of the task to delete.
      * @throws DukeException If there is IOException when reading or writing from text file.
      */

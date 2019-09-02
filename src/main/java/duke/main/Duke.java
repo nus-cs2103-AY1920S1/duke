@@ -1,11 +1,11 @@
 package duke.main;
 
-import duke.component.TaskList;
-import duke.component.Storage;
-import duke.component.Ui;
-import duke.exception.DukeException;
 import duke.command.Command;
 import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.exception.DukeException;
 
 /**
  * Represents chatbot Duke with main method.
@@ -13,19 +13,25 @@ import duke.component.Parser;
  */
 public class Duke {
 
-    /** Store and load tasks from text in text file */
+    /**
+     * Store and load tasks from text in text file
+     */
     private Storage storage;
 
-    /** Task List of tasks */
+    /**
+     * Task List of tasks
+     */
     private TaskList tasks;
 
-    /** User Interface that takes care of user interaction with chatbot */
+    /**
+     * User Interface that takes care of user interaction with chatbot
+     */
     private Ui ui;
 
     /**
      * Creates a new instance of Duke with file path of text file.
      *
-     *@param filePath File path of text file that stores tasks.
+     * @param filePath File path of text file that stores tasks.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -64,8 +70,7 @@ public class Duke {
     /**
      * Creates a new instance of Duke and runs it
      * to allow user interaction with chatbot.
-     *
-     * @param args
+     * @param args Running the duke chatbot
      */
     public static void main(String[] args) {
         new Duke("/Users/joannayap/Desktop/duke/data/duke.txt").run();

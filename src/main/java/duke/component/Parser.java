@@ -1,7 +1,9 @@
 package duke.component;
 
-import duke.exception.*;
 import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyDescException;
+import duke.exception.InvalidArgumentException;
 
 /**
  * Represents a Parser object that parses user inputs.
@@ -20,6 +22,7 @@ public class Parser {
 
     /**
      * Parses out user inputs
+     *
      * @param input User input.
      * @return Command Type of command that user input in.
      * @throws DukeException If there is IOException when reading or writing from text file.
@@ -44,6 +47,7 @@ public class Parser {
     /**
      * Returns Command object based on user input.
      * Helper method to parse(String input) method.
+     *
      * @param input User input.
      * @return Command Type o comand summoned by user.
      * @throws DukeException If there is IOException when reading or writing from text file.
@@ -104,8 +108,7 @@ public class Parser {
             }
 
 
-        }
-         else {
+        } else {
             throw new InvalidArgumentException();
         }
     }

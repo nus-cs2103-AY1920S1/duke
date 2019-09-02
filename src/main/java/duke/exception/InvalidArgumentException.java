@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- *  Represents InvalidArgumentException that is thrown when user input is invalid.
+ * Represents InvalidArgumentException that is thrown when user input is invalid.
  * The InvalidArgumentException class extends DukeException class.
  */
 public class InvalidArgumentException extends DukeException {

@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdc3c01d-ed0e-4709-a277-530fc6c192e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main/java/duke/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/duke/todo/todoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/duke/todo/TodoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/../../gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main/java/duke/data/tasks.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../main/java/duke/data/tasks.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +63,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

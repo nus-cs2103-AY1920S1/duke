@@ -28,6 +28,7 @@ public class Duke {
 			ui.showError(fe.getMessage());
 		} catch (DukeException e) {
 			tasks = new TaskList();
+			ui.showError(e.getMessage());
 			ui.showLoadingError(); // i suppose this just says file is corrupted therefore creating new or sth
 		} catch (ParseException pe) {
 			ui.showError(pe.getMessage());

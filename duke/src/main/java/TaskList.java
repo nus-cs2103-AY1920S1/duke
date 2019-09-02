@@ -29,4 +29,19 @@ class TaskList {
 	public void addTask(Task task) {
 		list.add(task);
 	}
+
+	/**
+	 * List by matching description of exisitng list of tasks against keyword
+	 * @param keyword
+	 */
+	public void listMatch(String keyword, Ui ui) {
+		int counter = 1;
+		for (Task task: this.list) {
+			if (task.getDescription().contains(keyword)) {
+				ui.print("Here are the matching tasks in your list:");
+				ui.print(counter + "." + task);
+				counter++;
+			}
+		}
+	}
 }

@@ -97,7 +97,7 @@ public class Parser {
             int taskNum;
             try {
                 taskNum = Integer.parseInt(input.substring(7));
-                return new AddCommand(taskNum);
+                return new DeleteCommand(taskNum);
 
             } catch (StringIndexOutOfBoundsException e) {
                 throw new EmptyDescException("delete");
@@ -105,7 +105,7 @@ public class Parser {
 
 
         }
-        } else {
+         else {
             throw new InvalidArgumentException();
         }
     }

@@ -3,8 +3,17 @@ package task;
 import datetime.DateTime;
 import exception.DukeException;
 
+/**
+ * Event task object. Has an task name, date, starting time and ending time.
+ */
 public class Event extends Task{
     DateTime date_Time;
+
+    /**
+     * Constructor for Event object. Called when generating TaskList based on user input.
+     * @param description contains task name, date, starting time and ending time.
+     * @throws DukeException thrown when description format is incorrect. or when setEventTime throws DukeException.
+     */
     public Event(String description) throws DukeException{
         super(description);
         int divider = description.indexOf("/at");
@@ -17,6 +26,11 @@ public class Event extends Task{
         super.description = super.description.substring(0, divider);
     }
 
+
+    /**
+     * toString method of Event
+     * @return String denoting task name, status, date, and starting and ending time of task.
+     */
     @Override
     public String toString(){
         String output = "[E][" + super.getStatusIcon() + "]" + " " + super.description + "(at: "

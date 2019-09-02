@@ -2,6 +2,9 @@ package task;
 
 import exception.DukeException;
 
+/**
+ * Extends Task. Has a task name.
+ */
 public class Todo extends Task{
 
     public Todo(String description) throws DukeException {

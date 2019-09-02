@@ -8,7 +8,7 @@ public class Ui {
 
     private static final String HORIZONTAL_LINE = "________________________________________________________________\n";
 
-    private static final String greetingMsg = HORIZONTAL_LINE
+    private static final String GREETING_MSG = HORIZONTAL_LINE
             + " Hello! I'm Duke\n"
             + " What can I do for you?\n"
             + HORIZONTAL_LINE;
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public void printGreetingMsg() {
-        System.out.println(greetingMsg);
+        System.out.println(GREETING_MSG);
     }
 
     public void printMsgLine(String msg) {

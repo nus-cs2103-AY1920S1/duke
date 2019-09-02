@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         try {
             //Error if user inputs spaces
             if (commandDesc.substring(7).split(" ")[0].equals("")) {
@@ -27,7 +27,11 @@ public class DeleteCommand extends Command {
             if (taskNumber > 0 && taskNumber <= tasks.taskList.size()) {
                 storage.deleteFromFile(System.getProperty("user.dir"),
                         tasks.taskList.get(taskNumber - 1).stringForAppend());
+                String output = "Noted. I've removed this task: \n";
+                output += tasks.taskList.get(taskNumber - 1) + "\n";
                 tasks.deleteTask(taskNumber);
+                output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
+                return output;
             } else {
                 throw new InvalidTaskNumberDukeException("invalid");
             }

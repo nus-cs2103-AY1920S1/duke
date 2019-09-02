@@ -48,7 +48,7 @@ public class Storage {
                     taskList.add(newEvent);
                 }
                 //If tasks is done, mark as done.
-                if (arrayInput[1].equals("\u2713")) {
+                if (arrayInput[1].equals("1")) {
                     taskList.get(taskList.size() - 1).markAsDone();
                 }
             }
@@ -113,7 +113,7 @@ public class Storage {
                         newLine += "|";
                     }
                     if (j == 1) {
-                        newLine += " \u2713 ";
+                        newLine += " 1 ";
                     } else {
                         newLine += splittedParts[j];
                     }

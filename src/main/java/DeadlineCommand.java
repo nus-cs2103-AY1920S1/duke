@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         try {
             //Check if description is empty (does not check when user input
             //multiple spaces as the description.
@@ -24,6 +24,10 @@ public class DeadlineCommand extends Command {
             Deadline newDeadline = new Deadline(commandLine[0], commandLine[1]);
             storage.appendToFile(System.getProperty("user.dir") + "/data/tasks.txt", newDeadline.stringForAppend());
             tasks.addDeadline(newDeadline);
+            String output = "Got it. I've added this task: \n";
+            output += newDeadline + "\n";
+            output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
+            return output;
         } catch (IndexOutOfBoundsException err) {
             throw new EmptyDescDukeException("deadline");
         }

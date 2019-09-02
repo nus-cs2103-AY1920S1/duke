@@ -1,0 +1,10 @@
+T | ? | eat
+E | ✘ | meeting | 20180909 0900
+E | ✘ | meeting | 12/12/2019 900
+D | ✘ | food | 23/09/2019 1200
+T | 0 | new 
+T | 0 | makan
+T | 0 | work
+T | 0 | whee
+T | 0 | greet
+T | 0 | new hi

@@ -17,6 +17,7 @@ import java.util.Queue;
  * Main driver class for Duke program.
  * </p>
  */
+
 public class Duke {
     private static final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
 

@@ -5,11 +5,11 @@ import task.TaskList;
 import ui.Ui;
 
 /**
- * Represents an invalid command
+ * Represents an invalid command.
  */
 public class IncorrectCommand extends Command {
     /**
-     * Prints command is invalid message
+     * Prints command is invalid message.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

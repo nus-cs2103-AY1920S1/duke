@@ -5,10 +5,12 @@ import task.TaskList;
 import ui.Ui;
 
 /**
- * Tells user that the program is terminating
+ * Tells user that the program is terminating.
  */
 public class ExitCommand extends Command {
     /**
+     * Instructs the program that it is terminating.
+     *
      * @return true to indicate program is terminating
      */
     @Override
@@ -17,7 +19,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Prints exit message
+     * Prints exit message.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

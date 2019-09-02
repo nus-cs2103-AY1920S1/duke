@@ -5,7 +5,7 @@ import task.TaskList;
 import ui.Ui;
 
 /**
- * Shows all tasks in task list
+ * Shows all tasks in task list.
  */
 public class ListCommand extends Command {
     @Override

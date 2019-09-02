@@ -9,22 +9,24 @@ import ui.Ui;
 import java.util.Date;
 
 /**
- * Represent an event to be added
+ * Represent an event to be added.
  */
 public class EventCommand extends Command {
     private String[] arguments;
 
     /**
-     * @param arguments contains description and date of event
+     * Initializes EventCommand with event description and date of event.
+     *
+     * @param arguments contains event description and date of event
      */
     public EventCommand(String[] arguments) {
         this.arguments = arguments;
     }
 
     /**
-     * Adds event to task list
+     * Adds event to task list.
      * Print messages to notify users event has
-     * been added to task list
+     * been added to task list.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

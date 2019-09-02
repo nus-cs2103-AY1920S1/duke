@@ -9,6 +9,8 @@ import ui.Ui;
  */
 public abstract class Command {
     /**
+     * Instructs the program that it is not terminating.
+     *
      * @return false to signify the program is not terminating
      */
     public boolean canEnd() {
@@ -16,7 +18,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute a command.
+     * Executes a command.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

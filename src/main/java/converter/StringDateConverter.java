@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Converts String object to Date object
+ * Converts String object to Date object.
  */
 public class StringDateConverter {
     /**
-     * Convert String object to Date object
+     * Convert String object to Date object.
      *
      * @param strDate in the format "dd/MM/yyy HHmm"
      * @return date object
@@ -21,7 +21,7 @@ public class StringDateConverter {
     }
 
     /**
-     * Convert String object to Date object
+     * Convert String object to Date object.
      *
      * @param strDate in the format "EEE MMM dd HH:mm:ss zzz yyyy"
      * @return date object

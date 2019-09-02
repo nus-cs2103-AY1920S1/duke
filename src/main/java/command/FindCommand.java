@@ -6,12 +6,14 @@ import task.TaskList;
 import ui.Ui;
 
 /**
- * Represents a find command
+ * Represents a find command.
  */
 public class FindCommand extends Command {
     private String keyword;
 
     /**
+     * Initializes FindCommand with words to be searched.
+     *
      * @param keyword is the word user wants to search
      */
     public FindCommand(String keyword) {
@@ -19,7 +21,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Shows all task with description that matches keyword
+     * Shows all task with description that matches keyword.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

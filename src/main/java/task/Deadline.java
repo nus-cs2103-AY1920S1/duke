@@ -3,13 +3,15 @@ package task;
 import java.util.Date;
 
 /**
- * Represents a deadline
+ * Represents a deadline.
  */
 public class Deadline extends Task {
 
     protected Date by;
 
     /**
+     * Initializes Deadline with description and due date.
+     *
      * @param description of deadline
      * @param by is the due date of deadline
      */
@@ -19,6 +21,8 @@ public class Deadline extends Task {
     }
 
     /**
+     * Initializes Deadline with description, due date and isDone status.
+     *
      * @param description of deadline
      * @param by is the due date of deadline
      * @param isDone true if deadline is completed. Else false

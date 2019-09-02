@@ -1,16 +1,24 @@
 package parser;
 
-import command.*;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.ToDoCommand;
 import exception.DukeException;
 
 import java.util.Scanner;
 
 /**
- * Deals with making sense of user command
+ * Deals with making sense of user command.
  */
 public class Parser {
     /**
-     * Parses user input into command for execution
+     * Parses user input into command for execution.
      *
      * @param userInput String of input of user
      * @return the command based on user input

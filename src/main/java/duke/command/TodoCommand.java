@@ -8,8 +8,8 @@ import duke.task.TaskList;
 
 import java.util.Map;
 
-public class Todo extends Command {
-    public Todo(String[] args) {
+public class TodoCommand extends Command {
+    public TodoCommand(String[] args) {
         super(args);
     }
 

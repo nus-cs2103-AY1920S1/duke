@@ -8,8 +8,8 @@ import duke.task.TaskList;
 
 import java.util.Map;
 
-public class Deadline extends Command {
-    public Deadline(String[] args) {
+public class DeadlineCommand extends Command {
+    public DeadlineCommand(String[] args) {
         super(args);
 
         parser.register("/by", true);

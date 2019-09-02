@@ -8,9 +8,9 @@ import duke.task.TaskList;
 
 import java.util.Map;
 
-public class Event extends Command {
+public class EventCommand extends Command {
 
-    public Event(String[] args) {
+    public EventCommand(String[] args) {
         super(args);
 
         parser.register("/at", true);

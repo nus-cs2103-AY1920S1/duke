@@ -8,8 +8,8 @@ import duke.task.TaskList;
 
 import java.util.Map;
 
-public class Delete extends Command {
-    public Delete(String[] args) {
+public class DeleteCommand extends Command {
+    public DeleteCommand(String[] args) {
         super(args);
     }
 

@@ -4,8 +4,8 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class List extends Command {
-    public List(String[] args) {
+public class ListCommand extends Command {
+    public ListCommand(String[] args) {
         super(args);
     }
 

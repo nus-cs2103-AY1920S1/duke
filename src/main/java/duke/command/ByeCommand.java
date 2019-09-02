@@ -4,8 +4,8 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class Bye extends Command {
-    public Bye(String[] args) {
+public class ByeCommand extends Command {
+    public ByeCommand(String[] args) {
         super(args);
     }
 

@@ -1,7 +1,15 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandMap;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  * Parser that converts Strings into {@link Command} objects using a {@link CommandMap}
@@ -16,14 +24,14 @@ public class PreParser {
     public PreParser() {
         String[] dummyArgs = new String[0];
         commandMap = new CommandMap();
-        commandMap.register(new duke.command.Bye(dummyArgs));
-        commandMap.register(new duke.command.List(dummyArgs));
-        commandMap.register(new duke.command.Done(dummyArgs));
-        commandMap.register(new duke.command.Todo(dummyArgs));
-        commandMap.register(new duke.command.Deadline(dummyArgs));
-        commandMap.register(new duke.command.Event(dummyArgs));
-        commandMap.register(new duke.command.Delete(dummyArgs));
-        commandMap.register(new duke.command.Find(dummyArgs));
+        commandMap.register(new ByeCommand(dummyArgs));
+        commandMap.register(new ListCommand(dummyArgs));
+        commandMap.register(new DoneCommand(dummyArgs));
+        commandMap.register(new TodoCommand(dummyArgs));
+        commandMap.register(new DeadlineCommand(dummyArgs));
+        commandMap.register(new EventCommand(dummyArgs));
+        commandMap.register(new DeleteCommand(dummyArgs));
+        commandMap.register(new FindCommand(dummyArgs));
     }
 
     /**

@@ -7,8 +7,8 @@ import duke.task.TaskList;
 
 import java.util.Map;
 
-public class Done extends Command {
-    public Done(String[] args) {
+public class DoneCommand extends Command {
+    public DoneCommand(String[] args) {
         super(args);
     }
 

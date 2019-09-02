@@ -8,8 +8,8 @@ import duke.task.TaskList;
 import java.util.List;
 import java.util.Map;
 
-public class Find extends Command {
-    public Find(String[] args) {
+public class FindCommand extends Command {
+    public FindCommand(String[] args) {
         super(args);
     }
 

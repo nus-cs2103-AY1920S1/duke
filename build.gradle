@@ -1,6 +1,11 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
+}
+//added checkstyle support
+checkstyle {
+    toolVersion = '8.23'
 }
 
 group 'seedu.duke'

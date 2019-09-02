@@ -19,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Parses the query as a Deadline Task.
+     *
      * @param in A query from the user.
      * @return A Deadline task
      * @throws DukeException representing any checked exceptions

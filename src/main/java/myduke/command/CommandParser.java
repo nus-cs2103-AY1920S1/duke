@@ -11,6 +11,7 @@ public class CommandParser {
 
     /**
      * Creates the relevant command based on the user's query.
+     *
      * @param query The query of the user.
      * @return The appropriate Command.
      * @throws DukeException if no commands matches the query.

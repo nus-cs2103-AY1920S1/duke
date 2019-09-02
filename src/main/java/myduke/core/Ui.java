@@ -29,6 +29,7 @@ public class Ui {
 
     /**
      * Waits for a user query.
+     *
      * @return the user query.
      */
     public String waitForQuery() {
@@ -47,6 +48,7 @@ public class Ui {
 
     /**
      * Prints a single response.
+     *
      * @param responseHeader A message to the user.
      */
     public void printResponse(String responseHeader) {
@@ -63,8 +65,9 @@ public class Ui {
 
     /**
      * Prints a response and list the given tasks.
-     * @param responseHeader A message to the user.
-     * @param listOfTasks The list of tasks to be displayed to the user.
+     *
+     * @param responseHeader    A message to the user.
+     * @param listOfTasks       The list of tasks to be displayed to the user.
      */
     public void printResponse(String responseHeader, List<Task> listOfTasks) {
         //Print Boundary
@@ -90,9 +93,10 @@ public class Ui {
 
     /**
      * Prints a single response and list a specified task.
-     * @param responseHeader A message to the user.
-     * @param refTask The task to be displayed to the user.
-     * @param numOfTasks Displays the number of task(s) left in the task list if value is greater or equal than 0.
+     *
+     * @param responseHeader    A message to the user.
+     * @param refTask           The task to be displayed to the user.
+     * @param numOfTasks        Displays the number of tasks left in the task list if value is greater or equal than 0.
      */
     public void printResponse(String responseHeader, Task refTask, int numOfTasks) {
         //Print Boundary
@@ -133,6 +137,7 @@ public class Ui {
 
     /**
      * Prints an informational-level message to the console.
+     *
      * @param message an informational-level message.
      */
     public void logInfo(String message) {
@@ -141,6 +146,7 @@ public class Ui {
 
     /**
      * Prints a warning-level message to the console.
+     *
      * @param message a warning-level message.
      */
     public void logWarn(String message) {
@@ -149,6 +155,7 @@ public class Ui {
 
     /**
      * Prints an error-level message to the console.
+     *
      * @param message an error-level message.
      */
     public void logError(String message) {
@@ -157,6 +164,7 @@ public class Ui {
 
     /**
      * Prints the message to the console.
+     *
      * @param message a message.
      * @param level severity of the message.
      */

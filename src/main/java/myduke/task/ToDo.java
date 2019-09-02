@@ -15,6 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Parses the query as a ToDo Task.
+     *
      * @param in A query from the user.
      * @return A ToDo task
      * @throws DukeException representing any checked exceptions

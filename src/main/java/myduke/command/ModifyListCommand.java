@@ -11,6 +11,7 @@ public abstract class ModifyListCommand extends Command {
 
     /**
      * Constructs a modify List command.
+     *
      * @param itemIndex An item index.
      * @throws DukeException if the index is lesser than one.
      */
@@ -24,6 +25,7 @@ public abstract class ModifyListCommand extends Command {
 
     /**
      * Constructs a modify List Command.
+     *
      * @param itemIndex A String representing an item index.
      * @throws DukeException if the string is not an integer or the index is lesser than one.
      */

@@ -19,6 +19,7 @@ public class Event extends Task {
 
     /**
      * Parses the query as a Event Task.
+     *
      * @param in A query from the user.
      * @return A Event task
      * @throws DukeException representing any checked exceptions

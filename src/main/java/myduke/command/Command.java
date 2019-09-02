@@ -12,6 +12,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList Task list.
      * @param ui       UI.
      * @param storage  Storage.
@@ -21,6 +22,7 @@ public abstract class Command {
 
     /**
      * Indicates if the program should exit.
+     *
      * @return A boolean indicating whether the exit condition has been met.
      */
     public boolean shouldExit() {

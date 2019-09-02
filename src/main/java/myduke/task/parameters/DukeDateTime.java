@@ -20,6 +20,7 @@ public class DukeDateTime {
 
     /**
      * A Wrapper class for DateTime Object.
+     *
      * @param dateTimeString the date time object to parse
      */
     public DukeDateTime(String dateTimeString) {
@@ -41,6 +42,7 @@ public class DukeDateTime {
 
     /**
      * Determines whether the object is a valid DateTime Object.
+     *
      * @return A boolean determining whether the object is a valid DateTime Object
      */
     public boolean isValidDateTimeObject() {
@@ -49,6 +51,7 @@ public class DukeDateTime {
 
     /**
      * Get the DateTime Object.
+     *
      * @return a DateTime Object.
      */
     public Date getLocalDateTime() {

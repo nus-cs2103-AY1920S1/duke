@@ -29,9 +29,10 @@ public class StorageManager {
 
     /**
      * Constructor of Storage Manager.
-     * @param fileLocation Location of Database file.
-     * @param taskList A List of tasks to complete.
-     * @param logger A BiConsumer to perform logging.
+     *
+     * @param fileLocation  Location of Database file.
+     * @param taskList      A List of tasks to complete.
+     * @param logger        A BiConsumer to perform logging.
      */
     public StorageManager(String fileLocation, List<Task> taskList, BiConsumer<String, LoggerMessageType> logger) {
         this.dataBaseLocation = fileLocation;
@@ -41,6 +42,7 @@ public class StorageManager {
 
     /**
      * Tries to load the list of task from the database File.
+     *
      * @return A boolean indicating whether the list of task were successfully loaded from the database.
      */
     public boolean tryLoadFromDataBase() throws NullPointerException {
@@ -115,6 +117,7 @@ public class StorageManager {
 
     /**
      * Tries to save the given list of task to the database file.
+     *
      * @return A boolean indicating whether the list of task were successfully saved to the database.
      */
     public boolean tryWriteToFile() {

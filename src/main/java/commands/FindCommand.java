@@ -1,10 +1,12 @@
 package commands;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Arrays;
+
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+
 import tasks.Task;
 
 /**
@@ -18,10 +20,10 @@ public class FindCommand extends Command {
      *  Boolean isExit is set to false because
      *  program should not terminate after command is executed.
      *
-     * @param fullCommand the line of user input.
+     * @param commandArr String array containing the split text retrieved from user input.
      */
-    public FindCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public FindCommand(String[] commandArr) {
+        this.commandArr = commandArr;
         isExit = false;
     }
 
@@ -30,17 +32,13 @@ public class FindCommand extends Command {
      * contains keyword as a word.
      *
      * @param description the description (of the task)
-     * @param keyword the keyword to be matched
+     * @param keywords String[] containing the keywords to be matched
      * @return boolean value detailing whether a match was found
      */
-    public static boolean containsWord(String description, String keyword) {
-        Scanner sc = new Scanner(description);
-        while (sc.hasNext()) {
-            if (keyword.equals(sc.next())) {
-                return true;
-            }
-        }
-        return false;
+    public static boolean containsKeyWords(String description, String[] keywords) {
+        ArrayList<String> al = new ArrayList<>(Arrays.asList(keywords));
+        ArrayList<String> desc = new ArrayList<>(Arrays.asList(description.split(" ")));
+        return desc.containsAll(al);
     }
 
     /**
@@ -53,13 +51,11 @@ public class FindCommand extends Command {
      * @return String output reply from Duke.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Scanner sc = new Scanner(fullCommand);
-        sc.next();
-        String keyword = sc.next();
+        String[] keywords = commandArr[1].split(" ");
         ArrayList<Task> taskLst = tasks.getTaskLst();
         String store = "     Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskLst.size(); i++) {
-            if (containsWord(taskLst.get(i).getDescription(), keyword)) {
+            if (containsKeyWords(taskLst.get(i).getDescription(), keywords)) {
                 store += String.format("     %d.%s\n",
                         i + 1, taskLst.get(i));
             }

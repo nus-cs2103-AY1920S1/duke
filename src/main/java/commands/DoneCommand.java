@@ -19,10 +19,10 @@ public class DoneCommand extends Command {
      * Boolean isExit is set to false because
      * program should not terminate after command is executed.
      *
-     * @param fullCommand the line of user input.
+     * @param commandArr String array containing the split text retrieved from user input.
      */
-    public DoneCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public DoneCommand(String[] commandArr) {
+        this.commandArr = commandArr;
         isExit = false;
     }
 
@@ -37,10 +37,8 @@ public class DoneCommand extends Command {
      * @return String output reply from Duke.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Scanner sc = new Scanner(fullCommand);
-        sc.next();
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        int taskDoneIndex = sc.nextInt() - 1;
+        int taskDoneIndex = Integer.parseInt(commandArr[1]) - 1;
         taskLst.get(taskDoneIndex).setDone();
         return String.format("     Nice! I've marked this task as done:\n       %s\n",
                 taskLst.get(taskDoneIndex));

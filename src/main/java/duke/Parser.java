@@ -33,22 +33,23 @@ public class Parser {
      * @throws DukeException  If there is invalid input.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        Scanner sc = new Scanner(fullCommand);
-        String command = sc.next();
-        if (command.equals("bye")) {
-            return new ExitCommand(fullCommand);
-        } else if (command.equals("list")) {
-            return new ListCommand(fullCommand);
-        } else if (command.startsWith("delete")) {
-            return new DeleteCommand(fullCommand);
-        } else if (command.startsWith("done")) {
-            return new DoneCommand(fullCommand);
-        } else if (command.startsWith("find")) {
-            return new FindCommand(fullCommand);
-        } else if (command.startsWith("todo") || command.startsWith("deadline")
-                || command.startsWith("event")) {
-            return new AddCommand(fullCommand);
-        } else {
+        String[] commandArr = fullCommand.split(" ", 2);
+        switch (commandArr[0]) {
+        case "bye":
+            return new ExitCommand(commandArr);
+        case "list":
+            return new ListCommand(commandArr);
+        case "delete":
+            return new DeleteCommand(commandArr);
+        case "done":
+            return new DoneCommand(commandArr);
+        case "find":
+            return new FindCommand(commandArr);
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddCommand(commandArr);
+        default:
             throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
                     + "but I don't know what that means :-(");
         }

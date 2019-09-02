@@ -25,10 +25,10 @@ public class AddCommand extends Command {
      * Boolean isExit is set to false because
      * program should not terminate after command is executed.
      *
-     * @param fullCommand the line of user input.
+     * @param commandArr String array containing the split text retrieved from user input.
      */
-    public AddCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public AddCommand(String[] commandArr) {
+        this.commandArr = commandArr;
         isExit = false;
     }
 
@@ -44,48 +44,26 @@ public class AddCommand extends Command {
      * @return String output reply from Duke.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Scanner sc = new Scanner(fullCommand);
-        sc.next();
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        if (fullCommand.startsWith("todo")) {
+        if (commandArr[0].equals("todo")) {
             // Add a ToDo task
-            if (!sc.hasNextLine()) {
+            if (commandArr.length <= 1) {
                 throw new DukeException("     \u2639 OOPS!!! "
                         + "The description of a todo cannot be empty.");
             }
-            taskLst.add(new ToDo(sc.nextLine().substring(1), false));
-        } else if (fullCommand.startsWith("deadline")) {
+            taskLst.add(new ToDo(commandArr[1], false));
+        } else if (commandArr[0].equals("deadline")) {
             // Add a Deadline task
-            String by = sc.nextLine().substring(1);
-            String description = "";
-            for (int i = 0; i < by.length(); i++) {
-                char c = by.charAt(i);
-                if (c != '/') {
-                    description += c;
-                } else {
-                    by = by.substring(i + 4);
-                    // get rid of space
-                    description = description.substring(0, description.length() - 1);
-                    break;
-                }
-            }
+            String[] fullCommand = commandArr[1].split(" /by ");
+            String description = fullCommand[0];
+            String by = fullCommand[1];
             taskLst.add(new Deadline(description,
                     LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
                     false));
-        } else if (fullCommand.startsWith("event")) { // assume that task is an event
-            String at = sc.nextLine().substring(1);
-            String description = "";
-            for (int i = 0; i < at.length(); i++) {
-                char c = at.charAt(i);
-                if (c != '/') {
-                    description += c;
-                } else {
-                    at = at.substring(i + 4);
-                    // get rid of space
-                    description = description.substring(0, description.length() - 1);
-                    break;
-                }
-            }
+        } else if (commandArr[0].equals("event")) { // assume that task is an event
+            String[] fullCommand = commandArr[1].split(" /at ");
+            String description = fullCommand[0];
+            String at = fullCommand[1];
             taskLst.add(new Event(description,
                     LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
                     false));

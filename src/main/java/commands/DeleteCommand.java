@@ -19,10 +19,10 @@ public class DeleteCommand extends Command {
      *  Boolean isExit is set to false because
      *  program should not terminate after command is executed.
      *
-     * @param fullCommand the line of user input.
+     * @param commandArr String array containing the split text retrieved from user input.
      */
-    public DeleteCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public DeleteCommand(String[] commandArr) {
+        this.commandArr = commandArr;
         isExit = false;
     }
 
@@ -37,10 +37,8 @@ public class DeleteCommand extends Command {
      * @return String output reply from Duke.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Scanner sc = new Scanner(fullCommand);
-        sc.next();
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        int delTaskIndex = sc.nextInt() - 1;
+        int delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
         Task deletedTask = taskLst.remove(delTaskIndex);
         return String.format("     Noted. I've removed this task:\n"
                         + "       %s\n     Now you have %d tasks in the list.\n",

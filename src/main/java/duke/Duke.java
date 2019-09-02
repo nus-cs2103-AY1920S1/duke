@@ -95,11 +95,6 @@ public class Duke extends Application {
         return ui.showOpeningLine() + reply + ui.showClosingLine();
     }
 
-//    public static void main(String[] args) {
-//        String filePath = "." + File.separator + "data" + File.separator + "duke.txt";
-//        new Duke(filePath).run();
-//    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components

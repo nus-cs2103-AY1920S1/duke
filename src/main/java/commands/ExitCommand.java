@@ -16,10 +16,10 @@ public class ExitCommand extends Command {
      * Boolean isExit is set to true because
      * program should be terminated after command is executed.
      *
-     * @param fullCommand the line of user input.
+     * @param commandArr String array containing the split text retrieved from user input.
      */
-    public ExitCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public ExitCommand(String[] commandArr) {
+        this.commandArr = commandArr;
         isExit = true;
     }
 

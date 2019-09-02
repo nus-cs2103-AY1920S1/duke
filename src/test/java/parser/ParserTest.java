@@ -25,8 +25,8 @@ public class ParserTest {
             assertTrue(Parser.parse("this is an illegal command") instanceof Command);
             fail();
         } catch(DukeException ex) {
-            assertEquals("Invalid command! Try the commands: bye, list, done, todo, deadline, event or delete and " +
-                        "their respective formats!", ex.getMessage());
+            assertEquals("Invalid command! Try the commands: bye, list, done, todo, deadline, event, find or delete " +
+                        "and their respective formats!", ex.getMessage());
         }
     }
 }

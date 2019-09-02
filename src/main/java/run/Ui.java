@@ -60,4 +60,15 @@ public class Ui {
         System.out.println("  " + task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
+    public static void printFind(ArrayList<Task> tasks) {
+        if(tasks.size() == 0) {
+            System.out.println("No tasks found containing your search!");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for(int i = 1; i <= tasks.size(); i++) {
+            Task curr_task = tasks.get(i-1);
+            System.out.println(i + "." + curr_task);
+        }
+    }
 }

@@ -47,4 +47,15 @@ public class TaskList {
         this.tasks.remove(task_num - 1);
         Ui.printDelete(curr_task, this.tasks.size());
     }
+
+    public void find(String searchString) {
+        ArrayList<Task> passedTasks = new ArrayList<Task>();
+        for(int i = 1; i <= this.tasks.size(); i++) {
+            Task curr_task = this.tasks.get(i-1);
+            if(curr_task.getName().contains(searchString)) {
+                passedTasks.add(curr_task);
+            }
+        }
+        Ui.printFind(passedTasks);
+    }
 }

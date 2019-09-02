@@ -2,3 +2,5 @@ D//CS2103T project//false//2/12/1997 2359
 E//McDonalds//true//1/12/2019 0050
 T//sleep//true
 T//fix code//false
+T//sleep with Phyllisa//false
+E//sleeping at 9am//true//2/12/1997 0900

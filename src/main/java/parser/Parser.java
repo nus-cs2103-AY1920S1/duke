@@ -1,13 +1,6 @@
 package parser;
 
-import command.Command;
-import command.ByeCommand;
-import command.ListCommand;
-import command.DoneCommand;
-import command.ToDoCommand;
-import command.DeadlineCommand;
-import command.EventCommand;
-import command.DeleteCommand;
+import command.*;
 import exception.DukeException;
 import exception.InvalidInputException;
 
@@ -28,9 +21,11 @@ public class Parser {
             return new EventCommand(rawString);
         } else if (rawString.startsWith("delete ")) {
             return new DeleteCommand(rawString);
+        } else if (rawString.startsWith("find ")) {
+            return new FindCommand(rawString);
         } else {
             throw new InvalidInputException("Invalid command! Try the commands: bye, list, done, todo, deadline, " +
-                    "event or delete and their respective formats!");
+                    "event, find or delete and their respective formats!");
         }
     }
 }

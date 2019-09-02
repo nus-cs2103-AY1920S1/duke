@@ -11,7 +11,6 @@ public class AddCommand extends Command {
      * @param task - duke.task.Task given to execute command
      */
     public AddCommand(Task task) {
-        super(task);
         this.task = task;
     }
 

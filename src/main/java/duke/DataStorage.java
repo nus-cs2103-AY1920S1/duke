@@ -1,18 +1,28 @@
+package duke;
+
 import duke.task.*;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 public class DataStorage {
-    private static final String PATH = "C:\\Users\\ellieyeewenna\\Desktop\\Ellie\\NUS\\CS2103\\IP\\data\\duke.txt";
+    private static final String FILE_NAME = "duke.txt";
+    private static final String PARENT_DIR_NAME = "data";
+    private static final int SEARCH_LIMIT = 5;
+    private String path;
+
+    public DataStorage() {
+        this.setFilePath();
+    }
     /**
      * Stores all tasks in tasklist into given txt file
      * @param taskList - list containing all existing tasks
      */
-    public static void storeTaskList(TaskList taskList) {
+    public void storeTaskList(TaskList taskList) {
         String content = getStringContent(taskList);
         try {
-            Files.writeString(Paths.get(PATH), content);
+            Files.writeString(Paths.get(this.path), content);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,8 +32,8 @@ public class DataStorage {
      * Retrieves tasks from given txt file and stores into new duke.task.TaskList
      * @return duke.task.TaskList - list containing all existing tasks
      */
-    public static TaskList getStoredTaskList() {
-        File file = new File(PATH);
+    public TaskList getStoredTaskList() {
+        File file = new File(this.path);
         TaskList taskList = new TaskList();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -80,5 +90,29 @@ public class DataStorage {
             }
         }
         return contents;
+    }
+
+    private void setFilePath() {
+        // Gets the currents directory of the user
+        String workingDirectory = System.getProperty("user.dir");
+        Path directory = Paths.get(workingDirectory);
+        int count = 1;
+        while (!Files.isDirectory(Paths.get(directory.toString(), PARENT_DIR_NAME))
+                && count <= SEARCH_LIMIT) {
+            directory = directory.getParent();
+            count++;
+        }
+        if (count > SEARCH_LIMIT) {
+            // Create new directory
+            try {
+                Path newPath = Paths.get(workingDirectory, PARENT_DIR_NAME);
+                Files.createDirectory(newPath);
+                this.path = Paths.get(newPath.toString(), FILE_NAME).toString();
+            } catch (IOException e) {
+                System.out.println("Storage location not found :( ");
+            }
+        } else {
+            this.path = Paths.get(directory.toString(), PARENT_DIR_NAME, FILE_NAME).toString();
+        }
     }
 }

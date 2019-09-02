@@ -1,8 +1,6 @@
 package duke.task;
 
-import duke.task.ITask;
-
-public class Task implements ITask {
+public abstract class Task {
     private static final String DEFAULT_TASK_TYPE = "Default";
     private String taskName;
     private String taskIcon;

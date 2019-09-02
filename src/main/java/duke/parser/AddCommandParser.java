@@ -2,8 +2,8 @@ package duke.parser;
 
 import duke.command.AddCommand;
 import duke.command.Command;
-import duke.exception.IncompleteCommandError;
-import duke.exception.UnknownCommandException;
+import duke.command.IncompleteCommandException;
+import duke.command.UnknownCommandException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
@@ -25,7 +25,7 @@ public class AddCommandParser {
      * Parse new task (with date) based on existing format
      * @param commandDescription - array of strings containing command description
      * @return Optional containing either valid command or null (when exception thrown)
-     * @throws IncompleteCommandError - throws error if the command is not in correct format
+     * @throws IncompleteCommandException - throws error if the command is not in correct format
      */
     public static Optional<Command> parseWithDate(String[] commandDescription) throws UnknownCommandException  {
         try {
@@ -43,7 +43,7 @@ public class AddCommandParser {
                 return Optional.of(new AddCommand(new EventTask(taskName, statementAndDate[1])));
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new IncompleteCommandError("incomplete", commandDescription[0]);
+            throw new IncompleteCommandException("incomplete", commandDescription[0]);
         }
         return Optional.empty();
     }

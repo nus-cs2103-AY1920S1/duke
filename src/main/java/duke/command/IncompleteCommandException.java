@@ -1,6 +1,6 @@
-package duke.exception;
+package duke.command;
 
-public class IncompleteCommandError extends UnknownCommandException {
+public class IncompleteCommandException extends UnknownCommandException {
     private String message;
     private String taskName;
 
@@ -9,7 +9,7 @@ public class IncompleteCommandError extends UnknownCommandException {
      * @param message - Message describing command: Empty or incomplete
      * @param taskName - Name of task
      */
-    public IncompleteCommandError(String message, String taskName) {
+    public IncompleteCommandException(String message, String taskName) {
         super(message);
         this.message = message;
         this.taskName = taskName;

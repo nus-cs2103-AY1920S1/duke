@@ -14,7 +14,6 @@ public class FindCommand extends Command {
      * @param taskName - Name of task to search for
      */
     public FindCommand(String taskName) {
-        super(null);
         this.taskName = taskName;
     }
 

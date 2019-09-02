@@ -1,8 +1,8 @@
 package duke.parser;
 
 import duke.command.*;
-import duke.exception.IncompleteCommandError;
-import duke.exception.UnknownCommandException;
+import duke.command.IncompleteCommandException;
+import duke.command.UnknownCommandException;
 import duke.task.TaskList;
 
 import java.util.Optional;
@@ -55,11 +55,11 @@ public class ParserManager {
     /**
      * Throws error if the given command is empty
      * @param commandDescription - array of strings containing command description
-     * @throws IncompleteCommandError - throws error if the command is not in complete format
+     * @throws IncompleteCommandException - throws error if the command is not in complete format
      */
-    private void checkCommandEmpty(String[] commandDescription) throws IncompleteCommandError {
+    private void checkCommandEmpty(String[] commandDescription) throws IncompleteCommandException {
         if (commandDescription.length == 1) {
-            throw new IncompleteCommandError("empty", commandDescription[0]);
+            throw new IncompleteCommandException("empty", commandDescription[0]);
         }
     }
 

@@ -1,7 +1,5 @@
 package duke.parser;
 
-import duke.exception.WrongDateFormatException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

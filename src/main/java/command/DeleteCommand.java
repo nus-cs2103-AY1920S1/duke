@@ -2,10 +2,9 @@ package command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import exception.DukeException;
 import exception.DukeInvalidTaskIndexException;
-import java.io.IOException;
+import task.Task;
 
 /**
  * Represents a Command which deletes a task from the TaskList.
@@ -24,21 +23,21 @@ public class DeleteCommand extends Command {
     /**
      * Deletes a task from the TaskList.
      * @param tasks TaskList which stores the list of tasks.
-     * @param ui Ui which feedbacks to user about success of command.
      * @param storage Storage which saves the task into the text file.
      * @throws DukeException DukeException that may arise from invalid inputs.
-     * @throws IOException IOException if an I/O error occurs when writing onto the file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {
             throw new DukeException("You have no tasks to delete.");
         } else if (index < 0 || index >= tasks.getSize()) {
             throw new DukeInvalidTaskIndexException("delete", tasks.getSize());
         } else {
-            ui.print("Noted. I've removed this task:\n" + tasks.getTask(index) + "\n"
-                    + "Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
+            Task t = tasks.getTask(index);
             tasks.deleteTask(index);
             storage.save(tasks);
+            return ("Noted. I've removed this task:\n" + t + "\n"
+                    + "Now you have " + tasks.getSize() + " task"
+                    + ((tasks.getSize() - 1) == 1 ? " " : "s ") + "in the list.");
         }
     }
 

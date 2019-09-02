@@ -13,7 +13,7 @@ public class TaskList {
 
     /**
      * Creates a TaskList which stores Tasks.
-     * @param tasks an Arraylist of Task.
+     * @param tasks an ArrayList of Task.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -35,11 +35,11 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void deleteTask(int index) throws DukeException {
+    public void deleteTask(int index) {
         tasks.remove(index);
     }
 
-    public void doneTask(int index) throws DukeException {
+    public void doneTask(int index) {
         tasks.get(index).markAsDone();
     }
 

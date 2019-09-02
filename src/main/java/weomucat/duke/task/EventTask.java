@@ -10,6 +10,8 @@ public class EventTask extends Task {
   private String at;
 
   /**
+   * Default constructor.
+   *
    * @param description a description of the event
    * @param at          location of the event
    * @throws InvalidParameterException If the description is empty or at is empty.

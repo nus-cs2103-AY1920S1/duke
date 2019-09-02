@@ -13,6 +13,8 @@ public abstract class Storage<T> {
   protected String path;
 
   /**
+   * Default constructor.
+   *
    * @param path fixed path of database
    */
   public Storage(String path) {
@@ -20,6 +22,8 @@ public abstract class Storage<T> {
   }
 
   /**
+   * Check if the path exists in the file system.
+   *
    * @return if database exists
    */
   public boolean exists() {

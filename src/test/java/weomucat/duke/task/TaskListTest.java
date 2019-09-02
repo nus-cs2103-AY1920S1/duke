@@ -51,9 +51,9 @@ public class TaskListTest {
 
   @Test
   public void validAddUsage() {
-    StubTask taskOne = new StubTask("one");
-    StubTask taskTwo = new StubTask("two");
-    StubTask taskThree = new StubTask("three");
+    final StubTask taskOne = new StubTask("one");
+    final StubTask taskTwo = new StubTask("two");
+    final StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
     StubAddTaskListener addTaskListener = new StubAddTaskListener();
@@ -92,9 +92,9 @@ public class TaskListTest {
 
   @Test
   public void validDeleteUsage() {
-    StubTask taskOne = new StubTask("one");
-    StubTask taskTwo = new StubTask("two");
-    StubTask taskThree = new StubTask("three");
+    final StubTask taskOne = new StubTask("one");
+    final StubTask taskTwo = new StubTask("two");
+    final StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
     StubDeleteTaskListener deleteTaskListener = new StubDeleteTaskListener();
@@ -135,9 +135,9 @@ public class TaskListTest {
 
   @Test
   public void validFindUsage() {
-    StubTask taskOne = new StubTask("one");
-    StubTask taskTwo = new StubTask("two");
-    StubTask taskThree = new StubTask("three");
+    final StubTask taskOne = new StubTask("one");
+    final StubTask taskTwo = new StubTask("two");
+    final StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
     StubFindTaskListener findTaskListener = new StubFindTaskListener();

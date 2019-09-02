@@ -45,6 +45,9 @@ public class Controller implements UserInputListener {
   private ArrayList<ListTaskCommandListener> listTaskCommandListeners;
   private ArrayList<ByeCommandListener> byeCommandListeners;
 
+  /**
+   * Default constructor.
+   */
   public Controller() {
     this.addTaskCommandListeners = new ArrayList<>();
     this.deleteTaskCommandListeners = new ArrayList<>();

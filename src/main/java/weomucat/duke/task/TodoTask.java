@@ -8,6 +8,8 @@ import weomucat.duke.exception.InvalidParameterException;
 public class TodoTask extends Task {
 
   /**
+   * Default constructor.
+   *
    * @param description a description of the todo
    * @throws InvalidParameterException If the description is empty.
    */

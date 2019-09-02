@@ -16,6 +16,8 @@ public class Parser {
   private String[] tokens;
 
   /**
+   * Default constructor.
+   *
    * @param input User input to decipher.
    */
   public Parser(String input) {
@@ -28,6 +30,8 @@ public class Parser {
   }
 
   /**
+   * Get command of input.
+   *
    * @return Deciphered command
    */
   public String getCommand() {

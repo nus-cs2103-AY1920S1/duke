@@ -14,10 +14,10 @@ import weomucat.duke.ui.Ui;
 public class Duke implements ByeCommandListener {
 
   private static final String LOGO = " ____        _        \n"
-      + "	|  _ \\ _   _| | _____ \n"
-      + "	| | | | | | | |/ / _ \\\n"
-      + "	| |_| | |_| |   <  __/\n"
-      + "	|____/ \\__,_|_|\\_\\___|\n";
+      + "   |  _ \\ _   _| | _____ \n"
+      + "   | | | | | | | |/ / _ \\\n"
+      + "   | |_| | |_| |   <  __/\n"
+      + "   |____/ \\__,_|_|\\_\\___|\n";
 
   public static final Locale LOCALE = Locale.ENGLISH;
   public static final String DATETIME_PARSE_PATTERN = "dd/MM/yy HHmm";
@@ -35,6 +35,8 @@ public class Duke implements ByeCommandListener {
   }
 
   /**
+   * Default constructor.
+   *
    * @param taskListPath Relative path of taskList database.
    */
   public Duke(String taskListPath) {

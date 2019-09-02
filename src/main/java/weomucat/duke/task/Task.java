@@ -11,6 +11,8 @@ public abstract class Task implements Serializable {
   private boolean done;
 
   /**
+   * Default constructor.
+   *
    * @param description a description of the task
    */
   public Task(String description) {
@@ -18,13 +20,17 @@ public abstract class Task implements Serializable {
   }
 
   /**
-   * @param done marks the task as done or not done
+   * Marks the task as done or not done.
+   *
+   * @param done task is done or not done
    */
   public void setDone(boolean done) {
     this.done = done;
   }
 
   /**
+   * The description of this Task.
+   *
    * @return description of this Task
    */
   public String getDescription() {
@@ -33,7 +39,7 @@ public abstract class Task implements Serializable {
 
   @Override
   public String toString() {
-    String done_icon = this.done ? "[\u2713]" : "[\u2718]";
-    return String.format("%s %s", done_icon, this.description);
+    String doneIcon = this.done ? "[✓]" : "[✘]";
+    return String.format("%s %s", doneIcon, this.description);
   }
 }

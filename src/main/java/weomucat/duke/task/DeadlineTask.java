@@ -17,6 +17,8 @@ public class DeadlineTask extends Task {
   private ZonedDateTime by;
 
   /**
+   * Default constructor.
+   *
    * @param description a description of the deadline
    * @param by          date due. format of the date is DATETIME_PARSE_PATTERN
    * @throws InvalidParameterException If the description is empty, by is empty or by is invalid.

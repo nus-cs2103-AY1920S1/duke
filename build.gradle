@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
 group 'weomucat.duke'
@@ -21,9 +22,12 @@ dependencies {
 
 run {
     standardInput = System.in
-    systemProperty "file.encoding", "UTF-8"
 }
 
 test {
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion '8.24'
 }

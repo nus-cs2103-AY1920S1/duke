@@ -20,12 +20,15 @@ public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener
     ListTaskListener {
 
   private static final String SAY_INDENTATION = "\t";
-  private static final String SAY_HORIZONTAL_LINE = "============================================================";
+  private static final String SAY_HORIZONTAL_LINE =
+      "============================================================";
 
   private ArrayList<UserInputListener> userInputListeners;
   private Scanner scanner;
 
   /**
+   * Default constructor.
+   *
    * @param inputStream The stream which user input is from
    */
   public Ui(InputStream inputStream) {
@@ -74,7 +77,7 @@ public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener
    * @param lines use varargs for multiline messages.
    */
   public void displayError(String... lines) {
-    lines[0] = "\u2639 OOPS!!! " + lines[0];
+    lines[0] = "☹ OOPS!!! " + lines[0];
     displayMessage(lines);
   }
 

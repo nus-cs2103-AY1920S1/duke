@@ -12,7 +12,7 @@ public interface Command {
   String PARAMETER_BY = "/by";
 
   /**
-   * The parameters that this Command takes in
+   * The parameters that this Command takes in.
    */
   String[] getParameterOptions();
 

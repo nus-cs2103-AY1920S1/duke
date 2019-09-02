@@ -1,2 +1,4 @@
 T | 0 | SEP application
 E | 1 | 2103 meeting | 3rd of September 2019, 4pm-6pm
+T | 0 | submit GUI 
+T | 0 | grade Darren's code 

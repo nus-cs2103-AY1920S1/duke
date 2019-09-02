@@ -4,22 +4,36 @@ import duke.exception.DukeDateFormatException;
 
 import java.text.DecimalFormat;
 
+/**
+ * A date class to be used in the Duke application.
+ * This class represents the time and date of the tasks.
+ * <code>DukeDate</code> can be formatted into a String by {@link DukeDate#format()} or {@link DukeDate#toString()}.
+ */
 public class DukeDate {
 
+    /** {@value ERROR_ILLEGAL_YEAR} */
     private static final String ERROR_ILLEGAL_YEAR = "☹ OOPS!!! Year should be a number greater than 0";
+    /** {@value ERROR_ILLEGAL_MONTH} */
     private static final String ERROR_ILLEGAL_MONTH = "☹ OOPS!!! Month should be a number between 1 and 12.";
+    /** {@value ERROR_ILLEGAL_DAY} */
     private static final String ERROR_ILLEGAL_DAY = "☹ OOPS!!! Date must be greater than 0 (and less than 31).";
+    /** {@value ERROR_DAY_MONTH_MISMATCH} */
     private static final String ERROR_DAY_MONTH_MISMATCH = "☹ OOPS!!! Given date does not exist in given month.";
+    /** {@value ERROR_ILLEGAL_TIME} */
     private static final String ERROR_ILLEGAL_TIME = "☹ OOPS!!! Hour must be between 0 and 23,\n"
-            + "              and minute must be between 0 and 59.";
+            + "      and minute must be between 0 and 59.";
 
     private int year;
     private Month month;
     private int day;
     private int hour;
     private int minute;
+    /** Determines whether hour field is before noon or after noon. */
     private String amPmMarker;
 
+    /**
+     * Represents the twelve months.
+     */
     public enum Month {
         JANUARY(1),
         FEBRUARY(2),
@@ -44,6 +58,11 @@ public class DukeDate {
             return this.monthInt;
         }
 
+        /**
+         * Returns the name of this month with only the first letter capitalized.
+         *
+         * @return Name of this month with the first letter capitalized.
+         */
         @Override
         public String toString() {
             String month = super.toString();
@@ -51,7 +70,11 @@ public class DukeDate {
         }
     }
 
-    public DukeDate() {
+    /**
+     * Constructs a DukeDate instance to be used in a test class.
+     * Not for use.
+     */
+    protected DukeDate() {
         this.year = 2020;
         this.month = Month.JANUARY;
         this.day = 1;
@@ -59,6 +82,16 @@ public class DukeDate {
         this.minute = 0;
     }
 
+    /**
+     * Constructs a DukeDate object.
+     *
+     * @param year Year of this DukeDate.
+     * @param month Month of this DukeDate as an integer.
+     * @param day Day of this DukeDate.
+     * @param hour Hour of this DukeDate to be inputted as 24 hour format.
+     * @param minute Minute of this DukeDate.
+     * @throws DukeDateFormatException When the given date or time is illegal.
+     */
     public DukeDate(int year, int month, int day, int hour, int minute)
             throws DukeDateFormatException {
         if (year < 0) {
@@ -73,6 +106,16 @@ public class DukeDate {
         this.setTime(hour, minute);
     }
 
+    /**
+     * Constructs a DukeDate object.
+     *
+     * @param year Year of this DukeDate.
+     * @param month Month of this DukeDate as the Month enum.
+     * @param day Day of this DukeDate.
+     * @param hour Hour of this DukeDate to be inputted as 24 hour format.
+     * @param minute Minute of this DukeDate.
+     * @throws DukeDateFormatException When the given date or time is illegal.
+     */
     public DukeDate(int year, Month month, int day, int hour, int minute)
             throws DukeDateFormatException {
         if (year < 0) {
@@ -87,6 +130,13 @@ public class DukeDate {
         this.setTime(hour, minute);
     }
 
+    /**
+     * Switches given integer (1 - 12) to the corresponding {@link Month}.
+     *
+     * @param monthInt Integer to be converted.
+     * @return <code>Month</code> corresponding to monthInt field.
+     * @throws DukeDateFormatException If monthInt <= 0 or monthInt >= 13.
+     */
     private Month getMonth(int monthInt) throws DukeDateFormatException {
         switch (monthInt) {
         case 1:
@@ -118,6 +168,14 @@ public class DukeDate {
         }
     }
 
+    /**
+     * Checks if the given month and day is valid.
+     *
+     * @param month Month to be checked.
+     * @param day Day to be checked.
+     * @return True if given month and day is valid, false otherwise.
+     * @throws DukeDateFormatException When the given fields is invalid.
+     */
     private boolean dayIsValid(int month, int day) throws DukeDateFormatException {
         if (day < 1) {
             throw new DukeDateFormatException(ERROR_ILLEGAL_DAY);
@@ -143,6 +201,13 @@ public class DukeDate {
         }
     }
 
+    /**
+     * Formats time into AM/PM format.
+     *
+     * @param hour Hour of this DukeDate inputted as 24 hour format.
+     * @param minute Minute of this DukeDate.
+     * @throws DukeDateFormatException When given time is invalid.
+     */
     private void setTime(int hour, int minute) throws DukeDateFormatException {
         if (hour > 23 || hour < 0 || minute > 59 || minute < 0) {
             throw new DukeDateFormatException(ERROR_ILLEGAL_TIME);
@@ -157,6 +222,16 @@ public class DukeDate {
         this.minute = minute;
     }
 
+    /**
+     * Formats this DukeDate into a String.
+     * The format is "dd MMM, YYYY, hh:mm a"
+     * <ul>
+     *     <li>MMM - the month written as a literal.
+     *     <li>a   - the AM/PM marker
+     * </ul>
+     *
+     * @return This DukeDate formatted into a String.
+     */
     public String format() {
         DecimalFormat df = new DecimalFormat("00");
         return String.format("%d %s, %d, %d:%s %s",
@@ -168,6 +243,11 @@ public class DukeDate {
                              this.amPmMarker);
     }
 
+    /**
+     * Returns same result as {@link DukeDate#format()}.
+     *
+     * @return {@link DukeDate#format()}.
+     */
     @Override
     public String toString() {
         return this.format();

@@ -21,12 +21,21 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
+/**
+ * Parses various Strings into meaningful information.
+ */
 public class Parser {
 
+    /** {@value ERROR_DATE_FORMAT} */
     private static final String ERROR_DATE_FORMAT = "☹ OOPS!!! Date must be in MM/DD/YYYY HHMM format.";
+    /** {@value ERROR_SAVE_FILE_FORMAT} */
     private static final String ERROR_SAVE_FILE_FORMAT = "☹ OOPS!!! Saved file contains illegal formatting.";
+    /** {@value ERROR_ILLEGAL_COMMAND} */
     private static final String ERROR_ILLEGAL_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
+    /**
+     * This stores all the commands that Duke can understand and carry out.
+     */
     private enum CommandType {
         LIST,
         DONE,
@@ -38,6 +47,15 @@ public class Parser {
         BYE;
     }
 
+    /**
+     * Parses the given date in String to a {@link DukeDate} object.
+     * <p>
+     * <b>Prerequisite: </b>String must be in MM/DD/YYYY HHMM form in 24-hour format.
+     *
+     * @param date String to be parsed.
+     * @return {@link DukeDate} with information formatted in the date String.
+     * @throws DukeDateFormatException When the date and time given is illegal or in the wrong format.
+     */
     public static DukeDate parseToDate(String date) throws DukeDateFormatException {
         // Date format : MM/DD/YYYY HHMM
         String[] dateAndTime = date.split(" ");
@@ -53,6 +71,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses each line in the save file into the corresponding {@link Task} object.
+     *
+     * @param line A line in the save file.
+     * @return {@link Task} corresponding to the line.
+     * @throws DukeIOException When the lines in the save file is formatted incorrectly.
+     */
     static Task parseToTask(String line) throws DukeIOException {
         try {
             String[] taskComponents = line.split("-");
@@ -76,6 +101,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the date into a {@link DukeDate}.
+     *
+     * @param date Result of {@link DeadlineTask#getDateAsString()} or {@link EventTask#getDateAsString()}.
+     * @return {@link DukeDate} corresponding to the date String.
+     * @throws DukeIOException When the date in the save file is formatted incorrectly.
+     */
     private static DukeDate parseToDukeDate(String date) throws DukeIOException {
         // dd MM, yyyy, hh:mm a
         try {
@@ -93,6 +125,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the inputted command into a {@link Command} object.
+     *
+     * @param command User inputted string to be parsed into a {@link Command} object.
+     * @param description The rest of the user input;
+     * @return The {@link Command} object corresponding to the user input.
+     * @throws DukeIllegalCommandException When the string inputted is not a valid {@link CommandType}.
+     */
     public static Command parseToCommand(String command, String description) throws DukeIllegalCommandException {
         try {
             switch (CommandType.valueOf(command.toUpperCase())) {

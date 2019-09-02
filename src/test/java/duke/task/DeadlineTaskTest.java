@@ -12,8 +12,8 @@ class DeadlineTaskTest {
     void getDueDate_sampleDate_equals() {
         DukeDateStub dds = new DukeDateStub(2019, 9, 1, 17, 22);
         DeadlineTask dt = new DeadlineTask("essay 1",
-                false,
-                dds);
+                                           false,
+                                            dds);
 
         assertEquals(dds, dt.getDueDate());
     }

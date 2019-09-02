@@ -13,7 +13,7 @@ import java.util.TimerTask;
  */
 public class Duke {
 
-    private static final String FILEPATH = "\\data\\duke.txt";
+    private static final String FILEPATH = ".\\data\\duke.txt";
 
     private boolean isExiting = false;
 

@@ -76,7 +76,7 @@ public class Ui {
         if (tasks.size() == 0) {
             return "There are no tasks in your list right now.";
         } else {
-            return "Here are the task(s) in your list:" + getTasksString(tasks);
+            return "Here are the task(s) in your list:\n" + getTasksString(tasks);
         }
     }
 

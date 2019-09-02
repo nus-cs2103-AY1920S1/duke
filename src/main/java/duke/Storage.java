@@ -25,7 +25,12 @@ public class Storage {
      * @param filepath The directory which holds the file this object will load/save tasks from/to.
      */
     public Storage(String filepath) {
-        this.filepath = System.getProperty("user.dir") + filepath;
+        this.filepath = filepath;
+
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
 
     /**

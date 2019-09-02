@@ -8,12 +8,6 @@ class ListCommand implements Command {
         this.tasks = tasks;
     }
 
-    /**
-     * Returns a message with the list of tasks.
-     *
-     * @param words Array of words from the input line.
-     * @return Message to show the user.
-     */
     @Override
     public List<String> run(String[] words) {
         List<String> messages = new ArrayList<>();

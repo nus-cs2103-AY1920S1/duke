@@ -10,13 +10,6 @@ class DeleteCommand implements Command {
         this.storage = storage;
     }
 
-    /**
-     * Removes a task, and returns a message about the removed task and number of remaining tasks.
-     *
-     * @param words Array of words from the input line.
-     * @return Message to show the user.
-     * @throws IOException If the tasks cannot be saved.
-     */
     @Override
     public List<String> run(String[] words) throws IOException {
         Task task = tasks.remove(Integer.parseInt(words[1]) - 1);

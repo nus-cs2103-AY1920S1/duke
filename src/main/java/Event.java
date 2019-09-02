@@ -6,13 +6,6 @@ public class Event extends TimeTask {
         super(description, time);
     }
 
-    /**
-     * Returns a Command which generates an Event given the input line.
-     *
-     * @param tasks The shared list of tasks.
-     * @param storage Storage to save the tasks after adding the event.
-     * @return A Command which generates events.
-     */
     static Command getCommand(List<Task> tasks, Storage storage) {
         return words -> {
             List<String> wordList = List.of(words);
@@ -34,11 +27,6 @@ public class Event extends TimeTask {
         };
     }
 
-    /**
-     * Returns a list of strings representing this task so that it can be saved.
-     *
-     * @return A representation of this task as a list for saving.
-     */
     @Override
     List<String> getSaveList() {
         List<String> list = new ArrayList<>();
@@ -48,11 +36,6 @@ public class Event extends TimeTask {
         return list;
     }
 
-    /**
-     * Returns this task as a string to display to the user.
-     *
-     * @return This task as a string.
-     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + getTimeString() + ")";

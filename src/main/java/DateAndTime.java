@@ -1,6 +1,6 @@
 /**
- * Conversion for date and time from dd/mm/yyyy to [date] of
- * [month] and 24 hour to 12 hour format respectively.
+ * Conversion for date and time from dd/mm/yyyy to [date] of [month] and 24 hour to 12 hour format
+ * respectively.
  */
 public class DateAndTime {
 
@@ -13,10 +13,8 @@ public class DateAndTime {
 		time = "";
 	}
 
-
 	/**
-	 * Changing the format of the date from dd/mm/yyyy to
-	 * [date] of [month] [year]
+	 * Changing the format of the date from dd/mm/yyyy to [date] of [month] [year]
 	 *
 	 * @param date Date of the deadline or event.
 	 * @return Formatted date.
@@ -35,17 +33,14 @@ public class DateAndTime {
 			String formattedMonth = formatMonth(month);
 			formattedDate = formattedDay + " of " + formattedMonth + " " + year;
 
-
 		} catch (NumberFormatException e) {
 			System.out.println(border + "\n" + e + "\n" + border);
 		}
 		return formattedDate;
 	}
 
-
 	/**
-	 * Changing the format of time from 24-hour clock
-	 * to 12-hour clock.
+	 * Changing the format of time from 24-hour clock to 12-hour clock.
 	 *
 	 * @param time Time of the deadline or event.
 	 * @return Formatted time.
@@ -72,10 +67,11 @@ public class DateAndTime {
 					twelveHour = 12;
 					formattedTime = twelveHour + ":" + twelveMin + "am";
 				} else {
-					twelveHour = 12;
+					if (twelveHour == 0) {
+						twelveHour = 12;
+					}
 					formattedTime = twelveHour + ":" + twelveMin + "pm";
 				}
-
 			}
 		} catch (NumberFormatException e) {
 			isString = true;
@@ -89,7 +85,6 @@ public class DateAndTime {
 		}
 
 		return formattedTime;
-
 	}
 
 	/**
@@ -136,7 +131,6 @@ public class DateAndTime {
 		return dayFormat;
 	}
 
-
 	/**
 	 * Formatting of the month from number form to the name of the month.
 	 *
@@ -147,7 +141,6 @@ public class DateAndTime {
 
 		String translatedMonth = "";
 		switch (month) {
-
 			case "1":
 				translatedMonth = "January";
 				break;
@@ -190,6 +183,4 @@ public class DateAndTime {
 		}
 		return translatedMonth;
 	}
-
-
 }

@@ -1,5 +1,3 @@
-E/0/birthday/2nd of March 2019, my house 
-T/0/english homework
-T/0/math 
-T/0/more homework
-T/0/chinese homework
+D~0~homework~tomrrow 2233 6/5/201
+E~0~birthday~my house tomrrow 5/4/2011 1930
+T~0~my proj

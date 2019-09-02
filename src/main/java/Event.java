@@ -18,7 +18,7 @@ public class Event extends Task {
 	 */
 	public String getVenue() {
 
-		return checkTime(at);
+		return at;
 	}
 
 	/**
@@ -31,30 +31,35 @@ public class Event extends Task {
 	public String checkTime(String time) {
 		DateAndTime eventDateTime = new DateAndTime();
 		String[] timeAndDate = time.split(" ");
-		String formatDeadline = "";
+		String formatEvent = "";
 		for (int i = 0; i < timeAndDate.length; i++) {
 			String[] date = timeAndDate[i].split("/");
 			if (date.length == 3) {
 				if (i == 0) {
-					formatDeadline += eventDateTime.formatDate(timeAndDate[i] + ", ");
+					formatEvent += eventDateTime.formatDate(timeAndDate[i]) + ", ";
+				} else if (i == timeAndDate.length - 1) {
+					formatEvent += eventDateTime.formatDate(timeAndDate[i]);
 				} else {
-					formatDeadline += ", " + eventDateTime.formatDate(timeAndDate[i]);
+					formatEvent += eventDateTime.formatDate(timeAndDate[i]) + ", ";
 				}
-
 			} else if (timeAndDate[i].length() == 4) {
 				if (i == 0) {
-					formatDeadline += eventDateTime.formatTime(timeAndDate[i]);
+					formatEvent += eventDateTime.formatTime(timeAndDate[i]) + ", ";
+				} else if (i == timeAndDate.length - 1) {
+					formatEvent += eventDateTime.formatTime(timeAndDate[i]);
 				} else {
-					formatDeadline += " " + eventDateTime.formatTime(timeAndDate[i]);
+					formatEvent += eventDateTime.formatTime(timeAndDate[i]) + ", ";
+				}
+			} else {
+				if (i == 0 || i != timeAndDate.length - 1) {
+					formatEvent += timeAndDate[i] + " ";
 				}
 
-			} else {
-				formatDeadline += timeAndDate[i] + " ";
 			}
 
 		}
 
-		return formatDeadline;
+		return formatEvent;
 	}
 
 

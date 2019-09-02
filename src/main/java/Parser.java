@@ -38,12 +38,12 @@ public class Parser {
 		} else if (input.startsWith("find")) {
 			try {
 				if (input.length() < 5) {
-					throw new DukeException(ui.EMPTYINPUT);
+					throw new DukeException(ui.EMPTY_INPUT);
 				}
 				String findTask = input.substring(5);
 				System.out.println(ui.BORDER + "\nHere are the matching tasks in your list:");
 				int taskNumber = 1;
-				for(int i = 0; i < tasks.getTaskList().size(); i ++) {
+				for (int i = 0; i < tasks.getTaskList().size(); i++) {
 					if (tasks.getTask(i).toString().contains(findTask)) {
 						System.out.println(taskNumber + "." + tasks.getTask(i).toString());
 						taskNumber++;
@@ -120,8 +120,8 @@ public class Parser {
 				System.out.println(ui.BORDER + "\nGot it. I've added this task:");
 				System.out.println(newDeadLine.toString());
 				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.appendToFile("D/" + newDeadLine.getStatus() + "/" +
-						newDeadLine.getDescription() + "/" + newDeadLine.getDeadline() + "\n");
+				wf.appendToFile("D~" + newDeadLine.getStatus() + "~" +
+						newDeadLine.getDescription() + "~" + newDeadLine.getDeadline() + "\n");
 
 			} catch (DukeInvalidArgumentException e) {
 
@@ -155,8 +155,8 @@ public class Parser {
 				System.out.println(ui.BORDER + "\nGot it. I've added this task:");
 				System.out.println(newEvent.toString());
 				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.appendToFile("E/" + newEvent.getStatus() + "/" +
-						newEvent.getDescription() + "/" + newEvent.getVenue() + "\n");
+				wf.appendToFile("E~" + newEvent.getStatus() + "~" +
+						newEvent.getDescription() + "~" + newEvent.getVenue() + "\n");
 
 			} catch (DukeInvalidArgumentException e) {
 
@@ -183,7 +183,7 @@ public class Parser {
 				System.out.println(ui.BORDER + "\nGot it. I've added this task:");
 				System.out.println(newToDo.toString());
 				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.appendToFile("T/" + newToDo.getStatus() + "/" +
+				wf.appendToFile("T~" + newToDo.getStatus() + "~" +
 						newToDo.getDescription() + "\n");
 
 			} catch (DukeException e) {
@@ -251,7 +251,7 @@ public class Parser {
 	 * @return Boolean
 	 */
 	public boolean isExit() {
-		
+
 		return isEndLoop;
 	}
 }

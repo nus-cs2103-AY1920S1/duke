@@ -39,7 +39,7 @@ public class DukeReadFile {
 
 		for (int i = 0; i < addTask.length; i++) {
 			if (addTask[i].startsWith("T")) {
-				String[] at = addTask[i].split("/");
+				String[] at = addTask[i].split("~");
 				Todo td = new Todo(at[2]);
 				if (at[1].equals("1")) {
 					td.markAsDone();
@@ -47,7 +47,7 @@ public class DukeReadFile {
 				ct.add(td);
 
 			} else if (addTask[i].startsWith("D")) {
-				String[] at = addTask[i].split("/");
+				String[] at = addTask[i].split("~");
 				Deadline dl = new Deadline(at[2], at[3]);
 				if (at[1].equals("1")) {
 					dl.markAsDone();
@@ -55,7 +55,7 @@ public class DukeReadFile {
 				ct.add(dl);
 
 			} else if (addTask[i].startsWith("E")) {
-				String[] at = addTask[i].split("/");
+				String[] at = addTask[i].split("~");
 				Event e = new Event(at[2], at[3]);
 				if (at[1].equals("1")) {
 					e.markAsDone();

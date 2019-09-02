@@ -34,7 +34,7 @@ public class Task {
 	}
 
 
-	public void markNotDone(){
+	public void markNotDone() {
 
 		this.isDone = false;
 	}
@@ -58,6 +58,7 @@ public class Task {
 	 * @return 1 or 0 to indicate completion of task.
 	 */
 	public int getStatus() {
+
 		return isDone ? 1 : 0;
 	}
 

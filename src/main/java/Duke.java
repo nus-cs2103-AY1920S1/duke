@@ -31,20 +31,21 @@ public class Duke {
 	}
 
 
-    /**
-     * Execution of the task list manager
-     */
-    public void run() {
-        System.out.println(ui.INTRO);
-        boolean isExit = false;
-        userCommand = new Parser(ui, tasks, rf, wf);
-        while (!isExit) {
-            String input = ui.getInput();
-            userCommand.evaluate(input);
-            isExit = userCommand.isExit();
+	/**
+	 * Execution of the task list manager
+	 */
+	public void run() {
+		System.out.println(ui.INTRO);
+		boolean isExit = false;
+		userCommand = new Parser(ui, tasks, rf, wf);
+		while (!isExit) {
+			String input = ui.getInput();
+			userCommand.evaluate(input);
+			isExit = userCommand.isExit();
 
-        }
-    }
+		}
+	}
+
 	/**
 	 * Main method to execute the Duke's program.
 	 *

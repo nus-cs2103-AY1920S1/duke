@@ -1,6 +1,5 @@
 /**
- * Creates a deadline for a task which has to be done.
- * A sub class of Task.
+ * Creates a deadline for a task which has to be done. A sub class of Task.
  */
 public class Deadline extends Task {
 
@@ -12,19 +11,16 @@ public class Deadline extends Task {
 	}
 
 	/**
-	 * Returns the date and/or time of the deadline
-	 * after it has been formatted.
+	 * Returns the date and/or time of the deadline after it has been formatted.
 	 *
 	 * @return Formatted time.
 	 */
 	public String getDeadline() {
-		return checkTime(by);
+		return by;
 	}
 
-
 	/**
-	 * Converting of the date and/or time of the deadline
-	 * to the required format.
+	 * Converting of the date and/or time of the deadline to the required format.
 	 *
 	 * @param time Date/time of the deadline.
 	 * @return Formatted date/time.
@@ -37,33 +33,32 @@ public class Deadline extends Task {
 			String[] date = timeAndDate[i].split("/");
 			if (date.length == 3) {
 				if (i == 0) {
-					formatDeadline += dateTime.formatDate(timeAndDate[i] + ", ");
+					formatDeadline += dateTime.formatDate(timeAndDate[i]) + ", ";
+				} else if (i == timeAndDate.length - 1) {
+					formatDeadline += dateTime.formatDate(timeAndDate[i]);
 				} else {
-					formatDeadline += ", " + dateTime.formatDate(timeAndDate[i]);
+					formatDeadline += dateTime.formatDate(timeAndDate[i]) + ", ";
 				}
-
 			} else if (timeAndDate[i].length() == 4) {
 				if (i == 0) {
+					formatDeadline += dateTime.formatTime(timeAndDate[i]) + ", ";
+				} else if (i == timeAndDate.length - 1) {
 					formatDeadline += dateTime.formatTime(timeAndDate[i]);
 				} else {
-					formatDeadline += " " + dateTime.formatTime(timeAndDate[i]);
+					formatDeadline += dateTime.formatTime(timeAndDate[i]) + ", ";
 				}
-
 			} else {
-
-				formatDeadline += timeAndDate[i] + " ";
+				if (i == 0 || i != timeAndDate.length - 1) {
+					formatDeadline += timeAndDate[i] + " ";
+				}
 			}
-
 		}
-
 		return formatDeadline;
-
 	}
 
-
 	/**
-	 * Returns a string with a deadline symbol [D] as well as
-	 * the description and deadline of the task.
+	 * Returns a string with a deadline symbol [D] as well as the description and deadline of the
+	 * task.
 	 *
 	 * @return String of the task and deadline.
 	 */

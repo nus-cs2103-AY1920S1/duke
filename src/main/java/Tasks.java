@@ -25,7 +25,7 @@ public class Tasks {
         this.status = 0;
     }
 
-    String getStatus() {
+    int getStatus() {
         return status;
     }
 
@@ -35,7 +35,7 @@ public class Tasks {
 
     String formatTime() {
         String output = "";
-        if(time.length > 1) {
+        if(time.length() > 1) {
             output = time.substring(1);
         }
         return output;
@@ -43,7 +43,10 @@ public class Tasks {
 
     @Override 
     public String toString() {
-        return typeOfTask + " | " + status + " | " + taskDetails + " | " + formatTime();
+        if(formatTime().length() < 1) {
+            return typeOfTask + " | " + status + " |" + taskDetails;
+        }
+        return typeOfTask + " | " + status + " |" + taskDetails + " | " + formatTime();
     } 
 
 }

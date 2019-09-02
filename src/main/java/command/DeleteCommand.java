@@ -5,12 +5,14 @@ import task.TaskList;
 import ui.Ui;
 
 /**
- * Represents a delete command
+ * Represents a delete command.
  */
 public class DeleteCommand extends Command {
     private int index;
 
     /**
+     * Initializes DeleteCommand with index ot the task to be deleted.
+     *
      * @param index index of the task to be deleted
      */
     public DeleteCommand(int index) {
@@ -18,8 +20,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task identified by its index from the task list
-     * Prints messages to notify users that the task has been deleted
+     * Deletes a task identified by its index from the task list.
+     * Prints messages to notify users that the task has been deleted.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

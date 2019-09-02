@@ -1,13 +1,15 @@
 package task;
 
 /**
- * Represents a task
+ * Represents a task.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
+     * Initializes Task with description.
+     *
      * @param description of the task
      */
     public Task(String description) {
@@ -16,6 +18,8 @@ public class Task {
     }
 
     /**
+     * Initializes Task with description and isDone status.
+     *
      * @param description of the task
      * @param isDone true if task is completed. Else false
      */

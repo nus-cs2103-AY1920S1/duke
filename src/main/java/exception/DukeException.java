@@ -1,13 +1,13 @@
 package exception;
 
 /**
- * Represents all exception unique to Duke
+ * Represents all exception unique to Duke.
  */
-public class DukeException extends Exception{
-
+public class DukeException extends Exception {
     protected String type;
 
     /**
+     * Initializes DukeException with error type.
      * @param input the error type
      */
     public DukeException(String input) {
@@ -15,11 +15,13 @@ public class DukeException extends Exception{
     }
 
     /**
+     * Returns String error message.
+     *
      * @return error message
      */
     @Override
     public String getMessage() {
-        switch(this.type) {
+        switch (this.type) {
         case "invalid number":
             return "Please enter a valid number.";
         case "empty todo":

@@ -1,7 +1,11 @@
 package parser;
 
 import converter.StringDateConverter;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,20 +16,22 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Represents the file used to store task list
+ * Represents the file used to store task list.
  */
 public class Storage {
     private String filePath;
 
     /**
-     * @param filePath represents the file where task list is stored
+     * Instantiate Storage with path of the file where task list is stored.
+     *
+     * @param filePath represents the path of the file where task list is stored
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Loads the file where task list is stored
+     * Loads the file where task list is stored.
      *
      * @return list of task if the file is found
      * @throws FileNotFoundException when no task list file is found
@@ -39,8 +45,7 @@ public class Storage {
             boolean isDone;
             if (outputs[1].equals("Done")) {
                 isDone = true;
-            }
-            else {
+            } else {
                 isDone = false;
             }
             Date date = null;
@@ -60,7 +65,7 @@ public class Storage {
             case "D":
                 tasks.add(new Deadline(description, date, isDone));
                 break;
-            case "E":
+            default: //case "E":
                 tasks.add(new Event(description, date, isDone));
                 break;
             }
@@ -69,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Saves task list in designated file path
+     * Saves task list in designated file path.
      *
      * @param tasks is the task list
      * @throws IOException if designated file path is not found
@@ -77,7 +82,8 @@ public class Storage {
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task task : tasks.getTasks()) {
-            String description, textToAdd;
+            String description;
+            String textToAdd;
             Date date = null;
             textToAdd = "";
             description = task.getDescription();

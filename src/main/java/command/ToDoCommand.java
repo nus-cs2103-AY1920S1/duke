@@ -6,12 +6,14 @@ import task.ToDo;
 import ui.Ui;
 
 /**
- * Represents a todo task to be added
+ * Represents a todo task to be added.
  */
 public class ToDoCommand extends Command {
     private String description;
 
     /**
+     * Initializes ToDoCommand with description of todo Task.
+     *
      * @param description contains description of todo task
      */
     public ToDoCommand(String description) {
@@ -19,9 +21,9 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Adds todo task to task list
+     * Adds todo task to task list.
      * Prints messages to notify users todo task
-     * has been added to task list
+     * has been added to task list.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users

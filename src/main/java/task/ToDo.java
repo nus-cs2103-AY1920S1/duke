@@ -1,11 +1,13 @@
 package task;
 
 /**
- * Represents a todo task
+ * Represents a todo task.
  */
 public class ToDo extends Task {
 
     /**
+     * Initializes ToDo with description.
+     *
      * @param description of the todo task
      */
     public ToDo(String description) {
@@ -13,6 +15,8 @@ public class ToDo extends Task {
     }
 
     /**
+     * Initializes ToDo with description and isDone status.
+     *
      * @param description description of the todo task
      * @param isDone true if todo task is completed. Else false
      */

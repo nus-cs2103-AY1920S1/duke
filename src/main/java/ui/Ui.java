@@ -3,7 +3,7 @@ package ui;
 import java.util.Scanner;
 
 /**
- * UI of the application
+ * UI of the application.
  */
 public class Ui {
     Scanner myScanner;
@@ -21,7 +21,8 @@ public class Ui {
     }
 
     /**
-     * Read user input
+     * Reads user input.
+     *
      * @return full user input
      */
     public String readCommand() {

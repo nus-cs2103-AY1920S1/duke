@@ -38,10 +38,10 @@ public class Duke {
     }
 
     /**
-     * Prints welcome message
-     * Collects input from users
-     * Prints exit message
-     * Saves task list into hard disk
+     * Prints welcome message.
+     * Collects input from users.
+     * Prints exit message.
+     * Saves task list into hard disk.
      */
     private void run() {
         ui.showWelcome();

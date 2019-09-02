@@ -15,14 +15,16 @@ public class DeadlineCommand extends Command {
     private String[] arguments;
 
     /**
-     * @param arguments contains description and date of deadline.
+     * Initializes DeadlineCommand with deadline description and due date.
+     *
+     * @param arguments contains description and due date
      */
     public DeadlineCommand(String[] arguments) {
         this.arguments = arguments;
     }
 
     /**
-     * Adds deadline to task list
+     * Adds deadline to task list.
      * Prints messages to notify users deadline has been
      * added to task list
      *

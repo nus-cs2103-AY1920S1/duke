@@ -52,8 +52,9 @@ public class Task {
      *
      * @param hasBeenDone boolean to indicate that the task has been completed.
      */
-    public void setTaskAsDone(boolean hasBeenDone) {
+    public boolean setTaskAsDone(boolean hasBeenDone) {
         this.isDone = hasBeenDone;
+        return this.isDone;
     }
 
     /**

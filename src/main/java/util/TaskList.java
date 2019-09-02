@@ -44,8 +44,8 @@ public class TaskList {
      *
      * @param task the task to be added
      */
-    public void add(Task task) {
-        this.tasks.add(task);
+    public boolean add(Task task) {
+        return this.tasks.add(task);
     }
 
     /**

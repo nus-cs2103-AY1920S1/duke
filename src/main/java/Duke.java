@@ -1,6 +1,12 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /** Class to represent Duke. */
@@ -11,6 +17,13 @@ public class Duke extends Application {
     private Parser parser;
     private Storage storage;
     private TaskList tl;
+
+    // variables required for JavaFX execution
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /**
      * Class constructor for the Duke class.
@@ -102,10 +115,53 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        // Step 1. Settingu p requried components.
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        // The container for the content of the chat to scroll.
+        this.scrollPane = new ScrollPane();
+        this.dialogContainer = new VBox();
+        this.scrollPane.setContent(dialogContainer);
+
+        this.userInput = new TextField();
+        this.sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(this.scrollPane, this.userInput, this.sendButton);
+
+        this.scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+        
+        mainLayout.setPrefSize(400.0, 600.0);
+        
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+        
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        
+        userInput.setPrefWidth(325.0);
+        
+        sendButton.setPrefWidth(55.0);
+        
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        // Show the stage.
+        stage.show();
     }
 }

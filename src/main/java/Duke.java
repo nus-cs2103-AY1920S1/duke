@@ -6,7 +6,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Parser p = new Parser();
-        //ArrayList<Tasks> listOfTasks = new ArrayList<>();
         TaskList listOfTasks = new TaskList();
         SaveToFile sf = new SaveToFile();
         
@@ -26,10 +25,8 @@ public class Duke {
             switch (keyword) {
                 case "list":
                 for(int i = 1; i <= listOfTasks.size(); i++) {
-                    System.out.println("in loop");
                     System.out.println(i + ". " + listOfTasks.getTask(i - 1));
                 }
-                //System.out.println("is listing");
                 break;
 
                 case "done":

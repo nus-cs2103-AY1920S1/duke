@@ -13,12 +13,12 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+        this.text = l;
+        this.displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        this.text.setWrapText(true);
+        this.displayPicture.setFitWidth(100.0);
+        this.displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -36,12 +36,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        DialogBox db = new DialogBox(l, iv);
+        db.setSpacing(5);
+        return db;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        DialogBox db = new DialogBox(l, iv);
         db.flip();
+        db.setSpacing(5);
         return db;
     }
 }

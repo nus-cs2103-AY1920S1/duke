@@ -23,18 +23,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    @FXML
     private Duke duke;
 
+    @FXML
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/shiba.jpg"));
+    @FXML
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/samoyed.jpg"));
 
-    private MainWindow() {
+    MainWindow(Duke duke) {
         try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
+            fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.duke = duke;
     }
 
     @FXML

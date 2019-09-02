@@ -22,16 +22,10 @@ public class Main extends Application {
      * @param stage JavaFXStage
      */
     public void start(Stage stage) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        AnchorPane ap = new MainWindow(duke);
+        Scene scene = new Scene(ap);
+        stage.setScene(scene);
+        stage.show();
     }
 }
 

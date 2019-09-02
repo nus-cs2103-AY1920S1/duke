@@ -237,6 +237,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.AddCommandTest" />
+      <item itemvalue="JUnit.DeadlineTest" />
+      <item itemvalue="JUnit.DeadlineTest.testInstantiate_objectWithStringAsDateParameter_string" />
+      <item itemvalue="JUnit.DeadlineTest.testToString_objectWithDatAsDateeParameter_string" />
+      <item itemvalue="JUnit.TodoTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.DeadlineTest" />

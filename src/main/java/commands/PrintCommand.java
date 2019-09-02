@@ -8,7 +8,7 @@ import util.TaskList;
  * Encapsulates command to print all tasks in the task list.
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 3
+ * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class PrintCommand extends Command {
 
@@ -31,6 +31,7 @@ public class PrintCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        // call UI to print task list
         ui.printTasks(tasks);
     }
 }

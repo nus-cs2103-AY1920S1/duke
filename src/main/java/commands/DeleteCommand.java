@@ -12,11 +12,11 @@ import java.io.IOException;
  * Encapsulates command for deleting task from the task list.
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 3
+ * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class DeleteCommand extends Command {
 
-    /** The serial number (1-indexed) of the task to be deleted*/
+    /** The serial number (1-indexed) of the task to be deleted. */
     private String taskNumber;
 
     /**
@@ -36,8 +36,8 @@ public class DeleteCommand extends Command {
      * the storage handler to update the task list on the hard disk.
      *
      * @param tasks the task list the task is to be added to
-     * @param ui the user interface associated with this run of ui.Duke
-     * @param storage the storage handler associated with this run of ui.Duke
+     * @param ui the user interface associated with this run of Duke
+     * @param storage the storage handler associated with this run of Duke
      * @throws IOException when file the list is to be written to is not found
      */
     @Override

@@ -5,19 +5,19 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /**
- * Encapsulates a event-type task handled by ui.Duke.
+ * Encapsulates a event-type task handled by uDuke.
  *
- * A event differs from other tasks because it has a date on which it is to
- * occur.
+ * <p> A event differs from other tasks because it has a date on which it is to
+ * occur. </p>
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 3
+ * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Event extends Task {
-    /** String representing date or time at which event is slated to occur */
+    /** String representing date or time at which event is slated to occur. */
     private String dateTime;
 
-    /** Date / Time converted to the Date format */
+    /** Date / Time converted to the Date format. */
     private Date when;
 
     /**

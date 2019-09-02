@@ -10,7 +10,7 @@ import main.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Constructs a new ExitCommand to deal with the 'bye' command
+     * Constructs a new ExitCommand to deal with the 'bye' command.
      */
     public ExitCommand() {
         super();
@@ -23,7 +23,7 @@ public class ExitCommand extends Command {
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbye();
         super.canExit();
     }

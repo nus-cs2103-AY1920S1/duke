@@ -1,7 +1,10 @@
 package main;
 
-import main.TaskList;
-import task.*;
+import task.DateTime;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,14 +14,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
 
     private String filePath;
 
     /**
-     * Creates a new Storage object
+     * Creates a new Storage object.
      *
      * @param filePath File path to read from and to write to.
      */
@@ -27,7 +30,7 @@ public class Storage {
     }
 
     /**
-     * Loads existing task list from specified file path
+     * Loads existing task list from specified file path.
      *
      * @return An ArrayList containing the Tasks from the specified file
      * @throws DukeException If file does not exist
@@ -47,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Reads from a specified File
+     * Reads from a specified File.
      *
      * @param sc    Scanner to read from file
      * @param f     File to be read from
@@ -76,8 +79,8 @@ public class Storage {
             throw new DukeException("Invalid task type found.");
         }
 
-        int status;         // Check task status.
-        try{
+        int status;         // Check task status
+        try {
             status = Integer.parseInt(arr[1].trim());
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid task status found.");
@@ -134,7 +137,7 @@ public class Storage {
     }
 
     /**
-     * Clears the file found at filePath
+     * Clears the file found at filePath.
      *
      * @throws DukeException if file is not found.
      */

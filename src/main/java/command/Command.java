@@ -41,5 +41,7 @@ public abstract class Command {
     /**
      * Sets the exit boolean to true.
      */
-    public void canExit() { this.isExit = true; }
+    public void canExit() {
+        this.isExit = true;
+    }
 }

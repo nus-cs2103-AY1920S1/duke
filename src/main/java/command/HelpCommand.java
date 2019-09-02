@@ -11,7 +11,7 @@ import main.Ui;
 public class HelpCommand extends Command {
 
     /**
-     * Creates a new HelpCommand
+     * Creates a new HelpCommand.
      */
     public HelpCommand() {
         super();
@@ -24,7 +24,7 @@ public class HelpCommand extends Command {
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Helper helper = new Helper();
         ui.dukeEcho(helper.getCommands());
     }

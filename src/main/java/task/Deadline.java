@@ -3,13 +3,13 @@ package task;
 import task.DateTime;
 
 /**
- * Represents a Task with type Deadline
+ * Represents a Task with type Deadline.
  */
 public class Deadline extends Task {
     private DateTime dateTime;
 
     /**
-     * Creates a Deadline object
+     * Creates a Deadline object.
      *
      * @param name      The name of the Deadline task
      * @param dateTime  The date and time of the task, in DateTime format
@@ -20,7 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a Deadline object
+     * Creates a Deadline object.
      *
      * @param name      The name of the deadline task
      * @param isComplete The completion status of the deadline task (true/false)

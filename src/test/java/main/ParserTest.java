@@ -3,7 +3,7 @@ package main;
 import command.AddCommand;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
@@ -20,7 +20,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_add_Command_withException(){
+    public void parse_add_Command_withException() {
         String res;
         String fullCommand = "evENT dog's birthday / 32/01/2016 1200";
         try {
@@ -30,6 +30,7 @@ public class ParserTest {
         }
         assertEquals("Invalid date-time format. Date-time should be in dd/MM/yyyy HHmm format.", res);
     }
+
     @Test
     public void parse_deleteCommand_noException() throws DukeException {
         String dummyTaskToAdd = "evENT dog's birthday / 26/01/2016 1200";

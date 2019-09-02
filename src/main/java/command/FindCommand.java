@@ -9,14 +9,14 @@ import task.Task;
 import java.util.ArrayList;
 
 /**
- * deals with finding tasks by keyword
+ * Deals with finding tasks by keyword.
  */
 public class FindCommand extends Command {
 
     private String keyword;
 
     /**
-     * Creates a FindCommand object to deal with finding tasks by keyword
+     * Creates a FindCommand object to deal with finding tasks by keyword.
      *
      * @param keyword the keyword to be searched
      * @throws DukeException if keyword only contains whitespaces
@@ -29,7 +29,8 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the command to find tasks by keyword
+     * Executes the command to find tasks by keyword.
+     *
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file

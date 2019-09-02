@@ -3,7 +3,7 @@ package main;
 import java.util.Scanner;
 
 /**
- * Deals with interactions with the user
+ * Deals with interactions with the user.
  */
 public class Ui {
 
@@ -32,14 +32,14 @@ public class Ui {
     }
 
     /**
-     * Shows the divider line
+     * Shows the divider line.
      */
     public void showLine() {
         System.out.println(DIVIDER);
     }
 
     /**
-     * Shows the Duke welcome message
+     * Shows the Duke welcome message.
      */
     public void showWelcome() {
         showLine();
@@ -48,14 +48,14 @@ public class Ui {
     }
 
     /**
-     * Shows a goodbye message from Duke
+     * Shows a goodbye message from Duke.
      */
     public void showGoodbye() {
         dukeEcho("Bye! Hope to see you again soon!");
     }
 
     /**
-     * Shows an error
+     * Shows an error.
      *
      * @param message the error message to be displayed
      */
@@ -70,7 +70,7 @@ public class Ui {
      *                 Messages in separate lines should be fed in as different parameters, e.g.
      *                 dukeEcho("This is message 1", "Message 2 is on the next line");
      */
-    public void dukeEcho(String... messages){
+    public void dukeEcho(String... messages) {
         for (String msg : messages) {
             System.out.println(BLANKSPACE + msg);
         }

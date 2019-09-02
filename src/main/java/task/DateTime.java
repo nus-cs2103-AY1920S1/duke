@@ -13,7 +13,7 @@ public class DateTime {
     private LocalDateTime dateTime;
 
     /**
-     * Constructs a DateTime object
+     * Constructs a DateTime object.
      *
      * @param dateTime in LocalDateTime format.
      */
@@ -22,14 +22,14 @@ public class DateTime {
     }
 
     /**
-     * Constructs a DateTime object
+     * Constructs a DateTime object.
      *
      * @param rawDateTimeFormat A String with date and time information, with format dd/MM/yyyy HHmm,
      *                          e.g. 25/07/2019 2330
      * @throws DukeException If format is not recognized.
      */
     public DateTime(String rawDateTimeFormat) throws DukeException {
-        try{
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             this.dateTime = LocalDateTime.parse(rawDateTimeFormat, formatter);
         } catch (DateTimeParseException ex) {

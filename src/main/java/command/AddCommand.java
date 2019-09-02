@@ -4,10 +4,14 @@ import main.DukeException;
 import main.Storage;
 import main.TaskList;
 import main.Ui;
-import task.*;
+import task.DateTime;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 /**
- * An AddCommand object to deal with adding Tasks
+ * An AddCommand object to deal with adding Tasks.
  */
 public class AddCommand extends Command {
 
@@ -16,7 +20,7 @@ public class AddCommand extends Command {
     private DateTime dateTime;
 
     /**
-     * Constructs an AddCommand to deal with adding Tasks
+     * Constructs an AddCommand to deal with adding Tasks.
      *
      * @param taskType      The type of the task - Todo, Event, Deadline
      * @param taskDetails   Additional information of the task - task name, task date & time
@@ -48,7 +52,7 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask;
-        switch(taskType){
+        switch (taskType) {
         case "todo":
             newTask = new ToDo(taskName);
             break;
@@ -69,9 +73,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Overrides toString method
+     * Overrides toString method.
      *
-     * @return Add <taskType>: <taskName> <taskDate&Time>
+     * @return String format of AddCommand for debugging.
      */
     @Override
     public String toString() {

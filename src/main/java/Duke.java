@@ -1,10 +1,14 @@
 import command.Command;
-import main.*;
+import main.DukeException;
+import main.Parser;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
 
 import java.util.Scanner;
 
 /**
- * Main class
+ * Main class.
  */
 public class Duke {
 
@@ -43,6 +47,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method.
+     *
+     * @param args input arguments
+     */
     public static void main(String[] args) {
 
         System.out.println("Enter filepath for task list:");

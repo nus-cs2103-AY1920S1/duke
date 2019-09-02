@@ -3,7 +3,6 @@ public class Tasks {
     String taskDesc;
     String status;
     String tde; 
-    //String timeOfEvent; 
     String[] timeOfEvent;
 
     public Tasks(String desc, String type, String time) {

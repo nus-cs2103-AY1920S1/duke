@@ -1,4 +1,3 @@
-import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.UI;
@@ -14,6 +13,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class CreateEventCommandTest {
@@ -49,7 +49,7 @@ public class CreateEventCommandTest {
     @Test
     public void executeCreateEventCommand() {
         String expectedSubString1 = "Got it. I've added this task:";
-        String expectedSubString2 = "[Event][✗] Project Meeting (at: 28/08/19 1600 - 28/08/19 1800)";
+        String expectedSubString2 = "[Event][N] Project Meeting (at: 28/08/19 1600 - 28/08/19 1800)";
         String expectedSubString3 = "Now you have 1 task in the list";
 
 
@@ -57,11 +57,11 @@ public class CreateEventCommandTest {
         try {
             command.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            System.out.println("execute create event command test should pass, but it didn't " + e.getMessage());
+            System.out.println("execute create event command test should pass, but it didn't because " + e.getMessage());
+            fail();
         }
 
         String actual = outContent.toString();
-
         assertTrue(actual.contains(expectedSubString1));
         assertTrue(actual.contains(expectedSubString2));
         assertTrue(actual.contains(expectedSubString3));

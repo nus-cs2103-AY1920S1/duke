@@ -41,7 +41,7 @@ public abstract class Task {
      * @return A String representing the task in the specified format
      */
     public String convertTaskToFileString() {
-        char isCompleted = this.isCompleted ? 'T' : 'F';
+        char isCompleted = this.isCompleted ? 'Y' : 'N';
         String taskType = this.taskType.toString();
         String result = taskType + " | " + isCompleted + " | " + this.taskName + " " + this.details;
         return result.stripTrailing();
@@ -79,7 +79,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        char symbol = this.isCompleted ? '✓' : '✗';
+        char symbol = this.isCompleted ? 'Y' : 'N';
         String result = "[" + taskType + "][" + symbol + "] " + taskName + " " + details;
         return result.stripTrailing();
     }

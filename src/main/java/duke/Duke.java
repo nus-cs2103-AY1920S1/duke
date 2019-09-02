@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 
 /**
- * Driver class for Duke operations
+ * Driver class for Duke operations.
  *
  * @author JXKENG
  */
@@ -15,7 +15,7 @@ public class Duke {
     public static final String filePath = "C:/Users/jxken/Desktop/Github/duke/data/duke.txt";
 
     /**
-     * Starting point for duke commands and actions
+     * Starting point for duke commands and actions.
      *
      * @param args command line arguments
      */
@@ -29,7 +29,7 @@ public class Duke {
 
         boolean isExit = false;
 
-        while (!isExit) {
+        while (!isExit && sc.hasNext()) {
             String fullCommand = sc.nextLine();
             try {
                 UI.printLine();

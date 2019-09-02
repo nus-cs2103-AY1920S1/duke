@@ -7,7 +7,7 @@ import duke.UI;
 /**
  * Inherits from abstract Command class.
  * Handles execution of commands in this format:
- * <code>list/code>
+ * <code>list</code>
  */
 public class ListCommand extends Command {
     public ListCommand(String taskInformation) {

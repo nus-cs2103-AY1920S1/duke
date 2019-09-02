@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -9,13 +10,13 @@ import java.text.ParseException;
 
 /**
  * Helper class for converting task strings from file
- * to <code>Task</code> objects
+ * to <code>Task</code> objects.
  */
 public class FileReaderHandler {
     TaskList tasks;
 
     /**
-     * Default constructor for FileReaderHandler class
+     * Default constructor for FileReaderHandler class.
      *
      * @param tasks A <code>TaskList</code> object
      */
@@ -43,7 +44,8 @@ public class FileReaderHandler {
                 try {
                     tasks.addTask(new Deadline(deadlineText, deadlineParts[1], isCompleted), false);
                 } catch (ParseException error) {
-                    System.out.println(error.getMessage() + ". Please make sure date from file is in this format DD/MM/YYYY HHMM");
+                    System.out.println(error.getMessage() +
+                            ". Please make sure date from file is in this format DD/MM/YYYY HHMM");
                 }
                 break;
             case "EVENT":
@@ -52,9 +54,12 @@ public class FileReaderHandler {
                 try {
                     tasks.addTask(new Event(eventText, eventParts[1], isCompleted), false);
                 } catch (ParseException error) {
-                    System.out.println(error.getMessage() + ". Please enter date from file in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM");
+                    System.out.println(error.getMessage() +
+                            ". Please enter date from file in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM");
                 }
                 break;
+            default:
+                throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException error) {
             System.out.println("\t ☹ OOPS!!! " + error.getMessage());

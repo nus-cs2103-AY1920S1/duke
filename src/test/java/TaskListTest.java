@@ -27,6 +27,7 @@ public class TaskListTest {
             fail();
         }
     }
+
     @Test
     public void deleteTask_taskExists_success() {
         List<Task> taskList = tasks.getList();
@@ -38,6 +39,7 @@ public class TaskListTest {
             System.out.println("Task exists, this exception should not be thrown " + e.getMessage());
             fail();
         }
+
         assertEquals(1, taskList.size());
         assertEquals(taskList.get(0).getTaskName(), "project meeting" );
     }
@@ -53,7 +55,6 @@ public class TaskListTest {
         } catch (TaskDoesNotExistException e) {
             assertEquals("Task not found", e.getMessage());
         }
-
 
     }
 }

@@ -53,7 +53,7 @@ class ListCommand extends Command {
         if (commandArgs.length > 0) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after list command",
-                    " ☹  OOPS!!! There shouldn't be anything following 'list',\n"
+                    " =X  OOPS!!! There shouldn't be anything following 'list',\n"
                             + " did you meant to do something else?");
         }
     }

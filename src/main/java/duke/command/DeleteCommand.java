@@ -34,7 +34,7 @@ class DeleteCommand extends WritableCommand {
     void run(TaskList tasks, MainWindow ui, Storage storage) {
         Task taskDeleted = tasks.deleteTaskByIndex(taskIndex);
 
-        ui.showMessage(" Noted. I've removed this task:"
+        ui.showMessage(" Noted. I've removed this task:\n"
                 + String.format("   %s", taskDeleted.getStatusText())
                 + String.format(" Now you have %d tasks in the list.", tasks.getSize()));
     }
@@ -54,7 +54,7 @@ class DeleteCommand extends WritableCommand {
         if (commandArgs.length > 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after delete command",
-                    " ☹  OOPS!!! There shouldn't be so many arguments!");
+                    " =X  OOPS!!! There shouldn't be so many arguments!");
         }
 
         try {
@@ -63,12 +63,12 @@ class DeleteCommand extends WritableCommand {
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
-                    " ☹  OOPS!!! The task number you gave me wasn't a valid number,\n"
+                    " =X  OOPS!!! The task number you gave me wasn't a valid number,\n"
                             + " or you didn't give me one at all!");
         } catch (IndexOutOfBoundsException | NullPointerException ex) {
             throw new DukeInvalidArgumentException(
                     "User number supplied was out of list bounds",
-                    " ☹  OOPS!!! The task number you gave me wasn't within your current list!");
+                    " =X  OOPS!!! The task number you gave me wasn't within your current list!");
         }
     }
 }

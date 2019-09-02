@@ -41,7 +41,7 @@ class DeadlineCommand extends AddTaskCommand {
         if (byIndex == -1) {
             throw new DukeInvalidArgumentException(
                     "Missing /by delimiter for deadline command",
-                    " ☹  OOPS!!! I dont know what is your deadline!\n"
+                    " =X  OOPS!!! I dont know what is your deadline!\n"
                             + " You should add a deadline with\n"
                             + " \'deadline <description> /by <timing>\'");
         }

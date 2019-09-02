@@ -110,7 +110,7 @@ public class Storage {
                 default:
                     throw new DukeTaskFileParseException(
                             "Unhandled taskType encountered",
-                            " ☹  Oops! I am not trained to handle this type of Tasks...\n");
+                            " =X  Oops! I am not trained to handle this type of Tasks...\n");
                 }
 
                 taskToAdd.setDone(isTaskDone);
@@ -155,7 +155,7 @@ public class Storage {
         } catch (IOException ex) {
             throw new DukeFileWriteException(
                     ex.getMessage(),
-                    " ☹  OOPS!!! I failed to write the task data to disk!");
+                    " =X  OOPS!!! I failed to write the task data to disk!");
         }
     }
 
@@ -172,7 +172,7 @@ public class Storage {
         } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",
-                    " ☹  Oops! I encountered an invalid task type value while\n"
+                    " =X  Oops! I encountered an invalid task type value while\n"
                             + "   reading your file.");
         }
     }
@@ -196,7 +196,7 @@ public class Storage {
 
         throw new DukeTaskFileParseException(
                 "Invalid done status number encountered while parsing task file",
-                " ☹  Oops! I encountered an invalid or missing done value\n"
+                " =X  Oops! I encountered an invalid or missing done value\n"
                         + "   while reading your file.");
     }
 
@@ -216,7 +216,7 @@ public class Storage {
         } catch (DukeInvalidArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task description encountered when parsing task file",
-                    " ☹  Oops! I encountered an empty description while\n"
+                    " =X  Oops! I encountered an empty description while\n"
                             + "   reading your file.");
         }
     }
@@ -267,7 +267,7 @@ public class Storage {
      * to the user.
      */
     private void printNoStorageMsg() {
-        ui.showMessage(" ☹  Oops! I failed to find a "
+        ui.showMessage(" =X  Oops! I failed to find a "
                 + dirName
                 + " directory upwards\n"
                 + "   and could not create one!");

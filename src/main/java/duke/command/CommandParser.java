@@ -26,7 +26,7 @@ public abstract class CommandParser {
             inputs = Arrays.copyOfRange(inputs, 1, inputs.length);
         } catch (IllegalArgumentException | IndexOutOfBoundsException ex) {
             throw new DukeInvalidCommandException(
-                    " ☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    " =X  OOPS!!! I'm sorry, but I don't know what that means =(");
         }
 
         switch (commandType) {
@@ -60,7 +60,7 @@ public abstract class CommandParser {
                     String.format(
                             "Encountered unimplemented or uncovered command type %s",
                             commandType.toString()),
-                    " ☹  OOPS!!! I'm sorry, but I haven't implemented it :-(");
+                    " =X  OOPS!!! I'm sorry, but I haven't implemented it =(");
         }
 
         return command;

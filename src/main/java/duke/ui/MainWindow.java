@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -18,7 +19,7 @@ public class MainWindow extends AnchorPane {
     /** VBox container for dialog boxes in the scroll pane. */
     @FXML
     private VBox dialogContainer;
-     /** User input text field for receiving inputs. */
+    /** User input text field for receiving inputs. */
     @FXML
     private TextField userInput;
     /** Send button for sending input with mouse inputs. */

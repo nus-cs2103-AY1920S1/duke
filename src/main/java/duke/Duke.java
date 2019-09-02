@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.CommandParser;
 import duke.command.Commands;
@@ -21,8 +19,8 @@ public class Duke {
 
     /** The directory name to use in construction of the storage object. */
     private static final String RECURSIVE_PARENT_DIR_NAME = "data";
-    /** The greeting message to show on application launch */
-    private static final String greetingMsg = " Hello! I'm Duke\n"
+    /** The greeting message to show on application launch. */
+    private static final String GREETING_MSG = " Hello! I'm Duke\n"
             + " What can I do for you?\n";
     /** The storage object to use for task-disk storage. */
     private Storage storage;
@@ -49,7 +47,7 @@ public class Duke {
      */
     public Duke(MainWindow ui) {
         this.ui = ui;
-        ui.showMessage(greetingMsg);
+        ui.showMessage(GREETING_MSG);
         this.storage = new Storage(RECURSIVE_PARENT_DIR_NAME, ui);
         this.tasks = new TaskList();
         this.storage.loadTasksToList(tasks);

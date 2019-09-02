@@ -78,7 +78,7 @@ class StorageTest {
         new Storage(INVALID_DIR_NAME, outputUi);
 
         assertTrue(outputUi.getMessages().contains(
-                String.format(" ☹  Oops! I failed to find a %s directory upwards\n", INVALID_DIR_NAME)));
+                String.format(" =X  Oops! I failed to find a %s directory upwards\n", INVALID_DIR_NAME)));
     }
 
     @Test
@@ -139,7 +139,7 @@ class StorageTest {
 
             assertEquals(0, listOfTasks.getSize());
             assertTrue(outputUi.getMessages().contains(
-                    " ☹  Oops! I encountered an invalid task type value while\n"));
+                    " =X  Oops! I encountered an invalid task type value while\n"));
         } catch (IOException ex) {
             fail("IOException encountered when trying to create loadTasksToList test files.\n"
                     + ex.getMessage());

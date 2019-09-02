@@ -1,9 +1,11 @@
 package duke;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private static final ArrayList<Task> TASKS = new ArrayList<>();
 
     private static void handleList() {

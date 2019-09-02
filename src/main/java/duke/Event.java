@@ -1,16 +1,23 @@
 package duke;
 
+import java.text.ParseException;
+import java.util.Date;
+
 public class Event extends Task {
 
-    protected String at;
+    protected Date at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+        try {
+            this.at = Duke.dateTimeFormatter.parse(at);
+        } catch (ParseException e) {
+            throw new DukeException("Oops! Incorrect Date/time format.");
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + Duke.dateTimeFormatter.format(at) + ")";
     }
 }

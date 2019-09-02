@@ -14,6 +14,7 @@ public class Events extends Task {
 
     @Override
     public String encodeForStorage() {
-        return "events" + getCurrentStatus() + Description + "(at:" + at + ")";
+        int myInt = isDone ? 1 : 0;
+        return "events [" + myInt + "]" + Description + "/at:" + at;
     }
 }

@@ -14,7 +14,7 @@ public abstract class Task {
     public String getOverallStatus() {
         return getCurrentStatus() + Description;
     }
-    public void checkIfCompleted() {
+    public void CompleteTask() {
         isDone = true;
     }
 

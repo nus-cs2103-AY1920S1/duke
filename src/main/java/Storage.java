@@ -1,47 +1,47 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.io.FileNotFoundException;
-import java.nio.file.Paths;
-import java.util.Iterator;
+
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import
 
 public class Storage {
 
-    private File data;
-    private FileWriter fileWriter;
 
-    public Storage() throws IOException {
-        data = new File("tasklist.txt");
-        fileWriter = new FileWriter(data);
-    }
-    public Storage(String filePath) throws IOException {
-        data = new File(filePath);
-        fileWriter = new FileWriter(data);
+    public Storage() throws IOException {}
+
+    public void StoreData(LinkedList<Task> toStore) throws IOException {
+        FileWriter fileWriter = new FileWriter("tasklist.txt");
+        String fullList = "";
+        for (Task task : toStore) {
+            fullList = fullList + task.encodeForStorage() + "\n";
+        }
+        fileWriter.write(fullList);
+        fileWriter.flush();
+        fileWriter.close();
     }
 
-    public void StoreData(LinkedList<Task> toStore) {
-        try {
-            for (Task task : toStore) {
-                fileWriter.write(task.encodeForStorage());
+    public LinkedList<Task> LoadData() throws IOException {
+        FileReader reader = new FileReader("tasklist.txt");
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        TaskList storedData = new TaskList();
+        Parser parser;
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
+            parser = new Parser(line);
+            switch (parser.getCommandType()) {
+            case ADDTODO:
+                storedData.addTodo(parser.getDescription(), parser.isDone());
+                break;
+            case ADDDEADLINE:
+                storedData.addDeadline(parser.getDescription(), parser.isDone(), parser.getDate());
+                break;
+            case ADDEVENT:
+                storedData.addEvent(parser.getDescription(), parser.isDone(), parser.getDate());
             }
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
         }
+        bufferedReader.close();
+        return storedData.getTaskList();
     }
 
-    public void TaskList LoadData() throws FileNotFoundException {
-        Scanner reader = new Scanner(data);
-        while (reader.hasNext()){
-            pars
-        }
-
-
-    }
 }
 

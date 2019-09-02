@@ -31,9 +31,9 @@ public class TaskList {
         }
         System.out.println("    ____________________________________________________________");
     }
-    public void completeTask(String userinput){
-        int taskNumber = Integer.parseInt(userinput.split(" ")[1]);
-        taskList.get(taskNumber-1).checkIfCompleted();
+    public void completeTask(String completedtask){
+        int taskNumber = Integer.parseInt(completedtask.split(" ")[1]);
+        taskList.get(taskNumber-1).CompleteTask();
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done: \n" +
                 "       "+ taskList.get(taskNumber-1).getOverallStatus() +"\n" +
@@ -42,18 +42,17 @@ public class TaskList {
 
 
     public void addTodo(String toDoName , boolean completionStatus){
-        taskList.addLast(new ToDos(toDoName));
-        printnewtask();
-    }
-    public void addDeadline(String deadlineName , ) {
-        taskList.addLast(new Deadlines((deadlineName.split("/")[0]), (deadlineName.split("/by")[1])));
-        printnewtask();
+        taskList.addLast(new ToDos(toDoName,completionStatus));
     }
 
-    public void addEvent(String eventName){
-        taskList.addLast(new Events((eventName.split("/")[0]), (eventName.split("/at")[1])));
-        printnewtask();
+    public void addDeadline(String deadlineName , boolean completionStatus , String date ) {
+        taskList.addLast(new Deadlines(deadlineName,completionStatus,date));
     }
+
+    public void addEvent(String eventName , boolean completionStatus, String date){
+        taskList.addLast(new Events(eventName,completionStatus,date));
+    }
+
     public void removeTask(String deletedEvent){
         int taskTodDelete = Integer.parseInt(deletedEvent.split(" ")[1]);
         System.out.println("    ____________________________________________________________\n" +
@@ -63,6 +62,9 @@ public class TaskList {
                 "    ____________________________________________________________");
         taskList.remove(taskTodDelete-1);
 
+    }
+    public LinkedList<Task> getTaskList(){
+        return taskList;
     }
 
 

@@ -11,6 +11,7 @@ public class ToDos extends Task {
 
     @Override
     public String encodeForStorage(){
-        return "todo " + getCurrentStatus() + Description;
+        int myInt = isDone ? 1 : 0;
+        return "todo [" + myInt + "]" + Description;
     }
 }

@@ -13,7 +13,8 @@ public class Deadlines extends Task {
 
     @Override
     public String encodeForStorage() {
-        return "deadline" + getCurrentStatus() + Description + "(by:" + date + ")";
+        int myInt = isDone ? 1 : 0;
+        return "deadline [" + myInt + "]" + Description + "/by" + date;
     }
 
 }

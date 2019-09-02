@@ -9,51 +9,52 @@ public class Parser {
     private String description;
     private String date;
 
-    public Parser(String fullCommand){
-        // include a /s* after first \s*
+    public Parser(String fullCommand) {
+        System.out.println(fullCommand);
         Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
-                + " (?:(\\[))?(?<completionstatus>(?:[✓])?)(?:(\\])?)"
-                + "(?<description>([\\w\\s]+))"
-                + " (?:(/by|/at))?(?<date>(?:[\\w\\s\\d+]+)?)");
+                + "\\s*(?<completionstatus>(\\[[✗✓]\\])?)"
+                + " (?<description>([\\w\\s\\d+]+)?)"
+                + "(?:(/by|/at))?(?<date>([\\w\\s\\d+]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
-        if(!matcher.find()){
+        if (!matcher.find()) {
             System.out.println("    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                     "    ____________________________________________________________");
         }
-        switch(matcher.group("commandWord")) {
-            case "list":
-                commandType = CommandType.LIST;
-                break;
-            case "todo":
-                commandType = CommandType.ADDTODO;
-                break;
-            case "deadline":
-                commandType = CommandType.ADDDEADLINE;
-                break;
-            case "event":
-                commandType = CommandType.ADDEVENT;
-                break;
-            case "delete":
-                commandType = CommandType.DELETE;
-                break;
-            case "done":
-                commandType = CommandType.COMPLETE;
-                break;
-            default:
-                System.out.println("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                        "    ____________________________________________________________");
+        System.out.println(matcher.group("commandWord")+matcher.group("completionstatus")+matcher.group("description"));
+        switch (matcher.group("commandWord")) {
+        case "list":
+            commandType = CommandType.LIST;
+            break;
+        case "todo":
+            commandType = CommandType.ADDTODO;
+            break;
+        case "deadline":
+            commandType = CommandType.ADDDEADLINE;
+            break;
+        case "event":
+            commandType = CommandType.ADDEVENT;
+            break;
+        case "delete":
+            commandType = CommandType.DELETE;
+            break;
+        case "done":
+            commandType = CommandType.COMPLETE;
+            break;
+        default:
+            System.out.println("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "    ____________________________________________________________");
         }
-        isDone = matcher.group("completionstatus").equals("✓");
-        description = matcher.group("description");
+        isDone = matcher.group("completionstatus").equals("[✓]");
+        description = matcher.group("description").trim();
         if (!matcher.group("date").isEmpty()) {
-            date = matcher.group("date");
+            date = matcher.group("date").trim();
         }
 
     }
 
-    public CommandType getCommandType(){
+    public CommandType getCommandType() {
         return commandType;
     }
 
@@ -68,4 +69,5 @@ public class Parser {
     public String getDate() {
         return date;
     }
+}
 

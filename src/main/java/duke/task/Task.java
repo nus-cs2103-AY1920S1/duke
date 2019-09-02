@@ -10,6 +10,10 @@ public abstract class Task {
         this.done = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void doTask() throws DukeException{
         if (this.done) {
             throw new DukeException("The task specified has already been done.");

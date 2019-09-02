@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class AddCommand extends Command {
 
-    /** The task created in response to this command*/
+    /** The task created in response to this command. */
     private Task task;
 
     /**

@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.component.*;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -11,7 +13,9 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
-    /** The task number to be deleted */
+    /**
+     * The task number to be deleted
+     */
     int taskNum;
 
     /**
@@ -28,8 +32,8 @@ public class DeleteCommand extends Command {
      * Prints response in console.
      *
      * @param taskList List of the things user needs to do
-     * @param ui Interface that interacts with the user
-     * @param storage Stores the user input in a file
+     * @param ui       Interface that interacts with the user
+     * @param storage  Stores the user input in a file
      * @throws DukeException IOException if there is an error writing or reading file
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

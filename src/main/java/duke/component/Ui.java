@@ -15,17 +15,24 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /** Parser to parse user inputs */
+    /**
+     * Parser to parse user inputs
+     */
     private Parser inputParser = new Parser();
 
-    /** Scanner to scan user inputs */
+    /**
+     * Scanner to scan user inputs
+     */
     private Scanner scanner = new Scanner(System.in);
 
-    /** Checks whether Ui should close */
+    /**
+     * Checks whether Ui should close
+     */
     boolean isExit = false;
 
     /**
      * Reads user inputs
+     *
      * @return String that represents user inputs.
      */
     public String readCommand() {
@@ -68,6 +75,7 @@ public class Ui {
 
     /**
      * Prints text in console.
+     *
      * @param text Text to print.
      */
     public void printText(String text) {
@@ -79,6 +87,7 @@ public class Ui {
 
     /**
      * Prints error message
+     *
      * @param message Message to print.
      */
     public void showError(String message) {

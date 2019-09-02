@@ -1,8 +1,11 @@
 package duke.command;
 
-import duke.component.*;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
 
-/** Represents user's list commmand to chatbot.
+/**
+ * Represents user's list commmand to chatbot.
  * The 'ListCommand' class supports operators (i) executing the command
  * and (ii) checking if the bot has exited its conversation with the user.
  */
@@ -13,9 +16,8 @@ public class ListCommand extends Command {
      * Tasks are retrieved from TaskList
      *
      * @param taskList List of the things user needs to do
-     * @param ui Interface that interacts with the user
-     * @param storage Stores the user input in a file
-     * @throws DukeException IOException if there is an error writing or reading file
+     * @param ui       Interface that interacts with the user
+     * @param storage  Stores the user input in a file
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
 

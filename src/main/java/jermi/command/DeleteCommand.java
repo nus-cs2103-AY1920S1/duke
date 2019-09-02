@@ -36,17 +36,18 @@ public class DeleteCommand extends Command {
      * @param taskList Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         Task task = taskList.getTask(index);
         taskList.remove(index);
         int numOfTasks = taskList.getSize();
-        ui.echo("Noted. I've removed this task:",
+        storage.taskListToFile();
+        return ui.echo("Noted. I've removed this task:",
                 "  " + task,
                 String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
-        storage.taskListToFile();
     }
 
     /**

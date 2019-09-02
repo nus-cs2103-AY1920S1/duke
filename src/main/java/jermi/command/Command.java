@@ -16,9 +16,10 @@ public abstract class Command {
      * @param taskList Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output response.
      * @throws JermiException JermiException.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException;
 
     /**
      * Indicates if the program should exit.

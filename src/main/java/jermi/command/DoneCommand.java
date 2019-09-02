@@ -36,14 +36,15 @@ public class DoneCommand extends Command {
      * @param taskList Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         Task task = taskList.getTask(this.index);
         task.markAsDone();
-        ui.echo("Nice! I've marked this task as done:", "  " + task);
         storage.taskListToFile();
+        return ui.echo("Nice! I've marked this task as done:", "  " + task);
     }
 
     /**

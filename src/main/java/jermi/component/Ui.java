@@ -1,22 +1,9 @@
 package jermi.component;
 
-import java.util.Scanner;
-
 /**
  * A class that deals with interaction with the user.
  */
 public class Ui {
-    /** Keyboard input reader. */
-    private Scanner scanner;
-
-    /**
-     * Public constructor for class.
-     * Initialises {@link Scanner};
-     */
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
     /**
      * Formats a message.
      *
@@ -24,60 +11,64 @@ public class Ui {
      * @return Formatted message.
      */
     private String formatMessage(String message) {
-        return "     " + message + "\n";
+        return message + "\n";
     }
 
     /**
-     * Reads input command.
-     *
-     * @return Command read.
-     */
-    public String readCommand() {
-        return this.scanner.next();
-    }
-
-    /**
-     * Reads input details.
-     *
-     * @return Details read.
-     */
-    public String readDetails() {
-        return this.scanner.nextLine().trim();
-    }
-
-    /**
-     * Prints formatted messages.
+     * Returns formatted messages.
      *
      * @param messages Message.
+     * @return Formatted messages.
      */
-    public void echo(String... messages) {
-        String border = "    ____________________________________________________________\n";
+    public String echo(String... messages) {
+        String border = "_______________________________________________\n";
         StringBuilder toEcho = new StringBuilder(border);
         for (String message : messages) {
-            toEcho.append(formatMessage(message));
+            toEcho.append(this.formatMessage(message));
         }
-        toEcho.append(border);
         System.out.println(toEcho);
+        return toEcho.toString();
     }
 
     /**
-     * Prints welcome message.
+     * Returns welcome message.
+     *
+     * @return Welcome message.
      */
-    public void greet() {
-        echo("Hello! I'm Jermi", "What can I do for you?");
+    public String greet() {
+        return this.echo("Hello! I'm Jermi", "What can I do for you?");
     }
 
     /**
-     * Prints exit message.
+     * Returns exit message.
+     *
+     * @return Exit message.
      */
-    public void exit() {
-        echo("Bye. Hope to see you again soon!");
+    public String exit() {
+        return this.echo("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints run failure message.
+     * Reads the entire user input and returns the input command.
+     *
+     * @param input User input.
+     * @return Input command.
      */
-    public void runFail() {
-        echo("Client has failed to run.", "Please resolve the issue above before running again.");
+    public String readCommand(String input) {
+        return input.split(" ", 2)[0];
+    }
+
+    /**
+     * Reads the entire user input and returns the input details.
+     *
+     * @param input User input.
+     * @return Input details.
+     */
+    public String readDetails(String input) {
+        try {
+            return input.split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "";
+        }
     }
 }

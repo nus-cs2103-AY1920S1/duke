@@ -27,17 +27,18 @@ public class FindCommand extends Command {
      * @param taskList Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         List<String> tasks = taskList.find(this.keyword);
 
         for (int index = 1; index <= tasks.size(); index++) {
             tasks.set(index - 1, index + "." + tasks.get(index - 1));
         }
         tasks.add(0, "Here are the matching tasks in your list:");
-        ui.echo(tasks.toArray(new String[0]));
+        return ui.echo(tasks.toArray(new String[0]));
     }
 
     /**

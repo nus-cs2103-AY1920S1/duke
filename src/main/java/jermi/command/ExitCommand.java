@@ -23,11 +23,12 @@ public class ExitCommand extends Command {
      * @param taskList Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
-        ui.exit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+        return ui.exit();
     }
 
     /**

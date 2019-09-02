@@ -71,17 +71,18 @@ public class AddCommand extends Command {
      * @param taskList Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         Task task = this.createTask();
         taskList.add(task);
         int numOfTasks = taskList.getSize();
-        ui.echo("Got it. I've added this task:",
+        storage.taskListToFile();
+        return ui.echo("Got it. I've added this task:",
                 "  " + task,
                 String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
-        storage.taskListToFile();
     }
 
     /**

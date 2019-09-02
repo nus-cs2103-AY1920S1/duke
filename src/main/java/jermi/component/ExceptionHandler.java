@@ -21,17 +21,19 @@ public class ExceptionHandler {
      * Handles checked exceptions.
      *
      * @param e JermiException.
+     * @return Error message.
      */
-    public void handleCheckedExceptions(JermiException e) {
-        this.ui.echo(e.getMessage());
+    public String handleCheckedExceptions(JermiException e) {
+        return this.ui.echo(e.getMessage());
     }
 
     /**
      * Handles unchecked exceptions.
      *
      * @param e Exception.
+     * @return Error message.
      */
-    public void handleUncheckedExceptions(Exception e) {
-        e.printStackTrace();
+    public String handleUncheckedExceptions(Exception e) {
+        return e.toString();
     }
 }

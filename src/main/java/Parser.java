@@ -8,15 +8,22 @@ import java.util.ArrayList;
 
 public class Parser {
 
+    static ArrayList<TaskList> array;
+    static int num;
+
+    public Parser(ArrayList<TaskList> arr, int n) {
+        array = arr;
+        num = n;
+    }
+
     /**
      * <p>
      *     goodBye is used to exit the duke
      * </p>
      */
   
-    public void goodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.exit(0);
+    public String goodBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
 
@@ -27,8 +34,9 @@ public class Parser {
      * @param array the list of task
      */
 
-    public void callList(ArrayList<TaskList> array) {
-        TaskList.printList(array);
+    public String callList(ArrayList<TaskList> array) {
+
+        return TaskList.printList(array);
     }
 
 
@@ -40,10 +48,10 @@ public class Parser {
      * @param array the list of task
      */
 
-    public void callDone(String word, ArrayList<TaskList> array) {
+    public String callDone(String word, ArrayList<TaskList> array) {
         String arr1[] = word.split(" ");
         int taskNum = Integer.parseInt(arr1[1]);
-        TaskList.markAsDone(taskNum, array);
+        return TaskList.markAsDone(taskNum, array);
     }
 
 
@@ -55,10 +63,10 @@ public class Parser {
      * @param word get command
      * @param array the list of task
      */
-    public void callTodo(int num, String word, 
+    public String callTodo(int num, String word,
                          ArrayList<TaskList> array) {
         TaskList todoT = new Todo(num, "[✗]", word, "todo");
-        todoT.addList(todoT, array, num);
+        return todoT.addList(todoT, array, num);
     }
 
     /**
@@ -70,12 +78,12 @@ public class Parser {
      * @param array the list of task
      */
 
-    public void callEvent(String word, int num, 
+    public String callEvent(String word, int num,
                           ArrayList<TaskList> array) {
         String arr2[] = word.split("/at");
         DateTime dT1 = new DateTime(arr2[1]);
         TaskList eventT = new Event(num, "[✗]", arr2[0], "event", dT1);
-        eventT.addList(eventT, array, num);
+        return eventT.addList(eventT, array, num);
     }
 
     /**
@@ -86,14 +94,14 @@ public class Parser {
      * @param num task number
      * @param array the list of task
      */
-    public void callDeadline(String word, int num, 
+    public String callDeadline(String word, int num,
                              ArrayList<TaskList> array) {
         String arr3[] = word.split("/by");
         String list[] = arr3[1].split(" ");
         DateTime dT2 = new DateTime(arr3[1]);
         TaskList deadlineT = new Deadline(num, "[✗]", 
                                           arr3[0], "deadline", dT2);
-        deadlineT.addList(deadlineT, array, num);
+        return deadlineT.addList(deadlineT, array, num);
     }
 
     /**
@@ -104,11 +112,11 @@ public class Parser {
      * @param array the list of task
      */
 
-    public void callDelete(String word, ArrayList<TaskList> array) {
+    public String callDelete(String word, ArrayList<TaskList> array) {
         String arr4[] = word.split(" ");
         int taskNum = Integer.parseInt(arr4[1]);
         TaskList forDelete = array.get(taskNum - 1);
-        forDelete.deleteTask(forDelete, array);
+        String out = forDelete.deleteTask(forDelete, array);
       
         int size = array.size();
 
@@ -134,13 +142,15 @@ public class Parser {
                 }
             }
         }
+        return out;
     }
 
-    public void callFind(String word, ArrayList<TaskList> array) {
+    public String callFind(String word, ArrayList<TaskList> array) {
         ArrayList<TaskList> arr = new ArrayList<TaskList>();
         String arr5[] = word.split(" ");
         String searchWord = arr5[1];
         int size = array.size();
+        String out = "";
 
         for(int i = 0; i < size; i++) {
             TaskList t = array.get(i);
@@ -148,7 +158,6 @@ public class Parser {
             String type = t.getType();
             if(taskWord.contains(searchWord)) {
                 if(type.equals("todo")) {
-                    System.out.println("here");
                     TaskList addTask = new Todo(i + 1, t.getTaskCheck(),
                             taskWord, type);
                     arr.add(addTask);
@@ -164,8 +173,9 @@ public class Parser {
             }
         }
         for(TaskList tL : arr) {
-            System.out.println(tL);
+            out = out + "\n" + tL;
         }
+        return out;
     }
 
 }

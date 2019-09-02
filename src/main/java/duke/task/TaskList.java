@@ -132,16 +132,12 @@ public class TaskList {
      */
     public TaskList findTask(String input) throws DukeException {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        if (input.split(" ").length > 2) {
-            throw new DukeException("More than 1 keyword has been entered.");
-        } else {
-            String keyword = input.split(" ")[1];
-            for (Task task: this.tasks) {
-                if (task.getDescription().contains(keyword)) {
-                    foundTasks.add(task);
-                }
+        String keyword = input.split(" ", 2)[1];
+        for (Task task: this.tasks) {
+            if (task.getDescription().contains(keyword)) {
+                foundTasks.add(task);
             }
-            return new TaskList(foundTasks);
         }
+        return new TaskList(foundTasks);
     }
 }

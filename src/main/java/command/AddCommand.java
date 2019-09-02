@@ -40,13 +40,13 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask;
         switch(type){
-            case TODO:
+        case TODO:
             newTask = new Todo(specifics);
             break;
-            case DEADLINE:
+        case DEADLINE:
             newTask = new Deadline(specifics);
             break;
-            default:
+        default:
             newTask = new Event(specifics);
             break;
         }

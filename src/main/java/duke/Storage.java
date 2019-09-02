@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Save the current list to a specified file path on the hard disk.
      *
-     * @param tasks List to of tasks to be save.
+     * @param tasks List of tasks to be save.
      */
     public void save(ArrayList<Task> tasks) {
         try {

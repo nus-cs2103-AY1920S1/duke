@@ -35,7 +35,7 @@ public class Parser {
                     remaining = input.substring(input.indexOf(" ") + 1);
 
                     // Check description is not empty
-                    if(remaining.replace(" ", "").length() <= 0){
+                    if (remaining.replace(" ", "").length() <= 0) {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
                 }
@@ -86,7 +86,7 @@ public class Parser {
                     remaining = input.substring(input.indexOf(" ") + 1);
 
                     // Check description is not empty
-                    if(remaining.replace(" ", "").length() <= 0){
+                    if (remaining.replace(" ", "").length() <= 0) {
                         throw new DukeException("The description of a find cannot be empty.");
                     }
                 }

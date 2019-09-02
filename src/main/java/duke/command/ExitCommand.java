@@ -18,11 +18,10 @@ public class ExitCommand extends Command {
      */
     public String execute(Ui ui, Storage storage, TaskList taskList) {
         new Timer().schedule(new TimerTask() {
-                                 public void run() {
-                                     System.exit(0);
-                                 }
-                             }
-            , new Date(System.currentTimeMillis() + 1 * 800));
+                public void run() {
+                    System.exit(0);
+                }
+            }, new Date(System.currentTimeMillis() + 1 * 800));
         return "Bye. Hope to see you again soon!";
     }
 }

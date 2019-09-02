@@ -5,6 +5,7 @@ import duke.ui.MainWindow;
 public class DukeException extends Exception {
 
     public static MainWindow mw;
+
     /**
      * Creates a Duke Exception object.
      *

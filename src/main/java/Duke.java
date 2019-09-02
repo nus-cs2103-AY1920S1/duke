@@ -6,7 +6,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Parser p = new Parser();
-        ArrayList<Tasks> listOfTasks = new ArrayList<>();
+        //ArrayList<Tasks> listOfTasks = new ArrayList<>();
+        TaskList listOfTasks = new TaskList();
         SaveToFile sf = new SaveToFile();
         
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
@@ -24,26 +25,25 @@ public class Duke {
 
             switch (keyword) {
                 case "list":
-                System.out.println(listOfTasks.size());
                 for(int i = 1; i <= listOfTasks.size(); i++) {
                     System.out.println("in loop");
-                    System.out.println(i + ". " + listOfTasks.get(i - 1));
+                    System.out.println(i + ". " + listOfTasks.getTask(i - 1));
                 }
                 //System.out.println("is listing");
                 break;
 
                 case "done":
                 int indexOfTask = Integer.parseInt(descriptions.get(1));
-                listOfTasks.get(indexOfTask - 1).finishTask();
+                listOfTasks.getTask(indexOfTask - 1).finishTask();
                 System.out.println("Task status updated.");
-                sf.updateFile(listOfTasks);
+                sf.updateFile(listOfTasks.getTaskList());
                 break;
 
                 case "delete":
                 int indexOfTask2 = Integer.parseInt(descriptions.get(1));
-                listOfTasks.remove(indexOfTask2 - 1);
+                listOfTasks.deleteTask(indexOfTask2 - 1);
                 System.out.println("List of tasks updated.");
-                sf.updateFile(listOfTasks);
+                sf.updateFile(listOfTasks.getTaskList());
                 break;
 
                 case "todo":
@@ -51,8 +51,8 @@ public class Duke {
                     taskDescriptions.add(descriptions.get(0));
                     taskDescriptions.add(descriptions.get(1));
                     Tasks todo = new Tasks(taskDescriptions);
-                    listOfTasks.add(todo);
-                    sf.updateFile(listOfTasks);
+                    listOfTasks.addTask(todo);
+                    sf.updateFile(listOfTasks.getTaskList());
                     System.out.println("Got it, todo added to tasks");
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("OOPS!! The description for todo cannot be empty!");
@@ -65,8 +65,8 @@ public class Duke {
                     taskDescriptions.add(descriptions.get(1));
                     taskDescriptions.add(descriptions.get(2));
                     Tasks deadline = new Tasks(taskDescriptions);
-                    listOfTasks.add(deadline);
-                    sf.updateFile(listOfTasks);
+                    listOfTasks.addTask(deadline);
+                    sf.updateFile(listOfTasks.getTaskList());
                     System.out.println("Got it, new deadline added to list");
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
@@ -79,8 +79,8 @@ public class Duke {
                     taskDescriptions.add(descriptions.get(1));
                     taskDescriptions.add(descriptions.get(2));
                     Tasks event = new Tasks(taskDescriptions);
-                    listOfTasks.add(event);
-                    sf.updateFile(listOfTasks);
+                    listOfTasks.addTask(event);
+                    sf.updateFile(listOfTasks.getTaskList());
                     System.out.println("Got it, new event added to schedule");
                 } catch(IndexOutOfBoundsException e) {
                     System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");

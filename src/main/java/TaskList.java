@@ -7,8 +7,8 @@ public class TaskList {
         listOfTasks.add(t);
     }
 
-    protected void deleteTask(Tasks t) {
-        listOfTasks.remove(t);
+    protected void deleteTask(int i) {
+        listOfTasks.remove(i);
     }
 
     protected Tasks getTask(int i) {
@@ -17,6 +17,10 @@ public class TaskList {
 
     protected ArrayList<Tasks> getTaskList() {
         return listOfTasks;
+    }
+
+    protected int size() {
+        return listOfTasks.size();
     }
 
 }

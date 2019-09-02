@@ -69,7 +69,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds Task object to TaskList and adds inputs to the File in Storage, and
-     * prints notification.
+     * prints response.
      *
      * @param taskList List of the things user needs to do
      * @param ui       Interface that interacts with the user

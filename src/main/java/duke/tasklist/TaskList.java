@@ -27,4 +27,12 @@ public class TaskList extends LinkedList<Task> {
     public Task get(int n) {
         return taskList.get(n);
     }
+
+    public LinkedList getList() {
+        return this.taskList;
+    }
+
+    public void setList(LinkedList<Task> taskList) {
+        this.taskList = taskList;
+    }
 }

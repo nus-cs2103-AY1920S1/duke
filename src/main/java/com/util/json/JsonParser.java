@@ -251,26 +251,26 @@ public class JsonParser {
             obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
         } catch (SaveFileFormatException e1) {
             try {
-                Pair<Integer,Double> res1 = parseJsonDouble(input, i);
-                obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
+                Pair<Integer,Double> res2 = parseJsonDouble(input, i);
+                obj = new Pair<>(res2.fst, new DynamicValue(res2.snd));
             } catch (SaveFileFormatException e2) {
                 try {
-                    Pair<Integer,Boolean> res1 = parseJsonBoolean(input, i);
-                    obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
+                    Pair<Integer,Boolean> res3 = parseJsonBoolean(input, i);
+                    obj = new Pair<>(res3.fst, new DynamicValue(res3.snd));
                 } catch (SaveFileFormatException e3) {
                     try {
-                        Pair<Integer,String> res1 = parseJsonString(input, i);
-                        obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
+                        Pair<Integer,String> res4 = parseJsonString(input, i);
+                        obj = new Pair<>(res4.fst, new DynamicValue(res4.snd));
                     } catch (SaveFileFormatException e4) {
                         try {
-                            Pair<Integer,HashMap<String,DynamicValue>> res1 = parseJsonObject(input,
+                            Pair<Integer,HashMap<String,DynamicValue>> res5 = parseJsonObject(input,
                                     i);
-                            obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
+                            obj = new Pair<>(res5.fst, new DynamicValue(res5.snd));
                         } catch (SaveFileFormatException e5) {
                             try {
-                                Pair<Integer,ArrayList<DynamicValue>> res1 = parseJsonArray(input,
+                                Pair<Integer,ArrayList<DynamicValue>> res6 = parseJsonArray(input,
                                         i);
-                                obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
+                                obj = new Pair<>(res6.fst, new DynamicValue(res6.snd));
                             } catch (SaveFileFormatException e6) {
                                 if (e3.getErrorCode() == 2 && e4.getErrorCode() == 2
                                         && e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {

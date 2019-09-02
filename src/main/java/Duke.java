@@ -275,7 +275,8 @@ public class Duke {
 	}
 
 	public static boolean isDone(String op) {
-    	return (op.equals("\u2713"));
+		return (op.equals("\u2713"));
+	}
 
     public static String getDateTime(String deadline) {
     	String[] datetime = deadline.split(" ");

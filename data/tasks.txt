@@ -1,5 +1,4 @@
 T | 1 | read book
 D | 0 | event | 09 Aug 1999, 06:00 PM
 T | 1 | read book
-T | 0 | read book
-D | 0 | meeting | 09 Aug 1888, 07:00 PM
+D | 1 | meeting | 09 Aug 1888, 07:00 PM

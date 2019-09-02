@@ -32,7 +32,7 @@ public class Duke {
         storage = new Storage(fileName);
         try {
             tasks = storage.load();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

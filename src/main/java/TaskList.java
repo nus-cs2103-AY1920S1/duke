@@ -74,4 +74,12 @@ public class TaskList {
         }
         return sb.toString();
     }
+
+    public String printMatchingTasks() {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+        for (int i = 1; i <= xs.size(); i++) {
+            sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
+        }
+        return sb.toString();
+    }
 }

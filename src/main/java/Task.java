@@ -20,7 +20,9 @@ public abstract class Task {
         return isDone ? "1" : "0";
     }
 
-
+    public String getDescription() {
+        return description;
+    }
 
     public abstract String getFormattedString();
 

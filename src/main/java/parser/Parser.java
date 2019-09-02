@@ -26,6 +26,9 @@ public class Parser {
         case "done":
             //fallthrough
         case "delete":
+            if (separatedInputs.length <= 1) {
+                throw new DukeException("invalid number");
+            }
             Scanner s = new Scanner(separatedInputs[1]);
             if (separatedInputs.length > 2 || !s.hasNextInt()) {
                 throw new DukeException("invalid number");

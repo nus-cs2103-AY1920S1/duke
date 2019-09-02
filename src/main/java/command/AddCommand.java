@@ -7,14 +7,12 @@ import run.TaskList;
 import run.Ui;
 import run.Storage;
 
-public class AddCommand extends Command {
+public abstract class AddCommand extends Command {
     TaskList tasks;
     Ui ui;
     Storage storage;
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-
-    }
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     public boolean isExit() {
         return false;

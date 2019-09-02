@@ -16,6 +16,7 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+
     public void run() {
         ui.introduction();
         ui.init();
@@ -36,6 +37,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("C:\\Users\\nisga\\OneDrive\\Desktop\\duke\\src\\main\\java\\data\\tasks.txt").run();
     }
 }

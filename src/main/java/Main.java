@@ -28,11 +28,7 @@ public class Main extends Application {
             stage.setTitle("Duke");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
-                try {
-                    duke.storeTasks();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                duke.parse("bye");
             });
             fxmlLoader.<MainWindow>getController().init(duke);
 

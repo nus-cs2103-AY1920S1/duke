@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -112,8 +114,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -122,7 +124,7 @@ public class Duke extends Application {
      * Replace this stub with completed method.
      */
     private String getResponse(String input) {
-        return "Duke heart: " + input;
+        return "Duke heard: " + input;
     }
 
     /**

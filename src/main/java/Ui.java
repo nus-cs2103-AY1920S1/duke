@@ -1,16 +1,19 @@
+import java.util.Scanner;
+
 public class Ui {
     /*
-    1. constructor which initialises scanner
-    2. void showWelcome()
-    3. void showResponse()
-    4. void showError()
-    5. void exit()
     6. String readWord()
      */
     private String INDENT;
+    private Scanner scanner;
 
     public Ui(String INDENT) {
         this.INDENT = INDENT;
+        this.scanner = new Scanner(System.in);
+    }
+
+    public String readLine() {
+        return scanner.nextLine();
     }
 
     public void printIndentedString(String string, String INDENT) {

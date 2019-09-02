@@ -2,7 +2,6 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,12 +32,11 @@ public class Duke {
     }
 
     public void run() throws FileNotFoundException, UnsupportedEncodingException {
-        Scanner sc = new Scanner(System.in);
         int listSize = 0;
         int listPointer;
 
         ui.start();
-        String input = sc.nextLine();
+        String input = ui.readLine();
         String[] inputArr = input.split(" ", 2);
 
         while (!inputArr[0].equals("bye")) {
@@ -110,7 +108,7 @@ public class Duke {
                 ui.printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Try todo, " +
                         "event and deadline");
             }
-            input = sc.nextLine();
+            input = ui.readLine();
             inputArr = input.split(" ", 2);
         }
         ui.exit();

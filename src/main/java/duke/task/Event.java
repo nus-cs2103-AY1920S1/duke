@@ -28,9 +28,9 @@ public class Event extends Task {
             String[] temp = at.split(" ");
             time = Integer.valueOf(temp[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! Wrong input format. \"Event <description> /at <DD/MM/YYYY> <XX:XX>\"");
+            throw new DukeException("\t☹ OOPS!!! Wrong input format. \"Event <description> /at <DD/MM/YYYY> <XX:XX>\"");
         } catch (NumberFormatException e) {
-            throw new DukeException("     ☹ OOPS!!! Wrong input format. \"Event <description> /at <DD/MM/YYYY> <XX:XX>\"");
+            throw new DukeException("\t☹ OOPS!!! Wrong input format. \"Event <description> /at <DD/MM/YYYY> <XX:XX>\"");
         }
     }
 

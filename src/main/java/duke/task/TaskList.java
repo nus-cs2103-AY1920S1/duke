@@ -58,13 +58,13 @@ public class TaskList {
                 } else if (type.equalsIgnoreCase("event")) {
                     task = new Event(command.substring(6, index - 1), command.substring(index + 4));
                 } else {
-                    throw new IllegalArgumentException("     ☹ OOPS!!!No such task type.");
+                    throw new IllegalArgumentException("\t☹ OOPS!!!No such task type.");
                 }
             }
             tasks.add(task);
             ui.addedTask(task, tasks.size());
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! Wrong input format. \"Deadline <description> /by <DD/MM/YYYY> <XX:XX>");
+            throw new DukeException("\t☹ OOPS!!! Wrong input format. \"Deadline <description> /by <DD/MM/YYYY> <XX:XX>");
         } catch (IllegalArgumentException e) {
             throw new DukeException(e.getMessage());
         }
@@ -85,9 +85,9 @@ public class TaskList {
             tasks.remove(number - 1);
             ui.deletedTask(task, tasks.size());
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! The task number cannot be empty.");
+            throw new DukeException("\t☹ OOPS!!! The task number cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! The task number does not exist.");
+            throw new DukeException("\t☹ OOPS!!! The task number does not exist.");
         }
     }
 
@@ -103,15 +103,15 @@ public class TaskList {
             String[] done = command.split(" ");
             int number = Integer.valueOf(done[1]);
             if (tasks.get(number - 1).isCompleted()) {
-                throw new DukeException("     ☹ OOPS!!! The task is already marked as done.");
+                throw new DukeException("\t☹ OOPS!!! The task is already marked as done.");
             } else {
                 tasks.get(number - 1).markAsDone();
                 ui.doneTask(tasks, number);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! The task number cannot be empty.");
+            throw new DukeException("\t☹ OOPS!!! The task number cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! The task number does not exist.");
+            throw new DukeException("\t☹ OOPS!!! The task number does not exist.");
         }
     }
 }

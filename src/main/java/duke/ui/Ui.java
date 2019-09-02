@@ -42,13 +42,13 @@ public class Ui {
      */
     public void showWelcome(List<Task> tasks) {
         showLine();
-        System.out.println("     Hello! I'm Duke\n" + "     What can I do for you?\n");
+        System.out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?\n");
 
         try {
             if (!tasks.isEmpty()) {
                 printTasks(tasks);
             } else {
-                System.out.println("     There are no tasks in the list right now.");
+                System.out.println("\tThere are no tasks in the list right now.");
             }
         } catch (DukeException e) {
             showError(e.getMessage());
@@ -61,7 +61,7 @@ public class Ui {
      * Prints the exit message.
      */
     public void showExit() {
-        System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println("\tBye. Hope to see you again soon!");
     }
 
     /**
@@ -72,13 +72,13 @@ public class Ui {
      */
     public void printTasks(List<Task> tasks) throws DukeException {
         if (tasks.isEmpty()) {
-            throw new DukeException("     ☹ OOPS!!! The list is empty.");
+            throw new DukeException("\t☹ OOPS!!! The list is empty.");
         }
-        System.out.println("     Here are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
         int count = 0;
         for (Task task: tasks) {
             count++;
-            System.out.println("     " + count + "." + task);
+            System.out.println("\t" + count + "." + task);
         }
     }
 
@@ -94,24 +94,24 @@ public class Ui {
         try {
             keyword = keyword.substring(4).trim();
             if (keyword.isEmpty()) {
-                throw new DukeException("     ☹ OOPS!!! Search keyword cannot be empty.");
+                throw new DukeException("\t☹ OOPS!!! Search keyword cannot be empty.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("     ☹ OOPS!!! Search keyword cannot be empty.");
+            throw new DukeException("\t☹ OOPS!!! Search keyword cannot be empty.");
         }
         if (tasks.isEmpty()) {
-            throw new DukeException("     ☹ OOPS!!! The list is empty.");
+            throw new DukeException("\t☹ OOPS!!! The list is empty.");
         }
-        System.out.println("     Here are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
         int count = 0;
         for (Task task: tasks) {
             if (task.getDescription().contains(keyword)) {
                 count++;
-                System.out.println("     " + count + "." + task);
+                System.out.println("\t" + count + "." + task);
             }
         }
         if (count == 0) {
-            throw new DukeException("     ☹ OOPS!!! There are no matching tasks.");
+            throw new DukeException("\t☹ OOPS!!! There are no matching tasks.");
         }
     }
 
@@ -129,9 +129,9 @@ public class Ui {
      * @param size The current number of tasks in the list.
      */
     public void addedTask(Task task, int size) {
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + size + " tasks in the list.");
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t  " + task);
+        System.out.println("\tNow you have " + size + " tasks in the list.");
     }
 
     /**
@@ -141,9 +141,9 @@ public class Ui {
      * @param size The current number of tasks in the list.
      */
     public void deletedTask(Task task, int size) {
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + size + " tasks in the list.");
+        System.out.println("\tNoted. I've removed this task: ");
+        System.out.println("\t  " + task);
+        System.out.println("\tNow you have " + size + " tasks in the list.");
     }
 
     /**
@@ -153,14 +153,14 @@ public class Ui {
      * @param number The index of the task in the list.
      */
     public void doneTask(List<Task> tasks, int number) {
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + tasks.get(number - 1));
+        System.out.println("\tNice! I've marked this task as done: ");
+        System.out.println("\t  " + tasks.get(number - 1));
     }
 
     /**
      * Prints the horizontal line.
      */
     public void showLine() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("\t____________________________________________________________");
     }
 }

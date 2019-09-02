@@ -1,4 +1,5 @@
 import Exceptions.InvalidCommandException;
+import Exceptions.InvalidInputException;
 import UI.MessageGenerator;
 import UI.UI;
 
@@ -22,7 +23,7 @@ public class Duke {
         isExit = false;
     }
 
-    private void run() throws InvalidCommandException {
+    private void run() throws InvalidCommandException, InvalidInputException {
         greeter.greet();
         ui.processFile();
         while (!isExit) {
@@ -32,7 +33,7 @@ public class Duke {
         greeter.bye();
     }
 
-    public static void main(String[] args) throws InvalidCommandException {
+    public static void main(String[] args) throws InvalidCommandException, InvalidInputException {
         new Duke().run();
     }
 }

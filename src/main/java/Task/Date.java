@@ -1,5 +1,7 @@
 package Task;
 
+import Exceptions.InvalidInputException;
+
 public class Date {
     int day;
     Month month;
@@ -69,8 +71,15 @@ public class Date {
      * @param dateString String in form DD/MM/YYYY.
      * @return Date object.
      */
-    public static Date processDate(String dateString) {
+    public static Date processDate(String dateString) throws InvalidInputException {
         String[] date = dateString.split("/");
+        try {
+            if (date.length < 3) {
+                throw new InvalidInputException();
+            }
+        } catch (InvalidInputException e){
+            e.printError();
+        }
         return new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
     }
 

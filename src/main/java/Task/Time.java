@@ -1,5 +1,7 @@
 package Task;
 
+import Exceptions.InvalidInputException;
+
 public class Time {
 
     private Period period;
@@ -34,7 +36,13 @@ public class Time {
      * @param timeString String in form HHMM.
      * @return Time object.
      */
-    public static Time processTime(String timeString) {
+    public static Time processTime(String timeString) throws InvalidInputException {
+        try {
+            int time = Integer.parseInt(timeString);
+        } catch (NumberFormatException e) {
+            InvalidInputException invalidInput = new InvalidInputException();
+            invalidInput.printError();
+        }
         return new Time(Integer.parseInt(timeString));
     }
 

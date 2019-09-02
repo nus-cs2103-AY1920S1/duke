@@ -4,6 +4,7 @@ import Data.Command;
 import Data.Parser;
 import Data.Storage;
 import Exceptions.InvalidCommandException;
+import Exceptions.InvalidInputException;
 import Exceptions.MissingInputException;
 import Task.Task;
 import Task.TaskList;
@@ -54,7 +55,7 @@ public class UI {
      * Processes input from the Command Line made by user.
      * This makes changes to the program's task list and file.
      */
-    public void processInput() throws InvalidCommandException {
+    public void processInput() throws InvalidCommandException, InvalidInputException {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             processCommand(parser.process(line));
@@ -66,7 +67,7 @@ public class UI {
      * This updates and writes the file.
      * @param command command created from parser.
      */
-    private void processCommand(Command command) {
+    private void processCommand(Command command) throws InvalidInputException{
             try {
                 switch (command.type) {
                 case EXIT:

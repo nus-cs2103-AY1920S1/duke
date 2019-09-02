@@ -2,6 +2,7 @@ package Data;
 
 import Exceptions.DukeException;
 import Exceptions.InvalidCommandException;
+import Exceptions.InvalidInputException;
 import Exceptions.MissingInputException;
 import Task.*;
 
@@ -66,7 +67,7 @@ public class Parser {
      * @return task created from the command.
      * @throws MissingInputException when command's description is incomplete.
      */
-    public Task createTask(Command command) throws MissingInputException {
+    public Task createTask(Command command) throws MissingInputException, InvalidInputException {
         String line = command.getDescription();
         String[] description = line.split(" ");
         String eventType = description[0];
@@ -109,7 +110,7 @@ public class Parser {
      * @param arr String array that contains task description that has been processed.
      * @return Task created from given inputs.
      */
-    Task createNewTask(int taskNo, String taskType, String[] arr) {
+    Task createNewTask(int taskNo, String taskType, String[] arr) throws InvalidInputException {
         boolean firstInDescription = true;
         String desc = "";
         Date date = null;

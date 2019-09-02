@@ -6,6 +6,8 @@ public class AddCommand extends Command {
 
     protected String desc;
     protected String dateTime;
+    private Task newTask;
+    private TaskList tasks;
 
     /**
      * Represents an action to add tasks that does not require date and time.
@@ -55,10 +57,21 @@ public class AddCommand extends Command {
             newTask = new ToDo(this.getDesc());
         }
         tasks.addTask(newTask);
-        ui.showAddMessage(newTask, tasks);
+        this.newTask = newTask;
+        this.tasks = tasks;
     }
 
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder printStr = new StringBuilder();
+        printStr.append("Got it. I've added this task:\n");
+        printStr.append("  " + newTask + "\n");
+        printStr.append("Now you have " + tasks.getTaskCount() + " tasks in the list.");
+
+        return printStr.toString();
     }
 }

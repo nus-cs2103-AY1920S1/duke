@@ -13,11 +13,15 @@ public class ExitCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        ui.showExitMessage();
         storage.save(tasks);
     }
 
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Bye. Hope to see you again soon!";
     }
 }

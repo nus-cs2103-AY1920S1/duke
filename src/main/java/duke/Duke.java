@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -175,10 +176,11 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        DialogBox userDialog = DialogBox.getUserDialog(userText, new ImageView(user), "user");
+        userDialog.setPadding(new Insets(10, 10, 10, 10));
+        DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText, new ImageView(duke), "duke");
+        dukeDialog.setPadding(new Insets(10, 10, 10, 10));
+        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
         userInput.clear();
     }
 

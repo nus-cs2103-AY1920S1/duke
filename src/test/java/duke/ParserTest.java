@@ -15,31 +15,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void test_parse_bye(){
+    public void test_parse_bye() {
         Command bye = Parser.parse("BYE");
         assertEquals(true, bye instanceof ExitCommand);
     }
 
     @Test
-    public void test_parse_add(){
+    public void test_parse_add() {
         Command add = Parser.parse("deadLINE");
         assertEquals(true, add instanceof AddCommand);
     }
 
     @Test
-    public void test_parse_delete(){
+    public void test_parse_delete() {
         Command bye = Parser.parse("deLetE");
         assertEquals(true, bye instanceof DeleteCommand);
     }
 
     @Test
-    public void test_parse_list(){
+    public void test_parse_list() {
         Command bye = Parser.parse("LIst");
         assertEquals(true, bye instanceof ListCommand);
     }
 
     @Test
-    public void test_parse_error(){
+    public void test_parse_error() {
         try {
             Command bye = Parser.parse("LALALA");
         } catch (DukeException e) {

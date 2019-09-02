@@ -105,7 +105,6 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             ui.showError("Data file does not exist.");
-        } finally {
         }
     }
 }

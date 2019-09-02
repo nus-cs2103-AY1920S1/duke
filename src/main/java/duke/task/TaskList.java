@@ -64,7 +64,8 @@ public class TaskList {
             tasks.add(task);
             ui.addedTask(task, tasks.size());
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! Wrong input format. \"Deadline <description> /by <DD/MM/YYYY> <XX:XX>");
+            throw new DukeException("\t☹ OOPS!!! Wrong input format. "
+                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>");
         } catch (IllegalArgumentException e) {
             throw new DukeException(e.getMessage());
         }

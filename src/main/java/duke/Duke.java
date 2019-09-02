@@ -11,7 +11,7 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Create a new Duke object.
+     * Creates a new Duke object.
      */
     public Duke() {
         ui = new Ui();
@@ -20,32 +20,17 @@ public class Duke {
     }
 
     /**
-     * Start the program execution.
+     * Returns the response from executing a command.
+     *
+     * @param input User input command.
+     * @return Response returned from command.
      */
-    /*
-    public void run() {
-        boolean shouldContinue = true;
-
-        while (shouldContinue) { //Read input until 'bye' command is entered
-            String input = ui.readCommand();
-            Command command = Parser.parse(input); // Parse and perform logic
-            command.execute(ui, storage, taskList);
-            shouldContinue = command.shouldContinue();
-        }
-        ui.printExit();
-    }
-     */
-
     public String getResponse(String input) {
         Command command = Parser.parse(input); // Parse and perform logic
         return command.execute(ui, storage, taskList);
     }
 
     public static void main(String[] args) {
-        /*
-        Duke duke = new Duke();
-        duke.run();
-         */
         Application.launch(Main.class, args);
     }
 }

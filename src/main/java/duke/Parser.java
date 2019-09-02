@@ -8,7 +8,6 @@ import duke.command.EmptyCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.task.Task;
 import duke.task.TaskEnum;
 
 public class Parser {
@@ -27,14 +26,18 @@ public class Parser {
                 String remaining = "";
                 String item = "";
                 String date = "";
-                Task task = null;
 
-                //Check input is valid
+                // Check description is not empty
                 if (input.indexOf(" ") == -1 || (input.indexOf(" ") + 1) == -1) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 } else {
                     command = input.substring(0, input.indexOf(" "));
                     remaining = input.substring(input.indexOf(" ") + 1);
+
+                    // Check description is not empty
+                    if(remaining.replace(" ", "").length() <= 0){
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
                 }
 
                 switch (command) {
@@ -77,10 +80,15 @@ public class Parser {
                 String command = "";
                 String remaining = "";
                 if (input.indexOf(" ") == -1 || (input.indexOf(" ") + 1) == -1) {
-                    throw new DukeException("The description of a todo cannot be empty.");
+                    throw new DukeException("The description of a find cannot be empty.");
                 } else {
                     command = input.substring(0, input.indexOf(" "));
                     remaining = input.substring(input.indexOf(" ") + 1);
+
+                    // Check description is not empty
+                    if(remaining.replace(" ", "").length() <= 0){
+                        throw new DukeException("The description of a find cannot be empty.");
+                    }
                 }
 
                 return new FindCommand(remaining);
@@ -92,20 +100,20 @@ public class Parser {
         } else if (input.contains("done")) { // Mark item as complete
             int taskNo = Integer.parseInt(
                 input.replace("done", "")
-                    .replace(" ", "")); //Removing 'done' and empty spaces
+                    .replace(" ", "")); // Removing 'done' and empty spaces
 
             return new DoneCommand(taskNo);
         } else if (input.contains("delete")) { // Delete item
             int taskNo = Integer.parseInt(
                 input.replace("delete", "")
-                    .replace(" ", "")); //Removing 'delete' and empty spaces
+                    .replace(" ", "")); // Removing 'delete' and empty spaces
 
             return new DeleteCommand(taskNo);
         } else if (input.equals("list")) { // List items
             return new ListCommand();
         } else if (input.equals("bye")) { // Exit application
             return new ExitCommand();
-        } else { // Invalid duke.command.Command
+        } else { // Invalid command
             new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 

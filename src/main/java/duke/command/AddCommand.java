@@ -61,12 +61,6 @@ public class AddCommand extends Command {
         }
 
         if (task != null) {
-            /*
-            ui.printOutput("  " + task,
-                "Got it. I've added this task: ",
-                taskList.getTaskList().size());
-             */
-
             storage.save(taskList.getTaskList());
 
             return ui.returnOutput("  " + task,

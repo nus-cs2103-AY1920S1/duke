@@ -14,7 +14,6 @@ public class ListCommand extends Command {
      * @param taskList TaskList object.
      */
     public String execute(Ui ui, Storage storage, TaskList taskList) {
-        //ui.printOutput(taskList.list());
         return ui.returnOutput(taskList.list());
     }
 }

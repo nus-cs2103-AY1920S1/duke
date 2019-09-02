@@ -45,7 +45,6 @@ public class FindCommand extends Command {
                 listOutput = listOutput.substring(0, listOutput.length() - 1);
             }
         }
-        //ui.printOutput(listOutput);
         return ui.returnOutput(listOutput);
     }
 }

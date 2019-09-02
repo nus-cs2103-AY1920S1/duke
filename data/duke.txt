@@ -4,4 +4,4 @@ T|true|buy apples
 T|false|buy pears
 D|true|buy toys|14/10/2019 1400
 T|true|buy eggs
-T|false|buy speakers
+T|true|buy speakers

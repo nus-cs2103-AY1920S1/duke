@@ -25,14 +25,4 @@ public class ExitCommand extends Command {
             , new Date(System.currentTimeMillis() + 1 * 800));
         return "Bye. Hope to see you again soon!";
     }
-
-    /**
-     * Returns if commands should continue being read.
-     *
-     * @return Boolean value if commands should continue being read.
-     */
-    @Override
-    public boolean shouldContinue() {
-        return false;
-    }
 }

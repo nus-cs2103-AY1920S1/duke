@@ -143,7 +143,7 @@ public class TaskList {
     /**
      * Returns list of tasks.
      *
-     * @return List of tasks
+     * @return List of tasks.
      */
     public String list() {
         String listOutput = "Here are the tasks in your list:\n";

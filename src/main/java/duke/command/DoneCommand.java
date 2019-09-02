@@ -29,7 +29,6 @@ public class DoneCommand extends Command {
         Task task = taskList.done(taskNo);
 
         if (task != null) {
-            //ui.printOutput("Nice! I've marked this task as done: \n  " + task);
             storage.save(taskList.getTaskList());
             return ui.returnOutput("Nice! I've marked this task as done: \n  " + task);
         }

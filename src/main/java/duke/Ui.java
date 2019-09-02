@@ -31,7 +31,7 @@ public class Ui {
      * Prints a line in the console.
      */
     public void drawLine() {
-        System.out.println("\t-----------------------------------------------------------------------------");
+        System.out.println("\t----------------------------------------------------------");
     }
 
     /**

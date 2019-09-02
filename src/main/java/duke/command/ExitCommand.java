@@ -11,21 +11,21 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command {
 
-    /**
-     * Class Constructor.
-     */
-    public ExitCommand() {
-    }
+  /**
+   * Class Constructor.
+   */
+  public ExitCommand() {
+  }
 
-    @Override
-    public boolean isExit() {
-        return true;
-    }
+  @Override
+  public boolean isExit() {
+    return true;
+  }
 
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
+  @Override
+  public void execute(TaskList tasks, Ui ui, Storage storage) {
+    System.out.println("Bye. Hope to see you again soon!");
+  }
 
 
 }

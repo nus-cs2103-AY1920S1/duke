@@ -7,44 +7,44 @@ package duke.task;
  */
 public class Deadline extends Task {
 
-    private String by;
+  private String by;
 
-    /**
-     * Class constructor.
-     *
-     * @param description description of deadline.
-     * @param by target date and time.
-     */
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
+  /**
+   * Class constructor.
+   *
+   * @param description description of deadline.
+   * @param by          target date and time.
+   */
+  public Deadline(String description, String by) {
+    super(description);
+    this.by = by;
+  }
 
-    /**
-     * Class constructor that must set deadline status when instantiated.
-     *
-     * @param description description of deadline.
-     * @param by target date and time.
-     * @param isDone set status of deadline.
-     */
-    public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        this.by = by;
-    }
+  /**
+   * Class constructor that must set deadline status when instantiated.
+   *
+   * @param description description of deadline.
+   * @param by          target date and time.
+   * @param isDone      set status of deadline.
+   */
+  public Deadline(String description, String by, boolean isDone) {
+    super(description, isDone);
+    this.by = by;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toString() {
+    return "[D]" + super.toString() + " (by: " + by + ")";
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toDataFormat() {
-        return "D" + super.toDataFormat() + " | " + by;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String toDataFormat() {
+    return "D" + super.toDataFormat() + " | " + by;
+  }
 }

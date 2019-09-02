@@ -11,13 +11,13 @@ import duke.task.TaskList;
  */
 public class ListCommand extends Command {
 
-    /**
-     * Class Constructor.
-     */
-    public ListCommand() {
-    }
+  /**
+   * Class Constructor.
+   */
+  public ListCommand() {
+  }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks.getAllTasks());
-    }
+  public void execute(TaskList tasks, Ui ui, Storage storage) {
+    ui.printList(tasks.getAllTasks());
+  }
 }

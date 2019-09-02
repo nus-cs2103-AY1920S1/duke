@@ -1,6 +1,6 @@
 package duke.io;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 import duke.tasklist.ToDo;
 import duke.tasklist.Deadline;
@@ -8,12 +8,11 @@ import duke.tasklist.Event;
 import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-
 
 
 /**
@@ -25,10 +24,10 @@ public class Storage {
     /**
      * Constructs an instance of the file handler
      *
-     * @param path The path to the file in the src/main/resource/SaveFiles/ directory
+     * @param path The path to the file from the src/ directory
      */
     public Storage(String path) {
-        filePath = "src/main/resources/SaveFiles/".concat(path);
+        filePath = "src/".concat(path);
     }
 
 
@@ -163,6 +162,7 @@ public class Storage {
             System.err.println(exception.getMessage());
         }
     }
+
 }
 //saved file format
 /*

@@ -1,16 +1,16 @@
 package duke.command;
 
 /**
- * Data structure to wrap a command to delete a task in the task list
+ * A Command which is used to tell Duke remove a Task in the TaskList.
  */
 public class DeleteTaskCommand extends Command {
 
     /**
-     * Constructs the command to mark a task as done
+     * Constructs the Command to tell Duke to remove a task form the TaskList
      *
-     * @param taskNumber The number corresponding position of the task in the task list to be marked deleted
+     * @param taskNumber The number corresponding position of the Task in the TaskList to be marked as done
      */
-    public DeleteTaskCommand(String taskNumber) {
-        super(Type.TYPE_DELETE, taskNumber);
+    DeleteTaskCommand(String taskNumber) {
+        super(Type.COMMAND_DELETE_TASK, taskNumber);
     }
 }

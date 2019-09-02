@@ -1,6 +1,6 @@
 package duke.io;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 /**
  * The exception to be thrown when the file at some file path is missing, or a directory

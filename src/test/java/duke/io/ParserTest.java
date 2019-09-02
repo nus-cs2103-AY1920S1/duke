@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test;
 
-import duke.io.Parser;
+import duke.command.Parser;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 import duke.command.AddTaskCommand;
 import duke.command.ShowListCommand;

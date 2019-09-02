@@ -1,7 +1,7 @@
 package duke.tasklist;
 
-import duke.DukeException;
-import duke.io.Parser;
+import duke.error.DukeException;
+import duke.command.Parser;
 
 /**
  * Class representing a deadline task in the task list.

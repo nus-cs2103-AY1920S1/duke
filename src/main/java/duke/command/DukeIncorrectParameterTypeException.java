@@ -1,18 +1,18 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 /**
- * Exception which can be thrown when the type of the argument provided to a command cannot
- * be converted to the required type
+ * A DukeException which can be thrown when the argument(s), if any, provided cannot be parsed as the type required
+ * when executing the command.
  */
 public class DukeIncorrectParameterTypeException extends DukeException {
 
     /**
-     * Constructs the exception to be thrown when an argument of the wrong type is provided to a command
+     * Constructs the DukeException to be thrown when the argument given cannot be parsed as the type required
      *
      * @param typeExpected The expected type of the argument
-     * @param argument     The argument which is of the wrong type
+     * @param argument     The argument cannot be parsed
      */
     public DukeIncorrectParameterTypeException(String typeExpected, String argument) {
         super("The following cannot be converted to ", typeExpected, ":\n", argument);

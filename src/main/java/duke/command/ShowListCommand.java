@@ -1,14 +1,14 @@
 package duke.command;
 
 /**
- * Data structure to wrap the command to list out the tasks in the task list
+ * A Command which is used to tell Duke display the contents of the TaskList.
  */
 public class ShowListCommand extends Command {
 
     /**
-     * Constructs the command which displays the list of tasks in the task list
+     * Constructs the Command which displays the Tasks in the TaskList
      */
-    public ShowListCommand() {
-        super(Type.TYPE_LIST);
+    ShowListCommand() {
+        super(Type.COMMAND_SHOW_LIST);
     }
 }

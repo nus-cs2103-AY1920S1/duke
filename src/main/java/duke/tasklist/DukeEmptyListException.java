@@ -1,6 +1,6 @@
 package duke.tasklist;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 /**
  * Exception to be thrown when an error occurs because the task list is empty

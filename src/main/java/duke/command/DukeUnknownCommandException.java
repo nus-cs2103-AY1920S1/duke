@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.error.DukeException;
 
 /**
- * Exception to be thrown when the command provided is not a supported command.
+ * A DukeException to be thrown when the command of the input given cannot be parsed as a valid command Type for Duke.
  */
 public class DukeUnknownCommandException extends DukeException {
 
     /**
-     * Constructs the exception to be thrown when the command provided is not supported.
+     * Constructs the DukeException to be thrown when the command cannot be parsed as a valid command Type for Duke.
      */
     public DukeUnknownCommandException() {
         super("I'm sorry. I don't know what that means :c");

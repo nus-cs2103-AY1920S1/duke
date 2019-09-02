@@ -57,7 +57,7 @@ public class Parser {
             description = matcher.group("description").trim();
             if (!matcher.group("date").isEmpty()) {
                 // Parsing the date
-                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
                 date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
             }
 

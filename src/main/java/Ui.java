@@ -10,6 +10,16 @@ public class Ui {
     protected TaskList tL = new TaskList(new ArrayList<>());
     protected Storage store = new Storage(Storage.file);
 
+    /**
+     * Constructor for Ui.
+     */
+    public Ui() {
+
+    }
+
+    /**
+     * Prints the greeting at the initiation of the chat bot.
+     */
     public void greeting() {
         String logo = "     ____        _        \n" +
                       "    |  _ \\ _   _| | _____ \n" +
@@ -34,6 +44,10 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Scans the input from the user and does the respective
+     * command based on the input. Prints out error messages as well.
+     */
     public void nextCommand() {
         while (scan.hasNext()) {
             try {
@@ -104,8 +118,6 @@ public class Ui {
     public static void printIndent() {
         System.out.print("    ");
     }
-
-    // Prints the line. For better organisation.
 
     /**
      * Prints line.
@@ -188,6 +200,11 @@ public class Ui {
         return Storage.countLines(Storage.file);
     }
 
+    /**
+     * When there is nothing in the file, this method
+     * will print out to the user, telling them that there
+     * is no previous tasks saved in the file
+     */
     public void showLoadingError() {
         printLine();
         printIndent();

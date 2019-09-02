@@ -21,19 +21,22 @@ public class DoneCommand extends Command {
      * @throws DukeException If any error is encountered.
      */
     public DoneCommand(String input) throws DukeException {
-        this.index = Integer.parseInt(input);
-        this.setExit(false);
+        try {
+            this.index = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please ensure that your input is an integer.");
+        }
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         if (index < 1 || index > tasklist.getTaskSize()) {
             throw new DukeException("Index out of range.");
         }
         tasklist.markDone(index);
-        ui.printStatement("Nice! I've marked this task as done:",
-                format("  %s", tasklist.getTaskByIndex(index).toString()));
         storage.updateData(tasklist);
+        return ui.generateResponse("Nice! I've marked this task as done:",
+                format("  %s", tasklist.getTaskByIndex(index).toString()));
     }
 }
 

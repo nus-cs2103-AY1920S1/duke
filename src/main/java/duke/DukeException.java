@@ -2,7 +2,6 @@ package duke;
 
 /**
  * Customized DukeException to represent the errors encountered in program.
- *
  */
 public class DukeException extends Exception {
     private String description;

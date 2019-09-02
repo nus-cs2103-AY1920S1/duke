@@ -11,12 +11,15 @@ import duke.Ui;
  */
 public class ByeCommand extends Command {
 
-    public ByeCommand() {
-        this.setExit(true);
+    @Override
+    public boolean isExit() {
+        return true;
     }
 
+
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
-        ui.printStatement("Bye. Hope to see you again soon!");
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+        return ui.generateResponse("Bye. Hope to see you again soon!",
+                "Enter any key to exit the application.");
     }
 }

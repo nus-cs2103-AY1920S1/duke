@@ -30,6 +30,7 @@ public class Storage {
 
     /**
      * Initially populates the Task List with the hard drive data (Input data file).
+     *
      * @param list ArrayList to be populated.
      * @param line A given line in the input file.
      */

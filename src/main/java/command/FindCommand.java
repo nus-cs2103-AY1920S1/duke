@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         Stream<String> taskStream = tasklist
                 .getList()
                 .stream()
@@ -27,6 +27,6 @@ public class FindCommand extends Command {
                 .map(task -> task.toString());
         Stream<String> combined = Stream.concat(Stream.of("Here are the matching tasks in your list:"), taskStream);
         String[] combinedString = combined.toArray(String[]::new);
-        ui.printStatement(combinedString);
+        return ui.generateResponse(combinedString);
     }
 }

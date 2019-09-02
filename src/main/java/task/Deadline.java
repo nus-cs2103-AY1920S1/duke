@@ -11,9 +11,12 @@ import java.time.format.DateTimeParseException;
  *
  */
 public class Deadline extends Task {
-    private String by;
     protected LocalDate date;
     protected LocalTime time;
+    private static DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
+    private static DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy");
+    private static DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("h:mm a");
 
     /**
      * Constructor class for Deadline object.
@@ -38,21 +41,21 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String date, String time) throws DateTimeParseException {
         super(desc);
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
+        this.date = LocalDate.parse(date, INPUT_DATE_FORMAT);
+        this.time = LocalTime.parse(time, INPUT_TIME_FORMAT);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                + ", " + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
+                + date.format(OUTPUT_DATE_FORMAT)
+                + ", " + time.format(OUTPUT_TIME_FORMAT) + ")";
     }
 
     @Override
     public String fileFormat() {
         return String.format("D | %s | %s | %s %s", isDoneString(), getDescription(),
-                date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                time.format(DateTimeFormatter.ofPattern("HHmm")));
+                date.format(INPUT_DATE_FORMAT),
+                time.format(INPUT_TIME_FORMAT));
     }
 }

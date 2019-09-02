@@ -1,6 +1,5 @@
 package command;
 
-
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -11,8 +10,6 @@ import duke.Ui;
  *
  */
 public abstract class Command {
-    private boolean isExit;
-
 
     /**
      * Executes the given line instruction passed into the object.
@@ -20,14 +17,17 @@ public abstract class Command {
      * @param tasklist Tasklist object containing the data structure.
      * @param ui duke Ui object responsible for interface response.
      * @param storage duke Storage object to make changes to hard drive data.
+     * @return Response string from the Bot to the user.
      */
-    public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
+    public abstract String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Indicates if the Command signals for program termination.
+     *
+     * @return A boolean if the program should terminate.
+     */
     public boolean isExit() {
-        return this.isExit;
+        return false;
     }
 
-    public void setExit(boolean exit) {
-        isExit = exit;
-    }
 }

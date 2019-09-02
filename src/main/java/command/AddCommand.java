@@ -34,7 +34,6 @@ public class AddCommand extends Command {
             throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
         }
         this.task = createTask(taskDetail[0], taskDetail[1]);
-        this.setExit(false);
     }
 
     /**
@@ -66,7 +65,7 @@ public class AddCommand extends Command {
                 LocalTime time = LocalTime.parse(datetime[1], DateTimeFormatter.ofPattern("HHmm"));
                 t = new Deadline(deadlineContent[0], date, time);
             } catch (DateTimeParseException e) {
-                throw new DukeException("Invalid Date Time format input");
+                throw new DukeException("Invalid Date Time format input. Should be in the format dd/MM/yyyy HHmm");
             }
             break;
         case "event":
@@ -84,11 +83,11 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         tasklist.addTask(task);
-        ui.printStatement("Got it. I've added this task:",
+        storage.updateData(tasklist);
+        return ui.generateResponse("Got it. I've added this task:",
                 format("  %s", task),
                 format("Now you have %d tasks in the list.", tasklist.getTaskSize()));
-        storage.updateData(tasklist);
     }
 }

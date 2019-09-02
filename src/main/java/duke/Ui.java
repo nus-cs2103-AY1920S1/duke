@@ -13,42 +13,32 @@ import static java.lang.String.format;
  */
 public class Ui {
     private String line;
-    Scanner sc;
 
     /**
      * Ui Constructor.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
-        this.line = "\t____________________________________________________________\n";
     }
 
     /**
      * Error printer if duke.DukeException is encountered.
      *
      * @param e Caught duke.DukeException.
+     * @return The error that is faced by Duke.
      */
-    public void showLoadingError(DukeException e) {
-        System.out.println(this.line + format("\t %s\n", e) + this.line);
+    public String showLoadingError(DukeException e) {
+        return e.toString();
     }
 
     /**
-     * Scans for the next line command.
+     *  Returns a String response to the given input to the interface.
      *
-     * @return next line input.
+     * @param args Iteration of string inputs that each represent a line to be shown.
+     * @return String response from the GUI to the user.
      */
-    public String readCommand() {
-        String s = sc.nextLine();
-        return s;
-    }
-
-    /**
-     * printing the given input to the interface.
-     * @param args iteration of string inputs that each represent a line to be printed.
-     */
-    public void printStatement(String... args) {
-        String content = format("%s", Stream.of(args).map(s -> "\t " + s + "\n")
+    public String generateResponse(String... args) {
+        String content = format("%s", Stream.of(args).map(s -> s + "\n")
                 .reduce((x,y) -> x + y).orElse(""));
-        System.out.println(this.line + content + this.line);
+        return content;
     }
 }

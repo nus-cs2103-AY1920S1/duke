@@ -20,11 +20,10 @@ public class ListCommand extends Command {
      * Command to List the existing tasks.
      */
     public ListCommand() {
-        this.setExit(false);
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         Stream<String> taskStream = IntStream
                 .range(0, tasklist.getTaskSize())
                 .mapToObj(i -> {
@@ -33,6 +32,6 @@ public class ListCommand extends Command {
                 });
         Stream<String> combined = Stream.concat(Stream.of("Here are the tasks in your list:"), taskStream);
         String[] combinedString = combined.toArray(String[]::new);
-        ui.printStatement(combinedString);
+        return ui.generateResponse(combinedString);
     }
 }

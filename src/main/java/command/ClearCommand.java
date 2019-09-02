@@ -12,9 +12,9 @@ import duke.Ui;
 public class ClearCommand extends Command {
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         tasklist.clearAll();
-        ui.printStatement("Your list is now empty.");
         storage.updateData(tasklist);
+        return ui.generateResponse("Your list is now empty.");
     }
 }

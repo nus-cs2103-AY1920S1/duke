@@ -64,7 +64,7 @@ public class Date {
      */
     private String getMonth(String month) {
         String[] arrayOfMonths = {"January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"};
+            "July", "August", "September", "October", "November", "December"};
         return arrayOfMonths[Integer.parseInt(month) - 1];
     }
 

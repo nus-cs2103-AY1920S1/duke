@@ -24,7 +24,7 @@ public abstract class Command {
 
     /**
      * Checks whether the terminated command has been given in order to terminate
-     the application
+     the application.
      * @return returns a boolean, true if "bye" is called, false if it is not.
      */
     public boolean isExit() {

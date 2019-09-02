@@ -22,17 +22,17 @@ public class DoneCommand extends Command {
      *      an exception occuring in the running of the application.
      */
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-            int sizeOfList = task.getNumOfTasks();
-            String number = description.substring(4).trim();
-            if (number.matches("^\\d+")) {
-                int taskNum = Integer.parseInt(number);
-                if (taskNum > sizeOfList || taskNum < 1) {
-                    throw new InvalidDescriptionException("Wrong description");
-                } else {
-                    ui.showText(task.tickTask(taskNum));
-                }
-            } else {
+        int sizeOfList = task.getNumOfTasks();
+        String number = description.substring(4).trim();
+        if (number.matches("^\\d+")) {
+            int taskNum = Integer.parseInt(number);
+            if (taskNum > sizeOfList || taskNum < 1) {
                 throw new InvalidDescriptionException("Wrong description");
+            } else {
+                ui.showText(task.tickTask(taskNum));
             }
+        } else {
+            throw new InvalidDescriptionException("Wrong description");
+        }
     }
 }

@@ -19,7 +19,7 @@ public class PrintCommand extends Command {
      * @throws DukeException Possibility of throwing a DukeException due to
      *      an exception occuring in the running of the application.
      */
-    public void execute (TaskList task, Ui ui, Storage storage) {
+    public void execute(TaskList task, Ui ui, Storage storage) {
         ui.showText(task.printTasks());
     }
 }

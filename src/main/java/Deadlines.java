@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Deadlines is a form of Task. It contains a description of the task
  and additional information such as the date that the task is due.

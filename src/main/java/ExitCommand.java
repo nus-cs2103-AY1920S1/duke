@@ -19,9 +19,9 @@ public class ExitCommand extends Command {
      * @param ui Ui for user interactions.
      * @param storage Storage for writing of information to text file.
      * @throws DukeException Possibility of throwing a DukeException due to
-     *      an exception occuring in the running of the application.
+     an exception occuring in the running of the application.
      */
-    public void execute (TaskList task, Ui ui, Storage storage) {
+    public void execute(TaskList task, Ui ui, Storage storage) {
         storage.writeToFile(task);
         ui.showExitMessage();
     }

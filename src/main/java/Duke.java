@@ -34,19 +34,19 @@ public class Duke {
     }
 
     /**
-     * A method to begin the application.
-     */
+    * A method to begin the application.
+    */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch(DukeException e) {
+            } catch (DukeException e) {
                 ui.showError(e);
             }
         }

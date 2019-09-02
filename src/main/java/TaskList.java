@@ -42,7 +42,7 @@ public class TaskList {
      * @param list List of Task to be updated.
      * @param content Data to be processed.
      */
-    private void integrateList (ArrayList<Task> list, String content) {
+    private void integrateList(ArrayList<Task> list, String content) {
         Scanner s = new Scanner(content);
         while (s.hasNextLine()) {
             String text = s.nextLine();
@@ -61,6 +61,9 @@ public class TaskList {
             case "E":
                 xs.add(new Event(itemArr[2], itemArr[1], itemArr[3]));
                 numOfTasks++;
+                break;
+
+            default:
                 break;
             }
         }
@@ -128,6 +131,10 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * A method to print the tasks in the list that matches the predicate.
+     * @return Returns a String representation of all the Task that match the predicate.
+     */
     public String printMatchingTasks() {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         for (int i = 1; i <= xs.size(); i++) {

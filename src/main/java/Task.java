@@ -32,17 +32,30 @@ public abstract class Task {
         this.isDone = (checker.equals("1")) ? true : false;
     }
 
+    /**
+     * A method to mark the status of the task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
+    /**
+     * A method to retrieve the status icon representing the status of the task.
+     1 if done, 0 if not done.
+     * @return
+     */
     protected String getStatusIcon() {
         return isDone ? "1" : "0";
     }
 
+    /**
+     * A method to retrieve the description of the task.
+     * @return Returns the description of the task.
+     */
     public String getDescription() {
         return description;
     }
+
     /**
      * Prints the task in the desired format for storing in text file.
      * @return Returns formatted String representing Task.

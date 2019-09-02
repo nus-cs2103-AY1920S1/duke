@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * The Event class is a type of task. It contains a description of the
  event and additional information such as the date of the event.

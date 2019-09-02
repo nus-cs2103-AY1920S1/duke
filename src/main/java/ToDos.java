@@ -2,7 +2,7 @@
  * The ToDos class is a type of task. It contains description
  of the task to be completed.
  */
-public class ToDos extends Task{
+public class ToDos extends Task {
     /**
      * Constructs and initializes the attributes of a new ToDos object.
      * @param description Description of the task.

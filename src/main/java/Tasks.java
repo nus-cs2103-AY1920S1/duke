@@ -30,23 +30,20 @@ public class Tasks {
     }
 
     public void finishTask() {
-        status = "✓";
+        status = 1;
     }
 
-   String formatTime() {
+    String formatTime() {
         String output = "";
-        if(timeOfEvent.length > 1) {
-            output = "(" + timeOfEvent[0] + ":";
-            for(int i = 1; i < timeOfEvent.length; i++) {
-                output = output + " " + timeOfEvent[i];
-            }
-            output = output + ")";
+        if(time.length > 1) {
+            output = time.substring(1);
         }
         return output;
     }
+
     @Override 
     public String toString() {
-        return "[" + tde + "] " + "[" + status + "] " + taskDesc + formatTime();
+        return typeOfTask + " | " + status + " | " + taskDetails + " | " + formatTime();
     } 
 
 }

@@ -17,16 +17,18 @@ class UI {
 
     /**
      * Print welcome string.
+     * @return formatted string.
      */
-    public void printWelcome() {
-        prettyPrint(welcomeStr);
+    public String printWelcome() {
+        return prettyPrint(welcomeStr);
     }
 
     /**
      * Print exit string.
+     * @return formatted string.
      */
-    public void printExit() {
-        prettyPrint(endStr);
+    public String printExit() {
+        return prettyPrint(endStr);
     }
 
     /**
@@ -45,59 +47,67 @@ class UI {
      * Method to display task addition.
      * @param task Task added.
      * @param tl TaskList of tasks.
+     * @return formatted string.
      */
-    public void showTaskAddition(Task task, TaskList tl) {
+    public String showTaskAddition(Task task, TaskList tl) {
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
         sb.append("       " + task + "\n");
         sb.append(String.format("     Now you have %d tasks in the list.", tl.getTasks().size()));
-        prettyPrint(sb.toString());
+        return prettyPrint(sb.toString());
     }
 
     /**
      * Display a deletion of task.
      * @param task Task deleted.
      * @param tl TaskList deleted from.
+     * @return formatted string.
      */
-    public void showTaskDeletion(Task task, TaskList tl) {
+    public String showTaskDeletion(Task task, TaskList tl) {
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
         sb.append(String.format("     %s\n", task.toString()));
         sb.append(String.format("     Now you have %d tasks in the list.", tl.getTasks().size()));
-        prettyPrint(sb.toString());
+        return prettyPrint(sb.toString());
     }
 
     /**
      * Display marking task as done.
      * @param task Task marked done.
+     * @return formatted string.
      */
-    public void showTaskMarkedDone(Task task) {
+    public String showTaskMarkedDone(Task task) {
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
         sb.append(String.format("     %s", task.toString()));
-        prettyPrint(sb.toString());
+        return prettyPrint(sb.toString());
     }
 
     /**
      * List the tasks in a TaskList.
      * @param tl TaskList to list tasks from.
+     * @return formatted list of tasks.
      */
-    public void showTaskList(TaskList tl) {
-        prettyPrint(tl.listTasks());
+    public String showTaskList(TaskList tl) {
+        return prettyPrint(tl.listTasks());
     }
 
     /**
      * Display an error.
      * @param e Error to be displayed.
+     * @return formatted error.
      */
-    public void printError(DukeException e) {
-        prettyPrint(String.format("☹ OOPS!!! %s", e.getMessage()));
+    public String printError(DukeException e) {
+        return prettyPrint(String.format("☹ OOPS!!! %s", e.getMessage()));
     }
 
     /**
      * Pretty print a string.
      * @param str String to be printed.
+     * @return Formatted string.
      */
-    private static void prettyPrint(String str) {
-        System.out.println("    --------------------------------------------------");
-        System.out.println("     " + str);
-        System.out.println("    --------------------------------------------------");
+    private static String prettyPrint(String str) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("    --------------------------------------------------\n");
+        sb.append("     " + str + "\n");
+        sb.append("    --------------------------------------------------\n");
+        return sb.toString();
     }
 }

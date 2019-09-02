@@ -1,10 +1,10 @@
-package Storage;
+package storage;
 
-import Exceptions.DukeException;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import exceptions.DukeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;

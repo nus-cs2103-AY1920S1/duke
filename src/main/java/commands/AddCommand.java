@@ -1,10 +1,10 @@
-package Commands;
+package commands;
 
-import Exceptions.DukeException;
-import Storage.Storage;
-import Tasks.Task;
-import Tasks.TaskList;
-import Ui.Ui;
+import exceptions.DukeException;
+import storage.Storage;
+import tasks.Task;
+import tasks.TaskList;
+import ui.Ui;
 
 public class AddCommand extends Command {
     private Task task;

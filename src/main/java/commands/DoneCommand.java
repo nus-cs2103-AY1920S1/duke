@@ -1,9 +1,8 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import Tasks.Task;
-import Tasks.TaskList;
-import Ui.Ui;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Ui;
 
 public class DoneCommand extends Command {
 

@@ -1,11 +1,11 @@
-package Parser;
+package parser;
 
-import Commands.*;
-import Exceptions.InvalidCommandException;
-import Exceptions.InvalidDescriptionException;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Todo;
+import commands.*;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidDescriptionException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

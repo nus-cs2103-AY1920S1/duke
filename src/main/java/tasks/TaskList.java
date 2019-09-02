@@ -1,9 +1,7 @@
-package Tasks;
+package tasks;
 
-import Exceptions.DukeException;
-import Tasks.Task;
+import exceptions.DukeException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {

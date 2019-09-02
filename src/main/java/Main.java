@@ -3,6 +3,11 @@ import duke.exception.DukeIOException;
 
 public class Main {
 
+    /**
+     * Runs the {@link Duke} application.
+     *
+     * @param args Arguments passed through the terminal
+     */
     public static void main(String[] args) {
         try {
             (new Duke()).run();

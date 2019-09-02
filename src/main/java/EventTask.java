@@ -1,17 +1,21 @@
 import json.JsonWriter;
 import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class EventTask extends Task {
-	private final String timing;
+	private final LocalDateTime timing;
 
 	public EventTask(String task, String timing) {
 		super(task);
-		this.timing = timing;
+		this.timing = DateParser.parse(timing);
 	}
 
 	EventTask(Map<String, Object> dict) {
 		super(dict);
-		this.timing = (String) dict.get("timing");
+		this.timing = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+			.parse((String) dict.get("timing"), LocalDateTime::from);
 	}
 
 	@Override
@@ -22,12 +26,13 @@ public class EventTask extends Task {
 	@Override
 	public String toString() {
 		String baseDescription = super.toString();
-		return String.format("%s (at: %s)", baseDescription, timing);
+		return String.format("%s (at: %s)", baseDescription,
+				DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(timing));
 	}
 
 	@Override
 	public void toJson(JsonWriter.ObjectContext ctx) {
 		super.toJson(ctx);
-		ctx.writeField("timing", this.timing);
+		ctx.writeField("timing", DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(this.timing));
 	}
 }

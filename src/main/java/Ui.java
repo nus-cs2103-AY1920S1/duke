@@ -10,6 +10,9 @@ public class Ui {
      */
     Scanner sc;
 
+    /**
+     * Class constructor that initialises the scanner object in the ui object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -195,6 +198,11 @@ public class Ui {
         storage.rewriteFile(tasks);
     }
 
+    /**
+     * When user finds a task using a keyword.
+     * @param input Input from user
+     * @param tasks List of tasks
+     */
     public static void handleFind(String input, TaskList tasks) {
         String[] inputStringArr = input.split(" ", 2);
         String searchTerm = inputStringArr[1];
@@ -213,14 +221,22 @@ public class Ui {
                     System.out.println("     " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
                             + t + " (by: " + t.getDate() + ")");
                 }
+                listNum++;
             }
         }
     }
 
+    /**
+     * This method prints the divider for the application for decorative and clarity purposes.
+     */
     public static void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * This method prints the appropriate error message based on the erroneous user input.
+     * @param errorMsg Error message to be printed
+     */
     public void showError(String errorMsg) {
         System.out.println(errorMsg);
     }

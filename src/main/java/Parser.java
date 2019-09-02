@@ -1,7 +1,13 @@
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.time.LocalTime.parse;
 
 public class Parser {
     private CommandType commandType;
@@ -9,6 +15,7 @@ public class Parser {
     private String description;
     private String date = "";
     private boolean isSafe = true;
+    private DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Parser(String fullCommand) {
         Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
@@ -51,7 +58,14 @@ public class Parser {
             description = matcher.group("description").trim();
             if (!matcher.group("date").isEmpty()) {
                 date = matcher.group("date").trim();
+                // Parsing the date
+                LocalDateTime dates = LocalDateTime.parse(date, inputFormat);
+                // Format for output
+                DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
+                // Printing the date
+                System.out.println(dates.format(outputFormat));
             }
+
         }
 
     }

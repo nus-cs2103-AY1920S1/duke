@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /** Class to represent a dialog box. */
 public class DialogBox extends HBox {
@@ -19,6 +20,7 @@ public class DialogBox extends HBox {
         this.text.setWrapText(true);
         this.displayPicture.setFitWidth(100.0);
         this.displayPicture.setFitHeight(100.0);
+        this.displayPicture.setClip(new Circle(50.0, 50.0, 50.0));
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);

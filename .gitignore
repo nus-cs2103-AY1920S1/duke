@@ -14,3 +14,4 @@ src/main/resources/docs/
 bin/
 src/main/java/TaskList.txt
 *.class
+src/main/java/Duke.class

@@ -1,6 +1,11 @@
-class Parser {
+package duke.util;
 
-    static Command parse(String fullCommand) throws DukeException {
+import duke.command.*;
+import duke.exception.DukeException;
+
+public class Parser {
+
+    public static Command parse(String fullCommand) throws DukeException {
         String[] commandWords = fullCommand.split(" ");
         String action = commandWords[0];
         try {

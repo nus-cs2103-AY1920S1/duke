@@ -1,17 +1,19 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
-    private String by;
+    private String at;
     private LocalDateTime time;
 
-    Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            time = LocalDateTime.parse(by, formatter);
+            time = LocalDateTime.parse(at, formatter);
         } catch (Exception err) {
             System.err.println(err.getMessage());
         }
@@ -19,11 +21,11 @@ public class Deadline extends Task {
 
     @Override
     public StringBuilder saveData() {
-        return new StringBuilder("D|").append(super.saveData()).append("|").append(by);
+        return new StringBuilder("E|").append(super.saveData()).append("|").append(at);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + time + ")";
     }
 }

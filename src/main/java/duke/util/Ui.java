@@ -1,29 +1,33 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
 
     private Scanner sc = new Scanner(System.in);
     private String line = "    ____________________________________________________________";
 
-    void showWelcome() {
+    public void showWelcome() {
         System.out.println(line + "\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" + line);
     }
 
-    void showLoadingError(String e) {
+    public void showLoadingError(String e) {
         System.err.println(e);
     }
 
-    void showError(String e) {
+    public void showError(String e) {
         System.err.println(e);
     }
 
-    String readCommand() {
+    public String readCommand() {
         return sc.nextLine();
     }
 
-    void showLine() {
+    public void showLine() {
         System.out.println(line);
     }
 
@@ -33,11 +37,11 @@ class Ui {
                         "     Now you have " + numOfTasks + " tasks in the list.");
     }
 
-    void showBye() {
+    public void showBye() {
         System.out.println("     Bye. Hope to see you again soon!");
     }
 
-    void showList(TaskList taskList) {
+    public void showList(TaskList taskList) {
         System.out.print(taskList);
     }
 

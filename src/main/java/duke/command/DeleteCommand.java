@@ -1,0 +1,21 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
+public class DeleteCommand extends Command {
+
+    private int deletedItemNo;
+
+    public DeleteCommand(int deletedItemNo) {
+        super(false);
+        this.deletedItemNo = deletedItemNo;
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        taskList.delete(deletedItemNo, ui);
+    }
+}

@@ -1,18 +1,23 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
     private ArrayList<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         taskList = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    void delete(int deletedItemNo, Ui ui) throws DukeException {
+    public void delete(int deletedItemNo, Ui ui) throws DukeException {
         try {
             Task itemRemoved = taskList.remove(deletedItemNo - 1);
             int numOfTask = taskList.size();
@@ -22,19 +27,19 @@ class TaskList {
         }
     }
 
-    void add(Task task, Ui ui) {
+    public void add(Task task, Ui ui) {
         taskList.add(task);
         int numOfTask = taskList.size();
         ui.showAdded(task, numOfTask);
     }
 
-    void done(int itemNo, Ui ui) {
+    public void done(int itemNo, Ui ui) {
         Task task = taskList.get(itemNo - 1);
         task.markAsDone();
         ui.showDone(task);
     }
 
-    void writeTo(Storage storage) throws DukeException {
+    public void writeTo(Storage storage) throws DukeException {
         storage.writeToFile(taskList);
     }
 

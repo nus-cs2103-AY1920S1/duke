@@ -12,5 +12,3 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
-
-src/.idea

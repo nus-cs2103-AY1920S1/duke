@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     private int taskID;
 
     /**
-     * Constructs a DeleteCommand object to deal with deleting tasks
+     * Constructs a DeleteCommand object to deal with deleting tasks.
      *
      * @param taskID The task ID to be deleted.
      */
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Delete " + this.taskID;
     }
 }

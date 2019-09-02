@@ -1,12 +1,12 @@
 package task;
 
 /**
- * Represents a Task with type ToDo
+ * Represents a Task with type ToDo.
  */
 public class ToDo extends Task {
 
     /**
-     * Constructs a new ToDo task
+     * Constructs a new ToDo task.
      *
      * @param name The name of the ToDo task
      */
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructs a new ToDo task
+     * Constructs a new ToDo task.
      *
      * @param name The name of the ToDo task
      * @param isComplete The completion status of the task (true/false)

@@ -1,7 +1,7 @@
 package main;
 
 /**
- * Helper class for the user
+ * Helper class for the user.
  */
 public class Helper {
 
@@ -9,10 +9,10 @@ public class Helper {
     String[] arr;
 
     /**
-     * Constructs a new Helper object
+     * Constructs a new Helper object.
      */
     public Helper() {
-        arr = new String[NUMBER_OF_COMMANDS+1];
+        arr = new String[NUMBER_OF_COMMANDS + 1];
         arr[0] = "Here are the list of commands and their allowable input formats";
         arr[1] = "bye";
         arr[2] = "list";
@@ -26,7 +26,7 @@ public class Helper {
     }
 
     /**
-     * Returns an array of allowable input formats
+     * Returns an array of allowable input formats.
      *
      * @return An array with the list of allowable input formats
      */

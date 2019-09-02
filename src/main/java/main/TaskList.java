@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Used to store tasks
+ * Used to store tasks.
  */
-public class TaskList implements Iterable<Task>{
+public class TaskList implements Iterable<Task> {
 
     private ArrayList<Task> tasks;
 
     /**
-     * Creates a new TaskList object with no existing tasks
+     * Creates a new TaskList object with no existing tasks.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Creates a new TaskList object with existing tasks
+     * Creates a new TaskList object with existing tasks.
      *
      * @param existingTaskList ArrayList of existing tasks
      */
@@ -29,7 +29,7 @@ public class TaskList implements Iterable<Task>{
     }
 
     /**
-     * Returns the Tasks stored in an ArrayList
+     * Returns the Tasks stored in an ArrayList.
      *
      * @return The task list in ArrayList form.
      */
@@ -38,7 +38,7 @@ public class TaskList implements Iterable<Task>{
     }
 
     /**
-     * Adds a new task to the task list
+     * Adds a new task to the task list.
      *
      * @param newTask Task object to be added
      * @return The task that has been added
@@ -49,13 +49,13 @@ public class TaskList implements Iterable<Task>{
     }
 
     /**
-     * Deletes a task from the task list given by its task ID (starting from 1)
+     * Deletes a task from the task list given by its task ID (starting from 1).
      *
      * @param taskNum task ID (index starts from 1)
      * @return The deleted task with specified task ID.
      */
     public Task deleteTask(int taskNum) {
-        Task removedTask = this.tasks.remove(taskNum-1);
+        Task removedTask = this.tasks.remove(taskNum - 1);
         return removedTask;
     }
 
@@ -66,13 +66,13 @@ public class TaskList implements Iterable<Task>{
      * @return The updated Task object, with completion status updated.
      */
     public Task finishTask(int taskNum) {
-        Task completedTask = this.tasks.get(taskNum-1);
+        Task completedTask = this.tasks.get(taskNum - 1);
         completedTask.finishTask();
         return completedTask;
     }
 
     /**
-     * Returns the current size of the task list
+     * Returns the current size of the task list.
      *
      * @return the current size of the task list
      */
@@ -87,7 +87,7 @@ public class TaskList implements Iterable<Task>{
      * @return Task Object with the corresponding task ID.
      */
     public Task getTask(int taskID) {
-        return tasks.get(taskID-1);
+        return tasks.get(taskID - 1);
     }
 
     /**
@@ -98,7 +98,8 @@ public class TaskList implements Iterable<Task>{
     }
 
     /**
-     * Finds all tasks which contains a specific keyword
+     * Finds all tasks which contains a specific keyword.
+     * 
      * @param keyword the keyword to be searched
      * @return An ArrayList of tasks which contains the keyword
      */

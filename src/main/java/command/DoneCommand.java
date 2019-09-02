@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
 
     /**
      * Creates a DoneCommand object to deal with marking a task as complete.
-     * @param taskID
+     * @param taskID The ID of the task to be marked as done.
      */
     public DoneCommand(int taskID) {
         super();
@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the command to mark a task as complete
+     * Executes the command to mark a task as complete.
      *
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user

@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Represents a Task object
+ * Represents a Task object.
  */
 public class Task {
 
@@ -19,7 +19,7 @@ public class Task {
     }
 
     /**
-     * Creates a new Task object
+     * Creates a new Task object.
      *
      * @param name          The name of the new task
      * @param isComplete    The completion status of the task (true/false)
@@ -36,7 +36,7 @@ public class Task {
     }
 
     /**
-     * Sets the status of the task to complete
+     * Sets the status of the task to complete.
      */
     public void finishTask() {
         this.isComplete = true;
@@ -53,7 +53,7 @@ public class Task {
     }
 
     /**
-     * Returns true if task name contains a keyword
+     * Returns true if task name contains a keyword.
      *
      * @param keyword the keyword to be checked against the task name
      * @return true if task name contains specified keyword

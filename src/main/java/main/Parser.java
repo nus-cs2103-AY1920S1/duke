@@ -1,15 +1,22 @@
 package main;
 
-import command.*;
+import command.AddCommand;
+import command.ClearAllTasksCommand;
 import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.HelpCommand;
+import command.ListCommand;
 
 /**
- * Deals with making sense of the user command
+ * Deals with making sense of the user command.
  */
 public class Parser {
 
     /**
-     * Returns a Command object to parse the command
+     * Returns a Command object to parse the command.
      *
      * @param fullCommand The full user command received from the ui.
      * @return A command object to parse the command
@@ -49,7 +56,7 @@ public class Parser {
                 String keyword = arr[1].trim().toLowerCase();
                 return new FindCommand(keyword);
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException ("Please enter a keyword to find");
+                throw new DukeException("Please enter a keyword to find");
             }
         case "todo":
         case "event":
@@ -60,8 +67,8 @@ public class Parser {
                 throw new DukeException("The description of the command '" + cmd + "' cannot be empty!");
             }
         default:
-            throw new DukeException("I'm sorry I do not understand what you mean. " +
-                    "Please enter 'help' to see all supported commands.");
+            throw new DukeException("I'm sorry I do not understand what you mean. "
+                    + "Please enter 'help' to see all supported commands.");
         }
     }
 }

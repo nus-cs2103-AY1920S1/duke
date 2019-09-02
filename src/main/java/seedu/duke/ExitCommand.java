@@ -18,10 +18,11 @@ public class ExitCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         exit = true;
-        ui.exit();
+        return ui.exit();
     }
 
 }

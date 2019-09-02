@@ -27,14 +27,14 @@ public class DeleteCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      * @throws IOException upon wrong input
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        ui.printRemoveMsg();
-        ui.printLatest(list);
+    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
+        String output = ui.printRemoveMsg() + ui.printLatest(list) + ui.printNumTask(list);
         list.deleteTask(index);
-        ui.printNumTask(list);
         storage.writeToFile(list);
+        return output;
     }
 }

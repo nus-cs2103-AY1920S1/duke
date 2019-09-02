@@ -32,15 +32,15 @@ public class DeadlineCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      * @throws IOException on input error
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         list.addTask(new Deadline(command, dateTime));
-        ui.printAddMsg();
-        ui.printLatest(list);
-        ui.printNumTask(list);
+        String output = ui.printAddMsg() + ui.printLatest(list) + ui.printNumTask(list);
         storage.appendToFile(list);
+        return output;
     }
 
 }

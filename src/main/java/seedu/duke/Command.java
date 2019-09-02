@@ -22,9 +22,10 @@ public abstract class Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      * @throws IOException on input error
      */
-    public abstract void execute(TaskList list, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList list, Ui ui, Storage storage) throws IOException;
 
     /**
      * Returns whether the program should exit.

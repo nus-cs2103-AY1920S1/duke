@@ -18,9 +18,10 @@ public class ListCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.printList(list);
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return ui.printList(list);
     }
 
 }

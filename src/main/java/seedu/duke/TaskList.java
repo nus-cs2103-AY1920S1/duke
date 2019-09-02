@@ -70,10 +70,13 @@ public class TaskList {
      */
     public ArrayList<Task> findMatching(String keyword) {
         ArrayList<Task> matchingList = new ArrayList<>();
-
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getDescription().contains(keyword)) {
-                matchingList.add(taskList.get(i));
+            String[] arr = taskList.get(i).getDescription().split(" ");
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j].equals(keyword)) {
+                    matchingList.add(taskList.get(i));
+                    break;
+                }
             }
         }
         return matchingList;

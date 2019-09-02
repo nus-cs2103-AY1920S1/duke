@@ -27,13 +27,15 @@ public class DoneCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      * @throws IOException on input error
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        list.getTask(index).markAsDone();
+    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
+        String output = list.getTask(index).markAsDone();
         list.getTask(index).updateDone();
         storage.writeToFile(list);
+        return output;
     }
 
 }

@@ -27,15 +27,15 @@ public class TodoCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the data file
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to data file
+     * @return the output string
      * @throws IOException on the incorrect input
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         list.addTask(new Todo(command));
-        ui.printAddMsg();
-        ui.printLatest(list);
-        ui.printNumTask(list);
+        String output = ui.printAddMsg() + ui.printLatest(list) + ui.printNumTask(list);
         storage.appendToFile(list);
+        return output;
     }
 
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +49,7 @@ public class ParserTest {
         } catch (InvalidInputException e) {
             fail();
         } catch (EmptyDescriptionException e) {
-            assertEquals("☹ OOPS!!! The description of a " + "deadline" + " cannot be empty.", e.getMessage());
+            assertEquals("☹ OOPS!!! The description of a " + "deadline" + " cannot be empty.\n", e.getMessage());
         } catch (DukeException e) {
             fail();
         }
@@ -62,7 +63,7 @@ public class ParserTest {
             Parser.parse(str, ui);
             fail();
         } catch (InvalidInputException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n", e.getMessage());
         } catch (EmptyDescriptionException e) {
             fail();
         } catch (DukeException e) {

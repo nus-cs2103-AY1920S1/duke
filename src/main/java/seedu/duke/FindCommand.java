@@ -27,13 +27,14 @@ public class FindCommand extends Command {
      * @param list the TaskList object that is handling the arraylist of the datafile
      * @param ui the UserInterface object that handles the interaction with users
      * @param storage the Storage object that stores and handles the path to datafile
+     * @return the output string
      * @throws IOException upon wrong input
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        ui.printMatchingMsg();
+    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         ArrayList<Task> matchingList = list.findMatching(keyword);
-        ui.printMatchingList(matchingList);
+        String output = ui.printMatchingMsg() + ui.printMatchingList(matchingList);
+        return output;
     }
 
 }

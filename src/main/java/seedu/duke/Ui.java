@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Ui is a class that deals with interactions with the user. It contains operations that
@@ -16,108 +15,93 @@ public class Ui {
     }
 
     /**
-     * Prints the greeting message.
+     * Returns the greeting message in the form of a string.
      */
-    public static void greet() {
+    public static String greet() {
         String message = "Hello! I'm Duke\n"
                 + "What can I do for you?";
-        System.out.println(message);
+        return message;
     }
 
     /**
-     * Scans the command and return it.
-     *
-     * @return the command that the user input
+     * Returns the exit message in the form of a string.
      */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
-     * Returns the separating line.
-     *
-     * @return the separating line
-     */
-    public String showLine() {
-        return "____________________________________________________________";
-    }
-
-    /**
-     * Prints the exit message.
-     */
-    public static void exit() {
+    public static String exit() {
         String byeMessage = "Bye. Hope to see you again soon!";
-        System.out.println(byeMessage);
+        return byeMessage;
     }
 
     /**
-     * Prints the error message if the storage cannot load.
+     * Returns the error message in the form of a string if the storage cannot load.
      */
-    public static void showLoadingError() {
-        System.out.println("Storage cannot be loaded!");
+    public static String showLoadingError() {
+        String msg = "Storage cannot be loaded!\n";
+        return msg;
     }
 
     /**
-     * Prints message and all the tasks in the list.
+     * Returns message and all the tasks in the list in the form of a string.
      *
      * @param list the list of tasks
      */
-    public static void printList(TaskList list) {
-        System.out.println("Here are the tasks in your list:");
+    public static String printList(TaskList list) {
+        String tasksMsg = "Here are the tasks in your list:\n";
         for (int j = 0; (j < list.getSize()) && list.getTask(j) != null; j++) {
-            System.out.println(j + 1 + "." + list.getTask(j));
+            tasksMsg += String.valueOf(j + 1 + "." + list.getTask(j)) + "\n";
         }
+        return tasksMsg;
     }
 
     /**
-     * Prints the add message.
+     * Returns the add message in the form of a string.
      */
-    public static void printAddMsg() {
-        System.out.println("Got it. I've added this task:");
+    public static String printAddMsg() {
+        return ("Got it. I've added this task:\n");
     }
 
     /**
-     * Prints the message stating the number of tasks in the list.
+     * Returns the message stating the number of tasks in the list.
      *
      * @param list the list of tasks
      */
-    public static void printNumTask(TaskList list) {
-        System.out.println("Now you have " + list.getSize() + " tasks in the list.");
+    public static String printNumTask(TaskList list) {
+        return ("Now you have " + list.getSize() + " tasks in the list.\n");
     }
 
     /**
-     * Prints the remove message.
+     * Returns the remove message in the form of a string.
      */
-    public static void printRemoveMsg() {
-        System.out.println("Noted. I've removed this task:");
+    public static String printRemoveMsg() {
+        return ("Noted. I've removed this task:\n");
     }
 
     /**
-     * Prints the latest task in the list.
+     * Returns the latest task in the list.
      *
      * @param list the list of tasks
      */
-    public static void printLatest(TaskList list) {
-        System.out.println(list.getTask(list.getSize() - 1));
+    public static String printLatest(TaskList list) {
+        return String.valueOf(list.getTask(list.getSize() - 1) + "\n");
     }
 
     /**
-     * Prints the matching message.
+     * Returns the matching message.
      */
-    public static void printMatchingMsg() {
-        System.out.println("Here are the matching tasks in your list:");
+    public static String printMatchingMsg() {
+        return ("Here are the matching tasks in your list:\n");
     }
 
     /**
-     * Prints the tasks in the matching list.
+     * Returns the tasks in the matching list.
      *
      * @param list the list of matching tasks
      */
-    public static void printMatchingList(ArrayList<Task> list) {
+    public static String printMatchingList(ArrayList<Task> list) {
+        String string = "";
         for (int j = 0; (j < list.size()) && list.get(j) != null; j++) {
-            System.out.println(j + 1 + "." + list.get(j));
+            string += String.valueOf(j + 1 + "." + list.get(j) + "\n");
         }
+        return string;
     }
 
     /**
@@ -127,7 +111,7 @@ public class Ui {
      * @return the empty description error message
      */
     public static String emptyDescriptionMsg(String s) {
-        return ("☹ OOPS!!! The description of a " + s + " cannot be empty.");
+        return ("☹ OOPS!!! The description of a " + s + " cannot be empty.\n");
     }
 
     /**
@@ -136,16 +120,16 @@ public class Ui {
      * @return the invalid input error message
      */
     public static String invalidInputMsg() {
-        return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
     }
 
     /**
-     * Prints the error message.
+     * Returns the error message.
      *
      * @param s the error message
      */
-    public void printErrMsg(String s) {
-        System.out.println(s);
+    public String printErrMsg(String s) {
+        return s + "\n";
     }
 
 }

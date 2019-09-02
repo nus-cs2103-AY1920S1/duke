@@ -13,7 +13,7 @@ public class EditCommand extends Command {
      * Constructor for EditCommand.
      * @param index index of Task in TaskList to mark as done.
      */
-    public EditCommand(int index){
+    public EditCommand(int index) {
         super.type = FullCommand.DONE;
         this.index = index;
     }
@@ -22,7 +22,7 @@ public class EditCommand extends Command {
      * Used tp check if command is an ExitCommand.
      * @return false as command is an EditCommand.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 
@@ -36,7 +36,7 @@ public class EditCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (index == -1){
+            if (index == -1) {
                 throw new IndexOutOfBoundsException();
             }
             Task completedTask = tasks.complete(index);

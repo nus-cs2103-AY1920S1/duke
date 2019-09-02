@@ -9,7 +9,7 @@ import ui.Ui;
  * Command to end program.
  */
 public class ExitCommand extends Command {
-    public ExitCommand(){
+    public ExitCommand() {
         this.type = FullCommand.BYE;
     }
 
@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
     /** Used by Duke class method run to check for exit command and terminate program if exit command is found.
      * @return true as command is ExitCommand.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 
@@ -30,5 +30,5 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.closeWriter();
-    };
+    }
 }

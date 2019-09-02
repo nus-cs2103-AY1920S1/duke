@@ -1,6 +1,13 @@
 package parser;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.EditCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.FullCommand;
+import command.ListCommand;
 import exception.DukeException;
 
 /**
@@ -15,8 +22,8 @@ public class Parser {
      * @throws DukeException When there are no matching command. i.e user input or line from txt file is invalid.
      */
     public static Command parse(String instruction) throws DukeException {
-        String[] word_Arr = instruction.split(" ", 2);
-        FullCommand command = FullCommand.getByName(word_Arr[0]);
+        String[] wordArr = instruction.split(" ", 2);
+        FullCommand command = FullCommand.getByName(wordArr[0]);
         try {
             switch (command) {
             case LIST:
@@ -24,19 +31,21 @@ public class Parser {
             case BYE:
                 return new ExitCommand();
             case DONE:
-                return new EditCommand(Integer.parseInt(word_Arr[1]) - 1);
+                return new EditCommand(Integer.parseInt(wordArr[1]) - 1);
             case DELETE:
-                return new DeleteCommand(Integer.parseInt(word_Arr[1]) - 1);
+                return new DeleteCommand(Integer.parseInt(wordArr[1]) - 1);
             case FIND:
-                return new FindCommand(word_Arr[1]);
+                return new FindCommand(wordArr[1]);
             default:
-                if (word_Arr[1].equals("")){
+                if (wordArr[1].equals("")) {
                     throw new DukeException("");
                 }
-                return new AddCommand(command, word_Arr[1]);
+                return new AddCommand(command, wordArr[1]);
             }
         } catch (IndexOutOfBoundsException | DukeException e) {
             throw new DukeException("Give instructions in the format: (instruction type) (details)");
+        } catch (NumberFormatException e) {
+            throw new DukeException("'done' and 'delete' must be followed by an integer index.");
         }
     }
 }

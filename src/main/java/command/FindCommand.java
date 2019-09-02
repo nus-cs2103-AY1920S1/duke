@@ -12,14 +12,14 @@ import java.util.ArrayList;
 /**
  * Command to list all tasks containing keyword.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     String keyword;
 
     /**
      * Constructor for FindCommand.
      * @param keyword when executed, will search for all tasks with keyword.
      */
-    public FindCommand(String keyword){
+    public FindCommand(String keyword) {
         super.type = FullCommand.FIND;
         this.keyword = keyword;
     }
@@ -30,7 +30,7 @@ public class FindCommand extends Command{
      * @return false.
      */
 
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 
@@ -41,12 +41,12 @@ public class FindCommand extends Command{
      * @param tasks TaskList containing all Tasks.
      * @param ui Instance of user interface to print feedback to user.
      * @param storage updates data record of TaskList in storage.filepath if needed.
-     * @throws DukeException
+     * @throws DukeException should not be thrown for this Command subclass.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> shortlist = new ArrayList<>();
-        for (Task task: tasks.getList()){
-            if (task.findWord(keyword)){
+        for (Task task: tasks.getList()) {
+            if (task.findWord(keyword)) {
                 shortlist.add(task);
             }
         }

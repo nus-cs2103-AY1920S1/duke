@@ -8,8 +8,8 @@ import exception.DukeException;
  * Easy way to check if user types invalid command.
  */
 public enum FullCommand {
-    LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline")
-        , EVENT("event"), BYE("bye"), FIND("find");
+    LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline"),
+        EVENT("event"), BYE("bye"), FIND("find");
 
     private String name;
 
@@ -28,8 +28,8 @@ public enum FullCommand {
      * @throws DukeException Thrown when user enters invalid command.
      */
     public static FullCommand getByName(String keyword) throws DukeException {
-        for(FullCommand command : values()){
-            if(command.getName().equals(keyword)){
+        for (FullCommand command : values()) {
+            if (command.getName().equals(keyword)) {
                 return command;
             }
         }

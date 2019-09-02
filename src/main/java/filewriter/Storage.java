@@ -2,8 +2,11 @@ package filewriter;
 
 import datetime.DateTime;
 import exception.DukeException;
-import task.*;
-
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,8 +38,8 @@ public class Storage {
      * Creates FileWriter member fw.
      * @throws DukeException when invalid filepath.
      */
-    private void createWriter() throws DukeException{
-        try{
+    private void createWriter() throws DukeException {
+        try {
             fw = new FileWriter(filePath, willAppend);
         } catch (IOException e) {
             throw new DukeException("invalid filepath");
@@ -48,7 +51,7 @@ public class Storage {
      * Used in Execute method of ExitCommand object.
      * @throws DukeException when invalid filepath.
      */
-    public void closeWriter() throws DukeException{
+    public void closeWriter() throws DukeException {
         try {
             fw.close();
         } catch (IOException e) {
@@ -62,7 +65,7 @@ public class Storage {
      * @param textToAdd (Command Object).to String();
      * @throws DukeException thrown when IOException is caught.
      */
-    public void writeToFile(String textToAdd) throws DukeException{
+    public void writeToFile(String textToAdd) throws DukeException {
         try {
             checkAppend(true);
             fw.write(textToAdd + "\n");
@@ -78,7 +81,7 @@ public class Storage {
      * @param schedule Modified contents of TaskList.
      * @throws DukeException thrown when IOException is caught.
      */
-    public void editFile(TaskList schedule) throws DukeException{
+    public void editFile(TaskList schedule) throws DukeException {
         try {
             checkAppend(false);
             for (Task task: schedule.getList()) {
@@ -94,7 +97,7 @@ public class Storage {
      * @param toAppend new boolean value of toAppend.
      * @throws DukeException thrown when createWriter throws DukeException.
      */
-    private void checkAppend(boolean toAppend) throws DukeException{
+    private void checkAppend(boolean toAppend) throws DukeException {
         closeWriter();
         willAppend = toAppend;
         createWriter();
@@ -139,7 +142,7 @@ public class Storage {
      * Reads txt file and updates TaskList accordingly.
      * Calls read method line by line, and gets corresponding Task.
      * Check each line to check if Task should markAsDone.
-     * @return Storage object with updated ArrayList<Task> taskList used in construction of TaskList object.
+     * @return object with updated ArrayList taskList used in construction of TaskList object.
      * @throws DukeException when read throws DukeException.
      */
     public Storage load() throws DukeException {
@@ -151,16 +154,16 @@ public class Storage {
                 String line = s.nextLine();
                 if (! line.equals("")) {
                     Task newTask = read(line.replace("\n", ""));
-                    if (line.substring(4,5).equals("\u2713")){
+                    if (line.substring(4,5).equals("\u2713")) {
                         newTask.markAsDone();
                     }
                     taskList.add(newTask);
                 }
             }
             return this;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new DukeException("File not found!");
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new DukeException("Unforseen load errors: " + e.getMessage());
         }
     }
@@ -169,7 +172,7 @@ public class Storage {
      * Called during construction method of TaskList.
      * @return ArrayList of Task
      */
-    public ArrayList<Task> getSchedule(){
+    public ArrayList<Task> getSchedule() {
         return taskList;
     }
 }

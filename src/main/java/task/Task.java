@@ -26,8 +26,8 @@ public abstract class Task {
      * @return boolean value indicating if word/phrase can be found in description.
      */
 
-    public boolean findWord(String keyword){
-        if (description.indexOf(keyword) == -1){
+    public boolean findWord(String keyword) {
+        if (description.indexOf(keyword) == -1) {
             return false;
         } else {
             return true;
@@ -46,7 +46,7 @@ public abstract class Task {
     /**
      * sets isDone value to true.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 

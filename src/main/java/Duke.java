@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * @param filePath String indicating filepath to txt file for storing and loading of  Task List.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -22,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method which is called to properly start the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

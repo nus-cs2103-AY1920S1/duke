@@ -1,11 +1,33 @@
 import java.util.Scanner;
 
+/**
+ * Date class, to store the date information of a certain task.
+ */
 public class Date {
+    /**
+     * The day portion of the Date.
+     */
     private String day;
+
+    /**
+     * The month portion of the Date.
+     */
     private String month;
+
+    /**
+     * The year portion of the Date.
+     */
     private String year;
+
+    /**
+     * The time portion of the Date.
+     */
     private String time;
 
+    /**
+     * Constructs and initializes the attributes of a new Date object.
+     * @param info The required information to retrieve date, month, year and time.
+     */
     public Date(String info) {
         Scanner sc = new Scanner(info);
         String[] info1 = sc.next().split("[/]");
@@ -16,6 +38,11 @@ public class Date {
         sc.close();
     }
 
+    /**
+     * Helps to format the date correctly.
+     * @param date date information to be formatted.
+     * @return The formatted date.
+     */
     private String getDate(String date) {
         if (date.startsWith("1") && date.length() == 2) {
             return date + "th";
@@ -30,21 +57,22 @@ public class Date {
         }
     }
 
+    /**
+     * Helps to format the month correctly.
+     * @param month month information to be formatted.
+     * @return The formatted month.
+     */
     private String getMonth(String month) {
         String[] arrayOfMonths = {"January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"};
         return arrayOfMonths[Integer.parseInt(month) - 1];
     }
 
-    private String getTime(int time) {
-        if (time > 12 ) {
-            return (time%12) + "pm";
-        } else if (time == 0){
-            return 12 + "am";
-        } else {
-            return time + "am";
-        }
-    }
+    /**
+     * Helps to format the time correctly.
+     * @param time month information to be formatted.
+     * @return The formatted time.
+     */
 
     private String getTime(String time) {
         String timing = "";
@@ -63,6 +91,11 @@ public class Date {
             return t + "am";
         }
     }
+
+    /**
+     * A String representation of a Data object, printing its fields in a format.
+     * @return Returns the formatted String representation of Data objects.
+     */
     @Override
     public String toString() {
         return String.format("%s of %s %s, %s", day, month, year, time);

@@ -4,13 +4,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The Storage class handles all reading of data from files and writing of data to
+ the files.
+ */
 public class Storage {
+    /**
+     * The file path to the text file, where data is read from and written to.
+     */
     private String filePath;
 
+    /**
+     * Constructs and initializes the attributes of a new Storage object.
+     * @param filePath The file path to the text file, where data is read from
+     and written to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads and reads data from the file specified in the file path.
+     * @return Returns the data read as a String to be processed by TaskList.
+     * @throws DukeException Throws a DukeException in the event the intended
+     file is not found at the file path.
+     */
     public String load() throws DukeException {
         try {
             File f = new File(filePath);
@@ -27,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the data retrieved from TaskList to the text file.
+     * @param list The TaskList where updated data is retrieved from, and
+     to be written to the text file.
+     */
     public void writeToFile(TaskList list) {
         try {
             FileWriter fileWriter = new FileWriter("data/duke.txt", false);

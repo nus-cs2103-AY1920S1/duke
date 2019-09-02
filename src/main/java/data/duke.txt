@@ -1,0 +1,5 @@
+1. [T][✓] do fwoc
+2. [D][✓] fwoc (by: 6th aug)
+3. [T][✘] jeanne
+4. [E][✓] fwoc (at: 6aug 6pm)
+5. [T][✘] me

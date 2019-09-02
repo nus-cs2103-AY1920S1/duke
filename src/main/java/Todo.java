@@ -5,8 +5,8 @@ public class Todo extends Task {
     }
 
     @Override
-    public String saveData() {
-        return "T | " + super.saveData();
+    public StringBuilder saveData() {
+        return new StringBuilder("T|").append(super.saveData());
     }
 
     @Override

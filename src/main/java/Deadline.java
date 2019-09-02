@@ -13,13 +13,13 @@ public class Deadline extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             time = LocalDateTime.parse(by, formatter);
         } catch (Exception err) {
-            System.err.println(err);
+            System.err.println(err.getMessage());
         }
     }
 
     @Override
-    public String saveData() {
-        return "D | " + super.saveData() + " | " + by;
+    public StringBuilder saveData() {
+        return new StringBuilder("D|").append(super.saveData()).append("|").append(by);
     }
 
     @Override

@@ -15,11 +15,11 @@ public class Task {
         isDone = true;
     }
 
-    public String saveData() {
+    public StringBuilder saveData() {
         if (isDone) {
-            return "1 | " + description;
+            return new StringBuilder("1 | ").append(description);
         }
-        return "0 | " + description;
+        return new StringBuilder("0 | ").append(description);
     }
 
     @Override

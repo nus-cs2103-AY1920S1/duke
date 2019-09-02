@@ -13,13 +13,13 @@ public class Event extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             time = LocalDateTime.parse(at, formatter);
         } catch (Exception err) {
-            System.err.println(err);
+            System.err.println(err.getMessage());
         }
     }
 
     @Override
-    public String saveData() {
-        return "E | " + super.saveData() + " | " + at;
+    public StringBuilder saveData() {
+        return new StringBuilder("E|").append(super.saveData()).append("|").append(at);
     }
 
     @Override

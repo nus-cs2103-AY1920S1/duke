@@ -1,10 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
 	static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,8 +19,32 @@ public class Duke {
         System.out.println("What can I do for you?");
         printLineS();
         ArrayList<Task> tasks = new ArrayList<Task>();
-        Task[] cmd = new Task[100];
+        ArrayList<String> filetasks = new ArrayList<String>();
+
+        String fileloc = "data/duke.txt";
+        File tempFile = new File(fileloc);
+        boolean exists = tempFile.exists();
+
+        if (tempFile.createNewFile()) { //no file yet so create
+
+		} else { // there is already a file so just print
+        	Scanner s = new Scanner(tempFile);
+        	while (s.hasNext()) {
+        		String t = s.nextLine();
+				System.out.println(t);
+				filetasks.add(t);
+			}
+        	tasks = createTasks(filetasks);
+        	// transfer the list to the new list
+		}
+
         int count = 0;
+
+        if (tasks.isEmpty()) {
+
+		} else {
+        	count = tasks.size();
+		}
 
         while (sc.hasNext()) {
             String command = sc.nextLine();
@@ -45,6 +72,7 @@ public class Duke {
             		System.out.println("Nice! I've marked this task as done: ");
             		System.out.println(t);
             		printLineS();
+            		saveFile(tasks);
             	} else if (ls[0].equals("todo")) {
             		String[] td = command.split(" ");
             		try {
@@ -66,6 +94,7 @@ public class Duke {
 	            		count++;
 	            		System.out.println("Now you have " + count + " tasks in the list.");
 	            		printLineS();
+						saveFile(tasks);
 	            	} catch (DukeException e){
 	            		System.out.println(e);
 	            	} 
@@ -94,7 +123,8 @@ public class Duke {
             		System.out.println(tasks.get(count));
             		count++;
             		System.out.println("Now you have " + count + " tasks in the list.");
-            		printLineS(); 
+            		printLineS();
+					saveFile(tasks);
             	} else if (ls[0].equals("deadline")) {
             		String[] eve = command.split(" ");
             		String com = "";
@@ -120,7 +150,8 @@ public class Duke {
             		System.out.println(tasks.get(count));
             		count++;
             		System.out.println("Now you have " + count + " tasks in the list.");
-            		printLineS(); 
+            		printLineS();
+					saveFile(tasks);
             	} else if (ls[0].equals("delete")) {
             		String dnumber = ls[1];
             		int dnum = Integer.parseInt(dnumber);
@@ -131,6 +162,7 @@ public class Duke {
             		count--;
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS();
+					saveFile(tasks);
             	} else {
             		try {
             			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -150,4 +182,95 @@ public class Duke {
         System.out.println("____________________________________________________________\n");
 
     }
+
+    public static void saveFile(ArrayList tasks) throws IOException {
+    	FileWriter fw = new FileWriter("data/duke.txt");
+		String texttoadd = "";
+		System.out.println("These will be saved");
+		for (int i = 0; i < tasks.size(); i ++) {
+			int num = i + 1;
+			String textpart = num + ". " + tasks.get(i);
+			if (i == 0) {
+				texttoadd = textpart;
+			} else {
+				texttoadd = texttoadd + "\n" + textpart;
+			}
+		}
+		try {
+			fw.write(texttoadd);
+			fw.close();
+		} catch (IOException e) {
+			System.out.println("Something went wrong: " + e.getMessage());
+		}
+	}
+
+	public static ArrayList<Task> createTasks(ArrayList<String> filetasks) {
+    	ArrayList<Task> tasks = new ArrayList<Task>();
+		while (!filetasks.isEmpty()) {
+			String tas = filetasks.remove(0);
+			String[] splittedtas = tas.split("");
+			if (splittedtas[4].equals("T")) {
+				String word = "";
+				for (int i = 10; i < splittedtas.length; i ++) {
+					word = word + splittedtas[i];
+				}
+				tasks.add(new Todo(word));
+				if (isDone(splittedtas[7])) {
+					Task t = tasks.get(tasks.size()-1);
+					t.markAsDone();
+				}
+			} else if (splittedtas[4].equals("D")) {
+				String word = "";
+				String deadline = "";
+				for (int i = 10; i < splittedtas.length; i ++) {
+					if (splittedtas[i].equals("(")) {
+						for (int j = i+5; j < splittedtas.length-1; j++) {
+							deadline = deadline + splittedtas[j];
+						}
+						break;
+					} else {
+						if (splittedtas[i+1].equals("(")) {
+
+						} else {
+							word = word + splittedtas[i];
+						}
+					}
+				}
+				tasks.add(new Deadline(word, deadline));
+				if (isDone(splittedtas[7])) {
+					Task t = tasks.get(tasks.size()-1);
+					t.markAsDone();
+				}
+			} else if (splittedtas[4].equals("E")) {
+				String word = "";
+				String date = "";
+				for (int i = 10; i < splittedtas.length; i ++) {
+					if (splittedtas[i].equals("(")) {
+						for (int j = i+5; j < splittedtas.length-1; j++) {
+							date = date + splittedtas[j];
+						}
+						break;
+					} else {
+						if (splittedtas[i+1].equals("(")) {
+
+						} else {
+							word = word + splittedtas[i];
+						}
+					}
+				}
+				tasks.add(new Event(word, date));
+				if (isDone(splittedtas[7])) {
+					Task t = tasks.get(tasks.size()-1);
+					t.markAsDone();
+				}
+			} else {
+
+			}
+		}
+		return tasks;
+	}
+
+	public static boolean isDone(String op) {
+    	return (op.equals("\u2713"));
+	}
 }

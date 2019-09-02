@@ -21,14 +21,6 @@ public class ParserTest {
     }
 
     /**
-     * Tests the deadline command using invalid inputs.
-     */
-    @Test
-    public void deadlineCommand_invalidInput_incorrectCommandResult() {
-
-    }
-
-    /**
      * Tests the deadline command using valid inputs.
      */
     @Test

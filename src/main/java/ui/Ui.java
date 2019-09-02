@@ -8,17 +8,18 @@ import java.util.Scanner;
 /**
  *  Encapsulates a user interface handler that deals with interactions with
  *  the user.
+ *
  *   @author atharvjoshi
- *   @version CS2103 AY19/20 Sem 1 iP Week 3
+ *   @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Ui {
-    /** welcome message */
+    /** welcome message. */
     private String welcomeMessage;
 
-    /** logo for ui.Duke */
+    /** logo for Duke. */
     private String logo;
 
-    /** exit message */
+    /** exit message. */
     private String exitMessage;
 
     /**
@@ -125,8 +126,8 @@ public class Ui {
      * Prints error message when user specifies an invalid non-integer index.
      */
     public void showInvalidIndexError() {
-        System.out.println("Please input an integer which is the " +
-                "index of the task you wish to mark as done.");
+        System.out.println("Please input an integer which is the "
+                + "index of the task you wish to mark as done.");
         this.showLine();
     }
 
@@ -144,8 +145,8 @@ public class Ui {
      * Prints error message when user enters incorrect date/time format.
      */
     void showInvalidDateTimeFormattingError() {
-        System.out.println("Looks like you entered the incorrect Date/Time " +
-                "format. Please follow <dd>/<mm>/<yyyy> <hhmm>");
+        System.out.println("Looks like you entered the incorrect Date/Time "
+                + "format. Please follow <dd>/<mm>/<yyyy> <hhmm>");
         this.showLine();
     }
 
@@ -164,6 +165,7 @@ public class Ui {
         System.out.println("No tasks found matching the keyword you specified!");
         this.showLine();
     }
+
     /**
      * Prints message when user marks a given task as done.
      *

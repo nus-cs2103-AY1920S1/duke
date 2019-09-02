@@ -13,23 +13,23 @@ import tasks.Todo;
 import util.TaskList;
 
 import java.text.ParseException;
+
 /**
  * Encapsulates a handler that tries to make sense of user commands.
  *
  *  @author atharvjoshi
- *  @version CS2103 AY19/20 Sem 1 iP Week 2
+ *  @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Parser {
-
     /**
-     * Enumeration of all command types supported by ui.Duke.
+     * Enumeration of all command types supported by Duke.
      */
     private enum Imperative {
         BYE, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO
     }
 
     /**
-     * Parses user input into a command executed by ui.Duke.
+     * Parses user input into a command executed by Duke.
      *
      * @param fullCommand the string entered by the user as a command
      * @return a ui.Duke-executable command
@@ -80,7 +80,8 @@ public class Parser {
 
     /**
      * Returns the string containing date/time information for deadline and
-     * event type tasks
+     * event type tasks.
+     *
      * @param command string containing task attribute information
      * @param regex the delimiter used to split the command string
      * @return string containing date/time information
@@ -108,7 +109,7 @@ public class Parser {
         String[] splitLine = line.split("-", 3);
         boolean isTaskDone = splitLine[1].equals("Y");
 
-        switch(splitLine[0]) {
+        switch (splitLine[0]) {
         case "D":
             emptyList.add(new Deadline(
                     splitTaskAttributes(splitLine[2], "-")[0],

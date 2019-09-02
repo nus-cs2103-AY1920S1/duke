@@ -5,18 +5,18 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /**
- * Encapsulates a deadline-type task handled by ui.Duke.
+ * Encapsulates a deadline-type task handled by Duke.
  *
- * A deadline differs from other tasks because it has a due date.
+ * <p> A deadline differs from other tasks because it has a due date. </p>
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 3
+ * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Deadline extends Task {
-    /** The date by which task is due */
+    /** The date by which task is due. */
     private String dueDate;
 
-    /** Date / Time converted to Date format */
+    /** Date / Time converted to Date format. */
     private Date byWhen;
 
     /**

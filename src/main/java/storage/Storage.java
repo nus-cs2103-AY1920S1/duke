@@ -16,13 +16,13 @@ import java.text.ParseException;
  * file and saving to file.
  *
  *  @author atharvjoshi
- *  @version CS2103 AY19/20 Sem 1 iP Week 3
+ *  @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Storage {
-    /** File object containing the saved task list */
+    /** File object containing the saved task list. */
     private File file;
 
-    /** v */
+    /** The string represnting file path relativ to root folder. */
     private String filePath;
 
     /**

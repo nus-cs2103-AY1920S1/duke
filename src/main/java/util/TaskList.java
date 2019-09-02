@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * Contains the task list and operations on the list.
  *
  *  @author atharvjoshi
- *  @version CS2103 AY19/20 Sem 1 iP Week 3
+ *  @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class TaskList {
-    /** Internal task list kept as an array list of task objects */
+    /** Internal task list kept as an array list of task objects. */
     private ArrayList<Task> tasks;
 
     /**
@@ -22,7 +22,9 @@ public class TaskList {
     }
 
     /**
-     * Creates a copy of a given task list.
+     * Creates a copy of the given task list.
+     *
+     * @param anotherTaskList the task list to be copied
      */
     public TaskList(TaskList anotherTaskList) {
         this.tasks = anotherTaskList.tasks;

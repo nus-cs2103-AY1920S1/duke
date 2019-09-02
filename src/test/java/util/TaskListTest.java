@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TaskListTest {
     @Test
-    void isEmptyTest(){
+    void isEmptyTest() {
         TaskList emptyList = new TaskList();
         int listSize = emptyList.size();
         assertEquals(0, listSize);

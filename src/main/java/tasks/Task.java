@@ -1,20 +1,20 @@
 package tasks;
 
 /**
- * Encapsulates a task handled by ui.Duke.
+ * Encapsulates a task handled by Duke.
  *
- * A task has a description and a status, for each of which getter methods have
- * been provided. The task status can also be updated when a task is done.
+ * <p> A task has a description and a status, for each of which getter methods have
+ * been provided. The task status can also be updated when a task is done. </p>
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 3
+ * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 
 public class Task {
-    /** The description of the task */
+    /** The description of the task. */
     private String description;
 
-    /** The status of the task - done or not done */
+    /** The status of the task - done or not done. */
     private boolean isDone;
 
     /**

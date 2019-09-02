@@ -1,13 +1,13 @@
 package tasks;
 
 /**
- * Encapsulates a todo-type task handled by ui.Duke.
+ * Encapsulates a todo-type task handled by Duke.
  *
- * A todo differs from other tasks because it has no due date, it simply has
- * a task description.
+ * <p> A todo differs from other tasks because it has no due date, it simply has
+ * a task description. </p>
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 2
+ * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Todo extends Task {
 

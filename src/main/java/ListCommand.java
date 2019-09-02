@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ListCommand implements Command {
-    private final List<Task> tasks;
+    private final TaskList tasks;
 
-    ListCommand(List<Task> tasks) {
+    ListCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 

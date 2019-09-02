@@ -6,7 +6,7 @@ public class Deadline extends TimeTask {
         super(description, time);
     }
 
-    static Command getCommand(List<Task> tasks, Storage storage) {
+    static Command getCommand(TaskList tasks, Storage storage) {
         return words -> {
             List<String> wordList = List.of(words);
             int separator = wordList.indexOf("/by");
@@ -21,7 +21,7 @@ public class Deadline extends TimeTask {
             String time = String.join(" ", wordList.subList(separator + 1, words.length));
             Task task = new Deadline(description, time);
             tasks.add(task);
-            storage.store(tasks);
+            storage.store(tasks.getAsLines());
             return List.of("Got it. I've added this task:", "  " + task,
                     "Now you have " + tasks.size() + " tasks in the list.");
         };

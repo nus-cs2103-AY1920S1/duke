@@ -68,8 +68,8 @@ public class TaskList {
 
     public List<Task> findTask(String taskDescription) {
         return taskList.stream()
-                .filter(task -> task.getDescription()
-                        .contains(taskDescription)).collect(Collectors.toList());
+                .filter(task -> task.getDescription().contains(taskDescription))
+                .collect(Collectors.toList());
 
     }
 }

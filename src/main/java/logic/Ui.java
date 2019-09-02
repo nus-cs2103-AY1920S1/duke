@@ -13,11 +13,13 @@ public class Ui {
      *
      * @param input String parameter to be wrapped and printed
      */
+
+    public static String HORIZONTAL_LINE = "____________________________________________________________\n";
     public static void printStr(String input) {
         StringBuilder sb = new StringBuilder();
-        sb.append("____________________________________________________________\n");
+        sb.append(HORIZONTAL_LINE);
         sb.append(input + "\n");
-        sb.append("____________________________________________________________\n");
+        sb.append(HORIZONTAL_LINE);
         System.out.println(sb.toString());
     }
 

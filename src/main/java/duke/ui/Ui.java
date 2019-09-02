@@ -1,48 +1,48 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 public class Ui {
-    Scanner sc = new Scanner(System.in);
+    StringBuilder outputMessage = new StringBuilder();
 
-    private static final String DIVIDER = "\t____________________________________________________________";
     private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String MESSAGE_BYE      = "Bye. Hope to see you again soon!";
 
-    public String nextCommand() {
-        return sc.nextLine();
-    }
-
-    public static void printDivider() {
-        System.out.println(DIVIDER);
+    /**
+     * Returns outputMessage to print to GUI.
+     * @return outputMessage.
+     */
+    public String getMessage() {
+        return outputMessage.toString();
     }
 
     /**
-     * Prints output in a standardised format.
-     * @param output String to be printed by Duke.
+     * Makes outputMessage empty.
      */
-    public static void printIndented(String output) {
-        StringBuilder str = new StringBuilder();
-        String[] lines = output.split("\n");
-        for (String line : lines) {
-            str.append(String.format("\t %s\n", line));
-        }
-        System.out.print(str);
+    public void resetMessage() {
+        outputMessage.setLength(0);
     }
 
     /**
-     * Prints the greeting message for starting Duke.
+     * Adds text to outputMessage for printing.
+     * @param output Text to add to outputMessage.
      */
-    public static void sayGreeting() {
-        printDivider();
-        printIndented(MESSAGE_GREETING);
-        printDivider();
+    public void append(String output) {
+        outputMessage.append(output);
+        outputMessage.append("\n");
     }
 
     /**
-     * Prints the bye message for exiting Duke.
+     * Returns the greeting message.
+     * @return Greeting message.
      */
-    public static void sayBye() {
-        printIndented(MESSAGE_BYE);
+    public String getGreeting() {
+        return MESSAGE_GREETING;
+    }
+
+    /**
+     * Returns the farewell message.
+     * @return Farewell message.
+     */
+    public String getBye() {
+        return MESSAGE_BYE;
     }
 }

@@ -25,10 +25,11 @@ public class FindCommand extends Command {
      * Executes Find command to filter the given TaskList for those that contain the search term.
      *
      * @param tasks Current TaskList.
+     * @param ui Current Ui.
      * @param storage Current Storage.
      * @throws DukeException Never.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList filteredTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(search)) {
@@ -39,13 +40,13 @@ public class FindCommand extends Command {
         StringBuilder lines = new StringBuilder();
         if (filteredTasks.isEmpty()) {
             lines.append(MESSAGE_NO_TASKS);
-            Ui.printIndented(lines.toString());
+            ui.append(lines.toString());
             return;
         }
         lines.append(MESSAGE_LIST);
         for (int i = 0; i < filteredTasks.size(); i++) {
             lines.append(String.format("%d. %s\n", i + 1, filteredTasks.get(i).toString()));
         }
-        Ui.printIndented(lines.toString());
+        ui.append(lines.toString());
     }
 }

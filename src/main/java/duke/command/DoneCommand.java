@@ -26,15 +26,16 @@ public class DoneCommand extends Command {
      * Executes Done command to mark a task from the given TaskList as done.
      *
      * @param tasks Current TaskList.
+     * @param ui Current Ui.
      * @param storage Current Storage.
      * @throws DukeException If invalid id.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskId < 1 || taskId > tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
         Task task = tasks.get(taskId - 1);
         task.markAsDone();
-        Ui.printIndented(String.format(MESSAGE_DONE, task.toString()));
+        ui.append(String.format(MESSAGE_DONE, task.toString()));
     }
 }

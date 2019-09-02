@@ -27,16 +27,17 @@ public class DeleteCommand extends Command {
      * Executes Delete command to delete a task from the given TaskList.
      *
      * @param tasks Current TaskList.
+     * @param ui Current Ui.
      * @param storage Current Storage.
      * @throws DukeException If invalid id.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskId < 1 || taskId > tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
         Task task = tasks.get(taskId - 1);
         tasks.remove(taskId - 1);
-        Ui.printIndented(String.format(MESSAGE_DELETE, task.toString(), tasks.size(),
+        ui.append(String.format(MESSAGE_DELETE, task.toString(), tasks.size(),
                 tasks.size() != 1 ? "tasks" : "task"));
     }
 }

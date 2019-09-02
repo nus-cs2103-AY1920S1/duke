@@ -13,20 +13,21 @@ public class ListCommand extends Command {
      * Executes List command to list all tasks in given TaskList.
      *
      * @param tasks Current TaskList.
+     * @param ui Current Ui.
      * @param storage Current Storage.
      * @throws DukeException Never.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         StringBuilder lines = new StringBuilder();
         if (tasks.isEmpty()) {
             lines.append(MESSAGE_NO_TASKS);
-            Ui.printIndented(lines.toString());
+            ui.append(lines.toString());
             return;
         }
         lines.append(MESSAGE_LIST);
         for (int i = 0; i < tasks.size(); i++) {
             lines.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
-        Ui.printIndented(lines.toString());
+        ui.append(lines.toString());
     }
 }

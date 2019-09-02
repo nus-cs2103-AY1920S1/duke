@@ -1,72 +1,97 @@
-import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class Duke {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Tasks> list = new ArrayList<Tasks>();
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+        Parser p = new Parser();
+        ArrayList<Tasks> listOfTasks = new ArrayList<>();
+        SaveToFile sf = new SaveToFile();
+
         while(sc.hasNext()) {
-           String next = sc.nextLine(); 
-           String[] command = next.split(" ");
-           if(command[0].equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+            String nextCmd = sc.nextLine();
+            ArrayList<String> descriptions = p.parse(nextCmd);
+            ArrayList<String> taskDescriptions = new ArrayList<>();
+            String keyword = descriptions.get(0);
+
+            if(keyword.equals("bye")) {
+                System.out.println("Bye! Hope to see you again!");
                 break;
-           } else if (command[0].equals("list")) {
-               int numOfOp = list.size();
-               for (int i = 1; i <= numOfOp; i++) {
-                   System.out.println(i + "." + list.get(i - 1));
-               }
-           } else if (command[0].equals("done")) {
-               Tasks done = list.get(Integer.parseInt(command[1]) - 1);
-               done.finishTask();
-               System.out.println("Nice! I've marked this task as done:\n " + done);
-           } else if (command[0].equals("delete")) {
-               Tasks removeThis = list.get(Integer.parseInt(command[1]) - 1);
-               System.out.println("Noted. I've removed this task:\n " + removeThis);
-               list.remove(Integer.parseInt(command[1]) - 1);
-               System.out.println("Now you have " + list.size() + " tasks in the list."); 
-           } 
-           else {
-               int index = next.lastIndexOf("/");
-               String time = "";
-               if(index != -1) {
-                   time = next.substring(index + 1);
-                   if(time.equals("")) {
-                       System.out.println("☹ OOPS!!! The time cannot be empty.");
-                       continue;
-                   }
-               }
-               String desc;
-               if(command[0].equals("deadline")) {
-                   desc = next.substring(9, index - 1) + " ";
-                   if(desc.equals(" ")) {
-                       System.out.println("☹ OOPS!!! The description for deadline cannot be empty.");
-                       continue;
-                   }
-               } else if(command[0].equals("event")) {
-                   desc = next.substring(6, index - 1) + " ";
-                   if(desc.equals(" ")) {
-                        System.out.println("☹ OOPS!!! The description for event cannot be empty.");
-                        continue;
-                   }
-               } else if(command[0].equals("todo")) {
-                   desc = next.substring(4);
-                   if (desc.equals("")) {
-                       System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                   } else {
-                       desc = desc.substring(1);
-                   }
-               } else {
-                   System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                   continue;
-               }
-               Tasks nextTask = new Tasks(desc, command[0], time); 
-               list.add(nextTask);
-               System.out.println("Got it. I've added this task:\n " + nextTask);
-           }
+            }
+
+            switch (keyword) {
+                case "list":
+                System.out.println(listOfTasks.size());
+                for(int i = 1; i <= listOfTasks.size(); i++) {
+                    System.out.println("in loop");
+                    System.out.println(i + ". " + listOfTasks.get(i - 1));
+                }
+                //System.out.println("is listing");
+                break;
+
+                case "done":
+                int indexOfTask = Integer.parseInt(descriptions.get(1));
+                listOfTasks.get(indexOfTask - 1).finishTask();
+                System.out.println("Task status updated.");
+                sf.updateFile(listOfTasks);
+                break;
+
+                case "delete":
+                int indexOfTask2 = Integer.parseInt(descriptions.get(1));
+                listOfTasks.remove(indexOfTask2 - 1);
+                System.out.println("List of tasks updated.");
+                sf.updateFile(listOfTasks);
+                break;
+
+                case "todo":
+                try {
+                    taskDescriptions.add(descriptions.get(0));
+                    taskDescriptions.add(descriptions.get(1));
+                    Tasks todo = new Tasks(taskDescriptions);
+                    listOfTasks.add(todo);
+                    sf.updateFile(listOfTasks);
+                    System.out.println("Got it, todo added to tasks");
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println("OOPS!! The description for todo cannot be empty!");
+                }  
+                break;
+
+                case "deadline":
+                try {
+                    taskDescriptions.add(descriptions.get(0));
+                    taskDescriptions.add(descriptions.get(1));
+                    taskDescriptions.add(descriptions.get(2));
+                    Tasks deadline = new Tasks(taskDescriptions);
+                    listOfTasks.add(deadline);
+                    sf.updateFile(listOfTasks);
+                    System.out.println("Got it, new deadline added to list");
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
+                }  
+                break;
+
+                case "event":
+                try {
+                    taskDescriptions.add(descriptions.get(0));
+                    taskDescriptions.add(descriptions.get(1));
+                    taskDescriptions.add(descriptions.get(2));
+                    Tasks event = new Tasks(taskDescriptions);
+                    listOfTasks.add(event);
+                    sf.updateFile(listOfTasks);
+                    System.out.println("Got it, new event added to schedule");
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
+                } 
+                break;
+
+                default:
+                System.out.println("OOPS!! I'm sorry, but I don't know what that means :-("); 
+                
+            }
+
+
+            
         }
-        
     }
 }

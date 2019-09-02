@@ -38,6 +38,10 @@ public class DukeIO {
 		}
 	}
 
+	public void sayError(DukeException e) {
+		this.say(String.format("☹ OOPS!!! %s", e.getMessage())); 
+	}
+
 	public void bindCommand(String command, Predicate<Command> handler) {
 		this.commandMap.put(command, handler);
 	}
@@ -54,7 +58,7 @@ public class DukeIO {
 		try {
 			return action.get();
 		} catch(DukeException e) {
-			this.say(String.format("☹ OOPS!!! %s", e.getMessage())); 
+			this.sayError(e);
 			return fallback;
 		} finally {
 			if(this.printingDialogBlock) {

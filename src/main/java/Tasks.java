@@ -1,22 +1,28 @@
+import java.util.ArrayList;
 
 public class Tasks {
-    String taskDesc;
-    String status;
-    String tde; 
-    //String timeOfEvent; 
-    String[] timeOfEvent;
+    ArrayList<String> taskDescription;
+    String typeOfTask;
+    String taskDetails;
+    String time;
+    int status;
 
-    public Tasks(String desc, String type, String time) {
-        taskDesc = desc;
-        status = "✗";
-        if(type.equals("todo")) {
-            tde = "T";
-        } else if(type.equals("deadline")) {
-            tde = "D";
+    public Tasks(ArrayList<String> inputList) {
+        this.taskDescription = inputList;
+        if(inputList.get(0).equals("todo")) {
+            this.typeOfTask = "T";
+            this.taskDetails = inputList.get(1);
+            this.time = "";
+        } else if(inputList.get(0).equals("deadline")) {
+                this.typeOfTask = "D";
+                this.taskDetails = inputList.get(1);
+                this.time = inputList.get(2);
         } else {
-            tde = "E";
+            this.typeOfTask = "E";
+            this.taskDetails = inputList.get(1);
+            this.time = inputList.get(2);
         }
-        timeOfEvent = time.split(" ");
+        this.status = 0;
     }
 
     String getStatus() {

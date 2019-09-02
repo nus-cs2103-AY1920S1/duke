@@ -1,13 +1,13 @@
 public class DeleteCommand extends Command {
     public DeleteCommand(String commandText) {
         super();
-        desc = commandText;
+        description = commandText;
     }
 
     public void execute(TaskList task, Ui ui, Storage storage) throws  DukeException{
             int sizeOfList = task.getNumOfTasks();
-            if (desc.matches("^\\d+")) {
-                int taskNum = Integer.parseInt(desc);
+            if (description.matches("^\\d+")) {
+                int taskNum = Integer.parseInt(description);
                 if (taskNum > sizeOfList || taskNum < 1) {
                     throw new InvalidDescriptionException("Wrong description");
                 } else {

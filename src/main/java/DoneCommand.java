@@ -1,12 +1,12 @@
 public class DoneCommand extends Command {
     public DoneCommand(String commandText) {
         super();
-        desc = commandText;
+        description = commandText;
     }
 
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
             int sizeOfList = task.getNumOfTasks();
-            String number = desc.substring(4).trim();
+            String number = description.substring(4).trim();
             if (number.matches("^\\d+")) {
                 int taskNum = Integer.parseInt(number);
                 if (taskNum > sizeOfList || taskNum < 1) {

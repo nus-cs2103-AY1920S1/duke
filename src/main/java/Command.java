@@ -1,6 +1,6 @@
 public abstract class Command {
     protected boolean isExit;
-    protected String desc;
+    protected String description;
 
     public Command() {
         isExit = false;

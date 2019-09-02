@@ -3,21 +3,21 @@ public class AddCommand extends Command {
 
     public AddCommand(String typeOfTask, String commandText) {
         super();
-        this.desc = commandText;
+        this.description = commandText;
         this.typeOfTask = typeOfTask;
     }
 
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
             switch (typeOfTask) {
                 case "todo":
-                    if (desc.equals("")) {
+                    if (description.equals("")) {
                         throw new InvalidDescriptionException("Wrong description");
                     }
-                    ui.showText(task.addTask(new ToDos(desc)));
+                    ui.showText(task.addTask(new ToDos(description)));
                     break;
 
                 case "deadline":
-                    String[] input2 = desc.trim().split("/by");
+                    String[] input2 = description.trim().split("/by");
                     if (input2.length != 2) {
                         throw new InvalidDescriptionException("Wrong description");
                     }
@@ -25,7 +25,7 @@ public class AddCommand extends Command {
                     break;
 
                 case "event":
-                    String[] input3 = desc.trim().split("/at");
+                    String[] input3 = description.trim().split("/at");
                     if (input3.length != 2) {
                         throw new InvalidDescriptionException("Wrong description");
                     }

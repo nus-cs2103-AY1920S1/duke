@@ -20,8 +20,6 @@ public abstract class Task {
         return isDone ? "1" : "0";
     }
 
-
-
     public abstract String getFormattedString();
 
     @Override

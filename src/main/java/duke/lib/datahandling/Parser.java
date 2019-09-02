@@ -1,13 +1,13 @@
-package duke.bin.datahandling;
+package duke.lib.datahandling;
 
-import duke.bin.TaskList;
-import duke.bin.UI;
-import duke.bin.common.DukeException;
-import duke.bin.common.Time;
-import duke.bin.task.Deadline;
-import duke.bin.task.Event;
-import duke.bin.task.Task;
-import duke.bin.task.ToDo;
+import duke.lib.TaskList;
+import duke.lib.UI;
+import duke.lib.common.DukeException;
+import duke.lib.common.Time;
+import duke.lib.task.Deadline;
+import duke.lib.task.Event;
+import duke.lib.task.Task;
+import duke.lib.task.ToDo;
 
 import java.util.ArrayList;
 
@@ -45,6 +45,7 @@ public class Parser {
             String[] words = fullCommand.split(" ", 2);
             String command;
             boolean moreThanOne;
+
             if (fullCommand.contains(" ")) {
                 command = words[0];
                 moreThanOne = true;
@@ -55,7 +56,7 @@ public class Parser {
 
             Task temp;
 
-            switch(command) {
+            switch (command) {
             case "find":
                 if (!moreThanOne) {
                     throw new DukeException("Sorry, you need to input something to find what you're looking for.");
@@ -73,22 +74,20 @@ public class Parser {
                 }
                 ui.displayList(list, "Here are the tasks in your list:");
                 break;
-
             case "done":
                 if (moreThanOne) {
                     String secondWord = words[1];
                     int index = Integer.parseInt(secondWord);
                     ui.display(taskList.markAsDone(index).toString(),
                             "Nice! I've marked this task as done:");
-                }
-                else {
+                } else {
                     throw new DukeException("I'm sorry, you didn't specify which index of the list you've done.");
                 }
                 break;
-
             case "delete":
                 if (!moreThanOne) {
-                    throw new DukeException("I'm sorry, you didn't specify which index of the list you want to delete.");
+                    throw new DukeException("I'm sorry, "
+                            + "you didn't specify which index of the list you want to delete.");
                 }
                 String secondWord = words[1];
                 int index = Integer.parseInt(secondWord);
@@ -96,7 +95,6 @@ public class Parser {
                         "Noted. I've removed this task:",
                         "Now you have " + taskList.getSize() + " tasks in the list.");
                 break;
-
             case "todo":
                 if (!moreThanOne) {
                     throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
@@ -106,7 +104,6 @@ public class Parser {
                 ui.display(temp.toString(), "Got it. I've added this task:",
                         "Now you have " + taskList.getSize() + " tasks in the list.");
                 break;
-
             case "deadline":
                 if (moreThanOne) {
                     String[] spl = words[1].split(" /by ", 2);
@@ -123,7 +120,6 @@ public class Parser {
                     throw new DukeException("I'm sorry, the description of your DeadLine cannot be empty.");
                 }
                 break;
-
             case "event":
                 if (moreThanOne) {
                     String[] split = words[1].split(" /at ", 2);
@@ -140,7 +136,6 @@ public class Parser {
                     throw new DukeException("I'm sorry, the description of your Event cannot be empty.");
                 }
                 break;
-
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
             }

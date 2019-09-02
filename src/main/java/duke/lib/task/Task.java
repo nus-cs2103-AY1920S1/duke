@@ -1,4 +1,4 @@
-package duke.bin.task;
+package duke.lib.task;
 
 /**
  * Abstract class for task.

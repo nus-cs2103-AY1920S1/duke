@@ -1,8 +1,8 @@
-package duke.bin;
+package duke.lib;
 
-import duke.bin.common.DukeException;
-import duke.bin.task.Task;
-import duke.bin.task.ToDo;
+import duke.lib.common.DukeException;
+import duke.lib.task.Task;
+import duke.lib.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

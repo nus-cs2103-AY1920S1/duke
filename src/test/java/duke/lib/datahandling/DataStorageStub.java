@@ -1,6 +1,6 @@
-package duke.bin.datahandling;
+package duke.lib.datahandling;
 
-import duke.bin.task.Task;
+import duke.lib.task.Task;
 
 import java.util.ArrayList;
 

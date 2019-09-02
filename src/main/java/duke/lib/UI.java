@@ -1,22 +1,24 @@
-package duke.bin;
+package duke.lib;
 
-import duke.bin.common.Constants;
-import duke.bin.common.DukeException;
-import duke.bin.task.Task;
+import duke.lib.common.DukeException;
+import duke.lib.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Handles output and input via terminal for the application
+ * Handles output and input via terminal for the application.
  */
 public class UI {
     private Scanner sc;
+    private static final String INDENTATION = "     ";
+    private static final String HORIZONTAL_LINE =
+            INDENTATION + "____________________________________________________________\n";
 
     /**
      * Default Constructor will instantiate a scanner object.
      */
-    public UI () {
+    public UI() {
         sc = new Scanner(System.in);
     }
 
@@ -51,7 +53,7 @@ public class UI {
      * @param string the message to be displayed.
      */
     public void display(String string) {
-        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + string + "\n" + Constants.HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE + INDENTATION + string + "\n" + HORIZONTAL_LINE);
     }
 
     /**
@@ -61,8 +63,8 @@ public class UI {
      * @param startPhrase the start message to be displayed before the original message.
      */
     public void display(String string, String startPhrase) {
-        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + startPhrase);
-        System.out.println(Constants.INDENTATION + string + "\n" + Constants.HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE + INDENTATION + startPhrase);
+        System.out.println(INDENTATION + string + "\n" + HORIZONTAL_LINE);
     }
 
     /**
@@ -73,9 +75,9 @@ public class UI {
      * @param endingPhrase the end message to be displayed after the original message.
      */
     public void display(String string, String startPhrase, String endingPhrase) {
-        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + startPhrase);
-        System.out.println(Constants.INDENTATION + "  " + string);
-        System.out.println(Constants.INDENTATION + endingPhrase + "\n" + Constants.HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE + INDENTATION + startPhrase);
+        System.out.println(INDENTATION + "  " + string);
+        System.out.println(INDENTATION + endingPhrase + "\n" + HORIZONTAL_LINE);
     }
 
     /**
@@ -85,13 +87,13 @@ public class UI {
      * @param startPhrase the starting message to be displayed.
      */
     public void displayList(ArrayList<Task> tasks, String startPhrase) {
-        System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + startPhrase);
+        System.out.println(HORIZONTAL_LINE + INDENTATION + startPhrase);
         int i = 1;
-        while( i < tasks.size()) {
-            System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));
+        while (i < tasks.size()) {
+            System.out.println(INDENTATION + i + ". " + tasks.get(i - 1));
             i++;
         }
-        System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));
-        System.out.println(Constants.HORIZONTAL_LINE);
+        System.out.println(INDENTATION + i + ". " + tasks.get(i - 1));
+        System.out.println(HORIZONTAL_LINE);
     }
 }

@@ -1,4 +1,4 @@
-package duke.bin.common;
+package duke.lib.common;
 
 /**
  * The Exception class used by this program inherited from Exception.

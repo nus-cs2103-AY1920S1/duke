@@ -1,7 +1,7 @@
-package duke.bin;
+package duke.lib;
 
-import duke.bin.common.DukeException;
-import duke.bin.task.Task;
+import duke.lib.common.DukeException;
+import duke.lib.task.Task;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,14 @@ import java.util.ArrayList;
  * Contains the list of tasks with operations to add, delete, etc.
  */
 public class TaskList {
-    private ArrayList<Task> textStorage = new ArrayList<>();
+    private ArrayList<Task> textStorage;
+
+    /**
+     * Default constructor for TaskList.
+     */
+    public TaskList() {
+        textStorage = new ArrayList<Task>();
+    }
 
     /**
      * Stores the given task in the list.
@@ -49,8 +56,9 @@ public class TaskList {
      */
     public Task markAsDone(int index) throws DukeException {
         --index;
-        if (index < 0 | index >= textStorage.size())
+        if (index < 0 | index >= textStorage.size()) {
             throw new DukeException("There's no Task attached to that number");
+        }
         return textStorage.get(index).completed();
     }
 
@@ -63,8 +71,9 @@ public class TaskList {
      */
     public Task delete(int index) throws DukeException {
         --index;
-        if (index < 0 | index >= textStorage.size())
+        if (index < 0 | index >= textStorage.size()) {
             throw new DukeException("There's no Task attached to that number");
+        }
         return textStorage.remove(index);
     }
 

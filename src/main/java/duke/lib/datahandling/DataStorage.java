@@ -1,17 +1,20 @@
-package duke.bin.datahandling;
+package duke.lib.datahandling;
 
-import duke.bin.common.DukeException;
-import duke.bin.common.Time;
-import duke.bin.task.Deadline;
-import duke.bin.task.Event;
-import duke.bin.task.Task;
-import duke.bin.task.ToDo;
+import duke.lib.common.DukeException;
+import duke.lib.common.Time;
+import duke.lib.task.Deadline;
+import duke.lib.task.Event;
+import duke.lib.task.Task;
+import duke.lib.task.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class DataStorage {
     private String filePath;
@@ -63,7 +66,7 @@ public class DataStorage {
             String[] spl = s.split(" ", 2);
             Task temp;
 
-            switch(type) {
+            switch (type) {
             case "T":
                 temp = new ToDo(spl[1]);
                 break;

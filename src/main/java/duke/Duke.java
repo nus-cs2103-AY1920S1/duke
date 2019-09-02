@@ -1,10 +1,10 @@
 package duke;
 
-import duke.bin.common.DukeException;
-import duke.bin.datahandling.Parser;
-import duke.bin.TaskList;
-import duke.bin.UI;
-import duke.bin.datahandling.DataStorage;
+import duke.lib.common.DukeException;
+import duke.lib.datahandling.Parser;
+import duke.lib.TaskList;
+import duke.lib.UI;
+import duke.lib.datahandling.DataStorage;
 
 /**
  * The main class of duke, which manages the running of the program.

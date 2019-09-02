@@ -1,8 +1,8 @@
-package duke.bin.datahandling;
+package duke.lib.datahandling;
 
-import duke.bin.TaskList;
-import duke.bin.UI;
-import duke.bin.common.DukeException;
+import duke.lib.TaskList;
+import duke.lib.UI;
+import duke.lib.common.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

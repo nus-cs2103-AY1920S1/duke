@@ -1,7 +1,7 @@
-package duke.bin.task;
+package duke.lib.task;
 
 public class ToDo extends Task {
-    public ToDo (String task) {
+    public ToDo(String task) {
         super(task);
     }
 

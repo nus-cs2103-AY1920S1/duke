@@ -1,4 +1,4 @@
-package duke.bin.common;
+package duke.lib.common;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
  * Time class to hold value of time with correct display.
  */
 public class Time {
-    private final String DATE_PATTERN = "dd MMMM yyyy, hh:mm a";
+    private static final String DATE_PATTERN = "dd MMMM yyyy, hh:mm a";
     private LocalDateTime date;
     private String format;
 
@@ -32,8 +32,8 @@ public class Time {
                         Integer.valueOf(stringSplit[1].substring(2)));
                 format = date.format(formatter);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-                throw new DukeException("Oops something when wrong with your date input, " +
-                        "try following this date pattern: " + DATE_PATTERN);
+                throw new DukeException("Oops something when wrong with your date input, "
+                        + "try following this date pattern: " + DATE_PATTERN);
             }
         }
     }

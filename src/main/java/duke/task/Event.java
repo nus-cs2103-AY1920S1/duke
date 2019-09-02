@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * The Event class extends Task. It is a type of task with a specified location.
  */

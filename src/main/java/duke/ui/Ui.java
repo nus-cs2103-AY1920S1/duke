@@ -1,7 +1,10 @@
+package duke.ui;
+
 /**
  * The Ui class handles the chat bot's responses to the user, namely what it should print back to the user.
  */
 
+import duke.task.Task;
 import java.util.ArrayList;
 
 public class Ui {
@@ -28,7 +31,7 @@ public class Ui {
     /**
      * Prints the welcome message and logo.
      */
-    public void showLogo() {
+    public void showWelcome() {
         System.out.println("Hello from\n" + logo);
         System.out.println(indent + line);
         System.out.println(indent + "Hello! I'm Duke.\n" + indent + "What can I do for you today?");
@@ -41,6 +44,11 @@ public class Ui {
         System.out.println(indent + "Duke has failed to load properly.");
         System.out.println(indent + line);
     }
+
+    public void showError(String message) {
+        System.out.println("☹ OOPS!!! " + message);
+    }
+
     /**
      * Prints the goodbye message.
      */
@@ -107,7 +115,7 @@ public class Ui {
     /**
      * Prints tasks that match the search keyword.
      * @param list The list of tasks.
-     * @param search The search keyword or phrase.
+     * @param search The search keyword or phrase.ZZgitZZ
      */
     public void printQuerySet(ArrayList<Task> list, String search) {
         System.out.println(indent + "Here are the matching tasks in your list:");
@@ -124,10 +132,10 @@ public class Ui {
      * Prints all tasks and index them.
      * @param tasks A TaskList object that contains the list of class.
      */
-    public void printTasks(TaskList tasks) {
-        for (int i = 0; i < tasks.getList().size(); i++) {
+    public void printTasks(ArrayList<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
             int k = i + 1;
-            System.out.println(indent + k + ". " + tasks.list.get(i).toString());
+            System.out.println(indent + k + ". " + tasks.get(i).toString());
         }
     }
 }

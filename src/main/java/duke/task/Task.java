@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Task is a class to represent a task. It contains a description of the task and its status (whether the task has been completed).
  */
@@ -5,7 +7,7 @@ public class Task {
     /**
      * The description of the task.
      */
-    protected String description;
+    public String description;
     /**
      * A boolean describing whether the task has been completed.
      */

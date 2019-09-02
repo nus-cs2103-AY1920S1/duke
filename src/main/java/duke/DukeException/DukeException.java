@@ -1,7 +1,9 @@
+package duke.DukeException;
+
 /**
  * An unchecked exception class.
  */
-class DukeException extends Exception {
+public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
     }

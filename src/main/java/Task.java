@@ -18,7 +18,7 @@ public class Task {
 			throw new DukeException(message);
 		}
 		this.description = description;
-		this.completed = false;
+		this.completed = completed;
 	}
 
 	Task(Map<String, Object> dict) {

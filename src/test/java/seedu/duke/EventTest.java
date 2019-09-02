@@ -19,7 +19,7 @@ public class EventTest {
     public void test2() {
         Date date = new GregorianCalendar(2019, 7, 28, 23, 59).getTime();
         Event event = new Event("CS2103T project", date);
-        String expected = "[E][✘] CS2103T project (at: 28 August 2019 11:59 PM)";
+        String expected = "[E][\u2718] CS2103T project (at: 28 August 2019 11:59 PM)";
         assertEquals(expected, event.toString());
     }
 

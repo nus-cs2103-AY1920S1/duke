@@ -12,8 +12,9 @@ public class DateTimeTest {
             DateTime.setDeadline("30.11.2019 05:00");
             fail();
         } catch (DukeException e){
+            System.out.println(e.getMessage());
             assertEquals("Incorrect Deadline date/time format." + System.lineSeparator() +
-                    "    Please key in date(d/MM/yyyy) time(HHmm)", e.getMessage());
+                    "    Please key in date(d/M/yyyy) time(HHmm)", e.getMessage());
         }
     }
     @Test
@@ -37,7 +38,7 @@ public class DateTimeTest {
             fail();
         } catch (DukeException e){
             assertEquals("Incorrect Event date/time format." + System.lineSeparator() +
-                    "    Please key in date(d/MM/yyyy) start_time(HHmm)-end_time(HHmm)", e.getMessage());
+                    "    Please key in date(d/M/yyyy) start_time(HHmm)-end_time(HHmm)", e.getMessage());
         }
     }
     @Test

@@ -1,0 +1,4 @@
+[T][?] training
+
+
+[E][?] testEvent (at: 20/9/2010 0500-0530)

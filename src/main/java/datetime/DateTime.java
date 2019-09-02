@@ -70,7 +70,7 @@ public class DateTime {
             return event;
         } catch (DateTimeParseException e) {
             throw new DukeException("Incorrect Event date/time format." + System.lineSeparator()
-                    + "    Please key in date(d/MM/yyyy) start_time(HHmm)-end_time(HHmm)");
+                    + "    Please key in date(d/M/yyyy) start_time(HHmm)-end_time(HHmm)");
         }
     }
 

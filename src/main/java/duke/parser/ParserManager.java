@@ -18,26 +18,22 @@ public class ParserManager {
      */
     public Optional<Command> parseCommand(TaskList taskList, String fullCommand) {
         this.taskList = taskList;
-        String[] commandDescription = fullCommand.trim().split("\\s+", 2);
-        commandDescription[0] = commandDescription[0].toLowerCase();
-        String taskName = commandDescription[0];
         try {
-            // Special case since only word "list" is required
-            if(taskName.equals("list")) { return ListCommandParser.parse(fullCommand); }
-            // Checks if command is empty
-            this.checkCommandEmpty(commandDescription);
-
-            switch (taskName) {
-            case "delete":
+            String[] commandDescription = fullCommand.trim().split("\\s+", 2);
+            Commands commandType = checkValidCommand(commandDescription);
+            switch (commandType) {
+            case LIST:
+                return ListCommandParser.parse(fullCommand);
+            case DELETE:
                 return DeleteCommandParser.parse(commandDescription, this.taskList.size());
-            case "done":
+            case DONE:
                 return DoneCommandParser.parse(commandDescription, this.taskList.size());
-            case "todo":
+            case TODO:
                 return AddCommandParser.parseWithoutDate(commandDescription);
-            case "deadline":
-            case "event":
+            case DEADLINE:
+            case EVENT:
                 return AddCommandParser.parseWithDate(commandDescription);
-            case "find":
+            case FIND:
                 return FindCommandParser.parse(commandDescription);
             default:
                 throw new UnknownCommandException(commandDescription[0]);
@@ -50,17 +46,6 @@ public class ParserManager {
             this.printInvalidStatementMessage(fullCommand);
         }
         return Optional.empty();
-    }
-
-    /**
-     * Throws error if the given command is empty
-     * @param commandDescription - array of strings containing command description
-     * @throws IncompleteCommandException - throws error if the command is not in complete format
-     */
-    private void checkCommandEmpty(String[] commandDescription) throws IncompleteCommandException {
-        if (commandDescription.length == 1) {
-            throw new IncompleteCommandException("empty", commandDescription[0]);
-        }
     }
 
     /**
@@ -77,5 +62,19 @@ public class ParserManager {
      */
     private void printInvalidStatementMessage(String fullCommand) {
         System.out.println("☹ OOPS!!! The statement: \"" + fullCommand + "\" is invalid. ");
+    }
+
+    /**
+     * Checks if the given String contains a valid command
+     * @param commandDescription - array of strings containing command description
+     * @return Commands containing valid command type
+     * @throws UnknownCommandException - thrown when given string does not match valid commands
+     */
+    private Commands checkValidCommand(String commandDescription[]) throws UnknownCommandException{
+        try {
+            return Commands.valueOf(commandDescription[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new UnknownCommandException(commandDescription[0]);
+        }
     }
 }

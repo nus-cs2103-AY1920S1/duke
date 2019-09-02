@@ -16,8 +16,10 @@ public class AddCommandParser {
      * Parse new task (without date) based on existing format
      * @param commandDescription - array of strings containing command description
      * @return Optional containing either valid command or null (when exception thrown)
+     * @throws IncompleteCommandException - throws error if the command is not in complete format
      */
-    public static Optional<Command> parseWithoutDate(String[] commandDescription) {
+    public static Optional<Command> parseWithoutDate(String[] commandDescription) throws IncompleteCommandException {
+        checkCommandEmpty(commandDescription);
         return Optional.of(new AddCommand(new ToDoTask(commandDescription[1])));
     }
 
@@ -28,6 +30,7 @@ public class AddCommandParser {
      * @throws IncompleteCommandException - throws error if the command is not in correct format
      */
     public static Optional<Command> parseWithDate(String[] commandDescription) throws UnknownCommandException  {
+        checkCommandEmpty(commandDescription);
         try {
             String[] taskArray = commandDescription[1].split("/", 2);
             String taskName = taskArray[0].trim();
@@ -46,5 +49,16 @@ public class AddCommandParser {
             throw new IncompleteCommandException("incomplete", commandDescription[0]);
         }
         return Optional.empty();
+    }
+
+    /**
+     * Throws error if the given command is empty
+     * @param commandDescription - array of strings containing command description
+     * @throws IncompleteCommandException - throws error if the command is not in complete format
+     */
+    private static void checkCommandEmpty(String[] commandDescription) throws IncompleteCommandException {
+        if (commandDescription.length == 1) {
+            throw new IncompleteCommandException("empty", commandDescription[0]);
+        }
     }
 }

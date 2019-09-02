@@ -42,7 +42,7 @@ public class Deadline extends Task {
      */
     public String getDateTimePrint() {
         LocalDateTime dateTime = this.getLocalDateTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma");
         String formattedDateTime = dateTime.format(formatter);
 
         return formattedDateTime;

@@ -5,6 +5,7 @@
 public class DoneCommand extends Command {
 
     protected int index;
+    private Task doneTask;
 
     /**
      * Represents an action to mark task as done in their task list.
@@ -33,7 +34,7 @@ public class DoneCommand extends Command {
         if (this.getIndex() < tasks.getTaskCount()) {
             Task doneTask = tasks.getTask(this.getIndex());
             tasks.markTaskDone(this.getIndex());
-            ui.showDoneMessage(doneTask);
+            this.doneTask = doneTask;
         } else {
             throw new DukeException("☹ Index is not within the list. Please enter a index within the list.");
         }
@@ -41,5 +42,11 @@ public class DoneCommand extends Command {
 
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String printStr = "Nice! I've marked this task as done:\n  " + doneTask;
+        return printStr;
     }
 }

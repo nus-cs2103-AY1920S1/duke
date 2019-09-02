@@ -5,6 +5,8 @@
 public class DeleteCommand extends Command {
 
     protected int index;
+    private Task deletedTask;
+    private TaskList tasks;
 
     /**
      * Represents an action to delete task using the index in their task list.
@@ -33,7 +35,9 @@ public class DeleteCommand extends Command {
         if (this.getIndex() < tasks.getTaskCount()) {
             Task deletedTask = tasks.getTask(this.getIndex());
             tasks.deleteTask(this.getIndex());
-            ui.showDeleteMessage(deletedTask, tasks);
+
+            this.deletedTask = deletedTask;
+            this.tasks = tasks;
         } else {
             throw new DukeException("☹ Index is not within the list. Please enter a index within the list.");
         }
@@ -41,5 +45,13 @@ public class DeleteCommand extends Command {
 
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String printStr = "Noted. I've removed this task:\n"
+                + "  " + deletedTask + "\n"
+                + "Now you have " + tasks.getTaskCount() + " tasks in the list.";
+        return printStr;
     }
 }

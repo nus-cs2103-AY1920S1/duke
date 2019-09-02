@@ -26,10 +26,20 @@ public enum TaskType {
 				return t;
 			}
 		}
-		return null;
+		return TaskType.ToDo;
 	}
 
 	public String getMarker() {
 		return marker;
+	}
+
+	public static class Builder implements ValueHandler<Task> {
+		public ObjectHandler<Task> handleObject() {
+			return ObjectHandler.DictValue.basicDict().map(dict -> {
+				String typeString = dict.getOrDefault("type", "ToDo").toString();
+				TaskType type = TaskType.fromString(typeString);
+				return type.jsonConstructor.apply(dict);
+			});
+		}
 	}
 }

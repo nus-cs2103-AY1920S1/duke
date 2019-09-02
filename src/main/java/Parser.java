@@ -18,7 +18,7 @@ public class Parser {
      * @throws DukeException when the input is missing information or
      *                       in the wrong format
      */
-    @SuppressWarnings("checkstyle:FallThrough")
+
     public static Command parse(String command) throws DukeException {
         String[] commandSplit = command.split(" ");
         String type = commandSplit[0];

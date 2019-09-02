@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextInputDialog;
 
 /**

@@ -17,13 +17,13 @@ public class Task {
     public boolean getIsCorrectFormat() {
         return isCorrectFormat;
     }
+
     /**
      * Returns tick or cross symbol.
      *
      * @return A tick or cross to symbolize whether the task has been done.
      */
     public String getStatusIcon() {
-        //System.out.println("\u2713");
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -39,7 +39,6 @@ public class Task {
      * has added the task into the list.
      */
     public void printGI() {
-        //Ui temp = new Ui();
         Ui.printLine();
         Ui.printIndent();
         System.out.println("Got it. I've added this task:");
@@ -53,7 +52,8 @@ public class Task {
      */
     public void printNumOfTasks() throws IOException {
         Ui.printIndent();
-        System.out.println("Now you have " + Ui.getNumOfTasks() + " tasks in the list.");
+        System.out.println("Now you have " +
+                Ui.getNumOfTasks() + " tasks in the list.");
         Ui.printLine();
     }
 
@@ -93,7 +93,6 @@ public class Task {
                 }
                 isCorrectFormat = true;
                 formatted = dayInteger + endOfDate + " of " + month + " " + year + ", " + time;
-
             } catch (ParseException e) {
                 Ui.printIndent();
                 System.out.println(e.getMessage());

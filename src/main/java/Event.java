@@ -11,7 +11,6 @@ public class Event extends Task {
         this.when = when;
     }
 
-
     @Override
     public String toString() {
         String date = formatDate(when);

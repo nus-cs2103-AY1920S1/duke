@@ -16,8 +16,10 @@ public class Storage {
      *
      * @param filepath File that the task is added to.
      * @param textToAdd Tasks that needs to be added.
-     * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason
+     * @throws IOException If the named file exists but
+     * is a directory rather than a regular file,
+     * does not exist but cannot be created, or
+     * cannot be opened for any other reason.
      */
     public void addToFile(String filepath, String textToAdd) throws IOException {
             FileWriter typer = new FileWriter(filepath, true);
@@ -31,8 +33,10 @@ public class Storage {
      *
      * @param filepath File that the task is added to.
      * @param textToAdd Tasks that needs to be added.
-     * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     * @throws IOException If the named file exists but
+     * is a directory rather than a regular file,
+     * does not exist but cannot be created, or
+     * cannot be opened for any other reason.
      */
     public void writeToFile(String filepath, String textToAdd) throws IOException {
         FileWriter typer = new FileWriter(filepath);
@@ -45,19 +49,19 @@ public class Storage {
      *
      * @param filename File that the tasks are in.
      * @return Returns the number of tasks.
-     * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     * @throws IOException If the named file exists but
+     * is a directory rather than a regular file,
+     * does not exist but cannot be created, or
+     * cannot be opened for any other reason.
      */
     public static int countLines(String filename) throws IOException {
         try (InputStream inputs = new BufferedInputStream(new FileInputStream(filename))) {
             byte[] characters = new byte[1024];
-
             int readCharacters = inputs.read(characters);
             if (readCharacters == -1) {
                 // no lines to read
                 return 0;
             }
-
             int count = 0;
             while (readCharacters == 1024) {
                 for (int i = 0; i < 1024; ) {
@@ -67,10 +71,8 @@ public class Storage {
                 }
                 readCharacters = inputs.read(characters);
             }
-
             // count remaining characters
             while (readCharacters != -1) {
-                //System.out.println(readCharacters);
                 for (int i = 0; i < readCharacters; ++i) {
                     if (characters[i] == '\n') {
                         ++count;
@@ -102,12 +104,14 @@ public class Storage {
                         break;
                     case "D":
                         int byIndex = task.indexOf("(");
-                        Task deadline = new Deadline(task.substring(spaceIndex, byIndex - 1), task.substring(byIndex + 4));
+                        Task deadline = new Deadline(task.substring(spaceIndex, byIndex - 1),
+                                task.substring(byIndex + 4));
                         taskList.add(deadline);
                         break;
                     case "E":
                         int atIndex = task.indexOf("(");
-                        Task event = new Event(task.substring(spaceIndex, atIndex - 1), task.substring(atIndex + 4));
+                        Task event = new Event(task.substring(spaceIndex, atIndex - 1),
+                                task.substring(atIndex + 4));
                         taskList.add(event);
                         break;
                 }

@@ -18,10 +18,23 @@ public class Storage {
      * @param filepath refers to the file path of TaskList
      */
 
+
     public Storage (String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * WriteToFile method to only be used by Storage class.
+     * Saves the taskslist to the file.
+     * @param filePath the directory of the TaskList file, in the form of a String
+     * @param textToAdd text that is meant to be appended
+     * @throws IOException
+     */
+    private void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // boolean param to append and not overwrite
+        fw.append(textToAdd);
+        fw.close();
+    }
     /**
      * Loads up the tasklist from the saved file in the harddisk.
      * @return ArrayList of tasks.
@@ -66,22 +79,22 @@ public class Storage {
         return tasks;
     }
 
-    public void writeToHardDisk() {
+    public void writeToHardDisk(TaskList tasks) throws DukeException{
         try {
             String taskListFilePath = "C:\\repos\\duke\\out\\data\\TaskList.txt";
             FileWriter fw = new FileWriter (taskListFilePath);
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i) instanceof Deadline) {
-                    writeToFile(taskListFilePath, "D | " + tasks.get(i).isDone() + " | "
-                            + tasks.get(i).getTask() + " | " + ((Deadline) tasks.get(i)).getDueDate());
-                } else if (tasks.get(i) instanceof Event) {
-                    writeToFile(taskListFilePath, "E | " + tasks.get(i).isDone() + " | "
-                            + tasks.get(i).getTask() + " | " + ((Event) tasks.get(i)).getDueDate());
+            for (int i = 0; i < tasks.getSize(); i++) {
+                if (tasks.getTask(i) instanceof Deadline) {
+                    writeToFile(taskListFilePath, "D | " + tasks.getTask(i).isDone() + " | "
+                            + tasks.getTask(i).getTask() + " | " + ((Deadline) tasks.getTask(i)).getDueDate());
+                } else if (tasks.getSize(i) instanceof Event) {
+                    writeToFile(taskListFilePath, "E | " + tasks.getTask(i).isDone() + " | "
+                            + tasks.getTask(i).getTask() + " | " + ((Event) tasks.getTask(i)).getDueDate());
                 } else {
-                    writeToFile(taskListFilePath, "T | " + tasks.get(i).isDone() + " | "
-                            + tasks.get(i).getTask());
+                    writeToFile(taskListFilePath, "T | " + tasks.getTask(i).isDone() + " | "
+                            + tasks.getTask(i).getTask());
                 }
-                if (i != tasks.size() - 1) {
+                if (i != tasks.getSize() - 1) {
                     writeToFile(taskListFilePath, "\n");
                 }
             }

@@ -16,6 +16,14 @@ public class TaskList {
     }
 
     /**
+     * To add a task into the tasklist
+     * @param task to be added
+     */
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
+
+    /**
      * To delete a certain task
      * @param task to be deleted
      */
@@ -35,7 +43,7 @@ public class TaskList {
     /**
      * Prints a list of the tasklist
      */
-    public void list() {
+    public void showList() {
         // prints a list of all tasks stored in this tasklist
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + ". " + tasks.get(i));

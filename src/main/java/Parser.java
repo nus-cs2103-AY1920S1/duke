@@ -6,6 +6,11 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the sentence entered by the user and returns various commands
+     * @param input by the user
+     * @return other commands
+     */
     // parse the command string keyed in by the user
     public static Command parse (String input) {
         String[] userInput = input.split(" ", 2);

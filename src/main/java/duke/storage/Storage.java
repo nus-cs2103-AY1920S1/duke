@@ -1,8 +1,8 @@
-package Duke.storage;
+package duke.storage;
 
-import Duke.exception.DukeException;
-import Duke.task.*;
-import Duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.task.*;
+import duke.parser.Parser;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

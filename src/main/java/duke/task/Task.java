@@ -1,5 +1,5 @@
-package Duke.task;
-import Duke.exception.DukeException;
+package duke.task;
+import duke.exception.DukeException;
 
 public abstract class Task {
     protected String description;

@@ -1,4 +1,6 @@
-//did not account for inputs with space before taskType. "   todo" smart
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -40,7 +42,7 @@ public class Duke {
                 case TODO:
                 case EVENT:
                 case DEADLINE:
-                    user.addTask();
+                    user.addTask();  //DateTimeParseDukeException might occur here. How to show in code?
                     user.updateSaveFile();
                     break;
                 case DONE:
@@ -60,7 +62,7 @@ public class Duke {
                     break;
                 }
                 inputErrors = true;
-            } catch (UnknownInputException | BadInputException err) {
+            } catch (UnknownInputException | BadInputException | DateTimeParseDukeException err) {
                 inputErrors = false;
             }
         } while (!user.inputIsBye() || !inputErrors); //only exit program, when user inputs bye. otherwise keep trying
@@ -100,10 +102,19 @@ class Task {
 
 class Deadline extends Task {
     //formatting of inputs is left in User class
-    private String by;
-    Deadline(String description, String by) {
+    protected LocalDateTime by;
+    public Deadline(String description, String by) throws DateTimeParseDukeException {
         super(description);
-        this.by = by;
+
+        //@@author Shi Hao Yap(parse) and CarbonGrid(Exception)
+        //realised I should make life easier by restricting input formats instead of accounting for all types.
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            this.by = LocalDateTime.parse(by.trim(), format1);
+        } catch (DateTimeParseException err) {
+            throw new DateTimeParseDukeException();
+        }
+        //@@author
     }
 
     public String getDescription() {
@@ -116,10 +127,18 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    private String at;
-    Event(String description, String at) {
+    protected LocalDateTime at;
+    public Event(String description, String at) throws DateTimeParseDukeException {
         super(description);
-        this.at = at;
+
+        //@@author Shi Hao Yap(parse) and CarbonGrid(Exception)
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            this.at = LocalDateTime.parse(at.trim(), format1);
+        } catch (DateTimeParseException err) {
+            throw new DateTimeParseDukeException();
+        }
+        //@@author
     }
 
     public String getDescription() {
@@ -202,7 +221,7 @@ class User {
         return true;
     }
 
-    void addTask() { //addTask/event.deadline
+    void addTask() throws DateTimeParseDukeException { //addTask/event.deadline
         //todo: first space to last char
         //event/deadline: first space to "/", after "/" to last char
         TaskType taskType = this.getTaskType(); //used just for switchcase.
@@ -398,5 +417,11 @@ class BadInputException extends Exception {
         System.out.println("    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! The description of a " + i + " cannot be empty.\n" +
                 "    ____________________________________________________________\n");
+    }
+}
+
+class DateTimeParseDukeException extends Exception {
+    public DateTimeParseDukeException() {
+        System.out.println("    Please follow according to the date format: dd/MM/yyyy HHmm\n");
     }
 }

@@ -16,6 +16,10 @@ public class TodoCommand extends Command {
     @Override
     public void execute(List<Task> tasks) {
         tasks.add(todo);
-        echo(new String[]{"added: " + todo.toString()});
+        echo(new String[] {
+            "Got it. I've added this task:",
+            "  " + todo.toString(),
+            "Now you have " + tasks.size() + " tasks in the list."
+        });
     }
 }

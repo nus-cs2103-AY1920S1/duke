@@ -15,7 +15,10 @@ public class DoneCommand extends Command {
     @Override
     public void execute(List<Task> tasks) {
         tasks.get(taskId).markAsDone();
-        echo(new String[]{"Nice! I've marked this task as done:",
-                tasks.get(taskId).toString()});
+        echo(
+            new String[] {
+                "Nice! I've marked this task as done:",
+                "  " + tasks.get(taskId).toString()
+            });
     }
 }

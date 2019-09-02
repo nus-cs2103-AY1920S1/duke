@@ -16,6 +16,10 @@ public class EventCommand extends Command {
     @Override
     public void execute(List<Task> tasks) {
         tasks.add(event);
-        echo(new String[]{"added: " + event.toString()});
+        echo(new String[] {
+            "Got it. I've added this task:",
+            "  " + event.toString(),
+            "Now you have " + tasks.size() + " tasks in the list."
+        });
     }
 }

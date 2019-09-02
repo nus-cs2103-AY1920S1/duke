@@ -16,7 +16,12 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(List<Task> tasks) {
         tasks.add(deadline);
-        echo(new String[]{"added: " + deadline.toString()});
+        echo(
+            new String[] {
+                "Got it. I've added this task:",
+                "  " + deadline.toString(),
+                "Now you have " + tasks.size() + " tasks in the list."
+            });
     }
 }
 

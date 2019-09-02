@@ -3,14 +3,27 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Main class for the Duke application.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private TextUi ui;
+
+    /**
+     * Provides a constructor with zero parameters for JavaFX Launcher
+     * to use.
+     */
+    public Duke() {
+        // empty constructor for JavaFX to work
+    }
 
     /**
      * Sets up Duke's user interface, storage, and task list.
@@ -26,6 +39,20 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Sets the stage and scene for JavaFX, using the given Stage.
+     *
+     * @param stage     Stage to be set
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Welcome to Duke!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show(); 
     }
 
     /**

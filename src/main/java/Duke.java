@@ -1,14 +1,16 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+/** Class to represent Duke. */
+public class Duke extends Application {
 
     // class variables
-    UI ui;
-    Parser parser;
-    Storage storage;
-    TaskList tl;
+    private UI ui;
+    private Parser parser;
+    private Storage storage;
+    private TaskList tl;
 
     /**
      * Class constructor for the Duke class.
@@ -93,5 +95,17 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+    }
+
+    /**
+     * Function which helps execute JavaFX.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

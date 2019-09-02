@@ -1,16 +1,8 @@
 package seedu.duke;
 
-import seedu.duke.commands.Command;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.DoneCommand;
-import seedu.duke.commands.ByeCommand;
-import seedu.duke.commands.DeadlineCommand;
-import seedu.duke.commands.EventCommand;
-import seedu.duke.commands.TodoCommand;
+import seedu.duke.commands.*;
 
 
-import seedu.duke.exceptions.InsufficientArgumentException;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.trackables.Deadline;
@@ -36,6 +28,7 @@ public class Duke {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
+        DELETE("delete"),
         BYE("bye");
 
         private final String command;
@@ -51,6 +44,7 @@ public class Duke {
     private static final String TODO_PATTERN = "(todo)(?=\\s)\\s([\\w\\D]+)";
     private static final String DEADLINE_PATTERN = "(deadline)(?=\\s)\\s([\\w\\D]+(?=\\s/by\\s))\\s/by\\s([\\w\\D]+)";
     private static final String EVENT_PATTERN = "(event)(?=\\s)\\s([\\w\\D]+(?=\\s/at\\s))\\s/at\\s([\\w\\D]+)";
+    private static final String DELETE_PATTEN = "(delete)(?=\\s)\\s([\\d]+)";
     private static final String BYE_PATTERN = "(bye)";
 
 
@@ -125,14 +119,21 @@ public class Duke {
                 commandToExecute = new EventCommand(new Event(matcher.group(2), matcher.group(3)));
             } else if (command == CommandName.DEADLINE) {
                 commandToExecute = new DeadlineCommand(new Deadline(matcher.group(2),matcher.group(3)));
-            } else if (command == CommandName.BYE) {
+            } else if (command == CommandName.DELETE) {
+                try {
+                    int taskId = Integer.parseInt(matcher.group(2));
+                    taskList.get(taskId-1);
+                    commandToExecute = new DeleteCommand(taskId);
+                } catch (IndexOutOfBoundsException ibx) {
+                    throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
+                }            } else if (command == CommandName.BYE) {
                 commandToExecute = new ByeCommand();
             } else {
                 // Code should never reach here. If it does, return to caller.
                 return;
             }
         } else {
-            throw new InvalidArgumentException("Invalid or missing arguments in command " + command.name(), null);
+            throw new InvalidArgumentException("Invalid or missing arguments in command " + command.name() + ".", null);
         }
         commandToExecute.execute(taskList);
     }
@@ -159,11 +160,13 @@ public class Duke {
         case DEADLINE:
             pattern = DEADLINE_PATTERN;
             break;
+        case DELETE:
+            pattern = DELETE_PATTEN;
+            break;
         case BYE:
             pattern = BYE_PATTERN;
             break;
         default:
-            System.out.println("No such command");
             break;
         }
         return pattern;

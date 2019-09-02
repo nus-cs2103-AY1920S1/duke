@@ -3,5 +3,5 @@ D / 1 / return book / June 6th
 E / 1 / project meeting / Aug 6th 2-4pm
 T / 0 / read book
 T / 0 / aaaa
-E / 0 / aaa / asds
-T / 0 / readb
+T / 1 / readbk
+D / 0 / aaaa / 1

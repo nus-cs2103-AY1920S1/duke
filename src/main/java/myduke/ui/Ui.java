@@ -1,4 +1,4 @@
-package myduke.core;
+package myduke.ui;
 
 import java.util.List;
 import java.util.Scanner;

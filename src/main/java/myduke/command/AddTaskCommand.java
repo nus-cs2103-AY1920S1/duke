@@ -2,8 +2,8 @@ package myduke.command;
 
 import java.util.Scanner;
 
-import myduke.core.StorageManager;
-import myduke.core.Ui;
+import myduke.storage.StorageManager;
+import myduke.ui.Ui;
 import myduke.exception.DukeException;
 import myduke.exception.DukeIllegalArgumentException;
 import myduke.task.Deadline;

@@ -1,7 +1,7 @@
 import myduke.command.Command;
 import myduke.command.CommandParser;
-import myduke.core.Ui;
-import myduke.core.StorageManager;
+import myduke.ui.Ui;
+import myduke.storage.StorageManager;
 import myduke.task.TaskList;
 
 /**

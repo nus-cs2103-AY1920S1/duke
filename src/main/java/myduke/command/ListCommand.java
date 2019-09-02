@@ -1,7 +1,7 @@
 package myduke.command;
 
-import myduke.core.StorageManager;
-import myduke.core.Ui;
+import myduke.storage.StorageManager;
+import myduke.ui.Ui;
 import myduke.exception.DukeException;
 import myduke.task.TaskList;
 

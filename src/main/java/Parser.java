@@ -9,7 +9,10 @@ public class Parser {
         String[] separated = s.split(" ");
         if(separated.length == 1) {
             output.add(separated[0]);
-            //System.out.println("end of parser");
+            return output;
+        } else if(separated.length == 2) {
+            output.add(separated[0]);
+            output.add(separated[1]);
             return output;
         } else {
             int index = 1;
@@ -25,14 +28,11 @@ public class Parser {
                         break;
                     }
                 } else {
-                    //System.out.println("breaking");
                     break;
                 }
             }
-            //System.out.println("out of first loop");
             output.add(sb.toString());
             sb.setLength(0);
-            //System.out.println(sb.length());
             while(index < separated.length) {
                 if(index != separated.length - 1) {
                     sb.append(separated[index]);
@@ -47,8 +47,6 @@ public class Parser {
                 output.add(sb.toString());
             }
         }
-        //System.out.println("end of parser");
-        //System.out.println(output.get(1));
         return output;
     } 
 

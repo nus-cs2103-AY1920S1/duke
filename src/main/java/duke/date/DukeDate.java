@@ -224,10 +224,10 @@ public class DukeDate {
 
     /**
      * Formats this DukeDate into a String.
-     * The format is "dd MMM, YYYY, hh:mm a"
+     * The format is "dd Month, YYYY, hh:mm a"
      * <ul>
-     *     <li>MMM - the month written as a literal.
-     *     <li>a   - the AM/PM marker
+     *     <li>Month - the month written as a literal.
+     *     <li>a - the AM/PM marker
      * </ul>
      *
      * @return This DukeDate formatted into a String.

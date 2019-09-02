@@ -45,4 +45,8 @@ public class Task {
     public void taskDone(){
         done = true;
     }
+
+    public String getCommand(){
+        return command;
+    }
 }

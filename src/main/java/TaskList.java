@@ -92,4 +92,21 @@ public class TaskList {
     public void add(Task newTask){
         list.add(newTask);
     }
+
+    /**
+     * to retrieve the Task
+     * @param x is the digit of the task in the list
+     * @return the Task
+     */
+    public Task get(int x){
+        return list.get(x);
+    }
+
+    /**
+     * checks whether list is empty
+     * @return boolean value
+     */
+    public boolean isEmpty(){
+        return list.isEmpty();
+    }
 }

@@ -40,6 +40,8 @@ public class Ui {
                 parser.delete(command);
             } else if (command.equals("list")){                                                                         //IF LIST
                 tasks.printForList();
+            } else if(words[0].equals("find")){
+                parser.find(command);
             } else {
                 try {
                     String[]splitWords = command.trim().split("\\s",2);

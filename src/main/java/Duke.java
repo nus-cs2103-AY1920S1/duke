@@ -3,21 +3,17 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.*;
 
+import UI.UI;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("     ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "     ____________________________________________________________\n");
+        final UI ui = new UI();
 
-        Scanner sc = new Scanner(System.in);
+        ui.printLogo();
+        ui.printData("Hello! I'm Duke\n" +
+                            "What can I do for you?\n");
+
         ArrayList<String> data = new ArrayList<String>();
         ArrayList<String> done = new ArrayList<String>();
         ArrayList<String> type = new ArrayList<String>();
@@ -50,31 +46,30 @@ public class Duke {
 
 
         do{
-            String input = sc.nextLine();
+            String input = ui.nextLine();
 
             if(input.equals("bye")){
-                System.out.println("     ____________________________________________________________\n" +
-                        "     Bye. Hope to see you again soon!\n" +
-                        "     ____________________________________________________________");
+                ui.printData("Bye. Hope to see you again soon!");
                 break;
             } else if(input.equals("list")) {
                 int i;
-                System.out.println("     ____________________________________________________________\n");
-                for(i = 0; i < data.size(); i++){
-                    System.out.print("     "); // + (i + 1) + ". [" + type.get(i) + "][" + done.get(i) + "] " + data.get(i));
-                    System.out.print((i + 1) + ". ");
-                    System.out.print("[" + type.get(i) + "]");
-                    System.out.print("[" + done.get(i) + "]");
-                    System.out.print(" " + data.get(i));
-                    if(type.get(i).equals("D")){
-                        System.out.print(" (by: " + details.get(i) + ")");
-                    } else if(type.get(i).equals("E")){
-                        System.out.print(" (at: " + details.get(i) + ")");
-                    }
 
-                    System.out.println();
+                String content = "";
+
+                for(i = 0; i < data.size(); i++){
+                    content.concat((i + 1) + ". ");
+                    content.concat("[" + type.get(i) + "]");
+                    content.concat("[" + done.get(i) + "]");
+                    content.concat(" " + data.get(i));
+                    if(type.get(i).equals("D")){
+                        content.concat(" (by: " + details.get(i) + ")");
+                    } else if(type.get(i).equals("E")){
+                        content.concat(" (at: " + details.get(i) + ")");
+                    }
+                    content.concat("\n");
                 }
-                System.out.println("     ____________________________________________________________");
+
+                ui.printData(content);
 
                 try{
                     PrintWriter writer = new PrintWriter("savefile.txt", "UTF-8");
@@ -121,42 +116,39 @@ public class Duke {
 
                 done.set(index - 1, "✓");
 
-                System.out.println("     ____________________________________________________________");
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("     [" + done.get(index - 1) + "] " + data.get(index - 1));
-                System.out.println("     ____________________________________________________________");
+                String content = "Nice! I've marked this task as done:\n" +
+                                "[" + done.get(index - 1) + "] " + data.get(index - 1) +"\n";
+
+                ui.printData(content);
 
             } else if(input.startsWith("delete")){
                 String[] sp = input.split(" ", 2);
                 int index = Integer.parseInt(sp[1]);
 
-                System.out.println("     ____________________________________________________________");
-                System.out.println("     Noted. I've removed this task:");
-                System.out.print("       [" + type.get(index - 1) + "][" + done.get(index - 1) + "] " + data.get(index - 1));
+                String content = "";
+                content.concat("Noted. I've removed this task:\n");
+                content.concat("[" + type.get(index - 1) + "][" + done.get(index - 1) + "] " + data.get(index - 1));
                 if(type.get(index - 1).equals("D")){
-                    System.out.print(" (by: " + details.get(index - 1) + ")");
+                    content.concat(" (by: " + details.get(index - 1) + ")");
                 } else if (type.get(index - 1).equals("E")){
-                    System.out.print(" (at: " + details.get(index - 1) + ")");
+                    content.concat(" (at: " + details.get(index - 1) + ")");
                 }
-                System.out.println();
+                content.concat("\n");
 
                 data.remove(index - 1);
                 type.remove(index - 1);
                 done.remove(index - 1);
                 details.remove(index - 1);
 
-                System.out.println("     You now have " + data.size() + " tasks in this list");
-                System.out.println("     ____________________________________________________________");
-
+                content.concat("You now have " + data.size() + " tasks in this list\n");
+                ui.printData(content);
 
 
             } else if(input.startsWith("todo")) {
                 String[] sp = input.split(" ", 2);
 
                 if(sp.length < 2){
-                    System.out.println("     ____________________________________________________________");
-                    System.out.println("     OOPS! The description of a todo cannot be empty.");
-                    System.out.println("     ____________________________________________________________");
+                    ui.printData("OOPS! The description of a todo cannot be empty.\n");
                     continue;
                 }
 
@@ -165,12 +157,13 @@ public class Duke {
                 done.add("✗");
                 type.add("T");
 
-                System.out.println("     ____________________________________________________________");
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("        [T][✗] " + sp[1]);
-                System.out.println("     Now you have " + data.size() + " tasks in this list");
-                System.out.println("     ____________________________________________________________");
+                String content = "";
 
+                content.concat("Got it. I've added this task:\n");
+                content.concat("[T][✗] " + sp[1] +'\n');
+                content.concat("Now you have " + data.size() + " tasks in this list\n");
+
+                ui.printData(content);
 
 
             } else if(input.startsWith("deadline")) {
@@ -233,19 +226,19 @@ public class Duke {
                 done.add("✗");
                 type.add("D");
 
-                System.out.println("     ____________________________________________________________");
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("        [D][✗] " + sp2[0] + " (by: " + sp2[1] + ")");
-                System.out.println("     Now you have " + data.size() + " tasks in this list");
-                System.out.println("     ____________________________________________________________");
+                String content = "";
+
+                content.concat("Got it. I've added this task:\n");
+                content.concat("[D][✗] " + sp2[0] + " (by: " + sp2[1] + ")\n");
+                content.concat("Now you have " + data.size() + " tasks in this list\n");
+
+                ui.printData(content);
 
             } else if(input.startsWith("event")) {
                 String[] sp = input.split(" ", 2);
 
                 if(sp.length < 2){
-                    System.out.println("     ____________________________________________________________");
-                    System.out.println("     OOPS!!! The description of a event cannot be empty.");
-                    System.out.println("     ____________________________________________________________");
+                    ui.printData("OOPS!!! The description of a event cannot be empty.");
                     continue;
                 }
 
@@ -256,20 +249,20 @@ public class Duke {
                 done.add("✗");
                 type.add("E");
 
-                System.out.println("     ____________________________________________________________");
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("        [E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
-                System.out.println("     Now you have " + data.size() + " tasks in this list");
-                System.out.println("     ____________________________________________________________");
+                String content = "";
+
+                content.concat("Got it. I've added this task:");
+                content.concat("[E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
+                content.concat("Now you have " + data.size() + " tasks in this list");
+
+                ui.printData(content);
 
             } else if(input.startsWith("find")) {
 
                 String[] sp = input.split(" ", 2);
 
                 if(sp.length < 2){
-                    System.out.println("     ____________________________________________________________");
-                    System.out.println("     OOPS!!! The description of a find cannot be empty.");
-                    System.out.println("     ____________________________________________________________");
+                    ui.printData("OOPS!!! The description of a find cannot be empty.");
                     continue;
                 }
 
@@ -280,28 +273,26 @@ public class Duke {
                         indexes.add(i);
                     }
                 }
-                System.out.println("     ____________________________________________________________\n");
-
+                String content = "";
                 for(i = 0; i < indexes.size(); i++) {
                     System.out.print("     ");
-                    System.out.print((i + 1) + ". ");
-                    System.out.print("[" + type.get(indexes.get(i)) + "]");
-                    System.out.print("[" + done.get(indexes.get(i)) + "]");
-                    System.out.print(" " + data.get(indexes.get(i)));
+                    content.concat((i + 1) + ". ");
+                    content.concat("[" + type.get(indexes.get(i)) + "]");
+                    content.concat("[" + done.get(indexes.get(i)) + "]");
+                    content.concat(" " + data.get(indexes.get(i)));
                     if(type.get(indexes.get(i)).equals("D")){
-                        System.out.print(" (by: " + details.get(indexes.get(i)) + ")");
+                        content.concat(" (by: " + details.get(indexes.get(i)) + ")");
                     } else if(type.get(i).equals("E")){
-                        System.out.print(" (at: " + details.get(indexes.get(i)) + ")");
+                        content.concat(" (at: " + details.get(indexes.get(i)) + ")");
                     }
-                    System.out.println();
-                    System.out.println("     ____________________________________________________________");
+                    content.concat("\n");
                 }
+                ui.printData(content);
 
 
             } else {
-                    System.out.println("     ____________________________________________________________\n" +
-                            "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                            "     ____________________________________________________________");
+
+                ui.printData("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
 
         } while(true);

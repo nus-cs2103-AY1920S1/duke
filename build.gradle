@@ -39,5 +39,5 @@ application {
     // Change this to your main class.
     //mainClassName = "java/Duke";
 //    mainClassName = "src/main/java/Duke.java"
-    mainClassName = "Duke";
+    mainClassName = "Launcher";
 }

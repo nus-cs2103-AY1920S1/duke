@@ -17,6 +17,14 @@ public class TaskList {
         this.listString = "";
     }
 
+    public TaskList(ArrayList<Task> tasklist) {
+        this.list = new ArrayList<>();
+        this.listString = "";
+        for(Task task : tasklist) {
+            addTask(task);
+        }
+    }
+
     public ArrayList<Task> getList() {
         return list;
     }

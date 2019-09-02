@@ -32,6 +32,10 @@ public class Ui {
         printIndentedString("Bye. Hope to see you again soon!", INDENT);
     }
 
+    public void showLoadingError() {
+        printIndentedString("Loading error! New file created.", INDENT);
+    }
+
     public void printError(String errorMessage) {
         printIndentedString(errorMessage, INDENT);
     }

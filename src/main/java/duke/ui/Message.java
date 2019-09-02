@@ -21,7 +21,7 @@ public class Message {
     }
 
     public static String formatErrorMsg(String errorMsg) {
-        return String.format("\u2639 OOPS!!! %s", errorMsg); // show the frowning face
+        return String.format("☹ OOPS!!! %s", errorMsg);
     }
 
     public static String concatLines(String... lines) {

@@ -17,8 +17,6 @@ import static duke.ui.Message.getTaskTotalMsg;
  * Adds a task to the task list.
  */
 public class AddCommand extends Command {
-    private String taskType;
-    private String taskParams;
     private Task newTask;
 
     /**
@@ -26,13 +24,7 @@ public class AddCommand extends Command {
      *
      * @throws DukeException if any of the arguments are invalid
      */
-    public AddCommand(String taskType, String taskParams) {
-        this.taskType = taskType;
-        this.taskParams = taskParams;
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public AddCommand(String taskType, String taskParams) throws DukeException {
         switch (taskType) {
         case "todo":
             this.newTask = new Todo(taskParams);
@@ -66,6 +58,10 @@ public class AddCommand extends Command {
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(newTask);
         storage.save(tasks);
         return concatLines(MESSAGE_ADD, newTask.getIndentedFormat(), getTaskTotalMsg(tasks));

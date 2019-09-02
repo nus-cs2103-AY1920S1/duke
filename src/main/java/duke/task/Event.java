@@ -2,16 +2,16 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import static duke.parser.DateTimeParser.inputDateFormatter;
 import static duke.parser.DateTimeParser.inputTimeFormatter;
 import static duke.parser.DateTimeParser.outputDateFormatterShort;
 import static duke.parser.DateTimeParser.outputTimeFormatter;
 import static duke.parser.DateTimeParser.parseDate;
 import static duke.parser.DateTimeParser.parseTime;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task with both start time and end time.
@@ -83,7 +83,7 @@ public class Event extends Task {
     public String encode() {
         return String.format("E | %d | %s | %s %s %s %s",
                 getStatusCode(),
-                description,
+                getDescription(),
                 inputDateFormatter.format(startDate),
                 inputTimeFormatter.format(startTime),
                 inputDateFormatter.format(endDate),

@@ -21,7 +21,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList result = tasks.filterByKeyWord(keyWord);
+        TaskList result = tasks.filterByKeyWord(this.keyWord);
         if (tasks.isEmpty()) {
             return MESSAGE_NO_MATCHING_TASKS;
         } else {

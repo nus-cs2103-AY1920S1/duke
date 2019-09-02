@@ -25,7 +25,7 @@ public class Todo extends Task {
      */
     @Override
     public String encode() {
-        return String.format("T | %d | %s", getStatusCode(), description);
+        return String.format("T | %d | %s", getStatusCode(), getDescription());
     }
 
     @Override

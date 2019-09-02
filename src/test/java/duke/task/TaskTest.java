@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TaskTest {
+class TaskTest {
     private Task task;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         task = new TaskImplStub("Test");
     }
 

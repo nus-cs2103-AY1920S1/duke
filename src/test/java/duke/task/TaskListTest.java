@@ -7,13 +7,15 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TaskListTest {
+class TaskListTest {
     private TaskList taskList;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         taskList = new TaskList();
     }
 
@@ -72,8 +74,8 @@ public class TaskListTest {
 
     @Test
     void isEmpty() {
-        assertEquals(true, taskList.isEmpty());
+        assertTrue(taskList.isEmpty());
         addTask();
-        assertEquals(false, taskList.isEmpty());
+        assertFalse(taskList.isEmpty());
     }
 }

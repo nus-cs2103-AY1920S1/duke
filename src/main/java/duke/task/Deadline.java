@@ -2,17 +2,17 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
+
 import static duke.parser.DateTimeParser.inputDateFormatter;
 import static duke.parser.DateTimeParser.inputTimeFormatter;
 import static duke.parser.DateTimeParser.outputDateFormatter;
 import static duke.parser.DateTimeParser.outputTimeFormatter;
 import static duke.parser.DateTimeParser.parseDate;
 import static duke.parser.DateTimeParser.parseTime;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.util.Optional;
 
 /**
  * Represents a task with a deadline.
@@ -65,11 +65,9 @@ public class Deadline extends Task {
     public String encode() {
         return String.format("D | %d | %s | %s%s",
                 getStatusCode(),
-                description,
+                getDescription(),
                 inputDateFormatter.format(byDate),
-                byTime.isPresent()
-                        ? " " + inputTimeFormatter.format(byTime.get())
-                        : "");
+                byTime.map(byTime -> " " + inputTimeFormatter.format(byTime)).orElse(""));
     }
 
     @Override

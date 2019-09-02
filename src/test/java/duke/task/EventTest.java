@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class EventTest {
+class EventTest {
+
     @Test
     void constructorTest_invalidTimeFormat_exceptionThrown() {
         try {

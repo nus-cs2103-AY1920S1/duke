@@ -1,12 +1,12 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.CompleteCommand;
 import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CompleteCommand;
 import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 
 /**
@@ -43,7 +43,7 @@ public class CommandParser {
             int taskId = Integer.parseInt(command.split("\\s+")[1]);
             return new DeleteCommand(taskId);
         } else if (command.startsWith("find ")) {
-            String keyWord = command.substring(5).trim();
+            String keyWord = (command.split("\\s+", 2)[1]).trim();
             return new FindCommand(keyWord);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

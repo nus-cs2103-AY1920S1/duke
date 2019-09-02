@@ -14,6 +14,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private boolean isExit;
 
     public Duke() {
         this(Storage.DEFAULT_STORAGE_FILEPATH);
@@ -27,6 +28,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        this.isExit = false;
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -39,13 +41,33 @@ public class Duke {
      * Generates a response to user input.
      */
     public String getResponse(String input) {
-        // TODO: Terminate the program when ExitCommand is triggered
         try {
-            String fullCommand = input;
-            Command c = CommandParser.parse(fullCommand);
+            Command c = CommandParser.parse(input);
+            this.isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return formatErrorMsg(e.getMessage());
+        }
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    private void run() {
+        ui.printResponse(MESSAGE_WELCOME);
+        ui.showLine();
+        while (!this.isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = CommandParser.parse(fullCommand);
+                ui.printResponse(c.execute(tasks, ui, storage));
+                this.isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.printResponse(formatErrorMsg(e.getMessage()));
+            } finally {
+                ui.showLine();
+            }
         }
     }
 
@@ -54,23 +76,5 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
-    }
-
-    private void run() {
-        ui.printResponse(MESSAGE_WELCOME);
-        ui.showLine();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = CommandParser.parse(fullCommand);
-                ui.printResponse(c.execute(tasks, ui, storage));
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printResponse(formatErrorMsg(e.getMessage()));
-            } finally {
-                ui.showLine();
-            }
-        }
     }
 }

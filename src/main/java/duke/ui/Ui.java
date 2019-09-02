@@ -24,8 +24,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        String command = in.nextLine().trim();
-        return command;
+        return in.nextLine().trim();
     }
 
     public void closeScanner() {

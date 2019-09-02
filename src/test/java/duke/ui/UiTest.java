@@ -11,22 +11,21 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UiTest {
+class UiTest {
     private Ui ui;
     private final InputStream systemIn = System.in;
     private final PrintStream systemOut = System.out;
 
-    private ByteArrayInputStream testIn;
     private ByteArrayOutputStream testOut;
 
     @BeforeEach
-    public void setUpStreams() {
+    void setUpStreams() {
         testOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(testOut));
     }
 
     @AfterEach
-    public void restoreStreams() {
+    void restoreStreams() {
         System.setOut(systemOut);
     }
 
@@ -37,7 +36,7 @@ public class UiTest {
     @Test
     void readCommand_withTrailingSpaces() {
         String data = "Test   ";
-        testIn = new ByteArrayInputStream(data.getBytes());
+        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
         ui = new Ui();
         assertEquals("Test", ui.readCommand());

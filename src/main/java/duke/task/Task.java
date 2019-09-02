@@ -5,8 +5,8 @@ import duke.exception.DukeException;
 import static duke.ui.Ui.INDENT;
 
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     protected Task(String description) {
         this.description = description;
@@ -43,12 +43,12 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("[%s] %s", getStatusIcon(), getDescription());
     }
 
     /**
      * Adds indentation in from of the string representation of this task
-     * and returns the indendted format of this task.
+     * and returns the indented format of this task.
      *
      * @return the indented format of this task
      */
@@ -57,7 +57,7 @@ public abstract class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "✘");
     }
 
     protected int getStatusCode() {

@@ -14,20 +14,20 @@ import static duke.ui.Message.getTaskTotalMsg;
  * Deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private int taskId;
+    private int index;
 
     /**
-     * Constructs a DeleteCommand object given taskId of the task to be deleted.
+     * Constructs a DeleteCommand object given index of the task to be deleted.
      *
-     * @param taskId the 1-based index of the task to be deleted
+     * @param index the 1-based index of the task to be deleted
      */
-    public DeleteCommand(int taskId) {
-        this.taskId = taskId;
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.deleteTaskByIndex(taskId);
+        Task task = tasks.deleteTaskByIndex(this.index);
         storage.save(tasks);
         return concatLines(MESSAGE_DELETE, task.getIndentedFormat(), getTaskTotalMsg(tasks));
     }

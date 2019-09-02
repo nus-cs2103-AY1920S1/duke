@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DeadlineTest {
+class DeadlineTest {
+
     @Test
     void stringConversion_withTime() throws DukeException {
         Deadline deadline = new Deadline("Test", "01/01/2019 0700");

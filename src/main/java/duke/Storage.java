@@ -6,6 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +19,9 @@ import java.util.Scanner;
  * Deals with loading tasks from the given file and saving tasks in the same file.
  */
 public class Storage {
-    /** Default file path used if the user doesn't provide the file name. */
+    /**
+     * Default file path used if the user doesn't provide the file name.
+     */
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
 
     private File file;
@@ -87,7 +90,7 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             for (Task task : tasks.getTasks()) {
                 fw.write(task.encode());
-                fw.write(System.lineSeparator());
+                fw.write(Ui.LS);
             }
             fw.close();
         } catch (IOException e) {

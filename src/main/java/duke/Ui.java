@@ -47,9 +47,9 @@ public class Ui {
             try {
                 handleInput(task, input);
             } catch (IllegalArgumentException e) {
-                print("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                print("    OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (IndexOutOfBoundsException e) {
-                print("    ☹ OOPS!!! I'm sorry, but task number " + task[1] + " does not exist.");
+                print("    OOPS!!! I'm sorry, but task number " + task[1] + " does not exist.");
             } finally {
                 storage.saveTasks(taskList);
                 input = sc.nextLine();
@@ -102,12 +102,12 @@ public class Ui {
             System.out.println("        " + parsedTask);
             System.out.println("    Now you have " + taskList.getListSize() + " tasks in the list.");
         } catch (DukeException e) {
-            print("    ☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
+            print("    OOPS!!! The description of a " + taskType + " cannot be empty.");
         } catch (ParseException e) {
-            print("    ☹ OOPS!!! The date/time of a " + taskType
+            print("    OOPS!!! The date/time of a " + taskType
                     + " does not follow the specified format of dd/MM/yyyy HHmm.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            print("    ☹ OOPS!!! The description of a " + taskType
+            print("    OOPS!!! The description of a " + taskType
                     + " does not follow the specified format.");
         }
     }

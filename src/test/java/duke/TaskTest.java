@@ -9,10 +9,10 @@ public class TaskTest {
 
     @Test
     public void testToString() {
-        assertEquals("[\u2718] blah blah", t.toString());
-        assertNotEquals("[\u2718] blah", t.toString());
-        assertNotEquals("[\u2718] blah ", t.toString());
-        assertNotEquals("[\u2718] blah bla", t.toString());
+        assertEquals("[ ] blah blah", t.toString());
+        assertNotEquals("[ ] blah", t.toString());
+        assertNotEquals("[ ] blah ", t.toString());
+        assertNotEquals("[ ] blah bla", t.toString());
     }
 
     @Test

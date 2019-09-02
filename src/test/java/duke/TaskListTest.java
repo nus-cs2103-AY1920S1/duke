@@ -15,10 +15,10 @@ public class TaskListTest {
         t.addToList(new Task("generic 2"));
         t.addToList(new Task("generic 3"));
         t.addToList(new Task("generic 4"));
-        assertEquals("[✘] generic 1", t.getList().get(0).toString());
-        assertEquals("[✘] generic 2", t.getList().get(1).toString());
-        assertEquals("[✘] generic 3", t.getList().get(2).toString());
-        assertEquals("[✘] generic 4", t.getList().get(3).toString());
+        assertEquals("[ ] generic 1", t.getList().get(0).toString());
+        assertEquals("[ ] generic 2", t.getList().get(1).toString());
+        assertEquals("[ ] generic 3", t.getList().get(2).toString());
+        assertEquals("[ ] generic 4", t.getList().get(3).toString());
     }
 
     @Test
@@ -38,8 +38,8 @@ public class TaskListTest {
         t.addToList(new Task("generic 4"));
         t.markAsDone(1);
         t.markAsDone(3);
-        assertEquals("[✓] generic 1", t.getList().get(0).toString());
-        assertEquals("[✓] generic 3", t.getList().get(2).toString());
+        assertEquals("[+] generic 1", t.getList().get(0).toString());
+        assertEquals("[+] generic 3", t.getList().get(2).toString());
         try {
             t.markAsDone(5);
             fail();

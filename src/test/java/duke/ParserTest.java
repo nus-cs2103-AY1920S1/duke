@@ -12,9 +12,9 @@ public class ParserTest {
         Parser p1 = new Parser("todo play");
         Parser p2 = new Parser("event meeting /at 09/06/1934 0700");
         Parser p3 = new Parser("deadline project /by 03/11/3241 1200");
-        String s1 = "[T][✘] play";
-        String s2 = "[E][✘] meeting (at: 09 Jun 1934, 07:00 AM)";
-        String s3 = "[D][✘] project (by: 03 Nov 3241, 12:00 PM)";
+        String s1 = "[T][ ] play";
+        String s2 = "[E][ ] meeting (at: 09 Jun 1934, 07:00 AM)";
+        String s3 = "[D][ ] project (by: 03 Nov 3241, 12:00 PM)";
         assertEquals(s1, p1.parse().toString());
         assertEquals(s2, p2.parse().toString());
         assertEquals(s3, p3.parse().toString());

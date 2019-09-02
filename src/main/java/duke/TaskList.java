@@ -81,7 +81,7 @@ public class TaskList {
      */
     public void find(String s) {
         List<Task> temp = new ArrayList<>();
-        for (Task task : list ) {
+        for (Task task : list) {
             String[] descriptionArray = task.getDescription().split(" ");
             for (int i = 0; i < descriptionArray.length; i++) {
                 if (s.equals(descriptionArray[i])) {

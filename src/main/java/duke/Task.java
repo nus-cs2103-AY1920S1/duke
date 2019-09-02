@@ -25,7 +25,7 @@ public class Task {
      * @return symbol A tick or cross symbol.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "+" : " ");
     }
 
     public String getDescription() {
@@ -55,6 +55,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] "+ this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 }

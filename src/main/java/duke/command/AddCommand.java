@@ -48,7 +48,7 @@ public class AddCommand extends Command {
             if (inputSplit.length == 1) {
                 // Exception if no description after "todo"
                 throw new DukeException(ui.separationLine
-                        + "\n     :( OOPS!!! The description of a todo cannot be empty.\n"
+                        + "\n     ☹ OOPS!!! The description of a todo cannot be empty.\n"
                         + ui.separationLine + "\n");
             }
             Todo todo = new Todo(userInput.replace("todo ", ""), 0);
@@ -60,7 +60,7 @@ public class AddCommand extends Command {
         case "deadline":
             if (!userInput.contains(" /by ")) {
                 // Exception for invalid deadline format
-                throw new DukeException(ui.separationLine + "\n     :( OOPS!!! For deadline please use the format\n"
+                throw new DukeException(ui.separationLine + "\n     ☹ OOPS!!! For deadline please use the format\n"
                         + "               \"deadline description /by end time\"\n" + ui.separationLine + "\n");
             }
             String[] splitStringD = userInput.split(" /by ");
@@ -78,7 +78,7 @@ public class AddCommand extends Command {
         case "event":
             if (!userInput.contains(" /at ")) {
                 // Exception for invalid deadline format
-                throw new DukeException(ui.separationLine + "\n     :( OOPS!!! For event please use the format\n"
+                throw new DukeException(ui.separationLine + "\n     ☹ OOPS!!! For event please use the format\n"
                         + "               \"event description /at period\"\n" + ui.separationLine + "\n");
             }
             String[] splitStringE = userInput.split(" /at ");

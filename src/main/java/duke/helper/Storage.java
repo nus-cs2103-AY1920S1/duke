@@ -68,7 +68,7 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException ioe) {
-            new Ui().printError("Failed to save changes to file. Please try again.");
+            new Ui().printError("☹ Failed to save changes to file. Please try again.");
         }
     }
 

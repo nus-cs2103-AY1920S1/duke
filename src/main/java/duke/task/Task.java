@@ -31,7 +31,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String doneSymbol = isDone == 1 ? "[+]" : "[ ]"; // "[\u2713]" : "[\u2718]"; don't display properly in console
+        String doneSymbol = isDone == 1 ? "[✓]" : "[✘]"; // "[\u2713]" : "[\u2718]"; don't display properly in console
         return doneSymbol + " " + description;
     }
 }

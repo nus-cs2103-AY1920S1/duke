@@ -1,13 +1,20 @@
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.time.LocalTime.parse;
 
 public class Parser {
     private CommandType commandType;
     private boolean isDone;
     private String description;
     private String date = "";
+    private LocalDateTime date;
     private boolean isSafe = true;
 
     public Parser(String fullCommand) {
@@ -15,6 +22,7 @@ public class Parser {
                 + "\\s*(?<completionstatus>(\\[[01]\\])?)"
                 + "\\s*(?<description>([\\w\\s\\d]+)?)"
                 + "(?:(/by|/at))?(?<date>([\\w\\s\\d+]+)?)");
+                + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
         if (!matcher.find()) {
             System.out.println("    ____________________________________________________________\n" +
@@ -23,6 +31,7 @@ public class Parser {
             isSafe= false;
         }else {
             switch (matcher.group("commandWord")) {
+            switch (matcher.group("commandWord").trim()) {
             case "list":
                 commandType = CommandType.LIST;
                 break;
@@ -51,7 +60,11 @@ public class Parser {
             description = matcher.group("description").trim();
             if (!matcher.group("date").isEmpty()) {
                 date = matcher.group("date").trim();
+                // Parsing the date
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
             }
+
         }
 
     }
@@ -69,6 +82,7 @@ public class Parser {
     }
 
     public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 

@@ -1,6 +1,9 @@
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected String Description;
     protected boolean isDone;
+    protected DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
     public Task(String description , boolean completionStatus) {
         this.Description = description;

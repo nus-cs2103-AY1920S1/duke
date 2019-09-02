@@ -13,17 +13,31 @@ public class Duke {
     static String INDENT = "    ";
 
     private static Storage storage;
+    private static TaskList tasks;
+    private Ui ui;
     private static String FILENAME = "../../../data/duke.txt";
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        storage = new Storage(FILENAME);
+    public Duke(String filePath) {
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+        } catch(Exception err) {
+            System.out.println(err);
+        }
+//        try {
+//            tasks = new TaskList(storage.load());
+//        } catch(DukeException e) {
+//            ui.showLoadingError();
+//            tasks = new TaskList();
+//        }
+    }
 
+    public void run() throws FileNotFoundException, UnsupportedEncodingException {
         Scanner sc = new Scanner(System.in);
         int listSize = 0;
         int listPointer;
 
-        printIndentedString("Hello! I'm Duke\n" +
-                INDENT + " " + "What can I do for you?", INDENT);
+        UIprintWelcome();
         String input = sc.nextLine();
         String[] inputArr = input.split(" ", 2);
 
@@ -51,11 +65,11 @@ public class Duke {
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
-                            listArr.add(new Task(inputArr[1], "todo"));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
-                            listSize++;
-                            updateTodoString();
-                            storage.updateTodoFile(listString);
+                        listArr.add(new Task(inputArr[1], "todo"));
+                        printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
+                        listSize++;
+                        updateTodoString();
+                        storage.updateTodoFile(listString);
                     } else if(inputArr[0].equals("deadline")) {
                         try {
                             String deadline = input.split(" /by ")[1];
@@ -86,14 +100,12 @@ public class Duke {
                             updateTodoString();
                             storage.updateTodoFile(listString);
                         } catch(Exception ex) {
-                            printIndentedString("☹ OOPS!!! Events require a specific datetime after /at, "
-                                            + "in format 'dd/MM/yyyy HHmm'"
-                                    , INDENT);
+                            UIprintError("☹ OOPS!!! Events require a specific datetime after /at, "
+                                    + "in format 'dd/MM/yyyy HHmm'");
                         }
                     }
                 } else {
-                    printIndentedString("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty."
-                            , INDENT);
+                    UIprintError("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.");
                 }
             } else {
                 printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Try todo, " +
@@ -103,6 +115,10 @@ public class Duke {
             inputArr = input.split(" ", 2);
         }
         printIndentedString("Bye. Hope to see you again soon!", INDENT);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+        new Duke(FILENAME).run();
     }
 
     public static void printIndentedString(String string, String INDENT) {
@@ -122,13 +138,12 @@ public class Duke {
         }
     }
 
-//    public static void updateTodoFile(String todoString) {
-//        try {
-//            PrintWriter writer = new PrintWriter("../../../data/duke.txt", "UTF-8");
-//            writer.printf(todoString);
-//            writer.close();
-//        } catch (IOException ex) {
-//            System.out.println(ex);
-//        }
-//    }
+    public static void UIprintWelcome() {
+        printIndentedString("Hello! I'm Duke\n" +
+                INDENT + " " + "What can I do for you?", INDENT);
+    }
+
+    public static void UIprintError(String errorMessage) {
+        printIndentedString(errorMessage, INDENT);
+    }
 }

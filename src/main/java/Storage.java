@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -63,5 +64,29 @@ public class Storage {
             throw new DukeException("Error, File Not Found.");
         }
         return tasks;
+    }
+
+    public void writeToHardDisk() {
+        try {
+            String taskListFilePath = "C:\\repos\\duke\\out\\data\\TaskList.txt";
+            FileWriter fw = new FileWriter (taskListFilePath);
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i) instanceof Deadline) {
+                    writeToFile(taskListFilePath, "D | " + tasks.get(i).isDone() + " | "
+                            + tasks.get(i).getTask() + " | " + ((Deadline) tasks.get(i)).getDueDate());
+                } else if (tasks.get(i) instanceof Event) {
+                    writeToFile(taskListFilePath, "E | " + tasks.get(i).isDone() + " | "
+                            + tasks.get(i).getTask() + " | " + ((Event) tasks.get(i)).getDueDate());
+                } else {
+                    writeToFile(taskListFilePath, "T | " + tasks.get(i).isDone() + " | "
+                            + tasks.get(i).getTask());
+                }
+                if (i != tasks.size() - 1) {
+                    writeToFile(taskListFilePath, "\n");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred " + e.getMessage());
+        }
     }
 }

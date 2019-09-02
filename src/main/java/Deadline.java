@@ -20,6 +20,10 @@ public class Deadline extends Task {
         this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
+    public Date getDueDate() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by : " + this.date + ")";

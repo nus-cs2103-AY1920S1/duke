@@ -20,7 +20,7 @@ public class Event extends Task {
         this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return this.date;
     }
 

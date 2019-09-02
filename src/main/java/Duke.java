@@ -1,8 +1,8 @@
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +12,12 @@ public class Duke {
     static ArrayList<Task> listArr = new ArrayList<Task>();
     static String INDENT = "    ";
 
-    public static void main(String[] args) {
+    private static Storage storage;
+    private static String FILENAME = "../../../data/duke.txt";
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+        storage = new Storage(FILENAME);
+
         Scanner sc = new Scanner(System.in);
         int listSize = 0;
         int listPointer;
@@ -31,7 +36,7 @@ public class Duke {
                 printIndentedString("Nice! I've marked this task as done: \n"
                         + INDENT + "   " + listArr.get(listPointer - 1), INDENT);
                 updateTodoString();
-                updateTodoFile(listString);
+                storage.updateTodoFile(listString);
             } else if(inputArr[0].equals("delete")) {
                 listPointer = Integer.parseInt(inputArr[1]);
                 Task deletedTask = listArr.get(listPointer - 1);
@@ -40,7 +45,7 @@ public class Duke {
                         + INDENT + "   " + deletedTask + "\n" + INDENT +
                         "Now you have " + listArr.size() + " tasks in the list.", INDENT);
                 updateTodoString();
-                updateTodoFile(listString);
+                storage.updateTodoFile(listString);
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + INDENT + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
@@ -50,7 +55,7 @@ public class Duke {
                             printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
                             listSize++;
                             updateTodoString();
-                            updateTodoFile(listString);
+                            storage.updateTodoFile(listString);
                     } else if(inputArr[0].equals("deadline")) {
                         try {
                             String deadline = input.split(" /by ")[1];
@@ -62,7 +67,7 @@ public class Duke {
                                     + aftTaskAddMessage, INDENT);
                             listSize++;
                             updateTodoString();
-                            updateTodoFile(listString);
+                            storage.updateTodoFile(listString);
                         } catch(Exception ex) {
                             printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by, "
                                             + "in format 'dd/MM/yyyy HHmm'",
@@ -79,7 +84,7 @@ public class Duke {
                                     + aftTaskAddMessage, INDENT);
                             listSize++;
                             updateTodoString();
-                            updateTodoFile(listString);
+                            storage.updateTodoFile(listString);
                         } catch(Exception ex) {
                             printIndentedString("☹ OOPS!!! Events require a specific datetime after /at, "
                                             + "in format 'dd/MM/yyyy HHmm'"
@@ -91,7 +96,8 @@ public class Duke {
                             , INDENT);
                 }
             } else {
-                printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", INDENT);
+                printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Try todo, " +
+                        "event and deadline", INDENT);
             }
             input = sc.nextLine();
             inputArr = input.split(" ", 2);
@@ -116,13 +122,13 @@ public class Duke {
         }
     }
 
-    public static void updateTodoFile(String todoString) {
-        try {
-            PrintWriter writer = new PrintWriter("../../../data/duke.txt", "UTF-8");
-            writer.printf(todoString);
-            writer.close();
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-    }
+//    public static void updateTodoFile(String todoString) {
+//        try {
+//            PrintWriter writer = new PrintWriter("../../../data/duke.txt", "UTF-8");
+//            writer.printf(todoString);
+//            writer.close();
+//        } catch (IOException ex) {
+//            System.out.println(ex);
+//        }
+//    }
 }

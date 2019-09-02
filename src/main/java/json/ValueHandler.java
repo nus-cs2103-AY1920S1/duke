@@ -51,8 +51,16 @@ public interface ValueHandler<T> {
 		public ObjectHandler<Map<String, Object>> handleObject() {
 			return new ObjectHandler.DictValue<>(INSTANCE);
 		}
-		public ArrayHandler<List<Object>> handleArray() {
+		public ArrayHandler<ArrayList<Object>> handleArray() {
 			return new ArrayHandler.ListValue<>(INSTANCE);
 		}
+	}
+
+	public static <T> ValueHandler<ArrayList<T>> listOf(ValueHandler<T> elemHandler) {
+		return new ValueHandler<>() {
+			public ArrayHandler<ArrayList<T>> handleArray() {
+				return new ArrayHandler.ListValue<T>(elemHandler);
+			}
+		};
 	}
 }

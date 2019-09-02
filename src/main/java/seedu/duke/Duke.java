@@ -1,17 +1,5 @@
 package seedu.duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-
-
 import java.text.ParseException;
 
 /**
@@ -27,18 +15,21 @@ public class Duke {
     public Duke() {}
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a message response to user input.
+     *
+     * @return String of message.
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         return run(input);
     }
 
 
     /**
-     * Runs Duke which will take in user commands to create tasks, delete tasks,
-     * mark task as done, list out task while updating data file when the tasks in
+     * Runs Duke which will load tasks from data file, take in user commands to create tasks,
+     * delete tasks, mark task as done, list out task while updating data file when the tasks in
      * the list is updated.
+     *
+     * @param input User input.
      */
     public String run(String input) {
         //ui.showIntro();

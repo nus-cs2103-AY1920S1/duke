@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.util.Scanner;
-
 /**
  * Represents user interface that has methods that interacts with the user and
  * prints out messages of commands and exceptions.
@@ -15,23 +13,20 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message of Duke.
+     * Returns the welcome message of Duke.
+     *
+     * @return String of the welcome message.
      */
     public String showIntro() {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
-
         String greeting = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
         return greeting;
     }
 
     /**
-     * Prints the exception of loading data file into arraylist error.
+     * Returns the exception of loading data file into arraylist error.
+     *
+     * @return String of exception message
      */
     public String showLoadingError() {
         return "\u2639 OOPS!!! There is an error loading data file";
@@ -47,18 +42,20 @@ public class Ui {
     }
 
     /**
-     * Prints the message of the task that is deleted with its information.
+     * Returns the message of the task that is deleted with its information.
      *
      * @param task Task that is deleted.
+     * @return String of message.
      */
     public String printDeletedTaskMsg(Task task) {
         return "Noted. I've removed this task:\n" + task;
     }
 
     /**
-     * Prints the number of tasks in the list.
+     * Returns the number of tasks in the list.
      *
      * @param tasks TaskList of the tasks in the list currently.
+     * @return String of number of tasks.
      */
     public String printNoOfTaskInList(TaskList tasks) {
         String statusOfList;
@@ -67,7 +64,6 @@ public class Ui {
         } else {
             statusOfList = "Now you have " + tasks.size() + " tasks in the list.\n";
         }
-        //System.out.println(statusOfList);
         return statusOfList;
     }
 
@@ -226,14 +222,14 @@ public class Ui {
     }
 
     /**
-     * Prints the task and its information that is added to the list
+     * Returns the message of the task and its information that is added to the list
      * of tasks.
      *
      * @param task Task that is added to the list.
+     * @return String of message.
      */
     public String printAddedTask(Task task) {
         String commandMsg = "Got it. I've added this task:\n" + task;
-        //System.out.println(commandMsg);
         return commandMsg;
     }
 
@@ -270,38 +266,37 @@ public class Ui {
     }
 
     /**
-     * Prints the task information that is marked as done.
+     * Returns the message of the task information that is marked as done.
      *
      * @param task Task that is marked as done.
+     * @return String of message
      */
     public String printMarkDoneMsg(Task task) {
         String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
                 "[" + task.getStatusIcon() + "] " + task.getDescription() + "\n";
-        //System.out.println(markAsDoneMsg);
         return markAsDoneMsg;
     }
 
     /**
-     * Prints all the tasks in the list with the information of each task.
+     * Returns message of all the tasks in the list with the information of each task.
      *
      * @param tasks TaskList of all the tasks currently.
+     * @return String of message.
      */
     public String printAllTasks(TaskList tasks) {
         String listMsg = "Here are the tasks in your list:\n";
-        //System.out.println(listMsg);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String taskMsg = (i + 1) + ". " + task + "\n";
             listMsg = listMsg + taskMsg;
-            //System.out.println(taskMsg);
         }
-        //System.out.println();
         return listMsg;
     }
 
     /**
-     * Prints the exception message for a parse error caused by an
-     * incorrectly input date and time format.
+     * Returns the exception message for a parse error caused by an incorrectly input date, time format.
+     *
+     * @return String of message.
      */
     public String showParseError() {
         return "\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
@@ -309,16 +304,19 @@ public class Ui {
     }
 
     /**
-     * Prints the exception message for an exception with default message.
+     * Returns the exception message for an exception with default message.
      *
      * @param e Exception that was thrown to be printed.
+     * @return String of exception message.
      */
     public String showExceptionMsg(Exception e) {
         return e.toString();
     }
 
     /**
-     * Prints the goodbye message of duke when the bye command is input.
+     * Returns the goodbye message of duke when the bye command is input.
+     *
+     * @return String of goodbye message.
      */
     public String printGoodbyeMsg() {
         String exitMsg = "Bye. Hope to see you again soon!\n";
@@ -326,40 +324,18 @@ public class Ui {
     }
 
     /**
-     * Reads in the user input with a <code><Scanner/code>.
-     *
-     * @return String of the user input.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints the line before and after a user input and message printed by
-     * Duke.
-     */
-    public void showLine() {
-        String line = "____________________________________________"
-                + "______________________________________________";
-        System.out.println(line);
-    }
-
-    /**
-     * Prints all the tasks matching keyword with the information of each task.
+     * Returns message of all the tasks matching keyword with the information of each task.
      *
      * @param tasks TaskList of all the tasks matching keyword.
+     * @return String of message.
      */
     public String printAllMatchingTasks(TaskList tasks) {
         String listMsg = "Here are the matching tasks in your list:\n";
-       // System.out.println(listMsg);
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String taskMsg = (i + 1) + ". " + task + "\n";
             listMsg = listMsg + taskMsg;
-            //System.out.println(taskMsg);
         }
-        //System.out.println();
         return listMsg;
     }
 

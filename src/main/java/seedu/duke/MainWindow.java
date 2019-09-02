@@ -1,18 +1,12 @@
 package seedu.duke;
 
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -32,9 +26,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
+    /**
+     * Class constructor.
+     */
     public MainWindow() {}
 
+    /**
+     * Initialises the layout for the main window.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();
@@ -55,10 +54,10 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         var db = DialogBox.getDukeDialog(response, dukeImage);
-        if (input.equals("list")) {
+        if (input.equals("list") || input.split(" ")[0].equals("find")) {
             db.setMinHeight(190.0);
         } else {
-            db.setMinHeight(80.0);
+            db.setMinHeight(90.0);
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage), db);

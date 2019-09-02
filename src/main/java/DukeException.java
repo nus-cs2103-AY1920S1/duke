@@ -1,3 +1,4 @@
+package duke.error;
 import java.io.*;
 /**
  * inherits from exception class

@@ -1,3 +1,11 @@
+package duke.command;
+import duke.error.DukeException;
+import duke.task.Task;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * subclass of command
  * execute delete tasks operations

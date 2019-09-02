@@ -1,3 +1,11 @@
+package duke.command;
+import duke.error.DukeException;
+import duke.task.Task;
+import duke.Parser;
+import duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+
 /**
  * subclass of command
  * operation to update tasks: done commands

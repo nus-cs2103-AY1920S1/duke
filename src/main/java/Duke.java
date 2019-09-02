@@ -1,3 +1,7 @@
+package duke;
+import duke.command.Command;
+import duke.error.DukeException;
+
 /**
  * main class
  * */

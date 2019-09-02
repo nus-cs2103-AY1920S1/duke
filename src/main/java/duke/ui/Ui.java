@@ -5,11 +5,19 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * A user interface that handles the user input and interactions with the user.
+ */
 public class Ui {
-    public void showLine() {
+
+    private void showLine() {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Prints the Duke logo and the welcome message. This method is called when the Parser starts
+     * scanning the user's input.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -23,18 +31,32 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints the farewell message. This method is called when Parser is done scanning the user's
+     * input.
+     */
     public void showBye() {
         showLine();
         System.out.println("\t Bye. Hope to see you again soon!");
         showLine();
     }
 
+    /**
+     * Prints the error message contained within the exception.
+     *
+     * @param errorMsg the error message to be printed.
+     */
     public void showError(String errorMsg) {
         showLine();
         System.out.printf("\t %s\n", errorMsg);
         showLine();
     }
 
+    /**
+     * Prints the entire list in the TaskList.
+     *
+     * @param list the list to be printed.
+     */
     public void showList(ArrayList<Task> list) {
         int count = 1;
         showLine();
@@ -46,6 +68,13 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints the Task that has been added into the TaskList and also the number of remaining Tasks in
+     * the TaskList.
+     *
+     * @param addedTask the Task that has been added.
+     * @param taskList the TaskList which the Task is added to.
+     */
     public void showAddedTask(Task addedTask, TaskList taskList) {
         showLine();
         System.out.println("\t Got it. I've added this task:");
@@ -54,6 +83,13 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints the Task that has been deleted from the TaskList and also the number of remaining Tasks in
+     * the TaskList.
+     *
+     * @param deletedTask the Task that has been deleted.
+     * @param taskList the TaskList which the Task is deleted from.
+     */
     public void showDeletedTask(Task deletedTask, TaskList taskList) {
         showLine();
         System.out.println("\t Noted. I've removed this task:");
@@ -62,6 +98,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints the Task after it has been completed.
+     *
+     * @param completed the Task that has been completed.
+     */
     public void showCompletedTask(Task completed) {
         System.out.println("\t____________________________________________________________");
         System.out.println("\t Nice! I've marked this task as done: ");
@@ -69,12 +110,17 @@ public class Ui {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     *  Prints the Tasks found.
+     *
+     * @param taskList the TaskList of the Tasks that were found.
+     */
     public void showFound(TaskList taskList) {
         ArrayList<Task> list = taskList.getTaskList();
         int count = 1;
         showLine();
         System.out.println("\t Here are the matching tasks in your list:");
-        for(Task task: list) {
+        for (Task task: list) {
             System.out.printf("\t %d. %s\n", count, task);
             count++;
         }

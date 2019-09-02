@@ -71,7 +71,7 @@ public class Storage {
                 }
             }
             return taskList;
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException |ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
             throw new IllegalDukeArgumentException();
 

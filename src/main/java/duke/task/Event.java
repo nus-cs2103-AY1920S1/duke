@@ -22,7 +22,7 @@ public class Event extends Task {
      * Used for when user inputs event task directly to the chatbot.
      *
      * @param description Description of task
-     * @param time    Date the event happens
+     * @param time        Date the event happens
      */
     public Event(String description, Date time) {
         super(description);
@@ -36,7 +36,7 @@ public class Event extends Task {
      *
      * @param isDone      0 or 1 representation of whether a task is done
      * @param description Description of task
-     * @param time   Date the task is due on
+     * @param time        Date the task is due on
      */
     public Event(String isDone, String description, String time) {
         super(isDone, description);

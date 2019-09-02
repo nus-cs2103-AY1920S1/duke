@@ -1,0 +1,4 @@
+D | 0 | bk  | Wed Aug 02 00:00:00 SGT 2000
+E | 1 |  bk this  | Thu Sep 03 00:00:00 SGT 1998
+T | 1 | blah 
+E | 1 |  boo  | Wed Aug 05 11:00:00 SGT 1992

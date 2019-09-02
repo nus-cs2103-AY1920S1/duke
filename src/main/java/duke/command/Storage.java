@@ -26,24 +26,24 @@ public class Storage {
 
     /**
      * Creates a Storage object that stores all the data of the
-     * task list when Duke is stopped
+     * task list when Duke is stopped.
      *
      * @param filePath is the file path to the file you want to save to
      */
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Writes the tasks in the TaskList to a certain file path
-     * for later retrieval when Duke restarts
+     * for later retrieval when Duke restarts.
      *
      * @param li list that is written to the file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException File is not found
      */
-    public void writeFile(LinkedList<Task> li) throws FileNotFoundException{
+    public void writeFile(LinkedList<Task> li) throws FileNotFoundException {
         PrintWriter outputStream = new PrintWriter(filePath);
-        for(int i = 0; i < li.size(); i++){
+        for (int i = 0; i < li.size(); i++) {
             outputStream.println(li.get(i).save());
         }
         outputStream.close();
@@ -52,16 +52,16 @@ public class Storage {
 
     /**
      * Reads the file that contains the list of task
-     * and uploads it into the TaskList in Duke
+     * and uploads it into the TaskList in Duke.
      *
      * @return returns a list of all the tasks in the file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException File is not found
      */
-    public LinkedList<Task> printFileContents() throws FileNotFoundException{
+    public LinkedList<Task> printFileContents() throws FileNotFoundException {
         LinkedList<Task> li = new LinkedList<>();
         File f = new File(filePath);
         Scanner scan = new Scanner(f);
-        while(scan.hasNext()){
+        while (scan.hasNext()) {
             String[] what = scan.nextLine().split("\\|");
             // 0 is the task type
             // 1 is the done level
@@ -73,34 +73,33 @@ public class Storage {
             String taskType = what[0];
             int doner = Integer.parseInt(what[1]);
             Task newTask = null;
-            if (taskType.equals("T")){
+            if (taskType.equals("T")) {
                 newTask =  new ToDo(what[2], doner);
-                
-            } else if(taskType.equals("D")){
+            } else if (taskType.equals("D")) {
                 newTask = new Deadline(what[2], dateTimeConversion(what[3]), doner);
-
-            } else if (taskType.equals("E")){
+            } else if (taskType.equals("E")) {
                 newTask = new Event(what[2], dateTimeConversion(what[3]), doner);
             }
             li.add(newTask);
-        };
+        }
         return li;
     }
 
     /**
-     * Converts a string to a date object
+     * Converts a string to a date object.
+     *
      * @param dateTime the date and time that needs to be converted
      *                 to a date object
      * @return a date object from the string given
      */
     //print the line for fromatting
-    public Date dateTimeConversion(String dateTime){
+    public Date dateTimeConversion(String dateTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
         String dateInString = dateTime;
         try {
             Date date = formatter.parse(dateInString);
             return date;
-        } catch (ParseException e){
+        } catch (ParseException e) {
             System.out.println("Not valid date and time");
             Date date = null;
             return date;

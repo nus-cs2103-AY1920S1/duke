@@ -13,26 +13,37 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
+/**
+ * Main driver class for Duke.
+ */
 public class Duke {
     
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filePath){
+    /**
+     * Creates a Duke object that takes in a filepath to
+     * the file where the list of previous tasks is stored.
+     * @param filePath path to where the last saved task list is stored
+     */
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try{
+        try {
             tasks = new TaskList(storage.printFileContents());
-        } catch (FileNotFoundException e){
-
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
         }
 
     }
 
     //write to file when there is a change in state
 
-    public void run(){
+    /**
+     * Runs the logic for Duke.
+     */
+    public void run() {
         Scanner scan = new Scanner(System.in);
         
         ui.showWelcome();
@@ -49,7 +60,7 @@ public class Duke {
         //     //System.out.println("File not found");
         // }
 
-        while(true){
+        while (true) {
             ui.printnewline();
             String echo = scan.nextLine();
             Parser split = new Parser(echo);
@@ -57,7 +68,7 @@ public class Duke {
 
             String firstWord = split.getType();
 
-            if(firstWord.equals("bye")){
+            if (firstWord.equals("bye")) {
                 // if bye, then end the program
                 ui.printline();
                 System.out.println("\tBye. Hope to see you again soon!");
@@ -66,12 +77,12 @@ public class Duke {
                 
                 break;
 
-            } else if(firstWord.equals("list")){
+            } else if (firstWord.equals("list")) {
                 //if list, print the list of Duke.tasks
 
                 tasks.printList();
 
-            } else if(firstWord.equals("done")){
+            } else if (firstWord.equals("done")) {
                 //if done, change the task status and tell them what they have completed
                 int taskNum = Integer.parseInt(split.getDesc().get(0));
                 //scan.nextLine();
@@ -79,7 +90,7 @@ public class Duke {
                 
                 int taskNumb = taskNum - 1;
                 
-                if (taskNumb >= tasks.size()){
+                if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else if (tasks.getTask(taskNumb).getIsDone()) {
                     //System.out.println("im here");
@@ -90,24 +101,24 @@ public class Duke {
                     ui.printDone(change);
                 }
 
-            } else if (firstWord.equals("delete")){
+            } else if (firstWord.equals("delete")) {
                 int taskNum = Integer.parseInt(split.getDesc().get(0));
                 int taskNumb = taskNum - 1;
 
-                if(taskNumb >= tasks.size()){
+                if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else {
                     ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
                     tasks.remove(taskNumb);
                 }
 
-            } else if(firstWord.equals("find")){
+            } else if (firstWord.equals("find")) {
                 String searchWord = split.getDesc().get(0);
                 LinkedList<Task> listWord = new LinkedList<>();
                 TaskList containsWord = new TaskList(listWord);
-                for(int i = 0; i < tasks.size(); i++){
+                for (int i = 0; i < tasks.size(); i++) {
                     Task taskInList = tasks.getTask(i);
-                    if(taskInList.getDescription().contains(searchWord)){
+                    if (taskInList.getDescription().contains(searchWord)) {
                         containsWord.add(taskInList);
                     }
                 }
@@ -117,31 +128,31 @@ public class Duke {
                 Task newTask = null;
                 LinkedList<String> copy = split.getDesc();
 
-                if (firstWord.equals("todo")){
+                if (firstWord.equals("todo")) {
                     actual =  String.join(" ", copy);
-                    if(actual.isEmpty()){
+                    if (actual.isEmpty()) {
                         error = "emptyToDo";
                     }
                     newTask =  new ToDo(actual);
-                } else if (firstWord.equals("deadline")){
+                } else if (firstWord.equals("deadline")) {
                     String help = String.join(" ", copy);
 
                     String task = "";
                     String time = "";
 
-                    if(help.isEmpty()){
+                    if (help.isEmpty()) {
                         error = "emptyDeadline";
                     } else {
                         int slashInt = help.indexOf("/by");
                         //System.out.println(slashInt);
                         //time = help.substring();
-                        if(slashInt == -1){
+                        if (slashInt == -1) {
                             error = "emptyBy";
                         } else {
                             time = help.substring(slashInt + 4);
                             task = help.substring(0, slashInt - 1);
 
-                            if (task.equals(" ")){
+                            if (task.equals(" ")) {
                                 error = "emptyDeadline";
                             } else {
                                 //System.out.println(task);
@@ -152,24 +163,24 @@ public class Duke {
 
                     }
  
-                } else if(firstWord.equals("event")){
+                } else if (firstWord.equals("event")) {
                     String help = String.join(" ", copy);
 
                     String task = "";
                     String time = "";
 
-                    if(help.isEmpty()){
+                    if (help.isEmpty()) {
                         error = "emptyEvent";
                     } else {
                         int slashInt = help.indexOf("/at");
                         //System.out.println(slashInt);
                         //time = help.substring();
-                        if(slashInt == -1){
+                        if (slashInt == -1) {
                             error = "emptyAt";
                         } else {
                             time = help.substring(slashInt + 4);
                             task = help.substring(0, slashInt - 1);
-                            if (task.equals(" ")){
+                            if (task.equals(" ")) {
                                 error = "emptyEvent";
                             } else {
                                 //System.out.println(task);
@@ -181,19 +192,19 @@ public class Duke {
                 }
 
                 //handle all errors
-                if (!error.isEmpty() || newTask == null){
+                if (!error.isEmpty() || newTask == null) {
                     
                     AException ee =  new AException();
                     ui.printline();
-                    if (error.equals("emptyToDo")){
+                    if (error.equals("emptyToDo")) {
                         ee.emptyToDoException();
-                    } else if (error.equals("emptyDeadline")){
+                    } else if (error.equals("emptyDeadline")) {
                         ee.emptyDeadlineException();
-                    } else if (error.equals("emptyBy")){
+                    } else if (error.equals("emptyBy")) {
                         ee.emptyByException();
-                    } else if (error.equals("emptyEvent")){
+                    } else if (error.equals("emptyEvent")) {
                         ee.emptyEventException();
-                    } else if (error.equals("emptyAt")){
+                    } else if (error.equals("emptyAt")) {
                         ee.emptyAtException();
                     } else {
                         ee.dontUnderstand();
@@ -209,18 +220,18 @@ public class Duke {
 
             }
 
-            if(!error.isEmpty()){
+            if (!error.isEmpty()) {
                 AException ee2 =  new AException();
                 ui.printline();
-                if(error.equals("taskDoNotExist")){
+                if (error.equals("taskDoNotExist")) {
                     ee2.exceedListSize();
-                } else if(error.equals("taskAlreadyCompleted")){
+                } else if (error.equals("taskAlreadyCompleted")) {
                     ee2.taskAlreadyCompleted();
                 }
                 ui.printline();
             }
 
-            try{
+            try {
                 storage.writeFile(tasks.getList());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

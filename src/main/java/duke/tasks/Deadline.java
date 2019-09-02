@@ -12,11 +12,11 @@ public class Deadline extends Task {
 
     /**
      * Create an initial deadline task that initializes
-     * to incomplete by default
+     * to incomplete by default.
      * @param description a description given for the task
      * @param by the actual deadline for the deadline task
      */
-    public Deadline(String description, Date by){
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
@@ -32,9 +32,9 @@ public class Deadline extends Task {
      * @param doner the completion status of the task
      *              (Completed is 1, incomplete is 2)
      */
-    public Deadline(String description, Date by, int doner){
+    public Deadline(String description, Date by, int doner) {
         super(description);
-        if(doner == 1){
+        if (doner == 1) {
             super.completed();
         }
         this.by = by;
@@ -42,14 +42,14 @@ public class Deadline extends Task {
 
     /**
      * Returns a string that represents the deadline that will be stored in
-     * the format got storage and retrieval in a .txt file
+     * the format got storage and retrieval in a .txt file.
      *
      * @return the string of the task that will be saved in the .txt file
      */
     @Override
-    public String save(){
+    public String save() {
         int a = 0;
-        if(super.isDone){
+        if (super.isDone) {
             a = 1;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
@@ -57,7 +57,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy hh:mm a");
         return "[D]" + super.toString() + "(by: " + formatter.format(by) + ")";
     }

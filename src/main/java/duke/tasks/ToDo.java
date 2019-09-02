@@ -7,10 +7,10 @@ public class ToDo extends Task {
 
     /**
      * Create an initial To Do task that initializes
-     * to incomplete by default
+     * to incomplete by default.
      * @param description a description given for the task
      */
-    public ToDo(String description){
+    public ToDo(String description) {
         super(description);
     }
 
@@ -23,9 +23,9 @@ public class ToDo extends Task {
      * @param doner the completion status of the task
      *              (Completed is 1, incomplete is 2)
      */
-    public ToDo(String description, int doner){
+    public ToDo(String description, int doner) {
         super(description);
-        if(doner == 1){
+        if (doner == 1) {
             super.completed();
         }
     }
@@ -37,16 +37,16 @@ public class ToDo extends Task {
      * @return the string of the task that will be saved in the .txt file
      */
     @Override
-    public String save(){
+    public String save() {
         int a = 0;
-        if(super.isDone){
+        if (super.isDone) {
             a = 1;
         }
-        return "T|" + a + "|" + super.description ;
+        return "T|" + a + "|" + super.description;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

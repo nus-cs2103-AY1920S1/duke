@@ -12,12 +12,12 @@ public class Event extends Task {
 
     /**
      * Creates an initial event task that initializes
-     * to incomplete by default
+     * to incomplete by default.
      *
      * @param description a description given for the task
      * @param at the actual deadline for the deadline task
      */
-    public Event(String description, Date at){
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
@@ -33,9 +33,9 @@ public class Event extends Task {
      * @param doner the completion status of the task
      *              (Completed is 1, incomplete is 2)
      */
-    public Event(String description, Date at, int doner){
+    public Event(String description, Date at, int doner) {
         super(description);
-        if(doner == 1){
+        if (doner == 1) {
             super.completed();
         }
         this.at = at;
@@ -43,14 +43,14 @@ public class Event extends Task {
 
     /**
      * Returns a string that represents the event that will be stored in
-     * the format got storage and retrieval in a .txt file
+     * the format got storage and retrieval in a .txt file.
      *
      * @return the string of the task that will be saved in the .txt file
      */
     @Override
-    public String save(){
+    public String save() {
         int a = 0;
-        if(super.isDone){
+        if (super.isDone) {
             a = 1;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
@@ -58,7 +58,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy hh:mm a");
         return "[E]" + super.toString() + "(at: " + formatter.format(at) + ")";
     }

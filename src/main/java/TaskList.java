@@ -125,13 +125,6 @@ abstract class TaskList {
 
             doneTask = new Todo(i, "[✓]", currentTask, getType);
             a.set(i - 1, doneTask);
-        } else if (getType.equals("event")) {
-            doneTask = new Event(i, "[✓]", currentTask, getType, t.getAB());
-            a.set(i - 1, doneTask);
-        } else {
-            doneTask = new Deadline(i, "[✓]", currentTask, getType, t.getAB());
-
-            a.set(i - 1, doneTask);
         }
         System.out.println("[✓] " + currentTask);
     }

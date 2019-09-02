@@ -43,8 +43,6 @@ public class Deadline extends TaskList {
     public String toString() {
         return Integer.toString(getTaskNumber()) + ".[D]"
                 + getTaskCheck() + " " + getTaskName() + by;
-        return Integer.toString(getTaskNumber()) + ".[D]" + 
-           getTaskCheck() + getTaskName() + "by "+ by;
     }
 
 }

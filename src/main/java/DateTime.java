@@ -52,7 +52,8 @@ public class DateTime {
        if(h < 12) {
            time = hour + "." + min + "a.m.";
        } else {
-           time = hour + "." + min + "p.m.";
+           int changeHour = Integer.parseInt(hour) - 12;
+           time = changeHour + "." + min + "p.m.";
        }
        return time;
     }

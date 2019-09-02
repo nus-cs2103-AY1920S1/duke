@@ -37,7 +37,7 @@ public class Parser {
                     || temp[0].equalsIgnoreCase("todo")) {
                 return new AddCommand(command);
             } else {
-                throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("\tOOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }

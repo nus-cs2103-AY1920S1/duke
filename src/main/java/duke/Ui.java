@@ -48,7 +48,7 @@ public class Ui {
      * Prints a line.
      */
     public void printLine() {
-        System.out.println("\t ----------------------------------------------------------");
+        System.out.println("\t ---------------------------------------------------------");
     }
 
     /**

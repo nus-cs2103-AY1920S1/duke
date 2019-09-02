@@ -1,5 +1,8 @@
 import java.text.ParseException;
 
+/**
+ * The Deadline class represents any tasks that have a description, and a deadline in nature.
+ */
 public class Deadline extends Task {
     private String _date;
     private DateTime _dateTime;
@@ -32,7 +35,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of the Event object to be saved
      * into the hard disk file for the Duke program.
-     * @return String Returns a the data representation of the Event Task.
+     * @return String Returns the data representation of the Event Task.
      */
     public String toData() {
         String t = String.format("E | %s | %s | %s",
@@ -40,7 +43,11 @@ public class Deadline extends Task {
         return t;
     }
 
+    /**
+     * Returns a string representation of the expected Deadline in the new format.
+     * @return String Returns a string of the deadline's date.
+     */
     public String getDeadline() {
-        return this._date;
+         return this._date;
     }
 }

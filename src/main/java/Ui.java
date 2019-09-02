@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The Ui class handles all user interactions and is responsible for returning the correct
+ * String representations of the output for the user.
+ */
 public class Ui {
     private static final String LOGO = "____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -48,7 +52,7 @@ public class Ui {
     }
 
     /**
-     * Adds a new Task to the list of tasks, and informs the user of the task added.
+     * Informs the user of the task added.
      * @param t The Task to be added, which can be a ToDo, Deadline, or Event.
      * @param list The TaskList which contains all Tasks in the list.
      * @return String Returns a String of information notifying the user of the added task.
@@ -61,7 +65,7 @@ public class Ui {
     }
 
     /**
-     * Marks a Task as done, and notifies the user of the task marked as done.
+     * Notifies the user of the task marked as done.
      * @param n The task number, in the order of input.
      * @param list The TaskList which contains all Tasks in the list.
      * @return String Returns a string to inform user of the task marked as done.
@@ -74,8 +78,7 @@ public class Ui {
     }
 
     /**
-     * Deletes a given Task from the list of all Tasks, then notifies the user of the
-     * Task removed.
+     * Notifies the user of the Task removed.
      * @param index The task number, in the order of input.
      * @return String Returns a string to inform user of the task removed from the list.
      */
@@ -87,6 +90,11 @@ public class Ui {
         return addLines(del);
     }
 
+    /**
+     * Shows the user his data that is stored in the hard disk.
+     * @param data the DukeData object that stores the user's data from Duke program.
+     * @throws IOException if an I/O Exception occurs.
+     */
     public void showData(DukeData data) throws IOException {
         System.out.println(LINE);
         data.printDataFile();
@@ -94,6 +102,11 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Adds a line before and after every command.
+     * @param cmd the command output.
+     * @return String a String representation of the output with the lines.
+     */
     public static String addLines(String cmd) {
         String out = String.format("%s%n %s%n%s%n",
                 LINE, cmd, LINE);

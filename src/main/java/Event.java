@@ -1,5 +1,8 @@
 import java.text.ParseException;
 
+/**
+ * The Event class represents any tasks that have a description, and an event date in nature.
+ */
 public class Event extends Task {
     private String _date;
     private DateTime _dateTime;

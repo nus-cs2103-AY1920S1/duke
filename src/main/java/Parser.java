@@ -1,12 +1,20 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Deads with making sense of the user command,
+ * and simulates the supposed interaction from the command.
+ */
 public class Parser {
     private Ui _ui;
     private Duke _duke;
     private DukeData _data;
-    private final Scanner sc;
+    private Scanner sc;
 
+    /**
+     * Creates a new Parser object with the given Duke program.
+     * @param parseDuke the Duke Program that will be handles by the Parser.
+     */
     public Parser(Duke parseDuke) {
         this._duke = parseDuke;
         this._data = parseDuke.getData();
@@ -15,6 +23,9 @@ public class Parser {
         System.out.println(_ui.showIntro());
     }
 
+    /**
+     * The parse method handles all input and output from the Scanner through the Duke program.
+     */
     public void parse() {
         TaskList tasks = this._data.load();
         while (sc.hasNext()) {

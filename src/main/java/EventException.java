@@ -1,5 +1,6 @@
 /**
- * Handles exception found in the Event object.
+ * The EventException class handles any incorrect event input by the user,
+ * and prompts them to enter in the correct format.
  */
 public class EventException extends Exception {
     private static String _noDesc = " OOPS!!! The description of an event cannot be empty.";

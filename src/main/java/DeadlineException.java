@@ -1,3 +1,7 @@
+/**
+ * The DeadlineException class handles any incorrect deadline input by the user,
+ * and prompts them to enter in the correct format.
+ */
 public class DeadlineException extends Exception{
     private static String _noDesc = " OOPS!!! The description of a deadline cannot be empty.";
     private static String _noDate = " OOPS!!! The date of a deadline cannot be empty.";

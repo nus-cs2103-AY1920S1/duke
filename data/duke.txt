@@ -1,0 +1,12 @@
+D | 1 | buy book  | Mon Aug 02 06:00:00 SGT 1999
+E | 1 |  book event  | Sat Sep 02 07:00:00 SGT 2000
+T | 1 | fake
+T | 1 | buy book
+T | 1 | give book
+T | 1 | this
+T | 1 | this that
+T | 1 | blah
+E | 1 |  fake event  | Mon Aug 02 00:00:00 SGT 1999
+D | 1 | fake deadline  | Sun Apr 03 01:00:00 SGT 2005
+E | 1 |  blahs  | Thu Aug 05 00:00:00 SGT 1999
+E | 0 |   | Thu Aug 05 00:00:00 SGT 1999

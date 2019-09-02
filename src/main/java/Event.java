@@ -25,6 +25,10 @@ public class Event extends Task {
         this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
+    public String getDueDate() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at : " + this.date + ")";

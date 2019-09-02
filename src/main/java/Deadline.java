@@ -24,8 +24,9 @@ public class Deadline extends Task {
     public void parseTime(String time) throws ParseException {
         this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by : " + date + ")";
+        return "[D]" + super.toString() + " (by : " + this.date + ")";
     }
 }

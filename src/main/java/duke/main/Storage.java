@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * Deals with loading tasks from the file and saving tasks to the file
+ */
 public class Storage {
     private String filePath;
 
@@ -14,6 +17,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks saved into the hard drive from the previous Duke session
+     * and stores them in an ArrayList of tasks.
+     *
+     * @return an ArrayList of existing tasks
+     * @throws DukeException if file cannot be found or opened
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();

@@ -3,12 +3,22 @@ package duke.main;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * Deals with understanding the commands given to the bot by the user.
+ */
 public class Parser {
     public Parser() {
     }
 
+    /**
+     * Returns a Command object that corresponds to the fullCommand argument given to the bot
+     * by the user as a String.
+     *
+     * @param fullCommand the command given to the bot by the user
+     * @return the corresponding Command object
+     * @throws DukeException if fullCommand is not one of the recognised commands
+     */
     public Command parse(String[] fullCommand) throws DukeException {
-        //Add Find Command
         String command = fullCommand[0];
         String details = fullCommand[1];
         if (command.equals("bye")) {

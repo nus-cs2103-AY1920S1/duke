@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.main.*;
 
+/**
+ * Represents the 'bye' command.
+ */
 public class ByeCommand implements Command {
     public ByeCommand() {
     }

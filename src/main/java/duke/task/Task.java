@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task given to the bot by the user.
+ */
 public class Task {
     protected String name;
     protected boolean isDone;

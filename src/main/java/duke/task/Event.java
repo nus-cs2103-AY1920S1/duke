@@ -12,6 +12,12 @@ public class Event extends Task {
         this.dateTime = formatDateTime(dateTime);
     }
 
+    /**
+     * Returns a String containing the formatted date and time given by the user
+     *
+     * @param dateTime a String containing the date and time given by the user
+     * @return a new formatted String containing the date and time, following the format in the method
+     */
     private String formatDateTime(String dateTime) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         SimpleDateFormat newFormat = new SimpleDateFormat("d 'of' MMMMMMMMM yyyy, h:mm a");

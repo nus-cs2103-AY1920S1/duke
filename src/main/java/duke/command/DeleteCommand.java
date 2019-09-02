@@ -4,6 +4,9 @@ import duke.main.*;
 import duke.exception.DukeException;
 import duke.task.*;
 
+/**
+ * Represents the 'delete' command.
+ */
 public class DeleteCommand implements Command {
     private int index;
 
@@ -11,6 +14,13 @@ public class DeleteCommand implements Command {
         this.index = index;
     }
 
+    /**
+     * Deletes the indexed task and saves this new task list in the hard disk
+     *
+     * @param storage the Storage object to update the tasks in the file
+     * @param ui the Ui object dealing with interactions with the user
+     * @param tasks the TaskList object containing the existing list of tasks
+     */
     public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
         try {
             Task deleted = tasks.removeTask(index);

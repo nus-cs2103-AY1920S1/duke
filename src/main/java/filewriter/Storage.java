@@ -109,29 +109,29 @@ public class Storage {
     private Task read(String line) throws DukeException {
         Task output;
         switch (line.charAt(line.indexOf("[") + 1)) {
-            case 'T':
-                output = new Todo(line.substring(7, line.length()));
+        case 'T':
+            output = new Todo(line.substring(7, line.length()));
+            return output;
+        case 'D':
+            try {
+                int divider = line.indexOf("(by:");
+                String input = line.substring(7, divider);
+                input += "/by " + DateTime.readDeadLine(line.substring(divider + 5, line.length() - 1)).toString();
+                output = new Deadline(input);
                 return output;
-            case 'D':
-                try {
-                    int divider = line.indexOf("(by:");
-                    String input = line.substring(7, divider);
-                    input += "/by " + DateTime.readDeadLine(line.substring(divider + 5, line.length() - 1)).toString();
-                    output = new Deadline(input);
-                    return output;
-                } catch (Exception e) {
-                    throw new DukeException("Deadline task not stored properly.");
-                }
-            default:
-                try {
-                    int divider = line.indexOf("(at:");
-                    String input = line.substring(7, divider);
-                    input += "/at " + DateTime.readEventTime(line.substring(divider + 5, line.length() - 1)).toString();
-                    output = new Event(input);
-                    return output;
-                } catch (Exception e) {
-                    throw new DukeException("Event task not stored properly.");
-                }
+            } catch (Exception e) {
+                throw new DukeException("Deadline task not stored properly.");
+            }
+        default:
+            try {
+                int divider = line.indexOf("(at:");
+                String input = line.substring(7, divider);
+                input += "/at " + DateTime.readEventTime(line.substring(divider + 5, line.length() - 1)).toString();
+                output = new Event(input);
+                return output;
+            } catch (Exception e) {
+                throw new DukeException("Event task not stored properly.");
+            }
         }
     }
 

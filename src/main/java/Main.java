@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import duke.Duke;
+import duke.MainUi;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,6 +29,7 @@ public class Main extends Application {
             stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

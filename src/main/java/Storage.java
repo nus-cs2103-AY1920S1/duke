@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,29 +46,39 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         String line;
         try {
-            File loadupFile = new File(this.filepath);
-            Scanner scLoad = new Scanner(loadupFile);
+            File loadUpFile = new File(this.filepath);
+            Scanner scLoad = new Scanner(loadUpFile);
             while (scLoad.hasNextLine()) {
                 String sentence = scLoad.nextLine();
                 String[] taskInfo = sentence.split(" \\u007C ");
                 if (taskInfo[0].equals("T")) {
-                    Task t = new ToDo(taskInfo[2]);
+                    ToDo taskT = new ToDo(taskInfo[2]);
                     if (taskInfo[1].equals("1")) {
-                        t.markAsDone();
+                        taskT.markAsDone();
                     }
-                    tasks.add(t);
+                    tasks.add(taskT);
                 } else if (taskInfo[0].equals("D")) {
-                    Task t = new Deadline(taskInfo[2], taskInfo[3]);
-                    if (taskInfo[1].equals("1")) {
-                        t.markAsDone();
+                    Deadline taskD = new Deadline(taskInfo[2]);
+                    try {
+                        taskD.parseTime(taskInfo[3]);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    tasks.add(t);
+                    if (taskInfo[1].equals("1")) {
+                        taskD.markAsDone();
+                    }
+                    tasks.add(taskD);
                 } else if (taskInfo[0].equals("E")) {
-                    Task t = new Event(taskInfo[2], taskInfo[3]);
-                    if (taskInfo[1].equals("1")) {
-                        t.markAsDone();
+                    Event taskE = new Event(taskInfo[2]);
+                    try {
+                        taskE.parseTime(taskInfo[3]);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    tasks.add(t);
+                    if (taskInfo[1].equals("1")) {
+                        taskE.markAsDone();
+                    }
+                    tasks.add(taskE);
                 } else {
 
                 }

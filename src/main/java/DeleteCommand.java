@@ -3,7 +3,7 @@ public class DeleteCommand extends Command {
     /**
      * Creates an DeleteCommand object
      * Deletes a task from the tasklist at a certain index
-     * @param task
+     * @param task to be deleted
      */
     public DeleteCommand(int index) {
         super();

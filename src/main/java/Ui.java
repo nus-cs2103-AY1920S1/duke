@@ -81,6 +81,9 @@ public class Ui {
         this.sc.close();
     }
 
+    public void showLoadingError() {
+        System.out.println("Error while loading");
+    }
     public void showError() {
 
     }

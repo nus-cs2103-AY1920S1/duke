@@ -32,48 +32,13 @@ public class Duke {
     public void run() throws ParseException, IOException {
         Scanner scan = new Scanner(System.in);
         this.ui.greet();
-        File f = new File("/Users/sairo/OneDrive/Desktop/Duke/Data/Duke.txt");
+        File f = new File("../Duke/data/Duke.txt");
         Scanner sca = new Scanner(f);
         while (sca.hasNext()) {
             String dat = sca.nextLine();
             this.parser.readTask(dat,this.list);
         }
-        while (scan.hasNextLine()) {
-            String command = scan.next();
-            if (command.equals("bye")) {
-                this.ui.exit();
-                String s = "";
-                for (Task t : this.list.taskList) {
-                    s = s + t.toString() + "\n";
-                }
-                this.storage.writeFile(s);
-                break;
-            } else if (command.equals("list")) {
-                this.list.getList();
-            } else if (command.equals("done")) {
-                int num = scan.nextInt();
-                this.list.markAsDone(num - 1);
-                String c = scan.nextLine();
-            } else if (command.equals("event")) {
-                String b = scan.nextLine();
-                this.list.readEvent(b);
-            } else if (command.equals("deadline")) {
-                String det = scan.nextLine();
-                this.list.readDeadline(det);
-            } else if (command.equals("todo")) {
-                String todoDetails = scan.nextLine();
-                this.list.readTodo(todoDetails);
-            } else if (command.equals("delete")) {
-                int number = scan.nextInt();
-                this.list.deleteTask(number);
-            } else if (command.equals("find")) {
-                String required = scan.next();
-                this.list.find(required);
-            } else {
-                System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
-                String empt = scan.nextLine();
-            }
-        }
+        this.parser.readUserCommand(this.ui,this.list,this.storage);
     }
 
     public static void main(String[] args) throws DukeException, IOException, ParseException {

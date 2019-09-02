@@ -19,7 +19,7 @@ public class Storage {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      * does not exist but cannot be created, or cannot be opened for any other reason
      */
-    public static void addToFile(String filepath, String textToAdd) throws IOException {
+    public void addToFile(String filepath, String textToAdd) throws IOException {
             FileWriter typer = new FileWriter(filepath, true);
             typer.write(textToAdd + System.lineSeparator());
             typer.close();
@@ -34,7 +34,7 @@ public class Storage {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      * does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public static void writeToFile(String filepath, String textToAdd) throws IOException {
+    public void writeToFile(String filepath, String textToAdd) throws IOException {
         FileWriter typer = new FileWriter(filepath);
         typer.write(textToAdd);
         typer.close();
@@ -92,20 +92,22 @@ public class Storage {
         } else {
             while (sc.hasNext()) {
                 String task = sc.nextLine();
-                String taskType = task.substring(1, 2);
+                int index = task.indexOf("[");
+                String taskType = task.substring(index + 1, index + 2);
+                int spaceIndex = task.indexOf(" ");
                 switch (taskType) {
                     case "T":
-                        Task toDo = new Todo(task.substring(7));
+                        Task toDo = new Todo(task.substring(spaceIndex));
                         taskList.add(toDo);
                         break;
                     case "D":
                         int byIndex = task.indexOf("(");
-                        Task deadline = new Deadline(task.substring(7, byIndex - 1), task.substring(byIndex + 4));
+                        Task deadline = new Deadline(task.substring(spaceIndex, byIndex - 1), task.substring(byIndex + 4));
                         taskList.add(deadline);
                         break;
                     case "E":
                         int atIndex = task.indexOf("(");
-                        Task event = new Event(task.substring(7, atIndex - 1), task.substring(atIndex + 4));
+                        Task event = new Event(task.substring(spaceIndex, atIndex - 1), task.substring(atIndex + 4));
                         taskList.add(event);
                         break;
                 }

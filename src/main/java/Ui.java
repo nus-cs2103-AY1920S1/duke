@@ -1,19 +1,21 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
 
     protected Scanner scan = new Scanner(System.in);
-    protected TaskList tL = new TaskList();
+    protected TaskList tL = new TaskList(new ArrayList<>());
+    protected Storage store = new Storage(Storage.file);
 
     public void greeting() {
-        String logo = "     ____        _        \n"
-                    + "    |  _ \\ _   _| | _____ \n"
-                    + "    | | | | | | | |/ / _ \\\n"
-                    + "    | |_| | |_| |   <  __/\n"
-                    + "    |____/ \\__,_|_|\\_\\___|\n";
+        String logo = "     ____        _        \n" +
+                      "    |  _ \\ _   _| | _____ \n" +
+                      "    | | | | | | | |/ / _ \\\n" +
+                      "    | |_| | |_| |   <  __/\n" +
+                      "    |____/ \\__,_|_|\\_\\___|\n";
 
         // Prints out greeting of the chat bot.
         printLine();
@@ -37,17 +39,14 @@ public class Ui {
             try {
                 String text = scan.nextLine().trim();
                 if (text.equals("bye")) {
-                    printBye();
+                    Ui.printBye();
                     break;
-
                 } else if (text.equals("list")) {
                     printList();
                 } else if (text.equals("delete all")) {
                     tL.deleteAllCommand(text);
                 } else if (text.contains(" ")) {
-
                     String[] splittedText = text.split(" ");
-
                     if (splittedText[0].equals("done")) {
                         int num = text.indexOf(" ");
                         int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
@@ -62,11 +61,9 @@ public class Ui {
                     } else {
                         if (splittedText[0].equals("todo")) {
                             tL.toDoCommand(text);
-
                         } else if (splittedText[0].equals("deadline") &&
                                 text.contains("/") && text.contains("by")) { // what if there is no deadline
                             tL.deadlineCommand(text);
-
                         } else if (splittedText[0].equals("event") &&
                                 text.contains("/") && text.contains("at")) { // what if there is no date
                             tL.eventCommand(text);
@@ -177,21 +174,6 @@ public class Ui {
                 numbering++;
             }
         }
-        printLine();
-    }
-
-    /**
-     * Deletes everything off the task list.
-     *
-     * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
-     */
-    private static void deleteAll() throws IOException{
-        Storage.writeToFile(Storage.file, "");
-        TaskList.listOfTasks.clear();
-        printLine();
-        printIndent();
-        System.out.println("Everything in your list has been removed! Add more tasks to get started again!!!");
         printLine();
     }
 

@@ -1,10 +1,12 @@
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class TaskList {
 
     protected static ArrayList<Task> listOfTasks = new ArrayList<Task>();
-    //protected static String file = "todo.txt";
+    protected Task tasking = new Task("");
+    protected Storage store = new Storage(Storage.file);
 
     public TaskList() {
 
@@ -17,17 +19,17 @@ public class TaskList {
     public void deleteCommand(String text) throws IOException {
         int num = text.indexOf(" ");
         int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
-        Task.printRemove();
+        tasking.printRemove();
         Ui.printDelete(taskNumber);
-        System.out.println("before removing from listoftask: " + listOfTasks.get(1).toString());
+        //System.out.println("before removing from listoftask: " + listOfTasks.get(1).toString());
         listOfTasks.remove(taskNumber - 1);
-        System.out.println("before overwriting file and for loop: " + listOfTasks.get(1).toString());
-        Storage.writeToFile(Storage.file, "");
+        //System.out.println("before overwriting file and for loop: " + listOfTasks.get(1).toString());
+        store.writeToFile(Storage.file, "");
         for (Task task : listOfTasks) {
-            System.out.println("before storing to file again: " + task.toString());
-            Storage.addToFile(Storage.file, task.toString());
+            //System.out.println("before storing to file again: " + task.toString());
+            store.addToFile(Storage.file, task.toString());
         }
-        Task.printNumOfTasks();
+        tasking.printNumOfTasks();
     }
 
     /**
@@ -37,7 +39,7 @@ public class TaskList {
      * does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void deleteAllCommand(String text) throws IOException {
-        Storage.writeToFile(Storage.file, "");
+        store.writeToFile(Storage.file, "");
         listOfTasks.clear();
         Ui.printLine();
         Ui.printIndent();
@@ -46,14 +48,14 @@ public class TaskList {
     }
 
     public void toDoCommand(String text) throws IOException {
-        Task.printGI();
+        tasking.printGI();
         Ui.printIndent();
         int num = text.indexOf(" ");
         Task task = new Todo(text.substring(num + 1));
         System.out.println("  " + task.toString());
         listOfTasks.add(task);
-        Storage.addToFile(Storage.file, task.toString());
-        Task.printNumOfTasks();
+        store.addToFile(Storage.file, task.toString());
+        tasking     .printNumOfTasks();
     }
 
     public void eventCommand(String text) throws DukeException, IOException {
@@ -66,12 +68,12 @@ public class TaskList {
             String taskers = task.toString();
             if (!taskers.equals("Invalid date format!")) {
 
-                Task.printGI();
+                tasking.printGI();
                 Ui.printIndent();
                 System.out.println("  " + taskers);
                 listOfTasks.add(task);
-                Storage.addToFile(Storage.file, taskers);
-                Task.printNumOfTasks();
+                store.addToFile(Storage.file, taskers);
+                tasking.printNumOfTasks();
             } else {
                 Ui.printIndent();
                 throw new DukeException(taskers);
@@ -88,17 +90,21 @@ public class TaskList {
         int num = text.indexOf("/");
         int num1 = text.indexOf(" ");
         int dayDate = Integer.parseInt(text.substring(num + 4, num + 6));
-        if (dayDate > 0 && dayDate <= 31) {
+        int monthDate = Integer.parseInt(text.substring(num + 7, num + 9));
+        int timeHour = Integer.parseInt(text.substring(num + 15, num + 17));
+        int timeMin = Integer.parseInt(text.substring(num + 17));
+        if (dayDate > 0 && dayDate <= 31 && monthDate > 0 && monthDate <= 12 &&
+                timeHour > 0 && timeHour <= 24 && timeMin >= 0 && timeMin <= 59 ) {
             Task task = new Deadline(text.substring(num1, num - 1),
                     text.substring(num + 4));
             String taskers = task.toString();
             if (!taskers.equals("Invalid date format!")) {
-                Task.printGI();
+                tasking.printGI();
                 Ui.printIndent();
                 System.out.println("  " + taskers);
                 listOfTasks.add(task);
-                Storage.addToFile(Storage.file, taskers);
-                Task.printNumOfTasks();
+                store.addToFile(Storage.file, taskers);
+                tasking.printNumOfTasks();
             } else {
                 Ui.printIndent();
                 throw new DukeException(taskers);

@@ -1,9 +1,10 @@
 package duke;
 
 import duke.task.Todo;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
 
@@ -16,7 +17,7 @@ public class TaskTest {
     public void test_markAsDone() {
         Todo todo = new Todo("do work");
         todo.markAsDone();
-        assertEquals(true, todo.getIsDone());
+        assertEquals(true, todo.isCompleted());
     }
 
     @Test

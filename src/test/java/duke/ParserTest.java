@@ -1,13 +1,17 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.DeleteCommand;
+import duke.command.ListCommand;
+
 import duke.exception.DukeException;
 import duke.parser.Parser;
-import org.junit.Test;
 
-import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
@@ -18,8 +22,8 @@ public class ParserTest {
 
     @Test
     public void test_parse_add(){
-        Command bye = Parser.parse("aDd");
-        assertEquals(true, bye instanceof AddCommand);
+        Command add = Parser.parse("deadLINE");
+        assertEquals(true, add instanceof AddCommand);
     }
 
     @Test

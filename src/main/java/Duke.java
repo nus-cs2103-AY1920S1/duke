@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Duke {
-    private static String listString = "";
-    private static ArrayList<Task> listArr = new ArrayList<Task>();
+//    private static String listString = "";
+//    private static ArrayList<Task> listArr = new ArrayList<Task>();
     private static String INDENT = "    ";
     private static String FILENAME = "../../../data/duke.txt";
 
@@ -20,6 +20,7 @@ public class Duke {
         try {
             ui = new Ui(INDENT);
             storage = new Storage(filePath);
+            tasks = new TaskList();
         } catch(Exception err) {
             System.out.println(err);
         }
@@ -41,45 +42,41 @@ public class Duke {
 
         while (!inputArr[0].equals("bye")) {
             if (inputArr[0].equals("list")) {
-                ui.printResponse("Here are the tasks in your list:\n" + listString);
+                ui.printResponse("Here are the tasks in your list:\n" + tasks.getListString());
             } else if (inputArr[0].equals("done")) {
                 listPointer = Integer.parseInt(inputArr[1]);
-                listArr.get(listPointer - 1).markAsDone();
+                tasks.markTaskAsDone(listPointer - 1);
                 ui.printResponse("Nice! I've marked this task as done: \n"
-                        + INDENT + "   " + listArr.get(listPointer - 1));
-                updateTodoString();
-                storage.updateTodoFile(listString);
+                        + INDENT + "   " + tasks.getList().get(listPointer - 1));
+                storage.updateTodoFile(tasks.getListString());
             } else if(inputArr[0].equals("delete")) {
                 listPointer = Integer.parseInt(inputArr[1]);
-                Task deletedTask = listArr.get(listPointer - 1);
-                listArr.remove(listPointer - 1);
+                Task deletedTask = tasks.getList().get(listPointer - 1);
+                tasks.deleteTask(listPointer - 1);
                 ui.printResponse("Noted. I've removed this task: \n"
                         + INDENT + "   " + deletedTask + "\n" + INDENT +
-                        "Now you have " + listArr.size() + " tasks in the list.");
-                updateTodoString();
-                storage.updateTodoFile(listString);
+                        "Now you have " + tasks.getList().size() + " tasks in the list.");
+                storage.updateTodoFile(tasks.getListString());
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + INDENT + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
-                        listArr.add(new Task(inputArr[1], "todo"));
-                        ui.printResponse(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage);
+                        tasks.addTask(new Task(inputArr[1], "todo"));
+                        ui.printResponse(befTaskAddMessage + tasks.getList().get(listSize) + "\n " + INDENT + aftTaskAddMessage);
                         listSize++;
-                        updateTodoString();
-                        storage.updateTodoFile(listString);
+                        storage.updateTodoFile(tasks.getListString());
                     } else if(inputArr[0].equals("deadline")) {
                         try {
                             String deadline = input.split(" /by ")[1];
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                             LocalDateTime deadlineByDateTime = LocalDateTime.parse(deadline, formatter);
-                            listArr.add(new Task(inputArr[1].split(" /by ")[0], "deadline",
+                            tasks.addTask(new Task(inputArr[1].split(" /by ")[0], "deadline",
                                     deadlineByDateTime));
-                            ui.printResponse(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT
+                            ui.printResponse(befTaskAddMessage + tasks.getList().get(listSize) + "\n " + INDENT
                                     + aftTaskAddMessage);
                             listSize++;
-                            updateTodoString();
-                            storage.updateTodoFile(listString);
+                            storage.updateTodoFile(tasks.getListString());
                         } catch(Exception ex) {
                             ui.printResponse("☹ OOPS!!! Deadlines require a specific datetime after /by, "
                                             + "in format 'dd/MM/yyyy HHmm'");
@@ -89,13 +86,12 @@ public class Duke {
                             String eventDateTime = input.split(" /at ")[1];
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                             LocalDateTime eventDateTimeByDateTime = LocalDateTime.parse(eventDateTime, formatter);
-                            listArr.add(new Task(inputArr[1].split(" /at ")[0], "event"
+                            tasks.addTask(new Task(inputArr[1].split(" /at ")[0], "event"
                                     , eventDateTimeByDateTime));
-                            ui.printResponse(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT
+                            ui.printResponse(befTaskAddMessage + tasks.getList().get(listSize) + "\n " + INDENT
                                     + aftTaskAddMessage);
                             listSize++;
-                            updateTodoString();
-                            storage.updateTodoFile(listString);
+                            storage.updateTodoFile(tasks.getListString());
                         } catch(Exception ex) {
                             ui.printError("☹ OOPS!!! Events require a specific datetime after /at, "
                                     + "in format 'dd/MM/yyyy HHmm'");
@@ -117,30 +113,4 @@ public class Duke {
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         new Duke(FILENAME).run();
     }
-
-    public static void print(String string, String INDENT) {
-        System.out.println(INDENT + "____________________________________________________________");
-        System.out.println(INDENT + " " + string);
-        System.out.println(INDENT + "____________________________________________________________");
-        System.out.println();
-    }
-
-    public static void updateTodoString() {
-        listString = "" + INDENT + " ";
-        for (int i = 0; i < listArr.size(); i++) {
-            listString += (i + 1) + ". " + listArr.get(i);
-            if (i != (listArr.size() - 1)) {
-                listString += '\n' + INDENT + ' ';
-            }
-        }
-    }
-
-//    public static void UIprintWelcome() {
-//        print("Hello! I'm Duke\n" +
-//                INDENT + " " + "What can I do for you?", INDENT);
-//    }
-
-//    public static void UIprintError(String errorMessage) {
-//        print(errorMessage, INDENT);
-//    }
 }

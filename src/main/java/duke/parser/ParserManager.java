@@ -1,7 +1,6 @@
 package duke.parser;
 
 import duke.command.*;
-import duke.command.IncompleteCommandException;
 import duke.command.UnknownCommandException;
 import duke.task.TaskList;
 

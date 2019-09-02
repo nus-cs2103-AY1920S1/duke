@@ -92,6 +92,8 @@ public class DataStorage {
         return contents;
     }
 
+    //@@author {ang-zeyu}-reused
+    //Reused from https://github.com/ang-zeyu/duke/blob/master/src/main/java/duke/storage/Storage.java with minor modifications
     private void setFilePath() {
         // Gets the currents directory of the user
         String workingDirectory = System.getProperty("user.dir");

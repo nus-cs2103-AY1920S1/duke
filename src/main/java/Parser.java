@@ -12,10 +12,10 @@ public class Parser {
      * @return other commands
      */
     // parse the command string keyed in by the user
-    public static Command parse (String input) {
+    public static Command parse (String input) throws DukeException {
         String[] userInput = input.split(" ", 2);
         String firstWord = userInput[0]; //firstword of the user input
-        try {
+        //try {
             switch (firstWord) {
                 case "bye":
                     return new ExitCommand();
@@ -70,9 +70,12 @@ public class Parser {
                         throw new DukeException("Incorrect format for due date of Event!!");
                     }
                     return new AddCommand(event);
+                default :
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
+        //} catch (DukeException e) {
+        //    System.out.println(e.getMessage());
+        //}
+        //return new AddCommand();
     }
 }

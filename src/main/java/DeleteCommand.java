@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        ui.printDeleteMessage();
+        ui.printDeleteMessage(tasks, task);
     }
 
     @Override

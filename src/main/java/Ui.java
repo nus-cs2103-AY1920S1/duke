@@ -66,7 +66,7 @@ public class Ui {
     }
     public void printListMessage(TaskList tasks) {
         System.out.println("Here are the tasks in your list:\n");
-        tasks.list(); // this prints the list of tasks
+        tasks.showList(); // this prints the list of tasks
     }
 
     public void showLine() {
@@ -84,7 +84,7 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("Error while loading");
     }
-    public void showError() {
-
+    public void showError(String s) {
+        System.out.println(s);
     }
 }

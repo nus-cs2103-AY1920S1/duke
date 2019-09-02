@@ -8,6 +8,13 @@ public class TaskList {
     }
 
     /**
+     * Overloaded constructor to initialise empty arraylist
+     */
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
      * To get the number of tasks
      * @return the size of the arraylist in an integer form
      */

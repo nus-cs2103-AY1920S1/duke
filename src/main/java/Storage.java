@@ -44,7 +44,6 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException{
         ArrayList<Task> tasks = new ArrayList<>();
-        String line;
         try {
             File loadUpFile = new File(this.filepath);
             Scanner scLoad = new Scanner(loadUpFile);
@@ -98,7 +97,7 @@ public class Storage {
                 if (tasks.getTask(i) instanceof Deadline) {
                     writeToFile(taskListFilePath, "D | " + tasks.getTask(i).isDone() + " | "
                             + tasks.getTask(i).getTask() + " | " + ((Deadline) tasks.getTask(i)).getDueDate());
-                } else if (tasks.getSize(i) instanceof Event) {
+                } else if (tasks.getTask(i) instanceof Event) {
                     writeToFile(taskListFilePath, "E | " + tasks.getTask(i).isDone() + " | "
                             + tasks.getTask(i).getTask() + " | " + ((Event) tasks.getTask(i)).getDueDate());
                 } else {

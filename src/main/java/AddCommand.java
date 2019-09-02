@@ -18,8 +18,8 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(task);
-        ui.printAddMessage();
+        tasks.addTask(this.task);
+        ui.printAddMessage(tasks, this.task);
         try {
             storage.writeToHardDisk(tasks);
         } catch (DukeException e) {

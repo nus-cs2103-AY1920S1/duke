@@ -1,0 +1,12 @@
+#SendButton {
+    -fx-background-color: rgb(65, 63, 84);
+    -fx-text-fill: rgb(222,222,222);
+    -fx-font-weight: bold;
+    -fx-font-size:18;
+}
+
+#SendButton:hover {
+    -fx-background-color: #393654;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}

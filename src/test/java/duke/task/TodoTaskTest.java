@@ -48,17 +48,17 @@ class TodoTaskTest {
             TodoTask todo = new TodoTask(TaskTestConstants.VALID_DESCRIPTION_1);
 
             assertFalse(todo.isDone());
-            assertEquals("✘", todo.getStatusIcon());
+            assertEquals("\u2718", todo.getStatusIcon());
             assertEquals(
-                    String.format("[T][✘] %s", TaskTestConstants.VALID_DESCRIPTION_1),
+                    String.format("[T][\u2718] %s", TaskTestConstants.VALID_DESCRIPTION_1),
                     todo.getStatusText());
 
             todo.setDone(true);
 
             assertTrue(todo.isDone());
-            assertEquals("✓", todo.getStatusIcon());
+            assertEquals("\u2713", todo.getStatusIcon());
             assertEquals(
-                    String.format("[T][✓] %s", TaskTestConstants.VALID_DESCRIPTION_1),
+                    String.format("[T][\u2713] %s", TaskTestConstants.VALID_DESCRIPTION_1),
                     todo.getStatusText());
         });
     }

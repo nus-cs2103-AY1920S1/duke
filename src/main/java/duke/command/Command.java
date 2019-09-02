@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.task.TaskList;
 import duke.storage.DukeFileWriteException;
 import duke.storage.Storage;
@@ -29,20 +29,20 @@ public abstract class Command {
      * Method for running the processing logic of the command.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      */
-    abstract void run(TaskList tasks, Ui ui, Storage storage);
+    abstract void run(TaskList tasks, MainWindow ui, Storage storage);
 
     /**
      * Method for running the validating logic of the command.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      * @throws DukeInvalidArgumentException If an argument is invalid for the command.
      */
-    abstract void validate(TaskList tasks, Ui ui, Storage storage)
+    abstract void validate(TaskList tasks, MainWindow ui, Storage storage)
             throws DukeInvalidArgumentException;
 
     /**
@@ -50,12 +50,12 @@ public abstract class Command {
      * Validates the inputs first, then runs the processing logic.
      *
      * @param tasks TaskList of tasks to use.
-     * @param ui Ui to use for displaying command output.
+     * @param ui MainWindow to use for displaying command output.
      * @param storage Storage for WritableCommands to execute write-to-disk operations.
      * @throws DukeInvalidArgumentException If an argument is invalid for the command.
      * @throws DukeFileWriteException If a file write operation of a command fails.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public void execute(TaskList tasks, MainWindow ui, Storage storage)
             throws DukeInvalidArgumentException, DukeFileWriteException {
         validate(tasks, ui, storage);
         run(tasks, ui, storage);

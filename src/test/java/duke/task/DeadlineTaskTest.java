@@ -98,9 +98,9 @@ class DeadlineTaskTest {
                     TaskTestConstants.VALID_DATE_1);
 
             assertFalse(deadline.isDone());
-            assertEquals("✘", deadline.getStatusIcon());
+            assertEquals("\u2718", deadline.getStatusIcon());
             assertEquals(
-                    String.format("[D][✘] %s (by: %s)",
+                    String.format("[D][\u2718] %s (by: %s)",
                             TaskTestConstants.VALID_DESCRIPTION_1,
                             TaskUtil.getDisplayTime(
                                     TaskUtil.getDateFromString(
@@ -110,9 +110,9 @@ class DeadlineTaskTest {
             deadline.setDone(true);
 
             assertTrue(deadline.isDone());
-            assertEquals("✓", deadline.getStatusIcon());
+            assertEquals("\u2713", deadline.getStatusIcon());
             assertEquals(
-                    String.format("[D][✓] %s (by: %s)",
+                    String.format("[D][\u2713] %s (by: %s)",
                             TaskTestConstants.VALID_DESCRIPTION_1,
                             TaskUtil.getDisplayTime(
                                     TaskUtil.getDateFromString(

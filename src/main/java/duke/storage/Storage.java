@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.command.DukeInvalidArgumentException;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -36,7 +36,7 @@ public class Storage {
     /** The absolute filePath of the task data file to use. */
     private String filePath;
     /** The user interface object for displaying error messages. */
-    private Ui ui;
+    private MainWindow ui;
 
     /**
      * Constructor of the storage object.
@@ -48,7 +48,7 @@ public class Storage {
      * @param dirName The directory name as a string.
      * @param ui The user interface object to use.
      */
-    public Storage(String dirName, Ui ui) {
+    public Storage(String dirName, MainWindow ui) {
         this.dirName = dirName;
         this.ui = ui;
         setFilePath();
@@ -69,11 +69,8 @@ public class Storage {
         try {
             dataScanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException ex) {
-            ui.printLineDivider();
-            ui.printMsgLine(" I did not find any previous data in your data directory\n"
+            ui.showMessage(" I did not find any previous data in your data directory\n"
                     + " I'll try to create one when you save something!");
-            ui.printLineDivider();
-            ui.printEmptyLine();
             return;
         }
 
@@ -113,16 +110,14 @@ public class Storage {
                 default:
                     throw new DukeTaskFileParseException(
                             "Unhandled taskType encountered",
-                            " ☹  Oops! I am not trained to handle this type of Tasks...\n");
+                            " =X  Oops! I am not trained to handle this type of Tasks...\n");
                 }
 
                 taskToAdd.setDone(isTaskDone);
                 taskList.addTask(taskToAdd);
             } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
-                ui.printLineDivider();
-                ui.printMsgLine(ex.getDisplayMsg());
-                ui.printMsgLine(String.format("   Error in storage file line number: %d", lineNumber));
-                ui.printLineDivider();
+                ui.showMessage(ex.getDisplayMsg()
+                        + String.format("\n   Error in storage file line number: %d", lineNumber));
             }
         }
     }
@@ -160,7 +155,7 @@ public class Storage {
         } catch (IOException ex) {
             throw new DukeFileWriteException(
                     ex.getMessage(),
-                    " ☹  OOPS!!! I failed to write the task data to disk!");
+                    " =X  OOPS!!! I failed to write the task data to disk!");
         }
     }
 
@@ -177,7 +172,7 @@ public class Storage {
         } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",
-                    " ☹  Oops! I encountered an invalid task type value while\n"
+                    " =X  Oops! I encountered an invalid task type value while\n"
                             + "   reading your file.");
         }
     }
@@ -201,7 +196,7 @@ public class Storage {
 
         throw new DukeTaskFileParseException(
                 "Invalid done status number encountered while parsing task file",
-                " ☹  Oops! I encountered an invalid or missing done value\n"
+                " =X  Oops! I encountered an invalid or missing done value\n"
                         + "   while reading your file.");
     }
 
@@ -221,7 +216,7 @@ public class Storage {
         } catch (DukeInvalidArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task description encountered when parsing task file",
-                    " ☹  Oops! I encountered an empty description while\n"
+                    " =X  Oops! I encountered an empty description while\n"
                             + "   reading your file.");
         }
     }
@@ -272,15 +267,12 @@ public class Storage {
      * to the user.
      */
     private void printNoStorageMsg() {
-        ui.printLineDivider();
-        ui.printMsgLine(" ☹  Oops! I failed to find a "
+        ui.showMessage(" =X  Oops! I failed to find a "
                 + dirName
                 + " directory upwards\n"
                 + "   and could not create one!");
-        ui.printMsgLine(
+        ui.showMessage(
                 " You can still run the application, but note your data\n"
                     + "   will not be here the next time you restart the app!");
-        ui.printLineDivider();
-        ui.printEmptyLine();
     }
 }

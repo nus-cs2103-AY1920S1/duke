@@ -51,7 +51,7 @@ public abstract class Task {
      * @return The respective unicode character.
      */
     String getStatusIcon() {
-        return (isDone ? "✓" : "✘");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

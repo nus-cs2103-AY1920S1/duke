@@ -1,80 +1,79 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.command.CommandParser;
 import duke.command.Commands;
-import duke.storage.DukeFileWriteException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeApplication;
+import duke.ui.MainWindow;
+import javafx.animation.PauseTransition;
+import javafx.application.Application;
+import javafx.util.Duration;
 
 /**
  * Main class of the Duke app.
- * Runs a main read, print, evaluate loop.
+ * Launches the JavaFX DukeApplication.
+ * Provides an abstraction of a running duke instance, with a method
+ * to process input.
  */
-class Duke {
+public class Duke {
 
     /** The directory name to use in construction of the storage object. */
     private static final String RECURSIVE_PARENT_DIR_NAME = "data";
+    /** The greeting message to show on application launch. */
+    private static final String GREETING_MSG = " Hello! I'm Duke\n"
+            + " What can I do for you?\n";
     /** The storage object to use for task-disk storage. */
     private Storage storage;
-    /** The Ui object to use for displaying output to the user. */
-    private Ui ui;
+    /** The MainWindow object to use for displaying output to the user. */
+    private MainWindow ui;
     /** The TaskList object to use for in-memory task storage. */
     private TaskList tasks;
 
     /**
-     * Creates an instance of the Duke app and runs it.
+     * Launches the DukeApplication JavaFX user interface.
      * Does not use any command line arguments currently.
      *
      * @param args Array of command line string arguments.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke(RECURSIVE_PARENT_DIR_NAME);
-        duke.run();
+        Application.launch(DukeApplication.class);
     }
 
     /**
      * Constructor of the Duke instance.
      * Initializes the various instance properties.
      *
-     * @param dirName The directory name to use for the storage object.
+     * @param ui The MainWindow with which to initialise this duke instance.
      */
-    private Duke(String dirName) {
-        ui = new Ui(new Scanner(System.in));
-        storage = new Storage(dirName, ui);
-        tasks = new TaskList();
-        storage.loadTasksToList(tasks);
+    public Duke(MainWindow ui) {
+        this.ui = ui;
+        ui.showMessage(GREETING_MSG);
+        this.storage = new Storage(RECURSIVE_PARENT_DIR_NAME, ui);
+        this.tasks = new TaskList();
+        this.storage.loadTasksToList(tasks);
     }
 
     /**
-     * The main Read, Print, Evaluate loop of the Duke app.
-     * While the command parsed is not of the bye command type,
-     * the method continues to execute the commands.
-     * Any remaining uncaught duke exceptions are displayed and
-     * presented to the user here.
+     * Response processor of Duke.
+     * Takes a string input and creates a command, and then executes it.
+     * Also prints any error messages resulting from Duke to the ui.
+     *
+     * @param input String input from the user.
      */
-    private void run() {
-        ui.printGreetingMsg();
+    public void processInput(String input) {
+        try {
+            Command command = CommandParser.parseCommand(input);
+            command.execute(tasks, ui, storage);
 
-        while (true) {
-            try {
-                String input = ui.readLine();
-                ui.printLineDivider();
-                Command command = CommandParser.parseCommand(input);
-                command.execute(tasks, ui, storage);
-
-                if (command.commandType == Commands.BYE) {
-                    break;
-                }
-            } catch (DukeExceptions ex) {
-                ui.displayDukeException(ex);
-            } finally {
-                ui.printLineDivider();
-                ui.printEmptyLine();
+            if (command.commandType == Commands.BYE) {
+                PauseTransition exitDelay = new PauseTransition(new Duration(1000));
+                exitDelay.setOnFinished(ui.exitHandler);
+                exitDelay.play();
             }
+        } catch (DukeExceptions ex) {
+            ui.showMessage(ex.getDisplayMsg());
         }
     }
 }

@@ -98,9 +98,9 @@ class EventTaskTest {
             String endDate = splitTimings[1];
 
             assertFalse(event.isDone());
-            assertEquals("✘", event.getStatusIcon());
+            assertEquals("\u2718", event.getStatusIcon());
             assertEquals(
-                    String.format("[E][✘] %s (at: %s)",
+                    String.format("[E][\u2718] %s (at: %s)",
                             TaskTestConstants.VALID_DESCRIPTION_1,
                             TaskUtil.getDisplayTime(TaskUtil.getDateFromString(startDate))
                                     + " to "
@@ -111,9 +111,9 @@ class EventTaskTest {
             event.setDone(true);
 
             assertTrue(event.isDone());
-            assertEquals("✓", event.getStatusIcon());
+            assertEquals("\u2713", event.getStatusIcon());
             assertEquals(
-                    String.format("[E][✓] %s (at: %s)",
+                    String.format("[E][\u2713] %s (at: %s)",
                             TaskTestConstants.VALID_DESCRIPTION_1,
                             TaskUtil.getDisplayTime(TaskUtil.getDateFromString(startDate))
                                     + " to "

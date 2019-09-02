@@ -47,6 +47,7 @@ public class Duke {
         System.out.println("Enter filepath for task list:");
         Scanner sc = new Scanner(System.in);
         String filePath = sc.nextLine();
+        sc.close();
         Duke duke;
         if (filePath.equals("default")) {
             duke = new Duke("/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt");

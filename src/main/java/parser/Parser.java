@@ -6,6 +6,7 @@ import commands.AddCommand;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ExitCommand;
+import commands.FindCommand;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
@@ -24,7 +25,7 @@ public class Parser {
      * Enumeration of all command types supported by ui.Duke.
      */
     private enum Imperative {
-        BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO
+        BYE, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO
     }
 
     /**
@@ -70,6 +71,8 @@ public class Parser {
                     splitTaskAttributes(splitCommand[1], "\\/")[0],
                     splitTaskAttributes(splitCommand[1], "\\/")[1],
                     false));
+        case FIND:
+            return new FindCommand(imperative, splitCommand[1]);
         default:
             throw new IllegalArgumentException();
         }

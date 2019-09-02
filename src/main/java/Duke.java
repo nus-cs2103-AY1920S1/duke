@@ -69,9 +69,8 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Label welcomeText = new Label("Hello! I'm Quack.\nWhat can I do for you?\n");
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(welcomeText, new ImageView(duke)));
+                DialogBox.getDukeDialog("Hello! I'm Quack.\nWhat can I do for you?\n", user));
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Quack");
@@ -138,10 +137,11 @@ public class Duke extends Application {
     private void handleUserInput() {
         String text = userInput.getText();
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String responseText = getResponse(userInput.getText());
+        Label dukeText = new Label(responseText);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getDukeDialog(responseText, duke)
         );
         if (text.equals("bye")) {
             userInput.setEditable(false);
@@ -153,7 +153,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);

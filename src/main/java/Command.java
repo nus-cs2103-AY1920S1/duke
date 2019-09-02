@@ -30,9 +30,13 @@ public class Command {
             break;
         case "done":
             int number = ui.readNumber();
-            tasks.markDone(number);
-            ui.printDone(number, tasks);
-            storage.updateDone(number);
+            if (!TaskList.getList().get(number - 1).isDone()) {
+                tasks.markDone(number);
+                ui.printDone(number, tasks);
+                storage.updateDone(number);
+            } else {
+                System.out.println("Task is already done.");
+            }
             break;
         case "todo":
             String taskname = ui.readLine().trim();

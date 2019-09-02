@@ -7,10 +7,13 @@ import java.util.function.*;
 public class Registry {
 	private static HashMap<Class<?>, BiConsumer<JsonWriter.ValueContext, ?>> encoderMap
 		= new HashMap<>();
+	private static HashMap<Class<?>, BiConsumer<JsonWriter.ValueContext, ?>> encoderCache
+		= new HashMap<>();
 	public static <T> void register(
 			Class<T> clazz,
 			BiConsumer<JsonWriter.ValueContext, T> encoder) {
 		encoderMap.put(clazz, encoder);
+		encoderCache.clear();
 			}
 
 	static {
@@ -32,14 +35,11 @@ public class Registry {
 		register(Object.class, (ctx, obj) -> ctx.writeString(obj.toString()));
 	}
 
-	static <T> BiConsumer<JsonWriter.ValueContext, T> getEncoder(Class<? extends T> clazz) {
-		System.out.printf("Finding encoder for %s\n", clazz);
+	private static <T> BiConsumer<JsonWriter.ValueContext, T> getEncoderInner(Class<? extends T> clazz) {
 		Class<?> current = clazz;
 		while(!Object.class.equals(current)) {
-			System.out.printf("Checking superclass %s\n", current);
 			BiConsumer<JsonWriter.ValueContext, ?> encoder = encoderMap.get(current);
 			if(encoder != null) {
-				System.out.printf("Using encoder for %s\n", current);
 				return (BiConsumer<JsonWriter.ValueContext, T>) encoder;
 			}
 			current = current.getSuperclass();
@@ -47,12 +47,10 @@ public class Registry {
 		current = clazz;
 		while(!Object.class.equals(current)) {
 		for(Type iface : current.getInterfaces()) {
-			System.out.printf("Checking iface %s\n", iface);
 			if(iface instanceof Class) {
 				Class<?> c = (Class<?>) iface;
 				BiConsumer<JsonWriter.ValueContext, ?> encoder = encoderMap.get(c);
 				if(encoder != null) {
-					System.out.printf("Using encoder for %s\n", c);
 					return (BiConsumer<JsonWriter.ValueContext, T>) encoder;
 				}
 			}
@@ -62,9 +60,18 @@ public class Registry {
 
 		BiConsumer<JsonWriter.ValueContext, ?> encoder = encoderMap.get(Object.class);
 		if(encoder != null) {
-			System.out.printf("Using default encoder for Object\n");
 			return (BiConsumer<JsonWriter.ValueContext, T>) encoder;
 		}
 		throw new JsonException("No handler for class %s", clazz);
 	}
+
+	private static <T> BiConsumer<JsonWriter.ValueContext, T> getEncoder(Class<? extends T> clazz) {
+		if(encoderCache.containsKey(clazz)) {
+			return encoderCache.get(clazz);
+		}
+		BiConsumer<JsonWriter.ValueContext, T> encoder = getEncoderInner(clazz);
+		encoderCache.put(clazz, encoder);
+		return encoder;
+	}
+	
 }

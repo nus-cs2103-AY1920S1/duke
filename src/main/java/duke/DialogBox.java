@@ -32,7 +32,10 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private static Background BG_GREY = new Background(
+    private static Background BG_ORANGE = new Background(
+            new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    private static Background BG_LIGHTGRAY = new Background(
             new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY));
 
     private DialogBox(String user, String text, Image img) {
@@ -62,8 +65,17 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the user dialog.
+     *
+     * @param text Text for the user dialog
+     * @param img Image for the user dialog
+     * @return The user dialog
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox("You", text, img);
+        var db = new DialogBox("You", text, img);
+        db.setBackground(BG_LIGHTGRAY);
+        return db;
     }
 
     /**
@@ -76,7 +88,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox("Duke", text, img);
         db.flip();
-        db.setBackground(BG_GREY);
+        db.setBackground(BG_ORANGE);
         return db;
     }
 }

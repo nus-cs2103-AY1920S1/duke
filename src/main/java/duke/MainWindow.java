@@ -26,9 +26,9 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaUser.png"));
+            .getResourceAsStream("/images/DaMannequin.png"));
     private Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaNeverForget.png"));
+            .getResourceAsStream("/images/DaLemon.png"));
 
     public MainWindow() {
     }
@@ -39,8 +39,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    /**
+     * Shows a welcome message from Duke.
+     */
+    public void showWelcome() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage)
+        );
+    }
+
+    /**
+     * Shows a generic error message from Duke.
+     */
+    public void showError() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.getLoadingError(), dukeImage)
         );
     }
 

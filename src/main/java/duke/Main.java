@@ -1,5 +1,6 @@
 package duke;
 
+import duke.ui.Ui;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +25,15 @@ public class Main extends Application {
             stage.setTitle("Duke");
             stage.setResizable(false);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+
+            MainWindow controller = fxmlLoader.<MainWindow>getController();
+            controller.setDuke(duke);
+            if (Ui.hasNewMessage()) {
+                Ui.clearMessageQueue();
+                controller.showError();
+            }
+            controller.showWelcome();
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

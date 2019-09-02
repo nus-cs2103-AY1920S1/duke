@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
-    private Queue<String> messageQueue = new LinkedList<>();
+    private static Queue<String> messageQueue = new LinkedList<>();
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -48,18 +48,27 @@ public class Ui {
      * @return Welcome message
      */
     public static String getWelcomeMessage() {
-        return "Hello! I'm Duke"
+        return "Hello! I'm Duke."
                 + System.lineSeparator()
                 + "What can I do for you?";
     }
 
     /**
-     * Shows a loading error.
+     * Gets a preset loading error.
+     *
+     * @return Generic loading error message
      */
-    public void showLoadingError() {
-        String output = "The save file doesn't seem to be there or is incorrect!"
+    public static String getLoadingError() {
+        return "The save file doesn't seem to be there or is incorrect!"
                 + System.lineSeparator()
                 + "Let's start afresh.";
+    }
+
+    /**
+     * Shows a loading error message.
+     */
+    public void showLoadingError() {
+        printLine(getLoadingError());
     }
 
     /**
@@ -95,6 +104,22 @@ public class Ui {
         }
 
         return output.toString().trim();
+    }
+
+    /**
+     * Checks if there is a new message in the queue.
+     *
+     * @return True if there is a message in the queue.
+     */
+    public static boolean hasNewMessage() {
+        return !messageQueue.isEmpty();
+    }
+
+    /**
+     * Clears the message queue.
+     */
+    public static void clearMessageQueue() {
+        messageQueue.clear();
     }
 
     /**

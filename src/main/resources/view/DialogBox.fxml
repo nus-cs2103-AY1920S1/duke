@@ -10,8 +10,8 @@
   <children>
       <VBox maxHeight="1.7976931348623157E308" prefWidth="100.0" HBox.hgrow="ALWAYS">
          <children>
-          <Label fx:id="userName" style="-fx-font-weight: bold; -fx-underline: true;" text="User" wrapText="true" />
-            <Label fx:id="message" maxHeight="1.7976931348623157E308" text="Message" wrapText="true" />
+          <Label fx:id="userName" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="User" wrapText="true" />
+            <Label fx:id="message" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Message" wrapText="true" />
          </children>
          <padding>
             <Insets left="10.0" top="15.0" />

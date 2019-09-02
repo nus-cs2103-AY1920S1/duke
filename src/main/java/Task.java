@@ -8,15 +8,27 @@ public class Task {
     protected boolean isDone;
     protected boolean isCorrectFormat;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param description Takes in a string that is
+     * either Todo, Event or Deadline.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.isCorrectFormat = false;
     }
 
+    /**
+     * Method to get whether that date is in correct format.
+     *
+     * @return Returns the boolean isCorrectFormat for the date.
+     */
     public boolean getIsCorrectFormat() {
         return isCorrectFormat;
     }
+
     /**
      * Returns tick or cross symbol.
      *
@@ -57,6 +69,12 @@ public class Task {
         Ui.printLine();
     }
 
+    /**
+     * Method to get the String for whether
+     * the task is done or not.
+     *
+     * @return Returns the tick or cross in brackets.
+     */
     public String toString() {
         return "[" + getStatusIcon() + "]";
     }
@@ -70,6 +88,14 @@ public class Task {
         System.out.println("Noted. I've removed this task.");
     }
 
+    /**
+     * Method to format the date into the appropriate format.
+     * For example, 10/02/2012 1800 to 10th of February 2012, 6:00 pm.
+     *
+     * @param date Takes in a valid date to format it.
+     * @return Returns the correctly formatted date with the
+     * appropriate strings.
+     */
     public String formatDate(String date) {
         String formatted = date;
         if (!date.contains(")")) {

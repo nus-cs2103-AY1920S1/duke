@@ -17,7 +17,7 @@ public class Storage {
      * @param filepath File that the task is added to.
      * @param textToAdd Tasks that needs to be added.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason
+     * does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void addToFile(String filepath, String textToAdd) throws IOException {
             FileWriter typer = new FileWriter(filepath, true);
@@ -83,6 +83,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task into the tasklist
+     * in TaskList from the file.
+     *
+     * @return ArrayList that has been copied from the file.
+     * @throws IOException If the named file exists but is a directory rather than a regular file,
+     * does not exist but cannot be created, or cannot be opened for any other reason.
+     * @throws DukeException If there is nothing in the file to be loaded,
+     * this exception will be thrown.
+     */
     public ArrayList<Task> load() throws IOException, DukeException {
         File f = new File(file);
         Scanner sc = new Scanner(f);

@@ -1,12 +1,19 @@
 public class Todo extends Task {
 
-    //protected String by;
-
+    /**
+     * Constructor for Todo task.
+     * @param description
+     */
     public Todo(String description) {
         super(description);
-        //this.by = by;
     }
 
+    /**
+     * Method to get the string for Todo tasks.
+     *
+     * @return Returns the formatted string to
+     * be added into tasklist and file.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString() + " " + description;

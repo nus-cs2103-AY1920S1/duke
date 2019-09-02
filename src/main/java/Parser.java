@@ -1,3 +1,8 @@
+package duke;
+
+import duke.command.*;
+import duke.DukeException;
+import duke.task.*;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Date;

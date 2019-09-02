@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Parser;
+import duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.task.Task;
+
 public class DoneCommand extends Command {
     public DoneCommand() {
         this("");

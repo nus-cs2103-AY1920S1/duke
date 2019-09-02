@@ -1,3 +1,7 @@
+package duke;
+
+import duke.TaskList;
+import duke.DukeException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;

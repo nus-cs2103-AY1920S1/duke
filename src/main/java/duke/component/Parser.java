@@ -109,6 +109,14 @@ public class Parser {
             }
 
 
+        } else if (input.contains("find")) {
+            String keyword;
+            try {
+                keyword = input.substring(5);
+                return new FindCommand(keyword);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new EmptyDescException("find");
+            }
         } else {
             throw new InvalidArgumentException();
         }

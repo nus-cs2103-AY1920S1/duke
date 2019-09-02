@@ -158,6 +158,13 @@ public class Ui {
     }
 
     /**
+     * Prints message when given find keywords do not match any task.
+     */
+    public void showTaskNotFoundMessage() {
+        System.out.println("No tasks found matching the keyword you specified!");
+        this.showLine();
+    }
+    /**
      * Prints message when user marks a given task as done.
      *
      * @param task the task marked as done

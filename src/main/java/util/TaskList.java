@@ -22,6 +22,13 @@ public class TaskList {
     }
 
     /**
+     * Creates a copy of a given task list.
+     */
+    public TaskList(TaskList anotherTaskList) {
+        this.tasks = anotherTaskList.tasks;
+    }
+
+    /**
      * Checks if list is empty.
      *
      * @return true if list is empty, false otherwise

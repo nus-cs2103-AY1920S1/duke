@@ -72,7 +72,7 @@ public class Ui {
      */
     public void printTasks(List<Task> tasks) throws DukeException {
         if (tasks.isEmpty()) {
-            throw new DukeException("\t☹ OOPS!!! The list is empty.");
+            throw new DukeException("\tOOPS!!! The list is empty.");
         }
         System.out.println("\tHere are the tasks in your list:");
         int count = 0;
@@ -94,13 +94,13 @@ public class Ui {
         try {
             keyword = keyword.substring(4).trim();
             if (keyword.isEmpty()) {
-                throw new DukeException("\t☹ OOPS!!! Search keyword cannot be empty.");
+                throw new DukeException("\tOOPS!!! Search keyword cannot be empty.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! Search keyword cannot be empty.");
+            throw new DukeException("\tOOPS!!! Search keyword cannot be empty.");
         }
         if (tasks.isEmpty()) {
-            throw new DukeException("\t☹ OOPS!!! The list is empty.");
+            throw new DukeException("\tOOPS!!! The list is empty.");
         }
         System.out.println("\tHere are the tasks in your list:");
         int count = 0;
@@ -111,7 +111,7 @@ public class Ui {
             }
         }
         if (count == 0) {
-            throw new DukeException("\t☹ OOPS!!! There are no matching tasks.");
+            throw new DukeException("\tOOPS!!! There are no matching tasks.");
         }
     }
 
@@ -119,7 +119,7 @@ public class Ui {
      * Prints error if there is no database.
      */
     public void showLoadingError() {
-        showError("     No existing task list available!");
+        showError("\tNo existing task list available!");
     }
 
     /**

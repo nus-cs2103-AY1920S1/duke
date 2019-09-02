@@ -9,7 +9,7 @@ import duke.storage.Storage;
 public class ExitCommand extends Command {
 
     /**
-     * Exit the chatbot. Get Ui to show the exit message and Storage to update data.
+     * Exit the chatbot. Get Ui to show the exit message.
      *
      * @param taskList TaskList object containing the current tasks list.
      * @param ui The Ui object we are currently using.
@@ -18,7 +18,6 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showExit();
-        storage.updateData(taskList.getTasks());
     }
 
     /**

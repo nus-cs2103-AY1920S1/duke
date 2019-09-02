@@ -84,8 +84,7 @@ public class Storage {
 
         try {
             FileWriter fw = new FileWriter(filePath);
-            while (!list.isEmpty()) {
-                Task task = list.remove(0);
+            for (Task task: list) {
                 StringBuilder sb = new StringBuilder();
                 if (task instanceof Todo) {
                     sb.append("T ");

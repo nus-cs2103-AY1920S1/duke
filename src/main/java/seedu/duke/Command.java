@@ -12,8 +12,8 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command by checking exceptions and
-     * printing out what has been done
+     * Executes the command by checking exceptions,
+     * and printing out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param ui Ui that interacts with user by checking for exceptions and printing out

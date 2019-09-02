@@ -7,8 +7,7 @@ public class ToDos extends Task {
 
     /**
      * Creates a new ToDo with the specified detail.
-     * @param task Detail of what the ToDo 
-     * requires to be done.
+     * @param task Detail of what the ToDo requires to be done.
      */
     public ToDos(String task) {
         super(task);
@@ -17,10 +16,8 @@ public class ToDos extends Task {
     /**
      * Creates a new ToDo with the specified detail and 
      * its completition status being predetermined.
-     * @param task Detail of what the ToDo 
-     * requires to be done.
-     * @param complete Boolean to determine whether the ToDo
-     * has been completed or not.
+     * @param task Detail of what the ToDo requires to be done.
+     * @param complete Boolean to determine whether the ToDo has been completed or not.
      */
     public ToDos(String task, boolean complete) {
         super(task, complete);

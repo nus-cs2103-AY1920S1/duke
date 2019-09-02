@@ -13,15 +13,15 @@ public class TaskList {
     /**
      * Creates a new TaskList object initialised with tasks from
      * the inputted array list of Tasks.
-     * @param taskList An array list of tasks with which the TaskList
-     * object is initialised.
+     * @param taskList An array list of tasks with which the TaskList object is initialised.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * @return The current task List
+     * Returns the an array list which is the TaskList object's task list. 
+     * @return The current TaskList object's task list.
      */
     public ArrayList<Task> getTaskList() {
         return taskList;
@@ -31,8 +31,7 @@ public class TaskList {
      * Adds a new Task into the task list and writes
      * the changes back into the local file of tasks as well.
      * @param task The task to be added into the task list.
-     * @param storage The Storage object handling the read and write from the
-     * local file storing the tasks.
+     * @param storage The Storage object handling the read and write from the local file storing the tasks.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
     public void addTask(Task task, Storage storage) throws IOException {
@@ -62,8 +61,7 @@ public class TaskList {
      * Deletes a specific task from the task list and writes
      * the changes back into the local file of tasks as well.
      * @param index The index of the task to be deleted from the array list.
-     * @param storage The Storage object handling the read and write from the
-     * local file storing the tasks.
+     * @param storage The Storage object handling the read and write from the local file storing the tasks.
      * @throws DukeException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
@@ -83,10 +81,8 @@ public class TaskList {
     /**
      * Sets the status of a particular task in the array list of tasks to 
      * completed thereby signifying that the task has been completed.
-     * @param index The index of the task in the array list to be set to completed 
-     * to be marked as completed.
-     * @param storage The Storage object handling the read and write from the
-     * local file storing the tasks.
+     * @param index The index of the task in the array list to be set to completed to be marked as completed.
+     * @param storage The Storage object handling the read and write from the local file storing the tasks.
      * @throws DukeException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */

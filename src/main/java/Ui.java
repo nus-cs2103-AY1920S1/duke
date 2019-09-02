@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+
 /**
  * The Ui class handles the interaction with the users, mainly 
  * displaying the greeting and goodbye messages along with customised
  * error messages.
  */
+
 public class Ui {
 
     /**
@@ -46,13 +48,12 @@ public class Ui {
      * Validates whether a command entered by the user is legitimate and something
      * Duke can act upon.
      * @param detail Details of the user command broken down into chunks.
-     * @throws DukeException When the command is either incomplete or an invalid
-     * command.
+     * @throws DukeException When the command is either incomplete or an invalid command.
      */
     public static void validateDetail(String[] detail) throws DukeException {
         if (detail.length == 0) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else if (! detail[0].equals("todo") && ! detail[0].equals("event") &&! detail[0].equals("deadline")) {
+        } else if (! detail[0].equals("todo") && ! detail[0].equals("event") && ! detail[0].equals("deadline")) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (detail.length == 1) {
             throw new DukeException("OOPS!!! The description of a " + detail[0] + " cannot be empty.");
@@ -62,8 +63,7 @@ public class Ui {
     /**
      * Checks whether the details being used to create a particular deadline are sufficient. 
      * @param detail The details entered by the user to create the deadline.
-     * @throws DukeException When insufficient data is entered by the user to 
-     * create the deadline.
+     * @throws DukeException When insufficient data is entered by the user to create the deadline.
      */
     public static void validateDeadlineDetails(String[] detail) throws DukeException {
         if (detail.length != 2) {
@@ -74,8 +74,7 @@ public class Ui {
     /**
      * Checks whether the details being used to create a particular event are sufficient. 
      * @param detail The details entered by the user to create the event.
-     * @throws DukeException When insufficient data is entered by the user to 
-     * create the event.
+     * @throws DukeException When insufficient data is entered by the user to create the event.
      */
     public static void validateEventDetails(String[] detail) throws DukeException {
         if (detail.length != 2) {

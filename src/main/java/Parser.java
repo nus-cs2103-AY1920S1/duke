@@ -61,7 +61,7 @@ public class Parser {
      * @throws DukeException If the format of the time is invalid.
      */
     public static String parseTime(String timeDetail) throws DukeException {
-        int hour = (Integer.parseInt(timeDetail)/100);
+        int hour = (Integer.parseInt(timeDetail) / 100);
         validateHour(hour);
         String actualHour = hour % 12 == 0 ? "12" : String.valueOf(hour % 12); 
         int minute = Integer.parseInt(timeDetail) % 100;
@@ -76,8 +76,7 @@ public class Parser {
      * its string representation in the dd/mm/yyyy format.
      * @param dateDetail The string representation of the date.
      * @return Date in (dd of mm, YYYY) format.
-     * @throws DukeException When the dd/mm/yyyy format of the date 
-     * is invalid.
+     * @throws DukeException When the dd/mm/yyyy format of the date is invalid.
      */
     public static String parseDate(String dateDetail) throws DukeException {
         String[] dateBreakup = dateDetail.split("/");
@@ -92,8 +91,7 @@ public class Parser {
      * Returns the deadline date and time for a deadline in the advanced date and time
      * format.
      * @param dateDetails Details of the due date and time of the deadline. 
-     * @return String representation of the deadline date and time in advanced date
-     * and time format. 
+     * @return String representation of the deadline date and time in advanced date and time format. 
      * @throws DukeException If the due or time entered are invalid.
      */
     public static String processDeadlineDate(String dateDetails) throws DukeException {
@@ -107,7 +105,7 @@ public class Parser {
      * format.
      * @param dateDetails Details of the due date and time duration of the event. 
      * @return String representation of the event date and time duration in advanced date
-     * and time format.
+     *     and time format.
      * @throws DukeException If the due or time duration entered are invalid.
      */
     public static String processEventDate(String dateDetails) throws DukeException {
@@ -123,8 +121,7 @@ public class Parser {
      * @param input The user input.
      * @param taskList The taskList object handling all tasks.
      * @param ui The Ui object to display any messages to the user.
-     * @param storage The Storage object needed to load and write back to the 
-     * tasks file. 
+     * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws Exception When any error occurs during the execution of the user command.
      */
     public void processCommand(String input, TaskList taskList, Ui ui, Storage storage) throws Exception {
@@ -150,8 +147,7 @@ public class Parser {
      * specified by the user.
      * @param input The user's delete command.
      * @param taskList The TaskList object holding all the tasks.
-     * @param storage The Storage object needed to load and write back to the 
-     * tasks file. 
+     * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws DukeException When the index the user entered is not a number.
      * @throws IOException When there is a problem writing back to the file.
      */
@@ -173,8 +169,7 @@ public class Parser {
      * specified by the user.
      * @param input The user's done command.
      * @param taskList The TaskList object holding all the tasks.
-     * @param storage The Storage object needed to load and write back to the 
-     * tasks file. 
+     * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws DukeException When the index the user entered is not a number.
      * @throws IOException When there is a problem writing back to the file.
      */
@@ -196,8 +191,7 @@ public class Parser {
      * the local file as well. 
      * @param details Details being used to create the event.
      * @param list The TaskList object holding all the tasks.
-     * @param storage The Storage object needed to load and write back to the 
-     * tasks file. 
+     * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws IOException When any error arises in writing back into storage in the file.
      */
     public static void addToDo(String details, TaskList list, Storage storage) throws IOException {
@@ -211,8 +205,7 @@ public class Parser {
      * the local file as well. 
      * @param details Details being used to create the event.
      * @param list The TaskList object holding all the tasks.
-     * @param storage The Storage object needed to load and write back to the 
-     * tasks file. 
+     * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws DukeException When any error arises in creating the event.
      * @throws IOException When any error arises in writing back into storage in the file.
      */
@@ -231,8 +224,7 @@ public class Parser {
      * the local file. 
      * @param details Details being used to create the event.
      * @param list The TaskList object holding all the tasks.
-     * @param storage The Storage object needed to load and write back to the 
-     * tasks file. 
+     * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws DukeException When any error arises in creating the event.
      * @throws IOException When any error arises in writing back into storage in the file.
      */

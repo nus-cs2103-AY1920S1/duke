@@ -28,11 +28,10 @@ public class Storage {
      * of the task.
      * @param line The string which, in a single line, describes a particular task.
      * @return The task constructed from the inputted task detail line.
-     * @throws DukeException When the line of string being read does not describe any
-     * particular type of task.
+     * @throws DukeException When the line of string being read does not describe any particular type of task.
      */
-    public static Task createTaskFromFile(String s) throws DukeException {
-        String[] command = s.split(" \\| ");
+    public static Task createTaskFromFile(String line) throws DukeException {
+        String[] command = line.split(" \\| ");
         boolean isPending = command[1].equals("1") ? true : false;
         switch (command[0]) {
         case "T":
@@ -62,8 +61,8 @@ public class Storage {
      * the file.
      * @return An array list of tasks.
      * @throws FileNotFoundException When the file being written to cannot be found.
-     * @throws DukeException When a particular task saved in the file is of the wrong 
-     * format or does not describe an existing type of task.
+     * @throws DukeException When a particular task saved in the file is of the 
+     *     wrong format or does not describe an existing type of task.
      */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> list = new ArrayList<>();
@@ -91,6 +90,8 @@ public class Storage {
     }
 
     /**
+     * Returns the file path of the file which the storage object 
+     * is using for read and write purposes.
      * @return the filePath
      */
     public String getFilePath() {

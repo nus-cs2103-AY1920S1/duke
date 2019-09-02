@@ -39,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Returns the string representation of a Task
+     * Returns the string representation of a Task.
      */
     @Override
     public String toString() {

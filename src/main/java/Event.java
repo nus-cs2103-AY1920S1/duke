@@ -8,9 +8,9 @@ public class Event extends Task {
     String timeline;
 
     /**
-     * Creates a new Event object
-     * @param task Description of the event to take place
-     * @param timeline Description of the duration of the event
+     * Creates a new Event object.
+     * @param task Description of the event to take place.
+     * @param timeline Description of the duration of the event.
      */
     public Event(String task, String timeline) {
         super(task);
@@ -19,11 +19,11 @@ public class Event extends Task {
 
     /**
      * Creates a new Event object for use within Duke, 
-     * with a predermined completion state.
+     * with a predermined completion state of whether 
      * it is complete or not.
-     * @param task Description of the event to take place
-     * @param timeline Description of the duration of the event
-     * @param complete Boolean variable to determine if the deadline has been finished or not
+     * @param task Description of the event to take place.
+     * @param timeline Description of the duration of the event.
+     * @param complete Boolean variable to determine if the deadline has been finished or not.
      */
     public Event(String task, String timeline, boolean complete) {
         super(task, complete);
@@ -31,7 +31,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of an event as it is stored in text file on the local system.
+     * Returns the String representation of an event as 
+     * it is stored in text file on the local system.
      */
     @Override
     public String toStringForFile() {

@@ -8,9 +8,9 @@ public class Deadline extends Task {
     String dueDate;
 
     /**
-     * Returns a new Deadline object for use within Duke
-     * @param task Description of the deadline task
-     * @param dueDate Description of the time the deadline needs to be finished
+     * Returns a new Deadline object for use within Duke.
+     * @param task Description of the deadline task.
+     * @param dueDate Description of the time the deadline needs to be finished.
      */
     public Deadline(String task, String dueDate) {
         super(task);
@@ -19,9 +19,9 @@ public class Deadline extends Task {
 
     /**
      * Returns a new Deadline object for use within Duke with a predermined completion state.
-     * @param task Description of the deadline task
-     * @param dueDate Description of the time the deadline needs to be finished
-     * @param complete Boolean variable to determine if the deadline has been finished or not
+     * @param task Description of the deadline task.
+     * @param dueDate Description of the time the deadline needs to be finished.
+     * @param complete Boolean variable to determine if the deadline has been finished or not.
      */
     public Deadline(String task, String dueDate, boolean complete) {
         super(task, complete);
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of a deadline
+     * Returns the String representation of a deadline.
      */
     @Override
     public String toString() {

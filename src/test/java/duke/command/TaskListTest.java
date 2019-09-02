@@ -1,24 +1,22 @@
 package duke.command;
 
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Type;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Tests TaskList class
+ * Tests TaskList class.
  */
 class TaskListTest {
     /**
-     * Tests if TaskList successfully add a new Task
+     * Tests if TaskList successfully add a new Task.
      */
     @Test
     public void taskList_invalidCommand_exceptionThrown() {
         /**
-         * Stub for Task
+         * Stub for Task.
          */
         class TaskStub extends Task {
             /**
@@ -36,7 +34,7 @@ class TaskListTest {
             }
 
             /**
-             * Returns null
+             * Returns null.
              */
             @Override
             public String getFileStringFormat() {
@@ -44,8 +42,9 @@ class TaskListTest {
             }
 
         }
+
         /**
-         * Stub for Event
+         * Stub for Event.
          */
         class EventStub extends TaskStub {
             /**
@@ -60,8 +59,9 @@ class TaskListTest {
                 type = Type.EVENT;
             }
         }
-       TaskList taskList = new TaskList();
-       taskList.addTask(new EventStub("Do this thing",  false, ""));
-       assertEquals(1, taskList.getSize());
+
+        TaskList taskList = new TaskList();
+        taskList.addTask(new EventStub("Do this thing",  false, ""));
+        assertEquals(1, taskList.getSize());
     }
 }

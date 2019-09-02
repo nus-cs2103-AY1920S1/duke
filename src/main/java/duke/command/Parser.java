@@ -7,14 +7,14 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Represents a parser that will be used to parse each line of input
+ * Represents a parser that will be used to parse each line of input.
  */
 public class Parser {
     private TaskList taskList;
     private Ui ui;
 
     /**
-     * Constructs a Parser
+     * Constructs a Parser.
      * @param taskList taskList to which the parsed Tasks would be saved
      * @param ui ui for input and output
      */
@@ -24,10 +24,10 @@ public class Parser {
     }
 
     /**
-     * Parses the inputted string into a Task
+     * Parses the inputted string into a Task.
      * @param  str string to be parsed
      */
-    public void parseLine(String str) throws DukeException, NumberFormatException{
+    public void parseLine(String str) throws DukeException, NumberFormatException {
         if (str.equals("list")) {
             ui.printList();
         } else if (str.startsWith("delete ")) {
@@ -38,7 +38,7 @@ public class Parser {
             } else if (i < 1) {
                 throw new DukeException("Number must be greater than 0");
             }
-            ui.printDelete( taskList.removeTask(i));
+            ui.printDelete(taskList.removeTask(i));
         } else if (str.startsWith("done ")) {
             String[] arr = str.split(" ");
             int i = Integer.parseInt(arr[1]);
@@ -74,7 +74,7 @@ public class Parser {
                 }
                 task = new Deadline(typeArray[1], false, arr[1]);
                 taskList.addTask(task);
-            } else if (typeArray[0].equals("event")){
+            } else if (typeArray[0].equals("event")) {
                 if (typeArray.length < 2 || typeArray[1].trim().equals("")) {
                     throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                 }

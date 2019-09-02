@@ -17,7 +17,7 @@ public abstract class Task {
     protected Date date;
 
     /**
-     * Empty constructor for Task
+     * Empty constructor for Task.
      */
     public Task() {
 
@@ -44,11 +44,11 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string which is the first character of each task type
+     * Returns a string which is the first character of each task type.
      * @return a "T", "D", or "E"
      */
     public String getSymbol() {
-        switch (type){
+        switch (type) {
         case TODO:
             return "T";
         case DEADLINE:
@@ -65,7 +65,7 @@ public abstract class Task {
      * @return true if the task is done, false otherwise
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "x"); //return tick or X symbols
     }
 
     public void markAsDone() {
@@ -73,7 +73,7 @@ public abstract class Task {
     }
 
     /**
-     * Overrides toString method
+     * Overrides toString method.
      * @return a String in the to-be-displayed format
      */
     @Override
@@ -82,7 +82,8 @@ public abstract class Task {
             return "[" + getSymbol() + "][" + getStatusIcon() + "] " + description;
         } else {
             String[] infos = info.split(" ", 2);
-            return "[" + getSymbol() + "][" + getStatusIcon() + "] " + description + " (" + infos[0] +":  " +  infos[1] + ")";
+            return "[" + getSymbol() + "][" + getStatusIcon() + "] "
+                    + description + " (" + infos[0] + ":  " +  infos[1] + ")";
         }
     }
 

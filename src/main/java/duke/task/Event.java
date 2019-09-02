@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task of type event. An <code>Event</code> object contains a description,
  * a  boolean representing whether or not the task has been done and additional information.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
 
     /**
@@ -20,7 +20,7 @@ public class Event extends Task{
     }
 
     /**
-     * Overrides toString method
+     * Overrides toString method.
      * @return a String in the to-be-displayed format
      */
     @Override

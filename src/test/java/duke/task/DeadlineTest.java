@@ -1,16 +1,15 @@
 package duke.task;
 
-import duke.command.TaskList;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Tests Deadline class
+ * Tests Deadline class.
  */
 class DeadlineTest {
     /**
-     * Tests if Deadline.getFileStringFormat outputs the correct String format
+     * Tests if Deadline.getFileStringFormat outputs the correct String format.
      */
     @Test
     public void deadlineGenerateStringFormat_doneDeadline_success() {

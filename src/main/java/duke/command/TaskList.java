@@ -5,44 +5,44 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * Stores the list of tasks and supports the addition, deletion, and mark as done of tasks
+ * Stores the list of tasks and supports the addition, deletion, and mark as done of tasks.
  */
 public class TaskList {
 
     private ArrayList<Task> list;
 
     /**
-     * An empty constructor for TaskList
+     * An empty constructor for TaskList.
      */
     public TaskList() {
         this.list =  new ArrayList<>();
     }
 
     /**
-     * Constructs a new TaskList with the given ArrayList<Task>
-     * @param list an ArrayList<Task> which content is going to be saved in the new TaskList object
+     * Constructs a new TaskList with the given ArrayList of Tasks.
+     * @param list an ArrayList of Tasks which content is going to be saved in the new TaskList object
      */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
     /**
-     * Adds a new task
+     * Adds a new task.
      */
     public void addTask(Task task) {
         list.add(task);
     }
 
     /**
-     * Returns the list of tasks in this TaskList
-     * @return an ArrayList<Task> containng the tasks
+     * Returns the list of tasks in this TaskList.
+     * @return an ArrayList of Tasks containng the tasks
      */
     public ArrayList<Task> getList() {
         return list;
     }
 
     /**
-     * Removes a task with of the position i - 1
+     * Removes a task with of the position i - 1.
      * @param i position of the task (starts from 1)
      * @return the Task which is removed from this TaskList
      */
@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the current number of tasks stored in this TaskList
+     * Returns the current number of tasks stored in this TaskList.
      * @return an integer representing the number of tasks in this tasklist
      */
     public int getSize() {
@@ -59,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the task stored at position i + 1 as done
+     * Marks the task stored at position i + 1 as done.
      * @return the modified Task
      */
     public Task markTaskAsDone(int i) {

@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task of type deadline. An <code>Deadline</code> object contains a description,
  * a  boolean representing whether or not the task has been done and additional information.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String  by;
 
     /**
@@ -20,7 +20,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Overrides toString method
+     * Overrides toString method.
      * @return a String in the to-be-displayed format
      */
     @Override

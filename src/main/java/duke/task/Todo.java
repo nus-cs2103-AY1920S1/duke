@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task of type todo. A <code>Todo</code> object contains a description,
  * a  boolean representing whether or not the task has been done and additional information.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructs a new Todo.
      * @param description description of the task
@@ -16,7 +16,7 @@ public class Todo extends Task{
     }
 
     /**
-     * Overrides toString method
+     * Overrides toString method.
      * @return a String in the to-be-displayed format
      */
     @Override

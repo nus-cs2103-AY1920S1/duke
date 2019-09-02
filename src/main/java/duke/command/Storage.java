@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Saves file to the specified filePath
+ * Saves file to the specified filePath.
  */
 public class Storage {
     private String filePath;
@@ -27,10 +27,10 @@ public class Storage {
     }
 
     /**
-     * Loads the saved file and adds the tasks to TaskList
+     * Loads the saved file and adds the tasks to TaskList.
      * @return the list of tasks parsed from the saved file
      */
-    public ArrayList<Task> load() throws FileNotFoundException{
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -52,8 +52,8 @@ public class Storage {
     }
 
     /**
-     * Updates the file in the corresponding filePath
-     * @param arr an ArrayList<Task> to update the file in the corresponding filePath
+     * Updates the file in the corresponding filePath.
+     * @param arr an ArrayList of Tasks to update the file in the corresponding filePath
      */
     public static  void  updateFile(ArrayList<Task> arr) {
         File dir = new File("/Users/joannasara/Desktop/duke/data");

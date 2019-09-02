@@ -39,9 +39,7 @@ public class Duke {
                     String[] splitStr = input.split(" ");
                     // if less than 2 words
                     if (splitStr.length < 2) {
-                        sendLine();
-                        sendMessage("Please indicate task index!");
-                        sendLine();
+                        throw new MissingTaskIndexException();
                     } else {
                         // take 2nd word
                         String itemIndex = splitStr[1];
@@ -67,9 +65,7 @@ public class Duke {
                     String[] splitStr = input.split(" ", 2);
                     // if less than 2 words
                     if (splitStr.length < 2) {
-                        sendLine();
-                        sendMessage("Please indicate task to do with deadline!");
-                        sendLine();
+                        throw new MissingDeadlineException();
                     } else {
                         // take 2nd word onwards
                         String item = splitStr[1];
@@ -85,9 +81,7 @@ public class Duke {
                     String[] splitStr = input.split(" ", 2);
                     // if less than 2 words
                     if (splitStr.length < 2) {
-                        sendLine();
-                        sendMessage("Please indicate task to do with start and end time!");
-                        sendLine();
+                        throw new MissingEventException();
                     } else {
                         // take 2nd word onwards
                         String item = splitStr[1];
@@ -103,9 +97,7 @@ public class Duke {
                     String[] splitStr = input.split(" ");
                     // if less than 2 words
                     if (splitStr.length < 2) {
-                        sendLine();
-                        sendMessage("Please indicate task index!");
-                        sendLine();
+                        throw new MissingTaskIndexException();
                     } else {
                         // take 2nd word
                         String itemIndex = splitStr[1];
@@ -196,30 +188,38 @@ public class Duke {
     public static void doneTask(String itemIndex) {
         // convert string to int
         int index = Integer.parseInt(itemIndex) - 1;
-        if (index < 0 || index >= count) {
-            sendMessage("Invalid index!");
-        } else {
-            Task item = tasks.get(index);
-            // tick completed task
-            item.setDone();
-            sendMessage("Nice! I've marked this task as done: ");
-            sendMessage("  " + item.toString());
+        try {
+            if (index < 0 || index >= count) {
+                throw new InvalidIndexException();
+            } else {
+                Task item = tasks.get(index);
+                // tick completed task
+                item.setDone();
+                sendMessage("Nice! I've marked this task as done: ");
+                sendMessage("  " + item.toString());
+            }
+        } catch (Exception error) {
+            sendMessage(error.toString());
         }
     }
 
     public static void deleteTask(String itemIndex) {
         // convert string to int
         int index = Integer.parseInt(itemIndex) - 1;
-        if (index < 0 || index >= count) {
-            sendMessage("Invalid index!");
-        } else {
-            Task item = tasks.get(index);
-            // delete task
-            tasks.remove(index);
-            count --;
-            sendMessage("Noted. I've removed this task: ");
-            sendMessage("  " + item.toString());
-            sendMessage(String.format("Now you have %d tasks in the list.", count));
+        try {
+            if (index < 0 || index >= count) {
+                throw new InvalidIndexException();
+            } else {
+                Task item = tasks.get(index);
+                // delete task
+                tasks.remove(index);
+                count --;
+                sendMessage("Noted. I've removed this task: ");
+                sendMessage("  " + item.toString());
+                sendMessage(String.format("Now you have %d tasks in the list.", count));
+            }
+        } catch (Exception error) {
+            sendMessage(error.toString());
         }
     }
 

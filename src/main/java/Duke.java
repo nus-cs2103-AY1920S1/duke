@@ -8,18 +8,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Duke {
-    static String listString = "";
-    static ArrayList<Task> listArr = new ArrayList<Task>();
-    static String INDENT = "    ";
+    private static String listString = "";
+    private static ArrayList<Task> listArr = new ArrayList<Task>();
+    private static String INDENT = "    ";
+    private static String FILENAME = "../../../data/duke.txt";
 
     private static Storage storage;
     private static TaskList tasks;
     private Ui ui;
-    private static String FILENAME = "../../../data/duke.txt";
 
     public Duke(String filePath) {
         try {
-            ui = new Ui();
+            ui = new Ui(INDENT);
             storage = new Storage(filePath);
         } catch(Exception err) {
             System.out.println(err);
@@ -37,27 +37,27 @@ public class Duke {
         int listSize = 0;
         int listPointer;
 
-        UIprintWelcome();
+        ui.start();
         String input = sc.nextLine();
         String[] inputArr = input.split(" ", 2);
 
         while (!inputArr[0].equals("bye")) {
             if (inputArr[0].equals("list")) {
-                printIndentedString("Here are the tasks in your list:\n" + listString, INDENT);
+                ui.printResponse("Here are the tasks in your list:\n" + listString);
             } else if (inputArr[0].equals("done")) {
                 listPointer = Integer.parseInt(inputArr[1]);
                 listArr.get(listPointer - 1).markAsDone();
-                printIndentedString("Nice! I've marked this task as done: \n"
-                        + INDENT + "   " + listArr.get(listPointer - 1), INDENT);
+                ui.printResponse("Nice! I've marked this task as done: \n"
+                        + INDENT + "   " + listArr.get(listPointer - 1));
                 updateTodoString();
                 storage.updateTodoFile(listString);
             } else if(inputArr[0].equals("delete")) {
                 listPointer = Integer.parseInt(inputArr[1]);
                 Task deletedTask = listArr.get(listPointer - 1);
                 listArr.remove(listPointer - 1);
-                printIndentedString("Noted. I've removed this task: \n"
+                ui.printResponse("Noted. I've removed this task: \n"
                         + INDENT + "   " + deletedTask + "\n" + INDENT +
-                        "Now you have " + listArr.size() + " tasks in the list.", INDENT);
+                        "Now you have " + listArr.size() + " tasks in the list.");
                 updateTodoString();
                 storage.updateTodoFile(listString);
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
@@ -66,7 +66,7 @@ public class Duke {
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
                         listArr.add(new Task(inputArr[1], "todo"));
-                        printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
+                        ui.printResponse(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage);
                         listSize++;
                         updateTodoString();
                         storage.updateTodoFile(listString);
@@ -77,15 +77,14 @@ public class Duke {
                             LocalDateTime deadlineByDateTime = LocalDateTime.parse(deadline, formatter);
                             listArr.add(new Task(inputArr[1].split(" /by ")[0], "deadline",
                                     deadlineByDateTime));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT
-                                    + aftTaskAddMessage, INDENT);
+                            ui.printResponse(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT
+                                    + aftTaskAddMessage);
                             listSize++;
                             updateTodoString();
                             storage.updateTodoFile(listString);
                         } catch(Exception ex) {
-                            printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by, "
-                                            + "in format 'dd/MM/yyyy HHmm'",
-                                    INDENT);
+                            ui.printResponse("☹ OOPS!!! Deadlines require a specific datetime after /by, "
+                                            + "in format 'dd/MM/yyyy HHmm'");
                         }
                     } else if(inputArr[0].equals("event")) {
                         try {
@@ -94,34 +93,34 @@ public class Duke {
                             LocalDateTime eventDateTimeByDateTime = LocalDateTime.parse(eventDateTime, formatter);
                             listArr.add(new Task(inputArr[1].split(" /at ")[0], "event"
                                     , eventDateTimeByDateTime));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT
-                                    + aftTaskAddMessage, INDENT);
+                            ui.printResponse(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT
+                                    + aftTaskAddMessage);
                             listSize++;
                             updateTodoString();
                             storage.updateTodoFile(listString);
                         } catch(Exception ex) {
-                            UIprintError("☹ OOPS!!! Events require a specific datetime after /at, "
+                            ui.printError("☹ OOPS!!! Events require a specific datetime after /at, "
                                     + "in format 'dd/MM/yyyy HHmm'");
                         }
                     }
                 } else {
-                    UIprintError("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.");
+                    ui.printError("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.");
                 }
             } else {
-                printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Try todo, " +
-                        "event and deadline", INDENT);
+                ui.printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Try todo, " +
+                        "event and deadline");
             }
             input = sc.nextLine();
             inputArr = input.split(" ", 2);
         }
-        printIndentedString("Bye. Hope to see you again soon!", INDENT);
+        ui.exit();
     }
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
         new Duke(FILENAME).run();
     }
 
-    public static void printIndentedString(String string, String INDENT) {
+    public static void print(String string, String INDENT) {
         System.out.println(INDENT + "____________________________________________________________");
         System.out.println(INDENT + " " + string);
         System.out.println(INDENT + "____________________________________________________________");
@@ -138,12 +137,12 @@ public class Duke {
         }
     }
 
-    public static void UIprintWelcome() {
-        printIndentedString("Hello! I'm Duke\n" +
-                INDENT + " " + "What can I do for you?", INDENT);
-    }
+//    public static void UIprintWelcome() {
+//        print("Hello! I'm Duke\n" +
+//                INDENT + " " + "What can I do for you?", INDENT);
+//    }
 
-    public static void UIprintError(String errorMessage) {
-        printIndentedString(errorMessage, INDENT);
-    }
+//    public static void UIprintError(String errorMessage) {
+//        print(errorMessage, INDENT);
+//    }
 }

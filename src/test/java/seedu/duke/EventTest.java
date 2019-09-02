@@ -1,11 +1,10 @@
 package seedu.duke;
 
-import org.junit.Test;
 
+import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventTest {
     @Test
@@ -16,7 +15,7 @@ public class EventTest {
             Date date = dateFormat.parse("24/08/2019");
             Date time = timeFormat.parse("1800");
             Event event = new Event("abc", date, time);
-            assertEquals("[E][\u2718] abc (at: 24 AUGUST 2019 6.00 PM)", event.toString());
+            assertEquals("[E][\u2718] abc (at: 24 August 2019 6.00 PM)", event.toString());
         } catch (Exception e) {
             System.out.println("failed test");
         }
@@ -31,7 +30,7 @@ public class EventTest {
             Date time = timeFormat.parse("1800");
             Event event = new Event("abc", date, time);
             event.markAsDone();
-            assertEquals("[E][\u2713] abc (at: 24 AUGUST 2019 6.00 PM)", event.toString());
+            assertEquals("[E][\u2713] abc (at: 24 August 2019 6.00 PM)", event.toString());
         } catch (Exception e) {
             System.out.println("failed test");
         }

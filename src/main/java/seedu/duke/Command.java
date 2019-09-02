@@ -12,8 +12,8 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command by checking exceptions and
-     * printing out what has been done
+     * Executes the command by checking exceptions,
+     * and printing out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param ui Ui that interacts with user by checking for exceptions and printing out
@@ -23,7 +23,7 @@ public abstract class Command {
      * @throws java.io.IOException If there is problems reading/writing or appending to file.
      * @throws Exception If there is problems with Parser reading in file line.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
 
     /**
      * Returns if duke should end.

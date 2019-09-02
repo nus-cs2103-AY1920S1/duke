@@ -1,15 +1,11 @@
 package seedu.duke;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -17,13 +13,13 @@ public class ParserTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    @Before
+    @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
-    @After
+    @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
@@ -32,7 +28,7 @@ public class ParserTest {
     @Test
     public void test1() {
        try {
-           assertEquals("[D][\u2718] abc (by: 24 AUGUST 2019 6.00 PM)",
+           assertEquals("[D][\u2718] abc (by: 24 August 2019 6.00 PM)",
                    Parser.readInFileLine("D | 0 | abc | 24/08/2019 1800").toString());
        } catch (Exception e) {
             assertEquals(1,2);
@@ -42,7 +38,7 @@ public class ParserTest {
     @Test
     public void test2() {
         try {
-            assertEquals("[D][\u2713] abc (by: 24 AUGUST 2019 6.00 PM)",
+            assertEquals("[D][\u2713] abc (by: 24 August 2019 6.00 PM)",
                     (Parser.readInFileLine("D | 1 | abc | 24/08/2019 1800")).toString());
         } catch (Exception e) {
             assertEquals(1,2);
@@ -87,7 +83,7 @@ public class ParserTest {
     @Test
     public void test10() {
         try {
-            assertEquals("[E][\u2718] efgh (at: 24 AUGUST 2019 4.00 PM)",
+            assertEquals("[E][\u2718] efgh (at: 24 August 2019 4.00 PM)",
                     Parser.createEvent("event efgh /at 24/08/2019 1600").toString());
         } catch (Exception e) {
             System.out.println("failed test");
@@ -97,7 +93,7 @@ public class ParserTest {
     @Test
     public void test11() {
         try {
-            assertEquals("[E][\u2718] help (at: 30 AUGUST 2019 4.00 PM)",
+            assertEquals("[E][\u2718] help (at: 30 August 2019 4.00 PM)",
                     Parser.createEvent("event help /at 30/08/2019 1600").toString());
         } catch (Exception e) {
             System.out.println("failed test");
@@ -117,7 +113,7 @@ public class ParserTest {
     @Test
     public void test14() {
         try {
-            assertEquals("[D][\u2718] help (by: 30 AUGUST 2019 4.00 PM)",
+            assertEquals("[D][\u2718] help (by: 30 August 2019 4.00 PM)",
                     Parser.createDeadline("deadline help /by 30/08/2019 1600")
                             .toString());
         } catch (Exception e) {
@@ -247,7 +243,7 @@ public class ParserTest {
         } catch (Exception e) {
             ui.showParseError();
         }
-        assertEquals("\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
-                "and time in 24hr format, separated by a space.\n\r\n", outContent.toString());
+        assertEquals("? OOPS!!! Please input the date in dd/mm/yyyy and time in 24hr format " +
+                "or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n\r\n", outContent.toString());
     }
 }

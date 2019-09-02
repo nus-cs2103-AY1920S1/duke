@@ -1,12 +1,11 @@
 package seedu.duke;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -14,13 +13,13 @@ public class FindCommandTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    @Before
+    @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
-    @After
+    @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
@@ -35,7 +34,7 @@ public class FindCommandTest {
         try {
             find.execute(tl, ui, st);
             assertEquals( "Here are the matching tasks in your list:\r\n"
-                    + "1. [T][\u2718] def\r\n\r\n", outContent.toString());
+                    + "1. [T][?] def\r\n\r\n", outContent.toString());
         } catch (Exception e) {
             assertEquals(2, 3);
         }

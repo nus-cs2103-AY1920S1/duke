@@ -27,12 +27,13 @@ public class DeadlineCommand extends Command {
      * @throws java.text.ParseException If there is incorrect date and time input.
      * @throws Exception If unable to append to data file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         ui.checkErrorForDeadlineCommand(command, tasks);
         tasks.add(Parser.createDeadline(command));
-        ui.printAddedTask(tasks.get(tasks.size() - 1));
-        ui.printNoOfTaskInList(tasks);
+
         storage.appendFile(tasks);
+        return ui.printAddedTask(tasks.get(tasks.size() - 1)) + "\n" +
+            ui.printNoOfTaskInList(tasks);
     }
 
     /**

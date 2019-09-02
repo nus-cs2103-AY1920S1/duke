@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      * @param storage Storage to append to data file after updating tasks.
      * @throws DukeException Exception for incorrect user input.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.checkErrorForFindCommand(command);
         String keyword = Parser.getKeyword(command);
         for (int i = 0; i < tasks.size(); i++) {
@@ -62,7 +62,7 @@ public class FindCommand extends Command {
                 }
             }
         }
-        ui.printAllMatchingTasks(matchList);
+        return ui.printAllMatchingTasks(matchList);
     }
 
     /**

@@ -27,12 +27,13 @@ public class MarkDoneCommand extends Command {
      * @throws DukeException If there is incorrect user input.
      * @throws Exception If unable to overwrite data file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         ui.checkMarkDoneError(command, tasks);
         int curr = Parser.taskToMarkDone(command);
         tasks.get(curr - 1).markAsDone();
-        ui.printMarkDoneMsg(tasks.get(curr - 1));
+
         storage.writeFile(tasks);
+        return ui.printMarkDoneMsg(tasks.get(curr - 1));
     }
 
     /**

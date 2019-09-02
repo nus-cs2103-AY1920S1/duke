@@ -1,6 +1,5 @@
 T | 0 | ewnr
 T | 0 | evnev
-E | 0 | eciercb | 01/10/2019 1630
 D | 0 | xewc | 12/09/2019 1300
 T | 0 | cwecn
 D | 0 | cwekcb | 25/09/2019 1800

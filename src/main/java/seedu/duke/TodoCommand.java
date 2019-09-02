@@ -27,12 +27,13 @@ public class TodoCommand extends Command {
      * @throws java.text.ParseException Exception for incorrect date and time input.
      * @throws Exception Exception for being unable to append to data file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         ui.checkErrorForTodoCommand(command, tasks);
         tasks.add(Parser.createTodo(command));
-        ui.printAddedTask(tasks.get(tasks.size() - 1));
-        ui.printNoOfTaskInList(tasks);
+
         storage.appendFile(tasks);
+        return ui.printAddedTask(tasks.get(tasks.size() - 1)) + "\n" +
+            ui.printNoOfTaskInList(tasks);
     }
 
     /**

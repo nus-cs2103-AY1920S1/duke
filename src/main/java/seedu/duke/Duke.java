@@ -1,5 +1,17 @@
 package seedu.duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+
+
 import java.text.ParseException;
 
 /**
@@ -12,61 +24,44 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    public Duke() {}
+
     /**
-     * Class constructor that takes in a filepath.
-     * Creates a task list from  loading information from data file.
-     * It is able to create an empty TaskList if there is problems loading the data file or
-     * creating the data file.
-     *
-     * @param filePath String of file path to create data file or load data file from.
-     * @throws Exception If file cannot be created or loaded from correctly.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (Exception e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+    String getResponse(String input) {
+        return run(input);
     }
+
 
     /**
      * Runs Duke which will take in user commands to create tasks, delete tasks,
      * mark task as done, list out task while updating data file when the tasks in
      * the list is updated.
      */
-    public void run() {
-        ui.showIntro();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand, ui);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.out.println(e);
-            } catch (ParseException e) {
-                ui.showParseError();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.showParseError();
-            } catch (Exception e) {
-                ui.showExceptionMsg(e);
-            } finally {
-                ui.showLine();
-            }
+    public String run(String input) {
+        //ui.showIntro();
+        ui = new Ui();
+        storage = new Storage("data/duke.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
-    }
-
-    /**
-     * Drives duke class as main method.
-     *
-     * @param args String[]
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand, ui);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.toString();
+        } catch (ParseException e) {
+            return ui.showParseError();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return ui.showParseError();
+        } catch (Exception e) {
+            return ui.showExceptionMsg(e);
+        }
     }
 }

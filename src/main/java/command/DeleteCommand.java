@@ -34,6 +34,10 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Checks if this command is an exit ("bye") command
+     * @return false boolean since command is not exit ("bye") command
+     */
     public boolean isExit() {
         return false;
     }

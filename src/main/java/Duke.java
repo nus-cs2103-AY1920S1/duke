@@ -5,6 +5,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import json.JsonParser;
+import json.JsonWriter;
+import json.ValueHandler;
 
 public class Duke {
 
@@ -14,7 +21,7 @@ public class Duke {
 	};
 
 	private DukeIO io;
-	private final List<Task> taskList;
+	private ArrayList<Task> taskList;
 
 	private void addTask(Task t) {
 		this.taskList.add(t);
@@ -124,15 +131,41 @@ public class Duke {
 		this.io.bindCommand("todo", this::makeToDoTask);
 		this.io.bindCommand("delete", this::deleteTask);
 		this.io.setUnknownCommandHandler(cmd -> { throw new DukeException("I'm sorry, but I don't know what that means. :-("); });
-		this.taskList = new ArrayList<>();
+	}
+
+	private static final String SAVE_PATH = "./duke.json";
+	private ArrayList<Task> loadStorage() {
+		try(FileReader read = new FileReader(SAVE_PATH)) {
+			return JsonParser.parse(read, ValueHandler.listOf(new TaskType.Builder()));
+		} catch(FileNotFoundException e) {
+			return new ArrayList<>();
+		} catch(IOException e) {
+			throw new DukeException("Unable to load saved data", e);
+		}
+	}
+
+	private void saveStorage(ArrayList<Task> tasks) {
+		try(FileWriter write = new FileWriter(SAVE_PATH);
+			JsonWriter jw = new JsonWriter(write)) {
+			jw.writeValue(tasks);
+		} catch(Exception e) {
+			throw new DukeException(e);
+		}
 	}
 
 	private void run() {
+		this.loadStorage();
 		//Start off greeting the user.
-		this.io.withDialogBlock(() -> this.io.say(initialGreeting));
+		this.io.withDialogBlock(() -> {
+			this.io.say(initialGreeting);
+			this.taskList = this.loadStorage();
+		});
 
 		//Start listen loop.
 		this.io.listen();
+		this.io.withDialogBlock(() -> {
+			this.saveStorage(this.taskList);
+		});
 	}
 
     public static void main(String[] args) {

@@ -20,7 +20,7 @@ public class Storage {
      * Constructs the Storage object.
      * @param filePath Provides the filepath to the local text file as the local storage.
      */
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 

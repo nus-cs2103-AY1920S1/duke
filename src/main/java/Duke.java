@@ -1,9 +1,13 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
-import java.util.Date;
-
 
 /**
  * Entry point of this project Duke. Duke is a Task manager that aims
@@ -14,8 +18,12 @@ import java.util.Date;
  *
  * @author TuanDingWei
  */
-public class Duke {
-
+public class Duke extends Application {
+//    private ScrollPane scrollPane;
+//    private VBox dialogContainer;
+//    private TextField userInput;
+//    private Button sendButton;
+    private Scene scene;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -23,20 +31,26 @@ public class Duke {
     /**
      * Construct a Duke object, the Task manager bot.
      *
-     * @param filePath This holds the filepath to the local storage where
-     *                 a list of task is permanently stored until cleared.
-     *                 The file path can be in the format of a text file.
+     *
      */
-
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt");
         tasks = new TaskList(storage.load());
         ui.welcome();
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**

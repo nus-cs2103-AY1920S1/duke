@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    public Ui() {
+
+    }
+
     public void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -11,7 +11,7 @@ public class Parser {
      * Constructs the Parser object and performs the interpretation of user commands.
      * @param input This is the input String of the user command.
      */
-    Parser(String input) {
+    public Parser(String input) {
         String[] dueSplit = input.split("/", 2);
         String due = "dummy";
         if (dueSplit.length > 1) {

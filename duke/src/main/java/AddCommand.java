@@ -24,6 +24,13 @@ class AddCommand extends Command {
 		ui.print("Now you have " + tasks.getList().size() + " tasks in the list.");
 	}
 
+	/**
+	 * Caches task associated with command, returns it when queried
+	 * @return Task to be added using the addCommand
+	 * @throws DukeException  could be thrown by createTask
+	 * @throws ParseException could be thrown by could be thrown by unparseable datetime in createTask
+	 */
+
 	public Task getTask() throws DukeException, ParseException { // only called when loading
 		if (this.task == null) {
 			// remainingCommand contains [1/0] [description]
@@ -42,8 +49,11 @@ class AddCommand extends Command {
 	 * @param type of task
 	 * @param isDone
 	 * @param description of task, deadline, details, etc
-	 * @return
+	 * @return Task created by command
+	 * @throws DukeException  could be thrown by loading invalid tasks
+	 * @throws ParseException could be thrown by unparseable datetime in loading functions
 	 */
+	
 	public Task createTask(String type, boolean isDone, String description) throws DukeException, ParseException {
 		// depending on type
 		switch (type) {

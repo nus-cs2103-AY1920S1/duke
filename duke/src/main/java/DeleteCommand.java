@@ -12,6 +12,7 @@ class DeleteCommand extends Command {
 		} else if (remainingCommand.isEmpty()) {
 			throw new DukeException("Which task do you want to delete?");
 		}
+		
 		int index = Integer.valueOf(remainingCommand); // assuming only has number left
 		Task task = list.get(index - 1);
 		list.remove(task);

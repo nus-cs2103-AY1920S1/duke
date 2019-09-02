@@ -15,6 +15,12 @@ class Storage {
 		this.filename = filename;
 	}
 
+	/**
+	 * Reads file to import existing tasks, adding to TaskList using addCommands
+	 * @return Arraylist of addCommands, loaded from data/duke.txt
+	 * @throws FileNotFoundException if file is not found
+	 */
+
 	public ArrayList<AddCommand> load() throws FileNotFoundException {
 		ArrayList<AddCommand> commands = new ArrayList<>();
 		File f = new File(filename);

@@ -23,13 +23,13 @@ public class Ui {
     /**
      * Initializes the UI class.
      * Must be run once every time.
-     * @param vBox vBox object that handles the dialogue.
+     * @param vbox vBox object that handles the dialogue.
      * @param textField TextField object that contains user's input
      * @param user Image object to represent user
      * @param dukeImage Image object to represent duke
      */
-    public static void initialize(VBox vBox, TextField textField, Image user, Image dukeImage) {
-        dialogContainer = vBox;
+    public static void initialize(VBox vbox, TextField textField, Image user, Image dukeImage) {
+        dialogContainer = vbox;
         userInput = textField;
         user = user;
         duke = dukeImage;

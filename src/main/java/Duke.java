@@ -21,6 +21,9 @@ public class Duke {
         while (!user.equals("bye")) {
             TaskList taskList = new TaskList(saveFile.LoadData());
             parser = new Parser(user);
+            if (!parser.isSafe()){
+                continue;
+            }
             try {
                 switch (parser.getCommandType()) {
                 case LIST:

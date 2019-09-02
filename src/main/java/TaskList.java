@@ -32,7 +32,7 @@ public class TaskList {
         System.out.println("    ____________________________________________________________");
     }
     public void completeTask(String completedtask){
-        int taskNumber = Integer.parseInt(completedtask.split(" ")[1]);
+        int taskNumber = Integer.parseInt(completedtask);
         taskList.get(taskNumber-1).CompleteTask();
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done: \n" +
@@ -54,7 +54,7 @@ public class TaskList {
     }
 
     public void removeTask(String deletedEvent){
-        int taskTodDelete = Integer.parseInt(deletedEvent.split(" ")[1]);
+        int taskTodDelete = Integer.parseInt(deletedEvent);
         System.out.println("    ____________________________________________________________\n" +
                 "     Noted. I've removed this task: \n" +
                 "       "+ taskList.get(taskTodDelete-1).getOverallStatus() +"\n" +

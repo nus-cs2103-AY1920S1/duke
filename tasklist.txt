@@ -1,1 +1,3 @@
-birthday [✓] johns birthday
+todo [1]johns birthday
+deadline [1]return book/byaug 2019 wpm
+birthday [1] hahaha

@@ -7,8 +7,9 @@ class Deadline extends Task {
 
     /**
      * Creates a new deadline task.
-     * @param description Description of the task
-     * @param by Deadline of the task
+     *
+     * @param description Description of the task.
+     * @param by          Deadline of the task.
      */
     Deadline(String description, Date by) {
         super(description);
@@ -17,9 +18,10 @@ class Deadline extends Task {
 
     /**
      * Creates a new deadline task.
-     * @param description Description of the task
-     * @param isDone Flag whether task is done
-     * @param by Deadline of the task
+     *
+     * @param description Description of the task.
+     * @param isDone      Flag whether task is done.
+     * @param by          Deadline of the task.
      */
     Deadline(String description, boolean isDone, Date by) {
         super(description, isDone);
@@ -27,8 +29,9 @@ class Deadline extends Task {
     }
 
     /**
-     * Generates the task's textual representation in save file format.
-     * @return Textual representation of the task in save file format
+     * Generates the task's text representation in save file format.
+     *
+     * @return Text representation of the task in save file format.
      */
     @Override
     String toSaveFormat() {
@@ -36,8 +39,9 @@ class Deadline extends Task {
     }
 
     /**
-     * Generates the task's textual representation in display format.
-     * @return Textual representation of the task in display format
+     * Generates the task's text representation in display format.
+     *
+     * @return Text representation of the task in display format.
      */
     @Override
     public String toString() {

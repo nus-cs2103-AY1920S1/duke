@@ -12,7 +12,8 @@ class Storage {
 
     /**
      * Creates a new Storage instance.
-     * @param filePath Relative path of the save file
+     *
+     * @param filePath Relative path of the save file.
      */
     Storage(String filePath) {
         this.filePath = String.format("%s/%s", System.getProperty("user.dir"), filePath);
@@ -20,8 +21,9 @@ class Storage {
 
     /**
      * Loads tasks from a save file into an ArrayList.
-     * @return ArrayList with all tasks from the save file
-     * @throws DukeException File I/O failure
+     *
+     * @return ArrayList with all tasks from the save file.
+     * @throws DukeException If file I/O fails
      */
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -44,8 +46,9 @@ class Storage {
 
     /**
      * Writes all tasks to the save file.
-     * @param tasks ArrayList of all tasks
-     * @throws DukeException File I/O failure
+     *
+     * @param tasks ArrayList of all tasks.
+     * @throws DukeException If file I/O fails
      */
     void persist(ArrayList<Task> tasks) throws DukeException {
         StringBuilder output = new StringBuilder();

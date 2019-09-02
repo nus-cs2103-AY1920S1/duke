@@ -14,7 +14,8 @@ class TaskList {
 
     /**
      * Creates a new task list using an existing ArrayList.
-     * @param tasks ArrayList of tasks
+     *
+     * @param tasks ArrayList of tasks.
      */
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -22,9 +23,10 @@ class TaskList {
 
     /**
      * Delete a task from the task list.
-     * @param taskId Task ID
-     * @return Task that was deleted
-     * @throws DukeException ID not found
+     *
+     * @param taskId Task ID.
+     * @return Task that was deleted.
+     * @throws DukeException If ID is not found.
      */
     Task deleteTask(int taskId) throws DukeException {
         try {
@@ -36,9 +38,10 @@ class TaskList {
 
     /**
      * Mark a task as done.
-     * @param taskId Task ID
-     * @return Task that was marked done
-     * @throws DukeException ID not found
+     *
+     * @param taskId Task ID.
+     * @return Task that was marked done.
+     * @throws DukeException If ID is not found.
      */
     Task markDone(int taskId) throws DukeException {
         try {
@@ -52,8 +55,9 @@ class TaskList {
 
     /**
      * Add a task to the task list.
-     * @param task Task to be added
-     * @return Flag whether task was successfully added
+     *
+     * @param task Task to be added.
+     * @return Flag whether task was successfully added.
      */
     boolean addTask(Task task) {
         return this.tasks.add(task);
@@ -61,17 +65,18 @@ class TaskList {
 
     /**
      * Access underlying ArrayList for export purposes.
-     * @return ArrayList of tasks
+     *
+     * @return ArrayList of tasks.
      */
     ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
-
     /**
-     * Generates a numbered list of tasks matching a query
-     * @param query Query string
-     * @return Numbered list of matching tasks
+     * Generates a numbered list of tasks matching a query.
+     *
+     * @param query Query string.
+     * @return Numbered list of matching tasks.
      */
     String query(String query) {
         TaskList match = new TaskList();
@@ -87,7 +92,8 @@ class TaskList {
 
     /**
      * Generates numbered list of all tasks in the task list.
-     * @return Numbered list of all tasks
+     *
+     * @return Numbered list of all tasks.
      */
     @Override
     public String toString() {

@@ -12,7 +12,8 @@ public class Duke {
 
     /**
      * Creates a new Duke instance.
-     * @param filePath Relative path of the save file
+     *
+     * @param filePath Relative path of the save file.
      */
     private Duke(String filePath) {
         this.ui = new Ui();
@@ -99,8 +100,9 @@ public class Duke {
     }
 
     /**
-     * Main method.
-     * @param args Command-line arguments
+     * Instantiates and runs the a new Duke instance.
+     *
+     * @param args Command-line arguments.
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();

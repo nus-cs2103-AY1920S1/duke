@@ -24,4 +24,18 @@ public class DeleteCommand extends Command {
         System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
         storage.updateChanges(tasks.getDukeTaskList());
     }
+
+    @Override
+    public String executeForGui(TaskList tasks, Ui ui, Storage storage) {
+        Task toBeRemoved = tasks.getTask(indexToRemove);
+        tasks.removeTask(indexToRemove);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:");
+        sb.append("\n");
+        sb.append(toBeRemoved);
+        sb.append("\n");
+        sb.append("Now you have " + tasks.getSize() + " tasks in the list.");
+        storage.updateChanges(tasks.getDukeTaskList());
+        return sb.toString();
+    }
 }

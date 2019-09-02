@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 /**
  * Encapsulates a parser that parses input.
  */
@@ -8,7 +10,7 @@ public class Parser {
      * @param input user input
      * @return relevant command parsed from user input
      */
-    public static Command parse (String input) {
+    public static Command parse(String input) {
         String[] inputSplit = input.split(" ");
         if (input.equals("bye")) {
             return new ExitCommand();

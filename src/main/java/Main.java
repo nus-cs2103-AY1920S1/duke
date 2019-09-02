@@ -13,13 +13,10 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt");
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
-        /*File file = new File("data");
-        file.mkdir();
-        duke.run();*/
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

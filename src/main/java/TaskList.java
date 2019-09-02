@@ -88,11 +88,12 @@ abstract class TaskList {
      * @param a the list of task
      */
 
-    static void printList(ArrayList<TaskList> a) {
-        System.out.println("Here are the tasks in your list:");
+    static String printList(ArrayList<TaskList> a) {
+        String out = "Here are the tasks in your list:";
         for (TaskList t : a) {
-            System.out.println(t);
+            out = out + "\n" + t;
         }
+        return out;
     }
 
 
@@ -104,8 +105,9 @@ abstract class TaskList {
      * @param a the list of task
      */
 
-    static void markAsDone(int i, ArrayList<TaskList> a) {
-        System.out.println("Nice! I've marked this task as done:");
+    static String markAsDone(int i, ArrayList<TaskList> a) {
+        String out = "Nice! I've marked this task as done:";
+
         TaskList t = a.get(i - 1);
         String currentTask = t.getTaskName();
         String getType = t.getType();
@@ -126,7 +128,7 @@ abstract class TaskList {
             doneTask = new Todo(i, "[✓]", currentTask, getType);
             a.set(i - 1, doneTask);
         }
-        System.out.println("[✓] " + currentTask);
+        return out + "\n" + "[✓] " + currentTask;
     }
 
     /**
@@ -138,12 +140,12 @@ abstract class TaskList {
      * @param n task number assigned
      */
 
-    void addList(TaskList t, ArrayList<TaskList> a, int n) {
-        System.out.println("Got it. I've added this task:");
+    String addList(TaskList t, ArrayList<TaskList> a, int n) {
+        String out = "Got it. I've added this task:";
         a.add(t);
-        System.out.println(t);
-        System.out.println("Now you have " + Integer.toString(n) +
-                " tasks in the list.");
+        out = out + "\n" + t + "\n" + "Now you have " + Integer.toString(n) +
+                " tasks in the list.";
+        return out;
     }
 
 
@@ -155,14 +157,13 @@ abstract class TaskList {
      * @param a the list of task
      */
 
-    void deleteTask(TaskList t, ArrayList<TaskList> a) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(t);
+    String deleteTask(TaskList t, ArrayList<TaskList> a) {
         int taskNumber = t.getTaskNumber();
         a.remove(taskNumber - 1);
 
-        System.out.println("Now you have " + Integer.toString(a.size()) +
-                " tasks in the list.");
+        return "Noted. I've removed this task: " + "\n" + t + "\n" +
+                "Now you have " + Integer.toString(a.size()) +
+                " tasks in the list.";
     }
 
     /**

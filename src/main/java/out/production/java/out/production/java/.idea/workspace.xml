@@ -24,7 +24,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e33aa0a-6ac4-414c-a1cf-f21c73d81322" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../data/duke.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deadline.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeadlineCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeleteCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DoneCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Duke.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DukeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EmptyDescException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Event.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExitCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvalidArgumentException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ListCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaskList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ui.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/AddCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/DeadlineCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/DeleteCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/DoneCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/EventCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/ExitCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/ListCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/command/TodoCommand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/Parser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/Storage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/TaskList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/component/Ui.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/exception/DukeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/exception/EmptyDescException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/exception/InvalidArgumentException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/main/Duke.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Deadline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Event.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Task.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/task/Todo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test/java/TodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../test/java/TodoTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,78 +87,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/duke/component/Parser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="115" column="57" lean-forward="true" selection-start-line="115" selection-start-column="57" selection-end-line="115" selection-end-column="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../test/java/TodoTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/duke/component/Ui.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/duke/task/Todo.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../test/java/DeadlineTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/duke/task/Deadline.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+            <state relative-caret-position="90">
+              <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/duke/command/AddCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="71" column="22" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -123,17 +110,13 @@
         <option value="$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/component/Parser.java" />
         <option value="$PROJECT_DIR$/duke/command/DeadlineCommand.java" />
         <option value="$PROJECT_DIR$/duke/component/Parser.java" />
-        <option value="$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java" />
-        <option value="$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java" />
-        <option value="$PROJECT_DIR$/../../test/java/AddCommandTest.java" />
-        <option value="$PROJECT_DIR$/../../test/java/DeadlineTest.java" />
-        <option value="$PROJECT_DIR$/../../test/java/TodoTest.java" />
         <option value="$PROJECT_DIR$/duke/command/AddCommand.java" />
+        <option value="$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="334" />
+    <option name="x" value="288" />
     <option name="y" value="23" />
     <option name="width" value="908" />
     <option name="height" value="802" />
@@ -143,36 +126,17 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="java" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="java" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="true" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567413321595" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567410561359" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/../../test/src" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
@@ -189,61 +153,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DeadlineTest">
-    <configuration name="AddCommandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AddCommandTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeadlineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DeadlineTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeadlineTest.testInstantiate_objectWithStringAsDateParameter_string" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DeadlineTest" />
-      <option name="METHOD_NAME" value="testInstantiate_objectWithStringAsDateParameter_string" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DeadlineTest.testToString_objectWithDatAsDateeParameter_string" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DeadlineTest" />
-      <option name="METHOD_NAME" value="testToString_objectWithDatAsDateeParameter_string" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TodoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TodoTest" />
-      <option name="TEST_OBJECT" value="class" />
+  <component name="RunManager">
+    <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="duke.main.Duke" />
+      <module name="java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="duke.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DeadlineTest" />
-        <item itemvalue="JUnit.DeadlineTest.testToString_objectWithDatAsDateeParameter_string" />
-        <item itemvalue="JUnit.DeadlineTest.testInstantiate_objectWithStringAsDateParameter_string" />
-        <item itemvalue="JUnit.TodoTest" />
-        <item itemvalue="JUnit.AddCommandTest" />
+        <item itemvalue="Application.Duke" />
       </list>
     </recent_temporary>
   </component>
@@ -260,40 +186,8 @@
     </task>
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="DeadlineTest - 2019.09.02 at 16h 16m 37s.xml">
-      <configuration name="DeadlineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest - 2019.09.02 at 16h 24m 02s.xml">
-      <configuration name="DeadlineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest - 2019.09.02 at 16h 27m 08s.xml">
-      <configuration name="DeadlineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest_testInstantiate_objectWithStringAsDateParameter_string - 2019.09.02 at 16h 27m 42s.xml">
-      <configuration name="DeadlineTest.testInstantiate_objectWithStringAsDateParameter_string" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest_testInstantiate_objectWithStringAsDateParameter_string - 2019.09.02 at 16h 28m 50s.xml">
-      <configuration name="DeadlineTest.testInstantiate_objectWithStringAsDateParameter_string" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest_testToString_objectWithDatAsDateeParameter_string - 2019.09.02 at 16h 29m 45s.xml">
-      <configuration name="DeadlineTest.testToString_objectWithDatAsDateeParameter_string" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest_testToString_objectWithDatAsDateeParameter_string - 2019.09.02 at 16h 30m 22s.xml">
-      <configuration name="DeadlineTest.testToString_objectWithDatAsDateeParameter_string" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest_testToString_objectWithDatAsDateeParameter_string - 2019.09.02 at 16h 31m 40s.xml">
-      <configuration name="DeadlineTest.testToString_objectWithDatAsDateeParameter_string" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest - 2019.09.02 at 16h 31m 57s.xml">
-      <configuration name="DeadlineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DeadlineTest - 2019.09.02 at 16h 32m 32s.xml">
-      <configuration name="DeadlineTest" configurationId="JUnit" />
-    </history-entry>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="334" y="23" width="908" height="802" extended-state="0" />
+    <frame x="288" y="23" width="908" height="802" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.2551963" />
@@ -305,7 +199,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31967214" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32957748" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -314,7 +208,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32891566" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32957748" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -374,6 +268,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/duke/component/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="114" column="48" lean-forward="true" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/component/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -388,6 +289,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/duke/command/AddCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/main/java/duke/command/DeleteCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -395,66 +303,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/duke/component/Ui.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../duke copy/src/test/java/DeadlineCommandTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="90">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/duke/task/Todo.java">
+    <entry file="file://$PROJECT_DIR$/../../test/java/DeadlineCommandTest.java">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/duke/component/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="115" column="57" lean-forward="true" selection-start-line="115" selection-start-column="57" selection-end-line="115" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/duke/task/Deadline.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../test/java/DeadlineTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../test/java/TodoTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/duke/command/AddCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="71" column="22" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
-        </state>
-      </provider>
     </entry>
   </component>
   <component name="masterDetails">
@@ -508,11 +365,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>test</last-edited>
+          <last-edited>java</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

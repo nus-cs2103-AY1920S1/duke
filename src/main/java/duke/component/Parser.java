@@ -1,9 +1,7 @@
 package duke.component;
 
+import duke.exception.*;
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.EmptyDescException;
-import duke.exception.InvalidArgumentException;
 
 /**
  * Represents a Parser object that parses user inputs.
@@ -22,7 +20,6 @@ public class Parser {
 
     /**
      * Parses out user inputs
-     *
      * @param input User input.
      * @return Command Type of command that user input in.
      * @throws DukeException If there is IOException when reading or writing from text file.
@@ -47,7 +44,6 @@ public class Parser {
     /**
      * Returns Command object based on user input.
      * Helper method to parse(String input) method.
-     *
      * @param input User input.
      * @return Command Type o comand summoned by user.
      * @throws DukeException If there is IOException when reading or writing from text file.
@@ -101,21 +97,14 @@ public class Parser {
             int taskNum;
             try {
                 taskNum = Integer.parseInt(input.substring(7));
-                return new DeleteCommand(taskNum);
+                return new AddCommand(taskNum);
 
             } catch (StringIndexOutOfBoundsException e) {
                 throw new EmptyDescException("delete");
             }
 
 
-        } else if (input.contains("find")) {
-            String keyword;
-            try {
-                keyword = input.substring(5);
-                return new FindCommand(keyword);
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new EmptyDescException("find");
-            }
+        }
         } else {
             throw new InvalidArgumentException();
         }

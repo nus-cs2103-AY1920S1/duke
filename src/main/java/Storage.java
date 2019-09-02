@@ -25,9 +25,18 @@ public class Storage {
         TaskList storedData = new TaskList();
         Parser parser;
         String line;
+        int tasknumber = 1;
 
         while ((line = bufferedReader.readLine()) != null) {
             parser = new Parser(line);
+            if (!parser.isSafe()){
+                System.out.println("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but loading task "+ tasknumber +
+                        " has failed, it will be removed\n"+
+                        "    ____________________________________________________________");
+                tasknumber++;
+                continue;
+            }
             switch (parser.getCommandType()) {
             case ADDTODO:
                 storedData.addTodo(parser.getDescription(), parser.isDone());
@@ -38,6 +47,7 @@ public class Storage {
             case ADDEVENT:
                 storedData.addEvent(parser.getDescription(), parser.isDone(), parser.getDate());
             }
+            tasknumber++;
         }
         bufferedReader.close();
         return storedData.getTaskList();

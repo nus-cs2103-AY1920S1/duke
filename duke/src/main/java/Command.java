@@ -1,15 +1,18 @@
-class Command {
-	private String command;
+import java.text.ParseException;
 
-	public Command(String command) {
+abstract class Command {
+	protected String command;
+	protected String remainingCommand;
+	protected Task task;
+
+	public Command(String command, String remainingCommand) {
 		this.command = command;
+		this.remainingCommand = remainingCommand;
 	}
 
-	public isExit() {
+	public boolean isExit() {
 		return this.command.equals("bye");
 	}
 
-	public void execute(TaskList tasks, Ui ui, Storage storage) {
-		tasks.add(task);
-	}
+	abstract public void execute(TaskList tasks, Ui ui) throws DukeException, ParseException;
 }

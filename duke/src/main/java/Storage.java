@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.Stream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 class Storage {
@@ -15,26 +15,27 @@ class Storage {
 		this.filename = filename;
 	}
 
-	public Stream<String> load() throws DukeException {
-		try {
-			File f = new File(filename);
-			Scanner s = new Scanner(f);
-			Stream<String> stringStream = Stream.generate(() -> s.nextLine());
-			s.close();
-			return stringStream;
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found!");
+	public ArrayList<AddCommand> load() throws FileNotFoundException {
+		ArrayList<AddCommand> commands = new ArrayList<>();
+		File f = new File(filename);
+		Scanner s = new Scanner(f);
+		
+		while (s.hasNext()) {
+			AddCommand c = (AddCommand) Parser.parse(s.next(), s.nextLine().trim());
+			commands.add(c);		
 		}
+		s.close();
+
+		return commands;
 	}
 
 	/**
 	 * Writes updated todo list to file.
 	 */
 
-	public void update(ArrayList<Task> list, String filename) throws IOException {
-		// writes into file
+	public void update(TaskList tasks, String filename) throws IOException {
 		FileWriter fw = new FileWriter(filename, false); // rewrites the entire doc
-		for (Task task: list) {
+		for (Task task: tasks.getList()) {
 			String type = task.getType();
 			int binary = task.isDone ? 1 : 0;
 			String toWrite = type + " " + binary + " " + task.getDescription();

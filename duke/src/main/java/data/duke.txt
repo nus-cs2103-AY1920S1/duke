@@ -1,2 +1,1 @@
-todo 0 read book
-deadline 0 2100 /by now
+todo 0 work

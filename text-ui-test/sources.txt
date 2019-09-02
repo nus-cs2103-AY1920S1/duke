@@ -9,5 +9,5 @@
 ../src/main/java/duke/task/Task.java
 ../src/main/java/duke/task/Deadline.java
 ../src/main/java/duke/task/Todo.java
-../src/main/java/Duke.java
+../src/main/java/duke.util.Duke.java
 ../src/main/java/Launcher.java

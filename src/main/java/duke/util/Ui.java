@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Print welcome message
      */
-    public String welcomeMessage() {
+    public static String welcomeMessage() {
         String result = "Hello!\nWhat can I do for you?";
         result += "\nType 'commands' to view a list of commands you can use.";
         return result;

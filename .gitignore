@@ -13,3 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 src/test/java/dukeTest.txt
+data/duke.txt

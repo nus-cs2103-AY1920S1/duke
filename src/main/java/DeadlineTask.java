@@ -1,9 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class DeadlineTask extends Task {
-	private final String deadline;
+	private final LocalDateTime deadline;
 
 	public DeadlineTask(String task, String deadline) {
 		super(task);
-		this.deadline = deadline;
+		this.deadline = DateParser.parse(deadline);
 	}
 
 	@Override
@@ -19,6 +23,7 @@ public class DeadlineTask extends Task {
 	@Override
 	public String toString() {
 		String baseDescription = super.toString();
-		return String.format("%s (by: %s)", baseDescription, deadline);
+		return String.format("%s (by: %s)", baseDescription,
+				DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(deadline));
 	}
 }

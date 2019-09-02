@@ -32,6 +32,20 @@ public class Duke {
                 //System.out.println("is listing");
                 break;
 
+                case "done":
+                int indexOfTask = Integer.parseInt(descriptions.get(1));
+                listOfTasks.get(indexOfTask - 1).finishTask();
+                System.out.println("Task status updated.");
+                sf.updateFile(listOfTasks);
+                break;
+
+                case "delete":
+                int indexOfTask2 = Integer.parseInt(descriptions.get(1));
+                listOfTasks.remove(indexOfTask2 - 1);
+                System.out.println("List of tasks updated.");
+                sf.updateFile(listOfTasks);
+                break;
+
                 case "todo":
                 try {
                     taskDescriptions.add(descriptions.get(0));

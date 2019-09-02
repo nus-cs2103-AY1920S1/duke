@@ -5,13 +5,8 @@ import java.text.SimpleDateFormat;
 public class Deadline extends Task {
     private Date date;
 
-    public Deadline(String desc, String date) {
+    public Deadline(String desc) {
         super(desc);
-        try {
-            parseTime(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

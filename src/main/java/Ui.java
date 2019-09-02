@@ -80,4 +80,8 @@ public class Ui {
     public void closeScanner() {
         this.sc.close();
     }
+
+    public void showError() {
+
+    }
 }

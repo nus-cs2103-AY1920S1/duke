@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 public class TaskList {
+    private ArrayList<Task> tasks;
 
     TaskList() {
 
@@ -14,6 +17,8 @@ public class TaskList {
 
     public void list() {
         // prints a list of all tasks stored in this tasklist
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i + 1 + ". " + tasks.get(i));
+        }
     }
-
 }

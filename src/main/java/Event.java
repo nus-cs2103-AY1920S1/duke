@@ -5,13 +5,8 @@ import java.text.SimpleDateFormat;
 public class Event extends Task {
     private Date date;
 
-    public Event(String desc, String date) {
+    public Event(String desc) {
         super(desc);
-        try {
-            parseTime(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

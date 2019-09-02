@@ -70,6 +70,9 @@ public class Parser {
                         throw new DukeException("Incorrect format for due date of Event!!");
                     }
                     return new AddCommand(event);
+                case "find":
+                    String query = userInput[1];
+                    return new FindCommand(query);
                 default :
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

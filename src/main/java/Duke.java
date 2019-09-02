@@ -5,7 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 
+/**
+ * Duke, a personal chat bot assistant that helps you manage your tasks
+ *
+ * @author KaiBin
+ * @version 1.0
+ * @since 19-08-2019
+ */
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

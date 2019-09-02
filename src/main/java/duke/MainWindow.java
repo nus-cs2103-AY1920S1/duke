@@ -10,9 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. 
+ * Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -32,6 +33,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/samoyed.jpg"));
 
+    /**
+     * Constructor.
+     *
+     * @param duke Duke
+     */
     MainWindow(Duke duke) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
@@ -45,10 +51,18 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
+    /**
+     * Initialize duke.
+     */
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets duke.
+     *
+     * @param d Duke
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

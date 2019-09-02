@@ -29,18 +29,23 @@ public class DeleteCommand implements Command {
     /**
      * Execute.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (index > tasks.getSize() || index < 1) {
                 throw new InvalidIndexException("\u2639 OOPS!!! Trying to delete invalid task");
             }
             Task removedTask = tasks.remove(index);
-            ui.prettyPrint4("Noted. I've removed the task:");
-            ui.prettyPrint6(String.format("%s", removedTask)); 
-            ui.prettyPrint4(String.format("Now you have %d tasks in the list.", tasks.getSize())); 
+            String strToPrint = String.format("%s%s%s", 
+                    ui.prepend4("Noted. I've removed the task:"),
+                    ui.prepend6(String.format("%s", removedTask)),
+                    ui.prepend4(String.format(
+                            "Now you have %d tasks in the list.", tasks.getSize())));
+            System.out.printf("%s", strToPrint);
             storage.save(tasks);
+            return strToPrint;
         } catch (IOException e) {
             ui.printWriteError();
+            return ui.stringifyError(e);
         }
     }
 }

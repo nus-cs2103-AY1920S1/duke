@@ -16,7 +16,8 @@ public class ByeCommand implements Command {
     /**
      * Execute.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
         ui.printBye();
+        return ui.genBye(); 
     }
 }

@@ -66,6 +66,13 @@ public class Duke {
      * @param input String
      */
     String getResponse(String input) {
-        return "testing";
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            return this.ui.stringifyError(e);
+        } catch (ParseException e) {
+            return "Passed in an invalid date";
+        } 
     }
 }

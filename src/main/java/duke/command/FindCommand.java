@@ -26,15 +26,19 @@ public class FindCommand implements Command {
     /**
      * Execute.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int counter = 1;
-        ui.prettyPrint4("Here are the matching tasks in your list:");
+        String strToReturn = ui.prepend4("Here are the matching tasks in your list:");
+        System.out.printf("%s", strToReturn);
         for (int i = 1; i <= tasks.getSize(); i++) {
             Task task = tasks.get(i);
             if (task.getName().contains(this.keyword)) {
-                ui.prettyPrint4(String.format("%d.%s", counter, task));
+                String taskInString = ui.prepend4(String.format("%d.%s", counter, task));
+                System.out.printf("%s", taskInString);
+                strToReturn += taskInString;
                 counter++;
             }
         }
+        return strToReturn;
     }
 }

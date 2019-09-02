@@ -24,6 +24,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         AnchorPane ap = new MainWindow(duke);
         Scene scene = new Scene(ap);
+        scene.getStylesheets().add(this.getClass().getResource("/view/styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

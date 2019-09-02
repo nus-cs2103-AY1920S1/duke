@@ -34,13 +34,15 @@ public class EventCommand implements Command {
     /**
      * Execute.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.add(new Event(this.name, this.time));
             ui.sendAddTaskAck(tasks.get(tasks.getSize()), tasks.getSize());
             storage.save(tasks);
+            return ui.genAddTaskAck(tasks.get(tasks.getSize()), tasks.getSize());
         } catch (IOException e) {
             ui.printWriteError();
+            return ui.stringifyError(e);
         }
     }
 }

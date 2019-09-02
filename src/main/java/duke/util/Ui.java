@@ -38,7 +38,7 @@ public class Ui {
      * @param str the String to be printed
      */
     public void prettyPrint4(String str) {
-        System.out.printf("    %s\n", str);    
+        System.out.printf("%s", prepend4(str));
     }
 
     /**
@@ -47,8 +47,42 @@ public class Ui {
      * @param str the String to be printed 
      */
     public void prettyPrint6(String str) {
-        System.out.printf("      %s\n", str);
+        System.out.printf("%s", prepend6(str));
     }
+
+    /**
+     * Insert 4 spaces into String at front.
+     *
+     * @param str String
+     * @return String
+     */
+    public String prepend4(String str) {
+        return String.format("    %s\n", str);
+    }
+
+    /**
+     * Insert 6 spaces into String at front.
+     *
+     * @param str String
+     * @return String
+     */
+    public String prepend6(String str) {
+        return String.format("      %s\n", str);
+    }
+
+    /**
+     * Generate task acknowledgement.
+     *
+     * @param task Task
+     * @param size int the size of the task list
+     * @return String
+     */
+    public String genAddTaskAck(Task task, int size) {
+        return String.format("%s%s%s",
+                prepend4("Got it. I've added this task:"),
+                prepend6(task.toString()),
+                prepend4(String.format("Now you have %d tasks in the list.", size)));
+    } 
 
     /**
      * Sends task acknowledgement.
@@ -57,37 +91,80 @@ public class Ui {
      * @param size int the size of the task list
      */
     public void sendAddTaskAck(Task task, int size) {
-        prettyPrint4("Got it. I've added this task:");
-        prettyPrint6(task.toString());
-        prettyPrint4(String.format("Now you have %d tasks in the list.", size));
+        System.out.printf("%s", genAddTaskAck(task, size));
     } 
+
+    /**
+     * Generate welcome message.
+     *
+     * @return String
+     */
+    public String genWelcome() {
+        return "Hello I'm Duke\nWhat can I do for you\n";
+    }
+
+    /**
+     * Generate bye message.
+     *
+     * @return String
+     */
+    public String genBye() {
+        return "Bye. Hope to see you again soon!\n";
+    }
+
+    /**
+     * Generate Write error message.
+     *
+     * @return String
+     */
+    public String genWriteError() {
+        return "Sorry, failed to write to the disc\n";
+    }
+
+    /**
+     * Generate read error message.
+     *
+     * @return String
+     */
+    public String genReadError() {
+        return "Sorry, failed to read from the disc\n"; 
+    }
 
     /**
      * Print welcome message.
      */
     public void printWelcome() {
-        System.out.printf("Hello I'm Duke\nWhat can I do for you\n");
+        System.out.printf("%s", genWelcome());
     }
 
     /**
      * Print bye message.
      */
     public void printBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.printf("%s", genBye());
     }
 
     /**
      * Print write error.
      */
     public void printWriteError() {
-        System.out.println("Sorry, failed to write to the disc");
+        System.out.printf("%s", genWriteError());
     }
 
     /**
      * Print read error.
      */
     public void printReadError() {
-        System.out.println("Sorry, failed to read from the disc");
+        System.out.printf("%s", genReadError());
+    }
+
+    /**
+     * Error in string form.
+     *
+     * @return String
+     */
+    public String stringifyError(Exception e) {
+        return String.format("%s\n", e.toString()); 
     }
 
     /**
@@ -96,6 +173,6 @@ public class Ui {
      * @param e Exception
      */
     public void printError(Exception e) {
-        System.out.println(e);
+        System.out.printf("%s", stringifyError(e));
     }
 }

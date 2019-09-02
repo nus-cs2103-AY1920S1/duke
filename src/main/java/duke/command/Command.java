@@ -12,9 +12,10 @@ public interface Command {
      * @param task TaskList
      * @param ui Ui
      * @param storage Storage
+     * @return whatever is printed out to console for feedback to the GUI
      * @throws DukeException if error occurs while executing the command
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException;
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Check if it should exit.

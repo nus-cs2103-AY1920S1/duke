@@ -31,18 +31,22 @@ public class DoneCommand implements Command {
     /**
      * Execute.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (index > tasks.getSize() || index < 1) {
                 throw new InvalidIndexException("\u2639 OOPS!!! Trying to modify invalid task");
             }
             Task task = tasks.get(index);
             task.markDone();
-            ui.prettyPrint4(String.format("Nice! I've marked this task as done:"));
-            ui.prettyPrint6(String.format("%s", task)); 
+            String strToPrint = String.format("%s%s",
+                    ui.prepend4("Nice! I've marked this task as done:"),
+                    ui.prepend6(task.toString()));
+            System.out.printf("%s", strToPrint);
             storage.save(tasks);
+            return strToPrint;
         } catch (IOException e) {
             ui.printWriteError();
+            return ui.stringifyError(e);
         }
     }
 }

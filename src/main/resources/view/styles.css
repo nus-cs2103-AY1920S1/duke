@@ -1,6 +1,7 @@
 .dialogBox {
     display: flex;
     flex-direction: row;
+    width: 100%;
     align-items: center;
     margin-bottom: 8px;
 }

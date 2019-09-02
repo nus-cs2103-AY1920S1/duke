@@ -1,4 +1,4 @@
-deadline return book /by 2/aug/2018/18/00
+deadline return book /by 6/apr/2020/20/33
 event project meeting /at 3/oct/2019/18/00/3/oct/2019/19/00
 todo borrow book
 

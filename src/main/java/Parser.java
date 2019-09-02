@@ -9,14 +9,12 @@ public class Parser{
 
     }
 
-    public boolean parse (String line){
+    public String parse (String line){
 
         if(line.equals("bye")){
-            System.out.println("Bye. Hope to see you again soon!");
-            return false;
+            return "Bye. Hope to see you again soon!";
         }else if(line.equals("list")){
-            taskList.printTaskList();
-            return true;
+            return taskList.toString();
         }else{ 
             String inputnoun = line.split(" ")[0];
 
@@ -38,13 +36,15 @@ public class Parser{
                     if(inputnoun.equals("done")){
                         String stringFromUser = line.replaceAll("\\D+","");
                         Integer indexFromUser = Integer.parseInt(stringFromUser);
-                        taskList.doneTask(indexFromUser - 1);
+                        
                         storage.save();
+                        return taskList.doneTask(indexFromUser - 1);
                             
                     }else if (inputnoun.equals("todo")){
                         ToDoTask newTask = new ToDoTask (false, taskName);
-                        taskList.add(newTask);
+                        String toPrint = taskList.add(newTask);
                         storage.save();
+                        return toPrint;
 
                     }else if (inputnoun.equals("deadline")){
                         String [] deadlineArray = line.split("/");
@@ -62,8 +62,9 @@ public class Parser{
                         String newTaskName = taskName.split("/")[0];
                         
                         DeadlinesTask newTask = new DeadlinesTask (false, newTaskName, deadlineDateTime);
-                        taskList.add(newTask);
+                        String toPrint = taskList.add(newTask);
                         storage.save();
+                        return toPrint;
                     
                     }else if (inputnoun.equals("event")){
                         String [] deadlineArray = line.split("/");
@@ -89,30 +90,27 @@ public class Parser{
                         DateTime endingDateTime = new DateTime(endingHour, endingMin, endingDate, endingMonth, endingYear);
 
                         EventsTask newTask = new EventsTask (false, newTaskName, startingDateTime, endingDateTime);
-                        taskList.add(newTask);
-                        storage.save();
+                        String toPrint = taskList.add(newTask);
+                        storage.save(); 
+                        return toPrint;
 
                     }else if(inputnoun.equals("find")){
                         Command findCommand = new FindCommand(taskName);
                         findCommand.execute(taskList);
-
-
 
                     }else{
                         int offset = Integer.parseInt(taskName) - 1;
                         if(offset > taskList.size() - 1){
                             throw new DukeException("☹ OOPS!!! There aren't so many tasks!"); 
                         }else{
-                            taskList.deleteTask(offset);
+                            storage.save();
+                            return taskList.deleteTask(offset);
                         }
-                        storage.save();
                     }
-                    return true;
                 }
             }catch(DukeException e){
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
-        }
-        return true;
-    }
+        }return "Huatz";
+    } 
 }

@@ -1,28 +1,21 @@
-public class Duke {
+public class Duke  {
 
     private String filepath;
     private Storage storage;
     private TaskList taskList;
-    private UI ui; 
+    private Parser parser;
 
-    public Duke(String filepath){
-        this.filepath = filepath;
+
+    public Duke(){
+        this.filepath = "../resources/data/duke.txt";
         this.storage = new Storage(filepath);
-
-    }
-
-    public void run(){
-    
-        String startingMessage = "Hello! I'm Duke\nWhat can I do for you?" ;
-        System.out.println(startingMessage);
-
         this.taskList = storage.loadStorage();
-        ui = new UI(storage, taskList);
-        ui.run();
-        
+        this.parser = new Parser(storage, taskList);
+    }
+
+    public Parser getParser(){
+        return parser;
     }
     
-    public static void main(String[] args){
-        new Duke("../resources/data/duke.txt").run();
-    }
+
 }

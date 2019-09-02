@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      * @throws DukeException Throws if task(s) could not be found.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         ArrayList<Task> temp = new ArrayList<>();
         ArrayList<Task> fullList = tasks.getTaskList();
         for (Task task: fullList) {
@@ -42,9 +42,10 @@ public class FindCommand extends Command {
             }
         }
         if (temp.size() == 0) {
-            throw new DukeException("☹ OOPS!!! I could not find any tasks with these words :-(");
+            throw new DukeException("OOPS!!! I could not find any tasks with these words :-(");
         }
         TaskList temp1 = new TaskList(temp);
-        ui.showFound(temp1);
+
+        return ui.showFound(temp1);
     }
 }

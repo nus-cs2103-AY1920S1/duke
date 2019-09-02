@@ -6,39 +6,37 @@ import java.util.Scanner;
 
 public class UI {
     private Scanner sc;
-    private static final String BORDER = "____________________________________________________________";
-    private static final String UPPER_BORDER = BORDER + "\n\n";
-    private static final String LOWER_BORDER = "\n" + BORDER + "\n";
+//    private static final String BORDER = "________________________________________________________";
+//    private static final String UPPER_BORDER = BORDER + "\n\n";
+//    private static final String LOWER_BORDER = BORDER + "\n";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String WELCOME_MESSAGE = "Hello from\n" + logo + "\n"
-            + UPPER_BORDER + "Hello! I'm Duke\n" + "What can I do for you?" + LOWER_BORDER;
-    private static final String ERROR_CANNOT_LOAD = UPPER_BORDER
-            + "☹ OOPS!!! I cannot read your file! :(" + LOWER_BORDER;
-    private static final String BYE = UPPER_BORDER
-            + "Bye. Hope to see you again soon!" + LOWER_BORDER;
-    private static final String TASK_WRAPPER_UPPER = UPPER_BORDER + "Got it. I've added this task:\n";
+            +  "Hello! I'm Duke\n" + "What can I do for you?";
+    private static final String ERROR_CANNOT_LOAD = "OOPS!!! I cannot read your file! :(";
+    private static final String BYE = "Bye. Hope to see you again soon!";
+    private static final String TASK_WRAPPER_UPPER = "Got it. I've added this task:\n";
     private static final String DONE = "Nice! I've marked this task as done:\n";
-    private static final String TASK_WRAPPER_UPPER_DELETE = UPPER_BORDER + "Got it. I've removed this task:\n";
+    private static final String TASK_WRAPPER_UPPER_DELETE = "Got it. I've removed this task:\n";
     private static final String NOW_YOU_HAVE = "Now you have ";
-    private static final String TASK_WRAPPER_LOWER = " tasks in the list.\n" + LOWER_BORDER;
+    private static final String TASK_WRAPPER_LOWER = " tasks in the list.\n";
     private static final String FOUND = "Here are the matching tasks in your list:\n";
 
     /**
      * Prints out a welcome message.
      */
-    public void greet() {
-        System.out.println(WELCOME_MESSAGE);
+    public String greet() {
+        return WELCOME_MESSAGE;
     }
 
     /**
      * Prints out an error if file cannot be loaded.
      */
-    public void cannotLoad() {
-        System.out.println(ERROR_CANNOT_LOAD);
+    public String cannotLoad() {
+        return ERROR_CANNOT_LOAD;
     }
 
     /**
@@ -46,8 +44,8 @@ public class UI {
      *
      * @param taskList TaskList to print out.
      */
-    public void showTaskList(TaskList taskList) {
-        System.out.println(UPPER_BORDER + taskList + LOWER_BORDER);
+    public String showTaskList(TaskList taskList) {
+        return taskList.toString();
     }
 
     /**
@@ -55,8 +53,8 @@ public class UI {
      *
      * @param task Task to be marked done.
      */
-    public void showDone(Task task) {
-        System.out.println(UPPER_BORDER + DONE + task + "\n" + LOWER_BORDER);
+    public String showDone(Task task) {
+        return DONE + task + "\n";
     }
 
     /**
@@ -66,13 +64,13 @@ public class UI {
      * @param taskList TaskList of the Task that was operated on.
      * @param isAdd Type of operation that was done.
      */
-    public void operateTask(Task task, TaskList taskList, boolean isAdd) {
+    public String operateTask(Task task, TaskList taskList, boolean isAdd) {
         if (isAdd) {
-            System.out.println(TASK_WRAPPER_UPPER + task + "\n" + NOW_YOU_HAVE + taskList.getTaskListSize()
-                    + TASK_WRAPPER_LOWER);
+            return TASK_WRAPPER_UPPER + task + "\n" + NOW_YOU_HAVE + taskList.getTaskListSize()
+                    + TASK_WRAPPER_LOWER;
         } else {
-            System.out.println(TASK_WRAPPER_UPPER_DELETE + task + "\n" + NOW_YOU_HAVE + (taskList.getTaskListSize() - 1)
-                    + TASK_WRAPPER_LOWER);
+            return TASK_WRAPPER_UPPER_DELETE + task + "\n" + NOW_YOU_HAVE + (taskList.getTaskListSize() - 1)
+                    + TASK_WRAPPER_LOWER;
         }
     }
 
@@ -81,8 +79,8 @@ public class UI {
      *
      * @param foundItems The result of finding the taskList.
      */
-    public void showFound(TaskList foundItems) {
-        System.out.println(UPPER_BORDER + FOUND + foundItems + LOWER_BORDER);
+    public String showFound(TaskList foundItems) {
+        return FOUND + foundItems;
     }
 
     /**
@@ -90,14 +88,14 @@ public class UI {
      *
      * @param e Error to be shown.
      */
-    public void showError(String e) {
-        System.out.println(UPPER_BORDER + e + LOWER_BORDER);
+    public String showError(String e) {
+        return e;
     }
 
     /**
      * Prints bye message.
      */
-    public void bye() {
-        System.out.println(BYE);
+    public String bye() {
+        return BYE;
     }
 }

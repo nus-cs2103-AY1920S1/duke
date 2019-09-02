@@ -12,8 +12,8 @@ public class ParserTest {
     public void testParseTodo() throws DukeException {
         String[] testNormal = new String[] {"todo", "Hello"};
         String[] testThrow = new String[] {"todo"};
-        assertEquals("Hello", Parser.parseTodo(testNormal));
-        assertThrows(DukeException.class, () -> Parser.parseTodo(testThrow));
+        assertEquals("Hello", Parser.parseTask(testNormal, "todo"));
+        assertThrows(DukeException.class, () -> Parser.parseTask(testThrow, "todo"));
     }
 
 }

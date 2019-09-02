@@ -21,7 +21,7 @@ public class Parser {
                 return new ListCommand();
             } else if (keywords[0].equals("done")) {
                 if (keywords.length > 2) {
-                    throw new DukeException("☹ OOPS!!! You supplied too many arguments :-(");
+                    throw new DukeException("OOPS!!! You supplied too many arguments :-(");
                 } else {
                     return new DoneCommand(Integer.parseInt(keywords[1]));
                 }
@@ -36,7 +36,7 @@ public class Parser {
                 return new EventCommand(temp[0], temp[1]);
             } else if (keywords[0].equals("delete")) {
                 if (keywords.length > 2) {
-                    throw new DukeException("☹ OOPS!!! You supplied too many arguments :-(");
+                    throw new DukeException("OOPS!!! You supplied too many arguments :-(");
                 } else {
                     return new DeleteCommand(Integer.parseInt(keywords[1]));
                 }
@@ -44,12 +44,12 @@ public class Parser {
                 String temp = parseTask(keywords, "find");
                 return new FindCommand(temp);
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("☹ OOPS!!! I can't mark or delete without an entry :-(");
+            throw new DukeException("OOPS!!! I can't mark or delete without an entry :-(");
         } catch (NumberFormatException ex) {
-            throw new DukeException("☹ OOPS!!! That's not a valid entry :-(");
+            throw new DukeException("OOPS!!! That's not a valid entry :-(");
         }
     }
 
@@ -62,7 +62,7 @@ public class Parser {
      */
     public static String parseTask(String[] keywords, String taskType) throws DukeException {
         if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a " + taskType + " cannot be empty.");
         } else {
             keywords[0] = "";
             return String.join(" ", keywords).strip();
@@ -81,7 +81,7 @@ public class Parser {
      */
     public static String[] parseTaskTime(String[] keywords, String dateTimeType) throws DukeException {
         if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a " + dateTimeType + " cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a " + dateTimeType + " cannot be empty.");
         } else {
             String temp = "";
             String date = "";
@@ -117,10 +117,10 @@ public class Parser {
             if (date.equals("")) {
                 switch (dateTimeType) {
                 case "deadline":
-                    throw new DukeException("☹ OOPS!!! Your deadline does not have a /by.");
+                    throw new DukeException("OOPS!!! Your deadline does not have a /by.");
 
                 case "event":
-                    throw new DukeException("☹ OOPS!!! Your event does not have an /at.");
+                    throw new DukeException("OOPS!!! Your event does not have an /at.");
 
                 default:
                     break;

@@ -45,7 +45,7 @@ public class TaskList {
         try {
             taskList.remove(entry - 1);
         } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
+            throw new DukeException("OOPS!!! I'm sorry, but this task does not exist.");
         }
     }
 
@@ -59,7 +59,7 @@ public class TaskList {
         try {
             taskList.get(entry - 1).setDone();
         } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
+            throw new DukeException("OOPS!!! I'm sorry, but this task does not exist.");
         }
     }
 

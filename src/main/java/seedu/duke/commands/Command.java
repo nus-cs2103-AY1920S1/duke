@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage Storage to write or read files if applicable.
      * @throws DukeException Throws if reading or writing files fails wherever storage is involved.
      */
-    public abstract void execute(TaskList tasks, UI ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, UI ui, Storage storage) throws DukeException;
 
     /**
      * Determines if the command will result in the end of the application.

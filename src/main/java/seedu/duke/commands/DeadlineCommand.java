@@ -36,13 +36,14 @@ public class DeadlineCommand extends Command {
      * @throws DukeException Throws if storage cannot find the file to write to.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         tasks.addToList(deadlineToAdd);
-        ui.operateTask(deadlineToAdd, tasks, true);
         try {
             storage.writeToFile(tasks);
         } catch (IOException ex) {
-            throw new DukeException("☹ OOPS!!! I cannot read your file! :(");
+            throw new DukeException("OOPS!!! I cannot read your file! :(");
         }
+
+        return ui.operateTask(deadlineToAdd, tasks, true);
     }
 }

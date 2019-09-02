@@ -13,18 +13,33 @@ import java.util.Scanner;
  * Main class to drive the Duke application.
  */
 public class Duke {
+
     private UI ui;
     private Storage storageHandler;
     private TaskList taskList;
     private static final String savedPath
             = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
 
-
     /**
-     * Main constructor for Duke that specifies the path of the save file.
-     *
-     * @param savedPath Path of the duke.txt file used to store information.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
+    public String getResponse(String input) {
+        String command = input;
+        Command c;
+        try {
+            c = Parser.parse(command);
+            return c.execute(taskList, ui, storageHandler);
+        } catch (DukeException ex) {
+            return ui.showError(ex.getMessage());
+        }
+    }
+
+        /**
+         * Main constructor for Duke that specifies the path of the save file.
+         *
+         * @param savedPath Path of the duke.txt file used to store information.
+         */
     public Duke(String savedPath) {
         ui = new UI();
         storageHandler = new Storage(savedPath);
@@ -32,6 +47,17 @@ public class Duke {
             taskList = new TaskList(storageHandler.loadFromFile());
         } catch (DukeException ex) {
             ui.cannotLoad();
+            taskList = new TaskList();
+        }
+    }
+
+    public Duke() {
+        ui = new UI();
+        storageHandler = new Storage(savedPath);
+        try {
+            taskList = new TaskList(storageHandler.loadFromFile());
+        } catch (DukeException ex) {
+            System.out.println(ui.cannotLoad());
             taskList = new TaskList();
         }
     }
@@ -49,7 +75,7 @@ public class Duke {
             try {
                 command = sc.nextLine();
                 Command c = Parser.parse(command);
-                c.execute(taskList, ui, storageHandler);
+                System.out.println(c.execute(taskList, ui, storageHandler));
                 isExit = c.isExit();
             } catch (DukeException ex) {
                 ui.showError(ex.getMessage());

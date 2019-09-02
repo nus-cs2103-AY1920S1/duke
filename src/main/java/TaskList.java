@@ -22,12 +22,27 @@ public class TaskList {
 
             if (type.equals("T")) {
                 Task add = new Todo(listItem[2]);
+
+                if(listItem[1] == "✓") {
+                    add.markAsDone();
+                }
+
                 this.taskList.add(add);
             } else if (type.equals("D")) {
-                Task addTask = new Deadline(listItem[2], listItem[3]);
-                this.taskList.add(addTask);
+                Task add = new Deadline(listItem[2], listItem[3]);
+
+                if(listItem[1] == "✓") {
+                    add.markAsDone();
+                }
+
+                this.taskList.add(add);
             } else {
                 Task add = new Events(listItem[2], listItem[3]);
+
+                if(listItem[1] == "✓") {
+                    add.markAsDone();
+                }
+                
                 this.taskList.add(add);
             }
         }

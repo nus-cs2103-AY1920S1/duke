@@ -62,7 +62,7 @@ public class Parser {
             String[] wordsArray = new String[findWords.size()];
             findWords.toArray(wordsArray);
             return new KeyCommand(wordsArray);
-            
+
         case "todo":
         case "deadline":
         case "event":

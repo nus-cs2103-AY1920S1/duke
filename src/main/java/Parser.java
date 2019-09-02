@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Deads with making sense of the user command,
+ * Deals with making sense of the user command,
  * and simulates the supposed interaction from the command.
  */
 public class Parser {
@@ -13,7 +13,7 @@ public class Parser {
 
     /**
      * Creates a new Parser object with the given Duke program.
-     * @param parseDuke the Duke Program that will be handles by the Parser.
+     * @param parseDuke the Duke Program that will be handles by the Parser
      */
     public Parser(Duke parseDuke) {
         this._duke = parseDuke;
@@ -115,9 +115,7 @@ public class Parser {
                 System.err.println(Ui.addLines(e.getMessage()));
             } catch (EventException e) {
                 System.err.println(Ui.addLines(e.getMessage()));
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IOException | IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
         }

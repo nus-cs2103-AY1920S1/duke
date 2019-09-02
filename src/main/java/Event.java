@@ -9,8 +9,8 @@ public class Event extends Task {
 
     /**
      * Creates an Event object, which is also a Task.
-     * @param desc a description of the Event Task.
-     * @param date the date the Event will be held on.
+     * @param desc a description of the Event Task
+     * @param date the date the Event will be held on
      */
     public Event(String desc, String date) {
         super(desc);
@@ -23,8 +23,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string representation of a Event object.
-     * @return String Returns a string representation of a Event object.
+     * Returns a string representation of an Event object.
+     * @return a string representation of an Event object
      */
     public String toString() {
         String e = String.format("[E][%s]%s(at: %s)",
@@ -35,7 +35,7 @@ public class Event extends Task {
     /**
      * Returns a string representation of the Event object to be saved
      * into the hard disk file for the Duke program.
-     * @return String Returns a the data representation of the Event Task.
+     * @return the data representation of the Event Task.
      */
     public String toData() {
         String t = String.format("E | %s | %s | %s",

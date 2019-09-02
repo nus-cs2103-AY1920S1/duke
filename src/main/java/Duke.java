@@ -18,7 +18,7 @@ public class Duke { // handles all input and output
 
     /**
      * Creates a Duke program with filePath as the path to save Duke's data.
-     * @param filePath the path to save the Duke's data from user input.
+     * @param filePath the path to save the Duke's data from user input
      */
     public Duke(String filePath) {
         this._myData = new DukeData(filePath);
@@ -34,7 +34,7 @@ public class Duke { // handles all input and output
 
     /**
      * This method allows for retrieval of the user's TaskList that has been entered into Duke.
-     * @return ArrayList of Task objects that contains the users' tasks.
+     * @return ArrayList of Task objects that contains the users' tasks
      */
     public ArrayList<Task> getTaskList() {
         return this._myData.load().getList();
@@ -42,7 +42,7 @@ public class Duke { // handles all input and output
 
     /**
      * The getData() method retrieves the data that Duke has stored fdr the user.
-     * @return DukeData representation of the data that has been stored.
+     * @return DukeData representation of the data that has been stored
      */
     public DukeData getData() {
         return this._myData;
@@ -50,7 +50,7 @@ public class Duke { // handles all input and output
 
     /**
      * This is the main method that initiates the running of the Duke program.
-     * @param args Unused.
+     * @param args Unused
      */
     public static void main(String[] args) { // handles all input and output
         Duke theDuke = new Duke("/Users/StudyBuddy/Desktop/CS2103/iP/duke/src/main/data");

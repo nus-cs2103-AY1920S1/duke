@@ -6,7 +6,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a ToDo object which is also a Task.
-     * @param desc Description of the ToDo Task.
+     * @param desc Description of the ToDo Task
      */
     public ToDo(String desc) {
         super(desc);
@@ -14,7 +14,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a string representation of a ToDo object.
-     * @return String Returns a string representation of a ToDo object.
+     * @return String Returns a string representation of a ToDo object
      */
     public String toString() {
         String t = String.format("[T][%s]%s",
@@ -25,7 +25,7 @@ public class ToDo extends Task {
     /**
      * Returns a string representation of the ToDo object to be saved
      * into the hard disk file for the Duke program.
-     * @return String Returns a the data representation of the ToDo Task.
+     * @return String Returns a the data representation of the ToDo Task
      */
     public String toData() {
         String t = String.format("T | %s | %s",

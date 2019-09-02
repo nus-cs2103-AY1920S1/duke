@@ -16,7 +16,7 @@ public class Ui {
 
     /**
      * Greets the users, and asks users what they want Duke to do.
-     * @return String Returns a String of Greetings.
+     * @return a String of Greetings.
      */
     public String showIntro() {
         String out = String.format("%s%n Hello! I am Duke%n " +
@@ -27,8 +27,8 @@ public class Ui {
     /**
      * Lists out all the tasks the user has added, be it ToDo, Deadlines or Events,
      * in the order of input.
-     * @param tasks An ArrayList which consists of the Task objects
-     * @return String Returns a Strings of all Tasks.
+     * @param tasks an ArrayList which consists of the Task objects
+     * @return a String representation of all Tasks in the list
      */
     public String showList(ArrayList<Task> tasks) {
         StringBuilder s = new StringBuilder();
@@ -44,7 +44,7 @@ public class Ui {
 
     /**
      * Bids the user GoodBye after the user is done using Duke.
-     * @return String Returns a string of farewell words.
+     * @return a string of farewell words.
      */
     public String showFarewell() {
         String bye = String.format("GoodBye! Hope to see you again soon!");
@@ -53,9 +53,9 @@ public class Ui {
 
     /**
      * Informs the user of the task added.
-     * @param t The Task to be added, which can be a ToDo, Deadline, or Event.
-     * @param list The TaskList which contains all Tasks in the list.
-     * @return String Returns a String of information notifying the user of the added task.
+     * @param t the Task to be added, which can be a ToDo, Deadline, or Event.
+     * @param list the TaskList which contains all Tasks in the list.
+     * @return a String of information notifying the user of the added task.
      */
     public String showTaskAdded(Task t, TaskList list) {
         String added = String.format("Got it! I've added this task:" +
@@ -66,9 +66,9 @@ public class Ui {
 
     /**
      * Notifies the user of the task marked as done.
-     * @param n The task number, in the order of input.
-     * @param list The TaskList which contains all Tasks in the list.
-     * @return String Returns a string to inform user of the task marked as done.
+     * @param n the task number, in the order of input.
+     * @param list the TaskList which contains all Tasks in the list.
+     * @return a string to inform user of the task marked as done.
      */
     public String showDone(int n, TaskList list) {
         Task t = list.getTask(n - 1);
@@ -79,8 +79,9 @@ public class Ui {
 
     /**
      * Notifies the user of the Task removed.
-     * @param index The task number, in the order of input.
-     * @return String Returns a string to inform user of the task removed from the list.
+     * @param index the task number, in the order of input
+     * @param list the list from which the Task is to be deleted from
+     * @return a string to inform user of the task removed from the list
      */
     public String showDelete(int index, TaskList list) {
         Task t = list.getTask(index);
@@ -105,7 +106,7 @@ public class Ui {
     /**
      * Adds a line before and after every command.
      * @param cmd the command output.
-     * @return String a String representation of the output with the lines.
+     * @return a String representation of the output with the lines.
      */
     public static String addLines(String cmd) {
         String out = String.format("%s%n %s%n%s%n",

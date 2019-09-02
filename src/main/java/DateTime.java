@@ -17,9 +17,9 @@ public class DateTime {
 
     /**
      * Constructs a new DateTime object with the given date and time.
-     * @param dateTime the date/time string representation in the old format.
+     * @param dateTime the date/time string representation in the old format
      * @throws ParseException when the parameter dateTime given is
-     * not presented in the given format.
+     * not presented in the given format
      */
     public DateTime(String dateTime) throws ParseException {
         this._dateTime = dateTime;
@@ -29,8 +29,7 @@ public class DateTime {
     /**
      * This method formats the date and time into the more readable format,
      * and returns a string representation of it.
-     * @return String Returns a string representation of the given
-     * date and time in the new format.
+     * @return a string representation of the given date and time in the new format.
      */
     public String getDateTimeString() {
         String[] splitDate = this._dateTime.split("/");

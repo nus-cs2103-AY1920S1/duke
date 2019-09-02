@@ -9,8 +9,8 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object, which is also a Task.
-     * @param desc a description of the Deadline Task.
-     * @param date the date of the Deadline which is to be done by.
+     * @param desc a description of the Deadline Task
+     * @param date the date of the Deadline which is to be done by
      */
     public Deadline(String desc, String date) {
         super(desc);
@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of a Deadline object.
-     * @return String Returns a string representation of a Deadline object.
+     * @return a string representation of a Deadline object.
      */
     public String toString() {
         String d = String.format("[D][%s]%s(by: %s)",
@@ -35,7 +35,7 @@ public class Deadline extends Task {
     /**
      * Returns a string representation of the Event object to be saved
      * into the hard disk file for the Duke program.
-     * @return String Returns the data representation of the Event Task.
+     * @return the data representation of the Event Task
      */
     public String toData() {
         String t = String.format("E | %s | %s | %s",
@@ -45,7 +45,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of the expected Deadline in the new format.
-     * @return String Returns a string of the deadline's date.
+     * @return a string of the deadline's date.
      */
     public String getDeadline() {
          return this._date;

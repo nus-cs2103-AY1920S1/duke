@@ -11,16 +11,35 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    private static final String DEFAULT_FILE_PATH = "tasks.txt";
+
     /**
-     * Sets up Duke.
-     * @param args Setup arguments
+     * Returns output in response to input command.
+     * @param input User command.
+     * @return String representation of the output from the input command.
      */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+    public String getResponse(String input) {
+        ui.resetMessage();
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            storage.save(tasks);
+        } catch (DukeException ex) {
+            ui.append(ex.getMessage());
+        }
+        return ui.getMessage();
+    }
+
+    /**
+     * Starts Duke using the default file path.
+     */
+    public Duke() {
+        this(DEFAULT_FILE_PATH);
     }
 
     /**
      * Starts Duke.
+     *
      * @param filePath File path of the tasks data.
      */
     public Duke(String filePath) {
@@ -28,33 +47,27 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
-            Ui.printIndented(String.format("Loaded from %s", storage.getFilePath()));
+            ui.append(String.format("Loaded from %s", storage.getFilePath()));
         } catch (DukeException ex) {
-            Ui.printIndented(ex.getMessage());
+            ui.append(ex.getMessage());
             tasks = new TaskList();
         }
     }
 
     /**
-     * Runs Duke.
+     * Returns data load message. Only used on initialization.
+     * @return Data load message.
      */
-    private void run() {
-        Ui.sayGreeting();
-        boolean isExit = false;
+    public String getStartUpMessage() {
+        return ui.getMessage();
+    }
 
-        while (!isExit) {
-            String fullCommand = ui.nextCommand();
-            Ui.printDivider();
-            try {
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, storage);
-                storage.save(tasks);
-                isExit = c.isExit();
-            } catch (DukeException ex) {
-                Ui.printIndented(ex.getMessage());
-            } finally {
-                Ui.printDivider();
-            }
-        }
+    /**
+     * Returns greeting message.
+     * @return Greeting message.
+     */
+    public String getGreeting() {
+        return ui.getGreeting();
     }
 }
+

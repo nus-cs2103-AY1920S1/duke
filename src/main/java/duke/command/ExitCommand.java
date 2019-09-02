@@ -10,11 +10,12 @@ public class ExitCommand extends Command {
      * Executes Exit command to close Duke.
      *
      * @param tasks Current TaskList.
+     * @param ui Current Ui.
      * @param storage Current Storage.
      * @throws DukeException Never.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
-        Ui.sayBye();
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.append(ui.getBye());
     }
 
     @Override

@@ -47,10 +47,11 @@ public class AddCommand extends Command {
      * Executes Add command to add a task to the given TaskList.
      *
      * @param tasks Current TaskList.
+     * @param ui Current Ui.
      * @param storage Current Storage.
      * @throws DukeException If invalid input.
      */
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         switch (type) {
         case "event": {
@@ -101,7 +102,7 @@ public class AddCommand extends Command {
             task = new Todo(description);
         }
         tasks.add(task);
-        Ui.printIndented(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
+        ui.append(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
                 tasks.size() != 1 ? "tasks" : "task"));
     }
 }

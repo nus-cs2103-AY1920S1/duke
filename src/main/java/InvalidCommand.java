@@ -1,17 +1,20 @@
 public class InvalidCommand extends Command {
 
-  String errorMessage;
+    String errorMessage;
 
-  public InvalidCommand(String errorMessage) {
-    this.errorMessage = errorMessage;
-  }
+    public InvalidCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) {
+    /**
+     * Executes the given task, prints output and updates the taskList.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
 
-    // Printing Output
-    ui.showTopBorder();
-    System.out.println("\n\t" + errorMessage);
-    ui.showBottomBorder();
+        // Printing Output
+        ui.showTopBorder();
+        System.out.println("\n\t" + errorMessage);
+        ui.showBottomBorder();
 
-  }
+    }
 }

@@ -4,25 +4,25 @@
  */
 public class Event extends Task {
 
-  private String timing;
+    private String timing;
 
-  // Constructor
-  public Event(String description, String timing) {
-    super(description);
-    this.timing = timing;
-  }
+    // Constructor
+    public Event(String description, String timing) {
+        super(description);
+        this.timing = timing;
+    }
 
-  /**
-   * Returns the timing at which the event happens
-   * 
-   * @return timing
-   */
-  public String getTiming() {
-    return this.timing;
-  }
+    /**
+     * Returns the timing at which the event happens.
+     * 
+     * @return timing
+     */
+    public String getTiming() {
+        return this.timing;
+    }
 
-  @Override
-  public String toString() {
-    return "[E] " + super.toString() + " (at: " + timing + ")";
-  }
+    @Override
+    public String toString() {
+        return "[E] " + super.toString() + " (at: " + timing + ")";
+    }
 }

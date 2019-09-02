@@ -1,5 +1,9 @@
-import json.JsonWriter;
-import json.Registry;
+package org.duke.task;
+
+import org.duke.DukeException;
+import org.duke.json.JsonWriter;
+import org.duke.json.Registry;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.function.Function;

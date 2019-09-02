@@ -1,10 +1,12 @@
+package org.duke.task;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import json.ObjectHandler;
-import json.Receiver;
-import json.ValueHandler;
+import org.duke.json.ObjectHandler;
+import org.duke.json.Receiver;
+import org.duke.json.ValueHandler;
 
 public enum TaskType {
 	ToDo("T", Task::new),

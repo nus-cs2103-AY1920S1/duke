@@ -1,6 +1,8 @@
+package org.duke.util;
+
 import java.util.function.Function;
 
-class CounterDecorator implements Function<String, String> {
+public class CounterDecorator implements Function<String, String> {
 	private int counter;
 	public CounterDecorator(int start) {
 		this.counter = start;

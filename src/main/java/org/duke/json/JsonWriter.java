@@ -1,4 +1,4 @@
-package json;
+package org.duke.json;
 
 import java.io.*;
 import java.util.Iterator;

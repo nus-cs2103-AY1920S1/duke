@@ -1,3 +1,5 @@
+package org.duke;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +11,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import json.JsonParser;
-import json.JsonWriter;
-import json.ValueHandler;
+
+import org.duke.task.Task;
+import org.duke.task.EventTask;
+import org.duke.task.DeadlineTask;
+import org.duke.task.TaskType;
+
+import org.duke.json.JsonParser;
+import org.duke.json.JsonWriter;
+import org.duke.json.ValueHandler;
+
+import org.duke.ui.DukeIO;
+import org.duke.ui.Command;
+
+import org.duke.util.CounterDecorator;
 
 public class Duke {
 

@@ -1,4 +1,5 @@
-package json;
+package org.duke.json;
+
 import java.util.*;
 public interface ValueHandler<T> {
 	default T handleBoolean(boolean val) {

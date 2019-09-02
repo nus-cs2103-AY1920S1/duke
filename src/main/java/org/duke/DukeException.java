@@ -1,3 +1,5 @@
+package org.duke;
+
 public class DukeException extends RuntimeException {
 	public DukeException() {}
 	public DukeException(String message) { super(message); }

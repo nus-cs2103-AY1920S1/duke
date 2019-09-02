@@ -1,4 +1,5 @@
-package json;
+package org.duke.json;
+
 import java.lang.reflect.Type;
 import java.io.*;
 import java.util.*;
@@ -65,9 +66,9 @@ public class Registry {
 		throw new JsonException("No handler for class %s", clazz);
 	}
 
-	private static <T> BiConsumer<JsonWriter.ValueContext, T> getEncoder(Class<? extends T> clazz) {
+	public static <T> BiConsumer<JsonWriter.ValueContext, T> getEncoder(Class<? extends T> clazz) {
 		if(encoderCache.containsKey(clazz)) {
-			return encoderCache.get(clazz);
+			return (BiConsumer<JsonWriter.ValueContext, T>) encoderCache.get(clazz);
 		}
 		BiConsumer<JsonWriter.ValueContext, T> encoder = getEncoderInner(clazz);
 		encoderCache.put(clazz, encoder);

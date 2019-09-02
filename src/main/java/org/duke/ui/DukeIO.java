@@ -1,3 +1,5 @@
+package org.duke.ui;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.HashMap;
@@ -5,6 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import org.duke.DukeException;
 
 public class DukeIO {
 

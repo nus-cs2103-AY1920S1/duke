@@ -1,4 +1,5 @@
-package json;
+package org.duke.json;
+
 import java.util.*;
 import java.util.function.*;
 

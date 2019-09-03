@@ -1,3 +1,4 @@
+// ----- JavaFX -----
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -7,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+// ----- JavaFX -----
 
 import java.io.IOException;
 
@@ -23,6 +25,7 @@ public class Duke extends Application {
     private Ui ui;
     private Parser parser;
 
+    // ----- JavaFX -----
     // UI components
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -32,6 +35,7 @@ public class Duke extends Application {
     // Avatar images
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    // ----- JavaFX -----
 
     //public Duke(String filePath) {
     public Duke() {
@@ -49,6 +53,7 @@ public class Duke extends Application {
         }
     }
 
+    // ----- JavaFX -----
     // Overrides Application#start() method with concrete implementation
     @Override
     public void start(Stage stage) {
@@ -161,6 +166,7 @@ public class Duke extends Application {
     //private String getResponse(String input) {
         return "Duke heard: " + input;
     }
+    // ----- JavaFX -----
 
     /**
      * Starts Duke program.

@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Intialise this class with an index

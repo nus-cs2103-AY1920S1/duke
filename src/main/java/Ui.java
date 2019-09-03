@@ -22,10 +22,14 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+
     /**
      * Lists all the Tasks to the user
      */
-    public void list () { System.out.println("Here are the tasks in your list:"); }
+    public void list () {
+        System.out.println("Here are the tasks in your list:");
+    }
+
 
     /**
      * Notifies user that a Task was added to the tasks list

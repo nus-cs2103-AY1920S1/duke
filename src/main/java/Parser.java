@@ -57,9 +57,13 @@ public class Parser {
 
         String[] words = command.split(" ", 2);
 
-        if (words.length == 1) throw DukeException.emptyDescription();
+        if (words.length == 1) {
+            throw DukeException.emptyDescription();
+        }
 
-        if (words[1].isBlank()) throw DukeException.emptyDescription();
+        if (words[1].isBlank()) {
+            throw DukeException.emptyDescription();
+        }
 
         int index = Integer.valueOf(words[1]) - 1;
 
@@ -78,7 +82,9 @@ public class Parser {
 
         String[] words = command.split(" ", 2);
 
-        if (words.length == 1) throw DukeException.emptyDescription();
+        if (words.length == 1) {
+            throw DukeException.emptyDescription();
+        }
 
         Task task = null;
 
@@ -88,7 +94,9 @@ public class Parser {
         case TODO:
             description = words[1];
 
-            if (description.isBlank()) throw DukeException.emptyDescription();
+            if (description.isBlank()) {
+                throw DukeException.emptyDescription();
+            }
 
             task = new Todo(description);
 
@@ -97,12 +105,16 @@ public class Parser {
         case DEADLINE:
             String[] split = words[1].split(" /by ", 2);
 
-            if (split.length == 1) throw DukeException.emptyDescription();
+            if (split.length == 1) {
+                throw DukeException.emptyDescription();
+            }
 
             description = split[0];
             String by = split[1];
 
-            if (description.isBlank() || by.isBlank()) throw DukeException.emptyDescription();
+            if (description.isBlank() || by.isBlank()) {
+                throw DukeException.emptyDescription();
+            }
 
             task = new Deadline(description, by);
 
@@ -111,12 +123,16 @@ public class Parser {
         case EVENT:
             split = words[1].split(" /at ", 2);
 
-            if (split.length == 1) throw DukeException.emptyDescription();
+            if (split.length == 1) {
+                throw DukeException.emptyDescription();
+            }
 
             description = split[0];
             String at = split[1];
 
-            if (description.isBlank() || at.isBlank()) throw DukeException.emptyDescription();
+            if (description.isBlank() || at.isBlank()) {
+                throw DukeException.emptyDescription();
+            }
 
             task = new Event(description, at);
 
@@ -137,9 +153,13 @@ public class Parser {
     public static int parsesDelete (String command) throws DukeException {
         String[] words = command.split(" ", 2);
 
-        if (words.length == 1) throw DukeException.emptyDescription();
+        if (words.length == 1)  {
+            throw DukeException.emptyDescription();
+        }
 
-        if (words[1].isBlank()) throw DukeException.emptyDescription();
+        if (words[1].isBlank()) {
+            throw DukeException.emptyDescription();
+        }
 
         System.out.println("Noted. I've removed this task:");
 

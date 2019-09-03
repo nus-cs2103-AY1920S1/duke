@@ -2,6 +2,9 @@ package duke.main;
 
 import java.util.Scanner;
 
+/**
+ * Deals with interaction with the user
+ */
 public class Ui {
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

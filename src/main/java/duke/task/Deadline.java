@@ -23,7 +23,6 @@ public class Deadline extends Task {
         SimpleDateFormat newFormat = new SimpleDateFormat("d 'of' MMMMMMMMM yyyy, h:mm a");
         try {
             Date date = format.parse(dateTime);
-            System.out.println(date);
             return newFormat.format(date);
         } catch (ParseException e) {
             return dateTime;

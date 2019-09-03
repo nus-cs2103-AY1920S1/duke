@@ -42,6 +42,8 @@ public class Parser {
             return parseEvent(details);
         } else if (command.equals("todo")) {
             return parseTodo(details);
+        } else if (command.equals("find")) {
+            return parseFind(details);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-()");
         }
@@ -116,5 +118,12 @@ public class Parser {
             throw new DukeException("OOPS!!! Please add task description after 'todo'");
         }
         return new TodoCommand(details);
+    }
+
+    public FindCommand parseFind(String details) throws DukeException {
+        if (details.isBlank()) {
+            throw new DukeException("OOPS!!! Please add keyword after 'find'");
+        }
+        return new FindCommand(details);
     }
 }

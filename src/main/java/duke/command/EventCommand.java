@@ -50,14 +50,14 @@ public class EventCommand extends Command {
      */
     public static void event(String data, TaskList tasks, Ui ui) throws DukeException {
         if (data.isEmpty()) {
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
                     + "The description of an event cannot be empty.");
         }
 
         String[] result = data.split("/at");
 
         if (result.length <= 1) {
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
                     + "Event time is needed.");
         }
 

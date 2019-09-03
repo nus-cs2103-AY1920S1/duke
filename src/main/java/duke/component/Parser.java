@@ -66,7 +66,7 @@ public class Parser {
 
 
         default:
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
                     + "I'm sorry, but I don't know what that means :-(");
         }
     }

@@ -50,13 +50,13 @@ public class DeadlineCommand extends Command {
     public static void deadline(String data, TaskList tasks, Ui ui) throws DukeException {
         if (data.isEmpty()) {
             throw new DukeException(ui.INDENT_COMMENT
-                    + "\u2639 OOPS !!! " + "The description of a deadline cannot be empty.");
+                    + "OOPS !!! " + "The description of a deadline cannot be empty.");
         }
 
         String[] result = data.split("/by");
 
         if (result.length <= 1) {
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Deadline is needed.");
+            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! " + "Deadline is needed.");
         }
 
         String achieve = result[0].trim();

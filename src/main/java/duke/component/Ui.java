@@ -11,10 +11,10 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Indentation for comment. */
-    public final String INDENT_COMMENT = "    ";
+    public static final String INDENT_COMMENT = "    ";
 
     /** Indentation for task description. */
-    public final String INDENT_TASK = "      ";
+    public static final String INDENT_TASK = "      ";
 
     /** Scan user input. */
     private Scanner input = new Scanner(System.in);
@@ -23,8 +23,8 @@ public class Ui {
      * Print the horizontal line.
      */
     public void showLine() {
-        System.out.println("   " +
-                "________________________________________________________________________");
+        System.out.println("   "
+                + "________________________________________________________________________");
     }
 
     /**

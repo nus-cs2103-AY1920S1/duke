@@ -57,7 +57,7 @@ public class Storage {
             file.createNewFile();
         } catch (IOException e) {
             ui.showLine();
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+            System.out.println(ui.INDENT_COMMENT + "OOPS !!! "
                     + "File is not able to be created");
             ui.showLine();
             System.out.println("");
@@ -78,7 +78,7 @@ public class Storage {
                     list.add(getEachTask(input.nextLine()));
                 } catch (DukeException e) {
                     ui.showLine();
-                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                    System.out.println(ui.INDENT_COMMENT + "OOPS !!! "
                             + "File is empty");
                     ui.showLine();
                     System.out.println("");
@@ -86,7 +86,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             ui.showLine();
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+            System.out.println(ui.INDENT_COMMENT + "OOPS !!! "
                     + "File is not available");
             ui.showLine();
             System.out.println("");
@@ -116,7 +116,7 @@ public class Storage {
             } catch (NumberFormatException ex) {
                 ui.showLine();
                 System.out.println(ui.INDENT_COMMENT
-                        + "\u2639 OOPS !!! " + "Error in Database Data");
+                        + "OOPS !!! " + "Error in Database Data");
             }
             break;
 
@@ -130,7 +130,7 @@ public class Storage {
             } catch (NumberFormatException ex) {
                 ui.showLine();
                 System.out.println(ui.INDENT_COMMENT
-                        + "\u2639 OOPS !!! " + "Error in Database Data");
+                        + "OOPS !!! " + "Error in Database Data");
             }
             break;
 
@@ -144,13 +144,13 @@ public class Storage {
             } catch (NumberFormatException ex) {
                 ui.showLine();
                 System.out.println(ui.INDENT_COMMENT
-                        + "\u2639 OOPS !!! " + "Error in Database Data");
+                        + "OOPS !!! " + "Error in Database Data");
             }
             break;
 
         default:
             throw new DukeException(ui.INDENT_COMMENT
-                    + "\u2639 OOPS !!! " + "Error in reading data");
+                    + "OOPS !!! " + "Error in reading data");
         }
 
         return task;
@@ -181,7 +181,7 @@ public class Storage {
                 save.append(type);
                 save.append(" | ");
 
-                if (temp.substring(1, 2).trim().equals("\u2713")) {
+                if (temp.substring(1, 2).trim().equals("✓")) {
                     save.append("1");
                 } else {
                     save.append("0");

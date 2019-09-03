@@ -9,7 +9,7 @@ public class DukeTest {
      * To test the Deadline Command.
      */
     @Test
-    public void testDeadline(){
+    public void testDeadline() {
         assertEquals("[T][✘] read books", new Todo("read books").toString());
     }
 
@@ -26,7 +26,7 @@ public class DukeTest {
      */
     @Test
     public void testStatus() {
-        boolean test= true;
+        boolean test = true;
         Deadline actual = new Deadline("return books", "12/12/2012 1800");
         actual.markAsDone();
         assertEquals(test, actual.isDone);

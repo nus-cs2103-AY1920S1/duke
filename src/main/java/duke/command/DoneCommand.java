@@ -47,10 +47,10 @@ public class DoneCommand extends Command {
             if (data.isEmpty()) {
                 if (tasks.getItemNo() == 0) {
                     throw new DukeException(ui.INDENT_COMMENT
-                            + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                            + "OOPS !!! " + "The task list are currently empty.");
                 } else {
                     throw new DukeException(ui.INDENT_COMMENT
-                            + "\u2639 OOPS !!! " + "Index of task are needed.");
+                            + "OOPS !!! " + "Index of task are needed.");
                 }
             }
 
@@ -59,9 +59,9 @@ public class DoneCommand extends Command {
             if (item > tasks.getItemNo()) {
                 if (tasks.getItemNo() == 0) {
                     throw new DukeException(ui.INDENT_COMMENT
-                            + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                            + "OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                    throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
                             + "Number enter can only be less than or equal number of task.");
                 }
             }
@@ -71,7 +71,7 @@ public class DoneCommand extends Command {
             t.markAsDone();
             System.out.println(ui.INDENT_TASK + t);
         } catch (NumberFormatException ex) {
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+            System.out.println(ui.INDENT_COMMENT + "OOPS !!! "
                     + "Only Integer is allowed after done.");
         }
     }

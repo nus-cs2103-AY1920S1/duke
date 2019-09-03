@@ -29,11 +29,11 @@ public class Deadline extends Task {
             String[] temp = by.split(" ");
             time = Integer.valueOf(temp[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! Wrong input format. "
-                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"");
+            throw new DukeException("OOPS!!! Wrong input format. \n"
+                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"\n");
         } catch (NumberFormatException e) {
-            throw new DukeException("\t☹ OOPS!!! Wrong input format. "
-                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"");
+            throw new DukeException("OOPS!!! Wrong input format. \n"
+                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"\n");
         }
     }
 

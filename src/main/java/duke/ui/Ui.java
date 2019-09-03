@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner sc;
+    private StringBuilder sb;
 
     /**
      * Constructor of Ui object. Creates scanner object for the instance.
@@ -27,140 +28,153 @@ public class Ui {
     }
 
     /**
-     * Prints error message.
+     * Returns error message.
      *
      * @param error Error message to be reflected to the user.
      */
-    public void showError(String error) {
-        System.err.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
-     * Prints the welcome message and the existing tasks if any.
+     * Returns the welcome message and the existing tasks if any.
      *
      * @param tasks The existing task list in the database.
      */
-    public void showWelcome(List<Task> tasks) {
-        showLine();
-        System.out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?\n");
+    public String showWelcome(List<Task> tasks) {
+        //showLine();
+        sb = new StringBuilder();
+        sb.append("Hello! I'm Duke\n" + "What can I do for you?\n");
 
         try {
             if (!tasks.isEmpty()) {
-                printTasks(tasks);
+                sb.append(printTasks(tasks));
             } else {
-                System.out.println("\tThere are no tasks in the list right now.");
+                sb.append("There are no tasks in the list right now.\n");
             }
         } catch (DukeException e) {
-            showError(e.getMessage());
-        } finally {
-            showLine();
+            sb.append(showError(e.getMessage()));
         }
+        return sb.toString();
     }
 
     /**
-     * Prints the exit message.
+     * Returns the exit message.
      */
-    public void showExit() {
-        System.out.println("\tBye. Hope to see you again soon!");
+    public String showExit() {
+        sb = new StringBuilder();
+        sb.append("Bye. Hope to see you again soon!");
+        return sb.toString();
     }
 
     /**
-     * Prints the available tasks.
+     * Returns the available tasks.
      *
      * @param tasks Current task list to be printed.
      * @throws DukeException If the current task list is empty.
      */
-    public void printTasks(List<Task> tasks) throws DukeException {
+    public String printTasks(List<Task> tasks) throws DukeException {
+        sb = new StringBuilder();
         if (tasks.isEmpty()) {
-            throw new DukeException("\tOOPS!!! The list is empty.");
+            throw new DukeException("OOPS!!! The list is empty.");
         }
-        System.out.println("\tHere are the tasks in your list:");
+        sb.append("Here are the tasks in your list:\n");
         int count = 0;
         for (Task task: tasks) {
             count++;
-            System.out.println("\t" + count + "." + task);
+            sb.append("  " + count + "." + task + "\n");
         }
+        return sb.toString();
     }
 
 
     /**
-     * Prints the tasks that match the user's keyword.
+     * Returns the tasks that match the user's keyword.
      *
      * @param tasks The list of tasks.
      * @param keyword User's keyword.
      * @throws DukeException If there are no tasks in the list or no search results.
      */
-    public void printMatchingTasks(List<Task> tasks, String keyword) throws DukeException {
+    public String printMatchingTasks(List<Task> tasks, String keyword) throws DukeException {
+        sb = new StringBuilder();
         try {
             keyword = keyword.substring(4).trim();
             if (keyword.isEmpty()) {
-                throw new DukeException("\tOOPS!!! Search keyword cannot be empty.");
+                throw new DukeException("OOPS!!! Search keyword cannot be empty.");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\tOOPS!!! Search keyword cannot be empty.");
+            throw new DukeException("OOPS!!! Search keyword cannot be empty.");
         }
         if (tasks.isEmpty()) {
-            throw new DukeException("\tOOPS!!! The list is empty.");
+            throw new DukeException("OOPS!!! The list is empty.");
         }
-        System.out.println("\tHere are the tasks in your list:");
+        sb.append("Here are the tasks in your list:\n");
         int count = 0;
         for (Task task: tasks) {
             if (task.getDescription().contains(keyword)) {
                 count++;
-                System.out.println("\t" + count + "." + task);
+                sb.append("  " + count + "." + task + "\n");
             }
         }
         if (count == 0) {
-            throw new DukeException("\tOOPS!!! There are no matching tasks.");
+            throw new DukeException("OOPS!!! There are no matching tasks.");
         }
+        return sb.toString();
     }
 
     /**
-     * Prints error if there is no database.
+     * Return error if there is no database.
      */
     public void showLoadingError() {
-        showError("\tNo existing task list available!");
+        sb = new StringBuilder();
+        sb.append("No existing task list available!\n");
     }
 
     /**
-     * Prints the set of sentences after successfully adding a task.
+     * Return the set of sentences after successfully adding a task.
      *
      * @param task The task that was added.
      * @param size The current number of tasks in the list.
      */
-    public void addedTask(Task task, int size) {
-        System.out.println("\tGot it. I've added this task: ");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
+    public String addedTask(Task task, int size) {
+        sb = new StringBuilder();
+        sb.append("Got it. I've added this task: \n");
+        sb.append("  " + task + "\n");
+        sb.append("Now you have " + size + " tasks in the list.\n");
+        return sb.toString();
     }
 
     /**
-     * Prints the set of sentences after successfully deleting a task.
+     * Return the set of sentences after successfully deleting a task.
      *
      * @param task The task that was deleted.
      * @param size The current number of tasks in the list.
      */
-    public void deletedTask(Task task, int size) {
-        System.out.println("\tNoted. I've removed this task: ");
-        System.out.println("\t  " + task);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
+    public String deletedTask(Task task, int size) {
+        sb = new StringBuilder();
+        sb.append("Noted. I've removed this task: \n");
+        sb.append("  " + task + "\n");
+        sb.append("Now you have " + size + " tasks in the list.\n");
+        return sb.toString();
     }
 
     /**
-     * Prints the set of sentences after successfully marking a task as done.
+     * Returns the set of sentences after successfully marking a task as done.
      *
      * @param tasks The task that was marked as done.
      * @param number The index of the task in the list.
      */
-    public void doneTask(List<Task> tasks, int number) {
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t  " + tasks.get(number - 1));
+    public String doneTask(List<Task> tasks, int number) {
+        sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done: \n");
+        sb.append("  " + tasks.get(number - 1) + "\n");
+        return sb.toString();
     }
 
     /**
      * Prints the horizontal line.
      */
     public void showLine() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 }

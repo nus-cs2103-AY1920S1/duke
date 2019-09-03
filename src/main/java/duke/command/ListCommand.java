@@ -16,8 +16,8 @@ public class ListCommand extends Command {
      * @param storage The Storage object we are currently using.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printTasks(taskList.getTasks());
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.printTasks(taskList.getTasks());
     }
 
     /**

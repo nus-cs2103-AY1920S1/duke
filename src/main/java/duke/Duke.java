@@ -18,10 +18,6 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
     /**
      * Constructor. Creates Ui, Storage and TaskList object.
      * If the file does not exist, an error will be shown.
@@ -40,25 +36,26 @@ public class Duke {
     }
 
     /**
-     * Shows the welcome message and gets Ui to show the current tasks in the list.
-     * Reads in the command line by line, parse it and executes it.
+     * Returns the welcome message and gets Ui to show the current tasks in the list.
      */
-    public void run() {
-        ui.showWelcome(taskList.getTasks());
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                storage.updateData(taskList.getTasks());
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getWelcomeMessage() {
+        return ui.showWelcome(taskList.getTasks());
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * @param input User's input.
+     */
+    protected String getResponse(String input) {
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(taskList, ui, storage);
+            storage.updateData(taskList.getTasks());
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
         }
     }
 }

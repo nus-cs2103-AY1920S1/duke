@@ -7,7 +7,7 @@ import java.util.Date;
 public class Event extends Task {
     protected String dateTime;
 
-    public Event(String name, String time, boolean isDone) {
+    public Event(String name, String dateTime, boolean isDone) {
         super(name, isDone);
         this.dateTime = formatDateTime(dateTime);
     }

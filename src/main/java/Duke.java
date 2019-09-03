@@ -8,7 +8,6 @@ public class Duke {
 
     /**
      * Setting up several classes ready to be called.
-     *
      */
     public Duke() {
         ui = new Ui();

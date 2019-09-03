@@ -2,10 +2,17 @@ package task;
 import java.util.Date;
 import formatter.TimeFormatter;
 
+/**
+ *
+ */
 
 public class deadlineTask extends Task {
     //Add variable for deadline tasks
     Date deadline;
+
+    /**
+     *
+     */
 
     public deadlineTask(String inputTask, boolean complete, Date endTime) {
         super(inputTask,complete);
@@ -13,9 +20,17 @@ public class deadlineTask extends Task {
         deadline = endTime;
     }
 
+    /**
+     *
+     */
+
     public Date getTime() {
         return deadline;
     }
+
+    /**
+     *
+     */
 
     @Override
     public String toString() {

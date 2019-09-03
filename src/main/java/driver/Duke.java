@@ -9,12 +9,20 @@ import command.Command;
 import command.textFormatter;
 import command.ByeCommand;
 
+/**
+ *
+ */
+
 public class Duke {
 
     Ui myUserInterface;
     TaskList myTaskList;
     Storage myTaskManager;
     Parser myParser;
+
+    /**
+     *
+     */
 
     public Duke(String x) {
         myUserInterface = new Ui();
@@ -30,6 +38,10 @@ public class Duke {
             System.out.println(err);
         }
     }
+
+    /**
+     *
+     */
 
     public void run()  {
         //Say Hello
@@ -64,6 +76,9 @@ public class Duke {
 
     }
 
+    /**
+     *
+     */
 
     public static void main(String[] args) {
         Duke testRun = new Duke("data/loggedData.txt");

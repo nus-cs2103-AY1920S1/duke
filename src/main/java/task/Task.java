@@ -1,11 +1,17 @@
 package task;
-import formatter.TimeFormatter;
+
+/**
+ *
+ */
 
 public class Task {
     String name;
     boolean completed;
     String type;
 
+    /**
+     *
+     */
 
     public Task(String taskInput, boolean complete) {
         name = taskInput;
@@ -13,11 +19,27 @@ public class Task {
         type = null;
     }
 
+    /**
+     *
+     */
+
     public String getName() {
         return name;
     }
+
+    /**
+     *
+     */
     public String getType() { return type;}
+
+    /**
+     *
+     */
     public boolean getDoneStatus() { return completed;}
+
+    /**
+     *
+     */
 
     //return the String of having completed the current task
     //Change the completed variable
@@ -25,6 +47,10 @@ public class Task {
         completed = true;
         return this;
     }
+
+    /**
+     *
+     */
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package driver;
 
-import java.util.Scanner;
 import exception.DukeException;
 import exception.incompleteInputException;
 import command.Command;
@@ -9,11 +8,15 @@ import command.DoneCommand;
 import command.DeleteCommand;
 import command.AddCommand;
 
+/**
+ *
+ */
+
 public class Parser {
 
-
-    public Parser() {
-    }
+    /**
+     *
+     */
 
     public Command parse(String userInput) throws DukeException, incompleteInputException {
                  if (userInput.equalsIgnoreCase("list")) {

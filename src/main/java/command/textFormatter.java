@@ -1,10 +1,10 @@
 package command;
 import java.util.ArrayList;
 import task.Task;
-import task.TaskList;
-import task.deadlineTask;
-import task.eventTask;
-import task.todoTask;
+
+/**
+ *
+ */
 
 public class textFormatter {
     String logo = " ____        _        \n"
@@ -12,6 +12,10 @@ public class textFormatter {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+    /**
+     *
+     */
 
 
     public static String listFormat(ArrayList<Task> input) {
@@ -27,6 +31,10 @@ public class textFormatter {
         return separator + listMessageTitle + tasks + separator;
     }
 
+    /**
+     *
+     */
+
     public static String deleteFormat(Task removed, int size) {
     String separator = "    ____________________________________________________________";
     String removingTask = "    Noted. I've removed this task:";
@@ -38,6 +46,10 @@ public class textFormatter {
        return answer;
 }
 
+    /**
+     *
+     */
+
     public static String doneFormat(Task done) {
         String firstLine = "Nice! I've marked this task as done:\n";
         String secondLine = "      " + done;
@@ -47,12 +59,20 @@ public class textFormatter {
         return separator + converted + separator;
     }
 
+    /**
+     *
+     */
+
 
     public static String errorFormat(Exception error) {
         String separator = "    ____________________________________________________________ + \n";
         String err = "    " + error.getMessage();
         return separator + err + "\n" + separator;
     }
+
+    /**
+     *
+     */
 
     public static String addFormat(Task inputTask, int size) {
         String separator = "    ____________________________________________________________\n";
@@ -62,12 +82,20 @@ public class textFormatter {
         return separator + addingTask + converted + taskTracking + separator;
     }
 
+    /**
+     *
+     */
+
     public static String byeFormat() {
         String end = "Bye. Hope to see you again soon!";
         String separator = "    ____________________________________________________________\n";
         String converted = "    " + end + "\n";
         return separator + converted + separator;
     }
+
+    /**
+     *
+     */
 
     public static String helloFormat() {
         String start = "Hello! I'm Duke\n    What can I do for you?";

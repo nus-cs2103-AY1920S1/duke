@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.util.Ui;
 
 /**
  * ListCommand class.
@@ -10,8 +9,8 @@ public class ListCommand extends Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui) {
-        taskList.printList();
+    public String[] execute(TaskList taskList) {
+        return taskList.printList();
     }
 
     /**

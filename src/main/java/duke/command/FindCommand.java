@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.util.Ui;
+
 import java.util.ArrayList;
 
 /**
@@ -23,14 +23,14 @@ public class FindCommand extends Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public String[] execute(TaskList taskList) {
         ArrayList<Task> filteredList = new ArrayList<Task>();
         for (Task task : taskList) {
             if (task.getDescription().contains(this.keyword)) {
                 filteredList.add(task);
             }
         }
-        TaskList.printExternalList(filteredList, ui, "Here are the matching tasks in your list:");
+        return TaskList.printExternalList(filteredList, "Here are the matching tasks in your list:");
     }
 
     /**

@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Ui;
 
 /**
  * DoneCommand class.
@@ -22,8 +21,8 @@ public class DoneCommand extends Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        taskList.doTask(this.taskNumber);
+    public String[] execute(TaskList taskList) throws DukeException {
+        return taskList.doTask(this.taskNumber);
     }
 
     /**

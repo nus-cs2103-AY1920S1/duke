@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.ToDo;
 import duke.task.TaskList;
-import duke.util.Ui;
+import duke.task.ToDo;
 
 /**
  * TodoCommand class.
@@ -23,8 +22,8 @@ public class TodoCommand extends Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        taskList.addNewTask(new ToDo(this.description));
+    public String[] execute(TaskList taskList) throws DukeException {
+        return taskList.addNewTask(new ToDo(this.description));
     }
 
     /**

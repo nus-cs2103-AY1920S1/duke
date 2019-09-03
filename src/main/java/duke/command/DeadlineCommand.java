@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.TaskList;
-import duke.util.Ui;
 
 /**
  * DeadlineCommand class.
@@ -26,8 +25,8 @@ public class DeadlineCommand extends Command {
     /**
      * {@inheritDoc}
      */
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        taskList.addNewTask(new Deadline(this.description, this.by));
+    public String[] execute(TaskList taskList) throws DukeException {
+        return taskList.addNewTask(new Deadline(this.description, this.by));
     }
 
     /**

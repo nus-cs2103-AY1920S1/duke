@@ -25,7 +25,7 @@ public class Duke {
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
-        this.taskList = new TaskList(storage, ui);
+        this.taskList = new TaskList(storage);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Duke {
             String input = sc.nextLine();
             try {
                 Command command = Parser.parseCommand(input);
-                command.execute(taskList, ui);
+                ui.print(command.execute(taskList));
                 isExit = command.isExit();
             } catch (DukeException e) {
                 ui.print(e.getMessage());
@@ -54,10 +54,17 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input User input to be processed.
+     * @return response to be printed.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parseCommand(input);
+            return String.join("\n", command.execute(taskList));
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

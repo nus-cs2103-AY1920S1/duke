@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.util.Ui;
 
 /**
  * Abstract Command class, for inheritance of various commands.
@@ -12,9 +11,9 @@ public abstract class Command {
      * Executes the command.
      *
      * @param taskList List of tasks for operation of command.
-     * @param ui Ui for command to write output.
+     * @return message to be printed.
      */
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
+    public abstract String[] execute(TaskList taskList) throws DukeException;
 
     /**
      * Checks if the command should cause the application to exit.

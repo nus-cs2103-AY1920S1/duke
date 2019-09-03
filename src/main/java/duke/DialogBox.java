@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox based on given text and avatar for Duke output.
+     *
+     * @param text Text to be printed.
+     * @param img Avatar to be displayed.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates a DialogBox based on given text and avatar for user input.
+     *
+     * @param text Text to be printed.
+     * @param img Avatar to be displayed.
+     * @return JavaFX DialogBox containing the given text and avatar.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Generates a DialogBox based on given text and avatar for Duke output.
+     *
+     * @param text Text to be printed.
+     * @param img Avatar to be displayed.
+     * @return JavaFX DialogBox containing the given text and avatar.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

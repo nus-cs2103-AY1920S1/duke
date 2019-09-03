@@ -50,14 +50,14 @@ public class Parser {
             String type = input.substring(0, input.indexOf(" "));
             String description = input.substring(input.indexOf(" ") + 1);
             switch (type) {
-                case "todo":
-                    return new Add("todo", description);
-                case "event":
-                    return new Add("event", description);
-                case "deadline":
-                    return new Add("deadline", description);
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            case "todo":
+                return new Add("todo", description);
+            case "event":
+                return new Add("event", description);
+            case "deadline":
+                return new Add("deadline", description);
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }

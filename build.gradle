@@ -1,12 +1,18 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
+    //id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-checkstyle {
-    toolVersion = '8.23'
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
+
+//checkstyle {
+//    toolVersion = '8.23'
+//}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
@@ -24,7 +30,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 run {

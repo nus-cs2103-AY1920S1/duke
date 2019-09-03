@@ -53,4 +53,8 @@ public class Duke {
         ui.close();
         storage.writeTasks(taskList);
     }
+
+    public String getResponse(String input) {
+        return "I received: " + input;
+    }
 }

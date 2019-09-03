@@ -60,6 +60,7 @@ public class Storage {
                     allTasks.append(taskList.get(i).store()).append(System.lineSeparator());
                 }
                 if (!file.exists()) {
+                    file.getParentFile().mkdirs();
                     file.createNewFile();
                 }
                 FileWriter fileWriter = new FileWriter(file);

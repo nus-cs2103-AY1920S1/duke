@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String store() {
-        return "D|" + getStatus() + "|" + description + "|" + details;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HHmm");
+        return "D|" + getStatus() + "|" + description + "|" + formatter.format(details);
     }
 }

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Duke;
+import duke.data.DukeData;
+import duke.data.TaskList;
+import duke.task.*;
+
 import java.io.IOException;
 import java.util.Scanner;
 

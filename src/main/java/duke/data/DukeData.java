@@ -1,3 +1,7 @@
+package duke.data;
+
+import duke.task.Task;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -87,13 +91,13 @@ public class DukeData {
     /**
      * Adds and updates the given task to the file saved in the hard disk.
      * @param index the index of the task to be added.
-     * @param t Task object which can represent ToDo, Deadline, or Event.
-     * @throws IOException if an I/O Exception occurs
+     * @param task Task object which can represent ToDo, Deadline, or Event.
+     * @throws IOException
      */
-    public void addTask(int index, Task t) throws IOException {
-        this._taskList.addTask(t);
+    public void addTask(int index, Task task) throws IOException {
+        this._taskList.addTask(task);
 
-        this._bw.write(String.format(" %d. %s", index, t.toData()));
+        this._bw.write(String.format(" %d. %s", index, task.toData()));
         this._bw.newLine();
         this._bw.flush();
     }

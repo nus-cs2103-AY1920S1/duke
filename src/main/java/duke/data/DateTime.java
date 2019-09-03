@@ -1,3 +1,5 @@
+package duke.data;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,11 +9,11 @@ import java.util.Date;
  * readable format, e.g. 2nd of January 2019 4PM.
  */
 public class DateTime {
-    private final SimpleDateFormat _formatGiven = new SimpleDateFormat(
+    private final SimpleDateFormat DATETIME_FORMATGIVEN = new SimpleDateFormat(
             "d/M/yyyy HHmm");
-    private final String _formatToShow = " 'of' MMMM yyyy, ha";
-    private final SimpleDateFormat _formatter = new SimpleDateFormat(
-            _formatToShow);
+    private final String FORMAT_TOSHOW = " 'of' MMMM yyyy, ha";
+    private final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat(
+            FORMAT_TOSHOW);
     private String _dateTime;
     private Date _date;
 
@@ -23,7 +25,7 @@ public class DateTime {
      */
     public DateTime(String dateTime) throws ParseException {
         this._dateTime = dateTime;
-        this._date = _formatGiven.parse(dateTime);
+        this._date = DATETIME_FORMATGIVEN.parse(dateTime);
     }
 
     /**
@@ -34,8 +36,8 @@ public class DateTime {
     public String getDateTimeString() {
         String[] splitDate = this._dateTime.split("/");
         String suffix = getSuffix(Integer.parseInt(splitDate[0]));
-        String dateTime = suffix + _formatter.format(this._date);
-        return dateTime;
+        String dateTimeString = suffix + DATETIME_FORMATTER.format(this._date);
+        return dateTimeString;
     }
 
     private String getSuffix(int d) {

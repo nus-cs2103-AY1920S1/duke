@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * The ToDo class handles all Todo Tasks,
  * which usually includes a description of the ToDo task.
@@ -17,9 +19,8 @@ public class ToDo extends Task {
      * @return String Returns a string representation of a ToDo object
      */
     public String toString() {
-        String t = String.format("[T][%s]%s",
+        return String.format("[T][%s]%s",
                 this.getStatusIcon(), this._description);
-        return t;
     }
 
     /**
@@ -28,8 +29,7 @@ public class ToDo extends Task {
      * @return String Returns a the data representation of the ToDo Task
      */
     public String toData() {
-        String t = String.format("T | %s | %s",
+        return String.format("T | %s | %s",
                 this.getStatusIcon(), this._description);
-        return t;
     }
 }

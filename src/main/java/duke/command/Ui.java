@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.data.DukeData;
+import duke.data.TaskList;
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -44,7 +50,7 @@ public class Ui {
 
     /**
      * Bids the user GoodBye after the user is done using Duke.
-     * @return a string of farewell words.
+     * @return a string of farewell words
      */
     public String showFarewell() {
         String bye = String.format("GoodBye! Hope to see you again soon!");
@@ -53,9 +59,9 @@ public class Ui {
 
     /**
      * Informs the user of the task added.
-     * @param t the Task to be added, which can be a ToDo, Deadline, or Event.
-     * @param list the TaskList which contains all Tasks in the list.
-     * @return a String of information notifying the user of the added task.
+     * @param t the Task to be added, which can be a ToDo, Deadline, or Event
+     * @param list the TaskList which contains all Tasks in the list
+     * @return a String of information notifying the user of the added task
      */
     public String showTaskAdded(Task t, TaskList list) {
         String added = String.format("Got it! I've added this task:" +
@@ -66,12 +72,12 @@ public class Ui {
 
     /**
      * Notifies the user of the task marked as done.
-     * @param n the task number, in the order of input.
-     * @param list the TaskList which contains all Tasks in the list.
-     * @return a string to inform user of the task marked as done.
+     * @param n the task number, in the order of input
+     * @param list the TaskList which contains all Tasks in the list
+     * @return a string to inform user of the task marked as done
      */
-    public String showDone(int n, TaskList list) {
-        Task t = list.getTask(n - 1);
+    public String showDone(int taskNo, TaskList list) {
+        Task t = list.getTask(taskNo - 1);
         String done = String.format("Nice! I've marked this task as done:%n %s",
                 t.toString());
         return addLines(done);
@@ -93,8 +99,8 @@ public class Ui {
 
     /**
      * Shows the user his data that is stored in the hard disk.
-     * @param data the DukeData object that stores the user's data from Duke program.
-     * @throws IOException if an I/O Exception occurs.
+     * @param data the DukeData object that stores the user's data from Duke program
+     * @throws IOException if an I/O Exception occurs
      */
     public void showData(DukeData data) throws IOException {
         System.out.println(LINE);
@@ -105,8 +111,8 @@ public class Ui {
 
     /**
      * Adds a line before and after every command.
-     * @param cmd the command output.
-     * @return a String representation of the output with the lines.
+     * @param cmd the command output
+     * @return a String representation of the output with the lines
      */
     public static String addLines(String cmd) {
         String out = String.format("%s%n %s%n%s%n",

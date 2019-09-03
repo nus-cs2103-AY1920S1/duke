@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.data.DateTime;
+
 import java.text.ParseException;
 
 /**
@@ -27,9 +31,8 @@ public class Deadline extends Task {
      * @return a string representation of a Deadline object.
      */
     public String toString() {
-        String d = String.format("[D][%s]%s(by: %s)",
+        return String.format("[D][%s]%s(by: %s)",
                     this.getStatusIcon(), this._description, this._date);
-        return d;
     }
 
     /**
@@ -38,9 +41,8 @@ public class Deadline extends Task {
      * @return the data representation of the Event Task
      */
     public String toData() {
-        String t = String.format("E | %s | %s | %s",
+        return String.format("E | %s | %s | %s",
                 this.getStatusIcon(), this._description, this._date);
-        return t;
     }
 
     /**

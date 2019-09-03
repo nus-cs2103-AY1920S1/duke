@@ -1,3 +1,5 @@
+package duke.command;
+
 /**
  * Handles any command that is not understandable by Duke.
  */

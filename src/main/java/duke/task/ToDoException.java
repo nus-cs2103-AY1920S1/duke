@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * The ToDoException class handles any incorrect todo input by the user,
  * and prompts them to enter in the correct format.

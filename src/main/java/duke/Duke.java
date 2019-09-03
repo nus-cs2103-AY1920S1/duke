@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.Parser;
+import duke.data.DukeData;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**

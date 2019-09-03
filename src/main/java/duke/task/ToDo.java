@@ -19,7 +19,6 @@ public class ToDo extends Task {
      * @return String Returns a string representation of a ToDo object.
      */
     public String toString() {
-
         return String.format("[T][%s]%s",
                 this.getStatusIcon(), this._description);
     }
@@ -30,8 +29,7 @@ public class ToDo extends Task {
      * @return String Returns a the data representation of the ToDo Task.
      */
     public String toData() {
-        String t = String.format("T | %s | %s",
+        return String.format("T | %s | %s",
                 this.getStatusIcon(), this._description);
-        return t;
     }
 }

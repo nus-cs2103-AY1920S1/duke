@@ -16,8 +16,9 @@ public class Parser {
      * @param s Storage object storing data input by the user.
      * @throws DukeException if user input is wrong.
      */
-    public static void parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
+    public static String parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         String deadlineDetails = input.substring(9);
+        StringBuilder sb = new StringBuilder();
         try {
             int index = deadlineDetails.indexOf("/");
             String name = deadlineDetails.substring(0,index);
@@ -27,11 +28,12 @@ public class Parser {
                 throw new DeadlineDetailsEmptyException("OOPS!!! tasks.Deadline details cannot be empty");
             }
             t.addTask(deadline);
-            ui.showAdded();
+            sb.append(ui.showAdded() +"\n");
             s.writeListToFile(t);
-            System.out.println(deadline);
+            sb.append(deadline.toString());
+            return sb.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.inputWrong();
+            return ui.inputWrong();
         }
     }
 
@@ -43,8 +45,9 @@ public class Parser {
      * @param s Storage object storing data input by the user.
      * @throws DukeException if user input is wrong.
      */
-    public static void parseEvent(String input, TaskList t,Ui ui,Storage s) throws DukeException {
+    public static String parseEvent(String input, TaskList t,Ui ui,Storage s) throws DukeException {
         String eventDetails = input.substring(6);
+        StringBuilder sb = new StringBuilder();
         try {
             int index = eventDetails.indexOf("/");
             String name = eventDetails.substring(0,index);
@@ -54,11 +57,12 @@ public class Parser {
                 throw new EventDetailsEmptyException("OOPS!!! tasks.Event details cannot be empty.");
             }
             t.addTask(event);
-            ui.showAdded();
+            sb.append(ui.showAdded() + "\n");
             s.writeListToFile(t);
-            System.out.println(event);
+            sb.append(event.toString());
+            return sb.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
-            ui.inputWrong();
+            return ui.inputWrong();
         }
     }
 
@@ -70,15 +74,17 @@ public class Parser {
      * @param s Storage object storing data input by the user.
      * @throws DukeException if user input is wrong.
      */
-    public static void parseToDo(String input, TaskList t,Ui ui,Storage s) throws DukeException {
+    public static String parseToDo(String input, TaskList t,Ui ui,Storage s) throws DukeException {
+        StringBuilder sb = new StringBuilder();
         if (input.length() == 4) {
             throw new TodoEmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
         }
         ToDo todo = new ToDo(input.substring(5));
         t.addTask(todo);
-        ui.showAdded();
+        sb.append(ui.showAdded() + "\n");
         s.writeListToFile(t);
-        System.out.println(todo);
+        sb.append(todo.toString());
+        return sb.toString();
     }
 
 
@@ -89,14 +95,15 @@ public class Parser {
      * @param s Storage object storing data input by the user.
      * @throws DukeException if user input is wrong.
      */
-    public static void parseDone(String input, TaskList t,Storage s) throws DukeException {
+    public static String parseDone(String input, TaskList t,Storage s) throws DukeException {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
         if (number > t.getCommandList().size() + 1) {
             throw new TaskNotFoundException("OOPS!!! tasks.Task number is incorrect");
         }
-        t.getCommandList().get(number - 1).complete();
+        String completed = t.getCommandList().get(number - 1).complete();
         s.writeListToFile(t);
+        return completed;
     }
 
     /**
@@ -107,22 +114,24 @@ public class Parser {
      * @param s Storage object storing data input by the user.
      * @throws DukeException if user input is wrong.
      */
-    public static void parseDelete(String input, TaskList t,Ui ui, Storage s) throws DukeException {
+    public static String parseDelete(String input, TaskList t,Ui ui, Storage s) throws DukeException {
+        StringBuilder sb = new StringBuilder();
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
         if (number > t.getCommandList().size() + 1) {
             throw new TaskNotFoundException("OOPS!!! tasks.Task number is incorrect");
         }
-        ui.showDeleted();
-        System.out.println(t.getCommandList().get(number - 1));
+        sb.append(ui.showDeleted());
+        sb.append(t.getCommandList().get(number - 1));
         t.deleteTask(number);
         s.writeListToFile(t);
+        return sb.toString();
     }
 
-    public static void parseFind(String input, TaskList t, Ui ui, Storage s) {
+    public static String parseFind(String input, TaskList t, Ui ui, Storage s) {
         String[] arr = input.split(" ");
         String keyword = arr[1];
-        ui.printMatching(t,keyword);
+        return ui.printMatching(t,keyword);
     }
 }
 

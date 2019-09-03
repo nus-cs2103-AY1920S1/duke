@@ -10,37 +10,39 @@ public class Ui {
     /**
      * Shows the welcome message.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public String showWelcome() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello! I'm Duke\n");
+        sb.append("What can I do for you?");
+        return sb.toString();
     }
 
     /**
      * Shows the message when a task has been added.
      */
-    public void showAdded() {
-        System.out.println("Got it. I've added this task:");
+    public String showAdded() {
+        return "Got it. I've added this task:";
     }
 
     /**
      * Shows the message when a wrong input has been detected.
      */
-    public void inputWrong() {
-        System.out.println("Input format is wrong.");
+    public String inputWrong() {
+        return "Input format is wrong.";
     }
 
     /**
      * Shows the message when a task has been deleted.
      */
-    public void showDeleted() {
-        System.out.println("Noted. I've removed this task:");
+    public String showDeleted() {
+        return "Noted. I've removed this task:";
     }
 
     /**
      * Shows the goodbye message.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again!");
+    public String showBye() {
+        return "Bye. Hope to see you again!";
     }
 
     /**
@@ -48,33 +50,37 @@ public class Ui {
      * @param t taskList.
      * @param s Storage where the data has been stored.
      */
-    public void printList(TaskList t, Storage s) {
-        System.out.println("Here are the tasks in your list:");
+    public String printList(TaskList t, Storage s) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         int size = t.getCommandList().size();
         for (int i = 1; i < size + 1; i++) {
-            System.out.print(i + ".");
-            System.out.println(t.getCommandList().get(i - 1));
+            sb.append(i + ".");
+            sb.append(t.getCommandList().get(i - 1) + "\n");
         }
+        return sb.toString();
     }
 
     /**
      * Prints out the error message.
      * @param e Error.
      */
-    public void showError(String e) {
-        System.out.println(e);
+    public String showError(String e) {
+        return e;
     }
 
-    public void printMatching(TaskList t, String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String printMatching(TaskList t, String keyword) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
         int size = t.getCommandList().size();
         int counter = 1;
         for (int i = 1; i < size + 1; i++) {
             if (t.getCommandList().get(i-1).getName().contains(keyword)) {
-                System.out.print(counter + ".");
-                System.out.println(t.getCommandList().get(i - 1));
+                sb.append(counter + ".");
+                sb.append(t.getCommandList().get(i - 1) +"\n");
                 counter++;
             }
         }
+        return sb.toString();
     }
 }

@@ -18,10 +18,12 @@ public class Task {
     /**
      * Marks task as complete
      */
-    public void complete() {
+    public String complete() {
         this.completed = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("+|" + this.name);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append("+|" + this.name);
+        return sb.toString();
     }
 
     /**

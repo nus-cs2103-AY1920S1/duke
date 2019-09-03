@@ -21,10 +21,10 @@ public class ListCommand extends Command {
      *
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
-     * @param ui  User interface of chat bot.
+     * @return Result of command.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.showTaskList(taskList);
+    public String execute(Storage storage, TaskList taskList) {
+        return Ui.showTaskList(taskList);
     }
 }

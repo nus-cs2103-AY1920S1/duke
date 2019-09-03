@@ -16,11 +16,15 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Overrides execute method in abstract superclass.
+     * Executes the command.
+     *
+     * @param storage  Data file of chat bot.
+     * @param taskList  Task list of chat bot.
+     * @return Result of command.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-
+    public String execute(Storage storage, TaskList taskList) {
+        return Ui.showByeMessage();
     }
 
     /**

@@ -27,13 +27,13 @@ public class DeleteCommand extends Command {
      *
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
-     * @param ui  User interface of chat bot.
+     * @return Result of command.
      * @throws DukeException  If data file pointed to by storage cannot be updated.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList) throws DukeException {
         Task task = taskList.remove(index);
         storage.update(taskList);
-        ui.showDeleteMessage(taskList.size(), task);
+        return Ui.showDeleteMessage(taskList.size(), task);
     }
 }

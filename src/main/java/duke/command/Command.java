@@ -19,11 +19,11 @@ public abstract class Command {
      * Abstract method to execute command, to be overridden by child classes.
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
-     * @param ui  User interface of chat bot.
+     * @return Result of command.
      * @throws DukeException  If data file pointed to by storage cannot be updated.
      */
 
-    public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
+    public abstract String execute(Storage storage, TaskList taskList) throws DukeException;
 
     /**
      * Flags command as not a command to end chat bot.

@@ -2,10 +2,6 @@ package duke;
 
 import duke.task.Task;
 
-import java.io.InputStream;
-import java.util.Scanner;
-import java.io.PrintStream;
-
 /**
  * Encapsulates a user interface.
  */
@@ -18,47 +14,21 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    protected final Scanner in;
-    protected final PrintStream out;
 
     /**
-     * Constructs a Ui object with system IO.
-     */
-    public Ui() {
-        this(System.in, System.out);
-    }
-
-    /**
-     * Constructs a Ui object with given input and output stream.
+     * Repackages messages into the chat bot format for output.
      *
-     * @param in  Input stream.
-     * @param out  Output stream.
+     * @param messages  Messages to be repackaged for output.
+     * @return Messages ready to be output.
      */
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
-    }
-
-    /**
-     * Outputs messages in the chat bot format.
-     *
-     * @param messages  Messages to be printed in the chat bot format.
-     */
-    public void output(String... messages) {
-        out.println(INDENTATION + HORIZONTAL_LINE);
+    public static String output(String... messages) {
+        String output = "";
+        output += (INDENTATION + HORIZONTAL_LINE);
         for (String message : messages) {
-            out.print(INDENTATION + message.replace("\n", "\n" + INDENTATION));
+            output += (INDENTATION + message.replace("\n", "\n" + INDENTATION));
         }
-        out.println(HORIZONTAL_LINE + "\n");
-    }
-
-    /**
-     * Reads next line of user input.
-     *
-     * @return Line of user input.
-     */
-    public String input() {
-        return in.nextLine();
+        output += (HORIZONTAL_LINE + "\n");
+        return output;
     }
 
     /**
@@ -66,8 +36,8 @@ public class Ui {
      *
      * @param taskList   Task list to be output.
      */
-    public void showTaskList(TaskList taskList) {
-        output("Here are the tasks in your list:\n" + taskList.list());
+    public static String showTaskList(TaskList taskList) {
+        return output("Here are the tasks in your list:\n" + taskList.list());
     }
 
     /**
@@ -75,8 +45,8 @@ public class Ui {
      *
      * @param task   Task marked as done.
      */
-    public void showDoneMessage(Task task) {
-        output("Nice! I've marked this task as done:\n" + task + "\n");
+    public static String showDoneMessage(Task task) {
+        return output("Nice! I've marked this task as done:\n" + task + "\n");
     }
 
     /**
@@ -85,12 +55,12 @@ public class Ui {
      * @param size  Size of task list.
      * @param task   Task deleted.
      */
-    public void showDeleteMessage(int size, Task task) {
+    public static String showDeleteMessage(int size, Task task) {
         if (size == 1) {
-            output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
+            return output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
                     + size + " task in the list.\n");
         } else {
-            output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
+            return output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
                     + size + " tasks in the list.\n");
         }
     }
@@ -101,12 +71,12 @@ public class Ui {
      * @param size  Size of task list.
      * @param task   Task added.
      */
-    public void showAddMessage(int size, Task task) {
+    public static String showAddMessage(int size, Task task) {
         if (size == 1) {
-            output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
+            return output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
                     + size + " task in the list.\n");
         } else {
-            output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
+            return output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
                     + size + " tasks in the list.\n");
         }
     }
@@ -114,15 +84,15 @@ public class Ui {
     /**
      * Outputs welcome message.
      */
-    public void showWelcomeMessage() {
-        output("Hello from\n" + LOGO + "What can I do for you?\n");
+    public static String showWelcomeMessage() {
+        return output("Hello from\n" + LOGO + "What can I do for you?\n");
     }
 
     /**
      * Outputs goodbye message.
      */
-    public void showByeMessage() {
-        output("Bye. Hope to see you again soon!\n");
+    public static String showByeMessage() {
+        return output("Bye. Hope to see you again soon!\n");
     }
 
     /**
@@ -131,15 +101,15 @@ public class Ui {
      * @param taskList  Task list to be searched.
      * @param keyword   Keyword to be searched for.
      */
-    public void showFindMessage(TaskList taskList, String keyword) {
-        output("Here are the matching tasks in your list:\n" + taskList.find(keyword));
+    public static String showFindMessage(TaskList taskList, String keyword) {
+        return output("Here are the matching tasks in your list:\n" + taskList.find(keyword));
     }
 
     /**
      * Outputs message indicating a loading error.
      */
-    public void showLoadingError() {
-        output("File not found.\n");
+    public static String showLoadingError() {
+        return output("File not found.\n");
     }
 
     /**
@@ -147,8 +117,8 @@ public class Ui {
      *
      * @param error  Description of error to be output.
      */
-    public void showError(String error) {
-        output(error);
+    public static String showError(String error) {
+        return output(error);
     }
 
 }

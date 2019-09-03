@@ -25,10 +25,10 @@ public class FindCommand extends Command {
      *
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
-     * @param ui  User interface of chat bot.
+     * @return Result of command.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.showFindMessage(taskList, keyword);
+    public String execute(Storage storage, TaskList taskList) {
+        return Ui.showFindMessage(taskList, keyword);
     }
 }

@@ -23,7 +23,7 @@ public class Parser {
      * @return Command described by user input.
      * @throws DukeException  If description of todo is empty or input format is invalid.
      */
-    public Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ByeCommand();
         } else if (input.equals("list")) {
@@ -35,7 +35,6 @@ public class Parser {
             int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1; // possible error here
             return new DeleteCommand(deleteIndex);
         } else if (input.startsWith("find")) {
-            System.out.println("here.");
             input = input.replaceFirst("^find", "");
             String keyword = input.substring(input.indexOf(" ") + 1);
             return new FindCommand(keyword);

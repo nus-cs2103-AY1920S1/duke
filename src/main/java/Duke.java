@@ -12,8 +12,8 @@ import duke.ui.Ui;
  * task.
  *
  * @author Clarence Koh
- *  * @version 1.0
- *  * @since 29th August 2019
+ * @version 1.0
+ * @since 29th August 2019
  */
 public class Duke {
 

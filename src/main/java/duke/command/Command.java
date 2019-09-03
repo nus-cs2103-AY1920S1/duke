@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.exception.*;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -10,8 +10,8 @@ import duke.ui.Ui;
  * which allows for the user to instruct what is to be done to the current task list.
  *
  * @author Clarence Koh
- *  * @version 1.0
- *  * @since 29th August 2019
+ * @version 1.0
+ * @since 29th August 2019
  */
 public abstract class Command {
 

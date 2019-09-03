@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -39,10 +38,9 @@ public class FindTaskCommand extends Command {
      * @param tasks The task lists which contains all the user added tasks.
      * @param ui The user interface which deals with user input and interaction.
      * @param storage The storage to load and save task data into the output file.
-     * @throws DukeException If there is a problem with data processing, loading or saving.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> matchingTasks = tasks.findTaskWithWord(this.keywords);
         ui.printTaskList(matchingTasks);
     }

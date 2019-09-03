@@ -42,11 +42,6 @@ public class TaskList {
         }
     }
 
-    /**
-     * This method returns the number of tasks currently in the task list.
-     *
-     * @return The size of the task list.
-     */
     public int size() {
         return this.tasks.size();
     }

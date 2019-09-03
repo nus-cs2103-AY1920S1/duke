@@ -1,6 +1,12 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.FindTaskCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -170,15 +176,15 @@ public class Parser {
                         break;
                     }
                 }
-                    case "find": {
-                        try {
-                            findCheck(task);
-                            return new FindTaskCommand(command.substring(5).trim());
-                        } catch (DukeException e) {
-                            System.err.println("Something went wrong: " + e.getMessage());
-                            break;
-                        }
+                case "find": {
+                    try {
+                        findCheck(task);
+                        return new FindTaskCommand(command.substring(5).trim());
+                    } catch (DukeException e) {
+                        System.err.println("Something went wrong: " + e.getMessage());
+                        break;
                     }
+                }
                 default: {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

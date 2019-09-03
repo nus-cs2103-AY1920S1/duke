@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
-import duke.exception.*;
+import duke.exception.DukeException;
 
 /**
  * Represents the <code>Command</code> to delete task from the task list.

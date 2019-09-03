@@ -48,6 +48,7 @@ public class Task {
     }
 
     public String toString() {
+
         return this.description;
     }
 
@@ -56,7 +57,11 @@ public class Task {
      *
      * @return <code>boolean</code> telling the user whether the task was done.
      */
-    public boolean isDone() { return this.isDone; }
+    public boolean isDone() {
+        return this.isDone;
+    }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return this.description;
+    }
 }

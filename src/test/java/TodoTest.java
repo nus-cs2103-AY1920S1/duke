@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TodoTest {
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         Task task = new Todo("read book");
         assertTrue(task.toString().equals("[T][X] read book"));
     }

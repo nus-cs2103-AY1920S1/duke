@@ -21,6 +21,7 @@ public class Command {
     private CommandType type;
     private int targetIndex;
     private Task addedTask;
+    private String keyword;
 
     private Command(CommandType type) {
         // for primitive command
@@ -31,6 +32,12 @@ public class Command {
         // for DONE
         this.type = type;
         this.targetIndex = taskNumber - 1;
+    }
+
+    private Command(CommandType type, String keyword) {
+        // for DONE
+        this.type = type;
+        this.keyword = keyword;
     }
 
     private Command(CommandType type, Task addedTask) {
@@ -67,6 +74,11 @@ public class Command {
                 throw new CommandException("☹ OOPS!!! You must specify a task number.");
             }
             return new Command(CommandType.DELETE, Integer.parseInt(command[1]));
+        case "find":
+            if (command.length <= 1) {
+                throw new CommandException("☹ OOPS!!! You must specify a keyword.");
+            }
+            return new Command(CommandType.FIND, command[1]);
         case "todo":
             if (command.length <= 1) {
                 throw new CommandException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -120,10 +132,14 @@ public class Command {
         return addedTask;
     }
 
+    public String getKeyword() {
+        return keyword;
+    }
+
     /**
      * The only types of Command allowed.
      */
     public enum CommandType {
-        BYE, LIST, DONE, ADD, ECHO, DELETE
+        BYE, LIST, DONE, ADD, ECHO, DELETE, FIND
     }
 }

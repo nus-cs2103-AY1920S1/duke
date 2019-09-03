@@ -6,6 +6,9 @@ import com.tysng.duke.storage.Storage;
 import com.tysng.duke.ui.Command;
 import com.tysng.duke.ui.Response;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * This class handles the logic of the Application.
  *
@@ -50,6 +53,9 @@ public class Duke {
         case BYE:
             response = this.handleBye();
             break;
+        case FIND:
+            response = this.handleFind(command.getKeyword());
+            break;
         case ECHO:
             response = this.handleEcho(command.toString());
             break;
@@ -60,6 +66,12 @@ public class Duke {
         return response;
     }
 
+    private Response handleFind(String keyword) {
+        List<Task> matchedTasks = taskList.getTaskList().stream()
+                .filter(task -> task.getTaskName().contains(keyword))
+                .collect(Collectors.toList());
+        return Response.newMatch(matchedTasks);
+    }
 
     private Response handleDone(int targetIndex) {
         taskList.getTask(targetIndex).setCompleted(true);

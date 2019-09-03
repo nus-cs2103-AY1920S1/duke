@@ -99,6 +99,15 @@ public class Response {
         ));
     }
 
+    private static Response listing(List<Task> items, String prompt) {
+        List<String> content = IntStream.range(0, items.size())
+                .mapToObj(i -> (i + 1) + "." + items.get(i).toString())
+                .collect(Collectors.toList());
+        content.add(0, prompt);
+
+        return new Response(content);
+    }
+
     /**
      * Generates a List type response.
      *
@@ -106,12 +115,17 @@ public class Response {
      * @return a response
      */
     public static Response newListing(List<Task> items) {
-        List<String> content = IntStream.range(0, items.size())
-                .mapToObj(i -> (i + 1) + "." + items.get(i).toString())
-                .collect(Collectors.toList());
-        content.add(0, "Here are the tasks in your list:");
+        return Response.listing(items, "Here are the tasks in your list:");
+    }
 
-        return new Response(content);
+    /**
+     * Generates a Find type response.
+     *
+     * @param items the list of items to be listed
+     * @return a response
+     */
+    public static Response newMatch(List<Task> items) {
+        return Response.listing(items, "Here are the matching tasks in your list:");
     }
 
     /**

@@ -1,30 +1,32 @@
-package duke;
+package duke.cli;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.exception.DukeStorageException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.Cli;
 
-public class Duke {
+public class DukeCli {
     private static Storage storage;
     private static TaskList tasks;
-    private static Ui ui;
+    private static Cli ui;
 
-    private Duke() {
+    /**
+     * The Duke CLI application.
+     */
+    public DukeCli() {
         storage = new Storage("duke.txt");
         tasks = new TaskList();
-        ui = new Ui(System.in, System.out);
+        ui = new Cli(System.in, System.out);
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
-    private void run() {
+    /**
+     * Run the Duke CLI application.
+     */
+    public void run() {
         ui.showWelcome();
 
         try {
@@ -42,8 +44,14 @@ public class Duke {
                 }
                 ui.showSeparator();
                 Command command = Parser.parse(input);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
+                CommandResult result = command.execute(tasks, storage);
+                isExit = result.isExit();
+                for (String message : result.getMessages()) {
+                    ui.showMessage(message);
+                }
+                for (String warning : result.getWarnings()) {
+                    ui.showWarning(warning);
+                }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {

@@ -14,7 +14,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 dependencies {
@@ -29,8 +29,11 @@ test {
     useJUnitPlatform()
 }
 
-run {
+task runCli (type: JavaExec, dependsOn: classes) {
+    main = "duke.Launcher"
     standardInput = System.in
+    classpath = sourceSets.main.runtimeClasspath
+    args = [ "cli" ]
 }
 
 shadowJar {

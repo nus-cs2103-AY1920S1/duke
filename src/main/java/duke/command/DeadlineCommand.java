@@ -5,7 +5,6 @@ import duke.exception.DukeInvalidCommandException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 
@@ -25,8 +24,8 @@ public class DeadlineCommand extends AddCommandWithTime {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws DukeExecutionException {
         check(tasks);
-        addTask(new Deadline(this.description, this.time), tasks, ui, storage);
+        return addTask(new Deadline(this.description, this.time), tasks, storage);
     }
 }

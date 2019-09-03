@@ -5,7 +5,6 @@ import duke.exception.DukeStorageException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import static duke.ui.Messages.TASKS_COUNT;
 import static duke.ui.Messages.TASK_ADD_FAILURE;
@@ -26,18 +25,22 @@ public abstract class AddCommand extends Command {
         }
     }
 
-    protected void addTask(final Task task, TaskList tasks, Ui ui, Storage storage) {
+    protected CommandResult addTask(final Task task, TaskList tasks, Storage storage) {
+        CommandResult result = new CommandResult();
         if (tasks.addTask(task)) {
-            ui.showMessage(TASK_ADD_SUCCESS);
-            ui.showIndented(task.toString());
-            ui.showMessage(String.format(TASKS_COUNT, tasks.size()));
+            result.addMessages(
+                TASK_ADD_SUCCESS,
+                task.toString(),
+                String.format(TASKS_COUNT, tasks.size())
+            );
             try {
                 storage.writeTasks(tasks);
             } catch (DukeStorageException e) {
-                ui.showWarning(e.getMessage());
+                result.addWarnings(e.getMessage());
             }
         } else {
             throw new RuntimeException(TASK_ADD_FAILURE);
         }
+        return result;
     }
 }

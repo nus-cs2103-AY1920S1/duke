@@ -5,7 +5,6 @@ import duke.exception.DukeStorageException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import static duke.ui.Messages.TASK_ALREADY_DONE;
 import static duke.ui.Messages.TASK_MARKED_AS_DONE;
@@ -16,20 +15,21 @@ public class DoneCommand extends CommandWithNumber {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws DukeExecutionException {
         check(tasks);
+        CommandResult result = new CommandResult();
         Task task = tasks.getTask(this.taskNumber);
         if (task.isDone()) {
-            ui.showMessage(TASK_ALREADY_DONE);
+            result.addWarnings(TASK_ALREADY_DONE);
         } else {
             task.markAsDone();
-            ui.showMessage(TASK_MARKED_AS_DONE);
-            ui.showIndented(task.toString());
+            result.addMessages(TASK_MARKED_AS_DONE, task.toString());
             try {
                 storage.writeTasks(tasks);
             } catch (DukeStorageException e) {
-                ui.showWarning(e.getMessage());
+                result.addWarnings(e.getMessage());
             }
         }
+        return result;
     }
 }

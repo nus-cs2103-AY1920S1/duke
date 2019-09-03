@@ -12,7 +12,7 @@ public class ListTaskCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage){
-        ui.printString(tasks.toString());
+    public String execute(TaskList tasks, Ui ui, Storage storage){
+        return tasks.toString();
     }
 }

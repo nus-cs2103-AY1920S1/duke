@@ -12,7 +12,7 @@ public abstract class Command {
      * @param storage
      * @throws DukeException
      */
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * This task to check if the command is an exit command

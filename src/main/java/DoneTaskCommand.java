@@ -18,10 +18,11 @@ public class DoneTaskCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task currTask = tasks.doneTask(index);
-        ui.printString("Nice! I've marked this task as done: ");
-        ui.printString( "   " + currTask.getTaskDetails());
+        String output = "Nice! I've marked this task as done: \n";
+        output = output + "   " + currTask.getTaskDetails();
+        return output;
     }
 
 }

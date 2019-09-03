@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 public class Task {
     String description;
     boolean isDone;
@@ -46,6 +48,55 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Format the date and time.
+     * @param year Year.
+     * @param month Month.
+     * @param date Date.
+     * @param time Time.
+     * @return The correct date and time format.
+     */
+    public String formatDateAndTime(int year, int month, int date, int time) throws DukeException {
+        if (date > 31 || month > 12 || time > 2400) {
+            throw new DukeException("OOPS!!! Incorrect date or time.\n");
+        }
+        StringBuilder sb = new StringBuilder();
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        sb.append(date);
+
+        switch (date) {
+        case 1:
+            sb.append("st");
+            break;
+        case 2:
+            sb.append("nd");
+            break;
+        case 3:
+            sb.append("rd");
+            break;
+        default:
+            sb.append("th");
+            break;
+        }
+        sb.append(" of " + months[month - 1] + " " + year + ", ");
+
+        if (time >= 1200) {
+            if ((time / 100) == 12) {
+                sb.append("12." + (time % 100) + "pm");
+            } else {
+                sb.append((time / 100 - 12) + "." + (time % 100) + "pm");
+            }
+        } else {
+            if ((time / 100) == 0) {
+                sb.append("12." + (time % 100) + "am");
+            } else {
+                sb.append((time / 100) + "." + (time % 100) + "am");
+            }
+        }
+        return sb.toString();
     }
 
     /**

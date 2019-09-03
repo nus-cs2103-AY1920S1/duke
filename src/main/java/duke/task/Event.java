@@ -27,6 +27,7 @@ public class Event extends Task {
             year = Integer.valueOf(at.substring(6, 10));
             String[] temp = at.split(" ");
             time = Integer.valueOf(temp[1]);
+            this.at = formatDateAndTime(year, month, date, time);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! Wrong input format.\n"
                     + "\"Event <description> /at <DD/MM/YYYY> <XX:XX>\"\n");

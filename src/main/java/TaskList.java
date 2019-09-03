@@ -39,9 +39,14 @@ public class TaskList {
      * @param ui User interface that assists with printing.
      */
     public void printTasks(Ui ui) {
-        ui.show("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            ui.show((i + 1) + "." + tasks.get(i));
+        if (tasks.isEmpty()) {
+            ui.show("You do not have any tasks in your list.");
+            ui.show("Use 'help' to see how to add tasks to your list!");
+        } else {
+            ui.show("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                ui.show((i + 1) + "." + tasks.get(i));
+            }
         }
     }
 

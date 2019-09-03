@@ -51,25 +51,25 @@ public class Ui {
     }
 
     public void showLine() {
-
         showToUser(DIVIDER);
     }
 
     public void showGoodbye() {
-
         showToUser(DIVIDER, "Bye! Hope to see you again soon!", DIVIDER);
     }
 
     public void showAddedMessage(TaskList taskList, Task task) {
         showToUser("Got it. I've added this task:");
         showToUser(task.toActionString());
-        showToUser("Now you have " + taskList.list.size() + " tasks in the list");
+        showToUser("Now you have " + taskList.list.size()
+                + " tasks in the list");
     }
 
     public void showDeleteMessage(TaskList taskList, Task task) {
         showToUser("Noted. I've removed this task: ");
         showToUser(task.toActionString());
-        showToUser("Now you have " + (taskList.list.size() - 1) + " tasks in the list.");
+        showToUser("Now you have " + (taskList.list.size() - 1)
+                + " tasks in the list.");
     }
 
     public void showDoneMessage(Task task) {
@@ -87,7 +87,6 @@ public class Ui {
         }
     }
 
-
     public void showLoadingError() {
         showToUser("There is something wrong.");
     }
@@ -95,7 +94,8 @@ public class Ui {
     public void showListMessage(TaskList taskList) {
         showToUser("Here are the tasks in your list:");
         for(int i = 1;i <= taskList.list.size();i++) {
-            showToUser(i + "." + taskList.list.get(i - 1).toActionString());
+            showToUser(i + "."
+                    + taskList.list.get(i - 1).toActionString());
         }
     }
 }

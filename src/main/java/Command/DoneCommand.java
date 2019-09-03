@@ -7,10 +7,10 @@ import Ui.Ui;
 import java.io.IOException;
 
 public class DoneCommand extends Command {
+
     private int taskNo;
 
     public DoneCommand(int taskNo) {
-
         this.taskNo = taskNo;
     }
 

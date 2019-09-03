@@ -10,8 +10,7 @@ public abstract class Command {
 
     protected boolean isExit = false;
 
-    public Command() {
-    }
+    public Command() {}
 
     public abstract void execute(TaskList t, Ui ui, Storage storage) throws IOException;
 

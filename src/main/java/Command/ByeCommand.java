@@ -6,9 +6,7 @@ import Ui.Ui;
 
 public class ByeCommand extends Command {
 
-    public ByeCommand() {
-
-    }
+    public ByeCommand() {}
 
     @Override
     public void execute(TaskList t, Ui ui, Storage storage) {

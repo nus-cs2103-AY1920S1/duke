@@ -20,12 +20,16 @@ public class DeleteCommand extends Command {
         return new DeleteCommand(fullCommand);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int itemId = Parser.parseDelete(this.fullCommand);
-        Task item = tasks.remove(itemId);
-        ui.printResponse("Noted. I've removed this task:  \n  "
+        try {
+            Task item = tasks.remove(itemId);
+            ui.printResponse("Noted. I've removed this task:  \n  "
                 + item.toString() + "\n"
                 + "Now you have " + tasks.size() +" tasks in the list.");
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
+        }   
     }
 
     public boolean isExit() {

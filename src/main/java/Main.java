@@ -32,7 +32,6 @@ public class Main {
     public void run() {
         this.ui.showWelcome();
 
-        Parser parser = new Parser();
         boolean isExit = false;
         while(!isExit) {
             try {

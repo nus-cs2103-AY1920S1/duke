@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.Date;
-import java.util.Scanner;
 
 public class Event extends Task {
     public Event(String description, Date date) {

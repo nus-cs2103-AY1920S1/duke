@@ -2,7 +2,6 @@ package duke.task;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Task implements Serializable {
     protected String type;

@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.Date;
-import java.util.Scanner;
 
 public class Deadline extends Task {
     public Deadline(String description, Date date) {

@@ -20,9 +20,13 @@ public class DoneCommand extends Command {
         return new DoneCommand(fullCommand);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int itemId = Parser.parseDone(this.fullCommand);
-        tasks.markAsDone(itemId);
+        try {
+            tasks.markAsDone(itemId);
+        } catch(IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
+        }
         ui.printResponse("Nice! I've marked this task as done: \n  "
                 + tasks.get(itemId).toString());
     }

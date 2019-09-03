@@ -17,7 +17,15 @@ public class Duke {
     private Window window;
 
     /**
-     *  Constructs a <code>Duke</code> application instance, an interactive task manager.
+     *  Constructs a <code>Duke</code> application instance, an interactive task manager, with the default filepath.
+     *  @throws IOException if an error occured during a file I/O operation.
+     */
+    public Duke() throws IOException {
+        this(DEFAULT_FILEPATH);
+    }
+
+    /**
+     *  Constructs a <code>Duke</code> application instance, an interactive task manager, with a given file path.
      *  @param filePath <code>String</code> containing the relative file path of the file to persist application
      *                  data to.
      *  @throws IOException if an error occured during a file I/O operation.
@@ -64,7 +72,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         try {
-            new Duke(DEFAULT_FILEPATH).run();
+            new Duke().run();
         } catch (IOException e) {
             System.err.println("\nERROR: Unable to resolve default file directory. Exiting...");
         }

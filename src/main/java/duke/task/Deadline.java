@@ -35,6 +35,7 @@ public class Deadline extends Task {
         try {
             dateTime = LocalDateTime.parse(by, f);
         } catch (DateTimeParseException e) {
+            dateTime = null;
         }
     }
 

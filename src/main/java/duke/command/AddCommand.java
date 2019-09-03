@@ -14,16 +14,16 @@ import duke.core.Ui;
  */
 public class AddCommand extends Command {
     /** The task to be added, as specified by this command. */
-    private Task t;
+    private Task task;
 
     /**
      * Constructs a <code>AddCommand</code> object.
      *
-     * @param t Specifies the task to be added.
+     * @param task Specifies the task to be added.
      */
-    public AddCommand(Task t) {
+    public AddCommand(Task task) {
         super();
-        this.t = t;
+        this.task = task;
     }
 
     /**
@@ -49,8 +49,8 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(t);
-        ui.addedTask(t, tasks.getSize());
+        tasks.addTask(task);
+        ui.addedTask(task, tasks.getSize());
         storage.save(tasks);
     }
 }

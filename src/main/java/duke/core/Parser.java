@@ -88,8 +88,8 @@ public class Parser {
         if ((fw.equals("todo") || fw.equals("deadline") || fw.equals("event")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
         }
-        if ((fw.equals("deadline") && findIdx(words, "/by") == -1) || 
-                (fw.equals("event") && findIdx(words, "/at") == -1)) {
+        if ((fw.equals("deadline") && findIdx(words, "/by") == -1)
+                || (fw.equals("event") && findIdx(words, "/at") == -1)) {
             throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
         }
         if ((fw.equals("done") || fw.equals("delete")) && words.length < 2) {

@@ -3,22 +3,36 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.*;
 
+import Model.Tasklist;
+import Model.deadline;
+import Model.event;
+import Model.todo;
+import Storage.Storage;
 import UI.UI;
 
 public class Duke {
-    public static void main(String[] args) {
+    private Storage storage;
+    private Tasklist tasks;
+    private UI ui;
 
-        final UI ui = new UI();
+    public static void main(String[] args){
+        new Duke("data/tasks.txt").run();
+    }
 
+    public Duke(String filepath){
+        ui = new UI();
+        tasks = new Tasklist();
+    }
+
+    public void run() {
         ui.printLogo();
         ui.printData("Hello! I'm Duke\n" +
                             "What can I do for you?\n");
 
-        ArrayList<String> data = new ArrayList<String>();
-        ArrayList<String> done = new ArrayList<String>();
-        ArrayList<String> type = new ArrayList<String>();
-        ArrayList<String> details = new ArrayList<String>();
 
+
+
+        /*
         try{
             BufferedReader br = new BufferedReader(new FileReader("savefile.txt"));
 
@@ -45,6 +59,8 @@ public class Duke {
         }
 
 
+         */
+
         do{
             String input = ui.nextLine();
 
@@ -56,21 +72,22 @@ public class Duke {
 
                 String content = "";
 
-                for(i = 0; i < data.size(); i++){
-                    content.concat((i + 1) + ". ");
-                    content.concat("[" + type.get(i) + "]");
-                    content.concat("[" + done.get(i) + "]");
-                    content.concat(" " + data.get(i));
-                    if(type.get(i).equals("D")){
-                        content.concat(" (by: " + details.get(i) + ")");
-                    } else if(type.get(i).equals("E")){
-                        content.concat(" (at: " + details.get(i) + ")");
+                for(i = 0; i < tasks.size(); i++){
+                    content = content.concat((i + 1) + ". ");
+                    content = content.concat("[" + tasks.get(i).getSymbol() + "]");
+                    content = content.concat("[" + tasks.get(i).getIsDoneSymbol() + "]");
+                    content = content.concat(" " + tasks.get(i).getDescription());
+                    if(tasks.get(i).getSymbol() == 'D'){
+                        content = content.concat(" (by: " + tasks.get(i).getDetails() + ")");
+                    } else if(tasks.get(i).getSymbol() == 'E'){
+                        content = content.concat(" (at: " + tasks.get(i).getDetails() + ")");
                     }
-                    content.concat("\n");
+                    content = content.concat("\n");
                 }
 
                 ui.printData(content);
 
+                /*
                 try{
                     PrintWriter writer = new PrintWriter("savefile.txt", "UTF-8");
                     for(i = 0; i < data.size(); i++){
@@ -110,14 +127,16 @@ public class Duke {
                     System.out.println("Saving failed!");
                 }
 
+                 */
+
             } else if(input.startsWith("done")) {
                 String[] sp = input.split(" ", 2);
                 int index = Integer.parseInt(sp[1]);
 
-                done.set(index - 1, "✓");
+                tasks.get(index - 1).markAsDone();
 
                 String content = "Nice! I've marked this task as done:\n" +
-                                "[" + done.get(index - 1) + "] " + data.get(index - 1) +"\n";
+                                "[" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription() +"\n";
 
                 ui.printData(content);
 
@@ -126,21 +145,18 @@ public class Duke {
                 int index = Integer.parseInt(sp[1]);
 
                 String content = "";
-                content.concat("Noted. I've removed this task:\n");
-                content.concat("[" + type.get(index - 1) + "][" + done.get(index - 1) + "] " + data.get(index - 1));
-                if(type.get(index - 1).equals("D")){
-                    content.concat(" (by: " + details.get(index - 1) + ")");
-                } else if (type.get(index - 1).equals("E")){
-                    content.concat(" (at: " + details.get(index - 1) + ")");
+                content = content.concat("Noted. I've removed this task:\n");
+                content = content.concat("[" + tasks.get(index - 1).getSymbol() + "][" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription());
+                if(tasks.get(index - 1).getSymbol() == 'D'){
+                    content = content.concat(" (by: " + tasks.get(index - 1).getDetails() + ")");
+                } else if (tasks.get(index - 1).getSymbol() == 'E'){
+                    content = content.concat(" (at: " + tasks.get(index - 1).getDetails() + ")");
                 }
-                content.concat("\n");
+                content = content.concat("\n");
 
-                data.remove(index - 1);
-                type.remove(index - 1);
-                done.remove(index - 1);
-                details.remove(index - 1);
+                tasks.remove(index - 1);
 
-                content.concat("You now have " + data.size() + " tasks in this list\n");
+                content = content.concat("You now have " + tasks.size() + " tasks in this list\n");
                 ui.printData(content);
 
 
@@ -152,85 +168,33 @@ public class Duke {
                     continue;
                 }
 
-                data.add(sp[1]);
-                details.add("NULL");
-                done.add("✗");
-                type.add("T");
+                tasks.add(new todo(sp[1]));
 
                 String content = "";
 
-                content.concat("Got it. I've added this task:\n");
-                content.concat("[T][✗] " + sp[1] +'\n');
-                content.concat("Now you have " + data.size() + " tasks in this list\n");
+                content = content.concat("Got it. I've added this task:\n");
+                content = content.concat("[T][✗] " + sp[1] +'\n');
+                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
 
                 ui.printData(content);
-
 
             } else if(input.startsWith("deadline")) {
                 String[] sp = input.split(" ", 2);
 
                 if(sp.length < 2){
-                    System.out.println("     ____________________________________________________________");
-                    System.out.println("     OOPS!!! The description of a deadline cannot be empty.");
-                    System.out.println("     ____________________________________________________________");
+                    ui.printData("OOPS! The description of a deadline cannot be empty.\n");
                     continue;
                 }
 
                 String[] sp2 = sp[1].split(" /by ", 2);
 
-                String[] date = sp2[1].split(" ");
-                String time = date[1];
-                String[] date2 = date[0].split("/");
-
-                String month;
-                if(date2[1].equals(1)){
-                    month = "January";
-                }
-                if(date2[1].equals(2)){
-                    month = "February";
-                }
-                if(date2[1].equals(3)){
-                    month = "March";
-                }
-                if(date2[1].equals(4)){
-                    month = "April";
-                }
-                if(date2[1].equals(5)){
-                    month = "May";
-                }
-                if(date2[1].equals(6)){
-                    month = "June";
-                }
-                if(date2[1].equals(7)){
-                    month = "July";
-                }
-                if(date2[1].equals(8)){
-                    month = "August";
-                }
-                if(date2[1].equals(9)){
-                    month = "September";
-                }
-                if(date2[1].equals(10)){
-                    month = "October";
-                }
-                if(date2[1].equals(1)){
-                    month = "November";
-                }
-                if(date2[1].equals(1)){
-                    month = "December";
-                }
-
-
-                data.add(sp2[0]);
-                details.add(sp2[1]);
-                done.add("✗");
-                type.add("D");
+                tasks.add(new deadline(sp2[0], sp2[1]));
 
                 String content = "";
 
-                content.concat("Got it. I've added this task:\n");
-                content.concat("[D][✗] " + sp2[0] + " (by: " + sp2[1] + ")\n");
-                content.concat("Now you have " + data.size() + " tasks in this list\n");
+                content = content.concat("Got it. I've added this task:\n");
+                content = content.concat("[D][✗] " + sp2[0] + " (by: " + sp2[1] + ")\n");
+                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
 
                 ui.printData(content);
 
@@ -244,16 +208,13 @@ public class Duke {
 
                 String[] sp2 = sp[1].split(" /at ", 2);
 
-                data.add(sp2[0]);
-                details.add(sp2[1]);
-                done.add("✗");
-                type.add("E");
+                tasks.add(new event(sp2[0], sp2[1]));
 
                 String content = "";
 
-                content.concat("Got it. I've added this task:");
-                content.concat("[E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
-                content.concat("Now you have " + data.size() + " tasks in this list");
+                content = content.concat("Got it. I've added this task:");
+                content = content.concat("[E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
+                content = content.concat("Now you have " + tasks.size() + " tasks in this list");
 
                 ui.printData(content);
 
@@ -268,24 +229,23 @@ public class Duke {
 
                 ArrayList<Integer> indexes = new ArrayList<Integer>();
                 int i;
-                for(i = 0; i < data.size(); i++) {
-                    if(data.get(i).contains(sp[1])) {
+                for(i = 0; i < tasks.size(); i++) {
+                    if(tasks.get(i).getDescription().contains(sp[1])) {
                         indexes.add(i);
                     }
                 }
                 String content = "";
                 for(i = 0; i < indexes.size(); i++) {
-                    System.out.print("     ");
-                    content.concat((i + 1) + ". ");
-                    content.concat("[" + type.get(indexes.get(i)) + "]");
-                    content.concat("[" + done.get(indexes.get(i)) + "]");
-                    content.concat(" " + data.get(indexes.get(i)));
-                    if(type.get(indexes.get(i)).equals("D")){
-                        content.concat(" (by: " + details.get(indexes.get(i)) + ")");
-                    } else if(type.get(i).equals("E")){
-                        content.concat(" (at: " + details.get(indexes.get(i)) + ")");
+                    content = content.concat((i + 1) + ". ");
+                    content = content.concat("[" + tasks.get(indexes.get(i)).getSymbol() + "]");
+                    content = content.concat("[" + tasks.get(indexes.get(i)).getIsDoneSymbol() + "]");
+                    content = content.concat(" " + tasks.get(indexes.get(i)).getDescription());
+                    if(tasks.get(indexes.get(i)).getSymbol() == 'D'){
+                        content = content.concat(" (by: " + tasks.get(indexes.get(i)).getDetails() + ")");
+                    } else if(tasks.get(indexes.get(i)).getSymbol() == 'E'){
+                        content = content.concat(" (at: " + tasks.get(indexes.get(i)).getDetails() + ")");
                     }
-                    content.concat("\n");
+                    content = content.concat("\n");
                 }
                 ui.printData(content);
 

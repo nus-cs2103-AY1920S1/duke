@@ -2,19 +2,8 @@ package duke.component;
 
 import java.util.Scanner;
 import java.lang.StringBuilder;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-public class Window extends Application {
-    private static final String DUKE_LOGO =
-            " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String DUKE_INTRODUCTION = "Hello! I'm Duke\nWhat can I do for you?";
+public class Window {
     private static final String DIVIDER_PROTOTYPE = "____________________________________________________";
     private static final String DIVIDER_BAR = String.format(
         "    %s%s\n",
@@ -34,9 +23,9 @@ public class Window extends Application {
     /**
      *  Displays the welcome message for the <code>Duke</code> application.
      */
-    public void showWelcome() {
-        System.out.println(Window.DUKE_LOGO);
-        this.print(Window.DUKE_INTRODUCTION);
+    public void showWelcome(String logo, String introduction) {
+        System.out.println(logo);
+        this.print(introduction);
     }
 
     /**
@@ -76,14 +65,5 @@ public class Window extends Application {
         
         result.append(Window.DIVIDER_BAR);
         System.out.println(result.toString());
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label dummy = new Label("Labia majoris");
-        Scene scene = new Scene(dummy);
-
-        stage.setScene(scene);
-        stage.show();
     }
 }

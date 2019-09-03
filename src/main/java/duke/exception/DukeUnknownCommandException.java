@@ -17,7 +17,7 @@ public class DukeUnknownCommandException extends DukeException {
 
     @Override
     public String toString() {
-        String template = "[DukeUnknownCommandException] %s\n  > %s";
+        String template = "[DukeUnknownCommandException]\n%s\n  > %s";
         return String.format(template, this.getMessage(), this.errorSource); 
     }
 }

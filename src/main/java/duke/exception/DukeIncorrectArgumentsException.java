@@ -24,7 +24,7 @@ public class DukeIncorrectArgumentsException extends DukeException {
 
     @Override
     public String toString() {
-        String template = "[DukeIncorrectArgumentsException] %s\n  | %s\n  > %s";
+        String template = "[DukeIncorrectArgumentsException]\n%s\n  | %s\n  > %s";
         return String.format(template, this.getMessage(), this.commandFormat, this.errorSource); 
     }
 }

@@ -19,7 +19,7 @@ public class DukeInvalidArgumentException extends DukeException {
 
     @Override
     public String toString() {
-        String template = "[DukeInvalidArgumentException] %s\n  > %s";
+        String template = "[DukeInvalidArgumentException]\n%s\n  > %s";
         return String.format(template, this.getMessage(), this.errorSource); 
     }
 }

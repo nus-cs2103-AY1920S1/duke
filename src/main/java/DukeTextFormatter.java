@@ -2,9 +2,9 @@
  * A class that handles text formatting for Duke's responses to the user.
  */
 public class DukeTextFormatter {
-    private static final String BAR = "____________________________________________________________\n";
-    private static final String FOUR_SPACE = "    ";
-    private static final String FIVE_SPACE = "     ";
+    //private static final String BAR = "____________________________________________________________\n";
+    //private static final String FOUR_SPACE = "    ";
+    //private static final String FIVE_SPACE = "     ";
 
     /**
      * Formats a <code>String</code> to look nicer when printed to the console. Generally, this method should also be 
@@ -13,7 +13,9 @@ public class DukeTextFormatter {
      * @param inputString The <code>String</code> to be printed to the console.
      * @return The formatted <code>String</code>
      */
-    public static String makeFormattedText(String inputString) {
+    
+    /*
+     public static String makeFormattedText(String inputString) {
         //Splits the string into separate lines
         String [] splitString = inputString.split("\n");
 
@@ -33,5 +35,10 @@ public class DukeTextFormatter {
         sb.append(BAR);
 
         return sb.toString();
+    }
+    */
+
+    public static String makeFormattedText(String inputString) {
+        return inputString;
     }
 }

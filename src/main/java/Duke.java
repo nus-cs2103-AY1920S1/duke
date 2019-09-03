@@ -1,16 +1,34 @@
-import java.util.Scanner;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
+//import java.util.Scanner;
+//import java.io.PrintStream;
+//import java.nio.charset.StandardCharsets;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+// JavaFX
+/*
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+*/
 
 /**
  * The class where the main method is located. Takes in user inputs, and processes the results of Duke's responses.
  */
 public class Duke {
+    // Class logic components
     private DukeSaveLoad dukeSaveLoad;
     private TaskList tasks;
+    private boolean systemShouldShutdown = false;
 
     /**
      * Creates a new instance of Duke.
@@ -25,44 +43,30 @@ public class Duke {
         tasks = dukeSaveLoad.attemptLoad();
     }
 
-    private void run() throws FileNotFoundException, IOException, SecurityException {
-        Scanner sc = new Scanner(System.in);
-        PrintStream printStream = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+    public String getResponse(String inputString) throws FileNotFoundException, IOException, SecurityException {
+        try {
+            DukeReply dukeReply = UserInputProcessor.processUserInput(inputString, tasks);
+        
+            //printStream.print(dukeReply.dukeReplyString);
 
-        printStream.print(DukeTextFormatter.makeFormattedText(DukeUi.GREET_HELLO));
-
-        while (true) { //Interaction loop with user. This will persist until shutdown.
-            String userInput = sc.nextLine();
-            
-            try {
-                DukeReply dukeReply = UserInputProcessor.processUserInput(userInput, tasks);
-            
-                printStream.print(dukeReply.dukeReplyString);
-
-                if(dukeReply.shouldSave) {
-                    dukeSaveLoad.attemptSave(tasks);
-                }
-
-                if(dukeReply.shouldExitLoop) {
-                    break;
-                }
-            } catch (DukeException e) {
-                printStream.print(e.getMessage());
+            if(dukeReply.shouldSave) {
+                dukeSaveLoad.attemptSave(tasks);
             }
-        }
 
-        sc.close();
+            systemShouldShutdown = dukeReply.shouldExitLoop;
+
+            return dukeReply.dukeReplyString;
+        } catch (DukeException e) {
+            //printStream.print(e.getMessage());
+            return e.getMessage();
+        }
     }
 
-    /**
-     * Creates a new instance of <code>Duke</code> and calls its <code>run</code> method.
-     * @param args A <code>String</code> array containing command line arguments
-     */
-    public static void main (String [] args) {
-        try{
-            new Duke().run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public String sayHi() {
+        return DukeTextFormatter.makeFormattedText(DukeUi.GREET_HELLO);
+    }
+
+    public boolean systemShouldShutdown() {
+        return systemShouldShutdown;
     }
 }

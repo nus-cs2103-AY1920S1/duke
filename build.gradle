@@ -12,12 +12,21 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application
     id 'application'
+    
+    // For JavaFX
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+
+    mavenCentral() // For JavaFX
+
+    flatDir {
+        dirs 'lib'
+    }
 }
 
 dependencies {
@@ -29,11 +38,13 @@ dependencies {
 
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+
+    compile fileTree(dir: 'lib', include: '*.jar')
 }
 
 application {
     // Define the main class for the application
-    mainClassName = 'Duke'
+    mainClassName = 'Launcher'
 }
 
 run {
@@ -43,4 +54,9 @@ run {
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+}
+
+javafx { // For JavaFX
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }

@@ -29,12 +29,20 @@ public class Tasks {
         this.status = 0;
     }
 
+    private String formatTime() {
+        String output = "";
+        if(time.length() > 1) {
+            output = time.substring(1);
+        }
+        return output;
+    }
+
     @Override 
     public String toString() {
         if(this.typeOfTask.equals("T")) {
             return typeOfTask + " | " + status + " | " + taskDetails;
         }  
-        return typeOfTask + " | " + status + " | " + taskDetails + " | " + time;
+        return typeOfTask + " | " + status + " | " + taskDetails + " | " + formatTime();
     }
 
 }

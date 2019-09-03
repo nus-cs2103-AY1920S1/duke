@@ -58,4 +58,17 @@ public class TaskList {
         Task task = list.remove(index);
         return task;
     }
+
+    public Task[] find(String text) {
+
+        ArrayList<Task> tasks =  new ArrayList<>();
+
+        for (Task task : list) {
+            if (task.description.toLowerCase().contains(text.toLowerCase())) {
+                tasks.add(task);
+            }
+        }
+
+        return tasks.toArray(new Task[tasks.size()]);
+    }
 }

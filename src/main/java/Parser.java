@@ -17,6 +17,7 @@ public class Parser {
 
         Task task = null;
         int index;
+        String text;
 
         switch (words[0]) {
         case "todo":
@@ -32,8 +33,12 @@ public class Parser {
             index = Parser.parsesDone(command);
             return new DoneCommand(index);
         case "delete":
-            index = Parser.parsesDone(command);
+            index = Parser.parsesDelete(command);
             return new DeleteCommand(index);
+        case "find":
+            text = Parser.parsesFind(command);
+            return new FindCommand(text);
+
         }
 
         switch (command) {
@@ -53,6 +58,40 @@ public class Parser {
      * @return index of done task
      * @throws DukeException
      */
+
+    private static String parsesFind(String command) throws DukeException {
+
+        String[] words = command.split(" ", 2);
+
+        if (words.length == 1) throw DukeException.emptyDescription();
+
+        if (words[1].isBlank()) throw DukeException.emptyDescription();
+
+        String text = words[1];
+
+        return text;
+    }
+
+    /**
+     * parses the delete string to get the index of the Task to be deleted
+     * @param command delete string
+     * @return index of the task to be deleted
+     * @throws DukeException
+     */
+    public static int parsesDelete (String command) throws DukeException {
+
+        String[] words = command.split(" ", 2);
+
+        if (words.length == 1) throw DukeException.emptyDescription();
+
+        if (words[1].isBlank()) throw DukeException.emptyDescription();
+
+        int index = Integer.valueOf(words[1]) - 1;
+
+        return index;
+
+    }
+
     public static int parsesDone (String command) throws DukeException {
 
         String[] words = command.split(" ", 2);
@@ -142,30 +181,6 @@ public class Parser {
 
         return task;
 
-    }
-
-    /**
-     * parses the delete string to get the index of the Task to be deleted
-     * @param command delete string
-     * @return index of the task to be deleted
-     * @throws DukeException
-     */
-    public static int parsesDelete (String command) throws DukeException {
-        String[] words = command.split(" ", 2);
-
-        if (words.length == 1)  {
-            throw DukeException.emptyDescription();
-        }
-
-        if (words[1].isBlank()) {
-            throw DukeException.emptyDescription();
-        }
-
-        System.out.println("Noted. I've removed this task:");
-
-        int index = Integer.valueOf(words[1]) - 1;
-
-        return index;
     }
 
 }

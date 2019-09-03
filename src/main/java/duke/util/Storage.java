@@ -40,7 +40,7 @@ public class Storage {
                 this.file.createNewFile();
             }
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS! Errors occurred while setting up database!");
+            throw new DukeException("Errors occurred while setting up database!");
         }
     }
 
@@ -68,7 +68,7 @@ public class Storage {
                     task = new Event(description[2], description[3]);
                     break;
                 default:
-                    throw new DukeException("☹ OOPS! Task description invalid!");
+                    throw new DukeException("Task description invalid!");
                 }
                 if (description[1].equals("1")) {
                     task.markAsDone();
@@ -78,7 +78,7 @@ public class Storage {
             sc.close();
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new DukeException("☹ OOPS! File not found!");
+            throw new DukeException("File not found!");
         }
     }
 
@@ -97,7 +97,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS! Errors occurred while updating database!");
+            throw new DukeException("Errors occurred while updating database!");
         }
     }
 }

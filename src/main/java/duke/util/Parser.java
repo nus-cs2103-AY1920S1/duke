@@ -34,7 +34,7 @@ public class Parser {
         try {
             commandEnum = CommandEnum.valueOf(commandArr[0].toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ OOPS! I can't do it!");
+            throw new DukeException("I can't do it!");
         }
         switch (commandEnum) {
         case BYE:
@@ -45,33 +45,33 @@ public class Parser {
             return new FindCommand(commandArr[1]);
         case DONE:
             if (commandArr.length <= 1) {
-                throw new DukeException("☹ OOPS! Task number missing!");
+                throw new DukeException("Task number missing!");
             }
             return new DoneCommand(parseTaskNumber(commandArr[1]));
         case DELETE:
             if (commandArr.length <= 1) {
-                throw new DukeException("☹ OOPS! Task number missing!");
+                throw new DukeException("Task number missing!");
             }
             return new DeleteCommand(parseTaskNumber(commandArr[1]));
         case TODO:
             if (commandArr.length <= 1) {
-                throw new DukeException("☹ OOPS! Todo description missing!");
+                throw new DukeException("Todo description missing!");
             }
             return new TodoCommand(commandArr[1]);
         case DEADLINE:
             if (commandArr.length <= 1) {
-                throw new DukeException("☹ OOPS! Deadline description missing!");
+                throw new DukeException("Deadline description missing!");
             }
             String[] deadlineInputArr = parseDeadline(commandArr[1]);
             return new DeadlineCommand(deadlineInputArr[0], deadlineInputArr[1]);
         case EVENT:
             if (commandArr.length <= 1) {
-                throw new DukeException("☹ OOPS! Deadline description missing!");
+                throw new DukeException("Deadline description missing!");
             }
             String[] eventInputArr = parseEvent(commandArr[1]);
             return new EventCommand(eventInputArr[0], eventInputArr[1]);
         default:
-            throw new DukeException("☹ OOPS! I can't do it!");
+            throw new DukeException("I can't do it!");
         }
     }
 
@@ -86,7 +86,7 @@ public class Parser {
         try {
             return LocalDateTime.parse(dateTimeString, STANDARD_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS! Date Time format invalid!");
+            throw new DukeException("Date Time format invalid!");
         }
     }
 
@@ -101,9 +101,9 @@ public class Parser {
         String[] deadlineArr = deadlineString.split(" /by ");
         if (deadlineArr.length <= 1) {
             if (deadlineString.indexOf("/by") == 0) {
-                throw new DukeException("☹ OOPS! Deadline description format invalid!");
+                throw new DukeException("Deadline description format invalid!");
             } else {
-                throw new DukeException("☹ OOPS! Deadline due date missing!");
+                throw new DukeException("Deadline due date missing!");
             }
         }
         return deadlineArr;
@@ -120,9 +120,9 @@ public class Parser {
         String[] eventArr = eventString.split(" /at ");
         if (eventArr.length <= 1) {
             if (eventString.indexOf("/at") == 0) {
-                throw new DukeException("☹ OOPS! Event description format invalid!");
+                throw new DukeException("Event description format invalid!");
             } else {
-                throw new DukeException("☹ OOPS! Event timing missing!");
+                throw new DukeException("Event timing missing!");
             }
         }
         return eventArr;
@@ -140,9 +140,9 @@ public class Parser {
         try {
             result = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ OOPS! Task number format invalid!");
+            throw new DukeException("Task number format invalid!");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS! Task number invalid!");
+            throw new DukeException("Task number invalid!");
         }
         return result;
     }

@@ -42,7 +42,7 @@ public class Duke {
                 ui.print(command.execute(taskList));
                 isExit = command.isExit();
             } catch (DukeException e) {
-                ui.print(e.getMessage());
+                ui.print("\u26A0 OOPS! " + e.getMessage());
             }
         }
 
@@ -64,7 +64,7 @@ public class Duke {
             Command command = Parser.parseCommand(input);
             return String.join("\n", command.execute(taskList));
         } catch (DukeException e) {
-            return e.getMessage();
+            return "\u26A0 OOPS! " + e.getMessage();
         }
     }
 }

@@ -10,7 +10,7 @@ public class ByeCommand extends Command {
      * {@inheritDoc}
      */
     public String[] execute(TaskList taskList) {
-        return new String[] {"Bye! Hope to see you again soon!"};
+        return new String[] {"\u2600 Bye! Hope to see you again soon!"};
     }
 
     /**

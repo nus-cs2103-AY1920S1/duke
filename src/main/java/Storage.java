@@ -99,30 +99,5 @@ public class Storage {
     }
 
     //list
-    public void list (TaskList taskList){
-        if(taskList.getTasks().size() == 0){
-            //System.out.println("but size is zero");
-            throw new RuntimeException();
-        }
-        System.out.println("    ____________________________________________________________");
-        for (int i = 0; i < taskList.getTasks().size(); i++) {
-            System.out.print("     "+(i+1)+"."+"["+taskList.getTasks().get(i).getType()+"]"+"["+ taskList.getTasks().get(i).getStatus()+"] "+taskList.getTasks().get(i).getTaskName()+" ");
-            switch (taskList.getTasks().get(i).getType()){
-                case 'T':
-                    System.out.println();
-                    break;
-                case 'D':
-                    //Forced type casting
-                    Deadline dtask = (Deadline) taskList.getTasks().get(i);
-                    System.out.println("(by: "+dtask.getBy()+")");
-                    break;
-                case 'E':
-                    Event etask = (Event) taskList.getTasks().get(i);
-                    System.out.println("(by: "+etask.getStart()+")");
-                    break;
-            }
 
-        }
-        System.out.println("    ____________________________________________________________");
-    }
 }

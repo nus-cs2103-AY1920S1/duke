@@ -31,7 +31,7 @@ public class Parse {
                 return false;
             case "list":
                 try {
-                    duke.getStorage().list(duke.getTaskList());
+                    duke.getTaskList().list();
                 } catch (RuntimeException exList) {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     ☹ OOPS!!! There is no task in your list.");
@@ -55,7 +55,7 @@ public class Parse {
 
             case "delete":
                 try{
-                    deleteTask(duke, Integer.parseInt(command[1])-1);
+                    duke.getTaskList().deleteTask(Integer.parseInt(command[1])-1);
                 } catch (IndexOutOfBoundsException exDelete) {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     ☹ OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
@@ -184,17 +184,7 @@ public class Parse {
 
     }
 
-    public static void deleteTask(Duke duke, int index) {
-        if (index > duke.getTaskList().size()-1) {
-            throw new IndexOutOfBoundsException();
-        }
-        Task task = duke.getTaskList().remove(index);
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("       ["+task.getType()+"]"+"["+ task.getStatus()+"] "+task.getTaskName());
-        System.out.println("     Now you have "+duke.getTaskList().size()+" tasks in the list");
-        System.out.println("    ____________________________________________________________");
-    }
+
 
 
     public  GregorianCalendar stringToDate (String str) throws ParseException {

@@ -1,7 +1,7 @@
 package command;
 
 import core.Storage;
-import core.Ui;
+import ui.Ui;
 import exception.DukeIoException;
 import task.Task;
 import task.TaskList;

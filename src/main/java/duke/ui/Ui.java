@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 

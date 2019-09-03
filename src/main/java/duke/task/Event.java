@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.datetime.DateTime;
+import duke.exception.DukeException;
+
 /**
  * Events are tasks that start at a specific time and ends at a specific time.
  */

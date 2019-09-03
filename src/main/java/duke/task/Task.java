@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Tasks include events, deadlines and todo actions.
  */
@@ -14,6 +16,10 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**

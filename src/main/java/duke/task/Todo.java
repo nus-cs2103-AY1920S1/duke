@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 /**
  * Todos are tasks without any date/time attached to it.
  */

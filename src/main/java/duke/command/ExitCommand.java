@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Command to end the Duke session.
  */

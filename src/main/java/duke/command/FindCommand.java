@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 /**
  * Command to search for tasks containing a specific key word/phrase and display those matching tasks.
  */

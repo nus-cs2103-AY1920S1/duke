@@ -1,3 +1,8 @@
+package duke.tasklist;
+
+import duke.task.Task;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 /**
@@ -85,7 +90,7 @@ public class TaskList {
     public void findTasks(String searchTerm, Ui ui) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : tasks) {
-            if (task.description.contains(searchTerm)) {
+            if (task.getDescription().contains(searchTerm)) {
                 searchResults.add(task);
             }
         }

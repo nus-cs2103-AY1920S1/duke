@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.datetime.DateTime;
+import duke.exception.DukeException;
+
 /**
  * Deadlines are tasks that need to be done before a specific date/time.
  */

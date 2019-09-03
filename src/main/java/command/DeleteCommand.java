@@ -33,10 +33,8 @@ public class DeleteCommand extends Command {
             Command incorrectCommand = new IncorrectCommand();
             incorrectCommand.execute(tasks, ui, storage);
         } else {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(tasks.getTasks().get(this.index));
+            ui.showDeleteCommand(tasks, this.index);
             tasks.getTasks().remove(this.index);
-            System.out.println("Now you have " + tasks.getTasks().size() + " in the list.");
         }
     }
 }

@@ -31,7 +31,8 @@ public class Parser {
     }
 
     /**
-     * The parse method handles all input and output from the Scanner through the Duke program.
+     * The parse method handles all input and output from the Scanner,
+     * as well as their corresponding interactions through the Duke program.
      */
     public void parse() {
         TaskList tasks = this._data.load();
@@ -110,6 +111,9 @@ public class Parser {
                                 System.out.println(this._ui.showTaskAdded(ev, tasks));
                             }
                         }
+                        break;
+                    case "find":
+                        System.out.println(this._ui.showFind(cmdLine, this._data.load()));
                         break;
                     default: // if it is not any of the above commands
                         throw new DukeException(cmdWord + cmdLine);

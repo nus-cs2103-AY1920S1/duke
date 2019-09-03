@@ -59,20 +59,20 @@ public class Ui {
 
     /**
      * Informs the user of the task added.
-     * @param t the Task to be added, which can be a ToDo, Deadline, or Event
+     * @param task the Task to be added, which can be a ToDo, Deadline, or Event
      * @param list the TaskList which contains all Tasks in the list
      * @return a String of information notifying the user of the added task
      */
-    public String showTaskAdded(Task t, TaskList list) {
+    public String showTaskAdded(Task task, TaskList list) {
         String added = String.format("Got it! I've added this task:" +
                         "%n   %s%n Now you have %d task in the list.",
-                t.toString(), list.getSize());
+                task.toString(), list.getSize());
         return addLines(added);
     }
 
     /**
      * Notifies the user of the task marked as done.
-     * @param n the task number, in the order of input
+     * @param taskNo the task number, in the order of input
      * @param list the TaskList which contains all Tasks in the list
      * @return a string to inform user of the task marked as done
      */
@@ -107,6 +107,30 @@ public class Ui {
         data.printDataFile();
         System.out.println(LINE);
         System.out.println();
+    }
+
+    /**
+     * This method searches the TaskList for the tasks that contain the relevant keyword,
+     * and displays the details of the tasks.
+     * @param keyword the word that users key in to find the task with the keyword
+     * @param list the TaskList to search for the tasks with the keyword
+     * @return a String representation of the list of tasks containing the keyword
+     */
+    public String showFind(String keyword, TaskList list) {
+        StringBuilder found = new StringBuilder("Here are the matching tasks in your list:");
+        ArrayList<Task> taskList = list.getList();
+        int count = 0;
+        for (int i = 0; i < list.getSize(); i++) {
+            Task t = taskList.get(i);
+            String desc = t.getDesc();
+            if (desc.contains(keyword)) {
+                count++;
+                found.append(System.getProperty("line.separator"));
+                found.append(" ").append(count).append(".");
+                found.append(t.toString());
+            }
+        }
+        return addLines(found.toString());
     }
 
     /**

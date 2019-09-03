@@ -75,6 +75,16 @@ public class Ui {
      * @param taskList taskList object to be shown
      */
     public void showList(TaskList taskList) {
+        System.out.println("     Here are the tasks in your list:");
+        System.out.print(taskList);
+    }
+
+    /**
+     * Displays the list of tasks pertaining to the search result.
+     * @param taskList taskList object to be shown
+     */
+    public void showSearchResults(TaskList taskList) {
+        System.out.println("     Here are the matching tasks in your list:");
         System.out.print(taskList);
     }
 

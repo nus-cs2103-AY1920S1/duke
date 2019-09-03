@@ -75,13 +75,31 @@ public class TaskList {
     }
 
     /**
+     * Finds the task(s) with matching descriptions.
+     * @param taskToBeFound search term
+     * @return TaskList object containing list of relevant search results
+     * @throws DukeException if task is not found
+     */
+    public TaskList find(String taskToBeFound) throws DukeException {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(taskToBeFound)) {
+                searchResults.add(task);
+            }
+        }
+        if (searchResults.isEmpty()) {
+            throw new DukeException("     File not found! :(");
+        }
+        return new TaskList(searchResults);
+    }
+
+    /**
      * Returns a string representation of the list of tasks.
      * @return a string representation of the list of tasks
      */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append("     Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             output.append("     ").append(i + 1).append(".").append(taskList.get(i)).append("\n");
         }

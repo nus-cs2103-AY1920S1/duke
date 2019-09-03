@@ -4,8 +4,9 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
-import duke.command.ExitCommand;
 import duke.command.AddCommand;
+import duke.command.FindCommand;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 
 /**
@@ -47,6 +48,9 @@ public class Parser {
                 String deadlineDescription = deadlineComponents[0];
                 String deadlineTime = deadlineComponents[1];
                 return new AddCommand(action, deadlineDescription, deadlineTime);
+            case "find":
+                String taskToBeFound = fullCommand.substring(5);
+                return new FindCommand(taskToBeFound);
             default:
                 throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

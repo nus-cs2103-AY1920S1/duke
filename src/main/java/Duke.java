@@ -6,10 +6,14 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object.
+     * @param filePath storage path.
+     */
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -18,10 +22,9 @@ public class Duke {
     }
 
     /**
-     * Runs the main program
+     * Runs the main program.
      */
     public void run() {
-        Scanner scanner = new Scanner(System.in);
         ui.showGreeting();
         boolean isExit = false;
         while (!isExit) {

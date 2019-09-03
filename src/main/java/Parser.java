@@ -1,9 +1,10 @@
 public class Parser {
     /**
-     * Parses user input into enums and separate the details accordingly
-     * @param fullCommand
-     * @return a Command object
-     * @throws DukeException
+     * Parses user input into enums and separate the details accordingly.
+     *
+     * @param fullCommand user input to be parsed into duke enum.
+     * @return a Command object.
+     * @throws DukeException when an occurred with a specific message.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] strArr = fullCommand.split(" ", 2);
@@ -21,7 +22,7 @@ public class Parser {
             return new Command(DukeEnum.LIST, "");
         } else if (strArr[0].contains("delete")) {
             return new Command(DukeEnum.DELETE, strArr[1]);
-        } else if(strArr[0].equalsIgnoreCase("find")){
+        } else if (strArr[0].equalsIgnoreCase("find")) {
             return new Command(DukeEnum.FIND, strArr[1]);
         } else {
             throw new DukeException("I don't know what that means :-( ");

@@ -9,6 +9,12 @@ public class Event extends Task {
     protected String text;
     protected String at;
 
+    /**
+     * Creates an Event object.
+     * @param description of the event
+     * @param helper datetime object
+     * @param at where the event is held.
+     */
     public Event(String description, DateTimeRangeHelper helper, String at) {
         super(description);
         this.startTime = helper.getStartTime();
@@ -18,6 +24,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Creates an Event object.
+     * @param description to be chopped up into various variables.
+     * @throws DukeException when an error occurred with a specific message.
+     */
     public Event(String description) throws DukeException {
         super(description);
         String[] descArr = description.split(" /at ", 2);

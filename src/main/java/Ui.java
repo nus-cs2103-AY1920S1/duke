@@ -10,7 +10,7 @@ public class Ui {
 
 
     /**
-     * Prints a greeting message to welcome the user
+     * Prints a greeting message to welcome the user.
      */
     public void showGreeting() {
         String logo = " ____        _        \n"
@@ -25,39 +25,41 @@ public class Ui {
     }
 
     /**
-     * Sets the displayText variable to print a goodbye message
+     * Sets the displayText variable to print a goodbye message.
      */
     public void showBye() {
         displayText = "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints an error message when the tasks could not be loaded from the txt file
+     * Prints an error message when the tasks could not be loaded from the txt file.
      */
     public void showLoadingError() {
-        System.out.println("\\u2639 OOPS!!! I'm sorry, but I could not load your saved task list ");
+        //if face not shown, try to use \u2639
+        System.out.println("☹ OOPS!!! I'm sorry, but I could not load your saved task list ");
     }
 
     /**
-     * Reads the user input
-     * @return user input
+     * Reads the user input.
+     * @return user input.
      */
     public String readCommand() {
         return scanner.nextLine();
     }
 
     /**
-     * Prints any error message
-     * @param message
+     * Prints any error message.
+     * @param message error message.
      */
     public void showError(String message) {
-        StringBuilder sb = new StringBuilder("\u2639 OOPS!!! I'm sorry, but ");
+        //if face not shown, try to use \u2639
+        StringBuilder sb = new StringBuilder("☹ OOPS!!! I'm sorry, but ");
         sb.append(message);
-        System.out.println(sb.toString());
+        setText(sb.toString());
     }
 
     /**
-     * Prints the saved text and reset the variable
+     * Prints the saved text and reset the variable.
      */
     public void showLine() {
         System.out.println(displayText);
@@ -65,17 +67,17 @@ public class Ui {
     }
 
     /**
-     * Sets the displayText message that is to be printed when showLine() is called
-     * @param str
+     * Sets the displayText message that is to be printed when showLine() is called.
+     * @param str to replace displayText.
      */
     public void setText(String str) {
         displayText = str;
     }
 
     /**
-     * Sets the displayText message when a task is saved
-     * @param task
-     * @param size
+     * Sets the displayText message when a task is saved.
+     * @param task saved.
+     * @param size number of tasks in the list.
      */
     public void showTaskSaved(Task task, int size) {
         displayText = "Got it. I've added this task:\n\t" + task + "\nNow you have " + size + " tasks in the list.";

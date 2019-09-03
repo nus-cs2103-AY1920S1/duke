@@ -3,6 +3,10 @@ public class TaskException extends DukeException {
     protected boolean time;
     protected String type;
 
+    /**
+     * Creates a TaskException object.
+     * @param message error message.
+     */
     public TaskException(String message) {
         super(message);
         desc = false;

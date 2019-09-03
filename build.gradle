@@ -37,6 +37,12 @@ task runCli (type: JavaExec, dependsOn: classes) {
     args = [ "cli" ]
 }
 
+task runGui (type: JavaExec, dependsOn: classes) {
+    main = "duke.Launcher"
+    classpath = sourceSets.main.runtimeClasspath
+    args = [ "gui" ]
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1"

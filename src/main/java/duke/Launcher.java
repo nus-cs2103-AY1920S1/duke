@@ -1,6 +1,7 @@
 package duke;
 
 import duke.cli.DukeCli;
+import duke.gui.DukeGui;
 import javafx.application.Application;
 
 import java.util.Set;
@@ -29,7 +30,7 @@ public class Launcher {
     }
 
     private static void launchGui() {
-        Application.launch(duke.DukeGui.class);
+        Application.launch(DukeGui.class);
     }
 
     private static void launchCli() {

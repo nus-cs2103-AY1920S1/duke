@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +17,8 @@ public class DukeGui extends Application {
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
             stage.setTitle("Duke");
-            stage.setResizable(false);
-            stage.setMinHeight(600.0);
-            stage.setMinWidth(400.0);
+            stage.setMinHeight(925.0);
+            stage.setMinWidth(600.0);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

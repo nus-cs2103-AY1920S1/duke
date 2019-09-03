@@ -10,6 +10,7 @@ public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
+
     /**
      * Gets the task description and status.
      *

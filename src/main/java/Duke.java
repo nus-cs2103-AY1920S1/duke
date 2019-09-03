@@ -1,5 +1,5 @@
 /**
- * The Duke class
+ * The Duke class is the main program.
  */
 public class Duke {
 

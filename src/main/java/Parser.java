@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Parser {
     /**
-     * Gets a Command object
+     * Gets a Command object.
      *
      * @param command A string representing the user's command.
      * @return A Command object.
@@ -29,8 +29,9 @@ public class Parser {
         if (array.length == 2) {
             String[] dateArray = array[0].split("/");
             if (dateArray.length == 3) {
-                if ((dateArray[0].equals("1") || dateArray[0].equals("21") ||
-                        dateArray[0].equals("31"))) {
+                if ((dateArray[0].equals("1")
+                        || dateArray[0].equals("21")
+                        || dateArray[0].equals("31"))) {
                     day = dateArray[0] + "st";
                 } else if ((dateArray[0].equals("2") || dateArray[0].equals("22"))) {
                     day = dateArray[0] + "nd";
@@ -75,6 +76,8 @@ public class Parser {
                     break;
                 case "12":
                     day = day + " of December ";
+                    break;
+                default:
                     break;
                 }
                 day = day + dateArray[2] + ", ";

@@ -15,6 +15,7 @@ public class Event extends Task {
         super(desription);
         this.when = when;
     }
+
     /**
      * Gets the task description, time and status.
      *

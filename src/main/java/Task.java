@@ -30,6 +30,7 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
     /**
      * Gets the task description and an icon depending on whether it is done.
      *

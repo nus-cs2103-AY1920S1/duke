@@ -87,7 +87,7 @@ public class Storage {
      */
     public static String getSavedListString(TaskList tasks) {
         String allTasks = "";
-        for (int i = 0; i < tasks.getTasks().size() ; i++) {
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
             allTasks += tasks.getTasks().get(i).toSave() + "\n";
         }
         return allTasks;

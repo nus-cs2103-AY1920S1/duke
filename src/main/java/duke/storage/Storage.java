@@ -14,22 +14,55 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Class for reading and writing Duke data.
+ */
 public class Storage {
+    /**
+     * Charset for reading and writing .txt files.
+     */
     final static Charset ENCODING = StandardCharsets.UTF_8;
+    /**
+     * Path for data.
+     */
     private Path path;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param path path for duke.txt
+     * @throws IOException
+     */
     public Storage(String path) throws IOException {
         this.path = Paths.get(path);
     }
 
+    /**
+     * Reads text file from path.
+     *
+     * @return text lines from .txt as List of Strings
+     * @throws IOException
+     */
     private List<String> read() throws IOException {
         return Files.readAllLines(path, ENCODING);
     }
 
+    /**
+     * Writes text file to path.
+     *
+     * @param lines text lines to write onto .txt as List of Strings
+     * @throws IOException
+     */
     private void write(List<String> lines) throws IOException {
         Files.write(path, lines, ENCODING);
     }
 
+    /**
+     * Reads text file and formatted into ArrayList of tasks to be used on other classes.
+     *
+     * @return ArrayList of tasks
+     * @throws IOException
+     */
     public ArrayList<Task> readDuke() throws IOException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         List<String> lines = read();
@@ -51,6 +84,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes text file in .txt format.
+     *
+     * @param tasks List of tasks
+     * @throws IOException
+     */
     public void writeDuke(List<Task> tasks) throws IOException {
         List<String> lines = new ArrayList<String>();
         for (Task task : tasks) {

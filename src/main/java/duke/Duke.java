@@ -9,12 +9,20 @@ import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.task.Task;
 
+/**
+ * Main class for Duke.
+ */
 public class Duke {
     private Ui ui;
     private Parser parser;
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Initialises all necessary objects for Duke.
+     *
+     * @param filePath path to duke.txt save
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -28,12 +36,13 @@ public class Duke {
     }
 
     /**
-     * inside run, use ui to ask for commands, ui sends back what command it was as a string
-     * parser takes that string command and read it and say is what command and send back as an integer(?)
-     * tasklist takes it and does the command and send back a list
-     * storage takes the list and record into drive
+     * run() method loops the functions of Duke. Starts Duke by printing the logo then get an input. Input
+     * gets passed into a Parser object which gives an Integer result. That including the original input
+     * string gets passed into a TaskList object that returns the resultant List of tasks. That gets written
+     * onto disk with a Storage object. It loops until input is "bye".
+     *
+     * @throws IOException
      */
-
     public void run() throws IOException {
         ui.printLogo();
         String input;

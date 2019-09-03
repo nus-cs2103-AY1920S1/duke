@@ -20,7 +20,7 @@ public class Duke {
     public Duke() throws FileNotFoundException, IOException {
 
         this.ui = new UI();
-        this.storage = new Storage("../duke.txt");
+        this.storage = new Storage("/Users/joshuaseet/Desktop/CS2103/Duke/src/main/duke.txt");
         ArrayList<Task> existing = storage.readFileContents();
         this.taskList = new TaskList(existing);
         this.storage.writeToFile("");

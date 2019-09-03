@@ -17,6 +17,7 @@ public class Parser {
     TaskList taskList;
     Ui ui;
     String line;
+
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
@@ -74,7 +75,7 @@ public class Parser {
         } else if (words[0].equals("delete")) {
             currTask = taskList.delete(words[1]);
             ui.printDelete(currTask, taskList);
-        } else if(words[0].equals("find")) {
+        } else if (words[0].equals("find")) {
             ArrayList<Task> temp = new ArrayList<>();
             for (int i = 0; i < taskList.list.size(); i++) {
                 String currDesc = taskList.list.get(i).getDesc();

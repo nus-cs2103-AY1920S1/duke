@@ -12,10 +12,17 @@ public class Event extends Task {
     protected String at;
     protected Date date;
 
+    /**
+     * Constructs an event class.
+     * @param description description of the event task.
+     * @param at date of event.
+     * @throws ParseException if date is in wrong format.
+     */
+
     public Event(String description, String at) throws ParseException {
         super(description);
         this.at = at;
-        this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(at);
+        this.date = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(at);
     }
 
     /**

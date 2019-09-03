@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Represents a JUnit test for TaskList.
@@ -24,19 +24,21 @@ class TaskListTest {
         /**
          * Stub for Task.
          */
+        
         class TaskStub extends Task {
             public TaskStub(String desc) {
                 description = desc;
                 isDone = false;
                 num = 0;
             }
+            
             public String format() {
                 return null;
             }
         }
 
         /**
-         * Stub for ToDos
+         * Stub for ToDos.
          */
 
         class ToDosStub extends TaskStub {

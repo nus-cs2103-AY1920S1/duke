@@ -71,13 +71,14 @@ public class Storage {
      * @throws ParseException If date is not in date format.
      */
 
-    private static void readFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException, ParseException {
+    private static void readFileContents(String filePath, ArrayList<Task> list)
+            throws FileNotFoundException, ParseException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
             boolean checkDone;
             String currLine = s.nextLine();
-            String[] currWords= currLine.split("[|]", 4);
+            String[] currWords = currLine.split("[|]", 4);
             if (currWords[1].equals("1")) {
                 checkDone = true;
             } else {

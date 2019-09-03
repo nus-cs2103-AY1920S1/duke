@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     @Override
     public String formatToWrite() {
-        if (this.done) {
+        if (super.isDone) {
             return String.format("T | %d | %s", 1, this.description);
         } else {
             return String.format("T | %d | %s", 0, this.description);

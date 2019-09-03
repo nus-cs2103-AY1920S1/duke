@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String formatToWrite() {
-        if (this.done) {
+        if (super.isDone) {
             return String.format("D | %d | %s | %s", 1, this.description, formatter.format(this.by));
         } else {
             return String.format("D | %d | %s | %s", 0, this.description, formatter.format(this.by));

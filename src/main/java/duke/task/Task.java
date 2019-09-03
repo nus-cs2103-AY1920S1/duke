@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
+import duke.exception.DukeTaskException;
 
 public abstract class Task {
     protected String description;
-    protected Boolean done;
+    protected Boolean isDone;
 
     /**
      * Constructs a Task with description.
@@ -13,7 +13,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getDescription() {
@@ -23,13 +23,13 @@ public abstract class Task {
     /**
      * Marks that the Task has been done.
      *
-     * @throws DukeException if the Task has already been done and the user wants it to be done again.
+     * @throws DukeTaskException if the Task has already been done and the user wants it to be done again.
      */
-    public void doTask() throws DukeException {
-        if (this.done) {
-            throw new DukeException("The task specified has already been done.");
+    public void doTask() throws DukeTaskException {
+        if (this.isDone) {
+            throw new DukeTaskException("The task specified has already been done.");
         } else {
-            this.done = true;
+            this.isDone = true;
         }
     }
 
@@ -38,7 +38,7 @@ public abstract class Task {
      * the text file stored on the hard disk is being written to the TaskList.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -47,7 +47,7 @@ public abstract class Task {
      * @return the String representation of the unicode.
      */
     public String getStatusIcon() {
-        return done ? "[\u2713]" : "[\u2718]";  //represents tick and cross
+        return this.isDone ? "[\u2713]" : "[\u2718]";  //represents tick and cross
     }
 
     /**

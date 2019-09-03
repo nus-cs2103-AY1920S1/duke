@@ -1,6 +1,9 @@
 package duke.parser;
 
 import duke.exception.DukeException;
+import duke.exception.DukeParserException;
+import duke.exception.DukeTaskException;
+import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -49,44 +52,68 @@ public class Parser {
         while (!bye) {
             String input = sc.nextLine();
             String[] command = input.split(" ");
-            try {
-                switch (command[0]) {
-                case "bye":
-                    ui.showBye();
-                    bye = true;
-                    break;
-                case "list":
-                    ui.showList(taskList.getTaskList());
-                    break;
-                case "done":
-                    ui.showCompletedTask(taskList.doTask(input));
-                    break;
-                case "todo":
-                    Todo todo = makeTodo(input);
-                    taskList.addTodo(todo);
-                    ui.showAddedTask(todo, taskList);
-                    break;
-                case "deadline":
-                    Deadline deadline = makeDeadline(input);
-                    taskList.addDeadline(deadline);
-                    ui.showAddedTask(deadline, taskList);
-                    break;
-                case "event":
-                    Event event = makeEvent(input);
-                    taskList.addEvent(event);
-                    ui.showAddedTask(event, taskList);
-                    break;
-                case "delete":
-                    ui.showDeletedTask(taskList.deleteTask(input), taskList);
-                    break;
-                case "find":
-                    ui.showFound(taskList.findTask(input));
-                    break;
-                default:
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            switch (command[0]) {
+            case "bye":
+                ui.showBye();
+                bye = true;
+                break;
+            case "list":
+                ui.showList(taskList.getTaskList());
+                break;
+            case "done":
+                try {
+                    Task doneTask = taskList.doTask(input);
+                    ui.showCompletedTask(doneTask);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (DukeException e) {
-                System.out.println(e);
+                break;
+            case "todo":
+                try {
+                    Todo todo = makeTodo(input);
+                    taskList.addTask(todo);
+                    ui.showAddedTask(todo, taskList);
+                } catch (DukeTaskException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            case "deadline":
+                try {
+                    Deadline deadline = makeDeadline(input);
+                    taskList.addTask(deadline);
+                    ui.showAddedTask(deadline, taskList);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            case "event":
+                try {
+                    Event event = makeEvent(input);
+                    taskList.addTask(event);
+                    ui.showAddedTask(event, taskList);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            case "delete":
+                try {
+                    Task deletedTask = taskList.deleteTask(input);
+                    ui.showDeletedTask(deletedTask, taskList);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            case "find":
+                TaskList foundList = taskList.findTask(input);
+                ui.showFound(foundList);
+                break;
+            default:
+                try {
+                    throw new DukeParserException("I'm sorry, but I don't know what that means :-(");
+                } catch (DukeParserException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
             }
         }
         sc.close();
@@ -101,21 +128,21 @@ public class Parser {
      * @return a Date object which date has been parsed into the desired format obtained from the formatter.
      * @throws DukeException if the user's input is not in the right format.
      */
-    public static Date parseDate(SimpleDateFormat formatter, String input) throws DukeException {
+    public static Date parseDate(SimpleDateFormat formatter, String input) throws DukeParserException {
         try {
             return formatter.parse(input);
         } catch (ParseException e) {
-            throw new DukeException("Please key a date in the format dd/MM/yyyy HHHH.");
+            throw new DukeParserException("Please key a date in the format dd/MM/yyyy HHHH.");
         }
     }
 
-    private Todo makeTodo(String input) throws DukeException {
+    private Todo makeTodo(String input) throws DukeTaskException {
         if (input.split(" ", 2).length > 1) {
             String todoInput = input.split(" ", 2)[1];
             Todo todo = new Todo(todoInput);
             return todo;
         } else {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeTaskException("The description of a todo cannot be empty.");
         }
     }
 
@@ -123,14 +150,14 @@ public class Parser {
         if (input.split(" ", 2).length > 1) {
             String[] desc = input.split(" ", 2)[1].split(" /by ");
             if (desc.length > 2) {
-                throw new DukeException("There are too many /by in the description.");
+                throw new DukeTaskException("There are too many /by in the description.");
             } else if (desc.length < 2) {
-                throw new DukeException("The description of the deadline is insufficient.");
+                throw new DukeTaskException("The description of the deadline is insufficient.");
             }
             Deadline deadline = new Deadline(desc[0], parseDate(formatter, desc[1]));
             return deadline;
         } else {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeTaskException("The description of a deadline cannot be empty.");
         }
     }
 
@@ -138,14 +165,14 @@ public class Parser {
         if (input.split(" ", 2).length > 1) {
             String[] desc = input.split(" ", 2)[1].split(" /at ");
             if (desc.length > 2) {
-                throw new DukeException("There are too many /at in the description.");
+                throw new DukeTaskException("There are too many /at in the description.");
             } else if (desc.length < 2) {
-                throw new DukeException("The description of the deadline is insufficient.");
+                throw new DukeTaskException("The description of the deadline is insufficient.");
             }
             Event event = new Event(desc[0], parseDate(formatter, desc[1]));
             return event;
         } else {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeTaskException("The description of a todo cannot be empty.");
         }
     }
 }

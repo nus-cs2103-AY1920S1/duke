@@ -116,7 +116,6 @@ public class Storage {
                     textToAdd = String.format("%s\n%s", textToAdd, task.formatToWrite());
                 }
             }
-            System.out.print(textToAdd);
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {

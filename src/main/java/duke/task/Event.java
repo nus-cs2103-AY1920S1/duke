@@ -24,7 +24,7 @@ public class Event extends Task {
 
     @Override
     public String formatToWrite() {
-        if (this.done) {
+        if (super.isDone) {
             return String.format("E | %d | %s | %s", 1, this.description, formatter.format(this.by));
         } else {
             return String.format("E | %d | %s | %s", 0, this.description, formatter.format(this.by));

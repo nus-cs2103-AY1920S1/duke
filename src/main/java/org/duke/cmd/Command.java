@@ -1,4 +1,4 @@
-package org.duke.ui;
+package org.duke.cmd;
 
 import java.util.HashMap;
 import java.util.Map;

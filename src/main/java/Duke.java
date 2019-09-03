@@ -11,7 +11,7 @@ public class Duke{
                 toReturn = toReturn.concat((i + 1) + "." + this.get(i).toString() + "\n     ");
             }
 
-            return toReturn.substring(0, toReturn.length() - 5);
+            return toReturn.substring(0, toReturn.length() - 6);
         }
     };
 
@@ -36,9 +36,11 @@ public class Duke{
                     target.done();
                     dukePrint("Nice! I've marked this task as done:", "  " + target);
                     break;
-                default:
-                    System.out.println("Here");
-                    addToTodo(userInput);
+                case "todo":
+                case "event":
+                case "deadline":
+                    addToTodo(userInput.split(" ", 2)[1], userCommand);
+                    break;
             }
 
         }
@@ -70,9 +72,10 @@ public class Duke{
     }
 
 
-    private static void addToTodo(String description) {
-        todoList.add(new ListItem(description));
-        dukePrint("added: " + description);
+    private static void addToTodo(String description, String command) {
+        todoList.add(new ListItem(description, command));
+        dukePrint("Got it. I've added this task:" + "\n      " + todoList.get(todoList.size() - 1),
+                "Now you have " + todoList.size() + " tasks in the list.");
     }
 
 

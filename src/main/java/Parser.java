@@ -19,35 +19,37 @@ public class Parser {
      * @param taskList The list that store all the task.
      * @throws DukeException Exception in case of error
      */
-    public void parseCommand (UI ui, Storage storage, String command, TaskList taskList) throws DukeException {
+    public String parseCommand (UI ui, Storage storage, String command, TaskList taskList) throws DukeException {
         if (!availableCommands.contains(command.split(" ")[0])) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         } else if (command.equals("bye")) {
-            ui.exit();
-            System.exit(0);
+            return ui.exit();
+            //System.exit(0);
         } else if (command.equals("list")) {
-            ui.printList(taskList);
+            String holder = ui.printList(taskList);
+            return holder;
         } else if (command.startsWith("done")) {
             String[] words = command.split("\\s");
             int index = Integer.parseInt(words[1]);
-            taskList.doneTask(index);
+            String holder = taskList.doneTask(index);
             storage.saveTask();
+            return holder;
         } else if (command.startsWith("delete")) {
             String[] words = command.split("\\s");
             int index = Integer.parseInt(words[1]);
-            taskList.deleteTask(index);
+            String holder = taskList.deleteTask(index);
             storage.saveTask();
+            return holder;
         } else if(command.startsWith("find")) {
             List<Task> findList;
             String[] words = command.split("\\s");
             String findString = words[1];
             findList = taskList.findTask(taskList, findString);
-            ui.printTaskList(findList);
+            return ui.printTaskList(findList);
         } else {
-            taskList.addTask(command);
+            String holder = taskList.addTask(command);
             storage.saveTask();
+            return holder;
         }
     }
-
-
 }

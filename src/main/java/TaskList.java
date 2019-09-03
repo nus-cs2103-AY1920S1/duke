@@ -41,7 +41,7 @@ public class TaskList {
      * @param command Information to be used
      * @throws DukeException throws duke exception
      */
-    public void addTask(String command) throws DukeException{
+    public String addTask(String command) throws DukeException{
         ui.horizontalLine();
         List<String> commandList = new ArrayList<>(Arrays.asList(command.split(" ")));
         String stringHolder = (commandList.remove(0));
@@ -51,9 +51,8 @@ public class TaskList {
             if (!stringHolder.isEmpty()) {
                 Task taskHolder = new ToDo(stringHolder, false);
                 taskList.add(taskHolder);
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  [T][\u2718] " + stringHolder);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                String holder = "Got it. I've added this task:\n" + "  [T][\u2718] " + stringHolder + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
+                return holder;
             } else {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
@@ -86,9 +85,8 @@ public class TaskList {
             Task taskHolder = new Deadline(stringHolder, dateHolder, false);
             taskList.add(taskHolder);
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  [D][\u2718] " + stringHolder + " (by: " + date + ")");
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            String holder = "Got it. I've added this task:\n" + "  [D][\u2718] " + stringHolder + " (by: " + date + ")" + "Now you have " + taskList.size() + " tasks in the list.";
+            return holder;
         } else {
             stringHolder = commandList.remove(0);
             listHolder.remove(0);
@@ -118,40 +116,31 @@ public class TaskList {
             Task taskHolder = new Event(stringHolder, dateHolder, false);
             taskList.add(taskHolder);
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  [E][\u2718] " + stringHolder + " (at: " + date + ")");
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            String holder = "Got it. I've added this task:\n" + "  [E][\u2718] " + stringHolder + " (at: " + date + ")" + "Now you have " + taskList.size() + " tasks in the list.";
+            return holder;
         }
-        ui.horizontalLine();
-        System.out.println();
     }
 
     /**
      * Changes the status of the task from undone to done
      * @param index Index of the task
      */
-    public void doneTask(int index) {
+    public String doneTask(int index) {
         index = index - 1;
         taskList.get(index).changeStatusTrue();
-        ui.horizontalLine();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [" + taskList.get(index).getType() + "]" + "[" + taskList.get(index).getStatusIcon() + "] " + taskList.get(index).getDescription() + taskList.get(index).getDate());
-        ui.horizontalLine();
-        System.out.println();
+        String holder = ui.horizontalLine() + "\nNice! I've marked this task as done:\n" + "  [" + taskList.get(index).getType() + "]" + "[" + taskList.get(index).getStatusIcon() + "] " + taskList.get(index).getDescription() + taskList.get(index).getDate() + "\n" + ui.horizontalLine() + "\n";
+        return holder;
     }
 
     /**
      * Deletes the task from the list
      * @param index Index of the task
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         index = index - 1;
         Task taskHolder = taskList.remove(index);
-        ui.horizontalLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  [" + taskHolder.getType() + "]" + "[" + taskHolder.getStatusIcon() + "] " + taskHolder.getDescription() + taskHolder.getDate());
-        ui.horizontalLine();
-        System.out.println();
+        String holder = ui.horizontalLine() + "\nNoted. I've removed this task:\n" + "  [" + taskHolder.getType() + "]" + "[" + taskHolder.getStatusIcon() + "] " + taskHolder.getDescription() + taskHolder.getDate() + "\n" + ui.horizontalLine() + "\n";
+        return holder;
     }
 
     public List findTask(TaskList taskList, String findString) {

@@ -9,7 +9,7 @@ public class TodoTest {
     public void testStringOutput() {
         String description = "exampleDescription";
 
-        assertEquals("[T][1] exampleDescription",
+        assertEquals("[T][O] exampleDescription",
                 new Todo(description).toString());
     }
 }

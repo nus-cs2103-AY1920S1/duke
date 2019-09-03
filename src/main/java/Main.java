@@ -17,17 +17,16 @@ public class Main extends Application {
         fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
     }
 
-
     @Override
     public void start(Stage stage) {
         try {
             stage.setTitle("Duke");
-            new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/duke.png")));
-            // FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().printDialog("Hello! I'm Duke");
             fxmlLoader.<MainWindow>getController().printDialog("What can I do for you?");

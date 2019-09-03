@@ -18,7 +18,7 @@ public class EventTask extends Task {
     super(description);
 
     if (description.equals("")) {
-      throw new InvalidParameterException("The description of a todo cannot be empty.");
+      throw new InvalidParameterException("The description of an event cannot be empty.");
     }
 
     if (at.equals("")) {

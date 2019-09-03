@@ -23,8 +23,8 @@ import weomucat.duke.task.Task;
 import weomucat.duke.ui.listener.UserInputListener;
 
 /**
- * https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller A Controller accepts user
- * input and converts it to commands for the model or view.
+ * https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+ * A Controller accepts user input and converts it to commands for the model or view.
  */
 public class Controller implements UserInputListener {
 
@@ -178,6 +178,11 @@ public class Controller implements UserInputListener {
    */
   public void newByeCommandListener(ByeCommandListener listener) {
     this.byeCommandListeners.add(listener);
+  }
+
+  @Override
+  public void byeUpdate() throws DukeException {
+    commands.get(COMMAND_BYE).run();
   }
 
   @Override

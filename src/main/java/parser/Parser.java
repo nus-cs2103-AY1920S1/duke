@@ -11,8 +11,17 @@ import command.DeleteCommand;
 import exception.DukeException;
 import exception.InvalidInputException;
 
+/**
+ * Parser for reading user input and understand which command user is trying to use
+ */
 public class Parser {
 
+    /**
+     * Reads a single line of user input and creates the relevant command
+     * @param rawString user input to create a command
+     * @return command created if user input is successfully parsed
+     * @throws DukeException if user enters an invalid input and suggests available commands instead
+     */
     public static Command parse(String rawString) throws DukeException {
         if (rawString.equals("bye")) {
             return new ByeCommand();

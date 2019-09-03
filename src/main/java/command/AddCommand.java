@@ -8,13 +8,20 @@ import run.Ui;
 import run.Storage;
 
 /**
- * Abstract class for a command that adds tasks into tasks list
+ * Abstract class for a command that adds tasks into tasks list that extends Command class
  */
 public abstract class AddCommand extends Command {
-    TaskList tasks;
-    Ui ui;
-    Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
+    protected Storage storage;
 
+    /**
+     * Abstract method that adds information to current TaskList, updates the
+     * state of the TaskList through storage and interacts/updates the user through the ui
+     * @param tasks current TaskList with all current tasks
+     * @param ui current user interface
+     * @param storage current storage state
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**

@@ -5,10 +5,18 @@ import run.Ui;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Extends from Task, a task with a name and date and time for when the deadline is due by
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;
 
+    /**
+     * Constructor for a deadline, defaults isDone as false (Marks the new deadline as undone)
+     * @param description this deadline's name
+     * @param by this deadline's date and time in the format dd/mm/yyyy hhmm
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -19,6 +27,18 @@ public class Deadline extends Task {
             Ui.showError(ex.getMessage());
         }
     }
+
+    /**
+     * Constructor for a deadline when reading from state file
+     * @param description this deadline's name
+     * @param isDone boolean true or false if this deadline is done or undone respectively
+     * @param by this deadline's due date and time in the format dd/mm/yyyy hhmm
+     */
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = parseDateTime(by);
+    }
+
     private LocalDateTime parseDateTime(String by) throws DateTimeException, NumberFormatException {
         try {
             String[] splited = by.split(" ");
@@ -31,15 +51,19 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
-        this.by = parseDateTime(by);
-    }
-
+    /**
+     * Gets string of at field for this deadline (date and time of when this deadline is due by)
+     * @return this deadline's datetime in the format dd/mm/yyyy hhmm
+     */
     public String getStringBy() {
         return by.getDayOfMonth() + "/" + by.getMonthValue() + "/" + by.getYear() + " " + String.format("%02d", by.getHour()) + String.format("%02d", by.getMinute());
     }
 
+    /**
+     * Returns String representation of this deadline
+     * @return String in format [D] (super class Task's toString) at: (this deadline's datetime in the format
+     * dd/mm/yyyy hhmm)
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getStringBy() + ")";

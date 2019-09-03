@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Class representing a command to delete an item from the task list.
  */
 public class DeleteCommand extends Command {
-    private final String str;
+    private String str;
 
     /**
      * Creates a new DeleteCommand with the specified index.

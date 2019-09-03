@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * marked as done. This list is indexed starting from 1.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
-    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private ArrayList<Task> tasks;
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     
     /**
      * Initializes an empty task list.
@@ -34,10 +34,10 @@ public class TaskList {
                 t = new Todo(fields[2]);
                 break;
             case "E":
-                t = new Event(fields[2], LocalDateTime.parse(fields[3], inputFormatter));
+                t = new Event(fields[2], LocalDateTime.parse(fields[3], INPUT_FORMATTER));
                 break;
             case "D":
-                t = new Deadline(fields[2], LocalDateTime.parse(fields[3], inputFormatter));
+                t = new Deadline(fields[2], LocalDateTime.parse(fields[3], INPUT_FORMATTER));
                 break;
             default:
                 t = new Todo("nothing");

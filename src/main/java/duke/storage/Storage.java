@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Class that handles reading and writing tasks from and to disk.
  */
 public class Storage {
-    private final String path;
+    private String path;
 
     public Storage(String path) {
         this.path = path;

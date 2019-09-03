@@ -4,7 +4,7 @@ package duke.task;
  * A generic task, which can be marked as done.
  */
 public class Task {
-    private final String desc;
+    private String desc;
     protected boolean done;
 
     /**

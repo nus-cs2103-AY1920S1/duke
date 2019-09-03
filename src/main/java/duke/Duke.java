@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
     private TaskList tasks;
-    private final Storage storage;
+    private Storage storage;
 
     String getResponse(String cmd) {
         try {

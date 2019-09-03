@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Class representing a command to add a new task.
  */
 public class AddCommand extends Command {
-    private final Task task;
+    private Task task;
 
     /**
      * Creates a new AddCommand with the given task.

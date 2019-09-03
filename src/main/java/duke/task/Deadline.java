@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
  * Class representing a deadline, a task to be completed by a certain time.
  */
 public class Deadline extends Task {
-    private final LocalDateTime by;
+    private LocalDateTime by;
     private static final Pattern PAT = Pattern.compile("(.+) /by (.+)");
-    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm");
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm");
 
     /**
      * Initializes a Deadline from its description and its time.
@@ -42,7 +42,7 @@ public class Deadline extends Task {
         }
 
         try {
-            return new Deadline(m.group(1), LocalDateTime.parse(m.group(2), inputFormatter));
+            return new Deadline(m.group(1), LocalDateTime.parse(m.group(2), INPUT_FORMATTER));
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Time must be in the format day#/month#/yyyy hhmm.");
         }
@@ -55,7 +55,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(displayFormatter) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DISPLAY_FORMATTER) + ")";
     }
 
     /**
@@ -65,6 +65,6 @@ public class Deadline extends Task {
      */
     @Override
     public String export() {
-        return "D|" + super.export() + "|" + by.format(inputFormatter);
+        return "D|" + super.export() + "|" + by.format(INPUT_FORMATTER);
     }
 }

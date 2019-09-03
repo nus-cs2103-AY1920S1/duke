@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
  * Class representing an event that will occur at or around a specified time.
  */
 public class Event extends Task {
-    private final LocalDateTime at;
+    private LocalDateTime at;
     private static final Pattern PAT = Pattern.compile("(.+) /at (.+)");
-    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm");
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm");
 
     /**
      * Initializes an Event from its description and its time.
@@ -42,7 +42,7 @@ public class Event extends Task {
         }
 
         try {
-            return new Event(m.group(1), LocalDateTime.parse(m.group(2), inputFormatter));
+            return new Event(m.group(1), LocalDateTime.parse(m.group(2), INPUT_FORMATTER));
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Time must be in the format day#/month#/yyyy hhmm.");
         }
@@ -55,7 +55,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(displayFormatter) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DISPLAY_FORMATTER) + ")";
     }
 
     /**
@@ -65,6 +65,6 @@ public class Event extends Task {
      */
     @Override
     public String export() {
-        return "E|" + super.export() + "|" + at.format(inputFormatter);
+        return "E|" + super.export() + "|" + at.format(INPUT_FORMATTER);
     }
 }

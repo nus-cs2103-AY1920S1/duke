@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * and to display those items.
  */
 public class FindCommand extends Command {
-    private final String keyword;
+    private String keyword;
 
     /**
      * Creates a new FindCommand with the specified keyword.

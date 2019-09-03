@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Class representing a command to mark an item in the task list as done.
  */
 public class DoneCommand extends Command {
-    private final String str;
+    private String str;
 
     /**
      * Creates a new DoneCommand with the specified index.

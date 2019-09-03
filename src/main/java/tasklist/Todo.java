@@ -2,8 +2,8 @@ package tasklist;
 
 public class Todo extends Task {
 
-    public Todo(String name , boolean completionStatus ) {
-        super(name,completionStatus);
+    public Todo(String description , boolean completionStatus ) {
+        super(description,completionStatus);
     }
 
     @Override

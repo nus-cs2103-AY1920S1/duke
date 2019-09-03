@@ -17,6 +17,7 @@ public class TaskList {
 
 
     public void printnewtask(){
+
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
                 "       " + taskList.getLast().getOverallStatus() + "\n" +
@@ -43,15 +44,16 @@ public class TaskList {
                 "    ____________________________________________________________");
     }
 
-    public void addTask(String taskType , boolean completionStatus , LocalDateTime date ) {
+    public void addTask(String taskType ,String description, boolean completionStatus , LocalDateTime date ) {
         switch (taskType) {
         case "todo":
-            taskList.addLast(new Todo(taskType,completionStatus));
+            taskList.addLast(new Todo(description,completionStatus));
+            break;
         case "deadline":
-            taskList.addLast(new Deadline(taskType, completionStatus, date));
+            taskList.addLast(new Deadline(description, completionStatus, date));
             break;
         case "event":
-            taskList.addLast(new Event(taskType, completionStatus, date));
+            taskList.addLast(new Event(description, completionStatus, date));
             break;
         }
         printnewtask();

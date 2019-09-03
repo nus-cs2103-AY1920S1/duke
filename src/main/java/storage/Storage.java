@@ -3,7 +3,7 @@ package storage;
 
 import tasklist.Task;
 import tasklist.TaskList;
-import parser.parser;
+import parser.Parser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,7 +18,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void StoreData(LinkedList<Task> toStore) throws IOException {
+    public void storeData(LinkedList<Task> toStore) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         String fullList = "";
         for (Task task : toStore) {
@@ -28,11 +28,11 @@ public class Storage {
         fileWriter.close();
     }
 
-    public LinkedList<Task> LoadData() throws IOException {
+    public LinkedList<Task> loadData() throws IOException {
         FileReader reader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(reader);
         TaskList storedData = new TaskList();
-        parser parser = new parser();
+        Parser parser = new Parser();
         String line;
         int tasknumber = 1;
 

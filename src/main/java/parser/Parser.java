@@ -13,13 +13,13 @@ import java.util.regex.Pattern;
 
 import static java.time.LocalTime.parse;
 
-public class parser {
+public class Parser {
     private boolean isDone;
     private String description;
     private LocalDateTime date;
     private boolean isSafe = true;
 
-    public parser(){};
+    public Parser(){};
 
     public void parse(String fullCommand, TaskList scheduler) {
         Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
@@ -44,7 +44,7 @@ public class parser {
             case "todo":
             case "deadline":
             case "event":
-                scheduler.addTask(description, isDone, date);
+                scheduler.addTask(matcher.group("commandWord"),description, isDone, date);
                 break;
             case "list":
                 scheduler.listTasks();
@@ -64,19 +64,6 @@ public class parser {
         }
     }
 
-
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
 
     public boolean isSafe() {
         return isSafe;

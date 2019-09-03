@@ -1,16 +1,19 @@
 import storage.Storage;
 import tasklist.TaskList;
-import parser.parser;
+import parser.Parser;
 
 import java.io.IOException;
+import java.lang.reflect.Parameter;
 import java.util.Scanner;
 
 public class Duke {
     private Storage saveFile;
-    private tas
 
+    public Duke(String filepath) throws IOException {
+        saveFile = new Storage(filepath);
+    }
 
-    public static void main(String[] args) throws IOException {
+    public void run() throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -23,53 +26,27 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         String user = input.nextLine();
-        parser parser;
-        Storage saveFile = new Storage();
+        TaskList scheduler;
+        Parser parser = new Parser();
 
         while (!user.equals("bye")) {
-            TaskList taskList = new TaskList(saveFile.LoadData());
-            parser = new parser(user);
-            if (!parser.isSafe()){
+            scheduler = new TaskList(saveFile.loadData());
+            parser.parse(user, scheduler);
+            if (!parser.isSafe()) {
                 continue;
             }
-            try {
-                switch (parser.getCommandType()) {
-                case LIST:
-                    taskList.listTasks();
-                    break;
-                case COMPLETE:
-                    taskList.completeTask(parser.getDescription());
-                    break;
-                case ADDTODO:
-                    taskList.addTodo(parser.getDescription(),parser.isDone());
-                    taskList.printnewtask();
-                    break;
-                case ADDDEADLINE:
-                    taskList.addDeadline(parser.getDescription(),parser.isDone(),parser.getDate());
-                    taskList.printnewtask();
-                    break;
-                case ADDEVENT:
-                    taskList.addEvent(parser.getDescription(),parser.isDone(),parser.getDate());
-                    taskList.printnewtask();
-                    break;
-                case DELETE:
-                    taskList.removeTask(parser.getDescription());
-                    break;
-                default:
-                    System.out.println("    ____________________________________________________________\n" +
-                            "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                            "    ____________________________________________________________");
-                }
-            }catch (IndexOutOfBoundsException e){
-                System.out.println("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! The description of a task cannot be empty.\n" +
-                        "    ____________________________________________________________");
-            }
-            saveFile.StoreData(taskList.getTaskList());
+            saveFile.storeData(scheduler.getTaskList());
             user = input.nextLine();
         }
+
+
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        new Duke("tasklist.txt").run();
     }
 }

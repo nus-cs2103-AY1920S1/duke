@@ -16,7 +16,7 @@ public class Duke {
     }
 
     private void run() {
-        this.ui.welcome();
+        this.ui.printResponse(this.ui.welcome());
 
         while (true) {
             try {
@@ -38,6 +38,11 @@ public class Duke {
     }
 
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c = Parser.parse(input.trim().split("\\s+"));
+        return c.run(tasks, storage);
+    }
+
+    String welcome() {
+        return this.ui.welcome();
     }
 }

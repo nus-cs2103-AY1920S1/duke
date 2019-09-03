@@ -13,8 +13,8 @@ class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    void welcome() {
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you ?");
+    String welcome() {
+        return ("Hello from\n" + logo + "\nWhat can I do for you ?");
     }
 
     Command getUserInput() throws DukeException {

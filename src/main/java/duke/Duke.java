@@ -6,15 +6,15 @@ import duke.command.Command;
 import duke.component.Parser;
 import duke.component.TaskList;
 import duke.component.Storage;
-import duke.component.Ui;
+import duke.component.Window;
 import duke.exception.DukeException;
 
 public class Duke {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
-    private Ui ui;
     private Storage fileMgr;
     private TaskList tasks;
+    private Window window;
 
     /**
      *  Constructs a <code>Duke</code> application instance, an interactive task manager.
@@ -23,7 +23,7 @@ public class Duke {
      *  @throws IOException if an error occured during a file I/O operation.
      */
     public Duke(String filePath) throws IOException {
-        this.ui = new Ui();
+        this.window = new Window();
         
         this.fileMgr = new Storage(filePath);
 
@@ -31,7 +31,7 @@ public class Duke {
         try {
             tasks = fileMgr.readTaskList();
         } catch (DukeException e) {
-            this.ui.print(String.format("%s\n\nInitialised with empty TaskList", e.toString()));
+            this.window.print(String.format("%s\n\nInitialised with empty TaskList", e.toString()));
             tasks = new TaskList();
         }
     }
@@ -41,19 +41,19 @@ public class Duke {
      */
     public void run() {
         // Show Duke's logo and welcome message
-        this.ui.showWelcome();
+        this.window.showWelcome();
 
         boolean isRunning = true;
-        while (isRunning && this.ui.hasCommand()) {
-            String command = this.ui.readCommand();
+        while (isRunning && this.window.hasCommand()) {
+            String command = this.window.readCommand();
             
             // Parse the command to return a Command object
             try {
                 Command c = Parser.parse(command);
-                this.ui.print(c.execute(tasks, fileMgr));
+                this.window.print(c.execute(tasks, fileMgr));
                 isRunning = !c.willTerminate();
             } catch (DukeException e) {
-                this.ui.print(e.toString());
+                this.window.print(e.toString());
             }
         }
     }

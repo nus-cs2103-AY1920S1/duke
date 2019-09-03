@@ -94,7 +94,7 @@ public class TaskList {
     public String addTask(Task t) {
         numOfTasks++;
         xs.add(t);
-        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.\n", t, numOfTasks);
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
     }
 
     /**
@@ -104,7 +104,7 @@ public class TaskList {
      */
     public String tickTask(int num) {
         xs.get(num - 1).markAsDone();
-        return String.format("Nice! I've marked this task as done:\n%s\n", xs.get(num - 1));
+        return String.format("Nice! I've marked this task as done:\n%s", xs.get(num - 1));
     }
 
     /**
@@ -116,7 +116,7 @@ public class TaskList {
         numOfTasks--;
         Task t = xs.get(num - 1);
         xs.remove(num - 1);
-        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.\n", t, numOfTasks);
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
     }
 
     /**

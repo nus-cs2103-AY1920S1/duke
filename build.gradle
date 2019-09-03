@@ -7,7 +7,7 @@ plugins {
 }
 
 group "duke"
-version "0.5.0"
+version "0.9.0"
 
 repositories {
     mavenCentral()
@@ -28,7 +28,7 @@ javafx {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.5.0"
+    archiveVersion = "0.9.0"
     archiveClassifier = null
     archiveAppendix = null
 }

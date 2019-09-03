@@ -109,7 +109,7 @@ public class Ui {
                     try {
                         input.substring(6,7);
                     } catch (Exception e){
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        throw new DukeException("☹ OOPS!!! The description of an Event cannot be empty.");
                     }
                     showEvent(input);
                     continue;
@@ -225,6 +225,12 @@ public class Ui {
         return day + " of " + month + " " + year + ", " + incorrectTime + "hours";
     }
 
+    /**
+     * Shows a list of all tasks holding the same characters of the input.
+     * Excludes all excess spacing after last non-space character
+     *
+     * @param input String for the method to check against the stored taskList
+     */
     public void showFind(String input) throws Exception {
         String toMatch = input.substring(5).trim();
         TaskList tempTaskList = new TaskList(new ArrayList<Task>());

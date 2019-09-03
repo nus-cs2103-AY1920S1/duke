@@ -1,6 +1,13 @@
+package command;
+
+import duke.DukeException;
+import task.Task;
+import task.TaskList;
+import task.Event;
+import task.Deadline;
+import task.ToDo;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -14,8 +21,8 @@ public class Storage {
 
 
     /**
-     * Instantiates a new Storage object.
-     * Storage object will store the path of the list .txt file.
+     * Instantiates a new input.Storage object.
+     * input.Storage object will store the path of the list .txt file.
      * After which, it will scan the list file for the existing tasks.
      *
      * @param filePath the file path
@@ -34,12 +41,11 @@ public class Storage {
         return this.filePath;
     }
 
-
     /**
      * Load list of tasks and store into an ArrayList.
      * If file has a filled, loop through entire file.
      * Check for the type of task in each line:
-     * Either [T] Todo, [D] Deadline, [E] Event,
+     * Either [T] Todo, [D] task.Deadline, [E] task.Event,
      * and create each type of task and store into the list.
      *
      * @return ArrayList of Tasks from the file
@@ -62,7 +68,7 @@ public class Storage {
                 String description = file.next().trim();
                 list.add(new ToDo(description));
                 if (status.contains("1")) {
-                    list.get(index).isDone = true;
+                    list.get(index).setDone();
                 }
                 index += 1;
             } else {
@@ -77,7 +83,7 @@ public class Storage {
                 }
 
                 if (status.contains("1")) {
-                    list.get(index).isDone = true;
+                    list.get(index).setDone();
                 }
                 index += 1;
             }
@@ -92,7 +98,7 @@ public class Storage {
 
 
     /**
-     * Save the current list of tasks TaskList into a .txt file.
+     * Save the current list of tasks task.TaskList into a .txt file.
      * Fetch the tasks from the list and output into the .txt
      * line by line and close the file once saved.
      *

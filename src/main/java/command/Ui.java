@@ -1,3 +1,5 @@
+package command;
+
 public class Ui {
 
     private static final String INTRODUCTION = "     Hello! I'm Duke";
@@ -14,7 +16,7 @@ public class Ui {
     private static final String ADD_TASK = "     Got it. I've added this task:";
     private static final String REMOVE_TASK = "     Noted. I've removed this task: ";
     private static final String CLOSING_STATEMENT = "     Bye. Hope to see you again soon!";
-    private static final String INVALID_COMMAND = "    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String INVALID_COMMAND = "    " + "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     public Ui() {
     }

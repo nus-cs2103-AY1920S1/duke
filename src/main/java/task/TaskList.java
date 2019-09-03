@@ -1,10 +1,15 @@
+package task;
+
+import command.Parser;
+import command.Ui;
+
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
 
-    protected ArrayList<Task> list;
-    protected Ui ui = new Ui();
-    protected Parser parser = new Parser();
+    private ArrayList<Task> list;
+    private Ui ui = new Ui();
+    private Parser parser = new Parser();
 
     public TaskList() {
     }
@@ -51,7 +56,7 @@ class TaskList {
         // Get integer found in user input
         try {
             int index = Integer.parseInt(value.trim()); // Remove any blank space
-            list.get(index - 1).isDone = true;
+            list.get(index - 1).setDone();
             ui.completedTask();
             System.out.println(list.get(index - 1));
         } catch (Exception e) {

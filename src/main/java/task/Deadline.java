@@ -1,19 +1,21 @@
+package task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-class Deadline extends Task {
+public class Deadline extends Task {
 
-    protected String by;
-    protected Date dateTime;
+    private String by;
+    private Date dateTime;
 
     // List of acceptable date formats (for this case, just choosing two common patterns)
-    protected List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
+    private List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
 
     /**
-     * Instantiates a new Deadline Task.
+     * Instantiates a new task.Deadline task.Task.
      * Convert the date/time provided to a SimpleDateFormat object.
      * Can only convert for certain date & time formats.
      *
@@ -43,6 +45,6 @@ class Deadline extends Task {
     }
 
     public String toSave() {
-        return "D | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.by;
+        return "D | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + this.by;
     }
 }

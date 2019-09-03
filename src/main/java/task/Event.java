@@ -1,19 +1,21 @@
+package task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-class Event extends Task {
+public class Event extends Task {
 
-    protected String at;
-    protected Date dateTime;
+    private String at;
+    private Date dateTime;
 
     // List of acceptable date formats (for this case, just choosing two common patterns)
-    protected List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
+    private List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
 
     /**
-     * Instantiates a new Event Task.
+     * Instantiates a new task.Event task.Task.
      * Convert the date/time provided to a SimpleDateFormat object.
      * Can only convert for certain date & time formats.
      *
@@ -43,6 +45,6 @@ class Event extends Task {
     }
 
     public String toSave() {
-        return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.at;
+        return "E | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + this.at;
     }
 }

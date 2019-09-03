@@ -1,6 +1,12 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
+
+import duke.DukeException;
+import command.Parser;
+import command.Storage;
+import command.Ui;
+import task.Task;
+import task.TaskList;
 
 // For JavaFX
 import javafx.application.Application;
@@ -13,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
+
 
 public class Duke extends Application {
     // String Constants used for Duke output
@@ -98,7 +105,6 @@ public class Duke extends Application {
         return "Duke heard: " + input;
     }
 
-
     /**
      * Instantiates a new Duke object.
      * Load an existing .txt file for the list of tasks stored.
@@ -149,81 +155,12 @@ public class Duke extends Application {
         // Create new user interface object
         Ui ui = new Ui();
 
-        // Read command-line input with Scanner
-        Scanner scanner = new Scanner(System.in);
-
         // Initial opening introduction and prompt for user input
         ui.openingStatement();
 
-        // Check for last statement
-        while (!input.equals("bye")) {
+        // Parse Duke commands
+        parser.parseDuke(storage, tasks, input);
 
-            // Get entire line of input from command-line
-            input = scanner.nextLine().trim(); //Remove blank space
-
-            // Store whatever text entered, except "bye", exit loop
-            if (input.equals("bye")) {
-                break;
-            }
-            ui.separator();
-
-            if (input.equals("list")) {
-                ui.showList();
-                tasks.printList();
-            } else if (input.contains("done")) {
-
-                try {
-                    //Mark task as done
-                    tasks.setDone(input);
-                } catch (NullPointerException err) {
-                    ui.invalidEntry();
-                    continue;
-                }
-
-            } else if (input.contains("delete")) {
-
-                try {
-                    //Mark task as done
-                    tasks.deleteTask(input);
-                } catch (NullPointerException err) {
-                    ui.invalidEntry();
-                    continue;
-                }
-            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
-
-                try {
-                    String action = parser.parseAction(input);
-                    ui.addTask();
-                    tasks.addTask(action, input);
-                } catch (DukeException err) {
-                    System.out.println(err.getMessage());
-                }
-
-            } else if (input.contains("find")) {
-                String keyword = parser.parseDescription("find", input);
-                ui.matchingList();
-                tasks.getList(keyword);
-            } else {
-                // Do not fit any commands
-                try {
-                    throw new DukeException(ui.invalidCommand());
-                } catch (DukeException err) {
-                    System.out.println(err.getMessage());
-                    ui.separator();
-                    System.out.println("");
-                    continue;
-                }
-            }
-
-            ui.separator();
-            System.out.println();
-
-            try {
-                storage.saveFile(tasks, this.storage.getFilePath());
-            } catch (DukeException e) {
-                ui.saveError();
-            }
-        }
         // Closing statement
         ui.closingStatement();
     }

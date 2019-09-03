@@ -20,8 +20,8 @@
    )
    REM no error here, errorlevel == 0
    
-   REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-   java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
+   REM run the program, feed commands from command.txt file and redirect the output to the ACTUAL.TXT
+   java -classpath ..\bin Duke < command.txt > ACTUAL.TXT
    
    REM compare the output to the expected output
    FC ACTUAL.TXT EXPECTED.TXT
@@ -50,8 +50,8 @@
        exit 1
    fi
    
-   # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-   java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+   # run the program, feed commands from command.txt file and redirect the output to the ACTUAL.TXT
+   java -classpath ../bin Duke < command.txt > ACTUAL.TXT
    
    # compare the output to the expected output
    diff ACTUAL.TXT EXPECTED.TXT
@@ -66,7 +66,7 @@
    ```
 1. Update the `javac` and `java` commands in the script to match the name/location of your main class.
 1. Add an `EXPECTED.txt` to the same folder, containing the expected output.
-1. Add an `input.txt` containing the input commands.
+1. Add an `command.txt` containing the command commands.
 1. Run the `.bat`/`.sh` file to execute the test.
 
 --------------------------------------------------------------------------------

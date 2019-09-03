@@ -1,4 +1,3 @@
-﻿[T] | [?] | wake up
-[E] | [?] | meeting | at: 12pm
-[T] | [?] | eat lunch
-[D] | [?] | finish hw | by: 2pm
+[E] | [✘] | meeting | at: 12pm
+[T] | [✓] | eat lunch
+[D] | [✘] | finish hw | by: 2pm

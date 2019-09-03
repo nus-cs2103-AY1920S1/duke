@@ -1,7 +1,7 @@
 /**
- * Wraps of paths to files.
+ * Wraps paths to files.
  */
-public class myPaths {
+public class MyPaths {
 
     /** Path to task list. */
     public static final String TASK_LIST = "tasks.txt";

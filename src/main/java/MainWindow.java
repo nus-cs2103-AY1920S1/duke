@@ -1,5 +1,3 @@
-package duke.javafx.control;
-
 import duke.util.Duke;
 import duke.util.Ui;
 import javafx.fxml.FXML;
@@ -9,9 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 /**
- * Controller for duke.javafx.control.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -31,7 +28,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(
+        dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage)
         );
     }
@@ -41,7 +38,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.util.Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

@@ -1,6 +1,5 @@
 import java.io.IOException;
 
-import duke.javafx.control.MainWindow;
 import duke.util.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

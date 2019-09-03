@@ -9,6 +9,7 @@ public class Command {
     private static final int DELETE = 3;
     private static final int FIND = 4;
     private static final int TASK = 5;
+    private static final int COMMANDS = -1;
     private static final String list =
             "1) list - view your Todo list\n" +
             "2) done TASK_NUMBER - mark a task as done\n" +
@@ -27,26 +28,26 @@ public class Command {
     }
 
     public String execute(Storage storage, Ui ui, TaskList tasks) throws IOException, DukeException {
-        if (command == 0) {
+        if (command == BYE) {
             storage.saveHistory(tasks.getTaskList());
             return ui.byeMessage();
-        } else if (command == 1){
+        } else if (command == LIST){
             return tasks.getListAsString();
-        } else if (command == 2){
+        } else if (command == DONE){
             String result = tasks.markItemComplete(Integer.parseInt(inputParts[1]));
             storage.saveHistory(tasks.getTaskList());
             return result;
-        } else if (command == 3){
+        } else if (command == DELETE){
             String result = tasks.deleteItem(Integer.parseInt(inputParts[1]));
             storage.saveHistory(tasks.getTaskList());
             return result;
-        } else if (command == 4){
+        } else if (command == FIND){
             return tasks.findItem(inputParts[1]);
-        } else if (command == 5){
+        } else if (command == TASK){
             String result = tasks.registerNewTask(inputParts);
             storage.saveHistory(tasks.getTaskList());
             return result;
-        } else if (command == -1){
+        } else if (command == COMMANDS){
             return list;
         }
         return "";

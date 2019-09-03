@@ -28,7 +28,7 @@ public class TaskList {
 
     /**
      * Deletes a specific task in the list based on the index in the array
-     * @param index
+     * @param index an integer that will be deleted
      */
     public void delete(int index) {
         taskArrayList.remove(index);
@@ -36,7 +36,7 @@ public class TaskList {
 
     /**
      * Adds a specific task into the list
-     * @param task
+     * @param task a specific Task to be added into the arraylist
      */
     public void add(Task task) {
         taskArrayList.add(task);

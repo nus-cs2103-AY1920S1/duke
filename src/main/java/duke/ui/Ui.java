@@ -14,6 +14,9 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints out the Duke logo as well we welcome message
+     */
     public void showWelcome() {
         logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -49,7 +52,7 @@ public class Ui {
 
     /**
      * Returns the remainingWords scanned in readCommand()
-     * @return
+     * @return remainingWords
      */
     public String getRemainingWords() {
         return remainingWords;

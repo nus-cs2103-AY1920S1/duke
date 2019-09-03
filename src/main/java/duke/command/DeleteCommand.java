@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
      * @param tasks the TaskList to be used
      * @param ui the Ui to be used
      * @param storage the Storage to be used
-     * @throws DukeException
+     * @throws DukeException when the format of remainingwords is not legit
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

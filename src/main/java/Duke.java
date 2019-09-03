@@ -5,9 +5,14 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.text.ParseException;
 
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -54,11 +59,19 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World");
+        Scene scene = new Scene(helloWorld);
+        stage.setScene(scene);
+        stage.show() ;
+    }
+
     /**
      * Runs the main method to load the duke.txt file into the program and then calls the run method
      * @param args
-     * @throws DukeException
-     * @throws ParseException
+     * @throws DukeException when an error of Duke occurs
+     * @throws ParseException when a string is not parsed properly
      */
     public static void main(String[] args) throws DukeException, ParseException{
         new Duke("/Users/lawnce/Desktop/duke/data/duke.txt").run();

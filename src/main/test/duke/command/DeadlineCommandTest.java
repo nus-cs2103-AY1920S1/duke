@@ -1,16 +1,14 @@
 package duke.command;
 
-import duke.initials.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeadlineCommandTest {
 
     @Test
-    void makeDate() {
+    void testMakeDate() {
         DeadlineCommand deadlineCommand = new DeadlineCommand();
         try {
             assertEquals("18th of December 2019, 6:00pm", deadlineCommand.makeDate("18/12/19"));
@@ -20,7 +18,7 @@ class DeadlineCommandTest {
     }
 
     @Test
-    void makeDate_wrongDate_ParseException() {
+    void test_makeDate_wrongDate_ParseException() {
         DeadlineCommand deadlineCommand = new DeadlineCommand();
         try {
             deadlineCommand.makeDate("Sunday");

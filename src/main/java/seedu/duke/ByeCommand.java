@@ -23,6 +23,7 @@ public class ByeCommand extends Command {
      * @param tasks TaskList currently.
      * @param ui Ui initialized in <code>Duke</code> to interact with user.
      * @param storage Storage to write/load/append to data file after updating tasks.
+     * @return String of goodbye message.
      */
     public String  execute(TaskList tasks, Ui ui, Storage storage) {
         this.ui = ui;

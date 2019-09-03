@@ -4,7 +4,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-group 'seedu.duke'
+group 'duke'
 version '0.1.0'
 
 repositories {

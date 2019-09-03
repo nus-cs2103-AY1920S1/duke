@@ -12,7 +12,7 @@ import java.util.Scanner;
  * The main class for Duke.
  */
 
-public class Duke extends Application {
+public class Duke{ //extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -23,25 +23,16 @@ public class Duke extends Application {
     static Scanner scan = new Scanner(System.in);
     static String input = "";
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
 
     public String getResponse(String input) throws IOException {
-        while (!input.equals("bye")) {
-            input = scan.nextLine();
+        if (!input.equals("bye")) {
             inputParser.determineAction(input);
+            String response= ui.getGuidedUserInterfaceMsg();
+            ui.setGuidedUserInterfaceMsg("");
+            return response;
         }
-        return null;
+        return ui.goodByeMsg;
     }
-
-    //public String getResponse(String input) {
-    //}
 
     public enum Action {
         ADD,

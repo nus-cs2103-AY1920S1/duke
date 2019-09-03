@@ -4,8 +4,8 @@
 
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
+     public String description;
+     public boolean isDone;
 
     /**
      * The constructor for the Deadline class.

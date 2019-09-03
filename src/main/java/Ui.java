@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    String goodByeMsg = "Bye. Hope to see you again soon!";
+    private static String guidedUserInterfaceMsg = "";
+
     /**
      * A basic welcome message. Prints the duke logo and greeting.
      */
@@ -27,7 +30,7 @@ public class Ui {
      */
 
     public void sayGoodbye(){
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(goodByeMsg);
     }
 
 
@@ -39,6 +42,8 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(taskList.get(taskList.size() - 1).toString());
         System.out.println("Now you have " + taskList.size() + " tasks in the list.\n");
+        guidedUserInterfaceMsg = "Got it. I've added this task:\n" + taskList.get(taskList.size() - 1).toString() +
+                "\n" + "Now you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -48,6 +53,8 @@ public class Ui {
     public void removeTask(ArrayList<Task> taskList, int taskNumber){
         System.out.println("Noted. I've removed this task:\n" + taskList.get(taskNumber).toString());
         System.out.println("Now you have " + (taskList.size()-1) + " tasks in the list.\n");
+        guidedUserInterfaceMsg = "Noted. I've removed this task:\n" + taskList.get(taskNumber).toString() +
+                "\nNow you have " + (taskList.size()-1) + " tasks in the list.";
     }
 
     /**
@@ -57,7 +64,14 @@ public class Ui {
     public void setTaskDone(ArrayList<Task> taskList, int taskNumber){
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(taskList.get(taskNumber).toString() + "\n");
+        guidedUserInterfaceMsg = "Nice! I've marked this task as done:\n" + taskList.get(taskNumber).toString();
     }
 
+    public String getGuidedUserInterfaceMsg() {
+        return guidedUserInterfaceMsg;
+    }
 
+    public void setGuidedUserInterfaceMsg(String guidedUserInterfaceMsg) {
+        Ui.guidedUserInterfaceMsg = guidedUserInterfaceMsg;
+    }
 }

@@ -7,11 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/* THINGS THAT NEED TO BE ADDED:
-    1. load function that loads ArrayList in
-    2.
- */
-
 public class Storage {
     private PrintWriter writer;
     private String filename;
@@ -31,23 +26,28 @@ public class Storage {
         File f = new File(filename);
         Scanner scanner = new Scanner(f);
 
-        while(scanner.hasNextLine()) {
+        while(scanner.hasNext()) {
             scanner.next();
+            if(!scanner.hasNext()) {
+                break;
+            }
             String[] inputArr = scanner.nextLine().trim().split(" ", 3);
             char taskType = inputArr[0].charAt(1);
-            boolean isTaskComplete = (inputArr[1] == "[\u2713]") ? true : false;
+            boolean isTaskComplete = (inputArr[1].equals("[\u2713]")) ? true : false;
             if(taskType == 'T') {
-                tasklist.add(new Task(inputArr[2], "todo"));
+                tasklist.add(new Task(inputArr[2], "todo", isTaskComplete));
             } else if(taskType == 'D') {
-                String deadline = inputArr[2].split(" /by ")[1];
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                String deadlineDetails = inputArr[2].split("\\(")[0];
+                String deadline = inputArr[2].split("\\(")[1].split(" ", 2)[1];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm)");
                 LocalDateTime deadlineByDateTime = LocalDateTime.parse(deadline, formatter);
-                tasklist.add(new Task(inputArr[2].split(" /by ")[0], "deadline", deadlineByDateTime));
+                tasklist.add(new Task(deadlineDetails, "deadline", deadlineByDateTime, isTaskComplete));
             } else {
-                String eventDateTime = inputArr[2].split(" /at ")[1];
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                String eventDetails = inputArr[2].split("\\(")[0];
+                String eventDateTime = inputArr[2].split("\\(")[1].split(" ", 2)[1];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm)");
                 LocalDateTime eventDateTimeByDateTime = LocalDateTime.parse(eventDateTime, formatter);
-                tasklist.add(new Task(inputArr[2].split(" /at ")[0], "event", eventDateTimeByDateTime));
+                tasklist.add(new Task(eventDetails, "event", eventDateTimeByDateTime, isTaskComplete));
             }
         }
         return tasklist;

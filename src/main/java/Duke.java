@@ -1,9 +1,5 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -31,7 +27,6 @@ public class Duke {
     }
 
     public void run() throws FileNotFoundException, UnsupportedEncodingException {
-        int listSize = 0;
         int listPointer;
 
         ui.start();
@@ -57,38 +52,28 @@ public class Duke {
                 storage.updateTodoFile(tasks.getListString());
             } else if(parser.getCommand().equals("todo") || parser.getCommand().equals("deadline") || parser.getCommand().equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + INDENT + "   ";
-                String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
+                String aftTaskAddMessage = "Now you have " + (tasks.getList().size() + 1) + " tasks in the list.";
                 if(parser.getInputArr().length > 1) {
                     if(parser.getCommand().equals("todo")) {
-                        tasks.addTask(new Task(parser.getDetail(), "todo"));
-                        ui.printResponse(befTaskAddMessage + tasks.getList().get(listSize) + "\n " + INDENT + aftTaskAddMessage);
-                        listSize++;
+                        tasks.addTask(new Task(parser.getDetail(), "todo", false));
+                        ui.printResponse(befTaskAddMessage + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT + aftTaskAddMessage);
                         storage.updateTodoFile(tasks.getListString());
                     } else if(parser.getCommand().equals("deadline")) {
                         try {
-                            String deadline = input.split(" /by ")[1];
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                            LocalDateTime deadlineByDateTime = LocalDateTime.parse(deadline, formatter);
-                            tasks.addTask(new Task(parser.getDetail().split(" /by ")[0], "deadline",
-                                    deadlineByDateTime));
-                            ui.printResponse(befTaskAddMessage + tasks.getList().get(listSize) + "\n " + INDENT
+                            tasks.addDateTask(parser.getDetail().split(" /by ")[0], parser.getDetail().split(" /by ")[1], "deadline");
+                            ui.printResponse(befTaskAddMessage + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
                                     + aftTaskAddMessage);
-                            listSize++;
                             storage.updateTodoFile(tasks.getListString());
                         } catch(Exception ex) {
                             ui.printResponse("☹ OOPS!!! Deadlines require a specific datetime after /by, "
                                             + "in format 'dd/MM/yyyy HHmm'");
+                            System.out.println(ex);
                         }
                     } else if(parser.getCommand().equals("event")) {
                         try {
-                            String eventDateTime = input.split(" /at ")[1];
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-                            LocalDateTime eventDateTimeByDateTime = LocalDateTime.parse(eventDateTime, formatter);
-                            tasks.addTask(new Task(parser.getDetail().split(" /at ")[0], "event"
-                                    , eventDateTimeByDateTime));
-                            ui.printResponse(befTaskAddMessage + tasks.getList().get(listSize) + "\n " + INDENT
+                            tasks.addDateTask(parser.getDetail().split(" /at ")[0], parser.getDetail().split( " /at ")[1], "event");
+                            ui.printResponse(befTaskAddMessage + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
                                     + aftTaskAddMessage);
-                            listSize++;
                             storage.updateTodoFile(tasks.getListString());
                         } catch(Exception ex) {
                             ui.printError("☹ OOPS!!! Events require a specific datetime after /at, "

@@ -8,21 +8,22 @@ public class Task {
     protected LocalDateTime dateTime;
     protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public Task(String description, String taskType) {
+    public Task(String description, String taskType, boolean isDone) {
         this.description = description;
         this.taskType = taskType;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
-    public Task(String description, String taskType, LocalDateTime dateTime) {
+    public Task(String description, String taskType, LocalDateTime dateTime, boolean isDone) {
         this.description = description;
         this.taskType = taskType;
-        this.isDone = false;
+        this.isDone = isDone;
         this.dateTime = dateTime;
     }
 
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]");
+//        return (isDone ? "TASKDONE" : "TASKNOTDONE");
     }
 
     public String getDescription() {

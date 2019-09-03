@@ -1,13 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
-    /*
-    1. Creating an arraylist when tasklist is constructed
-    2. ArrayList<Task> getList()
-    3. addTask(Task task)
-    4. delTask(int index)
-    5. markAsDone(int index)
-     */
     private ArrayList<Task> list;
     private String listString;
     private static String INDENT = "    ";
@@ -36,6 +31,12 @@ public class TaskList {
     public void addTask(Task newTask) {
         list.add(newTask);
         updateTodoString();
+    }
+
+    public void addDateTask(String details, String dateTime, String taskType) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        LocalDateTime dateTimeByDateTime = LocalDateTime.parse(dateTime, formatter);
+        addTask(new Task(details, taskType, dateTimeByDateTime, false));
     }
 
     public void deleteTask(int index) {

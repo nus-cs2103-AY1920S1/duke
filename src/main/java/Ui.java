@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
 public class Ui {
-    /*
-    6. String readWord()
-     */
     private String INDENT;
     private Scanner scanner;
 

@@ -13,6 +13,6 @@ public class ByeCommand extends Command {
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
         storage.store(list.tasks);
-        ui.showFarewell();
+        super.commandOutput = ui.showFarewell();
     }
 }

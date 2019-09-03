@@ -10,6 +10,6 @@ public class ListTasksCommand extends Command {
      */
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+        super.commandOutput = ui.showList(tasks);
     } // End method.
 }

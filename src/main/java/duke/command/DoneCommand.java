@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
             Task task = list.get(entry);
             task.markAsDone();
 
-            ui.showDone(task.toString());
+            super.commandOutput = ui.showDone(task.toString());
 
         } catch (IllegalArgumentException e) {
             throw new DukeException("You need to specify the task you want to complete!");

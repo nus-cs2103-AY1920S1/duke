@@ -25,7 +25,14 @@ public class Parser {
     public static Command parse(String[] command) throws DukeException {
         try {
             CommandList commandCode = CommandList.valueOf(command[0].toUpperCase());
-            String details = command[1];
+            String details = "";
+
+            try {
+                details = command[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+
+            }
+
             Task task;
             switch (commandCode) {
             case BYE:

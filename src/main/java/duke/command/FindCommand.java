@@ -23,6 +23,6 @@ public class FindCommand extends Command {
                 matchList.add(task);
             } // End if.
         } // End for loop.
-        ui.listFindMatches(matchList);
+        super.commandOutput = ui.listFindMatches(matchList);
     }
 }

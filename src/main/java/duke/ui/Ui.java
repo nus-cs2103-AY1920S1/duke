@@ -22,50 +22,53 @@ public class Ui {
     /**
      * Outputs farewell message.
      */
-    public void showFarewell() {
+    public String showFarewell() {
         String farewellText = "Bye <3 Hope to see you again soon!";
-        System.out.println(farewellText);
         sc.close(); // Close the scanner.
+        return farewellText;
     }
 
     /**
      * Outputs the user's current list of tasks.
      * @param tasks Represents the user's current list.
+     * @returns String informing user about the list status.
      */
-    public void showList(Tasklist tasks) {
+    public String showList(Tasklist tasks) {
         String listText = "Here are the tasks in your list:";
-        System.out.println(listText);
-        listEntries(tasks);
+        String entries = listEntries(tasks);
+        return String.format("%s\n%s\n", listText, entries);
     } // End method.
 
     /**
      * List all entries recorded by Duke; print nothing if no entries are present.
      */
-    private static void listEntries(Tasklist tasks) {
+    private static String listEntries(Tasklist tasks) {
+        String out = "";
         int numEntry = 1;
         for (Task task : tasks.tasks) {
-            System.out.printf("%d. %s\n", numEntry, task.toString());
+            out += String.format("%d. %s\n", numEntry, task.toString());
+            out += "\n";
             numEntry++;
         } // End for loop.
+        return out;
     } // End method.
 
-    private static void listEntries(ArrayList<Task> tasks) {
+    private static String listEntries(ArrayList<Task> tasks) {
+        String out = "";
         int numEntry = 1;
         for (Task task : tasks) {
-            System.out.printf("%d. %s\n", numEntry, task.toString());
+            out += String.format("%d. %s\n", numEntry, task.toString());
+            out += "\n";
             numEntry++;
         } // End for loop.
+        return out;
     } // End method.
 
-    public void listFindMatches(ArrayList<Task> list) {
-        System.out.println("Here are the matching tasks in your list:");
-        listEntries(list);
+    public String listFindMatches(ArrayList<Task> list) {
+        String info = ("Here are the matching tasks in your list:");
+        String entries = listEntries(list);
+        return String.format("%s\n%s\n", info, entries);
     }
-
-    public void invalidCommand() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means. "
-                + "I sure need more sleep...");
-    } // End method.
 
     /**
      * Reads the user's command.
@@ -82,29 +85,26 @@ public class Ui {
      * @param desc Description of the task added.
      * @param size The current size of the list.
      */
-    public void addTaskDialogue(String desc, int size) {
+    public String addTaskDialogue(String desc, int size) {
         String addText = "Got it. I've added this task:";
         String taskWord = size <= 1 ? "task" : "tasks"; // Ensure correct grammar.
         String numTaskText = String.format("Now you have %d %s in the list.", size, taskWord);
 
-        System.out.println(addText);
-        System.out.println("  " + desc);
-        System.out.println(numTaskText);
+        return String.format("%s\n  %s\n%s\n", addText, desc, numTaskText);
     } // End method.
 
 
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return (message);
     }
 
     /**
      * Tell the user that the task has been marked as done.
      * @param message String representation of the task that was marked as done.
      */
-    public void showDone(String message) {
+    public String showDone(String message) {
         String doneText = "Nice! I've marked this task as done: ";
-        System.out.println(doneText);
-        System.out.println("  " + message);
+        return String.format("%s\n  %s\n", doneText, message);
     }
 
     /**
@@ -112,17 +112,15 @@ public class Ui {
      * @param message Represents the deleted task.
      * @param size The current size of the list after deletion.
      */
-    public void showDeleted(String message, int size) {
+    public String showDeleted(String message, int size) {
         String removeText = "Noted. I've removed this task:";
         String taskWord = size <= 1 ? "task" : "tasks"; // Ensure correct grammar.
+        String remaining = String.format("Now you have %d %s in the list.", size, taskWord);
 
-        System.out.println(removeText);
-        System.out.println("  " + message);
-        System.out.printf("Now you have %d %s in the list.\n", size, taskWord);
-
+        return String.format("%s\n  %s\n%s\n", removeText, message, remaining);
     }
 
-    public void showLoadingError() {
-        System.out.println("Error loading savefile.");
+    public String showLoadingError() {
+        return ("Error loading savefile.\n");
     }
 }

@@ -43,11 +43,20 @@ public class Duke {
 
     // Handler Methods.
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response from Duke. Runs the main logic flow of Duke for one command.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            String[] fullCommand = input.split(" ", 2); // Split into command & details
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            return c.commandOutput(); // commandOutput is the text passed to UI.
+
+        } catch (NoSuchElementException e) {
+            return ui.showError(e.getMessage());
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 
     /**

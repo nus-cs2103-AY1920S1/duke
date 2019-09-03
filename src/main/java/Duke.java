@@ -37,7 +37,7 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("/users/dominique/documents/cs2103t/duke/data/duke.txt").run();
     }
 
 

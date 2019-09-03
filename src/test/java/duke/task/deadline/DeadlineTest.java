@@ -16,7 +16,7 @@ class DeadlineTest {
     @Test
     void testToString() {
         Deadline deadline = new Deadline("return books", "2nd of September 2019, 6:00pm");
-        String expected = "[D][���] return books (by: 2nd of September 2019, 6:00pm)";
+        String expected = "[D][✘] return books (by: 2nd of September 2019, 6:00pm)";
         Assertions.assertEquals(expected, deadline.toString());
     }
 }

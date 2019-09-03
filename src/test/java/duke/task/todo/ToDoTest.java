@@ -9,7 +9,7 @@ class ToDoTest {
     @Test
     void testToString() {
         ToDo task = new ToDo("borrow books");
-        String expected = "[T][���] borrow books";
+        String expected = "[T][✘] borrow books";
         Assertions.assertEquals(expected, task.toString());
     }
 }

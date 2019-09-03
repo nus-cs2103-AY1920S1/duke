@@ -16,7 +16,7 @@ class EventTest {
     @Test
     void testToString() {
         Event event = new Event("project meeting", "Friday, 4th of July 2019, 8:00am");
-        String expected = "[E][���] project meeting (at: Friday, 4th of July 2019, 8:00am)";
+        String expected = "[E][✘] project meeting (at: Friday, 4th of July 2019, 8:00am)";
         Assertions.assertEquals(expected, event.toString());
     }
 }

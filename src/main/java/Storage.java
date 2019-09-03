@@ -27,7 +27,7 @@ public class Storage {
 
         ArrayList<Task> listOfTasks = new ArrayList<>();
 
-        try{
+        try {
             checkFileExist();
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
@@ -58,9 +58,9 @@ public class Storage {
     }
 
     /**
-     * Saves current list of tasks to hard drive
+     * Saves current list of tasks to hard drive.
      *
-     * @param listOfTasks List that will be saved to the file
+     * @param listOfTasks List that will be saved to the file.
      */
     public static void save(List<Task> listOfTasks) {
         try {
@@ -85,8 +85,9 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
     /**
-     * Checks if the file exists, if not create a new file
+     * Checks if the file exists, if not create a new file.
      *
      */
     private static void checkFileExist() {

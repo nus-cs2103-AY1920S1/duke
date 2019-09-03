@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class TaskListTest {
     @Test
-    public void addTask_emptyList(){
+    public void addTask_emptyList() {
         ArrayList<Task> list = new ArrayList<>();
         TaskList taskList = new TaskList(list);
 

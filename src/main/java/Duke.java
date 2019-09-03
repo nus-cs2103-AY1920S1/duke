@@ -7,6 +7,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes duke application with the path of the file of the list of tasks.
+     *
+     * @param filePath Path of the file that is being used to load and save the tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

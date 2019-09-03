@@ -16,7 +16,8 @@ public class Parser {
      * @param userInput The rest of user input after the inputType.
      * @throws DukeException If user input is not in the format
      */
-    public static void parse(TaskList taskList, Ui ui, Storage storage, String inputType, String userInput) throws DukeException {
+    public static void parse(
+        TaskList taskList, Ui ui, Storage storage, String inputType, String userInput) throws DukeException {
         if (inputType.equals("todo")) {
             try {
                 String description = userInput.trim();
@@ -57,7 +58,8 @@ public class Parser {
             } catch (IllegalArgumentException e) {
                 throw new DukeException("OOPS!!! Task description/Task by can not be empty");
             } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: deadline [task description] /by [dd/mm/yyyy HHmm]");
+                throw new DukeException("OOPS!!! Format is wrong. "
+                    + "Use: deadline [task description] /by [dd/mm/yyyy HHmm]");
             }
         } else if (inputType.equals("event")) {
             try {
@@ -77,7 +79,7 @@ public class Parser {
             } catch (IllegalArgumentException e) {
                 throw new DukeException("OOPS!!! Task description/Task at can not be empty");
             } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: event [task description] /at [dd/mm/yyyy HHmm]");
+                throw new DukeException("OOPS!!! Format is wrong. Use:event [task description] /at [dd/mm/yyyy HHmm]");
             }
         } else if (inputType.equals("done")) {
             try {
@@ -125,7 +127,7 @@ public class Parser {
      * @return Date Time object if str can be converted.
      * @throws ArrayIndexOutOfBoundsException If string can not be converted
      */
-    public static LocalDateTime dateTimeConverter(String str) throws ArrayIndexOutOfBoundsException{
+    public static LocalDateTime dateTimeConverter(String str) throws ArrayIndexOutOfBoundsException {
         String[] dateTime = str.split(" ");
         String[] date = dateTime[0].split("/");
         String time = dateTime[1];

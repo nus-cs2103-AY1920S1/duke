@@ -39,8 +39,16 @@ public class Duke{
                 case "todo":
                 case "event":
                 case "deadline":
-                    addToTodo(userInput.split(" ", 2)[1], userCommand);
+                    try {
+                        addToTodo(userInput.split(" ", 2)[1], userCommand);
+                    }
+                    //try to catch more exceptions
+                    catch (Exception e) {
+                        dukePrint("☹ OOPS!!! The description of a " + userCommand + " cannot be empty.");
+                    }
                     break;
+                default:
+                    dukePrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
         }

@@ -1,7 +1,7 @@
 package driver;
 
 import exception.DukeException;
-import exception.incompleteInputException;
+import exception.IncompleteInputException;
 import command.Command;
 import command.ListCommand;
 import command.DoneCommand;
@@ -18,7 +18,7 @@ public class Parser {
      *
      */
 
-    public Command parse(String userInput) throws DukeException, incompleteInputException {
+    public Command parse(String userInput) throws DukeException, IncompleteInputException {
                  if (userInput.equalsIgnoreCase("list")) {
                     return new ListCommand();
                 } else if (userInput.contains("done")) {
@@ -37,11 +37,11 @@ public class Parser {
                              (userInput.contains("event")&&(userInput.length()>6)&&userInput.contains("/"))) {
                             return new AddCommand(userInput);
                      } else if(userInput.contains("todo")) {
-                         throw new incompleteInputException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                         throw new IncompleteInputException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                      } else if(userInput.contains("deadline")&&(!(userInput.contains("/")))) {
-                         throw new incompleteInputException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                         throw new IncompleteInputException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
                      } else if (userInput.contains("event")&&(!(userInput.contains("/")))) {
-                         throw new incompleteInputException("\u2639 OOPS!!! The description of an event cannot be empty.");
+                         throw new IncompleteInputException("\u2639 OOPS!!! The description of an event cannot be empty.");
                      } else {
                          throw new DukeException();
                      }

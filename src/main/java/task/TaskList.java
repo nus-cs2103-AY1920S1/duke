@@ -35,21 +35,21 @@ public class TaskList {
         Task temp;
         if(addedTask.contains("todo")) {
             String replaced = addedTask.replace("todo ","");
-            temp = new todoTask(replaced,false);
+            temp = new TodoTask(replaced,false);
             myTaskList.add(temp);
             return temp;
         } else if(addedTask.contains("deadline")) {
             String replaced = addedTask.replace("deadline ","");
             String[] deadLines = replaced.split("by");
             String endTime = deadLines[1];
-            temp = new deadlineTask(deadLines[0].replace("/",""),false,TimeFormatter.convertToDate(endTime));
+            temp = new DeadlineTask(deadLines[0].replace("/",""),false,TimeFormatter.convertToDate(endTime));
             myTaskList.add(temp);
             return temp;
         } else if (addedTask.contains("event")) {
             String replaced = addedTask.replace("event ","");
             String[] events = replaced.split("at");
             String eventTime = events[1];
-            temp = new eventTask(events[0].replace("/",""),false,TimeFormatter.convertToDate(eventTime));
+            temp = new EventTask(events[0].replace("/",""),false,TimeFormatter.convertToDate(eventTime));
             myTaskList.add(temp);
             return temp;
         }

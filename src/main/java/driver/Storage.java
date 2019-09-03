@@ -2,9 +2,9 @@ package driver;
 
 import task.TaskList;
 import task.Task;
-import task.todoTask;
-import task.deadlineTask;
-import task.eventTask;
+import task.TodoTask;
+import task.DeadlineTask;
+import task.EventTask;
 import formatter.TimeFormatter;
 
 //File object serves as your reference to the hard drive file
@@ -39,11 +39,11 @@ public class Storage {
             String current = s.nextLine();
             String[] splitTask = current.split(",");
             if (splitTask[0].equalsIgnoreCase("T")) {
-                myTasksStore.add(new todoTask(splitTask[2], Boolean.parseBoolean(splitTask[1])));
+                myTasksStore.add(new TodoTask(splitTask[2], Boolean.parseBoolean(splitTask[1])));
             } else if (splitTask[0].equalsIgnoreCase("D")) {
-                myTasksStore.add(new deadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
+                myTasksStore.add(new DeadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
             } else if (splitTask[0].equalsIgnoreCase("E")) {
-                myTasksStore.add(new deadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
+                myTasksStore.add(new DeadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
             }
         }
         s.close();
@@ -63,11 +63,11 @@ public class Storage {
                 fw.write(task+ System.lineSeparator());
             } else {
                 if((current.getType()).equalsIgnoreCase("E")) {
-                    eventTask event = (eventTask)current;
+                    EventTask event = (EventTask)current;
                     String task = String.format("%s,%b,%s,%s", event.getType(),event.getDoneStatus(),event.getName(),TimeFormatter.convertToString(event.getTime()));
                     fw.write(task+ System.lineSeparator());
                 } else {
-                    deadlineTask deadline = (deadlineTask)current;
+                    DeadlineTask deadline = (DeadlineTask)current;
                     String task = String.format("%s,%b,%s,%s", deadline.getType(),deadline.getDoneStatus(),deadline.getName(),TimeFormatter.convertToString(deadline.getTime()));
                     fw.write(task+System.lineSeparator());
                 }

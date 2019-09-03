@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
      */
 
     public String formatOutput() {
-        return textFormatter.deleteFormat(removed,reference.getSize());
+        return TextFormatter.deleteFormat(removed,reference.getSize());
     }
 
     /**

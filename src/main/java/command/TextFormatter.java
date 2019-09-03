@@ -1,12 +1,14 @@
 package command;
-import java.util.ArrayList;
+
 import task.Task;
+import java.util.ArrayList;
+
 
 /**
  *
  */
 
-public class textFormatter {
+public class TextFormatter {
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

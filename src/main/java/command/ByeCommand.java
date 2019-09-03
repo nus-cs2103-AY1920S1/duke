@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
      */
 
     public String formatOutput() {
-        return textFormatter.byeFormat();
+        return TextFormatter.byeFormat();
     }
 
     /**

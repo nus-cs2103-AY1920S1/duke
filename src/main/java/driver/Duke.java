@@ -6,7 +6,7 @@ import java.util.Scanner;
 import task.TaskList;
 import command.HelloCommand;
 import command.Command;
-import command.textFormatter;
+import command.TextFormatter;
 import command.ByeCommand;
 
 /**
@@ -58,7 +58,7 @@ public class Duke {
                 Command curr = myParser.parse(temp);
                 curr.executeCommand(myTaskList, myUserInterface);
             } catch (Exception err) {
-                myUserInterface.printError(textFormatter.errorFormat(err));
+                myUserInterface.printError(TextFormatter.errorFormat(err));
             }
         }
 

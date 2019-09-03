@@ -12,7 +12,7 @@ public class ListCommand extends Command {
 
     public String formatOutput() {
 
-        return textFormatter.listFormat(reference.getList());
+        return TextFormatter.listFormat(reference.getList());
     }
 
     /**

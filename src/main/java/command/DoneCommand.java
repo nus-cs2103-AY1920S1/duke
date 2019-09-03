@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
 
     public String formatOutput() {
 
-        return textFormatter.doneFormat(done);
+        return TextFormatter.doneFormat(done);
     }
 
     /**

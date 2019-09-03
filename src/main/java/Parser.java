@@ -23,6 +23,7 @@ public class Parser {
         keywordToCommand.put("todo", new AddCommand());
         keywordToCommand.put("deadline", new AddCommand());
         keywordToCommand.put("event", new AddCommand());
+        keywordToCommand.put("find", new FindCommand());
         return keywordToCommand;
     }
 
@@ -134,5 +135,16 @@ public class Parser {
         default:
             throw new DukeException("Invalid task input.");
         }
+    }
+
+    /**
+     * Returns query to match to Tasks.
+     * 
+     * @param input Input entered by user.
+     * @return String containing query.
+     */
+    public static String parseFind(String input) {
+        String phrase = input.split("find")[1];
+        return phrase;
     }
 }

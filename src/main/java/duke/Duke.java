@@ -10,6 +10,11 @@ import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * <h1>Duke</h1>
  * Stores user-defined tasks.
@@ -18,7 +23,7 @@ import duke.module.Ui;
  * @version v0.1
  * @since   2019-09-01
  */
-public class Duke {
+public class Duke extends Application {
 
     /** Handles user inputs and outputs. */
     private Ui ui;
@@ -59,6 +64,16 @@ public class Duke {
                 this.ui.printToUser(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label duke = new Label("DUKE"); // Creating a new Label control
+        Scene scene = new Scene(duke, 500, 400); // Setting the scene to be our Label
+
+        stage.setTitle("DUKE");
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
     
 }

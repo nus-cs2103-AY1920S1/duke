@@ -26,7 +26,7 @@ public class TaskList {
      * @return returns the task that was deleted
      */
     public Task remove(int i) {
-        return list.remove(i);
+        return list.remove(i-1);
     }
 
     /**
@@ -60,7 +60,7 @@ public class TaskList {
     public String toString() {
         String res = "";
         for (int i = 0; i < list.size(); i++) {
-            res += list.get(i).order + "." + list.get(i) + "\n";
+            res += (i+1) + "." + list.get(i) + "\n";
         }
         return res;
     }

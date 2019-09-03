@@ -31,56 +31,74 @@ public class Verify {
      * @param formatter date formatter to catch wrong date format exceptions
      * @throws DukeException in the case of invalid input
      */
-    public static void checkCommandValidity(String command, TaskList list, DateTimeFormatter formatter)
+    public static String checkCommandValidity(String command, TaskList list, DateTimeFormatter formatter)
             throws DukeException {
+        String message;
         if (command.startsWith("done")) {
             if (command.split(" ").length < 2) {
-                throw new DukeException("whoops! please enter a number after done");
+                message = "whoops! please enter a number after done";
+                throw new DukeException(message);
             } else if (!isNum(command.split(" ")[1])) {
-                throw new DukeException("whoops! you need to enter a number, not anything else");
+                message = "whoops! you need to enter a number, not anything else";
+                throw new DukeException(message);
             } else if ((Integer.parseInt(command.split(" ")[1])) >= list.list.size()) {
-                throw new DukeException("oh! that task doesn't exist! please enter a task within the list!");
+                message = "oh! that task doesn't exist! please enter a task within the list!";
+                throw new DukeException(message);
             }
         } else if (command.startsWith("delete")) {
             if (command.split(" ").length < 2) {
-                throw new DukeException("whoops! please enter a number after delete");
+                message = "whoops! please enter a number after delete";
+                throw new DukeException(message);
             } else if (!isNum(command.split(" ")[1])) {
-                throw new DukeException("whoops! you need to enter a number, not anything else");
+                message = "whoops! you need to enter a number, not anything else";
+                throw new DukeException(message);
             } else if ((Integer.parseInt(command.split(" ")[1]) - 1) >= list.list.size()) {
-                throw new DukeException("oh! that task doesn't exist! please enter a task within the list!");
+                message = "oh! that task doesn't exist! please enter a task within the list!";
+                throw new DukeException(message);
             }
         } else if (command.startsWith("todo")) {
             if (command.length() <= 5) {
-                throw new DukeException("oopsie! did you forget to add a description for your todo?");
+                message = "oopsie! did you forget to add a description for your todo?";
+                throw new DukeException(message);
             }
         } else if (command.startsWith("deadline")) {
             if (command.length() <= 9) {
-                throw new DukeException("oops! did you forget to add a description to your deadline?");
+                message = "oops! did you forget to add a description to your deadline?";
+                throw new DukeException(message);
             } else if (command.substring(9).split(" /by ").length < 2) {
-                throw new DukeException("oh no! the by date of a deadline cannot be empty!");
+                message = "oh no! the by date of a deadline cannot be empty!";
+                throw new DukeException(message);
             }
             try {
                 LocalDateTime.parse(command.substring(9).split(" /by ")[1], formatter);
             } catch (DateTimeParseException e) {
-                throw new DukeException("oh dear, your date is invalid! please check if you entered it right!");
+                message = "oh dear, your date is invalid! please check if you entered it right!";
+                throw new DukeException(message);
             }
         } else if (command.startsWith("event")) {
             if (command.length() <= 6) {
-                throw new DukeException("whoops! did you forget to add a description to your event?");
+                message = "whoops! did you forget to add a description to your event?";
+                throw new DukeException(message);
             } else if (command.substring(6).split(" /at ").length < 2) {
-                throw new DukeException("golly! the from/to dates of an event cannot be empty!");
+                message = "golly! the from/to dates of an event cannot be empty!";
+                throw new DukeException(message);
             } else if (command.substring(6).split(" /at ")[1].split(" to ").length < 2) {
-                throw new DukeException("gosh! i can't find your from and to dates! did you enter both?");
+                message = "gosh! i can't find your from and to dates! did you enter both?";
+                throw new DukeException(message);
             }
             try {
                 LocalDateTime.parse(command.substring(6).split(" /at ")[1].split(" to ")[0], formatter);
                 LocalDateTime.parse(command.substring(6).split(" /at ")[1].split(" to ")[1], formatter);
             } catch (DateTimeParseException e) {
-                throw new DukeException("oh dear, your date is invalid! please check if you entered it right!");
+                message = "oh dear, your date is invalid! please check if you entered it right!";
+                throw new DukeException(message);
             }
         } else if (command.equals("bye") || command.equals("list")) {
         } else {
-            throw new DukeException("blast! i don't understand that!");
+            message = "blast! i don't understand that!";
+            throw new DukeException(message);
         }
+        message = "ok";
+        return message;
     }
 }

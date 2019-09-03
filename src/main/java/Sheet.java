@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -8,7 +6,6 @@ import java.util.List;
  */
 public class Sheet {
     private List<Task> tasks;
-    private Storage storage = new Storage(myPaths.TASK_LIST);
     private int numOfTask;
     private Ui ui = new Ui();
 
@@ -22,34 +19,32 @@ public class Sheet {
         numOfTask = tasks.size();
     }
 
+    public List<Task> getList() {
+        return this.tasks;
+    }
+
     /**
      * Adds a task to the list.
      *
      * @param task Task to be added to the list.
-     * @throws IOException If errors occurs when accessing the file that contains the list.
      */
-    public void add(Task task) throws IOException{
+    public void add(Task task){
         tasks.add(task);
-        storage.save(tasks);
         ui.showAdd(task.toString().trim());
         this.numOfTask++;
         ui.showCount(numOfTask);
-        ui.showLine();
     }
 
     /**
      * Deletes a task from the list.
      *
      * @param index Serial index of the task in list.
-     * @throws IOException If errors occurs when accessing the file that contains the list.
      */
-    public void delete(int index) throws IOException{
+    public void delete(int index){
         Task removed = tasks.remove(index - 1);
-        storage.save(tasks);
         ui.showRemove(removed.toString().trim());
         this.numOfTask--;
         ui.showCount(numOfTask);
-        ui.showLine();
     }
 
     /**
@@ -65,12 +60,10 @@ public class Sheet {
      * Marks the task as done.
      *
      * @param index Serial index of the task in list.
-     * @throws IOException If errors occurs when accessing the file that contains the list.
      */
-    public void markAsDone(int index) throws IOException {
+    public void markAsDone(int index){
         Task doneTask = tasks.get(index - 1).finish();
         tasks.set(index - 1, doneTask);
-        storage.save(tasks);
         ui.showDone(doneTask.toString().trim());
     }
 
@@ -86,24 +79,27 @@ public class Sheet {
     /**
      * Outputs the task list.
      *
-     * @throws FileNotFoundException If the file containing the list is not found.
      */
-    public void showList() throws FileNotFoundException{
+    public void showList() {
         ui.showListHeader();
 
         for (int i = 0; i < numOfTask; i++) {
             ui.showTask(i + 1, tasks.get(i).toString().trim());
         }
-        ui.showLine();
+    }
+
+    public void clearList() {
+        ui.showClearList();
+        tasks.clear();
+        numOfTask = 0;
     }
 
     /**
      * Searches for tasks containing the keyword.
      *
      * @param keyword Keyword for searching.
-     * @throws IOException If errors occurs when accessing the file that contains the list.
      */
-    public void find(String keyword) throws IOException {
+    public void find(String keyword) {
         ui.showSearchHeader();
         int count = 0;
         for (Task task : tasks) {
@@ -115,7 +111,6 @@ public class Sheet {
         if (count == 0) {
             ui.showNotFound();
         }
-        ui.showLine();
     }
 
     /**

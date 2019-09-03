@@ -15,13 +15,7 @@ public class DukeException extends Exception{
     this.message = msg;
     }
 
-    /**
-     * ToString method.
-     *
-     * @return String representation of the DukeException object.
-     */
-    @Override
-    public String toString() {
-        return message;
+    public String getMessege() {
+        return this.message;
     }
 }

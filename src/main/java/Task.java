@@ -70,18 +70,20 @@ public class Task {
         Boolean isDone = (s.charAt(4) == '\u2713');
         switch (s.charAt(1)) {
         case 'T':
-                return new Todo(s.substring(7), isDone);
+                return isDone ? new Todo(s.substring(7)).finish() : new Todo(s.substring(7));
         case 'E':
                 String description = s.substring(7, s.lastIndexOf('(') - 1);
                 String[] times = s.substring(s.lastIndexOf('(') - 1).split(" ");
                 LocalDateTime start = LocalDateTime.parse(times[2], formatter);
                 LocalDateTime end = LocalDateTime.parse(times[5],formatter);
-                return new Event(description, start, end, isDone);
+                Event e = new Event(description, start, end);
+                return isDone ? e.finish() : e;
         case 'D':
                 String description2 = s.substring(7, s.lastIndexOf('(') - 1);
                 String[] deadlines = s.substring(s.lastIndexOf('(') - 1).split(" ");
                 LocalDateTime dl = LocalDateTime.parse(deadlines[2],formatter);
-                return new Deadline(description2, dl, isDone);
+                Deadline d = new Deadline(description2, dl);
+                return isDone ? d.finish() : d;
         default:
                 return new Task(s.substring(7));
         }

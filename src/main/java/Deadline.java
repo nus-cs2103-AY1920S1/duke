@@ -25,7 +25,7 @@ public class Deadline extends Task {
      * @param deadline Date and time by which the task is due.
      * @param isDone True if the task is finished.
      */
-    public Deadline(String description, LocalDateTime deadline, boolean isDone) {
+    private Deadline(String description, LocalDateTime deadline, boolean isDone) {
         super(description, isDone);
         this.deadline = deadline;
     }
@@ -47,8 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        TimeManager tm = new TimeManager();
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description +
-                " (by: " + tm.printTime(deadline) + " )\n";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description
+                + " (by: " + DateUtil.printTime(deadline) + " )\n";
     }
 }

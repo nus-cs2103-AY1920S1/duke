@@ -1,9 +1,10 @@
+import java.util.Scanner;
+
 /**
  * Contains responses and interactions with the user.
  */
 public class Ui {
 
-    private static final String LINE = "    ____________________________________________________________\n";
     private static final String INDENT = "     ";
 
     /**
@@ -22,22 +23,26 @@ public class Ui {
      * Displays a long line.
      */
     public void showLine() {
-        System.out.printf(LINE);
+        System.out.printf("    ____________________________________________________________\n");
     }
 
     /**
      * Displays a welcome message.
      */
     public void showWelcome() {
-        System.out.printf(LINE + INDENT + "Hello! I'm Duke\n" + INDENT + "What can I do for you?\n"
-                + LINE);
+        System.out.printf(INDENT + "Hello! I'm Duke\n" + INDENT + "What can I do for you?\n");
+        showLine();
     }
 
     /**
      * Displays a goodbye message.
      */
     public void showGoodbye() {
-        System.out.printf(LINE + INDENT + "Bye. Hope to see you again soon!\n" + LINE);
+        System.out.printf(INDENT + "Bye. Hope to see you again soon!\n");
+    }
+
+    public void sayHi() {
+        System.out.printf(INDENT + "Hi :-D Say Something to me!\n");
     }
 
     /**
@@ -46,8 +51,7 @@ public class Ui {
      * @param doneTask Task done.
      */
     public void showDone(String doneTask) {
-        System.out.printf(LINE + INDENT + "Nice! I've marked this task as done: \n" + INDENT +
-                doneTask + "\n" + LINE);
+        System.out.printf(INDENT + "Nice! I've marked this task as done: \n" + INDENT  + " " + doneTask + "\n");
     }
 
     /**
@@ -56,21 +60,21 @@ public class Ui {
      * @param task Task added.
      */
     public void showAdd(String task) {
-        System.out.printf(LINE + INDENT + "Got it. I've added this task: \n" + INDENT + " " + task + "\n");
+        System.out.printf(INDENT + "Got it. I've added this task: \n" + INDENT + " " + task + "\n");
     }
 
     /**
      * Displays a header for the task list contends.
      */
     public void showListHeader() {
-        System.out.printf(LINE + INDENT + "Here are the tasks in your list:\n");
+        System.out.printf(INDENT + "Here are the tasks in your list:\n");
     }
 
     /**
      * Displays a header for the task search.
      */
     public void showSearchHeader() {
-        System.out.printf(LINE + INDENT + "Here are the matching tasks in your list:\n");
+        System.out.printf(INDENT + "Here are the matching tasks in your list:\n");
     }
 
     /**
@@ -79,7 +83,7 @@ public class Ui {
      * @param removed Task removed.
      */
     public void showRemove(String removed) {
-        System.out.printf(LINE + INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
+        System.out.printf(INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
     }
 
     /**
@@ -89,49 +93,15 @@ public class Ui {
         System.out.printf(INDENT + "Hummm, nothing has been found.\n");
     }
 
-    /**
-     * Displays the error message for unknown user command.
-     */
-    public void showUnknownError() {
-        System.out.printf(LINE + INDENT + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + LINE);
-    }
-
-    /**
-     * Displays an error message for the app's customized exceptions.
-     *
-     * @param e Exception to be printed.
-     */
-    public void printDukeException(DukeException e) {
-        System.out.printf(LINE + INDENT + e.toString() + "\n"  + LINE);
-    }
-
-    /**
-     * Displays an error message when the task list file is not found.
-     */
-    public void printFileNotFoundException() {
-        System.out.printf(LINE + INDENT + "oops, task list is not found :o\n" + LINE);
-    }
-
-    /**
-     * Displays the error message when file read and write goes wrong.
-     */
-    public void printIOException() {
-        System.out.printf(LINE + INDENT + "oops, something went wrong :(\n" + LINE);
-    }
-
-    /**
-     * Displays the error message when user enters an none-integer for the task index.
-     */
-    public void printTaskIndexMismatchException() {
-        System.out.printf(LINE + INDENT +
-                "☹ OOPS!!! I cannot recognise that task index. :-(" + "\n" + LINE);
+    public void showError(String message) {
+        System.out.printf(INDENT + message + "\n");
     }
 
     /**
      * Displays and error message when the file is unable to be loaded.
      */
     public void showLoadingError() {
-        System.out.printf(LINE + INDENT + "oops, something went wrong\n" + LINE);
+        System.out.printf(INDENT + "oops, something went wrong\n");
     }
 
     /**
@@ -147,6 +117,10 @@ public class Ui {
         }
     }
 
+    public void showClearList() {
+        System.out.printf(INDENT + "Great! I've removed all your tasks!\n");
+    }
+
     /**
      * Displays the task.
      *
@@ -156,4 +130,10 @@ public class Ui {
     public void showTask(int index, String task) {
         System.out.printf(INDENT + " " + index + ". " + task + "\n");
     }
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
 }
+

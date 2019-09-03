@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Contains utility functions for managing LocalDataTime object.
  */
-public class TimeManager {
+public class DateUtil {
 
     /**
      * Creates a LocalDateTime object form its String representation.
@@ -14,15 +14,17 @@ public class TimeManager {
      * @return LocalDateTime object represented by the input String.
      * @throws IllegalTimeFormatException If the input String is not convertible to a LocalDateTime object.
      */
-    public LocalDateTime getTime(String s) throws IllegalTimeFormatException{
-        String[] dateTime = s.trim().split(" ");
-        String[] date = dateTime[0].split("/");
-        String[] temp = new String[5];
+    public static LocalDateTime toTime(String s) throws IllegalTimeFormatException{
+        String[] dateTime = s.trim().split(" "); // split syntax and date and time
+        String[] date = dateTime[0].split("/"); // split date into day, month and year
 
+        String[] temp = new String[5];
         for (int i = 0; i < 5; i++) {
             if (i < date.length) {
+                // store date information into a String array that toTime method understands
                 temp[i] = date[i];
             } else {
+                // use 00 to replace missing date and time information
                 temp[i] = "00";
             }
         }
@@ -37,22 +39,23 @@ public class TimeManager {
             date[4] = time.substring(2);
         } else {
             if (dateTime.length > 1) {
-                // time is stored in dateTime[1]
+                // time is stored in dateTime[1] because of missing date
                 time = dateTime[1];
                 if (time.length() < 3) {
                     throw new IllegalTimeFormatException(
-                            "☹ Sorry, I couldn't recognise the time. Enter time in the format of 'hhmm' :D");
+                            "☹ Sorry, I couldn't recognise the time.\n"
+                            + "     Enter time in the format of 'hhmm' :D");
                 }
                 date[3] = time.substring(0, 2);
                 date[4] = time.substring(2);
             }
         }
-        return toTime(date);
+        return toLocalDateTime(date);
     }
 
-    private LocalDateTime toTime(String[] times) throws IllegalTimeFormatException{
+    private static LocalDateTime toLocalDateTime(String[] times) throws IllegalTimeFormatException{
         try {
-            LocalDateTime current = LocalDateTime.now();
+            LocalDateTime current = LocalDateTime.now(); // get current time
             int year = times[2].equals("00") ? current.getYear() : Integer.parseInt(times[2]);
             int month = times[1].equals("00") ? current.getMonth().getValue() : Integer.parseInt(times[1]);
             int day = times[0].equals("00") ? current.getDayOfMonth() : Integer.parseInt(times[0]);
@@ -61,12 +64,12 @@ public class TimeManager {
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (DateTimeException e) {
             throw new IllegalTimeFormatException(
-                    "☹ Sorry, I couldn't recognise the time.\n" +
-                            "     Try enter in the format of 'dd/MM/yy hhmm' :D");
+                    "☹ Sorry, I couldn't recognise the time.\n"
+                            + "     Try enter in the format of 'dd/MM/yy hhmm' :D");
         } catch (NumberFormatException nfe) {
             throw new IllegalTimeFormatException(
-                    "☹ Sorry, only numbers can be recognised for time.\n" +
-                            "     Try enter in the format of 'dd/MM/yy hhmm' :D");
+                    "☹ Sorry, only numbers can be recognised for time.\n"
+                            + "     Try enter in the format of 'dd/MM/yy hhmm' :D");
         }
     }
 
@@ -76,7 +79,7 @@ public class TimeManager {
      * @param dt LocalDateTime object to be printed.
      * @return Formatted String representation of the date and time stored in the LocalDateTime object.
      */
-    public String printTime(LocalDateTime dt) {
+    public static String printTime(LocalDateTime dt) {
         DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
         return dt.format(customFormatter);
     }

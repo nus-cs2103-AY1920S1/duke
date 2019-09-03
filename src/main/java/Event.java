@@ -30,7 +30,7 @@ public class Event extends Task{
      * @param end Date and time when the event ends.
      * @param isDone True if the taks is finished.
      */
-    public Event(String description, LocalDateTime start, LocalDateTime end, boolean isDone) {
+    private Event(String description, LocalDateTime start, LocalDateTime end, boolean isDone) {
         super(description, isDone);
         this.startTime = start;
         this.endTime = end;
@@ -53,8 +53,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        TimeManager tm = new TimeManager();
-        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + tm.printTime(startTime)
-                + " , to " + tm.printTime(endTime)+ " )\n";
+        return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + DateUtil.printTime(startTime)
+                + " , to " + DateUtil.printTime(endTime)+ " )\n";
     }
 }

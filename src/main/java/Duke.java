@@ -30,7 +30,23 @@ public class Duke {
      * Drives the main class.
      */
     public void run() {
-        parser.start(sheet);
+        ui.showLogo();
+        ui.showWelcome();
+
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(sheet, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
     }
 
     /**

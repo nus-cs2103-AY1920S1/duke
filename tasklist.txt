@@ -1,3 +1,4 @@
 todo [1]johns birthday
-deadline [1]return book/byaug 2019 wpm
+deadline [1]return book/by02/02/2019 0600
 todo [1]lol
+deadline [1]monthsarry/by12/02/2020 2000

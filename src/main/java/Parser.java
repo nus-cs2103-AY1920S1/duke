@@ -13,7 +13,6 @@ public class Parser {
     private CommandType commandType;
     private boolean isDone;
     private String description;
-    private String date = "";
     private LocalDateTime date;
     private boolean isSafe = true;
 
@@ -21,7 +20,6 @@ public class Parser {
         Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
                 + "\\s*(?<completionstatus>(\\[[01]\\])?)"
                 + "\\s*(?<description>([\\w\\s\\d]+)?)"
-                + "(?:(/by|/at))?(?<date>([\\w\\s\\d+]+)?)");
                 + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
         if (!matcher.find()) {
@@ -30,7 +28,6 @@ public class Parser {
                     "    ____________________________________________________________");
             isSafe= false;
         }else {
-            switch (matcher.group("commandWord")) {
             switch (matcher.group("commandWord").trim()) {
             case "list":
                 commandType = CommandType.LIST;
@@ -59,7 +56,6 @@ public class Parser {
             isDone = matcher.group("completionstatus").equals("[1]");
             description = matcher.group("description").trim();
             if (!matcher.group("date").isEmpty()) {
-                date = matcher.group("date").trim();
                 // Parsing the date
                 DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
                 date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
@@ -81,7 +77,6 @@ public class Parser {
         return description;
     }
 
-    public String getDate() {
     public LocalDateTime getDate() {
         return date;
     }

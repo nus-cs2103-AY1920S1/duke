@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -38,5 +40,12 @@ public class Duke {
         }
 
         ui.printLine("Bye. Hope to see you again soon!");
+    }
+
+    /**
+     * TODO.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

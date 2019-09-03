@@ -35,6 +35,9 @@ public class TaskList {
      * Displays the tasklist
      */
     public String getListAsString() {
+        if (count == 0) {
+            return "You have no tasks in your list!";
+        }
         String result = "Here are the tasks in your list:\n";
         for (Task t : taskList) {
             String current = t.getIndex() + "." + t + "\n";

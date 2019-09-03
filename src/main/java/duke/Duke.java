@@ -28,75 +28,97 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke instance's execution.
+     * Creates a new Duke instance, no-argument version.
+     */
+    Duke() {
+        this("data/duke.txt");
+    }
+
+    /**
+     * Starts Duke's execution, used for command-line execution.
      */
     private void run() {
-        this.ui.showWelcome();
+        System.out.println(this.ui.showWelcome());
 
         String input = this.ui.getInput();
         while (input != null) {
-            try {
-                String command = Parser.extractCommand(input);
-
-                switch (command) {
-                case "bye": {
-                    this.ui.showGoodbye();
-                    System.exit(0);
-                    break;
-                }
-
-                case "list": {
-                    this.ui.showTasks(this.tasks.toString());
-                    break;
-                }
-
-                case "done":
-                case "delete": {
-                    int taskId = Integer.parseInt(Parser.extractId(input));
-
-                    if (command.equals("delete")) {
-                        Task deletedTask = this.tasks.deleteTask(taskId);
-                        this.ui.showTaskDeletion(deletedTask);
-                    }
-
-                    if (command.equals("done")) {
-                        Task doneTask = this.tasks.markDone(taskId);
-                        this.ui.showTaskDone(doneTask);
-                    }
-
-                    break;
-                }
-
-                case "find": {
-                    String query = Parser.extractQuery(input);
-                    this.ui.showQuery(this.tasks.query(query));
-                    break;
-                }
-
-                case "todo":
-                case "deadline":
-                case "event": {
-                    Task newTask = Parser.parseTask(input);
-                    this.tasks.addTask(newTask);
-                    this.ui.showTaskAdded(newTask);
-                    break;
-                }
-
-                default: {
-                    this.ui.showException(new DukeException("Sorry I do not understand. Please try again."));
-                }
-                }
-
-                this.storage.persist(this.tasks.getTasks());
-            } catch (DukeException e) {
-                this.ui.showException(e);
-            }
+            String output = process(input);
+            System.out.println(output);
 
             input = this.ui.getInput();
         }
 
-        this.ui.showGoodbye();
+        System.out.println(this.ui.showGoodbye());
         System.exit(0);
+    }
+
+    /**
+     * Obtains output from Duke given an input string.
+     *
+     * @param input Input string
+     * @return Duke output
+     */
+    String process(String input) {
+        StringBuilder output = new StringBuilder();
+
+        try {
+            String command = Parser.extractCommand(input);
+
+            switch (command) {
+            case "bye": {
+                output.append(this.ui.showGoodbye());
+                System.exit(0);
+                break;
+            }
+
+            case "list": {
+                output.append(this.ui.showTasks(this.tasks.toString()));
+                break;
+            }
+
+            case "done":
+            case "delete": {
+                int taskId = Integer.parseInt(Parser.extractId(input));
+
+                if (command.equals("delete")) {
+                    Task deletedTask = this.tasks.deleteTask(taskId);
+                    output.append(this.ui.showTaskDeletion(deletedTask));
+                }
+
+                if (command.equals("done")) {
+                    Task doneTask = this.tasks.markDone(taskId);
+                    output.append(this.ui.showTaskDone(doneTask));
+                }
+
+                break;
+            }
+
+            case "find": {
+                String query = Parser.extractQuery(input);
+                output.append(this.ui.showQuery(this.tasks.query(query)));
+                break;
+            }
+
+            case "todo":
+            case "deadline":
+            case "event": {
+                Task newTask = Parser.parseTask(input);
+                this.tasks.addTask(newTask);
+                output.append(this.ui.showTaskAdded(newTask));
+                break;
+            }
+
+            default: {
+                output.append(this.ui.showException(new DukeException("Sorry I do not understand. Please try again.")));
+            }
+            }
+
+            this.storage.persist(this.tasks.getTasks());
+        } catch (DukeException e) {
+            output.append(this.ui.showException(e));
+        }
+
+        return output.toString();
     }
 
     /**

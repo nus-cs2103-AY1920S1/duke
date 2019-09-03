@@ -1,6 +1,7 @@
 package org.duke.ui;
 
 import org.duke.DukeException;
+import org.duke.cmd.CommandDispatcher;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -62,4 +63,6 @@ public interface DukeIO {
     <T> T withDialogBlock(Supplier<T> action, T fallback);
 
     void listen();
+
+    void setCommandDispatcher(CommandDispatcher commandDispatcher);
 }

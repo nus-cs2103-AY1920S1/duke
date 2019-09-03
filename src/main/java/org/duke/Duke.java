@@ -9,7 +9,6 @@ import org.duke.task.DeadlineTask;
 import org.duke.task.EventTask;
 import org.duke.task.Task;
 import org.duke.task.TaskType;
-import org.duke.ui.DukeConsoleIO;
 import org.duke.ui.DukeIO;
 import org.duke.util.CounterDecorator;
 
@@ -33,9 +32,10 @@ public class Duke {
     private final DukeIO io;
     private ArrayList<Task> taskList;
 
-    private Duke() {
+    public Duke(DukeIO io) {
+        this.io = io;
+
         this.dispatcher = new CommandDispatcher();
-        this.io = new DukeConsoleIO(this.dispatcher);
         //Bind command handlers
         this.dispatcher.bindCommand("list", this::displayList);
         this.dispatcher.bindCommand("done", this::markAsDone);
@@ -48,12 +48,8 @@ public class Duke {
         this.dispatcher.setUnknownCommandHandler(cmd -> {
             throw new DukeException("I'm sorry, but I don't know what that means. :-(");
         });
-    }
+        this.io.setCommandDispatcher(this.dispatcher);
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-//        Application.launch(DukeFx.class, args);
     }
 
     private void addTask(Task t) {
@@ -185,7 +181,7 @@ public class Duke {
         }
     }
 
-    private void run() {
+    public void run() {
         this.loadStorage();
         //Start off greeting the user.
         this.io.withDialogBlock(() -> {
@@ -195,6 +191,9 @@ public class Duke {
 
         //Start listen loop.
         this.io.listen();
+    }
+
+    public void save() {
         this.io.withDialogBlock(() -> this.saveStorage(this.taskList));
     }
 }

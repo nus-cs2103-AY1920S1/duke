@@ -1,10 +1,10 @@
 package org.duke.ui;
 
+import org.duke.Duke;
 import org.duke.DukeException;
 import org.duke.cmd.CommandDispatcher;
 
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
@@ -22,12 +22,9 @@ public class DukeConsoleIO implements DukeIO {
 
     /**
      * Constructs a DukeIO instance wrapping standard input.
-     * @param dispatcher Command dispatcher to use
      */
-    public DukeConsoleIO(CommandDispatcher dispatcher) {
+    private DukeConsoleIO() {
         this.scanner = new Scanner(System.in);
-        Objects.requireNonNull(dispatcher, "dispatcher");
-        this.commandDispatcher = dispatcher;
     }
 
     /**
@@ -66,12 +63,22 @@ public class DukeConsoleIO implements DukeIO {
         }
     }
 
+    public static void main(String[] args) {
+        DukeConsoleIO io = new DukeConsoleIO();
+        Duke duke = new Duke(io);
+        duke.run();
+        duke.save();
+    }
 
     /**
      * Start running the listen loop, and respond to commands.
      */
     @Override
     public void listen() {
+        if (commandDispatcher == null) {
+            this.withDialogBlock(() -> say("No command handlers configured!"));
+            return;
+        }
         //While there is still input from user
         while (scanner.hasNextLine()) {
             //Read single line of user input, and remove extra spaces
@@ -83,5 +90,10 @@ public class DukeConsoleIO implements DukeIO {
                break;
             }
         }
+    }
+
+    @Override
+    public void setCommandDispatcher(CommandDispatcher commandDispatcher) {
+        this.commandDispatcher = commandDispatcher;
     }
 }

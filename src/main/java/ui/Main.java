@@ -14,7 +14,7 @@ import main.Duke;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/duke.txt");
+    private Duke duke = new Duke("data/duke.txt", true);
 
     @Override
     public void start(Stage stage) {

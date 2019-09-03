@@ -8,7 +8,6 @@ import task.TaskList;
 import ui.Ui;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Entry point of the Duke application.
@@ -28,6 +27,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
+        ui.showWelcome();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -38,12 +38,28 @@ public class Duke {
     }
 
     /**
-     * Collects input from users.
-     * Prints exit message.
-     * Saves task list into hard disk.
+     * Initializes Duke to use GUI if isGui is true
+     * Loads task list from hard disk if file is found.
+     * Else create an empty task list.
+     *
+     * @param filePath directory where task list is stored
+     */
+    public Duke(String filePath, boolean isGui) {
+        this(filePath);
+        if (isGui) {
+            ui = new Ui(true);
+            ui.showWelcome();
+        }
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
+    /**
+     * Collects input from users and executes relevant command.
      */
     public void run() {
-        ui.showWelcome();
         boolean canEnd = false;
         while (!canEnd) {
             try {
@@ -52,22 +68,31 @@ public class Duke {
                 command.execute(tasks, ui, storage);
                 canEnd = command.canEnd();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showLoadingError(e.getMessage());
             }
-        }
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Collects input from command and executes relevant command
+     * in GUI.
+     *
+     * @param input is the user input
+     * @return String message to notify user of their input result
+     */
     public String getResponse(String input) {
-        return "haha";
+        try {
+            Command command = new Parser().parse(input);
+            command.execute(tasks, ui, storage);
+            return ui.getDisplayMsg();
+        } catch (DukeException e) {
+            ui.showLoadingError(e.getMessage());
+            return ui.getDisplayMsg();
+        }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
+        Duke duke = new Duke("data/duke.txt", false);
         duke.run();
     }
 }

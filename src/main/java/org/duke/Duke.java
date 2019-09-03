@@ -1,5 +1,7 @@
 package org.duke;
 
+import org.duke.cmd.Command;
+import org.duke.cmd.CommandDispatcher;
 import org.duke.json.JsonParser;
 import org.duke.json.JsonWriter;
 import org.duke.json.ValueHandler;
@@ -7,7 +9,7 @@ import org.duke.task.DeadlineTask;
 import org.duke.task.EventTask;
 import org.duke.task.Task;
 import org.duke.task.TaskType;
-import org.duke.ui.Command;
+import org.duke.ui.DukeConsoleIO;
 import org.duke.ui.DukeIO;
 import org.duke.util.CounterDecorator;
 
@@ -27,21 +29,23 @@ public class Duke {
             "What can I do for you?"
     };
     private static final String SAVE_PATH = "./duke.json";
-    private DukeIO io;
+    private final CommandDispatcher dispatcher;
+    private final DukeIO io;
     private ArrayList<Task> taskList;
 
     private Duke() {
-        this.io = new DukeIO();
+        this.dispatcher = new CommandDispatcher();
+        this.io = new DukeConsoleIO(this.dispatcher);
         //Bind command handlers
-        this.io.bindCommand("list", this::displayList);
-        this.io.bindCommand("done", this::markAsDone);
-        this.io.bindCommand("bye", this::handleBye);
-        this.io.bindCommand("deadline", this::makeDeadlineTask);
-        this.io.bindCommand("event", this::makeEventTask);
-        this.io.bindCommand("todo", this::makeToDoTask);
-        this.io.bindCommand("delete", this::deleteTask);
-        this.io.bindCommand("find", this::findTasks);
-        this.io.setUnknownCommandHandler(cmd -> {
+        this.dispatcher.bindCommand("list", this::displayList);
+        this.dispatcher.bindCommand("done", this::markAsDone);
+        this.dispatcher.bindCommand("bye", this::handleBye);
+        this.dispatcher.bindCommand("deadline", this::makeDeadlineTask);
+        this.dispatcher.bindCommand("event", this::makeEventTask);
+        this.dispatcher.bindCommand("todo", this::makeToDoTask);
+        this.dispatcher.bindCommand("delete", this::deleteTask);
+        this.dispatcher.bindCommand("find", this::findTasks);
+        this.dispatcher.setUnknownCommandHandler(cmd -> {
             throw new DukeException("I'm sorry, but I don't know what that means. :-(");
         });
     }
@@ -49,6 +53,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
+//        Application.launch(DukeFx.class, args);
     }
 
     private void addTask(Task t) {

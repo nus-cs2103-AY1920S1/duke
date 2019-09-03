@@ -1,15 +1,33 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
+/**
+ * A personal assistant todo-list tracking chatbot
+ *
+ * @author Ng Qian Jie Cheryl
+ * @version 0.1
+ */
 public class Duke {
+    /**
+     * Constant indentation from start of line (formatting)
+     */
     private static String INDENT = "    ";
+    /**
+     * File location for loaded text or new text file containing todo tasks
+     */
     private static String FILENAME = "../../../data/duke.txt";
 
+    /**
+     * Handles loading tasks from file and saving tasks in file
+     */
     private static Storage storage;
+    /**
+     * Contains task list and operations to modify the list
+     */
     private static TaskList tasks;
+    /**
+     * Deals with interactions with the user
+     */
     private Ui ui;
 
     public Duke(String filePath) {

@@ -7,20 +7,31 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private PrintWriter writer;
+    /**
+     * Directory location for file storage and retrieval
+     */
     private String filename;
 
+    /**
+     * Constructor for new Storage object with directory information loaded
+     * @param filename
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
+     */
     public Storage(String filename) throws FileNotFoundException, UnsupportedEncodingException {
         this.filename = filename;
-//        createTodoFile();
     }
 
-    public void createTodoFile() throws FileNotFoundException, UnsupportedEncodingException {
-        writer = new PrintWriter(filename, "UTF-8");
-    }
-
-    // basically takes file and returns tasks
+    /**
+     * Loads tasks from file into an array of tasks to be passed into TaskList
+     * @return ArrayList of tasks loaded from file
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasklist = new ArrayList<>();
         File f = new File(filename);
@@ -53,6 +64,12 @@ public class Storage {
         return tasklist;
     }
 
+    /**
+     * Update the loaded file based on changes to the todo file
+     * @param todoString String of tasks based on TaskList
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
+     */
     public void updateTodoFile(String todoString) throws FileNotFoundException, UnsupportedEncodingException {
         writer = new PrintWriter(filename, "UTF-8");
         writer.printf(todoString);

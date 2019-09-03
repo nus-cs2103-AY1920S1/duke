@@ -1,13 +1,29 @@
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-
+/**
+ * Handles deletion of tasks upon user input eg. "delete 2"
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Integer indicating task to be deleted
+     */
     private int listPointer;
 
+    /**
+     * Constructor that takes in keywords and indentation for execution of delete function
+     * @param command First keyword entered by user determining command type
+     * @param commandDetails Following integer indicating list index of task to be deleted
+     * @param INDENT Constant indentation from start of line (formatting)
+     */
     public DeleteCommand(String command, String commandDetails, String INDENT) {
         super(command, commandDetails, INDENT);
     }
 
+    /**
+     * Handles deletion of task from list
+     * @param tasks Contains task list and operations to delete from list
+     * @param ui Handles user interaction
+     * @param storage Updates new task list to file
+     * @throws DukeException Custom exception
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             listPointer = Integer.parseInt(commandDetails);

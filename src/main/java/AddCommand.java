@@ -1,11 +1,24 @@
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-
+/**
+ * Handles addition of tasks upon user input eg. "todo complete CS2103"
+ */
 public class AddCommand extends Command {
+    /**
+     * Constructor that takes in keywords and indentation for execution of addition function
+     * @param command First keyword entered by user determining task type
+     * @param commandDetails Following integer indicating task name and date (if relevant)
+     * @param INDENT Constant indentation from start of line (formatting)
+     */
     public AddCommand(String command, String commandDetails, String INDENT) {
         super(command, commandDetails, INDENT);
     }
 
+    /**
+     * Handles addition of task from list
+     * @param tasks Contains task list and operations to add from list
+     * @param ui Handles user interaction
+     * @param storage Updates new task list to file
+     * @throws DukeException Custom exception
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {

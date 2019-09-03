@@ -30,16 +30,14 @@ public class Duke {
 
             try {
                 Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                ui.printLine("");
+                String output = c.execute(tasks, storage);
+                ui.printLine(output);
 
                 isRunning = !c.isExit();
             } catch (DukeException e) {
                 ui.printLine(e.getMessage());
             }
         }
-
-        ui.printLine("Bye. Hope to see you again soon!");
     }
 
     /**

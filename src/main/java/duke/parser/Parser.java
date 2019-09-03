@@ -8,7 +8,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 public class Parser {
 
@@ -25,12 +24,12 @@ public class Parser {
         switch (command) {
         case "todo":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     try {
                         Task task = new Todo(inputs[1]);
                         tasks.add(task);
                         storage.saveTasks(tasks);
-                        echoTaskAdded(task, tasks, ui);
+                        return createAddedMessage(task, tasks);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Todo task description cannot be blank.");
                     }
@@ -38,7 +37,7 @@ public class Parser {
             };
         case "deadline":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -47,7 +46,7 @@ public class Parser {
                         Task task = new Deadline(desc, by);
                         tasks.add(task);
                         storage.saveTasks(tasks);
-                        echoTaskAdded(task, tasks, ui);
+                        return createAddedMessage(task, tasks);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
                     }
@@ -55,7 +54,7 @@ public class Parser {
             };
         case "event":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -64,7 +63,7 @@ public class Parser {
                         Task task = new Event(desc, at);
                         tasks.add(task);
                         storage.saveTasks(tasks);
-                        echoTaskAdded(task, tasks, ui);
+                        return createAddedMessage(task, tasks);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Event task description or start time cannot be blank.");
                     }
@@ -72,28 +71,31 @@ public class Parser {
             };
         case "list":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     if (tasks.isEmpty()) {
                         throw new DukeException("Oops! You have no tasks yet.");
                     }
                     int index = 1;
+                    String message = "";
+
                     for (Task task : tasks) {
-                        ui.printLine(String.format("%d.%s", index, task));
+                        message += String.format("%d.%s\n", index, task);
                         index++;
                     }
+
+                    return message;
                 }
             };
         case "done":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskDone = tasks.get(taskNumber - 1);
                         taskDone.markAsDone();
                         storage.saveTasks(tasks);
 
-                        ui.printLine("Nice! I've marked this task as done:");
-                        ui.printLine(String.format("%s", taskDone));
+                        return String.format("Nice! I've marked this task as done:\n%s\n", taskDone);
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Your task cannot be found!");
                     }
@@ -101,15 +103,15 @@ public class Parser {
             };
         case "delete":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskRemoved = tasks.remove(taskNumber - 1);
                         storage.saveTasks(tasks);
 
-                        ui.printLine("Got it. I've removed this task:");
-                        ui.printLine(String.format("%s", taskRemoved));
-                        ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        return String.format(
+                                "Got it. I've removed this task:\n" + "%s\n" + "Now you have %d tasks in the list.\n",
+                                taskRemoved, tasks.size());
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Your task cannot be found!");
                     }
@@ -117,7 +119,7 @@ public class Parser {
             };
         case "find":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     try {
                         String keyword = inputs[1];
                         TaskList matchingTasks = new TaskList();
@@ -132,13 +134,15 @@ public class Parser {
                             throw new DukeException("Oops! There is no matching task.");
                         }
 
-                        ui.printLine("Here are the matching tasks in your list:");
+                        String output = "Here are the matching tasks in your list:\n";
 
                         int index = 1;
                         for (Task task : tasks) {
-                            ui.printLine(String.format("%d.%s", index, task));
+                            output += String.format("%d.%s\n", index, task);
                             index++;
                         }
+
+                        return output;
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! I don't know what to search for.");
                     }
@@ -146,7 +150,8 @@ public class Parser {
             };
         case "bye":
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) {
+                public String execute(TaskList tasks, Storage storage) {
+                    return "Bye. Hope to see you again soon!";
                 }
 
                 public boolean isExit() {
@@ -155,16 +160,15 @@ public class Parser {
             };
         default:
             return new Command() {
-                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
                     throw new DukeException("Oops! You entered an invalid command.");
                 }
             };
         }
     }
 
-    private static void echoTaskAdded(Task task, TaskList tasks, Ui ui) {
-        ui.printLine("Got it. I've added this task:");
-        ui.printLine(String.format("%s", task));
-        ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+    private static String createAddedMessage(Task task, TaskList tasks) {
+        return String.format("Got it. I've added this task:\n" + "%s\n" + "Now you have %d tasks in the list.\n", task,
+                tasks.size());
     }
 }

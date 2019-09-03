@@ -32,7 +32,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -43,6 +43,7 @@ public class Duke {
      * Saves task list into hard disk.
      */
     public void run() {
+        ui.showWelcome();
         boolean canEnd = false;
         while (!canEnd) {
             try {
@@ -65,8 +66,8 @@ public class Duke {
         return "haha";
     }
 
-//    public static void main(String[] args) {
-//        Duke duke = new Duke("data/duke.txt");
-//        duke.run();
-//    }
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
+    }
 }

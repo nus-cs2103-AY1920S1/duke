@@ -8,7 +8,8 @@ class ParserTest {
 
     @Test
     void parse_listCommand_success() throws DukeException {
-        TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
+        //TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
+        TaskList taskList = new Duke().getTaskList();
         Command expectedOutput = new ListCommand();
         Command actualOutput = new Parser().parse("list", taskList);
 
@@ -17,7 +18,8 @@ class ParserTest {
 
     @Test
     void parse_doneCommand_sucess() throws DukeException {
-        TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
+        //TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
+        TaskList taskList = new Duke().getTaskList();
         Command expectedOutput = new DoneCommand(1);
         Command actualOutput = new Parser().parse("done 1", taskList);
 
@@ -52,7 +54,8 @@ class ParserTest {
     void parse_missingBy_exceptionThrown() {
         Command expectedOutput = new SubCommand("deadline", "cs2103 iP",
                 "/by", "28/8/2019 2359");
-        TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
+        //TaskList taskList = new Duke("F:\\CS2103\\duke\\data\\duke.txt").getTaskList();
+        TaskList taskList = new Duke().getTaskList();
         try {
             assertEquals(expectedOutput,
                     new Parser().parse("deadline cs2103 iP 28/8/2019 2359", taskList));

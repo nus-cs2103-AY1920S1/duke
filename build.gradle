@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'checkstyle'
@@ -18,7 +18,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.duke.DukeGui"
 }
 
 test {
@@ -30,4 +30,8 @@ test {
 
 checkstyle {
     toolVersion = '8.24'
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }

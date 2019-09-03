@@ -11,8 +11,5 @@ public class TaskTest {
         assertEquals("[N] test", new Task("test").toString());
     }
 
-    @Test
-    public void testToFile() {
-        assertEquals("T|N|test", new Task("test").toFile());
-    }
+
 }

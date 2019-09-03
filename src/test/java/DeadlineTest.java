@@ -6,7 +6,7 @@ public class DeadlineTest {
     @Test
     public void dummyTest(){
         Deadline test = new Deadline("Return book", "12/12/2019 1200");
-        assertEquals("[D][" + "✘" + "] Return book (by: 12/12/2019 1200)", test.toString());
-        assertEquals("D | " + "✘" + " | Return book | 12/12/2019 1200", test.stringForAppend());
+        assertEquals("[D][" + "0" + "] Return book (by: 12/12/2019 1200)", test.toString());
+        assertEquals("D | " + "0" + " | Return book | 12/12/2019 1200", test.stringForAppend());
     }
 }

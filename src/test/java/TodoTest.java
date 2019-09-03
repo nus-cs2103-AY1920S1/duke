@@ -6,7 +6,7 @@ public class TodoTest {
     @Test
     public void dummyTest(){
         Todo test = new Todo("Read book");
-        assertEquals("[T][" + "✘" + "] Read book", test.toString());
-        assertEquals("T | " + "✘" + " | Read book", test.stringForAppend());
+        assertEquals("[T][" + "0" + "] Read book", test.toString());
+        assertEquals("T | " + "0" + " | Read book", test.stringForAppend());
     }
 }

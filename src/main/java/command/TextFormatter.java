@@ -107,6 +107,19 @@ public class TextFormatter {
     }
 
 
+    public static String searchFormat(ArrayList<Task> input) {
+        String separator = "    ____________________________________________________________\n";
+        String listMessageTitle = "    Here are the matching tasks in your list:\n";
+        StringBuilder myTasks = new StringBuilder();
+        for (int i = 0; i < input.size(); i++) {
+            String temp = "    " + (i + 1) + "." + input.get(i) + "\n";
+            myTasks.append(temp);
+        }
+        String tasks = myTasks.toString();
+
+        return separator + listMessageTitle + tasks + separator;
+    }
+
 
 
 

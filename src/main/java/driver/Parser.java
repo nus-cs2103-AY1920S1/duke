@@ -7,6 +7,7 @@ import command.ListCommand;
 import command.DoneCommand;
 import command.DeleteCommand;
 import command.AddCommand;
+import command.SearchCommand;
 
 /**
  *
@@ -27,10 +28,13 @@ public class Parser {
                     int number = Integer.parseInt(numberAsString);
                     return new DoneCommand(number-1);
                 } else if (userInput.contains("delete")) {
-                    String[] numTasks = userInput.split(" ");
-                    String numberAsString = numTasks[1];
-                    int number = Integer.parseInt(numberAsString);
-                    return new DeleteCommand(number-1);
+                     String[] numTasks = userInput.split(" ");
+                     String numberAsString = numTasks[1];
+                     int number = Integer.parseInt(numberAsString);
+                     return new DeleteCommand(number - 1);
+                 } else if (userInput.contains("find")) {
+                     String mystery = userInput.replace("find ", "");
+                     return new SearchCommand(mystery);
                 } else {
                      if((userInput.contains("todo")&&(userInput.length()>5))||
                              (userInput.contains("deadline")&&(userInput.length()>9)&&userInput.contains("/")) ||

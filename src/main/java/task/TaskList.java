@@ -26,6 +26,18 @@ public class TaskList {
         return myTaskList;
     }
 
+    public ArrayList<Task> searchTasks(String input) {
+        ArrayList<Task> answer = new ArrayList<>();
+
+        for(Task temp: myTaskList) {
+            if (temp.getName().contains(input)) {
+                answer.add(temp);
+            }
+        }
+        return answer;
+        }
+
+
 
     /**
      *

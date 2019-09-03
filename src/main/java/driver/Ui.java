@@ -66,6 +66,10 @@ public class Ui {
        System.out.println(add);
     }
 
+    public void printSearch(String search) {
+        System.out.println(search);
+    }
+
 
 
 }

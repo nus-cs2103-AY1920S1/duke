@@ -6,8 +6,8 @@ import ui.Ui;
 
 public class ByeCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showByeMessage();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.byeMessage();
     }
 
     @Override

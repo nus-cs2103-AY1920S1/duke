@@ -18,16 +18,8 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public void showWelcome() {
-        System.out.println(WELCOME_MESSAGE);
-    }
-
-    /**
-     * Scans for user input and returns the result as a String.
-     * @return Command inputted as a String
-     */
-    public String readCommand() {
-        return new Scanner(System.in).nextLine();
+    public String showWelcome() {
+        return WELCOME_MESSAGE;
     }
 
     /**
@@ -35,13 +27,15 @@ public class Ui {
      * @param numOfTasks total number of tasks after a task has been added
      * @param taskDescription description of the newly added task
      */
-    public void showAddTaskMsg(int numOfTasks, String taskDescription) {
-        System.out.println("Got it. I've added this task:\n  " + taskDescription);
+    public String showAddTaskMsg(int numOfTasks, String taskDescription) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Got it. I've added this task:\n  " + taskDescription + "\n");
         if (numOfTasks == 1) {
-            System.out.println("Now you have " + numOfTasks + " task in the list.");
+            builder.append("Now you have " + numOfTasks + " task in the list.");
         } else {
-            System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+            builder.append("Now you have " + numOfTasks + " tasks in the list.");
         }
+        return builder.toString();
     }
 
     /**
@@ -49,49 +43,58 @@ public class Ui {
      * @param removedTask description of removed task
      * @param numOfTasks total number of tasks that are left in the list
      */
-    public void showDelTaskMsg(String removedTask, int numOfTasks) {
-        System.out.println("Noted. I've removed this task:\n  " + removedTask);
+    public String showDelTaskMsg(String removedTask, int numOfTasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n  " + removedTask + "\n");
         if (numOfTasks == 1) {
-            System.out.println("Now you have " + numOfTasks + " task in the list.");
+            sb.append("Now you have " + numOfTasks + " task in the list.");
         } else {
-            System.out.println("Now you have " + numOfTasks + " tasks in the list.");
+            sb.append("Now you have " + numOfTasks + " tasks in the list.");
         }
+        return sb.toString();
     }
 
     /**
      * Prints the tasks stored in a list.
      * @param tasks arraylist of tasks stored.
      */
-    public void printTaskList(ArrayList<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
+    public String printTaskList(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i).toString());
+            sb.append(i + 1 + "." + tasks.get(i).toString() + "\n");
         }
+        return sb.toString();
     }
 
 
     /**
      * Prints a message once the command find has been entered.
      */
-    public void showFindMessage() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String findMessage(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        sb.append(printTaskList(tasks));
+        return sb.toString();
     }
 
     /**
      * Displays a message once command 'Bye' has been entered.
      */
-    public void showByeMessage() {
-        System.out.println("Bye! Hope to see you again!");
+    public String byeMessage() {
+        return "Bye! Hope to see you again!";
     }
 
     /**
      * Displays a message once task is done.
      * @param task task that is done
      */
-    public void showDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("    [" + task.getStatusIcon() + "] " +
+    public String doneMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append("    [" + task.getStatusIcon() + "] " +
                 task.getDescription());
+        return sb.toString();
     }
 
     /**
@@ -111,7 +114,7 @@ public class Ui {
     /**
      * Prints a line divider.
      */
-    public void showLine() {
-        System.out.println(DIVIDER_LINE);
+    public String showLine() {
+        return DIVIDER_LINE;
     }
 }

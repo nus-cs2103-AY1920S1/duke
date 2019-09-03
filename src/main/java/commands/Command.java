@@ -13,7 +13,7 @@ public abstract class Command {
      * @param ui prints the relevant messages according the user's commands
      * @param storage updates the text document file
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     public abstract boolean isExit();
 }

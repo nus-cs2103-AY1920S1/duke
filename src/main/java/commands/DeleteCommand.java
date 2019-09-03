@@ -14,10 +14,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task deleted = taskList.deleteTask(taskIndex);
-        ui.showDelTaskMsg(deleted.toString(), taskList.getListSize());
         storage.uploadTasksToFile(taskList.getTasks());
+        return ui.showDelTaskMsg(deleted.toString(), taskList.getListSize());
     }
 
     @Override

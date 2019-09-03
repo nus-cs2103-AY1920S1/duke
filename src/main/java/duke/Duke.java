@@ -8,19 +8,25 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
-    private static Storage storage;
-    private static TaskList tasks;
-    private static Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
     /**
-     * Starts up the Duke program.
+     * Creates a Duke instance that loads a TaskList from Storage.
+     */
+    public Duke() {
+        this.storage = new Storage("data/duke.txt");
+        this.tasks = storage.loadTasks();
+    }
+
+    /**
+     * Runs the Duke program from CLI.
      * 
      * @param args options. (Currently none)
      */
     public static void main(String[] args) {
-        ui = Ui.getInstance();
-        storage = new Storage("data/duke.txt");
-        tasks = storage.loadTasks();
+        Duke duke = new Duke();
+        Ui ui = Ui.getInstance();
 
         ui.printLine("Hello! I'm Duke\nWhat can I do for you?");
 
@@ -30,7 +36,7 @@ public class Duke {
 
             try {
                 Command c = Parser.parse(input);
-                String output = c.execute(tasks, storage);
+                String output = c.execute(duke.tasks, duke.storage);
                 ui.printLine(output);
 
                 isRunning = !c.isExit();
@@ -41,9 +47,21 @@ public class Duke {
     }
 
     /**
-     * TODO.
+     * Parses and execute the input given, and returns a response.
+     * 
+     * @param input a String from the user
+     * @return a String as a response
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output;
+
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(this.tasks, this.storage);
+        } catch (DukeException e) {
+            output = e.getMessage();
+        }
+
+        return output;
     }
 }

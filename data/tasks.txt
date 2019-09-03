@@ -6,4 +6,3 @@
 0 | T | mooo
 0 | E | dead | 12/12/1234 0111
 0 | T | help
-0 | T | vomit

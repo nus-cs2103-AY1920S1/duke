@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.tasklist.Tasklist;
 import duke.ui.Ui;
 
+import java.time.format.DateTimeParseException;
+
 public class AddCommand extends Command {
     private Task task;
 
@@ -20,7 +22,11 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.add(task);
-        super.commandOutput = ui.addTaskDialogue(task.toString(), tasks.size());
+        try {
+            super.commandOutput = ui.addTaskDialogue(task.toString(), tasks.size());
+            tasks.add(task); // Add after task.toString() to see if there is formatting error.
+        } catch (DateTimeParseException e) {
+            throw new DukeException("The format of the date and time should be dd/MM/yyyy HHmm!");
+        }
     }
 }

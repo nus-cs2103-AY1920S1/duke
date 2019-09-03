@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
+     * Returns a single line of string containing the entire command from the user-input.
      * @return a single line of string containing the entire command from the user-input.
      */
     public String readCommand() {
@@ -17,21 +18,21 @@ public class Ui {
     /**
      * Prints a single line to separate commands.
      */
-    public void showLine(){
+    public void showLine() {
         System.out.println("_________________________________________________________________________________________");
     }
 
     /**
      * Prints error message for loading error.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("No previous sessions detected. Please create a file called 'tasks.txt' under data folder.");
     }
 
     /**
      * Prints welcome message from Duke.
      */
-    public void showWelcome(){
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -50,6 +51,7 @@ public class Ui {
 
 
     /**
+     * Prints the error message.
      * @param message prints the error message.
      */
     public void showError(String message) {

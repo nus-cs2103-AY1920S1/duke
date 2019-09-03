@@ -1,6 +1,7 @@
 public class ListCommand extends Command {
 
     /**
+     * Returns whether the command is an ExitCommand.
      * @return whether the command is an ExitCommand
      */
     @Override

@@ -109,6 +109,8 @@ public class DateTime {
         case 12:
             monthString = "December";
             break;
+        default:
+            monthString = "invalid month";
         }
         return monthString;
     }

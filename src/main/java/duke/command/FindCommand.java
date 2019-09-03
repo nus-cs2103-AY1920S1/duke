@@ -34,6 +34,7 @@ public class FindCommand extends Command {
         }
         return new FindCommand(fullCommand[1]);
     }
+
     /**
      * Executes the search command.
      *

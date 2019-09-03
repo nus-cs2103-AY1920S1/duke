@@ -13,16 +13,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles file reading and writing.
+ */
 public class Storage {
 
     private File storage;
     private String filepath;
 
+    /**
+     * Initialises a Storage object for file processes.
+     * @param filepath path to the file for storage
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         storage = new File(filepath);
     }
 
+    /**
+     * Loads data from the file.
+     * @return ArrayList of Task objects
+     * @throws DukeException if file is not found
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> taskList = new ArrayList<>();
@@ -37,6 +49,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes data to file.
+     * @param taskList ArrayList of Task objects to be written
+     * @throws DukeException if file is not found
+     */
     void writeToFile(ArrayList<Task> taskList) throws DukeException {
         StringBuilder toSave = new StringBuilder();
         for (Task task : taskList) {
@@ -51,6 +68,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes the string objects from the file.
+     * @param task String representation of the task
+     * @return a Task object representation of the task
+     * @throws DukeException if the string format is not adhered to
+     */
     private Task convertToTask(String task) throws DukeException {
         String[] taskComponents = task.split("\\|");
         String taskType = taskComponents[0];

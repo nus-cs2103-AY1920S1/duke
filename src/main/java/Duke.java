@@ -5,12 +5,19 @@ import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Parser;
 
+/**
+ * This is the main class of the program.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises the Duke object.
+     * @param filePath path to the file for data loading and writing
+     */
     private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     private void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -40,6 +50,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates a new instance of the Duke object.
+     * @param args args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

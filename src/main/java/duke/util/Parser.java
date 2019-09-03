@@ -3,8 +3,17 @@ package duke.util;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * Represents a parser object to process commands.
+ */
 public class Parser {
 
+    /**
+     * Parses user commands.
+     * @param fullCommand command from user input
+     * @return a Command
+     * @throws DukeException if the command in invalid
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commandWords = fullCommand.split(" ");
         String action = commandWords[0];

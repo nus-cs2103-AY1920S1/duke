@@ -18,8 +18,14 @@ public class ExitCommand extends Command {
      * @throws DukeException If the tasks cannot be written and saved into file properly.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeCli(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasks(tasks);
+    }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        storage.saveTasks(tasks);
+        return "Bye!"; // TODO: figure out how to exit GUI
     }
 
     /**

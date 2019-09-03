@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -16,7 +17,12 @@ public class ListCommand extends Command {
      * @param storage Storage where the Tasks are retrieved from and stored to.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printTasks(tasks);
+    public void executeCli(TaskList tasks, Ui ui, Storage storage) {
+        ui.printTasksListing(tasks);
+    }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.getTasksListing(tasks);
     }
 }

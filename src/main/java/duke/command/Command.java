@@ -49,7 +49,9 @@ public abstract class Command {
      * @param storage Storage where the Tasks are retrieved from and stored to.
      * @throws DukeException If inputted arguments are invalid.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void executeCli(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    public abstract String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns true if the command is "bye", else returns false.

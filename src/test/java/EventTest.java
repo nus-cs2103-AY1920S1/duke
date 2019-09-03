@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EventTest {
     @Test
     public void testStringConversion() throws DukeException {
-        assertEquals("[E][ ] lecture (at: 28/08/2019 1600)",
+        assertEquals("[E][X] lecture (at: 28/08/2019 1600)",
                 new Event("lecture", "28/08/2019 1600").toString());
     }
 

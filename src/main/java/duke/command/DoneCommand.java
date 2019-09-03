@@ -30,9 +30,16 @@ public class DoneCommand extends Command {
      * @throws DukeException If taskId does not represent a valid number.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeCli(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.get(args);
         task.markAsDone();
-        ui.printMarkTaskAsDone(task);
+        ui.printMarkTaskAsDoneMsg(task);
+    }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task task = tasks.get(args);
+        task.markAsDone();
+        return ui.getMarkTaskAsDoneMsg(task);
     }
 }

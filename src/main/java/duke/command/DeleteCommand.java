@@ -30,8 +30,14 @@ public class DeleteCommand extends Command {
      * @throws DukeException If taskId does not represent a valid number.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeCli(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.remove(args);
-        ui.printDeleteTask(task);
+        ui.printDeleteTaskMsg(task);
+    }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task task = tasks.remove(args);
+        return ui.getDeleteTaskMsg(task);
     }
 }

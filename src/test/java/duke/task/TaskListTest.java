@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Represents a JUnit test for TaskList.
@@ -31,6 +31,7 @@ class TaskListTest {
                 isDone = false;
                 num = 0;
             }
+            
             public String format() {
                 return null;
             }

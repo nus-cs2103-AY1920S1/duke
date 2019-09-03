@@ -1,6 +1,5 @@
 package duke.storage;
 
-import duke.dukeException.DukeException;
 import duke.task.Task;
 import duke.ui.UiText;
 
@@ -44,19 +43,17 @@ public class Storage {
     }
 
     /**
-     * convert the task in the file to arraylist;
+     * convert the task in the file to arraylist.
      * @return ArrayList of Task
-     * @throws DukeException
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() {
         ArrayList<Task> arr = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(file)))
-        {
+        try (BufferedReader br = new BufferedReader(new FileReader(file)))  {
 
-            String sCurrentLine;
+            String currentLine;
 
-            while ((sCurrentLine = br.readLine()) != null) {
-                String[] input = sCurrentLine.split(" \\| ");
+            while ((currentLine = br.readLine()) != null) {
+                String[] input = currentLine.split(" \\| ");
                 arr.add(new Task(input));
             }
 
@@ -66,17 +63,10 @@ public class Storage {
         return arr;
     }
 
-//    public static void writeToFile(String filePath, String text) throws IOException {
-//        FileWriter fw = new FileWriter(filePath);
-//        fw.write(text);
-//        fw.close();
-//    }
-
-
     /**
      * write new task to the existing fille without overwritting the content of the file.
      * @param text task to converted to String to append to the file.
-     * @throws IOException
+     * @throws IOException file not found
      */
     public void appendToFile(String text) throws IOException {
         FileWriter fw = new FileWriter(file, true);
@@ -87,7 +77,7 @@ public class Storage {
     /**
      * Update the file when is a delete or done command.
      * @param tasks updated arraylist of Task.
-     * @throws IOException
+     * @throws IOException file not found
      */
     public void updateFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(file);

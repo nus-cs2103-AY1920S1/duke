@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.storage.Storage;
@@ -20,7 +20,7 @@ public class AddEventCommand extends Command {
      * @param list  TaskList
      * @param ui    UiText
      * @param storage   Storage
-     * @throws DukeException
+     * @throws DukeException wrong format or wrong input
      */
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {

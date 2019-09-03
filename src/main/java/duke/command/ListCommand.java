@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.task.Task;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.UiText;
 
 public class ListCommand extends Command {
+
     public ListCommand(String[] msg) {
         super(msg);
     }
@@ -16,11 +17,12 @@ public class ListCommand extends Command {
      * @param list  TaskList
      * @param ui    UiText
      * @param storage   Storage
-     * @throws DukeException
+     * @throws DukeException invalid input
      */
+
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if(super.command.length == 1) {
+        if (super.command.length == 1) {
             ui.printlnMsg("Here are the tasks in your list:");
             for (int i = 0; i < list.getList().size(); i++) {
                 Task tk = list.getList().get(i);

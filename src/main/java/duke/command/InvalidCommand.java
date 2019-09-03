@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.UiText;
@@ -14,7 +14,7 @@ public class InvalidCommand extends Command {
      * @param list TaskList
      * @param ui UiText
      * @param storage Storage
-     * @throws DukeException
+     * @throws DukeException invalid input
      */
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {

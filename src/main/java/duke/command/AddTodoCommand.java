@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.storage.Storage;
@@ -20,11 +20,12 @@ public class AddTodoCommand extends Command {
      * @param list  TaskList
      * @param ui    UiText
      * @param storage   Storage
-     * @throws DukeException
+     * @throws DukeException empty description
      */
+
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if(super.command.length == 2 && !super.command[1].trim().equals("")) {
+        if (super.command.length == 2 && !super.command[1].trim().equals("")) {
             try {
                 Task task = new Todo(super.command[1]);
                 list.getList().add(task);
@@ -36,7 +37,7 @@ public class AddTodoCommand extends Command {
                 //error msg
                 ui.unableToWriteFileError();
             }
-        }else {
+        } else {
             throw new DukeException("\u1F65 OOPS!!! The description of a todo cannot be empty.");
         }
     }

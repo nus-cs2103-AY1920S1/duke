@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.task.Task;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
      * @param list  TaskList
      * @param ui    UiText
      * @param storage   Storage
-     * @throws DukeException
+     * @throws DukeException invalid input
      */
 
     @Override
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
         if (super.command.length == 2) {
             try {
                 int index = Integer.parseInt(super.command[1].trim());
-                if(index > list.getList().size()) {
+                if (index > list.getList().size()) {
                     throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
                 } else if (index < 1) {
                     throw new DukeException("OOPS!! The number should be larger than 0");
@@ -34,10 +34,9 @@ public class DoneCommand extends Command {
                     try {
                         Task tk = list.getList().get(index - 1);
                         tk.markAsDone();
-                        storage.updateFile(list.getList());
-
                         //marked msg
-                       ui.markedMsg(tk);
+                        ui.markedMsg(tk);
+                        storage.updateFile(list.getList());
                     } catch (IOException e) {
                         //error msg
                         System.out.println("Unable to write the file");

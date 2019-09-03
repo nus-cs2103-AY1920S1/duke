@@ -7,7 +7,7 @@ import java.util.Date;
  * @author   Yang Shuting
  * @see      Deadline
  * @see      Event
- * @See      Todo
+ * @see      Todo
  */
 public class Task {
     protected  String description;
@@ -30,8 +30,8 @@ public class Task {
     }
 
     /**
-     * Construct Task from a string array that consist the type of fill and all the informationn
-     * @param input
+     * Construct Task from a string array that consist the type of fill and all the information.
+     * @param input task from the storage
      */
     public Task(String[] input) {
         String type = input[0].trim();
@@ -94,7 +94,7 @@ public class Task {
 
     @Override
     public String toString() {
-            return tag + "[" + getStatusIcon() + "] "
+        return tag + "[" + getStatusIcon() + "] "
                     + description + information;
-        }
+    }
 }

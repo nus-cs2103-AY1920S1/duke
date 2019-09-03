@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.UiText;
@@ -21,7 +21,8 @@ public abstract class Command {
         return isExit;
     }
 
-    public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {}
+    public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
+    }
 
     @Override
     public String toString() {

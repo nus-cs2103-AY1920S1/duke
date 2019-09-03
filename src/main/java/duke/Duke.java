@@ -1,8 +1,7 @@
-
 package duke;
 
 import duke.command.Command;
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.parser.Parser;
 import duke.taskList.TaskList;
 import duke.storage.Storage;
@@ -11,8 +10,7 @@ import duke.ui.UiText;
 import java.io.FileNotFoundException;
 
 /**
- * Duke is  a Persional Assistant Chatbot thats
- * helps a person to keep track of various things.
+ * Duke is  a Persional Assistant Chatbot that helps a person to keep track of various things.
  * @author Yang Shuting
  */
 
@@ -58,8 +56,8 @@ public class Duke {
                     ui.showLine();
                 }
             }
-        }catch (FileNotFoundException e){
-                    ui.showLoadingError();
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
         }
     }
 

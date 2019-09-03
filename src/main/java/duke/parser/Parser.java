@@ -1,6 +1,16 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.Command;
+import duke.command.FindCommand;
+import duke.command.AddEventCommand;
+import duke.command.InvalidCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddTodoCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+
 
 /**
  * Parse the user input to valid command.

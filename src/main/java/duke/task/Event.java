@@ -7,10 +7,15 @@ import java.util.Date;
  * description of the task and time which the event will held.
  * @author Yang Shuting
  * @see Task
- * @see Deadine
+ * @see Deadline
  * @see Todo
  */
 public class Event extends Task {
+    /**
+     * constructor to create an event task
+     * @param description  description of the content
+     * @param at the date and time
+     */
     public Event(String description, String at) {
         super(description.trim());
         super.tag = "[E]";

@@ -1,4 +1,5 @@
 package duke.ui;
+
 import duke.task.Task;
 
 import java.io.InputStream;
@@ -101,6 +102,7 @@ public class UiText {
      * Message that will be displayed when a task has successfully marked done.
      * @param task Task object that marked done.
      */
+
     public void markedMsg(Task task) {
         out.println(
                 String.format("Nice! I've marked this task as done:\n"
@@ -112,6 +114,7 @@ public class UiText {
      *
      * @param task Task object that was deleted.
      */
+
     public void deleteMsg(Task task) {
         out.println(String.format(
                 "Noted. I\'ve removed this task: \n  "
@@ -127,6 +130,7 @@ public class UiText {
 
 
     }
+
     public void unableToWriteFileError() {
         out.println("Unable to write the file");
     }

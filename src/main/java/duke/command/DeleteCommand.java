@@ -22,11 +22,13 @@ public class DeleteCommand extends Command {
      * @param storage Storage to read and write files.
      * @throws DukeException If user input a number that is not within TaskList.
      */
-    public void execute(TaskList t, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList t, Ui ui, Storage storage) throws DukeException {
+        String message = "";
         try {
             Task deletedTask = t.tasks.remove(pos);
-            ui.showDeletedTask(deletedTask, t.tasks.size());
+            message = ui.showDeletedTask(deletedTask, t.tasks.size());
             storage.save(t.tasks);
+            return message;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please input a number that is within the list");
         }

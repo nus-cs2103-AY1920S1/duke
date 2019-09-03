@@ -52,12 +52,15 @@ public class Ui {
      *
      * @param tasks TaskList object.
      */
-    public void showExitMessage(ArrayList<Task> tasks) {
-        System.out.println("Saving your current tasks : ");
+    public String showExitMessage(ArrayList<Task> tasks) {
+        String message = "";
+        message += "Saving your current tasks : \n";
         for (Task t : tasks) {
-            System.out.println(t);
+            message += t.toString() + "\n";
+//            System.out.println(t);
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        message += "Bye. Hope to see you again soon!";
+        return message;
     }
 
     /**
@@ -81,10 +84,10 @@ public class Ui {
      * @param t Task that is added.
      * @param n Number of tasks in the TaskList.
      */
-    public void showAddedTask(Task t, int n) {
-        System.out.println("Got it. I've added this task:\n  "
+    public String showAddedTask(Task t, int n) {
+        return "Got it. I've added this task:\n  "
                 + t
-                + "\nNow you have " + n + " tasks in the list.");
+                + "\nNow you have " + n + " tasks in the list.\n";
     }
 
     /**
@@ -93,10 +96,10 @@ public class Ui {
      * @param t Task that is deleted.
      * @param n The index of the task that is deleted in TaskList.
      */
-    public void showDeletedTask(Task t, int n) {
-        System.out.println("Noted. I've removed this task:\n  "
+    public String showDeletedTask(Task t, int n) {
+        return "Noted. I've removed this task:\n  "
                 + t
-                + "\nNow you have " + n + " tasks in the list.");
+                + "\nNow you have " + n + " tasks in the list.";
     }
 
     /**
@@ -104,9 +107,8 @@ public class Ui {
      *
      * @param t Task that is completed.
      */
-    public void showDoneTask(Task t) {
-        System.out.println("Nice! I've marked this task as done:\n"
-                + t);
+    public String showDoneTask(Task t) {
+        return "Nice! I've marked this task as done:\n" + t;
     }
 
     /**
@@ -114,15 +116,18 @@ public class Ui {
      *
      * @param list TaskList object.
      */
-    public void printList(TaskList list) {
+    public String printList(TaskList list) {
+        String message = "";
         try {
-            System.out.println("Here are the task in your list:");
+            message += "Here are the task in your list:\n";
             for (int i = 0; i < list.tasks.size(); i++) {
-                System.out.println(i + 1 + "." + list.tasks.get(i));
+//                System.out.println(i + 1 + "." + list.tasks.get(i));
+                message += i + 1 + "." + list.tasks.get(i) + "\n";
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.print("Your list is empty.");
+            return "Your list is empty";
         }
+        return message;
     }
 
     /**
@@ -130,11 +135,14 @@ public class Ui {
      *
      * @param foundTaskList TaskList with filtered keyword.
      */
-    public void showFoundTask(ArrayList<Task> foundTaskList) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFoundTask(ArrayList<Task> foundTaskList) {
+        String message = "";
+        message += "Here are the matching tasks in your list:";
         for (int i = 0; i < foundTaskList.size(); i++) {
-            System.out.println(i + 1 + "." + foundTaskList.get(i));
+            message += i + 1 + "." + foundTaskList.get(i);
+//            System.out.println(i + 1 + "." + foundTaskList.get(i));
         }
+        return message;
     }
 
     private String display(String text) {

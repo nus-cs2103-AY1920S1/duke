@@ -20,9 +20,11 @@ public class AddCommand extends Command {
      * @param ui UI to interact with user.
      * @param storage Storage to read and write files.
      */
-    public void execute(TaskList t, Ui ui, Storage storage) {
+    public String execute(TaskList t, Ui ui, Storage storage) {
+        String message = "";
         t.tasks.add(task);
-        ui.showAddedTask(task, t.tasks.size());
+        message = ui.showAddedTask(task, t.tasks.size());
         storage.save(t.tasks);
+        return message;
     }
 }

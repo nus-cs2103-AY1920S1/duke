@@ -24,7 +24,8 @@ public class FindCommand extends Command {
      * @param storage Storage to read and write files.
      */
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) {
+    public String execute(TaskList t, Ui ui, Storage storage) {
+        String message = "";
         ArrayList<Task> foundTaskList = new ArrayList<>();
         for (Task task : t.tasks) {
             String description = task.getDescription().toLowerCase();
@@ -32,6 +33,7 @@ public class FindCommand extends Command {
                 foundTaskList.add(task);
             }
         }
-        ui.showFoundTask(foundTaskList);
+        message = ui.showFoundTask(foundTaskList);
+        return message;
     }
 }

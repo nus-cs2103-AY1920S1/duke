@@ -14,7 +14,7 @@ public abstract class Command {
     protected Task task;
     boolean exit = false;
 
-    public abstract void execute(TaskList t, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList t, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return this.exit;

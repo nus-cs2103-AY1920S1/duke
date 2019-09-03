@@ -15,9 +15,11 @@ public class ExitCommand extends Command {
      * @param ui UI to interact with user.
      * @param storage Storage to read and write files.
      */
-    public void execute(TaskList t, Ui ui, Storage storage) {
+    public String execute(TaskList t, Ui ui, Storage storage) {
+        String message = "";
         super.exit = true;
-        ui.showExitMessage(t.tasks);
+        message = ui.showExitMessage(t.tasks);
         storage.save(t.tasks);
+        return message;
     }
 }

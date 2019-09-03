@@ -28,15 +28,12 @@ public class DeleteCommand extends Command {
         try {
             if (inputSplit.length != 2) {
                 // Exception if there is no task number or multiple words after "delete"
-                throw new DukeException(ui.separationLine
-                        + "\n     :( OOPS!!! Please specify number of a single task to delete.\n"
-                        + ui.separationLine + "\n");
+                throw new DukeException(":( OOPS!!! Please specify number of a single task to delete.\n");
             }
             int specifiedDel = Integer.parseInt(inputSplit[1]); // will throw NumberFormatException if not int
             if (specifiedDel < 1 || specifiedDel > tasks.getSize()) {
                 // Exception if task number is beyond current number of tasks
-                throw new DukeException(ui.separationLine
-                        + "\n     :( OOPS!!! Please specify valid task number.\n" + ui.separationLine + "\n");
+                throw new DukeException(":( OOPS!!! Please specify valid task number.\n");
             }
             Task delTask = tasks.getElement(specifiedDel - 1);
             tasks.deleteFromList(specifiedDel - 1);
@@ -45,8 +42,7 @@ public class DeleteCommand extends Command {
             // Write to file
             storage.overwriteFile(tasks.toArrayList());
         } catch (NumberFormatException ne) {
-            ui.printError(ui.separationLine + "\n     :( OOPS!!! Please specify task number as one integer only.\n"
-                    + ui.separationLine + "\n");
+            ui.printError(":( OOPS!!! Please specify task number as one integer only.\n");
         }
     }
 }

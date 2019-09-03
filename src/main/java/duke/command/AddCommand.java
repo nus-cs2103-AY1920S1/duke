@@ -47,9 +47,7 @@ public class AddCommand extends Command {
         case "todo":
             if (inputSplit.length == 1) {
                 // Exception if no description after "todo"
-                throw new DukeException(ui.separationLine
-                        + "\n     :( OOPS!!! The description of a todo cannot be empty.\n"
-                        + ui.separationLine + "\n");
+                throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.\n");
             }
             Todo todo = new Todo(userInput.replace("todo ", ""), 0);
             tasks.addToList(todo);
@@ -60,8 +58,8 @@ public class AddCommand extends Command {
         case "deadline":
             if (!userInput.contains(" /by ")) {
                 // Exception for invalid deadline format
-                throw new DukeException(ui.separationLine + "\n     :( OOPS!!! For deadline please use the format\n"
-                        + "               \"deadline description /by end time\"\n" + ui.separationLine + "\n");
+                throw new DukeException(":( OOPS!!! For deadline please use the format\n"
+                        + "\"deadline description /by end time\"\n");
             }
             String[] splitStringD = userInput.split(" /by ");
             Date inputDateD = Parser.convertToDate(splitStringD[1], Parser.dateFormats);
@@ -78,8 +76,8 @@ public class AddCommand extends Command {
         case "event":
             if (!userInput.contains(" /at ")) {
                 // Exception for invalid deadline format
-                throw new DukeException(ui.separationLine + "\n     :( OOPS!!! For event please use the format\n"
-                        + "               \"event description /at period\"\n" + ui.separationLine + "\n");
+                throw new DukeException(":( OOPS!!! For event please use the format\n"
+                        + "\"event description /at period\"\n");
             }
             String[] splitStringE = userInput.split(" /at ");
             Date inputDateE = Parser.convertToDate(splitStringE[1], Parser.dateFormats);

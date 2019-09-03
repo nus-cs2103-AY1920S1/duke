@@ -1,45 +1,69 @@
 package duke.helper;
 
+import duke.fxgui.DialogBox;
 import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * Handles reading from user input and printing to user interface.
  */
 public class Ui {
     private Scanner scan;
-    public String separationLine;
+    public String separationLine = "__";
+    private VBox dialogContainer;
+    private TextField userInput;
+    public Image user = new Image(this.getClass().getResourceAsStream("/images/userSleipnir.png"));
+    public Image duke = new Image(this.getClass().getResourceAsStream("/images/dukeGhidorah.jpg"));
 
-    public Ui() {
+    /**
+     * Initializes UI instance with a VBox that contains dialog boxes and TextField for user input.
+     *
+     * @param dialogContainer VBox that UI should write to.
+     * @param userInput TextField that UI should read user input from.
+     */
+    public Ui(VBox dialogContainer, TextField userInput) {
         scan = new Scanner(System.in);
-        separationLine = "    ____________________________________________________________";
+        this.dialogContainer = dialogContainer;
+        this.userInput = userInput;
     }
 
     /**
      * Displays welcome message.
      */
     public void showWelcome() {
-        String logo = "      ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(separationLine + "\n" + logo + "\n     Hello! I'm Duke\n     What can I do for you?\n"
-                + separationLine + "\n");
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String welcomeLine = logo + "\nHello! I'm Duke\nWhat can I do for you?\n";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeLine, duke));
     }
 
-    public String readLineInput() {
-        return scan.nextLine();
+    public String readInput() {
+        return userInput.getText();
+    }
+
+    public void printUserInput() {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(readInput(), user));
+        userInput.clear();
     }
 
     public void showLoadingError() {
-        System.out.println("Error loading from file. Initiating with empty Task list.");
+        String message = "Error loading from file. Initiating with empty Task list.";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, duke));
     }
 
     public void printError(String message) {
-        System.err.println(message);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, duke));
     }
 
     /**
@@ -48,30 +72,45 @@ public class Ui {
      * @param tasks ArrayList of Tasks to be displayed.
      */
     public void printTaskList(ArrayList<Task> tasks) {
-        System.out.println(separationLine + "\n     Here are the tasks in your list:");
+        String list = "Here are the tasks in your list:";
         for (Task task : tasks) {
-            System.out.println("     " + (tasks.indexOf(task) + 1) + "." + task.toString());
+            list += "\n" + (tasks.indexOf(task) + 1) + ". " + task.toString();
         }
-        System.out.println(separationLine + "\n");
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(list, duke));
     }
 
     public void printDoneNotification(String doneTask) {
-        System.out.println(separationLine + "\n     Nice! I've marked this task as done:\n       "
-                + doneTask + "\n" + separationLine + "\n");
+        String notification = "Nice! I've marked this task as done:\n" + "    " + doneTask;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(notification, duke));
     }
 
+    /**
+     * Prints notification when task is added to the list.
+     *
+     * @param addTask Task to be added.
+     * @param listSize Current size of the list.
+     */
     public void printAddNotification(String addTask, int listSize) {
-        System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + addTask
-                + "\n     Now you have " + listSize + " tasks in the list." + "\n" + separationLine + "\n");
+        String notification = "Got it. I've added this task:\n" + "    " + addTask + "\nNow you have " + listSize
+                + " tasks in the list.";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(notification, duke));
     }
 
+    /**
+     * Prints notification when task is deleted from the list.
+     *
+     * @param delTask Task to be deleted.
+     * @param listSize Current size of the list.
+     */
     public void printDeleteNotification(String delTask, int listSize) {
-        System.out.println(separationLine + "\n     Noted. I've removed this task:\n       " + delTask
-                + "\n     Now you have " + listSize + " tasks in the list." + "\n" + separationLine + "\n");
+        String notification = "Noted. I've removed this task:\n" + "    " + delTask + "\nNow you have " + listSize
+                + " tasks in the list.";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(notification, duke));
     }
 
     public void printExitMessage() {
-        System.out.println(separationLine + "\n     Bye. Hope to see you again soon!\n" + separationLine);
+        String exit = "Bye. Hope to see you again soon!\n";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(exit, duke));
     }
 
     /**
@@ -80,10 +119,10 @@ public class Ui {
      * @param tasks ArrayList of Tasks to be displayed.
      */
     public void printSearchList(ArrayList<Task> tasks) {
-        System.out.println(separationLine + "\n     Here are the matching tasks in your list:");
+        String list = "Here are the matching tasks in your list:";
         for (Task task : tasks) {
-            System.out.println("     " + (tasks.indexOf(task) + 1) + "." + task.toString());
+            list += "\n" + (tasks.indexOf(task) + 1) + ". " + task.toString();
         }
-        System.out.println(separationLine + "\n");
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(list, duke));
     }
 }

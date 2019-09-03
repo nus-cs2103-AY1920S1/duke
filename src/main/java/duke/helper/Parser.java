@@ -81,10 +81,7 @@ public class Parser {
             return new FindCommand(filePath, null, userInput.replaceFirst("find ", ""));
         default:
             // Exception if invalid instruction
-            Ui ui = new Ui();
-            throw new DukeException(ui.separationLine
-                    + "\n     :( OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + ui.separationLine + "\n");
+            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 

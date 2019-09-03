@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class DoneCommand extends Command {
 
-    int index;
+    private int index;
 
     public DoneCommand (int index) {
         this.index = index;

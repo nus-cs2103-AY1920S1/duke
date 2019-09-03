@@ -13,7 +13,9 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void list () { System.out.println("Here are the tasks in your list:"); }
+    public void list () {
+        System.out.println("Here are the tasks in your list:");
+    }
 
     public void add (ArrayList<Task> list) {
 

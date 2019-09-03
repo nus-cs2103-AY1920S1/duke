@@ -5,7 +5,7 @@ import java.util.*;
 
 public class TaskList {
 
-    ArrayList<Task> list;
+    protected ArrayList<Task> list;
 
     public TaskList (ArrayList<Task> list) {
         this.list = list;
@@ -16,7 +16,6 @@ public class TaskList {
     }
 
     public void add (Task task) {
-
         list.add(task);
     }
 
@@ -37,8 +36,6 @@ public class TaskList {
     public Task delete (int index) {
 
         Task task = list.remove(index);
-
         return task;
-
     }
 }

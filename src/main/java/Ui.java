@@ -30,7 +30,8 @@ public class Ui {
         // Prints out greeting of the chat bot.
         printLine();
         printIndent();
-        System.out.println("Hello! My name is \n" + logo + "\n" + "    What can I do for you? \n");
+        System.out.println("Hello! My name is \n" + logo + "\n" +
+                "    What can I do for you? \n");
         printIndent();
         System.out.println("I can only do these functions for now: \n \n" +
                 "    Todo \n" + "        Eg. todo __(task)__\n" +
@@ -67,8 +68,8 @@ public class Ui {
                         if (taskNumber > 0 && taskNumber <= TaskList.listOfTasks.size()) {
                             printDone(taskNumber);
                         } else {
-                            throw new DukeException("☹ OOPS!!! There is no such task number in your list of tasks!! " +
-                                    "Please enter a valid number!");
+                            throw new DukeException("☹ OOPS!!! There is no such task " +
+                                    "number in your list of tasks!! Please enter a valid number!");
                         }
                     } else if (splittedText[0].equals("delete")) {
                         tL.deleteCommand(text);
@@ -76,10 +77,10 @@ public class Ui {
                         if (splittedText[0].equals("todo")) {
                             tL.toDoCommand(text);
                         } else if (splittedText[0].equals("deadline") &&
-                                text.contains("/") && text.contains("by")) { // what if there is no deadline
+                                text.contains("/") && text.contains("by")) {
                             tL.deadlineCommand(text);
                         } else if (splittedText[0].equals("event") &&
-                                text.contains("/") && text.contains("at")) { // what if there is no date
+                                text.contains("/") && text.contains("at")) {
                             tL.eventCommand(text);
                         } else {
                             printLine();
@@ -126,7 +127,8 @@ public class Ui {
      */
     public static void printLine() {
         printIndent();
-        System.out.println("___________________________________________________________________");
+        System.out.println("_____________________" +
+                "______________________________________________");
     }
 
     /**
@@ -193,8 +195,10 @@ public class Ui {
      * Gets the number of task inside the file.
      *
      * @return Number of tasks.
-     * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     * @throws IOException If the named file exists
+     * but is a directory rather than a regular file,
+     * does not exist but cannot be created, or
+     * cannot be opened for any other reason.
      */
     public static int getNumOfTasks() throws IOException {
         return Storage.countLines(Storage.file);

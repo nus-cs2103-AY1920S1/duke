@@ -5,6 +5,9 @@ import java.util.ArrayList;
  * Represents a Parser which is used to parse the user input depending on their commands.
  */
 public class Parser {
+
+    protected static boolean hasTerminated;
+
     /**
      * Parses user input based on different type of command.
      * For each case, different parse requirement is needed
@@ -12,15 +15,15 @@ public class Parser {
      * @param taskList TaskList of the current file.
      * @param ui Ui of the project.
      * @param storage Storage of the project.
-     * @param inputType InputType of the user.
-     * @param userInput The rest of user input after the inputType.
+     * @param userInput The user input to be parsed.
      * @throws DukeException If user input is not in the format
      */
     public static void parse(
-        TaskList taskList, Ui ui, Storage storage, String inputType, String userInput) throws DukeException {
+        TaskList taskList, Ui ui, Storage storage, String userInput) throws DukeException {
+        String inputType = userInput.split(" ")[0].trim();
         if (inputType.equals("todo")) {
             try {
-                String description = userInput.trim();
+                String description = userInput.substring(4).trim();
                 if (description.isBlank()) {
                     throw new IllegalArgumentException();
                 }
@@ -34,6 +37,7 @@ public class Parser {
             }
         } else if (inputType.equals("list")) {
             try {
+                userInput = userInput.substring(4);
                 if (!userInput.isBlank()) {
                     throw new Exception();
                 }
@@ -43,6 +47,7 @@ public class Parser {
             }
         } else if (inputType.equals("deadline")) {
             try {
+                userInput = userInput.substring(8).trim();
                 String[] statement = userInput.split("/by");
                 String taskDescription = statement[0].trim();
                 String taskBy = statement[1].trim();
@@ -63,6 +68,7 @@ public class Parser {
             }
         } else if (inputType.equals("event")) {
             try {
+                userInput = userInput.substring(5).trim();
                 String[] statement = userInput.split("/at");
                 String taskDescription = statement[0].trim();
                 String taskAt = statement[1].trim();
@@ -83,6 +89,7 @@ public class Parser {
             }
         } else if (inputType.equals("done")) {
             try {
+                userInput = userInput.substring(4).trim();
                 int taskNumber = Integer.parseInt(userInput.trim()) - 1;
                 taskList.getListOfTasks().get(taskNumber).markAsDone();
                 ui.printDoneTask(taskList, taskNumber);
@@ -93,6 +100,7 @@ public class Parser {
             }
         } else if (inputType.equals("delete")) {
             try {
+                userInput = userInput.substring(6).trim();
                 int taskNumber = Integer.parseInt(userInput.trim()) - 1;
                 Task deletedTask = taskList.getListOfTasks().get(taskNumber);
                 taskList.getListOfTasks().remove(taskNumber);
@@ -104,6 +112,7 @@ public class Parser {
             }
         } else if (inputType.equals("find")) {
             try {
+                userInput = userInput.substring(4).trim();
                 String keyword = userInput.trim();
                 ArrayList<Task> filterTasks = new ArrayList<>();
                 for (Task task : taskList.getListOfTasks()) {
@@ -115,9 +124,24 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! Your input format is wrong. Use: find [task description]");
             }
+        } else if (inputType.equals("bye")) {
+            try {
+                userInput = userInput.substring(3);
+                if (!userInput.isBlank()) {
+                    throw new Exception();
+                }
+                ui.printProgrammeTerminated();
+                hasTerminated = true;
+            } catch (Exception e) {
+                throw new DukeException("OOPS!!! Your input format is wrong. Use: bye");
+            }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    public static boolean hasTerminated() {
+        return hasTerminated;
     }
 
     /**

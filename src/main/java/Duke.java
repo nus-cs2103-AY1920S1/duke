@@ -9,28 +9,27 @@ public class Duke {
 
     /**
      * Initializes duke application with the path of the file of the list of tasks.
-     *
-     * @param filePath Path of the file that is being used to load and save the tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         tasks = new TaskList(storage.load());
     }
 
     /**
      * Runs the duke application.
      */
-
     public void run() {
         ui.printHello();
-        String command;
+        String userInput = ui.getNextLine();
+        String inputType = userInput.split(" ")[0];
 
-        while (!(command = ui.getNext()).equals("bye")) {
+        while (!inputType.equals("bye")) {
             try {
-                Parser.parse(tasks, ui, storage, command, ui.getNextLine());
+                Parser.parse(tasks, ui, storage, userInput);
+                userInput = ui.getNextLine();
+                inputType = userInput.split(" ")[0];
             } catch (DukeException e) {
-                ui.printLine();
                 System.out.println("     " + e.getMessage());
                 System.out.println("    _____________________________________\n");
             }
@@ -40,7 +39,22 @@ public class Duke {
         ui.printBye();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    /**
+     * Gets response every time user send inputs.
+     *
+     * @param input User's input to the duke application.
+     * @return response to the user's input.
+     */
+    public String getResponse(String input) {
+        if (Parser.hasTerminated()) {
+            return ui.print();
+        }
+        try {
+            Parser.parse(tasks, ui, storage, input);
+            return ui.print();
+        } catch (DukeException e) {
+            ui.sendErrorMessage(e.getMessage());
+            return ui.print();
+        }
     }
 }

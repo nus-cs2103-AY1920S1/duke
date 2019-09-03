@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Ui {
 
     private Scanner sc;
+    private String printStatement;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -20,26 +21,30 @@ public class Ui {
         return sc.next();
     }
 
-    public void printLine() {
-        System.out.println("    _____________________________________");
+    public String print() {
+        return this.printStatement;
+    }
+
+    public void setPrintStatement(String str) {
+        this.printStatement = str;
+    }
+
+    public void sendErrorMessage(String errorMsg) {
+        this.printStatement = errorMsg;
     }
 
     /**
      * Prints welcome statements for the user.
      */
     public void printHello() {
-        printLine();
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        printLine();
     }
 
     /**
      * Prints good bye statements for the user.
      */
     public void printBye() {
-        printLine();
-        System.out.println("     Bye. Hope to see you again soon!");
-        printLine();
+        setPrintStatement("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -49,11 +54,10 @@ public class Ui {
      * @param newTask Task that is being added.
      */
     public void printAddTask(TaskList taskList, Task newTask) {
-        printLine();
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + newTask);
-        System.out.println("     Now you have " + taskList.getListOfTasks().size() + " tasks in the list.");
-        System.out.println("    _____________________________________\n");
+        String str = "Got it. I've added this task:\n" + newTask + "\nNow you have "
+                + taskList.getListOfTasks().size() + " tasks in the list.";
+
+        setPrintStatement(str);
     }
 
     /**
@@ -62,13 +66,12 @@ public class Ui {
      * @param taskList List contains all the tasks.
      */
     public void printTaskList(TaskList taskList) {
-        printLine();
-        System.out.println("     Here are the tasks in your list:");
+        String str = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getListOfTasks().size(); i++) {
             int number = i + 1;
-            System.out.println("     " + number + "." + taskList.getListOfTasks().get(i));
+            str += number + "." + taskList.getListOfTasks().get(i) + "\n";
         }
-        System.out.println("    _____________________________________\n");
+        setPrintStatement(str);
     }
 
     /**
@@ -78,10 +81,8 @@ public class Ui {
      * @param taskNumber ID of the task that will be marked done.
      */
     public void printDoneTask(TaskList taskList, int taskNumber) {
-        printLine();
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + taskList.getListOfTasks().get(taskNumber));
-        System.out.println("    _____________________________________\n");
+        String str = "Nice! I've marked this task as done:\n" + taskList.getListOfTasks().get(taskNumber);
+        setPrintStatement(str);
     }
 
     /**
@@ -91,11 +92,9 @@ public class Ui {
      * @param deletedTask Task that is being deleted.
      */
     public void printDeleteTask(TaskList taskList, Task deletedTask) {
-        printLine();
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + deletedTask);
-        System.out.println("     Now you have " +  taskList.getListOfTasks().size() + " tasks in the list.");
-        System.out.println("    _____________________________________\n");
+        String str = "Noted. I've removed this task:\n" + deletedTask + "\nNow you have "
+                + taskList.getListOfTasks().size() + " tasks in the list.";
+        setPrintStatement(str);
     }
 
     /**
@@ -104,12 +103,15 @@ public class Ui {
      * @param listOfTasks Tasks that contains the search keyword.
      */
     public void printFindTasks(ArrayList<Task> listOfTasks) {
-        printLine();
-        System.out.println("     Here are the matching tasks in your list:");
+        String str = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < listOfTasks.size(); i++) {
             int number = i + 1;
-            System.out.println("     " + number + "." + listOfTasks.get(i));
+            str += number + "." + listOfTasks.get(i);
         }
-        System.out.println("     _____________________________________\n");
+        setPrintStatement(str);
+    }
+
+    public void printProgrammeTerminated() {
+        setPrintStatement("Programme has terminated");
     }
 }

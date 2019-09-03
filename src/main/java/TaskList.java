@@ -79,7 +79,6 @@ public class TaskList {
         for (int i = 0; i < this.taskList.size(); i++) {
             printable += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
-        
         return printable;
     }
 

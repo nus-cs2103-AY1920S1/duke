@@ -3,7 +3,9 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Gui;
 import duke.ui.Ui;
+import javafx.application.Application;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,7 +41,6 @@ public class Duke {
 
     }
 
-
     /**
      * Runs the logic of Duke.
      */
@@ -66,8 +67,10 @@ public class Duke {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
+        Application.launch(Gui.class, args);
         Duke dukeInstance = new Duke("data/duke.txt");
         dukeInstance.run();
     }
+
 
 }

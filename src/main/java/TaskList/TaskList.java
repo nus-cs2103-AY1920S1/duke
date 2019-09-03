@@ -24,5 +24,15 @@ public class TaskList {
 
         list.remove(taskNo - 1);
     }
+
+    public ArrayList<Task> contains(String word) {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task task: list) {
+            if (task.description.contains(word)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }
 

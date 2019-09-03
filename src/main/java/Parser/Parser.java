@@ -9,6 +9,7 @@ import Command.ByeCommand;
 import Command.DeleteCommand;
 import Command.DoneCommand;
 import Command.ListCommand;
+import Command.FindCommand;
 
 public class Parser {
     public Parser() {}
@@ -30,6 +31,8 @@ public class Parser {
                 return new ListCommand();
             case "bye":
                 return new ByeCommand();
+            case "find":
+                return new FindCommand(fullCommand.substring((i + 1)));
             case "todo":
                 if (fullCommand.length() == 4) {
                     System.out.println("OOPS!!! The description of a todo cannot be empty.");

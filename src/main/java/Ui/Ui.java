@@ -5,6 +5,7 @@ import TaskList.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -98,5 +99,13 @@ public class Ui {
                     + taskList.list.get(i - 1).toActionString());
         }
     }
+
+    public void showFindMessage(ArrayList<Task> result) {
+        showToUser("Here are the matching tasks in your list:");
+        for (Task task: result) {
+            showToUser(task.toActionString());
+        }
+    }
+
 }
 

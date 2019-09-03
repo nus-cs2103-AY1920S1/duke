@@ -1,4 +1,3 @@
-T | 0 | return the book
 T | 0 | return book
 T | 0 | return book 
 D | 0 | return books | 2nd of December 2019, 6PM
@@ -8,3 +7,4 @@ D | 0 | return books | 2nd of December 2019, 6PM
 T | 0 | borrow books
 E | 0 | unicon | 7th of December 2019, 7-8PM | 7/12/2019 1900-2000
 T | 0 | borrow book
+T | 0 | return book

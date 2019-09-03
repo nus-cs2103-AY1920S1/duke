@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.*;
+import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 
 
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * The main class for this program, calls the execution of the whole program.
@@ -50,6 +52,7 @@ public class Duke extends Application {
             taskList = new TaskList();
         }
         parser = new Parser(taskList, ui);
+        ui.taskList = taskList;
     }
 
     /**
@@ -167,7 +170,19 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        input = input.trim();
+        if (input.equals("bye")) {
+            storage.updateFile(taskList.getList());
+            return "Bye. Hope to see you again soon!";
+        } else {
+            try {
+                return  parser.parseLine(input);
+            } catch (DukeException e) {
+                return e.getMessage();
+            } catch (NumberFormatException e) {
+                return "Must input an integer";
+            }
+        }
     }
 
 

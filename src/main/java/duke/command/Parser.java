@@ -27,9 +27,9 @@ public class Parser {
      * Parses the inputted string into a Task.
      * @param  str string to be parsed
      */
-    public void parseLine(String str) throws DukeException, NumberFormatException {
+    public String parseLine(String str) throws DukeException, NumberFormatException {
         if (str.equals("list")) {
-            ui.printList();
+            return ui.printList();
         } else if (str.startsWith("delete ")) {
             String[] arr = str.split(" ");
             int i = Integer.parseInt(arr[1]);
@@ -38,7 +38,7 @@ public class Parser {
             } else if (i < 1) {
                 throw new DukeException("Number must be greater than 0");
             }
-            ui.printDelete(taskList.removeTask(i));
+            return ui.printDelete(taskList.removeTask(i));
         } else if (str.startsWith("done ")) {
             String[] arr = str.split(" ");
             int i = Integer.parseInt(arr[1]);
@@ -47,10 +47,10 @@ public class Parser {
             } else if (i < 1) {
                 throw new DukeException("Number must be greater than 0");
             }
-            ui.printDone(taskList.markTaskAsDone(i));
+            return ui.printDone(taskList.markTaskAsDone(i));
         } else if (str.startsWith("find ")) {
             String[] arr = str.split(" ", 2);
-            ui.printMatchingList(arr[1]);
+            return ui.printMatchingList(arr[1]);
         } else {
             String[] arr = str.split("/", 2); // separates the the description
             String[] typeArray = arr[0].split(" ", 2); // separate the task type
@@ -89,7 +89,7 @@ public class Parser {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            ui.printAdd(task);
+            return ui.printAdd(task);
         }
     }
 }

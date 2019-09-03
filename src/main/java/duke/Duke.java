@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.core.DukeException;
 import duke.core.Parser;
@@ -72,6 +74,6 @@ public class Duke {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("../../../data/tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }

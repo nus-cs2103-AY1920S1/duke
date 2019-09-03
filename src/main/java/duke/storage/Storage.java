@@ -18,7 +18,8 @@ public class Storage {
     final static Charset ENCODING = StandardCharsets.UTF_8;
     private Path path;
 
-    public Storage(String path) throws IOException { this.path = Paths.get(path);
+    public Storage(String path) throws IOException {
+        this.path = Paths.get(path);
     }
 
     private List<String> read() throws IOException {

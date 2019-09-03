@@ -11,14 +11,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.scene.layout.VBox;
+
 /**
  * Handles reading from and writing to save file on hard disk.
  */
 public class Storage {
     private String filePath;
+    private VBox dialogContainer;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, VBox dialogContainer) {
         this.filePath = filePath;
+        this.dialogContainer = dialogContainer;
     }
 
     /**
@@ -68,7 +72,8 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException ioe) {
-            new Ui().printError("☹ Failed to save changes to file. Please try again.");
+            new Ui(dialogContainer, null)
+                    .printError(":( Failed to save changes to file. Please try again.");
         }
     }
 

@@ -1,4 +1,4 @@
-package duke.fxGui;
+package duke.fxgui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -27,6 +27,13 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     private String type;
 
+    /**
+     * Initializes a dialog box in the GUI.
+     *
+     * @param text Text to be displayed in Label.
+     * @param img Image to be displayed in ImageView.
+     * @param type Indication of whether dialog box is for "user" or "duke" dialog.
+     */
     public DialogBox(String text, Image img, String type) {
         this.type = type;
 
@@ -41,13 +48,6 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-//        this.setAlignment(Pos.TOP_RIGHT);
-//        text.setWrapText(true);
-//        // Bottom, right, top, left
-//        text.setPadding(new Insets(5, 15, 5, 15));
-//
-//        displayPicture.setFitWidth(100.0);
-//        displayPicture.setFitHeight(100.0);
 
         // Circle clipping starts from top left corner of image
         displayPicture.setClip(new Circle(50, 50, 50));
@@ -59,7 +59,6 @@ public class DialogBox extends HBox {
             this.setBackground(new Background(new BackgroundFill(Color.KHAKI, new CornerRadii(20.0),
                     new Insets(5, 5, 5, 5))));
         }
-//        this.getChildren().addAll(text, displayPicture);
     }
 
     /**
@@ -72,12 +71,18 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img, String type) {
-        return new DialogBox(text, img, type);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img, "user");
     }
 
-    public static DialogBox getDukeDialog(String text, Image img, String type) {
-        var db = new DialogBox(text, img, type);
+    /**
+     * Produces a duke dialog box that is flipped to the left side of the interface.
+     *
+     * @param text Text contained by the dialog box.
+     * @param img Image representing duke.
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img, "duke");
         db.flip();
         return db;
     }

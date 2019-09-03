@@ -3,58 +3,29 @@ package duke.command;
 import duke.DukeException;
 import duke.helper.Storage;
 import duke.helper.Ui;
-import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DoneCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private String separationLine = "    ____________________________________________________________";
-
-    @Test
-    public void executeDone_validInput_success() {
-        System.setOut(new PrintStream(outContent));
-        ArrayList<Task> temp = new ArrayList<>() {
-            {
-                add(new Todo("doneTest", 0));
-            }
-        };
-        String expected = separationLine + "\n     Nice! I've marked this task as done:\n       [T][+] doneTest"
-                + "\n" + separationLine + "\n" + System.lineSeparator();
-        new DoneCommand("", new String[]{"done", "1"})
-                .execute(new TaskList(temp), new Ui(), new Storage(""));
-        assertEquals(expected, outContent.toString());
-    }
 
     @Test
     public void executeDone_noTaskNumber_exceptionThrown() {
         try {
             System.setOut(new PrintStream(outContent));
             new DoneCommand("", new String[]{"done"})
-                    .execute(new TaskList(), new Ui(), new Storage(""));
+                    .execute(new TaskList(), new Ui(null, null), new Storage("", null));
             fail();
         } catch (DukeException de) {
-            String correctExpected = separationLine
-                    + "\n     :( OOPS!!! Please specify number of a single task to mark as done.\n"
-                    + separationLine + "\n";
+            String correctExpected = ":( OOPS!!! Please specify number of a single task to mark as done.\n";
             assertEquals(correctExpected, de.getMessage());
         }
-    }
-
-    @Test
-    public void executeDone_itemNotInt_noOutputOutsideExecute() {
-        System.setOut(new PrintStream(outContent));
-        new DoneCommand("", new String[]{"done", "first item"})
-                .execute(new TaskList(), new Ui(), new Storage(""));
-        assertEquals("", outContent.toString());
     }
 
     @Test
@@ -62,11 +33,10 @@ public class DoneCommandTest {
         try {
             System.setOut(new PrintStream(outContent));
             new DoneCommand("", new String[]{"done", "100"})
-                    .execute(new TaskList(), new Ui(), new Storage(""));
+                    .execute(new TaskList(), new Ui(null, null), new Storage("", null));
             fail();
         } catch (DukeException de) {
-            String correctExpected = separationLine + "\n     :( OOPS!!! Please specify valid task number.\n"
-                    + separationLine + "\n";
+            String correctExpected = ":( OOPS!!! Please specify valid task number.\n";
             assertEquals(correctExpected, de.getMessage());
         }
     }

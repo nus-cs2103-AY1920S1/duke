@@ -14,9 +14,7 @@ public class ParserTest {
             Parser.parse("Random gibberish");
             fail();
         } catch (DukeException de) {
-            String correctExpected = "    ____________________________________________________________\n"
-                    + "     :( OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________" + "\n";
+            String correctExpected = ":( OOPS!!! I'm sorry, but I don't know what that means :-(";
             assertEquals(correctExpected, de.getMessage());
         }
     }

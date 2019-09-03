@@ -21,5 +21,5 @@ abstract class Command {
         return command.equals("bye");
     }
 
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, UnsupportedEncodingException;
+    abstract public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

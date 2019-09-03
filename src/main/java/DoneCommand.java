@@ -8,11 +8,16 @@ public class DoneCommand extends Command {
         super(command, commandDetails, INDENT);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, UnsupportedEncodingException {
-        listPointer = Integer.parseInt(commandDetails);
-        tasks.markTaskAsDone(listPointer - 1);
-        ui.printResponse("Nice! I've marked this task as done: \n"
-                + INDENT + "   " + tasks.getList().get(listPointer - 1));
-        storage.updateTodoFile(tasks.getListString());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            listPointer = Integer.parseInt(commandDetails);
+            tasks.markTaskAsDone(listPointer - 1);
+            ui.printResponse("Nice! I've marked this task as done: \n"
+                    + INDENT + "   " + tasks.getList().get(listPointer - 1));
+            storage.updateTodoFile(tasks.getListString());
+        } catch (Exception err) {
+            throw new DukeException(err.getMessage());
+        }
+
     }
 }

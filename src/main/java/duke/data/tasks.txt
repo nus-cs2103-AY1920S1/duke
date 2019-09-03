@@ -1,3 +1,2 @@
-T |    borrow book
-T |  borrow book
-T | borrow book
+T |       borrow books
+T |    borrow books

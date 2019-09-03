@@ -11,13 +11,14 @@ public class Command {
     private static final int TASK = 5;
     private static final int COMMANDS = -1;
     private static final String list =
-            "1) list - view your Todo list\n" +
-            "2) done TASK_NUMBER - mark a task as done\n" +
-            "3) delete TASK_NUMBER - delete a task\n" +
-            "4) find 'QUERY' - find tasks containing 'QUERY'\n" +
-            "5) todo 'TASK_NAME' - create a new todo called 'TASK_NAME'\n" +
-            "6) event 'EVENT_NAME' /at 'dd/mm/yyyy' 'TIME_IN_24HR'\n" +
-            "7) deadline 'TASK_NAME' /by /dd/mm/yyyy 'TIME_IN_24HR'";
+            "1) list: view your Todo list\n" +
+            "2) done {task_number}: mark a task as done\n" +
+            "3) delete {task_number}: delete a task\n" +
+            "4) find {query}: find tasks containing {query}\n\n" +
+            "          ---Task Commands---\n\n" +
+            "5) todo {task_name}\n" +
+            "6) event {event_name} /at {dd/mm/yyyy} {time_in_24hr}\n" +
+            "7) deadline {task_name} /by {dd/mm/yyyy} {time_in_24hr}";
 
     private String[] inputParts;
     private int command;

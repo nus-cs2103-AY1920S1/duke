@@ -14,6 +14,13 @@ public class DoneCommand extends Command {
         this.taskNo = taskNo;
     }
 
+    /**
+     * execute the command of marking a task as done
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.list.get(taskNo - 1).markAsDone();

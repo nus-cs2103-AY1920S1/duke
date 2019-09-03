@@ -13,6 +13,11 @@ import Command.ListCommand;
 public class Parser {
     public Parser() {}
 
+    /**
+     * Parse in the full command and return the command accordingly
+     * @param fullCommand
+     * @return Command
+     */
     public static Command parse(String fullCommand) {
         int i = fullCommand.indexOf(' ');
         String first = getFirstWord(fullCommand);
@@ -27,7 +32,7 @@ public class Parser {
                 return new ByeCommand();
             case "todo":
                 if (fullCommand.length() == 4) {
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
                 } else {
                     ToDos taskTodo = new ToDos(fullCommand.substring(i + 1));
                     taskTodo.setTaskType("T");
@@ -38,7 +43,7 @@ public class Parser {
                 int k = fullCommand.indexOf(" ");
 
                 if (fullCommand.length() == 8) {
-                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                 } else {
                     Deadlines taskDeadline = new Deadlines(fullCommand.substring(k + 1, j - 1));
                     taskDeadline.setTime(fullCommand.substring(j + 4));
@@ -50,7 +55,7 @@ public class Parser {
                 int q = fullCommand.indexOf(" ");
 
                 if (fullCommand.length() == 5) {
-                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                    System.out.println("OOPS!!! The description of an event cannot be empty.");
                 } else {
                     Events taskEvent = new Events(fullCommand.substring(q + 1, p - 1));
                     taskEvent.setTime(fullCommand.substring(p + 4));
@@ -58,11 +63,16 @@ public class Parser {
                     return new AddCommand(taskEvent);
                 }
             default:
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-()");
                 return null;
         }
     }
 
+    /**
+     * to get the first word in a string of input
+     * @param input
+     * @return  String
+     */
         public static String getFirstWord(String input) {
             if (input.indexOf(" ") > -1) {
                 return input.substring(0, input.indexOf(" "));

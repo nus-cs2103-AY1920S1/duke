@@ -14,6 +14,13 @@ public class DeleteCommand extends Command {
         this.taskNo = taskNo;
     }
 
+    /**
+     * execute the command of deleting the task
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         ui.showDeleteMessage(taskList, taskList.list.get(taskNo - 1));
@@ -21,6 +28,10 @@ public class DeleteCommand extends Command {
         storage.save(taskList);
     }
 
+    /**
+     * check if it is exited
+     * @return boolean
+     */
     @Override
     public boolean isExit() {
         return isExit;

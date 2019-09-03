@@ -25,21 +25,39 @@ public class Storage {
     public final String filepath;
 
     public Storage(String filepath) {
+
         this.filepath = filepath;
     }
 
+    /**
+     * store text into a file
+     * @param filePath
+     * @param textToAdd
+     * @throws IOException
+     */
     public void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter((filePath));
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * append the text in a file without over-writing the content inside
+     * @param filePath
+     * @param textToAppend
+     * @throws IOException
+     */
     public void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * save the tasks into the file
+     * @param taskList
+     * @throws IOException
+     */
     public void save(TaskList taskList) throws IOException {
         if(taskList.list.size() != 0) {
             writeToFile(filepath, taskList.list.get(0).toString() + System.lineSeparator());
@@ -50,6 +68,11 @@ public class Storage {
         }
     }
 
+    /**
+     * to load the list from the file
+     * @return
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>(100);
         Path path = Paths.get(filepath);
@@ -62,6 +85,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * to get the task from a string of input
+     * @param line
+     * @return </Task>
+     */
     private Optional<Task> getTask(String line) {
         try {
             List<String> data = Stream.of(line.split("\\|")).map(String::trim).collect(Collectors.toList());

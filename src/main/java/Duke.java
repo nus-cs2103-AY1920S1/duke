@@ -1,5 +1,5 @@
 /**
- * The Duke class is the main program.
+ * The Duke class handles the input of the user.
  */
 public class Duke {
 
@@ -10,7 +10,7 @@ public class Duke {
     /**
      * Creates a Duke object.
      *
-     * @param filePath A string representing the directory of the file
+     * @param filePath A string representing the directory of the file.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -18,29 +18,17 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
-    /**
-     * Loads and saves files by applying other classes.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
-        }
+    public static void main(String[] args) {
+        System.out.println("AAA");
     }
 
     /**
-     * This main program implements an application of the classes that will print all the outputs
-     * and it loads and saves files.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    public String getResponse(String input) {
+        Command c = Parser.parse(input);
+        String s = c.execute(tasks, ui, storage);
+        return s;
     }
 }
-
-
-
-

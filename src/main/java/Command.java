@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * The Command class makes use of multiple classes to drive the program.
  */
@@ -21,71 +23,95 @@ public class Command {
      * @param ui An Ui object that helps to interact with the user.
      * @param storage A Storage object that contains a file with the tasks in it.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        switch (command) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        Scanner sc = new Scanner(command);
+        String action = sc.next();
+        switch (action) {
         case "bye":
-            ui.showBye();
-            break;
+            return ui.showBye();
         case "list":
-            ui.listTask(tasks);
-            break;
+            return ui.listTask(tasks);
         case "done":
-            int number = ui.readNumber();
+            int number = sc.nextInt();
             if (!tasks.getList().get(number - 1).isDone()) {
                 tasks.markDone(number);
-                ui.printDone(number, tasks);
                 storage.updateDone(number, tasks);
+                return ui.printDone(number, tasks);
             } else {
-                System.out.println("Task is already done.");
+                return "Task is already done.";
             }
-            break;
         case "todo":
-            String taskname = ui.readLine().trim();
-            if (ui.checkValidity(taskname)) {
-                Task t = new Todo(taskname);
-                storage.addTodo(taskname, tasks);
-                tasks.add(t);
-                ui.printAdd(t, tasks);
+            try {
+                if (sc.hasNextLine()) {
+                    String taskname = sc.nextLine().trim();
+                    if (!taskname.equals("")) {
+                        Task t = new Todo(taskname);
+                        storage.addTodo(taskname, tasks);
+                        tasks.add(t);
+                        return ui.printAdd(t, tasks);
+                    } else {
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                } else {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                }
+            } catch (DukeException e) {
+                return e.getMessage();
             }
-            break;
         case "deadline":
-            String deadline = ui.readLine().trim();
-            if (ui.checkValidity(deadline)) {
-                String[] arrDeadline = deadline.split("/by");
-                String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
-                Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
-                storage.addDeadline(deadline, tasks);
-                tasks.add(taskDeadline);
-                ui.printAdd(taskDeadline, tasks);
+            try {
+                if (sc.hasNextLine()) {
+                    String deadline = sc.nextLine().trim();
+                    if (!deadline.equals("")) {
+                        String[] arrDeadline = deadline.split("/by");
+                        String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
+                        Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
+                        storage.addDeadline(deadline, tasks);
+                        tasks.add(taskDeadline);
+                        return ui.printAdd(taskDeadline, tasks);
+                    } else {
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                } else {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                }
+            } catch (DukeException e) {
+                return e.getMessage();
             }
-            break;
-        case "event":
-            String event = ui.readLine().trim();
-            if (ui.checkValidity(event)) {
-                String[] arrEvent = event.split("/at");
-                String time = Parser.convertDateAndTime(arrEvent[1].trim());
-                Task taskEvent = new Event(arrEvent[0].trim(), time);
-                storage.addEvent(event, tasks);
-                tasks.add(taskEvent);
-                ui.printAdd(taskEvent, tasks);
+            case "event":
+            try {
+                if (sc.hasNextLine()) {
+                    String event = sc.nextLine().trim();
+                    if (!event.equals("")) {
+                        String[] arrEvent = event.split("/at");
+                        String time = Parser.convertDateAndTime(arrEvent[1].trim());
+                        Task taskEvent = new Event(arrEvent[0].trim(), time);
+                        storage.addEvent(event, tasks);
+                        tasks.add(taskEvent);
+                        return ui.printAdd(taskEvent, tasks);
+                    } else {
+                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                    }
+                } else {
+                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                }
+            } catch (DukeException e) {
+                return e.getMessage();
             }
-            break;
         case "delete":
-            int deletionNumber = ui.readNumber();
+            int deletionNumber = sc.nextInt();
             storage.delete(deletionNumber, tasks);
             Task toDelete = tasks.getList().get(deletionNumber - 1);
             tasks.delete(deletionNumber);
-            ui.printDelete(toDelete, tasks);
-            break;
+            return ui.printDelete(toDelete, tasks);
         case "find":
-            String keyword = ui.readLine().trim();
-            ui.printFind(keyword, tasks);
-            break;
+            String keyword = sc.nextLine().trim();
+            return ui.printFind(keyword, tasks);
         default:
             try {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
         }
     }

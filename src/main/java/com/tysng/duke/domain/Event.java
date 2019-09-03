@@ -2,6 +2,9 @@ package com.tysng.duke.domain;
 
 import java.util.Date;
 
+/**
+ * This class contains a Data at which the event is happening.
+ */
 public class Event extends Task {
     private Date at;
 

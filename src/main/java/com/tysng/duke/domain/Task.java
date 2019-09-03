@@ -1,5 +1,8 @@
 package com.tysng.duke.domain;
 
+/**
+ * This class contains the common methods pertaining to Event, Task and ToDo classes
+ */
 public abstract class Task {
     protected boolean isCompleted;
     protected String taskName;
@@ -17,6 +20,11 @@ public abstract class Task {
         return isCompleted;
     }
 
+    /**
+     * Sets the completion status of the task.
+     *
+     * @param completed the completion status of the task
+     */
     public void setCompleted(boolean completed) {
         isCompleted = completed;
     }

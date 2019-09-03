@@ -2,6 +2,9 @@ package com.tysng.duke.domain;
 
 import java.util.Date;
 
+/**
+ * This class contains a Date by which the Deadline is due.
+ */
 public class Deadline extends Task {
     private Date by;
 

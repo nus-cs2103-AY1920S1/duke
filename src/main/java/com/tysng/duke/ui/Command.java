@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/*
-Parses command to get information
+/**
+ * This class parses raw user input text into a Command object that can be process by Duke.
  */
 public class Command {
     private CommandType type;
@@ -39,6 +39,14 @@ public class Command {
         this.addedTask = addedTask;
     }
 
+    /**
+     * Creates a new command from the user input. This static factory method parses a line of user
+     * input into a Command object.
+     *
+     * @param instruction a line of user input
+     * @return a command class with the user input wrapped inside
+     * @throws CommandException if the user input cannot be successfully parsed
+     */
     public static Command NewCommand(String instruction) throws CommandException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
         Date date;
@@ -83,7 +91,6 @@ public class Command {
         case "event":
             List<String> eventDetails = Stream.of(String.join(" ", Arrays.copyOfRange(command, 1, command.length))
                     .split("/at")).map(String::trim).collect(Collectors.toList());
-            ;
             if (eventDetails.size() != 2) {
                 throw new CommandException("☹ OOPS!!! Something is wrong with your input.");
             }
@@ -113,6 +120,9 @@ public class Command {
         return addedTask;
     }
 
+    /**
+     * The only types of Command allowed.
+     */
     public enum CommandType {
         BYE, LIST, DONE, ADD, ECHO, DELETE
     }

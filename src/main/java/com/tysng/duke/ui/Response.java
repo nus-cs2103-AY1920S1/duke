@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/*
-Handles response formatting
+/**
+ * This class formats the output of the Application. It wraps the lines of texts inside the class, and provides a
+ * convenient print() method to print to stdout.
  */
 public class Response {
     private static final String INDENT = "  ";
@@ -75,6 +76,9 @@ public class Response {
         return new Response(List.of(input));
     }
 
+    /**
+     * Prints the Response to stdout. This methods handles the indentation and dividers.
+     */
     public void print() {
         String border = "    ";
         String contentIndent = "     ";

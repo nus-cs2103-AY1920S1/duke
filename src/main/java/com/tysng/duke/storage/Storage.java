@@ -17,15 +17,29 @@ import java.util.stream.Stream;
 
 public class Storage {
     private final static String FILENAME = "duke.txt";
+
+    /**
+     * The platform-independent path to the /data folder
+     */
     private static Path DATA_FOLDER = Path.of(".", "data");
+
     private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
+    /**
+     * The Path object is assigned at run time
+     */
     private Path storageFilePath;
 
     private Storage() {
         this.storageFilePath = Path.of(DATA_FOLDER.toString(), FILENAME);
     }
 
+    /**
+     * Constructs a new Storage class.  The static factory method will create the data.txt file if the path and the file does
+     * not already exist.
+     *
+     * @return the constructed class
+     */
     public static Storage initialize() {
         Storage storage = new Storage();
         try {
@@ -43,6 +57,11 @@ public class Storage {
         return storage;
     }
 
+    /**
+     * Saves the given task list to local files.
+     *
+     * @param taskList a list of tasks
+     */
     public void saveTasks(List<Task> taskList) {
         List<String> entries = taskList.stream().map(this::toFileEntry).collect(Collectors.toList());
         try {
@@ -52,6 +71,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from local storage.  When the storage text file is not found, it writes the stack trace
+     * to stderr and returns an empty list.
+     *
+     * @return the loaded tasks
+     */
     public List<Task> loadTasks() {
         try {
             List<String> entries = Files.readAllLines(this.storageFilePath);

@@ -1,13 +1,12 @@
-package logic;
-
 import commands.Command;
+
+import logic.*;
 
 import java.util.Scanner;
 
 /**
  * Driver Class for Program.
  */
-
 public class Duke {
     private Scanner sc = new Scanner(System.in);
     private String taskListPath;
@@ -31,7 +30,7 @@ public class Duke {
     /**
      * Continuously scans for User Input, Creates Command Objects and execute accordingly.
      */
-    void start() {
+    void run() {
         ui.greet();
 
         while (sc.hasNextLine()) {
@@ -47,6 +46,6 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("./src/main/data/taskList.txt");
-        duke.start();
+        duke.run();
     }
 }

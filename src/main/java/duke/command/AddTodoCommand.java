@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.parser.Task;
-import duke.parser.Todo;
+import duke.dukeException.DukeException;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.UiText;

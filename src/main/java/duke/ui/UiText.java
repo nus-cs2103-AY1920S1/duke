@@ -1,5 +1,5 @@
 package duke.ui;
-import duke.parser.Task;
+import duke.task.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;

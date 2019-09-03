@@ -1,4 +1,4 @@
-import duke.parser.Event;
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,17 +8,17 @@ public class EventTest {
 
     @Test
     public void EventGetDescriptionTest() {
-        assertEquals(event.getDescription(), "Meeting");
+        assertEquals("Meeting", event.getDescription());
 
     }
 
     @Test
     public void EventGetInformationTest() {
-        assertEquals(event.getInformation(), "(at: 19/9/2019)");
+        assertEquals("(at: 19/9/2019)", event.getInformation());
     }
 
     @Test
     public void EventGetStatusBitTest() {
-        assertEquals(event.getStatusBit(), 0);
+        assertEquals(0, event.getStatusBit());
     }
 }

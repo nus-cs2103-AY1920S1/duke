@@ -1,14 +1,8 @@
 package duke.taskList;
 
-import duke.Duke;
-import duke.parser.Task;
-import duke.storage.Storage;
-import duke.DukeException;
-import duke.parser.Todo;
-import duke.parser.Event;
-import duke.parser.Deadline;
+import duke.task.Task;
+import duke.dukeException.DukeException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

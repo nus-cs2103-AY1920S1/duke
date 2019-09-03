@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.task;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ public class Event extends Task {
         super(description.trim());
         super.tag = "[E]";
         super.information = "(at: " + at.trim() + ")";
-        Date date = new Date(at.trim());
+        super.date = new Date(at.trim());
         super.taskType = TaskType.EVENT;
     }
 }

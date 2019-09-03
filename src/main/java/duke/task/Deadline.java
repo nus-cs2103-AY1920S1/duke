@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.task;
 
 import java.util.Date;
 /**
@@ -6,7 +6,7 @@ import java.util.Date;
  * description of the task and due time of the task.
  * @author Yang Shuting
  * @see Task
- * @see Deadine
+ * @see Deadline
  * @see Todo
  */
 public class Deadline extends Task {

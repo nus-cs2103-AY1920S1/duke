@@ -2,6 +2,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.dukeException.DukeException;
 import duke.parser.Parser;
 import duke.taskList.TaskList;
 import duke.storage.Storage;
@@ -33,7 +34,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -50,6 +51,7 @@ public class Duke {
                     ui.showLine();
                     Command c = Parser.parse(fullCommand);
                     c.execute(tasks, ui, storage);
+                    isExit = c.isExit();
                 } catch (DukeException e) {
                     ui.printlnMsg(e.getMessage());
                 } finally {
@@ -62,7 +64,7 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Duke duke = new Duke("src/main/data/duke.txt");
         duke.run();
     }

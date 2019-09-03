@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.task;
 
 import java.util.Date;
 

@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.parser.Task;
+import duke.dukeException.DukeException;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.UiText;
 
-public class Command {
+public abstract class Command {
     protected String[] command;
     protected boolean isExit = false;
 
@@ -18,10 +17,20 @@ public class Command {
 
     }
 
-    protected boolean isExit() {
+    public boolean isExit() {
         return isExit;
     }
 
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {}
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (String s : command) {
+            sb.append(s);
+            sb.append(" ");
+        }
+        return  sb.toString();
+    }
 
 }

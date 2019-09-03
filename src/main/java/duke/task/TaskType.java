@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.task;
 
 public enum TaskType {
     EVENT,

@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.task;
 
 /**
  * Todo task that is with tag T and tasktype of todo.

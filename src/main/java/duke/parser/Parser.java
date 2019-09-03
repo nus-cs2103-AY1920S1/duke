@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.DukeException;
 import duke.command.*;
 
 /**

@@ -1,7 +1,7 @@
 package duke.storage;
 
-import duke.DukeException;
-import duke.parser.Task;
+import duke.dukeException.DukeException;
+import duke.task.Task;
 import duke.ui.UiText;
 
 import java.io.FileNotFoundException;
@@ -95,25 +95,23 @@ public class Storage {
             String input = "";
 
             switch (task.getTaskType()) {
-                case TODO:
-                    input = String.format("T | %d | %s\n",
-                            task.getStatusBit(),
-                            task.getDescription());
-                    break;
+            case TODO:
+                input = String.format("T | %d | %s\n",
+                        task.getStatusBit(),
+                        task.getDescription());
+                break;
 
-                case DEADLINE:
-                    input = String.format("D | %d | %s | %s\n",
-                            task.getStatusBit(),
-                            task.getDescription(),
-                            task.getInformation());
-                    break;
-                case EVENT:
-                    input = String.format("E | %d | %s | %s\n",
-                            task.getStatusBit(),
-                            task.getDescription(),
-                            task.getInformation());
-
-
+            case DEADLINE:
+                input = String.format("D | %d | %s | %s\n",
+                        task.getStatusBit(),
+                        task.getDescription(),
+                        task.getInformation());
+                break;
+            case EVENT:
+                input = String.format("E | %d | %s | %s\n",
+                        task.getStatusBit(),
+                        task.getDescription(),
+                        task.getInformation());
             }
             writer.write(input);
         }

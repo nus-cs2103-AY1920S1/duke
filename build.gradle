@@ -3,6 +3,9 @@ plugins {
     id 'application'
     id 'checkstyle'
 }
+//apply plugin: "java"
+//apply plugin: "application"
+//apply plugin: "checkstyle"
 
 group 'seedu.duke'
 version '0.1.0'

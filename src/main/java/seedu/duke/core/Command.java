@@ -62,13 +62,13 @@ public class Command {
             if (description.equals("") || description == null) {
                 throw new DukeException("Oops! list index not entered for 'done'");
             } else {
-                output = new StringBuilder(output).append("\nNice! I've marked this task as done:\n").toString();
+
                 int index = Integer.valueOf(description) - 1;
                 list.get(index).markAsDone();
 
                 storage.saveTask(list);
-
-                output += displayTask(output, list, index);
+                output = "Nice! I've marked this task as done:\n";
+                output = displayTask(output, list, index);
             }
         } else if (cmd.equals("find")) {
             output += ui.displayList(output, storage.searchTask(list, description));
@@ -102,7 +102,8 @@ public class Command {
      */
     public String displayTask(String output, List<Task> list, int index) {
         if (index >= 0) {
-            output += (list.get(index) + "\n");
+            output = new StringBuilder(output)
+                    .append(list.get(index) + "\n").toString() ;
         }
         return output;
     }

@@ -1,5 +1,6 @@
 package seedu.duke.core;
 
+import javafx.scene.control.Label;
 import seedu.duke.model.Task;
 
 import java.util.List;
@@ -13,25 +14,25 @@ public class Ui {
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static String GREETINGMSG =
-            "____________________________________________________________\n"
+            "________________________________________________________________________________________________ \n"
             + "Hello! I'm Duke\n"
             + "What can I do for you?\n"
-            + "____________________________________________________________";
+            + "________________________________________________________________________________________________";
 
     public void readCommand() {
 
     }
 
-    public void showWelcome() {
-        System.out.println(GREETINGMSG);
+    public Label showWelcome() {
+        return new Label(GREETINGMSG);
     }
 
     public void printLine() {
         System.out.println("____________________________________________________________");
     }
 
-    public void printByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public Label printByeMessage() {
+        return new Label("Bye. Hope to see you again soon!");
     }
 
     public void showLoadingError() {

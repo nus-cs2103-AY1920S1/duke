@@ -26,6 +26,9 @@ public class Duke {
         ui.link(taskList,storage);
         ui.showWelcome();
     }
+    public static String getResponse(String input) {
+        return input;
+    }
     private void run() {
         // TODO add DukeException for this
         /**

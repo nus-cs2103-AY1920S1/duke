@@ -7,7 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
-
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Main extends Application {
 
@@ -16,12 +20,17 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user;
+    private Image duke;
 
     public static void main(String[] args) {
         launch();
     }
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws FileNotFoundException {
+        user= new Image(new FileInputStream("C:\\Users\\Seb\\duke\\images\\DaUser.jpg"));
+        duke = new Image(new FileInputStream("C:\\Users\\Seb\\duke\\images\\DaDuke.jpg"));
+
         //Step 1. Formatting the window to look as expected.
 
         //The container for the content of the chat to scroll.
@@ -69,6 +78,35 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // more code to be added here later
+        // part 3
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {  // for when user presses enter in textfield
+            handleUserInput();
+        });
+    }
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(Duke.getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 }

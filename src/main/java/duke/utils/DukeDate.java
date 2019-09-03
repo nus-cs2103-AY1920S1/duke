@@ -12,6 +12,7 @@ public class DukeDate {
 
     /**
      * Constructor
+     *
      * @param dateStr String representing a certain date and time (format as specified
      *                in DukeDate.dateFormatString)
      * @throws ParseException
@@ -24,6 +25,7 @@ public class DukeDate {
     /**
      * String representation of the date and time in the format specified in
      * DukeDate.dateFormatString
+     *
      * @return String representation of the date and time
      */
     public String toString() {

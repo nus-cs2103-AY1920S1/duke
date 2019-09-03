@@ -14,8 +14,9 @@ public class ListCommand extends Command {
      * Will iterate through the Tasks in TaskList and print out the
      * tasks one by one with a counter. This method will not cause the
      * TaskList to be saved.
-     * @param ui Ui object that is responsible for printing output as a response
-     * @param storage Storage object respnsible for saving the Tasks into a pre-defined format
+     *
+     * @param ui       Ui object that is responsible for printing output as a response
+     * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException
      */

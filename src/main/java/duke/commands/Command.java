@@ -20,6 +20,7 @@ public class Command {
     /**
      * Getter for <code>isExit</code> boolean.
      * Used to determine whether to exit the while loop in Duke
+     *
      * @return boolean determining whether to exit the while loop in Duke
      */
     public boolean isExit() {
@@ -30,8 +31,9 @@ public class Command {
      * Will save the Tasks in the TaskList via Storage's provided methods.
      * This method is useful as it can be called by child classes should they
      * require saving functionality.
-     * @param ui Ui object that is responsible for printing output as a response
-     * @param storage Storage object respnsible for saving the Tasks into a pre-defined format
+     *
+     * @param ui       Ui object that is responsible for printing output as a response
+     * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException
      */

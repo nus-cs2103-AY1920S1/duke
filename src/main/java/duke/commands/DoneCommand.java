@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param taskNum 1-indexed number of task
      */
     public DoneCommand(int taskNum) {
@@ -20,8 +21,9 @@ public class DoneCommand extends Command {
 
     /**
      * Will mark the task associated with <code>taskNum</code> as done
-     * @param ui Ui object that is responsible for printing output as a response
-     * @param storage Storage object respnsible for saving the Tasks into a pre-defined format
+     *
+     * @param ui       Ui object that is responsible for printing output as a response
+     * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException
      */

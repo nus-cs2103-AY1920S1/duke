@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class Parser {
     /**
      * Parses the entire line of user input and generates a Command object
+     *
      * @param fullCommand entire line of user input
      * @return Command object whose .execute() method can be called to achieve some desired behaviour
      * @throws DukeException
@@ -52,6 +53,7 @@ public class Parser {
 
     /**
      * Method to parse the parameters of the ToDo object
+     *
      * @param remainingParams remaining parameters required to initialise ToDo object
      * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
      * @throws DukeException
@@ -70,6 +72,7 @@ public class Parser {
 
     /**
      * Method to parse the parameters of the Event object
+     *
      * @param remainingParams remaining parameters required to initialise Event object
      * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
      * @throws DukeException
@@ -92,14 +95,14 @@ public class Parser {
             commandParams.add(durationArr[1].trim());
 
             return commandParams;
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Event is of invalid form!");
         }
     }
 
     /**
      * Method to parse the parameters of the Deadline object
+     *
      * @param remainingParams remaining parameters required to initialise Deadline object
      * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
      * @throws DukeException
@@ -120,8 +123,7 @@ public class Parser {
             commandParams.add(deadline);
 
             return commandParams;
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Deadline is of invalid form!");
         }
     }

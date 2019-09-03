@@ -12,9 +12,10 @@ public class Event extends Task {
 
     /**
      * Constructor
+     *
      * @param description String describing title/details of Event
-     * @param startTime String describing start time of Event (in the format specified in DukeDate.dateFormatString)
-     * @param endTime String describing end time of Event (in the format specified in DukeDate.dateFormatString)
+     * @param startTime   String describing start time of Event (in the format specified in DukeDate.dateFormatString)
+     * @param endTime     String describing end time of Event (in the format specified in DukeDate.dateFormatString)
      * @throws DukeException
      */
     public Event(String description, String startTime, String endTime) throws DukeException {
@@ -22,8 +23,7 @@ public class Event extends Task {
         try {
             this.startTime = new DukeDate(startTime);
             this.endTime = new DukeDate(endTime);
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             throw new DukeException("Unable to created Event object. Time in invalid format: " + e.getMessage());
         }
 
@@ -31,6 +31,7 @@ public class Event extends Task {
 
     /**
      * String representation of Event object
+     *
      * @return String representation of Event object
      */
     public String toString() {
@@ -41,6 +42,7 @@ public class Event extends Task {
     /**
      * Generates a String representation of the Event Task in a format
      * that is compatible for the Storage object to read and write.
+     *
      * @return String representation of the Task (compatibility with Storage class)
      */
     public String getStorageFormat() {

@@ -27,6 +27,7 @@ public class Storage {
 
     /**
      * Constructor
+     *
      * @param filepath String representing the path to the file in which Task data will be saved
      */
     public Storage(String filepath) {
@@ -35,6 +36,7 @@ public class Storage {
 
     /**
      * Convenience method to save a TaskList onto disk
+     *
      * @param allTasks TaskList representing a collection of Task objects
      * @throws DukeException
      */
@@ -49,8 +51,7 @@ public class Storage {
             }
 
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Could not save to file!");
         }
 
@@ -58,6 +59,7 @@ public class Storage {
 
     /**
      * Convenience method to load Task data from disk and re-created the TaskList object.
+     *
      * @return TaskList representing a collection of Tasks saved on disk
      * @throws DukeException
      */
@@ -71,8 +73,7 @@ public class Storage {
             }
 
             return new TaskList(allStoredTasks);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("No existing tasks found!");
         }
     }
@@ -80,6 +81,7 @@ public class Storage {
     /**
      * Private method used to convert from the String format in the disk data
      * into an actual Task object (ToDo, Event, Deadline)
+     *
      * @param nextLine disk data (each field is seperated by the "|" character)
      * @return Task object
      * @throws DukeException
@@ -90,7 +92,7 @@ public class Storage {
         Task t = new Task("Uninitialised Task");
 
         //These 2 attributes are consistent across all 3 Task types (ToDo, Deadline, Event)
-        boolean isDone = s[1].trim().equals("1") ? true : false;
+        boolean isDone = s[1].trim().equals("1");
         String description = s[2].trim();
 
         switch (command) {

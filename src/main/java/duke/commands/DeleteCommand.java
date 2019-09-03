@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param taskNum 1-indexed number associated with a given task
      */
     public DeleteCommand(int taskNum) {
@@ -21,8 +22,9 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task associated with <code>taskNum</code> and will save the
      * TaskList.
-     * @param ui Ui object that is responsible for printing output as a response
-     * @param storage Storage object respnsible for saving the Tasks into a pre-defined format
+     *
+     * @param ui       Ui object that is responsible for printing output as a response
+     * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException
      */

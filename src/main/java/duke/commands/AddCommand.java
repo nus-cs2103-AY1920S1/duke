@@ -14,6 +14,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor
+     *
      * @param commandParams ArrayList<String> containing the individual String components
      *                      required for the different Task types.
      */
@@ -24,8 +25,9 @@ public class AddCommand extends Command {
     /**
      * Executes the desired behaviour for the AddCommand object. In this case,
      * this involves adding a ToDo, Event or Deadline object to the TaskList.
-     * @param ui Ui object that is responsible for printing output as a response
-     * @param storage Storage object respnsible for saving the Tasks into a pre-defined format
+     *
+     * @param ui       Ui object that is responsible for printing output as a response
+     * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException
      */

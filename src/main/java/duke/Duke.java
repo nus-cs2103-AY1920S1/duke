@@ -6,26 +6,24 @@ import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.util.Scanner;
 
 /**
  * Main class for Duke application.
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
 
     /**
-     * Constructs a Duke object with disk storage located at "data/tasks.txt".
+     * Constructs a Duke object with disk storage located at filepath".
+     *
+     * @param filePath filepath for disk storage
      */
-    public Duke() {
-        this.storage = new Storage("data/tasks.txt");
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
         this.ui = new Ui();
         this.taskList = new TaskList(storage, ui);
     }
@@ -52,15 +50,14 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data/tasks.txt").run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

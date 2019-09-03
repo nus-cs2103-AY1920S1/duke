@@ -1,9 +1,15 @@
 public class Event extends Task {
-    private String eventTime;
+    private DateTime eventTime;
+    private static final String ABBREV_TASK = "E";
 
-    public Event(String description, String eventTime) {
+    public Event(String description, DateTime eventTime) {
         super(description);
         this.eventTime = eventTime;
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return ABBREV_TASK + " | " + taskIsDoneState + " | " + description + " | " + eventTime.toSaveFormat();
     }
 
     @Override

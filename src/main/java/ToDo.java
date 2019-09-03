@@ -1,8 +1,14 @@
 public class ToDo extends Task {
     private String by;
+    private static final String ABBREV_TASK = "T";
 
     public ToDo(String description) {
         super(description);
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return ABBREV_TASK + " | " + taskIsDoneState + " | " + description;
     }
 
     @Override

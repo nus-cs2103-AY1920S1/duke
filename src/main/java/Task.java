@@ -1,21 +1,26 @@
-public class Task {
+public abstract class Task {
 
-    private String description;
-    private boolean doneStatus;
+    protected String description;
+    protected boolean taskIsDone;
+    protected int taskIsDoneState;
 
     public Task(String description) {
         this.description = description;
-        doneStatus = false;
+        this.taskIsDone = false;
+        this.taskIsDoneState = 0;
     }
 
     public void taskComplete() {
-        doneStatus = true;
+        taskIsDone = true;
+        taskIsDoneState = 1;
     }
+
+    public abstract String toSaveFormat();
 
     @Override
     public String toString() {
         String output;
-        if (doneStatus == true) {
+        if (taskIsDone == true) {
             output = "[✓]";
         } else {
             output = "[✗]";

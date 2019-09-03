@@ -1,10 +1,15 @@
 public class Deadline extends Task {
+    private DateTime deadlineTime;
+    private static final String ABBREV_TASK = "D";
 
-    private String deadlineTime;
-
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, DateTime deadlineTime) {
         super(description);
         this.deadlineTime = deadlineTime;
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return ABBREV_TASK + " | " + taskIsDoneState + " | " + description + " | " + deadlineTime.toSaveFormat();
     }
 
     @Override

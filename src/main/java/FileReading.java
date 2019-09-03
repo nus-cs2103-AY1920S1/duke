@@ -26,7 +26,9 @@ public class FileReading {
             directory.mkdir();
         }
         File f = new File("data/duke.txt");
-        if (!f.createNewFile()){loadFileContents(taskList, f);}
+        if (!f.createNewFile()){
+            loadFileContents(taskList, f);
+        }
     }
 
     /**
@@ -37,7 +39,7 @@ public class FileReading {
      * @throws FileNotFoundException For cases where the method is called without a file present.
      */
 
-    public static void loadFileContents(ArrayList<Task> taskList, File f) throws FileNotFoundException {
+    static void loadFileContents(ArrayList<Task> taskList, File f) throws FileNotFoundException {
         String fullLine;
         String type;
         String done;

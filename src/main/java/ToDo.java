@@ -10,7 +10,7 @@ public class ToDo extends Task {
      * @param description  Description of the event task.
      */
 
-    public ToDo(String description) {
+    ToDo(String description) {
         super(description);
     }
 

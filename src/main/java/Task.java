@@ -4,8 +4,8 @@
 
 public abstract class Task {
 
-     public String description;
-     public boolean isDone;
+     String description;
+     private boolean isDone;
 
     /**
      * The constructor for the Deadline class.
@@ -21,7 +21,7 @@ public abstract class Task {
      * @return A tick or cross status icon depending on whether the task is completed
      */
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -29,7 +29,7 @@ public abstract class Task {
      * A setter to set the Task object to 'done'
      */
 
-    public void setDone(){
+    void setDone(){
         isDone=true;
     }
 

@@ -1,8 +1,3 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,19 +7,23 @@ import java.util.Scanner;
  * The main class for Duke.
  */
 
-public class Duke{ //extends Application {
+public class Duke {
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private static Ui ui = new Ui();
+    private static ArrayList<Task> taskList = new ArrayList<>(100);
+    private static InputParser inputParser = new InputParser(taskList);
 
-    static Ui ui = new Ui();
-    static ArrayList<Task> taskList = new ArrayList<>(100);
-    static InputParser inputParser = new InputParser(taskList);
-    static Scanner scan = new Scanner(System.in);
-    static String input = "";
+    Duke (){
+        try {
+            FileReading.checkFileExists(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
-    public String getResponse(String input) throws IOException {
+    String getResponse(String input) throws IOException {
         if (!input.equals("bye")) {
             inputParser.determineAction(input);
             String response= ui.getGuidedUserInterfaceMsg();
@@ -37,11 +36,13 @@ public class Duke{ //extends Application {
     public enum Action {
         ADD,
         REMOVE,
-        DONE,
-        FIND
+        DONE
     }
 
     public static void main(String[] args) throws IOException {
+
+        Scanner scan = new Scanner(System.in);
+        String input = "";
 
         try {
             FileReading.checkFileExists(taskList);
@@ -55,7 +56,6 @@ public class Duke{ //extends Application {
             input = scan.nextLine();
             inputParser.determineAction(input);
         }
-
         ui.sayGoodbye();
     }
 }

@@ -103,12 +103,6 @@ public class InputParser {
                 ui.setGuidedUserInterfaceMsg("OOPS!!! Please enter a valid number\n");
                 System.out.println("OOPS!!! Please enter a valid number\n");
                 break;
-            } catch (IndexOutOfBoundsException err) {
-                System.out.println("You only have " + taskList.size() + " tasks, please choose a number from " +
-                        "that\n");
-                ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() +
-                        " tasks, please choose a number from that\n");
-                break;
             }
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.DONE);
             break;
@@ -119,11 +113,6 @@ public class InputParser {
             } catch (NumberFormatException err) {
                 System.out.println("OOPS!!! Please enter a valid number\n");
                 ui.setGuidedUserInterfaceMsg("OOPS!!! Please enter a valid number\n");
-                break;
-            } catch (IndexOutOfBoundsException err) {
-                System.out.println("You only have " + taskList.size() + " tasks, please choose a number from that\n");
-                ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() +
-                        " tasks, please choose a number from that\n");
                 break;
             }
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.REMOVE);
@@ -142,6 +131,7 @@ public class InputParser {
                         guidedUserInterfaceMsg += findCounter + ". " + taskList.get(a).toString() +"\n";
                     }
                 }
+                ui.setGuidedUserInterfaceMsg(guidedUserInterfaceMsg);
                 break;
             } catch (IndexOutOfBoundsException err) {
                 System.out.println("OOPS!!! Incorrect format for the 'find' command.\n");

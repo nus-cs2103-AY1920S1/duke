@@ -5,7 +5,7 @@ import java.util.Date;
  * A list of accepted date formats by me to parse user inputs through to recognise dates
  */
 
-public class DateParser {
+class DateParser {
 
     private static SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     private static SimpleDateFormat formatter2 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -35,7 +35,7 @@ public class DateParser {
      * @return either a Date object or null value.
      */
 
-    public static Date parseDate(String date) {
+    static Date parseDate(String date) {
 
         try {
             return formatter1.parse(date);

@@ -11,7 +11,7 @@ import java.util.Iterator;
  * The class used to write data from the Task array list and store it in a 'duke.txt' file.
  */
 
-public class FileWriting {
+class FileWriting {
 
     /**
      * Used to check for an existing 'data' directory and 'temp.txt' file.
@@ -28,7 +28,7 @@ public class FileWriting {
      */
 
 
-    public static void writeToFile(ArrayList<Task> taskList) throws IOException {
+    static void writeToFile(ArrayList<Task> taskList) throws IOException {
 
         File directory = new File("data");
         if (!directory.exists()) {

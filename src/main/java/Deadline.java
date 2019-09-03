@@ -8,7 +8,6 @@ import java.util.Date;
 public class Deadline extends Task {
 
     protected String by;
-    protected Date date;
 
     /**
      * The constructor for the Deadline class.
@@ -16,10 +15,10 @@ public class Deadline extends Task {
      * @param by Used to store a date or user-inputted temporal descriptions.
      */
 
-    public Deadline(String description, String by) {
+    Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.date = DateParser.parseDate(by);
+        Date date = DateParser.parseDate(by);
         if (date != null) { this.by = date.toString(); }
     }
 

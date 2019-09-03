@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ModifyTaskList {
 
-    Ui ui = new Ui();
+    private Ui ui = new Ui();
 
     /**
      * Adds an additional task to the Task array list.
@@ -20,7 +20,7 @@ public class ModifyTaskList {
      * @throws IOException For cases where user input does not conform to the other classes' requirements.
      */
 
-    protected void addToTaskList(ArrayList<Task> taskList, Task t, Duke.Action action) throws IOException {
+    void addToTaskList(ArrayList<Task> taskList, Task t, Duke.Action action) throws IOException {
         if (action == Duke.Action.ADD) {
             taskList.add(t);
             ui.addTask(taskList);
@@ -37,10 +37,9 @@ public class ModifyTaskList {
      * @param taskNumber The number of the Task object.
      * @param action The type of operation that is to be done on the task list (in this case remove or set done).
      * @throws IndexOutOfBoundsException For numbers exceeding size of taskList.
-     * @throws IOException For non-numerical input.
      */
 
-    protected void changeTaskList (ArrayList<Task> taskList, int taskNumber, Duke.Action action){
+    void changeTaskList (ArrayList<Task> taskList, int taskNumber, Duke.Action action){
         if (action == Duke.Action.REMOVE) {
             try {
                 ui.removeTask(taskList, taskNumber);
@@ -48,6 +47,8 @@ public class ModifyTaskList {
                 FileWriting.writeToFile(taskList);
             } catch (IndexOutOfBoundsException | IOException err){
                 System.out.println("You only have " + taskList.size() + " tasks, please choose a number from that\n");
+                ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() + " tasks, please choose a number " +
+                        "from that\n");
             }
         }
 
@@ -58,6 +59,8 @@ public class ModifyTaskList {
                 FileWriting.writeToFile(taskList);
             } catch (IndexOutOfBoundsException | IOException err){
                 System.out.println("You only have " + taskList.size() + " tasks, please choose a number from that\n");
+                ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() + " tasks, please choose a number " +
+                        "from that\n");
             }
         }
     }

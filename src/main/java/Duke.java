@@ -17,30 +17,14 @@ public class Duke {
     private UI ui;
 
     public static void main(String[] args){
-        new Duke("tasks.txt").run();
+
+        new Duke("duke.txt").run();
     }
 
     public Duke(String filepath){
         ui = new UI();
-        Storage storage = new Storage(Path.of(filepath));
+        storage = new Storage(Path.of(filepath));
         tasks = storage.load();
-
-        /*
-        try{
-            String line = null;
-            BufferedReader br = new BufferedReader(new FileReader("savefile.txt"));
-            while((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
-            }
-            br.close();
-        } catch(Exception E){
-            System.out.println("Test failed");
-        }
-
-         */
-
-
-
 
     }
 
@@ -74,7 +58,7 @@ public class Duke {
                 }
 
                 ui.printData(content);
-                //storage.save(tasks);
+                storage.save(tasks);
 
             } else if(input.startsWith("done")) {
                 String[] sp = input.split(" ", 2);

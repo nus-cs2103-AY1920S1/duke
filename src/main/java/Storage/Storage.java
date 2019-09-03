@@ -34,8 +34,6 @@ public class Storage {
         try{
             Reader reader = Files.newBufferedReader(filepath);
             Scanner sc = new Scanner(reader);
-            System.out.println(sc.nextLine());
-
             while(sc.hasNextLine()){
                 tasks.add(parseLine(sc.nextLine()));
             }
@@ -88,7 +86,7 @@ public class Storage {
     private boolean parseTaskIsDone(String s){
         if(s.equals("Y")){
             return true;
-        } else if(s.equals("F")){
+        } else if(s.equals("N")){
             return false;
         } else {
             System.out.println("Error in resolving task done");
@@ -102,13 +100,19 @@ public class Storage {
 
     private void serializeToFile(Path filePath, Tasklist tasks){
         try{
-            FileOutputStream fos = new FileOutputStream(filePath.toFile());
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+            //FileOutputStream fos = new FileOutputStream(filePath.toFile());
+            //BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fos));
+
+            PrintWriter writer = new PrintWriter(filePath.toFile(), "UTF-8");
 
             int i;
             for(i = 0; i < tasks.size(); i++){
                 writer.write(serializeLine(tasks.get(i)));
+                writer.println();
             }
+
+            writer.close();
+
 
         } catch(Exception E){
             System.out.println("Unable to write to file");

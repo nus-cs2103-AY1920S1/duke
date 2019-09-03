@@ -133,6 +133,18 @@ public class Duke {
 		return false;
 	}
 
+	private boolean findTasks(Command input) {
+		this.io.say("Here are the matching tasks in your list:");
+		String target = input.arguments.toLowerCase();
+		this.io.say(this.taskList.stream()
+				.filter(task ->
+					task.getDescription().toLowerCase().contains(target))
+				.map(Object::toString)
+				.map(new CounterDecorator(1))
+				.iterator());
+		return false;
+	}
+
 	private Duke() {
 		this.io = new DukeIO();
 		//Bind command handlers
@@ -143,6 +155,7 @@ public class Duke {
 		this.io.bindCommand("event", this::makeEventTask);
 		this.io.bindCommand("todo", this::makeToDoTask);
 		this.io.bindCommand("delete", this::deleteTask);
+		this.io.bindCommand("find", this::findTasks);
 		this.io.setUnknownCommandHandler(cmd -> { throw new DukeException("I'm sorry, but I don't know what that means. :-("); });
 	}
 

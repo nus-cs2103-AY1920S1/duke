@@ -38,6 +38,10 @@ public class Task {
 		return this.completed;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
 	private static final String completedMarker = "[✓]";
 	private static final String incompleteMarker = "[✗]";
 

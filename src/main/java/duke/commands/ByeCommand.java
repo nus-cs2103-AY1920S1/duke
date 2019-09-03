@@ -5,7 +5,7 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-/** Command invoked when "bye" command is encountered */
+/** Command invoked when "bye" command is encountered. */
 public class ByeCommand extends Command {
     /**
      * Upon execution, will change the <code>isExit</code> boolean is true. Will also

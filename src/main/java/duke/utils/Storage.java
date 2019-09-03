@@ -23,7 +23,7 @@ import java.util.Scanner;
  * use the <code>save</code> and <code>load</code> methods.
  */
 public class Storage {
-    private File f;
+    private File file;
 
     /**
      * Constructor
@@ -31,7 +31,7 @@ public class Storage {
      * @param filepath String representing the path to the file in which Task data will be saved
      */
     public Storage(String filepath) {
-        this.f = new File(filepath);
+        this.file = new File(filepath);
     }
 
     /**
@@ -65,7 +65,7 @@ public class Storage {
      */
     public TaskList load() throws DukeException {
         try {
-            Scanner sc = new Scanner(this.f);
+            Scanner sc = new Scanner(this.file);
             ArrayList<Task> allStoredTasks = new ArrayList<Task>();
             while (sc.hasNext()) {
                 Task t = generateSavedTask(sc.nextLine());

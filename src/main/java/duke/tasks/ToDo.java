@@ -1,9 +1,9 @@
 package duke.tasks;
 
-/** Implements the logic behind a ToDo Task */
+/** Implements the logic behind a ToDo Task. */
 public class ToDo extends Task {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description String description of the ToDo Task
      */
@@ -12,7 +12,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * String representation of ToDo object
+     * String representation of ToDo object.
      *
      * @return String representation of ToDo object
      */

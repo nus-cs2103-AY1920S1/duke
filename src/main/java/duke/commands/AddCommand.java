@@ -8,12 +8,12 @@ import duke.utils.Ui;
 
 import java.util.ArrayList;
 
-/** Command invoked when "todo", "event" or "deadline" commands are encountered */
+/** Command invoked when "todo", "event" or "deadline" commands are encountered. */
 public class AddCommand extends Command {
     ArrayList<String> commandParams;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param commandParams ArrayList<String> containing the individual String components
      *                      required for the different Task types.

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class Parser {
     /**
-     * Parses the entire line of user input and generates a Command object
+     * Parses the entire line of user input and generates a Command object.
      *
      * @param fullCommand entire line of user input
      * @return Command object whose .execute() method can be called to achieve some desired behaviour
@@ -52,10 +52,10 @@ public class Parser {
     }
 
     /**
-     * Method to parse the parameters of the ToDo object
+     * Method to parse the parameters of the ToDo object.
      *
      * @param remainingParams remaining parameters required to initialise ToDo object
-     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
+     * @return ArrayList containing the processed parameters, ready to be passed to a Command object
      * @throws DukeException
      */
     public static ArrayList<String> parseToDo(String remainingParams) throws DukeException {
@@ -71,10 +71,10 @@ public class Parser {
     }
 
     /**
-     * Method to parse the parameters of the Event object
+     * Method to parse the parameters of the Event object.
      *
      * @param remainingParams remaining parameters required to initialise Event object
-     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
+     * @return ArrayList containing the processed paramters, ready to be passed to a Command object
      * @throws DukeException
      */
     public static ArrayList<String> parseEvent(String remainingParams) throws DukeException {
@@ -101,10 +101,10 @@ public class Parser {
     }
 
     /**
-     * Method to parse the parameters of the Deadline object
+     * Method to parse the parameters of the Deadline object.
      *
      * @param remainingParams remaining parameters required to initialise Deadline object
-     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
+     * @return ArrayList containing the processed parameters, ready to be passed to a Command object
      * @throws DukeException
      */
     public static ArrayList<String> parseDeadline(String remainingParams) throws DukeException {

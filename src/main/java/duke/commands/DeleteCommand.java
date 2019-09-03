@@ -6,12 +6,12 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-/** Command invoked when the "delete" command is encountered */
+/** Command invoked when the "delete" command is encountered. */
 public class DeleteCommand extends Command {
     int taskNum;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param taskNum 1-indexed number associated with a given task
      */

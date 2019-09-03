@@ -23,7 +23,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param saveFilePath String representing the path to the file in which Tasks
      *                     will be saved

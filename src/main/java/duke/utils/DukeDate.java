@@ -4,18 +4,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/** Convenience class to convert between String and Date object */
+/** Convenience class to convert between String and Date object. */
 public class DukeDate {
     private final String dateFormatString = "dd/MM/yyyy HH:mm";
     private SimpleDateFormat df;
     private Date time;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param dateStr String representing a certain date and time (format as specified
      *                in DukeDate.dateFormatString)
-     * @throws ParseException
+     * @throws ParseException Exception thrown when error encountered parsing dateStr
      */
     public DukeDate(String dateStr) throws ParseException {
         this.df = new SimpleDateFormat(this.dateFormatString);

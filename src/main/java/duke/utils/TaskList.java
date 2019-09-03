@@ -79,7 +79,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the underlying ArrayList of Tasks
+     * Returns the underlying ArrayList of Tasks.
      *
      * @return underlying ArrayList of Tasks
      */

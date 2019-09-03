@@ -8,9 +8,15 @@ import duke.utils.Ui;
 
 import java.util.ArrayList;
 
+/** Command invoked when the "find" command is encountered. */
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Constructor.
+     *
+     * @param keyword String representing the keyword to be searched for.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

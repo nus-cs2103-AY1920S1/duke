@@ -8,7 +8,7 @@ import duke.utils.Ui;
 
 import java.util.ArrayList;
 
-/** Command invoked when the "list" command is encountered */
+/** Command invoked when the "list" command is encountered. */
 public class ListCommand extends Command {
     /**
      * Will iterate through the Tasks in TaskList and print out the

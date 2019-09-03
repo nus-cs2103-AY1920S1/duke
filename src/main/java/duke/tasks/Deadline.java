@@ -5,12 +5,12 @@ import duke.utils.DukeDate;
 
 import java.text.ParseException;
 
-/** Implements the logic behind an Deadline Task */
+/** Implements the logic behind an Deadline Task. */
 public class Deadline extends Task {
     private DukeDate deadline;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description String describing title/details of Deadline
      * @param deadline    String describing time of Deadline (in the format specified in DukeDate.dateFormatString)
@@ -27,7 +27,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of Deadline object
+     * String representation of Deadline object.
      *
      * @return String representation of Deadline object
      */

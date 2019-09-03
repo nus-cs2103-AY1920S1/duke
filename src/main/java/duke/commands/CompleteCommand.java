@@ -5,12 +5,12 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-/** Command invoked when the "done" command is encountered */
+/** Command invoked when the "done" command is encountered. */
 public class CompleteCommand extends Command {
     int taskNum;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param taskNum the 1-indexed task number to be marked as complete
      */

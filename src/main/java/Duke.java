@@ -118,13 +118,14 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         dialogContainer.setSpacing(10);
+        //displayPicture.setFitHeight(100);
         userInput.clear();
     }
 
     /**
      * Replace this stub with completed method.
      */
-    private String getResponse(String input) {
+    protected String getResponse(String input) {
         return "Duke heard: " + input;
     }
 

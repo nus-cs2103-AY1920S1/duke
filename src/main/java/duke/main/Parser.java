@@ -54,11 +54,11 @@ class Parser {
             validateFindInput(toFind);
             return new FindCommand(toFind);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private static Date parseDate(String date) throws DukeException {
+    static Date parseDate(String date) throws DukeException {
         try {
             SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
             return dateFormatter.parse(date);
@@ -67,7 +67,7 @@ class Parser {
         }
     }
 
-    private static boolean isDate(String input) {
+    static boolean isDate(String input) {
         // Assume date is in the format 2/12/2019 1800
         String[] splitInput = input.split("/");
         if (splitInput.length != 3 || isNotNumeric(splitInput[0]) || isNotNumeric(splitInput[1])) {
@@ -93,7 +93,7 @@ class Parser {
     private static int validateDoneOrDeleteIndex(String doneInput) throws DukeException {
         // Checks that the string is not empty and is an integer
         if (doneInput.isEmpty() || isNotNumeric(doneInput)) {
-            throw new DukeException("☹ OOPS!!! The index to remove cannot be blank or not an integer.");
+            throw new DukeException("OOPS!!! The index to remove cannot be blank or not an integer.");
         }
 
         return Integer.parseInt(doneInput);
@@ -105,13 +105,13 @@ class Parser {
 
     private static void validateTodo(String todo) throws DukeException {
         if (todo.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     private static void validateFindInput(String toFind) throws DukeException {
         if (toFind.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The provided filter for find cannot be empty.");
+            throw new DukeException("OOPS!!! The provided filter for find cannot be empty.");
         }
     }
 
@@ -137,8 +137,8 @@ class Parser {
 
         // Event or deadline should be of length 2 after splitting and both should not be blank
         if (splitInput.length != 2 || splitInput[0].isBlank() || splitInput[1].isBlank()) {
-            throw new DukeException("☹ OOPS!!! I had trouble processing that input.\n"
-                    + "\tPlease make sure that the task description and dates are not empty!");
+            throw new DukeException("OOPS!!! I had trouble processing that input.\n"
+                    + "Please make sure that the task description and dates are not empty!");
         }
         return splitInput;
     }

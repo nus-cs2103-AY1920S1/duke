@@ -47,9 +47,17 @@ public class Storage {
                     task = new Todo(splitInput[2]);
                     break;
                 case "D":
+                    if (Parser.isDate(splitInput[3])) {
+                        task = new Deadline(splitInput[2], Parser.parseDate(splitInput[3]));
+                        break;
+                    }
                     task = new Deadline(splitInput[2], splitInput[3]);
                     break;
                 case "E":
+                    if (Parser.isDate(splitInput[3])) {
+                        task = new Event(splitInput[2], Parser.parseDate(splitInput[3]));
+                        break;
+                    }
                     task = new Event(splitInput[2], splitInput[3]);
                     break;
                 default:

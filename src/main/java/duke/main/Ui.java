@@ -6,17 +6,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner sc;
+    private StringBuilder output;
 
     Ui() {
-        sc = new Scanner(System.in);
+        output = new StringBuilder();
+    }
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    void resetOutput() {
+        output.setLength(0);
+    }
+
+    String getOutput() {
+        return output.toString();
+    }
+
+    private void appendToOutput(String str) {
+        output.append(str);
     }
 
     /**
@@ -26,11 +31,9 @@ public class Ui {
      * @param size Current size of list after addition.
      */
     public void printAddSuccessMessage(Task task, int size) {
-        showLine();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
-        showLine();
+        appendToOutput("Got it. I've added this task:\n");
+        appendToOutput("\t" + task + "\n");
+        appendToOutput("Now you have " + size + " tasks in the list.\n");
     }
 
     /**
@@ -40,11 +43,9 @@ public class Ui {
      * @param size Current size of list after deletion.
      */
     public void printDeleteSuccessMessage(Task task, int size) {
-        showLine();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have " + size + " tasks in the list.");
-        showLine();
+        appendToOutput("Noted. I've removed this task:\n");
+        appendToOutput("\t" + task + "\n");
+        appendToOutput("Now you have " + size + " tasks in the list.\n");
     }
 
     /**
@@ -54,29 +55,24 @@ public class Ui {
      * @param message The message to be printed before printing the list.
      */
     public void printList(ArrayList<Task> tasks, String message) {
-        showLine();
-        System.out.println("\t" + message);
+        appendToOutput(message + "\n");
         for (int i = 0; i < tasks.size(); i++) {
             int oneBasedIndex = i + 1;
-            System.out.printf("\t%d. %s\n", oneBasedIndex, tasks.get(i));
+            String formattedOutput = String.format("%d. %s\n", oneBasedIndex, tasks.get(i));
+            appendToOutput(formattedOutput);
         }
-        showLine();
     }
 
-    void printGreetingMessage() {
-        printMessage("Hello, I'm Duke\n\tWhat can I do for you?");
+    String getGreeting() {
+        return "Hello from Duke\nWhat can I do for you?";
     }
 
+    /**
+     * Prints the exit message.
+     *
+     */
     public void printExitMessage() {
-        printMessage("Bye. Hope to see you again soon!");
-    }
-
-    void showError(String message) {
-        printMessage(message);
-    }
-
-    void showLoadingError(String error) {
-        printMessage("An error occurred during file loading " + error);
+        appendToOutput("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -85,16 +81,6 @@ public class Ui {
      * @param message The message to be printed.
      */
     public void printMessage(String message) {
-        showLine();
-        System.out.println("\t" + message);
-        showLine();
-    }
-
-    private void showLine() {
-        System.out.println("\t____________________________________________________________");
-    }
-
-    String readCommand() {
-        return sc.nextLine();
+        appendToOutput(message);
     }
 }

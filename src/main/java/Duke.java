@@ -1,9 +1,14 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import Model.Tasklist;
 import Model.deadline;
 import Model.event;
@@ -11,10 +16,19 @@ import Model.todo;
 import Storage.Storage;
 import UI.UI;
 
-public class Duke {
+public class Duke extends Application{
     private Storage storage;
     private Tasklist tasks;
     private UI ui;
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 
     public static void main(String[] args){
 
@@ -23,7 +37,7 @@ public class Duke {
 
     public Duke(String filepath){
         ui = new UI();
-        storage = new Storage(Path.of(filepath));
+        storage = new Storage(Paths.get(filepath));
         tasks = storage.load();
 
     }

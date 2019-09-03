@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Main class of the application.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -22,7 +25,9 @@ public class Duke {
         }
     }
 
-    // run the program
+    /**
+     * Executes and runs the main program.
+     */
     public void run() {
         ui.welcomeMessage();
 

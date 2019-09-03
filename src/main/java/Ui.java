@@ -17,7 +17,11 @@ public class Ui {
         System.out.println("File loaded unsuccessful");
     }
 
-    // Printing the list of task from a taskList
+    /**
+     * Printing the list of task from a taskList.
+     *
+     * @param taskList the list of tasks
+     */
     public void printList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         int counter = 1;
@@ -28,6 +32,12 @@ public class Ui {
         }
     }
 
+    /**
+     * To find the task that matches the keyword with the description.
+     *
+     * @param taskList a list of tasks
+     * @param keyword the text/keyword that will be searched from the list
+     */
     public void searchTaskKeyword(TaskList taskList, String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         int counter = 1;
@@ -40,11 +50,22 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out the task that is marked as done.
+     *
+     * @param selectedTask a selected task from a list of tasks.
+     */
     public void printTaskDone(Task selectedTask) {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("[" + selectedTask.getStatusIcon() + "] " + selectedTask.getDescription());
     }
 
+    /**
+     * Adds a newTask into the current taskList.
+     *
+     * @param taskList a list of tasks
+     * @param newTask a new task to be added to the list of tasks
+     */
     public void printAddTask(TaskList taskList, Task newTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println(newTask);
@@ -52,6 +73,12 @@ public class Ui {
     }
 
 
+    /**
+     * To delete a task at a certain location.
+     *
+     * @param deletedTask a LinkedList that stores the list of tasks.
+     * @param index the location of the task to be deleted.
+     */
     public void printTaskDelete(LinkedList<Task> deletedTask, int index) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(deletedTask.get(index - 1));

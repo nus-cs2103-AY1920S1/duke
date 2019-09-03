@@ -13,7 +13,7 @@ public class Storage {
      *
      * @param filePath the location where the previous list of tasks is being saved.
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -85,7 +85,7 @@ public class Storage {
      * @throws FileNotFoundException if no file detected.
      * @throws IOException file corrupted.
      */
-    public static void writeFile (LinkedList<Task> updatedTask) {
+    public static void writeFile(LinkedList<Task> updatedTask) {
         File file = new File(filePath);
         boolean isFileExists = file.exists();
 
@@ -97,21 +97,26 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             for (Task subTask: updatedTask) {
                 if (subTask instanceof Todo) {
-                    String newTodo = "T | " +
-                            (subTask.isDone ? "1" : "0") + " | " +
-                            (subTask.getDescription());
+                    String newTodo = "T | "
+                            + (subTask.isDone ? "1" : "0")
+                            + " | "
+                            + (subTask.getDescription());
                     fw.write(newTodo + System.lineSeparator());
                 } else if (subTask instanceof Deadline) {
-                    String newDeadline = "D | " +
-                            (subTask.isDone ? "1" : "0") + " | " +
-                            (subTask.getDescription()) + " | " +
-                            (((Deadline) subTask).getBy());
+                    String newDeadline = "D | "
+                            + (subTask.isDone ? "1" : "0")
+                            + " | "
+                            + (subTask.getDescription())
+                            + " | "
+                            + (((Deadline) subTask).getBy());
                     fw.write(newDeadline + System.lineSeparator());
                 } else if (subTask instanceof Event) {
-                    String newEvent = "E | " +
-                            (subTask.isDone ? "1" : "0") + " | " +
-                            (subTask.getDescription()) + " | " +
-                            (((Event) subTask).getAt());
+                    String newEvent = "E | "
+                            + (subTask.isDone ? "1" : "0")
+                            + " | "
+                            + (subTask.getDescription())
+                            + " | "
+                            + (((Event) subTask).getAt());
                     fw.write(newEvent + System.lineSeparator());
                 } else {
                     fw.close();

@@ -1,6 +1,6 @@
 public class Todo extends Task {
     /**
-     * A subclass of Task that categorized itself as a regular thing that need to be done
+     * A subclass of Task that categorized itself as a regular thing that need to be done.
      *
      * @param description description of the Todo (Task).
      */

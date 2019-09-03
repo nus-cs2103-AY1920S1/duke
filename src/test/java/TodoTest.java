@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
-    public void testStringOutput(){
+    public void testStringOutput() {
         String description = "exampleDescription";
 
-        assertEquals("[T][" + "\u2718" + "] exampleDescription",
+        assertEquals("[T][1] exampleDescription",
                 new Todo(description).toString());
     }
 }

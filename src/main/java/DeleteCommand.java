@@ -11,13 +11,28 @@ public class DeleteCommand extends Command {
      * Creates a DeleteCommand object with the specified task number to be deleted assigned.
      *
      * @param command Contains the index of the task to be deleted.
+     * @throws NumberFormatException If index of task to be deleted is not a number.
      */
-    public DeleteCommand(String command) {
+    public DeleteCommand(String command) throws NumberFormatException {
         try {
             this.taskNumber = Integer.parseInt(command);
         } catch (NumberFormatException e) {
             throw new DukeException("    OOPS!!! Please specify the index of the task to be deleted.");
         }
+    }
+
+    /**
+     * Parses the command given to Duke and creates a DeleteCommand if possible.
+     *
+     * @param fullCommand Full command split by whitespace.
+     * @return DeleteCommand object to be created.
+     * @throws DukeException If no index is given.
+     */
+    public static DeleteCommand process(String[] fullCommand) throws DukeException {
+        if (fullCommand.length == 1) {
+            throw new DukeException("    OOPS!!! Please specify the index of the task to be deleted.");
+        }
+        return new DeleteCommand(fullCommand[1]);
     }
 
     /**

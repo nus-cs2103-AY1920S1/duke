@@ -18,11 +18,11 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            return new DoneCommand(currArray[1]);
+            return DoneCommand.process(currArray);
         case "delete":
-            return new DeleteCommand(currArray[1]);
+            return DeleteCommand.process(currArray);
         case "find":
-            return new FindCommand(currArray[1]);
+            return FindCommand.process(currArray);
         case "todo":
             return new AddCommand(Todo.process(currArray));
         case "deadline":

@@ -1,6 +1,11 @@
 package duke.util;
 
 public class Parser {
+    /**
+     * Returns a command according to user input
+     * @param inputParts user input
+     * @return Command object to be executed
+     */
     public static Command parse(String[] inputParts) {
         switch (inputParts[0]) {
         case "bye":

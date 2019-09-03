@@ -18,6 +18,9 @@ public class Duke {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private final String path = "./saved/taskList_history.txt";
 
+    /**
+     * Constructor for duke
+     */
     public Duke() {
         storage = new Storage(path);
         ui = new Ui();
@@ -35,18 +38,10 @@ public class Duke {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * Returns the duke's response to a user input
+     * @param input User input
+     * @return Message to be displayed
      */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     public String getResponse(String input) {
         try {
             String[] inputParts = input.split(" ", 2);

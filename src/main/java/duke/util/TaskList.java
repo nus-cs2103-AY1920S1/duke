@@ -273,6 +273,11 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Returns a list of results from a given search query
+     * @param name Search query
+     * @return String of all tasks containing the search query
+     */
     public String findItem(String name) {
         ArrayList<Task> results = new ArrayList<>();
         for (Task t : taskList) {

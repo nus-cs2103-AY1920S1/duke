@@ -11,7 +11,7 @@
    <children>
       <HBox fillHeight="true">
          <children>
-            <Label fx:id="dialog" alignment="TOP_LEFT" maxWidth="285.0" textFill="#dbdbdb" wrapText="true" HBox.hgrow="ALWAYS">
+            <Label fx:id="dialog" alignment="TOP_LEFT" maxWidth="285.0" textFill="#dbdbdb" wrapText="true">
                <padding>
                   <Insets top="20.0" />
                </padding>

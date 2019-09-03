@@ -23,11 +23,25 @@ public class Command {
     private String[] inputParts;
     private int command;
 
+    /**
+     * Constructor for Command object
+     * @param inputParts user input split into words, represented as an array
+     * @param command enum to determine which command it is
+     */
     public Command(String[] inputParts, int command) {
         this.command = command;
         this.inputParts = inputParts;
     }
 
+    /**
+     * Executes command
+     * @param storage Storage object for saving/retrieving task list
+     * @param ui Ui object to return duke's responses as strings
+     * @param tasks List of task
+     * @return String to be displayed as message
+     * @throws IOException if there is a problem when reading/writing to the history
+     * @throws DukeException if there is an invalid command/action by user
+     */
     public String execute(Storage storage, Ui ui, TaskList tasks) throws IOException, DukeException {
         if (command == BYE) {
             storage.saveHistory(tasks.getTaskList());

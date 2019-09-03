@@ -52,6 +52,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(this.filePath);
 
+            assert !taskList.isEmpty() : "Task list is empty, there is nothing to save!";
             for (int i = 0; i < taskList.size(); i++) {
                 fw.write(taskList.get(i).toFileFormat());
             }

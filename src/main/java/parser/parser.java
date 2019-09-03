@@ -1,3 +1,7 @@
+package parser;
+
+import tasklist.TaskList;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,16 +13,17 @@ import java.util.regex.Pattern;
 
 import static java.time.LocalTime.parse;
 
-public class Parser {
-    private CommandType commandType;
+public class parser {
     private boolean isDone;
     private String description;
     private LocalDateTime date;
     private boolean isSafe = true;
 
-    public Parser(String fullCommand) {
+    public parser(){};
+
+    public void parse(String fullCommand, TaskList scheduler) {
         Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
-                + "\\s*(?<completionstatus>(\\[[01]\\])?)"
+                + "\\s*(?<completionStatus>(\\[[01]\\])?)"
                 + "\\s*(?<description>([\\w\\s\\d]+)?)"
                 + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
@@ -26,48 +31,40 @@ public class Parser {
             System.out.println("    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                     "    ____________________________________________________________");
-            isSafe= false;
-        }else {
-            switch (matcher.group("commandWord").trim()) {
-            case "list":
-                commandType = CommandType.LIST;
-                break;
-            case "todo":
-                commandType = CommandType.ADDTODO;
-                break;
-            case "deadline":
-                commandType = CommandType.ADDDEADLINE;
-                break;
-            case "event":
-                commandType = CommandType.ADDEVENT;
-                break;
-            case "delete":
-                commandType = CommandType.DELETE;
-                break;
-            case "done":
-                commandType = CommandType.COMPLETE;
-                break;
-            default:
-                System.out.println("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! I'm sorry, but I don't know that task :-(\n" +
-                        "    ____________________________________________________________");
-                isSafe = false;
-            }
-            isDone = matcher.group("completionstatus").equals("[1]");
+            isSafe = false;
+        } else {
+            isDone = matcher.group("completionStatus").equals("[1]");
             description = matcher.group("description").trim();
             if (!matcher.group("date").isEmpty()) {
                 // Parsing the date
                 DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
                 date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
             }
-
+            switch (matcher.group("commandWord")) {
+            case "todo":
+            case "deadline":
+            case "event":
+                scheduler.addTask(description, isDone, date);
+                break;
+            case "list":
+                scheduler.listTasks();
+                break;
+            case "done":
+                scheduler.completeTask(description);
+                break;
+            case "delete":
+                scheduler.removeTask(description);
+                break;
+            default:
+                System.out.println("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know that command :-(\n" +
+                        "    ____________________________________________________________");
+                isSafe = false;
+            }
         }
-
     }
 
-    public CommandType getCommandType() {
-        return commandType;
-    }
+
 
     public boolean isDone() {
         return isDone;
@@ -85,4 +82,5 @@ public class Parser {
         return isSafe;
     }
 }
+
 

@@ -1,3 +1,5 @@
+package tasklist;
+
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
@@ -41,18 +43,20 @@ public class TaskList {
                 "    ____________________________________________________________");
     }
 
-
-    public void addTodo(String toDoName , boolean completionStatus){
-        taskList.addLast(new ToDos(toDoName,completionStatus));
+    public void addTask(String taskType , boolean completionStatus , LocalDateTime date ) {
+        switch (taskType) {
+        case "todo":
+            taskList.addLast(new Todo(taskType,completionStatus));
+        case "deadline":
+            taskList.addLast(new Deadline(taskType, completionStatus, date));
+            break;
+        case "event":
+            taskList.addLast(new Event(taskType, completionStatus, date));
+            break;
+        }
+        printnewtask();
     }
 
-    public void addDeadline(String deadlineName , boolean completionStatus , LocalDateTime date ) {
-        taskList.addLast(new Deadlines(deadlineName,completionStatus,date));
-    }
-
-    public void addEvent(String eventName , boolean completionStatus, LocalDateTime date){
-        taskList.addLast(new Events(eventName,completionStatus,date));
-    }
 
     public void removeTask(String deletedEvent){
         int taskTodDelete = Integer.parseInt(deletedEvent);
@@ -67,6 +71,5 @@ public class TaskList {
     public LinkedList<Task> getTaskList(){
         return taskList;
     }
-
 
 }

@@ -1,7 +1,15 @@
+import storage.Storage;
+import tasklist.TaskList;
+import parser.parser;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    private Storage saveFile;
+    private tas
+
+
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,12 +23,12 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         String user = input.nextLine();
-        Parser parser;
+        parser parser;
         Storage saveFile = new Storage();
 
         while (!user.equals("bye")) {
             TaskList taskList = new TaskList(saveFile.LoadData());
-            parser = new Parser(user);
+            parser = new parser(user);
             if (!parser.isSafe()){
                 continue;
             }

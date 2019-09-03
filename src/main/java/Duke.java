@@ -1,34 +1,27 @@
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
-import Tasks.TaskList;
-
 import Exception.DukeException;
-import Exception.IncorrectTaskNameException;
-import Exception.EmptyDeadlineDescriptionException;
-import Exception.EmptyEventDescriptionException;
-import Exception.EmptyTodoDescriptionException;
-
-import Util.Parser;
+import Tasks.Task;
+import Tasks.TaskList;
 import Util.Storage;
 import Util.Ui;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.util.ArrayList;
 /**
  * Represents the main class for the project where the main method will run
  */
-public class Duke {
+public class Duke extends Application {
     public static ArrayList<Task> storedTasks = new ArrayList<>();
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public static void main(String[] args) throws Exception {
-        new Duke("data/duke.txt").run();
-    }
+//    public static void main(String[] args) throws Exception {
+//        new Duke("data/duke.txt").run();
+//    }
 
     /**
      * Constructs a Duke object which will initialise 1)storage, 2)tasks 3)Ui class..
@@ -44,6 +37,9 @@ public class Duke {
             throw new DukeException("File is empty");
         }
     }
+    public Duke(){
+
+    }
 
     /**
      * runs the Ui read input to take in data from user.
@@ -53,5 +49,14 @@ public class Duke {
     public void run() throws Exception{
         ui.readInput();
         storage.closeFile();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

@@ -1,18 +1,17 @@
 package task;
-
 /**
  *
  */
 
-public class todoTask extends Task {
-
+public class TodoTask extends Task {
     /**
      *
      */
 
-    public todoTask(String taskInput, boolean complete) {
+    public TodoTask(String taskInput, boolean complete) {
         super(taskInput,complete);
         type = "T";
+
     }
 
 }

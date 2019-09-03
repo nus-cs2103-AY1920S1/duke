@@ -13,7 +13,7 @@ public abstract class Task {
 
     /**
      * Constructs a Task object (which cannot be initialised on its own)
-     * @param description a Description of the Task.
+     * @param description a Description of the Task
      */
     public Task(String description) {
         this._description = description;
@@ -24,7 +24,7 @@ public abstract class Task {
      * Gets the status icon of the Task, of whether it has been marked
      * as done or not.
      * @return Returns a "O" representing a Task that is marked done,
-     * and a "X" if a Task is not marked as done.
+     * and a "X" if a Task is not marked as done
      */
     public final String getStatusIcon() {
         return (_isDone ? "O" : "X");
@@ -39,15 +39,15 @@ public abstract class Task {
 
     /**
      * Gets the Description of the Task Object.
-     * @return String Returns a description of the current Task.
+     * @return a description of the current Task.
      */
     public final String getDesc() {
         return this._description;
     }
 
     /**
-     * Returns a string representation of the Task object
-     * @return String Returns a String representation of the Task object.
+     * Returns a string representation of the Task object.
+     * @return a String representation of the Task object
      */
     @Override
     public abstract String toString();
@@ -55,7 +55,7 @@ public abstract class Task {
     /**
      * Returns a string representation of the Task object to be saved
      * into the hard disk file for the Duke program.
-     * @return String Returns a the data representation of the Task.
+     * @return a String Returns a the data representation of the Task
      */
     public abstract String toData();
 }

@@ -7,6 +7,10 @@ import duke.task.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The Ui class handles all user interactions and is responsible for returning the correct
+ * String representations of the output for the user.
+ */
 public class Ui {
     private static final String LOGO = "____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -18,7 +22,7 @@ public class Ui {
 
     /**
      * Greets the users, and asks users what they want Duke to do.
-     * @return String Returns a String of Greetings.
+     * @return a String of Greetings.
      */
     public String showIntro() {
         String out = String.format("%s%n Hello! I am Duke%n " +
@@ -29,8 +33,8 @@ public class Ui {
     /**
      * Lists out all the tasks the user has added, be it ToDo, Deadlines or Events,
      * in the order of input.
-     * @param tasks An ArrayList which consists of the Task objects
-     * @return String Returns a Strings of all Tasks.
+     * @param tasks an ArrayList which consists of the Task objects
+     * @return a String representation of all Tasks in the list
      */
     public String showList(ArrayList<Task> tasks) {
         StringBuilder s = new StringBuilder();
@@ -46,7 +50,7 @@ public class Ui {
 
     /**
      * Bids the user GoodBye after the user is done using Duke.
-     * @return String Returns a string of farewell words.
+     * @return a string of farewell words
      */
     public String showFarewell() {
         String bye = String.format("GoodBye! Hope to see you again soon!");
@@ -54,10 +58,10 @@ public class Ui {
     }
 
     /**
-     * Adds a new Task to the list of tasks, and informs the user of the task added.
-     * @param t The Task to be added, which can be a ToDo, Deadline, or Event.
-     * @param list The TaskList which contains all Tasks in the list.
-     * @return String Returns a String of information notifying the user of the added task.
+     * Informs the user of the task added.
+     * @param t the Task to be added, which can be a ToDo, Deadline, or Event
+     * @param list the TaskList which contains all Tasks in the list
+     * @return a String of information notifying the user of the added task
      */
     public String showTaskAdded(Task t, TaskList list) {
         String added = String.format("Got it! I've added this task:" +
@@ -67,10 +71,10 @@ public class Ui {
     }
 
     /**
-     * Marks a Task as done, and notifies the user of the task marked as done.
-     * @param taskNo The task number, in the order of input.
-     * @param list The TaskList which contains all Tasks in the list.
-     * @return String Returns a string to inform user of the task marked as done.
+     * Notifies the user of the task marked as done.
+     * @param n the task number, in the order of input
+     * @param list the TaskList which contains all Tasks in the list
+     * @return a string to inform user of the task marked as done
      */
     public String showDone(int taskNo, TaskList list) {
         Task t = list.getTask(taskNo - 1);
@@ -80,10 +84,10 @@ public class Ui {
     }
 
     /**
-     * Deletes a given Task from the list of all Tasks, then notifies the user of the
-     * Task removed.
-     * @param index The task number, in the order of input.
-     * @return String Returns a string to inform user of the task removed from the list.
+     * Notifies the user of the Task removed.
+     * @param index the task number, in the order of input
+     * @param list the list from which the Task is to be deleted from
+     * @return a string to inform user of the task removed from the list
      */
     public String showDelete(int index, TaskList list) {
         Task t = list.getTask(index);
@@ -93,6 +97,11 @@ public class Ui {
         return addLines(del);
     }
 
+    /**
+     * Shows the user his data that is stored in the hard disk.
+     * @param data the DukeData object that stores the user's data from Duke program
+     * @throws IOException if an I/O Exception occurs
+     */
     public void showData(DukeData data) throws IOException {
         System.out.println(LINE);
         data.printDataFile();
@@ -100,6 +109,11 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Adds a line before and after every command.
+     * @param cmd the command output
+     * @return a String representation of the output with the lines
+     */
     public static String addLines(String cmd) {
         String out = String.format("%s%n %s%n%s%n",
                 LINE, cmd, LINE);

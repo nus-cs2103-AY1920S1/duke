@@ -17,6 +17,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return String.format("[DukeException] %s\n  > %s", this.getMessage(), this.errorSource); 
+        return String.format("[DukeException]\n%s\n  > %s", this.getMessage(), this.errorSource); 
     }
 }

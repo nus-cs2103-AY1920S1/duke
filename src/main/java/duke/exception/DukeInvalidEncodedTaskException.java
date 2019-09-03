@@ -21,7 +21,7 @@ public class DukeInvalidEncodedTaskException extends DukeException {
 
     @Override
     public String toString() {
-        String template = "[DukeInvalidEncodedTaskException] %s\n  > %s";
+        String template = "[DukeInvalidEncodedTaskException]\n%s\n  > %s";
         return String.format(template, this.getMessage(), this.errorSource); 
     }
 }

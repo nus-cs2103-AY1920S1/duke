@@ -8,7 +8,7 @@ public class DukeWriteToFileException extends DukeException {
 
     @Override
     public String toString() {
-        String template = "[DukeWriteToFileException] %s";
+        String template = "[DukeWriteToFileException]\n%s";
         return String.format(template, this.getMessage()); 
     }
 }

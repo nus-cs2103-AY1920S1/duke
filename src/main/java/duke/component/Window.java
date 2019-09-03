@@ -3,32 +3,29 @@ package duke.component;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
-public class Ui {
-    private static final String DUKE_LOGO =
-            " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String DUKE_INTRODUCTION = "Hello! I'm Duke\nWhat can I do for you?";
+public class Window {
     private static final String DIVIDER_PROTOTYPE = "____________________________________________________";
-    private static final String DIVIDER_BAR = String.format("    %s%s\n", Ui.DIVIDER_PROTOTYPE, Ui.DIVIDER_PROTOTYPE);
+    private static final String DIVIDER_BAR = String.format(
+        "    %s%s\n",
+        Window.DIVIDER_PROTOTYPE,
+        Window.DIVIDER_PROTOTYPE
+    );
     
     private Scanner sc;
 
     /**
      *  Creates a <code>Ui</code> object that handles user interactions.
      */
-    public Ui() {
+    public Window() {
         this.sc = new Scanner(System.in);
     }
 
     /**
      *  Displays the welcome message for the <code>Duke</code> application.
      */
-    public void showWelcome() {
-        System.out.println(Ui.DUKE_LOGO);
-        this.print(Ui.DUKE_INTRODUCTION);
+    public void showWelcome(String logo, String introduction) {
+        System.out.println(logo);
+        this.print(introduction);
     }
 
     /**
@@ -55,7 +52,7 @@ public class Ui {
     public void print(String message) {
         StringBuilder result = new StringBuilder();
         
-        result.append(Ui.DIVIDER_BAR)
+        result.append(Window.DIVIDER_BAR)
               .append("\n");
 
         // Retrieves each individual line in the message and pads them with spaces to the left
@@ -66,7 +63,7 @@ public class Ui {
                   .append("\n");
         }
         
-        result.append(Ui.DIVIDER_BAR);
+        result.append(Window.DIVIDER_BAR);
         System.out.println(result.toString());
     }
 }

@@ -8,7 +8,7 @@ public class DukeNoCommandException extends DukeException {
 
     @Override
     public String toString() {
-        String template = "[DukeNoCommandException] %s";
+        String template = "[DukeNoCommandException]\n%s";
         return String.format(template, this.getMessage()); 
     }
 }

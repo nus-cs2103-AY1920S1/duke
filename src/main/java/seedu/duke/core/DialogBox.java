@@ -23,9 +23,9 @@ public class DialogBox extends HBox {
         textBox.getChildren().add(text);
 
         displayPicture = iv;
-        displayPicture.setFitHeight(100);
-        displayPicture.setFitWidth(100);
-        clip = new Circle(50, 50, 50);
+        displayPicture.setFitHeight(70);
+        displayPicture.setFitWidth(70);
+        clip = new Circle(35, 35, 35);
         displayPicture.setClip(clip);
 
         this.setStyle("-fx-background-color: #CCCCCC");

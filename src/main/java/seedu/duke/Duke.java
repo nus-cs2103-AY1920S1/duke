@@ -69,9 +69,9 @@ public class Duke extends Application {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 600.0);
 
-        scrollPane.setPrefSize(395, 568.0);
+        scrollPane.setPrefSize(495, 568.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -81,7 +81,7 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty()
                 .addListener((observable) -> scrollPane.setVvalue(1.0));
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(425.0);
 
         sendButton.setPrefWidth(55.0);
 

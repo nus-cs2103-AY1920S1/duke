@@ -1,4 +1,13 @@
+package duke.task;
+
 import java.util.Scanner;
+
+import duke.task.DukeException;
+import duke.task.Parser;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Ui;
 
 public class Duke {
     private Storage storage;

@@ -1,6 +1,14 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+
+import duke.task.Deadline;
+import duke.task.DukeException;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Parser {
     public static Date getDateFromUser(String input) {

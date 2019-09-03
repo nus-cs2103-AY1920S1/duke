@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -176,9 +177,9 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        DialogBox userDialog = DialogBox.getUserDialog(userText, new ImageView(user), "user");
+        DialogBox userDialog = DialogBox.getUserDialog(userText.getText(), user, "user");
         userDialog.setPadding(new Insets(10, 10, 10, 10));
-        DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText, new ImageView(duke), "duke");
+        DialogBox dukeDialog = DialogBox.getDukeDialog(dukeText.getText(), duke, "duke");
         dukeDialog.setPadding(new Insets(10, 10, 10, 10));
         dialogContainer.getChildren().addAll(userDialog, dukeDialog);
         userInput.clear();
@@ -188,7 +189,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "BIDIBIDIBIDI " + input + " BIDIBIDIBIDI";
     }
 }

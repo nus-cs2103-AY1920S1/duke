@@ -28,15 +28,22 @@ public class DeleteCommand extends Command {
      * @param ui                User interface
      * @param storage           Hard disk storage
      * @throws DukeException    If storage fails, etc.
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
+    public String execute(TaskList tasks, TextUi ui, Storage storage) throws
             DukeException {
         int taskIndex = getTaskIndex(details, tasks.size());
         Task deletedTask = tasks.remove(taskIndex);
-        ui.showText("Noted. I've removed this task:"
+        String textToDisplay = "Noted. I've removed this task:"
                 + "\n  " + deletedTask.toString()
-                + "\nNow you have " + tasks.size() + " tasks in the list.");
-        save(tasks, storage);
+                + "\nNow you have " + tasks.size() + " tasks in the list.\n";
+        ui.showText(textToDisplay);
+        try {
+            save(tasks, storage);
+        } catch (DukeException e) {
+            System.err.print(e.getMessage());
+        }
+        return textToDisplay;
     }
 }

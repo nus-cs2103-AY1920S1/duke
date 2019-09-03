@@ -29,11 +29,11 @@ public class TodoCommand extends AddCommand {
      * @param ui                User interface
      * @param storage           Hard disk storage
      * @throws DukeException    If the superclass method fails, etc.
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
-            DukeException {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) {
         tasks.add(new Todo(details));
-        super.execute(tasks, ui, storage);
+        return super.execute(tasks, ui, storage);
     }
 }

@@ -6,8 +6,11 @@ import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -28,12 +31,18 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User1.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Dukey.png"));
+
     /**
      * Provides a constructor with zero parameters for JavaFX Launcher
      * to use.
      */
     public Duke() {
-        // empty constructor for JavaFX to work
+        // temporary: hardcoded storage file path
+        storage = new HardDiskStorage("/data/duke.txt");
+        tasks = new TaskList();
+        ui = new TextUi(); // temporary
     }
 
     /**
@@ -82,6 +91,9 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
+        stage.setScene(scene);
+        stage.show();
+
         // Step 2: Format window
 
         stage.setTitle("Duke");
@@ -112,8 +124,56 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        stage.setScene(scene);
-        stage.show();
+        // Step 3. Add functionality to handle user input.
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) ->
+                scrollPane.setVvalue(1.0));
+
+        // Add welcome message
+
+        Label dukeWelcome = new Label("Welcome to Duke!\nHow may I help you?");
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(dukeWelcome, new ImageView(duke))
+        );
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's response, then adds them to the dialog container. Clears user
+     * input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Executes the user input and returns Duke's response.
+     *
+     * @param input     String of user-given input
+     * @return          String of Duke's response to given input
+     */
+    private String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String dukeResponse = c.execute(tasks, ui, storage);
+            return dukeResponse;
+        } catch (DukeException e) {
+            return "Sorry, " + e.getMessage();
+        }
     }
 
     /**

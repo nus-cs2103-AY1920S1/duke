@@ -70,8 +70,9 @@ public abstract class Command {
      * @param ui                User interface
      * @param storage           Hard disk storage
      * @throws DukeException    If command details are invalid, etc.
+     * @return
      */
-    public abstract void execute(TaskList tasks, TextUi ui, Storage storage) throws
+    public abstract String execute(TaskList tasks, TextUi ui, Storage storage) throws
             DukeException;
 
     /**
@@ -86,7 +87,7 @@ public abstract class Command {
             storage.store(tasks);
         } catch (IOException e) {
             throw new DukeException(
-                    "oops! I encountered an error when saving your tasks.\n"
+                    "Oops! I encountered an error when saving your tasks.\n"
                             + "    " + e.getMessage() + "\n"
                             + "If you say bye now, you may not be able to access this\n"
                             + " list in future.");

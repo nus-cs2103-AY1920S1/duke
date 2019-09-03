@@ -30,12 +30,12 @@ public class EventCommand extends AddCommand {
      * @param ui                User interface
      * @param storage           Hard disk storage
      * @throws DukeException    If superclass method fails, etc.
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
-            DukeException {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) {
         String[] taskDetails = details.split(" /at ");
         tasks.add(new Event(taskDetails[0], taskDetails[1]));
-        super.execute(tasks, ui, storage);
+        return super.execute(tasks, ui, storage);
     }
 }

@@ -74,6 +74,19 @@ public class TaskList {
     }
 
     /**
+     * Returns a String of all tasks as a one-indexed list.
+     *
+     * @return  String containing all tasks as a one-indexed list
+     */
+    public String asIndexedString() {
+        String output = "";
+        for (int i = 1; i <= this.size(); i++) {
+            output = output.concat(i + "." + this.get(i - 1).toString() + "\n");
+        }
+        return output;
+    }
+
+    /**
      * Returns a String representing all of the tasks as a formatted list.
      *
      * @return  String representation of task list.

@@ -31,21 +31,29 @@ public class DoneCommand extends Command {
      * @param ui                User interface
      * @param storage           Hard disk storage
      * @throws DukeException    If task list fails to be saved to storage, etc.
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
-            DukeException {
+    public String execute(TaskList tasks, TextUi ui, Storage storage)
+            throws DukeException {
         int taskIndex = getTaskIndex(details, tasks.size());
         Task selectedTask = tasks.get(taskIndex);
+        String textToDisplay;
         if (isDone) {
             selectedTask.markAsDone();
-            ui.showText("Nice! I've marked this task as done:"
-                    + "\n  " + selectedTask.toString());
+            textToDisplay = "Nice! I've marked this task as done:"
+                    + "\n  " + selectedTask.toString();
         } else {
             selectedTask.markAsUndone();
-            ui.showText("Oh dear. I've marked this task as undone:"
-                    + "\n  " + selectedTask.toString());
+            textToDisplay = "Oh dear. I've marked this task as undone:"
+                    + "\n  " + selectedTask.toString();
         }
-        save(tasks, storage);
+        ui.showText(textToDisplay);
+        try {
+            save(tasks, storage);
+        } catch (DukeException e) {
+            System.err.print(e.getMessage());
+        }
+        return textToDisplay;
     }
 }

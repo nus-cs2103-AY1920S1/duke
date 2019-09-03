@@ -29,12 +29,12 @@ public class DeadlineCommand extends AddCommand {
      * @param storage           Hard disk storage
      * @throws DukeException    If an exception is thrown by the execute(...)
      *                          method in the parent class AddCommand
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
-            DukeException {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) {
         String[] taskDetails = details.split(" /by ");
         tasks.add(new Deadline(taskDetails[0], taskDetails[1]));
-        super.execute(tasks, ui, storage);
+        return super.execute(tasks, ui, storage);
     }
 }

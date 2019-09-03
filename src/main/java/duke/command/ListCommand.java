@@ -20,17 +20,20 @@ public class ListCommand extends Command {
     /**
      * Displays the current list of tasks on the given user interface, or
      * if the list is empty, displays an alternative message.
-     *
-     * @param tasks             List of tasks
+     *  @param tasks             List of tasks
      * @param ui                User interface
      * @param storage           Hard disk storage
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) {
+        String response;
         if (tasks.isEmpty()) {
-            ui.showText("You have no tasks now. Hooray!");
+            response = "You have no tasks now. Hooray!";
         } else {
-            ui.showList(tasks);
+            response = tasks.asIndexedString();
         }
+        ui.showText(response);
+        return response;
     }
 }

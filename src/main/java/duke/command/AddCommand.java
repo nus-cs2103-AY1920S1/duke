@@ -28,14 +28,20 @@ public abstract class AddCommand extends Command {
      * @param ui                User interface
      * @param storage           Hard disk storage
      * @throws DukeException    If an error occurs when saving the new task list
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
-            DukeException {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) {
         int numberOfTasks = tasks.size();
-        ui.showText("Got it. I've added this task:"
+        String textToDisplay = "Got it. I've added this task:"
                 + "\n  " + tasks.get(numberOfTasks - 1)
-                + "\nNow you have " + numberOfTasks + " tasks in the list.");
-        save(tasks, storage);
+                + "\nNow you have " + numberOfTasks + " tasks in the list.\n";
+        ui.showText(textToDisplay);
+        try {
+            save(tasks, storage);
+        } catch (DukeException e) {
+            System.err.print(e.getMessage());
+        }
+        return textToDisplay;
     }
 }

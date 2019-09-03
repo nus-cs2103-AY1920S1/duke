@@ -27,13 +27,13 @@ public class FindCommand extends Command {
      * FindCommand. Tasks are evaluated using their default toString() values
      * and are matched against the current command's details using the String
      * method contains(String).
-     *
-     * @param tasks             List of tasks
+     *  @param tasks             List of tasks
      * @param ui                User interface
      * @param storage           Hard disk storage
+     * @return                  String containing Duke's response
      */
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) {
+    public String execute(TaskList tasks, TextUi ui, Storage storage) {
         TaskList foundTasks = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -41,6 +41,6 @@ public class FindCommand extends Command {
                 foundTasks.add(task);
             }
         }
-        ui.showList(foundTasks);
+        return foundTasks.asIndexedString();
     }
 }

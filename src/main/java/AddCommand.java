@@ -28,7 +28,7 @@ public class AddCommand extends Command {
         try {
             storage.store(tasks);
         } catch (IOException e) {
-            System.out.println("    OOPS!!! " + e.getMessage());
+            System.err.println("    OOPS!!! " + e.getMessage());
         }
     }
 }

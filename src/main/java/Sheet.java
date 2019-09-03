@@ -88,6 +88,9 @@ public class Sheet {
         }
     }
 
+    /**
+     * Remove all tasks from the task list.
+     */
     public void clearList() {
         ui.showClearList();
         tasks.clear();

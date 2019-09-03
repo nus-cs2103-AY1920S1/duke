@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a command from user input String "done".
+ */
 public class CommandDone extends Command {
 
     public CommandDone(String cmd) {
@@ -26,5 +29,10 @@ public class CommandDone extends Command {
             throw new IllegalTaskIndexException(
                     "☹ OOPS!!! I cannot recognise that task index. :-(");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Done: " + command;
     }
 }

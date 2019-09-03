@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a command from user input String "delete".
+ */
 public class CommandDelete extends Command{
 
     public CommandDelete(String command) {
@@ -28,4 +31,8 @@ public class CommandDelete extends Command{
         }
     }
 
+    @Override
+    public String toString() {
+        return "Delete: " + command;
+    }
 }

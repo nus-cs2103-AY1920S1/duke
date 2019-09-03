@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a command from user input String "event".
+ */
 public class CommandEvent extends Command {
 
     public CommandEvent(String cmd) {
@@ -21,5 +24,10 @@ public class CommandEvent extends Command {
             sh.add(evTask);
             stor.save(sh.getList());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Event: " + command;
     }
 }

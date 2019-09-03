@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a command from user input String "bye".
+ */
 public class CommandExit extends Command{
 
     public CommandExit(String cmd) {
@@ -12,5 +15,10 @@ public class CommandExit extends Command{
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Exit: " + command;
     }
 }

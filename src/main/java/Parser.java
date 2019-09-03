@@ -3,6 +3,12 @@
  */
 public class Parser {
 
+    /**
+     * Parses the user input String into executable commands.
+     *
+     * @param cmd User input String.
+     * @return new Command object encapsulating the user's command.
+     */
     public static Command parse(String cmd) {
         String[] cmds = cmd.split(" ");
         String command = cmds[0];

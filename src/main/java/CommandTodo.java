@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a command from user input String "todo".
+ */
 public class CommandTodo extends Command {
 
     public CommandTodo(String command) {
@@ -13,5 +16,10 @@ public class CommandTodo extends Command {
         Task todoTask = new Todo(command.trim());
         sh.add(todoTask);
         stor.save(sh.getList());
+    }
+
+    @Override
+    public String toString() {
+        return "Todo: " + command;
     }
 }

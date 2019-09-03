@@ -1,6 +1,8 @@
-import java.io.IOException;
-
+/**
+ * Encapsulates a command from user input String "deadline".
+ */
 public class CommandDeadline extends Command {
+
     public CommandDeadline(String command) {
         super(command);
     }
@@ -21,5 +23,10 @@ public class CommandDeadline extends Command {
             sh.add(dlTask);
             stor.save(sh.getList());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Deadline: " + command;
     }
 }

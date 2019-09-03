@@ -8,21 +8,58 @@ import java.util.List;
 public class SheetTest {
     @Test
     public void addTest() {
-        try {
-            List<Task> lst1 = new ArrayList<>();
-            List<Task> lst2 = new ArrayList<>();
-            Task t1 = new Todo("task1");
-            Task t2 = new Todo("task2");
-            lst1.add(t1);
-            lst2.add(t1);
-            lst2.add(t2);
+        List<Task> lst1 = new ArrayList<>();
+        List<Task> lst2 = new ArrayList<>();
+        Task t1 = new Todo("task1");
+        Task t2 = new Todo("task2");
+        lst1.add(t1);
+        lst2.add(t1);
+        lst2.add(t2);
 
-            Sheet sh1 = new Sheet(lst1);
-            Sheet sh2 = new Sheet(lst2);
-            sh1.add(t2);
-            assertEquals(sh2.toString(), sh1.toString());
-        } catch (IOException e) {
-            System.out.println(e.toString());
+        Sheet sh1 = new Sheet(lst1);
+        Sheet sh2 = new Sheet(lst2);
+        sh1.add(t2);
+        assertEquals(sh2.toString(), sh1.toString());
+    }
+
+    @Test
+    public void deleteTest() {
+        List<Task> lst1 = new ArrayList<>();
+        List<Task> lst2 = new ArrayList<>();
+        Task t1 = new Todo("task1");
+        Task t2 = new Todo("task2");
+        lst1.add(t1);
+
+        Sheet sh1 = new Sheet(lst1);
+        Sheet sh2 = new Sheet(lst2);
+        sh1.delete(1);
+        assertEquals(sh2.toString(), sh1.toString());
+    }
+
+    @Test
+    public void markAsDoneTest() {
+        List<Task> lst1 = new ArrayList<>();
+        List<Task> lst2 = new ArrayList<>();
+        Task t1 = new Todo("task1").finish();
+        Task t2 = new Todo("task2");
+        lst1.add(t1);
+        lst2.add(t1);
+
+        Sheet sh1 = new Sheet(lst1);
+        Sheet sh2 = new Sheet(lst2);
+        sh2.markAsDone(1);
+        assertEquals(sh2.toString(), sh1.toString());
+    }
+
+    @Test
+    public void isEmptyTest() {
+        List<Task> lst1 = new ArrayList<>();
+        Sheet sh1 = new Sheet(lst1);
+        String isEmpty = "false";
+        if (sh1.isEmpty()) {
+            isEmpty = "true";
         }
+        assertEquals("true", isEmpty);
+
     }
 }

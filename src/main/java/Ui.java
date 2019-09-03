@@ -117,6 +117,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a header for the clear command.
+     */
     public void showClearList() {
         System.out.printf(INDENT + "Great! I've removed all your tasks!\n");
     }
@@ -131,6 +134,11 @@ public class Ui {
         System.out.printf(INDENT + " " + index + ". " + task + "\n");
     }
 
+    /**
+     * Reads the user input String from the keyboard.
+     *
+     * @return User input String.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

@@ -10,17 +10,38 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+/**
+ * Class for operations to task list.
+ */
 public class TaskList {
+    /**
+     * ArrayList of tasks.
+     */
     private ArrayList<Task> tasks;
 
+    /**
+     * Default constructor for TaskList. Used in case of unable to locate file.
+     */
     public TaskList() {
         tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param tasks ArrayList of tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Carry out operations according to commands from user.
+     *
+     * @param result integer passed from Parser class
+     * @param input  original String input from user
+     * @return ArrayList of tasks
+     */
     public List<Task> doCommand(int result, String input) {
         String[] s = input.split("\\s");
         switch (result) {

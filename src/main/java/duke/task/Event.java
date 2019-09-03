@@ -2,9 +2,21 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class for events.
+ */
 public class Event extends Task {
+    /**
+     * Variable for date and time.
+     */
     private LocalDateTime dateTime;
 
+    /**
+     * Constructor for event.
+     *
+     * @param description description of event
+     * @param date        date and time of event
+     */
     public Event(String description, String date) {
         super(description);
         String[] dateSplit = date.split("\\s");
@@ -17,16 +29,30 @@ public class Event extends Task {
         dateTime = LocalDateTime.of(year, month, day, hour, min);
     }
 
+    /**
+     * Returns date and time as a String.
+     *
+     * @return String of date and time
+     */
     private String getDate() {
         return dateTime.getDayOfMonth() + "/" + dateTime.getMonthValue() + "/" + dateTime.getYear() +
                 " " + String.format("%02d", dateTime.getHour()) + String.format("%02d", dateTime.getMinute());
     }
 
-    @Override
+    /**
+     * Returns String in text file format.
+     *
+     * @return a String to write on text file
+     */
     public String toFile() {
         return "E|" + getStatusIcon() + "|" + description + "|" + getDate();
     }
 
+    /**
+     * Returns String to output on terminal.
+     *
+     * @return a String to output on terminal
+     */
     @Override
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + description + "(at: " + getDate() + ")";

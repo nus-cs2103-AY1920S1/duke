@@ -1,4 +1,5 @@
 public class Task {
+    private int index;
     private char type ;
     private char status;
     private String taskName;
@@ -7,12 +8,17 @@ public class Task {
         //default constructor
     }
 
-    public Task(String taskName) {
+    public Task(String taskName, int index) {
         this.status = '✗';
         this.taskName = taskName;
+        this.index = index;
     }
     public char getType() {
         return type;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public void setType(char c) {

@@ -32,7 +32,7 @@ public class Gui extends Application {
             AnchorPane mainWindow = fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
-            //stage.setResizable(false);
+            stage.setResizable(false);
 
             //set the current working Duke
             fxmlLoader.<MainWindow>getController().setDuke(duke);

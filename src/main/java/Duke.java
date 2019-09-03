@@ -47,6 +47,14 @@ public class Duke{
                         dukePrint("☹ OOPS!!! The description of a " + userCommand + " cannot be empty.");
                     }
                     break;
+                case "delete":
+                    try {
+                        removeFromTodo(userInput.split(" ", 2)[1]);
+                    }
+                    catch (Exception e) {
+                        dukePrint("Nothing to delete");
+                    }
+                    break;
                 default:
                     dukePrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -85,6 +93,11 @@ public class Duke{
         dukePrint("Got it. I've added this task:" + "\n      " + todoList.get(todoList.size() - 1),
                 "Now you have " + todoList.size() + " tasks in the list.");
     }
-
+    private static void removeFromTodo(String description) {
+        ListItem target = todoList.get(Integer.parseInt(description) - 1);
+        todoList.remove(target);
+        dukePrint("Noted. I've removed this task:" + "\n      " + target,
+                "Now you have " + todoList.size() + " tasks in the list.");
+    }
 
 }

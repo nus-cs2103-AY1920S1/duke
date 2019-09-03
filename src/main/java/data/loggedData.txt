@@ -1,4 +1,0 @@
-D,true,dede ,12/12/0020 1200
-T,false,poo
-D,false,x  ,12/12/2012 1200
-D,false,x  ,12/12/1212 1200

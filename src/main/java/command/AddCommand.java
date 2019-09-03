@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     }
 
     public String formatOutput() {
-        return textFormatter.addFormat(added,reference.getSize());
+        return TextFormatter.addFormat(added,reference.getSize());
     }
 
     public void passToUI(String input) {

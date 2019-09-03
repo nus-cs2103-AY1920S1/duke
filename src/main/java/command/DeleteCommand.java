@@ -1,9 +1,9 @@
 package command;
 import task.Task;
 import task.TaskList;
-import task.deadlineTask;
-import task.eventTask;
-import task.todoTask;
+import task.DeadlineTask;
+import task.EventTask;
+import task.TodoTask;
 import driver.Ui;
 
 public class DeleteCommand extends Command {
@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     public String formatOutput() {
-        return textFormatter.deleteFormat(removed,reference.getSize());
+        return TextFormatter.deleteFormat(removed,reference.getSize());
     }
 
     public void passToUI(String input) {

@@ -1,9 +1,9 @@
 package command;
 import task.Task;
 import task.TaskList;
-import task.deadlineTask;
-import task.eventTask;
-import task.todoTask;
+import task.DeadlineTask;
+import task.EventTask;
+import task.TodoTask;
 import driver.Ui;
 
 public class DoneCommand extends Command {
@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
 
     public String formatOutput() {
 
-        return textFormatter.doneFormat(done);
+        return TextFormatter.doneFormat(done);
     }
 
     public void passToUI(String input) {

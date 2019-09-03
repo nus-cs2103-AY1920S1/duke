@@ -3,11 +3,11 @@ import java.util.Date;
 import formatter.TimeFormatter;
 
 
-public class deadlineTask extends Task {
+public class DeadlineTask extends Task {
     //Add variable for deadline tasks
     Date deadline;
 
-    public deadlineTask(String inputTask, boolean complete, Date endTime) {
+    public DeadlineTask(String inputTask, boolean complete, Date endTime) {
         super(inputTask,complete);
         type = "D";
         deadline = endTime;

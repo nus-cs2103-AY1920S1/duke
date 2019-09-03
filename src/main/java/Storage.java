@@ -1,5 +1,3 @@
-package duke.command;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;

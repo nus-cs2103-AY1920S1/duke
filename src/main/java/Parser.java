@@ -1,5 +1,3 @@
-package duke.command;
-
 import java.util.Arrays;
 
 /**

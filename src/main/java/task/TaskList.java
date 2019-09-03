@@ -1,81 +1,76 @@
 package task;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> task;
-    private int counter;
+    private static ArrayList<Task> task;
+    private static int counter;
 
-    public TaskList() {
-        this.task = new ArrayList<>();
-        this.counter = 0;
+    protected TaskList() {
+        TaskList.task = new ArrayList<>();
+        TaskList.counter = 0;
     }
 
-    public TaskList(ArrayList<Task> task) {
-        this.task = task;
-        this.counter = task.size();
+    protected TaskList(ArrayList<Task> task) {
+        TaskList.task = task;
+        TaskList.counter = task.size();
     }
 
-    public TaskList(ArrayList<Task> task, int counter) {
-        this.task = task;
-        this.counter = counter;
+    protected TaskList(ArrayList<Task> task, int counter) {
+        TaskList.task = task;
+        TaskList.counter = counter;
     }
 
     /**
      * Adds task into the current list of tasks.
      * 
      * @param t Task to be added.
-     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
      */
-    public TaskList addTask(Task t) {
+    protected static String addTask(Task t) {
         task.add(t);
-        Ui.printAddedTask(t, counter);
         counter++;
-        return new TaskList(task, counter);
+        return Ui.printAddedTask(t, counter - 1);
     }
 
     /**
      * Deletes task into the current list of tasks.
      * 
      * @param index Index of task to be deleted.
-     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
      */
-    public TaskList deleteTask(int index) {
+    protected static String deleteTask(int index) {
         Task deletedTask = task.remove(index);
         counter--;
-        Ui.printDeleteTask(deletedTask, counter);
-        return new TaskList(task, counter);
+        return Ui.printDeleteTask(deletedTask, counter);
     }
 
     /**
      * Mark the task that is in the list as done.
      * 
      * @param index Index of task to be marked as done.
-     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
      */
-    public TaskList doneTask(int index) {
+    protected static String doneTask(int index) {
         Task markAsDoneTask = task.get(index);
         markAsDoneTask.markAsDone();
-        Ui.printDoneTask(markAsDoneTask);
-        return new TaskList(task, counter);
+        return Ui.printDoneTask(markAsDoneTask);
     }
 
-    public void findTask(String keyWord) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task t : this.task) {
+    protected static String findTask(String keyWord) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task t : TaskList.task) {
             if (t.getDescription().contains(keyWord)) {
                 foundTasks.add(t);
             }
         }
-        Ui.printFoundTask(new TaskList(foundTasks));
+        return Ui.printFoundTask(foundTasks);
     }
 
-    public ArrayList<Task> getTasks() {
-        return this.task;
+    protected static ArrayList<Task> getTasks() {
+        return TaskList.task;
     }
 
-    public int getCounter() {
-        return this.counter;
+    protected static int getCounter() {
+        return TaskList.counter;
     }
 }

@@ -2,19 +2,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import task.TaskList;
-import task.Storage;
 import task.Parser;
+import task.Storage;
 import task.Ui;
 
 public class Duke {
 
     private TaskList taskList;
     private Storage storage;
-    private Parser parser;
 
     public Duke() {
         storage = new Storage();
-        parser = new Parser();
     }
 
     /**
@@ -35,12 +33,12 @@ public class Duke {
 
         Ui.startOfInteractions();
 
-        taskList = parser.parseList(taskList);
+        Ui.readUserInput();
 
         Ui.endOfInteractions();
 
         try {
-            storage.writeData(taskList);
+            storage.writeData();
         } catch (IOException e) {
             Ui.printException(e);
         }
@@ -51,6 +49,15 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        return Parser.parse(input);
+    }
+
+    protected String startOfShow() {
+        try {
+            taskList = storage.readData();
+            return Ui.startOfInteractions();
+        } catch (FileNotFoundException e) {
+            return Ui.printException(e);
+        }
     }
 }

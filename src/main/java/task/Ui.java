@@ -1,36 +1,59 @@
 package task;
 
+import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Ui {
 
-    public static void startOfInteractions() {
-        System.out.println("Hello I'm Duke\n" + "What can I do for you?");
+    public static String startOfInteractions() {
+        return "Hello I'm Duke\n" + "What can I do for you?";
     }
 
-    public static void endOfInteractions() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static void readUserInput() {
+        Scanner sc = new Scanner(System.in);
+
+        String textInput;
+        if (sc.hasNext()) {
+            textInput = sc.nextLine();
+        } else {
+            textInput = "bye";
+        }
+
+        while (!textInput.equals("bye")) {
+            Parser.parse(textInput);
+        }
+
+        // Close the scanner
+        sc.close();
+    }
+
+    public static String endOfInteractions() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints the list of tasks in taskList.
-     * 
-     * @param taskList Contains the list of tasks and number of tasks.
      */
-    public static void printList(TaskList taskList) {
-        ArrayList<Task> task = taskList.getTasks();
-        int counter = taskList.getCounter();
+    public static String printList() {
+        String output = "";
+        ArrayList<Task> task = TaskList.getTasks();
+        int counter = TaskList.getCounter();
         String isPlural = counter == 1 ? "is" : "are";
         String taskIfPlural = counter == 1 ? "task" : "tasks";
-        System.out.println("Here " + isPlural + " the " + taskIfPlural + " in your list:");
+        output += "Here " + isPlural + " the " + taskIfPlural + " in your list:\n";
         for (int i = 1; i <= counter; i++) {
-            System.out.println(i + "." + task.get(i - 1));
+            output += "" + i + "." + task.get(i - 1) + "\n";
         }
+
+        return output;
     }
 
-    public static void printDoneTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public static String printDoneTask(Task task) {
+        String output = "";
+        output += "Nice! I've marked this task as done:\n";
+        output += task + "\n";
+        return output;
     }
 
     /**
@@ -39,11 +62,13 @@ public class Ui {
      * @param t       Last added task.
      * @param counter Remaining number of tasks in the list.
      */
-    public static void printAddedTask(Task t, int counter) {
-        System.out.println("Got it. I've added this task:\n" + t);
+    public static String printAddedTask(Task t, int counter) {
+        String output = "";
+        output += "Got it. I've added this task:\n" + t + "\n";
         counter++;
         String taskIfPlural = counter == 1 ? "task" : "tasks";
-        System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
+        output += "Now you have " + counter + " " + taskIfPlural + " in the list.\n";
+        return output;
     }
 
     /**
@@ -52,22 +77,25 @@ public class Ui {
      * @param task    Last deleted task.
      * @param counter Remaining number of tasks in the list.
      */
-    public static void printDeleteTask(Task task, int counter) {
+    public static String printDeleteTask(Task task, int counter) {
+        String output = "";
         String taskIfPlural = counter <= 1 ? "task" : "tasks";
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
+        output += "Noted. I've removed this task:\n";
+        output += task + "\n";
+        output += "Now you have " + counter + " " + taskIfPlural + " in the list.\n";
+        return output;
     }
 
-    public static void printFoundTask(TaskList taskList) {
-        ArrayList<Task> task = taskList.getTasks();
-        int counter = taskList.getCounter();
+    public static String printFoundTask(List<Task> foundTasks) {
+        String output = "";
+        int counter = foundTasks.size();
         String isPlural = counter == 1 ? "is" : "are";
         String taskIfPlural = counter == 1 ? "task" : "tasks";
-        System.out.println("Here " + isPlural + " the matching " + taskIfPlural + " in your list:");
+        output += "Here " + isPlural + " the matching " + taskIfPlural + " in your list:\n";
         for (int i = 1; i <= counter; i++) {
-            System.out.println(i + "." + task.get(i - 1));
+            output += "" + i + "." + foundTasks.get(i - 1) + "\n";
         }
+        return output;
     }
 
     /**
@@ -75,11 +103,7 @@ public class Ui {
      * 
      * @param e Exception to be printed.
      */
-    public static void printException(Exception e) {
-        if (e instanceof DukeException) {
-            System.err.println(e);
-        } else {
-            System.err.println(e.getMessage());
-        }
+    public static String printException(Exception e) {
+        return e.getMessage();
     }
 }

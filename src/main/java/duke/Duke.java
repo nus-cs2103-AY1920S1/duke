@@ -42,7 +42,9 @@ public class Duke {
                 ui.print(command.execute(taskList));
                 isExit = command.isExit();
             } catch (DukeException e) {
+                //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
                 ui.print("\u26A0 OOPS! " + e.getMessage());
+                //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
             }
         }
 
@@ -64,7 +66,9 @@ public class Duke {
             Command command = Parser.parseCommand(input);
             return String.join("\n", command.execute(taskList));
         } catch (DukeException e) {
+            //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
             return "\u26A0 OOPS! " + e.getMessage();
+            //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
         }
     }
 }

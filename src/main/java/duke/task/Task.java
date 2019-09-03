@@ -22,11 +22,13 @@ public class Task {
      * @return the tick icon [✓] if task is done, or cross icon [✗] otherwise.
      */
     private String getStatusIcon() {
+        //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
         if (this.isDone) {
             return "[\u2713] ";
         } else {
             return "[\u2718] ";
         }
+        //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
     }
 
     /**

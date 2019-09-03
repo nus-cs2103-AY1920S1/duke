@@ -409,8 +409,12 @@ public class JsonParser {
                 break;
             } else if (input[i] == '\\' && !escape) {
                 escape = true;
-            } else if (escape && input[i] == '"' || input[i] == '\\') {
-                value.append(input[i]);
+            } else if (escape) {
+                if (input[i] == '"' || input[i] == '\\') {
+                    value.append(input[i]);
+                } else if (input[i] == 'n') {
+                    value.append('\n');
+                }
                 escape = false;
             } else {
                 value.append(input[i]);
@@ -449,5 +453,14 @@ public class JsonParser {
             i++;
         }
         return i;
+    }
+
+    /**
+     * Replace instances of " and n as escape characters for formatting as json string.
+     * @param str   string to format
+     * @return      formatted string
+     */
+    public static String formatStringForJson(String str) {
+        return str.replaceAll("\"", "\\\\\"").replaceAll("\n", "\\\\\n");
     }
 }

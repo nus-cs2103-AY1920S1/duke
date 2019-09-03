@@ -1,6 +1,7 @@
 package com.tasks;
 
 import com.util.json.JsonObject;
+import com.util.json.JsonParser;
 import com.util.json.Schema;
 
 public class Task {
@@ -42,7 +43,7 @@ public class Task {
      */
     public JsonObject toJson() {
         JsonObject obj = new JsonObject();
-        obj.put(Schema.ATTR_NAME, name.replaceAll("\"", "\\\\\""));
+        obj.put(Schema.ATTR_NAME, JsonParser.formatStringForJson(name));
         return obj;
     }
 }

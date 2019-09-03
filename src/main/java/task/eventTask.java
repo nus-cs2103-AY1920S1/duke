@@ -1,4 +1,7 @@
+package task;
+
 import java.util.Date;
+import formatter.TimeFormatter;
 
 public class eventTask extends Task {
     //Add variable for eventTask

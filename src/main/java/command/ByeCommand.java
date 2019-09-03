@@ -1,3 +1,4 @@
+package command;
 public class ByeCommand extends Command {
 
     public String formatOutput() {

@@ -1,3 +1,9 @@
+package command;
+
+import task.Task;
+import task.TaskList;
+import driver.Ui;
+
 public class AddCommand extends Command {
     String addedTask;
     Task added;

@@ -1,3 +1,5 @@
+package formatter;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;

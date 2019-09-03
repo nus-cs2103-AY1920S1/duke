@@ -26,8 +26,8 @@ public class DeleteCommand extends Command {
             Task item = tasks.remove(itemId);
             ui.printResponse("Noted. I've removed this task:  \n  "
                 + item.toString() + "\n"
-                + "Now you have " + tasks.size() +" tasks in the list.");
-        } catch(IndexOutOfBoundsException e) {
+                + "Now you have " + tasks.size() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
         }   
     }

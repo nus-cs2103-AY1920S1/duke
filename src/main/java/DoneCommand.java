@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
         int itemId = Parser.parseDone(this.fullCommand);
         try {
             tasks.markAsDone(itemId);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
         }
         ui.printResponse("Nice! I've marked this task as done: \n  "

@@ -25,7 +25,7 @@ public class AddCommand extends Command {
         tasks.add(task);
         ui.printResponse("Got it. I've added this task:\n  "
                 + task.toString() + "\n"
-                + "Now you have " + tasks.size() +" tasks in the list.");
+                + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public boolean isExit() {

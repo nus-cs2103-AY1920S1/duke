@@ -33,7 +33,7 @@ public class Main {
         this.ui.showWelcome();
 
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);

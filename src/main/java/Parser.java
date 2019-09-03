@@ -24,12 +24,12 @@ public class Parser {
     }
 
     public static Command parse(String input) throws DukeException {
-        if(keywordToCommand.containsKey(input)) {
+        if (keywordToCommand.containsKey(input)) {
             return keywordToCommand.get(input);
         } else {
             String keyword = input.split(" ")[0];
             Command command;
-            if(keywordToCommand.containsKey(keyword)) {
+            if (keywordToCommand.containsKey(keyword)) {
                 command = keywordToCommand.get(keyword).clone(input);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -42,11 +42,11 @@ public class Parser {
         String[] words = input.split(" ");
         int itemId;
         try {
-            assert(words.length == 2);
+            assert (words.length == 2);
             String command = words[0];
-            assert(command.equals("done"));
+            assert (command.equals("done"));
             itemId = Integer.parseInt(words[1]);
-        } catch(AssertionError e) {
+        } catch (AssertionError e) {
             throw new DukeException("☹ OOPS!!! Incorrect format for done command.");
         }
         return itemId;
@@ -56,11 +56,11 @@ public class Parser {
         String[] words = input.split(" ");
         int itemId;
         try {
-            assert(words.length == 2);
+            assert (words.length == 2);
             String command = words[0];
-            assert(command.equals("delete"));
+            assert (command.equals("delete"));
             itemId = Integer.parseInt(words[1]);
-        } catch(AssertionError e) {
+        } catch (AssertionError e) {
             throw new DukeException("☹ OOPS!!! Incorrect format for delete command.");
         }
         return itemId;
@@ -71,9 +71,9 @@ public class Parser {
         String type = words[0];
     
         String info = input.substring((type + " ").length());
-        switch(type) {
+        switch (type) {
         case "todo":
-            if(info.equals("")) {
+            if (info.equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
             return new Todo(info);
@@ -83,7 +83,7 @@ public class Parser {
             Date date;
             try {
                 date = dateFormatter.parse(args[1].trim());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 throw new DukeException("☹ OOPS!!! Incorrect date format.");
             }
             return new Deadline(description, date);
@@ -92,11 +92,12 @@ public class Parser {
             description = args[0].trim();
             try {
                 date = dateFormatter.parse(args[1].trim());
-            } catch(Exception e) {
+            } catch (Exception e) {
                 throw new DukeException("☹ OOPS!!! Incorrect date format.");
             }
             return new Event(description, date);
+        default:
+            throw new DukeException("Invalid task input.");
         }
-        throw new DukeException("Invalid task input.");
     }
 }

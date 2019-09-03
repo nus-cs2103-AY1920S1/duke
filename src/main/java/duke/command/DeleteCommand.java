@@ -14,7 +14,7 @@ import duke.task.Task;
 public class DeleteCommand extends Command {
 
     /**
-     * The task number to be deleted
+     * The task number to be deleted.
      */
     int taskNum;
 
@@ -31,17 +31,18 @@ public class DeleteCommand extends Command {
      * Deletes respective task in taskList and from text file.
      * Prints response in console.
      *
-     * @param taskList List of the things user needs to do
-     * @param ui       Interface that interacts with the user
-     * @param storage  Stores the user input in a file
-     * @throws DukeException IOException if there is an error writing or reading file
+     * @param taskList List of the things user needs to do.
+     * @param ui       Interface that interacts with the user.
+     * @param storage  Stores the user input in a file.
+     * @throws DukeException IOException if there is an error writing or reading file.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.deleteText(taskNum);
 
         Task removedTask = taskList.deleteTask(taskNum);
-        ui.printText("Noted. I've removed this task:\n" + removedTask +
-                "Now you have " + taskList.size() + " tasks in the list.");
+        ui.printText("Noted. I've removed this task:\n" + removedTask
+                + "Now you have " + taskList.size()
+                + " tasks in the list.");
 
 
     }
@@ -49,7 +50,7 @@ public class DeleteCommand extends Command {
     /**
      * Returns a false to indicate program has not exited.
      *
-     * @return false Program has not exited
+     * @return false Program has not exited.
      */
     public boolean isExit() {
         return false;

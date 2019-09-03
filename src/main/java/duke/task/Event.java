@@ -12,7 +12,7 @@ import java.util.Date;
 public class Event extends Task {
 
     /**
-     * Date the event happens
+     * Date the event happens.
      */
     private Date time;
 

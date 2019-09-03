@@ -1,7 +1,13 @@
 package duke.component;
 
 //imports
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyDescException;
 import duke.exception.InvalidArgumentException;
@@ -22,7 +28,7 @@ public class Parser {
 
 
     /**
-     * Parses out user inputs
+     * Parses out user inputs.
      *
      * @param input User input.
      * @return Command Type of command that user input in.

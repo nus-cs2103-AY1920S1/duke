@@ -14,7 +14,7 @@ import duke.task.Task;
 public class DoneCommand extends Command {
 
     /**
-     * The task number to be marked done
+     * The task number to be marked done.
      */
     int taskNum;
 
@@ -31,10 +31,10 @@ public class DoneCommand extends Command {
      * Marks respective task in taskList as done and task from text file to be 0.
      * Prints response in console.
      *
-     * @param taskList List of the things user needs to do
-     * @param ui       Interface that interacts with the user
-     * @param storage  Stores the user input in a file
-     * @throws DukeException IOException if there is an error writing or reading file
+     * @param taskList List of the things user needs to do.
+     * @param ui       Interface that interacts with the user.
+     * @param storage  Stores the user input in a file.
+     * @throws DukeException IOException if there is an error writing or reading file.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 

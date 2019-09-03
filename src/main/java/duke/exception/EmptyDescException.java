@@ -1,14 +1,14 @@
 package duke.exception;
 
 /**
- * Represents EmptyDescException that is thrown when the description
+ * Represents EmptyDescException that is thrown when the description.
  * of task or task number is empty.
  * The EmptyDescException class extends DukeException class.
  */
 public class EmptyDescException extends DukeException {
 
     /**
-     * The type ot task EmptyDescException is thrown under
+     * The type ot task EmptyDescException is thrown under.
      **/
     private String type;
 

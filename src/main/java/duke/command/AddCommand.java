@@ -22,31 +22,31 @@ import java.util.Date;
 public class AddCommand extends Command {
 
     /**
-     * Whether the deadline task is done
+     * Whether the deadline task is done.
      */
     boolean isDone;
 
     /**
-     * Description of deadline task
+     * Description of deadline task.
      */
     String description;
 
     /**
-     * Date in which the deadline task is due
+     * Date in which the deadline task is due.
      */
     Date deadline;
 
     /**
-     * Type of task to be added
+     * Type of task to be added.
      */
     String type;
 
     /**
      * Initializes a new instance of DeadlineCommand.
      *
-     * @param isDone      Whether deadline task is done
-     * @param description Description of task
-     * @param deadline    Date the task is due
+     * @param isDone      Whether deadline task is done.
+     * @param description Description of task.
+     * @param deadline    Date the task is due.
      */
     public AddCommand(String type, boolean isDone, String description, String deadline) {
         this.type = type;
@@ -71,10 +71,10 @@ public class AddCommand extends Command {
      * Adds Task object to TaskList and adds inputs to the File in Storage, and
      * prints response.
      *
-     * @param taskList List of the things user needs to do
-     * @param ui       Interface that interacts with the user
-     * @param storage  Stores the user input in a file
-     * @throws DukeException IOException if there is an error writing or reading file
+     * @param taskList List of the things user needs to do.
+     * @param ui       Interface that interacts with the user.
+     * @param storage  Stores the user input in a file.
+     * @throws DukeException IOException if there is an error writing or reading file.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
@@ -93,7 +93,7 @@ public class AddCommand extends Command {
             newTask = new Event(this.description, this.deadline);
             break;
 
-        case ("T"):
+        default:
             newTask = new Todo(this.description);
             break;
 
@@ -107,8 +107,8 @@ public class AddCommand extends Command {
 
 
         ui.printText("Got it. I've added this task: \n" + "  "
-                + newTask + "Now you have " +
-                numTask + " tasks in the list.");
+                + newTask + "Now you have "
+                + numTask + " tasks in the list.");
 
     }
 
@@ -116,7 +116,7 @@ public class AddCommand extends Command {
     /**
      * Returns a false to indicate program has not exited.
      *
-     * @return false Program has not exited
+     * @return false Program has not exited.
      */
     public boolean isExit() {
         return false;

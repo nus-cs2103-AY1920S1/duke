@@ -14,17 +14,17 @@ import duke.exception.DukeException;
 public class Duke {
 
     /**
-     * Store and load tasks from text in text file
+     * Store and load tasks from text in text file.
      */
     private Storage storage;
 
     /**
-     * Task List of tasks
+     * Task List of tasks.
      */
     private TaskList tasks;
 
     /**
-     * User Interface that takes care of user interaction with chatbot
+     * User Interface that takes care of user interaction with chatbot.
      */
     private Ui ui;
 

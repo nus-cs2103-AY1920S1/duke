@@ -16,7 +16,7 @@ import java.util.List;
 public class FindCommand extends Command {
 
     /**
-     * Keyword to find specific tasks
+     * Keyword to find specific tasks.
      */
     String keyword;
 
@@ -33,10 +33,10 @@ public class FindCommand extends Command {
      * Finds a specific task with keyowrd from list of tasks,
      * and prints result.
      *
-     * @param taskList Stores the list of the tasks
-     * @param ui       Interface that interacts with the user
-     * @param storage  Stores the user input in a file
-     * @throws DukeException IOException if there is an error writing or reading file
+     * @param taskList Stores the list of the tasks.
+     * @param ui       Interface that interacts with the user.
+     * @param storage  Stores the user input in a file.
+     * @throws DukeException IOException if there is an error writing or reading file.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
@@ -58,7 +58,7 @@ public class FindCommand extends Command {
     /**
      * Returns a false to indicate program has not exited.
      *
-     * @return false Program has not exited
+     * @return false Program has not exited.
      */
     public boolean isExit() {
         return false;

@@ -7,12 +7,12 @@ package duke.task;
  */
 public abstract class Task {
     /**
-     * Description of task
+     * Description of task.
      */
     private String description;
 
     /**
-     * Whether task is done
+     * Whether task is done.
      */
     protected boolean isDone;
 
@@ -28,10 +28,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-   /* public Task(boolean isDone, String description) {
-        this.isDone = isDone;
-        this.description = description;
-    } */
 
     /**
      * Initialises a new instance oft task.
@@ -57,9 +53,9 @@ public abstract class Task {
 
     /**
      * Returns a string representing whether task is done.
+     * The value v for when task is done and x for when task is not done.
      *
-     * @return STring representation of whether task is done.
-     * v for when task is done and x for when task is not done.
+     * @return Striing representation of whether task is done.
      */
     public String getStatusIcon() {
         return (this.isDone ? "v" : "x"); // "\u2713" : "\u2718"); //return tick or X symbols
@@ -73,7 +69,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string represenation of task
+     * Returns a string represenation of task.
      */
     public abstract String toString();
 }

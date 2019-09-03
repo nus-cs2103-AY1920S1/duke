@@ -16,22 +16,22 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Parser to parse user inputs
+     * Parser to parse user inputs.
      */
     private Parser inputParser = new Parser();
 
     /**
-     * Scanner to scan user inputs
+     * Scanner to scan user inputs.
      */
     private Scanner scanner = new Scanner(System.in);
 
     /**
-     * Checks whether Ui should close
+     * Checks whether Ui should close.
      */
     boolean isExit = false;
 
     /**
-     * Reads user inputs
+     * Reads user inputs.
      *
      * @return String that represents user inputs.
      */
@@ -44,8 +44,8 @@ public class Ui {
      */
     public void showWelcome() {
         this.showLine();
-        this.printText("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        this.printText("Hello! I'm Duke\n"
+                + "What can I do for you?");
         this.showLine();
     }
 
@@ -86,7 +86,7 @@ public class Ui {
 
 
     /**
-     * Prints error message
+     * Prints error message.
      *
      * @param message Message to print.
      */

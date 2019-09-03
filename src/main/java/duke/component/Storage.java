@@ -29,12 +29,12 @@ import java.util.List;
 public class Storage {
 
     /**
-     * File path
+     * File path.
      */
     private String filePath;
 
     /**
-     * Text file
+     * Text file.
      */
     private File textFile;
 
@@ -52,7 +52,7 @@ public class Storage {
     /**
      * Returns ArrayList of Tasks converted from tasks in text file.
      *
-     * @return ArrayList of Tasks
+     * @return ArrayList of Tasks.
      * @throws DukeException If there is IOException when reading or writing from text file.
      */
     public ArrayList<Task> load() throws DukeException {
@@ -81,7 +81,7 @@ public class Storage {
      * Returns task converted from String representation of text in text file.
      *
      * @param line String representation of a task, from text file.
-     * @return Task
+     * @return Task.
      */
     public Task lineToTask(String line) {
         String[] lineArray = line.split("\\|");
@@ -112,7 +112,7 @@ public class Storage {
      * @throws DukeException If there is IOException when reading or writing from text file.
      */
     public void writeToFile(String textToAdd) throws DukeException {
-        try {//Create a file writer object to represent the hard disk
+        try { //Create a file writer object to represent the hard disk
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(textToAdd);
             fw.close();
@@ -122,15 +122,23 @@ public class Storage {
     }
 
 
+    /**
+     * Appends task into text file.
+     *
+     * @param type Type of task.
+     * @param date Date the task is due on.
+     * @param desc Description of task.
+     * @throws DukeException If IOException is thrown when reading or writing from file.
+     */
     public void appendToFile(String type, Date date, String desc) throws DukeException {
 
-        if (date == null)
+        if (date == null) {
             writeToFile(type + " | 1 | " + desc + "\n");
-        else
+        } else {
             writeToFile(type + " | 1 | " + desc + " | " + date + "\n");
-
-
+        }
     }
+
 
     /**
      * Updates text that is already in text file.

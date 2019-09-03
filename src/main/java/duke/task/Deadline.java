@@ -12,7 +12,7 @@ import java.util.Date;
 public class Deadline extends Task {
 
     /**
-     * Date the task is due
+     * Date the task is due.
      */
     private Date deadline;
 

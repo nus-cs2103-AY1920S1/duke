@@ -8,10 +8,8 @@ public class Ui {
      *
      * Prints out the response to be displayed to the user.
      */
-    private void getResponse() {
-        System.out.println("    ____________________________________________________________\n     "
-                + this.response
-                + "\n    ____________________________________________________________\n");
+    private String getResponse() {
+        return this.response;
     }
 
 
@@ -20,20 +18,22 @@ public class Ui {
      *
      * @param task task added by user.
      * @param tasks the list of tasks.
+     * @return String representing the response.
      */
-    public void add(Task task, TaskList tasks) {
+    public String add(Task task, TaskList tasks) {
         //update response
         this.response = "Got it. I've added this task:\n       " + task
                 + "\n     Now you have " + tasks.getSize() + " tasks in the list.";
-        getResponse();
+        return getResponse();
     }
 
     /**
      * Prints out the response showing a list of tasks.
      *
      * @param tasks the list of tasks.
+     * @return String representing the response.
      */
-    public void list(TaskList tasks) {
+    public String list(TaskList tasks) {
         // Get the list of tasks in the Arraylist
         String listOfTasks = "Here are the tasks in your list:\n     ";
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -42,39 +42,30 @@ public class Ui {
         }
         // Update response
         this.response = listOfTasks;
-        getResponse();
+        return getResponse();
     }
 
     /**
      * Prints out the response when user exits the application.
      *
+     * @return String representing the response.
      */
-    public void exit() {
+    public String exit() {
         //update response
         this.response = "Bye. Hope to see you again soon!";
-        getResponse();
-    }
-
-    /**
-     * Prints out the response when user enters the application
-     *
-     */
-    public void greet() {
-        // Update response
-        this.response = "Hello! I'm Duke\n" +
-                "     What can I do for you?";
-        getResponse();
+        return getResponse();
     }
 
     /**
      * Prints out the response when the user marks a task as done.
      *
      * @param task task done by user.
+     * @return String representing the response.
      */
-    public void done(Task task) {
+    public String done(Task task) {
         // Update response
         this.response = "Nice! I've marked this task as done:\n       " + task;
-        getResponse();
+        return getResponse();
     }
 
     /**
@@ -82,12 +73,13 @@ public class Ui {
      *
      * @param task task to be deleted.
      * @param tasks the list of tasks.
+     * @return String representing the response.
      */
-    public void delete(Task task, TaskList tasks) {
+    public String delete(Task task, TaskList tasks) {
         // Update response
-        this.response = this.response = "Noted. I've removed this task: \n       " + task
+        this.response = "Noted. I've removed this task: \n       " + task
                 + "\n     Now you have " + tasks.getSize() + " tasks in the list.";
-        getResponse();
+        return getResponse();
     }
 
     /**
@@ -96,12 +88,11 @@ public class Ui {
      * @param tasks a <code>TaskList</code> instance containing a list of tasks.
      * @param key   the keyword to be compared against each task description.
      * @throws DukeException Exceptions thrown when there are more than/ less than one keyword specified.
+     * @return String representing the response.
      */
-    public void find(TaskList tasks, String key) throws DukeException {
+    public String find(TaskList tasks, String key) throws DukeException {
         if (key.split(" ").length > 1 || key.equals(" ")) {
-            throw new DukeException("    ____________________________________________________________\n     " +
-                    "\u2639" + " OOPS!!! Please include at most/ at least one keyword." +
-                    "\n    ____________________________________________________________\n");
+            throw new DukeException("\u2639 OOPS!!! Please include at most/ at least one keyword.");
         }
         // Get the list of tasks in the tasks list.
         String listOfTasks = "Here are the matching tasks in your list:\n     ";
@@ -129,8 +120,8 @@ public class Ui {
             }
             this.response = listOfTasks;
         } else {
-            this.response = "\u2639 " + "OOPS!!! There is no matching tasks in your list.";
+            this.response = "\u2639 OOPS!!! There is no matching tasks in your list.";
         }
-        getResponse();
+        return getResponse();
     }
 }

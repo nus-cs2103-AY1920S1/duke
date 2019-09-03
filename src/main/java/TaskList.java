@@ -103,19 +103,13 @@ public class TaskList {
 
         // Handle exceptions
         if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
-            throw new DukeException("    ____________________________________________________________\n     " +
-                    "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                    "\n    ____________________________________________________________\n");
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         if (taskDes.equals("")) throw new DukeException(
-                "    ____________________________________________________________\n     " +
-                        "\u2639" + " OOPS!!! The description of a " + taskType + " cannot be empty." +
-                        "\n    ____________________________________________________________\n");
+                "\u2639 OOPS!!! The description of a " + taskType + " cannot be empty.");
         if ((taskType.equals("deadline") || taskType.equals("event")) && taskTime.equals(""))
             throw new DukeException(
-                    "    ____________________________________________________________\n     " +
-                            "\u2639" + " OOPS!!! The time of a " + taskType + " cannot be empty." +
-                            "\n    ____________________________________________________________\n");
+                    "\u2639 OOPS!!! The time of a " + taskType + " cannot be empty.");
 
         // Converts date format.
         try {

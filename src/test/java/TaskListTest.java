@@ -19,25 +19,19 @@ class TaskListTest {
         try {assertEquals("", new TaskList().add("task testing1 /by 10/10/2020 1100").toString());
             fail();
         } catch (DukeException e) {
-            assertEquals("    ____________________________________________________________\n     " +
-                    "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                    "\n    ____________________________________________________________\n", e.getMessage());
+            assertEquals("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
 
         try {assertEquals("", new TaskList().add("event").toString());
             fail();
         } catch (DukeException e) {
-            assertEquals("    ____________________________________________________________\n     " +
-                    "\u2639" + " OOPS!!! The description of a event cannot be empty." +
-                    "\n    ____________________________________________________________\n", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The description of a event cannot be empty.", e.getMessage());
         }
 
         try {assertEquals("", new TaskList().add("deadline testing2").toString());
             fail();
         } catch (DukeException e) {
-            assertEquals("    ____________________________________________________________\n     " +
-                    "\u2639" + " OOPS!!! The time of a deadline cannot be empty." +
-                    "\n    ____________________________________________________________\n", e.getMessage());
+            assertEquals("\u2639 OOPS!!! The time of a deadline cannot be empty.", e.getMessage());
         }
     }
 

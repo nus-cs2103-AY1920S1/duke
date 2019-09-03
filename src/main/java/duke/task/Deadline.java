@@ -45,9 +45,9 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
         if (done) {
-            s = s + "[D][✓]";
+            s = s + "[D][O]";
         } else {
-            s = s + "[D][✗]";
+            s = s + "[D][ ]";
         }
 
         return s + " " + description + " (by: " + deadLine.format(formatter) + ")";

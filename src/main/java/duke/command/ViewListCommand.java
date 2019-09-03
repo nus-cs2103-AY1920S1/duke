@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.component.GuiResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -17,8 +18,8 @@ public class ViewListCommand extends Command {
      * @return boolean indication of successful or unsuccessful running of command.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) {
-        ui.printTaskList(taskList);
-        return true;
+    public String executeCommand(TaskList taskList, Storage storage, Ui ui) {
+
+        return GuiResponse.getTaskListInString(taskList);
     }
 }

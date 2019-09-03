@@ -47,9 +47,9 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
         if (done) {
-            s = s + "[E][✓]";
+            s = s + "[E][O]";
         } else {
-            s = s + "[E][✗]";
+            s = s + "[E][ ]";
         }
 
         return s + " " + description + " (at: " + time.format(formatter) + ")";

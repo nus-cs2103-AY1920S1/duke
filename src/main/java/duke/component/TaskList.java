@@ -80,7 +80,7 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < taskList.size(); i++) {
-            result = result + "\n\t" + " " + (i + 1) + ". " + taskList.get(i);
+            result = result + "\n" + (i + 1) + ". " + taskList.get(i);
         }
 
         return result;

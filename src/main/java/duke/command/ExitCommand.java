@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.component.GuiResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -20,11 +21,9 @@ public class ExitCommand extends Command {
      * @throws IOException when error occurs while writing to hard disk.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws IOException {
+    public String executeCommand(TaskList taskList, Storage storage, Ui ui) throws IOException {
 
         storage.save(taskList);
-        ui.showGoodByeScreen();
-
-        return true;
+        return GuiResponse.GOODBYEMESSAGE;
     }
 }

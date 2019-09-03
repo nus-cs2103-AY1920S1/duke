@@ -35,9 +35,9 @@ public class Todo extends Task {
     public String toString() {
         String s = "";
         if (done) {
-            s = s + "[T][✓]";
+            s = s + "[T][O]";
         } else {
-            s = s + "[T][✗]";
+            s = s + "[T][ ]";
         }
 
         return s + " " + description;

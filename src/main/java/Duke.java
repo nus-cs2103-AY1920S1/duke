@@ -1,9 +1,9 @@
 import duke.command.Command;
 import duke.command.ExitCommand;
-import duke.component.Parser;
 import duke.component.Storage;
-import duke.component.TaskList;
 import duke.component.Ui;
+import duke.component.TaskList;
+import duke.component.Parser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,21 +16,25 @@ public class Duke {
 
     /**
      * Constructor for Duke Object.
-     * @param filePath path to the text file located on the hard disk.
      * @throws FileNotFoundException while input text file cannot be found.
      * @throws IOException while input text file cannot be created.
      */
-    public Duke(String filePath) throws FileNotFoundException, IOException {
+    public Duke() {
+        try {
+            ui = new Ui();
+            storage = new Storage(System.getProperty("user.dir"));
+            ui.showWelcomeScreen();
+            taskList = new TaskList(storage.load());
+        } catch (Exception e) {
+            Ui.printErrorMessage(e);
+            return;
+        }
 
-        ui = new Ui();
-        storage = new Storage(filePath);
-        ui.showWelcomeScreen();
-        taskList = new TaskList(storage.load());
     }
 
 
     /**
-     * Runs Duke Program.
+     * Runs Duke Program for Console.
      */
     public void run() {
 
@@ -43,24 +47,23 @@ public class Duke {
                 if (newCommand instanceof ExitCommand) {
                     return;
                 }
-
             } catch (Exception e) {
                 ui.printErrorMessage(e);
             }
         }
     }
 
-    /**
-     * Runs the created Duke object by appending location of text file inside the constructor.
-     * @param args arguments passing to main method
-     */
-    public static void main(String[] args) {
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
         try {
-            new Duke(System.getProperty("user.dir")).run();
+            Command command = Parser.retrieveCommandFromString(input);
+            return command.executeCommand(taskList, storage, ui);
         } catch (Exception e) {
-            Ui.printErrorMessage(e);
-            return;
+            return e.toString();
         }
     }
 }

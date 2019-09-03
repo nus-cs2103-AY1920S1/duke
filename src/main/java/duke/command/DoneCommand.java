@@ -1,10 +1,10 @@
 package duke.command;
 
-
-import duke.component.DukeException;
 import duke.component.Storage;
+import duke.component.DukeException;
 import duke.component.TaskList;
 import duke.component.Ui;
+import duke.component.GuiResponse;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
      * @throws IOException when error occurs while writing to hard disk.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+    public String executeCommand(TaskList taskList, Storage storage, Ui ui)
             throws DukeException, IOException {
 
         if (index >= taskList.getSize() || index < 0) {
@@ -43,10 +43,10 @@ public class DoneCommand extends Command {
 
         taskList.replace(index, taskList.getAtIndex(index).changeToCompletedStatus());
 
-        ui.printDoneAcknowledgement(taskList.getAtIndex(index));
+
 
         storage.save(taskList);
 
-        return true;
+        return GuiResponse.getDoneAcknowledgement(taskList.getAtIndex(index));
     }
 }

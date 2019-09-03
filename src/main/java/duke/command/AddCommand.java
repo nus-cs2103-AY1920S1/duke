@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.component.DukeException;
-import duke.component.Storage;
 import duke.component.TaskList;
+import duke.component.Storage;
 import duke.component.Ui;
+import duke.component.GuiResponse;
+
 import duke.task.Task;
 
 import java.io.IOException;
@@ -32,15 +33,12 @@ public class AddCommand extends Command {
      * @throws IOException when error occurs while writing to hard disk.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+    public String executeCommand(TaskList taskList, Storage storage, Ui ui)
             throws IOException {
 
         taskList.add(newTask);
-
-        ui.printAddedAcknowledgement(newTask, taskList.getSize());
-
         storage.save(taskList);
 
-        return true;
+        return GuiResponse.getAddedAcknowledgement(newTask, taskList.getSize());
     }
 }

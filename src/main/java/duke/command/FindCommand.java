@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.component.GuiResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -28,7 +29,7 @@ public class FindCommand extends Command {
      * @return boolean indication of successful or unsuccessful running of command.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) {
+    public String executeCommand(TaskList taskList, Storage storage, Ui ui) {
         TaskList tempTaskList = new TaskList();
 
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -38,9 +39,7 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.printFoundTaskList(tempTaskList);
-
-        return true;
+        return GuiResponse.getFoundTaskListInString(tempTaskList);
     }
 
 }

@@ -20,6 +20,6 @@ public abstract class Command {
      * @throws DukeException when Duke error occurs.
      * @throws IOException when IO error occurs.
      */
-    public abstract boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+    public abstract String executeCommand(TaskList taskList, Storage storage, Ui ui)
             throws DukeException, IOException;
 }

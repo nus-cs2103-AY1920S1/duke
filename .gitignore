@@ -16,3 +16,5 @@ src/main/java/TaskList.txt
 *.class
 src/main/java/Duke.class
 *.class
+*.class
+*.class

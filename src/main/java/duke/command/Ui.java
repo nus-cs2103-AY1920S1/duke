@@ -34,7 +34,7 @@ public class Ui {
         while (!line.equals("bye")) {
             try {
                 parser.process(line);
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 System.err.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.err.println("☹ OOPS!!! The task done must be a number.");

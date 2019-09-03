@@ -24,6 +24,7 @@ class TaskListTest {
         /**
          * Stub for Task.
          */
+        
         class TaskStub extends Task {
             public TaskStub(String desc) {
                 description = desc;
@@ -36,7 +37,7 @@ class TaskListTest {
         }
 
         /**
-         * Stub for ToDos
+         * Stub for ToDos.
          */
 
         class ToDosStub extends TaskStub {

@@ -7,10 +7,18 @@ import duke.command.Ui;
 
 import java.io.IOException;
 
+/**
+ * Contains the main method.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+
+    /**
+     * Opens the task and start the task update.
+     * @param filePath filePath of the task file.
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -22,6 +30,10 @@ public class Duke {
             taskList = new TaskList();
         }
     }
+
+    /**
+     * Start getting user input and update the storage.
+     */
 
     public void run() {
         try {

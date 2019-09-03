@@ -12,15 +12,29 @@ public class Task {
     public Task() {
     }
 
+    /**
+     * Constructs a task.
+     * @param description description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.num = 0;
     }
 
+    /**
+     * To get the status icon based on the status.
+     * @return tick or X symbols.
+     */
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
+    /**
+     * Updates the status icon.
+     * @param b the new status.
+     */
 
     public void setStatusIcon(boolean b) {
         isDone = b;

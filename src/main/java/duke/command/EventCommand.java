@@ -1,8 +1,10 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.main.*;
-import duke.task.*;
+import duke.main.Storage;
+import duke.main.Ui;
+import duke.main.TaskList;
+import duke.task.Event;
 
 public class EventCommand implements Command {
     private String task;

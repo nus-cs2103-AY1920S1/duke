@@ -1,8 +1,10 @@
 package duke.command;
 
-import duke.main.*;
+import duke.main.Storage;
+import duke.main.Ui;
+import duke.main.TaskList;
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Task;
 
 public class DoneCommand implements Command {
     private int index;

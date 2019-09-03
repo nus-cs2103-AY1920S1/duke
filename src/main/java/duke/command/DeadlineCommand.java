@@ -1,8 +1,10 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.main.*;
-import duke.task.*;
+import duke.main.Storage;
+import duke.main.Ui;
+import duke.main.TaskList;
+import duke.task.Deadline;
 
 public class DeadlineCommand implements Command {
     private String task;

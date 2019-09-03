@@ -1,9 +1,14 @@
-public class ByeCommand extends Command {
+package duke.command;
+
+import duke.component.TaskList;
+import duke.component.Storage;
+
+public class ListCommand extends Command {
     /**
-     *  Constructs a <code>ByeCommand</code> object.
+     *  Constructs a <code>ListCommand</code> object.
      */
-    public ByeCommand() {
-        super("bye");
+    public ListCommand() {
+        super("list");
     }
     
     /**
@@ -13,11 +18,6 @@ public class ByeCommand extends Command {
      *  @return a <code>String</code> containing the output of executing this command.
      */
     public String execute(TaskList tasks, Storage fileMgr) {
-        return "Bye. Hope to see you again soon!";
-    }
-
-    @Override
-    public boolean willTerminate() {
-        return true;
+        return tasks.toString();
     }
 }

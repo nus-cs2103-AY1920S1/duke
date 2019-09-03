@@ -1,4 +1,10 @@
+package duke.command;
+
 import java.util.ArrayList;
+
+import duke.component.TaskList;
+import duke.component.Storage;
+import duke.task.Task;
 
 public class FindCommand extends Command {
     private String searchString;

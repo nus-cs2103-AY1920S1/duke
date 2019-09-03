@@ -1,20 +1,25 @@
-import java.io.IOException;
-import java.util.Date;
+package duke.command;
 
-public class EventCommand extends Command {
+import java.io.IOException;
+
+import duke.component.TaskList;
+import duke.component.Storage;
+import duke.exception.DukeException;
+import duke.exception.DukeWriteToFileException;
+import duke.task.Task;
+import duke.task.TodoTask;
+
+public class TodoCommand extends Command {
     private String description;
-    private Date atTime;
 
     /**
-     *  Constructs an <code>EventCommand</code> object with a given description and event timestamp.
+     *  Constructs a <code>TodoCommand</code> object with a given description.
      *  @param command raw command string that generated this <code>Command</code> object.
-     *  @param description <code>String</code> description of the <code>EventTask</code> to be created.
-     *  @param atTime timestamp of the <code>EventTask</code> to be created, as a <code>Date</code> object.
+     *  @param description <code>String</code> description of the <code>TodoTask</code> to be created.
      */
-    public EventCommand(String command, String description, Date atTime) {
+    public TodoCommand(String command, String description) {
         super(command);
         this.description = description;
-        this.atTime = atTime;
     }
 
     /**
@@ -25,12 +30,12 @@ public class EventCommand extends Command {
      *  @throws DukeException if an I/O error occured when writing the updated TaskList to the file.
      */
     public String execute(TaskList tasks, Storage fileMgr) throws DukeException {
-        Task task = new EventTask(this.description, this.atTime);
+        Task task = new TodoTask(this.description);
         tasks.addTask(task);
         try {
             fileMgr.writeTaskList(tasks);
         } catch (IOException e) {
-            throw new DukeWriteToFileException("writeTaskList method invocation in EventCommand");
+            throw new DukeWriteToFileException("writeTaskList method invocation in TodoCommand");
         }
         
         String template = "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.";

@@ -1,3 +1,5 @@
+package duke.exception;
+
 @SuppressWarnings("serial")
 public class DukeIncorrectArgumentsException extends DukeException {
     protected String commandFormat;

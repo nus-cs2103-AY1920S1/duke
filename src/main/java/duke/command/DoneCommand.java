@@ -1,14 +1,23 @@
+package duke.command;
+
 import java.io.IOException;
 
-public class DeleteCommand extends Command {
+import duke.component.TaskList;
+import duke.component.Storage;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidTaskException;
+import duke.exception.DukeWriteToFileException;
+import duke.task.Task;
+
+public class DoneCommand extends Command {
     private int id;
 
     /**
-     *  Constructs a <code>DeleteCommand</code> object with the ID of a task to be removed.
+     *  Constructs a <code>DoneCommand</code> object with the ID of a task to be marked as done.
      *  @param command raw command string that generated this <code>Command</code> object.
-     *  @param id <code>int</code> ID of the task to be removed.
+     *  @param id <code>int</code> ID of the task to be marked as done.
      */
-    public DeleteCommand(String command, int id) {
+    public DoneCommand(String command, int id) {
         super(command);
         this.id = id;
     }
@@ -26,14 +35,14 @@ public class DeleteCommand extends Command {
             throw new DukeInvalidTaskException(this.id, this.getCommand());
         }
 
-        Task task = tasks.deleteTask(id);
+        Task task = tasks.getTask(id);
+        task.complete();
         try {
             fileMgr.writeTaskList(tasks);
         } catch (IOException e) {
-            throw new DukeWriteToFileException("writeTaskList method invocation in DeleteCommand");
+            throw new DukeWriteToFileException("writeTaskList method invocation in DoneCommand");
         }
         
-        String template = "Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.";
-        return String.format(template, task.toString(), tasks.numberOfTasks());
+        return String.format("Nice! I've marked this task as done:\n  %s", task.toString());
     }
 }

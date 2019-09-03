@@ -1,3 +1,5 @@
+package duke.exception;
+
 @SuppressWarnings("serial")
 public class DukeWriteToFileException extends DukeException {
     public DukeWriteToFileException(String errorSource) {

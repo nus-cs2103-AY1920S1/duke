@@ -1,6 +1,23 @@
+package duke.component;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.exception.DukeIncorrectArgumentsException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeNoCommandException;
+import duke.exception.DukeUnknownCommandException;
 
 public class Parser {
     // Command templates

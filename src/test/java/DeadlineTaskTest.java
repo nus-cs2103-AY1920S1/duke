@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import duke.task.DeadlineTask;
+
 public class DeadlineTaskTest {
     @Test
     @DisplayName("Encoded string of DeadlineTask is correct")

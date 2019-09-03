@@ -1,3 +1,5 @@
+package duke.task;
+
 public class TodoTask extends Task {
     /**
      *  Constructs a <code>TodoTask</code> object with a given description.

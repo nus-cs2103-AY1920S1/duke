@@ -1,3 +1,5 @@
+package duke.exception;
+
 @SuppressWarnings("serial")
 public class DukeException extends Exception {
     // Stores the command whose parsing led to the exception being thrown

@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import duke.task.EventTask;
+
 public class EventTaskTest {
     @Test
     @DisplayName("Encoded string of EventTask is correct")

@@ -1,3 +1,5 @@
+package duke.exception;
+
 @SuppressWarnings("serial")
 public class DukeNoCommandException extends DukeException {
     public DukeNoCommandException() {

@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.task.TodoTask;
+
 public class TodoTaskTest {
     @Test
     @DisplayName("Encoded string of TodoTask is correct")

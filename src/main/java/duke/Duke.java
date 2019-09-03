@@ -1,4 +1,13 @@
+package duke;
+
 import java.io.IOException;
+
+import duke.command.Command;
+import duke.component.Parser;
+import duke.component.TaskList;
+import duke.component.Storage;
+import duke.component.Ui;
+import duke.exception.DukeException;
 
 public class Duke {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";

@@ -28,7 +28,7 @@ public class Duke {
                 } else if (next.equals("done")) {
                     int taskNo = sc.nextInt();
                     if (taskNo > store.size()) {
-                        throw new DukeException("☹ OOPS!!! No such item in the list!");
+                        throw new DukeException("☹ OOPS!!! No such item in the list!!!");
                     }
                     store.get(taskNo-1).markAsDone();
                     this.storage.write(this.tasks);

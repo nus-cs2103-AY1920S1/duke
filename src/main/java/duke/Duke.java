@@ -23,7 +23,8 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param saveFilePath String representing the path to the file in which Tasks
      *                     will be saved
      */
@@ -33,13 +34,25 @@ public class Duke {
         this.storage = new Storage(Duke.saveFilePath);
         try {
             this.allTasks = this.storage.load();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             ui.printErrorMsg(e);
             this.allTasks = new TaskList(new ArrayList<Task>());
         }
     }
 
+    /**
+     * Keeps looping through to check the console for user input. Will terminate
+     * when the user inputs "bye" to the console.
+     */
+    public static void main(String[] args) {
+        Duke d = new Duke("data/savedTasks.txt");
+        d.run();
+    }
+
+    /**
+     * Method to run Duke. Used to continually poll the user for input
+     * via the console input.
+     */
     public void run() {
         ui.printWelcomeMsg();
         boolean isExit = false;
@@ -50,26 +63,15 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(this.ui, this.storage, this.allTasks);
                 isExit = c.isExit();
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 //This is the highest level at which a DukeException is caught.
                 //Most DukeExceptions will be caught and handled at this level.
                 ui.printErrorMsg(e);
-            }
-            catch (NoSuchElementException e) {
+            } catch (NoSuchElementException e) {
                 ui.printSentence("Please enter a command!");
             }
         }
 
         ui.printExitMsg();
-    }
-
-    /**
-     * Keeps looping through to check the console for user input. Will terminate
-     * when the user inputs "bye" to the console.
-     */
-    public static void main(String[] args) {
-        Duke d = new Duke("data/savedTasks.txt");
-        d.run();
     }
 }

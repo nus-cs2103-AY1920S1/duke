@@ -23,20 +23,22 @@ import java.util.Scanner;
  * use the <code>save</code> and <code>load</code> methods.
  */
 public class Storage {
-    private File f;
+    private File file;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param filepath String representing the path to the file in which Task data will be saved
      */
     public Storage(String filepath) {
-        this.f = new File(filepath);
+        this.file = new File(filepath);
     }
 
     /**
-     * Convenience method to save a TaskList onto disk
+     * Convenience method to save a TaskList onto disk.
+     *
      * @param allTasks TaskList representing a collection of Task objects
-     * @throws DukeException
+     * @throws DukeException thrown when error encountered saving to file.
      */
     public void save(TaskList allTasks) throws DukeException {
         try {
@@ -49,8 +51,7 @@ public class Storage {
             }
 
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Could not save to file!");
         }
 
@@ -58,12 +59,13 @@ public class Storage {
 
     /**
      * Convenience method to load Task data from disk and re-created the TaskList object.
+     *
      * @return TaskList representing a collection of Tasks saved on disk
-     * @throws DukeException
+     * @throws DukeException thrown when no existing tasks were saved to file.
      */
     public TaskList load() throws DukeException {
         try {
-            Scanner sc = new Scanner(this.f);
+            Scanner sc = new Scanner(this.file);
             ArrayList<Task> allStoredTasks = new ArrayList<Task>();
             while (sc.hasNext()) {
                 Task t = generateSavedTask(sc.nextLine());
@@ -71,18 +73,18 @@ public class Storage {
             }
 
             return new TaskList(allStoredTasks);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("No existing tasks found!");
         }
     }
 
     /**
-     * Private method used to convert from the String format in the disk data
+     * Private method used to convert from the String format in the disk data.
      * into an actual Task object (ToDo, Event, Deadline)
+     *
      * @param nextLine disk data (each field is seperated by the "|" character)
      * @return Task object
-     * @throws DukeException
+     * @throws DukeException re-thrown from underlying method calls.
      */
     private Task generateSavedTask(String nextLine) throws DukeException {
         String[] s = nextLine.split("\\|");
@@ -90,7 +92,7 @@ public class Storage {
         Task t = new Task("Uninitialised Task");
 
         //These 2 attributes are consistent across all 3 Task types (ToDo, Deadline, Event)
-        boolean isDone = s[1].trim().equals("1") ? true : false;
+        boolean isDone = s[1].trim().equals("1");
         String description = s[2].trim();
 
         switch (command) {
@@ -105,6 +107,8 @@ public class Storage {
         case "D":
             String deadline = s[3].trim();
             t = new Deadline(description, deadline);
+            break;
+        default:
             break;
         }
 

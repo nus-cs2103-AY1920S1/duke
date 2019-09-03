@@ -8,13 +8,14 @@ import duke.utils.Ui;
 
 import java.util.ArrayList;
 
-/** Command invoked when "todo", "event" or "deadline" commands are encountered */
+/** Command invoked when "todo", "event" or "deadline" commands are encountered. */
 public class AddCommand extends Command {
     ArrayList<String> commandParams;
 
     /**
-     * Constructor
-     * @param commandParams ArrayList<String> containing the individual String components
+     * Constructor.
+     *
+     * @param commandParams ArrayList containing the individual String components
      *                      required for the different Task types.
      */
     public AddCommand(ArrayList<String> commandParams) {
@@ -24,10 +25,11 @@ public class AddCommand extends Command {
     /**
      * Executes the desired behaviour for the AddCommand object. In this case,
      * this involves adding a ToDo, Event or Deadline object to the TaskList.
-     * @param ui Ui object that is responsible for printing output as a response
-     * @param storage Storage object respnsible for saving the Tasks into a pre-defined format
+     *
+     * @param ui       Ui object that is responsible for printing output as a response
+     * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
-     * @throws DukeException
+     * @throws DukeException re-thrown from underlying method calls.
      */
     public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
         Task t = new Task("Uninitialised Task");
@@ -40,6 +42,9 @@ public class AddCommand extends Command {
             break;
         case "deadline":
             t = allTasks.addDeadline(this.commandParams.get(1), this.commandParams.get(2));
+            break;
+        default:
+            break;
         }
 
         //UI response

@@ -5,32 +5,33 @@ import duke.utils.DukeDate;
 
 import java.text.ParseException;
 
-/** Implements the logic behind an Event Task */
+/** Implements the logic behind an Event Task. */
 public class Event extends Task {
     private DukeDate startTime;
     private DukeDate endTime;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param description String describing title/details of Event
-     * @param startTime String describing start time of Event (in the format specified in DukeDate.dateFormatString)
-     * @param endTime String describing end time of Event (in the format specified in DukeDate.dateFormatString)
-     * @throws DukeException
+     * @param startTime   String describing start time of Event (in the format specified in DukeDate.dateFormatString)
+     * @param endTime     String describing end time of Event (in the format specified in DukeDate.dateFormatString)
+     * @throws DukeException thrown when unable to create Event object.
      */
     public Event(String description, String startTime, String endTime) throws DukeException {
         super(description);
         try {
             this.startTime = new DukeDate(startTime);
             this.endTime = new DukeDate(endTime);
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             throw new DukeException("Unable to created Event object. Time in invalid format: " + e.getMessage());
         }
 
     }
 
     /**
-     * String representation of Event object
+     * String representation of Event object.
+     *
      * @return String representation of Event object
      */
     public String toString() {
@@ -41,6 +42,7 @@ public class Event extends Task {
     /**
      * Generates a String representation of the Event Task in a format
      * that is compatible for the Storage object to read and write.
+     *
      * @return String representation of the Task (compatibility with Storage class)
      */
     public String getStorageFormat() {

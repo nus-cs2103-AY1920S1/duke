@@ -20,10 +20,11 @@ import java.util.ArrayList;
  */
 public class Parser {
     /**
-     * Parses the entire line of user input and generates a Command object
+     * Parses the entire line of user input and generates a Command object.
+     *
      * @param fullCommand entire line of user input
      * @return Command object whose .execute() method can be called to achieve some desired behaviour
-     * @throws DukeException
+     * @throws DukeException thrown when an unrecognised command is encountered.
      */
     public static Command parse(String fullCommand) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
@@ -51,10 +52,11 @@ public class Parser {
     }
 
     /**
-     * Method to parse the parameters of the ToDo object
+     * Method to parse the parameters of the ToDo object.
+     *
      * @param remainingParams remaining parameters required to initialise ToDo object
-     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
-     * @throws DukeException
+     * @return ArrayList containing the processed parameters, ready to be passed to a Command object
+     * @throws DukeException thrown when task description is empty/invalid.
      */
     public static ArrayList<String> parseToDo(String remainingParams) throws DukeException {
         String taskDescription = remainingParams.trim();
@@ -69,10 +71,11 @@ public class Parser {
     }
 
     /**
-     * Method to parse the parameters of the Event object
+     * Method to parse the parameters of the Event object.
+     *
      * @param remainingParams remaining parameters required to initialise Event object
-     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
-     * @throws DukeException
+     * @return ArrayList containing the processed paramters, ready to be passed to a Command object
+     * @throws DukeException thrown when event parameters are invalid.
      */
     public static ArrayList<String> parseEvent(String remainingParams) throws DukeException {
         try {
@@ -92,17 +95,17 @@ public class Parser {
             commandParams.add(durationArr[1].trim());
 
             return commandParams;
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Event is of invalid form!");
         }
     }
 
     /**
-     * Method to parse the parameters of the Deadline object
+     * Method to parse the parameters of the Deadline object.
+     *
      * @param remainingParams remaining parameters required to initialise Deadline object
-     * @return ArrayList<String> containing the processed paramters, ready to be passed to a Command object
-     * @throws DukeException
+     * @return ArrayList containing the processed parameters, ready to be passed to a Command object
+     * @throws DukeException thrown when deadline parameters are invalid.
      */
     public static ArrayList<String> parseDeadline(String remainingParams) throws DukeException {
         try {
@@ -120,8 +123,7 @@ public class Parser {
             commandParams.add(deadline);
 
             return commandParams;
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Deadline is of invalid form!");
         }
     }

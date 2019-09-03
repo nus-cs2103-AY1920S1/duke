@@ -16,8 +16,8 @@ public class Ui {
 
     }
 
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String showWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**

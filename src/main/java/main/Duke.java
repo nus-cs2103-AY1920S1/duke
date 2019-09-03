@@ -38,13 +38,11 @@ public class Duke {
     }
 
     /**
-     * Prints welcome message.
      * Collects input from users.
      * Prints exit message.
      * Saves task list into hard disk.
      */
-    private void run() {
-        ui.showWelcome();
+    public void run() {
         boolean canEnd = false;
         while (!canEnd) {
             try {
@@ -63,8 +61,12 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.run();
+    public String getResponse(String input) {
+        return "haha";
     }
+
+//    public static void main(String[] args) {
+//        Duke duke = new Duke("data/duke.txt");
+//        duke.run();
+//    }
 }

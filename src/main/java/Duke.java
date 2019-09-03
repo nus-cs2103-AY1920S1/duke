@@ -2,10 +2,10 @@ import textfiles.ReadFile;
 import textfiles.WriteFile;
 import textfiles.Storage;
 
-import duke.d_interface.DukeException;
-import duke.d_interface.Parser;
-import duke.d_interface.Ui;
-import duke.d_interface.Tasklist;
+import duke.dukeinterface.DukeException;
+import duke.dukeinterface.Parser;
+import duke.dukeinterface.Ui;
+import duke.dukeinterface.Tasklist;
 
 import duke.task.Task;
 import duke.task.Deadline;
@@ -34,12 +34,12 @@ public class Duke {
         ArrayList<String> textArr;
         String filename = "../../../data/duke.txt";
         Storage file = new ReadFile(filename);
-        WriteFile data = new WriteFile(filename, true);
+        WriteFile data = new WriteFile(filename);
 
         ui.greet();
         try {
             //noinspection CastCanBeRemovedNarrowingVariableType
-            textArr = ((ReadFile) file).OpenFile();
+            textArr = ((ReadFile) file).openFile();
             taskList.loadEvents(textArr);
         } catch (IOException e) {
             file.ioErrorMessage();
@@ -76,7 +76,7 @@ public class Duke {
                     String todoDescription = taskList.getDescription(commandArr);
                     Task todo = new ToDo(todoDescription);
                     taskList.add(todo);
-                    data.writeToFile("T | \u2718 | " + todoDescription);
+                    data.writeToFile("T | ✘ | " + todoDescription);
                     taskList.printTask(todo, taskList.size());
                     break;
 
@@ -86,7 +86,7 @@ public class Duke {
                     eventTime = parser.checkTime(eventTime);
                     Task event = new Event(eventDescription, eventTime);
                     taskList.add(event);
-                    data.writeToFile("E | \u2718 | " + eventDescription + " | " + eventTime);
+                    data.writeToFile("E | ✘ | " + eventDescription + " | " + eventTime);
                     taskList.printTask(event, taskList.size());
                     break;
 
@@ -100,8 +100,8 @@ public class Duke {
                     deadlineTime = parser.checkTime(deadlineTime);
                     Task deadline = new Deadline(deadlineDescription, deadlineTime);
                     taskList.add(deadline);
-                    data.writeToFile("D | \u2718 | " + deadlineDescription + " | " +
-                            deadlineTime);
+                    data.writeToFile("D | ✘ | " + deadlineDescription + " | "
+                            + deadlineTime);
                     taskList.printTask(deadline, taskList.size());
                     break;
 

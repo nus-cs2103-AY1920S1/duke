@@ -22,36 +22,27 @@ public class WriteFile extends Storage {
      * This field stores the path to duke.txt file.
      */
     private String path;
-    /**
-     * This field determines whether the txt file can be overwritten.
-     */
-    private boolean append_to_file;
 
     /**
      * Constructor for the WriteFile class. Edits and saves any changes on
      * the task list of Duke and store it in the user's local drive.
      * @param path File path in which duke.txt is going to be saved at.
-     * @param append_to_file Determines whether the file is editable.
      */
-    public WriteFile(String path, boolean append_to_file) {
+    public WriteFile(String path) {
         this.path = path;
-        this.append_to_file = append_to_file;
     }
 
     /**
      * Write any changes made to Duke task list and save it.
      * @param text Text which describes the task and Duke will update the
      *             duke.txt file accordingly.
-     * @throws IOException Exception thrown when there is no duke.txt file
-     * to write to.
+     * @throws IOException Exception thrown when there is no duke.txt file to write to.
      */
     public void writeToFile(String text) throws IOException {
-        FileWriter write = new FileWriter(path, append_to_file);
-        PrintWriter print_line = new PrintWriter(write);
-
-        print_line.printf("%s" + "%n", text);
-
-        print_line.close();
+        FileWriter write = new FileWriter(path);
+        PrintWriter printLine = new PrintWriter(write);
+        printLine.printf("%s" + "%n", text);
+        printLine.close();
     }
 
     /**
@@ -66,14 +57,16 @@ public class WriteFile extends Storage {
         BufferedReader br = new BufferedReader(new FileReader(f));
         BufferedWriter bw = new BufferedWriter(new FileWriter(tmp));
 
-        for (int i = 0; i < toRemove; i++)
+        for (int i = 0; i < toRemove; i++) {
             bw.write(String.format("%s%n", br.readLine()));
+        }
 
         br.readLine();
 
         String l;
-        while (null != (l = br.readLine()))
+        while (null != (l = br.readLine())) {
             bw.write(String.format("%s%n", l));
+        }
 
         br.close();
         bw.close();
@@ -104,27 +97,29 @@ public class WriteFile extends Storage {
         }
 
         if (currTask instanceof ToDo) {
-            bw.write("T | " + "\u2713" + " | " + currTask.getDescription() + "\n");
+            bw.write("T | " + "✓" + " | " + currTask.getDescription() + "\n");
         } else if (currTask instanceof Deadline) {
-            bw.write("D | " + "\u2713" + " | " + currTask.getDescription()
+            bw.write("D | " + "✓" + " | " + currTask.getDescription()
                     + " | " + ((Deadline) currTask).getBy() + "\n");
         } else {
-            bw.write("E | " + "\u2713" + " | " + currTask.getDescription()
+            bw.write("E | " + "✓" + " | " + currTask.getDescription()
                     + " | " + ((Event) currTask).getAt() + "\n");
         }
 
         br.readLine();
 
         String l;
-        while (null != (l = br.readLine()))
+        while (null != (l = br.readLine())) {
             bw.write(String.format("%s%n", l));
+        }
 
         br.close();
         bw.close();
 
         File oldFile = new File(f);
-        if (oldFile.delete())
+        if (oldFile.delete()) {
             //noinspection ResultOfMethodCallIgnored
             tmp.renameTo(oldFile);
+        }
     }
 }

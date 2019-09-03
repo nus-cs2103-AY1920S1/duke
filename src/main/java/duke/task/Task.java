@@ -26,11 +26,10 @@ public class Task {
 
     /**
      * Getter method to check the isDone field of the current task.
-     * @return either a tick or a cross depending on the isDone status of
-     * the specific task.
+     * @return either a tick or a cross depending on the isDone status of task.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
     /**

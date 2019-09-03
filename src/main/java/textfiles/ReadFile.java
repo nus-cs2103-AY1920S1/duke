@@ -29,7 +29,7 @@ public class ReadFile extends Storage {
      * @return ArrayList of tasks that the user currently have.
      * @throws IOException Gives exception if there is no file to read from.
      */
-    public ArrayList<String> OpenFile() throws IOException {
+    public ArrayList<String> openFile() throws IOException {
         FileReader fr = new FileReader(path);
         BufferedReader textReader = new BufferedReader(fr);
         String line = textReader.readLine();

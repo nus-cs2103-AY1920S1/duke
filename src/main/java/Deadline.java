@@ -1,6 +1,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline which is a subclass of Task class.
+ * A deadline needs the LocalDateTime to specify when is the deadline due.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;

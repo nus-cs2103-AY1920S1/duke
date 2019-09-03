@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks that are currently available.
+ * It is able to add or delete tasks from the current list.
+ */
 public class TaskList {
 
     private ArrayList<Task> listOfTasks;

@@ -1,6 +1,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event which is a subclass of Task class.
+ * An event needs the LocalDateTime to specify when the event is happening.
+ */
 public class Event extends Task {
 
     protected LocalDateTime at;

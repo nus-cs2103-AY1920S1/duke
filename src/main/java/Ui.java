@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Represents a user interface that deals with the interaction between the user and computer.
+ */
 public class Ui {
 
     private Scanner sc;

@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Represents a Parser which is used to parse the user input depending on their commands.
+ */
 public class Parser {
     /**
      * Parses user input based on different type of command.

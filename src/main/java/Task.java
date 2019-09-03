@@ -1,3 +1,6 @@
+/**
+ * Represents a task to be represented in the duke applications.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

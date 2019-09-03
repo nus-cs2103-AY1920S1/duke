@@ -1,3 +1,6 @@
+/**
+ * Represents the main logic of the applications.
+ */
 public class Duke {
 
     private Storage storage;
@@ -9,6 +12,10 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
+
+    /**
+     * Runs the duke application.
+     */
 
     public void run() {
         ui.printHello();

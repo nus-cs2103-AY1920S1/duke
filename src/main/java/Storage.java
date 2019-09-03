@@ -6,6 +6,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage in which the data is to be load and rewrite everytime the user use the duke application.
+ */
 public class Storage {
 
     private static File file;

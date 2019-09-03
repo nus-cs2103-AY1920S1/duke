@@ -35,6 +35,7 @@ public class Event extends Task {
         try {
             dateTime = LocalDateTime.parse(at, f);
         } catch (DateTimeParseException e) {
+            dateTime = null;
         }
     }
 

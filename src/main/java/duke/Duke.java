@@ -49,7 +49,7 @@ public class Duke {
      * Runs the <code>Duke</code> program that continuously reads, parses and 
      * executes user input until a "bye" message is received.
      */
-    private void run(){
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

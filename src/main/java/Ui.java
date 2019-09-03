@@ -20,20 +20,24 @@ public class Ui {
         return sc.next();
     }
 
-    public void printHello() {
+    public void printLine() {
         System.out.println("    _____________________________________");
+    }
+
+    public void printHello() {
+        printLine();
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        System.out.println("    _____________________________________\n");
+        printLine();
     }
 
     public void printBye() {
-        System.out.println("    _____________________________________");
+        printLine();
         System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    _____________________________________");
+        printLine();
     }
 
     public void printAddTask(TaskList taskList, Task newTask) {
-        System.out.println("    _____________________________________");
+        printLine();
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask);
         System.out.println("     Now you have " + taskList.getListOfTasks().size() + " tasks in the list.");
@@ -41,7 +45,7 @@ public class Ui {
     }
 
     public void printTaskList(TaskList taskList) {
-        System.out.println("    _____________________________________");
+        printLine();
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < taskList.getListOfTasks().size(); i++) {
             int number = i + 1;
@@ -51,14 +55,14 @@ public class Ui {
     }
 
     public void printDoneTask(TaskList taskList, int taskNumber) {
-        System.out.println("    _____________________________________");
+        printLine();
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       " + taskList.getListOfTasks().get(taskNumber));
         System.out.println("    _____________________________________\n");
     }
 
     public void printDeleteTask(TaskList taskList, Task deletedTask) {
-        System.out.println("    _____________________________________");
+        printLine();
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + deletedTask);
         System.out.println("     Now you have " +  taskList.getListOfTasks().size() + " tasks in the list.");
@@ -66,7 +70,7 @@ public class Ui {
     }
 
     public void printFindTasks(ArrayList<Task> listOfTasks) {
-        System.out.println("     _____________________________________");
+        printLine();
         System.out.println("     Here are the matching tasks in your list:");
         for (int i = 0; i < listOfTasks.size(); i++) {
             int number = i + 1;

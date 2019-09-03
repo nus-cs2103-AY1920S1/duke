@@ -25,7 +25,7 @@ public class Duke {
             try {
                 Parser.parse(tasks, ui, storage, command, ui.getNextLine());
             } catch (DukeException e) {
-                System.out.println("    _____________________________________");
+                ui.printLine();
                 System.out.println("     " + e.getMessage());
                 System.out.println("    _____________________________________\n");
             }

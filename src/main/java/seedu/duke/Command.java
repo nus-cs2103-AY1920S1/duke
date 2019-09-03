@@ -22,8 +22,9 @@ public abstract class Command {
      * @param t TaskList.
      * @param u Ui.
      * @param s Storage.
+     * @return
      */
-    public abstract void execute(TaskList t, Ui u, Storage s);
+    public abstract String execute(TaskList t, Ui u, Storage s);
 
     /**
      * Returns whether Task is done.

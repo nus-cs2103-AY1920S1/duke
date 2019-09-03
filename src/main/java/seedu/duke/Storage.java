@@ -79,7 +79,7 @@ public class Storage {
      */
     public static void update(boolean append, String str, TaskList t) throws IOException {
         FileWriter fw;
-        if (append == false) {
+        if (!append) {
             fw = new FileWriter(filepath);
             String tasks = "";
             for (Task task : t.list) {

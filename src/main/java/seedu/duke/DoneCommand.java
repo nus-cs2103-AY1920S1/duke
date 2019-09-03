@@ -20,9 +20,10 @@ public class DoneCommand extends Command {
      * @param t TaskList.
      * @param u Ui.
      * @param s Storage.
+     * @return
      */
     @Override
-    public void execute(TaskList t, Ui u, Storage s) {
+    public String execute(TaskList t, Ui u, Storage s) {
         Task task = t.list.get(done);
         task.done();
         try {
@@ -30,7 +31,7 @@ public class DoneCommand extends Command {
         } catch (IOException e) {
             u.showError(e.getMessage());
         } finally {
-            u.doneLine(task.toString());
+            return u.doneLine(task.toString());
         }
     }
 }

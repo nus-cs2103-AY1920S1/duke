@@ -24,13 +24,13 @@ public class AddCommand extends Command {
 
     /**
      * Executes the AddCommand and adds a corresponding Task to the TaskList.
-     *
-     * @param t TaskList.
+     *  @param t TaskList.
      * @param u Ui.
      * @param s Storage.
+     * @return
      */
     @Override
-    public void execute(TaskList t, Ui u, Storage s) {
+    public String execute(TaskList t, Ui u, Storage s) {
         Task task = new Task("null");
         if (title.equals("todo")) {
             task = new ToDo(details);
@@ -52,8 +52,7 @@ public class AddCommand extends Command {
         } catch (IOException e) {
             System.out.println("Something went wrong");
         }
-
-        u.addLine(task.toString(), t.list.size());
+        return u.addLine(task.toString(), t.list.size());
     }
 
     /**

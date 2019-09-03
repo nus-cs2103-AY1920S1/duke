@@ -67,28 +67,28 @@ public class Parser {
         if (array.length == 1) {
             //if to do, event or deadline are missing a description
             if (task) {
-                throw new DukeException("Empty Description", "The description of a " + first + " cannot be empty.");
+                throw new DukeException("The description of a " + first + " cannot be empty.");
             }
 
             //if done, delete or find are not followed by a number
             else if (first.equals("done") || first.equals("delete") || first.equals("find")) {
-                throw new DukeException("Missing Task", "Please specify a task.");
+                throw new DukeException("Please specify a task.");
             }
 
             //if it is not a single-worded valid input
             else if (!first.equals("bye") && !first.equals("list")) {
-                throw new DukeException("Invalid Input", "I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         } else {
             //if it is an invalid input containing multiple words
             if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find")) {
-                throw new DukeException("Invalid Input", "I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
 
             //if event or deadline do not have details
             else if ((first.equals("event") && !input.contains("/at")) ||
                     (first.equals("deadline") && !input.contains("/by"))) {
-                throw new DukeException("Missing Details", "The details of a " + first + " cannot be missing.");
+                throw new DukeException("The details of a " + first + " cannot be missing.");
             }
         }
     }

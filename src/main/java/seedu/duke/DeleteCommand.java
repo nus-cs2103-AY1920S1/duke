@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 /**
  * Handles deleting tasks from the TaskList.
  */
@@ -18,11 +20,17 @@ public class DeleteCommand extends Command {
      * @param t TaskList.
      * @param u Ui.
      * @param s Storage.
+     * @return
      */
     @Override
-    public void execute(TaskList t, Ui u, Storage s) {
+    public String execute(TaskList t, Ui u, Storage s) {
         Task task = t.list.get(delete);
         t.list.remove(delete);
-        u.deleteLine(task.toString(), t.list.size());
+        try {
+            s.update(false, "", t);
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+        return u.deleteLine(task.toString(), t.list.size());
     }
 }

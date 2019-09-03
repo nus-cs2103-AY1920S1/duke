@@ -9,7 +9,7 @@ public class FindCommand extends Command {
         toFind = str;
     }
     @Override
-    public void execute(TaskList t, Ui u, Storage s) {
+    public String execute(TaskList t, Ui u, Storage s) {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task: t.list) {
             String title = task.description;
@@ -17,6 +17,6 @@ public class FindCommand extends Command {
                 list.add(task);
             }
         }
-        ui.listMatching(list);
+        return ui.listMatching(list);
     }
 }

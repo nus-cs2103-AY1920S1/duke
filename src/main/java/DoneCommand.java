@@ -23,14 +23,14 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (intNum > tasks.size()) {
             throw new DukeException("☹ OOPS!!! Task " + intNum + " does not exist.");
-        } else {
-            Task done = tasks.get(intNum - 1);
-            done.markAsDone();
-            String printable = ("Nice! I've marked this task as done:" + "\n" + done.toString());
-
-            storage.save(tasks.getTaskList());
-            return printable;
         }
+
+        Task done = tasks.get(intNum - 1);
+        done.markAsDone();
+        String printable = ("Nice! I've marked this task as done:" + "\n" + done.toString());
+
+        storage.save(tasks.getTaskList());
+        return printable;
     }
 
     /**

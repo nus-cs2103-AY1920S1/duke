@@ -50,23 +50,25 @@ public class Parser {
 
         case "todo":
             enumType = Type.valueOf(type.toUpperCase());
+            assert enumType == Type.TODO : "Enum is not right!";
             return new AddCommand(enumType, command.substring(5), "");
 
         case "deadline":
             enumType = Type.valueOf(type.toUpperCase());
+            assert enumType == Type.DEADLINE : "Enum is not right!";
             timeSplit = splitCommandForTask(type, command);
             return new AddCommand(enumType, timeSplit[0].substring(9), timeSplit[1]);
 
         case "event":
             enumType = Type.valueOf(type.toUpperCase());
+            assert enumType == Type.EVENT : "Enum is not right!";
             timeSplit = splitCommandForTask(type, command);
             return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
 
         default:
-            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't "
-                    + "know what that means :-(");
+            assert false : "Program not supposed to reach this line!";
+            return null;
         }
-
     }
 
     private static String[] keywordsToArray(String[] keywords) {

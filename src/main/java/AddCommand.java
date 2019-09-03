@@ -67,6 +67,9 @@ public class AddCommand extends Command {
     private String addTask(Task newTask, TaskList tasks) {
         tasks.add(newTask);
         int numTasks = tasks.size();
+
+        assert numTasks != 0 : "Tasks did not get added to the task list!";
+
         return "Got it. I've added this task:" + "\n" + newTask.toString() +
                 "\n" + "Now you have " + numTasks + " tasks in the list.";
     }

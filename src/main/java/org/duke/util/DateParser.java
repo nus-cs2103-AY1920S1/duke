@@ -1,207 +1,212 @@
 package org.duke.util;
 
-import java.time.*;
-import java.time.temporal.*;
-import java.time.format.*;
 import java.text.ParsePosition;
-import java.util.stream.Stream;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.FormatStyle;
+import java.time.format.TextStyle;
+import java.time.temporal.*;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class DateParser {
 
-	private String text;
-	private ParsePosition pos;
+    private String text;
+    private ParsePosition pos;
 
-	private void eatWhitespace() {
-		int i;
-		for(i = pos.getIndex(); i < text.length(); i++) {
-			if(!Character.isWhitespace(text.charAt(i))) break;
-		}
-		pos.setIndex(i);
-	}
-
-	private <R> R tryParse(DateTimeFormatter formatter,
-			TemporalQuery<R> query) {
-		eatWhitespace();
-		int ix = pos.getIndex(), errIx = pos.getErrorIndex();
-		try {
-			TemporalAccessor parsed = formatter.parse(text, pos);
-			R value = query.queryFrom(parsed);
-			if(value == null) {
-				pos.setIndex(ix);
-				pos.setErrorIndex(errIx);
+    private void eatWhitespace() {
+        int i;
+        for (i = pos.getIndex(); i < text.length(); i++) {
+			if (!Character.isWhitespace(text.charAt(i))) {
+				break;
 			}
-			return value;
-		} catch(DateTimeException e) {
-			pos.setIndex(ix);
-			pos.setErrorIndex(errIx);
-			return null;
-		}
-	}
+        }
+        pos.setIndex(i);
+    }
 
-	@SafeVarargs
-	private <R> R tryParses(DateTimeFormatter formatter,
-			TemporalQuery<R>... queries) {
-		return tryParse(formatter, parsed -> {
-			for(TemporalQuery<R> q : queries) {
-				try {
-					R value = q.queryFrom(parsed);
-					if(value != null) {
-						return value;
-					}
-				} catch(DateTimeException e) {
-					continue;
-				}
-			}
-			return null;
-		});
-	}
+    private <R> R tryParse(DateTimeFormatter formatter,
+                           TemporalQuery<R> query) {
+        eatWhitespace();
+        int ix = pos.getIndex(), errIx = pos.getErrorIndex();
+        try {
+            TemporalAccessor parsed = formatter.parse(text, pos);
+            R value = query.queryFrom(parsed);
+            if (value == null) {
+                pos.setIndex(ix);
+                pos.setErrorIndex(errIx);
+            }
+            return value;
+        } catch (DateTimeException e) {
+            pos.setIndex(ix);
+            pos.setErrorIndex(errIx);
+            return null;
+        }
+    }
 
-	private static final DateTimeFormatter weekdayFormatter =
-		new DateTimeFormatterBuilder()
-			.parseCaseInsensitive().parseLenient()
-			.optionalStart()
-			.appendText(ChronoField.DAY_OF_WEEK, TextStyle.SHORT)
-			.optionalEnd()
-			.optionalStart()
-			.appendText(ChronoField.DAY_OF_WEEK, TextStyle.FULL)
-			.optionalEnd()
-			.toFormatter();
+    @SafeVarargs
+    private <R> R tryParses(DateTimeFormatter formatter,
+                            TemporalQuery<R>... queries) {
+        return tryParse(formatter, parsed -> {
+            for (TemporalQuery<R> q : queries) {
+                try {
+                    R value = q.queryFrom(parsed);
+                    if (value != null) {
+                        return value;
+                    }
+                } catch (DateTimeException e) {
+                }
+            }
+            return null;
+        });
+    }
 
-	private static final DateTimeFormatter dmFormatter = 
-		new DateTimeFormatterBuilder()
-			.parseLenient()
-			.appendValue(ChronoField.DAY_OF_MONTH)
-			.appendLiteral(' ')
-			.appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT).toFormatter();
-	private static final DateTimeFormatter mdFormatter = 
-		new DateTimeFormatterBuilder()
-			.parseLenient()
-			.appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
-			.appendLiteral(' ')
-			.appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
+    private static final DateTimeFormatter weekdayFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive().parseLenient()
+                    .optionalStart()
+                    .appendText(ChronoField.DAY_OF_WEEK, TextStyle.SHORT)
+                    .optionalEnd()
+                    .optionalStart()
+                    .appendText(ChronoField.DAY_OF_WEEK, TextStyle.FULL)
+                    .optionalEnd()
+                    .toFormatter();
 
-	private static DateTimeFormatter addYear(DateTimeFormatter fmt) {
-		return new DateTimeFormatterBuilder()
-			.append(fmt)
-			.parseLenient()
-			.appendLiteral(' ')
-			.appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
-			.toFormatter();
-	}
-	private static final DateTimeFormatter[] dateFormatters = new DateTimeFormatter[] {
-		dmFormatter, addYear(dmFormatter),
-		mdFormatter, addYear(mdFormatter),
-		DateTimeFormatter.ISO_LOCAL_DATE
-	};
+    private static final DateTimeFormatter dmFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseLenient()
+                    .appendValue(ChronoField.DAY_OF_MONTH)
+                    .appendLiteral(' ')
+                    .appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT).toFormatter();
+    private static final DateTimeFormatter mdFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseLenient()
+                    .appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
+                    .appendLiteral(' ')
+                    .appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
 
-	private static final DateTimeFormatter[] timeFormatters = new DateTimeFormatter[] {
-		DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM),
-		DateTimeFormatter.ofPattern("kkmm'h'"),
-		new DateTimeFormatterBuilder()
-			.appendPattern("h[[':']['.']mm][' ']")
-			.parseCaseInsensitive()
-			.optionalStart().appendText(ChronoField.AMPM_OF_DAY).optionalEnd()
-			.toFormatter(),
-		DateTimeFormatter.ISO_LOCAL_TIME
-	};
+    private static DateTimeFormatter addYear(DateTimeFormatter fmt) {
+        return new DateTimeFormatterBuilder()
+                .append(fmt)
+                .parseLenient()
+                .appendLiteral(' ')
+                .appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
+                .toFormatter();
+    }
 
-	private Stream<LocalDate> parseWeekday(DayOfWeek weekday) {
-		TemporalAdjuster nextOrSameWeekday = TemporalAdjusters.nextOrSame(weekday);
-		TemporalAdjuster nextWeekday = TemporalAdjusters.next(weekday);
-		LocalDate first = LocalDate.now().with(nextOrSameWeekday);
-		return Stream.iterate(first, prev ->
-				LocalDate.from(nextWeekday.adjustInto(prev))
-				);
-	}
+    private static final DateTimeFormatter[] dateFormatters = new DateTimeFormatter[]{
+            dmFormatter, addYear(dmFormatter),
+            mdFormatter, addYear(mdFormatter),
+            DateTimeFormatter.ISO_LOCAL_DATE
+    };
 
-	private Stream<LocalDate> parseMonthDay(MonthDay md) {
-		LocalDate now = LocalDate.now();
-		int startYear = now.getYear();
-		IntStream yearStream = IntStream.range(startYear, 9999);
-		if(md.equals(MonthDay.of(2, 29))) {
-			yearStream = yearStream.filter(y -> Year.of(y).isLeap());
-		}
-		return yearStream.mapToObj(y -> md.atYear(y))
-			.filter(date -> date.isAfter(now));
-	}
+    private static final DateTimeFormatter[] timeFormatters = new DateTimeFormatter[]{
+            DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM),
+            DateTimeFormatter.ofPattern("kkmm'h'"),
+            new DateTimeFormatterBuilder()
+                    .appendPattern("h[[':']['.']mm][' ']")
+                    .parseCaseInsensitive()
+                    .optionalStart().appendText(ChronoField.AMPM_OF_DAY).optionalEnd()
+                    .toFormatter(),
+            DateTimeFormatter.ISO_LOCAL_TIME
+    };
 
-	private LocalDateTime tryDates(Stream<LocalDate> possibleDates, LocalTime exactTime) {
-		if(possibleDates == null || exactTime == null) {
-			return null;
-		}
-		LocalDateTime now = LocalDateTime.now();
-		return possibleDates.map(d -> d.atTime(exactTime))
-			.filter(d -> d.isAfter(now))
-			.findFirst().orElse(null);
-	}
+    private Stream<LocalDate> parseWeekday(DayOfWeek weekday) {
+        TemporalAdjuster nextOrSameWeekday = TemporalAdjusters.nextOrSame(weekday);
+        TemporalAdjuster nextWeekday = TemporalAdjusters.next(weekday);
+        LocalDate first = LocalDate.now().with(nextOrSameWeekday);
+        return Stream.iterate(first, prev ->
+                LocalDate.from(nextWeekday.adjustInto(prev))
+        );
+    }
 
-	public LocalDateTime parseDateTime() {
-		for(DateTimeFormatter dt : dateFormatters) {
-			LocalDateTime date = tryParses(dt,
-					acc -> {
-						LocalDate exactDate = LocalDate.from(acc);
-						if(exactDate == null) {
-							return null;
-						}
-						LocalTime exactTime = parseTime();
-						if(exactTime == null) {
-							return null;
-						}
-						return exactDate.atTime(exactTime);
-					},
-					acc -> {
-						Stream<LocalDate> possibleDates = parseMonthDay(MonthDay.from(acc));
-						LocalTime exactTime = parseTime();
-						return tryDates(possibleDates, exactTime);
-					});
-			if(date != null) {
-				return date;
-			}
-		}
-		for(DateTimeFormatter dt : dateFormatters) {
-			LocalDateTime date = tryParses(dt,
-					acc -> {
-						LocalDate exactDate = LocalDate.from(acc);
-						if(exactDate == null) {
-							return null;
-						}
-						return exactDate.atTime(LocalTime.MIDNIGHT);
-					},
-					acc -> {
-						Stream<LocalDate> possibleDates = parseMonthDay(MonthDay.from(acc));
-						return tryDates(possibleDates, LocalTime.MIDNIGHT);
-					});
-			if(date != null) {
-				return date;
-			}
-		}
-		Stream<LocalDate> possibleDates = tryParse(weekdayFormatter,
-			acc -> parseWeekday(DayOfWeek.from(acc))
-		);
-		LocalTime exactTime = parseTime();
-		if(exactTime == null) {
-			exactTime = LocalTime.MIDNIGHT;
-		}
-		return tryDates(possibleDates, exactTime);
-	}
+    private Stream<LocalDate> parseMonthDay(MonthDay md) {
+        LocalDate now = LocalDate.now();
+        int startYear = now.getYear();
+        IntStream yearStream = IntStream.range(startYear, 9999);
+        if (md.equals(MonthDay.of(2, 29))) {
+            yearStream = yearStream.filter(y -> Year.of(y).isLeap());
+        }
+        return yearStream.mapToObj(y -> md.atYear(y))
+                .filter(date -> date.isAfter(now));
+    }
 
-	private LocalTime parseTime() {
-		for(DateTimeFormatter dt : timeFormatters) {
-			LocalTime time = tryParse(dt, LocalTime::from);
-			if(time != null) {
-				return time;
-			}
-		}
-		return null;
-	}
+    private LocalDateTime tryDates(Stream<LocalDate> possibleDates, LocalTime exactTime) {
+        if (possibleDates == null || exactTime == null) {
+            return null;
+        }
+        LocalDateTime now = LocalDateTime.now();
+        return possibleDates.map(d -> d.atTime(exactTime))
+                .filter(d -> d.isAfter(now))
+                .findFirst().orElse(null);
+    }
 
-	private DateParser(String input) {
-		this.text = input;
-		this.pos = new ParsePosition(0);
-	}
+    public LocalDateTime parseDateTime() {
+        for (DateTimeFormatter dt : dateFormatters) {
+            LocalDateTime date = tryParses(dt,
+                    acc -> {
+                        LocalDate exactDate = LocalDate.from(acc);
+                        if (exactDate == null) {
+                            return null;
+                        }
+                        LocalTime exactTime = parseTime();
+                        if (exactTime == null) {
+                            return null;
+                        }
+                        return exactDate.atTime(exactTime);
+                    },
+                    acc -> {
+                        Stream<LocalDate> possibleDates = parseMonthDay(MonthDay.from(acc));
+                        LocalTime exactTime = parseTime();
+                        return tryDates(possibleDates, exactTime);
+                    });
+            if (date != null) {
+                return date;
+            }
+        }
+        for (DateTimeFormatter dt : dateFormatters) {
+            LocalDateTime date = tryParses(dt,
+                    acc -> {
+                        LocalDate exactDate = LocalDate.from(acc);
+                        if (exactDate == null) {
+                            return null;
+                        }
+                        return exactDate.atTime(LocalTime.MIDNIGHT);
+                    },
+                    acc -> {
+                        Stream<LocalDate> possibleDates = parseMonthDay(MonthDay.from(acc));
+                        return tryDates(possibleDates, LocalTime.MIDNIGHT);
+                    });
+            if (date != null) {
+                return date;
+            }
+        }
+        Stream<LocalDate> possibleDates = tryParse(weekdayFormatter,
+                acc -> parseWeekday(DayOfWeek.from(acc))
+        );
+        LocalTime exactTime = parseTime();
+        if (exactTime == null) {
+            exactTime = LocalTime.MIDNIGHT;
+        }
+        return tryDates(possibleDates, exactTime);
+    }
 
-	public static LocalDateTime parse(String input) {
-		return new DateParser(input).parseDateTime();
-	}
+    private LocalTime parseTime() {
+        for (DateTimeFormatter dt : timeFormatters) {
+            LocalTime time = tryParse(dt, LocalTime::from);
+            if (time != null) {
+                return time;
+            }
+        }
+        return null;
+    }
+
+    private DateParser(String input) {
+        this.text = input;
+        this.pos = new ParsePosition(0);
+    }
+
+    public static LocalDateTime parse(String input) {
+        return new DateParser(input).parseDateTime();
+    }
 }

@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
  * Other classes should call on this class' methods to 
  * interact with user.
  */
-class Ui implements TaskObserver {
+class Ui implements TaskObserver, UiObservable {
     private ControllerInterface controller; 
     private TaskModelInterface model;
     private Scanner sc;
     private int totalTasks;
+    private List<UiObserver> observers;
+    private String response; // for GUI, to get a reply
 
     public Ui(ControllerInterface controller, TaskModelInterface model) {
         this.controller = controller;
@@ -23,10 +25,35 @@ class Ui implements TaskObserver {
         this.model.registerObserver(this);
         this.sc = new Scanner(System.in);
         this.totalTasks = 0;
+        this.observers = new ArrayList<>();
     }
 
-    private static void printGreeting() {
-        Ui.printBanner();
+    //L10 for GooeyBridge
+    public void registerObserver(UiObserver u) {
+        this.observers.add(u);
+    }
+
+    public void removeObserver(UiObserver u) { /* TODO */ }
+
+    public String getReply() {
+        return this.response;
+    }        
+
+    private void notifyObservers() {
+        for (UiObserver u : this.observers) {
+            u.update(this);
+        }
+    }
+
+
+
+
+
+    
+
+    private void printGreeting() {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = Ui.printBanner(sbOut);
         String greeting1 = "hewwo! i'm OwO\n"
             + "Mistew Stawk's augmented weawity gwocewy wist\n"
             + "OwO stands fow \"Owways With Owws\"\n"
@@ -34,34 +61,66 @@ class Ui implements TaskObserver {
             //+ "Mistew Stawk wuvd his acwonyms.\n"
             + "what can OwO do fow you today?";
         //Display.printSection(printxs);
-        Ui.printSection(greeting1);
+        sbOut.append(greeting1);
+        //Ui.printSection(greeting1);
+        printText(sbOut);
+    }
+    public static String stringGreeting() {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = Ui.printBanner(sbOut);
+        String greeting1 = "hewwo! i'm OwO\n"
+            + "Mistew Stawk's augmented weawity gwocewy wist\n"
+            + "OwO stands fow \"Owways With Owws\"\n"
+            + "its a wowk in pwogwess, wike me\n"
+            //+ "Mistew Stawk wuvd his acwonyms.\n"
+            + "what can OwO do fow you today?";
+        //Display.printSection(printxs);
+        sbOut.append(greeting1);
+        //Ui.printSection(greeting1);
+        return sbOut.toString();
     }
 
-    private static void printExitMessage() {
+    public void printExitMessage() {
         //String farewell = "Bye. Hope to see you "
         //     + "again soon!";
         String farewell = "NyOO >w< owo dont goo OwO wiww "
             + "miss youu!!";
 
-        Ui.printSection(farewell);
+        printSection(farewell);
     }
 
-    private static void printLineBreak() {
+    private static StringBuilder printLineBreak(StringBuilder sb) {
         String line = "     "
             + "________________________________"
             + "____________________________";
-        System.out.println(line);
+        sb.append(line);
+        sb.append("\n");
+        return sb;
+        //Ui.printText(line);
+        //Modified in L10 to support piping to GUI
+        //System.out.println(line);
     }
 
-    private static void printHeader() {
-        System.out.println();
-        Ui.printLineBreak();
+    private static StringBuilder printHeader(StringBuilder sb) {
+        StringBuilder sbOut = sb;
+        String header = "\n";// + Ui.printLineBreak();
+        sbOut.append(header);
+        sbOut = Ui.printLineBreak(sbOut);
+        return sbOut;
+        //System.out.println();
+        //Ui.printLineBreak();
     }
 
-    private static void printFooter() {
-        Ui.printLineBreak();
-        System.out.println();
-        System.out.println();
+    private static StringBuilder printFooter(StringBuilder sb) {
+        StringBuilder sbOut = sb;
+        sbOut = Ui.printLineBreak(sbOut);
+        sbOut.append("\n");
+        sbOut.append("\n");
+        //Ui.printLineBreak();
+        //Modified in L10 to support piping to GUI
+        //System.out.println();
+        //System.out.println();
+        return sbOut;
     }
 
 
@@ -72,27 +131,60 @@ class Ui implements TaskObserver {
         return textList;
     }        
 
-    private static void printList(List<String> printJobs) {
+    private void printText(StringBuilder sb) {
+        String output = sb.toString();
+        //System.out.println(output);
+        this.response = output;
+        notifyObservers();
+    }
+
+    private void printList(List<String> printJobs) {
         /* TODO:  Delimit by \n */
 
+        StringBuilder sbOut = new StringBuilder();;
         for (String printJob : printJobs) {
-            System.out.print("      ");
-            System.out.print(printJob);
-            System.out.println();
+            sbOut.append("      ");
+            sbOut.append(printJob);
+            sbOut.append("\n");
+            //System.out.print("      ");
+            //System.out.print(printJob);
+            //System.out.println();
         }
+        printText(sbOut);
     }
 
-    private static void printSection(List<String> printJobs) {
-        Ui.printHeader();
-        Ui.printList(printJobs);
-        Ui.printFooter();
+    private static StringBuilder addToBuilder(List<String> printJobs, StringBuilder sb) {
+
+        /* TODO:  Delimit by \n */
+
+        StringBuilder sbOut = sb;
+        for (String printJob : printJobs) {
+            sbOut.append("      ");
+            sbOut.append(printJob);
+            sbOut.append("\n");
+            //System.out.print("      ");
+            //System.out.print(printJob);
+            //System.out.println();
+        }
+        return sbOut;
     }
 
-    private static void printSection(String job) {
+    private void printSection(List<String> printJobs) {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = Ui.printHeader(sbOut);
+        sbOut = Ui.addToBuilder(printJobs, sbOut);
+        sbOut = Ui.printFooter(sbOut);
+        //Ui.printHeader();
+        //Ui.printList(printJobs);
+        //Ui.printFooter();
+        printText(sbOut);
+    }
+
+    private void printSection(String job) {
         //ArrayList<String> printxs = new ArrayList<>();
         //printxs.add(job);
         List<String> printxs = Ui.stringToList(job);
-        Ui.printSection(printxs);
+        printSection(printxs);
     }
 
     /**
@@ -100,7 +192,7 @@ class Ui implements TaskObserver {
      *  @param taskDetails Details of Task to print
      *  @param totalTasks total number of tasks in the tasklist
      */
-    public static void printAddTaskSection(String taskDetails,
+    public void printAddTaskSection(String taskDetails,
             int totalTasks) {
         ArrayList<String> printxs = new ArrayList<>();
         String headerMsg = "got it boss. "
@@ -112,7 +204,7 @@ class Ui implements TaskObserver {
         printxs.add(headerMsg);
         printxs.add(outputMsg);
         printxs.add(footerMsg);
-        Ui.printSection(printxs);
+        printSection(printxs);
     }        
 
     /**
@@ -120,14 +212,14 @@ class Ui implements TaskObserver {
      *  @param taskDetails Details of Task to print
      *  @param totalTasks total number of tasks in the tasklist
      */
-    public static void printDoneTaskSection(String taskDetails) {
+    public void printDoneTaskSection(String taskDetails) {
         ArrayList<String> printxs = new ArrayList<>();
         String headermsg = "Nyice ;;w;;  "
              + "OwO has mawked this task as donye";
         //String headermsg = "Nice! I've marked this task as done:";
         printxs.add(headermsg);
         printxs.add(taskDetails);
-        Ui.printSection(printxs);
+        printSection(printxs);
 
     }
 
@@ -136,27 +228,27 @@ class Ui implements TaskObserver {
      *  @param taskDetails Details of Task to print
      *  @param totalTasks total number of tasks in the tasklist
      */
-    public static void printDeleteTaskSection(String 
+    public void printDeleteTaskSection(String 
             taskDetails, int totalTasks) {
         String header = "nyoted. OwO has wemuvd this task:\n";
         String footer = "nyow you have "
             + totalTasks + " tasks in the wist";
-        Ui.printSection(header + footer);
+        printSection(header + footer);
     }
 
     /**
      * Returns void, prints an error section to screen.
      *  @param message Error message to be printed
      */
-    public static void printErrorSection(String message) {
-        Ui.printSection(message);
+    public void printErrorSection(String message) {
+        printSection(message);
     }        
 
     /**
      * Returns void, prints a list of task given input.
      *  @param Stream of tasks to be printed
      */
-    public static <T> void 
+    public <T> void 
         printAllTasks(Stream<T> taskStream) {
 
         List<T> taskList = taskStream
@@ -177,7 +269,7 @@ class Ui implements TaskObserver {
 
             ++counter;
         }
-        Ui.printSection(printxs);
+        printSection(printxs);
     }
 
 
@@ -225,20 +317,35 @@ class Ui implements TaskObserver {
      * Returns nothing, starts user session and maintains loop.
      */
     public void instance() {
-        Ui.printGreeting();
+        printGreeting();
         String command = this.sc.nextLine();
 
         while (! this.controller.isEndCommand(command)) {
             this.controller.whatsGoingOn(command);
             command = this.sc.nextLine();
         }
-        Ui.printExitMessage();
+        printExitMessage();
+    }
+
+    /**
+     * Returns nothing, starts user session for GUI 
+     * and maintains loop.
+     */
+    public void instanceGui() {
+        printGreeting();
+        String command = this.sc.nextLine();
+
+        while (! this.controller.isEndCommand(command)) {
+            this.controller.whatsGoingOn(command);
+            command = this.sc.nextLine();
+        }
+        printExitMessage();
     }
 
     /**
      * Returns void, prints welcome banner and logo.
      */
-    public static void printBanner() {
+    public static StringBuilder printBanner(StringBuilder sb) {
         String logo = "        \u2606                     \u273f\n"
             + "                                    \u2606 \u273f\n"
             + "         \u273f                 \u273f \u2606\n"
@@ -258,6 +365,9 @@ class Ui implements TaskObserver {
             + "\n"
             + "              \u2606       \u273f\n";
 
-        System.out.println("Hewwo fwom\n" + logo);
+        //System.out.println("Hewwo fwom\n" + logo);
+        StringBuilder sbOut = new StringBuilder();
+        sbOut.append("Hewwo fwom\n" + logo);
+        return sbOut;
     }
 }

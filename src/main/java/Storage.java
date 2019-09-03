@@ -17,7 +17,8 @@ class Storage implements TaskObserver, StorageInterface {
 
 
     private TaskModelInterface model;
-    private String path = "../../../../data/duke.txt";
+    //private String path = "../../../../data/duke.txt";
+    private String path = "/data/duke.txt";
     private TaskCreator taskCreator;
 
     public Storage(TaskModelInterface model) {
@@ -79,7 +80,8 @@ class Storage implements TaskObserver, StorageInterface {
                 + "taskwist fwom this session cannyot be saved";
             System.out.println(e);
 
-            Ui.printErrorSection(loadFileErrorMsg);
+            //Ui.printErrorSection(loadFileErrorMsg);
+            System.out.println(loadFileErrorMsg);
         } 
         return taskList.stream();
     }
@@ -116,7 +118,8 @@ class Storage implements TaskObserver, StorageInterface {
                 + "you nyeed to cweate a fowdew cawwed 'data'\n"
                 + "in the 'woot' pwoject diwectowy";
             System.out.println(e);
-            Ui.printErrorSection(writeFileErrorMsg);
+            System.out.println(writeFileErrorMsg);
+            //Ui.printErrorSection(writeFileErrorMsg);
             //System.out.println("you need to create a folder" 
             //       + " called 'data' in 'duke' dir");
         }

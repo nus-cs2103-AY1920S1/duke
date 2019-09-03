@@ -1,5 +1,6 @@
 //made in L3 to reduce clutter in Duke
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -18,9 +19,11 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private GooeyBridge bridge;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/googleneutralblob.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/pinkowo.png"));
+
 
 
     //GUI L3.5L Iteration2
@@ -39,6 +42,8 @@ public class Main extends Application {
             DialogBox.getUserDialog(userText, new ImageView(user)),
             DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        // just to close
+        closeWindow(userInput.getText());
         userInput.clear();
     }
 
@@ -48,7 +53,16 @@ public class Main extends Application {
      *   * Replace this stub with your completed method.
      *    */
     private String getResponse(String input) {
-        return "OwO heard: " + input;
+        this.bridge.inputText(input);
+        return "OwO heawd: " + input + "\n" 
+            + this.bridge.getText();
+    }
+
+    private void closeWindow(String command) {
+//        if (Parser.isEndCommand(command)) {
+//            Platform.exit();
+//            System.exit(0);
+//        }
     }
 
     //GUI L3: Iteration1
@@ -69,6 +83,9 @@ public class Main extends Application {
     //added in GUI L1
     @Override
     public void start(Stage stage) {
+
+
+
         // GUI L2 Step 1 setting up required componenets
 
         // The container for the content of chat to scroll
@@ -123,6 +140,14 @@ public class Main extends Application {
             userInput.clear();
         });
 
+        //adding stuff here
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren()
+                .add(getDialogLabel(userInput.getText()));
+            //friday.whatsGoingOn(userInput.getText());
+            userInput.clear();
+        });
+
         userInput.setOnAction((event) -> {
             dialogContainer.getChildren()
                 .add(getDialogLabel(userInput.getText()));
@@ -143,6 +168,22 @@ public class Main extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+
+
+        // starting OWO
+
+        TaskModelInterface model = new TaskList();
+        StorageInterface storage = new Storage(model);
+        ControllerInterface friday = new Parser(model);
+        this.bridge = ((Parser) friday).getBridge();
+        Label banner = new Label(Ui.stringGreeting());
+        dialogContainer.getChildren().addAll(
+            DialogBox.getUserDialog(banner, new ImageView(duke)));
+
+
+        //friday.start();
+
 
         stage.setScene(scene);
         stage.show();

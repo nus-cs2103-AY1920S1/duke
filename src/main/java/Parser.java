@@ -14,12 +14,15 @@ class Parser implements ControllerInterface {
     private TaskModelInterface model;
     private Ui display;
     private TaskCreator taskCreator;
+    private GooeyBridge bridge;
 
     public Parser(TaskModelInterface model) {
         this.model = model;
         //this.display = new Display(this, model);
         this.display = new Ui(this, model);
         this.taskCreator = new BasicTaskCreator();
+        this.bridge = new GooeyBridge(this);
+        this.display.registerObserver(this.bridge);
     }
 
     /**
@@ -33,6 +36,11 @@ class Parser implements ControllerInterface {
     public void stop() {
         //this.display.
     }
+
+    public GooeyBridge getBridge() {
+        return this.bridge;
+    }
+
 
     /**
      * Returns nothing, this command evaluates user command
@@ -55,6 +63,8 @@ class Parser implements ControllerInterface {
         } else if 
             (commandlist[0].toUpperCase().equals("FIND")) {
             this.findTasks(command);
+        } else if (isEndCommand(command)) {
+            display.printExitMessage();
         } else {
             this.addTask(command);
         }

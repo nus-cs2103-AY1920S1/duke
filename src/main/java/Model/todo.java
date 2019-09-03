@@ -7,6 +7,11 @@ public class todo extends Task{
         super(description);
     }
 
+    public todo(String description, boolean isDone) {
+        super(description);
+        this.setIsDone(isDone);
+    }
+
     @Override
     public char getSymbol() {
         return this.symbol;

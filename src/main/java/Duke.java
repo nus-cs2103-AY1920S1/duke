@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.*;
 
 import Model.Tasklist;
@@ -16,50 +17,37 @@ public class Duke {
     private UI ui;
 
     public static void main(String[] args){
-        new Duke("data/tasks.txt").run();
+        new Duke("tasks.txt").run();
     }
 
     public Duke(String filepath){
         ui = new UI();
-        tasks = new Tasklist();
+        Storage storage = new Storage(Path.of(filepath));
+        tasks = storage.load();
+
+        /*
+        try{
+            String line = null;
+            BufferedReader br = new BufferedReader(new FileReader("savefile.txt"));
+            while((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+            br.close();
+        } catch(Exception E){
+            System.out.println("Test failed");
+        }
+
+         */
+
+
+
+
     }
 
     public void run() {
         ui.printLogo();
         ui.printData("Hello! I'm Duke\n" +
                             "What can I do for you?\n");
-
-
-
-
-        /*
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("savefile.txt"));
-
-            String line = br.readLine();
-            String[] arr = line.split("/");
-
-            data = new ArrayList<>(Arrays.asList(arr));
-
-            line = br.readLine();
-            arr = line.split("/");
-            done = new ArrayList<>(Arrays.asList(arr));
-
-            line = br.readLine();
-            arr = line.split("/");
-            type = new ArrayList<>(Arrays.asList(arr));
-
-            line = br.readLine();
-            arr = line.split("/");
-            details = new ArrayList<>(Arrays.asList(arr));
-
-
-        } catch (Exception E){
-
-        }
-
-
-         */
 
         do{
             String input = ui.nextLine();
@@ -86,48 +74,7 @@ public class Duke {
                 }
 
                 ui.printData(content);
-
-                /*
-                try{
-                    PrintWriter writer = new PrintWriter("savefile.txt", "UTF-8");
-                    for(i = 0; i < data.size(); i++){
-                        writer.print(data.get(i));
-                        if(i < data.size() - 1){
-                            writer.print("/");
-                        }
-                    }
-                    writer.println();
-
-                    for(i = 0; i < done.size(); i++){
-                        writer.print(done.get(i));
-                        if(i < done.size() - 1){
-                            writer.print("/");
-                        }
-                    }
-                    writer.println();
-
-                    for(i = 0; i < type.size(); i++){
-                        writer.print(type.get(i));
-                        if(i < type.size() - 1){
-                            writer.print("/");
-                        }
-                    }
-                    writer.println();
-
-                    for(i = 0; i < details.size(); i++){
-                        writer.print(details.get(i));
-                        if(i < details.size() - 1){
-                            writer.print("/");
-                        }
-                    }
-                    writer.println();
-                    writer.close();
-
-                } catch(Exception E){
-                    System.out.println("Saving failed!");
-                }
-
-                 */
+                //storage.save(tasks);
 
             } else if(input.startsWith("done")) {
                 String[] sp = input.split(" ", 2);

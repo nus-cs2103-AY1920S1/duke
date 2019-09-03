@@ -9,6 +9,12 @@ public class deadline extends Task{
         this.details = details;
     }
 
+    public deadline(String description, Boolean isDone, String details){
+        super(description);
+        this.details = details;
+        this.setIsDone(isDone);
+    }
+
     @Override
     public char getSymbol() {
         return this.symbol;

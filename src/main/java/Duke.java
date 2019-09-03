@@ -1,9 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -141,13 +138,17 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        //Label userText = new Label(userInput.getText());
+        //Label dukeText = new Label(getResponse(userInput.getText()));
+        Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+        Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
         dialogContainer.getChildren().addAll(
                 //new DialogBox(userText, new ImageView(user)),
-                DialogBox.getUserDialog(userText, new ImageView(user)),
+                //DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getUserDialog(userInput.getText(), userImage),
                 //new DialogBox(dukeText, new ImageView(duke))
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                //DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(getResponse(userInput.getText()), dukeImage)
         );
         userInput.clear();
     }
@@ -156,7 +157,8 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
+    //private String getResponse(String input) {
         return "Duke heard: " + input;
     }
 

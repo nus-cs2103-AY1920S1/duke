@@ -73,15 +73,15 @@ public class Ui {
         System.out.println(format("Noted. I've removed this task: "));
         System.out.println("  " + format(t.repr()));
         switch (tasks.size()) {
-            case 0:
-                System.out.println(format("Now you have no task in the list."));
-                break;
-            case 1:
-                System.out.println(format("Now you have 1 task in the list."));
-                break;
-            default:
-                System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
-                break;
+        case 0:
+            System.out.println(format("Now you have no task in the list."));
+            break;
+        case 1:
+            System.out.println(format("Now you have 1 task in the list."));
+            break;
+        default:
+            System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
+            break;
         }
         System.out.println(line);
     }

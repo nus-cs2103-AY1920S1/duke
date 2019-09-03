@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Parses input entered by user.
+ */
 public class Parser {
     protected static HashMap<String, Command> keywordToCommand = createMap();
     protected static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -23,6 +26,14 @@ public class Parser {
         return keywordToCommand;
     }
 
+    /**
+     * Returns the command as specified by the input.
+     * If input cannot be parsed, throws DukeException.
+     *
+     * @param input Input entered by user.
+     * @return Command object specified by input.
+     * @throws DukeException If input cannot be parsed.
+     */
     public static Command parse(String input) throws DukeException {
         if(keywordToCommand.containsKey(input)) {
             return keywordToCommand.get(input);
@@ -38,6 +49,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the itemId for the task to be marked done.
+     * If input cannot be parsed, throws DukeException.
+     *
+     * @param input Input entered by user.
+     * @return itemId for object to be marked done.
+     * @throws DukeException If input has incorrect format.
+     */
     public static int parseDone(String input) throws DukeException {
         String[] words = input.split(" ");
         int itemId;
@@ -52,6 +71,14 @@ public class Parser {
         return itemId;
     }
 
+    /**
+     * Returns the itemId for the task to be deleted.
+     * If input cannot be parsed, throws DukeException.
+     *
+     * @param input Input entered by user.
+     * @return itemId for object to be marked done.
+     * @throws DukeException If input has incorrect format.
+     */
     public static int parseDelete(String input) throws DukeException {
         String[] words = input.split(" ");
         int itemId;
@@ -66,6 +93,14 @@ public class Parser {
         return itemId;
     }
 
+    /**
+     * Returns the Task to be added to the TaskList.
+     * If input cannot be parsed, throws DukeException.
+     *
+     * @param input Input entered by user.
+     * @return Task to be added.
+     * @throws DukeException If input has incorrect format.
+     */
     public static Task parseTask(String input) throws DukeException {
         String[] words = input.split(" ");
         String type = words[0];

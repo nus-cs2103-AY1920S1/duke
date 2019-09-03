@@ -7,13 +7,27 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Storage class of Duke.
+ * Handles saving of TaskList data.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Constructor of Storage
+     * 
+     * @param filePath Specifies where save data is to be stored and loaded from.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves TaskList data to file specified in filePath.
+     * 
+     * @param list TaskList which data is to be saved.
+     */
     public void save(TaskList list) {
         try {
             FileOutputStream fout = new FileOutputStream(this.filePath);  
@@ -26,6 +40,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns TaskList constructed from loaded data from filePath.
+     * 
+     * @return TaskList constructed from loaded data.
+     */
     public TaskList load() throws DukeException {
         TaskList list = new TaskList();
         try {

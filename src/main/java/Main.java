@@ -13,11 +13,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Main class of Duke.
+ * Contains run() method.
+ */
 public class Main {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor of Main class.
+     * 
+     * @param filePath Path to text file where save data is stored.
+     */
     public Main(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,6 +38,9 @@ public class Main {
         }
     }
 
+    /**
+     * Run method of Duke.
+     */
     public void run() {
         this.ui.showWelcome();
 

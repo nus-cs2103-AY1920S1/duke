@@ -2,16 +2,19 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Ui class that handles output of Duke to the console.
+ */
 public class Ui {
-    public String format(String command) {
+    String format(String output) {
         return "    ____________________________________________________________\n"
-                + indent(command)
+                + indent(output)
                 + "    ____________________________________________________________\n";
     }
 
-    public String indent(String command) {
+    String indent(String output) {
         StringBuffer stringBuffer = new StringBuffer();
-        Scanner scanner = new Scanner(command);
+        Scanner scanner = new Scanner(output);
         while(scanner.hasNext()) {
             String temp = scanner.nextLine();
             stringBuffer.append("     " + temp + "\n");
@@ -20,10 +23,18 @@ public class Ui {
         return stringBuffer.toString();
     }
 
-    public void printResponse(String command) {
-        System.out.println(format(command));
+    /**
+     * Prints output of Duke.
+     */
+    public void printResponse(String output) {
+        System.out.println(format(output));
     }
 
+    /**
+     * Reads input of user from the console.
+     * 
+     * @return String containing input of user.
+     */
     public String readCommand() {
         // Unable to close scanner - will trigger NullException error on scanner.nextLine()
         Scanner scanner = new Scanner(System.in);
@@ -31,15 +42,24 @@ public class Ui {
         return fullCommand;
     }
 
+    /**
+     * Shows welcome message of Duke.
+     */
     public void showWelcome() {
         this.printResponse("Hello! I'm Duke\n"
                 + "What can I do for you?");
     }
 
+    /**
+     * Shows error message of Duke.
+     */
     public void showError(String message) {
         this.printResponse(message);
     }
 
+    /**
+     * Shows error if save data is not loaded.
+     */
     public void showLoadingError() {
         this.printResponse("☹ OOPS!!! No tasks saved.");
     }

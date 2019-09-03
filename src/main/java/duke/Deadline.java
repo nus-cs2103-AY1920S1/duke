@@ -35,7 +35,7 @@ class Deadline extends Task {
      */
     @Override
     String toSaveFormat() {
-        return String.format("D | %s | %s", super.toSaveFormat(), Duke.dateFormatter.format(this.by));
+        return String.format("D | %s | %s", super.toSaveFormat(), Duke.DATE_FORMATTER.format(this.by));
     }
 
     /**
@@ -45,6 +45,6 @@ class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), Duke.dateFormatter.format(this.by));
+        return String.format("[D]%s (by: %s)", super.toString(), Duke.DATE_FORMATTER.format(this.by));
     }
 }

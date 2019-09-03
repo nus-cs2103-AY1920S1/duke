@@ -122,7 +122,7 @@ public class Parser {
      */
     static Date parseDate(String dateStr) throws DukeException {
         try {
-            return Duke.dateFormatter.parse(dateStr);
+            return Duke.DATE_FORMATTER.parse(dateStr);
         } catch (ParseException e) {
             throw new DukeException("Failed to parse date.");
         }

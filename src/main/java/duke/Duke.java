@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public class Duke {
     // Configuration
-    static final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private Storage storage;
     private TaskList tasks;
@@ -77,6 +77,7 @@ public class Duke {
             }
 
             case "done":
+                // fallthrough
             case "delete": {
                 int taskId = Integer.parseInt(Parser.extractId(input));
 
@@ -100,7 +101,9 @@ public class Duke {
             }
 
             case "todo":
+                // fallthrough
             case "deadline":
+                // fallthrough
             case "event": {
                 Task newTask = Parser.parseTask(input);
                 this.tasks.addTask(newTask);

@@ -18,6 +18,6 @@ class ParserTest {
         String dateStr = "24/12/2018 1530";
         Date date = Parser.parseDate(dateStr);
 
-        assertEquals(Duke.dateFormatter.format(date), dateStr);
+        assertEquals(Duke.DATE_FORMATTER.format(date), dateStr);
     }
 }

@@ -35,7 +35,7 @@ class Event extends Task {
      */
     @Override
     String toSaveFormat() {
-        return String.format("E | %s | %s", super.toSaveFormat(), Duke.dateFormatter.format(this.at));
+        return String.format("E | %s | %s", super.toSaveFormat(), Duke.DATE_FORMATTER.format(this.at));
     }
 
     /**
@@ -45,6 +45,6 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (by: %s)", super.toString(), Duke.dateFormatter.format(this.at));
+        return String.format("[E]%s (by: %s)", super.toString(), Duke.DATE_FORMATTER.format(this.at));
     }
 }

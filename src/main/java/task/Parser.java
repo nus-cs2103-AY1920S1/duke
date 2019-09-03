@@ -11,7 +11,7 @@ public class Parser {
      *                 number of tasks.
      * @return New TaskList that contains an ArrayList of tasks and number of tasks.
      */
-    public TaskList parse(TaskList taskList) {
+    public TaskList parseList(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
 
         String textInput;

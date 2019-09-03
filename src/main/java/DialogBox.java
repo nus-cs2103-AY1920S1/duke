@@ -7,8 +7,10 @@ import javafx.scene.layout.HBox;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
+    private Circle displayPictureShape;
     private Label text;
     private ImageView displayPicture;
 
@@ -18,14 +20,14 @@ public class DialogBox extends HBox {
      * @param iv image to view
      */
     public DialogBox(Label l, ImageView iv) {
+        displayPictureShape = new Circle(75,75,75);
         text = l;
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100);
-        displayPicture.setFitHeight(100);
-
+        displayPicture.setClip(displayPictureShape);
         this.setAlignment(Pos.TOP_RIGHT);
+        this.setSpacing(10);
         this.getChildren().addAll(text, displayPicture);
     }
 

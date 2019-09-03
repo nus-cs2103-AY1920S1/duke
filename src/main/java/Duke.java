@@ -117,6 +117,7 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        dialogContainer.setSpacing(10);
         userInput.clear();
     }
 

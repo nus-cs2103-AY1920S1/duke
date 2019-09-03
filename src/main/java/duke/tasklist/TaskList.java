@@ -41,10 +41,10 @@ public class TaskList {
         tasks.add(current);
     }
 
-    public void delete(int taskNumber, DukeUi ui) throws IndexOutOfBoundsException{
+    public String delete(int taskNumber, DukeUi ui) throws IndexOutOfBoundsException{
         Task current = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
-        ui.printTaskDeletedMessage(current, tasks.size());
+        return ui.printTaskDeletedMessage(current, tasks.size());
     }
 
     public void done (int taskNumber) throws DukeTaskDoneException, IndexOutOfBoundsException{

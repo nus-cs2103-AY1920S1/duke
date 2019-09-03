@@ -26,12 +26,12 @@ public class DeleteCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
+    public String execute(TaskList tasks, DukeUi ui, StorageData storage) {
         try {
-            tasks.delete(this.taskNumber, ui);
             storage.deleteTaskInData(this.taskNumber);
+            return tasks.delete(this.taskNumber, ui);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }

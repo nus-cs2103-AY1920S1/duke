@@ -229,6 +229,6 @@ public abstract class Command {
      * @param ui      DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public abstract void execute(TaskList tasks, DukeUi ui, StorageData storage);
+    public abstract String execute(TaskList tasks, DukeUi ui, StorageData storage);
 
 }

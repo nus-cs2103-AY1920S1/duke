@@ -51,10 +51,10 @@ public class EventCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
+    public String execute(TaskList tasks, DukeUi ui, StorageData storage) {
         Event current = new Event(this.description, this.duringWhen);
         tasks.add(current);
         storage.addEventData(this.description, this.duringWhen);
-        ui.printAddEventMessage(current, tasks.size());
+        return ui.printAddEventMessage(current, tasks.size());
     }
 }

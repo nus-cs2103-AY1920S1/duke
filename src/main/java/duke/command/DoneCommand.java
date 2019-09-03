@@ -26,15 +26,15 @@ public class DoneCommand extends Command {
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
+    public String execute(TaskList tasks, DukeUi ui, StorageData storage) {
         try {
             tasks.done(this.taskNumber);
-            ui.printTaskDoneMessage(tasks, this.taskNumber);
             storage.markTaskDoneInData(this.taskNumber);
+            return ui.printTaskDoneMessage(tasks, this.taskNumber);
         } catch (DukeTaskDoneException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println("OOPS!!! Invalid Task Number detected.");
+            return "OOPS!!! Invalid Task Number detected.";
         }
     }
 }

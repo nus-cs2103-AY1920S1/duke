@@ -7,8 +7,8 @@ public class FindTaskCommand extends Command {
         this.keyWord = keyWord;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage){
+    String execute(TaskList tasks, Ui ui, Storage storage){
         ArrayList<Task> list = tasks.find(keyWord);
-        ui.printList(list);
+        return list.toString();
     }
 }

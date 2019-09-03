@@ -16,10 +16,12 @@ public class DeleteTaskCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task currTask = tasks.deleteTask(index);
-        ui.printString("Noted. I've removed this task: ");
-        ui.printString( "   " + currTask);
-        ui.printString(tasks.listDetails());
+        String output = "";
+        output = "Noted. I've removed this task: \n";
+        output = output + "   " + currTask + "\n";
+        output = output + tasks.listDetails();
+        return output;
     }
 }

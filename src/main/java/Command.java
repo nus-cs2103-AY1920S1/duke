@@ -24,16 +24,17 @@ public class Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (command) {
         case "bye":
+            ui.showBye();
             break;
         case "list":
             ui.listTask(tasks);
             break;
         case "done":
             int number = ui.readNumber();
-            if (!TaskList.getList().get(number - 1).isDone()) {
+            if (!tasks.getList().get(number - 1).isDone()) {
                 tasks.markDone(number);
                 ui.printDone(number, tasks);
-                storage.updateDone(number);
+                storage.updateDone(number, tasks);
             } else {
                 System.out.println("Task is already done.");
             }
@@ -42,9 +43,9 @@ public class Command {
             String taskname = ui.readLine().trim();
             if (ui.checkValidity(taskname)) {
                 Task t = new Todo(taskname);
-                storage.addTodo(taskname);
+                storage.addTodo(taskname, tasks);
                 tasks.add(t);
-                ui.printAdd(t);
+                ui.printAdd(t, tasks);
             }
             break;
         case "deadline":
@@ -53,9 +54,9 @@ public class Command {
                 String[] arrDeadline = deadline.split("/by");
                 String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
                 Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
-                storage.addDeadline(deadline);
+                storage.addDeadline(deadline, tasks);
                 tasks.add(taskDeadline);
-                ui.printAdd(taskDeadline);
+                ui.printAdd(taskDeadline, tasks);
             }
             break;
         case "event":
@@ -64,21 +65,21 @@ public class Command {
                 String[] arrEvent = event.split("/at");
                 String time = Parser.convertDateAndTime(arrEvent[1].trim());
                 Task taskEvent = new Event(arrEvent[0].trim(), time);
-                storage.addEvent(event);
+                storage.addEvent(event, tasks);
                 tasks.add(taskEvent);
-                ui.printAdd(taskEvent);
+                ui.printAdd(taskEvent, tasks);
             }
             break;
         case "delete":
             int deletionNumber = ui.readNumber();
-            storage.delete(deletionNumber);
+            storage.delete(deletionNumber, tasks);
             Task toDelete = tasks.getList().get(deletionNumber - 1);
             tasks.delete(deletionNumber);
-            ui.printDelete(toDelete);
+            ui.printDelete(toDelete, tasks);
             break;
         case "find":
             String keyword = ui.readLine().trim();
-            ui.printFind(keyword);
+            ui.printFind(keyword, tasks);
             break;
         default:
             try {

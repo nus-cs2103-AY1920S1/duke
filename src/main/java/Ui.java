@@ -66,10 +66,10 @@ public class Ui {
      *
      * @param t A task that will be added to a list of tasks.
      */
-    public void printAdd(Task t) {
+    public void printAdd(Task t, TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t);
-        System.out.println("Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
     /**
@@ -77,10 +77,10 @@ public class Ui {
      *
      * @param toDelete A task that will be deleted from the list of tasks.
      */
-    public void printDelete(Task toDelete) {
+    public void printDelete(Task toDelete, TaskList tasks) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + toDelete);
-        System.out.println("Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
     /**
@@ -125,12 +125,12 @@ public class Ui {
         }
     }
 
-    public void printFind(String keyword) {
+    public void printFind(String keyword, TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
         int count = 1;
-        for (int i = 0; i < TaskList.size(); i++) {
-            if (TaskList.getList().get(i).getDescription().contains(keyword)) {
-                System.out.println(count + "." + TaskList.getList().get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.getList().get(i).getDescription().contains(keyword)) {
+                System.out.println(count + "." + tasks.getList().get(i));
                 count++;
             }
         }

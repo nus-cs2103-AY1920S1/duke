@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private static ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Creates the TaskList object that contains an ArrayList of tasks.
@@ -22,7 +22,7 @@ public class TaskList {
      *
      * @return An int representing how many tasks the ArrayList contains
      */
-    public static int size() {
+    public int size() {
         return tasks.size();
     }
 
@@ -31,7 +31,7 @@ public class TaskList {
      *
      * @return An ArrayList containing tasks.
      */
-    public static ArrayList<Task> getList() {
+    public ArrayList<Task> getList() {
         return tasks;
     }
 

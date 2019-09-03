@@ -26,19 +26,19 @@ public class Storage {
      *
      * @param number An int representing the task number.
      */
-    public void updateDone(int number) {
+    public void updateDone(int number, TaskList tasks) {
         try {
             String s = "";
             Scanner scanFile = new Scanner(file);
-            for (int i = 1; i <= TaskList.size(); i++) {
+            for (int i = 1; i <= tasks.size(); i++) {
                 if (i == number) {
-                    if (i == TaskList.size()) {
+                    if (i == tasks.size()) {
                         s = s + scanFile.nextLine().replaceFirst("0", "1");
                     } else {
                         s = s + scanFile.nextLine().replaceFirst("0", "1") + System.lineSeparator();
                     }
                 } else {
-                    if (i == TaskList.size()) {
+                    if (i == tasks.size()) {
                         s = s + scanFile.nextLine();
                     } else {
                         s = s + scanFile.nextLine() + System.lineSeparator();
@@ -109,10 +109,10 @@ public class Storage {
      *
      * @param taskname A string representing the task description.
      */
-    public void addTodo(String taskname) {
+    public void addTodo(String taskname, TaskList tasks) {
         try {
             FileWriter append = new FileWriter("data/duke.txt", true);
-            if (TaskList.size() == 0) {
+            if (tasks.size() == 0) {
                 append.write("T | 0 | " + taskname);
             } else {
                 append.write("\n" + "T | 0 | " + taskname);
@@ -128,13 +128,13 @@ public class Storage {
      *
      * @param deadline A string representing the deadline task description.
      */
-    public void addDeadline(String deadline) {
+    public void addDeadline(String deadline, TaskList tasks) {
         try {
             String[] arrDeadline = deadline.split("/by");
             String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
             Task t = new Deadline(arrDeadline[0].trim(), timeDeadline);
             FileWriter append = new FileWriter("data/duke.txt", true);
-            if (TaskList.size() == 0) {
+            if (tasks.size() == 0) {
                 append.write("D | 0 | " + arrDeadline[0].trim() + " | " + arrDeadline[1].trim());
             } else {
                 append.write("\n" + "D | 0 | " + arrDeadline[0].trim() + " | " + arrDeadline[1].trim());
@@ -150,13 +150,13 @@ public class Storage {
      *
      * @param event A string representing the task description.
      */
-    public void addEvent(String event) {
+    public void addEvent(String event, TaskList tasks) {
         try {
             String[] arrEvent = event.split("/at");
             String time = Parser.convertDateAndTime(arrEvent[1].trim());
             Task task = new Event(arrEvent[0].trim(), time);
             FileWriter append = new FileWriter("data/duke.txt", true);
-            if (TaskList.size() == 0) {
+            if (tasks.size() == 0) {
                 append.write("E | 0 | " + arrEvent[0].trim() + " | " + arrEvent[1].trim());
             } else {
                 append.write("\n" + "E | 0 | " + arrEvent[0].trim() + " | " + arrEvent[1].trim());
@@ -172,16 +172,16 @@ public class Storage {
      *
      * @param deletionNumber An int representing the task number of the task to be deleted.
      */
-    public void delete(int deletionNumber) {
+    public void delete(int deletionNumber, TaskList tasks) {
         try {
             String s = "";
             Scanner scanFile = new Scanner(file);
-            for (int i = 1; i <= TaskList.size(); i++) {
+            for (int i = 1; i <= tasks.size(); i++) {
                 if (i == deletionNumber) {
                     scanFile.nextLine();
-                } else if (i == TaskList.size()) {
+                } else if (i == tasks.size()) {
                     s = s + scanFile.nextLine();
-                } else if (i == TaskList.size() - 1 && TaskList.size() == deletionNumber) {
+                } else if (i == tasks.size() - 1 && tasks.size() == deletionNumber) {
                     s = s + scanFile.nextLine();
                 } else {
                     s = s + scanFile.nextLine() + System.lineSeparator();

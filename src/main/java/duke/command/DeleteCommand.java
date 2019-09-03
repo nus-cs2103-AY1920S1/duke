@@ -1,10 +1,11 @@
-package main.java.command;
+package duke.command;
 
-import main.java.components.Storage;
-import main.java.components.TaskList;
+import duke.Storage;
+import duke.TaskList;
+
 /**
  * DeleteCommand class which extends the abstract class Command.
- * This class handles the deletion of tasks, and subsequent updating
+ * This class handles the deletion of Duke.tasks, and subsequent updating
  * the txt file.
  */
 public class DeleteCommand extends Command {
@@ -13,7 +14,7 @@ public class DeleteCommand extends Command {
 	/**
 	 * Class constructor
 	 *
-	 * @param command command to delete task
+	 * @param command Duke.command to delete task
 	 */
 	public DeleteCommand(String command) {
 		this.command = command;
@@ -21,10 +22,10 @@ public class DeleteCommand extends Command {
 	
 	/**
 	 * Method that overrides the abstract method in Command class.
-	 * Deletes the task requested by the user from the TaskList
+	 * Deletes the task requested by the user from the Duke.TaskList
 	 * Update the txt file by removing the respective task.
 	 *
-	 * @param tasks ArrayList of Tasks that keep tracks of the Tasks.
+	 * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
 	 * @param storage Handles the reading and writing of the txt file.
 	 */
 	public void execute(TaskList tasks, Storage storage) {
@@ -35,7 +36,7 @@ public class DeleteCommand extends Command {
 	/**
 	 * AddCommand does not exit program.
 	 *
-	 * @return False as this command does not end the program.
+	 * @return False as this Duke.command does not end the program.
 	 */
 	public boolean isExit() {
 		return false;

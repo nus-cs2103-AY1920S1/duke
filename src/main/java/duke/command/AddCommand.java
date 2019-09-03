@@ -1,12 +1,12 @@
-package main.java.command;
+package duke.command;
 
-import main.java.components.Storage;
-import main.java.components.TaskList;
-import main.java.exception.InvalidInputException;
+import duke.Storage;
+import duke.TaskList;
+import duke.exception.InvalidInputException;
 
 /**
  * AddCommand class which extends the abstract class Command.
- * This class handles any addition of tasks into the TaskList class and
+ * This class handles any addition of Duke.tasks into the Duke.TaskList class and
  * subsequently updating the txt file.
  */
 public class AddCommand extends Command {
@@ -15,7 +15,7 @@ public class AddCommand extends Command {
 	/**
 	 * Class constructor
 	 *
-	 * @param command command to add task
+	 * @param command Duke.command to add task
 	 */
 	public AddCommand(String command) {
 		this.command = command;
@@ -23,13 +23,13 @@ public class AddCommand extends Command {
 	
 	/**
 	 * Method that overrides the abstract method in Command class.
-	 * Adds the tasks requested by the user into TaskList.
+	 * Adds the Duke.tasks requested by the user into Duke.TaskList.
 	 * Update the txt file by adding the respective task.
 	 *
-	 * @param tasks ArrayList of Tasks that keep tracks of the Tasks.
+	 * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
 	 * @param storage Handles the reading and writing of the txt file.
 	 */
-	public void execute(TaskList tasks, Storage storage){
+	public void execute(TaskList tasks, Storage storage) {
 		try {
 			if (command.startsWith("todo")) {
 				System.out.println("in");
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
 	/**
 	 * AddCommand does not exit program.
 	 *
-	 * @return False as this command does not end the program.
+	 * @return False as this Duke.command does not end the program.
 	 */
 	public boolean isExit() {
 		return false;

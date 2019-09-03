@@ -1,14 +1,14 @@
-package main.java.command;
+package duke.command;
 
-import main.java.components.Storage;
-import main.java.components.TaskList;
-import main.java.tasks.Task;
-import main.java.command.Command;
+import duke.Storage;
+import duke.TaskList;
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 /**
  * ListCommand class which extends the abstract class Command.
- * This class handles the printing of all tasks in the TaskList.
+ * This class handles the printing of all Duke.tasks in the Duke.TaskList.
  */
 public class ListCommand extends Command {
 	protected String command;
@@ -16,7 +16,7 @@ public class ListCommand extends Command {
 	/**
 	 * Class constructor
 	 *
-	 * @param command command to show all the tasks in TaskList
+	 * @param command Duke.command to show all the Duke.tasks in Duke.TaskList
 	 */
 	public ListCommand(String command) {
 		this.command = command;
@@ -24,9 +24,9 @@ public class ListCommand extends Command {
 	
 	/**
 	 * Method that overrides the abstract method in Command class.
-	 * Prints all the task from the TaskList.
+	 * Prints all the task from the Duke.TaskList.
 	 *
-	 * @param tasks ArrayList of Tasks that keep tracks of the Tasks.
+	 * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
 	 * @param storage Handles the reading and writing of the txt file.
 	 */
 	public void execute(TaskList tasks, Storage storage) {
@@ -39,7 +39,7 @@ public class ListCommand extends Command {
 	/**
 	 * ListCommand does not exit program.
 	 *
-	 * @return False as this command does not end the program.
+	 * @return False as this Duke.command does not end the program.
 	 */
 	public boolean isExit() {
 		return false;

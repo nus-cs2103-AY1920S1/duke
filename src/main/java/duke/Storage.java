@@ -1,11 +1,12 @@
-package main.java.components;
+package duke;
 
-import main.java.exception.EmptyDescriptionException;
-import main.java.exception.InvalidDescriptionException;
-import main.java.tasks.Task;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-import main.java.tasks.Todo;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDescriptionException;
+import duke.tasks.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,8 +15,8 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
- * Storage class deals with loading tasks from the file and
- * saving tasks into the file.
+ * Duke.Storage class deals with loading Duke.tasks from the file and
+ * saving Duke.tasks into the file.
  */
 public class Storage {
 	protected String filePath;
@@ -31,9 +32,9 @@ public class Storage {
 	}
 	
 	/**
-	 * This method loads the saved tasks list from the saved file into the program.
+	 * This method loads the saved Duke.tasks list from the saved file into the program.
 	 *
-	 * @return the array list of tasks that keep tracks of the tasks.
+	 * @return the array list of Duke.tasks that keep tracks of the Duke.tasks.
 	 */
 	public ArrayList<Task> load() {
 		return this.readStored();
@@ -67,11 +68,11 @@ public class Storage {
 	 * This method stores the deadline task keyed in by the user into the file.
 	 *
 	 * @param input the description of the deadline task
-	 * @throws EmptyDescriptionException if the description is empty for the deadline task.
+	 * @throws EmptyDescriptionException   if the description is empty for the deadline task.
 	 * @throws InvalidDescriptionException if the format of the deadline keyed in by the user is wrong.
-	 * @throws ParseException if the date format for the deadline keyed in by the user is wrong.
+	 * @throws ParseException              if the date format for the deadline keyed in by the user is wrong.
 	 */
-	public void storeDeadline(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException{
+	public void storeDeadline(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException {
 		try {
 			FileWriter fw = new FileWriter(this.filePath, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -103,11 +104,11 @@ public class Storage {
 	 * This method stores the event task keyed in by the user into the file.
 	 *
 	 * @param input the description of the event task
-	 * @throws EmptyDescriptionException if the description is empty for the event task.
+	 * @throws EmptyDescriptionException   if the description is empty for the event task.
 	 * @throws InvalidDescriptionException if the format of the event keyed in by the user is wrong.
-	 * @throws ParseException if the date format for the event keyed in by the user is wrong.
+	 * @throws ParseException              if the date format for the event keyed in by the user is wrong.
 	 */
-	public void storeEvent(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException{
+	public void storeEvent(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException {
 		try {
 			if (input.contains("/at")) {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true));
@@ -138,10 +139,10 @@ public class Storage {
 	 * This method deletes the task as requested by the user input in the file. It rewrites
 	 * everything from the saved file and writes from the updated task list in the program.
 	 *
-	 * @param input the command given by the user input which includes the index of the
+	 * @param input the Duke.command given by the user input which includes the index of the
 	 *              array list that user wants to delete.
 	 */
-	public void updateDelete(String input){
+	public void updateDelete(String input) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filePath));
 			String[] inputs = input.split(" ");
@@ -159,7 +160,7 @@ public class Storage {
 			}
 			br.close();
 			BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-			for(String s : stored) {
+			for (String s : stored) {
 				bw.write(s);
 				bw.newLine();
 			}
@@ -174,7 +175,7 @@ public class Storage {
 	 * This method completes the task as requested by the user input in the file. It rewrites
 	 * everything from the saved file and writes from the updated task list in the program.
 	 *
-	 * @param input the command given by the user input which includes the index of the
+	 * @param input the Duke.command given by the user input which includes the index of the
 	 *              array list that user wants to complete.
 	 */
 	public void updateComplete(String input) {
@@ -198,7 +199,7 @@ public class Storage {
 			}
 			br.close();
 			BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-			for(String s : stored) {
+			for (String s : stored) {
 				bw.write(s);
 				bw.newLine();
 			}
@@ -210,29 +211,28 @@ public class Storage {
 	}
 	
 	/**
-	 * This method reads the tasks that has been saved in the file and load the tasks into the program.
+	 * This method reads the Duke.tasks that has been saved in the file and load the Duke.tasks into the program.
 	 *
-	 * @return a array list of tasks.
+	 * @return a array list of Duke.tasks.
 	 */
-	public ArrayList<Task> readStored(){
+	public ArrayList<Task> readStored() {
 		ArrayList<Task> tasks = new ArrayList<>();
 		try {
 			this.readData(tasks);
 		} catch (ParseException e) {
-			System.out.println("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: " +
-					"02/08/2019 14:30\n");
+			System.out.println("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: " + "02/08/2019 14:30\n");
 		}
 		return tasks;
 	}
 	
 	/**
 	 * This method works together with readStored() method and makes sense of the data stored in the saved file
-	 * and load the tasks into the program.
+	 * and load the Duke.tasks into the program.
 	 *
-	 * @param tasksList the task list to store the tasks from the saved file.
+	 * @param tasksList the task list to store the Duke.tasks from the saved file.
 	 * @throws ParseException if the data from the saved file does not follow a certain format.
 	 */
-	public void readData(ArrayList<Task> tasksList) throws ParseException{
+	public void readData(ArrayList<Task> tasksList) throws ParseException {
 		String inputLine = null;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -256,7 +256,7 @@ public class Storage {
 	/**
 	 * This method adds the saved to do task from the file into the program task list.
 	 *
-	 * @param input description of the to do task.
+	 * @param input     description of the to do task.
 	 * @param tasksList task list in which the to do task will be added into.
 	 */
 	public void addStoredTodo(String[] input, ArrayList<Task> tasksList) {
@@ -270,11 +270,11 @@ public class Storage {
 	/**
 	 * This method adds the saved deadline task from the file into the program task list.
 	 *
-	 * @param input description and deadline date of the deadline task.
+	 * @param input     description and deadline date of the deadline task.
 	 * @param tasksList task list in which the deadline task will be added into.
 	 * @throws ParseException if saved data does not follow the required format.
 	 */
-	public void addStoredDeadline(String[] input, ArrayList<Task> tasksList) throws ParseException{
+	public void addStoredDeadline(String[] input, ArrayList<Task> tasksList) throws ParseException {
 		Deadline deadline = new Deadline(input[2], convertStringToDate(input[3]));
 		if (Integer.parseInt(input[1]) == 1) {
 			deadline.complete();
@@ -285,11 +285,11 @@ public class Storage {
 	/**
 	 * This method adds the saved event task from the file into the program task list.
 	 *
-	 * @param input description and event date of the event task.
+	 * @param input     description and event date of the event task.
 	 * @param tasksList task list in which the event task will be added into.
 	 * @throws ParseException if saved data does not follow the required format.
 	 */
-	public void addStoredEvent(String[] input, ArrayList<Task> tasksList) throws ParseException{
+	public void addStoredEvent(String[] input, ArrayList<Task> tasksList) throws ParseException {
 		Event event = new Event(input[2], convertStringToDate(input[3]));
 		if (Integer.parseInt(input[1]) == 1) {
 			event.complete();

@@ -1,10 +1,11 @@
-package main.java.command;
+package duke.command;
 
-import main.java.components.Storage;
-import main.java.components.TaskList;
+import duke.Storage;
+import duke.TaskList;
+
 /**
  * DoneCommand class which extends the abstract class Command.
- * This class handles the completion of tasks, and subsequent updating
+ * This class handles the completion of Duke.tasks, and subsequent updating
  * the txt file.
  */
 public class DoneCommand extends Command {
@@ -13,7 +14,7 @@ public class DoneCommand extends Command {
 	/**
 	 * Class constructor
 	 *
-	 * @param command command to complete task
+	 * @param command Duke.command to complete task
 	 */
 	public DoneCommand(String command) {
 		this.command = command;
@@ -21,10 +22,10 @@ public class DoneCommand extends Command {
 	
 	/**
 	 * Method that overrides the abstract method in Command class.
-	 * Completes the task requested by the user from the TaskList by marking them as done.
+	 * Completes the task requested by the user from the Duke.TaskList by marking them as done.
 	 * Update the txt file by marking the respective task as done.
 	 *
-	 * @param tasks ArrayList of Tasks that keep tracks of the Tasks.
+	 * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
 	 * @param storage Handles the reading and writing of the txt file.
 	 */
 	public void execute(TaskList tasks, Storage storage) {
@@ -35,7 +36,7 @@ public class DoneCommand extends Command {
 	/**
 	 * DoneCommand does not exit program.
 	 *
-	 * @return False as this command does not end the program.
+	 * @return False as this Duke.command does not end the program.
 	 */
 	public boolean isExit() {
 		return false;

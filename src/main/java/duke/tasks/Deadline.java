@@ -1,10 +1,10 @@
-package main.java.tasks;
+package duke.tasks;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 /**
- * Deadline class that can be created by the user. Handles all tasks with deadlines.
+ * Deadline class that can be created by the user. Handles all Duke.tasks with deadlines.
  */
 public class Deadline extends Task {
 

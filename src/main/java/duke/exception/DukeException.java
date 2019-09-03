@@ -1,7 +1,7 @@
-package main.java.exception;
+package duke.exception;
 
 /**
- * DukeException class handles all the exception that can be thrown by the program.
+ * DukeException class handles all the Duke.exception that can be thrown by the program.
  */
 public class DukeException extends Exception {
     
@@ -16,7 +16,7 @@ public class DukeException extends Exception {
     /**
      * Class constructor
      *
-     * @param message message to be tagged to the exception.
+     * @param message message to be tagged to the Duke.exception.
      */
     public DukeException(String message) {
         super(message);

@@ -1,20 +1,21 @@
-package main.java.components;
+package duke;
 
-import main.java.exception.DukeException;
-import main.java.exception.EmptyDescriptionException;
-import main.java.exception.InvalidDescriptionException;
-import main.java.tasks.Task;
-import main.java.tasks.Deadline;
-import main.java.tasks.Event;
-import main.java.tasks.Todo;
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDescriptionException;
+import duke.tasks.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * TaskList class contains the task list, and has operations to
- * add/delete the tasks in the list.
+ * Duke.TaskList class contains the task list, and has operations to
+ * add/delete the Duke.tasks in the list.
  */
 public class TaskList {
 	protected static ArrayList<Task> tasks;
@@ -22,7 +23,7 @@ public class TaskList {
 	/**
 	 * Class constructor
 	 *
-	 * @param tasks an array list of tasks.
+	 * @param tasks an array list of Duke.tasks.
 	 * @throws DukeException which includes any exceptions when operating on the task list.
 	 */
 	public TaskList(ArrayList<Task> tasks) throws DukeException {
@@ -32,7 +33,7 @@ public class TaskList {
 	/**
 	 * This method retrieves the task list.
 	 *
-	 * @return the array list of tasks that keep tracks of the tasks.
+	 * @return the array list of Duke.tasks that keep tracks of the Duke.tasks.
 	 */
 	public ArrayList<Task> getTasks() {
 		return this.tasks;
@@ -43,7 +44,7 @@ public class TaskList {
 	 *
 	 * @param input description of the to do task to be added into the task list.
 	 */
-	public void addTodo(String input){
+	public void addTodo(String input) {
 		try {
 			if (!input.substring(4).isEmpty()) {
 				String description = input.substring(4);
@@ -63,7 +64,7 @@ public class TaskList {
 	 *
 	 * @param input description of the deadline task together with the deadline date to be added into the task list.
 	 */
-	public void addDeadline(String input){
+	public void addDeadline(String input) {
 		try {
 			if (input.contains("/by")) {
 				int index = input.lastIndexOf("/by");
@@ -120,7 +121,7 @@ public class TaskList {
 	 * Deletes the task as requested by the user input and removes this task from the
 	 * task list.
 	 *
-	 * @param input command of the user input which includes the index of the task that
+	 * @param input Duke.command of the user input which includes the index of the task that
 	 *              user wants to delete.
 	 */
 	public void deleteTask(String input) {
@@ -135,10 +136,10 @@ public class TaskList {
 	/**
 	 * Completes the task as requested by the user input.
 	 *
-	 * @param input command of the user input which includes the index of the task that
+	 * @param input Duke.command of the user input which includes the index of the task that
 	 *              user wants to complete
 	 */
-	public void completeTask(String input){
+	public void completeTask(String input) {
 		String[] inputs = input.split(" ");
 		int index = Integer.parseInt(inputs[1]) - 1;
 		tasks.get(index).complete();
@@ -149,7 +150,7 @@ public class TaskList {
 	/**
 	 * Find the task according to the keyword given by the user input.
 	 *
-	 * @param input command of the user input which includes the keyword that the user wants to find.
+	 * @param input Duke.command of the user input which includes the keyword that the user wants to find.
 	 */
 	public void findTask(String input) {
 		String keyword = input.substring(5);

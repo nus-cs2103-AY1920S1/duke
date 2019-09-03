@@ -1,6 +1,6 @@
-package main.java.exception;
+package duke.exception;
 //
-//import duke.exception.DukeException;
+//import duke.Duke.exception.DukeException;
 /**
  * InvalidInputException class extends DukeException and deals with
  * any random inputs that is not within the function of the program.
@@ -13,7 +13,7 @@ public class InvalidInputException extends DukeException {
     /**
      * Class constructor
      *
-     * @param message message to be tagged to the exception.
+     * @param message message to be tagged to the Duke.exception.
      */
     public InvalidInputException(String message) {
         super(message);

@@ -1,7 +1,7 @@
-package main.java.tasks;
+package duke.tasks;
 
 /**
- * To do class that can be created by the user. Handles all tasks with To do.
+ * To do class that can be created by the user. Handles all Duke.tasks with To do.
  */
 public class Todo extends Task {
     

@@ -1,16 +1,16 @@
-package main.java.exception;
+package duke.exception;
 
-//import main.java.exception.DukeException;
+//import main.java.Duke.exception.DukeException;
 /**
  * EmptyDescriptionException class extends DukeException and deals with
- * tasks without any description given by the input in the program.
+ * Duke.tasks without any description given by the input in the program.
  */
 public class EmptyDescriptionException extends DukeException{
     
     /**
      * Class constructor
      *
-     * @param message message to be tagged to the exception.
+     * @param message message to be tagged to the Duke.exception.
      */
     public EmptyDescriptionException(String message) {
         super(message);

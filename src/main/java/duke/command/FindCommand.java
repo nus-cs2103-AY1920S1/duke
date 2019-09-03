@@ -1,10 +1,10 @@
-package main.java.command;
+package duke.command;
 
-import main.java.components.Storage;
-import main.java.components.TaskList;
-import main.java.exception.EmptyDescriptionException;
-import main.java.exception.InvalidDescriptionException;
-import main.java.exception.InvalidInputException;
+import duke.Storage;
+import duke.TaskList;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidInputException;
 
 import java.io.IOException;
 

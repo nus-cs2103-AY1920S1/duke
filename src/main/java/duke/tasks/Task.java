@@ -1,8 +1,8 @@
-package main.java.tasks;
+package duke.tasks;
 
 /**
  * Task class includes Todo, Deadline and Event classes.
- * It is the task that is tracked by the TaskList.
+ * It is the task that is tracked by the Duke.TaskList.
  */
 public class Task {
     protected boolean isDone = false;

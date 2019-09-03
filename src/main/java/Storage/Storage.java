@@ -22,10 +22,10 @@ import java.text.ParseException;
 
 public class Storage {
 
-    public final String filepath;
+    public final String FILEPATH;
 
     public Storage(String filepath) {
-        this.filepath = filepath;
+        this.FILEPATH = filepath;
     }
 
     public void writeToFile(String filePath, String textToAdd) throws IOException {
@@ -42,17 +42,17 @@ public class Storage {
 
     public void save(TaskList taskList) throws IOException {
         if(taskList.list.size() != 0) {
-            writeToFile(filepath, taskList.list.get(0).toString() + System.lineSeparator());
+            writeToFile(FILEPATH, taskList.list.get(0).toString() + System.lineSeparator());
 
             for (int i = 1; i < taskList.list.size(); i++) {
-                appendToFile(filepath, taskList.list.get(i).toString() + System.lineSeparator());
+                appendToFile(FILEPATH, taskList.list.get(i).toString() + System.lineSeparator());
             }
         }
     }
 
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>(100);
-        Path path = Paths.get(filepath);
+        Path path = Paths.get(FILEPATH);
         Scanner scanner = new Scanner(path);
         while(scanner.hasNextLine()) {
             String line = scanner.nextLine();

@@ -7,10 +7,10 @@ import Ui.Ui;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
+
     private int taskNo;
 
     public DeleteCommand(int taskNo) {
-
         this.taskNo = taskNo;
     }
 

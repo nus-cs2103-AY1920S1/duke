@@ -25,9 +25,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.add(taskToAdd);
-        ui.showAddedTask(taskList);
         storage.writeListToFile(taskList);
+        return ui.showAddedTask(taskList);
     }
 }

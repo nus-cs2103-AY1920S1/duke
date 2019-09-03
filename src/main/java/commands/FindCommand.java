@@ -36,9 +36,10 @@ public class FindCommand extends Command {
      * @param ui the user interface associated with this run of Duke
      * @param storage the storage handler associated with this run of Duke
      * @throws IOException when file the list is to be written to is not found
+     * @return Duke's response to the user command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         // obtain array of keywords, size of array, and size of list
         String[] keywordArray = this.keywords.split(" ");
         int keywordArraySize = keywordArray.length;
@@ -68,10 +69,10 @@ public class FindCommand extends Command {
 
         if (foundTasksContainer.isEmpty()) {
             // inform user that task is not found
-            ui.showTaskNotFoundMessage();
+            return ui.showTaskNotFoundMessage();
         } else {
             // send container task list for printing
-            ui.printTasks(foundTasksContainer);
+            return ui.printTasks(foundTasksContainer);
         }
     }
 }

@@ -1,21 +1,21 @@
 import ui.Duke;
 
+import javafx.application.Application;
+
 /**
- * Driver method for Duke.
+ * GUI Launcher for Duke.
  *
  * @author atharvjoshi
  * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Main {
     /**
-     * The main method that drives Duke.
-     *
-     * <p> Creates a new instance of Duke and runs it. </p>
+     * The main method that launches Duke.
      *
      * @param args command(s) from the user
      */
     public static void main(String[] args) {
-        // create an instance of ui.Duke with the file containing the task list
-        new Duke("data/tasks.txt").run();
+        // code adapted from JavaFX tutorials by CS2103 teaching dept
+        Application.launch(Duke.class, args);
     }
 }

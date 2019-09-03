@@ -28,10 +28,11 @@ public class PrintCommand extends Command {
      * @param tasks the task list the task is to be added to
      * @param ui the user interface associated with this run of ui.Duke
      * @param storage the storage handler associated with this run of ui.Duke
+     * @return Duke's response to the user command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // call UI to print task list
-        ui.printTasks(tasks);
+        return ui.printTasks(tasks);
     }
 }

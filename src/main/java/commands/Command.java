@@ -23,11 +23,11 @@ public abstract class Command {
     boolean isExit;
 
     /** Abstract execute method to be implemented by child classes. */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)
             throws IOException;
 
     /**
-     *  Instantiate a command with an imperative.
+     * Instantiate a command with an imperative.
      * @param imperative the term used to identify the command type.
      */
     Command(String imperative) {

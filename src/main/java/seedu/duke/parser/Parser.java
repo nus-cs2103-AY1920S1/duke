@@ -7,6 +7,7 @@ import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class Parser {
      * @param tasks Represents the TaskList object to add or remove Task objects.
      * @param filePath Represents the file for the tasks to be recorded in.
      */
-    public void parse(String command, UI ui, TaskList tasks, String filePath){
+    public void parse(String command, UI ui, TaskList tasks, String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
             while (!command.equals("bye")) {
@@ -57,7 +58,7 @@ public class Parser {
                 command = ui.readCommand();
             }
             fw.close();
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("File not found.");
         }
     }
@@ -67,9 +68,9 @@ public class Parser {
      * @param taskList The list that contains/may not contain tasks.
      * @param ui User input that handles the printing.
      */
-    public static void printList(TaskList taskList, UI ui){
+    public static void printList(TaskList taskList, UI ui) {
         String reply = "Here are the tasks in your list:\n\t ";
-        for(int i=0; i<taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             reply += (i + 1) + "." + taskList.get(i);
             if (i != taskList.size() - 1) {
                 reply += "\n\t ";
@@ -77,7 +78,6 @@ public class Parser {
         }
         ui.printReply(reply);
     }
-
 
     /** Adds a task to the Task list.
      * @param task Task to be added to the list. Prints out a reply when task is added.
@@ -102,12 +102,12 @@ public class Parser {
      * @param ui Handles the printing of reply.
      * @throws DukeException If task index is more than the size of Task list.
      */
-    public static void removeFromList(TaskList taskList, int taskIndex, UI ui) throws DukeException{
-        if(taskIndex > taskList.size()){
+    public static void removeFromList(TaskList taskList, int taskIndex, UI ui) throws DukeException {
+        if (taskIndex > taskList.size()) {
             throw new DukeException("");
         }
-        String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex-1) + "\n\t" +
-                "Now you have " + taskList.size() + ((taskList.size() == 1)? " task": " tasks") + " in the list.";
+        String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex - 1) + "\n\t"
+                + "Now you have " + taskList.size() + ((taskList.size() == 1) ? " task" : " tasks") + " in the list.";
         ui.printReply(reply);
     }
 
@@ -119,14 +119,14 @@ public class Parser {
     public static void findKeyword(TaskList taskList, String keyword, UI ui) {
         TaskList matchingTasks = new TaskList();
         String reply = "Here are the matching tasks in your list:\n\t ";
-        for(Task task: taskList) {
-            if(task.getDescription().contains(keyword)) {
+        for (Task task: taskList) {
+            if (task.getDescription().contains(keyword)) {
                 matchingTasks.add(task);
             }
         }
-        for(int i = 1; i <= matchingTasks.size(); i++) {
-            reply += i + "." + matchingTasks.get(i-1);
-            if(i < matchingTasks.size()) {
+        for (int i = 1; i <= matchingTasks.size(); i++) {
+            reply += i + "." + matchingTasks.get(i - 1);
+            if (i < matchingTasks.size()) {
                 reply += "\n\t ";
             }
         }

@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import seedu.duke.parser.DateParser;
+
 import java.util.Date;
 
 public class Deadline extends Task {
@@ -14,12 +15,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toFile(){
-        return "D | " + (isDone?"1":"0") + " | " + this.description + " | " + this.strBy + "\n";
+    public String toFile() {
+        return "D | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strBy + "\n";
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + " (by: " + strBy + ")";
     }
 }

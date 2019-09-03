@@ -5,11 +5,11 @@ import java.io.File;
 public class Storage {
     public String path;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.path = filePath;
     }
 
-    public File load(){
+    public File load() {
         return new File(path);
     }
 }

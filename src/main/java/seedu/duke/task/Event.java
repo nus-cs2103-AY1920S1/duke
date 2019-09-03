@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import seedu.duke.parser.DateParser;
+
 import java.util.Date;
 
 public class Event extends Task {

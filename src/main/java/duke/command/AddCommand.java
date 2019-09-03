@@ -6,7 +6,7 @@ import duke.util.Ui;
 import duke.task.Task;
 
 /**
- * Create an AddCommand. It adds tasks to user's list.
+ * Creates an AddCommand. It adds tasks to user's list.
  */
 public class AddCommand extends Command {
     public AddCommand(Task task) {
@@ -21,10 +21,8 @@ public class AddCommand extends Command {
      * @param storage Storage to read and write files.
      */
     public String execute(TaskList t, Ui ui, Storage storage) {
-        String message = "";
         t.tasks.add(task);
-        message = ui.showAddedTask(task, t.tasks.size());
         storage.save(t.tasks);
-        return message;
+        return ui.showAddedTask(task, t.tasks.size());
     }
 }

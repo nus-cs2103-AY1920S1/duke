@@ -7,7 +7,7 @@ import duke.util.Ui;
 import duke.task.Task;
 
 /**
- * Create a DeleteCommand. It removes user's task from the list.
+ * Creates a DeleteCommand. It removes user's task from the list.
  */
 public class DeleteCommand extends Command {
     public DeleteCommand(int n) {
@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete a task from user list.
+     * Deletes a task from user list.
      *
      * @param t TaskList to be appended.
      * @param ui UI to interact with user.
@@ -23,12 +23,10 @@ public class DeleteCommand extends Command {
      * @throws DukeException If user input a number that is not within TaskList.
      */
     public String execute(TaskList t, Ui ui, Storage storage) throws DukeException {
-        String message = "";
         try {
             Task deletedTask = t.tasks.remove(pos);
-            message = ui.showDeletedTask(deletedTask, t.tasks.size());
             storage.save(t.tasks);
-            return message;
+            return ui.showDeletedTask(deletedTask, t.tasks.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please input a number that is within the list");
         }

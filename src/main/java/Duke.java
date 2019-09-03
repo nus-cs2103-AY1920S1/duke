@@ -1,4 +1,3 @@
-import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -10,6 +9,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Sets up Storage, Ui and Parser for Duke.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -21,8 +23,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes duke after set up.
+     */
     public void run() {
         ui.showWelcome(tasks.tasks);
+        /*
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -39,6 +45,7 @@ public class Duke {
                 ui.showLine();
             }
         }
+        */
     }
 
     public static void main(String[] args) {
@@ -46,8 +53,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a message generated based on user input.
+     *
+     * @param input User input.
+     * @return Message in a string.
      */
     String getResponse(String input) {
         String doggoResponse = "";
@@ -56,6 +65,6 @@ public class Duke {
         } catch (DukeException e) {
             doggoResponse = e.getMessage();
         }
-        return "Doggo responses : \n" + doggoResponse;
+        return "Doggo : \n" + doggoResponse;
     }
 }

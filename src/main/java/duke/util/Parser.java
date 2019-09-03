@@ -14,11 +14,11 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * Create a Parser file to parse user input into Commands understood by the programme.
+ * Creates a Parser file to parse user input into Commands understood by the programme.
  */
 public class Parser {
     /**
-     * Parse user input into Commands understood by the programme.
+     * Parses user input into Commands understood by the programme.
      *
      * @param s Input string.
      * @return A specific Command which will be executed.
@@ -65,7 +65,7 @@ public class Parser {
 
         case "todo":
             if (s.length() < 6) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("Wof! The description of a todo cannot be empty.");
             }
             description = s.substring(5);
             task = new ToDo(description);
@@ -74,7 +74,7 @@ public class Parser {
 
         case "deadline":
             if (s.length() < 10) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("Wof! The description of a deadline cannot be empty.");
             }
             temp = s.split("/by");
             if (temp.length < 2) {
@@ -92,7 +92,7 @@ public class Parser {
 
         case "event":
             if (s.length() < 7) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("Wof! The description of a event cannot be empty.");
             }
             temp = s.split("/at");
             if (temp.length < 2) {
@@ -113,7 +113,7 @@ public class Parser {
             break;
 
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Wof?");
         }
         return c;
     }

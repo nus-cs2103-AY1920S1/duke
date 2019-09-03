@@ -9,13 +9,13 @@ import duke.task.ToDo;
 import java.util.ArrayList;
 
 /**
- * Create a TaskList to store Task objects.
+ * Creates a TaskList to store Task objects.
  */
 public class TaskList {
     public ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
-     * TaskList to store.
+     * Creates a TaskList to store Task objects.
      *
      * @param content Input an ArrayList of String for TaskList to read inputs line by line
      * @throws DukeException If input is not formatted properly.

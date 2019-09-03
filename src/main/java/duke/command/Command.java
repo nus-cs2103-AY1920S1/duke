@@ -7,7 +7,7 @@ import duke.util.Ui;
 import duke.task.Task;
 
 /**
- * Generic command class, to be inherited by specific commands.
+ * Creates a generic command class, to be inherited by specific commands.
  */
 public abstract class Command {
     int pos;

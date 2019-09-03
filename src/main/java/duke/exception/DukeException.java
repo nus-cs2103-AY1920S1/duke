@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Create a DukeException.
+ * Creates a DukeException.
  */
 public class DukeException extends Exception {
     public DukeException(String message) {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Create a Storage class to read and write user's tasks.
+ * Creates a Storage class to read and write user's tasks.
  */
 public class Storage {
     private Scanner sc;
@@ -21,7 +21,7 @@ public class Storage {
     private static final String DUKE_DATA_PATH = DUKE_DATA_DIR + File.separator + "task.txt";
 
     /**
-     * Create a Storate class to read and write user's tasks.
+     * Creates a Storage class to read and write user's tasks.
      */
     public Storage() {
         try {

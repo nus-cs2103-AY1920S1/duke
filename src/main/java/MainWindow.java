@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,8 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Creates a Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -37,7 +39,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -45,5 +47,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.substring(9, 37).equals("Saving your current tasks : ")) {
+            quitJavaFX();
+        }
+    }
+
+    private void quitJavaFX() {
+        Platform.exit();
+        System.exit(0);
     }
 }

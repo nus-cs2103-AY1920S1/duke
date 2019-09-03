@@ -5,7 +5,7 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Create an ExitCommand. It ends the programme and stores user's tasks.
+ * Creates an ExitCommand. It ends the programme and stores user's tasks.
  */
 public class ExitCommand extends Command {
     /**
@@ -16,10 +16,8 @@ public class ExitCommand extends Command {
      * @param storage Storage to read and write files.
      */
     public String execute(TaskList t, Ui ui, Storage storage) {
-        String message = "";
-        super.exit = true;
-        message = ui.showExitMessage(t.tasks);
         storage.save(t.tasks);
-        return message;
+        super.exit = true;
+        return ui.showExitMessage(t.tasks);
     }
 }

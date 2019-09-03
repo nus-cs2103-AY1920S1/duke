@@ -3,25 +3,14 @@ package duke.util;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
- * Create a UI class to manage UI for users.
+ * Creates a UI class to manage UI for users.
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
     private static final String LINES = "____________________________________________________________\n";
 
     public Ui() {
-    }
-
-    /**
-     * Prompts user for an input.
-     *
-     * @return A new line.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 
     /**
@@ -32,32 +21,14 @@ public class Ui {
     }
 
     /**
-     * Prints horizontal lines.
-     */
-    public void showLine() {
-        System.out.print(LINES);
-    }
-
-    /**
-     * Prints error message.
-     *
-     * @param message Error message.
-     */
-    public void showError(String message) {
-        System.out.println(message);
-    }
-
-    /**
      * Prints the UI for ending the programme.
      *
      * @param tasks TaskList object.
      */
     public String showExitMessage(ArrayList<Task> tasks) {
-        String message = "";
-        message += "Saving your current tasks : \n";
+        String message = "Saving your current tasks : \n";
         for (Task t : tasks) {
             message += t.toString() + "\n";
-//            System.out.println(t);
         }
         message += "Bye. Hope to see you again soon!";
         return message;
@@ -68,14 +39,16 @@ public class Ui {
      *
      * @param tasks TaskList object.
      */
-    public void showWelcome(ArrayList<Task> tasks) {
-        System.out.println(display("Hello! I'm Duke\nFeed me some commands!\n"));
-        showLine();
-        System.out.println("Leftover tasks from before : ");
+    public String showWelcome(ArrayList<Task> tasks) {
+        String message = LINES;
+        message += "Hello! I'm Duke\nFeed me some commands!\n";
+        message += LINES;
+        message += "Leftover tasks from before : \n";
         for (Task t : tasks) {
-            System.out.println(t);
+            message += t + "\n";
         }
-        showLine();
+        message += LINES;
+        return message;
     }
 
     /**
@@ -117,15 +90,9 @@ public class Ui {
      * @param list TaskList object.
      */
     public String printList(TaskList list) {
-        String message = "";
-        try {
-            message += "Here are the task in your list:\n";
-            for (int i = 0; i < list.tasks.size(); i++) {
-//                System.out.println(i + 1 + "." + list.tasks.get(i));
-                message += i + 1 + "." + list.tasks.get(i) + "\n";
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return "Your list is empty";
+        String message = "Here are the task in your list:\n";
+        for (int i = 0; i < list.tasks.size(); i++) {
+            message += i + 1 + "." + list.tasks.get(i) + "\n";
         }
         return message;
     }
@@ -136,16 +103,10 @@ public class Ui {
      * @param foundTaskList TaskList with filtered keyword.
      */
     public String showFoundTask(ArrayList<Task> foundTaskList) {
-        String message = "";
-        message += "Here are the matching tasks in your list:";
+        String message = "Here are the matching tasks in your list:";
         for (int i = 0; i < foundTaskList.size(); i++) {
             message += i + 1 + "." + foundTaskList.get(i);
-//            System.out.println(i + 1 + "." + foundTaskList.get(i));
         }
         return message;
-    }
-
-    private String display(String text) {
-        return LINES + text + LINES;
     }
 }

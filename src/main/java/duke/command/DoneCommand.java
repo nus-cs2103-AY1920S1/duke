@@ -7,7 +7,7 @@ import duke.util.Ui;
 import duke.task.Task;
 
 /**
- * Create a DoneCommand. It saves user's task as done.
+ * Creates a DoneCommand. It saves user's task as done.
  */
 public class DoneCommand extends Command {
     public DoneCommand(int n) {
@@ -23,12 +23,10 @@ public class DoneCommand extends Command {
      * @throws DukeException If user input a number that is not within TaskList.
      */
     public String execute(TaskList t, Ui ui, Storage storage) throws DukeException {
-        String message = "";
         try {
             Task doneTask = t.tasks.get(pos).markAsDone();
-            message = ui.showDoneTask(doneTask);
             storage.save(t.tasks);
-            return message;
+            return ui.showDoneTask(doneTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please input a number that is within the list");
         }

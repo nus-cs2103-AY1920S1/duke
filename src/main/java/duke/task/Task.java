@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Create a Task.
+ * Creates a Task.
  */
 public class Task {
     String description;

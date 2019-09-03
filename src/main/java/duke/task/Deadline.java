@@ -3,14 +3,14 @@ package duke.task;
 import java.util.Date;
 
 /**
- * Create a Deadline Task. Description and timing required.
+ * Creates a Deadline Task. Description and timing required.
  */
 public class Deadline extends Task {
     private String by;
     private Date date;
 
     /**
-     * Create a Deadline Task. Description and timing required.
+     * Creates a Deadline Task. Description and timing required.
      *
      * @param description Description of the task, in String.
      * @param by Timing of the task, in String.

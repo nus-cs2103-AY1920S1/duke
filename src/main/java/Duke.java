@@ -32,7 +32,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean run = true;
         ArrayList<String> textArr;
-        String filename = "../../../data/duke.txt";
+        String filename = "data/duke.txt";
         Storage file = new ReadFile(filename);
         WriteFile data = new WriteFile(filename);
 

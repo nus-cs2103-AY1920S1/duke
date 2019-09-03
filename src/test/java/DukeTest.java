@@ -8,7 +8,7 @@ class DukeTest {
     @Test
     void main() throws Exception {
         final InputStream original = System.in;
-        final FileInputStream fips = new FileInputStream(new File("../../test_data/duke.txt"));
+        final FileInputStream fips = new FileInputStream(new File("data/duke.txt"));
         System.setIn(fips);
         System.setIn(original);
     }

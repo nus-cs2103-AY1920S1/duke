@@ -11,7 +11,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<Task>();

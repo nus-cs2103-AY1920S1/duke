@@ -13,6 +13,9 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /** Set a task as done and returns an acknowledgement of making the task as done.
+     * @return a string to acknowledge successful marking of task as done.
+     */
     public String markAsDone() {
         isDone = true;
         String reply = "Nice! I've marked this task as done:\n\t" +  " [\u2713] " + this.description;

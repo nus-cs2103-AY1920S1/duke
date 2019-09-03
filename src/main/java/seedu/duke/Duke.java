@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private UI ui;
 
+    /** Constructs a Duke object. Reads and loads the latest record of the Task List
+     * from the file that stores the list.
+     * @param filePath Represents the file address of the file to be read.
+     */
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);
@@ -22,6 +26,7 @@ public class Duke {
         }
     }
 
+    /** Executes the Duke program. */
     public void run() {
         ui.showWelcome();
         String command = ui.readCommand();

@@ -93,7 +93,9 @@ public class Parser {
         String replyToFile = task.toFile();
         try {
             fw.write(replyToFile);
-        } catch (IOException e) { }
+        } catch (IOException e) {
+            ui.printReply("Unable to write to file.");
+        }
     }
 
     /** Removes a task from the Task list. If task index is out of the list, throws DukeException.

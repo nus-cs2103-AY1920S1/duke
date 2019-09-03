@@ -4,6 +4,8 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.Scanner;
+
 /**
  * Duke is a chat based task manager that keeps track of the Tasks keyed in by the user.
  */
@@ -32,8 +34,18 @@ public class Duke {
      * Starts Duke.
      */
     public void run() {
+        boolean isExit = false;
+        Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks);
-        storage.write(parser.start());
+
+        ui.showWelcome();
+
+        while(!isExit) {
+            String input = sc.nextLine();
+            isExit = parser.parse(input);
+        }
+        sc.close();
+        storage.write(tasks);
     }
 
     public static void main(String[] args) {

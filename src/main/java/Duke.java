@@ -1,5 +1,5 @@
-import duck.command.Command;
-import duck.util.*;
+import duke.command.Command;
+import duke.util.*;
 
 import java.io.FileNotFoundException;
 

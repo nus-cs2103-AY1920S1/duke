@@ -1,11 +1,12 @@
-package duck.util;
+package util;
 
+import duke.util.TaskList;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static duck.util.ObjectsForTest.*;
+import static duke.util.ObjectsForTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {

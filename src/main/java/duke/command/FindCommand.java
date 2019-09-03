@@ -1,9 +1,9 @@
-package duck.command;
+package duke.command;
 
-import duck.task.Task;
-import duck.util.Storage;
-import duck.util.TaskList;
-import duck.util.Ui;
+import duke.task.Task;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a <code>Command</code> to list all related tasks by a searching key word.

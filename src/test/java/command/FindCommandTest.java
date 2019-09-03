@@ -1,8 +1,9 @@
-package duck.command;
+package command;
 
-import duck.util.Storage;
-import duck.util.TaskList;
-import duck.util.Ui;
+import duke.command.FindCommand;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import static duck.util.ObjectsForTest.*;
+import static duke.util.ObjectsForTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FindCommandTest {

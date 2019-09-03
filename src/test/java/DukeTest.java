@@ -1,6 +1,5 @@
-
-import duck.util.Storage;
-import duck.util.TaskList;
+import duke.util.Storage;
+import duke.util.TaskList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -8,8 +7,12 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static duck.util.ObjectsForTest.*;
+import static duke.util.ObjectsForTest.todo;
+import static duke.util.ObjectsForTest.deadline;
+import static duke.util.ObjectsForTest.event;
+import static duke.util.ObjectsForTest.filePath;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class DukeTest {
 

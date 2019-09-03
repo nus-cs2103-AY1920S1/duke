@@ -1,10 +1,10 @@
-package duck.command;
+package duke.command;
 
-import duck.task.Task;
-import duck.util.DukeException;
-import duck.util.Storage;
-import duck.util.TaskList;
-import duck.util.Ui;
+import duke.task.Task;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a <code>Command</code> to mark one task done. After the <code>execute</code>, The status, <code>isDone</code>

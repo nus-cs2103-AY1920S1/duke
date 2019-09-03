@@ -1,6 +1,6 @@
-package duck.util;
+package duke.util;
 
-import duck.command.*;
+import duke.command.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

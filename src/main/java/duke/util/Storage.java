@@ -1,9 +1,9 @@
-package duck.util;
+package duke.util;
 
-import duck.task.Deadline;
-import duck.task.Event;
-import duck.task.Task;
-import duck.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.*;
 import java.util.ArrayList;

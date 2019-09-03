@@ -1,4 +1,4 @@
-package duck.task;
+package duke.task;
 
 /**
  * This is a one kind of <code>Task</code> to specify the details for the item in the task list.

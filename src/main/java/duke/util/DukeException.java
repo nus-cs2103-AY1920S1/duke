@@ -1,4 +1,4 @@
-package duck.util;
+package duke.util;
 
 /**
  * This is a customised Exception that belongs to the Duke project.

@@ -1,8 +1,8 @@
-package duck.command;
+package duke.command;
 
-import duck.util.Storage;
-import duck.util.TaskList;
-import duck.util.Ui;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 import java.io.IOException;
 

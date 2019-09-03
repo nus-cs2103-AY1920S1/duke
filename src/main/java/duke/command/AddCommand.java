@@ -1,12 +1,12 @@
-package duck.command;
+package duke.command;
 
-import duck.task.Deadline;
-import duck.task.Event;
-import duck.task.Task;
-import duck.task.Todo;
-import duck.util.Storage;
-import duck.util.TaskList;
-import duck.util.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

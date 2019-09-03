@@ -1,9 +1,9 @@
-package duck.command;
+package duke.command;
 
-import duck.util.DukeException;
-import duck.util.Storage;
-import duck.util.TaskList;
-import duck.util.Ui;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Command is the abstract base class for all executable commands. A Command object encapsulates the information about

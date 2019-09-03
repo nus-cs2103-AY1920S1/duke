@@ -1,8 +1,9 @@
-package duck.task;
+package task;
 
+import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
-import static duck.util.ObjectsForTest.*;
+import static duke.util.ObjectsForTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {

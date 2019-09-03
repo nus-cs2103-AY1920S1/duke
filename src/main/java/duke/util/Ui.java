@@ -1,6 +1,6 @@
-package duck.util;
+package duke.util;
 
-import duck.task.Task;
+import duke.task.Task;
 
 import java.util.Scanner;
 

@@ -1,6 +1,8 @@
-package duck.util;
+package util;
 
-import duck.command.*;
+import duke.command.*;
+import duke.util.DukeException;
+import duke.util.Parser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -8,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static duck.util.ObjectsForTest.*;
+import static duke.util.ObjectsForTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
@@ -75,7 +77,7 @@ class ParserTest {
     @ParameterizedTest
     @ValueSource(strings = {"hehe", "todo  ", "deadline hehe", "deadline /by", "deadline /by 02/21/1999",
             "event /by 02/21/1999", "event /at", "event /at 02/21/1999 18:00"})
-    void parseCommand_invalidCommand_throwDuckException(String invalidCommand) {
+    void parseCommand_invalidCommand_throwDukeException(String invalidCommand) {
         assertThrows(DukeException.class, () -> Parser.parseCommand(invalidCommand));
     }
 }

@@ -58,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks in the file into an ArrayList of tasks
+     * Loads the tasks in the file into an ArrayList of tasks.
      *
      * @return An ArrayList containing tasks from the file.
      */
@@ -81,7 +81,8 @@ public class Storage {
                 case "D":
                     String deadline = sc.nextLine().trim();
                     String[] deadlineArray = deadline.split("\\|");
-                    Task deadlineTask = new Deadline(deadlineArray[2].trim(), Parser.convertDateAndTime(deadlineArray[3].trim()));
+                    Task deadlineTask = new Deadline(deadlineArray[2].trim(),
+                            Parser.convertDateAndTime(deadlineArray[3].trim()));
                     if (deadlineArray[1].trim().equals("1")) {
                         deadlineTask.markAsDone();
                     }
@@ -95,6 +96,8 @@ public class Storage {
                         eventTask.markAsDone();
                     }
                     tasks.add(eventTask);
+                    break;
+                default:
                     break;
                 }
             }

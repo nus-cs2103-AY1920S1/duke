@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * The Ui class provides methods to deal with user interactions
+ * The Ui class provides methods to deal with user interactions.
  */
 public class Ui {
 
@@ -69,7 +69,8 @@ public class Ui {
     public void printAdd(Task t, TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t);
-        System.out.println("Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + " "
+                + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
     /**
@@ -80,7 +81,8 @@ public class Ui {
     public void printDelete(Task toDelete, TaskList tasks) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + toDelete);
-        System.out.println("Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + " "
+                + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
     /**
@@ -114,7 +116,7 @@ public class Ui {
     }
 
     /**
-     * Prints the list of tasks stored in the ArrayList
+     * Prints the list of tasks stored in the ArrayList.
      *
      * @param tasks A TaskList object that contains an ArrayList of Task.
      */
@@ -125,6 +127,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the tasks matching the input keyword.
+     *
+     * @param keyword A string containing the keyword.
+     * @param tasks A TaskList object that contains an ArrayList of Task.
+     */
     public void printFind(String keyword, TaskList tasks) {
         System.out.println("Here are the matching tasks in your list:");
         int count = 1;

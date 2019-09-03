@@ -11,8 +11,8 @@ public class FindCommand extends InputCommand {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String toFind = getString();
-        ui.showMatches(taskList.findTask(toFind));
+        return ui.getMatches(taskList.findTask(toFind));
     }
 }

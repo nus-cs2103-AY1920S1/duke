@@ -11,138 +11,150 @@ public class Ui {
     private Scanner sc;
 
     public Ui() {
-        sc = new Scanner(System.in);
     }
 
     /**
-     * Prints welcome message during startup.
+     * Returns welcome message during startup.
+     *
+     * @return String Welcome message
      */
-    public void showWelcome() {
+    public String getWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        showLine();
-        printStandard("Hello! I'm Duke");
-        printStandard("What can I do for you?");
-        showLine();
+        return "Hello from\n" + logo + getStandard("Hello! I'm Duke\n")
+                + getStandard("What can I do for you?\n");
     }
 
     /**
-     * Prints farewell message when "bye" is entered.
-     */
-    public void showExit() {
-        printStandard("Bye. Hope to see you again soon!");
-    }
-
-    /**
+     * Returns farewell message when "bye" is entered.
      *
+     * @return String Farewell message
      */
-    public void showLoadingError() {
-
+    public String getExit() {
+        return getStandard("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints the standard line output for visual differentiation between user input and system output.
+     * Returns the loading error message.
+     *
+     * @return String Loading error message
      */
-    public void showLine() {
-        System.out.println("    ____________________________________________________________");
+    public String getLoadingError() {
+        return "Failed to load save file. Please ignore this" +
+                "message if this is your first time running this program!\n";
     }
+
+//    /**
+//     * Returns the standard line output for visual differentiation between user input and system output.
+//     *
+//     * @return String Line
+//     */
+//    private String getLine() {
+//        return "    ____________________________________________________________\n";
+//    }
 
     /**
      * Reads a line of user input via a Scanner variable whenever the "enter" key is pressed.
      *
      * @return
      */
-    public String readCommand() {
-        return sc.nextLine();
-    }
+//    public String readCommand() {
+//        return sc.nextLine();
+//    }
 
     /**
-     * Prints the error message of the DukeException being thrown.
+     * Returns the error message of the DukeException being thrown.
      *
      * @param s
+     * @return String Error message of DukeException
      */
-    public void showError(String s) {
-        printStandard(s);
+    public String getError(String s) {
+        return getStandard(s);
     }
 
     /**
-     * Prints all matching tasks to the keyword.
+     * Returns all matching tasks to the keyword.
      *
      * @param matches
+     * @return String Matching tasks
      */
-    public void showMatches(ArrayList<String> matches) {
-        printStandard("Here are the matching tasks in your list:");
+    public String getMatches(ArrayList<String> matches) {
+        String toReturn = getStandard("Here are the matching tasks in your list:\n");
         for (int i = 0; i < matches.size(); ++i) {
-            printStandard(String.format("%d.%s", i + 1, matches.get(i).trim()));
+            toReturn = toReturn.concat(getStandard(String.format("%d.%s", i + 1, matches.get(i).trim())));
         }
+        return toReturn;
     }
 
     /**
-     * Prints the most recent task that was added.
+     * Returns the most recent task that was added.
      *
      * @param task
      * @param lstSize
+     * @return String Most recent added task
      */
-    public void showAddedTask(String task, int lstSize) {
-        printStandard("Got it. I've added this task:");
-        printStandard(task);
-        showTaskSize(lstSize);
+    public String getAddedTask(String task, int lstSize) {
+        String add = getStandard("Got it. I've added this task:\n");
+        return add + getStandard(task) + getTaskSize(lstSize);
     }
 
     /**
-     * Prints the most recent task that was deleted.
+     * Returns the most recent task that was deleted.
      *
      * @param task
      * @param lstSize
+     * @return String Most recent deleted task
      */
-    public void showDeletedTask(String task, int lstSize) {
-        printStandard("Noted. I've removed this task:");
-        printStandard(task);
-        showTaskSize(lstSize);
+    public String getDeletedTask(String task, int lstSize) {
+        String del = getStandard("Noted. I've removed this task:\n");
+        return del + getStandard(task) + getTaskSize(lstSize);
     }
 
     /**
-     * Prints the most recent task that was marked as done.
+     * Returns the most recent task that was marked as done.
      *
      * @param task
+     * @return String Most recent done task
      */
-    public void showDoneTask(String task) {
-        printStandard("Nice! I've marked this task as done:");
-        printStandard(task);
+    public String getDoneTask(String task) {
+        String done = getStandard("Nice! I've marked this task as done:\n");
+        return done + getStandard(task);
     }
 
     /**
-     * Prints the task list size for both add & delete.
+     * Returns the task list size for both add & delete.
      *
      * @param size
+     * @return String Size of task list
      */
-    private void showTaskSize(int size) {
-        printStandard(String.format("Now you have %d tasks in the list.", size));
+    private String getTaskSize(int size) {
+        return getStandard(String.format("Now you have %d tasks in the list.\n", size));
     }
 
     /**
-     * Prints all the tasks in the TaskList and numbers them.
+     * Returns all the tasks in the TaskList and numbers them.
      *
      * @param taskLst
+     * @return String Numbered tasks in task list
      */
-    public void showAllTasks(LinkedList<String> taskLst) {
-        printStandard("Here are the tasks in your list:");
+    public String getAllTasks(LinkedList<String> taskLst) {
+        String toReturn = getStandard("Here are the tasks in your list:\n");
         for (String task : taskLst) {
-            printStandard(task);
+            toReturn = toReturn.concat(getStandard(task));
         }
+        return toReturn;
     }
 
     /**
-     * Converts and prints any given String into the correct output format.
+     * Converts and returns any given String into the correct output format.
      *
      * @param string
+     * @return String correct output format
      */
-    private void printStandard(String string) {
-        System.out.println("     " + string);
+    private String getStandard(String string) {
+        return "     " + string + "\n";
     }
 }

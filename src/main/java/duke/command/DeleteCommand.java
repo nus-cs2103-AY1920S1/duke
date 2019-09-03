@@ -14,18 +14,19 @@ public class DeleteCommand extends InputCommand {
 
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             String index = getString();
             if (index.split(" ").length > 1) {
+                System.out.println(index + index.split("").length);
                 throw new InputMismatchException();
             }
             int del = Integer.parseInt(index);
-            if (taskList.getNumTasks() > del) {
+            if (taskList.getNumTasks() < del) {
                 throw new IndexOutOfBoundsException();
             }
 
-            ui.showDeletedTask(taskList.deleteTask(del - 1), taskList.getNumTasks());
+            return ui.getDeletedTask(taskList.deleteTask(del - 1), taskList.getNumTasks());
         } catch (InputMismatchException e) {
             throw new DukeException("☹ OOPS!!! Please enter a single number.");
         } catch (IndexOutOfBoundsException e) {

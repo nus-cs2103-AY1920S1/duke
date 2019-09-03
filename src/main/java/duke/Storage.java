@@ -22,7 +22,7 @@ public class Storage {
      * processed by the TaskList. Creates the relevant directory and files if none are present.
      *
      * @return LinkedList which contains the list of tasks in the saved format
-     * @throws DukeException
+     * @throws DukeException File not found DukeException
      */
     public LinkedList<String> load() throws DukeException {
         LinkedList<String> lst = new LinkedList<>();
@@ -46,7 +46,7 @@ public class Storage {
      * into the given filePath.
      *
      * @param lst The LinkedList to be saved
-     * @throws DukeException
+     * @throws DukeException General DukeException
      */
     public void save(LinkedList<String> lst) throws DukeException {
         try {

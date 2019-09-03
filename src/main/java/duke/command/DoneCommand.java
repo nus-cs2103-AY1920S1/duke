@@ -13,18 +13,18 @@ public class DoneCommand extends InputCommand {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             String index = getString();
             if (index.split(" ").length > 1) {
                 throw new InputMismatchException();
             }
             int done = Integer.parseInt(index);
-            if (taskList.getNumTasks() > done) {
+            if (taskList.getNumTasks() < done) {
                 throw new IndexOutOfBoundsException();
             }
 
-            ui.showDoneTask(taskList.doneTask(done - 1));
+            return ui.getDoneTask(taskList.doneTask(done - 1));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The index is not within the task list size.");
         } catch (NumberFormatException e) {

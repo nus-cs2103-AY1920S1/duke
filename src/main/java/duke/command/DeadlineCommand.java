@@ -12,13 +12,13 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             String[] deadlineArr = getDesc().split("/by");
             Deadline deadlineTask = Deadline.of(deadlineArr[0], deadlineArr[1]);
             taskList.addTask(deadlineTask);
             // storage.store(deadlineTask);
-            ui.showAddedTask(deadlineTask.toString(), taskList.getNumTasks());
+            return ui.getAddedTask(deadlineTask.toString(), taskList.getNumTasks());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! Please follow correct format of \"deadline [description] /by [date]\".");
         }

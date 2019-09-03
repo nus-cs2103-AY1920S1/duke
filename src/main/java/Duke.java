@@ -1,18 +1,11 @@
 import duke.*;
 import duke.command.Command;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 //public class Duke extends Application {
 public class Duke {
@@ -25,37 +18,54 @@ public class Duke {
     private Button sendButton;
     private Scene scene;
 
-    public Duke(String filePath) {
+    Duke() {
+        String filePath = "data/tasks.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.getLoadingError();
             tasks = new TaskList();
         }
     }
 
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+//    /**
+//     * Iteration 2:
+//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * the dialog container. Clears the user input after processing.
+//     */
+//    private void handleUserInput() {
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                new DialogBox(userText, new ImageView(user)),
+//                new DialogBox(dukeText, new ImageView(duke))
+//        );
+//        userInput.clear();
+//    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+//        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.getError(e.getMessage());
         }
     }
 
-    String getResponse(String input) {
-        return null;
+    /**
+     * Returns welcome message of Ui.
+     *
+     * @return String welcome message
+     */
+    String getWelcome() {
+        return ui.getWelcome();
     }
 
 //    public static void main(String[] args) {

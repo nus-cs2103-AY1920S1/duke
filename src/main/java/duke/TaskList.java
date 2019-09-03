@@ -5,7 +5,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -16,7 +15,6 @@ public class TaskList {
     private LinkedList<Task> lst;
 
     /**
-     *
      * @param list
      * @throws DukeException
      */
@@ -28,29 +26,29 @@ public class TaskList {
             int done = Integer.parseInt(arr[1].trim());
             String desc = arr[2];
             switch (task) {
-            case "D":
-                Deadline deadline = Deadline.of(desc, arr[3]);
-                if (done == 1) {
-                    deadline.markAsDone();
-                }
-                lst.addLast(deadline);
-                break;
-            case "T":
-                Todo todo = Todo.of(desc);
-                if (done == 1) {
-                    todo.markAsDone();
-                }
-                lst.addLast(todo);
-                break;
-            case "E":
-                Event event = Event.of(desc, arr[3]);
-                if (done == 1) {
-                    event.markAsDone();
-                }
-                lst.addLast(event);
-                break;
-            default:
-                break;
+                case "D":
+                    Deadline deadline = Deadline.of(desc, arr[3]);
+                    if (done == 1) {
+                        deadline.markAsDone();
+                    }
+                    lst.addLast(deadline);
+                    break;
+                case "T":
+                    Todo todo = Todo.of(desc);
+                    if (done == 1) {
+                        todo.markAsDone();
+                    }
+                    lst.addLast(todo);
+                    break;
+                case "E":
+                    Event event = Event.of(desc, arr[3]);
+                    if (done == 1) {
+                        event.markAsDone();
+                    }
+                    lst.addLast(event);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -60,7 +58,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @return
      */
     public int getNumTasks() {
@@ -68,7 +65,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @param keyword
      * @return
      */
@@ -84,7 +80,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @param task
      */
     public void addTask(Task task) {
@@ -92,7 +87,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @param index
      * @return
      */
@@ -101,7 +95,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @param index
      * @return
      */
@@ -112,7 +105,6 @@ public class TaskList {
     }
 
     /**
-     *
      * @param isSaveFormat
      * @return
      */

@@ -21,8 +21,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/feelsbadman.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/peppapig.png"));
 
     @FXML
     public void initialize() {
@@ -31,6 +31,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        getWelcome();
     }
 
     /**
@@ -46,5 +47,25 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            System.exit(0);
+                        }
+                    },
+                    3000
+            );
+        }
+    }
+
+    /**
+     * Prints welcome message of Duke.
+     */
+    private void getWelcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)
+        );
     }
 }

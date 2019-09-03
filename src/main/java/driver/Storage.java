@@ -16,8 +16,16 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ *
+ */
+
 public class Storage {
     String filePath;
+
+    /**
+     *
+     */
 
     public Storage(String x) {
     filePath =x;
@@ -40,6 +48,11 @@ public class Storage {
         }
         s.close();
     }
+
+    /**
+     *
+     */
+
     //Write new tasks at the end of the process
     protected void updateTasks(TaskList myList) throws IOException {
         ArrayList<Task> myTasksStore = myList.getList();

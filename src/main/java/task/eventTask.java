@@ -3,9 +3,17 @@ package task;
 import java.util.Date;
 import formatter.TimeFormatter;
 
+/**
+ *
+ */
+
 public class eventTask extends Task {
     //Add variable for eventTask
     Date timeSlot;
+
+    /**
+     *
+     */
 
     public eventTask(String taskInput, boolean complete, Date timing) {
         super(taskInput,complete);
@@ -13,9 +21,17 @@ public class eventTask extends Task {
         timeSlot = timing;
     }
 
+    /**
+     *
+     */
+
     public Date getTime() {
         return timeSlot;
     }
+
+    /**
+     *
+     */
 
     @Override
     public String toString() {

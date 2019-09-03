@@ -1,18 +1,27 @@
 package command;
 import task.Task;
 import task.TaskList;
-import task.deadlineTask;
-import task.eventTask;
-import task.todoTask;
 import driver.Ui;
+
+/**
+ *
+ */
 
 public class DoneCommand extends Command {
     int doneIndex;
     Task done;
 
+    /**
+     *
+     */
+
     public DoneCommand(int number) {
         doneIndex = number;
     }
+
+    /**
+     *
+     */
 
     @Override
     public void executeCommand(TaskList reference, Ui printer) {
@@ -22,10 +31,18 @@ public class DoneCommand extends Command {
         this.passToUI(this.formatOutput());
     }
 
+    /**
+     *
+     */
+
     public String formatOutput() {
 
         return textFormatter.doneFormat(done);
     }
+
+    /**
+     *
+     */
 
     public void passToUI(String input) {
 

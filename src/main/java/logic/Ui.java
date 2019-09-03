@@ -5,16 +5,22 @@ import task.Task;
 import java.util.List;
 
 /**
- * Deals with interactions with the user and output on CLI
+ * Deals with interactions with the user and output on CLI.
  */
 public class Ui {
     /**
-     * Wraps strings for style and formatting
+     * Wraps strings for style and formatting.
      *
      * @param input String parameter to be wrapped and printed
      */
 
     public static String HORIZONTAL_LINE = "____________________________________________________________\n";
+
+    /**
+     * Wraps the parameter String with horizontal lines for aesthetic purposes.
+     *
+     * @param input String to be wrapped
+     */
     public static void printStr(String input) {
         StringBuilder sb = new StringBuilder();
         sb.append(HORIZONTAL_LINE);
@@ -24,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Prints out greeting string at start of app
+     * Prints out greeting string at start of app.
      */
     public void greet() {
         StringBuilder sb = new StringBuilder();
@@ -40,7 +46,7 @@ public class Ui {
     }
 
     /**
-     * Prints out ordered list of tasks
+     * Prints out ordered list of tasks.
      *
      * @param taskList List of Tasks
      */
@@ -63,7 +69,7 @@ public class Ui {
     }
 
     /**
-     * Exit Message to be printed
+     * Exit Message to be printed.
      */
     public void bye() {
         printStr("Bye. Hope to see you again soon!");

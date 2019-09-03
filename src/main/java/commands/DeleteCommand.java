@@ -1,9 +1,12 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 
 /**
- * Encapsulates command to delete a task from the Task List
+ * Encapsulates command to delete a task from the Task List.
  */
 public class DeleteCommand extends Command {
     private String args;
@@ -13,7 +16,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Overridden Method to execute the delete command
+     * Overridden Method to execute the delete command.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface

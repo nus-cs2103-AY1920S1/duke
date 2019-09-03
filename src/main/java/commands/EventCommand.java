@@ -1,13 +1,17 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
+import logic.Parser;
 import task.Events;
 import task.Task;
 
 import java.time.LocalDateTime;
 
 /**
- * Encapsulates command to create an Event Task to be added to List of Tasks
+ * Encapsulates command to create an Event Task to be added to List of Tasks.
  */
 public class EventCommand extends Command {
     private String args;
@@ -17,7 +21,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Overridden Method to execute the EventCommand
+     * Overridden Method to execute the EventCommand.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface
@@ -30,11 +34,11 @@ public class EventCommand extends Command {
         String[] dateString = splitStr[1].trim().split(" - "); //e.g. 2/12/2019 1800 - 2/12/2019 1800
 
         if (splitStr.length == 1) {
-            throw new DukeException("Invalid format. Please include '/at' to state your start and end dates. " +
-                    "\nE.g. event meeting /at 12/7/2019 2000 - 18/12/2019 1800");
+            throw new DukeException("Invalid format. Please include '/at' to state your start and end dates. "
+                    + "\nE.g. event meeting /at 12/7/2019 2000 - 18/12/2019 1800");
         } else if (dateString.length != 2) {
-            throw new DukeException("Invalid Format. Please enter both the start and end dates" +
-                    "\nE.g. event meeting /at 12/7/2019 2000 - 18/12/2019 1800");
+            throw new DukeException("Invalid Format. Please enter both the start and end dates"
+                    + "\nE.g. event meeting /at 12/7/2019 2000 - 18/12/2019 1800");
         } else if (splitStr[0].trim().isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
         }

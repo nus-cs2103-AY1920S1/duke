@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Contains the logic.TaskList and has the operations to add/delete tasks in the list
+ * Contains the logic.TaskList and has the operations to add/delete tasks in the list.
  */
 public class TaskList {
     private List<Task> taskList;
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Adds Tasks to Task List
+     * Adds Tasks to Task List.
      *
      * @param task Task Obj to be added
      */
@@ -34,12 +34,12 @@ public class TaskList {
     }
 
     /**
-     * Task to be marked as done
+     * Task to be marked as done.
      *
      * @param taskNumStr String to be parsed as int
      * @throws DukeException If cannot parse string to int
      */
-    public void markTask(String taskNumStr) throws DukeException { //mark as done. Need to check if already done, and if so throw exception
+    public void markTask(String taskNumStr) throws DukeException {
         int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();
         Task task = taskList.get(taskNum - 1);
@@ -50,7 +50,7 @@ public class TaskList {
     }
 
     /**
-     * Task to be deleted from list of tasks
+     * Task to be deleted from list of tasks.
      *
      * @param taskNumStr String to be parsed as int
      * @throws DukeException If cannot parse string to int
@@ -66,6 +66,12 @@ public class TaskList {
         Ui.printStr(sb.toString());
     }
 
+    /**
+     * Find and filter tasks by keyword.
+     *
+     * @param taskDescription Keyword string to filter with
+     * @return Filtered list of tasks
+     */
     public List<Task> findTask(String taskDescription) {
         return taskList.stream()
                 .filter(task -> task.getDescription().contains(taskDescription))

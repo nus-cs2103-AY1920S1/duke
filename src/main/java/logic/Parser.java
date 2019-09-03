@@ -8,11 +8,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Deals with making sense of user command
+ * Deals with making sense of user command.
  */
 
 public class Parser {
     /**
+     * Receives string format of a dateTime and parses it to an object.
+     *
      * @param dateTimeStr String of dateTime. E.g. 2/12/2019 1800
      * @return LocalDateTime variable that is stored in Deadline/Event Obj
      * @throws DukeException If given dateTimeStr is of an incorrect format
@@ -31,13 +33,13 @@ public class Parser {
 
             return LocalDateTime.of(year, month, day, hours, mins);
         } catch (ArrayIndexOutOfBoundsException | DateTimeException | NumberFormatException e) {
-            throw new DukeException("Invalid Date-Time format.\n" +
-                    "Please use DD/MM/YYYY HHMM E.g. [2/12/2019 1800]");
+            throw new DukeException("Invalid Date-Time format.\n"
+                    + "Please use DD/MM/YYYY HHMM E.g. [2/12/2019 1800]");
         }
     }
 
     /**
-     * Converts date object to string that is written on txt file
+     * Converts date object to string that is written on txt file.
      *
      * @param dateObj LocalDateTime Object
      * @return DateTime string E.g. 10/12/2019 0830
@@ -50,21 +52,21 @@ public class Parser {
     }
 
     /**
-     * Prints date-time in a legible format on the CLI
+     * Prints date-time in a legible format on the CLI.
      *
      * @param dateObj LocalDateTime Object
      * @return Date String e.g. 10 DECEMBER 2019 0830
      */
     public static String printDate(LocalDateTime dateObj) {
-        return dateObj.getDayOfMonth() + " " + dateObj.getMonth() +
-                " " + dateObj.getYear() + " " + String.format("%02d", dateObj.getHour())
+        return dateObj.getDayOfMonth() + " " + dateObj.getMonth()
+                + " " + dateObj.getYear() + " " + String.format("%02d", dateObj.getHour())
                 + String.format("%02d", dateObj.getMinute());
     }
 
     /**
-     * Attempts to convert input string into an int
+     * Attempts to convert input string into an int.
      *
-     * @param str String to be parsed
+     * @param str      String to be parsed
      * @param taskList List of Tasks
      * @return Int of Task in the TaskList
      * @throws DukeException If task number doesnt exist
@@ -85,7 +87,7 @@ public class Parser {
     }
 
     /**
-     * Massive switch statement to read user inputs
+     * Massive switch statement to read user inputs.
      *
      * @param inputString Input read from scanner
      * @return Command Object to be executed

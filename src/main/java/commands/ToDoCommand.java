@@ -1,11 +1,14 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 import task.Task;
 import task.ToDo;
 
 /**
- * Encapsulates command to create a ToDo object to be added to the list of tasks
+ * Encapsulates command to create a ToDo object to be added to the list of tasks.
  */
 public class ToDoCommand extends Command {
     private String args;
@@ -15,7 +18,7 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Overridden Method to execute the ToDo command
+     * Overridden Method to execute the ToDo command.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface

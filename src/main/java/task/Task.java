@@ -12,7 +12,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks Task as done
+     * Marks Task as done.
      *
      * @throws DukeException If task is already done
      */
@@ -29,7 +29,7 @@ public abstract class Task {
     }
 
     /**
-     * Converts to String to be written onto text file
+     * Converts to String to be written onto text file.
      * @return String
      */
     public abstract String toFileString();

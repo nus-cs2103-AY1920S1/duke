@@ -1,14 +1,16 @@
 package commands;
 
-import logic.*;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 
 /**
- * Encapsulates command to get and print an ordered list of tasks
+ * Encapsulates command to get and print an ordered list of tasks.
  */
 public class GetListCommand extends Command {
 
     /**
-     * Overridden Method to execute the GetList command
+     * Overridden Method to execute the GetList command.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface

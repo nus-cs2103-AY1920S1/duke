@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
- * Deals with loading tasks and saving tasks in file
+ * Deals with loading tasks and saving tasks in file.
  */
 
 public class Storage {
@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * Reads and scans text file, convert them to Task Objs to be added
+     * Reads and scans text file, convert them to Task Objs to be added.
      *
      * @return List of Tasks loaded from text file
      * @throws DukeException If encounter file creation/parsing problems
@@ -58,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Creates task from reading the string from text file. Called from load()
+     * Creates task from reading the string from text file. Called from load().
      *
      * @param textArr String Array obtained after splitted
      * @return Task Object to be added to TaskList
@@ -91,7 +91,7 @@ public class Storage {
     }
 
     /**
-     * Updates text file after command execution
+     * Updates text file after command execution.
      *
      * @param taskList List of Tasks in logic.TaskList
      */

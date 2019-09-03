@@ -1,14 +1,16 @@
 package commands;
 
-import logic.*;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 
 /**
- * Encapsulates command to exit and terminate the program
+ * Encapsulates command to exit and terminate the program.
  */
 public class ExitCommand extends Command {
 
     /**
-     * Overridden Method to exit the program
+     * Overridden Method to exit the program.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface

@@ -1,9 +1,12 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 
 /**
- * Encapsulates command to mark a task as done
+ * Encapsulates command to mark a task as done.
  */
 public class DoneCommand extends Command {
     private String args;
@@ -13,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Overridden Method to execute the DoneCommand
+     * Overridden Method to execute the DoneCommand.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface

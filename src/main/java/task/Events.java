@@ -8,6 +8,14 @@ public class Events extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
+    /**
+     * Constructor for Event Object.
+     *
+     * @param isDone      If task is completed
+     * @param description Description String of Event
+     * @param start       LocalDateTime Object of start
+     * @param end         LocalDateTime Object of end
+     */
     public Events(boolean isDone, String description, LocalDateTime start, LocalDateTime end) {
         super(isDone, description);
         this.start = start;

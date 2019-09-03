@@ -5,7 +5,7 @@ import commands.Command;
 import java.util.Scanner;
 
 /**
- * Driver Class for Program
+ * Driver Class for Program.
  */
 
 public class Duke {
@@ -15,6 +15,12 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor.
+     *
+     * @param filePath filePath of the taskList.txt file
+     * @throws DukeException If encounter error in loading file
+     */
     public Duke(String filePath) throws DukeException {
         taskListPath = filePath;
         storage = new Storage(taskListPath);
@@ -23,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Continuously scans for User Input, Creates Command Objects and execute accordingly
+     * Continuously scans for User Input, Creates Command Objects and execute accordingly.
      */
     void start() {
         ui.greet();
@@ -39,7 +45,7 @@ public class Duke {
         }
     }
 
-    public static void main(String args[]) throws DukeException {
+    public static void main(String[] args) throws DukeException {
         Duke duke = new Duke("./src/main/data/taskList.txt");
         duke.start();
     }

@@ -1,13 +1,17 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
+import logic.Parser;
 import task.Deadlines;
 import task.Task;
 
 import java.time.LocalDateTime;
 
 /**
- * Encapsulates command to add a Deadline Obj to TaskList
+ * Encapsulates command to add a Deadline Obj to TaskList.
  */
 public class DeadlineCommand extends Command {
     private String args;
@@ -17,7 +21,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Overridden Method to execute the DeadlineCommand
+     * Overridden Method to execute the DeadlineCommand.
      *
      * @param tasks   list of tasks
      * @param ui      User Interface

@@ -1,7 +1,7 @@
 package logic;
 
 /**
- * Exception Object for Duke Program
+ * Exception Object for Duke Program.
  */
 public class DukeException extends Exception {
     public DukeException(String errorMsg) {

@@ -52,4 +52,13 @@ public class Ui {
     public void abort() {
         System.out.println("SORRY SOMETHING WENT SERIOUSLY WRONG! \nGoodbye!");
     }
+
+    public void find(Task[] matchedTasks) {
+
+        System.out.println("Here are the matching tasks in your list:");
+
+        for (Task task : matchedTasks) {
+            System.out.println(task);
+        }
+    }
 }

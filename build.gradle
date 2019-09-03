@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 group 'seedu.duke'
@@ -25,4 +26,8 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
+}
+
+checkstyle {
+    toolVersion = '8.24'
 }

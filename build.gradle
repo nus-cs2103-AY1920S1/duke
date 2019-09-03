@@ -1,10 +1,11 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'checkstyle'
 }
 
-group 'seedu.duke'
+group 'duke'
 version '0.1.0'
 
 repositories {
@@ -12,7 +13,7 @@ repositories {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 checkstyle {
@@ -30,4 +31,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }

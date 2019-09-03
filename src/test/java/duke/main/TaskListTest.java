@@ -22,6 +22,12 @@ class TaskListTest {
         taskList.add(test);
         assertEquals(test, taskList.get(0), "Test insert todo into list");
 
+        ArrayList<Task> filteredTasks = taskList.find("todo");
+        assertEquals(1, filteredTasks.size(), "List of filtered tasks should be 1");
+
+        filteredTasks = taskList.find("hello");
+        assertEquals(0, filteredTasks.size(), "List of filtered tasks should be 0");
+
         taskList.delete(0);
         assertEquals(0, taskList.size(), "Size of list after deletion should be 0");
     }

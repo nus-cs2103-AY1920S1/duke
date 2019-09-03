@@ -54,7 +54,7 @@ public class TaskList {
      */
     public void delete(int zeroBasedIndex) throws DukeException {
         if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
-            throw new DukeException("☹ OOPS!!! The index to remove cannot be less than 0 or "
+            throw new DukeException("OOPS!!! The index to remove cannot be less than 0 or "
                     + "greater than the length of the list.");
         }
 
@@ -65,6 +65,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Finds tasks in the list containing the given String in their description.
+     *
+     * @param toFind The criteria to filter tasks.
+     * @return An ArrayList containing all tasks containing thg given String in their description.
+     */
     public ArrayList<Task> find(String toFind) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task t : tasks) {

@@ -20,6 +20,10 @@ public class Event extends Task {
 
     @Override
     public String getOutputFormat() {
+        if (eventTime == null) {
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, dateFormatter.format(eventDate));
+        }
         return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, eventTime);
     }
 

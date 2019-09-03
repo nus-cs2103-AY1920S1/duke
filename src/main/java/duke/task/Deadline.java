@@ -20,6 +20,10 @@ public class Deadline extends Task {
 
     @Override
     public String getOutputFormat() {
+        if (deadlineBy == null) {
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, dateFormatter.format(deadlineDate));
+        }
         return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, deadlineBy);
     }
 

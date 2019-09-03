@@ -6,6 +6,7 @@ import duke.command.AddTodoCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
@@ -18,6 +19,7 @@ class ParserTest {
     void parserTest() throws DukeException  {
         assertTrue(Parser.parse("bye") instanceof ExitCommand);
         assertTrue(Parser.parse("list") instanceof ListCommand);
+        assertTrue(Parser.parse("find abc") instanceof FindCommand);
         assertTrue(Parser.parse("done 2") instanceof DoneCommand);
         assertTrue(Parser.parse("delete 2") instanceof DeleteCommand);
 

@@ -27,7 +27,7 @@ public class ListCommand extends Command {
     /**
      * Returns a ListCommand as initialized by the constructor.
      * 
-     * @param input Input entered by user.
+     * @param fullCommand Input entered by user.
      */
     public Command clone(String fullCommand) {
         return new ListCommand(fullCommand);

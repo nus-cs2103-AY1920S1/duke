@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     /**
      * Returns an AddCommand as initialized by the constructor.
      * 
-     * @param input Input entered by user.
+     * @param fullCommand Input entered by user.
      */
     public Command clone(String fullCommand) {
         return new AddCommand(fullCommand);
@@ -43,12 +43,12 @@ public class AddCommand extends Command {
      * @param ui Ui for printing responses to the console.
      * @param storage Storage that stores the modified TaskList.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = Parser.parseTask(this.fullCommand);
         tasks.add(task);
         ui.printResponse("Got it. I've added this task:\n  "
                 + task.toString() + "\n"
-                + "Now you have " + tasks.size() +" tasks in the list.");
+                + "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**

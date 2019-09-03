@@ -11,7 +11,7 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     /**
      * Adds Task to TaskList.
      * 
-     * @param Task to be added to TaskList.
+     * @param task Task to be added to TaskList.
      * @return Boolean if Task is successfully added.
      */
     public boolean addTask(Task task) {
@@ -55,7 +55,7 @@ public class TaskList extends ArrayList<Task> implements Serializable {
     public String toString() {
         StringBuffer listBuffer = new StringBuffer();
         int len = this.size();
-        for(int i = 1; i <= len; i++) {
+        for (int i = 1; i <= len; i++) {
             listBuffer.append(i + "."
                     + this.get(i).toString()
                     + "\n");

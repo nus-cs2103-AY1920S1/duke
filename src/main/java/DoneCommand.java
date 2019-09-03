@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
     /**
      * Returns a DoneCommand as initialized by the constructor.
      * 
-     * @param input Input entered by user.
+     * @param fullCommand Input entered by user.
      */
     public Command clone(String fullCommand) {
         return new DoneCommand(fullCommand);
@@ -47,7 +47,7 @@ public class DoneCommand extends Command {
         int itemId = Parser.parseDone(this.fullCommand);
         try {
             tasks.markAsDone(itemId);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
         }
         ui.printResponse("Nice! I've marked this task as done: \n  "

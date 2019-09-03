@@ -15,7 +15,7 @@ public class Storage {
     protected String filePath;
 
     /**
-     * Constructor of Storage
+     * Constructor of Storage.
      * 
      * @param filePath Specifies where save data is to be stored and loaded from.
      */
@@ -35,7 +35,7 @@ public class Storage {
             out.writeObject(list);  
             out.flush();  
             out.close();  
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -51,7 +51,7 @@ public class Storage {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.filePath));  
             list = (TaskList) in.readObject(); 
             in.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException("Save data not found.");
         }
         return list;

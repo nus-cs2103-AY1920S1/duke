@@ -7,6 +7,7 @@ import java.util.Date;
  * Task class for storing information about a task.
  */
 public class Task implements Serializable {
+    protected String type;
     protected String description;
     protected Date date;
     protected boolean isDone;
@@ -14,10 +15,12 @@ public class Task implements Serializable {
     /**
      * Constructor for Task object.
      * 
+     * @param type Type of task.
      * @param description Description of task.
      * @param date Date of task.
      */
-    public Task(String description, Date date) {
+    public Task(String type, String description, Date date) {
+        this.type = type;
         this.description = description;
         this.date = date;
         this.isDone = false;

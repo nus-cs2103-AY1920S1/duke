@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     /**
      * Returns a DeleteCommand as initialized by the constructor.
      * 
-     * @param input Input entered by user.
+     * @param fullCommand Input entered by user.
      */
     public Command clone(String fullCommand) {
         return new DeleteCommand(fullCommand);
@@ -49,8 +49,8 @@ public class DeleteCommand extends Command {
             Task item = tasks.remove(itemId);
             ui.printResponse("Noted. I've removed this task:  \n  "
                 + item.toString() + "\n"
-                + "Now you have " + tasks.size() +" tasks in the list.");
-        } catch(IndexOutOfBoundsException e) {
+                + "Now you have " + tasks.size() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
         }   
     }

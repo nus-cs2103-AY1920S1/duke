@@ -15,7 +15,7 @@ public class Ui {
     String indent(String output) {
         StringBuffer stringBuffer = new StringBuffer();
         Scanner scanner = new Scanner(output);
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             String temp = scanner.nextLine();
             stringBuffer.append("     " + temp + "\n");
         }

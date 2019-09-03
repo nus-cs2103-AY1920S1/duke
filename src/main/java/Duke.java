@@ -64,9 +64,9 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
-                ui.showError(e.getMessage());
+                ui.showError("The command is invalid!");
             } finally {
-                System.out.println("☹ OOPS!!! The command is invalid");
+                ui.printLine();
             }
         }
     }

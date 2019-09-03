@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.exception.DukeException;
@@ -12,7 +14,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 /**
- * Drives the Duke bot.
+ * Drives the duke.Duke bot.
  * This is the main driver class and entry point.
  */
 public class Duke {
@@ -21,8 +23,9 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    private boolean isGoodbye = false;
     /**
-     * Constructs the Duke Object.
+     * Constructs the duke.Duke Object.
      * @param filePath Path to the data text file
      */
     public Duke(String filePath) {
@@ -42,7 +45,7 @@ public class Duke {
     }
 
     /**
-     * Runs the logic of Duke.
+     * Runs the logic of duke.Duke.
      */
     public void run() {
 
@@ -63,14 +66,28 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke instance.
+     * Starts the duke.Duke instance.
      * @param args Command line arguments
      */
     public static void main(String[] args) {
         Application.launch(Gui.class, args);
-        Duke dukeInstance = new Duke("data/duke.txt");
-        dukeInstance.run();
+        //Duke dukeInstance = new Duke("data/duke.txt");
+        //dukeInstance.run();
     }
 
 
+    public void getResponse(String fullInput) {
+        if (this.isGoodbye) {
+            System.exit(0);
+        }
+        try {
+            Command c = Parser.parse(fullInput);
+            c.execute(tasks, ui, storage);
+            if (c.isExit()) {
+               this.isGoodbye = true;
+            }
+        } catch (DukeException de) {
+            ui.exposeError(de.getMessage());
+        }
+    }
 }

@@ -36,13 +36,13 @@ public class DoneCommand extends Command {
      * @param storage  Stores the user input in a file.
      * @throws DukeException IOException if there is an error writing or reading file.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         taskList.markTaskDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
         storage.updateText(taskNum);
-        ui.printText("Nice! I've marked this task as done: \n" + updatedTask);
         storage.updateText(taskNum);
+        return("Nice! I've marked this task as done: \n" + updatedTask);
 
 
     }

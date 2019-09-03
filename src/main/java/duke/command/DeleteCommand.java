@@ -36,11 +36,11 @@ public class DeleteCommand extends Command {
      * @param storage  Stores the user input in a file.
      * @throws DukeException IOException if there is an error writing or reading file.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.deleteText(taskNum);
 
         Task removedTask = taskList.deleteTask(taskNum);
-        ui.printText("Noted. I've removed this task:\n" + removedTask
+        return ("Noted. I've removed this task:\n" + removedTask
                 + "Now you have " + taskList.size()
                 + " tasks in the list.");
 

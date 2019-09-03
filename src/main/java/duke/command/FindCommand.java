@@ -38,7 +38,7 @@ public class FindCommand extends Command {
      * @param storage  Stores the user input in a file.
      * @throws DukeException IOException if there is an error writing or reading file.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         List<String> foundTasks = taskList.findTask(this.keyword);
 
@@ -50,7 +50,7 @@ public class FindCommand extends Command {
         }
 
 
-        ui.printText(result);
+        return (result);
 
 
     }

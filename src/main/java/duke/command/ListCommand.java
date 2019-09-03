@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @param ui       Interface that interacts with the user
      * @param storage  Stores the user input in a file
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
 
         String result = "Here are the tasks in your list:\n";
         int index = 1;
@@ -29,7 +29,7 @@ public class ListCommand extends Command {
         }
 
 
-        ui.printText(result);
+        return (result);
 
 
     }

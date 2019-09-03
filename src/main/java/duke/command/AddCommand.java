@@ -76,7 +76,7 @@ public class AddCommand extends Command {
      * @param storage  Stores the user input in a file.
      * @throws DukeException IOException if there is an error writing or reading file.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         storage.appendToFile(this.type, this.deadline, this.description);
 
@@ -106,7 +106,7 @@ public class AddCommand extends Command {
         int numTask = taskList.size();
 
 
-        ui.printText("Got it. I've added this task: \n" + "  "
+        return("Got it. I've added this task: \n" + "  "
                 + newTask + "Now you have "
                 + numTask + " tasks in the list.");
 

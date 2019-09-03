@@ -19,10 +19,10 @@ public class ExitCommand extends Command {
      * @param ui       Interface that interacts with the user
      * @param storage  Stores the user input in a file
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
 
-        ui.printText("Bye. Hope to see you again soon!");
-        ui.closeUi();
+        return ("Bye. Hope to see you again soon!");
+
 
     }
 

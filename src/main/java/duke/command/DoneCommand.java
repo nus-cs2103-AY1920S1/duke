@@ -24,9 +24,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.markAsDone(index);
-        ui.showDoneTask(taskList.getTask(index));
+
         storage.writeListToFile(taskList);
+        return ui.showDoneTask(taskList.getTask(index));
     }
 }

@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
 
+import javafx.application.Application;
+
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -59,8 +62,21 @@ public class Duke {
      */
 
     public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("resources/duke.txt");
-        duke.run();
+
+
+        Application.launch(Gui.class, args);
+        //duke.run();
     }
 
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
 }

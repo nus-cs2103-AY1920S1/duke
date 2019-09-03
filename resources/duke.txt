@@ -1,0 +1,6 @@
+T | 1 | read book
+T | 1 | chiong level-8
+T | 0 | splashdown
+D | 1 | complete tutorial | 07 Sep 2019 0000
+E | 0 | JJ Lin's concert | 02 Aug 2019 1800
+T | 0 | go home

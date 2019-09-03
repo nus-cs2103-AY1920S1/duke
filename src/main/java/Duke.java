@@ -13,24 +13,21 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.TextInputDialog;
 
 /**
  * Represents main running class of the Duke program.
  */
 public class Duke extends Application {
-    private Storage storage = new Storage("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\"
-            + "dukenew\\src\\main\\java\\TaskList");;
+    private Storage storage = new Storage("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\iP\\dukenew\\src\\main\\java\\TaskList.txt");
     private TaskList tasks = new TaskList();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Stage stage;
-    private Image user = new Image(this.getClass().getResourceAsStream("/resources/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/resources/images/DaDuke.png"));
+    private Image user = new Image(this.getClass()
+            .getResourceAsStream("/resources/images/DaUser.png"));
+    private Image duke = new Image(this.getClass()
+            .getResourceAsStream("/resources/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -45,16 +42,17 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         userInput.setStyle("");
         //sendButton.setStyle("-fx-background-color: #D6E6FE");
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        scene = new Scene(mainLayout, Color.WHITE);
+        Scene scene = new Scene(mainLayout, Color.WHITE);
 
         stage.setScene(scene);
-        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/resources/images/javamascot.png")));
+        stage.getIcons().add(new Image(this.getClass()
+                .getResourceAsStream("/resources/images/javamascot.png")));
         stage.show();
 
         //Step 2. Formatting the window to look as expected
@@ -84,7 +82,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -115,7 +113,8 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the
+     * other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws DukeException {
@@ -141,7 +140,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws DukeException {
+    private String getResponse(String input) throws DukeException {
         return Parser.parse(input).execute(tasks, storage);
     }
 

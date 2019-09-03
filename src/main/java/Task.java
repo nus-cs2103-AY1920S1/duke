@@ -17,14 +17,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns a boolean indicating the status of completion of the task.
-     * @return true if the task is completed and false otherwise
-     */
-    public boolean getStatus() {
-        return isDone;
-    }
-
-    /**
      * Updates the status of completion of a task to complete.
      */
     public void markAsDone() {
@@ -38,11 +30,10 @@ public abstract class Task {
     @Override
     public String toString() {
         if (isDone) {
-            String printable = "[✓] " + taskDesc;
-            return printable;
+            return "[✓] " + taskDesc;
+
         } else {
-            String printable = "[✗] " + taskDesc;
-            return printable;
+            return "[✗] " + taskDesc;
         }
     }
 
@@ -51,12 +42,6 @@ public abstract class Task {
      * @return String format of the object
      */
     public abstract String toFileFormat();
-
-    /**
-     * Retrieves the time description of the object.
-     * @return Time description of the object in calendar date format
-     */
-    public abstract Date getDate();
 
     /**
      * Returns a string corresponding to date stored in task object.

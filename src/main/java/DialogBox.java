@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -21,8 +20,8 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+        this.text = l;
+        this.displayPicture = iv;
         Circle clip = new Circle(50, 50, 50);
         l.setPadding(new Insets(5));
         iv.setClip(clip);

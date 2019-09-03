@@ -6,8 +6,8 @@ import java.text.ParseException;
  * Represents an "Event" task inputted by the user.
  */
 public class Events extends Task {
-    protected String timeDesc;
-    protected Date date;
+    private String timeDesc;
+    private Date date;
 
     /**
      * Constructs an Events task object.
@@ -44,19 +44,9 @@ public class Events extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            String format = "E | [✓] | " + taskDesc + " | " + timeDesc + "\n";
-            return format;
+            return "E | [✓] | " + taskDesc + " | " + timeDesc + "\n";
         } else {
-            String format = "E | [✗] | " + taskDesc + " | " + timeDesc + "\n";
-            return format;
+            return "E | [✗] | " + taskDesc + " | " + timeDesc + "\n";
         }
-    }
-
-    /**
-     * Retrieves the time description of the object.
-     * @return Time description of the object in calendar date format
-     */
-    public Date getDate() {
-        return date;
     }
 }

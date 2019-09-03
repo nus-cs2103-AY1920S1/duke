@@ -3,9 +3,9 @@
  * Executes the command input by using UI and adds the corresponding tasks to the tasklist.
  */
 public class AddCommand extends Command {
-    protected Type enumType;
-    protected String taskDesc;
-    protected String timeDesc;
+    private Type enumType;
+    private String taskDesc;
+    private String timeDesc;
 
     /**
      * Constructs a AddCommand object.
@@ -28,33 +28,18 @@ public class AddCommand extends Command {
      * @throws DukeException if task requirements is not met
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        String printable = "";
+        Task newTask;
         switch (enumType) {
-            case TODO: {
-                Task newTask = new Todo(this.taskDesc);
-                tasks.add(newTask);
-                int numTasks = tasks.size();
-                printable = "Got it. I've added this task:" + "\n" + newTask.toString() +
-                            "\n" + "Now you have " + numTasks + " tasks in the list.";
-            }
-
+        case TODO:
+            newTask = new Todo(this.taskDesc);
             break;
 
-            case DEADLINE: {
-                Task newTask = new Deadline(this.taskDesc, this.timeDesc);
-                tasks.add(newTask);
-                int numTasks = tasks.size();
-                printable = "Got it. I've added this task:" + "\n" + newTask.toString() +
-                            "\n" + "Now you have " + numTasks + " tasks in the list.";
-            }
+        case DEADLINE:
+            newTask = new Deadline(this.taskDesc, this.timeDesc);
             break;
 
-            case EVENT:
-                Task newTask = new Events(this.taskDesc, this.timeDesc);
-                tasks.add(newTask);
-                int numTasks = tasks.size();
-                printable = "Got it. I've added this task:" + "\n" + newTask.toString() +
-                        "\n" + "Now you have " + numTasks + " tasks in the list.";
+        case EVENT:
+            newTask = new Events(this.taskDesc, this.timeDesc);
             break;
 
         default:
@@ -62,7 +47,7 @@ public class AddCommand extends Command {
         }
 
         storage.save(tasks.getTaskList());
-        return printable;
+        return addTask(newTask, tasks);
     }
 
     /**
@@ -71,5 +56,18 @@ public class AddCommand extends Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Adds a task to the task list.
+     * @param newTask the task to be added
+     * @param tasks the existing taskList
+     * @return String informing the user of the task addition
+     */
+    private String addTask(Task newTask, TaskList tasks) {
+        tasks.add(newTask);
+        int numTasks = tasks.size();
+        return "Got it. I've added this task:" + "\n" + newTask.toString() +
+                "\n" + "Now you have " + numTasks + " tasks in the list.";
     }
 }

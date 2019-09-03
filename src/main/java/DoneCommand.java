@@ -3,14 +3,14 @@
  * Executes the command input by using UI and adds the corresponding tasks to the tasklist.
  */
 public class DoneCommand extends Command {
-    protected String num;
+    private int intNum;
 
     /**
      * Constructs a DoneCommand object.
-     * @param num indicates the task to be marked as completed
+     * @param stringNum indicates the task to be marked as completed
      */
-    public DoneCommand(String num) {
-        this.num = num;
+    public DoneCommand(String stringNum) {
+        this.intNum = Integer.parseInt(stringNum);
     }
 
     /**
@@ -21,15 +21,14 @@ public class DoneCommand extends Command {
      * @throws DukeException if task requirements is not met
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        int numChange = Integer.parseInt(this.num);
-        if (numChange > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! Task " + numChange + " does not exist.");
+        if (intNum > tasks.size()) {
+            throw new DukeException("☹ OOPS!!! Task " + intNum + " does not exist.");
         } else {
-            Task done = tasks.get(numChange - 1);
+            Task done = tasks.get(intNum - 1);
             done.markAsDone();
             String printable = ("Nice! I've marked this task as done:" + "\n" + done.toString());
-            storage.save(tasks.getTaskList());
 
+            storage.save(tasks.getTaskList());
             return printable;
         }
     }

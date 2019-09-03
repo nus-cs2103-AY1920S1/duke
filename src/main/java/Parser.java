@@ -18,94 +18,49 @@ public class Parser {
      * @throws DukeException when the input is missing information or
      *                       in the wrong format
      */
-    @SuppressWarnings("checkstyle:FallThrough")
+
     public static Command parse(String command) throws DukeException {
         String[] commandSplit = command.split(" ");
         String type = commandSplit[0];
-
         Type enumType;
-        String timeDesc;
+        String[] timeSplit;
 
         switch (type) {
         case "list":
             return new ListCommand();
 
-        case "done":
-            if (commandSplit.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please indicate which "
-                        + "task you have completed.");
-            }
+        case "bye":
+            return new ExitCommand();
+        }
 
+        if (commandSplit.length == 1) {
+            throw throwMissingDescException(type);
+        }
+
+        switch (type) {
+        case "done":
             return new DoneCommand(commandSplit[1]);
 
         case "delete":
-            if (commandSplit.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please indicate which task "
-                        + "you would like to delete.");
-            }
-
             return new DeleteCommand(commandSplit[1]);
 
-        case "bye":
-            return new ExitCommand();
-
         case "find":
-            if (commandSplit.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please indicate the keyword "
-                        + "you are looking for!");
-            }
-
-            ArrayList<String> findWords = new ArrayList<>();
-            for(int i=1; i<commandSplit.length; i++) {
-                findWords.add(commandSplit[i]);
-            }
-            String[] wordsArray = new String[findWords.size()];
-            findWords.toArray(wordsArray);
+            String[] wordsArray = keywordsToArray(commandSplit);
             return new KeyCommand(wordsArray);
 
         case "todo":
+            enumType = Type.valueOf(type.toUpperCase());
+            return new AddCommand(enumType, command.substring(5), "");
+
         case "deadline":
+            enumType = Type.valueOf(type.toUpperCase());
+            timeSplit = splitCommandForTask(type, command);
+            return new AddCommand(enumType, timeSplit[0].substring(9), timeSplit[1]);
+
         case "event":
-            if (commandSplit.length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a "
-                        + command + " cannot be empty.");
-            }
-
-            switch (type) {
-            case "todo":
-                enumType = Type.valueOf(type.toUpperCase());
-                return new AddCommand(enumType, command.substring(5), "");
-
-            case "deadline": {
-                String[] timeSplit = command.split("/by");
-
-                if (timeSplit.length == 1) {
-                    throw new DukeException("☹ OOPS!! Please enter a deadline for your task.");
-                }
-
-                timeDesc = timeSplit[1];
-                enumType = Type.valueOf(type.toUpperCase());
-                return new AddCommand(enumType, timeSplit[0].substring(9), timeDesc);
-            }
-
-            case "event":
-                String[] timeSplit = command.split("/at");
-                timeDesc = timeSplit[1];
-                enumType = Type.valueOf(type.toUpperCase());
-
-                if (timeSplit.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please enter a time for your task.");
-                }
-
-                timeDesc = timeSplit[1];
-                enumType = Type.valueOf(type.toUpperCase());
-
-                return new AddCommand(enumType, timeSplit[0].substring(6), timeDesc);
-
-            default:
-                throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't "
-                        + "know what that means :-(");
-            }
+            enumType = Type.valueOf(type.toUpperCase());
+            timeSplit = splitCommandForTask(type, command);
+            return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
 
         default:
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't "
@@ -114,4 +69,58 @@ public class Parser {
 
     }
 
+    private static String[] keywordsToArray(String[] keywords) {
+        ArrayList<String> findWords = new ArrayList<>();
+        for (int i = 1; i < keywords.length; i++) {
+            findWords.add(keywords[i]);
+        }
+        String[] wordsArray = new String[findWords.size()];
+        return findWords.toArray(wordsArray);
+    }
+
+    private static String[] splitCommandForTask(String type, String command) throws DukeException {
+        String[] timeSplit;
+
+        if (type.equals("event")) {
+            timeSplit = command.split("/at");
+        } else {
+            timeSplit = command.split("/by");
+        }
+
+        if (timeSplit.length == 1) {
+            throw new DukeException("☹ OOPS!!! Please enter a time for your task.");
+        }
+
+        return timeSplit;
+    }
+
+    private static DukeException throwMissingDescException(String type) {
+        DukeException toThrow = null;
+
+        switch (type) {
+        case "done":
+            toThrow = new DukeException("☹ OOPS!!! Please indicate " +
+                    "which task you have completed.");
+            break;
+        case "delete":
+            toThrow = new DukeException("☹ OOPS!!! Please indicate which task "
+                    + "you would like to delete.");
+            break;
+        case "find":
+            toThrow = new DukeException("☹ OOPS!!! Please indicate the keyword "
+                    + "you are looking for!");
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            toThrow = new DukeException("☹ OOPS!!! The description of a "
+                    + "task cannot be empty.");
+            break;
+        default:
+             toThrow = new DukeException(" ☹ OOPS!!! I'm sorry, but I don't "
+                     + "know what that means :-(");
+        }
+
+        return toThrow;
+    }
 }

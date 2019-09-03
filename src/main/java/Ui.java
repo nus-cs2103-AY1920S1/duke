@@ -32,13 +32,6 @@ public class Ui {
     }
 
     /**
-     * Returns to the next line.
-     */
-    public void showLine() {
-        System.out.println("\n");
-    }
-
-    /**
      * Prints a message.
      * @param message String to be displayed on screen
      */

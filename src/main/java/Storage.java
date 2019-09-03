@@ -26,7 +26,7 @@ public class Storage {
      * @throws DukeException if the file cannot be found
      */
     public ArrayList<String> load() throws DukeException {
-        ArrayList<String> fileList = new ArrayList<String>();
+        ArrayList<String> fileList = new ArrayList<>();
         try {
             File file = new File(this.filePath);
             Scanner sc = new Scanner(file);
@@ -47,7 +47,7 @@ public class Storage {
      * Reads and saves the tasks from the taskList to specified file.
      * @param taskList existing taskList
      */
-    public void save(ArrayList<Task> taskList) {
+    public void save(ArrayList<Task> taskList) throws DukeException {
 
         try {
             FileWriter fw = new FileWriter(this.filePath);
@@ -58,7 +58,7 @@ public class Storage {
 
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong writing to file!");
+            throw new DukeException("Something went wrong writing to file!");
         }
     }
 }

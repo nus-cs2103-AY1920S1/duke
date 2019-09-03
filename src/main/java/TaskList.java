@@ -24,32 +24,16 @@ public class TaskList {
             switch(type) {
             case "T":
                 add = new Todo(listItem[2]);
-
-                if(listItem[1] == "✓") {
-                    add.markAsDone();
-                }
-
-                this.taskList.add(add);
-                break;
+                addTask(add, listItem[1]);
 
             case "D":
                 add = new Deadline(listItem[2], listItem[3]);
-
-                if(listItem[1] == "✓") {
-                    add.markAsDone();
-                }
-
-                this.taskList.add(add);
+                addTask(add, listItem[1]);
                 break;
 
             case "E":
                 add = new Events(listItem[2], listItem[3]);
-
-                if(listItem[1] == "✓") {
-                    add.markAsDone();
-                }
-
-                this.taskList.add(add);
+                addTask(add, listItem[1]);
                 break;
 
             default:
@@ -63,6 +47,19 @@ public class TaskList {
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
+    }
+
+    /**
+     * Adds a task to the task list
+     * @param task the task to be added to the task list
+     * @param status indicates whether the task has been completed
+     */
+    public void addTask(Task task, String status) {
+        if(status == "✓") {
+            task.markAsDone();
+        }
+
+        this.taskList.add(task);
     }
 
     /**

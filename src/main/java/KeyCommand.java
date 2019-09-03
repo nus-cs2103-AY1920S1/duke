@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Executes the command input by using UI and adds the corresponding tasks to the tasklist.
  */
 public class KeyCommand extends Command {
-    protected String[] keyword;
+    private String[] keyword;
 
     /**
      * Constructs a AddCommand object.
@@ -21,30 +21,29 @@ public class KeyCommand extends Command {
      * @param tasks holds the list of tasks currently in the program
      * @param storage stores the added task to the specified file
      * @return String to be displayed as Duke response in GUI
-     * @throws DukeException if task requirements is not met
+     * @throws DukeException if keywords do not match any existing tasks
      */
-    public String execute(TaskList tasks, Storage storage) {
-        String printable = "";
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String printable;
         printable = "Here are the matching tasks in your list: " + "\n";
-        ArrayList<String> resultList = new ArrayList<String>();
+        ArrayList<String> resultList = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
-            String[] taskDesc = tasks.get(i).getDesc().split(" ");
+            String description = tasks.get(i).getDesc();
 
-            for (int j = 0; j < taskDesc.length; j++) {
-                for(int k=0; k<keyword.length; k++) {
-                    if (taskDesc[j].equals(keyword[k])) {
-                        String toAdd = tasks.get(i).toString();
+            for (int k = 0; k < keyword.length; k++) {
+                if (description.contains(keyword[k])) {
+                    String toAdd = tasks.get(i).toString();
 
-                        if(!resultList.contains(toAdd)) {
-                            resultList.add(toAdd);
-                        }
-
-                        break;
+                    if (!resultList.contains(toAdd)) {
+                        resultList.add(toAdd);
                     }
                 }
-
             }
+        }
+
+        if (resultList.size() == 0) {
+            throw new DukeException("Sorry, there are no tasks matching your keywords!");
         }
 
         for (int i = 0; i < resultList.size(); i++) {

@@ -16,7 +16,7 @@ public class Todo extends Task {
     /**
      * Converts the object to its string form to be printed.
      * @return String printing out the Todo object's description
-     *          snd status of completion
+     *          and status of completion
      */
     @Override
     public String toString() {
@@ -29,19 +29,9 @@ public class Todo extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            String format = "T | [✓] | " + taskDesc + "\n";
-            return format;
+            return "T | [✓] | " + taskDesc + "\n";
         } else {
-            String format = "T | [✗] | " + taskDesc + "\n";
-            return format;
+            return "T | [✗] | " + taskDesc + "\n";
         }
-    }
-
-    /**
-     * Retrieves the time description of the object.
-     * @return null because Todo tasks do not have a time description
-     */
-    public Date getDate() {
-        return null;
     }
 }

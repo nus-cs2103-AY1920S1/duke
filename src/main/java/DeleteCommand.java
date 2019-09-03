@@ -3,14 +3,14 @@
  * Executes the command input by using UI and adds the corresponding tasks to the tasklist.
  */
 public class DeleteCommand extends Command {
-    protected String num;
+    private int intNum;
 
     /**
      * Constructs a DeleteCommand object.
-     * @param num indicates the task to be deleted
+     * @param stringNum indicates the task to be deleted
      */
-    public DeleteCommand(String num) {
-        this.num = num;
+    public DeleteCommand(String stringNum) {
+        this.intNum = Integer.parseInt(stringNum);
     }
 
     /**
@@ -21,16 +21,16 @@ public class DeleteCommand extends Command {
      * @throws DukeException if task requirements is not met
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        int numChange = Integer.parseInt(this.num);
-        if (numChange > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! Task " + numChange + " does not exist.");
+        if (this.intNum > tasks.size()) {
+            throw new DukeException("☹ OOPS!!! Task " + intNum + " does not exist.");
         }
-        Task toRemove = tasks.get(numChange - 1);
-        tasks.remove(numChange - 1);
+
+        Task toRemove = tasks.get(intNum - 1);
+        tasks.remove(intNum - 1);
         String printable = ("Noted. I've removed this task:" + "\n" + toRemove.toString() +
                     "\n" + "Now you have " + tasks.size() + " tasks in the list.");
-        storage.save(tasks.getTaskList());
 
+        storage.save(tasks.getTaskList());
         return printable;
     }
 

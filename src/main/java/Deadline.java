@@ -6,8 +6,8 @@ import java.text.ParseException;
  * Represents a "Deadline" task inputted by the user.
  */
 public class Deadline extends Task {
-    protected String timeDesc;
-    protected Date date;
+    private String timeDesc;
+    private Date date;
 
     /**
      * Constructs a Deadline task object.
@@ -44,19 +44,9 @@ public class Deadline extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            String format = "D | [✓] | " + taskDesc + " | " + timeDesc + "\n";
-            return format;
+            return "D | [✓] | " + taskDesc + " | " + timeDesc + "\n";
         } else {
-            String format = "D | [✗] | " + taskDesc + " | " + timeDesc + "\n";
-            return format;
+            return "D | [✗] | " + taskDesc + " | " + timeDesc + "\n";
         }
-    }
-
-    /**
-     * Retrieves the time description of the object.
-     * @return Time description of the object in calendar date format
-     */
-    public Date getDate() {
-        return date;
     }
 }

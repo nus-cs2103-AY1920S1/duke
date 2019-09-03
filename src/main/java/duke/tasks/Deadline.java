@@ -14,7 +14,7 @@ public class Deadline extends Task {
      *
      * @param description String describing title/details of Deadline
      * @param deadline    String describing time of Deadline (in the format specified in DukeDate.dateFormatString)
-     * @throws DukeException
+     * @throws DukeException thrown when deadline String is of invalid format.
      */
     public Deadline(String description, String deadline) throws DukeException {
         super(description);

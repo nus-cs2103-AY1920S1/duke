@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
     private int taskNum;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param taskNum 1-indexed number of task
      */
@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
      * @param ui       Ui object that is responsible for printing output as a response
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
-     * @throws DukeException
+     * @throws DukeException re-thrown from underlying method calls.
      */
     public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
         //Mark task as complete

@@ -49,6 +49,10 @@ public class Duke {
         d.run();
     }
 
+    /**
+     * Method to run Duke. Used to continually poll the user for input
+     * via the console input.
+     */
     public void run() {
         ui.printWelcomeMsg();
         boolean isExit = false;

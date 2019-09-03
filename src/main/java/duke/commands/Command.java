@@ -12,7 +12,7 @@ import duke.utils.Ui;
 public class Command {
     boolean isExit;
 
-    /** Constructor */
+    /** Constructor. */
     public Command() {
         this.isExit = false;
     }
@@ -35,7 +35,7 @@ public class Command {
      * @param ui       Ui object that is responsible for printing output as a response
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
-     * @throws DukeException
+     * @throws DukeException re-thrown from underlying method calls.
      */
     public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
         //Default behaviour is to save current TaskList

@@ -26,7 +26,7 @@ public class Storage {
     private File file;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param filepath String representing the path to the file in which Task data will be saved
      */
@@ -35,10 +35,10 @@ public class Storage {
     }
 
     /**
-     * Convenience method to save a TaskList onto disk
+     * Convenience method to save a TaskList onto disk.
      *
      * @param allTasks TaskList representing a collection of Task objects
-     * @throws DukeException
+     * @throws DukeException thrown when error encountered saving to file.
      */
     public void save(TaskList allTasks) throws DukeException {
         try {
@@ -61,7 +61,7 @@ public class Storage {
      * Convenience method to load Task data from disk and re-created the TaskList object.
      *
      * @return TaskList representing a collection of Tasks saved on disk
-     * @throws DukeException
+     * @throws DukeException thrown when no existing tasks were saved to file.
      */
     public TaskList load() throws DukeException {
         try {
@@ -79,12 +79,12 @@ public class Storage {
     }
 
     /**
-     * Private method used to convert from the String format in the disk data
+     * Private method used to convert from the String format in the disk data.
      * into an actual Task object (ToDo, Event, Deadline)
      *
      * @param nextLine disk data (each field is seperated by the "|" character)
      * @return Task object
-     * @throws DukeException
+     * @throws DukeException re-thrown from underlying method calls.
      */
     private Task generateSavedTask(String nextLine) throws DukeException {
         String[] s = nextLine.split("\\|");
@@ -107,6 +107,8 @@ public class Storage {
         case "D":
             String deadline = s[3].trim();
             t = new Deadline(description, deadline);
+            break;
+        default:
             break;
         }
 

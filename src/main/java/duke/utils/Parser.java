@@ -24,7 +24,7 @@ public class Parser {
      *
      * @param fullCommand entire line of user input
      * @return Command object whose .execute() method can be called to achieve some desired behaviour
-     * @throws DukeException
+     * @throws DukeException thrown when an unrecognised command is encountered.
      */
     public static Command parse(String fullCommand) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
@@ -56,7 +56,7 @@ public class Parser {
      *
      * @param remainingParams remaining parameters required to initialise ToDo object
      * @return ArrayList containing the processed parameters, ready to be passed to a Command object
-     * @throws DukeException
+     * @throws DukeException thrown when task description is empty/invalid.
      */
     public static ArrayList<String> parseToDo(String remainingParams) throws DukeException {
         String taskDescription = remainingParams.trim();
@@ -75,7 +75,7 @@ public class Parser {
      *
      * @param remainingParams remaining parameters required to initialise Event object
      * @return ArrayList containing the processed paramters, ready to be passed to a Command object
-     * @throws DukeException
+     * @throws DukeException thrown when event parameters are invalid.
      */
     public static ArrayList<String> parseEvent(String remainingParams) throws DukeException {
         try {
@@ -105,7 +105,7 @@ public class Parser {
      *
      * @param remainingParams remaining parameters required to initialise Deadline object
      * @return ArrayList containing the processed parameters, ready to be passed to a Command object
-     * @throws DukeException
+     * @throws DukeException thrown when deadline parameters are invalid.
      */
     public static ArrayList<String> parseDeadline(String remainingParams) throws DukeException {
         try {

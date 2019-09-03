@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      * @param ui       Ui object that is responsible for printing output as a response
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
-     * @throws DukeException
+     * @throws DukeException re-thrown from underlying method calls.
      */
     public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
         ArrayList<Task> allTasksArrList = allTasks.getArrayList();

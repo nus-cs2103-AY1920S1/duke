@@ -9,17 +9,20 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 
 /**
- * Static methods for parsing user input into usable information for other methods
+ * Static methods for parsing user input into usable information by Duke.
  */
 public class Parser {
 
     /**
-     * Tries to parse input string as Date and Time in dd/MM/yyyy HHmm, and format into a format that cannot be misread:
-     * dd/MM/yyyy HHmm(e.g. 12/12/1212 1212 -> 12th of DECEMBER 1212, 12:12pm)
+     * Parses the argument provided by the user for the Date/Time parameter of the Deadline and
+     * Event Tasks, if possible.
+     *
+     * <p>If the argument provided by the user is in dd/MM/yyyy HHmm format, it will be formatted into a more explicit
+     * format. For example, "12/12/1212 1212" will be formatted to "12th of DECEMBER 1212, 12:12pm".</p>
      *
      * @param dateTimeString The input string to be parsed, and formatted, if possible
-     * @return The formatted date and time, if it can be formatted
-     * @throws DukeException The exception thrown when the input cannot be formatted
+     * @return The formatted date and time, if the input is valid.
+     * @throws DukeException when the input cannot be formatted.
      */
     public static String parseDateTime(String dateTimeString) throws DukeException {
         try {
@@ -29,8 +32,6 @@ public class Parser {
             int day = dateAndTime.getDayOfMonth();
             String month = dateAndTime.getMonth().toString();
             int year = dateAndTime.getYear();
-            int hour = dateAndTime.getHour();
-            int minute = dateAndTime.getMinute();
 
             StringBuilder dateTime = new StringBuilder();
 
@@ -40,6 +41,9 @@ public class Parser {
             dateTime.append(" ");
             dateTime.append(year);
             dateTime.append(", ");
+
+            int hour = dateAndTime.getHour();
+            int minute = dateAndTime.getMinute();
             dateTime.append((hour > 12 ? hour - 12 : hour == 0 ? 12 : hour));
             if (minute != 0) {
                 dateTime.append(":");
@@ -57,7 +61,9 @@ public class Parser {
         }
     }
 
-    // helper method to format a number into it's ordinal form
+    /**
+     * Helper method to format a positive integer into it's ordinal form.
+     */
     private static String getIntegerOrdinal(int integer) {
         int remainderHundred = integer % 100;
         if (remainderHundred > 9 && remainderHundred < 21) {
@@ -78,12 +84,11 @@ public class Parser {
     }
 
     /**
-     * Tries to parse user input as a command, with arguments if any, and formats it in a way that it can be used by
-     * other methods using the commands
+     * Tries to parse user input as a Command, with arguments, if any.
      *
-     * @param input The input string to be parsed as a command
-     * @return A data structure containing the type of command, and the arguments provided with it, if any
-     * @throws DukeException The exception thrown when there is an error when attempting to format the input as command
+     * @param input The input string to be parsed as a Command
+     * @return A Command, wrapping the user's instructions to Duke, which can instruct Duke to do some action
+     * @throws DukeException when an error occurs attempting to parse the input as a valid Command
      */
     public static Command parseAsCommand(String input) throws DukeException {
         input = input.trim();
@@ -168,7 +173,7 @@ public class Parser {
 
         for (String parameter : parametersProvided) {
             if (parameter == null) {
-                throw new DukeMissingParameterException(commandType, parametersProvided);
+                throw new DukeMissingArgumentException(commandType, parametersProvided);
             }
         }
 

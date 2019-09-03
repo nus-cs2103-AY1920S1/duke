@@ -16,13 +16,14 @@ import java.io.FileNotFoundException;
 
 
 /**
- * File handler responsible for reading/writing from/to files in order to load/save the task list in between sessions.
+ * File handler responsible for reading/writing from/to files in order to load/save the TaskList
+ * in between sessions.
  */
 public class Storage {
     private String filePath;
 
     /**
-     * Constructs an instance of the file handler
+     * Constructs an instance of the file handler for a specified file path.
      *
      * @param path The path to the file from the src/ directory
      */
@@ -63,9 +64,10 @@ public class Storage {
     }
 
     /**
-     * Returns the task list from the data stored in the file at the file path provided during initialization
+     * Returns the TaskList read from the file at the file path specified during initialization
+     * of the Storage instance.
      *
-     * @return The task list from data stored in the file
+     * @return The TaskList read from data stored in the file
      * @throws DukeException Exception thrown when error occurs when trying to recreate the task list
      */
     public TaskList loadTaskList() throws DukeException {
@@ -91,16 +93,14 @@ public class Storage {
                     taskList.add(readAsToDo(file));
                     break;
                 default:
-                    throw new DukeException("The save file at ", filePath, " is corrupt.");
-                    //throw DukeCorruptSaveFileException(filePath);
+                    throw new DukeCorruptFileException(filePath);
                 }
             }
-
             return taskList;
         } catch (FileNotFoundException ex) {
             throw new DukeInvalidFilePathException(filePath);
         } catch (IOException | NumberFormatException ex) {
-            throw new DukeException("The save file at ,", filePath, " is corrupt.");
+            throw new DukeCorruptFileException(filePath);
         }
     }
 
@@ -123,10 +123,10 @@ public class Storage {
     }
 
     /**
-     * Writes/Saves the task list into the file path provided during initialization
+     * Writes/Saves the TaskList into the file path specified during initialization of the Storage instance.
      *
-     * @param taskList The task list to be saved at the file path
-     * @throws DukeException Exception thrown when error occurs when trying to save the task list
+     * @param taskList The TaskList to be saved at the file path
+     * @throws DukeException when error occurs while trying to save the TaskList
      */
     public void save(TaskList taskList) throws DukeException {
         FileWriter file;

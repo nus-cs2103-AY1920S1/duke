@@ -4,16 +4,17 @@ import duke.error.DukeException;
 import duke.command.Parser;
 
 /**
- * Class representing an Event task in the task list
+ * A Task in a TaskList that represents an Event with a description and a time/date which the Event
+ * Task occurs at.
  */
 public class Event extends Task {
     public String time;
 
     /**
-     * Constructs an Event task which is incomplete initially
+     * Constructs an Event task, with description and time.
      *
      * @param description The description of the event
-     * @param time        The time the event occurs at
+     * @param time The time the event occurs at
      */
     public Event(String description, String time) {
         super(description);
@@ -25,11 +26,11 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an Event task with the completion status provided
+     * Constructs an Event task with a specified completion status.
      *
-     * @param isComplete  The completion status of the Event
-     * @param description The description of the event
-     * @param time        The time the event occurs
+     * @param isComplete The completion status of the Event
+     * @param description The description of the Event
+     * @param time The time the Event occurs
      */
     public Event(boolean isComplete, String description, String time) {
         super(description);
@@ -42,9 +43,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the task
+     * Returns the string representation of the Event Task.
      *
-     * @return The string representation of the task
+     * @return The string representation of the Event Task
      */
     @Override
     public String toString() {

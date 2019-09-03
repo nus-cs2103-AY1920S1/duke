@@ -4,16 +4,17 @@ import duke.error.DukeException;
 import duke.command.Parser;
 
 /**
- * Class representing a deadline task in the task list.
+ * A Task in a TaskList that represents a Deadline with a description and a time/date which the
+ * Deadline Task is expected to be completed by.
  */
 public class Deadline extends Task {
     public String time;
 
     /**
-     * Constructs the deadline task (incomplete by default)
+     * Constructs the Deadline Task.
      *
-     * @param description The description of the deadline task
-     * @param time        The time the deadline task needs to be completed
+     * @param description The description of the Deadline Task
+     * @param time        The time/date that the Deadline Task needs to be completed by
      */
     public Deadline(String description, String time) {
         super(description);
@@ -25,11 +26,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs the deadline task along with the completion status of the class
+     * Constructs the Deadline Task, with a specified completion status.
      *
-     * @param isComplete  The completion status of the task
-     * @param description The description of the task
-     * @param time        The time the task needs to be completed by
+     * @param isComplete  The completion status of the Task
+     * @param description The description of the Task
+     * @param time        The time/date the Task needs to be completed by
      */
     public Deadline(boolean isComplete, String description, String time) {
         super(description);
@@ -42,9 +43,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of the class
+     * Returns the string representation of the Deadline Task.
      *
-     * @return The string representation of the class
+     * @return The string representation of the Deadline Task.
      */
     @Override
     public String toString() {

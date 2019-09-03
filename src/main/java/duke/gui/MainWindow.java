@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import duke.ui.Response;
 
 /**
- * The main window of the JavaFX GUI for DUKE.
+ * The main window of the JavaFX GUI for Duke.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the current working Duke instance which the GUI will interface with.
      *
-     * @param duke
+     * @param duke The Duke instance to interface with
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
@@ -53,10 +53,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Displays a greeting message.
+     * Displays Duke's greeting message.
      */
     public void displayGreetingMessage() {
-        dialogContainer.getChildren().add(DialogBox.getDukeNormalDialog("Hi, I'm Duke!\nWhat can I do for you?", dukeImage));
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeNormalDialog(
+                        "Hi, I'm Duke!\nWhat can I do for you?",
+                        dukeImage));
     }
 
 
@@ -74,9 +77,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Displays the user's message and duke's response message
+     * Displays the user's message, and Duke's response message.
      *
-     * @param input The user's message to duke
+     * @param input The user's message to Duke
      * @param response Duke's response to the user
      */
     private void displayDialog(String input, String response) {
@@ -87,9 +90,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Displays the user's message and duke's error response message
+     * Displays the user's message and Duke's error response message.
      *
-     * @param input The user's message to duke which causes an error
+     * @param input The user's message to Duke which causes an error
      * @param response Duke's error response message
      */
     private void displayError(String input, String response) {

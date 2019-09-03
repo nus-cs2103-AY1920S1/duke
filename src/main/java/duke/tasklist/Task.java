@@ -1,14 +1,14 @@
 package duke.tasklist;
 
 /**
- * Abstract class representing a task which can be added to a task list
+ * Abstract class representing a Task which can be added to a TaskList.
  */
 public abstract class Task {
     boolean taskCompletionStatus;
     private String taskDescription;
 
     /**
-     * Default constructor for classes which extend from Task
+     * Constructs a Task.
      *
      * @param description The description of the task
      */
@@ -18,9 +18,9 @@ public abstract class Task {
     }
 
     /**
-     * Sets the completion status of the task to completed
+     * Sets the completion status of the Task to true (is complete).
      *
-     * @return This task which has been marked as completed
+     * @return This Task which has been marked as completed
      */
     public Task complete() {
         taskCompletionStatus = true;
@@ -28,16 +28,16 @@ public abstract class Task {
     }
 
     /**
-     * Returns if the task has been completed or not
+     * Returns true if the Task has been completed, or false otherwise.
      *
-     * @return True if the task is complete, false otherwise
+     * @return True if the Task is complete, false otherwise
      */
     public boolean isComplete() {
         return taskCompletionStatus;
     }
 
     /**
-     * Returns the description of the task
+     * Returns the description of the Task.
      *
      * @return The description of the task
      */
@@ -46,9 +46,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns the string representation of the task
+     * Returns the string representation of the Task.
      *
-     * @return The string representation of the task
+     * @return The string representation of the Task
      */
     @Override
     public String toString() {

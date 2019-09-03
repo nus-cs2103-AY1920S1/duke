@@ -7,7 +7,6 @@ import duke.error.DukeException;
 import duke.command.AddTaskCommand;
 import duke.command.ShowListCommand;
 import duke.command.ExitCommand;
-import duke.command.DukeMissingParameterException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -15,12 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Class to test certain functionality of the Parser class
+ * Class to test certain functionality of the Parser class.
  */
 public class ParserTest {
 
     /**
-     * Test that the parseDateTime method can output the properly formatted date and time when a valid input is given
+     * Test that the parseDateTime method can output the properly formatted date and time
+     * when a valid input is given.
      */
     @Test
     public void parseDateTime_validInput_success() {
@@ -37,7 +37,8 @@ public class ParserTest {
     }
 
     /**
-     * Test that the parseDateTime method throws an exception when it tries to parse and format an invalid input
+     * Test that the parseDateTime method throws an exception when it tries to parse and
+     * format an invalid input.
      */
     @Test
     public void parseDateTime_invalidInput_exceptionThrown() {
@@ -48,8 +49,8 @@ public class ParserTest {
     }
 
     /**
-     * Test that the parseDateTime method throws an exception when the input looks valid but cannot be formatted to the
-     * expected format
+     * Test that the parseDateTime method throws an exception when the input looks valid but
+     * cannot be formatted to the expected format.
      */
     @Test
     public void parseDateTime_validLookingInvaliButdInput_exceptionThrown() {
@@ -61,30 +62,38 @@ public class ParserTest {
     }
 
     /**
-     * Test that the parseAsCommand method throws a DukeMissingParameterException when the it tries to parse a input
-     * as a command, but the required arguments are not provided
+     * Test that the parseAsCommand method throws a DukeMissingParameterException when the
+     * it tries to parse a input as a command, but the required arguments are not provided.
      */
     @Test
     public void parseAsCommand_missingParameter_exceptionThrown() {
         //task commands
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("todo "));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("todo "));
 
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("deadline "));
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("deadline task"));
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("deadline /by time"));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("deadline "));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("deadline task"));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("deadline /by time"));
 
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("event "));
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("event task "));
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("event /at time"));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("event "));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("event task "));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("event /at time"));
 
         //other commands
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("done "));
-        assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("delete "));
+        assertThrows(
+                duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("done "));
+        assertThrows(duke.command.DukeMissingArgumentException.class, () -> Parser.parseAsCommand("delete "));
     }
 
     /**
-     * Test that the parseAsCommand method properly ignores redundant input when attempting to parse commands
-     * which require 0 arguments.
+     * Test that the parseAsCommand method properly ignores redundant input when attempting to parse
+     * commands which require 0 arguments.
      */
     @Test
     public void parseAsCommand_redundantArgumentForNoArgumentCommands_success() {
@@ -99,7 +108,7 @@ public class ParserTest {
     }
 
     /**
-     * Test that the parseAsCommand method properly returns an AddTaskCommand when the input is valid
+     * Test that the parseAsCommand method properly returns an AddTaskCommand when the input is valid.
      */
     @Test
     public void parseAsCommand_nonParseableTimeForDeadlineOrEvent_success() {

@@ -19,7 +19,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * A GUI for DUKE using FXML/JavaFX.
+ * A GUI for Duke using FXML/JavaFX.
  */
 public class Gui extends Application {
 
@@ -32,6 +32,7 @@ public class Gui extends Application {
             AnchorPane mainWindow = fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
             stage.setScene(scene);
+            //stage.setResizable(false);
 
             //set the current working Duke
             fxmlLoader.<MainWindow>getController().setDuke(duke);

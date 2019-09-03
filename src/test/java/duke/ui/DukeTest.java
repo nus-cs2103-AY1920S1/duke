@@ -1,6 +1,5 @@
 package duke.ui;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,19 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Class to test functionality of certain methods in the Duke class
+ * Class to test functionality of certain methods in the Duke class.
  */
 public class DukeTest {
 
     private static Duke duke;
 
     @BeforeEach
-    public void setUpDuke() {
+    void setUpDuke() {
         duke = new Duke("test/resources/save/DukeTestSave01.txt");
     }
 
     @BeforeEach
-    public void clearTestTaskList() {
+    void clearTestTaskList() {
         try {
             FileWriter temp = new FileWriter("src/test/resources/save/DukeTestSave01.txt");
             temp.write("0");
@@ -49,11 +48,12 @@ public class DukeTest {
 
 
     /**
-     * Test that bad syntax for commands to add tasks result in an error Response from Duke for the following
-     * situations:
-     *
-     * - missing arguments
-     * - wrong delimiter
+     * Test that bad syntax for commands to add tasks result in an error Response from Duke for the
+     * following situations.
+     * <ul>
+     * <li>Missing arguments</li>
+     * <li>Wrong delimiter</li>
+     * </ul>
      */
     @Test
     public void getResponse_invalidAddTaskInputs_responseCausedByError() {
@@ -76,12 +76,13 @@ public class DukeTest {
 
     /**
      * Test that bad syntax for commands to delete tasks result in an error Response from Duke for the
-     * following situations:
-     *
-     * - no argument
-     * - negative integer
-     * - zero
-     * - argument not parsable as integer
+     * following situations.
+     * <ul>
+     * <li>no argument</li>
+     * <li>negative integer</li>
+     * <li>zero</li>
+     * <li>argument not parsable as integer</li>
+     * </ul>
      */
     @Test
     public void getResponse_invalidDeleteInputs_responseCausedByError() {
@@ -93,12 +94,13 @@ public class DukeTest {
 
     /**
      * Test that bad syntax for commands to complete tasks result in an error Response from Duke for the
-     * following situations:
-     *
-     * - no argument
-     * - negative integer
-     * - zero
-     * - argument not parsable as integer
+     * following situations.
+     * <ul>
+     * <li>no argument</li>
+     * <li>negative integer</li>
+     * <li>zero</li>
+     * <li>argument not parsable as integer</li>
+     * </ul>
      */
     @Test
     public void getResponse_invalidCompleteInputs_responseCausedByError() {
@@ -110,10 +112,8 @@ public class DukeTest {
 
 
     /**
-     * Test that bad syntax for commands to search for tasks result in an error Response from Duke for the
-     * following situation:
-     *
-     * - no argument
+     * Test that bad syntax for commands to search for tasks result in an error Response from Duke
+     * when no argument is given.
      */
     @Test
     public void getResponse_invalidSearchInputs_responseCausedByError() {
@@ -131,9 +131,12 @@ public class DukeTest {
     }
 
     /**
-     * Test that parameter-less commands (list, bye) result in a normal Response from Duke in the following situations:
-     * - normal usage (no argument given)
-     * - with redundant argument given
+     * Test that parameter-less commands (list, bye) result in a normal Response from Duke in the
+     * following situations.
+     * <ul>
+     * <li>normal usage (no argument given)</li>
+     * <li>with redundant argument given</li>
+     * </ul>
      */
     @Test
     public void getResponse_validParameterlessCommand_responseNotCausedByError() {
@@ -146,8 +149,8 @@ public class DukeTest {
 
 
     /**
-     * Test that after the command to exit is given to Duke, that it is inactive and response to further input is caused
-     * by error.
+     * Test that after the command to exit is given to Duke, that it is inactive and
+     * response to further input is caused by error.
      */
     @Test
     public void getResponse_exitCommand_dukeInactiveAndResponseCausedByError() {

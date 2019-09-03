@@ -21,7 +21,7 @@ import duke.tasklist.Event;
 import java.util.ArrayList;
 
 /**
- * The driver class that uses the various components of Duke to represent a task managing assistant (Duke).
+ * The driver class that uses the various components of Duke to represent a Task managing assistant.
  */
 public class Duke {
 
@@ -30,9 +30,9 @@ public class Duke {
     private boolean isActive;
 
     /**
-     * Constructs a new Duke instance with the working TaskList whose data is saved at the path given
+     * Constructs a new Duke instance with the working TaskList whose data is saved at the file path given.
      *
-     * @param taskListPath path of TaskList save file
+     * @param taskListPath The file path of TaskList's save file
      */
     public Duke(String taskListPath) {
         storage = new Storage(taskListPath);
@@ -68,7 +68,7 @@ public class Duke {
     }
 
     /**
-     * Returns true if duke is active, and false otherwise
+     * Returns true if duke is active, and false otherwise.
      *
      * @return true if duke is active, and false otherwise
      */
@@ -77,7 +77,10 @@ public class Duke {
     }
 
     /**
-     * Determine which command handler to use, executes command with that handler, returns response/throws exception
+     * Determines which Command handler to use, then executes the provided Command with that handler.
+     *
+     * @param command The Command to be executed
+     * @throws DukeException when the Command cannot be properly executed for some reason
      */
     private String executeCommand(Command command) throws DukeException {
         // all commands passed to this method have all required parameter non-empty

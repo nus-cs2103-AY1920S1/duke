@@ -3,12 +3,12 @@ package duke.io;
 import duke.error.DukeException;
 
 /**
- * The exception to be thrown when the file at some file path is missing, or a directory
+ * The DukeException to be thrown when the file at some file path is missing, or is a directory.
  */
 public class DukeInvalidFilePathException extends DukeException {
 
     /**
-     * Constructs the exception
+     * Constructs DukeException to be thrown when the file at some file path is missing, or is a directory.
      *
      * @param path The file path of the file which is missing, or is a directory
      */

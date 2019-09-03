@@ -1,0 +1,34 @@
+package duke.command;
+
+import duke.error.DukeException;
+
+import java.util.ArrayList;
+
+/**
+ * A DukeException to be thrown when the parameters required for the Command are not provided.
+ */
+public class DukeMissingArgumentException extends DukeException {
+
+    /**
+     * Constructor for the DukeException to be thrown when needed parameters for a Command are not provided.
+     *
+     * @param type The type of the Command which parameters were not all provided arguments
+     * @param arguments The arguments provided along with the Command
+     */
+    public DukeMissingArgumentException(Type type, String[] arguments) {
+        super(missingArguments(type, arguments));
+    }
+
+    // helper method to get the parameters which are missing arguments
+    private static String missingArguments(Type type, String[] argumentsProvided) {
+        StringBuilder message = new StringBuilder("The following field(s) cannot be empty:");
+        ArrayList<String> parameters = Type.getParametersFor(type);
+        for (int i = 0; i < Type.getNumberOfParametersExpectedFor(type); i++) {
+            if (argumentsProvided[i] == null) {
+                message.append("\n>>>");
+                message.append(parameters.get(i));
+            }
+        }
+        return message.toString();
+    }
+}

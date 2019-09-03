@@ -5,8 +5,8 @@ import duke.error.DukeException;
 import java.util.Optional;
 
 /**
- * A Response contains Dukes's reply to a given Command, as well as some information about the current State of Duke,
- * after executing the last Command given to it.
+ * A Response represents a Response from Dukes as a result of some user input, as well as some
+ * information about the current State of Duke after trying to carry out the instruction the input.
  */
 public class Response {
     private Optional<DukeException> dukeException;
@@ -20,11 +20,12 @@ public class Response {
     }
 
     /**
-     * Returns a Response containing the message from Duke after successfully executing a Command, signal that
-     * the Response was not caused by an error, and the activity status of Duke at the time of the Response.
+     * Returns a Response from Duke if a Command is successfully executed.
      *
-     * @param message The message from Duke in reply to the given Command
-     * @param isActive True if Duke is able to respond to further Commands, false otherwise.
+     * <p>The Response contains the message Duke responds with, and the activity status of Duke.</p>
+     *
+     * @param message The message from Duke due to successfully executing a Command
+     * @param isActive True if Duke is able to accept further Commands, false otherwise.
      * @return The Response from successfully executing a Command
      */
     public static Response fromString(String message, boolean isActive) {
@@ -33,8 +34,10 @@ public class Response {
 
 
     /**
-     * Returns a Response containing the error message from Duke after an error occurs after user input, signal that
-     * the Response was caused by an error, and the activity status of Duke at the time of the Response.
+     * Returns a Response from Duke if a Command was not successfully executed.
+     *
+     * <p>The Response contains the error message from Duke after an error occurs after user input, and
+     * the activity status of Duke at the time of the Response.</p>
      *
      * @param e The DukeException thrown when the error occurs
      * @param isActive True if Duke is able to respond to further Commands, false otherwise.
@@ -54,18 +57,18 @@ public class Response {
     }
 
     /**
-     * Returns true is Duke can take further user input, false otherwise
+     * Returns true is Duke can take further user input, false otherwise.
      *
-     * @return True is Duke can take further user input, False otherwise
+     * @return True is Duke can take further user input, False otherwise.
      */
     public boolean isActive() {
         return isActive;
     }
 
     /**
-     * Returns the String representation of the Response
+     * Returns the String representation of the Response.
      *
-     * @return the String representation of the Response
+     * @return the String representation of the Response.
      */
     @Override
     public String toString() {

@@ -1,12 +1,12 @@
 package duke.tasklist;
 
 /**
- * Class representing a to do task which can be added to the task list
+ * A Task in a TaskList that represents a simple ToDo Task with a description.
  */
 public class ToDo extends Task {
 
     /**
-     * Constructs the todo task, initially incomplete
+     * Constructs a ToDo Task.
      *
      * @param description The description of the task
      */
@@ -15,10 +15,10 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructs the todo task, with the completion status provided
+     * Constructs a ToDo Task, with the specified completion status.
      *
-     * @param isComplete  The completion status of the task
-     * @param description The description of the task
+     * @param isComplete  The completion status of the Task
+     * @param description The description of the Task
      */
     public ToDo(boolean isComplete, String description) {
         super(description);
@@ -26,9 +26,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the string representation of the todo task
+     * Returns the string representation of the ToDo Task.
      *
-     * @return The string representation of the todo task
+     * @return The string representation of the ToDo Task
      */
     @Override
     public String toString() {

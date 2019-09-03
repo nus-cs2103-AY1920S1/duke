@@ -3,14 +3,15 @@ package duke.tasklist;
 import duke.error.DukeException;
 
 /**
- * Exception to be thrown when an error occurs because a command to modify a task, which is not in the task list,
- * is executed.
+ * A DukeException to be thrown when an error occurs because a Command tries to modify a Task which does
+ * not exist in the TaskList.
  */
 public class DukeNoCorrespondingTaskException extends DukeException {
     /**
-     * Constructs the exception to be thrown
+     * Constructs the exception to be thrown when an error occurs because a Command tries to modify
+     * a Task which does not exist in the TaskList.
      *
-     * @param number The number that does not match a task number in the task list
+     * @param number The number which does not correspond to a Task in the TaskList
      */
     public DukeNoCorrespondingTaskException(int number) {
         super("The following number does not correspond to a task in the list: \n", Integer.toString(number));

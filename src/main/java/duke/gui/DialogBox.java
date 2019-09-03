@@ -21,8 +21,9 @@ import java.io.IOException;
 
 /**
  * A custom control using FXML.
- * This control represents dialog from an agent in Duke (user, or Duke). It consists of a Circle with an ImagePattern
- * fill to represent the speaker, and a Label to display the message from the speaker.
+ *
+ * <p>This control represents dialog from either Duke or the user. It consists of a Circle with an ImagePattern
+ * fill to represent the speaker, and a Label to display the message from the speaker.</p>
  */
 public class DialogBox extends HBox {
     @FXML
@@ -31,8 +32,9 @@ public class DialogBox extends HBox {
     private Circle icon;
 
     /**
-     * Constructs the dialog box
-     * @param speakerText The text to be displayed in the dialog box
+     * Constructs the dialog box.
+     *
+     * @param speakerText The speaker's text to be displayed in the dialog box
      * @param img The image to be used as the display picture
      */
     private DialogBox(String speakerText, Image img) {
@@ -41,31 +43,21 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-        } catch (IOException e) {;
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        // formats the text field
-        // text = speakerText;
-        // text.setWrapText(true);
+
         text.setText(speakerText);
         text.setPadding(new Insets(0,5,0,42.5));
         setHeight(text.getHeight() +  10);
 
         // formats the display picture
-        // icon = new Circle();
-        // icon.setRadius(37.5);
         icon.setFill(new ImagePattern(img));
-
-        // formats the dialog box
-        //setMinHeight(100);
-        //setAlignment(Pos.CENTER_RIGHT);
-        //getChildren().addAll(text, icon);
     }
 
     // mirrors the dialog box elements orientation
     private void flip() {
         this.setAlignment(Pos.CENTER_LEFT);
-
         text.setPadding(new Insets(0,42.5,0,5));
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
@@ -73,7 +65,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a dialog box formatted to display the message from the user.
+     * Returns a dialog box formatted to display a message from the user.
      *
      * @param userText The user's message
      * @param img The user's display picture
@@ -115,7 +107,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a dialog box formatted to display error messages from Duke
+     * Returns a dialog box formatted to display error messages from Duke.
      *
      * @param dukeErrorText Duke's error message
      * @param img Duke's display picture

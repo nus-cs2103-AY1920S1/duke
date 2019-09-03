@@ -3,8 +3,8 @@ package duke.command;
 /**
  * An abstract class representing an instruction for Duke.
  *
- * A Command is a data structure that wraps a valid instruction type for Duke, and the arguments that should be used 
- * when executing an instruction of that type.
+ * <p>A Command is a data structure that wraps a valid instruction type for Duke, and the arguments
+ * that should be used when executing an instruction of that type.</p>
  */
 public abstract class Command {
     // the type of instruction to be executed
@@ -13,9 +13,9 @@ public abstract class Command {
     private String[] arguments;
 
     /**
-     * Constructs the Command
+     * Constructs the Command.
      *
-     * @param type       The enumerated type of Command
+     * @param type The enumerated Type of Command
      * @param arguments The arguments for the Command, if any
      */
     Command(Type type, String... arguments) {
@@ -24,9 +24,9 @@ public abstract class Command {
     }
 
     /**
-     * Returns the enumerated type of the Command
+     * Returns the enumerated Type of the Command.
      *
-     * @param command The Command of which the enumerated type is needed from.
+     * @param command The Command of which the enumerated Type is needed from.
      * @return The enumerated Type of the command.
      */
     public static Type getTypeOf(Command command) {
@@ -34,10 +34,10 @@ public abstract class Command {
     }
 
     /**
-     * Returns the arguments provided with the Command
+     * Returns the arguments provided along with the Command.
      *
      * @param command The Command from which the arguments used are needed.
-     * @return The arguments used in the Command, in a String[].
+     * @return The arguments provided along with the Command, in a String[].
      */
     public static String[] getArgumentsUsed(Command command) {
         return command.arguments;

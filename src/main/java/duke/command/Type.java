@@ -3,8 +3,12 @@ package duke.command;
 import java.util.ArrayList;
 
 /**
- * The enumeration of the type of Commands which can be given to Duke to manipulate/display information about
- * the TaskList.
+ * The enumeration of the type of Commands which can be given to Duke to manipulate/display
+ * information about the TaskList.
+ *
+ * <p>The enumeration also contains details such as the number of parameters that are expected for the
+ * Command, the names of the parameters, and the delimiters used to separate multiple the different
+ * arguments, if any.</p>
  */
 public enum Type {
     COMMAND_EXIT(0),
@@ -34,17 +38,17 @@ public enum Type {
     private ArrayList<String> delimiters;
 
     /**
-     * Returns the number of parameters expected for the command of the Type provided
+     * Returns the number of parameters expected for the Command of the Type provided.
      *
-     * @param type The type of the command for which the number of parameters expected is needed
-     * @return The number of parameters expected
+     * @param type The type of the Command for which the number of parameters expected is needed
+     * @return The number of parameters expected for a Command of the Type.
      */
     public static int getNumberOfParametersExpectedFor(Type type) {
         return type.parametersExpected;
     }
 
     /**
-     * Returns an ArrayList of the names of the parameters of the for the Type of command
+     * Returns an ArrayList of the parameter names of the Command of the given Type.
      *
      * @param type The Type of command which the names of the parameters is required from
      * @return An ArrayList of the parameter names
@@ -54,9 +58,10 @@ public enum Type {
     }
 
     /**
-     * Returns the delimiters used to separate multiple arguments for commands of the Type provided
+     * Returns an ArrayList of the delimiters used to separate multiple arguments for Commands of
+     * the Type provided.
      *
-     * @param type The Type of command
+     * @param type The Type of the Command
      * @return An ArrayList of the delimiters
      */
     public static ArrayList<String> getDelimitersFor(Type type) {

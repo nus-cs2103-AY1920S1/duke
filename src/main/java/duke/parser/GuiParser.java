@@ -27,136 +27,117 @@ public class GuiParser  {
     public String readUserInput(String string) {
         //Scanner myScanner = new Scanner(System.in);
         String argument = string;
-            if (argument.equals("list")) {
-                String result = storeTaskList.listTask();
-                return result;
-            } else {
+        if (argument.equals("list")) {
+            String result = storeTaskList.listTask();
+            return result;
+        } else {
+            try {
                 String[] argumentArray = argument.split(" ");
                 //start of toDo,Event,Deadline
                 if (argumentArray[0].equals("done")) {
-                    try {
-                        if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a done command cannot be empty.");
-                        }
-                        int index = Integer.valueOf(argumentArray[1]) - 1;
-                        String result = storeTaskList.doneTask(index);
-                        return result;
-                    } catch (IndexOutOfBoundsException e) {
-                        return "invalid number not in current list , please enter input again";
-                    } catch (DukeException e) {
-                        return e.toString();
+                    if (argumentArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a done command cannot be empty.");
                     }
+                    int index = Integer.valueOf(argumentArray[1]) - 1;
+                    String result = storeTaskList.doneTask(index);
+                    return result;
+
                 } else if (argumentArray[0].equals("todo")) {
-                    try {
-                        //catch empty desc error
-                        if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        //form back string
-                        String toDoTaskString = "";
-                        for (int i = 1; i < argumentArray.length; i++) {
-                            toDoTaskString += argumentArray[i];
-                            toDoTaskString += " ";
-                        }
-                        //.trim() to remove trailing space
-                        String result = storeTaskList.addToDoTask(toDoTaskString.trim());
-                        return result;
-                    } catch (DukeException e) {
-                        return e.toString();
+                    //catch empty desc error
+                    if (argumentArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
+                    //form back string
+                    String toDoTaskString = "";
+                    for (int i = 1; i < argumentArray.length; i++) {
+                        toDoTaskString += argumentArray[i];
+                        toDoTaskString += " ";
+                    }
+                    //.trim() to remove trailing space
+                    String result = storeTaskList.addToDoTask(toDoTaskString.trim());
+                    return result;
+
                 } else if (argumentArray[0].equals("deadline")) {
-                    try {
-                        //catch empty desc error
-                        if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                        }
-                        //form back string , description stops at /by
-                        //date time starts from /by
-                        String deadlineTaskDescriptionString = "";
-                        String deadlineTaskDateAndTimeString = "";
-                        boolean createDesc = true;
-                        //catch error of no specific date time after /by
-                        if (argumentArray[argumentArray.length - 1].matches("/by")) {
-                            throw new DukeException("Oops, no specific date/time supplied");
-                        }
-                        for (int i = 1; i < argumentArray.length; i++) {
-                            if (argumentArray[i].equals("/by")) {
-                                createDesc = false;
-                            } else if (createDesc) {
-                                deadlineTaskDescriptionString += argumentArray[i];
-                                deadlineTaskDescriptionString += " ";
-                            } else {
-                                deadlineTaskDateAndTimeString += argumentArray[i];
-                                deadlineTaskDateAndTimeString += " ";
-                            }
-                        }
-                        deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
-                        String result = storeTaskList.addDeadlineTask(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
-                        return result;
-                    } catch (DukeException e) {
-                        return e.toString();
+                    //catch empty desc error
+                    if (argumentArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
+                    //form back string , description stops at /by
+                    //date time starts from /by
+                    String deadlineTaskDescriptionString = "";
+                    String deadlineTaskDateAndTimeString = "";
+                    boolean createDesc = true;
+                    //catch error of no specific date time after /by
+                    if (argumentArray[argumentArray.length - 1].matches("/by")) {
+                        throw new DukeException("Oops, no specific date/time supplied");
+                    }
+                    for (int i = 1; i < argumentArray.length; i++) {
+                        if (argumentArray[i].equals("/by")) {
+                            createDesc = false;
+                        } else if (createDesc) {
+                            deadlineTaskDescriptionString += argumentArray[i];
+                            deadlineTaskDescriptionString += " ";
+                        } else {
+                            deadlineTaskDateAndTimeString += argumentArray[i];
+                            deadlineTaskDateAndTimeString += " ";
+                        }
+                    }
+                    deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
+                    String result = storeTaskList.addDeadlineTask(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
+                    return result;
                 } else if (argumentArray[0].equals("event")) {
-                    try {
-                        //catch empty desc error
-                        if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                        }
-                        //form back string , description stops at /at
-                        //date time starts from /at
-                        String eventTaskDescriptionString = "";
-                        String eventTaskDateAndTimeString = "";
-                        boolean createDesc = true;
-                        //catch error of no specific date time after /at
-                        if (argumentArray[argumentArray.length - 1].matches("/at")) {
-                            throw new DukeException("Oops, no specific duration supplied");
-                        }
-                        for (int i = 1; i < argumentArray.length; i++) {
-                            if (argumentArray[i].equals("/at")) {
-                                createDesc = false;
-                            } else if (createDesc) {
-                                eventTaskDescriptionString += argumentArray[i];
-                                eventTaskDescriptionString += " ";
-                            } else {
-                                eventTaskDateAndTimeString += argumentArray[i];
-                                eventTaskDateAndTimeString += " ";
-                            }
-                        }
-                        eventTaskDateAndTimeString = convertStringToDateEvent(eventTaskDateAndTimeString);
-                        String result = storeTaskList.addEventTask(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
-                        return result;
-                    } catch (DukeException e) {
-                        return e.toString();
+                    //catch empty desc error
+                    if (argumentArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                     }
+                    //form back string , description stops at /at
+                    //date time starts from /at
+                    String eventTaskDescriptionString = "";
+                    String eventTaskDateAndTimeString = "";
+                    boolean createDesc = true;
+                    //catch error of no specific date time after /at
+                    if (argumentArray[argumentArray.length - 1].matches("/at")) {
+                        throw new DukeException("Oops, no specific duration supplied");
+                    }
+                    for (int i = 1; i < argumentArray.length; i++) {
+                        if (argumentArray[i].equals("/at")) {
+                            createDesc = false;
+                        } else if (createDesc) {
+                            eventTaskDescriptionString += argumentArray[i];
+                            eventTaskDescriptionString += " ";
+                        } else {
+                            eventTaskDateAndTimeString += argumentArray[i];
+                            eventTaskDateAndTimeString += " ";
+                        }
+                    }
+                    eventTaskDateAndTimeString = convertStringToDateEvent(eventTaskDateAndTimeString);
+                    String result = storeTaskList.addEventTask(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
+                    return result;
                 } else if (argumentArray[0].equals("delete")) {
-                    try {
-                        if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
-                        }
-                        int index = Integer.valueOf(argumentArray[1]) - 1;
-                        String result = storeTaskList.deleteTask(index);
-                        return result;
-                        //catch task number not in list error
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("invalid number not in current list");
-                    } catch (DukeException e) {
-                        return e.toString();
+                    if (argumentArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
                     }
+                    int index = Integer.valueOf(argumentArray[1]) - 1;
+                    String result = storeTaskList.deleteTask(index);
+                    return result;
+                    //catch task number not in list error
+
                 } else if (argumentArray[0].equals("find")) {
                     String result = storeTaskList.findTask(argumentArray[1]);
                     return result;
                 } else if (argumentArray[0].equals("bye")) {
                     System.exit(0);
                 } else {
-                    try {
-                        //handles error for not recognized command
-                        throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    } catch (DukeException e) {
-                        return e.toString();
-                    }
+                    //handles error for not recognized command
+                    throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+            } catch (IndexOutOfBoundsException e) {
+                return "invalid number not in current list , please enter input again";
+            } catch (DukeException e) {
+                return e.toString();
             }
-            return "Oops, please enter input again";
+        }
+        return "error in input";
     }
 
     /**
@@ -184,6 +165,7 @@ public class GuiParser  {
         }
         return " ";
     }
+
 
     /**
      * converts time to string

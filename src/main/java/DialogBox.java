@@ -32,23 +32,6 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Another instance of Dialog box constructor to call on UserDialogBox FXML file
-     * @param img
-    */
-    private DialogBox(String text, Image img, boolean test) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dialog.setText(text);
-        displayPicture.setImage(img);
-    }
-
-    /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
@@ -59,7 +42,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, true);
+        return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

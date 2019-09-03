@@ -79,7 +79,7 @@ public class TaskList {
      * Searches for the given keyword in the task list.
      * @param s The keyword.
      */
-    public void find(String s) {
+    public String find(String s) {
         List<Task> temp = new ArrayList<>();
         for (Task task : list) {
             String[] descriptionArray = task.getDescription().split(" ");
@@ -89,25 +89,29 @@ public class TaskList {
                 }
             }
         }
-        printList(temp);
+        return convertToString(temp);
     }
 
     /**
      * Prints the task list in order of which task is added first.
      */
-    public void printList() {
+    public String printList() {
         int i = 1;
+        String s = "";
         for (Task task : list) {
-            System.out.println("    " + i + ". " + task);
+            s += "    " + i + ". " + task + "\n";
             i++;
         }
+        return s;
     }
 
-    private void printList(List<Task> t) {
+    private String convertToString(List<Task> t) {
         int i = 1;
+        String s = "";
         for (Task task : t) {
-            System.out.println("    " + i + ". " + task);
+            s += "    " + i + ". " + task + "\n";
             i++;
         }
+        return s;
     }
 }

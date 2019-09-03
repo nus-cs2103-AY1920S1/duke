@@ -1,5 +1,16 @@
+/**
+ * This is a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the
+ * user's avatar and a label containing text from the user.
+ */
+
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -7,52 +18,61 @@ import javafx.scene.layout.HBox;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
-    private Circle displayPictureShape;
-    private Label text;
+    @FXML
+    private Label dialog;
+
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Constructor for DialogBox, a custom control.
-     * @param l Label component in a DialogBox
-     * @param iv image to view
+     * @param text String of text in a DialogBox
+     * @param image Image to display as avatar
      */
-    public DialogBox(Label l, ImageView iv) {
-        displayPictureShape = new Circle(75,75,75);
-        text = l;
-        displayPicture = iv;
+    public DialogBox(String text, Image image) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setClip(displayPictureShape);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.setSpacing(10);
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setText(text);
+        displayPicture.setImage(image);
     }
 
     /**
      * Flips the dialog box such that ImageView is on the left and text is on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
+        Collections.reverse(tmp);
         this.getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    /**
+     * Returns DialogBoxes that represent User messages.
+     * @param text String containing user input
+     * @param image Image of user's avatar
+     * @return DialogBox to contain User messages
+     */
+    public static DialogBox getUserDialog(String text, Image image) {
+        return new DialogBox(text, image);
     }
 
     /**
      * Returns DialogBoxes that represents Duke messages.
-     * @param l Label component in the DialogBox
-     * @param iv Image to be viewed
-     * @return DialogBox to contain Duke messages.
+     * @param text String that represents Duke messages
+     * @param image Image of Duke's avatar
+     * @return DialogBox to contain Duke messages
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image image) {
+        var db = new DialogBox(text, image);
         db.flip();
         return db;
     }

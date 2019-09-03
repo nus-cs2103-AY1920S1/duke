@@ -1,12 +1,6 @@
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 
 public class Duke {
+    private static final String TABS = "     ";
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
@@ -27,18 +21,18 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
-    /*
-
-    public static void main(String[] args) {
-        new Duke("//Users//chowjiaying//Github//2103T-iP//duke//data//duke.txt").run();
+    /**
+     * Prints a welcome message.
+     */
+    public String getWelcome() {
+        return TABS + "Hello! I'm Duke\n"
+                + TABS + "What can I do for you?";
     }
 
-
-
-     * Method that runs the Duke program.
-
+    /**
+     * Method that runs Duke logic.
+     */
     public void run() {
-        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -55,5 +49,4 @@ public class Duke {
 
         }
     }
-    */
 }

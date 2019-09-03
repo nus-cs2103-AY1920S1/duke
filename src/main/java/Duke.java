@@ -65,7 +65,7 @@ public class Duke {
 
 
         Application.launch(Gui.class, args);
-        //duke.run();
+
     }
 
     public Ui getUi() {

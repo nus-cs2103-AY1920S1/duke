@@ -4,6 +4,8 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
+
+import java.awt.*;
 import java.io.FileNotFoundException;
 
 /**
@@ -73,6 +75,6 @@ public class Duke {
      * @param args Unused
      */
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("C:/Users/Shawn Lee/Desktop/UNI FILES/Y2S1/CS2103T/duke/data/duke.txt").run();
     }
 }

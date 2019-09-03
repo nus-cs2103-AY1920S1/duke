@@ -1,3 +1,4 @@
 T | 0 | shawn
-E | 0 | seminar | 10/06/2020 1800
+E | 0 | seminar | 10th of June 2019, 6:00pm
 D | 0 | test | 20th of September 2019, 12:00pm
+D | 0 | shawn | 9th of June 1997, 6:00am

@@ -6,6 +6,7 @@ import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.Ui;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -14,6 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Duke class. Creates a new Ui, TaskList and Storage object, then runs the main method of the program.
@@ -32,6 +36,9 @@ public class Duke extends Application{
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * This method runs the Duke chat bot. In particular, it prints the intro, and determines which command should
@@ -141,6 +148,11 @@ public class Duke extends Application{
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+        // Scroll down to the end every time the dialog container's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.setPadding(new Insets(10, 5, 0, 5));
+        dialogContainer.setSpacing(10);
+
         userInput.setPrefWidth(325.0);
 
         sendButton.setPrefWidth(55.0);
@@ -152,7 +164,51 @@ public class Duke extends Application{
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
     }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Replace this stub with my own method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+//    /**
+//     * Iteration 1:
+//     * Creates a label with the specified text and adds it to the dialog container.
+//     * @param text String containing the text to add.
+//     * @return a label with the specified text that has word wrap enabled.
+//     */
+//    private Label getDialogLabel(String text) {
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
 
     /**
      * Main class. Sets the filepath for the saving of Duke tasks.

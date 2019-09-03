@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
@@ -16,22 +17,41 @@ public class Duke {
         try {
             storage = new Storage(filePath);
         } catch(FileNotFoundException | UnsupportedEncodingException err) {
-            System.out.println(err);
+            ui.showFileMissingError();
         }
         try {
             tasks = new TaskList(storage.load());
-        } catch(FileNotFoundException err) {
+        } catch(Exception err) {
+            ui.printError(err.getMessage());
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    public void run() throws FileNotFoundException, UnsupportedEncodingException {
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while(!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Parser parser = new Parser(fullCommand);
+                Command c = Parser.parse(parser.getCommand(), parser.getDetail(), INDENT);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void runOld() throws FileNotFoundException, UnsupportedEncodingException {
         int listPointer;
 
-        ui.start();
-        String input = ui.readLine();
-        Parser parser = new Parser(input);
+        ui.showWelcome();
+        String fullCommand = ui.readCommand();
+        Parser parser = new Parser(fullCommand);
 
         while (!parser.getCommand().equals("bye")) {
             if (parser.getCommand().equals("list")) {
@@ -87,13 +107,13 @@ public class Duke {
                 ui.printResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-( Try todo, " +
                         "event and deadline");
             }
-            input = ui.readLine();
-            parser = new Parser(input);
+            fullCommand = ui.readCommand();
+            parser = new Parser(fullCommand);
         }
         ui.exit();
     }
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void main(String[] args) {
         new Duke(FILENAME).run();
     }
 }

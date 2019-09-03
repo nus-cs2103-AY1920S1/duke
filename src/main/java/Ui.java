@@ -9,7 +9,7 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
-    public String readLine() {
+    public String readCommand() {
         return scanner.nextLine();
     }
 
@@ -20,7 +20,7 @@ public class Ui {
         System.out.println();
     }
 
-    public void start() {
+    public void showWelcome() {
         printIndentedString("Hello! I'm Duke\n" +
                 INDENT + " " + "What can I do for you?", INDENT);
     }
@@ -32,6 +32,8 @@ public class Ui {
     public void showLoadingError() {
         printIndentedString("Loading error! New file created.", INDENT);
     }
+
+    public void showFileMissingError() { printIndentedString("File not found. Check file directory.", INDENT); }
 
     public void printError(String errorMessage) {
         printIndentedString(errorMessage, INDENT);

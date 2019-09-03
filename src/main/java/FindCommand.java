@@ -1,17 +1,19 @@
-import java.util.ArrayList;
-
 public class FindCommand extends Command {
 
-    String command;
-    
-    public FindCommand(String command){
-        this.command = command;
+    public FindCommand(String command, TaskList taskList ){
+        super(command, taskList);
     }
 
-    public void execute(TaskList taskList){
+    @Override
+    public String processCommand(){
+        return super.command;
+    }
+
+    @Override
+    public String execute(String processedCommand){
         TaskList taskListsWithKeyWords = new TaskList();
         
-        int length = taskList.size();
+        int length = super.taskList.size();
 
         for(int i = 0; i < length; i++){
             Task currentTask = taskList.getTask(i);
@@ -20,8 +22,7 @@ public class FindCommand extends Command {
                 taskListsWithKeyWords.add(currentTask);
             }
         }
-
-        taskListsWithKeyWords.printTaskList();
+        return taskListsWithKeyWords.toString();
     }
     
 }

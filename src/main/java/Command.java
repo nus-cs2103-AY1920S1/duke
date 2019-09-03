@@ -1,11 +1,18 @@
-public abstract class Command{
+public class Command{
+    protected String command;
+    protected TaskList taskList;
 
-    /**
-     * An abstract method that executes the command 
-     *
-     * @param taskList the taskList that the command requires
-     * @return void
-     */
-    abstract public void execute(TaskList taskList);
+    public Command (String command, TaskList taskList){
+        this.command = command;
+        this.taskList = taskList;
+    }
+    
+    public String processCommand(){
+        return null;
+    }
+
+    public String execute(String processedCommand){
+        return null;
+    };
 
 }

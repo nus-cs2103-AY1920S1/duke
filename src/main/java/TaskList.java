@@ -28,11 +28,12 @@ public class TaskList{
     }
 
     public String deleteTask(int index){
-        taskList.remove(index);
+        
 
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:" +"\n");
         sb.append(taskList.get(index) +"\n");
+        taskList.remove(index);
         sb.append(String.format("Now you have %d tasks in the list.", taskList.size() ));
         
         return sb.toString();
@@ -47,20 +48,6 @@ public class TaskList{
         currentTask.setStatus(true);
         String message = "Nice! I've marked this task as done:\n" + currentTask;
         return message;
-    }
-
-    public ArrayList <Task> getTaskList(){
-        return taskList;
-    }
-
-    public void printTaskList(){
-        int size = taskList.size();
-
-        for(int i = 0; i < size; i ++){
-            Integer number = i + 1;
-            String message = number + ". " + taskList.get(i);
-            System.out.println(message);
-        }
     }
 
     @Override

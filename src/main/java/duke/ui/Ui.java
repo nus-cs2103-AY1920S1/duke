@@ -14,9 +14,9 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showWelcome() {
+    public String showWelcome() {
         String greetingText = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greetingText);
+        return greetingText;
     }
 
     /**

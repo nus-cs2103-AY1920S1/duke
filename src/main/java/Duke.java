@@ -8,7 +8,7 @@ public class Duke{
         public String toString() {
             String toReturn = "";
             for (int i = 0; i < this.size(); i++) {
-                toReturn = toReturn.concat((i + 1) + ". " + this.get(i).toString() + "\n    ");
+                toReturn = toReturn.concat((i + 1) + "." + this.get(i).toString() + "\n     ");
             }
 
             return toReturn.substring(0, toReturn.length() - 5);
@@ -25,15 +25,20 @@ public class Duke{
         String userCommand = "";
         String userInput;
         while (!userCommand.equals("exit")) {
-            userInput = consoleScanner.next();
+            userInput = consoleScanner.nextLine();
             userCommand = userInput.split(" ",2)[0];
             switch(userCommand) {
                 case "list":
                     dukePrint(todoList);
                     break;
+                case "done":
+                    ListItem target = todoList.get(Integer.parseInt(userInput.split(" ", 2)[1]) - 1);
+                    target.done();
+                    dukePrint("Nice! I've marked this task as done:", "  " + target);
+                    break;
                 default:
+                    System.out.println("Here");
                     addToTodo(userInput);
-
             }
 
         }
@@ -58,7 +63,7 @@ public class Duke{
     private static void dukePrint(Object... texts) {
         System.out.println("    _____________________________");
         for (Object text : texts) {
-            System.out.println("    " + text);
+            System.out.println("     " + text);
         }
         System.out.println("    _____________________________");
 

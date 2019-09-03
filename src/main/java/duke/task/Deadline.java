@@ -28,12 +28,15 @@ public class Deadline extends Task {
             year = Integer.valueOf(by.substring(6, 10));
             String[] temp = by.split(" ");
             time = Integer.valueOf(temp[1]);
+            this.by = formatDateAndTime(year, month, date, time);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! Wrong input format. \n"
                     + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"\n");
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Wrong input format. \n"
                     + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"\n");
+        } catch (DukeException e) {
+            throw e;
         }
     }
 

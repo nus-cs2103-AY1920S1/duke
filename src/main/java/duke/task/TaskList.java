@@ -43,7 +43,7 @@ public class TaskList {
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect.
      */
-    public void addTask(String command, Ui ui) throws DukeException {
+    public String addTask(String command, Ui ui) throws DukeException {
         String[] words = command.split(" ");
         String type = words[0];
         Task task;
@@ -58,14 +58,16 @@ public class TaskList {
                 } else if (type.equalsIgnoreCase("event")) {
                     task = new Event(command.substring(6, index - 1), command.substring(index + 4));
                 } else {
-                    throw new IllegalArgumentException("\tOOPS!!!No such task type.");
+                    throw new IllegalArgumentException("OOPS!!!No such task type.");
                 }
             }
             tasks.add(task);
-            ui.addedTask(task, tasks.size());
+            return ui.addedTask(task, tasks.size());
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("\tOOPS!!! Wrong input format. "
-                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>");
+            throw new DukeException("OOPS!!! Wrong input format. \n"
+                    + "\"Todo <description>\" or\n"
+                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\" or\n"
+                    + "\"Event <description> /at <DD/MM/YYYY> <XX:XX>\"\n");
         } catch (IllegalArgumentException e) {
             throw new DukeException(e.getMessage());
         }
@@ -78,17 +80,17 @@ public class TaskList {
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect.
      */
-    public void deleteTask(String command, Ui ui) throws DukeException {
+    public String deleteTask(String command, Ui ui) throws DukeException {
         try {
             String[] done = command.split(" ");
             int number = Integer.valueOf(done[1]);
             Task task = tasks.get(number - 1);
             tasks.remove(number - 1);
-            ui.deletedTask(task, tasks.size());
+            return ui.deletedTask(task, tasks.size());
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\tOOPS!!! The task number cannot be empty.");
+            throw new DukeException("OOPS!!! The task number cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\tOOPS!!! The task number does not exist.");
+            throw new DukeException("OOPS!!! The task number does not exist.");
         }
     }
 
@@ -99,20 +101,20 @@ public class TaskList {
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect or if the task is already done.
      */
-    public void doneTask(String command, Ui ui) throws DukeException {
+    public String doneTask(String command, Ui ui) throws DukeException {
         try {
             String[] done = command.split(" ");
             int number = Integer.valueOf(done[1]);
             if (tasks.get(number - 1).isCompleted()) {
-                throw new DukeException("\tOOPS!!! The task is already marked as done.");
+                throw new DukeException("OOPS!!! The task is already marked as done.");
             } else {
                 tasks.get(number - 1).markAsDone();
-                ui.doneTask(tasks, number);
+                return ui.doneTask(tasks, number);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\tOOPS!!! The task number cannot be empty.");
+            throw new DukeException("OOPS!!! The task number cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\tOOPS!!! The task number does not exist.");
+            throw new DukeException("OOPS!!! The task number does not exist.");
         }
     }
 }

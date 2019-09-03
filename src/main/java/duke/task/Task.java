@@ -20,7 +20,7 @@ public class Task {
      * @return The current status icon of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+        return (isDone ? "O" : "X"); //return tick or X symbols
     }
 
     /**

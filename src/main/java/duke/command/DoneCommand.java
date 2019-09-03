@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.ui.Ui;
 
 import duke.task.TaskList;
@@ -27,8 +28,15 @@ public class DoneCommand extends Command {
      * @param storage The Storage object we are currently using.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.doneTask(command, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = "";
+        try {
+            response = taskList.doneTask(command, ui);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            return response;
+        }
     }
 
     /**

@@ -15,7 +15,7 @@ public abstract class Command {
      * @param ui The Ui object we are currently using.
      * @param storage The Storage object we are currently using.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Checks if the command is an ExitCommand.

@@ -20,6 +20,7 @@ public class Parser {
         keywordToCommand.put("todo", new AddCommand());
         keywordToCommand.put("deadline", new AddCommand());
         keywordToCommand.put("event", new AddCommand());
+        keywordToCommand.put("find", new FindCommand());
         return keywordToCommand;
     }
 
@@ -98,5 +99,10 @@ public class Parser {
             return new Event(description, date);
         }
         throw new DukeException("Invalid task input.");
+    }
+
+    public static String parseFind(String input) {
+        String phrase = input.split("find")[1];
+        return phrase;
     }
 }

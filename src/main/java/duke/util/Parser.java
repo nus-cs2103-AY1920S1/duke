@@ -40,7 +40,7 @@ public class Parser {
             throw new DukeException("     Please enter the description!");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("     Please enter the time/date!!");
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
     }

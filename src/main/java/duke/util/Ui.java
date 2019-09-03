@@ -10,9 +10,9 @@ public class Ui {
     private String line = "    ____________________________________________________________";
 
     public void showWelcome() {
-        System.out.println(line + "\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" + line);
+        System.out.println(line + "\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n" + line);
     }
 
     public void showLoadingError(String e) {
@@ -33,8 +33,8 @@ public class Ui {
 
     void showDeleted(Task task, int numOfTasks) {
         System.out.println(
-                "     Noted. I've removed this task: \n       " + task + "\n" +
-                        "     Now you have " + numOfTasks + " tasks in the list.");
+                "     Noted. I've removed this task: \n       " + task
+                        + "\n     Now you have " + numOfTasks + " tasks in the list.");
     }
 
     public void showBye() {
@@ -46,8 +46,8 @@ public class Ui {
     }
 
     void showAdded(Task task, int numOfTasks) {
-        System.out.println("     Got it. I've added this task: \n       " + task +
-                "\n     Now you have " + numOfTasks + " tasks in the list.");
+        System.out.println("     Got it. I've added this task: \n       " + task
+                + "\n     Now you have " + numOfTasks + " tasks in the list.");
     }
 
     void showDone(Task task) {

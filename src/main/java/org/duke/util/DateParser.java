@@ -10,17 +10,83 @@ import java.time.temporal.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * Helper class to parse rough date/time strings.
+ */
 public class DateParser {
 
+    private static final DateTimeFormatter weekdayFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive().parseLenient()
+                    .optionalStart()
+                    .appendText(ChronoField.DAY_OF_WEEK, TextStyle.SHORT)
+                    .optionalEnd()
+                    .optionalStart()
+                    .appendText(ChronoField.DAY_OF_WEEK, TextStyle.FULL)
+                    .optionalEnd()
+                    .toFormatter();
+    private static final DateTimeFormatter dmFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseLenient()
+                    .appendValue(ChronoField.DAY_OF_MONTH)
+                    .appendLiteral(' ')
+                    .appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT).toFormatter();
+    private static final DateTimeFormatter mdFormatter =
+            new DateTimeFormatterBuilder()
+                    .parseLenient()
+                    .appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
+                    .appendLiteral(' ')
+                    .appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
+    private static final DateTimeFormatter[] dateFormatters = new DateTimeFormatter[]{
+            dmFormatter, addYear(dmFormatter),
+            mdFormatter, addYear(mdFormatter),
+            DateTimeFormatter.ISO_LOCAL_DATE
+    };
+    private static final DateTimeFormatter[] timeFormatters = new DateTimeFormatter[]{
+            DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM),
+            DateTimeFormatter.ofPattern("kkmm'h'"),
+            new DateTimeFormatterBuilder()
+                    .appendPattern("h[[':']['.']mm][' ']")
+                    .parseCaseInsensitive()
+                    .optionalStart().appendText(ChronoField.AMPM_OF_DAY).optionalEnd()
+                    .toFormatter(),
+            DateTimeFormatter.ISO_LOCAL_TIME
+    };
     private String text;
     private ParsePosition pos;
+    private DateParser(String input) {
+        this.text = input;
+        this.pos = new ParsePosition(0);
+    }
+
+    private static DateTimeFormatter addYear(DateTimeFormatter fmt) {
+        return new DateTimeFormatterBuilder()
+                .append(fmt)
+                .parseLenient()
+                .appendLiteral(' ')
+                .appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
+                .toFormatter();
+    }
+
+    /**
+     * Given an input string describing a date+time, return a {@link java.time.LocalDateTime} representing it.
+     * <p>
+     * If the input specifies a specific date, we use that date.
+     * Else, it returns the next matching date in the future.
+     *
+     * @param input Rough date input
+     * @return {@link java.time.LocalDateTime} object, or null if no valid parse.
+     */
+    public static LocalDateTime parse(String input) {
+        return new DateParser(input).parseDateTime();
+    }
 
     private void eatWhitespace() {
         int i;
         for (i = pos.getIndex(); i < text.length(); i++) {
-			if (!Character.isWhitespace(text.charAt(i))) {
-				break;
-			}
+            if (!Character.isWhitespace(text.charAt(i))) {
+                break;
+            }
         }
         pos.setIndex(i);
     }
@@ -60,56 +126,6 @@ public class DateParser {
             return null;
         });
     }
-
-    private static final DateTimeFormatter weekdayFormatter =
-            new DateTimeFormatterBuilder()
-                    .parseCaseInsensitive().parseLenient()
-                    .optionalStart()
-                    .appendText(ChronoField.DAY_OF_WEEK, TextStyle.SHORT)
-                    .optionalEnd()
-                    .optionalStart()
-                    .appendText(ChronoField.DAY_OF_WEEK, TextStyle.FULL)
-                    .optionalEnd()
-                    .toFormatter();
-
-    private static final DateTimeFormatter dmFormatter =
-            new DateTimeFormatterBuilder()
-                    .parseLenient()
-                    .appendValue(ChronoField.DAY_OF_MONTH)
-                    .appendLiteral(' ')
-                    .appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT).toFormatter();
-    private static final DateTimeFormatter mdFormatter =
-            new DateTimeFormatterBuilder()
-                    .parseLenient()
-                    .appendText(ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
-                    .appendLiteral(' ')
-                    .appendValue(ChronoField.DAY_OF_MONTH).toFormatter();
-
-    private static DateTimeFormatter addYear(DateTimeFormatter fmt) {
-        return new DateTimeFormatterBuilder()
-                .append(fmt)
-                .parseLenient()
-                .appendLiteral(' ')
-                .appendValueReduced(ChronoField.YEAR, 2, 4, 2000)
-                .toFormatter();
-    }
-
-    private static final DateTimeFormatter[] dateFormatters = new DateTimeFormatter[]{
-            dmFormatter, addYear(dmFormatter),
-            mdFormatter, addYear(mdFormatter),
-            DateTimeFormatter.ISO_LOCAL_DATE
-    };
-
-    private static final DateTimeFormatter[] timeFormatters = new DateTimeFormatter[]{
-            DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM),
-            DateTimeFormatter.ofPattern("kkmm'h'"),
-            new DateTimeFormatterBuilder()
-                    .appendPattern("h[[':']['.']mm][' ']")
-                    .parseCaseInsensitive()
-                    .optionalStart().appendText(ChronoField.AMPM_OF_DAY).optionalEnd()
-                    .toFormatter(),
-            DateTimeFormatter.ISO_LOCAL_TIME
-    };
 
     private Stream<LocalDate> parseWeekday(DayOfWeek weekday) {
         TemporalAdjuster nextOrSameWeekday = TemporalAdjusters.nextOrSame(weekday);
@@ -199,14 +215,5 @@ public class DateParser {
             }
         }
         return null;
-    }
-
-    private DateParser(String input) {
-        this.text = input;
-        this.pos = new ParsePosition(0);
-    }
-
-    public static LocalDateTime parse(String input) {
-        return new DateParser(input).parseDateTime();
     }
 }

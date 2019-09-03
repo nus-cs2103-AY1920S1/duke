@@ -6,6 +6,9 @@ import org.duke.json.Registry;
 
 import java.util.Map;
 
+/**
+ * Represents a basic To-Do Task.
+ */
 public class Task {
     private static final String completedMarker = "[✓]";
     private static final String incompleteMarker = "[✗]";
@@ -39,10 +42,19 @@ public class Task {
         ctx.writeObject(value::toJson);
     }
 
+
+    /**
+     * Mark this task as completed.
+     */
     public void markComplete() {
         this.completed = true;
     }
 
+    /**
+     * Checks if the task is marked as complete.
+     *
+     * @return Whether task has been marked as completed.
+     */
     public boolean isCompleted() {
         return this.completed;
     }

@@ -5,11 +5,28 @@ import java.io.IOException;
 import java.io.PushbackReader;
 import java.io.Reader;
 
+/**
+ * This class reads JSON objects off a {@link Reader}.
+ */
 public class JsonParser {
     private final PushbackReader reader;
 
     private JsonParser(Reader reader) {
         this.reader = new PushbackReader(new BufferedReader(reader));
+    }
+
+    /**
+     * Given a input {@param reader}, and a way to extract a value ({@param handler}),
+     * parse out a JSON value from the input.
+     *
+     * @param r       Input reader
+     * @param handler JSON Value handler
+     * @param <T>     Return type
+     * @return Parsed value
+     */
+    public static <T> T parse(Reader r, ValueHandler<T> handler) {
+        JsonParser p = new JsonParser(r);
+        return p.readValue(handler);
     }
 
     private char next() {
@@ -40,12 +57,6 @@ public class JsonParser {
                 break;
             }
         }
-    }
-
-    private enum CommaState {
-        Empty,
-        ReadElement,
-        ReadComma
     }
 
     private <T> T readObjectFields(ObjectHandler<T> handler) {
@@ -229,8 +240,9 @@ public class JsonParser {
         }
     }
 
-    public static <T> T parse(Reader r, ValueHandler<T> handler) {
-        JsonParser p = new JsonParser(r);
-        return p.readValue(handler);
+    private enum CommaState {
+        Empty,
+        ReadElement,
+        ReadComma
     }
 }

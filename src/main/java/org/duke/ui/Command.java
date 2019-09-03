@@ -4,20 +4,34 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * Represents parsed user input, divided into a command type and arguments.
+ */
 public class Command {
+    private static final Pattern switchBoundary = Pattern.compile("\\s+/");
+    private static final Pattern cmdBoundary = Pattern.compile("\\s+");
     public final String type;
     public final String arguments;
     public final Map<String, String> namedArguments;
-
     public Command(String type, String arguments, Map<String, String> namedArguments) {
         this.type = type;
         this.arguments = arguments;
         this.namedArguments = namedArguments;
     }
 
-    private static final Pattern switchBoundary = Pattern.compile("\\s+/");
-    private static final Pattern cmdBoundary = Pattern.compile("\\s+");
-
+    /**
+     * From user input, parse it into a {@link Command}.
+     * <p>
+     * First word is the main command type.
+     * The main arguments are the remainder of words,
+     * up til the first named argument or end of string.
+     * <p>
+     * Each named argument starts with a switch "/(name)".
+     * The argument spans up til the next named argument or end of string.
+     *
+     * @param input User input
+     * @return Parsed command, or null if invalid
+     */
     public static Command parse(String input) {
         input = input.trim();
 

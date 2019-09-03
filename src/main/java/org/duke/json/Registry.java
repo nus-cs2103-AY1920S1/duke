@@ -6,18 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+/**
+ * Registry mapping Java classes to appropriate JSON encoder functions.
+ */
 public class Registry {
     private static HashMap<Class<?>, BiConsumer<JsonWriter.ValueContext, ?>> encoderMap
             = new HashMap<>();
     private static HashMap<Class<?>, BiConsumer<JsonWriter.ValueContext, ?>> encoderCache
             = new HashMap<>();
-
-    public static <T> void register(
-            Class<T> clazz,
-            BiConsumer<JsonWriter.ValueContext, T> encoder) {
-        encoderMap.put(clazz, encoder);
-        encoderCache.clear();
-    }
 
     static {
         register(List.class, (ctx, list) ->
@@ -36,6 +32,13 @@ public class Registry {
         register(String.class, (ctx, str) -> ctx.writeString(str));
         register(Boolean.class, (ctx, b) -> ctx.writeBoolean(b));
         register(Object.class, (ctx, obj) -> ctx.writeString(obj.toString()));
+    }
+
+    public static <T> void register(
+            Class<T> clazz,
+            BiConsumer<JsonWriter.ValueContext, T> encoder) {
+        encoderMap.put(clazz, encoder);
+        encoderCache.clear();
     }
 
     private static <T> BiConsumer<JsonWriter.ValueContext, T> getEncoderInner(Class<? extends T> clazz) {

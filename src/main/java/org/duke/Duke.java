@@ -17,6 +17,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Main class for Duke.
+ */
 public class Duke {
 
     private static final String[] initialGreeting = new String[]{

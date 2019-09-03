@@ -8,8 +8,134 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+/**
+ * This class handles serialization of Java values into JSON values.
+ */
 public class JsonWriter implements AutoCloseable {
 
+    private final Writer writer;
+    private int indentationLevel = 0;
+    private ValueContext valueContext = new ValueContext();
+
+    /**
+     * Constructs a JsonWriter wrapping a output writer.
+     *
+     * @param writer Output writer
+     */
+    public JsonWriter(Writer writer) {
+        this.writer = new BufferedWriter(writer);
+    }
+
+    private static String escapeString(String unescaped) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < unescaped.length(); i++) {
+            char c = unescaped.charAt(i);
+            switch (c) {
+            case '\\':
+            case '\"':
+            case '/':
+                sb.append("\\").append(c);
+                break;
+            case '\b':
+                sb.append("\\b");
+                break;
+            case '\f':
+                sb.append("\\f");
+                break;
+            case '\n':
+                sb.append("\\n");
+                break;
+            case '\r':
+                sb.append("\\r");
+                break;
+            case '\t':
+                sb.append("\\t");
+                break;
+            default:
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Writes a JSON value, given a function expecting a {@link ValueContext}.
+     *
+     * @param coder Encoding function.
+     */
+    public void writeValue(Consumer<ValueContext> coder) {
+        coder.accept(this.valueContext);
+    }
+
+    /**
+     * Writes the given value, using a handler from {@link Registry}.
+     *
+     * @param value Java value to write
+     * @param <T>   Type of value
+     */
+    public <T> void writeValue(T value) {
+        this.valueContext.writeValue(value);
+    }
+
+    private JsonWriter beginLine() {
+        try {
+            this.writer.write('\n');
+            for (int i = 0; i < this.indentationLevel; i++) {
+                this.writer.write('\t');
+            }
+        } catch (IOException e) {
+            throw new JsonException("IO error", e);
+        }
+        return this;
+    }
+
+    private JsonWriter appendQuoted(String unescaped) {
+        try {
+            String escaped = JsonWriter.escapeString(unescaped);
+            this.writer.write('"');
+            this.writer.write(escaped);
+            this.writer.write('"');
+        } catch (IOException e) {
+            throw new JsonException("IO error", e);
+        }
+        return this;
+    }
+
+    private JsonWriter append(String literal) {
+        try {
+            this.writer.write(literal);
+        } catch (IOException e) {
+            throw new JsonException("IO error", e);
+        }
+        return this;
+    }
+
+    private JsonWriter append(char literal) {
+        try {
+            this.writer.write(literal);
+        } catch (IOException e) {
+            throw new JsonException("IO error", e);
+        }
+        return this;
+    }
+
+    /**
+     * Flushes the underlying Writer.
+     *
+     * @throws IOException
+     */
+    public void flush() throws IOException {
+        this.writer.flush();
+    }
+
+    @Override
+    public void close() throws Exception {
+        this.writer.close();
+    }
+
+    /**
+     * This represents the context, of currently reading a JSON value.
+     */
     public class ValueContext {
         public void writeString(String s) {
             JsonWriter.this.appendQuoted(s);
@@ -72,111 +198,19 @@ public class JsonWriter implements AutoCloseable {
         }
     }
 
-    private int indentationLevel = 0;
-    private final Writer writer;
-
-    private ValueContext valueContext = new ValueContext();
-
-    public JsonWriter(Writer writer) {
-        this.writer = new BufferedWriter(writer);
-    }
-
-    public void writeValue(Consumer<ValueContext> coder) {
-        coder.accept(this.valueContext);
-    }
-
-    public <T> void writeValue(T value) {
-        this.valueContext.writeValue(value);
-    }
-
-
-    private static String escapeString(String unescaped) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < unescaped.length(); i++) {
-            char c = unescaped.charAt(i);
-            switch (c) {
-            case '\\':
-            case '\"':
-            case '/':
-                sb.append("\\").append(c);
-                break;
-            case '\b':
-                sb.append("\\b");
-                break;
-            case '\f':
-                sb.append("\\f");
-                break;
-            case '\n':
-                sb.append("\\n");
-                break;
-            case '\r':
-                sb.append("\\r");
-                break;
-            case '\t':
-                sb.append("\\t");
-                break;
-            default:
-                sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-
-    private JsonWriter beginLine() {
-        try {
-            this.writer.write('\n');
-            for (int i = 0; i < this.indentationLevel; i++) {
-                this.writer.write('\t');
-            }
-        } catch (IOException e) {
-            throw new JsonException("IO error", e);
-        }
-        return this;
-    }
-
-    private JsonWriter appendQuoted(String unescaped) {
-        try {
-            String escaped = JsonWriter.escapeString(unescaped);
-            this.writer.write('"');
-            this.writer.write(escaped);
-            this.writer.write('"');
-        } catch (IOException e) {
-            throw new JsonException("IO error", e);
-        }
-        return this;
-    }
-
-    private JsonWriter append(String literal) {
-        try {
-            this.writer.write(literal);
-        } catch (IOException e) {
-            throw new JsonException("IO error", e);
-        }
-        return this;
-    }
-
-    private JsonWriter append(char literal) {
-        try {
-            this.writer.write(literal);
-        } catch (IOException e) {
-            throw new JsonException("IO error", e);
-        }
-        return this;
-    }
-
     private abstract class BlockContext implements AutoCloseable {
-        private boolean hasPrev = false;
         private static final String separator = ",";
-
-        protected abstract char blockStart();
-
-        protected abstract char blockEnd();
+        private boolean hasPrev = false;
 
         protected BlockContext() {
             JsonWriter.this.append(this.blockStart());
             JsonWriter.this.indentationLevel++;
             JsonWriter.this.beginLine();
         }
+
+        protected abstract char blockStart();
+
+        protected abstract char blockEnd();
 
         protected void startObject() {
             if (this.hasPrev) {
@@ -193,6 +227,9 @@ public class JsonWriter implements AutoCloseable {
         }
     }
 
+    /**
+     * This represents the context, of currently reading a JSON object.
+     */
     public class ObjectContext extends BlockContext {
         protected char blockStart() {
             return '{';
@@ -213,6 +250,9 @@ public class JsonWriter implements AutoCloseable {
         }
     }
 
+    /**
+     * This represents the context, of currently reading a JSON array.
+     */
     public class ArrayContext extends BlockContext {
         protected char blockStart() {
             return '[';
@@ -226,14 +266,5 @@ public class JsonWriter implements AutoCloseable {
             this.startObject();
             coder.accept(JsonWriter.this.valueContext);
         }
-    }
-
-    public void flush() throws IOException {
-        this.writer.flush();
-    }
-
-    @Override
-    public void close() throws Exception {
-        this.writer.close();
     }
 }

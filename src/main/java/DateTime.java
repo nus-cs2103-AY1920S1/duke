@@ -28,8 +28,9 @@ public class DateTime {
      *
      * @param dateTimeString Date and time given in the format DD/MM/YYYY HHMM.
      * @return DateTime object created.
+     * @throws ArrayIndexOutOfBoundsException If date and time given is not in the accepted format.
      */
-    public static DateTime create(String dateTimeString) {
+    public static DateTime create(String dateTimeString) throws ArrayIndexOutOfBoundsException {
         try {
             String[] currArray = dateTimeString.split("\\s+", 2);
             String dateString = currArray[0];

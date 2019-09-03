@@ -1,53 +1,41 @@
 import java.util.Scanner;
 
 public class Parser {
-    Ui myUi;
-    TaskList myList;
 
 
-    public Parser(Ui x, TaskList y) {
-        myUi = x;
-        myList = y;
+    public Parser() {
     }
 
-    public void parse() {
-        Scanner myInputReader = new Scanner(System.in);
-        String userInput = myInputReader.nextLine();
-
-        while (!userInput.equalsIgnoreCase("bye")) {
-            try {
-                if (userInput.equalsIgnoreCase("list")) {
-                    myUi.printTasks(myList.getList());
+    public Command parse(String userInput) throws DukeException, incompleteInputException {
+                 if (userInput.equalsIgnoreCase("list")) {
+                    return new ListCommand();
                 } else if (userInput.contains("done")) {
                     String[] numTasks = userInput.split(" ");
                     String numberAsString = numTasks[1];
                     int number = Integer.parseInt(numberAsString);
-                    myUi.printDone(myList.taskDone(number - 1));
+                    return new DoneCommand(number-1);
                 } else if (userInput.contains("delete")) {
                     String[] numTasks = userInput.split(" ");
                     String numberAsString = numTasks[1];
                     int number = Integer.parseInt(numberAsString);
-                    myUi.printDelete(myList.deleteTask(number - 1), myList);
+                    return new DeleteCommand(number-1);
                 } else {
-                    //Adding is handled in tasklist
-                    Task current = myList.addTasks(userInput);
-                    myUi.printAdd(current, myList);
-                }
-            } catch (DukeException err) {
-                String separator = "    ____________________________________________________________";
-                System.out.println(separator);
-                System.out.println("    " + err.getMessage());
-                System.out.println(separator + "\n");
-            } catch (incompleteInputException otherErr) {
-                String separator = "    ____________________________________________________________";
-                System.out.println(separator);
-                System.out.println("    " + otherErr.getMessage());
-                System.out.println(separator + "\n");
-            } finally {
-                userInput = myInputReader.nextLine();
-            }
+                     if((userInput.contains("todo")&&(userInput.length()>5))||
+                             (userInput.contains("deadline")&&(userInput.length()>9)&&userInput.contains("/")) ||
+                             (userInput.contains("event")&&(userInput.length()>6)&&userInput.contains("/"))) {
+                            return new AddCommand(userInput);
+                     } else if(userInput.contains("todo")) {
+                         throw new incompleteInputException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                     } else if(userInput.contains("deadline")&&(!(userInput.contains("/")))) {
+                         throw new incompleteInputException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                     } else if (userInput.contains("event")&&(!(userInput.contains("/")))) {
+                         throw new incompleteInputException("\u2639 OOPS!!! The description of an event cannot be empty.");
+                     } else {
+                         throw new DukeException();
+                     }
 
         }
     }
 }
+
 

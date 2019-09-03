@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -8,12 +9,12 @@ public class Duke {
     Storage myTaskManager;
     Parser myParser;
 
-    public Duke() {
+    public Duke(String x) {
         myUserInterface = new Ui();
         //Create TaskList for Duke
         myTaskList = new TaskList();
-        myTaskManager = new Storage();
-        myParser = new Parser(myUserInterface,myTaskList);
+        myTaskManager = new Storage(x);
+        myParser = new Parser();
         //Copy tasks from .txt file to my taskList
         try {
             myTaskManager.loadTasks(myTaskList);
@@ -23,11 +24,25 @@ public class Duke {
         }
     }
 
-    public void run() {
+    public void run()  {
         //Say Hello
-        myUserInterface.helloMessage();
+        HelloCommand sayHello = new HelloCommand();
+        sayHello.executeCommand(myTaskList,myUserInterface);
 
-        myParser.parse();
+        Scanner userInput = new Scanner(System.in);
+        while(userInput.hasNextLine()) {
+            String temp = userInput.nextLine();
+            if (temp.equalsIgnoreCase("bye")) {
+                break;
+            }
+            try {
+                Command curr = myParser.parse(temp);
+                curr.executeCommand(myTaskList, myUserInterface);
+            } catch (Exception err) {
+                myUserInterface.printError(textFormatter.errorFormat(err));
+            }
+        }
+
         //Update the .txt file with the new changes
 
         try {
@@ -37,13 +52,14 @@ public class Duke {
             System.out.println(err);
 
         }
-        myUserInterface.byeMessage();
+        ByeCommand sayBye = new ByeCommand();
+        sayBye.executeCommand(myTaskList,myUserInterface);
 
     }
 
 
     public static void main(String[] args) {
-        Duke testRun = new Duke();
+        Duke testRun = new Duke("data/loggedData.txt");
         testRun.run();
 
     }

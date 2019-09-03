@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class Storage {
     String filePath;
 
-    public Storage() {
-    filePath ="data/loggedData.txt";
+    public Storage(String x) {
+    filePath =x;
     }
     //import tasks from database
     protected void loadTasks(TaskList myList) throws FileNotFoundException {

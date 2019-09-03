@@ -15,42 +15,35 @@ public class TaskList {
 
 
     //Add and print the added notes
-    public Task addTasks(String addedTask) throws DukeException, incompleteInputException {
+    public Task addTasks(String addedTask)  {
         Task temp;
-        if(addedTask.contains("todo")&&(addedTask.length()>5)) {
+        if(addedTask.contains("todo")) {
             String replaced = addedTask.replace("todo ","");
             temp = new todoTask(replaced,false);
             myTaskList.add(temp);
             return temp;
-        } else if(addedTask.contains("deadline")&&(addedTask.length()>9)&&addedTask.contains("/")) {
+        } else if(addedTask.contains("deadline")) {
             String replaced = addedTask.replace("deadline ","");
             String[] deadLines = replaced.split("by");
             String endTime = deadLines[1];
             temp = new deadlineTask(deadLines[0].replace("/",""),false,TimeFormatter.convertToDate(endTime));
             myTaskList.add(temp);
             return temp;
-        } else if (addedTask.contains("event")&&(addedTask.length()>6)&&addedTask.contains("/")) {
+        } else if (addedTask.contains("event")) {
             String replaced = addedTask.replace("event ","");
             String[] events = replaced.split("at");
             String eventTime = events[1];
             temp = new eventTask(events[0].replace("/",""),false,TimeFormatter.convertToDate(eventTime));
             myTaskList.add(temp);
             return temp;
-        } else if(addedTask.contains("todo")) {
-            throw new incompleteInputException("\u2639 OOPS!!! The description of a todo cannot be empty.");
-        } else if(addedTask.contains("deadline")&&(!(addedTask.contains("/")))) {
-            throw new incompleteInputException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
-        } else if (addedTask.contains("event")&&(!(addedTask.contains("/")))) {
-            throw new incompleteInputException("\u2639 OOPS!!! The description of an event cannot be empty.");
-        } else {
-            throw new DukeException();
         }
+        return null;
         }
 
 
     //Retrieve the task, complete it and return the formatted String
     //"Nice! I've marked..."
-    public String taskDone(int index) {
+    public Task taskDone(int index) {
         return myTaskList.get(index).taskComplete();
     }
 

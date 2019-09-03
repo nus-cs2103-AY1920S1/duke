@@ -6,14 +6,14 @@ public class TaskListTest {
     @Test
     void sizeTest() {
         TaskList temp = new TaskList();
-        temp.add("todo read book");
+        temp.addTasks("todo read book");
         assertEquals(1, temp.getSize());
     }
 
     @Test
     void deleteTest() {
         TaskList temp = new TaskList();
-        temp.add("todo read book");
+        temp.addTasks("todo read book");
         Task curr = temp.deleteTask(1);
         assertEquals(1, curr.getName());
     }

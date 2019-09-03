@@ -22,8 +22,11 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Retrieve a response from the user input and return the response that duke
+     * will reply.
+     *
+     * @param input the user input text
+     * @return the response text
      */
     public String getResponse(String input) {
         if (input.equals("bye")) {

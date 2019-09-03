@@ -48,13 +48,6 @@ public class TaskList {
     }
 
     /**
-<<<<<<< HEAD
-     * Adds a task.
-     * @param type type of task to be added
-     * @param description description of new task
-     * @throws DukeException if type of task connot be recognised or task description cannot be parsed
-     */
-=======
      * Finds tasks that have matching words in their descriptions.
      * @param target searching term
      * @return TaskList of matching tasks
@@ -69,7 +62,12 @@ public class TaskList {
         return new TaskList(targets);
     }
 
->>>>>>> branch-level-9
+    /**
+     * Adds a task.
+     * @param type type of task to be added
+     * @param description description of new task
+     * @throws DukeException if type of task connot be recognised or task description cannot be parsed
+     */
     public void add(String type, String description) throws DukeException {
         Task newTask;
         switch (type) {

@@ -4,19 +4,16 @@
 public class Task {
     boolean done = false;
     String content;
-    int order;
 
     /**
      * task constructor
      * 
      * @param content the description of the task
      * @param status  whether the task is done or not
-     * @param order   the order of the task in the list
      */
-    public Task(String content, int status, int order) {
+    public Task(String content, int status) {
         this.content = content;
         done = status == 1 ? true : false;
-        this.order = order;
     }
 
     public String toString() {

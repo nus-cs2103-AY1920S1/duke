@@ -8,7 +8,7 @@ import ui.Ui;
 import java.io.IOException;
 
 /**
- * Encapsulates command for adding todo, deadline, and event tasks to list.
+ * Encapsulates command for adding to-do, deadline, and event tasks to list.
  *
  * @author atharvjoshi
  * @version CS2103 AY19/20 Sem 1 iP Week 4
@@ -32,23 +32,22 @@ public class AddCommand extends Command {
      * Executes the add command task by adding task to list, sending a message
      * to be printed on the user interface, and asking storage to update the
      * task list on the hard drive.
-     * @param tasks the task list the task is to be added to
-     * @param ui the user interface associated with this run of Duke
-     * @param storage the storage handler associated with this run of Duke
-     * @throws IOException when file the list is to be written to is not found
+     * @param tasks the task list the task is to be added to.
+     * @param ui the user interface associated with this run of Duke.
+     * @param storage the storage handler associated with this run of Duke.
+     * @throws IOException when file the list is to be written to is not found.
+     * @return Duke's response to the user command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws IOException {
-        if (this.task != null) {
-            // add task to list
-            tasks.add(this.task);
+        // add task to list
+        tasks.add(this.task);
 
-            // call UI to send message informing user that task has been added
-            ui.showAddTaskMessage(this.task, tasks.size());
+        // call storage to update the saved file of tasks
+        storage.update(tasks);
 
-            // call storage to update the saved file of tasks
-            storage.update(tasks);
-        }
+        // call UI to send message informing user that task has been added
+        return ui.showAddTaskMessage(this.task, tasks.size());
     }
 }

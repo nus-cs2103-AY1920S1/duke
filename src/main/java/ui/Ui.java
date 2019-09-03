@@ -4,6 +4,7 @@ import util.TaskList;
 import tasks.Task;
 
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 /**
  *  Encapsulates a user interface handler that deals with interactions with
@@ -32,71 +33,58 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         this.welcomeMessage = "Hello! I'm Duke!!!\n";
-        this.exitMessage = "Bye. Hope to see you again soon!\n";
+        this.exitMessage = "Hope to see you again soon!\n";
     }
 
     /**
-     * Welcomes the user with specified welcome message and logo.
-     */
-    void welcomeUser() {
-        System.out.println(logo);
-        System.out.print(welcomeMessage);
-    }
-
-    /**
-     * Wishes the user goodbye upon exiting ui.Duke.
-     */
-    void farewellUser() {
-        System.out.print(exitMessage);
-        this.showLine();
-    }
-
-    /**
-     * Prints startup error.
-     */
-    void showStartupError() {
-        System.out.println("Unable to load tasks from hard disk");
-        this.showLine();
-    }
-
-    /**
-     * Reads user input.
+     * Returns the specified welcome message and logo.
      *
-     * @return a line entered by the user
+     * @return welcome message.
      */
-    String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+    String getWelcomeMessage() {
+        return logo + welcomeMessage;
     }
 
     /**
-     * Prints line separator between commands and outputs for better
-     * readability.
+     * Returns the exit message that wishes the user goodbye upon exiting Duke.
+     *
+     * @return exit message.
      */
-    void showLine() {
-        System.out.println("################################################");
+    public String getFarewellMessage() {
+        return exitMessage;
     }
 
     /**
-     * Prints error when user tries to work on an empty list.
+     * Returns startup error message.
+     *
+     * @return startup error message.
      */
-    public void showEmptyListError() {
-        System.out.println("No tasks in your list!");
-        this.showLine();
+    String showStartupError() {
+        return "Unable to load tasks from hard disk\n";
     }
 
     /**
-     * Prints message when task is successfully added to list.
+     * Returns error when user tries to work on an empty list.
+     *
+     * @return empty list error message.
+     */
+    public String showEmptyListError() {
+        return "No tasks in your list!";
+    }
+
+    /**
+     * Returns message when task is successfully added to list.
      *
      * @param task the task that was added
      * @param size the size of the list after adding task
+     * @return add task message.
      */
-    public void showAddTaskMessage(Task task, int size) {
-        System.out.println("Got it. I've added this task: \n"
-                + "  " + task);
-        System.out.format("Now you have %d tasks in the list.\n",
-                size);
-        this.showLine();
+    public String showAddTaskMessage(Task task, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task: \n");
+        sb.append("  " + task + "\n");
+        sb.append(String.format("Now you have %d tasks in the list. \n", size));
+        return sb.toString();
     }
 
     /**
@@ -104,98 +92,118 @@ public class Ui {
      *
      * @param task the task that was deleted
      * @param size the size of the list after deleting task
+     * @return delete task message.
      */
-    public void showDeleteTaskMessage(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("   " + task);
-        System.out.format("Now you have %d tasks in the list\n", size);
-        this.showLine();
+    public String showDeleteTaskMessage(Task task, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n");
+        sb.append("   " + task + "\n");
+        sb.append(String.format("Now you have %d tasks in the list\n", size));
+        return sb.toString();
     }
 
     /**
      * Prints error message when user specifies 0 index or an index bigger
      * than the size of the task list.
+     *
+     * @return index out of bounds error message.
      */
-    public void showIndexOutOfBoundsError() {
-        System.out.println("You've specified a 0 index or index "
-                + "that is bigger than the size of your list!");
-        this.showLine();
+    public String showIndexOutOfBoundsError() {
+        return "You've specified a 0 index or index "
+                + "that is bigger than the size of your list!\n";
     }
 
     /**
      * Prints error message when user specifies an invalid non-integer index.
+     *
+     * @return invalid index error message.
      */
-    public void showInvalidIndexError() {
-        System.out.println("Please input an integer which is the "
-                + "index of the task you wish to mark as done.");
-        this.showLine();
+    public String showInvalidIndexError() {
+        return "Please input an integer which is the "
+                + "index of the task you wish to mark as done.\n";
     }
 
     /**
      * Prints error message when user enters invalid command.
+     *
+     * @return invalid command error message.
      */
-    void showInvalidCommandError() {
-        System.out.println("You entered a command I do not understand :-(");
-        System.out.println("Let's speak the same language! Type 'help' to "
-                + "see the list of commands I understand :-)");
-        this.showLine();
+    String showInvalidCommandError() {
+        return "You entered a command I do not understand :-(\n";
     }
 
     /**
      * Prints error message when user enters incorrect date/time format.
+     *
+     * @return invalid date time format message.
      */
-    void showInvalidDateTimeFormattingError() {
-        System.out.println("Looks like you entered the incorrect Date/Time "
-                + "format. Please follow <dd>/<mm>/<yyyy> <hhmm>");
-        this.showLine();
+    String showInvalidDateTimeFormattingError() {
+        return "Looks like you entered the incorrect Date/Time "
+                + "format. Please follow <dd>/<mm>/<yyyy> <hhmm>\n";
     }
 
     /**
      * Prints error message when user enters incorrect task attributes format.
+     *
+     * @return invalid format message.
      */
-    void showInvalidFormattingError() {
-        System.out.println("Wrong format! Please try again.");
-        this.showLine();
+    String showInvalidFormattingError() {
+        return "Wrong format! Please try again!\n";
     }
 
     /**
      * Prints message when given find keywords do not match any task.
+     *
+     * @return task not found message.
      */
-    public void showTaskNotFoundMessage() {
-        System.out.println("No tasks found matching the keyword you specified!");
-        this.showLine();
+    public String showTaskNotFoundMessage() {
+        return "No tasks found matching the keyword you specified!";
     }
 
     /**
      * Prints message when user marks a given task as done.
      *
-     * @param task the task marked as done
+     * @param task the task marked as done.
+     * @return task marked done message.
      */
-    public void showTaskDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("   " + task);
-        this.showLine();
+    public String showTaskDoneMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append("   " + task + "\n");
+        return sb.toString();
+    }
+
+    /**
+     * Returns message saying task has already been done.
+     *
+     * @return task already done message.
+     */
+    public String showTaskAlreadyDoneMessage() {
+        return "This task has already been done!";
     }
 
     /**
      * Prints all tasks in the list to the terminal.
      *
      * @param tasks the task list
+     * @return string containing all tasks in readable format.
      */
-    public void printTasks(TaskList tasks) {
+    public String printTasks(TaskList tasks) {
         // inform user if the list is empty
         if (tasks.isEmpty()) {
-            System.out.println("No tasks in your list!");
+            return "No tasks in your list!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the tasks in your list:\n");
+
             // loop through each task in list and print it
             int listSize = tasks.size();
             for (int i = 0; i < listSize; i++) {
                 // specified format e.g. "1. task 1"
                 Task currentTask = tasks.get(i);
-                System.out.format("%d. %s\n", i + 1, currentTask);
+                sb.append(String.format("%d. %s\n", i + 1, currentTask));
             }
+            return sb.toString();
         }
-        this.showLine();
     }
 }

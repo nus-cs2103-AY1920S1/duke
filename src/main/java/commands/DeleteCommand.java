@@ -39,12 +39,13 @@ public class DeleteCommand extends Command {
      * @param ui the user interface associated with this run of Duke
      * @param storage the storage handler associated with this run of Duke
      * @throws IOException when file the list is to be written to is not found
+     * @return Duke's response to the user command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (tasks.isEmpty()) {
             // if the user is trying this command on an empty task list
-            ui.showEmptyListError();
+            return ui.showEmptyListError();
         } else {
             try {
                 int taskIndex = Integer.parseInt(taskNumber) - 1; // 1 indexed
@@ -52,15 +53,16 @@ public class DeleteCommand extends Command {
                 Task taskToRemove = tasks.get(taskIndex);
                 tasks.remove(taskIndex);
 
-                // message
-                ui.showDeleteTaskMessage(taskToRemove, tasks.size());
-
                 // update storage
                 storage.update(tasks);
+
+                // return message
+                return ui.showDeleteTaskMessage(taskToRemove, tasks.size());
+
             } catch (IndexOutOfBoundsException exceptionOne) {
-                ui.showIndexOutOfBoundsError();
+                return ui.showIndexOutOfBoundsError();
             } catch (NumberFormatException exceptionTwo) {
-                ui.showInvalidIndexError();
+                return ui.showInvalidIndexError();
             }
         }
     }

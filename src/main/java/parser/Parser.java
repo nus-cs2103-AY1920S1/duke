@@ -32,7 +32,7 @@ public class Parser {
      * Parses user input into a command executed by Duke.
      *
      * @param fullCommand the string entered by the user as a command
-     * @return a ui.Duke-executable command
+     * @return a Duke-executable command
      * @throws IllegalArgumentException if command not supported by duke
      * @throws IndexOutOfBoundsException if incomplete commands
      * @throws ParseException if incorrect date/time format

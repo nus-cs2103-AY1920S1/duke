@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
 
     protected Scanner scan = new Scanner(System.in);
-    protected TaskList tL = new TaskList(new ArrayList<>());
+    protected TaskList tL = new TaskList();
     protected Storage store = new Storage(Storage.file);
 
     /**
@@ -73,6 +73,9 @@ public class Ui {
                         }
                     } else if (splittedText[0].equals("delete")) {
                         tL.deleteCommand(text);
+                    } else if (splittedText[0].equals("find")) {
+                        ArrayList<String> strList = findCommand(splittedText[1]);
+                        printKeywordList(strList);
                     } else {
                         if (splittedText[0].equals("todo")) {
                             tL.toDoCommand(text);
@@ -213,5 +216,38 @@ public class Ui {
         printLine();
         printIndent();
         System.out.println("Nothing in file!");
+    }
+
+    public ArrayList<String> findCommand(String wordToFind) throws IOException, DukeException {
+        File f = new File(Storage.file);
+        Scanner sc =new Scanner(f);
+        ArrayList<String> tempList = new ArrayList<>();
+        if (Storage.countLines(Storage.file) == 0) {
+            printIndent();
+            throw new DukeException("No such word is found in any of the tasks.");
+        } else {
+            int num = 1;
+            while (sc.hasNext()) {
+                String text = sc.nextLine();
+                if (text.contains(wordToFind)) {
+                    String task = num + "." + text;
+                    tempList.add(task);
+                    num++;
+                }
+            }
+        }
+        System.out.println("5");
+        return tempList;
+    }
+
+    public void printKeywordList(ArrayList<String> list) {
+        printLine();
+        printIndent();
+        System.out.println("Here are the matching tasks in your list!");
+        for (String str : list) {
+            printIndent();
+            System.out.println(str);
+        }
+        printLine();
     }
 }

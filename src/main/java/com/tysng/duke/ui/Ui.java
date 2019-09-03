@@ -39,7 +39,7 @@ public class Ui {
         while (sc.hasNextLine()) {
             Command command;
             try {
-                command = Command.NewCommand(sc.nextLine());
+                command = Command.newCommand(sc.nextLine());
 
             } catch (CommandException e) {
                 Response.newException(e);

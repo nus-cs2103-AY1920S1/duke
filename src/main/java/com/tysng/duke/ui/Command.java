@@ -47,7 +47,7 @@ public class Command {
      * @return a command class with the user input wrapped inside
      * @throws CommandException if the user input cannot be successfully parsed
      */
-    public static Command NewCommand(String instruction) throws CommandException {
+    public static Command newCommand(String instruction) throws CommandException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
         Date date;
 

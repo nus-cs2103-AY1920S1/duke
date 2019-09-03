@@ -1,7 +1,7 @@
 package com.tysng.duke.domain;
 
 /**
- * This class contains the common methods pertaining to Event, Task and ToDo classes
+ * This class contains the common methods pertaining to Event, Task and ToDo classes.
  */
 public abstract class Task {
     protected boolean isCompleted;

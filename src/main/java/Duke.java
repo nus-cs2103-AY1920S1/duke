@@ -9,10 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import parser.Parser;
 import storage.Storage;
 import tasks.TaskList;
@@ -32,7 +30,7 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private ImageView userIv, dukeIv;
+    private Image userIv, dukeIv;
 
     public Duke() {
     }
@@ -94,8 +92,8 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        userIv = new ImageView(new Image(this.getClass().getResourceAsStream("images/DaUser.png")));
-        dukeIv = new ImageView(new Image(this.getClass().getResourceAsStream("images/DaDuke.png")));
+        userIv = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
+        dukeIv = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
 
         ui = new Ui();
         storage = new Storage(FILE_PATH);
@@ -128,8 +126,8 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userText);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userIv),
@@ -142,7 +140,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String fullCommand) {
+    public String getResponse(String fullCommand) {
 //        ui.showWelcome();
         boolean isExit = false;
         try {

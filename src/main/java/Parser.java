@@ -34,77 +34,78 @@ public class Parser {
      * @param inputText the text that user input.
      * @param storage the location for retrieval and write the updated file.
      */
-    public static void parse(TaskList tasks, Ui ui, String inputText, Storage storage) {
+    public static String parse(TaskList tasks, Ui ui, String inputText, Storage storage) {
         String[] keyList = inputText.split(" ", 2);
         String actionKey = keyList[0];
 
         try {
             if (inputText.equals("list")) { // to print all the list of plans
-                ui.printList(tasks);
+                return ui.printList(tasks);
             } else if (actionKey.equals("done")) { // mark as done if the plan is finished
                 int index = Integer.parseInt(inputText.split(" ")[1]);
                 Task selectedTask = tasks.getListOfTasks().get(index - 1);
                 selectedTask.markAsDone();
-                ui.printTaskDone(selectedTask);
 
                 storage.writeFile(tasks.getListOfTasks());
+                return ui.printTaskDone(selectedTask);
             } else if (actionKey.equals("delete")) { // delete a specific plan
                 int index = Integer.parseInt(keyList[1]);
-                ui.printTaskDelete(tasks.getListOfTasks(), index);
+                String outputText = ui.printTaskDelete(tasks.getListOfTasks(), index);
                 tasks.deleteTask(index - 1);
 
                 storage.writeFile(tasks.getListOfTasks());
+                return outputText;
             } else if (actionKey.equals("find")) {
                 String textToSearch = keyList[1];
-                ui.searchTaskKeyword(tasks, textToSearch);
+                return ui.searchTaskKeyword(tasks, textToSearch);
             } else { // to handle addition of a specific type of plan
                 if (actionKey.equals("deadline")) {
                     if (keyList.length <= 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     }
 
                     String[] contentList = keyList[1].split(" /by ");
                     if (contentList.length <= 1) {
-                        throw new DukeException("☹ OOPS!!! Time need to be specified");
+                        throw new DukeException("OOPS!!! Time need to be specified");
                     }
 
                     LocalDateTime convertedTimeStamp = convertDateAndTime(contentList[1]);
                     Deadline newDeadline = new Deadline(contentList[0], convertedTimeStamp);
                     tasks.addTask(newDeadline);
-                    ui.printAddTask(tasks, newDeadline);
                     storage.writeFile(tasks.getListOfTasks());
+                    return ui.printAddTask(tasks, newDeadline);
                 } else if (actionKey.equals("event")) {
                     if (keyList.length <= 1) {
-                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                     }
 
                     String[] contentList = keyList[1].split(" /at ");
                     if (contentList.length == 1) {
-                        throw new DukeException("☹ OOPS!!! Time need to be specified");
+                        throw new DukeException("OOPS!!! Time need to be specified");
                     }
 
                     LocalDateTime convertedTimeStamp = convertDateAndTime(contentList[1]);
                     Event newEvent = new Event(contentList[0], convertedTimeStamp);
                     tasks.addTask(newEvent);
-                    ui.printAddTask(tasks, newEvent);
                     storage.writeFile(tasks.getListOfTasks());
+                    return ui.printAddTask(tasks, newEvent);
                 } else if (actionKey.equals("todo")) {
                     if (keyList.length <= 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
 
                     Todo newTodo = new Todo(inputText.split(" ", 2)[1]);
                     tasks.addTask(newTodo);
-                    ui.printAddTask(tasks, newTodo);
                     storage.writeFile(tasks.getListOfTasks());
+                    return ui.printAddTask(tasks, newTodo);
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         } catch (DukeException err) {
-            System.out.println(err.getMessage());
+            return err.getMessage();
         } catch (Exception err) {
-            System.out.println("[Exception] " + err);
+            return "[Exception] " + err;
         }
     }
 }

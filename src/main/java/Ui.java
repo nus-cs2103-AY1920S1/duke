@@ -1,35 +1,35 @@
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+
 import java.util.LinkedList;
 
 /**
  * To deals with interactions with the user.
  */
-public class Ui {
-    public void welcomeMessage() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
+public class Ui extends AnchorPane {
 
-    public void exitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    public void showLoadingError() {
-        System.out.println("File loaded unsuccessful");
+    public String showLoadingError() {
+        return "File loaded unsuccessful";
     }
 
     /**
      * Printing the list of task from a taskList.
      *
      * @param taskList the list of tasks
+     * @return an output text for the UI.
      */
-    public void printList(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
+    public String printList(TaskList taskList) {
+        String outputText = "Here are the matching tasks in your list:\n";
         int counter = 1;
 
         for (Task subTask : taskList.getListOfTasks()) {
-            System.out.println(counter + ". " + subTask);
+            outputText = (outputText + counter + ". " + subTask) + "\n";
             counter++;
         }
+
+        return outputText;
     }
 
     /**
@@ -37,27 +37,34 @@ public class Ui {
      *
      * @param taskList a list of tasks
      * @param keyword the text/keyword that will be searched from the list
+     * @return an output text for the UI.
      */
-    public void searchTaskKeyword(TaskList taskList, String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String searchTaskKeyword(TaskList taskList, String keyword) {
+        String outputText = "Here are the matching tasks in your list:\n";
         int counter = 1;
 
         for (Task subTask : taskList.getListOfTasks()) {
             if (subTask.getDescription().contains(keyword)) {
-                System.out.println(counter + ". " + subTask);
+                outputText = (outputText + counter + ". " + subTask) + "\n";
                 counter++;
             }
         }
+
+        return outputText;
     }
 
     /**
      * Prints out the task that is marked as done.
      *
      * @param selectedTask a selected task from a list of tasks.
+     * @return an output text for the UI.
      */
-    public void printTaskDone(Task selectedTask) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("[" + selectedTask.getStatusIcon() + "] " + selectedTask.getDescription());
+    public String printTaskDone(Task selectedTask) {
+        String outputText = "";
+        outputText = "Nice! I've marked this task as done: "
+                + "\n"
+                + "[" + selectedTask.getStatusIcon() + "] " + selectedTask.getDescription();
+        return outputText;
     }
 
     /**
@@ -65,11 +72,14 @@ public class Ui {
      *
      * @param taskList a list of tasks
      * @param newTask a new task to be added to the list of tasks
+     * @return an output text for the UI.
      */
-    public void printAddTask(TaskList taskList, Task newTask) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(newTask);
-        System.out.println("Now you have " + taskList.getListOfTasks().size() + " tasks in the list.");
+    public String printAddTask(TaskList taskList, Task newTask) {
+        String outputText = "";
+        outputText = "Got it. I've added this task:\n"
+                + newTask + "\n"
+                + "Now you have " + taskList.getListOfTasks().size() + " tasks in the list.";
+        return outputText;
     }
 
 
@@ -78,10 +88,13 @@ public class Ui {
      *
      * @param deletedTask a LinkedList that stores the list of tasks.
      * @param index the location of the task to be deleted.
+     * @return an output text for the UI.
      */
-    public void printTaskDelete(LinkedList<Task> deletedTask, int index) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(deletedTask.get(index - 1));
-        System.out.println("Now you have " + (deletedTask.size() - 1) + " tasks in the list.");
+    public String printTaskDelete(LinkedList<Task> deletedTask, int index) {
+        String outputText = "";
+        outputText = "Noted. I've removed this task:\n"
+                + deletedTask.get(index - 1) + "\n"
+                + "Now you have " + (deletedTask.size() - 1) + " tasks in the list.";
+        return outputText;
     }
 }

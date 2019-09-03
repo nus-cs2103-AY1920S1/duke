@@ -6,8 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.*;
 
+/**
+ * This class handles serialization of Java values into JSON values.
+ */
 public class JsonWriter implements AutoCloseable {
 
+    /**
+     * This represents the context, of currently reading a JSON value.
+     */
 	public class ValueContext {
 		public void writeString(String s) {
 			JsonWriter.this.appendQuoted(s);
@@ -69,14 +75,29 @@ public class JsonWriter implements AutoCloseable {
 
 	private ValueContext valueContext = new ValueContext();
 
+    /**
+     * Constructs a JsonWriter wrapping a output writer.
+     * @param writer Output writer
+     */
 	public JsonWriter(Writer writer) {
 		this.writer = new BufferedWriter(writer);
 	}
 
+
+    /**
+     * Writes a JSON value, given a function expecting a {@link ValueContext}.
+     * @param coder Encoding function.
+     */
 	public void writeValue(Consumer<ValueContext> coder) {
 		coder.accept(this.valueContext);
 	}
 
+
+    /**
+     * Writes the given value, using a handler from {@link Registry}.
+     * @param value Java value to write
+     * @param <T> Type of value
+     */
 	public <T> void writeValue(T value) {
 		this.valueContext.writeValue(value);
 	}
@@ -183,6 +204,10 @@ public class JsonWriter implements AutoCloseable {
 		}
 	}
 
+
+    /**
+     * This represents the context, of currently reading a JSON object.
+     */
 	public class ObjectContext extends BlockContext {
 		protected char blockStart() {
 			return '{';
@@ -200,6 +225,10 @@ public class JsonWriter implements AutoCloseable {
 			this.writeField(name, vctx -> vctx.writeValue(value));
 		}
 	}
+
+    /**
+     * This represents the context, of currently reading a JSON array.
+     */
 	public class ArrayContext extends BlockContext {
 		protected char blockStart() {
 			return '[';
@@ -213,6 +242,10 @@ public class JsonWriter implements AutoCloseable {
 		}
 	}
 
+    /**
+     * Flushes the underlying Writer.
+     * @throws IOException
+     */
 	public void flush() throws IOException {
 		this.writer.flush();
 	}

@@ -8,9 +8,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents a event task, with a start timing attached.
+ */
 public class EventTask extends Task {
 	private final LocalDateTime timing;
 
+	/**
+	 * Constructs an {@link EventTask} from a task description and timing date string.
+	 * @param task Description of task
+	 * @param timing Date string describing timing
+	 */
 	public EventTask(String task, String timing) {
 		super(task);
 		this.timing = DateParser.parse(timing);

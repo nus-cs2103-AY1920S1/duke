@@ -8,6 +8,9 @@ import org.duke.json.ObjectHandler;
 import org.duke.json.Receiver;
 import org.duke.json.ValueHandler;
 
+/**
+ * Enumerates all known task types.
+ */
 public enum TaskType {
 	ToDo("T", Task::new),
 	Deadline("D", DeadlineTask::new),
@@ -22,6 +25,13 @@ public enum TaskType {
 		this.jsonConstructor = jsonConstructor;
 	}
 
+    /**
+     * From the given string, find the matching {@link TaskType} value.
+     * Like {@link Enum#valueOf(Class, String)}, but case insensitive.
+     *
+     * @param value String to parse
+     * @return Matching {@link TaskType} value, or a default.
+     */
 	public static TaskType fromString(String value) {
 		for(TaskType t : TaskType.values()) {
 			if(t.name().equalsIgnoreCase(value)) {
@@ -31,6 +41,10 @@ public enum TaskType {
 		return TaskType.ToDo;
 	}
 
+    /**
+     * Returns the short marker string associated with this task type.
+     * @return Marker string for this type.
+     */
 	public String getMarker() {
 		return marker;
 	}

@@ -7,6 +7,9 @@ import java.text.ParsePosition;
 import java.util.stream.Stream;
 import java.util.stream.IntStream;
 
+/**
+ * Helper class to parse rough date/time strings.
+ */
 public class DateParser {
 
 	private String text;
@@ -201,6 +204,15 @@ public class DateParser {
 		this.pos = new ParsePosition(0);
 	}
 
+	/**
+	 * Given an input string describing a date+time, return a {@link java.time.LocalDateTime} representing it.
+	 * <p>
+	 * If the input specifies a specific date, we use that date.
+	 * Else, it returns the next matching date in the future.
+	 *
+	 * @param input Rough date input
+	 * @return {@link java.time.LocalDateTime} object, or null if no valid parse.
+	 */
 	public static LocalDateTime parse(String input) {
 		return new DateParser(input).parseDateTime();
 	}

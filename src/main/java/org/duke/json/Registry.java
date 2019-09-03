@@ -5,6 +5,9 @@ import java.io.*;
 import java.util.*;
 import java.util.function.*;
 
+/**
+ * Registry mapping Java classes to appropriate JSON encoder functions.
+ */
 public class Registry {
 	private static HashMap<Class<?>, BiConsumer<JsonWriter.ValueContext, ?>> encoderMap
 		= new HashMap<>();

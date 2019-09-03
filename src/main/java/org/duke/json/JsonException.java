@@ -1,5 +1,8 @@
 package org.duke.json;
 
+/**
+ * Exception representing JSON parse/write errors.
+ */
 public class JsonException extends RuntimeException {
 	public JsonException(String message) {
 		super(message);

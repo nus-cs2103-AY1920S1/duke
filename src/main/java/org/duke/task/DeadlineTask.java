@@ -8,9 +8,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+
+/**
+ * Represents a task with a deadline attached.
+ */
 public class DeadlineTask extends Task {
 	private final LocalDateTime deadline;
 
+	/**
+	 * Constructs a {@link DeadlineTask} from a given description and deadline.
+	 * @param task Description
+	 * @param deadline Deadline date string
+	 */
 	public DeadlineTask(String task, String deadline) {
 		super(task);
 		this.deadline = DateParser.parse(deadline);

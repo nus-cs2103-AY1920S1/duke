@@ -26,6 +26,9 @@ import org.duke.ui.Command;
 
 import org.duke.util.CounterDecorator;
 
+/**
+ * Main class for Duke.
+ */
 public class Duke {
 
 	private static final String[] initialGreeting = new String[]{

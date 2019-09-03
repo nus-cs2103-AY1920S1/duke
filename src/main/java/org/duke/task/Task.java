@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.function.Function;
 
+/**
+ * Represents a basic To-Do Task.
+ */
 public class Task {
 	private final String description;
 	private boolean completed;
@@ -30,10 +33,19 @@ public class Task {
 			(Boolean) dict.getOrDefault("completed", false));
 	}
 
+
+	/**
+	 * Mark this task as completed.
+	 */
 	public void markComplete() {
 		this.completed = true;
 	}
 
+
+	/**
+	 * Checks if the task is marked as complete.
+	 * @return Whether task has been marked as completed.
+	 */
 	public boolean isCompleted() {
 		return this.completed;
 	}

@@ -3,6 +3,9 @@ package org.duke.json;
 import java.io.*;
 import java.util.regex.Pattern;
 
+/**
+ * This class reads JSON objects off a {@link Reader}.
+ */
 public class JsonParser {
 	private final PushbackReader reader;
 
@@ -228,6 +231,16 @@ public class JsonParser {
 		}
 	}
 
+
+	/**
+	 * Given a input {@param reader}, and a way to extract a value ({@param handler}),
+	 * parse out a JSON value from the input.
+	 *
+	 * @param r Input reader
+	 * @param handler JSON Value handler
+	 * @param <T> Return type
+	 * @return Parsed value
+	 */
 	public static <T> T parse(Reader r, ValueHandler<T> handler) {
 		JsonParser p = new JsonParser(r);
 		return p.readValue(handler);

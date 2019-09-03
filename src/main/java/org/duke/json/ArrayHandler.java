@@ -3,8 +3,22 @@ package org.duke.json;
 import java.util.*;
 import java.util.function.*;
 
+/**
+ * This is a structure capable of receiving consecutive JSON values from a JSON array,
+ * and finally producing a T value.
+ * @param <T> Value to produce
+ */
 public interface ArrayHandler<T> {
+    /**
+     * Handle one new JSON value in the JSON array.
+     * @param receiver {@link ValueHandler} callback
+     */
 	public void handleElement(Receiver receiver);
+
+    /**
+     * Handle the end of the array, and return the final value.
+     * @return Completed value
+     */
 	public T handleEnd();
 
 	public static <T> ValueHandler<ArrayList<T>> listOf(ValueHandler<T> valueHandler) {

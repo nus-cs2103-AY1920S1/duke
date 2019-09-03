@@ -46,7 +46,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * @param input User's input.
      */
-    protected String getResponse(String input) {
+    public String getResponse(String input) {
         String response = "";
         try {
             Command c = Parser.parse(input);

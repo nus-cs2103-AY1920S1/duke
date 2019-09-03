@@ -43,7 +43,7 @@ public class ParserTest {
         try {
             Command bye = Parser.parse("LALALA");
         } catch (DukeException e) {
-            assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }

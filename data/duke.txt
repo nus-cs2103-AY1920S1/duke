@@ -1,8 +1,4 @@
 [T] [-] ok good
 [D] [-] this shoudl work (by: 10/2/1029 1300 )
 [E] [-] aw thank god (at: 19/2/1928 1000 )
-[T] [-] hello
 [T] [-] h
-[T] [-] h
-[T] [-] wh
-[T] [-] whattttttt

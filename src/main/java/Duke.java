@@ -10,6 +10,7 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Instantiates Duke object.
      * @param filePath the file path of the saved tasks
      */
     public Duke(String filePath) {
@@ -28,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Runs the programme continuously until the user inputs "bye"
+     * Runs the programme continuously until the user inputs "bye".
      */
     public void run() {
         ui.showWelcome();

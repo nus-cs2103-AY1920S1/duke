@@ -4,6 +4,7 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns string that displays the task in a readable format to the user.
      * @return string that displays the task in a readable format to the user
      */
     @Override
@@ -12,6 +13,7 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns string for storing in text file.
      * @return string for storing in text file
      */
     @Override

@@ -11,8 +11,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * @return string representing date and time in the following format:
-     * 23rd September 2019, 3.01am
+     * Generates a date and time string appropriate for storing in save file.
+     * @return string representing date and time in the following format: 23rd September 2019, 3.01am
      */
     private String generateDateAndTimeString() {
         String dateAndTime = "" + by.getDayOfMonth();
@@ -52,6 +52,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Generates string for displaying to user.
      * @return string that displays the task in a readable format to the user
      */
     @Override
@@ -60,6 +61,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Generate string for storing in file.
      * @return string for storing in text file
      */
     @Override

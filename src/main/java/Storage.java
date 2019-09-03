@@ -19,8 +19,8 @@ public class Storage {
     }
 
     /**
-     * Converts lines of Strings in saved text file into tasks which are loaded into an ArrayList<Task>.
-     * @return an ArrayList<Task> containing all the tasks in the saved file.
+     * Converts lines of Strings in saved text file into tasks which are loaded into an ArrayList.
+     * @return an ArrayList containing all the tasks in the saved file.
      * @throws DukeException if there is an error in loading the file
      */
     public ArrayList<Task> load() throws DukeException {

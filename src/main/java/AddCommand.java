@@ -6,6 +6,7 @@ public class AddCommand extends Command {
     private String fullCommand;
 
     /**
+     * Instantiates AddCommand object.
      * @param fullCommand String which is the full line that the user inputs
      */
     public AddCommand(String fullCommand) {
@@ -13,7 +14,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * returns whether the command is an ExitCommand
+     * Returns whether the command is an ExitCommand.
      * @return whether the command is an ExitCommand
      */
     @Override
@@ -23,7 +24,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds and determines the type of given task to the saved task-list and prints
-     * a confirmation if the addition of the new task is successful
+     * a confirmation if the addition of the new task is successful.
      * @param tasks TaskList containing the user's saved tasks
      * @param ui Ui object to handle the user input
      * @param storage storage object to determine where the executed results are stored
@@ -62,8 +63,8 @@ public class AddCommand extends Command {
             storage.addToFile(tasks.getTask(tasks.getNumOfTasks() - 1).toSaveString());
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.getTask(tasks.getNumOfTasks() - 1));
-            System.out.println("Now you have " + tasks.getNumOfTasks() +
-                    (tasks.getNumOfTasks() == 1 ? " task" : " tasks") + " in the list.");
+            System.out.println("Now you have " + tasks.getNumOfTasks()
+                    + (tasks.getNumOfTasks() == 1 ? " task" : " tasks") + " in the list.");
         } catch (IOException ex) {
             System.out.println("Cannot save new task in file");
         }

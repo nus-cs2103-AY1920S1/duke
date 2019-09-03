@@ -11,8 +11,8 @@ public class Event extends Task {
     }
 
     /**
-     * @return string representing date and time in the following format:
-     * 23rd September 2019, 3.01am
+     * Returns appropriate date and time string suitable for storing.
+     * @return string representing date and time in the following format: 23rd September 2019, 3.01am
      */
     protected String generateDateAndTimeString() {
         String dateAndTime = "" + at.getDayOfMonth();
@@ -52,6 +52,7 @@ public class Event extends Task {
     }
 
     /**
+     * Returns string that displays the task in a readable format to the user.
      * @return string that displays the task in a readable format to the user
      */
     @Override
@@ -60,6 +61,7 @@ public class Event extends Task {
     }
 
     /**
+     * Returns string for storing in text file.
      * @return string for storing in text file
      */
     @Override

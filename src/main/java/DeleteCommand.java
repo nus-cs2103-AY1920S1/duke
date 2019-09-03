@@ -23,13 +23,14 @@ public class DeleteCommand extends Command {
      * @param taskList The task list for the task to be added to.
      * @param ui The ui which prints the added message.
      * @param storage The storage which deals with the hard drive.
+     * @return The string representation of a successful delete command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> arrayList = taskList.getArrayList();
         Task task = arrayList.get(taskNumber - 1);
         taskList.deleteTask(task);
 
-        ui.printDeletedMessage(task, taskList);
+        return ui.stringDeletedMessage(task, taskList);
     }
 
 }

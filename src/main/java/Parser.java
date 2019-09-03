@@ -19,19 +19,22 @@ public class Parser {
             returnCommand = new ByeCommand();
         } else if(isList(fullCommand)) {
             returnCommand = new ListCommand();
+        } else if(isHelp(fullCommand)) {
+            returnCommand = new HelpCommand();
         } else if(isDone(fullCommand)) {
             returnCommand = processDoneCommand(fullCommand);
         } else if(isDelete(fullCommand)) {
             returnCommand = processDeleteCommand(fullCommand);
         } else if(isFind(fullCommand)) {
             returnCommand = processFindCommand(fullCommand);
-        } else {
+        } else if(isToDo(fullCommand) || isDeadline(fullCommand) || isEvent(fullCommand)) {
             try {
                 returnCommand = processAddCommand(fullCommand);
             } catch(InvalidInputException e) {
-                System.out.println("InvalidInputException occurred: " + e);
-                System.out.println();
+                returnCommand = new InvalidCommand("InvalidExceptionError occurred.");
             }
+        } else {
+            returnCommand = new InvalidCommand();
         }
 
         return returnCommand;
@@ -195,12 +198,16 @@ public class Parser {
         return str.startsWith("todo");
     }
 
-    private static boolean isDeadline(String str) {
-        return str.startsWith("deadline");
-    }
+    private static boolean isDeadline(String str) { return str.startsWith("deadline"); }
+
+    private static boolean isEvent(String str) { return str.startsWith("event"); }
 
     private static boolean isFind(String str) {
         return str.startsWith("find");
+    }
+
+    private static boolean isHelp(String str) {
+        return str.startsWith("help");
     }
 
 }

@@ -7,7 +7,7 @@ public abstract class Command {
 
     public boolean isExit;
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Returns true if isExit is true, else false.

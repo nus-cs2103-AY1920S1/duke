@@ -23,8 +23,9 @@ public class FindCommand extends Command {
      * @param taskList The task list for the task to be added to.
      * @param ui The ui which prints the added message.
      * @param storage The storage which deals with the hard drive.
+     * @return The string representation of a successful find command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> arrayList = taskList.getArrayList();
         TaskList foundList = new TaskList();
 
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.printFoundMessage(foundList);
+        return ui.stringFoundMessage(foundList);
     }
 
 }

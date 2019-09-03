@@ -37,20 +37,21 @@ public class AddCommand extends Command {
      * @param taskList The task list for the task to be added to.
      * @param ui The ui which prints the added message.
      * @param storage The storage which deals with the hard drive.
+     * @return The string representation of a successful add command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if(isToDo(taskType)) {
             ToDo toDo = new ToDo(taskDescription);
             taskList.addTask(toDo);
-            ui.printAddedMessage(toDo, taskList);
+            return ui.stringAddedMessage(toDo, taskList);
         } else if(isDeadline(taskType)) {
             Deadline deadline = new Deadline(taskDescription, taskDateTime);
             taskList.addTask(deadline);
-            ui.printAddedMessage(deadline, taskList);
+            return ui.stringAddedMessage(deadline, taskList);
         } else {
             Event event = new Event(taskDescription, taskDateTime);
             taskList.addTask(event);
-            ui.printAddedMessage(event, taskList);
+            return ui.stringAddedMessage(event, taskList);
         }
     }
 

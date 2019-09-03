@@ -23,6 +23,11 @@ public class Response {
         this.content = content;
     }
 
+    /**
+     * Generates a Greeting type response.
+     *
+     * @return a response
+     */
     public static Response newGreetings() {
         return new Response(List.of(
                 "Hello! I'm Duke",
@@ -30,16 +35,34 @@ public class Response {
         ));
     }
 
+    /**
+     * Generates a Bye type response.
+     *
+     * @return a response
+     */
     public static Response newFarewell() {
         return new Response(List.of(
                 "Bye. Hope to see you again soon!"
         ));
     }
 
+    /**
+     * Generates a Exception response.
+     *
+     * @param e the exception to be printed
+     * @return a response
+     */
     public static Response newException(Exception e) {
         return new Response(List.of(e.getMessage()));
     }
 
+    /**
+     * Generates a Add type response.
+     *
+     * @param item      the item to added
+     * @param totalItem count of the total item in the list
+     * @return a response
+     */
     public static Response newAdded(Task item, int totalItem) {
         return new Response(List.of(
                 "Got it. I've added this task: ",
@@ -48,6 +71,12 @@ public class Response {
         ));
     }
 
+    /**
+     * Generates a Done type response.
+     *
+     * @param item the item marked as done
+     * @return a response
+     */
     public static Response newDone(Task item) {
         return new Response(List.of(
                 "Nice! I've marked this task as done:",
@@ -55,6 +84,13 @@ public class Response {
         ));
     }
 
+    /**
+     * Generates a Delete type response.
+     *
+     * @param item      the item deleted
+     * @param totalItem count of the items left
+     * @return a response
+     */
     public static Response newDelete(Task item, int totalItem) {
         return new Response(List.of(
                 "Noted. I've removed this task: ",
@@ -63,6 +99,12 @@ public class Response {
         ));
     }
 
+    /**
+     * Generates a List type response.
+     *
+     * @param items the list of items to be listed
+     * @return a response
+     */
     public static Response newListing(List<Task> items) {
         List<String> content = IntStream.range(0, items.size())
                 .mapToObj(i -> (i + 1) + "." + items.get(i).toString())
@@ -72,6 +114,11 @@ public class Response {
         return new Response(content);
     }
 
+    /**
+     * Generates a Echo type response.
+     *
+     * @return a response
+     */
     public static Response newEcho(String input) {
         return new Response(List.of(input));
     }

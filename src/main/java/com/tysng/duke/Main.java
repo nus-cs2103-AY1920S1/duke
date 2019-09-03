@@ -8,6 +8,10 @@ import com.tysng.duke.ui.Ui;
  * This class is the entry point of the Application.
  */
 public class Main {
+    /**
+     * Starts the Application.
+     * @param args command line args
+     */
     public static void main(String[] args) {
         Storage storage = Storage.initialize();
         Duke duke = new Duke(storage);

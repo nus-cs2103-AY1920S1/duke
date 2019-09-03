@@ -15,18 +15,21 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * This class handles saving and loading from local files.
+ */
 public class Storage {
-    private final static String FILENAME = "duke.txt";
+    private static final String FILENAME = "duke.txt";
 
     /**
-     * The platform-independent path to the /data folder
+     * The platform-independent path to the /data folder.
      */
     private static Path DATA_FOLDER = Path.of(".", "data");
 
     private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
     /**
-     * The Path object is assigned at run time
+     * The Path object is assigned at run time.
      */
     private Path storageFilePath;
 
@@ -35,8 +38,8 @@ public class Storage {
     }
 
     /**
-     * Constructs a new Storage class.  The static factory method will create the data.txt file if the path and the file does
-     * not already exist.
+     * Constructs a new Storage class.  The static factory method will create the data.txt file if the path
+     * and the file does not already exist.
      *
      * @return the constructed class
      */

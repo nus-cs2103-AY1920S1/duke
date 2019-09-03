@@ -8,8 +8,8 @@ import com.tysng.duke.ui.Response;
 
 /**
  * This class handles the logic of the Application.
- * <p>
- * For every Command, it will process and return a Response object. This class
+ *
+ * <p>For every Command, it will process and return a Response object. This class
  * also interacts with te Storage class to retrieve and save TaskList objects to local storage.
  */
 public class Duke {
@@ -17,7 +17,7 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Constructs a service layer object with the external Storage layer
+     * Constructs a service layer object with the external Storage layer.
      *
      * @param storage an instance of the Storage object
      */

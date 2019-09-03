@@ -2,12 +2,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class where the main logic is executed
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Intialises all the classes needed to run this Application.
+     * It also retrieves the previous tasks saved in the last session.
+     * @param filePath File Path of duke.txt
+     * @param folderPath Folder Path in which duke.txt is saved
+     */
     public Duke(String filePath, String folderPath) {
         ui = new Ui();
         storage = new Storage(filePath, folderPath);
@@ -25,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main logic of the application
+     */
     public void run() {
         ui.greeting();
         boolean isExit = false;
@@ -43,7 +55,12 @@ public class Duke {
         }
     }
 
-
+    /**
+     * This is the starting point of the application
+     * @param args
+     * @throws DukeException
+     * @throws IOException
+     */
     public static void main(String[] args) throws DukeException, IOException {
 
         new Duke("../data/duke.txt", "../data").run();

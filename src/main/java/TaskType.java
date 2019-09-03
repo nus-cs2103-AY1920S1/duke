@@ -1,3 +1,6 @@
+/**
+ * Represents different types of tasks
+ */
 public enum TaskType {
-    TODO, DEADLINE, EVENT, DONE, DELETE, LIST, BYE;
+    TODO, DEADLINE, EVENT;
 }

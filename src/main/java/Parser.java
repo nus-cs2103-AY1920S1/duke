@@ -1,7 +1,16 @@
 import java.util.DuplicateFormatFlagsException;
 
+/**
+ * This class deals with making sense of the user command
+ */
 public class Parser {
 
+    /**
+     * Parses the input given by the user
+     * @param command The inputted text
+     * @return
+     * @throws DukeException
+     */
     public static Command parse (String command) throws DukeException {
 
         String[] words = command.split(" ", 2);
@@ -38,6 +47,12 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the done string and returns the index of the done task
+     * @param command done string
+     * @return index of done task
+     * @throws DukeException
+     */
     public static int parsesDone (String command) throws DukeException {
 
         String[] words = command.split(" ", 2);
@@ -52,6 +67,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the add string and returns the task
+     * @param command add string
+     * @param taskType type of task (todo, event, deadline)
+     * @return The Task to be added
+     * @throws DukeException
+     */
     public static Task parsesAdd (String command, TaskType taskType) throws DukeException {
 
         String[] words = command.split(" ", 2);
@@ -106,6 +128,12 @@ public class Parser {
 
     }
 
+    /**
+     * parses the delete string to get the index of the Task to be deleted
+     * @param command delete string
+     * @return index of the task to be deleted
+     * @throws DukeException
+     */
     public static int parsesDelete (String command) throws DukeException {
         String[] words = command.split(" ", 2);
 

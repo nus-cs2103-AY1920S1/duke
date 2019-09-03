@@ -5,28 +5,52 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     public String folderPath;
     public String filePath;
 
+    /**
+     * Initialises a Storage Class with a filePath and a folderPath
+     * @param filePath
+     * @param folderPath
+     */
     public Storage(String filePath, String folderPath) {
         this.filePath = filePath;
         this.folderPath = folderPath;
 
     }
 
-    public void makeDirectory (String filePath) throws IOException {
+    /**
+     * Makes the directory of the folder if it didn't exist before
+     * @param the folder path to make the directory
+     * @throws IOException
+     */
+    public void makeDirectory (String folderPath) throws IOException {
         File file = new File(filePath);
         file.mkdirs();
     }
 
+    /**
+     * Saves the file in the specified filePath
+     * @param filePath specified filePath
+     * @param textToAdd the data (text) to save inside the file
+     * @throws IOException
+     */
     public void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Retrives the preivously saved tasks form the filePath
+     * @return Previously saved tasks
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> retrieve () throws FileNotFoundException {
 
         ArrayList<Task> list = new ArrayList<>();
@@ -67,6 +91,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the Tasks in a file
+     * @param list The list of tasks to save
+     * @throws IOException
+     */
     public void save (ArrayList<Task> list) throws IOException {
 
         String s = "";

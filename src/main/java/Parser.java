@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Represents the class used to read data from the file and process it.
  */
 public class Parser {
-
+    Scanner scan = new Scanner(System.in);
     public Parser() {
 
     }
@@ -55,48 +55,48 @@ public class Parser {
 
     /**
      * Method to read and process user input.
-     * @param ui the UI of the Duke object that interacts with the user
-     * @param list the task list of the Duke object which stores the tasks
-     * @param storage the object responsible for reading file data and saving data to file when user exits
-     * @throws IOException if File not found or other input output exceptions
-     * @throws ParseException if thee data for event type of tasks not in the specified format
+     *
+     * @param ui the user interface interacting with the user
+     * @param list the list where tasks are stored
+     * @param storage the object responsible for writing data to file
+     * @throws IOException if file not found or other input output exceptions
+     * @throws ParseException if data in event class not according to format
      */
     public void readUserCommand(Ui ui, TaskList list, Storage storage) throws IOException, ParseException {
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNextLine()) {
+        while(ui.shouldContinue()){
             String command = scan.next();
             if (command.equals("bye")) {
-                ui.exit();
-                String writeDataToFile = "";
+                ui.Exit();
+                String s = "";
                 for (Task t : list.taskList) {
-                    writeDataToFile = writeDataToFile + t.toString() + "\n";
+                    s = s + t.toString() + "\n";
                 }
-                storage.writeFile(writeDataToFile);
-                break;
+                storage.writeFile(s);
             } else if (command.equals("list")) {
                 list.getList();
             } else if (command.equals("done")) {
-                int numberToBeMarked = scan.nextInt();
-                list.markAsDone(numberToBeMarked - 1);
-                String c = scan.nextLine();
+                int num = scan.nextInt();
+                list.markAsDone(num - 1);
             } else if (command.equals("event")) {
-                String eventGiven = scan.nextLine();
-                list.readEvent(eventGiven);
+                String b = scan.nextLine();
+                list.readEvent(b);
             } else if (command.equals("deadline")) {
-                String deadlineGiven = scan.nextLine();
-                list.readDeadline(deadlineGiven);
+                String det = scan.nextLine();
+                list.readDeadline(det);
             } else if (command.equals("todo")) {
                 String todoDetails = scan.nextLine();
                 list.readTodo(todoDetails);
             } else if (command.equals("delete")) {
-                int numberToBeDeleted = scan.nextInt();
-                list.deleteTask(numberToBeDeleted);
+                int number = scan.nextInt();
+                String empty = scan.nextLine();
+                list.deleteTask(number);
             } else if (command.equals("find")) {
-                String requiredWord = scan.next();
-                list.find(requiredWord);
+                String required = scan.next();
+                String empty = scan.nextLine();
+                list.find(required);
             } else {
                 System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
-                String emptyLine = scan.nextLine();
+                String empty = scan.nextLine();
             }
         }
     }

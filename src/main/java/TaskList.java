@@ -72,19 +72,21 @@ public class TaskList {
     /**
      *Finds and prints all the tasks containing the word requested by the user.
      *
-     * @param s The word that the user wants to find.
+     * @param words The words that the user wants to find.
      */
-    protected void find(String s) {
-        int count = 0;
-        System.out.println("Here are the matching tasks in your list:");
-        for (Task t : taskList) {
-            if (t.description.contains(s)) {
-                System.out.println(t);
-                count += 1;
+    protected void find(String ...words) {
+        for (String s : words) {
+            int count = 0;
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task task : taskList) {
+                if (task.description.contains(s)) {
+                    System.out.println(task);
+                    count += 1;
+                }
             }
-        }
-        if (count == 0) {
-            System.out.println("There are no matching tasks in your list");
+            if (count == 0) {
+                System.out.println("There are no matching tasks in your list.");
+            }
         }
     }
 

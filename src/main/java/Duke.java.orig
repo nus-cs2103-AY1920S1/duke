@@ -55,13 +55,15 @@ public class Duke {
         }
     }
 
+<<<<<<< HEAD
     /**
      * This is the starting point of the application
      * @param args
      * @throws DukeException
      * @throws IOException
      */
-
+=======
+>>>>>>> branch-A-CodingStandard
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("../data/duke.txt", "../data").run();
     }

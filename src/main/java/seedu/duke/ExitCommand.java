@@ -17,9 +17,10 @@ public class ExitCommand extends Command{
      * @param t TaskList.
      * @param u Ui.
      * @param s Storage.
+     * @return
      */
     @Override
-    public void execute(TaskList t, Ui u, Storage s) {
-        u.exitLine();
+    public String execute(TaskList t, Ui u, Storage s) {
+        return u.exitLine();
     }
 }

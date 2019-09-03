@@ -71,61 +71,74 @@ public class Ui {
     /**
      * Prints message when marking a task as done.
      * @param str String representing Task done.
+     * @return
      */
-    public static void doneLine(String str) {
-        System.out.println("Nice! I've marked this task as done:\n " + str);
+    public static String doneLine(String str) {
+        String message = "Nice! I've marked this task as done:\n " + str;
+        return message;
     }
 
     /**
      * Prints message when deleting a task.
      * @param str String representing Task deleted.
      * @param size integer representing the current size of the TaskList.
+     * @return
      */
-    public static void deleteLine(String str, int size) {
-        System.out.println("Noted. I've removed this task: \n   " + str + "\n Now you have " +
-        size + " tasks in the list.");
+    public static String deleteLine(String str, int size) {
+        String result = "Noted. I've removed this task: \n   " + str + "\n Now you have " +
+        size + " tasks in the list.";
+        return result;
     }
 
     /**
      * Prints message when adding a task.
      * @param str String representing Task added.
      * @param size integer representing the current size of the TaskList.
+     * @return
      */
-    public static void addLine(String str, int size) {
-        System.out.println("Got it. I've added this task:\n " + str +
-                "\nNow you have " + size + " tasks in the list.");
+    public static String addLine(String str, int size) {
+        String message = "Got it. I've added this task:\n " + str +
+                "\nNow you have " + size + " tasks in the list.";
+        return message;
     }
 
     /**
      * Prints exit message.
+     * @return
      */
-    public static void exitLine() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String exitLine() {
+        String message = "Bye. Hope to see you again soon!";
+        return message;
     }
 
     /**
      * Prints the list of all Tasks in the TaskList.
      * @param tl Current TaskList.
+     * @return
      */
-    public static void list(TaskList tl) {
+    public static String list(TaskList tl) {
+        String message = "";
         if (tl.list.size() != 0) {
-            System.out.println("Here are the tasks in your list:");
+            message += "Here are the tasks in your list:\n";
             for (int i = 1; i <= tl.list.size(); i++) {
-                System.out.println(" " + i + ". " + tl.list.get(i - 1).toString());
+                message += " " + i + ". " + tl.list.get(i - 1).toString() + "\n";
             }
         } else {
-            System.out.println("You have no tasks in your list.");
+            message = "You have no tasks in your list.";
         }
+        return message;
     }
 
-    public static void listMatching(ArrayList<Task> tl) {
+    public static String listMatching(ArrayList<Task> tl) {
+        String result = "";
         if (tl.size() != 0) {
-            System.out.println("Here are the matching tasks in your list:");
+            result += "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= tl.size(); i++) {
-                System.out.println(" " + i + ". " + tl.get(i - 1).toString());
+                result += " " + i + ". " + tl.get(i - 1).toString() + "\n";
             }
         } else {
-            System.out.println("You have no matching tasks in your list.");
+            result = "You have no matching tasks in your list.";
         }
+        return result;
     }
 }

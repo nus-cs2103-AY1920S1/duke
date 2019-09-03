@@ -10,9 +10,10 @@ public class ListCommand extends Command {
      * @param t TaskList.
      * @param u Ui.
      * @param s Storage.
+     * @return
      */
     @Override
-    public void execute(TaskList t, Ui u, Storage s) {
-        u.list(t);
+    public String execute(TaskList t, Ui u, Storage s) {
+        return u.list(t);
     }
 }

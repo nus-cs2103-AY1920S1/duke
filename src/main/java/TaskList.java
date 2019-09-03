@@ -28,5 +28,16 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> search = new ArrayList<>();
+        for(Task current : this.list) {
+            String toSearch = current.description;
+            if(toSearch.toLowerCase().contains(keyword.toLowerCase())){
+                search.add(current);
+            }
+        }
+        return search;
+    }
+
     //crud operations
 }

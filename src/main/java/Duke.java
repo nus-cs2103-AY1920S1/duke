@@ -77,6 +77,19 @@ public class Duke {
                     this.storage.write(this.tasks);
                     String size = Integer.toString(store.size());
                     System.out.println("Now you have " + size + " tasks in the list.");
+                } else if (next.equals("find")) {
+                    String search = sc.nextLine().trim();
+                    ArrayList<Task> found = this.tasks.find(search);
+                    int n = 1;
+                    if(found.isEmpty()){
+                            System.out.println("No matching items found");
+                    } else {
+                        System.out.println("Here are the matching tasks in your list:");
+                        for (Task item : found) {
+                            System.out.println(n + "." + item);
+                            n++;
+                        }
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

@@ -26,11 +26,11 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String greetMsg = "    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n";
+        showLine();
+        String greetMsg = "     Hello! I'm Duke\n     What can I do for you?";
         System.out.println(logo + '\n' + greetMsg);
+        showLine();
+        System.out.println();
     }
 
     /**
@@ -151,7 +151,7 @@ public class Ui {
         System.out.println("     Got it. I've added this task: \n" +
                 "       [D][ ] " + d + " (by: " + dt + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.");
-        storage.appendToFile("D | 0 | " + taskName + " | " + date + '\n');
+        storage.appendToFile("D | 0 | " + taskName + " | " + dt.toString() + '\n');
     }
 
     /**

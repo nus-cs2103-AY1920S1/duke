@@ -1,14 +1,13 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * This class processes date input from the user. For example, if the command is deadline return book /by
  * 2/12/2019 1800, Duke understands 2/12/2019 1800 as 2nd of December 2019, 6pm, instead of storing it simply
  * as a String.
  */
 public class DateTime {
-
-    /**
-     * Original input from user.
-     */
-    String dateTime;
 
     /**
      * Processed day from user input.
@@ -35,23 +34,32 @@ public class DateTime {
      * @param dateTime Date and time input form user
      */
     public DateTime(String dateTime) {
-        this.dateTime = dateTime;
+        processDate(dateTime);
     }
 
     /**
-     * This method splits the user input into day, month and year.
-     * @param d Date from user input
+     * This method processes the user's date and time input into the desired format.
+     * @param dateTime Date and time input by user
      */
-    public void processDate(String d) {
-        String[] splitDate = d.split("/");
-        processDay(splitDate[0]);
-        processMonth(splitDate[1]);
-        year = splitDate[2];
+    public void processDate(String dateTime) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            simpleDateFormat.setLenient(false);
+            Date date = simpleDateFormat.parse(dateTime);
+            day = new SimpleDateFormat("d").format(date);
+            month = new SimpleDateFormat("MMMM").format(date);
+            year = new SimpleDateFormat("yyyy").format(date);
+            time = new SimpleDateFormat("h:mma").format(date).toLowerCase();
+            processDay(day); // adds st, nd, rd, th suffix to day
+        } catch (ParseException ex) {
+            System.err.println(ex);
+            System.exit(1);
+        }
     }
 
     /**
-     * Process day into desired format.
-     * @param d Unformatted day input
+     * Adds suffix to day.
+     * @param d Day string without suffix
      */
     public void processDay(String d) {
         int dayNum = Integer.parseInt(d);
@@ -69,95 +77,6 @@ public class DateTime {
     }
 
     /**
-     * Process month into desired format.
-     * @param m Unformatted month input
-     */
-    public void processMonth(String m) {
-        switch (Integer.parseInt(m)) {
-        case 1:
-            month = "January";
-            break;
-        case 2:
-            month = "February";
-            break;
-        case 3:
-            month = "March";
-            break;
-        case 4:
-            month = "April";
-            break;
-        case 5:
-            month = "May";
-            break;
-        case 6:
-            month = "June";
-            break;
-        case 7:
-            month = "July";
-            break;
-        case 8:
-            month = "August";
-            break;
-        case 9:
-            month = "September";
-            break;
-        case 10:
-            month = "October";
-            break;
-        case 11:
-            month = "November";
-            break;
-        case 12:
-            month = "December";
-            break;
-        }
-    }
-
-    /**
-     * Process time into desired format.
-     * @param t Unformatted time input
-     */
-    public void processTime(String t) {
-        int timeNum = Integer.parseInt(t);
-        int minutes = timeNum % 100;
-        if (minutes > 0) {
-            if (timeNum < 59) {
-                int hour = 12;
-                time = String.valueOf(hour) + ":" + String.format("%02d", minutes) + "am";
-            } else if (timeNum < 1300) {
-                // time before 1pm
-                int hour = (timeNum - minutes) / 100;
-                if (hour < 12) {
-                    time = String.valueOf(hour) + ":" + String.format("%02d", minutes) + "am";
-                } else {
-                    time = String.valueOf(hour) + ":" + String.format("%02d", minutes) + "pm";
-                }
-            } else {
-                // 1pm and after until 2359
-                int hour = ((timeNum - minutes) / 100) - 12;
-                time = String.valueOf(hour) + ":" + String.format("%02d", minutes) + "pm";
-            }
-        } else {
-            if (timeNum < 59) {
-                int hour = 12;
-                time = String.valueOf(hour) + "am";
-            } else if (timeNum < 1300) {
-                // time before 1pm
-                int hour = (timeNum - minutes) / 100;
-                if (hour < 12) {
-                    time = String.valueOf(hour) + "am";
-                } else {
-                    time = String.valueOf(hour) + "pm";
-                }
-            } else {
-                // 1pm and after until 2359
-                int hour = ((timeNum - minutes) / 100) - 12;
-                time = String.valueOf(hour) + "pm";
-            }
-        }
-    }
-
-    /**
      * Getter to retrieve the time
      * @return String Time in desired format
      */
@@ -171,9 +90,6 @@ public class DateTime {
      */
     @Override
     public String toString() {
-        String[] splitDateTime = dateTime.split(" ");
-        processDate(splitDateTime[0]);
-        processTime(splitDateTime[1]);
         String result = day + " of " + month + " " + year + ", " + time;
         return result;
     }

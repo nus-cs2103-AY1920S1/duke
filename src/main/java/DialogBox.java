@@ -43,10 +43,10 @@ public class DialogBox extends HBox {
         }
         name.setText(isDuke ? "Perry" : "You");
         dialog.setText(text);
-        Circle clip = new Circle(35, 35, 35);
+        Circle clip = new Circle(30, 30, 30);
         displayPicture.setClip(clip);
-        displayPicture.setFitWidth(70.0);
-        displayPicture.setFitHeight(70.0);
+        displayPicture.setFitWidth(60.0);
+        displayPicture.setFitHeight(60.0);
         displayPicture.setImage(img);
     }
 

@@ -2,8 +2,6 @@ package duke.util;
 /**
  * duke.util.Duke Class
  */
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,8 +12,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private final String path = "./saved/taskList_history.txt";
 
     /**

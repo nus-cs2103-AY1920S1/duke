@@ -73,7 +73,7 @@ public class Ui {
     }
 
     public String getExitMsg() {
-        return "Bye. Hope to see you again soon!";
+        return "Your tasks have been saved.\nBye. Hope to see you again soon!";
     }
 
     /**
@@ -191,7 +191,7 @@ public class Ui {
 
             int id = 1;
             for (Task task : tasksWithKeyword) {
-                sb.append(id + "." + task);
+                sb.append(id + "." + task + "\n");
                 id++;
             }
 

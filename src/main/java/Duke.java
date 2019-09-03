@@ -118,6 +118,11 @@ public class Duke extends Application {
 
         // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Show greeting message at start
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(ui.getGreetingMsg()), new ImageView(duke))
+        );
     }
 
      /**

@@ -28,7 +28,7 @@ public class FindCommand extends Command {
      * @param storage StorageData of Duke App.
      */
     @Override
-    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
-        ui.printKeyWordTasks(tasks, this.keyWord);
+    public String execute(TaskList tasks, DukeUi ui, StorageData storage) {
+        return ui.printKeyWordTasks(tasks, this.keyWord);
     }
 }

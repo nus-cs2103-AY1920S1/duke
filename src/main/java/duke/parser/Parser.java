@@ -53,7 +53,6 @@ public class Parser {
 
         default:
             throw new DukeWrongInputException();
-
         }
     }
 }

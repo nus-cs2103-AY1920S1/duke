@@ -1,4 +1,26 @@
-import java.io.*;
+import javafx.application.Application;
+
+import javafx.fxml.FXMLLoader;
+
+import javafx.geometry.Pos;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+
+import javafx.stage.Stage;
+
+import java.awt.Dimension;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,10 +44,14 @@ import duke.exception.DukeWrongInputException;
 import duke.exception.DukeEmptyDescriptionException;
 import duke.exception.DukeMissingDescriptionException;
 
-public class Duke {
+public class Duke extends Application {
     private DukeUi dukeUI;
     private StorageData storage;
     private TaskList tasks;
+
+    public Duke() {
+        this("data/tasks.txt");
+    }
 
     /**
      * Instantiates a Duke Object.
@@ -47,26 +73,36 @@ public class Duke {
      * User input is then passed through the Parser object in the Duke object, creating a Command object.
      * Command object is then executed accordingly.
      */
-    public void run() {
-        Scanner input = new Scanner(System.in);
-        dukeUI.printWelcomeMessage();
-        while(input.hasNextLine()) {
-            try {
-                Command c = Parser.parseCommand(input.nextLine());
-                c.execute(this.tasks, this.dukeUI, this.storage);
-            } catch (DukeWrongInputException e) {
-                System.out.println(e.getMessage());
-            } catch (DukeMissingDescriptionException ex) {
-                System.out.println(ex.getMessage());
-            } catch (DukeEmptyDescriptionException exx) {
-                System.out.println(exx.getMessage());
-            }
+    public String run(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.execute(this.tasks, this.dukeUI, this.storage);
+        } catch (DukeWrongInputException e) {
+            return e.getMessage();
+        } catch (DukeMissingDescriptionException ex) {
+            return ex.getMessage();
+        } catch (DukeEmptyDescriptionException exx) {
+            return exx.getMessage();
+        }
+    }
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            VBox vb = fxmlLoader.load();
+            Scene scene = new Scene(vb);
+            stage.setScene(scene);
+            fxmlLoader.<MainController>getController().setDuke(new Duke());
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
+/*
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+ */
 }
 
 

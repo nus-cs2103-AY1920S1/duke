@@ -33,21 +33,19 @@ public class UI {
     /**
      * Generic Greeting at the start of the programme.
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        return "Hello from\n" + logo + "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * Generic farewell at the end of the programme.
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 }

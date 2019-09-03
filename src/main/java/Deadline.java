@@ -24,7 +24,7 @@ public class Deadline extends Task {
         try {
             this.date = formatter.parse(by);
         } catch (ParseException pe){
-            System.out.println("Something serious happened here...");
+            System.out.println("Deadline: Something serious happened here...");
         }
     }
 

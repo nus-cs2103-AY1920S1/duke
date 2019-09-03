@@ -29,7 +29,7 @@ public class Event extends Task {
             this.startTime = formatter.parse(on.substring(10, 14));
             this.endTime = formatter.parse(on.substring(15));
         } catch (ParseException pe) {
-            System.out.println("Something serious happened here...");
+            System.out.println("Event: Something serious happened here...");
         }
     }
 

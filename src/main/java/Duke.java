@@ -3,11 +3,25 @@ import components.Parser;
 import components.Storage;
 import components.TaskList;
 import components.Ui;
+import javafx.scene.control.Label;
 
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+
+
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+
 
     /**
      * Constructs a Duke instance.
@@ -19,6 +33,7 @@ public class Duke {
         taskList = new TaskList(storage.load());
         ui = new Ui();
     }
+
 
     private void run() {
         ui.showWelcome();

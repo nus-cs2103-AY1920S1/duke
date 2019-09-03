@@ -7,11 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * The DukeData class manages the data of the user's task list
+ * The DukeData class manages the data of the user's task list by
  * updating the data file in the hard disk accordingly.
  */
 public class DukeData {
-    // every time Duke starts up, create and load a new file
+    // every time Duke starts up, create and load a new or existing file.
     private File _saveFile;
     private FileWriter _fw;
     private BufferedWriter _bw;
@@ -19,7 +19,7 @@ public class DukeData {
 
     /**
      * Generates a new DukeData object which handles creation of a
-     * new txt file in the data directory.
+     * new txt file in the default data directory.
      */
     public DukeData() {
         this._taskList = new TaskList();
@@ -50,6 +50,11 @@ public class DukeData {
         }
     }
 
+    /**
+     * Generates a new DukeData object which handles creation of a
+     * new txt file in the given data directory, filePath.
+     * @param filePath the file path where the user wants to save Duke's data to
+     */
     public DukeData(String filePath) {
         this._taskList = new TaskList();
 
@@ -83,7 +88,7 @@ public class DukeData {
      * Adds and updates the given task to the file saved in the hard disk.
      * @param index the index of the task to be added.
      * @param t Task object which can represent ToDo, Deadline, or Event.
-     * @throws IOException
+     * @throws IOException if an I/O Exception occurs
      */
     public void addTask(int index, Task t) throws IOException {
         this._taskList.addTask(t);
@@ -95,8 +100,8 @@ public class DukeData {
 
     /**
      * Updates the data file in the hard disk by removing the said task.
-     * @param index the index of the task to be removed.
-     * @throws IOException
+     * @param index the index of the task to be removed
+     * @throws IOException if an I/O Exception occurs
      */
     public void removeTask(int index) throws IOException {
         this._taskList.removeTask(index);
@@ -119,8 +124,8 @@ public class DukeData {
      * Updates the data file in the hard disk by changing
      * the status of the given task.
      * @param index the index of the task from the task list
-     * @throws IOException
-     * @throws FileNotFoundException when the file does not exist.
+     * @throws IOException if an I/O Exception occurs
+     * @throws FileNotFoundException when the file does not exist
      */
     public void taskDone(int index)
             throws IOException, FileNotFoundException {
@@ -142,13 +147,15 @@ public class DukeData {
 
     /**
      * Closes the BufferedWriter file upon exit of the Duke program.
+     * @throws IOException if an I/O Exception occurs
      */
     public void exit() throws IOException {
         this._bw.close();
     }
 
     /**
-     * Prints out everything in the data file saved in the hard disk
+     * Prints out everything in the data file saved in the hard disk.
+     * @throws IOException if an I/O Exception occurs
      */
     public void printDataFile() throws IOException {
         BufferedReader out = new BufferedReader(
@@ -162,6 +169,10 @@ public class DukeData {
         out.close();
     }
 
+    /**
+     * Loads the data that DukeData manages in the form of a TaskList object.
+     * @return TaskList object of the list that DukeData manages
+     */
     public TaskList load() {
         return this._taskList;
     }

@@ -71,8 +71,8 @@ public class Ui {
     public static void handleList(String input, TaskList tasks) throws DukeException {
         String[] inputStringArr = input.split(" ");
         if (inputStringArr.length > 1) {
-            throw new DukeException("     ☹ OOPS!!! The list command should not be followed by other " +
-                    "text!");
+            throw new DukeException("     ☹ OOPS!!! The list command should not be followed by other "
+                    + "text!");
         } else {
             System.out.println("     Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
@@ -97,7 +97,7 @@ public class Ui {
      * @param input User input
      * @param tasks List of tasks
      * @param storage Update tasks stored persistently
-     * @throws DukeException
+     * @throws DukeException When task has already been marked done or number provided not in range
      */
     public static void handleDone(String input, TaskList tasks, Storage storage) throws DukeException {
         String[] inputStringArr = input.split(" ");
@@ -105,8 +105,8 @@ public class Ui {
             int taskNum = Integer.parseInt(inputStringArr[1]);
             int totalTasks = tasks.size();
             if (taskNum < 1 || taskNum > totalTasks) {
-                throw new DukeException("     ☹ OOPS!!! The number provided is not within the range of the " +
-                        "list.");
+                throw new DukeException("     ☹ OOPS!!! The number provided is not within the range of the "
+                        + "list.");
             } else {
                 Task t = tasks.get(taskNum - 1);
                 boolean isDone = t.getStatus();
@@ -114,8 +114,8 @@ public class Ui {
                     throw new DukeException("     ☹ OOPS!!! The task has already been marked as completed.");
                 } else {
                     t.setDone();
-                    System.out.println("     Nice! I've marked this task as done: \n" +
-                            "       [" + '+' + "] " + t);
+                    System.out.println("     Nice! I've marked this task as done: \n"
+                            + "       [" + '+' + "] " + t);
                     storage.rewriteFile(tasks);
                 }
             }
@@ -137,9 +137,9 @@ public class Ui {
             String taskName = ((input.split(" ", 2))[1]).strip();
             Todo t = new Todo(taskName);
             tasks.add(t);
-            System.out.println("     Got it. I've added this task: \n" +
-                    "       [T]" + "[ ]" + ' ' + t+ '\n' +
-                    "     Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println("     Got it. I've added this task: \n"
+                    + "       [T]" + "[ ]" + ' ' + t + '\n'
+                    + "     Now you have " + tasks.size() + " tasks in the list.");
             storage.appendToFile("T | 0 | " + taskName + '\n');
         } else {
             throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -159,9 +159,9 @@ public class Ui {
         DateTime dt = new DateTime(date);
         Deadline d = new Deadline(taskName, dt.toString());
         tasks.add(d);
-        System.out.println("     Got it. I've added this task: \n" +
-                "       [D][ ] " + d + " (by: " + dt + ")\n" +
-                "     Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println("     Got it. I've added this task: \n"
+                + "       [D][ ] " + d + " (by: " + dt + ")\n"
+                + "     Now you have " + tasks.size() + " tasks in the list.");
         storage.appendToFile("D | 0 | " + taskName + " | " + dt.toString() + '\n');
     }
 
@@ -178,9 +178,9 @@ public class Ui {
         DateTime dt = new DateTime(date);
         Event e = new Event(taskName, dt.toString());
         tasks.add(e);
-        System.out.println("     Got it. I've added this task: \n" +
-                "       [E][ ] " + e + " (at: " + dt + ")\n" +
-                "     Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println("     Got it. I've added this task: \n"
+                + "       [E][ ] " + e + " (at: " + dt + ")\n"
+                + "     Now you have " + tasks.size() + " tasks in the list.");
         storage.appendToFile("E | 0 | " + taskName + " | " + date + '\n');
     }
 

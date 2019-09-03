@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * This method returns the number of tasks on the list.
+     * Returns the number of tasks on the list.
      * @return int This returns the number of tasks on the list.
      */
     public int size() {

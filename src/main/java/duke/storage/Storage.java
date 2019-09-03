@@ -39,21 +39,27 @@ public class Storage {
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(f);
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String s = sc.nextLine();
             String[] data = s.split(" \\| ");
             String command = data[0];
             if (command.equals("T")) {
                 Todo t = new Todo(data[2]);
-                if (Integer.parseInt(data[1]) == 1) t.setDone();
+                if (Integer.parseInt(data[1]) == 1) {
+                    t.setDone();
+                }
                 tasks.add(t);
             } else if (command.equals("D")) {
                 Deadline d = new Deadline(data[2], data[3]);
-                if (Integer.parseInt(data[1]) == 1) d.setDone();
+                if (Integer.parseInt(data[1]) == 1) {
+                    d.setDone();
+                }
                 tasks.add(d);
             } else {
                 Event e = new Event(data[2], data[3]);
-                if (Integer.parseInt(data[1]) == 1) e.setDone();
+                if (Integer.parseInt(data[1]) == 1) {
+                    e.setDone();
+                }
                 tasks.add(e);
             }
         }

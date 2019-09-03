@@ -79,7 +79,7 @@ public class DateTime {
     }
 
     /**
-     * Getter to retrieve the time
+     * Getter to retrieve the time.
      * @return String Time in desired format
      */
     public String getTime() {

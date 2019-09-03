@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Scanner;
 
 //Proper JavaFX implementation needed.
 public class Duke extends Application {
@@ -37,21 +36,7 @@ public class Duke extends Application {
             .getResourceAsStream("/images/cat_user.jpg"));
 
     private void run() throws IOException, ParseException {
-        Scanner sc = new Scanner(System.in);
-        DukeController controller = new DukeController();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        Command command = new Command();
 
-        File file = storage.initFile();
-        List<Task> list = storage.loadTask(FILEPATH);
-
-        ui.showWelcome();
-        controller.execute(ui, list, storage, command, sc);
-
-        ui.printLine();
-        ui.printByeMessage();
-        ui.printLine();
     }
 
     public static void main(String[] args) throws IOException, ParseException {
@@ -59,7 +44,21 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException, ParseException{
+        DukeController controller = new DukeController();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        Command command = new Command();
+
+        File file = storage.initFile();
+        List<Task> list = storage.loadTask(FILEPATH);
+        /*
+        ui.showWelcome();
+
+        ui.printLine();
+        ui.printByeMessage();
+        ui.printLine();
+        */
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -96,11 +95,19 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput(controller, ui, list, storage, command);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput(controller, ui, list, storage, command);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         Scene scene = new Scene(mainLayout);
@@ -109,9 +116,9 @@ public class Duke extends Application {
         stage.show();
     }
 
-    private void handleUserInput() {
+    private void handleUserInput(DukeController controller, Ui ui, List<Task> list, Storage storage, Command command) throws IOException {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(getResponse(controller, userInput.getText(), ui, list, storage, command));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -119,8 +126,9 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String input) {
-        return "seedu.duke.Duke heard: " + input;
+    private String getResponse(DukeController controller, String input, Ui ui, List<Task> list, Storage storage, Command command)
+        throws IOException {
+        return controller.executeFx(ui, list, storage, command, input);
     }
 }
 

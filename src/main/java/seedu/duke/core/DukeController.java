@@ -46,4 +46,26 @@ public class DukeController {
             }
         }
     }
+
+    public String executeFx(Ui ui, List<Task> list, Storage storage, Command command,
+                          String input) throws IOException {
+        String output = "";
+        String[] parsed_inputs = input.split(" ", 2);
+
+        String cmd = parsed_inputs[0]; //command
+        String description = "";
+
+        if (parsed_inputs.length >= 2) {
+            description = parsed_inputs[1];
+        }
+        try {
+            output += command.parseCommand(input, cmd, description, list, storage, ui);
+        } catch (DukeException e) {
+            output += e.toString();
+        } catch (ParseException e) {
+            output += e.toString();
+        }
+
+        return output;
+    }
 }

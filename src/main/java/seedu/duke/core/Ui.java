@@ -42,12 +42,13 @@ public class Ui {
      * Prints all the tasks inside task list.
      * @param list Task list (ArrayList) where all tasks are stored.
      */
-    public void displayList(List<Task> list) {
-        System.out.println("Here are the tasks in your list:");
+    public String displayList(String output, List<Task> list) {
+        output += "Here are the tasks in your list:\n";
         int index = 0;
         for (Task task : list) {
             index++;
-            System.out.println(index + "." + task);
+            output += (index + "." + task + "\n");
         }
+        return output;
     }
 }

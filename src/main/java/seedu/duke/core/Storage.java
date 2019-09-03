@@ -99,11 +99,9 @@ public class Storage {
      * @throws IOException when file is corrupted or cannot be opened.
      * @throws ParseException when date entered from the user is in incorrect date format.
      */
-    public Task addTask(List<Task> list, String cmd, String desc, String time) throws DukeException,
+    public String addTask(String output, List<Task> list, String cmd, String desc, String time) throws DukeException,
             IOException, ParseException {
-        DukeController controller = new DukeController();
         Task task = new Task();
-
         if (cmd == null || desc == null || time == null) {
             throw new DukeException("oops! cmd/desc/time is null..");
         } else if (cmd.equals("") || desc.equals("") || time.equals("")) {
@@ -119,10 +117,10 @@ public class Storage {
             list.add(task);
 
             saveTask(list);
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + task);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
-            return task;
+            output += "Got it. I've added this task:\n";
+            output += "  " + task + "\n";
+            output += "Now you have " + list.size() + " tasks in the list.\n";
+            return output;
         }
     }
 
@@ -133,14 +131,13 @@ public class Storage {
      * @return Task List (ArrayList) based on the search keyword.
      */
     public List<Task> searchTask(List<Task> list, String description) {
-        Task task = new Task();
         List<Task> searchResultList = new ArrayList<>();
 
         for (Task t : list) {
             String[] arr = t.getDescription().split(" ");
 
             for (String word : arr) {
-                if (arr.equals(description)) {
+                if (word.equals(description)) {
                     searchResultList.add(t);
                 }
             }
@@ -156,19 +153,20 @@ public class Storage {
      * @throws DukeException when user enters index that is out of boundaries of the list index.
      * @throws IOException when text file cannot be opened or modified.
      */
-    public void removeTask(List<Task> list, int index) throws TaskListEmptyException,
+    public String removeTask(String output, List<Task> list, int index) throws TaskListEmptyException,
             DukeException, IOException {
         if (list.isEmpty()) {
             throw new TaskListEmptyException("list is empty");
-        } else if (index <= 0 || list.size() < index  + 1) {
+        } else if (index < 0 || list.size() < index  + 1) {
             throw new DukeException("Entered index is out of bound: " + index);
         } else {
-            System.out.println("Noted. I've removed this task:");
+            output += "Noted. I've removed this task: \n";
             Task t = list.get(index);
-            System.out.println("  " + t);
+            output += "  " + t + "\n";
             list.remove(index);
             saveTask(list);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
+            output += "Now you have " + list.size() + " tasks in the list.\n";
         }
+        return output;
     }
 }

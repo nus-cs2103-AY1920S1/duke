@@ -11,7 +11,7 @@ import duke.ui.Ui;
 public abstract class Command {
 
     /**
-     * This method returns a boolean indicating whether the command is an exit command.
+     * Returns a boolean indicating whether the command is an exit command.
      * @return boolean true if exit command, false otherwise
      */
     public boolean isExit() {

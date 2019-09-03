@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * This method returns true indicating that this is an exit command.
+     * Returns true indicating that this is an exit command.
      * @return boolean true since this is an exit command
      */
     @Override

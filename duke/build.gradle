@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "Duke"
+}

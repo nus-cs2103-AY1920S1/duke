@@ -1,5 +1,5 @@
 /**
- * The driver class of the entire Duke Project
+ * The driver class of the entire Duke Project.
  */
 public class Duke {
     private Ui ui;

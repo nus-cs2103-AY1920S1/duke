@@ -1,7 +1,7 @@
 /**
  * Represents a Delete Command.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     /**
      * Constructs a Delete Comamnd object.
      */

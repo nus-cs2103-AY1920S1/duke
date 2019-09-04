@@ -1,5 +1,5 @@
 /**
- * Represents the Help command, which is responsible for showing all possible commands
+ * Represents the Help command, which is responsible for showing all possible commands.
  */
 public class HelpCommand extends Command {
     /**

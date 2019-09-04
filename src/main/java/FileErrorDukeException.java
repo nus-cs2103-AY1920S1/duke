@@ -1,7 +1,7 @@
 /**
  * An exception thrown when there is an error reading or writing to a save file.
  */
-public class FileErrorDukeException extends DukeException{
+public class FileErrorDukeException extends DukeException {
     String filePath;
 
     /**

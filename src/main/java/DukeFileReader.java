@@ -24,19 +24,19 @@ public class DukeFileReader {
             String[] lineSplit = line.split("\\|");
             String eventType = lineSplit[0].trim();
             switch (eventType) {
-                case "todo":
-                    tasks.add(new ToDoTask(lineSplit[1].trim(), lineSplit[2].trim()));
-                    break;
-                case "event":
-                    tasks.add(new EventsTask(lineSplit[1].trim(), lineSplit[2].trim(),
-                                lineSplit[3].trim()));
-                    break;
-                case "deadline":
-                    tasks.add(new DeadlineTask(lineSplit[1].trim(), lineSplit[2].trim(),
-                                lineSplit[3].trim()));
-                    break;
-                default:
-                    throw new FileErrorDukeException(file.getAbsolutePath());
+            case "todo":
+                tasks.add(new ToDoTask(lineSplit[1].trim(), lineSplit[2].trim()));
+                break;
+            case "event":
+                tasks.add(new EventsTask(lineSplit[1].trim(), lineSplit[2].trim(),
+                            lineSplit[3].trim()));
+                break;
+            case "deadline":
+                tasks.add(new DeadlineTask(lineSplit[1].trim(), lineSplit[2].trim(),
+                            lineSplit[3].trim()));
+                break;
+            default:
+                throw new FileErrorDukeException(file.getAbsolutePath());
             }
         }
         return tasks;

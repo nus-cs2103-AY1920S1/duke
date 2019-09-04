@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     public FindCommand() {
     }
 
@@ -8,6 +8,12 @@ public class FindCommand extends Command{
         return false;
     }
 
+    /**
+     * Executes the command to find the specified word in all tasks.
+     * @param tasks The TaskList of the current Duke App
+     * @param ui The Ui being used by the Duke App
+     * @param storage The Storage unit being used by the Duke app.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String filter = ui.getLastCommand().substring(5).trim();
         ui.showMessage("Here are the tasks in your list:");

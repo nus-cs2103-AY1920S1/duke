@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Represents a list command which is responsible for displaying the current list of tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     /**
      * Constructs a ListCommand Object.
      */

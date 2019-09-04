@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 /**
- * Represents the User Interface used by the Dike App. It is responsible for reading and displaying
- * everything to and from the user. It keeps track of only the latest user input.
+ * Represents the User Interface used by the Duke App.
+ * It is responsible for reading and displaying everything to and from the user.
+ * It keeps track of only the latest user input.
  */
 public class Ui {
     public String lastCommand = "";
@@ -59,7 +60,7 @@ public class Ui {
     }
 
     /**
-     * Displayes an error text
+     * Displays an error text.
      * @param err the text of the error.
      */
     void showError(String err) {
@@ -81,7 +82,7 @@ public class Ui {
     }
 
     /**
-     * Displayes a horizontal line.
+     * Displays a horizontal line.
      */
     public void straightLine() {
         System.out.println("\n--------------------------------------");

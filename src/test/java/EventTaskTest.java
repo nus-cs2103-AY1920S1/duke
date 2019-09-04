@@ -9,8 +9,9 @@ public class EventTaskTest {
         assertEquals("[E][✗] lecture (At: 12 December 2019, 4PM)",
                 new EventsTask("lecture /at 12/12/2019 16:00").toString());
     }
+
     @Test
-    public void toString_invalidInput_exception() throws Exception{
+    public void toString_invalidInput_exception() throws Exception {
         try {
             assertEquals(0, new EventsTask("hello world"));
             fail();
@@ -18,8 +19,9 @@ public class EventTaskTest {
             assertEquals("OOPS!!! The description /at of a event task cannot be empty.",e.toString());
         }
     }
+
     @Test
-    public void toString_invalidDate_exception() throws Exception{
+    public void toString_invalidDate_exception() throws Exception {
         try {
             assertEquals(0, new EventsTask("hello world /at :)"));
             fail();

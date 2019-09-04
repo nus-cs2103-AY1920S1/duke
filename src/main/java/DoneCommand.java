@@ -11,7 +11,6 @@ public class DoneCommand extends Command {
 
     /**
      * Determines whether or should the Duke App should terminate.
-     *
      * @return returns false
      */
     public boolean isExit() {
@@ -20,12 +19,14 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the completion of a particular task defines by the last user input.
-     *
      * @param tasks   The TaskList of the current Duke App.
      * @param storage The Storage unit being used by the Duke app.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String doneNumber = input.substring(5).trim();
+        String doneNumber = input.substring(4).trim();
+        if (doneNumber.length() == 0) {
+            return "No task number detected to be completed";
+        }
         try {
             int taskNumber = Integer.parseInt(doneNumber) - 1;
             tasks.complete(taskNumber);

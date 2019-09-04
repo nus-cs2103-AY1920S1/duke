@@ -25,7 +25,10 @@ public class DeleteCommand extends Command {
      * @param storage The Storage unit being used by the Duke app.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String deleteNumber = input.substring(7).split(" ")[0].trim();
+        String deleteNumber = input.substring(6).trim();
+        if (deleteNumber.length() == 0) {
+            return "No number detected to be removed";
+        }
         try {
             int taskNumber = Integer.parseInt(deleteNumber) - 1;
             String output = "Noted. I've removed this task:\n";

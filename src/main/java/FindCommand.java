@@ -16,7 +16,10 @@ public class FindCommand extends Command {
      * @param storage The Storage unit being used by the Duke app.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String filter = input.substring(5).trim();
+        String filter = input.substring(4).trim();
+        if (filter.length() == 0) {
+            return "No keyword to search";
+        }
         String output = "Here are the tasks in your list:\n";
         ArrayList<Task> allTask = tasks.getList();
         for (int i = 0; i < allTask.size(); i++) {

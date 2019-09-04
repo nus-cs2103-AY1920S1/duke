@@ -25,7 +25,7 @@ public class DeadlineCommand extends AddCommand {
      * @param storage The Storage unit being used by the Duke app.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String command = input.substring(9).trim();
+        String command = input.substring(8).trim();
         return addTask(tasks, storage, new DeadlineTask(command));
     }
 }

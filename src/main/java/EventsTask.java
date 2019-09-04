@@ -58,9 +58,9 @@ public class EventsTask extends Task {
     public String toString() {
         String output = "[E]";
         if (super.completed) {
-            output += "[✓]";
+            output += "[\u2713]";
         } else {
-            output += "[✗]";
+            output += "[\u2717]";
         }
         output += " " + this.taskName + " (At: " + this.taskTime + ")";
         return output;

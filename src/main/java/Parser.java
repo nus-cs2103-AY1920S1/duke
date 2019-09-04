@@ -26,14 +26,14 @@ public class Parser {
 
     public void parseLineInput(String input) throws DukeException, IOException, ParseException {
         String firstWord = input.split(" ")[0];
-        ArrayList<Task> list = taskList.getList();
+        //ArrayList<Task> list = taskList.getList();
         if (firstWord.equals("bye")) {
             ui.printByeMessage();
         } else if (firstWord.equals("list")) {
-            ui.printList(list);
+            ui.printList(taskList.getList());
         } else if (firstWord.equals("done")) {
             Integer taskNum = Integer.valueOf(input.substring(5));
-            Task currTask = list.get(taskNum - 1);
+            Task currTask = taskList.getTask(taskNum - 1);
             currTask.markAsDone();
             ui.printTaskDone(currTask);
             storage.updateFile();
@@ -42,8 +42,8 @@ public class Parser {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             } else {
                 Task toDoTask = new Todo(input.substring(5));
-                ui.printToDoTask(toDoTask, list);
-                list.add(toDoTask);
+                ui.printToDoTask(toDoTask, taskList.getList());
+                taskList.addTask(toDoTask);
                 storage.appendToFile(toDoTask);
             }
         } else if (firstWord.equals("deadline")) {
@@ -53,8 +53,8 @@ public class Parser {
                 String time = input.split("/by", 2)[1];
                 String description = input.split(" /by", 2)[0];
                 Task deadlineTask = new Deadline(description, time);
-                list.add(deadlineTask);
-                ui.printDeadlineTask(deadlineTask, list);
+                taskList.addTask(deadlineTask);
+                ui.printDeadlineTask(deadlineTask, taskList.getList());
                 storage.appendToFile(deadlineTask);
             }
         } else if (firstWord.equals("event")) {
@@ -64,14 +64,14 @@ public class Parser {
                 String time = input.split("/at", 2)[1];
                 String description = input.split(" /at", 2)[0];
                 Task eventTask = new Event(description, time);
-                list.add(eventTask);
-                ui.printEvenTask(eventTask, list);
+                taskList.addTask(eventTask);
+                ui.printEvenTask(eventTask, taskList.getList());
                 storage.appendToFile(eventTask);
             }
         } else if (firstWord.equals("delete")) {
             Integer index = Integer.valueOf(input.substring(7));
-            ui.printDeleteTask(list.get(index - 1), list);
-            list.remove((int) index - 1);
+            ui.printDeleteTask(taskList.getTask(index - 1), taskList.getList());
+            taskList.deleteTask((int) index - 1);
             storage.updateFile();
         } else if (firstWord.equals("bye")) {
             ui.printByeMessage();

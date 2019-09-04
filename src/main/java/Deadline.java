@@ -23,6 +23,10 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public String toString() {
         return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] " + this.description + "(by: " + time + ")";
     }

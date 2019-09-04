@@ -28,6 +28,10 @@ public class TaskList {
         return this.list;
     }
 
+    public Task getTask(int index) {
+        return this.list.get(index);
+    }
+
     public void setTaskList(ArrayList<Task> list) {
         this.list = list;
     }

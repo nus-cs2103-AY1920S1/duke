@@ -1,23 +1,18 @@
-import java.util.ArrayList;
+public class Event extends Tasks {
+    private final String TAG = "E";
+    private String dateTime;
 
-public class Event {
-    private String tag = "E";
-    private taskDescription;
-    private status;
-    private time;
+    public Event(String dets, String dateTime) {
+        super(dets);
+        this.dateTime = dateTime;
+    }
 
-    public Event(ArrayList<String> inputList) {
-        super(inputList.get(1), inputList.get(2));
-        this.taskDescription = super.taskDetails;
-        this.status = super.status;
-        this.time = super.time;
+    public void finishTask() {
+        super.finishTask();
     }
 
     @Override
-
-    public String toString(){
-        return tag + " | " + status + " | " + taskDescription + " | " + time;
+    public String toString() {
+        return TAG + " | " + super.getStatus() + " | " + super.getDetails() + " | " + dateTime;
     }
-
-
 }

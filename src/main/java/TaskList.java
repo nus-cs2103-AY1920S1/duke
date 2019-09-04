@@ -5,6 +5,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> tasks;
+    private String output;
 
     /**
      * Creates a new TaskList.
@@ -47,5 +48,21 @@ public class TaskList {
      */
     public Task get(int index) {
         return tasks.get(index);
+    }
+
+    /**
+     * Set the output of command.
+     * @param s The response of command.
+     */
+    public void setOutput(String s) {
+        this.output = s;
+    }
+
+    /**
+     * Returns the output.
+     * @return The message that needs to be printed out.
+     */
+    public String getOutput() {
+        return output;
     }
 }

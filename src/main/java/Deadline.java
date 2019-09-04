@@ -1,6 +1,6 @@
 public class Deadline extends Task {
-    protected String by;
-    public Deadline(String taskName, String by) {
+    protected DateTime by;
+    public Deadline(String taskName, DateTime by) {
         super(taskName);
         this.by = by;
     }
@@ -10,6 +10,6 @@ public class Deadline extends Task {
     }
     @Override
     public String getStorageString(){
-        return "D | " + super.isDone + " | " + taskName + " | " + by;
+        return "D | " + super.isDone + " | " + taskName + " | " + by.toString();
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Storage {
     private String fileLocation =  "data/duke.txt";
@@ -18,7 +19,6 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] splited = line.split("\\|");
-                String type = splited[0];
                 for (int i = 0; i < splited.length; i++) {
                     splited[i] = splited[i].trim();
                 }
@@ -32,7 +32,7 @@ public class Storage {
                         break;
 
                     case "D":
-                        Task deadline = new Deadline(splited[2], splited[3]);
+                        Task deadline = new Deadline(splited[2], new DateTime(splited[3]));
                         if(splited[1].equals("true")){
                             deadline.markAsDone();
                         }
@@ -40,7 +40,7 @@ public class Storage {
                         break;
 
                     case "E":
-                        Task event = new Event(splited[2], splited[3]);
+                        Task event = new Event(splited[2], new DateTime(splited[3]));
                         if(splited[1].equals("true")){
                             event.markAsDone();
                         }
@@ -54,7 +54,9 @@ public class Storage {
                 sc.close();
         }catch(FileNotFoundException e){
             System.out.println("File not found");
-        }
+        }catch (ParseException e) {
+            System.out.println("     ☹ OOPS!!! I'm sorry,Please enter the date in the format dd-MMM-yyyy HH:mm");
+        }		     
         return tasks;
     }
     public void saveFile(ArrayList<Task> tasks){

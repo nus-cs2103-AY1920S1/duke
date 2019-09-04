@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList; 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.text.ParseException;
 
 public class Duke {
     void logo(){
@@ -40,8 +39,8 @@ public class Duke {
         Storage storage = new Storage();
         ArrayList <Task> list = storage.recoverTasks();
         Scanner sc = new Scanner(System.in);
-        try{
-            while (sc.hasNextLine()){
+        while (sc.hasNextLine()){
+            try{
                 String line = sc.nextLine().toLowerCase();
                 String[] splited = line.split(" ");
                 String check = splited[0];
@@ -89,7 +88,7 @@ public class Duke {
                         System.out.println(addDoubleLine("    ☹ OOPS!!! Events require both a description and a date \n    (e.g. event go to concert /at 13 Feb)"));
                     }else{
                         //if it reaches here it is successful
-                        list.add(new Event(splitDate[0].trim(), splitDate[1].trim()));
+                        list.add(new Event(splitDate[0].trim(), new DateTime(splitDate[1].trim())));
                         Task current = list.get(list.size()-1);
                         printMsg(current, list.size());
                         storage.saveFile(list);
@@ -100,7 +99,7 @@ public class Duke {
                     if(splitDate.length < 2){
                         System.out.println(addDoubleLine("    ☹ OOPS!!! Deadlines require both a description and a date by \n    (e.g. deadline homework3 /by tomorrow)"));
                     }else{
-                        list.add(new Deadline(splitDate[0].trim(), splitDate[1].trim()));
+                        list.add(new Deadline(splitDate[0].trim(), new DateTime(splitDate[1].trim())));
                         Task current = list.get(list.size()-1);
                         printMsg(current, list.size());
                     }
@@ -108,9 +107,13 @@ public class Duke {
                 }else{
                     System.out.println(addDoubleLine("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
                 }
-            }
-        }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println(addDoubleLine("Input cannot be empty!"));
+            
+            }catch(ArrayIndexOutOfBoundsException e){
+                System.out.println(addDoubleLine("Input cannot be empty!"));
+            }catch (ParseException e) {
+                System.out.println(addDoubleLine("     ☹ OOPS!!! I'm sorry,Please enter the date in the format dd-MM-yyyy HH:mm"));
+            }             
+           
         }
         sc.close();
     }

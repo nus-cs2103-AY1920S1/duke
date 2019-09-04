@@ -1,6 +1,6 @@
 public class Event extends Task {
-    protected String at;
-    public Event(String taskName, String at) {
+    protected DateTime at;
+    public Event(String taskName, DateTime at) {
         super(taskName);
         this.at = at;
     }
@@ -10,6 +10,6 @@ public class Event extends Task {
     }
     @Override
     public String getStorageString(){
-        return "E | " + super.isDone + " | " + taskName + " | " + at;
+        return "E | " + super.isDone + " | " + taskName + " | " + at.toString();
     }
 }

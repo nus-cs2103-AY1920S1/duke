@@ -3,7 +3,6 @@ package duke.command;
 import java.io.IOException;
 import duke.exception.DukeException;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
@@ -45,20 +44,21 @@ public class DeleteCommand extends Command {
      * Executes the delete command.
      *
      * @param tasks Task list where the task should be deleted from.
-     * @param ui User interface that assists with printing.
      * @param storage Storage to be updated with the task deleted.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
+        StringBuilder sb = new StringBuilder();
         try {
-            tasks.deleteTask(taskNumber, ui);
+            sb.append(tasks.deleteTask(taskNumber));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("    OOPS!!! Your specified task number is out of range.");
+            sb.append("OOPS!!! Your specified task number is out of range.");
         }
         try {
             storage.store(tasks);
         } catch (IOException e) {
-            System.err.println("    OOPS!!! " + e.getMessage());
+            sb.append("OOPS!!! " + e.getMessage());
         }
+        return sb.toString();
     }
 }

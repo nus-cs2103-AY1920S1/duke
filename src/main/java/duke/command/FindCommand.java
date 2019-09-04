@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
@@ -39,11 +38,10 @@ public class FindCommand extends Command {
      * Executes the search command.
      *
      * @param tasks Task list to search from.
-     * @param ui User interface that assists with printing.
      * @param storage Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.findTasks(searchTerm, ui);
+    public String execute(TaskList tasks, Storage storage) {
+        return tasks.findTasks(searchTerm);
     }
 }

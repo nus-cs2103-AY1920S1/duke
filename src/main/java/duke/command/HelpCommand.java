@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
@@ -9,19 +8,17 @@ import duke.storage.Storage;
  */
 public class HelpCommand extends Command {
 
-    private Ui ui;
+    private StringBuilder sb = new StringBuilder();
 
     /**
      * Executes the help command with instructions for all possible commands.
      *
      * @param tasks Unused.
-     * @param ui User interface that assists with printing.
      * @param storage Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        this.ui = ui;
-        ui.show("Here is how you can use me:");
+    public String execute(TaskList tasks, Storage storage) {
+        sb.append("Here is how you can use me:\n");
         print("bye", "to exit");
         print("list", "to show the tasks you have on your list");
         print("todo [description]", "to add a task of type todo");
@@ -30,6 +27,7 @@ public class HelpCommand extends Command {
         print("delete [task number]", "to delete the task of that specified index number from the task list");
         print("done [task number]", "to mark the task of that specified index number from the task list as "
                 + "done");
+        return sb.toString();
     }
 
     /**
@@ -39,6 +37,6 @@ public class HelpCommand extends Command {
      * @param description Explanation of command.
      */
     public void print(String command, String description) {
-        ui.show(Ui.TAB + command + " - " + description);
+        sb.append(command + " - " + description + "\n");
     }
 }

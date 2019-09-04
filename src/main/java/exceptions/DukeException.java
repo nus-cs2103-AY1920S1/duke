@@ -1,6 +1,8 @@
+package exceptions;
+
 /**
  * A specific type of Exception thrown for all exceptions that
- occur in the Duke application.
+ * occur in the Duke application.
  */
 public class DukeException extends Exception {
     /**

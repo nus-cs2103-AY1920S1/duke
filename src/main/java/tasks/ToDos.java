@@ -1,6 +1,8 @@
+package tasks;
+
 /**
  * The ToDos class is a type of task. It contains description
- of the task to be completed.
+ * of the task to be completed.
  */
 public class ToDos extends Task {
     /**
@@ -30,7 +32,7 @@ public class ToDos extends Task {
 
     /**
      * Overrides the underlying Object toString method to print ToDos in
-     the desired format to show to users.
+     * the desired format to show to users.
      * @return Returns formatted String representing ToDos.
      */
     @Override

@@ -1,3 +1,7 @@
+package oop;
+
+import exceptions.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -26,7 +30,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
         return ("Hello from\n" + logo);
-}
+    }
 
     /**
      * A method to display text to the user.
@@ -46,7 +50,7 @@ public class Ui {
 
     /**
      * A method to display the error message upon reading data from text file at the
-     start of the application.
+     * start of the application.
      * @param error The Error to be displayed.
      */
     public String showLoadingError(DukeException   error) {

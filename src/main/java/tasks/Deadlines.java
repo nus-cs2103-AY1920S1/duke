@@ -1,6 +1,10 @@
+package tasks;
+
+import oop.Date;
+
 /**
  * Deadlines is a form of Task. It contains a description of the task
- and additional information such as the date that the task is due.
+ * and additional information such as the date that the task is due.
  */
 public class Deadlines extends Task {
 
@@ -47,7 +51,7 @@ public class Deadlines extends Task {
 
     /**
      * Overrides the underlying Object toString method to print Deadlines in
-     the desired format to show to users.
+     * the desired format to show to users.
      * @return Returns formatted String representing Deadlines.
      */
     @Override

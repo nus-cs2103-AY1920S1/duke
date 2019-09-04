@@ -1,9 +1,11 @@
+package tasks;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * The TaskList class handles consolidating the task input by the user
- into a list.
+ * into a list.
  */
 public class TaskList {
     /**
@@ -26,7 +28,7 @@ public class TaskList {
 
     /**
      * Constructs and initializes the attributes of a new TaskList object,
-     with data read from previous existing data.
+     * with data read from previous existing data.
      * @param currentList The list of tasks previously stored on the text file
      written to.
      */
@@ -38,7 +40,7 @@ public class TaskList {
 
     /**
      * A method to process the data of previous taskings, and add them to the
-     current TaskList.
+     * current TaskList.
      * @param list List of Task to be updated.
      * @param content Data to be processed.
      */

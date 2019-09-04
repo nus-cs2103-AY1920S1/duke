@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.handleDelete(userInput, tasks, storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.handleDelete(userInput, tasks, storage);
     }
 }

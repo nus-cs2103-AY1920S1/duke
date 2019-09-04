@@ -25,7 +25,7 @@ public class ExitCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.handleBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.handleBye();
     }
 }

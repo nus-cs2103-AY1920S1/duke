@@ -1,9 +1,8 @@
 import java.util.Scanner;
-
 import java.io.IOException;
 
 /**
- * Deals with extracting out from the commands.
+ * Deals with reading and making sense of the user command.
  */
 public class Parser {
 
@@ -15,8 +14,8 @@ public class Parser {
      * Creates a new parser instance.
      *
      * @param storage Storage instance to be used.
-     * @param taskList TaskList containing task list of the tasks.
-     * @param ui Ui instance to be used for User interface.
+     * @param taskList TaskList containing task list.
+     * @param ui Ui instance to be used.
      */
     public Parser(Storage storage, TaskList taskList, Ui ui) {
         this.storage = storage;
@@ -25,101 +24,60 @@ public class Parser {
     }
 
     /**
-     * Reads user commands and responds.
-     * Instructs Ui to print different messages and interact with user.
+     * Reads user input as commands, deciphers commands and carries out the commands correspondingly.
+     * Instructs Ui to return different messages to interact with users.
+     *
+     * @param command user input.
+     * @return String to be displayed as reply to the user.
+     * @throws DukeException self-defined exceptions caused by illegal input.
      */
-    public void parse() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String comm = sc.nextLine();//Reads user input
-            if (comm.equals("bye")) {
-                ui.exit();
-                break;
-            } else if (comm.equals("list")) {
-                ui.list(taskList);
-            } else if (comm.length() > 4 && comm.substring(0, 4).equals("done")) {
-                if (comm.charAt(4) != ' ') {
-                    try {
-                        Task task = taskList.add(comm);
-                        ui.add(task, taskList);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+    public String parse(String command) throws DukeException {
+        // Read user input
+        try {
+            if (command.equals("bye")) {
+                return ui.exit();
+            } else if (command.equals("list")) {
+                return ui.list(taskList);
+            } else if (command.length() > 5 && command.substring(0, 4).equals("done")) {
+                if (command.charAt(4) != ' ') {
+                    Task task = taskList.add(command);
+                    return ui.add(task, taskList);
+
                 } else {
-                    try {
-                        Task task = taskList.done(Integer.valueOf(comm.substring(5)));
-                        ui.done(task);
-                        try {
-                            storage.writeOnFile(taskList.genInfo());
-                        } catch (IOException e) {
-                            System.out.println("Something went wrong: " + e.getMessage());
-                        }
-                    } catch (Exception e) {
-                        System.out.println("    ____________________________________________________________\n     " +
-                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                                "\n    ____________________________________________________________\n");
-                    }
+                    Task task = taskList.done(Integer.parseInt(command.substring(5)));
+                    String response = ui.done(task);
+                    storage.writeOnFile(taskList.generateInfo());
+                    return response;
                 }
-            } else if (comm.length() > 6 && comm.substring(0, 6).equals("delete")) {
-                if (comm.charAt(6) != ' ') {
-                    try {
-                        Task task = taskList.add(comm);
-                        ui.add(task, taskList);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+            } else if (command.length() > 7 && command.substring(0, 6).equals("delete")) {
+                if (command.charAt(6) != ' ') {
+                    Task task = taskList.add(command);
+                    return ui.add(task, taskList);
                 } else {
-                    try {
-                        Task task = taskList.delete(Integer.valueOf(comm.substring(7)));
-                        ui.delete(task, taskList);
-                        try {
-                            storage.writeOnFile(taskList.genInfo());
-                        } catch (IOException e) {
-                            System.out.println("Something went wrong: " + e.getMessage());
-                        }
-                    } catch (Exception e) {
-                        System.out.println("    ____________________________________________________________\n     " +
-                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                                "\n    ____________________________________________________________\n");
-                    }
+                    Task task = taskList.delete(Integer.parseInt(command.substring(7)));
+                    String response = ui.delete(task, taskList);
+                    storage.writeOnFile(taskList.generateInfo());
+                    return response;
                 }
-            } else if (comm.length() > 5 && comm.substring(0, 4).equals("find")) {
-                if (comm.charAt(4) != ' ') {
-                    try {
-                        Task task = taskList.add(comm);
-                        ui.add(task, taskList);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+            } else if (command.length() > 5 && command.substring(0, 4).equals("find")) {
+                if (command.charAt(4) != ' ') {
+                    Task task = taskList.add(command);
+                    return ui.add(task, taskList);
                 } else {
-                    try {
-                        ui.find(taskList, comm.substring(5));
-                        try {
-                            storage.writeOnFile(taskList.genInfo());
-                        } catch (IOException e) {
-                            System.out.println("Something went wrong: " + e.getMessage());
-                        }
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    } catch (Exception e) {
-                        System.out.println("    ____________________________________________________________\n     " +
-                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                                "\n    ____________________________________________________________\n");
-                    }
+                    String response = ui.find(taskList, command.substring(5));
+                    storage.writeOnFile(taskList.generateInfo());
+                    return response;
                 }
             } else {
-                try {
-                    Task task = taskList.add(comm);
-                    ui.add(task, taskList);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                try {
-                    storage.writeOnFile(taskList.genInfo());
-                } catch (IOException e) {
-                    System.out.println("Something went wrong: " + e.getMessage());
-                }
+                Task task = taskList.add(command);
+                String response = ui.add(task, taskList);
+                storage.writeOnFile(taskList.generateInfo());
+                return response;
             }
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
         }
-    }
+}
 }

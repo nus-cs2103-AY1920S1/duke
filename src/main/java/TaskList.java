@@ -1,91 +1,96 @@
-import java.util.Date;
-import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
- * Contains the task list of tasks.
+ * Specifications for Task list.
  */
 public class TaskList {
-    private List<Task> taskList;
+
+    private List<Task> tasks;
 
     /**
-     * Creates an instance of TaskList.
+     * Creates an instance of TaskList with empty new arrayList of tasks.
+     *
      */
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * Creates an instance of TaskList and initialises.
+     * Creates an instance of TaskList with input arrayList of tasks.
      *
-     * @param taskList list of tasks.
+     * @param tasks list of tasks.
      */
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
-     * Returns size of the list.
+     * Returns the number of tasks in the task list.
      *
-     * @return size of the list.
+     * @return size of task list.
      */
     public int getSize() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     /**
-     * Returns the element at ith position.
+     * Returns ith Task element from the task list.
      *
-     * @param i stores the position from where the task is to be extracted.
-     * @return the element at ith position.
+     * @param i index of Task in the list of tasks.
+     * @return Task at index i of the list.
      */
-    public Task getElement(int position) {
-        return this.taskList.get(position);
-
+    public Task getElement(int i) {
+        return this.tasks.get(i);
     }
 
     /**
-     * Returns the information of time with a particular time format.
+     * Converts time to particular format.
      *
-     * @param n Stores the information of time in a String forma.
-     * @return proper date format.
+     * @param n number as integers.
+     * @return String representing ordinal number nth.
      */
     private static String getTimeFormat(int n) {
         if (n >= 11 && n <= 13) {
             return n + "th";
         }
-
         switch (n % 10) {
-        case 1:
-            return n + "st of";
-        case 2:
-            return n + "nd of";
-        case 3:
-            return n + "rd of";
-        default:
-            return n + "th of";
+            case 1:
+                return n + "st of";
+            // Fallthrough
+            case 2:
+                return n + "nd of";
+            // Fallthrough
+            case 3:
+                return n + "rd of";
+            // Fallthrough
+            default:
+                return n + "th of";
+            // Fallthrough
         }
     }
 
     /**
-     * Converts command of users into Task objects with details.
+     * Converts command of users into Task objects with relevant details.
      *
      * @param s String used by user for creating a new task.
-     * @return Task object with extracted input details
-     * @throws DukeException Exception thrown when input is in invalid format.
+     * @return a Task object with input details
+     * @throws DukeException Exception thrown when input is of invalid format.
      */
-
     public Task add(String s) throws DukeException {
-        String arr[] = s.split(" ");
+        String[] arr = s.split(" ");
         String tasksType = arr[0];
         String tasksDescr = "";
         String tasksTime = "";
 
-        for (int i = 1; i < arr.length; i++) { //Gets task description
+        // Get task description
+        for (int i = 1; i < arr.length; i++) {
             if (arr[i].length() >= 1 && arr[i].charAt(0) == '/') {
-                for (int j = i + 1; j < arr.length; j++) { //get task time
+                // Get task time
+                for (int j = i + 1; j < arr.length; j++) {
                     tasksTime += " " + arr[j];
                 }
                 break;
@@ -93,30 +98,25 @@ public class TaskList {
                 tasksDescr += " " + arr[i];
             }
         }
-        tasksDescr = tasksDescr.trim(); //Remove extra spaces
+        tasksDescr = tasksDescr.trim();
         tasksTime = tasksTime.trim();
 
-        //Handles exceptions
+        // Handle exceptions
         if (!(tasksType.equals("todo") || tasksType.equals("deadline") || tasksType.equals("event"))) {
-            throw new DukeException("    ____________________________________________________________\n     " +
-                    "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
-                    "\n    ____________________________________________________________\n");
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         if (tasksDescr.equals("")) throw new DukeException(
-                "    ____________________________________________________________\n     " +
-                        "\u2639" + " OOPS!!! The description of a " + tasksType + " cannot be empty." +
-                        "\n    ____________________________________________________________\n");
+                "\u2639 OOPS!!! The description of a " + tasksType + " cannot be empty.");
         if ((tasksType.equals("deadline") || tasksType.equals("event")) && tasksTime.equals(""))
             throw new DukeException(
-                    "    ____________________________________________________________\n     " +
-                            "\u2639" + " OOPS!!! The time of a " + tasksType + " cannot be empty." +
-                            "\n    ____________________________________________________________\n");
+                    "\u2639 OOPS!!! The time of a " + tasksType + " cannot be empty.");
 
+        // Converts into required date format.
         try {
             Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(tasksTime);
             SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
             tasksTime = formatter.format(date);
-            String array[] = tasksTime.split(" ");
+            String[] array = tasksTime.split(" ");
             array[0] = getTimeFormat(Integer.valueOf(array[0]));
             array[array.length - 1] = array[array.length - 1].toLowerCase();
             tasksTime = "";
@@ -128,33 +128,36 @@ public class TaskList {
 
         }
 
+        // Creates new task.
         Task task;
         if (tasksType.equals("todo")) {
             task = new ToDo(tasksDescr);
-            taskList.add(task);
+            tasks.add(task);
             return task;
         } else if (tasksType.equals("deadline")) {
             task = new Deadline(tasksDescr, tasksTime);
-            taskList.add(task);
+            tasks.add(task);
             return task;
         } else if (tasksType.equals("event")) {
             task = new Event(tasksDescr, tasksTime);
-            taskList.add(task);
+            tasks.add(task);
             return task;
         } else {
             return null;
         }
     }
 
+
     /**
-     * Marks the nth task in the task list as done by changing status.
+     * Marks the nth task in the task list as done.
      *
      * @param n the position of task in the list of tasks.
-     * @return task marked as done.
+     * @return the task marked as done.
      */
     public Task done(int n) {
-        Task task = this.taskList.get(n - 1);
-        task.mark(); //Marks the corresponding task as done
+        Task task = this.tasks.get(n - 1);
+
+        task.mark();
         return task;
     }
 
@@ -162,38 +165,38 @@ public class TaskList {
      * Deletes nth task from the list of tasks.
      *
      * @param n the position of task in the list of tasks.
-     * @return task deleted from the list.
+     * @return the task deleted from the list.
      */
     public Task delete(int n) {
-        Task task = this.taskList.get(n - 1);
-        this.taskList.remove(task); //Deletes task from list
+        Task task = this.tasks.get(n - 1);
+
+        this.tasks.remove(task);
         return task;
     }
 
     /**
-     * COnverts task into a required String to store in the data file.
-     * @return String with details of the task.
+     * Converts task into a String format to be stored in the data file.
+     *
+     * @return a String representation to be stored in the task list file.
      */
-    public String genInfo() {
-        //Convert Task object into a String which will be stored in the data file
-        String taskData = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            String curr;
+    public String generateInfo() {
 
+        String taskFile = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String current;
             if (task.getTimeLabel().equals("")) {
-                curr = task.getLabel() + " | " + task.getInfo() + " | " + task.getDescription();
+                current = task.getLabel() + " | " + task.getInfo() + " | " + task.getDescription();
             } else {
-                curr = task.getLabel() + " | " + task.getInfo() + " | " + task.getDescription() + " | "
-                        + task.getTimeLabel();
+                current = task.getLabel() + " | " + task.getInfo() + " | " + task.getDescription()
+                        + " | " + task.getTimeLabel();
             }
-            if (i != taskList.size() - 1) {
-                taskData += curr + System.lineSeparator();
+            if (i != tasks.size() - 1) {
+                taskFile += current + System.lineSeparator();
             } else {
-                taskData += curr;
+                taskFile += current;
             }
         }
-
-        return taskData;
+        return taskFile;
     }
 }

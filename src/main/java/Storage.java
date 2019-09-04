@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file after change.
+ * Deals with loading tasksList from the file and saving tasksList in the file after change.
  */
 public class Storage {
-    private List<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasksList = new ArrayList<Task>();
     private String fPath;
 
     /**
@@ -35,11 +35,11 @@ public class Storage {
     }
 
     /**
-     * Loads file from the file path and translates the lines into <code>Task</code> objects.
+     * Loads file from the file path and converts instances into <code>Task</code> objects.
      *
-     * @return list of tasks.
-     * @throws FileNotFoundException Exception produced by failure of finding file.
-     * @throws DukeException When empty file.
+     * @return list of tasksList.
+     * @throws FileNotFoundException Exception produced if file not found.
+     * @throws DukeException in case of empty file.
      */
 
     public List<Task> load() throws FileNotFoundException, DukeException {
@@ -59,25 +59,25 @@ public class Storage {
             Task task;
             if (tasksType.equals("T")) {
                 task = new ToDo(tasksDescr);
-                tasks.add(task);
+                tasksList.add(task);
                 if (tasksInfo == 1)
                     task.mark();
             } else if (tasksType.equals("D")) {
                 tasksTime = arr[3];
                 task = new Deadline(tasksDescr, tasksTime);
-                tasks.add(task);
+                tasksList.add(task);
                 if (tasksInfo == 1)
                     task.mark();
             } else if (tasksType.equals("E")) {
                 tasksTime = arr[3];
                 task = new Event(tasksDescr, tasksTime);
-                tasks.add(task);
+                tasksList.add(task);
                 if (tasksInfo == 1)
                     task.mark();
             }
         }
 
-        return tasks;
+        return tasksList;
     }
 
 }

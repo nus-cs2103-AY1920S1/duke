@@ -1,25 +1,19 @@
-/**
- * Acts as the main interface
- */
-
 import java.io.FileNotFoundException;
 
 public class Duke {
 
-    private Storage storage;
+    private Storage storage = new Storage("src/main/data/duke.txt");
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Creates an instance of Duke with a path of the task list file to run.
-     * Instance of Storage loads data from the file.
-     * Exception is reported if file not found.
-     *
-     * @param filePath Stores file of the path in which list of tasks are stored.
+     * Creates an instance of Duke with a path to list of tasks file.
+     * New Ui instance is created for Gradle.
+     * Loads data from the file and the tasks are stored into a TaskList.
+     * Exception is reported, if file is not found or empty.
      */
-    public Duke(String filePath) {
-        ui = new Ui(); //Creating user interface object.
-        storage = new Storage(filePath);
+    public Duke() {
+        ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -30,20 +24,16 @@ public class Duke {
     }
 
     /**
-     * Creates new instance of Parser and runs parse method of Parser for user input.
-     * Default greeting message is printed using Ui object.
+     * Creates new instance of Parser and run parse method to read user input and then give reply.
+     * Catches and reports DukeExceptions.
      */
-    public void run() {
-        ui.greet();
-        Parser parser = new Parser(storage, tasks, ui);
-        parser.parse();
+    public String getResponseDirect(String text) {
+        try {
+            Parser parser = new Parser(storage, tasks, ui);
+            return parser.parse(text);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
-    /**
-     * Creates a new instance of Duke with a path to task list file and runs.
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
-    }
 }

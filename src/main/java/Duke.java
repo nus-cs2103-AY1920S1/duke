@@ -1,19 +1,19 @@
-import java.util.Scanner;
 import java.io.IOException;
 
 /**
  * Represents a Duke Chatbot that is able to keep track of tasks.
  */
 public class Duke {
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
     /**
-     * Create a new Duke Chatbot with a filepath fot it to access.
-     * @param filePath of the file for Duke to save to.
+     * Create a new Duke Chatbot with access to duke.txt file.
      */
-    public Duke(String filePath) {
+    public Duke() {
+        String filePath = "duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -30,7 +30,8 @@ public class Duke {
      * @param args String array
      */
     public static void main(String[] args) {
-        new Duke("duke.txt").run();
+        //new Duke("duke.txt").run();
+        new Duke().run();
     }
 
     /**
@@ -158,4 +159,10 @@ public class Duke {
         // When command is bye
         ui.showFarewell();
     }
+
+    //REPLACE THIS WITH MY COMPLETED METHOD!!!!
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
 }

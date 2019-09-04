@@ -1,8 +1,9 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws IncompleteCommandException, InvalidCommandException {
+    public static void main(String[] args) throws IncompleteCommandException, InvalidCommandException, ParseException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<Task>();
 

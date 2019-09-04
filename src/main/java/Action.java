@@ -1,4 +1,7 @@
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Action {
     public static void welcomeMessage() {
@@ -14,7 +17,7 @@ public class Action {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public static void doTask(String command, ArrayList<Task> list) throws IncompleteCommandException, InvalidCommandException {
+    public static void doTask(String command, ArrayList<Task> list) throws IncompleteCommandException, InvalidCommandException, ParseException {
         String[] commandStrArray = command.split(" ", 2);
         try {
             if (commandStrArray[0].equals("list")) {
@@ -48,9 +51,11 @@ public class Action {
                         if (commandStrArray.length == 1) {
                             throw new IncompleteCommandException("Incomplete Command");
                         }
+                        String[] descriptionStrArray = commandStrArray[1].split("/by");
+                        String dateString = descriptionStrArray[1];
+                        Date date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(dateString);
                         System.out.println("    ____________________________________________________________");
                         System.out.println("     Got it. I've added this task: ");
-                        String[] descriptionStrArray = commandStrArray[1].split("/by");
                         Task task = new Deadline(descriptionStrArray[0], descriptionStrArray[1]);
                         System.out.println("       " + task);
                         list.add(task);
@@ -78,6 +83,12 @@ public class Action {
         } catch (InvalidCommandException e) {
             System.out.println("    ____________________________________________________________");
             System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("    ____________________________________________________________\n");
+        } catch (ParseException e) {
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     ☹ OOPS!!! The date format is incorrect");
+            System.out.println("     Please enter your date in this format: dd/MM/yyyy hhmm");
+            System.out.println("     Eg: 2/12/2019 1800");
             System.out.println("    ____________________________________________________________\n");
         }
     }

@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.utils.UiResponse;
 
 import java.util.ArrayList;
 
@@ -26,12 +26,13 @@ public class AddCommand extends Command {
      * Executes the desired behaviour for the AddCommand object. In this case,
      * this involves adding a ToDo, Event or Deadline object to the TaskList.
      *
-     * @param ui       Ui object that is responsible for printing output as a response
+     * @param ui       UiResponse object that is responsible for returning a String response to GUI
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException re-thrown from underlying method calls.
+     * @return String representing Duke's response
      */
-    public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
+    public String execute(UiResponse ui, Storage storage, TaskList allTasks) throws DukeException {
         Task t = new Task("Uninitialised Task");
         switch (this.commandParams.get(0)) {
         case "todo":
@@ -48,13 +49,14 @@ public class AddCommand extends Command {
         }
 
         //UI response
-        ui.printLine();
-        ui.printSentence("Got it. I've added this task:");
-        ui.printSentence("\t" + t);
-        ui.printSentence("Now you have " + allTasks.size() + " tasks in the list");
-        ui.printLine();
+        ui.reset();
+        ui.addSentence("Got it. I've added this task:");
+        ui.addSentence("\t" + t);
+        ui.addSentence("Now you have " + allTasks.size() + " tasks in the list");
 
         //Parent method invoked to save TaskList
         super.execute(ui, storage, allTasks);
+
+        return ui.getResponse();
     }
 }

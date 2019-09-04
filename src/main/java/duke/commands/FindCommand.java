@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.utils.UiResponse;
 
 import java.util.ArrayList;
 
@@ -23,12 +23,13 @@ public class FindCommand extends Command {
 
     /**
      * Will search through all tasks in TaskList for keyword.
-     * @param ui       Ui object that is responsible for printing output as a response
+     * @param ui       UiResponse object that is responsible for returning a String response to GUI
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException re-thrown from underlying method calls.
+     * @return String representing Duke's response
      */
-    public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
+    public String execute(UiResponse ui, Storage storage, TaskList allTasks) throws DukeException {
         ArrayList<Task> allTasksArrList = allTasks.getArrayList();
 
         ArrayList<Task> filteredTasks = new ArrayList<Task>();
@@ -38,19 +39,18 @@ public class FindCommand extends Command {
             }
         }
 
+        ui.reset();
         if (filteredTasks.size() == 0) {
-            ui.printLine();
-            ui.printSentence("Sorry, no tasks match your search term!");
-            ui.printLine();
+            ui.addSentence("Sorry, no tasks match your search term!");
         } else {
             int counter = 1;
-            ui.printLine();
-            ui.printSentence("Here are the tasks that contain your search term:");
+            ui.addSentence("Here are the tasks that contain your search term:");
             for (Task t : filteredTasks) {
-                ui.printSentence("\t" + counter + ". " + t);
+                ui.addSentence("\t" + counter + ". " + t);
                 counter++;
             }
-            ui.printLine();
         }
+
+        return ui.getResponse();
     }
 }

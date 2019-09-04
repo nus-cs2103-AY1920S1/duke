@@ -26,9 +26,11 @@ public class Storage {
     /**
      * Constructor for the Storage class.
      *
-     * @param filepath Absolute filepath of the text file. Eg. "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
+     * @param filepath Absolute filepath of the text file.
+     *                 Eg. "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
      */
-    public Storage(String filepath){
+    public Storage(String filepath) {
+
         this.filepath = filepath;
     }
 
@@ -38,15 +40,15 @@ public class Storage {
      * @param filepath Absolute filepath of the text file.
      * @throws IOException An IOException may occur when trying to write the file.
      */
-    public void createFile(String filepath) throws IOException{
+    public void createFile(String filepath) throws IOException {
         File f = new File(filepath);
         String data = "";
 
         // If the file does not exist, create sa new text file.
-        if (f.exists() == false){
+        if (f.exists() == false) {
             try {
                 Files.write(Paths.get(filepath), data.getBytes());
-            } catch (IOException e){
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -58,7 +60,7 @@ public class Storage {
      * @param text The text to be appended to the txt file.
      * @throws IOException An IOException may occur when trying to write the file.
      */
-    public void writeToFile(String text) throws IOException{
+    public void writeToFile(String text) throws IOException {
         FileWriter fw = new FileWriter(this.getFilePath(), true);
         fw.write(text + System.lineSeparator());
         fw.close();
@@ -69,7 +71,7 @@ public class Storage {
      *
      * @throws IOException An IOException may occur when trying to write the file.
      */
-    public void clearFileBeforeSaving() throws IOException{
+    public void clearFileBeforeSaving() throws IOException {
         // Overwrites text file and adds headers before saving tasks
         FileWriter fw = new FileWriter(this.getFilePath(), false);
         fw.write("event type | isDone | description | extra description" + System.lineSeparator());
@@ -77,9 +79,9 @@ public class Storage {
     }
 
     /**
-     * Returns an ArrayList<Task> from the data loaded from the filePath.
+     * Returns an ArrayList(Task) from the data loaded from the filePath.
      *
-     * @return ArrayList<Task> parsed from text file.
+     * @return ArrayList(Task) parsed from text file.
      * @throws FileNotFoundException An FilenotFoundException may occur when if filePath is invalid.
      */
     public ArrayList<Task> load() throws FileNotFoundException {

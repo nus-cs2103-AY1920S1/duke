@@ -6,3 +6,4 @@ T | 0 | sleep at nine
 E | 0 | Birthday | home
 T | 1 | sleep at ten
 E | 0 | sleep | home
+E | 0 | Tutorial | SoC

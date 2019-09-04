@@ -9,7 +9,7 @@ package seedu.duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected possibleTaskTypes taskType;
+    protected PossibleTaskTypes taskType;
 
     /**
      * Returns a Task object after initializing with the String description.
@@ -20,7 +20,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.taskType = possibleTaskTypes.DEFAULT;
+        this.taskType = PossibleTaskTypes.DEFAULT;
     }
 
     /**
@@ -29,10 +29,10 @@ public class Task {
      * @param description Description String of the task.
      * @param isDone Boolean status of the task.
      */
-    public Task(String description, Boolean isDone){
+    public Task(String description, Boolean isDone) {
         this.description = description;
         this.isDone = isDone;
-        this.taskType = possibleTaskTypes.DEFAULT;
+        this.taskType = PossibleTaskTypes.DEFAULT;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Task {
      *
      * @return String containing the task description.
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.description;
     }
 
@@ -57,8 +57,8 @@ public class Task {
     /**
      * Setter function for setting a Task isDone from false to true.
      */
-    public void setDone(){
-        if ( !this.isDone ){
+    public void setDone() {
+        if (!this.isDone) {
             this.isDone = true;
         }
         return;
@@ -66,12 +66,12 @@ public class Task {
 
     /**
      * Returns a parsed String of the Task object, depending on the subclass implementation.
-     * Eg. [T][✘] <Task Description>.
+     * Eg. [T][✘] (Task Description).
      *
      * @return Parsed string.
      */
-    public String toString(){
-        return ( "[" + this.getStatusIcon() + "] " + this.description);
+    public String toString() {
+        return ("[" + this.getStatusIcon() + "] " + this.description);
     }
 
     /**
@@ -79,10 +79,10 @@ public class Task {
      *
      * @return Parsed string for saving.
      */
-    public String toSaveString(){
+    public String toSaveString() {
         int booleanNum = (this.isDone ? 1 : 0);
 
-        return ( " | " + booleanNum + " | " + this.description );
+        return (" | " + booleanNum + " | " + this.description);
     }
 
     /**
@@ -90,8 +90,8 @@ public class Task {
      *
      * @return Boolean status if TaskType is default.
      */
-    public Boolean isDefault(){
-        return this.taskType.equals(possibleTaskTypes.DEFAULT) ;
+    public Boolean isDefault() {
+        return this.taskType.equals(PossibleTaskTypes.DEFAULT);
     }
 
     /**
@@ -99,8 +99,9 @@ public class Task {
      *
      * @return Boolean status if TaskType is default.
      */
-    public Boolean isTodo(){
-        return this.taskType.equals(possibleTaskTypes.TODO) ;
+    public Boolean isTodo() {
+        return this.taskType.equals(PossibleTaskTypes.TODO);
+
     }
 
     /**
@@ -108,8 +109,10 @@ public class Task {
      *
      * @return Boolean status if TaskType is Event.
      */
-    public Boolean isEvent(){
-        return this.taskType.equals(possibleTaskTypes.EVENT) ;
+    public Boolean isEvent() {
+        return this.taskType.equals(PossibleTaskTypes.EVENT);
+
+
     }
 
     /**
@@ -117,14 +120,16 @@ public class Task {
      *
      * @return Boolean status if TaskType is deadline.
      */
-    public Boolean isDeadline(){
-        return this.taskType.equals(possibleTaskTypes.DEADLINE) ;
+    public Boolean isDeadline() {
+        return this.taskType.equals(PossibleTaskTypes.DEADLINE);
+
+
     }
 
     /**
      * An enumeration of the possible task types.
      */
-    enum possibleTaskTypes {
+    enum PossibleTaskTypes {
         DEFAULT, DEADLINE, EVENT, TODO
     }
 }

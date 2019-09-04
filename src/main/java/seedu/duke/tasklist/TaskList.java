@@ -23,7 +23,7 @@ public class TaskList {
      *
      * @return Number of Task objects.
      */
-    public int getSize(){
+    public int getSize() {
         return getArrayList().size();
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @param i Integer index.
      * @return Task object which is located at index i.
      */
-    public Task getTask(int i){
+    public Task getTask(int i) {
         return getArrayList().get(i);
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
      *
      * @param newTask Task object that needs to be added into the list.
      */
-    public void addTask(Task newTask){
+    public void addTask(Task newTask) {
         getArrayList().add(newTask);
     }
 
@@ -51,17 +51,17 @@ public class TaskList {
      *
      * @param i Integer index of where the Task object (to be deleted) is in.
      */
-    public void deleteTask(int i){
+    public void deleteTask(int i) {
         getArrayList().remove(i);
     }
 
     /**
-     * Returns the ArrayList<Task> inside the TaskList object.
+     * Returns the ArrayList(Task) inside the TaskList object.
      * Is a getter function to get the private attribute, listOfTasks.
      *
-     * @return ArrayList<Task? object.
+     * @return ArrayList(Task) object.
      */
-    public ArrayList<Task> getArrayList(){
+    public ArrayList<Task> getArrayList() {
         return this.listOfTasks;
     }
 
@@ -69,26 +69,27 @@ public class TaskList {
      * Returns another TaskLIst object which contains Task objects that is similar to the search string.
      *
      * @param searchTerm String that needs to be inside the Task description of similar Tasks.
-     * @return Tasklist object, which has an ArrayList <Task> that only contains matching Task objects.
+     * @return Tasklist object, which has an ArrayList (Task) that only contains matching Task objects.
      */
-    public TaskList findSimilarTasks (String searchTerm){
+    public TaskList findSimilarTasks(String searchTerm) {
 
         ArrayList<Task> listOfTasks = this.getArrayList();
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
-        Task task = null; String taskDescription = "";
+        Task task = null;
+        String taskDescription = "";
 
-        for (int i = 0; i < listOfTasks.size(); i++){
+        for (int i = 0; i < listOfTasks.size(); i++) {
 
             task = listOfTasks.get(i);
             taskDescription = task.getTaskName();
 
-            if ( taskDescription.contains(searchTerm) ){
+            if (taskDescription.contains(searchTerm)) {
                 matchingTasks.add(task);
             }
         }
 
         // Create a TaskList object to encapsulate the ArrayList<Task>.
-        return  new TaskList(matchingTasks);
+        return new TaskList(matchingTasks);
     }
 
 }

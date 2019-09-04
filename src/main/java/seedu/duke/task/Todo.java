@@ -11,9 +11,9 @@ public class Todo extends Task {
      *
      * @param description Description String ot the task.
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
-        taskType = possibleTaskTypes.TODO;
+        taskType = PossibleTaskTypes.TODO;
     }
 
     /**
@@ -22,31 +22,31 @@ public class Todo extends Task {
      * @param description Description String ot the task.
      * @param isDone isDone status of the task.
      */
-    public Todo(String description, Boolean isDone){
+    public Todo(String description, Boolean isDone) {
         super(description, isDone);
     }
 
     /**
      * Returns a parsed String of the Todo object.
-     * Eg. description = "<Task Description>", isDone = false.
-     * Parsed string = "[T][✘] <Task Description>".
+     * Eg. description = "(Task Description)", isDone = false.
+     * Parsed string = "[T][✘] (Task Description)".
      *
      * @return Parsed String of the Todo object.
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString() ;
+        return "[T]" + super.toString();
     }
 
     /**
      * Returns a parsed String, meant for saving, of the Todo object.
-     * Eg. description = "<Task Description>", isDone = true.
-     * Parsed saved string = "T | 1 | <Task Description>".
+     * Eg. description = "(Task Description)", isDone = true.
+     * Parsed saved string = "T | 1 | (Task Description)".
      *
      * @return Parsed saved string of the Todo object.
      */
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
         return ("T" + super.toSaveString());
     }
 }

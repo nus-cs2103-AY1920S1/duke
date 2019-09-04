@@ -8,7 +8,7 @@ public class Parser {
     /**
      * Default constructor of the Parser class.
      */
-    public Parser (){
+    public Parser(){
     }
 
     /**
@@ -16,8 +16,9 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return First word of a string, delimited by whitespaces, " ".
      */
-    public static String parseCommand(String fullCommand){
-        return ( fullCommand.split(" ")[0] );
+    public static String parseCommand(String fullCommand) {
+        return (fullCommand.split(" ")[0]);
+
     }
 
     /**
@@ -25,8 +26,8 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Substring from index 5 (whitespace after "todo") to end of string.
      */
-    public static String getTodoDescription(String fullCommand){
-        return ( fullCommand.substring(5) );
+    public static String getTodoDescription(String fullCommand) {
+        return (fullCommand.substring(5));
     }
 
     /**
@@ -34,8 +35,8 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Substring from index 9 (whitespace after "deadline") to the '/' char inside "/by".
      */
-    public static String getDeadlineDescription(String fullCommand){
-        return ( fullCommand.substring(9, fullCommand.indexOf('/')) );
+    public static String getDeadlineDescription(String fullCommand) {
+        return (fullCommand.substring(9, fullCommand.indexOf('/')));
     }
 
     /**
@@ -43,8 +44,8 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Substring from 4 chars after '/' in "/by".
      */
-    public static String getDeadlineDateTime(String fullCommand){
-        return ( fullCommand.substring(4 + fullCommand.indexOf('/')) );
+    public static String getDeadlineDateTime(String fullCommand) {
+        return (fullCommand.substring(4 + fullCommand.indexOf('/')));
     }
 
     /**
@@ -52,8 +53,8 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Substring from index 6 (whitespace after "event") to the '/' char inside "/at"
      */
-    public static String getEventDescription(String fullCommand){
-        return ( fullCommand.substring(6, fullCommand.lastIndexOf('/')) );
+    public static String getEventDescription(String fullCommand) {
+        return (fullCommand.substring(6, fullCommand.lastIndexOf('/')));
     }
 
     /**
@@ -61,8 +62,8 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Substring from 4 chars after '/' in "/at"
      */
-    public static String getEventLocation(String fullCommand){
-        return ( fullCommand.substring(4 + fullCommand.lastIndexOf('/')) );
+    public static String getEventLocation(String fullCommand) {
+        return (fullCommand.substring(4 + fullCommand.lastIndexOf('/')));
     }
 
     /**
@@ -70,8 +71,9 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Int of the substring from index 5 ( whitespace after "done" string).
      */
-    public static int getFinishedTaskNum(String fullCommand){
-        return ( Integer.parseInt(fullCommand.substring(5)) ) ;
+    public static int getFinishedTaskNum(String fullCommand) {
+        return (Integer.parseInt(fullCommand.substring(5)));
+
     }
 
     /**
@@ -79,11 +81,12 @@ public class Parser {
      * @param fullCommand Input of the user, read from Scanner object.
      * @return Int of the substring from index 7 ( whitespace after "delete" string).
      */
-    public static int getDeletedTaskNum(String fullCommand){
-        return ( Integer.parseInt(fullCommand.substring(7)) );
+    public static int getDeletedTaskNum(String fullCommand) {
+        return (Integer.parseInt(fullCommand.substring(7)));
     }
 
-    public static String getFindTask(String fullCommand){
-        return (fullCommand.substring(5)) ;
+    public static String getFindTask(String fullCommand) {
+        return (fullCommand.substring(5));
+
     }
 }

@@ -14,10 +14,10 @@ public class Event extends Task {
      * @param description Description String of the task.
      * @param location Location String of the task.
      */
-    public Event (String description, String location){
+    public Event(String description, String location) {
         super(description);
         this.location = location;
-        taskType = possibleTaskTypes.EVENT;
+        taskType = PossibleTaskTypes.EVENT;
     }
 
     /**
@@ -28,10 +28,10 @@ public class Event extends Task {
      * @param location Location String of the task.
      * @param isDone isDone status of the task.
      */
-    public Event(String description, String location, Boolean isDone){
+    public Event(String description, String location, Boolean isDone) {
         super(description, isDone);
         this.location = location;
-        taskType = possibleTaskTypes.EVENT;
+        taskType = PossibleTaskTypes.EVENT;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Event extends Task {
      * @return Parsed String of the Event object.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + super.toString() + " (at: " + location + ")";
     }
 
@@ -54,8 +54,8 @@ public class Event extends Task {
      * @return Parsed saved String of the Event object.
      */
     @Override
-    public String toSaveString(){
-        return ( "E" + super.toSaveString() + " | " + this.location);
+    public String toSaveString() {
+        return ("E" + super.toSaveString() + " | " + this.location);
     }
 
 }

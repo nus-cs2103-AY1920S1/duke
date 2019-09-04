@@ -72,7 +72,8 @@ public class Deadline extends Task {
      * @return Parsed string for saving.
      */
     @Override
-    public String toSaveString(){
+    public String toSaveString() {
+
         return ("D" + super.toSaveString() + " | " + this.dateTime);
     }
 
@@ -84,17 +85,17 @@ public class Deadline extends Task {
      * @param by Unparsed dateTime String.
      * @return Parsed dateTime String.
      */
-    public String parseBy(String by){
+    public String parseBy(String by) {
 
-        taskType = possibleTaskTypes.DEADLINE;
+        taskType = PossibleTaskTypes.DEADLINE;
 
         String[] words = dateTime.split("/");
         String[] years = dateTime.split(" ");
 
         int day = Integer.parseInt(words[0]);
-        int month = Integer.parseInt(words[1]);
+
         String hour = years[1];
-        int year = Integer.parseInt(words[2].split(" ")[0]);
+
 
         String dayString;
         if ((day == 1) || (day == 21) || (day == 31)) {
@@ -107,11 +108,6 @@ public class Deadline extends Task {
             dayString = "th";
         }
 
-        String[] possibleMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
-                "December"};
-
-
-        String monthString = possibleMonths[month - 1];
 
         String hoursString = hour;
         String amOrpm = "";
@@ -138,6 +134,15 @@ public class Deadline extends Task {
             hourString = Integer.parseInt(hoursString.substring(0, 2));
         }
 
-        return ( day + dayString + " of " + monthString + " " + year + ", " + hourString + minuteString + amOrpm );
+        int year = Integer.parseInt(words[2].split(" ")[0]);
+
+        int month = Integer.parseInt(words[1]);
+
+        String[] possibleMonths = {"January", "February", "March", "April", "May", "June", "July", "August",
+                                   "September", "October", "November", "December"};
+
+        String monthString = possibleMonths[month - 1];
+
+        return (day + dayString + " of " + monthString + " " + year + ", " + hourString + minuteString + amOrpm);
     }
 }

@@ -8,7 +8,7 @@ public class Ui {
     /** Goodbye message. */
     private static String goodbye = "\t Bye. Hope to see you again soon!\n";
 
-    /** Stores the MainWindow object */
+    /** Stores the MainWindow object. */
     private MainWindow mainWindow;
 
     /**
@@ -30,7 +30,7 @@ public class Ui {
      * Prints the goodbye mesage.
      */
     public void printGoodbye() throws InterruptedException {
-         mainWindow.printAsDuke(goodbye);
+        mainWindow.printAsDuke(goodbye);
     }
 
     /**

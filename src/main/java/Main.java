@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Duke duke = new Duke();
 
+    /**
+     * Starts the MainWindow view.
+     * @param stage The stage for the MainWndow.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -21,7 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

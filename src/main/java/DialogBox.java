@@ -25,6 +25,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a new DialogBox object.
+     * @param text The text to display in the DialogBox.
+     * @param img The image to display as the profile picture within the DialogBox.
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -40,6 +45,9 @@ public class DialogBox extends HBox {
         displayPicture.setClip(new Circle(50, 50, 50));
     }
 
+    /**
+     * Flips the view of the DialogBox.
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
@@ -47,10 +55,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox from the point of view of the user.
+     * @param text The text to display in the DialogBox.
+     * @param img The image to display as the profile picture within the DialogBox.
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a DialogBox from the point of view of Duke.
+     * @param text The text to display in the DialogBox.
+     * @param img The image to display as the profile picture within the DialogBox.
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

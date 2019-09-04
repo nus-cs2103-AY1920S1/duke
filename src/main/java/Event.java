@@ -1,6 +1,6 @@
 /** 
 * Represents an Event
-* */ 
+*/ 
 
 public class Event extends Task {
 

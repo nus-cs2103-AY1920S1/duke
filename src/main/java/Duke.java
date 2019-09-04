@@ -3,8 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /** 
- * Main class of the programme
- *  */ 
+* Main class of the programme
+*/ 
 
 public class Duke {
     

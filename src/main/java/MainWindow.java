@@ -5,7 +5,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
@@ -38,6 +37,10 @@ public class MainWindow extends AnchorPane {
         duke.initialize(this);
     }
 
+    /**
+     * prints out dialogue box in the MainWindow
+     * @param s output String
+     */
     void dukeSays(String s) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(s, dukeImage)

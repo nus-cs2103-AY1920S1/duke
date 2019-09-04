@@ -34,6 +34,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to retrieve Tasklist to get tasks
+     *
+     * @return tasklist of tasks
+     */
+
     public Tasklist getTasks() {
         return tasklist;
     }

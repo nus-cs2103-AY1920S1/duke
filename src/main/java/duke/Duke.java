@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.UnknownCommandException;
 import duke.parser.ParserManager;
 import duke.task.TaskList;
+import duke.ui.MainWindow;
 
 public class Duke {
     private static TaskList taskList;

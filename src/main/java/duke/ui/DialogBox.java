@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,9 +21,9 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Label dialog = new Label();
     @FXML
-    private ImageView displayPicture;
+    private ImageView displayPicture = new ImageView();
 
     private DialogBox(String text, Image img) {
         try {
@@ -34,7 +34,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -50,12 +49,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.setMinHeight(dialogBox.dialog.getMinHeight());
+        return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.setMinHeight(dialogBox.dialog.getMaxHeight());
+        dialogBox.flip();
+        return dialogBox;
     }
 }

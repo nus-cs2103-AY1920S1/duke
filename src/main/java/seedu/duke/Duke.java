@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.duke.core.*;
+import seedu.duke.core.command.Command;
 import seedu.duke.model.Task;
 
 import java.io.File;

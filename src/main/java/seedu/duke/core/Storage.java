@@ -7,14 +7,10 @@ import seedu.duke.model.Event;
 import seedu.duke.model.Task;
 import seedu.duke.model.Todo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Storage {
@@ -130,19 +126,20 @@ public class Storage {
      * @param description task description.
      * @return Task List (ArrayList) based on the search keyword.
      */
-    public List<Task> searchTask(List<Task> list, String description) {
-        List<Task> searchResultList = new ArrayList<>();
+    public ArrayList<Task> searchTask(List<Task> list, String ... description) {
+        HashSet<Task> searchResultList = new HashSet<>();
 
         for (Task t : list) {
             String[] arr = t.getDescription().split(" ");
-
             for (String word : arr) {
-                if (word.equals(description)) {
-                    searchResultList.add(t);
+                for (String desc_word : description) {
+                    if (word.equals(desc_word)) {
+                        searchResultList.add(t);
+                    }
                 }
             }
         }
-        return searchResultList;
+        return new ArrayList<Task>(searchResultList);
     }
 
     /**

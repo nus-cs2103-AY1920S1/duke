@@ -1,5 +1,7 @@
-package seedu.duke.core;
+package seedu.duke.core.command;
 
+import seedu.duke.core.Storage;
+import seedu.duke.core.Ui;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.TaskListEmptyException;
 import seedu.duke.model.Task;
@@ -23,7 +25,7 @@ public class Command {
      * @throws IOException when file is not found or cannot be opened.
      */
     public String parseCommand(String input, String cmd, String description,
-                             List<Task> list, Storage storage, Ui ui) throws DukeException,
+                               List<Task> list, Storage storage, Ui ui) throws DukeException,
             ParseException, IOException {
         String output = "";
 
@@ -71,7 +73,7 @@ public class Command {
                 output = displayTask(output, list, index);
             }
         } else if (cmd.equals("find")) {
-            output += ui.displayList(output, storage.searchTask(list, description));
+            output += ui.displayList(output, storage.searchTask(list, description.split(" ")));
         } else {
             //incorrect command
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -92,8 +94,6 @@ public class Command {
             throw new DukeException("Oops! please specify time (/at, /by ...");
         }
     }
-
-
 
     /**
      * Prints only the specified task from task list.

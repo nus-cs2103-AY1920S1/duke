@@ -23,11 +23,20 @@ import javafx.stage.Stage;
  * storage attribute is a Storage object, which helps read and write data to the text file
  *
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 
     /**
      * Instantiates a Duke object.
@@ -239,7 +248,7 @@ public class Duke {
      *
      * @param args Main entry point.
      */
-    public static void main(String[] args) {
+    public static void main(String args) {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
     }
 
@@ -255,6 +264,10 @@ public class Duke {
         TODO,
         DEADLINE,
         FIND
+    }
+
+    public Duke(){
+
     }
 
 }

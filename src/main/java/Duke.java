@@ -1,7 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Main method of Duke application.
+     */
     public static void main(String[] args) {
         // Create a scanner to take in user input
         Scanner sc = new Scanner(System.in);
@@ -11,11 +15,24 @@ public class Duke {
         );
 
         String command = sc.nextLine();
+        ArrayList<String> tasks = new ArrayList<>();
 
         while (!command.equals("bye")) {
-            System.out.println(
-                    formatMessage(command)
-            );
+            if (command.equals("list")) {
+                String list = "";
+                for (int i = 0; i < tasks.size(); i++) {
+                    list += String.format(
+                            "%d. " + tasks.get(i) + "\n",
+                            i + 1
+                    );
+                }
+                System.out.println(formatMessage(list));
+            } else {
+                tasks.add(command);
+                System.out.println(
+                        formatMessage("added: " + command)
+                );
+            }
             command = sc.nextLine();
         }
 

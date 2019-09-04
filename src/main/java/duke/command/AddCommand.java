@@ -23,7 +23,8 @@ public class AddCommand extends Command {
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            super.commandOutput = ui.addTaskDialogue(task.toString(), tasks.size());
+            super.commandOutput = ui.addTaskDialogue(task.toString(), tasks.size() + 1);
+            // Size + 1 since the addTask dialogue is being generated before it is added.
             tasks.add(task); // Add after task.toString() to see if there is formatting error.
         } catch (DateTimeParseException e) {
             throw new DukeException("The format of the date and time should be dd/MM/yyyy HHmm!");

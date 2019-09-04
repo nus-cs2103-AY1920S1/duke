@@ -8,7 +8,7 @@ import run.Ui;
 import run.Storage;
 
 /**
- * Abstract class for a command that adds tasks into tasks list
+ * Abstract class for a command that adds tasks into tasks list.
  */
 public abstract class AddCommand extends Command {
     TaskList tasks;
@@ -18,7 +18,7 @@ public abstract class AddCommand extends Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Checks if this command is an exit ("bye") command
+     * Checks if this command is an exit ("bye") command.
      * @return false boolean since command is not exit ("bye") command
      */
     public boolean isExit() {
@@ -35,7 +35,7 @@ public abstract class AddCommand extends Command {
             storage.updateState(tasks);
         } catch (IOException ex) {
             Ui.showError("IO exception caught while adding task!");
-        } catch(UpdateStateException ex) {
+        } catch (UpdateStateException ex) {
             Ui.showError(ex.getMessage());
         }
     }

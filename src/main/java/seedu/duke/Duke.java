@@ -244,7 +244,7 @@ public class Duke {
     }
 
     /**
-     * possibleTasks is an enumeration of the constant, pre-defined, recognizable commands.
+     * possibleTasks  is an enumeration of the constant, pre-defined, recognizable commands.
      */
     enum PossibleTasks {
         BYE,

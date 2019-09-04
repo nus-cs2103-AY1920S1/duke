@@ -5,7 +5,7 @@ import duke.task.Task;
 /**
  * Check the task base on the index given by the user.
  */
-public class doneCommand extends command{
+public class DoneCommand extends Command {
     /**
      * Mark the current task done.
      * @param currTask refer to the specific task the user checks.

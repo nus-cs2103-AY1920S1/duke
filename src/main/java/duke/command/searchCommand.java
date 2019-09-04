@@ -11,7 +11,7 @@ import java.util.StringJoiner;
 /**
  * Search the task list based on the keyword given by the user.
  */
-public class searchCommand extends command{
+public class SearchCommand extends Command {
     /**
      * Search the task list based on the keyword given by the user.
      * @param commandArr input given by the user.

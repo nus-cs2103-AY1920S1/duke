@@ -5,7 +5,7 @@ import duke.task.Task;
 /**
  * Delete the current task indicated by the user.
  */
-public class deleteCommand extends command {
+public class DeleteCommand extends Command {
     /**
      * Delete the specific task from the task list prompted by the user.
      * @param size takes in the size of the task list.

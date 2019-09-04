@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 /**
  * Add task to the task list based on to do, deadline and event.
  */
-public class addCommand extends command {
+public class AddCommand extends Command {
     /**
      * Get the description the input task.
      * @param commandArr current task of the user input.

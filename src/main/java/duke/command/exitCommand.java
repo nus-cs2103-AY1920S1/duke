@@ -3,16 +3,16 @@ package duke.command;
 /**
  * Exit the GUI and closes it.
  */
-public class exitCommand extends command {
+public class ExitCommand extends Command {
     /**
      * End the session between Duke and the user.
      * @return Duke's reply in closing the GUI and end session.
      */
     public String exit() {
-        return printLine() +
-                "      Bye. Hope to see you again soon!\n" +
-                printLine() +
-                "\n";
+        return printLine()
+                + "      Bye. Hope to see you again soon!\n"
+                + printLine()
+                + "\n";
     }
 
     /**

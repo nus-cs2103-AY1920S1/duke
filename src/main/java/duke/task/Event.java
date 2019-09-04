@@ -75,6 +75,9 @@ public class Event extends Task {
             break;
         default : jargon = "th ";
         }
+        if (startTime.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
+            jargon = "th ";
+        }
         String nameOfMonth = "";
         switch (startTime.get(Calendar.MONTH)) {
         case 0 : nameOfMonth = "January";
@@ -138,6 +141,9 @@ public class Event extends Task {
         case 3 : jargon = "rd ";
             break;
         default : jargon = "th ";
+        }
+        if (endTime.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
+            jargon = "th ";
         }
         String nameOfMonth = "";
         switch (endTime.get(Calendar.MONTH)) {

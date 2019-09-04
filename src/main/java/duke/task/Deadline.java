@@ -58,6 +58,9 @@ public class Deadline extends Task {
             break;
         default : jargon = "th ";
         }
+        if (time.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
+            jargon = "th ";
+        }
         String nameOfMonth = "";
         switch (time.get(Calendar.MONTH)) {
         case 0 : nameOfMonth = "January";

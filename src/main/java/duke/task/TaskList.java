@@ -18,6 +18,10 @@ public class TaskList {
         this.tasks = loadedTasks;
     }
 
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
+
     /**
      * This method adds the <code>task</code> into the task list.
      *

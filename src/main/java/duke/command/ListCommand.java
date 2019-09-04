@@ -13,12 +13,6 @@ import duke.ui.Ui;
  * @since 29th August 2019
  */
 public class ListCommand extends Command {
-    /**
-     * Class constructor.
-     */
-    public ListCommand() {
-        super();
-    }
 
     /**
      * This method when called results in the listing of all the task from the task list in the

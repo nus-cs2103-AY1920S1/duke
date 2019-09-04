@@ -17,14 +17,8 @@ public class Ui {
     /**
      * Represents the scanner which reads user input.
      */
-    private Scanner sc;
-
-    /**
-     * Class constructor.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
+    private Scanner sc = new Scanner(System.in);
+    private StringBuilder output = new StringBuilder();
 
     /**
      * This method reads user input and returns it in a String.
@@ -35,20 +29,38 @@ public class Ui {
         return this.sc.nextLine();
     }
 
+
+    public void resetOutput() {
+        this.output.delete(0, output.length());
+    }
+
     /**
-     * This method displays messages to user.
-     *
-     * @param message Message toi be displayed to user.
+     * Returns the output string.
      */
-    public void printFormat(String message) {
-        System.out.println(message);
+    public String printString() {
+        return output.toString();
+    }
+
+    /**
+     * Adds the message on to the output string object.
+     */
+    public void append(String message) {
+        output.append(message);
+        output.append("\n");
+    }
+
+    /**
+     * Check for data left unread.
+     */
+    public boolean isDoneReading() {
+        return sc.hasNextLine();
     }
 
     /**
      * This method prints welcome message when app is initiated.
      */
     public void showWelcome() {
-        printFormat("Hello, I'm Duke\nWhat can I do for you?");
+        append("Hello, I'm Duke\nWhat can I do for you?");
     }
 
     /**
@@ -58,10 +70,10 @@ public class Ui {
      */
     public void printTaskList(ArrayList<Task> tasks) {
         int counter = 0;
-        System.out.println("Here are the tasks in your list:");
+        append("Here are the tasks in your list:");
         for (Task task : tasks) {
             counter++;
-            System.out.println(counter + "." + task.toString());
+            append(counter + "." + task.toString());
         }
     }
 
@@ -69,7 +81,7 @@ public class Ui {
      * This method prints the exit message to the user.
      */
     public void printBye() {
-        printFormat("Bye. Hope to see you again soon!");
+        append("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -78,8 +90,8 @@ public class Ui {
      * @param task The description of the task.
      */
     public void printDone(String task) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task);
+        append("Nice! I've marked this task as done: ");
+        append(task);
     }
 
     /**
@@ -89,9 +101,9 @@ public class Ui {
      * @param size The size of the task list.
      */
     public void printRemoveMessage(String task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+        append("Noted. I've removed this task:");
+        append(task);
+        append("Now you have " + size + " tasks in the list.");
     }
 
     /**
@@ -101,15 +113,15 @@ public class Ui {
      * @param size The size of the task list.
      */
     public void printAddTaskMessage(String task, int size) {
-        System.out.println("Got it. I've added this task.");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+        append("Got it. I've added this task.");
+        append(task);
+        append("Now you have " + size + " tasks in the list.");
     }
 
     /**
-     * Prints separator line in all output of <code>Duke</code>.
+     * Append error message to the output string.
      */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public void printError(String error) {
+        append(error);
     }
 }

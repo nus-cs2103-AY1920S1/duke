@@ -1,0 +1,7 @@
+.chatbox{
+    -fx-background-color: lightgray;
+}
+
+.image{
+    -fx-shape:Circle;
+}

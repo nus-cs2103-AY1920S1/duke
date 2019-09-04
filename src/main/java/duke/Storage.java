@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 /**
  * Storage class to manage hard drive data.
- *
  */
 public class Storage {
     private String filepath;

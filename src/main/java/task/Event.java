@@ -1,7 +1,5 @@
 package task;
 
-import duke.DukeException;
-
 /**
  * Task which has a place.
  *

@@ -7,6 +7,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Creates a Deadline object.
+     * @param command string used to be chopped up into description and by.
+     */
     public Deadline(String command) {
         super(command);
         String[] commandArr = command.split(" /", 2);

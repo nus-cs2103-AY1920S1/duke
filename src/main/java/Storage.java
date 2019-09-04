@@ -10,7 +10,12 @@ public class Storage {
     private String filePath = "";
     private File file;
 
-    public Storage(String filePath) {
+    /**
+     * Creates a storage object.
+     * @param filePath refers to the filepath where the txt file is stored.
+     * @throws DukeException when the file can't be created.
+     */
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         file = new File(filePath);
         if (!file.exists()) {
@@ -18,16 +23,15 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException ex) {
-
+                throw new DukeException("I can't find the file path");
             }
         }
     }
 
     /**
-     * Writes a text to the txt file specified in filepath
-     *
-     * @param textToAdd
-     * @throws IOException
+     * Writes a text to the txt file specified in filepath.
+     * @param textToAdd refers to the text to be inserted into the txt file.
+     * @throws IOException when the text can't be written into the txt file.
      */
     public void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -36,9 +40,9 @@ public class Storage {
     }
 
     /**
-     * Writes an arraylist of tasks to the txt file specified in filepath
-     * @param taskListToAdd
-     * @throws IOException
+     * Writes a list of tasks to the txt file specified in filepath.
+     * @param taskListToAdd a list to be added into the txt file.
+     * @throws DukeException when an error occurred with a specific message.
      */
     public void writeToFile(ArrayList<Task> taskListToAdd) throws DukeException {
         StringBuilder sb = new StringBuilder();
@@ -53,9 +57,9 @@ public class Storage {
     }
 
     /**
-     * Gets the file content
+     * Gets the file content.
      * @return arrayList of tasks
-     * @throws DukeException
+     * @throws DukeException when an error occurred with a specific message.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -66,16 +70,16 @@ public class Storage {
                 taskList.add(task);
             }
         } catch (FileNotFoundException ex) {
-
+            throw new DukeException("I can't load your tasks.");
         }
         return taskList;
     }
 
     /**
-     * Reads in the txt file data and create task objects accordingly
-     * @param taskString
-     * @return
-     * @throws DukeException
+     * Reads in the txt file data and create task objects accordingly.
+     * @param taskString to parse the string into different tasks.
+     * @return {@link Task}
+     * @throws DukeException when an error occurred with a specific message.
      */
     public Task decodeTask(String taskString) throws DukeException {
         String[] taskArr = taskString.split(" \\| ");
@@ -98,9 +102,9 @@ public class Storage {
     }
 
     /**
-     * Returns true if 1 or else false
-     * @param s
-     * @return
+     * Returns true if 1 or else false.
+     * @param s string input
+     * @return {@link boolean}
      */
     public boolean decodeIsDone(String s) {
         return s.equals("1");

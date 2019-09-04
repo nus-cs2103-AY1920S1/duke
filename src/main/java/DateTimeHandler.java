@@ -24,9 +24,9 @@ class DateTimeHandler {
     }
 
     /**
-     * Transforms dd/MM/yyyy HHmm into an ordinal date format
-     * @param s
-     * @return
+     * Transforms dd/MM/yyyy HHmm into an ordinal date format.
+     * @param s is a string in the form of "d/M/yyyy HHmm".
+     * @return {@link String}
      */
     public static String getDateTime(String s) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -41,23 +41,22 @@ class DateTimeHandler {
     }
 
     /**
-     * Transforms dd/MM/yyyy HHmm-HHmm into an ordinal date format
-     * @param s
-     * @return
-     * @throws DukeException
+     * Transforms dd/MM/yyyy HHmm-HHmm into an ordinal date format.
+     * @param s is a string in the form of "d/M/yyyy HHmm-HHmm".
+     * @throws DukeException when an error occurred with a specific message.
      */
     public static DateTimeRangeHelper getDateTimeRange(String s) throws DukeException {
         try {
-            String[] sArr = s.split("-");
+            String[] stringArr = s.split("-");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(sArr[0], formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(stringArr[0], formatter);
             DateTimeFormatter dukeFormatter = new DateTimeFormatterBuilder()
                     .appendText(ChronoField.DAY_OF_MONTH, ordNo)
                     .appendPattern(" 'of' MMMM yyyy, h")
                     .toFormatter();
 
             DateTimeFormatter toFormatter = DateTimeFormatter.ofPattern("HHmm");
-            LocalTime toTime = LocalTime.parse(sArr[1], toFormatter);
+            LocalTime toTime = LocalTime.parse(stringArr[1], toFormatter);
             DateTimeFormatter toTimeFormatter = DateTimeFormatter.ofPattern("ha");
 
             String st = dateTime.format(dukeFormatter) + "-" + toTime.format(toTimeFormatter);

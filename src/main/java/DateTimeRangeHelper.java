@@ -7,6 +7,13 @@ public class DateTimeRangeHelper {
     private LocalDate date;
     private String displayText;
 
+    /**
+     * Creates a datetimerangehelper data transfer object.
+     * @param start time.
+     * @param end time.
+     * @param date date.
+     * @param text description.
+     */
     public DateTimeRangeHelper(LocalTime start, LocalTime end, LocalDate date, String text) {
         startTime = start;
         endTime = end;

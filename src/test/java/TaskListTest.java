@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
-    public void sizeTest(){
+    public void sizeTest() {
         TaskList taskList = new TaskList();
-        assertEquals(0,taskList.getSize());
+        assertEquals(0, taskList.getSize());
     }
 
     @Test
-    public void getTaskTest(){
+    public void getTaskTest() {
         Task todo = new Todo("return book");
         TaskList taskList = new TaskList();
         taskList.addTask(todo);

@@ -13,8 +13,9 @@ public class TaskList {
     }
 
     /**
-     * Returns all the tasks
-     * @return all tasks in ArrayList form
+     * Returns all the tasks.
+     *
+     * @return {@link ArrayList} all tasks in ArrayList form.
      */
     public ArrayList<Task> getTasks() {
         return tasks;
@@ -39,27 +40,30 @@ public class TaskList {
     }
 
     /**
-     * Sets the task to be done
-     * @param i: index of the task
+     * Sets the task to be done.
+     *
+     * @param i index of the task.
      */
     public void done(int i) {
         tasks.get(i).done();
     }
 
     /**
-     * Returns the task with the specified index
-     * @param i: index of the task
-     * @return: Specified task
+     * Returns the task with the specified index.
+     *
+     * @param i index of the task.
+     * @return: Specified task.
      */
     public Task getTask(int i) {
         return tasks.get(i);
     }
 
     /**
-     * Deletes the task with the specified index
-     * @param i: index of the task
-     * @return: Deleted task
-     * @throws DukeException
+     * Deletes the task with the specified index.
+     *
+     * @param i index of the task.
+     * @throws DukeException when an error occurred with a specific message.
+     * @return: Deleted task.
      */
     public Task deleteTask(int i) throws DukeException {
         try {
@@ -70,18 +74,24 @@ public class TaskList {
     }
 
     /**
-     * Returns the number of tasks in the task list
-     * @return: Number of tasks in the task list
+     * Returns the number of tasks in the task list.
+     *
+     * @return {@link int} Number of tasks in the task list.
      */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Finds a text.
+     * @param description search string.
+     * @return {@link String}
+     */
     public String findTask(String description) {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> filteredTasks = new ArrayList<>();
-        for(int i = 0; i < tasks.size(); i++){
-            if(tasks.get(i).getDescription().contains(description)){
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(description)) {
                 filteredTasks.add(tasks.get(i));
             }
         }

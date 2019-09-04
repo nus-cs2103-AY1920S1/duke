@@ -3,6 +3,11 @@ public class Command {
     private boolean isExit;
     private String description;
 
+    /**
+     * Creates a Command object.
+     * @param de enum object.
+     * @param description of the command.
+     */
     public Command(DukeEnum de, String description) {
         this.de = de;
         isExit = de.equals(DukeEnum.BYE);
@@ -14,11 +19,11 @@ public class Command {
     }
 
     /**
-     * Executes the command accordingly
-     * @param tasks
-     * @param ui
-     * @param storage
-     * @throws DukeException
+     * Executes the command accordingly.
+     * @param tasks refers to all the tasks.
+     * @param ui refers to the object that handles all the things to do with user.
+     * @param storage refers to the storage object.
+     * @throws DukeException when an error occurred.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (de) {
@@ -64,11 +69,14 @@ public class Command {
             int i = Integer.parseInt(description) - 1;
             task = tasks.deleteTask(i);
             storage.writeToFile(tasks.getTasks());
-            String noted = "Noted. I've removed this task:\n\t" + task + "\nNow you have " + tasks.getSize() + " tasks in the list.";
+            String noted = "Noted. I've removed this task:\n\t" + task
+                    + "\nNow you have " + tasks.getSize() + " tasks in the list.";
             ui.setText(noted);
             break;
         case FIND:
             ui.setText(tasks.findTask(description).toString());
+            break;
+        default:
             break;
         }
     }

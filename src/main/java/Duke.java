@@ -37,7 +37,8 @@ public class Duke {
         System.out.println(addDoubleLine("     Got it. I've added this task: \n" + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list."));
     }
     static void handleInput(){
-        ArrayList <Task> list = new ArrayList<Task>();
+        Storage storage = new Storage();
+        ArrayList <Task> list = storage.recoverTasks();
         Scanner sc = new Scanner(System.in);
         try{
             while (sc.hasNextLine()){
@@ -47,7 +48,7 @@ public class Duke {
                 //bye
                 if (check.equals("bye")) {
                     System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
-                    saveFile(list);
+                    storage.saveFile(list);
                     System.exit(0);
                 //list
                 }else if(check.equals("list")){
@@ -58,14 +59,14 @@ public class Duke {
                     Task current = list.get(Integer.parseInt(taskNum) - 1);
                     current.markAsDone();
                     System.out.println(addDoubleLine("     Nice! I've marked this task as done:\n" + "    " + current.toString()));
-                    saveFile(list);
+                    storage.saveFile(list);
 
                 }else if(check.equals("delete")){
                     String taskNum = splited[1];
                     Task current = list.get(Integer.parseInt(taskNum) - 1);
                     list.remove(Integer.parseInt(taskNum) - 1);
                     System.out.println(addDoubleLine("     Noted. I've removed this task: \n" + "    " + current.toString() + "\n     Now you have " + list.size() + " tasks in the list."));
-                    saveFile(list);
+                    storage.saveFile(list);
 
                 }else if(check.equals("todo")){
                     String description = line.replace("todo", "").trim();
@@ -77,7 +78,7 @@ public class Duke {
                         list.add(new Todo(description));
                         Task current = list.get(list.size()-1);
                         printMsg(current, list.size());
-                        saveFile(list);
+                        storage.saveFile(list);
 
                     }
                 //make an event task
@@ -91,8 +92,7 @@ public class Duke {
                         list.add(new Event(splitDate[0].trim(), splitDate[1].trim()));
                         Task current = list.get(list.size()-1);
                         printMsg(current, list.size());
-                        saveFile(list);
-                    
+                        storage.saveFile(list);
                     }
                 //make deadline task
                 }else if(check.equals("deadline")){
@@ -114,24 +114,7 @@ public class Duke {
         }
         sc.close();
     }
-    public static void saveFile(ArrayList<Task> tasks){
-        try {
-            FileWriter fw = new FileWriter("data/duke.txt");
-            String total = "";
-            for (int i = 0; i < tasks.size(); i ++) {
-                String current = tasks.get(i).getStorageString();
-                if (i == 0) {
-                    total = current;
-                } else {
-                    total = total + "\n" + current;
-                }
-            }
- 			fw.write(total);
- 			fw.close();
- 		} catch (IOException e) {
- 			System.out.println("Something went wrong: " + e.getMessage());
- 		}
- 	}
+    
     public static void main(String[] args) {
         greeting();
         handleInput();

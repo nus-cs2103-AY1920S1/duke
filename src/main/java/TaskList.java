@@ -29,7 +29,7 @@ public class TaskList {
      * @throws DukeException if num is out of range
      */
     public void done(int num) throws DukeException {
-        if (num >= tasks.size() || num < 1) {
+        if (num > tasks.size() || num < 1) {
             throw new DukeException("Task number out of range.");
         }
         tasks.get(num - 1).isDone = true;
@@ -41,7 +41,7 @@ public class TaskList {
      * @throws DukeException if num is out of range
      */
     public void delete(int num) throws DukeException {
-        if (num >= tasks.size() || num < 1) {
+        if (num > tasks.size() || num < 1) {
             throw new DukeException("Task number out of range.");
         }
         tasks.remove(num - 1);

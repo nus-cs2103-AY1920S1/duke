@@ -39,15 +39,19 @@ public class Ui {
     /**
      * Sends greetings to user.
      */
-    public void greet() {
-        formatPrint(new String[]{"Hello! I'm Duke", "What can I do for you?"});
+    public String greet() {
+        String response = "Hello! I'm Duke \n     What can I do for you?";
+        formatPrint(response);
+        return response;
     }
 
     /**
      * Says goodbye to user.
      */
-    public void bye() {
-        formatPrint("Bye. Hope to see you again soon!");
+    public String bye() {
+        String response = "Bye. Hope to see you again soon!";
+        formatPrint(response);
+        return response;
     }
 
     /**
@@ -55,21 +59,28 @@ public class Ui {
      * @param list a TaskList object that contains a list of tasks
      * @throws DukeException if description of tasks cannot be parsed
      */
-    public void printList(TaskList list) throws DukeException {
+    public String printList(TaskList list) throws DukeException {
         ArrayList<Task> tasks = list.tasks;
+        StringBuilder response = new StringBuilder();
         if (tasks.size() == 0) {
+            response.append("There is no task in your list");
             throw new DukeException("There is no task in your list");
         }
         try {
             System.out.println(line);
             System.out.println(format("Here are the tasks in your list:"));
+            response.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
+                response.append(i + 1).append(".").append(t.repr()).append("\n");
                 System.out.println("  " + format(i + 1 + "." + t.repr()));
             }
             System.out.println(line);
         } catch (ParseException e) {
+            response.append("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
             throw new DukeException("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
+        } finally {
+            return String.valueOf(response);
         }
     }
 
@@ -79,10 +90,11 @@ public class Ui {
      * @param num number of task to be marked as done
      * @throws ParseException if description of task connot be parsed
      */
-    public void done(TaskList list, int num) throws ParseException {
+    public String done(TaskList list, int num) throws ParseException {
         ArrayList<Task> tasks = list.tasks;
         String[] listToPrint = {"Nice! I've marked this task as done: ", "  " + tasks.get(num - 1).repr()};
         formatPrint(listToPrint);
+        return listToPrint[0] + "\n" + listToPrint[1];
     }
 
     /**
@@ -91,24 +103,31 @@ public class Ui {
      * @param num number of task to be deleted
      * @throws ParseException if description of task connot be parsed
      */
-    public void delete(TaskList list, int num) throws ParseException {
+    public String delete(TaskList list, int num) throws ParseException {
+        String response = "";
         ArrayList<Task> tasks = list.tasks;
         Task t = tasks.get(num - 1);
         System.out.println(line);
         System.out.println(format("Noted. I've removed this task: "));
+        response += "Noted. I've removed this task: \n  " + t.repr() + "\n";
         System.out.println("  " + format(t.repr()));
         switch (tasks.size()) {
-        case 0:
+        case 1:
+            response += "Now you have no task in the list.";
             System.out.println(format("Now you have no task in the list."));
             break;
-        case 1:
+        case 2:
+            response += "Now you have 1 task in the list.";
             System.out.println(format("Now you have 1 task in the list."));
             break;
         default:
+            int count = tasks.size() - 1;
+            response += "Now you have " + count + " tasks in the list.";
             System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
             break;
         }
         System.out.println(line);
+        return response;
     }
 
     /**
@@ -116,7 +135,8 @@ public class Ui {
      * @param list a TaskList object that contains a list of tasks
      * @throws DukeException if description of task connot be parsed
      */
-    public void add(TaskList list) throws DukeException {
+    public String add(TaskList list) throws DukeException {
+        String response = "";
         ArrayList<Task> tasks = list.tasks;
         try {
             Task newTask = tasks.get(tasks.size() - 1);
@@ -124,15 +144,20 @@ public class Ui {
             System.out.println(line);
             System.out.println(format("Got it. I've added this task: "));
             System.out.println("  " + str);
+            response += "Got it. I've added this task: \n  " + str + "\n";
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException | ParseException ex) {
-            throw new DukeException("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
+            response = "Task description should be of format \"context /prep dd/MM/yyyy HHmm\"";
+            throw new DukeException(response);
         }
         if (tasks.size() == 1) {
             System.out.println(format("Now you have 1 task in the list."));
+            response += "Now you have 1 task in the list.";
         } else {
             System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
+            response += "Now you have " + tasks.size() + " tasks in the list.";
         }
         System.out.println(line);
+        return response;
     }
 
 
@@ -140,44 +165,57 @@ public class Ui {
      * @param targets a TaskList of matching tasks
      * @throws DukeException if there is no matching task or task description cannot be parsed
      */
-    public void printFind(TaskList targets) throws DukeException {
+    public String printFind(TaskList targets) throws DukeException {
+        StringBuilder response = new StringBuilder();
         ArrayList<Task> tasks = targets.tasks;
         if (tasks.size() == 0) {
-            throw new DukeException("There is no matching task in your list");
+            response.append("There is no matching task in your list");
+            throw new DukeException(response.toString());
         }
         try {
             System.out.println(line);
             System.out.println(format("Here are the matching tasks in your list:"));
+            response.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 System.out.println("  " + format(i + 1 + "." + t.repr()));
+                response.append("  ").append(i + 1).append(".").append(t.repr()).append("\n");
             }
             System.out.println(line);
         } catch (ParseException e) {
-            throw new DukeException("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
+            response = new StringBuilder("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
+            throw new DukeException(response.toString());
+        } finally {
+            return response.toString();
         }
     }
 
     /**
      * Tells user tasks connot be loaded from hard disk.
      */
-    public void showLoadingError() {
-        formatPrint("Cannot load files");
+    public String showLoadingError() {
+        String response = "Cannot load files";
+        formatPrint(response);
+        return response;
     }
 
     /**
      * Tells user a DukeException has occurred.
      * @param ex the exception whose message is to be printed
      */
-    public void showDukeException(DukeException ex) {
-        formatPrint(ex.getMessage());
+    public String showDukeException(DukeException ex) { 
+        String response = ex.getMessage();
+        formatPrint(response);
+        return response;
     }
 
     /**
      * Tells user a ParseError has occurred.
      */
-    public void showParseError() {
-        formatPrint("Task description should be of format \"context /prep dd/MM/yyyy HHmm\"");
+    public String showParseError() {
+        String response = "Task description should be of format \"context /prep dd/MM/yyyy HHmm\"";
+        formatPrint(response);
+        return response;
     }
 
 }

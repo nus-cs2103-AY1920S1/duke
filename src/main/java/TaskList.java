@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Contains all tasks added in by the user
+ * Contains all tasks added in by the user.
  */
 public class TaskList {
     private static ArrayList<Task> taskList;
@@ -9,12 +9,13 @@ public class TaskList {
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
+
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Adds task into current tasklist
+     * Adds task into current tasklist.
      *
      * @param task Task to be added into tasklist
      */
@@ -23,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes task from current tasklist
+     * Deletes task from current tasklist.
      *
      * @param taskNum Task number of task to be deleted from tasklist
      */
@@ -32,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the current number of tasks in tasklist
+     * Returns the current number of tasks in tasklist.
      *
      * @return number of tasks in tasklist
      */
@@ -48,6 +49,11 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Returns all the tasks currently in the tasklist.
+     *
+     * @return all tasks currently in tasklist
+     */
     public static String printTasks() {
         if (taskList.isEmpty()) {
             return "task list is empty";
@@ -60,6 +66,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Search in a tasklist for the tasks that matches the term provided.
+     *
+     * @param term Used to search for tasks that matches the term
+     */
     public static String findTasks(String term) {
         ArrayList<Task> searchedTasks = new ArrayList<>();
         for (Task task : taskList) {

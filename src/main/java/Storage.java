@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Represents a storage for users' tasklist
+ * Represents a storage for users' tasklist.
  */
 public class Storage {
     private static String filePath;
@@ -18,17 +18,16 @@ public class Storage {
     }
 
     /**
-     * Returns user's tasklist
+     * Returns user's tasklist.
      *
      * @return arraylist of tasks
      * @throws IOException occurs when file does not exist or is corrupted
      */
     public ArrayList<Task> load() throws IOException {
-        FileReader fReader = new FileReader(filePath);
-        BufferedReader bReader = new BufferedReader(fReader);
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
         String line = null;
 
-        while((line = bReader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             char taskType = line.charAt(1);
             char isDone = line.charAt(4);
             if (taskType == 'T') {
@@ -47,10 +46,12 @@ public class Storage {
                 String by = line.substring(line.indexOf(':') + 2, line.indexOf(')')).trim();
                 String[] dateTimeSplit = by.split(" ");
                 if (dateTimeSplit.length == 3) {
-                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " " + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
+                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " "
+                                   + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
                     time = "";
                 } else if (dateTimeSplit.length == 4) {
-                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " " + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
+                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " "
+                                   + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
                     time = dateTimeSplit[3];
                 }
                 Task deadline = new Deadline(description, new DateTime(date, time));
@@ -67,10 +68,12 @@ public class Storage {
                 String at = line.substring(line.indexOf(':') + 2, line.indexOf(')')).trim();
                 String[] dateTimeSplit = at.split(" ");
                 if (dateTimeSplit.length == 3) {
-                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " " + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
+                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " "
+                                   + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
                     time = "";
                 } else if (dateTimeSplit.length == 4) {
-                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " " + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
+                    date = dateTimeSplit[0] + " " + dateTimeSplit[1] + " "
+                                   + dateTimeSplit[2].substring(0, dateTimeSplit[2].length() - 1);
                     time = dateTimeSplit[3];
                 }
                 Task event = new Event(description, new DateTime(date, time));
@@ -82,22 +85,21 @@ public class Storage {
                 }
             }
         }
-        bReader.close();
+        reader.close();
         return taskList;
     }
 
     /**
-     * Saves the current tasks in tasklist to the file specified by user
+     * Saves the current tasks in tasklist to the file specified by user.
      *
      * @throws IOException occurs when file does not exist or is corrupted
      */
     public static void save() throws IOException {
-        FileWriter fWriter = new FileWriter(filePath);
-        BufferedWriter bWriter = new BufferedWriter(fWriter);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
 
         for (Task task : TaskList.getCurrentTasks()) {
-            bWriter.write(task + "\n");
+            writer.write(task + "\n");
         }
-        bWriter.close();
+        writer.close();
     }
 }

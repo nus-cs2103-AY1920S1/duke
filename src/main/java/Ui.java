@@ -15,14 +15,14 @@ public class Ui {
     }
 
     /**
-     * Prints all tasks currently in the tasklist
+     * Prints all tasks currently in the tasklist.
      */
     public static String printTaskList() {
         return TaskList.printTasks();
     }
 
     /**
-     * Search in a tasklist for the tasks that matches the term provided
+     * Search in a tasklist for the tasks that matches the term provided.
      *
      * @param term Used to search for tasks that matches the term
      */
@@ -37,12 +37,13 @@ public class Ui {
      */
     public static String addTaskToTaskList(Task task) {
         TaskList.addTask(task);
-        String output = "Got it. I've added this task: \n" + task + "\n" + "Now you have " + TaskList.getTaskListSize() + " tasks in the list.";
+        String output = "Got it. I've added this task: \n" + task + "\n" + "Now you have "
+                    + TaskList.getTaskListSize() + " tasks in the list.";
         return output;
     }
 
     /**
-     * Deletes a task from the tasklist by calling delTask from TaskList class
+     * Deletes a task from the tasklist by calling delTask from TaskList class.
      *
      * @param taskNum The task number of the task to be deleted
      */
@@ -55,11 +56,9 @@ public class Ui {
     }
 
     /**
-     * Reads users' commands and respond accordingly
+     * Reads users' commands and respond accordingly.
      */
     public static String readInput(String userInput) {
-//        Scanner input = new Scanner(System.in);
-//        String userInput = input.nextLine();
         if (userInput.equals("bye")) {
             return "goodbye!";
         } else if (userInput.equals("list")) {

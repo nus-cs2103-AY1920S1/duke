@@ -12,6 +12,14 @@ public class DateTime {
         this.time = time;
     }
 
+    /**
+     * Creates a DateTime object out of a string representing date and time
+     * e.g., 11/12/2019 1800 will give a DateTime object with date being
+     * 11th December 2019 and time being 6:00pm
+     *
+     * @param dateTime String that represents a date and a time
+     * @throws InvalidInputException occurs when an invalid date is input
+     */
     public DateTime(String dateTime) throws InvalidInputException {
         String[] splitDateAndTime = dateTime.split(" ");
         String[] splitDate = splitDateAndTime[0].split("/");

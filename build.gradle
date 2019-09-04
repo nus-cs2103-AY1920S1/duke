@@ -2,7 +2,13 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'checkstyle'
 }
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
 
 group 'seedu.duke'
 version '0.1.0'

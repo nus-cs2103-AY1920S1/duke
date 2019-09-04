@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Represents Duke the main program for users to
- * save and load tasks
+ * Represents Duke the main program for users to save and load tasks.
  */
 public class Duke extends Application {
     private Storage storage;
@@ -25,6 +24,9 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Represents a Duke assistant.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
@@ -83,16 +85,16 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
+            // handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-//            handleUserInput();
+            // handleUserInput();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.

@@ -2,19 +2,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * Represents a parser that checks the validity of
- * users' inputs
+ * Represents a parser that checks the validity of users' inputs.
  */
 public class Parser {
     /**
-     * Checks validity of users' input
+     * Checks validity of users' input.
      * @param type refers to the commands of user inputs e.g., "done", "delete", "deadline"
      * @param userInput refers to the actual input sentence from user
      * @throws EmptyFieldException occurs when there are missing data from user input
      * @throws InvalidInputException occurs when user input is invalid
      * @throws ParseException occurs when user input date is invalid
      */
-    public static void handleInput(String type, String userInput) throws EmptyFieldException, InvalidInputException, ParseException {
+    public static void handleInput(String type, String userInput) throws
+            EmptyFieldException, InvalidInputException, ParseException {
         if (type.equals("find")) {
             if (userInput.substring(5).isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! You have to type something that you want to find");

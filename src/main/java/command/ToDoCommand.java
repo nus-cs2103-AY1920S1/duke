@@ -31,13 +31,15 @@ public class ToDoCommand extends AddCommand {
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state
+     * @return String output of executed command to be shown to the user
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.tasks = tasks;
         super.ui = ui;
         super.storage = storage;
         ToDo currTask = new ToDo(rawString.replaceFirst("todo ", ""));
-        tasks.add(currTask);
+        String output = tasks.add(currTask);
         super.addCommandUpdateState();
+        return output;
     }
 }

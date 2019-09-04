@@ -28,57 +28,59 @@ public class TaskList {
 
     /**
      * Prints all tasks currently stored in this TaskList through ui.
+     * @return String formatted print of all tasks in this TaskList or "No tasks!" if empty
      */
-    public void list() {
+    public String list() {
         if (this.tasks.size() == 0) {
-            Ui.showMessage("No tasks!");
-            return;
+            return "No tasks!";
         }
-        Ui.printList(this.tasks);
+        return Ui.printList(this.tasks);
     }
 
     /**
      * Adds a task into this TaskList.
      * @param task the task to be added in
+     * @return String output to user after adding the task
      */
-    public void add(Task task) {
+    public String add(Task task) {
         this.tasks.add(task);
-        Ui.printAdd(task, this.tasks.size());
+        return Ui.printAdd(task, this.tasks.size());
     }
 
     /**
      * Marks a task within this TaskList as done.
      * @param taskNum int of task number that is to be marked as done (1-indexed)
+     * @return String output to user after marking task as done
      */
-    public void done(int taskNum) {
+    public String done(int taskNum) {
         if (taskNum > this.tasks.size()) {
-            Ui.showError("No task at that number! (Marking as done unsuccessful)");
-            return;
+            return "No task at that number! (Marking as done unsuccessful)";
         }
         Task currTask = this.tasks.get(taskNum - 1);
         currTask.setDone();
-        Ui.printDone(currTask);
+        return Ui.printDone(currTask);
     }
 
     /**
      * Deletes a task from within the TaskList.
      * @param taskNum int of task number that is to be deleted (1-indexed)
+     * @return String output to user after deleting task
      */
-    public void delete(int taskNum) {
+    public String delete(int taskNum) {
         if (taskNum > this.tasks.size()) {
-            Ui.showError("No task at that number! (Deletion unsuccessful)");
-            return;
+            return "No task at that number! (Deletion unsuccessful)";
         }
         Task currTask = this.tasks.get(taskNum - 1);
         this.tasks.remove(taskNum - 1);
-        Ui.printDelete(currTask, this.tasks.size());
+        return Ui.printDelete(currTask, this.tasks.size());
     }
 
     /**
      * Searches through tasks in this TaskList to find matching tasks.
      * @param searchString String to be searched for within task names
+     * @return String of formatted tasks that match search parameter
      */
-    public void find(String searchString) {
+    public String find(String searchString) {
         ArrayList<Task> passedTasks = new ArrayList<Task>();
         for (int i = 1; i <= this.tasks.size(); i++) {
             Task currTask = this.tasks.get(i - 1);
@@ -86,6 +88,6 @@ public class TaskList {
                 passedTasks.add(currTask);
             }
         }
-        Ui.printFind(passedTasks);
+        return Ui.printFind(passedTasks);
     }
 }

@@ -16,8 +16,9 @@ public abstract class Command {
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state
+     * @return String output of executed command to be shown to the user
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /** Checks if this command is an exit ("bye") command.
      * @return boolean that checks if this is exit ("bye") command

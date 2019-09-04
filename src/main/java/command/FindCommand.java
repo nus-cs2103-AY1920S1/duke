@@ -27,9 +27,10 @@ public class FindCommand extends Command {
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state
+     * @return String output of executed command to be shown to the user
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.find(this.searchString);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.find(this.searchString);
     }
 
     /**

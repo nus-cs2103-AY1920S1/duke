@@ -36,9 +36,10 @@ public class DeleteCommand extends Command {
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state
+     * @return String output of executed command to be shown to the user
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.delete(taskNum);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = tasks.delete(taskNum);
         try {
             storage.updateState(tasks);
         } catch (IOException ex) {
@@ -46,6 +47,7 @@ public class DeleteCommand extends Command {
         } catch (UpdateStateException ex) {
             Ui.showError(ex.getMessage());
         }
+        return output;
     }
 
     /**

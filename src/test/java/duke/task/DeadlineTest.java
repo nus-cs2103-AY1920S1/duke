@@ -4,9 +4,7 @@ import duke.command.DukeException;
 import duke.command.Parser;
 import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
 
@@ -24,10 +22,10 @@ class DeadlineTest {
 
     @Test
     void testToString() throws DukeException {
-            assertEquals("[D][-] sleep (by: 29th July, 2018. 11:00pm)",
-                    new Deadline(new Parser("deadline sleep /by 29/07/2018 2300")).toString());
-            Deadline deadline = new Deadline(new Parser("deadline sleep right now /by 21/12/2015 0846"));
-            deadline.markAsDone();
-            assertEquals("[D][+] sleep right now (by: 21st December, 2015. 8:46am)", deadline.toString());
+        assertEquals("[D][-] sleep (by: 29th July, 2018. 11:00pm)",
+                new Deadline(new Parser("deadline sleep /by 29/07/2018 2300")).toString());
+        Deadline deadline = new Deadline(new Parser("deadline sleep right now /by 21/12/2015 0846"));
+        deadline.markAsDone();
+        assertEquals("[D][+] sleep right now (by: 21st December, 2015. 8:46am)", deadline.toString());
     }
 }

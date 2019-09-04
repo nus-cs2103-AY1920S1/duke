@@ -40,7 +40,7 @@ public class TaskList {
      */
     public void printAllTasks() {
         for (int i = 1; i <= numTasks; i++) {
-            System.out.println(i + "." + allTasks.get(i-1));
+            System.out.println(i + "." + allTasks.get(i - 1));
         }
     }
 
@@ -56,8 +56,8 @@ public class TaskList {
     }
 
     /**
-     * Deletes the Task of the give index from the TaskList
-     * @param index
+     * Deletes the Task of the give index from the TaskList.
+     * @param index of the task to be deleted.
      * @return the deleted task
      */
     public Task deleteTask(int index) {
@@ -67,10 +67,15 @@ public class TaskList {
         return deletedTask;
     }
 
+    /**
+     * Search for the keyword given in this TaskList.
+     * @param keyword Representing the word we want to search for.
+     * @return A TaskList of the filtered tasks containing this keyword.
+     */
     public TaskList searchFor(String keyword) {
         ArrayList<Task> relevant = new ArrayList<>();
 
-        for(Task task : allTasks) {
+        for (Task task : allTasks) {
             if (task.getDescription().contains(keyword)) {
                 relevant.add(task);
             }

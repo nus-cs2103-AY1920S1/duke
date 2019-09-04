@@ -12,7 +12,7 @@ public class Storage {
     private File file;
 
     /**
-     * Creates a new Storage which refers to the file of the given filepath
+     * Creates a new Storage which refers to the file of the given filepath.
      * @param filepath used by Duke to store and modify information.
      */
     public Storage(String filepath) {
@@ -22,7 +22,7 @@ public class Storage {
     /**
      * Saves the new list to the file.
      * @param content of the modified list.
-     * @throws IOException
+     * @throws IOException Indicates that the given file to duke cannot be accessed.
      */
     public void saveToFile(String content) throws IOException {
         FileWriter fw = new FileWriter(file);
@@ -33,7 +33,7 @@ public class Storage {
     /**
      * Loads the saved tasks from the file to Duke's current task list.
      * @return a list representing the tasks.
-     * @throws DukeException
+     * @throws DukeException Indicating that the file given cannot be loaded.
      */
     public ArrayList<Task> loadPreviousTasks() throws DukeException {
         ArrayList<Task> loadList = new ArrayList<>();
@@ -61,8 +61,6 @@ public class Storage {
         String details = line.substring(0,6);
         char[] detailsArray = details.toCharArray();
         String type = "" + detailsArray[1];
-        String done = "" + detailsArray[4];
-        boolean isDone = done.equals("+");
         String desc = line.substring(7);
 
         Task newTask = new Task("dummy");
@@ -84,6 +82,10 @@ public class Storage {
             String description = dd[0].substring(0, dd[0].length() - 1);
             newTask = new Event(description, deadline);
         }
+
+        // Read from line to see if task should be marked as done
+        String done = "" + detailsArray[4];
+        boolean isDone = done.equals("+");
 
         if (isDone) {
             newTask.quietMarkAsDone();

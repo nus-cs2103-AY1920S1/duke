@@ -64,7 +64,7 @@ public class Duke {
                         // Save new list to storage
                         try {
                             storage.saveToFile(taskList.toString());
-                        } catch(IOException e) {
+                        } catch (IOException e) {
                             ui.showLoadingError();
                         }
 
@@ -142,7 +142,7 @@ public class Duke {
                         // Save the new list to storage
                         try {
                             storage.saveToFile(taskList.toString());
-                        } catch(IOException e) {
+                        } catch (IOException e) {
                             ui.showLoadingError();
                         }
 

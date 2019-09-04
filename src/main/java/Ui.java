@@ -66,7 +66,7 @@ public class Ui {
 
     /**
      * Prints the given error message.
-     * @param e
+     * @param e error given
      */
     public void showErrorMessage(Exception e) {
         System.out.println(e.getMessage());
@@ -85,8 +85,8 @@ public class Ui {
     }
 
     /**
-     * Prints the list of Tasks that are relevant
-     * @param filteredList of tasks related to the keyword
+     * Prints the list of Tasks that are relevant.
+     * @param filteredList of tasks related to the keyword.
      */
     public void showSearchList(TaskList filteredList) {
         System.out.println("Here are the matching tasks in your list:");

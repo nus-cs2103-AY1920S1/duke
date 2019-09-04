@@ -6,11 +6,12 @@ import java.time.format.DateTimeFormatter;
  * Generates either todo, deadline or event tasks.
  */
 public class Parser {
+
     /**
      * Generates the appropriate task that matches the command.
      * @param task command to create the task.
      * @return Task that is generated.
-     * @throws DukeException
+     * @throws DukeException Exceptions specific to Duke
      */
     public static Task generateNewTask(String task) throws DukeException {
         try {
@@ -79,7 +80,7 @@ public class Parser {
         LocalDateTime actualDateTime = LocalDateTime.of(Integer.valueOf(date[2]), Integer.valueOf(date[1]),
                 Integer.valueOf(date[0]), hours, minutes);
         // maybe error here
-        DateTimeFormatter dtf=  DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm a");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm a");
         String formatted = " " + dtf.format(actualDateTime);
         return formatted;
     }

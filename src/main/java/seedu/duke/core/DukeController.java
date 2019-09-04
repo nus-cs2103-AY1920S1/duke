@@ -15,7 +15,7 @@ public class DukeController {
      * Command.
      * @param ui UI of the system.
      * @param list Task List (ArrayList) where all tasks are stored.
-     * @param storage storage unit which handles saving & updating the task list.
+     * @param storage storage unit which handles saving and updating the task list.
      * @param command command unit which handles parsing the input.
      * @param sc Scanner object
      * @throws IOException when file is corrupted or cannot be opened.
@@ -45,5 +45,27 @@ public class DukeController {
                 System.out.println(e);
             }
         }
+    }
+
+    public String executeFx(Ui ui, List<Task> list, Storage storage, Command command,
+                          String input) throws IOException {
+        String output = "";
+        String[] parsed_inputs = input.split(" ", 2);
+
+        String cmd = parsed_inputs[0]; //command
+        String description = "";
+
+        if (parsed_inputs.length >= 2) {
+            description = parsed_inputs[1];
+        }
+        try {
+            output += command.parseCommand(input, cmd, description, list, storage, ui);
+        } catch (DukeException e) {
+            output += e.toString();
+        } catch (ParseException e) {
+            output += e.toString();
+        }
+
+        return output;
     }
 }

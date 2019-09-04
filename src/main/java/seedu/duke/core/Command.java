@@ -16,56 +16,68 @@ public class Command {
      * @param cmd cmd which is already parsed from input string.
      * @param description task description.
      * @param list task list
-     * @param storage storage unit which handles saving & updating the task list.
+     * @param ui UI object.
+     * @param storage storage unit which handles saving and updating the task list.
      * @throws DukeException when user does not write full command input.
      * @throws ParseException when user inputs the date in incorrect format.
      * @throws IOException when file is not found or cannot be opened.
      */
-    public void parseCommand(String input, String cmd, String description,
+    public String parseCommand(String input, String cmd, String description,
                              List<Task> list, Storage storage, Ui ui) throws DukeException,
             ParseException, IOException {
+        String output = "";
+
         if (input.equals("list")) {
-            ui.displayList(list);
+            output += ui.displayList(output, list);
         } else if (cmd.equals("delete")) {
             try {
                 if (description.equals("") || description == null) {
                     throw new DukeException("Entered index empty..");
                 } else {
                     int index = Integer.valueOf(description) - 1;
-                    storage.removeTask(list, index);
+                    output += storage.removeTask(output, list, index);
                 }
             } catch (TaskListEmptyException e) {
-                System.out.println(e);
+                output += e;
+            } catch (DukeException e) {
+                output += e;
             }
         } else if (cmd.equals("todo")) {
-            storage.addTask(list, cmd, description, "__dummy__");
+            output += storage.addTask(output, list, cmd, description, "__dummy__");
         } else if (cmd.equals("deadline")) {
             String[] arr1 = description.split(" /by ", 2);
             validateTime(arr1);
             String desc = arr1[0];
             String by = arr1[1];
 
-            storage.addTask(list, cmd, desc, by);
+            output += storage.addTask(output, list, cmd, desc, by);
         } else if (cmd.equals("event")) {
             String[] arr2 = description.split(" /at ", 2);
             validateTime(arr2);
             String desc = arr2[0];
             String at = arr2[1];
 
-            storage.addTask(list, cmd, desc, at);
+            output += storage.addTask(output, list, cmd, desc, at);
         } else if (cmd.equals("done")) {
-            int index = Integer.valueOf(description) - 1;
-            list.get(index).markAsDone();
-            storage.saveTask(list);
+            if (description.equals("") || description == null) {
+                throw new DukeException("Oops! list index not entered for 'done'");
+            } else {
 
-            System.out.println("Nice! I've marked this task as done:");
-            displayTask(list, index);
+                int index = Integer.valueOf(description) - 1;
+                list.get(index).markAsDone();
+
+                storage.saveTask(list);
+                output = "Nice! I've marked this task as done:\n";
+                output = displayTask(output, list, index);
+            }
         } else if (cmd.equals("find")) {
-            ui.displayList(storage.searchTask(list, description));
+            output += ui.displayList(output, storage.searchTask(list, description));
         } else {
             //incorrect command
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
+        return output;
     }
 
     /**
@@ -88,9 +100,11 @@ public class Command {
      * @param list Task list (ArrayList) where all tasks are stored
      * @param index index of which task user want to print out.
      */
-    public void displayTask(List<Task> list, int index) {
+    public String displayTask(String output, List<Task> list, int index) {
         if (index >= 0) {
-            System.out.println(list.get(index));
+            output = new StringBuilder(output)
+                    .append(list.get(index) + "\n").toString() ;
         }
+        return output;
     }
 }

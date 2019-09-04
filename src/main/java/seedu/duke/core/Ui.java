@@ -1,5 +1,6 @@
 package seedu.duke.core;
 
+import javafx.scene.control.Label;
 import seedu.duke.model.Task;
 
 import java.util.List;
@@ -13,25 +14,25 @@ public class Ui {
                     + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static String GREETINGMSG =
-            "____________________________________________________________\n"
+            "________________________________________________________________________________________________ \n"
             + "Hello! I'm Duke\n"
             + "What can I do for you?\n"
-            + "____________________________________________________________";
+            + "________________________________________________________________________________________________";
 
     public void readCommand() {
 
     }
 
-    public void showWelcome() {
-        System.out.println(GREETINGMSG);
+    public Label showWelcome() {
+        return new Label(GREETINGMSG);
     }
 
     public void printLine() {
         System.out.println("____________________________________________________________");
     }
 
-    public void printByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public Label printByeMessage() {
+        return new Label("Bye. Hope to see you again soon!");
     }
 
     public void showLoadingError() {
@@ -42,12 +43,13 @@ public class Ui {
      * Prints all the tasks inside task list.
      * @param list Task list (ArrayList) where all tasks are stored.
      */
-    public void displayList(List<Task> list) {
-        System.out.println("Here are the tasks in your list:");
+    public String displayList(String output, List<Task> list) {
+        output += "Here are the tasks in your list:\n";
         int index = 0;
         for (Task task : list) {
             index++;
-            System.out.println(index + "." + task);
+            output += (index + "." + task + "\n");
         }
+        return output;
     }
 }

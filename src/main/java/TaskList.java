@@ -95,6 +95,37 @@ public class TaskList {
     }
 
     /**
+     * Helper function for findMatchingTasksString returning ArrayList of matching tasks
+     * @param keyword Search keyword for finding matching tasks
+     * @return ArrayList of matching tasks
+     */
+    public ArrayList<Task> findMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
+     * Returns formatted list of matching tasks to be printed
+     * @param keyword Search keyword for finding matching tasks
+     * @return String list of matching tasks
+     */
+    public String findMatchingTasksString(String keyword) {
+        ArrayList<Task> matchingTasksList = findMatchingTasks(keyword);
+        int counter = 1;
+        listString = "" + INDENT + " ";
+        for (Task task : matchingTasksList) {
+            listString += counter + ". " + task + '\n' + INDENT + " ";
+            counter++;
+        }
+        return listString;
+    }
+
+    /**
      * Update tasks in String of tasks
      */
     public void updateTodoString() {

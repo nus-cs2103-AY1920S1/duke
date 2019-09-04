@@ -61,10 +61,10 @@ public class Storage {
                     task = new Todo(description, done);
                     break;
                 case "D":
-                    task = new Deadline(description, dateFormat.parse(tokens[3]));
+                    task = new Deadline(description, dateFormat.parse(tokens[3]), done);
                     break;
                 case "E":
-                    task = new Event(description, dateFormat.parse(tokens[3]));
+                    task = new Event(description, dateFormat.parse(tokens[3]), done);
                     break;
                 default:
                     throw new IoDukeException("Invalid task type found");

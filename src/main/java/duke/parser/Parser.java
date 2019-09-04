@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -67,6 +68,11 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! Your bye command is in the wrong format.");
                 }
                 return new ExitCommand();
+            case "find":
+                if (!(commands.length == 2)){
+                    throw new DukeException("☹ OOPS!!! Your bye command is in the wrong format.");
+                }
+                return new FindCommand(commands[1]);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

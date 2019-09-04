@@ -54,7 +54,7 @@ public class TaskList {
     }
 
     public void listAllTasks(Ui ui) {
-        ui.messageUser("Here are the tasks in your list:");
+        ui.messageUser("Here are the tasks:");
         int startNumber = 1;
         ArrayList<String> allTasks = new ArrayList<>();
         for (Task t : this.toDoList) {
@@ -72,5 +72,16 @@ public class TaskList {
         }
         return allTasks.toString();
     }
+
+    public ArrayList<Task> searchTaskListForKeyword(String keyword){
+        ArrayList<Task> matches = new ArrayList<>();
+        for(Task task : this.toDoList){
+            if(task.getTaskDescription().contains(keyword)){
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+
 
 }

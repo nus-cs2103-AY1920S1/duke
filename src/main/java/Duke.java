@@ -38,6 +38,6 @@ public class Duke {
         }
     }
     public static void main(String[] args) throws Exception {
-        new Duke("../Data/Duke.txt").run();
+        new Duke("D:\\Programs\\Java Projects\\duke\\src\\main\\Data\\Duke.txt").run();
     }
 }

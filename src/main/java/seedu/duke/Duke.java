@@ -197,7 +197,7 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) {
+    String getResponse(String input) {
         return "Duke heard: " + input;
     }
 }

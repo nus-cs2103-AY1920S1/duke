@@ -5,6 +5,7 @@ public class CommandHi extends Command {
 
     public CommandHi(String command) {
         super(command);
+        super.type = "Hi: ";
     }
 
     @Override

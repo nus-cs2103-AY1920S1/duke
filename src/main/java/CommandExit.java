@@ -5,6 +5,7 @@ public class CommandExit extends Command {
 
     public CommandExit(String cmd) {
         super(cmd);
+        super.type = "Exit: ";
     }
 
     @Override

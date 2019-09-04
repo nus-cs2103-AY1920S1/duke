@@ -5,6 +5,7 @@ public class CommandDeadline extends Command {
 
     public CommandDeadline(String command) {
         super(command);
+        super.type = "Deadline: ";
     }
 
     @Override

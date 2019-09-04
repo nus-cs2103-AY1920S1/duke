@@ -5,6 +5,7 @@ public class CommandEvent extends Command {
 
     public CommandEvent(String cmd) {
         super(cmd);
+        super.type = "Event: ";
     }
 
     @Override

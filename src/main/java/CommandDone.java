@@ -5,6 +5,7 @@ public class CommandDone extends Command {
 
     public CommandDone(String cmd) {
         super(cmd);
+        super.type = "Done: ";
     }
 
     @Override

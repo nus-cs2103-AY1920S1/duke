@@ -5,6 +5,7 @@ public class CommandFind extends Command {
 
     public CommandFind(String command) {
         super(command);
+        super.type = "Find: ";
     }
 
     @Override

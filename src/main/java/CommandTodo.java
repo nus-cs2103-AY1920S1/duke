@@ -5,6 +5,7 @@ public class CommandTodo extends Command {
 
     public CommandTodo(String command) {
         super(command);
+        super.type = "Todo: ";
     }
 
     @Override

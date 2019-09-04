@@ -46,7 +46,7 @@ public class DateUtil {
             }
             date[3] = time.substring(0, 2); // set hh
             date[4] = time.substring(2); // set mm
-        } else { }
+        }
         return toLocalDateTime(date);
     }
 

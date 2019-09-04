@@ -4,6 +4,7 @@
 public abstract class Command {
 
     protected String command;
+    protected String type;
 
     /**
      * Constructs a Command object.
@@ -40,6 +41,6 @@ public abstract class Command {
      */
     @Override
     public String toString() {
-        return command;
+        return type + command;
     }
 }

@@ -5,6 +5,7 @@ public class CommandDelete extends Command {
 
     public CommandDelete(String command) {
         super(command);
+        super.type = "Delete: ";
     }
 
     @Override

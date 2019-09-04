@@ -5,6 +5,7 @@ public class IllegalCommand extends Command {
 
     public IllegalCommand(String command) {
         super(command);
+        super.type = "Illegal: ";
     }
 
     @Override

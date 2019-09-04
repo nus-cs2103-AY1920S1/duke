@@ -5,6 +5,7 @@ public class CommandList extends Command {
 
     public CommandList(String command) {
         super(command);
+        super.type = "List: ";
     }
 
     @Override

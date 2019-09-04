@@ -1,7 +1,7 @@
 package myduke.command;
 
-import myduke.core.StorageManager;
-import myduke.core.Ui;
+import myduke.storage.StorageManager;
+import myduke.ui.Ui;
 import myduke.task.TaskList;
 
 /**
@@ -10,6 +10,8 @@ import myduke.task.TaskList;
 public class TerminateSessionCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, StorageManager storage) {
+        ui.printResponse("Bye. Hope to see you again soon!");
+        storage.tryWriteToFile();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package myduke.command;
 
-import myduke.core.StorageManager;
-import myduke.core.Ui;
+import myduke.storage.StorageManager;
+import myduke.ui.Ui;
 import myduke.exception.DukeException;
 import myduke.task.TaskList;
 
@@ -16,6 +16,7 @@ public abstract class Command {
      * @param taskList Task list.
      * @param ui       UI.
      * @param storage  Storage.
+     *
      * @throws DukeException If a checked error occurs.
      */
     public abstract void execute(TaskList taskList, Ui ui, StorageManager storage) throws DukeException;

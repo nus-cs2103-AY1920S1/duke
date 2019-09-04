@@ -1,4 +1,4 @@
-package myduke.core;
+package myduke.storage;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.ui.UI;
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.UI;
 
 public class DoneCommand extends Command {
     private int index;
+
     public DoneCommand(String message) {
         super(message);
         this.index = Integer.parseInt(message);

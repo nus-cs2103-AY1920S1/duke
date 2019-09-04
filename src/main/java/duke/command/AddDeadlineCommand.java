@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.ui.UI;
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.tasklist.TaskList;
 import duke.time.Date;
 import duke.time.Time;
-import duke.task.Deadline;
+import duke.ui.UI;
 
 public class AddDeadlineCommand extends Command {
 
@@ -32,7 +32,6 @@ public class AddDeadlineCommand extends Command {
                 mainInput += " ";
             }
         }
-        String extraInfo = "";
         String tempInfo = "";
         for (int i = marker + 1; i < inputMessage.length; i++) {
             if (i == inputMessage.length - 1) {
@@ -61,7 +60,7 @@ public class AddDeadlineCommand extends Command {
         if (!inputTime.isValid()) {
             throw new DukeException("     Sorry! Invalid time format");
         }
-        extraInfo = inputDate + ", " + inputTime;
+        String extraInfo = inputDate + ", " + inputTime;
         if (extraInfo.equals("")) {
             throw new DukeException("     Please provide date and time of the deadline");
         }

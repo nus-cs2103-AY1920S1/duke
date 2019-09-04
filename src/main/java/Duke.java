@@ -1,11 +1,11 @@
-import java.io.FileNotFoundException;
-
-import duke.storage.Storage;
-import duke.ui.UI;
-import duke.tasklist.TaskList;
 import duke.command.Command;
-import duke.parser.Parser;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.UI;
+
+import java.io.FileNotFoundException;
 
 public class Duke {
     private Storage storage;
@@ -23,11 +23,15 @@ public class Duke {
         this.ui = new UI(taskList);
     }
 
+    public static void main(String[] args) throws Exception {
+        new Duke("src/main/Data/Duke.txt").run();
+    }
+
     public void run() throws Exception {
         ui.printIntro();
         storage.loadTasks();
         boolean programRunning = true;
-        while(programRunning) {
+        while (programRunning) {
             try {
                 String input = ui.readLine();
                 Command inputCommand = Parser.parse(input);
@@ -36,8 +40,5 @@ public class Duke {
                 ui.printError(error);
             }
         }
-    }
-    public static void main(String[] args) throws Exception {
-        new Duke("D:\\Programs\\Java Projects\\duke\\src\\main\\Data\\Duke.txt").run();
     }
 }

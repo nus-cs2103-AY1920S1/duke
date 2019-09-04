@@ -1,15 +1,17 @@
 package duke.tasklist;
 
-import java.util.ArrayList;
-import duke.task.Task;
 import duke.storage.Storage;
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+import java.util.ArrayList;
 
 
 public class TaskList {
     private ArrayList<Task> listOfTasks;
+
     public TaskList(Storage storage) throws Exception {
         listOfTasks = storage.getList();
     }
@@ -19,11 +21,7 @@ public class TaskList {
     }
 
     public boolean isEmpty() {
-        if (listOfTasks.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return listOfTasks.isEmpty();
     }
 
     public int size() {
@@ -33,6 +31,7 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.listOfTasks;
     }
+
     public Task get(int index) {
         return listOfTasks.get(index);
     }

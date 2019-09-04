@@ -1,11 +1,12 @@
 package duke.ui;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import duke.tasklist.TaskList;
-import duke.task.Task;
 import duke.exception.DukeException;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class UI {
 
@@ -97,6 +98,7 @@ public class UI {
         printLine();
         printBlank();
     }
+
     public void printBye() {
         printLine();
         System.out.println("     Bye. Hope to see you again soon!");

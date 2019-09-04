@@ -1,16 +1,16 @@
 package duke.storage;
 
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.exception.DukeException;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
 
 public class Storage {
     private BufferedReader br;
@@ -40,13 +40,13 @@ public class Storage {
 
     public void loadTasks() throws Exception {
         String next = br.readLine();
-        while(next != null) {
+        while (next != null) {
             String[] input = next.split(" ");
             String status = input[1];
             String type = input[0];
             String description = "";
             String extraInfo = "";
-            for (int i = 2; i < input.length; i ++) {
+            for (int i = 2; i < input.length; i++) {
                 if (i == input.length - 1) {
                     description += input[i];
                 } else {
@@ -56,7 +56,7 @@ public class Storage {
             }
             if (type.equals("todo")) {
                 inputList.add(new Todo(description));
-            } else if (type.equals("event")){
+            } else if (type.equals("event")) {
                 extraInfo = br.readLine();
                 inputList.add(new Event(description, extraInfo));
             } else if (type.equals("deadline")) {

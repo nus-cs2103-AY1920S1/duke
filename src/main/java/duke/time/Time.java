@@ -6,6 +6,7 @@ public class Time {
     protected int time;
     protected String outputTime;
     protected boolean validFormat = true;
+
     public Time(int time) throws DukeException {
         String timeString = String.valueOf(time);
         if (timeString.length() != 4) {
@@ -34,6 +35,7 @@ public class Time {
     public boolean isValid() {
         return validFormat;
     }
+
     @Override
     public String toString() {
         return outputTime;

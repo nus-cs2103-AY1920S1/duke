@@ -38,7 +38,6 @@ public class Duke {
         } catch (FileNotFoundException error) {
             this.taskList = new TaskList();
         }
-
         this.ui = new UI(taskList);
     }
 

@@ -8,9 +8,14 @@ public class DoneCommand extends Command {
     /**
      * Constructs a DoneCommand object.
      * @param stringNum indicates the task to be marked as completed
+     * @throws DukeException if the string is not a number
      */
-    public DoneCommand(String stringNum) {
-        this.intNum = Integer.parseInt(stringNum);
+    public DoneCommand(String stringNum) throws DukeException {
+        try {
+            this.intNum = Integer.parseInt(stringNum);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a valid task number!");
+        }
     }
 
     /**
@@ -31,14 +36,6 @@ public class DoneCommand extends Command {
 
         storage.save(tasks.getTaskList());
         return printable;
-    }
-
-    /**
-     * Determines whether the program stops running.
-     * @return boolean value false so the program continues to run
-     */
-    public boolean isExit() {
-        return false;
     }
 }
 

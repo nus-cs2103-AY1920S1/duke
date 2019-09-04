@@ -3,7 +3,7 @@
  * Executes the command input by using UI and adds the corresponding tasks to the tasklist.
  */
 public class AddCommand extends Command {
-    private Type enumType;
+    private TaskType enumType;
     private String taskDesc;
     private String timeDesc;
 
@@ -13,12 +13,13 @@ public class AddCommand extends Command {
      * @param taskDesc description of the task by user
      * @param timeDesc inputted time of the task
      */
-    public AddCommand(Type enumType, String taskDesc, String timeDesc) {
+    public AddCommand(TaskType enumType, String taskDesc, String timeDesc) {
         this.enumType = enumType;
         this.taskDesc = taskDesc;
         this.timeDesc = timeDesc;
     }
 
+    @Override
     /**
      * Adds the program task inputted by the user to the task list.
      * and prints out corresponding response
@@ -39,7 +40,7 @@ public class AddCommand extends Command {
             break;
 
         case EVENT:
-            newTask = new Events(this.taskDesc, this.timeDesc);
+            newTask = new Event(this.taskDesc, this.timeDesc);
             break;
 
         default:
@@ -48,14 +49,6 @@ public class AddCommand extends Command {
 
         storage.save(tasks.getTaskList());
         return addTask(newTask, tasks);
-    }
-
-    /**
-     * Determines whether the program stops running.
-     * @return boolean value false so the program continues to run
-     */
-    public boolean isExit() {
-        return false;
     }
 
     /**

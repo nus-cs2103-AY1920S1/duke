@@ -52,12 +52,4 @@ public class KeyCommand extends Command {
 
         return printable;
     }
-
-    /**
-     * Determines whether the program stops running.
-     * @return boolean value false so the program continues to run
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

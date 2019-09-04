@@ -22,7 +22,7 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         String[] commandSplit = command.split(" ");
         String type = commandSplit[0];
-        Type enumType;
+        TaskType enumType;
         String[] timeSplit;
 
         switch (type) {
@@ -49,25 +49,25 @@ public class Parser {
             return new KeyCommand(wordsArray);
 
         case "todo":
-            enumType = Type.valueOf(type.toUpperCase());
-            assert enumType == Type.TODO : "Enum is not right!";
+            enumType = TaskType.valueOf(type.toUpperCase());
+            assert enumType == TaskType.TODO : "Enum is not right!";
             return new AddCommand(enumType, command.substring(5), "");
 
         case "deadline":
-            enumType = Type.valueOf(type.toUpperCase());
-            assert enumType == Type.DEADLINE : "Enum is not right!";
+            enumType = TaskType.valueOf(type.toUpperCase());
+            assert enumType == TaskType.DEADLINE : "Enum is not right!";
             timeSplit = splitCommandForTask(type, command);
             return new AddCommand(enumType, timeSplit[0].substring(9), timeSplit[1]);
 
         case "event":
-            enumType = Type.valueOf(type.toUpperCase());
-            assert enumType == Type.EVENT : "Enum is not right!";
+            enumType = TaskType.valueOf(type.toUpperCase());
+            assert enumType == TaskType.EVENT : "Enum is not right!";
             timeSplit = splitCommandForTask(type, command);
             return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
 
         default:
-            assert false : "Program not supposed to reach this line!";
-            return null;
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't"
+                    + "know what that means :-(");
         }
     }
 
@@ -101,8 +101,8 @@ public class Parser {
 
         switch (type) {
         case "done":
-            toThrow = new DukeException("☹ OOPS!!! Please indicate " +
-                    "which task you have completed.");
+            toThrow = new DukeException("☹ OOPS!!! Please indicate "
+                    + "which task you have completed.");
             break;
         case "delete":
             toThrow = new DukeException("☹ OOPS!!! Please indicate which task "

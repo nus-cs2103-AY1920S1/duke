@@ -5,7 +5,7 @@ import java.text.ParseException;
 /**
  * Represents an "Event" task inputted by the user.
  */
-public class Events extends Task {
+public class Event extends Task {
     private String timeDesc;
     private Date date;
 
@@ -16,7 +16,7 @@ public class Events extends Task {
      * @throws DukeException if task description or time is not inputted,
      *                       or time is inputted in the wrong format
      */
-    public Events(String desc, String timeDesc) throws DukeException {
+    public Event(String desc, String timeDesc) throws DukeException {
         super(desc);
         this.timeDesc = timeDesc;
 

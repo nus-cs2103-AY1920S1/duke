@@ -9,8 +9,12 @@ public class DeleteCommand extends Command {
      * Constructs a DeleteCommand object.
      * @param stringNum indicates the task to be deleted
      */
-    public DeleteCommand(String stringNum) {
-        this.intNum = Integer.parseInt(stringNum);
+    public DeleteCommand(String stringNum) throws DukeException {
+        try {
+            this.intNum = Integer.parseInt(stringNum);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a valid task number!");
+        }
     }
 
     /**
@@ -32,13 +36,5 @@ public class DeleteCommand extends Command {
 
         storage.save(tasks.getTaskList());
         return printable;
-    }
-
-    /**
-     * Determines whether the program stops running.
-     * @return boolean value false so the program continues to run
-     */
-    public boolean isExit() {
-        return false;
     }
 }

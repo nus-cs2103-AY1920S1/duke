@@ -18,6 +18,8 @@ public abstract class Command {
      * Determines whether the program stops running.
      * @return boolean value to determine whether the program terminates
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    }
 }
 

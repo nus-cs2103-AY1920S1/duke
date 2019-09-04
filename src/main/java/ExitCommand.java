@@ -22,6 +22,7 @@ public class ExitCommand extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
+    @Override
     /**
      * Determines whether the program stops running.
      * @return booleane value true to terminate the program

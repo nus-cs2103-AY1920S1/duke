@@ -5,7 +5,6 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected ArrayList<Task> taskList;
-    protected ArrayList<String> fileList;
 
     /**
      * Creates a TaskList object including tasks from existing file.
@@ -13,7 +12,6 @@ public class TaskList {
      * @throws DukeException if inputs for tasks are missing or in a wrong format
      */
     public TaskList(ArrayList<String> fileList) throws DukeException {
-        this.fileList = fileList;
         this.taskList = new ArrayList<Task>();
 
         for (int i = 0; i < fileList.size(); i++) {
@@ -32,7 +30,7 @@ public class TaskList {
                 break;
 
             case "E":
-                add = new Events(listItem[2], listItem[3]);
+                add = new Event(listItem[2], listItem[3]);
                 addTask(add, listItem[1]);
                 break;
 

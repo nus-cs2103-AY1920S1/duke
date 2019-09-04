@@ -7,6 +7,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -15,7 +16,7 @@ import java.util.LinkedList;
 /**
  * Makes sense of user's input and react in accordance.
  */
-class Parser {
+public class Parser {
 
     /**
      * @param act     keyword indicating the intended operation from user input
@@ -24,40 +25,41 @@ class Parser {
      * @throws DukeIllegalDescriptionException
      * @throws DukeIllegalActionException
      */
-    static void parse(String act, Storage storage) throws FileNotFoundException,
+    public static String parse(String act, Storage storage) throws FileNotFoundException,
             DukeIllegalDescriptionException, DukeIllegalActionException {
+        String response = "";
         try {
-            switch (Action.valueOf(act)) {
+            switch (Action.valueOf(act.split(" ")[0])) {
             case list:
-                System.out.println("Here are the tasks in your list:\n");
+                response += ("Here are the tasks in your list:\n");
                 for (int i = 0; i < TaskList.taskList.size(); i++) {
-                    System.out.println(1 + i + "." + TaskList.taskList.get(i).toString());
+                    response += (1 + i + "." + TaskList.taskList.get(i).toString()) + "\n";
                 }
                 break;
             case bye:
-                System.out.println("Bye. Hope to see you again soon!");
-                Ui.sc.close();
+                response += ("Bye. Hope to see you again soon!");
+                Ui.getScanner().close();
                 break;
             case done:
-                int n = Ui.sc.nextInt();
+                int n = Integer.parseInt(act.substring(5));
                 TaskList.taskList.get(n - 1).setDone();
-                System.out.println("Nice! I've marked this task as done:\n" + TaskList.taskList.get(n - 1).toString());
+                response += ("Nice! I've marked this task as done:\n" + TaskList.taskList.get(n - 1).toString());
                 storage.saveData();
                 break;
             case todo:
-                String tdDescription = Ui.sc.nextLine();
+                String tdDescription = act.substring(5);
                 if (tdDescription.isBlank()) {
                     throw new DukeIllegalDescriptionException(act);
                 } else {
                     Task todo = new ToDo(tdDescription);
                     TaskList.taskList.add(todo);
-                    System.out.println("Got it. I've added this task: \n" + todo.toString()
+                    response += ("Got it. I've added this task: \n" + todo.toString()
                             + "\nNow you have " + (TaskList.taskList.size()) + " tasks in the list.");
                     storage.saveData();
                 }
                 break;
             case deadline:
-                String dlDetail = Ui.sc.nextLine();
+                String dlDetail = act.substring(9);
                 int dlDivision = dlDetail.indexOf("/");
                 try {
                     String dlDescription = dlDetail.substring(0, dlDivision - 1);
@@ -65,7 +67,7 @@ class Parser {
                     String by = dlDetail.substring(dlDivision + 3);
                     Task dl = new Deadline(dlDescription, by);
                     TaskList.taskList.add(dl);
-                    System.out.println("Got it. I've added this task: \n" + dl.toString()
+                    response += ("Got it. I've added this task: \n" + dl.toString()
                             + "\nNow you have " + (TaskList.taskList.size()) + " tasks in the list.");
                     storage.saveData();
                 } catch (StringIndexOutOfBoundsException e) {
@@ -75,7 +77,7 @@ class Parser {
                 }
                 break;
             case event:
-                String eventDetail = Ui.sc.nextLine();
+                String eventDetail = act.substring(6);
                 int eventDivision = eventDetail.indexOf("/");
                 try {
                     String eventDescription = eventDetail.substring(0, eventDivision - 1);
@@ -83,7 +85,7 @@ class Parser {
 
                     Task event = new Event(eventDescription, at);
                     TaskList.taskList.add(event);
-                    System.out.println("Got it. I've added this task: \n" + event.toString()
+                    response += ("Got it. I've added this task: \n" + event.toString()
                             + "\nNow you have " + (TaskList.taskList.size()) + " tasks in the list.");
                     storage.saveData();
                 } catch (StringIndexOutOfBoundsException e) {
@@ -93,15 +95,15 @@ class Parser {
                 }
                 break;
             case delete:
-                int d = Ui.sc.nextInt() - 1;
+                int d = Integer.parseInt(act.substring(7)) - 1;
                 Task temp = TaskList.taskList.get(d);
                 TaskList.taskList.remove(d);
-                System.out.println("Noted. I've removed this task: \n" + temp.toString()
+                response += ("Noted. I've removed this task: \n" + temp.toString()
                         + "\nNow you have " + (TaskList.taskList.size()) + " tasks in the list.");
                 storage.saveData();
                 break;
             case find:
-                String keyword = Ui.sc.nextLine();
+                String keyword = act.substring(5);
                 boolean isFound = false;
                 LinkedList<Task> foundList = new LinkedList<>();
                 for (Task task : TaskList.taskList) {
@@ -111,18 +113,19 @@ class Parser {
                     }
                 }
                 if (isFound) {
-                    System.out.println("Here are the matching tasks in your list:\n");
+                    response += ("Here are the matching tasks in your list:\n");
                     for (int i = 0; i < foundList.size(); i++) {
-                        System.out.println(1 + i + "." + foundList.get(i).toString());
+                        response += (1 + i + "." + foundList.get(i).toString()) + "\n";
                     }
                 } else {
-                    System.out.println("Keyword not found ;_;");
+                    response += ("Keyword not found ;_;");
                 }
                 break;
             }
         } catch (IllegalArgumentException e) {
             throw new DukeIllegalActionException();
         }
+        return response;
     }
 }
 

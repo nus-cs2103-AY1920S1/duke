@@ -1,28 +1,21 @@
-package duke;
-
-import duke.command.Parser;
-import duke.command.Storage;
-import duke.command.TaskList;
-import duke.command.Ui;
+package duke.command;
 
 import java.io.IOException;
 
 /**
  * Contains the main method.
  */
-public class Duke {
+public class Duke{
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
     /**
      * Opens the task and start the task update.
-     * @param filePath filePath of the task file.
      */
-
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         try {
             taskList = new TaskList(storage.load());
         } catch (IOException e) {
@@ -34,17 +27,14 @@ public class Duke {
     /**
      * Start getting user input and update the storage.
      */
-
-    public void run() {
+    public String run(String input) {
+        String s = "";
         try {
-            ui.start(new Parser(taskList, ui));
+            s = ui.start(new Parser(taskList, ui), input);
             storage.save(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+        return s;
     }
 }

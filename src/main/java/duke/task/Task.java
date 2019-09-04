@@ -3,7 +3,6 @@ package duke.task;
 /**
  * Represents a task.
  */
-
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -26,7 +25,6 @@ public class Task {
      * To get the status icon based on the status.
      * @return tick or X symbols.
      */
-
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -35,7 +33,6 @@ public class Task {
      * Updates the status icon.
      * @param b the new status.
      */
-
     public void setStatusIcon(boolean b) {
         isDone = b;
         if (isDone) {
@@ -52,7 +49,6 @@ public class Task {
      *
      * @return task as string.
      */
-
     public String format() {
         return "|" + num + "|" + description;
     }
@@ -62,7 +58,6 @@ public class Task {
      *
      * @return task as string.
      */
-
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

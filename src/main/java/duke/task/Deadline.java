@@ -18,7 +18,6 @@ public class Deadline extends Task {
      * @param by date of deadline.
      * @throws ParseException if date is in wrong format.
      */
-
     public Deadline(String description, String by) throws ParseException {
         super(description);
         this.by = by;
@@ -30,7 +29,6 @@ public class Deadline extends Task {
      *
      * @return task as string.
      */
-
     public String format() {
         return "D" + super.format() + "|" + by;
     }
@@ -40,7 +38,6 @@ public class Deadline extends Task {
      *
      * @return task as string.
      */
-
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

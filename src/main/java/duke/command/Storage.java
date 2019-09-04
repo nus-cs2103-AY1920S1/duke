@@ -16,7 +16,6 @@ import java.util.Scanner;
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
-
 public class Storage {
     private String filePath;
 
@@ -30,7 +29,6 @@ public class Storage {
      * @return list of tasks from file.
      * @throws IOException If file is corrupted or not found.
      */
-
     public ArrayList<Task> load() throws IOException {
         File dir = new File("data");
         if (!dir.exists()) {
@@ -70,7 +68,6 @@ public class Storage {
      * @throws FileNotFoundException  If file is not found.
      * @throws ParseException If date is not in date format.
      */
-
     private static void readFileContents(String filePath, ArrayList<Task> list)
             throws FileNotFoundException, ParseException {
         File f = new File(filePath); // create a File for the given file path
@@ -106,7 +103,6 @@ public class Storage {
      *
      * @throws IOException If file is corrupted or not found.
      */
-
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
@@ -118,7 +114,6 @@ public class Storage {
      *
      * @throws IOException If file is corrupted or not found.
      */
-
     public void save(TaskList taskList) throws IOException {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < taskList.list.size(); i++) {

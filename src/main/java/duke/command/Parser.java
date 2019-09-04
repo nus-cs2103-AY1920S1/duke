@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 /**
  * Deals with making sense of the user command.
  */
-
 public class Parser {
     TaskList taskList;
     Ui ui;
@@ -30,7 +28,6 @@ public class Parser {
      * @throws DukeException  If input is incorrect.
      * @throws ParseException  If date is not in date format.
      */
-
     public void process(String line) throws DukeException, ParseException {
         Integer num; //number in list which is done
         Task currTask; //refers to current task in list

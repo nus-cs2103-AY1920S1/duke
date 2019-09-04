@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -23,11 +23,11 @@ public class FindCommand extends Command {
      * @param storage the Storage instance dealing with hard disk reading/writing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
         // create a new task list with results containing the keyword.
         TaskList searchList = taskList.find(keyword);
-
         // inform the user of matching queries (if any)
-        ui.showSearchList(searchList);
+        String response = ui.showSearchList(searchList);
+        return new CommandResponse(response, super.isExit());
     }
 }

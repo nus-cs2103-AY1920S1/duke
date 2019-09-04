@@ -1,20 +1,17 @@
-package duke;
+package duke.gui;
 
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
-    private static final String PREFIX = "    ";
-    private static final String DIVIDER = "____________________________________________________________";
+    public static final String PREFIX = "    ";
+    public static final String DIVIDER = "------------------------------------------------------";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
     private static final String ADD_MESSAGE = "Got it. I've added this task:";
     private static final String SEARCH_MESSAGE = "Here are the matching tasks in your list:";
@@ -22,23 +19,31 @@ public class Ui {
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
-    private Scanner in;
-    private PrintStream out;
-
-    public Ui() {
-        this(System.in, System.out);
-    }
-
-    private Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
+    /**
+     * Convenience method for formatting un-indented input.
+     *
+     * @param input the text to format.
+     * @return the formatted text string.
+     */
+    public static String addPrefixNewline(String input) {
+        return PREFIX + input + '\n';
     }
 
     /**
-     * Prints out a divider.
+     * Convenience method for adding dividers above and below the text.
+     *
+     * @param input the text to format.
+     * @return the formatted text string.
      */
-    public void showLine() {
-        showToUser(DIVIDER);
+    public static String addDividers(String input) {
+        return addPrefixNewline(DIVIDER) + input + addPrefixNewline(DIVIDER);
+    }
+
+    /**
+     * Prints out a welcome message.
+     */
+    public String showWelcomeMessage() {
+        return showToUser(WELCOME_MESSAGE);
     }
 
     /**
@@ -46,24 +51,8 @@ public class Ui {
      *
      * @param e the error to print.
      */
-    public void showError(DukeException e) {
-        showToUser(e.getMessage());
-    }
-
-    /**
-     * Prints out a welcome message.
-     */
-    public void showWelcomeMessage() {
-        showToUser(DIVIDER, WELCOME_MESSAGE, DIVIDER);
-    }
-
-    /**
-     * Reads a full command from the next line of input.
-     *
-     * @return the full command read.
-     */
-    public String readCommand() {
-        return in.nextLine();
+    public String showError(DukeException e) {
+        return showToUser(e.getMessage());
     }
 
     /**
@@ -72,8 +61,8 @@ public class Ui {
      * @param task the task added.
      * @param taskCount the number of tasks currently in the task list.
      */
-    public void showAddMessage(Task task, long taskCount) {
-        showToUser(ADD_MESSAGE,
+    public String showAddMessage(Task task, long taskCount) {
+        return showToUser(ADD_MESSAGE,
                 task.toString(),
                 (taskCount == 1
                     ? "Now you have 1 task in the list."
@@ -85,9 +74,8 @@ public class Ui {
      *
      * @param task the task marked done.
      */
-    public void showDoneMessage(Task task) {
-        showToUser(DONE_MESSAGE,
-                task.toString());
+    public String showDoneMessage(Task task) {
+        return showToUser(DONE_MESSAGE, task.toString());
     }
 
     /**
@@ -96,8 +84,8 @@ public class Ui {
      * @param task the deleted task.
      * @param taskCount the number of tasks remaining in the task list.
      */
-    public void showDeleteMessage(Task task, long taskCount) {
-        showToUser(DELETE_MESSAGE,
+    public String showDeleteMessage(Task task, long taskCount) {
+        return showToUser(DELETE_MESSAGE,
                 task.toString(),
                 (taskCount == 1
                     ? "Now you have 1 task in the list."
@@ -109,9 +97,8 @@ public class Ui {
      *
      * @param searchList the task list of results.
      */
-    public void showSearchList(TaskList searchList) {
-        showToUser(SEARCH_MESSAGE);
-        showTaskList(searchList);
+    public String showSearchList(TaskList searchList) {
+        return showToUser(SEARCH_MESSAGE, showTaskList(searchList));
     }
 
     /**
@@ -119,31 +106,35 @@ public class Ui {
      *
      * @param taskList the task list to print.
      */
-    public void showTaskList(TaskList taskList) {
+    public String showTaskList(TaskList taskList) {
+        StringBuilder sb = new StringBuilder();
         ArrayList<Task> tasks = taskList.getTaskList();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task != null) { // account for 0-indexing
-                showToUser(String.format("%d. %s", i, task));
+                sb.append(showToUser(String.format("%d. %s", i, task)));
             }
         }
+        return sb.toString();
     }
 
     /**
      * Prints the exit message.
      */
-    public void showExitMessage() {
-        showToUser(EXIT_MESSAGE);
+    public String showExitMessage() {
+        return showToUser(EXIT_MESSAGE);
     }
 
     /**
-     * Prints out a sequence of messages with prefix added to each line.
+     * Prints out a sequence of messages with dividers at beginning and end, and prefix added to each line.
      *
      * @param messages the sequence of messages to print.
      */
-    private void showToUser(String... messages) {
+    private String showToUser(String... messages) {
+        StringBuilder sb = new StringBuilder();
         for (String line: messages) {
-            out.println(PREFIX + line);
+            sb.append(PREFIX).append(line).append('\n');
         }
+        return sb.toString();
     }
 }

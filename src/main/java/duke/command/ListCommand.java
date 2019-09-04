@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -20,7 +20,8 @@ public class ListCommand extends Command {
      * @param storage the Storage instance dealing with hard disk reading/writing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showTaskList(taskList);
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
+        String response = ui.showTaskList(taskList);
+        return new CommandResponse(response, super.isExit());
     }
 }

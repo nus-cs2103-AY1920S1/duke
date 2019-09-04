@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -24,14 +24,13 @@ public class DeleteCommand extends Command {
      * @param storage the Storage instance dealing with hard disk reading/writing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
         // delete the task at corresponding index
         Task task = taskList.delete(idx);
-
         // inform user of deletion
-        ui.showDeleteMessage(task, taskList.count());
-
+        String response = ui.showDeleteMessage(task, taskList.count());
         // update hard disk
         storage.writeToDisk(taskList);
+        return new CommandResponse(response, super.isExit());
     }
 }

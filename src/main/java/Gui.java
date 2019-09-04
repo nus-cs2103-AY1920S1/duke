@@ -11,9 +11,11 @@ import jermi.component.Jermi;
  * A GUI for Duke using FXML.
  */
 public class Gui extends Application {
-
-    private Jermi jermi = new Jermi();
-
+    /**
+     * Starts the Jermi application.
+     *
+     * @param stage Stage.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -21,7 +23,7 @@ public class Gui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setJermi(this.jermi);
+            fxmlLoader.<MainWindow>getController().setup(new Jermi());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

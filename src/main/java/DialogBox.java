@@ -18,12 +18,21 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    /** Dialog to be displayed. */
     @FXML
     private Label dialog;
+    /** Image to be displayed. */
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    /**
+     * Private constructor for class.
+     * Contains the dialog and image to be displayed.
+     *
+     * @param text Dialog to be displayed.
+     * @param image Image to be displayed.
+     */
+    private DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -33,12 +42,12 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        this.dialog.setText(text);
+        this.displayPicture.setImage(image);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the displayed image is on the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -47,13 +56,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    /**
+     * Returns a {@link DialogBox} containing the user's image and the dialog to be displayed.
+     *
+     * @param text Dialog to be displayed.
+     * @param image User's image to be displayed.
+     * @return Dialog box containing the user's image and the dialog to be displayed.
+     */
+    public static DialogBox getUserDialog(String text, Image image) {
+        return new DialogBox(text, image);
     }
 
-    public static DialogBox getJermiDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    /**
+     * Returns a {@link DialogBox} containing Jermi's image and the dialog to be displayed.
+     *
+     * @param text Dialog to be displayed.
+     * @param image Jermi's image to be displayed.
+     * @return Dialog box containing Jermi's image and the dialog to be displayed.
+     */
+    public static DialogBox getJermiDialog(String text, Image image) {
+        DialogBox dialogBox = new DialogBox(text, image);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

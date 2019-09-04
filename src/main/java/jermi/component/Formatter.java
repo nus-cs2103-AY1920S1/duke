@@ -3,7 +3,7 @@ package jermi.component;
 /**
  * A class that deals with interaction with the user.
  */
-public class Ui {
+public class Formatter {
     /**
      * Formats a message.
      *

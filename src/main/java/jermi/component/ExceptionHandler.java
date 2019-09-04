@@ -6,15 +6,15 @@ import jermi.exception.JermiException;
  * A class that deals with handling exceptions.
  */
 public class ExceptionHandler {
-    /** UI. */
-    Ui ui;
+    /** Formatter. */
+    Formatter formatter;
 
     /**
      * Public constructor for class.
-     * @param ui UI.
+     * @param formatter Formatter.
      */
-    public ExceptionHandler(Ui ui) {
-        this.ui = ui;
+    public ExceptionHandler(Formatter formatter) {
+        this.formatter = formatter;
     }
 
     /**
@@ -24,7 +24,7 @@ public class ExceptionHandler {
      * @return Error message.
      */
     public String handleCheckedExceptions(JermiException e) {
-        return this.ui.echo(e.getMessage());
+        return this.formatter.echo(e.getMessage());
     }
 
     /**

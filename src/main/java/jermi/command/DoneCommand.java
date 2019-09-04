@@ -2,7 +2,7 @@ package jermi.command;
 
 import jermi.component.Storage;
 import jermi.component.TaskList;
-import jermi.component.Ui;
+import jermi.component.Formatter;
 import jermi.exception.JermiException;
 import jermi.exception.InvalidIndexException;
 import jermi.task.Task;
@@ -34,17 +34,17 @@ public class DoneCommand extends Command {
      * Executes the command.
      *
      * @param taskList Task list.
-     * @param ui UI.
+     * @param formatter Formatter.
      * @param storage Storage.
      * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
         Task task = taskList.getTask(this.index);
         task.markAsDone();
         storage.taskListToFile();
-        return ui.echo("Nice! I've marked this task as done:", "  " + task);
+        return formatter.echo("Nice! I've marked this task as done:", "  " + task);
     }
 
     /**

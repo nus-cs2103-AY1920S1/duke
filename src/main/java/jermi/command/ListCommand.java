@@ -1,8 +1,8 @@
 package jermi.command;
 
+import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
-import jermi.component.Ui;
 import jermi.exception.JermiException;
 import jermi.task.Task;
 import java.util.List;
@@ -25,13 +25,13 @@ public class ListCommand extends Command {
      * Executes the command.
      *
      * @param taskList Task list.
-     * @param ui UI.
+     * @param formatter Formatter.
      * @param storage Storage.
      * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
         List<String> tasks = taskList
                 .getList()
                 .stream()
@@ -42,7 +42,7 @@ public class ListCommand extends Command {
             tasks.set(index - 1, index + "." + tasks.get(index - 1));
         }
         tasks.add(0, "Here are the tasks in your list:");
-        return ui.echo(tasks.toArray(new String[0]));
+        return formatter.echo(tasks.toArray(new String[0]));
     }
 
     /**

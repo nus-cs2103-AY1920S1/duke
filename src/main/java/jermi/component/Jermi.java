@@ -11,8 +11,8 @@ import jermi.exception.JermiException;
  * @since 2019-08-25
  */
 public class Jermi {
-    /** Ui object reference. */
-    private Ui ui;
+    /** Formatter object reference. */
+    private Formatter formatter;
     /** Parser object reference. */
     private Parser parser;
     /** TaskList object reference. */
@@ -24,13 +24,13 @@ public class Jermi {
 
     /**
      * Private constructor for class.
-     * Initialises {@link Ui}, {@link Parser}, {@link TaskList} and {@link ExceptionHandler}.
+     * Initialises {@link Formatter}, {@link Parser}, {@link TaskList} and {@link ExceptionHandler}.
      */
     public Jermi() {
-        this.ui = new Ui();
+        this.formatter = new Formatter();
         this.parser = new Parser();
         this.taskList = new TaskList();
-        this.exceptionHandler = new ExceptionHandler(this.ui);
+        this.exceptionHandler = new ExceptionHandler(this.formatter);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Jermi {
     public String initialiseStorage(String pathname) {
         try {
             this.storage = new Storage(pathname, this.taskList);
-            return this.ui.greet();
+            return this.formatter.greet();
         } catch (JermiException e) {
             return this.exceptionHandler.handleCheckedExceptions(e);
         } catch (Exception e) {
@@ -58,11 +58,11 @@ public class Jermi {
      */
     public String getResponse(String input, boolean[] shouldExit) {
         try {
-            String inputCommand = this.ui.readCommand(input);
-            String inputDetails = this.ui.readDetails(input);
+            String inputCommand = this.formatter.readCommand(input);
+            String inputDetails = this.formatter.readDetails(input);
             Command command = this.parser.parse(inputCommand, inputDetails);
             shouldExit[0] = command.shouldExit();
-            return command.execute(this.taskList, this.ui, this.storage);
+            return command.execute(this.taskList, this.formatter, this.storage);
         } catch (JermiException e) {
             return this.exceptionHandler.handleCheckedExceptions(e);
         } catch (Exception e) {

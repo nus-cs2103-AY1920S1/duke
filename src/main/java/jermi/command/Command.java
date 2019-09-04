@@ -2,7 +2,7 @@ package jermi.command;
 
 import jermi.component.Storage;
 import jermi.component.TaskList;
-import jermi.component.Ui;
+import jermi.component.Formatter;
 import jermi.exception.JermiException;
 
 /**
@@ -14,12 +14,12 @@ public abstract class Command {
      * Executes the command.
      *
      * @param taskList Task list.
-     * @param ui UI.
+     * @param formatter Formatter.
      * @param storage Storage.
      * @return Output response.
      * @throws JermiException JermiException.
      */
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException;
+    public abstract String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException;
 
     /**
      * Indicates if the program should exit.

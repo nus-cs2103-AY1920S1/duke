@@ -2,7 +2,7 @@ package jermi.command;
 
 import jermi.component.Storage;
 import jermi.component.TaskList;
-import jermi.component.Ui;
+import jermi.component.Formatter;
 import jermi.exception.JermiException;
 import jermi.exception.InvalidIndexException;
 import jermi.task.Task;
@@ -34,18 +34,18 @@ public class DeleteCommand extends Command {
      * Executes the command.
      *
      * @param taskList Task list.
-     * @param ui UI.
+     * @param formatter Formatter.
      * @param storage Storage.
      * @return Output response.
      * @throws JermiException JermiException.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
         Task task = taskList.getTask(index);
         taskList.remove(index);
         int numOfTasks = taskList.getSize();
         storage.taskListToFile();
-        return ui.echo("Noted. I've removed this task:",
+        return formatter.echo("Noted. I've removed this task:",
                 "  " + task,
                 String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }

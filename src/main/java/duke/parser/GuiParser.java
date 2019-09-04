@@ -25,7 +25,6 @@ public class GuiParser  {
      * returns a String
      */
     public String readUserInput(String string) {
-        //Scanner myScanner = new Scanner(System.in);
         String argument = string;
         if (argument.equals("list")) {
             String result = storeTaskList.listTask();

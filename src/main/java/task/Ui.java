@@ -62,10 +62,10 @@ public class Ui {
      * @param t       Last added task.
      * @param counter Remaining number of tasks in the list.
      */
-    public static String printAddedTask(Task t, int counter) {
+    public static String printAddedTask(Task t) {
         String output = "";
         output += "Got it. I've added this task:\n" + t + "\n";
-        counter++;
+        int counter = TaskList.getCounter();
         String taskIfPlural = counter == 1 ? "task" : "tasks";
         output += "Now you have " + counter + " " + taskIfPlural + " in the list.\n";
         return output;
@@ -77,8 +77,9 @@ public class Ui {
      * @param task    Last deleted task.
      * @param counter Remaining number of tasks in the list.
      */
-    public static String printDeleteTask(Task task, int counter) {
+    public static String printDeleteTask(Task task) {
         String output = "";
+        int counter = TaskList.getCounter();
         String taskIfPlural = counter <= 1 ? "task" : "tasks";
         output += "Noted. I've removed this task:\n";
         output += task + "\n";

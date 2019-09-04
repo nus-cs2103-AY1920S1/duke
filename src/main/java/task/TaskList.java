@@ -6,21 +6,13 @@ import java.util.ArrayList;
 public class TaskList {
 
     private static ArrayList<Task> task;
-    private static int counter;
 
     protected TaskList() {
         TaskList.task = new ArrayList<>();
-        TaskList.counter = 0;
     }
 
     protected TaskList(ArrayList<Task> task) {
         TaskList.task = task;
-        TaskList.counter = task.size();
-    }
-
-    protected TaskList(ArrayList<Task> task, int counter) {
-        TaskList.task = task;
-        TaskList.counter = counter;
     }
 
     /**
@@ -30,8 +22,7 @@ public class TaskList {
      */
     protected static String addTask(Task t) {
         task.add(t);
-        counter++;
-        return Ui.printAddedTask(t, counter - 1);
+        return Ui.printAddedTask(t);
     }
 
     /**
@@ -41,8 +32,7 @@ public class TaskList {
      */
     protected static String deleteTask(int index) {
         Task deletedTask = task.remove(index);
-        counter--;
-        return Ui.printDeleteTask(deletedTask, counter);
+        return Ui.printDeleteTask(deletedTask);
     }
 
     /**
@@ -71,6 +61,6 @@ public class TaskList {
     }
 
     protected static int getCounter() {
-        return TaskList.counter;
+        return TaskList.task.size();
     }
 }

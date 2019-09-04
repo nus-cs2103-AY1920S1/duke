@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
             return;
         }
         String response = duke.getResponse(input);
-        if (response.equals("exit duke")) {
+        if (response.trim().equals("exit duke")) {
             Platform.exit();
         }
         dialogContainer.getChildren().addAll(

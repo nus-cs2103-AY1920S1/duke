@@ -81,8 +81,13 @@ public class Parser {
         String cmd = input;
         oneLine = cmd.trim().split(" ", 2);
         String firstWord = oneLine[0];
-
-        if (firstWord.equals("bye")) {
+        if (firstWord.equals("exit")) {
+            if (oneLine.length == 2 && oneLine[1].trim().equals("duke")) {
+                outCommand = new ExitCommand("exit duke");
+            } else {
+                throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
+            }
+        } else if (firstWord.equals("bye")) {
             if (oneLine.length != 1) {
                 throw new ExtraDescriptionException("There is extra description for bye");
             }

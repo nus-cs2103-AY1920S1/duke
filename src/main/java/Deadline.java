@@ -1,4 +1,5 @@
 public class Deadline extends Task {
+
     protected String by;
 
     public Deadline(String description, String by) {
@@ -6,7 +7,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String formattedString() {
+    public String formatString() {
         return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, by);
     }
 

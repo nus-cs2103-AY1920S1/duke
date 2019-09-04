@@ -7,7 +7,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String formattedString() {
+    public String formatString() {
         return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, at);
     }
 

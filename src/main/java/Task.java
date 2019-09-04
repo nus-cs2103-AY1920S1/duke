@@ -1,4 +1,5 @@
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -11,11 +12,11 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
-    public abstract String formattedString();
+    public abstract String formatString();
 
     @Override
     public String toString() {

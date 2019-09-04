@@ -9,7 +9,7 @@ public class DukeException extends Exception {
     /**
      * Creates an exception specific to the Duke application.
      *
-     * @param errorMessage Message to be passed through the exception
+     * @param errorMessage Message to be passed using the exception.
      */
     public DukeException(String errorMessage) {
         super(errorMessage);

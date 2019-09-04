@@ -21,8 +21,8 @@ public class Parser {
      * Parses the input string and returns a Command corresponding to the
      * required action.
      *
-     * @param input             String representation of the desired command
-     * @return                  Command
+     * @param input             String representation of the desired command.
+     * @return                  Command corresponding to the input.
      * @throws DukeException    If input is invalid, etc.
      */
     public static Command parse(String input) throws DukeException {
@@ -63,9 +63,9 @@ public class Parser {
      * 8. "find [description]"
      * 9. "bye"
      *
-     * @param input             Text input to be validated
+     * @param input             Text input to be validated.
      * @throws DukeException    An exception with a message describing Duke's
-     *                          response to the problem
+     *                          response to the problem.
      */
     private static void validate(String input) throws DukeException {
         if (input.startsWith("done") || input.startsWith("undo")) {

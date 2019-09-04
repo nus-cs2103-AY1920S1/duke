@@ -30,6 +30,11 @@ public class MainWindow {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the given Duke as the Duke instance for the current MainWindow.
+     *
+     * @param d     The instance of Duke to be used.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

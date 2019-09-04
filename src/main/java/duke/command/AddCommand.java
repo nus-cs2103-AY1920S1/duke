@@ -14,7 +14,7 @@ public abstract class AddCommand extends Command {
     /**
      * Constructs an AddCommand with the given details.
      *
-     * @param details   Details of task to be added
+     * @param details   Details of task to be added.
      */
     public AddCommand(String details) {
         super(details);
@@ -24,11 +24,10 @@ public abstract class AddCommand extends Command {
      * Displays a message indicating the successful addition of a new Task
      * and attempts to save the task list to storage.
      *
-     * @param tasks             List of tasks
-     * @param ui                User interface
-     * @param storage           Hard disk storage
-     * @throws DukeException    If an error occurs when saving the new task list
-     * @return                  String containing Duke's response
+     * @param tasks             List of tasks.
+     * @param ui                User interface.
+     * @param storage           Hard disk storage.
+     * @return                  String containing Duke's response.
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {

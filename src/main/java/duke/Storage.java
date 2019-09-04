@@ -15,8 +15,8 @@ public interface Storage {
     /**
      * Loads tasks from external storage to a new list, then returns that list.
      *
-     * @return                  List of tasks that were loaded from file
-     * @throws DukeException    If tasks cannot be loaded from file
+     * @return                  List of tasks that were loaded from file.
+     * @throws DukeException    If tasks cannot be loaded from file.
      */
     List<Task> load() throws DukeException;
 

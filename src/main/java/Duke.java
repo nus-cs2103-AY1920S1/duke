@@ -44,6 +44,7 @@ public class Duke  {
     /**
      * Generate a response to user input.
      * Calls Parser object to read current input from GUI
+     * ALL outputs from the program will be passed through here to the GUI
      */
     private String getResponse(String input) {
         assert !input.equals("") :  "string from GUI parser should not be empty ";

@@ -1,7 +1,10 @@
 package duke.UI;
 
 public class GuiUi {
-
+    /**
+     * Utility class that sends general String to display to duke GUI
+     * @return
+     */
     public static String showGreeting() {
         String temp = "";
         String logo = " ____        _        \n"

@@ -14,7 +14,7 @@ public class Parser {
      * The constructor takes in a String and creates a new Parser object.
      * @param fullCommand the String of input from the user.
      */
-    public Parser (String fullCommand) {
+    public Parser(String fullCommand) {
         this.fullCommand = fullCommand;
         this.part = fullCommand.split(" ");
     }
@@ -36,7 +36,7 @@ public class Parser {
     }
 
     public String getKeyword() {
-        return fullCommand.substring(fullCommand.indexOf(" ")+1);
+        return fullCommand.substring(fullCommand.indexOf(" ") + 1);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Parser {
      * @return String of activity name of a Todo task.
      */
     public String getActivityNameWithoutTime() {
-        return fullCommand.substring(fullCommand.indexOf(" ")+1);
+        return fullCommand.substring(fullCommand.indexOf(" ") + 1);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Parser {
      * @return String of activity name of a Deadine or Event task.
      */
     public String getActivityNameWithTime() {
-        return fullCommand.substring(fullCommand.indexOf(" ")+1,
+        return fullCommand.substring(fullCommand.indexOf(" ") + 1,
                 fullCommand.indexOf("/"));
     }
 
@@ -87,10 +87,12 @@ public class Parser {
             if (part.length < 2) {
                 throw new DukeException("☹ OOPS!!! You need to enter an index.");
             }
+            break;
         case "find":
             if (part.length < 2) {
                 throw new DukeException("☹ OOPS!!! You need to enter a keyword to search");
             }
+            break;
         case "todo":
             // check whether task description is empty.
             if (part.length < 2) {

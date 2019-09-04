@@ -34,7 +34,7 @@ public class TaskList {
     public void showTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i+1) + ". " + list.get(i));
+            System.out.println((i + 1) + ". " + list.get(i));
         }
     }
 
@@ -46,7 +46,7 @@ public class TaskList {
         int i = 0;
         for (Task task : list) {
             if (task.toString().contains(keyword)) {
-                System.out.println((i+1) + ". " + task);
+                System.out.println((i + 1) + ". " + task);
                 i++;
             }
         }
@@ -67,7 +67,7 @@ public class TaskList {
      * @param activityName String of take name.
      * @param isDone true if the task is done, or false otherwise.
      */
-    public void addTodo(String activityName, boolean isDone){
+    public void addTodo(String activityName, boolean isDone) {
         Task newTask = new Todo(activityName,false);
         addAndPrint(newTask);
     }

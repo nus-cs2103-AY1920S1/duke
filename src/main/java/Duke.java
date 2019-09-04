@@ -96,10 +96,6 @@ public class Duke {
         ui.sayBye();
     }
 
-    /**
-     * Creates a new Duke object and passes in the file path to run the program.
-     * @param args
-     */
     public static void main(String[] args) {
         new Duke("../../../data/tasks.txt").run();
     }

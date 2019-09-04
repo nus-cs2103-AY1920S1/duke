@@ -23,7 +23,7 @@ public class Storage {
      * The constructor takes in filePath and creates a new storage object.
      * @param filePath the string representing the file path of the stored task list.
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -58,6 +58,8 @@ public class Storage {
                 break;
             case "E":
                 tasks.add(new Event(part[2], isDone, part[3]));
+                break;
+            default:
                 break;
             }
         }

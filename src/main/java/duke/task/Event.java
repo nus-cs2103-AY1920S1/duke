@@ -1,7 +1,7 @@
 package duke.task;
 
+import duke.DateParser;
 import duke.DukeException;
-import duke.Parser;
 
 public class Event extends Task {
     protected String date;
@@ -9,7 +9,7 @@ public class Event extends Task {
     public Event(String desc, String date) {
         super(desc);
         try {
-            this.date = Parser.parseDateOrDateTimeToString(date);
+            this.date = DateParser.parseDateOrDateTimeToString(date);
         } catch (DukeException e) {
             this.date = date;
         }

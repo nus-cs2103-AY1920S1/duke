@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.task.Task;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList implements Serializable {
-    List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {
 

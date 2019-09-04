@@ -3,7 +3,7 @@
  */
 public class ToDoCommand extends AddCommand {
     /**
-     * Constructs a ToDOCommand.
+     * Constructs a ToDoCommand.
      */
     public ToDoCommand(String input) {
         super(input);
@@ -11,7 +11,6 @@ public class ToDoCommand extends AddCommand {
 
     /**
      * Determines whether or should the Duke App should terminate.
-     *
      * @return returns false
      */
     public boolean isExit() {
@@ -20,12 +19,11 @@ public class ToDoCommand extends AddCommand {
 
     /**
      * Executes the construction of a TodoTask.
-     *
      * @param tasks   The TaskList of the current Duke App.
      * @param storage The Storage unit being used by the Duke app.
      */
     public String execute(TaskList tasks, Storage storage) {
-        String command = input.substring(5).trim();
+        String command = input.substring(4).trim();
         return addTask(tasks, storage, new ToDoTask(command));
     }
 }

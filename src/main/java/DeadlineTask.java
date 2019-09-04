@@ -58,9 +58,9 @@ public class DeadlineTask extends Task {
     public String toString() {
         String output = "[D]";
         if (super.completed) {
-            output += "[✓]";
+            output += "[\u2713]";
         } else {
-            output += "[✗]";
+            output += "[\u2717]";
         }
         output += " " + this.taskName + " (By: " + this.taskTime + ")";
         return output;

@@ -9,7 +9,7 @@ public class ToDoTask extends Task {
      */
     public ToDoTask(String task) {
         super(task);
-        if (task.trim().length() == 0) {
+        if (task.trim().length() == 0 || task == null) {
             throw new EmptyDescriptionDukeException("todo");
         }
     }
@@ -36,9 +36,9 @@ public class ToDoTask extends Task {
     public String toString() {
         String output = "[T]";
         if (super.completed) {
-            output += "[✓]";
+            output += "[\u2713]";
         } else {
-            output += "[✗]";
+            output += "[\u2717]";
         }
         output += " " + super.task;
         return output;

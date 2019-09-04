@@ -11,6 +11,7 @@ public class InvalidTimeDukeException extends DukeException {
 
     /**
      * Gives out a string that describes the exception.
+     *
      * @return A string that describes the exception.
      */
     @Override

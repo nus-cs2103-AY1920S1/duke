@@ -7,6 +7,7 @@ abstract class Task {
 
     /**
      * Constructs a task.
+     *
      * @param task The name of the task.
      */
     public Task(String task) {
@@ -15,7 +16,8 @@ abstract class Task {
 
     /**
      * Constructs a task that has or may not be completed.
-     * @param task The name of the task.
+     *
+     * @param task        The name of the task.
      * @param isCompleted The state of the task's completion.
      */
     public Task(String task, boolean isCompleted) {
@@ -32,6 +34,7 @@ abstract class Task {
 
     /**
      * returns a string that is used to store it in the save file.
+     *
      * @return a string specifically formatted for storage.
      */
     @Override

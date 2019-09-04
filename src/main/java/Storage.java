@@ -8,16 +8,14 @@ import java.util.ArrayList;
  */
 public class Storage {
     String filePath;
-    Ui ui;
 
     /**
      * Constructs a Storage Object to handle saving or loading.
+     *
      * @param filePath the location of the save file.
-     * @param ui the Ui object that is responsible for displaying things.
      */
-    public Storage(String filePath, Ui ui) {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        this.ui = ui;
         File file = new File(filePath);
         //System.out.println("full path: " + file.getAbsolutePath());
         if (!file.exists()) {
@@ -35,6 +33,7 @@ public class Storage {
 
     /**
      * Returns an arrayList that has all currently stored tasks.
+     *
      * @return an ArrayList containing all the tasks stored.
      */
     public ArrayList<Task> getData() {
@@ -47,6 +46,7 @@ public class Storage {
 
     /**
      * Writes the given TaskList to the save file.
+     *
      * @param tasks The Tasklist that has all the tasks to be saved.
      */
     public void writeList(TaskList tasks) {

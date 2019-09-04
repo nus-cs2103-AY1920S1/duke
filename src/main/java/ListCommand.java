@@ -7,12 +7,13 @@ public class ListCommand extends Command {
     /**
      * Constructs a ListCommand Object.
      */
-    public ListCommand() {
-
+    public ListCommand(String input) {
+        super.input = input;
     }
 
     /**
      * Determines whether or should the Duke App should terminate.
+     *
      * @return returns false.
      */
     public boolean isExit() {
@@ -21,15 +22,16 @@ public class ListCommand extends Command {
 
     /**
      * Executes the command to display all tasks currently saved.
-     * @param tasks The TaskList of the current Duke App
-     * @param ui The Ui being used by the Duke App
+     *
+     * @param tasks   The TaskList of the current Duke App.
      * @param storage The Storage unit being used by the Duke app.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Storage storage) {
+        String output = "Here are the tasks in your list:\n";
         ArrayList<Task> allTask = tasks.getList();
         for (int i = 0; i < allTask.size(); i++) {
-            ui.showMessage(6, (i + 1) + "." + allTask.get(i).toString());
+            output += "    " + (i + 1) + "." + allTask.get(i).toString() + "\n";
         }
+        return output;
     }
 }

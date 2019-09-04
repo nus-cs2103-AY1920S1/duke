@@ -1,14 +1,14 @@
 /**
- * Deals with making sense of user commands into Command classes
+ * Deals with making sense of user commands into Command classes.
  */
 public class Parser {
     /**
-     * String array containing user input string
+     * String array containing user input string.
      */
     private String[] inputArr;
 
     /**
-     * Constructor for splitting input into main command and command details
+     * Constructor for splitting input into main command and command details.
      * @param input original user input string
      */
     public Parser(String input) {
@@ -16,7 +16,7 @@ public class Parser {
     }
 
     /**
-     * Returns main command
+     * Returns main command.
      * @return main user command
      */
     public String getCommand() {
@@ -24,7 +24,7 @@ public class Parser {
     }
 
     /**
-     * Returns command details as integer for deleting and marking tasks as complete
+     * Returns command details as integer for deleting and marking tasks as complete.
      * @return array index pointer for task in task list
      */
     public int getPointer() {
@@ -32,7 +32,7 @@ public class Parser {
     }
 
     /**
-     * Returns command details
+     * Returns command details.
      * @return command details
      */
     public String getDetail() {
@@ -44,25 +44,25 @@ public class Parser {
     }
 
     /**
-     * Parses user commands into relevant Command classes to execute relevant actions
+     * Parses user commands into relevant Command classes to execute relevant actions.
      * @param command First keyword entered by user determining command type
      * @param commandDetails Following indicating keywords
-     * @param INDENT Constant indentation from start of line (formatting)
+     * @param indent Constant indentation from start of line (formatting)
      * @return Commands which execute relevant actions to follow user commands
      */
-    public static Command parse(String command, String commandDetails, String INDENT) {
+    public static Command parse(String command, String commandDetails, String indent) {
         if (command.equals("bye")) {
-            return new ExitCommand(command, commandDetails, INDENT);
+            return new ExitCommand(command, commandDetails, indent);
         } else if (command.equals("list")) {
-            return new ListCommand(command, commandDetails, INDENT);
+            return new ListCommand(command, commandDetails, indent);
         } else if (command.equals("done")) {
-            return new DoneCommand(command, commandDetails, INDENT);
+            return new DoneCommand(command, commandDetails, indent);
         } else if (command.equals("delete")) {
-            return new DeleteCommand(command, commandDetails, INDENT);
+            return new DeleteCommand(command, commandDetails, indent);
         } else if (command.equals("find")) {
-            return new FindCommand(command, commandDetails, INDENT);
+            return new FindCommand(command, commandDetails, indent);
         } else {
-            return new AddCommand(command, commandDetails, INDENT);
+            return new AddCommand(command, commandDetails, indent);
         }
     }
 }

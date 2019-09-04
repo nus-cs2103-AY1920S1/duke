@@ -3,24 +3,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * Handles operations to the task list and contains the task list
+ * Handles operations to the task list and contains the task list.
  */
 public class TaskList {
     /**
-     * ArrayList for tracking Tasks on the list
+     * ArrayList for tracking Tasks on the list.
      */
     private ArrayList<Task> list;
     /**
-     * String for printing Tasks on the list
+     * String for printing Tasks on the list.
      */
     private String listString;
     /**
-     * Constant indentation after start of line (formatting)
+     * Constant indentation after start of line (formatting).
      */
     private static String INDENT = "    ";
 
     /**
-     * Constructor for an empty TaskList
+     * Constructor for an empty TaskList.
      */
     public TaskList() {
         this.list = new ArrayList<>();
@@ -28,7 +28,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor for loading a prior ArrayList<Task> of tasks
+     * Constructor for loading a prior ArrayList of tasks.
      * @param tasklist ArrayList of tasks
      */
     public TaskList(ArrayList<Task> tasklist) {
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Return ArrayList of tasks
+     * Return ArrayList of tasks.
      * @return ArrayList of Tasks
      */
     public ArrayList<Task> getList() {
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Return string with all tasks
+     * Return string with all tasks.
      * @return String with all tasks
      */
     public String getListString() {
@@ -56,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Add new todo task to task list
+     * Add new todo task to task list.
      * @param newTask Details of incoming task
      */
     public void addTask(Task newTask) {
@@ -65,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * Add new deadline/event task to task list
+     * Add new deadline/event task to task list.
      * @param details Details of incoming task
      * @param dateTime Details on relevant date to task
      * @param taskType Type of task to be added
@@ -77,7 +77,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task from task list based on index on list
+     * Delete task from task list based on index on list.
      * @param index Index of task to be removed
      */
     public void deleteTask(int index) {
@@ -86,7 +86,7 @@ public class TaskList {
     }
 
     /**
-     * Mark task as complete within the task list
+     * Mark task as complete within the task list.
      * @param index Index of task to be marked complete
      */
     public void markTaskAsDone(int index) {
@@ -95,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Helper function for findMatchingTasksString returning ArrayList of matching tasks
+     * Helper function for findMatchingTasksString returning ArrayList of matching tasks.
      * @param keyword Search keyword for finding matching tasks
      * @return ArrayList of matching tasks
      */
@@ -110,7 +110,7 @@ public class TaskList {
     }
 
     /**
-     * Returns formatted list of matching tasks to be printed
+     * Returns formatted list of matching tasks to be printed.
      * @param keyword Search keyword for finding matching tasks
      * @return String list of matching tasks
      */
@@ -126,7 +126,7 @@ public class TaskList {
     }
 
     /**
-     * Update tasks in String of tasks
+     * Update tasks in String of tasks.
      */
     public void updateTodoString() {
         listString = "" + INDENT + " ";

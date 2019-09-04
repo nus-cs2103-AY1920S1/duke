@@ -10,36 +10,36 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private PrintWriter writer;
     /**
-     * Directory location for file storage and retrieval
+     * Directory location for file storage and retrieval.
      */
     private String filename;
 
     /**
-     * Constructor for new Storage object with directory information loaded
-     * @param filename
-     * @throws FileNotFoundException
-     * @throws UnsupportedEncodingException
+     * Constructor for new Storage object with directory information loaded.
+     * @param filename Location for loaded/new file
+     * @throws FileNotFoundException File directory cannot be located
+     * @throws UnsupportedEncodingException File type is not supported
      */
     public Storage(String filename) {
         this.filename = filename;
     }
 
     /**
-     * Loads tasks from file into an array of tasks to be passed into TaskList
+     * Loads tasks from file into an array of tasks to be passed into TaskList.
      * @return ArrayList of tasks loaded from file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException No file is found in the file directory indicated, loading failed.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasklist = new ArrayList<>();
         File f = new File(filename);
         Scanner scanner = new Scanner(f);
 
-        while(scanner.hasNext()) {
+        while (scanner.hasNext()) {
             scanner.next();
             if (!scanner.hasNext()) {
                 break;
@@ -67,10 +67,10 @@ public class Storage {
     }
 
     /**
-     * Update the loaded file based on changes to the todo file
+     * Update the loaded file based on changes to the todo file.
      * @param todoString String of tasks based on TaskList
-     * @throws FileNotFoundException
-     * @throws UnsupportedEncodingException
+     * @throws FileNotFoundException File directory cannot be located
+     * @throws UnsupportedEncodingException File type is not supported
      */
     public void updateTodoFile(String todoString) throws FileNotFoundException, UnsupportedEncodingException {
         writer = new PrintWriter(filename, "UTF-8");

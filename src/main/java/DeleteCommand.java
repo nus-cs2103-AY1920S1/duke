@@ -3,22 +3,22 @@
  */
 public class DeleteCommand extends Command {
     /**
-     * Integer indicating task to be deleted
+     * Integer indicating task to be deleted.
      */
     private int listPointer;
 
     /**
-     * Constructor that takes in keywords and indentation for execution of delete function
+     * Constructor that takes in keywords and indentation for execution of delete function.
      * @param command First keyword entered by user determining command type
      * @param commandDetails Following integer indicating list index of task to be deleted
-     * @param INDENT Constant indentation from start of line (formatting)
+     * @param indent Constant indentation from start of line (formatting)
      */
-    public DeleteCommand(String command, String commandDetails, String INDENT) {
-        super(command, commandDetails, INDENT);
+    public DeleteCommand(String command, String commandDetails, String indent) {
+        super(command, commandDetails, indent);
     }
 
     /**
-     * Handles deletion of task from list
+     * Handles deletion of task from list.
      * @param tasks Contains task list and operations to delete from list
      * @param ui Handles user interaction
      * @param storage Updates new task list to file
@@ -30,8 +30,8 @@ public class DeleteCommand extends Command {
             Task deletedTask = tasks.getList().get(listPointer - 1);
             tasks.deleteTask(listPointer - 1);
             ui.printResponse("Noted. I've removed this task: \n"
-                    + INDENT + "   " + deletedTask + "\n" + INDENT +
-                    "Now you have " + tasks.getList().size() + " tasks in the list.");
+                    + indent + "   " + deletedTask + "\n" + indent
+                    + "Now you have " + tasks.getList().size() + " tasks in the list.");
             storage.updateTodoFile(tasks.getListString());
         } catch (Exception err) {
             throw new DukeException(err.getMessage());

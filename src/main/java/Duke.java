@@ -2,50 +2,57 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 /**
- * A personal assistant todo-list tracking chatbot
+ * A personal assistant todo-list tracking chatbot.
  *
  * @author Ng Qian Jie Cheryl
  * @version 0.1
  */
 public class Duke {
     /**
-     * Constant indentation from start of line (formatting)
+     * Constant indentation from start of line (formatting).
      */
     private static String INDENT = "    ";
     /**
-     * File location for loaded text or new text file containing todo tasks
+     * File location for loaded text or new text file containing todo tasks.
      */
     private static String FILENAME = "data/duke.txt";
 
     /**
-     * Handles loading tasks from file and saving tasks in file
+     * Handles loading tasks from file and saving tasks in file.
      */
     private static Storage storage;
     /**
-     * Contains task list and operations to modify the list
+     * Contains task list and operations to modify the list.
      */
     private static TaskList tasks;
     /**
-     * Deals with interactions with the user
+     * Deals with interactions with the user.
      */
     private Ui ui;
 
+    /**
+     * Main initializer of Duke bot.
+     * @param filePath Location for file to be saved
+     */
     public Duke(String filePath) {
         ui = new Ui(INDENT);
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch(Exception err) {
+        } catch (Exception err) {
             ui.printError(err.getMessage());
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
+    /**
+     * Main method running Duke class.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Parser parser = new Parser(fullCommand);

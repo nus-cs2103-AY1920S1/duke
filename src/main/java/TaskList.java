@@ -38,21 +38,26 @@ public class TaskList {
     /**
      * Print all the tasks on the list.
      */
-    public void printAllTasks() {
+    public String printAllTasks() {
+        String output = "";
         for (int i = 1; i <= numTasks; i++) {
-            System.out.println(i + "." + allTasks.get(i - 1));
+            //System.out.println(i + "." + allTasks.get(i - 1));
+            output = output + i + "." + allTasks.get(i - 1) + "\n";
         }
+        return output;
     }
 
     /**
      * Mark the task of the given index as done.
      * @param index of the task to be marked.
      */
-    public void markAsDone(int index) {
+    public String markAsDone(int index) {
+        String reply = "";
         Task completedTask = allTasks.get(index - 1);
         if (!completedTask.isDone()) {
-            completedTask.markAsDone();
+            reply = completedTask.markAsDone();
         }
+        return reply;
     }
 
     /**

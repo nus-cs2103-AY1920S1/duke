@@ -25,10 +25,9 @@ public class Task {
     /**
      * Mark this task as done and provide notification.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + this.toString());
+        return "Nice! I've marked this task as done:" + "\n" + "  " + this.toString();
     }
 
     /**

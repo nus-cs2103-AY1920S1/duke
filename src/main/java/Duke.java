@@ -50,7 +50,7 @@ public class Duke {
     }
 
     private void add(String type, String description) {
-        try{
+        try {
             tasks.add(type, description);
             storage.write(tasks);
             ui.add(tasks);

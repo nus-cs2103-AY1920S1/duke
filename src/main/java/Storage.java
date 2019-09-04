@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
@@ -60,17 +64,17 @@ public class Storage {
                 Task newTask;
                 boolean isDone = parts[1].equals("1");
                 switch (parts[0]) {
-                    case "T":
-                        newTask = new Todo(parts[2], isDone);
-                        break;
-                    case "E":
-                        newTask = new Event(parts[2], isDone);
-                        break;
-                    case "D":
-                        newTask = new Deadline(parts[2], isDone);
-                        break;
-                    default:
-                        newTask = new Task("");
+                case "T":
+                    newTask = new Todo(parts[2], isDone);
+                    break;
+                case "E":
+                    newTask = new Event(parts[2], isDone);
+                    break;
+                case "D":
+                    newTask = new Deadline(parts[2], isDone);
+                    break;
+                default:
+                    newTask = new Task("");
                 }
                 list.add(newTask);
             }

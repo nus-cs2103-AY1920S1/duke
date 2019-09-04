@@ -167,7 +167,7 @@ public class Ui {
 
     /**
      * Tells user a DukeException has occurred.
-     * @param ex
+     * @param ex the exception whose message is to be printed
      */
     public void showDukeException(DukeException ex) {
         formatPrint(ex.getMessage());

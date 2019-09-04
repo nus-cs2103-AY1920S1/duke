@@ -30,7 +30,7 @@ public class Task {
     }
 
     private Date parseDate(String input) throws ParseException {
-        SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy HHmm");
+        SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy HHmm");
         Date t = new Date();
         t = ft.parse(input);
         return t;

@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 T | 1 | borrow book
 D | 1 | return book | Sunday
+=======
+T | 0 | borrow book
+E | 0 | project meeting | Mon 2-4pm
+>>>>>>> branch-Level-7

@@ -10,11 +10,12 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
- public class ApplicationLauncher extends Application {
+public class ApplicationLauncher extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationLauncher.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    ApplicationLauncher.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = new AnchorPane();
             fxmlLoader.setRoot(ap);
             fxmlLoader.load();

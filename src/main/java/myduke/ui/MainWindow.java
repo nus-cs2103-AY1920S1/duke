@@ -38,7 +38,9 @@ public class MainWindow extends AnchorPane {
         userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
         dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
         dukeEngine = new Duke(
-            message -> { dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage)); },
+            message -> {
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
+            },
             MessageFormatType.MESSAGE_FORMAT_NO_BOUNDARY_WITHOUT_INDENT);
     }
 
@@ -70,7 +72,8 @@ public class MainWindow extends AnchorPane {
             Thread thread = new Thread(() -> {
                 try {
                     Thread.sleep(2000);
-                } catch (InterruptedException exc) {
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.getMessage());
                 } finally {
                     Platform.runLater(() -> Platform.exit());
                 }

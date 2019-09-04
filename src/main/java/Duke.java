@@ -1,14 +1,11 @@
+import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-public class Duke {
+
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -32,7 +29,7 @@ public class Duke {
     public void start(Stage stage) {
         File file = new File("data");
         file.mkdir();
-        new Duke().run();
+       new Duke().run();
     }
 
     /**
@@ -97,17 +94,6 @@ public class Duke {
 
             }
         }
-    }
-
-    /**
-     * Entry point of the application.
-     * Initializes the application and starts the interaction with the user.
-     */
-
-    public static void main(String[] args) {
-        File f = new File("data");
-        f.mkdir();
-        new Duke().run();
     }
 
     /**
@@ -335,7 +321,7 @@ public class Duke {
 
     public String getResponse(String input) {
         String output = "";
-        ui.showWelcome();
+        //ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();

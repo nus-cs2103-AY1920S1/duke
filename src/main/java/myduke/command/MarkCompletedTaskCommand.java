@@ -21,6 +21,6 @@ public class MarkCompletedTaskCommand extends ModifyListCommand {
     @Override
     public void execute(TaskList taskList, Ui ui, StorageManager storage) throws DukeException {
         Task completedTask = taskList.markTaskAsDone(this.itemIndex);
-        ui.printResponse("Nice! I've marked this task as done:", completedTask, -1);
+        ui.printResponse("Nice! I've marked this task as done:", -1, completedTask);
     }
 }

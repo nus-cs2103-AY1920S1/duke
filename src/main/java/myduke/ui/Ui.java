@@ -102,18 +102,27 @@ public class Ui {
      * Prints a single response and list a specified task.
      *
      * @param responseHeader A message to the user.
-     * @param refTask        The task to be displayed to the user.
-     * @param numOfTasks     Displays the number of tasks left in the task list if value is greater or equal than 0.
+     * @param numOfTasksLeft Displays the number of tasks left in the task list if value is greater or equal than 0.
+     * @param listOfTasks    The list of tasks to be displayed to the user.
      */
-    public void printResponse(String responseHeader, Task refTask, int numOfTasks) {
+    public void printResponse(String responseHeader, int numOfTasksLeft, Task... listOfTasks) {
         messages.add(responseHeader);
-        messages.add(refTask.toString());
 
-        if (numOfTasks >= 0) {
+        if (listOfTasks.length == 1) {
+            messages.add(listOfTasks[0].toString());
+        } else if (listOfTasks.length > 1) {
+            int indexOfTask = 0;
+            for (Task currentTask : listOfTasks) {
+                indexOfTask += 1;
+                messages.add(String.format("%d.%s", indexOfTask, currentTask));
+            }
+        }
+
+        if (numOfTasksLeft >= 0) {
             messages.add(String.format(
                     "Now you have %d task%s in the list.",
-                    numOfTasks,
-                    (numOfTasks > 1) ? "s" : ""));
+                    numOfTasksLeft,
+                    (numOfTasksLeft > 1) ? "s" : ""));
         }
     }
 

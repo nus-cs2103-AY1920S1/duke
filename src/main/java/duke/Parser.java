@@ -1,6 +1,5 @@
 package duke;
 
-
 import command.AddCommand;
 import command.Command;
 import command.DeleteCommand;
@@ -12,7 +11,6 @@ import command.ClearCommand;
 
 /**
  * Parser class to parse a given input command.
- *
  */
 public class Parser {
 
@@ -61,7 +59,7 @@ public class Parser {
             command = new ClearCommand();
             break;
         default:
-            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I'm sorry, but I don't know what that means.");
         }
         return command;
     }

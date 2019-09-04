@@ -39,15 +39,6 @@ public class Duke extends Application {
         }
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public static void main(String[] args) {
         Duke duke = new Duke("tasks.txt");
         duke.run();
@@ -60,5 +51,14 @@ public class Duke extends Application {
         Parser parser = new Parser(this.taskList, this.ui, this.storage);
         ui.printWelcomeMessage();
         ui.run(parser);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

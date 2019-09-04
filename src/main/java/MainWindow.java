@@ -29,12 +29,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        try {
-            userImage = new Image(new FileInputStream("C:\\Users\\thisi\\Documents\\GitHub\\duke\\images\\DaUser.png"));//this.getClass().getResourceAsStream("/images/DaUser.png"));
-            dukeImage = new Image(new FileInputStream("C:\\Users\\thisi\\Documents\\GitHub\\duke\\images\\DaDuke.png"));//this.getClass().getResourceAsStream("/images/DaDuke.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+        dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     }
 
     public void setDuke(Duke d) {

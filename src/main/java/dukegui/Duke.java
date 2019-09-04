@@ -139,7 +139,7 @@ public class Duke extends Application {
     private void greetUser() {
         Label dukeText = new Label(AutoResponse.DUKE_HELLO.replace("    ", ""));
         dialogueContainer.getChildren().addAll(
-                new DialogueBox(dukeText, new ImageView(duke))
+                DialogueBox.getDukeDialog(dukeText, new ImageView(duke))
         );
     }
 
@@ -152,8 +152,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogueContainer.getChildren().addAll(
-                new DialogueBox(userText, new ImageView(user)),
-                new DialogueBox(dukeText, new ImageView(duke))
+                DialogueBox.getUserDialog(userText, new ImageView(user)),
+                DialogueBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
         if (this.isExit) {

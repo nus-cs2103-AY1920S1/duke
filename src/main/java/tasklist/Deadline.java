@@ -4,13 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents the Deadline type of task
+ * Represents the Deadline type of task.
  */
 public class Deadline extends Task {
 
-    public Deadline(String name, boolean completionStatus , LocalDateTime date) {
+    public Deadline(String name, boolean completionStatus, LocalDateTime date) {
         super(name,completionStatus, date);
     }
+
     @Override
     public String getOverallStatus() {
         return "[D]" + getCurrentStatus() + description + "(by:" + date.format(OUTPUT_FORMAT) + ")";

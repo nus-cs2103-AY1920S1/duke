@@ -1,7 +1,7 @@
 package storage;
 
 
-import Ui.TextUi;
+import ui.TextUi;
 import tasklist.Task;
 import tasklist.TaskList;
 import parser.Parser;
@@ -26,7 +26,7 @@ public class Storage {
     }
 
     /**
-     * method used to store data by inputting to a file line by line
+     * method used to store data by inputting to a file line by line.
      * @param toStore The list of task from a TaskList object containing the tasks to be stored
      * @throws IOException if the filepath specified is invalid
      */
@@ -42,7 +42,7 @@ public class Storage {
     }
 
     /**
-     * method used to read files and load data on to linkedlist to be passed to TaskList object
+     * method used to read files and load data on to linkedlist to be passed to TaskList object.
      * @return returns a linkedList to a TaskList object with all the tasks already loaded
      * @throws IOException if the the file path is invalid
      */
@@ -62,8 +62,8 @@ public class Storage {
             }
             tasknumber++;
         }
-            bufferedReader.close();
-            return storedData.getTaskList();
+        bufferedReader.close();
+        return storedData.getTaskList();
     }
 
 }

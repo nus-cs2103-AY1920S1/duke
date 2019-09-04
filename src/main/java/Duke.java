@@ -1,14 +1,13 @@
-import Ui.TextUi;
+import ui.TextUi;
 import storage.Storage;
 import tasklist.TaskList;
 import parser.Parser;
-
 import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Main class of the program
- * starts the application and receives use input
+ * Main class of the program.
+ * starts the application and receives use input.
  */
 
 public class Duke {
@@ -21,8 +20,8 @@ public class Duke {
     }
 
     /**
-     * Runs the program until termination
-     * @throws IOException
+     * Runs the program until termination.
+     * @throws IOException in case file doesn't load
      */
     public void run() throws IOException {
         ui.printIntroduction();

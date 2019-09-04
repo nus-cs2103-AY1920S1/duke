@@ -1,6 +1,6 @@
 package parser;
 
-import Ui.TextUi;
+import ui.TextUi;
 import tasklist.TaskList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,26 +20,24 @@ public class Parser {
     private LocalDateTime date;
     private boolean isSafe;
     private TextUi ui;
+    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)"
+            + "\\s*(?<completionStatus>(\\[[01]\\])?)"
+            + "\\s*(?<description>([\\w\\s\\d]+)?)"
+            + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
 
-    public Parser(){
+    public Parser() {
         ui = new TextUi();
-    };
+    }
 
     /**
-     * method used to split up the user input and execute the required task
+     * method used to split up the user input and execute the required task.
      * @param fullCommand user input
      * @param scheduler TaskList object that commands are to be executed on
      * @param isLoading boolean variable to check if the input is from a user or save file (to stop some print actions)
      */
-
-    public void parse(String fullCommand, TaskList scheduler , boolean isLoading){
+    public void parse(String fullCommand, TaskList scheduler, boolean isLoading) {
         isSafe = true;
-        Pattern command_format = Pattern.compile("(?<commandWord>\\w+)"
-                + "\\s*(?<completionStatus>(\\[[01]\\])?)"
-                + "\\s*(?<description>([\\w\\s\\d]+)?)"
-                + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
-        Matcher matcher = command_format.matcher(fullCommand);
-
+        Matcher matcher = COMMAND_FORMAT.matcher(fullCommand);
         if (matcher.find()) {
             command = matcher.group("commandWord");
             isDone = matcher.group("completionStatus").equals("[1]");
@@ -62,7 +60,7 @@ public class Parser {
                 case "event":
                     scheduler.addTask(command, description, isDone, date);
                     if (!isLoading) {
-                        scheduler.printnewtask();
+                        scheduler.printNewTask();
                     }
                     break;
                 case "list":
@@ -88,7 +86,6 @@ public class Parser {
         }
 
     }
-
 
     public boolean isSafe() {
         return isSafe;

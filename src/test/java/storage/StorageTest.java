@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * sto
- */
 
 public class StorageTest {
 
@@ -21,12 +18,12 @@ public class StorageTest {
         System.setOut(new PrintStream(outContent));
         testfile = new Storage("src\\test\\resources\\testfile.txt");
         TaskList testlist = new TaskList(testfile.loadData());
-        String expectedOutput = "    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know that command :-(\n" +
-                "    ____________________________________________________________\r\n" +
-                "    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but loading task 1 has failed, it will be removed\n" +
-                "    ____________________________________________________________\r\n";
+        String expectedOutput = "    ____________________________________________________________\n"
+                + "     ☹ OOPS!!! I'm sorry, but I don't know that command :-(\n"
+                + "    ____________________________________________________________\r\n"
+                + "    ____________________________________________________________\n"
+                + "     ☹ OOPS!!! I'm sorry, but loading task 1 has failed, it will be removed\n"
+                + "    ____________________________________________________________\r\n";
         assertEquals(expectedOutput,outContent.toString());
     }
 }

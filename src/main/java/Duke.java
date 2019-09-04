@@ -33,6 +33,18 @@ public class Duke {
         ui.initiate(storage, tasks);
     }
 
+    /**
+     * Returns initialised <code>Ui</code> of specified chatbot.
+     *
+     * @return Initialised <code>Ui</code>.
+     */
+    public Ui getUi() {
+        ui.setStorage(storage);
+        ui.setList(tasks);
+
+        return ui;
+    }
+
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

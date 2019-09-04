@@ -8,11 +8,11 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Creates a <code>DukeException</code> that prints an error message.
+     * Creates a <code>DukeException</code> from an error message.
      *
      * @param message Error message.
      */
     public DukeException(String message) {
-        System.out.println(String.format("\u2639 OOPS!!! %s\n", message));
+        super(String.format("\u2639 OOPS!!! %s\n", message));
     }
 }

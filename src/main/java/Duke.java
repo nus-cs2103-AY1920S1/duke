@@ -16,7 +16,7 @@ public class Duke {
 	 * Creates new Storage instance and Parser
 	 */
     public Duke() throws IOException {
-		UI.start();
+    	UI.start();
 		//ArrayList<Task> tasks = new ArrayList<Task>();
 		storage = new Storage("data/duke.txt");
 

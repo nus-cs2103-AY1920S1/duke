@@ -1,22 +1,25 @@
 import java.io.File;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**
  * Driver class which contains the main method of the program. Also encapsulates Duke,
  * a to-do list. Each Duke object has a storage file, a list of tasks, and a user
  * interface.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private String filePath = "data/tasks.txt";
 
     /**
      * Constructor.
-     * @param filePath file path of text file used to load and store tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -26,6 +29,15 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+
+    @Override
+    public void start(Stage stage) {
+        File file = new File("data");
+        file.mkdir();
+        new Duke().run();
+    }
+
 
     /**
      * Runs the application. A scanner is instantiated to read standard input.
@@ -45,12 +57,17 @@ public class Duke {
     }
 
     /**
-     * Main method, the program's entry point. A Duke object is instantiated to call run(), an instance method.
-     * @param args  an array of command-line arguments for the application
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        File file = new File("data");
-        file.mkdir();
-        new Duke("data/tasks.txt").run();
+
+     public String getResponse(String input) {
+         Command c = Parser.parse(input);
+         try {
+             String response = c.executeForGui(tasks, ui, storage);
+             return response;
+         } catch (DukeException e) {
+             return e.getMessage();
+         }
     }
 }

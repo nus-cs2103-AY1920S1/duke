@@ -15,11 +15,33 @@ public class FindCommand extends Command {
         displayList(matchingList);
     }
 
+    @Override
+    public String executeForGui(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
+        sb.append("\n");
+        ArrayList<Task> matchingList = tasks.generateMatchingList(keyword);
+        String listString = displayListForGui(matchingList);
+        sb.append(listString);
+        return sb.toString();
+    }
+
     public void displayList(ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
             String itemDisplay = itemIndex + "." + list.get(i).getDescription();
             System.out.println(itemDisplay);
         }
+    }
+
+    public String displayListForGui(ArrayList<Task> list) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            int itemIndex = i + 1;
+            String itemDisplay = itemIndex + "." + list.get(i).getDescription();
+            sb.append(itemDisplay);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

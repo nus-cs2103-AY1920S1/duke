@@ -104,6 +104,32 @@ public class TaskList {
         }
     }
 
+    public String addTaskAfterValidationForGui(String dateTimeString, Task t) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dukeDateTimeFormatter);
+
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                e.setDateTimeAt(dateTime);
+            } else {
+                Deadline d = (Deadline) t;
+                d.setDateTimeBy(dateTime);
+            }
+
+            addTask(t);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Got it. I've added this task:");
+            sb.append("\n");
+            sb.append(t);
+            sb.append("\n");
+            sb.append("Now you have " + dukeTaskList.size() + " tasks in the list.");
+            return sb.toString();
+        } catch (Exception e) {
+            return "Task not added to list because the input format for date and time is unrecognised. "
+                    + "Please enter date and time in dd/MM/yyyy HHmm format.";
+        }
+    }
+
     /**
      * Prints the full list of tasks.
      */
@@ -113,6 +139,17 @@ public class TaskList {
             String itemDisplay = itemIndex + "." + dukeTaskList.get(i).toString();
             System.out.println(itemDisplay);
         }
+    }
+
+    public String displayFullListForGui() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < dukeTaskList.size(); i++) {
+            int itemIndex = i + 1;
+            String itemDisplay = itemIndex + "." + dukeTaskList.get(i).toString();
+            sb.append(itemDisplay);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     public ArrayList<Task> generateMatchingList(String keyword) {

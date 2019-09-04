@@ -14,5 +14,12 @@ public class DisplayListCommand extends Command {
         System.out.println("Here are the tasks in your list:");
         tasks.displayFullList();
     }
+
+    @Override
+    public String executeForGui(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.displayFullListForGui();
+    }
+
+
 }
 

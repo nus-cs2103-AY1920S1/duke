@@ -32,14 +32,14 @@ public class FindCommand extends Command{
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : taskList.getTasks()) {
             if (t.getDescription().contains(findKeywork)) {
                 tasks.add(t);
             }
         }
-        ui.printFindMessage(tasks);
+        return ui.printFindMessage(tasks);
     }
 
     /**

@@ -29,12 +29,14 @@ public class DeleteCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String outputString = "";
         int index = Integer.parseInt(commandSplit[1]);
-        ui.printDeletedMessage();
+        outputString = outputString + ui.printDeletedMessage();
         taskList.delete(index);
-        ui.printNumberOfTasks(taskList);
-        ui.printTask(taskList.getTasks().get(index-1));
+        outputString = outputString + ui.printNumberOfTasks(taskList);
+        outputString = outputString + ui.printTask(taskList.getTasks().get(index-1));
+        return outputString;
     }
 
     /**

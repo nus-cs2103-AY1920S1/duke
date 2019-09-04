@@ -27,10 +27,12 @@ public class ListCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printListMessage();
-        ui.printTaskList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String outputString = "";
+        outputString = outputString + ui.printListMessage();
+        outputString = outputString + ui.printTaskList(taskList);
         taskList.list();
+        return outputString;
     }
 
     /**

@@ -29,12 +29,13 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command by using the three arguments provided
+     * Executes the command by using the three arguments provided and
+     * Returns the String to be written.
      * @param taskList
      * @param ui
      * @param storage
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Checks if Duke will end.

@@ -1,0 +1,18 @@
+.sendButton {
+    -fx-background-color: white;
+    -fx-background-image: url("../images/send.png");
+    -fx-background-size: 100% 100%;
+    -fx-rotate: 45;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.chat-bubble {
+    -fx-background-color: lightblue;
+}

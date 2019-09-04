@@ -11,16 +11,15 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
-
-
     public void showLoadingError() {
         System.out.println("File cannot be loaded.");
     }
     */
 
+    /*
     /**
      * This method is used to print welcome message to user.
-     */
+     *
     public void showWelcome() {
         System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
     }
@@ -33,11 +32,11 @@ public class Ui {
      * This method is used to read user command.
      *
      * @return String This returns user command as a string.
-     */
-    public String readCommand() {
 
+    public String readCommand() {
         return scanner.nextLine();
     }
+    */
 
     public String print(String msg) {
         return msg;
@@ -58,12 +57,4 @@ public class Ui {
         return output;
     }
 
-    /**
-     * This method is used to print welcome message to user.
-     *
-     * @return Nothing
-     */
-    public void showError(String message) {
-        System.out.println(message);
-    }
 }

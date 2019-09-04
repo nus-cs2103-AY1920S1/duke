@@ -54,4 +54,9 @@ public class TaskList {
         Task t = list.get(taskNumToMark - 1);
         t.markAsDone();
     }
+
+    public Task getTask(int taskNumToGet) {
+        Task t = list.get(taskNumToGet - 1);
+        return t;
+    }
 }

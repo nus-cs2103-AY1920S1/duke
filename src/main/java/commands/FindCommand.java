@@ -24,7 +24,7 @@ public class FindCommand extends Command {
         for (Task t : tasks.getList()) {
             if (t.toString().contains(keyword)) {
                 output += ("\n" + ui.print(t.toString()));
-                 foundAny = true;
+                foundAny = true;
             }
         }
         if (!foundAny) {

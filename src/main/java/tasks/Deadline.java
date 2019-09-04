@@ -11,22 +11,25 @@ public class Deadline extends Task {
 
     /**
      * This is a constructor for tasks.Deadline.
+     *
      * @param description description of task
-     * @param by due date of deadline
+     * @param by          due date of deadline
      */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
         super.symbol = "D";
     }
+
     /**
      * This method is used to return the task list.
      *
      * @return date
      */
+
     public LocalDateTime getDate() throws ParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        date1 = date1.parse(by,formatter);
+        date1 = date1.parse(by, formatter);
         return date1;
     }
 

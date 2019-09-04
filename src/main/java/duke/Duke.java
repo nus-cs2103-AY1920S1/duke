@@ -28,12 +28,12 @@ public class Duke {
     private Button sendButton;
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    // private Image dukebot = new Image(this.getClass().getResourceAsStream("/pikachu.png"));
     //private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
 
-    public Duke() {}
+    public Duke() {
 
+    }
 
     /**
      * This constructor takes in the filePath and initiates the necessary

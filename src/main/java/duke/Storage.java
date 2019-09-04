@@ -52,7 +52,6 @@ public class Storage {
      * This method is used to update current items in the list.
      *
      * @param list the current task list
-     * @return Nothing
      */
     public void updateList(ArrayList<Task> list) {
         //File file = new File("C:\\duke\\src\\main\\java\\data\\duke.txt");
@@ -62,12 +61,12 @@ public class Storage {
                 if (t.getSymbol().equals("T")) {
                     out.println(t.getSymbol() + " / " + (t.isDone() ? 1 : 0) + " / " + t.getDescription());
                 } else {
-                    out.println(t.getSymbol() + " / " + (t.isDone() ? 1 : 0) + " / " + t.getDescription() + " / " + t.getExtraInfo());
+                    out.println(t.getSymbol() + " / " + (t.isDone() ? 1 : 0) + " / " + t.getDescription()
+                            + " / " + t.getExtraInfo());
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 }

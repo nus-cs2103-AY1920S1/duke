@@ -39,7 +39,7 @@ public class Parser {
             String[] details = instruction.split(" /at ");
             if (details.length != 2) {
                 throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or Date"
-                        + "and start and end time not provided.");
+                        + " and/or start and end time not provided.");
             }
             String[] dateAndTime = details[1].split(" ");
             if (dateAndTime.length != 2) {

@@ -7,11 +7,11 @@
  import duke.exception.InvalidInputDukeException;
  import duke.exception.InvalidTaskDukeException;
 
- import org.junit.Test;
+ import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+ import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ParserTest {
+ public class ParserTest {
 
     @Test
     public void parseTest() throws EmptyTaskDukeException, InvalidTaskDukeException, InvalidInputDukeException {

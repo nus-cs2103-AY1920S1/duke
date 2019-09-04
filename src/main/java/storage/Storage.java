@@ -1,6 +1,7 @@
 package storage;
 
 
+import Ui.TextUi;
 import tasklist.Task;
 import tasklist.TaskList;
 import parser.Parser;
@@ -12,10 +13,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class Storage {
-    protected String filePath;
+    private String filePath;
+    private TextUi ui;
 
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
+        ui = new TextUi();
     }
 
     public void storeData(LinkedList<Task> toStore) throws IOException {
@@ -37,12 +40,9 @@ public class Storage {
         int tasknumber = 1;
 
         while ((line = bufferedReader.readLine()) != null) {
-            parser.parse(line,storedData);
+            parser.parse(line,storedData,true);
             if (!parser.isSafe()) {
-                System.out.println("    ____________________________________________________________\n" +
-                        "     ☹ OOPS!!! I'm sorry, but loading task " + tasknumber +
-                        " has failed, it will be removed\n" +
-                        "    ____________________________________________________________");
+                ui.printLoadingError(tasknumber);
             }
             tasknumber++;
         }

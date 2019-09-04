@@ -1,6 +1,6 @@
-# JavaFX Tutorial 3 – Interacting with the user
+# JavaFX Tutorial 3 – Interacting with the Ui
 
-Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user input. 
+Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to Ui input. 
 
 Rather than to do everything in one try, let’s iterate and build up towards our final goal. 
 
@@ -8,7 +8,7 @@ Rather than to do everything in one try, let’s iterate and build up towards ou
 
 JavaFX has an _event-driven architecture style_. As such, we programmatically define _handler_ methods to execute as a response to certain _events_. When an event is detected, JavaFX will call the respective handlers.
 
-For Duke, there are two events that we want to respond to, namely the user pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
+For Duke, there are two events that we want to respond to, namely the Ui pressing `Enter` in the `TextField` and left-clicking the `Button`. These are the `onAction` event for the `TextField` and the `onMouseClicked` event for the `Button`.
 
 For now, let’s have the application add a new `Label` with the text from the `TextField`. Update the `Main` class as follows. You'll need to add an `import javafx.scene.control.Label;` too.
 ```java
@@ -18,7 +18,7 @@ public void start(Stage stage) {
 
     //Step 2 code here
 
-    //Step 3. Add functionality to handle user input.
+    //Step 3. Add functionality to handle Ui input.
     sendButton.setOnMouseClicked((event) -> {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();
@@ -103,7 +103,7 @@ import javafx.scene.image.ImageView;
 ```
 
 Next, add two images to the `main/resources/images` folder.
-For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the user avatar and Duke's avatar respectively but you can use any image you want.
+For this tutorial, we have two images `DaUser.png` and `DaDuke.png` to represent the Ui avatar and Duke's avatar respectively but you can use any image you want.
 
 Image|Filename
 ---|---
@@ -114,31 +114,31 @@ Image|Filename
 ```java
 public class Duke extends Application {
     // ...
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image Ui = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     // ...
 }
 ```
 
-Add a new method to handle user input:
+Add a new method to handle Ui input:
 ```java
 /**
  * Iteration 2:
- * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
- * the dialog container. Clears the user input after processing.
+ * Creates two dialog boxes, one echoing Ui input and the other containing Duke's reply and then appends them to
+ * the dialog container. Clears the Ui input after processing.
  */
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-            new DialogBox(userText, new ImageView(user)),
+            new DialogBox(userText, new ImageView(Ui)),
             new DialogBox(dukeText, new ImageView(duke))
     );
     userInput.clear();
 }
 
 /**
- * You should have your own function to generate a response to user input.
+ * You should have your own function to generate a response to Ui input.
  * Replace this stub with your completed method.
  */
 private String getResponse(String input) {
@@ -153,7 +153,7 @@ Update the event handler code in the `start` method to use the new `handleUserIn
 public void start(Stage stage) {
     //...
 
-    //Part 3. Add functionality to handle user input.
+    //Part 3. Add functionality to handle Ui input.
     sendButton.setOnMouseClicked((event) -> {
         handleUserInput();
     });
@@ -170,7 +170,7 @@ Run the program and see how it works.
 
 ## Iteration 3 – Adding custom behavior to DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user input and Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between Ui input and Duke’s output.
 
 ```java
 /**
@@ -212,7 +212,7 @@ private void handleUserInput() {
     Label userText = new Label(userInput.getText());
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(userText, new ImageView(user)),
+            DialogBox.getUserDialog(userText, new ImageView(Ui)),
             DialogBox.getDukeDialog(dukeText, new ImageView(duke))
     );
     userInput.clear();

@@ -1,29 +1,22 @@
+import Ui.TextUi;
 import storage.Storage;
 import tasklist.TaskList;
 import parser.Parser;
 
 import java.io.IOException;
-import java.lang.reflect.Parameter;
 import java.util.Scanner;
 
 public class Duke {
     private Storage saveFile;
+    private TextUi ui;
 
     public Duke(String filepath) throws IOException {
         saveFile = new Storage(filepath);
+        ui = new TextUi();
     }
 
     public void run() throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________");
-
+        ui.printIntroduction();
         Scanner input = new Scanner(System.in);
         String user = input.nextLine();
         TaskList scheduler;
@@ -31,18 +24,13 @@ public class Duke {
 
         while (!user.equals("bye")) {
             scheduler = new TaskList(saveFile.loadData());
-            parser.parse(user, scheduler);
-            if (!parser.isSafe()) {
-                continue;
-            }
+            parser.parse(user, scheduler,false);
             saveFile.storeData(scheduler.getTaskList());
             user = input.nextLine();
         }
 
+        ui.printGoodByeMsg();
 
-        System.out.println("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________");
     }
 
 

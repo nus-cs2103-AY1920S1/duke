@@ -1,3 +1,6 @@
 todo [1]johns birthday
-todo [1]lol
 deadline [1]monthsarry/by12/02/2020 2000
+deadline [0]finish this/by04/09/2019 0100
+todo [0]sy
+deadline [0]asdasdf/by02/02/2019 2000
+deadline [0]asdasdf/by02/02/2019 2000

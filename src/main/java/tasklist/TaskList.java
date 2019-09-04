@@ -1,47 +1,37 @@
 package tasklist;
 
+import Ui.TextUi;
+
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class TaskList {
-    private LinkedList<Task> taskList;
+    protected LinkedList<Task> taskList;
+    private TextUi ui;
 
     public TaskList(){
         taskList = new LinkedList<Task>();
+        ui = new TextUi();
     }
 
 
     public TaskList(LinkedList<Task> loadedList){
         taskList = loadedList;
+        ui = new TextUi();
     }
 
 
     public void printnewtask(){
-
-        System.out.println("    ____________________________________________________________\n" +
-                "     Got it. I've added this task: \n" +
-                "       " + taskList.getLast().getOverallStatus() + "\n" +
-                "     Now you have " + taskList.size() + " tasks in the list.\n" +
-                "    ____________________________________________________________");
+        ui.printAddedTask(taskList.getLast().getOverallStatus(),taskList.size());
     }
 
     public void listTasks() {
-        int i = 0;
-        System.out.println("    ____________________________________________________________\n" +
-                "     Here are the tasks in your list:");
-        while (i < taskList.size()) {
-            System.out.println("     "+ (i+1) + ". " + taskList.get(i).getOverallStatus());
-            i++;
-        }
-        System.out.println("    ____________________________________________________________");
+        ui.printTaskList(taskList);
     }
     public void completeTask(String completedtask){
         int taskNumber = Integer.parseInt(completedtask);
         taskList.get(taskNumber-1).CompleteTask();
-        System.out.println("    ____________________________________________________________\n" +
-                "     Nice! I've marked this task as done: \n" +
-                "       "+ taskList.get(taskNumber-1).getOverallStatus() +"\n" +
-                "    ____________________________________________________________");
+        ui.printCompletedTask(taskList.get(taskNumber-1).getOverallStatus());
     }
 
     public void addTask(String taskType ,String description, boolean completionStatus , LocalDateTime date ) {
@@ -56,17 +46,12 @@ public class TaskList {
             taskList.addLast(new Event(description, completionStatus, date));
             break;
         }
-        printnewtask();
     }
 
 
     public void removeTask(String deletedEvent){
         int taskTodDelete = Integer.parseInt(deletedEvent);
-        System.out.println("    ____________________________________________________________\n" +
-                "     Noted. I've removed this task: \n" +
-                "       "+ taskList.get(taskTodDelete-1).getOverallStatus() +"\n" +
-                "     Now you have " + (taskList.size()-1) + " tasks in the list.\n" +
-                "    ____________________________________________________________");
+        ui.printRemovedTask(taskList.get(taskTodDelete-1).getOverallStatus(),taskList.size());
         taskList.remove(taskTodDelete-1);
     }
 

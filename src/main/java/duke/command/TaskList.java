@@ -11,7 +11,7 @@ public class TaskList {
 
     /**
      * Constructs a taskList object.
-     * @param arrayList arrayList that the represents the TaskList.
+     * @param arrayList ArrayList that the represents the TaskList.
      */
     public TaskList(ArrayList<Task> arrayList) {
         arr = arrayList;
@@ -26,7 +26,7 @@ public class TaskList {
 
     /**
      * Returns the Tasks that are in Database.
-     * @return arrayList of Tasks
+     * @return ArrayList of Tasks
      */
     public ArrayList<Task> getArr() {
         return arr;

@@ -3,7 +3,7 @@ package duke.command;
 import java.util.ArrayList;
 
 /**
- * Makes sense of user commands and holds and arrayList containing information of how to process commands.
+ * Makes sense of user commands and holds and ArrayList containing information of how to process commands.
  */
 public class Parser {
     private boolean valid = true;
@@ -11,7 +11,7 @@ public class Parser {
     private String type;
 
     /**
-     * Creates a Parser object that takes a command and processes an arrayList containing information to be used to
+     * Creates a Parser object that takes a command and processes an ArrayList containing information to be used to
      * declare and initialize Tasks.
      * @param command command provided by user.
      * @throws DukeException exception returned when format of command not right.
@@ -123,7 +123,7 @@ public class Parser {
 
     /**
      * Returns information about the command to be executed.
-     * @return arrayList that contains particular command information at each index.
+     * @return ArrayList that contains particular command information at each index.
      */
     public ArrayList<String> getList() {
         return list;

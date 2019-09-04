@@ -6,7 +6,7 @@ import duke.command.Parser;
  */
 public class ToDo extends Task {
     /**
-     * Creates an object using information from the arrayList of the Parser.
+     * Creates an object using information from the ArrayList of the Parser.
      * @param parser parser that contains information about the ToDo object.
      */
     public ToDo(Parser parser) {
@@ -15,7 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a Todo object with description as input.
-     * @param des descrption of the ToDo object.
+     * @param des description of the ToDo object.
      */
     public ToDo(String des) {
         super(des);

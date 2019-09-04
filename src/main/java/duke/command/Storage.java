@@ -22,8 +22,8 @@ public class Storage {
     }
 
     /**
-     * Processes data in the history file and creates an arrayList holding the User's tasks.
-     * @return arrayList holding the Tasks retrieved from history file.
+     * Processes data in the history file and creates an ArrayList holding the User's tasks.
+     * @return ArrayList holding the Tasks retrieved from history file.
      * @throws DukeException thrown if a task is of invalid format.
      * @throws IOException thrown id filePath is non-Existent.
      */

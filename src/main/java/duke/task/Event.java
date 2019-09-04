@@ -12,7 +12,7 @@ public class Event extends Task {
     private Calendar endTime;
 
     /**
-     * Creates duke.task.Event object taking info from Parser's arrayList.
+     * Creates duke.task.Event object taking info from Parser's ArrayList.
      * @param parser
      */
     public Event(Parser parser) {

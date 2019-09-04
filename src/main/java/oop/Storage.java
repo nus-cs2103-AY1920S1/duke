@@ -1,11 +1,19 @@
+package oop;
+
+import exceptions.DukeException;
+
+import tasks.Task;
+import tasks.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
  * The Storage class handles all reading of data from files and writing of data to
- the files.
+ * the files.
  */
 public class Storage {
     /**
@@ -46,7 +54,7 @@ public class Storage {
     /**
      * Writes the data retrieved from TaskList to the text file.
      * @param list The TaskList where updated data is retrieved from, and
-     to be written to the text file.
+     *       to be written to the text file.
      */
     public void writeToFile(TaskList list) {
         try {

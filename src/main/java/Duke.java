@@ -1,3 +1,13 @@
+import commands.Command;
+
+import exceptions.DukeException;
+
+import oop.Parser;
+import oop.Storage;
+import oop.Ui;
+
+import tasks.TaskList;
+
 /**
  * Duke is the main class of the app, where the execution command exists.
  */
@@ -51,6 +61,11 @@ public class Duke {
         }
     }
 
+    /**
+     * A method to retrieve the necessary String output after the Application parses the user's input.
+     * @param input The input by the user.
+     * @return
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

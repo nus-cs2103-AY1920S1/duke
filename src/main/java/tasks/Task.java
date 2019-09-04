@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * The Task class handles all types of tasks a user will input.
  */
@@ -9,7 +11,7 @@ public abstract class Task {
 
     /**
      * A boolean to represent the status of the task, true if completed,
-     false if not completed.
+     * false if not completed.
      */
     protected boolean isDone;
 
@@ -41,7 +43,7 @@ public abstract class Task {
 
     /**
      * A method to retrieve the status icon representing the status of the task.
-     1 if done, 0 if not done.
+     * 1 if done, 0 if not done.
      * @return
      */
     protected String getStatusIcon() {
@@ -64,7 +66,7 @@ public abstract class Task {
 
     /**
      * Overrides the underlying Object toString method to print Task in
-     the desired format to show to users.
+     * the desired format to show to users.
      * @return Returns formatted String representing Task.
      */
     @Override

@@ -1,6 +1,10 @@
+package tasks;
+
+import oop.Date;
+
 /**
  * The Event class is a type of task. It contains a description of the
- event and additional information such as the date of the event.
+ * event and additional information such as the date of the event.
  */
 public class Event extends Task {
     /**
@@ -46,7 +50,7 @@ public class Event extends Task {
 
     /**
      * Overrides the underlying Object toString method to print Event in
-     the desired format to show to users.
+     * the desired format to show to users.
      * @return Returns formatted String representing Event.
      */
     @Override

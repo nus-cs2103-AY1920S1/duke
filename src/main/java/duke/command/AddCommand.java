@@ -33,8 +33,9 @@ public class AddCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task addTask;
+        String outputString = "";
         if (commandSplit[0].equalsIgnoreCase(deadline)) {
             String details = super.stringCommand.substring(deadline.length()).trim();
             if (details.length() == 0) {
@@ -42,8 +43,8 @@ public class AddCommand extends Command {
             }
             String[] detail = details.split(" /by ");
             addTask = new Deadline(detail[0], detail[1]);
-            ui.printAddedMessage();
-            ui.printTask(addTask);
+            outputString = outputString + ui.printAddedMessage();
+            outputString = outputString + ui.printTask(addTask);
             taskList.add(addTask);
         } else if (commandSplit[0].equalsIgnoreCase(event)) {
             String details = super.stringCommand.substring(event.length()).trim();
@@ -52,8 +53,8 @@ public class AddCommand extends Command {
             }
             String[] detail = details.split(" /at ");
             addTask = new Event(detail[0], detail[1]);
-            ui.printAddedMessage();
-            ui.printTask(addTask);
+            outputString = outputString + ui.printAddedMessage();
+            outputString = outputString + ui.printTask(addTask);
             taskList.add(addTask);
         } else if (commandSplit[0].equalsIgnoreCase(todo)) {
             String details = super.stringCommand.substring(todo.length()).trim();
@@ -61,11 +62,12 @@ public class AddCommand extends Command {
                 throw new InputMismatchException("The description of a todo cannot be empty.");
             }
             addTask = new Todo(details);
-            ui.printAddedMessage();
-            ui.printTask(addTask);
+            outputString = outputString + ui.printAddedMessage();
+            outputString = outputString + ui.printTask(addTask);
             taskList.add(addTask);
         }
-        ui.printNumberOfTasks(taskList);
+        outputString = outputString + ui.printNumberOfTasks(taskList);
+        return outputString;
     }
 
     /**

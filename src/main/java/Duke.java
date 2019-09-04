@@ -43,27 +43,23 @@ public class Duke {
     }
 
     /**
-     * Runs duke.
-     */
-    public void run() {
-        ui.greet();
-        while (!isExit) {
-            try {
-                String stringCommand = ui.readCommand();
-                Command command = new Parser().parse(stringCommand);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException e) {
-                ui.printErrorMessage(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the String representation of the output.
+     * @param input user input
+     * @return output from Duke
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = "";
+            try {
+                Command command = new Parser().parse(input);
+                output = command.execute(taskList, ui, storage);
+            } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException e) {
+                output = ui.printErrorMessage(e.getMessage());
+            }
+
+        return output;
+    }
+
+    public String greeting() {
+        return ui.greet();
     }
 }

@@ -17,115 +17,108 @@ public class Ui {
     public Ui() {
     }
 
-    /**
-     * Returns String representation of user input.
-     * @return String representation of user input
-     */
-    public String readCommand() {
-        String command = "";
-        if (scanner.hasNextLine()) {
-            command = scanner.nextLine();
-        }
-        return command;
-    }
 
     /**
-     * Prints out the number of tasks in the taskList.
+     * Returns the number of tasks in the taskList.
      * @param taskList
      */
-    public void printNumberOfTasks(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getTasks().size()
-                + " tasks in the list.");
+    public String printNumberOfTasks(TaskList taskList) {
+        return ("Now you have " + taskList.getTasks().size()
+                + " tasks in the list.") + "\n";
     }
 
     /**
-     * Prints out the string representation of task t.
+     * Returns the string representation of task t.
      * @param t duke.task.Task to be printed out
      */
-    public void printTask(Task t) {
-        System.out.println(t.toString());
+    public String printTask(Task t) {
+        return (t.toString()) + "\n";
     }
 
     /**
-     * Prints out the string representation of all the tasks in taskList
+     * Returns the String representation of all the tasks in taskList
      * @param taskList
      */
-    public void printTaskList(TaskList taskList) {
+    public String printTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         int number = 1;
+        String outputString = "";
         for (Task task : tasks) {
-            String outputString = number + ". " + task.toString();
-            System.out.println(outputString);
+             outputString = outputString + number + ". " + task.toString() + "\n";
             number++;
         }
+        return outputString + "\n";
     }
 
     /**
-     * Prints out the error message.
+     * String representation of the error message.
      * @param error
      */
-    public void printErrorMessage(String error) {
-        System.out.println("OOPS!!! " + error );
+    public String printErrorMessage(String error) {
+        return "OOPS!!! " + error + "\n";
     }
 
     /**
-     * Prints out the pre-message for the add command.
+     * String representation of the pre-message for the add command.
      */
-    public void printAddedMessage() {
-        System.out.println("Got it. I've added this task:");
+    public String printAddedMessage() {
+        return ("Got it. I've added this task:") + "\n";
     }
 
     /**
-     * Prints out the pre-message for the delete command.
+     * String representation of the pre-message for the delete command.
      */
-    public void printDeletedMessage() {
-        System.out.println("Noted. I've removed this task:");
+    public String printDeletedMessage() {
+        return ("Noted. I've removed this task:") + "\n";
     }
 
     /**
-     * Prints out the pre-message for the done command.
+     * String representation of the pre-message for the done command.
      */
-    public void printDoneMessage() {
-        System.out.println("Nice! I've marked this task as done: ");
+    public String printDoneMessage() {
+        return ("Nice! I've marked this task as done: ") + "\n";
     }
 
     /**
-     * Prints out the pre-message for the list command.
+     * String representation of the pre-message for the list command.
      */
-    public void printListMessage() {
-        System.out.println("Here are the tasks in your list: ");
+    public String printListMessage() {
+        return ("Here are the tasks in your list: ") + "\n";
     }
 
     /**
-     * Prints out greetings for Duke bot.
+     * String representation of greetings for Duke bot.
      */
-    public void greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String greet() {
+        return ("Hello! I'm Duke\nWhat can I do for you?") + "\n";
     }
 
     /**
-     * Prints out the message for the bye command.
+     * String representation of the message for the bye command.
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String bye() {
+        return ("Bye. Hope to see you again soon!") + "\n";
     }
 
     /**
-     * Prints out the loading message error
+     * String representation of the loading message error
      */
-    public void showLoadingError() {
-        System.out.println("Error, file not found");
+    public String showLoadingError() {
+        return ("Error, file not found") + "\n";
     }
 
     /**
-     * Prints out the message for the find command.
+     * String representation of the message for the find command.
      */
-    public void printFindMessage(ArrayList<Task> tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String printFindMessage(ArrayList<Task> tasks) {
+        String outputString = "";
+        outputString = "Here are the matching tasks in your list:\n" ;
         int count = 1;
         for (Task t : tasks) {
-            System.out.println(count + "." + t.toString());
+            String taskString = count + "." + t.toString() + "\n";
+            outputString = outputString + taskString;
             count++;
         }
+        return outputString + "\n";
     }
 }

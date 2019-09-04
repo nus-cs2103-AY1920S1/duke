@@ -29,11 +29,13 @@ public class DoneCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String outputString = "";
         int index = Integer.parseInt(commandSplit[1]);
-        ui.printDoneMessage();
+        outputString = outputString + ui.printDoneMessage();
         taskList.done(index);
-        ui.printTask(taskList.getTasks().get(index-1));
+        outputString = outputString + ui.printTask(taskList.getTasks().get(index-1));
+        return outputString;
     }
 
     /**

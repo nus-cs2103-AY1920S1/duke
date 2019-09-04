@@ -41,7 +41,7 @@ public class Storage {
      */
     public TaskList load() throws IOException, ClassNotFoundException {
         if (!Files.exists(path)) {
-            return new TaskList();
+            throw new IOException("File does not exist.");
         }
         FileInputStream fis = new FileInputStream(path.toString());
         ObjectInputStream ois = new ObjectInputStream(fis);

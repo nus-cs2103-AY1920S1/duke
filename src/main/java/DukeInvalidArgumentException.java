@@ -3,11 +3,9 @@
  * DukeException to handle invalid arguments.
  */
 public class DukeInvalidArgumentException extends DukeException {
-
-	protected String inputMessage;
+	private String inputMessage;
 
 	public DukeInvalidArgumentException(String message, String inputMessage) {
-
 		super(message);
 		this.inputMessage = inputMessage;
 	}
@@ -21,7 +19,6 @@ public class DukeInvalidArgumentException extends DukeException {
 	 */
 	@Override
 	public String toString() {
-
 		return super.toString() + "\nInput by user: " + inputMessage;
 	}
 }

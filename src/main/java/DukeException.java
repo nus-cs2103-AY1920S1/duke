@@ -3,14 +3,11 @@
  * handle certain edge cases.
  */
 public class DukeException extends Exception {
-
 	protected String inputMessage;
 
 	public DukeException(String inputMessage) {
-
 		this.inputMessage = inputMessage;
 	}
-
 
 	/**
 	 * Returns the exception message.
@@ -19,7 +16,6 @@ public class DukeException extends Exception {
 	 */
 	@Override
 	public String toString() {
-
 		return this.inputMessage;
 	}
 }

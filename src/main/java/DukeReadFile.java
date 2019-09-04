@@ -9,10 +9,9 @@ import java.util.Scanner;
  */
 public class DukeReadFile {
 
-	protected static String filePath;
-	protected static String currentTask = "";
-	protected static ArrayList<Task> ct = new ArrayList<>();
-	static String border = "____________________________________________________________";
+	private static String filePath;
+	private static String currentTask = "";
+	private static ArrayList<Task> currentTaskList = new ArrayList<>();
 
 	public DukeReadFile(String filePath) {
 
@@ -44,7 +43,7 @@ public class DukeReadFile {
 				if (at[1].equals("1")) {
 					td.markAsDone();
 				}
-				ct.add(td);
+				currentTaskList.add(td);
 
 			} else if (addTask[i].startsWith("D")) {
 				String[] at = addTask[i].split("~");
@@ -52,7 +51,7 @@ public class DukeReadFile {
 				if (at[1].equals("1")) {
 					dl.markAsDone();
 				}
-				ct.add(dl);
+				currentTaskList.add(dl);
 
 			} else if (addTask[i].startsWith("E")) {
 				String[] at = addTask[i].split("~");
@@ -60,11 +59,8 @@ public class DukeReadFile {
 				if (at[1].equals("1")) {
 					e.markAsDone();
 				}
-				ct.add(e);
-			} else {
-
+				currentTaskList.add(e);
 			}
-
 		}
 	}
 
@@ -77,6 +73,6 @@ public class DukeReadFile {
 	 */
 	public static ArrayList<Task> myTask() {
 
-		return ct;
+		return currentTaskList;
 	}
 }

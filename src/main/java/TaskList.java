@@ -14,7 +14,6 @@ public class TaskList {
 	}
 
 	public TaskList(ArrayList<Task> loadFile) {
-
 		tasks = new ArrayList<>();
 		tasks.addAll(loadFile);
 		counter = tasks.size();
@@ -26,9 +25,7 @@ public class TaskList {
 	 * @param task Current task.
 	 */
 	public void addTask(Task task) {
-
 		tasks.add(task);
-		counter++;
 	}
 
 
@@ -38,9 +35,7 @@ public class TaskList {
 	 * @param index Index of the tasks to be deleted.
 	 */
 	public void deleteTask(int index) {
-
 		tasks.remove(index);
-		counter--;
 	}
 
 
@@ -50,7 +45,7 @@ public class TaskList {
 	 * @return
 	 */
 	public int getCounter() {
-		return counter;
+		return tasks.size();
 	}
 
 	/**

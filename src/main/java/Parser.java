@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * the input by the user to a specified format.
  */
 public class Parser {
-
 	Ui ui;
 	TaskList tasks;
 	DukeReadFile rf;
@@ -15,7 +14,6 @@ public class Parser {
 
 
 	public Parser(Ui ui, TaskList tasks, DukeReadFile rf, DukeWriteFile wf) {
-
 		this.ui = ui;
 		this.tasks = tasks;
 		this.rf = rf;
@@ -30,13 +28,13 @@ public class Parser {
 	 *
 	 * @param input Input of the tasks of the user.
 	 */
-	public void evaluate(String input) {
+	public void evaluate(String input) throws DukeException, DukeInvalidArgumentException {
 		int counter = 0;
 		if (input.equals("bye")) {
 			System.out.println(ui.OUTRO);
 			isEndLoop = true;
 		} else if (input.startsWith("find")) {
-			try {
+
 				if (input.length() < 5) {
 					throw new DukeException(ui.EMPTY_INPUT);
 				}
@@ -50,9 +48,7 @@ public class Parser {
 					}
 				}
 				System.out.println(ui.BORDER);
-			} catch (DukeException e) {
-				System.out.println(e);
-			}
+
 		} else if (input.equals("list")) {
 			int itemNumber = 1;
 			counter = tasks.getCounter();
@@ -81,17 +77,9 @@ public class Parser {
 				tasks.getTask(taskIndex - 1).markAsDone();
 				System.out.println(ui.MARK_DONE);
 				System.out.println(tasks.getTask(taskIndex - 1).toString() + "\n" + ui.BORDER);
-				wf.writeToFile(Duke.writeFile(tasks.getTaskList()));
+				wf.writeToFile(DukeWriteFile.writeFile(tasks.getTaskList()));
 
-			} catch (DukeInvalidArgumentException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
-
-			} catch (DukeException e) {
-
-				System.out.println(e);
-
-			} catch (IndexOutOfBoundsException e) {
+			}  catch (IndexOutOfBoundsException e) {
 
 				System.out.println(ui.BORDER + "\nTask number not found! Try again!\n" + ui.BORDER);
 			} catch (NumberFormatException e) {
@@ -123,15 +111,7 @@ public class Parser {
 				wf.appendToFile("D~" + newDeadLine.getStatus() + "~" +
 						newDeadLine.getDescription() + "~" + newDeadLine.getDeadline() + "\n");
 
-			} catch (DukeInvalidArgumentException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
-
-			} catch (DukeException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			} catch (IOException e) {
-
 				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			}
 
@@ -158,15 +138,7 @@ public class Parser {
 				wf.appendToFile("E~" + newEvent.getStatus() + "~" +
 						newEvent.getDescription() + "~" + newEvent.getVenue() + "\n");
 
-			} catch (DukeInvalidArgumentException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
-
-			} catch (DukeException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			} catch (IOException e) {
-
 				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			}
 
@@ -186,10 +158,7 @@ public class Parser {
 				wf.appendToFile("T~" + newToDo.getStatus() + "~" +
 						newToDo.getDescription() + "\n");
 
-			} catch (DukeException e) {
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			} catch (IOException e) {
-
 				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			}
 
@@ -212,11 +181,7 @@ public class Parser {
 
 				counter = tasks.getCounter();
 				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.writeToFile(Duke.writeFile(tasks.getTaskList()));
-
-			} catch (DukeInvalidArgumentException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
+				wf.writeToFile(DukeWriteFile.writeFile(tasks.getTaskList()));
 
 			} catch (NumberFormatException e) {
 
@@ -226,21 +191,13 @@ public class Parser {
 
 				System.out.println(ui.BORDER + "\nTask number not found! Try again!\n" + ui.BORDER);
 
-			} catch (DukeException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
-
 			} catch (IOException e) {
 
 				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 
 			}
 		} else {
-			try {
 				throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-			} catch (DukeException e) {
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
-			}
 		}
 	}
 

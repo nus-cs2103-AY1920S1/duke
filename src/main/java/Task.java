@@ -1,14 +1,14 @@
-/**
- * Creates a task with a description which is to be added
- * to the task list.
- */
 public class Task {
 
 	protected String description;
 	protected boolean isDone;
 
+	/**
+	 * Creates a task with a description which is to be added
+	 * to the task list.
+	 * @param description Description of task.
+	 */
 	public Task(String description) {
-
 		this.description = description;
 		this.isDone = false;
 	}
@@ -20,7 +20,6 @@ public class Task {
 	 * @return An icon.
 	 */
 	public String getStatusIcon() {
-
 		return (isDone ? "x" : " "); //return tick or X symbols
 	}
 
@@ -29,13 +28,11 @@ public class Task {
 	 * the task as completed.
 	 */
 	public void markAsDone() {
-
 		this.isDone = true;
 	}
 
 
 	public void markNotDone() {
-
 		this.isDone = false;
 	}
 
@@ -58,7 +55,6 @@ public class Task {
 	 * @return 1 or 0 to indicate completion of task.
 	 */
 	public int getStatus() {
-
 		return isDone ? 1 : 0;
 	}
 
@@ -69,7 +65,6 @@ public class Task {
 	 */
 	@Override
 	public String toString() {
-
 		return "[" + this.getStatusIcon() + "] " + this.description;
 	}
 }

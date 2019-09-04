@@ -1,12 +1,11 @@
 /**
- * Conversion for date and time from dd/mm/yyyy to [date] of [month] and 24 hour to 12 hour format
+ * Converter for date and time from dd/mm/yyyy to [date] of [month] and 24 hour to 12 hour format
  * respectively.
  */
 public class DateAndTime {
-
-	protected String date;
-	protected String time;
-	String border = "____________________________________________________________";
+	private String date;
+	private String time;
+	final static String border = "____________________________________________________________";
 
 	public DateAndTime() {
 		date = "";
@@ -14,17 +13,15 @@ public class DateAndTime {
 	}
 
 	/**
-	 * Changing the format of the date from dd/mm/yyyy to [date] of [month] [year]
+	 * Changing the format of the date from dd/mm/yyyy to [date] of [month] [year].
 	 *
 	 * @param date Date of the deadline or event.
 	 * @return Formatted date.
 	 */
 	public String formatDate(String date) {
 		String formattedDate = "";
-
 		try {
 			String[] dateFormat = date.split("/");
-
 			int day = Integer.parseInt(dateFormat[0]);
 			String month = dateFormat[1];
 			String year = dateFormat[2];
@@ -77,13 +74,11 @@ public class DateAndTime {
 			isString = true;
 		} catch (DukeException e) {
 			System.out.println(border + "\n" + e + "\n" + border);
-
 		} finally {
 			if (isString) {
 				formattedTime = time;
 			}
 		}
-
 		return formattedTime;
 	}
 
@@ -127,7 +122,6 @@ public class DateAndTime {
 		} else {
 			dayFormat = day + "th";
 		}
-
 		return dayFormat;
 	}
 
@@ -141,46 +135,83 @@ public class DateAndTime {
 
 		String translatedMonth = "";
 		switch (month) {
-			case "1":
-				translatedMonth = "January";
-				break;
-			case "2":
-				translatedMonth = "February";
-				break;
-			case "3":
-				translatedMonth = "March";
-				break;
-			case "4":
-				translatedMonth = "April";
-				break;
-			case "5":
-				translatedMonth = "May";
-				break;
-			case "6":
-				translatedMonth = "June";
-				break;
-			case "7":
-				translatedMonth = "July";
-				break;
-			case "8":
-				translatedMonth = "August";
-				break;
-			case "9":
-				translatedMonth = "September";
-				break;
-			case "10":
-				translatedMonth = "October";
-				break;
-			case "11":
-				translatedMonth = "November";
-				break;
-			case "12":
-				translatedMonth = "December";
-				break;
-			default:
-				System.out.println("Wrong month");
-				break;
+		case "1":
+			translatedMonth = "January";
+			break;
+		case "2":
+			translatedMonth = "February";
+			break;
+		case "3":
+			translatedMonth = "March";
+			break;
+		case "4":
+			translatedMonth = "April";
+			break;
+		case "5":
+			translatedMonth = "May";
+			break;
+		case "6":
+			translatedMonth = "June";
+			break;
+		case "7":
+			translatedMonth = "July";
+			break;
+		case "8":
+			translatedMonth = "August";
+			break;
+		case "9":
+			translatedMonth = "September";
+			break;
+		case "10":
+			translatedMonth = "October";
+			break;
+		case "11":
+			translatedMonth = "November";
+			break;
+		case "12":
+			translatedMonth = "December";
+			break;
+		default:
+			System.out.println("Wrong month");
+			break;
 		}
 		return translatedMonth;
+	}
+
+	/**
+	 * Converting of the date and/or time of the deadline to the required format.
+	 *
+	 * @param time Date/time of the deadline.
+	 * @return Formatted date/time.
+	 */
+	public static String checkTime(String time) {
+		DateAndTime DateTime = new DateAndTime();
+		String[] timeAndDate = time.split(" ");
+		String formatDeadline = "";
+		for (int i = 0; i < timeAndDate.length; i++) {
+			String[] date = timeAndDate[i].split("/");
+			if (date.length == 3) {
+				if (i == 0) {
+					formatDeadline += DateTime.formatDate(timeAndDate[i]) + ", ";
+				} else if (i == timeAndDate.length - 1) {
+					formatDeadline += DateTime.formatDate(timeAndDate[i]);
+				} else {
+					formatDeadline += DateTime.formatDate(timeAndDate[i]) + ", ";
+				}
+			} else if (timeAndDate[i].length() == 4) {
+				if (i == 0) {
+					formatDeadline += DateTime.formatTime(timeAndDate[i]) + ", ";
+				} else if (i == timeAndDate.length - 1) {
+					formatDeadline += DateTime.formatTime(timeAndDate[i]);
+				} else {
+					formatDeadline += DateTime.formatTime(timeAndDate[i]) + ", ";
+				}
+			} else {
+				if (i == 0 || i != timeAndDate.length - 1) {
+					formatDeadline += timeAndDate[i] + " ";
+				}
+			}
+		}
+		return formatDeadline;
 	}
 }

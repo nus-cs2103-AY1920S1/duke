@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Writes the current tasks in the lst to a text document
@@ -18,12 +19,12 @@ public class DukeWriteFile {
 	/**
 	 * Writes the current task in the list to the text document.
 	 *
-	 * @param textToaAdd Current tasks in the list.
+	 * @param textToAdd Current tasks in the list.
 	 * @throws IOException
 	 */
-	public static void writeToFile(String textToaAdd) throws IOException {
+	public static void writeToFile(String textToAdd) throws IOException {
 		FileWriter fw = new FileWriter(filePath);
-		fw.write(textToaAdd);
+		fw.write(textToAdd);
 		fw.close();
 	}
 
@@ -39,6 +40,33 @@ public class DukeWriteFile {
 		FileWriter fw = new FileWriter(filePath, true);
 		fw.write(textToAppend);
 		fw.close();
+	}
+
+	/**
+	 * Converting current tasks in the list to a string
+	 * in order to write onto a text document.
+	 *
+	 * @param currentTask Tasks that are on the list.
+	 * @return String of the task on the list.
+	 */
+	public static String writeFile(ArrayList<Task> currentTask) {
+		String writeTask = "";
+
+		for (int i = 0; i < currentTask.size(); i++) {
+
+			if (currentTask.get(i) instanceof Todo) {
+				writeTask += "T~" + currentTask.get(i).getStatus() +
+						"~" + currentTask.get(i).getDescription() + "\n";
+			} else if (currentTask.get(i) instanceof Event) {
+				writeTask += "E~" + currentTask.get(i).getStatus() +
+						"~" + currentTask.get(i).getDescription() + "~" + ((Event) currentTask.get(i)).getVenue() +
+						"\n";
+			} else {
+				writeTask += "D~" + currentTask.get(i).getStatus() +
+						"~" + currentTask.get(i).getDescription() + "~" + ((Deadline) currentTask.get(i)).getDeadline() + "\n";
+			}
+		}
+		return writeTask;
 	}
 
 }

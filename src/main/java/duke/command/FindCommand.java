@@ -7,9 +7,25 @@ import duke.ui.UI;
 import duke.task.Task;
 import java.util.ArrayList;
 
+/**
+ * Class that represents command to find tasks.
+ */
 public class FindCommand extends Command {
+
+    /**
+     * The tasks to be printed.
+     */
     private TaskList toBePrinted;
+
+    /**
+     * The keyword to find in the list.
+     */
     private String input;
+
+    /**
+     * Constructor that takes in the keyword to find.
+     * @param message The keyword.
+     */
     public FindCommand(String message) {
         super(message);
         toBePrinted = new TaskList();

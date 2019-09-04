@@ -1,6 +1,5 @@
 package duke.command;
 
-import com.sun.tools.javac.Main;
 import duke.task.TaskList;
 import duke.task.TaskStub;
 import duke.ui.MainWindowStub;
@@ -25,7 +24,7 @@ class DeleteCommandTest {
         assertEquals(1, testTasks.getSize());
         deleteCommand.run(testTasks, windowStub, null);
         assertEquals(0, testTasks.getSize());
-        assertTrue(windowStub.getMessages().contains(" Noted. I've removed this task:"));
+        assertTrue(windowStub.getMessages().contains("Noted. I've removed this task:"));
     }
 
     @Test

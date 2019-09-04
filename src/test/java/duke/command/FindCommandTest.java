@@ -5,7 +5,6 @@ import duke.task.TaskList;
 import duke.task.TaskStub;
 import duke.ui.MainWindowStub;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;

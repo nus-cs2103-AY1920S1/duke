@@ -31,7 +31,7 @@ class FindCommand extends Command {
      */
     FindCommand(String commandString, String[] commandArgs) {
         this(commandArgs);
-        searchPattern = commandString.replaceFirst("find\\s", "");
+        searchPattern = commandString.replaceFirst("find\\s?", "");
     }
 
     /**
@@ -44,12 +44,12 @@ class FindCommand extends Command {
     @Override
     void run(TaskList tasks, MainWindow ui, Storage storage) {
         StringBuilder displayMessage = new StringBuilder(
-                " Here are the matching tasks in your list:\n");
+                "Here are the matching tasks in your list:\n");
 
         int taskIndex = 1;
         for (Task task : tasks.getAllTasks()) {
             if (task.getDescription().contains(searchPattern)) {
-                displayMessage.append(String.format(" %d.%s\n", taskIndex, task.getStatusText()));
+                displayMessage.append(String.format("%d.%s\n", taskIndex, task.getStatusText()));
                 taskIndex++;
             }
         }

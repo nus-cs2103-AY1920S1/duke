@@ -28,7 +28,7 @@ class ByeCommand extends Command {
      */
     @Override
     void run(TaskList tasks, MainWindow ui, Storage storage) {
-        ui.showMessage(" Bye. Hope to see you again soon!");
+        ui.showMessage("Bye. Hope to see you again soon!");
     }
 
     /**

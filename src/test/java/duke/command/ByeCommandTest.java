@@ -14,7 +14,7 @@ class ByeCommandTest {
         ByeCommand byeCommand = new ByeCommand(new String[0]);
         assertDoesNotThrow(() -> byeCommand.execute(null, windowStub, null));
 
-        assertEquals(windowStub.getMessages(), " Bye. Hope to see you again soon!");
+        assertEquals(windowStub.getMessages(), "Bye. Hope to see you again soon!");
     }
 
     @Test

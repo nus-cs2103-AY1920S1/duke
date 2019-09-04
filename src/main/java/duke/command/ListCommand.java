@@ -30,11 +30,11 @@ class ListCommand extends Command {
     @Override
     void run(TaskList tasks, MainWindow ui, Storage storage) {
         StringBuilder displayMessage = new StringBuilder(
-                " Here are the matching tasks in your list:\n");
+                "Here are the matching tasks in your list:\n");
 
         int taskIndex = 1;
         for (Task task : tasks.getAllTasks()) {
-            displayMessage.append(String.format(" %d.%s\n", taskIndex, task.getStatusText()));
+            displayMessage.append(String.format("%d.%s\n", taskIndex, task.getStatusText()));
             taskIndex++;
         }
         ui.showMessage(displayMessage.toString());

@@ -34,9 +34,9 @@ class DeleteCommand extends WritableCommand {
     void run(TaskList tasks, MainWindow ui, Storage storage) {
         Task taskDeleted = tasks.deleteTaskByIndex(taskIndex);
 
-        ui.showMessage(" Noted. I've removed this task:\n"
+        ui.showMessage("Noted. I've removed this task:\n"
                 + String.format("   %s", taskDeleted.getStatusText())
-                + String.format(" Now you have %d tasks in the list.", tasks.getSize()));
+                + String.format("Now you have %d tasks in the list.", tasks.getSize()));
     }
 
     /**

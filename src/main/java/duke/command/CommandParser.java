@@ -19,7 +19,7 @@ public abstract class CommandParser {
 
         String[] inputs = commandString.split("\\s+");
         Commands commandType;
-        Command command = null;
+        Command command;
 
         try {
             commandType = Commands.valueOf(inputs[0].toUpperCase());

@@ -33,8 +33,8 @@ abstract class AddTaskCommand extends WritableCommand {
     void run(TaskList tasks, MainWindow ui, Storage storage) {
         tasks.addTask(taskToAdd);
 
-        ui.showMessage(" Got it. I've added this task:\n"
+        ui.showMessage("Got it. I've added this task:\n"
                 + String.format("   %s\n", taskToAdd.getStatusText())
-                + String.format(" Now you have %d tasks in the list.", tasks.getSize()));
+                + String.format("Now you have %d tasks in the list.", tasks.getSize()));
     }
 }

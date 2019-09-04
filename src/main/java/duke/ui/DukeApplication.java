@@ -33,7 +33,6 @@ public class DukeApplication extends Application {
                     Duke.class.getResource("/views/MainWindow.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
             duke = new Duke(fxmlLoader.<MainWindow>getController());
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().exitHandler =

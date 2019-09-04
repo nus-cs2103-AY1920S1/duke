@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,7 +29,7 @@ class TodoTaskTest {
     void getTiming() {
         assertDoesNotThrow(() -> {
             TodoTask todo = new TodoTask(TaskTestConstants.VALID_DESCRIPTION_1);
-            assertEquals(null, todo.getTiming());
+            assertNull(todo.getTiming());
         });
     }
 

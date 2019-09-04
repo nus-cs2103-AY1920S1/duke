@@ -11,10 +11,10 @@ public class Storage {
      * @return ioErrorMessage which prompts the user there is no duke.txt file.
      */
     public String ioErrorMessage() {
-        return printLine() +
-                "     Sorry there is no text file to read or write data.\n" +
-                printLine() +
-                "\n";
+        return printLine()
+                + "     Sorry there is no text file to read or write data.\n"
+                + printLine()
+                + "\n";
     }
 
     /**

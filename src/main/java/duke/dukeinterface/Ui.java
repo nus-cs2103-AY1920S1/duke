@@ -18,11 +18,11 @@ public class Ui {
      */
     public String greet() {
         sb = new StringBuilder();
-        String logo = "    o-o    o   o  o    o  o--o \n" +
-                "    |    \\    |    |   |   /    |    \n" +
-                "    |     O  |    |  OO     O-o  \n" +
-                "    |    /    |    |   |   \\    |    \n" +
-                "    o-o     o-o  o    o   o--o\n\n";
+        String logo = "    o-o    o   o  o    o  o--o \n"
+                + "    |    \\    |    |   |   /    |    \n"
+                + "    |     O  |    |  OO     O-o  \n"
+                + "    |    /    |    |   |   \\    |    \n"
+                + "    o-o     o-o  o    o   o--o\n\n";
 
         sb.append(logo);
         sb.append("     Hello! I'm Duke\n     What can I do for you?\n");

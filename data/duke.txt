@@ -1,4 +1,4 @@
-D | ✓ | running | 11:20am
-T | ✘ | borrow books
+T | ✓ | borrow books
 E | ✓ | project meeting | Thursday 7:00pm
 E | ✓ | bizit meeting | Tuesday 6:30pm
+T | ✘ | read books

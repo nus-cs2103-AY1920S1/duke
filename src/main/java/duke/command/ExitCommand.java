@@ -23,7 +23,6 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveList(tasks);
         ui.sayGoodbye();
-        System.exit(0);
     }
 
     /**

@@ -1,13 +1,11 @@
 package duke.command;
 
-import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents a command which shuts down duke.Duke.
- * @see Duke
+ * Represents a command which shuts down Duke.
  */
 
 public class ByeCommand extends Command{
@@ -32,7 +30,7 @@ public class ByeCommand extends Command{
     }
 
     /**
-     * Checks if duke.Duke will end.
+     * Checks if Duke will end.
      * @return true
      */
     @Override

@@ -97,7 +97,7 @@ public class Ui {
     }
 
     /**
-     * Prints out greetings for duke.Duke bot.
+     * Prints out greetings for Duke bot.
      */
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");

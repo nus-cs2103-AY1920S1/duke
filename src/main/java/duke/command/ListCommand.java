@@ -34,7 +34,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Checks if duke.Duke will end.
+     * Checks if Duke will end.
      * @return false
      */
     @Override

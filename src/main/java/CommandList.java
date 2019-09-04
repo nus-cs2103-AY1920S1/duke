@@ -18,6 +18,22 @@ public class CommandList extends Command {
             ui.printString(tempStr);
             count++;
         }
+    }
 
+    /**
+     * Executes the list command.
+     * @param tasks the task list
+     * @param storage the storage writer
+     * @return List
+     */
+    @Override
+    public String executeForGUI(TaskList tasks, Storage storage) {
+        String string = "Here are the tasks in your list:";
+        int count = 1;
+        for (Task t: tasks.getList()) {
+            string = string + "\n" + count + "." + t.toString();
+            count++;
+        }
+        return string;
     }
 }

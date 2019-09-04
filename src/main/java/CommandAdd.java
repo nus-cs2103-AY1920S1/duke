@@ -89,6 +89,20 @@ public class CommandAdd extends Command {
     }
 
     /**
+     * Executes the add command in GUI.
+     * @param tasks the task list
+     * @param storage the storage writer
+     * @return string
+     */
+    public String executeForGUI(TaskList tasks, Storage storage) {
+        String string = "Got it. I've added this task:" + "\n";
+        tasks.add(task);
+        string = string + task.toString() + "\n";
+        string = string + "Now you have " + tasks.getNoOfTasks() + " tasks in the list.";
+        return string;
+    }
+
+    /**
      * Returns the string representation of the task command.
      * @return the task stored.
      */

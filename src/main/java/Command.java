@@ -16,5 +16,14 @@ public abstract class Command {
      * @param storage the storage writer
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+
+    /**
+     * Executes the command in GUI.
+     * @param tasks the task list
+     * @param ui the Ui
+     * @param storage the storage writer
+     * @return
+     */
+    public abstract String executeForGUI(TaskList tasks, Storage storage) throws DukeException;
     public String string;
 }

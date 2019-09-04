@@ -36,4 +36,25 @@ public class CommandFind extends Command {
             }
         }
     }
+
+    /**
+     * Executes the find command.
+     * @param tasks the task list
+     * @param storage the storage writer
+     * @return String
+     */
+    @Override
+    public String executeForGUI(TaskList tasks, Storage storage) {
+        String curr = "Here are the matching tasks in your list:";
+        int count = 1;
+        for (Task t: tasks.getList()) {
+            if (t.getDescription().contains(string)) {
+                curr = curr + "\n" + count + "." + t.toString();
+                count++;
+            } else {
+
+            }
+        }
+        return curr;
+    }
 }

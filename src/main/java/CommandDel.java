@@ -32,4 +32,21 @@ public class CommandDel extends Command {
         ui.printString("Now you have " + tasks.getNoOfTasks() + " tasks in the list.");
         storage.save(tasks.getList(), tasks.getNoOfTasks());
     }
+
+    /**
+     * Executes the delete command on GUI.
+     * @param tasks the task list
+     * @param storage the storage writer
+     * @return string
+     */
+    @Override
+    public String executeForGUI(TaskList tasks, Storage storage) {
+        String string = "Noted. I've removed thi task:" + "\n";
+        string = string + tasks.getList().get(position - 1).toString() + "\n";
+        tasks.delete(position);
+        storage.save(tasks.getList(), tasks.getNoOfTasks());
+        string = string + "Now you have " + tasks.getNoOfTasks() + " tasks in the list.";
+        storage.save(tasks.getList(), tasks.getNoOfTasks());
+        return string;
+    }
 }

@@ -1,2 +1,2 @@
-T | 0 | food
-T | 0 | homework
+E | 1 | dinner | 11th of December 2019, 6pm
+E | 0 | dinner | 11th of December 2019, 7pm

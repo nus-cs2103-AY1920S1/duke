@@ -27,4 +27,15 @@ public class CommandExit extends Command {
         ui.printString("Bye. Hope to see you again soon!");
         this.isExit = true;
     }
+
+    /**
+     * Executes the exit command.
+     * @param tasks the task list
+     * @param storage the storage writer
+     * @return string
+     */
+    @Override
+    public String executeForGUI(TaskList tasks, Storage storage) {
+        return "Bye. Hope to see you again soon!";
+    }
 }

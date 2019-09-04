@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /** 
 * Represents a list of tasks. Stores all tasks.
-* */ 
+*/ 
 
 public class TaskList {
 
@@ -32,6 +32,11 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    /** 
+    * find method to search for tasks with the specified keyword in them.
+    * @returns ArrayList<Task> of relevant tasks.
+    */ 
+
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> search = new ArrayList<>();
         for(Task current : this.list) {
@@ -42,6 +47,4 @@ public class TaskList {
         }
         return search;
     }
-
-    //crud operations
 }

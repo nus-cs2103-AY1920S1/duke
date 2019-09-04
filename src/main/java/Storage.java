@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 
 /** 
 * Storage class used to store and write events to file.
-* */ 
+*/ 
 
 public class Storage {
 

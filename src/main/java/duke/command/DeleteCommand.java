@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
+
 /**
  * DeleteCommands represents user commands to delete a task.
  */
@@ -20,15 +27,16 @@ public class DeleteCommand extends Command {
      * @param ui Ui object to display messages
      * @param storage Storage object to save changes to
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToDelete = tasks.getTask(taskNumber);
         tasks.delete(taskNumber);
         Integer numberOfTasks = tasks.getNumberOfTasks();
 
-        ui.showDeleteMessage();
-        ui.showTask(taskToDelete);
-        ui.showNumberOfTasks(numberOfTasks);
+        message += ui.showDeleteMessage();
+        message += ui.showTask(taskToDelete);
+        message += ui.showNumberOfTasks(numberOfTasks);
 
         storage.writeTaskToFile(tasks);
+        return message;
     }
 }

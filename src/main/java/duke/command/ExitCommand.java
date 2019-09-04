@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.task.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * ExitCommands represent a user command to exit the program.
  */
 public class ExitCommand extends Command {
     public ExitCommand() {
         super();
+        isExit = true;
     }
 
     /**
@@ -12,8 +19,7 @@ public class ExitCommand extends Command {
      * @param ui a TaskList that stores the list of tasks
      * @param storage Storage object to save task changes to text file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        isExit = true;
-        ui.showExit();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showExit();
     }
 }

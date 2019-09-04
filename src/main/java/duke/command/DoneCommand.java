@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
  * DoneCommands represents user commands to mark a task as done.
  */
@@ -19,13 +26,17 @@ public class DoneCommand extends Command {
      * @param tasks a TaskList that stores the list of tasks
      * @param ui Ui object to display messages
      * @param storage Storage object to save changes to
+     * @return String that shows what task marked as done
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String message = "";
         Task taskCompleted = tasks.getTask(taskNumber);
         taskCompleted.markAsDone();
 
-        ui.showDoneMessage();
-        ui.showTask(taskCompleted);
+        message += ui.showDoneMessage();
+        message += ui.showTask(taskCompleted);
         storage.writeTaskToFile(tasks);
+
+        return message;
     }
 }

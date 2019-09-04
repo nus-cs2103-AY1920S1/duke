@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Base class for all exceptions in Duke.
  */

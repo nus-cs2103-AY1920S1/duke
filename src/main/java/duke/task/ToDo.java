@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class represents ToDo tasks which is a type of Task.
  */

@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Storage deals with loading tasks from a file and saving tasks to the file.
  */

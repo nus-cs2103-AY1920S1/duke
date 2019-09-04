@@ -1,3 +1,4 @@
+package duke.controllers;
 /**
  * This is a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the

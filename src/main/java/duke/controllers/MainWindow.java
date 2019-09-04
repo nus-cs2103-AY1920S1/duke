@@ -1,3 +1,8 @@
+package duke.controllers;
+
+import duke.Duke;
+import duke.ui.Main;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -27,13 +32,11 @@ public class MainWindow extends AnchorPane {
         showWelcome();
     }
 
-    public void setDuke(Duke duke) {
-        this.duke = duke;
-    }
-
-    @FXML
+    /**
+     * Creates a dialog box with Duke's welcome message.
+     */
     public void showWelcome() {
-        String welcomeMessage = duke.getWelcome();
+        String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
@@ -51,5 +54,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (duke.isExit()) {
+            Main.stopApplication();
+        }
     }
 }

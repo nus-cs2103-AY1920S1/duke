@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * UnknownCommandExceptions represents commands not recognised by Duke.
  */

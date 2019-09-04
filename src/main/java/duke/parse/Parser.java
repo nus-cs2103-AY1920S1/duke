@@ -1,3 +1,20 @@
+package duke.parse;
+
+import duke.command.ExitCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.AddCommand;
+import duke.command.DoneCommand;
+import duke.command.SearchCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.exception.EmptyToDoDescriptionException;
+import duke.exception.UnknownCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
  * Parser deals with the logic of parsing user inputs.
  */

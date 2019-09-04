@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * This exception occurs when a ToDo description is empty.
  */

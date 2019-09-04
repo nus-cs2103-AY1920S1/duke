@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A base class that Deadline, Event, and ToDo inherit from.
  */

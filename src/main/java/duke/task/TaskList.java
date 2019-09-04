@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * TaskLists represent the task list, and is in charge of addition and deletion of tasks.
  */

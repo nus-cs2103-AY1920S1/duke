@@ -1,7 +1,14 @@
+package duke.command;
+
 /**
  * SearchCommand represents a user command to search for tasks that contains a particular word in
  * its description.
  */
+
+import duke.task.TaskList;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
 
 import java.util.HashMap;
 
@@ -18,8 +25,8 @@ public class SearchCommand extends Command {
         this.searchDescription = searchDescription;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         HashMap<Integer, Task> searchResults = tasks.search(searchDescription);
-        ui.showSearchResults(searchResults);
+        return ui.showSearchResults(searchResults);
     }
 }

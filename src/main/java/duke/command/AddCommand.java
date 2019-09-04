@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Storage;
+import duke.ui.Ui;
+
 /**
  * AddCommands represent the addition of Tasks to the TaskList.
  */
@@ -20,14 +27,16 @@ public class AddCommand extends Command {
      * @param ui Ui object
      * @param storage Storage object to save changes to text file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(userTask);
         Integer numberOfTasks = tasks.getNumberOfTasks();
 
-        ui.showAddMessage();
-        ui.showTask(userTask);
-        ui.showNumberOfTasks(numberOfTasks);
+        message += ui.showAddMessage();
+        message += ui.showTask(userTask);
+        message += ui.showNumberOfTasks(numberOfTasks);
 
         storage.writeTaskToFile(tasks);
+
+        return message;
     }
 }

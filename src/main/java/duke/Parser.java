@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 /**
  * Parser for {@link duke.command.Command} argument lists. It can convert an entire raw argument list into a multimap
  * between switch names and switch argument lists. Both required and optional switches are supported.

@@ -106,7 +106,7 @@ public class DateParser {
             try {
                 parsedString = parseDateTime(input).format(DateTimeFormatter.ofPattern("d 'of' MMMM yyyy, h:mma"));
             } catch (DukeException e2) {
-                // Format not applicable
+                // Cannot be parsed with the default formatters
             }
         }
         if (parsedString == null) {

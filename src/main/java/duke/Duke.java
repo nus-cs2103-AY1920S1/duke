@@ -5,12 +5,20 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Main application class.
+ */
 public class Duke {
     private PreParser preParser;
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructs a Duke object with the data file residing in the specified path.
+     *
+     * @param filePath  String designating the file to load and save tasks into
+     */
     public Duke(String filePath) {
         preParser = new PreParser();
         ui = new Ui();
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints the welcome message and begins receiving input from the user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

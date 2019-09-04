@@ -1,4 +1,3 @@
 todo [0]asdfa
-todo [0]adsa
 deadline [0]this is a test input/by02/02/2019 2000
 todo [0]list

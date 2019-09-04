@@ -82,6 +82,10 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Searches through whole tasklist to try and find a match with the user input
+     * @param search the string to search for
+     */
     public void findTasks(String search) {
         LinkedList<String> foundtasks = new LinkedList<>();
         for (Task task: taskList){

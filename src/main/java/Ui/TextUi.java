@@ -125,6 +125,10 @@ public class TextUi {
                 DIVIDER);
     }
 
+    /**
+     * prints the ui for listing the found tasks
+     * @param foundtasks list containing the tasks that were found
+     */
     public void printFoundTasks(LinkedList<String> foundtasks){
         if (foundtasks.isEmpty()){
             System.out.println(DIVIDER + "\n"

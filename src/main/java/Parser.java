@@ -12,7 +12,7 @@ public class Parser {
     private static UI ui;
     private static Storage storage;
     private static int count;
-    public Tasklist tasklist;
+    private Tasklist tasklist;
 
     /**
      * Parser constructor

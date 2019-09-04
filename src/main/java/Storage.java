@@ -30,11 +30,11 @@ public class Storage {
 
         while((line = bReader.readLine()) != null) {
             char taskType = line.charAt(1);
-            String isDone = line.substring(4, 5);
+            char isDone = line.charAt(4);
             if (taskType == 'T') {
                 String description = line.substring(7);
                 Task todo = new ToDo(description);
-                if (isDone.equals("\u2718")) {
+                if (isDone == '0') {
                     taskList.add(todo);
                 } else {
                     todo.markAsDone();
@@ -54,7 +54,7 @@ public class Storage {
                     time = dateTimeSplit[3];
                 }
                 Task deadline = new Deadline(description, new DateTime(date, time));
-                if (isDone.equals("\u2718")) {
+                if (isDone == '0') {
                     taskList.add(deadline);
                 } else {
                     deadline.markAsDone();
@@ -74,7 +74,7 @@ public class Storage {
                     time = dateTimeSplit[3];
                 }
                 Task event = new Event(description, new DateTime(date, time));
-                if (isDone.equals("\u2718")) {
+                if (isDone == '0') {
                     taskList.add(event);
                 } else {
                     event.markAsDone();

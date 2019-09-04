@@ -1,3 +1,6 @@
+# Formatting
+My formatting follows the [Google Java Format](https://github.com/google/google-java-format) because they have a nice tool to autoformat and I don't have a fancy IDE to setup the complex and odd oracle tabination settings. Anyway the only difference is the indentation in switch statements as far as I can tell.
+
 # Setting up
 
 **Prerequisites**

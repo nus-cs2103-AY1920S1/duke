@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * Task object is defined by a description. It has a field isDone to indicate
  * whether the task is completed or not.

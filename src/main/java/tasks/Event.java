@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * Represents an Event Task. An event task is represented by a description and
  * the timing the event happens.

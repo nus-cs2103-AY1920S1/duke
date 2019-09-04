@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Constructor to take in a populated ArrayList of Task type (i.e. from text file).
+     *
      * @param list ArrayList of Task Type
      */
     public TaskList(ArrayList<Task> list) {
@@ -24,6 +25,7 @@ public class TaskList {
 
     /**
      * Adds a Task object into the list.
+     *
      * @param task A Task object
      */
     public void addTask(Task task) {
@@ -34,6 +36,7 @@ public class TaskList {
 
     /**
      * Deletes a Task from the list.
+     *
      * @param deleteIndex Index of selected Task Object, 1-based index
      */
     public void deleteTask(int deleteIndex) {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Returns selected Task object from list.
+     *
      * @param taskIndex Index of selected Task object, 1-based index
      * @return Task object
      */
@@ -62,14 +66,15 @@ public class TaskList {
     }
 
     /**
-     * Prints out the Tasks whose description matches the search term
+     * Prints out the Tasks whose description matches the search term.
+     *
      * @param searchTerm Keyword by user for search
      */
     public void searchTaskList(String searchTerm) {
         System.out.println("Here are the matching tasks in your list:");
         int noOfSearches = 1;
-        for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getDescription().contains(searchTerm)){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getDescription().contains(searchTerm)) {
                 System.out.println((noOfSearches) + "." + list.get(i));
                 noOfSearches += 1;
             }
@@ -78,6 +83,7 @@ public class TaskList {
 
     /**
      * Sets boolean variable isDone of selected Task object to true.
+     *
      * @param doneIndex Index of selected Task object, 1-based index
      */
     public void setDoneTask(int doneIndex) {
@@ -88,6 +94,7 @@ public class TaskList {
 
     /**
      * Returns the list of tasks that Duke holds as an object.
+     *
      * @return ArrayList of Task type
      */
     public ArrayList<Task> getTaskList() {

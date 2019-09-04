@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      * from the Storage Class.
      */
     //note private can't be accessed by child
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = this.inputCommand.split(" ", 2);
         String typeTask = inputsplit[0];
         if (inputsplit.length <= 1) {
@@ -54,8 +54,8 @@ public class AddCommand extends Command {
             taskToAdd = new Event(descripSplit[0], ldt);
         }
         tasks.addToRecord(taskToAdd);
-        ui.printAdd(taskToAdd, tasks.getSize());
         storage.writeToFile(tasks.getTaskList());
+        return ui.printAdd(taskToAdd, tasks.getSize());
     }
 
 }

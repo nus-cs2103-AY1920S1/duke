@@ -39,6 +39,6 @@ public abstract class Command {
      * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
      * @throws DukeException which will be dealed with by the Duke class.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

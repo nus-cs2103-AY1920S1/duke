@@ -25,8 +25,8 @@ public class ExitCommand extends Command {
      * @param ui Ui passed from the Duke main class, responsible for printing output to the user and obtaining input.
      * @param storage Storage passed from the Duke main class, responsible for updating duke.txt after every command.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         this.shouldExit = true;
-        ui.printBye();
+        return ui.printBye();
     }
 }

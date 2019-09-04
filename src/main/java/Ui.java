@@ -2,6 +2,7 @@ package duke;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 import duke.task.Task;
 
 /**
@@ -14,98 +15,88 @@ public class Ui {
     /**
      * greet user.
      * */
-    public void showWelcome() {
-        String greeting = "     Hello! I'm Duke\n     What can I do for you?";
-        System.out.println(liner + "\n" + greeting + "\n" + liner);
+    public String showWelcome() {
+        String greeting = "\tHello! I'm Duke\n\tWhat can I do for you?";
+        return liner + "\n" + greeting + "\n" + liner;
     }
 
     /**
      * print goodbye to user.
      * */
-    public void showBye() {
-        System.out.println(liner);
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println(liner);
+    public String showBye() {
+        return liner + "\n\tBye. Hope to see you again soon!\n" + liner;
     }
 
     /**
      * print divider line.
      * */
-    public void showLine() {
-        System.out.println(liner);
+    public String showLine() {
+        return liner + "\n";
     }
 
     /**
      * show error message.
      * */
-    public void showError(String message) {
-        showLine();
-        System.out.println(message);
-        showLine();
+    public String showError(String message) {
+        return liner + "\n" + message + "\n" + liner;
     }
 
     /**
      * print loading file error.
      * */
-    public void showLoadingError() {
-        System.out.println("New task list generated: no existing file found!");
+    public String showLoadingError() {
+        return "New task list generated: no existing file found!";
     }
 
     /**
      * print add task message.
      * */
-    public void printAddTask(Task newTask, int totalTasks) {
-        System.out.println(liner);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + newTask.toString());
-        System.out.println("     Now you have " + totalTasks + " tasks in the list.");
-        System.out.println(liner);
+    public String printAddTask(Task newTask, int totalTasks) {
+        return liner + "\n\tGot it. I've added this task:\n\t" + newTask.toString()
+                + "\n\t" + "Now you have " + totalTasks + " tasks in the list.\n" + liner;
     }
 
     /**
      * print done task message.
      * */
-    public void printDoneTask(Task currTask) {
-        System.out.println(liner);
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       "  + currTask.toString());
-        System.out.println(liner);
+    public String printDoneTask(Task currTask) {
+        return liner + "\n\tNice! I've marked this task as done: \n\t"
+                + currTask.toString() + "\n" + liner;
     }
 
     /**
      * print deleted task message.
      * */
-    public void printDeletedTask(Task currTask, int totalTasks) {
-        System.out.println(liner);
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("       "  + currTask.toString());
-        System.out.println("     Now you have " + totalTasks + " tasks in the list.");
-        System.out.println(liner);
+    public String printDeletedTask(Task currTask, int totalTasks) {
+        return liner + "\n\tNoted. I've removed this task:\n\t" + currTask.toString()
+                + "\n\t" + "Now you have " + totalTasks + " tasks in the list.\n" + liner;
     }
 
     /**
      * print all contents in task list.
      * */
-    public void showList(TaskList tasks) {
+    public String showList(TaskList tasks) {
+        StringBuilder sb = new StringBuilder("\tHere are the tasks in your list:\n");
         ArrayList<Task> list = tasks.getList();
-        System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             int num = i + 1;
             Task currTask = list.get(i);
-            System.out.println("     " + num + ". " + currTask.toString());
+            sb.append("\t" + num + ". " + currTask.toString() + "\n");
         }
+        return sb.toString();
     }
 
     /**
      * print matching tasks from search result.
      * */
-    public void printMatches(ArrayList<Task> results) {
-        System.out.println("     Here are the matching tasks in your list:");
+    public String printMatches(ArrayList<Task> results) {
+        StringBuilder sb = new StringBuilder("\tHere are the matching tasks in your list:\n");
         for (int i = 0; i < results.size(); i++) {
             int num = i + 1;
             Task currTask = results.get(i);
-            System.out.println("     " + num + ". " + currTask.toString());
+            sb.append("\t" + num + ". " + currTask.toString() + "\n");
         }
+        return sb.toString();
     }
 
     /**

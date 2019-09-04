@@ -2,10 +2,16 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 group 'duke'
 version '0.1.0'
+
+javafx {
+    version = "12.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
 
 repositories {
     mavenCentral()
@@ -21,7 +27,7 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 checkstyle {

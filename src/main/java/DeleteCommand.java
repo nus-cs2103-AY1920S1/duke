@@ -25,17 +25,18 @@ public class DeleteCommand extends Command {
      * delete task in TaskList and update text file (in storage)
      * if successful, print out deleted task to user
      * */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (parser.validNumber(command, tasks.getList().size())) {
                 pos = Integer.parseInt(command);
                 Task currTask = tasks.deleteTask(pos);
                 storage.updateTasks(currTask, "delete", pos - 1);
-                ui.printDeletedTask(currTask, tasks.getList().size());
+                return ui.printDeletedTask(currTask, tasks.getList().size());
             }
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
+        return "";
     }
 
     public boolean isExit() {

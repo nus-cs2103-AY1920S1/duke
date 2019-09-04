@@ -22,13 +22,13 @@ public class FindCommand extends Command {
      * find there is matching results
      * if successful, print out list of matches
      * */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             ArrayList<Task> results = tasks.searchTasks(command);
             if (results.isEmpty()) {
                 throw new DukeException("     0 Matching Results found!");
             } else {
-                ui.printMatches(results);
+                return ui.printMatches(results);
             }
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());

@@ -25,17 +25,18 @@ public class UpdateCommand extends Command {
      * update task and text file (in storage)
      * if successful, print out updated task
      * */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (parser.validNumber(command, tasks.getList().size())) {
                 pos = Integer.parseInt(command);
                 Task currTask = tasks.updateTask(pos);
                 storage.updateTasks(currTask, "done", pos - 1);
-                ui.printDoneTask(currTask);
+                return ui.printDoneTask(currTask);
             }
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
+        return "";
 
     }
 

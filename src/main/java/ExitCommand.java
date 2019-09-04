@@ -9,8 +9,8 @@ import duke.Ui;
 public class ExitCommand extends Command {
     protected String command;
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showBye();
     }
 
     public boolean isExit() {

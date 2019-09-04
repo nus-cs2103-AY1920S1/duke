@@ -48,10 +48,10 @@ public class AddCommand extends Command {
      * add task in TaskList and text file (in storage)
      * if successful, print out task added
      * */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.getList().add(task);
         storage.saveTasks(task, type);
-        ui.printAddTask(task, tasks.getList().size());
+        return ui.printAddTask(task, tasks.getList().size());
     }
 
     public boolean isExit() {

@@ -3,7 +3,6 @@ package duke;
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.todo.Task;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
@@ -22,7 +21,7 @@ public class Duke {
      *
      * @param filePath File path for input.
      */
-    public Duke(String filePath) {
+    Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -33,67 +32,19 @@ public class Duke {
         }
     }
 
-    private void run() {
-        ui.greet();
-
-        boolean isRunning = true;
+    public String getResponse(String input) {
         Parser parser = new Parser();
-        Command command;
+        ui.resetMessage();
 
-        while (isRunning) {
-            try {
-                String input = ui.takeCommand();
-                command = parser.parse(input);
-
-                switch (command.getTaskType()) {
-                case "bye":
-                    isRunning = false;
-                    break;
-                case "done":
-                    int index = command.getIndex() - 1;
-                    tasks.markTaskDone(index);
-                    ui.reportDone(tasks.getTask(index));
-                    break;
-                case "list":
-                    ui.printFormattedText(tasks.generateList());
-                    break;
-                case "delete":
-                    Task removedTask = tasks.removeTask(command.getIndex());
-                    ui.reportRemove(removedTask, tasks.getNumOfTasks());
-                    break;
-                case "todo":
-                    Task addedTodo = tasks.addTask(command.getTask());
-                    ui.reportAdd(addedTodo, tasks.getNumOfTasks());
-                    break;
-                case "deadline":
-                    Task addedDeadline = tasks.addTask("D", command.getTask(), command.getDate());
-                    ui.reportAdd(addedDeadline, tasks.getNumOfTasks());
-                    break;
-                case "event":
-                    Task addedEvent = tasks.addTask("E", command.getTask(), command.getDate());
-                    ui.reportAdd(addedEvent, tasks.getNumOfTasks());
-                    break;
-                case "find":
-                    String taskFound = tasks.findTask(command.getKeyword());
-                    ui.reportFound(taskFound);
-                    break;
-                default:
-                    throw new DukeException("     OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            }
+        try {
+            Command command = parser.parse(input);
+            command.execute(tasks, ui);
+            storage.save(tasks);
+        } catch (DukeException e) {
+            ui.reportError(e);
         }
 
-        ui.bye();
-
-        // Write the latest To Do List into the file
-        storage.writeBackToFile(tasks.outputTasks());
+        return ui.getMessage();
     }
 
-    /*
-    public static void main(String[] args) {
-        new Duke("src/main/java/duke/data/tasks.txt").run();
-    }
-     */
 }

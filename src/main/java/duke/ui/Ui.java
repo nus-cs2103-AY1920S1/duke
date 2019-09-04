@@ -1,54 +1,26 @@
 package duke.ui;
 
+import duke.DukeException;
 import duke.todo.Task;
 
-import java.util.Scanner;
-
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
-
+    StringBuilder messageBuffer;
     /**
      * Displays error when loading file.
      */
+
+    public Ui() {
+        this.messageBuffer = new StringBuilder();
+    }
     public void showLoadingError() {
-        System.out.println("Unable to load file");
-    }
-
-    /**
-     * Waits for user input and
-     * returns the next line of input.
-     *
-     * @return Input from the user.
-     */
-    public String takeCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints input text with formatting.
-     *
-     * @param text Input text from other methods.
-     */
-    public static void printFormattedText(String text) {
-        printDivider();
-        System.out.println(text);
-        printDivider();
-    }
-
-    private static void printDivider() {
-        indent();
-        for (int i = 0; i < 50; i++) {
-            System.out.print("_");
-        }
-        System.out.println();
+        messageBuffer.append("Unable to load file");
     }
 
     /**
      * Prints greeting message.
      */
-    public static void greet() {
-        printFormattedText("    Hello! I'm Duke\n"
-                + "    What can I do for you?");
+    public void getGreeting() {
+        messageBuffer.append("Hello! I'm Duke.\nWhat can I do for you?");
     }
 
     /**
@@ -57,9 +29,9 @@ public class Ui {
      * @param task Task done.
      */
     public void reportDone(Task task) {
-        printFormattedText("    Nice! I've marked this task as done:\n"
-                + "        " + task.getStatusIcon()
-                + task.getDescription());
+        messageBuffer.append("Nice! I've marked this task as done:\n");
+        messageBuffer.append("    " + task.getStatusIcon());
+        messageBuffer.append(task.getDescription());
     }
 
     /**
@@ -69,10 +41,9 @@ public class Ui {
      * @param numOfTasks Number of tasks left in the task list.
      */
     public void reportRemove(Task task, int numOfTasks) {
-        printFormattedText("    Noted. I've removed this task:\n"
-                + "       " + task
-                + "\n    Now you have " + numOfTasks
-                + " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
+        messageBuffer.append("Noted. I've removed this task:\n");
+        messageBuffer.append("" + task + "\nNow you have " + numOfTasks);
+        messageBuffer.append(" task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
     }
 
     /**
@@ -82,35 +53,54 @@ public class Ui {
      * @param numOfTasks Number of tasks left in the task list.e
      */
     public void reportAdd(Task task, int numOfTasks) {
-        printFormattedText("    Got it. I've added this task:\n"
-                + "      " + task
-                + "\n    Now you have " + numOfTasks
-                + " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
-    }
-
-    public void reportFound(String taskFound) {
-        printFormattedText(taskFound);
+        messageBuffer.append("    Got it. I've added this task:\n");
+        messageBuffer.append("      " + task);
+        messageBuffer.append("\n    Now you have " + numOfTasks);
+        messageBuffer.append(" task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
     }
 
     /**
-     * Prints goodbye message.
-     */
-    public static void bye() {
-        printFormattedText("    Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Prints formatted error message.
+     * Appends task found to message buffer.
      *
-     * @param e Error message.
+     * @param taskFound Task found.
      */
-    public static void printError(String e) {
-        printFormattedText(e);
+    public void reportFound(String taskFound) {
+        messageBuffer.append(taskFound);
     }
 
-    private static void indent() {
-        for (int i = 0; i < 4; i++) {
-            System.out.print(" ");
-        }
+    /**
+     * Appends goodbye message to message buffer.
+     */
+    public void reportBye() {
+         this.messageBuffer.append("Bye. Hope to see you again soon!");
+    }
+
+    /**
+     * Appends formatted tasks.
+     *
+     * @param formattedTasks String of formatted tasks.
+     */
+    public void reportList(String formattedTasks) {
+        messageBuffer.append(formattedTasks);
+    }
+
+    public void reportError(DukeException e) {
+        messageBuffer.append(e.getMessage());
+    }
+
+    /**
+     * Returns buffered message.
+     *
+     * @return Buffered message.
+     */
+    public String getMessage() {
+        return messageBuffer.toString();
+    }
+
+    /**
+     * Resets message buffer.
+     */
+    public void resetMessage() {
+        messageBuffer = new StringBuilder();
     }
 }

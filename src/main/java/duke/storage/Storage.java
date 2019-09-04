@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.todo.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -59,12 +61,12 @@ public class Storage {
     /**
      * Writes back to the data file with the current list formatted.
      *
-     * @param formattedList Formatted current list of Todos.
+     * @param tasks Current list of Todos.
      */
-    public void writeBackToFile(String formattedList) {
+    public void save(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(formattedList);
+            fileWriter.write(tasks.outputTasks());
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());

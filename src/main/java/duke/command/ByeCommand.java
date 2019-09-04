@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
 public class ByeCommand implements Command {
     /**
      * Returns task type.
@@ -24,5 +27,9 @@ public class ByeCommand implements Command {
 
     public String getKeyword() {
         return "error";
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        ui.reportBye();
     }
 }

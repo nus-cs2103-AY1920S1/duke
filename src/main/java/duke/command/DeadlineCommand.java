@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.todo.Task;
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
 public class DeadlineCommand implements Command {
     private String task;
     private String deadline;
@@ -45,5 +49,10 @@ public class DeadlineCommand implements Command {
 
     public String getKeyword() {
         return "error";
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        Task addedTodo = tasks.addTask(getTask());
+        ui.reportAdd(addedTodo, tasks.getNumOfTasks());
     }
 }

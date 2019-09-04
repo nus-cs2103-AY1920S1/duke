@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
 public class FindCommand implements Command {
     private String keyword;
 
@@ -25,5 +28,10 @@ public class FindCommand implements Command {
 
     public String getKeyword() {
         return keyword;
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        String taskFound = tasks.findTask(getKeyword());
+        ui.reportFound(taskFound);
     }
 }

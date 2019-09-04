@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.todo.Task;
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand implements Command {
     private int index;
 
@@ -40,5 +44,10 @@ public class DeleteCommand implements Command {
 
     public String getKeyword() {
         return "error";
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        Task removedTask = tasks.removeTask(getIndex());
+        ui.reportRemove(removedTask, tasks.getNumOfTasks());
     }
 }

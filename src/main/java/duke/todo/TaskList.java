@@ -203,9 +203,12 @@ public class TaskList {
      * Marks a task based on the input index as done.
      *
      * @param index Index of the task done.
+     * @return Task done.
      */
-    public void markTaskDone(int index) {
-        taskList.get(index).markAsDone();
+    public Task markTaskDone(int index) {
+        Task taskDone = taskList.get(index);
+        taskDone.markAsDone();
+        return taskDone;
     }
 
     /**

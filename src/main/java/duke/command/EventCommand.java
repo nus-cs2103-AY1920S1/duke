@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.todo.Task;
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
 public class EventCommand implements Command {
     private String task;
     private String eventDate;
@@ -50,5 +54,10 @@ public class EventCommand implements Command {
 
     public String getKeyword() {
         return "error";
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        Task addedEvent = tasks.addTask("E", getTask(), getDate());
+        ui.reportAdd(addedEvent, tasks.getNumOfTasks());
     }
 }

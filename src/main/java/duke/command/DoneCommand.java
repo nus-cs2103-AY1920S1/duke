@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.todo.Task;
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand implements Command {
     private String taskType = "done";
     private int index;
@@ -10,7 +14,7 @@ public class DoneCommand implements Command {
      * @param index Index of the task done.
      */
     public DoneCommand(int index) {
-        this.index = index;
+        this.index = index - 1;
     }
 
     /**
@@ -41,5 +45,10 @@ public class DoneCommand implements Command {
 
     public String getKeyword() {
         return "error";
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        Task taskMarkedDone = tasks.markTaskDone(getIndex());
+        ui.reportDone(taskMarkedDone);
     }
 }

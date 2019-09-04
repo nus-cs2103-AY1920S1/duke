@@ -1,6 +1,9 @@
 package duke.command;
 
-public class PrintCommand implements Command {
+import duke.todo.TaskList;
+import duke.ui.Ui;
+
+public class ListCommand implements Command {
     /**
      * Returns the task type.
      *
@@ -24,5 +27,9 @@ public class PrintCommand implements Command {
 
     public String getKeyword() {
         return "error";
+    }
+
+    public void execute(TaskList tasks, Ui ui) {
+        ui.reportList(tasks.generateList());
     }
 }

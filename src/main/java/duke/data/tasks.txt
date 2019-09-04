@@ -1,2 +1,2 @@
-T |borrow book
 T |loan book
+T |borrow book

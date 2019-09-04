@@ -1,9 +1,16 @@
+import javafx.application.Platform;
+
 import java.util.Scanner;
 
 /**
  * Represents a user interface that deals with the user.
  */
 public class Ui {
+
+    private final String LOADING_ERROR = "No existing task list can be loaded. New task list will be created.";
+
+    private Storage mainStorage;
+    private TaskList mainTaskList;
 
     /**
      * Sets up the user interface to take in user commands.
@@ -12,6 +19,9 @@ public class Ui {
      * @param taskList Task handling.
      */
     public void initiate(Storage storage, TaskList taskList) {
+        mainStorage = storage;
+        mainTaskList = taskList;
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -24,47 +34,99 @@ public class Ui {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
+            System.out.println(getResponse(input));
+
+            write();
+
+            if (sc.hasNext()) {
+                input = sc.nextLine();
+            } else {
+                break;
+            }
+        }
+
+        System.out.println("Bye. Hope to see you again soon!");
+        Platform.exit();
+    }
+
+    public void setStorage(Storage storage) {
+        mainStorage = storage;
+    }
+
+    public void setList(TaskList taskList) {
+        mainTaskList = taskList;
+    }
+
+    /**
+     * Returns task addition response given specified list of task.
+     *
+     * @param taskList List of task.
+     * @return Task addition response.
+     */
+    public String getTaskAddition(TaskList taskList) {
+        StringBuilder message = new StringBuilder();
+        message.append("Got it. I've added this task:\n");
+        message.append(taskList.getTask());
+
+        return message.toString();
+    }
+
+    /**
+     * Prints out loading error message.
+     */
+    public void showLoadingError() {
+        System.out.println(LOADING_ERROR);
+    }
+
+    /**
+     * Returns chatbot response based on user commands.
+     *
+     * @param input User commands.
+     * @return Chatbot response.
+     */
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder();
+
+        if (!input.equals("bye")) {
             String[] parseInfo = Parser.parseCommand(input);
-            int currentNum = taskList.getNumTask();
+            int currentNum = mainTaskList.getNumTask();
 
             switch (parseInfo[0]) {
             case "DONE":
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(taskList.getDoneTask(parseInfo[1]) + "\n");
+                response.append("Nice! I've marked this task as done:\n");
+                response.append(mainTaskList.getDoneTask(parseInfo[1]) + "\n");
                 break;
             case "DELETE":
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(taskList.deleteTask(parseInfo[1]));
+                response.append("Noted. I've removed this task:\n");
+                response.append(mainTaskList.deleteTask(parseInfo[1]) + "\n");
                 break;
             case "TODO":
-                taskList.addTodoTask(parseInfo[1]);
-                printTaskAddition(taskList);
+                mainTaskList.addTodoTask(parseInfo[1]);
+                response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
             case "DEADLINE":
-                taskList.addDeadlineTask(Parser.parseDetails(parseInfo[1]));
-                printTaskAddition(taskList);
+                mainTaskList.addDeadlineTask(Parser.parseDetails(parseInfo[1]));
+                response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
             case "EVENT":
-                taskList.addEventTask(Parser.parseDetails(parseInfo[1]));
-                printTaskAddition(taskList);
+                mainTaskList.addEventTask(Parser.parseDetails(parseInfo[1]));
+                response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
             case "LIST":
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskList.getNumTask(); i++) {
-                    System.out.println(String.format("%d.%s", i + 1, taskList.getTask(i)));
+                response.append("Here are the tasks in your list:\n");
+                for (int i = 0; i < mainTaskList.getNumTask(); i++) {
+                    response.append(String.format("%d.%s", i + 1, mainTaskList.getTask(i)) + "\n");
                 }
-                System.out.println();
                 break;
             case "FIND":
-                System.out.println("Here are the matching tasks in your list:");
-                for (int i = 0, j = 0; i < taskList.getNumTask(); i++) {
-                    Task current = taskList.getTask(i);
+                response.append("Here are the matching tasks in your list:\n");
+                for (int i = 0, j = 0; i < mainTaskList.getNumTask(); i++) {
+                    Task current = mainTaskList.getTask(i);
 
                     if (current.hasKeyword(parseInfo[1])) {
-                        System.out.println(String.format("%d.%s", ++j, current));
+                        response.append(String.format("%d.%s", ++j, current) + "\n");
                     }
                 }
-                System.out.println();
                 break;
             default:
                 try {
@@ -76,42 +138,24 @@ public class Ui {
                         throw new InvalidArgumentException("I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException exception) {
-
+                    response.append(exception.getMessage());
                 }
             }
 
-            if (currentNum != taskList.getNumTask()) {
-                System.out.println(String.format("Now you have %d tasks in the list.\n", taskList.getNumTask()));
+            if (currentNum != mainTaskList.getNumTask()) {
+                response.append(String.format("Now you have %d tasks in the list.\n", mainTaskList.getNumTask()));
             }
-
-            if (sc.hasNext()) {
-                input = sc.nextLine();
-            } else {
-                break;
-            }
+        } else {
+            response.append("Bye. Hope to see you again soon!\n");
         }
 
-        storage.overWrite(taskList.getList());
-
-        if (input.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-        }
+        return response.toString();
     }
 
     /**
-     * Prints out task addition response given specified list of task.
-     *
-     * @param taskList List of task.
+     * Calls for <code>Storage</code> to overwrite stored list of tasks.
      */
-    public void printTaskAddition(TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskList.getTask());
-    }
-
-    /**
-     * Prints out loading error message.
-     */
-    public void showLoadingError() {
-        System.out.println("No existing task list can be loaded. New task list will be created.");
+    public void write() {
+        mainStorage.overWrite(mainTaskList.getList());
     }
 }

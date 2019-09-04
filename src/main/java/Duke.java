@@ -7,42 +7,30 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) throws IOException {
+        Command c = Parser.parse(input);
+        return c.execute(tasks, ui, storage);
+    }
+
+    public String getStartMessage() {
+        return ui.getWelcomeMessage();
+    }
+
+    public Duke() {
+        String filePath = "src/main/java/data/tasks.txt";
         ui = new Ui();
         storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            System.out.println("File not found!");
         } catch (IOException e) {
-            ui.showLoadingError();
+            System.out.println("IO Exception!");
         }
-    }
-
-    public void run() {
-
-        ui.showWelcome();
-        ui.showTopBorder();
-        System.out.println("\n\tHere are the tasks in your list: ");
-        ui.printTasks(tasks.getTaskList());
-        ui.showBottomBorder();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (IOException e) {
-                System.out.println("Input / Output error!");
-            }
-        }
-
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

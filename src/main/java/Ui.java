@@ -1,43 +1,43 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
 
-  public void showWelcome() {
-    String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    System.out.println("Hello from\n" + logo);
+  public String getWelcomeMessage() {
+    String output = "";
 
     // Welcome message
-    System.out.println("\t____________________________________________________________");
-    System.out.println("\n\tHello! I'm Duke");
-    System.out.println("\tWhat can I do for you?");
-    System.out.println("\t____________________________________________________________\n");
+    output += getTopBorder();
+    output += "\n\tHello! I'm Duke!";
+    output += "\n\tWhat can I do for you?\n";
+    output += getBottomBorder();
+
+    return output;
   }
 
-  public void showTopBorder() {
-    System.out.println("\t____________________________________________________________");
+  public String getTopBorder() {
+    return "____________________________________________________________";
   }
 
-  public void showBottomBorder() {
-    System.out.println("\t____________________________________________________________\n");
+  public String getBottomBorder() {
+    return "\n____________________________________________________________";
   }
 
-  public void printTasks(ArrayList<Task> tasks) {
+  public String getTasksAsString(ArrayList<Task> tasks) {
+    String output = "";
     for (int i = 0; i < tasks.size(); i++) {
-      System.out.println("\n\t" + (i + 1) + ". " + tasks.get(i).toString());
+      output += "\n\t" + (i + 1) + ". " + tasks.get(i).toString();
     }
+
+    return output;
   }
 
-  public void showLoadingError() {
-    showTopBorder();
-    System.out.println("\n\tSorry! There was an error loading the files from the system.");
-    showBottomBorder();
+  public String getLoadingError() {
+    String output = "";
+    output += getTopBorder();
+    output += "\n\tSorry! There was an error loading the files from the system.";
+    output += getBottomBorder();
+
+    return output;
   }
 
-  public String readCommand() {
-    Scanner sc = new Scanner(System.in);
-    String command = sc.nextLine();
-    return command;
-  }
 }

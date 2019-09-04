@@ -1,0 +1,4 @@
+D | 1 | CS2103T Quiz |  5th of September 2019, 11.59 PM
+T | 0 | borrow book
+D | 0 | CS2103T Quiz |  5th of December 2019, 11.59 PM
+T | 0 | return book

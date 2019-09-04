@@ -12,11 +12,12 @@ public class DoneCommand extends Command {
     this.index = index - 1;
   }
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
+  public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
 
-    if (index <= 0 || index > tasks.getSize() - 1) {
-      new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
-      return;
+    String output = "";
+
+    if (index < 0 || index > tasks.getSize() - 1) {
+      return new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
     }
 
     // Execute Command
@@ -24,14 +25,16 @@ public class DoneCommand extends Command {
 
     Task doneTask = tasks.getTaskList().get(index);
 
-    // Printing Output
-    ui.showTopBorder();
-    System.out.println("\n\tNice! I have marked this task as done: ");
-    System.out.println("\n\t" + doneTask);
-    ui.showBottomBorder();
+    // Save output as String
+    output += ui.getTopBorder();
+    output += "\n\tNice! I have marked this task as done: ";
+    output += "\n\t" + doneTask;
+    output += ui.getBottomBorder();
 
     // Saving to file
     storage.updateAsDone(index);
+
+    return output;
 
   }
 }

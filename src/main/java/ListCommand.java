@@ -1,10 +1,15 @@
 public class ListCommand extends Command {
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) {
-    ui.showTopBorder();
-    System.out.println("\n\tHere are the tasks in your list: ");
-    ui.printTasks(tasks.getTaskList());
-    ui.showBottomBorder();
+  public String execute(TaskList tasks, Ui ui, Storage storage) {
+
+    String output = "";
+
+    // Save output as String
+    output += ui.getTopBorder();
+    output += "\n\tHere are the tasks in your list: ";
+    output += ui.getTasksAsString(tasks.getTaskList());
+    output += ui.getBottomBorder();
+    return output;
   }
 
 }

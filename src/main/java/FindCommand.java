@@ -6,12 +6,15 @@ public class FindCommand extends Command {
     this.description = description;
   }
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) {
+  public String execute(TaskList tasks, Ui ui, Storage storage) {
 
-    // Printing output
-    ui.showTopBorder();
-    System.out.println("\n\tHere are the matching tasks in your list: ");
-    ui.printTasks(tasks.findTasks(description));
-    ui.showBottomBorder();
+    String output = "";
+
+    // Save output as String
+    output += ui.getTopBorder();
+    output += "\n\tHere are the matching tasks in your list: ";
+    output += ui.getTasksAsString(tasks.findTasks(description));
+    output += ui.getBottomBorder();
+    return output;
   }
 }

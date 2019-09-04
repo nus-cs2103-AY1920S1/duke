@@ -20,55 +20,59 @@ public class AddCommand extends Command {
     this.taskDescription = taskDescription;
   }
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+  public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+
+    String output = "";
 
     if (type.equals("todo")) {
       // Create ToDo object
       ToDo t = new ToDo(taskDescription);
       tasks.addTask(t);
 
-      // Printing output
-      ui.showTopBorder();
-      System.out.println("\n\tGot it! I've added this task: ");
-      System.out.println("\n\t" + t.toString());
-      System.out.println("\n\tNow you have " + tasks.getSize() + " tasks in the list.");
-      ui.showBottomBorder();
-
       // Saving to text file
       String textToAdd = "T | 0 | " + taskDescription + "\n";
       storage.saveTask(textToAdd);
+
+      // Save output as String
+      output += ui.getTopBorder();
+      output += "\n\tGot it! I've added this task: ";
+      output += "\n\t" + t.toString();
+      output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
+      output += ui.getBottomBorder();
 
     } else if (type.equals("deadline")) {
       // Create DeadLine object
       DeadLine d = new DeadLine(taskDescription, time);
       tasks.addTask(d);
 
-      // Printing Output
-      ui.showTopBorder();
-      System.out.println("\n\tGot it! I've added this task: ");
-      System.out.println("\n\t" + d.toString());
-      System.out.println("\n\tNow you have " + tasks.getSize() + " tasks in the list.");
-      ui.showBottomBorder();
-
       // Saving to text file
       String textToAdd = "D | 0 | " + taskDescription + " | " + time + "\n";
       storage.saveTask(textToAdd);
+
+      // Save output as String
+      output += ui.getTopBorder();
+      output += "\n\tGot it! I've added this task: ";
+      output += "\n\t" + d.toString();
+      output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
+      output += ui.getBottomBorder();
 
     } else if (type.equals("event")) {
       // Create Event object
       Event e = new Event(taskDescription, time);
       tasks.addTask(e);
 
-      // Printing Output
-      ui.showTopBorder();
-      System.out.println("\n\tGot it! I've added this task: ");
-      System.out.println("\n\t" + e.toString());
-      System.out.println("\n\tNow you have " + tasks.getSize() + " tasks in the list.");
-      ui.showBottomBorder();
-
       // Saving to text file
       String textToAdd = "E | 0 | " + taskDescription + " | " + time + "\n";
       storage.saveTask(textToAdd);
+
+      // Save output as String
+      output += ui.getTopBorder();
+      output += "\n\tGot it! I've added this task: ";
+      output += "\n\t" + e.toString();
+      output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
+      output += ui.getBottomBorder();
     }
+
+    return output;
   }
 }

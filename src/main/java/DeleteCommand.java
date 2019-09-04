@@ -12,26 +12,29 @@ public class DeleteCommand extends Command {
     this.index = index - 1;
   }
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
+  public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
+
+    String output = "";
 
     if (index < 0 || index > tasks.getSize() - 1) {
-      new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
-      return;
+      return new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
     }
 
     // Execute command
     Task removed = tasks.getTaskList().get(index);
     tasks.getTaskList().remove(index);
 
-    // Printing Output
-    ui.showTopBorder();
-    System.out.println("\n\tNoted. I have removed this task: ");
-    System.out.println("\n\t" + removed);
-    System.out.println("\n\tNow you have " + tasks.getSize() + " tasks in the list.");
-    ui.showBottomBorder();
+    // Save output as String
+    output += ui.getTopBorder();
+    output += "\n\tNoted. I have removed this task: ";
+    output += "\n\t" + removed;
+    output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
+    output += ui.getBottomBorder();
 
     // Save in .txt file
     storage.deleteTask(index);
+
+    return output;
 
   }
 }

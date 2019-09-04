@@ -6,12 +6,15 @@ public class InvalidCommand extends Command {
     this.errorMessage = errorMessage;
   }
 
-  public void execute(TaskList tasks, Ui ui, Storage storage) {
+  public String execute(TaskList tasks, Ui ui, Storage storage) {
 
-    // Printing Output
-    ui.showTopBorder();
-    System.out.println("\n\t" + errorMessage);
-    ui.showBottomBorder();
+    String output = "";
+
+    // Save output as String
+    output += ui.getTopBorder();
+    output += "\n\t" + errorMessage;
+    output += ui.getBottomBorder();
+    return output;
 
   }
 }

@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 public abstract class Task {
+=======
+import java.util.Date;
+
+public class Task {
+>>>>>>> branch-Level-8
     protected String description;
     protected boolean isDone;
-    protected String date = "";
+    protected Date date;
     protected String type = "";
 
     public Task(String description) {
@@ -13,6 +19,13 @@ public abstract class Task {
         return this.description;
     }
 
+<<<<<<< HEAD
+=======
+    public Date getDate() {
+        return this.date;
+    }
+
+>>>>>>> branch-Level-8
     public String getType() {
         return this.type;
     }

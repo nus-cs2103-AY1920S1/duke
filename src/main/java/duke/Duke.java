@@ -25,6 +25,12 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.loadTasks(ui);
+        ui.out("What can I do for you?");
+        ui.showLine();
+    }
+
+    public String getOutput() {
+        return ui.getDukeOut().toString();
     }
 
     /**
@@ -32,8 +38,6 @@ public class Duke {
      */
     public void run() {
         boolean isExit = false;
-        ui.out("What can I do for you?");
-        ui.showLine();
         while (!isExit) {
             try {
                 String input = ui.read();
@@ -55,6 +59,24 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "I received: " + input;
+        ui.clear();
+        try {
+            Command command = Parser.parse(input);
+            command.execute(taskList, ui, storage);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            ui.out("The details of an Event/Deadline cannot be empty.");
+        } catch (UnsupportedOperationException ex) {
+            ui.out("I'm sorry, but I don't know what that means.");
+        } catch (NumberFormatException ex) {
+            ui.out("Please only complete/delete tasks on the list.");
+        } catch (ParseException ex) {
+            ui.out("Please format date/time as 'dd-MM-yyyy HHmm'.");
+        }
+        return ui.getDukeOut().toString();
+    }
+
+    public void close() {
+        ui.close();
+        storage.writeTasks(taskList);
     }
 }

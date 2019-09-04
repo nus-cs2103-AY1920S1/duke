@@ -1,3 +1,5 @@
+package duke.io;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -17,7 +19,7 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML

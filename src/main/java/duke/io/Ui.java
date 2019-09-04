@@ -10,11 +10,14 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner;
 
+    private StringBuilder dukeOut;
+
     /**
      * Constructor creates new scanner to read System-in.
      */
     public Ui() {
         scanner = new Scanner(System.in);
+        dukeOut = new StringBuilder();
         showLine();
         out("Hello! I'm Duke");
     }
@@ -28,11 +31,19 @@ public class Ui {
     }
 
     public void out(String output) {
-        System.out.println("\t" + output);
+        dukeOut.append(output).append("\n");
+    }
+
+    public StringBuilder getDukeOut() {
+        return dukeOut;
+    }
+
+    public void clear() {
+        dukeOut = new StringBuilder();
     }
 
     public void showLine() {
-        out("========================");
+        out("================================");
     }
 
     /**
@@ -43,6 +54,7 @@ public class Ui {
         if (taskList.size() == 0) {
             out("List is empty!");
         } else {
+            out("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 out((i + 1) + "." + taskList.get(i));
             }

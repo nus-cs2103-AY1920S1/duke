@@ -12,6 +12,13 @@ public class Deadline extends TimeTask {
         super(description, time);
     }
 
+    /**
+     * Returns a Command which generates a Deadline given the input line.
+     *
+     * @param tasks The shared list of tasks.
+     * @param storage Storage to save the tasks after adding the deadline.
+     * @return A Command which generates deadlines.
+     */
     public static Command getCommand(TaskList tasks, Storage storage) {
         return words -> {
             List<String> wordList = List.of(words);
@@ -33,6 +40,11 @@ public class Deadline extends TimeTask {
         };
     }
 
+    /**
+     * Returns a list of strings representing this task so that it can be saved.
+     *
+     * @return A representation of this task as a list for saving.
+     */
     @Override
     public List<String> getSaveList() {
         List<String> list = new ArrayList<>();
@@ -42,6 +54,11 @@ public class Deadline extends TimeTask {
         return list;
     }
 
+    /**
+     * Returns this task as a string to display to the user.
+     *
+     * @return This task as a string.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getTimeString() + ")";

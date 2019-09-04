@@ -17,6 +17,11 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Constructs a new copy of the Duke application.
+     *
+     * @param filePath File path of the save file to store tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         Storage storage = new Storage(filePath);
@@ -40,6 +45,9 @@ public class Duke {
         parser.register("bye", new ByeCommand());
     }
 
+    /**
+     * Runs this Duke application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

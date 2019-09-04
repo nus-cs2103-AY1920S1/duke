@@ -28,6 +28,7 @@ public class Duke {
         ui = new Ui(this);
         tasks = new TaskList(this);
         parser = new Parser(this, tasks);
+        sc = new Scanner(System.in);
         try {
             setStorage(new Storage(filePath));
             tasks.setTaskList(storage.loadTasks());
@@ -58,13 +59,6 @@ public class Duke {
      * Executes and orchestrates the running of the chat-bot.
      */
     public void run() {
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-         */
         ui.dukeOutput("Hello, this is Duke.\n" + "How may I help you?");
         ui.readInputs();
     }

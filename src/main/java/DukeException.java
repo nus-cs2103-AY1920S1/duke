@@ -1,6 +1,5 @@
 /**
  * The DukeException returns a message detailing the exceptions thrown in the Duke program.
- *
  */
 public class DukeException extends Exception {
 

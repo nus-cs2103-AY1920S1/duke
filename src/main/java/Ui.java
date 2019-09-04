@@ -1,16 +1,15 @@
 import java.util.Scanner;
 
 /**
- * Represents the user interface
- * Contains a set of display messages
+ * Represents the user interface.
+ * Contains a set of display messages.
  */
 public class Ui {
     protected Scanner input = new Scanner(System.in);
     protected String blankLines = "____________________________________________________________";
 
     /**
-     * Prints the logo and welcome message
-     *
+     * Prints the logo and welcome message.
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -26,16 +25,15 @@ public class Ui {
     }
 
     /**
-     * Prints the farewell message
-     *
+     * Prints the farewell message and closes the scanner.
      */
     public void showFarewell() {
+        input.close();
         System.out.println("    Bye. Hope to see you again!");
     }
 
     /**
-     * Prints a blank line
-     *
+     * Prints a blank line.
      */
     public void printBlankLine() {
         System.out.println(blankLines);
@@ -43,9 +41,9 @@ public class Ui {
 
 
     /**
-     * Reads system input and returns a string
+     * Reads system input and returns a string.
      *
-     * @return fullCommand The full command as input by the user
+     * @return fullCommand The full command as input by the user.
      */
     public String readCommand() {
         String fullCommand = input.nextLine();

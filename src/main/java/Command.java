@@ -1,7 +1,6 @@
 /**
- * An abstract class command, created from the Parser
- * Contains Strings to store the command and type of command
-
+ * An abstract class command, created from the Parser.
+ * Contains Strings to store the command and type of command.
  */
 
 public abstract class Command {
@@ -14,7 +13,7 @@ public abstract class Command {
         this.command = fullCommand;
     }
 
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException{
+    public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
 
     }
 

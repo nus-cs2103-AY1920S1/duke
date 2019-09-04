@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Represents a storage file
- * Contains a filename to read and write from
+ * Represents a storage file.
+ * Contains a filename to read and write from.
  */
 public class Storage {
 
@@ -18,9 +18,9 @@ public class Storage {
     }
 
     /**
-     * Writes the contents of the task list onto the file
+     * Writes the contents of the task list onto the file.
      *
-     * @param tasks  The task list to get tasks from
+     * @param tasks The task list to get tasks from.
      */
     public void saveTaskList(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
@@ -41,6 +41,7 @@ public class Storage {
                         break;
                     case "D":
                         type = "Deadline";
+                        break;
                 }
                 String isDone = "";
                 if (x.isDone) {
@@ -63,10 +64,11 @@ public class Storage {
     }
 
     /**
-     * Reads the file to add tasks to the task list
+     * Reads the file to add tasks to the task list.
      *
-     * @param tasks  The task list to get tasks from
-     * @return taskList The updated task list
+     * @param fileInput The String read from file.
+     * @param taskList  The task list to get tasks from.
+     * @return taskList The updated task list.
      */
     public TaskList loadFromFile(String fileInput, TaskList taskList) {
         boolean isDone = true;
@@ -94,13 +96,13 @@ public class Storage {
     }
 
     /**
-     * Displays and returns the task list after loading from the file for initialization
-     * Does not load from file if already initialized
+     * Displays and returns the task list after loading from the file for initialization.
+     * Does not load from file if already initialized.
      *
-     * @return taskList The updated task list
-     * @throws DukeException If file is empty
+     * @return taskList The updated task list.
+     * @throws DukeException If file is empty.
      */
-    public TaskList displayTaskList() throws DukeException{
+    public TaskList displayTaskList() throws DukeException {
         TaskList taskList = new TaskList();
         StringBuilder sb = new StringBuilder();
         String strLine = "";
@@ -128,6 +130,6 @@ public class Storage {
             System.err.println("IOException: " + ioe.getMessage());
             throw new DukeException("    Error when reading file");
         }
-    return taskList;
+        return taskList;
     }
 }

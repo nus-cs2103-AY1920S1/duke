@@ -1,27 +1,27 @@
 /**
- * Represents an adding to task list command
- * Commands include adding Deadlines, Events and ToDos to the task list
+ * Represents an adding to task list command.
+ * Commands include adding Deadlines, Events and ToDos to the task list.
  */
 public class AddCommand extends Command {
 
     protected static boolean isExit;
-    public AddCommand (String type, String command) {
+
+	public AddCommand(String type, String command) {
         super(type, command);
     }
 
     /**
-     * Executes the AddCommand
-     * Adds a Deadline Task: "deadline"
-     * Adds an Event Task: "event"
-     * Adds a ToDo Task: "todo"
+     * Executes the AddCommand.
+     * Adds Deadlines: "deadline".
+     * Adds Events: "event".
+     * Adds ToDos: "todo".
      *
-     * @param ui  The Ui currently running
-     * @param taskList The TaskList Class containing the task list
-     * @param storage The Storage class containing the name of file the be read
-     *
+     * @param ui       The Ui currently running.
+     * @param taskList The TaskList Class containing the task list.
+     * @param storage  The Storage class containing the name of file the be read.
      */
     @Override
-    public void execute (Ui ui, TaskList taskList, Storage storage) {
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
         Task newTask;
         switch (this.type) {
             case "deadline":
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-                taskList.tasks.add(newTask);
+	            TaskList.tasks.add(newTask);
                 break;
 
             case "event":
@@ -41,12 +41,12 @@ public class AddCommand extends Command {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-                taskList.tasks.add(newTask);
+	            TaskList.tasks.add(newTask);
                 break;
 
             case "todo":
                 newTask = new ToDo(command);
-                taskList.tasks.add(newTask);
+	            TaskList.tasks.add(newTask);
                 break;
 
             default:
@@ -54,6 +54,6 @@ public class AddCommand extends Command {
         }
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + newTask);
-        System.out.println("    Now you have " + taskList.tasks.size() + " tasks in the list");
+	    System.out.println("    Now you have " + TaskList.tasks.size() + " tasks in the list");
     }
 }

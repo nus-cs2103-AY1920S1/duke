@@ -5,6 +5,7 @@ public class Duke {
 
     public Duke(String fileName) {
         this.ui = new Ui();
+        ui.showWelcome();
         this.storage = new Storage(fileName);
         try {
             taskList = storage.displayTaskList();
@@ -17,7 +18,7 @@ public class Duke {
     public void run() {
         String fullCommand = ui.readCommand();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             ui.printBlankLine();
 
             try {

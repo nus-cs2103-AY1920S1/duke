@@ -9,13 +9,13 @@ public class TaskList {
     public static ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
-     * Marks a task as done
+     * Marks a task as done.
      *
-     * @param command  Command that includes the index of task to be marked
+     * @param command Command that includes the index of task to be marked.
      */
     public void markAsDone(String command) {
         int completedTaskNumber = Integer.parseInt(command);
@@ -25,8 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Prints the entire task list with index
-     *
+     * Prints the entire task list with index.
      */
     public void printTaskList() {
         System.out.println("    Here are the tasks in your list:\n");
@@ -38,20 +37,21 @@ public class TaskList {
     }
 
     /**
-     * Clears the task list
-     *
+     * Clears the task list.
      */
     public void clearTaskList() {
-        this.tasks.clear();
+        tasks.clear();
         System.out.println("    The task list has been cleared!");
     }
+
     /**
-     * Deletes a task from the task list
+     * Deletes a task from the task list.
      *
+     * @param command The index of the task to be deleted, starts from 1.
      */
     public void deleteTask(String command) {
         int index = Integer.parseInt(command);
-        if (index <= tasks.size() && index >0) {
+        if (index <= tasks.size() && index > 0) {
             Task removedTask = tasks.remove(index - 1);
             System.out.println("    Noted. I've removed this task:\n      " + removedTask);
             System.out.println("    Now you have " + tasks.size() + " tasks left in the list");
@@ -62,14 +62,15 @@ public class TaskList {
             System.out.println("    Congratulations, your last task has been deleted!");
         }
     }
+
     /**
-     * Searches the task list with a keyword and prints all that matches
-     * Prints "There are no matching tasks in your list" if no match is found
+     * Searches the task list with a keyword and prints all that matches.
+     * Prints "There are no matching tasks in your list" if no match is found.
      *
-     * @param command  Command that includes the keyword to be searched for
+     * @param command Command that includes the keyword to be searched for.
      */
     public void searchByKeyword(String command) {
-        command = command.substring(1, command.length());
+        command = command.substring(1);
         boolean hasMatch = false;
         for (Task x : tasks) {
             if (x.description.contains(command)) {
@@ -78,7 +79,7 @@ public class TaskList {
                     System.out.println("    Here are the matching tasks in your list");
                     hasMatch = true;
                 }
-                System.out.println("      " + Integer.toString(index) + "." + x);
+                System.out.println("      " + index + "." + x);
             }
         }
         if (!hasMatch) {

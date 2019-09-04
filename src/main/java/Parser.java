@@ -7,7 +7,6 @@ import java.util.Date;
  * Represents a Parser that deals with making sense of the user command.
  */
 public class Parser {
-
     private Ui ui = new Ui();
 
     /**
@@ -17,7 +16,7 @@ public class Parser {
      * @return The TaskList that has been changed.
      * @throws Exception If user do not input index.
      */
-    public TaskList parseDone(String str, TaskList tasks) throws Exception{
+    public TaskList parseDone(String str, TaskList tasks) throws Exception {
         String[] strArr = str.split(" ");
 
         if (strArr.length == 1) { //no description
@@ -35,7 +34,7 @@ public class Parser {
         Task t = tasks.get(index);
         t.markAsDone();
 
-        ui.showTaskDone(t);
+        tasks.setOutput(ui.showTaskDone(t));
 
         return tasks;
     }
@@ -56,7 +55,7 @@ public class Parser {
         Task t = new Todo(str.substring(5));
         tasks.add(t);
 
-        ui.showAddTask(t, tasks);
+        tasks.setOutput(ui.showAddTask(t, tasks));
 
         return tasks;
     }
@@ -101,7 +100,7 @@ public class Parser {
         Task t = new Deadline(str.substring(9, indexOfSlash - 1), date, time);
         tasks.add(t);
 
-        ui.showAddTask(t, tasks);
+        tasks.setOutput(ui.showAddTask(t, tasks));
 
         return tasks;
     }
@@ -146,7 +145,7 @@ public class Parser {
         Task t = new Event(str.substring(6, indexOfSlash - 1), date, time);
         tasks.add(t);
 
-        ui.showAddTask(t, tasks);
+        tasks.setOutput(ui.showAddTask(t, tasks));
 
         return tasks;
     }
@@ -175,12 +174,19 @@ public class Parser {
 
         Task t = tasks.delete(index);
 
-        ui.showDeleteTask(t, tasks);
+        tasks.setOutput(ui.showDeleteTask(t, tasks));
 
         return tasks;
 
     }
 
+    /**
+     * Making sense of Find command.
+     * @param str The String of command.
+     * @param tasks THe lis of Task in TaskList.
+     * @return The TaskList that contains the keyword.
+     * @throws Exception If user do not input keyword.
+     */
     public TaskList parseFind(String str, TaskList tasks) throws Exception {
         String[] strArr = str.split(" ");
 

@@ -2,100 +2,130 @@
  * Represents user interface that deals with interactions with user.
  */
 public class Ui {
+    private TaskList tasks;
 
-    public void showWelcome() {
+    public Ui(TaskList tasks) {
+        this.tasks = tasks;
+    }
+
+    public Ui() {}
+
+    public TaskList getTasksList() {
+        return tasks;
+    }
+
+    /**
+     * Returns welcome message.
+     * @return Welcome message.
+     */
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        showLine();
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
-        showLine();
+        return "Hello! I'm Duke.\nWhat can I do for you?\n";
     }
 
-    public void showGoodbye() {
-        showLine();
-        System.out.println("\tBye. Hope to see you again soon!");
-        showLine();
+    /**
+     * Returns goodbye message.
+     * @return
+     */
+    public String showGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Print out the TaskList in order.
-     * @param TaskList The list of task.
      */
-    public void showTaskList(TaskList TaskList) {
-        System.out.println("\tHere are the tasks in your list:");
+    public String showTaskList() {
+        String s = "Here are the tasks in your list:\n";
 
         int i = 1;
-        for (Task t : TaskList.getList()) {
-            System.out.println("\t" + i + ". " + t);
+        for (Task t : tasks.getList()) {
+            s += i + ". " + t + "\n";
             i++;
         }
-    }
 
-    public void showLine() {
-        System.out.println("\t____________________________________________________________________");
+        return s;
     }
 
     /**
      * Takes in Command, parse it and returns the changed list.
-     * @param str The String of command.
-     * @param list The list of task.
+     * @param str   The String of command.
      * @return The list of task.
      * @throws Exception If command is missing input.
      */
-    public TaskList input(String str, TaskList list) throws Exception {
+    public TaskList input(String str) throws Exception {
         String[] strArr = str.split(" ");
         Parser parser = new Parser();
 
         if (strArr[0].equals("list")) {
-            showTaskList(list);
+            tasks.setOutput(showTaskList());
         } else if (strArr[0].equals("done")) {
-            list = parser.parseDone(str, list);
+            tasks = parser.parseDone(str, tasks);
         } else if (strArr[0].equals("todo")) {
-            list = parser.parseTodo(str, list);
+            tasks = parser.parseTodo(str, tasks);
         } else if (strArr[0].equals("deadline")) {
-            list = parser.parseDeadline(str, list);
+            tasks = parser.parseDeadline(str, tasks);
         } else if (strArr[0].equals("event")) {
-            list = parser.parseEvent(str, list);
+            tasks = parser.parseEvent(str, tasks);
         } else if (strArr[0].equals("delete")) {
-            list = parser.parseDelete(str, list);
+            tasks = parser.parseDelete(str, tasks);
         } else if (strArr[0].equals("find")) {
-            showMatchingTask(parser.parseFind(str, list));
+            tasks.setOutput(showMatchingTask(parser.parseFind(str, tasks)));
+        } else if (strArr[0].equals("bye")) {
+            tasks.setOutput(showGoodbye());
         } else {
             throw new DukeException("OOPS!!! I,m sorry, but I don't know what that means :-(");
         }
 
-        return list;
+        return tasks;
     }
 
-    public void showAddTask(Task t, TaskList list) {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + t);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
-
+    /**
+     * Returns the message of task added.
+     * @param t     The Task that is added into TaskList.
+     * @param tasks The TaskList of user.
+     * @return The string of added task.
+     */
+    public String showAddTask(Task t, TaskList tasks) {
+        return "Got it. I've added this task:\n" + "  " + t + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
-    public void showTaskDone(Task t) {
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t" + t);
+    /**
+     * Return the message of task mark as done.
+     * @param t The Task that is marked as done.
+     * @return The string of task mark as done.
+     */
+    public String showTaskDone(Task t) {
+        return "Nice! I've marked this task as done:\n\t" + t;
     }
 
-    public void showDeleteTask(Task t, TaskList list) {
-        System.out.println("\tNoted! I've removed this task:");
-        System.out.println("\t" + t);
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+    /**
+     * Returns the message of task that is deleted.
+     * @param t     The Task deleted.
+     * @param tasks The TaskList of user.
+     * @return The string of task deleted.
+     */
+    public String showDeleteTask(Task t, TaskList tasks) {
+        return "Noted! I've removed this task:\n" + t + "\nNow you have " + tasks.size() + " tasks in the list.\n";
     }
 
-    public void showMatchingTask(TaskList tasks) {
-        System.out.println("\tHere are the matching tasks in your list:");
+    /**
+     * Returns all Task that match the keyword.
+     * @param tasks The TaskList of matched Task.
+     * @return The string of all task that match the keyword.
+     */
+    public String showMatchingTask(TaskList tasks) {
+        String s = "Here are the matching tasks in your list:\n";
 
         int i = 1;
         for (Task t : tasks.getList()) {
-            System.out.println("\t" + i + ". " + t);
+            s += i + ". " + t + "\n";
             i++;
         }
+
+        return s;
     }
 }

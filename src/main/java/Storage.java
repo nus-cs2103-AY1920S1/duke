@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +41,7 @@ public class Storage {
                 Task t;
                 if (str.charAt(1) == 'T') {
                     t = new Todo(str.substring(7));
-                    if (str.charAt(4) == '\u2713') {//mark task as done
+                    if (str.charAt(4) == '\u2713') { //mark task as done
                         t.markAsDone();
                     }
                     tasks.add(t);
@@ -79,7 +80,9 @@ public class Storage {
                 }
             }
             reader.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

@@ -11,25 +11,29 @@ import duke.utils.Ui;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+
 /**
  * Main class that brings together all the implemented classes to execute the Duke
  * tasking logic.
  */
-public class Duke {
+public class Duke extends Application {
 
-    public static String saveFilePath;
+    public static String saveFilePath = "data/savedTasks.txt";
     private Storage storage;
     private TaskList allTasks;
     private Ui ui;
 
     /**
-     * Constructor.
-     *
-     * @param saveFilePath String representing the path to the file in which Tasks
-     *                     will be saved
+     * Constructor. Will attempt to load any saved tasks specified in the
+     * Duke.savedFilePath class attribute. If not saved tasks are found, then
+     * an empty TaskList is initialised.
      */
-    public Duke(String saveFilePath) {
-        Duke.saveFilePath = saveFilePath;
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(Duke.saveFilePath);
         try {
@@ -45,7 +49,8 @@ public class Duke {
      * when the user inputs "bye" to the console.
      */
     public static void main(String[] args) {
-        Duke d = new Duke("data/savedTasks.txt");
+        Duke.saveFilePath = "data/savedTasks.txt"; //This is meant to be readily changed.
+        Duke d = new Duke();
         d.run();
     }
 
@@ -73,5 +78,14 @@ public class Duke {
         }
 
         ui.printExitMsg();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }

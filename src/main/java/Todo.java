@@ -1,19 +1,17 @@
-import java.util.ArrayList;
-
 public class Todo extends Tasks {
-    String tag = "T";
-    String taskDescription;
-    int status;
+    private final String TAG = "T";
 
-    public Todo(ArrayList<String> inputList) {
-        super(inputList.get(1));
-        this.taskDescription = super.taskDetails;
-        this.status = super.status;
+    public Todo(String dets) {
+        super(dets);
     }
+
+    public void finishTask() {
+        super.finishTask();
+    }
+
 
     @Override
-    Public String toString() {
-        return tag + " | " + taskDescription + " | " + taskDetails;
+    public String toString() {
+        return TAG + " | " + super.getStatus() + " | " + super.getDetails();
     }
-
 }

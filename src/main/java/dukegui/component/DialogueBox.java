@@ -1,4 +1,4 @@
-package duke.guicomponent;
+package dukegui.component;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

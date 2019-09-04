@@ -1,13 +1,13 @@
-package duke.command;
+package dukegui.command;
 
 import duke.exception.DukeIOException;
-import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeIllegalIndexException;
 
-import duke.module.AutoResponse;
 import duke.module.Storage;
 import duke.module.TaskList;
-import duke.module.Ui;
+import duke.module.AutoResponse;
+
+import duke.task.Task;
 
 /**
  * Represents the "delete" command supported by Duke.
@@ -22,35 +22,41 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a <code>Task</code> from the <code>TaskList</code>.
+     * Returns the result of deleting a <code>Task</code> from the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
-     * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
-     * @throws DukeIllegalIndexException When the index inputted is out of bounds or missing.
+     * @throws DukeIllegalIndexException When the index inputted is out of bounds.
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeIllegalIndexException, DukeIOException {
+    public String getResponse(TaskList taskList, Storage storage)
+            throws DukeIllegalIndexException, DukeIOException {
+        String response;
         try {
             int index = Integer.parseInt(this.detail);
-            ui.printToUser(AutoResponse.DUKE_DELETE_TASK,
-                           "  " + taskList.deleteTaskAt(index).getStatus(),
-                           String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
+            Task task = taskList.deleteTaskAt(index);
+            response = new StringBuilder(AutoResponse.DUKE_DELETE_TASK)
+                    .append("\n")
+                    .append("  ")
+                    .append(task.getStatus())
+                    .append(String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()))
+                    .toString();
         } catch (NumberFormatException e) {
             if (this.detail.isEmpty()) {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_MISSING_INDEX);
             }
             if (taskList.isEmpty()) {
-                ui.printToUser(AutoResponse.DUKE_NO_TASKS);
+                response = AutoResponse.DUKE_NO_TASKS;
             } else if (this.detail.equals("all")) {
-                    taskList.deleteAllTasks();
-                    ui.printToUser(AutoResponse.DUKE_DELETE_ALL_TASKS);
+                taskList.deleteAllTasks();
+                response = AutoResponse.DUKE_DELETE_ALL_TASKS;
             } else {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_ILLEGAL_INDEX);
             }
         }
         storage.saveTasks(taskList);
+        return response;
     }
 
     /**

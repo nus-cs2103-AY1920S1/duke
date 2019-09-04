@@ -1,10 +1,8 @@
-package duke.command;
+package dukegui.command;
 
 import duke.exception.DukeException;
-
 import duke.module.Storage;
 import duke.module.TaskList;
-import duke.module.Ui;
 
 /**
  * Abstract class to represent the commands supported by Duke.
@@ -12,14 +10,14 @@ import duke.module.Ui;
 public abstract class Command {
 
     /**
-     * Executes a certain function.
+     * Returns the result of executing a certain function.
      *
      * @param taskList List of tasks to manage.
-     * @param ui UI to show result to user.
      * @param storage Storage to save any changes if necessary.
+     * @return Result of executing this {@code Command}.
      * @throws DukeException When applicable.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String getResponse(TaskList taskList, Storage storage) throws DukeException;
 
     /**
      * Shows whether executing this Command should quit the Duke or not.

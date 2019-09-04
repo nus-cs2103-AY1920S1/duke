@@ -2,6 +2,7 @@ package duke.module;
 
 import duke.task.Task;
 import duke.exception.DukeIllegalIndexException;
+import duke.module.AutoResponse;
 
 import java.util.Iterator;
 import java.util.List;
@@ -12,11 +13,6 @@ import java.util.ArrayList;
  * When Duke application reboots, TaskList is loaded with previous tasks through {@link Storage}.
  */
 public class TaskList {
-
-    /** {@value DUKE_LIST_TASKS} */
-    private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
-    /** {@value DUKE_NO_TASKS} */
-    private static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
 
     /** List storing all the user tasks. */
     private List<Task> taskList;
@@ -47,9 +43,9 @@ public class TaskList {
     private String generateIndexExceptionMessage(int index) {
         String message;
         if (index < 1) {
-            message = "☹ OOPS!!! Index has to be greater than zero.";
+            message = AutoResponse.ERROR_NONPOSITIVE_INDEX;
         } else {
-            message = String.format("☹ OOPS!!! Currently there are only %d tasks.", this.taskList.size());
+            message = String.format(AutoResponse.ERROR_EXCEED_INDEX, this.taskList.size());
         }
         return message;
     }
@@ -109,6 +105,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public boolean isEmpty() {
+        return this.taskList.size() == 0;
+    }
+
     /**
      * Deletes the task at the given index.
      *
@@ -163,11 +163,11 @@ public class TaskList {
      */
     public String[] listAll() {
         if (this.taskList.size() == 0) {
-            return new String[] { DUKE_NO_TASKS };
+            return new String[] { AutoResponse.DUKE_NO_TASKS };
         }
 
         List<String> lines = new ArrayList<>();
-        lines.add(DUKE_LIST_TASKS);
+        lines.add(AutoResponse.DUKE_LIST_TASKS);
         for (int i = 0; i < this.taskList.size(); i++) {
             lines.add(String.format("  %d.%s",
                     i + 1,

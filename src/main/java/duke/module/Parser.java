@@ -14,8 +14,8 @@ import duke.date.DukeDate;
 
 import duke.exception.DukeDateFormatException;
 import duke.exception.DukeIOException;
-
 import duke.exception.DukeIllegalCommandException;
+
 import duke.task.Task;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -25,13 +25,6 @@ import duke.task.TodoTask;
  * Parses various Strings into meaningful information.
  */
 public class Parser {
-
-    /** {@value ERROR_DATE_FORMAT} */
-    private static final String ERROR_DATE_FORMAT = "☹ OOPS!!! Date must be in MM/DD/YYYY HHMM format.";
-    /** {@value ERROR_SAVE_FILE_FORMAT} */
-    private static final String ERROR_SAVE_FILE_FORMAT = "☹ OOPS!!! Saved file contains illegal formatting.";
-    /** {@value ERROR_ILLEGAL_COMMAND} */
-    private static final String ERROR_ILLEGAL_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     /**
      * This stores all the commands that Duke can understand and carry out.
@@ -67,7 +60,7 @@ public class Parser {
                                 Integer.parseInt(dateAndTime[1].substring(0, 2)),
                                 Integer.parseInt(dateAndTime[1].substring(2)));
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeDateFormatException(ERROR_DATE_FORMAT);
+            throw new DukeDateFormatException(AutoResponse.ERROR_DATE_FORMAT);
         }
     }
 
@@ -94,10 +87,10 @@ public class Parser {
                         taskComponents[1].equals("1"),
                         parseToDukeDate(taskComponents[3]));
             default:
-                throw new DukeIOException(ERROR_SAVE_FILE_FORMAT);
+                throw new DukeIOException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
             }
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            throw new DukeIOException(ERROR_SAVE_FILE_FORMAT);
+            throw new DukeIOException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
         }
     }
 
@@ -121,7 +114,7 @@ public class Parser {
                     hour,
                     Integer.parseInt(parsed[4]));
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | DukeDateFormatException e) {
-            throw new DukeIOException(ERROR_SAVE_FILE_FORMAT);
+            throw new DukeIOException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
         }
     }
 
@@ -153,10 +146,10 @@ public class Parser {
             case BYE:
                 return new ExitCommand();
             default:
-                throw new DukeIllegalCommandException(ERROR_ILLEGAL_COMMAND);
+                throw new DukeIllegalCommandException(AutoResponse.ERROR_ILLEGAL_COMMAND);
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeIllegalCommandException(ERROR_ILLEGAL_COMMAND);
+            throw new DukeIllegalCommandException(AutoResponse.ERROR_ILLEGAL_COMMAND);
         }
     }
 

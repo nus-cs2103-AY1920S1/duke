@@ -1,11 +1,11 @@
-package duke.command;
+package dukegui.command;
 
 import duke.exception.DukeIllegalArgumentException;
 
 import duke.module.AutoResponse;
 import duke.module.Storage;
 import duke.module.TaskList;
-import duke.module.Ui;
+
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -24,20 +24,24 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds a <code>Task</code> in the <code>TaskList</code> with a description that contains {@link #keyword}.
+     * Returns the response to this FindCommand.
      *
      * @param taskList List of tasks to manage.
-     * @param ui UI to show result to user.
      * @param storage Storage to save any changes if necessary.
      * @throws DukeIllegalArgumentException When the keyword is missing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeIllegalArgumentException {
+    public String getResponse(TaskList taskList, Storage storage) throws DukeIllegalArgumentException {
         if (keyword.isEmpty()) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_KEYWORD);
         }
-        List<Task> foundTasks = taskList.findAllTasksContaining(this.keyword);
-        ui.printToUser(this.listTasks(foundTasks));
+        String[] lines = this.listTasks(taskList.findAllTasksContaining(this.keyword));
+        StringBuilder sb = new StringBuilder();
+        for (String line : lines) {
+            sb.append(line);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     /**

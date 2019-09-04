@@ -1,4 +1,4 @@
-package duke.command;
+package dukegui.command;
 
 import duke.date.DukeDate;
 
@@ -10,40 +10,38 @@ import duke.module.AutoResponse;
 import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
-import duke.module.Ui;
 
-import duke.task.DeadlineTask;
+import duke.task.EventTask;
 import duke.task.Task;
 
 /**
- * Represents the "deadline" command supported by Duke.
+ * Represents the "event" command supported by Duke.
  */
-public class AddDeadlineCommand extends Command {
+public class AddEventCommand extends Command {
 
-    /** "{@value DELIMITER_DEADLINE_DATE}" : To be used when splitting {@link #description}. */
-    private static final String DELIMITER_DEADLINE_DATE = "/by";
+    /** "{@value DELIMITER_EVENT_DATE}" : To be used when splitting {@link #description}. */
+    private static final String DELIMITER_EVENT_DATE = "/at";
 
-    /** Should contain the description and due date of a <code>DeadlineTask</code>. */
+    /** Should contain the description and event date of this <code>EventTask</code>. */
     private String description;
 
-    public AddDeadlineCommand(String description) {
+    public AddEventCommand(String description) {
         this.description = description;
     }
 
     /**
-     * Adds a {@link DeadlineTask} to the <code>TaskList</code>.
+     * Returns the result of adding a {@link EventTask} to the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
-     * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
      * @throws DukeDateFormatException When the date is formatted incorrectly.
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String getResponse(TaskList taskList, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
-        String[] arg = this.description.split(DELIMITER_DEADLINE_DATE);
+        String[] arg = this.description.split(DELIMITER_EVENT_DATE);
 
         // Check for errors
         this.throwIfInvalid(arg);
@@ -53,16 +51,19 @@ public class AddDeadlineCommand extends Command {
         DukeDate dukeDate = Parser.parseToDate(date);
 
         // Add task to the TaskList
-        Task task = new DeadlineTask(arg[0].trim(), dukeDate);
+        Task task = new EventTask(arg[0].trim(), dukeDate);
         taskList.addTask(task);
 
         // Save new task to the storage file
         storage.saveTasks(taskList);
 
-        // Display the result to the user
-        ui.printToUser(AutoResponse.DUKE_ADD_TASK,
-                "  " + task.getStatus(),
-                String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
+        return (new StringBuilder(AutoResponse.DUKE_ADD_TASK))
+                .append("\n")
+                .append("  ")
+                .append(task.getStatus())
+                .append("\n")
+                .append(String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()))
+                .toString();
     }
 
     private void throwIfInvalid(String[] arg)
@@ -91,7 +92,7 @@ public class AddDeadlineCommand extends Command {
         } else if (!hasDescription) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_TASK_DESCRIPTION);
         } else if (!hasDate) {
-            throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_DEADLINE_DATE);
+            throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_EVENT_DATE);
         }
     }
 
@@ -99,7 +100,6 @@ public class AddDeadlineCommand extends Command {
      * Returns false.
      *
      * @return False.
-     * @see Command#isExit()
      */
     @Override
     public boolean isExit() {

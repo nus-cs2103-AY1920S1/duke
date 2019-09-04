@@ -1,5 +1,6 @@
 package duke.date;
 
+import duke.module.AutoResponse;
 import duke.exception.DukeDateFormatException;
 
 import java.text.DecimalFormat;
@@ -10,18 +11,6 @@ import java.text.DecimalFormat;
  * <code>DukeDate</code> can be formatted into a String by {@link DukeDate#format()} or {@link DukeDate#toString()}.
  */
 public class DukeDate {
-
-    /** {@value ERROR_ILLEGAL_YEAR} */
-    private static final String ERROR_ILLEGAL_YEAR = "☹ OOPS!!! Year should be a number greater than 0";
-    /** {@value ERROR_ILLEGAL_MONTH} */
-    private static final String ERROR_ILLEGAL_MONTH = "☹ OOPS!!! Month should be a number between 1 and 12.";
-    /** {@value ERROR_ILLEGAL_DAY} */
-    private static final String ERROR_ILLEGAL_DAY = "☹ OOPS!!! Date must be greater than 0 (and less than 31).";
-    /** {@value ERROR_DAY_MONTH_MISMATCH} */
-    private static final String ERROR_DAY_MONTH_MISMATCH = "☹ OOPS!!! Given date does not exist in given month.";
-    /** {@value ERROR_ILLEGAL_TIME} */
-    private static final String ERROR_ILLEGAL_TIME = "☹ OOPS!!! Hour must be between 0 and 23,\n"
-            + "      and minute must be between 0 and 59.";
 
     private int year;
     private Month month;
@@ -95,12 +84,12 @@ public class DukeDate {
     public DukeDate(int year, int month, int day, int hour, int minute)
             throws DukeDateFormatException {
         if (year < 0) {
-            throw new DukeDateFormatException(ERROR_ILLEGAL_YEAR);
+            throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_YEAR);
         }
         this.year = year;
         this.month = this.getMonth(month);
         if (!dayIsValid(month, day)) {
-            throw new DukeDateFormatException(ERROR_DAY_MONTH_MISMATCH);
+            throw new DukeDateFormatException(AutoResponse.ERROR_DAY_MONTH_MISMATCH);
         }
         this.day = day;
         this.setTime(hour, minute);
@@ -119,12 +108,12 @@ public class DukeDate {
     public DukeDate(int year, Month month, int day, int hour, int minute)
             throws DukeDateFormatException {
         if (year < 0) {
-            throw new DukeDateFormatException(ERROR_ILLEGAL_YEAR);
+            throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_YEAR);
         }
         this.year = year;
         this.month = month;
         if (!dayIsValid(month.getMonthInt(), day)) {
-            throw new DukeDateFormatException(ERROR_DAY_MONTH_MISMATCH);
+            throw new DukeDateFormatException(AutoResponse.ERROR_DAY_MONTH_MISMATCH);
         }
         this.day = day;
         this.setTime(hour, minute);
@@ -164,7 +153,7 @@ public class DukeDate {
         case 12:
             return Month.DECEMBER;
         default:
-            throw new DukeDateFormatException(ERROR_ILLEGAL_MONTH);
+            throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_MONTH);
         }
     }
 
@@ -178,7 +167,7 @@ public class DukeDate {
      */
     private boolean dayIsValid(int month, int day) throws DukeDateFormatException {
         if (day < 1) {
-            throw new DukeDateFormatException(ERROR_ILLEGAL_DAY);
+            throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_DAY);
         }
         switch (month) {
         case 2:
@@ -197,7 +186,7 @@ public class DukeDate {
         case 11:
             return day <= 30;
         default:
-            throw new DukeDateFormatException(ERROR_ILLEGAL_MONTH);
+            throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_MONTH);
         }
     }
 
@@ -210,7 +199,7 @@ public class DukeDate {
      */
     private void setTime(int hour, int minute) throws DukeDateFormatException {
         if (hour > 23 || hour < 0 || minute > 59 || minute < 0) {
-            throw new DukeDateFormatException(ERROR_ILLEGAL_TIME);
+            throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_TIME);
         }
         if (hour >= 12) {
             this.amPmMarker = "PM";

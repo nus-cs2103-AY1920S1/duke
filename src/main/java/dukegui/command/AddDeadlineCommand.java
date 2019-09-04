@@ -1,4 +1,4 @@
-package duke.command;
+package dukegui.command;
 
 import duke.date.DukeDate;
 
@@ -10,7 +10,6 @@ import duke.module.AutoResponse;
 import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
-import duke.module.Ui;
 
 import duke.task.DeadlineTask;
 import duke.task.Task;
@@ -31,17 +30,17 @@ public class AddDeadlineCommand extends Command {
     }
 
     /**
-     * Adds a {@link DeadlineTask} to the <code>TaskList</code>.
+     * Returns the result of adding a {@link DeadlineTask} to the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
-     * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
+     * @return Result of executing this {@code AddDeadlineCommand}.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
      * @throws DukeDateFormatException When the date is formatted incorrectly.
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public String getResponse(TaskList taskList, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
         String[] arg = this.description.split(DELIMITER_DEADLINE_DATE);
 
@@ -59,14 +58,17 @@ public class AddDeadlineCommand extends Command {
         // Save new task to the storage file
         storage.saveTasks(taskList);
 
-        // Display the result to the user
-        ui.printToUser(AutoResponse.DUKE_ADD_TASK,
-                "  " + task.getStatus(),
-                String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
+        return (new StringBuilder(AutoResponse.DUKE_ADD_TASK))
+                .append("\n")
+                .append("  ")
+                .append(task.getStatus())
+                .append("\n")
+                .append(String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()))
+                .toString();
     }
 
     private void throwIfInvalid(String[] arg)
-            throws DukeIllegalArgumentException {
+        throws DukeIllegalArgumentException {
         String description = "";
         boolean hasDescription;
         try {

@@ -121,8 +121,7 @@ public class GuiParser  {
         if (inputArray.length == 1) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
-        //form back string , description stops at /at
-        //date time starts from /at
+        //form back string , description stops at /at date time starts from /at
         String eventTaskDescriptionString = "";
         String eventTaskDateAndTimeString = "";
         boolean createDesc = true;
@@ -156,16 +155,13 @@ public class GuiParser  {
     }
 
 
-  
-
     /**
      * String manipulation method to return a formatted
      * from 2/12/2019 1800 to 2nd of December 2019 6pm etc
      * @param dateAndTimeString given string in the format of d/mm/yyyy HHmm
      * @return formatted date and time
      */
-    private static String convertStringToDate(String dateAndTimeString) {
-        try {
+    private static String convertStringToDate(String dateAndTimeString) throws DukeException {
             String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
             String date = arrayOfDateAndTime[0];
             String time = arrayOfDateAndTime[1];
@@ -175,12 +171,6 @@ public class GuiParser  {
             time = convertTime(timeInInt);
             dateAndTimeString = date + ", " + time;
             return dateAndTimeString;
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("invalid date and time supplied: try d/mm/yyyy 0000 format");
-        } catch (DukeException e ) {
-            System.out.println(e);
-        }
-        return " ";
     }
 
 
@@ -272,8 +262,7 @@ public class GuiParser  {
      * @param dateAndTimeString  e.g 2/12/2019 1400-1500
      * @return formatted string
      */
-    private static String convertStringToDateEvent(String dateAndTimeString) {
-        try {
+    private static String convertStringToDateEvent(String dateAndTimeString) throws DukeException {
             String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
             String date = arrayOfDateAndTime[0];
             String temp = arrayOfDateAndTime[1];
@@ -285,11 +274,6 @@ public class GuiParser  {
             timeEnding = convertTime(Integer.valueOf(timeEnding));
             dateAndTimeString = date + ", " + timeStarting + "-" +timeEnding;
             return dateAndTimeString;
-        } catch (IndexOutOfBoundsException e) {
-            return "invalid date and time supplied: try d/mm/yyyy 0000 format";
-        } catch (DukeException e ) {
-            return e.toString();
-        }
     }
 
     /**
@@ -297,7 +281,7 @@ public class GuiParser  {
      * @param test dummy String
      * @return
      */
-    public static String accessConvertStringToDate(String test) {
+    public static String accessConvertStringToDate(String test) throws DukeException {
         return convertStringToDate(test);
     }
 

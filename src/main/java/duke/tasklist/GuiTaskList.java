@@ -36,16 +36,12 @@ public class GuiTaskList {
     public String listTask() {
         String result = "";
         int num = 1;
-        result += "Here are the tasks in your list:";
-        result += "\n";
+        result = result + "Here are the tasks in your list:" + "\n";
         for (Task i : store) {
-            result += String.valueOf(num);
-            result += (". " + i);
-            result += "\n";
+            result = result + String.valueOf(num) + (". " + i) + "\n";
             num++;
         }
         return result;
-
     }
 
     /**
@@ -57,9 +53,8 @@ public class GuiTaskList {
         String result = "";
         Task taskToModify = store.get(index);
         taskToModify.markAsDone();
-        result += "Nice! I've marked this task as done: ";
-        result += "\n";
-        result += taskToModify.toString();
+        result = result + "Nice! I've marked this task as done: "
+                + "\n" + taskToModify.toString();
         storage.saveTaskToFile(store);
         return result;
     }
@@ -75,11 +70,9 @@ public class GuiTaskList {
         Task toDoTask = new ToDo(toDoTaskString);
         store.add(toDoTask);
         storage.saveTaskToFile(store);
-        result += GuiUi.printGotIt();
-        result += "\n";
-        result += (" " + toDoTask.toString());
-        result += "\n";
-        result += (GuiUi.printNow(store.size()));
+        result = result + GuiUi.printGotIt() + "\n" + (" "
+                + toDoTask.toString()) + "\n"
+                + (GuiUi.printNow(store.size()));
         return result;
     }
 
@@ -94,11 +87,9 @@ public class GuiTaskList {
         Task deadlineTask = new Deadline(deadlineTaskDescriptionString, deadlineTaskDateAndTimeString);
         store.add(deadlineTask);
         storage.saveTaskToFile(store);
-        result += GuiUi.printGotIt();
-        result += "\n";
-        result += (" " + deadlineTask.toString());
-        result += "\n";
-        result += (GuiUi.printNow(store.size()));
+        result = result + GuiUi.printGotIt() + "\n" + (" "
+                + deadlineTask.toString())  + "\n"
+                + (GuiUi.printNow(store.size()));
         return result;
     }
 
@@ -114,11 +105,9 @@ public class GuiTaskList {
         Task eventTask = new Event(eventTaskDescriptionString, eventTaskDateAndTimeString);
         store.add(eventTask);
         storage.saveTaskToFile(store);
-        result += GuiUi.printGotIt();
-        result += "\n";
-        result += (" " + eventTask.toString());
-        result += "\n";
-        result += (GuiUi.printNow(store.size()));
+        result = result + GuiUi.printGotIt() + "\n" + (" "
+                + eventTask.toString()) + "\n"
+                + (GuiUi.printNow(store.size()));
         return result;
     }
 
@@ -130,11 +119,9 @@ public class GuiTaskList {
         String result = "";
         Task removed = store.remove(index);
         storage.saveTaskToFile(store);
-        result += GuiUi.printNoted();
-        result += "\n";
-        result += removed.toString();
-        result += "\n";
-        result += GuiUi.printNow(store.size());
+        result = result + GuiUi.printNoted() + "\n"
+                + removed.toString() + "\n"
+                + GuiUi.printNow(store.size());
         return result;
     }
 
@@ -146,8 +133,7 @@ public class GuiTaskList {
         String result = "";
         int num = 1;
         for (Task i : store) {
-            result += (num + ". " + i);
-            result += "\n";
+            result = result + (num + ". " + i) + "\n";
             num++;
         }
         return result;
@@ -161,16 +147,14 @@ public class GuiTaskList {
             listOfAllDesc.add(i.getDescription());
         }
         GuiTaskList temp = new GuiTaskList(new ArrayList<Task>());
-
         for (int i = 0; i < store.size(); i++) {
             String eachDescription = listOfAllDesc.get(i);
             if (eachDescription.contains(query)) {
                 temp.addGenericTask(store.get(i));
             }
         }
-        result += ("Here are the matching tasks in your list:");
-        result += "\n";
-        result += temp.listSearchQuery();
+        result = result + ("Here are the matching tasks in your list:")
+                + "\n" + temp.listSearchQuery();
         return result;
     }
 }

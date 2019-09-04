@@ -27,15 +27,22 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
-    private void run() {
+    public Duke() {
+        this.ui = new Ui();
+        this.dateParser = new DateParser(DATE_FORMAT);
+        this.storage = new Storage(dateParser, "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat");
+        this.parser = new Parser();
 
-        ui = new Ui();
-        dateParser = new DateParser(DATE_FORMAT);
-        storage = new Storage(dateParser, "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat");
-        parser = new Parser();
+        this.ui.printGreeting();
+        this.taskList = storage.readDataFile();
+    }
 
-        ui.printGreeting();
-        taskList = storage.readDataFile();
+    public void exit() {
+        storage.writeDataFile(taskList);
+        ui.printGoodbye();
+    }
+
+    public void run() {
 
         String line = ui.nextLine();
 
@@ -54,13 +61,12 @@ public class Duke {
             line = ui.nextLine();
         }
 
-        storage.writeDataFile(taskList);
-        ui.printGoodbye();
+        exit();
     }
 
     // Processes a single line of input by identifying the command that was given, then delegating it
     // to a subfunction to handle the command call.
-    private void processInputLine(String line) throws DukeException, ParseException {
+    public void processInputLine(String line) throws DukeException, ParseException {
 
         Command command = parser.getCommandFromLine(line);
         String commandText = command.toString();

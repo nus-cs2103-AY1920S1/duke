@@ -24,12 +24,12 @@ public class DoneCommand extends Command {
      * @throws IOException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
 
         Task task = taskList.done(this.index);
 
-        ui.done(task);
-
         storage.save(taskList.list);
+
+        return ui.done(task);
     }
 }

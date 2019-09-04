@@ -10,10 +10,10 @@ public class FindCommand extends Command {
 
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
 
         Task[] matchedTasks = taskList.find(text);
 
-        ui.find(matchedTasks);
+        return ui.find(matchedTasks);
     }
 }

@@ -14,8 +14,8 @@ public class ListCommand extends Command {
      * @throws IOException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        ui.list();
-        taskList.list();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+
+        return ui.list(taskList.list);
     }
 }

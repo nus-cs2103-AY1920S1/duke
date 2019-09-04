@@ -33,7 +33,7 @@ public abstract class Command {
      * @param storage  the <code>Storage</code> object to load and record data
      * @throws DukeException the <code>DukeException</code> that may be thrown during command execution
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    abstract public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Compares two commands based on their types.

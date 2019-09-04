@@ -24,6 +24,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        setUp();
     }
 
     /**
@@ -78,5 +79,14 @@ public class Duke {
             }
         }
         ui.showGoodbye();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }

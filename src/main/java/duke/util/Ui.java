@@ -16,6 +16,9 @@ public class Ui {
     private static final String separator = "    ____________________________________________________________\n";
     private static final String welcomeSentence = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String endingSentence = "Bye. Hope to see you again soon!";
+    private static final String savingError = "☹ OOPS!!! We cannot save your data!";
+    private static final String loadingError = "☹ OOPS!!! We cannot load your data!";
+    private static final String noTaskMsg = "kkk ~ There is no task in your todo list now!";
     private Scanner scanner;
 
     /**
@@ -30,48 +33,60 @@ public class Ui {
                 + "\n" + separator;
     }
 
-    public void showWelcome() {
+    public String showWelcome() {
         System.out.println(getFormattedStr(welcomeSentence));
+        return welcomeSentence;
     }
 
-    public void showGoodbye() {
+    public String showGoodbye() {
         System.out.println(getFormattedStr(endingSentence));
+        return endingSentence;
     }
 
-    public void showSavingError() {
-        System.out.println(getFormattedStr("☹ OOPS!!! We cannot save your data!"));
+    public String showSavingError() {
+        System.out.println(getFormattedStr(savingError));
+        return savingError;
     }
 
-    public void showLoadingError() {
-        System.out.println(getFormattedStr("☹ OOPS!!! We cannot load your data!"));
+    public String showLoadingError() {
+        System.out.println(getFormattedStr(loadingError));
+        return loadingError;
     }
 
-    public void showError(String errorMsg) {
+    public String showError(String errorMsg) {
         System.out.println(getFormattedStr(errorMsg));
+        return errorMsg;
     }
 
-    public void showNoTask() {
-        System.out.println(getFormattedStr("kkk ~ There is no task in your todo list now!"));
+    public String showNoTask() {
+        System.out.println(getFormattedStr(noTaskMsg));
+        return noTaskMsg;
     }
 
-    public void showTaskAdded(int total, Task newTask) {
-        System.out.println(getFormattedStr("Got it. I've added this task:\n" + "  " + newTask
-                + "\nNow you have " + total + " tasks in the list."));
+    public String showTaskAdded(int total, Task newTask) {
+        String msg = "Got it. I've added this task:\n" + "  " + newTask
+                + "\nNow you have " + total + " tasks in the list.";
+        System.out.println(getFormattedStr(msg));
+        return msg;
     }
 
 
-    public void showTaskDeleted(int total, Task removedTask) {
-        System.out.println(getFormattedStr("Noted. I've removed this task: \n" + "  " + removedTask
-                + "\nNow you have " + total + " tasks in the list."));
+    public String showTaskDeleted(int total, Task removedTask) {
+        String msg = "Noted. I've removed this task: \n" + "  " + removedTask
+                + "\nNow you have " + total + " tasks in the list.";
+        System.out.println(getFormattedStr(msg));
+        return msg;
     }
 
-    public void showTaskDone(Task doneTask) {
-        System.out.println(getFormattedStr("Nice! I've marked this task as done:\n" + "  " + doneTask));
+    public String showTaskDone(Task doneTask) {
+        String msg = "Nice! I've marked this task as done:\n" + "  " + doneTask;
+        System.out.println(getFormattedStr(msg));
+        return msg;
     }
 
-    public void showFullList(TaskList taskList) {
+    public String showFullList(TaskList taskList) {
         if (taskList.getTotalTask() == 0) {
-            showNoTask();
+            return showNoTask();
         } else {
             String formattedList = separator;
             formattedList = formattedList + indentation + "Here are the tasks in your list:\n";
@@ -80,6 +95,7 @@ public class Ui {
             }
             formattedList = formattedList + separator;
             System.out.println(formattedList);
+            return formattedList;
         }
     }
 

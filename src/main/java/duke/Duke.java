@@ -14,34 +14,10 @@ import duke.util.Ui;
  * of CS2103.
  */
 public class Duke {
+    // object attributes
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-
-    /**
-     * Drives the main code to create a Duke object and run it. It is the CLI entry
-     * point.
-     *
-     * @param args command line parameters for Duke. First one is the saved
-     *             filepath.
-     */
-    public static void main(String[] args) {
-        Duke duke;
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        if (args.length > 1) {
-            duke = new Duke(args[1]);
-        } else {
-            duke = new Duke();
-        }
-        duke.start();
-    }
 
     /**
      * Returns a Duke object, which can be used
@@ -78,29 +54,18 @@ public class Duke {
         }
     }
 
-    /**
-     * Starts the main loop for the chat assistant to take in
-     * inputs and process them.
-     */
-    public void start() {
+    public String getResponse(String input) {
+        String response;
 
-        this.ui.greetHello(); // greet user on startup
-
-        do { // main loop and exception handler
-            try {
-                String input = ui.getUserCommand();
-                this.ui.showLine();
-                Command c = Parser.parseForCommands(input); // send it off to be parsed
-                c.initialize(this.storage, this.taskList, this.ui);
-                c.execute();
-            } catch (DukeShutDownException e) {
-                ui.greetGoodbye();
-                break;
-            } catch (DukeException e) {
-                ui.displayMessage(e.getMessage());
-            } finally {
-                this.ui.showLine();
-            }
-        } while (true);
+        try {
+            Command c = Parser.parseForCommands(input); // send it off to be parsed
+            c.initialize(this.storage, this.taskList, this.ui);
+            response = c.execute();
+        } catch (DukeShutDownException e) {
+            response = Ui.GOODBYE;
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
     }
 }

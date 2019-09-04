@@ -12,7 +12,7 @@ public class ByeCommand extends Command {
      * Throws a DukeShutDownException, which should be handled by the
      * main Duke program as it sees fit.
      */
-    public void execute() throws DukeShutDownException {
-        throw new DukeShutDownException("Shutting down...");
+    public String execute() throws DukeShutDownException {
+        return "bye";
     }
 }

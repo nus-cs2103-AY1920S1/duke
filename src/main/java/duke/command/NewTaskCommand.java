@@ -29,13 +29,18 @@ public abstract class NewTaskCommand extends Command {
      *                       after addition.
      */
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         this.taskList.add(this.task);
-        this.ui.displayMessage("Got it. I've added this task:\n  "
+//        this.ui.displayMessage("Got it. I've added this task:\n  "
+//                + task
+//                + "\nNow you have "
+//                + this.taskList.getSize()
+//                + " task(s) in the list.");
+        this.storage.saveToDisk(this.taskList);
+        return "Got it. I've added this task:\n  "
                 + task
                 + "\nNow you have "
                 + this.taskList.getSize()
-                + " task(s) in the list.");
-        this.storage.saveToDisk(this.taskList);
+                + " task(s) in the list.";
     }
 }

@@ -99,7 +99,6 @@ public class Duke {
         } finally {
             sc.close();
         }
-
     }
 
     public static void main(String[] args) throws DukeException, FileNotFoundException {

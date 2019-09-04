@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Ui {
+    
     public Ui() {
-
     }
 
     public void list(ArrayList<Task> store) throws DukeException {

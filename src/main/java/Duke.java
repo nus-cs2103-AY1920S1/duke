@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.io.IOException;
 
 /**
- * Represents an application that that manages <code>ToDo</code>s, <code>duke.task.Event</code>s, and <code>Deadline</code>s.
+ * Represents an application that manages <code>ToDo</code>s, <code>duke.task.Event</code>s, and <code>Deadline</code>s.
  * A Duke object can add <code>Task</code>s, delete them, mark them as Done, and maintain a history of Tasks entered
  * during earlier execution.
  */

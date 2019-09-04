@@ -13,7 +13,7 @@ public class Event extends Task {
 
     /**
      * Creates duke.task.Event object taking info from Parser's ArrayList.
-     * @param parser
+     * @param parser Parser containing the information to create the new Event object
      */
     public Event(Parser parser) {
         super(parser.getList().get(0));

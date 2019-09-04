@@ -95,7 +95,7 @@ public class Ui {
     }
 
     /**
-     * Prints output for the 'list' command
+     * Prints output for the 'list' command.
      * @param taskList the taskList that needs its Tasks' details printed.
      */
     public void showTasks(TaskList taskList) {

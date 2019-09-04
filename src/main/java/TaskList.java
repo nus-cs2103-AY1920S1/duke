@@ -21,18 +21,22 @@ public class TaskList {
 
             switch(type) {
             case "T":
-                add = new Todo(listItem[2]);
+                add = new Todo(type, listItem[2]);
                 addTask(add, listItem[1]);
 
             case "D":
-                add = new Deadline(listItem[2], listItem[3]);
+                add = new Deadline(type, listItem[2], listItem[3]);
                 addTask(add, listItem[1]);
                 break;
 
             case "E":
-                add = new Event(listItem[2], listItem[3]);
+                add = new Event(type, listItem[2], listItem[3]);
                 addTask(add, listItem[1]);
                 break;
+
+            case "F":
+                 add = new FixedDurationTask(type, listItem[2], listItem[3]);
+                 break;
 
             default:
                 throw new DukeException("The input is not a task!");

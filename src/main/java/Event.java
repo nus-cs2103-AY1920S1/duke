@@ -7,7 +7,7 @@ import java.text.ParseException;
  */
 public class Event extends Task {
     private String timeDesc;
-    private Date date;
+    protected Date date;
 
     /**
      * Constructs an Events task object.
@@ -16,8 +16,8 @@ public class Event extends Task {
      * @throws DukeException if task description or time is not inputted,
      *                       or time is inputted in the wrong format
      */
-    public Event(String desc, String timeDesc) throws DukeException {
-        super(desc);
+    public Event(String type, String desc, String timeDesc) throws DukeException {
+        super(type, desc);
         this.timeDesc = timeDesc;
 
         try {
@@ -35,7 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return super.toString() + " (at: " + date + ")";
     }
 
     /**
@@ -44,9 +44,13 @@ public class Event extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return "E | [✓] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [✓] | " + taskDesc + " | " + timeDesc + "\n";
         } else {
-            return "E | [✗] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [✗] | " + taskDesc + " | " + timeDesc + "\n";
         }
+    }
+
+    public Date getDate() {
+        return this.date;
     }
 }

@@ -48,6 +48,9 @@ public class Parser {
             String[] wordsArray = keywordsToArray(commandSplit);
             return new KeyCommand(wordsArray);
 
+        case "sort":
+            return new SortCommand(commandSplit[1]);
+
         case "todo":
             enumType = TaskType.valueOf(type.toUpperCase());
             assert enumType == TaskType.TODO : "Enum is not right!";
@@ -64,6 +67,7 @@ public class Parser {
             assert enumType == TaskType.EVENT : "Enum is not right!";
             timeSplit = splitCommandForTask(type, command);
             return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
+
         case "fixed":
             enumType = TaskType.valueOf(type.toUpperCase());
             assert enumType == TaskType.FIXED : "Enum is not right!";
@@ -118,6 +122,10 @@ public class Parser {
         case "find":
             toThrow = new DukeException("☹ OOPS!!! Please indicate the keyword "
                     + "you are looking for!");
+            break;
+        case "sort":
+            toThrow = new DukeException("☹ OOPS!!! Please indicate how "
+                    + "you want to sort the list!");
             break;
         case "todo":
         case "deadline":

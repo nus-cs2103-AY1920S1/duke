@@ -32,19 +32,19 @@ public class AddCommand extends Command {
         Task newTask;
         switch (enumType) {
         case TODO:
-            newTask = new Todo(this.taskDesc);
+            newTask = new Todo("T" , this.taskDesc);
             break;
 
         case DEADLINE:
-            newTask = new Deadline(this.taskDesc, this.timeDesc);
+            newTask = new Deadline("D", this.taskDesc, this.timeDesc);
             break;
 
         case EVENT:
-            newTask = new Event(this.taskDesc, this.timeDesc);
+            newTask = new Event("E", this.taskDesc, this.timeDesc);
             break;
 
         case FIXED:
-           newTask = new FixedDurationTask(this.taskDesc, this.timeDesc);
+           newTask = new FixedDurationTask("F", this.taskDesc, this.timeDesc);
            break;
 
         default:

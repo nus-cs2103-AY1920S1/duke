@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class FixedDurationTask extends Task {
     private String duration;
     /**
@@ -5,8 +7,8 @@ public class FixedDurationTask extends Task {
      * @param desc description of the task by user
      * @throws DukeException if task description is not inputted
      */
-    public FixedDurationTask(String desc, String duration) {
-        super(desc);
+    public FixedDurationTask(String type, String desc, String duration) {
+        super(type, desc);
         this.duration = duration;
     }
 
@@ -18,7 +20,7 @@ public class FixedDurationTask extends Task {
      */
     @Override
     public String toString() {
-        return "[F]" + super.toString() + " (needs: " + this.duration + ")";
+        return super.toString() + " (needs: " + this.duration + ")";
     }
 
     /**
@@ -27,9 +29,13 @@ public class FixedDurationTask extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return "F | [✓] | " + taskDesc + " | " + duration + "\n";
+            return type + " | [✓] | " + taskDesc + " | " + duration + "\n";
         } else {
-            return "F | [✗] | " + taskDesc + " | " + duration + "\n";
+            return type + " | [✗] | " + taskDesc + " | " + duration + "\n";
         }
+    }
+
+    public Date getDate() {
+        return null;
     }
 }

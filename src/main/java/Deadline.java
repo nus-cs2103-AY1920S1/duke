@@ -7,7 +7,7 @@ import java.text.ParseException;
  */
 public class Deadline extends Task {
     private String timeDesc;
-    private Date date;
+    protected Date date;
 
     /**
      * Constructs a Deadline task object.
@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * @throws DukeException if task description or time is not inputted,
      *                       or time is inputted in the wrong format
      */
-    public Deadline(String desc, String timeDesc) throws DukeException {
-        super(desc);
+    public Deadline(String type, String desc, String timeDesc) throws DukeException {
+        super(type, desc);
         this.timeDesc = timeDesc;
 
         try {
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ")";
+        return super.toString() + " (by: " + date + ")";
     }
 
     /**
@@ -44,9 +44,13 @@ public class Deadline extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return "D | [✓] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [✓] | " + taskDesc + " | " + timeDesc + "\n";
         } else {
-            return "D | [✗] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [✗] | " + taskDesc + " | " + timeDesc + "\n";
         }
+    }
+
+    public Date getDate() {
+        return this.date;
     }
 }

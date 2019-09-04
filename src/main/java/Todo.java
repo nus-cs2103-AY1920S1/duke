@@ -9,8 +9,8 @@ public class Todo extends Task {
      * @param desc description of the task by user
      * @throws DukeException if task description is not inputted
      */
-    public Todo(String desc) {
-        super(desc);
+    public Todo(String type, String desc) {
+        super(type, desc);
     }
 
     /**
@@ -20,7 +20,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.toString();
     }
 
     /**
@@ -29,9 +29,13 @@ public class Todo extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return "T | [✓] | " + taskDesc + "\n";
+            return type + " | [✓] | " + taskDesc + "\n";
         } else {
-            return "T | [✗] | " + taskDesc + "\n";
+            return type + " | [✗] | " + taskDesc + "\n";
         }
+    }
+
+    public Date getDate() {
+        return null;
     }
 }

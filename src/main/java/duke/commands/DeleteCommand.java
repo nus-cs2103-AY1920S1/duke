@@ -5,16 +5,16 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.managers.TaskList;
 import duke.managers.Ui;
 import duke.managers.Storage;
+
 import duke.tasks.Task;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
     private int taskToBeDeleted;
 
     public DeleteCommand(int taskNum) {
@@ -29,20 +29,17 @@ public class DeleteCommand extends Command {
      * @exception DukeException is thrown when there is an error with the input
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        this.tasks = tasks;
-        this.ui = ui;
-        this.storage = storage;
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         int maxNum = tasks.totalNumTasks();
         if (taskToBeDeleted > maxNum) {
             throw new DukeException("Oops! This task number does not exist.");
         } else {
             Task deleted = tasks.delTask(taskToBeDeleted);
-            this.ui.printLine("Noted. I've removed this task:");
-            this.ui.printLine(deleted.toString());
             maxNum = tasks.totalNumTasks();
-            this.ui.printLine("Now you have " + maxNum + " tasks in the list.");
+            maxNum = tasks.totalNumTasks();
             storage.save(tasks);
+            return ui.printLine("Noted. I've removed this task:" + "\n" + deleted.toString() + "\n"
+                            + "Now you have " + maxNum + " tasks in the list.");
         }
     }
 

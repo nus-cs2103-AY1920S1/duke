@@ -7,6 +7,16 @@ package duke.managers;
 import duke.exceptions.DateException;
 
 public class DateTime {
+    private String day;
+    private String month;
+    private String year;
+
+    private static String[] daySuffix = {
+            "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+            "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+            "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"};
+    private static String[] monthName = { "January", "February", "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December"};
 
     public DateTime() {
 
@@ -17,13 +27,15 @@ public class DateTime {
      * @param date a String containing the date that was in the command to Duke
      * @exception DateException if the month number is invalid
      */
-    public static String getDate(String date) throws DateException {
-        String[] ddmmyy = date.split("/");
-        String dd = addDaySuffix(ddmmyy[0]) + " of ";
-        String mm = wordMonth(ddmmyy[1]) + " ";
-        String yy = ddmmyy[2] + ", ";
+    public String getDate(String date) throws DateException {
+        String[] splitDate = date.split("/");
+        String dd = addDaySuffix(splitDate[0]) + " of ";
+        String mm = wordMonth(splitDate[1]) + " ";
+        String yy = splitDate[2] + ", ";
         return dd + mm + yy;
+
     }
+
 
     /**
      * Adds the suffix for the day in the date String. It is used in the getDate method.

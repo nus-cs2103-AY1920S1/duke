@@ -5,16 +5,18 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.managers.Storage;
 import duke.managers.TaskList;
 import duke.managers.Ui;
+
 import duke.tasks.Task;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    private Storage storage;
-    private TaskList tasks;
     private Ui ui;
     private String keyword;
     private ArrayList<Task> matchedTasks = new ArrayList<>();
@@ -35,10 +37,8 @@ public class FindCommand extends Command {
      * @exception DukeException is thrown when there is an error with the input
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        this.tasks = tasks;
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         this.ui = ui;
-        this.storage = storage;
         ArrayList<Task> allTasks = tasks.getAllTasks();
         for (Task task : allTasks) {
             String taskDescription = task.getDescription();
@@ -50,25 +50,25 @@ public class FindCommand extends Command {
                 }
             }
         }
-        printAllMatches();
+        return printAllMatches();
     }
 
     /**
      * Prints all the tasks that match the keyword given by the user. If there are no matching tasks,
      * the user will be advised as such.
      */
-    private void printAllMatches() {
+    private String printAllMatches() {
         if (matchedTasks.size() > 0) {
-            ui.printLine("Here are the matching tasks in your list:");
+            String printedLines = "Here are the matching tasks in your list:" + "\n";
             int index = 1;
             for (Task task : matchedTasks) {
-                ui.printLine(index + "." + task.toString());
+                printedLines += index + "." + task.toString() + "\n";
                 index++;
             }
+            return this.ui.printLine(printedLines.trim());
         } else {
-            ui.printLine("Oops, there are no tasks with that keyword!");
+            return this.ui.printLine("Oops, there are no tasks with that keyword!");
         }
-
     }
 
     public boolean isExit() {

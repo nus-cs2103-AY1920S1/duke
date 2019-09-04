@@ -6,14 +6,16 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+
 import duke.managers.TaskList;
 import duke.managers.Ui;
 import duke.managers.Storage;
+
 import java.io.IOException;
 
 public abstract class Command {
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 
     public abstract boolean isExit();
 }

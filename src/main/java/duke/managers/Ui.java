@@ -49,7 +49,7 @@ public class Ui {
      * This method prints the message for the user to read.
      * @param string containing the response to the user's input
      */
-    public void printLine(String string) {
-        System.out.println(string);
+    public String printLine(String string) {
+        return string;
     }
 }

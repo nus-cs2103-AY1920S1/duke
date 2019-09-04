@@ -9,9 +9,6 @@ import duke.managers.Ui;
 import duke.managers.Storage;
 
 public class ExitCommand extends Command {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
 
     public ExitCommand() {
     }
@@ -22,11 +19,8 @@ public class ExitCommand extends Command {
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        this.tasks = tasks;
-        this.ui = ui;
-        this.storage = storage;
-        this.ui.printLine("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printLine("Bye. Hope to see you again soon!");
     }
 
     public boolean isExit() {

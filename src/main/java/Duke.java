@@ -9,7 +9,7 @@ public class Duke {
         TaskList listOfTasks = new TaskList();
         SaveToFile sf = new SaveToFile();
         
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+
 
         while(sc.hasNext()) {
             String nextCmd = sc.nextLine();

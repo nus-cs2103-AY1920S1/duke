@@ -1,9 +1,19 @@
+/**
+ * Represents a chatbot assistant. A <code>Duke</code> object corresponds
+ * to a chatbot that has <code>Storage</code>, <code>TaskList</code>
+ * and <code>Ui</code>.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a <code>Duke</code> object with a storage filepath.
+     *
+     * @param filePath Storage filepath.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -15,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initiates the chatbot to take user input.
+     */
     public void run() {
         ui.initiate(storage, tasks);
     }

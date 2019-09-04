@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
+/**
+ * Represents a user interface that deals with the user.
+ */
 public class Ui {
+
+    /**
+     * Sets up the user interface to take in user commands.
+     *
+     * @param storage Storage handling.
+     * @param taskList Task handling.
+     */
     public void initiate(Storage storage, TaskList taskList) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -76,11 +86,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out task addition response given specified list of task.
+     *
+     * @param taskList List of task.
+     */
     public void printTaskAddition(TaskList taskList) {
         System.out.println("Got it. I've added this task:");
         System.out.println(taskList.getTask());
     }
 
+    /**
+     * Prints out loading error message.
+     */
     public void showLoadingError() {
         System.out.println("No existing task list can be loaded. New task list will be created.");
     }

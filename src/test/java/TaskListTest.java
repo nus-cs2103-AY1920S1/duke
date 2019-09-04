@@ -1,6 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
+    /**
+     * Tests TaskList addTask method.
+     */
     public void addTaskTest() {
         Todo dummy = new Todo("Dummy Test");
 

@@ -9,48 +9,46 @@ public class UI {
     /**
      * Displays horizontal line.
      */
-    public void showLine() {
-        System.out.println(line);
+    public String showLine() {
+        return line;
     }
 
     /**
      * Displays greeting on start of the program.
      */
-    public void showGreeting() {
-        System.out.println(logo);
-        showLine();
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println(line);
+    public String showGreeting() {
+        return "    Yo! I'm Duke"
+                + "    What can I do for you?";
     }
 
     /**
      * Displays goodbye message on exit.
      */
-    public void showGoodbye() {
-        System.out.println(line);
-        System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println(line);
+    public String showGoodbye() {
+//        System.out.println(line);
+        return "    Bye. Hope to see you again soon!";
+//        System.out.println(line);
     }
 
     /**
      * Displays all the items in the tasklist.
      * @param tasks refers to the tasklist
      */
-    public void showTasksInList(TaskList tasks) {
-        System.out.println("    Here are the tasks in your list:");
+    public String showTasksInList(TaskList tasks) {
+        String output = "    Here are the tasks in your list: \n";
         for (int i = 0; i < tasks.getListSize(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.getItemAtIndex(i));
+            output += "    " + (i + 1) + ". " + tasks.getItemAtIndex(i) + "\n";
         }
+        return output;
     }
 
     /**
      * Displays message on marking a task as done.
      * @param task refers to the task marked as done
      */
-    public void showTaskIsDoneMsg(Task task) {
-        System.out.println("    Nice! I've marked this task as done: ");
-        System.out.println("     " + task);
+    public String showTaskIsDoneMsg(Task task) {
+        return "    Nice! I've marked this task as done: \n" + "     " + task.toString();
+
     }
 
     /**
@@ -58,10 +56,10 @@ public class UI {
      * @param task refers to the task deleted.
      * @param taskListSize refers to the size of the tasklist after deletion.
      */
-    public void showTaskDeletedMsg(Task task, int taskListSize) {
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("     " + task);
-        System.out.println("    Now you have " + taskListSize + " tasks in the list.");
+    public String showTaskDeletedMsg(Task task, int taskListSize) {
+        return "    Noted. I've removed this task: \n"
+                + "     " + task.toString() + "\n" + "    Now you have "
+                + taskListSize + " tasks in the list.";
     }
 
     /**
@@ -69,18 +67,18 @@ public class UI {
      * @param task refers to the task added to the list.
      * @param taskListSize refers to the size of the tasklist after the addition
      */
-    public void showTaskAddedMsg(Task task, int taskListSize) {
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("     " + task);
-        System.out.println("    Now you have " + taskListSize + " in the list.");
+    public String showTaskAddedMsg(Task task, int taskListSize) {
+        return "    Got it. I've added this task:\n"
+                + "     " + task
+                + "    Now you have " + taskListSize + " in the list.";
     }
 
     /**
      * Displays message on encoutering an error.
      * @param errMsg refers to the error message to be shown to the user.
      */
-    public void showErrorMsg(String errMsg) {
-        System.out.println("    " + errMsg);
+    public String showErrorMsg(String errMsg) {
+        return "    " + errMsg;
     }
 
     /**
@@ -88,15 +86,16 @@ public class UI {
      * @param toFind refers to the keyword to be found.
      * @param tasks refers to the list of tasks.
      */
-    public void showFoundItems(String toFind, TaskList tasks) {
-        System.out.println("    Here are the matching tasks in your list: ");
+    public String showFoundItems(String toFind, TaskList tasks) {
+        String output = "    Here are the matching tasks in your list: \n";
         int counter = 1;
         for (int i = 0; i < tasks.getListSize(); i++) {
             if (tasks.getItemAtIndex(i).getDescription().contains(toFind)) {
-                System.out.println("    " + counter + ". " + tasks.getItemAtIndex(i));
+                output += "    " + counter + ". " + tasks.getItemAtIndex(i) + "\n";
                 counter++;
             }
         }
+        return output;
     }
 
 }

@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 import duke.ui.UI;
 
 /**
- * Class that represents that command to print an error message;
+ * Class that represents that command to print an error message.
  */
 public class ErrorCommand extends Command {
 

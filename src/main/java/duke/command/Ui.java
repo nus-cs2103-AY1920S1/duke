@@ -35,23 +35,23 @@ public class Ui {
     }
 
     /**
-     * To print the greet message from Duke.
+     * To print the greet message from duke.Duke.
      */
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    public String greet() {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
+        return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * To scan the commands inputted from the users and pass it to Parser class to take actions.
      *
-     * @throws DukeIllegalInputException       Invalid input from users which can not be recognized by Duke.
-     * @throws DukeIllegalDescriptionException Invalid description after commands which can not be recognized by Duke.
+     * @throws DukeIllegalInputException       Invalid input from users which can not be recognized by duke.Duke.
+     * @throws DukeIllegalDescriptionException Invalid description after commands which can not be recognized by duke.Duke.
      */
     public void scan() throws DukeIllegalInputException, DukeIllegalDescriptionException {
         Scanner sc = new Scanner(System.in);
@@ -60,7 +60,7 @@ public class Ui {
             String[] action = input.split(" ", 2); /* Break the command into array with two parts */
             try {
                 Parser parser = new Parser(action);
-                parser.parse();
+                System.out.println(parser.parse());
                 if (!flag) {
                     break;
                 }
@@ -73,15 +73,15 @@ public class Ui {
     /**
      * To print the response of successfully adding the task.
      */
-    void printAddTask() {
-        System.out.println("Got it. I've added this task:");
+    String printAddTask() {
+        return "Got it. I've added this task:\n";
     }
 
     /**
      * To print the total number of tasks.
      */
-    void printCountTasks() {
-        System.out.println("Now you have " + TaskList.getList().size() + " tasks in the list.");
+    String printCountTasks() {
+        return "Now you have " + TaskList.getList().size() + " tasks in the list.\n";
     }
 
     /**

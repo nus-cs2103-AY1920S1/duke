@@ -13,10 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This is a class to make sense of the user commands and allow Duke to take different actions
+ * This is a class to make sense of the user commands and allow duke.Duke to take different actions
  * depending on the commands received.
  */
-class Parser {
+public class Parser {
 
     private String[] action;
 
@@ -25,7 +25,7 @@ class Parser {
      *
      * @param action A string array contains split commands.
      */
-    Parser(String[] action) {
+    public Parser(String[] action) {
         this.action = action;
     }
 
@@ -34,72 +34,81 @@ class Parser {
      *
      * @throws DukeIllegalDescriptionException To deal with the illegal and invalid inputs from users.
      */
-    void parse() throws DukeIllegalDescriptionException {
+    public String parse() throws DukeIllegalDescriptionException {
+        String output = "";
         switch (Command.valueOf(action[0])) {
         case bye:
-            commandBye();
+            output = commandBye();
             break;
         case list:
-            commandList();
+            output = commandList();
             break;
         case done:
-            commandDone();
+            output = commandDone();
             break;
         case todo:
-            commandTodo();
+            output = commandTodo();
             break;
         case deadline:
-            commandDeadline();
+            output = commandDeadline();
             break;
         case event:
-            commandEvent();
+            output = commandEvent();
             break;
         case delete:
-            commandDelete();
+            output = commandDelete();
             break;
         case find:
-            commandFind();
+            output = commandFind();
             break;
         }
-
+        return output;
     }
 
     /**
      * Action taken when the command is bye.
      */
-    private void commandBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    private String commandBye() {
         Ui.setFlag();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Action taken when the command is list.
      */
-    private void commandList() {
-        System.out.println("Here are the tasks in your list:");
+    private String commandList() {
+        String output = "";
+        output += "Here are the tasks in your list:\n";
         for (int i = 0; i < TaskList.getList().size(); ++i) {
-            System.out.println(i + 1 + "." + TaskList.getList().get(i));
+            output += (i + 1 + "." + TaskList.getList().get(i) + "\n");
         }
+        return output;
     }
 
     /**
      * Action taken when the command is done.
      */
-    private void commandDone() {
-        Storage storage = new Storage();
-        int num = Integer.parseInt(action[1]);
-        Task newTask = TaskList.getList().get(num - 1);
-        newTask.markAsDone();
-        TaskList.getList().set(num - 1, newTask);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(TaskList.getList().get(num - 1));
-        boolean isAppend = false;
-        for (Task task : TaskList.getList()) {
-            storage.appendToFile(storage.getFilePath(), task.toString(), isAppend);
-            if (!isAppend) {
-                isAppend = true;
+    private String commandDone() throws DukeIllegalDescriptionException {
+        String output = "";
+        try {
+            Storage storage = new Storage();
+            int num = Integer.parseInt(action[1]);
+            Task newTask = TaskList.getList().get(num - 1);
+            newTask.markAsDone();
+            TaskList.getList().set(num - 1, newTask);
+            output += "Nice! I've marked this task as done:\n";
+            output += TaskList.getList().get(num - 1);
+            boolean isAppend = false;
+            for (Task task : TaskList.getList()) {
+                storage.appendToFile(storage.getFilePath(), task.toString(), isAppend);
+                if (!isAppend) {
+                    isAppend = true;
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeIllegalDescriptionException(action[0]);
         }
+        return output;
     }
 
     /**
@@ -107,19 +116,21 @@ class Parser {
      *
      * @throws DukeIllegalDescriptionException To deal with the illegal input after to_do command such as no input.
      */
-    private void commandTodo() throws DukeIllegalDescriptionException {
+    private String commandTodo() throws DukeIllegalDescriptionException {
+        String output = "";
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
             Task todo = new Todo(action[1]);
             TaskList.getList().add(todo);
-            ui.printAddTask();
-            System.out.println(todo);
-            ui.printCountTasks();
+            output += ui.printAddTask();
+            output += (todo + "\n");
+            output += ui.printCountTasks();
             storage.appendToFile(storage.getFilePath(), todo.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(action[0]);
         }
+        return output;
     }
 
     /**
@@ -128,7 +139,8 @@ class Parser {
      * @throws DukeIllegalDescriptionException To deal with the illegal input after deadline such as
      *                                         without stating /by time.
      */
-    private void commandDeadline() throws DukeIllegalDescriptionException {
+    private String commandDeadline() throws DukeIllegalDescriptionException {
+        String output = "";
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
@@ -138,15 +150,16 @@ class Parser {
             Date ddlDate = ddlFormat.parse(ddlTime);
             Task deadline = new Deadline(dl[0], ui.getNewFormatDeadline().format(ddlDate));
             TaskList.getList().add(deadline);
-            ui.printAddTask();
-            System.out.println(deadline);
-            ui.printCountTasks();
+            output += ui.printAddTask();
+            output += (deadline + "\n");
+            output += ui.printCountTasks();
             storage.appendToFile(storage.getFilePath(), deadline.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(action[0]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return output;
     }
 
     /**
@@ -155,7 +168,8 @@ class Parser {
      * @throws DukeIllegalDescriptionException To deal with the illegal input after event such as
      *                                         without stating /at time.
      */
-    private void commandEvent() throws DukeIllegalDescriptionException {
+    private String commandEvent() throws DukeIllegalDescriptionException {
+        String output = "";
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
@@ -171,50 +185,63 @@ class Parser {
             Task event = new Event(ev[0], ui.getNewFormatEvStart().format(eventDateStart) +
                     " to " + ui.getNewFormatEvEnd().format(eventDateEnd));
             TaskList.getList().add(event);
-            ui.printAddTask();
-            System.out.println(event);
-            ui.printCountTasks();
+            output += ui.printAddTask();
+            output += (event + "\n");
+            output += ui.printCountTasks();
             storage.appendToFile(storage.getFilePath(), event.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(action[1]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return output;
     }
 
     /**
      * Action taken when the command is delete.
      */
-    private void commandDelete() {
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        int delNum = Integer.parseInt(action[1]) - 1;
-        Task delTask = TaskList.getList().get(delNum);
-        TaskList.getList().remove(delNum);
-        System.out.println("Noted. I've removed this task:\n" + delTask.toString());
-        ui.printCountTasks();
-        boolean isAppendDel = false;
-        for (Task task : TaskList.getList()) {
-            storage.appendToFile(storage.getFilePath(), task.toString(), isAppendDel);
-            if (!isAppendDel) {
-                isAppendDel = true;
+    private String commandDelete() throws DukeIllegalDescriptionException {
+        String output = "";
+        try {
+            Ui ui = new Ui();
+            Storage storage = new Storage();
+            int delNum = Integer.parseInt(action[1]) - 1;
+            Task delTask = TaskList.getList().get(delNum);
+            TaskList.getList().remove(delNum);
+            output += ("Noted. I've removed this task:\n" + delTask.toString() + "\n");
+            output += ui.printCountTasks();
+            boolean isAppendDel = false;
+            for (Task task : TaskList.getList()) {
+                storage.appendToFile(storage.getFilePath(), task.toString(), isAppendDel);
+                if (!isAppendDel) {
+                    isAppendDel = true;
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeIllegalDescriptionException(action[0]);
         }
+        return output;
     }
 
     /**
      * To find the list that contains the keyword inputted by the users and print them out by sequence.
      */
-    private void commandFind() {
-        String keyword = action[1];
-        System.out.println("Here are the matching tasks in your list:");
-        int count = 1;
-        for (Task task : TaskList.getList()) {
-            if (task.toString().contains(keyword)) {
-                System.out.println(count + "." + task);
-                count++;
+    private String commandFind() throws DukeIllegalDescriptionException {
+        String output = "";
+        try {
+            String keyword = action[1];
+            output += "Here are the matching tasks in your list:\n";
+            int count = 1;
+            for (Task task : TaskList.getList()) {
+                if (task.toString().contains(keyword)) {
+                    output += (count + "." + task + "\n");
+                    count++;
+                }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeIllegalDescriptionException(action[0]);
         }
+        return output;
     }
 
 

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  * This class is used to save the tasks in the hard disk once there is a change made to the list and load the file
- * from the hard disk once the Duke is initiated.
+ * from the hard disk once the duke.Duke is initiated.
  */
 public class Storage {
 

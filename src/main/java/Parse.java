@@ -2,16 +2,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Parse {
 
     public static void scan(Duke duke){
         Scanner scanner = new Scanner(System.in);
-        String taskName = scanner.nextLine();      //the whole user command
+        String taskName = "";
+        try {
+            taskName = scanner.nextLine();      //the whole user command
+        } catch (NoSuchElementException nex) {
+            System.out.println("     Oops! Target file does not exist!");
+        }
+
 
         while(duke.getParse().getCommand(duke, taskName, true)) {
-            taskName = scanner.nextLine();
+            try {
+                taskName = scanner.nextLine();
+            } catch (NoSuchElementException nex) {
+                System.out.println("     Oops! No such thing!");
+            }
+
         }
     }
 
@@ -34,7 +46,7 @@ public class Parse {
                     duke.getTaskList().list();
                 } catch (RuntimeException exList) {
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! There is no task in your list.");
+                    System.out.println("      OOPS!!! There is no task in your list.");
                     System.out.println("    ____________________________________________________________");
                 } finally {
                     return true;
@@ -46,7 +58,7 @@ public class Parse {
                 } catch (IndexOutOfBoundsException exDone) {
                     if (b) {
                         System.out.println("    ____________________________________________________________");
-                        System.out.println("     ☹ OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
+                        System.out.println("      OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
                         System.out.println("    ____________________________________________________________");
                     }
                 } finally {
@@ -58,7 +70,7 @@ public class Parse {
                     duke.getTaskList().deleteTask(Integer.parseInt(command[1])-1);
                 } catch (IndexOutOfBoundsException exDelete) {
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
+                    System.out.println("      OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
                     System.out.println("    ____________________________________________________________");
                 } finally {
                     return true;
@@ -72,7 +84,7 @@ public class Parse {
 
                 } catch (StringIndexOutOfBoundsException exTodo) {
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("      OOPS!!! The description of a todo cannot be empty.");
                     System.out.println("    ____________________________________________________________");
                 } finally {
                     return true;
@@ -97,12 +109,12 @@ public class Parse {
                     duke.getTaskList().addTaskIn(dtask, b);
                 } catch (StringIndexOutOfBoundsException exDeadline1){
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println("      OOPS!!! The description of a deadline cannot be empty.");
                     System.out.println("    ____________________________________________________________");
 
                 } catch (IndexOutOfBoundsException exDeadline2){
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The end time of a deadline cannot be empty.");
+                    System.out.println("      OOPS!!! The end time of a deadline cannot be empty.");
                     System.out.println("    ____________________________________________________________");
 
                 } finally {
@@ -130,12 +142,12 @@ public class Parse {
 
                 } catch (StringIndexOutOfBoundsException exEvent1) {
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
+                    System.out.println("      OOPS!!! The description of a event cannot be empty.");
                     System.out.println("    ____________________________________________________________");
 
                 } catch (IndexOutOfBoundsException exEvent2){
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The start time of a event cannot be empty.");
+                    System.out.println("      OOPS!!! The start time of a event cannot be empty.");
                     System.out.println("    ____________________________________________________________");
                 } finally {
                     return true;
@@ -149,7 +161,7 @@ public class Parse {
                     duke.getTaskList().find(key);
                 } catch(StringIndexOutOfBoundsException sex) {
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! Key is invalid");
+                    System.out.println("      OOPS!!! Key is invalid");
                     System.out.println("    ____________________________________________________________");
                 } finally {
                     return true;
@@ -158,7 +170,7 @@ public class Parse {
             default:
                 //
                 try {
-                    throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new InvalidCommandException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } catch (RuntimeException exDefault1) {
                     System.out.println("    ____________________________________________________________");
                     System.out.println(exDefault1.getMessage());

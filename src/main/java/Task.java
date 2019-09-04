@@ -9,7 +9,7 @@ public class Task {
     }
 
     public Task(String taskName, int index) {
-        this.status = '✗';
+        this.status = '0';
         this.taskName = taskName;
         this.index = index;
     }
@@ -30,7 +30,7 @@ public class Task {
     }
 
     public void setStatus() {
-        status = '✓';
+        status = '1';
     }
 
     public String getTaskName() {

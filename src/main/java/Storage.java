@@ -16,7 +16,7 @@ public class Storage {
     }
 
     //save
-    public void save (TaskList taskList) {
+    public void save (TaskList taskList) throws ArrayIndexOutOfBoundsException {
         String string = "";
         FileOutputStream fos;
         try {
@@ -49,13 +49,13 @@ public class Storage {
             }
         } catch (IOException ioe){
             System.out.println("    ____________________________________________________________");
-            System.out.println("     ☹ OOPS!!! The target-output file does not exist.");
+            System.out.println("      OOPS!!! The target-output file does not exist.");
             System.out.println("    ____________________________________________________________");
         }
     }
 
     //load
-    public void load (Duke duke) throws NullPointerException {
+    public void load (Duke duke) throws Exception {
         int index = 0;
         String string;
         String [] buffer;
@@ -69,28 +69,32 @@ public class Storage {
                 //split
                 //D|✗|return book |Sunday
                 buffer = string.split("\\|");
-                switch (buffer[0].charAt(0)) {
-                    case 'T' :
-                        command = command.concat("todo ");
-                        command = command.concat(buffer[2]);
-                        break;
-                    case 'D':
-                        command = command.concat("deadline "); //task type
-                        command = command.concat(buffer[2]); //task name
-                        command = command.concat(" /by ");
-                        command = command.concat(buffer[3]); //task date
-                        break;
-                    case 'E':
-                        command = command.concat("event "); //task type
-                        command = command.concat(buffer[2]); //task name
-                        command = command.concat(" /by ");
-                        command = command.concat(buffer[3]); //task date
-                        break;
-                }
-                duke.getParse().getCommand(duke, command, false);
-                //if necessary, mark the task as done
-                if (buffer[1].charAt(0) == '✓') {
-                    duke.getParse().done(duke, index, false);
+                try {
+                    switch (buffer[0].charAt(0)) {
+                        case 'T' :
+                            command = command.concat("todo ");
+                            command = command.concat(buffer[2]);
+                            break;
+                        case 'D':
+                            command = command.concat("deadline "); //task type
+                            command = command.concat(buffer[2]); //task name
+                            command = command.concat(" /by ");
+                            command = command.concat(buffer[3]); //task date
+                            break;
+                        case 'E':
+                            command = command.concat("event "); //task type
+                            command = command.concat(buffer[2]); //task name
+                            command = command.concat(" /by ");
+                            command = command.concat(buffer[3]); //task date
+                            break;
+                    }
+                    duke.getParse().getCommand(duke, command, false);
+                    //if necessary, mark the task as done
+                    if (buffer[1].charAt(0) == '1') {
+                        duke.getParse().done(duke, index, false);
+                    }
+                } catch (ArrayIndexOutOfBoundsException aex) {
+                    System.out.println("     Oops! Incomplete command");
                 }
             } //end of while
         } catch (IOException ioe){

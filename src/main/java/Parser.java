@@ -4,20 +4,20 @@ public class Parser {
     private static Storage storageManager = new Storage("task.txt");
 
     /**
-     * understands and responds to a command
+     * understands and responds to a command.
      *
      * @param input a command for Duke
      *
      */
-    public static boolean checkCommand(String input) throws NoValidCommandException{
+    public static boolean checkCommand(String input) throws NoValidCommandException {
 
         String[] words = input.split(" ", 2);
         String command = words[0];
 
         switch (command) {
         case "bye":
-            System.out.println("Bye. Hope to " +
-                    "see you again soon!");
+            System.out.println("Bye. Hope to "
+                    + "see you again soon!");
             return false;
 
         case "list":
@@ -42,7 +42,7 @@ public class Parser {
             break;
 
         case "event":
-            try{
+            try {
                 taskManager.addEvent(words[1]);
             } catch (IndexOutOfBoundsException ex) {
                 System.out.println("Either event description or event specific timing is missing.");

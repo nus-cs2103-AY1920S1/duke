@@ -10,7 +10,7 @@ public class TaskList {
     public void printTaskList() {
         System.out.println("Here are the tasks in your list:");
 
-        for (int i = 0; i < taskList.size(); i++){
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             int count = i + 1;
             System.out.println(count + "." + task.toString());
@@ -22,9 +22,9 @@ public class TaskList {
     /**
      * returns details for all available task when the list command is invoked.
      */
-    public String getTasksData(){
+    public String getTasksData() {
         String message = "";
-        for (int i = 0; i < taskList.size(); i++){
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             int count = i + 1;
             message = message + task.toString() + "\r\n";
@@ -40,15 +40,15 @@ public class TaskList {
      *
      */
 
-    public void markDone(int taskIndex){
-        try{
+    public void markDone(int taskIndex) {
+        try {
             Task t = taskList.get(taskIndex);
             t.setCompleted();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("   [✓] " + t.getTask());
 
-        } catch (IndexOutOfBoundsException ex){
-            if (taskList.size() == 0){
+        } catch (IndexOutOfBoundsException ex) {
+            if (taskList.size() == 0) {
                 System.out.println("No tasks to be done.");
             } else {
                 taskIndex += 1;
@@ -63,18 +63,18 @@ public class TaskList {
      * @param taskIndex position of a task in the taskList Arraylist
      *
      */
-    public void deleteTask(int taskIndex){
-        try{
-            Task deleted_task = taskList.remove(taskIndex);
+    public void deleteTask(int taskIndex) {
+        try {
+            Task deletedTask = taskList.remove(taskIndex);
             System.out.println("Noted. I've removed this task:");
-            System.out.println(" " + deleted_task.toString());
+            System.out.println(" " + deletedTask.toString());
 
-            if (taskList.size() <= 1){
+            if (taskList.size() <= 1) {
                 System.out.println("Now you have " + taskList.size() + " task in the list.");
             } else {
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
             }
-        } catch (IndexOutOfBoundsException ex){
+        } catch (IndexOutOfBoundsException ex) {
             if (taskList.size() == 0) {
                 System.out.println("Nothing to delete.");
             } else {
@@ -104,7 +104,7 @@ public class TaskList {
      * @param input information in the form of: proj-meeting /at 13/10/2019 6-8pm (an example)
      *
      */
-    public void addEvent(String input){
+    public void addEvent(String input) {
         String[] words = input.split(" /at ");
         Events event = new Events(words[0], words[1]);
         taskList.add(event);
@@ -117,11 +117,10 @@ public class TaskList {
      * @param input information in the form of: proj-meeting (an example)
      *
      */
-    public void addToDo(String input){
+    public void addToDo(String input) {
         Todo td = new Todo(input);
         taskList.add(td);
         td.printAddedTodo(taskList.size());
-
     }
     
 }

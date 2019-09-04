@@ -2,14 +2,22 @@
 public class Duke {
     private static Ui uiManager = new Ui();
 
-    public void run(){
+    /**
+     * manages user inputs.
+     *
+     *
+     */
+    public void run() {
         uiManager.takeUserCommand();
     }
 
-    public static void main(String[] args)  {
+    /**
+     * runs Duke.
+     *
+     */
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
-
     }
 
 }

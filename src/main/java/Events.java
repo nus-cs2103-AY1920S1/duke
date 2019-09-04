@@ -12,7 +12,7 @@ public class Events extends Task {
      *
      */
 
-    public Events(String task, String timeDate){
+    public Events(String task, String timeDate) {
         super(task);
         this.timeDate = timeDate;
         interpretDate();
@@ -24,7 +24,7 @@ public class Events extends Task {
      * [E] represents that our object is a Events object.
      *
      */
-    public String toString(){
+    public String toString() {
         String box;
         String msg = "[E]";
         if (!this.isDone()) {
@@ -41,7 +41,7 @@ public class Events extends Task {
      *2-4pm stays the same
      */
 
-    public void interpretDate(){
+    public void interpretDate() {
         String[] words = timeDate.split(" ");
         String date = words[0];
         String time = words[1];
@@ -62,11 +62,11 @@ public class Events extends Task {
      * @param size Number of tasks managed by Duke after we have added an Events object.
      *
      */
-    public void printAddedEvent (int size) {
+    public void printAddedEvent(int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + this.toString());
         String end = " tasks in the list.";
-        if (size == 1){
+        if (size == 1) {
             end = " task in the list.";
         }
         System.out.println("Now you have " + size + end);

@@ -8,17 +8,17 @@ public class NoValidCommandException extends Exception {
      *
      */
 
-    public NoValidCommandException (String message){
+    public NoValidCommandException(String message) {
         this.message = message;
     }
 
 
     /**
-     * prints customised error message for NoValidCommandException
+     * prints customised error message for NoValidCommandException.
      *
      */
 
-    public void printErrorMessage(){
+    public void printErrorMessage() {
         System.out.println(message);
     }
 }

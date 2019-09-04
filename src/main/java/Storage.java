@@ -9,12 +9,12 @@ public class Storage {
      * @param file name of txt file to store data whenever TaskList changes
      *
      */
-    public Storage(String file){
+    public Storage(String file) {
         fileName = file;
     }
 
     /**
-     * writes and saves all Task data into a txt file
+     * writes and saves all Task data into a txt file.
      * @param taskManager a TaskList object
      *
      */
@@ -26,11 +26,11 @@ public class Storage {
     }
 
     /**
-     * calls saveTask()
+     * calls saveTask().
      * @param taskManager a TaskList object
      *
      */
-    public void saveTaskUtil (TaskList taskManager){
+    public void saveTaskUtil(TaskList taskManager) {
         try {
             saveTask(taskManager);
         } catch (IOException e) {

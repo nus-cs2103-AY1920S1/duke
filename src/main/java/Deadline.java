@@ -4,7 +4,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private String deadLine;
-
     private String interpretedDate;
     private String interpretedTime;
 
@@ -15,7 +14,7 @@ public class Deadline extends Task {
      */
 
 
-    public Deadline(String taskName, String deadLine){
+    public Deadline(String taskName, String deadLine) {
         super(taskName);
         this.deadLine = deadLine;
 
@@ -29,17 +28,15 @@ public class Deadline extends Task {
      * [D] represents that our object is a deadline object.
      *
      */
-    public String toString(){
+    public String toString() {
         String box;
         String msg = "[D]";
-        if (!this.isDone()){
+        if (!this.isDone()) {
             box = "[✗]";
-        } else{
+        } else {
             box = "[✓]";
         }
-
         return msg + box + " " + this.getTask() + " (by: " + this.interpretedDate + " at " + this.interpretedTime + ")";
-
     }
 
     /**
@@ -48,7 +45,7 @@ public class Deadline extends Task {
      *and 1830 becomes 0630 pm
      */
 
-    public void interpretDeadLine(){
+    public void interpretDeadLine() {
         String[] words = deadLine.split(" ");
         String date = words[0];
         String time = words[1];
@@ -67,7 +64,6 @@ public class Deadline extends Task {
 
     }
 
-
     /**
      * prints a message by Duke, when Duke has added a Deadline object.
      *
@@ -75,17 +71,14 @@ public class Deadline extends Task {
      *
      */
 
-    public void printAddedDeadline (int size){
+    public void printAddedDeadline(int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + this.toString());
         String end = " tasks in the list.";
-        if (size==1) {
+        if (size == 1) {
             end = " task in the list.";
         }
         System.out.println("Now you have " + size + end);
     }
-
-
-
 
 }

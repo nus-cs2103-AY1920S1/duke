@@ -4,16 +4,19 @@ public class Todo extends Task {
      * @param task name of a given Todo object
      *
      */
-    public Todo(String task){
+
+    public Todo(String task) {
         super(task);
     }
+
     /**
      * returns the message comprising [T], name of the task of the Todo object,
      * together with the a symbol representing if a Todo object is completed or not.
      * [T] represents that our object is a Todo object.
      *
      */
-    public String toString(){
+
+    public String toString() {
         String box;
         String msg = "[T]";
 
@@ -22,7 +25,7 @@ public class Todo extends Task {
         } else {
             box = "[✓] ";
         }
-        return msg + box + this.getTask() ;
+        return msg + box + this.getTask();
     }
 
 
@@ -33,12 +36,12 @@ public class Todo extends Task {
      *
      */
 
-    public void printAddedTodo (int size){
+    public void printAddedTodo(int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + this.toString());
         String end = " tasks in the list.";
 
-        if (size==1) {
+        if (size == 1) {
             end = " task in the list.";
         }
         System.out.println("Now you have " + size + end);

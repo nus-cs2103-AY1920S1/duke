@@ -22,8 +22,9 @@ public class DeleteCommand extends Command {
      * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
+     * @return The response string.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n" + tasks.allTasks.get(index));
         storage.deleteTaskFromFile(tasks.allTasks.get(index));
@@ -37,7 +38,7 @@ public class DeleteCommand extends Command {
               .append(tasks.allTasks.size())
                 .append(" tasks in the list.");
         }
-        ui.printMessage(sb.toString());
+        return (sb.toString());
     }
 
     /**

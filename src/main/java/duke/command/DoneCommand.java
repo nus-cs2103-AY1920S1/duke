@@ -22,14 +22,15 @@ public class DoneCommand extends Command {
      * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
+     * @return The response string.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         // Delete from file, mark as done, reinsert into file
         storage.deleteTaskFromFile(tasks.allTasks.get(index));
         tasks.allTasks.get(index).markAsDone();
-        ui.printMessage("Nice! I've marked this task as done:\n" + tasks.allTasks.get(index));
         storage.appendTaskToFile(tasks.allTasks.get(index));
+        return ("Nice! I've marked this task as done:\n" + tasks.allTasks.get(index));
     }
 
     /**

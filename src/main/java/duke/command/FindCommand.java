@@ -24,16 +24,18 @@ public class FindCommand extends Command {
      * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
+     * @return The response string.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         // Print all existing items in the list
-        ui.printMessage("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         for (Task x : tasks.allTasks) {
             if (x.toString().toLowerCase().contains(keyword)) {
-                ui.printMessage((tasks.allTasks.indexOf(x) + 1) + ". " + x);
+                sb.append((tasks.allTasks.indexOf(x) + 1) + ". " + x);
             }
         }
+        return sb.toString();
     }
 
     /**

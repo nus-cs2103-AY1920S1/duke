@@ -5,3 +5,5 @@ T|0|Make bed
 T|0|make bed
 T|0|read book
 D|0|return my stuff |tomorrow
+D|0|cskam |tomorrow
+D|0|csasa |tomrrow

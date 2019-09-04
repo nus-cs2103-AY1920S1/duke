@@ -18,12 +18,14 @@ public class ListCommand extends Command {
      * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
+     * @return The response string.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         // Print all existing items in the list
-        ui.printMessage("Here are the tasks in your list:");
-        tasks.allTasks.forEach(x -> ui.printMessage((tasks.allTasks.indexOf(x) + 1) + ". " + x));
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        tasks.allTasks.forEach(x -> sb.append((tasks.allTasks.indexOf(x) + 1) + ". " + x + "\n"));
+        return sb.toString();
     }
 
     /**

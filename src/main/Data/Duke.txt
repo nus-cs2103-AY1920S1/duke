@@ -1,2 +1,6 @@
-event pending make some money
+event done make some money
 12th of December 1999, 5am
+todo pending make some cash
+todo pending get some cash
+todo pending eat some food
+todo pending actually eat the money

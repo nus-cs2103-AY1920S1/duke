@@ -20,10 +20,9 @@ public class Duke {
 
     /**
      * Constructs and initializes the attributes of a new Duke object.
-     * @param filePath File path to the text file to read and write data.
      */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
+    public Duke() {
+        this.storage = new Storage("data\\duke.txt");
         this.ui = new Ui();
         try {
             this.tasks = new TaskList(storage.load());
@@ -52,12 +51,21 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e);
+        }
+    }
+
     /**
      * main method for the program to execute.
      * @param args Takes in an array of Strings as arguments.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("data\\duke.txt");
+        Duke duke = new Duke();
         duke.run();
     }
 }

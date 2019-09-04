@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
      * @throws DukeException Possibility of throwing a DukeException due to
      *      an exception occuring in the running of the application.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
         int sizeOfList = task.getNumOfTasks();
         String number = description.substring(4).trim();
         if (number.matches("^\\d+")) {
@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
             if (taskNum > sizeOfList || taskNum < 1) {
                 throw new InvalidDescriptionException("Wrong description");
             } else {
-                ui.showText(task.tickTask(taskNum));
+                return ui.showText(task.tickTask(taskNum));
             }
         } else {
             throw new InvalidDescriptionException("Wrong description");

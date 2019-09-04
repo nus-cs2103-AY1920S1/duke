@@ -1,1 +1,2 @@
 E | 0 | kick me  | 31/8/2019 2200
+T | 1 | smack oscar

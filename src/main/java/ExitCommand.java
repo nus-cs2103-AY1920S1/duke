@@ -21,8 +21,8 @@ public class ExitCommand extends Command {
      * @throws DukeException Possibility of throwing a DukeException due to
      an exception occuring in the running of the application.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList task, Ui ui, Storage storage) {
         storage.writeToFile(task);
-        ui.showExitMessage();
+        return ui.showExitMessage();
     }
 }

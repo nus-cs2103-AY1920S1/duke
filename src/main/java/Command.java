@@ -40,5 +40,5 @@ public abstract class Command {
      * @throws DukeException Possibility of throwing a DukeException due to
      *      an exception occuring in the running of the application.
      */
-    public abstract void execute(TaskList task, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeException;
 }

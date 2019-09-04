@@ -3,6 +3,9 @@ package tasklist;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Deadline type of task
+ */
 public class Deadline extends Task {
 
     public Deadline(String name, boolean completionStatus , LocalDateTime date) {

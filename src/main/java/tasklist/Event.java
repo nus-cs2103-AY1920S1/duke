@@ -3,6 +3,9 @@ package tasklist;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Event type of task
+ */
 public class Event extends Task {
 
     protected String at;

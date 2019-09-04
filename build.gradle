@@ -23,7 +23,7 @@ googleJavaFormat {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1.0"
+    archiveVersion = "0.3.0"
     archiveClassifier = null
     archiveAppendix = null
 }

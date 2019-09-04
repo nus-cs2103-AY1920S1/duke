@@ -15,7 +15,7 @@ public class Duke {
     /**
      * File location for loaded text or new text file containing todo tasks
      */
-    private static String FILENAME = "../../../data/duke.txt";
+    private static String FILENAME = "data/duke.txt";
 
     /**
      * Handles loading tasks from file and saving tasks in file

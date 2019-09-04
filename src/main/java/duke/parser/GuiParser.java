@@ -196,13 +196,7 @@ public class GuiParser  {
             //midnight
             timeInInt = 12;
         } else if (timeInInt > 0 && timeInInt < 1200) {
-            int hrs = timeInInt / 100 % 12;
-            int mins = timeInInt % 100;
-            if (mins == 0) {
-                time = String.valueOf(hrs) + "am";
-            } else {
-                time = String.valueOf(hrs) + String.valueOf(mins) + "am";
-            }
+            time = String.valueOf(timeInInt) + "am";
         } else if (timeInInt < 2359 && timeInInt >= 1300) {
             //1300 / 100 = 13 % 12
             int hrs = (timeInInt / 100) % 12;
@@ -285,20 +279,17 @@ public class GuiParser  {
             String temp = arrayOfDateAndTime[1];
             String[] arrayOfTime = temp.split("-");
             String timeStarting = arrayOfTime[0];
-            System.out.println(timeStarting);
             String timeEnding = arrayOfTime[1];
             date = formatString(date);
             timeStarting = convertTime(Integer.valueOf(timeStarting));
-            System.out.println(timeStarting);
             timeEnding = convertTime(Integer.valueOf(timeEnding));
             dateAndTimeString = date + ", " + timeStarting + "-" +timeEnding;
             return dateAndTimeString;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("invalid date and time supplied: try d/mm/yyyy 0000 format");
+            return "invalid date and time supplied: try d/mm/yyyy 0000 format";
         } catch (DukeException e ) {
-            System.out.println(e);
+            return e.toString();
         }
-        return " ";
     }
 
     /**

@@ -8,13 +8,16 @@ import java.util.Scanner;
 public class Storage {
     private String storagePath;
 
+    /**
+     * @param Storagepath Relative path to storage location
+     */
     public Storage(String storagePath) {
         this.storagePath = storagePath;
         ensureStorageCreated();
     }
 
     private void ensureStorageCreated() {
-        File file = new File(System.getProperty("user.dir") + storagePath);
+        File file = new File(System.getProperty("user.dir") + "/" + storagePath);
         file.getParentFile().mkdirs();
     }
 

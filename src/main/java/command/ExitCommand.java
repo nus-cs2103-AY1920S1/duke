@@ -3,7 +3,6 @@ import main.Storage;
 import main.Ui;
 import task.TaskList;
 import task.InsufficientTaskArgumentException;
-import task.InvalidTaskException;
 
 public class ExitCommand implements Command {
 
@@ -28,10 +27,9 @@ public class ExitCommand implements Command {
      * @param ui Ui of the app.
      * @param storage Storage is the class that manages file reading and file writing of the data passed into the app.
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
-     * @throws InvalidTaskException exception thrown when task is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskException, InsufficientTaskArgumentException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
         ui.nextLine("See you later! 8)");
         return ;
     }

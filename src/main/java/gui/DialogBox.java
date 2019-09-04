@@ -23,8 +23,8 @@ public class DialogBox extends HBox {
                 "-fx-label-padding: 10;" +
                 "-fx-text-fill: white;" +
                 "-fx-background-radius: 4;");
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(120.0);
+        displayPicture.setFitHeight(120.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -43,6 +43,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         DialogBox dukeDialog = new DialogBox(l, iv);
+        dukeDialog.text.setTranslateX(-10.0);
         dukeDialog.text.setTranslateY(10.0);
         return dukeDialog;
     }

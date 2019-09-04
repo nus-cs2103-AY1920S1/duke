@@ -55,7 +55,9 @@ public class Parser {
         } else if (commandComponents[0].equals("find")) {
             c = new FindCommand(commandComponents[1]);
         } else {
-            throw new DukeException("Sorry! I don't know what this command does: " + fullCommand);
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "    Sorry! I don't know what this command does:\n" +  "    " + fullCommand + "\n" +
+                    "    ____________________________________________________________");
         }
         return c;
     }

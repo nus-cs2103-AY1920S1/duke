@@ -9,22 +9,25 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int i = Integer.parseInt(oneLine[1].trim());
         int tasksSize = tasks.size();
 
         if (i <= tasksSize && i > 0) {
-            System.out.println(Ui.frontSpace + " Nice! I've marked this task as done: ");
             Task current = tasks.getTaskList().get(i - 1);
             current.markAsDone();
-            System.out.println(Ui.frontSpace + "   " + current);
+
+            try {
+                storage.save(tasks);
+            } catch (Exception e) {
+                Ui.printOutput(" duke.txt has problem");
+            }
+
+            return Ui.frontSpace + "Nice! I've marked this task as done: \n" +
+                    Ui.frontSpace + "   " + current.toString();
         } else {
             throw new TaskNotExistException("task does not exist");
         }
-        try {
-            storage.save(tasks);
-        } catch (Exception e) {
-            System.out.println(Ui.frontSpace + " duke.txt has problem");
-        }
+
     }
 }

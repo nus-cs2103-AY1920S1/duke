@@ -11,122 +11,135 @@ public class Parser {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Creates a Parser object with the given TaskList, Ui, Storage.
+     * @param taskList TaskList that duke keeps track of.
+     * @param ui Generates the output string.
+     * @param storage Accesses the given file.
+     */
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;
     }
 
+    /**
+     * Processes the Command given by the user to Duke.
+     * @param command String representing the command given to Duke.
+     * @return A string representing the reply from Duke.
+     */
     public String processCommand(String command) {
         String reply = "";
 
-            // When command is 'list'
-            if (command.equals("list")) {
-                String list = taskList.printAllTasks();
-                reply = "Here are the tasks in your list:" + "\n" + list;
+        // When command is 'list'
+        if (command.equals("list")) {
+            String list = taskList.printAllTasks();
+            reply = "Here are the tasks in your list:" + "\n" + list;
 
-            } else if (command.contains("done")) {
-                String[] sentence = command.split(" ");
+        } else if (command.contains("done")) {
+            String[] sentence = command.split(" ");
 
-                // When command is 'done'
-                try {
-                    if (sentence[0].equals("done")) { // Check if the first word is done
-                        int completedTaskIndex = Integer.parseInt(sentence[1]);
-                        reply = taskList.markAsDone(completedTaskIndex);
-                        // If it wasn't marked before, this would print out a notification saying it is now marked.
+            // When command is 'done'
+            try {
+                if (sentence[0].equals("done")) { // Check if the first word is done
+                    int completedTaskIndex = Integer.parseInt(sentence[1]);
+                    reply = taskList.markAsDone(completedTaskIndex);
+                    // If it wasn't marked before, this would print out a notification saying it is now marked.
 
-                        // Save new list to storage
-                        try {
-                            storage.saveToFile(taskList.toString());
-                        } catch (IOException e) {
-                            reply = ui.showLoadingError();
-                        }
-
-                    } else {
-                        throw new UnknownTaskTypeException();
+                    // Save new list to storage
+                    try {
+                        storage.saveToFile(taskList.toString());
+                    } catch (IOException e) {
+                        reply = ui.showLoadingError();
                     }
 
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    reply = ui.promptDoneCompletion();
-                } catch (IndexOutOfBoundsException e) {
-                    reply = ui.promptList();
-                } catch (NumberFormatException e) {
-                    reply = ui.promptDoneFormat();
-                } catch (UnknownTaskTypeException e) {
-                    reply = ui.showErrorMessage(e);
+                } else {
+                    throw new UnknownTaskTypeException();
                 }
 
-
-            } else if (command.contains("delete")) {
-                String[] sentence = command.split(" ");
-
-                // When command is 'delete'
-                try {
-                    if (sentence[0].equals("delete")) {
-                        int taskIndex = Integer.parseInt(sentence[1]);
-                        Task deletedTask = taskList.deleteTask((taskIndex - 1));
-                        reply = ui.showDeletedTask(deletedTask, taskList.numTasks);
-
-                        // Save new list to storage
-                        try {
-                            storage.saveToFile(taskList.toString());
-                        } catch (IOException e) {
-                            reply = ui.showLoadingError();
-                        }
-
-                    } else {
-                        throw new UnknownTaskTypeException();
-                    }
-
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    reply = ui.promptDeleteCompletion();
-                } catch (IndexOutOfBoundsException e) {
-                    reply = ui.promptList();
-                } catch (NumberFormatException e) {
-                    reply = ui.promptDeleteFormat();
-                } catch (UnknownTaskTypeException e) {
-                    reply = ui.showErrorMessage(e);
-                }
-
-
-            } else if (command.contains("find")) {
-                String[] sentence = command.split(" ");
-                String keyword = "";
-
-                try {
-                    if (sentence[0].equals("find")) {
-                        keyword = sentence[1];
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    reply = ui.promptFindKeyword();
-                }
-
-                reply = ui.showSearchList(taskList.searchFor(keyword));
-
-            } else {
-                // Generate new task
-                try {
-                    if (!command.isEmpty()) {
-                        Task newTask = Parser.generateNewTask(command);
-                        taskList.addTask(newTask);
-
-                        // Save the new list to storage
-                        try {
-                            storage.saveToFile(taskList.toString());
-                        } catch (IOException e) {
-                            reply = ui.showLoadingError();
-                        }
-
-                        reply = ui.showAddTask(newTask, taskList.numTasks);
-                    }
-
-                } catch (DukeException err) {
-                    reply = ui.showErrorMessage(err);
-                }
-
+            } catch (ArrayIndexOutOfBoundsException e) {
+                reply = ui.promptDoneCompletion();
+            } catch (IndexOutOfBoundsException e) {
+                reply = ui.promptList();
+            } catch (NumberFormatException e) {
+                reply = ui.promptDoneFormat();
+            } catch (UnknownTaskTypeException e) {
+                reply = ui.showErrorMessage(e);
             }
+
+
+        } else if (command.contains("delete")) {
+            String[] sentence = command.split(" ");
+
+            // When command is 'delete'
+            try {
+                if (sentence[0].equals("delete")) {
+                    int taskIndex = Integer.parseInt(sentence[1]);
+                    Task deletedTask = taskList.deleteTask((taskIndex - 1));
+                    reply = ui.showDeletedTask(deletedTask, taskList.numTasks);
+
+                    // Save new list to storage
+                    try {
+                        storage.saveToFile(taskList.toString());
+                    } catch (IOException e) {
+                        reply = ui.showLoadingError();
+                    }
+
+                } else {
+                    throw new UnknownTaskTypeException();
+                }
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                reply = ui.promptDeleteCompletion();
+            } catch (IndexOutOfBoundsException e) {
+                reply = ui.promptList();
+            } catch (NumberFormatException e) {
+                reply = ui.promptDeleteFormat();
+            } catch (UnknownTaskTypeException e) {
+                reply = ui.showErrorMessage(e);
+            }
+
+
+        } else if (command.contains("find")) {
+            String[] sentence = command.split(" ");
+            String keyword = "";
+
+            try {
+                if (sentence[0].equals("find")) {
+                    keyword = sentence[1];
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                reply = ui.promptFindKeyword();
+            }
+
+            reply = ui.showSearchList(taskList.searchFor(keyword));
+
+        } else {
+            // Generate new task
+            try {
+                if (!command.isEmpty()) {
+                    Task newTask = Parser.generateNewTask(command);
+                    taskList.addTask(newTask);
+
+                    // Save the new list to storage
+                    try {
+                        storage.saveToFile(taskList.toString());
+                    } catch (IOException e) {
+                        reply = ui.showLoadingError();
+                    }
+
+                    reply = ui.showAddTask(newTask, taskList.numTasks);
+                }
+
+            } catch (DukeException err) {
+                reply = ui.showErrorMessage(err);
+            }
+        }
+
         // When command is bye
-        ui.showFarewell();
+        if (command.equals("bye")) {
+            reply = ui.showFarewell();
+        }
 
         return reply;
     }

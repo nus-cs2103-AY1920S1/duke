@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 /**
- * Represents a Duke Chatbot that is able to keep track of tasks.
+ * Represents a Duke object that is able to keep track of tasks.
  */
 public class Duke {
 
@@ -10,7 +10,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Create a new Duke Chatbot with access to duke.txt file.
+     * Create a new Duke with access to duke.txt file.
      */
     public Duke() {
         String filePath = "duke.txt";
@@ -26,27 +26,14 @@ public class Duke {
     }
 
     /**
-     * Main method that starts everything.
-     * @param args String array
-     */
-    /*
-    public static void main(String[] args) {
-        //new Duke("duke.txt").run();
-        new Duke().run();
-    }
-     */
-
-    /**
-     * Runs the Chatbot.
+     * Runs Duke.
      */
     public String run(String command) {
-        ui.showWelcome();
-        System.out.println("Here is the list of tasks from where you've left off: ");
-        ui.showList(taskList);
+
 
         Parser parser = new Parser(taskList, ui, storage);
 
-        String response = parser.processCommand(command); //returns string?
+        String response = parser.processCommand(command); //returns string
 
         return response;
     }
@@ -57,4 +44,14 @@ public class Duke {
         return run(input);
     }
 
+    /**
+     * Generate Duke's welcome message.
+     * @return a string representing the welcome message.
+     */
+    public String showWelcome() {
+        String s1 = ui.showWelcome();
+        String s2 = "Here is the list of tasks from where you've left off: ";
+        String s3 = ui.showList(taskList);
+        return s1 + "\n" + s2 + "\n" + s3;
+    }
 }

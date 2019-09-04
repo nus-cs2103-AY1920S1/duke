@@ -59,4 +59,14 @@ public class TaskList {
         return taskList;
     }
 
+    public void findTasks(String search) {
+        LinkedList<String> foundtasks = new LinkedList<>();
+        for (Task task: taskList){
+            if(task.getOverallStatus().contains(search)){
+                foundtasks.addLast(task.getOverallStatus());
+            }
+        }
+        ui.printFoundTasks(foundtasks);
+    }
+
 }

@@ -89,4 +89,19 @@ public class TextUi {
                 DIVIDER);
     }
 
+    public void printFoundTasks(LinkedList<String> foundtasks){
+        if (foundtasks.isEmpty()){
+            System.out.println(DIVIDER + "\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I couldn't find anything :-(\n"
+                    + DIVIDER);
+        }else {
+            System.out.println(DIVIDER + "\n"
+                    + "     Here are the matching tasks in your list:");
+            int i = 0;
+            for (String s : foundtasks) {
+                System.out.println("     " + ++i + "." + s);
+            }
+            System.out.println(DIVIDER);
+        }
+    }
 }

@@ -37,6 +37,7 @@ public class Parser {
                 + "\\s*(?<description>([\\w\\s\\d]+)?)"
                 + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
+
         if (matcher.find()) {
             command = matcher.group("commandWord");
             isDone = matcher.group("completionStatus").equals("[1]");
@@ -51,6 +52,7 @@ public class Parser {
                     isSafe = false;
                 }
             }
+
             if (isSafe) {
                 switch (command) {
                 case "todo":
@@ -69,6 +71,9 @@ public class Parser {
                     break;
                 case "delete":
                     scheduler.removeTask(description);
+                    break;
+                case "find":
+                    scheduler.findTasks(description);
                     break;
                 default:
                     ui.printErrorMsg1();

@@ -1,7 +1,7 @@
 /**
  * Abstract class for all Commands which handle changes to user interaction, task list and saved todo file
  */
-abstract class Command {
+public abstract class Command {
     /**
      * First keyword entered by user determining command type
      */

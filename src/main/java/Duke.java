@@ -32,11 +32,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui(INDENT);
-        try {
-            storage = new Storage(filePath);
-        } catch(FileNotFoundException | UnsupportedEncodingException err) {
-            ui.showFileMissingError();
-        }
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch(Exception err) {

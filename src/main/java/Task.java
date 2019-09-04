@@ -69,11 +69,11 @@ public class Task {
      * @return Task type
      */
     public String getTaskType() {
-        if(taskType.equals("todo")) {
+        if (taskType.equals("todo")) {
             return "[T]";
-        } else if(taskType.equals("deadline")) {
+        } else if (taskType.equals("deadline")) {
             return "[D]";
-        } else if(taskType.equals("event")) {
+        } else if (taskType.equals("event")) {
             return "[E]";
         } else {
             return "";
@@ -98,9 +98,9 @@ public class Task {
     @Override
     public String toString() {
         String stringToPrint = getTaskType() + " " + getStatusIcon() + " " + getDescription();
-        if(taskType.equals("deadline")) {
+        if (taskType.equals("deadline")) {
             return stringToPrint + " (by: " + getDateTime() + ")";
-        } else if(taskType.equals("event")) {
+        } else if (taskType.equals("event")) {
             return stringToPrint + " (at: " + getDateTime() + ")";
         } else {
             return stringToPrint;

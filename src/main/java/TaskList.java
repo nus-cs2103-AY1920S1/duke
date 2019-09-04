@@ -34,7 +34,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasklist) {
         this.list = new ArrayList<>();
         this.listString = "";
-        for(Task task : tasklist) {
+        for (Task task : tasklist) {
             addTask(task);
         }
     }

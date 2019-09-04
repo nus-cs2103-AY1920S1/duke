@@ -2,8 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public class Storage {
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      */
-    public Storage(String filename) throws FileNotFoundException, UnsupportedEncodingException {
+    public Storage(String filename) {
         this.filename = filename;
     }
 
@@ -39,15 +41,15 @@ public class Storage {
 
         while(scanner.hasNext()) {
             scanner.next();
-            if(!scanner.hasNext()) {
+            if (!scanner.hasNext()) {
                 break;
             }
             String[] inputArr = scanner.nextLine().trim().split(" ", 3);
             char taskType = inputArr[0].charAt(1);
             boolean isTaskComplete = (inputArr[1].equals("[\u2713]")) ? true : false;
-            if(taskType == 'T') {
+            if (taskType == 'T') {
                 tasklist.add(new Task(inputArr[2], "todo", isTaskComplete));
-            } else if(taskType == 'D') {
+            } else if (taskType == 'D') {
                 String deadlineDetails = inputArr[2].split("\\(")[0];
                 String deadline = inputArr[2].split("\\(")[1].split(" ", 2)[1];
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm)");

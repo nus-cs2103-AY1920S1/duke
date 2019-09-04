@@ -71,7 +71,6 @@ public class Duke {
                         break;
                     } else if (command.equals("list")) {
                         ui.showTasks(tasks);
-                        ui.showTasks(tasks);
                     } else if (commandAnalyzer.getType().equals("find")) {
                         ui.showTasks(tasks.find(commandAnalyzer.getList().get(0)));
                     } else {

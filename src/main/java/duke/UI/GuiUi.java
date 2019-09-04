@@ -27,5 +27,4 @@ public class GuiUi {
     public static String printNow(int length) {
         return "Now you have " + length + " tasks in the list.";
     }
-
 }

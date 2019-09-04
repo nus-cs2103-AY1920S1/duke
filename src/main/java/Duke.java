@@ -33,6 +33,7 @@ public class Duke  {
      * @param filepath file path giving the location of the file
      */
     public Duke(String filepath) {
+        assert !filepath.equals("") : "file path should not be empty!";
         storage = new Storage(filepath);
         //initialise an arraylist to store Tasks
         GuiTaskList store = new GuiTaskList(storage.createTasksFromFile(), storage);
@@ -45,6 +46,7 @@ public class Duke  {
      * Calls Parser object to read current input from GUI
      */
     private String getResponse(String input) {
+        assert !input.equals("") :  "string from GUI parser should not be empty ";
         return parser.readUserInput(input);
     }
 

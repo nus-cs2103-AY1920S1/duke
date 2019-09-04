@@ -35,16 +35,15 @@ public class GuiParser  {
                 //start of toDo,Event,Deadline
                 if (argumentArray[0].equals("done")) {
                     if (argumentArray.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a done command cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a done command cannot be empty.");
                     }
                     int index = Integer.valueOf(argumentArray[1]) - 1;
                     String result = storeTaskList.doneTask(index);
                     return result;
-
                 } else if (argumentArray[0].equals("todo")) {
                     //catch empty desc error
                     if (argumentArray.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
                     //form back string
                     String toDoTaskString = "";
@@ -55,11 +54,10 @@ public class GuiParser  {
                     //.trim() to remove trailing space
                     String result = storeTaskList.addToDoTask(toDoTaskString.trim());
                     return result;
-
                 } else if (argumentArray[0].equals("deadline")) {
                     //catch empty desc error
                     if (argumentArray.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     }
                     //form back string , description stops at /by
                     //date time starts from /by
@@ -87,7 +85,7 @@ public class GuiParser  {
                 } else if (argumentArray[0].equals("event")) {
                     //catch empty desc error
                     if (argumentArray.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                        throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                     }
                     //form back string , description stops at /at
                     //date time starts from /at
@@ -114,7 +112,7 @@ public class GuiParser  {
                     return result;
                 } else if (argumentArray[0].equals("delete")) {
                     if (argumentArray.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
+                        throw new DukeException("OOPS!!! The description for delete command cannot be empty.");
                     }
                     int index = Integer.valueOf(argumentArray[1]) - 1;
                     String result = storeTaskList.deleteTask(index);
@@ -128,7 +126,7 @@ public class GuiParser  {
                     System.exit(0);
                 } else {
                     //handles error for not recognized command
-                    throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (IndexOutOfBoundsException e) {
                 return "invalid number not in current list , please enter input again";
@@ -136,7 +134,7 @@ public class GuiParser  {
                 return e.toString();
             }
         }
-        return "error in input";
+        return "";
     }
 
     /**

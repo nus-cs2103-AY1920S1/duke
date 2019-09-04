@@ -39,12 +39,13 @@ public class Storage {
     }
 
 
-        /**
+    /**
      * Saves given arrayList of Tasks to file
      * @param list ArrayList of Task
      */
     public void saveTaskToFile(ArrayList<Task> list) {
         try {
+            assert this.tempFile != null : "File cannot be null here";
             FileWriter fileWriter = new FileWriter(this.tempFile);
             for (int i = 0; i < list.size(); i++) {
                 Task currentTask = list.get(i);
@@ -62,6 +63,7 @@ public class Storage {
      * @return ArrayList of Task
      */
     public ArrayList<Task> createTasksFromFile() {
+        assert this.storingStrings != null : "array cannot be null here";
         ArrayList<Task> store = new ArrayList<>();
         for (int i = 0; i < this.storingStrings.size(); i++) {
             String wholeLine = this.storingStrings.get(i);
@@ -90,7 +92,6 @@ public class Storage {
                 store.add(toDoTask);
 
             } else if (argumentArray[0].equals("D")) {
-
                 String deadlineTaskDescriptionString = "";
                 String deadlineTaskDateAndTimeString = "";
                 boolean createDesc = true;
@@ -142,8 +143,6 @@ public class Storage {
 
             }
         }
-
-
         return store;
     }
 

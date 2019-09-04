@@ -47,7 +47,7 @@ public class Duke {
                 boolean valid = parser.checkValidity();
 
                 // Proceed only if the full command is valid.
-                if(valid) {
+                if (valid) {
                     String commandType = parser.getCommandType();
 
                     // Operate according to the command type.
@@ -81,6 +81,8 @@ public class Duke {
                                 parser.getTime(), false);
                         storage.updateFile(tasks);
                         break;
+                    default:
+                        break;
                     }
                 }
             } catch (DukeException | IOException ex) {
@@ -96,7 +98,6 @@ public class Duke {
 
     /**
      * Creates a new Duke object and passes in the file path to run the program.
-     *
      * @param args
      */
     public static void main(String[] args) {

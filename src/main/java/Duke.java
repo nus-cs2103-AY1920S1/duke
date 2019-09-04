@@ -5,12 +5,20 @@ import duke.command.Parser;
 import duke.command.Storage;
 import duke.DukeException;
 
+/**
+ * Represents the main class of the programme.
+ */
 public class Duke {
 
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Constructs a duke object that takes in filePath which is the
+     * path from which the file is to be loaded.
+     * @param filePath The path of the file from which the file is loaded.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +38,9 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Runs the Duke programme.
+     */
     public void run() {
         Parser parser = new Parser(this.taskList, this.ui, this.storage);
         ui.printWelcomeMessage();

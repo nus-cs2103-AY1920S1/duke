@@ -1,31 +1,60 @@
 package duke.task;
 
+/**
+ * Represents a Task that contains the fields description that describes the
+ * task, isDone that indicates if a task has been done and typeOfTask that
+ * differentiates the type of task which can be an Event task, Todo task, or
+ * Deadline task.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone = false;
     protected String typeOfTask;
 
+    /**
+     *  Constructs a Task object with specified description.
+     * @param description Description that describes the task.
+     */
     public Task(String description) {
         this.description = description;
     }
 
+    /**
+     * Get status icon. If a task is done, returns check mark,
+     * otherwise, cross mark.
+     * @return string of a check or cross mark.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Change the field isDone to be true.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+
+    /**
+     * Check whether is task is done.
+     * @return the boolean value isDone.
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * @return the description of the task.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * @return the type of the task.
+     */
     public String getTypeOfTask() {
         return this.typeOfTask;
     }

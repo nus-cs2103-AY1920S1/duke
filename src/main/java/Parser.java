@@ -19,13 +19,21 @@ import duke.DukeException;
  * Ui that prints the message for each commands and Storage that
  * updates the files when the list of Task is modified.
  */
-
 public class Parser {
 
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructs parser object that takes in TaskList,
+     * Ui and Storage as parameter.
+     *
+     * @param taskList  list of tasks contained in TaskList object.
+     * @param ui User Interface object responsible for printing messages.
+     * @param storage Storage that loads and updates files when tasks are
+     *                deleted or added to the list.
+     */
     public Parser(TaskList taskList, Ui ui, Storage storage){
         this.taskList = taskList;
         this.ui = ui;
@@ -38,7 +46,6 @@ public class Parser {
      *
      * @param input  Command to be executed or Task to be created.
      * @throws DukeException  if Task has incomplete description.
-     * @throws IOException if
      */
     public void parseLineInput(String input) throws DukeException, IOException, ParseException {
         String firstWord = input.split(" ")[0];
@@ -91,6 +98,19 @@ public class Parser {
             storage.updateFile();
         } else if (firstWord.equals("bye")) {
             ui.printByeMessage();
+        } else if (firstWord.equals("find")) {
+            String item = "(.*)" + input.split(" ", 2)[1] + "(.*)";
+            ArrayList<Task> list = taskList.getList();
+            for (int i = 0; i < list.size(); i++) {
+                String description = list.get(i).getDescription();
+                boolean isPresent = description.matches(item);
+                //System.out.println(description);
+                //System.out.println(item);
+                //System.out.println(isPresent);
+                if (isPresent) {
+                    System.out.println(list.get(i));
+                }
+            }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
         }

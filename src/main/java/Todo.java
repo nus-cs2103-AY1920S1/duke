@@ -1,8 +1,15 @@
 package duke.task;
 
-import duke.task.Task;
-
+/**
+ * Child class of a Task class that respresents a Task of type todo
+ * that only has a desciption.
+ */
 public class Todo extends Task {
+
+    /**
+     * Constructs a Todo object with specified desciption.
+     * @param description Description of the todo task.
+     */
     public Todo(String description) {
         super(description);
         super.typeOfTask = "T";

@@ -40,11 +40,21 @@ public class TaskList {
         list.remove(t);
     }
     public void showlist() {
+        //String output = "";
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
             String itemDisplay = itemIndex + "." + list.get(i).toString();
             System.out.println(itemDisplay);
         }
+    }
+
+    public String showlistString() {
+        String output = "";
+        for (int i = 0; i < list.size(); i++) {
+            int itemIndex = i + 1;
+            output = output + "." + list.get(i).toString()+"/n";
+        }
+        return output;
     }
 
 
@@ -66,6 +76,26 @@ public class TaskList {
             System.out.println("Now you have " + list.size() + " tasks in the list.");
         } catch (Exception e) {
             System.out.println("Error " + "Please enter date and time in right format.");
+        }
+    }
+    public String timeformString(String dateTimeString, Task t) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, time);
+
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                e.setDateTime(dateTime);
+            } else {
+                Deadline d = (Deadline) t;
+                d.setDateTime(dateTime);
+            }
+            add(t);
+            String a ="Got it. I've added this task:" + t;
+            String b ="Now you have " + list.size() + " tasks in the list.";
+            return a+b;
+        } catch (Exception e) {
+            String c ="Error " + "Please enter date and time in right format.";
+            return c;
         }
     }
 }

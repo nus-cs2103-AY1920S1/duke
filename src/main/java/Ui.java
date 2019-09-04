@@ -19,17 +19,17 @@ public class Ui {
     /**
      * Prints all tasks currently in the tasklist
      */
-    public static void printTaskList() {
-        TaskList.printTasks();
+    public static String printTaskList() {
+        return TaskList.printTasks();
     }
 
     /**
-     * Adds a task to the tasklist by calling addTask from TaskList class
+     * Search in a tasklist for the tasks that matches the term provided
      *
-     * @param task The task to be added to the tasklist
+     * @param term Used to search for tasks that matches the term
      */
-    public static void findTasks(String term) {
-        TaskList.findTasks(term);
+    public static String findTasks(String term) {
+        return TaskList.findTasks(term);
     }
 
     /**
@@ -37,11 +37,10 @@ public class Ui {
      *
      * @param task The task to be added into tasklist
      */
-    public static void addTaskToTaskList(Task task) {
+    public static String addTaskToTaskList(Task task) {
         TaskList.addTask(task);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(task);
-        System.out.println("Now you have " + TaskList.getTaskListSize() + " tasks in the list.");
+        String output = "Got it. I've added this task: \n" + task + "\n" + "Now you have " + TaskList.getTaskListSize() + " tasks in the list.";
+        return output;
     }
 
     /**
@@ -49,101 +48,156 @@ public class Ui {
      *
      * @param taskNum The task number of the task to be deleted
      */
-    public static void delTaskInTaskList(int taskNum) {
+    public static String delTaskInTaskList(int taskNum) {
         Task taskToRemove = TaskList.getTaskAt(taskNum);
         TaskList.delTask(taskNum);
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(taskToRemove);
-        System.out.println("Now you have " + TaskList.getTaskListSize() + " tasks in the list.");
+        String output = "Noted. I've removed this task: \n" + taskToRemove + "\n"
+                                + "Now you have " + TaskList.getTaskListSize() + " tasks in the list.";
+        return output;
     }
 
     /**
      * Reads users' commands and respond accordingly
      */
-    public static void readInput() {
-        Scanner input = new Scanner(System.in);
-        String userInput = input.nextLine();
-
-        while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                printTaskList();
-                userInput = input.nextLine();
-                continue;
-            }
+    public static String readInput(String userInput) {
+//        Scanner input = new Scanner(System.in);
+//        String userInput = input.nextLine();
+        if (userInput.equals("bye")) {
+            return "goodbye!";
+        } else if (userInput.equals("list")) {
+            return printTaskList();
+        } else {
             String[] userInputSplit = userInput.split(" ");
-
             try {
                 Parser.handleInput(userInputSplit[0], userInput);
             } catch (DukeException ex) {
-                System.out.println(ex.getMessage());
-                userInput = input.nextLine();
-                continue;
+                return ex.getMessage();
             } catch (ParseException ex) {
-                System.out.println("☹ OOPS!!! The Date/Time field is invalid");
-                userInput = input.nextLine();
-                continue;
+                return "☹ OOPS!!! The Date/Time field is invalid";
             }
 
             if (userInput.startsWith("find")) {
-                findTasks(userInputSplit[1]);
+                return findTasks(userInputSplit[1]);
             } else if (userInput.startsWith("done")) {
                 int taskNumber = Integer.parseInt(userInput.substring(5));
                 Task selectedTask = TaskList.getTaskAt(taskNumber);
                 selectedTask.markAsDone();
-                System.out.println("Nice! I've marked this task as done: \n" + selectedTask);
+                return "Nice! I've marked this task as done: \n" + selectedTask;
             } else if (userInput.startsWith("delete")) {
                 int taskNumber = Integer.parseInt(userInput.substring(7));
-                delTaskInTaskList(taskNumber);
+                return delTaskInTaskList(taskNumber);
             } else if (userInput.startsWith("todo")) {
                 String description = userInput.substring(5);
-                addTaskToTaskList(new ToDo(description));
+                return addTaskToTaskList(new ToDo(description));
             } else if (userInput.startsWith("deadline")) {
                 String description = userInput.substring(9, userInput.indexOf('/') - 1);
                 String by = userInput.substring(13 + description.length()).trim();
 
                 try {
                     Parser.handleInput("by", by);
-                    addTaskToTaskList(new Deadline(description, new DateTime(by)));
+                    return addTaskToTaskList(new Deadline(description, new DateTime(by)));
                 } catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                    userInput = input.nextLine();
-                    continue;
+                    return ex.getMessage();
                 } catch (ParseException ex) {
-                    System.out.println("☹ OOPS!!! The Date/Time field is invalid");
-                    userInput = input.nextLine();
-                    continue;
+                    return "☹ OOPS!!! The Date/Time field is invalid";
                 }
-
             } else if (userInput.startsWith("event")) {
                 String description = userInput.substring(6, userInput.indexOf('/') - 1);
                 String at = userInput.substring(10 + description.length()).trim();
                 try {
                     Parser.handleInput("at", at);
-                    addTaskToTaskList(new Event(description, new DateTime(at)));
+                    return addTaskToTaskList(new Event(description, new DateTime(at)));
                 } catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                    userInput = input.nextLine();
-                    continue;
+                    return ex.getMessage();
                 } catch (ParseException ex) {
-                    System.out.println("☹ OOPS!!! The Date/Time field is invalid");
-                    userInput = input.nextLine();
-                    continue;
+                    return "☹ OOPS!!! The Date/Time field is invalid";
                 }
+            } else {
+                return "Something went wrong";
             }
-            try {
-                Storage.save();
-            } catch (IOException ex) {
-                showSavingError();
-            }
-            userInput = input.nextLine();
         }
+
+
+//        while (!userInput.equals("bye")) {
+//            if (userInput.equals("list")) {
+//                printTaskList();
+//                userInput = input.nextLine();
+//                continue;
+//            }
+//            String[] userInputSplit = userInput.split(" ");
+//
+//            try {
+//                Parser.handleInput(userInputSplit[0], userInput);
+//            } catch (DukeException ex) {
+//                System.out.println(ex.getMessage());
+//                userInput = input.nextLine();
+//                continue;
+//            } catch (ParseException ex) {
+//                System.out.println("☹ OOPS!!! The Date/Time field is invalid");
+//                userInput = input.nextLine();
+//                continue;
+//            }
+
+//            if (userInput.startsWith("find")) {
+//                findTasks(userInputSplit[1]);
+//            } else if (userInput.startsWith("done")) {
+//                int taskNumber = Integer.parseInt(userInput.substring(5));
+//                Task selectedTask = TaskList.getTaskAt(taskNumber);
+//                selectedTask.markAsDone();
+//                System.out.println("Nice! I've marked this task as done: \n" + selectedTask);
+//            } else if (userInput.startsWith("delete")) {
+//                int taskNumber = Integer.parseInt(userInput.substring(7));
+//                delTaskInTaskList(taskNumber);
+//            } else if (userInput.startsWith("todo")) {
+//                String description = userInput.substring(5);
+//                addTaskToTaskList(new ToDo(description));
+//            } else if (userInput.startsWith("deadline")) {
+//                String description = userInput.substring(9, userInput.indexOf('/') - 1);
+//                String by = userInput.substring(13 + description.length()).trim();
+//
+//                try {
+//                    Parser.handleInput("by", by);
+//                    addTaskToTaskList(new Deadline(description, new DateTime(by)));
+//                } catch (DukeException ex) {
+//                    System.out.println(ex.getMessage());
+////                    userInput = input.nextLine();
+//                    continue;
+//                } catch (ParseException ex) {
+//                    System.out.println("☹ OOPS!!! The Date/Time field is invalid");
+////                    userInput = input.nextLine();
+//                    continue;
+//                }
+//
+//            } else if (userInput.startsWith("event")) {
+//                String description = userInput.substring(6, userInput.indexOf('/') - 1);
+//                String at = userInput.substring(10 + description.length()).trim();
+//                try {
+//                    Parser.handleInput("at", at);
+//                    addTaskToTaskList(new Event(description, new DateTime(at)));
+//                } catch (DukeException ex) {
+//                    System.out.println(ex.getMessage());
+////                    userInput = input.nextLine();
+//                    continue;
+//                } catch (ParseException ex) {
+//                    System.out.println("☹ OOPS!!! The Date/Time field is invalid");
+////                    userInput = input.nextLine();
+//                    continue;
+//                }
+//            }
+//            try {
+//                Storage.save();
+//            } catch (IOException ex) {
+//                showSavingError();
+//            }
+//            userInput = input.nextLine();
     }
 
-    public static void showLoadingError() {
-        System.out.println("Unable to load file from file path");
+    public static String showLoadingError() {
+        return "Unable to load file from file path";
     }
 
-    public static void showSavingError() {
-        System.out.println("Unable to save onto file");
+    public static String showSavingError() {
+        return "Unable to save onto file";
     }
 }
+

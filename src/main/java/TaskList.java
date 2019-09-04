@@ -48,18 +48,19 @@ public class TaskList {
         return taskList;
     }
 
-    public static void printTasks() {
+    public static String printTasks() {
         if (taskList.isEmpty()) {
-            System.out.println("task list is empty");
+            return "task list is empty";
         } else {
-            System.out.println("Here are the tasks in your list: ");
+            String output = "Here are the tasks in your list:\n";
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + "." + taskList.get(i));
+                output += (i + 1) + "." + taskList.get(i) + "\n";
             }
+            return output;
         }
     }
 
-    public static void findTasks(String term) {
+    public static String findTasks(String term) {
         ArrayList<Task> searchedTasks = new ArrayList<>();
         for (Task task : taskList) {
             if (task.getDescription().contains(term)) {
@@ -67,12 +68,13 @@ public class TaskList {
             }
         }
         if (searchedTasks.isEmpty()) {
-            System.out.println("There is no tasks");
+            return "There is no tasks";
         } else {
-            System.out.println("Here are the matching tasks in your list: ");
+            String output = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < searchedTasks.size(); i++) {
-                System.out.println((i + 1) + "." + searchedTasks.get(i));
+                output += (i + 1) + "." + searchedTasks.get(i) + "\n";
             }
+            return output;
         }
     }
 }

@@ -17,7 +17,7 @@ public class Event extends Task implements Serializable {
      * Creates an event task.
      * @param description indicates what the task is about and when the event is
      * @throws DukeException when input does not meet required format
-     * or '/at' is not specified.
+     *     or '/at' is not specified.
      */
     public Event(String description) throws DukeException {
         super(description);

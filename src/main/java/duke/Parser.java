@@ -22,7 +22,7 @@ public class Parser {
      * @param input a String representation of the user's input.
      * @return a String output for the result of the command.
      * @throws DukeException for various input errors or if the
-     * command is invalid.
+     *     command is invalid.
      */
     public String parse(String input) throws DukeException {
         /*
@@ -99,47 +99,49 @@ public class Parser {
      * @param input describes the task
      * @param type indicates the type of task that was parsed by parse().
      * @return a String indicating the successful adding of the task to
-     * the duke list.
+     *     the duke list.
      * @throws DukeException when description is invalid.
      */
     public String addToList(String input, TaskType type) throws DukeException {
         Task task = null;
         // Process input string (Cut command suffix)
         switch (type) {
-            case Todo:
-                if (input.length() > TODO_SUFFIX_LENGTH) {
-                    task = new Todo(
-                            input.substring(TODO_SUFFIX_LENGTH)
-                    );
-                } else {
-                    throw new DukeException("The description of a todo"
-                            + " cannot be empty.");
-                }
-                break;
-            case Deadline:
-                if (input.length() > DEADLINE_SUFFIX_LENGTH) {
-                    task = new Deadline(
-                            input.substring(DEADLINE_SUFFIX_LENGTH)
-                    );
-                } else {
-                    throw new DukeException("The description of a deadline"
-                            + " cannot be empty.");
-                }
-                break;
-            case Event:
-                if (input.length() > EVENT_SUFFIX_LENGTH) {
-                    task = new Event(input.substring(
-                            EVENT_SUFFIX_LENGTH)
-                    );
-                } else {
-                    throw new DukeException("The description of an event"
-                            + " cannot be empty.");
-                }
-                break;
-            default:
-                throw new DukeException("Error in adding Task!");
+        case Todo:
+            if (input.length() > TODO_SUFFIX_LENGTH) {
+                task = new Todo(
+                    input.substring(TODO_SUFFIX_LENGTH)
+                );
+            } else {
+                throw new DukeException("The description of a todo"
+                        + " cannot be empty.");
+            }
+            break;
+        case Deadline:
+            if (input.length() > DEADLINE_SUFFIX_LENGTH) {
+                task = new Deadline(
+                    input.substring(DEADLINE_SUFFIX_LENGTH)
+                );
+            } else {
+                throw new DukeException("The description of a deadline"
+                        + " cannot be empty.");
+            }
+            break;
+        case Event:
+            if (input.length() > EVENT_SUFFIX_LENGTH) {
+                task = new Event(input.substring(
+                        EVENT_SUFFIX_LENGTH)
+                );
+            } else {
+                throw new DukeException("The description of an event"
+                        + " cannot be empty.");
+            }
+            break;
+        default:
+            throw new DukeException("Error in adding Task!");
         }
+
         this.taskList.add(task);
+
         return ("Got it. I've added this task:\n  " + task
                 + "\nNow you have " + this.taskList.size()
                 + " tasks in the list.");

@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -45,7 +46,7 @@ public class Storage {
      * Saves a TaskList to the storage binary at the designated file path.
      * @param taskList a TaskList object to be saved into the binary.
      * @throws DukeException if save fails (either due to permissions
-     * or storage space)
+     *     or storage space)
      */
     public void save(TaskList taskList) throws DukeException {
         try {

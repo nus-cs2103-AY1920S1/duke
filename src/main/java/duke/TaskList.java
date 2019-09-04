@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,6 +78,13 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Returns the string representation of Tasks that match a search term.
+     * @param regex a string representing the search term
+     * @return a string containing the string representation of all Task
+     *     objects that match the search term.
+     * @throws DukeException if the list is empty
+     */
     public String getSearchList(String regex) throws DukeException {
         String listOutput = this.getList();
         List<String> tasks =

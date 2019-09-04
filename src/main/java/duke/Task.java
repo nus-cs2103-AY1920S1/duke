@@ -21,7 +21,7 @@ public class Task implements Serializable {
     /**
      * Returns a tick or cross based on the status of the task.
      * @return a character \u2713 (tick) or \u2718 (cross)
-     * representing the status of the task.
+     *     representing the status of the task.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols

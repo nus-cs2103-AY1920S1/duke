@@ -16,9 +16,9 @@ public class Deadline extends Task implements Serializable {
     /**
      * Creates a deadline task.
      * @param description indicates what the task is about
-     *                    and when the deadline is
-     * @throws DukeException if input does not meet required
-     * format or '/by' is not specified.
+     *     and when the deadline is
+     * @throws DukeException if input does not meet require
+     *     format or '/by' is not specified.
      */
     public Deadline(String description) throws DukeException {
         super(description);

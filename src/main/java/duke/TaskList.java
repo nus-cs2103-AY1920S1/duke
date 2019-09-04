@@ -76,8 +76,10 @@ public class TaskList {
     }
 
     /**
-     * Searches for the given keyword in the task list.
+     * Returns a string consisting of all tasks that matches the given keyword in the task list.
+     *
      * @param s The keyword.
+     * @return string All tasks that manage the keyword.
      */
     public String find(String s) {
         List<Task> temp = new ArrayList<>();
@@ -93,13 +95,13 @@ public class TaskList {
     }
 
     /**
-     * Prints the task list in order of which task is added first.
+     * Returns a string containing the task list in order of which task is added first.
      */
     public String printList() {
         int i = 1;
         String s = "";
         for (Task task : list) {
-            s += "    " + i + ". " + task + "\n";
+            s += i + ". " + task + "\n";
             i++;
         }
         return s;
@@ -109,7 +111,7 @@ public class TaskList {
         int i = 1;
         String s = "";
         for (Task task : t) {
-            s += "    " + i + ". " + task + "\n";
+            s += i + ". " + task + "\n";
             i++;
         }
         return s;

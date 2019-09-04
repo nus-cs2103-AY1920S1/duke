@@ -24,12 +24,18 @@ public class WriteFile extends Storage {
     private String path;
 
     /**
+     * This field checks whether you can rewrite the file.
+     */
+    private boolean isWritable;
+
+    /**
      * Constructor for the WriteFile class. Edits and saves any changes on
      * the task list of Duke and store it in the user's local drive.
      * @param path File path in which duke.txt is going to be saved at.
      */
-    public WriteFile(String path) {
+    public WriteFile(String path, boolean isWritable) {
         this.path = path;
+        this.isWritable = isWritable;
     }
 
     /**
@@ -39,7 +45,7 @@ public class WriteFile extends Storage {
      * @throws IOException Exception thrown when there is no duke.txt file to write to.
      */
     public void writeToFile(String text) throws IOException {
-        FileWriter write = new FileWriter(path);
+        FileWriter write = new FileWriter(path, isWritable);
         PrintWriter printLine = new PrintWriter(write);
         printLine.printf("%s" + "%n", text);
         printLine.close();

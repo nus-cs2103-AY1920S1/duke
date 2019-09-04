@@ -1,17 +1,28 @@
 package duke.dukeinterface;
 
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import textfiles.WriteFile;
+
+import java.io.IOException;
 import java.util.StringJoiner;
+import java.lang.StringBuilder;
 
 /**
  * Validates the input commands from the user.
  */
 public class Parser {
+    private StringBuilder sb;
+
     /**
      * Validates the input that the user gave to Duke.
      * @param commandArr Input that the user gave to Duke.
      * @throws DukeException Exception thrown when an invalid command is given.
      */
-    public void checkCommand(String[] commandArr) throws DukeException {
+    private void checkCommand(String[] commandArr) throws DukeException {
         if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete")) {
             throw new DukeException(
                     "    ____________________________________________________________\n"
@@ -35,7 +46,7 @@ public class Parser {
      * @return Formatted timing of the date and time.
      * @throws DukeException Exception thrown when an invalid date or timing is given.
      */
-    public String checkTime(String time) throws DukeException {
+    private String checkTime(String time) throws DukeException {
         String[] timeArr = time.split(" ");
         String[] month = {"NIL", "January", "February", "March", "April", "May",
             "June", "July", "August", "September", "October", "November", "December"};
@@ -143,5 +154,117 @@ public class Parser {
         }
 
         return result;
+    }
+
+    private String numberErrorMessage() {
+        sb = new StringBuilder();
+        sb.append(printLine());
+        sb.append("     ☹ OOPS!!! Please type in a valid index from 1 to 100\n");
+        sb.append(printLine());
+        return sb.toString();
+    }
+
+    @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
+    private String indexErrorMessage(int len) {
+        sb = new StringBuilder();
+        sb = new StringBuilder();
+        sb.append(printLine());
+        sb.append("     ☹ OOPS!!! Index out of bounds for task list of length " + len + "\n");
+        sb.append(printLine());
+        return sb.toString();
+    }
+
+    public String run(String command, Tasklist taskList, WriteFile data) {
+        String[] commandArr = command.split(" ");
+        String result = "";
+        try {
+            checkCommand(commandArr);
+            String filename = "data/duke.txt";
+            switch (commandArr[0]) {
+                case "list":
+                    result = taskList.printArray();
+                    break;
+
+                case "done":
+                    duke.command.command c = new doneCommand();
+                    int indexDone = Integer.parseInt(commandArr[1]) - 1;
+                    Task currTask = taskList.get(indexDone);
+                    currTask.markAsDone();
+                    result = ((doneCommand) c).taskComplete(currTask);
+                    data.replaceNthLine(filename, indexDone, currTask);
+                    break;
+
+                case "delete":
+                    c = new deleteCommand();
+                    int index = Integer.parseInt(commandArr[1]) - 1;
+                    result = ((deleteCommand) c).deleteComplete(taskList.size(),
+                            taskList.get(index));
+                    taskList.remove(index);
+                    data.removeNthLine(filename, index);
+                    break;
+
+                case "find":
+                    c = new searchCommand();
+                    result = ((searchCommand) c).searchKeyword(commandArr, taskList);
+                    break;
+
+                case "todo":
+                    c = new addCommand();
+                    result = ((addCommand) c).getDescription(commandArr);
+                    Task todo = new ToDo(result);
+                    taskList.add(todo);
+                    data.writeToFile("T | ✘ | " + result);
+                    result = taskList.printTask(todo, taskList.size());
+                    break;
+
+                case "deadline":
+                    c = new addCommand();
+                    String deadlineDescription = ((addCommand) c).getDescription(commandArr);
+                    String deadlineTime = ((addCommand) c).getTime(commandArr);
+                    deadlineTime = checkTime(deadlineTime);
+                    Task deadline = new Deadline(deadlineDescription, deadlineTime);
+                    taskList.add(deadline);
+                    data.writeToFile("D | ✘ | " + deadlineDescription + " | "
+                            + deadlineTime);
+                    result = taskList.printTask(deadline, taskList.size());
+                    break;
+
+                case "event":
+                    c = new addCommand();
+                    String eventDescription = ((addCommand) c).getDescription(commandArr);
+                    String eventTime = ((addCommand) c).getTime(commandArr);
+                    eventTime = checkTime(eventTime);
+                    Task event = new Event(eventDescription, eventTime);
+                    taskList.add(event);
+                    data.writeToFile("E | ✘ | " + eventDescription + " | " + eventTime);
+                    result = taskList.printTask(event, taskList.size());
+                    break;
+
+                case "exit":
+                    c = new exitCommand();
+                    result = ((exitCommand) c).exit();
+                    break;
+
+                case "default":
+                    break;
+            }
+        } catch (DukeException ex) {
+            result = (ex.getMessage()) + "\n";
+        } catch (IndexOutOfBoundsException ex) {
+            result = indexErrorMessage(taskList.size());
+        } catch (NumberFormatException ex) {
+            result = numberErrorMessage();
+        } catch (IOException ex) {
+            result = data.ioErrorMessage();
+        }
+        return result;
+    }
+
+    /**
+     * Gives a string as a border.
+     * @return a string that forms the border for duke.
+     */
+    private String printLine() {
+        return "    ____________________________________________________________\n";
     }
 }

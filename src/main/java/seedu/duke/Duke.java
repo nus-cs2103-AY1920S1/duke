@@ -10,15 +10,15 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Duke is the main class that launches the chat bot when it is run.
  */
-public class Duke {
-
-    /**
-     * This is the path of the file where the tasks are saved to and loaded from.
-     */
-    private String filePath;
+public class Duke extends Application {
 
     /**
      * This is the storage class which does the saving and loading of the files.
@@ -40,10 +40,9 @@ public class Duke {
      * If the specified file contains pre-saved tasks, it will be loaded.
      * @param filePath The path of the file that is used to save and load the tasks.
      */
-    public Duke(String filePath) {
-        this.filePath = filePath;
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -77,7 +76,16 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
 

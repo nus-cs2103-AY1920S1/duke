@@ -2,6 +2,7 @@ package duke.time;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 public class DateTime {
@@ -10,7 +11,7 @@ public class DateTime {
      * @param input User input representing a date and time.
      * @return
      */
-    public static String parseDateTime(String input) {
+    public static String parseDateTime(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
         DateTimeFormatter outputFormat = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);

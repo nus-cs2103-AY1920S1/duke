@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
 
             Task removedTask = list.remove(entry);
 
-            ui.showDeleted(removedTask.toString(), list.size());
+            super.commandOutput = ui.showDeleted(removedTask.toString(), list.size());
 
         } catch (IllegalArgumentException e) {
             throw new DukeException("You need to specify the task you want to delete!");

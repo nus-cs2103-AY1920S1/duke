@@ -14,6 +14,8 @@ import duke.command.FindCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     /**
@@ -25,7 +27,14 @@ public class Parser {
     public static Command parse(String[] command) throws DukeException {
         try {
             CommandList commandCode = CommandList.valueOf(command[0].toUpperCase());
-            String details = command[1];
+            String details = "";
+
+            try {
+                details = command[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+
+            }
+
             Task task;
             switch (commandCode) {
             case BYE:
@@ -56,5 +65,6 @@ public class Parser {
             throw new DukeException("D:  OOPS!!! I'm sorry, but I don't know what that means. "
                     + "I sure need more sleep...");
         } // End try-catch.
+
     }
 }

@@ -4,3 +4,12 @@ T 0 take 5
 T 0 five guys
 D 0 read tank /by 25th of January 1995, 0am
 T 0 show stanley mom
+T 0 read stuf
+T 0 read book
+T 0 read 1
+T 0 read 2
+T 0 read 3
+T 0 read 5
+T 0 read 16
+T 0 read 11231
+T 0 32131231

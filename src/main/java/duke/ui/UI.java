@@ -22,14 +22,14 @@ public class UI {
     /**
      * Prints a message to welcome the user.
      */
-    public void welcomeMsg() {
-        String logo = " ____        _        \n"
+    public String welcomeMsg() {
+        return "Hello from\n"
+                + " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "What can I do for you?";
     }
 
     /**
@@ -44,64 +44,64 @@ public class UI {
     /**
      * Prints a message of an error.
      */
-    public void errorUcde() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String errorUcde() {
+        return "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorEtdde() {
-        System.out.println("☹ OOPS!!! I'm sorry, the description cannot be empty :-(");
+    public String errorEtdde() {
+        return "\u2639 OOPS!!! I'm sorry, the description cannot be empty :-(";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorEddde() {
-        System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+    public String errorEddde() {
+        return "\u2639 OOPS!!! The description of a deadline cannot be empty.";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorEedde() {
-        System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+    public String errorEedde() {
+        return "\u2639 OOPS!!! The description of a event cannot be empty.";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorNdde() {
-        System.out.println("☹ OOPS!!! You need to provide a date, with / to indicate it:-(");
+    public String errorNdde() {
+        return "\u2639 OOPS!!! You need to provide a date, with / to indicate it:-(";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorItide() {
-        System.out.println("☹ OOPS!!! You need to provide a valid task number :-(");
+    public String invalidTaskIndexExceptionMsg() {
+        return "\u2639 OOPS!!! You need to provide a valid task number :-(";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorNfe() {
-        System.out.println("☹ OOPS!!! You need to provide a valid number :-(");
+    public String errorNfe() {
+        return "\u2639 OOPS!!! You need to provide a valid number :-(";
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorDe(String errorMsg) {
-        System.out.println("☹ OOPS!!! Something went wrong! " + errorMsg);
+    public String errorDe(String errorMsg) {
+        return "\u2639 OOPS!!! Something went wrong! " + errorMsg;
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorPe() {
-        System.out.println("☹ OOPS!!! There was a parsing error!");
+    public String errorPe() {
+        return "\u2639 OOPS!!! There was a parsing error!";
     }
 }
 

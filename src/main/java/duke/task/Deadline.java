@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.main.Parser;
+
 import java.util.Date;
 
 /**
@@ -20,7 +22,7 @@ public class Deadline extends Task {
      * @return string that contains information about a task.
      */
     public String saveInfo() {
-        return "deadline" + " " + taskDetails + " /by " + TaskList.inputDateFormat.format(deadlineBy)
+        return "deadline" + " " + taskDetails + " /by " + Parser.inputDateFormat.format(deadlineBy)
                 + System.getProperty("line.separator") + completed;
     }
 
@@ -28,13 +30,13 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.completed) {
-            sb.append("[D][✓] ");
+            sb.append("[D][\u2713] ");
         } else {
-            sb.append("[D][✗] ");
+            sb.append("[D][\u2717] ");
         }
         sb.append(taskDetails);
         sb.append(" (");
-        sb.append(TaskList.outputDateFormat.format(deadlineBy));
+        sb.append(Parser.outputDateFormat.format(deadlineBy));
         sb.append(")");
         return sb.toString();
     }

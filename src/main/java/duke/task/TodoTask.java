@@ -22,9 +22,9 @@ public class TodoTask  extends Task {
     @Override
     public String toString() {
         if (this.completed) {
-            return "[T][✓] " + taskDetails;
+            return "[T][\u2713] " + taskDetails;
         } else {
-            return "[T][✗] " + taskDetails;
+            return "[T][\u2717] " + taskDetails;
         }
     }
 }

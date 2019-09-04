@@ -1,6 +1,10 @@
 package duke.storage;
 
+import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.SaveFileWrongFormatDukeException;
+import duke.command.UnloadableCommand;
+import duke.main.Parser;
 import duke.task.TaskList;
 
 import java.io.File;
@@ -43,18 +47,21 @@ public class Storage {
      * @throws FileNotFoundException If there is an error in the file path, or the file does not exists.
      * @throws ParseException If there is an error in parsing.
      */
-    public TaskList load() throws DukeException, FileNotFoundException, ParseException {
+    public TaskList load(Parser parser) throws FileNotFoundException, SaveFileWrongFormatDukeException {
         TaskList tl = new TaskList();
         Scanner fileSc = new Scanner(this.file);
         String line;
         while (fileSc.hasNext()) {
             line = fileSc.nextLine();
-            tl.parseInput(line, false);
+            Command commandToLoadTask = parser.parse(line);
+            if (commandToLoadTask instanceof UnloadableCommand) {
+                throw new SaveFileWrongFormatDukeException("Save file contains a line that could not be loaded");
+            }
+            commandToLoadTask.execute(tl);
             if (Boolean.parseBoolean(fileSc.nextLine())) {
-                tl.checkTask(tl.getTaskList().size() - 1);
+                tl.checkTask(tl.getSizeOfTaskList() - 1);
             }
         }
-        System.out.println("Loaded saved task list!");
         return tl;
     }
 }

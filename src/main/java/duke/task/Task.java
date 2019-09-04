@@ -16,7 +16,7 @@ public abstract class Task {
     /**
      * Marks a task as completed.
      */
-    void taskDone() {
+    public void taskDone() {
         this.completed = true;
     }
 
@@ -49,9 +49,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (completed) {
-            return "[✓] " + this.taskDetails;
+            return "[\u2713] " + this.taskDetails;
         } else {
-            return "[✗] " + this.taskDetails;
+            return "[\u2717] " + this.taskDetails;
         }
     }
 }

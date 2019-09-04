@@ -71,7 +71,7 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
 
   @Override
   public void displayError(String... lines) {
-    lines[0] = "\u2639 OOPS!!! " + lines[0];
+    lines[0] = "☹ OOPS!!! " + lines[0];
     String message = String.join("\n", lines);
     Platform.runLater(() -> this.root.addDukeErrorText(message));
   }

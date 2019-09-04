@@ -12,7 +12,7 @@ public abstract class DeadlineCommand implements Command {
 
   @Override
   public String[] getParameterOptions() {
-    return new String[]{PARAMETER_BY};
+    return new String[] {PARAMETER_BY};
   }
 
   @Override

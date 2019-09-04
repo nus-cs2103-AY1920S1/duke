@@ -16,7 +16,8 @@ import weomucat.duke.ui.listener.UserInputListener;
 public class CommandLineUi implements Ui {
 
   private static final String SAY_INDENTATION = "\t";
-  private static final String SAY_HORIZONTAL_LINE = "============================================================";
+  private static final String SAY_HORIZONTAL_LINE =
+      "============================================================";
 
   private ArrayList<UserInputListener> userInputListeners;
   private BufferedReader bufferedReader;
@@ -80,7 +81,7 @@ public class CommandLineUi implements Ui {
   public void displayError(String... lines) {
     System.out.print("\033[0;31m");
     System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
-    lines[0] = "\u2639 OOPS!!! " + lines[0];
+    lines[0] = "☹ OOPS!!! " + lines[0];
     for (String line : lines) {
       System.out.println(SAY_INDENTATION + line);
     }

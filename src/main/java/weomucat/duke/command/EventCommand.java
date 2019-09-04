@@ -12,7 +12,7 @@ public abstract class EventCommand implements Command {
 
   @Override
   public String[] getParameterOptions() {
-    return new String[]{PARAMETER_AT};
+    return new String[] {PARAMETER_AT};
   }
 
   @Override

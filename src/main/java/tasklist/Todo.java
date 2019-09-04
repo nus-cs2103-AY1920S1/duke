@@ -1,5 +1,9 @@
 package tasklist;
 
+/**
+ * Represents the Todo type of task
+ */
+
 public class Todo extends Task {
 
     public Todo(String description , boolean completionStatus ) {

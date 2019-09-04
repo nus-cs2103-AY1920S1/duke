@@ -2,21 +2,16 @@ package parser;
 
 import Ui.TextUi;
 import tasklist.TaskList;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.time.LocalTime.parse;
+/**
+ * Parser class to split up the user input in to separate variables. it then checks the command and executes as directed
+ * It also splits up the input from save files and adds it in the same way to a TaskList object
+ */
 
 public class Parser {
     String command;
@@ -29,6 +24,13 @@ public class Parser {
     public Parser(){
         ui = new TextUi();
     };
+
+    /**
+     * method used to split up the user input and execute the required task
+     * @param fullCommand user input
+     * @param scheduler TaskList object that commands are to be executed on
+     * @param isLoading boolean variable to check if the input is from a user or save file (to stop some print actions)
+     */
 
     public void parse(String fullCommand, TaskList scheduler , boolean isLoading){
         isSafe = true;
@@ -87,9 +89,6 @@ public class Parser {
         return isSafe;
     }
 
-    public String command() {
-        return command;
-    }
 }
 
 

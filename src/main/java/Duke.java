@@ -6,6 +6,11 @@ import parser.Parser;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main class of the program
+ * starts the application and receives use input
+ */
+
 public class Duke {
     private Storage saveFile;
     private TextUi ui;
@@ -15,6 +20,10 @@ public class Duke {
         ui = new TextUi();
     }
 
+    /**
+     * Runs the program until termination
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.printIntroduction();
         Scanner input = new Scanner(System.in);

@@ -29,13 +29,13 @@ public class ExitCommand extends Command {
      * @param storage  the <code>Storage</code> object to load and record data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             storage.recordTasks(taskList);
         } catch (IOException e) {
-            ui.showSavingError();
+            return ui.showSavingError();
         }
-
+        return ui.showGoodbye();
     }
 
 }

@@ -34,12 +34,12 @@ public class DeleteCommand extends Command {
      * @throws DukeException If the specified number for the task does not existed in the current list
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (target < 0 || target >= taskList.getTotalTask()) {
             throw new DukeException("The task number is invalid!");
         }
         Task removedTask = taskList.removeTaskAt(target);
-        ui.showTaskDeleted(taskList.getTotalTask(), removedTask);
+        return ui.showTaskDeleted(taskList.getTotalTask(), removedTask);
     }
 
     /**

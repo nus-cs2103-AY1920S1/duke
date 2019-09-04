@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @param storage  the <code>Storage</code> object to load and record data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList resultList = new TaskList();
 
         for (int i = 0; i < taskList.getTotalTask(); i++) {
@@ -40,7 +40,7 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.showFullList(resultList);
+        return ui.showFullList(resultList);
     }
 }
 

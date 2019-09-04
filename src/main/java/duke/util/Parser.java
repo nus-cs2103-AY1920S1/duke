@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This is a class that parsers user's commands(strings) to <code>LocalDateTime</code> objects and executable
@@ -14,6 +17,8 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
+    private static Set<String> existingCommands = new HashSet<>
+            (Arrays.asList("list", "bye", "done", "delete", "todo", "deadline", "event", "find"));
 
     /**
      * Parses a given string in a certain format to a <code>LocalDateTime</code> object. The string must be in the
@@ -46,16 +51,19 @@ public class Parser {
     public static Command parseCommand(String info) throws DukeException {
 
         String[] infos = info.trim().split("\\s+", 2);
-        if (infos[0].equals("list")) {
+        String primaryCommand = infos[0];
+        if (!existingCommands.contains(primaryCommand)) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        if (primaryCommand.equals("list")) {
             return new ListCommand();
-        } else if (infos[0].equals("bye")) {
+        } else if (primaryCommand.equals("bye")) {
             return new ExitCommand();
-            //the rest requires at least two arguments
         } else {
             if (infos.length < 2) {
                 throw new DukeException("☹ OOPS!!! No enough information entered");
             }
-            switch (infos[0]) {
+            switch (primaryCommand) {
             case "done":
                 try {
                     int order = Integer.valueOf(infos[1]);

@@ -70,7 +70,7 @@ public class AddCommand extends Command {
      * @param storage  the <code>Storage</code> object to load and record data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
 
         switch (taskType) {
@@ -85,7 +85,7 @@ public class AddCommand extends Command {
         }
 
         taskList.add(newTask);
-        ui.showTaskAdded(taskList.getTotalTask(), newTask);
+        return ui.showTaskAdded(taskList.getTotalTask(), newTask);
     }
 
     /**

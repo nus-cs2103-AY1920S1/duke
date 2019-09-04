@@ -1,52 +1,22 @@
-import java.util.ArrayList;
-
 public class Tasks {
-    //ArrayList<String> taskDescription;
-    //String typeOfTask;
-    String taskDetails;
-    String time;
-    int status;
+    private int status;
+    private String details;
 
-    /*public Tasks(ArrayList<String> inputList) {
-        this.taskDescription = inputList;
-        if(inputList.get(0).equals("todo")) {
-            this.typeOfTask = "T";
-            this.taskDetails = inputList.get(1);
-            this.time = "";
-        } else if(inputList.get(0).equals("deadline")) {
-                this.typeOfTask = "D";
-                this.taskDetails = inputList.get(1);
-                this.time = inputList.get(2);
-        } else {
-            this.typeOfTask = "E";
-            this.taskDetails = inputList.get(1);
-            this.time = inputList.get(2);
-        }
+    public Tasks(String details) {
         this.status = 1;
-    } */
-
-
-    public Tasks(String taskDetails) {
-        this.taskDetails = taskDetails;
-        this.status = 1;
+        this.details = details;
     }
 
-    public Tasks(String taskDetails, String time) {
-        this.taskDetails = taskDetails;
-        this.time = time.substring(1);
-        this.status = 1;
-    }
-
-    protected void finishTask() {
+    public void finishTask() {
         this.status = 0;
     }
 
-    /*@Override
-    public String toString() {
-        if(this.typeOfTask.equals("T")) {
-            return typeOfTask + " | " + status + " | " + taskDetails;
-        }
-        return typeOfTask + " | " + status + " | " + taskDetails + " | " + formatTime();
-    }*/
+    public String getDetails() {
+        return this.details;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
 
 }

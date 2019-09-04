@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList; 
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     void logo(){
@@ -37,69 +39,99 @@ public class Duke {
     static void handleInput(){
         ArrayList <Task> list = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()){
-            String line = sc.nextLine().toLowerCase();
-            String[] splited = line.split(" ");
-            String check = splited[0];
-            //bye
-            if (check.equals("bye")) {
-                System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
-                System.exit(0);
-            //list
-            }else if(check.equals("list")){
-                handleList(list);
-            //done
-            }else if(check.equals("done")){
-                String taskNum = splited[1];
-                Task current = list.get(Integer.parseInt(taskNum) - 1);
-                current.markAsDone();
-                System.out.println(addDoubleLine("     Nice! I've marked this task as done:\n" + "    " + current.toString()));
-            //make a todo task
-            }else if(check.equals("delete")){
-                String taskNum = splited[1];
-                Task current = list.get(Integer.parseInt(taskNum) - 1);
-                list.remove(Integer.parseInt(taskNum) - 1);
-                System.out.println(addDoubleLine("     Noted. I've removed this task: \n" + "    " + current.toString() + "\n     Now you have " + list.size() + " tasks in the list."));
-            }else if(check.equals("todo")){
-                String description = line.replace("todo", "").trim();
+        try{
+            while (sc.hasNextLine()){
+                String line = sc.nextLine().toLowerCase();
+                String[] splited = line.split(" ");
+                String check = splited[0];
+                //bye
+                if (check.equals("bye")) {
+                    System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
+                    saveFile(list);
+                    System.exit(0);
+                //list
+                }else if(check.equals("list")){
+                    handleList(list);
+                //done
+                }else if(check.equals("done")){
+                    String taskNum = splited[1];
+                    Task current = list.get(Integer.parseInt(taskNum) - 1);
+                    current.markAsDone();
+                    System.out.println(addDoubleLine("     Nice! I've marked this task as done:\n" + "    " + current.toString()));
+                    saveFile(list);
+
+                }else if(check.equals("delete")){
+                    String taskNum = splited[1];
+                    Task current = list.get(Integer.parseInt(taskNum) - 1);
+                    list.remove(Integer.parseInt(taskNum) - 1);
+                    System.out.println(addDoubleLine("     Noted. I've removed this task: \n" + "    " + current.toString() + "\n     Now you have " + list.size() + " tasks in the list."));
+                    saveFile(list);
+
+                }else if(check.equals("todo")){
+                    String description = line.replace("todo", "").trim();
+                    //error handling
+                    if(description.equals("")){
+                        System.out.println(addDoubleLine("    ☹ OOPS!!! The description of a todo cannot be empty."));
+                    
+                    }else{ //successful addition 
+                        list.add(new Todo(description));
+                        Task current = list.get(list.size()-1);
+                        printMsg(current, list.size());
+                        saveFile(list);
+
+                    }
+                //make an event task
+                }else if(check.equals("event")){
+                    //removes the command and splits it into 2
+                    String [] splitDate = line.replace("event", "").split("/at");
+                    if(splitDate.length < 2){
+                        System.out.println(addDoubleLine("    ☹ OOPS!!! Events require both a description and a date \n    (e.g. event go to concert /at 13 Feb)"));
+                    }else{
+                        //if it reaches here it is successful
+                        list.add(new Event(splitDate[0].trim(), splitDate[1].trim()));
+                        Task current = list.get(list.size()-1);
+                        printMsg(current, list.size());
+                        saveFile(list);
+                    
+                    }
+                //make deadline task
+                }else if(check.equals("deadline")){
+                    String [] splitDate = line.replace("deadline", "").split("/by");
+                    if(splitDate.length < 2){
+                        System.out.println(addDoubleLine("    ☹ OOPS!!! Deadlines require both a description and a date by \n    (e.g. deadline homework3 /by tomorrow)"));
+                    }else{
+                        list.add(new Deadline(splitDate[0].trim(), splitDate[1].trim()));
+                        Task current = list.get(list.size()-1);
+                        printMsg(current, list.size());
+                    }
                 //error handling
-                if(description.equals("")){
-                    System.out.println(addDoubleLine("    ☹ OOPS!!! The description of a todo cannot be empty."));
-                
-                }else{ //successful addition 
-                    list.add(new Todo(description));
-                    Task current = list.get(list.size()-1);
-                    printMsg(current, list.size());
-                }
-            //make an event task
-            }else if(check.equals("event")){
-                //removes the command and splits it into 2
-                String [] splitDate = line.replace("event", "").split("/at");
-                if(splitDate.length < 2){
-                    System.out.println(addDoubleLine("    ☹ OOPS!!! Events require both a description and a date \n    (e.g. event go to concert /at 13 Feb)"));
                 }else{
-                    //if it reaches here it is successful
-                    list.add(new Event(splitDate[0].trim(), splitDate[1].trim()));
-                    Task current = list.get(list.size()-1);
-                    printMsg(current, list.size());
-                
+                    System.out.println(addDoubleLine("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
                 }
-            //make deadline task
-            }else if(check.equals("deadline")){
-                String [] splitDate = line.replace("deadline", "").split("/by");
-                if(splitDate.length < 2){
-                    System.out.println(addDoubleLine("    ☹ OOPS!!! Deadlines require both a description and a date by \n    (e.g. deadline homework3 /by tomorrow)"));
-                }else{
-                    list.add(new Deadline(splitDate[0].trim(), splitDate[1].trim()));
-                    Task current = list.get(list.size()-1);
-                    printMsg(current, list.size());
-                }
-            //error handling
-            }else{
-                System.out.println(addDoubleLine("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
             }
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println(addDoubleLine("Input cannot be empty!"));
         }
+        sc.close();
     }
+    public static void saveFile(ArrayList<Task> tasks){
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            String total = "";
+            for (int i = 0; i < tasks.size(); i ++) {
+                String current = tasks.get(i).getStorageString();
+                if (i == 0) {
+                    total = current;
+                } else {
+                    total = total + "\n" + current;
+                }
+            }
+ 			fw.write(total);
+ 			fw.close();
+ 		} catch (IOException e) {
+ 			System.out.println("Something went wrong: " + e.getMessage());
+ 		}
+ 	}
     public static void main(String[] args) {
         greeting();
         handleInput();

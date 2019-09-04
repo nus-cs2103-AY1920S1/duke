@@ -8,4 +8,8 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+    @Override
+    public String getStorageString(){
+        return "D | " + super.isDone + " | " + taskName + " | " + by;
+    }
 }

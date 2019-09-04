@@ -20,4 +20,7 @@ public class Task {
     public String toString(){
         return getStatusIcon() + " " + this.taskName;
     }
+    public String getStorageString(){
+        return "";
+    }
 }

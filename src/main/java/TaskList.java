@@ -71,17 +71,17 @@ public class TaskList {
     public void add(String type, String description) throws DukeException {
         Task newTask;
         switch (type) {
-            case "todo":
-                newTask = new Todo(description);
-                break;
-            case "event":
-                newTask = new Event(description);
-                break;
-            case "deadline":
-                newTask = new Deadline(description);
-                break;
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case "todo":
+            newTask = new Todo(description);
+            break;
+        case "event":
+            newTask = new Event(description);
+            break;
+        case "deadline":
+            newTask = new Deadline(description);
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         try {
             newTask.repr();

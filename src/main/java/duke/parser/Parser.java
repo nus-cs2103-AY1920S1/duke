@@ -21,7 +21,7 @@ public class Parser {
      *
      * @param input Input string.
      * @return Command generated.
-     * @throws DukeException
+     * @throws DukeException When input does not fit any types.
      */
     public Command parse(String input) throws DukeException {
         String taskType = input.split(" ")[0];
@@ -44,11 +44,11 @@ public class Parser {
             return new DeadlineCommand(input.substring(5));
         case "event":
             return new EventCommand(input.substring(5));
-            case "find":
-                return new FindCommand(input.substring(5));
+        case "find":
+            return new FindCommand(input.substring(5));
         default:
-            throw new DukeException("     \u2639 OOPS!!! I'm sorry, " +
-                   "but I don't know what that means :-(");
+            throw new DukeException("     OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");
         }
     }
 }

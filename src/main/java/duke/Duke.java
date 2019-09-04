@@ -1,11 +1,11 @@
 package duke;
 
-import duke.todo.TaskList;
-import duke.storage.Storage;
-import duke.parser.Parser;
-import duke.ui.Ui;
 import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.todo.Task;
+import duke.todo.TaskList;
+import duke.ui.Ui;
 
 /**
  * Duke class.
@@ -74,7 +74,7 @@ public class Duke {
                     ui.reportAdd(addedEvent, tasks.getNumOfTasks());
                     break;
                 default:
-                    throw new DukeException("     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("     OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 ui.printError(e.getMessage());

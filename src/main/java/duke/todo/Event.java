@@ -1,4 +1,5 @@
 package duke.todo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -26,8 +27,8 @@ public class Event extends Task {
      */
     @Override
     public String getFormattedTask() {
-        return "E | " + super.getDescription() +
-                " /at " + date;
+        return "E | " + super.getDescription()
+                + " /at " + date;
     }
 
     /**
@@ -37,7 +38,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + this.getDescription() +
-                " (on: " + date.format(formatter) + ")";
+        return "[E]" + getStatusIcon() + this.getDescription()
+                + " (on: " + date.format(formatter) + ")";
     }
 }

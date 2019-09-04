@@ -47,8 +47,8 @@ public class Ui {
      * Prints greeting message.
      */
     public static void greet() {
-        printFormattedText("    Hello! I'm Duke\n" +
-                "    What can I do for you?");
+        printFormattedText("    Hello! I'm Duke\n"
+                + "    What can I do for you?");
     }
 
     /**
@@ -57,9 +57,9 @@ public class Ui {
      * @param task Task done.
      */
     public static void reportDone(Task task) {
-        printFormattedText("    Nice! I've marked this task as done:\n" +
-                "        " + task.getStatusIcon() +
-                task.getDescription());
+        printFormattedText("    Nice! I've marked this task as done:\n"
+                + "        " + task.getStatusIcon()
+                + task.getDescription());
     }
 
     /**
@@ -69,10 +69,10 @@ public class Ui {
      * @param numOfTasks Number of tasks left in the task list.
      */
     public static void reportRemove(Task task, int numOfTasks) {
-        printFormattedText("    Noted. I've removed this task:\n" +
-                "       " + task +
-                "\n    Now you have " + numOfTasks +
-                " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
+        printFormattedText("    Noted. I've removed this task:\n"
+                + "       " + task
+                + "\n    Now you have " + numOfTasks
+                + " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
     }
 
     /**
@@ -82,10 +82,10 @@ public class Ui {
      * @param numOfTasks Number of tasks left in the task list.e
      */
     public static void reportAdd(Task task, int numOfTasks) {
-        printFormattedText("    Got it. I've added this task:\n" +
-                "      " + task +
-                "\n    Now you have " + numOfTasks +
-                " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
+        printFormattedText("    Got it. I've added this task:\n"
+                + "      " + task
+                + "\n    Now you have " + numOfTasks
+                + " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
     }
 
     public static void reportFound(String tasksFound) {

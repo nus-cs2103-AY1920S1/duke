@@ -1,4 +1,5 @@
 package duke.storage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,8 +29,8 @@ public class Storage {
         try {
             File file = new File(filePath);
             if (!file.isFile() && !file.createNewFile()) {
-                throw new IOException("Error creating new file " +
-                        file.getAbsolutePath());
+                throw new IOException("Error creating new file "
+                        + file.getAbsolutePath());
             }
             Scanner fileScanner = new Scanner(file);
 
@@ -55,6 +56,11 @@ public class Storage {
         return fileEntries;
     }
 
+    /**
+     * Writes back to the data file with the current list formatted.
+     *
+     * @param formattedList Formatted current list of Todos.
+     */
     public void writeBackToFile(String formattedList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
@@ -63,5 +69,5 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
-    };
+    }
 }

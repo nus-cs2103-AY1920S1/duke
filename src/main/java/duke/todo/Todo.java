@@ -14,7 +14,7 @@ public class Todo extends Task {
      */
     @Override
     public String getFormattedTask() {
-        return "T | " + super.getDescription();
+        return "T |" + super.getDescription();
     }
 
     /**

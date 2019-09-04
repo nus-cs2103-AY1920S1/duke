@@ -30,7 +30,7 @@ public class Task {
 
     public String getFormattedTask() {
         return description;
-    };
+    }
 
     @Override
     public String toString() {

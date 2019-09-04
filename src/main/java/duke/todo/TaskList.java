@@ -1,4 +1,5 @@
 package duke.todo;
+
 import duke.DukeException;
 
 import java.lang.StringBuilder;
@@ -11,11 +12,10 @@ public class TaskList {
 
     /**
      * Constructs a TaskList object after taking in a list of file input.
-     *
      * Throws DukeException when the input is empty.
      *
      * @param fileInput Input from the data file.
-     * @throws DukeException
+     * @throws DukeException When input is empty.
      */
     public TaskList(ArrayList<String> fileInput) throws DukeException {
         if (fileInput.size() == 0) {
@@ -89,14 +89,16 @@ public class TaskList {
         Task currentTask;
 
         output.append("    Here are the tasks in your list:\n");
-        for (int i = 0 ; i < counter; i++) {
+        for (int i = 0; i < counter; i++) {
             currentTask = taskList.get(i);
             index = i + 1;
             output.append("    ");
             output.append(index);
             output.append(". ");
             output.append(currentTask);
-            if (i < counter - 1) output.append('\n');
+            if (i < counter - 1) {
+                output.append('\n');
+            }
         }
         return output.toString();
     }
@@ -120,6 +122,12 @@ public class TaskList {
         return counter;
     }
 
+    /**
+     * Finds a task based on the keyword input.
+     *
+     * @param keyword Keyword of the task.
+     * @return Task with the keyword.
+     */
     public String findTask(String keyword) {
         ArrayList<Task> tasksFound = new ArrayList<>();
 
@@ -134,14 +142,16 @@ public class TaskList {
         Task currentTask;
 
         output.append("    Here are the matching tasks in your list:\n");
-        for (int i = 0 ; i < counter; i++) {
+        for (int i = 0; i < counter; i++) {
             currentTask = tasksFound.get(i);
             index = i + 1;
             output.append("    ");
             output.append(index);
             output.append(". ");
             output.append(currentTask);
-            if (i < counter - 1) output.append('\n');
+            if (i < counter - 1) {
+                output.append('\n');
+            }
         }
         return output.toString();
     }

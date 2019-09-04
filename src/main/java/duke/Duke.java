@@ -7,6 +7,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -35,6 +36,7 @@ public class Duke {
         parser.register("deadline", Deadline.getCommand(tasks, storage));
         parser.register("event", Event.getCommand(tasks, storage));
         parser.register("list", new ListCommand(tasks));
+        parser.register("find", new FindCommand(tasks));
         parser.register("done", new DoneCommand(tasks, storage));
         parser.register("delete", new DeleteCommand(tasks, storage));
         parser.register("bye", new ByeCommand());

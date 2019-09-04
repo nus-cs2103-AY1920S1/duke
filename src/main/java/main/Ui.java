@@ -7,7 +7,7 @@ public class Ui {
     String currentLine;
 
     /**
-     * Constructor for Duke app user interface.
+     * Constructor for gui.Duke app user interface.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -33,9 +33,11 @@ public class Ui {
     /**
      * Prints the current user interface response/reply.
      */
-    public void showLine() {
+    public String showLine() {
         System.out.println(currentLine);
+        String temp = currentLine;
         currentLine = null;
+        return temp;
     }
 
     /**
@@ -58,11 +60,13 @@ public class Ui {
     /**
      * Shows the welcome message of the user interface.
      */
-    public void showWelcome() {
-        System.out.println("    ____________________________________________________________\n" +
+    public String showWelcome() {
+        String welcome = "    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________");
+                "     What can I do for you today?\n" +
+                "    ____________________________________________________________";
+        System.out.println(welcome);
+        return welcome;
     }
 
     /**

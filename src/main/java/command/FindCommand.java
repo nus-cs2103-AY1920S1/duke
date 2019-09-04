@@ -2,7 +2,7 @@ package command;
 
 
 import main.Storage;
-import main.TaskList;
+import task.TaskList;
 import main.Ui;
 import task.InsufficientTaskArgumentException;
 import task.InvalidTaskException;
@@ -21,7 +21,7 @@ public class FindCommand implements Command {
     }
 
     /**
-     * execute performs the command in the Duke app.
+     * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
      * @param ui Ui of the app.
      * @param storage Storage is the class that manages file reading and file writing of the data passed into the app.

@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.utils.UiResponse;
 
 /** Command invoked when the "delete" command is encountered. */
 public class DeleteCommand extends Command {
@@ -23,23 +23,24 @@ public class DeleteCommand extends Command {
      * Deletes the task associated with <code>taskNum</code> and will save the
      * TaskList.
      *
-     * @param ui       Ui object that is responsible for printing output as a response
+     * @param ui       UiResponse object that is responsible for returning a String response to GUI
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
      * @throws DukeException re-thrown from underlying method calls.
+     * @return String representing Duke's response
      */
-    public void execute(Ui ui, Storage storage, TaskList allTasks) throws DukeException {
+    public String execute(UiResponse ui, Storage storage, TaskList allTasks) throws DukeException {
         //Delete Task
         Task t = allTasks.deleteTask(this.taskNum);
 
         //UI Response
-        ui.printLine();
-        ui.printSentence("Noted. I've removed this task:");
-        ui.printSentence("\t" + t);
-        ui.printSentence("Now you have " + allTasks.size() + " tasks in the list.");
-        ui.printLine();
+        ui.reset();
+        ui.addSentence("Noted. I've removed this task:");
+        ui.addSentence("\t" + t);
+        ui.addSentence("Now you have " + allTasks.size() + " tasks in the list.");
 
         //Parent method invoked to save TaskList
         super.execute(ui, storage, allTasks);
+        return ui.getResponse();
     }
 }

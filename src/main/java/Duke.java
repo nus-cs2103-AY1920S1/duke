@@ -1,8 +1,16 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,14 +27,16 @@ import java.util.Scanner;
  * @author TuanDingWei
  */
 public class Duke extends Application {
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
     private Scene scene;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Construct a Duke object, the Task manager bot.
@@ -46,17 +56,108 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        Duke duke = new Duke();
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox();
+//        scrollPane.setContent(dialogContainer);
+//
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+//        stage.setTitle("Duke");
+//        stage.setResizable(false);
+//        stage.setMinHeight(600.0);
+//        stage.setMinWidth(400.0);
+//
+//        mainLayout.setPrefSize(400.0, 600.0);
+//
+//        scrollPane.setPrefSize(385, 535);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//
+//        scrollPane.setVvalue(1.0);
+//        scrollPane.setFitToWidth(true);
+//
+//        // You will need to import `javafx.scene.layout.Region` for this.
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(325.0);
+//
+//        sendButton.setPrefWidth(55.0);
+//
+//        AnchorPane.setTopAnchor(scrollPane, 1.0);
+//
+//        AnchorPane.setBottomAnchor(sendButton, 1.0);
+//        AnchorPane.setRightAnchor(sendButton, 1.0);
+//
+//        AnchorPane.setLeftAnchor(userInput , 1.0);
+//        AnchorPane.setBottomAnchor(userInput, 1.0);
+//
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
+//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+//        stage.setScene(scene);
+//        stage.show();
     }
 
+//    /**
+//     * Iteration 2:
+//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * the dialog container. Clears the user input after processing.
+//     */
+//    private void handleUserInput() {
+//        String userText = new String(userInput.getText());
+//        String dukeText = new String(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, new Image(user)),
+//                DialogBox.getDukeDialog(dukeText, new Image(duke))
+//        );
+//        userInput.clear();
+//    }
+
+//    /**
+//     * You should have your own function to generate a response to user input.
+//     * Replace this stub with your completed method.
+//     */
+//    protected String getResponse(String input) {
+//        return "Duke heard: " + input;
+//    }
+
     /**
-     * Contains most of the operations of the Task Manager bot.
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
      */
-    protected void run() {
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    private void run() {
         String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt";
 
         Scanner sc = new Scanner(System.in);
@@ -69,7 +170,7 @@ public class Duke extends Application {
                 input = sc.nextLine();
                 check = input.toLowerCase();
                 if (check.equals("list")) {
-                    ui.showListOfTask(tasks);
+                    System.out.println(ui.showListOfTask(tasks));
                     continue;
                 }
 
@@ -88,9 +189,9 @@ public class Duke extends Application {
                     }
                     taskDone.markAsDone();
                     storage.updateLocalFile(tasks.get());
-                    ui.doneAnnouncement(taskDone);
+                    System.out.println(ui.doneAnnouncement(taskDone));
                 } else if (userCommand.equals("find")) {
-                    tasks.keywordSearch(taskDescription);
+                    System.out.println(tasks.keywordSearch(taskDescription));
                 } else if (userCommand.equals("delete")) {
                     int target = Integer.valueOf(taskDescription);
                     Task taskDelete;
@@ -103,7 +204,7 @@ public class Duke extends Application {
                     Task.reduceTaskCount();
                     storage.updateLocalFile(tasks.get());
                     taskCount = Task.getTaskCount();
-                    ui.deleteAnnouncement(taskDelete, taskCount);
+                    System.out.println(ui.deleteAnnouncement(taskDelete, taskCount));
                 } else if (!check.equals("bye")) {
                     System.out.print(createTask(userCommand, due, taskDescription, storage, ui, tasks));
                 }
@@ -112,7 +213,66 @@ public class Duke extends Application {
             }
         }
 
-        ui.sayYourGoodBye();
+        System.out.println(ui.sayYourGoodBye());
+    }
+
+    /**
+     * Contains most of the operations of the Task Manager bot.
+     */
+    protected String getResponse(String input) {
+        String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt";
+
+        Scanner sc = new Scanner(System.in);
+        String check = "dummy";
+        int taskCount;
+
+        try {
+            check = input.toLowerCase();
+            if (check.equals("list")) {
+                return ui.showListOfTask(tasks);
+            }
+
+            Parser parser = new Parser(input);
+            String userCommand = parser.getUserCommand();
+            String due = parser.getDue();
+            String taskDescription = parser.getTaskDescription();
+
+            if (userCommand.equals("done")) {
+                int target = Integer.valueOf(taskDescription);
+                Task taskDone;
+                if (tasks.size() >= target && target > 0) {
+                    taskDone = tasks.get(target - 1);
+                } else {
+                    throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
+                }
+                taskDone.markAsDone();
+                storage.updateLocalFile(tasks.get());
+                return ui.doneAnnouncement(taskDone);
+            } else if (userCommand.equals("find")) {
+                return tasks.keywordSearch(taskDescription);
+            } else if (userCommand.equals("delete")) {
+                int target = Integer.valueOf(taskDescription);
+                Task taskDelete;
+                if (tasks.size() >= target && target > 0) {
+                    taskDelete = tasks.get((target - 1));
+                    tasks.removeTask((target - 1));
+                } else {
+                    throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
+                }
+                Task.reduceTaskCount();
+                storage.updateLocalFile(tasks.get());
+                taskCount = Task.getTaskCount();
+                return ui.deleteAnnouncement(taskDelete, taskCount);
+            } else if (!check.equals("bye")) {
+                return createTask(userCommand, due, taskDescription, storage, ui, tasks);
+            } else if (check.equals("bye")) {
+                return ui.sayYourGoodBye();
+            }
+        } catch (DukeException ex) {
+            System.out.println("OOPS!!! " + ex.getMessage() + "\n");
+        }
+
+        return "Are you speaking in botlang? I don't understand what you are saying!";
     }
 
     /**

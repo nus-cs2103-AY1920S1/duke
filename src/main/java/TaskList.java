@@ -68,7 +68,7 @@ public class TaskList {
         taskStorage.remove(index);
     }
 
-    public void keywordSearch(String input) {
+    public String keywordSearch(String input) {
         ArrayList<Task> result = new ArrayList<>();
 
         for (Task task : taskStorage) {
@@ -83,6 +83,6 @@ public class TaskList {
         }
 
         Ui ui = new Ui();
-        ui.announceMatchingTask(result);
+        return ui.announceMatchingTask(result);
     }
 }

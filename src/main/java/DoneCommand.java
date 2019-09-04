@@ -14,18 +14,17 @@ public class DoneCommand extends Command {
         int tasksSize = tasks.size();
 
         if (i <= tasksSize && i > 0) {
-//            System.out.println(Ui.frontSpace + " Nice! I've marked this task as done: \n");
             Task current = tasks.getTaskList().get(i - 1);
             current.markAsDone();
-//            System.out.println(Ui.frontSpace + "   " + current);
+
             try {
                 storage.save(tasks);
             } catch (Exception e) {
-                System.out.println(Ui.frontSpace + " duke.txt has problem");
+                Ui.printOutput(" duke.txt has problem");
             }
-            return String.format(
-                    Ui.frontSpace + " Nice! I've marked this task as done: \n",
-                    Ui.frontSpace + current + "\n");
+
+            return Ui.frontSpace + "Nice! I've marked this task as done: \n" +
+                    Ui.frontSpace + "   " + current.toString();
         } else {
             throw new TaskNotExistException("task does not exist");
         }

@@ -25,29 +25,25 @@ public class Ui {
         return null;
     }
 
-    public void showLine() {
-        System.out.print(oneLine);
+    public String showLine() {
+        return oneLine;
     }
 
     /**
      * showError(String message).
      */
     public void showError(String message) {
-        System.out.println(" " + frontSpace + message);
+        printOutput(frontSpace + message);
     }
 
-    /**
-     * showWelcome().
-     */
-    public void showWelcome() {
-        String greet = "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n";
-        greet = oneLine + greet + oneLine;
-        System.out.println(greet);
+
+    public static String getWelcomeMessage() {
+        return "    Hello! I'm Duke.\n"
+                + "    What can I do for you?";
     }
 
-    public void printLine(Object output) {
-        System.out.println(output);
+    public static void printOutput(Object output) {
+        System.out.println(frontSpace + output);
     }
 
     /**
@@ -55,7 +51,7 @@ public class Ui {
      */
     public void showLoadingError() {
         showLine();
-        System.out.println(frontSpace + " duke.txt file has problem!");
+        Ui.printOutput(" duke.txt file has problem!");
         showLine();
     }
 }

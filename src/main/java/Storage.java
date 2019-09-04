@@ -38,7 +38,7 @@ public class Storage {
                 throw new InvalidNumberException("[duke.txt]: the description should have 0 or 1");
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            Ui.printOutput(e);
         }
     }
 
@@ -55,7 +55,7 @@ public class Storage {
             }
 
         } catch (Exception e) {
-            System.out.println("[duke.txt]: duke.txt not found");
+            Ui.printOutput("[duke.txt]: duke.txt not found");
         }
         return myList;
     }
@@ -78,7 +78,7 @@ public class Storage {
             pr.close();
         } catch (FileNotFoundException e) {
             System.out.println();
-            System.out.println("duke.txt not found");
+            Ui.printOutput("duke.txt not found");
         }
     }
 }

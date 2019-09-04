@@ -1,5 +1,6 @@
-package duke;
+package duke.util;
 
+import duke.DukeException;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandMap;

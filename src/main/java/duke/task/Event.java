@@ -1,9 +1,13 @@
 package duke.task;
 
-import duke.DateParser;
+import duke.util.DateParser;
 import duke.DukeException;
 
 public class Event extends Task {
+    /**
+     * The date of this event.
+     * It is a String to allow the user to custom dates such as 'the day after tomorrow'
+     */
     protected String date;
 
     public Event(String desc, String date) {

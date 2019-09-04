@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
+import duke.util.PreParser;
 
 import java.io.IOException;
 

@@ -69,16 +69,26 @@ public class Storage {
      * @return taskList The updated task list
      */
     public TaskList loadFromFile(String fileInput, TaskList taskList) {
+        boolean isDone = true;
+        if (fileInput.contains("Not done")) {
+            isDone = false;
+        }
         String newCommand = fileInput.substring(22);
         if (fileInput.contains("/by")) {
             newCommand = " " + newCommand;
-            TaskList.tasks.add(new Deadline(newCommand));
+            Task newDeadline = new Deadline(newCommand);
+            newDeadline.isDone = isDone;
+            TaskList.tasks.add(newDeadline);
         } else if (fileInput.contains("/at")) {
             newCommand = " " + newCommand;
-            TaskList.tasks.add(new Event(newCommand));
+            Task newEvent = new Event(newCommand);
+            newEvent.isDone = isDone;
+            TaskList.tasks.add(newEvent);
         } else {
             newCommand = " " + newCommand;
-            TaskList.tasks.add(new ToDo(newCommand));
+            Task newToDo = new ToDo(newCommand);
+            newToDo.isDone = isDone;
+            TaskList.tasks.add(newToDo);
         }
         return taskList;
     }

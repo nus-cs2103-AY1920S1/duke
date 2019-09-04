@@ -8,7 +8,6 @@ public class ToDo extends Task {
     public ToDo (String description) {
         super(description.substring(1));
         this.type = "T";
-
     }
 
     @Override

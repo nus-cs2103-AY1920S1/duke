@@ -41,7 +41,7 @@ public class Storage {
      *
      * @return Status of storage.
      */
-    public boolean storageUpdated() {
+    public boolean isUpdated() {
         return storageIsChanged;
     }
 

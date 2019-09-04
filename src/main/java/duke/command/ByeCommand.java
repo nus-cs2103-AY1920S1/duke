@@ -30,7 +30,7 @@ public class ByeCommand extends Command {
      */
     public Response execute(TaskList taskList, Ui ui, Storage storage) {
         Response toReturn = ui.getGoodByeResponse();
-        if (storage.storageUpdated()) {
+        if (storage.isUpdated()) {
             try {
                 storage.writeToDisk(taskList);
                 toReturn = ui.getDoneWritingAndByeResponse();

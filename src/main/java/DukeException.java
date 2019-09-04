@@ -1,7 +1,9 @@
 package duke.error;
-import java.io.*;
+
+import java.lang.Exception;
+
 /**
- * inherits from exception class
+ * inherits from exception class.
  * handles all exception of duke
  * */
 public class DukeException extends Exception {

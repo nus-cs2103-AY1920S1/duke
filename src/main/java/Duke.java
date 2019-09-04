@@ -1,9 +1,10 @@
 package duke;
+
 import duke.command.Command;
 import duke.error.DukeException;
 
 /**
- * main class
+ * main class.
  * */
 public class Duke {
 
@@ -11,6 +12,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * constructor of main class.
+     * initialize ui, storage, tasklist objects
+     *
+     * @param filePath String of file location
+     * */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * main program for execution.
+     * */
     public void run() {
         ui.showWelcome();
         Parser parser = new Parser();
@@ -44,4 +54,5 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+
 }

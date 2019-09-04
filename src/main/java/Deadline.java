@@ -1,6 +1,7 @@
 package duke.task;
+
 /**
- * subclass of task
+ * subclass of task.
  * handles deadline type task of a specific time
  * */
 public class Deadline extends Task {
@@ -12,7 +13,9 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getType() { return "D"; }
+    public String getType() {
+        return "D";
+    }
 
     @Override
     public String getDescription() {
@@ -21,6 +24,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]"  +super.toString() + " (by: " + by + ")";
+        return "[D]"  + super.toString() + " (by: " + by + ")";
     }
 }

@@ -1,16 +1,19 @@
 package duke.task;
+
 /**
- * subclass of task
+ * subclass of task.
  * handles todo task
  * */
 public class Todo extends Task {
 
-    public Todo (String description) {
+    public Todo(String description) {
         super(description);
     }
 
     @Override
-    public String getType() { return "T"; }
+    public String getType() {
+        return "T";
+    }
 
     @Override
     public String toString() {

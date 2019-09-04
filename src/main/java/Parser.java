@@ -1,16 +1,27 @@
 package duke;
+
 import duke.error.DukeException;
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.UpdateCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ExitCommand;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * deals with making sense of the user command
+ * deal with making sense of the user command.
  * */
 public class Parser {
     protected String command;
-    public Command parse(String fullcommand) throws DukeException{
+
+    /**
+     * constructor: checks and push command to subclass.
+     * */
+    public Command parse(String fullcommand) throws DukeException {
         try {
             if (fullcommand.equals("list")) { //LIST
                 return new ListCommand();
@@ -42,7 +53,9 @@ public class Parser {
         }
     }
 
-    // check if task command is valid
+    /**
+     * check if task command is valid.
+     * */
     public void checkTask(String type, String command) throws DukeException {
         if (type.equals("T")) {
             if (command.isEmpty()) {
@@ -65,7 +78,11 @@ public class Parser {
         }
     }
 
-    // check if command is valid number
+    /**
+     * check if command is valid number.
+     *
+     * @throws DukeException if command is not a number or outOfBound in TaskList
+     * */
     public boolean validNumber(String command, int listSize) throws DukeException {
         try {
             if (command.isEmpty()) {
@@ -87,11 +104,16 @@ public class Parser {
         return true;
     }
 
-    // format date and time
+    /**
+     * format date and time.
+     *
+     * @throws DukeException if datetime format != "dd/mm/yyyy HHmm"
+     * */
     public String datetimeformat(String input) throws DukeException {
         try {
             System.out.println(input);
-            LocalDateTime datetime = LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")); //convert to ISO_LOCAL_DATE_TIME
+            //convert to ISO_LOCAL_DATE_TIME
+            LocalDateTime datetime = LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
             DateTimeFormatter format = DateTimeFormatter.ofPattern(" MMMM yyyy, ha");
             return getSuffix(datetime.getDayOfMonth()).concat(datetime.format(format));
         } catch (DateTimeParseException e) {
@@ -99,21 +121,23 @@ public class Parser {
         }
     }
 
-    // get day suffix for date formatter
+    /**
+     * get day suffix for date formatter.
+     * */
     public String getSuffix(int day) {
         switch (day) {
-            case 1:
-            case 21:
-            case 31:
-                return day + "st";
-            case 2:
-            case 22:
-                return day + "nd";
-            case 3:
-            case 23:
-                return day + "rd";
-            default:
-                return day + "th";
+        case 1:
+        case 21:
+        case 31:
+            return day + "st";
+        case 2:
+        case 22:
+            return day + "nd";
+        case 3:
+        case 23:
+            return day + "rd";
+        default:
+            return day + "th";
         }
     }
 

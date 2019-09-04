@@ -1,6 +1,7 @@
 package duke.task;
+
 /**
- * subclass of task
+ * subclass of task.
  * handles event type tasks with a specific time period
  * */
 public class Event extends Task {
@@ -12,7 +13,9 @@ public class Event extends Task {
     }
 
     @Override
-    public String getType() { return "E"; }
+    public String getType() {
+        return "E";
+    }
 
     @Override
     public String getDescription() {

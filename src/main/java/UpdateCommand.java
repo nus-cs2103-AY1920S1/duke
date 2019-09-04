@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.error.DukeException;
 import duke.task.Task;
 import duke.Parser;
@@ -7,7 +8,7 @@ import duke.Storage;
 import duke.TaskList;
 
 /**
- * subclass of command
+ * subclass of command.
  * operation to update tasks: done commands
  * */
 public class UpdateCommand extends Command {
@@ -19,6 +20,11 @@ public class UpdateCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * main method to perform operation.
+     * update task and text file (in storage)
+     * if successful, print out updated task
+     * */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (parser.validNumber(command, tasks.getList().size())) {

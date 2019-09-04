@@ -1,6 +1,7 @@
 package duke.task;
+
 /**
- * handles task types
+ * handles task types.
  * */
 public class Task {
     protected String description;
@@ -20,13 +21,17 @@ public class Task {
         return description;
     }
 
-    public boolean getStatus() { return isDone; }
+    public boolean getStatus() {
+        return isDone;
+    }
 
     public void markAsDone() {
         isDone = true;
     }
 
-    public String getType() { return "GENERAL"; }
+    public String getType() {
+        return "GENERAL";
+    }
 
     @Override
     public String toString() {

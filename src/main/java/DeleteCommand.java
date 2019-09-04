@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.error.DukeException;
 import duke.task.Task;
 import duke.Parser;
@@ -7,7 +8,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * subclass of command
+ * subclass of command.
  * execute delete tasks operations
  * */
 public class DeleteCommand extends Command {
@@ -16,9 +17,14 @@ public class DeleteCommand extends Command {
     protected Parser parser = new Parser();
 
     public DeleteCommand(String command) {
-       this.command = command;
+        this.command = command;
     }
 
+    /**
+     * main method to perform operation.
+     * delete task in TaskList and update text file (in storage)
+     * if successful, print out deleted task to user
+     * */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (parser.validNumber(command, tasks.getList().size())) {

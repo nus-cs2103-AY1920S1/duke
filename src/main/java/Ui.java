@@ -1,43 +1,59 @@
 package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import duke.task.Task;
+
 /**
- * deals with interactions with user
+ * deals with interactions with user.
  * */
 public class Ui {
+
     public static String liner = "    ____________________________________________________________";
 
-    //greet user
+    /**
+     * greet user.
+     * */
     public void showWelcome() {
         String greeting = "     Hello! I'm Duke\n     What can I do for you?";
         System.out.println(liner + "\n" + greeting + "\n" + liner);
     }
 
-    //say goodbye
+    /**
+     * print goodbye to user.
+     * */
     public void showBye() {
         System.out.println(liner);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(liner);
     }
 
-    //show divider line
+    /**
+     * print divider line.
+     * */
     public void showLine() {
         System.out.println(liner);
     }
 
-    //show error message
+    /**
+     * show error message.
+     * */
     public void showError(String message) {
         showLine();
         System.out.println(message);
         showLine();
     }
 
+    /**
+     * print loading file error.
+     * */
     public void showLoadingError() {
         System.out.println("New task list generated: no existing file found!");
     }
 
-    // print add task message
+    /**
+     * print add task message.
+     * */
     public void printAddTask(Task newTask, int totalTasks) {
         System.out.println(liner);
         System.out.println("     Got it. I've added this task: ");
@@ -46,7 +62,9 @@ public class Ui {
         System.out.println(liner);
     }
 
-    // print done task message
+    /**
+     * print done task message.
+     * */
     public void printDoneTask(Task currTask) {
         System.out.println(liner);
         System.out.println("     Nice! I've marked this task as done: ");
@@ -54,7 +72,9 @@ public class Ui {
         System.out.println(liner);
     }
 
-    // print deleted task message
+    /**
+     * print deleted task message.
+     * */
     public void printDeletedTask(Task currTask, int totalTasks) {
         System.out.println(liner);
         System.out.println("     Noted. I've removed this task: ");
@@ -63,7 +83,9 @@ public class Ui {
         System.out.println(liner);
     }
 
-    // print all contents of task list
+    /**
+     * print all contents in task list.
+     * */
     public void showList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
         System.out.println("     Here are the tasks in your list:");
@@ -74,7 +96,9 @@ public class Ui {
         }
     }
 
-    // print matching tasks from search result
+    /**
+     * print matching tasks from search result.
+     * */
     public void printMatches(ArrayList<Task> results) {
         System.out.println("     Here are the matching tasks in your list:");
         for (int i = 0; i < results.size(); i++) {
@@ -84,7 +108,9 @@ public class Ui {
         }
     }
 
-    // get user input
+    /**
+     * get user input.
+     * */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

@@ -1,18 +1,31 @@
 package duke;
+
 import duke.error.DukeException;
-import duke.task.*;
-import java.io.*;
-import java.nio.file.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 
 /**
- * deals with loading tasks from the file and saving tasks in the file
- * */
+ * deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     public File file;
     public File dir;
     public String filepath;
 
+    /**
+     * constructor for Storage class.
+     *
+     * @param filepath String of the file location
+     * */
     public Storage(String filepath) {
         String[] arr = filepath.split("/");
         dir = new File(arr[0]);
@@ -23,8 +36,13 @@ public class Storage {
         this.filepath = arr[1];
     }
 
-    // transform data in file to array
-    public ArrayList<Task> load() throws Exception{
+    /**
+     * transform data in text file to array of tasks.
+     *
+     * @returns arraylist of task
+     * @throws Exception if file does not exist or loading task error
+     * */
+    public ArrayList<Task> load() throws Exception {
         try {
             if (file.exists()) {
                 return loadTasks();
@@ -36,8 +54,13 @@ public class Storage {
         }
     }
 
-    // Helper Function to load method
-    public ArrayList<Task> loadTasks() throws IOException{
+    /**
+     * helper Function to load() method.
+     *
+     * @return list of tasks from text file
+     * @throws IOException if task type != "T" || "D" || "E"
+     * */
+    public ArrayList<Task> loadTasks() throws IOException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
             FileReader reader = new FileReader(file);
@@ -47,18 +70,19 @@ public class Storage {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] arr = line.split(" \\| ");
                 Task task;
+
                 switch (arr[0]) {
-                    case "T": //todo
-                        task = new Todo(arr[2]);
-                        break;
-                    case "D": //deadline
-                        task = new Deadline(arr[2], arr[3]);
-                        break;
-                    case "E": //event
-                        task = new Deadline(arr[2], arr[3]);
-                        break;
-                    default:
-                        throw new IOException("Something is Wrong!");
+                case "T": //todo
+                    task = new Todo(arr[2]);
+                    break;
+                case "D": //deadline
+                    task = new Deadline(arr[2], arr[3]);
+                    break;
+                case "E": //event
+                    task = new Deadline(arr[2], arr[3]);
+                    break;
+                default:
+                    throw new IOException("Something is Wrong!");
                 }
 
                 if (Integer.parseInt(arr[1]) == 1) {
@@ -72,7 +96,12 @@ public class Storage {
         return tasks;
     }
 
-    // add new tasks information in file
+    /**
+     * add new tasks information in text file.
+     *
+     * @param task Task to save in file
+     * @param type Type of task - 1 char long
+     * */
     public void saveTasks(Task task, String type) {
         try {
             FileWriter writer = new FileWriter(file, true); //initialize file writer
@@ -92,7 +121,13 @@ public class Storage {
         }
     }
 
-    // edit existing tasks in file: delete and done commands
+    /**
+     * edit existing tasks in file: delete and done commands.
+     *
+     * @param task Task to save in file
+     * @param command String command from user input
+     * @param position Index of task in TaskList
+     * */
     public void updateTasks(Task task, String command, int position) {
         try {
             File temp = new File(dir, "temp.txt");

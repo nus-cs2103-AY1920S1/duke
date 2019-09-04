@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
 group 'duke'
@@ -20,5 +21,9 @@ test {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }

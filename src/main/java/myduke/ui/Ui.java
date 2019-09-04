@@ -1,10 +1,13 @@
 package myduke.ui;
 
-import java.util.List;
-import java.util.Scanner;
-
 import myduke.task.Task;
 import myduke.type.LoggerMessageType;
+import myduke.type.MessageFormatType;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.function.Consumer;
 
 /**
  * Handles all user interactions.
@@ -13,18 +16,43 @@ public class Ui {
     //Constants
     private static final String MESSAGE_PADDING  = "     ";
     private static final String MESSAGE_BOUNDARY = "    ____________________________________________________________";
-    private static final char MESSAGE_SAD_FACE = 0x2639;
+    private static final String MESSAGE_NEWLINE  = System.lineSeparator();
+    private static final char MESSAGE_SAD_FACE   = 0x2639;
 
     //Class variables
     private Scanner primaryScanner;
+    private Consumer<String> logger;
+    private LinkedList<String> messages;
+    private MessageFormatType defaultMessageFormat;
+
+    /**
+     * Constructor for Ui.
+     *
+     * @param logger A consumer to print the message.
+     * @param format The default format to print the message.
+     */
+    public Ui(Consumer<String> logger, MessageFormatType format) {
+        this.defaultMessageFormat = format;
+        this.messages = new LinkedList<>();
+        this.logger = logger;
+    }
 
     /**
      * Initialises the scanner to read queries from the console.
      */
-    public void init() {
-        if (primaryScanner == null) {
+    public void initScanner() {
+        if (!isConsoleScannerInitialised()) {
             primaryScanner = new Scanner(System.in);  // Create a Scanner object
         }
+    }
+
+    /**
+     * Checks whether the console scanner has been initialised.
+     *
+     * @return A boolean representing whether the console scanner has been initialised.
+     */
+    public boolean isConsoleScannerInitialised() {
+        return primaryScanner != null;
     }
 
     /**
@@ -52,87 +80,41 @@ public class Ui {
      * @param responseHeader A message to the user.
      */
     public void printResponse(String responseHeader) {
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.print(MESSAGE_PADDING);
-
-        System.out.println(responseHeader);
-
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.println();
+        messages.add(responseHeader);
     }
 
     /**
      * Prints a response and list the given tasks.
      *
-     * @param responseHeader    A message to the user.
-     * @param listOfTasks       The list of tasks to be displayed to the user.
+     * @param responseHeader A message to the user.
+     * @param listOfTasks    The list of tasks to be displayed to the user.
      */
     public void printResponse(String responseHeader, List<Task> listOfTasks) {
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.print(MESSAGE_PADDING);
-        System.out.println(responseHeader);
-
-        if (listOfTasks != null) {
-            int indexOfTask = 0;
-            for (Task currentTask : listOfTasks) {
-
-                indexOfTask += 1;
-                System.out.print(MESSAGE_PADDING);
-                System.out.print(String.format("%d.", indexOfTask));
-                System.out.println(currentTask);
-            }
+        messages.add(responseHeader);
+        int indexOfTask = 0;
+        for (Task currentTask : listOfTasks) {
+            indexOfTask += 1;
+            messages.add(String.format("%d.%s", indexOfTask, currentTask));
         }
-
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.println();
     }
 
     /**
      * Prints a single response and list a specified task.
      *
-     * @param responseHeader    A message to the user.
-     * @param refTask           The task to be displayed to the user.
-     * @param numOfTasks        Displays the number of tasks left in the task list if value is greater or equal than 0.
+     * @param responseHeader A message to the user.
+     * @param refTask        The task to be displayed to the user.
+     * @param numOfTasks     Displays the number of tasks left in the task list if value is greater or equal than 0.
      */
     public void printResponse(String responseHeader, Task refTask, int numOfTasks) {
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.print(MESSAGE_PADDING);
-        System.out.println(responseHeader);
-
-        System.out.print(MESSAGE_PADDING);
-        System.out.print("  ");
-        System.out.println(refTask);
+        messages.add(responseHeader);
+        messages.add(refTask.toString());
 
         if (numOfTasks >= 0) {
-            System.out.print(MESSAGE_PADDING);
-            System.out.println(String.format(
+            messages.add(String.format(
                     "Now you have %d task%s in the list.",
                     numOfTasks,
                     (numOfTasks > 1) ? "s" : ""));
         }
-
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.println();
-    }
-
-    /**
-     * Greets the user.
-     */
-    public void welcomeUser() {
-        printResponse("Hello! I'm Duke\n" + MESSAGE_PADDING + "What can I do for you?");
-    }
-
-    /**
-     * Bids farewell to the user.
-     */
-    public void sayGoodBye() {
-        printResponse("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -166,7 +148,7 @@ public class Ui {
      * Prints the message to the console.
      *
      * @param message a message.
-     * @param level severity of the message.
+     * @param level   severity of the message.
      */
     public void log(String message, LoggerMessageType level) {
         switch (level) {
@@ -181,5 +163,50 @@ public class Ui {
             logError(message);
             break;
         }
+    }
+
+    /**
+     * Displays the logged messages in the default message format.
+     *
+     * @return The printed message.
+     */
+    public String displayMessage() {
+        return displayMessage(this.defaultMessageFormat);
+    }
+
+    /**
+     * Displays the logged messages in a given format type.
+     *
+     * @param format The format which the message will be printed.
+     *
+     * @return The printed message.
+     */
+    public String displayMessage(MessageFormatType format) {
+        boolean printBoundary = (format == MessageFormatType.MESSAGE_FORMAT_WITH_BOUNDARY_AND_INDENT);
+        boolean printIndent = (format != MessageFormatType.MESSAGE_FORMAT_NO_BOUNDARY_WITHOUT_INDENT);
+
+        StringBuilder builder = new StringBuilder();
+        if (printBoundary) {
+            builder.append(MESSAGE_BOUNDARY);
+            builder.append(MESSAGE_NEWLINE);
+        }
+
+        while (!messages.isEmpty()) {
+            if (printIndent) {
+                builder.append(MESSAGE_PADDING);
+            }
+            builder.append(messages.pollFirst());
+            builder.append(MESSAGE_NEWLINE);
+        }
+
+        if (printBoundary) {
+            builder.append(MESSAGE_BOUNDARY);
+            builder.append(MESSAGE_NEWLINE);
+        }
+
+        String output = builder.toString();
+
+        logger.accept(output);
+        return output;
     }
 }

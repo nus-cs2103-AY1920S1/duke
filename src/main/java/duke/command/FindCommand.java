@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException.DukeException;
+import duke.exception.DukeException;
 import duke.task.Task;
-import duke.taskHandler.Storage;
+import duke.handler.Storage;
 import duke.ui.Ui;
 
 import java.io.IOException;
@@ -15,6 +15,7 @@ public class FindCommand extends Command {
     public FindCommand(String searchPhrase) {
         this.searchPhrase = searchPhrase;
     }
+
     @Override
     public boolean isExit() {
         return false;

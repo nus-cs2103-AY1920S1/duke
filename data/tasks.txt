@@ -1,5 +1,4 @@
-[T][?] ] hi
-[T][?] ] hello
-[T][?] ] homework
-[T][?] iP
-[T][?] hello
+[T][✘] hihi
+[T][✘] hihi
+[E][✘] wedding (at: chapel)
+[D][✘] dede (by: now)

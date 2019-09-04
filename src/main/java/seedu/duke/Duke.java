@@ -1,10 +1,10 @@
 package seedu.duke;
 
-import duke.DukeException.DukeException;
+import duke.exception.DukeException;
 import duke.command.Command;
 import duke.command.Parser;
-import duke.taskHandler.Storage;
-import duke.taskHandler.TaskList;
+import duke.handler.Storage;
+import duke.handler.TaskList;
 import duke.ui.Ui;
 
 import java.io.IOException;
@@ -52,6 +52,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the app.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

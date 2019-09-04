@@ -1,4 +1,4 @@
-package duke.taskHandler;
+package duke.handler;
 
 import duke.task.Task;
 

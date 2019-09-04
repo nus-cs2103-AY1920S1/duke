@@ -1,4 +1,4 @@
-package duke.DukeException;
+package duke.exception;
 
 /**
  * An unchecked exception class.

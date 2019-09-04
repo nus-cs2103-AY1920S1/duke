@@ -12,6 +12,12 @@ public class Deadline extends Task {
      */
     protected String by;
 
+    /**
+     * Create an instance of Deadline. Date and time provided in the right format will be parsed into a
+     * datetime object. Otherwise, the deadline will remain seen as the original string.
+     * @param description Description of the deadline.
+     * @param dateTime Date and Time at which the deadline is.
+     */
     public Deadline(String description, String dateTime) {
         super(description);
         try {

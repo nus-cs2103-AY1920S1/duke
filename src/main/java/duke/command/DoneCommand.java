@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException.DukeException;
+import duke.exception.DukeException;
 import duke.task.Task;
-import duke.taskHandler.Storage;
+import duke.handler.Storage;
 import duke.ui.Ui;
 
 import java.io.IOException;
@@ -26,5 +26,6 @@ public class DoneCommand extends Command {
         Task task = tasks.get(index - 1);
         task.markAsDone();
         ui.showDoneResponse();
+        System.out.println("        " + task);
     }
 }

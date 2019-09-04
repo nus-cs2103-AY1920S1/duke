@@ -1,9 +1,19 @@
 package duke.command;
 
-import duke.DukeException.DukeException;
+import duke.exception.DukeException;
 
+/**
+ * Parser parses the input by the user and determines what the command is the user is issuing, or no command at all
+ * (invalid command).
+ */
 public class Parser {
 
+    /**
+     * Returns the correct command object, or an exception if the user input is invalid in format.
+     * @param fullCommand The full string input of the user
+     * @return An object that is a child class of Command
+     * @throws DukeException DukeException is thrown if the command is not valid
+     */
     public static Command parse(String fullCommand) throws DukeException {
         fullCommand = fullCommand.trim();
         String[] commandWords = fullCommand.split("\\s+");

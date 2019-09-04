@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException.DukeException;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.taskHandler.Storage;
+import duke.handler.Storage;
 import duke.ui.Ui;
 
 import java.util.ArrayList;

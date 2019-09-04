@@ -38,6 +38,9 @@ public class Ui {
         System.out.println(indent + line);
     }
 
+    /**
+     * Prints the loading error message if Duke fails to load properly.
+     */
     public void showLoadingError() {
         System.out.println("Hello from\n" + logo);
         System.out.println(indent + line);
@@ -103,8 +106,8 @@ public class Ui {
 
     /**
      * Prints the message that responses to the user adding a task to the list.
-     * @param task
-     * @param list
+     * @param task The task that has just been created.
+     * @param list The list to add the task to.
      */
     public void printAddedTask(Task task, ArrayList<Task> list) {
         System.out.println(indent + "Got it. I've added this task:");

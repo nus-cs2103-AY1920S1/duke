@@ -1,4 +1,4 @@
-package duke.taskHandler;
+package duke.handler;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -12,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.ArrayList;
-
 /**
  * The Storage class deals with the saving and loading of data into Duke.
  * The data are the tasks that the user specified.
@@ -56,30 +55,30 @@ public class Storage {
             while ((read = reader.readLine()) != null) {
                 String type = read.substring(1, 2);
                 String status = read.substring(4, 5);
-                String info = read.substring(7);
+                String info = read.substring(9);
 
                 Task task;
                 if (type.equals("T")) {
                     task = new ToDo(info.trim());
-                    if (status.equals("\u2713")) {
+                    if (status.equals("✔")) {
                         task.markAsDone();
                     }
                     list.add(task);
                 } else if (type.equals("E")) {
-                    String[] infoArr = info.split("(:at)");
-                    String description = infoArr[0].trim();
-                    String at = infoArr[1].substring(1, infoArr[1].length());
+                    String[] infoArr = info.split("at:");
+                    String description = infoArr[0].substring(0, infoArr[1].length() - 1).trim();
+                    String at = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Event(description, at);
-                    if (status.equals("\u2713")) {
+                    if (status.equals("✔")) {
                         task.markAsDone();
                     }
                     list.add(task);
                 } else if (type.equals("D")) {
-                    String[] infoArr = info.split("(:by)");
-                    String description = infoArr[0].trim();
-                    String by = infoArr[1].substring(1, infoArr[1].length());
+                    String[] infoArr = info.split("by:");
+                    String description = infoArr[0].substring(0, infoArr[1].length() - 1).trim();
+                    String by = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Deadline(description, by);
-                    if (status.equals("\u2713")) {
+                    if (status.equals("✔")) {
                         task.markAsDone();
                     }
                     list.add(task);
@@ -91,4 +90,3 @@ public class Storage {
         return list;
     }
 }
-

@@ -1,7 +1,8 @@
 package duke.task;
 
 /**
- * Task is a class to represent a task. It contains a description of the task and its status (whether the task has been completed).
+ * Task is a class to represent a task. It contains a description of the task and its status
+ * (whether the task has been completed).
  */
 public class Task {
     /**
@@ -23,7 +24,7 @@ public class Task {
      * @return A tick or cross symbol, depending on whether the task has been completed.
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
+        return isDone ? "✔" : "✘"; //return tick or X symbols
     }
 
     /**

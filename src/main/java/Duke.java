@@ -24,64 +24,7 @@ public class Duke {
         fw.close();
     }
 
-<<<<<<< HEAD
-    private static void copyFileToList() throws FileNotFoundException {
-        File file = new File(filePath);
-        Scanner fs = new Scanner(file);
-        while (fs.hasNext()) {
-            String str = fs.nextLine();
-            String[] strArr = str.split(" \\| ");
-            if (strArr[0].equals("T")) {
-                Todo todo = new Todo(strArr[2]);
-                markTaskAsDone(strArr[1], todo);
-                list.add(todo);
-            } else if (strArr[0].equals("D")) {
-                Deadline deadline = new Deadline(strArr[2], strArr[3]);
-                markTaskAsDone(strArr[1], deadline);
-                list.add(deadline);
-            } else if (strArr[0].equals("E")) {
-                Event event = new Event(strArr[2], strArr[3]);
-                markTaskAsDone(strArr[1], event);
-                list.add(event);
-            }
-        }
-        fs.close();
-    }
-
-    private static void markTaskAsDone(String str, Task task) {
-        if (str.equals("1")) {
-            task.markAsDone();
-        }
-    }
-
-    private static void printDetails(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
-    }
-
-    private static void copyNewListToFile() throws FileNotFoundException, IOException {
-        StringBuffer text = new StringBuffer();
-        for (Task t : list) {
-            String type = t.getType();
-            text.append(type);
-            text.append(" | ");
-            text.append(t.getStatusNum());
-            text.append(" | ");
-            text.append(t.getDescription());
-            if (type.equals("D") || type.equals("E")) {
-                text.append(" | ");
-                text.append(t.getDate());
-            }
-            text.append("\n");
-        }
-        writeToFile(text.toString());
-    }
-
-    public static void copyFileToList() throws FileNotFoundException {
-=======
     public static void copyFileToList() throws FileNotFoundException, ParseException {
->>>>>>> branch-Level-8
         File file = new File(filePath);
         Scanner fs = new Scanner(file);
         while (fs.hasNext()) {
@@ -198,15 +141,9 @@ public class Duke {
                 try {
                     if (text.length() <= 5) {
                         throw new DukeException();
-<<<<<<< HEAD
-                    }
-                    String[] t = text.split("/");
-                    Event event = new Event(t[0].substring(6, t[0].length() - 1), t[1].substring(3));
-=======
                     } String[] t = text.split("/");
                     Date date = convertToDate(t[1].substring(3));
                     Event event = new Event(t[0].substring(6, t[0].length() - 1), date);
->>>>>>> branch-Level-8
                     list.add(event);
                     printDetails(event);
                     appendTaskToFile(event);
@@ -251,7 +188,7 @@ public class Duke {
                 try {
                     throw new DukeException();
                 } catch (DukeException error) {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :(");
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         }

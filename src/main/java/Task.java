@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-public abstract class Task {
-=======
 import java.util.Date;
 
 public class Task {
->>>>>>> branch-Level-8
     protected String description;
     protected boolean isDone;
     protected Date date;
@@ -19,20 +15,13 @@ public class Task {
         return this.description;
     }
 
-<<<<<<< HEAD
-=======
     public Date getDate() {
         return this.date;
     }
 
->>>>>>> branch-Level-8
     public String getType() {
         return this.type;
     }
-
-    public String getDate() {
-        return this.date;
-    };
 
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";

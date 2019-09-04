@@ -41,6 +41,10 @@ public abstract class Task {
      */
     public abstract String formatString();
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

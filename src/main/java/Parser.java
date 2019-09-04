@@ -33,6 +33,9 @@ public class Parser {
         } else if (input.matches("event\\s+.+")) {
             parseInfo[0] = "EVENT";
             parseInfo[1] = input.replaceAll("event\\s+", "");
+        } else if (input.matches("find\\s+.+")) {
+            parseInfo[0] = "FIND";
+            parseInfo[1] = input.replaceAll("find\\s+", "");
         } else if (input.equals("list")) {
             parseInfo[0] = "LIST";
         } else {

@@ -55,10 +55,21 @@ public class Ui {
                 }
                 System.out.println();
                 break;
+            case "FIND":
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0, j = 0; i < taskList.getNumTask(); i++) {
+                    Task current = taskList.getTask(i);
+
+                    if (current.hasKeyword(parseInfo[1])) {
+                        System.out.println(String.format("%d.%s", ++j, current));
+                    }
+                }
+                System.out.println();
+                break;
             default:
                 try {
                     if (input.equals("todo") || input.equals("deadline") || input.equals("event")
-                            || input.equals("done")) {
+                            || input.equals("done") || input.equals("find")) {
                         String message = String.format("The description of a %s cannot be empty.", input);
                         throw new InsufficientArgumentException(message);
                     } else {

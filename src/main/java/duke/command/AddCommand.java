@@ -75,7 +75,7 @@ public class AddCommand extends Command {
      * @param storage Storage of the current list of tasks.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws Exception {
         Task task;
         switch (parsedString[0]) {
         case "todo":
@@ -92,14 +92,18 @@ public class AddCommand extends Command {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(task);
-        System.out.println("Got it. I've added this task");
-        System.out.println("  " + task.toString());
-        if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list");
-        } else {
-            System.out.println(String.format("Now you have %d tasks in the list", tasks.size()));
-        }
         storage.updateFile(tasks);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task\n");
+        sb.append("  " + task.toString() + "\n");
+        if (tasks.size() == 1) {
+            sb.append("Now you have 1 task in the list\n");
+        } else {
+            sb.append(String.format("Now you have %d tasks in the list\n", tasks.size()));
+        }
+        String result = sb.toString();
+        System.out.println(result);
+        return result;
     }
 
     /**

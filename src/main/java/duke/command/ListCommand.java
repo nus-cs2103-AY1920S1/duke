@@ -19,13 +19,17 @@ public class ListCommand extends Command {
      * @param storage Connects to the storage file
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         int index = 0;
-        System.out.println("Here are the tasks in your list: ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list: \n");
         for (Task task : tasks.getList()) {
             index++;
-            System.out.println(index + ". " + task.toString());
+            sb.append(index + ". " + task.toString() + "\n");
         }
+        String result = sb.toString();
+        System.out.println(result);
+        return result;
     }
 
     /**

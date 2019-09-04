@@ -10,6 +10,7 @@ import duke.command.Command;
 /**
  * Represents a find command.
  */
+
 public class FindCommand extends Command {
 
     public FindCommand(String command) {
@@ -23,19 +24,23 @@ public class FindCommand extends Command {
      * @param ui UI
      * @param storage Storage containing file.
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         ArrayList<Task> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         for (Task task : tasks.getList()) {
             if (task.getContent().contains(command)) {
                 result.add(task);
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
+        sb.append("Here are the matching tasks in your list:\n");
         int index = 0;
         for (Task task : result) {
             index++;
-            System.out.println(index + " " + task.toString());
+            sb.append(index + " " + task.toString() + "\n");
         }
+        String response = sb.toString();
+        System.out.println(response);
+        return response;
     }
 
     @Override

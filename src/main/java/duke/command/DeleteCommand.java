@@ -34,21 +34,25 @@ public class DeleteCommand extends Command {
      * @throws DukeException If index is negative or exceeds the size of TaskList.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws Exception {
         int index = Integer.parseInt(command);
         if (index > tasks.size() || index < 1) {
             throw new DukeException("☹ OOPS!!! That number you put in does not exit");
         }
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("  " + task.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task: \n");
+        sb.append("  " + task.toString() + "\n");
         if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list");
+            sb.append("Now you have 1 task in the list\n");
         } else {
-            System.out.println(String.format("Now you have %d tasks in the list", tasks.size()));
+            sb.append(String.format("Now you have %d tasks in the list\n", tasks.size()));
         }
         storage.updateFile(tasks);
+        String result = sb.toString();
+        System.out.println(result);
+        return result;
     }
 
     /**

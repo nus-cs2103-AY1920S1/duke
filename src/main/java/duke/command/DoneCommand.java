@@ -33,14 +33,18 @@ public class DoneCommand extends Command {
      * @throws DukeException If index is negative or exceeds the size of TaskList.
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws Exception {
         int index = Integer.valueOf(command);
         if (index > tasks.size() || index < 1) {
             throw new DukeException("☹ OOPS!!! That number you put in does not exit");
         }
         tasks.get(index - 1).toggleState();
-        System.out.println("Nice! I've marked this task as done: \n  " + tasks.get(index - 1).toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done: \n  " + tasks.get(index - 1).toString() + "\n");
         storage.updateFile(tasks);
+        String result = sb.toString();
+        System.out.println(result);
+        return result;
     }
 
     /**

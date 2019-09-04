@@ -91,7 +91,9 @@ public class Duke {
         storage.writeBackToFile(tasks.outputTasks());
     }
 
+    /*
     public static void main(String[] args) {
         new Duke("src/main/java/duke/data/tasks.txt").run();
     }
+     */
 }

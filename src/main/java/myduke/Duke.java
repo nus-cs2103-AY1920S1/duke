@@ -2,7 +2,6 @@ package myduke;
 
 import myduke.command.Command;
 import myduke.command.CommandParser;
-import myduke.command.InitialiseDukeCommand;
 import myduke.type.MessageFormatType;
 import myduke.ui.Ui;
 import myduke.storage.StorageManager;
@@ -27,11 +26,7 @@ public class Duke {
      * Constructor for the class Duke.
      */
     public Duke(Consumer<String> logger, MessageFormatType format) {
-
-        if (logger == null) {
-            logger = System.out::print;
-        }
-
+        assert logger != null : " Logger for Duke should not be null";
         ui = new Ui(logger, format);
         tasks = new TaskList();
         storage = new StorageManager(DATABASE_LOCATION, tasks, ui::log);
@@ -46,6 +41,10 @@ public class Duke {
      */
     public boolean respondToQuery(String query) {
         boolean shouldContinueChat = true;
+
+        assert tasks != null   : " TaskList was not initialised";
+        assert ui != null      : " ui was not initialised";
+        assert storage != null : " Storage Manager was not initialised";
 
         //Find and give Response
         try {
@@ -71,6 +70,7 @@ public class Duke {
                 userQuery = ui.waitForQuery();
             } else {
                 ui.initScanner();
+                assert ui.isConsoleScannerInitialised() : " Console Scanner is not initialised";
             }
 
             //Find and give Response
@@ -80,7 +80,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke myObj = new Duke(null, MessageFormatType.MESSAGE_FORMAT_WITH_BOUNDARY_AND_INDENT);
+        Duke myObj = new Duke(System.out::print, MessageFormatType.MESSAGE_FORMAT_WITH_BOUNDARY_AND_INDENT);
         myObj.spin();
     }
 }

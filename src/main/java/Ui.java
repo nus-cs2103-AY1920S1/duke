@@ -23,28 +23,29 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while(!input.equals("bye")) {
+        while (!input.equals("bye")) {
             String[] parseInfo = Parser.parseCommand(input);
             int currentNum = taskList.getNumTask();
+
             switch (parseInfo[0]) {
             case "DONE":
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(taskList.doneTask(parseInfo[1]) + "\n");
+                System.out.println(taskList.getDoneTask(parseInfo[1]) + "\n");
                 break;
             case "DELETE":
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(taskList.deleteTask(parseInfo[1]));
                 break;
             case "TODO":
-                taskList.todoTask(parseInfo[1]);
+                taskList.addTodoTask(parseInfo[1]);
                 printTaskAddition(taskList);
                 break;
             case "DEADLINE":
-                taskList.deadlineTask(Parser.parseDetails(parseInfo[1]));
+                taskList.addDeadlineTask(Parser.parseDetails(parseInfo[1]));
                 printTaskAddition(taskList);
                 break;
             case "EVENT":
-                taskList.eventTask(Parser.parseDetails(parseInfo[1]));
+                taskList.addEventTask(Parser.parseDetails(parseInfo[1]));
                 printTaskAddition(taskList);
                 break;
             case "LIST":

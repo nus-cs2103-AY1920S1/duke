@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,50 +29,51 @@ public class Storage {
      * @throws DukeException If diskList does not exist.
      */
     public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+
         try {
             Scanner s = new Scanner(diskList);
-            while(s.hasNext()) {
-                String[] savedTask = s.nextLine().split(" \\| ");
 
-                switch (savedTask[0]) {
+            while (s.hasNext()) {
+                String[] savedTasks = s.nextLine().split(" \\| ");
+
+                switch (savedTasks[0]) {
                 case "T":
-                    Todo t = new Todo(savedTask[2]);
-                    if (savedTask[1].equals("1")) {
-                        t.markAsDone();
+                    Todo t = new Todo(savedTasks[2]);
+                    if (savedTasks[1].equals("1")) {
+                        t.setDone();
                     }
-                    taskList.add(t);
+                    tasks.add(t);
                     break;
                 case "D":
-                    Deadline d = new Deadline(savedTask[2], savedTask[3]);
-                    if (savedTask[1].equals("1")) {
-                        d.markAsDone();
+                    Deadline d = new Deadline(savedTasks[2], savedTasks[3]);
+                    if (savedTasks[1].equals("1")) {
+                        d.setDone();
                     }
-                    taskList.add(d);
+                    tasks.add(d);
                     break;
                 case "E":
-                    Event e = new Event(savedTask[2], savedTask[3]);
-                    if (savedTask[1].equals("1")) {
-                        e.markAsDone();
+                    Event e = new Event(savedTasks[2], savedTasks[3]);
+                    if (savedTasks[1].equals("1")) {
+                        e.setDone();
                     }
-                    taskList.add(e);
+                    tasks.add(e);
                     break;
                 }
             }
-
         } catch (Exception e) {
             throw new DukeException();
         }
 
-        return taskList;
+        return tasks;
     }
 
     /**
      * Overwrites stored list of tasks with given list of tasks.
      *
-     * @param taskList List of tasks.
+     * @param tasks List of tasks.
      */
-    public void overWrite(ArrayList<Task> taskList) {
+    public void overWrite(ArrayList<Task> tasks) {
         try {
             diskList.createNewFile();
         } catch (Exception e) {
@@ -81,8 +83,8 @@ public class Storage {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
 
-        for (Task t : taskList) {
-            String s = t.formattedString();
+        for (Task t : tasks) {
+            String s = t.formatString();
 
             if (first) {
                 sb.append(s);

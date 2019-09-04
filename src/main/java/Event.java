@@ -25,7 +25,7 @@ public class Event extends Task {
      *
      * @return Condensed description.
      */
-    public String formattedString() {
+    public String formatString() {
         return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, at);
     }
 

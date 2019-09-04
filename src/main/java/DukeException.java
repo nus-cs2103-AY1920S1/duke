@@ -2,6 +2,7 @@
  * Represents an exception encountered by <code>Duke</code>.
  */
 public class DukeException extends Exception {
+
     public DukeException() {
         super("File does not exist");
     }

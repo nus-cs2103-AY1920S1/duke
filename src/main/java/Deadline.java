@@ -4,6 +4,7 @@
  * two Strings e.g., <code>"submit report","11/10/2019 5pm"</code>
  */
 public class Deadline extends Task {
+
     /** Date/time deadline for this task. */
     protected String by;
 
@@ -24,7 +25,7 @@ public class Deadline extends Task {
      *
      * @return Condensed description.
      */
-    public String formattedString() {
+    public String formatString() {
         return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, by);
     }
 

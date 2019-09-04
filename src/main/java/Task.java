@@ -4,6 +4,7 @@
  * a String and a boolean e.g., <code>"read book",true</code>
  */
 public abstract class Task {
+
     /** Description of task. */
     protected String description;
     /** State of task. */
@@ -29,7 +30,7 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
@@ -38,7 +39,7 @@ public abstract class Task {
      *
      * @return Condensed description.
      */
-    public abstract String formattedString();
+    public abstract String formatString();
 
     @Override
     public String toString() {

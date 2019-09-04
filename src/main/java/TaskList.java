@@ -7,25 +7,25 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
     private int numTask;
 
     /**
      * Constructs a new <code>TaskList</code>.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
         numTask = 0;
     }
 
     /**
      * Constructs a <code>TaskList</code> from an existing list.
      *
-     * @param taskList Existing list.
+     * @param existingTasks Existing list.
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
-        numTask = taskList.size();
+    public TaskList(ArrayList<Task> existingTasks) {
+        this.tasks = existingTasks;
+        numTask = existingTasks.size();
     }
 
     public int getNumTask() {
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> getList() {
-        return taskList;
+        return tasks;
     }
 
     /**
@@ -42,7 +42,7 @@ public class TaskList {
      * @return Last <code>Task</code>.
      */
     public Task getTask() {
-        return taskList.get(numTask - 1);
+        return tasks.get(numTask - 1);
     }
 
     /**
@@ -52,31 +52,31 @@ public class TaskList {
      * @return <code>Task</code> at index position.
      */
     public Task getTask(int i) {
-        return taskList.get(i);
+        return tasks.get(i);
     }
 
     /**
      * Updates and returns a <code>Task</code> as done based on task number.
      *
-     * @param s Task number.
+     * @param index Task number.
      * @return Done <code>Task</code>.
      */
-    public Task doneTask(String s) {
-        Task t = taskList.get(Integer.valueOf(s) - 1);
-        t.markAsDone();
+    public Task getDoneTask(String index) {
+        Task t = tasks.get(Integer.valueOf(index) - 1);
+        t.setDone();
         return t;
     }
 
     /**
      * Removes a <code>Task</code> from list of tasks based on task number.
      *
-     * @param s Task number.
+     * @param index Task number.
      * @return Removed <code>Task</code>.
      */
-    public Task deleteTask(String s) {
-        int listRank = Integer.valueOf(s) - 1;
-        Task t = taskList.get(listRank);
-        taskList.remove(listRank);
+    public Task deleteTask(String index) {
+        int listRank = Integer.valueOf(index) - 1;
+        Task t = tasks.get(listRank);
+        tasks.remove(listRank);
         numTask--;
         return t;
     }
@@ -84,30 +84,30 @@ public class TaskList {
     /**
      * Updates list of task with a new <code>Todo</code>.
      *
-     * @param s Task details.
+     * @param detail Task details.
      */
-    public void todoTask(String s) {
-        taskList.add(new Todo(s));
+    public void addTodoTask(String detail) {
+        tasks.add(new Todo(detail));
         numTask++;
     }
 
     /**
      * Updates list of task with a new <code>Deadline</code>.
      *
-     * @param s Task details in array.
+     * @param details Task details in array.
      */
-    public void deadlineTask(String[] s) {
-        taskList.add(new Deadline(s[0], s[1]));
+    public void addDeadlineTask(String[] details) {
+        tasks.add(new Deadline(details[0], details[1]));
         numTask++;
     }
 
     /**
      * Updates list of task with a new <code>Event</code>.
      *
-     * @param s Task details in array.
+     * @param details Task details in array.
      */
-    public void eventTask(String[] s) {
-        taskList.add(new Event(s[0], s[1]));
+    public void addEventTask(String[] details) {
+        tasks.add(new Event(details[0], details[1]));
         numTask++;
     }
 }

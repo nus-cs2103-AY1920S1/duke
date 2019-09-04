@@ -15,6 +15,7 @@ public class Duke extends Application {
 
 	private static String filename = "./data/duke.txt"; // todo isDone? description
 
+	public Duke() {}
 	public Duke(String filename) {
 		ui = new Ui();
 		storage = new Storage(filename);

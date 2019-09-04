@@ -1,13 +1,17 @@
-package duke;
+package duke.tasks;
 
-public class Task {
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
+public class Task implements Serializable {
+
+    protected final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     protected String description;
     protected boolean isDone;
 
-    public Task(String description, boolean isDone) {
+    public Task(String description) {
         this.description = description;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     public String getStatusIcon() {

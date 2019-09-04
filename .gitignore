@@ -15,3 +15,6 @@ bin/
 
 # Text UI testing output file
 /text-ui-test/ACTUAL.TXT
+
+# data file
+/data/duke.txt

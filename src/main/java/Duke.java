@@ -1,3 +1,8 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -16,7 +21,9 @@ import duke.ui.Ui;
  * @version 1.0
  * @since 29th August 2019
  */
-public class Duke {
+public class Duke extends Application {
+
+    private String filePath = "./data/duke.txt";
 
     /**
      * This storage deals with loading tasks from the file and saving tasks in the file.
@@ -38,18 +45,17 @@ public class Duke {
      * If a data file is already created in the given file path, the data file is updated according to
      * the user's input. If file does not exist in the given file path, a new date file is created.
      *
-     * @param filePath The path of the file to be read and written.
      */
-    private Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(this.filePath);
     }
 
     /**
      * This method is used to allow the execution of <code>duke</code> to take place until the user exits
      * the program. It allows the program to keep reading the user's input until the user exits the program.
      */
-    private void run() {
+    public void run() {
         try {
             this.tasks = new TaskList(this.storage.loadFromFile());
         } catch (DukeException e) {
@@ -80,6 +86,15 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     /**
      * This is the main method where <code>Duke</code> is instantiated and executed using the <code>run</code> method.
      * A default file path to /duke.txt is provided in the main method.
@@ -87,7 +102,7 @@ public class Duke {
      * @param args Unused
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("./data/duke.txt");
+        Duke duke = new Duke();
         duke.run();
     }
 

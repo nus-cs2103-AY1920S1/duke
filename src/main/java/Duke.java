@@ -2,9 +2,12 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/** 
+ * Main class of the programme
+ *  */ 
 
 public class Duke {
-
+    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/** 
+* Ui class responsible for outputting info to the user.
+* */ 
+
 public class Ui {
     public Ui() {
 

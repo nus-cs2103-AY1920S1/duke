@@ -2,6 +2,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/** 
+* Parser object used to parse data into required format
+* */ 
+
 public class Parser {
 
     public Parser() {

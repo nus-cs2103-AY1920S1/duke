@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/** 
+* Represents a list of tasks. Stores all tasks.
+* */ 
+
 public class TaskList {
 
     public ArrayList<Task> list;

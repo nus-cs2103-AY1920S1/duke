@@ -1,3 +1,7 @@
+/** 
+* Represents an Event
+* */ 
+
 public class Event extends Task {
 
     protected String at;

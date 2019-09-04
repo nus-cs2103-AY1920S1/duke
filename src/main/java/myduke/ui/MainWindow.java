@@ -60,14 +60,22 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if (input.isEmpty()) {
+        if (input.isEmpty() || sendButton.isDisabled()) {
             return;
         }
 
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         if (!dukeEngine.respondToQuery(input)) {
-            Platform.exit();
-            return;
+            sendButton.setDisable(true);
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException exc) {
+                } finally {
+                    Platform.runLater(() -> Platform.exit());
+                }
+            });
+            thread.start();
         }
         userInput.clear();
     }

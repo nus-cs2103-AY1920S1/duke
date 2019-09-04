@@ -22,6 +22,18 @@ public class ExitCommand extends Command {
     }
 
     /**
+     * Returns the response to command "bye."
+     *
+     * @param taskList List of tasks to manage.
+     * @param storage Storage to save any changes if necessary.
+     */
+    @Override
+    public String getResponse(TaskList taskList, Storage storage) {
+        // TODO: use package
+        return "Bye. Hope to see you again soon!";
+    }
+
+    /**
      * Returns true.
      *
      * @return True.

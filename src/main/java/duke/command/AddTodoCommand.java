@@ -56,6 +56,34 @@ public class AddTodoCommand extends Command {
     }
 
     /**
+     * Returns the result of adding a {@link TodoTask} to the <code>TaskList</code>.
+     *
+     * @param taskList List of tasks to manage.
+     * @param storage Storage to save any changes.
+     * @throws DukeIllegalArgumentException When the description of task is missing.
+     * @throws DukeIOException When there is an error during an input-output process.
+     */
+    @Override
+    public String getResponse(TaskList taskList, Storage storage)
+            throws DukeIllegalArgumentException, DukeIOException {
+        if (this.description.isEmpty()) {
+            throw new DukeIllegalArgumentException(ERROR_MISSING_TASK_DESCRIPTION);
+        }
+
+        Task task = new TodoTask(this.description);
+        taskList.addTask(task);
+        storage.saveTasks(taskList);
+
+        return new StringBuilder(DUKE_ADD_TASK)
+                .append("\n")
+                .append("  ")
+                .append(task.getStatus())
+                .append("\n")
+                .append(String.format(DUKE_NUMBER_OF_TASKS, taskList.getSize()))
+                .toString();
+    }
+
+    /**
      * Returns false.
      *
      * @return False.

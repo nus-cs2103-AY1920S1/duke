@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeIOException;
-import duke.exception.DukeIllegalArgumentException;
 import duke.exception.DukeIllegalIndexException;
 
 import duke.module.Storage;
@@ -55,6 +54,47 @@ public class DoneCommand extends Command {
             }
         }
         storage.saveTasks(taskList);
+    }
+
+    /**
+     * Returns the response of marking a <code>Task</code> in the <code>TaskList</code> as done.
+     *
+     * @param taskList List of tasks to manage.
+     * @param storage Storage to save any changes.
+     * @throws DukeIllegalIndexException When the index inputted is out of bounds.
+     * @throws DukeIOException When there is an error during an input-output process.
+     */
+    @Override
+    public String getResponse(TaskList taskList, Storage storage)
+            throws DukeIllegalIndexException, DukeIOException {
+        String response;
+        try {
+            int index = Integer.parseInt(this.detail);
+            taskList.markAsDoneTaskAt(index);
+            response = new StringBuilder(DUKE_MARK_AS_DONE)
+                    .append("\n")
+                    .append("  ")
+                    .append(taskList.getTaskAt(index).getStatus())
+                    .toString();
+        } catch (NumberFormatException e) {
+            if (taskList.getSize() == 0) {
+                // TODO Change package
+                response = "You currently have no tasks in your list.";
+            } else if (this.detail.equals("all")) {
+                taskList.markAsDoneAllTasks();
+                String[] lines = taskList.listAll();
+                StringBuilder sb = new StringBuilder(DUKE_MARK_AS_DONE);
+                for (int i = 1; i < lines.length; i++) {
+                    sb.append(lines[i]);
+                    sb.append("\n");
+                }
+                response = sb.toString();
+            } else {
+                throw new DukeIllegalIndexException(ERROR_ILLEGAL_INDEX);
+            }
+        }
+        storage.saveTasks(taskList);
+        return response;
     }
 
     /**

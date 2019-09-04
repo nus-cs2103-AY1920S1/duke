@@ -47,6 +47,27 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Returns the response to this FindCommand.
+     *
+     * @param taskList List of tasks to manage.
+     * @param storage Storage to save any changes if necessary.
+     * @throws DukeIllegalArgumentException When the keyword is missing.
+     */
+    @Override
+    public String getResponse(TaskList taskList, Storage storage) throws DukeIllegalArgumentException {
+        if (keyword.isEmpty()) {
+            throw new DukeIllegalArgumentException(ERROR_MISSING_KEYWORD);
+        }
+        String[] lines = new TaskList(taskList.findAllTasksContaining(this.keyword)).listAll();
+        StringBuilder sb = new StringBuilder();
+        for (String line : lines) {
+            sb.append(line);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    /**
      * List all <code>Task</code>s in the given taskList.
      * Implemented to aid in displaying all tasks found containing the {@link #keyword}.
      *

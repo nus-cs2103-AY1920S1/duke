@@ -7,6 +7,8 @@ import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
 
+import duke.task.Task;
+
 /**
  * Represents the "delete" command supported by Duke.
  */
@@ -55,6 +57,42 @@ public class DeleteCommand extends Command {
             }
         }
         storage.saveTasks(taskList);
+    }
+
+    /**
+     * Returns the result of deleting a <code>Task</code> from the <code>TaskList</code>.
+     *
+     * @param taskList List of tasks to manage.
+     * @param storage Storage to save any changes.
+     * @throws DukeIllegalIndexException When the index inputted is out of bounds.
+     * @throws DukeIOException When there is an error during an input-output process.
+     */
+    @Override
+    public String getResponse(TaskList taskList, Storage storage)
+            throws DukeIllegalIndexException, DukeIOException {
+        String response;
+        try {
+            int index = Integer.parseInt(this.detail);
+            Task task = taskList.deleteTaskAt(index);
+            response = new StringBuilder(DUKE_DELETE_TASK)
+                    .append("\n")
+                    .append("  ")
+                    .append(task.getStatus())
+                    .append(String.format(DUKE_NUMBER_OF_TASKS, taskList.getSize()))
+                    .toString();
+        } catch (NumberFormatException e) {
+            if (taskList.getSize() == 0) {
+                // TODO : change package
+                response = "You currently have no tasks in your list.";
+            } else if (this.detail.equals("all")) {
+                taskList.deleteAllTasks();
+                response = DUKE_DELETE_ALL_TASKS;
+            } else {
+                throw new DukeIllegalIndexException(ERROR_ILLEGAL_INDEX);
+            }
+        }
+        storage.saveTasks(taskList);
+        return response;
     }
 
     /**

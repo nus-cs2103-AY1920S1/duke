@@ -10,19 +10,29 @@ import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
 
+import duke.guicomponent.DialogueBox;
+
 import javafx.application.Application;
 
 import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 import javafx.scene.text.Font;
 
 import javafx.stage.Stage;
+
+import java.lang.reflect.Array;
 
 /**
  * <h1>Duke</h1>
@@ -42,10 +52,12 @@ public class Duke extends Application {
     private Storage storage;
 
     private ScrollPane scrollPane;
-    private VBox dialogContainer;
+    private VBox dialogueContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/ryan.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/D.png"));
 
     /**
      * Initializes the necessary modules to run the Duke application.
@@ -85,8 +97,8 @@ public class Duke extends Application {
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+        dialogueContainer = new VBox();
+        scrollPane.setContent(dialogueContainer);
 
         // Set properties of scrollPane
         scrollPane.setPrefSize(398, 535);
@@ -94,9 +106,10 @@ public class Duke extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+        scrollPane.setPannable(true);
 
-        // Set size of dialogContainer based on scrollPane size
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        // Set size of dialogueContainer based on scrollPane size
+        dialogueContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         // Make a TextField to write commands
         userInput = new TextField();
@@ -106,6 +119,17 @@ public class Duke extends Application {
         // Make send Button
         sendButton = new Button("Send");
         sendButton.setPrefSize(70.0, 40.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        //Scroll down to the end every time dialogueContainer's height changes.
+        dialogueContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         // Make an AnchorPane add previously defined nodes
         AnchorPane mainLayout = new AnchorPane();
@@ -135,6 +159,55 @@ public class Duke extends Application {
 
         // Show stage
         stage.show();
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialogue container.
+     *
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogueLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogueContainer.getChildren().addAll(
+                new DialogueBox(userText, new ImageView(user)),
+                new DialogueBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        String[] command = input.split(" ", 2);
+        try {
+            Command c = Parser.parseToCommand(command[0], command[1]);
+            return c.getResponse(this.taskList, this.storage);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            try {
+                Command c = Parser.parseToCommand(command[0], "");
+                return c.getResponse(this.taskList, this.storage);
+            } catch (DukeException e2) {
+                return e2.getMessage();
+            }
+        } catch (DukeException e1) {
+            return e1.getMessage();
+        }
     }
     
 }

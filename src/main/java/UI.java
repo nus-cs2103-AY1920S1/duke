@@ -46,4 +46,9 @@ public class UI {
         System.out.println("Got it. I've added this task:");
     }
 
+    public static void find() {
+        printLine();
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
 }

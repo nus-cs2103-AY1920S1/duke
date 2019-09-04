@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import java.io.IOException;
 
@@ -155,6 +156,11 @@ public class Parser {
                     UI.listcount(count);
                     UI.printLineS();
                     storage.saveFile(tasklist.returnTasks());
+                } else if (ls[0].equals("find")) {
+                    ArrayList<Task> temp = tasklist.find(ls[1]);
+                    UI.find();
+                    tasklist.listfind(temp);
+                    UI.printLineS();
                 } else {
                     try {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -19,7 +19,7 @@ import duke.ui.Ui;
 public class Duke {
 
     protected boolean isExit = false;
-    private String filePath = "./data/duke.txt";
+    private String filePath = "../data/duke.txt";
 
     /**
      * This storage deals with loading tasks from the file and saving tasks in the file.

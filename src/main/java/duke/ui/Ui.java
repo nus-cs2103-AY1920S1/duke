@@ -81,7 +81,9 @@ public class Ui {
      * This method prints the exit message to the user.
      */
     public void printBye() {
+
         append("Bye. Hope to see you again soon!");
+        append("Press enter to exit the chat!");
     }
 
     /**

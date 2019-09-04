@@ -34,6 +34,8 @@ public class Parser {
             return new DoneCommand(command, commandDetails, INDENT);
         } else if(command.equals("delete")) {
             return new DeleteCommand(command, commandDetails, INDENT);
+        } else if (command.equals("find")) {
+            return new FindCommand(command, commandDetails, INDENT);
         } else {
             return new AddCommand(command, commandDetails, INDENT);
         }

@@ -49,6 +49,27 @@ public class TaskList {
         updateTodoString();
     }
 
+    public ArrayList<Task> findMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (Task task : list) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    public String findMatchingTasksString(String keyword) {
+        ArrayList<Task> matchingTasksList = findMatchingTasks(keyword);
+        int counter = 1;
+        listString = "" + INDENT + " ";
+        for (Task task : matchingTasksList) {
+            listString += counter + ". " + task + '\n' + INDENT + " ";
+            counter++;
+        }
+        return listString;
+    }
+
     public void updateTodoString() {
         listString = "" + INDENT + " ";
         for (int i = 0; i < list.size(); i++) {

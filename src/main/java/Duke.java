@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 /**
- * The Main class
+ * The Main class.
  */
 public class Duke {
 

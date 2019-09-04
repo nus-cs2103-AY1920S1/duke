@@ -1,7 +1,7 @@
 /**
  * Encapsulates a command from user input String "clear".
  */
-public class CommandClear extends Command{
+public class CommandClear extends Command {
 
     public CommandClear(String command) {
         super(command);

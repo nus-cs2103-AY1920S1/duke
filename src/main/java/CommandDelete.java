@@ -1,14 +1,14 @@
 /**
  * Encapsulates a command from user input String "delete".
  */
-public class CommandDelete extends Command{
+public class CommandDelete extends Command {
 
     public CommandDelete(String command) {
         super(command);
     }
 
     @Override
-    public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException{
+    public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
         try {
             int index = Integer.parseInt(command);
             if (index > sh.getNumOfTask()) {

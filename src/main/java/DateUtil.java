@@ -46,13 +46,11 @@ public class DateUtil {
             }
             date[3] = time.substring(0, 2); // set hh
             date[4] = time.substring(2); // set mm
-        }else {
-            // user enters date only
-            // do nothing
-        } return toLocalDateTime(date);
+        } else { }
+        return toLocalDateTime(date);
     }
 
-    private static LocalDateTime toLocalDateTime(String[] times) throws IllegalTimeFormatException{
+    private static LocalDateTime toLocalDateTime(String[] times) throws IllegalTimeFormatException {
         try {
             LocalDateTime current = LocalDateTime.now(); // default date is the current date
             int year = times[2].equals("00") ? current.getYear() : Integer.parseInt(times[2]);

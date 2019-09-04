@@ -28,7 +28,7 @@ public class Sheet {
      *
      * @param task Task to be added to the list.
      */
-    public void add(Task task){
+    public void add(Task task) {
         tasks.add(task);
         ui.showAdd(task.toString().trim());
         this.numOfTask++;
@@ -40,7 +40,7 @@ public class Sheet {
      *
      * @param index Serial index of the task in list.
      */
-    public void delete(int index){
+    public void delete(int index) {
         Task removed = tasks.remove(index - 1);
         ui.showRemove(removed.toString().trim());
         this.numOfTask--;
@@ -61,7 +61,7 @@ public class Sheet {
      *
      * @param index Serial index of the task in list.
      */
-    public void markAsDone(int index){
+    public void markAsDone(int index) {
         Task doneTask = tasks.get(index - 1).finish();
         tasks.set(index - 1, doneTask);
         ui.showDone(doneTask.toString().trim());

@@ -51,7 +51,7 @@ public class Storage {
      * @param lst Task list to be saved.
      * @throws IOException If errors occurs when accessing the file that contains the list.
      */
-    public void save(List<Task> lst) throws DukeIOException {
+    public void save(List<Task> lst) throws DukeIoException {
         try {
             this.tasks = new File(pathToFile);
             if (this.tasks.exists()) {
@@ -65,7 +65,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException("oops, something went wrong :(");
+            throw new DukeIoException("oops, something went wrong :(");
         }
     }
 }

@@ -8,7 +8,7 @@ public class CommandEvent extends Command {
     }
 
     @Override
-    public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException{
+    public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
         String[] commands = command.split("(/from)|(to)");
         if (this.command.isBlank() || command.indexOf("/") == 0) {
             throw new MissingDescriptionException(

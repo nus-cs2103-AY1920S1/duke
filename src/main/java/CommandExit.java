@@ -1,7 +1,7 @@
 /**
  * Encapsulates a command from user input String "bye".
  */
-public class CommandExit extends Command{
+public class CommandExit extends Command {
 
     public CommandExit(String cmd) {
         super(cmd);

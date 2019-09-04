@@ -1,7 +1,7 @@
 /**
  * Customised exceptions in the app.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     private String message;
 
@@ -11,8 +11,8 @@ public class DukeException extends Exception{
      * @param msg Message of the exception.
      */
     public DukeException(String msg) {
-    super(msg);
-    this.message = msg;
+        super(msg);
+        this.message = msg;
     }
 
     public String getMessege() {

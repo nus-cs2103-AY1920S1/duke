@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
  * The first LocalDateTime represents the date and time when the event starts.
  * The second LocalDateTime represents the date and time when the event ends.
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
 
@@ -54,6 +54,6 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + "[" + this.getStatusIcon() + "] " + this.description + " (from: " + DateUtil.printTime(startTime)
-                + " , to " + DateUtil.printTime(endTime)+ " )\n";
+                + " , to " + DateUtil.printTime(endTime) + " )\n";
     }
 }

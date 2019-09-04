@@ -9,8 +9,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.print(Ui.frontSpace + message);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return Ui.frontSpace + message;
     }
 
     @Override

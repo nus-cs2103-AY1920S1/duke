@@ -30,8 +30,9 @@ public class Duke {
 
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String str = c.execute(tasks, ui, storage);
                 isExit = c.isExit();
+                System.out.print(str);
             } catch (Exception e) {
                 ui.showError(e.getMessage());
             } finally {

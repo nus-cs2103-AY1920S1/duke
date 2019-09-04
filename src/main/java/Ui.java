@@ -46,6 +46,10 @@ public class Ui {
         System.out.println(greet);
     }
 
+    public void printLine(Object output) {
+        System.out.println(output);
+    }
+
     /**
      * showLoadingError().
      */

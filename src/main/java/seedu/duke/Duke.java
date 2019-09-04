@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import duke.DukeException.DukeException;
 import duke.command.Command;
 import duke.command.Parser;
@@ -61,9 +63,9 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks.getList(), ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 ui.showError("The command is invalid!");
             } finally {
                 ui.printLine();

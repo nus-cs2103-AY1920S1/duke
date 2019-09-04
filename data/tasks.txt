@@ -1,9 +1,5 @@
-[T][✘] hello
-[T][✘] hi
-[T][✘] no
-[T][✘] hi
-[T][✘] hello
-[T][✘] homework
-[D][✘] eat (by: 200)
-[E][✓] eat (at: hall)
-[E][✓] eat eat (at: hall hall)
+[T][?] ] hi
+[T][?] ] hello
+[T][?] ] homework
+[T][?] iP
+[T][?] hello

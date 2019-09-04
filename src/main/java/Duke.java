@@ -1,194 +1,123 @@
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 
 public class Duke {
-    public static ArrayList<Task> list = new ArrayList<Task>();
-    public static String filePath = "/Users/michelleyong/Desktop/CS2103T/duke/data/duke.txt";
+    private Storage storage;
+    private TaskList taskList; //.getList() returns list of task
+    private Ui ui;
 
-    private static void writeToFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private static void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAppend);
-        fw.close();
-    }
-
-    public static void copyFileToList() throws FileNotFoundException, ParseException {
-        File file = new File(filePath);
-        Scanner fs = new Scanner(file);
-        while (fs.hasNext()) {
-            String line = fs.nextLine();
-            String[] taskArr = line.split(" \\| ");
-            String type = taskArr[0];
-            if (type.equals("T")) {
-                Todo todo = new Todo(taskArr[2]);
-                if (taskArr[1].equals("1")) {
-                    todo.markAsDone();
-                }
-                list.add(todo);
-            } else if (type.equals("D")) {
-                Deadline deadline = new Deadline(taskArr[2], convertToDate(taskArr[3]));
-                if (taskArr[1].equals("1")) {
-                    deadline.markAsDone();
-                }
-                list.add(deadline);
-            } else if (type.equals("E")) {
-                Event event = new Event(taskArr[2], convertToDate(taskArr[3]));
-                if (taskArr[1].equals("1")) {
-                    event.markAsDone();
-                }
-                list.add(event);
-            }
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            taskList = new TaskList();
+        } catch (FileNotFoundException f) {
+            System.out.println(f);
+        } catch (ParseException p) {
+            System.out.println(p);
         }
-        fs.close();
-    }
-
-    public static void printDetails(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
-    }
-
-    public static String convertTaskToFileFormat(Task task) {
-        StringBuffer textToAdd = new StringBuffer();
-        String type = task.getType();
-        if (type.equals("T")) {
-            textToAdd.append("T | ");
-        } else if (type.equals("D")) {
-            textToAdd.append("D | ");
-        } else if (type.equals("E")) {
-            textToAdd.append("E | ");
-        }
-        textToAdd.append(task.getStatusNum());
-        textToAdd.append(" | ");
-        textToAdd.append(task.getDescription());
-        if (type.equals("D") || type.equals("E")) {
-            textToAdd.append(" | ");
-            textToAdd.append(task.getDate());
-        }
-        textToAdd.append("\n");
-        return textToAdd.toString();
-    }
-
-    public static void appendTaskToFile(Task task) throws IOException {
-        String textToAppend = convertTaskToFileFormat(task);
-        appendToFile(textToAppend);
-    }
-
-    public static void updateTaskInFile() throws IOException {
-        StringBuffer textToAdd = new StringBuffer();
-        for (Task task : list) {
-            textToAdd.append(convertTaskToFileFormat(task));
-        }
-        writeToFile(textToAdd.toString());
-    }
-
-    public static Date convertToDate(String str) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hhmm");
-        Date date = sdf.parse(str);
-        return date;
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-        copyFileToList();
+        new Duke("/Users/michelleyong/Desktop/CS2103T/duke/data/duke.txt").run();
+    }
 
+    public void run() throws IOException, ParseException {
+        ui.printHello();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        Parser parser = new Parser(sc);
 
         while (sc.hasNext()) {
-            String text = sc.nextLine();
-            String[] s = text.split(" ");
-            if (s[0].equals("todo")) {
+            String text = parser.nextCommand();
+            String[] commandArr = parser.breakDownCommand(text);
+            String command = parser.getCommand(commandArr);
+            if (command.equals("todo")) {
                 try {
                     if (text.length() <= 4) {
                         throw new DukeException();
                     }
-                    String task = text.substring(5);
-                    Todo todo = new Todo(task);
-                    list.add(todo);
-                    printDetails(todo);
-                    appendTaskToFile(todo);
-                } catch (DukeException error) {
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    Todo todo = parser.getTodo(text);
+                    taskList.addTask(todo);
+                    ui.printTaskAdded(todo, taskList.getSize());
+                    storage.appendTaskToFile(todo);
+                } catch (DukeException e) {
+                    ui.printTodoError();
                 }
-            } else if (s[0].equals("deadline")) {
+            } else if (command.equals("deadline")) {
                 try {
                     if (text.length() <= 8) {
                         throw new DukeException();
                     }
-                    String[] t = text.split("/");
-                    Date date = convertToDate(t[1].substring(3));
-                    Deadline deadline = new Deadline(t[0].substring(9, t[0].length() - 1), date);
-                    list.add(deadline);
-                    printDetails(deadline);
-                    appendTaskToFile(deadline);
-                } catch (DukeException error) {
-                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                    String[] descArr = parser.breakDownDescription(text);
+                    Date date = parser.getDate(descArr, storage);
+                    Deadline deadline = new Deadline(parser.getDeadlineDesc(descArr), date);
+                    taskList.addTask(deadline);
+                    ui.printTaskAdded(deadline, taskList.getSize());
+                    storage.appendTaskToFile(deadline);
+                } catch (DukeException e) {
+                    ui.printDeadlineError();
                 }
-            } else if (s[0].equals("event")) {
+            } else if (command.equals("event")) {
                 try {
                     if (text.length() <= 5) {
                         throw new DukeException();
-                    } String[] t = text.split("/");
-                    Date date = convertToDate(t[1].substring(3));
-                    Event event = new Event(t[0].substring(6, t[0].length() - 1), date);
-                    list.add(event);
-                    printDetails(event);
-                    appendTaskToFile(event);
-                } catch (DukeException error) {
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    String[] descArr = parser.breakDownDescription(text);
+                    Date date = parser.getDate(descArr, storage);
+                    Event event = new Event(parser.getEventDesc(descArr), date);
+                    taskList.addTask(event);
+                    ui.printTaskAdded(event, taskList.getSize());
+                    storage.appendTaskToFile(event);
+                } catch (DukeException e) {
+                    ui.printEventError();
                 }
-            } else if (s[0].equals("list")) {
-                int length = list.size();
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i <= length; i++) {
-                    Task task = list.get(i - 1);
-                    System.out.println(i + ". " + task);
+            } else if (command.equals("list")) {
+                taskList.printList();
+            } else if (command.equals("done")) {
+                try {
+                    if (text.length() <= 4) {
+                        throw new DukeException();
+                    }
+                    int num = parser.getTaskNum(commandArr);
+                    if (num >= taskList.getSize()) {
+                        throw new DukeException();
+                    }
+                    Task task = taskList.markTaskAsDone(num);
+                    ui.printTaskDone(task);
+                    storage.updateTaskInFile(taskList.getList());
+                } catch (DukeException e) {
+                    ui.printNoSuchTaskError();
                 }
-            } else if (s[0].equals("done")) {
-                int num = Integer.parseInt(s[1]);
-                Task task = list.get(num - 1);
-                task.markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("  " + task);
-                updateTaskInFile();
-            } else if (s[0].equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+            } else if (command.equals("bye")) {
+                ui.printBye();
                 break;
-            } else if (s[0].equals("delete")) {
+            } else if (command.equals("delete")) {
                 try {
                     if (text.length() <= 6) {
                         throw new DukeException();
                     }
-                    int num = Integer.parseInt(s[1]);
-                    if (num > list.size()) {
+                    int num = parser.getTaskNum(commandArr);
+                    if (num >= taskList.getSize()) {
                         throw new DukeException();
                     }
-                    Task removed = list.remove(num - 1);
-                    System.out.println("Noted. I've removed this task: ");
-                    System.out.println("  " + removed);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    updateTaskInFile();
-                } catch (DukeException error) {
-                    System.out.println("OOPS!!! There is no such task.");
+                    Task removed = taskList.removeTask(num);
+                    ui.printTaskRemoved(removed, taskList.getSize());
+                    storage.updateTaskInFile(taskList.getList());
+                } catch (DukeException e) {
+                    ui.printNoSuchTaskError();
                 }
             } else {
                 try {
                     throw new DukeException();
-                } catch (DukeException error) {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } catch (DukeException e) {
+                    ui.printUnknownCommandError();
                 }
             }
         }

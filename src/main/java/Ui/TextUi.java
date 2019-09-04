@@ -1,6 +1,8 @@
 package Ui;
 
 import tasklist.Task;
+
+import java.security.PublicKey;
 import java.util.LinkedList;
 
 public class TextUi {
@@ -78,6 +80,12 @@ public class TextUi {
     public void printWrongDate(){
         System.out.println(DIVIDER + "\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't understand that date :-(\n" +
+                DIVIDER);
+    }
+
+    public void printNeedDate(){
+        System.out.println(DIVIDER + "\n" +
+                "     ☹ OOPS!!! I'm sorry, but I need a date :-(\n" +
                 DIVIDER);
     }
 

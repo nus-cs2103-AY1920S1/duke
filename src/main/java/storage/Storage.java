@@ -23,11 +23,11 @@ public class Storage {
 
     public void storeData(LinkedList<Task> toStore) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
-        String fullList = "";
+        StringBuilder fullList = new StringBuilder();
         for (Task task : toStore) {
-            fullList = fullList + task.encodeForStorage() + "\n";
+            fullList.append(task.encodeForStorage()).append("\n");
         }
-        fileWriter.write(fullList);
+        fileWriter.write(fullList.toString());
         fileWriter.close();
     }
 

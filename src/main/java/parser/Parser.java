@@ -19,8 +19,9 @@ import java.util.regex.Pattern;
 import static java.time.LocalTime.parse;
 
 public class Parser {
+    String command;
     private boolean isDone;
-    private String description;
+    String description;
     private LocalDateTime date;
     private boolean isSafe;
     private TextUi ui;
@@ -36,10 +37,8 @@ public class Parser {
                 + "\\s*(?<description>([\\w\\s\\d]+)?)"
                 + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
         Matcher matcher = command_format.matcher(fullCommand);
-        if (!matcher.find()) {
-            ui.printErrorMsg2();
-            isSafe = false;
-        } else {
+        if (matcher.find()) {
+            command = matcher.group("commandWord");
             isDone = matcher.group("completionStatus").equals("[1]");
             description = matcher.group("description").trim();
             if (!matcher.group("date").isEmpty()) {
@@ -47,17 +46,17 @@ public class Parser {
                     // Parsing the date
                     DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
                     date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
-                }catch (DateTimeParseException e){
+                } catch (DateTimeParseException e) {
                     ui.printWrongDate();
                     isSafe = false;
                 }
             }
             if (isSafe) {
-                switch (matcher.group("commandWord")) {
+                switch (command) {
                 case "todo":
                 case "deadline":
                 case "event":
-                    scheduler.addTask(matcher.group("commandWord"), description, isDone, date);
+                    scheduler.addTask(command, description, isDone, date);
                     if (!isLoading) {
                         scheduler.printnewtask();
                     }
@@ -76,12 +75,20 @@ public class Parser {
                     isSafe = false;
                 }
             }
+        } else {
+            ui.printErrorMsg2();
+            isSafe = false;
         }
+
     }
 
 
     public boolean isSafe() {
         return isSafe;
+    }
+
+    public String command() {
+        return command;
     }
 }
 

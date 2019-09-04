@@ -5,8 +5,14 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
+
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testImplementation ('org.junit.jupiter:junit-jupiter:5.5.0')
+    testRuntime('org.junit.jupiter:junit-jupiter:5.5.0')
 }
 checkstyle {
     toolVersion = '8.23'
@@ -25,9 +31,7 @@ test {
 group 'seedu.duke'
 version '0.1.0'
 
-repositories {
-    mavenCentral()
-}
+
 
 application {
     // Change this to your main class.

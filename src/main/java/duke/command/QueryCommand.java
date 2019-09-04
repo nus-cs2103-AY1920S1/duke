@@ -2,15 +2,13 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.Ui;
 import duke.exception.DukeException;
-import duke.support.PrintFunction;
 import duke.task.Task;
 
 import java.util.ListIterator;
 
 /**
- * Encapsulates a command which query the tasks list of Duke bot.
+ * Encapsulates a command which query the tasks list of duke.Duke bot.
  */
 public class QueryCommand extends Command {
     private QueryType queryType;
@@ -36,34 +34,38 @@ public class QueryCommand extends Command {
     /**
      * Executes the query command accordingly.
      *
-     * @param tasksList the tasks list of Duke.
-     * @param ui the ui of Duke.
-     * @param database the database of Duke.
+     * @param tasksList the tasks list of duke.Duke.
+     * @param database the database of duke.Duke.
      * @throws DukeException if the user's input is incorrect.
      */
-    public void execute(TaskList tasksList, Ui ui, DukeDatabase database) throws DukeException {
-        initialise(tasksList, ui, database);
+    public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {
+        initialise(database, tasksList);
 
+        String response = "";
         if (QueryType.LIST_ALL.equals(queryType)) {
-            list();
+            response = list();
         } else if (QueryType.FIND_BY_KEYWORD.equals(queryType)) {
-            listTasksByKeyword();
+            response = listTasksByKeyword();
         } else {
             throw new DukeException("Internal logic bug occurs!");
         }
+
+        return response;
     }
 
-    /**
-     * Lists all the tasks in the taskList.
-     */
-    private void list() {
-        ui.echo(getPrintListFunction(taskList, "Here are the tasks in your list:"));
+    private String list() {
+        StringBuilder builder = new StringBuilder(250);
+
+        builder.append("Here are the tasks in your list:\n");
+        appendListRepresentation(taskList, builder);
+
+        return builder.toString();
     }
 
     /**
      * Lists a list of tasks which contains the keyword given by the user.
      */
-    private void listTasksByKeyword() {
+    private String listTasksByKeyword() {
         // Extract keyword from user's input.
         String keyword = input.substring(4).trim();
 
@@ -73,7 +75,7 @@ public class QueryCommand extends Command {
         int size = taskList.size();
 
         // Find the tasks that have the keyword given by user
-        // and add them to the result list.
+        // and append their string representation to the message to be printed.
         for (int i = 0; i < size; i++) {
             Task currTask = iterator.next();
             if (currTask.toString().contains(keyword)) {
@@ -81,26 +83,22 @@ public class QueryCommand extends Command {
             }
         }
 
-        // Print the result list.
-        ui.echo(getPrintListFunction(resultList,"Here are the matching tasks in your list:"));
+        // Generate the message to be printed
+        StringBuilder builder = new StringBuilder(250);
+        builder.append("Here are the matching tasks in your list:\n");
+        appendListRepresentation(resultList, builder);
+
+        return builder.toString();
     }
 
-    /**
-     * Returns a PrintFunction used to print the given message followed by the tasks list to the console.
-     * @param list the list of tasks to be printed.
-     * @param message the message to be printed.
-     * @return the PrintFunction object used to the do the printing as described in the method description.
-     */
-    private PrintFunction getPrintListFunction(TaskList list, String message) {
-        return () -> {
-            System.out.print(Ui.INDENTATION_LVL1 + message + "\n");
-            ListIterator<Task> iterator = list.listIterator();
+    private void appendListRepresentation(TaskList list, StringBuilder builder) {
+        ListIterator<Task> iterator = list.listIterator();
+        int size = list.size();
 
-            for (int i = 0; i < list.size(); i++) {
-                String taskDetails = iterator.next().toString();
-                System.out.printf(ui.indentAndSplit(String.format("%d.%s", i + 1, taskDetails),
-                        Ui.INDENTATION_LVL1));
-            }
-        };
+        for (int i = 1; i <= size; i++) {
+            builder.append(i + ". ");
+            builder.append(iterator.next().toString());
+            builder.append("\n");
+        }
     }
 }

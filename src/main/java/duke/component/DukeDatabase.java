@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Encapsulates the database of Duke bot.
+ * Encapsulates the database of duke.Duke bot.
  */
 public class DukeDatabase {
     private String databaseDirectory; // Path of the the database file.
-    private File tasksFile; // File object which represents the database file of Duke bot
+    private File tasksFile; // File object which represents the database file of duke.Duke bot
 
     // Cannot delete this constructor to ensure that it overwrites the default public constructor
     private DukeDatabase() {

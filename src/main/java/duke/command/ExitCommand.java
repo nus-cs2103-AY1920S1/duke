@@ -2,11 +2,11 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.Ui;
 import duke.exception.DukeException;
+import javafx.application.Platform;
 
 /**
- * Encapsulates a command which terminates Duke bot.
+ * Encapsulates a command which terminates duke.Duke bot.
  */
 public class ExitCommand extends Command {
     /**
@@ -19,21 +19,15 @@ public class ExitCommand extends Command {
     /**
      * Executes the exit command accordingly.
      *
-     * @param tasksList the tasks list of Duke.
-     * @param ui the ui of Duke.
-     * @param database the database of Duke.
+     * @param tasksList the tasks list of duke.Duke.
+     * @param database the database of duke.Duke.
      * @throws DukeException if the user's input is incorrect.
      */
-    public void execute(TaskList tasksList, Ui ui, DukeDatabase database) throws DukeException {
-        initialise(tasksList, ui, database);
-        exit();
-    }
+    public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {
+        initialise(database, tasksList);
+        Platform.exit();
+        database.update(taskList); // Update the database before program completely terminates
 
-    /**
-     * Clean up the essential components of Duke bot and terminates the bot.
-     */
-    public void exit() {
-        ui.echo("Bye. Hope to see you again!");
-        database.update(taskList);
+        return "";
     }
 }

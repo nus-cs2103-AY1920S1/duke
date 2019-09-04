@@ -2,12 +2,11 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.task.Event;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Encapsulates a command that adds a task into the tasks list of Duke.
+ * Encapsulates a command that adds a task into the tasks list of duke.Duke.
  */
 public class AddCommand extends Command {
     private AddType addType;
@@ -42,45 +41,53 @@ public class AddCommand extends Command {
     /**
      * Executes the adding command accordingly.
      *
-     * @param tasksList the tasks list of Duke.
-     * @param ui the ui of Duke.
-     * @param database the database of Duke.
+     * @param tasksList the tasks list of duke.Duke.
+     * @param database the database of duke.Duke.
      * @throws DukeException if the user's input is incorrect.
      */
-    public void execute(TaskList tasksList, Ui ui, DukeDatabase database) throws DukeException {
-        initialise(tasksList, ui, database);
+    public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {
+        initialise(database, tasksList);
 
+        Task task;
         if (AddType.TODO.equals(addType)) {
-            addToDo();
+            task = addToDo();
         } else if (AddType.DEADLINE.equals(addType)) {
-            addDeadline();
+            task = addDeadline();
         } else if (AddType.EVENT.equals(addType)) {
-            addEvent();
+            task = addEvent();
         } else {
             throw new DukeException("Internal logic bug occurred!");
         }
+
+        String response = String.format("Got it I've added this task:\n%s\nNow you have %s in the list.\n",
+                task.toString(), getTaskPhrase(taskList.size()));
+
+        return response;
     }
 
     /**
      * Adds to do entry to the taskList.
      */
-    private void addToDo() throws DukeException {
+    private ToDo addToDo() throws DukeException {
         String topic = input.substring(4).trim();
 
         if ("".equals(topic)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
-        addTask(new ToDo(topic));
+        ToDo toDo = new ToDo(topic);
+        taskList.addTask(toDo);
+
+        return toDo;
     }
 
     /**
      * Adds deadline entry to the taskList.
      */
-    private void addDeadline() throws DukeException {
+    private Deadline addDeadline() throws DukeException {
         String[] details = input.substring(8).trim().split("/by");
 
-        if (details.length == 1 || "".equals(details[0].trim()) || "".equals(details[1].trim())) {
+        if (details.length <= 1 || "".equals(details[0].trim()) || "".equals(details[1].trim())) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
 
@@ -89,19 +96,22 @@ public class AddCommand extends Command {
             String deadlineUserInput = details[1].stripLeading();
             String deadline = formatDateAndTime(deadlineUserInput);
 
-            addTask(new Deadline(topic, deadline));
+            Deadline deadlineObject = new Deadline(topic, deadline);
+            taskList.addTask(deadlineObject);
+
+            return deadlineObject;
         } catch (ParseException e) {
-            ui.echo(DukeException.PREFIX + " The format of date and time is wrong!");
+            throw new DukeException("The format of date and time is wrong!");
         }
     }
 
     /**
      * Adds event entry to the taskList.
      */
-    private void addEvent() throws DukeException {
+    private Event addEvent() throws DukeException {
         String[] details = input.substring(5).trim().split("/at");
 
-        if (details.length == 1 || "".equals(details[0].trim()) || "".equals(details[1].trim())) {
+        if (details.length <= 1 || "".equals(details[0].trim()) || "".equals(details[1].trim())) {
             throw new DukeException("The description and date of an event cannot be empty.");
         }
 
@@ -110,23 +120,13 @@ public class AddCommand extends Command {
             String dateUserInput = details[1].stripLeading();
             String date = formatDateAndTime(dateUserInput);
 
-            addTask(new Event(topic, date));
-        } catch (ParseException e) {
-            ui.echo(DukeException.PREFIX + " The format of date and time is wrong!");
-        }
-    }
+            Event event = new Event(topic, date);
+            taskList.addTask(event);
 
-    /**
-     * Adds Task entries(to do, deadline & event) to the taskList.
-     */
-    private void addTask(Task task) {
-        taskList.addTask(task);
-        ui.echo(() -> {
-            System.out.printf("%sGot it. I've added this task:\n", Ui.INDENTATION_LVL1);
-            System.out.printf(ui.indentAndSplit(task.toString(), Ui.INDENTATION_LVL2));
-            System.out.printf(String.format("%sNow you have %s in the list.\n", Ui.INDENTATION_LVL1,
-                    ui.getTaskPhrase(taskList.size())));
-        });
+            return event;
+        } catch (ParseException e) {
+            throw new DukeException("The format of date and time is wrong!");
+        }
     }
 
     /**

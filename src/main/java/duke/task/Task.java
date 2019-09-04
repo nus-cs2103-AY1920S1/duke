@@ -10,7 +10,7 @@ public abstract class Task {
     private boolean isDone;
     private String status; // a unicode symbol representing the isDone status of the task (either a tick or a cross).
     protected String details; // The details of this task, varies according to the actual type of the task.
-    protected String detailsForDatabase; // data summary used to write the task into the database of Duke.
+    protected String detailsForDatabase; // data summary used to write the task into the database of duke.Duke.
 
     /**
      * Constructs a task object.

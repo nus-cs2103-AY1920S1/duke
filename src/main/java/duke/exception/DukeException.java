@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Encapsulates exceptions that are specific to Duke chat bot. Most of these exceptions are
+ * Encapsulates exceptions that are specific to duke.Duke chat bot. Most of these exceptions are
  * user's input error.
  */
 public class DukeException extends Exception {

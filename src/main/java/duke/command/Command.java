@@ -2,15 +2,13 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.Ui;
 import duke.exception.DukeException;
 
 /**
- * Encapsulates a command to be executed by Duke bot.
+ * Encapsulates a command to be executed by duke.Duke bot.
  */
 public abstract class Command {
     protected TaskList taskList;
-    protected Ui ui;
     protected DukeDatabase database;
     protected String input;
 
@@ -26,25 +24,22 @@ public abstract class Command {
     /**
      * Initialises the dependencies of the Command object.
      *
-     * @param t the taskList of Duke.
-     * @param u the ui of Duke.
-     * @param d the database of Duke.
+     * @param t the taskList of duke.Duke.
+     * @param d the database of duke.Duke.
      */
-    protected void initialise(TaskList t, Ui u, DukeDatabase d) {
-        taskList = t;
-        ui = u;
+    protected void initialise(DukeDatabase d, TaskList t) {
         database = d;
+        taskList = t;
     }
 
     /**
      * Executes the command that this object encapsulates.
      *
-     * @param t the taskList of Duke.
-     * @param u the ui of Duke.
-     * @param d the database of Duke.
+     * @param t the taskList of duke.Duke.
+     * @param d the database of duke.Duke.
      * @throws DukeException depending on the actual Command type of the object.
      */
-    public abstract void execute(TaskList t, Ui u, DukeDatabase d) throws DukeException;
+    public abstract String execute(DukeDatabase d, TaskList t) throws DukeException;
 
     /**
      * Checks if the command is an ExitCommand.
@@ -53,5 +48,13 @@ public abstract class Command {
      */
     public boolean isExit() {
         return this instanceof ExitCommand;
+    }
+
+    /**
+     * Returns the phrase "N word" or "N words" (singular or plural).
+     * N is the the number of tasks in the taskList.
+     */
+    protected String getTaskPhrase(int size) {
+        return size > 1 ? size + " tasks" : size + " task";
     }
 }

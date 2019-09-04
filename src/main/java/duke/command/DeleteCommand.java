@@ -2,12 +2,11 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
- * Encapsulates a command that deletes a task from the task list of Duke.
+ * Encapsulates a command that deletes a task from the task list of duke.Duke.
  */
 public class DeleteCommand extends Command {
     private DeleteType deleteType;
@@ -33,36 +32,38 @@ public class DeleteCommand extends Command {
     /**
      * Executes the delete command accordingly.
      *
-     * @param tasksList the tasks list of Duke.
-     * @param ui the ui of Duke.
-     * @param database the database of Duke.
+     * @param tasksList the tasks list of duke.Duke.
+     * @param database the database of duke.Duke.
      * @throws DukeException if the user's input is incorrect.
      */
-    public void execute(TaskList tasksList, Ui ui, DukeDatabase database) throws DukeException {
-        initialise(tasksList, ui, database);
+    public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {
+        initialise(database, tasksList);
 
+        Task task = null;
         if (DeleteType.INDEX.equals(deleteType)) {
-            deleteTask();
+            task = deleteTask();
         }
+
+        String response = "";
+        if (task != null) {
+            response = String.format("Noted. I've removed this task:\n%s\nNow you have %s in the list.\n",
+                    task.toString(), getTaskPhrase(taskList.size()));
+        }
+
+        return response;
     }
 
     /**
      * Deletes a task from the taskList.
      */
-    private void deleteTask() throws DukeException {
+    private Task deleteTask() throws DukeException {
         try {
             int index = Integer.parseInt(input.substring(6).trim());
-
             Task task = taskList.removeTask(index - 1);
 
-            ui.echo(() -> {
-                System.out.printf("%sNoted. I've removed this task:\n", Ui.INDENTATION_LVL1);
-                System.out.printf(ui.indentAndSplit(task.toString(), Ui.INDENTATION_LVL2)); // task details
-                System.out.printf("%sNow you have %s in the list.\n", Ui.INDENTATION_LVL1,
-                        ui.getTaskPhrase(taskList.size()));
-            });
+            return task;
         } catch (NumberFormatException e) {
-            ui.echo(String.format("%s There can only be an integer after the word \"delete\"", DukeException.PREFIX));
+            throw new DukeException("There can only be an integer after the word \"delete\"!");
         }
     }
 }

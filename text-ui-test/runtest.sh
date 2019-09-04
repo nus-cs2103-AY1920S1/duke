@@ -27,7 +27,7 @@ fi
 
 # Test 1
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin duke.Duke < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED.TXT
@@ -47,7 +47,7 @@ then
 fi
 
 # run test 2
-java -classpath ../bin Duke < input2.txt > ACTUAL2.TXT
+java -classpath ../bin duke.Duke < input2.txt > ACTUAL2.TXT
 
 diff ACTUAL2.TXT EXPECTED2.TXT
 if [ $? -eq 0 ]

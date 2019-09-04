@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 public class TaskManager {
     private ArrayList<Task> todoList;
@@ -58,7 +57,7 @@ public class TaskManager {
                 this.todoList.add(newDeadline);
                 return newDeadline;
             } catch (IndexOutOfBoundsException e) { //same as event time
-                throw new DukeException("Error: no deadline provided");
+                throw new DukeException("No deadline provided");
             }
         }
     }

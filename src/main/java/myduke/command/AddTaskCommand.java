@@ -29,7 +29,7 @@ public class AddTaskCommand extends Command {
     public void execute(TaskList taskList, Ui ui, StorageManager storage) throws DukeException {
         Task newTask = createTask();
         taskList.add(newTask);
-        ui.printResponse("Got it. I've added this task:", newTask, taskList.size());
+        ui.printResponse("Got it. I've added this task:", taskList.size(), newTask);
     }
 
     /**

@@ -13,6 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Project Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
  * storage attribute is a Storage object, which helps read and write data to the text file

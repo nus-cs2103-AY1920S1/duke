@@ -16,6 +16,10 @@ public class Storage {
     private File fileData;
     private Scanner fileScanner;
 
+    /**
+     * The constructor method for the Storage class.
+     * @param filePath The path to the file for storing the tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
@@ -37,6 +41,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This function loads the data stored in the storage file and puts it into an ArrayList of Tasks.
+     * @return ArrayList of Tasks
+     * @throws DukeException When the line in the storage file is incorrectly formatted.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -48,6 +57,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * This function saves the tasks into the storage file.
+     * @param tasks The TaskList with all the tasks to store in the file.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.fileData, false);

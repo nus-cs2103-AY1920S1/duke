@@ -14,6 +14,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor function.
+     * @param filePath The path to the file for tasks storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The main function to execute the program.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         this.ui.printHello();
@@ -48,10 +55,19 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * The main entry point to the program.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("../data/tasks.txt").run();
     }
 
+    /**
+     * This function does basic handling of the user's input and pass on the arguments to Parser.
+     * @param next The next input by the user.
+     * @throws DukeException When a program-specific exception has occurred.
+     */
     public void handleInput(String next) throws DukeException {
         if (next.equals("list")) {
             System.out.print(Parser.handleList(this.tasks));

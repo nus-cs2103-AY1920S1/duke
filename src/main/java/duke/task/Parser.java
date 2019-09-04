@@ -11,14 +11,30 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 public class Parser {
+    /**
+     * This function parses the date given by the user in the format "dd/Mm/yyyy HHmm".
+     * @param input The input given by the user.
+     * @return Date
+     */
     public static Date getDateFromUser(String input) {
         return parseDate(input, "dd/MM/yyyy HHmm");
     }
 
+    /**
+     * This function parses the date given in the storage file in the format "EEE MMM dd HH:mm:ss Z yyyy".
+     * @param input The date from the storage file.
+     * @return Date
+     */
     public static Date getDateFromFile(String input) {
         return parseDate(input, "EEE MMM dd HH:mm:ss Z yyyy");
     }
 
+    /**
+     * This function parses the date given in the input according to the pattern given.
+     * @param input The input date to parse.
+     * @param pattern The pattern to use to parse the input date.
+     * @return Date
+     */
     public static Date parseDate(String input, String pattern) {
         Date date = new Date();
 
@@ -32,6 +48,12 @@ public class Parser {
         return date;
     }
 
+    /**
+     * This function parses a line in the storage file and returns a Task object.
+     * @param input The line in the storage file to parse.
+     * @return Task
+     * @throws DukeException When the storage file is incorrectly formatted.
+     */
     public static Task getTaskFromLine(String input) throws DukeException {
         char type = input.charAt(0);
         String[] parts = input.split("\\Q | \\E");
@@ -55,6 +77,11 @@ public class Parser {
         return output;
     }
 
+    /**
+     * This function handles the "list" command by the user and returns all tasks in a human-readable format.
+     * @param tasks The list of tasks in the form of a TaskList.
+     * @return String
+     */
     public static String handleList(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.getTasks().size(); i++) {
@@ -66,6 +93,12 @@ public class Parser {
         return sb.toString();
     }
 
+    /**
+     * This function handles the "done" command by the user and marks a particular task as done.
+     * @param tasks The list of tasks in the form of a TaskList.
+     * @param input The input given by the user and should contain the task ID to mark as done.
+     * @return Task
+     */
     public static Task handleDone(TaskList tasks, String input) {
         String[] parts = input.split(" ");
         int num = Integer.parseInt(parts[1]);
@@ -74,13 +107,25 @@ public class Parser {
         return task;
     }
 
+    /**
+     * This function handles the "delete" command by the user and deletes a particular task from the TaskList.
+     * @param tasks The list of tasks in the form of a TaskList.
+     * @param input The input given by the user and should contain the task ID to delete.
+     * @return Task
+     */
     public static Task handleDelete(TaskList tasks, String input) {
         String[] parts = input.split(" ");
         int num = Integer.parseInt(parts[1]);
-        Task removed = tasks.remove(num - 1);
-        return removed;
+        return tasks.remove(num - 1);
     }
 
+    /**
+     * This function handles all other additions of new task objects.
+     * @param tasks The list of tasks in the form of a TaskList.
+     * @param input The input given by the user and should contain the other details needed for a particular Task.
+     * @return Task
+     * @throws DukeException When the user's input is incorrectly formatted or have missing elements.
+     */
     public static Task handleItem(TaskList tasks, String input) throws DukeException {
         Task task;
 

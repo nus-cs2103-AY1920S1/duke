@@ -20,12 +20,22 @@ public class Ui {
         System.out.println(output);
     }
 
+    /**
+     * This function prints out the confirmation message after a successful deletion.
+     * @param task The Task deleted.
+     * @param counter The number of tasks after deletion.
+     */
     public void printDelete(Task task, int counter) {
         String output = "Noted. I've removed this task:\n  " + task;
         output += "\nNow you have " + counter + " tasks in the list.";
         System.out.println(output);
     }
 
+    /**
+     * This function prints out the confirmation message after a successful addition.
+     * @param task The Task added.
+     * @param counter The number of tasks after addition.
+     */
     public void printAdd(Task task, int counter) {
         String output = "Got it. I've added this task:\n  " + task;
         output += "\nNow you have " + counter + " tasks in the list.";

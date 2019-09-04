@@ -4,17 +4,31 @@ import task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList for storing all current tasks
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList
+     * @param tasks arraylist of tasks to be stored in this TaskList
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Get the arraylist of tasks stored in this TaskList
+     * @return arraylist of tasks in this TaskList
+     */
     public ArrayList<Task> getTasksArrayList() {
         return this.tasks;
     }
 
+    /**
+     * Prints all tasks currently stored in this TaskList through ui
+     */
     public void list() {
         if(this.tasks.size() == 0) {
             Ui.showMessage("No tasks!");
@@ -23,11 +37,19 @@ public class TaskList {
         Ui.printList(this.tasks);
     }
 
+    /**
+     * Adds a task into this TaskList
+     * @param task the task to be added in
+     */
     public void add(Task task) {
         this.tasks.add(task);
         Ui.printAdd(task, this.tasks.size());
     }
 
+    /**
+     * Marks a task within this TaskList as done
+     * @param task_num int of task number that is to be marked as done (1-indexed)
+     */
     public void done(int task_num) {
         if(task_num > this.tasks.size()) {
             Ui.showError("No task at that number! (Marking as done unsuccessful)");
@@ -38,6 +60,10 @@ public class TaskList {
         Ui.printDone(curr_task);
     }
 
+    /**
+     * Deletes a task from within the TaskList
+     * @param task_num int of task number that is to be deleted (1-indexed)
+     */
     public void delete(int task_num) {
         if(task_num > this.tasks.size()) {
             Ui.showError("No task at that number! (Deletion unsuccessful)");

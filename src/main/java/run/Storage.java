@@ -14,16 +14,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage system that writes to and from file in hard disk based on state on TaskList
+ */
 public class Storage {
-    String filepath;
-    File state;
-    StorageParser sp = new StorageParser();
+    protected String filepath;
+    protected File state;
+    protected StorageParser sp = new StorageParser();
 
+    /**
+     * Constructor for Storage
+     * @param filepath filepath to state file
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         init();
     }
 
+    /**
+     * Initialises by checking if file is present in specified path and creates file if none present
+     */
     public void init() {
         state = new File(filepath);
         try {
@@ -37,6 +47,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates tasks from state file and stores them in an arraylist for later conversion into TaskList object
+     * @return An arraylist of tasks based on tasks created and loaded from state file
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner sc = null;
@@ -64,6 +78,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Rewrites state file based on current tasks in TaskList
+     * @param tasks all current tasks (the entire TaskList itself)
+     * @throws IOException if exception when accessing file
+     * @throws UpdateStateException if exception when writing contents to file
+     */
     public void updateState(TaskList tasks) throws IOException, UpdateStateException {
         FileWriter fw = null;
         try {
@@ -91,6 +111,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts todo object into formatted String representation for storage on state file
+     * @param todo todo object to be written to state file
+     * @return String of todo formatted for sending for writing to state file
+     */
     public String fileUpdateToDo(ToDo todo) {
         StringBuilder SB =  new StringBuilder();
         SB.append("T//");
@@ -100,6 +125,11 @@ public class Storage {
         return SB.toString();
     }
 
+    /**
+     * Converts deadline object into formatted String representation for storage on state file
+     * @param deadline deadline object to be written to state file
+     * @return String of deadline formatted for sending for writing to state file
+     */
     public String fileUpdateDeadline(Deadline deadline) {
         StringBuilder SB =  new StringBuilder();
         SB.append("D//");
@@ -111,6 +141,11 @@ public class Storage {
         return SB.toString();
     }
 
+    /**
+     * Converts event object into formatted String representation for storage on state file
+     * @param event event object to be written to state file
+     * @return String of event formatted for sending for writing to state file
+     */
     public String fileUpdateEvent(Event event) {
         StringBuilder SB =  new StringBuilder();
         SB.append("E//");

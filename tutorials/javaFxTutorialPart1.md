@@ -100,10 +100,14 @@ Congratulations! You have created your first GUI application!
 1. `Node`s can be interacted with like Plain Old Java Objects (POJO).
    1. What properties of a `Label` can you change programmatically?
    1. Try changing the `Label` to have a font of Arial at size 50.
+        helloWorld.setFont(new Font("Arial", 50));
 
 1. You’ve learnt that a `Stage` can be thought of as a window. 
    1. Can you have more than one `Stage` an application?
    1. Try creating another stage and showing it! What happens?
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(scene);
+        secondaryStage.show();
 
 --------------------------------------------------------------------------------
 **Authors:**

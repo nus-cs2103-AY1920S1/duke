@@ -230,6 +230,8 @@ You have successfully implemented a fully functional GUI for Duke!
 
 1. While the GUI looks similar to the mockup, there are still parts that need to be refined. Try your hand at some of these tasks:
    * Add padding between each DialogBox
+        in handleUserInput():
+        dialogContainer.setSpacing(10);
    * Add padding between each ImageView and its Label
    * Clip the ImageView into a circle
    * Add background color to each dialog box

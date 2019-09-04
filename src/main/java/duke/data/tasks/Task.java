@@ -63,7 +63,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String statusIcon = isDone ? "\u2713" : "\u2718";
+        String statusIcon = isDone ? "Done" : "Not Done";
         return String.format("[%s] %s", statusIcon, description);
     }
 

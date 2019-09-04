@@ -39,7 +39,7 @@ public class Parser  {
                 if (argumentArray[0].equals("done")) {
                     try {
                         if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a done command cannot be empty.");
+                            throw new DukeException("OOPS!!! The description of a done command cannot be empty.");
                         }
                         int index = Integer.valueOf(argumentArray[1]) - 1;
                         storeTaskList.doneTask(index);
@@ -54,7 +54,7 @@ public class Parser  {
                     try {
                         //catch empty desc error
                         if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         }
                         //form back string
                         String toDoTaskString = "";
@@ -75,7 +75,7 @@ public class Parser  {
                     try {
                         //catch empty desc error
                         if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                         }
 
 
@@ -113,7 +113,7 @@ public class Parser  {
                     try {
                         //catch empty desc error
                         if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                         }
                         //form back string , description stops at /at
                         //date time starts from /at
@@ -149,7 +149,7 @@ public class Parser  {
                 }else if (argumentArray[0].equals("delete")) {
                     try{
                         if (argumentArray.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
+                            throw new DukeException("OOPS!!! The description for delete command cannot be empty.");
                         }
                         int index = Integer.valueOf(argumentArray[1]) - 1;
                         storeTaskList.deleteTask(index);
@@ -171,7 +171,7 @@ public class Parser  {
                 } else {
                     try {
                         //handles error for not recognized command
-                        throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     } catch (DukeException e) {
                         System.out.println(e);
                     } finally {

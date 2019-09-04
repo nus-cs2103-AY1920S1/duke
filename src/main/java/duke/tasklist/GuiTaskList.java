@@ -21,9 +21,9 @@ public class GuiTaskList {
      * @param storage
      */
     public GuiTaskList(ArrayList<Task> listOfTasks, Storage storage) {
+        assert listOfTasks != null : "list of tasks read should not be null";
         this.store = listOfTasks;
         this.storage = storage;
-
     }
 
     public GuiTaskList(ArrayList<Task> listOfTasks) {

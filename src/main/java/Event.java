@@ -8,11 +8,19 @@ public class Event extends Task {
         this.isDone = false;
     }
 
-    public String toString() {
+    public String toFile() {
         if(isDone) {
-            return "[E}[✓] " + name + " (at: " + time + ")";
+            return "E-1-" + name + "-" + time;
         } else {
-            return "[E}[✗] " + name + " (at: " + time + ")";
+            return "E-0-" + name + "-" + time;
+        }
+    }
+
+    public String toString() {
+        if (isDone) {
+            return "[E][✓] " + name + " (at: " + time + ")";
+        } else {
+            return "[E][✗] " + name + " (at: " + time + ")";
         }
     }
 }

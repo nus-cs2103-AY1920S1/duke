@@ -10,7 +10,7 @@ group 'duke'
 version '0.1.0'
 
 application {
-    mainClassName = "myduke.Duke"
+    mainClassName = "myduke.ApplicationLauncher"
 }
 
 repositories {
@@ -48,7 +48,7 @@ shadowJar {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'myduke.Duke'
+        attributes 'Main-Class': 'myduke.ApplicationLauncher'
     }
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }

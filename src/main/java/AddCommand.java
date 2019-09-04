@@ -46,4 +46,8 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public String toString() {
+        return task.toString();
+    }
 }

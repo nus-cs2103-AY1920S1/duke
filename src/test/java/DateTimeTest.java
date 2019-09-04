@@ -1,4 +1,6 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.task.DateTime;
 import org.junit.jupiter.api.Test;
 
 class DateTimeTest {

@@ -7,9 +7,7 @@ import duke.exception.DukeUnknownInputException;
 
 import java.util.Arrays;
 
-import static duke.task.TaskType.TODO;
-import static duke.task.TaskType.DEADLINE;
-import static duke.task.TaskType.EVENT;
+import static duke.task.TaskType.*;
 
 /**
  * Deals with making sense of commands.

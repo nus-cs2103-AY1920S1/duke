@@ -16,8 +16,13 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * The main entry point into the gui.
+     *
+     * @param primaryStage The stage to add our parent node.
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         try {
             // The FXMLLoader maps a control with fx:id defined in FXML to a variable with same name in controller.
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

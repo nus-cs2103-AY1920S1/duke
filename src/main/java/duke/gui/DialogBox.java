@@ -14,6 +14,9 @@ import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 
+/**
+ * Represents a Horizontal box with a label and Image.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -51,10 +54,24 @@ public class DialogBox extends HBox {
         return this;
     }
 
+    /**
+     * Creates a new right-justified dialog box.
+     *
+     * @param text the text to place in the label.
+     * @param img the image to place in the box.
+     * @return the new dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a new left-justified dialog box.
+     *
+     * @param text the text to place in the label.
+     * @param img the image to place in the box.
+     * @return the new dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         return new DialogBox(text, img).flip();
     }

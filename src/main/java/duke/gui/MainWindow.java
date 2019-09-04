@@ -1,10 +1,9 @@
 package duke.gui;
 
-import duke.CommandResponse;
+import duke.command.CommandResponse;
 import duke.Duke;
-// the @FXML notation marks a private or protected member, allowing FXML to access it despite the modifier.
-import duke.Ui;
 import duke.exception.DukeException;
+// the @FXML notation marks a private or protected member, allowing FXML to access it despite the modifier.
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -14,9 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import static duke.Ui.DIVIDER;
-import static duke.Ui.PREFIX;
 
 /**
  * A UI Controller class. For UI-related code.
@@ -37,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Bind the dialog container to the button of the scroll pane, and greet the user.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -51,8 +50,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing the dialog container.
-     * Clears the user input after processing.
+     * Listens to the input field and button and carries out the main business logic of Duke.
      */
     @FXML
     private void handleUserInput() {

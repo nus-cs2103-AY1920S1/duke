@@ -1,13 +1,10 @@
-package duke;
+package duke.gui;
 
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -22,22 +19,22 @@ public class Ui {
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
-    private Scanner in;
-    private PrintStream out;
-
-    public Ui() {
-        this(System.in, System.out);
-    }
-
-    private Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
-    }
-
+    /**
+     * Convenience method for formatting un-indented input.
+     *
+     * @param input the text to format.
+     * @return the formatted text string.
+     */
     public static String addPrefixNewline(String input) {
         return PREFIX + input + '\n';
     }
 
+    /**
+     * Convenience method for adding dividers above and below the text.
+     *
+     * @param input the text to format.
+     * @return the formatted text string.
+     */
     public static String addDividers(String input) {
         return addPrefixNewline(DIVIDER) + input + addPrefixNewline(DIVIDER);
     }
@@ -50,13 +47,6 @@ public class Ui {
     }
 
     /**
-     * Prints out a divider.
-     */
-    public String showDivider() {
-        return showToUser(DIVIDER);
-    }
-
-    /**
      * Prints out a specified error message.
      *
      * @param e the error to print.
@@ -64,15 +54,6 @@ public class Ui {
     public String showError(DukeException e) {
         return showToUser(e.getMessage());
     }
-
-//    /**
-//     * Reads a full command from the next line of input.
-//     *
-//     * @return the full command read.
-//     */
-//    public String readCommand() {
-//        return in.nextLine();
-//    }
 
     /**
      * Prints out the message indicating a task has been added.

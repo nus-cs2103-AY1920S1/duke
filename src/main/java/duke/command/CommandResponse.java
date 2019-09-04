@@ -1,4 +1,4 @@
-package duke;
+package duke.command;
 
 /**
  * Helper class to store the String response and boolean flag indicating program exit.

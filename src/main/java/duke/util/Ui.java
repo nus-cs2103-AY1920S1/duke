@@ -8,7 +8,16 @@ import java.util.Scanner;
  */
 public class Ui {
     // Class attributes
-    private static final String INDENT = "      ";
+    public static final String INDENT = "      ";
+    public static final String HELLO = " ___        _        \n"
+            + "|  _ \\ _  _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/\\__,_|_|\\_\\___|\n"
+            + "Hello! I'm Duke. What can I do for you?";
+    public static final String GOODBYE  = "Bye. Hope to see you again soon!";
+    public static final String LOADING_ERROR = "I couldn't find a saved task list...\n"
+            + "Let me start up a brand new list!";
 
     // Object attributes
     private Scanner sc;
@@ -123,10 +132,8 @@ public class Ui {
      * own enclosing lines.
      */
     public void greetHello() {
-        String hello = "Hello! I'm Duke\n"
-                + "What can I do for you?";
         this.showLine();
-        this.displayMessage(hello);
+        this.displayMessage(Ui.HELLO);
         this.showLine();
     }
 
@@ -134,10 +141,7 @@ public class Ui {
      * Prints out a formatted goodbye greeting on the screen.
      */
     public void greetGoodbye() {
-        String goodbye = "Bye. Hope to see you again soon!";
-        //this.showLine();
-        this.displaySingleLine(goodbye);
-        //this.showLine();
+        this.displaySingleLine(GOODBYE);
     }
 
     /**
@@ -145,8 +149,7 @@ public class Ui {
      */
     public void showLoadingError() {
         this.showLine();
-        this.displayMessage("I couldn't find a saved task list...\n"
-                + "Let me start up a brand new list!");
+        this.displayMessage(LOADING_ERROR);
         this.showLine();
     }
 

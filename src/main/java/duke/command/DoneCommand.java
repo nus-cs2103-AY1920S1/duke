@@ -30,10 +30,8 @@ public class DoneCommand extends Command {
     public String execute() throws DukeException {
         Task task = this.taskList.at(taskId);
         task.markAsDone();
-        //this.ui.displaySingleLine("Nice! I've marked this task as done:");
-        //this.ui.displayMessage(task.toString(), 2);
         this.storage.saveToDisk(this.taskList);
-        return "Nice! I've marked this task as done:" +
+        return "Nice! I've marked this task as done:\n" +
                 ui.indentMessage(task.toString());
     }
 }

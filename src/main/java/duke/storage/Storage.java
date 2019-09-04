@@ -1,9 +1,16 @@
+package duke.storage;
+
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.exception.DukeException;
 
 public class Storage {
     private BufferedReader br;
@@ -74,17 +81,19 @@ public class Storage {
             } else {
                 status = "pending";
             }
-            if (task.getClass().getName().equals("Todo")) {
+            if (task.getType().equals("todo")) {
                 output = "todo " + status + " " + task.getDescription();
                 fw.write(output + "\n");
-            } else if (task.getClass().getName().equals("Event")){
+            } else if (task.getType().equals("event")) {
                 output = "event " + status + " " + task.getDescription();
                 fw.write(output + "\n");
                 fw.write(task.getExtraInfo() + "\n");
-            } else {
+            } else if (task.getType().equals("deadline")) {
                 output = "deadline " + status + " " + task.getDescription();
                 fw.write(output + "\n");
                 fw.write(task.getExtraInfo() + "\n");
+            } else {
+                throw new DukeException("     Invalid file type!");
             }
         }
         fw.close();

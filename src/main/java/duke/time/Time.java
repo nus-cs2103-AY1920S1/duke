@@ -1,3 +1,7 @@
+package duke.time;
+
+import duke.exception.DukeException;
+
 public class Time {
     protected int time;
     protected String outputTime;

@@ -1,4 +1,7 @@
+package duke.task;
+
 public class Task {
+    protected String type = "";
     protected String description;
     protected boolean isDone;
     protected String extraInfo;
@@ -7,6 +10,10 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.extraInfo = "";
+    }
+
+    public String getType() {
+        return this.type;
     }
 
     public boolean getStatus() {

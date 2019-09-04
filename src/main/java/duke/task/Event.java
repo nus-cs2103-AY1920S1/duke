@@ -1,7 +1,10 @@
+package duke.task;
+
 public class Event extends Task {
     public Event(String description, String extraInfo) {
         super(description);
         this.extraInfo = extraInfo;
+        this.type = "event";
     }
 
     @Override

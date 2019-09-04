@@ -1,6 +1,16 @@
-public class AddEventCommand extends Command {
+package duke.command;
 
-    public AddEventCommand(String message) {
+import duke.tasklist.TaskList;
+import duke.storage.Storage;
+import duke.ui.UI;
+import duke.exception.DukeException;
+import duke.time.Date;
+import duke.time.Time;
+import duke.task.Deadline;
+
+public class AddDeadlineCommand extends Command {
+
+    public AddDeadlineCommand(String message) {
         super(message);
     }
 
@@ -13,7 +23,7 @@ public class AddEventCommand extends Command {
             if (i + 1 >= inputMessage.length) {
                 throw new DukeException("     Please provide more information");
             }
-            if (inputMessage[i + 1].equals("/at")) {
+            if (inputMessage[i + 1].equals("/by")) {
                 mainInput += inputMessage[i];
                 marker = i + 1;
                 break;
@@ -55,10 +65,10 @@ public class AddEventCommand extends Command {
         if (extraInfo.equals("")) {
             throw new DukeException("     Please provide date and time of the deadline");
         }
-        if (!inputMessage[marker].equals("/at")) {
-            throw new DukeException("     Wrong syntax, should be using /at for deadline");
+        if (!inputMessage[marker].equals("/by")) {
+            throw new DukeException("     Wrong syntax, should be using /by for deadline");
         }
-        listOfTasks.addEvent(new Event(input, extraInfo));
+        listOfTasks.addDeadline(new Deadline(input, extraInfo));
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
         ui.printTaskAdd(listOfTasks.get(listOfTasks.size() - 1));

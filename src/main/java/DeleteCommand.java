@@ -1,6 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-
 public class DeleteCommand extends Command {
     private int listPointer;
 

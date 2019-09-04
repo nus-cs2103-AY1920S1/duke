@@ -1,9 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Duke {
     private static String INDENT = "    ";
     private static String FILENAME = "../../../data/duke.txt";
@@ -14,11 +8,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui(INDENT);
-        try {
-            storage = new Storage(filePath);
-        } catch(FileNotFoundException | UnsupportedEncodingException err) {
-            ui.showFileMissingError();
-        }
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch(Exception err) {

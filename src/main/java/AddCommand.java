@@ -14,12 +14,16 @@ public class AddCommand extends Command {
                 if (!(commandDetails.equals(" ") || commandDetails.equals(""))) {
                     if (command.equals("todo")) {
                         tasks.addTask(new Task(commandDetails, "todo", false));
-                        ui.printResponse(befTaskAddMessage + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT + aftTaskAddMessage);
+                        ui.printResponse(befTaskAddMessage
+                                + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
+                                + aftTaskAddMessage);
                         storage.updateTodoFile(tasks.getListString());
                     } else if (command.equals("deadline")) {
                         try {
-                            tasks.addDateTask(commandDetails.split(" /by ")[0], commandDetails.split(" /by ")[1], "deadline");
-                            ui.printResponse(befTaskAddMessage + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
+                            tasks.addDateTask(commandDetails.split(" /by ")[0],
+                                    commandDetails.split(" /by ")[1], "deadline");
+                            ui.printResponse(befTaskAddMessage
+                                    + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
                                     + aftTaskAddMessage);
                             storage.updateTodoFile(tasks.getListString());
                         } catch (Exception ex) {
@@ -29,8 +33,10 @@ public class AddCommand extends Command {
                         }
                     } else if (command.equals("event")) {
                         try {
-                            tasks.addDateTask(commandDetails.split(" /at ")[0], commandDetails.split(" /at ")[1], "event");
-                            ui.printResponse(befTaskAddMessage + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
+                            tasks.addDateTask(commandDetails.split(" /at ")[0],
+                                    commandDetails.split(" /at ")[1], "event");
+                            ui.printResponse(befTaskAddMessage
+                                    + tasks.getList().get(tasks.getList().size() - 1) + "\n " + INDENT
                                     + aftTaskAddMessage);
                             storage.updateTodoFile(tasks.getListString());
                         } catch (Exception ex) {

@@ -1,12 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
-
-abstract class Command {
-    /*
-    1. create command with parser
-    2. abstract execute(tasks, ui, storage)
-    3. boolean isExit()
-     */
+public abstract class Command {
     protected String command;
     protected String commandDetails;
     protected String INDENT;

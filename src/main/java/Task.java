@@ -23,7 +23,6 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]");
-//        return (isDone ? "TASKDONE" : "TASKNOTDONE");
     }
 
     public String getDescription() {
@@ -31,11 +30,11 @@ public class Task {
     }
 
     public String getTaskType() {
-        if(taskType.equals("todo")) {
+        if (taskType.equals("todo")) {
             return "[T]";
-        } else if(taskType.equals("deadline")) {
+        } else if (taskType.equals("deadline")) {
             return "[D]";
-        } else if(taskType.equals("event")) {
+        } else if (taskType.equals("event")) {
             return "[E]";
         } else {
             return "";
@@ -53,9 +52,9 @@ public class Task {
     @Override
     public String toString() {
         String stringToPrint = getTaskType() + " " + getStatusIcon() + " " + getDescription();
-        if(taskType.equals("deadline")) {
+        if (taskType.equals("deadline")) {
             return stringToPrint + " (by: " + getDateTime() + ")";
-        } else if(taskType.equals("event")) {
+        } else if (taskType.equals("event")) {
             return stringToPrint + " (at: " + getDateTime() + ")";
         } else {
             return stringToPrint;

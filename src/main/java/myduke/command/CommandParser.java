@@ -13,7 +13,9 @@ public class CommandParser {
      * Creates the relevant command based on the user's query.
      *
      * @param query The query of the user.
+     *
      * @return The appropriate Command.
+     *
      * @throws DukeException if no commands matches the query.
      */
     public static Command create(String query) throws DukeException {
@@ -39,12 +41,15 @@ public class CommandParser {
         case "done":
             return new MarkCompletedTaskCommand(arguments);
 
+        case "rm":
+        case "del":
         case "delete":
             return new DeleteCommand(arguments);
 
         case "find":
             return new FilterTasksCommand(arguments);
 
+        case "ls":
         case "list":
             if (parts.length != 1) {
                 throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
@@ -52,15 +57,22 @@ public class CommandParser {
             return new ListCommand();
 
         case "bye":
+        case "shutdown":
             if (parts.length != 1) {
                 throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
             }
             return new TerminateSessionCommand();
 
+        case "reload":
+        case "reinitialise":
+            if (parts.length != 1) {
+                throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
+            }
+            return new InitialiseDukeCommand();
+
         default:
             throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
-
 
     }
 }

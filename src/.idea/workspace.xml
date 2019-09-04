@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d84f19b-e524-4f44-8369-8ca541921302" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main/java/Parser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/java/Storage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/java/Tasklist.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/java/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/java/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Duke.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Parser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Storage.class" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Storage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Tasklist.class" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Tasklist.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/Tasklist.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/Tasklist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/UI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/java/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/java/data/duke.txt" beforeDir="false" afterPath="$PROJECT_DIR$/main/java/data/duke.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +30,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main/java/Duke.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+                <state relative-caret-position="306">
+                  <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -52,8 +55,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main/java/Storage.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="307">
-                  <caret line="40" column="53" lean-forward="true" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+                <state relative-caret-position="190">
+                  <caret line="34" column="68" lean-forward="true" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#762#763#0" expanded="true" />
@@ -70,8 +73,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main/java/Parser.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+                <state relative-caret-position="376">
+                  <caret line="50" column="42" lean-forward="true" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -101,8 +104,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main/java/Tasklist.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+                <state relative-caret-position="255">
+                  <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
                   <folding>
                     <element signature="e#368#369#0" expanded="true" />
                     <element signature="e#394#395#0" expanded="true" />
@@ -112,8 +115,12 @@
                     <element signature="e#521#522#0" expanded="true" />
                     <element signature="e#297#298#0" expanded="true" />
                     <element signature="e#325#326#0" expanded="true" />
+                    <element signature="e#609#610#0" expanded="true" />
+                    <element signature="e#640#641#0" expanded="true" />
                     <element signature="e#612#613#0" expanded="true" />
                     <element signature="e#633#634#0" expanded="true" />
+                    <element signature="e#674#675#0" expanded="true" />
+                    <element signature="e#699#700#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -123,7 +130,7 @@
             <entry file="file://$PROJECT_DIR$/main/java/UI.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="450">
-                  <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+                  <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
                 </state>
               </provider>
             </entry>
@@ -149,11 +156,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main/java/Parser.java" />
-        <option value="$PROJECT_DIR$/main/java/UI.java" />
         <option value="$PROJECT_DIR$/main/java/Duke.java" />
-        <option value="$PROJECT_DIR$/main/java/Tasklist.java" />
+        <option value="$PROJECT_DIR$/main/java/UI.java" />
         <option value="$PROJECT_DIR$/main/java/Storage.java" />
+        <option value="$PROJECT_DIR$/main/java/Tasklist.java" />
+        <option value="$PROJECT_DIR$/main/java/Parser.java" />
       </list>
     </option>
   </component>
@@ -203,7 +210,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567586062729" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567590830951" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
@@ -349,8 +356,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/Duke.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="306">
+          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -360,37 +367,30 @@
     <entry file="file://$PROJECT_DIR$/main/java/UI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/Storage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-879">
-          <caret line="18" column="16" lean-forward="true" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        <state relative-caret-position="190">
+          <caret line="34" column="68" lean-forward="true" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#1579#1580#0" expanded="true" />
-            <element signature="e#4781#4782#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/java/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="true" />
+            <element signature="e#1453#1454#0" expanded="true" />
+            <element signature="e#1493#1494#0" expanded="true" />
+            <element signature="e#4617#4618#0" expanded="true" />
+            <element signature="e#4661#4662#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/java/Tasklist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        <state relative-caret-position="255">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding>
             <element signature="e#368#369#0" expanded="true" />
             <element signature="e#394#395#0" expanded="true" />
@@ -400,8 +400,22 @@
             <element signature="e#521#522#0" expanded="true" />
             <element signature="e#297#298#0" expanded="true" />
             <element signature="e#325#326#0" expanded="true" />
+            <element signature="e#609#610#0" expanded="true" />
+            <element signature="e#640#641#0" expanded="true" />
             <element signature="e#612#613#0" expanded="true" />
             <element signature="e#633#634#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/java/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="50" column="42" lean-forward="true" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

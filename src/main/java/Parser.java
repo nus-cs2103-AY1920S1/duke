@@ -10,52 +10,47 @@ import java.time.LocalTime;
 public class Parser {
 
     static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Task> tasks;
     private static UI ui;
     private static Storage storage;
     private static int count;
+    public Tasklist tasklist;
 
-    public Parser(ArrayList<Task> tasks,UI ui, Storage storage) {
-        this.tasks = tasks;
+    public Parser(Tasklist tasklist, UI ui, Storage storage) {
+        this.tasklist = tasklist;
         this.ui = ui;
         this.storage = storage;
 
 
-        if (tasks.isEmpty()) {
+        if (tasklist.returnTasks().isEmpty()) {
             count = 0;
         } else {
-            count = tasks.size();
+            count = tasklist.size();
         }
     }
 
-    public static void parserRead() throws IOException {
+    public void parserRead() throws IOException {
         while (sc.hasNext()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
-                UI.printLine();
                 UI.bye();
-                UI.printLineS();
                 break;
             } else if (command.equals("list")) {
                 UI.printLine();
                 UI.listOut();
-                for (int i = 0; i < tasks.size(); i ++) {
-                    int num = i + 1;
-                    System.out.println(num + ". " + tasks.get(i));
-                }
+                tasklist.listout();
                 UI.printLineS();
             } else {
                 String[] ls = command.split(" ");
                 if (ls[0].equals("done")) {
                     String num = command.substring(5, 6);
                     int res = Integer.parseInt(num);
-                    Task t = tasks.get(res - 1);
+                    Task t = tasklist.get(res - 1);
                     t.markAsDone();
                     UI.printLine();
                     UI.done();
                     System.out.println(t);
                     UI.printLineS();
-                    storage.saveFile(tasks);
+                    storage.saveFile(tasklist.returnTasks());
                 } else if (ls[0].equals("todo")) {
                     String[] td = command.split(" ");
                     try {
@@ -70,14 +65,14 @@ public class Parser {
                         } else {
 
                         }
-                        tasks.add(new Todo(com));
+                        tasklist.addTodo(new Todo(com));
                         UI.printLine();
                         UI.taskadded();
-                        System.out.println(tasks.get(count));
+                        System.out.println(tasklist.returnTasks().get(count));
                         count++;
                         UI.listcount(count);
                         UI.printLineS();
-                        storage.saveFile(tasks);
+                        storage.saveFile(tasklist.returnTasks());
                     } catch (DukeException e){
                         System.out.println(e);
                     }
@@ -100,14 +95,14 @@ public class Parser {
                             }
                         }
                     }
-                    tasks.add(new Event(com, getDateTime(eventdate)));
+                    tasklist.addEvent(new Event(com, getDateTime(eventdate)));
                     UI.printLine();
                     UI.taskadded();
-                    System.out.println(tasks.get(count));
+                    System.out.println(tasklist.returnTasks().get(count));
                     count++;
                     UI.listcount(count);
                     UI.printLineS();
-                    storage.saveFile(tasks);
+                    storage.saveFile(tasklist.returnTasks());
                 } else if (ls[0].equals("deadline")) {
                     String[] eve = command.split(" ");
                     String com = "";
@@ -127,25 +122,25 @@ public class Parser {
                             }
                         }
                     }
-                    tasks.add(new Deadline(com, getDateTime(deadline)));
+                    tasklist.addDeadline(new Deadline(com, getDateTime(deadline)));
                     UI.printLine();
                     UI.taskadded();
-                    System.out.println(tasks.get(count));
+                    System.out.println(tasklist.returnTasks().get(count));
                     count++;
                     UI.listcount(count);
                     UI.printLineS();
-                    storage.saveFile(tasks);
+                    storage.saveFile(tasklist.returnTasks());
                 } else if (ls[0].equals("delete")) {
                     String dnumber = ls[1];
                     int dnum = Integer.parseInt(dnumber);
                     UI.printLine();
                     System.out.println("Noted. I've removed this task:");
-                    System.out.println(tasks.get(dnum-1));
-                    tasks.remove(dnum-1);
+                    System.out.println(tasklist.returnTasks().get(dnum-1));
+                    tasklist.delete(dnum-1);
                     count--;
                     UI.listcount(count);
                     UI.printLineS();
-                    storage.saveFile(tasks);
+                    storage.saveFile(tasklist.returnTasks());
                 } else {
                     try {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -29,7 +29,22 @@ public class Tasklist {
         return tasks;
     }
 
+    public Task get(int i) {
+        return tasks.get(i);
+    }
+
     public int size() {
         return tasks.size();
+    }
+
+    public void delete(int num) {
+        tasks.remove(num);
+    }
+
+    public void listout() {
+        for (int i = 0; i < tasks.size(); i ++) {
+            int num = i + 1;
+            System.out.println(num + ". " + tasks.get(i));
+        }
     }
 }

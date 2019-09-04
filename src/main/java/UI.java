@@ -25,7 +25,9 @@ public class UI {
     }
 
     public static void bye() {
+        printLine();
         System.out.println("Bye. Hope to see you again soon!");
+        printLineS();
     }
 
     public static void listOut() {

@@ -28,8 +28,8 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> getTasks() {
-        return tasklist.returnTasks();
+    public Tasklist getTasks() {
+        return tasklist;
     }
 
     public void saveFile(ArrayList<Task> tasks) throws IOException {

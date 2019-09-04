@@ -1,6 +1,6 @@
 1. [T][✓] do fwoc
 2. [D][✓] fwoc (by: 6th aug)
 3. [T][✓] jeanne
-4. [E][✓] fwoc (at: 6aug 6pm)
-5. [D][✘] fwoc (by: 2nd of December 2019, 6.00PM)
-6. [T][✓] krbff
+4. [D][✘] fwoc (by: 2nd of December 2019, 6.00PM)
+5. [T][✓] krbff
+6. [T][✓] nothing

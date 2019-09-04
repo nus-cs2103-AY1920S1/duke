@@ -21,32 +21,37 @@ public class Duke {
 
     /**
      * Constructor for Duke that instantiates the Ui and Storage classes.
-     *
-     * @param filePath Path to .txt file for Storage of tasks.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
+        loadTasksFromStorage();
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().runCli();
+    }
+
+    /**
+     * Returns the response from Duke based on user's input.
+     *
+     * @param input Input from user.
+     * @return Output string from Duke.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.executeGui(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.getErrorMsg(e);
+        }
     }
 
     /**
      * Runs and starts the Duke chatbot program.
      */
-    public void run() {
-        try {
-            tasks = storage.getTasks();
-        } catch (FileNotFoundException e) {
-            tasks = new TaskList();
-        } catch (DukeException e) {
-            ui.printError(e);
-            tasks = new TaskList();
-        }
-
-        ui.printGreeting();
+    public void runCli() {
+        ui.printGreetingMsg();
 
         boolean isExit = false;
         while (!isExit) {
@@ -54,12 +59,37 @@ public class Duke {
                 String input = ui.readInput();
                 Command c = Parser.parse(input);
                 isExit = c.isExit();
-                c.execute(tasks, ui, storage);
+                c.executeCli(tasks, ui, storage);
             } catch (DukeException e) {
-                ui.printError(e);
+                ui.printErrorMsg(e);
             }
         }
 
-        ui.printExit();
+        ui.printExitMsg();
+    }
+
+    /**
+     * Loads tasks from storage and assign it to TaskList.
+     * If the file is not found or the file cannot be read correctly,
+     * a empty TaskList is assigned to task.
+     */
+    private void loadTasksFromStorage() {
+        try {
+            tasks = storage.getTasks();
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        } catch (DukeException e) {
+            ui.printErrorMsg(e);
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Returns the Ui instance associated with Duke.
+     *
+     * @return Ui instance associated with Duke.
+     */
+    public Ui getUi() {
+        return ui;
     }
 }

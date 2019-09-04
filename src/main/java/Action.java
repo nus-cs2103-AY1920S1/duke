@@ -1,3 +1,4 @@
+import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,6 +91,53 @@ public class Action {
             System.out.println("     Please enter your date in this format: dd/MM/yyyy hhmm");
             System.out.println("     Eg: 2/12/2019 1800");
             System.out.println("    ____________________________________________________________\n");
+        }
+        saveList(list);
+    }
+
+    public static void saveList(ArrayList<Task> list) {
+        File file = new File("/Users/sihao/Desktop/NUS AY19:20 Sem 1/CS2103/Duke/Data/Duke.txt");
+        try {
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Task t : list) {
+                bw.write(t.taskSavedTextFormat() + "\n");
+            }
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadTaskList(ArrayList<Task> list) {
+        File file = new File("/Users/sihao/Desktop/NUS AY19:20 Sem 1/CS2103/Duke/Data/Duke.txt");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String taskString;
+            while ((taskString = br.readLine()) != null) {
+                String[] taskStringArray = taskString.split("\\|");
+                if (taskStringArray[0].trim().equals("T")) {
+                    Task task = new ToDo(taskStringArray[2].trim());
+                    if (taskStringArray[1].trim().equals("1")) {
+                        task.isDone = true;
+                    }
+                    list.add(task);
+                } else if (taskStringArray[0].trim().equals("D")) {
+                    Task task = new Deadline(taskStringArray[2].trim(), taskStringArray[3].trim());
+                    if (taskStringArray[1].trim().equals("1")) {
+                        task.isDone = true;
+                    }
+                    list.add(task);
+                } else {
+                    Task task = new Event(taskStringArray[2].trim(), taskStringArray[3].trim());
+                    if (taskStringArray[1].trim().equals("1")) {
+                        task.isDone = true;
+                    }
+                    list.add(task);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

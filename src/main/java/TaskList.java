@@ -1,5 +1,3 @@
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -8,19 +6,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> listItems;
-    private PrintStream ps;
     private Storage storage;
     private Ui ui;
 
-    protected TaskList(Storage storage) {
-        this.ui = new Ui();
-        this.ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-        try {
-            this.storage = storage;
-            this.listItems = storage.load();
-        } catch (DukeException e) {
-            ui.printException(e);
-        }
+    TaskList(Storage storage, Ui ui) throws DukeException {
+        this.ui = ui;
+        this.storage = storage;
+        this.listItems = storage.load();
     }
 
     protected ArrayList<Task> getListItems() {

@@ -1,3 +1,7 @@
+/**
+ * Takes in user input and processes it to check whether it is valid.
+ * If valid, it will perform the specified command.
+ */
 public class Parser {
 
     private String[] validTaskTypes;
@@ -8,10 +12,10 @@ public class Parser {
      * The constructor of the Parser object. This mainly processes the input of the user.
      * @param taskList The task list of the program.
      */
-    public Parser(TaskList taskList) {
+    public Parser(TaskList taskList, Ui ui) {
         this.validTaskTypes = new String[] {"deadline", "event", "todo"};
         this.taskList = taskList;
-        this.ui = new Ui();
+        this.ui = ui;
     }
 
     /**
@@ -22,7 +26,7 @@ public class Parser {
         try {
             String[] commandArray = command.split(" ");
             if (command.equals("bye")) {
-                ui.printBye();
+                ui.byeMessage();
             } else if (command.equals("list")) {
                 ui.printList(taskList.getListItems());
             } else if (commandArray[0].equals("find")) {

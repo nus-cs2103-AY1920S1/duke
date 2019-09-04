@@ -80,7 +80,7 @@ public class Storage {
      */
     protected void save(ArrayList<Task> taskList) {
         try {
-            Storage.WriteTextToFile(this.filepath, taskList);
+                Storage.WriteTextToFile(this.filepath, taskList);
         } catch (IOException e) {
             System.err.println("Something went wrong!");
         }

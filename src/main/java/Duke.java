@@ -8,6 +8,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Instantiate a Duke object when a directory parameter is passed
@@ -30,42 +31,26 @@ public class Duke {
      * Run the application Duke.
      */
     private void run() {
+        parser = new Parser(tasks, ui);
         ui.showWelcome();
-        try {
-            while(true) {
-                String command = ui.enterCommand();
-                if (command.contains("todo") || command.contains("deadline") || command.contains("event")) {
-                        tasks.addTask(command);
-                        ui.getAddedMessage(tasks.getTaskList());
-                } else if (command.contains("delete")) {
-                    String deletedTask = tasks.deleteTask(command); // retrieve the deleted task.
-                    ui.getDeletedMessage(tasks.getTaskList(), deletedTask);
-                } else if (command.contains("done")) {
-                    String taskDoneStr = tasks.doneTask(command);  // retrieve the task that is done.
-                    ui.getDoneMessage(taskDoneStr);
-                } else if (command.contains("list")) {
-                    ui.showList(tasks.getTaskList());
-                } else if (command.contains("bye")) {
-                    storage.save(tasks.getTaskList());
-                    ui.getByeMessage();
-                    break;
-                } else if (command.contains("find")) {
-                    ArrayList<Task> foundTask = tasks.findTasks(command);
-                    ui.showFoundMessage(foundTask);
-                } else {
-                    throw new IllegalCommandException("I'm sorry, but I don't know what that means :-(");
-                }
+        while (true) {
+            String command = ui.enterCommand();
+            if (command.equals("bye")) {
+                storage.save(parser.retrieveTasks());
+                break;
+            } else {
+                parser.parse(command);
             }
-        } catch (IllegalCommandException errorMsg) {
-            ui.getIllegalCommandError(errorMsg);
         }
     }
+
+
 
     /**
      * Passed in the file path for the .txt file to instantiate the Duke object
      */
     public static void main(String[] args) {
         new Duke("/Users/kchensheng/Documents/NUS/Y2" +
-                "/Sem1/CS2103/chen_sheng_duke/data/data.txt").run();
+                "/Sem1/CS2103/kwan_chen_sheng_duke/data/data.txt").run();
     }
 }

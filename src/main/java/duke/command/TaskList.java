@@ -7,7 +7,6 @@ import java.util.ArrayList;
 /**
  *  Contains the task list. It has operations to add/delete tasks in the list.
  */
-
 public class TaskList {
     public ArrayList<Task> list;
 
@@ -24,7 +23,6 @@ public class TaskList {
      *
      * @param task task being added.
      */
-
     public void add(Task task) {
         list.add(task);
     }
@@ -34,7 +32,6 @@ public class TaskList {
      *
      * @param numString position of task being deleted.
      */
-
     public Task delete(String numString) {
         int numInt = Integer.valueOf(numString);
         return list.remove(numInt - 1);

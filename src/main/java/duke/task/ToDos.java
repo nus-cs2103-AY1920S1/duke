@@ -3,7 +3,6 @@ package duke.task;
 /**
  * Represents a todos task.
  */
-
 public class ToDos extends Task {
     public ToDos(String description) {
         super(description);
@@ -14,7 +13,6 @@ public class ToDos extends Task {
      *
      * @return task as string.
      */
-
     public String format() {
         return "T" + super.format();
     }
@@ -24,7 +22,6 @@ public class ToDos extends Task {
      *
      * @return task as string.
      */
-
     @Override
     public String toString() {
         return "[T]" + super.toString();

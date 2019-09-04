@@ -7,7 +7,6 @@ import java.util.Date;
 /**
  * Represents a event task.
  */
-
 public class Event extends Task {
     protected String at;
     protected Date date;
@@ -18,7 +17,6 @@ public class Event extends Task {
      * @param at date of event.
      * @throws ParseException if date is in wrong format.
      */
-
     public Event(String description, String at) throws ParseException {
         super(description);
         this.at = at;
@@ -30,7 +28,6 @@ public class Event extends Task {
      *
      * @return task as string.
      */
-
     public String format() {
         return "E" + super.format() + "|" + at;
     }
@@ -40,7 +37,6 @@ public class Event extends Task {
      *
      * @return task as string.
      */
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

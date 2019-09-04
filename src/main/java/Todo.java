@@ -17,7 +17,6 @@ public class Todo extends Task {
         } else {
             completion = "0";
         }
-
         return "T | " + completion + " | " + this.description;
     }
 

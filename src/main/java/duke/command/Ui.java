@@ -3,38 +3,24 @@ package duke.command;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.stream.IntStream;
 
 /**
  * A class which deals with the interactions of the user, including printing and requesting for input.
  */
 public class Ui {
-
-    private final Scanner sc = new Scanner(System.in);
-
-    /**
-     * Reads the next line using scanner.
-     *
-     * @return Returns the line.
-     */
-    public String readLine() {
-        return sc.nextLine();
-    }
-
     /**
      * Prints the welcome message.
      */
-    public void printWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public static String printWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Prints the error message due to file not found.
      */
-    public void showLoadingError() {
-        System.err.println("Error: Unable to load. File not found. Empty list is created.");
+    public String showLoadingError() {
+        return "Error: Unable to load. File not found. Empty list is created.";
     }
 
     /**
@@ -42,15 +28,17 @@ public class Ui {
      *
      * @param list The list to be printed.
      */
-    public void printList(ArrayList<Task> list) {
+    public String printList(ArrayList<Task> list) {
         if (list.isEmpty()) {
-            System.out.println("No task found");
+            return "No task found";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the tasks in your list:\n");
             IntStream.rangeClosed(1, list.size()).forEach(x -> {
                 Task task = list.get(x - 1);
-                System.out.println(x + "." + task.toString());
+                sb.append(x).append(". ").append(task.toString()).append("\n");
             });
+            return sb.toString();
         }
     }
 
@@ -59,9 +47,8 @@ public class Ui {
      *
      * @param task The task to be marked as done.
      */
-    void printTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task.toString());
+    String printTaskDone(Task task) {
+        return ("Nice! I've marked this task as done:\n  " + task.toString());
     }
 
     /**
@@ -70,10 +57,10 @@ public class Ui {
      * @param removed The deleted task.
      * @param list The list, in which the task has been removed from.
      */
-    void printDeleteTask(Task removed, ArrayList<Task> list) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + removed.toString());
-        System.out.println("Now you have " + list.size() + " in the list.");
+    String printDeleteTask(Task removed, ArrayList<Task> list) {
+        return ("Noted. I've removed this task:\n" +
+                "  " + removed.toString() + "\n" +
+                "Now you have " + list.size() + " in the list.");
     }
 
     /**
@@ -82,9 +69,9 @@ public class Ui {
      * @param task The task to be added.
      * @param list The list, to which the task is to be added to.
      */
-    void printAddTask(Task task, ArrayList<Task> list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task.toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list");
+    String printAddTask(Task task, ArrayList<Task> list) {
+        return ("Got it. I've added this task:\n" +
+                "  " + task.toString() + "\n" +
+                "Now you have " + list.size() + " tasks in the list");
     }
 }

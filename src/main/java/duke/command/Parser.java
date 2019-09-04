@@ -38,12 +38,12 @@ public class Parser {
      * @throws DukeException If a command is invalid
      * @throws ParseException If input date format is invalid
      */
-    public void processLine(String userInput) throws DukeException, ParseException {
+    public String processLine(String userInput) throws DukeException, ParseException {
         ArrayList<Task> list = tasks.list;
         String[] words = userInput.split(" ");
         String firstWord = words[0];
         if (firstWord.equals("list")) {
-            ui.printList(list);
+            return ui.printList(list);
 
         } else if (firstWord.equals("done")) {
             if (words.length != 2) {
@@ -54,7 +54,7 @@ public class Parser {
             }
             Task task = list.get(Integer.parseInt(words[1]) - 1);
             task.setDone(true);
-            ui.printTaskDone(task);
+            return ui.printTaskDone(task);
 
         } else if (firstWord.equals("delete")) {
             if (words.length != 2) {
@@ -65,7 +65,7 @@ public class Parser {
             }
             int index = Integer.parseInt(words[1]) - 1;
             Task removed = tasks.delete(index);
-            ui.printDeleteTask(removed, list);
+            return ui.printDeleteTask(removed, list);
 
         } else if (firstWord.equals("find")) {
             String secondWord = words[1];
@@ -73,33 +73,33 @@ public class Parser {
             tasks.list.stream()
                     .filter(task -> task.getDescription().contains(secondWord))
                     .forEach(listFound::add);
-            ui.printList(listFound);
+            return ui.printList(listFound);
         } else {
             Task task;
             if (firstWord.equals("todo")) {
                 if (words.length < 2 || words[1].equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
                 task = new ToDo(userInput.split(" ", 2)[1]);
             } else if (firstWord.equals("deadline")) {
                 if (words.length < 2 || words[1].equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
                 String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
                 String by = userInput.split(" ", 2)[1].split(" /by ", 2)[1];
                 task = new Deadline(description, by);
             } else if (firstWord.equals("event")) {
                 if (words.length < 2 || words[1].equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 }
                 String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
                 String at = userInput.split(" ", 2)[1].split(" /at ", 2)[1];
                 task = new Event(description, at);
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             tasks.add(task);
-            ui.printAddTask(task, list);
+            return ui.printAddTask(task, list);
         }
     }
 }

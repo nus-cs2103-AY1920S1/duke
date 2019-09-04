@@ -2,11 +2,13 @@ package duke;
 
 import java.io.IOException;
 
+import duke.command.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +26,14 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
+            stage.show(); // set visibility to true
+
+            // Display intro message
+            VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
+            Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(Ui.printWelcome(), dukeImage)
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }

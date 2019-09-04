@@ -13,6 +13,12 @@ public class Storage {
     private File tempFile;
     private Tasklist tasklist;
 
+    /**
+     * Constructor for Storage instance
+     *
+     * @param fileloc takes in the fileloc to know where to store
+     * @throws IOException  If file is wrong
+     */
     public Storage(String fileloc) throws IOException {
         //ArrayList<Task> tasks = new ArrayList<Task>();
         Tasklist tasklist = new Tasklist();
@@ -31,6 +37,13 @@ public class Storage {
     public Tasklist getTasks() {
         return tasklist;
     }
+
+    /**
+     * Saves the current tasks at hand into the txt file
+     *
+     * @param tasks  ArrayList of the tasks
+     * @throws IOException  If file is wrong
+     */
 
     public void saveFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(fileloc);
@@ -57,6 +70,12 @@ public class Storage {
         return tempFile.exists();
     }
 
+    /**
+     * Creates a file for the data to be saved
+     *
+     * @throws IOException  If file is wrong
+     */
+
     public void createFile() throws IOException {
         boolean exists = tempFile.exists();
         if (tempFile.createNewFile()) { //no file yet so create
@@ -65,6 +84,13 @@ public class Storage {
 
         }
     }
+
+    /**
+     * Reads a file and prints the data.
+     * Also calls a createTasks function to save those on the list to Tasklist.
+     *
+     * @throws FileNotFoundException  If file is wrong
+     */
 
     public void readFile() throws FileNotFoundException {
         ArrayList<String> filetasks = new ArrayList<String>();

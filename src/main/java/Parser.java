@@ -37,6 +37,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Reads the user input and converts it to instructions.
+     *
+     * @throws IOException  if the user input is wrong
+     */
+
     public void parserRead() throws IOException {
         while (sc.hasNext()) {
             String command = sc.nextLine();
@@ -160,6 +166,13 @@ public class Parser {
             }
         }
     }
+
+    /**
+     * Returns String of the Date and Time in the user friendly format
+     *
+     * @param deadline deadline of event or deadline
+     * @return String in user friendly format
+     */
 
     public static String getDateTime(String deadline) {
         String[] datetime = deadline.split(" ");

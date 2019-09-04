@@ -9,7 +9,7 @@ public class Storage {
     private String storagePath;
 
     /**
-     * @param Storagepath Relative path to storage location
+     * Constructs a storage object which will access harddisk data at the storagePath.
      */
     public Storage(String storagePath) {
         this.storagePath = storagePath;

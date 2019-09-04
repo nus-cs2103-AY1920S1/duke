@@ -2,33 +2,49 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
+import java.util.Collections;
+
+/**
+ * A custom control using FXML that represents a dialog box consisting of an
+ * ImageView and a Label. The ImageView represents the speaker's face and the
+ * Label contains text from the speaker.
+ */
 public class DialogBox extends HBox {
 
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Creates a dialog box with a Label on the left and ImageView on the right.
      *
-     * @param l     Label to be added
-     * @param iv    ImageView to be added
+     * @param text  String of text to be added
+     * @param img   Image to be displayed
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(
+                    "/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(80.0);
-        displayPicture.setFitHeight(80.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
@@ -38,30 +54,30 @@ public class DialogBox extends HBox {
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
+        Collections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
 
     /**
-     * Returns a new DialogBox with the given Label on the left and the given
+     * Returns a new duke.DialogBox with the given Label on the left and the given
      * ImageView on the right.
      *
-     * @param l     Label containing text
-     * @param iv    ImageView containing display picture
+     * @param text      String containing text
+     * @param img       Image containing display picture
      */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
     /**
-     * Returns a new DialogBox with the given Label on the right and the given
+     * Returns a new duke.DialogBox with the given Label on the right and the given
      * ImageView on the left.
      *
-     * @param l     Label containing text
-     * @param iv    ImageView containing display picture
+     * @param text      String containing text
+     * @param img       Image containing display picture
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

@@ -39,9 +39,9 @@ public abstract class Task {
      */
     private String getDoneSymbol() {
         if(this.isDone) {
-            return "✓";
+            return "Done";
         }
-        return "✗";
+        return "Not done";
     }
 
     /** Returns task type **/

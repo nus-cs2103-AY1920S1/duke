@@ -19,18 +19,18 @@ public class DoneCommand extends Command {
      * @param taskList - list containing all existing tasks
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         Task task = taskList.get(idx);
         taskList.done(this.idx);
-        this.printSuccessfulDoneMessage(task);
+        return this.getSuccessfulDoneMessage(task);
     }
 
     /**
      * Prints out message after successful marking of task
      * @param task - duke.task.Task that has been successfully marked done
      */
-    private void printSuccessfulDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task);
+    private String getSuccessfulDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n" +
+                "  " + task;
     }
 }

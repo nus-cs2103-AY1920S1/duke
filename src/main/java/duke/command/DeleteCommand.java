@@ -19,10 +19,10 @@ public class DeleteCommand extends Command {
      * @param taskList - list containing all existing tasks
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         Task task = taskList.get(this.idx);
         taskList.delete(idx);
-        this.printSuccessDeleteTaskMessage(task, taskList.size());
+        return this.getSuccessDeleteTaskMessage(task, taskList.size());
     }
 
     /**
@@ -30,9 +30,9 @@ public class DeleteCommand extends Command {
      * @param task - duke.task.Task that has been successfully deleted
      * @param size - Current size of list
      */
-    private void printSuccessDeleteTaskMessage(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    private String getSuccessDeleteTaskMessage(Task task, int size) {
+        return "Noted. I've removed this task:\n" +
+                "  " + task + "\n" +
+                "Now you have " + size + " tasks in the list.";
     }
 }

@@ -1,6 +1,8 @@
 package duke;
 
 import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -25,6 +27,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /** Exit handler for closing the main window. */
+    public EventHandler<ActionEvent> exitHandler;
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -47,5 +52,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Creates a new dialog box storing response message
+     * @param message - message to be displayed
+     */
+    public void display(String message) {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
 }

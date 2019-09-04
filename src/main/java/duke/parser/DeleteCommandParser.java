@@ -4,8 +4,6 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.IncompleteCommandException;
 
-import java.util.Optional;
-
 public class DeleteCommandParser {
 
     /**
@@ -15,11 +13,11 @@ public class DeleteCommandParser {
      * @return Optional containing either valid command or null (when exception thrown)
      * @throws RuntimeException - contains both NumberFormatException and IndexOutOfBoundsException
      */
-    public static Optional<Command> parse(String[] commandDescription, int size) throws RuntimeException, IncompleteCommandException {
+    public static Command parse(String[] commandDescription, int size) throws RuntimeException, IncompleteCommandException {
         checkCommandEmpty(commandDescription);
         int idx = Integer.parseInt(commandDescription[1]) - 1;
         if (idx >= size) { throw new IndexOutOfBoundsException(); }
-        return Optional.of(new DeleteCommand(idx));
+        return new DeleteCommand(idx);
     }
 
     /**

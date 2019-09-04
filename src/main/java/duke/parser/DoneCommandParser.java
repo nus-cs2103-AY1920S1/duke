@@ -4,8 +4,6 @@ import duke.command.Command;
 import duke.command.DoneCommand;
 import duke.command.IncompleteCommandException;
 
-import java.util.Optional;
-
 public class DoneCommandParser {
 
     /**
@@ -16,11 +14,11 @@ public class DoneCommandParser {
      * @throws RuntimeException - contains both NumberFormatException and IndexOutOfBoundsException
      * @throws IncompleteCommandException - throws error if the command is not in complete format
      */
-    public static Optional<Command> parse(String[] commandDescription, int size) throws RuntimeException, IncompleteCommandException {
+    public static Command parse(String[] commandDescription, int size) throws RuntimeException, IncompleteCommandException {
         checkCommandEmpty(commandDescription);
         int idx = Integer.parseInt(commandDescription[1]) - 1;
         if (idx >= size) { throw new IndexOutOfBoundsException(); }
-        return Optional.of(new DoneCommand(idx));
+        return new DoneCommand(idx);
     }
 
     /**

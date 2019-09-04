@@ -8,8 +8,6 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
 
-import java.util.Optional;
-
 public class AddCommandParser {
 
     /**
@@ -18,9 +16,9 @@ public class AddCommandParser {
      * @return Optional containing either valid command or null (when exception thrown)
      * @throws IncompleteCommandException - throws error if the command is not in complete format
      */
-    public static Optional<Command> parseWithoutDate(String[] commandDescription) throws IncompleteCommandException {
+    public static Command parseWithoutDate(String[] commandDescription) throws IncompleteCommandException {
         checkCommandEmpty(commandDescription);
-        return Optional.of(new AddCommand(new ToDoTask(commandDescription[1])));
+        return new AddCommand(new ToDoTask(commandDescription[1]));
     }
 
     /**
@@ -29,7 +27,7 @@ public class AddCommandParser {
      * @return Optional containing either valid command or null (when exception thrown)
      * @throws IncompleteCommandException - throws error if the command is not in correct format
      */
-    public static Optional<Command> parseWithDate(String[] commandDescription) throws UnknownCommandException  {
+    public static Command parseWithDate(String[] commandDescription) throws UnknownCommandException  {
         checkCommandEmpty(commandDescription);
         try {
             String[] taskArray = commandDescription[1].split("/", 2);
@@ -40,15 +38,15 @@ public class AddCommandParser {
             switch (taskType) {
             case "deadline":
                 DeadlineTask.verifyTaskStatement(statementAndDate[0].toLowerCase());
-                return Optional.of(new AddCommand(new DeadlineTask(taskName, statementAndDate[1])));
+                return new AddCommand(new DeadlineTask(taskName, statementAndDate[1]));
             case "event":
                 EventTask.verifyTaskStatement(statementAndDate[0].toLowerCase());
-                return Optional.of(new AddCommand(new EventTask(taskName, statementAndDate[1])));
+                return new AddCommand(new EventTask(taskName, statementAndDate[1]));
             }
         } catch (IndexOutOfBoundsException e) {
             throw new IncompleteCommandException("incomplete", commandDescription[0]);
         }
-        return Optional.empty();
+        return new AddCommand(null);
     }
 
     /**

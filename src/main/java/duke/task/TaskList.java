@@ -38,7 +38,6 @@ public class TaskList {
      * @throws IndexOutOfBoundsException - Throws error if given index is out of list bounds
      */
     public void delete(int idx) throws IndexOutOfBoundsException {
-        Task task = this.list.get(idx);
         this.list.remove(idx);
     }
 
@@ -62,10 +61,11 @@ public class TaskList {
     /**
      * Prints out contents of list
      */
-    public void print() {
-        System.out.println("Here are the tasks in your list:");
+    public String getPrintListMessage() {
+        String response = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println((i+1) + "." + this.list.get(i));
+            response += (i+1) + "." + this.list.get(i) + "\n";
         }
+        return response;
     }
 }

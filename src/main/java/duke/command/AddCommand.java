@@ -19,19 +19,19 @@ public class AddCommand extends Command {
      * @param taskList - list containing all existing tasks
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         taskList.add(this.task);
-        this.printSuccessfulAddMessage(taskList.size());
+        return this.getSuccessfulAddMessage(taskList.size());
     }
 
     /**
      * Prints out message after successful deletion of task
      * @param size - Current size of list
      */
-    private void printSuccessfulAddMessage(int size) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + this.task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    private String getSuccessfulAddMessage(int size) {
+        return "Got it. I've added this task: \n" +
+                "  " + this.task + "\n" +
+                "Now you have " + size + " tasks in the list.";
     }
 
     /* Returns stored task of comment */

@@ -4,8 +4,6 @@ import duke.command.Command;
 import duke.command.FindCommand;
 import duke.command.IncompleteCommandException;
 
-import java.util.Optional;
-
 public class FindCommandParser {
 
     /**
@@ -14,9 +12,9 @@ public class FindCommandParser {
      * @return Optional containing either valid command
      * @throws IncompleteCommandException - throws error if the command is not in complete format
      */
-    public static Optional<Command> parse(String[] commandDescription) throws IncompleteCommandException {
+    public static Command parse(String[] commandDescription) throws IncompleteCommandException {
         checkCommandEmpty(commandDescription);
-        return Optional.of(new FindCommand(commandDescription[1]));
+        return new FindCommand(commandDescription[1]);
     }
 
     /**

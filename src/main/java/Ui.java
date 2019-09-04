@@ -35,55 +35,47 @@ public class Ui {
      * @param string Input string to be inputted
      * @param indent Constant indentation from start of line (formatting)
      */
-    public void printIndentedString(String string, String indent) {
-        System.out.println(indent + "____________________________________________________________");
-        System.out.println(indent + " " + string);
-        System.out.println(indent + "____________________________________________________________");
-        System.out.println();
-    }
+//    public void printIndentedString(String string, String indent) {
+//        System.out.println(indent + "____________________________________________________________");
+//        System.out.println(indent + " " + string);
+//        System.out.println(indent + "____________________________________________________________");
+//        System.out.println();
+//    }
 
     /**
-     * Greets user and begins program.
+     * Returns message to greet user and begin program.
      */
-    public void showWelcome() {
-        printIndentedString("Hello! I'm Duke\n"
-                + indent + " " + "What can I do for you?", indent);
+    public String showWelcome() {
+        return "Hello! I'm Duke\n" + indent + " " + "What can I do for you?";
     }
 
     /**
-     * Greets user goodbye and ends program.
+     * Returns message to greet user goodbye and end program.
      */
-    public void exit() {
-        printIndentedString("Bye. Hope to see you again soon!", indent);
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Indicates error in loading.
+     * Returns error message in loading.
      */
-    public void showLoadingError() {
-        printIndentedString("Loading error! New file created.", indent);
+    public String showLoadingError() {
+        return "Loading error! New file created.";
     }
 
     /**
-     * Indicates missing file error.
-     */
-    public void showFileMissingError() {
-        printIndentedString("File not found. Check file directory.", indent);
-    }
-
-    /**
-     * Prints input error message.
+     * Returns input error message.
      * @param errorMessage Relevant error message
      */
-    public void printError(String errorMessage) {
-        printIndentedString(errorMessage, indent);
+    public String printError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
-     * Prints response message to user.
+     * Returns response message to user.
      * @param responseMessage Relevant message
      */
-    public void printResponse(String responseMessage) {
-        printIndentedString(responseMessage, indent);
+    public String printResponse(String responseMessage) {
+        return responseMessage;
     }
 }

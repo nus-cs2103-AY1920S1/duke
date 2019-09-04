@@ -19,15 +19,16 @@ public class AddCommand extends Command {
      * @param storage Updates new task list to file
      * @throws DukeException Custom exception
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
+            String response = "";
             if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                 String befTaskAddMessage = "Got it. I've added this task: \n" + indent + "   ";
                 String aftTaskAddMessage = "Now you have " + (tasks.getList().size() + 1) + " tasks in the list.";
                 if (!(commandDetails.equals(" ") || commandDetails.equals(""))) {
                     if (command.equals("todo")) {
                         tasks.addTask(new Task(commandDetails, "todo", false));
-                        ui.printResponse(befTaskAddMessage
+                        response = ui.printResponse(befTaskAddMessage
                                 + tasks.getList().get(tasks.getList().size() - 1) + "\n " + indent
                                 + aftTaskAddMessage);
                         storage.updateTodoFile(tasks.getListString());
@@ -35,35 +36,36 @@ public class AddCommand extends Command {
                         try {
                             tasks.addDateTask(commandDetails.split(" /by ")[0],
                                     commandDetails.split(" /by ")[1], "deadline");
-                            ui.printResponse(befTaskAddMessage
+                            response = ui.printResponse(befTaskAddMessage
                                     + tasks.getList().get(tasks.getList().size() - 1) + "\n " + indent
                                     + aftTaskAddMessage);
                             storage.updateTodoFile(tasks.getListString());
                         } catch (Exception ex) {
-                            ui.printError("☹ OOPS!!! Deadlines require a specific datetime after /by, "
-                                    + "in format 'dd/MM/yyyy HHmm'");
+                            response = ui.printError("☹ OOPS!!! Deadlines require a specific datetime "
+                                    + "after /by, in format 'dd/MM/yyyy HHmm'");
                             System.out.println(ex);
                         }
                     } else if (command.equals("event")) {
                         try {
                             tasks.addDateTask(commandDetails.split(" /at ")[0],
                                     commandDetails.split(" /at ")[1], "event");
-                            ui.printResponse(befTaskAddMessage
+                            response = ui.printResponse(befTaskAddMessage
                                     + tasks.getList().get(tasks.getList().size() - 1) + "\n " + indent
                                     + aftTaskAddMessage);
                             storage.updateTodoFile(tasks.getListString());
                         } catch (Exception ex) {
-                            ui.printError("☹ OOPS!!! Events require a specific datetime after /at, "
+                            response = ui.printError("OOPS!!! Events require a specific datetime after /at, "
                                     + "in format 'dd/MM/yyyy HHmm'");
                         }
                     }
                 } else {
-                    ui.printError("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                    response = ui.printError("OOPS!!! The description of a " + command + " cannot be empty.");
                 }
             } else {
-                ui.printError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n "
+                response = ui.printError("OOPS!!! I'm sorry, but I don't know what that means :-(\n "
                         + indent + "Try todo, event, deadline, list, delete or done");
             }
+            return response;
         } catch (Exception err) {
             throw new DukeException(err.getMessage());
         }

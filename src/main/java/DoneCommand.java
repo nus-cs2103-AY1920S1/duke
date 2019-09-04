@@ -24,13 +24,14 @@ public class DoneCommand extends Command {
      * @param storage Updates new task list to file
      * @throws DukeException Custom exception
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             listPointer = Integer.parseInt(commandDetails);
             tasks.markTaskAsDone(listPointer - 1);
-            ui.printResponse("Nice! I've marked this task as done: \n"
+            String response = ui.printResponse("Nice! I've marked this task as done: \n"
                     + indent + "   " + tasks.getList().get(listPointer - 1));
             storage.updateTodoFile(tasks.getListString());
+            return response;
         } catch (Exception err) {
             throw new DukeException(err.getMessage());
         }

@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * GUI interface for user interaction with Duke chatbot.
+ */
 public class DialogBox extends HBox {
 
     private Label text;

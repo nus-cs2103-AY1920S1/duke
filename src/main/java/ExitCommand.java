@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
      * @param ui Handles user interaction
      * @param storage Updates new task list to file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.exit();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.exit();
     }
 }

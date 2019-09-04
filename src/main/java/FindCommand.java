@@ -3,8 +3,8 @@ public class FindCommand extends Command {
         super(command, commandDetails, indent);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printResponse("Here are the matching tasks in your list:\n"
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printResponse("Here are the matching tasks in your list:\n"
                 + tasks.findMatchingTasksString(commandDetails));
     }
 }

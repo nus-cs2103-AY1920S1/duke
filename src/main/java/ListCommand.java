@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      * @param ui Handles user interaction
      * @param storage Updates new task list to file
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printResponse("Here are the tasks in your list:\n" + tasks.getListString());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printResponse("Here are the tasks in your list:\n" + tasks.getListString());
     }
 }

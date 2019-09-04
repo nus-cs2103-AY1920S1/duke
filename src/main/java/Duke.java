@@ -10,14 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 /**
  * A personal assistant todo-list tracking chatbot.
  *
@@ -56,15 +48,12 @@ public class Duke extends Application {
      */
     private Ui ui;
 
-    public Duke(){}
-
     /**
-     * Main initializer of Duke bot.
-     * @param filePath Location for file to be saved
+     * Main class which initializes Duke bot
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui(INDENT);
-        storage = new Storage(filePath);
+        storage = new Storage(FILENAME);
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception err) {
@@ -75,28 +64,9 @@ public class Duke extends Application {
     }
 
     /**
-     * Main method running Duke class.
+     * The start method for Duke application.
+     * @param stage Stage on which the program runs
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Parser parser = new Parser(fullCommand);
-                Command c = Parser.parse(parser.getCommand(), parser.getDetail(), INDENT);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke(FILENAME).run();
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -172,7 +142,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -186,7 +155,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -205,6 +173,23 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return respondToUser(input);
+    }
+
+    /**
+     * Helper function for handling user input.
+     * @param command User input into Duke bot
+     * @return String response to the user input upon executing functions
+     */
+    public String respondToUser(String command) {
+        try {
+            String fullCommand = command;
+            Parser parser = new Parser(fullCommand);
+            Command c = Parser.parse(parser.getCommand(), parser.getDetail(), INDENT);
+            String response = c.execute(tasks, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            return ui.printError(e.getMessage());
+        }
     }
 }

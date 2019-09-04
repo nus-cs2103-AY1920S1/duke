@@ -24,15 +24,16 @@ public class DeleteCommand extends Command {
      * @param storage Updates new task list to file
      * @throws DukeException Custom exception
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             listPointer = Integer.parseInt(commandDetails);
             Task deletedTask = tasks.getList().get(listPointer - 1);
             tasks.deleteTask(listPointer - 1);
-            ui.printResponse("Noted. I've removed this task: \n"
+            String response = ui.printResponse("Noted. I've removed this task: \n"
                     + indent + "   " + deletedTask + "\n" + indent
                     + "Now you have " + tasks.getList().size() + " tasks in the list.");
             storage.updateTodoFile(tasks.getListString());
+            return response;
         } catch (Exception err) {
             throw new DukeException(err.getMessage());
         }

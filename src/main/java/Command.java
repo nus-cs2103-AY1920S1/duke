@@ -42,5 +42,5 @@ public abstract class Command {
      * @param storage Updates new task list to file
      * @throws DukeException Custom exception
      */
-    protected abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    protected abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

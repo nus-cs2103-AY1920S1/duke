@@ -21,7 +21,6 @@ public class Event extends Task {
         this.isDone = false;
     }
 
-<<<<<<< HEAD
     public String toFile() {
         if(isDone) {
             return "E-1-" + name + "-" + parser.format(date);
@@ -34,14 +33,7 @@ public class Event extends Task {
         if (isDone) {
             return "[E][✓] " + name + " (at: " + formatter.format(date) + ")";
         } else {
-            return "[E][✗] " + name + " (at: " + .format(date) + ")";
-=======
-    public String toString() {
-        if (isDone) {
-            return "[E][✓] " + name + " (at: " + formatter.format(date) + ")";
-        } else {
             return "[E][✗] " + name + " (at: " + formatter.format(date) + ")";
->>>>>>> Branch-Level-8
         }
     }
 }

@@ -73,15 +73,10 @@ public class TaskList {
         return allTasks.toString();
     }
 
-    public ArrayList<Task> searchTaskListForKeyword(String keyword){
-        ArrayList<Task> matches = new ArrayList<>();
-        for(Task task : this.toDoList){
-            if(task.getTaskDescription().contains(keyword)){
-                matches.add(task);
-            }
-        }
-        return matches;
+    public ArrayList<Task> getToDoList(){
+        return this.toDoList;
     }
+
 
 
 }

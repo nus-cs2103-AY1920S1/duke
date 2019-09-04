@@ -173,10 +173,4 @@ public class Duke {
         taskList.add(newTask);
         ui.ackAddition(newTask, taskList.size());
     }
-    
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
 }

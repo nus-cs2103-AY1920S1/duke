@@ -31,17 +31,16 @@ public class Duke {
      */
     public void run() {
         this.ui.printWelcome();
-        String cmd = "";
         boolean isExit = false;
 
         while (!isExit) {
             try {
                 String command = this.ui.readCommand();
-                Command c = Parser.parse(command);
+                Command c = Parser.parse(command, this.tasks.getSize());
                 c.execute(this.tasks, this.ui, this.storage);
                 isExit = c.isExit();
 
-            } catch (InputMismatchException e) {
+            } catch (DukeException e) {
                 this.ui.printError(e);
             }
             this.ui.printLine();

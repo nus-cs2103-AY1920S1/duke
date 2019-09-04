@@ -7,29 +7,48 @@ public class Parser {
      * @param command is the user input
      * @return will return the correct command
      */
-    public static Command parse(String command) {
-        String[] cmdList = command.split(" ");
-        String keyword = cmdList[0];
+    public static Command parse(String command, int maxTaskSize) throws DukeIllegalArgumentException {
+        if (command.isBlank()) {
+            throw new DukeIllegalArgumentException("User input cannot be empty.");
+        }
+        try {
+            String[] cmdList = command.split(" ");
+            String keyword = cmdList[0];
 
-        if (keyword.equalsIgnoreCase("bye")) {
-            return new ExitCommand();
-        } else if (keyword.equalsIgnoreCase("find")) {
-            String taskToFind = cmdList[1];
-            return new FindCommand(taskToFind);
-        } else if (keyword.equalsIgnoreCase("list")) {
-            return new ListCommand();
+            if (keyword.equalsIgnoreCase("bye")) {
+                return new ExitCommand();
+            } else if (keyword.equalsIgnoreCase("find")) {
+                String taskToFind = cmdList[1];
+                return new FindCommand(taskToFind);
+            } else if (keyword.equalsIgnoreCase("list")) {
+                return new ListCommand();
 
-        } else if (keyword.equalsIgnoreCase("done")) {
-            int idxToMarkAsDone = Integer.parseInt(cmdList[1]) - 1;
-            return new DoneCommand(idxToMarkAsDone);
+            } else if (keyword.equalsIgnoreCase("done")) {
+                int idxToMarkAsDone = Integer.parseInt(cmdList[1]) - 1;
+                if (idxToMarkAsDone >= maxTaskSize) {
+                    throw new DukeIllegalArgumentException("Invalid input. Please input a valid number between 1 and "
+                            + maxTaskSize);
+                }
+                return new DoneCommand(idxToMarkAsDone);
 
-        } else if (keyword.equalsIgnoreCase("delete")) {
-            int idxToBeRemoved = Integer.parseInt(cmdList[1]) - 1;
-            return new DeleteCommand(idxToBeRemoved);
+            } else if (keyword.equalsIgnoreCase("delete")) {
+                int idxToBeRemoved = Integer.parseInt(cmdList[1]) - 1;
+                if (idxToBeRemoved >= maxTaskSize) {
+                    throw new DukeIllegalArgumentException("Invalid input. Please input a valid number between 1 and "
+                            + maxTaskSize);
+                }
+                return new DeleteCommand(idxToBeRemoved);
 
-        } else { //it will be an AddCommand
-            Task taskToBeAdded = handleNewTask(keyword, command);
-            return new AddCommand(taskToBeAdded);
+            } else { //it will be an AddCommand or an invalid command
+                Task taskToBeAdded = handleNewTask(keyword, command);
+                return new AddCommand(taskToBeAdded);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeIllegalArgumentException("Invalid input. Please minimally input a <keyword>, <description>, "
+                    + "and a <date> and <time> if required");
+        } catch (NumberFormatException e) {
+            throw new DukeIllegalArgumentException("User input is not a number.");
+
         }
     }
 
@@ -40,48 +59,18 @@ public class Parser {
      * @return the appropriate Task
      * @throws InputMismatchException when user does not type correct input
      */
-    private static Task handleNewTask(String keyword, String cmd) throws InputMismatchException {
-        String date = "";
-        String time = "";
-        String desc = "";
+    private static Task handleNewTask(String keyword, String cmd) throws DukeIllegalArgumentException {
         if (keyword.equalsIgnoreCase("deadline")) {
-            String descriptionAndTime = cmd.substring(8);
-            String[] details = descriptionAndTime.trim().split(" /by");
-            if (descriptionAndTime.isEmpty() || details.length <= 1) {
-                throw new InputMismatchException("The description of a deadline cannot be empty.");
-            }
-            String[] dateTime = details[1].trim().split(" ",2);
-            if (dateTime.length < 2) {
-                throw new InputMismatchException("Please input deadline time format.");
-            }
-            desc = details[0];
-            date = dateTime[0];
-            time = dateTime[1];
-            return new Deadline(desc, date, time);
+            return Deadline.genDeadlineTask(cmd);
 
         } else if (keyword.equalsIgnoreCase("event")) {
-            String descriptionAndTime = cmd.substring(5);
-            String[] details = descriptionAndTime.trim().split(" /at");
-            if (descriptionAndTime.isEmpty() || details.length <= 1) {
-                throw new InputMismatchException("The description of an event cannot be empty.");
-            }
-            String[] dateTime = details[1].split(" ",2);
-            if (dateTime.length < 2) {
-                throw new InputMismatchException("Please input event time format.");
-            }
-            desc = details[0];
-            date = dateTime[0];
-            time = dateTime[1];
-            return new Event(desc, date, time);
+            return Event.genEventTask(cmd);
 
         } else if (keyword.equalsIgnoreCase("todo")) {
-            desc = cmd.substring(4).trim(); //words after todo
-            if (desc.isEmpty()) {
-                throw new InputMismatchException("The description of a todo cannot be empty.");
-            }
-            return new Todo(desc);
+            return Todo.genTodoTask(cmd);
+
         } else {
-            throw new InputMismatchException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeIllegalArgumentException("I'm sorry, but I don't know what that means :-(");
         }
     }
 }

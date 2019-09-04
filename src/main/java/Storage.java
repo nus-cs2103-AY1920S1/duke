@@ -26,36 +26,8 @@ public class Storage {
             File dataFile = createOrRetrieve(filePath);
             ArrayList<String> stringOfTasks = readFile(dataFile);
             ArrayList<Task> arrOfTasks = new ArrayList<>();
-
-            String keyword = "";
-            Boolean isDone = false;
-            String description = "";
-            String dateAndTime = "";
-            String date = "";
-            String time = "";
-            Task t;
-
             for (String s : stringOfTasks) {
-                String[] cmdList = s.split("\\|");
-                keyword = cmdList[0].trim();
-                isDone = Boolean.valueOf(cmdList[1].trim());
-                description = cmdList[2].trim();
-                if (cmdList.length > 3) { //aka got dateAndTime String
-                    dateAndTime = cmdList[3].trim();
-                    String[] dateTime = dateAndTime.split("\\s*,");
-                    date = dateTime[0];
-                    time = dateTime[1].trim();
-                }
-                if (keyword.equalsIgnoreCase("D")) {
-                    t = new Deadline(description, date, time);
-                } else if (keyword.equalsIgnoreCase("E")) {
-                    t = new Event(description, date, time);
-                } else { //(keyword.equalsIgnoreCase("T")) {
-                    t = new Todo(description);
-                }
-                if (isDone) {
-                    t.markAsDone();
-                }
+                Task t = Task.genTaskFromData(s);
                 arrOfTasks.add(t);
             }
             return arrOfTasks;

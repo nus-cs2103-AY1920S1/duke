@@ -5,7 +5,7 @@ class DeadlineTest {
 
     @Test
     void toDataFormatTest() {
-        Deadline d = new Deadline("return book","2/12/2019", "1800");
+        Deadline d = Deadline.genDeadlineTask("Deadline return book /by 2/12/2019 1800");
         assertTrue(d.toDataFormat().equals("D | 0 | return book | 2/12/2019, 1800"));
     }
     /*

@@ -23,6 +23,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * The DialogBox constructor takes in a text and an image, and creates a new dialog box.
+     * 
+     * @param text
+     * @param img
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/DialogBox.fxml"));

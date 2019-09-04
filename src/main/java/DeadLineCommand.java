@@ -1,9 +1,24 @@
+/**
+ * Deadline command is used to create DeadLine tasks.
+ */
 public class DeadLineCommand extends Command {
 
+    /**
+     * Constructor for DeadLineCommand class.
+     * 
+     * @param command takes in the raw commmand
+     * @param taskList taskList is used to store tasks
+     */
     public DeadLineCommand(String command, TaskList taskList ){
         super(command, taskList);
     }
 
+    /**
+     * Takes in 'dirty' string and cleans it.
+     * Also creates the deadline task and executes it.
+     * 
+     * @return a string containing the procesedCommand
+     */
     @Override
     public String processCommand(){
         String line = super.command;
@@ -23,6 +38,11 @@ public class DeadLineCommand extends Command {
         return toPrint1;
     }
 
+    /**
+     * Returns the process.
+     * 
+     * @return a String detailing the process (i.e. task added)
+     */
     @Override
     public String execute(String processedCommand){
         return processedCommand;

@@ -1,9 +1,24 @@
+/**
+ * Event command is used to create Event tasks.
+ */
 public class EventCommand extends Command {
 
+    /**
+     * Constructor for EventCommand class.
+     * 
+     * @param command takes in the raw commmand
+     * @param taskList taskList is used to store tasks
+     */
     public EventCommand(String command, TaskList taskList ){
         super(command, taskList);
     }
 
+    /**
+     * Takes in 'dirty' string and cleans it.
+     * Also creates a new event task.
+     * 
+     * @return a string containing the procesedCommand
+     */
     @Override
     public String processCommand(){
         String line = super.command;
@@ -32,6 +47,10 @@ public class EventCommand extends Command {
         return toPrint2;
     }
 
+    /**
+     * 
+     * @return a String detailing the process.
+     */
     @Override
     public String execute(String processedCommand){
         return processedCommand;

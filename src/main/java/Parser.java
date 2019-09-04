@@ -1,3 +1,7 @@
+/**
+ * Parser class takes in the command passes the command to the correct 
+ * command class.
+ */
 public class Parser{
     
     private Storage storage;
@@ -9,6 +13,15 @@ public class Parser{
 
     }
 
+    /**
+     * The parse method is the 'main' method of the parser class and basically
+     * a switch case statement that calls the right command based on the 
+     * first word of the command (e.g. 'done'/'bye'/'list')
+     * 
+     * @param line takes in the command that the user types
+     * @return a string that corresponds to the command given
+     * @throws DukeException 
+     */
     public String parse (String line) throws DukeException{
         switch (line){
             case "bye":
@@ -82,7 +95,6 @@ public class Parser{
 
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
-
             }
         }
     }

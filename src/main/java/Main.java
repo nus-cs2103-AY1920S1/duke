@@ -16,7 +16,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
- 
         try {
             URL url = Main.class.getResource("/MainWindow.fxml");
             System.out.println(url);

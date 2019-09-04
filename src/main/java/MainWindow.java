@@ -21,11 +21,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Duke duke;
-
-
     private Image userImage;
     private Image dukeImage;
 
+    /**
+     * A workaround for getResourceAsStream().
+     * Uses FileInputStream rather than the above method.
+     * 
+     * @param input
+     * @return a new Image which can be added to the dialog box control
+     */
     public Image getImages(String input){
         try{
             return new Image(new FileInputStream(input));

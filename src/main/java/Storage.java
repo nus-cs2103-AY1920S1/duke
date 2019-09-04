@@ -3,6 +3,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+/**
+ * Storage class deals with the storing of the tasks in memory.
+ */
 public class Storage {
 
     private String filepath;
@@ -13,6 +16,12 @@ public class Storage {
         taskList = new TaskList();
     }
 
+    /**
+     * The loadStorage method reads the txt file for information about the tasks.
+     * It then processes the tasks and stores it in the taskList class.
+     * 
+     * @return a taslist contaning the stored information.
+     */
     public TaskList loadStorage(){
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -96,6 +105,9 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the current tasklist to a txt file.
+     */
     public void save(){
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));

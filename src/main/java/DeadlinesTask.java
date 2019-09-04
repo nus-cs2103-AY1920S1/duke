@@ -1,5 +1,5 @@
 /**
- * Represents a specific type of task - Tasks with deadlines
+ * Represents a specific type of task - Tasks with deadlines.
  *
  */
 class DeadlinesTask extends Task{
@@ -7,7 +7,7 @@ class DeadlinesTask extends Task{
     DateTime endingDateTime;
 
     /**
-     * Constructor for DeadlinesTask class
+     * Constructor for DeadlinesTask class.
      *
      * @param status indicates whether task is complete
      * @param message indicates what to do for the task
@@ -19,7 +19,7 @@ class DeadlinesTask extends Task{
     }
 
     /**
-     * String representation of the DeadlineTask
+     * String representation of the DeadlineTask.
      *
      * @return string representation
      */
@@ -35,7 +35,7 @@ class DeadlinesTask extends Task{
     }
 
     /**
-     * Returns the string representation needed for storage
+     * Returns the string representation needed for storage.
      *
      * @return string format needed for storage
      */

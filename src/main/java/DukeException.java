@@ -1,5 +1,13 @@
+/**
+ * A custom exception class detailing the error messages.
+ */
 @SuppressWarnings("serial")
-class DukeException extends Exception{
+public class DukeException extends Exception{
+    
+    /**
+     * 
+     * @param errorMessage takes in the error message and instantiates its parent class
+     */
     public DukeException(String errorMessage){
         super(errorMessage);
     }

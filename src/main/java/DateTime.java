@@ -1,6 +1,5 @@
 /**
- * Represents the time described in events
- *
+ * Represents the time described in events.
  */
 public class DateTime {
 
@@ -29,7 +28,7 @@ public class DateTime {
     }
 
     /**
-     * Returns the hour of the time
+     * Returns the hour of the time.
      *
      * @return int representing the hour 
      */
@@ -38,7 +37,7 @@ public class DateTime {
     }
 
     /**
-     * Returns the minute of the time
+     * Returns the minute of the time.
      *
      * @return int representing the minute 
      */
@@ -47,21 +46,22 @@ public class DateTime {
     }
 
     /**
-     * Returns the string representation of the DateTime class
+     * Returns the string representation of the DateTime class.
      *
      * @return string representation
      */
     @Override 
     public String toString(){
-        
+        String convertedDate;
+
         if(String.valueOf(date).contains("1")){
-            String convertedDate =Integer.toString(date) + "st";
+            convertedDate =Integer.toString(date) + "st";
         }else if (String.valueOf(date).contains("2")){
-            String convertedDate =Integer.toString(date) + "nd";
+            convertedDate =Integer.toString(date) + "nd";
         }else if (String.valueOf(date).contains("3")){
-            String convertedDate =Integer.toString(date) + "rd";
+            convertedDate =Integer.toString(date) + "rd";
         }else{
-            String convertedDate =Integer.toString(date) + "th";
+            convertedDate =Integer.toString(date) + "th";
         }
         
         String convertedHour;
@@ -71,12 +71,12 @@ public class DateTime {
         }else{
             convertedHour = Integer.toString(hour) + "am";
         }
-        return month + " " + date + " " + convertedHour;   
+        return month + " " + convertedDate + " " + convertedHour;   
         
     }
 
     /**
-     * Returns the string representation needed for storage
+     * Returns the string representation needed for storage.
      *
      * @return string format needed for storage
      */

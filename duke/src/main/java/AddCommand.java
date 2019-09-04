@@ -103,6 +103,8 @@ class AddCommand extends Command {
 		int indexBy = description.indexOf("/"); // potential source of error
 		if (indexBy == -1) {
 			throw new DukeException("Put / before by!");
+		} else if (indexBy == 0) {
+			throw new DukeException("Please include task description!");
 		}
 		String taskDesc = description.substring(0, indexBy - 1); // start after space, end before space before /
 
@@ -125,6 +127,8 @@ class AddCommand extends Command {
 		int indexAt = description.indexOf("/");
 		if (indexAt == -1) {
 			throw new DukeException("Put / before at!");
+		} else if (indexAt == 0) {
+			throw new DukeException("Please include task description!");
 		}
 		String taskDesc = description.substring(0, indexAt - 1); // start after space, end before space before /
 

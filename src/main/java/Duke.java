@@ -1,12 +1,12 @@
 public class Duke {
 
-    private Storage storage;
+    private SaveToFile storage;
     private TaskList tasks;
     private Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new SaveToFile("/Users/meiannn/Documents/GitHub/duke/src/main/java/TaskList.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

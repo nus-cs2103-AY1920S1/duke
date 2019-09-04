@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * Represents a DeadLine Task. A DeadLine object is represented by a description
  * and a time it is due by.

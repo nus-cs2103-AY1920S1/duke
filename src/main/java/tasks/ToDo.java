@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * Represents a ToDo Task. A ToDo task is represented by a description.
  */

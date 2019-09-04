@@ -1,3 +1,9 @@
+package command;
+
+import utils.TaskList;
+import utils.Storage;
+import utils.Ui;
+
 public class ExitCommand extends Command {
 
   public String execute(TaskList tasks, Ui ui, Storage storage) {

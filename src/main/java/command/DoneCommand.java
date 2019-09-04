@@ -1,14 +1,20 @@
+package command;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import utils.TaskList;
+import utils.Storage;
+import utils.Ui;
+import tasks.Task;
 
 /**
- * Delete Command is a Command, specifically for delete operation.
+ * Done Command is a Command, specifically for a done operation.
  */
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
 
   int index;
 
-  public DeleteCommand(int index) {
+  public DoneCommand(int index) {
     this.index = index - 1;
   }
 
@@ -20,19 +26,19 @@ public class DeleteCommand extends Command {
       return new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
     }
 
-    // Execute command
-    Task removed = tasks.getTaskList().get(index);
-    tasks.getTaskList().remove(index);
+    // Execute Command
+    tasks.getTaskList().get(index).setAsDone();
+
+    Task doneTask = tasks.getTaskList().get(index);
 
     // Save output as String
     output += ui.getTopBorder();
-    output += "\n\tNoted. I have removed this task: ";
-    output += "\n\t" + removed;
-    output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
+    output += "\n\tNice! I have marked this task as done: ";
+    output += "\n\t" + doneTask;
     output += ui.getBottomBorder();
 
-    // Save in .txt file
-    storage.deleteTask(index);
+    // Saving to file
+    storage.updateAsDone(index);
 
     return output;
 

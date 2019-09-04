@@ -21,7 +21,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 dependencies {

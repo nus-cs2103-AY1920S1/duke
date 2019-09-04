@@ -1,4 +1,12 @@
+package command;
+
 import java.io.IOException;
+import utils.TaskList;
+import utils.Ui;
+import utils.Storage;
+import tasks.DeadLine;
+import tasks.Event;
+import tasks.ToDo;
 
 /**
  * AddCommand is a Command, specifically for todo, event and deadlines

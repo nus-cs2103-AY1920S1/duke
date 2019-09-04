@@ -1,13 +1,20 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.task.Todo;
 import duke.tasklist.TaskList;
+import duke.storage.Storage;
 import duke.ui.UI;
+import duke.exception.DukeException;
+import duke.task.Todo;
 
+/**
+ * Class that represent command to add a new todo.
+ */
 public class AddTodoCommand extends Command {
 
+    /**
+     * Constructor that takes in the main message of the todo.
+     * @param message The main message of the todo.
+     */
     public AddTodoCommand(String message) {
         super(message);
     }

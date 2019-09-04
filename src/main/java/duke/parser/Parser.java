@@ -11,7 +11,17 @@ import duke.command.DeleteCommand;
 import duke.command.ErrorCommand;
 import duke.exception.DukeException;
 
+/**
+ * Class that takes in a String and parse it to return a valid command.
+ */
 public class Parser {
+
+    /**
+     * Used to take in a string input and returns a command if the input is valid.
+     * @param input Input made by the user.
+     * @return The command corresponding to the user input.
+     * @throws Exception Used to handle any exception that occurs.
+     */
     public static Command parse(String input) throws Exception {
         String[] inputArray = input.split(" ");
         String constructedString = "";

@@ -1,15 +1,22 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.task.Event;
 import duke.tasklist.TaskList;
+import duke.storage.Storage;
+import duke.ui.UI;
+import duke.exception.DukeException;
 import duke.time.Date;
 import duke.time.Time;
-import duke.ui.UI;
+import duke.task.Event;
 
+/**
+ * Class that represent the command to add a new event.
+ */
 public class AddEventCommand extends Command {
 
+    /**
+     * Constructor that takes in main message of the event.
+     * @param message The main message of the event.
+     */
     public AddEventCommand(String message) {
         super(message);
     }
@@ -67,7 +74,7 @@ public class AddEventCommand extends Command {
         if (!inputMessage[marker].equals("/at")) {
             throw new DukeException("     Wrong syntax, should be using /at for deadline");
         }
-        listOfTasks.addEvent(new Event(mainInput, extraInfo));
+        listOfTasks.addEvent(new Event(input, extraInfo));
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
         ui.printTaskAdd(listOfTasks.get(listOfTasks.size() - 1));

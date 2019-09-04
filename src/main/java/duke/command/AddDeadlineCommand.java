@@ -8,8 +8,15 @@ import duke.time.Date;
 import duke.time.Time;
 import duke.ui.UI;
 
+/**
+ * Class that represents command to add new deadline.
+ */
 public class AddDeadlineCommand extends Command {
 
+    /**
+     * Constructor that takes in main message of the deadline.
+     * @param message The main message of the deadline.
+     */
     public AddDeadlineCommand(String message) {
         super(message);
     }

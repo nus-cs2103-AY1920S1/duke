@@ -5,9 +5,20 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 
+/**
+ * Class that represent the command of finishing a task.
+ */
 public class DoneCommand extends Command {
+
+    /**
+     * Index of the task to be completed.
+     */
     private int index;
 
+    /**
+     * Constructor that takes the index of the task to be completed.
+     * @param message String of the index of the task to be completed.
+     */
     public DoneCommand(String message) {
         super(message);
         this.index = Integer.parseInt(message);

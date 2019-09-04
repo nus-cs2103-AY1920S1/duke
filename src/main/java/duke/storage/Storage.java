@@ -12,12 +12,36 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ * Class that represents the files in the hard drive to be modified or accessed.
+ */
 public class Storage {
+
+    /**
+     * Reader needed to read the file in hard drive.
+     */
     private BufferedReader br;
+
+    /**
+     * Used to access the file in the hard drive with given filepath.
+     */
     private FileReader fr;
+
+    /**
+     * Main list of tasks of the program to be written into or accessed from hard drive.
+     */
     private ArrayList<Task> inputList;
+
+    /**
+     * Filepath of the file in the hard drive.
+     */
     private String filepath;
 
+    /**
+     * Constructor that takes in the filepath of the data.
+     * @param path The filepath of the data as String.
+     * @throws Exception Used to handle exception that occurs.
+     */
     public Storage(String path) throws Exception {
         this.filepath = path;
         this.inputList = new ArrayList<Task>();
@@ -30,14 +54,26 @@ public class Storage {
         this.br = new BufferedReader(fr);
     }
 
+    /**
+     * Used to get the list of tasks.
+     * @return The main list of tasks as ArrayList.
+     */
     public ArrayList<Task> getList() {
         return this.inputList;
     }
 
+    /**
+     * Used to update the main task list every time there is a change.
+     * @param updatedList The new list to replace the old one.
+     */
     public void updateTaskList(ArrayList<Task> updatedList) {
         this.inputList = updatedList;
     }
 
+    /**
+     * Used to load the list of tasks from hard drive into the program to be modified.
+     * @throws Exception Used to handle exception that occurs when the method is running.
+     */
     public void loadTasks() throws Exception {
         String next = br.readLine();
         while (next != null) {
@@ -71,6 +107,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Used to update the hard drive with the most current list of tasks.
+     * @throws Exception Used to handle any exception that occurs.
+     */
     public void writeToFile() throws Exception {
         FileWriter fw = new FileWriter(filepath);
         for (Task task : inputList) {

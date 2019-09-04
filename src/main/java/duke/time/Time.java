@@ -2,11 +2,31 @@ package duke.time;
 
 import duke.exception.DukeException;
 
+/**
+ * Class that represents the time.
+ */
 public class Time {
+
+    /**
+     * The time in number form.
+     */
     protected int time;
+
+    /**
+     * The time formatted correctly as output.
+     */
     protected String outputTime;
+
+    /**
+     * To indicate whether the format of the time is valid.
+     */
     protected boolean validFormat = true;
 
+    /**
+     * Constructor that takes in the time to format it correctly.
+     * @param time The time in number form.
+     * @throws DukeException Error when the input is wrong.
+     */
     public Time(int time) throws DukeException {
         String timeString = String.valueOf(time);
         if (timeString.length() > 4) {
@@ -32,6 +52,10 @@ public class Time {
         outputTime = hour + minute + format;
     }
 
+    /**
+     * To check if the time format is valid.
+     * @return True if it is valid, false otherwise.
+     */
     public boolean isValid() {
         return validFormat;
     }

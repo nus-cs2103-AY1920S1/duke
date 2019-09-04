@@ -2,15 +2,53 @@ package duke.time;
 
 import duke.exception.DukeException;
 
+/**
+ * Class that represents a date.
+ */
 public class Date {
+
+    /**
+     * The day of the year.
+     */
     private int day;
+
+    /**
+     * The month of the year.
+     */
     private int month;
+
+    /**
+     * The year.
+     */
     private int year;
+
+    /**
+     * The output of the day in String.
+     */
     private String dayOutput;
+
+    /**
+     * The output of the month in String.
+     */
     private String monthOutput;
+
+    /**
+     * The output of the year in String.
+     */
     private String yearOutput;
+
+    /**
+     * To check if the format of the date is valid.
+     */
     private boolean validFormat = true;
 
+    /**
+     * Constructor that takes in the day month and year to format it properly.
+     * @param day The day.
+     * @param month The month.
+     * @param year The year.
+     * @throws DukeException Error for when the input is not correct.
+     */
     public Date(int day, int month, int year) throws DukeException {
         String dayString = String.valueOf(day);
         String monthString = String.valueOf(month);
@@ -94,6 +132,10 @@ public class Date {
         }
     }
 
+    /**
+     * Used to check whether the format is valid or not.
+     * @return True if it is valid, false otherwise.
+     */
     public boolean isValid() {
         return validFormat;
     }

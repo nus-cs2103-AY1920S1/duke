@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     public static ArrayList<Task> list = new ArrayList<Task>();
@@ -21,7 +24,7 @@ public class Duke {
         fw.close();
     }
 
-    public static void copyFileToList() throws FileNotFoundException {
+    public static void copyFileToList() throws FileNotFoundException, ParseException {
         File file = new File(filePath);
         Scanner fs = new Scanner(file);
         while (fs.hasNext()) {
@@ -35,13 +38,13 @@ public class Duke {
                 }
                 list.add(todo);
             } else if (type.equals("D")) {
-                Deadline deadline = new Deadline(taskArr[2], taskArr[3]);
+                Deadline deadline = new Deadline(taskArr[2], convertToDate(taskArr[3]));
                 if (taskArr[1].equals("1")) {
                     deadline.markAsDone();
                 }
                 list.add(deadline);
             } else if (type.equals("E")) {
-                Event event = new Event(taskArr[2], taskArr[3]);
+                Event event = new Event(taskArr[2], convertToDate(taskArr[3]));
                 if (taskArr[1].equals("1")) {
                     event.markAsDone();
                 }
@@ -91,7 +94,13 @@ public class Duke {
         writeToFile(textToAdd.toString());
     }
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static Date convertToDate(String str) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hhmm");
+        Date date = sdf.parse(str);
+        return date;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
         copyFileToList();
 
         Scanner sc = new Scanner(System.in);
@@ -120,7 +129,8 @@ public class Duke {
                         throw new DukeException();
                     }
                     String[] t = text.split("/");
-                    Deadline deadline = new Deadline(t[0].substring(9, t[0].length() - 1), t[1].substring(3));
+                    Date date = convertToDate(t[1].substring(3));
+                    Deadline deadline = new Deadline(t[0].substring(9, t[0].length() - 1), date);
                     list.add(deadline);
                     printDetails(deadline);
                     appendTaskToFile(deadline);
@@ -132,7 +142,8 @@ public class Duke {
                     if (text.length() <= 5) {
                         throw new DukeException();
                     } String[] t = text.split("/");
-                    Event event = new Event(t[0].substring(6, t[0].length() - 1), t[1].substring(3));
+                    Date date = convertToDate(t[1].substring(3));
+                    Event event = new Event(t[0].substring(6, t[0].length() - 1), date);
                     list.add(event);
                     printDetails(event);
                     appendTaskToFile(event);

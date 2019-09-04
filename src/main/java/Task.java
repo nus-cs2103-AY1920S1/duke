@@ -1,7 +1,9 @@
+import java.util.Date;
+
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String date = "";
+    protected Date date;
     protected String type = "";
 
     public Task(String description) {
@@ -13,7 +15,7 @@ public class Task {
         return this.description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return this.date;
     }
 

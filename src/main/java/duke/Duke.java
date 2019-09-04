@@ -3,14 +3,11 @@ package duke;
 import java.io.File;
 
 /**
- * Duke.java
- * CS2103T
- * @author Gabriel Ong
- *
  * This program is an interactive task list that takes in several
  * preset commands from the user to create tasks, view the list of
  * tasks and mark each of it as completed. This class contains the
  * main method and is responsible for all input/output and Task creation.
+ * @author Gabriel Ong
  *
  */
 public class Duke {

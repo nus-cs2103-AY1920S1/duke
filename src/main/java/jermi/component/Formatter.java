@@ -16,6 +16,7 @@ public class Formatter {
 
     /**
      * Returns formatted messages.
+     * Takes in an arbitrary number of messages to be formatted.
      *
      * @param messages Message.
      * @return Formatted messages.

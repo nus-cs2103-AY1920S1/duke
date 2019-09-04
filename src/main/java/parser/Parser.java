@@ -1,16 +1,26 @@
 package parser;
 
-import command.*;
+
+
+import command.Command;
+import command.ByeCommand;
+import command.ListCommand;
+import command.DoneCommand;
+import command.ToDoCommand;
+import command.DeadlineCommand;
+import command.EventCommand;
+import command.DeleteCommand;
+import command.FindCommand;
 import exception.DukeException;
 import exception.InvalidInputException;
 
 /**
- * Parser for reading user input and understand which command user is trying to use
+ * Parser for reading user input and understand which command user is trying to use.
  */
 public class Parser {
 
     /**
-     * Reads a single line of user input and creates the relevant command
+     * Reads a single line of user input and creates the relevant command.
      * @param rawString user input to create a command
      * @return command created if user input is successfully parsed
      * @throws DukeException if user enters an invalid input and suggests available commands instead
@@ -33,8 +43,8 @@ public class Parser {
         } else if (rawString.startsWith("find ")) {
             return new FindCommand(rawString);
         } else {
-            throw new InvalidInputException("Invalid command! Try the commands: bye, list, done, todo, deadline, " +
-                    "event, find or delete and their respective formats!");
+            throw new InvalidInputException("Invalid command! Try the commands: bye, list, done, todo, deadline, "
+                    + "event, find or delete and their respective formats!");
         }
     }
 }

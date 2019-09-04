@@ -2,11 +2,11 @@ package exception;
 
 /**
  * Extends DukeException and thrown when user types ("todo") therefore attempting to create a todo
- * with any description
+ * with any description.
  */
 public class EmptyToDoDescriptionException extends DukeException {
     /**
-     * Constructor for EmptyToDoDescriptionException
+     * Constructor for EmptyToDoDescriptionException.
      * @param exceptionMsg informs the user what the correct format of creating a new todo should be and why
      *      *                     this exception was thrown
      */

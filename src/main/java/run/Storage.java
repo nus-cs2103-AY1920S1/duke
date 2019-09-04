@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage system that writes to and from file in hard disk based on state on TaskList
+ * Storage system that writes to and from file in hard disk based on state on TaskList.
  */
 public class Storage {
     protected String filepath;
@@ -23,7 +23,7 @@ public class Storage {
     protected StorageParser sp = new StorageParser();
 
     /**
-     * Constructor for Storage
+     * Constructor for Storage.
      * @param filepath filepath to state file
      */
     public Storage(String filepath) {
@@ -32,7 +32,7 @@ public class Storage {
     }
 
     /**
-     * Initialises by checking if file is present in specified path and creates file if none present
+     * Initialises by checking if file is present in specified path and creates file if none present.
      */
     public void init() {
         state = new File(filepath);
@@ -42,13 +42,13 @@ public class Storage {
             } else {
                 Ui.showMessage("State file detected!");
             }
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             Ui.showError("IO exception encountered while initializing state file!");
         }
     }
 
     /**
-     * Creates tasks from state file and stores them in an arraylist for later conversion into TaskList object
+     * Creates tasks from state file and stores them in an arraylist for later conversion into TaskList object.
      * @return An arraylist of tasks based on tasks created and loaded from state file
      */
     public ArrayList<Task> load() {
@@ -58,20 +58,20 @@ public class Storage {
             sc = new Scanner(state);
             while (sc.hasNextLine()) {
                 String nextLine = sc.nextLine();
-                if(nextLine.equals("")) {
+                if (nextLine.equals("")) {
                     break;
                 } else {
                     tasks.add(sp.parseLine(nextLine));
                 }
             }
-        } catch(IOException ex){
+        } catch (IOException ex) {
             Ui.showError("IO exception caught while loading state file, initializing new empty Task List!");
             return new ArrayList<Task>();
-        } catch(ParseFileException ex) {
+        } catch (ParseFileException ex) {
             Ui.showError("Exception while reading contents of state file, initializing new empty Task List!");
             return new ArrayList<Task>();
         } finally {
-            if(sc != null) {
+            if (sc != null) {
                 sc.close();
             }
         }
@@ -79,7 +79,7 @@ public class Storage {
     }
 
     /**
-     * Rewrites state file based on current tasks in TaskList
+     * Rewrites state file based on current tasks in TaskList.
      * @param tasks all current tasks (the entire TaskList itself)
      * @throws IOException if exception when accessing file
      * @throws UpdateStateException if exception when writing contents to file
@@ -89,15 +89,15 @@ public class Storage {
         try {
             fw = new FileWriter(filepath);
             StringBuilder textToAddSB = new StringBuilder();
-            for (Task curr_task : tasks.getTasksArrayList()) {
-                if (curr_task instanceof ToDo) {
-                    textToAddSB.append(fileUpdateToDo((ToDo) curr_task));
+            for (Task currTask : tasks.getTasksArrayList()) {
+                if (currTask instanceof ToDo) {
+                    textToAddSB.append(fileUpdateToDo((ToDo) currTask));
                     textToAddSB.append(System.lineSeparator());
-                } else if (curr_task instanceof Deadline) {
-                    textToAddSB.append(fileUpdateDeadline((Deadline) curr_task));
+                } else if (currTask instanceof Deadline) {
+                    textToAddSB.append(fileUpdateDeadline((Deadline) currTask));
                     textToAddSB.append(System.lineSeparator());
-                } else if (curr_task instanceof Event) {
-                    textToAddSB.append(fileUpdateEvent((Event) curr_task));
+                } else if (currTask instanceof Event) {
+                    textToAddSB.append(fileUpdateEvent((Event) currTask));
                     textToAddSB.append(System.lineSeparator());
                 } else {
                     throw new UpdateStateException("Exception while updating state!");
@@ -105,55 +105,55 @@ public class Storage {
             }
             fw.write(textToAddSB.toString());
         } finally {
-            if(fw != null) {
+            if (fw != null) {
                 fw.close();
             }
         }
     }
 
     /**
-     * Converts todo object into formatted String representation for storage on state file
+     * Converts todo object into formatted String representation for storage on state file.
      * @param todo todo object to be written to state file
      * @return String of todo formatted for sending for writing to state file
      */
     public String fileUpdateToDo(ToDo todo) {
-        StringBuilder SB =  new StringBuilder();
-        SB.append("T//");
-        SB.append(todo.getName());
-        SB.append("//");
-        SB.append(todo.checkIsDone());
-        return SB.toString();
+        StringBuilder stringBuilder =  new StringBuilder();
+        stringBuilder.append("T//");
+        stringBuilder.append(todo.getName());
+        stringBuilder.append("//");
+        stringBuilder.append(todo.checkIsDone());
+        return stringBuilder.toString();
     }
 
     /**
-     * Converts deadline object into formatted String representation for storage on state file
+     * Converts deadline object into formatted String representation for storage on state file.
      * @param deadline deadline object to be written to state file
      * @return String of deadline formatted for sending for writing to state file
      */
     public String fileUpdateDeadline(Deadline deadline) {
-        StringBuilder SB =  new StringBuilder();
-        SB.append("D//");
-        SB.append(deadline.getName());
-        SB.append("//");
-        SB.append(deadline.checkIsDone());
-        SB.append("//");
-        SB.append(deadline.getStringBy());
-        return SB.toString();
+        StringBuilder stringBuilder =  new StringBuilder();
+        stringBuilder.append("D//");
+        stringBuilder.append(deadline.getName());
+        stringBuilder.append("//");
+        stringBuilder.append(deadline.checkIsDone());
+        stringBuilder.append("//");
+        stringBuilder.append(deadline.getStringBy());
+        return stringBuilder.toString();
     }
 
     /**
-     * Converts event object into formatted String representation for storage on state file
+     * Converts event object into formatted String representation for storage on state file.
      * @param event event object to be written to state file
      * @return String of event formatted for sending for writing to state file
      */
     public String fileUpdateEvent(Event event) {
-        StringBuilder SB =  new StringBuilder();
-        SB.append("E//");
-        SB.append(event.getName());
-        SB.append("//");
-        SB.append(event.checkIsDone());
-        SB.append("//");
-        SB.append(event.getStringAt());
-        return SB.toString();
+        StringBuilder stringBuilder =  new StringBuilder();
+        stringBuilder.append("E//");
+        stringBuilder.append(event.getName());
+        stringBuilder.append("//");
+        stringBuilder.append(event.checkIsDone());
+        stringBuilder.append("//");
+        stringBuilder.append(event.getStringAt());
+        return stringBuilder.toString();
     }
 }

@@ -12,7 +12,7 @@ public abstract class Command {
 
     /**
      * Abstract method that adds, withdraws or removes information from current TaskList, updates the
-     * state of the TaskList through storage and interacts/updates the user through the ui
+     * state of the TaskList through storage and interacts/updates the user through the ui.
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state

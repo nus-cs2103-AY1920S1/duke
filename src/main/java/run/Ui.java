@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Handles all the interaction with the user (taking input and printing output)
+ * Handles all the interaction with the user (taking input and printing output).
  */
 public class Ui {
     protected Scanner sc;
 
     /**
-     * Prints an error message to the user
+     * Prints an error message to the user.
      * @param errorMessage the error message to be printed to the user
      */
     public static void showError(String errorMessage) {
@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Prints a message to the user
+     * Prints a message to the user.
      * @param message the message to be printed
      */
     public static void showMessage(String message) {
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Introduction that is printed when Duke is first accessed
+     * Introduction that is printed when Duke is first accessed.
      */
     public void introduction() {
         showLine();
@@ -40,35 +40,35 @@ public class Ui {
     }
 
     /**
-     * Initialises a scanner (Used when Duke is first accessed)
+     * Initialises a scanner (Used when Duke is first accessed).
      */
     public void init() {
         this.sc = new Scanner(System.in);
     }
 
     /**
-     * Prints exit message (Used when Duke is exited)
+     * Prints exit message (Used when Duke is exited).
      */
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Closes the scanner (Used when Duke is exited)
+     * Closes the scanner (Used when Duke is exited).
      */
     public void closeScanner() {
         this.sc.close();
     }
 
     /**
-     * Prints line space for readability
+     * Prints line space for readability.
      */
     public void showLine() {
         System.out.println("---------------------------------------------------------------------");
     }
 
     /**
-     * Reads the line that user inputs
+     * Reads the line that user inputs.
      * @return rawString of user input
      */
     public String readCommand() {
@@ -76,19 +76,19 @@ public class Ui {
     }
 
     /**
-     * Prints a list of tasks
+     * Prints a list of tasks.
      * @param tasks arraylist of tasks to be printed
      */
     public static void printList(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
-        for(int i = 1; i <= tasks.size(); i++) {
-            Task curr_task = tasks.get(i-1);
-            System.out.println(i + "." + curr_task);
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task currTask = tasks.get(i - 1);
+            System.out.println(i + "." + currTask);
         }
     }
 
     /**
-     * Prints messages for when task is added to TaskList
+     * Prints messages for when task is added to TaskList.
      * @param task the task that was added
      * @param size current number of tasks in TaskList
      */
@@ -99,7 +99,7 @@ public class Ui {
     }
 
     /**
-     * Prints message for when a task is marked as done
+     * Prints message for when a task is marked as done.
      * @param task the task to be marked as done
      */
     public static void printDone(Task task) {
@@ -108,7 +108,7 @@ public class Ui {
     }
 
     /**
-     * Prints messages for when a task is deleted from TaskList
+     * Prints messages for when a task is deleted from TaskList.
      * @param task the task to be deleted
      * @param size new total number of tasks in TaskList
      */
@@ -117,15 +117,20 @@ public class Ui {
         System.out.println("  " + task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
+
+    /**
+     * Prints tasks that were found and special message if not tasks were found to match search string.
+     * @param tasks arraylist of found tasks that contained previous search string
+     */
     public static void printFind(ArrayList<Task> tasks) {
-        if(tasks.size() == 0) {
+        if (tasks.size() == 0) {
             System.out.println("No tasks found containing your search!");
             return;
         }
         System.out.println("Here are the matching tasks in your list:");
-        for(int i = 1; i <= tasks.size(); i++) {
-            Task curr_task = tasks.get(i-1);
-            System.out.println(i + "." + curr_task);
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task currTask = tasks.get(i - 1);
+            System.out.println(i + "." + currTask);
         }
     }
 }

@@ -9,14 +9,14 @@ import run.Ui;
 import java.io.IOException;
 
 /**
- * Extends Command class and used to mark an exisiting task in TaskList as done
+ * Extends Command class and used to mark an exisiting task in TaskList as done.
  */
 public class DoneCommand extends Command {
     protected String rawString;
     protected int taskNum;
 
     /**
-     * Constructor for done command
+     * Constructor for done command.
      * @param rawString complete unparsed user input of done creation request
      * @throws DoneParameterException if user does not provide a valid int number
      */
@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
     /**
      * Tries to mark relevant task in TaskList as done, updates state in storage and interacts/updates
      * the user through the ui. Catches IOException when accessing the storage state file and
-     * UpdateStateException if exception faces while updating storage state file
+     * UpdateStateException if exception faces while updating storage state file.
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state
@@ -44,13 +44,13 @@ public class DoneCommand extends Command {
             storage.updateState(tasks);
         } catch (IOException ex) {
             Ui.showError("IO exception caught while marking task as done!");
-        } catch(UpdateStateException ex) {
+        } catch (UpdateStateException ex) {
             Ui.showError(ex.getMessage());
         }
     }
 
     /**
-     * Checks if this command is an exit ("bye") command
+     * Checks if this command is an exit ("bye") command.
      * @return false boolean since command is not exit ("bye") command
      */
     public boolean isExit() {

@@ -9,14 +9,14 @@ import run.Ui;
 import java.io.IOException;
 
 /**
- * Extends Command class and is used to delete an existing task from TaskList
+ * Extends Command class and is used to delete an existing task from TaskList.
  */
 public class DeleteCommand extends Command {
     protected String rawString;
     protected int taskNum;
 
     /**
-     * Constructor for delete command
+     * Constructor for delete command.
      * @param rawString complete unparsed user input of delete creation request
      * @throws DeleteParameterException if user does not provide a valid int number
      */
@@ -29,9 +29,10 @@ public class DeleteCommand extends Command {
             throw new DeleteParameterException("Invalid parameter! Try the format: delete (task number)");
         }
     }
+
     /**
      * Deletes task from current TaskList based on user task number input, updates the
-     * state of the storage by deleting task as well and interacts/updates the user through the ui
+     * state of the storage by deleting task as well and interacts/updates the user through the ui.
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state
@@ -42,13 +43,13 @@ public class DeleteCommand extends Command {
             storage.updateState(tasks);
         } catch (IOException ex) {
             Ui.showError("IO exception caught while deleting task!");
-        } catch(UpdateStateException ex) {
+        } catch (UpdateStateException ex) {
             Ui.showError(ex.getMessage());
         }
     }
 
     /**
-     * Checks if this command is an exit ("bye") command
+     * Checks if this command is an exit ("bye") command.
      * @return false boolean since command is not exit ("bye") command
      */
     public boolean isExit() {

@@ -5,13 +5,13 @@ import task.Task;
 import java.util.ArrayList;
 
 /**
- * TaskList for storing all current tasks
+ * TaskList for storing all current tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor for TaskList
+     * Constructor for TaskList.
      * @param tasks arraylist of tasks to be stored in this TaskList
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     /**
-     * Get the arraylist of tasks stored in this TaskList
+     * Get the arraylist of tasks stored in this TaskList.
      * @return arraylist of tasks in this TaskList
      */
     public ArrayList<Task> getTasksArrayList() {
@@ -27,10 +27,10 @@ public class TaskList {
     }
 
     /**
-     * Prints all tasks currently stored in this TaskList through ui
+     * Prints all tasks currently stored in this TaskList through ui.
      */
     public void list() {
-        if(this.tasks.size() == 0) {
+        if (this.tasks.size() == 0) {
             Ui.showMessage("No tasks!");
             return;
         }
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task into this TaskList
+     * Adds a task into this TaskList.
      * @param task the task to be added in
      */
     public void add(Task task) {
@@ -47,39 +47,43 @@ public class TaskList {
     }
 
     /**
-     * Marks a task within this TaskList as done
-     * @param task_num int of task number that is to be marked as done (1-indexed)
+     * Marks a task within this TaskList as done.
+     * @param taskNum int of task number that is to be marked as done (1-indexed)
      */
-    public void done(int task_num) {
-        if(task_num > this.tasks.size()) {
+    public void done(int taskNum) {
+        if (taskNum > this.tasks.size()) {
             Ui.showError("No task at that number! (Marking as done unsuccessful)");
             return;
         }
-        Task curr_task = this.tasks.get(task_num - 1);
-        curr_task.setDone();
-        Ui.printDone(curr_task);
+        Task currTask = this.tasks.get(taskNum - 1);
+        currTask.setDone();
+        Ui.printDone(currTask);
     }
 
     /**
-     * Deletes a task from within the TaskList
-     * @param task_num int of task number that is to be deleted (1-indexed)
+     * Deletes a task from within the TaskList.
+     * @param taskNum int of task number that is to be deleted (1-indexed)
      */
-    public void delete(int task_num) {
-        if(task_num > this.tasks.size()) {
+    public void delete(int taskNum) {
+        if (taskNum > this.tasks.size()) {
             Ui.showError("No task at that number! (Deletion unsuccessful)");
             return;
         }
-        Task curr_task = this.tasks.get(task_num - 1);
-        this.tasks.remove(task_num - 1);
-        Ui.printDelete(curr_task, this.tasks.size());
+        Task currTask = this.tasks.get(taskNum - 1);
+        this.tasks.remove(taskNum - 1);
+        Ui.printDelete(currTask, this.tasks.size());
     }
 
+    /**
+     * Searches through tasks in this TaskList to find matching tasks.
+     * @param searchString String to be searched for within task names
+     */
     public void find(String searchString) {
         ArrayList<Task> passedTasks = new ArrayList<Task>();
-        for(int i = 1; i <= this.tasks.size(); i++) {
-            Task curr_task = this.tasks.get(i-1);
-            if(curr_task.getName().contains(searchString)) {
-                passedTasks.add(curr_task);
+        for (int i = 1; i <= this.tasks.size(); i++) {
+            Task currTask = this.tasks.get(i - 1);
+            if (currTask.getName().contains(searchString)) {
+                passedTasks.add(currTask);
             }
         }
         Ui.printFind(passedTasks);

@@ -17,7 +17,7 @@ public abstract class AddCommand extends Command {
 
     /**
      * Abstract method that adds information to current TaskList, updates the
-     * state of the TaskList through storage and interacts/updates the user through the ui
+     * state of the TaskList through storage and interacts/updates the user through the ui.
      * @param tasks current TaskList with all current tasks
      * @param ui current user interface
      * @param storage current storage state

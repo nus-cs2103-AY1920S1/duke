@@ -1,12 +1,12 @@
 package run;
 
+import exception.DukeException;
 import parser.Parser;
-import exception.*;
 import command.Command;
 
 /**
  * Creates a new Duke interface task management system that has includes a task list, storage system and user
- * interface
+ * interface.
  */
 public class Duke {
     private Storage storage;
@@ -14,7 +14,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for Duke
+     * Constructor for Duke.
      * @param filePath to current save state file
      */
     public Duke(String filePath) {
@@ -24,7 +24,7 @@ public class Duke {
     }
 
     /**
-     * Runs introductory messages and begins awaiting user input
+     * Runs introductory messages and begins awaiting user input.
      */
     public void run() {
         ui.introduction();
@@ -46,7 +46,7 @@ public class Duke {
     }
 
     /**
-     * main program in Java
+     * main program in Java.
      * @param args void
      */
     public static void main(String[] args) {

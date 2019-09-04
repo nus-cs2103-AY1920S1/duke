@@ -16,7 +16,6 @@ public class Parser {
     /**
      * Parses the input string and generates Command object
      * based on the input task type and relevant details.
-     *
      * Throws DukeException when the input does not fit into
      * any type.
      *

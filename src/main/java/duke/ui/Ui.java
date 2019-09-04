@@ -1,8 +1,8 @@
 package duke.ui;
 
 import duke.todo.Task;
+
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Ui {
     private Scanner sc = new Scanner(System.in);
@@ -109,6 +109,8 @@ public class Ui {
     }
 
     private static void indent() {
-        for (int i = 0; i < 4; i++) System.out.print(" ");
+        for (int i = 0; i < 4; i++) {
+            System.out.print(" ");
+        }
     }
 }

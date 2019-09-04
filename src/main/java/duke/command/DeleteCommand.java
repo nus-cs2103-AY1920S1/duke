@@ -19,7 +19,7 @@ public class DeleteCommand implements Command {
      */
     public String getTaskType() {
         return "delete";
-    };
+    }
 
     /**
      * Returns index of the task to be deleted.
@@ -28,15 +28,15 @@ public class DeleteCommand implements Command {
      */
     public int getIndex() {
         return index;
-    };
+    }
 
     public String getTask() {
         return "";
-    };
+    }
 
     public String getDate() {
         return "";
-    };
+    }
 
     public String getKeyword() {
         return "error";

@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      * @throws DukeException which can come from one sources, itself if the description of the find is empty or has more
      * than one keyword
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = this.inputCommand.split(" ");
         if (inputsplit.length <= 1) {
             throw new DukeException("OOPS!!! The description of a find Command cannot be empty.");
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
             throw new DukeException("OOPS!!! The find Command can only accept one keyword.");
         } else {
             ArrayList<Task> taskToFind = tasks.findTask(inputsplit[1]);
-            ui.printFind(taskToFind);
+            return ui.printFind(taskToFind);
         }
     }
 

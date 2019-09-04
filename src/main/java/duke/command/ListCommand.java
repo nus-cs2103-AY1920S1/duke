@@ -10,8 +10,7 @@ import duke.task.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Creates a new ListCommand, which requires no other details. The
-     * superclass constructor is called with an empty string.
+     * Creates a new ListCommand, which requires no other details,
      */
     public ListCommand() {
         super("");

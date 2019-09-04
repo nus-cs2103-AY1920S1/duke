@@ -14,8 +14,6 @@ public abstract class Task {
         isDone = true;
     }
 
-    public abstract String toFile();
-
     @Override
     public abstract String toString();
 }

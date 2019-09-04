@@ -12,6 +12,14 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.DukeException;
 
+/**
+ * Represents a Command manager that adds new Task to TaskList, deletes
+ * tasks and printing the list of tasks.
+ * Contains the fields TaskList that contains the list of Task,
+ * Ui that prints the message for each commands and Storage that
+ * updates the files when the list of Task is modified.
+ */
+
 public class Parser {
 
     private TaskList taskList;
@@ -24,6 +32,14 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Parse a one line input into a Task or Command.
+     * Print message is produced every time an input is passed in.
+     *
+     * @param input  Command to be executed or Task to be created.
+     * @throws DukeException  if Task has incomplete description.
+     * @throws IOException if
+     */
     public void parseLineInput(String input) throws DukeException, IOException, ParseException {
         String firstWord = input.split(" ")[0];
         //ArrayList<Task> list = taskList.getList();

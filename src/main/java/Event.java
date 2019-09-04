@@ -26,7 +26,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String mark = (isDone ? "✓" : "✗");
-        return String.format("[E][%s] %s (at: %s)", mark, taskDescription, at.format(dateTimeFormatter).toString());
+        return String.format("[E][%s] %s (at: %s)", (isDone ? "Complete" : "Incomplete"),
+                taskDescription, at.format(dateTimeFormatter));
     }
 }

@@ -36,8 +36,12 @@ public class TaskList implements Serializable {
      *
      * @param index The target index.
      */
-    public void markTaskAsDone(int index) {
-        taskList.get(index).markAsDone();
+    public void markTaskAsDone(int index) throws OutOfBoundsDeletionException {
+        try {
+            taskList.get(index).markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfBoundsDeletionException("No task with index number " + (index + 1) + " on your tasklist!");
+        }
     }
 
     /**

@@ -18,15 +18,16 @@ public class FindTaskCommand extends Command {
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         List<Task> matchedTasks = tasks.getMatchedTasks(keyword);
         if (matchedTasks.size() == 0) {
-            ui.print("There are no tasks in your list matching your keyword!");
+            return "There are no tasks in your list matching your keyword!";
         } else {
-            ui.print("Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
             for (int i = 1; i <= matchedTasks.size(); i++) {
-                ui.print(String.format("%d. %s", i, matchedTasks.get(i - 1)));
+                sb.append(String.format("%d. %s\n", i, matchedTasks.get(i - 1)));
             }
+            return sb.toString().trim();
         }
     }
 

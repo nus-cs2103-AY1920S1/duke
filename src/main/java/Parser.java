@@ -17,10 +17,10 @@ public class Parser {
     private static Optional<Command> findOneParameterCommand(String action) throws DukeException {
         Optional<Command> command;
         List<String> validActions = Arrays.asList(
-                new String[]{"bye", "list", "done", "delete", "find", "todo", "deadline", "event"});
+                "bye", "list", "done", "delete", "find", "todo", "deadline", "event");
 
         if (!validActions.contains(action)) {
-            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         switch (action) {
@@ -47,7 +47,7 @@ public class Parser {
         String action = parameters[0];
 
         if (parameters.length == 1) {
-            throw new EmptyDescriptionException("☹ OOPS!!! The description of a " +
+            throw new EmptyDescriptionException("OOPS!!! The description of a " +
                     action + " command cannot be empty.");
         }
 
@@ -87,19 +87,19 @@ public class Parser {
             String[] description;
             description = parameters[1].split(" /by ");
             if (description.length == 1) {
-                throw new EmptyDescriptionException("☹ OOPS!!! You missed out the time of the deadline task.");
+                throw new EmptyDescriptionException("OOPS!!! You missed out the time of the deadline task.");
             }
             command = new AddTaskCommand(new Deadline(description[0], description[1]));
             break;
         case "event":
             description = parameters[1].split(" /at ");
             if (description.length == 1) {
-                throw new EmptyDescriptionException("☹ OOPS!!! You missed out the time of the event task.");
+                throw new EmptyDescriptionException("OOPS!!! You missed out the time of the event task.");
             }
             command = new AddTaskCommand(new Event(description[0], description[1]));
             break;
         default:
-            throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return command;
     }

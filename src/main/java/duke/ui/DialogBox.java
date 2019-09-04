@@ -1,18 +1,14 @@
 package duke.ui;
 
 import java.io.IOException;
-import java.util.Collections;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -20,22 +16,28 @@ import javafx.scene.text.TextAlignment;
  * Consists of an ImageView to represent the user or duke's image and a label
  * containing response from duke.
  */
-class DialogBox extends HBox {
+class DialogBox extends AnchorPane {
     /** JavaFX Label control containing the dialog message. */
     @FXML
     private Label dialog;
     /** JavaFX ImageView control for displaying the user or duke's image. */
     @FXML
     private ImageView displayPicture;
+    /** Amount of space between the dialog and displayPicture containers. */
+    private static final int DIALOG_IMAGE_SPACE = 10;
+    /** Amount of space between the displayPicture and application's border. */
+    private static final double WINDOW_IMAGE_SPACE = 1.0;
 
     /**
      * Private constructor of dialog box for initialising the Label and
      * ImageView controls.
+     * Also flips the horizontal orientation to left-to-right if specified.
      *
      * @param text String dialog message for the Label control.
      * @param image JavaFX Image for the ImageView control.
+     * @param shouldFlip Boolean of whether the dialogBox should be aligned left-to-right.
      */
-    private DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image, boolean shouldFlip) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/views/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -47,18 +49,28 @@ class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(image);
-    }
 
-    /**
-     * Flips the dialog box, such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.CENTER_LEFT);
-        dialog.setAlignment(Pos.CENTER_LEFT);
-        dialog.setTextAlignment(TextAlignment.LEFT);
+        if (shouldFlip) {
+            AnchorPane.setLeftAnchor(displayPicture, WINDOW_IMAGE_SPACE);
+            AnchorPane.setRightAnchor(displayPicture, null);
+
+            dialog.setStyle(dialog.getStyle()
+                    + "-fx-border-width: 0 0 0 2; -fx-border-color:#ddd6c7;");
+            AnchorPane.setLeftAnchor(dialog,
+                    displayPicture.getBoundsInParent().getMaxX() + DIALOG_IMAGE_SPACE);
+            dialog.setAlignment(Pos.CENTER_LEFT);
+            dialog.setTextAlignment(TextAlignment.LEFT);
+            AnchorPane.setRightAnchor(dialog, WINDOW_IMAGE_SPACE);
+
+            this.setStyle(this.getStyle() + "-fx-border-color:#f2eada; -fx-background-color:#82c9c7;");
+        } else {
+            dialog.setStyle(dialog.getStyle()
+                    + "-fx-border-width: 0 2 0 0; -fx-border-color:#393654;");
+            AnchorPane.setRightAnchor(dialog,
+                    displayPicture.getBoundsInLocal().getMaxX() + DIALOG_IMAGE_SPACE);
+
+            this.setStyle(this.getStyle() + "-fx-border-color:#aaaaaa; -fx-background-color:#4e8c91;");
+        }
     }
 
     /**
@@ -69,7 +81,7 @@ class DialogBox extends HBox {
      * @return User DialogBox instance.
      */
     static DialogBox getUserDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        return new DialogBox(text, image, false);
     }
 
     /**
@@ -80,8 +92,6 @@ class DialogBox extends HBox {
      * @return Duke DialogBox instance.
      */
     static DialogBox getDukeDialog(String text, Image image) {
-        var db = new DialogBox(text, image);
-        db.flip();
-        return db;
+        return new DialogBox(text, image, true);
     }
 }

@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * A GUI for Duke using FXML.
@@ -33,10 +32,11 @@ public class DukeApplication extends Application {
                     Duke.class.getResource("/views/MainWindow.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
-            duke = new Duke(fxmlLoader.<MainWindow>getController());
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().exitHandler =
-                    (ActionEvent event) -> stage.close();
+
+            MainWindow dukeMainWindow = fxmlLoader.<MainWindow>getController();
+            duke = new Duke(dukeMainWindow);
+            dukeMainWindow.setDuke(duke);
+            dukeMainWindow.exitHandler = (ActionEvent event) -> stage.close();
 
             stage.show();
         } catch (IOException e) {

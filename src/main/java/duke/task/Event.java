@@ -9,11 +9,6 @@ public class Event extends Task {
     /** Event at date. **/
     private Date at;
 
-    public Event(String description, Date at) {
-        super(description);
-        this.at = at;
-    }
-
     public Event(String description, Date at, boolean isDone) {
         super(description, isDone);
         this.at = at;

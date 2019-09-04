@@ -4,7 +4,7 @@ import duke.task.Task;
 
 public class TaskStub extends Task {
     TaskStub() {
-        super("");
+        super("", false);
     }
 
     @Override

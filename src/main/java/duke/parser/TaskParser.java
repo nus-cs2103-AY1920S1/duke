@@ -47,7 +47,7 @@ public class TaskParser {
                 throw new InvalidInputDukeException("Todo description cannot be empty");
             }
 
-            return new Todo(subArgs[1]);
+            return new Todo(subArgs[1], false);
         case "deadline":
             matcher = DEADLINE_PATTERN.matcher(input);
 
@@ -62,7 +62,7 @@ public class TaskParser {
                 throw new InvalidInputDukeException("Syntax error. Date should be: d/M/yyyy HHmm");
             }
 
-            return new Deadline(matcher.group(1), date);
+            return new Deadline(matcher.group(1), date, false);
         case "event":
             matcher = EVENT_PATTERN.matcher(input);
 
@@ -77,7 +77,7 @@ public class TaskParser {
                 throw new InvalidInputDukeException("Syntax error. Date should be: d/M/yyyy HHmm");
             }
 
-            return new Event(matcher.group(1), date);
+            return new Event(matcher.group(1), date, false);
         default:
             throw new UnknownCommandDukeException();
         }

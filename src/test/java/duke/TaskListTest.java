@@ -40,7 +40,7 @@ class TaskListTest {
     @Test
     void testTaskList_AddTodo() throws DukeException {
         TaskList tasks = new TaskList();
-        tasks.addTask(new Todo("Test 1"));
+        tasks.addTask(new Todo("Test 1", false));
         assertEquals("Test 1", tasks.getTask(0).getDescription());
     }
 
@@ -53,8 +53,8 @@ class TaskListTest {
     @Test
     void testTaskList_FindTasksByKeyword() {
         TaskList tasks = new TaskList();
-        tasks.addTask(new Todo("hi"));
-        tasks.addTask(new Todo("bye"));
+        tasks.addTask(new Todo("hi", false));
+        tasks.addTask(new Todo("bye", false));
         assertEquals(1, tasks.findTasksByKeyword("bye").size());
         assertEquals("bye", tasks.findTasksByKeyword("bye").get(0).getDescription());
     }

@@ -10,11 +10,6 @@ public abstract class Task {
     /** Status of task. **/
     private boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

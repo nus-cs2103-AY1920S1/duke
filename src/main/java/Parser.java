@@ -43,42 +43,35 @@ public class Parser {
      *
      * @throws ParseException If date given is in the incorrect format and not dd/MM/yyyy HHmm.
      */
-    public void doCommand() throws ParseException {
+    public String doCommand() throws ParseException {
         if (taskDetails.equals("")) {
-            if (command.equals("bye") || command.equals("list") ) {
-
-            } else {
-                ui.showDescriptionEmptyError();
-                return;
+            if (!command.equals("list") ) {
+                return ui.showDescriptionEmptyError();
             }
         }
         switch (command) {
             case "list":
-                ui.list(list.getList());
-                break;
+                return ui.list(list.getList());
             case "done":
                 try {
                     Task task = list.doTask(taskDetails);
-                    ui.taskDone(task);
+                    return ui.taskDone(task);
                 } catch (Exception ex) {
-                    ui.noSuchTaskError();
+                    return ui.noSuchTaskError();
                 }
-                break;
             case "delete":
                 try {
                     Task task = list.deleteTask(taskDetails);
-                    ui.taskDeleted(task);
-                    ui.showNumberOfTasks(list.getList());
+                    return ui.taskDeleted(task) + "\n" +
+                            ui.showNumberOfTasks(list.getList());
                 } catch (Exception ex) {
-                    ui.noSuchTaskError();
+                    return ui.noSuchTaskError();
                 }
-                break;
             case "todo":
                 Todo task = new Todo(taskDetails);
                 list.addTask(task);
-                ui.taskCreated(task);
-                ui.showNumberOfTasks(list.getList());
-                break;
+                return ui.taskCreated(task) + "\n" +
+                        ui.showNumberOfTasks(list.getList());
             case "deadline": {
                 //split the string by /
                 String[] halves = taskDetails.split("/by");
@@ -86,9 +79,8 @@ public class Parser {
                 String by = halves[1];
                 Deadline deadline = new Deadline(description, by);
                 list.addTask(deadline);
-                ui.taskCreated(deadline);
-                ui.showNumberOfTasks(list.getList());
-                break;
+                return ui.taskCreated(deadline) + "\n" +
+                        ui.showNumberOfTasks(list.getList());
             }
             case "event": {
                 String[] halves = taskDetails.split("/at");
@@ -96,9 +88,8 @@ public class Parser {
                 String by = halves[1];
                 Event event = new Event(description, by);
                 list.addTask(event);
-                ui.taskCreated(event);
-                ui.showNumberOfTasks(list.getList());
-                break;
+                return ui.taskCreated(event) + "\n" +
+                        ui.showNumberOfTasks(list.getList());
             }
             case "find": {
                 String keyword = taskDetails;
@@ -108,12 +99,10 @@ public class Parser {
                         filteredList.add(item);
                     }
                 }
-                ui.list(filteredList);
-                break;
+                return ui.list(filteredList);
             }
             default:
-                ui.showWrongCommandError();
-                break;
+                return ui.showWrongCommandError();
         }
     }
 }

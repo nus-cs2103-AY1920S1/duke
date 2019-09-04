@@ -1,17 +1,23 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -22,6 +28,35 @@ public class Duke extends Application {
             ui.showLoadingError();
         }
     }
+    String getResponse(String input) {
+
+        Parser parser = new Parser(input, ui, tasks);
+        if (parser.getCommand().equals("bye")) {
+            return ui.sayGoodbye();
+        }
+        try {
+            return parser.doCommand();
+        } catch (Exception e) {
+            return "Something went wrong :( Please try again";
+        }
+
+//        String filePath = "C:\\Users\\johnn\\CS2103\\duke\\tasks.txt";
+//        try {
+//            storage.updateTasks(filePath, tasks.getList());
+//            return "Updating list....";
+//        } catch (Exception e) {
+//            return "Tasks not saved";
+//        }
+    }
+
+    public void updateDb() {
+        String filePath = "C:\\Users\\johnn\\CS2103\\duke\\tasks.txt";
+        try {
+            storage.updateTasks(filePath, tasks.getList());
+        } catch (Exception e) {
+        }
+    }
+
 
     public void run() {
         ui.greet();
@@ -51,6 +86,7 @@ public class Duke extends Application {
         new Duke(filePath).run();
     }
 
+
     /**
      * Converts a Date object to a String object in dd/MM/yyyy HHmm format
      *
@@ -63,12 +99,5 @@ public class Duke extends Application {
         return sDate;
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
 }

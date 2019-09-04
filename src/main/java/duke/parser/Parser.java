@@ -13,8 +13,21 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a parser object
+ */
 public class Parser {
 
+    /**
+     * Parser for the stored message that takes in a String and returns the parsed task.
+     * It parses messages that are stored inside the .txt file by Storage.
+     * It will throw a DukeException if the given command is in the wrong format.
+     * Only todo, deadline and event tasks can be stored in the data file.
+     *
+     * @param message The command to be parsed
+     * @return The parsed task
+     * @throws DukeException Error thrown if the command stored is in the wrong format
+     */
     public static Task parseStoredMessage(String message) throws DukeException {
         String[] commands = message.split("\\s{1}\\|\\s{1}");
         Task taskToAdd = null;
@@ -34,6 +47,16 @@ public class Parser {
         return taskToAdd;
     }
 
+    /**
+     * Parses a command from the user.
+     * It splits the command into its arguments according to the single whitespace delimiter.
+     * Allows for done, todo, deadline, event, delete, list, bye and find commands.
+     * It will throw a DukeException if the command given is in the wrong format.
+     *
+     * @param message
+     * @return the parsed command from the user tet
+     * @throws DukeException
+     */
     public static Command parseUserMessage(String message) throws DukeException {
         String[] commands = message.split(" ");
         switch (commands[0].toLowerCase()) {

@@ -26,14 +26,15 @@ public class FindCommand extends Command {
 
     /**
      * Executes the command to search for a keyword.
-     * It gets the arrayList<Task> from within the TaskList to be able to search,
+     * It gets the {@literal arrayList<Task>} from within the TaskList to be able to search,
      * then it loops through each task and searches if the description contains the keyword to be searched.
-     * It then creates a new TaskList from all the matches, and then calls listAllTasks with the provided ui.
+     * It then creates a new TaskList from all the matches, and then creates a new ListCommand to list out
+     * all the tasks that contain the keyword.
      *
      * @param tasks The TaskList to be searched
      * @param ui The ui to message the user
      * @param storage Storage if needed
-     * @throws DukeException
+     * @throws DukeException If there is an error while executing the FindCommand
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
@@ -44,6 +45,6 @@ public class FindCommand extends Command {
                     matches.add(task);
                 }
             }
-        new TaskList(matches).listAllTasks(ui);
+        new ListCommand().execute(new TaskList(matches), ui, storage);
     }
 }

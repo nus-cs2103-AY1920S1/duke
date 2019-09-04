@@ -1,6 +1,5 @@
 package duke.task;
 import duke.exception.DukeException;
-import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -51,17 +50,6 @@ public class TaskList {
             throw new DukeException("Task Number is out of bounds");
         }
         this.toDoList.set(numberToSet - 1, taskToSet);
-    }
-
-    public void listAllTasks(Ui ui) {
-        ui.messageUser("Here are the tasks:");
-        int startNumber = 1;
-        ArrayList<String> allTasks = new ArrayList<>();
-        for (Task t : this.toDoList) {
-            allTasks.add("" + startNumber + "." + t.getTaskStatus());
-            startNumber++;
-        }
-        ui.messageUser(allTasks);
     }
 
     public String listAllTasksAsString(){

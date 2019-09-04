@@ -1,8 +1,6 @@
 package duke.tasklist;
 
 import duke.task.Task;
-import duke.ui.Ui;
-
 import java.util.ArrayList;
 
 /**
@@ -40,18 +38,17 @@ public class TaskList {
 
     /**
      * Displays the contents of the task list to the user.
-     *
-     * @param ui User interface that assists with printing.
      */
-    public void printTasks(Ui ui) {
+    public String printTasks() {
         if (tasks.isEmpty()) {
-            ui.show("You do not have any tasks in your list.");
-            ui.show("Use 'help' to see how to add tasks to your list!");
+            return "You do not have any tasks in your list." + "Use 'help' to see how to add tasks" +
+                    " to your list!";
         } else {
-            ui.show("Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                ui.show((i + 1) + "." + tasks.get(i));
+                sb.append((i + 1) + "." + tasks.get(i) + "\n");
             }
+            return sb.toString();
         }
     }
 
@@ -59,35 +56,29 @@ public class TaskList {
      * Marks the task as completed and informs the user.
      *
      * @param taskNumber Index of the task to be marked as completed.
-     * @param ui User interface that assists with printing.
      */
-    public void completeTask(int taskNumber, Ui ui) {
+    public String completeTask(int taskNumber) {
         tasks.get(taskNumber - 1).markAsDone();
-        ui.show("Nice! I've marked this task as done:");
-        ui.show(tasks.get(taskNumber - 1).toString());
+        return "Nice! I've marked this task as done:\n" + tasks.get(taskNumber - 1).toString();
     }
 
     /**
      * Deletes the task an informs the user.
      *
      * @param taskNumber Index of the task to be deleted.
-     * @param ui User interface that assists with printing.
      */
-    public void deleteTask(int taskNumber, Ui ui) {
+    public String deleteTask(int taskNumber) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
-        ui.show("Noted. I've removed this task:");
-        ui.show(taskDescription);
-        ui.show(getListSize());
+        return "Noted. I've removed this task:\n" + taskDescription + getListSize();
     }
 
     /**
      * Searches for tasks matching the search term and displays the matching tasks to the user.
      *
      * @param searchTerm Key word/phrase to search for.
-     * @param ui User interface that assists with printing.
      */
-    public void findTasks(String searchTerm, Ui ui) {
+    public String findTasks(String searchTerm) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(searchTerm)) {
@@ -95,12 +86,13 @@ public class TaskList {
             }
         }
         if (searchResults.isEmpty()) {
-            ui.show("OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".");
+            return "OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".";
         } else {
-            ui.show("Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
             for (int i = 0; i < searchResults.size(); i++) {
-                ui.show((i + 1) + "." + searchResults.get(i));
+                sb.append((i + 1) + "." + searchResults.get(i) + "\n");
             }
+            return sb.toString();
         }
     }
 
@@ -108,13 +100,10 @@ public class TaskList {
      * Adds the task to the task list.
      *
      * @param task Task to be added.
-     * @param ui User interface that assists with printing.
      */
-    public void addTask(Task task, Ui ui) {
+    public String addTask(Task task) {
         tasks.add(task);
-        ui.show("Got it. I've added this task:");
-        ui.show(task.toString());
-        ui.show(getListSize());
+        return "Got it. I've added this task:\n" + task.toString() + getListSize();
     }
 
     /**

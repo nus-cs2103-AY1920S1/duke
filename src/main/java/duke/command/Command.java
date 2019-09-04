@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
@@ -24,9 +23,8 @@ public abstract class Command {
      * Executes the command.
      *
      * @param tasks Task list to refer to if necessary.
-     * @param ui User interface that assists with printing.
      * @param storage Storage to be updated with changes if any.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage);
 
 }

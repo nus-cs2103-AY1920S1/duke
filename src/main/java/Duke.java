@@ -1,26 +1,39 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
-    public static void main(String[] args) throws IncompleteCommandException, InvalidCommandException, ParseException {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<Task>();
 
-        Action.loadTaskList(list);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        Action.welcomeMessage();
-
-        String command = sc.nextLine();
-        while (!command.equals("bye")) {
-            Action.doTask(command, list);
-            command = sc.nextLine();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
+    }
 
-        Action.byeMessage();
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("/Users/sihao/Desktop/NUS AY19:20 Sem 1/CS2103/Duke/Data/Duke.txt").run();  
     }
 }

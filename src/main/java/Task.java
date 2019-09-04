@@ -13,10 +13,8 @@ public abstract class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n"
-                + "       [\u2713] " + description + "\n"
-                + "    ____________________________________________________________\n");
+        System.out.println("     Nice! I've marked this task as done:\n"
+                + "       [\u2713] " + description);
     }
 
     @Override

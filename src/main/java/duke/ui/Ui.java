@@ -108,15 +108,17 @@ public class Ui {
         if (tasks.isEmpty()) {
             throw new DukeException("OOPS!!! The list is empty.");
         }
-        sb.append("Here are the tasks in your list:\n");
+        sb.append("Here are the matching tasks:\n");
         int count = 0;
+        int matchingCount = 0;
         for (Task task: tasks) {
+            count++;
             if (task.getDescription().contains(keyword)) {
-                count++;
+                matchingCount++;
                 sb.append("  " + count + "." + task + "\n");
             }
         }
-        if (count == 0) {
+        if (matchingCount == 0) {
             throw new DukeException("OOPS!!! There are no matching tasks.");
         }
         return sb.toString();

@@ -28,9 +28,9 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.completed) {
-            sb.append("[D][✓] ");
+            sb.append("[D][\u2713] ");
         } else {
-            sb.append("[D][✗] ");
+            sb.append("[D][\u2717] ");
         }
         sb.append(taskDetails);
         sb.append(" (");

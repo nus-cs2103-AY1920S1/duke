@@ -49,9 +49,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (completed) {
-            return "[✓] " + this.taskDetails;
+            return "[\u2713] " + this.taskDetails;
         } else {
-            return "[✗] " + this.taskDetails;
+            return "[\u2717] " + this.taskDetails;
         }
     }
 }

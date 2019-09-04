@@ -36,16 +36,17 @@ public class TaskList {
      * @throws ParseException  If there is an error in the string and cause an error in parsing.
      * @throws DukeException If there are mistakes in the input in task.
      */
-    private void addTask(String task, TaskType type, boolean printText) throws ParseException, DukeException {
+    private String addTask(String task, TaskType type, boolean printText) throws ParseException, DukeException {
         Task addedTask;
         String date;
+        StringBuilder returnString = new StringBuilder();
         switch (type) {
         case TODO:
             addedTask = new TodoTask(task);
             taskList.add(addedTask);
             if (printText) {
-                System.out.println("Got it. I've added this task:");
-                System.out.println(addedTask);
+                returnString.append("Got it. I've added this task:\n");
+                returnString.append(addedTask.toString());
             }
             break;
         case DEADLINE:
@@ -66,8 +67,8 @@ public class TaskList {
             );
             taskList.add(addedTask);
             if (printText) {
-                System.out.println("Got it. I've added this task:");
-                System.out.println(addedTask);
+                returnString.append("Got it. I've added this task:\n");
+                returnString.append(addedTask.toString());
             }
             break;
         case EVENT:
@@ -88,28 +89,32 @@ public class TaskList {
             );
             taskList.add(addedTask);
             if (printText) {
-                System.out.println("Got it. I've added this task:");
-                System.out.println(addedTask);
+                returnString.append("Got it. I've added this task:\n");
+                returnString.append(addedTask.toString());
             }
             break;
         default:
             break;
         }
         if (printText) {
-            printTotalTasks();
+            returnString.append("\n");
+            returnString.append(printTotalTasks());
         }
+        return returnString.toString();
     }
 
     /**
      * Prints out all the tasks currently in this task list.
      *
      */
-    private void listAllTasks() {
+    private String listAllTasks() {
+        StringBuilder returnString = new StringBuilder();
         int total = taskList.size();
-        System.out.println("Here are the tasks in your list:");
+        returnString.append("Here are the tasks in your list:");
         for (int i = 0; i < total; i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i));
+            returnString.append("\n" + (i + 1) + ". " + taskList.get(i).toString());
         }
+        return returnString.toString();
     }
 
     /**
@@ -118,11 +123,10 @@ public class TaskList {
      *
      * @param taskIndex the index of the task.
      */
-    public void checkTask(int taskIndex) {
+    public String checkTask(int taskIndex) {
         Task t = taskList.get(taskIndex);
         t.taskDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
+        return "Nice! I've marked this task as done: \n" + t;
     }
 
     /**
@@ -139,14 +143,18 @@ public class TaskList {
      *
      * @throws InvalidTaskIndexDukeException If task index given is out of range.
      */
-    private void deleteTask(int taskIndex) throws InvalidTaskIndexDukeException {
+    private String deleteTask(int taskIndex) throws InvalidTaskIndexDukeException {
+        StringBuilder returnString = new StringBuilder();
         if (taskIndex < 0 || taskIndex > taskList.size() - 1) {
             throw new InvalidTaskIndexDukeException(taskIndex + " exceeds the range of taskList.");
         }
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(taskList.get(taskIndex));
+        returnString.append("Noted. I've removed this task:\n");
+        returnString.append(taskList.get(taskIndex).toString());
         taskList.remove(taskIndex);
-        printTotalTasks();
+        returnString.append("\n");
+        returnString.append(printTotalTasks());
+
+        return returnString.toString();
     }
 
     /**
@@ -172,8 +180,8 @@ public class TaskList {
     /**
      * Prints the total number of task in the task list.
      */
-    private void printTotalTasks() {
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    private String printTotalTasks() {
+        return "Now you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -185,43 +193,42 @@ public class TaskList {
      * @throws DukeException If there are mistakes in the input.
      * @throws ParseException If there are errors in the string of input that prevents parsing.
      */
-    public boolean parseInput(String input, boolean printText) throws DukeException, ParseException {
+    public String parseInput(String input, boolean printText) throws DukeException, ParseException {
         String[] splitInput = input.split(" ");
-        boolean dukeIsOn = true;
+        StringBuilder returnString = new StringBuilder();
         switch (splitInput[0]) {
         case "list":
-            this.listAllTasks();
+            returnString.append(this.listAllTasks());
             break;
         case "bye":
-            System.out.println("Bye. Hope to see you again soon!");
-            dukeIsOn = false;
+            returnString.append("Bye. Hope to see you again soon!");
             break;
         case "done":
-            this.checkTask(Integer.parseInt(splitInput[1]) - 1);
+            returnString.append(this.checkTask(Integer.parseInt(splitInput[1]) - 1));
             break;
         case "todo":
             if (input.length() <= 4) {
                 throw (new EmptyTodoDscDukeException("todo task has empty description."));
             }
-            this.addTask(input.substring(5), TaskType.TODO, printText);
+            returnString.append(this.addTask(input.substring(5), TaskType.TODO, printText));
             break;
         case "deadline":
             if (input.length() <= 8) {
                 throw (new EmptyDeadlineDscDukeException("deadline task has empty description."));
             }
-            this.addTask(input.substring(9), TaskType.DEADLINE, printText);
+            returnString.append(this.addTask(input.substring(9), TaskType.DEADLINE, printText));
             break;
         case "event":
             if (input.length() <= 5) {
                 throw (new EmptyEventDscDukeException("event task has empty description."));
             }
-            this.addTask(input.substring(6), TaskType.EVENT, printText);
+            returnString.append(this.addTask(input.substring(6), TaskType.EVENT, printText));
             break;
         case "delete":
             if (input.length() <= 6) {
                 throw new InvalidTaskIndexDukeException("No task number was given.");
             }
-            this.deleteTask(Integer.parseInt(splitInput[1]) - 1);
+            returnString.append(this.deleteTask(Integer.parseInt(splitInput[1]) - 1));
             break;
         case "find":
             if (input.length() <= 4) {
@@ -236,14 +243,14 @@ public class TaskList {
                 }
             }
             int lenOfMatchedList = matchedList.size();
-            System.out.println("Here are the matching tasks in your list");
+            returnString.append("Here are the matching tasks in your list");
             for (int i = 1; i <= lenOfMatchedList; i++) {
-                System.out.println(i + ". " + matchedList.get(i - 1));
+                returnString.append("\n" + i + ". " + matchedList.get(i - 1).toString());
             }
             break;
         default:
             throw(new UnknownCmdDukeException(splitInput[0] + " is not a known command."));
         }
-        return dukeIsOn;
+        return returnString.toString();
     }
 }

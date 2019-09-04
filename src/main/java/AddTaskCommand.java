@@ -29,11 +29,12 @@ public class AddTaskCommand extends Command {
      * @throws IOException If the I/O operation fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         tasks.addTask(newTask);
         storage.update(tasks);
-        ui.print("Got it. I've added this task:");
-        ui.print(newTask.toString());
-        ui.print(String.format("Now you have %d tasks in the list.", tasks.size()));
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
+        sb.append(newTask.toString());
+        sb.append(String.format("\nNow you have %d tasks in the list.", tasks.size()));
+        return sb.toString();
     }
 }

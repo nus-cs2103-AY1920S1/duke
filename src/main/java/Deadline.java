@@ -26,7 +26,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String mark = (isDone ? "✓" : "✗");
-        return String.format("[D][%s] %s (by: %s)", mark, taskDescription, by.format(dateTimeFormatter).toString());
+        return String.format("[D][%s] %s (by: %s)", (isDone ? "Complete" : "Incomplete"),
+                taskDescription, by.format(dateTimeFormatter));
     }
 }

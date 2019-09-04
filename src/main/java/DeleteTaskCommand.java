@@ -30,11 +30,12 @@ public class DeleteTaskCommand extends Command {
      * @throws DukeException If the user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, Storage storage) throws IOException, DukeException {
         Task deletedTask = tasks.deleteTask(targetIndex);
         storage.update(tasks);
-        ui.print("Noted. I've removed this task:");
-        ui.print(deletedTask.toString());
-        ui.print(String.format("Now you have %d tasks in the list.", tasks.size()));
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
+        sb.append(deletedTask.toString());
+        sb.append(String.format("\nNow you have %d tasks in the list.", tasks.size()));
+        return sb.toString();
     }
 }

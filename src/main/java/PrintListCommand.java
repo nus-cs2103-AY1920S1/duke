@@ -11,11 +11,12 @@ public class PrintListCommand extends Command {
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Storage storage) {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= tasks.size(); i++) {
-            ui.print(String.format("%d. %s", i, tasks.get(i - 1)));
+            sb.append(String.format("%d. %s\n", i, tasks.get(i - 1)));
         }
+        return sb.toString().trim();
     }
 
     /**

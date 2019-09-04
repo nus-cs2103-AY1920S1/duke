@@ -7,42 +7,31 @@ import java.io.IOException;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() { };
+
+    String fetchTaskList() {
+        storage = new Storage("data/tasks.tmp");
         try {
             tasks = storage.load();
+            return "Task list loaded.";
         } catch (IOException | ClassNotFoundException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
+            return "Unable to access existing task list; initialising new task list instead";
         }
     }
 
-    /**
-     * Runs the Duke program.
-     * The method loops until the user inputs 'bye', which then closes the program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            }
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String response = c.execute(tasks, storage);
+            return response;
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
         }
     }
 
-    /**
-     * The main method of the driver class.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.tmp").run();
+    public String showWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 }

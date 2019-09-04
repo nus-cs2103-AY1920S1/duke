@@ -19,11 +19,10 @@ public class MarkAsDoneCommand extends Command {
      * @throws IOException If the I/O operation fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws IOException, DukeException {
         tasks.markTaskAsDone(targetIndex);
         storage.update(tasks);
-        ui.print("Nice! I've marked this task as done:");
-        ui.print(tasks.get(targetIndex).toString());
+        return String.format("Nice! I've marked this task as done:\n%s", tasks.get(targetIndex));
     }
 
     /**

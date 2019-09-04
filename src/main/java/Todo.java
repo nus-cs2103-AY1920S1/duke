@@ -10,7 +10,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        String mark = (isDone ? "✓" : "✗");
-        return String.format("[T][%s] %s", mark, taskDescription);
+        return String.format("[T][%s] %s", (isDone ? "Complete" : "Incomplete"), taskDescription);
     }
 }

@@ -7,31 +7,66 @@ import java.util.StringJoiner;
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructs a new empty task list.
+     */
     public TaskList() {
     }
 
+    /**
+     * Constructs a task list with the tasks parsed from the list of lines.
+     *
+     * @param lines List of lines to parse tasks.
+     */
     public TaskList(List<String> lines) {
         for (String line : lines) {
             tasks.add(parseTask(line));
         }
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task Task to add.
+     */
     public void add(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Removes a task from the task list at the given index.
+     *
+     * @param index Position of the task in the list.
+     * @return The removed task.
+     */
     public Task remove(int index) {
         return tasks.remove(index);
     }
 
+    /**
+     * Returns the task at the given index in the list.
+     *
+     * @param index Position of the task in the list.
+     * @return The requested task.
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Returns the size of the task list.
+     *
+     * @return Size of task list.
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Converts this task list into a list of lines to save.
+     *
+     * @return List of converted tasks.
+     */
     public List<String> getAsLines() {
         List<String> save = new ArrayList<>();
         for (Task task : tasks) {

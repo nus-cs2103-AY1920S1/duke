@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * The Duke class runs Duke, the personal assistant chatbot
+ * The Duke class creates Duke, the personal assistant chatbot
  * that helps a person keeps track of various things.
  */
 
@@ -17,12 +17,9 @@ public class Duke {
 
     /**
      * Constructor for class Duke.
-     *
-     * @param filePath File path for saving tasks in the hard disk.
-     * @throws IOException Throws if an unpredicted error occurs.
      */
-    public Duke(String filePath) throws IOException {
-        ui = new Ui();
+    public Duke() {
+        String filePath = "C:\\CS2103T\\duke\\data\\tasks.txt";
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
@@ -30,20 +27,23 @@ public class Duke {
             tasks = new TaskList();
         } catch (FileNotFoundException e) {
             File file = new File(filePath);
-            file.createNewFile();
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            ui = new Ui(tasks, storage);
         }
     }
 
     /**
-     * Starts the program by calling the Ui.
+     * Returns a response from the given input by calling the repond method in the Ui class.
      *
-     * @throws IOException Throws if an unpredicted error occurs.
+     * @param input The input from user.
+     * @return string The response from duke.
      */
-    public void run() throws IOException {
-        ui.scan(tasks, storage);
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke("C:\\CS2103T\\duke\\data\\tasks.txt").run();
+    public String getResponse(String input) {
+        return ui.respond(input);
     }
 }

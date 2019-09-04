@@ -41,6 +41,12 @@ public abstract class Task {
      */
     public abstract String formatString();
 
+    /**
+     * Returns true if specified task has description which contains given keyword.
+     *
+     * @param keyword Possible word in task description.
+     * @return True if task description has keyword.
+     */
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
     }

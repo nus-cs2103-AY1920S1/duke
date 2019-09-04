@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
+import duke.task.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
+import duke.exception.DukeException;
 
 /**
  * Abstract Command class that contains execute() for

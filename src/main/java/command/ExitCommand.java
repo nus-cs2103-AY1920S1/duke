@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
-import duke.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
+import duke.task.TaskList;
 
 /**
  * Command containing method for exiting program.

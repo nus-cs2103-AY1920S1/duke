@@ -1,59 +1,32 @@
 package duke;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.Ui;
-import duke.Storage;
-import duke.TaskList;
-import duke.command.Command;
-import java.util.Scanner;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.io.IOException;
+
+import duke.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
- * Main class of Duke.
- * Contains run() method.
+ * A GUI for Duke using FXML.
  */
-public class Main {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+public class Main extends Application {
 
-    /**
-     * Constructor of Main class.
-     * 
-     * @param filePath Path to text file where save data is stored.
-     */
-    public Main(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    private Duke duke = new Duke();
+
+    @Override
+    public void start(Stage stage) {
         try {
-            tasks = storage.load();
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Run method of Duke.
-     */
-    public void run() {
-        this.ui.showWelcome();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

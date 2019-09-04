@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Parser;
-import duke.Ui;
-import duke.Storage;
-import duke.TaskList;
+import duke.exception.DukeException;
+import duke.util.Parser;
+import duke.util.Ui;
+import duke.util.Storage;
+import duke.task.TaskList;
 import duke.task.Task;
 
 /**

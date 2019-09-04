@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import duke.command.Command;
 import duke.command.AddCommand;
@@ -11,8 +11,9 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.DukeException;
+import duke.exception.DukeException;
 import java.util.HashMap;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -116,32 +117,36 @@ public class Parser {
         String type = words[0];
     
         String info = input.substring((type + " ").length());
-        switch (type) {
-        case "todo":
-            if (info.equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        try {
+            switch (type) {
+            case "todo":
+                if (info.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                return new Todo(info);
+            case "deadline":
+                String[] args = info.split("/by");
+                String description = args[0].trim();
+                Date date;
+                try {
+                    date = dateFormatter.parse(args[1].trim());
+                } catch (ParseException e) {
+                    throw new DukeException("☹ OOPS!!! Incorrect date format.");
+                }
+                return new Deadline(description, date);
+            case "event":
+                args = info.split("/at");
+                description = args[0].trim();
+                try {
+                    date = dateFormatter.parse(args[1].trim());
+                } catch (ParseException e) {
+                    throw new DukeException("☹ OOPS!!! Incorrect date format.");
+                }
+                return new Event(description, date);
+            default: 
+                throw new DukeException("Invalid task input.");
             }
-            return new Todo(info);
-        case "deadline":
-            String[] args = info.split("/by");
-            String description = args[0].trim();
-            Date date;
-            try {
-                date = dateFormatter.parse(args[1].trim());
-            } catch (Exception e) {
-                throw new DukeException("☹ OOPS!!! Incorrect date format.");
-            }
-            return new Deadline(description, date);
-        case "event":
-            args = info.split("/at");
-            description = args[0].trim();
-            try {
-                date = dateFormatter.parse(args[1].trim());
-            } catch (Exception e) {
-                throw new DukeException("☹ OOPS!!! Incorrect date format.");
-            }
-            return new Event(description, date);
-        default:
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task input.");
         }
     }

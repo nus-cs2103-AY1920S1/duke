@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.util.Scanner;
 
@@ -6,6 +6,8 @@ import java.util.Scanner;
  * Ui class that handles output of Duke to the console.
  */
 public class Ui {
+    public String buffer;
+
     String format(String output) {
         return "    ____________________________________________________________\n"
                 + indent(output)
@@ -27,7 +29,12 @@ public class Ui {
      * Prints output of Duke.
      */
     public void printResponse(String output) {
+        this.buffer = format(output);
         System.out.println(format(output));
+    }
+
+    public String getOutput() {
+        return this.buffer;
     }
 
     /**

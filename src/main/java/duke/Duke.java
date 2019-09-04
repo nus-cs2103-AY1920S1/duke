@@ -7,6 +7,16 @@ import duke.taskList.TaskList;
 import duke.storage.Storage;
 import duke.ui.UiText;
 
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+
+
 import java.io.FileNotFoundException;
 
 /**
@@ -14,10 +24,11 @@ import java.io.FileNotFoundException;
  * @author Yang Shuting
  */
 
-public class Duke {
+public class Duke extends Application implements EventHandler {
     private Storage storage;
     private TaskList tasks;
     private UiText ui;
+    Button button;
 
     /**
      * constructor to create a Duke Chatbot
@@ -63,7 +74,31 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke duke = new Duke("src/main/data/duke.txt");
-        duke.run();
+        //Duke duke = new Duke("src/main/data/duke.txt");
+        //duke.run();
+        launch(args);
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("DUKE");
+        button = new Button();
+        button.setText("Submit");
+        button.setOnAction(this);
+
+        StackPane layout = new StackPane();
+        layout.getChildren().add(button);
+
+        Scene scene = new Scene(layout, 300,250);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    @Override
+    public void handle(Event event) {
+        if (event.getSource() == button) {
+            System.out.println
+        }
     }
 }

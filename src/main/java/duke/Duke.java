@@ -13,11 +13,17 @@ import duke.storage.Storage;
 
 import duke.ui.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Implements the Duke chat bot.
  * @author Lim Yong Shen, Kevin
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -36,6 +42,12 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Constructs a Duke chatbot (used to run the Launcher class).
+     */
+    public Duke() {
     }
 
     /**
@@ -65,11 +77,25 @@ public class Duke {
     }
 
     /**
+     * Starts the specified JavaFX stage.
+     * @param stage The specified JavaFX stage.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        helloWorld.setFont(new Font("Arial", 50.0)); // Sets the Label's font to Arial
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage
+    }
+
+    /**
      * Executes the program.
      * @param args Command line arguments (unused).
      */
     public static void main(String[] args) {
-        new Duke("/Users/lyskevin/Desktop/Y2 Sem 1/CS2103T/duke/src/main/java/duke/data/tasks.txt").run();
+        new Duke("src/main/java/duke/data/tasks.txt").run();
     }
 
 }

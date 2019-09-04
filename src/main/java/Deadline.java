@@ -2,20 +2,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Deadline is a form of task
- */
+
 public class Deadline extends Task {
 
     protected LocalDate myDate;
     protected LocalTime myTime;
     protected DateTimeFormatter myFormatDate;
 
-    /**
-     * A task which has a due date(by when)
-     * @param description the information of the given task
-     * @param date the due date of the task
-     */
     public Deadline(String description, String date) {
         super(description);
         this.date = date;

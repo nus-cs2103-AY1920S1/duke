@@ -1,4 +1,4 @@
-todo`✘`aaa`
+todo`✓`aaa`
 todo`✘`aaa`
 todo`✘`bbb`
 todo`✘`read book`

@@ -7,8 +7,15 @@ import java.lang.StringBuilder;
  * list in Duke is not violated.
  */
 public class Ui {
+    /**
+     * This field combines strings together and form Duke's replies to user's inputs.
+     */
     private StringBuilder sb;
 
+    /**
+     * Reply to the user upon startup.
+     * @return Duke's reply to the user upon startup.
+     */
     public String greet() {
         sb = new StringBuilder();
         String logo = "    o-o    o   o  o    o  o--o \n" +
@@ -25,6 +32,11 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Repeat the words given in the user command.
+     * @param command input that is given by the user.
+     * @return Duke's reply to the given user input.
+     */
     // Echo commands entered by users
     @SuppressWarnings({"StringConcatenationInsideStringBufferAppend", "unused"})
     public String echo(String command) {
@@ -36,6 +48,11 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Forms the statement for user input in the GUI.
+     * @param command input that is given by the user.
+     * @return Forms the statement that the user said for dialog box.
+     */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     public String userCommand(String command) {
         sb = new StringBuilder();

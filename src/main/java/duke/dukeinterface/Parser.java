@@ -1,11 +1,17 @@
 package duke.dukeinterface;
 
-import duke.command.*;
+import textfiles.WriteFile;
+
+import duke.command.addCommand;
+import duke.command.exitCommand;
+import duke.command.searchCommand;
+import duke.command.doneCommand;
+import duke.command.deleteCommand;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import textfiles.WriteFile;
 
 import java.io.IOException;
 import java.util.StringJoiner;
@@ -15,6 +21,9 @@ import java.lang.StringBuilder;
  * Validates the input commands from the user.
  */
 public class Parser {
+    /**
+     * This field combines strings together and form Duke's replies to user's inputs.
+     */
     private StringBuilder sb;
 
     /**
@@ -156,6 +165,10 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Prompts the user that the input number they have given is invalid.
+     * @return numberErrorMessage which tells that the input is invalid.
+     */
     private String numberErrorMessage() {
         sb = new StringBuilder();
         sb.append(printLine());
@@ -164,6 +177,11 @@ public class Parser {
         return sb.toString();
     }
 
+    /**
+     * Prompts the user that the index they have given is invalid.
+     * @param len takes in the length of the current task list.
+     * @return indexErrorMessage which tells that the number is invalid.
+     */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     private String indexErrorMessage(int len) {
         sb = new StringBuilder();
@@ -174,6 +192,13 @@ public class Parser {
         return sb.toString();
     }
 
+    /**
+     * Run Duke and generate a reply based on the user's input.
+     * @param command takes in the user's input.
+     * @param taskList takes in the current task list of the user.
+     * @param data takes in the file path to write the data.
+     * @return a string consisting of Duke's reply to the user's input.
+     */
     public String run(String command, Tasklist taskList, WriteFile data) {
         String[] commandArr = command.split(" ");
         String result = "";

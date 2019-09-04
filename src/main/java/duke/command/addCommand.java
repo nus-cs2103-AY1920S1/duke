@@ -5,7 +5,16 @@ import duke.dukeinterface.DukeException;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
+/**
+ * Add task to the task list based on to do, deadline and event.
+ */
 public class addCommand extends command {
+    /**
+     * Get the description the input task.
+     * @param commandArr current task of the user input.
+     * @return string of the description of the task.
+     * @throws DukeException prompts the user if the task input is invalid.
+     */
     public String getDescription(String[] commandArr) throws DukeException {
         StringJoiner description = new StringJoiner(" ");
         int index;
@@ -36,6 +45,12 @@ public class addCommand extends command {
         return description.toString();
     }
 
+    /**
+     * Format the time from the input of the user.
+     * @param commandArr current task of the user input.
+     * @return formatted version of the timings.
+     * @throws DukeException prompts the user of invalid time format.
+     */
     public String getTime(String[] commandArr) throws DukeException {
         StringJoiner timing = new StringJoiner(" ");
         int index;

@@ -11,16 +11,17 @@ import javafx.application.Platform;
 import javafx.application.Application;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -28,19 +29,64 @@ import java.util.ArrayList;
  * Keeps track of the list of tasks the user have.
  */
 public class Duke extends Application {
+    /**
+     * This field changes the scroll pane of the GUI.
+     */
     private ScrollPane scrollPane;
+
+    /**
+     * This field shows the commands and replies between user and Duke.
+     */
     private VBox dialogContainer;
+
+    /**
+     * This field stores the commands given by the user to Duke.
+     */
     private TextField userInput;
+
+    /**
+     * This field stores the user's profile image.
+     */
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+
+    /**
+     * This field stores Duke's profile image.
+     */
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * This field helps with the user interface commands.
+     */
     private Ui ui = new Ui();
+
+    /**
+     * This field helps to validate the user's commands.
+     */
     private Parser parser = new Parser();
+
+    /**
+     * This field keeps track of the task the user have currently.
+     */
     private Tasklist taskList = new Tasklist();
+
+    /**
+     * This field keeps track of the task upon starting up Duke.
+     */
     private ArrayList<String> textArr;
+
+    /**
+     * This field stores the file path to get duke.txt.
+     */
     private String filename = "data/duke.txt";
+
+    /**
+     * This field gives the file path to write data into duke.txt.
+     */
     private WriteFile data = new WriteFile(filename, true);
 
+    /**
+     * Constructor for Duke class. It loads the file upon startup.
+     */
     public Duke() {
         ReadFile file = new ReadFile(filename);
         try {
@@ -50,6 +96,10 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Overridden method which setups the GUI upon starting Duke.
+     * @param stage setup the scene for the GUI.
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -131,6 +181,11 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    /**
+     * Return a string based on the user input.
+     * @param input takes in the input command from the user.
+     * @return a string which is a reply from Duke based on the input.
+     */
     private String getResponse(String input) {
         return parser.run(input, taskList, data);
     }

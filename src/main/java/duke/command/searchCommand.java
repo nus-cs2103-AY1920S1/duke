@@ -8,7 +8,16 @@ import java.lang.StringBuilder;
 
 import java.util.StringJoiner;
 
+/**
+ * Search the task list based on the keyword given by the user.
+ */
 public class searchCommand extends command{
+    /**
+     * Search the task list based on the keyword given by the user.
+     * @param commandArr input given by the user.
+     * @param taskList task list which contains all current tasks.
+     * @return list of tasks which has the indicated keywords.
+     */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     public String searchKeyword(String[] commandArr, Tasklist taskList) {
         StringBuilder sb = new StringBuilder();
@@ -33,6 +42,10 @@ public class searchCommand extends command{
         return sb.toString();
     }
 
+    /**
+     * Gives a string as a border.
+     * @return a string that forms the border for duke.
+     */
     private String printLine() {
         return "    ____________________________________________________________\n";
     }

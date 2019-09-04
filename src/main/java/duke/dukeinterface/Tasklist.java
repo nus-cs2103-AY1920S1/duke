@@ -14,7 +14,11 @@ import java.util.ArrayList;
  * user currently has.
  */
 public class Tasklist {
+    /**
+     * This field combines strings together and form Duke's replies to user's inputs.
+     */
     private StringBuilder sb;
+
     /**
      * This field stores the Array List of tasks that the user has.
      */
@@ -29,6 +33,12 @@ public class Tasklist {
     }
 
 
+    /**
+     * Reply the user when they added in a new task into the task list.
+     * @param task the current task that the user is referring to.
+     * @param size the size of the user's task list.
+     * @return Duke's reply in adding the task into the task list.
+     */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     String printTask(Task task, int size) {
         sb = new StringBuilder();
@@ -41,6 +51,10 @@ public class Tasklist {
     }
 
 
+    /**
+     * Reply the user with the tasks in the task list.
+     * @return Duke's reply which shows all the tasks in the task list.
+     */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     String printArray() {
         sb = new StringBuilder();
@@ -79,6 +93,11 @@ public class Tasklist {
         return taskList.size();
     }
 
+    /**
+     * Print out the task currently on duke.txt during startup.
+     * @param textArr list formed during startup consisting of current tasks.
+     * @return the list of task that are saved in duke.txt.
+     */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     public String loadEvents(ArrayList<String> textArr) {
         sb = new StringBuilder();
@@ -108,6 +127,10 @@ public class Tasklist {
         return sb.toString();
     }
 
+    /**
+     * Gives a string as a border.
+     * @return a string that forms the border for duke.
+     */
     private String printLine() {
         return "    ____________________________________________________________\n";
     }

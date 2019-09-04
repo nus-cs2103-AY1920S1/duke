@@ -1,56 +1,50 @@
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-
 public class Duke {
+    private static final String saveLoadFilePath = "listSaveData.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
+    private MainWindow mw;
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * parses and responds to the given input directly
+     * @implNote did not use the return String implementation as it
+     * limits duke's UX flexibility to 1 dialogBox per user input
+     * @param input
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    void getResponse(String input) {
+        if (!parser.parse(input, tasks, ui, storage, mw)) {
+            mw.closeSequence();
+        }
     }
 
-    public Duke() {
-
-    }
-
-    private static final String saveLoadFilePath = "listSaveData.txt";
-
-    private Duke(String filepath) {
-        // initialise variables
-        ui = new Ui();
-        parser = new Parser();
-        storage = new Storage(filepath);
+    /**
+     * loads stored taskList, and creates a reference to the calling MainWindow controller
+     * for the direction of output
+     * @implNote called when MainWindow.setDuke() is run
+     * @param mw
+     */
+    void initialize(MainWindow mw) {
+        this.mw = mw;
+        mw.dukeSays("initializing");
+        mw.dukeSays("loading storage");
         try {
             tasks = storage.load();
         } catch (Exception e) {
-            ui.print(e.getMessage());
+            mw.dukeSays(e.getMessage());
             tasks = new TaskList();
         }
+        mw.dukeSays(ui.printLogo());
+        mw.dukeSays(ui.printHello());
     }
 
-    private void run() {
-        try (Scanner scanner = new Scanner(System.in);
-             PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8)
-        ) {
-            System.setOut(out);
-            boolean active = true;
-
-            ui.printLogo();
-            ui.printHello();
-
-            while (active && scanner.hasNextLine()) {
-                active = parser.parse(scanner.nextLine(), tasks, ui, storage);
-            }
-        }
+    public Duke() {
+        this(saveLoadFilePath);
     }
-    public static void main(String[] args) {
-        new Duke(saveLoadFilePath).run();
+
+    public Duke(String filepath) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(filepath);
     }
 }

@@ -86,7 +86,7 @@ class Parser {
         }
     }
 
-    boolean parse(String input, TaskList tasks, Ui ui, Storage storage) {
+    boolean parse(String input, TaskList tasks, Ui ui, Storage storage, MainWindow mw) {
         String[] inputSplit = input.split(" ");
         String command = inputSplit[0];
 
@@ -97,18 +97,18 @@ class Parser {
 
             case "bye":
                 storage.save(tasks.saveFormat());
-                ui.printBye();
+                mw.dukeSays(ui.printBye());
                 return false;
 
             case "list":
-                ui.printList(tasks);
+                mw.dukeSays(ui.printList(tasks));
                 return true;
 
             case "done":
                 checkValidTaskIndex(inputSplit);
                 Task theTask = tasks.get(Integer.parseInt(inputSplit[1]) - 1);
                 theTask.isDone = true;
-                ui.printDone(theTask);
+                mw.dukeSays(ui.printDone(theTask));
                 return true;
 
             case "todo":
@@ -117,18 +117,18 @@ class Parser {
                 Task task = construct(inputSplit);
                 if (task != null) {
                     tasks.add(task);
-                    ui.printCreated(task, tasks);
+                    mw.dukeSays(ui.printCreated(task, tasks));
                 }
                 return true;
 
             case "delete":
                 checkValidTaskIndex(inputSplit);
                 Task removedTask = tasks.remove(Integer.parseInt(inputSplit[1]) - 1);
-                ui.printRemoved(removedTask, tasks);
+                mw.dukeSays(ui.printRemoved(removedTask, tasks));
                 return true;
 
             case "formats":
-                ui.printFormatHelp();
+                mw.dukeSays(ui.printFormatHelp());
                 return true;
 
             case "find":
@@ -137,16 +137,16 @@ class Parser {
                 for (String s : inputSplit) {
                     sb.append(s).append(" ");
                 }
-                ui.printFind(sb.substring(5).trim(), tasks);
+                mw.dukeSays(ui.printFind(sb.substring(5).trim(), tasks));
                 return true;
 
             default:
                 throw new InputUnknownException();
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            mw.dukeSays(e.getMessage());
         } catch (IOException e) {
-            System.out.println("unable to save " + e.getMessage());
+            mw.dukeSays("unable to save " + e.getMessage());
         }
         return true;
     }

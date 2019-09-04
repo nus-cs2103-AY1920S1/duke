@@ -6,50 +6,46 @@ class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String intro = "Hello! I'm Duke What can I do for you?";
 
-    void printLogo() {
-        System.out.println("Hello from\n" + logo);
+    String printLogo() {
+        return "Hello from\n" + logo;
     }
 
-    void printHello() {
-        System.out.println(intro);
+    String printHello() {
+        return intro;
     }
 
-    void print(String s) {
-        System.out.println(s);
+    String printBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    void printBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    String printList(TaskList tasks) {
+        return "Here are the tasks in your list:\n" +
+                tasks.printFormat();
     }
 
-    void printList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks.printFormat());
+    String printDone(Task task) {
+        return "Nice! I've marked this task as done: \n" +
+                "  " + task.getStatus();
     }
 
-    void printDone(Task task) {
-        System.out.println("Nice! I've marked this task as done: \n" +
-                "  " + task.getStatus());
+    String printCount(TaskList tasks){
+        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 
-    void printCount(TaskList tasks) {
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    String printCreated(Task t, TaskList tasks) {
+        return "Got it. I've added this task:\n" +
+                "  " + t.getStatus() +
+                printCount(tasks);
     }
 
-    void printCreated(Task t, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + t.getStatus());
-        printCount(tasks);
+    String printRemoved(Task removedTask, TaskList tasks) {
+        return "Noted. I've removed this task: \n" +
+                "  " + removedTask.getStatus() + "\n" +
+                printCount(tasks);
     }
 
-    void printRemoved(Task removedTask, TaskList tasks) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("  " + removedTask.getStatus());
-        printCount(tasks);
-    }
-
-    void printFormatHelp() {
-        System.out.println("Here are the valid formats of the inputs:\n" +
+    String printFormatHelp() {
+        return "Here are the valid formats of the inputs:\n" +
                 "todo<space>description\n" +
                 "   eg. todo sweep the floor\n" +
                 "   (creates a 'todo' with description 'sweep the floor'\n" +
@@ -62,11 +58,11 @@ class Ui {
                 "done<space>list_index\n" +
                 "   eg. done 6 (deletes Task number 6)\n" +
                 "delete<space>list_index\n" +
-                "   eg. delete 3 (deletes Task number 3)");
+                "   eg. delete 3 (deletes Task number 3)";
     }
 
-    void printFind(String input, TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(tasks.find(input));
+    String printFind(String input, TaskList tasks) {
+        return "Here are the matching tasks in your list:\n" +
+                tasks.find(input);
     }
 }

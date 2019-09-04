@@ -23,4 +23,8 @@ public class TaskList {
         return listOfTasks.size();
     }
 
+    protected void printAll() {
+
+    }
+
 }

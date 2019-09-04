@@ -10,7 +10,7 @@ public class Command {
     }
 
 
-    public void execute(TaskList list, Ui ui, Storage store) {
+    public void execute(TaskList list, Ui ui, SaveToFile store) {
         switch(cmd) {
             case "bye":
                 this.isExit = false;

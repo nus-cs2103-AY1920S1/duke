@@ -47,7 +47,7 @@ public class Ui {
     public static String printList(TaskList list) {
         String tasksMsg = "Here are the tasks in your list:\n";
         for (int j = 0; (j < list.getSize()) && list.getTask(j) != null; j++) {
-            tasksMsg += String.valueOf(j + 1 + "." + list.getTask(j)) + "\n";
+            tasksMsg += j + 1 + "." + list.getTask(j) + "\n";
         }
         return tasksMsg;
     }
@@ -81,7 +81,7 @@ public class Ui {
      * @param list the list of tasks
      */
     public static String printLatest(TaskList list) {
-        return String.valueOf(list.getTask(list.getSize() - 1) + "\n");
+        return list.getTask(list.getSize() - 1) + "\n";
     }
 
     /**
@@ -99,7 +99,7 @@ public class Ui {
     public static String printMatchingList(ArrayList<Task> list) {
         String string = "";
         for (int j = 0; (j < list.size()) && list.get(j) != null; j++) {
-            string += String.valueOf(j + 1 + "." + list.get(j) + "\n");
+            string += j + 1 + "." + list.get(j) + "\n";
         }
         return string;
     }

@@ -33,7 +33,6 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         String output = list.getTask(index).markAsDone();
-        list.getTask(index).updateDone();
         storage.writeToFile(list);
         return output;
     }

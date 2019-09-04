@@ -43,14 +43,6 @@ public class Task {
     }
 
     /**
-     * Sets the isDone variable to true and the doneIcon to 1.
-     */
-    public void updateDone() {
-        this.isDone = true;
-        this.doneIcon = 1;
-    }
-
-    /**
      * Returns the description of the task.
      *
      * @return the description of the task

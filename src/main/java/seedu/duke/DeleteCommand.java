@@ -32,9 +32,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        String output = ui.printRemoveMsg() + ui.printLatest(list) + ui.printNumTask(list);
+        String output = ui.printRemoveMsg() + ui.printLatest(list);
         list.deleteTask(index);
         storage.writeToFile(list);
+        output += ui.printNumTask(list);
         return output;
     }
 }

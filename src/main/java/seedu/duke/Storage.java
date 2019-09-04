@@ -62,7 +62,7 @@ public class Storage {
                 t = new Deadline(splitArr[2], dateTime);
             }
             if (splitArr[1].equals("1")) {
-                t.updateDone();
+                t.markAsDone();
             }
             taskList.add(t);
         }

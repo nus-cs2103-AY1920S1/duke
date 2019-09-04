@@ -73,7 +73,7 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             String[] arr = taskList.get(i).getDescription().split(" ");
             for (int j = 0; j < arr.length; j++) {
-                if (arr[j].equals(keyword)) {
+                if (arr[j].equalsIgnoreCase(keyword)) {
                     matchingList.add(taskList.get(i));
                     break;
                 }

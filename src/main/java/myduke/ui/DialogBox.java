@@ -36,7 +36,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private final static Background BG_GREY = new Background(
+    private static final Background BG_GREY = new Background(
             new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY));
 
     /**

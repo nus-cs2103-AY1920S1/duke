@@ -53,7 +53,7 @@ public class Ui {
      * Prints the loading error.
      */
     public String showLoadingError() {
-//        System.out.println("File not found");
+        System.out.println("File not found");
         return "File not found";
     }
 
@@ -62,10 +62,10 @@ public class Ui {
      */
     public String printList() {
         int i = 1;
-//        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are the tasks in your list:");
         String result = "Here are the tasks in your list:\n";
         for (Task task : taskList.getList()) {
-//            System.out.println(i + ". " + task);
+            System.out.println(i + ". " + task);
             result += i + ". " + task + "\n";
             i++;
         }
@@ -76,9 +76,9 @@ public class Ui {
      * Prints the message displayed when the user deletes a Task.
      */
     public String printDelete(Task task) {
-//        System.out.println("Noted. I've removed this task: : ");
-//        System.out.println("\t" + task);
-//        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
+        System.out.println("Noted. I've removed this task: : ");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
 
         return "Noted. I've removed this task: : \n"
                 + "\t" + task + "\n"
@@ -89,8 +89,8 @@ public class Ui {
      * Prints the message displayed when the user marks a Task as done.
      */
     public String printDone(Task task) {
-//        System.out.println("Nice! I've marked this task as done: ");
-//        System.out.println("\t" + task);
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("\t" + task);
         return "Nice! I've marked this task as done: \n\t" +task;
     }
 
@@ -98,9 +98,9 @@ public class Ui {
      * Prints the message displayed when the user adds a new Task.
      */
     public String printAdd(Task task) {
-//        System.out.println("Got it. I've added this task:");
-//        System.out.println("\t" + task.toString());
-//        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + task.toString());
+        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
         return "Got it. I've added this task:\n"
                 + "\t" + task.toString() + "\n"
                 + "Now you have " +  taskList.getSize()  +  " tasks in the list.";
@@ -111,11 +111,11 @@ public class Ui {
      */
     public String printMatchingList(String pattern) {
         int i = 1;
-//        System.out.println("Here are the matching tasks in your list:");
+        System.out.println("Here are the matching tasks in your list:");
         String result = "Here are the matching tasks in your list:\n";
         for (Task task : taskList.getList()) {
             if (task.toString().contains(pattern) || task.getFileStringFormat().contains(pattern)) {
-//                System.out.println(i + ". " + task);
+                System.out.println(i + ". " + task);
                 result += i + ". " + task + "\n";
                 i++;
             }

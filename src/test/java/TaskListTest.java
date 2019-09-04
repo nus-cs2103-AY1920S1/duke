@@ -1,3 +1,5 @@
+import task.Task;
+import task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +16,7 @@ public class TaskListTest {
     void deleteTest() {
         TaskList temp = new TaskList();
         temp.addTasks("todo read book");
-        Task curr = temp.deleteTask(1);
-        assertEquals(1, curr.getName());
+        Task curr = temp.deleteTask(0);
+        assertEquals("read book", curr.getName());
     }
 }

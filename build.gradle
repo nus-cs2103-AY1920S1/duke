@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.2.3'
+}
+
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "driver.Duke"
+}
+
+run {
+    standardInput = System.in
+}

@@ -26,4 +26,6 @@ public class State {
         list = initialList;
     }
 
+    public State() {
+    }
 }

@@ -7,9 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test
-    void parserTest() {
+    void parserErrorTest() {
         assertThrows(DukeException.class, () -> Parser.parse("asdfgh"));
     }
-
-
 }

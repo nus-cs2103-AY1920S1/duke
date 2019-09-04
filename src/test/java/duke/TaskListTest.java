@@ -14,4 +14,12 @@ public class TaskListTest {
         assertEquals(1, taskList.size());
         taskList.remove(1);
     }
+
+    @Test
+    void deleteTaskTest() {
+        TaskList taskList = new TaskList();
+        taskList.add(new Todo("description"));
+        taskList.remove(1);
+        assertEquals(0, taskList.size());
+    }
 }

@@ -52,17 +52,17 @@ public class TaskList {
         String[] data = line.split("\\|");
         Task task;
         switch (data[0]) {
-            case "T":
-                task = new ToDo(unescape(data[2]));
-                break;
-            case "D":
-                task = new Deadline(unescape(data[2]), unescape(data[3]));
-                break;
-            case "E":
-                task = new Event(unescape(data[2]), unescape(data[3]));
-                break;
-            default:
-                return null;
+        case "T":
+            task = new ToDo(unescape(data[2]));
+            break;
+        case "D":
+            task = new Deadline(unescape(data[2]), unescape(data[3]));
+            break;
+        case "E":
+            task = new Event(unescape(data[2]), unescape(data[3]));
+            break;
+        default:
+            return null;
         }
         if (data[1].equals("1")) {
             task.markAsDone();

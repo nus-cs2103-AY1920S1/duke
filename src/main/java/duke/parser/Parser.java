@@ -9,6 +9,7 @@ import duke.command.ListCommand;
 import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.ErrorCommand;
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -39,6 +40,8 @@ public class Parser {
             return new DoneCommand(constructedString);
         case "delete":
             return new DeleteCommand(constructedString);
+        case "find" :
+            return new FindCommand(constructedString);
         default:
             return new ErrorCommand("     OOPS!! I'm sorry, but I don't know what that means :-(");
         }

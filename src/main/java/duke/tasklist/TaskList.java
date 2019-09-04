@@ -40,6 +40,9 @@ public class TaskList {
         listOfTasks.remove(task);
     }
 
+    public void addTask(Task task) {
+        listOfTasks.add(task);
+    }
     public void addTodo(Todo task) {
         listOfTasks.add(task);
     }

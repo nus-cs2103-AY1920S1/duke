@@ -12,6 +12,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a Deadline Task which is not completed.
+     *
      * @param task a string that defines the deadline task. a deadline task requires a /by to split it's name and time.
      */
     public DeadlineTask(String task) {
@@ -37,9 +38,10 @@ public class DeadlineTask extends Task {
 
     /**
      * Constructs a Deadline task.
+     *
      * @param isCompleted Whether or not the task is completed yet.
-     * @param taskName The name of the task.
-     * @param taskTime The Time of the task represented by a string.
+     * @param taskName    The name of the task.
+     * @param taskTime    The Time of the task represented by a string.
      */
     public DeadlineTask(String isCompleted, String taskName, String taskTime) {
         super(taskName, Boolean.parseBoolean(isCompleted));
@@ -49,6 +51,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Returns a string which represents this task.
+     *
      * @return a String detailing the task's name and time.
      */
     @Override
@@ -65,6 +68,7 @@ public class DeadlineTask extends Task {
 
     /**
      * returns a string that is used to store it in the save file.
+     *
      * @return a string specifically formatted for storage.
      */
     @Override

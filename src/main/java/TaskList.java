@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Constructs a new TaskList based on a given ArrayList.
+     *
      * @param tasks an arraylist of tasks to be used as the TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Returns an arrayList that contains all stores tasks.
+     *
      * @return An ArrayList of stored tasks.
      */
     public ArrayList<Task> getList() {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Removes a task with the given index from the TaskList.
+     *
      * @param taskIndex The index of the task to be deleted.
      */
     public void remove(int taskIndex) {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Gives the number of tasks that are currently Stored.
+     *
      * @return the number of tasks currently stored.
      */
     public int size() {
@@ -47,6 +51,7 @@ public class TaskList {
 
     /**
      * Retreves the task at the given index.
+     *
      * @param index the index of the task to be retrieved.
      * @return The task at the given index.
      */
@@ -56,6 +61,7 @@ public class TaskList {
 
     /**
      * Completes the task at the given index.
+     *
      * @param index The index of the task to be completed.
      */
     public void complete(int index) {
@@ -64,6 +70,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the taskList.
+     *
      * @param task The new task to be added.
      */
     public void add(Task task) {

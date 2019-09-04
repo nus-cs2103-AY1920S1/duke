@@ -6,6 +6,7 @@ public class FileErrorDukeException extends DukeException {
 
     /**
      * creates the exception.
+     *
      * @param filePath The filepath that caused the Error
      */
     public FileErrorDukeException(String filePath) {
@@ -15,6 +16,7 @@ public class FileErrorDukeException extends DukeException {
 
     /**
      * Gives out a string that describes the exception.
+     *
      * @return A string that describes the exception.
      */
     @Override

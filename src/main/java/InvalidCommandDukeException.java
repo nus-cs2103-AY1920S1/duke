@@ -6,6 +6,7 @@ public class InvalidCommandDukeException extends DukeException {
 
     /**
      * Constructs the exception.
+     *
      * @param command the user input that caused the exception.
      */
     public InvalidCommandDukeException(String command) {
@@ -15,6 +16,7 @@ public class InvalidCommandDukeException extends DukeException {
 
     /**
      * Gives out a string that describes the exception.
+     *
      * @return A string that describes the exception.
      */
     @Override

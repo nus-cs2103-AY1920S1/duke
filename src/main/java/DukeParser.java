@@ -11,6 +11,7 @@ public class DukeParser {
 
     /**
      * Makes sense of the String given to the parser.
+     *
      * @param input The user input
      * @return returns one the possible commands interpreted from the user input.
      */
@@ -18,23 +19,23 @@ public class DukeParser {
         String command = input.split(" ")[0].trim(); //get the first word;
         switch (command) {
         case "bye":
-            return new ByeCommand();
+            return new ByeCommand(input);
         case "list":
-            return new ListCommand();
+            return new ListCommand(input);
         case "done":
-            return new DoneCommand();
+            return new DoneCommand(input);
         case "delete":
-            return new DeleteCommand();
+            return new DeleteCommand(input);
         case "todo":
-            return new ToDoCommand();
+            return new ToDoCommand(input);
         case "deadline":
-            return new DeadlineCommand();
+            return new DeadlineCommand(input);
         case "event":
-            return new EventCommand();
+            return new EventCommand(input);
         case "help":
-            return new HelpCommand();
+            return new HelpCommand(input);
         case "find":
-            return new FindCommand();
+            return new FindCommand(input);
         default:
             throw new InvalidCommandDukeException(command);
         }

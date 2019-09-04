@@ -2,42 +2,45 @@
  * The driver class of the entire Duke Project.
  */
 public class Duke {
-    private Ui ui;
+
     private Storage storage;
     private TaskList tasks;
 
-    private Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath, ui);
+    private boolean toExit = false;
+
+    /**
+     * Creates Duke which read and writes to the given filepath.
+     * @param filePath the location of the save file.
+     */
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.getData());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    private void run() {
-        ui.showWelcome();
-        ui.straightLine();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.straightLine(); // show the divider line ("_______")
-                Command c = DukeParser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.toString());
-            } finally {
-                ui.straightLine();
-            }
+    /**
+     * Returns the response of Duke when an input is given by the user.
+     * @param input The user's input.
+     * @return A string which is Duke's reponse
+     */
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            Command c = DukeParser.parse(input);
+            output = c.execute(tasks, storage);
+            toExit = c.isExit();
+        } catch (DukeException e) {
+            output = e.toString();
+        } finally {
+            return output;
         }
     }
 
-    public static void main(String[] args) {
-        String filePath = "data/dukeData.txt";
-        new Duke(filePath).run();
+    public boolean shouldExit() {
+        return this.toExit;
     }
+
 }

@@ -8,7 +8,8 @@ public class EmptyDescriptionDukeException extends DukeException {
 
     /**
      * Constructs an EmptyDescription Exception for Duke.
-     * @param id the type of task.
+     *
+     * @param id   the type of task.
      * @param desc the missing description of the task.
      */
     public EmptyDescriptionDukeException(String id, String desc) {
@@ -19,6 +20,7 @@ public class EmptyDescriptionDukeException extends DukeException {
 
     /**
      * Constructs an EmptyDescription Exception for Duke.
+     *
      * @param id The Type of task.
      */
     public EmptyDescriptionDukeException(String id) {
@@ -28,6 +30,7 @@ public class EmptyDescriptionDukeException extends DukeException {
 
     /**
      * Gives out a string that describes the exception.
+     *
      * @return A string that describes the exception.
      */
     @Override

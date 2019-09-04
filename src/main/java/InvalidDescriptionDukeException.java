@@ -8,7 +8,8 @@ public class InvalidDescriptionDukeException extends DukeException {
 
     /**
      * Constructs the exception when the following description of a command does not match the requirement.
-     * @param command The command called.
+     *
+     * @param command     The command called.
      * @param description The description that was passed by the user for the command.
      */
     public InvalidDescriptionDukeException(String command, String description) {
@@ -19,6 +20,7 @@ public class InvalidDescriptionDukeException extends DukeException {
 
     /**
      * Gives out a string that describes the exception.
+     *
      * @return A string that describes the exception.
      */
     @Override

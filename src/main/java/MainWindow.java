@@ -1,5 +1,6 @@
 import duke.util.Duke;
 import duke.util.Ui;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -55,4 +56,5 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
 }

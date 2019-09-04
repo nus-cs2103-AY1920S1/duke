@@ -47,4 +47,37 @@ public class Tasklist {
             System.out.println(num + ". " + tasks.get(i));
         }
     }
+
+    public void listfind(ArrayList<Task> found) {
+        for (int i = 0; i < found.size(); i ++) {
+            int num = i + 1;
+            System.out.println(num + ". " + found.get(i));
+        }
+    }
+
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> temp = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i ++) {
+            Task t = tasks.get(i);
+            String des = t.getDescription();
+            if (hasWord(des, word)) {
+                temp.add(t);
+            }
+        }
+        return temp;
+    }
+
+    public boolean hasWord(String description, String word) {
+        String[] ls = description.split(" ");
+        boolean a = false;
+        for (int i = 0; i < ls.length; i ++) {
+            if (ls[i].equals(word)) {
+                a = true;
+                break;
+            } else {
+
+            }
+        }
+        return a;
+    }
 }

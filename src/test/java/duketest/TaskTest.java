@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TaskTest {
 
-    private static final String TICK = "✓";     // \u2713
-    private static final String CROSS = "✗";    // \u2717
+    private static final String CIRCLE = "O";   
+    private static final String CROSS = "X";    
 
     @Test
     public void fieldVariableTest() {
@@ -22,7 +22,7 @@ public class TaskTest {
         Task task = new Task("This is a Task.");
         assertEquals("[" + CROSS + "] This is a Task.", task.toString());
         task.setCompleted(true);    
-        assertEquals("[" + TICK + "] This is a Task.", task.toString());
+        assertEquals("[" + CIRCLE + "] This is a Task.", task.toString());
     }
 
 

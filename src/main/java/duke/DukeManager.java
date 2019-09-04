@@ -13,13 +13,11 @@ class DukeManager {
     /**
      * Constructor for DukeManager, which instantiates several other classes as well.
      * 
-     * @throws DukeException If there is an error retrieving information.
      */
-    public DukeManager() throws DukeException {
+    public DukeManager() {
         this.uiManager = new Ui();
         this.storeManager = new Storage("Tasks.sav");
         this.parseManager = new Parser();
-        this.taskList = this.storeManager.retrieve();
         this.isActive = false;
     }
 
@@ -31,10 +29,15 @@ class DukeManager {
      * list, done, delete, todo, deadline, event, help, bye.
      * This method will end when the user inputs 'bye' or anything else which causes a DukeException.
      * 
+     * <p>This method is only used for the console version of Duke, and is not
+     * used in the javaFX version. For console version, look at runDuke instead.
+     * 
      * @throws DukeException When parsing user's input and executing commands.
+     * @see DukeManager#runDuke(String)
      */
     public void initializeDuke() throws DukeException {
         uiManager.printWelcome();
+        this.taskList = this.storeManager.retrieve();
         this.isActive = true;
         while (isActive) {
             uiManager.printWhatToDo();
@@ -46,5 +49,37 @@ class DukeManager {
             }
             uiManager.printEmpty();
         }
+    }
+
+    /**
+     * Retrieves the tasks from the Storage. 
+     * 
+     * @throws DukeException When there is an error retrieving information from the .sav file.
+     * @see Storage#retrieve()
+     */
+    public void retrieveTasks() throws DukeException {
+        this.taskList = this.storeManager.retrieve();
+    }
+
+    /**
+     * Returns a String that is going to be output to the user, and the given input results
+     * in an ExitCommand, it will close the Duke program.
+     * 
+     * <p>runDuke is for 1 iteration/command and is used only in javaFx.
+     * For the console version, please check initializeDuke()
+     * 
+     * @param input The user's input.
+     * @param duke The instance of duke program.
+     * @return a String going to be output to the user.
+     * @throws DukeException When there is an error in one fo the commands.
+     */
+    public String runDuke(String input, Duke duke) throws DukeException {
+        Command command = parseManager.parseToCommand(input);
+        command.execute(this.uiManager, this.taskList, this.storeManager);
+        String output = uiManager.getString();
+        if (command instanceof ExitCommand) {
+            duke.setExit(true);
+        }
+        return output;
     }
 }

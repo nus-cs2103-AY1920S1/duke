@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 checkstyle {
@@ -15,6 +16,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
 run {
     standardInput = System.in
 }
@@ -24,8 +29,9 @@ application {
     mainClassName = "Duke"
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 test {

@@ -10,8 +10,8 @@ class Task implements Serializable {
     protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-    private static final String TICK = "✓";     // \u2713
-    private static final String CROSS = "✗";    // \u2717
+    private static final String CIRCLE = "O";    
+    private static final String CROSS = "X";  
 
     private String task;
     private boolean isCompleted;
@@ -41,7 +41,7 @@ class Task implements Serializable {
     @Override
     public String toString() {
         if (this.isCompleted) {
-            return "[" + TICK + "] " + this.task;
+            return "[" + CIRCLE + "] " + this.task;
         } else {
             return "[" + CROSS + "] " + this.task;
         }

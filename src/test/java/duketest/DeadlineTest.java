@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlineTest {
 
-    private static final String TICK = "✓";     // \u2713
-    private static final String CROSS = "✗";    // \u2717
+    private static final String CIRCLE = "O";    
+    private static final String CROSS = "X";
 
     @Test
     public void instanceTest() {
@@ -72,7 +72,7 @@ public class DeadlineTest {
         assertEquals("[D][" + CROSS + "] This is a Deadline. (by: 14/05/2020)", 
                 deadline.toString());
         deadline.setCompleted(true);    
-        assertEquals("[D][" + TICK + "] This is a Deadline. (by: 14/05/2020)", 
+        assertEquals("[D][" + CIRCLE + "] This is a Deadline. (by: 14/05/2020)", 
                 deadline.toString());
     }
 

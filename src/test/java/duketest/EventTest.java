@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class EventTest {
 
-    private static final String TICK = "✓";     // \u2713
-    private static final String CROSS = "✗";    // \u2717
+    private static final String CIRCLE = "O";   
+    private static final String CROSS = "X";    
 
     @Test
     public void instanceTest() {
@@ -72,7 +72,7 @@ public class EventTest {
         assertEquals("[E][" + CROSS + "] This is a Event. (at: 14/05/2020)", 
                 event.toString());
         event.setCompleted(true);    
-        assertEquals("[E][" + TICK + "] This is a Event. (at: 14/05/2020)", 
+        assertEquals("[E][" + CIRCLE + "] This is a Event. (at: 14/05/2020)", 
                 event.toString());
     }
 

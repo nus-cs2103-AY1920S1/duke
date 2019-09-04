@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.CommandResponse;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -28,15 +29,14 @@ public class AddCommand extends Command {
      * @param storage the Storage instance dealing with hard disk reading/writing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
         // create the appropriate task, add to the list and write to disk
         Task task = taskList.add(TaskFactory.getTask(type, args));
-
         // inform the user the task has been added
-        ui.showAddMessage(task, taskList.count());
-
+        String response = ui.showAddMessage(task, taskList.count());
         // update hard disk
         storage.writeToDisk(taskList);
+        return new CommandResponse(response, super.isExit());
     }
 
     public String[] getArgs() {

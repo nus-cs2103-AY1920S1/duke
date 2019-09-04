@@ -41,5 +41,5 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "main.java.Duke"
+    mainClassName = "duke.DukeLauncher"
 }

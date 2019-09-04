@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.CommandResponse;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -25,5 +26,5 @@ public abstract class Command {
      * @param ui the Ui instance handling user-facing interaction.
      * @param storage the Storage instance dealing with hard disk reading/writing.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract CommandResponse execute(TaskList taskList, Ui ui, Storage storage);
 }

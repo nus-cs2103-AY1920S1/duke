@@ -32,7 +32,7 @@ public class Parser {
         case "todo":
             if (args.length == 0) {
                 throw new DukeMissingDescriptionException(
-                        "Parser: :'( OOPS!!! The description of a todo cannot be empty.");
+                        "OOPS! The description of a todo cannot be empty.");
             }
             return new AddCommand(TODO, args, false);
         case "event":
@@ -51,7 +51,7 @@ public class Parser {
         case "find":
             if (args.length == 0) {
                 throw new DukeMissingDescriptionException(
-                        "Parser: :'( OOPS!!! The keyword of a search cannot be empty.");
+                        "OOPS! The keyword of a search cannot be empty.");
             }
             String keyword = args[0].strip();
             return new FindCommand(keyword, false);
@@ -67,7 +67,7 @@ public class Parser {
             return new ExitCommand(true);
         default:
             throw new DukeMissingDescriptionException(
-                    "Parser: :'( OOPS!!! I'm sorry, but I don't know what that means...");
+                    "OOPS! I'm sorry, but I don't know what that means...");
         }
     }
 }

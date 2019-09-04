@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.CommandResponse;
 import duke.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -24,14 +25,13 @@ public class DoneCommand extends Command {
      * @param storage the Storage instance dealing with hard disk reading/writing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
         // mark the task corresponding to index as done
         Task task = taskList.markAsDone(idx);
-
         // inform the user task has been marked done
-        ui.showDoneMessage(task);
-
+        String response = ui.showDoneMessage(task);
         // update hard disk
         storage.writeToDisk(taskList);
+        return new CommandResponse(response, super.isExit());
     }
 }

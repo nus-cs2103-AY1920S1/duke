@@ -9,7 +9,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String description) {
         super();
-        description = description;
+        this.description = description;
     }
 
     /**
@@ -21,7 +21,7 @@ public class FindCommand extends Command {
      * @throws DukeException Possibility of throwing a DukeException due to
      *      an exception occuring in the running of the application.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList task, Ui ui, Storage storage) {
         String pattern = String.format(".*%s.*", description);
         TaskList tempTaskList = new TaskList();
         for (Task t : task.getTaskList()) {
@@ -29,6 +29,6 @@ public class FindCommand extends Command {
                 tempTaskList.addTask(t);
             }
         }
-        ui.showText(tempTaskList.printMatchingTasks());
+        return ui.showText(tempTaskList.printMatchingTasks());
     }
 }

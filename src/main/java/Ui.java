@@ -19,29 +19,29 @@ public class Ui {
     /**
      * A method to display welcome message at the start of the application.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
+            + "|____/ \\__,_|_|\\_\\___|\n";
+        return ("Hello from\n" + logo);
+}
 
     /**
      * A method to display text to the user.
      * @param text The text to be displayed.
      */
-    public void showText(String text) {
-        System.out.println(text);
+    public String showText(String text) {
+        return text;
     }
 
     /**
      * A method to display the error message to the user.
      * @param error The Error to be displayed.
      */
-    public void showError(DukeException error) {
-        System.out.println(error.getMessage());
+    public String showError(DukeException error) {
+        return error.getMessage();
     }
 
     /**
@@ -49,15 +49,15 @@ public class Ui {
      start of the application.
      * @param error The Error to be displayed.
      */
-    public void showLoadingError(DukeException   error) {
-        System.out.println(error.getMessage());
+    public String showLoadingError(DukeException   error) {
+        return error.getMessage();
     }
 
     /**
      * A method to display the exit message to be shown when the application terminates.
      */
-    public void showExitMessage() {
-        System.out.println("Bye! Hope to see you again soon.");
+    public String showExitMessage() {
+        return "Bye! Hope to see you again soon.";
     }
 
     /**

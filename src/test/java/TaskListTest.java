@@ -1,3 +1,6 @@
+import task.Task;
+import task.TaskList;
+import task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

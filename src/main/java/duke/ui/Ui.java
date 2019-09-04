@@ -99,6 +99,6 @@ public class Ui {
      * @param message exception message to be displayed
      */
     public String showError(String message) {
-        return TABS + "☹ OOPS!!! " + message + "\n";
+        return TABS + "\u2639 OOPS!!! " + message + "\n";
     }
 }

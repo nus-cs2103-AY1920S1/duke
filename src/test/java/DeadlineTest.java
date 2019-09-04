@@ -16,7 +16,7 @@ public class DeadlineTest {
 
     @Test
     public void testToString() {
-        assertEquals("[D]" + "[" + "\u2718" + "] " + deadline.getDescription() + "(by: " + deadline.getTime() + ")", deadline.toString());
+        assertEquals("[D]" + "[" + "\u2718" + "] " + deadline.getDescription() + " (by: " + deadline.getTime() + ")", deadline.toString());
     }
 
     @Test

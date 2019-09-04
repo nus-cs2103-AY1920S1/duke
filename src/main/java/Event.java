@@ -23,11 +23,12 @@ public class Event extends Task {
         super(description);
         this.time = time;
         super.typeOfTask = "E";
-        SimpleDateFormat formatter = new SimpleDateFormat( "dd/MM/yyyy hhmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
         this.date = formatter.parse(time);
     }
 
     /**
+     * Gets the time at which the event task is done.
      * @return the time at which the task is done.
      */
     public String getTime() {
@@ -35,6 +36,7 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] " + this.description + " (at: " + time + ")";
+        return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] "
+                + this.description + " (at: " + time + ")";
     }
 }

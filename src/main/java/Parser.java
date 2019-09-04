@@ -34,7 +34,7 @@ public class Parser {
      * @param storage Storage that loads and updates files when tasks are
      *                deleted or added to the list.
      */
-    public Parser(TaskList taskList, Ui ui, Storage storage){
+    public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;

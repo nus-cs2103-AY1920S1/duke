@@ -18,17 +18,19 @@ public class Deadline extends Task {
      * Constructs a Deadline task object with specified desciption and time.
      * @param description Description that describes the task.
      * @param time Time by which the task needs to be done.
-     * @throws ParseException
+     * @throws ParseException if time format does not follow the format required for parsing
+     the time when passed in the parse method.
      */
     public Deadline(String description, String time) throws ParseException {
         super(description);
         this.time = time;
         super.typeOfTask = "D";
-        SimpleDateFormat formatter = new SimpleDateFormat( "dd/MM/yyyy hhmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
         this.date = formatter.parse(time);
     }
 
     /**
+     * Gets the time by which the task has to be done.
      * @return The time by which the task has to be done.
      */
     public String getTime() {
@@ -36,6 +38,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Gets the description of the deadline task.
      * @return The description of the task.
      */
     public String getDescription() {
@@ -43,6 +46,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + time + ")";
+        return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] "
+                + this.description + " (by: " + time + ")";
     }
 }

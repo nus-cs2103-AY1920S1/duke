@@ -15,7 +15,7 @@ public class TaskList {
      * Constructs a TaskList object that takes in an ArrayList of Task.
      * @param list List of tasks that has been done and to be done.
      * @throws FileNotFoundException if file from which the list of task is
-     * loaded cannot be found.
+     *     loaded cannot be found.
      */
     public TaskList(ArrayList<Task> list) throws FileNotFoundException {
         this.list = list;
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list
+     * Deletes a task from the list.
      * @param index the index at which the task is located in the ArrayList.
      * @return The task that has been removed from the list.
      */

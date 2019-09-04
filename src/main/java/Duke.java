@@ -6,11 +6,15 @@ import duke.command.Ui;
 import duke.command.Parser;
 import duke.command.Storage;
 import duke.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents the main class of the programme.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Ui ui;
     private TaskList taskList;
@@ -33,6 +37,15 @@ public class Duke {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {

@@ -46,6 +46,7 @@ public class Task {
     }
 
     /**
+     * Get the description of the Task.
      * @return the description of the task.
      */
     public String getDescription() {
@@ -53,6 +54,7 @@ public class Task {
     }
 
     /**
+     * Get the type of the Task.
      * @return the type of the task.
      */
     public String getTypeOfTask() {

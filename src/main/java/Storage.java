@@ -20,11 +20,24 @@ public class Storage {
     TaskList taskList;
     ArrayList<Task> list;
 
+    /**
+     * Constructs a storage object that takes in the file path as parameter.
+     * @param filePath The path at which the file is stored.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Loads the content in the file into the ArrayList of Task.
+     * @return The ArrayList of type Task which has been filled with the tasks from
+     *     the content of the file.
+     * @throws DukeException if file does not exist in the fiven file path.
+     * @throws FileNotFoundException if no file can be found in the given file path.
+     * @throws ParseException if format of the file does not fit the expected format.
+     * @throws IOException if file path cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException, FileNotFoundException, ParseException, IOException {
         if (this.file.exists()) {
             Scanner scannerTask = new Scanner(this.file);
@@ -39,10 +52,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Set the field of the ArrayList of task to the list of task from TaskList.
+     * @param taskList The TaskList from which the ArrayList of task is to be assigned
+     *                 to the class's ArrayList field.
+     */
     public void setList(TaskList taskList) {
         this.list = taskList.getList();
     }
 
+    /**
+     * Parse the Text from the File to the corresponding Task objects.
+     * @param taskText the Line from the text to be parsed into Task object.
+     * @param list The list to which the resulting parsed text wish to be added.
+     * @throws ParseException if format of the text does not fit the expected format.
+     */
     public void parseTextToTask(String taskText, ArrayList<Task> list) throws ParseException {
         if (taskText.substring(0, 1).equals("T")) {
             Task task = new Todo(taskText.substring(8));
@@ -73,6 +97,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appending newly added task into the existing file.
+     * @param task The task that wish to be added ot the file for update.
+     * @throws IOException if file cannot be found when passed as an argument in
+     *     the FileWriter constructor.
+     */
     public void appendToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(this.file, true);
         String isDone = task.isDone() ? "1" : "0";
@@ -88,10 +118,15 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Update the file when the is changes to the contents of the file.
+     * @throws IOException if file cannot be found when passed as an argument in
+     *     the FileWriter constructor.
+     */
     public void updateFile() throws IOException {
         FileWriter writer = new FileWriter(this.file, false);
         String text = "";
-        for(Task task: this.list) {
+        for (Task task: this.list) {
             String isDone = task.isDone() ? "1" : "0";
             text = text + task.getTypeOfTask() + " | " + isDone + " | " + task.getDescription();
             if (task.getTypeOfTask().equals("D")) {

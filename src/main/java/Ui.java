@@ -1,9 +1,11 @@
 import duke.exception.InvalidCommandException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.MissingInputException;
+
 import duke.task.Task;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,6 +45,17 @@ public class Ui {
         }
     }
 
+    public String readUserInput(String command) {
+        Parser parser = new Parser();
+        String output = "";
+        try {
+            output = parser.executeCommand(command.trim());
+        } catch (InvalidCommandException | MissingInputException | MissingDescriptionException e) {
+            output += e.getMessage();
+        }
+        return output;
+    }
+
     /**
      * Prints the necessary output when a specific task is added to the tasks list.
      * @param task The specified task that was added to the task list.
@@ -50,8 +63,24 @@ public class Ui {
     public void printAddedTask(Task task) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + task.toString());
-        ArrayList<Task> tasks = (new TaskList()).getTaskList();
-        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
+        int size = (new TaskList()).getSize();
+        System.out.println(String.format("\tNow you have %d tasks in the list.", size));
+    }
+
+    public String getAddTaskResponse(Task task) {
+        String output = "\tGot it. I've added this task:";
+        output += ("\t" + task.toString());
+        int size = (new TaskList()).getSize();
+        output += String.format("\tNow you have %d tasks in the list.", size);
+        return output;
+    }
+
+    public void printMarkAsDone(Task task) {
+        System.out.println("\tNice! I've marked this task as done:\n\t\t" + task.toString());
+    }
+
+    public String getDoneTaskResponse(Task task) {
+        return "\tNice! I've marked this task as done:\n\t\t" + task.toString();
     }
 
     /**
@@ -61,8 +90,16 @@ public class Ui {
     public void printDeletedTask(Task task) {
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t  " + task.toString());
-        ArrayList<Task> tasks = (new TaskList()).getTaskList();
-        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
+        int size = (new TaskList()).getSize();
+        System.out.println(String.format("\tNow you have %d tasks in the list.", size));
+    }
+
+    public String getDeleteTaskResponse(Task task) {
+        String output = "\tNoted. I've removed this task:";
+        output += "\t  " + task.toString();
+        int size = (new TaskList()).getSize();
+        output += String.format("\tNow you have %d tasks in the list.", size);
+        return output;
     }
 
     public void printMatchingTasks(ArrayList<Task> matchingTasks) {
@@ -70,6 +107,14 @@ public class Ui {
         for (int i = 0; i < matchingTasks.size(); i++) {
             System.out.println(String.format("\t%d.%s", i + 1, matchingTasks.get(i)));
         }
+    }
+
+    public String getFindTaskResponse(ArrayList<Task> matchingTasks) {
+        StringBuilder output = new StringBuilder("\tHere are the matching tasks in your list:\n");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            output.append(String.format("\t%d.%s", i + 1, matchingTasks.get(i)));
+        }
+        return output.toString();
     }
 
     /**
@@ -80,6 +125,14 @@ public class Ui {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(String.format("\t%d.%s", i + 1, tasks.get(i)));
         }
+    }
+
+    public String getListResponse(ArrayList<Task> tasks) {
+        StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            output.append(String.format("\t%d.%s", i + 1, tasks.get(i)));
+        }
+        return output.toString();
     }
 
     /**
@@ -94,6 +147,17 @@ public class Ui {
             System.out.println(e.getMessage());
         }
         System.exit(0);
+    }
+
+    public String getByeResponse() {
+        String output = "\tBye. Hope to see you again soon!";
+        Storage storage = new Storage();
+        try {
+            storage.overwriteTasks();
+        } catch (IOException e) {
+            output += e.getMessage();
+        }
+        return output;
     }
 
 }

@@ -31,42 +31,45 @@ public class Parser {
      * deadline or event time and day.
      * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
      */
-    public void executeCommand(String command) throws InvalidCommandException, MissingInputException,
+    public String executeCommand(String command) throws InvalidCommandException, MissingInputException,
             MissingDescriptionException {
         String[] commandWords = command.trim().split(" ");
         String commandType = commandWords[0];
+        String output = "";
         TaskList taskList = new TaskList();
 
         switch (commandType) {
         case "list":
             ArrayList<Task> tasks = taskList.getTaskList();
-            ui.printList(tasks);
+            //.printList(tasks);
+            output = ui.getListResponse(tasks);
             break;
         case "done":
             int taskNumber = Integer.parseInt(commandWords[1]);
-            taskList.markAsDone(taskNumber);
+            output = taskList.markAsDone(taskNumber);
             break;
         case "delete":
             int taskNumber2 = Integer.parseInt(commandWords[1]);
-            taskList.deleteTask(taskNumber2);
+            output = taskList.deleteTask(taskNumber2);
             break;
         case "find":
-            taskList.findMatchingTasks(commandWords[1]);
+            output = taskList.findMatchingTasks(commandWords[1]);
             break;
         case "todo":
             // Fallthrough
         case "deadline":
             // Fallthrough
         case "event":
-            addTask(command, commandType);
+            output = addTask(command, commandType);
             break;
         case "bye":
-            this.ui.exit();
+            output = this.ui.getByeResponse();
             break;
         default:
             throw new InvalidCommandException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
+        return output;
     }
 
     /**
@@ -77,7 +80,7 @@ public class Parser {
      * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
      * deadline or event time and day.
      */
-    private void addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
+    private String addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
         String desc = command.substring(taskType.length()).trim();
         Task task = new Task();
 
@@ -134,7 +137,7 @@ public class Parser {
         }
 
         TaskList taskList = new TaskList();
-        taskList.addTask(task);
+        return taskList.addTask(task);
     }
 
 }

@@ -1,3 +1,6 @@
+import duke.exception.InvalidCommandException;
+import duke.exception.MissingDescriptionException;
+import duke.exception.MissingInputException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

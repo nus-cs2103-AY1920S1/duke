@@ -10,12 +10,11 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Creates Duke with the specified file path.
-     * @param filePath The path to the tasks list file.
+     * Creates Duke.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("src/main/java/tasklists.txt");
         try {
             taskList = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -31,8 +30,17 @@ public class Duke {
         ui.takeInUserInput();
     }
 
+    /**
+     * Gets the appropriate response with the specified input/command given by the user.
+     * @param input given by the user.
+     * @return String the appropriate response to the user's input.hello
+     */
+    public String getResponse(String input) {
+        return ui.readUserInput(input);
+    }
+
     public static void main(String[] args) {
-        Duke duke = new Duke("src/main/java/tasklists.txt");
+        Duke duke = new Duke();
         duke.run();
     }
 

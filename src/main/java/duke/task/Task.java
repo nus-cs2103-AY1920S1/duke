@@ -52,11 +52,11 @@ public class Task {
     }
 
     protected String getDoneSymbol() {
-        return this.isDone ? "✓" : "x";
+        return this.isDone ? "\u2713" : "x"; // returns check mark or cross
     }
 
     protected void setDoneSymbol() {
-        this.doneSymbol = isDone ? "✓" : "x";
+        this.doneSymbol = isDone ? "\u2713" : "x"; // returns check mark or cross
     }
 
     /**

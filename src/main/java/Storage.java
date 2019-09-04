@@ -3,14 +3,30 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage handler that loads from and saves task to a file location.
+ * A <code>Storage</code> object corresponds to a storage handler that interacts
+ * with a <code>File</code>.
+ */
 public class Storage {
 
     private File diskList;
 
+    /**
+     * Constructs a <code>Storage</code> based on a storage filepath.
+     *
+     * @param filePath Storage filepath.
+     */
     public Storage(String filePath) {
         diskList = new File(filePath);
     }
 
+    /**
+     * Returns updated list of tasks from specified storage.
+     *
+     * @return List of tasks.
+     * @throws DukeException If diskList does not exist.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -50,6 +66,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Overwrites stored list of tasks with given list of tasks.
+     *
+     * @param taskList List of tasks.
+     */
     public void overWrite(ArrayList<Task> taskList) {
         try {
             diskList.createNewFile();

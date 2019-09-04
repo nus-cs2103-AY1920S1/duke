@@ -1,7 +1,19 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a parser that makes sense of user commands.
+ */
 public class Parser {
+
+    /**
+     * Returns parsed command from given user command.
+     * Parsed command is represented by an array that contains
+     * command type and command details.
+     *
+     * @param input User command.
+     * @return Parsed command.
+     */
     public static String[] parseCommand(String input) {
         String[] parseInfo = new String[2];
         if (input.matches("done\\s+\\d+")) {
@@ -28,6 +40,14 @@ public class Parser {
         return parseInfo;
     }
 
+    /**
+     * Returns parsed details from given command details.
+     * Parsed details represented by array that contains task description
+     * and task date/time information.
+     *
+     * @param input Command details.
+     * @return Parsed details.
+     */
     public static String[] parseDetails(String input) {
         String[] parseInfo;
 
@@ -42,6 +62,12 @@ public class Parser {
         return parseInfo;
     }
 
+    /**
+     * Returns date/time in text format from date/time in numerical format.
+     *
+     * @param s Numerical date/time.
+     * @return Textual date/time.
+     */
     public static String dateConversion(String s) {
         SimpleDateFormat numDateTime = new SimpleDateFormat("d/M/y HHmm");
         SimpleDateFormat textDateTime = new SimpleDateFormat("d MMMM y, h.mma");

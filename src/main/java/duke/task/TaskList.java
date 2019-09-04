@@ -37,13 +37,20 @@ public class TaskList {
         return this.toDoList.remove(taskNumToDelete - 1);
     }
 
-    public Task markTaskAsDone(int taskNumToMark) throws DukeException{
+    public void markTaskAsDone(int taskNumToMark) throws DukeException{
         if (taskNumToMark <= 0 || taskNumToMark > this.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        Task taskToMark = this.getTaskFromList(taskNumToMark - 1);
+        Task taskToMark = this.getTaskFromList(taskNumToMark);
         taskToMark.markAsDone();
-        return taskToMark;
+        setIndexToTask(taskNumToMark, taskToMark);
+    }
+
+    public void setIndexToTask(int numberToSet, Task taskToSet) throws DukeException{
+        if (numberToSet <= 0 || numberToSet > this.getSize()){
+            throw new DukeException("Task Number is out of bounds");
+        }
+        this.toDoList.set(numberToSet - 1, taskToSet);
     }
 
     public void listAllTasks(Ui ui) {

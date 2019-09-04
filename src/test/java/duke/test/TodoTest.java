@@ -1,10 +1,18 @@
 package duke.test;
 
+import duke.exception.DukeException;
 import duke.task.Todo;
-public class TodoTest{
-    public static void main(String[] args)throws Exception{
+import org.junit.jupiter.api.Test;
 
-        //test setup
-        Todo t = new Todo("Test");
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class TodoTest{
+
+    @Test
+    public void testGetTaskStatus() throws DukeException {
+            Todo test = new Todo(" TEST");
+            assertEquals("[T] [✗] TEST", test.getTaskStatus());
     }
+
+
 }

@@ -19,7 +19,8 @@ public class DoneCommand extends Command {
         if (this.taskNumToComplete <= 0 || taskNumToComplete > tasks.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        Task taskToComplete = tasks.markTaskAsDone(this.taskNumToComplete);
+        tasks.markTaskAsDone(this.taskNumToComplete - 1);
+        Task taskToComplete = tasks.getTaskFromList(this.taskNumToComplete - 1);
         ui.messageUser("Nice! I've marked this task as done:",
                 "  " + taskToComplete.getTaskStatus());
     }

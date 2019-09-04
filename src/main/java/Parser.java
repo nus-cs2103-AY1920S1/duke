@@ -64,6 +64,11 @@ public class Parser {
             assert enumType == TaskType.EVENT : "Enum is not right!";
             timeSplit = splitCommandForTask(type, command);
             return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
+        case "fixed":
+            enumType = TaskType.valueOf(type.toUpperCase());
+            assert enumType == TaskType.FIXED : "Enum is not right!";
+            timeSplit = splitCommandForTask(type, command);
+            return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
 
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't"
@@ -85,12 +90,14 @@ public class Parser {
 
         if (type.equals("event")) {
             timeSplit = command.split("/at");
-        } else {
+        } else if (type.equals("deadline")) {
             timeSplit = command.split("/by");
+        } else {
+            timeSplit = command.split("/needs");
         }
 
         if (timeSplit.length == 1) {
-            throw new DukeException("☹ OOPS!!! Please enter a time for your task.");
+            throw new DukeException("☹ OOPS!!! Please enter a time / duration for your task.");
         }
 
         return timeSplit;

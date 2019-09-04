@@ -43,8 +43,13 @@ public class AddCommand extends Command {
             newTask = new Event(this.taskDesc, this.timeDesc);
             break;
 
+        case FIXED:
+           newTask = new FixedDurationTask(this.taskDesc, this.timeDesc);
+           break;
+
         default:
-            throw new DukeException("This doesn't make sense!");
+            assert false : "Program is not supposed to get here!";
+            newTask = null;
         }
 
         storage.save(tasks.getTaskList());

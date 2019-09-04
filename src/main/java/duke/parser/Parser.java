@@ -41,70 +41,61 @@ public class Parser {
      *
      * @return whether the bye command is given to exit from Duke.
      */
-    public boolean parse(String input) {
+    public String parse(String input) {
         String[] command = input.split(" ");
 
         switch (command[0]) {
         case "bye":
-            ui.showBye();
-            return true;
+            return ui.showBye();
         case "list":
-            ui.showList(taskList.getTaskList());
-            return false;
+            return ui.showList(taskList.getTaskList());
         case "done":
             try {
                 Task doneTask = taskList.doTask(input);
-                ui.showCompletedTask(doneTask);
+                return ui.showCompletedTask(doneTask);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            return false;
         case "todo":
             try {
                 Todo todo = makeTodo(input);
                 taskList.addTask(todo);
-                ui.showAddedTask(todo, taskList);
+                return ui.showAddedTask(todo, taskList);
             } catch (DukeTaskException e) {
-                System.out.println(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            return false;
         case "deadline":
             try {
                 Deadline deadline = makeDeadline(input);
                 taskList.addTask(deadline);
-                ui.showAddedTask(deadline, taskList);
+                return ui.showAddedTask(deadline, taskList);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            return false;
         case "event":
             try {
                 Event event = makeEvent(input);
                 taskList.addTask(event);
-                ui.showAddedTask(event, taskList);
+                return ui.showAddedTask(event, taskList);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            return false;
         case "delete":
             try {
                 Task deletedTask = taskList.deleteTask(input);
-                ui.showDeletedTask(deletedTask, taskList);
+                return ui.showDeletedTask(deletedTask, taskList);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            return false;
         case "find":
             TaskList foundList = taskList.findTask(input);
-            ui.showFound(foundList);
-            return false;
+            return ui.showFound(foundList);
         default:
             try {
                 throw new DukeParserException("I'm sorry, but I don't know what that means :-(");
             } catch (DukeParserException e) {
-                System.out.println(e.getMessage());
+                return ui.showError(e.getMessage());
             }
-            return false;
         }
     }
 

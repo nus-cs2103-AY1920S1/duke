@@ -39,17 +39,18 @@ public class DoneCommand extends Command {
      */
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 1 || tasks.getSize() < index) {
             throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
         }
         Task doneTask = tasks.getTask(index - 1);
         doneTask.setDone(true);
-        ui.showDoneTask(doneTask);
         try {
             storage.updateFile(tasks);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "Nice! I've marked this task as done:\n"
+                + "  " + doneTask;
     }
 }

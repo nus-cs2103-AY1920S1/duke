@@ -37,13 +37,15 @@ public class AddToDoCommand extends Command {
      * @param storage External storage where the list of tasks is stored
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
-        ui.showAddTask(task, tasks.getSize());
         try {
             storage.writeToFile(task.toFile());
         } catch (IOException e) {
             ui.showIoException(e);
         }
+        return "Got it. I've added this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 }

@@ -63,13 +63,15 @@ public class AddEventCommand extends Command {
      */
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(event);
-        ui.showAddTask(event, tasks.getSize());
         try {
             storage.writeToFile(event.toFile());
         } catch (IOException e) {
             ui.showIoException(e);
         }
+        return "Got it. I've added this task:\n"
+                + "  " + event + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 }

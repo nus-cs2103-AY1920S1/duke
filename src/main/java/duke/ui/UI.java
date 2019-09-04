@@ -1,4 +1,5 @@
 package duke.ui;
+
 import java.util.Scanner;
 
 /**
@@ -43,63 +44,63 @@ public class UI {
     /**
      * Prints a message of an error.
      */
-    public void errorUCDE() {
+    public void errorUcde() {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorETDDE() {
+    public void errorEtdde() {
         System.out.println("☹ OOPS!!! I'm sorry, the description cannot be empty :-(");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorEDDDE() {
+    public void errorEddde() {
         System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorEEDDE() {
+    public void errorEedde() {
         System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorNDDE() {
+    public void errorNdde() {
         System.out.println("☹ OOPS!!! You need to provide a date, with / to indicate it:-(");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorITIDE() {
+    public void errorItide() {
         System.out.println("☹ OOPS!!! You need to provide a valid task number :-(");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorNFE() {
+    public void errorNfe() {
         System.out.println("☹ OOPS!!! You need to provide a valid number :-(");
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorDE(String errorMsg) {
+    public void errorDe(String errorMsg) {
         System.out.println("☹ OOPS!!! Something went wrong! " + errorMsg);
     }
 
     /**
      * Prints a message of an error.
      */
-    public void errorPE() {
+    public void errorPe() {
         System.out.println("☹ OOPS!!! There was a parsing error!");
     }
 }

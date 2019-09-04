@@ -7,6 +7,7 @@ package duke.task;
 public abstract class Task {
     String taskDetails;
     boolean completed;
+
     Task(String taskDetails) {
         this.taskDetails = taskDetails;
         this.completed = false;
@@ -44,6 +45,7 @@ public abstract class Task {
     public String getTaskDetails() {
         return this.taskDetails;
     }
+
     @Override
     public String toString() {
         if (completed) {

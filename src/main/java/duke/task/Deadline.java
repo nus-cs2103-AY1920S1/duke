@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Deadline is a task that has to be completed by a certain date.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private Date deadlineBy;
 
     public Deadline(String taskDetails, Date deadlineBy) {
@@ -20,8 +20,8 @@ public class Deadline extends Task{
      * @return string that contains information about a task.
      */
     public String saveInfo() {
-        return "deadline" + " " + taskDetails + " /by " + TaskList.inputDateFormat.format(deadlineBy) + System.getProperty("line.separator")
-                + completed;
+        return "deadline" + " " + taskDetails + " /by " + TaskList.inputDateFormat.format(deadlineBy)
+                + System.getProperty("line.separator") + completed;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Deadline extends Task{
             sb.append("[D][✗] ");
         }
         sb.append(taskDetails);
-        sb.append (" (");
+        sb.append(" (");
         sb.append(TaskList.outputDateFormat.format(deadlineBy));
         sb.append(")");
         return sb.toString();

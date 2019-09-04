@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private File file;
+
     public Storage(String filePath) {
         file = new File(filePath);
     }
@@ -24,7 +25,7 @@ public class Storage {
      *
      * @param stringToSave  string that will be saved to a file
      */
-    public void saveDuke(String stringToSave){
+    public void saveDuke(String stringToSave) {
         try {
             FileWriter fw = new FileWriter(this.file);
             fw.write(stringToSave);

@@ -3,7 +3,7 @@ package duke.task;
 /**
  * To-do task is a task that is supposed to be completed in the future.
  */
-public class TodoTask  extends Task{
+public class TodoTask  extends Task {
     public TodoTask(String taskDetails) {
         super(taskDetails);
     }

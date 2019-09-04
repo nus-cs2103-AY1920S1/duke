@@ -1,6 +1,12 @@
 package duke.main;
 
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.EmptyDeadlineDscDukeException;
+import duke.exception.EmptyTodoDscDukeException;
+import duke.exception.UnknownCmdDukeException;
+import duke.exception.EmptyEventDscDukeException;
+import duke.exception.InvalidTaskIndexDukeException;
+import duke.exception.NoDateDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UI;
@@ -17,6 +23,10 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for duke.
+     * @param filePath  location where the save file is stored
+     */
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);
@@ -39,63 +49,30 @@ public class Duke {
             input = ui.getInput();
             try {
                 dukeIsOn = tasks.parseInput(input, true);
-            } catch (UnknownCmdDukeException e){
-                ui.errorUCDE();
+            } catch (UnknownCmdDukeException e) {
+                ui.errorUcde();
             } catch (EmptyTodoDscDukeException e) {
-                ui.errorETDDE();
+                ui.errorEtdde();
             } catch (EmptyDeadlineDscDukeException e) {
-                ui.errorEDDDE();
+                ui.errorEddde();
             } catch (EmptyEventDscDukeException e) {
-                ui.errorEEDDE();
+                ui.errorEedde();
             } catch (NoDateDukeException e) {
-                ui.errorNDDE();
+                ui.errorNdde();
             } catch (InvalidTaskIndexDukeException e) {
-                ui.errorITIDE();
+                ui.errorItide();
             } catch (NumberFormatException e) {
-                ui.errorNFE();
+                ui.errorNfe();
             } catch (DukeException e) {
-                ui.errorDE(e.getMessage());
+                ui.errorDe(e.getMessage());
             } catch (ParseException e) {
-                ui.errorPE();
+                ui.errorPe();
             }
         }
         storage.saveDuke(tasks.saveInfo());
     }
 
     public static void main(String[] args) {
-        new Duke("../data/savedList.txt").run();
+        new Duke("data/savedList.txt").run();
     }
-        //
-//        Scanner sc = new Scanner(System.in);
-//        String input;
-//        boolean dukeIsOn = true;
-//        String filePath = "../data/savedList.txt";
-//        TaskList myTasks = new TaskList(filePath);
-//        myTasks.loadDuke(filePath);
-//        while(dukeIsOn){
-//            input = sc.nextLine().trim();
-//            try {
-//                dukeIsOn = myTasks.parseInput(input, true);
-//            } catch (UnknownCmdDukeException e){
-//                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-//            } catch (EmptyTodoDscDukeException e) {
-//                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-//            } catch (EmptyDeadlineDscDukeException e) {
-//                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-//            } catch (EmptyEventDscDukeException e) {
-//                System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
-//            } catch (NoDateDukeException e) {
-//                System.out.println("☹ OOPS!!! You need to provide a date, with / to indicate it:-(");
-//            } catch (InvalidTaskIndexDukeException e) {
-//                System.out.println("☹ OOPS!!! You need to provide a valid task number :-(");
-//            } catch (NumberFormatException e) {
-//                System.out.println("☹ OOPS!!! You need to provide a valid number :-(");
-//            } catch (DukeException e) {
-//                System.out.println("☹ OOPS!!! Something went wrong" + e.getMessage());
-//            } catch (ParseException e) {
-//                System.out.println("Something went wrong! " + e.getMessage());
-//            }
-//        }
-//    }
-
 }

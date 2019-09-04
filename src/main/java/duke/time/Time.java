@@ -9,7 +9,7 @@ public class Time {
 
     public Time(int time) throws DukeException {
         String timeString = String.valueOf(time);
-        if (timeString.length() != 4) {
+        if (timeString.length() > 4) {
             validFormat = false;
         }
         String format = "";

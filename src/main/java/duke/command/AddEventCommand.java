@@ -67,7 +67,7 @@ public class AddEventCommand extends Command {
         if (!inputMessage[marker].equals("/at")) {
             throw new DukeException("     Wrong syntax, should be using /at for deadline");
         }
-        listOfTasks.addEvent(new Event(input, extraInfo));
+        listOfTasks.addEvent(new Event(mainInput, extraInfo));
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
         ui.printTaskAdd(listOfTasks.get(listOfTasks.size() - 1));

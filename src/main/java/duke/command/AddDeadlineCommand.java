@@ -67,7 +67,7 @@ public class AddDeadlineCommand extends Command {
         if (!inputMessage[marker].equals("/by")) {
             throw new DukeException("     Wrong syntax, should be using /by for deadline");
         }
-        listOfTasks.addDeadline(new Deadline(input, extraInfo));
+        listOfTasks.addDeadline(new Deadline(mainInput, extraInfo));
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
         ui.printTaskAdd(listOfTasks.get(listOfTasks.size() - 1));

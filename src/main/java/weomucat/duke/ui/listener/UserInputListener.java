@@ -5,11 +5,17 @@ import weomucat.duke.exception.DukeException;
 /**
  * When user input is received, this listener will be notified.
  */
-@FunctionalInterface
 public interface UserInputListener {
 
   /**
-   * When user input is received, this method will be called.
+   * When user wants to shutdown duke, this method will be called.
+   *
+   * @throws DukeException If there is anything wrong with processing.
+   */
+  void byeUpdate() throws DukeException;
+
+  /**
+   * When a user input string is received, this method will be called.
    *
    * @param userInput user input
    * @throws DukeException If there is anything wrong with processing.

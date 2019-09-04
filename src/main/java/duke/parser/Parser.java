@@ -35,89 +35,68 @@ public class Parser {
     }
 
     /**
-     * Returns a TaskList object that will contain all the remaining tasks that
-     * has been entered into duke.
+     * Parses the user input passed into duke and processes it accordingly.
      *
-     * <p>This method scans the commands passed into duke and processes the commands
-     * accordingly.
+     * <p>After parsing each input, a boolean of whether to exit is returned.
      *
-     * @return the TaskList after the Parser processes the commands.
+     * @return whether the bye command is given to exit from Duke.
      */
-    public TaskList start() {
-        Scanner sc = new Scanner(System.in);
-        boolean bye = false;
+    public String parse(String input) {
+        String[] command = input.split(" ");
 
-        ui.showWelcome();
-
-        while (!bye) {
-            String input = sc.nextLine();
-            String[] command = input.split(" ");
-            switch (command[0]) {
-            case "bye":
-                ui.showBye();
-                bye = true;
-                break;
-            case "list":
-                ui.showList(taskList.getTaskList());
-                break;
-            case "done":
-                try {
-                    Task doneTask = taskList.doTask(input);
-                    ui.showCompletedTask(doneTask);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case "todo":
-                try {
-                    Todo todo = makeTodo(input);
-                    taskList.addTask(todo);
-                    ui.showAddedTask(todo, taskList);
-                } catch (DukeTaskException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case "deadline":
-                try {
-                    Deadline deadline = makeDeadline(input);
-                    taskList.addTask(deadline);
-                    ui.showAddedTask(deadline, taskList);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case "event":
-                try {
-                    Event event = makeEvent(input);
-                    taskList.addTask(event);
-                    ui.showAddedTask(event, taskList);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case "delete":
-                try {
-                    Task deletedTask = taskList.deleteTask(input);
-                    ui.showDeletedTask(deletedTask, taskList);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case "find":
-                TaskList foundList = taskList.findTask(input);
-                ui.showFound(foundList);
-                break;
-            default:
-                try {
-                    throw new DukeParserException("I'm sorry, but I don't know what that means :-(");
-                } catch (DukeParserException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
+        switch (command[0]) {
+        case "bye":
+            return ui.showBye();
+        case "list":
+            return ui.showList(taskList.getTaskList());
+        case "done":
+            try {
+                Task doneTask = taskList.doTask(input);
+                return ui.showCompletedTask(doneTask);
+            } catch (DukeException e) {
+                return ui.showError(e.getMessage());
+            }
+        case "todo":
+            try {
+                Todo todo = makeTodo(input);
+                taskList.addTask(todo);
+                return ui.showAddedTask(todo, taskList);
+            } catch (DukeTaskException e) {
+                return ui.showError(e.getMessage());
+            }
+        case "deadline":
+            try {
+                Deadline deadline = makeDeadline(input);
+                taskList.addTask(deadline);
+                return ui.showAddedTask(deadline, taskList);
+            } catch (DukeException e) {
+                return ui.showError(e.getMessage());
+            }
+        case "event":
+            try {
+                Event event = makeEvent(input);
+                taskList.addTask(event);
+                return ui.showAddedTask(event, taskList);
+            } catch (DukeException e) {
+                return ui.showError(e.getMessage());
+            }
+        case "delete":
+            try {
+                Task deletedTask = taskList.deleteTask(input);
+                return ui.showDeletedTask(deletedTask, taskList);
+            } catch (DukeException e) {
+                return ui.showError(e.getMessage());
+            }
+        case "find":
+            TaskList foundList = taskList.findTask(input);
+            return ui.showFound(foundList);
+        default:
+            try {
+                throw new DukeParserException("I'm sorry, but I don't know what that means :-(");
+            } catch (DukeParserException e) {
+                return ui.showError(e.getMessage());
             }
         }
-        sc.close();
-        return taskList;
     }
 
     /**

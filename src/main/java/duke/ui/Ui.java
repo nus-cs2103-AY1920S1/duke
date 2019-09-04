@@ -10,120 +10,99 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    private void showLine() {
-        System.out.println("\t____________________________________________________________");
-    }
-
     /**
-     * Prints the Duke logo and the welcome message. This method is called when the Parser starts
-     * scanning the user's input.
+     * Returns the String representation of the Duke logo and the welcome message.
+     *
+     * <p>This method is called when the Parser starts scanning the user's input.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        showLine();
-        System.out.println("\t Hello! I'm Duke");
-        System.out.println("\t What can I do for you?");
-        showLine();
+        return String.format("%s\nHello! I'm Duke\nWhat can I do for you?", logo);
     }
 
     /**
-     * Prints the farewell message. This method is called when Parser is done scanning the user's
-     * input.
+     * Returns the String representation of the farewell message.
+     *
+     * <p>This method is called when Parser is done scanning the user's input.
      */
-    public void showBye() {
-        showLine();
-        System.out.println("\t Bye. Hope to see you again soon!");
-        showLine();
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the error message contained within the exception.
+     * Returns the String representation of the error message contained within the exception.
      *
      * @param errorMsg the error message to be printed.
      */
-    public void showError(String errorMsg) {
-        showLine();
-        System.out.printf("\t %s\n", errorMsg);
-        showLine();
+    public String showError(String errorMsg) {
+        return String.format("☹ OOPS!!! %s\n", errorMsg);
     }
 
     /**
-     * Prints the entire list in the TaskList.
+     * Returns the String representation of the entire list in the TaskList.
      *
      * @param list the list to be printed.
      */
-    public void showList(ArrayList<Task> list) {
+    public String showList(ArrayList<Task> list) {
         int count = 1;
-        showLine();
-        System.out.println("\t Here are the task(s) in your list:");
+        String listTasks = "Here are the task(s) in your list:\n\n";
         for (Task task: list) {
-            System.out.printf("\t %d. %s\n", count, task);
+            listTasks = String.format("%s\t%d. %s\n",listTasks, count, task);
             count++;
         }
-        showLine();
+        return listTasks;
     }
 
     /**
-     * Prints the Task that has been added into the TaskList and also the number of remaining Tasks in
-     * the TaskList.
+     * Returns the String representation of the Task that has been added into the TaskList and also the number of
+     * remaining Tasks in the TaskList.
      *
      * @param addedTask the Task that has been added.
      * @param taskList the TaskList which the Task is added to.
      */
-    public void showAddedTask(Task addedTask, TaskList taskList) {
-        showLine();
-        System.out.println("\t Got it. I've added this task:");
-        System.out.printf("\t   %s\n", addedTask);
-        System.out.printf("\t Now you have %d task(s) in the list.\n", taskList.getSize());
-        showLine();
+    public String showAddedTask(Task addedTask, TaskList taskList) {
+        return String.format("Got it. I've added this task:\n\n\t%s\n\nNow you have %d task(s) in the list.\n",
+                addedTask, taskList.getSize());
     }
 
     /**
-     * Prints the Task that has been deleted from the TaskList and also the number of remaining Tasks in
-     * the TaskList.
+     * Returns the String representation of the Task that has been deleted from the TaskList and also the number of
+     * remaining Tasks in the TaskList.
      *
      * @param deletedTask the Task that has been deleted.
      * @param taskList the TaskList which the Task is deleted from.
      */
-    public void showDeletedTask(Task deletedTask, TaskList taskList) {
-        showLine();
-        System.out.println("\t Noted. I've removed this task:");
-        System.out.printf("\t   %s\n", deletedTask);
-        System.out.printf("\t Now you have %d task(s) in the list.\n", taskList.getSize());
-        showLine();
+    public String showDeletedTask(Task deletedTask, TaskList taskList) {
+        return String.format("Noted. I've removed this task:\n\n\t%s\n\nNow you have %d task(s) in the list.\n",
+                deletedTask, taskList.getSize());
     }
 
     /**
-     * Prints the Task after it has been completed.
+     * Returns the String representation of the Task after that has been completed.
      *
      * @param completed the Task that has been completed.
      */
-    public void showCompletedTask(Task completed) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t Nice! I've marked this task as done: ");
-        System.out.printf("\t   %s\n", completed.toString());
-        System.out.println("\t____________________________________________________________");
+    public String showCompletedTask(Task completed) {
+        return String.format("Nice! I've marked this task as done: \n\n\t%s\n", completed);
     }
 
     /**
-     *  Prints the Tasks found.
+     * Returns the String representation of the Tasks found.
      *
      * @param taskList the TaskList of the Tasks that were found.
      */
-    public void showFound(TaskList taskList) {
+    public String showFound(TaskList taskList) {
         ArrayList<Task> list = taskList.getTaskList();
         int count = 1;
-        showLine();
-        System.out.println("\t Here are the matching tasks in your list:");
+        String found = "Here are the matching tasks in your list:\n\n";
         for (Task task: list) {
-            System.out.printf("\t %d. %s\n", count, task);
+            found = String.format("%s\t%d. %s\n", found, count, task);
             count++;
         }
-        showLine();
+        return found;
     }
 }

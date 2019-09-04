@@ -11,6 +11,10 @@ public class Duke {
 		new Duke();
     }
 
+	/**
+	 * Constructor for Duke
+	 * Creates new Storage instance and Parser
+	 */
     public Duke() throws IOException {
 		UI.start();
 		//ArrayList<Task> tasks = new ArrayList<Task>();

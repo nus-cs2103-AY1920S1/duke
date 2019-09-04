@@ -15,6 +15,15 @@ public class Parser {
     private static int count;
     public Tasklist tasklist;
 
+    /**
+     * Parser constructor
+     *
+     * @param tasklist tasklist containing the list of tasks
+     * @param ui the ui to be used
+     * @param storage where the tasks will be stored
+     *
+     */
+
     public Parser(Tasklist tasklist, UI ui, Storage storage) {
         this.tasklist = tasklist;
         this.ui = ui;

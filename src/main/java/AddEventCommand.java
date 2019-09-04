@@ -17,7 +17,7 @@ public class AddEventCommand extends Command {
      * @throws DukeException exception specific to Duke application
      */
     @Override
-    public void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (inputEvent.trim().length() == 5) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         } else {

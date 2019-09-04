@@ -17,7 +17,7 @@ public class AddTodoCommand extends Command {
      * @throws DukeException exception specific to Duke application
      */
     @Override
-    public void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (inputTodo.trim().length() == 4) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {

@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
      * @param storage storage file
      */
     @Override
-    public void execute (TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task toBeMarkDone = tasks.getTask(indexToMarkDone);
         toBeMarkDone.markAsDone();
         System.out.println("Nice! I've marked this task as done:");

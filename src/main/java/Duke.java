@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import duke.command.TaskList;
 import duke.command.Ui;

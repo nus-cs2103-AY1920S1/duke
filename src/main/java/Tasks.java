@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
 public class Tasks {
-    ArrayList<String> taskDescription;
-    String typeOfTask;
+    //ArrayList<String> taskDescription;
+    //String typeOfTask;
     String taskDetails;
     String time;
     int status;
 
-    public Tasks(ArrayList<String> inputList) {
+    /*public Tasks(ArrayList<String> inputList) {
         this.taskDescription = inputList;
         if(inputList.get(0).equals("todo")) {
             this.typeOfTask = "T";
@@ -23,26 +23,30 @@ public class Tasks {
             this.time = inputList.get(2);
         }
         this.status = 1;
+    } */
+
+
+    public Tasks(String taskDetails) {
+        this.taskDetails = taskDetails;
+        this.status = 1;
+    }
+
+    public Tasks(String taskDetails, String time) {
+        this.taskDetails = taskDetails;
+        this.time = time.substring(1);
+        this.status = 1;
     }
 
     protected void finishTask() {
         this.status = 0;
     }
 
-    private String formatTime() {
-        String output = "";
-        if(time.length() > 1) {
-            output = time.substring(1);
-        }
-        return output;
-    }
-
-    @Override 
+    /*@Override
     public String toString() {
         if(this.typeOfTask.equals("T")) {
             return typeOfTask + " | " + status + " | " + taskDetails;
-        }  
+        }
         return typeOfTask + " | " + status + " | " + taskDetails + " | " + formatTime();
-    }
+    }*/
 
 }

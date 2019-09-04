@@ -29,9 +29,9 @@ public class MainWindow extends AnchorPane {
     /** Indicator for if the program should close. */
     private boolean[] shouldExit = {false};
     /** Display image of user. */
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     /** Display image of Jermi. */
-    private Image jermiImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image jermiImage = new Image(this.getClass().getResourceAsStream("/images/Jermi.png"));
 
     /**
      * Allows the scroll pane to scroll down automatically when the dialog container stretches beyond

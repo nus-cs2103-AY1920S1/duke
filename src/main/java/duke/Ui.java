@@ -23,15 +23,27 @@ public class Ui {
         System.out.println(greeting);
     }
 
+    /**
+     * Shows a horizontal line.
+     */
     public void showLine() {
-        System.out.print(LINE);
+        // do nothing
+        // System.out.print(LINE);
     }
 
+    /**
+     * Shows the message preceding a task that has just been added.
+     */
     public void showAddTaskMessage() {
         String addTaskMessage = "     Got it. I've added this task: ";
         System.out.println(addTaskMessage);
     }
 
+    /**
+     * Prints the information about a task that has just been added.
+     *
+     * @param task Task that has just been added to the task list.
+     */
     public void printAddedTask(Task task) {
         String result = "";
         switch (task.getType()) {
@@ -47,12 +59,22 @@ public class Ui {
         }
         result += task;
         System.out.println(result);
+
+        // return result;
     }
 
+    /**
+     * Prints a string to the user interface.
+     *
+     * @param string The text to be printed.
+     */
     public void println(String string) {
         System.out.println(string);
     }
 
+    /**
+     * Shows the farewell message when the user exits Duke
+     */
     public void showFarewellMessage() {
         showLine();
         String farewellMessage = "     Bye. Hope to see you again soon!";

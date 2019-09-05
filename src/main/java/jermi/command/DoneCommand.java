@@ -10,10 +10,7 @@ import jermi.task.Task;
 /**
  * A representation of the command for marking a task as completed in the list.
  */
-public class DoneCommand extends Command {
-    /** Index of the task to be marked as done. */
-    private int index;
-
+public class DoneCommand extends MutateTaskCommand {
     /**
      * Public constructor for class.
      *
@@ -21,13 +18,7 @@ public class DoneCommand extends Command {
      * @throws JermiException {@link InvalidIndexException}.
      */
     public DoneCommand(String index) throws JermiException {
-        super();
-
-        try {
-            this.index = Integer.parseInt(index);
-        } catch (NumberFormatException e) {
-            throw new InvalidIndexException();
-        }
+        super(index);
     }
 
     /**
@@ -45,15 +36,5 @@ public class DoneCommand extends Command {
         task.markAsDone();
         storage.taskListToFile();
         return formatter.echo("Nice! I've marked this task as done:", "  " + task);
-    }
-
-    /**
-     * Indicates if the program should exit.
-     *
-     * @return {@code false}.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
     }
 }

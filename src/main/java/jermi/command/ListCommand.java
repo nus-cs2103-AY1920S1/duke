@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
  * A representation of the command to list the tasks in the list.
  */
 public class ListCommand extends Command {
-
     /**
      * Public constructor for class.
      */

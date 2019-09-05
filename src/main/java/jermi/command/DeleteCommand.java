@@ -10,10 +10,7 @@ import jermi.task.Task;
 /**
  * A representation of the command for deleting task from the list.
  */
-public class DeleteCommand extends Command {
-    /** Index of the task to be deleted. */
-    private int index;
-
+public class DeleteCommand extends MutateTaskCommand {
     /**
      * Public constructor for class.
      *
@@ -21,13 +18,7 @@ public class DeleteCommand extends Command {
      * @throws JermiException {@link InvalidIndexException}.
      */
     public DeleteCommand(String index) throws JermiException {
-        super();
-
-        try {
-            this.index = Integer.parseInt(index);
-        } catch (NumberFormatException e) {
-            throw new InvalidIndexException();
-        }
+        super(index);
     }
 
     /**
@@ -41,23 +32,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        Task task = taskList.getTask(index);
-        taskList.remove(index);
+        Task task = taskList.getTask(this.index);
+        taskList.remove(this.index);
         int numOfTasks = taskList.getSize();
         storage.taskListToFile();
         assert numOfTasks >= 0: "numOfTasks should be >= 0";
         return formatter.echo("Noted. I've removed this task:",
                 "  " + task,
                 String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
-    }
-
-    /**
-     * Indicates if the program should exit.
-     *
-     * @return {@code false}.
-     */
-    @Override
-    public boolean shouldExit() {
-        return false;
     }
 }

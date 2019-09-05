@@ -37,6 +37,7 @@ public class DoneCommand extends Command {
             response = new StringBuilder(AutoResponse.DUKE_MARK_AS_DONE)
                     .append("\n")
                     .append("  ")
+                    .append("\n")
                     .append(taskList.getTaskAt(index).getStatus())
                     .toString();
         } catch (NumberFormatException e) {

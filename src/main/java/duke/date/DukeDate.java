@@ -215,7 +215,7 @@ public class DukeDate {
      * Formats this DukeDate into a String.
      * The format is "dd Month, YYYY, hh:mm a"
      * <ul>
-     *     <li>Month - the month written as a literal.
+     *     <li>Month - the month written up to three letters..
      *     <li>a - the AM/PM marker
      * </ul>
      *
@@ -225,7 +225,7 @@ public class DukeDate {
         DecimalFormat df = new DecimalFormat("00");
         return String.format("%d %s, %d, %d:%s %s",
                              this.day,
-                             this.month,
+                             this.month.toString().substring(0, 3),
                              this.year,
                              this.hour,
                              df.format(this.minute),

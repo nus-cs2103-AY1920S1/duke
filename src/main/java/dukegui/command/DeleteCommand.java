@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
                     .append("\n")
                     .append("  ")
                     .append(task.getStatus())
+                    .append("\n")
                     .append(String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()))
                     .toString();
         } catch (NumberFormatException e) {

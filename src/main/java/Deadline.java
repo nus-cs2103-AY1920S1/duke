@@ -65,20 +65,20 @@ public class Deadline extends Task {
     }
 
     /**
-     * prints a message by Duke, when Duke has added a Deadline object.
+     * returns a message by Duke, when Duke has added a Deadline object.
      *
      * @param size Number of tasks managed by Duke after we have added a Deadline object.
      *
      */
 
-    public void printAddedDeadline(int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + this.toString());
+    public String addDeadlineMsg(int size) {
+        String message = "Got it. I've added this task: \n";
+        message = message + "  " + this.toString() + "\n";
         String end = " tasks in the list.";
         if (size == 1) {
             end = " task in the list.";
         }
-        System.out.println("Now you have " + size + end);
+        return message + "Now you have " + size + end;
     }
 
 }

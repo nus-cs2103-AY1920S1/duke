@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Ui {
 
     private boolean isRunning = true;
@@ -23,8 +21,6 @@ public class Ui {
 
     /**
      * receives commands from user.
-     */
-
     public void takeUserCommand() {
         sayHello();
         Scanner scan = new Scanner(System.in);
@@ -37,7 +33,24 @@ public class Ui {
                 ex.printErrorMessage();
             }
         }
+    }*/
+
+    /**
+     * returns salutations after user type in something into text field in the JavaFx GUI.
+     *
+     */
+    public String returnGreetings(){
+        return "Hello! I'm Duke \n" + "What can I do for you?";
     }
 
+    public String takeInput(String input) {
+        String message;
+        try {
+            message = commandInterpreter.checkCommand(input);
+        } catch (NoValidCommandException ex) {
+            return ex.returnErrorMessage();
+        }
+        return message;
 
+    }
 }

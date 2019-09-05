@@ -8,7 +8,7 @@ public class Events extends Task {
 
     /**
      * @param task task of the Events object
-     * @param timeDate time and date of the Deadline object in the following format: 2/12/2019 2-4pm
+     * @param timeDate time and date of the Event object in the following format: 2/12/2019 2-4pm
      *
      */
 
@@ -57,19 +57,19 @@ public class Events extends Task {
     }
 
     /**
-     * prints a message by Duke, when Duke has added an Events object.
+     * returns a message by Duke, when Duke has added an Events object.
      *
      * @param size Number of tasks managed by Duke after we have added an Events object.
      *
      */
-    public void printAddedEvent(int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + this.toString());
+    public String addedEventMsg(int size) {
+        String msg = "Got it. I've added this task: \n";
+        msg = msg + "  " + this.toString() + "\n";
         String end = " tasks in the list.";
         if (size == 1) {
             end = " task in the list.";
         }
-        System.out.println("Now you have " + size + end);
+        return msg + " Now you have " + size + end;
     }
 
 }

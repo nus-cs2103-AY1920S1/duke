@@ -30,21 +30,21 @@ public class Todo extends Task {
 
 
     /**
-     * prints a message by Duke, when Duke has added a Todo object.
+     * returns a message by Duke, when Duke has added a Todo object.
      *
      * @param size Number of tasks managed by Duke after we have added a Todo object.
      *
      */
 
-    public void printAddedTodo(int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + this.toString());
+    public String addedTodoMsg(int size) {
+        String msg = "Got it. I've added this task: \n";
+        msg = msg + "  " + this.toString() + "\n";
         String end = " tasks in the list.";
 
         if (size == 1) {
             end = " task in the list.";
         }
-        System.out.println("Now you have " + size + end);
+        return msg + " Now you have " + size + end;
     }
 
 }

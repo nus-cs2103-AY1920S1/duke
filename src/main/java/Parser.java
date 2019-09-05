@@ -9,60 +9,59 @@ public class Parser {
      * @param input a command for Duke
      *
      */
-    public static boolean checkCommand(String input) throws NoValidCommandException {
+    public static String checkCommand(String input) throws NoValidCommandException {
 
         String[] words = input.split(" ", 2);
         String command = words[0];
 
         switch (command) {
+
         case "bye":
-            System.out.println("Bye. Hope to "
-                    + "see you again soon!");
-            return false;
+            return "Bye. Hope to see you again soon!";
 
         case "list":
-            taskManager.printTaskList();
-            break;
+            return taskManager.getTaskList();
 
         case "done":
             int doneIndex = Integer.parseInt(words[1]) - 1;
-            taskManager.markDone(doneIndex);
+            String msgD = taskManager.markDone(doneIndex);
             storageManager.saveTaskUtil(taskManager);
-            break;
+            return msgD;
 
         case "delete":
             int delIndex = Integer.parseInt(words[1]) - 1;
-            taskManager.deleteTask(delIndex);
+            String msgDel = taskManager.deleteTask(delIndex);
             storageManager.saveTaskUtil(taskManager);
-            break;
+            return msgDel;
 
         case "deadline":
-            taskManager.addDeadLine(words[1]);
+            String msg = taskManager.addDeadLine(words[1]);
             storageManager.saveTaskUtil(taskManager);
-            break;
+            return msg;
 
         case "event":
+            String msgE;
             try {
-                taskManager.addEvent(words[1]);
+                msgE = taskManager.addEvent(words[1]);
             } catch (IndexOutOfBoundsException ex) {
-                System.out.println("Either event description or event specific timing is missing.");
+                msgE = "Either event description or event specific timing is missing.";
             }
             storageManager.saveTaskUtil(taskManager);
-            break;
+            return msgE;
 
         case "todo":
+            String msgT;
             try {
-                taskManager.addToDo(words[1]);
+                msgT = taskManager.addToDo(words[1]);
             } catch (IndexOutOfBoundsException ex) {
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                msgT = "☹ OOPS!!! The description of a todo cannot be empty.";
             }
             storageManager.saveTaskUtil(taskManager);
-            break;
+            return msgT;
 
         default:
             throw new NoValidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return true;
     }
 
 

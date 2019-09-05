@@ -139,16 +139,16 @@ public class Duke extends Application{
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        Label welcomeText = displayWelcome();
+        String welcomeText = displayWelcome();
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(welcomeText, new ImageView(duke)));
+                DialogBox.getUserDialog(welcomeText, duke));
     }
 
-    private Label displayWelcome(){
+    private String displayWelcome(){
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ui.showWelcome();
-        return new Label(outContent.toString());
+        return outContent.toString();
     }
 
     /**
@@ -171,15 +171,14 @@ public class Duke extends Application{
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        String response = getResponse(userInput.getText());
-        Label dukeText = new Label(response);
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
-        if (response.replace(" ","").substring(0,3).equals("Bye")) {
+        if (dukeText.replace(" ","").substring(0,3).equals("Bye")) {
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 pause.setOnFinished(event -> Platform.exit());
                 pause.play();
@@ -191,7 +190,7 @@ public class Duke extends Application{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             ByteArrayOutputStream outContent = new ByteArrayOutputStream();

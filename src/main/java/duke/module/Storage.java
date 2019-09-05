@@ -38,7 +38,7 @@ public class Storage {
      * @throws DukeIOException When an error occurs during the input-output process.
      */
     public Storage() throws DukeIOException {
-        this.cwd = System.getProperty("user.dir") + File.separator + "save-file";
+        this.cwd = "src/main/resources/save-file";
         this.fileName = "tasks.txt";
         this.savedFile = new File(this.cwd + File.separator + this.fileName);
         try {

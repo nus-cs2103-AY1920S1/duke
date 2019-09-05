@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 checkstyle {
@@ -17,9 +18,15 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.fx.StartUi"
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.0'
 }
+

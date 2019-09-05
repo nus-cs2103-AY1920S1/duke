@@ -48,4 +48,9 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printSearchResults(tasks, keyword);
     }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printSearchResultsGui(tasks, keyword);
+    }
 }

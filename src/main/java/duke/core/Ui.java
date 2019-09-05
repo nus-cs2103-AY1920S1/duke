@@ -32,11 +32,25 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    public String showWelcomeGui() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        return "Hello from\n" + logo
+                    + "\nHello! I'm Duke\nWhat can I do for you?";
+    }
+
     /**
      * Shows an error in loading the file where past tasks are stored.
      */
     public void showLoadingError() {
         System.out.println("Failed to Load past tasks :-(");
+    }
+
+    public String showLoadingErrorGui() {
+        return "Failed to Load past tasks :-(";
     }
 
     /**
@@ -67,6 +81,11 @@ public class Ui {
                 + size + " tasks in the list.");
     }
 
+    public String addedTaskGui(Task t, int size) {
+        return "Got it. I've added this task: \n  " + t + "\nNow you have "
+                + size + " tasks in the list.";
+    }
+
     /**
      * Shows that a <code>Task</code> has been marked as done.
      *
@@ -74,6 +93,10 @@ public class Ui {
      */
     public void markedAsDone(Task t) {
         System.out.println("Nice! I've marked this task as done: \n  " + t);
+    }
+
+    public String markedAsDoneGui(Task t) {
+        return "Nice! I've marked this task as done: \n  " + t;
     }
 
     /**
@@ -85,6 +108,11 @@ public class Ui {
     public void removedTask(Task t, int size) {
         System.out.println("Noted. I've removed this task: \n  " + t + "\nNow you have "
                 + size + " tasks in the list.");
+    }
+
+    public String removedTaskGui(Task t, int size) {
+        return "Noted. I've removed this task: \n  " + t + "\nNow you have "
+                + size + " tasks in the list.";
     }
 
     /**
@@ -101,6 +129,16 @@ public class Ui {
         }
     }
 
+    public String printTasksGui(TaskList tasks) {
+        int idx = 1;
+        StringBuilder sb = new StringBuilder();
+        for (Task t : tasks.getList()) {
+            sb.append(idx + "." + t + "\n");
+            idx++;
+        }
+        return "Here are the tasks in your list:\n" + sb.toString();
+    }
+
     /**
      * Shows content of an error.
      *
@@ -108,6 +146,10 @@ public class Ui {
      */
     public void showError(String s) {
         System.out.println(s);
+    }
+
+    public String showErrorGui(String s) {
+        return s;
     }
 
     /**
@@ -128,11 +170,27 @@ public class Ui {
         }
     }
 
+    public String printSearchResultsGui(TaskList tasks, String keyword) {
+        int idx = 1;
+        StringBuilder sb = new StringBuilder();
+        for (Task t : tasks.getList()) {
+            if (t.toString().contains(keyword)) {
+                sb.append(idx + "." + t + "\n");
+                idx++;
+            }
+        }
+        return "Here are the matching tasks in your list:\n" + sb.toString();
+    }
+
     /**
      * Shows bye message to user.
      */
     public void showBye() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public String showByeGui() {
+        return "Bye. Hope to see you again soon!";
     }
 }
 

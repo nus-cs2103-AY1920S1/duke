@@ -24,6 +24,8 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+    public abstract String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
     /**
      * Indicates whether this command tells Duke to exit.
      *

@@ -6,6 +6,7 @@ import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
+import duke.gui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 
 /**
  * Represents <code>Duke</code>, a Personal Assistant Chatbot that helps a 
@@ -49,9 +51,16 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     public Duke() {
-        storage = new Storage("");
+        /*storage = new Storage("");
         tasks = new TaskList();
+        ui = new Ui();*/
         ui = new Ui();
+        storage = new Storage("data/tasks.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -186,7 +195,7 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -200,7 +209,13 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+     private String getResponse(String input) {
+       // return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.executeGui(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showErrorGui(e.getMessage());
+        }
     }
 }

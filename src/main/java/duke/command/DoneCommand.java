@@ -53,4 +53,12 @@ public class DoneCommand extends Command {
         storage.save(tasks);
         ui.markedAsDone(t);
     }
+
+    @Override
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task t = tasks.getTask(taskId - 1);
+        t.markAsDone();
+        storage.save(tasks);
+        return ui.markedAsDoneGui(t);
+    }
 }

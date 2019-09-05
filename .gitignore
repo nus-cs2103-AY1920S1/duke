@@ -13,4 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-list.txt
+# Duke data files
+/data/

@@ -1,25 +1,55 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
 
 public class Duke {
 
-    private static ArrayList<Task> repeatList = new ArrayList();
+    /*
+        Alas - OOP, using a sledgehammer to crack a nut.
+        Yet another assignment with disproportionate workload #NUSLife
+    */
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException ex) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
 
     public static void main(String[] args) throws DukeException, IOException {
-        Scanner sc = new Scanner(System.in);
+        new Duke("list.txt").run();
+    }
 
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    /*    Scanner sc = new Scanner(System.in);
+
+
 
         File f = new File("." + File.separator + "list.txt");
         if (f.exists()) {
-            loadList();
+            repeatList = Storage.loadList();
         }
 
         if (repeatList.size() != 0) {
@@ -33,7 +63,7 @@ public class Duke {
             repeatStr = sc.nextLine();
             if (repeatStr.equals("bye")) {
                 byeHit = true;
-                saveList();
+                Storage.saveList(repeatList);
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (repeatStr.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
@@ -107,42 +137,5 @@ public class Duke {
                 }
             }
         }
-    }
-
-    private static void saveList() throws IOException {
-        FileWriter fw = new FileWriter("." + File.separator + "list.txt");
-        for (Task t : repeatList) {
-            fw.write(t.printSave() + System.lineSeparator());
-        }
-        fw.close();
-    }
-
-    private static void loadList() throws FileNotFoundException, DukeException {
-        File f = new File("." + File.separator + "list.txt");
-        Scanner sc = new Scanner(f);
-        while (sc.hasNext()) {
-            String line = sc.nextLine();
-            String[] lineSplit = line.split(" | ");
-            try {
-                switch (line.charAt(0)) {
-                    case 'T':
-                        repeatList.add(new Todo(lineSplit[4]));
-                        break;
-                    case 'D':
-                        repeatList.add(new Deadline(lineSplit[4], lineSplit[6]));
-                        break;
-                    case 'E':
-                        repeatList.add(new Event(lineSplit[4], lineSplit[6]));
-                        break;
-                    default:
-                        throw new DukeException("☹ OOPS!!! Invalid data loaded.");
-                }
-                if (lineSplit[2].equals("1")) {
-                    repeatList.get(repeatList.size() - 1).done();
-                }
-            } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("☹ OOPS!!! Invalid data loaded.");
-            }
-        }
-    }
+    } */
 }

@@ -30,6 +30,7 @@ public class DukeCommandAddEvent extends DukeCommandAdd {
         if (eventParameterIndex == -1 || eventParameterIndex == inputTokens.length) {
             ui.displayMissingEventParam();
         } else {
+            assert eventParameterIndex > 2; //minimally: 'event name /at (argv)'
             String eventTaskName = DukeParser.concatStringTokens(inputTokens, 1,
                     (eventParameterIndex - 2));
             String eventParameterString = DukeParser.concatStringTokens(inputTokens, eventParameterIndex,

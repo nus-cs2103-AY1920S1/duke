@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.command.update.DukeCommandUpdateTaskComplete;
-import duke.command.update.DukeCommandUpdateTaskDelete;
+import duke.command.update.DukeCommandUpdateDelete;
 import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
 import duke.util.ui.DukeUiMessages;
@@ -31,7 +31,7 @@ public class DukeCommandUpdate extends DukeCommand {
             if (inputTokens[0].toLowerCase().equals("done")) {
                 new DukeCommandUpdateTaskComplete(inputTokens).execute(tasks, ui, storage);
             } else if (inputTokens[0].toLowerCase().equals("delete")) {
-                new DukeCommandUpdateTaskDelete(inputTokens).execute(tasks, ui, storage);
+                new DukeCommandUpdateDelete(inputTokens).execute(tasks, ui, storage);
             }
         } else {
             ui.displayMissingIndex();

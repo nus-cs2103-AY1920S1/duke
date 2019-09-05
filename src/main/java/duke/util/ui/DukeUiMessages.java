@@ -83,6 +83,7 @@ public class DukeUiMessages {
      * @param input String to be displayed to the user.
      */
     public void displayToUser(String input) {
+        assert !input.equals("");
         ui.addAsLabelToDisplay(encapsulateOutputWithSeparator(input));
     }
 
@@ -91,6 +92,7 @@ public class DukeUiMessages {
      * @param input String to be displayed to the user without the separator formatting.
      */
     public void displayToUserUnformatted(String input) {
+        assert !input.equals("");
         ui.addAsLabelToDisplay(input);
     }
 

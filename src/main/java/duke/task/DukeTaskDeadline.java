@@ -42,6 +42,7 @@ public class DukeTaskDeadline extends DukeTask {
      */
     @Override
     public String toString() {
+        assert !getTaskType().equals("");
         String symbol = getTaskIsComplete() ? "✓" : "✗";
         return "[" + getTaskType() + "][" + symbol + "] " + getTaskName() + " (by: " + this.taskDeadline + ")";
     }

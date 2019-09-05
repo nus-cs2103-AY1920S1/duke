@@ -5,13 +5,13 @@ import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
 import duke.util.ui.DukeUiMessages;
 
-public class DukeCommandUpdateTaskDelete extends DukeCommandUpdate {
+public class DukeCommandUpdateDelete extends DukeCommandUpdate {
 
     /**
      * Constructor that takes in the user input split by the " " delimiter into a String[].
      * @param inputTokens User entered line split by a space delimiter.
      */
-    public DukeCommandUpdateTaskDelete(String[] inputTokens) {
+    public DukeCommandUpdateDelete(String[] inputTokens) {
         super(inputTokens);
     }
 

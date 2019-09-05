@@ -32,6 +32,7 @@ public class DukeCommandAddDeadline extends DukeCommandAdd {
         if (deadlineParameterIndex == -1 || deadlineParameterIndex == inputTokens.length) {
             ui.displayMissingDeadlineParam();
         } else {
+            assert deadlineParameterIndex > 2; //minimally: 'deadline name /by (argv)'
             String deadlineTaskName = DukeParser.concatStringTokens(inputTokens, 1,
                     (deadlineParameterIndex - 2));
             String deadlineParameterString = DukeParser.concatStringTokens(inputTokens, deadlineParameterIndex,

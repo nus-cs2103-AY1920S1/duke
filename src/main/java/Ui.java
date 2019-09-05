@@ -18,11 +18,11 @@ public class Ui {
         System.out.println(line + "     Bye. Hope to see you again soon!\n" + line);
     }
 
-    public void printFindTasks(ArrayList<Task> listOfTasks) {
+    public void printFindTasks(ArrayList<Task> relatedTask) {
         System.out.println(line + "     Here are the matching tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < relatedTask.size(); i++) {
             int num = i + 1;
-            System.out.println("     " + num + "." + taskList.get(i));
+            System.out.println("     " + num + "." + relatedTask.get(i));
         }
         System.out.print("\n" + line);
     }

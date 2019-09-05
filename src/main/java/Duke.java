@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Duke is the main body of the program. It takes in the
@@ -25,20 +25,19 @@ public class Duke {
     public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(ui);
+        String input;
 
         ui.showWelcome();
-        String input = sc.nextLine();
 
-        while (true) {
+        while (sc.hasNextLine()) {
             try {
-
+                input =sc.nextLine();
                 parser.parseCommand(input, tasks);
                 storage.update(tasks);
 
                 if (parser.isExit()) {
                     break;
                 }
-                input = sc.nextLine();
 
             } catch (DukeException e) {
 

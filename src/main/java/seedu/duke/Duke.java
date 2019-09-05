@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.ui.UI;
 import seedu.duke.task.TaskList;
 import seedu.duke.storage.Storage;
+
 import seedu.duke.exception.DukeException;
 import seedu.duke.parser.Parser;
 
@@ -10,6 +11,9 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private UI ui;
+
+    public Duke() {
+    }
 
     /** Constructs a Duke object. Reads and loads the latest record of the Task List
      * from the file that stores the list.
@@ -34,7 +38,15 @@ public class Duke {
         ui.showGoodByeMessage();
     }
 
-    public static void main(String[] args) {
-        new Duke("C:\\duke\\src\\data\\tasklist.txt").run();
+//    public static void main(String[] args) {
+//        new Duke("C:\\duke\\src\\data\\tasklist.txt").run();
+//    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }

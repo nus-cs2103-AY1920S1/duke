@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import static java.lang.System.lineSeparator;
+
 /**
  * Represents a {@link Command} to add a {@link Task}.
  */
@@ -15,17 +17,15 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public CommandResult execute() throws DukeException {
         tasks.add(toAdd);
         String data = toAdd.stringify();
         if (tasks.size() > 1) {
-            data = System.lineSeparator() + data;
+            data = lineSeparator() + data;
         }
         storage.append(data);
-        ui.showLine();
-        ui.showMessage("Got it. I've added this task:");
-        ui.showMessage("  " + toAdd);
-        ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
+        return new CommandResult("Got it. I've added this task:"
+                + lineSeparator() + ui.INDENT + toAdd
+                + lineSeparator() + "Now you have " + tasks.size() + " tasks in the list.");
     }
 }

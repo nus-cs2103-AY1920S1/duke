@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import static java.lang.System.lineSeparator;
+
 /**
  * Represents a {@link Command} to delete a {@link Task}.
  */
@@ -16,14 +18,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeException {
+    public CommandResult execute() throws DukeException {
         final Task task = tasks.delete(toDelete);
         storage.save(tasks.stringify());
-
-        ui.showLine();
-        ui.showMessage("Noted. I've removed this task:");
-        ui.showMessage("  " + task);
-        ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
+        return new CommandResult("Noted. I've removed this task:"
+                + lineSeparator() + ui.INDENT + task
+                + lineSeparator() + "Now you have " + tasks.size() + " tasks in the list.");
     }
 }

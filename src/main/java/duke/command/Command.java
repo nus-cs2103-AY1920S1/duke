@@ -21,7 +21,7 @@ public abstract class Command {
      *
      * @throws DukeException If the command failed to execute.
      */
-    public abstract void execute() throws DukeException;
+    public abstract CommandResult execute() throws DukeException;
 
     /**
      * Sets the data to be used by the {@link Command}.

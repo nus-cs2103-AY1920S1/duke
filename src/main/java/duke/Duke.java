@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -11,18 +12,19 @@ import duke.ui.Ui;
  * A task management application.
  */
 public class Duke {
+    private static final String STORAGE_PATHNAME = "data/tasks.txt";
+    private boolean isActive;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Returns a {@link Duke}.
-     *
-     * @param pathname Storage file path.
      */
-    public Duke(String pathname) {
+    public Duke() {
+        isActive = true;
         ui = new Ui();
-        storage = new Storage(pathname);
+        storage = new Storage(STORAGE_PATHNAME);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -30,27 +32,26 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    /**
+     * Parses and executes the input given.
+     *
+     * @param input The input to parse and execute
+     * @return The response from Duke.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.setData(tasks, ui, storage);
+            CommandResult result = c.execute();
+            isActive = !c.isExit();
+            return result.feedback;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
-    /**
-     * Runs the {@link Duke} application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.setData(tasks, ui, storage);
-                c.execute();
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    public boolean isActive() {
+        return isActive;
     }
 }
 

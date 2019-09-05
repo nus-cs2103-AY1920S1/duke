@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String INDENT = "    ";
+    public static final String INDENT = "    ";
     private Scanner sc;
 
     public Ui() {

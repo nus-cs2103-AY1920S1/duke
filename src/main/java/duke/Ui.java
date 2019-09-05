@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Ui {
     private InputStream in;
     private PrintStream out;
+    private Scanner scanner;
 
     /**
      * Constructs a Ui using the default {@link System#in} and {@link System#out}.
@@ -38,6 +39,7 @@ public class Ui {
         } catch (UnsupportedEncodingException e) {
             this.out = printStream;
         }
+        scanner = new Scanner(this.in);
     }
 
     /**
@@ -46,8 +48,7 @@ public class Ui {
      * @return  the String that was read
      */
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return scanner.nextLine();
     }
 
     /**

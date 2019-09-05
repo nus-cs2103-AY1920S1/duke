@@ -28,12 +28,21 @@ public class MainWindowController extends AnchorPane {
     private final Image userImage;
     private final Image dukeImage;
 
+    /**
+     * <p>
+     *     Constructor for MainWindowController.
+     * </p>
+     * @param factory TaskCommandFactory dependency to create ITaskCommands.
+     */
     public MainWindowController(TaskCommandFactory factory) {
         this.factory = factory;
         this.userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
         this.dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
     }
 
+    /**
+     * Called upon JavaFx generation of the MainWindow view. Sets up the scroll panel and displays a greeting message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty()

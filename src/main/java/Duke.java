@@ -26,125 +26,144 @@ public class Duke {
     private DateParser dateParser;
     private Storage storage;
     private Parser parser;
+    private Exiter exiter;
 
-    private void run() {
+    public Duke() {
+        this.ui = new Ui();
+        this.dateParser = new DateParser(DATE_FORMAT);
+        this.storage = new Storage(dateParser, "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat");
+        this.parser = new Parser();
+        this.exiter = new Exiter();
 
-        ui = new Ui();
-        dateParser = new DateParser(DATE_FORMAT);
-        storage = new Storage(dateParser, "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat");
-        parser = new Parser();
+        this.taskList = storage.readDataFile();
+    }
 
-        ui.printGreeting();
-        taskList = storage.readDataFile();
+    public String printGreeting() {
+        return this.ui.printGreeting();
+    }
+    
+    public void run() {
 
+        printGreeting();
         String line = ui.nextLine();
 
         // Keep reading input until the bye command is received.
-        while (parser.isNotByeCommand(line)) {
-            try {
-                processInputLine(line);
-            } catch (DukeException e) {
-                ui.printException(e);
-            } catch (ParseException e) {
-                ui.adviseDateFormat(DATE_FORMAT);
-            } catch (IndexOutOfBoundsException e) {
-                ui.printIndexOutOfBoundsException();
-            }
-
+        while (true) {
+            processInputLine(line);
             line = ui.nextLine();
         }
-
-        storage.writeDataFile(taskList);
-        ui.printGoodbye();
     }
 
     // Processes a single line of input by identifying the command that was given, then delegating it
     // to a subfunction to handle the command call.
-    private void processInputLine(String line) throws DukeException, ParseException {
+    public String processInputLine(String line) {
 
-        Command command = parser.getCommandFromLine(line);
-        String commandText = command.toString();
+        try {
+            Command command = parser.getCommandFromLine(line);
+            String commandText = command.toString();
+            String response = "";
 
-        switch (command) {
-        case LIST:
-            ui.printList(taskList);
-            break;
-        case DONE:
-            markTaskAsDone(
-                parser.getIndexFromLine(line)
-            );
-            break;
-        case DEADLINE:
-            addDeadline(
-                parser.getBeforeDelim(line, commandText, DELIM_BY),
-                parser.getAfterDelim(line, commandText, DELIM_BY)
-            );
-            break;
-        case EVENT:
-            addEvent(
-                parser.getBeforeDelim(line, commandText, DELIM_AT),
-                parser.getAfterDelim(line, commandText, DELIM_AT)
-            );
-            break;
-        case TODO:
-            addTodo(
-                parser.getArg(line, commandText)
-            );
-            break;
-        case DELETE:
-            deleteTask(
-                parser.getIndexFromLine(line)
-            );
-            break;
-        case FIND:
-            findTask(
-                parser.getArg(line, commandText)
-            );
-            break;
-        default:
-            throw new InvalidCommandException(PRINTED_OOPS + PRINTED_INVALID_COMMAND);
+            switch (command) {
+            case LIST:
+                response = ui.printList(taskList);
+                break;
+            case DONE:
+                response = markTaskAsDone(
+                    parser.getIndexFromLine(line)
+                );
+                break;
+            case DEADLINE:
+                response = addDeadline(
+                    parser.getBeforeDelim(line, commandText, DELIM_BY),
+                    parser.getAfterDelim(line, commandText, DELIM_BY)
+                );
+                break;
+            case EVENT:
+                response = addEvent(
+                    parser.getBeforeDelim(line, commandText, DELIM_AT),
+                    parser.getAfterDelim(line, commandText, DELIM_AT)
+                );
+                break;
+            case TODO:
+                response = addTodo(
+                    parser.getArg(line, commandText)
+                );
+                break;
+            case DELETE:
+                response = deleteTask(
+                    parser.getIndexFromLine(line)
+                );
+                break;
+            case FIND:
+                response = findTask(
+                    parser.getArg(line, commandText)
+                );
+                break;
+            case BYE:
+                response = exitAfter(1000);
+                break;
+            default:
+                throw new InvalidCommandException(PRINTED_OOPS + PRINTED_INVALID_COMMAND);
+            }
+
+            return response;
+        } catch (DukeException e) {
+            return ui.printException(e);
+        } catch (ParseException e) {
+            return ui.adviseDateFormat(DATE_FORMAT);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printIndexOutOfBoundsException();
         }
     }
 
-    private void findTask(String searchStr) {
-        ui.displaySearchResults(
+    private String exitAfter(int ms) {
+        exiter.exitAfter(ms);
+        storage.writeDataFile(taskList);
+        return ui.printGoodbye();
+    }
+
+    private String findTask(String searchStr) {
+        return ui.displaySearchResults(
             taskList.search(searchStr),
             searchStr
         );
     }
 
-    private void deleteTask(int index) {
+    private String deleteTask(int index) {
 
         Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
 
-        ui.ackDeletion(taskToDelete, taskList.size());
+        return ui.ackDeletion(taskToDelete, taskList.size());
     }
 
-    private void addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
+    private String addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
         if (desc.length() != 0) {
             Task newDeadline = new Deadline(desc, dateParser.parse(date));
-            addTask(newDeadline);
+            return addTask(newDeadline);
         } else {
             throwEmptyDescriptionException(Command.DEADLINE);
+            return "";
         }
     }
 
-    private void addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
+    private String addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
         if (desc.length() != 0) {
             Task newEvent = new Event(desc, dateParser.parse(date));
-            addTask(newEvent);
+            return addTask(newEvent);
         } else {
             throwEmptyDescriptionException(Command.EVENT);
+            return "";
         }
     }
 
-    private void addTodo(String desc) throws EmptyDescriptionException {
+    private String addTodo(String desc) throws EmptyDescriptionException {
         if (desc.length() != 0) {
             Task newTodo = new Todo(desc); 
-            addTask(newTodo);
+            return addTask(newTodo);
         } else {
             throwEmptyDescriptionException(Command.TODO);
+            return "";
         }
     }
 
@@ -157,20 +176,14 @@ public class Duke {
         );
     }
 
-    private void markTaskAsDone(int index) {
+    private String markTaskAsDone(int index) {
         Task doneTask = taskList.get(index);
         doneTask.markAsDone();
-        ui.ackDone(doneTask);
+        return ui.ackDone(doneTask);
     }
 
-    private void addTask(Task newTask) {
+    private String addTask(Task newTask) {
         taskList.add(newTask);
-        ui.ackAddition(newTask, taskList.size());
+        return ui.ackAddition(newTask, taskList.size());
     }
-    
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
 }

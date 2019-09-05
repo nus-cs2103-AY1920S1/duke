@@ -7,7 +7,7 @@ public class Ui {
     // Strings that Duke will output
     private static final String PRINTED_LONG_LINE = "____________________________________________________________";
     private static final String PRINTED_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String PRINTED_BYE = "Bye. Hope to see you again soon!";
+    private static final String PRINTED_BYE = "Bye. Hope to see you again soon!\nThis program will exit in one second.";
 
     private static final String PRINTED_HEADER_LIST = "Here are the tasks in your list:";
     private static final String PRINTED_HEADER_DONE = "Nice! I've marked this task as done:";
@@ -20,16 +20,16 @@ public class Ui {
     /**
      * Prints a goodbye message to the user, and closes off the input Scanner.
      */
-    public void printGoodbye() {
-        printWithLongLines(PRINTED_BYE);
+    public String printGoodbye() {
         input.close();
+        return printWithLongLines(PRINTED_BYE);
     }
 
     /**
      * Prints a greeting to the user.
      */
-    public void printGreeting() {
-        printWithLongLines(PRINTED_GREETING);
+    public String printGreeting() {
+        return printWithLongLines(PRINTED_GREETING);
     }
 
     /**
@@ -47,8 +47,8 @@ public class Ui {
      * @param deletedTask The Task that was deleted
      * @param listSize The new size of the TaskList
      */
-    public void ackDeletion(Task deletedTask, int listSize) {
-        printWithLongLines(
+    public String ackDeletion(Task deletedTask, int listSize) {
+        return printWithLongLines(
             "Noted. I've removed this task:\n"
             + deletedTask
             + "\nNow you have " 
@@ -62,8 +62,8 @@ public class Ui {
      * 
      * @param doneTask The Task that was done
      */
-    public void ackDone(Task doneTask) {
-        printWithLongLines(
+    public String ackDone(Task doneTask) {
+        return printWithLongLines(
             PRINTED_HEADER_DONE
             + "\n"
             + doneTask
@@ -76,8 +76,8 @@ public class Ui {
      * @param newTask The Task that was newly added
      * @param listSize The new size of the TaskList
      */
-    public void ackAddition(Task newTask, int listSize) {
-        printWithLongLines(
+    public String ackAddition(Task newTask, int listSize) {
+        return printWithLongLines(
             "Got it. I've added this task:\n"
             + newTask
             + "\nNow you have " 
@@ -91,12 +91,12 @@ public class Ui {
      * 
      * @param taskList The TaskList to be printed
      */
-    public void printList(TaskList taskList) {
-        printListWithPreamble(taskList, PRINTED_HEADER_LIST);
+    public String printList(TaskList taskList) {
+        return printListWithPreamble(taskList, PRINTED_HEADER_LIST);
     }
 
-    public void displaySearchResults(TaskList taskList, String query) {
-        printListWithPreamble(taskList, PRINTED_HEADER_SEARCH + query + "\n");
+    public String displaySearchResults(TaskList taskList, String query) {
+        return printListWithPreamble(taskList, PRINTED_HEADER_SEARCH + query + "\n");
     }
 
     /**
@@ -104,8 +104,8 @@ public class Ui {
      * 
      * @param format The expected date format
      */
-    public void adviseDateFormat(String format) {
-        printWithLongLines("Required date format: " + format);
+    public String adviseDateFormat(String format) {
+        return printWithLongLines("Required date format: " + format);
     }
 
     /**
@@ -113,29 +113,36 @@ public class Ui {
      * 
      * @param e The Exception to be displayed
      */
-    public void printException(Exception e) {
-        printWithLongLines(e.getMessage());
+    public String printException(Exception e) {
+        return printWithLongLines(e.getMessage());
     }
 
     /**
      * Displays an explanatory note to the user that explains an IndexOutOfBoundsException.
      */
-    public void printIndexOutOfBoundsException() {
-        printWithLongLines(PRINTED_INDEX_OUT_OF_BOUNDS_EXCEPTION);
+    public String printIndexOutOfBoundsException() {
+        return printWithLongLines(PRINTED_INDEX_OUT_OF_BOUNDS_EXCEPTION);
     }
 
-    private void printWithLongLines(String stringToPrint) {
-        System.out.println(
-            PRINTED_LONG_LINE
-            + "\n"
-            + stringToPrint
-            + "\n"
-            + PRINTED_LONG_LINE
+    private String printWithLongLines(String stringToPrint) {
+
+        // The commented-out code is for printing the long horizontal lines above and below each message.
+        // I chose not to remove this code in case I need it in future.
+
+        String outValue = (
+            //PRINTED_LONG_LINE
+            // + "\n"
+            /*+*/ stringToPrint
+            //+ "\n"
+            //+ PRINTED_LONG_LINE
             + "\n"
         );
+
+        System.out.println(outValue);
+        return outValue;
     }
 
-    private void printListWithPreamble(TaskList taskList, String preamble) {
+    private String printListWithPreamble(TaskList taskList, String preamble) {
         String wholeList = preamble + "\n";
         
         for (int i = 0; i < taskList.size(); i++) {
@@ -148,7 +155,6 @@ public class Ui {
             }
         }
 
-        printWithLongLines(wholeList);
-    
+        return printWithLongLines(wholeList);
     }
 }

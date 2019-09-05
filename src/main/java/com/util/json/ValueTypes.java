@@ -1,5 +1,5 @@
 package com.util.json;
 
-enum ValueTypes {
+public enum ValueTypes {
     INT, DOUBLE, BOOLEAN, STRING, OBJECT, ARRAY
 }

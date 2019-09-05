@@ -1,8 +1,6 @@
 package com.util.json;
 
-import java.util.ArrayList;
-
-class JsonValue {
+public class JsonValue {
 
     private ValueTypes type;
     private int valueInt;
@@ -10,7 +8,7 @@ class JsonValue {
     private boolean valueBoolean;
     private String valueString;
     private JsonObject valueObject;
-    private ArrayList<JsonValue> valueArray;
+    private JsonArray valueArray;
 
     public JsonValue(int value) {
         type = ValueTypes.INT;
@@ -37,7 +35,7 @@ class JsonValue {
         valueObject = value;
     }
 
-    public JsonValue(ArrayList<JsonValue> value) {
+    public JsonValue(JsonArray value) {
         type = ValueTypes.ARRAY;
         valueArray = value;
     }
@@ -81,11 +79,10 @@ class JsonValue {
         return valueObject;
     }
 
-    public ArrayList<JsonValue> getArray() throws JsonWrongValueTypeException {
+    public JsonArray getArray() throws JsonWrongValueTypeException {
         if (type != ValueTypes.ARRAY) {
             throw new JsonWrongValueTypeException(ValueTypes.ARRAY, type);
         }
-        //TODO change type to JsonArray
         return valueArray;
     }
 

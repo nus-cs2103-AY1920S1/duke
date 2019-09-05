@@ -51,7 +51,7 @@ public class Parser {
         }
     }
 
-    private static String getCommandFrom(String inputLine) {
+    public static String getCommandFrom(String inputLine) {
         return inputLine.strip().split(" ")[0];
     }
 

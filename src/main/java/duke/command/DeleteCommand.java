@@ -5,7 +5,6 @@ import duke.common.Message;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.UserInterface;
 
 /**
  * Deletes a task from the storage file.
@@ -23,21 +22,20 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes deletion of a task on user interface.
+     * Executes deletion of a task.
      *
      * @param taskList list of tasks.
-     * @param ui user interface displaying the successful deletion of a task.
      * @param storage local storage of data.
+     * @return message showing the successful deletion of a task.
      */
     @Override
-    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (index <= 0 || index > taskList.size()) {
             throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
         }
         Task task = taskList.delete(index);
         storage.save(taskList.getSimplifiedTaskRepresentations());
-        return Message.MESSAGE_DELETED + "\n " + String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size());
-//        ui.showDeletion(task);
-//        ui.showTaskSize(taskList);
+        return Message.MESSAGE_DELETED + "\n " + task + "\n"
+                + String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size());
     }
 }

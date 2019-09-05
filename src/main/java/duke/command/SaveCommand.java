@@ -10,8 +10,19 @@ import duke.ui.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a command instructing Duke to save tasks onto the hard-disk
+ */
 public class SaveCommand extends Command {
 
+    /**
+     * Executes the command and saves tasks into a file on the hard-disk.
+     * @param tasks List of tasks
+     * @param ui User-Interface
+     * @param storage Storage object
+     * @return
+     * @throws InvalidTaskDukeException
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
         try {
             ArrayList<Task> taskList = tasks.getTasks();
@@ -28,6 +39,10 @@ public class SaveCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the command is an exit command.
+     * @return False.
+     */
     public boolean checkExit() {
         return false;
     }

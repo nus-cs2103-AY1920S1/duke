@@ -6,14 +6,30 @@ import duke.task.*;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command instructing Duke to add a task.
+ */
 public class AddCommand extends Command {
 
     private String input;
 
+    /**
+     * Constructor for the add command.
+     * @param input Command description.
+     */
     public AddCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Executes the add command.
+     * @param tasks List of tasks
+     * @param ui User-Interface
+     * @param storage Storage class
+     * @return Duke's response.
+     * @throws InvalidTaskDukeException If the task is invalid.
+     * @throws InvalidDateDukeException If the date is invalid.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidTaskDukeException, InvalidDateDukeException {
         String cleanedInput = input.strip().toLowerCase();
@@ -22,6 +38,13 @@ public class AddCommand extends Command {
         return output;
     }
 
+    /**
+     * Makes a task corresponding to the input.
+     * @param cleanedInput Cleaned user input.
+     * @return Task representing user input.
+     * @throws InvalidTaskDukeException If task is invalid.
+     * @throws InvalidDateDukeException If the date format is invalid.
+     */
     public Task makeTask(String cleanedInput) throws InvalidTaskDukeException, InvalidDateDukeException {
         if (cleanedInput.startsWith("todo")) {
             return makeTodo(cleanedInput);
@@ -74,6 +97,10 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the command is an exit command.
+     * @return False
+     */
     public boolean checkExit() {
         return false;
     }

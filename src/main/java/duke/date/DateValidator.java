@@ -7,8 +7,18 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Deals with making sense of user entered dates and times
+ */
 public class DateValidator {
 
+    /**
+     * Validates the date-time string entered by the user.
+     * @param date Date-time input by the user.
+     * @param hasEndTime Boolean indicating if the date-time has an end time.
+     * @return Boolean output.
+     * @throws InvalidDateDukeException If the date format is invalid.
+     */
     public boolean validateDate(String date, boolean hasEndTime) throws InvalidDateDukeException {
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(date);

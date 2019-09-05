@@ -3,8 +3,18 @@ package duke.storage;
 import duke.date.InvalidDateDukeException;
 import duke.task.*;
 
+/**
+ * Serializes and de-serializes tasks to load and save them onto the hard-disk.
+ */
 public class Serializer {
 
+    /**
+     * De-serializes a task entry from the text file on the hard disk and returns the corresponding task object.
+     * @param input String task entry
+     * @return Task object
+     * @throws InvalidTaskDukeException If task is invalid.
+     * @throws InvalidDateDukeException If date is invalid.
+     */
     public Task deserializeTask(String input) throws InvalidTaskDukeException, InvalidDateDukeException {
         String[] tokens = input.split(" \\| ");
         if (tokens[0].equals("T")) {
@@ -42,6 +52,12 @@ public class Serializer {
         return t;
     }
 
+    /**
+     * Serialize task to store it into a text file on the hard-disk.
+     * @param task Task object
+     * @return String representing a task entry.
+     * @throws InvalidTaskDukeException If the task is invalid.
+     */
     public String serializeTask(Task task) throws InvalidTaskDukeException {
         String completionState = task.getIsDone() ? "1" : "0";
         String description = task.getDescription();

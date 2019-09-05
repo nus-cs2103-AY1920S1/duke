@@ -3,8 +3,17 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * Deals with parsing user input.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns the corresponding command.
+     * @param input User input
+     * @return Command corresponding to the user input.
+     * @throws DukeException If the command is invalid.
+     */
     public Command parseInput(String input) throws DukeException {
         String cleanedInput = input.strip().toLowerCase();
         if (isNullaryCommand(cleanedInput)) {

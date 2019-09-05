@@ -9,7 +9,7 @@ public class Event extends Task {
     }
 
     public String getTime() {
-        return time;
+        return time.toString();
     }
 
     @Override

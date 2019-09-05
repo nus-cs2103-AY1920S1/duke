@@ -9,7 +9,7 @@ public class Deadline extends Task {
     }
 
     public String getTime() {
-        return time;
+        return time.toString();
     }
 
     @Override

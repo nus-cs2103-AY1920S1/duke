@@ -32,16 +32,16 @@ public class Storage {
                 }
                 list.add(todo);
             } else if (type.equals("D")) {
-                String date = taskArr[3].substring(8, 9) + " " + taskArr[3].substring(4, 6) + " "
-                        + taskArr[3].substring(24, 27) + taskArr[3].substring(11, 15);
+                String date = taskArr[3].substring(8, 10) + " " + taskArr[3].substring(4, 7) + " "
+                        + taskArr[3].substring(24, 28) + " " + taskArr[3].substring(11, 16);
                 Deadline deadline = new Deadline(taskArr[2], convertToDate(date));
                 if (taskArr[1].equals("1")) {
                     deadline.markAsDone();
                 }
                 list.add(deadline);
             } else if (type.equals("E")) {
-                String date = taskArr[3].substring(8, 9) + " " + taskArr[3].substring(4, 6) + " "
-                        + taskArr[3].substring(24, 27) + taskArr[3].substring(11, 15);
+                String date = taskArr[3].substring(8, 10) + " " + taskArr[3].substring(4, 7) + " "
+                        + taskArr[3].substring(24, 28) + " " + taskArr[3].substring(11, 16);
                 Event event = new Event(taskArr[2], convertToDate(date));
                 if (taskArr[1].equals("1")) {
                     event.markAsDone();

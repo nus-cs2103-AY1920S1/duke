@@ -78,7 +78,7 @@ public class Duke extends Application {
     /**
      * Runs the duke bot.
      */
-    private void run() {
+    void run() {
         ui.showWelcome();
 
         boolean isExit = false;
@@ -204,6 +204,8 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        // This function handles duke
+
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(new DialogBox(userText.getText(), user), new DialogBox(dukeText.getText(), duke));

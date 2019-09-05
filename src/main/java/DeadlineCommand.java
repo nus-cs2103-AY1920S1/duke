@@ -1,4 +1,4 @@
-public class DeadlineCommand extends Command {
+public class DeadlineCommand extends UndoableCommand {
     private String description;
     private String by;
 
@@ -21,6 +21,11 @@ public class DeadlineCommand extends Command {
         result += "Now you have " + tasks.size() + " tasks in the list.";
         storage.writeToFile(tasks);
         return result;
+    }
+
+    @Override
+    String undo(TaskList tasks, Storage storage) throws DukeInvalidTaskException, DukeIoException {
+        return (new DeleteCommand(tasks.size())).execute(tasks, storage);
     }
 
     @Override

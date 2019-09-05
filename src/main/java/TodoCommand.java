@@ -1,4 +1,4 @@
-public class TodoCommand extends Command {
+public class TodoCommand extends UndoableCommand {
     private String description;
 
     TodoCommand(String description) {
@@ -14,6 +14,11 @@ public class TodoCommand extends Command {
         result += "Now you have " + tasks.size() + " tasks in the list.";
         storage.writeToFile(tasks);
         return result;
+    }
+
+    @Override
+    String undo(TaskList tasks, Storage storage) throws DukeInvalidTaskException, DukeIoException {
+        return (new DeleteCommand(tasks.size())).execute(tasks, storage);
     }
 
     @Override

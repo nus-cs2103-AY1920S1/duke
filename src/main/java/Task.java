@@ -28,6 +28,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
     public abstract String toFileString();
 
     @Override

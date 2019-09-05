@@ -1,4 +1,4 @@
-public class DoneCommand extends Command {
+public class DoneCommand extends UndoableCommand {
     private int doneIdx;
 
     /**
@@ -17,6 +17,13 @@ public class DoneCommand extends Command {
         tasks.get(doneIdx).markAsDone();
         storage.writeToFile(tasks);
         return "Nice! I've marked this task as done:\n  " + tasks.get(doneIdx);
+    }
+
+    @Override
+    String undo(TaskList tasks, Storage storage) throws DukeIoException {
+        tasks.get(doneIdx).markAsUndone();
+        storage.writeToFile(tasks);
+        return "Uh oh! I've marked this task as undone:\n  " + tasks.get(doneIdx);
     }
 
     @Override

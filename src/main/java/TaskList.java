@@ -19,6 +19,10 @@ public class TaskList {
         return tasks.add(t);
     }
 
+    void add(Task t, int idx) {
+        tasks.add(idx - 1, t);
+    }
+
     Task get(int idx) {
         return tasks.get(idx - 1);
     }

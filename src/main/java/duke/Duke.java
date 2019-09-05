@@ -5,6 +5,8 @@ import command.Command;
 import command.CommandFactory;
 import command.GreetCommand;
 import error.ConfigurationException;
+import fx.FxMain;
+import javafx.application.Application;
 import task.tasks.Task;
 import task.TaskListController;
 import util.DukeInput;
@@ -26,25 +28,32 @@ public class Duke {
 
     private TaskListController taskListController;
     private CommandFactory commandFactory;
+    private boolean isConsoleModeEnabled = false;
+
     private static final DukeMessage GENERIC_ERROR_MESSAGE =
             new DukeMessage("☹ OOPS!!! Something unexpected happened!!!");
 
     public void run() {
-        new GreetCommand().execute();
+        if (isConsoleModeEnabled) {
 
-        while (true) {
-            String command = DukeInput.readUserInput();
-            Optional<Command> next = commandFactory.parse(command);
+            new GreetCommand().execute();
 
-            try {
-                next.ifPresent(Command::execute);
-            } catch (Exception e) {
-                DukeOutput.printMessage(GENERIC_ERROR_MESSAGE);
+            while (true) {
+                String command = DukeInput.readUserInput();
+                Optional<Command> next = commandFactory.parse(command);
+
+                try {
+                    next.ifPresent(Command::execute);
+                } catch (Exception e) {
+                    DukeOutput.printMessage(GENERIC_ERROR_MESSAGE);
+                }
+
+                if (next.isPresent() && next.get() instanceof ByeCommand) {
+                    break;
+                }
             }
-
-            if (next.isPresent() && next.get() instanceof ByeCommand) {
-                break;
-            }
+        } else {
+            Application.launch(FxMain.class);
         }
     }
 
@@ -58,6 +67,8 @@ public class Duke {
             List<Task> taskData = DukeStorage.getInstance().getTaskData();
             taskListController = new TaskListController(taskData);
             commandFactory = new CommandFactory(taskListController);
+
+
         } catch (ConfigurationException e) {
             DukeMessage configErrorMessage = new DukeMessage(e.getMessage());
             DukeOutput.printMessage(configErrorMessage);

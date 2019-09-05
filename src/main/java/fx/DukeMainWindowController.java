@@ -12,6 +12,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyEvent;
 import task.TaskListController;
+import util.DukeMessage;
+import util.DukeOutput;
 import util.DukeOutputImplementation;
 
 
@@ -64,16 +66,17 @@ public class DukeMainWindowController implements DukeOutputImplementation {
         String input = userInput.getText();
 
         if (!input.equals("") && !isExited) {
-            Optional<Command> next = commandFactory.parse(input);
-
             dialogContainer.getChildren().addAll(
                     FxDialogBox.getUserDialog(input, userImage)
             );
+
+            Optional<Command> next = commandFactory.parse(input);
 
             next.ifPresent(Command::execute);
 
             if (next.isPresent() && next.get() instanceof ByeCommand) {
                 isExited = true;
+                DukeOutput.printMessage(new DukeMessage("Input will be disabled!"));
             }
 
             userInput.clear();

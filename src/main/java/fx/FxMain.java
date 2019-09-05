@@ -12,7 +12,7 @@ import util.DukeOutput;
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends Application {
+public class FxMain extends Application {
     @Override
     public void start(Stage stage) {
         try {

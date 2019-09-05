@@ -8,9 +8,9 @@ public class UiTest {
 
     @Test
     public void formatMessageCorrectly() {
-        String formattedMessage = "    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________\n";
+        String formattedMessage = "    ____________________________________________________________\n"
+                + "     Bye. Hope to see you again soon!\n"
+                + "    ____________________________________________________________\n";
         Assertions.assertEquals(
                 Ui.formatMessage("Bye. Hope to see you again soon!"),
                 formattedMessage

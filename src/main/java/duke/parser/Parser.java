@@ -29,4 +29,9 @@ public class Parser {
     public boolean isBye(String command) {
         return (command.equals("bye"));
     }
+
+    public boolean isFind(String[] command) {
+        return (command.equals("find"));
+    }
+
 }

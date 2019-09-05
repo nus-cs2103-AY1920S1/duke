@@ -5,6 +5,9 @@ import duke.date.Date;
 
 public class Event extends Task {
     Date time;
+    /**
+     * Dummy javadocs method.
+     */
 
     public Event(String description, String time) {
         super(description);

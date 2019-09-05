@@ -20,6 +20,9 @@ public class Task {
     public boolean isCompleted() {
         return isCompleted;
     }
+    /**
+     * Dummy javadocs method.
+     */
 
     public String getMark() {
         if (isCompleted) {

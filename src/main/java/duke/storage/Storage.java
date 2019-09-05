@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-
+    /**
+     * Dummy javadocs method.
+     */
     public static String readFile() {
         String contents = "";
         try {
@@ -25,6 +27,9 @@ public class Storage {
 
         return contents;
     }
+    /**
+     * Dummy javadocs method.
+     */
 
     public static void saveFile(TaskList tasks) {
         try {

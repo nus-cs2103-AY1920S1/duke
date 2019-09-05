@@ -5,6 +5,9 @@ import duke.tasklist.Task;
 
 public class Deadline extends Task {
     Date time;
+    /**
+     * Dummy javadocs method.
+     */
 
     public Deadline(String description, String time) {
         super(description);

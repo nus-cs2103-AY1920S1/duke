@@ -26,7 +26,7 @@ public class Storage {
      * @param fileName The path of the file.
      * @return an array list of tasks saved in the file.
      * @throws IOException If loading process is wrong.
-     * @throws DukeException If the message read from the file is invalid, although not likely.
+     * @throws DukeException If the initialization of a task type fails.
      */
     public static ArrayList<Task> reload(String fileName) throws IOException, DukeException {
         reader = new BufferedReader(new FileReader(fileName));
@@ -37,37 +37,62 @@ public class Storage {
         String line = reader.readLine();
         while (line != null) {
             String[] lineComponents = line.split("\\|");
-            boolean finished;
-            if (lineComponents[1].equals("0")) {
-                finished = false;
-            } else {
-                finished = true;
-            }
-            String taskname = lineComponents[2];
-            if (lineComponents[0].equals("T")) {
-                Task toAdd = new Todo(taskname);
-                if (finished) {
-                    toAdd.setAsFinish();
-                }
-                toReturn.add(toAdd);
-            } else if (lineComponents[0].equals("D")) {
-                String tasktime = lineComponents[3];
-                Task toAdd = new Deadline(taskname, tasktime);
-                if (finished) {
-                    toAdd.setAsFinish();
-                }
-                toReturn.add(toAdd);
-            } else {
-                String tasktime = lineComponents[3];
-                Task toAdd = new Event(taskname, tasktime);
-                if (finished) {
-                    toAdd.setAsFinish();
-                }
-                toReturn.add(toAdd);
-            }
+            Task toAdd = translateTask(lineComponents);
+            toReturn.add(toAdd);
             line = reader.readLine();
         }
         reader.close();
         return toReturn;
+    }
+
+    /**
+     * The method that translate a single line into a task.
+     *
+     * @param lineComponents The line in the file split by "|".
+     * @return the translated Task.
+     * @throws DukeException If the initialization of the task type fails.
+     */
+    private static Task translateTask(String[] lineComponents) throws DukeException{
+        boolean isFinished;
+        if (lineComponents[1].equals("0")) {
+            isFinished = false;
+        } else {
+            isFinished = true;
+        }
+        String taskName = lineComponents[2];
+        if (lineComponents[0].equals("T")) {
+            assert lineComponents.length != 3: "The file is wrong.";
+            return  translateTodo(taskName, isFinished);
+        } else if (lineComponents[0].equals("D")) {
+            assert lineComponents.length != 4: "The file is wrong";
+            return translateDeadline(taskName, isFinished, lineComponents[3]);
+        } else {
+            assert lineComponents.length != 4: "The file is wrong";
+            return translateEvent(taskName, isFinished, lineComponents[3]);
+        }
+    }
+
+    private static Todo translateTodo(String taskName, boolean isFinished) throws DukeException {
+        Todo toAdd = new Todo(taskName);
+        if (isFinished) {
+            toAdd.setAsFinish();
+        }
+        return toAdd;
+    }
+
+    private static Event translateEvent(String taskName, boolean isFinished, String taskTime) throws DukeException {
+        Event toAdd = new Event(taskName, taskTime);
+        if (isFinished) {
+            toAdd.setAsFinish();
+        }
+        return toAdd;
+    }
+
+    private static Deadline translateDeadline(String taskName, boolean isFinished, String taskTime) throws DukeException {
+        Deadline toAdd = new Deadline(taskName, taskTime);
+        if (isFinished) {
+            toAdd.setAsFinish();
+        }
+        return toAdd;
     }
 }

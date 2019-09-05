@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * The deadline subclass of the Task superclass. They have a instance deathTime which is the due time.
+ *
  * @Extends duke.tasks.Task
  */
 public class Deadline extends Task {
@@ -18,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of the class. The deadline is taken as a string and transformed using a date format.
+     *
      * @param taskName The task name.
      * @param deathTime the deadline.
      * @throws DukeException If the task name is empty or the deathTime string is not in format "dd/MM/yyyy HH:mm:ss".
@@ -35,6 +37,7 @@ public class Deadline extends Task {
     /**
      * This method returns the information of the task FOR THE USER to see.
      * Output of this method is usually handled by Ui class.
+     *
      * @return The information of the task, in form [type][finished] task name. For example, [T][X] Eat dinner.
      */
     @Override
@@ -51,6 +54,7 @@ public class Deadline extends Task {
     /**
      * This method returns the information of the task FOR SAVING INTO A FILE.
      * Output of this method is usually handled by the task list.
+     *
      * @return The information of the task, in form type|finished|task name. For example, T|0|Eat dinner.
      */
     @Override

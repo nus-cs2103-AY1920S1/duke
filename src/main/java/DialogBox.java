@@ -28,6 +28,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a DialogBox with the specified text and image.
+     * @param text specified text for the dialog box.
+     * @param img specified image for the dialog box.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -40,7 +45,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        Circle clip = new Circle(40, 40, 45);
+        Circle clip = new Circle(50, 35, 50);
         displayPicture.setClip(clip);
     }
 
@@ -54,6 +59,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Gets dialog box for the user with the specified text and image.
+     * @param text specified text that was input by user.
+     * @param img specified image for the user.
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }

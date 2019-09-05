@@ -27,6 +27,10 @@ public class Ui {
         System.out.println(openingMessage);
     }
 
+    public String getHelloMessage() {
+        return "\tHello! I'm Duke\n\tWhat can I do for you?\n";
+    }
+
     /**
      * Takes in user input and passes it on to a Parser object to deal with the input.
      */
@@ -150,14 +154,7 @@ public class Ui {
     }
 
     public String getByeResponse() {
-        String output = "\tBye. Hope to see you again soon!";
-        Storage storage = new Storage();
-        try {
-            storage.overwriteTasks();
-        } catch (IOException e) {
-            output += e.getMessage();
-        }
-        return output;
+        return "\tBye. Hope to see you again soon!";
     }
 
 }

@@ -12,9 +12,10 @@ public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
 
-    private int toMarkAsDone;
+    private final int toMarkAsDone;
 
     public DoneCommand(int id) {
+        assert id >= 0 && id < tasks.size();
         this.toMarkAsDone = id;
     }
 

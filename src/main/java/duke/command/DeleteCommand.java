@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
     private final int toDelete;
 
     public DeleteCommand(int id) {
+        assert id >= 0 && id < tasks.size();
         this.toDelete = id;
     }
 

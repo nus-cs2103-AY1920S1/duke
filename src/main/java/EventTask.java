@@ -13,6 +13,7 @@ public class EventTask extends Task {
      */
     EventTask(String description, String at) throws DukeInvalidDateException {
         super(description);
+        assert !at.equals("");
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             this.at = format.parse(at);

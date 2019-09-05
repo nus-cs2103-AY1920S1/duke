@@ -27,6 +27,10 @@ public class TaskList {
         return taskList;
     }
 
+    public int getNumberOfTasks() {
+        return this.taskList.size();
+    }
+
     /**
      * Adds a new Task into the task list and writes
      * the changes back into the local file of tasks as well.
@@ -65,17 +69,19 @@ public class TaskList {
      * @throws DukeException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public void deleteTask(int index, Storage storage) throws DukeException, IOException {
+    public StringBuilder deleteTask(int index, Storage storage) throws DukeException, IOException {
         try {
             this.taskList.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(taskList.get(index - 1).toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task: " + "\n");
+        sb.append(taskList.get(index - 1).toString() + "\n");
         this.taskList.remove(index - 1);
         storage.writeToFile(storage.getFilePath(), taskList);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        sb.append("Now you have " + taskList.size() + " tasks in the list.");
+        return sb;
     }
 
     /**
@@ -86,10 +92,14 @@ public class TaskList {
      * @throws DukeException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public void markAsDone(int index, Storage storage) throws DukeException, IOException {
+    public StringBuilder markAsDone(int index, Storage storage) throws DukeException, IOException {
+        StringBuilder sb = new StringBuilder();
         try {
             taskList.get(index - 1).markAsDone();
             storage.writeToFile(storage.getFilePath(), taskList);
+            sb.append("Nice! I've marked this task as done: " + "\n");
+            sb.append(taskList.get(index - 1).toString());
+            return sb;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }

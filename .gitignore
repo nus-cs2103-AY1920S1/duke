@@ -4,6 +4,7 @@
 /*.iml
 /*.jar
 Manifest.txt
+/*.class
 
 # Gradle build files
 /.gradle/

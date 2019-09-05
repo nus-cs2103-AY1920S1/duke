@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.io.IOException;
 
 /**
@@ -8,9 +7,10 @@ import java.io.IOException;
 
 public class Duke {
 
-    TaskList taskList;
-    Storage storage;
-    Ui ui;
+    private TaskList taskList;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser = new Parser();
 
     /**
      * Creates a new Duke object.
@@ -22,34 +22,20 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
+        
     }
 
-    /**
-     * Drives the Duke program by providing the means to read user inputs
-     * which are then processed into understandable commands which help Duke run.
-     */
-    public void run() {
-        ui.showGreetingMessage();
+    public Duke() throws IOException, DukeException {
+        ui = new Ui();
+        storage = new Storage("/Users/abhimanyadav/Desktop/Duke/duke/src/main/java/dukeTasks.txt");
+        taskList = new TaskList(storage.load());
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        Parser parser = new Parser();
-
-        while (! input.equals("bye")) {
-            try {
-                parser.processCommand(input, taskList, ui, storage);
-            } catch (Exception e) {
-                System.err.println(e);
-            } finally {
-                input = scanner.nextLine();
-            }
+    public String getResponse(String input) {
+        try {
+            return parser.processCommand(input, taskList, ui, storage).toString();
+        } catch(Exception e) {
+            return e.getMessage();
         }
-        ui.showGoodbyeMessage();
-        scanner.close();
-    }
-    
-    public static void main(String[] args) throws Exception {
-        Duke duke = new Duke("/Users/abhimanyadav/Desktop/Duke/duke/src/main/java/dukeTasks.txt");
-        duke.run();
     }
 }

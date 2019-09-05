@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The Ui class handles the interaction with the users, mainly 
@@ -16,32 +21,40 @@ public class Ui {
     }
 
     /**
-     * Prints the greeting message from Duke.
+     * Creates the greeting message from Duke in the 
+     * appropriate dialogbox form.
      */
-    public void showGreetingMessage() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public void showGreetingMessage(VBox dialogContainer, Image image) {
+        String dukeGoodbyeText = "Hello! I'm Duke" + "\n" + "What can I do for you?";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeGoodbyeText, image)
+        );
     }
 
     /**
-     * Prints the goodbye message from Duke.
+     * Returns the goodbye message by duke upon closing.
+     * @return The goodbye message.
      */
-    public void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints all the tasks loaded from the local file and 
-     * new ones created by users as they are stored in the array list.
-     * @param list The array list from which the tasks are being read.
+     * Returns a stringbuilder object with all the tasks in the
+     * arraylist of tasks returned in a list form.
+     * @param list The arraylist of tasks to be printed.
+     * @return Stringbuilder object with tasks in string form as a list.
      */
-    public void printTasks(ArrayList<Task> list) {
-        int i = 1;
-        System.out.println("Here are the tasks in your list:");
+    public StringBuilder printTasks(ArrayList<Task> list) {
+        int index = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:" + "\n");
         for (Task task : list) {
-            System.out.println(i + "." + task.toString());
-            i += 1;
+            sb.append(index + ". " + task.toString());
+            sb.append("\n");
+            index++;
         }
+        return sb;
     }
 
     /**
@@ -83,13 +96,17 @@ public class Ui {
     }
 
     /**
-     * Success message to be shown when a task is successfully created and added
-     * into the file and list of tasks by Duke.
-     * @param task The task which has been added successfully.
+     * Returns a Stringbuilder object with the success message to be shown by Duke
+     * upon successfully adding a task.
+     * @param task
+     * @return
      */
-    public static void addSuccess(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("\t" + task.toString());
+    public static StringBuilder addSuccess(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:");
+        sb.append("\n");
+        sb.append("\t" + task.toString());
+        return sb;
     }
 
 }

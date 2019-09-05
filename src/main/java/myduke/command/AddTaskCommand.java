@@ -36,6 +36,7 @@ public class AddTaskCommand extends Command {
      * Creates a task element.
      *
      * @return a task element.
+     *
      * @throws DukeException if type of task or their arguments are invalid.
      */
     private Task createTask() throws DukeException {

@@ -103,6 +103,6 @@ public class Duke {
             } catch (DukeException | ParseException error) {
                 System.out.print(line + "     " + error.getMessage() + "\n" + line);
             }
-        } while (x==1);
+        } while (x == 1);
     }
 }

@@ -19,4 +19,5 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
+
 }

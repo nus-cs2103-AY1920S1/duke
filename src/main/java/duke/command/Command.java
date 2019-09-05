@@ -35,11 +35,11 @@ public abstract class Command {
     /**
      * Abstract method for executed method.
      * @param tasks List of task.
-     * @param ui Ui of Duke Program.
      * @param storage Database of the Duke Program.
+     * @return String of output.
      * @throws DukeException If execute method fail to run the intended method.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Exit the Duke Program.

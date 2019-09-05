@@ -32,32 +32,36 @@ public class EventCommand extends Command {
     /**
      * Execute method to execute the event method.
      * @param tasks List of task enter by user.
-     * @param ui Duke Ui Program enter by user.
      * @param storage Database of the Duke Program.
+     * @return String of output.
      * @throws DukeException If event method is not able to get executed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        event(super.input, tasks, ui);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String reply = event(super.input, tasks);
+
+        return reply;
     }
 
     /**
      * "event" command to enter event description and event time.
      * @param data event description and time of event.
      * @param tasks List of task store in arraylist.
-     * @param ui Ui of Duke Program.
+     * @return String of output.
      * @throws DukeException If data is empty and event time is not entered.
      */
-    public static void event(String data, TaskList tasks, Ui ui) throws DukeException {
+    public static String event(String data, TaskList tasks) throws DukeException {
+        StringBuilder reply = new StringBuilder();
+
         if (data.isEmpty()) {
-            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
+            throw new DukeException("OOPS !!! "
                     + "The description of an event cannot be empty.");
         }
 
         String[] result = data.split("/at");
 
         if (result.length <= 1) {
-            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
+            throw new DukeException("OOPS !!! "
                     + "Event time is needed.");
         }
 
@@ -71,13 +75,16 @@ public class EventCommand extends Command {
             date = df.parse(timeline);
             formattedDate = outputformat.format(date);
             tasks.getTask().add(new Event(achieve, formattedDate));
-            System.out.println(ui.INDENT_COMMENT + "Got it. I've added this task: ");
-            System.out.println(ui.INDENT_TASK + tasks.getTask().get(tasks.getItemNo()));
+            reply.append("Got it. I've added this task: ");
+            reply.append("\n");
+            reply.append(tasks.getTask().get(tasks.getItemNo()));
+            reply.append("\n");
             tasks.setItemNo(tasks.getItemNo() + 1);
-            System.out.println(ui.INDENT_COMMENT + "Now you have "
+            reply.append("Now you have "
                     + tasks.getItemNo() + " tasks in the list.");
+            return reply.toString();
         } catch (ParseException pe) {
-            System.out.println(ui.INDENT_COMMENT + "Invalid Data and Time Format");
+            throw new DukeException("Invalid Data and Time Format");
         }
 
 

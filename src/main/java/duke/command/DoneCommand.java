@@ -26,31 +26,30 @@ public class DoneCommand extends Command {
     /**
      * The execute method to execute done method.
      * @param tasks The list of task.
-     * @param ui The ui of Duke Program.
      * @param storage The Database of Duke Program.
+     * @return String of output.
      * @throws DukeException If done method is not executed properly.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        done(super.input, tasks, ui);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return done(super.input, tasks);
     }
 
     /**
      * "done" command to check the finish task.
      * @param data Command and item index of the task.
      * @param tasks Task array that contains list of tasks.
-     * @param ui Ui of Duke Program.
+     * @return String of output.
      * @throws DukeException if number of items = 0 and index enter > total number of task.
      */
-    public static void done(String data, TaskList tasks, Ui ui) throws DukeException {
+    public static String done(String data, TaskList tasks) throws DukeException {
+        StringBuilder reply = new StringBuilder();
         try {
             if (data.isEmpty()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT
-                            + "OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException("OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT
-                            + "OOPS !!! " + "Index of task are needed.");
+                    throw new DukeException("OOPS !!! " + "Index of task are needed.");
                 }
             }
 
@@ -58,21 +57,21 @@ public class DoneCommand extends Command {
 
             if (item > tasks.getItemNo()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT
-                            + "OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException("OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
+                    throw new DukeException("OOPS !!! "
                             + "Number enter can only be less than or equal number of task.");
                 }
             }
-
-            System.out.println(ui.INDENT_COMMENT + "Nice! I've marked this task as done:");
+            reply.append("Nice! I've marked this task as done:");
+            reply.append("\n");
             Task t = tasks.getTask().get(--item);
             t.markAsDone();
-            System.out.println(ui.INDENT_TASK + t);
+            reply.append(t);
+
+            return reply.toString();
         } catch (NumberFormatException ex) {
-            System.out.println(ui.INDENT_COMMENT + "OOPS !!! "
-                    + "Only Integer is allowed after done.");
+            throw new DukeException("OOPS !!! " + "Only Integer is allowed after done.");
         }
     }
 }

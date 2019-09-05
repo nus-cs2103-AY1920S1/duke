@@ -1,74 +1,84 @@
 package duke.fx;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.Node;
-import javafx.scene.image.ImageView;
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
 /**
- * To get the dialog box of user and duke.
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
  *
  * @author TeoShyanJie
- *
  */
 public class DialogBox extends HBox {
-    /** Text Label. */
-    private Label text;
 
-    /** User Image or Duke Image. */
+    @FXML
+    private Label dialog;
+
+    @FXML
     private ImageView displayPicture;
 
     /**
-     * Construct the Dialog Box of Text Label and Image.
-     * @param l Text Label.
-     * @param iv Image of Duke/User.
+     * Dialog Box Constructor.
+     * @param text Input Text.
+     * @param img Image of either User/Duke.
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        final Circle clip = new Circle(50, 50, 50);
-        iv.setClip(clip);
-        displayPicture = iv;
-        text.setWrapText(true);
-        text.setPadding(new Insets(10,20,0,20));
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialog.setText(text);
+        dialog.setPadding(new Insets(0,0,0,15));
+        displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 50, 50));
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
-     * To get User Dialog.
-     * @param l Text Label.
-     * @param iv Image of User.
-     * @return The Dialog box of user.
+     * Dialog Box of User.
+     * @param text Text from User.
+     * @param img Image of User.
+     * @return Dialog Box of User.
      */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
     /**
-     * To get Duke Dialog.
-     * @param l Text Label.
-     * @param iv Image of Duke.
-     * @return The Dialog box of Duke.
+     * Dialog Box of Duke.
+     * @param text Text from Duke.
+     * @param img Image of Duke.
+     * @return Dialog Box of Duke.
      */
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

@@ -26,25 +26,25 @@ public class ExitCommand extends Command {
     /**
      * Execute method to execute bye method.
      * @param tasks List of task enter.
-     * @param ui Ui of Duke Program.
      * @param storage Database of the Duke Program.
+     * @return String of output.
      * @throws DukeException If bye method is not able to execute.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        bye(tasks, ui, storage);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         super.exit = true;
+        return bye(tasks, storage);
     }
 
     /**
      * "bye" to exit the Duke Program.
      * @param tasks List of task.
-     * @param ui Ui of Duke Program.
      * @param storage Database of the Duke Program.
+     * @return String of output.
      * @throws DukeException If update file fail when exiting Duke Program.
      */
-    public static void bye(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println(ui.INDENT_COMMENT + "Bye. Hope to see you again soon!");
+    public static String bye(TaskList tasks, Storage storage) throws DukeException {
         storage.updateFile(tasks.getTask());
+        return "Bye. Hope to see you again soon!";
     }
 }

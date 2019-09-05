@@ -25,30 +25,35 @@ public class ListCommand extends Command {
     /**
      * Execute method to execute the list method.
      * @param tasks List of task.
-     * @param ui The Ui of the Duke Program.
      * @param storage The Database of the Duke Program.
+     * @return String of output.
      * @throws DukeException The list method is not able to execute.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        list(tasks, ui);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return list(tasks);
     }
 
     /**
      * "list" command to list all the task.
      * @param tasks List of task saved in arraylist.
-     * @param ui Ui of Duke Programn.
+     * @return String of output.
      * @throws DukeException if number of items = 0.
      */
-    public static void list(TaskList tasks, Ui ui) throws DukeException {
+    public static String list(TaskList tasks) throws DukeException {
         if (tasks.getItemNo() == 0) {
-            throw new DukeException(ui.INDENT_COMMENT
-                    + "OOPS !!! " + "The task list are currently empty.");
+            throw new DukeException("OOPS !!! " + "The task list are currently empty.");
         }
+
+        StringBuilder reply = new StringBuilder();
         int index = 1;
-        System.out.println(ui.INDENT_COMMENT + "Here are the tasks in your list:");
+        reply.append("Here are the tasks in your list:");
+        reply.append("\n");
         for (int i = 0; i < tasks.getTask().size(); i++) {
-            System.out.println("    " + index++ + "." + tasks.getTask().get(i));
+            reply.append("    " + index++ + "." + tasks.getTask().get(i));
+            reply.append("\n");
         }
+
+        return reply.toString();
     }
 }

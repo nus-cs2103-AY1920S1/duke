@@ -25,29 +25,34 @@ public class FindCommand extends Command {
     /**
      * Execute method to execute the find method.
      * @param tasks List of task.
-     * @param ui Ui of Duke Program.
      * @param storage Database of the Duke Program.
+     * @return String of output.
      * @throws DukeException If find method is not executable.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        find(tasks, ui);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return find(tasks);
     }
 
     /**
      * To find the specific task with keyword enter.
      * @param tasks The list of tasks.
-     * @param ui Ui of Duke Program.
+     * @return String of output.
      */
-    public void find(TaskList tasks, Ui ui) {
+    public String find(TaskList tasks) {
+        StringBuilder reply = new StringBuilder();
+
         int index = 1;
-        System.out.println(ui.INDENT_COMMENT
-                + "Here are the matching tasks in your list:");
+        reply.append("Here are the matching tasks in your list:");
+        reply.append("\n");
         for (int i = 0; i < tasks.getTask().size(); i++) {
             if (tasks.getTask().get(i).toString().toLowerCase().contains(super.input.trim())) {
-                System.out.println(ui.INDENT_TASK + index++
+                reply.append(index++
                         + "." + tasks.getTask().get(i).toString());
+                reply.append("\n");
             }
         }
+
+        return reply.toString();
     }
 }

@@ -10,7 +10,6 @@ import duke.command.ExitCommand;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.exception.DukeException;
-import duke.component.Ui;
 
 /**
  * Parser class will parse the input from user and
@@ -23,11 +22,10 @@ public class Parser {
     /**
      * Parse method to parse command enter by user.
      * @param line The input enter by user.
-     * @param ui The ui of Duke Program.
      * @return The command type of user.
      * @throws DukeException If command enter is not valid.
      */
-    public static Command parse(String line, Ui ui) throws DukeException {
+    public static Command parse(String line) throws DukeException {
         String command = "";
         String rest = "";
 
@@ -66,7 +64,7 @@ public class Parser {
 
 
         default:
-            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
+            throw new DukeException("OOPS !!! "
                     + "I'm sorry, but I don't know what that means :-(");
         }
     }

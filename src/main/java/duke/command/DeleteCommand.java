@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.component.Ui;
 import duke.database.Storage;
+import duke.main.Duke;
 
 /**
  * This Delete Command class get the input of the task description
@@ -25,32 +26,34 @@ public class DeleteCommand extends Command {
     /**
      * Execute method to execute delete command.
      * @param tasks List of task.
-     * @param ui The ui of duke program.
      * @param storage The Database of duke program.
+     * @return String of output.
      * @throws DukeException If delete command fail to be executed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        delete(super.input, tasks, ui);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String reply = delete(super.input, tasks);
+
+        return reply;
     }
 
     /**
      * The delete method to delete specific task.
      * @param data Task enter by user.
      * @param tasks List of task.
-     * @param ui The ui of Duke Program.
+     * @return String of output.
      * @throws DukeException If the list of task is empty
      *     or if the task to delete is not in the list.
      */
-    public void delete(String data, TaskList tasks, Ui ui) throws DukeException {
+    public String delete(String data, TaskList tasks) throws DukeException {
+        StringBuilder reply = new StringBuilder();
+
         try {
             if (data.isEmpty()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT
-                            + "OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException("OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT
-                            + "OOPS !!! " + "Index of task are needed.");
+                    throw new DukeException("OOPS !!! " + "Index of task are needed.");
                 }
             }
 
@@ -58,21 +61,22 @@ public class DeleteCommand extends Command {
 
             if (item > tasks.getItemNo()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT
-                            + "OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException("OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! "
+                    throw new DukeException("OOPS !!! "
                             + "Number enter can only be less than or equal number of task.");
                 }
             }
-            System.out.println(ui.INDENT_COMMENT + "Noted. I've removed this task: ");
-            System.out.println(ui.INDENT_TASK + tasks.getTask().remove(--item));
+            reply.append("Noted. I've removed this task: ");
+            reply.append("\n");
+            reply.append(tasks.getTask().remove(--item));
+            reply.append("\n");
             tasks.setItemNo(tasks.getItemNo() - 1);
-            System.out.println(ui.INDENT_COMMENT + "Now you have "
+            reply.append("Now you have "
                     + tasks.getItemNo() + " tasks in the list.");
+            return reply.toString();
         } catch (NumberFormatException ex) {
-            System.out.println(ui.INDENT_COMMENT
-                    + "OOPS !!! " + "Only Integer is allowed after done.");
+            throw new DukeException("OOPS !!! " + "Only Integer is allowed after done.");
         }
     }
 }

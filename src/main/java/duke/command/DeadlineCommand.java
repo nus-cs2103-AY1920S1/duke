@@ -31,32 +31,34 @@ public class DeadlineCommand extends Command {
     /**
      * Execute method to execute deadline command.
      * @param tasks List of task.
-     * @param ui The ui of duke program.
      * @param storage The Database of duke program.
+     * @return String of output.
      * @throws DukeException If deadline command fail to be executed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        deadline(super.input, tasks, ui);
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return deadline(super.input, tasks);
     }
 
     /**
      * "deadline" command to enter deadline description and deadline time.
      * @param data deadline description and deadline of task.
      * @param tasks Task arraylist that contain list of task.
-     * @param ui Ui of Duke Program.
+     * @return String of output.
      * @throws DukeException If description and time of deadline is empty.
      */
-    public static void deadline(String data, TaskList tasks, Ui ui) throws DukeException {
+    public static String deadline(String data, TaskList tasks) throws DukeException {
+        StringBuilder reply = new StringBuilder();
+
         if (data.isEmpty()) {
-            throw new DukeException(ui.INDENT_COMMENT
-                    + "OOPS !!! " + "The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS !!! "
+                    + "The description of a deadline cannot be empty.");
         }
 
         String[] result = data.split("/by");
 
         if (result.length <= 1) {
-            throw new DukeException(ui.INDENT_COMMENT + "OOPS !!! " + "Deadline is needed.");
+            throw new DukeException("OOPS !!! " + "Deadline is needed.");
         }
 
         String achieve = result[0].trim();
@@ -70,13 +72,16 @@ public class DeadlineCommand extends Command {
             date = df.parse(timeline);
             formattedDate = outputformat.format(date);
             tasks.getTask().add(new Deadline(achieve, formattedDate));
-            System.out.println(ui.INDENT_COMMENT + "Got it. I've added this task: ");
-            System.out.println(ui.INDENT_TASK + tasks.getTask().get(tasks.getItemNo()));
+            reply.append("Got it. I've added this task: ");
+            reply.append("\n");
+            reply.append(tasks.getTask().get(tasks.getItemNo()));
+            reply.append("\n");
             tasks.setItemNo(tasks.getItemNo() + 1);
-            System.out.println(ui.INDENT_COMMENT + "Now you have "
+            reply.append("Now you have "
                     + tasks.getItemNo() + " tasks in the list.");
+            return reply.toString();
         } catch (ParseException pe) {
-            System.out.println(ui.INDENT_COMMENT + "Invalid Data and Time Format");
+            throw new DukeException("Invalid Data and Time Format");
         }
     }
 }

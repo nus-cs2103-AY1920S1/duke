@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Task;
+import duke.ui.Ui;
 
 import static java.lang.System.lineSeparator;
 
@@ -20,7 +21,7 @@ public class ListCommand extends Command {
         StringBuilder feedback = new StringBuilder("Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
-            feedback.append(lineSeparator() + i + ". " + task);
+            feedback.append(lineSeparator() + Ui.INDENT + i + ". " + task);
         }
         return new CommandResult(feedback.toString());
     }

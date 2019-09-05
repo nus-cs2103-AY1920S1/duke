@@ -10,6 +10,7 @@ import java.util.Date;
  * Represents a list of helper {@link Date} methods.
  */
 public class DateUtil {
+
     public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     /**

@@ -6,7 +6,8 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+
+import java.io.IOException;
 
 /**
  * A task management application.
@@ -16,20 +17,14 @@ public class Duke {
     private boolean isActive;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Returns a {@link Duke}.
      */
-    public Duke() {
+    public Duke() throws DukeException, IOException {
         isActive = true;
-        ui = new Ui();
         storage = new Storage(STORAGE_PATHNAME);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
     }
 
     /**
@@ -38,10 +33,10 @@ public class Duke {
      * @param input The input to parse and execute
      * @return The response from Duke.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws IOException {
         try {
             Command c = Parser.parse(input);
-            c.setData(tasks, ui, storage);
+            c.setData(tasks, storage);
             CommandResult result = c.execute();
             isActive = !c.isExit();
             return result.feedback;

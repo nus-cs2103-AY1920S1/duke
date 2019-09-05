@@ -1,7 +1,14 @@
-package command;
+package duke;
+
+import java.util.Scanner;
 
 public class Ui {
 
+    private static final         String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String INTRODUCTION = "     Hello! I'm Duke";
     private static final String USER_PROMPT = "     What can I do for you?";
     private static final String SEPARATOR = "    ____________________________________________________________";
@@ -21,6 +28,10 @@ public class Ui {
     public Ui() {
     }
 
+    public void welcomeStatement() {
+        System.out.println("Hello from\n" + LOGO);
+    }
+
     /**
      * Opening statement, introduction of Duke.
      * Includes a user prompt for input
@@ -33,13 +44,16 @@ public class Ui {
         System.out.println("");
     }
 
+    public String readCommand() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+        return input;
+    }
     /**
      * Closing statement.
      */
     public void closingStatement() {
-        System.out.println(SEPARATOR);
         System.out.println(CLOSING_STATEMENT);
-        System.out.println(SEPARATOR);
     }
 
     /**
@@ -119,5 +133,10 @@ public class Ui {
 
     public String invalidCommand() {
         return INVALID_COMMAND;
+    }
+
+    public void nextCommand() {
+        System.out.println(SEPARATOR);
+        System.out.println();
     }
 }

@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.io.File;
 
+import commands.Command;
 import duke.DukeException;
-import command.Parser;
-import command.Storage;
-import command.Ui;
-import task.Task;
-import task.TaskList;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import tasks.Task;
+import tasks.TaskList;
 
 // For JavaFX
 import javafx.application.Application;
@@ -138,31 +139,34 @@ public class Duke extends Application {
      */
     public void run() {
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        // Store command-line input as String
-        String input = "";
-
+        ui.welcomeStatement();
+        boolean isExit = false;
         Storage storage = this.storage;
         TaskList tasks = this.tasks;
-        Parser parser = new Parser();
-
-        // Create new user interface object
         Ui ui = new Ui();
 
         // Initial opening introduction and prompt for user input
         ui.openingStatement();
 
-        // Parse Duke commands
-        parser.parseDuke(storage, tasks, input);
+        while (!isExit) {
+            try {
+                String input = ui.readCommand();
+                ui.separator();
 
-        // Closing statement
-        ui.closingStatement();
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException err) {
+                System.out.println(err.getMessage());
+            }
+            ui.nextCommand();
+
+            try {
+                storage.saveFile(tasks, storage.getFilePath());
+            } catch (DukeException e) {
+                ui.saveError();
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 # JavaFX Tutorial 3 – Interacting with the user
 
-Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user command. 
+Picking up from where we left off last tutorial, we have successfully achieved the desired layout. Now let’s make the application respond to user commands. 
 
 Rather than to do everything in one try, let’s iterate and build up towards our final goal. 
 
@@ -18,7 +18,7 @@ public void start(Stage stage) {
 
     //Step 2 code here
 
-    //Step 3. Add functionality to handle user command.
+    //Step 3. Add functionality to handle user commands.
     sendButton.setOnMouseClicked((event) -> {
         dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
         userInput.clear();
@@ -120,12 +120,12 @@ public class Duke extends Application {
 }
 ```
 
-Add a new method to handle user command:
+Add a new method to handle user commands:
 ```java
 /**
  * Iteration 2:
- * Creates two dialog boxes, one echoing user command and the other containing Duke's reply and then appends them to
- * the dialog container. Clears the user command after processing.
+ * Creates two dialog boxes, one echoing user commands and the other containing Duke's reply and then appends them to
+ * the dialog container. Clears the user commands after processing.
  */
 private void handleUserInput() {
     Label userText = new Label(userInput.getText());
@@ -138,11 +138,11 @@ private void handleUserInput() {
 }
 
 /**
- * You should have your own function to generate a response to user command.
+ * You should have your own function to generate a response to user commands.
  * Replace this stub with your completed method.
  */
-private String getResponse(String command) {
-    return "Duke heard: " + command;
+private String getResponse(String commands) {
+    return "Duke heard: " + commands;
 }
 ```
 
@@ -153,7 +153,7 @@ Update the event handler code in the `start` method to use the new `handleUserIn
 public void start(Stage stage) {
     //...
 
-    //Part 3. Add functionality to handle user command.
+    //Part 3. Add functionality to handle user commands.
     sendButton.setOnMouseClicked((event) -> {
         handleUserInput();
     });
@@ -170,7 +170,7 @@ Run the program and see how it works.
 
 ## Iteration 3 – Adding custom behavior to DialogBox
 
-One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user command and Duke’s output.
+One additional benefit of defining a custom control is that we can add behavior specific to our `DialogBox`. Let’s add a method to flip a dialog box such that the image on the left to differentiate between user commands and Duke’s output.
 
 ```java
 /**

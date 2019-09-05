@@ -1,6 +1,4 @@
-package task;
-
-import duke.DukeException;
+package tasks;
 
 public class Task {
     private String description;
@@ -17,13 +15,6 @@ public class Task {
 
     public boolean getStatus() {
         return this.isDone;
-    }
-
-    // Invalid task throws DukeException
-    public Task(String action, int size) throws DukeException {
-        if (size == 1) {
-            throw new DukeException("    " + "\u2639" + " OOPS!!! The description of a " + action + " cannot be empty.");
-        }
     }
 
     public String toString() {

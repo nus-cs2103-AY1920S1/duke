@@ -1,7 +1,7 @@
-package task;
+package tasks;
 
-import command.Parser;
-import command.Ui;
+import duke.Parser;
+import duke.Ui;
 
 import java.util.ArrayList;
 
@@ -83,23 +83,20 @@ public class TaskList {
         }
     }
 
-    public void addTask(String action, String input) {
+    public void addTask(String input, String action, String description) {
 
         switch (action) {
 
         case "todo":
-            String description1 = parser.parseDescription(action, input);
-            list.add(new ToDo(description1));
+            this.list.add(new ToDo(description));
             break;
 
         case "deadline":
-            String description2 = parser.parseDescription(action, input);
-            list.add(new Deadline(description2, parser.parseDateTime(action, input)));
+            this.list.add(new Deadline(description, parser.parseDateTime(action, input)));
             break;
 
         case "event":
-            String description3 = parser.parseDescription(action, input);
-            list.add(new Event(description3, parser.parseDateTime(action, input)));
+            this.list.add(new Event(description, parser.parseDateTime(action, input)));
             break;
 
         default:

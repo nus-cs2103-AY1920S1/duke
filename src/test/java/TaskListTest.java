@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import task.*;
+import tasks.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

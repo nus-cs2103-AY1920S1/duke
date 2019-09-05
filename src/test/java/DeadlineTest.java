@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import task.Deadline;
-import task.Task;
+import tasks.Deadline;
+import tasks.Task;
 
 import static org.junit.jupiter.api.Assertions.*;
 

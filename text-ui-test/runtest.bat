@@ -15,8 +15,8 @@ IF ERRORLEVEL 1 (
 )
 REM no error here, errorlevel == 0
 
-REM run the program, feed commands from command.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Duke < command.txt > ACTUAL.TXT
+REM run the program, feed commands from commands.txt file and redirect the output to the ACTUAL.TXT
+java -classpath ..\bin Duke < commands.txt > ACTUAL.TXT
 
 
 REM compare the output to the expected output

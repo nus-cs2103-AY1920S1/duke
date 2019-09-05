@@ -1,11 +1,10 @@
-package command;
+package duke;
 
-import duke.DukeException;
-import task.Task;
-import task.TaskList;
-import task.Event;
-import task.Deadline;
-import task.ToDo;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Event;
+import tasks.Deadline;
+import tasks.ToDo;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;

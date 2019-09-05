@@ -1,4 +1,4 @@
-package task;
+package tasks;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,31 +6,30 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
-    private String by;
+    private String at;
     private Date dateTime;
 
     // List of acceptable date formats (for this case, just choosing two common patterns)
     private List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
 
     /**
-     * Instantiates a new task.Deadline task.Task.
+     * Instantiates a new task.Event task.Task.
      * Convert the date/time provided to a SimpleDateFormat object.
      * Can only convert for certain date & time formats.
      *
-     * @param description The description of the deadline
-     * @param by          The date & time of which the task has to be completed by
+     * @param description The description of the event
+     * @param at          The date & time of which the event is held at
      */
-    public Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
         for (String pattern : dateFormats) {
             SimpleDateFormat dateTime = new SimpleDateFormat(pattern);
             try {
-                this.dateTime = dateTime.parse(by);
+                this.dateTime = dateTime.parse(at);
             } catch (ParseException e) {
-                System.out.println("Unable to convert String to SimpleDateFormat.");
             }
         }
     }
@@ -38,13 +37,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (dateTime != null) {
-            return "[D]" + super.toString() + " (by: " + dateTime + ")";
+            return "[E]" + super.toString() + " (at: " + dateTime + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[E]" + super.toString() + " (at: " + at + ")";
         }
     }
 
     public String toSave() {
-        return "D | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + this.by;
+        return "E | " + (getStatus() ? "1" : "0") + " | " + getDescription() + " | " + this.at;
     }
 }

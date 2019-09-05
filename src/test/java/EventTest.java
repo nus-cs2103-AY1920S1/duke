@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import task.Event;
-import task.Task;
+import tasks.Event;
+import tasks.Task;
 
 import static org.junit.jupiter.api.Assertions.*;
 

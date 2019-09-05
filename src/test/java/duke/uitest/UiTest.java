@@ -6,6 +6,9 @@ import duke.ui.Ui;
 
 public class UiTest {
 
+    /**
+     * Test method to check if messages are formatted correctly.
+     */
     @Test
     public void formatMessageCorrectly() {
         String formattedMessage = "    ____________________________________________________________\n" +

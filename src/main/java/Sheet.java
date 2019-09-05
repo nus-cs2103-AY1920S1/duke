@@ -31,9 +31,7 @@ public class Sheet {
      */
     public void add(Task task) {
         tasks.add(task);
-        ui.showAdd(task.toString().trim());
-        this.numOfTask++;
-        ui.showCount(numOfTask);
+        ui.showAdd(task.toString().trim(), ++numOfTask);
     }
 
     /**
@@ -43,9 +41,7 @@ public class Sheet {
      */
     public void delete(int index) {
         Task removed = tasks.remove(index - 1);
-        ui.showRemove(removed.toString().trim());
-        this.numOfTask--;
-        ui.showCount(numOfTask);
+        ui.showRemove(removed.toString().trim(), --numOfTask);
     }
 
     /**
@@ -82,11 +78,12 @@ public class Sheet {
      *
      */
     public void showList() {
-        ui.showListHeader();
+        StringBuffer sb = new StringBuffer("");
 
         for (int i = 0; i < numOfTask; i++) {
-            ui.showTask(i + 1, tasks.get(i).toString().trim());
+            sb.append(("     " + i + 1 +  ". " + tasks.get(i).toString().trim() + "\n"));
         }
+        ui.showList(sb.toString());
     }
 
     /**
@@ -104,17 +101,18 @@ public class Sheet {
      * @param keyword Keyword for searching.
      */
     public void find(String keyword) {
-        ui.showSearchHeader();
+        StringBuffer sb = new StringBuffer("");
         int count = 0;
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 count++;
-                ui.showTask(count, task.toString().trim());
+                sb.append(("     " + count + ". " + tasks.get(count).toString().trim() + "\n"));
             }
         }
         if (count == 0) {
-            ui.showNotFound();
+            sb.append("     > < Sorry, nothing has been found.\n");
         }
+        ui.showSearch(sb.toString());
     }
 
     /**

@@ -13,10 +13,10 @@ public class CommandEvent extends Command {
         String[] commands = command.split("(/from)|(to)");
         if (this.command.isBlank() || command.indexOf("/") == 0) {
             throw new MissingDescriptionException(
-                    "☹ Oh! Did you forget to add the task?");
+                    "> < Oh! Did you forget to add the task?");
         } else if (commands.length < 3) {
             throw new MissingDescriptionException(
-                    "☹ OOPS!!! The event span is incomplete.");
+                    "> < OOPS!!! The event span is incomplete.");
         } else {
             String description = commands[0].trim();
             String start = commands[1].trim();

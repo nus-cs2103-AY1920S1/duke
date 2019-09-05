@@ -41,7 +41,7 @@ public class DateUtil {
             time = dateTime[1];
             if (time.length() < 3) {
                 // time is not entered in the format of hhmm.
-                throw new IllegalTimeFormatException("☹ Sorry, I couldn't recognise the time.\n"
+                throw new IllegalTimeFormatException("> < Sorry, I couldn't recognise the time.\n"
                         + "     Enter time in the format of 'hhmm' :D");
             }
             date[3] = time.substring(0, 2); // set hh
@@ -61,11 +61,11 @@ public class DateUtil {
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (DateTimeException e) {
             throw new IllegalTimeFormatException(
-                    "☹ Sorry, I couldn't recognise the time.\n"
+                    "> < Sorry, I couldn't recognise the time.\n"
                             + "     Try enter in the format of 'dd/MM/yy hhmm' :D");
         } catch (NumberFormatException nfe) {
             throw new IllegalTimeFormatException(
-                    "☹ Sorry, only numbers can be recognised for time.\n"
+                    "> < Sorry, only numbers can be recognised for time.\n"
                             + "     Try enter in the format of 'dd/MM/yy hhmm' :D");
         }
     }

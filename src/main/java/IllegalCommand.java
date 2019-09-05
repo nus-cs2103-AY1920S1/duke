@@ -10,7 +10,7 @@ public class IllegalCommand extends Command {
 
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
-        throw new IllegalCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new IllegalCommandException("> < Sorry, Nezuko doesn't know what that means.");
     }
 
     @Override

@@ -1,20 +1,24 @@
+package duke.ui;
+
+import duke.core.TaskList;
+import duke.tasks.Task;
 import java.util.List;
 import java.util.Scanner;
 
-public class UI {
+public class Clui implements UiInterface {
     private Scanner sc;
 
     /***
      * Class constructor.
      */
-    public UI() {
+    public Clui() {
         sc = new Scanner(System.in);
     }
 
     /***
      * Greet user.
      */
-    public static void greet() {
+    public void greet() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
@@ -122,7 +126,7 @@ public class UI {
     /***
      * Show exit message to user.
      */
-    public static void exit() {
+    public void exit() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________");

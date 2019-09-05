@@ -1,52 +1,62 @@
+package duke;
+
+
+import duke.commands.Command;
+import duke.core.Parser;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.exceptions.DukeException;
+import duke.ui.Clui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class DukeCLI {
+public class DukeCli {
     private TaskList taskList;
-    private UI ui;
+    private Clui clui;
     private Storage storage = new Storage(new File("data/tasks.txt"));
 
-    /***
+    /**
      * Main function for Duke CLI application.
      */
     public void run() {
-        ui = new UI();
+        clui = new Clui();
         taskList = new TaskList();
 
         /** Try to load data */
         try {
             taskList.loadData(storage.getTaskList());
-            ui.echoMessage("    *** EXISTING FILE LOADED ***");
+            clui.echoMessage("    *** EXISTING FILE LOADED ***");
         } catch (FileNotFoundException e) {
-            ui.echoMessage("    *** NO EXISTING FILE FOUND ***");
+            clui.echoMessage("    *** NO EXISTING FILE FOUND ***");
             try {
                 storage.createFile();
             } catch (IOException e2) {
-                ui.echoException(e2);
+                clui.echoException(e2);
             }
         } catch (DukeException e) {
-            ui.echoException(e);
+            clui.echoException(e);
         }
 
         /** Greet User */
-        ui.greet();
+        clui.greet();
 
         /** Interaction with User */
         boolean isByeBye = false;
         while (!isByeBye) {
             try {
-                String inputCommand = ui.readCommand(); // Initial Input
+                String inputCommand = clui.readCommand(); // Initial Input
                 Command c = Parser.parseCommand(inputCommand);
-                c.execute(storage, taskList, ui);
+                c.execute(storage, taskList, clui);
                 if(c.isExit)
                     isByeBye = true;
             } catch(IndexOutOfBoundsException e) {
-                ui.echoException(new DukeException("Index Out of Bounds Exception Caught"));
+                clui.echoException(new DukeException("Index Out of Bounds Exception Caught"));
             } catch (DukeException e) {
-                ui.echoException(e);
+                clui.echoException(e);
             } catch(Exception e) {
-                ui.echoException((new DukeException(e.getMessage())));
+                clui.echoException((new DukeException(e.getMessage())));
             }
         }
     }

@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.ui.UiInterface;
+
 public class DoneCommand extends Command {
     int indexToComplete;
 
@@ -17,7 +23,7 @@ public class DoneCommand extends Command {
      * @param ui UI used to interact
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, UI ui) throws IndexOutOfBoundsException {
+    public void execute(Storage storage, TaskList tasks, UiInterface ui) throws IndexOutOfBoundsException {
         ui.echoCompletedTask(tasks.completeTask(indexToComplete));
         storage.writeTaskListToFile(tasks);
     }

@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.ui.UiInterface;
+
 public class ExitCommand extends Command {
 
     /***
@@ -14,7 +20,7 @@ public class ExitCommand extends Command {
      * @param ui UI used to interact
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, UI ui) {
+    public void execute(Storage storage, TaskList tasks, UiInterface ui) {
         ui.exit();
     }
 }

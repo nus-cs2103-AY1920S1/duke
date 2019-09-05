@@ -1,3 +1,6 @@
+package duke.tasks;
+
+import duke.exceptions.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -58,13 +61,13 @@ public abstract class Task {
      *  Return a tick or cross depending on whether task is completed.
      */
     protected String getStatusIcon() {
-        return (isDone ? "✓" : "✘"); //return tick or X symbols
+        return (isDone ? "V" : "X"); //return tick or X symbols
     }
 
     /***
      * Set task as complete.
      */
-    protected void setDone() {
+    public void setDone() {
         isDone = true;
     }
 
@@ -72,7 +75,7 @@ public abstract class Task {
      * Check whether Task description contains given keyword.
      * @param keyword Keyword to match
      */
-    protected boolean checkMatch(String keyword) {
+    public boolean checkMatch(String keyword) {
         return description.contains(keyword);
     }
 

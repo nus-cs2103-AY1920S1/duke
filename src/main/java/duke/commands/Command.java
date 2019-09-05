@@ -1,8 +1,14 @@
+package duke.commands;
+
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.ui.UiInterface;
+
 /***
  * Abstract command class.
  */
 public abstract class Command {
-    protected boolean isExit;
+    public boolean isExit;
 
     /**
      * Class constructor.
@@ -12,5 +18,5 @@ public abstract class Command {
         this.isExit = isExit;
     }
 
-    public abstract void execute(Storage storage, TaskList tasks, UI ui);
+    public abstract void execute(Storage storage, TaskList tasks, UiInterface ui);
 }

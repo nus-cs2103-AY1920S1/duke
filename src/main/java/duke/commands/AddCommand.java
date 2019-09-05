@@ -1,4 +1,11 @@
-public class AddCommand extends Command{
+package duke.commands;
+
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.tasks.Task;
+import duke.ui.UiInterface;
+
+public class AddCommand extends Command {
     Task taskToAdd;
 
     /**
@@ -17,7 +24,7 @@ public class AddCommand extends Command{
      * @param ui UI used to interact
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, UI ui) {
+    public void execute(Storage storage, TaskList tasks, UiInterface ui) {
         tasks.addTask(taskToAdd);
         storage.appendTaskToFile(taskToAdd);
         ui.echoAddedTask(taskToAdd, tasks.getSize());

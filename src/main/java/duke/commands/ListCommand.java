@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.core.TaskList;
+import duke.core.Storage;
+import duke.ui.UiInterface;
+
 public class ListCommand extends Command {
 
     /***
@@ -14,7 +20,7 @@ public class ListCommand extends Command {
      * @param ui UI used to interact
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, UI ui) {
+    public void execute(Storage storage, TaskList tasks, UiInterface ui) {
         ui.echoList(tasks);
     }
 }

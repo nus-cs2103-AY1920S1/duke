@@ -12,7 +12,7 @@ public class DateUtil {
      * @throws ParseException if it fails to parse the date
      */
     public static Date parseFileStringToDate(String strDate) throws ParseException {
-        return new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy zzz").parse(strDate);
+        return new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(strDate);
     }
 
     /**

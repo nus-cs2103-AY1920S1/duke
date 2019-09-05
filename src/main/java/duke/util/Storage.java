@@ -7,7 +7,6 @@ import java.nio.file.*;
 import java.io.IOException;
 import java.lang.IndexOutOfBoundsException;
 import java.text.ParseException;
-import java.util.List;
 
 import duke.TaskList;
 import duke.task.Task;
@@ -90,7 +89,7 @@ public class Storage {
                 switch (lineArr[0]) {
                 case "EVENT":
                     result.add(new Event(lineArr[2],
-                               DateUtil.parseFileStringToDate(lineArr[3]),
+                               DateUtil.parseFileStringToDate(lineArr[3].trim()),
                                lineArr[1].equals("1")));
                     break;
                 case "TODO":
@@ -98,7 +97,7 @@ public class Storage {
                     break;
                 case "DEADLINE":
                     result.add(new Deadline(lineArr[2], 
-                               DateUtil.parseFileStringToDate(lineArr[3]), 
+                               DateUtil.parseFileStringToDate(lineArr[3].trim()), 
                                lineArr[1].equals("1")));
                     break;
                 default:
@@ -106,6 +105,7 @@ public class Storage {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error decoding data from file");
             } catch (ParseException e) {
+                System.out.println(e);
                 System.out.println("Error decoding the date from the file");
             }            
         } 

@@ -1,16 +1,17 @@
 .dialogBox {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    margin-bottom: 8px;
+    -fx-display: flex;
+    -fx-flex-direction: row;
+    -fx-width: 100%;
+    -fx-align-items: center;
+    -fx-margin-bottom: 8px;
 }
 
 .dialogBox:last-child {
-    margin-bottom: 0;
+    -fx-margin-bottom: 0;
 }
 
 .dialogDp {
-    margin: 0 4px;
-    border-radius: 50%;
+    -fx-width: 100%;
+    -fx-margin: 0 4px;
+    -fx-border-radius: 50%;
 }

@@ -13,6 +13,7 @@ public class DeadlineTask extends Task {
      */
     DeadlineTask(String description, String by) throws DukeInvalidDateException {
         super(description);
+        assert !by.equals("");
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             this.by = format.parse(by);

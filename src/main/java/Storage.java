@@ -55,6 +55,7 @@ public class Storage {
         if (arg.length < 3) {
             throw new DukeInvalidTaskFormatException(line);
         }
+        assert arg.length >= 3;
         Task t;
         switch (arg[0]) {
         case "T":

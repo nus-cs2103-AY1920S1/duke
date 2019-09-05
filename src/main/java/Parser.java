@@ -7,6 +7,7 @@ public class Parser {
      */
     static Command parse(String s) throws DukeException {
         String[] arg = s.split(" ", 2);
+        assert arg.length <= 2;
         switch (arg[0]) {
         case "bye":
             return new ByeCommand();

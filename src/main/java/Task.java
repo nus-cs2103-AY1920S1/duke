@@ -10,6 +10,7 @@ public abstract class Task {
      * @param description Task description
      */
     Task(String description) {
+        assert !description.equals("");
         this.description = description;
         this.isDone = false;
         this.dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");

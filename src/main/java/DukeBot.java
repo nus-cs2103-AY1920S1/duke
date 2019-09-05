@@ -37,6 +37,7 @@ public class DukeBot {
             if (input.equals("bye")) {
                 // if "bye", terminate
                 // todo: is there a way to combine this into processInput()?
+                this.taskList.saveToDisk();
                 break;
             }
 

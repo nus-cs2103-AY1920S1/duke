@@ -3,6 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import com.google.gson.Gson;
 
 public class TaskList {
 
@@ -61,6 +62,23 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + "items in this list.");
     }
 
+    public void saveToDisk() {
+        // create gson to serialise taskList
+        Gson gson = new Gson();
+        String taskListGson = gson.toJson(this);
+
+        // write taskList to txt file
+    }
+
+    public void readFromFile() {
+        // read json from file
+        // TODO
+
+        // create type token to deal with Arraylist
+        // todo: why can't I use Type?????
+        Type taskListType = new TypeToken<ArrayList<Task>>(){}.getType();
+        this.tasks = gson.fromJson(json, taskListType);
+    }
     /**
      * Processes the given input string.
      *

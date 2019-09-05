@@ -14,5 +14,5 @@ public interface Command {
      * </p>
      * @return following command if available.
      */
-    public Optional<Command> execute();
+    public void execute();
 }

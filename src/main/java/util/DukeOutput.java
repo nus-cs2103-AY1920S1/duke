@@ -33,7 +33,7 @@ public class DukeOutput {
         if (implementation == null) {
             System.out.println(output);
         } else {
-            implementation.printDukeOutput(output);
+            implementation.printDukeOutput(message.getMessage());
         }
     }
 }

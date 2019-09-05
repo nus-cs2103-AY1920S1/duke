@@ -1,6 +1,8 @@
 package fx;
 
-
+import command.ByeCommand;
+import command.Command;
+import command.CommandFactory;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.ScrollPane;
@@ -9,13 +11,16 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyEvent;
+import task.TaskListController;
+import util.DukeOutputImplementation;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 
-public class DukeMainWindowController {
+public class DukeMainWindowController implements DukeOutputImplementation {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,9 +28,11 @@ public class DukeMainWindowController {
     @FXML
     private TextField userInput;
 
-    private DukeFx duke;
     private Image userImage;
     private Image dukeImage;
+
+    private CommandFactory commandFactory;
+    private boolean isExited = false;
 
     public DukeMainWindowController() {
         File userFile = new File("src/main/assets/DaUser.png");
@@ -44,24 +51,31 @@ public class DukeMainWindowController {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(DukeFx d) {
-        duke = d;
+    public void configureMainWindowController(TaskListController taskListController) {
+        commandFactory = new CommandFactory(taskListController);
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if (!input.equals("")) {
-            String response = duke.getResponse(input);
+        if (!input.equals("") && !isExited) {
+            Optional<Command> next = commandFactory.parse(input);
+
             dialogContainer.getChildren().addAll(
-                    FxDialogBox.getUserDialog(input, userImage),
-                    FxDialogBox.getDukeDialog(response, dukeImage)
+                    FxDialogBox.getUserDialog(input, userImage)
             );
+
+            next.ifPresent(Command::execute);
+
+            if (next.isPresent() && next.get() instanceof ByeCommand) {
+                isExited = true;
+            }
+
             userInput.clear();
         }
     }
@@ -71,6 +85,11 @@ public class DukeMainWindowController {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             handleUserInput();
         }
+    }
+
+    @Override
+    public void printDukeOutput(String message) {
+        dialogContainer.getChildren().addAll(FxDialogBox.getDukeDialog(message, dukeImage));
     }
 }
 

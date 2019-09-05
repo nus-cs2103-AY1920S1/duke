@@ -32,9 +32,7 @@ public class DoneCommand implements Command {
      * @return new ListenCommand.
      */
     @Override
-    public Optional<Command> execute() {
+    public void execute() {
         taskListController.setTaskToDone(completedTaskIndex);
-
-        return Optional.of(new ListenCommand(taskListController));
     }
 }

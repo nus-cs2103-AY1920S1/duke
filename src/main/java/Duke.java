@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.Date;
 import java.text.ParseException;
@@ -7,9 +9,9 @@ import java.io.IOException;
 import java.text.ParseException;
 
 public class Duke {
-    private Storage storage;
-    private TaskList taskList; //.getList() returns list of task
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList taskList;
+    protected Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();

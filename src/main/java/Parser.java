@@ -1,9 +1,10 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.Date;
 import java.text.ParseException;
 
 public class Parser {
-    // deals with making sense of the user command
     private Scanner sc;
 
     public Parser(Scanner sc) {

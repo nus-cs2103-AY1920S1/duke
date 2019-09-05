@@ -1,6 +1,6 @@
+package duke;
+
 public class Ui {
-    // deals with interactions with the user
-    // throws error
     public Ui() {}
 
     public void printHello() {

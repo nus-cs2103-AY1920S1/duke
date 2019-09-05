@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -9,7 +11,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Storage {
-    // deals with loading tasks from the file and saving tasks in the file
     private String filePath;
 
     public Storage(String filePath) {

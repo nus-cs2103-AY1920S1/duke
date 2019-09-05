@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks
+ * Represents a list of tasks.
  */
 public class TaskList {
     /**

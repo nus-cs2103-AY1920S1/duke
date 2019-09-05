@@ -1,7 +1,7 @@
 package com.tasks;
 
 import com.util.json.JsonObject;
-import com.util.json.Schema;
+import com.core.savedata.Schema;
 
 public class Task {
 

@@ -1,4 +1,4 @@
-package com.util.json;
+package com.core.savedata;
 
 public class Schema {
     public static final String TASK_TODO = "todo";

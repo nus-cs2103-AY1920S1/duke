@@ -1,9 +1,11 @@
 public class Deadline extends Task {
-    String time;
+    Date time;
 
     public Deadline(String description, String time) {
         super(description);
-        this.time = time;
+        String[] dateAndTime = time.split(" ");
+        String[] date = dateAndTime[0].split("/");
+        this.time = new Date(date[0], date[1], date[2], dateAndTime[1]);
     }
 
     public String getTime() {

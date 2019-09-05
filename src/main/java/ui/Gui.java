@@ -33,4 +33,14 @@ public class Gui extends Ui {
         messageBuilder.append(line);
         messageBuilder.append(LINE_APPEND);
     }
+
+    /**
+     * Print out welcome message.
+     */
+    @Override
+    public void showWelcome() {
+        String greeting = "G'day mate! I'm Duke. Whatcha need help with?";
+        addLineToMessage(greeting);
+        show();
+    }
 }

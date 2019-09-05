@@ -29,6 +29,7 @@ public class DukeGui extends Application {
             MainWindow mw = fxmlLoader.<MainWindow>getController();
             duke = new Duke(System.getProperty("user.dir") + "/data/duke.txt", new Gui(mw));
             mw.setDuke(duke);
+            duke.getUi().showWelcome();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

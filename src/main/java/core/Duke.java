@@ -51,6 +51,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Getter for Ui.
+     *
+     * @return Ui of Duke.
+     */
+    public Ui getUi() {
+        return ui;
+    }
+
     public static void main(String[] args) {
         new Duke(System.getProperty("user.dir") + "/data/duke.txt", new Cli()).run();
     }

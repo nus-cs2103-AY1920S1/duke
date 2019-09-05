@@ -1,6 +1,8 @@
 package ui;
 
 import core.Duke;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -48,8 +54,32 @@ public class MainWindow extends AnchorPane {
 
         boolean isExit = duke.consumeUserInput(input);
         if (isExit) {
-            Platform.exit();
+            exit();
         }
+    }
+
+    /**
+     * Run exit sequence
+     */
+    private void exit() {
+        // disable textfield and button
+        sendButton.setDisable(true);
+        userInput.setDisable(true);
+
+        // run shutdown timer
+        AtomicInteger i = new AtomicInteger(3);
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.seconds(1),
+                ae -> {
+                    if (i.get() == 0) {
+                        Platform.exit();
+                    } else {
+                        addDukeResponse("Shutting down in..." + i);
+                        i.getAndDecrement();
+                    }
+                }));
+        timeline.setCycleCount(4);
+        timeline.play();
     }
 
     public void addDukeResponse(String response) {

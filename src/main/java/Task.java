@@ -11,11 +11,15 @@ public class Task {
         return description;
     }
 
-    void setCompleted() {
+    public void setCompleted() {
         this.isCompleted = true;
     }
 
-    String getMark() {
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public String getMark() {
         if (isCompleted) {
             return "✓";
         } else {
@@ -26,5 +30,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getMark() + "] " + this.getDescription() + "\n";
+    }
+
+    public String saveString() {
+        return "";
     }
 }

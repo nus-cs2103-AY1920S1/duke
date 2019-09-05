@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,14 +13,52 @@ public class Duke {
         // Create a scanner to take in user input
         Scanner sc = new Scanner(System.in);
 
+        String contents = "";
+        try {
+            FileReader reader = new FileReader("data/duke.txt");
+            int i;
+            while ((i = reader.read()) != -1) {
+                contents += (char) i;
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(
                 formatMessage("Hello, I'm Duke\nWhat can I do for you?")
         );
 
-        String command = sc.nextLine();
-        String[] commandTokens = command.split(" ");
         ArrayList<Task> tasks = new ArrayList<>();
         String message;
+
+        String[] contentLines = contents.split("\n");
+
+        for (String line : contentLines) {
+            String[] lineTokens = line.split(" \\| ");
+            if (lineTokens[0].equals("T")) {
+                Task newTask = new Todo(lineTokens[2]);
+                if (lineTokens[1].equals("1")) {
+                    newTask.setCompleted();
+                }
+                tasks.add(newTask);
+            } else if (lineTokens[0].equals("D")) {
+                Task newTask = new Deadline(lineTokens[2], lineTokens[3]);
+                if (lineTokens[1].equals("1")) {
+                    newTask.setCompleted();
+                }
+                tasks.add(newTask);
+            } else if (lineTokens[0].equals("E")) {
+                Task newTask = new Event(lineTokens[2], lineTokens[3]);
+                if (lineTokens[1].equals("1")) {
+                    newTask.setCompleted();
+                }
+                tasks.add(newTask);
+            }
+        }
+
+        String command = sc.nextLine();
+        String[] commandTokens = command.split(" ");
 
         while (!command.equals("bye")) {
             try {
@@ -92,6 +134,16 @@ public class Duke {
             }
             command = sc.nextLine();
             commandTokens = command.split(" ");
+        }
+        try {
+            FileWriter fstream = new FileWriter("data/duke.txt");
+            BufferedWriter out = new BufferedWriter(fstream);
+            for (Task task : tasks) {
+                out.write(task.saveString());
+            }
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         System.out.println(

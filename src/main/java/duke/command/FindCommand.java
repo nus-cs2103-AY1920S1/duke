@@ -42,12 +42,4 @@ public class FindCommand extends Command{
         return ui.printFindMessage(tasks);
     }
 
-    /**
-     * Checks if Duke will end.
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

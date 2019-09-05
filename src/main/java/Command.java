@@ -4,13 +4,15 @@ public class Command {
     private int index;
     private String nameOfTask; 
     private String dateStr;
+    private String wordToFind;
 	private boolean exit = false;
 
-	public Command(String action, int index, String nameOfTask, String dateStr) {
+	public Command(String action, int index, String nameOfTask, String dateStr, String wordToFind) {
 		this.action = action;
 		this.index = index;
 		this.nameOfTask = nameOfTask;
         this.dateStr = dateStr;
+        this.wordToFind = wordToFind;
 	}
 
     /**
@@ -34,26 +36,28 @@ public class Command {
             tasks.done(index);
 
         } else if (action.equals("bye")) {
-        	System.out.println("     Bye. Hope to see you again soon!");
+            System.out.println("     Bye. Hope to see you again soon!");
             exit = true;
 
         } else if (action.equals("todo")) {
-        	Task newTask = new ToDo(nameOfTask);
+            Task newTask = new ToDo(nameOfTask);
             System.out.println("     Got it. I've added this task: ");
             System.out.println("       " + newTask);
             tasks.add(newTask);
 
         } else if (action.equals("deadline")) {
-        	Task newTask = new Deadline(nameOfTask, dateStr);
+            Task newTask = new Deadline(nameOfTask, dateStr);
             System.out.println("     Got it. I've added this task: ");
             System.out.println("       " + newTask);
             tasks.add(newTask);
 
-        } else {
-        	Task newTask = new Event(nameOfTask, dateStr);
+        } else if (action.equals("event")){
+            Task newTask = new Event(nameOfTask, dateStr);
             System.out.println("     Got it. I've added this task: ");
             System.out.println("       " + newTask);
             tasks.add(newTask);
+        } else {
+            tasks.printListWithKeyword(wordToFind);
         }
 
         storage.save(tasks.getList());

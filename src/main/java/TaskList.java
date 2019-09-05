@@ -5,7 +5,7 @@ public class TaskList {
     private ArrayList<Task> list; 
 
     public TaskList() {
-    	this.list = new ArrayList<Task>();
+    	this.list = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> list) {
@@ -69,6 +69,22 @@ public class TaskList {
     	System.out.println("     Here are the tasks in your list:");
         for (int i = 1; i <= list.size(); i++) {
             System.out.println("     " + i + "." + list.get(i - 1));
+        }
+    }
+
+    /**
+     * Prints all the tasks in the list that have matching keyword
+     *
+     * @param keyword Keyword to search for
+     */
+    public void printListWithKeyword(String keyword) {
+        System.out.println("     Here are the matching tasks in your list:");
+        int num = 1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains(keyword)) {
+                System.out.println("     " + num + "." + list.get(i));
+                num++;
+            }
         }
     }
 }

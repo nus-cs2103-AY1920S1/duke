@@ -8,6 +8,7 @@ public class Parser {
     private static int index;
     private static String nameOfTask; 
     private static String dateStr;
+    private static String wordToFind;
 
 	/**
 	 * Returns the correct command from user input
@@ -25,9 +26,11 @@ public class Parser {
             index = -1;
             nameOfTask = "";
             dateStr = "";
+			wordToFind = "";
     	} else if (action.equals("delete")) {
             nameOfTask = "";
             dateStr = "";
+			wordToFind = "";
     		try {
                 index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
     		} catch (NumberFormatException e) {
@@ -38,6 +41,7 @@ public class Parser {
     	} else if (action.equals("done")) {
             nameOfTask = "";
             dateStr = "";
+			wordToFind = "";
     		try {
                 index = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
     		} catch (NumberFormatException e) {
@@ -49,9 +53,11 @@ public class Parser {
     		index = -1;
             nameOfTask = "";
             dateStr = "";
+			wordToFind = "";
     	} else if (action.equals("todo")) {
     		index = -1;
             dateStr = "";
+			wordToFind = "";
     		try {
     			nameOfTask = fullCommand.split(" ", 2)[1];
     		} catch (IndexOutOfBoundsException e) {
@@ -59,6 +65,7 @@ public class Parser {
     		}
     	} else if (action.equals("deadline")) {
     		index = -1;
+			wordToFind = "";
     		try {
     			nameOfTask = fullCommand.split(" ", 2)[1].split("/by")[0];
     			dateStr = fullCommand.split(" ", 2)[1].split("/by")[1];
@@ -67,13 +74,23 @@ public class Parser {
     		}    		
     	} else if (action.equals("event")) {
     		index = -1;
+			wordToFind = "";
     		try {
     			nameOfTask = fullCommand.split(" ", 2)[1].split("/by")[0];
     			dateStr = fullCommand.split(" ", 2)[1].split("/at")[1];
     		} catch (IndexOutOfBoundsException e) {
     			throw new IncompleteCommandException("Incomplete Command");
     		} 
-    	} else {
+    	} else if (action.equals("find")) {
+			index = -1;
+			nameOfTask = "";
+			dateStr = "";
+			try {
+				wordToFind = fullCommand.split(" ")[1];
+			} catch (IndexOutOfBoundsException e) {
+				throw new IncompleteCommandException("Incomplete Command");
+			}
+		} else {
     		throw new InvalidCommandException("Invalid Command");
     	}
         
@@ -86,6 +103,6 @@ public class Parser {
     		}
     	}
 
-        return new Command(action, index, nameOfTask, dateStr);
+        return new Command(action, index, nameOfTask, dateStr, wordToFind);
     }
 }

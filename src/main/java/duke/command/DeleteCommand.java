@@ -30,13 +30,14 @@ public class DeleteCommand extends Command {
      * @param storage local storage of data.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
         if (index <= 0 || index > taskList.size()) {
             throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
         }
         Task task = taskList.delete(index);
         storage.save(taskList.getSimplifiedTaskRepresentations());
-        ui.showDeletion(task);
-        ui.showTaskSize(taskList);
+        return Message.MESSAGE_DELETED + "\n " + String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size());
+//        ui.showDeletion(task);
+//        ui.showTaskSize(taskList);
     }
 }

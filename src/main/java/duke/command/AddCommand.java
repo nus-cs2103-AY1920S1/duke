@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.common.Message;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -29,10 +30,11 @@ public class AddCommand extends Command {
      * @param storage local storage of data.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
         taskList.addTask(task);
         storage.save(task.getSimplifiedRepresentation());
-        ui.showAddition(task);
-        ui.showTaskSize(taskList);
+        return Message.MESSAGE_ADDED + "\n " + String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size());
+//        ui.showAddition(task);
+//        ui.showTaskSize(taskList);
     }
 }

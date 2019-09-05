@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.common.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
@@ -28,7 +29,12 @@ public class FindCommand extends Command {
      * @param storage local storage of data.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
-        ui.showMatchingTaskList(taskList.getTaskNamesIfMatch(this.keyword));
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+        StringBuilder output = new StringBuilder(String.format(Message.MESSAGE_SHOW_TASK_LIST, " matching"));
+        for (String taskName : taskList.getTaskNamesIfMatch(this.keyword)) {
+            output.append("\n" + taskName);
+        }
+        return output.toString();
+//        ui.showMatchingTaskList(taskList.getTaskNamesIfMatch(this.keyword));
     }
 }

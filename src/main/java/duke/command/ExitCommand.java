@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.common.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
@@ -17,8 +18,9 @@ public class ExitCommand extends Command {
      * @param storage local storage of data.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
-        ui.exitProgram();
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+        return Message.MESSAGE_BYE;
+//        ui.exitProgram();
     }
 
     /**

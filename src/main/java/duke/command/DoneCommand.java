@@ -30,12 +30,13 @@ public class DoneCommand extends Command {
      * @param storage local storage of data.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
         if (index <= 0 || index > taskList.size()) {
             throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
         }
         Task task = taskList.markDone(index);
         storage.save(taskList.getSimplifiedTaskRepresentations());
-        ui.showMarkDone(task);
+        return Message.MESSAGE_MARK_DONE + "\n " + task;
+//        ui.showMarkDone(task);
     }
 }

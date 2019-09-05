@@ -25,5 +25,5 @@ public abstract class Command {
      * @param ui user interface displaying the effects of the execution of the command.
      * @param storage local storage of data.
      */
-    public abstract void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException;
 }

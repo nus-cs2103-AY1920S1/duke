@@ -15,7 +15,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "weijie.duke.Duke"
+    mainClassName = "weijie.duke.Launcher"
 }
 
 dependencies {

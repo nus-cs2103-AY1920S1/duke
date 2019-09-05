@@ -48,10 +48,10 @@ public class TaskCommandFactory {
                 }
             }
 
-            throw new DukeDependencyNotFoundException("☹ OOPS!!! This command is not working properly");
+            throw new DukeDependencyNotFoundException("☹ OOPS!!! This command is missing a dependency");
 
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            throw new DukeException("☹ OOPS!!! An unexpected error has occurred.");
+            throw new DukeException(e.getMessage());
         }
     }
 

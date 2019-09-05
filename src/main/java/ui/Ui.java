@@ -3,7 +3,6 @@ package ui;
 import tasks.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
     private static final String LOGO = " ____        _        \n"
@@ -58,9 +57,15 @@ public class Ui {
      * Prints the tasks stored in a list.
      * @param tasks arraylist of tasks stored.
      */
-    public String printTaskList(ArrayList<Task> tasks) {
+    public String printTaskListMessage(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
+        sb.append(getTaskListStringOf(tasks));
+        return sb.toString();
+    }
+
+    public String getTaskListStringOf(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1 + "." + tasks.get(i).toString() + "\n");
         }
@@ -74,7 +79,7 @@ public class Ui {
     public String findMessage(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
-        sb.append(printTaskList(tasks));
+        sb.append(getTaskListStringOf(tasks));
         return sb.toString();
     }
 

@@ -15,5 +15,7 @@ public abstract class Command {
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    }
 }

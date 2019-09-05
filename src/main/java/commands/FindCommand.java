@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.TaskNotFoundException;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
@@ -13,11 +14,11 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.findMessage(taskList.findTasks(key));
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+        try {
+            String res = ui.findMessage(taskList.findTasks(key));
+            return res;
+        } catch (TaskNotFoundException e) {
+            return e.getMessage();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package tasks;
 
 import exceptions.DukeException;
+import exceptions.TaskNotFoundException;
 
 import java.util.ArrayList;
 
@@ -32,12 +33,15 @@ public class TaskList {
      * @param key keyword inputted by user
      * @return list of tasks that contains the keyword
      */
-    public ArrayList<Task> findTasks (String key) {
+    public ArrayList<Task> findTasks (String key) throws TaskNotFoundException {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t: tasks) {
             if (t.getDescription().contains(key)) {
                 temp.add(t);
             }
+        }
+        if (temp.isEmpty()) {
+            throw new TaskNotFoundException("There are no tasks with the inputted key :(");
         }
         return temp;
     }
@@ -47,7 +51,7 @@ public class TaskList {
      * @param task task to be added
      * @throws DukeException
      */
-    public void addNewTask(Task task) throws DukeException {
+    public void addNewTask(Task task) {
         tasks.add(task);
     }
 

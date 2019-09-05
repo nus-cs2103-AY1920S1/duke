@@ -7,11 +7,6 @@ import ui.Ui;
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.printTaskList(taskList.getTasks());
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+        return ui.printTaskListMessage(taskList.getTasks());
     }
 }

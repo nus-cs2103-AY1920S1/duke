@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.DukeException;
 import storage.Storage;
 import tasks.Task;
 import tasks.TaskList;
@@ -15,13 +16,13 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        Task deleted = taskList.deleteTask(taskIndex);
-        storage.uploadTasksToFile(taskList.getTasks());
-        return ui.showDelTaskMsg(deleted.toString(), taskList.getListSize());
-    }
+        try {
+            Task deleted = taskList.deleteTask(taskIndex);
+            storage.uploadTasksToFile(taskList.getTasks());
+            return ui.showDelTaskMsg(deleted.toString(), taskList.getListSize());
 
-    @Override
-    public boolean isExit() {
-        return false;
+        } catch (IndexOutOfBoundsException e) {
+            return "Enter a valid task index u pepega :)";
+        }
     }
 }

@@ -1,6 +1,7 @@
 package parser;
 
 import commands.*;
+import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidDescriptionException;
 import tasks.Deadline;
@@ -9,6 +10,7 @@ import tasks.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
 
@@ -19,7 +21,7 @@ public class Parser {
      * @throws InvalidDescriptionException empty description of task
      * @throws InvalidCommandException unknown command
      */
-    public static Command parse(String command) throws InvalidDescriptionException, InvalidCommandException {
+    public static Command parse(String command) throws DukeException {
         String[] splitString = command.split(" ");
         String taskType = splitString[0];
         if (command.equals("list")) {
@@ -34,6 +36,7 @@ public class Parser {
             if (todoSplit.length == 1 || todoSplit[1].isEmpty()) {
                 throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
+
             return new AddCommand(new Todo(todoSplit[1].trim()));
         } else if (taskType.equals("deadline")) {
             //branch lvl 8 test
@@ -43,17 +46,31 @@ public class Parser {
             if (temp.length == 1 || temp[1].isEmpty()) {
                 throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
             }
-            LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
-            return new AddCommand(new Deadline(temp[1].trim(), ldt, deadlineSplit[1].trim()));
-        } else if (taskType.equals("event")) {
-            String[] deadlineSplit = command.split("/at ");
-            String[] temp = deadlineSplit[0].split("event ");
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-            if (temp.length == 1 || temp[1].isEmpty()) {
-                throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a event cannot be empty.");
+            if (deadlineSplit.length < 2) {
+                throw new InvalidDescriptionException("\u2639 OOPS!!! The date of a deadline cannot be empty.");
             }
-            LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
-            return new AddCommand(new Event(temp[1].trim(), ldt, deadlineSplit[1].trim()));
+            try {
+                LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
+                return new AddCommand(new Deadline(temp[1].trim(), ldt, deadlineSplit[1].trim()));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter a valid date in the format DD/MM/YYYY");
+            }
+        } else if (taskType.equals("event")) {
+            try {
+                String[] eventSplit = command.split("/at ");
+                String[] temp = eventSplit[0].split("event ");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+                if (temp.length == 1 || temp[1].isEmpty()) {
+                    throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a event cannot be empty.");
+                }
+                if (eventSplit.length < 2) {
+                    throw new InvalidDescriptionException("\u2639 OOPS!!! The date of a event cannot be empty.");
+                }
+                LocalDateTime ldt = LocalDateTime.parse(eventSplit[1].trim(), dtf);
+                return new AddCommand(new Event(temp[1].trim(), ldt, eventSplit[1].trim()));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter a valid date in the format DD/MM/YYYY");
+            }
         } else if (taskType.equals("delete")) {
             int taskIndex = Integer.valueOf(splitString[1]) - 1;
             return new DeleteCommand(taskIndex);
@@ -63,8 +80,7 @@ public class Parser {
                 builder.append(splitString[i] + " ");
             }
             return new FindCommand(builder.toString().trim());
-        }
-        else {
+        } else {
             throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

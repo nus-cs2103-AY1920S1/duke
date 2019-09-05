@@ -6,6 +6,8 @@ import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
+import java.time.format.DateTimeParseException;
+
 public class AddCommand extends Command {
     private Task task;
 
@@ -20,13 +22,8 @@ public class AddCommand extends Command {
             taskList.addNewTask(task);
             storage.uploadTasksToFile(taskList.getTasks());
             return ui.showAddTaskMsg(taskList.getListSize(), task.toString());
-        } catch (DukeException e) {
+        } catch (DateTimeParseException e) {
             return e.getMessage();
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

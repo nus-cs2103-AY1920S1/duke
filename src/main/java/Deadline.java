@@ -1,17 +1,23 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * This is a class for deadline tasks.
  * @author Choong Yong Xin
  */
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Deadline extends Task {
 
     Date by;
     String deadLine;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description Deadline description.
+     * @param deadLine Date that task is due.
+     */
     public Deadline(String description, String deadLine) {
         super(description);
         try {

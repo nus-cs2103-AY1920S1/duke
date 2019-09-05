@@ -11,12 +11,24 @@ public class DoneCommand extends Command {
         super(commandDesc);
     }
 
+    /**
+     * Returns a boolean to indicate whether the command is an exit command.
+     *
+     * @return false as command is not an exit command.
+     */
     boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns a string response by Quack when the command is executed.
+     *
+     * @param tasks TaskList containing the tasks.
+     * @param storage Storage to save the tasks.
+     * @return string to be displayed
+     */
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
         try {
             //Error if user inputs spaces
             if (commandDesc.substring(5).split(" ")[0].equals("")) {

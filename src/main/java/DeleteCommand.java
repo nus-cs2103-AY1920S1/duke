@@ -1,9 +1,9 @@
+import java.io.IOException;
+
 /**
  * This is a class for command dealing with deletions of any tasks.
  * @author Choong Yong Xin
  */
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
@@ -11,12 +11,24 @@ public class DeleteCommand extends Command {
         super(commandDesc);
     }
 
+    /**
+     * Returns a boolean to indicate whether the command is an exit command.
+     *
+     * @return false as command is not an exit command.
+     */
     boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns a string response by Quack when the command is executed.
+     *
+     * @param tasks TaskList containing the tasks.
+     * @param storage Storage to save the tasks.
+     * @return string to be displayed
+     */
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
         try {
             //Error if user inputs spaces
             if (commandDesc.substring(7).split(" ")[0].equals("")) {

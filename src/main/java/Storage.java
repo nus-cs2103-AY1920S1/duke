@@ -1,8 +1,3 @@
-/**
- * This is a class to deal with writing and loading from hard disk.
- * @author Choong Yong Xin
- */
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,6 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This is a class to deal with writing and loading from hard disk.
+ * @author Choong Yong Xin
+ */
+
 public class Storage {
 
     private String filePath;
@@ -22,6 +22,12 @@ public class Storage {
         this.filePath = currentDirectory + filePath;
     }
 
+    /**
+     * Returns an ArrayList containing the tasks loaded from hard disk.
+     *
+     * @return ArrayList containing the tasks.
+     * @throws DukeException if file not found.
+     */
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<Task>();
         File dataFile = new File(filePath);
@@ -60,14 +66,24 @@ public class Storage {
     }
 
 
-    //Function to append to file
+    /**
+     * Appends string to file.
+     *
+     * @param filePath String representing the filepath to append to.
+     * @param textToAppend String to append to file.
+     */
     void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend + "\n");
         fw.close();
     }
 
-    //Deletes specific line from file
+    /**
+     * Deletes specific line from file.
+     *
+     * @param currentDirectory current directory.
+     * @param line String to delete to file.
+     */
     void deleteFromFile(String currentDirectory, String line) throws IOException {
         File inputFile = new File(currentDirectory + "/data/tasks.txt");
         File tempFile = new File(currentDirectory + "/data/temp.txt");
@@ -90,7 +106,12 @@ public class Storage {
         boolean isRenamed = tempFile.renameTo(inputFile);
     }
 
-    //Edits status of a record
+    /**
+     * Edits specific line from file.
+     *
+     * @param currentDirectory current directory.
+     * @param line String to edit in file.
+     */
     void editsFile(String currentDirectory, String line) throws IOException {
         File inputFile = new File(currentDirectory + "/data/tasks.txt");
         File tempFile = new File(currentDirectory + "/data/temp.txt");

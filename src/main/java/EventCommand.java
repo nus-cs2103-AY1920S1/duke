@@ -1,9 +1,9 @@
+import java.io.IOException;
+
 /**
  * This is a class for command dealing with additions of new event tasks.
  * @author Choong Yong Xin
  */
-
-import java.io.IOException;
 
 public class EventCommand extends Command {
 
@@ -11,12 +11,24 @@ public class EventCommand extends Command {
         super(commandDesc);
     }
 
+    /**
+     * Returns a boolean to indicate whether the command is an exit command.
+     *
+     * @return false as command is not an exit command.
+     */
     boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns a string response by Quack when the command is executed.
+     *
+     * @param tasks TaskList containing the tasks.
+     * @param storage Storage to save the tasks.
+     * @return string to be displayed
+     */
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, EmptyDescDukeException {
+    String execute(TaskList tasks, Storage storage) throws IOException, EmptyDescDukeException {
         try {
             String[] commandLine = commandDesc.substring(6).split(" /at ");
             Event newEvent = new Event(commandLine[0], commandLine[1]);

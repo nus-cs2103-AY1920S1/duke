@@ -10,7 +10,13 @@ public class Parser {
         this.command = command;
     }
 
-    //Makes sense of user input to which command it corresponds to
+    /**
+     * Returns a Command corresponding to the type of command input by user.
+     *
+     * @param command string input by user.
+     * @return Command object corresponding to the command input by user.
+     * @throws DukeException if command is invalid.
+     */
     static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ByeCommand(command);

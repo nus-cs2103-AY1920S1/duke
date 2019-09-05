@@ -1,9 +1,9 @@
+import java.io.IOException;
+
 /**
  * This is a class for command dealing with additions of new deadline tasks.
  * @author Choong Yong Xin
  */
-
-import java.io.IOException;
 
 public class DeadlineCommand extends Command {
 
@@ -11,15 +11,26 @@ public class DeadlineCommand extends Command {
         super(commandDesc);
     }
 
+    /**
+     * Returns a boolean to indicate whether the command is an exit command.
+     *
+     * @return false as command is not an exit command.
+     */
     boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns a string response by Quack when the command is executed.
+     *
+     * @param tasks TaskList containing the tasks.
+     * @param storage Storage to save the tasks.
+     * @return string to be displayed
+     */
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
         try {
-            //Check if description is empty (does not check when user input
-            //multiple spaces as the description.
+            //Check if description is empty.
             String[] commandLine = commandDesc.substring(9).split(" /by ");
             Deadline newDeadline = new Deadline(commandLine[0], commandLine[1]);
             storage.appendToFile(System.getProperty("user.dir") + "/data/tasks.txt", newDeadline.stringForAppend());

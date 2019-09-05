@@ -12,11 +12,19 @@ public class Task {
         this.isDone = false;
     }
 
-
+    /**
+     * Returns status icon of tasks.
+     *
+     * @return 1 if task is done, else 0.
+     */
     public String getStatusIcon() {
         return (isDone ? "1" : "0"); //return tick or X symbols
     }
 
+    /**
+     * Changes boolean isDone to true if task is done.
+     *
+     */
     void markAsDone() {
         isDone = true;
     }

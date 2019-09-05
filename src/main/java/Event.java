@@ -1,17 +1,23 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * This is a class for event tasks.
  * @author Choong Yong Xin
  */
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Event extends Task {
 
     Date at;
     String atString;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description Event description
+     * @param eventDate Event date
+     */
     public Event(String description, String eventDate) {
         super(description);
         try {
@@ -26,7 +32,7 @@ public class Event extends Task {
     /**
      * Returns string for task display.
      *
-     * @return Display string
+     * @return display string
      */
     @Override
     public String toString() {
@@ -36,7 +42,7 @@ public class Event extends Task {
     /**
      * Returns string for file writing.
      *
-     * @return String to be saved.
+     * @return string to be saved.
      */
     @Override
     public String stringForAppend() {

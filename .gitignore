@@ -3,6 +3,12 @@
 /out/
 /*.iml
 
+# User data files
+/data/
+
+# Libraries
+/javafx-sdk-11.0.2/
+
 # Gradle build files
 /.gradle/
 /build/

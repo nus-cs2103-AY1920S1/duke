@@ -19,7 +19,7 @@ import duke.ui.Ui;
 public class Duke {
 
     protected boolean isExit = false;
-    private String filePath = "../data/duke.txt";
+    private static final String filePath = "data/duke.txt";
 
     /**
      * This storage deals with loading tasks from the file and saving tasks in the file.
@@ -76,11 +76,7 @@ public class Duke {
                 ui.printError("Something went wrong: " + e.getMessage());
             }
         }
-        try {
-            this.storage.saveToFile(this.tasks.getAllTasks());
-        } catch (DukeException e) {
-            ui.printError("Something went wrong: " + e.getMessage());
-        }
+
         ui.printBye();
     }
 
@@ -92,6 +88,11 @@ public class Duke {
      */
     protected String getResponse(String input) {
         if (this.isExit) {
+            try {
+                this.storage.saveToFile(this.tasks.getAllTasks());
+            } catch (DukeException e) {
+                ui.printError("Something went wrong: " + e.getMessage());
+            }
             String out = "thisisexitcommand";
             return out;
         }

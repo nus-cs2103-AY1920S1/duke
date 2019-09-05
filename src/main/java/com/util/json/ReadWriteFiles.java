@@ -1,6 +1,5 @@
 package com.util.json;
 
-import com.util.Printer;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,12 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReadWriteFiles {
-
-    private static final String SAVE_FILE = "./data/duke.json";
-
-    public static void write(String content) {
-        write(SAVE_FILE, content);
-    }
 
     /**
      * Given a path and content, makes directories if don't exist then writes the file.
@@ -35,14 +28,6 @@ public class ReadWriteFiles {
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
-        }
-    }
-
-    public static String read() {
-        try {
-            return read(SAVE_FILE);
-        } catch (FileNotFoundException e) {
-            return "";
         }
     }
 

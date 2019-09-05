@@ -19,8 +19,9 @@ public class Duke {
     private TaskList tasks;
     private boolean running;
 
-    public Duke(String path) {
-        storage = new Storage(path);
+
+    public Duke() {
+        storage = new Storage(FILE_PATH);
         ui = new Ui();
         running = true;
         try {
@@ -54,8 +55,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke(FILE_PATH);
+        Duke duke = new Duke();
         duke.start();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
 

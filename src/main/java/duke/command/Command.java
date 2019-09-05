@@ -39,7 +39,9 @@ public abstract class Command {
 
     /**
      * Checks if Duke will end.
-     * @return
+     * @return false
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    }
 }

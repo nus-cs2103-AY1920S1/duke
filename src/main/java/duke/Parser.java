@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.DoneCommand;
+import duke.command.Command;
+
 
 import java.util.InputMismatchException;
 

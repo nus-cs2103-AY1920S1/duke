@@ -38,12 +38,4 @@ public class DoneCommand extends Command {
         return outputString;
     }
 
-    /**
-     * Checks if Duke will end.
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

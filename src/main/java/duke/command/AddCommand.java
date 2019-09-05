@@ -69,13 +69,4 @@ public class AddCommand extends Command {
         outputString = outputString + ui.printNumberOfTasks(taskList);
         return outputString;
     }
-
-    /**
-     * Checks if Duke will end.
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -25,9 +25,9 @@ public class ListCommand extends Command {
      * @param storage Storage interface.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         ArrayList<String> listToPrint = list.printList();
-        ui.showList(listToPrint);
+        return ui.getList(listToPrint);
     }
 
     /**

@@ -23,8 +23,8 @@ public class ByeCommand extends Command {
      * @param storage Storage interface.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return ui.getBye();
     }
 
     /**

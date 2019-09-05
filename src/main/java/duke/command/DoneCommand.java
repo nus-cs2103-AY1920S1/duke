@@ -17,7 +17,6 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String command, Task pending, int taskNumberDone) {
         super(command, pending);
-
         this.taskNumberDone = taskNumberDone;
     }
 
@@ -29,10 +28,10 @@ public class DoneCommand extends Command {
      * @param storage Storage interface.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         Task t = list.setTaskDone(taskNumberDone - 1);
         storage.save(list.printList());
-        ui.showDoneTask(t);
+        return ui.getDoneTask(t);
     }
 
     /**

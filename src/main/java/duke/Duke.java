@@ -11,45 +11,22 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.command.Command;
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
 /**
  * Represents a Duke - interactive bot.
  * Contains functions to operate the bot.
  */
-public class Duke extends Application {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user;
-    private Image duke;
-
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     public Duke(){
-        String path = "https://upload.wikimedia.org/wikipedia/en/4/4d/Minions.png";
-
-        //user = new Image("https://pokestop.io/img/pokemon/jigglypuff-256x256.png");
-        //duke = new Image("https://pokestop.io/img/pokemon/jigglypuff-256x256.png");
-
-        user = new Image(path);
-        duke = new Image(path);
+        String filepath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt";
+        initializeDuke(filepath);
     }
 
     /**
@@ -57,10 +34,9 @@ public class Duke extends Application {
      *
      * @param filePath String of file path to read.
      */
-    public Duke(String filePath) {
+    public void initializeDuke(String filePath) {
         Parser.initialize();
         storage = new Storage(filePath);
-
         ui = new Ui();
 
         try {
@@ -79,14 +55,12 @@ public class Duke extends Application {
      * Runs the duke bot.
      */
     void run() {
-        ui.showWelcome();
-
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
 
-                ui.showLine(); // show the divider line ("_______")
+                //ui.showLine(); // show the divider line ("_______")
 
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
@@ -109,11 +83,48 @@ public class Duke extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt").run();
+    // Stub to reply to GUI
+    String getResponse(String input) {
+        String output = "";
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, ui, storage);
+        }
+        catch (IndexOutOfBoundsException | CommandNotFoundException | NullPointerException | IOException | IncorrectNumberOfArgumentsException o) {
+            //ui.showIndexError();
+            output = "error";
+        } //ui.showInputError();
+        // ui.showCommandNotFoundError();
+        // e.printStackTrace();
+        //  ui.showIncorrectNumberOfArgument();
+
+        return "Duke heard: " + output;
     }
 
-    @Override
+}
+
+/*
+
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+
+private void handleUserInput() {
+    // This function handles duke
+    Label userText = new Label(userInput.getText());
+    Label dukeText = new Label(getResponse(userInput.getText()));
+    dialogContainer.getChildren().addAll(new DialogBox(userText.getText(), user), new DialogBox(dukeText.getText(), duke));
+    userInput.clear();
+}
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+
+
+
+
+ @Override
     public void start(Stage stage) throws Exception {
         //Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         // class javafx.scene.control.Labeled
@@ -141,19 +152,7 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
-    }
-
-    private void createAnchorPane(Stage stage){
+     private void createAnchorPane(Stage stage){
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -198,37 +197,16 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        // This function handles duke
-
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(new DialogBox(userText.getText(), user), new DialogBox(dukeText.getText(), duke));
-        userInput.clear();
+      private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        return textToAdd;
     }
+ */
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    /*
+    public static void main(String[] args) {
+        new Duke("C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt").run();
     }
-
-}
-
-
-
-
-
-
-
-
-
-
+*/
 

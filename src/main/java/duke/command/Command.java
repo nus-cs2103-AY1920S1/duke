@@ -42,7 +42,7 @@ public abstract class Command {
     /**
      * Perform command actions.
      */
-    public abstract void execute(TaskList list, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList list, Ui ui, Storage storage) throws IOException;
 
     /**
      * Return boolean indicating if command is exit command.

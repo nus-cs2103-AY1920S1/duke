@@ -24,6 +24,10 @@ public class Ui {
         System.out.println(greeting);
     }
 
+    public String getWelcome(){
+        return "Hello! I'm Duke, what can I do for you?";
+    }
+
     /**
      * Display line.
      */
@@ -39,6 +43,10 @@ public class Ui {
         final String goodbye = "Bye. Hope to see you again soon!";
         sc.close();
         System.out.println(goodbye);
+    }
+
+    public String getBye(){
+       return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -74,6 +82,18 @@ public class Ui {
         System.out.println("Now you have " + numberOfItems + " in the list.");
     }
 
+    public String getAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
+        char icon;
+        if(isDone){
+            icon = '✓';
+        }
+        else{
+            icon = '❌';
+        }
+        return "Got it. I've added this task: " + "\t[" + firstAlphabet + "][" + icon + "] " + taskDescription + "Now" +
+               " you " + "have " + numberOfItems + " in the list.";
+    }
+
     /**
      * Display list message.
      */
@@ -82,6 +102,14 @@ public class Ui {
         for (int i = 0; i < listToPrint.size(); i++) {
             System.out.println((i + 1) + "." + listToPrint.get(i));
         }
+    }
+
+    public String getList(ArrayList<String> listToPrint) {
+        String result = "Here are the tasks in your list:";
+        for (int i = 0; i < listToPrint.size(); i++) {
+           result = result + (i + 1) + "." + listToPrint.get(i);
+        }
+        return result;
     }
 
     /**
@@ -93,12 +121,20 @@ public class Ui {
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
+    public String getDeletedTask(Task t, int taskCount) {
+        return "Noted. I've removed this task:" + t.printTask() + "Now you have " + taskCount + " tasks in the list.";
+    }
+
     /**
      * Display task done message.
      */
     public void showDoneTask(Task t) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(t.printTask());
+    }
+
+    public String getDoneTask(Task t) {
+        return "Nice! I've marked this task as done:" + t.printTask();
     }
 
     /**
@@ -135,6 +171,19 @@ public class Ui {
         for (int i = 0; i < listFound.size(); i++) {
             System.out.println((i + 1) + "." + listFound.get(i));
         }
+    }
+
+    public String getMatchingTaskList(ArrayList<String> listFound) {
+        if (listFound.size() == 0) {
+            return "No matching result from your list.";
+        }
+
+        String result;
+        result = "Here are the matching tasks in your list:";
+        for (int i = 0; i < listFound.size(); i++) {
+            result = result + (i + 1) + "." + listFound.get(i);
+        }
+        return result;
     }
 
     public void showIncorrectNumberOfArgument() {

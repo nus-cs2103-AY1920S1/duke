@@ -17,6 +17,7 @@ public abstract class Command {
 
     /**
      * Execute the command on target task list and print command information through target user end.
+     *
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
      * @throws DukeException Based on requirements of a Command subclass.
@@ -25,7 +26,13 @@ public abstract class Command {
 
     /**
      * Determines whether this is an exit command.
+     *
      * @return boolean, true if the specific command is an exit command, false otherwise.
      */
     public abstract boolean isExit();
+
+    protected void checkNullPointer(TaskList tl, Ui ui) {
+        assert tl != null: "This command is pointing to a null task list.";
+        assert ui != null: "This command is pointing to a null user interface.";
+    }
 }

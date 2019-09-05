@@ -27,6 +27,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {
+        checkNullPointer(tl, ui);
         try {
             tl.rewrite();
             return ui.showExitMessage();

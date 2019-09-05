@@ -111,7 +111,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             if (handleUserInput()) {
                 Platform.exit();
-            };
+            }
         });
     }
 

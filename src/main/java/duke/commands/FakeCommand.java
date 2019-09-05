@@ -26,6 +26,7 @@ public class FakeCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {
+        checkNullPointer(tl, ui);
         throw new DukeException("Please input a valid command.");
     }
 

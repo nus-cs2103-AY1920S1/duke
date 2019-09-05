@@ -49,6 +49,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {
+        checkNullPointer(tl, ui);
+        assert taskType == "T" || taskType == "E" || taskType == "D":
+                "taskType is invalid in the AddCommand.";
         Task toAdd;
         if (taskType.equals("T")) {
             toAdd = new Todo(taskName);

@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {
+        checkNullPointer(tl, ui);
         if (position > tl.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }

@@ -29,6 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {
+        checkNullPointer(tl, ui);
         if (target.equals("")) {
             throw new DukeException("The finding message cannot be empty");
         }

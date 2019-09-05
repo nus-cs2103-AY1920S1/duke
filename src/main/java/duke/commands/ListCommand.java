@@ -24,6 +24,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tl, Ui ui) {
+        checkNullPointer(tl, ui);
         return ui.showListMessage(tl.listAllTask());
     }
 

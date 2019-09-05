@@ -1,51 +1,32 @@
 package com.util.json;
 
 import com.util.Printer;
+import java.util.HashMap;
 
-public class JsonObject {
+public class JsonObject extends HashMap<String,JsonValue> {
 
-    /**
-     * True if object has no keys, False if a key exists.
-     */
-    private boolean empty = true;
-    /**
-     * String used to hold current json format.
-     */
-    private String formattedString = "";
-
-    /**
-     * Appends a Json formatted string value into this object.
-     * @param key   string key
-     * @param value Json formatted value
-     * @return      this object
-     */
-    private JsonObject putLiteral(String key, String value) {
-        if (!empty) {
-            formattedString += ",\n";
-        }
-        formattedString += Printer.surroundQuotes(key) + ": " + value;
-        empty = false;
-        return this;
+    public JsonValue put(String key, int value) {
+        return super.put(key, new JsonValue(value));
     }
 
-    /**
-     * Call to insert a string into the object.
-     * @param key   string key
-     * @param value string value
-     * @return      this object
-     */
-    public JsonObject put(String key, String value) {
-        return putLiteral(key, Printer.surroundQuotes(value));
+    public JsonValue put(String key, double value) {
+        return super.put(key, new JsonValue(value));
     }
 
-    /**
-     * Call to insert non string values into the object.
-     * @param key   string key
-     * @param value object value
-     * @return      this object
-     */
-    public JsonObject put(String key, Object value) {
-        return putLiteral(key, value.toString());
+    public JsonValue put(String key, boolean value) {
+        return super.put(key, new JsonValue(value));
+    }
+
+    public JsonValue put(String key, String value) {
+        return super.put(key, new JsonValue(value));
+    }
+
+    public JsonValue put(String key, JsonObject value) {
+        return super.put(key, new JsonValue(value));
+    }
+
+    public JsonValue put(String key, JsonArray value) {
+        return super.put(key, new JsonValue(value));
     }
 
     /**
@@ -53,6 +34,18 @@ public class JsonObject {
      * @return  string representation
      */
     public String toString() {
-        return "{\n" + Printer.indentString(formattedString) + "}";
+        StringBuilder formattedString = new StringBuilder("");
+        boolean empty = true;
+        for (HashMap.Entry<String, JsonValue> entry : entrySet()) {
+            if (!empty) {
+                formattedString.append(",\n");
+            } else {
+                empty = false;
+            }
+            String key = JsonParser.formatStringForJson(entry.getKey());
+            String value = entry.getValue().toString();
+            formattedString.append(key).append(": ").append(value);
+        }
+        return "{\n" + Printer.indentString(formattedString.toString()) + "}";
     }
 }

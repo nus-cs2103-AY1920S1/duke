@@ -8,7 +8,6 @@ import com.tasks.Todo;
 import com.util.Printer;
 import com.util.datetime.DateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class JsonParser {
 
@@ -25,14 +24,14 @@ public class JsonParser {
         }
         try {
             ArrayList<DoableTask> arr = new ArrayList<>();
-            for (DynamicValue o : parseJsonArray(input.toCharArray(), 0).snd) {
+            for (JsonValue o : parseJsonArray(input.toCharArray(), 0).snd) {
                 if (o.getType() != ValueTypes.OBJECT) {
                     throw new SaveFileFormatException(
                             "JSON array immediate elements must be tasks");
                 } else {
-                    HashMap<String,DynamicValue> obj = o.getObject();
-                    DynamicValue task;
-                    HashMap<String,DynamicValue> attributes;
+                    JsonObject obj = o.getObject();
+                    JsonValue task;
+                    JsonObject attributes;
                     TaskTypes type;
                     if ((task = obj.get(Schema.TASK_TODO)) != null) {
                         type = TaskTypes.TODO;
@@ -124,9 +123,9 @@ public class JsonParser {
      * @return resulting index and array
      * @throws SaveFileFormatException file format error
      */
-    private static Pair<Integer,ArrayList<DynamicValue>> parseJsonArray(char[] input, int i)
+    private static Pair<Integer,JsonArray> parseJsonArray(char[] input, int i)
             throws SaveFileFormatException {
-        ArrayList<DynamicValue> arr = new ArrayList<>();
+        JsonArray arr = new JsonArray()
         i = skipWhiteSpace(input, i);
         if (input[i] != '[') {
             throw new SaveFileFormatException("Expecting [ at " + i, 2);
@@ -150,7 +149,7 @@ public class JsonParser {
             }
             // advance ',' between value pairs
 
-            Pair<Integer,DynamicValue> valuePair = processDynamicValue(input, i);
+            Pair<Integer,JsonValue> valuePair = processDynamicValue(input, i);
             i = skipWhiteSpace(input, valuePair.fst);
             arr.add(valuePair.snd);
             // parse value
@@ -175,9 +174,9 @@ public class JsonParser {
      * @return resulting index and object / key value pairs HashMap
      * @throws SaveFileFormatException file format error
      */
-    private static Pair<Integer,HashMap<String,DynamicValue>> parseJsonObject(char[] input, int i)
+    private static Pair<Integer,JsonObject> parseJsonObject(char[] input, int i)
             throws SaveFileFormatException {
-        HashMap<String,DynamicValue> obj = new HashMap<>();
+        JsonObject obj = new JsonObject();
         i = skipWhiteSpace(input, i);
         if (input[i] != '{') {
             throw new SaveFileFormatException("Expecting { at " + i, 2);
@@ -218,7 +217,7 @@ public class JsonParser {
             i = skipWhiteSpace(input, i + 1);
             // find ':'
 
-            Pair<Integer,DynamicValue> valuePair = processDynamicValue(input, i);
+            Pair<Integer,JsonValue> valuePair = processDynamicValue(input, i);
             i = skipWhiteSpace(input, valuePair.fst);
             obj.put(key, valuePair.snd);
             // parse value
@@ -243,34 +242,34 @@ public class JsonParser {
      * @return resulting index and DynamicValue; algebraic sum type of all possible ValueTypes
      * @throws SaveFileFormatException file format error
      */
-    private static Pair<Integer,DynamicValue> processDynamicValue(char[] input, int i)
+    private static Pair<Integer,JsonValue> processDynamicValue(char[] input, int i)
             throws SaveFileFormatException {
-        Pair<Integer,DynamicValue> obj;
+        Pair<Integer,JsonValue> obj;
         try {
             Pair<Integer,Integer> res1 = parseJsonInt(input, i);
-            obj = new Pair<>(res1.fst, new DynamicValue(res1.snd));
+            obj = new Pair<>(res1.fst, new JsonValue(res1.snd));
         } catch (SaveFileFormatException e1) {
             try {
                 Pair<Integer,Double> res2 = parseJsonDouble(input, i);
-                obj = new Pair<>(res2.fst, new DynamicValue(res2.snd));
+                obj = new Pair<>(res2.fst, new JsonValue(res2.snd));
             } catch (SaveFileFormatException e2) {
                 try {
                     Pair<Integer,Boolean> res3 = parseJsonBoolean(input, i);
-                    obj = new Pair<>(res3.fst, new DynamicValue(res3.snd));
+                    obj = new Pair<>(res3.fst, new JsonValue(res3.snd));
                 } catch (SaveFileFormatException e3) {
                     try {
                         Pair<Integer,String> res4 = parseJsonString(input, i);
-                        obj = new Pair<>(res4.fst, new DynamicValue(res4.snd));
+                        obj = new Pair<>(res4.fst, new JsonValue(res4.snd));
                     } catch (SaveFileFormatException e4) {
                         try {
-                            Pair<Integer,HashMap<String,DynamicValue>> res5 = parseJsonObject(input,
+                            Pair<Integer,JsonObject> res5 = parseJsonObject(input,
                                     i);
-                            obj = new Pair<>(res5.fst, new DynamicValue(res5.snd));
+                            obj = new Pair<>(res5.fst, new JsonValue(res5.snd));
                         } catch (SaveFileFormatException e5) {
                             try {
-                                Pair<Integer,ArrayList<DynamicValue>> res6 = parseJsonArray(input,
+                                Pair<Integer,JsonArray> res6 = parseJsonArray(input,
                                         i);
-                                obj = new Pair<>(res6.fst, new DynamicValue(res6.snd));
+                                obj = new Pair<>(res6.fst, new JsonValue(res6.snd));
                             } catch (SaveFileFormatException e6) {
                                 if (e3.getErrorCode() == 2 && e4.getErrorCode() == 2
                                         && e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
@@ -410,10 +409,13 @@ public class JsonParser {
             } else if (input[i] == '\\' && !escape) {
                 escape = true;
             } else if (escape) {
-                if (input[i] == '"' || input[i] == '\\') {
+                if (input[i] == '"') {
                     value.append(input[i]);
                 } else if (input[i] == 'n') {
                     value.append('\n');
+                } else {
+                    value.append('\\');
+                    value.append(input[i]);
                 }
                 escape = false;
             } else {

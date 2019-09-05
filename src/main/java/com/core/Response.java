@@ -1,5 +1,6 @@
 package com.core;
 
+import com.core.savedata.SaveFile;
 import com.util.json.JsonArray;
 import com.util.json.ReadWriteFiles;
 import com.util.datetime.DateTime;
@@ -203,8 +204,8 @@ public enum Response {
     private static void save(State s) {
         JsonArray arr = new JsonArray();
         for (DoableTask t : s.list) {
-            arr.put(t.toJson());
+            arr.add(t.toJson());
         }
-        ReadWriteFiles.write(arr.toString());
+        SaveFile.write(arr.toString());
     }
 }

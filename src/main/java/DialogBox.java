@@ -2,6 +2,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.scene.Node;
 
 public class DialogBox extends HBox {
     private Label text;
@@ -17,5 +20,22 @@ public class DialogBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+    }
+
+    private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(tmp);
+        this.getChildren().setAll(tmp);
+    }
+
+    public static DialogBox getUserDialog(Label l, ImageView iv) {
+        return new DialogBox(l, iv);
+    }
+
+    public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        DialogBox box = new DialogBox(l, iv);
+        box.flip();
+        return box;
     }
 }

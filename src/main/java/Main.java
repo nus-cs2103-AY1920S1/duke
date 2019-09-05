@@ -98,8 +98,8 @@ public class Main extends Application {
         Label userText = new Label(command);
         Label dukeText = new Label(duke.getResponse(command));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userImage)),
-                new DialogBox(dukeText, new ImageView(dukeImage))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
     }
 }

@@ -27,9 +27,9 @@ public class Storage {
      * @param textToAdd String that the user wants to write to a file.
      * @throws IOException
      */
-    public void writeToFile(String textToAdd) throws IOException {
+    public void writeToFile(String... textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
+        fw.write(textToAdd[0]);
         fw.close();
     }
 

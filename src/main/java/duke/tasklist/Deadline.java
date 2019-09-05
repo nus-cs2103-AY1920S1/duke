@@ -1,7 +1,12 @@
-public class Event extends Task {
+package duke.tasklist;
+
+import duke.date.Date;
+import duke.tasklist.Task;
+
+public class Deadline extends Task {
     Date time;
 
-    public Event(String description, String time) {
+    public Deadline(String description, String time) {
         super(description);
         String[] dateAndTime = time.split(" ");
         String[] date = dateAndTime[0].split("/");
@@ -14,7 +19,7 @@ public class Event extends Task {
 
     @Override
     public String saveString() {
-        String saveString = "E | ";
+        String saveString = "D | ";
 
         if (this.isCompleted()) {
             saveString += 1;
@@ -33,6 +38,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + this.getMark() + "] " + this.getDescription() + " (at: " + time + ")\n";
+        return "[D][" + this.getMark() + "] " + this.getDescription() + " (by: " + time + ")\n";
     }
 }

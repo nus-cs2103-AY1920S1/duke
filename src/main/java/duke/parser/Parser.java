@@ -1,3 +1,6 @@
+package duke.parser;
+
+
 public class Parser {
     public boolean isTodo(String[] tokens) {
         return tokens[0].equals("todo");

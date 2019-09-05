@@ -1,13 +1,12 @@
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.*;
+import duke.ui.Ui;
 
 public class Duke {
     /**
-     * Main method of Duke application.
+     * Main method of duke.Duke application.
      */
     public static void main(String[] args) {
         // Create a scanner to take in user input
@@ -17,7 +16,7 @@ public class Duke {
         String contents = Storage.readFile();
 
         System.out.println(
-                Ui.formatMessage("Hello, I'm Duke\nWhat can I do for you?")
+                Ui.formatMessage("Hello, I'm duke.Duke\nWhat can I do for you?")
         );
 
         TaskList tasks = new TaskList();

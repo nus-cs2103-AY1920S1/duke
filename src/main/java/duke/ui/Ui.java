@@ -1,3 +1,5 @@
+package duke.ui;
+
 public class Ui {
     public static String formatMessage(String message) {
         String formatted = "    ____________________________________________________________\n";

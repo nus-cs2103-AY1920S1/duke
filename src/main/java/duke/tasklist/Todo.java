@@ -1,3 +1,7 @@
+package duke.tasklist;
+
+import duke.tasklist.Task;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

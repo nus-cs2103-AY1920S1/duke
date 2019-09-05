@@ -8,7 +8,12 @@ public abstract class Task {
     public Boolean done;
     SimpleDateFormat formatter;
 
-    public Task(String name, SimpleDateFormat formatter) {
+    /**
+     * defines a generic constructor for all Task subclasses.
+     * @param name String name.
+     * @param formatter DateTime formatter.
+     */
+    Task(String name, SimpleDateFormat formatter) {
         this.name = name;
         this.done = false;
         this.formatter = formatter;

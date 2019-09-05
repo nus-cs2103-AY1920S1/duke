@@ -23,7 +23,7 @@ public class ToDos extends Task {
     @Override
     public String saveText() {
         String output = "T|";
-        if(this.done) {
+        if (this.done) {
             output += "1|";
         } else {
             output += "0|";

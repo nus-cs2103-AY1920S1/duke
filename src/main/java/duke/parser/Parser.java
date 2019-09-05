@@ -1,13 +1,24 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.AddCommand;
+import duke.command.ListCommand;
+import duke.command.ExitCommand;
+import duke.command.DeleteCommand;
 
 public class Parser {
 
-    public static Command parse(String fullCommand) throws IllegalArgumentException{
+    /**
+     * method that handles input, takes in a String and adds its allocated Command.
+     * @param fullCommand String input from user.
+     * @return Command based on the first word of String command.
+     * @throws IllegalArgumentException if the command is not one of the valid ones.
+     */
+    public static Command parse(String fullCommand) throws IllegalArgumentException {
         String[] splitCommand = fullCommand.split(" ", 0);
-        if(splitCommand[0].equals("todo") || splitCommand[0].equals("deadline")
+        if (splitCommand[0].equals("todo") || splitCommand[0].equals("deadline")
                 || splitCommand[0].equals("event")) {
             return new AddCommand(fullCommand, splitCommand);
         } else if (splitCommand[0].equals("done")) {

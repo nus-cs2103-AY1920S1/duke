@@ -10,6 +10,9 @@ public class Ui {
     String bar;
     Scanner sc;
 
+    /**
+     * constructor for UI class that stores default logo, linebreak and Scanner object.
+     */
     public Ui() {
         this.logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,6 +24,9 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * method that produces welcome screen of project.
+     */
     public void welcome() {
         System.out.print(logo);
         this.bar();
@@ -33,10 +39,13 @@ public class Ui {
     }
 
     public String inputCommand() {
-        String command = sc.nextLine();
-        return command;
+        return sc.nextLine();
     }
 
+    /**
+     * method that prints message for a successful adding of task to ArrayList.
+     * @param listManager to access actual list of tasks.
+     */
     public void successfulAdd(ListManager listManager) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + listManager.actualList.get(listManager.actualList.size() - 1));

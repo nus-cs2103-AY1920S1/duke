@@ -5,14 +5,25 @@ import java.util.Date;
 
 public class Deadlines extends Task {
 
-    Date date;
+    private Date date;
 
+    /**
+     * constructor for Deadlines. accesses name and formatter from parent.
+     * @param name String name.
+     * @param formatter formatter for date and time.
+     * @param date date object.
+     */
     public Deadlines(String name, SimpleDateFormat formatter, Date date) {
         super(name, formatter);
         this.type = "[D]";
         this.date = date;
     }
 
+    /**
+     * Overrides toString method to reflect appropriate form of printing task.
+     * @return String output of task.
+     */
+    @Override
     public String toString() {
         String output;
         if (this.done) {
@@ -23,10 +34,14 @@ public class Deadlines extends Task {
         return output;
     }
 
+    /**
+     * Overrides saveText method to produce String to be saved in txt file.
+     * @return String output.
+     */
     @Override
     public String saveText() {
         String output = "D|";
-        if(this.done) {
+        if (this.done) {
             output += "1|";
         } else {
             output += "0|";

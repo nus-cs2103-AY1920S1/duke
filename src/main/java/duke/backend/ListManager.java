@@ -1,16 +1,17 @@
 package duke.backend;
 
-import duke.task.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+import duke.task.Task;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.ToDos;
 
 public class ListManager {
     public ArrayList<Task> actualList;
-    SimpleDateFormat formatter;
+    private SimpleDateFormat formatter;
 
     public ListManager(SimpleDateFormat formatter) {
         this.actualList = new ArrayList<>();
@@ -22,9 +23,15 @@ public class ListManager {
         this.formatter = formatter;
     }
 
+    /**
+     * Add Command that creates the different Tasks based on the first word.
+     * @param fullCommand full String command.
+     * @param splitCommand output of java.split(fullCommand).
+     */
     public void add(String fullCommand, String[] splitCommand) {
-        if(splitCommand[0].equals("todo")) {
-            String[] stringBreaker = fullCommand.split("todo",2);
+        switch (splitCommand[0]) {
+        case "todo": {
+            String[] stringBreaker = fullCommand.split("todo", 2);
             if (!stringBreaker[1].equals("")) {
                 ToDos todo = new ToDos(stringBreaker[1], this.formatter);
                 actualList.add(todo);
@@ -32,9 +39,11 @@ public class ListManager {
                 //Should throw exception here
                 System.out.println("\t☹ OOPS!!! The description of a todo cannot be empty.");
             }
-        } else if (splitCommand[0].equals("deadline")) {
+            break;
+        }
+        case "deadline": {
             String newString = fullCommand.substring(9);
-            String[] stringBreaker = newString.split("/by",2);
+            String[] stringBreaker = newString.split("/by", 2);
             try {
                 Date date = formatter.parse(stringBreaker[1]);
                 Deadlines deadline = new Deadlines(stringBreaker[0], formatter, date);
@@ -42,9 +51,11 @@ public class ListManager {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else if (splitCommand[0].equals("event")) {
+            break;
+        }
+        case "event": {
             String newString = fullCommand.substring(6);
-            String[] stringBreaker = newString.split("/at",2);
+            String[] stringBreaker = newString.split("/at", 2);
             try {
                 Date date = formatter.parse(stringBreaker[1]);
                 Events event = new Events(stringBreaker[0], formatter, date);
@@ -52,25 +63,35 @@ public class ListManager {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        } else {
+            break;
+        }
+        default:
             //Throw exception here
             System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
         }
     }
 
+    /**
+     * Iterates through the list and prints out each item.
+     */
     public void iterate() {
         if (this.actualList.isEmpty()) {
             System.out.println("\tYou have nothing on your to-do list!");
         } else {
             System.out.println("\tHere are the tasks in your list:");
-            for(int i = 0; i < actualList.size(); i++) {
+            for (int i = 0; i < actualList.size(); i++) {
                 System.out.print('\t');
-                System.out.print(i+1 + ".");
+                System.out.print((i + 1) + ".");
                 System.out.println(actualList.get(i));
             }
         }
     }
 
+    /**
+     * Sets a task within the list (of given index) as completed.
+     * @param index index of task stored within the list.
+     */
     public void done(int index) {
         if (index <= actualList.size()) {
             actualList.get(index - 1).done = true;
@@ -81,6 +102,10 @@ public class ListManager {
         }
     }
 
+    /**
+     * removes task of given index from the list.
+     * @param index index of task stored within the list.
+     */
     public void delete(int index) {
         Task removed = this.actualList.remove(index - 1);
         System.out.println("\tNoted. I've removed this task:");
@@ -88,13 +113,17 @@ public class ListManager {
         System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
     }
 
+    /**
+     * searches through the list and outputs every task in which its name contains the query.
+     * @param query String query to search for tasks.
+     */
     public void find(String query) {
         if (this.actualList.isEmpty()) {
             System.out.println("\tYou have nothing on your to-do list!");
         } else {
             ArrayList<Task> tempList = new ArrayList<>();
             for (int i = 0; i < actualList.size(); i++) {
-                if (actualList.get(i).name.contains(query) == true) {
+                if (actualList.get(i).name.contains(query)) {
                     tempList.add(actualList.get(i));
                 }
             }
@@ -103,7 +132,7 @@ public class ListManager {
             } else {
                 for (int j = 0; j < tempList.size(); j++) {
                     System.out.print('\t');
-                    System.out.print(j+1 + ".");
+                    System.out.print((j + 1) + ".");
                     System.out.println(tempList.get(j));
                 }
             }

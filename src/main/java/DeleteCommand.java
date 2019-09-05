@@ -9,6 +9,7 @@ public class DeleteCommand extends Command {
         this.deleteIdx = idx;
     }
 
+    @Override
     String execute(TaskList tasks, Storage storage) throws DukeInvalidTaskException, DukeIoException {
         if (deleteIdx < 1 || deleteIdx > tasks.size()) {
             throw new DukeInvalidTaskException(deleteIdx);
@@ -20,6 +21,7 @@ public class DeleteCommand extends Command {
         return result;
     }
 
+    @Override
     boolean isExit() {
         return false;
     }

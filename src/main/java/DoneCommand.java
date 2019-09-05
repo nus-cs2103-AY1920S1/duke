@@ -9,6 +9,7 @@ public class DoneCommand extends Command {
         this.doneIdx = idx;
     }
 
+    @Override
     String execute(TaskList tasks, Storage storage) throws DukeInvalidTaskException, DukeIoException {
         if (doneIdx < 1 || doneIdx > tasks.size()) {
             throw new DukeInvalidTaskException(doneIdx);
@@ -18,6 +19,7 @@ public class DoneCommand extends Command {
         return "Nice! I've marked this task as done:\n  " + tasks.get(doneIdx);
     }
 
+    @Override
     boolean isExit() {
         return false;
     }

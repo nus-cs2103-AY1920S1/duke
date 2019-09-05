@@ -12,6 +12,7 @@ public class DeadlineCommand extends Command {
         this.by = by;
     }
 
+    @Override
     String execute(TaskList tasks, Storage storage) throws DukeInvalidDateException, DukeIoException {
         Task t = new DeadlineTask(description, by);
         tasks.add(t);
@@ -22,6 +23,7 @@ public class DeadlineCommand extends Command {
         return result;
     }
 
+    @Override
     boolean isExit() {
         return false;
     }

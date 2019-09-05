@@ -5,6 +5,7 @@ public class TodoCommand extends Command {
         this.description = description;
     }
 
+    @Override
     String execute(TaskList tasks, Storage storage) throws DukeIoException {
         Task t = new TodoTask(description);
         tasks.add(t);
@@ -15,6 +16,7 @@ public class TodoCommand extends Command {
         return result;
     }
 
+    @Override
     boolean isExit() {
         return false;
     }

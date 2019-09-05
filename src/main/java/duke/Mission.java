@@ -1,3 +1,4 @@
+package duke;
 public class Mission {
     enum MissionType {
         T, D, E;
@@ -68,11 +69,11 @@ public class Mission {
         }
     }
 
-    public void printMission() {
+    public String printMission() {
         if(time != null) {
-            System.out.println("[" + type + "][" + state + "] " + content + " (" + atby + ":" + time + ")");
+            return "[" + type + "][" + state + "] " + content + " (" + atby + ":" + time + ")\n";
         } else {
-            System.out.println("[" + type + "][" + state + "] " + content);
+            return "[" + type + "][" + state + "] " + content + "\n";
         }
     }
 
@@ -83,7 +84,7 @@ public class Mission {
 
     public static Mission newMission(String str) {
         System.out.println("*******" + str);
-        String[] s = str.split("|");
+        String[] s = str.split("\\|");
         String MissionType = s[0];
         String state = (s[1].contentEquals("0")) ? "✗" : "✓";
         String content = s[2];

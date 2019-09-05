@@ -1,3 +1,4 @@
+package duke;
 public class Time {
     int date;
     int month;

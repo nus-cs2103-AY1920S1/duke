@@ -20,9 +20,7 @@ public class Ui {
             textInput = "bye";
         }
 
-        while (!textInput.equals("bye")) {
-            Parser.parse(textInput);
-        }
+        Parser.parse(textInput);
 
         // Close the scanner
         sc.close();

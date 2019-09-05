@@ -52,7 +52,7 @@ public class Parser {
             }
 
             int completedIndex = Integer.parseInt(textInput.replaceFirst("done ", "")) - 1;
-            if (completedIndex < 0 || completedIndex >= TaskList.getCounter()) {
+            if (isInvalidIndex(completedIndex)) {
                 throw new DukeException("OOPS!!! Index not found.");
             }
 
@@ -63,7 +63,7 @@ public class Parser {
             }
 
             int deletedIndex = Integer.parseInt(textInput.replaceFirst("delete ", "")) - 1;
-            if (deletedIndex < 0 || deletedIndex >= TaskList.getCounter()) {
+            if (isInvalidIndex(deletedIndex)) {
                 throw new DukeException("OOPS!!! Index not found.");
             }
 
@@ -75,6 +75,8 @@ public class Parser {
 
             String keyWord = textInput.replaceFirst("find ", "");
             return TaskList.findTask(keyWord);
+        } else if (textInput.equals("bye")) {
+            return Ui.endOfInteractions();
         } else {
             return parseTasks(textInput);
         }
@@ -82,5 +84,9 @@ public class Parser {
 
     private static boolean isInvalidCommand(String textInput, String command) {
         return textInput.equals(command) || textInput.equals(command + " ");
+    }
+
+    private static boolean isInvalidIndex(int index) {
+        return index < 0 || index >= TaskList.getCounter();
     }
 }

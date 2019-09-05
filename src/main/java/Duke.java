@@ -1,5 +1,3 @@
-import com.util.json.JsonParser;
-import com.util.json.SaveData;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
@@ -18,7 +16,8 @@ public class Duke {
         // greet
 
         Scanner scanner = new Scanner(System.in);
-        State state = new State(JsonParser.parseJsonFile(SaveData.read()));
+
+        State state = new State();//new State(JsonParser.parseJsonFile(SaveData.read()));
         try {
             while (!state.toExit) {
                 String input = scanner.nextLine();

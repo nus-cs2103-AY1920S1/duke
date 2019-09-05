@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SaveData {
+public class ReadWriteFiles {
 
     private static final String SAVE_FILE = "./data/duke.json";
 

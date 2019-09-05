@@ -1,6 +1,6 @@
 package com.util.json;
 
-public class SaveFileFormatException extends Exception {
+public class JsonFormatException extends Exception {
 
     /**
      * 1 - failed due to content of file.
@@ -11,7 +11,7 @@ public class SaveFileFormatException extends Exception {
     /**
      * Construct the exception without message and default errorCode.
      */
-    public SaveFileFormatException() {
+    public JsonFormatException() {
         super();
         errorCode = 1;
     }
@@ -21,7 +21,7 @@ public class SaveFileFormatException extends Exception {
      * @param msg   message
      * @param err   errorCode
      */
-    public SaveFileFormatException(String msg, Integer err) {
+    public JsonFormatException(String msg, Integer err) {
         super(msg);
         errorCode = err;
     }
@@ -30,7 +30,7 @@ public class SaveFileFormatException extends Exception {
      * Construct the exception with message and default errorCode.
      * @param msg   message
      */
-    public SaveFileFormatException(String msg) {
+    public JsonFormatException(String msg) {
         super(msg);
         errorCode = 1;
     }

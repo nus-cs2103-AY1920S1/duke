@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDateTime at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/MM/yyyy Hmm"));
     }
 
     @Override

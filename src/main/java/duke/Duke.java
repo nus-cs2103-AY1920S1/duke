@@ -1,6 +1,10 @@
 package duke;
 
 import java.io.File;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * This program is an interactive task list that takes in several
@@ -10,7 +14,7 @@ import java.io.File;
  * @author Gabriel Ong
  *
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -18,11 +22,10 @@ public class Duke {
 
     /**
      * Returns a instance of duke.
-     * @param filePath a filepath indicating the storage directory for duke
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("." + File.separator + "data");
         try {
             tasks = storage.load();
         } catch (DukeException e) {
@@ -50,7 +53,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("." + File.separator + "data").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

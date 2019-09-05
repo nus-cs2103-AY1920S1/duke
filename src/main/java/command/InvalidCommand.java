@@ -15,15 +15,11 @@ public class InvalidCommand extends Command {
      * @param tasks the TaskList.
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
+     * @return Executed output as String.
      * @see InvalidInstructionException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInstructionException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInstructionException {
         throw new InvalidInstructionException();
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

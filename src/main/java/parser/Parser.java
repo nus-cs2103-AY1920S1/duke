@@ -1,3 +1,5 @@
+package parser;
+
 import command.Command;
 import command.DoneCommand;
 import command.ListCommand;
@@ -18,7 +20,7 @@ public class Parser {
      * Parser is responsible for understanding the user's input. It will parse the
      * input and react with a suitable command.
      * @param userInput users's input as String
-     * @return a Command
+     * @return the respective Command.
      * @See Command
      */
     public static Command parse(String userInput) {

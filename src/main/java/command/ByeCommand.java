@@ -15,15 +15,13 @@ public class ByeCommand extends Command {
      * @param tasks the TaskList.
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
+     * @return Executed output as String.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.println("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks);
+        return "Bye. Hope to see you again soon!";
+
     }
 
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

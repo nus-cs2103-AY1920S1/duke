@@ -23,32 +23,30 @@ public class DoneCommand extends Command {
      * @param tasks the TaskList.
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
+     * @return Executed output as String.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
         if (input.length <= 1) {
             throw new DoneException();
         } else {
             int taskToBeDone = Integer.parseInt(input[1]);
-            if (tasks.getTaskList().size() < taskToBeDone) {
+            if (tasks.getSize() < taskToBeDone) {
                 throw new DoneException("OOPS!!! There is no such task in your list!\n"
                         + "Current number of tasks = " + tasks.getTaskList().size());
             } else {
-                Task task = tasks.getTaskList().get(taskToBeDone - 1);
+                String output = "";
+                Task task = tasks.getTask(taskToBeDone - 1);
                 if (task.isDone()) {
-                    ui.println("Hey! I've already marked this task as done :)");
-                    ui.println("  " + task);
+                    output += "Hey! I've already marked this task as done :)\n";
+                    output += "  " + task + "\n";
                 } else {
                     task.markAsDone();
-                    ui.println("Nice! I've marked this task as done:");
-                    ui.println("  " + task);
+                    output += "Nice! I've marked this task as done:\n";
+                    output += "  " + task + "\n";
                 }
+                return output;
             }
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

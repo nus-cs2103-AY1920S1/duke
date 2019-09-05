@@ -40,6 +40,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[\u2718] " + description;
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 }

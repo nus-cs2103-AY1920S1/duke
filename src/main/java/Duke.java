@@ -41,10 +41,12 @@ public class Duke {
 
                 case "list":
                     printDuke(LINE);
-                    System.out.println("    Here are the tasks in your list:");
                     if (list.isEmpty()) {
+                        printDuke("There is nothing in your list.");
+                        printDuke(LINE);
                         break;
                     }
+                    System.out.println("    Here are the tasks in your list:");
                     for (int i = 0; i < list.size(); i++) {
                         Task task = list.get(i);
                         printDuke((i + 1) + ". [" + task.getType() + "][" +
@@ -79,7 +81,7 @@ public class Duke {
                         printDuke(LINE);
                     } catch (ArrayIndexOutOfBoundsException exception) {
                         printDuke(LINE);
-                        printDuke("☹ OOPS!!! The description of a todo cannot be empty.");
+                        printDuke("\u2639 OOPS!!! The description of a todo cannot be empty.");
                         printDuke(LINE);
                     }
                     break;
@@ -101,12 +103,12 @@ public class Duke {
                             printDuke(LINE);
                         } catch (ArrayIndexOutOfBoundsException exception) {
                             printDuke(LINE);
-                            printDuke("☹ OOPS!!! Please enter when the deadline is due");
+                            printDuke("\u2639 OOPS!!! Please enter when the deadline is due");
                             printDuke(LINE);
                         }
                     } catch (ArrayIndexOutOfBoundsException exception) {
                         printDuke(LINE);
-                        printDuke("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        printDuke("\u2639 OOPS!!! The description of a deadline cannot be empty.");
                         printDuke(LINE);
                     }
                     break;
@@ -128,15 +130,34 @@ public class Duke {
                             printDuke(LINE);
                         } catch (ArrayIndexOutOfBoundsException exception) {
                             printDuke(LINE);
-                            printDuke("☹ OOPS!!! Please enter when the event is happening");
+                            printDuke("\u2639 OOPS!!! Please enter when the event is happening");
                             printDuke(LINE);
                         }
                     } catch (ArrayIndexOutOfBoundsException exception) {
                         printDuke(LINE);
-                        printDuke("☹ OOPS!!! The description of an event cannot be empty.");
+                        printDuke("\u2639 OOPS!!! The description of an event cannot be empty.");
                         printDuke(LINE);
                     }
                     break;
+
+                case "delete":
+                    try {
+                        int deleteNum = Integer.valueOf(cmdArr[1]);
+                        Task deletedTask = list.get(deleteNum - 1);
+                        list.remove(deleteNum - 1);
+
+                        printDuke(LINE);
+                        printDuke("Noted. I've removed this task:");
+                        printDuke(deletedTask.toString());
+                        printDuke("Now you have " + list.size() + " tasks in the list");
+                        printDuke(LINE);
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        printDuke(LINE);
+                        printDuke("\u2639 OOPS!!! Please add the task number");
+                        printDuke(LINE);
+                    }
+                    break;
+
                 default:
                 printDuke(LINE);
                 printDuke("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

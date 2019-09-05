@@ -19,4 +19,14 @@ public class Event extends Task {
         }
     }
 
+    @Override
+    // overrides saveTask method in Task
+    public String saveTask() {
+        if (isDone) {
+            return "E" + " | " + "1" + " | " + super.toString() + " | " + at + "\n";
+        } else {
+            return "E" + " | " + "0" + " | " + super.toString() + " | " + at + "\n";
+        }
+    }
+
 }

@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -9,6 +13,14 @@ public class Duke {
     public static int count = 0;
 
     public static void main(String[] args) {
+
+        try {
+            loadFileContents();
+        } catch (FileNotFoundException e) {
+            sendLine();
+            System.out.println("File not found");
+            sendLine();
+        }
 
         Scanner sc = new Scanner(System.in);
 
@@ -118,6 +130,14 @@ public class Duke {
         sendLine();
         sendBye();
         sendLine();
+
+        try {
+            saveFileContents();
+        } catch (IOException e) {
+            sendLine();
+            System.out.println("Unable to save data: " + e.getMessage());
+            sendLine();
+        }
     }
 
     public static void sendLine() {
@@ -221,6 +241,52 @@ public class Duke {
         } catch (Exception error) {
             sendMessage(error.toString());
         }
+    }
+
+    private static void loadFileContents() throws FileNotFoundException {
+        // create a file object
+        File f = new File("data/duke.txt");
+        Scanner load = new Scanner(f);
+        while (load.hasNext()) {
+            String item = load.nextLine();
+            loadTask(item);
+        }
+    }
+
+    public static void loadTask(String item) {
+        if (item.startsWith("T")) {
+            // split command into 3 parts
+            String[] splitStr = item.split(" \\| ", 3);
+            tasks.add(new Todo(splitStr[2]));
+            if (splitStr[1].equals("1")) {
+                tasks.get(count).setDone();
+            }
+            count ++;
+        } else if (item.startsWith("D")) {
+            // split command into 4 parts
+            String[] splitStr = item.split(" \\| ", 4);
+            tasks.add(new Deadline(splitStr[2], splitStr[3]));
+            if (splitStr[1].equals("1")) {
+                tasks.get(count).setDone();
+            }
+            count ++;
+        } else if (item.startsWith("E")) {
+            // split command into 4 parts
+            String[] splitStr = item.split(" \\| ", 4);
+            tasks.add(new Event(splitStr[2], splitStr[3]));
+            if (splitStr[1].equals("1")) {
+                tasks.get(count).setDone();
+            }
+            count ++;
+        }
+    }
+
+    private static void saveFileContents() throws IOException {
+        FileWriter save = new FileWriter("data/duke.txt");
+        for (int i = 0; i < tasks.size(); i++) {
+            save.write(tasks.get(i).saveTask());
+        }
+        save.close();
     }
 
 }

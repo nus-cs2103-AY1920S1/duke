@@ -1,0 +1,6 @@
+T | 1 | borrow book
+T | 0 | read book
+D | 0 | return book  |  Saturday 5pm
+E | 1 | project meeting  |  tomorrow 3-6pm
+D | 0 | project increments  |  Thursday 2359
+T | 0 | meet professor

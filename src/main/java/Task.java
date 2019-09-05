@@ -17,4 +17,8 @@ public class Task {
         return this.item;
     }
 
+    public String saveTask() {
+        return this.item;
+    }
+
 }

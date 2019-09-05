@@ -19,4 +19,14 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    // overrides saveTask method in Task
+    public String saveTask() {
+        if (isDone) {
+            return "D" + " | " + "1" + " | " + super.toString() + " | " + by + "\n";
+        } else {
+            return "D" + " | " + "0" + " | " + super.toString() + " | " + by + "\n";
+        }
+    }
+
 }

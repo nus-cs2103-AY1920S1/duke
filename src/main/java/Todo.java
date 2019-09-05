@@ -15,4 +15,14 @@ public class Todo extends Task {
         }
     }
 
+    @Override
+    // overrides saveTask method in Task
+    public String saveTask() {
+        if (isDone) {
+            return "T" + " | " + "1" + " | " + super.toString() + "\n";
+        } else {
+            return "T" + " | " + "0" + " | " + super.toString() + "\n";
+        }
+    }
+
 }

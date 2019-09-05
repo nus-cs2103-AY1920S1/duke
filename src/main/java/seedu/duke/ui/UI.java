@@ -2,6 +2,7 @@ package seedu.duke.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+
 import java.util.Scanner;
 
 public class UI {
@@ -9,20 +10,20 @@ public class UI {
     private final Scanner in;
     private final PrintStream out;
 
-    public UI(){
+    public UI() {
         this(System.in, System.out);
     }
 
-    public UI(InputStream in, PrintStream out){
+    public UI(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
     }
 
-    public void showWelcome(){
+    public void showWelcome() {
         printReply("Hello! I'm Duke\n\tWhat can I do for you?");
     }
 
-    public String readCommand(){
+    public String readCommand() {
         return in.nextLine();
     }
 

@@ -24,12 +24,13 @@ public class ClearAllTasksCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @return          The message to be displayed upon successful execution
      * @throws DukeException    If there is an error in clearing the file which stores the task list.
      */
-
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.clearAll();
-        ui.dukeEcho("All tasks have been cleared. You now have an empty task list!");
+        String res = ui.dukeEchoString("All tasks have been cleared. You now have an empty task list!");
         tasks.clearAll();
+        return res;
     }
 }

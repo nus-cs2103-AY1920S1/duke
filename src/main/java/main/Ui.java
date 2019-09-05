@@ -39,28 +39,34 @@ public class Ui {
     }
 
     /**
-     * Shows the Duke welcome message.
+     * Returns a welcome message from duke
+     *
+     * @return a welcome message from duke
      */
-    public void showWelcome() {
-        showLine();
-        dukeEcho("Hi! My name is Duke, what can I do for you?");
-        showLine();
+    public String getWelcomeMessage() {
+        String res = dukeEchoString("Hi! My name is Duke, what can I do for you?");
+        return res;
     }
 
     /**
-     * Shows a goodbye message from Duke.
+     * Returns a goodbye message from Duke.
+     *
+     * @return a goodbye message from Duke
      */
-    public void showGoodbye() {
-        dukeEcho("Bye! Hope to see you again soon!");
+    public String getGoodbyeMessage() {
+        String res = dukeEchoString("Bye! Hope to see you again soon!");
+        return res;
     }
 
     /**
-     * Shows an error.
+     * Displays an error.
      *
      * @param message the error message to be displayed
+     * @return error message from Duke
      */
-    public void showError(String message) {
-        dukeEcho(message);
+    public String getErrorMessage(String message) {
+        String res = dukeEchoString(message);
+        return res;
     }
 
     /**
@@ -74,6 +80,24 @@ public class Ui {
         for (String msg : messages) {
             System.out.println(BLANKSPACE + msg);
         }
+    }
+
+    /**
+     * Creates a string output format for the GUI.
+     *
+     * @param messages The list of messages to be shown to the user.
+     *                 Messages in separate lines should be fed in as different parameters, e.g.
+     *                 dukeEcho("This is message 1", "Message 2 is on the next line");
+     */
+    public String dukeEchoString(String... messages) {
+        if (messages.length==0) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String msg : messages) {
+            sb.append(BLANKSPACE + msg + "\n");
+        }
+        return sb.toString();
     }
 
 

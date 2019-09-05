@@ -23,9 +23,11 @@ public class HelpCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @return          The message to be displayed upon successful execution
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Helper helper = new Helper();
-        ui.dukeEcho(helper.getCommands());
+        String res = ui.dukeEchoString(helper.getCommands());
+        return res;
     }
 }

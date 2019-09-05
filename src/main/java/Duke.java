@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,6 +35,9 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/chewie.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/r2d2.png"));
 
+    /**
+     * Creates a new Duke object
+     */
     public Duke() {
         String filePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
         // Currently hardcoded.
@@ -48,24 +51,26 @@ public class Duke extends Application {
         }
     }
 
-    private void run() {
+    /**
+     * Returns the message to be displayed to the user in String format after parsing the
+     * user's full command.
+     *
+     * @param fullCommand The full command that the user input.
+     * @return Duke's response to the full command in String format.
+     */
+    public String run(String fullCommand) {
 
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+        String response = Ui.DIVIDER + "\n";
+        try {
+            Command c = Parser.parse(fullCommand);
+            response += c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            response += ui.getErrorMessage(e.getMessage());
         }
+        response += Ui.DIVIDER + "\n";
+        return response;
     }
+
 
     /*
     public static void main(String[] args) {
@@ -109,12 +114,12 @@ public class Duke extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(700.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 700.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(585, 635);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -124,7 +129,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(525.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -136,6 +141,16 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Display the welcome message
+        String uiWelcome = ui.DIVIDER + "\n" + ui.dukeEchoString(ui.getWelcomeMessage())
+                + "\n" + ui.DIVIDER;
+        Label welcomeLabel = getDialogLabel(uiWelcome);
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeLabel, new ImageView(duke)));
+        userInput.clear();
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -144,10 +159,6 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
     }
 
     /**
@@ -157,7 +168,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -170,22 +180,18 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        //Circle clip = new Circle(325,75, 75);
+        String fullCommand = userInput.getText().trim();
+        Label userText = new Label(fullCommand);
+        Label dukeText = new Label(run(fullCommand));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (fullCommand.toLowerCase().equals("bye")) {
+            Platform.exit();
+        } else {
+            userInput.clear();
+        }
     }
 
 }

@@ -31,7 +31,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String status = this.isComplete ? "✓" : "✗";
+        String status = this.isComplete ? "\u2713" : "\u2717";
         return "[" + status + "] " + this.name;
     }
 

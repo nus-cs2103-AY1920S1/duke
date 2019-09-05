@@ -29,16 +29,18 @@ public class DeleteCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @return          The message to be displayed upon successful execution
      * @throws DukeException If task ID is out of bounds
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskID > tasks.size()) {
             throw new DukeException("Invalid task ID. Please Enter a task ID between 1 and " + tasks.size());
         }
         Task removedTask = tasks.deleteTask(taskID);
-        ui.dukeEcho("Noted. I've removed this task:", removedTask.toString(),
+        String res = ui.dukeEchoString("Noted. I've removed this task:", removedTask.toString(),
                 "Now you have " + tasks.size() + " tasks in the list.");
         storage.save(tasks);
+        return res;
     }
 
     @Override

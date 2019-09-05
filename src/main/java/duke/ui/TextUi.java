@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Implements the text-based user interface.
  * @author Lim Yong Shen, Kevin
  */
-public class Ui {
+public class TextUi {
 
     private Scanner inputScanner;
     private static final String LOADING_ERROR_MESSAGE = "The data file could not be loaded."
@@ -25,7 +25,7 @@ public class Ui {
     /**
      * Constructs a ui.
      */
-    public Ui() {
+    public TextUi() {
         inputScanner = new Scanner(System.in);
     }
 

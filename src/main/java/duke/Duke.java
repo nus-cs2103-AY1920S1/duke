@@ -11,30 +11,24 @@ import duke.parser.Parser;
 
 import duke.storage.Storage;
 
-import duke.ui.Ui;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import duke.ui.TextUi;
 
 /**
  * Implements the Duke chat bot.
  * @author Lim Yong Shen, Kevin
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private TextUi ui;
 
     /**
      * Constructs a new Duke chat bot with the specified data file name.
      * @param fileName The specified data file name.
      */
     private Duke(String fileName) {
-        ui = new Ui();
+        ui = new TextUi();
         storage = new Storage(fileName);
         try {
             tasks = storage.load();
@@ -45,9 +39,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Constructs a Duke chatbot (used to run the Launcher class).
+     * Constructs a Duke instance (so that the application can be launched).
      */
     public Duke() {
+
     }
 
     /**
@@ -77,17 +72,15 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the specified JavaFX stage.
-     * @param stage The specified JavaFX stage.
+     * Processes the specified input and returns the appropriate message.
+     * @param input The specified input.
+     * @return The appropriate message.
      */
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        helloWorld.setFont(new Font("Arial", 50.0)); // Sets the Label's font to Arial
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage
+    private String process(String input) {
+        Command command = Parser.parse(input);
+        command.setTaskListToExecuteOn(tasks);
+        CommandResult commandResult = command.execute();
+        return commandResult.getMessage();
     }
 
     /**
@@ -95,7 +88,18 @@ public class Duke extends Application {
      * @param args Command line arguments (unused).
      */
     public static void main(String[] args) {
-        new Duke("src/main/java/duke/data/tasks.txt").run();
+        // new Duke("src/main/java/duke/data/tasks.txt").run();
+        //Application.launch(args);
+        new Duke("src/main/java/duke/data/tasks.txt");
+    }
+
+    /**
+     * Returns Duke's response based on the specified input.
+     * @param input The specified input.
+     * @return Duke's response based on the specified input.
+     */
+    public String getResponse(String input) {
+        return new Duke("src/main/java/duke/data/tasks.txt").process(input);
     }
 
 }

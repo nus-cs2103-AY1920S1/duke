@@ -34,6 +34,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * initialise Duke.
+     * @param d the constructed Duke object instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(

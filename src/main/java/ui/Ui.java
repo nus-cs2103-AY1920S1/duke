@@ -10,8 +10,8 @@ public class Ui {
      * Shows greeting message at start of the program.
      */
     public String showWelcome() {
-        return "Hello from! I'm Duke\n" +
-                "What can I do for you?";
+        return "Hello from! I'm Duke\n"
+                + "What can I do for you?";
     }
 
     /**
@@ -27,8 +27,8 @@ public class Ui {
      * Prints out error about unable to load data stored in user's hard disk.
      */
     public String showLoadingError() {
-        return "Note: task.TaskList storage is initially empty / the file is corrupted\n" +
-                "New empty file will be created.";
+        return "Note: task.TaskList storage is initially empty / the file is corrupted\n"
+                + "New empty file will be created.";
     }
 
 }

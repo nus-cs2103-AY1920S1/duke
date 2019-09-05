@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import duke.task.Deadline;
@@ -79,6 +80,19 @@ public class Parser {
         int num = Integer.parseInt(parts[1]);
         Task removed = tasks.remove(num - 1);
         return removed;
+    }
+
+    public static String handleFind(TaskList tasks, String input) {
+        String[] parts = input.split(" ");
+        ArrayList<Task> arr = new ArrayList<>();
+
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            if (tasks.get(i).getDescription().contains(parts[1])) {
+                arr.add(tasks.get(i));
+            }
+        }
+
+        return handleList(new TaskList(arr));
     }
 
     public static Task handleItem(TaskList tasks, String input) throws DukeException {

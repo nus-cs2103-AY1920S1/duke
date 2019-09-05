@@ -39,4 +39,8 @@ Now you have 6 tasks in the list.
 4.[T][✘] borrow book
 5.[D][✘] return book (by: Sun Sep 01 00:00:00 SGT 2019)
 6.[E][✘] project meeting (at: Mon Sep 02 14:00:00 SGT 2019 - Mon Sep 02 16:00:00 SGT 2019)
+1.[T][✓] read book
+2.[D][✘] return book (by: Thu Jun 06 00:00:00 SGT 2019)
+3.[T][✘] borrow book
+4.[D][✘] return book (by: Sun Sep 01 00:00:00 SGT 2019)
 Bye. Hope to see you again soon!

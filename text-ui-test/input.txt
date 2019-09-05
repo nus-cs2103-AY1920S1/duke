@@ -10,4 +10,5 @@ deadline return book /by 01/09/2019 0000
 event project meeting /at 02/09/2019 1400 - 02/09/2019 1600
 delete 3
 list
+find book
 bye

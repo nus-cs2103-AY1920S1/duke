@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private final static String FILE_PATH = "src/main/java/data/duke.txt";
+    private static final String FILE_PATH = "src/main/java/data/duke.txt";
 
     /**
      * Reads data from data file.
@@ -19,6 +19,7 @@ public class Storage {
      */
     public TaskList readData() throws FileNotFoundException {
         File f = new File(Storage.FILE_PATH);
+        assert f != null : "File is null";
         Scanner sc = new Scanner(f);
         ArrayList<Task> task = new ArrayList<>();
 
@@ -46,15 +47,14 @@ public class Storage {
     }
 
     /**
-     * Write data from taskList into data file.
+     * Writes data from taskList into data file.
      * 
-     * @param taskList A TaskList that contains an ArrayList of tasks and number of
-     *                 tasks.
      * @throws IOException Occurs when path of file is invalid.
      */
     public void writeData() throws IOException {
         ArrayList<Task> task = TaskList.getTasks();
         FileWriter fw = new FileWriter(Storage.FILE_PATH);
+        assert f != null : "FileWriter is null";
         String stringToWrite = "";
         int counter = task.size();
 

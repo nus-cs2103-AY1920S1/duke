@@ -31,7 +31,7 @@ public class Duke {
      * Class constructor that assumes file path to load storage from is in
      * data/duke.txt.
      */
-    public Duke(){
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data/duke.txt");
         try {

@@ -33,7 +33,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         try {
             Thread.sleep(1200);
         } catch (InterruptedException e) {

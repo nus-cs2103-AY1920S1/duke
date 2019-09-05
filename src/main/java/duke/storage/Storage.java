@@ -92,7 +92,6 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException("Error loading from specified file path");
         }
-
     }
 
     /**

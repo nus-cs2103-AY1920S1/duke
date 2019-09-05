@@ -12,24 +12,15 @@ public class Duke {
     public static void main(String[] args) {
         // Create a scanner to take in user input
         Scanner sc = new Scanner(System.in);
+        Parser parser = new Parser();
 
-        String contents = "";
-        try {
-            FileReader reader = new FileReader("data/duke.txt");
-            int i;
-            while ((i = reader.read()) != -1) {
-                contents += (char) i;
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String contents = Storage.readFile();
 
         System.out.println(
-                formatMessage("Hello, I'm Duke\nWhat can I do for you?")
+                Ui.formatMessage("Hello, I'm Duke\nWhat can I do for you?")
         );
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        TaskList tasks = new TaskList();
         String message;
 
         String[] contentLines = contents.split("\n");
@@ -41,124 +32,107 @@ public class Duke {
                 if (lineTokens[1].equals("1")) {
                     newTask.setCompleted();
                 }
-                tasks.add(newTask);
+                tasks.addTask(newTask);
             } else if (lineTokens[0].equals("D")) {
                 Task newTask = new Deadline(lineTokens[2], lineTokens[3]);
                 if (lineTokens[1].equals("1")) {
                     newTask.setCompleted();
                 }
-                tasks.add(newTask);
+                tasks.addTask(newTask);
             } else if (lineTokens[0].equals("E")) {
                 Task newTask = new Event(lineTokens[2], lineTokens[3]);
                 if (lineTokens[1].equals("1")) {
                     newTask.setCompleted();
                 }
-                tasks.add(newTask);
+                tasks.addTask(newTask);
             }
         }
 
         String command = sc.nextLine();
         String[] commandTokens = command.split(" ");
 
-        while (!command.equals("bye")) {
+        while (!parser.isBye(command)) {
             try {
-                if (command.equals("list")) {
+                if (parser.isList(command)) {
                     String list = "Here are the tasks in your list:\n";
-                    for (int i = 0; i < tasks.size(); i++) {
-                        Task task = tasks.get(i);
+                    for (int i = 0; i < tasks.getSize(); i++) {
+                        Task task = tasks.getTask(i);
                         list += String.format(
                                 "%d." + task,
                                 i + 1
                         );
                     }
-                    System.out.println(formatMessage(list));
-                } else if (commandTokens[0].equals("done")) {
+                    System.out.println(Ui.formatMessage(list));
+                } else if (parser.isDone(commandTokens)) {
                     int completedIndex = Integer.parseInt(commandTokens[1]) - 1;
                     message = "Nice! I've marked this task as done:\n  ";
-                    Task completedTask = tasks.get(completedIndex);
+                    Task completedTask = tasks.getTask(completedIndex);
                     completedTask.setCompleted();
                     message += completedTask;
-                    System.out.println(formatMessage(message));
-                } else if (commandTokens[0].equals("todo")) {
+                    System.out.println(Ui.formatMessage(message));
+                } else if (parser.isTodo(commandTokens)) {
                     if (commandTokens.length == 1) {
                         throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     Task newTask = new Todo(command.substring(5));
-                    tasks.add(newTask);
+                    tasks.addTask(newTask);
                     message = String.format(
                             "Got it. I've added this task:\n  %sNow you have %d tasks in the list.",
                             newTask,
-                            tasks.size()
+                            tasks.getSize()
                     );
                     System.out.println(
-                            formatMessage(message)
+                            Ui.formatMessage(message)
                     );
-                } else if (commandTokens[0].equals("deadline")) {
+                } else if (parser.isDeadline(commandTokens)) {
                     String[] deadlineTokens = command.substring(9).split(" /by ");
                     Task newTask = new Deadline(deadlineTokens[0], deadlineTokens[1]);
-                    tasks.add(newTask);
+                    tasks.addTask(newTask);
                     message = String.format(
                             "Got it. I've added this task:\n  %sNow you have %d tasks in the list.",
                             newTask,
-                            tasks.size()
+                            tasks.getSize()
                     );
                     System.out.println(
-                            formatMessage(message)
+                            Ui.formatMessage(message)
                     );
-                } else if (commandTokens[0].equals("event")) {
+                } else if (parser.isEvent(commandTokens)) {
                     String[] eventTokens = command.substring(6).split(" /at ");
                     Task newTask = new Event(eventTokens[0], eventTokens[1]);
-                    tasks.add(newTask);
+                    tasks.addTask(newTask);
                     message = String.format(
                             "Got it. I've added this task:\n  %sNow you have %d tasks in the list.",
                             newTask,
-                            tasks.size()
+                            tasks.getSize()
                     );
                     System.out.println(
-                            formatMessage(message)
+                            Ui.formatMessage(message)
                     );
-                } else if (commandTokens[0].equals("delete")) {
+                } else if (parser.isDelete(commandTokens)) {
                     int removeIndex = Integer.parseInt(commandTokens[1]) - 1;
-                    Task removeTask = tasks.get(removeIndex);
-                    tasks.remove(removeIndex);
+                    Task removeTask = tasks.getTask(removeIndex);
+                    tasks.removeTask(removeIndex);
                     message = String.format(
                             "Noted. I've removed this task:\n  %sNow you have %d tasks in the list.",
                             removeTask,
-                            tasks.size());
-                    System.out.println(formatMessage(message));
+                            tasks.getSize());
+                    System.out.println(Ui.formatMessage(message));
                 } else {
                     throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (Exception e) {
-                System.out.println(formatMessage(e.getMessage()));
+                System.out.println(Ui.formatMessage(e.getMessage()));
             }
             command = sc.nextLine();
             commandTokens = command.split(" ");
         }
-        try {
-            FileWriter fstream = new FileWriter("data/duke.txt");
-            BufferedWriter out = new BufferedWriter(fstream);
-            for (Task task : tasks) {
-                out.write(task.saveString());
-            }
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        Storage.saveFile(tasks);
 
         System.out.println(
-                formatMessage("Bye. Hope to see you again soon!")
+                Ui.formatMessage("Bye. Hope to see you again soon!")
         );
     }
 
-    private static String formatMessage(String message) {
-        String formatted = "    ____________________________________________________________\n";
-        String[] lines = message.split("\n");
-        for (String line : lines) {
-            formatted += "     " + line + "\n";
-        }
-        formatted += "    ____________________________________________________________\n";
 
-        return formatted;
-    }
 }

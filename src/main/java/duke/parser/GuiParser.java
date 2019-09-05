@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class GuiParser  {
     GuiTaskList storeTaskList;
 
-
     /**
      * Parser class responsible for parsing user input.
      * This includes asking for user input, decoding user input accordingly.
@@ -68,24 +67,18 @@ public class GuiParser  {
     }
 
     private String processDone(String[] inputArray) throws DukeException{
-        if (inputArray.length == 1) {
-            throw new DukeException("OOPS!!! The description of a done command cannot be empty.");
-        }
+        checkInputEmpty(inputArray);
         int index = Integer.valueOf(inputArray[1]) - 1;
         String result = storeTaskList.doneTask(index);
         return result;
     }
 
     private String processTodo(String[] inputArray) throws DukeException {
-        //catch empty desc error
-        if (inputArray.length == 1) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        }
+        checkInputEmpty(inputArray);
         //form back string
         String toDoTaskString = "";
         for (int i = 1; i < inputArray.length; i++) {
-            toDoTaskString += inputArray[i];
-            toDoTaskString += " ";
+            toDoTaskString = toDoTaskString + inputArray[i] + " ";
         }
         //.trim() to remove trailing space
         String result = storeTaskList.addToDoTask(toDoTaskString.trim());
@@ -93,12 +86,9 @@ public class GuiParser  {
     }
 
     private String processDeadline(String[] inputArray) throws DukeException {
-        try {//catch empty desc error
-             if (inputArray.length == 1) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            }
-            //form back string , description stops at /by
-            //date time starts from /by
+        try {
+            checkInputEmpty(inputArray);
+            //form back string , description stops at /by date time starts from /by
             String deadlineTaskDescriptionString = "";
             String deadlineTaskDateAndTimeString = "";
             boolean createDesc = true;
@@ -127,9 +117,7 @@ public class GuiParser  {
 
     private String processEvent(String[] inputArray) throws DukeException {
        try { //catch empty desc error
-           if (inputArray.length == 1) {
-               throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-           }
+           checkInputEmpty(inputArray);
            //form back string , description stops at /at date time starts from /at
            String eventTaskDescriptionString = "";
            String eventTaskDateAndTimeString = "";
@@ -158,9 +146,7 @@ public class GuiParser  {
     }
 
     private String processDelete(String[] inputArray) throws DukeException {
-        if (inputArray.length == 1) {
-            throw new DukeException("OOPS!!! The description for delete command cannot be empty.");
-        }
+        checkInputEmpty(inputArray);
         int index = Integer.valueOf(inputArray[1]) - 1;
         String result = storeTaskList.deleteTask(index);
         return result;
@@ -291,6 +277,12 @@ public class GuiParser  {
             timeEnding = convertTime(Integer.valueOf(timeEnding));
             dateAndTimeString = date + ", " + timeStarting + "-" +timeEnding;
             return dateAndTimeString;
+    }
+
+    private void checkInputEmpty(String[] inputArray) throws DukeException {
+        if (inputArray.length == 1) {
+            throw new DukeException("OOPS!!! The description of a done command cannot be empty.");
+        }
     }
 
     /**

@@ -111,11 +111,15 @@ public class Parser {
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(input);
+            return date;
         } catch (ParseException e) {
             throw new DukeException("Date is wrong format, try again");
-        } finally {
+        }
+        /*
+         finally {
             return date;
         }
+         */
     }
 
     /**

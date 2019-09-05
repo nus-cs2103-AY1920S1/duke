@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException if command is invalid or cannot write to file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskId.equals("")) {
             throw new NoIdGivenException("delete");
         }
@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
 
         storage.updateFile(tasks);
 
-        ui.dukeRespond("Noted. I've removed this task:",
+        return ui.dukeRespond("Noted. I've removed this task:",
                 "  " + task.toString(),
                 String.format("Now you have %d tasks in the list.", tasks.getSize()));
     }

@@ -16,8 +16,9 @@ public abstract class Command {
      * @param taskList TaskList agent to handle list of tasks.
      * @param ui Ui in charge of printing.
      * @param storage Storage agent in charge of reading/writing to file.
+     * @return any outputs/exceptions.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Returns whether command is an exit command.

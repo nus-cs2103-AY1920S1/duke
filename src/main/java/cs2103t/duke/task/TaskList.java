@@ -52,7 +52,7 @@ public class TaskList {
      * Prints out the list of tasks.
      * @param ui ui in charge of printing.
      */
-    public void listTasks(Ui ui) {
+    public String listTasks(Ui ui) {
         String[] taskStrings = new String[this.getSize() + 1];
         taskStrings[0] = "Here are the tasks in your list:";
         int listIndex = 0;
@@ -62,7 +62,7 @@ public class TaskList {
             //ASSUMPTION: ok fine need to at least print new id, if i dont wanna change the init id
             taskStrings[listIndex] = String.format("%d.%s", listIndex, t.toString());
         }
-        ui.dukeRespond(taskStrings);
+        return ui.dukeRespond(taskStrings);
     }
 
     /**

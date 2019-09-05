@@ -55,9 +55,17 @@ public class Duke extends Application {
 
     /**
      * Constructs Duke object to be called by Application launcher, javafx.
+     * Storage filepath used default ./data/tasks.txt.
      */
     public Duke() {
+        this.ui = new Ui();
         this.storage = new Storage(dataFilepath);
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            this.tasks = new TaskList();
+        }
     }
 
     /**
@@ -96,7 +104,7 @@ public class Duke extends Application {
      */
 
     public String getResponse(String fullCommand) {
-        /*
+        ///*
         String res;
         try {
             Command c = Parser.parse(fullCommand);
@@ -108,8 +116,8 @@ public class Duke extends Application {
             res = "cannot work sia";
         }
         return res;
-         */
-        return "Duke heard: " + fullCommand;
+        //*/
+        //return "Duke heard: " + fullCommand;
     }
 
     public static void main(String[] args) {
@@ -213,6 +221,7 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+        //System.out.println(userInput.getText());
         userInput.clear();
     }
 }

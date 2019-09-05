@@ -22,7 +22,7 @@ public class ListCommand extends Command {
      * @param storage Storage agent in charge of writing to file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.listTasks(ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.listTasks(ui);
     }
 }

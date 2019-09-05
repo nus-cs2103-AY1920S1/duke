@@ -16,13 +16,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> foundTasks = taskList.findTasks(this.wordToFind);
 
         if (foundTasks.isEmpty()) {
-            ui.dukeRespond("Sorry! I can't find any matching tasks in your list. Try another phrase?");
+            return ui.dukeRespond("Sorry! I can't find any matching tasks in your list. Try another phrase?");
         } else {
-            ui.dukeRespond(getStringArray(foundTasks));
+            return ui.dukeRespond(getStringArray(foundTasks));
         }
     }
 

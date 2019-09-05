@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * @throws DukeException if command is invalid or cannot write to file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskId.equals("")) {
             throw new NoIdGivenException("done");
         }
@@ -42,7 +42,7 @@ public class DoneCommand extends Command {
 
         storage.updateFile(tasks);
 
-        ui.dukeRespond("Nice! I've marked this task as done:",
+        return ui.dukeRespond("Nice! I've marked this task as done:",
                 "  " + task.toString());
     }
 }

@@ -22,8 +22,8 @@ public class ExitCommand extends Command {
      * @param storage Storage agent in charge of writing to file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.closeScanner();
-        ui.dukeRespond("Bye. Hope to see you again soon!");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        //ui.closeScanner();
+        return ui.dukeRespond("Bye. Hope to see you again soon!");
     }
 }

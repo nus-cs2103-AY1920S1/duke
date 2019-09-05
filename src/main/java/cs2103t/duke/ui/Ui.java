@@ -12,13 +12,13 @@ public class Ui {
     /** Divides responses as part of layout. */
     private static final String DIVIDER = "    " + "-".repeat(61);
     /** Reads user inputs from console. */
-    private Scanner scannerIn;
+    //private Scanner scannerIn;
 
     /**
      * Constructs a Ui.
      */
     public Ui() {
-        this.scannerIn = new Scanner(System.in);
+        //this.scannerIn = new Scanner(System.in);
     }
 
     /**
@@ -39,8 +39,8 @@ public class Ui {
      * Prints to console the inputs in Duke layout.
      * @param inputs lines of String that Duke is supposed to respond.
      */
-    public void dukeRespond(String... inputs) {
-        showLine();
+    public String dukeRespond(String... inputs) {
+    /*    showLine();
         PrintStream out;
         try {
             out = new PrintStream(System.out, false, "UTF-8");
@@ -51,6 +51,13 @@ public class Ui {
             e.printStackTrace(); //shouldnt happen?
         }
         showLine();
+     */
+        StringBuilder sb = new StringBuilder();
+        for (String s : inputs) {
+            sb.append(s);
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     private void showLine() {
@@ -76,7 +83,7 @@ public class Ui {
      * Waits for and reads next line of user input.
      * @return user input.
      */
-    public String readCommand() {
+    /*public String readCommand() {
         //start listening for user input
         return this.scannerIn.nextLine();
     }
@@ -84,7 +91,8 @@ public class Ui {
     /**
      * Closes scanner before terminating Duke.
      */
-    public void closeScanner() {
+    /*public void closeScanner() {
         this.scannerIn.close();
     }
+     */
 }

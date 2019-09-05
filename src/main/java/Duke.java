@@ -5,11 +5,32 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 
+// javaFx
+
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Empty constructor to bridge Main and fxml.
+     *
+     */
+    public Duke(){}
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    /**
+     * Required main method.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("/home/abhinav/Desktop/2103T/duke/data/dukeTest.txt");
         duke.run();

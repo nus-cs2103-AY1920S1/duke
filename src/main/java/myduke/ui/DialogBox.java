@@ -57,6 +57,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        assert !user.isBlank() : " user name should not be empty";
+        assert !text.isBlank() : " text message should not be empty";
+
         userName.setText(user);
         message.setText(text);
         displayPicture.setImage(img);
@@ -68,6 +71,7 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        assert tmp.size() > 1 : " Flipping the order of children should only be done if there is more than 1 child.";
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
@@ -82,6 +86,7 @@ public class DialogBox extends HBox {
      * @return Instance of a dialog box for user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
+        assert !text.isBlank() : " Text should not be empty";
         return new DialogBox("You", text, img);
     }
 
@@ -94,6 +99,7 @@ public class DialogBox extends HBox {
      * @return Instance of a dialog box for Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {
+        assert !text.isBlank() : " Text should not be empty";
         var dialog = new DialogBox("Duke", text, img);
         dialog.flip();
         dialog.setBackground(BG_GREY);

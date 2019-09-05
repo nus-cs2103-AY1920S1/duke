@@ -32,10 +32,12 @@ checkstyle{
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
 
 test {
+    enableAssertions = true
     useJUnitPlatform()
 }
 

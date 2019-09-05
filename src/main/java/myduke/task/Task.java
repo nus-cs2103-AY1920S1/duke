@@ -31,7 +31,7 @@ public abstract class Task {
     /**
      * Gets the database string format.
      *
-     * @return A database string format
+     * @return A database string format.
      */
     public abstract String getDataBaseFormat();
 

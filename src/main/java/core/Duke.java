@@ -1,3 +1,5 @@
+package core;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import ui.DialogBox;
@@ -5,7 +7,10 @@ import ui.TextUi;
 import storage.Storage;
 import tasklist.TaskList;
 import parser.Parser;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -34,7 +39,10 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
-    public Duke(){}
+    public Duke() throws IOException {
+        saveFile = new Storage("tasklist.txt");
+        textui = new TextUi();
+    }
 
     public Duke(String filepath) throws IOException {
         saveFile = new Storage(filepath);
@@ -51,7 +59,8 @@ public class Duke extends Application {
         String user = input.nextLine();
         TaskList scheduler;
         Parser parser = new Parser();
-
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
         while (!user.equals("bye")) {
             scheduler = new TaskList(saveFile.loadData());
             parser.parse(user, scheduler,false);
@@ -85,13 +94,13 @@ public class Duke extends Application {
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(450.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(450.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(435, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -101,7 +110,7 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(375.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -115,11 +124,19 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle ui input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -144,22 +161,32 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing ui input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the ui input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(textui)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(ui)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
     }
 
     /**
      * You should have your own function to generate a response to ui input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    private String getResponse(String input) throws IOException {
+        //textui.printIntroduction();
+        String user = input;
+        TaskList scheduler;
+        Parser parser = new Parser();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        scheduler = new TaskList(saveFile.loadData());
+        parser.parse(user, scheduler,false);
+        saveFile.storeData(scheduler.getTaskList());
+        return outContent.toString();
     }
 
 

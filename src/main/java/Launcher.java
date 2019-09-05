@@ -1,3 +1,4 @@
+import core.Duke;
 import javafx.application.Application;
 
 /**

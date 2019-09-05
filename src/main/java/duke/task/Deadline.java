@@ -5,9 +5,11 @@ import duke.exception.DukeException;
 /**
  * Represents a Deadline task.
  */
-public class Deadline extends Task{
-    /** the Deadline(date) of task stored as a string. */
-    protected String Deadline;
+public class Deadline extends Task {
+    /**
+     * the Deadline(date) of task stored as a string.
+     */
+    protected String deadline;
 
     /**
      * Constructor for Deadline which takes in a whole command as a String.
@@ -21,7 +23,7 @@ public class Deadline extends Task{
         this(message.split("/by", 2)[0],
                 (message.split("/by", 2).length > 1
                         ? message.split("/by", 2)[1]
-                        : "" ));
+                        : ""));
         this.taskType = "D";
     }
 
@@ -32,17 +34,17 @@ public class Deadline extends Task{
      * It throws a DukeException when either the description or the date field is empty.
      *
      * @param description The description of the Deadline
-     * @param Deadline The date of the Deadline(as a string)
+     * @param deadline    The date of the Deadline(as a string)
      * @throws DukeException When there is an error in the format of the Deadline
      */
-    public Deadline(String description, String Deadline) throws DukeException{
+    public Deadline(String description, String deadline) throws DukeException {
         super(description);
-        System.out.println("Deadline is" + Deadline);
-        this.Deadline = parseDate(Deadline);
-        if(this.getTaskDescription().equals("")){
+        System.out.println("Deadline is" + deadline);
+        this.deadline = parseDate(deadline);
+        if (this.getTaskDescription().equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a Deadline cannot be empty.");
         }
-        if(this.getDeadline().equals("")){
+        if (this.getDeadline().equals("")) {
             throw new DukeException("☹ OOPS!!! The date field of a Deadline cannot be empty.");
         }
         this.taskType = "D";
@@ -54,12 +56,12 @@ public class Deadline extends Task{
      * removed from the TaskList yet. It calls the two-argument constructor, then assigns isDone.
      *
      * @param description The description of the Deadline
-     * @param isDone Whether the Deadline is marked as done
-     * @param Deadline The date of the Deadline stored as a string
+     * @param isDone      Whether the Deadline is marked as done
+     * @param deadline    The date of the Deadline stored as a string
      * @throws DukeException Error if the format of the Deadline is incorrect
      */
-    public Deadline(String description, boolean isDone, String Deadline) throws DukeException{
-        this(description, Deadline);
+    public Deadline(String description, boolean isDone, String deadline) throws DukeException {
+        this(description, deadline);
         this.isDone = isDone;
     }
 
@@ -68,8 +70,8 @@ public class Deadline extends Task{
      *
      * @return Date Deadline of the Deadline (as a string)
      */
-    public String getDeadline(){
-        return this.Deadline;
+    public String getDeadline() {
+        return this.deadline;
     }
 
     /**
@@ -80,11 +82,11 @@ public class Deadline extends Task{
      * @return the Deadline that has been marked as done
      * @throws DukeException if there is an error marking the Deadline as done
      */
-    public Task markAsDone() throws DukeException{
-        if(this.isDone){
+    public Task markAsDone() throws DukeException {
+        if (this.isDone) {
             throw new DukeException("☹ OOPS!!! The Deadline is already marked as done.");
         }
-        Deadline completed = new Deadline(this.description, this.Deadline);
+        Deadline completed = new Deadline(this.description, this.deadline);
         completed.isDone = true;
         return completed;
     }
@@ -95,9 +97,9 @@ public class Deadline extends Task{
      *
      * @return the task status as a string.
      */
-    public String getTaskStatus(){
+    public String getTaskStatus() {
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()
-                + "(by: " + this.getDeadline() + ")" );
+                + "(by: " + this.getDeadline() + ")");
     }
 
     /**
@@ -106,7 +108,7 @@ public class Deadline extends Task{
      *
      * @return the task status as a string for storage.
      */
-    public String getStoredTaskStatus(){
+    public String getStoredTaskStatus() {
         return (this.getTaskType() + " | " + this.getStatusIcon() + " | " + this.getTaskDescription()
                 + " | " + this.getDeadline());
     }

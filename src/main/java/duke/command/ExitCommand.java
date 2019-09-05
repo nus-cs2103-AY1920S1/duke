@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
      * Constructor for ExitCommand sets isExit to true.
      * This is because ExitCommand is an exit command.
      */
-    public ExitCommand(){
+    public ExitCommand() {
         super();
         this.isExit = true;
     }
@@ -21,8 +21,8 @@ public class ExitCommand extends Command {
     /**
      * Executes the ExitCommand.
      *
-     * @param tasks The user's current TaskList
-     * @param ui The ui currently being used by the user
+     * @param tasks   The user's current TaskList
+     * @param ui      The ui currently being used by the user
      * @param storage The storage object being used by the user
      * @throws DukeException If there is an error trying to carry out the ExitCommand.
      */

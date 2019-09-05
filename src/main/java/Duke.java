@@ -14,13 +14,21 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    /** The Storage used for access/writing to files */
+    /**
+     * The Storage used for access/writing to files.
+     */
     private Storage storage;
-    /** The filepath to read from/write to */
+    /**
+     * The filepath to read from/write to.
+     */
     private String filePath;
-    /** The taskList to store the user's tasks */
+    /**
+     * The taskList to store the user's tasks.
+     */
     private TaskList tasks;
-    /** The User interface */
+    /**
+     * The User interface.
+     */
     private Ui ui;
 
     /**
@@ -47,13 +55,13 @@ public class Duke {
             this.tasks = this.storage.load();
         } catch (DukeException e) {
             this.ui.messageUser(e.getMessage());
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             this.ui.messageUser("The file is missing :(");
         } catch (IOException e) {
             this.ui.messageUser("Trouble creating file");
         }
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 Scanner scanner = new Scanner(System.in);
                 String userMessage = this.ui.readMessage(scanner);

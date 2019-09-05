@@ -1,42 +1,87 @@
 package duke.task;
+
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks
+ */
 public class TaskList {
-    private ArrayList<Task> toDoList;
+    /**
+     * The list of tasks is stored as an ArrayList{@literal <Task>}.
+     */
+    private ArrayList<Task> taskArrayList;
 
-    public TaskList(ArrayList<Task> toDoList){
-        this.toDoList = toDoList;
+    /**
+     * Constructor for TaskList which accepts an existing {@literal ArrayList<Task>}.
+     *
+     * @param taskArrayList The ArrayList of tasks
+     */
+    public TaskList(ArrayList<Task> taskArrayList) {
+        this.taskArrayList = taskArrayList;
     }
 
-    public TaskList(){
-        this.toDoList = new ArrayList<>();
+    /**
+     * Constructor for TaskList which creates an empty ArrayList.
+     */
+    public TaskList() {
+        this.taskArrayList = new ArrayList<>();
     }
 
-    public int getSize(){
-        return this.toDoList.size();
+    /**
+     * Returns the size of the list of tasks of this TaskList.
+     *
+     * @return size of the ArrayList inside the TaskList
+     */
+    public int getSize() {
+        return this.taskArrayList.size();
     }
 
-    public void addTaskToList(Task taskToAdd){
-        this.toDoList.add(taskToAdd);
+    /**
+     * Adds a Task to the TaskList.
+     *
+     * @param taskToAdd The Task to be added.
+     */
+    public void addTaskToList(Task taskToAdd) {
+        this.taskArrayList.add(taskToAdd);
     }
 
+    /**
+     * Returns the Task from the TaskList at the one-indexed position provided in the argument.
+     *
+     * @param taskNumToGet one-indexed position of the task
+     * @return the Task at the one-indexed position
+     * @throws DukeException Throws an exception if the task number is out bounds
+     */
     public Task getTaskFromList(int taskNumToGet) throws DukeException {
         if (taskNumToGet <= 0 || taskNumToGet > this.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        return this.toDoList.get(taskNumToGet - 1);
+        return this.taskArrayList.get(taskNumToGet - 1);
     }
 
-    public Task deleteTaskFromList(int taskNumToDelete) throws DukeException{
+    /**
+     * Deletes the Task from the TaskList at the one-indexed position provided in the argument.
+     *
+     * @param taskNumToDelete one-indexed position of the task to delete
+     * @return the Task at the one-indexed position
+     * @throws DukeException Throws an exception if the task number is out bounds
+     */
+    public Task deleteTaskFromList(int taskNumToDelete) throws DukeException {
         if (taskNumToDelete <= 0 || taskNumToDelete > this.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        return this.toDoList.remove(taskNumToDelete - 1);
+        return this.taskArrayList.remove(taskNumToDelete - 1);
     }
 
-    public void markTaskAsDone(int taskNumToMark) throws DukeException{
+    /**
+     * Marks the Task in the TaskList at the one-indexed position provided in the argument as done.
+     *
+     * @param taskNumToMark one-indexed position of the task
+     * @throws DukeException Throws an exception if the task number is out bounds
+     */
+    public void markTaskAsDone(int taskNumToMark) throws DukeException {
         if (taskNumToMark <= 0 || taskNumToMark > this.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
@@ -45,26 +90,44 @@ public class TaskList {
         setIndexToTask(taskNumToMark, taskToMark);
     }
 
-    public void setIndexToTask(int numberToSet, Task taskToSet) throws DukeException{
-        if (numberToSet <= 0 || numberToSet > this.getSize()){
+    /**
+     * Sets the Task from the TaskList at the one-indexed position provided in the argument.
+     * The position should already exist in the TaskList as this is used to update a task.
+     *
+     * @param numberToSet one-indexed position of the task
+     * @param taskToSet the Task to be set at that position
+     * @throws DukeException Throws an exception if the task number is out bounds
+     */
+    public void setIndexToTask(int numberToSet, Task taskToSet) throws DukeException {
+        if (numberToSet <= 0 || numberToSet > this.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        this.toDoList.set(numberToSet - 1, taskToSet);
+        this.taskArrayList.set(numberToSet - 1, taskToSet);
     }
 
-    public String listAllTasksAsString(){
+    /**
+     * Returns a list of all the tasks as a string.
+     * Currently used for storage only.
+     *
+     * @return String of all the Tasks in the format for storage.
+     */
+    public String listAllTasksAsString() {
         StringBuilder allTasks = new StringBuilder();
-        for (Task task : this.toDoList) {
+        for (Task task : this.taskArrayList) {
             allTasks.append(task.getStoredTaskStatus());
             allTasks.append(System.lineSeparator());
         }
         return allTasks.toString();
     }
 
-    public ArrayList<Task> getToDoList(){
-        return this.toDoList;
+    /**
+     * Returns the ArrayList{@literal <Task>} encapsulated within the TaskList.
+     *
+     * @return the ArrayList of this TaskList.
+     */
+    public ArrayList<Task> getTaskArrayList() {
+        return this.taskArrayList;
     }
-
 
 
 }

@@ -14,7 +14,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 /**
- * Represents a parser object
+ * Represents a parser object.
  */
 public class Parser {
 
@@ -53,9 +53,9 @@ public class Parser {
      * Allows for done, todo, deadline, event, delete, list, bye and find commands.
      * It will throw a DukeException if the command given is in the wrong format.
      *
-     * @param message
-     * @return the parsed command from the user tet
-     * @throws DukeException
+     * @param message The message sent by the user
+     * @return the parsed command from the user's message
+     * @throws DukeException Throws an exception if there is a problem parsing the user's message
      */
     public static Command parseUserMessage(String message) throws DukeException {
         String[] commands = message.split(" ");
@@ -87,12 +87,12 @@ public class Parser {
                 }
                 return new ListCommand();
             case "bye":
-                if (commands.length > 1){
+                if (commands.length > 1) {
                     throw new DukeException("☹ OOPS!!! Your bye command is in the wrong format.");
                 }
                 return new ExitCommand();
             case "find":
-                if (!(commands.length == 2)){
+                if (!(commands.length == 2)) {
                     throw new DukeException("☹ OOPS!!! Your bye command is in the wrong format.");
                 }
                 return new FindCommand(commands[1]);

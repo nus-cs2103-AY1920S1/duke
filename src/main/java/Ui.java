@@ -7,7 +7,7 @@ public class Ui {
     // Strings that Duke will output
     private static final String PRINTED_LONG_LINE = "____________________________________________________________";
     private static final String PRINTED_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String PRINTED_BYE = "Bye. Hope to see you again soon!";
+    private static final String PRINTED_BYE = "Bye. Hope to see you again soon!\nThis program will exit in one second.";
 
     private static final String PRINTED_HEADER_LIST = "Here are the tasks in your list:";
     private static final String PRINTED_HEADER_DONE = "Nice! I've marked this task as done:";

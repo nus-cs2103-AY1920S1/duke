@@ -22,12 +22,6 @@ public class Duke  {
     private GuiParser parser;
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
     /**
      * Constructor for Duke instance.
      * @param filepath file path giving the location of the file

@@ -2,22 +2,7 @@ E 1 project meeting /at 22nd of October 2017, 620pm
 T 0 read guys
 T 1 take 5
 T 0 five guys
-D 0 read tank /by 25th of January 1995, 0am
-T 0 show stanley mom
-T 0 read stuf
-T 0 read book
-T 0 read 1
-T 0 read 3
-T 0 read 5
-T 0 read 16
-T 0 read 11231
-T 0 32131231
-E 0 read book /at 2nd of March 12, 0am-1233pm
-E 0 read book /at 
-E 0 touch book /at 2nd of April 15, 0am-11pm
-E 0 read time /at 2nd of September 18, 0am-3pm
-E 0 touch 1231 /at 2nd of March 16, 900am-12pm
-E 0 5555 /at 2nd of April 15, 900am-1pm
-E 0 333 /at 4th of May 18, 8am-2pm
-E 0 444 /at 3rd of April 15, 932am-3pm
-E 0 rea444 /at 21st of March 18, 923am-142pm
+E 0 take5 /at 1st of February 18, 7pm-8pm
+E 0 ddd /at 1st of February 18, 400am-7pm
+E 0 doneee /at 5th of September 29, 9am-2pm
+E 0 doneee /at 5th of September 29, 923am-2pm

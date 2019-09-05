@@ -6,6 +6,7 @@ public class Duke {
 
         final String LINE = "____________________________________________________________";
         final String TAB = "    ";
+        final String GOT_IT = "Got it. I've added this task:";
         String cmd;
         Scanner scan = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<Task>();
@@ -27,8 +28,8 @@ public class Duke {
         Boolean isNotBye = true;
         while(isNotBye) {
             cmd = scan.nextLine();
-            String arr[] = cmd.split(" ", 2);
-            String firstWord = arr[0];
+            String cmdArr[] = cmd.split(" ", 2);
+            String firstWord = cmdArr[0];
 
             switch (firstWord) {
                 case "bye":
@@ -37,6 +38,7 @@ public class Duke {
                     printDuke(LINE);
                     isNotBye = false;
                     break;
+
                 case "list":
                     printDuke(LINE);
                     System.out.println("    Here are the tasks in your list:");
@@ -44,14 +46,17 @@ public class Duke {
                         break;
                     }
                     for (int i = 0; i < list.size(); i++) {
-                        System.out.println("    " + (i + 1) + ". [" + list.get(i).getStatusIcon() + "]"  + list.get(i).getDesc());
+                        Task task = list.get(i);
+                        printDuke((i + 1) + ". [" + task.getType() + "][" +
+                                    task.getStatusIcon() + "]"  + task.getDesc());
                     }
 
                     printDuke(LINE);
                     break;
+
                 case "done":
                     printDuke(LINE);
-                    int taskNum = Integer.valueOf(arr[1]);
+                    int taskNum = Integer.valueOf(cmdArr[1]);
                     list.get(taskNum - 1).isDone(true);
                     printDuke("Nice! I've marked this task as done");
                     System.out.println("    " + taskNum + ". [" + list.get(taskNum - 1).getStatusIcon() + "]"
@@ -59,11 +64,82 @@ public class Duke {
                     //printDuke();
                     printDuke(LINE);
                     break;
+
+                case "todo":
+                    try {
+                        String task = cmdArr[1];
+                        Todo todo = new Todo(task);
+                        list.add(todo);
+
+                        //output
+                        printDuke(LINE);
+                        printDuke(GOT_IT);
+                        printDuke(todo.toString());
+                        printDuke("Now you have " + list.size() + " tasks in the list");
+                        printDuke(LINE);
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        printDuke(LINE);
+                        printDuke("☹ OOPS!!! The description of a todo cannot be empty.");
+                        printDuke(LINE);
+                    }
+                    break;
+
+                case "deadline":
+                    try {
+                        String taskAndDate = cmdArr[1];
+                        String dl[] = taskAndDate.split("/", 2);
+                        try {
+                            String by = dl[1].substring(3);
+                            Deadline deadline = new Deadline(dl[0], by);
+                            list.add(deadline);
+
+                            //output
+                            printDuke(LINE);
+                            printDuke(GOT_IT);
+                            printDuke(deadline.toString());
+                            printDuke("Now you have " + list.size() + " tasks in the list");
+                            printDuke(LINE);
+                        } catch (ArrayIndexOutOfBoundsException exception) {
+                            printDuke(LINE);
+                            printDuke("☹ OOPS!!! Please enter when the deadline is due");
+                            printDuke(LINE);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        printDuke(LINE);
+                        printDuke("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        printDuke(LINE);
+                    }
+                    break;
+
+                case "event":
+                    try {
+                        String eventAndDate = cmdArr[1];
+                        String e[] = eventAndDate.split("/", 2);
+                        try {
+                            String at = e[1].substring(3);
+                            Event event = new Event(e[0], at);
+                            list.add(event);
+
+                            //output(LINE);
+                            printDuke(LINE);
+                            printDuke(GOT_IT);
+                            printDuke(event.toString());
+                            printDuke("Now you have " + list.size() + " tasks in the list");
+                            printDuke(LINE);
+                        } catch (ArrayIndexOutOfBoundsException exception) {
+                            printDuke(LINE);
+                            printDuke("☹ OOPS!!! Please enter when the event is happening");
+                            printDuke(LINE);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        printDuke(LINE);
+                        printDuke("☹ OOPS!!! The description of an event cannot be empty.");
+                        printDuke(LINE);
+                    }
+                    break;
                 default:
-                Task t = new Task(cmd);
-                list.add(t);
                 printDuke(LINE);
-                System.out.println(TAB + "added: " + cmd);
+                printDuke("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 printDuke(LINE);
             }
         }

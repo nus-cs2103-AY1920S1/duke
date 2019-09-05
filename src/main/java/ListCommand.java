@@ -8,10 +8,14 @@ public class ListCommand implements Command {
      * List down all the task in the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showMessage("Here are the task in your list:");
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Here are the task in your list:\n");
         for (int i = 1; i <= tasks.size(); ++i) {
-            ui.showMessage(i + "." + tasks.get(i));
+            builder.append(i + "." + tasks.get(i) + "\n");
         }
+
+        return builder.toString();
     }
 }

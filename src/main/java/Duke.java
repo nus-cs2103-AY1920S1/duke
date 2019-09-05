@@ -1,7 +1,6 @@
 public class Duke {
     private TaskList tasks;
     private Storage storage;
-    private Ui ui;
 
     /**
      * Initiates the main execution of the program.
@@ -10,37 +9,25 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
-        ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException ex) {
-            ui.showLoadingError(ex);
             tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the program.
+     * Returns Duke's response after exectuing the user input.
+     *
+     * @param fullCommand User input.
+     * @return Duke's response.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException ex) {
-                ui.showErrorMessage(ex);
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, storage);
+        } catch (DukeException ex) {
+            return ex.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }

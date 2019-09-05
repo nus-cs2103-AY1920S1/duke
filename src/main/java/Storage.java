@@ -1,5 +1,9 @@
-import java.io.*;
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,14 +21,14 @@ public class Storage {
      * @param filepath File that the task is added to.
      * @param textToAdd Tasks that needs to be added.
      * @throws IOException If the named file exists but
-     * is a directory rather than a regular file,
-     * does not exist but cannot be created, or
-     * cannot be opened for any other reason.
+     *     is a directory rather than a regular file,
+     *     does not exist but cannot be created, or
+     *     cannot be opened for any other reason.
      */
     public void addToFile(String filepath, String textToAdd) throws IOException {
-            FileWriter typer = new FileWriter(filepath, true);
-            typer.write(textToAdd + System.lineSeparator());
-            typer.close();
+        FileWriter typer = new FileWriter(filepath, true);
+        typer.write(textToAdd + System.lineSeparator());
+        typer.close();
     }
 
     /**
@@ -34,9 +38,9 @@ public class Storage {
      * @param filepath File that the task is added to.
      * @param textToAdd Tasks that needs to be added.
      * @throws IOException If the named file exists but
-     * is a directory rather than a regular file,
-     * does not exist but cannot be created, or
-     * cannot be opened for any other reason.
+     *     is a directory rather than a regular file,
+     *     does not exist but cannot be created, or
+     *     cannot be opened for any other reason.
      */
     public void writeToFile(String filepath, String textToAdd) throws IOException {
         FileWriter typer = new FileWriter(filepath);
@@ -50,9 +54,9 @@ public class Storage {
      * @param filename File that the tasks are in.
      * @return Returns the number of tasks.
      * @throws IOException If the named file exists but
-     * is a directory rather than a regular file,
-     * does not exist but cannot be created, or
-     * cannot be opened for any other reason.
+     *     is a directory rather than a regular file,
+     *     does not exist but cannot be created, or
+     *     cannot be opened for any other reason.
      */
     public static int countLines(String filename) throws IOException {
         try (InputStream inputs = new BufferedInputStream(new FileInputStream(filename))) {
@@ -87,13 +91,13 @@ public class Storage {
 
     /**
      * Loads the task into the tasklist
-     * in TaskList from the file.
+     *     in TaskList from the file.
      *
      * @return ArrayList that has been copied from the file.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
      * @throws DukeException If there is nothing in the file to be loaded,
-     * this exception will be thrown.
+     *     this exception will be thrown.
      */
     public ArrayList<Task> load() throws IOException, DukeException {
         File f = new File(file);
@@ -108,22 +112,24 @@ public class Storage {
                 String taskType = task.substring(index + 1, index + 2);
                 int spaceIndex = task.indexOf(" ");
                 switch (taskType) {
-                    case "T":
-                        Task toDo = new Todo(task.substring(spaceIndex));
-                        taskList.add(toDo);
-                        break;
-                    case "D":
-                        int byIndex = task.indexOf("(");
-                        Task deadline = new Deadline(task.substring(spaceIndex, byIndex - 1),
-                                task.substring(byIndex + 4));
-                        taskList.add(deadline);
-                        break;
-                    case "E":
-                        int atIndex = task.indexOf("(");
-                        Task event = new Event(task.substring(spaceIndex, atIndex - 1),
-                                task.substring(atIndex + 4));
-                        taskList.add(event);
-                        break;
+                case "T":
+                    Task toDo = new Todo(task.substring(spaceIndex));
+                    taskList.add(toDo);
+                    break;
+                case "D":
+                    int byIndex = task.indexOf("(");
+                    Task deadline = new Deadline(task.substring(spaceIndex, byIndex - 1),
+                            task.substring(byIndex + 4));
+                    taskList.add(deadline);
+                    break;
+                case "E":
+                    int atIndex = task.indexOf("(");
+                    Task event = new Event(task.substring(spaceIndex, atIndex - 1),
+                            task.substring(atIndex + 4));
+                    taskList.add(event);
+                    break;
+                default:
+                    break;
                 }
             }
             Ui.printIndent();

@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
 
     protected Scanner scan = new Scanner(System.in);
-    protected TaskList tL = new TaskList();
+    protected TaskList listTask = new TaskList();
     protected Storage store = new Storage(Storage.file);
 
     /**
@@ -21,25 +21,25 @@ public class Ui {
      * Prints the greeting at the initiation of the chat bot.
      */
     public void greeting() {
-        String logo = "     ____        _        \n" +
-                      "    |  _ \\ _   _| | _____ \n" +
-                      "    | | | | | | | |/ / _ \\\n" +
-                      "    | |_| | |_| |   <  __/\n" +
-                      "    |____/ \\__,_|_|\\_\\___|\n";
+        String logo = "     ____        _        \n"
+                + "    |  _ \\ _   _| | _____ \n"
+                + "    | | | | | | | |/ / _ \\\n"
+                + "    | |_| | |_| |   <  __/\n"
+                + "    |____/ \\__,_|_|\\_\\___|\n";
 
         // Prints out greeting of the chat bot.
         printLine();
         printIndent();
-        System.out.println("Hello! My name is \n" + logo + "\n" +
-                "    What can I do for you? \n");
+        System.out.println("Hello! My name is \n" + logo + "\n"
+                + "    What can I do for you? \n");
         printIndent();
-        System.out.println("I can only do these functions for now: \n \n" +
-                "    Todo \n" + "        Eg. todo __(task)__\n" +
-                "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n" +
-                "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n" +
-                "    Delete \n" + "        Eg. delete __(number)__ or delete all\n" +
-                "    Done \n" + "        Eg. done __(number)__\n" +
-                "    List \n");
+        System.out.println("I can only do these functions for now: \n \n"
+                + "    Todo \n" + "        Eg. todo __(task)__\n"
+                + "    Event \n" + "        Eg. event __(task)__ /at _(dd/MM/yyyy)_(hhmm)__\n"
+                + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n"
+                + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
+                + "    Done \n" + "        Eg. done __(number)__\n"
+                + "    List \n");
         printIndent();
         System.out.println("Ill be adding in more features soon! Please be patient! :)");
         printLine();
@@ -59,7 +59,7 @@ public class Ui {
                 } else if (text.equals("list")) {
                     printList();
                 } else if (text.equals("delete all")) {
-                    tL.deleteAllCommand(text);
+                    listTask.deleteAllCommand(text);
                 } else if (text.contains(" ")) {
                     String[] splittedText = text.split(" ");
                     if (splittedText[0].equals("done")) {
@@ -68,23 +68,23 @@ public class Ui {
                         if (taskNumber > 0 && taskNumber <= TaskList.listOfTasks.size()) {
                             printDone(taskNumber);
                         } else {
-                            throw new DukeException("☹ OOPS!!! There is no such task " +
-                                    "number in your list of tasks!! Please enter a valid number!");
+                            throw new DukeException("☹ OOPS!!! There is no such task "
+                                    + "number in your list of tasks!! Please enter a valid number!");
                         }
                     } else if (splittedText[0].equals("delete")) {
-                        tL.deleteCommand(text);
+                        listTask.deleteCommand(text);
                     } else if (splittedText[0].equals("find")) {
                         ArrayList<String> strList = findCommand(splittedText[1]);
                         printKeywordList(strList);
                     } else {
                         if (splittedText[0].equals("todo")) {
-                            tL.toDoCommand(text);
-                        } else if (splittedText[0].equals("deadline") &&
-                                text.contains("/") && text.contains("by")) {
-                            tL.deadlineCommand(text);
-                        } else if (splittedText[0].equals("event") &&
-                                text.contains("/") && text.contains("at")) {
-                            tL.eventCommand(text);
+                            listTask.toDoCommand(text);
+                        } else if (splittedText[0].equals("deadline")
+                                && text.contains("/") && text.contains("by")) {
+                            listTask.deadlineCommand(text);
+                        } else if (splittedText[0].equals("event")
+                                && text.contains("/") && text.contains("at")) {
+                            listTask.eventCommand(text);
                         } else {
                             printLine();
                             printIndent();
@@ -95,17 +95,17 @@ public class Ui {
                     printLine();
                     printIndent();
                     switch (text) {
-                        case "todo":
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. " +
-                                    "It must be in proper format (i.e. todo clean table).");
-                        case "deadline":
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. " +
-                                    "It must be in proper format (i.e. deadline return book /by 23 Aug).");
-                        case "event":
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. " +
-                                    "It must be in proper format (i.e. event Don's birthday /at 15 Jan 3pm).");
-                        default:
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    case "todo":
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. "
+                                + "It must be in proper format (i.e. todo clean table).");
+                    case "deadline":
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. "
+                                + "It must be in proper format (i.e. deadline return book /by 23 Aug).");
+                    case "event":
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. "
+                                + "It must be in proper format (i.e. event Don's birthday /at 15 Jan 3pm).");
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 }
             } catch (DukeException | IOException e) {
@@ -130,8 +130,8 @@ public class Ui {
      */
     public static void printLine() {
         printIndent();
-        System.out.println("_____________________" +
-                "______________________________________________");
+        System.out.println("_____________________________"
+                + "______________________________________");
     }
 
     /**
@@ -150,12 +150,12 @@ public class Ui {
      * @param i To indicate which task number is done.
      */
     private static void printDone(int i) {
-        TaskList.listOfTasks.get(i-1).markAsDone();
+        TaskList.listOfTasks.get(i - 1).markAsDone();
         printLine();
         printIndent();
         System.out.println("Nice! I've marked this task as done:");
         printIndent();
-        System.out.println(TaskList.listOfTasks.get(i-1).toString());
+        System.out.println(TaskList.listOfTasks.get(i - 1).toString());
         printLine();
     }
 
@@ -166,7 +166,7 @@ public class Ui {
      */
     public static void printDelete(int i) {
         printIndent();
-        System.out.println(TaskList.listOfTasks.get(i-1).toString());
+        System.out.println(TaskList.listOfTasks.get(i - 1).toString());
         printLine();
     }
 
@@ -199,9 +199,9 @@ public class Ui {
      *
      * @return Number of tasks.
      * @throws IOException If the named file exists
-     * but is a directory rather than a regular file,
-     * does not exist but cannot be created, or
-     * cannot be opened for any other reason.
+     *     but is a directory rather than a regular file,
+     *     does not exist but cannot be created, or
+     *     cannot be opened for any other reason.
      */
     public static int getNumOfTasks() throws IOException {
         return Storage.countLines(Storage.file);
@@ -210,7 +210,7 @@ public class Ui {
     /**
      * When there is nothing in the file, this method
      * will print out to the user, telling them that there
-     * is no previous tasks saved in the file
+     * is no previous tasks saved in the file.
      */
     public void showLoadingError() {
         printLine();
@@ -218,9 +218,23 @@ public class Ui {
         System.out.println("Nothing in file!");
     }
 
+    /**
+     * Method to find the keyword searched
+     * by the user.
+     *
+     * @param wordToFind Keyword entered by user.
+     * @return Returns an array list of tasks that contains the keyword.
+     * @throws IOException If the named file exists
+     *     but is a directory rather than a regular file,
+     *     does not exist but cannot be created, or
+     *     cannot be opened for any other reason.
+     * @throws DukeException This will be thrown out if there
+     *     is no matching words to the key word searched
+     *     by the user in all the tasks.
+     */
     public ArrayList<String> findCommand(String wordToFind) throws IOException, DukeException {
         File f = new File(Storage.file);
-        Scanner sc =new Scanner(f);
+        Scanner sc = new Scanner(f);
         ArrayList<String> tempList = new ArrayList<>();
         if (Storage.countLines(Storage.file) == 0) {
             printIndent();
@@ -240,6 +254,14 @@ public class Ui {
         return tempList;
     }
 
+    /**
+     * Prints the Start of the message that prints
+     * out the list of tasks that matches the keyword
+     * inputted by the user.
+     *
+     * @param list Prints out the array list of tasks
+     *             that contains the keyword.
+     */
     public void printKeywordList(ArrayList<String> list) {
         printLine();
         printIndent();

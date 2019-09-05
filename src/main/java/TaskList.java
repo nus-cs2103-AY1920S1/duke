@@ -31,7 +31,7 @@ public class TaskList {
      *
      * @param text Delete command with the which tasks to delete based of their numbering.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void deleteCommand(String text) throws IOException {
         int num = text.indexOf(" ");
@@ -50,17 +50,17 @@ public class TaskList {
      * Deletes everything off the task list.
      *
      * @throws IOException If the named file exists
-     * but is a directory rather than a regular file,
-     * does not exist but cannot be created,
-     * or cannot be opened for any other reason.
+     *     but is a directory rather than a regular file,
+     *     does not exist but cannot be created,
+     *     or cannot be opened for any other reason.
      */
     public void deleteAllCommand(String text) throws IOException {
         store.writeToFile(Storage.file, "");
         listOfTasks.clear();
         Ui.printLine();
         Ui.printIndent();
-        System.out.println("Everything in your list has been removed! " +
-                "Add more tasks to get started again!!!");
+        System.out.println("Everything in your list has been removed! "
+                + "Add more tasks to get started again!!!");
         Ui.printLine();
     }
 
@@ -69,7 +69,7 @@ public class TaskList {
      *
      * @param text Takes in todo command with task.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void toDoCommand(String text) throws IOException {
         tasking.printGI();
@@ -88,9 +88,9 @@ public class TaskList {
      *
      * @param text Takes in a event command with the task and date.
      * @throws DukeException If the user inputs more than the normal
-     * number of days/months/time, this error will be thrown out instead.
+     *     number of days/months/time, this error will be thrown out instead.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void eventCommand(String text) throws DukeException, IOException {
         int num = text.indexOf("/");
@@ -99,8 +99,8 @@ public class TaskList {
         int monthDate = Integer.parseInt(text.substring(num + 7, num + 9));
         int timeHour = Integer.parseInt(text.substring(num + 15, num + 17));
         int timeMin = Integer.parseInt(text.substring(num + 17));
-        if (dayDate > 0 && dayDate <= 31 && monthDate > 0 && monthDate <= 12 &&
-                timeHour > 0 && timeHour <= 24 && timeMin >= 0 && timeMin <= 59 ) {
+        if (dayDate > 0 && dayDate <= 31 && monthDate > 0 && monthDate <= 12
+                && timeHour > 0 && timeHour <= 24 && timeMin >= 0 && timeMin <= 59) {
             Task task = new Event(text.substring(num1, num - 1),
                     text.substring(num + 4));
             String taskers = task.toString();
@@ -118,8 +118,8 @@ public class TaskList {
         } else {
             Ui.printLine();
             Ui.printIndent();
-            throw new DukeException("Hmmm?? I'm sorry but there are at most 31 days in a month! " +
-                    "And remember, no negative dates allowed as well!!! :)");
+            throw new DukeException("Hmmm?? I'm sorry but there are at most 31 days in a month! "
+                    + "And remember, no negative dates allowed as well!!! :)");
         }
     }
 
@@ -130,9 +130,9 @@ public class TaskList {
      *
      * @param text Takes in a deadline command with the task and date.
      * @throws DukeException If the user inputs more than the normal
-     * number of days/months/time, this error will be thrown out instead.
+     *     number of days/months/time, this error will be thrown out instead.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void deadlineCommand(String text) throws DukeException, IOException {
         int num = text.indexOf("/");
@@ -141,8 +141,8 @@ public class TaskList {
         int monthDate = Integer.parseInt(text.substring(num + 7, num + 9));
         int timeHour = Integer.parseInt(text.substring(num + 15, num + 17));
         int timeMin = Integer.parseInt(text.substring(num + 17));
-        if (dayDate > 0 && dayDate <= 31 && monthDate > 0 && monthDate <= 12 &&
-                timeHour > 0 && timeHour <= 24 && timeMin >= 0 && timeMin <= 59 ) {
+        if (dayDate > 0 && dayDate <= 31 && monthDate > 0 && monthDate <= 12
+                && timeHour > 0 && timeHour <= 24 && timeMin >= 0 && timeMin <= 59) {
             Task task = new Deadline(text.substring(num1, num - 1),
                     text.substring(num + 4));
             String taskers = task.toString();
@@ -160,8 +160,8 @@ public class TaskList {
         } else {
             Ui.printLine();
             Ui.printIndent();
-            throw new DukeException("Hmmm?? I'm sorry but there are at most 31 days in a month! " +
-                    "And remember, no negative dates allowed as well!!! :)");
+            throw new DukeException("Hmmm?? I'm sorry but there are at most 31 days in a month! "
+                    + "And remember, no negative dates allowed as well!!! :)");
         }
     }
 }

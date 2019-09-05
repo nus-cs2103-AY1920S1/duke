@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * added to the list of tasks.
      *
      * @return Returns the string to be loaded into
-     * the file and printed out.
+     *     the file and printed out.
      */
     @Override
     public String toString() {

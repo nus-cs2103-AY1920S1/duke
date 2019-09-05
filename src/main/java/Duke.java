@@ -15,7 +15,7 @@ public class Duke {
      *
      * @param filepath File that the task is added to.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *         does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public Duke(String filepath) throws IOException {
         ui = new Ui();
@@ -30,7 +30,7 @@ public class Duke {
 
     /**
      * Contains the methods to start the bot and
-     * start to take in inputs for the bot
+     * start to take in inputs for the bot.
      */
     public void run() {
         ui.greeting();
@@ -40,7 +40,7 @@ public class Duke {
     /**
      * Main method.
      */
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         new Duke("todo.txt").run();
     }
 

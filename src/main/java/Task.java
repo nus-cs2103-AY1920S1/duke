@@ -12,7 +12,7 @@ public class Task {
      * Constructor for Task.
      *
      * @param description Takes in a string that is
-     * either Todo, Event or Deadline.
+     *     either Todo, Event or Deadline.
      */
     public Task(String description) {
         this.description = description;
@@ -59,12 +59,12 @@ public class Task {
      * Prints the number of tasks in the list.
      *
      * @throws IOException If the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
     public void printNumOfTasks() throws IOException {
         Ui.printIndent();
-        System.out.println("Now you have " +
-                Ui.getNumOfTasks() + " tasks in the list.");
+        System.out.println("Now you have "
+                + Ui.getNumOfTasks() + " tasks in the list.");
         Ui.printLine();
     }
 
@@ -93,7 +93,7 @@ public class Task {
      *
      * @param date Takes in a valid date to format it.
      * @return Returns the correctly formatted date with the
-     * appropriate strings.
+     *     appropriate strings.
      */
     public String formatDate(String date) {
         String formatted = date;

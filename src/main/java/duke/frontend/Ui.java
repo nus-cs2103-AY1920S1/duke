@@ -1,18 +1,28 @@
 package duke.frontend;
 
+import duke.task.TaskList;
 import java.util.Scanner;
-import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 import duke.exception.*;
 import duke.task.*;
 
-public class DukeBot {
+public class Ui {
     private static int cnt = 0;
-    // a utility function for performing actions based on commands
-    public static void action(String cmd, ArrayList<Task> list) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
+
+    private TaskList list;
+
+    public Ui(TaskList ls) {
+        this.list = ls;
+    }
+
+    public TaskList getFinalList() {
+        return list;
+    }
+
+    public void action(String cmd) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
         Task t;
 
-        if (cmd.startsWith("done")) {
+        if (cmd.toLowerCase().startsWith("done")) {
             if (cmd.length() <= 5 || parseInt(cmd.substring(5)) >= list.size() + 1) {
                 throw (new CompleteTaskException());
             }
@@ -21,7 +31,7 @@ public class DukeBot {
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(list.get(index - 1).toString());
             return;
-        } else if (cmd.startsWith("delete")) {
+        } else if (cmd.toLowerCase().startsWith("delete")) {
             if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {
                 throw (new DeleteTaskException());
             }
@@ -32,7 +42,7 @@ public class DukeBot {
             cnt--;
             System.out.printf("Now you have %d tasks in the list.\n", list.size());
             return;
-        } else if (cmd.startsWith("deadline")) {
+        } else if (cmd.toLowerCase().startsWith("deadline")) {
             if (cmd.length() <= 9 || !cmd.contains("/")) {
                 throw (new DukeWrongTaskException("deadline"));
             }
@@ -42,7 +52,7 @@ public class DukeBot {
             String ddl = cmd.substring(index + 4);
             t = new Deadline(desc, ddl);
             list.add(cnt++, t);
-        } else if (cmd.startsWith("event")) {
+        } else if (cmd.toLowerCase().startsWith("event")) {
             if (cmd.length() <= 6 || !cmd.contains("/")) {
                 throw (new DukeWrongTaskException("event"));
             }
@@ -51,11 +61,11 @@ public class DukeBot {
             String dt = cmd.substring(index + 4);
             t = new Event(desc, dt);
             list.add(cnt++, t);
-        } else if (cmd.startsWith("todo")){
+        } else if (cmd.toLowerCase().startsWith("todo")){
             if (cmd.length() <= 5) {
                 throw (new DukeWrongTaskException("toDo"));
             }
-            t = new toDo(cmd.substring(5));
+            t = new ToDo(cmd.substring(5));
             list.add(cnt++, t);
         } else {
             throw (new UnknownCmdException());
@@ -65,19 +75,23 @@ public class DukeBot {
         System.out.printf("Now you have %d tasks in the list.\n", list.size());
     }
 
-    public void start() throws EmptyListException {
+    public void showLoadingError() {
+        System.out.println("There's no event in your task list!");
+    }
+
+    public void start() {
         Scanner sc =  new Scanner(System.in);
 
-        // create storage for tasks
-        ArrayList<Task> list = new ArrayList<>();
-
         while (true) {
+            System.out.print("\n");
+            System.out.println("How can I help you?");
             String input = sc.nextLine();
 
-            switch (input) {
+            switch (input.toLowerCase()) {
                 case "bye":
-                case "Bye":
-                    System.out.println("Bye. Hope to see you again soon!"); return;
+                    System.out.println("Saving tasks...");
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
                 case "list":
                     try {
                         if (list.size() == 0) {
@@ -94,7 +108,7 @@ public class DukeBot {
                     }
                 default:
                     try {
-                        action(input, list);
+                        action(input);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }

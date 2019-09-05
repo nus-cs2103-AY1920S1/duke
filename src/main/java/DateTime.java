@@ -1,0 +1,128 @@
+public class DateTime {
+
+    String dateTime;
+    String day;
+    String month;
+    String year;
+    String time;
+
+    public DateTime(String dateTime) {
+        this.dateTime = dateTime.strip();
+    }
+
+    public String toString() {
+        reformat(dateTime);
+        return " " + day + " of " + month + " " + year + ", " + time;
+    }
+
+    public void reformat(String dateTime) {
+        String[] splitStr = dateTime.split("/", 3);
+        reformatDay(splitStr[0]);
+        reformatMonth(splitStr[1]);
+        String[] splitTime = splitStr[2].split(" ", 2);
+        reformatYear(splitTime[0]);
+        reformatTime(splitTime[1]);
+    }
+
+    public void reformatDay(String split) {
+        int i = Integer.parseInt(split);
+        if (i == 11 || i == 12 || i == 13) {
+            day = split + "th";
+        } else if (i % 10 == 1) {
+            day = split + "st";
+        } else if (i % 10 == 2) {
+            day = split + "nd";
+        } else if (i % 10 == 3) {
+            day = split + "rd";
+        } else {
+            day = split + "th";
+        }
+    }
+
+    public void reformatMonth(String split) {
+        int i = Integer.parseInt(split);
+        switch (i) {
+        case 1:
+            month = "January";
+            break;
+        case 2:
+            month = "February";
+            break;
+        case 3:
+            month = "March";
+            break;
+        case 4:
+            month = "April";
+            break;
+        case 5:
+            month = "May";
+            break;
+        case 6:
+            month = "June";
+            break;
+        case 7:
+            month = "July";
+            break;
+        case 8:
+            month = "August";
+            break;
+        case 9 :
+            month = "September";
+            break;
+        case 10:
+            month = "October";
+            break;
+        case 11:
+            month = "November";
+            break;
+        case 12:
+            month = "December";
+            break;
+        }
+    }
+
+    public void reformatYear(String split) {
+        year = split;
+    }
+
+    public void reformatTime(String split) {
+        int t = Integer.parseInt(split);
+        int min = t % 100;
+        int hr = t / 100;
+        if (hr == 0) {
+            if (min == 0) {
+                time = "12am";
+            } else if (min <= 9) {
+                time = "12:0" + min + "am";
+            } else {
+                time = "12:" + min + "am";
+            }
+        } else if (hr < 12) {
+            if (min == 0) {
+                time = hr + "am";
+            } else if (min <= 9) {
+                time = hr + ":0" + min + "am";
+            } else {
+                time = hr + ":" + min + "am";
+            }
+        } else if (hr == 12) {
+            if (min == 0) {
+                time = "12pm";
+            } else if (min <= 9) {
+                time = hr + ":0" + min + "pm";
+            } else {
+                time = hr + ":" + min + "pm";
+            }
+        } else {
+            hr = hr - 12;
+            if (min == 0) {
+                time = hr + "pm";
+            } else if (min <= 9) {
+                time = hr + ":0" + min + "pm";
+            } else {
+                time = hr + ":" + min + "pm";
+            }
+        }
+    }
+
+}

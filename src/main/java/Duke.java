@@ -174,21 +174,22 @@ public class Duke {
         if (count >= 100) {
             sendMessage("You can add no more than 100 tasks!");
         } else {
-            tasks.add(new Deadline(task, deadline));
+            DateTime dateTime = new DateTime(deadline);
+            tasks.add(new Deadline(task, dateTime.toString()));
             Task thing = tasks.get(count);
             count ++;
             sendMessage("Got it. I've added this task: ");
             sendMessage("  " + thing.toString());
             sendMessage(String.format("Now you have %d tasks in the list.", count));
         }
-
     }
 
     public static void addEvent(String task, String time) {
         if (count >= 100) {
             sendMessage("You can add no more than 100 tasks!");
         } else {
-            tasks.add(new Event(task, time));
+            DateTime dateTime = new DateTime(time);
+            tasks.add(new Event(task, dateTime.toString()));
             Task thing = tasks.get(count);
             count ++;
             sendMessage("Got it. I've added this task: ");

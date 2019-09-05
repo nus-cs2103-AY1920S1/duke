@@ -3,4 +3,8 @@ T | 0 | read book
 D | 0 | return book  |  Saturday 5pm
 E | 1 | project meeting  |  tomorrow 3-6pm
 D | 0 | project increments  |  Thursday 2359
-T | 0 | meet professor
+D | 1 | return book  | 2nd of December 2019, 6.0pm
+D | 0 | return book  |  2nd of December 2019, 6pm
+E | 0 | visit park  |  11th of March 2020, 12:05pm
+D | 0 | finish readings  |  23rd of July 2023, 12:59am
+E | 0 | wedding dinner  |  30th of October 2025, 9:20pm

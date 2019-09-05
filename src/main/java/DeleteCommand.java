@@ -29,16 +29,16 @@ public class DeleteCommand extends Command {
      * @throws IOException if stream to file cannot be written to or closed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Task chosenTask = tasks.getTask(deleteIndex - 1);
         tasks.removeTask(deleteIndex - 1);
         try {
             storage.deleteFromFile(deleteIndex);
-            System.out.println("Noted. I've removed this task:\n  " + chosenTask.toString());
-            System.out.println("Now you have " + tasks.tasks.size()
-                    + (tasks.tasks.size() == 1 ? " task" : " tasks") + " in the list.");
+            return "Noted. I've removed this task:\n  " + chosenTask.toString() + "\n"
+                    + "Now you have " + tasks.tasks.size()
+                    + (tasks.tasks.size() == 1 ? " task" : " tasks") + " in the list.";
         } catch (IOException ex) {
-            System.out.print("Error when deleting task from saved file");
+            return "Error when deleting task from saved file";
         }
     }
 }

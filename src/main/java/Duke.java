@@ -11,11 +11,10 @@ public class Duke {
 
     /**
      * Instantiates Duke object.
-     * @param filePath the file path of the saved tasks
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -25,7 +24,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
     /**
@@ -47,5 +46,20 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }
+
+    /**
+     * Takes the input string entered into the text box and returns the
+     * appropriate output response to be displayed in the dialog box.
+     * @param input refers to the string message entered by the user.
+     * @return appropriate reply expected
+     * @throws IOException if stream to file cannot be written to or closed.
+     * @throws DukeException if the user input is invalid.
+     */
+    public String getResponse(String input) throws IOException, DukeException {
+        String fullCommand = input;
+        Command c = Parser.parse(fullCommand);
+        String reply = c.execute(tasks, ui, storage);
+        return reply;
     }
 }

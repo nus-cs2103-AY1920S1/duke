@@ -16,7 +16,8 @@ public class ExitCommand extends Command {
      * @param storage storage object to determine where the executed results are stored
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showClosing();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        //ui.showClosing();
+        return "Bye. Hope to see you again soon!";
     }
 }

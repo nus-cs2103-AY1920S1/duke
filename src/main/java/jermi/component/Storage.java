@@ -56,7 +56,7 @@ public class Storage {
             task = new Event(components[2], components[3], components[1]);
             break;
         default:
-            assert (false);
+            assert task != null: "task cannot be null";
         }
         return task;
     }

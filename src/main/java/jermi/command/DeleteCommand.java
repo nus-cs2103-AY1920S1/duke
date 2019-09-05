@@ -45,6 +45,7 @@ public class DeleteCommand extends Command {
         taskList.remove(index);
         int numOfTasks = taskList.getSize();
         storage.taskListToFile();
+        assert numOfTasks >= 0: "numOfTasks should be >= 0";
         return formatter.echo("Noted. I've removed this task:",
                 "  " + task,
                 String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));

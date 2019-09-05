@@ -68,7 +68,7 @@ public class Parser {
                 command = new FindCommand(inputDetails);
                 break;
             default:
-                assert (false);
+                assert command != null: "command cannot be null";
             }
             break;
         default:

@@ -83,10 +83,12 @@ public class Parser {
     }
 
     private static boolean isInvalidCommand(String textInput, String command) {
+        assert command != null : "Command is null";
         return textInput.equals(command) || textInput.equals(command + " ");
     }
 
     private static boolean isInvalidIndex(int index) {
+        assert (Integer) index != null : "Index is null";
         return index < 0 || index >= TaskList.getCounter();
     }
 }

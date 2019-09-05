@@ -15,24 +15,24 @@ public class ListCommand extends Command {
      * @param tasks the TaskList.
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
+     * @return Executed output as String.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = "";
+        output += "Here are the tasks in your list:\n";
         int i = 1;
         for (Task task : tasks.getTaskList()) {
-            ui.println(i + ". " + task);
+            output += i + ". " + task + "\n";
             i++;
         }
+        return output;
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
-    //for testing purpose
+    /**
+     * For JUnit testing purpose.
+     */
     public boolean equals(Object obj) {
         return obj instanceof ListCommand;
     }

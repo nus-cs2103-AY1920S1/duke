@@ -4,9 +4,9 @@ package task;
  * A user's task.
  * Encapsulate details of the user's task.
  */
-public class Task {
+public abstract class Task {
     protected String description;
-    protected boolean isDone;
+    boolean isDone;
 
     /**
      * Constructor for a task.
@@ -19,14 +19,11 @@ public class Task {
 
     /**
      * Used to store task into user's hard disk storage.
-     * Will be further overrided in child's class.
-     * @return nothing, or an empty string
+     * @return the format to store in DataBase.
      */
-    public String toDataBase() {
-        return "";
-    }
+    public abstract String toDataBase();
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -41,7 +38,6 @@ public class Task {
         return isDone;
     }
 
-    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

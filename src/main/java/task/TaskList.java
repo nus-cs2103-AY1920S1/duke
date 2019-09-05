@@ -10,6 +10,32 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    public int getSize() {
+        return tasks.size();
+    }
+
+    public void addTask(Task task) {
+        this.tasks.add(task);
+    }
+
+    /**
+     * Delete a task in TaskList.
+     * @param index index number of task to be deleted.
+     * @return the deleted task.
+     */
+    public Task deleteTask(int index) {
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        return task;
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index);
+    }
+
+    /**
+     * Constructor to be called when there's no file read.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }

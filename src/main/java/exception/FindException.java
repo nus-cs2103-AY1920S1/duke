@@ -1,7 +1,7 @@
 package exception;
 
 /**
- * is thrown when problem occurs while finding a task.
+ * Responsible for problems occurred while finding a task.
  */
 public class FindException extends DukeException {
 

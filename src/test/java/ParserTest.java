@@ -1,7 +1,8 @@
 import command.ListCommand;
 import org.junit.jupiter.api.Test;
+import parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
 

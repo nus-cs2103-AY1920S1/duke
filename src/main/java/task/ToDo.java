@@ -16,18 +16,18 @@ public class ToDo extends Task {
      */
     public ToDo(String isDone, String description) {
         super(description);
-        if (isDone.equals("\u2713")) {
+        if (isDone.equals("1")) {
             this.isDone = true;
         }
     }
 
     /**
-     * Used to store into hard disk storage for easy reading.
+     * Stores into hard disk storage for easy reading.
      * @return format output for hard disk storage.
      */
     @Override
     public String toDataBase() {
-        return "[T] | " + getStatusIcon() + " | " + description;
+        return "[T] | " + "1" + " | " + description;
     }
 
     @Override

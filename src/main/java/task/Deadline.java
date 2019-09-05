@@ -9,8 +9,8 @@ import java.util.Date;
  */
 public class Deadline extends Task {
 
-    protected Date date;
-    protected SimpleDateFormat formatter;
+    private Date date;
+    private SimpleDateFormat formatter;
 
     /**
      * Constructor for Deadline Task.
@@ -35,7 +35,7 @@ public class Deadline extends Task {
         super(description);
         formatter = new SimpleDateFormat("dd/M/yyyy hh:mm");
         this.date = formatter.parse(date);
-        if (isDone.equals("\u2713")) {
+        if (isDone.equals("1")) {
             this.isDone = true;
         }
     }
@@ -46,7 +46,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toDataBase() {
-        return "[D] | " + getStatusIcon() + " | " + description + " | " + formatter.format(date);
+        return "[D] | " + 1 + " | " + description + " | " + formatter.format(date);
     }
 
     @Override

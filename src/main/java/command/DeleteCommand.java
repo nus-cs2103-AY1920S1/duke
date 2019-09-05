@@ -23,32 +23,29 @@ public class DeleteCommand extends Command {
      * @param tasks the TaskList.
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
+     * @return Executed output as String.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
         if (input.length <= 1) {
             throw new DeleteException();
         } else {
             int taskToDelete = Integer.parseInt(input[1]);
-            if (tasks.getTaskList().size() < taskToDelete) { //check if it's a valid delete
+            if (tasks.getSize() < taskToDelete) { //check if it's a valid delete
                 throw new DeleteException("OOPS!!! There is no such task in your list!"
                         + "Current number of tasks = " + tasks.getTaskList().size());
             } else {
-                Task task = tasks.getTaskList().get(taskToDelete - 1);
-                tasks.getTaskList().remove(taskToDelete - 1);
-                ui.println("Noted I've removed this task:");
-                ui.println("  " + task);
-                if (tasks.getTaskList().size() > 1) {
-                    ui.println("Now you have " + tasks.getTaskList().size() + " tasks in the list.");
+                String output = "";
+                Task task = tasks.deleteTask(taskToDelete - 1);
+                output += "Noted I've removed this task:\n";
+                output += "  " + task + "\n";
+                if (tasks.getSize() > 1) {
+                    output += "Now you have " + tasks.getSize() + " tasks in the list.\n";
                 } else {
-                    ui.println("Now you have " + tasks.getTaskList().size() + " task in the list.");
+                    output += "Now you have " + tasks.getSize() + " task in the list.\n";
                 }
+                return output;
             }
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

@@ -6,6 +6,8 @@ import jermi.component.TaskList;
 import jermi.exception.JermiException;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class FindCommand extends Command {
     /** Keyword used for finding. */
@@ -32,13 +34,13 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        List<String> tasks = taskList.find(this.keyword);
+        List<String> tasksInString = taskList.find(this.keyword);
+        List<String> formattedTasksInString = IntStream.rangeClosed(1, tasksInString.size())
+                .mapToObj(index -> String.format("%d.%s", index, tasksInString.get(index - 1)))
+                .collect(Collectors.toList());
 
-        for (int index = 1; index <= tasks.size(); index++) {
-            tasks.set(index - 1, index + "." + tasks.get(index - 1));
-        }
-        tasks.add(0, "Here are the matching tasks in your list:");
-        return formatter.echo(tasks.toArray(new String[0]));
+        formattedTasksInString.add(0, "Here are the matching tasks in your list:");
+        return formatter.echo(formattedTasksInString.toArray(new String[0]));
     }
 
     /**

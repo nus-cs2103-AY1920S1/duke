@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class Ui {
     public Ui() {
 
@@ -40,6 +42,16 @@ public class Ui {
         String output = "Got it. I've added this task:\n  " + task;
         output += "\nNow you have " + counter + " tasks in the list.";
         System.out.println(output);
+    }
+
+    /**
+     * This function prints out the list of tasks that correspond to the search term.
+     * @param results The result of the search.
+     */
+    public void printFind(String results) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        sb.append(results);
+        System.out.print(sb.toString());
     }
 
     public void showLoadingError() {

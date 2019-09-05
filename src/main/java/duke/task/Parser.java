@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import duke.task.Deadline;
@@ -117,6 +118,25 @@ public class Parser {
         String[] parts = input.split(" ");
         int num = Integer.parseInt(parts[1]);
         return tasks.remove(num - 1);
+    }
+
+    /**
+     * This function handles the "find" command by the user and searches for the given keyword in the TaskList.
+     * @param tasks The TaskList to find the tasks from.
+     * @param input The input given by the user and should contain the search keyword.
+     * @return String
+     */
+    public static String handleFind(TaskList tasks, String input) {
+        String[] parts = input.split(" ");
+        ArrayList<Task> arr = new ArrayList<>();
+
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            if (tasks.get(i).getDescription().contains(parts[1])) {
+                arr.add(tasks.get(i));
+            }
+        }
+
+        return handleList(new TaskList(arr));
     }
 
     /**

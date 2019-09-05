@@ -79,6 +79,8 @@ public class Duke {
             Task task = Parser.handleDelete(this.tasks, next);
             this.ui.printDelete(task, this.tasks.getTasks().size());
             this.storage.save(this.tasks);
+        } else if (next.startsWith("find")) {
+            this.ui.printFind(Parser.handleFind(this.tasks, next));
         } else {
             Task task = Parser.handleItem(tasks, next);
             this.ui.printAdd(task, (this.tasks.getTasks().size()));

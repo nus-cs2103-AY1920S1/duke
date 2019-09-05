@@ -16,12 +16,13 @@ public class ListCommand extends Command {
      * @param storage storage object to determine where the executed results are stored
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String reply = "Here are the tasks in your list:\n";
         int index = 0;
         for (Task t : tasks.tasks) {
-            System.out.println((index + 1) + "." + t.toString());
+            reply += (index + 1) + "." + t.toString() + "\n";
             index++;
         }
+        return reply;
     }
 }

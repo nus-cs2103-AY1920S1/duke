@@ -27,15 +27,15 @@ public class DoneCommand extends Command {
      * @param storage storage object to determine where the executed results are stored
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task chosenTask = tasks.getTask(doIndex - 1);
         chosenTask.markAsDone();
         try {
             storage.updateTaskInFile(doIndex);
-            System.out.println("Nice! I've marked this task as done:\n  "
+            return ("Nice! I've marked this task as done:\n  "
                     + chosenTask.toString());
         } catch (IOException ex) {
-            System.out.println("Can't update task in the file");
+            return "Can't update task in the file";
         }
     }
 }

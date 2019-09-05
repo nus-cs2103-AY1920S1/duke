@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<String> matchList = new ArrayList<String>();
         int index = 0;
 
@@ -24,10 +24,13 @@ public class FindCommand extends Command {
             }
         }
 
-        System.out.println("Here are the matching tasks in your list:");
+        String reply = "Here are the matching tasks in your list:\n";
 
         for (String line : matchList) {
-            System.out.println((index + 1) + "." + line);
+            reply += (index + 1) + "." + line + "\n";
+            index++;
         }
+
+        return reply;
     }
 }

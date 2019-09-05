@@ -31,7 +31,7 @@ public class AddCommand extends Command {
      * @throws DukeException if user input is invalid
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (fullCommand.substring(0, 4).equals("todo")) {
             if (fullCommand.length() == 4) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -61,12 +61,12 @@ public class AddCommand extends Command {
 
         try {
             storage.addToFile(tasks.getTask(tasks.getNumOfTasks() - 1).toSaveString());
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks.getTask(tasks.getNumOfTasks() - 1));
-            System.out.println("Now you have " + tasks.getNumOfTasks()
-                    + (tasks.getNumOfTasks() == 1 ? " task" : " tasks") + " in the list.");
+            return "Got it. I've added this task:\n"
+                    + "  " + tasks.getTask(tasks.getNumOfTasks() - 1) + "\n"
+                    + "Now you have " + tasks.getNumOfTasks()
+                    + (tasks.getNumOfTasks() == 1 ? " task" : " tasks") + " in the list.\n";
         } catch (IOException ex) {
-            System.out.println("Cannot save new task in file");
+            return "Cannot save new task in file";
         }
     }
 }

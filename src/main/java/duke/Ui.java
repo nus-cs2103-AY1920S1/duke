@@ -3,15 +3,16 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private boolean enabled;
+    private boolean isEnabled;
     private boolean errorLogsEnabled;
     private Scanner scanner;
+    private StringBuilder outputBuffer = new StringBuilder();
 
     /**
      * Creates a Ui object that controls I/O for user.
      */
     public Ui() {
-        enabled = false;
+        isEnabled = false;
         errorLogsEnabled = true;
         scanner = new Scanner(System.in);
     }
@@ -81,12 +82,13 @@ public class Ui {
     }
 
     /**
-     * Prints line if ui is enabled.
+     * Prints line if ui is isEnabled.
      * @param line line to be printed
      */
     public void println(String line) {
-        if (enabled) {
-            System.out.println(line);
+        if (isEnabled) {
+            //System.out.println(line);
+            outputBuffer.append(line).append('\n');
         }
     }
 
@@ -96,15 +98,30 @@ public class Ui {
      */
     public void printError(DukeException e) {
         if (errorLogsEnabled) {
-            System.out.println("☹ OOPS!!! " + e.getMessage());
+            //System.out.println("☹ OOPS!!! " + e.getMessage());
+            outputBuffer.append("\u2639")
+                    .append("OOPS!!! ")
+                    .append(e.getMessage())
+                    .append('\n');
         }
     }
 
     public boolean isEnabled() {
-        return enabled;
+        return isEnabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
+    /**
+     * Whenever UI "prints" something it puts it into the outputBuffer (StringBuilder). This also resets the buffer.
+     * @return string ui output
+     */
+    public String flushBuffer() {
+        String result = outputBuffer.toString();
+        //Set length to 0 (resetting buffer)
+        outputBuffer.setLength(0);
+        return result;
     }
 }

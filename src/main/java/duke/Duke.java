@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,6 +21,14 @@ public class Duke {
     private Ui ui = null;
     private Parser parser = null;
     private boolean isRunning = true;
+
+    /**
+     * Creates an instance of Duke which runs the program. Uses the default path to save file.
+     * Required for Launcher.java to work.
+     */
+    public Duke() {
+        this(ABSOLUTE_PATH_TO_SAVE_FILE);
+    }
 
     /**
      * Creates an instance of Duke which runs the program.
@@ -65,11 +72,38 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialize duke and return initial greeting (for GUI implementation).
+     * @return greeting
+     */
+    public String init() {
+        ui.setEnabled(true);
+        ui.printGreeting();
+        return ui.flushBuffer();
+    }
+
     public boolean isRunning() {
         return isRunning;
     }
 
     public void setRunning(boolean running) {
         isRunning = running;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
+    /**
+     * Function to generate response to user input.
+     */
+    public String getResponse(String input) {
+        try {
+            Command cmd = parser.parse(input);
+            cmd.execute(this, taskList, ui, storage);
+        } catch (DukeException e) {
+            ui.printError(e);
+        }
+        return ui.flushBuffer();
     }
 }

@@ -35,12 +35,16 @@ public class Duke {
         this.parser = new Parser();
         this.exiter = new Exiter();
 
-        this.ui.printGreeting();
         this.taskList = storage.readDataFile();
+    }
+
+    public String printGreeting() {
+        return this.ui.printGreeting();
     }
     
     public void run() {
 
+        printGreeting();
         String line = ui.nextLine();
 
         // Keep reading input until the bye command is received.

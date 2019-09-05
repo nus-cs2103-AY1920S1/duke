@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class Storage {
     /**
-     * Dummy javadocs method.
+     * Method to read saved tasks from file.
      */
+
     public static String readFile() {
         String contents = "";
         try {
@@ -27,10 +28,10 @@ public class Storage {
 
         return contents;
     }
-    /**
-     * Dummy javadocs method.
-     */
 
+    /**
+     * Method to save tasks to file.
+     */
     public static void saveFile(TaskList tasks) {
         try {
             FileWriter fstream = new FileWriter("data/duke.txt");

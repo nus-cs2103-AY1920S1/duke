@@ -1,15 +1,30 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+
+    private static ArrayList<Task> repeatList = new ArrayList();
+
+    public static void main(String[] args) throws DukeException, IOException {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> repeatList = new ArrayList();
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+
+        File f = new File("." + File.separator + "list.txt");
+        if (f.exists()) {
+            loadList();
+        }
+
+        if (repeatList.size() != 0) {
+            System.out.println("Loaded " + repeatList.size() + " items.");
+        }
 
         boolean byeHit = false;
         String repeatStr = "";
@@ -18,6 +33,7 @@ public class Duke {
             repeatStr = sc.nextLine();
             if (repeatStr.equals("bye")) {
                 byeHit = true;
+                saveList();
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (repeatStr.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
@@ -89,6 +105,43 @@ public class Duke {
                 } catch (DukeException ex) {
                     System.out.println(ex.getMessage());
                 }
+            }
+        }
+    }
+
+    private static void saveList() throws IOException {
+        FileWriter fw = new FileWriter("." + File.separator + "list.txt");
+        for (Task t : repeatList) {
+            fw.write(t.printSave() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    private static void loadList() throws FileNotFoundException, DukeException {
+        File f = new File("." + File.separator + "list.txt");
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] lineSplit = line.split(" | ");
+            try {
+                switch (line.charAt(0)) {
+                    case 'T':
+                        repeatList.add(new Todo(lineSplit[4]));
+                        break;
+                    case 'D':
+                        repeatList.add(new Deadline(lineSplit[4], lineSplit[6]));
+                        break;
+                    case 'E':
+                        repeatList.add(new Event(lineSplit[4], lineSplit[6]));
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! Invalid data loaded.");
+                }
+                if (lineSplit[2].equals("1")) {
+                    repeatList.get(repeatList.size() - 1).done();
+                }
+            } catch (IndexOutOfBoundsException ex) {
+                throw new DukeException("☹ OOPS!!! Invalid data loaded.");
             }
         }
     }

@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -8,8 +9,10 @@ import duke.ui.Ui;
 /**
  * Represents a command to add a task.
  */
-public class AddCommand extends Command{
-    /** Task to be added */
+public class AddCommand extends Command {
+    /**
+     * * Task to be added.
+     */
     private Task taskToAdd;
 
     /**
@@ -17,7 +20,7 @@ public class AddCommand extends Command{
      *
      * @param taskToAdd the task to be added
      */
-    public AddCommand(Task taskToAdd){
+    public AddCommand(Task taskToAdd) {
         super();
         this.taskToAdd = taskToAdd;
     }
@@ -27,12 +30,12 @@ public class AddCommand extends Command{
      * It adds the task to the TaskList provided by calling addTaskToList from
      * the TaskList class.
      *
-     * @param tasks The TaskList to be searched
-     * @param ui The ui to send messages to
+     * @param tasks   The TaskList to be searched
+     * @param ui      The ui to send messages to
      * @param storage Storage if required for the execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTaskToList(this.taskToAdd);
         ui.messageUser("Got it. I've added this task:",
                 taskToAdd.getTaskStatus(),

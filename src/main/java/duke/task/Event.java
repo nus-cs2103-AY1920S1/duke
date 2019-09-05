@@ -5,9 +5,11 @@ import duke.exception.DukeException;
 /**
  * A representation of an Event task.
  */
-public class Event extends Task{
+public class Event extends Task {
 
-    /** The date of the event as a string */
+    /**
+     * The date of the event as a string.
+     */
     protected String eventDate;
 
     /**
@@ -32,16 +34,16 @@ public class Event extends Task{
      * and throws a DukeException if either the event description or date field is empty.
      *
      * @param description the description of the event
-     * @param eventDate the date of the event stored as a String
+     * @param eventDate   the date of the event stored as a String
      * @throws DukeException thrown if there is an error creating the Event.
      */
-    public Event(String description, String eventDate) throws DukeException{
+    public Event(String description, String eventDate) throws DukeException {
         super(description);
         this.eventDate = parseDate(eventDate);
-        if(this.getTaskDescription().equals("")){
+        if (this.getTaskDescription().equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         }
-        if(this.getEventDate().equals("")){
+        if (this.getEventDate().equals("")) {
             throw new DukeException("☹ OOPS!!! The date field of a event cannot be empty.");
         }
         this.taskType = "E";
@@ -53,11 +55,11 @@ public class Event extends Task{
      * removed from the TaskList yet. It calls the two-argument constructor, then assigns isDone.
      *
      * @param description The description of the Event
-     * @param isDone Whether the Event is marked as done
-     * @param eventDate The date of the Event stored as a string
+     * @param isDone      Whether the Event is marked as done
+     * @param eventDate   The date of the Event stored as a string
      * @throws DukeException Error if the format of the event is incorrect
      */
-    public Event(String description, boolean isDone, String eventDate) throws DukeException{
+    public Event(String description, boolean isDone, String eventDate) throws DukeException {
         this(description, eventDate);
         this.isDone = isDone;
     }
@@ -67,7 +69,7 @@ public class Event extends Task{
      *
      * @return the eventDate stored as a string
      */
-    public String getEventDate(){
+    public String getEventDate() {
         return this.eventDate;
     }
 
@@ -79,8 +81,8 @@ public class Event extends Task{
      * @return the Event that has been marked as done
      * @throws DukeException if there is an error marking the Event as done
      */
-    public Task markAsDone() throws DukeException{
-        if(this.isDone){
+    public Task markAsDone() throws DukeException {
+        if (this.isDone) {
             throw new DukeException("☹ OOPS!!! The event is already marked as done.");
         }
         Event completed = new Event(this.description, this.eventDate);
@@ -94,9 +96,9 @@ public class Event extends Task{
      *
      * @return the task status as a string.
      */
-    public String getTaskStatus(){
+    public String getTaskStatus() {
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()
-                + "(at: " + this.getEventDate() + ")" );
+                + "(at: " + this.getEventDate() + ")");
     }
 
     /**
@@ -105,7 +107,7 @@ public class Event extends Task{
      *
      * @return the task status as a string for storage.
      */
-    public String getStoredTaskStatus(){
+    public String getStoredTaskStatus() {
         return (this.getTaskType() + " | " + this.getStatusIcon() + " | " + this.getTaskDescription()
                 + " | " + this.getEventDate());
     }

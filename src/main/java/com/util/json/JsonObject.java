@@ -9,24 +9,29 @@ public class JsonObject extends HashMap<String,JsonValue> {
         return super.put(key, new JsonValue(value));
     }
 
-    public JsonValue put(String key, double value) {
-        return super.put(key, new JsonValue(value));
+    public JsonObject put(String key, double value) {
+        super.put(key, new JsonValue(value));
+        return this;
     }
 
-    public JsonValue put(String key, boolean value) {
-        return super.put(key, new JsonValue(value));
+    public JsonObject put(String key, boolean value) {
+        super.put(key, new JsonValue(value));
+        return this;
     }
 
-    public JsonValue put(String key, String value) {
-        return super.put(key, new JsonValue(value));
+    public JsonObject put(String key, String value) {
+        super.put(key, new JsonValue(value));
+        return this;
     }
 
-    public JsonValue put(String key, JsonObject value) {
-        return super.put(key, new JsonValue(value));
+    public JsonObject put(String key, JsonObject value) {
+        super.put(key, new JsonValue(value));
+        return this;
     }
 
-    public JsonValue put(String key, JsonArray value) {
-        return super.put(key, new JsonValue(value));
+    public JsonObject put(String key, JsonArray value) {
+        super.put(key, new JsonValue(value));
+        return this;
     }
 
     /**

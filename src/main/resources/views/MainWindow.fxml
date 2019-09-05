@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <AnchorPane maxHeight="-Infinity"
             maxWidth="-Infinity"
             minHeight="-Infinity"
@@ -35,9 +36,17 @@
                 prefWidth="400.0"
                 vvalue="1.0">
 
+        <padding>
+            <Insets bottom="5.0"
+                    left="2.0"
+                    right="2.0"
+                    top="5.0"/>
+        </padding>
+
         <VBox fx:id="dialogContainer"
               prefHeight="552.0"
-              prefWidth="388.0"/>
+              prefWidth="388.0"
+              spacing="5.0"/>
 
     </ScrollPane>
 

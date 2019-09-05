@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -38,43 +37,12 @@ public class MainWindowController extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /**
-     * <p>
-     *     Starts the main flow of the app. Presenter will start to listen for user input from the Ui, and will
-     *     create appropriate Commands and invoke them, returning any TaskResponses to the Ui to be displayed.
-     * </p>
-     */
-//    public void run() {
-//        ui.startDisplay();
-//
-//        while (true) {
-//            String input = ui.readCommand();
-//
-//            if (input.equals("bye")) {
-//                ui.printExit();
-//                break;
-//            }
-//
-//            String[] args = input.split(" ");
-//
-//            try {
-//                ITaskCommand command = factory.tryMakeCommand(args[0]);
-//                TaskResponse response = command.execute(args);
-//                ui.print(response);
-//
-//            } catch (DukeException e) {
-//                ui.printError(e);
-//            }
-//
-//        }
-//    }
-
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         userInput.clear();
         dialogContainer.getChildren()
-                .add(DialogBoxController.getUserDialog(input, userImage));
+                .add(new UserDialogController(input, userImage));
 
         if (input.equals("bye")) {
             Platform.exit();
@@ -89,10 +57,10 @@ public class MainWindowController extends AnchorPane {
 
             if (response.isInvalidInput()) {
                 dialogContainer.getChildren()
-                        .add(DialogBoxController.getDukeDialog(response.getErrorMessage(), dukeImage));
+                        .add(new DukeDialogController(response.getErrorMessage(), dukeImage));
             } else {
                 dialogContainer.getChildren()
-                        .add(DialogBoxController.getDukeDialog(response.getFormattedResponse(), dukeImage));
+                        .add(new DukeDialogController(response.getFormattedResponse(), dukeImage));
             }
 
         } catch (DukeException e) {

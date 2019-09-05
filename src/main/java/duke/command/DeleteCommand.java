@@ -10,9 +10,7 @@ import duke.ui.Ui;
  * Represents a command to delete a task from a TaskList.
  */
 public class DeleteCommand extends Command {
-    /**
-     * The number of the task to delete (starting from 1).
-     */
+    /** The number of the task to delete (starting from 1). */
     private int taskNumToDelete;
 
     /**
@@ -20,7 +18,7 @@ public class DeleteCommand extends Command {
      *
      * @param taskNumToDelete One-based index task number to delete.
      */
-    public DeleteCommand(int taskNumToDelete) {
+    public DeleteCommand(int taskNumToDelete){
         super();
         this.taskNumToDelete = taskNumToDelete;
     }
@@ -29,8 +27,8 @@ public class DeleteCommand extends Command {
      * Execute this deleteCommand.
      * If the taskNumber provided is out of bounds of the TaskList, a DukeException is thrown.
      *
-     * @param tasks   The user's current TaskList
-     * @param ui      The ui currently being used by the user
+     * @param tasks The user's current TaskList
+     * @param ui The ui currently being used by the user
      * @param storage The storage object being used by the user
      * @throws DukeException An error trying to delete a task.
      */
@@ -39,10 +37,10 @@ public class DeleteCommand extends Command {
         if (this.taskNumToDelete <= 0 || this.taskNumToDelete > tasks.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        Task removedTask = tasks.deleteTaskFromList(this.taskNumToDelete - 1);
-        ui.messageUser("Noted. I've removed this task:",
-                removedTask.getTaskDescription(),
-                "Now you have " + tasks.getSize()
-                        + ((tasks.getSize() <= 1) ? " task" : " tasks") + " in the list.");
+            Task removedTask = tasks.deleteTaskFromList(this.taskNumToDelete - 1);
+            ui.messageUser("Noted. I've removed this task:",
+                    removedTask.getTaskDescription(),
+                    "Now you have " + tasks.getSize()
+                            + ((tasks.getSize() <= 1) ? " task" : " tasks") + " in the list.");
     }
 }

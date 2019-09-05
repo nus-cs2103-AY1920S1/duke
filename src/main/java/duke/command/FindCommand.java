@@ -12,9 +12,7 @@ import java.util.ArrayList;
  * Represents a command to find a task.
  */
 public class FindCommand extends Command {
-    /**
-     * Term to be searched within the TaskList.
-     */
+    /** Term to be searched within the TaskList */
     private String searchTerm;
 
     /**
@@ -22,7 +20,7 @@ public class FindCommand extends Command {
      *
      * @param searchTerm The term to be searched.
      */
-    public FindCommand(String searchTerm) {
+    public FindCommand(String searchTerm){
         this.searchTerm = searchTerm;
     }
 
@@ -33,20 +31,20 @@ public class FindCommand extends Command {
      * It then creates a new TaskList from all the matches, and then creates a new ListCommand to list out
      * all the tasks that contain the keyword.
      *
-     * @param tasks   The TaskList to be searched
-     * @param ui      The ui to message the user
+     * @param tasks The TaskList to be searched
+     * @param ui The ui to message the user
      * @param storage Storage if needed
      * @throws DukeException If there is an error while executing the FindCommand
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ArrayList<Task> taskList = tasks.getTaskArrayList();
-        ArrayList<Task> matches = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getTaskDescription().contains(this.searchTerm)) {
-                matches.add(task);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+        ArrayList<Task> taskList = tasks.getToDoList();
+            ArrayList<Task> matches = new ArrayList<>();
+            for(Task task : taskList){
+                if(task.getTaskDescription().contains(this.searchTerm)){
+                    matches.add(task);
+                }
             }
-        }
         new ListCommand().execute(new TaskList(matches), ui, storage);
     }
 }

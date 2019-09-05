@@ -1,5 +1,4 @@
 package duke.storage;
-
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.task.TaskList;
@@ -13,14 +12,10 @@ import java.util.Scanner;
  * Represents a Storage file to access and write to files.
  */
 public class Storage {
-    /**
-     * The filepath to store to/access from.
-     */
+    /** The filepath to store to/access from */
     private String filePath;
 
-    /**
-     * The File created from accessing the file.
-     */
+    /** The File created from accessing the file */
     private File tasksFile;
 
     /**
@@ -51,7 +46,7 @@ public class Storage {
      *
      * @return TaskList of all the tasks contained inside the .txt file.
      * @throws DukeException If there is an error parsing the command
-     * @throws IOException   If there is an error accessing the file
+     * @throws IOException If there is an error accessing the file
      */
     public TaskList load() throws DukeException, IOException {
         Scanner fileScanner = new Scanner(this.tasksFile);

@@ -5,17 +5,17 @@ import duke.exception.DukeException;
 /**
  * Represents a Todo Task.
  */
-public class Todo extends Task {
+public class Todo extends Task{
     /**
      * Constructor for Todo.
      * Throws a DukeException if the description is empty.
      *
-     * @param description The description of the Todo Task.
-     * @throws DukeException Exception thrown if there is an issue creating the Todo.
+     * @param description
+     * @throws DukeException
      */
     public Todo(String description) throws DukeException {
         super(description);
-        if (description.equals("")) {
+        if(description.equals("")){
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         this.taskType = "T";
@@ -26,10 +26,10 @@ public class Todo extends Task {
      * This is mainly used when parsing a String from storage into a Todo Task.
      *
      * @param description The description of the todo task
-     * @param isDone      Whether the task is done
+     * @param isDone Whether the task is done
      * @throws DukeException thrown when there is an error creating the todo.
      */
-    public Todo(String description, boolean isDone) throws DukeException {
+    public Todo(String description, boolean isDone) throws DukeException{
         this(description);
         this.isDone = isDone;
     }
@@ -42,8 +42,8 @@ public class Todo extends Task {
      * @return the Todo that has been marked as done
      * @throws DukeException if there is an error marking the Todo as done
      */
-    public Task markAsDone() throws DukeException {
-        if (this.isDone) {
+    public Task markAsDone() throws DukeException{
+        if(this.isDone){
             throw new DukeException("☹ OOPS!!! The todo is already marked as done.");
         }
         Todo completed = new Todo(this.description);
@@ -57,7 +57,7 @@ public class Todo extends Task {
      *
      * @return the task status as a string.
      */
-    public String getTaskStatus() {
+    public String getTaskStatus(){
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription());
     }
 
@@ -67,7 +67,7 @@ public class Todo extends Task {
      *
      * @return the task status as a string for storage.
      */
-    public String getStoredTaskStatus() {
+    public String getStoredTaskStatus(){
         return (this.getTaskType() + " | " + this.getStatusIcon() + " | " + this.getTaskDescription());
     }
 }

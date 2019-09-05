@@ -1,5 +1,4 @@
 package duke.task;
-
 import duke.exception.DukeException;
 
 import java.text.ParseException;
@@ -10,18 +9,12 @@ import java.util.Date;
 /**
  * Defines an abstract class of a Task.
  */
-public abstract class Task {
-    /**
-     * The description of the task.
-     */
+public abstract class Task{
+    /** The description of the task */
     protected String description;
-    /**
-     * Whether the task is done.
-     */
+    /** Whether the task is done */
     protected boolean isDone;
-    /**
-     * The type of the task, stored as a letter.
-     */
+    /** The type of the task, stored as a letter */
     protected String taskType;
 
     /**
@@ -30,7 +23,7 @@ public abstract class Task {
      *
      * @param description The description of the task.
      */
-    public Task(String description) {
+    public Task(String description){
         this.description = description;
         this.isDone = false;
     }
@@ -46,39 +39,39 @@ public abstract class Task {
      * @param input The date to be parsed as a String.
      * @return A string with the date parsed for display.
      */
-    public String parseDate(String input) {
+    public String parseDate(String input){
         SimpleDateFormat userInputParser = new SimpleDateFormat("d/MM/yyyy HHmm");
         SimpleDateFormat storageInputParser = new SimpleDateFormat("d 'of' MMMM yyyy',' h'.'mma");
-        try {
+        try{
             Date parsedDate;
-            try {
+            try{
                 parsedDate = userInputParser.parse(input);
-            } catch (ParseException e) {
-                try {
+            }catch(ParseException e){
+                try{
                     String inputWithRemovedOrdinal = input.replaceAll("(?<=\\d)(st|nd|rd|th)", "");
                     parsedDate = storageInputParser.parse(inputWithRemovedOrdinal);
-                } catch (ParseException f) {
+                }catch(ParseException f){
                     throw f;
                 }
             }
             Calendar cal = Calendar.getInstance();
             cal.setTime(parsedDate);
             int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-            if (dayOfMonth < 10 || dayOfMonth > 19) {
+            if(dayOfMonth < 10 || dayOfMonth > 19){
                 switch (dayOfMonth % 10) {
-                case 1:
-                    return new SimpleDateFormat("d'st' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
-                case 2:
-                    return new SimpleDateFormat("d'nd' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
-                case 3:
-                    return new SimpleDateFormat("d'rd' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
-                default:
-                    return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
+                    case 1:
+                        return new SimpleDateFormat("d'st' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
+                    case 2:
+                        return new SimpleDateFormat("d'nd' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
+                    case 3:
+                        return new SimpleDateFormat("d'rd' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
+                    default:
+                        return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
                 }
-            } else {
+            }else{
                 return new SimpleDateFormat("d'th' 'of' MMMM yyyy',' h'.'mma").format(parsedDate);
             }
-        } catch (ParseException e) {
+        } catch(ParseException e){
             System.out.println("ERROR PARSING DATE");
             return "";
         }
@@ -90,7 +83,7 @@ public abstract class Task {
      *
      * @return A string representation of the isDone boolean
      */
-    public String getStatusIcon() {
+    public String getStatusIcon(){
         return (isDone ? "✓" : "✗");
     }
 
@@ -99,7 +92,7 @@ public abstract class Task {
      *
      * @return A string of the task description
      */
-    public String getTaskDescription() {
+    public String getTaskDescription(){
         return this.description;
     }
 
@@ -118,7 +111,7 @@ public abstract class Task {
      *
      * @return A string containing the type of the task as a string.
      */
-    public String getTaskType() {
+    public String getTaskType(){
         return this.taskType;
     }
 

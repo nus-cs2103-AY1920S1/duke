@@ -10,7 +10,7 @@ public class Duke {
     private TaskList taskList = new TaskList();
     private WriteFile data;
 
-    private Duke(String path) {
+    public Duke(String path) {
         /**
          *  init 3 main components, ui storage and tasklist
          *  then init storage: load tasks into tasklist
@@ -26,7 +26,7 @@ public class Duke {
         ui.link(taskList,storage);
         ui.showWelcome();
     }
-    public static String getResponse(String input) {
+    public String getResponse(String input) {
         return input;
     }
     private void run() {

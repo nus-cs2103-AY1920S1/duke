@@ -24,6 +24,7 @@ public class Formatter {
     public String echo(String... messages) {
         String border = "_______________________________________________\n";
         StringBuilder toEcho = new StringBuilder(border);
+
         for (String message : messages) {
             toEcho.append(this.formatMessage(message));
         }

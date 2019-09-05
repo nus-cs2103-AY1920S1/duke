@@ -69,9 +69,7 @@ public class Storage {
     private void fileToTaskList() throws JermiException {
         try {
             List<String> lines = Files.readAllLines(this.file.toPath());
-            for (String line : lines) {
-                this.taskList.add(this.fileFormatToTask(line));
-            }
+            lines.forEach(line -> this.taskList.add(this.fileFormatToTask(line)));
         } catch (IOException e) {
             throw new LoadingException(e.getMessage());
         }
@@ -85,10 +83,7 @@ public class Storage {
     public void taskListToFile() throws JermiException {
         try {
             StringBuilder toWrite = new StringBuilder();
-            for (Task task : this.taskList.getList()) {
-                toWrite.append(task.toSaveFormat());
-                toWrite.append("\n");
-            }
+            this.taskList.getList().forEach(task -> toWrite.append(task.toSaveFormat() + "\n"));
             Files.writeString(this.file.toPath(), toWrite.toString());
         } catch (IOException e) {
             throw new SavingException(e.getMessage());

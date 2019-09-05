@@ -4,14 +4,18 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 import static java.lang.System.lineSeparator;
+import static java.util.Objects.requireNonNull;
 
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds and displays a list of Tasks that match the keyword"
+            + lineSeparator() + "Usage: " + COMMAND_WORD + " <keyword>";
     private final String keyword;
 
     public FindCommand(String keyword) {
-        this.keyword = keyword;
+        this.keyword = requireNonNull(keyword);
     }
 
     @Override

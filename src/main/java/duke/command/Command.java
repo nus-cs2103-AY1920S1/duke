@@ -4,7 +4,10 @@ import duke.Duke;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+
+import java.io.IOException;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a user command.
@@ -12,7 +15,6 @@ import duke.ui.Ui;
 public abstract class Command {
 
     protected TaskList tasks;
-    protected Ui ui;
     protected Storage storage;
     protected boolean isExit;
 
@@ -21,19 +23,17 @@ public abstract class Command {
      *
      * @throws DukeException If the command failed to execute.
      */
-    public abstract CommandResult execute() throws DukeException;
+    public abstract CommandResult execute() throws DukeException, IOException;
 
     /**
      * Sets the data to be used by the {@link Command}.
      *
-     * @param tasks List of tasks.
-     * @param ui UI interface.
+     * @param tasks   List of tasks.
      * @param storage Storage.
      */
-    public void setData(TaskList tasks, Ui ui, Storage storage) {
-        this.tasks = tasks;
-        this.ui = ui;
-        this.storage = storage;
+    public void setData(TaskList tasks, Storage storage) {
+        this.tasks = requireNonNull(tasks);
+        this.storage = requireNonNull(storage);
     }
 
     /**

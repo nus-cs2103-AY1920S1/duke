@@ -1,5 +1,7 @@
 package duke.task;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a task that can be marked as complete.
  */
@@ -8,7 +10,7 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = requireNonNull(description);
         this.isDone = false;
     }
 

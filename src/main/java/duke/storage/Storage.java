@@ -31,7 +31,7 @@ public class Storage {
      * @return List of tasks.
      * @throws DukeException If the loading of the data failed.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException, IOException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(file);
@@ -59,7 +59,7 @@ public class Storage {
                     break;
 
                 default:
-                    throw new DukeException("Invalid parameter specified");
+                    throw new DukeException("An error occurred while loading the Storage file");
                 }
 
                 if (done) {
@@ -71,13 +71,9 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             file.getParentFile().mkdirs();
-            try {
-                FileWriter fw = new FileWriter(file);
-                fw.close();
-                throw new DukeException("Storage file did not exist");
-            } catch (IOException ex) {
-                throw new DukeException("An error occurred when setting up the storage file: " + ex.getMessage());
-            }
+            FileWriter fw = new FileWriter(file);
+            fw.close();
+            return new ArrayList<>();
         }
     }
 
@@ -85,31 +81,23 @@ public class Storage {
      * Saves the data into the storage.
      *
      * @param data Data to be saved.
-     * @throws DukeException If the data failed to save.
+     * @throws IOException If the data failed to save.
      */
-    public void save(String data) throws DukeException {
-        try {
-            FileWriter fw = new FileWriter(file);
-            fw.write(data);
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeException("An error occurred when saving data to storage");
-        }
+    public void save(String data) throws IOException {
+        FileWriter fw = new FileWriter(file);
+        fw.write(data);
+        fw.close();
     }
 
     /**
      * Appends the data into the storage.
      *
      * @param data Data to be appended.
-     * @throws DukeException If the data failed to be appended.
+     * @throws IOException If the data failed to be appended.
      */
-    public void append(String data) throws DukeException {
-        try {
-            FileWriter fw = new FileWriter(file, true);
-            fw.append(data);
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeException("An error occurred while appending data to storage");
-        }
+    public void append(String data) throws IOException {
+        FileWriter fw = new FileWriter(file, true);
+        fw.append(data);
+        fw.close();
     }
 }

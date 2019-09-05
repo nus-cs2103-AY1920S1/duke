@@ -36,6 +36,7 @@ public class GuiUi {
                 "[todo <task name>]: create a todo Task \n" +
                 "[deadline <task name> /by dd/mm/yy hhmm]: create task with a specified deadline \n" +
                 "[event <task name> /at dd/mm/yy hhmm-hhmm]: create task with specified event \n" +
+                "[find <query>] searches ur list of tasks and return a result" +
                 "[bye]: closes applications";
     }
 }

@@ -27,6 +27,7 @@ public class GuiParser  {
      */
     public String readUserInput(String string) {
         String argument = string;
+        argument = argument.trim();
         if (argument.equals("list")) {
             String result = storeTaskList.listTask();
             return result;
@@ -50,7 +51,6 @@ public class GuiParser  {
                     return result;
                 } else if (inputArray[0].equals("help")) {
                     return GuiUi.helpText();
-
                 }
                 else if (inputArray[0].equals("bye")) {
                     System.exit(0);

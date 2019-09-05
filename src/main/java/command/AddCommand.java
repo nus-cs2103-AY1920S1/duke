@@ -48,9 +48,10 @@ public class AddCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @return          The message to be displayed upon successful execution
      * @throws DukeException    If format of task to be added is invalid
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask;
         switch (taskType) {
         case "todo":
@@ -66,10 +67,11 @@ public class AddCommand extends Command {
             throw new DukeException("Invalid task format"); // should never reach here :)
         }
         tasks.addTask(newTask);
-        ui.dukeEcho("Got it. I've added this task:",
+        String res = ui.dukeEchoString("Got it. I've added this task:",
                 newTask.toString(),
                 "Now you have " + tasks.size() + " tasks in the list.");
         storage.save(tasks);
+        return res;
     }
 
     /**

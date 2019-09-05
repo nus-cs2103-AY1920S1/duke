@@ -34,15 +34,17 @@ public class FindCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @return          The message to be displayed upon successful execution
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)  {
+    public String execute(TaskList tasks, Ui ui, Storage storage)  {
         ArrayList<Task> tasksContainingKeyword = tasks.findTasksByKeyword(keyword);
         String[] tasksToPrint = new String[tasksContainingKeyword.size() + 1];
         tasksToPrint[0] = "Here are the matching tasks in your list:";
         for (int i = 1; i <= tasksContainingKeyword.size(); i++) {
             tasksToPrint[i] = i + "." + tasksContainingKeyword.get(i - 1).toString();
         }
-        ui.dukeEcho(tasksToPrint);
+        String res = ui.dukeEchoString(tasksToPrint);
+        return res;
     }
 }

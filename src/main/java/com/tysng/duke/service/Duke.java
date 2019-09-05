@@ -1,9 +1,7 @@
 package com.tysng.duke.service;
 
 import com.tysng.duke.domain.Task;
-import com.tysng.duke.exception.CommandException;
 import com.tysng.duke.storage.Storage;
-import com.tysng.duke.ui.Command;
 import com.tysng.duke.ui.Response;
 
 import java.util.List;
@@ -18,6 +16,11 @@ import java.util.stream.Collectors;
 public class Duke {
     private TaskList taskList;
     private Storage storage;
+
+
+    public Duke() {
+
+    }
 
     /**
      * Constructs a service layer object with the external Storage layer.
@@ -60,7 +63,7 @@ public class Duke {
             response = this.handleEcho(command.toString());
             break;
         default:
-            throw new CommandException("This command is not recognized.");
+            throw new Error("Fatal error: the command is not valid");
         }
         this.storage.saveTasks(this.taskList.getTaskList());
         return response;

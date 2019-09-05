@@ -1,4 +1,4 @@
-package com.tysng.duke.ui;
+package com.tysng.duke.service;
 
 import com.tysng.duke.domain.Deadline;
 import com.tysng.duke.domain.Event;

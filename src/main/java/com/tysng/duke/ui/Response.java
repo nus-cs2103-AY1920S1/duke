@@ -35,6 +35,16 @@ public class Response {
         ));
     }
 
+    public static Response newSplash() {
+        return new Response(List.of(
+                " ____        _        \n"
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n"
+        ));
+    }
+
     /**
      * Generates a Bye type response.
      *
@@ -141,16 +151,30 @@ public class Response {
      * Prints the Response to stdout. This methods handles the indentation and dividers.
      */
     public void print() {
-        String border = "    ";
-        String contentIndent = "     ";
-        String divider = "____________________________________________________________";
-        // output
-        System.out.println(border + divider);
-        for (String line : content) {
-            System.out.print(contentIndent);
-            System.out.println(line);
-        }
-        System.out.println(border + divider);
+        System.out.print(this.toString());
     }
 
+    @Override
+    public String toString() {
+        String border = "    ";
+        String divider = "____________________________________________________________";
+        String contentIndent = "     ";
+
+        StringBuilder builder = new StringBuilder()
+                .append(border).append(divider).append(System.lineSeparator());
+
+        for (String line : content) {
+            builder.append(contentIndent).append(line).append(System.lineSeparator());
+        }
+
+        builder.append(border).append(divider).append(System.lineSeparator());
+        return builder.toString();
+    }
+
+    public String toDialogue() {
+        StringBuilder builder = new StringBuilder();
+        return this.content.stream()
+                .reduce(builder, (sb, line) -> sb.append(line).append(System.lineSeparator()), (x, y) -> y)
+                .toString();
+    }
 }

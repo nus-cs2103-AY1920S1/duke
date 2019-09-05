@@ -1,6 +1,7 @@
 package com.tysng.duke.ui;
 
 import com.tysng.duke.exception.CommandException;
+import com.tysng.duke.service.Command;
 import com.tysng.duke.service.Duke;
 
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
  * This class controls the input and output of the Application. It scans for user input, passes to Duke for processing,
  * and prints the response to stdout.
  */
-public class Ui {
+public class Cli {
     private Duke duke;
 
     /**
@@ -17,7 +18,7 @@ public class Ui {
      *
      * @param duke a Duke service layer object
      */
-    public Ui(Duke duke) {
+    public Cli(Duke duke) {
         this.duke = duke;
     }
 
@@ -36,6 +37,7 @@ public class Ui {
         // start interaction
         Scanner sc = new Scanner(System.in);
 
+        // generation of command is done here because calling bye should exit the programme
         while (sc.hasNextLine()) {
             Command command;
             try {
@@ -52,4 +54,7 @@ public class Ui {
         }
         sc.close();
     }
+
+
+
 }

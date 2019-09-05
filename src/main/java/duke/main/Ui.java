@@ -3,7 +3,6 @@ package duke.main;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
     private StringBuilder output;

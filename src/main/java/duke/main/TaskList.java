@@ -16,6 +16,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets all tasks present.
+     *
+     * @return The list of all tasks.
+     */
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
@@ -61,6 +66,11 @@ public class TaskList {
         tasks.remove(zeroBasedIndex);
     }
 
+    /**
+     * Returns the size of the task list.
+     *
+     * @return The size of the list.
+     */
     public int size() {
         return tasks.size();
     }

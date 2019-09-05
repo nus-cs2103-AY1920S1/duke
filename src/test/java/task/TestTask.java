@@ -26,15 +26,15 @@ public class TestTask {
 
     @Test
     public void toString_all() {
-        assertEquals(task.toString(), "[✘] return a book");
+        assertEquals("[✘] return a book", task.toString());
         task.markAsDone();
-        assertEquals(task.toString(), "[✓] return a book");
+        assertEquals("[✓] return a book", task.toString());
     }
 
     @Test
     public void stringify() {
-        assertEquals(task.stringify(), "0 | return a book");
+        assertEquals("0 | return a book", task.stringify());
         task.markAsDone();
-        assertEquals(task.stringify(), "1 | return a book");
+        assertEquals("1 | return a book", task.stringify());
     }
 }

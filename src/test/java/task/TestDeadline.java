@@ -19,11 +19,11 @@ public class TestDeadline {
 
     @Test
     public void toString_normal_noException() {
-        assertEquals(deadline.toString(), "[D][✘] return a book (by: 01/12/2019 1800)");
+        assertEquals("[D][✘] return a book (by: 01/12/2019 1800)", deadline.toString());
     }
 
     @Test
     public void stringify_normal_noException() {
-        assertEquals(deadline.stringify(), "D | 0 | return a book | 01/12/2019 1800");
+        assertEquals("D | 0 | return a book | 01/12/2019 1800", deadline.stringify());
     }
 }

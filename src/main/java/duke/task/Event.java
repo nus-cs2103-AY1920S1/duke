@@ -1,39 +1,34 @@
 package duke.task;
 
-import duke.exception.DukeException;
+import duke.date.DateValidator;
+import duke.date.InvalidDateDukeException;
 
-/**
- * Represents a Task at a particular time eg. 2-4 PM.
- */
 public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) throws DukeException {
+    public Event(String description, String at) throws InvalidTaskDukeException, InvalidDateDukeException {
         super(description);
-        this.at = at;
-        if (description.isBlank()) {
-            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        setAt(at);
+    }
+
+    public void setAt(String at) throws InvalidDateDukeException {
+        DateValidator v = new DateValidator();
+        boolean isValid = v.validateDate(at, true);
+        if (!isValid) {
+            throw new InvalidDateDukeException("Invalid date format! Please ensure your date sticks to this format:\n"
+                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
+                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"");
         }
+        this.at = at;
     }
 
-    /**
-     * Returns an ASCII description of the task.
-     *
-     * @return ASCII representation of the task.
-     */
-    @Override
-    public String getAscii() {
-        return "E | " + super.getAscii() + " | " + at;
+    public String getTime() {
+        return at;
     }
 
-    /**
-     * Returns a unicode description of the task.
-     *
-     * @return Unicode representation of the task.
-     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[Event] " + super.toString() + " (at: " + at + ")";
     }
 }

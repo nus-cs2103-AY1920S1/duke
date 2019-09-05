@@ -1,0 +1,18 @@
+hello!
+can you reply?
+todo borrow book
+todo read book
+deadline return book Aug 31st
+list
+deadline return book /by Aug 31st
+done 0
+done 1
+list
+delete 1
+event lecture /at 4 PM
+done 1
+done 2
+done 3
+done 4
+list
+bye

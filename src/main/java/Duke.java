@@ -1,144 +1,67 @@
+import duke.command.Command;
+import duke.command.LoadCommand;
+import duke.command.SaveCommand;
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.Deadline;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
-import java.io.IOException;
-import java.util.IllegalFormatException;
-import java.util.Scanner;
-import java.util.ArrayList;
-
-/**
- * The main class. The entire chat-bot runs from here.
- */
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class Duke {
 
-    private Scanner sc;
     private TaskList tasks;
-    private Storage storage;
     private Ui ui;
     private Parser parser;
+    private Storage storage;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    /**
-     * Constructor for the Duke class.
-     *
-     * @param filePath Filepath of the list of tasks.
-     */
-    public Duke(String filePath) {
-        ui = new Ui(this);
-        tasks = new TaskList(this);
-        parser = new Parser(this, tasks);
-        sc = new Scanner(System.in);
+    public Duke() {
+        ui = new Ui();
+        tasks = new TaskList();
+        parser = new Parser();
+        storage = new Storage();
         try {
-            setStorage(new Storage(filePath));
-            tasks.setTaskList(storage.loadTasks());
-        } catch (IOException e) {
-            System.out.println("Invalid file path!");
-        }
-    }
-
-    /**
-     * Sets the storage object to an instance at the correct filepath.
-     *
-     * @param storage The storage object to be used.
-     */
-    public void setStorage(Storage storage) {
-        this.storage = storage;
-    }
-
-    /**
-     * Executes the run method with the correct file-path input.
-     *
-     * @param args Command line inputs.
-     */
-    public static void main(String[] args) {
-        new Duke("C:/CS2103/iP/data/duke.txt").run();
-    }
-
-    /**
-     * Executes and orchestrates the running of the chat-bot.
-     */
-    public void run() {
-        ui.dukeOutput("Hello, this is Duke.\n" + "How may I help you?");
-        ui.readInputs();
-    }
-
-    /**
-     * Evaluates the input string from the UI.
-     *
-     * @param input Input string from the UI
-     * @throws DukeException If input is invalid.
-     */
-    public void evaluate(String input) throws DukeException {
-        try {
-            parser.evaluateInput(input);
-            storage.writeTasks(getTasksAscii());
-        } catch (IOException e) {
-            print("OOPS!!! Invalid file path.");
-        }
-    }
-
-    /**
-     * Returns a string of tasks containing only ASCII characters.
-     *
-     * The string returned is suitable to be written to a plain .txt file.
-     *
-     * @return List of tasks.
-     */
-    public String getTasksAscii() {
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            output.append((i + 1) + ". " + tasks.get(i).getAscii());
-            if (i != tasks.size() - 1) {
-                output.append("\n");
+            LoadCommand c = new LoadCommand();
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            try {
+                storage.flushData();
+            } catch (DukeException ex) {
+                ui.displayOutput(ex.getMessage());
             }
         }
-        return output.toString();
     }
 
-    /**
-     * Outputs a message through the UI.
-     *
-     * @param message Message to be printed.
-     */
-    public void print(String message) {
-        ui.dukeOutput(message);
-    }
-
-    /**
-     * Returns the number of tasks in the task list.
-     *
-     * @return Number of tasks.
-     */
-    public String getNumberOfTasks() {
-        return "Now you have " + tasks.size() + " tasks in the list.";
-    }
-
-    /**
-     * Notifies the user about the most recently added task.
-     */
-    public void printTaskAdded() {
-        String output = "Got it. I've added this task:\n"
-                + "  " + tasks.get(tasks.size() - 1).toString()
-                + "\n" + getNumberOfTasks();
-        ui.dukeOutput(output);
-    }
-
-    /**
-     * Outputs the list of tasks and their statuses.
-     */
-    public void printTasks() {
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            output.append((i + 1) + ". " + tasks.get(i).toString());
-            if (i != tasks.size() - 1) {
-                output.append("\n");
-            }
-        }
-        if (output.toString().isBlank()) {
-            ui.dukeOutput("You have no tasks to do o_O!");
-        } else {
-            ui.dukeOutput(output.toString());
+    String getResponse(String input) {
+        try {
+            Command c = parser.parseInput(input);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 

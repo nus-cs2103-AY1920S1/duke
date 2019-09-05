@@ -220,8 +220,10 @@ public class Duke extends Application {
 //    }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response to user input.
+     *
+     * @param input The user's input.
+     * @return Duke's response.
      */
     String getResponse(String input) {
         try {

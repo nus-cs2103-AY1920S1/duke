@@ -25,13 +25,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskRemoved = tasks.remove(index - 1);
+        try {
+            Task taskRemoved = tasks.remove(index - 1);
 
-        ui.showLine();
-        ui.println("     Noted. I've removed this task: ");
-        ui.println("       " + taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon()
-                + " " + taskRemoved);
-        ui.println("     Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
+            ui.showLine();
+            ui.println("     Noted. I've removed this task: ");
+            ui.println("       " + taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon()
+                    + " " + taskRemoved);
+            ui.println("     Now you have " + tasks.size() + " tasks in the list.");
+            ui.showLine();
+        } catch (IndexOutOfBoundsException e) {
+            ui.println("OOPS!!! The item that you want to delete does not exist.");
+        }
     }
 }

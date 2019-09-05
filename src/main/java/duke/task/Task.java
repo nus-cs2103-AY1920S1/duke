@@ -31,9 +31,13 @@ public class Task {
 
     public String getStatusIcon() {
         // Return tick or X symbols
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718"); // Either a tick or a cross symbol
     }
 
+    /**
+     * This function puts the content of the Task into a format suitable for storing into a file.
+     * @return String
+     */
     public String getFileLine() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.getType());

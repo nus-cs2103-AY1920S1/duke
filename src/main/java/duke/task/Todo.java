@@ -4,6 +4,11 @@ import duke.task.DukeException;
 import duke.task.Task;
 
 public class Todo extends Task {
+    /**
+     * The constructor for this class.
+     * @param description The description of the task.
+     * @throws DukeException If the description is missing.
+     */
     public Todo(String description) throws DukeException {
         super(description);
         if (description.length() == 0) {

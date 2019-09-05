@@ -125,12 +125,16 @@ public class Ui {
     }
 
     private String printWithLongLines(String stringToPrint) {
+
+        // The commented-out code is for printing the long horizontal lines above and below each message.
+        // I chose not to remove this code in case I need it in future.
+
         String outValue = (
-            PRINTED_LONG_LINE
-            + "\n"
-            + stringToPrint
-            + "\n"
-            + PRINTED_LONG_LINE
+            //PRINTED_LONG_LINE
+            // + "\n"
+            /*+*/ stringToPrint
+            //+ "\n"
+            //+ PRINTED_LONG_LINE
             + "\n"
         );
 

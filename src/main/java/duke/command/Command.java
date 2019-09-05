@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.util.Parser;
+import duke.util.ArgumentParser;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * the {@link #getName()} and {@link #execute(TaskList, Ui, Storage)} methods.
  */
 public abstract class Command {
-    protected Parser parser = new Parser();
+    protected ArgumentParser argumentParser = new ArgumentParser();
     protected String[] args;
 
     public Command(String[] args) {

@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.util.Parser;
+import duke.task.Event;
+import duke.util.ArgumentParser;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
@@ -13,7 +14,7 @@ public class EventCommand extends Command {
     public EventCommand(String[] args) {
         super(args);
 
-        parser.register("/at", true);
+        argumentParser.register("/at", true);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Map<String, String[]> switchArgs = parser.parse(args);
+        Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
         if (comArgs.length == 0) {
@@ -35,7 +36,7 @@ public class EventCommand extends Command {
             throw new DukeException("The date of an event cannot be empty.");
         }
 
-        duke.task.Event e = new duke.task.Event(Parser.concatenate(comArgs), Parser.concatenate(atArgs));
+        Event e = new Event(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(atArgs));
         tasks.add(e);
         ui.say("added: " + e);
     }

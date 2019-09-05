@@ -20,7 +20,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Map<String, String[]> switchArgs = parser.parse(args);
+        Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
         if (comArgs.length == 0) {

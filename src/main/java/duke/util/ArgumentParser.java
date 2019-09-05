@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * Parser for {@link duke.command.Command} argument lists. It can convert an entire raw argument list into a multimap
  * between switch names and switch argument lists. Both required and optional switches are supported.
  */
-public class Parser {
+public class ArgumentParser {
     protected Set<String> requiredSwitches = new TreeSet<>();
     protected Set<String> optionalSwitches = new TreeSet<>();
 
@@ -20,8 +20,8 @@ public class Parser {
      * Registers the specified String as a switch while specifying if it is required or optional.
      * Commands missing required switches will cause an exception upon parsing.
      *
-     * @param name        the String that uniquely identifies this switch.
-     * @param isRequired  boolean specifying if the switch is required.
+     * @param name        the String that uniquely identifies this switch
+     * @param isRequired  boolean specifying if the switch is required
      */
     public void register(String name, boolean isRequired) {
         if (isRequired) {

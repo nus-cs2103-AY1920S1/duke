@@ -1,7 +1,8 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.util.Parser;
+import duke.task.Deadline;
+import duke.util.ArgumentParser;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
@@ -12,7 +13,7 @@ public class DeadlineCommand extends Command {
     public DeadlineCommand(String[] args) {
         super(args);
 
-        parser.register("/by", true);
+        argumentParser.register("/by", true);
     }
 
     @Override
@@ -22,7 +23,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Map<String, String[]> switchArgs = parser.parse(args);
+        Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
         if (comArgs.length == 0) {
@@ -34,7 +35,7 @@ public class DeadlineCommand extends Command {
             throw new DukeException("The date of a deadline cannot be empty.");
         }
 
-        duke.task.Deadline d = new duke.task.Deadline(Parser.concatenate(comArgs), Parser.concatenate(byArgs));
+        Deadline d = new Deadline(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(byArgs));
         tasks.add(d);
         ui.say("added: " + d);
     }

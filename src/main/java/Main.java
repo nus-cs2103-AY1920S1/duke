@@ -9,6 +9,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Main extends Application {
     private Duke duke = new Duke("data/duke.txt");
@@ -18,6 +20,9 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -67,13 +72,11 @@ public class Main extends Application {
 
         //Step3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();            
+            handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -86,5 +89,17 @@ public class Main extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
+    }
+
+    private void handleUserInput() {
+        String command = userInput.getText();
+        userInput.clear();
+
+        Label userText = new Label(command);
+        Label dukeText = new Label(duke.getResponse(command));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(userImage)),
+                new DialogBox(dukeText, new ImageView(dukeImage))
+        );
     }
 }

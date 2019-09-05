@@ -1,7 +1,7 @@
 package duke.lib.datahandling;
 
 import duke.lib.TaskList;
-import duke.lib.UI;
+import duke.lib.ui.UI;
 import duke.lib.common.DukeException;
 import duke.lib.common.Time;
 import duke.lib.task.Deadline;
@@ -27,10 +27,10 @@ public class Parser {
      * @param storage Storage of where the save file is located
      * @param ui a ui to display the output from the commands
      */
-    public Parser(TaskList taskList, DataStorage storage, UI ui) {
+    public Parser(TaskList taskList, DataStorage storage) {
         this.storage = storage;
         this.taskList = taskList;
-        this.ui = ui;
+        this.ui = new UI();
         this.isExit = false;
     }
 
@@ -40,8 +40,9 @@ public class Parser {
      * @param fullCommand the command input given by the user
      * @throws DukeException multiple cases of wrong input
      */
-    public void parse(String fullCommand) throws DukeException {
+    public String parse(String fullCommand) throws DukeException {
         try {
+            updateStorage();
             String[] words = fullCommand.split(" ", 2);
             String command;
             boolean moreThanOne;
@@ -61,29 +62,26 @@ public class Parser {
                 if (!moreThanOne) {
                     throw new DukeException("Sorry, you need to input something to find what you're looking for.");
                 }
-                ui.displayList(findAllTaskWithName(words[1]), "Here are the matching tasks in your list:");
-                break;
+                return ui.format("Here are all the matching tasks with that name",
+                        true, (String[]) findAllTaskWithName(words[1]).toArray());
             case "bye":
-                ui.display("Bye. Hope to see you again soon!");
                 isExit = true;
-                break;
+                return ui.format("Bye. Hope to see you again soon!", false);
             case "list":
                 ArrayList<Task> list = taskList.getList();
                 if (list.isEmpty()) {
                     throw new DukeException("Oh looks like there's nothing in your list so far.");
                 }
-                ui.displayList(list, "Here are the tasks in your list:");
-                break;
+                return ui.convertTaskListToString("Here are the tasks in your list:", list);
             case "done":
                 if (moreThanOne) {
                     String secondWord = words[1];
                     int index = Integer.parseInt(secondWord);
-                    ui.display(taskList.markAsDone(index).toString(),
-                            "Nice! I've marked this task as done:");
+                    return ui.format("Nice! I've marked this task as done:",
+                            false, taskList.markAsDone(index).toString());
                 } else {
                     throw new DukeException("I'm sorry, you didn't specify which index of the list you've done.");
                 }
-                break;
             case "delete":
                 if (!moreThanOne) {
                     throw new DukeException("I'm sorry, "
@@ -91,19 +89,17 @@ public class Parser {
                 }
                 String secondWord = words[1];
                 int index = Integer.parseInt(secondWord);
-                ui.display(taskList.delete(index).toString(),
-                        "Noted. I've removed this task:",
-                        "Now you have " + taskList.getSize() + " tasks in the list.");
-                break;
+                return ui.format("Noted. I've removed this task:", false,
+                        taskList.delete(index).toString(),
+                         "Now you have " + taskList.getSize() + " tasks in the list.");
             case "todo":
                 if (!moreThanOne) {
                     throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
                 }
                 temp = new ToDo(words[1]);
                 taskList.store(temp);
-                ui.display(temp.toString(), "Got it. I've added this task:",
+                return ui.format("Got it. I've added this task:", false, temp.toString(),
                         "Now you have " + taskList.getSize() + " tasks in the list.");
-                break;
             case "deadline":
                 if (moreThanOne) {
                     String[] spl = words[1].split(" /by ", 2);
@@ -114,12 +110,11 @@ public class Parser {
                     Time t = new Time(time);
                     temp = new Deadline(spl[0], t);
                     taskList.store(temp);
-                    ui.display(temp.toString(), "Got it. I've added this task:",
+                    return ui.format("Got it. I've added this task:", false, temp.toString(),
                             "Now you have " + taskList.getSize() + " tasks in the list.");
                 } else {
                     throw new DukeException("I'm sorry, the description of your DeadLine cannot be empty.");
                 }
-                break;
             case "event":
                 if (moreThanOne) {
                     String[] split = words[1].split(" /at ", 2);
@@ -130,27 +125,25 @@ public class Parser {
                     Time t = new Time(time);
                     temp = new Event(split[0], t);
                     taskList.store(temp);
-                    ui.display(temp.toString(), "Got it. I've added this task:",
+                    return ui.format("Got it. I've added this task:", false, temp.toString(),
                             "Now you have " + taskList.getSize() + " tasks in the list.");
                 } else {
                     throw new DukeException("I'm sorry, the description of your Event cannot be empty.");
                 }
-                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :(");
             }
         } catch (NumberFormatException e) {
             throw new DukeException("I'm sorry please give a number instead.");
         }
-        updateStorage();
     }
 
-    private ArrayList<Task> findAllTaskWithName(String name) throws DukeException {
+    private ArrayList<String> findAllTaskWithName(String name) throws DukeException {
         ArrayList<Task> tempTaskList = taskList.getList();
-        ArrayList<Task> listWithMatchingName = new ArrayList<>();
+        ArrayList<String> listWithMatchingName = new ArrayList<>();
         for (Task t : tempTaskList) {
             if (t.getName().contains(name)) {
-                listWithMatchingName.add(t);
+                listWithMatchingName.add(t.toString());
             }
         }
         if (listWithMatchingName.isEmpty()) {

@@ -1,7 +1,7 @@
 package duke.lib.datahandling;
 
 import duke.lib.TaskList;
-import duke.lib.UI;
+import duke.lib.ui.UI;
 import duke.lib.common.DukeException;
 import org.junit.jupiter.api.Test;
 

@@ -14,17 +14,20 @@ public class AddCommand implements Command {
      * Adds task to the list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks);
 
-        ui.showMessage("Got it. I've added this task:");
-        ui.showMessage("  " + task);
-        printTotalTask(tasks, ui);
+        StringBuilder builder = new StringBuilder();
+        builder.append("Got it. I've added this task:\n");
+        builder.append("  " + task + "\n");
+        printTotalTask(tasks, builder);
+
+        return builder.toString();
     }
 
-    private void printTotalTask(TaskList tasks, Ui ui) {
+    private void printTotalTask(TaskList tasks, StringBuilder builder) {
         boolean isPlural = tasks.size() > 1;
-        ui.showMessage("Now you have " + tasks.size() + " task" + (isPlural ? "s" : "") + " in the list.");
+        builder.append("Now you have " + tasks.size() + " task" + (isPlural ? "s" : "") + " in the list.\n");
     }
 }

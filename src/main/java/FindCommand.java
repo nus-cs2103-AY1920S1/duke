@@ -14,14 +14,18 @@ public class FindCommand implements Command {
      * Finds all task which description contains keyword.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showMessage("Here are the matching tasks in your list:");
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Here are the matching tasks in your list:\n");
         int found = 0;
         for (int i = 1; i <= tasks.size(); ++i) {
             if (tasks.get(i).getDescription().contains(keyword)) {
                 found++;
-                ui.showMessage(found + "." + tasks.get(i));
+                builder.append(found + "." + tasks.get(i) + "\n");
             }
         }
+
+        return builder.toString();
     }
 }

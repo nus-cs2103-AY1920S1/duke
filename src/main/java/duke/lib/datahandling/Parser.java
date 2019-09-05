@@ -25,7 +25,6 @@ public class Parser {
      *
      * @param taskList Tasklist used by the duke program
      * @param storage Storage of where the save file is located
-     * @param ui a ui to display the output from the commands
      */
     public Parser(TaskList taskList, DataStorage storage) {
         this.storage = storage;

@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
      * @throws DukeFileSaveException Thrown when the file update fails.
      */
     @Override
-    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeTaskNotPresentException,
+    public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeTaskNotPresentException,
             DukeFileSaveException {
         if (taskNum < 1 || taskNum > taskList.getNumTasks()) {
             throw new DukeTaskNotPresentException();
@@ -46,6 +46,6 @@ public class DeleteCommand extends Command {
         } catch (IOException e) {
             throw new DukeFileSaveException();
         }
-        ui.printDeleteMsg(task, taskList);
+        return ui.printDeleteMsg(task, taskList);
     }
 }

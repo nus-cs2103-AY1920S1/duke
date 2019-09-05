@@ -47,7 +47,7 @@ public class AddCommand extends Command {
      * date and time of the task.
      */
     @Override
-    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeFileSaveException,
+    public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeFileSaveException,
             DukeWrongDateFormatException {
         Task task;
         if (type.equals("todo")) {
@@ -65,6 +65,6 @@ public class AddCommand extends Command {
         } catch (IOException e) {
             throw new DukeFileSaveException();
         }
-        ui.printAddTaskMsg(task, taskList);
+        return ui.printAddTaskMsg(task, taskList);
     }
 }

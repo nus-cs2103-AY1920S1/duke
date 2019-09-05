@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
      * @throws DukeFileSaveException Thrown when the file update fails.
      */
     @Override
-    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeTaskNotPresentException,
+    public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeTaskNotPresentException,
             DukeFileSaveException {
         if (taskNum < 1 || taskNum > taskList.getNumTasks()) {
             throw new DukeTaskNotPresentException();
@@ -47,6 +47,6 @@ public class DoneCommand extends Command {
         } catch (IOException e) {
             throw new DukeFileSaveException();
         }
-        ui.printDoneMsg(task);
+        return ui.printDoneMsg(task);
     }
 }

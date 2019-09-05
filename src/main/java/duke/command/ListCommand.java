@@ -11,13 +11,13 @@ public class ListCommand extends Command {
 
     /**
      * Lists all the tasks in the task list and prints them out.
-     *
-     * @param taskList The main task list of the application.
+     *  @param taskList The main task list of the application.
      * @param ui The main user interface of the application.
      * @param storage The main storage of the application.
+     * @return
      */
     @Override
-    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) {
-        ui.printList(taskList);
+    public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) {
+        return ui.printList(taskList);
     }
 }

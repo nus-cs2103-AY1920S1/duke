@@ -8,8 +8,6 @@ import duke.tasklist.MyList;
 import duke.tasklist.TaskList;
 import duke.ui.UserInterface;
 
-
-
 /**
  * Duke is a task manager which allows users to organise their tasks by adding different types
  * of tasks, list out the tasks, marking the tasks as done, deleting the task and storing the
@@ -24,10 +22,9 @@ public class Duke {
 
     /**
      * Initialises a new Duke application.
-     * @param directory Directory of which the file is stored.
      */
-    public Duke(String directory) {
-        storage = new Storage(directory);
+    public Duke() {
+        storage = new Storage("./data/");
         ui = new UserInterface();
         try {
             taskList = storage.loadList();
@@ -35,45 +32,22 @@ public class Duke {
             ui.printException(e.toString());
             taskList = new TaskList();
         }
-
     }
 
     /**
-     * Creates a new Duke object and runs the application.
-     * @param args Arguments from console.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke("./data/");
-        duke.run();
-        duke.exit();
-    }
-
-    /**
-     * Starts the main application loop.
-     */
-    public void run() {
-        ui.printIntro();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.printLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printException(e.toString());
-            } finally {
-                ui.printLine();
-            }
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return ui.printException(e.toString());
         }
     }
 
-    /**
-     * Handles the exit logic of the application.
-     */
-    public void exit() {
-        ui.exit();
-    }
+
+
 }
 

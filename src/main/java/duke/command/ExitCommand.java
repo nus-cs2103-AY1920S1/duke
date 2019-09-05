@@ -17,8 +17,8 @@ public class ExitCommand extends Command {
      * @param storage The main storage of the application.
      */
     @Override
-    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) {
-        ui.printExitMsg();
+    public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) {
+        return ui.printExitMsg();
     }
 
     /**

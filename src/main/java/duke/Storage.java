@@ -30,6 +30,7 @@ public class Storage {
             while (sc.hasNextLine()) {
                 Task task;
                 String instruction = sc.nextLine();
+                System.out.println(instruction);
                 String[] lines = instruction.split(" \\| ");
 
                 switch (lines[0]) {

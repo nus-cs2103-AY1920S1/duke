@@ -3,7 +3,14 @@ package duke.fx;
 import duke.main.Duke;
 import javafx.application.Application;
 
-public class StartUi {
+/**
+ * Launcher class to launch the User Interface
+ * of Duke Program.
+ *
+ * @author TeoShyanJie
+ *
+ */
+public class Launcher {
     public static void main(String[] args) {
         Application.launch(Duke.class, args);
     }

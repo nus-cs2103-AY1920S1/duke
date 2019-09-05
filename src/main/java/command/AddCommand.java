@@ -8,6 +8,10 @@ import task.TaskType;
 
 import java.util.Calendar;
 
+
+/**
+ * Represents a command that adds a task to the task list.
+ */
 public class AddCommand extends Command {
     private TaskType taskType;
     private String message;
@@ -24,6 +28,13 @@ public class AddCommand extends Command {
         this.message = message;
     }
 
+    /**
+     * Executes this task.
+     *
+     * @param tasks All the tasks that the user currently has.
+     * @param ui The Ui object associated with Duke.
+     * @param storage The Storage object associated with Duke
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Task("placeholder", TaskType.TODO);
@@ -53,12 +64,5 @@ public class AddCommand extends Command {
         ui.printAddedTask(task);
         ui.println("     Now you have " + tasks.size() + " tasks in the list.");
         ui.showLine();
-//        ui.getUserInput();
-
-//        String result = "Got it. I've added this task: \n"
-//                + ui.printAddedTask(task) + "\n"
-//                + "Now you have " + tasks.size() + " tasks in the list.";
-//
-//        return result;
     }
 }

@@ -8,9 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -32,6 +36,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // process the image to make it look circular
+        Circle cir2 = new Circle(250,200,80);
+        cir2.setStroke(Color.SEAGREEN);
+        cir2.setFill(new ImagePattern(img));
+        cir2.setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKSEAGREEN));
 
         dialog.setText(text);
         displayPicture.setImage(img);

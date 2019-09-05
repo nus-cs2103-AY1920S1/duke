@@ -7,6 +7,9 @@ import task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command that finds a task in the task list, which contains keywords that the user inputs.
+ */
 public class FindCommand extends Command {
     private String textToFind;
 
@@ -14,6 +17,13 @@ public class FindCommand extends Command {
         this.textToFind = textToFind;
     }
 
+    /**
+     * Executes this task.
+     *
+     * @param tasks All the tasks that the user currently has.
+     * @param ui The Ui object associated with Duke.
+     * @param storage The Storage object associated with Duke
+     */
     @Override
     public void  execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
@@ -38,22 +48,5 @@ public class FindCommand extends Command {
             }
             ui.showLine();
         }
-
-
-
-        // StringBuilder result = new StringBuilder("");
-
-//        if (matchingTasks.size() == 0) {
-//            result.append("I'm sorry, but I can't find any matching tasks :-(");
-//        } else {
-//            result.append("Here are the matching tasks in your list:\n");
-//            for (int i = 0; i < matchingTasks.size(); i++) {
-//                Task currentTask = matchingTasks.get(i);
-//                result.append("     " + Integer.toString(i + 1) + "." + currentTask.getTypeIcon()
-//                        + currentTask.getStatusIcon() + " " + currentTask + "\n");
-//            }
-//        }
-//
-//        return result.toString();
     }
 }

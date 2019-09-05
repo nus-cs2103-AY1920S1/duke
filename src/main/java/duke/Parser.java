@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,25 +11,29 @@ import java.time.LocalTime;
  */
 
 public class Parser {
-    /**
-     * Returns the first word in a string
-     *
-     * @param fullCommand Full command given by user
-     * @return First word in the command
-     */
-    public static String getFirstWord(String fullCommand) {
-        return fullCommand.split(" ")[0];
-    }
+    public static Command parse(String userinput) {
+        String[] parts = userinput.split(" ", 2);
 
-    /**
-     * Exclude the first word in a string and returns remaining string
-     *
-     * @param fullCommand Full command given by user
-     * @param firstWord First word to be removed from full command
-     * @return Returns string with first word excluded
-     */
-    public static String excludeFirstWord(String fullCommand, String firstWord) {
-        return fullCommand.replaceFirst(firstWord, "").trim();
+        switch (parts[0]) {
+        case "bye":
+            return new ByeCommand(parts);
+        case "find":
+            return new FindCommand(parts);
+        case "list":
+            return new ListCommand(parts);
+        case "done":
+            return new DoneCommand(parts);
+        case "delete":
+            return new DeleteCommand(parts);
+        case "todo":
+            return new TodoCommand(parts);
+        case "deadline":
+            return new DeadlineCommand(parts);
+        case "event":
+            return new EventCommand(parts);
+        default:
+            return new WrongCommand(parts);
+        }
     }
 
     /**

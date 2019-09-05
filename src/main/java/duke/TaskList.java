@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -14,7 +18,7 @@ public class TaskList {
     /**
      * Add a new task to list
      *
-     * @param newTask Task to be added to list
+     * @param newTask duke.Task to be added to list
      */
     public void add(Task newTask) {
         tasks.add(newTask);
@@ -23,7 +27,7 @@ public class TaskList {
     /**
      * Remove a task from list
      *
-     * @param newTask Task to be removed from list
+     * @param newTask duke.Task to be removed from list
      */
     public void remove(Task newTask) {
         tasks.remove(newTask);

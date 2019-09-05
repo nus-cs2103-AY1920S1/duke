@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents a task that user adds to their daily task list
  */

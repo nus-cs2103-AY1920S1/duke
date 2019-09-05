@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A class which deals with runtime exception
  */

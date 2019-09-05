@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Task;
+
 /**
  * Represents a basic task to be done by user
  */

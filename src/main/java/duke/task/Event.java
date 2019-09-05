@@ -1,7 +1,11 @@
+package duke.task;
+
+import duke.Task;
+
 import java.time.LocalDateTime;
 
 /**
- * Represents a Task with a time of event attached
+ * Represents a duke.Task with a time of event attached
  */
 
 public class Event extends Task {
@@ -16,10 +20,6 @@ public class Event extends Task {
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
-    }
-
-    public String getTime() {
-        return time;
     }
 
     @Override

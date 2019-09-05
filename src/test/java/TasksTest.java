@@ -1,3 +1,6 @@
+import duke.task.Deadline;
+import duke.Parser;
+import duke.task.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +24,8 @@ public class TasksTest {
 
         Assertions.assertEquals(deadlineTestObject.getName(), myTestName, "getName and myTestName does not match!");
         Assertions.assertEquals(deadlineTestObject.hasDone(), myTestBool, "hasDone() and myTestBool does not match!");
-        Assertions.assertEquals(deadlineTestObject.getTime(), myTestTime, "getTime() and myTestTime does not match!");
         Assertions.assertEquals(deadlineTestObject.getLocalDateTime(), Parser.changeToDateTimeFormat(myTestTime),
-                "getLocalDateTime() and Parser.changeToDateTimeFormat(myTestTime) does not match!");
+                "getLocalDateTime() and duke.Parser.changeToDateTimeFormat(myTestTime) does not match!");
     }
 
     @Test
@@ -35,8 +37,7 @@ public class TasksTest {
 
         Assertions.assertEquals(deadlineTestObject.getName(), myTestName, "getName and myTestName does not match!");
         Assertions.assertEquals(deadlineTestObject.hasDone(), myTestBool, "hasDone() and myTestBool does not match!");
-        Assertions.assertEquals(deadlineTestObject.getTime(), myTestTime, "getTime() and myTestTime does not match!");
         Assertions.assertEquals(deadlineTestObject.getLocalDateTime(), Parser.changeToDateTimeFormat(myTestTime),
-                "getLocalDateTime() and Parser.changeToDateTimeFormat(myTestTime) does not match!");
+                "getLocalDateTime() and duke.Parser.changeToDateTimeFormat(myTestTime) does not match!");
     }
 }

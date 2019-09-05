@@ -3,12 +3,17 @@ import java.util.ArrayList;
 
 public class Storage {
 
-	String filePath;
+	private String filePath;
 
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
+    /**
+     * Loads task list from txt file into ArrayList
+     *
+     * @throws DukeException If list cannot be loaded
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
@@ -41,11 +46,16 @@ public class Storage {
             throw new DukeException("File not found");
         }
         return taskList;
-    } 
+    }
 
+    /**
+     * Saves the task list in a txt file
+     *
+     * @param list List of all the tasks
+     */
     public void save(ArrayList<Task> list) {
-    	File file = new File("/Users/sihao/Desktop/NUS AY19:20 Sem 1/CS2103/Duke/Data/Duke.txt");
         try {
+            File file = new File("/Users/sihao/Desktop/NUS AY19:20 Sem 1/CS2103/Duke/Data/Duke.txt");
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             for (Task t : list) {

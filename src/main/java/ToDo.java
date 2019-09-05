@@ -9,6 +9,9 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the format of the String to be saved in txt file
+     */
     public String taskSavedTextFormat() {
         String done = "0";
         if (super.isDone) {

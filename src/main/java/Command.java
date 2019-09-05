@@ -1,6 +1,6 @@
 public class Command {
 
-    private String action;   //list, delete, done, todo, deadline, event, bye
+    private String action;
     private int index;
     private String nameOfTask; 
     private String dateStr;
@@ -13,7 +13,14 @@ public class Command {
         this.dateStr = dateStr;
 	}
 
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws IncompleteCommandException, InvalidCommandException {
+    /**
+     * Executes command
+     *
+     * @param tasks Access of the TaskList
+     * @param ui Access of Ui
+     * @param storage Access of storage to save tasks list
+     */
+	public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (action.equals("list")) {
             tasks.printList();
 
@@ -24,7 +31,7 @@ public class Command {
             System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
 
         } else if (action.equals("done")) {
-            tasks.get(index).markAsDone();
+            tasks.done(index);
 
         } else if (action.equals("bye")) {
         	System.out.println("     Bye. Hope to see you again soon!");
@@ -42,17 +49,19 @@ public class Command {
             System.out.println("       " + newTask);
             tasks.add(newTask);
 
-        } else if (action.equals("event")) {
+        } else {
         	Task newTask = new Event(nameOfTask, dateStr);
             System.out.println("     Got it. I've added this task: ");
             System.out.println("       " + newTask);
             tasks.add(newTask);
-
-        } else {
-        	throw new InvalidCommandException("Invalid Command");
         }
+
+        storage.save(tasks.getList());
 	}
-	
+
+    /**
+     * Returns the state of exit
+     */
 	public boolean isExit() {
 		return exit;
 	}

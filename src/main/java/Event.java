@@ -12,6 +12,9 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+    /**
+     * Returns the format of the String to be saved in txt file
+     */
     public String taskSavedTextFormat() {
         String done = "0";
         if (super.isDone) {

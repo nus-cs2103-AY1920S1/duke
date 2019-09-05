@@ -4,12 +4,21 @@ import java.text.ParseException;
 
 public class Parser {
 
-	private static String action;   //list, delete, done, todo, deadline, event, bye
+	private static String action;
     private static int index;
     private static String nameOfTask; 
     private static String dateStr;
-    
+
+	/**
+	 * Returns the correct command from user input
+	 * If command is invalid or incomplete, throw exception
+	 *
+	 * @param fullCommand String of command read from user input
+	 * @return Command
+	 * @throws DukeException If invalid or incomplete command is parsed
+	 */
     public static Command parse(String fullCommand) throws DukeException {
+
     	action = fullCommand.split(" ")[0];
 
     	if (action.equals("list")) {

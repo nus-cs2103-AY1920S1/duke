@@ -90,8 +90,8 @@ public class Ui {
         else{
             icon = '❌';
         }
-        return "Got it. I've added this task: " + "\t[" + firstAlphabet + "][" + icon + "] " + taskDescription + "Now" +
-               " you " + "have " + numberOfItems + " in the list.";
+        return "Got it. I've added this task: \n" + "\t[" + firstAlphabet + "][" + icon + "] " + taskDescription +
+               "\nNow you " + "have " + numberOfItems + " in the list.";
     }
 
     /**
@@ -107,7 +107,7 @@ public class Ui {
     public String getList(ArrayList<String> listToPrint) {
         String result = "Here are the tasks in your list:";
         for (int i = 0; i < listToPrint.size(); i++) {
-           result = result + (i + 1) + "." + listToPrint.get(i);
+           result = result + "\n" + (i + 1) + "." + listToPrint.get(i);
         }
         return result;
     }

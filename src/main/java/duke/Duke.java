@@ -11,9 +11,6 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.command.Command;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.control.TextField;
 
 /**
  * Represents a Duke - interactive bot.
@@ -98,7 +95,7 @@ public class Duke {
         // e.printStackTrace();
         //  ui.showIncorrectNumberOfArgument();
 
-        return "Duke heard: " + output;
+        return output;
     }
 
 }

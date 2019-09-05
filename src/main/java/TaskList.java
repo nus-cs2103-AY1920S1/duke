@@ -54,6 +54,13 @@ public class TaskList {
         return tasks.get(taskIndex - 1);
     }
 
+    private void deleteTask(Task taskToDelete) {
+        String taskDescription = taskToDelete.toString();
+        tasks.remove(taskToDelete);
+        System.out.println("Noted. I've removed this task: " + taskDescription);
+        System.out.println("Now you have " + tasks.size() + "items in this list.");
+    }
+
     /**
      * Processes the given input string.
      *
@@ -85,9 +92,24 @@ public class TaskList {
                 System.out.println("Oops! You entered an invalid task ID!");
             }
             break;
+        case "delete":
+            try {
+                int taskId = inputReader.nextInt(); // extract the task ID entered by user
+                this.deleteTask(getTask(taskId)); // mark task as done
+            } catch (InputMismatchException e) {
+                // user input after "done" is not an int
+                System.out.println("Oops! You entered an invalid task ID!");
+            } catch (NoSuchElementException e) {
+                // user input after "done" is blank
+                System.out.println("Oops! You did not enter a task ID!");
+            } catch (IndexOutOfBoundsException e) {
+                // user input after "done" is an invalid task ID
+                System.out.println("Oops! You entered an invalid task ID!");
+            }
+            break;
         case "todo":
             try {
-                description = inputReader.nextLine();
+                description = inputReader.nextLine().strip();
                 deadline = "no deadline";
                 this.addToList(TaskList.TaskType.TODO, description, deadline);
             } catch (NoSuchElementException e) {
@@ -98,8 +120,8 @@ public class TaskList {
         case "event":
             inputReader.useDelimiter("/at");
             try {
-                description = inputReader.next();
-                deadline = inputReader.next();
+                description = inputReader.next().strip();
+                deadline = inputReader.next().strip();
                 this.addToList(TaskList.TaskType.EVENT, description, deadline);
             } catch (NoSuchElementException e) {
                 // user imput after task type is blank
@@ -109,8 +131,8 @@ public class TaskList {
         case "deadline":
             inputReader.useDelimiter("/by");
             try {
-                description = inputReader.next();
-                deadline = inputReader.next();
+                description = inputReader.next().strip();
+                deadline = inputReader.next().strip();
                 this.addToList(TaskList.TaskType.DEADLINE, description, deadline);
             } catch (NoSuchElementException e) {
                 // user imput after task type is blank

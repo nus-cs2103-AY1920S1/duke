@@ -4,18 +4,6 @@ import duke.lib.TaskList;
 import duke.lib.common.DukeException;
 import duke.lib.datahandling.DataStorage;
 import duke.lib.datahandling.Parser;
-import duke.lib.ui.MainWindow;
-
-import duke.lib.ui.UI;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * The main class of duke, which manages the running of the program.

@@ -1,6 +1,5 @@
 package duke.lib.ui;
 
-import duke.lib.common.DukeException;
 import duke.lib.task.Task;
 
 import java.util.ArrayList;
@@ -22,29 +21,29 @@ public class UI {
         return format("Hello! I'm Duke",false, "What can I do for you?");
     }
 
-    /**
-     * Displays the error message to the user.
-     *
-     * @param exception exception that was thrown to be displayed
-     */
+//    /**
+//     * Displays the error message to the user.
+//     *
+//     * @param exception exception that was thrown to be displayed
+//     */
 //    public void showError(DukeException exception) {
 //        display(exception.getMessage());
 //    }
 
-    /**
-     * Reads what the user has inputted.
-     *
-     * @return the input in String format
-//     */
+//    /**
+//     * Reads what the user has inputted.
+//     *
+//     * @return the input in String format
+////     */
 //    public String readCommand() {
 //        return sc.nextLine();
 //    }
 
-    /**
-     * Displays the message to the user.
-     *
-//     * @param string the message to be displayed.
-//     */
+//    /**
+//     * Displays the message to the user.
+//     *
+////     * @param string the message to be displayed.
+////     */
 //    public void display(String string) {
 //        System.out.println(HORIZONTAL_LINE + INDENTATION + string + "\n" + HORIZONTAL_LINE);
 //    }
@@ -73,10 +72,10 @@ public class UI {
 //        System.out.println(INDENTATION + endingPhrase + "\n" + HORIZONTAL_LINE);
 
 
-    /**
-     * Displays the list to the user in indexed format with a starting message.
-     *
-     */
+//    /**
+//     * Displays the list to the user in indexed format with a starting message.
+//     *
+//     */
     public String format(String startPhrase, boolean useIndexing, String ... lines) {
         StringBuilder sb = new StringBuilder(startPhrase + "\n");
         if (useIndexing) {

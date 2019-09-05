@@ -8,8 +8,6 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    private static Ui ui = new Ui();
-
     /**
      * Constructs a unspecified and unfinished Task object.
      *

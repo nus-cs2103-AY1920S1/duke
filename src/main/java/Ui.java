@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
@@ -6,24 +8,10 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String INDENT = "     ";
+    private MainWindow mw;
 
-    /**
-     * Displays the Duke logo.
-     */
-    public void showLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.printf("Hello from\n" + logo);
-    }
-
-    /**
-     * Displays a long line.
-     */
-    public void showLine() {
-        System.out.printf("    ____________________________________________________________\n");
+    public Ui(MainWindow mw) {
+        this.mw = mw;
     }
 
     /**
@@ -31,17 +19,19 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.printf(INDENT + "Hello! I'm Duke\n" + INDENT + "What can I do for you?\n");
-        showLine();
+        mw.displayMsg(INDENT + "Hello! I'm Duke\n" + INDENT + "What can I do for you?\n");
     }
 
     /**
      * Displays a goodbye message.
      */
     public void showGoodbye() {
+        mw.displayMsg(INDENT + "Bye. Hope to see you again soon!\n");
         System.out.printf(INDENT + "Bye. Hope to see you again soon!\n");
     }
 
     public void sayHi() {
+        mw.displayMsg(INDENT + "Hi :-D Say Something to me!\n");
         System.out.printf(INDENT + "Hi :-D Say Something to me!\n");
     }
 
@@ -51,7 +41,9 @@ public class Ui {
      * @param doneTask Task done.
      */
     public void showDone(String doneTask) {
+        mw.displayMsg(INDENT + "Nice! I've marked this task as done: \n" + INDENT  + " " + doneTask + "\n");
         System.out.printf(INDENT + "Nice! I've marked this task as done: \n" + INDENT  + " " + doneTask + "\n");
+
     }
 
     /**
@@ -60,6 +52,7 @@ public class Ui {
      * @param task Task added.
      */
     public void showAdd(String task) {
+        mw.displayMsg(INDENT + "Got it. I've added this task: \n" + INDENT + " " + task + "\n");
         System.out.printf(INDENT + "Got it. I've added this task: \n" + INDENT + " " + task + "\n");
     }
 
@@ -67,6 +60,7 @@ public class Ui {
      * Displays a header for the task list contends.
      */
     public void showListHeader() {
+        mw.displayMsg(INDENT + "Here are the tasks in your list:\n");
         System.out.printf(INDENT + "Here are the tasks in your list:\n");
     }
 
@@ -74,6 +68,7 @@ public class Ui {
      * Displays a header for the task search.
      */
     public void showSearchHeader() {
+        mw.displayMsg(INDENT + "Here are the matching tasks in your list:\n");
         System.out.printf(INDENT + "Here are the matching tasks in your list:\n");
     }
 
@@ -83,6 +78,7 @@ public class Ui {
      * @param removed Task removed.
      */
     public void showRemove(String removed) {
+        mw.displayMsg(INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
         System.out.printf(INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
     }
 
@@ -90,10 +86,12 @@ public class Ui {
      * Displays a no result found message for search.
      */
     public void showNotFound() {
+        mw.displayMsg(INDENT + "Hummm, nothing has been found.\n");
         System.out.printf(INDENT + "Hummm, nothing has been found.\n");
     }
 
     public void showError(String message) {
+        mw.displayMsg(INDENT + message + "\n");
         System.out.printf(INDENT + message + "\n");
     }
 
@@ -101,6 +99,7 @@ public class Ui {
      * Displays and error message when the file is unable to be loaded.
      */
     public void showLoadingError() {
+        mw.displayMsg(INDENT + "oops, something went wrong\n");
         System.out.printf(INDENT + "oops, something went wrong\n");
     }
 
@@ -111,9 +110,11 @@ public class Ui {
      */
     public void showCount(int numOfTask) {
         if (numOfTask < 2) {
+            mw.displayMsg(INDENT + "Now you have " + numOfTask + " task in the list.\n");
             System.out.printf(INDENT + "Now you have %d task in the list.\n", numOfTask);
         } else {
-            System.out.printf(INDENT + "Now you have %d tasks in the list.\n", numOfTask);
+            mw.displayMsg(INDENT + "Now you have %d tasks in the list.\n");
+            System.out.printf(INDENT + "Now you have \" + numOfTask + \" tasks in the list.\n");
         }
     }
 
@@ -121,6 +122,7 @@ public class Ui {
      * Displays a header for the clear command.
      */
     public void showClearList() {
+        mw.displayMsg(INDENT + "Great! I've removed all your tasks!\n");
         System.out.printf(INDENT + "Great! I've removed all your tasks!\n");
     }
 
@@ -131,17 +133,8 @@ public class Ui {
      * @param task Task to be displayed.
      */
     public void showTask(int index, String task) {
+        mw.displayMsg(INDENT + " " + index + ". " + task + "\n");
         System.out.printf(INDENT + " " + index + ". " + task + "\n");
-    }
-
-    /**
-     * Reads the user input String from the keyboard.
-     *
-     * @return User input String.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
     }
 }
 

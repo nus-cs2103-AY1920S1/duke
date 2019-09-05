@@ -7,14 +7,15 @@ import java.util.List;
 public class Sheet {
     private List<Task> tasks;
     private int numOfTask;
-    private Ui ui = new Ui();
+    private Ui ui;
 
     /**
      * Construct a task list.
      *
      * @param tasks List of tasks contained the list.
      */
-    public Sheet(List<Task> tasks) {
+    public Sheet(List<Task> tasks, Ui ui) {
+        this.ui = ui;
         this.tasks = tasks;
         numOfTask = tasks.size();
     }

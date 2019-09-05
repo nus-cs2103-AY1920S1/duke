@@ -9,6 +9,7 @@ public class FindCommand extends Command {
         this.string = string;
     }
 
+    @Override
     String execute(TaskList tasks, Storage storage) {
         String result = "Here are the matching tasks in your list:";
         for (int i = 1; i <= tasks.size(); i++) {
@@ -19,6 +20,7 @@ public class FindCommand extends Command {
         return result;
     }
 
+    @Override
     boolean isExit() {
         return false;
     }

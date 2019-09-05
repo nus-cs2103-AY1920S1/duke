@@ -12,6 +12,7 @@ public class EventCommand extends Command {
         this.at = at;
     }
 
+    @Override
     String execute(TaskList tasks, Storage storage) throws DukeInvalidDateException, DukeIoException {
         Task t = new EventTask(description, at);
         tasks.add(t);
@@ -22,6 +23,7 @@ public class EventCommand extends Command {
         return result;
     }
 
+    @Override
     boolean isExit() {
         return false;
     }

@@ -16,5 +16,4 @@ class EventTest {
         newEvent.markAsDone();
         assertEquals("[\u2713]", newEvent.getStatusIcon());
     }
-
 } 

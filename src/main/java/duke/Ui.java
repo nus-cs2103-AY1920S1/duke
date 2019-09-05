@@ -4,19 +4,32 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
+    private MainWindow window;
 
     /**
-     * Constructs an object that handles display of prompts and receiving user input.
+     * Constructs a command line interface that handles display of prompts and receiving user input.
+     *
+     * @deprecated Use {@link #Ui(MainWindow)} instead.
      */
+    @Deprecated
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
     /**
+     * Constructs a graphic interface that handles display of prompts and receiving user input.
+     */
+    public Ui(MainWindow window) {
+        this.window = window;
+    }
+
+    /**
      * Prints a message to the console.
      *
+     * @deprecated Use {@link #printGuiMessage(String)} instead.
      * @param message the message to be printed.
      */
+    @Deprecated
     public void printMessage(String message) {
         String[] messages = message.split("\n");
         System.out.println("    ____________________________________________________________");
@@ -28,19 +41,30 @@ public class Ui {
     }
 
     /**
+     * Prints a message to the GUI.
+     *
+     * @param message the message to be printed.
+     */
+    public void printGuiMessage(String message) {
+        window.handleDukeResponse(message);
+    }
+
+    /**
      * Prints an error to the console.
      *
      * @param e the error to be printed.
      */
     public void printError(Exception e) {
-        printMessage("☹ OOPS!!! " + e.getMessage());
+        printGuiMessage("☹ OOPS!!! " + e.getMessage());
     }
 
     /**
-     * Reads a command from user input.
+     * Reads a command from user input in the console.
      *
+     * @deprecated Because of the addition of the graphic interface.
      * @return the raw command string read from user input.
      */
+    @Deprecated
     public String readCommand() {
         return scanner.nextLine();
     }
@@ -49,7 +73,7 @@ public class Ui {
      * Shows the welcome message.
      */
     public void showWelcome() {
-        printMessage("Hello! I'm Duke\nWhat can I do for you?");
+        printGuiMessage("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     /**

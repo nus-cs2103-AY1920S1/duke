@@ -28,6 +28,6 @@ public class FindCommand extends Command {
         StringBuilder myBuilder = new StringBuilder();
         myBuilder.append("Here are the matching tasks in your list:\n");
         myBuilder.append(tasks.findTask(argument).toString());
-        ui.printMessage(myBuilder.toString());
+        ui.printGuiMessage(myBuilder.toString());
     }
 }

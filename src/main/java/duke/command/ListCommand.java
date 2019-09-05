@@ -16,6 +16,6 @@ public class ListCommand extends Command {
         StringBuilder myBuilder = new StringBuilder();
         myBuilder.append("Here are the tasks in your list:\n");
         myBuilder.append(tasks.toString());
-        ui.printMessage(myBuilder.toString());
+        ui.printGuiMessage(myBuilder.toString());
     }
 }

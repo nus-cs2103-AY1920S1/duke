@@ -31,8 +31,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke() {}
-
     /**
      * Constructs a new instance of the Duke assistant which stores the task list in the given file path.
      *
@@ -52,8 +50,31 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts an instance to receive and execute prompts from the user.
+     * Constructs a new instance of the Duke assistant which has a specified GUI and stores the task list in the
+     * given file path.
+     *
+     * @param filePath the file path to the task list file.
+     * @param window the GUI for Duke to interact with.
      */
+    public Duke(String filePath, MainWindow window) {
+        ui = new Ui(window);
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        } catch (DukeException e) {
+            ui.printError(e);
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Starts an instance to receive and execute prompts from the user using command line.
+     *
+     * @deprecated Because of the addition of the graphic interface.
+     */
+    @Deprecated
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -66,6 +87,27 @@ public class Duke extends Application {
             } catch (DukeException e) {
                 ui.printError(e);
             }
+        }
+    }
+
+    /**
+     * Initialises a Duke instance and shows the welcome message.
+     */
+    public void init() {
+        ui.showWelcome();
+    }
+
+    /**
+     * Handles and executes a command entered by the user.
+     *
+     * @param fullCommand the command entered by the user.
+     */
+    public void handleUserCommand(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.printError(e);
         }
     }
 
@@ -112,7 +154,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -127,14 +169,6 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
     }
 
     /**
@@ -150,31 +184,4 @@ public class Duke extends Application {
 
         return textToAdd;
     }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
-        );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-//    public static void main(String[] args) {
-//        new Duke("data/tasks.txt").run();
-//    }
 }

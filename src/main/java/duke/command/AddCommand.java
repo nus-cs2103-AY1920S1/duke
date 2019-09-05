@@ -56,7 +56,7 @@ public class AddCommand extends Command {
         case "todo":
             myTask = new Todo(this.argument);
             tasks.addTask(myTask);
-            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask
+            ui.printGuiMessage("Got it. I've added this duke.task: \n  " + myTask
                     + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;
         case "deadline":
@@ -65,7 +65,7 @@ public class AddCommand extends Command {
             }
             myTask = new Deadline(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
-            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask
+            ui.printGuiMessage("Got it. I've added this duke.task: \n  " + myTask
                     + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;
         case "event":
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
             }
             myTask = new Event(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
-            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask
+            ui.printGuiMessage("Got it. I've added this duke.task: \n  " + myTask
                     + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;
         default:

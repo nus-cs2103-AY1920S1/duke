@@ -19,7 +19,7 @@ public class SearchCommand extends Command {
      * @return list of tasks which has the indicated keywords.
      */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
-    public String searchKeyword(String[] commandArr, Tasklist taskList) {
+    public String searchKeyword(Tasklist taskList, String... commandArr) {
         StringBuilder sb = new StringBuilder();
         StringJoiner sj = new StringJoiner(" ");
         for (int i = 1; i < commandArr.length; i++) {
@@ -32,9 +32,12 @@ public class SearchCommand extends Command {
         sb.append("     Here are the matching tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             Task currTask = taskList.get(i);
-            if (currTask.getDescription().contains(phrase)) {
-                sb.append("     "  + currTask.toString()
-                        + " {List index: " + (i + 1) + "}\n");
+            String[] taskArr = currTask.toString().split(" ");
+            for (String s : taskArr) {
+                if (s.contains(phrase)) {
+                    sb.append("     " + currTask.toString()
+                            + " {List index: " + (i + 1) + "}\n");
+                }
             }
         }
         sb.append(printLine());

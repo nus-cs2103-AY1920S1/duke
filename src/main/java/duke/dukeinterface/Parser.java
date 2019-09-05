@@ -20,7 +20,6 @@ import java.lang.StringBuilder;
 /**
  * Validates the input commands from the user.
  */
-@SuppressWarnings("WeakerAccess")
 public class Parser {
     /**
      * This field combines strings together and form Duke's replies to user's inputs.
@@ -32,8 +31,8 @@ public class Parser {
      * @param commandArr Input that the user gave to Duke.
      * @throws DukeException Exception thrown when an invalid command is given.
      */
-    public void checkCommand(String[] commandArr) throws DukeException {
-        if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete")) {
+    public void checkCommand(String... commandArr) throws DukeException {
+        if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete|find")) {
             throw new DukeException(
                     "    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
@@ -231,7 +230,7 @@ public class Parser {
 
             case "find":
                 c = new SearchCommand();
-                result = ((SearchCommand) c).searchKeyword(commandArr, taskList);
+                result = ((SearchCommand) c).searchKeyword(taskList, commandArr);
                 break;
 
             case "todo":

@@ -81,7 +81,7 @@ public class Sheet {
         StringBuffer sb = new StringBuffer("");
 
         for (int i = 0; i < numOfTask; i++) {
-            sb.append(("     " + i + 1 +  ". " + tasks.get(i).toString().trim() + "\n"));
+            sb.append((" " + (i + 1) +  ". " + tasks.get(i).toString().trim() + "\n"));
         }
         ui.showList(sb.toString());
     }
@@ -106,11 +106,11 @@ public class Sheet {
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 count++;
-                sb.append(("     " + count + ". " + tasks.get(count).toString().trim() + "\n"));
+                sb.append((" " + count + ". " + tasks.get(count).toString().trim() + "\n"));
             }
         }
         if (count == 0) {
-            sb.append("     > < Sorry, nothing has been found.\n");
+            sb.append("> < Sorry, nothing has been found.\n");
         }
         ui.showSearch(sb.toString());
     }

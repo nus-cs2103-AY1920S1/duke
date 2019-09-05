@@ -28,7 +28,7 @@ public class CommandDone extends Command {
             stor.save(sh.getList());
         } catch (NumberFormatException e) {
             throw new IllegalTaskIndexException(
-                    "> < Oops! I cannot recognise that task index.");
+                    "> < Oops! Nezuko cannot recognise that task index.");
         }
     }
 

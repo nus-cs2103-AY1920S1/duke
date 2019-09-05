@@ -29,7 +29,9 @@ public abstract class Command {
 
     /**
      * Executes actions that are specific to each Command sub-class. To be implemented
-     * by sub-classes.
+     * by sub-classes. As a general rule, initialize() should always be called
+     * to update the relevant data in the Command sub-class object before
+     * any calls to execute() are made.
      *
      * @throws DukeException for generic recoverable errors
      */

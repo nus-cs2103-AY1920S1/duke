@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
         Task task = this.taskList.at(taskId);
         task.markAsDone();
         this.storage.saveToDisk(this.taskList);
-        return "Nice! I've marked this task as done:\n" +
-                ui.indentMessage(task.toString());
+        return "Nice! I've marked this task as done:\n"
+                + ui.indentMessage(task.toString());
     }
 }

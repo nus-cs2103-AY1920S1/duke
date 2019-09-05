@@ -19,8 +19,8 @@ public class ListCommand extends Command {
         } else {
             //ui.displaySingleLine("Here are the tasks in your list:");
             //ui.displayMessage(taskList.toString(), 2);
-            return "Here are the tasks in your list:\n" +
-                    ui.indentMessage(taskList.toString());
+            return "Here are the tasks in your list:\n"
+                    + ui.indentMessage(taskList.toString());
         }
     }
 }

@@ -16,7 +16,8 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * JavaFX Controller for MainWindow. Provides the layout for the MainWindow,
+ * and defines the behaviour for on-screen GUI elements via fxml.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -56,37 +57,37 @@ public class MainWindow extends AnchorPane {
         publishDukeResponse(response);
     }
 
-    // given a string with multiple lines (identified by newlines),
+    // given a string with multiple lines (identified by terminating newlines),
     // returns an ArrayList object with each entry
     // containing a maximum of n lines from the original string.
     private ArrayList<String> splitEveryNthLine(String response, int n) {
-        String[] split_res = response.split("\n");
+        String[] splitStr = response.split("\n");
         StringBuilder sb = new StringBuilder();
-        ArrayList<String> return_list = new ArrayList<>();
+        ArrayList<String> returnList = new ArrayList<>();
 
-        for (int i = 0; i < split_res.length; i++) {
-            sb.append(split_res[i]);
+        for (int i = 0; i < splitStr.length; i++) {
+            sb.append(splitStr[i]);
             sb.append("\n");
-            if ((i + 1) % n == 0 || i + 1 == split_res.length) {
-                return_list.add(sb.toString());
+            if ((i + 1) % n == 0 || i + 1 == splitStr.length) {
+                returnList.add(sb.toString());
                 sb.setLength(0);
             }
         }
-        return return_list;
+        return returnList;
     }
 
     // publishes Duke response, with each box containing maximum of 7 lines to
     // prevent text overrun/truncation.
     private void publishDukeResponse(String response) {
-        ArrayList<String> split_res = splitEveryNthLine(response, 7);
+        ArrayList<String> splitResponse = splitEveryNthLine(response, 7);
 
-        for (int i = 0; i < split_res.size(); i++) {
+        for (int i = 0; i < splitResponse.size(); i++) {
             // if first box, display duke image. else no image.
-            DialogBox box = DialogBox.getDukeDialog(split_res.get(i), (i == 0) ? dukeImage : null);
+            DialogBox box = DialogBox.getDukeDialog(splitResponse.get(i), (i == 0) ? dukeImage : null);
             box.setPadding(new Insets((i == 0) ? 15 : 0, // if first box, use normal top padding. else 0 top padding
-                    5,
-                    (i + 1 == split_res.size()) ? 15 : 0, // if last box, use normal padding. else 0 padding.
-                    5));
+                    5, // normal right padding
+                    (i + 1 == splitResponse.size()) ? 15 : 0, // if last box, use normal padding. else 0 padding.
+                    5)); // normal left padding
             dialogContainer.getChildren().add(box);
         }
     }

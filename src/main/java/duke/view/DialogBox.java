@@ -49,10 +49,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates a chat entry suitable for placing user input.
+     *
+     * @param text String to be displayed
+     * @param img profile image of the user
+     * @return DialogBox object representing a chat entry
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Generates a chat entry suitable for placing duke responses.
+     * It is a flipped version of the user dialog.
+     *
+     * @param text String to be displayed
+     * @param img profile image of Duke
+     * @return DialogBox object representing a chat entry
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -54,6 +54,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes user command and retrieves response, if applicable.
+     *
+     * @param input user command to be executed
+     * @return response to be printed to user
+     */
     public String getResponse(String input) {
         String response;
 

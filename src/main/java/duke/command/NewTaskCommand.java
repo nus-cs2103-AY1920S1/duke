@@ -31,11 +31,6 @@ public abstract class NewTaskCommand extends Command {
     @Override
     public String execute() throws DukeException {
         this.taskList.add(this.task);
-//        this.ui.displayMessage("Got it. I've added this task:\n  "
-//                + task
-//                + "\nNow you have "
-//                + this.taskList.getSize()
-//                + " task(s) in the list.");
         this.storage.saveToDisk(this.taskList);
         return "Got it. I've added this task:\n  "
                 + task

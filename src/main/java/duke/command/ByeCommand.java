@@ -13,6 +13,7 @@ public class ByeCommand extends Command {
      * main Duke program as it sees fit.
      */
     public String execute() throws DukeShutDownException {
+        super.initialize(storage, taskList, ui);
         return "bye";
     }
 }

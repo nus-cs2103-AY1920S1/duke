@@ -1,6 +1,10 @@
 package duke.task;
 
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import duke.task.DukeException;
 import duke.task.Parser;
@@ -9,7 +13,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Ui;
 
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -28,6 +32,13 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Overloaded constructor function for JavaFX.
+     */
+    public Duke() {
+
     }
 
     /**
@@ -53,6 +64,19 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    /**
+     * The main function to execute the program in GUI mode.
+     * @param stage The stage to display content in.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**

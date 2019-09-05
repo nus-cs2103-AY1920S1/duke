@@ -19,7 +19,7 @@ public abstract class Command {
      * @param storage The main storage of the application.
      * @throws DukeException Occurs when parts of the command cannot be executed.
      */
-    public abstract void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeException;
+    public abstract String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeException;
 
     /**
      * Returns true when a exit command is called. Else, returns false.

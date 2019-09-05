@@ -25,13 +25,13 @@ public class FindCommand extends Command {
     /**
      * Finds the list of tasks from the taskList that contains the String word in the
      * tasks' description. The list of tasks will then be printed out.
-     *
-     * @param taskList The main task list of the application.
+     *  @param taskList The main task list of the application.
      * @param ui The main user interface of the application.
      * @param storage The main storage of the application.
+     * @return
      */
-    public void execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) {
+    public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) {
         MyList resultList = taskList.findTasks(word);
-        ui.printFindList(resultList);
+        return ui.printFindList(resultList);
     }
 }

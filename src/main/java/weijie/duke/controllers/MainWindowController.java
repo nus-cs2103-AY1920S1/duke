@@ -11,6 +11,8 @@ import weijie.duke.commands.ITaskCommand;
 import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.exceptions.DukeException;
 import weijie.duke.responses.TaskResponse;
+import weijie.duke.utils.StringUtils;
+import weijie.duke.views.Ui;
 
 
 public class MainWindowController extends AnchorPane {
@@ -34,7 +36,10 @@ public class MainWindowController extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.vvalueProperty()
+                .bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren()
+                .add(new DukeDialogController("Hello! I'm Duke\nWhat can I do for you?", dukeImage));
     }
 
     @FXML

@@ -49,9 +49,9 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeException For error in adding to TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         Deadline deadlineTask = new Deadline(this.task, tasks.getSize() + 1, this.date);
         tasks.addToList(deadlineTask);
-        ui.printAddDeadlineCommand(deadlineTask, tasks);
+        return ui.printAddDeadlineCommand(deadlineTask, tasks);
     }
 }

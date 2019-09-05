@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
      * @throws DukeException For tasks that cannot be found or have already been done.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         try {
             tasks.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
@@ -45,6 +45,6 @@ public class DoneCommand extends Command {
         }
         tasks.setDoneInList(this.index);
         Task task = tasks.getTaskByIndex(this.index);
-        ui.printDoneCommand(task);
+        return ui.printDoneCommand(task);
     }
 }

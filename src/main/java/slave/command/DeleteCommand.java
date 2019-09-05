@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException For error in retrieving task from list due to invalid index.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         try {
             tasks.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
@@ -41,6 +41,6 @@ public class DeleteCommand extends Command {
         }
         Task toRemove = tasks.getTaskByIndex(this.index);
         tasks.removeFromList(this.index);
-        ui.printDeleteCommand(toRemove, tasks);
+        return ui.printDeleteCommand(toRemove, tasks);
     }
 }

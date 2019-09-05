@@ -22,7 +22,7 @@ public class ListCommand extends Command {
      * @param ui User interface.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.printListCommand(tasks);
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.printListCommand(tasks);
     }
 }

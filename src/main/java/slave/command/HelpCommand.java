@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
      * @param ui User interface.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.showHelpMessage();
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.showHelpMessage();
     }
 }

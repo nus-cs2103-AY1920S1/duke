@@ -25,8 +25,8 @@ public class ClearCommand extends Command {
      * @throws DukeException If list is not found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         tasks.clearList();
-        ui.printClearCommand();
+        return ui.printClearCommand();
     }
 }

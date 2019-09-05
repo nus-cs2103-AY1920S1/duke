@@ -31,7 +31,7 @@ public class NullCommand extends Command {
      * @throws DukeException For invalid commands by user.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         throw new InvalidCommandException(command);
     }
 }

@@ -5,7 +5,7 @@ package slave.elements;
  */
 class Formatter {
 
-    private static final String HORIZONTAL_LINE = "    ____________________________________________________________";
+    private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     private static final String INDENTATION = "     ";
 
     /**
@@ -15,16 +15,18 @@ class Formatter {
      * @return Formatted message.
      */
     static String formatMessage(String text) {
-        return HORIZONTAL_LINE + "\n"
+        return HORIZONTAL_LINE
                 + INDENTATION + text + "\n"
-                + HORIZONTAL_LINE + "\n";
+                + HORIZONTAL_LINE;
     }
 
     /**
-     * Prints a Line.
+     * Returns a format line.
+     *
+     * @return Formatted Horizontal Line
      */
-    static void printLine() {
-        System.out.println(HORIZONTAL_LINE);
+    static String getLine() {
+        return HORIZONTAL_LINE;
     }
 
     /**
@@ -34,7 +36,7 @@ class Formatter {
      * @return Indented text.
      */
     static String indentLine(String text) {
-        return INDENTATION + text;
+        return INDENTATION + text + "\n";
     }
 
 }

@@ -22,8 +22,9 @@ public class ExitCommand extends Command {
      * @param ui User interface.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.showByeMessage();
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.showByeMessage();
     }
+
 }
 

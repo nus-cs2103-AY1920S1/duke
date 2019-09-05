@@ -33,9 +33,9 @@ public class AddToDoCommand extends Command {
      * @throws DukeException For error in adding to taskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         ToDo toDoTask = new ToDo(this.task, tasks.getSize() + 1);
         tasks.addToList(toDoTask);
-        ui.printAddToDoCommand(toDoTask, tasks);
+        return ui.printAddToDoCommand(toDoTask, tasks);
     }
 }

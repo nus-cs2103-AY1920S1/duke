@@ -36,7 +36,7 @@ public class FindCommand extends Command {
      * @throws DukeException Throws if searched term isn't in any of the task descriptions.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         ArrayList<Task> findList = new ArrayList<>();
         for (Task task: tasks.getList()) {
             if (task.getDescription().contains(this.term)) {
@@ -46,7 +46,7 @@ public class FindCommand extends Command {
         if (findList.size() == 0) {
             throw new CannotBeFoundException(this.term);
         }
-        ui.printFindCommand(findList);
+        return ui.printFindCommand(findList);
     }
 
 }

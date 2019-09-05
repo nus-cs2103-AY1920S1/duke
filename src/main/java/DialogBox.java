@@ -63,12 +63,18 @@ public class DialogBox extends HBox {
      * Gets dialog box for the user with the specified text and image.
      * @param text specified text that was input by user.
      * @param img specified image for the user.
-     * @return
+     * @return DialogBox for user with the specified text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets dialog box for Duke with the specified text and image.
+     * @param text specified text with Duke's response to the user's input.
+     * @param img specified image for Duke.
+     * @return Dialogbox for user with the specified text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

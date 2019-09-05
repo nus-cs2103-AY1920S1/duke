@@ -52,7 +52,12 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        return String.format("[%s][%s] %s (by: %s)", "D", super.getDoneSymbol(), this.desc, this.deadline.format(formatter));
+        return String.format(
+                "[%s][%s] %s (by: %s)",
+                "D",
+                super.getDoneSymbol(),
+                this.desc,
+                this.deadline.format(formatter));
     }
 
 }

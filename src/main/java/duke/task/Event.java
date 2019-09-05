@@ -52,6 +52,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
-        return String.format("[%s][%s] %s (at: %s)", "E", super.getDoneSymbol(), this.desc, this.when.format(formatter));
+        return String.format(
+                "[%s][%s] %s (at: %s)",
+                "E",
+                super.getDoneSymbol(),
+                this.desc,
+                this.when.format(formatter));
     }
 }

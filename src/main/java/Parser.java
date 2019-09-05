@@ -28,7 +28,7 @@ public class Parser {
      * @param command The specified command given by the user.
      * @throws InvalidCommandException if an invalid or recognisable command is given by the user.
      * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
-     * deadline or event time and day.
+     *     deadline or event time and day.
      * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
      */
     public String executeCommand(String command) throws InvalidCommandException, MissingInputException,
@@ -78,7 +78,7 @@ public class Parser {
      * @param taskType The type of the task that the user wants to add to the tasks list.
      * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
      * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
-     * deadline or event time and day.
+     *     deadline or event time and day.
      */
     private String addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
         String desc = command.substring(taskType.length()).trim();
@@ -114,7 +114,9 @@ public class Parser {
             break;
         case ("event"):
             if (!desc.contains("/at")) {
-                throw new MissingInputException("☹ OOPS!!! The event date and time cannot be found because /at is missing");
+                throw new MissingInputException(
+                        "☹ OOPS!!! The event date and time cannot be found because /at is missing"
+                );
             }
 
             String[] splitEventDesc = desc.split("/at"); // first element is simply the string description

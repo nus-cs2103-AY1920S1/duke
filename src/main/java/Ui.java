@@ -17,7 +17,9 @@ public class Ui {
     /**
      * An empty constructor that creates the Ui object.
      */
-    public Ui() {}
+    public Ui() {
+
+    }
 
     /**
      * Prints the hello message at the start of the program.
@@ -49,6 +51,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Reads input given by the user and passes it to a Parser class.
+     * @param command the input given by the user.
+     * @return the response to user's input.
+     */
     public String readUserInput(String command) {
         Parser parser = new Parser();
         String output = "";
@@ -71,6 +78,12 @@ public class Ui {
         System.out.println(String.format("\tNow you have %d tasks in the list.", size));
     }
 
+    /**
+     * Retrieves the response that Duke gives when a task is added to the task list.
+     * @param task the specifed task that is added to the task list.
+     * @return the response that Duke gives to inform the user that the specified task is added to the list and the
+     *     current number of tasks in the list.
+     */
     public String getAddTaskResponse(Task task) {
         String output = "\tGot it. I've added this task:";
         output += ("\t" + task.toString());
@@ -83,6 +96,11 @@ public class Ui {
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + task.toString());
     }
 
+    /**
+     * Retrieves the response that Duke gives when the specified task is marked as done.
+     * @param task the specified task that is marked as done.
+     * @return the response that Duke gives to inform the user that the specified task is marked as done.
+     */
     public String getDoneTaskResponse(Task task) {
         return "\tNice! I've marked this task as done:\n\t\t" + task.toString();
     }
@@ -98,6 +116,12 @@ public class Ui {
         System.out.println(String.format("\tNow you have %d tasks in the list.", size));
     }
 
+    /**
+     * Retrieves the response that Duke gives when a task is deleted from the task list.
+     * @param task the specified task that is deleted from the list.
+     * @return the appropriate response that Duke gives to let the user know that the corresponding task has been
+     *     deleted.
+     */
     public String getDeleteTaskResponse(Task task) {
         String output = "\tNoted. I've removed this task:";
         output += "\t  " + task.toString();
@@ -106,6 +130,10 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints the specified matching tasks one by one.
+     * @param matchingTasks the specified list of matching tasks.
+     */
     public void printMatchingTasks(ArrayList<Task> matchingTasks) {
         System.out.println("\tHere are the matching tasks in your list:");
         for (int i = 0; i < matchingTasks.size(); i++) {
@@ -113,6 +141,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Retrieves the appropriate response that Duke gives when the user wants to find certain tasks.
+     * @param matchingTasks the list of matching tasks that are found for the user.
+     * @return the response that Duke gives for the user to view the matching tasks.
+     */
     public String getFindTaskResponse(ArrayList<Task> matchingTasks) {
         StringBuilder output = new StringBuilder("\tHere are the matching tasks in your list:\n");
         for (int i = 0; i < matchingTasks.size(); i++) {
@@ -131,6 +164,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Retrieves the appropriate response that Duke gives when the user wants to view the task list.
+     * @param tasks the current list of tasks.
+     * @return the appropriate response that Duke gives for the user to view the task list.
+     */
     public String getListResponse(ArrayList<Task> tasks) {
         StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -153,6 +191,10 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Retrieves the appropriate response when the user enters "bye", i.e. wants to exit the program.
+     * @return the appropriate response that Duke gives when the user enters "bye".
+     */
     public String getByeResponse() {
         return "\tBye. Hope to see you again soon!";
     }

@@ -26,7 +26,9 @@ public class Storage {
     /**
      * An empty constructor that creates a Storage object.
      */
-    public Storage() {}
+    public Storage() {
+
+    }
 
     /**
      * Creates a Storage object with the specified file path.

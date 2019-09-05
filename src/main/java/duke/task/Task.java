@@ -12,7 +12,9 @@ public class Task {
     /**
      * An empty constructor that creates a Task object.
      */
-    public Task() {}
+    public Task() {
+
+    }
 
     /**
      * Creates a Task object with the specified description.

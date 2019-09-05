@@ -44,7 +44,6 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasks.add(task);
-        //ui.printAddedTask(task);
         return ui.getAddTaskResponse(task);
     }
 
@@ -55,7 +54,6 @@ public class TaskList {
     public String markAsDone(int taskNo) {
         Task taskDone = tasks.get(taskNo - 1);
         taskDone.markAsDone();
-        //ui.printMarkAsDone(taskDone);
         return ui.getDoneTaskResponse(taskDone);
     }
 
@@ -65,7 +63,6 @@ public class TaskList {
      */
     public String deleteTask(int taskNumber) {
         Task task = tasks.remove(taskNumber - 1);
-        //ui.printDeletedTask(task);
         return ui.getDeleteTaskResponse(task);
     }
 
@@ -84,45 +81,7 @@ public class TaskList {
             }
         }
 
-        //ui.printMatchingTasks(matchingTasks);
         return ui.getFindTaskResponse(matchingTasks);
     }
-
-//    /**
-//     * Prints the necessary output when a specific task is added to the tasks list.
-//     * @param task The specified task that was added to the task list.
-//     */
-//    private void printAddedTask(Task task) {
-//        System.out.println("\tGot it. I've added this task:");
-//        System.out.println("\t  " + task.toString());
-//        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
-//    }
-//
-//    /**
-//     * Prints the necessary output when a specific task is deleted from the tasks list.
-//     * @param task The specified task that was deleted from the task list.
-//     */
-//    private void printDeletedTask(Task task) {
-//        System.out.println("\tNoted. I've removed this task:");
-//        System.out.println("\t  " + task.toString());
-//        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
-//    }
-//
-//    private void printMatchingTasks(ArrayList<Task> matchingTasks) {
-//        System.out.println("\tHere are the matching tasks in your list:");
-//        for (int i = 0; i < matchingTasks.size(); i++) {
-//            System.out.println(String.format("\t%d.%s", i + 1, matchingTasks.get(i)));
-//        }
-//    }
-//
-//    /**
-//     * Prints the entire list task by task.
-//     */
-//    public void printList() {
-//        System.out.println("\tHere are the tasks in your list:");
-//        for (int i = 0; i < tasks.size(); i++) {
-//            System.out.println(String.format("\t%d.%s", i + 1, tasks.get(i)));
-//        }
-//    }
 
 }

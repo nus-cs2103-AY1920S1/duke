@@ -63,7 +63,11 @@ public class TaskListController {
      * </p>
      */
     public void displayAllTasks() {
-        view.displayAllTasks(tasks);
+        try {
+            view.displayAllTasks(tasks);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /***

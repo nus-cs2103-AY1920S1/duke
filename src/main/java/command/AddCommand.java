@@ -43,16 +43,13 @@ public class AddCommand implements Command {
      * @return listen command.
      */
     @Override
-    public Optional<Command> execute() {
+    public void execute() {
         try {
             Task task = taskKeyword.taskProducer.getTask(arguments);
             taskListController.addTask(task);
         } catch (TaskCreationException e) {
             DukeOutput.printMessage(new DukeMessage(e.getTaskErrorMessage()));
-            return Optional.of(new ListenCommand(taskListController));
         }
-
-        return Optional.of(new ListenCommand(taskListController));
     }
 
     private TaskKeyword parseKeyword(String keyword) throws UnknownCommandException {

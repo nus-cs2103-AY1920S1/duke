@@ -21,7 +21,7 @@ public class GreetCommand implements Command {
 
     private static final String GREETING =
             DUKE_LOGO + "\n" + "\n"
-                    + "Hello! I'm Duke\n"
+                    + "Hello! I'm duke.Duke\n"
                     + "What can I do for you?";
 
     /***
@@ -31,9 +31,8 @@ public class GreetCommand implements Command {
      * @return null.
      */
     @Override
-    public Optional<Command> execute() {
+    public void execute() {
         DukeMessage greetingMessage = new DukeMessage(GREETING);
         DukeOutput.printMessage(greetingMessage);
-        return Optional.empty();
     }
 }

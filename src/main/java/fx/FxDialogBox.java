@@ -22,7 +22,7 @@ public class FxDialogBox extends HBox {
 
     private FxDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(DukeMainWindowController.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -49,7 +49,7 @@ public class FxDialogBox extends HBox {
     }
 
     public static FxDialogBox getDukeDialog(String text, Image img) {
-        var db = new FxDialogBox(text, img);
+        FxDialogBox db = new FxDialogBox(text, img);
         db.flip();
         return db;
     }

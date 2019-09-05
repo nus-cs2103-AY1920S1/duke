@@ -13,7 +13,7 @@ import java.util.Optional;
  * Command to listen and parse user input.
  * </p>
  */
-public class ListenCommand implements Command {
+public class CommandFactory {
     private TaskListController taskListController;
 
     /***
@@ -22,7 +22,7 @@ public class ListenCommand implements Command {
      * </p>
      * @param taskListController controller for task list on which commands are executed.
      */
-    public ListenCommand(TaskListController taskListController) {
+    public CommandFactory(TaskListController taskListController) {
         this.taskListController = taskListController;
     }
 
@@ -32,9 +32,7 @@ public class ListenCommand implements Command {
      * </p>
      * @return corresponding commands.
      */
-    @Override
-    public Optional<Command> execute() {
-        String userInput = DukeInput.readUserInput();
+    public Optional<Command> parse(String userInput) {
         String command = getCommand(userInput);
         String arguments = getArguments(userInput);
 
@@ -54,7 +52,7 @@ public class ListenCommand implements Command {
                 return Optional.of(new AddCommand(command, arguments, taskListController));
             } catch (UnknownCommandException e) {
                 DukeOutput.printMessage(new DukeMessage(e.getMessage()));
-                return Optional.of(new ListenCommand(taskListController));
+                return Optional.empty();
             }
         }
     }

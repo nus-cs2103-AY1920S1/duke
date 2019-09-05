@@ -23,16 +23,22 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String type) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
+            if (type.equals("user")) {
+                FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+                fxmlLoader.setController(this);
+                fxmlLoader.setRoot(this);
+                fxmlLoader.load();
+            } else {
+                FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox2.fxml"));
+                fxmlLoader.setController(this);
+                fxmlLoader.setRoot(this);
+                fxmlLoader.load();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -48,7 +54,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, "user");
     }
 
     /**
@@ -59,7 +65,7 @@ public class DialogBox extends HBox {
      * @return a dialog box for the application to display of Duke's response
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "duke");
         db.flip();
         return db;
     }

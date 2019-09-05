@@ -15,21 +15,23 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         if (exceptionType.equals("done")) {
-            return ":( OOPS!!! The index of a done cannot be empty.";
+            return "The index of a done cannot be empty.";
         } else if (exceptionType.equals("delete")) {
-            return ":( OOPS!!! The index of a delete cannot be empty.";
+            return "The index of a delete cannot be empty.";
         } else if (exceptionType.equals("todo")) {
-            return ":( OOPS!!! The description of a todo cannot be empty.";
+            return "The description of a todo cannot be empty.";
         } else if (exceptionType.equals("index")) {
-            return ":( OOPS!!! No such task in the list.";
+            return "No such task in the list.";
         } else if (exceptionType.equals("deadline")) {
-            return ":( OPPS!!! Invalid input format for deadline.";
+            return "Invalid input format for deadline.";
         } else if (exceptionType.equals("event")) {
-            return ":( OPPS!!! Invalid input format for event";
+            return "Invalid input format for event";
         } else if (exceptionType.equals("find")) {
-            return ":( OOPS!!! No such keyword in the list!";
+            return "No such keyword in the list!";
+        } else if (exceptionType.equals("index")) {
+            return "Unable to do so, the list does have contain such an index";
         } else {
-            return ":( OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "Invalid Format! Please Follow the Standard Command lines in the Guide.";
         }
     }
 }

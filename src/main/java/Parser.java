@@ -23,4 +23,8 @@ public class Parser {
         return taskNum;
     }
 
+    public static void printLine() {
+        System.out.println("___________________________________");
+    }
+
 }

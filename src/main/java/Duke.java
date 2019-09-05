@@ -23,7 +23,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt");
+        storage = new Storage("duke.txt");
         tasks = new TaskList();
     }
 
@@ -36,8 +36,7 @@ public class Duke {
      */
     public String getResponse(String inputInstruction) throws IOException {
         String outputContent;
-        String inputCommand = Parser.getInputCommand(inputInstruction);
-        outputContent = ui.executeInstructions(inputInstruction, inputCommand, storage, tasks);
+        outputContent = Command.executeInstructions(inputInstruction, storage, tasks, ui);
         return outputContent;
     }
 
@@ -51,9 +50,9 @@ public class Duke {
     public String reformatInput(String input) {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         System.setOut(new PrintStream(buffer));
-        System.out.println("___________________________________");
+        Parser.printLine();
         System.out.println(input);
-        System.out.println("___________________________________");
+        Parser.printLine();
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
         String outputContent = buffer.toString();
         buffer.reset();

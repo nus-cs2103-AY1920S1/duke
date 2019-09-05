@@ -19,6 +19,7 @@ public class Storage {
      */
     public TaskList readData() throws FileNotFoundException {
         File f = new File(Storage.FILE_PATH);
+        assert f != null : "File is null";
         Scanner sc = new Scanner(f);
         ArrayList<Task> task = new ArrayList<>();
 
@@ -53,6 +54,7 @@ public class Storage {
     public void writeData() throws IOException {
         ArrayList<Task> task = TaskList.getTasks();
         FileWriter fw = new FileWriter(Storage.FILE_PATH);
+        assert f != null : "FileWriter is null";
         String stringToWrite = "";
         int counter = task.size();
 

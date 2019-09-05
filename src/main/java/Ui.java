@@ -39,6 +39,7 @@ public class Ui {
                 + "    Deadline \n" + "        Eg. deadline __(task)__ /by _(dd/MM/yyyy)_(hhmm)__\n"
                 + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
                 + "    Done \n" + "        Eg. done __(number)__\n"
+                + "    Find \n" + "        Eg. find __(keyword)__\n"
                 + "    List \n");
         printIndent();
         System.out.println("Ill be adding in more features soon! Please be patient! :)");

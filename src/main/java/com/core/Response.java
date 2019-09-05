@@ -202,10 +202,6 @@ public enum Response {
      * @param s state
      */
     private static void save(State s) {
-        JsonArray arr = new JsonArray();
-        for (DoableTask t : s.list) {
-            arr.add(t.toJson());
-        }
-        SaveFile.write(arr.toString());
+        SaveFile.write(s.list);
     }
 }

@@ -3,12 +3,11 @@ package duke;
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
 
 /**
- * Main class of Duke application - a personal assistant chat bot.
+ * Represents the logic of application.
  *
  * @author Ng Jun Hao
  */
@@ -20,12 +19,10 @@ public class Duke {
 
     /**
      * Constructor for instantiating a Duke session.
-     *
-     * @param filePath Path to storage file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new UserInterface();
-        storage = new Storage(filePath);
+        storage = new Storage(DEFAULT_STORAGE_FILEPATH);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -36,32 +33,17 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke session upon instantiation of Duke.
+     * Generates a response to user input.
+     *
+     * @param input user input.
+     * @return response.
      */
-    private void run() {
-        boolean isTerminated = false;
-        Task task;
-        ui.showWelcomeMessage();
-        while (!isTerminated) {
-            try {
-                String inputLine = ui.readLine();
-                ui.echo(inputLine);
-                ui.showLine();
-                Command command = Parser.parse(inputLine);
-                command.execute(taskList, ui, storage);
-                isTerminated = command.isTerminated();
-            } catch (DukeException e) {
-                ui.showExceptionMessage(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(taskList, storage);
+        } catch (DukeException e) {
+            return "OOPS!!! " + e.getMessage();
         }
-    }
-
-    /**
-     * Main entry point of the application.
-     */
-    public static void main(String[] args) {
-        new Duke(DEFAULT_STORAGE_FILEPATH).run();
     }
 }

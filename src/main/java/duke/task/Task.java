@@ -50,6 +50,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (isDone ? "[+] " : "[-] ") + this.taskName;
+        return (isDone ? "[\u2713] " : "[\u2718] ") + this.taskName;
     }
 }

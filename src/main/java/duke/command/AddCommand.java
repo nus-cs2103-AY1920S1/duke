@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.common.Message;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.UserInterface;
 
 /**
  * Adds a task to storage file.
@@ -22,17 +22,17 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes addition of a task on user interface.
+     * Executes addition of a task.
      *
      * @param taskList list of tasks.
-     * @param ui user interface displaying the successful addition of a task.
      * @param storage local storage of data.
+     * @return message showing the successful addition of a task.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         taskList.addTask(task);
         storage.save(task.getSimplifiedRepresentation());
-        ui.showAddition(task);
-        ui.showTaskSize(taskList);
+        return Message.MESSAGE_ADDED + "\n " + task + "\n"
+                + String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size());
     }
 }

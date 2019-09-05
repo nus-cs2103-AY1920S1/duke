@@ -1,32 +1,23 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.common.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.UserInterface;
 
 /**
  * Terminates the program.
  */
 public class ExitCommand extends Command {
     /**
-     * Executes exit program on user interface.
+     * Executes exit program.
      *
      * @param taskList list of tasks.
-     * @param ui user interface displaying program exiting.
      * @param storage local storage of data.
+     * @return exit message.
      */
     @Override
-    public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
-        ui.exitProgram();
-    }
-
-    /**
-     * Returns true as program has terminated upon program exiting.
-     * @return boolean true.
-     */
-    @Override
-    public boolean isTerminated() {
-        return true;
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
+        return Message.MESSAGE_BYE;
     }
 }

@@ -20,7 +20,6 @@ public class Command {
             return;
         }else if(delete){
             Task task = tasks.delete(info[1]);
-            System.out.println("test: " + info[1]);
             fileManager.fileDelete(Integer.parseInt(info[1]) - 1);
             ui.printDelete(task, tasks.getSize());
             return;

@@ -26,11 +26,11 @@ public class UI {
         return in.nextLine();
     }
 
-    public void showGoodByeMessage(){
+    public void showGoodByeMessage() {
         printReply("Bye. Hope to see you again soon.");
     }
 
-    public void showLoadingError(){
+    public void showLoadingError() {
         printReply("No file found.");
     }
 

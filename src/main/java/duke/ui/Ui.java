@@ -2,6 +2,10 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * REDUNDANT
+ * Represents the UI.
+ */
 public class Ui {
 
     private static final String LOGO = " ____        _        \n"
@@ -11,6 +15,9 @@ public class Ui {
             + "|_|   \\__,_|_|\\_\\___|\n";
     private Scanner sc;
 
+    /**
+     * Initializes the UI.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -19,6 +26,11 @@ public class Ui {
         displayOutput("Hello from\n" + LOGO);
     }
 
+    /**
+     * Displays Duke's response.
+     * @param output
+     * @return
+     */
     public String displayOutput(String output) {
         /*
         String bound = "     ____________________________________________________________\n     ";

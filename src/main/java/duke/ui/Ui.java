@@ -17,7 +17,8 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     static final String WELCOME_MSG = "Hello! I'm Duke\n"
             + "What can I do for you?";
-    static final String EXIT_MSG = "Bye. Hope to see you again soon!";
+    static final String EXIT_MSG = "Bye. Hope to see you again soon!\n"
+            + "Press ENTER to exit!";
 
     static final Scanner SCANNER = new Scanner(System.in);
 
@@ -25,8 +26,10 @@ public class Ui {
      * Prints the Welcome message.
      */
     public static void printWelcomeMsg() {
-        System.out.println("\nHello from\n" + LOGO);
+        CmdUx.print("\n".repeat(23));
+        CmdUx.print("\nHello from\n" + LOGO);
         CmdUx.printHBars(WELCOME_MSG);
+        CmdUx.print("\n");
     }
 
     /**
@@ -58,6 +61,11 @@ public class Ui {
         CmdUx.printHBars(sb.toString());
     }
 
+    /**
+     * Lists search results.
+     * @param tasks Full list of tasks
+     * @param searchResults Index of tasks in search result
+     */
     public static void listSearchResults(ArrayList<Task> tasks, ArrayList<Integer> searchResults) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
@@ -105,5 +113,6 @@ public class Ui {
     public static void exposeError(String errorMessage) {
         CmdUx.printHBars(errorMessage);
     }
+
 
 }

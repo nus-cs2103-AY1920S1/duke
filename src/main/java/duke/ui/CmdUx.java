@@ -7,18 +7,29 @@ package duke.ui;
 
 public class CmdUx {
 
+    private static GuiWindow guiWindow;
+
+    public static void setGuiWindow(GuiWindow currGuiWindow) {
+        guiWindow = currGuiWindow;
+    }
     /**
      * Prints a message wrapped by horizontal bars.
      * @param str The message
      */
     public static void printHBars(String str) {
-        String horizontalBar = "    ____________________________________________________________";
+        String horizontalBar = "    _______________________________________________________________________";
         String[] strSplit = str.split("\n");
-        System.out.println(horizontalBar);
+        StringBuilder sb = new StringBuilder();
+        sb.append(horizontalBar + "\n");
         for (String line : strSplit) {
-            System.out.println("    " + line);
+            sb.append("    " + line + "\n");
         }
-        System.out.println(horizontalBar);
+        sb.append(horizontalBar + "\n");
+        guiWindow.addLabelToDialogBox(sb.toString());
+    }
+
+    public static void print(String str) {
+        guiWindow.addLabelToDialogBox(str);
     }
 
 }

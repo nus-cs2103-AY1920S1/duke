@@ -1,134 +1,70 @@
 package com.util.json;
 
-import com.tasks.Deadline;
-import com.tasks.DoableTask;
-import com.tasks.Event;
-import com.tasks.TaskTypes;
-import com.tasks.Todo;
-import com.util.Printer;
-import com.util.datetime.DateTime;
-import java.util.ArrayList;
-
 public class JsonParser {
 
+    public static JsonValue parseJsonString(String input) throws JsonFormatException {
+        return processDynamicValue(input.toCharArray(), 0).snd;
+    }
+
     /**
-     * Given save file's input string, generate list. Empty list if erroneous or empty string does
-     * not exist.
+     * Parses from input[i] onwards as a json value, which can be of type specified in ValueTypes
+     * enum.
      *
-     * @param input json file string
-     * @return list
+     * @param input input character array
+     * @param i     index to start parsing
+     * @return resulting index and DynamicValue; algebraic sum type of all possible ValueTypes
+     * @throws JsonFormatException file format error
      */
-    public static ArrayList<DoableTask> parseJsonFile(String input) {
-        if (input.length() == 0) {
-            return new ArrayList<>();
-        }
+    public static Pair<Integer,JsonValue> processDynamicValue(char[] input, int i)
+            throws JsonFormatException {
+        Pair<Integer,JsonValue> obj;
         try {
+            Pair<Integer,Integer> res1 = parseJsonInt(input, i);
+            obj = new Pair<>(res1.fst, new JsonValue(res1.snd));
+        } catch (JsonFormatException e1) {
             try {
-                for (JsonValue obj : processDynamicValue(input.toCharArray(), 0).snd.getArray()) {
-                    JsonValue attrObj;
-                    if ((attrObj = obj.getObject().get(Schema.TASK_TODO)) != null) {
-
-                    } else if ((attrObj = obj.getObject().get(Schema.TASK_EVENT)) != null) {
-
+                Pair<Integer,Double> res2 = parseJsonDouble(input, i);
+                obj = new Pair<>(res2.fst, new JsonValue(res2.snd));
+            } catch (JsonFormatException e2) {
+                try {
+                    Pair<Integer,Boolean> res3 = parseJsonBoolean(input, i);
+                    obj = new Pair<>(res3.fst, new JsonValue(res3.snd));
+                } catch (JsonFormatException e3) {
+                    try {
+                        Pair<Integer,String> res4 = parseJsonString(input, i);
+                        obj = new Pair<>(res4.fst, new JsonValue(res4.snd));
+                    } catch (JsonFormatException e4) {
+                        try {
+                            Pair<Integer,JsonObject> res5 = parseJsonObject(input,
+                                    i);
+                            obj = new Pair<>(res5.fst, new JsonValue(res5.snd));
+                        } catch (JsonFormatException e5) {
+                            try {
+                                Pair<Integer,JsonArray> res6 = parseJsonArray(input,
+                                        i);
+                                obj = new Pair<>(res6.fst, new JsonValue(res6.snd));
+                            } catch (JsonFormatException e6) {
+                                if (e3.getErrorCode() == 2 && e4.getErrorCode() == 2
+                                        && e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
+                                    throw new JsonFormatException(
+                                            "input at " + i + " is of unknown format");
+                                } else if (e4.getErrorCode() == 2 && e5.getErrorCode() == 2
+                                        && e6.getErrorCode() == 2) {
+                                    throw e3;
+                                } else if (e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
+                                    throw e4;
+                                } else if (e6.getErrorCode() == 2) {
+                                    throw e5;
+                                } else {
+                                    throw e6;
+                                }
+                            }
+                        }
                     }
                 }
-            } catch (JsonWrongValueTypeException e) {
-                Printer.printError(e.getMessage());
             }
-        } catch (JsonFormatException e) {
-            Printer.printError("Save File has errors\n" + e.getMessage());
         }
-        try {
-            ArrayList<DoableTask> arr = new ArrayList<>();
-            for (JsonValue o : parseJsonArray(input.toCharArray(), 0).snd) {
-                if (o.getType() != ValueTypes.OBJECT) {
-                    throw new JsonFormatException(
-                            "JSON array immediate elements must be tasks");
-                } else {
-                    JsonObject obj = o.getObject();
-                    JsonValue task;
-                    JsonObject attributes;
-                    TaskTypes type;
-                    if ((task = obj.get(Schema.TASK_TODO)) != null) {
-                        type = TaskTypes.TODO;
-                    } else if ((task = obj.get(Schema.TASK_EVENT)) != null) {
-                        type = TaskTypes.EVENT;
-                    } else if ((task = obj.get(Schema.TASK_DEADLINE)) != null) {
-                        type = TaskTypes.DEADLINE;
-                    } else {
-                        throw new JsonFormatException("Unexpected task type");
-                    }
-                    if (task.getType() != ValueTypes.OBJECT) {
-                        throw new JsonFormatException("Invalid task format");
-                    }
-                    attributes = task.getObject();
-                    // parse task object
-
-                    DoableTask t = null;
-                    String name;
-                    boolean isDone;
-                    if (attributes.get(Schema.ATTR_NAME) != null
-                            && attributes.get(Schema.ATTR_NAME).getType() == ValueTypes.STRING) {
-                        name = attributes.get(Schema.ATTR_NAME).getString();
-                    } else {
-                        throw new JsonFormatException("No name field in task");
-                    }
-                    // parse name
-                    if (attributes.get(Schema.ATTR_DONE) != null
-                            && attributes.get(Schema.ATTR_DONE).getType() == ValueTypes.BOOLEAN) {
-                        isDone = attributes.get(Schema.ATTR_DONE).getBoolean();
-                    } else {
-                        throw new JsonFormatException("No done field in task");
-                    }
-                    // parse done
-                    switch (type) {
-                    case TODO:
-                        t = new Todo(name);
-                        break;
-                    case EVENT:
-                        if (attributes.get(Schema.ATTR_EVENT_START) != null
-                                && attributes.get(Schema.ATTR_EVENT_START).getType()
-                                == ValueTypes.STRING
-                                && attributes.get(Schema.ATTR_EVENT_END) != null
-                                && attributes.get(Schema.ATTR_EVENT_END).getType()
-                                == ValueTypes.STRING) {
-                            t = new Event(name,
-                                    DateTime.parseString(
-                                            attributes.get(Schema.ATTR_EVENT_START).getString()),
-                                    DateTime.parseString(
-                                            attributes.get(Schema.ATTR_EVENT_END).getString()));
-                        }
-                        break;
-                    case DEADLINE:
-                        if (attributes.get(Schema.ATTR_DEADLINE_DUE) != null
-                                && attributes.get(Schema.ATTR_DEADLINE_DUE).getType()
-                                == ValueTypes.STRING) {
-                            t = new Deadline(name, DateTime.parseString(
-                                    attributes.get(Schema.ATTR_DEADLINE_DUE).getString()));
-                        }
-                        break;
-                    default:
-                        throw new JsonFormatException("Unexpected task type");
-                    }
-
-                    if (t == null) {
-                        throw new JsonFormatException("Invalid task format");
-                    } else {
-                        if (isDone) {
-                            t.markAsDone();
-                        }
-                        arr.add(t);
-                    }
-                    // parse task attributes object
-                }
-            }
-            //TODO specify error content in error message
-            return arr;
-        } catch (JsonFormatException e) {
-            Printer.printError(
-                    "Your save file is not in the expected format\n error: " + e.getMessage());
-        }
-        return new ArrayList<>();
+        return obj;
     }
 
     /**
@@ -141,7 +77,7 @@ public class JsonParser {
      */
     private static Pair<Integer,JsonArray> parseJsonArray(char[] input, int i)
             throws JsonFormatException {
-        JsonArray arr = new JsonArray()
+        JsonArray arr = new JsonArray();
         i = skipWhiteSpace(input, i);
         if (input[i] != '[') {
             throw new JsonFormatException("Expecting [ at " + i, 2);
@@ -247,67 +183,6 @@ public class JsonParser {
         }
         // find '}'
         return new Pair<>(i + 1, obj);
-    }
-
-    /**
-     * Parses from input[i] onwards as a json value, which can be of type specified in ValueTypes
-     * enum.
-     *
-     * @param input input character array
-     * @param i     index to start parsing
-     * @return resulting index and DynamicValue; algebraic sum type of all possible ValueTypes
-     * @throws JsonFormatException file format error
-     */
-    private static Pair<Integer,JsonValue> processDynamicValue(char[] input, int i)
-            throws JsonFormatException {
-        Pair<Integer,JsonValue> obj;
-        try {
-            Pair<Integer,Integer> res1 = parseJsonInt(input, i);
-            obj = new Pair<>(res1.fst, new JsonValue(res1.snd));
-        } catch (JsonFormatException e1) {
-            try {
-                Pair<Integer,Double> res2 = parseJsonDouble(input, i);
-                obj = new Pair<>(res2.fst, new JsonValue(res2.snd));
-            } catch (JsonFormatException e2) {
-                try {
-                    Pair<Integer,Boolean> res3 = parseJsonBoolean(input, i);
-                    obj = new Pair<>(res3.fst, new JsonValue(res3.snd));
-                } catch (JsonFormatException e3) {
-                    try {
-                        Pair<Integer,String> res4 = parseJsonString(input, i);
-                        obj = new Pair<>(res4.fst, new JsonValue(res4.snd));
-                    } catch (JsonFormatException e4) {
-                        try {
-                            Pair<Integer,JsonObject> res5 = parseJsonObject(input,
-                                    i);
-                            obj = new Pair<>(res5.fst, new JsonValue(res5.snd));
-                        } catch (JsonFormatException e5) {
-                            try {
-                                Pair<Integer,JsonArray> res6 = parseJsonArray(input,
-                                        i);
-                                obj = new Pair<>(res6.fst, new JsonValue(res6.snd));
-                            } catch (JsonFormatException e6) {
-                                if (e3.getErrorCode() == 2 && e4.getErrorCode() == 2
-                                        && e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
-                                    throw new JsonFormatException(
-                                            "input at " + i + " is of unknown format");
-                                } else if (e4.getErrorCode() == 2 && e5.getErrorCode() == 2
-                                        && e6.getErrorCode() == 2) {
-                                    throw e3;
-                                } else if (e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
-                                    throw e4;
-                                } else if (e6.getErrorCode() == 2) {
-                                    throw e5;
-                                } else {
-                                    throw e6;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return obj;
     }
 
     /**

@@ -36,6 +36,9 @@ public class DukeParser {
      *     after the last token.
      */
     public static String concatStringTokens(String[] inputTokens, int startIndex, int endIndex) {
+        assert startIndex >= 0 && startIndex < inputTokens.length;
+        assert endIndex > 0 && endIndex < inputTokens.length;
+        assert startIndex < endIndex;
         StringBuilder sb = new StringBuilder();
         while (startIndex < endIndex) {
             sb.append(inputTokens[startIndex++] + " ");
@@ -54,6 +57,7 @@ public class DukeParser {
      * @throws DateTimeParseException If the input String does not match the required format.
      */
     public static String formatDate(String input) throws DateTimeParseException {
+        assert !input.equals("");
         Map<Long, String> ordinalNumbers = new HashMap<>(31);
         ordinalNumbers.put(1L, "1st");
         ordinalNumbers.put(2L, "2nd");

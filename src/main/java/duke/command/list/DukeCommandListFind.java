@@ -27,6 +27,7 @@ public class DukeCommandListFind extends DukeCommandList {
         if (inputTokens.length == 1) {
             ui.displayEmptySearchTermError();
         } else {
+            assert inputTokens.length > 1;
             String searchTerms = DukeParser.concatStringTokens(inputTokens, 1, (inputTokens.length - 1));
             tasks.findDukeTasks(searchTerms, ui);
         }

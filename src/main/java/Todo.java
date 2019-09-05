@@ -12,7 +12,6 @@ public class Todo extends Task {
         } else {
             saveString += 0;
         }
-
         saveString += " | ";
         saveString += this.getDescription();
         saveString += "\n";

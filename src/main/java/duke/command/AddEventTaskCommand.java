@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.task.TaskList;
 import duke.exception.DukeException;
-import duke.exception.TooManyTasksException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Represents a Command to add a ToDo Task to the list of tasks.
@@ -32,9 +31,7 @@ public class AddEventTaskCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        if (TaskList.hasHitTaskLimit()) {
-            throw new TooManyTasksException();
-        }
+        assert(!TaskList.hasHitTaskLimit()) : "OOPS! You can only have up to 100 tasks!";
         String[] eventData = dataParser.parseEventDate();
         dateParser.readInput(eventData[1]);
         String dateOutput = dateParser.convertDateToString();

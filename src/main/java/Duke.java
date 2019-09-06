@@ -80,6 +80,8 @@ public class Duke {
                 Command c = parser.findTaskCommand();
                 hasTerminated = c.checkIfExit();
                 c.execute(taskList, ui, storage, parser, dateHelper);
+            } catch (AssertionError e) {
+                ui.sendErrorMessage(e);
             } catch (DukeException error) {
                 ui.sendErrorMessage(error);
             }
@@ -105,6 +107,9 @@ public class Duke {
                 hasTerminated = true;
             }
             c.execute(taskList, ui, storage, parser, dateHelper);
+            return ui.print();
+        } catch (AssertionError e) {
+            ui.sendErrorMessage(e);
             return ui.print();
         } catch (DukeException error) {
             ui.sendErrorMessage(error);

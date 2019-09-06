@@ -1,4 +1,4 @@
-package duke.storage;
+package puke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,17 +17,9 @@ public class Storage {
      * Creates a new Storage anchored to a specific file.
      *
      * @param path The file's pathname.
-     * @throws IOException If an error arose while checking for the file's existence.
      */
-    public Storage(String path) throws IOException {
+    public Storage(String path) {
         this.taskFile = new File(path);
-        if (taskFile.createNewFile()) {
-            System.out.println("Task file not found; an empty one was created");
-        }
-
-        assert taskFile.exists();
-        assert taskFile.canRead();
-        assert taskFile.canWrite();
     }
 
     /**

@@ -1,4 +1,4 @@
-package duke;
+package puke;
 
 import javafx.application.Application;
 

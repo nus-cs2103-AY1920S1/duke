@@ -1,4 +1,4 @@
-package duke.task;
+package puke.task;
 
 /**
  * A generic task, which can be marked as done.

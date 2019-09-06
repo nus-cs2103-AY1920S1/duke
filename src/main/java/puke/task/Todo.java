@@ -1,4 +1,4 @@
-package duke.task;
+package puke.task;
 
 /**
  * Class representing a task to be done, but not at any particular time.

@@ -1,6 +1,6 @@
-package duke;
+package puke;
 
-import duke.task.Task;
+import puke.task.Task;
 
 class TaskStub extends Task {
     TaskStub() {

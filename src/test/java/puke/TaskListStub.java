@@ -1,7 +1,7 @@
-package duke;
+package puke;
 
-import duke.task.Task;
-import duke.task.TaskList;
+import puke.task.Task;
+import puke.task.TaskList;
 
 public class TaskListStub extends TaskList {
     private boolean isEmpty = true;

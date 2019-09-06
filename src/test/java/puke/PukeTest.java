@@ -1,17 +1,17 @@
-package duke;
+package puke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import puke.command.AddCommand;
+import puke.command.Command;
+import puke.command.DeleteCommand;
+import puke.task.Deadline;
+import puke.task.Event;
+import puke.task.TaskList;
+import puke.task.Todo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class DukeTest {
+class PukeTest {
     @Test
     void testTask() {
         Todo t1 = Todo.parse("dig a trench from the fence to lunchtime");
@@ -50,15 +50,16 @@ class DukeTest {
 
     @Test
     void testCommand() {
-        StorageStub storageStub = new StorageStub();
+        StorageStub storageStub = new StorageStub("tasks.txt");
         TaskListStub tasksStub = new TaskListStub();
+        ResponseStringsStub respStringsStub = new ResponseStringsStub();
 
         Command c = new AddCommand(new TaskStub());
-        c.execute(tasksStub, storageStub);
+        c.execute(tasksStub, respStringsStub, storageStub);
         assertEquals(tasksStub.size(), 1);
 
         c = new DeleteCommand("1");
-        c.execute(tasksStub, storageStub);
+        c.execute(tasksStub, respStringsStub, storageStub);
         assertEquals(tasksStub.size(), 0);
     }
 }

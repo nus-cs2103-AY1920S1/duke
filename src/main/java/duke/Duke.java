@@ -41,7 +41,7 @@ public class Duke extends Application {
      * @param args standard main args
      */
     public static void main(String[] args) {
-        new Duke("./data/duke.tasks.txt").run();
+        new Duke("./data/tasks.txt").run();
     }
 
     /**

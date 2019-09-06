@@ -33,6 +33,7 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] splits = line.split("[|]");
+                assert splits.length >= 3: "tasks.txt should follow the format with |.";
                 int completed = Integer.parseInt(splits[1].substring(1, 2));
                 Task newTask;
                 switch (splits[0]) {

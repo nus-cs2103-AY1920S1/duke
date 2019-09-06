@@ -110,6 +110,41 @@ public class TaskList {
     }
 
     /**
+     * Constructs the new edited name based on the data provided from the parser.
+     * @param nameData an array consisting the words forming the new name.
+     * @return the new name as a String.
+     */
+    private String constructNewName(String[] nameData) {
+        String newName = "";
+        for (int i = 1; i < nameData.length; i++) {
+            if (i > 1) {
+                newName += " ";
+            }
+            newName += nameData[i];
+        }
+
+        return newName;
+    }
+
+    /**
+     * Edits the specific task based on the name and index given.
+     * @param newTaskData An array which consists the index and new name.
+     * @return the edited task.
+     * @throws InvalidTaskIndexException if the index given is out of bounds.
+     */
+    public Task editSpecificTaskName(String[] newTaskData) throws InvalidTaskIndexException {
+        int index = Integer.parseInt(newTaskData[0]) - 1;
+        String newName = constructNewName(newTaskData);
+        if (index < 0 || index > tasks.size()) {
+            throw new InvalidTaskIndexException();
+        } else {
+            Task task = tasks.get(index);
+            task.editTaskName(newName);
+            return task;
+        }
+    }
+
+    /**
      * Returns a list of indexes of matching tasks which contain specific keywords.
      * @param keyword The matching keyword or keywords.
      * @return A list of indexes of tasks containing the keywords.

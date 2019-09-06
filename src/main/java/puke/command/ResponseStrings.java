@@ -105,6 +105,7 @@ public class ResponseStrings {
     public void sortTasks(TaskList tl) {
         tl.sort();
         lines.add("Tasks sorted.");
+        numTasksInList(tl);
         for (int i = 1; i <= tl.size(); i++) {
             lines.add(i + ". " + tl.get(i));
         }

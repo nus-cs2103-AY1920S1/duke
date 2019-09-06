@@ -13,39 +13,26 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
-
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Duke extends Application {
 
-    private static ArrayList<Task> items;
     private Ui user;
+    private Parser parse;
+    private Storage store;
     private Image dukeUser = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeServer = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Constructor for Duke class.
      */
-    public Duke() {
+    public Duke() throws FileNotFoundException {
         user = new Ui();
-        items = new ArrayList<>();
+        parse = new Parser(user);
+        store = new Storage(parse);
     }
 
-    /**
-     * Main method for Duke.
-      * @param args user input
-     */
+    /*
     public static void main(String[] args) {
         Duke execute = new Duke();
 
@@ -55,16 +42,12 @@ public class Duke extends Application {
             System.out.println("Stored file not found!!!");
         }
     }
+    */
 
     @Override
     public void start(Stage stage) {
 
-        try {
-            Scanner pastScan = new Scanner(new FileReader("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt"));
-            loadExisting(pastScan);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        store.loadExisting();
 
         //Step 1. Setting up required components
         //The container for the content of the chat to scroll.
@@ -137,8 +120,6 @@ public class Duke extends Application {
             userInput.clear();
         });
 
-        //store current tasks into local file for future reference
-        storeCurrent(items);
     }
 
     /**
@@ -153,13 +134,13 @@ public class Duke extends Application {
             assert !reply.isEmpty() : "Reply should not be empty";
         } else if (input.toLowerCase().equals("bye")) {
             //store current tasks into local file for future reference
-            storeCurrent(items);
+            store.storeCurrent(parse.getList());
             Platform.exit();
         } else if (input.toLowerCase().contains("done")) {
             try {
                 //mark task as done, change cross to tick
                 int itemNum = Integer.parseInt(input.substring(input.length() - 1));
-                Task curr = items.get(itemNum - 1);
+                Task curr = parse.getList().get(itemNum - 1);
                 curr.markAsDone();
                 assert curr.isDone : "Task should have been marked as done";
                 //forming the message
@@ -170,11 +151,11 @@ public class Duke extends Application {
                 reply = user.emptyError();
             }
         } else if (input.toLowerCase().equals("list")) {
-            reply = user.listTask(items);
+            reply = user.listTask(parse.getList());
         } else if (input.toLowerCase().contains("delete")) {
             try {
                 int itemNum = Integer.parseInt(input.substring(input.length() - 1));
-                reply = deleteTask(itemNum);
+                reply = parse.deleteTask(itemNum);
             } catch (IndexOutOfBoundsException e) {
                 reply = user.indexError();
             } catch (NumberFormatException e) {
@@ -182,7 +163,7 @@ public class Duke extends Application {
             }
         } else if (input.toLowerCase().contains("find")) {
             String searchTerm = input.substring(5);
-            reply = user.findTask(items, searchTerm);
+            reply = user.findTask(parse.getList(), searchTerm);
         } else {
             reply = parse.generateTask(input);
         }

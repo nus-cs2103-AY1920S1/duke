@@ -9,7 +9,7 @@ public class DeadlineTest {
     @Test
     public void testDeadline() {
         String border = "-------------------------------------";
-        final Duke d = new Duke();
+        final Parser d = new Parser(new Ui());
 
         StringBuilder sb = new StringBuilder();
         Task t = new Task("test");

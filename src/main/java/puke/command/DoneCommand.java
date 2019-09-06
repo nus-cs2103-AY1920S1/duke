@@ -28,11 +28,6 @@ public class DoneCommand extends Command {
         int ind = respStrings.checkInteger(str, tl);
         tl.markDone(ind);
         respStrings.add(tl.get(ind) + " is done.");
-
-        try {
-            storage.write(tl.export());
-        } catch (IOException e) {
-            respStrings.add("Error writing tasks to file!");
-        }
+        respStrings.writeToStorage(tl, storage);
     }
 }

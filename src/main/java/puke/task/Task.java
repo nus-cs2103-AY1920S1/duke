@@ -3,7 +3,7 @@ package puke.task;
 /**
  * A generic task, which can be marked as done.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     private String desc;
     protected boolean done;
 
@@ -62,5 +62,21 @@ public class Task {
      */
     public String export() {
         return (done ? "1|" : "0|") + desc;
+    }
+
+    /**
+     * Compares this Task against Task other. The type of task is compared first,
+     * followed by the description.
+     *
+     * @param other The Task this Task will be compared to.
+     * @return A positive integer if this > other, a negative integer if less and zero otherwise.
+     */
+    public int compareTo(Task other) {
+        if (this.export().compareTo(other.export()) > 0) {
+            return 1;
+        } else if (this.export().compareTo(other.export()) < 0) {
+            return -1;
+        }
+        return 0;
     }
 }

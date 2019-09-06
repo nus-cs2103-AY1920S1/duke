@@ -28,11 +28,6 @@ public class DeleteCommand extends Command {
         int ind = respStrings.checkInteger(str, tl);
         respStrings.add(tl.delete(ind) + " was deleted.");
         respStrings.numTasksInList(tl);
-
-        try {
-            storage.write(tl.export());
-        } catch (IOException e) {
-            respStrings.add("Error writing tasks to file!");
-        }
+        respStrings.writeToStorage(tl, storage);
     }
 }

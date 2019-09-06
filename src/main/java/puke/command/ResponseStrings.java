@@ -1,6 +1,8 @@
 package puke.command;
 
+import puke.storage.Storage;
 import puke.task.TaskList;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -91,6 +93,35 @@ public class ResponseStrings {
             for (int i = 1; i <= filteredTasks.size(); i++) {
                 lines.add(i + ". " + filteredTasks.get(i - 1));
             }
+        }
+    }
+
+    /**
+     * Sorts tasks in the given TaskList in-place and adds lines describing
+     * the newly sorted tasks.
+     *
+     * @param tl The TaskList to sort.
+     */
+    public void sortTasks(TaskList tl) {
+        tl.sort();
+        lines.add("Tasks sorted.");
+        for (int i = 1; i <= tl.size(); i++) {
+            lines.add(i + ". " + tl.get(i));
+        }
+    }
+
+    /**
+     * Writes the contents of the given TaskList to disk. If an exception is thrown
+     * in the process, add a line saying this.
+     *
+     * @param tl The TaskList whose contents are to be written to disk.
+     * @param storage The Storage object responsible for writing said contents.
+     */
+    public void writeToStorage(TaskList tl, Storage storage) {
+        try {
+            storage.write(tl.export());
+        } catch (IOException e) {
+            lines.add("Error writing tasks to file!");
         }
     }
 

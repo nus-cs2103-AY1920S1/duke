@@ -3,6 +3,7 @@ package puke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -138,5 +139,13 @@ public class TaskList {
             }
         }
         return out;
+    }
+
+    /**
+     * Sorts the tasks in this TaskList in-place.
+     * Tasks are sorted first by task type, then by description.
+     */
+    public void sort() {
+        Collections.sort(tasks);
     }
 }

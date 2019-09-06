@@ -33,6 +33,9 @@ public abstract class Command {
         if (cmd.equals("list")) {
             return new ListCommand();
         }
+        if (cmd.equals("sort")) {
+            return new SortCommand();
+        }
 
         String[] parts = cmd.split(" ", 2);
         if (parts.length == 1) {

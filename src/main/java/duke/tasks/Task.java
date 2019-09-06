@@ -1,8 +1,18 @@
 package duke.tasks;
 
+import duke.person.Person;
+import duke.person.PersonList;
+
+import java.util.ArrayList;
+
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
+    private PersonList people;
+
+    public Task() {
+        this("", new PersonList());
+    }
 
     /**
      * constructor of Task.
@@ -10,10 +20,20 @@ public class Task {
      * @param description description of the task
      */
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        this(description, new PersonList());
     }
 
+    public Task(String description, PersonList list) {
+        this.description = description;
+        this.isDone = false;
+        this.people = list;
+    }
+
+    public void addPeople(PersonList list) {
+        for (int i = 0; i < list.getSize(); i++) {
+            people.addPerson(list.getPerson(i));
+        }
+    }
 
     public String getStatusIcon() {
         return (isDone ? "+" : "-"); //return tick or X symbols
@@ -37,5 +57,9 @@ public class Task {
 
     public String writer() {
         return "This is a task";
+    }
+
+    public PersonList getPeople() {
+        return people;
     }
 }

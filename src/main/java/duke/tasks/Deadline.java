@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.person.PersonList;
+
 public class Deadline extends Task {
     protected String by;
     protected String year;
@@ -16,7 +18,17 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        String[] splits = by.split("[/ ]");
+        parseBy(by);
+    }
+
+    public Deadline(String description, PersonList list) {
+        super(description, list);
+        this.by = by;
+        parseBy(by);
+    }
+
+    private void parseBy(String str) {
+        String[] splits = str.split("[/ ]");
         day = splits[0];
         month = splits[1];
         year = splits[2];
@@ -29,7 +41,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")"
+                + "\nList of People:\n" + super.getPeople().toString();
     }
 
     @Override
@@ -40,6 +53,7 @@ public class Deadline extends Task {
         } else {
             text = text.concat("1 | " + getDescription() + " | " + getBy());
         }
+        text = text + " |" + super.getPeople().writer();
         return text;
     }
 }

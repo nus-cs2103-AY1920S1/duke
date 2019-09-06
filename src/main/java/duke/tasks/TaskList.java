@@ -3,7 +3,7 @@ package duke.tasks;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> list;
+    private ArrayList<Task> list;
 
     public TaskList() {
         list = new ArrayList<>();

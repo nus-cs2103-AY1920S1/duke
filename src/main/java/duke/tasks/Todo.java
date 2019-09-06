@@ -1,6 +1,12 @@
 package duke.tasks;
 
+import duke.person.PersonList;
+
 public class Todo extends Task {
+
+    public Todo(String description, PersonList list) {
+        super(description, list);
+    }
 
     public Todo(String description) {
         super(description);
@@ -8,7 +14,8 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString()
+                + "\nList of People:\n" + super.getPeople().toString();
     }
 
     @Override
@@ -19,6 +26,7 @@ public class Todo extends Task {
         } else {
             text = text.concat("1 | " + getDescription());
         }
+        text = text + " |" + super.getPeople().writer();
         return text;
     }
 }

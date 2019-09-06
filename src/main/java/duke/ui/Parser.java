@@ -23,10 +23,6 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ");
-        int number;
-        int index;
-        String description;
-        String date;
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else if (parts.length == 0) {
@@ -35,65 +31,93 @@ public class Parser {
 
         switch (parts[0]) {
         case "list":
-            return new ListCommand();
+            return parseList(parts);
         case "done":
-            if (parts.length == 1) {
-                throw new DukeException("The description of a done cannot be empty.");
-            }
-            number = Integer.parseInt(parts[1]);
-            return new DoneCommand(number);
+            return parseDone(parts);
         case "delete":
-            if (parts.length == 1) {
-                throw new DukeException("The description of a delete cannot be empty.");
-            }
-            number = Integer.parseInt(parts[1]);
-            return new DeleteCommand(number);
+            return parseDelete(parts);
         case "todo":
-            if (parts.length == 1) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            description = fullCommand.substring("todo".length() + 1);
-            Task todoTask = new Todo(description);
-            return new AddCommand(todoTask);
+            return parseTodo(parts, fullCommand);
         case "deadline":
-            if (parts.length == 1) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            }
-            index = fullCommand.indexOf("/");
-            if (index == -1 || index + 4 >= fullCommand.length()) {
-                throw new DukeException("Please provide a time for your deadline task");
-            }
-            if ("deadline".length() + 1 >= index - 1) {
-                throw new DukeException("Please provide a proper name for your deadline task");
-            }
-            description = fullCommand.substring("deadline".length() + 1, index - 1);
-            date = fullCommand.substring(index + 4);
-            Task deadlineTask = new Deadline(description, date);
-            return new AddCommand(deadlineTask);
+            return parseDeadline(parts, fullCommand);
         case "event":
-            if (parts.length == 1) {
-                throw new DukeException("The description of a event cannot be empty.");
-            }
-            index = fullCommand.indexOf("/");
-            if (index == -1 || index + 4 >= fullCommand.length()) {
-                throw new DukeException("Please provide a time for your event task");
-            }
-            if ("event".length() + 1 >= index - 1) {
-                throw new DukeException("Please provide a proper name for your event task");
-            }
-            description = fullCommand.substring("event".length() + 1, index - 1);
-            date = fullCommand.substring(index + 4);
-            Task eventTask = new Event(description, date);
-            return new AddCommand(eventTask);
+            return parseEvent(parts, fullCommand);
         case "find":
-            if (parts.length == 1) {
-                throw new DukeException("Please provide the string you want to search in the duke.tasks");
-            }
-            index = fullCommand.indexOf(" ");
-            String find = fullCommand.substring(index + 1);
-            return new FindCommand(find);
+            return parseFind(parts, fullCommand);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private static Command parseList(String[] parts) {
+        return new ListCommand();
+    }
+
+    private static Command parseDone(String[] parts) throws DukeException {
+        if (parts.length == 1) {
+            throw new DukeException("The description of a done cannot be empty.");
+        }
+        int number = Integer.parseInt(parts[1]);
+        return new DoneCommand(number);
+    }
+
+    private static Command parseDelete(String[] parts) throws DukeException {
+        if (parts.length == 1) {
+            throw new DukeException("The description of a delete cannot be empty.");
+        }
+        int number = Integer.parseInt(parts[1]);
+        return new DeleteCommand(number);
+    }
+
+    private static Command parseTodo(String[] parts, String fullCommand) throws DukeException {
+        if (parts.length == 1) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+        String description = fullCommand.substring("todo".length() + 1);
+        Task todoTask = new Todo(description);
+        return new AddCommand(todoTask);
+    }
+
+    private static Command parseDeadline(String[] parts, String fullCommand) throws DukeException {
+        if (parts.length == 1) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+        int index = fullCommand.indexOf("/");
+        if (index == -1 || index + 4 >= fullCommand.length()) {
+            throw new DukeException("Please provide a time for your deadline task");
+        }
+        if ("deadline".length() + 1 >= index - 1) {
+            throw new DukeException("Please provide a proper name for your deadline task");
+        }
+        String description = fullCommand.substring("deadline".length() + 1, index - 1);
+        String date = fullCommand.substring(index + 4);
+        Task deadlineTask = new Deadline(description, date);
+        return new AddCommand(deadlineTask);
+    }
+
+    private static Command parseEvent(String[] parts, String fullCommand) throws DukeException {
+        if (parts.length == 1) {
+            throw new DukeException("The description of a event cannot be empty.");
+        }
+        int index = fullCommand.indexOf("/");
+        if (index == -1 || index + 4 >= fullCommand.length()) {
+            throw new DukeException("Please provide a time for your event task");
+        }
+        if ("event".length() + 1 >= index - 1) {
+            throw new DukeException("Please provide a proper name for your event task");
+        }
+        String description = fullCommand.substring("event".length() + 1, index - 1);
+        String date = fullCommand.substring(index + 4);
+        Task eventTask = new Event(description, date);
+        return new AddCommand(eventTask);
+    }
+
+    private static Command parseFind(String[] parts, String fullCommand) throws DukeException {
+        if (parts.length == 1) {
+            throw new DukeException("Please provide the string you want to search in the duke.tasks");
+        }
+        int index = fullCommand.indexOf(" ");
+        String find = fullCommand.substring(index + 1);
+        return new FindCommand(find);
     }
 }

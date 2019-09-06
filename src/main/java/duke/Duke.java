@@ -30,17 +30,17 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
-        while(true) {
+        while (true) {
             Parser p = new Parser(ui.readNextLine());
             p.parse();
             String command = p.getCommand();
             String taskDetails = p.getTaskDetails();
-            if(command.equals("bye")) {
+            if (command.equals("bye")) {
                 ui.showBye();
                 break;
-            } else if(command.equals("list")) {
+            } else if (command.equals("list")) {
                 ui.showLine();
-                if(tasks.getListOfTasks().isEmpty()) {
+                if (tasks.getListOfTasks().isEmpty()) {
                     System.out.println("Sorry, there are no tasks in the list");
                 } else {
                     System.out.println("     Here are the tasks in your list:");
@@ -48,13 +48,13 @@ public class Duke {
                     ui.showLine();
                     ui.separationline();
                 }
-            } else if(command.equals("done")) {
+            } else if (command.equals("done")) {
                 int number = Integer.parseInt(taskDetails);
                 Task temp = tasks.getTask(number - 1);
                 tasks.setTaskAsDone(number - 1);
                 ui.showDone(temp);
                 storage.write(tasks.getListOfTasks());
-            } else if(command.equals("delete")) {
+            } else if (command.equals("delete")) {
                 int number = Integer.parseInt(taskDetails);
                 Task temp = tasks.getTask(number - 1);
                 tasks.deleteTask(number - 1);

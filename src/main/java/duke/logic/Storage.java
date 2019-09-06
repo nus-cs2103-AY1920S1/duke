@@ -61,16 +61,16 @@ public class Storage {
             StringBuilder temp = new StringBuilder();
             temp.append(task.getTaskType());
             temp.append(" | ");
-            if(task.isDone()) {
+            if (task.isDone()) {
                 temp.append(1);
             } else {
                 temp.append(0);
             }
             temp.append(" | ");
             temp.append(task.getDescription());
-            if((task instanceof Event) || (task instanceof Deadline)) {
+            if ((task instanceof Event) || (task instanceof Deadline)) {
                 temp.append(" | ");
-                if(task instanceof Event) {
+                if (task instanceof Event) {
                     temp.append(((Event) task).getExactDuration());
                 } else {
                     temp.append(((Deadline) task).getExactBy());
@@ -101,9 +101,9 @@ public class Storage {
                 System.out.println((String)Array.get(temp,i));
             }
             Task newTask;
-            if(task.equals("T")) {
+            if (task.equals("T")) {
                 newTask = new Todo((String)Array.get(temp,4));
-            } else if(task.equals("D")) {
+            } else if (task.equals("D")) {
                 newTask = new Deadline((String)Array.get(temp,4),
                         (String)Array.get(temp, 6) + " " +
                                 (String)Array.get(temp, 7));
@@ -112,7 +112,7 @@ public class Storage {
                         (String)Array.get(temp, 6) + " " +
                                 (String)Array.get(temp, 7));
             }
-            if(((String)Array.get(temp, 2)).equals("1")) {
+            if (((String) Array.get(temp, 2)).equals("1")) {
                 newTask.setDone();
             }
             list.add(newTask);

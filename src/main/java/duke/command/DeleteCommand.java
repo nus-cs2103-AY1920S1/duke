@@ -28,9 +28,9 @@ public class DeleteCommand extends Command {
 	 * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
 	 * @param storage Handles the reading and writing of the txt file.
 	 */
-	public void execute(TaskList tasks, Storage storage) {
-		tasks.deleteTask(command);
+	public String execute(TaskList tasks, Storage storage) {
 		storage.updateDelete(command);
+		return tasks.deleteTask(command);
 	}
 	
 	/**

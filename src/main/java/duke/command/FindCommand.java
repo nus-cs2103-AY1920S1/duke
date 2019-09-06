@@ -16,8 +16,9 @@ public class FindCommand extends Command {
 		this.command = command;
 	}
 	
-	public void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, InvalidInputException, InvalidDescriptionException, IOException {
-		tasks.findTask(this.command);
+	public String execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, InvalidInputException,
+		InvalidDescriptionException, IOException {
+		return tasks.findTask(this.command);
 	}
 	
 	public boolean isExit() {

@@ -22,8 +22,8 @@ public class Ui {
 	 * This method prints the welcome message for the user when they first
 	 * enter the program. It is always shown to signal the start of the program.
 	 */
-	public void showWelcome() {
-		System.out.println("Hello! I'm Duke.Duke \nWhat can I do for you?");
+	public static String welcome() {
+		return "Hello! I'm Bear. \nWhat can I do for you?";
 	}
 	
 	/**

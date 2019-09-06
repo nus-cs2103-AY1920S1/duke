@@ -15,11 +15,11 @@ import duke.tasks.Todo;
 
 public class Parser {
     /**
-     * parse the duke.command string and create according type of duke.command.
+     * parse the command string and create according type of command.
      *
-     * @param fullCommand string of duke.command
-     * @return return a new duke.command
-     * @throws DukeException when duke.command is invalid
+     * @param fullCommand string of command
+     * @return return a new command
+     * @throws DukeException when command is invalid
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ");

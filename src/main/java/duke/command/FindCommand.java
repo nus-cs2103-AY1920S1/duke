@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Tell whether the duke.command is exit duke.command.
+     * Tells whether the duke.command is exit command.
      *
      * @return true when it is.
      */
@@ -25,11 +25,11 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Execute the duke.command according to the duke.command type.
+     * Execute the duke.command according to the command type.
      *
-     * @param taskList The list of duke.tasks maintained in duke.Duke
+     * @param taskList The list of duke.tasks maintained in Duke
      * @param ui       Ui module
-     * @param storage  in charge of loading and saving the duke.tasks
+     * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the duke.command is invalid
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -39,7 +39,7 @@ public class FindCommand extends Command {
                 findList.add(task);
             }
         }
-        StringBuilder sb = new StringBuilder("Here are the matching duke.tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         for (int i = 0; i < findList.size(); i++) {
             sb.append("\n" + (i + 1) + "." + taskList.getTask(i + 1));
         }

@@ -18,11 +18,11 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execute done duke.command.
+     * Execute done command.
      *
-     * @param taskList The list of duke.tasks maintained in duke.Duke
+     * @param taskList The list of tasks maintained in Duke
      * @param ui       Ui module
-     * @param storage  in charge of loading and saving the duke.tasks
+     * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the task doesn't exist
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

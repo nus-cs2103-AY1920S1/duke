@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         taskList.addTask(task);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:");
         sb.append("\n  " + task);
-        sb.append("\nNow you have " + taskList.getSize() + " duke.tasks in the list.");
+        sb.append("\nNow you have " + taskList.getSize() + " tasks in the list.");
         ui.print(sb.toString());
     }
 }

@@ -10,7 +10,7 @@ public class DeleteCommand extends Command {
     private int number;
 
     /**
-     * Constructor which creates a delete duke.command.
+     * Constructor which creates a delete command.
      *
      * @param number the task number
      */
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Tell this is not an exit duke.command.
+     * Tells this is not an exit command.
      *
      * @return false
      */
@@ -28,12 +28,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the task in the list.
+     * Deletes the task in the list.
      *
-     * @param taskList list of duke.tasks
+     * @param taskList list of tasks
      * @param ui       interact with user input
      * @param storage  load and save duke.tasks
-     * @throws DukeException when duke.command is invalid
+     * @throws DukeException when command is invalid
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:");

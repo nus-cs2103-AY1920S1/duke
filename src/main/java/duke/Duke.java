@@ -16,7 +16,7 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
-     * constructor for duke.Duke.
+     * constructor for Duke.
      *
      * @param filePath which specifies the path for the .txt file
      */
@@ -36,7 +36,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Instantiate a duke.Duke object and run it.
+     * Instantiate a Duke object and run it.
      *
      * @param args standard main args
      */
@@ -45,7 +45,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Run process of duke.Duke.
+     * Runs process of Duke.
      */
     public void run() {
         ui.showWelcome();

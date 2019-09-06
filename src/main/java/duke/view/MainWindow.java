@@ -104,7 +104,7 @@ public class MainWindow extends AnchorPane {
             DialogBox box = DialogBox.getDukeDialog(splitResponse.get(i), (i == 0) ? dukeImage : null);
             box.setPadding(new Insets((i == 0) ? 15 : 0, // if first box, use normal top padding. else 0 top padding
                     5, // normal right padding
-                    (i + 1 == splitResponse.size()) ? 15 : 0, // if last box, use normal padding. else 0 padding.
+                    (i + 1 == splitResponse.size()) ? 15 : 0, // if last box, use normal btm padding. else 0 padding.
                     5)); // normal left padding
             dialogContainer.getChildren().add(box);
         }

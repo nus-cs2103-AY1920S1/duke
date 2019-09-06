@@ -118,10 +118,12 @@ public class Storage {
     }
 
     public String getSavePath() {
+        assert (this.file != null);
         return this.file.getPath();
     }
 
     public String changeSavePath(String newPath) {
+        assert (this.file != null);
         String previousPath = this.file.getPath();
         this.file = new File(newPath);
         return previousPath;

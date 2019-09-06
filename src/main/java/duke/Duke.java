@@ -48,6 +48,7 @@ public class Duke {
             Command c = Parser.parseForCommands(input); // send it off to be parsed
             c.initialize(this.storage, this.taskList, this.ui);
             response = c.execute();
+            assert (response != null);
         } catch (DukeShutDownException shutDownSignal) {
             throw shutDownSignal; // throws signal to GUI to handle
         } catch (DukeException e) {

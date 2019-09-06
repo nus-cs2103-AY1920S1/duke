@@ -62,6 +62,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a DoneCommand object
     private static DoneCommand parseDoneCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("done"));
         try {
             int taskIndex = Integer.parseInt(parameters[1]);
             return new DoneCommand(taskIndex);
@@ -78,6 +79,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a DeleteCommand object
     private static DeleteCommand parseDeleteCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("delete"));
         try {
             int taskIndex = Integer.parseInt(parameters[1]);
             return new DeleteCommand(taskIndex);
@@ -94,6 +96,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a TodoCommand object
     private static TodoCommand parseTodoCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("todo"));
         try {
             return new TodoCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
@@ -104,6 +107,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a EventCommand object
     private static EventCommand parseEventCommand(String[] parameters) throws DukeException {
+        assert(parameters[0].equals("event"));
         try {
             String[] deadlineParams = parameters[1].split(" /at ", 2);
             DateTime at = DateTime.parseString(deadlineParams[1]);
@@ -116,6 +120,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a DeadlineCommand object
     private static DeadlineCommand parseDeadlineCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("deadline"));
         try {
             String[] deadlineParams = parameters[1].split(" /by ", 2);
             DateTime by = DateTime.parseString(deadlineParams[1]);
@@ -128,6 +133,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a FindCommand object
     private static FindCommand parseFindCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("find"));
         try {
             return new FindCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
@@ -137,6 +143,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a LoadCommand object
     private static LoadCommand parseLoadCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("load"));
         try {
             return new LoadCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
@@ -146,6 +153,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a SaveCommand object
     private static SaveCommand parseSaveCommand(String[] parameters) throws DukeException {
+        assert (parameters[0].equals("save"));
         try {
             return new SaveCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {

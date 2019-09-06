@@ -25,7 +25,7 @@ public class Storage {
         this.tasklist = tasklist;
         //this.tasks = tasks;
         this.fileloc = fileloc;
-        tempFile = new File(fileloc);
+        this.tempFile = new File(fileloc);
 
         if (hasFile()) {
             readFile();
@@ -84,11 +84,7 @@ public class Storage {
 
     public void createFile() throws IOException {
         boolean exists = tempFile.exists();
-        if (tempFile.createNewFile()) { //no file yet so create
-
-        } else { // there is already a file so just print
-
-        }
+        boolean fileCreated = tempFile.createNewFile();    //no file yet so create
     }
 
     /**

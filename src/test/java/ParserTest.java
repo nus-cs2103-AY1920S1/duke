@@ -8,6 +8,6 @@ public class ParserTest {
         String test = "20/12/2019 1845";
         String output = Parser.getDateTime(test);
 
-        assertEquals("20th of December 2019, 06.45pm", output);
+        assertEquals("20th of December 2019, 6.45PM", output);
     }
 }

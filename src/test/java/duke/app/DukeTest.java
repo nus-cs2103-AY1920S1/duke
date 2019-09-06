@@ -12,9 +12,4 @@ public class DukeTest {
     public void sanityTest() {
         assertEquals(2, 2);
     }
-
-    @Test
-    public void failTest() {
-        assertEquals(3, 2);
-    }
 }

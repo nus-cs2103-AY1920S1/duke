@@ -1,11 +1,9 @@
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 public class TaskList {
 
@@ -27,6 +25,9 @@ public class TaskList {
 
     public void addToList(TaskType taskType, String description, String deadline)
             throws IllegalArgumentException {
+        // debug
+        System.out.println("at addToList method");
+        
         Task newTask = null; // task to be added
 
         // based on task type, create corresponding subclass object
@@ -50,7 +51,6 @@ public class TaskList {
         tasks.add(newTask);
         System.out.println("Okay! I've added: " + description
                 + ". Use list to see all your tasks!");
-        // todo: description has trailing space due to using /at or /by as delimiter. how?
     }
 
     public void printList() {

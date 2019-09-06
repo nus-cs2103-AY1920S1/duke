@@ -5,8 +5,13 @@ import java.util.Scanner;
 public class Parser {
 
     public static Command parse(String fullCommand) throws InputMismatchException {
+        // debug
+        System.out.println("at parse method");
         Scanner commandReader  = new Scanner(fullCommand);
         String command = commandReader.next();
+
+        // debug
+        System.out.println("command = " + command);
 
         if (command == "bye") {
             return new ExitCommand();

@@ -9,11 +9,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         // Done
         int itemId = Integer.parseInt(parts[1]);
         Task currentTask = tasks.get(itemId - 1);
         currentTask.setDone(true);
-        System.out.println("Nice! I've marked this task as done:\n[1] " + currentTask.getName());
+
+        String response = "Nice! I've marked this task as done:\n[1] " + currentTask.getName();
+        return response;
     }
 }

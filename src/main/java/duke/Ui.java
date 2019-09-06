@@ -10,51 +10,23 @@ import java.util.Scanner;
  */
 
 public class Ui {
-    private Scanner scanner = new Scanner(System.in);
 
-    /**
-     * Show welcome message
-     */
-    public void showWelcomeMessage() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    /**
-     * Show initial list message
-     */
-    public void showInitialListMessage(TaskList tasks) {
+    public String getStartingMessage(TaskList tasks) {
+        String message = "Hello! I'm Duke\nWhat can I do for you?\n";
         if (tasks.size() == 0) {
-            System.out.println("You do not have any stored tasks");
+            message += "You do not have any stored tasks\n";
         } else {
-            System.out.println("This is your current list of tasks");
+            message += "This is your current list of tasks\n";
             for (int i = 0; i < tasks.size(); i++) {
                 int currentItemNumber = i + 1;
                 Task currentTask = tasks.get(i);
-                System.out.println(currentItemNumber + "." + currentTask);
+                message += currentItemNumber + "." + currentTask + "\n";
             }
         }
+        return message;
     }
 
-    /**
-     * Show good bye message
-     */
-    public void showGoodbyeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Show error message
-     */
-    public void showErrorMessage(Exception e) {
-        System.out.println(e.getMessage());
-    }
-
-    /**
-     * Get user input
-     *
-     * @return String that user inputted
-     */
-    public String readCommand() {
-        return scanner.nextLine();
+    public String getErrorMessage(DukeException e) {
+        return e.getMessage();
     }
 }

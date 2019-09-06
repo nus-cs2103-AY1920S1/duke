@@ -9,14 +9,18 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        // List
-        System.out.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "You have no tasks at hand :)";
+        }
+
+        String response = "Here are the tasks in your list:\n";
         // Output current items in list
         for (int i = 0; i < tasks.size(); i++) {
             int currentItemNumber = i + 1;
             Task currentTask = tasks.get(i);
-            System.out.println(currentItemNumber + "." + currentTask);
+            response += currentItemNumber + "." + currentTask + "\n";
         }
+        return response;
     }
 }

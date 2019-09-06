@@ -9,9 +9,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        // Find
-        System.out.println("Here are the matching tasks in your list:");
+    public String execute(TaskList tasks) {
+        String response = "Here are the matching tasks in your list:\n";
         String keyPhrase = parts[1];
         boolean hasMatch = false;
         for (int i = 0; i < tasks.size(); i++) {
@@ -20,11 +19,13 @@ public class FindCommand extends Command {
             if (currentTask.getName().contains(keyPhrase)) {
                 hasMatch = true;
                 currentItemNumber += 1;
-                System.out.println(currentItemNumber + "." + currentTask);
+
+                response += currentItemNumber + "." + currentTask + "\n";
             }
         }
         if (!hasMatch) {
-            System.out.println("Nothing matches :(");
+            response += "Nothing matches :(";
         }
+        return response;
     }
 }

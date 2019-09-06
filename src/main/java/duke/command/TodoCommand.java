@@ -10,7 +10,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         // to do
         // Remaining words
         try {
@@ -19,10 +19,10 @@ public class TodoCommand extends Command {
             Todo newTodo = new Todo(name, false);
             tasks.add(newTodo);
 
-            // Print output of ADD
-            System.out.println("Got it. I've added this task:");
-            System.out.println(tasks.get(tasks.size() - 1));
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            String response = "Got it. I've added this task:\n"
+                    + tasks.get(tasks.size() - 1) + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.\n";
+            return response;
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");

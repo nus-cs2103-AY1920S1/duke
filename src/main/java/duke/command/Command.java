@@ -34,6 +34,7 @@ public abstract class Command {
      * to update the relevant data in the Command sub-class object before
      * any calls to execute() are made.
      *
+     * @return result feedback of the command to be printed to the user
      * @throws DukeException for generic recoverable errors
      */
     public abstract String execute() throws DukeException;

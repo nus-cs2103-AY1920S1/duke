@@ -11,6 +11,8 @@ public class ListCommand extends Command {
     /**
      * Prints out a string representation of TaskList object to the
      * screen for the user to view.
+     *
+     * @return result feedback of the command to be printed to the user
      */
     public String execute() {
         if (taskList.getSize() == 0) {

@@ -48,7 +48,7 @@ public class DateTime implements Serializable {
 
     /**
      * Returns the date and time in a standardized format
-     * of "ddth MMM yyyy", eg. 17th FEB 1996.
+     * of "dd MMM yyyy", eg. 17 FEB 1996.
      *
      * @return string representation of DateTime object
      */

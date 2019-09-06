@@ -1,9 +1,10 @@
 package duke.parser;
 
+import duke.exception.InvalidDateInputException;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import duke.exception.InvalidDateInputException;
 
 /**
  * Represents a Date Parser to parse in all String data given into a form readable by the user.
@@ -14,6 +15,8 @@ public class DateParser {
     private Date inputParser;
     private String input;
     private Calendar calendar = Calendar.getInstance();
+    private DateChecker dateChecker;
+    private TimeChecker timeChecker;
 
     /**
      * Reads the input and stores it in the parser.
@@ -66,18 +69,8 @@ public class DateParser {
     private void checkDateData(String[] dateData) throws InvalidDateInputException {
         InvalidDateInputException error = new InvalidDateInputException("Please key in a valid date in the format:\n "
                 + "dd/MM/yyyy");
-        int day = Integer.parseInt(dateData[0]);
-        int month = Integer.parseInt(dateData[1]);
-        int year = Integer.parseInt(dateData[2]);
-
-        if (year < 0 || month < 0 ||  month > 12 || day < 0 || day > 31) {
-            throw error;
-        } else if (day > 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
-                    || month == 10 || month == 12)) {
-            throw error;
-        } else if (month == 2 && ((day > 29 && year % 4 == 0) || day > 28)) {
-            throw error;
-        } else if (day > 30 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11)) {
+        dateChecker = new DateChecker(dateData);
+        if (dateChecker.containsInvalidDate()) {
             throw error;
         }
     }
@@ -89,14 +82,11 @@ public class DateParser {
      * @throws InvalidDateInputException If the hour or minutes is invalid.
      */
     private void checkTimeData(String time) throws InvalidDateInputException {
-        InvalidDateInputException error = new InvalidDateInputException("Please key in a valid time in the format:\n "
+        InvalidDateInputException error = new InvalidDateInputException("Please key in "
+                + "a valid time in the format:\n "
                 + "hhmm");
-        int hours = Integer.parseInt(time.substring(0, 2));
-        int mins = Integer.parseInt(time.substring(2));
-
-        if (hours < 0  || hours > 23 || mins < 0 || mins > 60) {
-            throw error;
-        } else if (time.length() != 4) {
+        timeChecker = new TimeChecker(time);
+        if (timeChecker.containsInvalidTime()) {
             throw error;
         }
     }
@@ -162,6 +152,4 @@ public class DateParser {
             throw new InvalidDateInputException("Please key in the date in this format:\n dd/MM/yyyy hhmm");
         }
     }
-
-
 }

@@ -31,7 +31,7 @@ public class AddEventTaskCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        assert(!TaskList.hasHitTaskLimit()) : "OOPS! You can only have up to 100 tasks!";
+        assert (!TaskList.hasHitTaskLimit()) : "OOPS! You can only have up to 100 tasks!";
         String[] eventData = dataParser.parseEventDate();
         dateParser.readInput(eventData[1]);
         String dateOutput = dateParser.convertDateToString();

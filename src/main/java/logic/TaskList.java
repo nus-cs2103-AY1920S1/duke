@@ -30,7 +30,7 @@ public class TaskList {
         sb.append("Got it. I've added this task:\n");
         sb.append("  " + task + "\n");
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
-        Ui.printStr(sb.toString());
+        Ui.loadStr(sb.toString());
     }
 
     /**
@@ -46,7 +46,7 @@ public class TaskList {
         task.markDone();
         sb.append("Nice! I've marked this task as done:\n");
         sb.append("  " + task.toString());
-        Ui.printStr(sb.toString());
+        Ui.loadStr(sb.toString());
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
         sb.append("  " + t + "\n");
         taskList.remove(taskNum - 1);
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
-        Ui.printStr(sb.toString());
+        Ui.loadStr(sb.toString());
     }
 
     /**

@@ -43,15 +43,15 @@ public class Storage {
                 taskList.add(task);
             }
 
-            Ui.printStr("Data is loaded from data/taskList.txt");
+            Ui.loadStr("Data is loaded from data/taskList.txt");
         } catch (FileNotFoundException e) {
-            Ui.printStr("File not found, data not loaded!\nCreating new file taskList.txt");
+            Ui.loadStr("File not found, data not loaded!\nCreating new file taskList.txt");
             File f = new File(filePath);
 
             try {
                 f.createNewFile(); //creates new text file
             } catch (IOException ioE) {
-                Ui.printStr(ioE.getMessage());
+                Ui.loadStr(ioE.getMessage());
             }
         }
         return taskList;
@@ -112,7 +112,7 @@ public class Storage {
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
-            Ui.printStr("Cannot write to file: " + e.getMessage());
+            Ui.loadStr("Cannot write to file: " + e.getMessage());
         }
     }
 }

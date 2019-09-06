@@ -96,7 +96,6 @@ public class Parser {
     public static Command parseCommand(String inputString) throws DukeException { //receives scanned string immediately
         String[] strSplit = inputString.split(" ", 2); //get first word and remaining
         String command = strSplit[0];
-
         switch (command) {
         case "bye":
             return new ExitCommand();
@@ -106,13 +105,13 @@ public class Parser {
             try {
                 return new DoneCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a task.task Number");
+                throw new DukeException("Please enter a valid task number");
             }
         case "delete":
             try {
                 return new DeleteCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a task.task Number");
+                throw new DukeException("Please enter a valid task number");
             }
         case "todo":
             try {

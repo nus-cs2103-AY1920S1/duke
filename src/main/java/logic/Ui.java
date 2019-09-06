@@ -15,18 +15,28 @@ public class Ui {
      */
 
     public static String HORIZONTAL_LINE = "____________________________________________________________\n";
+    public static String printString = "";
 
     /**
      * Wraps the parameter String with horizontal lines for aesthetic purposes.
      *
      * @param input String to be wrapped
      */
-    public static void printStr(String input) {
+    public static void loadStr(String input) {
         StringBuilder sb = new StringBuilder();
         sb.append(HORIZONTAL_LINE);
         sb.append(input + "\n");
         sb.append(HORIZONTAL_LINE);
-        System.out.println(sb.toString());
+        printString = sb.toString(); //stores string in static variable that can be called later
+    }
+
+    /**
+     * Method called by getResponse in Duke()
+     *
+     * @return String to be shown on the GUI.
+     */
+    public static String getLoadedStr() {
+        return printString;
     }
 
     /**
@@ -42,7 +52,7 @@ public class Ui {
         sb.append(logo);
         sb.append("Hello! I'm Duke\n");
         sb.append("What can I do for you?");
-        printStr(sb.toString());
+        loadStr(sb.toString());
     }
 
     /**
@@ -65,14 +75,14 @@ public class Ui {
             }
         }
 
-        printStr(sb.toString());
+        loadStr(sb.toString());
     }
 
     /**
      * Exit Message to be printed.
      */
     public void bye() {
-        printStr("Bye. Hope to see you again soon!");
+        loadStr("Bye. Hope to see you again soon!");
     }
 
 }

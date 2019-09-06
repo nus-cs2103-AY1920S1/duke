@@ -23,7 +23,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            Ui.printStr(e.getMessage());
+            Ui.loadStr(e.getMessage());
         }
     }
 
@@ -39,17 +39,21 @@ public class Duke {
                 Command command = Parser.parseCommand(input);
                 command.execute(tasks, ui, storage);
             } catch (DukeException e) {
-                Ui.printStr(e.getMessage());
+                Ui.loadStr(e.getMessage());
             }
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parseCommand(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            Ui.loadStr(e.getMessage());
+        } finally {
+            return Ui.getLoadedStr();
+        }
+
     }
 
 }

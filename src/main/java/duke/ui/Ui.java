@@ -3,7 +3,6 @@ package duke.ui;
 import duke.task.Task;
 import duke.tasklist.Tasklist;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 

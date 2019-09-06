@@ -1,7 +1,6 @@
 package core;
-import java.io.IOException;
 
-import com.sun.tools.javadoc.Main;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +15,9 @@ import ui.MainWindow;
 public class DukeGui extends Application {
     private Duke duke;
 
-    public DukeGui() {}
+    public DukeGui() {
+
+    }
 
     @Override
     public void start(Stage stage) {
@@ -26,9 +27,11 @@ public class DukeGui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Duke");
+
             MainWindow mw = fxmlLoader.<MainWindow>getController();
             duke = new Duke(System.getProperty("user.dir") + "/data/duke.txt", new Gui(mw));
             mw.setDuke(duke);
+
             duke.getUi().showWelcome();
             stage.show();
         } catch (IOException e) {

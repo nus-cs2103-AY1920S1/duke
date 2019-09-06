@@ -79,7 +79,7 @@ public class TaskList {
             try {
                 dateHolder = DATE_FORMAT.parse(date);
             } catch (ParseException e) {
-                throw new IODukeException("Please enter date in this format: d/m/y HHmm");
+                throw new DukeException("Please enter date in this format: d/m/y HHmm");
             }
 
             Task taskHolder = new Deadline(stringHolder, dateHolder, false);
@@ -110,7 +110,7 @@ public class TaskList {
             try {
                 dateHolder = DATE_FORMAT.parse(date);
             } catch (ParseException e) {
-                throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
+                throw new DukeException("Please enter date in this format: 2/12/2019 1800");
             }
 
             Task taskHolder = new Event(stringHolder, dateHolder, false);

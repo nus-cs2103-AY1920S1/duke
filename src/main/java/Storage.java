@@ -19,16 +19,16 @@ public class Storage {
 
     /**
      * Reads information from a text file into the list.
-     * @throws IODukeException throws IO related duke exception
+     * @throws DukeException throws IO related duke exception
      */
-    public void readTask() throws IODukeException{
+    public void readTask() throws DukeException{
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = null;
 
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(" \\| ");
                 if (tokens.length < 3) {
-                    throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
+                    throw new DukeException("Please enter date in this format: 2/12/2019 1800");
                 }
 
                 Task taskHolder = null;
@@ -44,7 +44,7 @@ public class Storage {
                     try {
                         date = DATE_FORMAT.parse(tokens[3]);
                     } catch (ParseException e) {
-                        throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
+                        throw new DukeException("Please enter date in this format: 2/12/2019 1800");
                     }
                 }
 
@@ -59,23 +59,23 @@ public class Storage {
                     taskHolder = new Event(description, date, isDone);
                     break;
                 default:
-                    throw new IODukeException("Invalid task");
+                    throw new DukeException("Invalid task");
                 }
                 taskList.addTask(taskHolder);
             }
 
         } catch (FileNotFoundException e) {
-            throw new IODukeException("File not found");
+            throw new DukeException("File not found");
         } catch (IOException e) {
-            throw new IODukeException("Error opening the file");
+            throw new DukeException("Error opening the file");
         }
     }
 
     /**
      * Saves all the current tasks in the list into a local text file.
-     * @throws IODukeException throws IO related duke exception
+     * @throws DukeException throws IO related duke exception
      */
-    public void saveTask() throws IODukeException{
+    public void saveTask() throws DukeException{
         PrintWriter pr = null;
         try {
             pr = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
@@ -101,7 +101,7 @@ public class Storage {
 
             }
         } catch (IOException e) {
-            throw new IODukeException("File could not be saved");
+            throw new DukeException("File could not be saved");
         } finally {
             if (pr != null) {
                 pr.close();

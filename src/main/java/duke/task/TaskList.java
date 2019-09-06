@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A class that holds a list of tasks that may be added to, removed or
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final Pattern TASK_PAT = Pattern.compile("([TED])\\|([01])\\|(.*?)\\|(.*?)");
     
     /**
      * Initializes an empty task list.
@@ -27,23 +30,29 @@ public class TaskList {
     public TaskList(ArrayList<String> stringTasks) {
         tasks = new ArrayList<>();
         for (String stringTask: stringTasks) {
-            String[] fields = stringTask.split("\\|");
-            Task t;
-            switch (fields[0]) {
+            Matcher m = TASK_PAT.matcher(stringTask);
+            if (!m.matches()) {
+                System.out.println("Ignoring malformed task line " + stringTask);
+                continue;
+            }
+
+            Task t = null;
+            switch (m.group(1)) {
             case "T":
-                t = new Todo(fields[2]);
+                t = new Todo(m.group(3));
                 break;
             case "E":
-                t = new Event(fields[2], LocalDateTime.parse(fields[3], INPUT_FORMATTER));
+                t = new Event(m.group(3), LocalDateTime.parse(m.group(4), INPUT_FORMATTER));
                 break;
             case "D":
-                t = new Deadline(fields[2], LocalDateTime.parse(fields[3], INPUT_FORMATTER));
+                t = new Deadline(m.group(3), LocalDateTime.parse(m.group(4), INPUT_FORMATTER));
                 break;
-            default:
-                t = new Todo("nothing");
+            default: // Can't reach here because the regex would have rejected it
                 break;
             }
-            if (fields[1].equals("1")) {
+
+            assert t != null;
+            if (m.group(2).equals("1")) {
                 t.markDone();
             }
             tasks.add(t);

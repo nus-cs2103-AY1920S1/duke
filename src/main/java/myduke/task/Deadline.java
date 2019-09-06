@@ -12,8 +12,13 @@ import myduke.task.parameters.DukeDateTime;
 public class Deadline extends Task {
     protected final DukeDateTime byDate;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeEmptyDescriptionException {
         super(description);
+        if (description.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The description of a deadline cannot be empty.");
+        } else if (by.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The duration of a deadline cannot be empty.");
+        }
         this.byDate = new DukeDateTime(by);
     }
 
@@ -28,7 +33,7 @@ public class Deadline extends Task {
      */
     public static Task parse(Scanner in) throws DukeException {
 
-        String delimiter = "/by ";
+        String delimiter = "/by";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
             throw new DukeEmptyDescriptionException("The description of a deadline cannot be empty.");

@@ -1,5 +1,7 @@
 package myduke.task.parameters;
 
+import myduke.exception.DukeEmptyDescriptionException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +25,11 @@ public class DukeDateTime {
      *
      * @param dateTimeString the date time object to parse
      */
-    public DukeDateTime(String dateTimeString) {
+    public DukeDateTime(String dateTimeString) throws DukeEmptyDescriptionException {
+        if (dateTimeString.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The date time string cannot be empty.");
+        }
+
         this.dateTimeString = dateTimeString;
         this.localDateFormatter = new SimpleDateFormat(DATETIME_FORMAT);
         this.localDatePrintFormatter = new SimpleDateFormat(PRINT_DATETIME_FORMAT);

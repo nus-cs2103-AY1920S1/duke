@@ -38,6 +38,9 @@ public class CommandParser {
         case "event":
             return new AddTaskCommand(TaskType.TASK_EVENT, arguments);
 
+        case "doafter":
+            return new AddTaskCommand(TaskType.TASK_DO_AFTER, arguments);
+
         case "done":
             return new MarkCompletedTaskCommand(arguments);
 

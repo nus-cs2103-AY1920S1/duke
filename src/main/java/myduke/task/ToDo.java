@@ -9,8 +9,11 @@ import myduke.exception.DukeEmptyDescriptionException;
  * A Task representing a ToDo Task.
  */
 public class ToDo extends Task {
-    public ToDo(String description) {
+    public ToDo(String description) throws DukeEmptyDescriptionException {
         super(description);
+        if (description.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The description of a todo cannot be empty.");
+        }
     }
 
     /**
@@ -27,8 +30,9 @@ public class ToDo extends Task {
         if (!in.hasNext()) {
             throw new DukeEmptyDescriptionException("The description of a task cannot be empty.");
         }
+        String description = in.next().trim();
 
-        return new ToDo(in.next().trim());
+        return new ToDo(description);
     }
 
     @Override

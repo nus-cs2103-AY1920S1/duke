@@ -69,7 +69,7 @@ public class TaskList extends ArrayList<Task> {
     public TaskList filterTasks(String keyword) {
         TaskList newList = new TaskList();
         this.stream()
-                .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
+                .filter(task -> task.toString().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(() -> newList));
 
         return newList;

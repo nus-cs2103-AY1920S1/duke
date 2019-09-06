@@ -9,22 +9,21 @@ import myduke.task.parameters.DukeDateTime;
 /**
  * A Task representing an Event.
  */
-public class Event extends Task {
-    protected final DukeDateTime at;
+public class DoAfter extends Task {
+    protected final DukeDateTime after;
 
-    public Event(String description, String at) throws DukeEmptyDescriptionException {
+    public DoAfter(String description, String after) throws DukeEmptyDescriptionException {
         super(description);
-
         if (description.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The description of a event cannot be empty.");
-        } else if (at.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The duration of a event cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of a 'do after' task cannot be empty.");
+        } else if (after.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The duration of a 'do after' task cannot be empty.");
         }
-        this.at = new DukeDateTime(at);
+        this.after = new DukeDateTime(after);
     }
 
     /**
-     * Parses the query as a Event Task.
+     * Parses the query as a DoAfter Task.
      *
      * @param in A query from the user.
      *
@@ -34,25 +33,25 @@ public class Event extends Task {
      */
     public static Task parse(Scanner in) throws DukeException {
 
-        String delimiter = "/at";
+        String delimiter = "/after";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The description of an event cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of a 'do after' task cannot be empty.");
         }
         String description = in.next().trim();
 
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The duration of a event cannot be empty.");
+            throw new DukeEmptyDescriptionException("The start date of a 'do after' task cannot be empty.");
         }
-        String at = in.next().substring(delimiter.length()).trim();
+        String after = in.next().substring(delimiter.length()).trim();
 
-        return new Event(description, at);
+        return new DoAfter(description, after);
     }
 
     @Override
     public char getDataBaseDescriptor() {
-        return 'E';
+        return 'A';
     }
 
     @Override
@@ -61,14 +60,14 @@ public class Event extends Task {
                 getDataBaseDescriptor(),
                 (isDone ? 1 : 0),
                 description,
-                at);
+                after);
     }
 
     @Override
     public String toString() {
-        return String.format("[%c]%s (at: %s)",
+        return String.format("[%c]%s (after: %s)",
                 getDataBaseDescriptor(),
                 super.toString(),
-                at);
+                after);
     }
 }

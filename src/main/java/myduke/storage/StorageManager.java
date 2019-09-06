@@ -10,7 +10,9 @@ import java.util.Scanner;
 import java.util.NoSuchElementException;
 import java.util.function.BiConsumer;
 
+import myduke.exception.DukeEmptyDescriptionException;
 import myduke.task.Deadline;
+import myduke.task.DoAfter;
 import myduke.task.Event;
 import myduke.task.Task;
 import myduke.task.ToDo;
@@ -85,6 +87,10 @@ public class StorageManager {
                     newTask = new Event(description, in.next());
                     break;
 
+                case "A": //DoAfter Task
+                    newTask = new DoAfter(description, in.next());
+                    break;
+
                 default:
                     throw new IllegalStateException("Unexpected value: " + taskType);
                 }
@@ -105,6 +111,8 @@ public class StorageManager {
         } catch (IllegalStateException ex) {
             loggerConsumer.accept("DB File is corrupt. " + ex.getMessage(), LoggerMessageType.LOGGER_MESSAGE_ERROR);
         } catch (NoSuchElementException ex) {
+            loggerConsumer.accept("DB File is corrupt. " + ex.getMessage(), LoggerMessageType.LOGGER_MESSAGE_ERROR);
+        } catch (DukeEmptyDescriptionException ex) {
             loggerConsumer.accept("DB File is corrupt. " + ex.getMessage(), LoggerMessageType.LOGGER_MESSAGE_ERROR);
         }
 

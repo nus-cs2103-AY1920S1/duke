@@ -92,7 +92,11 @@ public class Storage {
      * @throws DukeException If the task name is empty or the task time is not in valid format.
      */
     private static Event translateEvent(String taskName, boolean isFinished, String taskTime) throws DukeException {
-        Event toAdd = new Event(taskName, taskTime);
+        String[] splitTaskTime = taskTime.split("%");
+        Event toAdd = new Event(taskName, splitTaskTime[0]);
+        for (int i = 1; i < splitTaskTime.length; i++) {
+            toAdd.addEventTime(splitTaskTime[i]);
+        }
         if (isFinished) {
             toAdd.setAsFinish();
         }

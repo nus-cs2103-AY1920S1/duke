@@ -46,7 +46,24 @@ public class Ui {
     }
 
     /**
+     * This method is called to tell the user that a new possible slot of an event is added to the target event.
+     *
+     * @param t The target event.
+     * @return The String containing successful adding message.
+     */
+    public String showSlotMessage(Task t) {
+        return "Got it. I have added this slot to the following event:\n"
+                + " " + t.taskInfo() + "\n";
+    }
+
+    public String showSpecifyMessage(Task t) {
+        return "Got it. I have specified this slot to the following event: \n"
+                + " " + t.taskInfo() + "\n";
+    }
+
+    /**
      * This method is to tell the user that a task is successfully deleted from the task list.
+     *
      * @param t The task just have been deleted.
      */
     public String showDeleteMessage(Task t, int totaltaskNumber) {

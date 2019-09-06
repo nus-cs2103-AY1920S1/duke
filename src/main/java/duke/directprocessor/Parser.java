@@ -1,14 +1,7 @@
 package duke.directprocessor;
 
 import duke.KeyWord;
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FakeCommand;
-import duke.commands.FindCommand;
-import duke.commands.FinishCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.DukeException;
 import duke.tasks.TaskType;
 
@@ -38,6 +31,8 @@ public class Parser {
             case DONE: return finishCommand(splitInput);
             case DELETE: return deleteCommand(splitInput);
             case FIND: return findCommand(splitInput);
+            case SLOT: return slotCommand(splitInput);
+            case SPECIFY: return specifyCommand(splitInput);
             default: return fakeCommand();
         }
     }
@@ -165,7 +160,7 @@ public class Parser {
         try {
             return new DeleteCommand(Integer.parseInt(splitInput[1]));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Plase specify which task needs to be deleted by its order in the task list.");
+            throw new DukeException("Please specify which task needs to be deleted by its order in the task list.");
         }
     }
 
@@ -184,6 +179,37 @@ public class Parser {
             }
         }
         return new FindCommand(target);
+    }
+
+    /**
+     * The assistance method to return a slot command.
+     *
+     * @param splitInput The user input split by white space.
+     * @return A new SlotCommand
+     * @throws DukeException If the index of the task to modify is not specified.
+     */
+    private static Command slotCommand(String[] splitInput) throws DukeException {
+        try {
+            String newSlot = "";
+            for (int i = 2; i < splitInput.length; i++) {
+                newSlot = newSlot + splitInput[i] + " ";
+            }
+            return new SlotCommand(Integer.parseInt(splitInput[1]), newSlot);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify which event do you want to add a new slot.");
+        }
+    }
+
+    private static Command specifyCommand(String[] splitInput) throws DukeException {
+        try {
+            String specifiedSlot = "";
+            for (int i = 2; i < splitInput.length; i++) {
+                specifiedSlot = specifiedSlot + splitInput[i] + " ";
+            }
+            return new SpecifyCommand(Integer.parseInt(splitInput[1]), specifiedSlot);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please specify which event do you want to specify the slot.");
+        }
     }
 
     /**

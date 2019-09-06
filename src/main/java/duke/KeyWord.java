@@ -7,5 +7,6 @@ package duke;
 public enum KeyWord {
     TODO, EVENT, DEADLINE,
     DONE, DELETE, LIST,
-    FIND, BYE
+    FIND, BYE, SLOT,
+    SPECIFY
 }

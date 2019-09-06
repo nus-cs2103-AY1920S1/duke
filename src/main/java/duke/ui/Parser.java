@@ -1,25 +1,25 @@
-package ui;
+package duke.ui;
 
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.ListCommand;
-import command.AddCommand;
-import exception.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.AddCommand;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 public class Parser {
     /**
-     * parse the command string and create according type of command.
+     * parse the duke.command string and create according type of duke.command.
      *
-     * @param fullCommand string of command
-     * @return return a new command
-     * @throws DukeException when command is invalid
+     * @param fullCommand string of duke.command
+     * @return return a new duke.command
+     * @throws DukeException when duke.command is invalid
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ");
@@ -87,7 +87,7 @@ public class Parser {
             return new AddCommand(eventTask);
         case "find":
             if (parts.length == 1) {
-                throw new DukeException("Please provide the string you want to search in the tasks");
+                throw new DukeException("Please provide the string you want to search in the duke.tasks");
             }
             index = fullCommand.indexOf(" ");
             String find = fullCommand.substring(index + 1);

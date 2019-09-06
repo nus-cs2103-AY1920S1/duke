@@ -1,16 +1,16 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import storage.Storage;
-import tasks.Task;
-import tasks.TaskList;
-import ui.Ui;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private int number;
 
     /**
-     * Constructor which creates a delete command.
+     * Constructor which creates a delete duke.command.
      *
      * @param number the task number
      */
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Tell this is not an exit command.
+     * Tell this is not an exit duke.command.
      *
      * @return false
      */
@@ -30,10 +30,10 @@ public class DeleteCommand extends Command {
     /**
      * Delete the task in the list.
      *
-     * @param taskList list of tasks
+     * @param taskList list of duke.tasks
      * @param ui       interact with user input
-     * @param storage  load and save tasks
-     * @throws DukeException when command is invalid
+     * @param storage  load and save duke.tasks
+     * @throws DukeException when duke.command is invalid
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:");

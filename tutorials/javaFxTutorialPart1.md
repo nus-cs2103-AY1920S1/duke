@@ -44,7 +44,7 @@ javafx {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Modify your `duke.Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -52,8 +52,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class duke.Duke extends Application {
-    
+public class Duke extends Application {
+
     // ...
 
     @Override
@@ -67,7 +67,7 @@ public class duke.Duke extends Application {
 }
 ```
 
-Note how we have created a `Label` to contain the text that we want to show. We then create the `Scene` and set its content. Finally, we set the stage and show it. 
+Note how we have created a `Label` to contain the text that we want to show. We then create the `Scene` and set its content. Finally, we set the stage and show it.
 
 Next, we create another Java class, `Launcher`, as an entry point to our application.
 The `Launcher` class is reproduced below in its entirety.
@@ -80,14 +80,14 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(duke.Duke.class, args);
+        Application.launch(Duke.class, args);
     }
 }
 ```
 
 Run `Launcher` and you should see something like this:
 
-![Hello World](assets/HelloWorld.png) 
+![Hello World](assets/HelloWorld.png)
 
 Congratulations! You have created your first GUI application!
 
@@ -101,7 +101,7 @@ Congratulations! You have created your first GUI application!
    1. What properties of a `Label` can you change programmatically?
    1. Try changing the `Label` to have a font of Arial at size 50.
 
-1. You’ve learnt that a `Stage` can be thought of as a window. 
+1. You’ve learnt that a `Stage` can be thought of as a window.
    1. Can you have more than one `Stage` an application?
    1. Try creating another stage and showing it! What happens?
 

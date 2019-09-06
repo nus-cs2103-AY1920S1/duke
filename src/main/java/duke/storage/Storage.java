@@ -1,10 +1,10 @@
-package storage;
+package duke.storage;
 
-import exception.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,8 +22,8 @@ public class Storage {
     /**
      * load the history of duke.Duke.
      *
-     * @return return an arraylist of tasks
-     * @throws DukeException when loading encounters exception
+     * @return return an arraylist of duke.tasks
+     * @throws DukeException when loading encounters duke.exception
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
@@ -61,9 +61,9 @@ public class Storage {
     }
 
     /**
-     * save the tasks into a .txt file.
+     * save the duke.tasks into a .txt file.
      *
-     * @param list a list of tasks
+     * @param list a list of duke.tasks
      */
     public void save(ArrayList<Task> list) throws DukeException {
         try {

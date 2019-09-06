@@ -9,27 +9,27 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
-   What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
-    
+   Why does `Main` need to know that `DialogBox` needs a `Label`?
+   What happens if we change the `Label` to a custom `ColoredLabel` in the future?
+
     We need to minimize the amount of information each control needs to know about another.
     Otherwise, making changes in the future will break existing features.
 
 1. The code is untidy and long:
    Why is all the code in one place?
 
-   The `Main` class attempts to do it all. 
+   The `Main` class attempts to do it all.
    Code for visual tweaks, listeners and even utility methods are all in one file.
    This makes it difficult to find and make changes to existing code.
 
-FXML is a XML-based language that allows us to define our user interface. Properties of JavaFX objects can be defined in the FXML file. For example:  
+FXML is a XML-based language that allows us to define our user interface. Properties of JavaFX objects can be defined in the FXML file. For example:
 ```xml
  <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
 ```
 
 The FXML snippet define a TextField similar to the one that we programmatically defined previous in Tutorial 2. Notice how concise FXML is compared to the plain Java version.
 
-Let's return to duke.Duke and convert it to use FXML instead.
+Let's return to Duke and convert it to use FXML instead.
 
 # Rebuilding the Scene using FXML
 
@@ -80,29 +80,29 @@ Create the following files in `src/main/resources/view`:
 </fx:root>
 ```
 
-1. Let’s explore the provided FXML files in Scene Builder. 
-    
+1. Let’s explore the provided FXML files in Scene Builder.
+
     Running the tool brings up the main screen.
     Select `Open Project` > `src/main/resources/view/MainWindow.fxml`. Inspect each control and its properties.
 
    ![SceneBuilder opening MainWindow.fxml](assets/SceneBuilder.png)
 
 1. On the right accordion pane, you can modify the properties of the control that you have selected. Try changing the various settings and see what they do!
- 
-1. On the left accordion, you can see that we have set the controller class to `MainWindow`. 
+
+1. On the left accordion, you can see that we have set the controller class to `MainWindow`.
 We will get to that later.
- 
+
    ![Controller for MainWindow](assets/MainWindowController.png)
 
 1. Let’s repeat the process for `DialogBox`.
-   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
+   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_.
 
    ![Settings for DialogBox](assets/DialogBoxController.png)
 
 ## Using Controllers
 
-As part of the effort to separate the code handling duke.Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
-We call these UI classes _controllers_. 
+As part of the effort to separate the code handling Duke's logic and UI, let's _refactor_ the UI-related code to its own class.
+We call these UI classes _controllers_.
 
 Let's implement the `MainWindow` controller class that we specified in `MainWindow.fxml`.
 
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private duke.Duke duke;
+    private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -138,12 +138,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(duke.Duke d) {
+    public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -164,11 +164,11 @@ Without the annotation, we will have to make everything `public` and expose our 
 
 The `FXMLLoader` will map the a control with a `fx:id` defined in FXML to a variable with the same name in its controller.
 Notice how in `MainWindow`, we can invoke `TextField#clear()` on `userInput` and access its content just as we did in the previous example.
-Similarly, methods like private methods like `handleUserInput` can be used in FXML when annotated by `@FXML`. 
+Similarly, methods like private methods like `handleUserInput` can be used in FXML when annotated by `@FXML`.
 
 ## Using FXML in our application
 
-Let's create a new `Main` class as the bridge between the existing logic in `duke.Duke` and the UI in `MainWindow`.
+Let's create a new `Main` class as the bridge between the existing logic in `Duke` and the UI in `MainWindow`.
 
 **Main.java**
 ```java
@@ -182,11 +182,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for duke.Duke using FXML.
+ * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
-    private duke.Duke duke = new duke.Duke();
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -271,13 +271,13 @@ public class DialogBox extends HBox {
 }
 ```
 
-When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
+When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`.
 From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
 
 The last change that we have to make is to point our `Launcher` class in the right direction:
 In `Launcher.java`
 ```java
-//...    
+//...
 Application.launch(Main.class, args);
 //...
 ```

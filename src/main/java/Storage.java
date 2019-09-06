@@ -31,7 +31,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String next = sc.nextLine();
                 String[] arr = next.split("@");
-                boolean isDone = arr[1].equals("1");
+                boolean isDone = arr[1].contains("1");
                 String description = arr[2];
                 if (arr[0].contains("T")) {
                     t = new Todos(description.trim(), isDone);
@@ -47,9 +47,8 @@ public class Storage {
             System.out.println("File not found");
         } catch (ParseException e) {
             System.out.println("Date in wrong format");
-        } finally {
-            return list;
         }
+        return list;
     }
 
     /**

@@ -25,11 +25,11 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void printTask(int count, Task t) {
+    public String printTask(int count, Task t) {
         if (count == 1) {
-            System.out.println("  " + t + "\nNow you have " + count + " task in the list.");
+            return "  " + t + "\nNow you have " + count + " task in the list.";
         } else {
-            System.out.println("  " + t + "\nNow you have " + count + " tasks in the list.");
+            return "  " + t + "\nNow you have " + count + " tasks in the list.";
         }
     }
 

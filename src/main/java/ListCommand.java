@@ -5,12 +5,19 @@
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int listCount = 1;
+        String str = toString();
         for (Task task : tasks.getList()) {
-            System.out.println(listCount + "." + task);
+            str += listCount + "." + task + "\n";
             listCount++;
         }
+
+        return str;
+    }
+
+    @Override
+    public String toString() {
+        return "Here are the tasks in your list:\n";
     }
 }

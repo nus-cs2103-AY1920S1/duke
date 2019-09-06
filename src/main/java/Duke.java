@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.text.ParseException;
+
 /**
  * Main driving class for Duke.
  */
@@ -36,24 +38,24 @@ public class Duke extends Application {
         list = new TaskList(storage.load());
     }
 
-    public Duke(){}
+//    public Duke(){}
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand);
-            c.execute(list, ui, storage);
-            isExit = c instanceof ExitCommand;
-        }
-    }
-
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("Duke_List.txt");
-        duke.run();
-    }
+//    public void run() {
+//        ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            String fullCommand = ui.readCommand();
+//            Command c = Parser.parse(fullCommand);
+//            c.execute(list, ui, storage);
+//            isExit = c instanceof ExitCommand;
+//        }
+//    }
+//
+//
+//    public static void main(String[] args) {
+//        Duke duke = new Duke("Duke_List.txt");
+//        duke.run();
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -161,6 +163,15 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(list, ui, storage);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } catch (ParseException e) {
+            response = "Date in wrong format";
+        }
+        return response;
     }
 }

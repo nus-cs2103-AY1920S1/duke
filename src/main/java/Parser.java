@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 /**
  * Parser class to handle user input.
  */
@@ -8,7 +10,7 @@ public class Parser {
      * @param str The input string supplied to Duke.
      * @return Returns the corresponding command depending on the first word of the input string.
      */
-    public static Command parse(String str) {
+    public static Command parse(String str) throws DukeException, ParseException {
         String[] arr = str.split(" ");
         String next = arr[0];
         Command c;
@@ -29,8 +31,33 @@ public class Parser {
             c = new DeleteCommand(Integer.parseInt(arr[1]) - 1);
             break;
         default:
-            c = new AddCommand(arr);
-            break;
+            String description = "";
+            Task t;
+                if (next.equals("todo") || next.equals("deadline") || next.equals("event")) {
+                    if (arr.length == 1) {
+                        throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+                    } else {
+                        for (int i = 1; i < arr.length; i++) {
+                            description += " " + arr[i];
+                        }
+                    }
+                } else {
+                    throw new UnknownTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                if (next.equals("todo")) {
+                    t = new Todos(description.trim());
+                } else if (next.equals("deadline")) {
+                    int index = description.indexOf("/");
+                    String byWhen = description.substring(index + 4);
+                    String desc = description.substring(1, index - 1);
+                    t = new Deadline(desc, byWhen);
+                } else {
+                    int index = description.indexOf("/");
+                    String at = description.substring(index + 4);
+                    String desc = description.substring(1, index - 1);
+                    t = new Event(desc, at);
+                }
+                c = new AddCommand(t);
             }
             return c;
     }

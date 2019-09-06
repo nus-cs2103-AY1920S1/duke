@@ -10,6 +10,6 @@ public abstract class Command {
      * @param ui User interaction that comes with the command.
      * @param storage To deal with saving tasks into the file after executing the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
 }

@@ -8,12 +8,13 @@ public class DoneCommand extends Command {
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
+
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskDone = tasks.getList().get(taskNumber);
         taskDone.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n  " + taskDone);
         storage.writeFile(tasks.getList());
+        return toString() + " " + taskDone;
     }
 
    public int getTaskNumber() {
@@ -31,5 +32,10 @@ public class DoneCommand extends Command {
             return taskNumber == command.getTaskNumber();
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Nice! I've marked this task as done:\n";
     }
 }

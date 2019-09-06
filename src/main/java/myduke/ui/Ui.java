@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Handles all user interactions.
@@ -91,11 +93,10 @@ public class Ui {
      */
     public void printResponse(String responseHeader, List<Task> listOfTasks) {
         messages.add(responseHeader);
-        int indexOfTask = 0;
-        for (Task currentTask : listOfTasks) {
-            indexOfTask += 1;
-            messages.add(String.format("%d.%s", indexOfTask, currentTask));
-        }
+        IntStream
+                .range(1, listOfTasks.size() + 1)
+                .mapToObj(idx -> String.format("%d.%s", idx, listOfTasks.get(idx - 1)))
+                .forEach(messages::add);
     }
 
     /**
@@ -111,11 +112,10 @@ public class Ui {
         if (listOfTasks.length == 1) {
             messages.add(listOfTasks[0].toString());
         } else if (listOfTasks.length > 1) {
-            int indexOfTask = 0;
-            for (Task currentTask : listOfTasks) {
-                indexOfTask += 1;
-                messages.add(String.format("%d.%s", indexOfTask, currentTask));
-            }
+            IntStream
+                    .range(1, listOfTasks.length + 1)
+                    .mapToObj(idx -> String.format("%d.%s", idx, listOfTasks[idx - 1]))
+                    .forEach(messages::add);
         }
 
         if (numOfTasksLeft >= 0) {
@@ -200,13 +200,10 @@ public class Ui {
             builder.append(MESSAGE_NEWLINE);
         }
 
-        while (!messages.isEmpty()) {
-            if (printIndent) {
-                builder.append(MESSAGE_PADDING);
-            }
-            builder.append(messages.pollFirst());
-            builder.append(MESSAGE_NEWLINE);
-        }
+        messages.stream()
+                .map(msg -> String.format("%s%s%s", (printIndent ? MESSAGE_PADDING : ""), msg, MESSAGE_NEWLINE))
+                .forEach(builder::append);
+        messages.clear();
 
         if (printBoundary) {
             builder.append(MESSAGE_BOUNDARY);

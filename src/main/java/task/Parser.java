@@ -1,5 +1,13 @@
 package task;
 
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.ListCommand;
+import command.FindCommand;
+
 public class Parser {
 
     /**
@@ -10,85 +18,36 @@ public class Parser {
      */
     public static String parse(String textInput) {
         try {
-            return parseCommands(textInput);
+            Command command = parseCommands(textInput);
+            return command.execute();
         } catch (DukeException e) {
             return Ui.printException(e);
         }
     }
 
-    private static String parseTasks(String textInput) throws DukeException {
-        if (textInput.startsWith("todo")) {
-            if (isInvalidCommand(textInput, "todo")) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            String description = textInput.replaceFirst("todo ", "");
-            return TaskList.addTask(new Todo(description));
-        } else if (textInput.startsWith("deadline")) {
-            if (isInvalidCommand(textInput, "deadline")) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            }
-            String removeTaskWord = textInput.replaceFirst("deadline ", "");
-            String[] taskSplit = removeTaskWord.split(" /by ");
-            return TaskList.addTask(new Deadline(taskSplit[0], taskSplit[1]));
-        } else if (textInput.startsWith("event")) {
-            if (isInvalidCommand(textInput, "event")) {
-                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-            }
-
-            String removeTaskWord = textInput.replaceFirst("event ", "");
-            String[] taskSplit = removeTaskWord.split(" /at ");
-            return TaskList.addTask(new Event(taskSplit[0], taskSplit[1]));
-        } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-    }
-
-    private static String parseCommands(String textInput) throws DukeException {
+    private static Command parseCommands(String textInput) throws DukeException {
         if (textInput.equals("list")) {
-            return Ui.printList();
+            Command listCommand = new ListCommand();
+            return listCommand;
         } else if (textInput.startsWith("done")) {
-            if (isInvalidCommand(textInput, "done")) {
-                throw new DukeException("OOPS!!! Index required.");
-            }
-
-            int completedIndex = Integer.parseInt(textInput.replaceFirst("done ", "")) - 1;
-            if (isInvalidIndex(completedIndex)) {
-                throw new DukeException("OOPS!!! Index not found.");
-            }
-
-            return TaskList.doneTask(completedIndex);
+            Command doneCommand = new DoneCommand(textInput);
+            return doneCommand;
         } else if (textInput.startsWith("delete")) {
-            if (isInvalidCommand(textInput, "delete")) {
-                throw new DukeException("OOPS!!! Index required.");
-            }
-
-            int deletedIndex = Integer.parseInt(textInput.replaceFirst("delete ", "")) - 1;
-            if (isInvalidIndex(deletedIndex)) {
-                throw new DukeException("OOPS!!! Index not found.");
-            }
-
-            return TaskList.deleteTask(deletedIndex);
+            Command deleteCommand = new DeleteCommand(textInput);
+            return deleteCommand;
         } else if (textInput.startsWith("find")) {
-            if (isInvalidCommand(textInput, "find")) {
-                throw new DukeException("OOPS!!! Keyword required!");
-            }
-
-            String keyWord = textInput.replaceFirst("find ", "");
-            return TaskList.findTask(keyWord);
+            Command findCommand = new FindCommand(textInput);
+            return findCommand;
         } else if (textInput.equals("bye")) {
-            return Ui.endOfInteractions();
+            Command exitCommand = new ExitCommand();
+            return exitCommand;
         } else {
             return parseTasks(textInput);
         }
     }
 
-    private static boolean isInvalidCommand(String textInput, String command) {
-        assert command != null : "Command is null";
-        return textInput.equals(command) || textInput.equals(command + " ");
-    }
-
-    private static boolean isInvalidIndex(int index) {
-        assert (Integer) index != null : "Index is null";
-        return index < 0 || index >= TaskList.getCounter();
+    private static Command parseTasks(String textInput) throws DukeException {
+        Command addCommand = new AddCommand(textInput);
+        return addCommand;
     }
 }

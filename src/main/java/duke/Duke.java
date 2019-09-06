@@ -17,6 +17,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     
+    /**
+     * Main application.
+     */
     public Duke() {
         ui = new Ui();
         try {

@@ -50,11 +50,11 @@ public abstract class Command {
         } else if (e instanceof EmptyDescriptionException) {
             return (String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage()));
         } else if (e instanceof InvalidDescriptionException) {
-            return (String.format("OOPS!!! Invalid input! Make sure your %s has a description and required" + " data " +
-                "after /at for Event or /by for Deadline.\n", e.getMessage()));
+            return (String.format("OOPS!!! Invalid input! Make sure your %s has a description and required" + " data "
+                + "after /at for Event or /by for Deadline.\n", e.getMessage()));
         } else if (e instanceof ParseException) {
-            return (String.format("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm," + " " +
-                "example: 02/08/2019 14:30\n", e.getMessage()));
+            return (String.format("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm," + " "
+                + "example: 02/08/2019 14:30\n", e.getMessage()));
         } else {
             return (e.getMessage());
         }

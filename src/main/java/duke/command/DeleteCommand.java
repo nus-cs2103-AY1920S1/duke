@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     protected String command;
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param command Duke.command to delete task
      */

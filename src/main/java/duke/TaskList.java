@@ -22,7 +22,7 @@ public class TaskList {
     protected static ArrayList<Task> tasks;
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param tasks an array list of Duke.tasks.
      * @throws DukeException which includes any exceptions when operating on the task list.
@@ -133,8 +133,8 @@ public class TaskList {
         int index = Integer.parseInt(inputs[1]) - 1;
         Task removedTask = tasks.remove(index);
         String result = "";
-        result = "Noted. I've removed this task:\n" + removedTask.toString() + "\nNow you have " + tasks.size() + " " +
-            "tasks in the list.";
+        result = "Noted. I've removed this task:\n" + removedTask.toString() + "\nNow you have " + tasks.size() + " "
+            + "tasks in the list.";
         return result;
     }
     
@@ -192,8 +192,8 @@ public class TaskList {
      * @param task that has been successfully added into the task list.
      */
     public static String responseOut(Task task) {
-        String result = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + tasks.size() + " " +
-            "tasks in the list.";
+        String result = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + tasks.size() + " "
+            + "tasks in the list.";
         return result;
     }
     

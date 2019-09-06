@@ -12,7 +12,7 @@ public class ByeCommand extends Command {
     protected String command;
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param command Duke.command to exit the program.
      */

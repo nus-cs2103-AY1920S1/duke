@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     protected String command;
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param command Duke.command to show all the Duke.tasks in Duke.TaskList
      */

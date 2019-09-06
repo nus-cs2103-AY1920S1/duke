@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     protected String command;
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param command Duke.command to add task
      */

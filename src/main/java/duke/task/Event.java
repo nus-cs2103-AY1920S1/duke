@@ -9,6 +9,7 @@ public class Event extends Task {
     public Event(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;
+        assert (!dateTime.isEmpty()) : "You need to input the event date and time";
     }
 
     // Trying out using varargs.

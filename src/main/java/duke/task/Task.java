@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- *
+ * Represents a task object.
  */
 public class Task {
     // Instance variables
@@ -24,21 +24,25 @@ public class Task {
         return description;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
+    /**
+     * Sets the task to done or undone.
+     * @param done Boolean indicating whether the task is done or not.
+     * @return the task itself.
+     */
     public Task setDone(boolean done) {
         isDone = done;
         return this;
     }
 
+    /**
+     * Marks task as done.
+     */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * dot. Provided in the CS2103T task description.
+     * Represents done or undone. Provided in the CS2103T task description.
      * @return a graphic representation of 1/0.
      */
     public String getStatusIcon() {
@@ -54,6 +58,10 @@ public class Task {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
     }
 
+    /**
+     * Returns the description of the task.
+     * @return task description.
+     */
     public String toStorage() {
         return description;
     }

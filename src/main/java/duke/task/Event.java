@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.time.DateTime;
 
+/**
+ * Represents an event object.
+ */
 public class Event extends Task {
     private String dateTime;
 
@@ -24,6 +27,10 @@ public class Event extends Task {
                 + DateTime.parseDateTime(dateTime) + ")";
     }
 
+    /**
+     * Converts the Event object to a String representing it for storage purposes.
+     * @return
+     */
     @Override
     public String toStorage() {
         int isDoneInt = isDone ? 1 : 0;

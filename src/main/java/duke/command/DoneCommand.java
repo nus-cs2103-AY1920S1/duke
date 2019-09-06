@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.tasklist.Tasklist;
 import duke.ui.Ui;
 
+/**
+ * Represents a done command, which masks a task as done.
+ */
 public class DoneCommand extends Command {
     private String index;
 
@@ -13,6 +16,13 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks the task at the given index as done.
+     * @param list List of tasks.
+     * @param ui The user interface the user sees.
+     * @param storage Stores the user's list of tasks.
+     * @throws DukeException when an error occurs during execution.
+     */
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
         try {

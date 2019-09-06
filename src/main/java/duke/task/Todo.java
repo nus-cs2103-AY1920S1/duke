@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a todo object.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -11,6 +14,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Converts the Todo object to a String representing it for storage purposes.
+     * @return
+     */
     @Override
     public String toStorage() {
         int isDoneInt = isDone ? 1 : 0;

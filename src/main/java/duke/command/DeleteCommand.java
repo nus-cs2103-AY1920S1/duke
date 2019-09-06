@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.tasklist.Tasklist;
 import duke.ui.Ui;
 
+/**
+ * Represents a delete command.
+ */
 public class DeleteCommand extends Command {
     private String index;
 
@@ -13,6 +16,13 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the delete command.
+     * @param list List of tasks.
+     * @param ui The user interface the user sees.
+     * @param storage Stores the user's list of tasks.
+     * @throws DukeException when an error occurs during execution.
+     */
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
         try {
@@ -29,6 +39,6 @@ public class DeleteCommand extends Command {
 
         } catch (IllegalArgumentException e) {
             throw new DukeException("You need to specify the task you want to delete!");
-        } // End of try-catch.
-    } // End method
+        }
+    }
 }

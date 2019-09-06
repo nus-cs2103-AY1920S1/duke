@@ -7,7 +7,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents an Add Command.
@@ -59,7 +58,6 @@ public class AddCommand extends Command {
      * Executes the Command: adds the current task to current TaskList and writes it in the storage file.
      *
      * @param tasks   current TaskList instance
-     * @param ui      current UI instance
      * @param storage current Storage instance
      * @throws DukeException DukeException
      */

@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box for the user.
+     *
+     * @param text message to be shown
+     * @param img  User's avatar image
+     * @return Dialog Box instance
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialog box for Duke, flipped to indicate that message is from Duke.
+     *
+     * @param text message to be shown
+     * @param img  Duke's avatar image
+     * @return Dialog Box instance
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

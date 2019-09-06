@@ -79,6 +79,8 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             List<String> newlines = new ArrayList<>();
+            System.out.println(before);
+            System.out.println(after);
             for (String line : lines) {
                 if (line.equals(before) || line.contains(before)) {
                     newlines.add(after);

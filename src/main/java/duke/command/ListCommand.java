@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a List Command.
@@ -24,7 +23,6 @@ public class ListCommand extends Command {
      * Executes the Command: Prints out tasks in TaskList.
      *
      * @param tasks   current TaskList instance
-     * @param ui      current UI instance
      * @param storage current Storage instance
      * @throws DukeException DukeException
      */

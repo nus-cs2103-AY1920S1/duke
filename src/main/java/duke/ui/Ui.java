@@ -33,6 +33,7 @@ public class Ui extends AnchorPane {
      */
     public Ui() {
         dialogContainer = new VBox();
+        this.showWelcome();
         scrollPane = new ScrollPane();
         commandTextField = new TextField();
     }
@@ -46,14 +47,20 @@ public class Ui extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Starts the JavaFX GUI.
+     * @param primaryStage default window
+     */
     public void start(Stage primaryStage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/Ui.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Duke");
             fxmlLoader.<Ui>getController().setDuke(duke);
             primaryStage.show();
+            this.showWelcome();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,10 +69,15 @@ public class Ui extends AnchorPane {
     /**
      * Prints out welcome message.
      */
-    public void showWelcome() {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage));
+    private void showWelcome() {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm Duke\n"
+                + "What can I do for you?", dukeImage));
     }
 
+    /**
+     * Method to handle input from the user.
+     * Reads command and is passed to Duke class to be executed.
+     */
     public void handleInput() {
         try {
             String exit = this.duke.execute(this.readCommand());
@@ -78,7 +90,11 @@ public class Ui extends AnchorPane {
         }
     }
 
-    public String readCommand() {
+    /**
+     * Method to read command from the user.
+     * @return String command that user inputted.
+     */
+    private String readCommand() {
         String command = commandTextField.getText();
         commandTextField.setText("");
         dialogContainer.getChildren().add(DialogBox.getUserDialog(command, userImage));
@@ -90,17 +106,8 @@ public class Ui extends AnchorPane {
      *
      * @param line line to be printed.
      */
-    public void printLine(String line) {
+    private void printLine(String line) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(line, dukeImage));
-    }
-
-    /**
-     * Prints out error.
-     *
-     * @param err to be printed.
-     */
-    public void showError(String err) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(err, dukeImage));
     }
 
     /**

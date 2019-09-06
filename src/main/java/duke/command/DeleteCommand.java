@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a Delete Command.
@@ -30,14 +29,14 @@ public class DeleteCommand extends Command {
      * Executes the Command: removes current task from TaskList and removes line from storage.
      *
      * @param tasks   current TaskList instance
-     * @param ui      current UI instance
      * @param storage current Storage instance
      * @throws DukeException DukeException
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task deleted = tasks.remove(index);
         storage.deleteLine(deleted.storageString());
-        return ("Noted. I've removed this task:\n  " + deleted + "\nNow you have " + tasks.size() + " tasks in the list.");
+        return ("Noted. I've removed this task:\n  " + deleted + "\nNow you have "
+                + tasks.size() + " tasks in the list.");
     }
 
     /**

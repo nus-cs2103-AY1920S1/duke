@@ -3,7 +3,6 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a Done Command.
@@ -35,9 +34,10 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         String current = tasks.get(index).storageString();
+        String doneString = tasks.get(index).setDone();
         String res = tasks.get(index).storageString();
         storage.replaceLine(current, res);
-        return tasks.get(index).setDone();
+        return doneString;
     }
 
     /**

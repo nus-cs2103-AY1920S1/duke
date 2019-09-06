@@ -26,7 +26,7 @@ public class Task {
     @Override
     public String toString() {
         StringBuilder temp = new StringBuilder();
-        if(this.isDone()) {
+        if (this.isDone()) {
             temp.append("[✓] ");
         } else {
             temp.append("[✗] ");

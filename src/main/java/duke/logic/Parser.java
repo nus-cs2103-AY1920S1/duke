@@ -15,8 +15,8 @@ public class Parser {
         String temp = this.inputString.replaceFirst(" ", ":");
         System.out.println(temp);
         String[] tempArr = temp.split(":");
-        command = (String)Array.get(tempArr, 0);
-        if(tempArr.length > 1) {  //account for the fact that commands like "list" do not have duke.task details
+        command = (String) Array.get(tempArr, 0);
+        if (tempArr.length > 1) {  //account for the fact that commands like "list" do not have duke.task details
             taskDetails = ((String) Array.get(tempArr, 1)).trim();
         }
     }

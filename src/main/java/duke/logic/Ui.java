@@ -22,7 +22,7 @@ public class Ui {
     }
     public void showLine() {
         StringBuilder lineBuilder = new StringBuilder("     ");
-        for(int i = 0; i < 59; i++) {
+        for (int i = 0; i < 59; i++) {
             lineBuilder.append("_");
         }
         System.out.println(lineBuilder.toString());

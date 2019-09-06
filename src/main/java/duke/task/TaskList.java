@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class TaskList {
 
     /**
+     * Represents the maximum limit of the list of tasks
+     */
+    private final static int MAX_LIST_SIZE = 100;
+
+    /**
      * Represents the list of tasks.
      */
     private static ArrayList<Task> tasks;
@@ -30,7 +35,7 @@ public class TaskList {
     }
 
     public static boolean hasHitTaskLimit() {
-        return getNumberOfTasks() >= 100;
+        return getNumberOfTasks() >= MAX_LIST_SIZE;
     }
 
     /**

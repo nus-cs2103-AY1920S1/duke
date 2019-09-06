@@ -31,7 +31,7 @@ public class AddToDoTaskCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        assert(!TaskList.hasHitTaskLimit()) : "OOPS!!! You can only have up to 100 tasks!";
+        assert (!TaskList.hasHitTaskLimit()) : "OOPS!!! You can only have up to 100 tasks!";
         String toDoData = dataParser.parseToDoData();
         int taskIndex = taskList.addTodoTask(toDoData);
         ui.showAddedTask(TaskList.getTask(taskIndex));

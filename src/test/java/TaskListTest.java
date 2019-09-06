@@ -21,19 +21,6 @@ public class TaskListTest {
 
     @Test
     public void testGetTaskList() {
-        assertEquals("[D][✗] task (by: 1/1/1991 1234)", taskList.get(1).toString());
+        assertEquals("[D][Not done] task (by: 1/1/1991 1234)", taskList.get(1).toString());
     }
-    /*
-    @Test
-    public void testStringConversion() {
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        taskList.print();
-        String expectedOutput = "Here are the tasks in your list:\n" +
-                                "1.[T][✗] Say hi\n" +
-                                "2.[D][✗] task (by: 1/1/1991 1234)\n" +
-                                "3.[E][✗] sale (at: 1/1/1991 1234)\n";
-        assertEquals(expectedOutput, outContent.toString());
-    }
-     */
 }

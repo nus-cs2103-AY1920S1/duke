@@ -34,6 +34,7 @@ public class Duke {
         if(!input.trim().toLowerCase().equals("bye")) {
             try {
                 Command command = parserManager.parseCommand(taskList, input.trim());
+                assert command != null;
                 String response = command.execute(taskList);
                 dataStorage.storeTaskList(taskList);
                 return response;

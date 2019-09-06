@@ -1,15 +1,12 @@
+package duke;
 
 import duke.parser.GuiParser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.GuiTaskList;
 import duke.tasklist.TaskList;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+
 import java.util.ArrayList;
 
 public class Duke  {

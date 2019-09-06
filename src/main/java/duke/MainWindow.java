@@ -1,3 +1,4 @@
+package duke;
 
 import duke.Ui.GuiUi;
 import javafx.fxml.FXML;

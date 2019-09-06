@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -30,14 +29,13 @@ public class Duke extends Application {
     private TaskList taskList = new TaskList();
 
     public void run() {
-        Scanner sc;
-        Boolean exit = false;
 
         // Retrieve existing tasks
         try {
             Storage storage = new Storage("tasks.txt");
             taskList = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException e) {
+            // No existing data file found- create from empty list of tasks
             Ui.showLoadingError();
             taskList = new TaskList();
         }
@@ -49,7 +47,7 @@ public class Duke extends Application {
             nextAction = Parser.parseInput(Ui.getNextLine(), taskList);
         }
 
-        System.out.println("Bye. Hope to see you again soon!");
+        Ui.showGoodbyeMessage();
 
     }
 

@@ -28,6 +28,13 @@ public class Ui {
     }
 
     /**
+     * Displays a goodbye message to the user when they exit the program.
+     */
+    public static void showGoodbyeMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    /**
      * Displays an error message upon failure to open data file.
      */
     public static void showLoadingError() {

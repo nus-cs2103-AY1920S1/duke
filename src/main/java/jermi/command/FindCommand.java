@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * A representation of the command for finding the tasks containing the keyword.
+ */
 public class FindCommand extends Command {
     /** Keyword used for finding. */
     private String keyword;

@@ -11,7 +11,7 @@ import jermi.task.ToDo;
 import jermi.type.TaskType;
 
 /**
- * A representation of the command for adding task to the list.
+ * A representation of the command for adding a task to the list.
  */
 public class AddCommand extends Command {
     /** Task type of the task to be added. */

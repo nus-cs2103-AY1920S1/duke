@@ -67,6 +67,13 @@ public class TaskList {
     }
 
     /**
+     * Removes all tasks from the list.
+     */
+    public void clear() {
+        this.list.clear();
+    }
+
+    /**
      * Returns a list of task descriptions containing the keyword.
      *
      * @param keyword Keyword used for finding.

@@ -9,7 +9,6 @@ import jermi.exception.JermiException;
  * Base class for command.
  */
 public abstract class Command {
-
     /**
      * Executes the command.
      *

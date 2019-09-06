@@ -4,22 +4,11 @@ import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.exception.JermiException;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 
 /**
- * A representation of the command to list all tasks in the list.
+ * A representation of the command for deleting all the tasks from the list.
  */
-public class ListCommand extends Command {
-    /**
-     * Public constructor for class.
-     */
-    public ListCommand() {
-        super();
-    }
-
+public class ClearCommand extends Command {
     /**
      * Executes the command.
      *
@@ -31,12 +20,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        List<String> formattedTasksInString = IntStream.rangeClosed(1, taskList.getSize())
-                .mapToObj(index -> String.format("%d.%s", index, taskList.getTask(index)))
-                .collect(Collectors.toList());
-
-        formattedTasksInString.add(0, "Here are the tasks in your list:");
-        return formatter.echo(formattedTasksInString.toArray(new String[0]));
+        taskList.clear();
+        storage.taskListToFile();
+        return formatter.echo("Noted. I've removed all the tasks in the list.");
     }
 
     /**

@@ -8,7 +8,7 @@ import jermi.exception.InvalidIndexException;
 import jermi.task.Task;
 
 /**
- * A representation of the command for deleting task from the list.
+ * A representation of the command for deleting a task from the list.
  */
 public class DeleteCommand extends MutateTaskCommand {
     /**

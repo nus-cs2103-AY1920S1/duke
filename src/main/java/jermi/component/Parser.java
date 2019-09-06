@@ -1,12 +1,6 @@
 package jermi.component;
 
-import jermi.command.Command;
-import jermi.command.AddCommand;
-import jermi.command.DeleteCommand;
-import jermi.command.DoneCommand;
-import jermi.command.ExitCommand;
-import jermi.command.FindCommand;
-import jermi.command.ListCommand;
+import jermi.command.*;
 import jermi.exception.EmptyDescriptionException;
 import jermi.exception.InvalidCommandException;
 import jermi.exception.JermiException;
@@ -16,7 +10,6 @@ import jermi.type.TaskType;
  * A class that deals with making sense of the user input.
  */
 public class Parser {
-
     /**
      * Parses and returns the {@link Command} associated with the user input.
      *
@@ -33,6 +26,9 @@ public class Parser {
             break;
         case "bye":
             command = new ExitCommand();
+            break;
+        case "clear":
+            command = new ClearCommand();
             break;
         case "todo":
             //Fallthrough

@@ -23,9 +23,9 @@ public class DateChecker {
      * @return true if the date given contains an invalid year, month or day.
      */
     public boolean containsInvalidDate() {
-        return containsInvalidYear() || containsInvalidMonth() ||
-                containsInvalidDay() ||
-                containsInvalidDayInMonth();
+        return containsInvalidYear() || containsInvalidMonth()
+                || containsInvalidDay()
+                || containsInvalidDayInMonth();
     }
 
     /**

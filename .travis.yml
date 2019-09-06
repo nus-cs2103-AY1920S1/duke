@@ -4,7 +4,9 @@ matrix:
     - jdk: openjdk11
 
 script: >-
-  ./gradlew clean
+  ./config/travis/run-checks.sh &&
+  ./gradlew clean  allTests
+
 deploy:
   skip_cleanup: true
   provider: script

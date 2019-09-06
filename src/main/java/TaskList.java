@@ -30,6 +30,7 @@ public class TaskList {
         String[] task = s.split(" ");
         String statement = "";
         String[] modifiedTask = Parser.processTask(task);
+        assert modifiedTask.length == 3 : "Parser failed to process command correctly";
         switch (modifiedTask[0]) {
         case "todo":
             ToDo todo = new ToDo(modifiedTask[1]);
@@ -78,7 +79,7 @@ public class TaskList {
 
     protected String checkList() {
         if (this.tasklist.isEmpty()) {
-            return "\u2639 OOPS!!! There are no tasks in your list.";
+            return "\u2639 OOPS!!! I'm sorry, but there are no tasks in your list.";
         }
         String s = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasklist.size(); i++) {
@@ -90,7 +91,7 @@ public class TaskList {
 
     protected String findList(String keyword) {
         if (this.tasklist.isEmpty()) {
-            return "\u2639 OOPS!!! There are no tasks in your list.";
+            return "\u2639 OOPS!!! I'm sorry, but there are no tasks in your list.";
         }
         String s = "Here are the matching tasks in your list:\n";
         int idx = 1;
@@ -104,6 +105,9 @@ public class TaskList {
     }
 
     protected String complete(int i) {
+        if (i >= tasklist.size()) {
+            return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list.";
+        }
         Task t = this.tasklist.get(i - 1);
         t.setDone();
         String statement = "Nice! I've marked this task as done:\n  " + t;
@@ -111,6 +115,9 @@ public class TaskList {
     }
 
     protected String delete(int i) {
+        if (i >= tasklist.size()) {
+            return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list.";
+        }
         Task t = this.tasklist.remove(i - 1);
         Task.decCurrTotal();
         String statement = "Noted. I've removed this task:\n  " + t + "\nNow you have " + Task.getCurrTotal()

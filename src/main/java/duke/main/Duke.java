@@ -6,12 +6,18 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 
 /**
  * The duke robot's main class.
  */
-public class Duke {
+public class Duke extends Application {
     private Storage storage; //The place of storage.
     private TaskList tasks; //The list of tasks.
     private Ui ui; //The user interaction.
@@ -41,6 +47,18 @@ public class Duke {
         }
     }
 
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("duke.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException | FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+
     /**
      * Operates the object.
      */
@@ -63,5 +81,12 @@ public class Duke {
     }
 
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 }

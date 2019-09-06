@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     // Trying out using varargs.
-    public Event(String ... strings) {
+    public Event(String... strings) {
         super(strings[0]);
         this.dateTime = strings[1];
     }

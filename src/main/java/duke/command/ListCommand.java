@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class ListCommand extends Command {
+public class ListCommand extends TaskCommand {
     public boolean isExit() {
         return false;
     }

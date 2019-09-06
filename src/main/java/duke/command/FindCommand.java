@@ -8,7 +8,7 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class FindCommand extends Command {
+public class FindCommand extends TaskCommand {
     private String str;
 
     public FindCommand(String str) {

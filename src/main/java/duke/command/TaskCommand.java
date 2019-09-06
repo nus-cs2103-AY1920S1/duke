@@ -6,7 +6,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 
-public abstract class Command {
+public abstract class TaskCommand {
     /**
      * Tells whether the duke.command is exit duke.command.
      *

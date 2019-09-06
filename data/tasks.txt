@@ -1,6 +1,6 @@
-D | 1 | return book | 2/12/2019 1800  |
-E | 1 | buy book | 22/12/2019 1800  |
-D | 0 | do CS2103T | 25/8/2019 2100  |
-E | 0 | finish tutorials | 26/8/2019 0900  |
-T | 1 | add features  |
-T | 1 | eat dinner  |
+T|1|add features|
+T|0|homeworks check|james(VP)123
+T|1|homeworks check|james(VP)N.A.
+D|0|homeworks| 06/09/2019 2359 |faisal()N.A.
+E|0|alice show|07/09/2019 1900|Audrey(VP)1234
+E|0|alice show|07/09/2019 1900|Audrey(VP)1234|James(VP)N.A.

@@ -1,6 +1,1 @@
-T|1|add features|
-T|0|homeworks check|james(VP)123
-T|1|homeworks check|james(VP)N.A.
-D|0|homeworks| 06/09/2019 2359 |faisal()N.A.
-E|0|alice show|07/09/2019 1900|Audrey(VP)1234
-E|0|alice show|07/09/2019 1900|Audrey(VP)1234|James(VP)N.A.
+D|0|finish week5 project|06/09/2019 2359|Shuyuan(Student)123

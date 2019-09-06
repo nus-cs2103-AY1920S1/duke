@@ -58,7 +58,7 @@ public class Storage {
                 list.add(newTask);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new DukeException();
         }
         return list;

@@ -4,7 +4,7 @@ import cs2103t.duke.file.Storage;
 import cs2103t.duke.parse.Parser;
 import cs2103t.duke.task.TaskList;
 import cs2103t.duke.ui.Ui;
-
+/*
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
+*/
 /**
  * Acts as a chatbot to remember your tasks at hand.
  * There will be three kinds of tasks: Todo, Deadline, Event.
@@ -35,7 +35,7 @@ import java.io.PrintStream;
  * {@code bye} or {@code exit} to exit from duke.
  * Duke will save the tasks in a file ("./data/tasks.txt") and read from it.
  */
-public class Duke extends Application {
+public class Duke { /*extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -43,7 +43,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/walle.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/eve.png"));
-
+*/
     /** Handles file reading and writing. */
     private Storage storage;
     /** Handles direct changes to list of tasks. */
@@ -103,6 +103,11 @@ public class Duke extends Application {
     }
      */
 
+    public static void main(String[] args) {
+    //    new Duke("./data/tasks.txt").run();
+    }
+
+
     public String getResponse(String fullCommand) {
         ///*
         String res;
@@ -120,10 +125,7 @@ public class Duke extends Application {
         //return "Duke heard: " + fullCommand;
     }
 
-    public static void main(String[] args) {
-    //    new Duke("./data/tasks.txt").run();
-    }
-
+/*  //EXTRACTING OUT ALL THE GUI STUFF INTO THE FXML STUFF
     @Override
     public void start(Stage stage) {
         //step 1: setting up required components
@@ -175,7 +177,7 @@ public class Duke extends Application {
 
         //step 3: add functionality to handle user input
         sendButton.setOnMouseClicked((event) -> {
-            /*CLICKING SEND BUTTON*/
+            //CLICKING SEND BUTTON
             //System.out.println("sendbutton clicked!");
             handleUserInput();
             //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -183,7 +185,7 @@ public class Duke extends Application {
         });
 
         userInput.setOnAction((event) -> {
-            /*PRESSING ENTER TO SEND MSGS INSTEAD*/
+            //PRESSING ENTER TO SEND MSGS INSTEAD
             //System.out.println("userinput clicked?");
             handleUserInput();
             //dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -193,25 +195,27 @@ public class Duke extends Application {
         //scroll down to the end (last msg) every time dialogContainer's height changes
         dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
     }
-
+ */
+/*
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
-    private Label getDialogLabel(String text) {
+/*    private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
         return textToAdd;
     }
-
-    /**
+*/
+/*    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+/*    //THIS IS FOR THE OLD DIALOG BOX (LOOK AT PART 3 of tutorial)
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(this.getResponse(userInput.getText()));
@@ -224,4 +228,5 @@ public class Duke extends Application {
         //System.out.println(userInput.getText());
         userInput.clear();
     }
+ */
 }

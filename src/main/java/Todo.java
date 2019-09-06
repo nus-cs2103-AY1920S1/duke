@@ -1,16 +1,18 @@
 /**
- * Represents a to-do task.
+ * Represents a to-do object.
  */
 
 public class Todo extends Task {
 
     public Todo(String description) {
         super(description);
+        this.type = "todo";
+        this.symbol = "T";
     }
 
     @Override
     public String toString() {
-        return "[T]" + this.getStatusIcon() + this.getDescription();
+
+        return this.getSymbol() + this.getStatusIcon() + this.getDescription();
     }
 }
-

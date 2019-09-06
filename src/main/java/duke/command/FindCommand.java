@@ -5,6 +5,8 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
     private String taskName;
@@ -29,15 +31,19 @@ public class FindCommand extends Command {
                 list.add(taskList.get(i));
             }
         }
-        if (list.size() == 0) {
-            return this.getNoKeywordMessage();
-        } else {
-            String response = this.getFoundKeywordMessage();
-            for (int i = 0; i < list.size(); i++) {
-                response += (i+1) + "." + list.get(i) + "\n";
-            }
-            return response;
-        }
+
+        if (list.isEmpty()) { return this.getNoKeywordMessage(); }
+
+        // If there are several responses found, print them all
+        String response = this.getFoundKeywordMessage();
+        AtomicInteger index = new AtomicInteger();
+        response += list.stream()
+                .map(str -> {
+                    int idx = index.getAndIncrement();
+                    return (idx+1) + "." + list.get(idx) + "\n";
+                })
+                .collect(Collectors.joining());
+        return response;
     }
 
     /**

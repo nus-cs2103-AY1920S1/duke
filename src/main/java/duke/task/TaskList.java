@@ -3,7 +3,10 @@ package duke.task;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private List<Task> list;
@@ -65,9 +68,14 @@ public class TaskList {
      */
     public String getPrintListMessage() {
         String response = "Here are the tasks in your list:\n";
-        for (int i = 0; i < this.list.size(); i++) {
-            response += (i+1) + "." + this.list.get(i) + "\n";
-        }
+        AtomicInteger index = new AtomicInteger();
+        String[] printedList = new String[this.list.size()];
+        response += Arrays.stream(printedList)
+                          .map(str -> {
+                              int idx = index.getAndIncrement();
+                              return (idx+1) + "." + this.list.get(idx) + "\n";
+                          })
+                          .collect(Collectors.joining());
         return response;
     }
 }

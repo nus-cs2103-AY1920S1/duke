@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.awt.*;
+
 /**
  * A program that manages and keeps track of a list of tasks.
  * Features include adding and deleting tasks, as well as displaying list of current tasks.
@@ -97,7 +99,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);;
 
         userInput.setPrefWidth(525.0);
 

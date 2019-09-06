@@ -57,7 +57,7 @@ public class Ui {
      * @return String exception message of the argument exception.
      */
     public String showExceptionError(Exception e) {
-        return line + "     " + e.getMessage() + line;
+        return line + "     " + e.getMessage() + "\n" + line;
     }
 
     /**

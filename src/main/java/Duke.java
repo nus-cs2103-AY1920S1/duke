@@ -18,7 +18,6 @@ public class Duke {
 
     /**
      * Constructor of Duke class.
-     * @param filePath The directory of the text file for populating task list
      */
     public Duke() {
         String filePath = "src/main/data/duke.txt";
@@ -29,6 +28,27 @@ public class Duke {
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             taskList = new TaskList();
+        }
+    }
+
+    /**
+     * Method for interpreting Commands and returning Duke's replies to the DialogBox.
+     *
+     * @param input User input
+     * @return Duke's reply message based on input
+     */
+    public String getResponse(String input) {
+        try {
+            String fullCommand = input;
+            String[] commandArr = fullCommand.split(" ", 2);
+            Command c = Parser.parse(commandArr[0].trim());
+            if (commandArr.length > 1) {
+                return c.execute(storage, taskList, ui, commandArr[1].trim());
+            } else {
+                return c.execute(storage, taskList, ui, "");
+            }
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
     }
 

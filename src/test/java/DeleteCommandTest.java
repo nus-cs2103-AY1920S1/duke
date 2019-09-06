@@ -27,7 +27,7 @@ public class DeleteCommandTest {
         ui = new Ui();
         try {
             DeleteCommand dc = new DeleteCommand();
-            dc.execute(storage, taskList, ui);
+            dc.execute(storage, taskList, ui, input);
             assertTrue(taskList.getTaskList().size() == 0);
         } catch (DukeException e) {
             fail("failed to delete item in list");

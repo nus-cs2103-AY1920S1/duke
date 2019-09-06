@@ -17,23 +17,28 @@ public class Ui {
 
     /**
      * Prints out Welcome Message for the launch of Duke Chatbot.
+     *
+     * @return welcome message
      */
-    public void showWelcome() {
+    public String showWelcome() {
         final String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        final String startMessage = lineSpace + "Hello! I'm Duke\nWhat can I do for you?\n" + lineSpace;
-        System.out.println("Hello from\n" + logo + startMessage);
+        final String startMessage = "Hello! I'm Duke\nWhat can I do for you?\n";
+        String welcomeMessage = startMessage;
+        return welcomeMessage;
     }
 
     /**
      * Prints Goodbye Message when user closes the Duke Chatbot.
+     *
+     * @return goodbye message
      */
-    public void showGoodbye() {
+    public String showGoodbye() {
         String endMessage = "Bye. Hope to see you again!";
-        System.out.println(endMessage);
+        return endMessage;
     }
 
     /**
@@ -45,14 +50,17 @@ public class Ui {
 
     /**
      * Prints a specified error message.
+     *
      * @param error Message of error
+     * @return Message of error
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
      * Reads the user input and returns a String.
+     *
      * @return User input
      */
     public String readCommand() {

@@ -17,25 +17,26 @@ public class Duke {
             list = new TaskList();
         }
         ui = new Ui(list);
-        // include parser here later on
     }
 
     public void run() throws DukeException {
-        // initialize a duke bot to take input and perform actions
         ui.start();
         storage.save(ui.getFinalList());
     }
 
-    public static void main(String[] args) throws DukeException {
+    public void displayIntro() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+    }
 
+    public static void main(String[] args) throws DukeException {
         String dir = System.getProperty("user.dir") + "/src/main/java/data/dukeData.txt";
         Duke duke = new Duke(dir);
+        duke.displayIntro();
         duke.run();
     }
 }

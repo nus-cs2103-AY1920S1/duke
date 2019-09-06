@@ -24,8 +24,8 @@ public class MainWindow extends VBox {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/duke/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/duke/images/DaDuke.png"));
+    private static Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/duke/images/DaUser.png"));
+    private static Image DUKE_IMAGE = new Image(MainWindow.class.getResourceAsStream("/duke/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
@@ -43,7 +43,7 @@ public class MainWindow extends VBox {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, USER_IMAGE));
         userInput.clear();
         boolean shouldExit = duke.consumeUserInput(input);
         if (shouldExit) {
@@ -52,6 +52,6 @@ public class MainWindow extends VBox {
     }
 
     public void addDukeMessage(String dukeOutput) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeOutput, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeOutput, DUKE_IMAGE));
     }
 }

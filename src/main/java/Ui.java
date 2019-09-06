@@ -3,9 +3,9 @@ import java.util.List;
 /**
  * Manages UI related methods.
  */
-public class UI {
+public class Ui {
 
-    public UI() {
+    public Ui() {
     }
 
     public String horizontalLine() {
@@ -16,11 +16,6 @@ public class UI {
      * Greetings when the program starts
      */
     public String greet() {
-        /*horizontalLine();
-        System.out.println("Hello I'm Duke");
-        System.out.println("What can I do for you?");
-        horizontalLine();
-        System.out.println();*/
         String holder = horizontalLine() + "\nHello I'm Duke\n" + "What can I do for you?\n" + horizontalLine();
         return holder;
     }

@@ -13,9 +13,9 @@ import java.util.List;
 public class TaskList {
     final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
     private List<Task> taskList;
-    private UI ui;
+    private Ui ui;
 
-    public TaskList(UI ui) {
+    public TaskList(Ui ui) {
         this.taskList = new ArrayList<>();
         this.ui = ui;
     }
@@ -154,4 +154,4 @@ public class TaskList {
         return findList;
     }
 
-    }
+}

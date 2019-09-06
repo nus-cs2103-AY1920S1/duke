@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
-    UI ui = new UI();
+    Ui ui = new Ui();
 
     @Test
     void testTaskList_AddOneTask() {

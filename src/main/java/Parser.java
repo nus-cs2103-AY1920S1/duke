@@ -19,7 +19,7 @@ public class Parser {
      * @param taskList The list that store all the task.
      * @throws DukeException Exception in case of error
      */
-    public String parseCommand (UI ui, Storage storage, String command, TaskList taskList) throws DukeException {
+    public String parseCommand (Ui ui, Storage storage, String command, TaskList taskList) throws DukeException {
         if (!availableCommands.contains(command.split(" ")[0])) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         } else if (command.equals("bye")) {

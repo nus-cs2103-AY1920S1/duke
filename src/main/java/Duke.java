@@ -6,7 +6,7 @@ public class Duke{
     final static String FILE_LOCATION = System.getProperty("user.dir") + "/data/duke.txt";
     final static List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline", "delete", "find");
 
-    private UI ui;
+    private Ui ui;
     private Storage storage;
     private Parser parser;
     private TaskList taskList;
@@ -14,7 +14,7 @@ public class Duke{
     private Scanner scanner = new Scanner(System.in);
 
     public Duke(String filePath) {
-        ui = new UI();
+        ui = new Ui();
         taskList = new TaskList(ui);
         parser = new Parser(availableCommands);
         storage = new Storage(taskList, filePath);

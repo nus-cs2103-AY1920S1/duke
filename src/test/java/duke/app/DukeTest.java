@@ -13,8 +13,8 @@ public class DukeTest {
         assertEquals(2, 2);
     }
 
-    @Test
-    public void failTest() {
-        assertEquals(3, 2);
-    }
+//    @Test
+//    public void failTest() {
+//        assertEquals(3, 2);
+//    }
 }

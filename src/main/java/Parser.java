@@ -1,10 +1,8 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Parser {
 
@@ -20,10 +18,12 @@ public class Parser {
         this.items = new ArrayList<>();
     }
 
-    public Ui getUser(){
+    //return Ui obj
+    public Ui getUser() {
         return this.user;
     }
 
+    //return list of tasks
     public ArrayList<Task> getList() {
         return this.items;
     }

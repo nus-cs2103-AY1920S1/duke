@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,9 +16,9 @@ public class Storage {
     private Scanner pastScan;
 
     /**
-     * Constructor for Storage
+     * Constructor for Storage.
      * @param p Parser obj which handle all the processing of input
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException in the event the textfile is not located
      */
     public Storage(Parser p) throws FileNotFoundException {
         parse = p;

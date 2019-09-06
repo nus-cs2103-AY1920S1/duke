@@ -6,7 +6,7 @@ public class EventTest {
 
     @Test
     public void testEvent() {
-        final Duke d = new Duke();
+        final Parser d = new Parser(new Ui());
         String border = "-------------------------------------";
 
         StringBuilder sb = new StringBuilder();

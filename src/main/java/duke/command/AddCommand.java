@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an add command.
+ */
 public class AddCommand extends Command {
     private Task task;
 
@@ -16,10 +19,22 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Creates a new add command.
+     * @param task Task object.
+     * @return an AddCommand object.
+     */
     public static Command createAddCommand(Task task) {
         return new AddCommand(task);
     } // End method.
 
+    /**
+     * Executes the add command.
+     * @param tasks List of tasks.
+     * @param ui The user interface the user sees.
+     * @param storage Stores the user's list of tasks.
+     * @throws DukeException when an error occurs during execution.
+     */
     @Override
     public void execute(Tasklist tasks, Ui ui, Storage storage) throws DukeException {
         try {

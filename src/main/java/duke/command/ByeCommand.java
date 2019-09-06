@@ -5,11 +5,21 @@ import duke.storage.Storage;
 import duke.tasklist.Tasklist;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to say goodbye.
+ */
 public class ByeCommand extends Command {
     public ByeCommand() {
         super.isExit = true;
     }
 
+    /**
+     * Tells the user goodbye.
+     * @param list List of tasks.
+     * @param ui The user interface the user sees.
+     * @param storage Stores the user's list of tasks.
+     * @throws DukeException when an error occurs during execution.
+     */
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
         storage.store(list.tasks);

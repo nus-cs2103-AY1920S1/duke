@@ -9,6 +9,9 @@ import duke.task.Todo;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage object.
+ */
 public class Storage {
     private String filepath;
 
@@ -40,7 +43,7 @@ public class Storage {
             System.out.println(e.getMessage());
         } // End trycatch.
         return storedTasks;
-    } // End method.
+    }
 
     /**
      * Converts the stored string to a task.
@@ -88,5 +91,5 @@ public class Storage {
             throw new DukeException("IO Exception");
         } // End try-catch.
 
-    } // End method.
+    }
 }

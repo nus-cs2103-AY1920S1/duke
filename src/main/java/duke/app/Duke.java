@@ -10,7 +10,8 @@ import duke.ui.Ui;
 import java.util.NoSuchElementException;
 
 /**
- * Represents the Duke application object.
+ * Represents the Duke application object. Contains a user interface, a task list, and a
+ * storage object to save and retrieve data from the hard drive.
  */
 public class Duke {
     // Instance variables.
@@ -19,7 +20,8 @@ public class Duke {
     private Storage storage;
 
     /**
-     * Constructs a Duke object with the storage file initialised.
+     * Constructs a Duke object with the save file initialised. Creates a new, empty
+     * task list if the save file could not be initialised.
      */
     public Duke() {
         // Hard coded filepath for now.
@@ -36,14 +38,8 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
-
-    } // End of main.
-
-    // Handler Methods.
     /**
-     * Gets response from Duke. Runs the main logic flow of Duke for one command.
+     * Gets response from Duke. Runs the main logic flow of Duke for one command only.
      */
     public String getResponse(String input) {
         try {
@@ -52,9 +48,7 @@ public class Duke {
             c.execute(tasks, ui, storage);
             return c.commandOutput(); // commandOutput is the text passed to UI.
 
-        } catch (NoSuchElementException e) {
-            return ui.showError(e.getMessage());
-        } catch (DukeException e) {
+        } catch (NoSuchElementException | DukeException e) {
             return ui.showError(e.getMessage());
         }
     }
@@ -65,26 +59,4 @@ public class Duke {
     public String welcomeUser() {
         return ui.showWelcome();
     }
-
-    /**
-     * Runs the Duke application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String[] fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (NoSuchElementException e) {
-                ui.showError(e.getMessage());
-                return;
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        } // End while loop.
-    } // End method.
 }

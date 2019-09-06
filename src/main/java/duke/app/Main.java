@@ -14,8 +14,12 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    public Duke duke = new Duke();
 
+    /**
+     * Starts up the GUI.
+     * @param stage The JavaFX stage being used for the GUI.
+     */
     @Override
     public void start(Stage stage) {
         try {

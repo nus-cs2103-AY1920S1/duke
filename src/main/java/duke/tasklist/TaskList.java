@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents a TaskList of Tasks that Duke currently holds.
@@ -25,6 +27,10 @@ public class TaskList {
      */
     public TaskList() {
         this(new ArrayList<>());
+    }
+
+    public FilteredList<Task> getTasks() {
+        return new FilteredList<>((ObservableList<Task>) this.list);
     }
 
     /**

@@ -17,8 +17,8 @@ class ToDoTest {
     @Test
     void testToString_normalInput_success() {
         ToDo current = new ToDo("read book");
-        assertEquals("[T][✗] read book", current.toString());
+        assertEquals("[T][not done] read book", current.toString());
         current.setDone();
-        assertEquals("[T][✓] read book", current.toString());
+        assertEquals("[T][done] read book", current.toString());
     }
 }

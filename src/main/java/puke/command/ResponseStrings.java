@@ -97,21 +97,6 @@ public class ResponseStrings {
     }
 
     /**
-     * Sorts tasks in the given TaskList in-place and adds lines describing
-     * the newly sorted tasks.
-     *
-     * @param tl The TaskList to sort.
-     */
-    public void sortTasks(TaskList tl) {
-        tl.sort();
-        lines.add("Tasks sorted.");
-        numTasksInList(tl);
-        for (int i = 1; i <= tl.size(); i++) {
-            lines.add(i + ". " + tl.get(i));
-        }
-    }
-
-    /**
      * Writes the contents of the given TaskList to disk. If an exception is thrown
      * in the process, add a line saying this.
      *

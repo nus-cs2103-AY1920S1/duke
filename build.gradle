@@ -6,8 +6,8 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
-group "duke"
-version "0.9.0"
+group "puke"
+version "0.9.5"
 
 repositories {
     mavenCentral()
@@ -27,18 +27,14 @@ javafx {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.9.0"
+    archiveBaseName = "puke"
+    archiveVersion = "0.9.5"
     archiveClassifier = null
     archiveAppendix = null
 }
 
 application {
-    mainClassName = "duke.Main"
-}
-
-run {
-    standardInput = System.in
+    mainClassName = "puke.Main"
 }
 
 test {

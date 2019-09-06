@@ -13,7 +13,9 @@ public class SortCommand extends Command {
      * @see Command#execute
      */
     public void execute(TaskList tl, ResponseStrings respStrings, Storage storage) {
-        respStrings.sortTasks(tl);
+        tl.sort();
+        respStrings.add("Tasks sorted.");
+        respStrings.numTasksInList(tl);
         respStrings.writeToStorage(tl, storage);
     }
 }

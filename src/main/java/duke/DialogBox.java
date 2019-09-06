@@ -32,10 +32,10 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private static Background BG_ORANGE = new Background(
+    private static final Background BG_ORANGE = new Background(
             new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY));
 
-    private static Background BG_LIGHTGRAY = new Background(
+    private static final Background BG_LIGHTGRAY = new Background(
             new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY));
 
     private DialogBox(String user, String text, Image img) {

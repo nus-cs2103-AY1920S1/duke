@@ -53,7 +53,7 @@ public class TaskParser {
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "
-                        + "Deadline should be: deadline [description] /at [d/M/yyyy HHmm]");
+                        + "Deadline should be: deadline [description] /by [d/M/yyyy HHmm]");
             }
 
             try {

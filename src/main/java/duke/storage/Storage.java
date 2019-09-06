@@ -27,6 +27,7 @@ import java.util.List;
  */
 public class Storage {
     private String filePath;
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -54,17 +55,16 @@ public class Storage {
                 Task task;
                 boolean done = Boolean.parseBoolean(tokens[1]);
                 String description = tokens[2];
-                SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
 
                 switch (tokens[0]) {
                 case "T":
                     task = new Todo(description, done);
                     break;
                 case "D":
-                    task = new Deadline(description, dateFormat.parse(tokens[3]), done);
+                    task = new Deadline(description, DATE_FORMAT.parse(tokens[3]), done);
                     break;
                 case "E":
-                    task = new Event(description, dateFormat.parse(tokens[3]), done);
+                    task = new Event(description, DATE_FORMAT.parse(tokens[3]), done);
                     break;
                 default:
                     throw new IoDukeException("Invalid task type found");
@@ -105,10 +105,9 @@ public class Storage {
                 String output = String.format("%s|%b|%s",
                         task.getType(), task.getIsDone(), task.getDescription());
                 if (task instanceof Deadline) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("d/M/yyyy HHmm");
-                    output += "|" + formatter.format(((Deadline)task).getBy());
+                    output += "|" + DATE_FORMAT.format(((Deadline)task).getBy());
                 } else if (task instanceof Event) {
-                    output += "|" + ((Event)task).getAt();
+                    output += "|" + DATE_FORMAT.format(((Event)task).getAt());
                 }
 
                 output += "\n";

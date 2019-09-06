@@ -1,11 +1,12 @@
 package duke.task;
 
+import duke.command.Commands;
 import duke.command.IncorrectStatementException;
 
 public class DeadlineTask extends Task {
     private static final String DEFAULT_DEADLINE_ICON = "[D]";
     private static final String DEADLINE_TASK_STATEMENT = "by";
-    private static final String DEADLINE_TASK_TYPE = "Deadline";
+    private static final Commands DEADLINE_TASK_TYPE = Commands.DEADLINE;
     private String deadLine;
 
     /**

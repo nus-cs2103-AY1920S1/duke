@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.Duke;
 import duke.command.*;
 import duke.command.UnknownCommandException;
 import duke.task.TaskList;
@@ -13,27 +14,42 @@ public class ParserManager {
      * @param fullCommand - command given by user input
      * @return Optional containing either valid command or null (when exception is thrown)
      */
-    public Command parseCommand(TaskList taskList, String fullCommand) throws UnknownCommandException, RuntimeException {
+    public Command parseCommand(TaskList taskList, String fullCommand, CommandHistoryStack commandHistory) throws UnknownCommandException, RuntimeException {
         this.taskList = taskList;
         String[] commandDescription = fullCommand.trim().split("\\s+", 2);
         Commands commandType = checkValidCommand(commandDescription);
+
+        // Check for Undo case
+        if(commandType.equals(Commands.UNDO)) {
+            return UndoCommandParser.parse(fullCommand, commandHistory);
+        }
+
+        Command command;
         switch (commandType) {
         case LIST:
-            return ListCommandParser.parse(fullCommand);
+            command = ListCommandParser.parse(fullCommand);
+            break;
         case DELETE:
-            return DeleteCommandParser.parse(commandDescription, this.taskList.size());
+            command = DeleteCommandParser.parse(commandDescription, this.taskList.size());
+            break;
         case DONE:
-            return DoneCommandParser.parse(commandDescription, this.taskList.size());
+            command = DoneCommandParser.parse(commandDescription, this.taskList.size());
+            break;
         case TODO:
-            return AddCommandParser.parseWithoutDate(commandDescription);
+            command = AddCommandParser.parseWithoutDate(commandDescription);
+            break;
         case DEADLINE:
         case EVENT:
-            return AddCommandParser.parseWithDate(commandDescription);
+            command = AddCommandParser.parseWithDate(commandDescription);
+            break;
         case FIND:
-            return FindCommandParser.parse(commandDescription);
+            command = FindCommandParser.parse(commandDescription);
+            break;
         default:
             throw new UnknownCommandException(commandDescription[0]);
         }
+        commandHistory.update(command, taskList);
+        return command;
     }
 
     /**

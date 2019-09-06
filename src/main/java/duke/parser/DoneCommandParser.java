@@ -5,7 +5,7 @@ import duke.command.DoneCommand;
 import duke.command.IncompleteCommandException;
 
 public class DoneCommandParser {
-
+    private static final boolean DEFAULT_MARK_AS_UNDONE = false;
     /**
      * Marks specified command based on idx of command and required format
      * @param commandDescription - array of strings containing command description
@@ -18,7 +18,7 @@ public class DoneCommandParser {
         checkCommandEmpty(commandDescription);
         int idx = Integer.parseInt(commandDescription[1]) - 1;
         if ((idx < 0) || (idx >= size)) { throw new IndexOutOfBoundsException(); }
-        return new DoneCommand(idx);
+        return new DoneCommand(idx, DEFAULT_MARK_AS_UNDONE);
     }
 
     /**

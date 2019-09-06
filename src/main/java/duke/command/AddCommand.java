@@ -15,6 +15,13 @@ public class AddCommand extends Command {
     }
 
     /**
+     * @return Command type of command
+     */
+    public Commands getCommandType() {
+        return this.task.getTaskType();
+    }
+
+    /**
      * Adds given task into tasklist
      * @param taskList - list containing all existing tasks
      */

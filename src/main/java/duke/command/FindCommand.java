@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
     private String taskName;
+    private static final Commands FIND_COMMAND_TYPE = Commands.FIND;
 
     /**
      * Constructor
@@ -17,6 +18,13 @@ public class FindCommand extends Command {
      */
     public FindCommand(String taskName) {
         this.taskName = taskName;
+    }
+
+    /**
+     * @return Command type of command
+     */
+    public Commands getCommandType() {
+        return FIND_COMMAND_TYPE;
     }
 
     /**

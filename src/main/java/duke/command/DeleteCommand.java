@@ -5,6 +5,7 @@ import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
     private int idx;
+    private static final Commands DELETE_COMMAND_TYPE = Commands.DELETE;
 
     /**
      * Constructor
@@ -12,6 +13,20 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int idx) {
         this.idx = idx;
+    }
+
+    /**
+     * @return Command type of command
+     */
+    public Commands getCommandType() {
+        return DELETE_COMMAND_TYPE;
+    }
+
+    /**
+     * @return Index of task to delete
+     */
+    public int getIndex() {
+        return this.idx;
     }
 
     /**

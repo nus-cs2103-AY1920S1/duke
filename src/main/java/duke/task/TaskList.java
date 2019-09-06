@@ -37,6 +37,15 @@ public class TaskList {
     }
 
     /**
+     * Marks task at given index as undone
+     * @param idx - Index of task in list
+     */
+    public void undone(int idx) {
+        assert (idx >= 0 && idx < this.list.size());
+        this.list.get(idx).markUndone();
+    }
+
+    /**
      * Marks task at given index as done
      * @param idx - Index of task in list
      */

@@ -1,5 +1,6 @@
 import duke.command.AddCommand;
 import duke.command.Command;
+import duke.command.CommandHistoryStack;
 import duke.parser.ParserManager;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -27,14 +28,15 @@ public class ParserManagerTest {
         Command validOutput3 = new AddCommand(new EventTask("sales", "1/1/1991 1234"));
 
         ParserManager parserManager = new ParserManager();
+        CommandHistoryStack commandHistory = new CommandHistoryStack();
         TaskList taskList = new TaskList();
         assertAll("valid",
-                () -> assertEquals(validOutput1, parserManager.parseCommand(taskList, validInput1_1)),
-                () -> assertEquals(validOutput1, parserManager.parseCommand(taskList, validInput1_2)),
-                () -> assertEquals(validOutput2, parserManager.parseCommand(taskList, validInput2_1)),
-                () -> assertEquals(validOutput2, parserManager.parseCommand(taskList, validInput2_2)),
-                () -> assertEquals(validOutput3, parserManager.parseCommand(taskList, validInput3_1)),
-                () -> assertEquals(validOutput3, parserManager.parseCommand(taskList, validInput3_2))
+                () -> assertEquals(validOutput1, parserManager.parseCommand(taskList, validInput1_1, commandHistory)),
+                () -> assertEquals(validOutput1, parserManager.parseCommand(taskList, validInput1_2, commandHistory)),
+                () -> assertEquals(validOutput2, parserManager.parseCommand(taskList, validInput2_1, commandHistory)),
+                () -> assertEquals(validOutput2, parserManager.parseCommand(taskList, validInput2_2, commandHistory)),
+                () -> assertEquals(validOutput3, parserManager.parseCommand(taskList, validInput3_1, commandHistory)),
+                () -> assertEquals(validOutput3, parserManager.parseCommand(taskList, validInput3_2, commandHistory))
         );
     }
 }

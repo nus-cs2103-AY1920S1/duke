@@ -1,10 +1,12 @@
 package duke.task;
 
+import duke.command.Command;
+import duke.command.Commands;
+
 public abstract class Task {
-    private static final String DEFAULT_TASK_TYPE = "Default";
     private String taskName;
     private String taskIcon;
-    private String taskType;
+    private Commands taskType;
     private boolean isDone;
 
     /**
@@ -13,7 +15,7 @@ public abstract class Task {
      * @param taskIcon - Icon for the task - [D]/[E] etc..
      * @param taskType - Type of task - Deadline/Event etc..
      */
-    public Task(String taskName, String taskIcon, String taskType) {
+    public Task(String taskName, String taskIcon, Commands taskType) {
         this.taskName = taskName;
         this.isDone = false;
         this.taskIcon = taskIcon;
@@ -25,6 +27,8 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /** Marks Task as Undone **/
+    public void markUndone() { this.isDone = false; }
     /**
      * Returns taskName
      * @return String name
@@ -45,7 +49,7 @@ public abstract class Task {
     }
 
     /** Returns task type **/
-    public String getTaskType() {
+    public Commands getTaskType() {
         return this.taskType;
     }
 

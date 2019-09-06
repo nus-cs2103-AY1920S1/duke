@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandHistoryStack;
 import duke.command.UnknownCommandException;
 import duke.parser.ParserManager;
 import duke.task.TaskList;
@@ -11,6 +12,7 @@ public class Duke {
     private static ParserManager parserManager;
     private static DataStorage dataStorage;
     private static MainWindow mainWindow;
+    private static CommandHistoryStack commandHistory;
 
     public Duke(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -25,6 +27,7 @@ public class Duke {
         dataStorage = new DataStorage();
         taskList = dataStorage.getStoredTaskList();
         parserManager = new ParserManager();
+        commandHistory = new CommandHistoryStack();
     }
 
     /**
@@ -33,7 +36,7 @@ public class Duke {
     public static String getResponse(String input) {
         if(!input.trim().toLowerCase().equals("bye")) {
             try {
-                Command command = parserManager.parseCommand(taskList, input.trim());
+                Command command = parserManager.parseCommand(taskList, input.trim(), commandHistory);
                 assert command != null;
                 String response = command.execute(taskList);
                 dataStorage.storeTaskList(taskList);

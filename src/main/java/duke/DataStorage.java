@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.Commands;
 import duke.task.*;
 
 import java.io.*;
@@ -70,22 +71,22 @@ public class DataStorage {
         String contents = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            String taskType = task.getTaskType();
+            Commands taskType = task.getTaskType();
             String isDone = (task.isDone()) ? "1" : "0";
             String taskName = task.getName();
             switch (task.getTaskType()) {
-            case "Deadline":
+            case DEADLINE:
                 DeadlineTask deadLineTask = (DeadlineTask) task; // Check coding standard
                 String deadline = deadLineTask.getDeadline();
-                contents += taskType + "|" + isDone + "|" + taskName + "|" + deadline + "\n";
+                contents += "Deadline" + "|" + isDone + "|" + taskName + "|" + deadline + "\n";
                 break;
-            case "Event":
+            case EVENT:
                 EventTask eventTask = (EventTask) task;
                 String duration = eventTask.getDuration();
-                contents += taskType + "|" + isDone + "|" + taskName + "|" + duration + "\n";
+                contents += "Event" + "|" + isDone + "|" + taskName + "|" + duration + "\n";
                 break;
-            case "Todo":
-                contents += taskType + "|" + isDone + "|" + taskName + "\n";
+            case TODO:
+                contents += "Todo" + "|" + isDone + "|" + taskName + "\n";
                 break;
             }
         }

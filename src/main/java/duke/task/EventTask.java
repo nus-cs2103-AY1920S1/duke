@@ -1,11 +1,12 @@
 package duke.task;
 
+import duke.command.Commands;
 import duke.command.IncorrectStatementException;
 
 public class EventTask extends Task {
     private static final String DEFAULT_EVENT_ICON = "[E]";
     private static final String EVENT_TASK_STATEMENT = "at";
-    private static final String EVENT_TASK_TYPE = "Event";
+    private static final Commands EVENT_TASK_TYPE = Commands.EVENT;
     private String duration;
 
     /**

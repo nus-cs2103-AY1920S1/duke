@@ -9,48 +9,49 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 
 /**
  * Processes user input into Commands.
  */
 public class Parser {
     public static String filePath;
-    public static ArrayList<SimpleDateFormat> dateFormats = new ArrayList<>() {
-        {
-            add(new SimpleDateFormat("dd/M/yyyy HH:mm"));
-            add(new SimpleDateFormat("dd-M-yyyy HH:mm"));
-            add(new SimpleDateFormat("dd.M.yyyy HH:mm"));
-            add(new SimpleDateFormat("dd/M/yyyy hh:mm"));
-            add(new SimpleDateFormat("dd-M-yyyy hh:mm"));
-            add(new SimpleDateFormat("dd.M.yyyy hh:mm"));
-            add(new SimpleDateFormat("dd/M/yyyy h a"));
-            add(new SimpleDateFormat("dd-M-yyyy h a"));
-            add(new SimpleDateFormat("dd.M.yyyy h a"));
-            add(new SimpleDateFormat("dd/M/yyyy hhmm a"));
-            add(new SimpleDateFormat("dd-M-yyyy hhmm a"));
-            add(new SimpleDateFormat("dd.M.yyyy hhmm a"));
-            add(new SimpleDateFormat("dd/M/yyyy HHmm"));
-            add(new SimpleDateFormat("dd-M-yyyy HHmm"));
-            add(new SimpleDateFormat("dd.M.yyyy HHmm"));
-            add(new SimpleDateFormat("dd/M/yyyy Hmm"));
-            add(new SimpleDateFormat("dd-M-yyyy Hmm"));
-            add(new SimpleDateFormat("dd.M.yyyy Hmm"));
-            add(new SimpleDateFormat("dd/M/yyyy hhmm"));
-            add(new SimpleDateFormat("dd-M-yyyy hhmm"));
-            add(new SimpleDateFormat("dd.M.yyyy hhmm"));
-            add(new SimpleDateFormat("dd MMM yyyy HHmm"));
-            add(new SimpleDateFormat("dd MMMM yyyy HHmm"));
-            add(new SimpleDateFormat("dd/M/yyyy"));
-            add(new SimpleDateFormat("dd-M-yyyy"));
-            add(new SimpleDateFormat("dd.M.yyyy"));
-            add(new SimpleDateFormat("dd MMM yyyy"));
-            add(new SimpleDateFormat("dd MMMM yyyy"));
-        }
-    };
+    public static DateTimeFormatter DATE_FORMATS = new DateTimeFormatterBuilder()
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy HH:mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy HH:mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy HH:mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy hh:mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy hh:mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy hh:mm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy h a"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy h a"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy h a"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy hhmm a"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy hhmm a"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy hhmm a"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy HHmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy HHmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy Hmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy Hmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy hhmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy hhmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy hhmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd MMMM yyyy HHmm"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd/M/yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd-M-yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd MMMM yyyy"))
+            .parseStrict()
+            .toFormatter();
+
+    public static DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 
     /**
      * Converts user input into their relevant Command subclasses for processing.
@@ -88,24 +89,16 @@ public class Parser {
     /**
      * Converts String of certain formats to Date object.
      *
-     * @param dateString String to be converted to Date.
-     * @param dateFormats List of valid SimpleDateFormat objects that correspond to convertible String formats.
+     * @param dateString  String to be converted to Date.
+     * @param DATE_FORMATS DateTimeFormatter specifying format patterns to parse input String.
      * @return Date converted from String.
      */
-    public static Date convertToDate(String dateString, ArrayList<SimpleDateFormat> dateFormats) {
-        Date date = null;
-        for (SimpleDateFormat sdf : dateFormats) {
-            try {
-                sdf.setLenient(false);
-                date = sdf.parse(dateString);
-            } catch (ParseException pe) {
-                // Continue checking for matching date format
-            }
-            if (date != null) {
-                break;
-            }
+    public static LocalDateTime convertToDate(String dateString, DateTimeFormatter DATE_FORMATS) {
+        try {
+            return LocalDateTime.parse(dateString, DATE_FORMATS);
+        } catch (DateTimeParseException de) {
+            return null;
         }
-        return date;
     }
 
     public static void setFilePath(String filePath) {

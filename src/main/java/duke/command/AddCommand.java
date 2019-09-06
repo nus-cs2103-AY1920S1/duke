@@ -9,8 +9,7 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Adds a Task of type Todo, Deadline or Event to the list.
@@ -62,9 +61,9 @@ public class AddCommand extends Command {
                         + "\"deadline description /by end time\"\n");
             }
             String[] splitStringD = userInput.split(" /by ");
-            Date inputDateD = Parser.convertToDate(splitStringD[1], Parser.dateFormats);
+            LocalDateTime inputDateD = Parser.convertToDate(splitStringD[1], Parser.DATE_FORMATS);
             String inputDateStrD = inputDateD == null ? splitStringD[1]
-                    : new SimpleDateFormat("dd MMM yyyy, hh:mm a").format(inputDateD);
+                    : inputDateD.format(Parser.OUTPUT_FORMAT);
             Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""), 0,
                     inputDateStrD);
             tasks.addToList(deadline);
@@ -80,9 +79,9 @@ public class AddCommand extends Command {
                         + "\"event description /at period\"\n");
             }
             String[] splitStringE = userInput.split(" /at ");
-            Date inputDateE = Parser.convertToDate(splitStringE[1], Parser.dateFormats);
+            LocalDateTime inputDateE = Parser.convertToDate(splitStringE[1], Parser.DATE_FORMATS);
             String inputDateStrE = inputDateE == null ? splitStringE[1]
-                    : new SimpleDateFormat("dd MMM yyyy, hh:mm a").format(inputDateE);
+                    : inputDateE.format(Parser.OUTPUT_FORMAT);
             Event event = new Event(splitStringE[0].replace("event ", ""), 0,
                     inputDateStrE);
             tasks.addToList(event);

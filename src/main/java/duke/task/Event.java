@@ -8,7 +8,11 @@ import duke.time.DateTime;
 public class Event extends Task {
     private String dateTime;
 
-    // Constructor
+    /**
+     * Constructs an event object.
+     * @param description Description of the event.
+     * @param dateTime Date and time of the event.
+     */
     public Event(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;

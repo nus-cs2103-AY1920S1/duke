@@ -55,6 +55,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a dialog box formatted for Duke outputs.
+     * @param text Text Duke outputs.
+     * @param img Duke's photo.
+     * @return DialogBox with the correct formatting.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

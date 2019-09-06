@@ -15,6 +15,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, Date by) {
         super(description);
+        assert by != null;
         this.by = by;
     }
 

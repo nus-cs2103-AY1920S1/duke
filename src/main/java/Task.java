@@ -24,6 +24,7 @@ public class Task {
      * @param isDone Boolean for whether the task is done.
      */
     public Task(String description, boolean isDone) {
+        assert !description.equals("");
         this.description = description;
         this.isDone = isDone;
     }

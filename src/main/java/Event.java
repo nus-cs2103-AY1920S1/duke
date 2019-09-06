@@ -28,6 +28,7 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, Date at) {
         super(description, isDone);
+        assert at != null;
         this.at = at;
     }
 

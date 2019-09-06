@@ -85,9 +85,9 @@
                                    prefWidth="272.0"/>
                         <Button layoutX="294.0" layoutY="333.0" mnemonicParsing="false" onAction="#startSearch"
                                 text="Search"/>
-                        <TextArea fx:id="resultTextArea" layoutX="85.0" layoutY="376.0" prefHeight="160.0"
-                                  prefWidth="272.0"/>
                         <Text layoutX="21.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result"/>
+                        <ListView fx:id="resultListView" layoutX="73.0" layoutY="379.0" prefHeight="165.0"
+                                  prefWidth="283.0"/>
                     </children>
                 </AnchorPane>
             </items>

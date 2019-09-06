@@ -70,7 +70,7 @@ public class MainWindowController {
     @FXML
     private TextField searchTextField;
     @FXML
-    private TextArea resultTextArea;
+    private ListView<Task> resultListView;
 
     private Duke duke;
 
@@ -297,6 +297,10 @@ public class MainWindowController {
 
             return cell;
         });
+        resultListView.setCellFactory(param -> {
+            ListCell<Task> cell = new CustomListCell();
+            return cell;
+        });
         ObservableList<String> items = FXCollections.observableArrayList(
                 "To-Do", "Deadline", "Event", "All");
         masterListView.setItems(items);
@@ -359,13 +363,11 @@ public class MainWindowController {
     void startSearch(ActionEvent event) {
         String keyword = searchTextField.getText();
         List<Task> result = new ArrayList<>();
-        String output = "";
         for (Task t : this.duke.getTasks()) {
             if (t.getDescription().contains(keyword)) {
                 result.add(t);
-                output += t.toString() + "\n";
             }
         }
-        resultTextArea.setText(output);
+        resultListView.getItems().setAll(result);
     }
 }

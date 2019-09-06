@@ -20,24 +20,25 @@ public class TaskList {
      * @param task - task to add
      */
     public void add(Task task) {
+        assert task != null;
         this.list.add(task);
     }
 
     /**
      * Marks task at given index as done
      * @param idx - Index of task in list
-     * @throws IndexOutOfBoundsException - Throws error if given index is out of list bounds
      */
-    public void done(int idx) throws IndexOutOfBoundsException {
+    public void done(int idx) {
+        assert (idx >= 0 && idx < this.list.size());
         this.list.get(idx).markDone();
     }
 
     /**
      * Marks task at given index as done
      * @param idx - Index of task in list
-     * @throws IndexOutOfBoundsException - Throws error if given index is out of list bounds
      */
-    public void delete(int idx) throws IndexOutOfBoundsException {
+    public void delete(int idx) {
+        assert (idx >= 0 && idx < this.list.size());
         this.list.remove(idx);
     }
 
@@ -47,6 +48,7 @@ public class TaskList {
      * @return duke.task.Task at index idx
      */
     public Task get(int idx) {
+        assert (idx >= 0 && idx < this.list.size());
         return this.list.get(idx);
     }
 

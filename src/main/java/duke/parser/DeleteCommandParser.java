@@ -16,7 +16,7 @@ public class DeleteCommandParser {
     public static Command parse(String[] commandDescription, int size) throws RuntimeException, IncompleteCommandException {
         checkCommandEmpty(commandDescription);
         int idx = Integer.parseInt(commandDescription[1]) - 1;
-        if (idx >= size) { throw new IndexOutOfBoundsException(); }
+        if ((idx < 0) || (idx >= size)) { throw new IndexOutOfBoundsException(); }
         return new DeleteCommand(idx);
     }
 

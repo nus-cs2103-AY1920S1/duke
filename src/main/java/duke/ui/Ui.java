@@ -1,9 +1,10 @@
 package duke.ui;
 
-import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+
+import java.util.ArrayList;
 
 /**
  * The Class which handles user input and interacts with the user.
@@ -95,6 +96,14 @@ public class Ui {
      */
     public void sendErrorMessage(DukeException error) {
         append(error.toString());
+    }
+
+    /**
+     * Sends a message to the user based on the Error given.
+     * @param error The error which has arised.
+     */
+    public void sendErrorMessage(Error error) {
+        append(error.getMessage());
     }
 
     /**

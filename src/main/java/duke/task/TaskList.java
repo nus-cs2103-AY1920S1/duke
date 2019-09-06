@@ -1,7 +1,8 @@
 package duke.task;
 
-import java.util.ArrayList;
 import duke.exception.InvalidTaskIndexException;
+
+import java.util.ArrayList;
 
 /**
  * A Class that represents a list of all completed and uncompleted Tasks.
@@ -29,7 +30,7 @@ public class TaskList {
     }
 
     public static boolean hasHitTaskLimit() {
-        return tasks.size() >= 100;
+        return getNumberOfTasks() >= 100;
     }
 
     /**

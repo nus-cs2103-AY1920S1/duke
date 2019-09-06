@@ -9,12 +9,13 @@ import duke.TaskList;
  * the txt file.
  */
 public class DeleteCommand extends Command {
+    
     protected String command;
     
     /**
-     * Class constructor.
+     * Class constructor
      *
-     * @param command Duke.command to delete task.
+     * @param command Duke.command to delete task
      */
     public DeleteCommand(String command) {
         this.command = command;
@@ -28,9 +29,9 @@ public class DeleteCommand extends Command {
      * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
      * @param storage Handles the reading and writing of the txt file.
      */
-    public void execute(TaskList tasks, Storage storage) {
-        tasks.deleteTask(command);
+    public String execute(TaskList tasks, Storage storage) {
         storage.updateDelete(command);
+        return tasks.deleteTask(command);
     }
     
     /**

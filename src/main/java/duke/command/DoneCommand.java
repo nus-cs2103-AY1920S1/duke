@@ -9,12 +9,13 @@ import duke.TaskList;
  * the txt file.
  */
 public class DoneCommand extends Command {
+    
     protected String command;
     
     /**
-     * Class constructor.
+     * Class constructor
      *
-     * @param command Duke.command to complete task.
+     * @param command Duke.command to complete task
      */
     public DoneCommand(String command) {
         this.command = command;
@@ -28,9 +29,9 @@ public class DoneCommand extends Command {
      * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
      * @param storage Handles the reading and writing of the txt file.
      */
-    public void execute(TaskList tasks, Storage storage) {
-        tasks.completeTask(command);
+    public String execute(TaskList tasks, Storage storage) {
         storage.updateComplete(command);
+        return tasks.completeTask(command);
     }
     
     /**

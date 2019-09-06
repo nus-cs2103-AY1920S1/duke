@@ -8,10 +8,11 @@ import duke.Storage;
  * This class handles the exit of the program.
  */
 public class ByeCommand extends Command {
+    
     protected String command;
     
     /**
-     * Class constructor.
+     * Class constructor
      *
      * @param command Duke.command to exit the program.
      */
@@ -26,8 +27,8 @@ public class ByeCommand extends Command {
      * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
      * @param storage Handles the reading and writing of the txt file.
      */
-    public void execute(TaskList tasks, Storage storage) {
-        System.out.println("BYE! See you again next time!");
+    public String execute(TaskList tasks, Storage storage) {
+        return ("BYE! See you again next time!");
     }
     
     /**

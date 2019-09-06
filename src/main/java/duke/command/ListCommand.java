@@ -11,10 +11,11 @@ import java.util.ArrayList;
  * This class handles the printing of all Duke.tasks in the Duke.TaskList.
  */
 public class ListCommand extends Command {
+    
     protected String command;
     
     /**
-     * Class constructor.
+     * Class constructor
      *
      * @param command Duke.command to show all the Duke.tasks in Duke.TaskList
      */
@@ -29,11 +30,13 @@ public class ListCommand extends Command {
      * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
      * @param storage Handles the reading and writing of the txt file.
      */
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         ArrayList<Task> tasksList = tasks.getTasks();
+        String result = "";
         for (int i = 0; i < tasksList.size(); i++) {
-            System.out.println(tasksList.get(i));
+            result += tasksList.get(i) + "\n";
         }
+        return result;
     }
     
     /**

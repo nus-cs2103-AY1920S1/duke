@@ -18,10 +18,11 @@ import java.util.Date;
  * add/delete the Duke.tasks in the list.
  */
 public class TaskList {
+    
     protected static ArrayList<Task> tasks;
     
     /**
-     * Class constructor.
+     * Class constructor
      *
      * @param tasks an array list of Duke.tasks.
      * @throws DukeException which includes any exceptions when operating on the task list.
@@ -44,18 +45,19 @@ public class TaskList {
      *
      * @param input description of the to do task to be added into the task list.
      */
-    public void addTodo(String input) {
+    public String addTodo(String input) {
         try {
             if (!input.substring(4).isEmpty()) {
                 String description = input.substring(4);
                 Todo todo = new Todo(description);
                 tasks.add(todo);
-                printOut(todo);
+                String result = responseOut(todo);
+                return result;
             } else {
                 throw new EmptyDescriptionException("todo");
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
     
@@ -64,7 +66,7 @@ public class TaskList {
      *
      * @param input description of the deadline task together with the deadline date to be added into the task list.
      */
-    public void addDeadline(String input) {
+    public String addDeadline(String input) {
         try {
             if (input.contains("/by")) {
                 int index = input.lastIndexOf("/by");
@@ -79,12 +81,13 @@ public class TaskList {
                 }
                 Deadline deadline = new Deadline(description, byDeadline);
                 tasks.add(deadline);
-                printOut(deadline);
+                String result = responseOut(deadline);
+                return result;
             } else {
                 throw new InvalidDescriptionException("deadline");
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
     
@@ -93,7 +96,7 @@ public class TaskList {
      *
      * @param input description of the event task together with the event date to be added into the task list.
      */
-    public void addEvent(String input) {
+    public String addEvent(String input) {
         try {
             if (input.contains("/at")) {
                 int index = input.lastIndexOf("/at");
@@ -108,12 +111,13 @@ public class TaskList {
                 }
                 Event event = new Event(description, atEvent);
                 tasks.add(event);
-                printOut(event);
+                String result = responseOut(event);
+                return result;
             } else {
                 throw new InvalidDescriptionException("event");
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
     
@@ -124,13 +128,14 @@ public class TaskList {
      * @param input Duke.command of the user input which includes the index of the task that
      *              user wants to delete.
      */
-    public void deleteTask(String input) {
+    public String deleteTask(String input) {
         String[] inputs = input.split(" ");
         int index = Integer.parseInt(inputs[1]) - 1;
         Task removedTask = tasks.remove(index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(removedTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String result = "";
+        result = "Noted. I've removed this task:\n" + removedTask.toString() + "\nNow you have " + tasks.size() + " " +
+            "tasks in the list.";
+        return result;
     }
     
     /**
@@ -139,12 +144,13 @@ public class TaskList {
      * @param input Duke.command of the user input which includes the index of the task that
      *              user wants to complete
      */
-    public void completeTask(String input) {
+    public String completeTask(String input) {
         String[] inputs = input.split(" ");
         int index = Integer.parseInt(inputs[1]) - 1;
         tasks.get(index).complete();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.get(index));
+        String result = "";
+        result = "Nice! I've marked this task as done:\n" + tasks.get(index);
+        return result;
     }
     
     /**
@@ -152,11 +158,17 @@ public class TaskList {
      *
      * @param input Duke.command of the user input which includes the keyword that the user wants to find.
      */
-    public void findTask(String input) {
+    public String findTask(String input) {
         String keyword = input.substring(5);
         ArrayList<Task> filtered = copy(this.tasks);
-        System.out.println("Here are the matching tasks in your list.");
-        filtered.stream().filter(p -> p.getDescription().contains(keyword)).forEach(System.out::println);
+        String result = "";
+        result += "Here are the matching tasks in your list.";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
+                result += tasks.get(i).toString() + "\n";
+            }
+        }
+        return result;
     }
     
     /**
@@ -179,10 +191,10 @@ public class TaskList {
      *
      * @param task that has been successfully added into the task list.
      */
-    public static void printOut(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    public static String responseOut(Task task) {
+        String result = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + tasks.size() + " " +
+            "tasks in the list.";
+        return result;
     }
     
     /**

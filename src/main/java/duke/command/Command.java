@@ -27,7 +27,7 @@ public abstract class Command {
      * @throws InvalidDescriptionException if input does not follow the required format.
      * @throws IOException                 if storage file for tracking the Duke.TaskList is not found.
      */
-    public abstract void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException,
+    public abstract String execute(TaskList tasks, Storage storage) throws EmptyDescriptionException,
         InvalidInputException, InvalidDescriptionException, IOException;
     
     /**
@@ -44,19 +44,19 @@ public abstract class Command {
      *
      * @param e Exception thrown when user input is wrong.
      */
-    public static void handleException(Exception e) {
+    public static String handleException(Exception e) {
         if (e instanceof InvalidInputException) {
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (e instanceof EmptyDescriptionException) {
-            System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage()));
+            return (String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage()));
         } else if (e instanceof InvalidDescriptionException) {
-            System.out.println(String.format("OOPS!!! Invalid input! Make sure your %s has a description "
-                + "and required" + " data after /at for Event or /by for Deadline.\n", e.getMessage()));
+            return (String.format("OOPS!!! Invalid input! Make sure your %s has a description and required" + " data " +
+                "after /at for Event or /by for Deadline.\n", e.getMessage()));
         } else if (e instanceof ParseException) {
-            System.out.println(String.format("Please write your deadline/event date in this format: "
-                + "dd/MM/yyyy HH:mm," + " example: 02/08/2019 14:30\n", e.getMessage()));
+            return (String.format("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm," + " " +
+                "example: 02/08/2019 14:30\n", e.getMessage()));
         } else {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         }
     }
 }

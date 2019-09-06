@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 public class Ui {
     
+    
     /**
      * Class constructor.
      */
@@ -22,8 +23,8 @@ public class Ui {
      * This method prints the welcome message for the user when they first
      * enter the program. It is always shown to signal the start of the program.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke.Duke \nWhat can I do for you?");
+    public static String welcome() {
+        return "Hello! I'm Bear. \nWhat can I do for you?";
     }
     
     /**
@@ -49,10 +50,9 @@ public class Ui {
             System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage()));
         } else if (e instanceof InvalidDescriptionException) {
             System.out.println(String.format("OOPS!!! Invalid input! Make sure your %s has a description and "
-                + "required" + " data after /at for Event or /by for Deadline.\n", e.getMessage()));
+				+ "required" + " data after /at for Event or /by for Deadline.\n", e.getMessage()));
         } else if (e instanceof ParseException) {
-            System.out.println(String.format("Please write your deadline/event date in this format: dd/MM/yyyy "
-                + "HH:mm," + " example: 02/08/2019 14:30\n", e.getMessage()));
+            System.out.println(String.format("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm," + " example: 02/08/2019 14:30\n", e.getMessage()));
         } else {
             System.out.println(e.getMessage());
         }

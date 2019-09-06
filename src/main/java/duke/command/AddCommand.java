@@ -10,12 +10,13 @@ import duke.exception.InvalidInputException;
  * subsequently updating the txt file.
  */
 public class AddCommand extends Command {
+    
     protected String command;
     
     /**
-     * Class constructor.
+     * Class constructor
      *
-     * @param command Duke.command to add task.
+     * @param command Duke.command to add task
      */
     public AddCommand(String command) {
         this.command = command;
@@ -29,23 +30,22 @@ public class AddCommand extends Command {
      * @param tasks   ArrayList of Tasks that keep tracks of the Tasks.
      * @param storage Handles the reading and writing of the txt file.
      */
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             if (command.startsWith("todo")) {
-                System.out.println("in");
-                tasks.addTodo(command);
                 storage.storeTodo(command);
+                return tasks.addTodo(command);
             } else if (command.startsWith("deadline")) {
-                tasks.addDeadline(command);
                 storage.storeDeadline(command);
+                return tasks.addDeadline(command);
             } else if (command.startsWith("event")) {
-                tasks.addEvent(command);
                 storage.storeEvent(command);
+                return tasks.addEvent(command);
             } else {
                 throw new InvalidInputException();
             }
         } catch (Exception e) {
-            handleException(e);
+            return handleException(e);
         }
     }
     

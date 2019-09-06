@@ -150,8 +150,8 @@ public class Duke extends Application {
         String reply = "";
         if (input.toLowerCase().equals("hello")) {
             reply = user.welcome() + user.greeting();
+            assert !reply.isEmpty() : "Reply should not be empty";
         } else if (input.toLowerCase().equals("bye")) {
-            reply = user.conclusion();
             //store current tasks into local file for future reference
             storeCurrent(items);
             Platform.exit();
@@ -161,6 +161,7 @@ public class Duke extends Application {
                 int itemNum = Integer.parseInt(input.substring(input.length() - 1));
                 Task curr = items.get(itemNum - 1);
                 curr.markAsDone();
+                assert curr.isDone : "Task should have been marked as done";
                 //forming the message
                 reply = user.doneMessage(curr);
             } catch (IndexOutOfBoundsException e) {
@@ -184,10 +185,12 @@ public class Duke extends Application {
             reply = user.findTask(items, searchTerm);
         } else {
             reply = generateTask(input);
+            assert items.size() > 0 : "List of task should be more than 0";
         }
 
         return reply;
     }
+
 
     /**
      * Runnable method containing main process for cmd version.

@@ -30,7 +30,7 @@ public class Parser {
             try {
                 details = command[1];
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(e.getMessage());
+                System.out.println("");
             }
 
             Task task;

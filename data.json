@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "type": "todo",
+      "description": "Sample To-Do",
+      "is_done": false
+    },
+    {
+      "description": "Sample deadline",
+      "is_done": false,
+      "type": "deadline",
+      "by": "21/09/2019 0000"
+    },
+    {
+      "description": "Sample event",
+      "is_done": false,
+      "at": "21/09/2019 0000",
+      "type": "event"
+    },
+    {
+      "type": "todo",
+      "description": "Test",
+      "is_done": true
+    }
+  ]
+}

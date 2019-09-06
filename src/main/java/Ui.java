@@ -45,6 +45,7 @@ public class Ui {
 
     /**
      * Prints a specified error message.
+     *
      * @param error Message of error
      */
     public void showError(String error) {
@@ -53,6 +54,7 @@ public class Ui {
 
     /**
      * Reads the user input and returns a String.
+     *
      * @return User input
      */
     public String readCommand() {

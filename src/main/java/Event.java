@@ -8,8 +8,9 @@ public class Event extends Task {
 
     /**
      * Constructor to set the description of event and venue.
+     *
      * @param desc The description of the Event
-     * @param at The venue of the Event
+     * @param at   The venue of the Event
      */
     public Event(String desc, String at) {
         super(desc);
@@ -18,8 +19,9 @@ public class Event extends Task {
 
     /**
      * Constructor with additional parameter to set its completion status.
-     * @param desc The description of the Event
-     * @param at The venue of the Event
+     *
+     * @param desc   The description of the Event
+     * @param at     The venue of the Event
      * @param isDone The boolean variable to note if Event is completed
      */
     public Event(String desc, String at, boolean isDone) {
@@ -30,6 +32,7 @@ public class Event extends Task {
     /**
      * Overridden writeFormat method to specify that it is a Event
      * when saving the data.
+     *
      * @return Format for saving data
      */
     @Override
@@ -39,6 +42,7 @@ public class Event extends Task {
 
     /**
      * Overridden toString method to print out Event object.
+     *
      * @return Printing format of Event
      */
     @Override

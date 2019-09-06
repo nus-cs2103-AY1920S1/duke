@@ -14,6 +14,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand to set the Task command.
+     *
      * @param taskCmd User input of what Task is being generated
      */
     public AddCommand(String taskCmd) {
@@ -26,9 +27,10 @@ public class AddCommand extends Command {
      * The method will check the user input for a valid Command and adds the appropriate Task
      * accordingly. It will throw an exception if the user inputs are unrecognisable for the
      * method to execute correctly.
+     *
      * @param storage Storage object for saving purposes
-     * @param tasks Contains the list of tasks
-     * @param ui Holds Ui printing methods and user input field
+     * @param tasks   Contains the list of tasks
+     * @param ui      Holds Ui printing methods and user input field
      * @throws DukeException If taskCmd and taskName is invalid and format of subsequent fields is wrong
      */
     @Override

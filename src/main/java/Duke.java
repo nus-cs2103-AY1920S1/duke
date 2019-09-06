@@ -18,6 +18,7 @@ public class Duke {
 
     /**
      * Constructor of Duke class.
+     *
      * @param filePath The directory of the text file for populating task list
      */
     public Duke() {
@@ -30,6 +31,10 @@ public class Duke {
             ui.showError(e.getMessage());
             taskList = new TaskList();
         }
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard:" + input;
     }
 
     /*

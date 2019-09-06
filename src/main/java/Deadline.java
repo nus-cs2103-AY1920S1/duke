@@ -8,8 +8,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor to set the description of deadline and due date and time.
+     *
      * @param desc The description of the Deadline
-     * @param by The due date and time of the Deadline
+     * @param by   The due date and time of the Deadline
      */
     public Deadline(String desc, String by) {
         super(desc);
@@ -18,8 +19,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor with additional parameter to set its completion status.
-     * @param desc The description of the Deadline
-     * @param by The due date and time of the Deadline
+     *
+     * @param desc   The description of the Deadline
+     * @param by     The due date and time of the Deadline
      * @param isDone The boolean variable to note if Deadline is completed
      */
     public Deadline(String desc, String by, boolean isDone) {
@@ -30,6 +32,7 @@ public class Deadline extends Task {
     /**
      * Overridden writeFormat method to specify that it is a Deadline
      * when saving the data.
+     *
      * @return Format for saving data
      */
     @Override
@@ -39,6 +42,7 @@ public class Deadline extends Task {
 
     /**
      * Overridden toString method to print out Deadline object.
+     *
      * @return Printing format of Deadline
      */
     @Override

@@ -5,6 +5,7 @@ public class Parser {
 
     /**
      * Checks user input for a Command and returns the associated Command class.
+     *
      * @param userCmd The command from user input
      * @return Command object
      * @throws DukeException If user input is an invalid command

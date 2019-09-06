@@ -16,15 +16,17 @@ public abstract class Command {
     /**
      * Abstract method for the sub-classes of Command to use. This method will execute
      * differently based on the sub-class called.
+     *
      * @param storage Storage object for saving purposes
-     * @param tasks Contains the list of tasks
-     * @param ui Holds Ui printing methods and user input field
+     * @param tasks   Contains the list of tasks
+     * @param ui      Holds Ui printing methods and user input field
      * @throws DukeException If there is an error
      */
     abstract void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException;
 
     /**
      * Returns boolean variable hasExit for checking exit status.
+     *
      * @return hasExit boolean variable
      */
     public boolean isExit() {

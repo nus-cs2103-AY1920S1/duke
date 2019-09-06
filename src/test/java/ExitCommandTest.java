@@ -1,3 +1,4 @@
+import duke.command.ExitCommand;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

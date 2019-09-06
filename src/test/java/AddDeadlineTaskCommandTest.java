@@ -1,3 +1,7 @@
+import duke.command.AddDeadlineTaskCommand;
+import duke.command.EmptyTaskDescriptionException;
+import duke.model.Deadline;
+import duke.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

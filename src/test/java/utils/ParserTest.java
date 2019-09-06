@@ -40,7 +40,7 @@ public class ParserTest {
     @Test
     public void parseEventDetail_withAllNecessaryInfo_correctInfo() {
         String taskName = "event1";
-        String additionalInfo = "nus";
+        String additionalInfo = "20/11/2019 2214";
         String input = taskName + " /at " + additionalInfo;
         parser.setScanner(new Scanner(input));
         String[] expectedTaskInfo = new String[]{taskName, additionalInfo};

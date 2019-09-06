@@ -38,6 +38,7 @@ public abstract class Command {
         if (parts.length == 1) {
             throw new IllegalArgumentException("Yes, but what comes next?");
         }
+        assert parts.length == 2;
         String data = parts[1];
 
         switch (parts[0]) {

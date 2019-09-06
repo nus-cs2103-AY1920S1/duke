@@ -4,6 +4,8 @@ import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -25,11 +27,14 @@ public class Duke extends Application {
     }
 
     Duke() {
-        storage = new Storage("tasks.txt");
         try {
+            storage = new Storage("tasks.txt");
             tasks = new TaskList(storage.read());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
+        } catch (IOException e) {
+            System.out.println("Task file's functionality couldn't be guaranteed");
+            System.exit(1);
         }
     }
 

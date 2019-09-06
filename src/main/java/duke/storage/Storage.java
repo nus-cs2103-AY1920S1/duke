@@ -11,22 +11,34 @@ import java.util.Scanner;
  * Class that handles reading and writing tasks from and to disk.
  */
 public class Storage {
-    private String path;
+    private File taskFile;
 
-    public Storage(String path) {
-        this.path = path;
+    /**
+     * Creates a new Storage anchored to a specific file.
+     *
+     * @param path The file's pathname.
+     * @throws IOException If an error arose while checking for the file's existence.
+     */
+    public Storage(String path) throws IOException {
+        this.taskFile = new File(path);
+        if (taskFile.createNewFile()) {
+            System.out.println("Task file not found; an empty one was created");
+        }
+
+        assert taskFile.exists();
+        assert taskFile.canRead();
+        assert taskFile.canWrite();
     }
 
     /**
-     * Reads tasks from this instance's path, one task per line.
+     * Reads tasks from this instance's task file, one task per line.
      *
      * @return An ArrayList of strings, each string representing a task.
      * @throws FileNotFoundException If the file does not exist or is otherwise inaccessible.
      */
     public ArrayList<String> read() throws FileNotFoundException {
         ArrayList<String> out = new ArrayList<>();
-        File f = new File(path);
-        Scanner sc = new Scanner(f);
+        Scanner sc = new Scanner(taskFile);
         while (sc.hasNextLine()) {
             out.add(sc.nextLine());
         }
@@ -34,13 +46,13 @@ public class Storage {
     }
 
     /**
-     * Writes the given string representations of tasks to this instance's path.
+     * Writes the given string representations of tasks to this instance's task file.
      *
      * @param lines The lines to be written, produced by TaskList's export() method.
      * @throws IOException If an error occurs while writing the tasks.
      */
     public void write(ArrayList<String> lines) throws IOException {
-        FileWriter writer = new FileWriter(path);
+        FileWriter writer = new FileWriter(taskFile);
         for (String line: lines) {
             writer.write(line + "\n");
         }

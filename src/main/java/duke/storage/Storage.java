@@ -25,7 +25,7 @@ public class Storage {
             this.tempFile = new File(filePath);
             BufferedReader br = new BufferedReader(new FileReader(tempFile));
             String line = br.readLine();
-            while ( line != null) {
+            while (line != null) {
                 storingStrings.add(line);
                 line = br.readLine();
             }
@@ -52,7 +52,6 @@ public class Storage {
                 fileWriter.write(currentTask.createTaskInFileFormat() + "\n");
             }
             fileWriter.close();
-
         } catch(IOException e) {
             System.out.println(e);
         }
@@ -68,16 +67,11 @@ public class Storage {
         for (int i = 0; i < this.storingStrings.size(); i++) {
             String wholeLine = this.storingStrings.get(i);
             String[] argumentArray = wholeLine.split(" ");
-
             boolean isCompleted = false;
             if (argumentArray[1].equals("1"))  {
-                //completed
-                //System.out.println(argumentArray[1]);
                 isCompleted = true;
             }
-
             if (argumentArray[0].equals("T")) {
-
                 String toDoTaskString = "";
                 for (int j = 2; j < argumentArray.length; j++) {
                     toDoTaskString += argumentArray[j];
@@ -85,12 +79,10 @@ public class Storage {
                 }
                 //.trim() to remove trailing space
                 Task toDoTask = new ToDo(toDoTaskString.trim());
-
                 if(isCompleted) {
                     toDoTask.markAsDone();
                 }
                 store.add(toDoTask);
-
             } else if (argumentArray[0].equals("D")) {
                 String deadlineTaskDescriptionString = "";
                 String deadlineTaskDateAndTimeString = "";
@@ -106,20 +98,17 @@ public class Storage {
                         deadlineTaskDateAndTimeString += " ";
                     }
                 }
-
                 //use .trim() method to eliminate trailing white space
-                Task deadlineTask = new Deadline(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
+                Task deadlineTask = new Deadline(deadlineTaskDescriptionString.trim(),
+                        deadlineTaskDateAndTimeString.trim());
                 if (isCompleted) {
                     deadlineTask.markAsDone();
                 }
                 store.add(deadlineTask);
-
             } else if (argumentArray[0].equals("E")) {
                 String eventTaskDescriptionString = "";
                 String eventTaskDateAndTimeString = "";
                 boolean createDesc = true;
-
-
                 for (int j = 2; j < argumentArray.length; j++) {
                     if (argumentArray[j].equals("/at")) {
                         createDesc = false;
@@ -132,7 +121,6 @@ public class Storage {
 
                     }
                 }
-
                 //use of .trim() to avoid trailing whitespace
                 Task eventTask = new Event(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
                 if (isCompleted) {

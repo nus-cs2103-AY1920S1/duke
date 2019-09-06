@@ -22,12 +22,6 @@ public class Duke  {
     private GuiParser parser;
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
     /**
      * Constructor for Duke instance.
      * @param filepath file path giving the location of the file
@@ -44,6 +38,7 @@ public class Duke  {
     /**
      * Generate a response to user input.
      * Calls Parser object to read current input from GUI
+     * ALL outputs from the program will be passed through here to the GUI
      */
     private String getResponse(String input) {
         assert !input.equals("") :  "string from GUI parser should not be empty ";

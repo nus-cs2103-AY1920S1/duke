@@ -16,6 +16,7 @@ public class Duke {
 
     /**
      * Initialises the Duke object.
+     *
      * @param filePath path to the file for data loading and writing
      */
     private Duke(String filePath) {
@@ -52,6 +53,7 @@ public class Duke {
 
     /**
      * Creates a new instance of the Duke object.
+     *
      * @param args args
      */
     public static void main(String[] args) {

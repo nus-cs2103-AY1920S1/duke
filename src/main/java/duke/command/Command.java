@@ -14,6 +14,7 @@ public abstract class Command {
 
     /**
      * Instantiates a Command.
+     *
      * @param isExit boolean to indicate ExitCommand
      */
     Command(boolean isExit) {
@@ -22,6 +23,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written

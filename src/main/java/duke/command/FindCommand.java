@@ -14,6 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructs a find Command.
+     *
      * @param taskToBeFound search item
      */
     public FindCommand(String taskToBeFound) {
@@ -23,6 +24,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the find command.
+     *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written

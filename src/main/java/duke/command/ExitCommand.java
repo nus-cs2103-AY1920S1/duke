@@ -19,6 +19,7 @@ public class ExitCommand extends Command {
 
     /**
      * Updates the storage by writing data to it.
+     *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written

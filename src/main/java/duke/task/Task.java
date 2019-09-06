@@ -33,6 +33,7 @@ public class Task {
 
     /**
      * Converts the task into a StringBuilder object to be written into storage.
+     *
      * @return StringBuilder object for file writing
      */
     public StringBuilder saveData() {
@@ -44,6 +45,7 @@ public class Task {
 
     /**
      * Returns task description.
+     *
      * @return task description
      */
     public String getDescription() {
@@ -52,6 +54,7 @@ public class Task {
 
     /**
      * Returns a string representation of this task.
+     *
      * @return a string representation of this task
      */
     @Override

@@ -29,6 +29,7 @@ public class TaskList {
 
     /**
      * Deletes a Task.
+     *
      * @param deletedItemNo index of the task
      * @param ui ui object to print messages
      * @throws DukeException if task is not found
@@ -45,6 +46,7 @@ public class TaskList {
 
     /**
      * Adds a Task.
+     *
      * @param task task object to be added
      * @param ui ui object to print messages
      */
@@ -56,6 +58,7 @@ public class TaskList {
 
     /**
      * Marks the task as done.
+     *
      * @param itemNo index of the task to be marked
      * @param ui ui object to print messages
      */
@@ -67,6 +70,7 @@ public class TaskList {
 
     /**
      * Initiates writing of data into file.
+     *
      * @param storage storage object to write data into
      * @throws DukeException if file not found
      */
@@ -76,6 +80,7 @@ public class TaskList {
 
     /**
      * Finds the task(s) with matching descriptions.
+     *
      * @param taskToBeFound search term
      * @return TaskList object containing list of relevant search results
      * @throws DukeException if task is not found
@@ -95,6 +100,7 @@ public class TaskList {
 
     /**
      * Returns a string representation of the list of tasks.
+     *
      * @return a string representation of the list of tasks
      */
     @Override

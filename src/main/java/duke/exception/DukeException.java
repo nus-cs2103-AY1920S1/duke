@@ -6,15 +6,14 @@ package duke.exception;
 public class DukeException extends Exception {
     
     /**
-     * Class constructor
-     *
+     * Class constructor.
      */
     public DukeException() {
         super();
     }
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param message message to be tagged to the Duke.exception.
      */

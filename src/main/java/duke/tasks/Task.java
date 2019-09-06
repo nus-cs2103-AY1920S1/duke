@@ -9,7 +9,7 @@ public class Task {
     protected String description;
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param description details of the respective Task.
      */

@@ -6,16 +6,16 @@ import java.text.SimpleDateFormat;
 /**
  * Event class that can be created by the user. Handles all Duke.tasks with events.
  */
-public class Event extends Task{
+public class Event extends Task {
     
     protected Date at;
     protected SimpleDateFormat format = new SimpleDateFormat();
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param description details of the respective task.
-     * @param at event date.
+     * @param at          event date.
      */
     public Event(String description, Date at) {
         super(description);

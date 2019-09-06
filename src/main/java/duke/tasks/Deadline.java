@@ -7,15 +7,15 @@ import java.text.SimpleDateFormat;
  * Deadline class that can be created by the user. Handles all Duke.tasks with deadlines.
  */
 public class Deadline extends Task {
-
+    
     protected Date by;
     protected SimpleDateFormat format = new SimpleDateFormat();
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param description details of the respective task.
-     * @param by deadline date
+     * @param by          deadline date
      */
     public Deadline(String description, Date by) {
         super(description);

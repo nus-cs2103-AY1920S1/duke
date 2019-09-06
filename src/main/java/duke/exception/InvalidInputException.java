@@ -1,6 +1,7 @@
 package duke.exception;
 //
 //import duke.Duke.exception.DukeException;
+
 /**
  * InvalidInputException class extends DukeException and deals with
  * any random inputs that is not within the function of the program.
@@ -11,7 +12,7 @@ public class InvalidInputException extends DukeException {
     }
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param message message to be tagged to the Duke.exception.
      */

@@ -58,7 +58,11 @@ public class Duke {
                 int size = tasks.getListOfTasks().size();
                 ui.showDelete(temp, size);
                 storage.write(tasks.getListOfTasks());
-            } else {  //all other commands
+            } else if(command.equals("find")) {
+                String keyword = taskDetails;
+                ui.showMatchingTasks(tasks.find(keyword));
+            }
+            else {  //all other commands
                 try {
                     if (command.equals("todo")) {
                         if (taskDetails.equals("")) { //will it be such that String[].get(1) will be zero i.e. error?

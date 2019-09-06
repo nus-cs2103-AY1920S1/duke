@@ -4,7 +4,7 @@ public class DukeException extends Exception {
     String errorMessage;
 
     /**
-     * Custom Exception class
+     * Custom Exception class.
      * @param errorMessage customized error messages for each error
      */
     public DukeException(String errorMessage) {

@@ -2,8 +2,8 @@ package duke.ui;
 
 public class GuiUi {
     /**
-     * Utility class that sends general String to display to duke GUI
-     * @return
+     * Utility class that sends general String to display to duke GUI.
+     * @return String of greeting
      */
     public static String showGreeting() {
         String temp = "";
@@ -19,24 +19,53 @@ public class GuiUi {
         return temp;
     }
 
-    //print common methods to call
+    /**
+     * returns noted response.
+     * @return noted response
+     */
     public static String printNoted() {
+
         return "Noted. I've removed this task:";
     }
+
+    /**
+     * returns got it response.
+     * @return got it response
+     */
     public static String printGotIt() {
+
         return "Got it. I've added this task:";
     }
+
+    /**
+     * return back length of list response.
+     * @param length length of list
+     * @return length response
+     */
     public static String printNow(int length) {
+
         return "Now you have " + length + " tasks in the list.";
     }
+
+    /**
+     * returns help text.
+     * @return help text
+     */
     public static String helpText() {
-        return  "List of commands are as follows:\n" +
-                "[list]: list all tasks\n" +
-                "[done <number of task in list>]: mark particular task as done \n" +
-                "[todo <task name>]: create a todo Task \n" +
-                "[deadline <task name> /by dd/mm/yy hhmm]: create task with a specified deadline \n" +
-                "[event <task name> /at dd/mm/yy hhmm-hhmm]: create task with specified event \n" +
-                "[find <query>] searches ur list of tasks and return a result" +
+        return  "List of commands are as follows:\n"
+                +
+                "[list]: list all tasks\n"
+                +
+                "[done <number of task in list>]: mark particular task as done \n"
+                +
+                "[todo <task name>]: create a todo Task \n"
+                +
+                "[deadline <task name> /by dd/mm/yy hhmm]: create task with a specified deadline \n"
+                +
+                "[event <task name> /at dd/mm/yy hhmm-hhmm]: create task with specified event \n"
+                +
+                "[find <query>] searches ur list of tasks and return a result"
+                +
                 "[bye]: closes applications";
     }
 }

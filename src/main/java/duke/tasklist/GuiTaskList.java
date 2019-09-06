@@ -14,11 +14,11 @@ public class GuiTaskList {
     Storage storage;
 
     /**
-     * wrapper class for Task
+     * wrapper class for Task.
      * only responsible for actions that directly manipulates the actual list of task.
-     * Does not deal with saving or loading of tasks from storage
-     * @param listOfTasks
-     * @param storage
+     * Does not deal with saving or loading of tasks from storage.
+     * @param listOfTasks List of task objects stored
+     * @param storage storage instance to interact with file
      */
     public GuiTaskList(ArrayList<Task> listOfTasks, Storage storage) {
         assert listOfTasks != null : "list of tasks read should not be null";
@@ -31,7 +31,7 @@ public class GuiTaskList {
     }
 
     /**
-     * Method that displays the tasks on the current list to users
+     * Method that displays the tasks on the current list to users.
      */
     public String listTask() {
         String result = "";
@@ -45,7 +45,7 @@ public class GuiTaskList {
     }
 
     /**
-     * Create a done version of task at index
+     * Create a done version of task at index.
      * @param index refers to the position of specified task that user inputs
      */
 
@@ -60,7 +60,7 @@ public class GuiTaskList {
     }
 
     /**
-     * Creates a todo task based on user input
+     * Creates a todo task based on user input.
      * @param toDoTaskString user input
      */
 
@@ -77,24 +77,26 @@ public class GuiTaskList {
     }
 
     /**
-     * Creates a deadline task based on user input
+     * Creates a deadline task based on user input.
      * @param deadlineTaskDescriptionString User input for description of task
      * @param deadlineTaskDateAndTimeString date and time specified. should be in d/mm/yyyy HHmm format
      */
 
-    public String addDeadlineTask(String deadlineTaskDescriptionString, String deadlineTaskDateAndTimeString) {
+    public String addDeadlineTask(String deadlineTaskDescriptionString,
+                                  String deadlineTaskDateAndTimeString) {
         String result = "";
-        Task deadlineTask = new Deadline(deadlineTaskDescriptionString, deadlineTaskDateAndTimeString);
+        Task deadlineTask = new Deadline(deadlineTaskDescriptionString,
+                deadlineTaskDateAndTimeString);
         store.add(deadlineTask);
         storage.saveTaskToFile(store);
         result = result + GuiUi.printGotIt() + "\n" + (" "
-                + deadlineTask.toString())  + "\n"
+                + deadlineTask.toString()) + "\n"
                 + (GuiUi.printNow(store.size()));
         return result;
     }
 
     /**
-     * Creates event task based on user input
+     * Creates event task based on user input.
      * @param eventTaskDescriptionString user input for description of task
      * @param eventTaskDateAndTimeString date and time specified. should be in d/mm/yyyy HHmm format
      */
@@ -112,7 +114,7 @@ public class GuiTaskList {
     }
 
     /**
-     * Delete task in list at specified position
+     * Delete task in list at specified position.
      * @param index position of task to be deleted
      */
     public String deleteTask(int index) {
@@ -139,7 +141,11 @@ public class GuiTaskList {
         return result;
     }
 
-
+    /**
+     * Finds a task.
+     * @param query input from user
+     * @return string of task
+     */
     public String findTask(String query) {
         String result = "";
         ArrayList<String> listOfAllDesc = new ArrayList<>();

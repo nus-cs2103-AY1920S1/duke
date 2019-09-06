@@ -8,9 +8,9 @@ public class ToDoTest {
 
     @Test
     public void toStringTest() {
-           ToDoStub testObject = new ToDoStub();
-           String testObjectString = testObject.toString();
-           assertEquals("[T][\u2718] read book", testObjectString);
+        ToDoStub testObject = new ToDoStub();
+        String testObjectString = testObject.toString();
+        assertEquals("[T][\u2718] read book", testObjectString); //show tick
     }
 
     @Test

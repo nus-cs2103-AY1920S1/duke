@@ -5,7 +5,7 @@ public class Deadline extends Task {
     String dateAndTime;
 
     /**
-     * Deadline task
+     * Deadline task.
      * @param description user input of the title of the task
      * @param dateAndTime user input of date and time in the format d/mm/yyyy HHmm
      */
@@ -17,9 +17,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[D][\u2713] " + this.description + " (by: " + this.dateAndTime + ")";
+            //shows tick
+            return "[D][\u2713] " + this.description + " (by: " + this.dateAndTime + ")";//shows tick
         } else {
-            return "[D][\u2718] " + this.description + " (by: " + this.dateAndTime + ")";
+            //
+            return "[D][\u2718] " + this.description + " (by: " + this.dateAndTime + ")"; //shows cross
         }
     }
 

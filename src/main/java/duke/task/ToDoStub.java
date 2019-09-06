@@ -11,9 +11,9 @@ public class ToDoStub extends ToDo {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[T][\u2713] " + this.description;
+            return "[T][\u2713] " + this.description; //shows tick
         } else {
-            return "[T][\u2718] " + this.description;
+            return "[T][\u2718] " + this.description; //shows cross
         }
     }
 

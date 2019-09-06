@@ -4,7 +4,6 @@ import duke.parser.GuiParser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.GuiTaskList;
-import duke.tasklist.TaskList;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class Duke  {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Storage storage;
-    private TaskList tasks;
     private GuiParser parser;
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
@@ -46,7 +44,7 @@ public class Duke  {
 
     /**
      * accessor to getResponse() method.
-     * @param input
+     * @param input user input
      * @return return response of program according to input
      */
     public String getPublicResponse(String input) {

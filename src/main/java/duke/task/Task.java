@@ -5,9 +5,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Parent class of Tasks
-     * ToDo, Event , Deadline inherits from this class
-     * contains a description and a boolean flag (to mark done status)
+     * Parent class of Tasks.
+     * ToDo, Event , Deadline inherits from this class.
+     * contains a description and a boolean flag (to mark done status).
      * @param description title of the task
      */
     public Task(String description) {
@@ -15,12 +15,11 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task() {	    //test
-
+    public Task() {
     }
 
     /**
-     * Setter for isDone field
+     * Setter for isDone field.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -33,15 +32,15 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[\u2713] " + this.description;
+            return "[\u2713] " + this.description; //shows tick
         } else {
-            return "[\u2718] " + this.description;
+            return "[\u2718] " + this.description; //shows cross
         }
     }
 
     /**
-     * Utility method used when specific task is saved to the file
-     * @return
+     * Utility method used when specific task is saved to the file.
+     * @return created tasks in string
      */
     public String createTaskInFileFormat() {
         String temp = "";

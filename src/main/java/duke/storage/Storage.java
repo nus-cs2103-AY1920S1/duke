@@ -5,11 +5,14 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Storage {
 
@@ -17,7 +20,7 @@ public class Storage {
     ArrayList<String> storingStrings = new ArrayList<>();
 
     /**
-     * Object that deals with saving data to the files and reading from them
+     * Object that deals with saving data to the files and reading from them.
      * @param filePath file to be saved to
      */
     public Storage(String filePath) {
@@ -40,7 +43,7 @@ public class Storage {
 
 
     /**
-     * Saves given arrayList of Tasks to file
+     * Saves given arrayList of Tasks to file.
      * @param list ArrayList of Task
      */
     public void saveTaskToFile(ArrayList<Task> list) {
@@ -52,13 +55,13 @@ public class Storage {
                 fileWriter.write(currentTask.createTaskInFileFormat() + "\n");
             }
             fileWriter.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
 
     /**
-     * Creates an arrayList of Taks from file
+     * Creates an arrayList of Taks from file.
      * @return ArrayList of Task
      */
     public ArrayList<Task> createTasksFromFile() {
@@ -79,7 +82,7 @@ public class Storage {
                 }
                 //.trim() to remove trailing space
                 Task toDoTask = new ToDo(toDoTaskString.trim());
-                if(isCompleted) {
+                if (isCompleted) {
                     toDoTask.markAsDone();
                 }
                 store.add(toDoTask);
@@ -118,7 +121,6 @@ public class Storage {
                     } else {
                         eventTaskDateAndTimeString += argumentArray[j];
                         eventTaskDateAndTimeString += " ";
-
                     }
                 }
                 //use of .trim() to avoid trailing whitespace
@@ -127,8 +129,6 @@ public class Storage {
                     eventTask.markAsDone();
                 }
                 store.add(eventTask);
-            } else {
-
             }
         }
         return store;

@@ -4,15 +4,14 @@ import duke.exception.DukeException;
 import duke.tasklist.GuiTaskList;
 import duke.ui.GuiUi;
 
-import java.util.Scanner;
-
-public class GuiParser  {
+public class GuiParser {
     GuiTaskList storeTaskList;
 
     /**
      * Parser class responsible for parsing user input.
      * This includes asking for user input, decoding user input accordingly.
-     * Only responsible for making sense of the users command e.g String manipulation
+     * Only responsible for making sense of the users command e.g String manipulation.
+     *
      * @param list TaskList object at any instance, usually the TaskList read from the hard drive
      */
     public GuiParser(GuiTaskList list) {
@@ -20,9 +19,9 @@ public class GuiParser  {
     }
 
     /**
-     * main driver method for Parser class
-     * calls and links to other objects to execute the entire program
-     * returns a String
+     * main driver method for Parser class.
+     * calls and links to other objects to execute the entire program.
+     * returns a String.
      */
     public String readUserInput(String string) {
         String argument = string;
@@ -50,8 +49,7 @@ public class GuiParser  {
                     return result;
                 } else if (inputArray[0].equals("help")) {
                     return GuiUi.helpText();
-                }
-                else if (inputArray[0].equals("bye")) {
+                } else if (inputArray[0].equals("bye")) {
                     System.exit(0);
                 } else {
                     //handles error for not recognized command
@@ -66,7 +64,7 @@ public class GuiParser  {
         return "";
     }
 
-    private String processDone(String[] inputArray) throws DukeException{
+    private String processDone(String[] inputArray) throws DukeException {
         checkInputEmpty(inputArray);
         int index = Integer.valueOf(inputArray[1]) - 1;
         String result = storeTaskList.doneTask(index);
@@ -108,7 +106,9 @@ public class GuiParser  {
                 }
             }
             deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
-            String result = storeTaskList.addDeadlineTask(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
+            String result = storeTaskList.addDeadlineTask(
+                    deadlineTaskDescriptionString.trim(),
+                    deadlineTaskDateAndTimeString.trim());
             return result;
         } catch (IndexOutOfBoundsException e) {
             return "Incorrect format detected, enter in the form of: \n deadline <deadline name> /by <dd/mm/yy> <hhmm>";
@@ -116,33 +116,35 @@ public class GuiParser  {
     }
 
     private String processEvent(String[] inputArray) throws DukeException {
-       try { //catch empty desc error
-           checkInputEmpty(inputArray);
-           //form back string , description stops at /at date time starts from /at
-           String eventTaskDescriptionString = "";
-           String eventTaskDateAndTimeString = "";
-           boolean createDesc = true;
-           //catch error of no specific date time after /at
-           if (inputArray[inputArray.length - 1].matches("/at")) {
-               throw new DukeException("Oops, no specific duration supplied");
-           }
-           for (int i = 1; i < inputArray.length; i++) {
-               if (inputArray[i].equals("/at")) {
-                   createDesc = false;
-               } else if (createDesc) {
-                   eventTaskDescriptionString += inputArray[i];
-                   eventTaskDescriptionString += " ";
-               } else {
-                   eventTaskDateAndTimeString += inputArray[i];
-                   eventTaskDateAndTimeString += " ";
-               }
-           }
-           eventTaskDateAndTimeString = convertStringToDateEvent(eventTaskDateAndTimeString);
-           String result = storeTaskList.addEventTask(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
-           return result;
-       } catch (IndexOutOfBoundsException e) {
-           return "Incorrect format detected, enter in the form of: \n event <event name> /at <dd/mm/yy> <hhmm-hhmm>";
-       }
+        try { //catch empty desc error
+            checkInputEmpty(inputArray);
+            //form back string , description stops at /at date time starts from /at
+            String eventTaskDescriptionString = "";
+            String eventTaskDateAndTimeString = "";
+            boolean createDesc = true;
+            //catch error of no specific date time after /at
+            if (inputArray[inputArray.length - 1].matches("/at")) {
+                throw new DukeException("Oops, no specific duration supplied");
+            }
+            for (int i = 1; i < inputArray.length; i++) {
+                if (inputArray[i].equals("/at")) {
+                    createDesc = false;
+                } else if (createDesc) {
+                    eventTaskDescriptionString += inputArray[i];
+                    eventTaskDescriptionString += " ";
+                } else {
+                    eventTaskDateAndTimeString += inputArray[i];
+                    eventTaskDateAndTimeString += " ";
+                }
+            }
+            eventTaskDateAndTimeString = convertStringToDateEvent(eventTaskDateAndTimeString);
+            String result = storeTaskList.addEventTask(
+                    eventTaskDescriptionString.trim(),
+                    eventTaskDateAndTimeString.trim());
+            return result;
+        } catch (IndexOutOfBoundsException e) {
+            return "Incorrect format detected, enter in the form of: \n event <event name> /at <dd/mm/yy> <hhmm-hhmm>";
+        }
     }
 
     private String processDelete(String[] inputArray) throws DukeException {
@@ -154,32 +156,32 @@ public class GuiParser  {
 
 
     /**
-     * String manipulation method to return a formatted
-     * from 2/12/2019 1800 to 2nd of December 2019 6pm etc
+     * String manipulation method to return a formatted.
+     * from 2/12/2019 1800 to 2nd of December 2019 6pm etc.
      * @param dateAndTimeString given string in the format of d/mm/yyyy HHmm
      * @return formatted date and time
      */
     private static String convertStringToDate(String dateAndTimeString) throws DukeException {
-            String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
-            System.out.println(arrayOfDateAndTime);
-            String date = arrayOfDateAndTime[0];
-            String time = arrayOfDateAndTime[1];
-            // d/mm/yyyy
-            date = formatString(date);
-            Integer timeInInt = Integer.valueOf(time);
-            time = convertTime(timeInInt);
-            dateAndTimeString = date + ", " + time;
-            return dateAndTimeString;
+        String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
+        System.out.println(arrayOfDateAndTime);
+        String date = arrayOfDateAndTime[0];
+        String time = arrayOfDateAndTime[1];
+        // d/mm/yyyy
+        date = formatString(date);
+        Integer timeInInt = Integer.valueOf(time);
+        time = convertTime(timeInInt);
+        dateAndTimeString = date + ", " + time;
+        return dateAndTimeString;
     }
 
 
     /**
-     * converts time to string
-     * @param convertedTime given input e.g 1630
+     * converts time to string.
+     * @param timeInInt given input e.g 1630
      * @return formatted string e.g 1630 becomes 430pm
      * @throws DukeException exception when the input is not four digits / out of bounds e.g 2500
      */
-    private static String convertTime(Integer timeInInt) throws  DukeException{
+    private static String convertTime(Integer timeInInt) throws DukeException {
         String time = "";
         if (timeInInt == 0) {
             //midnight
@@ -213,8 +215,7 @@ public class GuiParser  {
     }
 
     /**
-     *
-     * helper function to convert d/mm/yyyy to the correct format
+     * helper function to convert d/mm/yyyy to the correct format.
      * @param date inputdate etc 2/12/2019
      * @return formatted date
      */
@@ -230,20 +231,19 @@ public class GuiParser  {
     }
 
     /**
-     * method to return the month in full spelling
+     * method to return the month in full spelling.
      * @param month given month number as input
      * @return name of the month
      */
     private static String getMonth(String month) {
-        final String[] arrMonths = {"entry to pad", "January", "February", "March", "April", "May", "June",
-                "July", "August", "September",
-                "October", "November", "December"};
+        String[] arrMonths = {"", "January", "February", "March", "April", "May",
+            "June", "July", "August", "September", "October", "November", "December"};
         int temp = Integer.valueOf(month);
         return arrMonths[temp];
     }
 
     /**
-     * method to find the ordinal of each number e.g 1st, 2nd, 3rd
+     * method to find the ordinal of each number e.g 1st, 2nd, 3rd.
      * @param num input num
      * @return formatted number e.g 1 becomes 1st, 21 becomes 21st
      */
@@ -251,32 +251,32 @@ public class GuiParser  {
         int temp = Integer.valueOf(num);
         if (temp == 1 || temp == 21 || temp == 31) {
             return temp + "st";
-        } else if (temp == 2 || temp == 22 ) {
+        } else if (temp == 2 || temp == 22) {
             return temp + "nd";
         } else if (temp == 3 || temp == 23) {
             return temp + "rd";
-        }else {
+        } else {
             return temp + "th";
         }
     }
 
     /**
-     * Helper function to convert the inputed date for the Event task
-     * @param dateAndTimeString  e.g 2/12/2019 1400-1500
+     * Helper function to convert the inputed date for the Event task.
+     * @param dateAndTimeString e.g 2/12/2019 1400-1500
      * @return formatted string
      */
     private static String convertStringToDateEvent(String dateAndTimeString) throws DukeException {
-            String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
-            String date = arrayOfDateAndTime[0];
-            String temp = arrayOfDateAndTime[1];
-            String[] arrayOfTime = temp.split("-");
-            String timeStarting = arrayOfTime[0];
-            String timeEnding = arrayOfTime[1];
-            date = formatString(date);
-            timeStarting = convertTime(Integer.valueOf(timeStarting));
-            timeEnding = convertTime(Integer.valueOf(timeEnding));
-            dateAndTimeString = date + ", " + timeStarting + "-" +timeEnding;
-            return dateAndTimeString;
+        String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
+        String date = arrayOfDateAndTime[0];
+        String temp = arrayOfDateAndTime[1];
+        String[] arrayOfTime = temp.split("-");
+        String timeStarting = arrayOfTime[0];
+        String timeEnding = arrayOfTime[1];
+        date = formatString(date);
+        timeStarting = convertTime(Integer.valueOf(timeStarting));
+        timeEnding = convertTime(Integer.valueOf(timeEnding));
+        dateAndTimeString = date + ", " + timeStarting + "-" + timeEnding;
+        return dateAndTimeString;
     }
 
     private void checkInputEmpty(String[] inputArray) throws DukeException {
@@ -286,7 +286,7 @@ public class GuiParser  {
     }
 
     /**
-     * method for testing private static methods
+     * method for testing private static methods.
      * @param test dummy String
      * @return
      */
@@ -295,10 +295,10 @@ public class GuiParser  {
     }
 
     /**
-     * method for testing private static method
+     * method for testing private static method.
      * @param convertedTime dummy int
-     * @return
-     * @throws DukeException
+     * @return String String that is converted
+     * @throws DukeException thrown if erroneous input
      */
     public static String accessConvertTime(int convertedTime) throws DukeException {
         return convertTime(convertedTime);

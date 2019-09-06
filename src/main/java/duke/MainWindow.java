@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Calls UI to print the greeting String when user first logs in
+     * Calls UI to print the greeting String when user first logs in.
      */
     @FXML
     public void handlePrintGreeting() {

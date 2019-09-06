@@ -4,10 +4,8 @@
  */
 public class AddCommand extends Command {
 
-    protected static boolean isExit;
-
 	public AddCommand(String type, String command) {
-        super(type, command);
+	    super(type, command);
     }
 
     /**
@@ -19,41 +17,46 @@ public class AddCommand extends Command {
      * @param ui       The Ui currently running.
      * @param taskList The TaskList Class containing the task list.
      * @param storage  The Storage class containing the name of file the be read.
+     * @return output The String output for GUI message.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         Task newTask;
         switch (this.type) {
-            case "deadline":
-                newTask = new Deadline(command);
-                try {
-                    newTask.understandDate();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-	            TaskList.tasks.add(newTask);
-                break;
+        case "deadline":
 
-            case "event":
-                newTask = new Event(command);
-                try {
-                    newTask.understandDate();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-	            TaskList.tasks.add(newTask);
-                break;
+            newTask = new Deadline(command);
+            try {
+                newTask.understandDate();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            TaskList.tasks.add(newTask);
+            break;
 
-            case "todo":
-                newTask = new ToDo(command);
-	            TaskList.tasks.add(newTask);
-                break;
+        case "event":
+            newTask = new Event(command);
+            try {
+                newTask.understandDate();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            TaskList.tasks.add(newTask);
+            break;
 
-            default:
-                newTask = new Task(command);
+        case "todo":
+            newTask = new ToDo(command);
+            TaskList.tasks.add(newTask);
+            break;
+
+        default:
+            newTask = new Task(command);
         }
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + newTask);
 	    System.out.println("    Now you have " + TaskList.tasks.size() + " tasks in the list");
+	    String output = "Got it. I've added this task:" + newTask + "\n";
+	    output += "Now you have " + TaskList.tasks.size() + " tasks in the list";
+	    return output;
     }
 }

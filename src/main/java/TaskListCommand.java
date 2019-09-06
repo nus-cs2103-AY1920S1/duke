@@ -19,37 +19,29 @@ public class TaskListCommand extends Command {
      * @param ui       The Ui currently running.
      * @param taskList The TaskList Class containing the task list.
      * @param storage  The Storage class containing the name of file the be read.
+     * @return output The String output for GUI message.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
-        switch (this.type) {
-            case "clear":
-                taskList.clearTaskList();
-                break;
-
-            case "delete":
-                taskList.deleteTask(this.command);
-                break;
-
-            case "done":
-                taskList.markAsDone(this.command);
-                break;
-
-            case "find":
-                taskList.searchByKeyword(this.command);
-                break;
-
-            case "list":
-                if (TaskList.tasks.isEmpty()) {
-                    System.out.println("    Congratulations! You have no tasks remaining!");
-                } else {
-                    taskList.printTaskList();
-                }
-                break;
-
-            default:
-                throw new DukeException("    TaskListCommand not identified.");
-
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
+        String output = "";
+        if (type.equals("clear")) {
+            output = taskList.clearTaskList();
+        } else if (type.equals("delete")) {
+            output = taskList.deleteTask(this.command);
+        } else if (type.equals("done")) {
+            output = taskList.markAsDone(this.command);
+        } else if (type.equals("find")) {
+            output = taskList.searchByKeyword(this.command);
+        } else if (type.equals("list")) {
+            if (TaskList.tasks.isEmpty()) {
+                System.out.println("    Congratulations! You have no tasks remaining!");
+                output = "Congratulations! You have no tasks remaining!";
+            } else {
+                output = taskList.printTaskList();
+            }
+        } else {
+            throw new DukeException("    TaskListCommand not identified.");
         }
+    return output;
     }
 }

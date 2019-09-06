@@ -13,8 +13,8 @@ public abstract class Command {
         this.command = fullCommand;
     }
 
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
-
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
+        return "";
     }
 
 

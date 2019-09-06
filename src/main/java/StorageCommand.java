@@ -20,17 +20,20 @@ public class StorageCommand extends Command {
      * @param taskList The TaskList Class containing the task list.
      * @param storage  The Storage class containing the name of file the be read.
      * @throws DukeException If command is not identified.
+     * @return output The String output for GUI message.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
+        String output = "";
         if (this.type.equals("save")) {
             storage.saveTaskList(TaskList.tasks);
+            output = "Your task list has been saved!";
         } else if (this.type.equals("display")) {
             storage.displayTaskList();
+            output = "The following is your saved task list\n" + taskList.toString();
         } else {
             throw new DukeException("    TaskListCommand not identified.");
         }
+        return output;
     }
-
-
 }

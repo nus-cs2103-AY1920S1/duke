@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Duke extends Application {
     private Storage storage;
@@ -75,6 +74,9 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.showWelcome(), duke)
+        );
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -91,12 +93,14 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //Part 3. Add functionality to handle user input.
+
+
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 	}
 
@@ -107,10 +111,8 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -119,11 +121,10 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         String userText = (userInput.getText());
         String dukeText = (getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
         );
@@ -134,8 +135,17 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) {
-        return "Duke heard: " + input;
+    protected String getResponse(String fullCommand) {
+        String output = "";
+        try {
+            Command command = Parser.parse(fullCommand);
+            output = command.execute(ui, taskList, storage);
+
+        } catch (DukeException e) {
+            output = e.toString();
+        }
+
+        return output;
     }
 
 
@@ -144,21 +154,14 @@ public class Duke extends Application {
         boolean isExit = false;
         while (!isExit) {
             ui.printBlankLine();
-
             try {
                 Command command = Parser.parse(fullCommand);
                 command.execute(ui, taskList, storage);
-                isExit = Command.isExit;
 
             } catch (DukeException e) {
-                System.out.println(e);
-            } finally {
-                if (!isExit) {
-                    fullCommand = ui.readCommand();
-                }
+                System.out.println (e);
             }
         }
-        ui.showFarewell();
     }
 
     public static void main(String[] args) {

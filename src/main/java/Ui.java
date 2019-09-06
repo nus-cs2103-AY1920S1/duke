@@ -11,7 +11,7 @@ public class Ui {
     /**
      * Prints the logo and welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -22,14 +22,16 @@ public class Ui {
         printBlankLine();
         System.out.println("    Hello, I'm Duke!\n    What can I do for you?");
         printBlankLine();
+        return "Yoda, I am. Help you, how can I?";
     }
 
     /**
      * Prints the farewell message and closes the scanner.
      */
-    public void showFarewell() {
+    public String showFarewell() {
         input.close();
         System.out.println("    Bye. Hope to see you again!");
+        return "Bye. Hope to see you again!";
     }
 
     /**

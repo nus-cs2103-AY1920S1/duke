@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -17,6 +18,10 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    /** To auto close using code to close button? */
+    @FXML
+    private Button closeButton;
+
 
     private Duke duke;
 
@@ -45,5 +50,21 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.contains("bye") || input.equalsIgnoreCase("exit")) {
+            closeButtonAction();
+        }
+    }
+
+    /**
+     * Closes GUI. This is a onClick callback function, but can be used
+     * for this purpose.
+     */
+    @FXML
+    private void closeButtonAction() {
+        //get a handle to the stage?
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        //ahhh then what i have to do when this fn is called aka close
+        stage.close();
     }
 }

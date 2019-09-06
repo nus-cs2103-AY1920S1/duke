@@ -64,11 +64,10 @@ public class Duke extends Application {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                if (fullCommand != null && fullCommand != "") {
-                    Command c = Parser.parse(fullCommand);
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
-                }
+                assert fullCommand != null && fullCommand != "" : "Critical Error from User Input";
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException ex) {
                 ui.showError(ex.getMessage());
             }

@@ -39,6 +39,7 @@ public class Deadline extends Task {
     }
 
     private String formatDate(String date) {
+        assert Integer.valueOf(date) <= 31 : "Date specified is greater than 31";
         if (date.equals("1")) {
             return "1st";
         } else if (date.equals("2")) {
@@ -71,6 +72,7 @@ public class Deadline extends Task {
     }
 
     private String formatMonth(String month) {
+        assert (Integer.valueOf(month) <= 12) : "Month specified is greater than 12";
         switch (month) {
         case "1" :
             return "January";

@@ -24,6 +24,7 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         String directive = commandArr[0];
+        assert !directive.equals("") : "Empty directive, critical error";
         if (directive.equals("list")) {
             return new ReadCommand(directive);
         } else if (directive.equals("bye")) {

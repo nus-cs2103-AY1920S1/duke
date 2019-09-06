@@ -36,6 +36,7 @@ public class TaskList {
      */
     public Task markNumberedTaskAsDone(int number) throws DukeException {
         Task task = getTaskAtIndex(number - 1);
+        assert task != null : "Error updating task as done";
         task.markAsDone();
         return task;
     }
@@ -45,7 +46,9 @@ public class TaskList {
     }
 
     public Task deleteTaskAtNumber(int position) {
-        return tasksList.remove(position - 1);
+        Task task =  tasksList.remove(position - 1);
+        assert task != null : "Error deleting task";
+        return task;
     }
 
     public Task getTaskAtIndex(int position) throws DukeException {

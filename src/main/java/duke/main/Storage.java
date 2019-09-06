@@ -67,6 +67,7 @@ public class Storage {
                 default:
                     throw new DukeException("Storage File not in correct format");
                 }
+                assert task != null : "Task file is corrupted and unable to load";
                 tasksList.add(task);
             }
         } catch (FileNotFoundException ex) {

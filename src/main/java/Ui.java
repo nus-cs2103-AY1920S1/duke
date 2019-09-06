@@ -225,4 +225,18 @@ public class Ui {
         sb.append(BORDER + "\n");
         return sb.toString();
     }
+
+    /**
+     * generating message for task which had already been added to list.
+     * @param current task user is trying to create/add
+     * @return message indicating the existed task
+     */
+    public String duplicateMessage(Task current) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(BORDER + "\n");
+        sb.append("This task had already been added: \n");
+        sb.append(current + "\n");
+        sb.append(BORDER + "\n");
+        return sb.toString();
+    }
 }

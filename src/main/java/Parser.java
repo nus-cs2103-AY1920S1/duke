@@ -1,4 +1,5 @@
 
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,9 +88,13 @@ public class Parser {
             //adding an item
             try {
                 Todo newTask = new Todo(input.substring(5));
-                items.add(newTask);
-                message = user.generateMessage(newTask, items.size());
-                System.out.println(message);
+                if (!checkDuplicate(newTask)) {
+                    items.add(newTask);
+                    message = user.generateMessage(newTask, items.size());
+                    System.out.println(message);
+                } else {
+                    message = user.duplicateMessage(newTask);
+                }
             } catch (StringIndexOutOfBoundsException e) {
                 message = user.todoError();
             }
@@ -99,9 +104,13 @@ public class Parser {
                 //split input into [deadline] [description] [date]
                 Date deadLineDate = convertStringToDeadline(input.substring(date + 3));
                 Deadline newTask = new Deadline(input.substring(9, date), deadLineDate);
-                items.add(newTask);
-                message = user.generateMessage(newTask, items.size());
-                System.out.println(message);
+                if (!checkDuplicate(newTask)) {
+                    items.add(newTask);
+                    message = user.generateMessage(newTask, items.size());
+                    System.out.println(message);
+                } else {
+                    message = user.duplicateMessage(newTask);
+                }
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 message = user.deadlineError();
             }
@@ -114,9 +123,13 @@ public class Parser {
                 Date eventDate = convertStringToEventStart(input.substring(time + 3, timeRange));
                 Date eventEnd = convertStringToEventEnd(input.substring(timeRange + 1));
                 Event newTask = new Event(input.substring(6, time), eventDate, eventEnd);
-                items.add(newTask);
-                message = user.generateMessage(newTask, items.size());
-                System.out.println(message);
+                if (!checkDuplicate(newTask)) {
+                    items.add(newTask);
+                    message = user.generateMessage(newTask, items.size());
+                    System.out.println(message);
+                } else {
+                    message = user.duplicateMessage(newTask);
+                }
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 message = user.eventError();
             }
@@ -204,4 +217,18 @@ public class Parser {
     */
 
 
+    public boolean checkDuplicate(Task curr) {
+        boolean result = false;
+        for (int i = 0; i < items.size(); i++) {
+            Task test = items.get(i);
+            if (test.getClass().equals(curr.getClass())) {
+                System.out.println("same task class");
+                if(test.equals(curr)) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 }

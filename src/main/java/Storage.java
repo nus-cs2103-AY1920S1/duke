@@ -92,7 +92,7 @@ public class Storage {
                 if (input.isDone) {
                     status = 1;
                 }
-                pw.println(input + " " + status);
+                pw.println(input.toString() + "" + status);
             }
             fw.flush();
             fw.close();

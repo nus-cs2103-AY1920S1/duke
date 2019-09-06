@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class Event extends Task {
 
@@ -23,6 +24,26 @@ public class Event extends Task {
     public String toString() {
         SimpleDateFormat startFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         SimpleDateFormat endFormat = new SimpleDateFormat(" - HH:mm");
-        return "[E]" + super.toString() + " (at: " + startFormat.format(start) + endFormat.format(end) + ")";
+        return "[E]" + super.toString() + "(at: " + startFormat.format(start) + endFormat.format(end) + ")";
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.description, this.start, this.end);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        Event test = (Event) o;
+        return this.description.equals(test.description) &&
+                this.start.equals(test.start) &&
+                this.end.equals(test.end);
     }
 }

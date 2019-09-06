@@ -61,11 +61,19 @@ public class TaskList {
         }
     }
 
+//    public String printToFile() {
+//        Task task;
+//        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); task = iterator.next()) {
+//            String s = iterator.next().printToFile();
+//            return s;
+//        }
+//    }
+
     public Task getTask(int taskIndex) throws IndexOutOfBoundsException {
         return tasks.get(taskIndex - 1);
     }
 
-    private void deleteTask(Task taskToDelete) {
+    public void deleteTask(Task taskToDelete) {
         String taskDescription = taskToDelete.toString();
         tasks.remove(taskToDelete);
         System.out.println("Noted. I've removed this task: " + taskDescription);

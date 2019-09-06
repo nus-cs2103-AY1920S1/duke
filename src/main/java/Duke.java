@@ -1,7 +1,4 @@
-import java.util.Scanner;
-
 public class Duke {
-//    private static DukeBot dukeBot;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -36,11 +33,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        Duke duke = new Duke("data/tasks.txt");
+        duke.run();
     }
-
-//    public static void main(String[] args) {
-//        dukeBot = new DukeBot();
-//        dukeBot.initialise();
-//    }
 }

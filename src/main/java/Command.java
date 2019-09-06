@@ -1,11 +1,8 @@
-public class Command {
-    private boolean isExit = false;
+public interface Command {
+    void execute(TaskList tasks, Ui ui, Storage storage);
+    // implementation varies for each subclass of Command
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        // implementation varies for each subclass of Command
-    }
-
-    public boolean isExit() {
-        return this.isExit;
+    default boolean isExit() {
+        return false;
     }
 }

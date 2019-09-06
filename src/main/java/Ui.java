@@ -10,9 +10,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private String welcomeMessage = "Hello from \n" + logo + "What can I do for you?";
     private String line = "____________________________________________________________";
-    private String filePath;
-    private String goodbyeMessage = "Your tasks have been saved to: " + filePath + "\n" +
-         "Bye. Hope to see you again soon!";
+    private String goodbyeMessage = "Bye. Hope to see you again soon!";
 
     public Ui() {
         this.in = new Scanner(System.in);
@@ -38,8 +36,7 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void showGoodbye(String filePath) {
-        this.filePath = filePath;
+    public void showGoodbye() {
         System.out.println(goodbyeMessage);
     }
 }

@@ -6,6 +6,7 @@ import static java.lang.Integer.parseInt;
 import duke.exception.*;
 import duke.task.*;
 import duke.parser.Parser;
+import java.util.ArrayList;
 
 public class Ui {
     private static int cnt = 0;
@@ -40,6 +41,16 @@ public class Ui {
                 list.get(index - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(list.get(index - 1).toString());
+                return;
+            case "find":
+                String keyWord = p.parseDesc(cmd);
+                ArrayList<Task> lst = list.returnAllMatchingTasks(keyWord);
+                if (lst.size() != 0) {
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (Task ta: lst) {
+                        System.out.printf("%d.%s\n", list.getTaskList().indexOf(ta) + 1, ta.toString());
+                    }
+                }
                 return;
             case "delete":
                 if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {

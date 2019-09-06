@@ -32,7 +32,7 @@ public class Storage {
                 if (item.contains("(")) {
                     int dateDescInd = item.indexOf("(");
                     desc = item.substring(7, dateDescInd - 1);
-                    date = item.substring(dateDescInd + 1, item.length() - 1);
+                    date = item.substring(dateDescInd + 5, item.length() - 1);
                 } else {
                     desc = item.substring(7);
                 }

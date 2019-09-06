@@ -34,12 +34,13 @@ public class Parser {
         switch (cmd) {
             case "deadline":
                 index = s.indexOf("/");
-                return s.substring(9, index - 1);
+                return s.substring(9, index - 1).trim();
             case "event":
                 index = s.indexOf("/");
-                return s.substring(6, index - 1);
+                return s.substring(6, index - 1).trim();
             case "todo":
-                return s.substring(5);
+            case "find":
+                return s.substring(5).trim();
             default:
                 return "No description provided";
         }
@@ -56,6 +57,4 @@ public class Parser {
             return rawDate;
         }
     }
-
-
 }

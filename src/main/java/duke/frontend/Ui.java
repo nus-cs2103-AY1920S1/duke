@@ -56,9 +56,7 @@ public class Ui {
                 if (cmd.length() <= 9 || !cmd.contains("/")) {
                     throw (new DukeWrongTaskException("deadline"));
                 }
-                // finding the position of "/"
-                index = cmd.indexOf("/");
-                desc = cmd.substring(9, index - 1);
+                desc = p.parseDesc(cmd);
                 String ddl = p.parseDate(cmd);
                 t = new Deadline(desc, ddl);
                 list.add(cnt++, t);
@@ -67,8 +65,7 @@ public class Ui {
                 if (cmd.length() <= 6 || !cmd.contains("/")) {
                     throw (new DukeWrongTaskException("event"));
                 }
-                index = cmd.indexOf("/");
-                desc = cmd.substring(6, index - 1);
+                desc = p.parseDesc(cmd);
                 String dt = p.parseDate(cmd);
                 t = new Event(desc, dt);
                 list.add(cnt++, t);
@@ -77,7 +74,7 @@ public class Ui {
                 if (cmd.length() <= 5) {
                     throw (new DukeWrongTaskException("toDo"));
                 }
-                t = new ToDo(cmd.substring(5));
+                t = new ToDo(p.parseDesc(cmd));
                 list.add(cnt++, t);
                 break;
             default:
@@ -93,6 +90,8 @@ public class Ui {
     }
 
     public void start() {
+        cnt = list.size();
+
         Scanner sc =  new Scanner(System.in);
 
         while (true) {

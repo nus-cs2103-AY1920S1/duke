@@ -28,6 +28,23 @@ public class Parser {
         }
     }
 
+    public String parseDesc(String s) {
+        String cmd = parseCommand(s);
+        int index = 0;
+        switch (cmd) {
+            case "deadline":
+                index = s.indexOf("/");
+                return s.substring(9, index - 1);
+            case "event":
+                index = s.indexOf("/");
+                return s.substring(6, index - 1);
+            case "todo":
+                return s.substring(5);
+            default:
+                return "No description provided";
+        }
+    }
+
     public String parseDate(String s) {
         int index = s.indexOf("/");
         String rawDate = s.substring(index + 4).trim();

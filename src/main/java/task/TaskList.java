@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A singleton that helps to manage the list of task and provides
+ * A singleton that helps to manage the list of tasks and provides
  * various operations on tasks.
  */
 public class TaskList {
@@ -75,6 +75,7 @@ public class TaskList {
      * @return The new Event task.
      */
     public Task addNewEventTask(String taskName, String additionalInfo, boolean isDone) {
+        assert !additionalInfo.isEmpty() : "Additional info of Event task cannot be empty.";
         Task newTask = new Event(taskName, additionalInfo);
         if (isDone) {
             newTask.setDone();
@@ -96,7 +97,7 @@ public class TaskList {
      * @return The new Deadline task.
      */
     public Task addNewDeadlineTask(String taskName, String additionalInfo, boolean isDone) {
-
+        assert !additionalInfo.isEmpty() : "Additional info of Deadline task cannot be empty.";
         Task newTask = new Deadline(taskName, additionalInfo);
         if (isDone) {
             newTask.setDone();
@@ -143,6 +144,7 @@ public class TaskList {
      * @return The list of tasks that are associated with the keyword.
      */
     public List<Task> generateListByKeyword(String keyword) {
+        assert !keyword.isEmpty() : "Find keyword cannot be empty";
         List<Task> findResult = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getName().contains(keyword)

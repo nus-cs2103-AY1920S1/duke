@@ -81,10 +81,8 @@ public class Duke {
                         break;
                     }
                     case "deadline": {
-                        String[] parts = rest.split("/by");
-                        String part1 = parts[0];
-                        String part2 = parts[1];
-                        Deadline d = new Deadline(parts[0], parts[1]);
+                        int indexOfSlash = userInput.indexOf("/");
+                        Deadline d = new Deadline(userInput.substring(9, indexOfSlash - 1), userInput.substring(indexOfSlash + 4));
                         tasks.add(d);
                         System.out.println("____________________________________________________________\n"
                                 + "Got it. I've added this task:\n"
@@ -94,10 +92,8 @@ public class Duke {
                         break;
                     }
                     case "event": {
-                        String[] parts = rest.split("/at");
-                        String part1 = parts[0];
-                        String part2 = parts[1];
-                        Event e = new Event(parts[0], parts[1]);
+                        int indexOfSlash = userInput.indexOf("/");
+                        Event e = new Event(userInput.substring(6, indexOfSlash - 1), userInput.substring(indexOfSlash + 4));
                         tasks.add(e);
                         System.out.println("____________________________________________________________\n"
                                 + "Got it. I've added this task:\n"

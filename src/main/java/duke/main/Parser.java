@@ -47,18 +47,24 @@ public class Parser {
                 return new CreateCommand(directive, commandArr[1]);
             } else {
                 try {
-                    String taskDetails = directive.equals("deadline") ? command.substring(9) : command.substring(6);
-                    String description = taskDetails.split("/")[0].trim();
-                    String addOns = directive.equals("deadline")
-                            ? taskDetails.substring(taskDetails.lastIndexOf("by") + 3).trim()
-                            : taskDetails.substring(taskDetails.lastIndexOf("at") + 3).trim();
-                    return new CreateCommand(directive, description, addOns);
+                    //return CreateCommand for event or deadline
+                    CreateCommand eventWithAddOn = createDeadlineOrEventCommand(directive, command);
+                    return eventWithAddOn;
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     throw new DukeException("Invalid event input");
                 }
             }
         }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public static CreateCommand createDeadlineOrEventCommand(String directive, String command) {
+        String taskDetails = directive.equals("deadline") ? command.substring(9) : command.substring(6);
+        String description = taskDetails.split("/")[0].trim();
+        String addOns = directive.equals("deadline")
+                ? taskDetails.substring(taskDetails.lastIndexOf("by") + 3).trim()
+                : taskDetails.substring(taskDetails.lastIndexOf("at") + 3).trim();
+        return new CreateCommand(directive, description, addOns);
     }
 
     public static boolean isTask(String directive) {

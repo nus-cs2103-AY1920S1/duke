@@ -2,7 +2,7 @@ package duke.parser;
 
 import duke.exception.DukeException;
 import duke.tasklist.GuiTaskList;
-import duke.Ui.GuiUi;
+import duke.ui.GuiUi;
 
 import java.util.Scanner;
 

@@ -17,8 +17,8 @@ public class Main extends Application {
     private Duke duke = new Duke("data/duke.txt");
 
     /**
-     * Driver method to load up main window
-     * @param stage
+     * Driver method to load up main window.
+     * @param stage current Stage instance
      */
     @Override
     public void start(Stage stage) {

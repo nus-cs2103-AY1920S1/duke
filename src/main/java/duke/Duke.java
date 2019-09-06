@@ -45,9 +45,9 @@ public class Duke  {
 
 
     /**
-     * accessor to getResponse() method
+     * accessor to getResponse() method.
      * @param input
-     * @return
+     * @return return response of program according to input
      */
     public String getPublicResponse(String input) {
         return this.getResponse(input);

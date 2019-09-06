@@ -22,7 +22,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Launcher"
+    mainClassName = "duke.Launcher"
 }
 checkstyle {
     toolVersion = '8.23'
@@ -38,6 +38,7 @@ dependencies {
 }
 
 run{
+    enableAssertions = false
      standardInput = System.in
 }
 test {

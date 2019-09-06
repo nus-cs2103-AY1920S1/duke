@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Ui.GuiUi;
+import duke.ui.GuiUi;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -53,6 +53,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Calls UI to print the greeting String when user first logs in
+     */
     @FXML
     public void handlePrintGreeting() {
         String output =  GuiUi.showGreeting();

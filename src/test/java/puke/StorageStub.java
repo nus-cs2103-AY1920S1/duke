@@ -1,11 +1,12 @@
-package duke;
+package puke;
 
-import duke.storage.Storage;
+import puke.storage.Storage;
+
 import java.util.ArrayList;
 
 public class StorageStub extends Storage {
-    StorageStub() {
-        super("no path");
+    StorageStub(String path) {
+        super(path);
     }
 
     @Override

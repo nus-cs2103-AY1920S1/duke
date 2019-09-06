@@ -1,24 +1,24 @@
-package duke.command;
+package puke.command;
 
-import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import puke.storage.Storage;
+import puke.task.Deadline;
+import puke.task.Event;
+import puke.task.TaskList;
+import puke.task.Todo;
 
 /**
  * Abstract class representing individual commands.
  */
 public abstract class Command {
     /**
-     * Executes this command on the given task list and user interface.
-     * Returns the response to this input, which is seen by the user.
+     * Executes this command on the given parameters.
+     * rStrings is modified to contain this program's response to the command.
      *
      * @param tl The task list.
+     * @param respStrings The ResponseStrings object operated on.
      * @param storage The place where tasks will be stored.
-     * @return The response to the user's command.
      */
-    public abstract String execute(TaskList tl, Storage storage);
+    public abstract void execute(TaskList tl, ResponseStrings respStrings, Storage storage);
 
     /**
      * Parses a command, returning a corresponding Command object.

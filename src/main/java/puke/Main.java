@@ -1,4 +1,4 @@
-package duke;
+package puke;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke = new Duke();
+    private Puke puke = new Puke();
 
     @Override
     public void start(Stage stage) {
@@ -21,7 +21,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Puke");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setPuke(puke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

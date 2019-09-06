@@ -1,4 +1,4 @@
-package duke;
+package puke;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,32 +23,32 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Puke puke;
 
-    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image pukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setPuke(Puke d) {
+        puke = d;
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other
-     * containing Duke's reply and then appends them to the dialog container.
+     * containing Puke's reply and then appends them to the dialog container.
      * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = puke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, DUKE_IMAGE)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, pukeImage)
         );
         userInput.clear();
         // This response is only produced by an ExitCommand

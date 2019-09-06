@@ -24,7 +24,7 @@ public class Parser {
         } else if (s.toLowerCase().startsWith("deadline")) {
             return "deadline";
         } else {
-            return "unknown command";
+            return "unknown command detected";
         }
     }
 

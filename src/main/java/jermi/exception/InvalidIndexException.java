@@ -4,7 +4,6 @@ package jermi.exception;
  * An exception associated with invalid index given.
  */
 public class InvalidIndexException extends JermiException {
-
     /**
      * Public constructor for class.
      */

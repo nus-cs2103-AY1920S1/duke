@@ -56,11 +56,11 @@ public class AddCommand extends Command {
                 task = new Event(activity, dateTime);
                 break;
             default:
-                assert task != null: "task cannot be null";
+                assert task != null : "task cannot be null";
             }
             break;
         default:
-            assert task != null: "task cannot be null";
+            assert task != null : "task cannot be null";
         }
         return task;
     }
@@ -80,7 +80,7 @@ public class AddCommand extends Command {
         taskList.add(task);
         int numOfTasks = taskList.getSize();
         storage.taskListToFile();
-        assert numOfTasks >= 0: "numOfTasks should be >= 0";
+        assert numOfTasks >= 0 : "numOfTasks should be >= 0";
         return formatter.echo("Got it. I've added this task:",
                 "  " + task,
                 String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));

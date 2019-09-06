@@ -9,7 +9,6 @@ import jermi.exception.JermiException;
  * A representation of the command to exit the program.
  */
 public class ExitCommand extends Command {
-
     /**
      * Public constructor for class.
      */

@@ -4,7 +4,6 @@ package jermi.task;
  * A representation of the todo task.
  */
 public class ToDo extends Task {
-
     /**
      * Public constructor for class.
      * Creates an uncompleted todo task.

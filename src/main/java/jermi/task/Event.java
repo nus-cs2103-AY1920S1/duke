@@ -4,7 +4,6 @@ package jermi.task;
  * A representation of the event task.
  */
 public class Event extends TaskWithDateTime {
-
     /**
      * Public constructor for class.
      * Creates an uncompleted event task.

@@ -4,7 +4,6 @@ package jermi.task;
  * A representation of the deadline task.
  */
 public class Deadline extends TaskWithDateTime {
-
     /**
      * Public constructor for class.
      * Creates an uncompleted deadline task.

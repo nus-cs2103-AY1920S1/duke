@@ -4,7 +4,6 @@ package jermi.exception;
  * An exception associated with error in writing contents to a data file.
  */
 public class SavingException extends JermiException {
-
     /**
      * Public constructor for class.
      *

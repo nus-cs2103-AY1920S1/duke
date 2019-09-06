@@ -4,7 +4,6 @@ package jermi.exception;
  * An exception associated with invalid command given.
  */
 public class InvalidCommandException extends JermiException {
-
     /**
      * Public constructor for class.
      */

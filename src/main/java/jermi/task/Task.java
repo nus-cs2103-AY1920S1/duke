@@ -21,7 +21,7 @@ public abstract class Task {
      * @return Tick if task is completed, else cross.
      */
     private String getStatusIcon() {
-        return this.isDone ? "✓" : "✘";
+        return this.isDone ? "✔" : "✘";
     }
 
     /**

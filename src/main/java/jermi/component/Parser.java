@@ -1,6 +1,13 @@
 package jermi.component;
 
-import jermi.command.*;
+import jermi.command.AddCommand;
+import jermi.command.ClearCommand;
+import jermi.command.Command;
+import jermi.command.DeleteCommand;
+import jermi.command.DoneCommand;
+import jermi.command.ExitCommand;
+import jermi.command.FindCommand;
+import jermi.command.ListCommand;
 import jermi.exception.EmptyDescriptionException;
 import jermi.exception.InvalidCommandException;
 import jermi.exception.JermiException;
@@ -64,7 +71,7 @@ public class Parser {
                 command = new FindCommand(inputDetails);
                 break;
             default:
-                assert command != null: "command cannot be null";
+                assert command != null : "command cannot be null";
             }
             break;
         default:

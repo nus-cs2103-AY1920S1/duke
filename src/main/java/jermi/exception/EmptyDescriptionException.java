@@ -4,7 +4,6 @@ package jermi.exception;
  * An exception associated with empty description.
  */
 public class EmptyDescriptionException extends JermiException {
-
     /**
      * Public constructor for class.
      *

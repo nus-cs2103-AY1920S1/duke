@@ -1,10 +1,7 @@
 package duke.directprocessor;
 
 import duke.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -60,18 +57,23 @@ public class Storage {
             isFinished = true;
         }
         String taskName = lineComponents[2];
-        if (lineComponents[0].equals("T")) {
-            assert lineComponents.length != 3: "The file is wrong.";
-            return  translateTodo(taskName, isFinished);
-        } else if (lineComponents[0].equals("D")) {
-            assert lineComponents.length != 4: "The file is wrong";
-            return translateDeadline(taskName, isFinished, lineComponents[3]);
-        } else {
-            assert lineComponents.length != 4: "The file is wrong";
-            return translateEvent(taskName, isFinished, lineComponents[3]);
+        TaskType taskType = TaskType.valueOf(lineComponents[0]);
+        switch(taskType) {
+            case T: return translateTodo(taskName, isFinished);
+            case D: return translateDeadline(taskName, isFinished, lineComponents[3]);
+            case E: return translateEvent(taskName, isFinished, lineComponents[3]);
+            default: throw new DukeException("The file cannot be read, we are starting a new task list.");
         }
     }
 
+    /**
+     * Translate a line in the task file into a todo task.
+     *
+     * @param taskName The name of the task.
+     * @param isFinished boolean, is the task finished.
+     * @return The translated todo task.
+     * @throws DukeException If the task name is empty.
+     */
     private static Todo translateTodo(String taskName, boolean isFinished) throws DukeException {
         Todo toAdd = new Todo(taskName);
         if (isFinished) {
@@ -80,6 +82,15 @@ public class Storage {
         return toAdd;
     }
 
+    /**
+     * Translate a line in the task file into an event task.
+     *
+     * @param taskName The name of the task.
+     * @param isFinished boolean, is the task finished.
+     * @param taskTime The time of the task, must be in the form of "dd:MM:yyyy hh:mm:ss".
+     * @return The translated event task.
+     * @throws DukeException If the task name is empty or the task time is not in valid format.
+     */
     private static Event translateEvent(String taskName, boolean isFinished, String taskTime) throws DukeException {
         Event toAdd = new Event(taskName, taskTime);
         if (isFinished) {
@@ -88,6 +99,15 @@ public class Storage {
         return toAdd;
     }
 
+    /**
+     * Translate a line in the task file into a deadline task.
+     *
+     * @param taskName The name of the task.
+     * @param isFinished boolean, is the task finished.
+     * @param taskTime The deadline of the task.
+     * @return The translated deadline task.
+     * @throws DukeException If the task name is empty or the task time is not in valid format.
+     */
     private static Deadline translateDeadline(String taskName, boolean isFinished, String taskTime) throws DukeException {
         Deadline toAdd = new Deadline(taskName, taskTime);
         if (isFinished) {

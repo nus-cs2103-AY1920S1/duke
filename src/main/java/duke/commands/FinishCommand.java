@@ -5,8 +5,7 @@ import duke.directprocessor.Ui;
 import duke.DukeException;
 
 /**
- * This is the Command subclass to set a target class in the task list as finish.
- * @Extends duke.commands.Command
+ * This is the specific command to set a target class in the task list as finish.
  */
 public class FinishCommand extends Command {
 
@@ -15,6 +14,7 @@ public class FinishCommand extends Command {
 
     /**
      * The constructor of the class, nothing special.
+     *
      * @param position The position of the task to delete.
      */
     public FinishCommand(int position) {
@@ -23,9 +23,10 @@ public class FinishCommand extends Command {
 
     /**
      * This method set the target task in the target task list as finished and let the target user end to
-     *     print out command message.
+     * print out command message.
+     *
      * @param tl The target task list to accept execution.
-     * @param ui The target user end to print command information.
+     * @param ui The target user interface to print command information.
      * @throws DukeException If the position is out of bound of the task list.
      */
     @Override
@@ -39,6 +40,7 @@ public class FinishCommand extends Command {
 
     /**
      * Determines whether this is an exit command.
+     *
      * @return boolean false.
      */
     @Override

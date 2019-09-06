@@ -5,8 +5,7 @@ import duke.directprocessor.Ui;
 import duke.DukeException;
 
 /**
- * This is the command subclass to list out all tasks whose task name contains the targeting string s.
- * @Extends Command
+ * This is the specific command to list out all tasks whose task name contains the targeting string s.
  */
 public class FindCommand extends Command {
 
@@ -14,6 +13,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor of the class, nothing special.
+     *
      * @param target The target string to look for in the task names.
      */
     public FindCommand(String target) {
@@ -23,6 +23,7 @@ public class FindCommand extends Command {
     /**
      * The override method execute from the superclass Command.
      * It gets the string array list from the target tl and let the target ui to print it out.
+     *
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
      * @throws DukeException If the target string is empty.
@@ -38,6 +39,7 @@ public class FindCommand extends Command {
 
     /**
      * Determines whether this is an exit command.
+     *
      * @return boolean false.
      */
     @Override

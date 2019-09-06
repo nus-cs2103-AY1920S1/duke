@@ -16,7 +16,7 @@ import duke.DukeException;
 public abstract class Command {
 
     /**
-     * Execute the command on target task list and print command information through target user end.
+     * Execute the command on target task list and print command information through target user interface.
      *
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
@@ -31,6 +31,13 @@ public abstract class Command {
      */
     public abstract boolean isExit();
 
+    /**
+     * This method checks that the task list and user interface to accept the command are not nulls.
+     * If unfortunately they are, this method will exit the program with corresponding error message.
+     *
+     * @param tl The task list to accept the command.
+     * @param ui The user interface to accept the command.
+     */
     protected void checkNullPointer(TaskList tl, Ui ui) {
         assert tl != null: "This command is pointing to a null task list.";
         assert ui != null: "This command is pointing to a null user interface.";

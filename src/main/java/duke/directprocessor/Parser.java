@@ -1,5 +1,6 @@
 package duke.directprocessor;
 
+import duke.KeyWord;
 import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
@@ -9,11 +10,12 @@ import duke.commands.FindCommand;
 import duke.commands.FinishCommand;
 import duke.commands.ListCommand;
 import duke.DukeException;
+import duke.tasks.TaskType;
 
 /**
  * This is a class that recognizes the user's input and calls the corresponding command.
  * It only recognizes the first word of the user input and key words like "/at", "/by".
- * Both its methods are static, so there is no necessity to initialize one.
+ * All of its methods are static, so there is no necessity to initialize one.
  */
 public class Parser {
 
@@ -26,25 +28,17 @@ public class Parser {
      */
     public static Command parse(String s) throws DukeException {
         String[] splitInput = splitInput(s);
-
-        if (splitInput[0].equals("list")) {
-            return listCommand();
-        } else if (splitInput[0].equals("bye")) {
-            return exitCommand();
-        } else if (splitInput[0].equals("todo")) {
-            return todoCommand(splitInput);
-        } else if (splitInput[0].equals("event")) {
-            return eventCommand(splitInput);
-        } else if (splitInput[0].equals("deadline")) {
-            return deadlineCommand(splitInput);
-        } else if (splitInput[0].equals("done")) {
-            return finishCommand(splitInput);
-        } else if (splitInput[0].equals("delete")) {
-            return deleteCommand(splitInput);
-        } else if (splitInput[0].equals("find")) {
-            return findCommand(splitInput);
-        } else {
-            return fakeCommand();
+        KeyWord keyWord = KeyWord.valueOf(splitInput[0].toUpperCase());
+        switch (keyWord) {
+            case LIST: return listCommand();
+            case BYE: return exitCommand();
+            case TODO: return todoCommand(splitInput);
+            case EVENT: return eventCommand(splitInput);
+            case DEADLINE: return deadlineCommand(splitInput);
+            case DONE: return finishCommand(splitInput);
+            case DELETE: return deleteCommand(splitInput);
+            case FIND: return findCommand(splitInput);
+            default: return fakeCommand();
         }
     }
 
@@ -80,7 +74,7 @@ public class Parser {
                 taskName = taskName + " ";
             }
         }
-        return new AddCommand("T", taskName);
+        return new AddCommand(TaskType.T, taskName);
     }
 
     /**
@@ -111,7 +105,7 @@ public class Parser {
                 }
             }
         }
-        return new AddCommand("E", taskName, taskTime);
+        return new AddCommand(TaskType.E, taskName, taskTime);
     }
 
     /**
@@ -142,7 +136,7 @@ public class Parser {
                 }
             }
         }
-        return new AddCommand("D", taskName, taskTime);
+        return new AddCommand(TaskType.D, taskName, taskTime);
     }
 
     /**

@@ -5,14 +5,13 @@ import duke.directprocessor.Ui;
 import duke.DukeException;
 
 /**
- * This is the Command subclass particularly handle the invalid commands.
+ * This is the specific class to handle the invalid commands.
  * Invalid commands only refers to the first key word of the user's command cannot be recognized.
  */
 public class FakeCommand extends Command {
 
     /**
-     * Contructor of the class, nothing special.
-     * @Extends duke.commands.Command
+     * Constructor of the class, nothing special.
      */
     public FakeCommand() {
 
@@ -20,9 +19,10 @@ public class FakeCommand extends Command {
 
     /**
      * This method directly throw out an DukeException to tell the user that this command is invalid.
+     *
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
-     * @throws DukeException Throw it anyway sinc ethe command is invalid.
+     * @throws DukeException Throw it anyway since the command is invalid.
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {
@@ -32,6 +32,7 @@ public class FakeCommand extends Command {
 
     /**
      * Determines whether this is an exit command.
+     *
      * @return boolean false.
      */
     @Override

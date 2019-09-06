@@ -5,12 +5,8 @@ import java.util.NoSuchElementException;
 import com.util.Printer;
 import com.core.State;
 import com.core.Response;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class Duke {
 
     /**
      * Main for program.
@@ -35,13 +31,5 @@ public class Duke extends Application {
         } catch (NoSuchElementException ignored) {
             System.out.print("");
         }
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
-        stage.setScene(scene);
-        stage.show();
     }
 }

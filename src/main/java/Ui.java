@@ -15,8 +15,8 @@ public class Ui {
     /**
      * Greetings when the program starts
      */
-    public String greet() {
-        String holder = horizontalLine() + "\nHello I'm Duke\n" + "What can I do for you?\n" + horizontalLine();
+    public static String greet() {
+        String holder = "\nHello I'm Duke\n" + "What can I do for you?\n";
         return holder;
     }
 

@@ -35,9 +35,20 @@ public class Task {
      * @return formatted String
      */
     public String toString() {
-        System.out.println(getStatusIcon());
+        System.out.println(getDescription());
         return "[" + getStatusIcon() + "] " + this.description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean equals(Task t) {
+        System.out.println(t.getDescription());
+        System.out.println(this.getDescription());
+        return t.getDescription().equals(this.getDescription());
+    }
+
 
 
 

@@ -93,4 +93,14 @@ public class TaskList {
         }
         return results;
     }
+
+    public boolean isDuplicate(Task t) {
+        for (Task task : tasks) {
+            if (task.equals(t)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

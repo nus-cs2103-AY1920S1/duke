@@ -18,8 +18,13 @@ public class AddCommand extends Command {
      * @param storage Class dealing with local storage of tasks
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(this.task);
-        return ui.showAddedTask(this.task, tasks.getListSize());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+
+        if (!tasks.isDuplicate(this.task)) {
+            tasks.addTask(this.task);
+            return ui.showAddedTask(this.task, tasks.getListSize());
+        } else {
+            throw new DukeException("Task is a duplicate!");
+        }
     }
 }

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,8 +25,26 @@ public class NewTaskWindowController {
     private Label dateLabel;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private TextField hours;
+    @FXML
+    private TextField minutes;
+    @FXML
+    private Text dots;
 
     private MainWindowController parentController;
+
+    private void hideTimeFields() {
+        hours.setVisible(false);
+        minutes.setVisible(false);
+        dots.setVisible(false);
+    }
+
+    private void showTimeFields() {
+        hours.setVisible(true);
+        minutes.setVisible(true);
+        dots.setVisible(true);
+    }
 
     void setParentController(MainWindowController parentController) {
         this.parentController = parentController;
@@ -45,13 +64,17 @@ public class NewTaskWindowController {
                 case "Deadline":
                     taskList.addTask(
                             new Deadline(descriptionTextField.getText(),
-                                    datePicker.getValue().atTime(0, 0)),
+                                    datePicker.getValue().atTime(
+                                            Integer.parseInt(hours.getText()),
+                                            Integer.parseInt(minutes.getText()))),
                             storage);
                     break;
                 case "Event":
                     taskList.addTask(
                             new Event(descriptionTextField.getText(),
-                                    datePicker.getValue().atTime(0, 0)),
+                                    datePicker.getValue().atTime(
+                                            Integer.parseInt(hours.getText()),
+                                            Integer.parseInt(minutes.getText()))),
                             storage);
                     break;
                 default:
@@ -82,6 +105,7 @@ public class NewTaskWindowController {
 
         dateLabel.setVisible(false);
         datePicker.setVisible(false);
+        hideTimeFields();
         ObservableList<String> items = FXCollections.observableArrayList("To-Do", "Deadline", "Event");
         typeSelector.setItems(items);
         typeSelector.setOnAction(event -> {
@@ -90,16 +114,19 @@ public class NewTaskWindowController {
             case "To-Do":
                 dateLabel.setVisible(false);
                 datePicker.setVisible(false);
+                hideTimeFields();
                 break;
             case "Deadline":
                 dateLabel.setText("by");
                 dateLabel.setVisible(true);
                 datePicker.setVisible(true);
+                showTimeFields();
                 break;
             case "Event":
                 dateLabel.setText("at");
                 dateLabel.setVisible(true);
                 datePicker.setVisible(true);
+                showTimeFields();
                 break;
             default:
                 break;

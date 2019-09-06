@@ -27,6 +27,18 @@
                         <MenuItem fx:id="fileOpen" mnemonicParsing="false" onAction="#openFile" text="Open…"/>
                     </items>
                 </Menu>
+                <Menu fx:id="sortMenu" mnemonicParsing="false" text="Sort...">
+                    <items>
+                        <MenuItem fx:id="sortItemByNameAscend" mnemonicParsing="false" onAction="#sortByNameAscend"
+                                  text="by name (ascend)"/>
+                        <MenuItem fx:id="sortItemByNameDescend" mnemonicParsing="false" onAction="#sortByNameDescend"
+                                  text="by name (descend)"/>
+                        <MenuItem fx:id="sortItemByTimeAscend" mnemonicParsing="false" onAction="#sortByTimeAscend"
+                                  text="by time (ascend)"/>
+                        <MenuItem fx:id="sortItemByTimeDescend" mnemonicParsing="false" onAction="#sortByTimeDescend"
+                                  text="by time (descend)"/>
+                    </items>
+                </Menu>
             </menus>
         </MenuBar>
         <SplitPane dividerPositions="0.18151447661469933, 0.5846325167037862" focusTraversable="true" prefHeight="-1.0"

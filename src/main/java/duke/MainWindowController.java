@@ -55,14 +55,19 @@ public class MainWindowController {
     private TextArea detailDescriptionTextArea;
     @FXML
     private Text detailTimeText;
+    @FXML
+    private Menu sortMenu;
+    @FXML
+    private MenuItem sortItemByNameAscend;
+    @FXML
+    private MenuItem sortItemByNameDescend;
+    @FXML
+    private MenuItem sortItemByTimeAscend;
+    @FXML
+    private MenuItem sortItemByTimeDescend;
 
     private Duke duke;
 
-    private Menu sortMenu;
-    private MenuItem sortMenuItem1;
-    private MenuItem sortMenuItem2;
-    private MenuItem sortMenuItem3;
-    private MenuItem sortMenuItem4;
 
     void setDuke(Duke duke) {
         this.duke = duke;
@@ -93,6 +98,16 @@ public class MainWindowController {
         detailTimeText.setVisible(false);
     }
 
+    private void hideSortByTime() {
+        sortItemByTimeDescend.setVisible(false);
+        sortItemByTimeAscend.setVisible(false);
+    }
+
+    private void showSortByTime() {
+        sortItemByTimeDescend.setVisible(true);
+        sortItemByTimeAscend.setVisible(true);
+    }
+
 
     Duke getDuke() {
         return duke;
@@ -102,15 +117,31 @@ public class MainWindowController {
         switch (masterListView.getSelectionModel().getSelectedItem()) {
         case "To-Do":
             displayTaskList.setAll(duke.getTodos());
+            hideSortByTime();
             break;
         case "Deadline":
             displayTaskList.setAll(duke.getDeadlines());
+            showSortByTime();
+            sortItemByTimeAscend.setOnAction(event -> {
+                this.displayTaskList.setAll(this.duke.getDeadlines(Comparator.comparing(Deadline::getBy)));
+            });
+            sortItemByTimeDescend.setOnAction(event -> {
+                this.displayTaskList.setAll(this.duke.getDeadlines(Comparator.comparing(Deadline::getBy).reversed()));
+            });
             break;
         case "Event":
-            displayTaskList.setAll(duke.getEvent());
+            displayTaskList.setAll(duke.getEvents());
+            showSortByTime();
+            sortItemByTimeAscend.setOnAction(event -> {
+                this.displayTaskList.setAll(this.duke.getEvents(Comparator.comparing(Event::getAt)));
+            });
+            sortItemByTimeDescend.setOnAction(event -> {
+                this.displayTaskList.setAll(this.duke.getEvents(Comparator.comparing(Event::getAt).reversed()));
+            });
             break;
         case "All":
             displayTaskList.setAll(duke.getTasks());
+            hideSortByTime();
             break;
         default:
             break;
@@ -183,8 +214,18 @@ public class MainWindowController {
                 "fx:id=\"detailDescriptionTextArea\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert detailTimeText != null :
                 "fx:id=\"detailTimeText\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert sortMenu != null : "fx:id=\"sortMenu\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert sortItemByNameAscend != null :
+                "fx:id=\"sortItemByNameAscend\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert sortItemByNameDescend != null :
+                "fx:id=\"sortItemByNameDescend\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert sortItemByTimeAscend != null :
+                "fx:id=\"sortItemByTimeAscend\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert sortItemByTimeDescend != null :
+                "fx:id=\"sortItemByTimeDescend\" was not injected: check your FXML file 'MainWindow.fxml'.";
 
         setDetailVisible(false);
+        hideSortByTime();
         middleListView.setCellFactory(param -> {
 
             ListCell<Task> cell = new CustomListCell();
@@ -218,24 +259,6 @@ public class MainWindowController {
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.getItems().add(deleteItem);
             contextMenu.getItems().add(doneItem);
-            // Context menu for sorting
-            sortMenu = new Menu("Sort...");
-            sortMenuItem1 = new MenuItem("by name (ascend)");
-            sortMenuItem2 = new MenuItem("by name (descend)");
-            sortMenuItem3 = new MenuItem("by time (ascend)");
-            sortMenuItem4 = new MenuItem("by time (descend)");
-            sortMenuItem1.setOnAction(event -> {
-                this.duke.tasks.sort(Comparator.comparing((Task a) -> a.getDescription().toUpperCase()));
-                displayTaskList.setAll(this.duke.getTasks());
-            });
-            sortMenuItem2.setOnAction(event -> {
-                this.duke.tasks.sort(Comparator.comparing((Task a) -> a.getDescription().toUpperCase()).reversed());
-                displayTaskList.setAll(this.duke.getTasks());
-            });
-            sortMenu.getItems().addAll(sortMenuItem1, sortMenuItem2);
-            ContextMenu sortContextMenu = new ContextMenu();
-            sortContextMenu.getItems().add(sortMenu);
-            middleListView.setContextMenu(sortContextMenu);
             cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
                 if (isNowEmpty) {
                     cell.setContextMenu(null);
@@ -304,5 +327,25 @@ public class MainWindowController {
         } catch (NullPointerException e) {
             // Do nothing here...
         }
+    }
+
+    @FXML
+    void sortByNameAscend(ActionEvent event) {
+        displayTaskList.sort(Comparator.comparing(Task::getDescription));
+    }
+
+    @FXML
+    void sortByNameDescend(ActionEvent event) {
+        displayTaskList.sort(Comparator.comparing(Task::getDescription).reversed());
+    }
+
+    @FXML
+    void sortByTimeAscend(ActionEvent event) {
+        System.out.println("ta");
+    }
+
+    @FXML
+    void sortByTimeDescend(ActionEvent event) {
+        System.out.println("td");
     }
 }

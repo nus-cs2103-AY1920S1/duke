@@ -111,6 +111,12 @@ public class Duke extends Application {
         return deadlines;
     }
 
+    /**
+     * Gets tasks of type Deadline.
+     *
+     * @param comparator the Comparator used to sort the returned list.
+     * @return a list of Deadline objects
+     */
     public List<Deadline> getDeadlines(Comparator<Deadline> comparator) {
         List<Deadline> deadlines = getDeadlines();
         deadlines.sort(comparator);
@@ -121,13 +127,25 @@ public class Duke extends Application {
      * Gets tasks of type Event.
      * @return a list of Event objects
      */
-    public List<Event> getEvent() {
+    public List<Event> getEvents() {
         List<Event> events = new ArrayList<>();
         for (Task t : tasks.getList()) {
             if (t instanceof Event) {
                 events.add((Event) t);
             }
         }
+        return events;
+    }
+
+    /**
+     * Gets tasks of type Event.
+     *
+     * @param comparator the Comparator used to sort the returned list.
+     * @return a list of Event objects
+     */
+    public List<Event> getEvents(Comparator<Event> comparator) {
+        List<Event> events = getEvents();
+        events.sort(comparator);
         return events;
     }
 

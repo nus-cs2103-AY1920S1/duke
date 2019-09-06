@@ -8,7 +8,7 @@ public class DukeTest {
     public void initializeTestSaveFile() {
         Duke duke = new Duke();
         assertEquals(2, duke.getTodos().size());
-        assertEquals(1, duke.getEvent().size());
+        assertEquals(1, duke.getEvents().size());
         assertEquals(1, duke.getDeadlines().size());
     }
 }

@@ -14,10 +14,10 @@ import duke.exception.DukeException;
  * Represents a parser that parses a line, returning a Command instance.
  */
 public class Parser {
-    private static final String unknownCommand = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    private static final String unknownTodo = "☹ OOPS!!! The description of a todo cannot be empty.";
-    private static final String unknownDeadline = "☹ OOPS!!! The description of a deadline cannot be empty.";
-    private static final String unknownEvent = "☹ OOPS!!! The description of an event cannot be empty.";
+    private static final String UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String UNKNOWN_TODO = "☹ OOPS!!! The description of a todo cannot be empty.";
+    private static final String UNKNOWN_DEADLINE = "☹ OOPS!!! The description of a deadline cannot be empty.";
+    private static final String UNKNOWN_EVENT = "☹ OOPS!!! The description of an event cannot be empty.";
 
     /**
      * Returns a Command instance of the specified line.
@@ -53,7 +53,7 @@ public class Parser {
             case "find":
                 return new FindCommand(line.substring(5));
             default:
-                throw new DukeException(unknownCommand);
+                throw new DukeException(UNKNOWN_COMMAND);
             }
         }
     }
@@ -80,7 +80,7 @@ public class Parser {
         }
         res[0] = sb.toString().trim();
         if (res[0].isEmpty()) {
-            throw new DukeException(deadline ? unknownDeadline : unknownEvent);
+            throw new DukeException(deadline ? UNKNOWN_DEADLINE : UNKNOWN_EVENT);
         }
         sb = new StringBuilder();
         for (int i = divide + 1; i < arr.length; i++) {

@@ -45,12 +45,24 @@ public class Deadline extends Task {
     }
 
     @Override
+    public char getDataBaseDescriptor() {
+        return 'D';
+    }
+
+    @Override
     public String getDataBaseFormat() {
-        return String.format("D | %d | %s | %s |\r\n", (isDone ? 1 : 0), description, byDate);
+        return String.format("%c | %d | %s | %s |\r\n",
+                getDataBaseDescriptor(),
+                (isDone ? 1 : 0),
+                description,
+                byDate);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byDate + ")";
+        return String.format("[%c]%s (by: %s)",
+                getDataBaseDescriptor(),
+                super.toString(),
+                byDate);
     }
 }

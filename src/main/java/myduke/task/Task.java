@@ -29,6 +29,13 @@ public abstract class Task {
     }
 
     /**
+     *  Gets the data base descriptor character.
+     *
+     * @return A unique character to identify the task.
+     */
+    public abstract char getDataBaseDescriptor();
+
+    /**
      * Gets the database string format.
      *
      * @return A database string format.

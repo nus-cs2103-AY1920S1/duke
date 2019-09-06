@@ -3,12 +3,17 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+import java.io.FileNotFoundException;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.FileInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 
 /**
@@ -16,26 +21,33 @@ import java.io.IOException;
  * to the hard disk for persistent storage.
  */
 public class Storage {
-    // static attributes
+    // CLASS ATTRIBUTES
+
+    // search for a config file which contains a path to the task list that duke should startup with
+    private static final String CONFIG_PATH = "./config/config.txt";
+    // the default path to be used if no config file is found
     private static final String DEFAULT_SAVE_PATH = "./saved_lists/savestate.tmp";
 
-    // object attributes
+
+    // OBJECT ATTRIBUTES
     private File file;
 
     /**
-     * Returns a Storage object that uses the default duke save path.
+     * Returns a Storage object. Uses the saved path in CONFIG_PATH for loading a TaskList that was last used,
+     * or the default path in DEFAULT_SAVE_PATH if no such config file was previously
+     * created.
      */
     public Storage() {
-        this.file = new File(Storage.DEFAULT_SAVE_PATH);
-    }
-
-    /**
-     * Returns a Storage object that uses the filePath provided by the user
-     * for storing and loading the task list.
-     * @param filePath String containing os filepath
-     */
-    public Storage(String filePath) {
-        this.file = new File(filePath);
+        try {
+            // if a config file containing a last-used startup path is present, use it
+            BufferedReader reader = new BufferedReader(new FileReader(CONFIG_PATH));
+            String listFilePath = reader.readLine();
+            this.file = new File(listFilePath);
+            reader.close();
+        } catch (IOException e) {
+            // else, use the default recommended path for loading and saving lists
+            this.file = new File(Storage.DEFAULT_SAVE_PATH);
+        }
     }
 
     /**
@@ -54,13 +66,15 @@ public class Storage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             list = (TaskList) ois.readObject();
             ois.close();
+            this.updateStartupConfig();
         } catch (IOException e) {
             throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
                     + "to the disk!\n"
                     + "Any changes might not be saved ):");
         } catch (ClassNotFoundException e) {
-            throw new DukeException("I'm sorry, I couldn't decipher the saved list.\n"
-                    + "It seems to be corrupted...\n"
+            throw new DukeException("I'm sorry, I couldn't decipher the saved list at:\n"
+                    + this.file.getPath() + "\n"
+                    + "It seems to be missing or corrupted...\n"
                     + "I will have to start a new list!");
         }
         return list;
@@ -82,10 +96,34 @@ public class Storage {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(list);
             oos.close();
+            this.updateStartupConfig();
         } catch (IOException e) {
-            throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
-                    + "to the disk!\n"
+            throw new DukeException("I'm so sorry! I had trouble saving the task list"
+                    + "to the following path:\n"
+                    + this.file.getPath() + "\n"
                     + "Any changes might not be saved ):");
         }
+    }
+
+    private void updateStartupConfig() throws DukeException {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(CONFIG_PATH));
+            writer.write(this.file.getPath());
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("I couldn't change my config file in '/config/config.txt'!\n"
+                    + "Did you restrict the write permissions to my own file?!");
+        }
+    }
+
+    public String getSavePath() {
+        return this.file.getPath();
+    }
+
+    public String changeSavePath(String newPath) {
+        String previousPath = this.file.getPath();
+        this.file = new File(newPath);
+        return previousPath;
     }
 }

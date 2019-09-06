@@ -17,11 +17,8 @@ public class FindCommand extends Command {
                     + searchWord
                     + "' ...";
         } else {
-            this.ui.displaySingleLine("Here are the matching tasks in your list:");
-            this.ui.displayMessage(results.toString(), 2);
             return "Here are the matching tasks in your list:\n"
                     + ui.indentMessage(results.toString());
-
         }
     }
 }

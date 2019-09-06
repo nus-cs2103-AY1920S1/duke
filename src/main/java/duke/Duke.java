@@ -36,25 +36,6 @@ public class Duke {
     }
 
     /**
-     * Returns a Duke object with a specified load file path.
-     * Its internal task list will be loaded from the filepath
-     * specified by the first command line argument.
-     *
-     * @param filePath path to saved file.
-     */
-    public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
-
-        try {
-            this.taskList = new TaskList(this.storage.loadFromDisk());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            this.taskList = new TaskList();
-        }
-    }
-
-    /**
      * Executes user command and retrieves response, if applicable.
      *
      * @param input user command to be executed

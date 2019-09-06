@@ -1,6 +1,8 @@
 package duke.util;
 
 import duke.command.FindCommand;
+import duke.command.LoadCommand;
+import duke.command.SaveCommand;
 import duke.exception.DukeException;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -48,17 +50,13 @@ public class Parser {
             return Parser.parseDeadlineCommand(parameters);
         case "find":
             return Parser.parseFindCommand(parameters);
+        case "load":
+            return Parser.parseLoadCommand(parameters);
+        case "save":
+            return Parser.parseSaveCommand(parameters);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, "
                     + "but I don't know what that means :-(");
-        }
-    }
-
-    private static FindCommand parseFindCommand(String[] parameters) throws DukeException {
-        try {
-            return new FindCommand(parameters[1]);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Hey! You need to give me a search word to look for!");
         }
     }
 
@@ -125,6 +123,33 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
                     + " to create a deadline task.");
+        }
+    }
+
+    // parses the arguments for remaining parameters to construct a FindCommand object
+    private static FindCommand parseFindCommand(String[] parameters) throws DukeException {
+        try {
+            return new FindCommand(parameters[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Hey! You need to give me a search word to look for!");
+        }
+    }
+
+    // parses the arguments for remaining parameters to construct a LoadCommand object
+    private static LoadCommand parseLoadCommand(String[] parameters) throws DukeException {
+        try {
+            return new LoadCommand(parameters[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Hey! You need to give me a file path to work with!");
+        }
+    }
+
+    // parses the arguments for remaining parameters to construct a SaveCommand object
+    private static SaveCommand parseSaveCommand(String[] parameters) throws DukeException {
+        try {
+            return new SaveCommand(parameters[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Hey! You need to give me a file path to work with!");
         }
     }
 }

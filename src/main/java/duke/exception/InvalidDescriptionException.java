@@ -7,13 +7,13 @@ package duke.exception;
  * Duke.tasks with the wrong description given by the input in the program.
  */
 public class InvalidDescriptionException extends DukeException {
-	
-	/**
-	 * Class constructor
-	 *
-	 * @param message message to be tagged to the Duke.exception.
-	 */
-	public InvalidDescriptionException(String message) {
-		super(message);
-	}
+    
+    /**
+     * Class constructor.
+     *
+     * @param message message to be tagged to the Duke.exception.
+     */
+    public InvalidDescriptionException(String message) {
+        super(message);
+    }
 }

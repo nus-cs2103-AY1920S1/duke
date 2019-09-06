@@ -6,7 +6,7 @@ package duke.tasks;
 public class Todo extends Task {
     
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param description details of the respective task.
      */

@@ -12,6 +12,7 @@ public class Ui {
     public Ui() {
         this.messageBuffer = new StringBuilder();
     }
+
     public void showLoadingError() {
         messageBuffer.append("Unable to load file");
     }
@@ -72,7 +73,7 @@ public class Ui {
      * Appends goodbye message to message buffer.
      */
     public void reportBye() {
-         this.messageBuffer.append("Bye. Hope to see you again soon!");
+        this.messageBuffer.append("Bye. Hope to see you again soon!");
     }
 
     /**

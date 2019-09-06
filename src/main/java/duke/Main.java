@@ -15,7 +15,8 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/java/duke/data/tasks.txt");
+    private static final String FILE_PATH = "src/main/java/duke/data/tasks.txt";
+    private Duke duke = new Duke(FILE_PATH);
 
     @Override
     public void start(Stage stage) {

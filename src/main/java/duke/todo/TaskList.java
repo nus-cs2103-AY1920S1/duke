@@ -6,9 +6,11 @@ import java.lang.StringBuilder;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * TaskList class for task list operations and storage.
+ */
 public class TaskList {
     private List<Task> taskList;
-    private int counter;
 
     /**
      * Constructs a TaskList object after taking in a list of file input.
@@ -22,15 +24,18 @@ public class TaskList {
             throw new DukeException("");
         } else {
             this.taskList = new ArrayList<>();
-            this.counter = 0;
 
             for (String fileEntry : fileInput) {
+                // Split the file entry by delimiter "|"
                 String[] processedEntry = fileEntry.split("\\|", 3);
+                // Extract task type
                 String taskType = processedEntry[0].trim();
+
+                // Store todo task
                 if (taskType.equals("T")) {
                     String taskDescription = processedEntry[1];
                     this.addTask(taskDescription);
-                } else {
+                } else { // Store event and deadline tasks
                     String taskDescription = processedEntry[1].trim();
                     String taskDate = processedEntry[2].trim();
                     this.addTask(taskType, taskDescription, taskDate);
@@ -44,7 +49,6 @@ public class TaskList {
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
-        this.counter = 0;
     }
 
     /**
@@ -89,14 +93,14 @@ public class TaskList {
         Task currentTask;
 
         output.append("    Here are the tasks in your list:\n");
-        for (int i = 0; i < counter; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             currentTask = taskList.get(i);
             index = i + 1;
             output.append("    ");
             output.append(index);
             output.append(". ");
             output.append(currentTask);
-            if (i < counter - 1) {
+            if (i < taskList.size() - 1) {
                 output.append('\n');
             }
         }
@@ -119,7 +123,7 @@ public class TaskList {
      * @return Number of tasks in the list.
      */
     public int getNumOfTasks() {
-        return counter;
+        return taskList.size();
     }
 
     /**
@@ -142,14 +146,14 @@ public class TaskList {
         Task currentTask;
 
         output.append("    Here are the matching tasks in your list:\n");
-        for (int i = 0; i < counter; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             currentTask = tasksFound.get(i);
             index = i + 1;
             output.append("    ");
             output.append(index);
             output.append(". ");
             output.append(currentTask);
-            if (i < counter - 1) {
+            if (i < taskList.size() - 1) {
                 output.append('\n');
             }
         }
@@ -164,7 +168,6 @@ public class TaskList {
      * @return Task added.
      */
     public Task addTask(String taskDetail) {
-        int numOfTasks = counter++ + 1;
         Task newTask = new Todo(taskDetail);
         taskList.add(newTask);
         return newTask;
@@ -180,8 +183,6 @@ public class TaskList {
      * @return Task added.
      */
     public Task addTask(String taskType, String taskDetail, String taskDate) {
-        int numOfTasks = counter++ + 1;
-        String[] inputTask = taskDetail.split("/by|/at");
         Task newTask = new Task("");
 
         switch (taskType) {
@@ -219,7 +220,6 @@ public class TaskList {
      */
     public Task removeTask(int index) {
         Task removedTask = taskList.remove(index - 1);
-        counter--;
         return removedTask;
     }
 }

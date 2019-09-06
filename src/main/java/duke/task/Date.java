@@ -2,6 +2,9 @@ package duke.task;
 
 import java.lang.reflect.Array;
 
+/**
+ * Represents a date, contains three integers that represents the day, month, and year.
+ */
 public class Date {
     private int day;
     private int month;
@@ -14,6 +17,11 @@ public class Date {
         this.year = Integer.parseInt((String)Array.get(tempStringArr, 2));
     }
 
+    /**
+     * Returns a word description of the month.
+     *
+     * @return word description of month.
+     */
     public String monthAsString() {
         if(month == 1) {
             return "January";
@@ -42,6 +50,11 @@ public class Date {
         }
     }
 
+    /**
+     * Returns string description of the date.
+     *
+     * @return string description of date.
+     */
     @Override
     public String toString() {
         StringBuilder outputString = new StringBuilder();

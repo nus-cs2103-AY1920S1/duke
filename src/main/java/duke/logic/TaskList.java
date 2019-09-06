@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * Represents a taskList with the ability to perform features on the tasks within.
+ * Contains a task list and methods able to perform features on the tasks in the taskList.
  */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
@@ -17,17 +17,36 @@ public class TaskList {
         this.listOfTasks = new ArrayList<>();
     }
 
+    /**
+     * Returns the stored task list.
+     *
+     * @return stored task list.
+     */
     public ArrayList<Task> getListOfTasks() {
         return listOfTasks;
     }
+
+    /**
+     * Adds a new task to the end of the stored task list.
+     *
+     * @param newTask
+     */
     public void addTask(Task newTask) {
         listOfTasks.add(newTask);
     }
+
+    /**
+     * Deletes a task from the stored task list given by the index called.
+     * @param number Specified index of task in task list.
+     */
     public void deleteTask(int number) {
         Task temp = listOfTasks.get(number - 1);
         listOfTasks.remove(number - 1);
     }
 
+    /**
+     * prints out the tasks in the stored task list.
+     */
     public void printList() {
         int counter = 1;
         for (Task task : this.listOfTasks) {
@@ -37,9 +56,9 @@ public class TaskList {
     }
 
     /**
-     * Sets a duke.task in a specified position in listOfTasks as done.
+     * Sets a task in a specified position in the task list as done.
      *
-     * @param number Specified index of duke.task.duke.task.Task object in listOfTasks.
+     * @param number Specified index of task in task list.
      */
     public void setTaskAsDone(int number) {
         Task temp = this.listOfTasks.get(number - 1);
@@ -47,10 +66,10 @@ public class TaskList {
     }
 
     /**
-     * Returns a duke.task.duke.task.Task object in a specified position in listOfTasks.
+     * Returns a task in a specified position in the task list.
      *
-     * @param number Specified index of duke.task.duke.task.Task object in listOfTasks.
-     * @return duke.task.duke.task.Task
+     * @param number Specified index of task in task list.
+     * @return Task in specified position in task list.
      */
     public Task getTask(int number) { //what about case where it is empty?
         return this.listOfTasks.get(number);

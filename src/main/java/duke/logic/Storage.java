@@ -1,10 +1,6 @@
 package duke.logic;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
+import duke.task.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,28 +9,51 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage space that stores a file path.
+ */
 public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    //updateTasksToFile and appendToFile are methods used by write() to write data from programme into the file
-    private void updateTasksToFile(String filePath, String textToAdd) throws IOException {
+
+    /**
+     * Rewrites file data with text to be added.
+     *
+     * @param filePath the representation of the path of the file.
+     * @param textToAdd text to be added to file.
+     * @throws IOException when I/O operations fail.
+     */
+    private void rewriteFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
+
+    /**
+     * Appends text to be added to the end of the file data.
+     *
+     * @param filePath the representation of the path of the file.
+     * @param textToAppend text to be appended to file.
+     * @throws IOException when I/O operations fail.
+     */
     private void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * Rewrites the file data with new data from an ArrayList<Task> </Task>.
+     *
+     * @param list the ArrayList<Task> </Task> to be used.
+     */
     public void write(ArrayList<Task> list) {
         //Store all the latest data from the ArrayList
         try {
-            updateTasksToFile(this.filePath, "");
+            rewriteFile(this.filePath, "");
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
@@ -65,7 +84,12 @@ public class Storage {
         }
     }
 
-    //Loading data from file into the Array
+    /**
+     * Loads data from a file into an ArrayList<Task> </Task>.
+     *
+     * @return an ArrayList<Task> </Task> with data from file.
+     * @throws FileNotFoundException If file cannot be found.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
         File f = new File(this.filePath);

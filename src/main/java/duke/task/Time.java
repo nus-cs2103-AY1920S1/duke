@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a time. Contains two integers representing hour and minute.
+ */
 public class Time {
     private int hour;
     private int minute;
@@ -9,6 +12,11 @@ public class Time {
         this.minute = Integer.parseInt(format24h.substring(2));
     }
 
+    /**
+     * Returns string description of the time.
+     *
+     * @return string description of time.
+     */
     @Override
     public String toString() {
         StringBuilder timeString = new StringBuilder();

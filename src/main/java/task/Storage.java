@@ -54,7 +54,7 @@ public class Storage {
     public void writeData() throws IOException {
         ArrayList<Task> task = TaskList.getTasks();
         FileWriter fw = new FileWriter(Storage.FILE_PATH);
-        assert f != null : "FileWriter is null";
+        assert fw != null : "FileWriter is null";
         String stringToWrite = "";
         int counter = task.size();
 

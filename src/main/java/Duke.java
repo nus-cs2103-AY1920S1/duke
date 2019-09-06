@@ -1,5 +1,4 @@
 import commands.Command;
-
 import logic.*;
 
 import java.util.Scanner;
@@ -16,15 +15,16 @@ public class Duke {
 
     /**
      * Constructor.
-     *
-     * @param filePath filePath of the taskList.txt file
-     * @throws DukeException If encounter error in loading file
      */
-    public Duke(String filePath) throws DukeException {
-        taskListPath = filePath;
+    public Duke() {
+        taskListPath = "./src/main/data/taskList.txt";
         storage = new Storage(taskListPath);
         ui = new Ui();
-        tasks = new TaskList(storage.load());
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            Ui.printStr(e.getMessage());
+        }
     }
 
     /**
@@ -44,8 +44,12 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke("./src/main/data/taskList.txt");
-        duke.run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
     }
+
 }

@@ -119,19 +119,19 @@ public class Parser {
 
     private static PersonList parsePersonList(String[] parts) {
         PersonList list = new PersonList();
-        for(String str:parts) {
+        for (String str : parts) {
             int startIndex = str.indexOf("(");
             int endIndex = str.lastIndexOf(")");
-            if(startIndex == -1) {
+            if (startIndex == -1) {
                 String name = str;
                 list.addPerson(new Person(name));
-            }else {
-                String name = str.substring(0,startIndex);
-                String title = str.substring(startIndex+1, endIndex);
-                if(endIndex == str.length()-1) {
+            } else {
+                String name = str.substring(0, startIndex);
+                String title = str.substring(startIndex + 1, endIndex);
+                if (endIndex == str.length() - 1) {
                     list.addPerson(new Person(name, title));
-                }else {
-                    String contact = str.substring(endIndex+1);
+                } else {
+                    String contact = str.substring(endIndex + 1);
                     list.addPerson(new Person(name, title, contact));
                 }
             }

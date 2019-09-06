@@ -22,27 +22,15 @@ public class PersonList {
         return p;
     }
 
-    public Person deletePerson(String name) {
-        Person p = findPerson(name);
-        if (p != null) {
-            list.remove(p);
-        }
-        return p;
-    }
-
-    public Person findPerson(String name) {
-        for (Person p : list) {
-            if (p.getName().equals(name)) {
-                return p;
-            }
-        }
-        return null;
-    }
-
     public Person getPerson(int index) {
         return list.get(index);
     }
 
+    /**
+     * converts personlist object to string.
+     *
+     * @return string which represents a personlist object
+     */
     public String toString() {
         String output = "";
         for (int i = 0; i < this.getSize(); i++) {
@@ -54,11 +42,16 @@ public class PersonList {
         return output;
     }
 
+    /**
+     * returns personlist as a string and write to .txt
+     *
+     * @return string
+     */
     public String writer() {
         String text = "";
-        for(int i = 0; i < this.getSize(); i++) {
+        for (int i = 0; i < this.getSize(); i++) {
             Person p = this.getPerson(i);
-            if(i != 0) {
+            if (i != 0) {
                 text = text + "|";
             }
             text = text + p.toString();

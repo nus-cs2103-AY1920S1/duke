@@ -6,13 +6,20 @@ public class Person {
     private String contact;
 
     public Person(String name) {
-        this(name, "","N.A.");
+        this(name, "", "N.A.");
     }
 
     public Person(String name, String title) {
         this(name, title, "N.A.");
     }
 
+    /**
+     * constructor for Person.
+     *
+     * @param name    String of person's name
+     * @param title   person's title
+     * @param contact the person's contact number
+     */
     public Person(String name, String title, String contact) {
         this.name = name;
         this.title = title;
@@ -31,7 +38,7 @@ public class Person {
         return title;
     }
 
-    public void modifyName(String name){
+    public void modifyName(String name) {
         this.name = name;
     }
 
@@ -44,6 +51,6 @@ public class Person {
     }
 
     public String toString() {
-        return this.name+"("+this.title+")"+this.contact;
+        return this.name + "(" + this.title + ")" + this.contact;
     }
 }

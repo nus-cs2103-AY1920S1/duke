@@ -20,16 +20,16 @@ public class Task {
         this(description, new PersonList());
     }
 
+    /**
+     * constructor of task.
+     *
+     * @param description task description
+     * @param list list of people related to the task
+     */
     public Task(String description, PersonList list) {
         this.description = description;
         this.isDone = false;
         this.personList = list;
-    }
-
-    public void addPeople(PersonList list) {
-        for (int i = 0; i < list.getSize(); i++) {
-            personList.addPerson(list.getPerson(i));
-        }
     }
 
     public String getStatusIcon() {

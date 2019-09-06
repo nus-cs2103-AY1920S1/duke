@@ -10,15 +10,12 @@ public class Deadline extends Task {
     protected String time;
 
     /**
-     * constructor of Deadline task.
+     * constructor for deadline type task.
      *
-     * @param description description of the task
-     * @param by          time
+     * @param description task description
+     * @param by time by which the task should be done
+     * @param list list of people who are related to the task
      */
-    public Deadline(String description, String by) {
-        this(description, by, new PersonList());
-    }
-
     public Deadline(String description, String by, PersonList list) {
         super(description, list);
         this.by = by;
@@ -27,7 +24,7 @@ public class Deadline extends Task {
 
     private void parseBy(String str) {
         String[] splits = str.split("[/ ]");
-        assert splits.length >= 4: "Time is invalid";
+        assert splits.length >= 4 : "Time is invalid";
         day = splits[0];
         month = splits[1];
         year = splits[2];

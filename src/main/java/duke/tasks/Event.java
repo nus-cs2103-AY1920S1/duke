@@ -21,6 +21,13 @@ public class Event extends Task {
         parseAt(at);
     }
 
+    /**
+     * constructor for event.
+     *
+     * @param description task description
+     * @param at time that event is held at
+     * @param list list of people related to the event
+     */
     public Event(String description, String at, PersonList list) {
         super(description, list);
         this.at = at;

@@ -61,27 +61,49 @@ public class NewTaskWindowController {
                 case "To-Do":
                     taskList.addTask(new ToDo(descriptionTextField.getText()), storage);
                     break;
-                case "Deadline":
+                case "Deadline": {
+                    int hrs = Integer.parseInt(hours.getText());
+                    int mins = Integer.parseInt(minutes.getText());
+                    if (hrs >= 24 || hrs < 0 || mins < 0 || mins >= 60) {
+                        throw new DukeException("Invalid time inputs.");
+                    }
                     taskList.addTask(
                             new Deadline(descriptionTextField.getText(),
                                     datePicker.getValue().atTime(
-                                            Integer.parseInt(hours.getText()),
-                                            Integer.parseInt(minutes.getText()))),
+                                            hrs,
+                                            mins)),
                             storage);
                     break;
-                case "Event":
+                }
+                case "Event": {
+                    int hrs = Integer.parseInt(hours.getText());
+                    int mins = Integer.parseInt(minutes.getText());
+                    if (hrs >= 24 || hrs < 0 || mins < 0 || mins >= 60) {
+                        throw new DukeException("Invalid time inputs.");
+                    }
                     taskList.addTask(
                             new Event(descriptionTextField.getText(),
                                     datePicker.getValue().atTime(
-                                            Integer.parseInt(hours.getText()),
-                                            Integer.parseInt(minutes.getText()))),
+                                            hrs,
+                                            mins)),
                             storage);
                     break;
+                }
                 default:
                     break;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            } catch (DukeException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            } catch (NullPointerException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No date is picked.");
+                alert.showAndWait();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please input valid numbers in time field.");
+                alert.showAndWait();
             }
             parentController.refreshView();
         }

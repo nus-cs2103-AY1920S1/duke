@@ -5,6 +5,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TaskList {
@@ -45,5 +46,9 @@ public class TaskList {
     void addTask(Task task, Storage storage) throws IOException, JSONException {
         tasks.add(task);
         storage.appendToSaveFile(task);
+    }
+
+    public void sort(Comparator<Task> comparator) {
+        this.tasks.sort(comparator);
     }
 }

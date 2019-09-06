@@ -14,6 +14,7 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -107,6 +108,12 @@ public class Duke extends Application {
                 deadlines.add((Deadline) t);
             }
         }
+        return deadlines;
+    }
+
+    public List<Deadline> getDeadlines(Comparator<Deadline> comparator) {
+        List<Deadline> deadlines = getDeadlines();
+        deadlines.sort(comparator);
         return deadlines;
     }
 

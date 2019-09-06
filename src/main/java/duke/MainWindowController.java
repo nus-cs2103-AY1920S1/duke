@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 
 public class MainWindowController {
 
@@ -56,6 +57,12 @@ public class MainWindowController {
     private Text detailTimeText;
 
     private Duke duke;
+
+    private Menu sortMenu;
+    private MenuItem sortMenuItem1;
+    private MenuItem sortMenuItem2;
+    private MenuItem sortMenuItem3;
+    private MenuItem sortMenuItem4;
 
     void setDuke(Duke duke) {
         this.duke = duke;
@@ -211,6 +218,24 @@ public class MainWindowController {
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.getItems().add(deleteItem);
             contextMenu.getItems().add(doneItem);
+            // Context menu for sorting
+            sortMenu = new Menu("Sort...");
+            sortMenuItem1 = new MenuItem("by name (ascend)");
+            sortMenuItem2 = new MenuItem("by name (descend)");
+            sortMenuItem3 = new MenuItem("by time (ascend)");
+            sortMenuItem4 = new MenuItem("by time (descend)");
+            sortMenuItem1.setOnAction(event -> {
+                this.duke.tasks.sort(Comparator.comparing((Task a) -> a.getDescription().toUpperCase()));
+                displayTaskList.setAll(this.duke.getTasks());
+            });
+            sortMenuItem2.setOnAction(event -> {
+                this.duke.tasks.sort(Comparator.comparing((Task a) -> a.getDescription().toUpperCase()).reversed());
+                displayTaskList.setAll(this.duke.getTasks());
+            });
+            sortMenu.getItems().addAll(sortMenuItem1, sortMenuItem2);
+            ContextMenu sortContextMenu = new ContextMenu();
+            sortContextMenu.getItems().add(sortMenu);
+            middleListView.setContextMenu(sortContextMenu);
             cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
                 if (isNowEmpty) {
                     cell.setContextMenu(null);

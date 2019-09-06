@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Constructs a command line interface that handles display of prompts and receiving user input.
      *
-     * @deprecated Use {@link #Ui(MainWindow)} instead.
+     * @deprecated use {@link #Ui(MainWindow)} instead.
      */
     @Deprecated
     public Ui() {
@@ -26,7 +26,7 @@ public class Ui {
     /**
      * Prints a message to the console.
      *
-     * @deprecated Use {@link #printGuiMessage(String)} instead.
+     * @deprecated use {@link #printGuiMessage(String)} instead.
      * @param message the message to be printed.
      */
     @Deprecated
@@ -61,7 +61,7 @@ public class Ui {
     /**
      * Reads a command from user input in the console.
      *
-     * @deprecated Because of the addition of the graphic interface.
+     * @deprecated because of the addition of the graphic interface.
      * @return the raw command string read from user input.
      */
     @Deprecated

@@ -5,9 +5,12 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import duke.exception.*;
 import duke.task.*;
+import duke.parser.Parser;
 
 public class Ui {
     private static int cnt = 0;
+
+    private static Parser p = new Parser();
 
     private TaskList list;
 
@@ -22,53 +25,63 @@ public class Ui {
     public void action(String cmd) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
         Task t;
 
-        if (cmd.toLowerCase().startsWith("done")) {
-            if (cmd.length() <= 5 || parseInt(cmd.substring(5)) >= list.size() + 1) {
-                throw (new CompleteTaskException());
-            }
-            int index = parseInt(cmd.substring(5));
-            list.get(index - 1).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list.get(index - 1).toString());
-            return;
-        } else if (cmd.toLowerCase().startsWith("delete")) {
-            if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {
-                throw (new DeleteTaskException());
-            }
-            int index = parseInt(cmd.substring(7));
-            System.out.println("Noted! I've removed this task:");
-            System.out.println(list.get(index - 1).toString());
-            list.remove(index - 1);
-            cnt--;
-            System.out.printf("Now you have %d tasks in the list.\n", list.size());
-            return;
-        } else if (cmd.toLowerCase().startsWith("deadline")) {
-            if (cmd.length() <= 9 || !cmd.contains("/")) {
-                throw (new DukeWrongTaskException("deadline"));
-            }
-            // finding the position of "/"
-            int index = cmd.indexOf("/");
-            String desc = cmd.substring(9, index - 1);
-            String ddl = cmd.substring(index + 4);
-            t = new Deadline(desc, ddl);
-            list.add(cnt++, t);
-        } else if (cmd.toLowerCase().startsWith("event")) {
-            if (cmd.length() <= 6 || !cmd.contains("/")) {
-                throw (new DukeWrongTaskException("event"));
-            }
-            int index = cmd.indexOf("/");
-            String desc = cmd.substring(6, index - 1);
-            String dt = cmd.substring(index + 4);
-            t = new Event(desc, dt);
-            list.add(cnt++, t);
-        } else if (cmd.toLowerCase().startsWith("todo")){
-            if (cmd.length() <= 5) {
-                throw (new DukeWrongTaskException("toDo"));
-            }
-            t = new ToDo(cmd.substring(5));
-            list.add(cnt++, t);
-        } else {
-            throw (new UnknownCmdException());
+        String command = p.parseCommand(cmd);
+
+        int index = 0;
+
+        String desc = "";
+
+        switch (command) {
+            case "done":
+                if (cmd.length() <= 5 || parseInt(cmd.substring(5)) >= list.size() + 1) {
+                    throw (new CompleteTaskException());
+                }
+                index = parseInt(cmd.substring(5));
+                list.get(index - 1).markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(list.get(index - 1).toString());
+                return;
+            case "delete":
+                if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {
+                    throw (new DeleteTaskException());
+                }
+                index = parseInt(cmd.substring(7));
+                System.out.println("Noted! I've removed this task:");
+                System.out.println(list.get(index - 1).toString());
+                list.remove(index - 1);
+                cnt--;
+                System.out.printf("Now you have %d tasks in the list.\n", list.size());
+                return;
+            case "deadline":
+                if (cmd.length() <= 9 || !cmd.contains("/")) {
+                    throw (new DukeWrongTaskException("deadline"));
+                }
+                // finding the position of "/"
+                index = cmd.indexOf("/");
+                desc = cmd.substring(9, index - 1);
+                String ddl = p.parseDate(cmd);
+                t = new Deadline(desc, ddl);
+                list.add(cnt++, t);
+                break;
+            case "event":
+                if (cmd.length() <= 6 || !cmd.contains("/")) {
+                    throw (new DukeWrongTaskException("event"));
+                }
+                index = cmd.indexOf("/");
+                desc = cmd.substring(6, index - 1);
+                String dt = p.parseDate(cmd);
+                t = new Event(desc, dt);
+                list.add(cnt++, t);
+                break;
+            case "todo":
+                if (cmd.length() <= 5) {
+                    throw (new DukeWrongTaskException("toDo"));
+                }
+                t = new ToDo(cmd.substring(5));
+                list.add(cnt++, t);
+                break;
+            default:
+                throw (new UnknownCmdException());
         }
         System.out.println("Got it. I've added this task:");
         System.out.println(t);
@@ -86,8 +99,9 @@ public class Ui {
             System.out.print("\n");
             System.out.println("How can I help you?");
             String input = sc.nextLine();
+            String command = p.parseCommand(input);
 
-            switch (input.toLowerCase()) {
+            switch (command) {
                 case "bye":
                     System.out.println("Saving tasks...");
                     System.out.println("Bye. Hope to see you again soon!");

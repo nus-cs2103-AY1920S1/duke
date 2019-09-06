@@ -1,6 +1,5 @@
 import duke.exception.DukeException;
 import duke.frontend.Ui;
-import duke.exception.EmptyListException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 

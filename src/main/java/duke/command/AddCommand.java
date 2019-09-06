@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Tell whether this is an exit duke.command.
+     * Tells whether this is an exit duke.command.
      *
      * @return false
      */
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add the new task into task list.
+     * Adds the new task into task list.
      *
      * @param taskList The list of duke.tasks maintained in duke.Duke
      * @param ui       Ui module

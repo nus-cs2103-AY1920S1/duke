@@ -15,7 +15,7 @@ import duke.tasks.Todo;
 
 public class Parser {
     /**
-     * parse the command string and create according type of command.
+     * parses the command string and create according type of command.
      *
      * @param fullCommand string of command
      * @return return a new command

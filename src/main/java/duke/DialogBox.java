@@ -43,6 +43,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns dialog.
+     *
+     * @param text String of displayed text.
+     * @param img image to be shown in dialog box as person profile photo.
+     * @return Dialog box object.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

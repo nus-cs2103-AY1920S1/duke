@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Execute exit duke.command.
+     * Executes exit command.
      *
      * @param taskList The list of tasks maintained in Duke
      * @param ui       Ui module

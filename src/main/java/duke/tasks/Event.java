@@ -8,7 +8,7 @@ public class Event extends Task {
     protected String time;
 
     /**
-     * create an event task.
+     * creates an event task.
      *
      * @param description description of the task
      * @param at          time information

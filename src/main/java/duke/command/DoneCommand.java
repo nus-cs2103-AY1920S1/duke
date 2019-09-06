@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execute done command.
+     * Executes done command.
      *
      * @param taskList The list of tasks maintained in Duke
      * @param ui       Ui module

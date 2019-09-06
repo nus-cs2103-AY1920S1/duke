@@ -8,14 +8,14 @@ import duke.ui.Ui;
 
 public abstract class Command {
     /**
-     * Tell whether the duke.command is exit duke.command.
+     * Tells whether the duke.command is exit duke.command.
      *
      * @return true when it is.
      */
     public abstract boolean isExit();
 
     /**
-     * Execute the duke.command according to the duke.command type.
+     * Executes the duke.command according to the duke.command type.
      *
      * @param taskList The list of duke.tasks maintained in duke.Duke
      * @param ui       Ui module

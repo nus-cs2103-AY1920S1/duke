@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Tells whether the duke.command is exit command.
+     * Tells whether the command is exit command.
      *
      * @return true when it is.
      */
@@ -27,10 +27,10 @@ public class FindCommand extends Command {
     /**
      * Execute the duke.command according to the command type.
      *
-     * @param taskList The list of duke.tasks maintained in Duke
+     * @param taskList The list of tasks maintained in Duke
      * @param ui       Ui module
      * @param storage  in charge of loading and saving the tasks
-     * @throws DukeException when the duke.command is invalid
+     * @throws DukeException when the command is invalid
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> findList = new ArrayList<>();

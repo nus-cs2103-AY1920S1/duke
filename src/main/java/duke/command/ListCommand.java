@@ -11,9 +11,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * List out all the tasks currently in the list.
+     * Lists out all the tasks currently in the list.
      *
-     * @param taskList The list of duke.tasks maintained in Duke
+     * @param taskList The list of tasks maintained in Duke
      * @param ui       Ui module
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when execution encounters problem

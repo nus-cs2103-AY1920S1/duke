@@ -10,7 +10,7 @@ public class Ui {
     }
 
     /**
-     * read the user input.
+     * reads the user input.
      *
      * @return return string
      */
@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * print out greeting information.
+     * prints out greeting information.
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -38,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * show errors encountered during execution.
+     * shows errors encountered during execution.
      *
      * @param message error message
      */
@@ -55,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * print out information in certain format.
+     * prints out information in certain format.
      *
      * @param str message to be printed
      */

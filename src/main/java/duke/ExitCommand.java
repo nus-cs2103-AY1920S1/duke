@@ -14,9 +14,9 @@ public class ExitCommand extends Command {
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printExitMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.closeScanner();
+        return ui.printExitMessage();
     }
 
     /**

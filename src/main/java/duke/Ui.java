@@ -46,75 +46,73 @@ public class Ui {
     /**
      * Prints formatting line.
      */
-    void showLine() {
-        System.out.println("_____________________________________________________________________________");
+    String showLine() {
+        return "_____________________________________________________________________________";
     }
 
     /**
      * Prints exit command message.
      */
-    void printExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!\n");
+    String printExitMessage() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Prints list command message.
      */
-    void printListMessage() {
-        System.out.println("Here are the tasks in your list:\n");
+    String printListMessage() {
+        return "Here are the tasks in your list:\n";
     }
 
     /**
      * Prints find command message.
      */
-    void printFindMessage() {
-        System.out.println("Here are the matching tasks in your list:\n");
+    String printFindMessage() {
+        return "Here are the matching tasks in your list:\n";
     }
 
     /**
      * Prints delete command message.
      */
-    void printDeleteMessage(Task task, TaskList tasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.getListSize() + " tasks in the list.");
+    String printDeleteMessage(Task task, TaskList tasks) {
+        String deleteMessage = "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
+        return deleteMessage;
     }
 
     /**
      * Prints done command message.
      */
-    void printDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done: \n"
-                + "[" + task.getStatusIcon() + "] " + task.description);
+    String printDoneMessage(Task task) {
+        return "Nice! I've marked this task as done: \n"
+                + "[" + task.getStatusIcon() + "] " + task.description;
     }
 
     /**
      * Prints add command message.
      */
-    void printAddMessage(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.getListSize() + " tasks in the list.");
+    String printAddMessage(Task task, TaskList tasks) {
+        String addMessage = "Got it. I've added this task:" + task + "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
+        return addMessage;
     }
 
     /**
      * Prints exception message.
      */
-    void printException(Exception ex) {
-        System.out.println(ex.getMessage());
+    String printException(Exception ex) {
+        return ex.getMessage();
     }
 
     /**
      * Prints loading error message.
      */
-    void showLoadingError() {
-        System.out.println("Loading Error");
+    String showLoadingError() {
+        return "Loading Error";
     }
 
     /**
      * Prints error message.
      */
-    void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    String showError(String errorMessage) {
+        return errorMessage;
     }
 }

@@ -42,7 +42,7 @@ application {
     mainClassName = "duke.Launcher"
 }
 
-run {
-    standardInput = System.in
-}
+//run {
+    //standardInput = System.in
+//}
 

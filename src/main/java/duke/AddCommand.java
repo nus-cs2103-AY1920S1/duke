@@ -21,15 +21,16 @@ public class AddCommand extends Command {
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(this.task);
-        ui.printAddMessage(this.task, tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         try {
+            tasks.addTask(this.task);
             storage.writeToHardDisk(tasks);
+            return ui.printAddMessage(this.task, tasks);
         } catch (DukeException ex) {
-            ui.printException(ex);
+            return ui.printException(ex);
         }
+
     }
 
     /**

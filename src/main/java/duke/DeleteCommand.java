@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.getListSize()) {
             throw new DukeException("OOPS!!! duke.Task not found.");
         }
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
             ui.printException(ex);
         }
 
-        ui.printDeleteMessage(task, tasks);
+        return ui.printDeleteMessage(task, tasks);
     }
 
     /**

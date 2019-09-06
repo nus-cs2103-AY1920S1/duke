@@ -8,15 +8,17 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printFindMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ui.printFindMessage());
         int counter = 0;
         for (Task t: tasks.taskList) {
             if (t.description.contains(word)) {
                 counter++;
-                System.out.println(counter + ". " + t);
+                sb.append(counter + ". " + t + "\n");
             }
         }
+        return sb.toString();
     }
 
     @Override

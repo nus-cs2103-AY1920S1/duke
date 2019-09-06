@@ -1,6 +1,5 @@
-package duke.text;
+package duke.command;
 
-import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -21,12 +20,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         List<Task> foundTasks = PAT.splitAsStream(keyWord)
                 .map(x -> tasks.find(x))
                 .flatMap(x -> x.stream())
                 .distinct()
                 .collect(Collectors.toList());
-        ui.showFoundTasks(foundTasks);
+        return ui.showFoundTasks(foundTasks);
     }
 }

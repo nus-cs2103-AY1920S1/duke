@@ -76,7 +76,7 @@ public class Task {
      * @return Tick if done, cross if not done.
      */
     public String getDoneStatus() {
-        return isDone() ? "1" : "0";
+        return isDone() ? "\u2714" : "\u2718";
     }
 
     @Override

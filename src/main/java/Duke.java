@@ -5,14 +5,34 @@ import duke.task.TaskList;
 import duke.text.Parser;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
+import javax.swing.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.SequenceInputStream;
 
 public class Duke {
     protected TaskList tasks;
     protected Storage storage;
     protected Ui ui;
+    protected String output;
+    protected boolean isExit = false;
 
+    public Duke(){};
     /**
      * Duke Constructor that takes in a filePath where application data would be stored.
      *
@@ -42,19 +62,39 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                output = c.execute(tasks, ui, storage);
+                System.out.println(output);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                output = ui.showError(e.getMessage());
             } finally {
-                ui.showLine();
+                output = ui.showLine();
             }
         }
+    }
+
+    public boolean getExit() {
+        return isExit;
+    }
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand);
+            stringBuilder.append(c.execute(tasks, ui, storage));
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            stringBuilder.append(ui.showError(e.getMessage()));
+        }
+        return stringBuilder.toString();
     }
 }

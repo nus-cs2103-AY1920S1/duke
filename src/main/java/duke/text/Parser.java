@@ -5,6 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -57,8 +58,7 @@ public class Parser {
 
         case "done":
             if (fullCommandSplit.length < 2) {
-                throw new DukeException("OOPS!!! The index of " + commandWord
-                        + " operation cannot be empty.");
+                throw new DukeException("OOPS!!! The index of " + commandWord + " operation cannot be empty.");
             }
 
             if (!fullCommandSplit[1].matches("(0|[1-9]\\d*)")) {

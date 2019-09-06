@@ -1,0 +1,23 @@
+.root {
+    -fx-font-family: "Lucida Handwriting";
+}
+
+#dialogContainer {
+    -fx-font-size: 14px;
+    -fx-padding: 0 5px 0 5px;
+}
+
+DialogBox {
+    -fx-label-padding: 0;
+    -fx-background-color: #eee;
+}
+
+DialogBox Label, FlippedDialogBox Label {
+    -fx-border-color: #000000;
+    -fx-border-radius: 10px;
+    -fx-padding: 0 10px 5px 10px;
+}
+
+DialogBox Label {
+
+}

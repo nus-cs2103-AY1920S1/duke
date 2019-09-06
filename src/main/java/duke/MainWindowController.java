@@ -21,7 +21,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class MainWindowController {
 
@@ -65,6 +67,10 @@ public class MainWindowController {
     private MenuItem sortItemByTimeAscend;
     @FXML
     private MenuItem sortItemByTimeDescend;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private TextArea resultTextArea;
 
     private Duke duke;
 
@@ -347,5 +353,19 @@ public class MainWindowController {
     @FXML
     void sortByTimeDescend(ActionEvent event) {
         System.out.println("td");
+    }
+
+    @FXML
+    void startSearch(ActionEvent event) {
+        String keyword = searchTextField.getText();
+        List<Task> result = new ArrayList<>();
+        String output = "";
+        for (Task t : this.duke.getTasks()) {
+            if (t.getDescription().contains(keyword)) {
+                result.add(t);
+                output += t.toString() + "\n";
+            }
+        }
+        resultTextArea.setText(output);
     }
 }

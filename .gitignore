@@ -14,4 +14,4 @@ src/main/resources/docs/
 bin/
 
 # duke.Duke data
-/data/*
+/data/

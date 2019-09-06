@@ -83,9 +83,20 @@ public class Storage {
             oos.writeObject(list);
             oos.close();
         } catch (IOException e) {
-            throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
-                    + "to the disk!\n"
+            throw new DukeException("I'm so sorry! I had trouble saving the task list"
+                    + "to the following path:\n"
+                    + this.file.getPath() + "\n"
                     + "Any changes might not be saved ):");
         }
+    }
+
+    public String getSavePath() {
+        return this.file.getPath();
+    }
+
+    public String changeSavePath(String newPath) {
+        String previousPath = this.file.getPath();
+        this.file = new File(newPath);
+        return previousPath;
     }
 }

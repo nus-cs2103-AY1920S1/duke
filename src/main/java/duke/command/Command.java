@@ -21,10 +21,11 @@ public abstract class Command {
      * @param taskList a TaskList object representing list of tasks
      * @param ui a Ui object for displaying output to screen
      */
-    public void initialize(Storage storage, TaskList taskList, Ui ui) {
+    public Command initialize(Storage storage, TaskList taskList, Ui ui) {
         this.storage = storage;
         this.taskList = taskList;
         this.ui = ui;
+        return this;
     }
 
     /**

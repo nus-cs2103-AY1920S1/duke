@@ -115,6 +115,10 @@ public class TaskList implements Serializable {
         return new TaskList(resultList);
     }
 
+    public void replaceWith(TaskList newList) {
+        this.tasks = newList.tasks;
+    }
+
     /**
      * Returns a string representation of the TaskList object. The output will
      * be formatted with one Task on each line, prepended by their respective

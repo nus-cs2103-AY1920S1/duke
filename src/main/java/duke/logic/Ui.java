@@ -1,3 +1,7 @@
+package duke.logic;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -38,18 +42,18 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?" );
+        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?" );
     }
     public void showDone(Task task) {
         this.showLine();
-        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("     Nice! I've marked this duke.task as done:");
         System.out.println("       " + task);
         this.showLine();
         this.separationline();
     }
     public void showDelete(Task task, int size) {
         this.showLine();
-        System.out.println("     Nice! I've removed this task:");
+        System.out.println("     Nice! I've removed this duke.task:");
         System.out.println("       " + task);
         System.out.println("      Now you have " + size + " tasks in the list.");
         this.showLine();
@@ -57,7 +61,7 @@ public class Ui {
     }
     public void showAdd(Task task, int size) {
         this.showLine();
-        System.out.println("      Got it. I've added this task:");
+        System.out.println("      Got it. I've added this duke.task:");
         System.out.println("       " + task);
         System.out.println("      Now you have " + size + " tasks in the list.");
         this.showLine();

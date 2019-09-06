@@ -1,3 +1,11 @@
+package duke;
+
+import duke.logic.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 
@@ -72,7 +80,7 @@ public class Duke {
                         } else {
                             tasks.addTask(new Event(description, secondString));
                         }
-                    } else {//all other keywords not part of Duke's task handling schedule
+                    } else {//all other keywords not part of duke.Duke's duke.task handling schedule
                         throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException de) {

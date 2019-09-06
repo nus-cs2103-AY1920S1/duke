@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Time {
     private int hour;
     private int minute;
@@ -23,6 +25,7 @@ public class Time {
         } else {
             timeString.append(this.hour);
             if (this.minute != 0) {
+                timeString.append(":");
                 timeString.append(this.minute);
             }
             timeString.append("am");

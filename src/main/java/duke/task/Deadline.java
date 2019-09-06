@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.lang.reflect.Array;
 
 public class Deadline extends Task {

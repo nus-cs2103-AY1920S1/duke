@@ -1,3 +1,7 @@
+package duke.logic;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -33,9 +37,9 @@ public class TaskList {
     }
 
     /**
-     * Sets a task in a specified position in listOfTasks as done.
+     * Sets a duke.task in a specified position in listOfTasks as done.
      *
-     * @param number Specified index of task.Task object in listOfTasks.
+     * @param number Specified index of duke.task.duke.task.Task object in listOfTasks.
      */
     public void setTaskAsDone(int number) {
         Task temp = this.listOfTasks.get(number - 1);
@@ -43,10 +47,10 @@ public class TaskList {
     }
 
     /**
-     * Returns a task.Task object in a specified position in listOfTasks.
+     * Returns a duke.task.duke.task.Task object in a specified position in listOfTasks.
      *
-     * @param number Specified index of task.Task object in listOfTasks.
-     * @return task.Task
+     * @param number Specified index of duke.task.duke.task.Task object in listOfTasks.
+     * @return duke.task.duke.task.Task
      */
     public Task getTask(int number) { //what about case where it is empty?
         return this.listOfTasks.get(number);

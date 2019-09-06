@@ -184,8 +184,7 @@ public class Duke extends Application {
             String searchTerm = input.substring(5);
             reply = user.findTask(items, searchTerm);
         } else {
-            reply = generateTask(input);
-            assert items.size() > 0 : "List of task should be more than 0";
+            reply = parse.generateTask(input);
         }
 
         return reply;

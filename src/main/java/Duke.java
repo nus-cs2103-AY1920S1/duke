@@ -18,7 +18,7 @@ public class Duke {
     public Duke() throws IOException {
     	UI.start();
 		//ArrayList<Task> tasks = new ArrayList<Task>();
-		storage = new Storage("data/duke.txt");
+		storage = new Storage("src/main/java/data/duke.txt");
 
 		Parser parse = new Parser(storage.getTasks(), ui, storage);
 		parse.parserRead();

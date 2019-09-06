@@ -70,7 +70,7 @@ public class Parser {
                     String[] td = command.split(" ");
                     try {
                         if (td.length == 1) {
-                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         }
                         String com = td[1];
                         if (td.length > 1) {
@@ -163,7 +163,7 @@ public class Parser {
                     UI.printLineS();
                 } else {
                     try {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     } catch (DukeException e) {
                         System.out.println(e);
                     }

@@ -1,15 +1,14 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.command.Command;
 import duke.exception.DukeException;
-import duke.parser.Parser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -26,6 +25,8 @@ public class Ui extends AnchorPane {
     @FXML
     private VBox dialogContainer;
     private Duke duke;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
      * Constructor for the Ui class, initiates a new Scanner instance.
@@ -62,10 +63,10 @@ public class Ui extends AnchorPane {
      * Prints out welcome message.
      */
     public void showWelcome() {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm Duke\n" + "What can I do for you?"));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage));
     }
 
-    public void handleInput()  {
+    public void handleInput() {
         try {
             String exit = this.duke.execute(this.readCommand());
             this.printLine(exit);
@@ -80,7 +81,7 @@ public class Ui extends AnchorPane {
     public String readCommand() {
         String command = commandTextField.getText();
         commandTextField.setText("");
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(command));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(command, userImage));
         return command;
     }
 
@@ -90,7 +91,7 @@ public class Ui extends AnchorPane {
      * @param line line to be printed.
      */
     public void printLine(String line) {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(line));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(line, dukeImage));
     }
 
     /**
@@ -99,13 +100,13 @@ public class Ui extends AnchorPane {
      * @param err to be printed.
      */
     public void showError(String err) {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(err));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(err, dukeImage));
     }
 
     /**
      * Print error when storage file is empty.
      */
     public void showLoadingError() {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog("You have not stored any tasks!"));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("You have not stored any tasks!", dukeImage));
     }
 }

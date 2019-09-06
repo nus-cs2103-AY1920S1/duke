@@ -8,36 +8,30 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
-    private ArrayList<Task> tasks;
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.tasks = new ArrayList<>();
     }
-
-    public void updateTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public void updateFile(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
+    //updateTasksToFile and appendToFile are methods used by write() to write data from programme into the file
+    private void updateTasksToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
-    public void appendToFile(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath, true); // create a FileWriter in append mode
+    private void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
     }
 
-    public void arrayDataToFile() {
+    public void write(ArrayList<Task> list) {
         //Store all the latest data from the ArrayList
         try {
-            this.updateFile("");
+            updateTasksToFile(this.filePath, "");
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
-        for(Task task : this.tasks) {
+        for(Task task : list) {
             StringBuilder temp = new StringBuilder();
             temp.append(task.getTaskType());
             temp.append(" | ");
@@ -57,14 +51,16 @@ public class Storage {
                 }
             }
             try {
-                this.appendToFile(temp.toString() + System.lineSeparator());
+                appendToFile(this.filePath, temp.toString() + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error: " + e.getMessage());
             }
         }
     }
 
+    //Loading data from file into the Array
     public ArrayList<Task> load() throws FileNotFoundException {
+        ArrayList<Task> list = new ArrayList<>();
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
         while(s.hasNext()) {
@@ -88,9 +84,8 @@ public class Storage {
             if(((String)Array.get(temp, 2)).equals("1")) {
                 newTask.setDone();
             }
-            this.tasks.add(newTask);
+            list.add(newTask);
         }
-        return this.tasks;
+        return list;
     }
-
 }

@@ -1,12 +1,8 @@
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.File;
 
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -15,89 +11,95 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (FileNotFoundException e) {
             ui.showLoadingError();
-            tasks = new TaskList();  //if the file is corrupted, the tasks list will start fresh
+            tasks = new TaskList();
         }
     }
 
     public void run() {
-        ui.introduction();
+        ui.showWelcome();
         while(true) {
-            try {
-                String commandLine = ui.getNextLine();
-                Parser p = new Parser(commandLine);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-
-
-        while(reader.hasNextLine()) {
-            String input = reader.next();
-            if(input.equals("bye")) {
-                System.out.println(horLine);
-                System.out.println("     Bye. Hope to see you again soon!");
-                System.out.println(horLine);
+            Parser p = new Parser(ui.readNextLine());
+            p.parse();
+            String command = p.getCommand();
+            String taskDetails = p.getTaskDetails();
+            if(command.equals("bye")) {
+                ui.showBye();
                 break;
-            } else if(input.equals("list")){
-                System.out.println(horLine);
-                if(taskList.isEmpty()) {
+            } else if(command.equals("list")) {
+                ui.showLine();
+                if(tasks.getListOfTasks().isEmpty()) {
                     System.out.println("Sorry, there are no tasks in the list");
                 } else {
                     System.out.println("     Here are the tasks in your list:");
-                    int counter = 1;
-                    for (Task task : taskList) {
-                        System.out.println("     " + counter + "." + task);
-                        counter++;
-                    }
+                    tasks.printList();
+                    ui.showLine();
+                    ui.separationline();
                 }
-                System.out.println(horLine + "\n");
-
-            } else if(input.equals("done")) {
-                int number = reader.nextInt();
-                Task temp = taskList.get(number - 1);
-                temp.setDone();
-                System.out.println(horLine);
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + temp);
-                System.out.println(horLine + "\n");
-                storage.arrayDataToFile(taskList);
-            } else if(input.equals("delete")) {
-                int number = reader.nextInt();
-                tasks.deleteTask(number);
-                System.out.println(horLine);
-                System.out.println("     Nice! I've removed this task:");
-                System.out.println("       " + temp);
-                System.out.println("      Now you have " + taskList.size() + " tasks in the list.");
-                System.out.println(horLine + "\n");
-                storage.arrayDataToFile(taskList);
-            } else{  //all other commands
+            } else if(command.equals("done")) {
+                int number = Integer.parseInt(taskDetails);
+                Task temp = tasks.getTask(number - 1);
+                tasks.setTaskAsDone(number - 1);
+                ui.showDone(temp);
+                storage.write(tasks.getListOfTasks());
+            } else if(command.equals("delete")) {
+                int number = Integer.parseInt(taskDetails);
+                Task temp = tasks.getTask(number - 1);
+                tasks.deleteTask(number - 1);
+                int size = tasks.getListOfTasks().size();
+                ui.showDelete(temp, size);
+                storage.write(tasks.getListOfTasks());
+            } else {  //all other commands
                 try {
-                    String taskDetails = reader.nextLine().trim();
-                    tasks.addTask(input, taskDetails);
+                    if (command.equals("todo")) {
+                        if (taskDetails.equals("")) { //will it be such that String[].get(1) will be zero i.e. error?
+                            throw new DukeException("      â˜¹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        tasks.addTask(new Todo(taskDetails));
+                    } else if (command.equals("deadline") || command.equals("event")) {
+                        if(taskDetails.equals("")) {
+                            throw new DukeException("      â˜¹ OOPS!!! The description of a " +
+                                    command + " cannot be empty.");
+                        }
+                        //replace the first / so that the dates will not be split up
+                        taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
+                        String[] tempStringArr = taskDetails.split(":");
+                        String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
+                        String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
+                        if (command.equals("deadline")) {
+                            tasks.addTask(new Deadline(description, secondString));
+                        } else {
+                            tasks.addTask(new Event(description, secondString));
+                        }
+                    } else {//all other keywords not part of Duke's task handling schedule
+                        throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
                 } catch (DukeException de) {
-                    System.out.println(horLine);
+                    ui.showLine();
                     System.err.println(de.getMessage());
-                    System.out.println(horLine + "\n");
+                    ui.showLine();
+                    ui.separationline();
                     continue;  //to prevent printing of below mentioned lines
                 } catch (ArrayIndexOutOfBoundsException ae) {
-                    System.out.println(horLine);
-                    System.err.println("      ☹ OOPS!!! You need to specify the " + input +
+                    ui.showLine();
+                    System.err.println("      â˜¹ OOPS!!! You need to specify the " + command +
                             " time through a /by (deadline) and /at (event)");
-                    System.out.println(horLine + "\n");
+                    ui.showLine();
+                    ui.separationline();
                     continue;
                 }
-                System.out.println(horLine);
-                System.out.println("      Got it. I've added this task:");
-                System.out.println("       " + taskList.get(taskList.size() - 1));
-                System.out.println("      Now you have " + taskList.size() + " tasks in the list.");
-                System.out.println(horLine);
-                System.out.println();
-                storage.arrayDataToFile(taskList);
+                Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
+                int size = tasks.getListOfTasks().size();
+                ui.showAdd(temp, size);
+                storage.write(tasks.getListOfTasks());
             }
         }
     }
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
 }
+
+
+

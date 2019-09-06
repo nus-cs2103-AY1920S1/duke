@@ -5,17 +5,33 @@ public class Ui {
     public Ui() {
         reader = new Scanner(System.in);
     }
-    public void showLoadingError() {
-        System.err.println("File not found");
-    }
-    public String getNextLine() {
+
+    public String readNextLine() {
         return reader.nextLine();
     }
-    public String getNext() {
+    public String readNext() {
         return reader.next();
     }
 
-    public void introduction() {
+    public void showLoadingError() {
+        System.out.println("File not found.");
+    }
+    public void showLine() {
+        StringBuilder lineBuilder = new StringBuilder("     ");
+        for(int i = 0; i < 59; i++) {
+            lineBuilder.append("_");
+        }
+        System.out.println(lineBuilder.toString());
+    }
+    public void separationline() {
+        System.out.println();
+    }
+    public void showBye() {
+        this.showLine();
+        System.out.println("     Bye. Hope to see you again soon!");
+        this.showLine();
+    }
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -24,16 +40,28 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?" );
     }
-
-    public void showLine() {
-        StringBuilder lineBuilder = new StringBuilder("     ");
-        for(int i = 0; i < 59; i++) {
-            lineBuilder.append("_");
-        }
-        System.out.println(lineBuilder.toString());
+    public void showDone(Task task) {
+        this.showLine();
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       " + task);
+        this.showLine();
+        this.separationline();
     }
-    public void sayGoodbye() {
-        System.out.println("     Bye. Hope to see you again soon!");
+    public void showDelete(Task task, int size) {
+        this.showLine();
+        System.out.println("     Nice! I've removed this task:");
+        System.out.println("       " + task);
+        System.out.println("      Now you have " + size + " tasks in the list.");
+        this.showLine();
+        this.separationline();
+    }
+    public void showAdd(Task task, int size) {
+        this.showLine();
+        System.out.println("      Got it. I've added this task:");
+        System.out.println("       " + task);
+        System.out.println("      Now you have " + size + " tasks in the list.");
+        this.showLine();
+        this.separationline();
     }
 
 }

@@ -1,3 +1,5 @@
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -7,7 +9,15 @@ import com.google.gson.Gson;
 
 public class TaskList {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public TaskList() {
+        this.tasks = new ArrayList<Task>();
+    }
 
     public enum TaskType {
         DEADLINE,
@@ -62,23 +72,24 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + "items in this list.");
     }
 
-    public void saveToDisk() {
-        // create gson to serialise taskList
-        Gson gson = new Gson();
-        String taskListGson = gson.toJson(this);
+//    public void saveToDisk() {
+////        // create gson to serialise taskList
+////        Gson gson = new Gson();
+////        String taskListGson = gson.toJson(this);
+////
+////        // write taskList to txt file
+////    }
+////
+////    public void readFromFile() {
+////        // read json from file
+////        // TODO
+////
+////        // create type token to deal with Arraylist
+////        // todo: why can't I use Type?????
+////        Type taskListType = new TypeToken<ArrayList<Task>>(){}.getType();
+////        this.tasks = Gson.fromJson(json, taskListType);
+////    }
 
-        // write taskList to txt file
-    }
-
-    public void readFromFile() {
-        // read json from file
-        // TODO
-
-        // create type token to deal with Arraylist
-        // todo: why can't I use Type?????
-        Type taskListType = new TypeToken<ArrayList<Task>>(){}.getType();
-        this.tasks = gson.fromJson(json, taskListType);
-    }
     /**
      * Processes the given input string.
      *

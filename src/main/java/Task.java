@@ -4,6 +4,7 @@ public class Task {
     protected String type;
 
     public Task(String description) {
+        // todo: modify constructor to create new task from String
         this.description = description;
         this.isDone = false;
     }

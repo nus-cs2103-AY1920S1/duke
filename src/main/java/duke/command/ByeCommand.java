@@ -14,6 +14,6 @@ public class ByeCommand extends Command {
      */
     public String execute() throws DukeShutDownException {
         super.initialize(storage, taskList, ui);
-        return "bye";
+        throw new DukeShutDownException(ui.GOODBYE);
     }
 }

@@ -41,15 +41,15 @@ public class Duke {
      * @param input user command to be executed
      * @return response to be printed to user
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeShutDownException {
         String response;
 
         try {
             Command c = Parser.parseForCommands(input); // send it off to be parsed
             c.initialize(this.storage, this.taskList, this.ui);
             response = c.execute();
-        } catch (DukeShutDownException e) {
-            response = Ui.GOODBYE;
+        } catch (DukeShutDownException shutDownSignal) {
+            throw shutDownSignal; // throws signal to GUI to handle
         } catch (DukeException e) {
             response = e.getMessage();
         }

@@ -1,6 +1,7 @@
 package duke.view;
 
 import duke.Duke;
+import duke.exception.DukeShutDownException;
 import duke.util.Ui;
 
 import duke.view.DialogBox;
@@ -12,8 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * JavaFX Controller for MainWindow. Provides the layout for the MainWindow,
@@ -51,10 +55,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        userInput.clear();
-        publishDukeResponse(response);
+        this.publishUserInput(input);
+        try {
+            String response = duke.getResponse(input);
+            this.publishDukeResponse(response);
+        } catch (DukeShutDownException e) {
+            this.publishDukeResponse(Ui.GOODBYE);
+            this.closeWindowAndExit();
+        }
+    }
+
+    private void closeWindowAndExit() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        }, 1500);
     }
 
     // given a string with multiple lines (identified by terminating newlines),
@@ -90,5 +108,10 @@ public class MainWindow extends AnchorPane {
                     5)); // normal left padding
             dialogContainer.getChildren().add(box);
         }
+    }
+
+    private void publishUserInput(String input) {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        userInput.clear();
     }
 }

@@ -10,5 +10,5 @@ public abstract class Command {
         this.parts = parts;
     }
 
-    public abstract void execute(TaskList task) throws DukeException;
+    public abstract String execute(TaskList task) throws DukeException;
 }

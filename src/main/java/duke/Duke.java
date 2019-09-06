@@ -2,47 +2,27 @@ package duke;
 
 import duke.command.Command;
 
-/**
- * Driver class
- */
-
 public class Duke {
-    public static boolean isExiting = false;
-
-    private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
+        tasks = new TaskList(Storage.load());
     }
 
-    public void run() {
-        // Greet user
-        ui.showWelcomeMessage();
-        ui.showInitialListMessage(tasks);
+    public String getStartingMessage() {
+        return ui.getStartingMessage(tasks);
+    }
 
-        // Ask initial user input
-        while (!isExiting) {
-            String userinput = ui.readCommand();
-            Command userCommand = Parser.parse(userinput);
-
-            try {
-                userCommand.execute(tasks);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
+    public String getResponse(String input) {
+        Command userCommand = Parser.parse(input);
+        String response;
+        try {
+            response = userCommand.execute(tasks);
+        } catch (DukeException e) {
+            response = ui.getErrorMessage(e);
         }
-
-        // At this point userinput equals "bye"
-        // Save data to file
-        storage.save(tasks);
-        ui.showGoodbyeMessage();
-    }
-
-    public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
+        return response;
     }
 }

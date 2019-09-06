@@ -12,7 +12,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         // deadline
         // Remaining words
         String remainingWords = parts[1];
@@ -26,8 +26,10 @@ public class DeadlineCommand extends Command {
         tasks.add(newDeadline);
 
         // Print output of ADD
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.size() - 1));
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String response = "Got it. I've added this task:\n"
+                + tasks.get(tasks.size() - 1) + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
+
+        return response;
     }
 }

@@ -9,14 +9,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         // Delete
         int itemId = Integer.parseInt(parts[1]);
         Task currentTask = tasks.get(itemId - 1);
         tasks.remove(currentTask);
 
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(currentTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String response = "Noted. I've removed this task:" + currentTask + "\n" +
+                "Now you have " + tasks.size() + " tasks in the list.";
+        return response;
     }
 }

@@ -9,7 +9,7 @@ public class WrongCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

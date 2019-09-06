@@ -17,18 +17,14 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    private String filePath;
-
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
+    private static final String filePath = "data/duke.txt";
 
     /**
      * Add initial stored tasks into ArrayList and return it
      *
      * @return Returns an ArrayList containing the stored data
      */
-    public ArrayList<Task> load() {
+    public static ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(new File(filePath));
@@ -62,7 +58,7 @@ public class Storage {
     /**
      * Save stored tasks into text file
      */
-    public void save(TaskList tasks) {
+    public static void save(TaskList tasks) {
         try {
             PrintWriter out = new PrintWriter(new File(filePath));
             for (int i = 0; i < tasks.size(); i++) {

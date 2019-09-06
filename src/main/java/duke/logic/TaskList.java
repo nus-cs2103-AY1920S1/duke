@@ -74,4 +74,14 @@ public class TaskList {
     public Task getTask(int number) { //what about case where it is empty?
         return this.listOfTasks.get(number);
     }
+
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for(Task task : this.listOfTasks) {
+            if(task.getDescription().contains(keyword)) {
+                temp.add(task);
+            }
+        }
+        return temp;
+    }
 }

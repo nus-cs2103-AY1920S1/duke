@@ -1,6 +1,7 @@
 package duke.logic;
 
 import duke.task.Task;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -116,6 +117,17 @@ public class Ui {
         System.out.println("      Got it. I've added this duke.task:");
         System.out.println("       " + task);
         System.out.println("      Now you have " + size + " tasks in the list.");
+        this.showLine();
+        this.separationline();
+    }
+    public void showMatchingTasks(ArrayList<Task> listOfMatches) {
+        this.showLine();
+        System.out.println("      Here are the matching tasks in your list:");
+        int counter = 1;
+        for(Task task : listOfMatches) {
+            System.out.println("     " + counter + "." + task);
+            counter++;
+        }
         this.showLine();
         this.separationline();
     }

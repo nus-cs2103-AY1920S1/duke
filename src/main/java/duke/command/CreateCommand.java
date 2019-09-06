@@ -50,6 +50,7 @@ public class CreateCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         boolean isAdd = true;
         Task task = new Task(description);
+        String notification = "";
         switch (directive) {
         case "todo":
             task = new ToDo(description);
@@ -64,9 +65,16 @@ public class CreateCommand extends Command {
             isAdd = false;
         }
         if (isAdd) {
-            taskList.addItem(task);
-            String notification = ui.getNotifyTaskAdded(task, taskList.size());
-            storage.addTaskToFile(task);
+            String duplicatesFound = taskList.getDuplicates(task);
+            if (duplicatesFound.equals("")) {
+                taskList.addItem(task);
+                notification = ui.getNotifyTaskAdded(task, taskList.size());
+                storage.addTaskToFile(task);
+            }
+            else {
+                notification = "We have detected possible duplicates.\n" + duplicatesFound;
+                notification += "Please change your item description.";
+            }
             return notification;
         }
         throw new DukeException("Error Executing Create Command");

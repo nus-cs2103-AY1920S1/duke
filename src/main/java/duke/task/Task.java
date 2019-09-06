@@ -30,4 +30,15 @@ public class Task {
     public String toString() {
         return "| " + getStatusIcon() + " | " + description + " ";
     }
+
+    @Override
+    public boolean equals(Object task) {
+        if (this == task) {
+            return true;
+        }
+        else if (task instanceof Task) {
+            return ((Task) task).description.equals(this.description);
+        }
+        return false;
+    }
 }

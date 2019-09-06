@@ -43,12 +43,12 @@ public class ReadCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String output;
+        String output = "";
         if (directive.equals("list")) {
             output = ui.getPrintLine("Here are the tasks in your list:");
             output += printTaskList(taskList.getTasksList(), ui);
             return output;
-        } else { //directive.equals("find")
+        } else if (directive.equals("find")){
             output = ui.getPrintLine("Here are the matching tasks in your list:");
             ArrayList<Task> tempList = new ArrayList<>();
             for (Task task : taskList.getTasksList()) {
@@ -57,6 +57,8 @@ public class ReadCommand extends Command {
                 }
             }
             output += printTaskList(tempList, ui);
+        } else {
+            output = "Read Command is invalid as it is not of type list or find";
         }
         return output;
     }

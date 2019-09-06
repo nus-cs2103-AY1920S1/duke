@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.command.ReadCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -59,4 +60,13 @@ public class TaskList {
         }
     }
 
+    public String getDuplicates(Task newItem) {
+        String duplicates = "";
+        for (Task task: tasksList) {
+            if (task.equals(newItem)) {
+                duplicates += task.toString() + "\n";
+            }
+        }
+        return duplicates;
+    }
 }

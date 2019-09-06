@@ -3,7 +3,6 @@ package puke.command;
 import puke.storage.Storage;
 import puke.task.Task;
 import puke.task.TaskList;
-import java.io.IOException;
 
 /**
  * Class representing a command to add a new task.

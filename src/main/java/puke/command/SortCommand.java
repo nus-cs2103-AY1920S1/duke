@@ -2,7 +2,6 @@ package puke.command;
 
 import puke.storage.Storage;
 import puke.task.TaskList;
-import java.io.IOException;
 
 /**
  * Class representing a command to sort the task list in-place.

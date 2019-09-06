@@ -47,18 +47,18 @@ class Ui {
     String printFormatHelp() {
         return "Here are the valid formats of the inputs:\n" +
                 "todo<space>description\n" +
-                "   eg. todo sweep the floor\n" +
-                "   (creates a 'todo' with description 'sweep the floor'\n" +
+                "\teg. todo sweep the floor\n" +
+                "\t(creates a 'todo' with description 'sweep the floor'\n" +
                 "deadline<space>description<space>/preposition<space>time\n" +
-                "   eg. deadline assignment submission /at exam venue\n" +
-                "   (creates an 'assignment submission' deadline that is (at: exam venue)\n" +
+                "\teg. deadline assignment submission /at exam venue\n" +
+                "\t(creates an 'assignment submission' deadline that is (at: exam venue)\n" +
                 "event<space>description<space>/preposition<space>time\n" +
-                "   eg. event happy new year /on 31/12/2019 2359\n" +
-                "   (creates a 'happy new year' event that is (on: 31 Dec 2019 2359)\n" +
+                "\teg. event happy new year /on 31/12/2019 2359\n" +
+                "\t(creates a 'happy new year' event that is (on: 31 Dec 2019 2359)\n" +
                 "done<space>list_index\n" +
-                "   eg. done 6 (deletes Task number 6)\n" +
+                "\teg. done 6 (deletes Task number 6)\n" +
                 "delete<space>list_index\n" +
-                "   eg. delete 3 (deletes Task number 3)";
+                "\teg. delete 3 (deletes Task number 3)";
     }
 
     String printFind(String input, TaskList tasks) {

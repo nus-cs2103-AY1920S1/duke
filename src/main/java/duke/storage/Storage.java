@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -30,6 +31,14 @@ public class Storage {
      *
      * @return List of tasks.
      * @throws DukeException If the loading of the data failed.
+     */
+
+    /**
+     * Loads the data from the storage.
+     *
+     * @return List of tasks.
+     * @throws DukeException If data loaded was of an incorrect format
+     * @throws IOException If the storage file failed to be created.
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         try {
@@ -74,6 +83,8 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             fw.close();
             return new ArrayList<>();
+        } catch (ParseException e) {
+            throw new DukeException("The storage file contains invalid characters.");
         }
     }
 

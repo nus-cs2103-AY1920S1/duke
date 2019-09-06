@@ -11,9 +11,9 @@ import duke.command.IncorrectCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnknownCommand;
-import duke.exception.DukeException;
 import duke.util.DateUtil;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -26,9 +26,8 @@ public class Parser {
      *
      * @param fullCommand {@link String} containing the command.
      * @return {@link Command} representing the command.
-     * @throws DukeException if the command has parser errors.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) {
         String[] arr = fullCommand.trim().split(" ", 2);
         final String commandWord = arr[0];
         final String args = arr.length > 1 ? arr[1] : null;
@@ -71,7 +70,7 @@ public class Parser {
         return new ToDoCommand(description);
     }
 
-    private static Command prepareDeadline(String args) throws DukeException, IllegalArgumentException {
+    private static Command prepareDeadline(String args) throws IllegalArgumentException {
         if (args == null) {
             return new IncorrectCommand(DeadlineCommand.MESSAGE_USAGE);
         }
@@ -80,11 +79,15 @@ public class Parser {
             return new IncorrectCommand(DeadlineCommand.MESSAGE_USAGE);
         }
         String description = params[0];
-        Date by = DateUtil.parse(params[1]);
-        return new DeadlineCommand(description, by);
+        try {
+            Date by = DateUtil.parse(params[1]);
+            return new DeadlineCommand(description, by);
+        } catch (ParseException e) {
+            return new IncorrectCommand(DeadlineCommand.MESSAGE_USAGE);
+        }
     }
 
-    private static Command prepareEvent(String args) throws DukeException, IllegalArgumentException {
+    private static Command prepareEvent(String args) throws IllegalArgumentException {
         if (args == null) {
             return new IncorrectCommand(EventCommand.MESSAGE_USAGE);
         }
@@ -93,8 +96,12 @@ public class Parser {
             return new IncorrectCommand(EventCommand.MESSAGE_USAGE);
         }
         String description = params[0];
-        Date at = DateUtil.parse(params[1]);
-        return new EventCommand(description, at);
+        try {
+            Date at = DateUtil.parse(params[1]);
+            return new EventCommand(description, at);
+        } catch (ParseException e) {
+            return new IncorrectCommand(EventCommand.MESSAGE_USAGE);
+        }
     }
 
     private static Command prepareDelete(String args) {

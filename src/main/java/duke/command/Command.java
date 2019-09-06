@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Duke;
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -21,9 +20,9 @@ public abstract class Command {
     /**
      * Executes the {@link Command}.
      *
-     * @throws DukeException If the command failed to execute.
+     * @throws IOException If the data failed to save.
      */
-    public abstract CommandResult execute() throws DukeException, IOException;
+    public abstract CommandResult execute() throws IOException;
 
     /**
      * Sets the data to be used by the {@link Command}.

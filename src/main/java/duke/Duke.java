@@ -34,15 +34,11 @@ public class Duke {
      * @return The response from Duke.
      */
     public String getResponse(String input) throws IOException {
-        try {
-            Command c = Parser.parse(input);
-            c.setData(tasks, storage);
-            CommandResult result = c.execute();
-            isActive = !c.isExit();
-            return result.feedback;
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
+        Command c = Parser.parse(input);
+        c.setData(tasks, storage);
+        CommandResult result = c.execute();
+        isActive = !c.isExit();
+        return result.feedback;
     }
 
     public boolean isActive() {

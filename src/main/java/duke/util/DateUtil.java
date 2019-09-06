@@ -20,12 +20,16 @@ public class DateUtil {
      * @return A {@link Date} parsed from the {@link String}. In case of error, returns null.
      * @throws DukeException if text is null.
      */
-    public static Date parse(String text) throws DukeException {
-        try {
-            return formatter.parse(text);
-        } catch (ParseException e) {
-            throw new DukeException(e.getMessage());
-        }
+
+    /**
+     * Parses text from a string to produce a {@link Date}.
+     *
+     * @param text A {@link String}, part of which should be parsed.
+     * @return A {@link Date} parsed from the string. In case of error, returns null.
+     * @throws ParseException if the beginning of the text cannot be parsed.
+     */
+    public static Date parse(String text) throws ParseException {
+        return formatter.parse(text);
     }
 
     /**

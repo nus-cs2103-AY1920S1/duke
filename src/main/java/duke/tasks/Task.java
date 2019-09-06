@@ -1,14 +1,11 @@
 package duke.tasks;
 
-import duke.person.Person;
 import duke.person.PersonList;
-
-import java.util.ArrayList;
 
 public class Task {
     private String description;
     private boolean isDone;
-    private PersonList people;
+    private PersonList personList;
 
     public Task() {
         this("", new PersonList());
@@ -26,12 +23,12 @@ public class Task {
     public Task(String description, PersonList list) {
         this.description = description;
         this.isDone = false;
-        this.people = list;
+        this.personList = list;
     }
 
     public void addPeople(PersonList list) {
         for (int i = 0; i < list.getSize(); i++) {
-            people.addPerson(list.getPerson(i));
+            personList.addPerson(list.getPerson(i));
         }
     }
 
@@ -52,14 +49,14 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "]" + this.getDescription();
     }
 
     public String writer() {
         return "This is a task";
     }
 
-    public PersonList getPeople() {
-        return people;
+    public PersonList getPersonList() {
+        return personList;
     }
 }

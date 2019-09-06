@@ -1,6 +1,8 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+import duke.person.Person;
+import duke.person.PersonList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -10,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
@@ -33,18 +36,18 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] splits = line.split("[|]");
-                assert splits.length >= 3 : "tasks.txt should follow the format with |.";
-                int completed = Integer.parseInt(splits[1].substring(1, 2));
+                assert splits.length >= 3 : "tasks.txt should follow the format with |";
+                int completed = Integer.parseInt(splits[1]);
                 Task newTask;
                 switch (splits[0]) {
-                case "T ":
-                    newTask = new Todo(splits[2].substring(1));
+                case "T":
+                    newTask = parseTodo(splits);
                     break;
-                case "E ":
-                    newTask = new Event(splits[2].substring(1, splits[2].length() - 1), splits[3].substring(1));
+                case "E":
+                    newTask = parseEvent(splits);
                     break;
-                case "D ":
-                    newTask = new Deadline(splits[2].substring(1, splits[2].length() - 1), splits[3].substring(1));
+                case "D":
+                    newTask = parseDeadline(splits);
                     break;
                 default:
                     newTask = new Task("");
@@ -86,5 +89,42 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Tasks are not able to be saved into .txt file.");
         }
+    }
+
+    private PersonList parsePersonList(String[] parts) {
+        PersonList list = new PersonList();
+        for(String str:parts) {
+            int startIndex = str.indexOf("(");
+            int endIndex = str.lastIndexOf(")");
+            if(startIndex == -1) {
+                String name = str;
+                list.addPerson(new Person(name));
+            }else {
+                String name = str.substring(0,startIndex);
+                String title = str.substring(startIndex+1, endIndex);
+                if(endIndex == str.length()-1) {
+                    list.addPerson(new Person(name, title));
+                }else {
+                    String contact = str.substring(endIndex+1);
+                    list.addPerson(new Person(name, title, contact));
+                }
+            }
+        }
+        return list;
+    }
+
+    private Task parseTodo(String[] parts) {
+        PersonList list = parsePersonList(Arrays.copyOfRange(parts, 3, parts.length));
+        return new Todo(parts[2], list);
+    }
+
+    private Task parseEvent(String[] parts) {
+        PersonList list = parsePersonList(Arrays.copyOfRange(parts, 4, parts.length));
+        return new Event(parts[2], parts[3],list);
+    }
+
+    private Task parseDeadline(String[] parts) {
+        PersonList list = parsePersonList(Arrays.copyOfRange(parts, 4, parts.length));
+        return new Deadline(parts[2], parts[3], list);
     }
 }

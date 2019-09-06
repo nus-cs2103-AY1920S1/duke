@@ -1,6 +1,7 @@
 package duke;
 
-import duke.command.Command;
+import duke.command.TaskCommand;
+import duke.person.PersonList;
 import duke.storage.Storage;
 import duke.exception.DukeException;
 import duke.tasks.TaskList;
@@ -14,6 +15,7 @@ public class Duke extends Application {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
+    private PersonList acquaintance;
 
     /**
      * constructor for Duke.
@@ -23,6 +25,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        acquaintance = new PersonList();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -54,7 +57,7 @@ public class Duke extends Application {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = Parser.parse(fullCommand);
+                TaskCommand c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -67,7 +70,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-
     }
 
     /**

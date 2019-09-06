@@ -58,7 +58,10 @@ public class PersonList {
         String text = "";
         for(int i = 0; i < this.getSize(); i++) {
             Person p = this.getPerson(i);
-            text = text + " ["+p.toString()+"]";
+            if(i != 0) {
+                text = text + "|";
+            }
+            text = text + p.toString();
         }
         return text;
     }

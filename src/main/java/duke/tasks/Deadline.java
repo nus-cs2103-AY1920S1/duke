@@ -16,12 +16,10 @@ public class Deadline extends Task {
      * @param by          time
      */
     public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-        parseBy(by);
+        this(description, by, new PersonList());
     }
 
-    public Deadline(String description, PersonList list) {
+    public Deadline(String description, String by, PersonList list) {
         super(description, list);
         this.by = by;
         parseBy(by);
@@ -29,6 +27,7 @@ public class Deadline extends Task {
 
     private void parseBy(String str) {
         String[] splits = str.split("[/ ]");
+        assert splits.length >= 4: "Time is invalid";
         day = splits[0];
         month = splits[1];
         year = splits[2];
@@ -42,18 +41,18 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")"
-                + "\nList of People:\n" + super.getPeople().toString();
+                + "\nList of People:\n" + super.getPersonList().toString();
     }
 
     @Override
     public String writer() {
-        String text = "D | ";
+        String text = "D|";
         if (getStatus() == false) {
-            text = text.concat("0 | " + getDescription() + " | " + getBy());
+            text = text.concat("0|" + getDescription() + "|" + getBy());
         } else {
-            text = text.concat("1 | " + getDescription() + " | " + getBy());
+            text = text.concat("1|" + getDescription() + "|" + getBy());
         }
-        text = text + " |" + super.getPeople().writer();
+        text = text + "|" + super.getPersonList().writer();
         return text;
     }
 }

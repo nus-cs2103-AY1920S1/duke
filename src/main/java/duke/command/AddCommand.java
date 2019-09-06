@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class AddCommand extends Command {
+public class AddCommand extends TaskCommand {
     private Task task;
 
     /**

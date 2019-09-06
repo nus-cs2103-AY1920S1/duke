@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
-public class DoneCommand extends Command {
+public class DoneCommand extends TaskCommand {
     private int number;
 
     public DoneCommand(int number) {

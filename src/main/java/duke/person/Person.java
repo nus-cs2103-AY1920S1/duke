@@ -3,9 +3,17 @@ package duke.person;
 public class Person {
     private String name;
     private String title;
-    private int contact;
+    private String contact;
 
-    public Person(String name, String title, int contact) {
+    public Person(String name) {
+        this(name, "","N.A.");
+    }
+
+    public Person(String name, String title) {
+        this(name, title, "N.A.");
+    }
+
+    public Person(String name, String title, String contact) {
         this.name = name;
         this.title = title;
         this.contact = contact;
@@ -15,7 +23,7 @@ public class Person {
         return name;
     }
 
-    public int getContact() {
+    public String getContact() {
         return contact;
     }
 
@@ -31,11 +39,11 @@ public class Person {
         this.title = title;
     }
 
-    public void modifyContact(int contact) {
+    public void modifyContact(String contact) {
         this.contact = contact;
     }
 
     public String toString() {
-        return this.name+"("+this.title+") "+this.contact;
+        return this.name+"("+this.title+")"+this.contact;
     }
 }

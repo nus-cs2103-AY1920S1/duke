@@ -78,7 +78,7 @@ public class UI {
      */
     public String getIllegalCommandMessage() {
         String illegalCommandMessage = "____________________________________________________________\n"
-                + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                 + "____________________________________________________________";
         return illegalCommandMessage;
     }
@@ -88,7 +88,7 @@ public class UI {
      * @return loading error
      */
     public String getLoadingError() {
-        String loadingError = "\u2639 OOPS!!! I'm sorry, but file was not loaded :-(\n";
+        String loadingError = "☹ OOPS!!! I'm sorry, but file was not loaded :-(\n";
         return padMessage(loadingError);
     }
 

@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
-    private TaskList t;
+    private TaskList taskList;
 
     @BeforeEach
     public void setUp() {
-        t = new TaskList();
+        taskList = new TaskList();
     }
 
     @Test
     public void add_todo_correctly() {
         ToDo td = new ToDo("mock task");
-        String result = t.addToDo(td);
+        String result = taskList.addToDo(td);
         assertEquals(td.toString(), result);
     }
 }

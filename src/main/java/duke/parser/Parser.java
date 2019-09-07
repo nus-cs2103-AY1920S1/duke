@@ -1,6 +1,16 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.FindCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.IllegalCommand;
+import duke.commands.ToDoCommand;
+import duke.commands.DeadlineCommand;
+import duke.commands.EventCommand;
+import duke.commands.ListCommand;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -16,7 +26,7 @@ import java.util.Date;
  */
 public class Parser {
     private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
-            + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
+            + "☹ OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
 
     /**
@@ -91,7 +101,7 @@ public class Parser {
         Task t;
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
         char taskType = fullTask.charAt(3);
-        boolean done = (fullTask.charAt(6) + "").equals("\u2713");
+        boolean done = (fullTask.charAt(6) + "").equals("✓");
         String task;
         String dateString;
         Date date;

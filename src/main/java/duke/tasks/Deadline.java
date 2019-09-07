@@ -19,7 +19,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
-        String iconForDone = done ? "\u2713" : "\u2718";
+        String iconForDone = done ? "✓" : "✘";
         return String.format("[D][%s] %s (by: %s)", iconForDone, this.task, sdf.format(this.date));
     }
 }

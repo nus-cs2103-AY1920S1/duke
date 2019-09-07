@@ -253,8 +253,5 @@
             <property name="exceptionVariableName" value="expected"/>
         </module>
         <module name="CommentsIndentation"/>
-        <module name="SuppressionFilter">
-            <property name="file" value="${config_loc}/suppressions.xml"/>
-        </module>
     </module>
 </module>

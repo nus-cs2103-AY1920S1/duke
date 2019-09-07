@@ -35,7 +35,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
-        String iconForDone = done ? "\u2713" : "\u2718";
+        String iconForDone = done ? "✓" : "✘";
         return String.format("[E][%s] %s (at: %s)", iconForDone, this.task, sdf.format(this.date));
     }
 }

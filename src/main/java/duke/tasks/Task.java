@@ -38,7 +38,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String iconForDone = done ? "\u2713" : "\u2718";
+        String iconForDone = done ? "✓" : "✘";
         return String.format("[%s] %s", iconForDone, this.task);
     }
 }

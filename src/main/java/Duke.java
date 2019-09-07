@@ -28,15 +28,6 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-//    /**
-//     * Creates a Duke object to run and mediate all other components.
-//     */
-//    public Duke() {
-//        this.ui = new UI();
-//        this.storage = new Storage("C:\\Users\\AngKa\\duke\\src\\main\\java\\test.txt");
-//        this.tasks = new TaskList(storage);
-//    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -145,18 +136,4 @@ public class Duke extends Application {
     public String getResponse(String input) {
         return input;
     }
-
-
-//    private void run() {
-//        ui.greet();
-//        String[] inputArr = storage.getInput().split("\\n");
-//        for (String s : inputArr) {
-//            String input = tasks.addTask(s);
-//            if (input.equals("bye")) {
-//                break;
-//            }
-//            ui.echo(input);
-//        }
-//        ui.bye();
-//    }
 }

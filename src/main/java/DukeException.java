@@ -11,6 +11,6 @@ public class DukeException extends Exception {
      * @param errorMessage Represents the error to be displayed.
      */
     public DukeException(String errorMessage) {
-        super(errorMessage);
+        super(errorMessage + "\n(Enter \"help\" for commands in duke.)");
     }
 }

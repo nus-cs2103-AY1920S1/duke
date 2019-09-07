@@ -73,6 +73,9 @@ public class TaskList {
         case "bye":
             statement = "bye";
             break;
+        case "help":
+            statement = help();
+            break;
         default:
             statement = COMMAND;
             break;
@@ -126,5 +129,29 @@ public class TaskList {
         String statement = "Noted. I've removed this task:\n  " + t + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
         return statement;
+    }
+
+    protected String help() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String header = "Hello from\n" + logo + "Hello! I'm Duke\n" + "Here are some tips:\n";
+        String task = "To add a task, you begin with either \"todo\", \"deadline\" or \"event\".\nFollowing that, "
+                + "you can add the description of the task. (ie, \"todo read a book\".)\nIf your task is a deadline, "
+                + "you are required to add after the description, the date of the form \"/by DD/MM/YYYY\" or \"/by DD/M"
+                + "M/YYYY HHMM\" (24H format).\nIf your task is an event, you are required to add a date of the form \""
+                + "/at DD/MM/YYYY HHMM-HHMM\"(24H format).\nFailure to follow the above format will result in an error "
+                + "response from me :-(";
+        String check = "To check what tasks I have stored for you enter the word \"list\".";
+        String doneDelete = "To mark a task as done or to delete it, enter the word \"done\" or \"delete\" followed by "
+                + "a whitespace and the task number to complete the aforementioned action.\n(ie, \"done 2\" to tell me "
+                + "to mark task 2 as done.)";
+        String search = "To search for a task based on the description, enter the word \"find\" followed by a "
+                + "whitespace and the keyword you are looking for.\n(ie, \"find book\" will search for all tasks with "
+                + "the word \"book\" in the description. Take note that the keyword is case-sensitive.)";
+        String end = "Hope this guide was helpful for you \u263A";
+        return header + "\n\n" + task + "\n\n" + check + "\n\n" + doneDelete + "\n\n" + search + "\n\n" + end;
     }
 }

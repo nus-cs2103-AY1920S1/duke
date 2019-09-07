@@ -22,7 +22,7 @@ public class Parser {
                 String[] task = new String[3];
                 task[0] = raw[0];
                 String action = task[0];
-                if (action.equals("list") || action.equals("bye")) {
+                if (action.equals("list") || action.equals("bye") || action.equals("help")) {
                     if (raw.length > 1) {
                         throw new DukeActionException("\u2639 OOPS!!! I'm sorry, but " + raw[0] + " should not have" +
                                 " more than 1 argument :-(");
@@ -37,7 +37,8 @@ public class Parser {
                     task[1] = raw[1];
                     task[2] = ""; // {done/delete/find, number for done or delete, word for find, ""}
                 } else {
-                    task[0] = "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(";
+                    task[0] = "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\nEnter \"help\" for "
+                            + "commands in duke.";
                     task[1] = "";
                     task[2] = "";
                 }
@@ -60,9 +61,9 @@ public class Parser {
         } else {
             raw[0] = "";
             task[1] = String.join(" ", raw).substring(1); //{command, desc+date, ""}
-            if (task[1].contains("/by")) {
+            if (task[0].equals("deadline")) {
                 return deadlineCommand(task);
-            } else if (task[1].contains("/at")) {
+            } else if (task[0].equals("event")) {
                 return eventCommand(task);
             } else {
                 task[2] = "";

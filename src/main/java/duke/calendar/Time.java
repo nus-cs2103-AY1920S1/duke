@@ -48,7 +48,9 @@ public class Time {
             if (minute != 0) {
                 if (minute < 10) {
                     timing.append(":" + "0" + minute);
+                    assert processedTime.length() == 4;
                 } else {
+                    assert minute >= 10 && minute <= 59 : "minute should be between 10 and 59";
                     timing.append(":" + minute);
                 }
             }

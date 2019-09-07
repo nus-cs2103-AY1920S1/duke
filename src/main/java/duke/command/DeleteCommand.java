@@ -38,8 +38,10 @@ public class DeleteCommand extends Command {
             throw new DukeException("☹ OOPS!!! This item does not exist.");
         }
         Task task = tasks.getTask(index);
+        int oldNumberOfTasks = tasks.getListSize();
         tasks.deleteTask(index);
         int numberOfTasks = tasks.getListSize();
+        assert numberOfTasks == oldNumberOfTasks - 1 : "task did not get deleted";
         ui.printDeleteMessage(task, numberOfTasks);
         try {
             storage.writeToHardDisk(tasks);

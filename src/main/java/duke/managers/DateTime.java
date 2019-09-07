@@ -7,16 +7,11 @@ package duke.managers;
 import duke.exceptions.DateException;
 
 public class DateTime {
-    private String day;
-    private String month;
-    private String year;
 
     private static String[] daySuffix = {
             "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
             "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
             "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"};
-    private static String[] monthName = { "January", "February", "March", "April", "May", "June", "July", "August",
-            "September", "October", "November", "December"};
 
     public DateTime() {
 
@@ -33,9 +28,7 @@ public class DateTime {
         String mm = wordMonth(splitDate[1]) + " ";
         String yy = splitDate[2] + ", ";
         return dd + mm + yy;
-
     }
-
 
     /**
      * Adds the suffix for the day in the date String. It is used in the getDate method.
@@ -43,16 +36,7 @@ public class DateTime {
      */
     private static String addDaySuffix(String day) {
         int dayNum = Integer.parseInt(day);
-        String dayWithSuffix = day;
-        if (dayNum == 1) {
-            dayWithSuffix += "st";
-        } else if (dayNum == 2) {
-            dayWithSuffix += "nd";
-        } else if (dayNum == 3) {
-            dayWithSuffix += "rd";
-        } else {
-            dayWithSuffix += "th";
-        }
+        String dayWithSuffix = day + daySuffix[dayNum - 1];
         return dayWithSuffix;
     }
 
@@ -122,18 +106,15 @@ public class DateTime {
         String numHour;
         if (hourNum > 24) {
             throw new DateException("Invalid time entered!");
-        } else if (hourNum < 12) {
+        } else {
+            hourNum = hourNum % 12;
             if (hourNum == 0) {
                 numHour = "12";
-            } else if (hourNum < 10) {
-                numHour = hours.substring(1,2);
             } else {
-                numHour = hours;
+                numHour = hourNum + "";
             }
-        } else {
-            numHour = hourNum % 12 + "";
+            return numHour;
         }
-        return numHour;
     }
 
     /**

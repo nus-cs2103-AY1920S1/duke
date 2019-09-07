@@ -1,4 +1,4 @@
-https://travis-ci.org/joloong/duke[image:https://travis-ci.org/joloong/duke.svg?branch=master[Build Status]]
+[![Build Status](https://travis-ci.org/joloong/duke.svg?branch=master)](https://travis-ci.org/joloong/duke)
 
 # Setting up
 

@@ -18,7 +18,9 @@ public class DukeTest {
 
     @BeforeEach
     void setUpDuke() {
-        duke = new Duke("test/resources/save/DukeTestSave01.txt");
+        duke = new Duke();
+        duke.greet();
+        duke.setUp("test/resources/save/DukeTestSave01.txt");
     }
 
     @BeforeEach

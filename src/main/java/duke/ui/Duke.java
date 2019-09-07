@@ -29,24 +29,50 @@ public class Duke {
     private TaskList taskList;
     private boolean isActive;
 
+    public Duke() {
+        isActive = false;
+    }
+
     /**
-     * Constructs a new Duke instance with the working TaskList whose data is saved at the file path given.
+     * Returns the Response from activating Duke.
+     *
+     * @return The Response from activating Duke
+     */
+    public Response greet() {
+        isActive = true;
+        return Response.fromString("Hi, I'm Duke! What can I do for you?", isActive);
+    }
+
+    /**
+     * Returns the Response from Duke from to attempting to load a TaskList from the specified path.
      *
      * @param taskListPath The file path of TaskList's save file
+     * @return The Response from Duke from to attempting to load a TaskList from the specified path.
+     *
      */
-    public Duke(String taskListPath) {
+    public Response setUp(String taskListPath) {
         storage = new Storage(taskListPath);
+        Response response;
         try {
             taskList = storage.loadTaskList();
+            // task list successfully loaded
+            response = Response.fromString(
+                    String.format("Your TaskList was successfully loaded from:\n%s", taskListPath),
+                    isActive);
         } catch (DukeException e0) {
             taskList = new TaskList();
+            // try write to the path
             try {
                 storage.save(taskList);
+                // path is valid
+                response = Response.fromError(e0, isActive);
             } catch (DukeException e1) {
-                e1.printStackTrace();
+                isActive = false;
+                // path is invalid
+                response = Response.fromError(e1, isActive);
             }
         }
-        isActive = true;
+        return response;
     }
 
     /**
@@ -59,7 +85,6 @@ public class Duke {
         if (!isActive) {
             return Response.fromError(new DukeException("not accepting commands"), isActive);
         }
-
         try {
             return Response.fromString(executeCommand(Parser.parseAsCommand(input)), isActive);
         } catch (DukeException e) {

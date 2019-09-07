@@ -23,7 +23,7 @@ import java.io.IOException;
  */
 public class Gui extends Application {
 
-    private Duke duke = new Duke("main/resources/save/DukeSave01.txt");
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -40,7 +40,10 @@ public class Gui extends Application {
             stage.show();
 
             // print greeting message after the stage is shown
-            fxmlLoader.<MainWindow>getController().displayGreetingMessage();
+            fxmlLoader.<MainWindow>getController().activateDuke();
+
+            // tries to load task list, and display message/error
+            fxmlLoader.<MainWindow>getController().loadExistingTaskList("main/resources/save/DukeSave01.txt");
 
             // show the goodbye message as a popup that needs to be clicked to close duke
             fxmlLoader.<MainWindow>getController().activityStatus.addListener((observable, oldValue, newValue) -> {

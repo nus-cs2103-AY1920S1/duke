@@ -53,12 +53,32 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Displays Duke's greeting message.
+     * Tries to load an TaskList from the specified file path, and displays the Response from the attemp.
+     *
+     * @param filePath The file path from which to try to load a TaskList from
      */
-    public void displayGreetingMessage() {
+    public void loadExistingTaskList(String filePath) {
+        Response response = duke.setUp(filePath);
+        if (!response.wasCausedByError()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeNormalDialog(
+                            response.toString(),
+                            dukeImage));
+        } else {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeErrorDialog(
+                            response.toString(),
+                            dukeImage));
+        }
+    }
+
+    /**
+     * Displays the Response from activating Duke.
+     */
+    public void activateDuke() {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeNormalDialog(
-                        "Hi, I'm Duke!\nWhat can I do for you?",
+                        duke.greet().toString(),
                         dukeImage));
     }
 

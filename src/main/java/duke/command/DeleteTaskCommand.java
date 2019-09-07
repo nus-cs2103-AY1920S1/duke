@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.ui.MessageHandler;
+import duke.utilities.Storage;
+import duke.task.TaskList;
 import duke.exception.TaskDoesNotExistException;
+import duke.task.Task;
 
 /**
  * Inherits from abstract Command class.
@@ -22,20 +23,19 @@ public class DeleteTaskCommand extends Command {
      *
      * @param tasks   <code>TaskList</code> object which holds the taskList
      *                and various methods to operate on the taskList
-     * @param ui      <code>UI</code> object which handles console output
+     * @param messageHandler      <code>UI</code> object which handles console output
      * @param storage <code>Storage</code> object which allows for reading
      *                result of executed command into preset task.txt file
      * @throws TaskDoesNotExistException if taskNumber does not exist in taskList
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws TaskDoesNotExistException {
+    public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage) throws TaskDoesNotExistException {
         int taskNumber = Integer.parseInt(commandInformation);
-        tasks.deleteTask(taskNumber, true);
+        Task t = tasks.deleteTask(taskNumber);
+        String response = messageHandler.taskDeletedConfirmationMessage(t);
         storage.writeToTasksFile(tasks);
+
+        return response;
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

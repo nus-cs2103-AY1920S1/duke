@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.ui.MessageHandler;
+import duke.utilities.Storage;
+import duke.task.TaskList;
 import duke.exception.DukeException;
 import duke.task.Event;
+import duke.task.Task;
 
 import java.text.ParseException;
 
@@ -25,28 +26,29 @@ public class CreateEventCommand extends Command {
      *
      * @param tasks   <code>TaskList</code> object which holds the taskList
      *                and various methods to operate on the taskList
-     * @param ui      <code>UI</code> object which handles console output
+     * @param messageHandler      <code>UI</code> object which handles console output
      * @param storage <code>Storage</code> object which allows for reading
      *                result of executed command into preset task.txt file
      * @throws DukeException if error related to Duke commands occurs
      */
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage) throws DukeException {
         String event = this.commandInformation;
         String[] eventParts = event.split(" /at ");
         String eventText = eventParts[0];
         String at = eventParts[1];
+        String response;
 
         try {
-            tasks.addTask(new Event(eventText, at),true);
+            Task t = new Event(eventText, at);
+            tasks.addTask(new Event(eventText, at));
+            response = messageHandler.addTaskConfirmationMessage(t);
         } catch (ParseException error) {
-            System.out.println("\t " + error.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM");
+            response = error.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM";
         }
         storage.writeToTasksFile(tasks);
+
+        return response;
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

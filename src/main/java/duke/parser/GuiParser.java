@@ -49,6 +49,8 @@ public class GuiParser {
                     return result;
                 } else if (inputArray[0].equals("help")) {
                     return GuiUi.helpText();
+                } else if (inputArray[0].equals("edit")) {
+                    return processEdit(inputArray);
                 } else if (inputArray[0].equals("bye")) {
                     System.exit(0);
                 } else {
@@ -56,12 +58,80 @@ public class GuiParser {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (IndexOutOfBoundsException e) {
-                return "invalid number not in current list , please enter input again";
+                return "invalid number/num of arguments entered!";
             } catch (DukeException e) {
                 return e.toString();
             }
         }
         return "";
+    }
+
+    private String processEdit(String[] inputArray) throws DukeException {
+        // format for deadline: edit 5 change time t: 02/11/15 0500
+        // format for event: edit 2 change event t: 02/11/12 0954-1230
+        // format for toDo: edit 1 change task t:
+        int indexOfItemToEdit = Integer.parseInt(inputArray[1]);
+        String typeOfEditCommand = inputArray[2];
+        if (typeOfEditCommand.equals("desc")) {
+            return changeDescInput(inputArray, indexOfItemToEdit);
+        } else if (typeOfEditCommand.equals("time")) {
+            return changeTimeInput(inputArray, indexOfItemToEdit);
+        } else {
+            return changeDescDateTimeInput(inputArray, indexOfItemToEdit);
+        }
+    }
+
+    private String changeDescInput(String[] inputArray, int indexOfItemToEdit) throws DukeException {
+        String newDesc = " ";
+        for (int i = 3; i < inputArray.length; i++) {
+            newDesc = newDesc + inputArray[i] + " ";
+        }
+        return storeTaskList.editTask(indexOfItemToEdit, newDesc.trim(), false);
+    }
+
+    private String changeTimeInput(String[] inputArray, int indexOfItemToEdit) throws DukeException {
+        String newDateAndTime = "";
+        for (int i = 3; i < inputArray.length; i++) {
+            newDateAndTime = newDateAndTime + inputArray[i] + " ";
+        }
+        if (newDateAndTime.contains("-")) {
+            newDateAndTime = convertStringToDateEvent(newDateAndTime.trim());
+        } else {
+            newDateAndTime = convertStringToDate(newDateAndTime.trim());
+        }
+        return storeTaskList.editTask(indexOfItemToEdit, newDateAndTime, true);
+    }
+
+
+    private String changeDescDateTimeInput(String[] inputArray, int indexOfItemToEdit) throws DukeException {
+        String newDesc = " ";
+        int i = 2;
+        String temp = inputArray[i];
+        while (!temp.equals("t:")) {
+            newDesc = newDesc + temp + " ";
+            i++;
+            temp = inputArray[i];
+        }
+        //for event and deadline tasks
+        String newDateAndTime = " ";
+        if (i < inputArray.length) {
+            try {
+                i++;
+                for (int j = i; j < inputArray.length; j++) {
+                    newDateAndTime = newDateAndTime + inputArray[j] + " ";
+                }
+                if (newDateAndTime.contains("-")) {
+                    newDateAndTime = convertStringToDateEvent(newDateAndTime.trim());
+                } else {
+                    newDateAndTime = convertStringToDate(newDateAndTime.trim());
+                }
+            } catch (IndexOutOfBoundsException e) {
+                return "new duration or timing supplied "
+                        +
+                        "is not in the correct format. Type help to see format of commands";
+            }
+        }
+        return storeTaskList.editTask(indexOfItemToEdit,newDesc.trim(), newDateAndTime);
     }
 
     private String processDone(String[] inputArray) throws DukeException {

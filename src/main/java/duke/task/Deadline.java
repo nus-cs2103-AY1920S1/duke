@@ -33,4 +33,10 @@ public class Deadline extends Task {
         temp += this.dateAndTime;
         return temp;
     }
+
+    @Override
+    public void editDateAndTime(String newDateAndTime) {
+
+        this.dateAndTime = newDateAndTime;
+    }
 }

@@ -6,6 +6,7 @@ import seedu.duke.exceptions.EmptyDeadlineArgException;
 import seedu.duke.exceptions.EmptyDeadlineDescException;
 import seedu.duke.exceptions.EmptyEventArgException;
 import seedu.duke.exceptions.EmptyEventDescException;
+import seedu.duke.exceptions.EmptyFindArgException;
 import seedu.duke.exceptions.EmptyTodoDescException;
 import seedu.duke.exceptions.TaskDoesNotExistException;
 import seedu.duke.exceptions.TaskNotSpecifiedException;
@@ -85,7 +86,10 @@ public class Parser {
      * @param keyword The keyword to find.
      * @return The response.
      */
-    private String find(String keyword) {
+    private String find(String keyword) throws DukeException {
+        if (keyword.isEmpty()) {
+            throw new EmptyFindArgException();
+        }
         List<Task> list = taskList
                 .stream()
                 .filter(x -> x.getDescription().contains(keyword))

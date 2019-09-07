@@ -1,11 +1,14 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.ui.Ui;
 
 import duke.task.TaskList;
 
 import duke.storage.Storage;
+
+import java.util.List;
 
 public class DeleteCommand extends Command {
 
@@ -28,17 +31,24 @@ public class DeleteCommand extends Command {
      * @param storage The Storage object we are currently using.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         assert taskList != null || ui != null || storage != null :
                 "TaskList, Ui and Storage objects cannot be null";
 
         String response = "";
         try {
-            response = taskList.deleteTask(command, ui);
-        } catch (DukeException e) {
-            response = e.getMessage();
-        } finally {
+            List<Task> tasks = taskList.getTasks();
+            String[] done = command.split(" ");
+            int number = Integer.parseInt(done[1]);
+            Task task = tasks.get(number - 1);
+            response = taskList.deleteTask(number, task, ui);
             return response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The task number cannot be empty.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The task number does not exist.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Enter a valid task number.");
         }
     }
 

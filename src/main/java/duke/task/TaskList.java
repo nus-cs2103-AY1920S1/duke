@@ -39,82 +39,37 @@ public class TaskList {
     /**
      * Adds a Task into the list.
      *
-     * @param command User's command.
+     * @param task Task object.
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect.
      */
-    public String addTask(String command, Ui ui) throws DukeException {
-        String[] words = command.split(" ");
-        String type = words[0];
-        Task task;
-
-        try {
-            if (type.equalsIgnoreCase("todo")) {
-                task = new Todo(command.substring(5));
-            } else {
-                int index = command.indexOf('/');
-                if (type.equalsIgnoreCase("deadline")) {
-                    task = new Deadline(command.substring(9, index - 1), command.substring(index + 4));
-                } else if (type.equalsIgnoreCase("event")) {
-                    task = new Event(command.substring(6, index - 1), command.substring(index + 4));
-                } else {
-                    throw new IllegalArgumentException("OOPS!!!No such task type.");
-                }
-            }
-            tasks.add(task);
-            return ui.addedTask(task, tasks.size());
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Wrong input format. \n"
-                    + "\"Todo <description>\" or\n"
-                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\" or\n"
-                    + "\"Event <description> /at <DD/MM/YYYY> <XX:XX>\"\n");
-        } catch (IllegalArgumentException e) {
-            throw new DukeException(e.getMessage());
-        }
+    public String addTask(Task task, Ui ui) {
+        tasks.add(task);
+        return ui.addedTask(task, tasks.size());
     }
 
     /**
      * Deletes a Task in the list.
      *
-     * @param command User's command.
+     * @param taskNumber Task number to be removed from the list.
+     * @param task Task object to be removed;
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect.
      */
-    public String deleteTask(String command, Ui ui) throws DukeException {
-        try {
-            String[] done = command.split(" ");
-            int number = Integer.valueOf(done[1]);
-            Task task = tasks.get(number - 1);
-            tasks.remove(number - 1);
-            return ui.deletedTask(task, tasks.size());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The task number cannot be empty.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The task number does not exist.");
-        }
+    public String deleteTask(int taskNumber, Task task, Ui ui) {
+        tasks.remove(taskNumber - 1);
+        return ui.deletedTask(task, tasks.size());
     }
 
     /**
      * Marks a Task in the list as done.
      *
-     * @param command User's command.
+     * @param taskNumber Task number to be marked as done.
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect or if the task is already done.
      */
-    public String doneTask(String command, Ui ui) throws DukeException {
-        try {
-            String[] done = command.split(" ");
-            int number = Integer.valueOf(done[1]);
-            if (tasks.get(number - 1).isCompleted()) {
-                throw new DukeException("OOPS!!! The task is already marked as done.");
-            } else {
-                tasks.get(number - 1).markAsDone();
-                return ui.doneTask(tasks, number);
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The task number cannot be empty.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The task number does not exist.");
-        }
+    public String doneTask(int taskNumber, Ui ui) {
+        tasks.get(taskNumber - 1).markAsDone();
+        return ui.doneTask(tasks, taskNumber);
     }
 }

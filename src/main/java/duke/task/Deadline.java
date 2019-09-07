@@ -36,6 +36,26 @@ public class Deadline extends Task {
     }
 
     /**
+     * Empty constructor.
+     */
+    public Deadline() {
+    }
+
+    /**
+     * Helper method for the string in storage format.
+     *
+     * @param description Description of the Deadline.
+     * @param by Date and time of deadline.
+     * @return Deadline object.
+     */
+    public static Deadline storedDeadline(String description, String by) {
+        Deadline deadline = new Deadline();
+        deadline.description = description;
+        deadline.by = by;
+        return deadline;
+    }
+
+    /**
      * Gets the description of the Deadline task.
      *
      * @return The description of the Deadline task.

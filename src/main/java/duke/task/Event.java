@@ -35,6 +35,26 @@ public class Event extends Task {
     }
 
     /**
+     * Empty constructor.
+     */
+    public Event() {
+    }
+
+    /**
+     * Helper method for the string in storage format.
+     *
+     * @param description Description of the Event.
+     * @param at Date and time of event.
+     * @return Event object.
+     */
+    public static Event storedEvent(String description, String at) {
+        Event event = new Event();
+        event.description = description;
+        event.at = at;
+        return event;
+    }
+
+    /**
      * Gets the description of the Event task.
      *
      * @return The description of the Event task.

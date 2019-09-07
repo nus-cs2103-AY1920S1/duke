@@ -12,6 +12,3 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
-
-# data file
-src/main/data/duke.txt

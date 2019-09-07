@@ -30,7 +30,6 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
             taskList = new TaskList();
         }
     }

@@ -7,6 +7,12 @@ public class Task {
     boolean isDone;
 
     /**
+     * Default constructor.
+     */
+    public Task() {
+    }
+
+    /**
      * Constructor to create a Task object.
      *
      * @param description The task description.
@@ -63,7 +69,6 @@ public class Task {
         if (date > 31 || month > 12 || time > 2400) {
             throw new DukeException("OOPS!!! Incorrect date or time.\n");
         }
-
         String formattedDate = formatDate(year, month, date);
         String formattedTime = formatTime(time);
         return formattedDate + formattedTime;

@@ -1,6 +1,9 @@
 package duke;
 
 import duke.command.Command;
+import duke.ui.GuiUi;
+import duke.ui.SystemUi;
+import duke.ui.Ui;
 import javafx.scene.layout.VBox;
 
 public class Duke {

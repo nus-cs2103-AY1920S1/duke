@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.DialogBox;
 import javafx.scene.layout.VBox;
 
 public class GuiUi extends Ui {

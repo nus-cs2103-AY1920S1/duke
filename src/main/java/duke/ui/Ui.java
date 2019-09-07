@@ -12,7 +12,7 @@ import java.util.StringJoiner;
 
 public abstract class Ui {
     /**
-     * A convenience method to create a {@code StringJoiner} using the system's newline separator.
+     * Returns a new {@code StringJoiner} using the system's newline separator.
      *
      * @return A new instance of {@code StringJoiner}.
      */
@@ -21,8 +21,8 @@ public abstract class Ui {
     }
 
     /**
-     * A convenience method to create a {@code StringJoiner} using the system's
-     * newline separator initialized with the contents of the specified string.
+     * Returns a new {@code StringJoiner} using the system's newline separator,
+     * initialized with the contents of the specified string.
      *
      * @return A new instance of {@code StringJoiner} with the contents of the specified string.
      */
@@ -35,7 +35,7 @@ public abstract class Ui {
     }
 
     /**
-     * Convenience function to format a Task differently based on its subtype (i.e. Todo/Deadline/Event).
+     * Formats a Task differently based on its subtype (i.e. Todo/Deadline/Event).
      *
      * @param t Task instance to represent as a string, can be Todo, Deadline or Event.
      * @return A textual representation of the given Task.
@@ -86,7 +86,7 @@ public abstract class Ui {
     public abstract void printBlock(String content);
 
     /**
-     * Convenience method to display the welcome message to the user.
+     * Displays the welcome message to the user.
      */
     public void displayWelcome() {
         printBlock("Hello! I'm Duke"
@@ -95,7 +95,7 @@ public abstract class Ui {
     }
 
     /**
-     * Display an error when Duke is unable to read the Tasks stored in a file.
+     * Displays an error when Duke is unable to read the Tasks stored in a file.
      *
      * @param exc The reason for the failed read/parse operation.
      */
@@ -112,7 +112,7 @@ public abstract class Ui {
     }
 
     /**
-     * Convenience method of displaying a DukeException.
+     * Displays a DukeException to the user.
      *
      * @param exc The DukeException that will be shown to the user.
      */
@@ -121,7 +121,7 @@ public abstract class Ui {
     }
 
     /**
-     * Display the error message to the user.
+     * Displays the error message to the user.
      *
      * @param message The error message that will be shown to the user.
      */
@@ -131,7 +131,7 @@ public abstract class Ui {
     }
 
     /**
-     * Convenience method of displaying a list of tasks to the user.
+     * Displays a list of tasks to the user.
      *
      * @param tasks Tasks to be displayed.
      */
@@ -140,7 +140,7 @@ public abstract class Ui {
     }
 
     /**
-     * Display a list of tasks to the user with a title.
+     * Displays a list of tasks to the user with a title.
      *
      * @param title The title that is shown before the tasks.
      * @param tasks Tasks to be displayed.
@@ -157,8 +157,7 @@ public abstract class Ui {
     }
 
     /**
-     * Convenience method to inform the user that the
-     * task they had previously selected has been marked done.
+     * Displays a message to inform the user that the task they had previously selected has been marked done.
      *
      * @param title A friendly "marked as done" style message to show to the user.
      * @param task  The task that was marked as done.
@@ -170,8 +169,7 @@ public abstract class Ui {
     }
 
     /**
-     * Convenience method to inform the user that
-     * the task they had previously selected has been removed.
+     * Displays a message to inform the user that the task they had previously selected has been removed.
      *
      * @param title     A friendly "removal successful" style message to show to the user.
      * @param task      The task that has been removed.
@@ -185,8 +183,7 @@ public abstract class Ui {
     }
 
     /**
-     * Convenience method to inform the user
-     * that they have added a new task to their list.
+     * Displays a message to inform the user that they have added a new task to their list.
      *
      * @param title     A friendly "task added" style message to show to the user.
      * @param task      The task that had just been added.

@@ -47,8 +47,7 @@ public class Storage {
     }
 
     /**
-     * Convenience function that loads the given file path and
-     * parses the Tasks within, returning a new List of the Tasks.
+     * Loads the given file path and parses the Tasks within, returning a new List of the Tasks.
      *
      * @param file File path that contains the Tasks to load.
      * @return A new List of the Tasks represented by the given file path.
@@ -73,7 +72,7 @@ public class Storage {
     }
 
     /**
-     * Convenience function that parses the Tasks from the input, returning a new List of the Tasks.
+     * Parses the Tasks from the input, returning a new List of the Tasks.
      *
      * @param input Stream of characters to parse Tasks from.
      * @return A new List of the Tasks represented by the given input.
@@ -83,7 +82,7 @@ public class Storage {
     }
 
     /**
-     * Parse the Tasks from the input, adding to the provided List of the Tasks.
+     * Parses the Tasks from the input, adding to the provided List of the Tasks.
      *
      * @param input Stream of characters to parse Tasks from.
      * @param tasks Pre-existing List of Tasks to be append to.

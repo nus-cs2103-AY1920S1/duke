@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Getter for this Task's deadline.
+     * Returns this Task's deadline.
      *
      * @return Deadline for this task.
      */

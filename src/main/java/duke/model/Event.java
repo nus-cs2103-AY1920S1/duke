@@ -17,7 +17,7 @@ public class Event extends Task {
     }
 
     /**
-     * Getter for when this Event occurs.
+     * Returns when this Event occurs.
      *
      * @return Date and time of this Event.
      */

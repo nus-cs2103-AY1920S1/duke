@@ -3,13 +3,17 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Duke class is the driver class.
  *
  * @author scwaterbear
  */
-public class Duke {
+public class Duke extends Application {
 
     /**
      * References to important objects.
@@ -20,12 +24,10 @@ public class Duke {
 
     /**
      * Class constructor.
-     *
-     * @param filePath location of file to load and store data.
      */
-    private Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("/Users/stephenchua/duke/src/main/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -35,7 +37,7 @@ public class Duke {
     }
 
 
-    private void run() {
+    public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -50,11 +52,17 @@ public class Duke {
         }
     }
 
-    /**
-     * Main method for Duke.
-     */
     public static void main(String[] args) {
-        new Duke("/Users/stephenchua/duke/src/main/data/duke.txt").run();
+        new Duke().run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
 

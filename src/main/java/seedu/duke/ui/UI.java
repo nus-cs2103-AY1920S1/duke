@@ -1,12 +1,13 @@
 package seedu.duke.ui;
 
+import seedu.duke.commons.Messages;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 
 import java.util.Scanner;
 
 public class UI {
-    private static final String REPLY_WRAPPER = "_______________________________________________________________";
     private final Scanner in;
     private final PrintStream out;
 
@@ -20,7 +21,7 @@ public class UI {
     }
 
     public void showWelcome() {
-        printReply("Hello! I'm Duke\n\tWhat can I do for you?");
+        printReply(Messages.MESSAGE_WELCOME_MESSAGE);
     }
 
     public String readCommand() {
@@ -28,14 +29,14 @@ public class UI {
     }
 
     public void showGoodByeMessage() {
-        printReply("Bye. Hope to see you again soon.");
+        printReply(Messages.MESSAGE_GOODBYE_MESSAGE);
     }
 
     public void showLoadingError() {
-        printReply("No file found.");
+        printReply(Messages.MESSAGE_FILE_NOT_FOUND);
     }
 
     public void printReply(String reply) {
-        System.out.println("\t" + REPLY_WRAPPER + "\n\t" + reply + "\n\t" + REPLY_WRAPPER);
+        System.out.println("\t" + Messages.REPLY_WRAPPER + "\n\t" + reply + "\n\t" + Messages.REPLY_WRAPPER);
     }
 }

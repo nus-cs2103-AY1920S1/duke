@@ -26,7 +26,7 @@ public class Task {
         return this.description;
     }
 
-    public String toFile() {
+    public String writeToFile() {
         return "";
     }
 

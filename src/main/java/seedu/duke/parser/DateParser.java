@@ -11,7 +11,7 @@ public class DateParser {
      * @param strDate Represents a string meant to be a date.
      * @return Date object that corresponds to the string.
      */
-    public Date parseDate(String strDate) {
+    public Date understandDate(String strDate) {
         try {
             SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy HHmm");
             return formatter1.parse(strDate);

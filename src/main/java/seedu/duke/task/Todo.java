@@ -6,7 +6,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toFile() {
+    public String writeToFile() {
         return "T | " + (isDone ? "1" : "0") + " | " + this.description + "\n";
     }
 

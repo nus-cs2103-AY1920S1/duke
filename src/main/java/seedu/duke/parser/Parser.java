@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import seedu.duke.commons.Messages;
 import seedu.duke.ui.UI;
 import seedu.duke.exception.DukeException;
 import seedu.duke.task.TaskList;
@@ -51,7 +52,7 @@ public class Parser {
                         throw new DukeException("");
                     }
                 } catch (DukeException e) {
-                    ui.printReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    ui.printReply(Messages.MESSAGE_UNKNOWN_COMMAND);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     ui.printReply("OOPS!!! The description of a " + command.split(" ", 2)[0] + " cannot be empty");
                 }
@@ -59,7 +60,7 @@ public class Parser {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("File not found.");
+            System.out.println(Messages.MESSAGE_FILE_NOT_FOUND);
         }
     }
 
@@ -90,11 +91,11 @@ public class Parser {
         String reply = "Got it. I've added this task:\n\t  " + task + "\n\tNow you have " + taskList.size()
                 + ((taskList.size() == 1) ? " task" : " tasks") + " in the list.";
         ui.printReply(reply);
-        String replyToFile = task.toFile();
+        String replyToFile = task.writeToFile();
         try {
             fw.write(replyToFile);
         } catch (IOException e) {
-            ui.printReply("Unable to write to file.");
+            ui.printReply(Messages.MESSAGE_CANT_WRITE_TO_FILE);
         }
     }
 

@@ -17,11 +17,11 @@ public class Deadline extends Task {
     public Deadline(String description, String strBy) {
         super(description);
         this.strBy = strBy;
-        this.by = new DateParser().parseDate(strBy);
+        this.by = new DateParser().understandDate(strBy);
     }
 
     @Override
-    public String toFile() {
+    public String writeToFile() {
         return "D | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strBy + "\n";
     }
 

@@ -38,9 +38,9 @@ public class Duke {
         ui.showGoodByeMessage();
     }
 
-//    public static void main(String[] args) {
-//        new Duke("C:\\duke\\src\\data\\tasklist.txt").run();
-//    }
+    public static void main(String[] args) {
+        new Duke("C:\\duke\\src\\data\\tasklist.txt").run();
+    }
 
     /**
      * You should have your own function to generate a response to user input.

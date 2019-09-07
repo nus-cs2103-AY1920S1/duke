@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class Gui extends VBox implements UiInterface{
+public class Gui extends VBox implements UiInterface {
     private Image duke = new Image(this.getClass().getResourceAsStream("../../images/avatar_placeholder.png"));
     private Image user = new Image(this.getClass().getResourceAsStream("../../images/avatar_placeholder.png"));
 
@@ -19,41 +19,40 @@ public class Gui extends VBox implements UiInterface{
                 DialogBox.getDukeDialog(dukeMessage, duke));
     }
 
-    /***
+    /**
      * Greet user.
      */
     public void greet(boolean fileExists) {
-        if(fileExists) {
+        if (fileExists) {
             this.getChildren().addAll(
-                    DialogBox.getDukeDialog("    *** EXISTING FILE LOADED ***    " +
-                            "_____________________________________________________\n" +
-                            "     Hello! I'm Duke\n" +
-                            "     What can I do for you?\n" +
-                            "_____________________________________________________", duke
+                    DialogBox.getDukeDialog("    *** EXISTING FILE LOADED ***    "
+                            + "_____________________________________________________\n"
+                            + "     Hello! I'm Duke\n"
+                            + "     What can I do for you?\n"
+                            + "_____________________________________________________", duke
                     ));
-        }
-        else {
+        } else {
             this.getChildren().addAll(
                     DialogBox.getDukeDialog(
-                            "    *** NO EXISTING FILE FOUND ***" +
-                                    " _____________________________________________________\n" +
-                                    "     Hello! I'm Duke\n" +
-                                    "     What can I do for you?\n" +
-                                    " _____________________________________________________", duke));
+                            "    *** NO EXISTING FILE FOUND ***"
+                                    + " _____________________________________________________\n"
+                                    + "     Hello! I'm Duke\n"
+                                    + "     What can I do for you?\n"
+                                    + " _____________________________________________________", duke));
 
         }
     }
 
-    /***
+    /**
      * Echo TaskList to user.
      * @param taskList TaskList to be echoed
      */
     public void echoList(TaskList taskList) {
         String output = "";
         output += "_____________________________________________________\n";
-        if (taskList.getSize() == 0)
+        if (taskList.getSize() == 0) {
             output += "     *** List is Empty ***     \n";
-        else {
+        } else {
             output += "     Here are the tasks in your list: \n";
             for (int i = 0; i < taskList.getSize(); i++) {
                 output += String.format("     %d.%s\n",
@@ -65,16 +64,16 @@ public class Gui extends VBox implements UiInterface{
                 DialogBox.getDukeDialog(output, duke));
     }
 
-    /***
+    /**
      * Echo matching Tasks to user.
      * @param matchingTasks Matching Tasks
      */
     public void echoMatchingTasks(List<Task> matchingTasks) {
         String output = "";
         output += "_____________________________________________________\n";
-        if (matchingTasks.size() == 0)
+        if (matchingTasks.size() == 0) {
             output += "     *** List is Empty ***     \n";
-        else {
+        } else {
             output += "     Here are the matching tasks in your list: \n";
             for (int i = 0; i < matchingTasks.size(); i++) {
                 output += String.format("     %d.%s\n",
@@ -86,49 +85,49 @@ public class Gui extends VBox implements UiInterface{
                 DialogBox.getDukeDialog(output, duke));
     }
 
-    /***
+    /**
      * Echo added Task to user.
      * @param taskToAdd Added Task
-     * @param taskListSize
+     * @param taskListSize Numer of Tasks in list
      */
     public void echoAddedTask(Task taskToAdd, int taskListSize) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog("_____________________________________________________\n" +
-                        "     Got it. I've added this task: \n" +
-                        String.format("       %s \n", taskToAdd.toString()) +
-                        String.format("     Now you have %d tasks in the list.\n", taskListSize) +
-                        "_____________________________________________________", duke));
+                DialogBox.getDukeDialog("_____________________________________________________\n"
+                        + "     Got it. I've added this task: \n"
+                        + String.format("       %s \n", taskToAdd.toString())
+                        + String.format("     Now you have %d tasks in the list.\n", taskListSize)
+                        + "_____________________________________________________", duke));
     }
 
-    /***
+    /**
      * Echo completed Task to user.
      * @param taskToComplete Completed Task
      */
-    public void echoCompletedTask(Task taskToComplete){
+    public void echoCompletedTask(Task taskToComplete) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(String.format("_____________________________________________________\n" +
-                                "     Nice! I've marked this task as done: \n" +
-                                "       %s\n" +
-                                "_____________________________________________________",
+                DialogBox.getDukeDialog(String.format("_____________________________________________________\n"
+                                + "     Nice! I've marked this task as done: \n"
+                                + "       %s\n"
+                                + "_____________________________________________________",
                         taskToComplete.toString()), duke));
     }
 
-    /***
+    /**
      * Echo deleted Task to user.
      * @param taskToDelete Deleted Task
      * @param taskListSize Number of remaining Tasks in TaskList
      */
     public void echoDeletedTask(Task taskToDelete, int taskListSize) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(String.format("_____________________________________________________\n" +
-                                "     Noted. I've removed this task: \n" +
-                                "       %s\n" +
-                                "     Now you have %d tasks in the list.\n" +
-                                "_____________________________________________________",
+                DialogBox.getDukeDialog(String.format("_____________________________________________________\n"
+                                + "     Noted. I've removed this task: \n"
+                                + "       %s\n"
+                                + "     Now you have %d tasks in the list.\n"
+                                + "_____________________________________________________",
                         taskToDelete.toString(), taskListSize), duke));
     }
 
-    /***
+    /**
      * Echo Exception to user.
      * @param e Exception to be echoed
      */
@@ -137,7 +136,7 @@ public class Gui extends VBox implements UiInterface{
                 DialogBox.getDukeDialog(e.getMessage(), duke));
     }
 
-    /***
+    /**
      * Echo message to user.
      * @param msg Message to be echoed
      */
@@ -146,14 +145,14 @@ public class Gui extends VBox implements UiInterface{
                 DialogBox.getDukeDialog(msg, duke));
     }
 
-    /***
+    /**
      * Show exit message to user.
      */
     public void exit() {
         this.getChildren().addAll(
                 DialogBox.getDukeDialog(
-                        "_____________________________________________________\n" +
-                                "     Bye. Hope to see you again soon!\n" +
-                                "_____________________________________________________", duke));
+                        "_____________________________________________________\n"
+                                + "     Bye. Hope to see you again soon!\n"
+                                + "_____________________________________________________", duke));
     }
 }

@@ -49,13 +49,14 @@ public class DukeCli {
                 String inputCommand = clui.readCommand(); // Initial Input
                 Command c = Parser.parseCommand(inputCommand);
                 c.execute(storage, taskList, clui);
-                if(c.isExit)
+                if (c.isExit) {
                     isByeBye = true;
-            } catch(IndexOutOfBoundsException e) {
+                }
+            } catch (IndexOutOfBoundsException e) {
                 clui.echoException(new DukeException("Index Out of Bounds Exception Caught"));
             } catch (DukeException e) {
                 clui.echoException(e);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 clui.echoException((new DukeException(e.getMessage())));
             }
         }

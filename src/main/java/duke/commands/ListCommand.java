@@ -6,7 +6,7 @@ import duke.ui.UiInterface;
 
 public class ListCommand extends Command {
 
-    /***
+    /**
      * Class constructor.
      */
     public ListCommand() {

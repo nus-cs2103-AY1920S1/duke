@@ -4,7 +4,7 @@ import duke.core.Storage;
 import duke.core.TaskList;
 import duke.ui.UiInterface;
 
-/***
+/**
  * Abstract command class.
  */
 public abstract class Command {

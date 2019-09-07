@@ -2,7 +2,7 @@ package duke.tasks;
 
 public class Todo extends Task {
 
-    /***
+    /**
      * Class constructor.
      * @param description Description of Task
      */

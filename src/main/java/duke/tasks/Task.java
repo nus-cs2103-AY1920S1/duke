@@ -9,7 +9,7 @@ public abstract class Task {
     protected boolean isDone;
     protected TaskType type;
 
-    /***
+    /**
      * Class constructor.
      * @param description Description of Task
      * @param type Type of Task
@@ -20,7 +20,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    /***
+    /**
      * Class constructor.
      * @param description Description of Task
      * @param type Type of Task
@@ -33,45 +33,46 @@ public abstract class Task {
 
     public abstract String serialize();
 
-    /***
+    /**
      * Deserialize input String and return corresponding Task.
      * @param input Input string
-     * @throws DukeException
+     * @throws DukeException Duke exception
      */
-    static public Task deserialize(String input) throws DukeException {
+    public static Task deserialize(String input) throws DukeException {
         try {
             String[] parsedLine = input.split(" \\| ");
             switch (parsedLine[0]) {
             case "T":
                 return new Todo(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1);
             case "D":
-                return new Deadline(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, LocalDateTime.parse(parsedLine[3]));
+                return new Deadline(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1,
+                        LocalDateTime.parse(parsedLine[3]));
             case "E":
-                return new Event(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, LocalDateTime.parse(parsedLine[3]));
+                return new Event(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1,
+                        LocalDateTime.parse(parsedLine[3]));
             default:
                 return null;
             }
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("Invalid File Format");
         }
     }
 
-    /***
+    /**
      *  Return a tick or cross depending on whether task is completed.
      */
     protected String getStatusIcon() {
         return (isDone ? "V" : "X"); //return tick or X symbols
     }
 
-    /***
+    /**
      * Set task as complete.
      */
     public void setDone() {
         isDone = true;
     }
 
-    /***
+    /**
      * Check whether Task description contains given keyword.
      * @param keyword Keyword to match
      */
@@ -79,7 +80,7 @@ public abstract class Task {
         return description.contains(keyword);
     }
 
-    /***
+    /**
      * Override toString method.
      */
     @Override

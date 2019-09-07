@@ -7,7 +7,7 @@ import duke.ui.UiInterface;
 
 public class InvalidCommand extends Command {
 
-    /***
+    /**
      * Class constructor.
      */
     public InvalidCommand() {

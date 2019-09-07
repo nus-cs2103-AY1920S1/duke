@@ -16,7 +16,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -71,8 +72,8 @@ public class DukeGui extends Application {
         sendButton.setPrefWidth(55.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userTextField , 1.0);
+        AnchorPane.setRightAnchor(sendButton,1.0);
+        AnchorPane.setLeftAnchor(userTextField, 1.0);
         AnchorPane.setBottomAnchor(userTextField, 1.0);
 
         /** Functionality **/
@@ -89,6 +90,9 @@ public class DukeGui extends Application {
         initialiseDuke();
     }
 
+    /**
+     * Initialise DukeGui.
+     */
     public void initialiseDuke() {
         taskList = new TaskList();
 
@@ -106,34 +110,37 @@ public class DukeGui extends Application {
         } catch (DukeException e) {
             dialogContainer.sendDukeMessage(e.getMessage());
         }
-
     }
 
-
-
+    /**
+     * Handle user input into text box.
+     * @param userInput User input
+     */
     public void handleUserInput(String userInput) {
-        Label userText = new Label(userInput);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user))
+                DialogBox.getUserDialog(userInput, user)
         );
         getResponse(userInput);
         userTextField.clear();
     }
 
-    private void getResponse(String input) {
+    /**
+     * Interface with Duke components to get response displayed in GUI.
+     * @param input Input command
+     */
+    public void getResponse(String input) {
         try {
             String inputCommand = input; // Initial Input
             Command c = Parser.parseCommand(inputCommand);
             c.execute(storage, taskList, dialogContainer);
-            if(c.isExit) {
+            if (c.isExit) {
                 Platform.exit();
             }
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             dialogContainer.echoException(new DukeException("Index Out of Bounds Exception Caught"));
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             dialogContainer.echoException(e);
-        } catch(Exception e) {
+        } catch (Exception e) {
             dialogContainer.echoException((new DukeException(e.getMessage())));
         }
     }

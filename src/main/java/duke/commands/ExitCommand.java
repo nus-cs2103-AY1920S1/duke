@@ -6,7 +6,7 @@ import duke.ui.UiInterface;
 
 public class ExitCommand extends Command {
 
-    /***
+    /**
      * Class constructor.
      */
     public ExitCommand() {

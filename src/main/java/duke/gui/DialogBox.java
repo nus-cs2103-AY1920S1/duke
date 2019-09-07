@@ -15,6 +15,11 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     private Image duke = new Image(this.getClass().getResourceAsStream("../../images/avatar_placeholder.png"));
 
+    /**
+     * Dialog box for chat component.
+     * @param l Label text
+     * @param iv Avatar image
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -28,6 +33,10 @@ public class DialogBox extends HBox {
     }
 
     /** Functions **/
+
+    /**
+     * Flip the dialog box horizontally.
+     */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -35,10 +44,19 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    /**
+     * Get user dialog box.
+     */
+    public static DialogBox getUserDialog(String userMessage, Image img) {
+        var db = new DialogBox(new Label(userMessage), new ImageView(img));
+        return db;
     }
 
+    /**
+     * Get duke dialog box.
+     * @param dukeMessage Label text
+     * @param img Image avatar
+     */
     public static DialogBox getDukeDialog(String dukeMessage, Image img) {
         var db = new DialogBox(new Label(dukeMessage), new ImageView(img));
         db.flip();

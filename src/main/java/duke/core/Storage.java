@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Storage {
     private File taskFile;
 
-    /***
+    /**
      * Class constructor.
      * @param file File instance to be used for storage
      */
@@ -22,15 +22,15 @@ public class Storage {
         this.taskFile = file;
     }
 
-    /***
-     * Create Storage File
+    /**
+     * Create Storage File.
      */
     public void createFile() throws IOException {
         taskFile.createNewFile();
     }
 
-    /***
-     * Write input TaskList into local storage
+    /**
+     * Write input TaskList into local storage.
      * @param list TaskList to be written to local storage
      */
     public void writeTaskListToFile(TaskList list) {
@@ -47,7 +47,7 @@ public class Storage {
         }
     }
 
-    /***
+    /**
      * Append a Task into storage file.
      * @param taskToAppend Task to be appended
      */
@@ -61,10 +61,10 @@ public class Storage {
         }
     }
 
-    /***
+    /**
      * Retrieve and return lists of Tasks from storage file.
-     * @throws FileNotFoundException
-     * @throws DukeException
+     * @throws FileNotFoundException File not found exception
+     * @throws DukeException Duke exception
      */
     public List<Task> getTaskList() throws FileNotFoundException, DukeException {
         List<Task> taskList = new ArrayList<Task>();

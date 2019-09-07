@@ -34,67 +34,74 @@ public class Parser {
      * @throws IllegalDukeFormatException
      * @throws IllegalDukeArgumentException
      */
-    public void parse(Storage storage) throws IllegalDukeFormatException, IllegalDukeArgumentException {
+    public String parse(Storage storage) throws IllegalDukeFormatException, IllegalDukeArgumentException {
         switch (Command.valueOf(splitCommand[0])) {
         case list:
-            commandList();
-            break;
+            return commandList();
+            //break;
         case bye:
-            commandBye();
-            break;
+            return commandBye();
+            //break;
         case done:
-            commandDone(storage);
-            break;
+            return commandDone(storage);
+            //break;
         case todo:
-            commandTodo(storage);
-            break;
+            return commandTodo(storage);
+            //break;
         case deadline:
-            commandDeadline(storage);
-            break;
+            return commandDeadline(storage);
+            //break;
         case event:
-            commandEvent(storage);
-            break;
+            return commandEvent(storage);
+            //break;
         case delete:
-            commandDelete(storage);
-            break;
+            return commandDelete(storage);
+            //break;
         case find:
-            commandFind();
-            break;
+            return commandFind();
+            //break;
         }
+        return "";
     }
 
     /**
      * method for "list" command, print the list out
      */
-    private void commandList() {
-        String tasks = "Here are the tasks in your list:";
+    private String commandList() {
+        String tasks = "Here are the tasks in your list:\n";
         System.out.println(tasks);
-        TaskList.print();
+        return tasks + TaskList.listString() + "\n";
     }
     /**
      * method for "bye" command, print ending and set isExit to true
      */
-    private void commandBye() {
-        String Exit = "Bye. Hope to see you again soon!";
-        System.out.println(Exit);
+    private String commandBye() {
+        String Exit = "Bye. Hope to see you again soon!\n";
         Ui.setIsExit(true);
+        return Exit;
     }
 
     /**
      * method for "done" command, set the task done, and rewrite them to text file with the status updated.
      * @param storage the object to interact with
      */
-    private void commandDone(Storage storage) {
+    private String commandDone(Storage storage) {
         try {
             int index = Integer.parseInt(splitCommand[1]);
             TaskList.getList().get(index - 1).setDone();
             String done = "Nice! I've marked this task as done:\n";
-            System.out.println(done + "  " + TaskList.getList().get(index - 1));
-            for (Task t : TaskList.getList()) {
-                storage.textWrite(t.toString(), false);
+            boolean isAppend = false;
+            if (TaskList.getList().size() > 0) {
+                for (Task t : TaskList.getList()) {
+                    storage.textWrite(t.toString(), isAppend);
+                    isAppend = true;
+                }
+            } else {
+                storage.textWrite("", false);
             }
+            return done + "  " + TaskList.getList().get(index - 1) + "\n";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Selected index not exists");
+            return "Selected index not exists" + "\n";
         }
 
     }
@@ -104,14 +111,14 @@ public class Parser {
      * @param storage the object to interact with
      * @throws IllegalDukeArgumentException
      */
-    private void commandTodo(Storage storage) throws IllegalDukeArgumentException {
+    private String commandTodo(Storage storage) throws IllegalDukeArgumentException {
         try {
             String descriptionT = splitCommand[1];
             Task todo = new Todo(descriptionT);
             TaskList.getList().add(todo);
             storage.textWrite(todo.toString(), true);
-            System.out.println("Got it. I've added this task:\n" + "  "
-                    + todo + "\nNow you have " + TaskList.getList().size() + " tasks in the list.");
+            return "Got it. I've added this task:\n" + "  "
+                    + todo + "\nNow you have " + TaskList.getList().size() + " tasks in the list." + "\n";
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalDukeArgumentException();
         }
@@ -123,20 +130,20 @@ public class Parser {
      * @param storage the object to interact with
      * @throws IllegalDukeFormatException
      */
-    private void commandDeadline(Storage storage) throws IllegalDukeFormatException {
+    private String commandDeadline(Storage storage) throws IllegalDukeFormatException {
         try {
             String[] fullCommand = splitCommand[1].split(" /by ");
             String deadlineTime = fullCommand[1];
             Task deadline = new Deadline(fullCommand[0], deadlineTime);
             TaskList.getList().add(deadline);
             storage.textWrite(deadline.toString(), true);
-            System.out.println("Got it. I've added this task:\n" + "  "
+            return "Got it. I've added this task:\n" + "  "
                     + deadline + "\nNow you have " +
-                    TaskList.getList().size() + " tasks in the list.");
+                    TaskList.getList().size() + " tasks in the list." + "\n";
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalDukeFormatException("deadline");
         } catch (ParseException e) {
-            System.out.println("OOPS!!! Wrong time format!");
+            return "OOPS!!! Wrong time format!" + "\n";
         }
     }
 
@@ -145,18 +152,18 @@ public class Parser {
      * @param storage  the object to interact with
      * @throws IllegalDukeFormatException
      */
-    private void commandEvent(Storage storage) throws IllegalDukeFormatException {
+    private String commandEvent(Storage storage) throws IllegalDukeFormatException {
         try {
             String[] fullCommand = splitCommand[1].split(" /at ");
             String eventTime = fullCommand[1];
             Task event = new Event(fullCommand[0], eventTime);
             TaskList.getList().add(event);
             storage.textWrite(event.toString(), true);
-            System.out.println("Got it. I've added this task:\n" + "  "
+            return "Got it. I've added this task:\n" + "  "
                     + event + "\nNow you have " +
-                    TaskList.getList().size() + " tasks in the list.");
+                    TaskList.getList().size() + " tasks in the list." + "\n";
         } catch (ParseException e) {
-            System.out.println("OOPS!!! Wrong time format!");
+            return "OOPS!!! Wrong time format!" + "\n";
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalDukeFormatException("event");
         }
@@ -166,21 +173,29 @@ public class Parser {
      * method for "delete" command, delete the task by remove it from the taskList and rewrite list to file
      * @param storage the object to interact with
      */
-    private void commandDelete(Storage storage) {
+    private String commandDelete(Storage storage) {
         try {
             int indexD = Integer.parseInt(splitCommand[1]) - 1;
             Task removedTask = TaskList.getList().remove(indexD);
-            for (Task t : TaskList.getList()) {
-                storage.textWrite(t.toString(), false);
+            boolean isAppend = false;
+            if (TaskList.getList().size() > 0) {
+                for (Task t : TaskList.getList()) {
+                    storage.textWrite(t.toString(), isAppend);
+                    isAppend = true;
+                }
+            } else {
+                storage.textWrite("", false);
             }
-            System.out.println("Noted. I've removed this task: \n" + "  "
-                    + removedTask + "\nNow you have " + TaskList.getList().size() + " tasks in the list.");
+            return "Noted. I've removed this task: \n" + "  "
+                    + removedTask + "\nNow you have " + TaskList.getList().size() + " tasks in the list." + "\n";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Selected index not exists");
+            return "Selected index not exists" + "\n";
         }
     }
-    private void commandFind() {
+    private String commandFind() {
         String target = splitCommand[1];
+        String reply = "Here are the matching tasks in your list:\n";
+        String list = "";
         boolean isFound = false;
         LinkedList<Task> targetList = new LinkedList<>();
         for (Task task : TaskList.getList()) {
@@ -190,13 +205,13 @@ public class Parser {
             }
         }
         if (isFound) {
-            System.out.println("Here are the matching tasks in your list:");
             for (int i = 0; i < targetList.size(); i++) {
                 int index = i + 1;
-                System.out.println("  " + index + "." + targetList.get(i).toString());
+                list += "  " + index + "." + targetList.get(i).toString() +"\n";
             }
+            return list;
         } else {
-            System.out.println("OOPS! No such key word detected.");
+            return "OOPS! No such key word detected." + "\n";
         }
     }
 }

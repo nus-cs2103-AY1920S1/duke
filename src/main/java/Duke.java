@@ -11,14 +11,21 @@ import duke.list.TaskList;
 import duke.excaptions.IllegalDukeArgumentException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+
+
 public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
@@ -28,6 +35,13 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Object DialogPanel;
+
+    public Duke() {
+        this("/data/duke.txt");
+    }
 
     /**
      *This constructor is used to check if the text file exists and followed the standard.
@@ -49,24 +63,24 @@ public class Duke extends Application {
     /**
      *This method aimed to make use of the readCommand() method in Ui class, and print out a bottom line at last.
      */
-    public void run() {
-        ui.readCommand();
-        ui.showLine();
-    }
+    //public void run() {
+      //  ui.readCommand();
+        //ui.showLine();
+    //}
 
     /**
      * This method makes use of showWelcome() method in Ui class to print out the greetings.
      */
-    private void greeting() {
-        ui.showWelcome();
-    }
+   // private void greeting() {
+     //   ui.showWelcome();
+    //}
 
     /**
      * This is the main method to create a new Duke object and run it by steps,
      * which terminate the program when command "bye" appears.
      * @param args unused
      */
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         Duke duke = new Duke("Users/xutunan/duke/duke.txt");
         duke.greeting();
         duke.ui.showLine();
@@ -74,7 +88,8 @@ public class Duke extends Application {
             duke.run();
         }
 
-    }
+    }*/
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -99,11 +114,11 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(500.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(485, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -124,7 +139,75 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(new Label(ui.showWelcome()), new ImageView(duke))
+        );
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+     private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        String response = getResponse(userInput.getText());
+        Label dukeText = new Label(response);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+        userInput.clear();
+        if (response.equals("exit")) {
+            Platform.exit();
+        }
+
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        if (input.equals("bye")) {
+            return "exit";
+        } else {
+            return ui.readCommand(input);
+        }
+    }
+
 }
 
 

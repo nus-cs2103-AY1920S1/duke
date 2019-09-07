@@ -84,7 +84,6 @@ public class Storage {
      * @param isAppend check where need append
      */
     public void textWrite(String task, boolean isAppend) {
-        File file = new File("/Users/xutunan/duke/data/duke.txt");
         try {
             FileWriter writer = new FileWriter("/Users/xutunan/duke/data/duke.txt", isAppend);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);

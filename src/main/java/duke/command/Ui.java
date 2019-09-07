@@ -3,6 +3,7 @@ package duke.command;
 import duke.excaptions.IllegalDukeArgumentException;
 import duke.excaptions.IllegalDukeFormatException;
 
+import java.awt.*;
 import java.util.Scanner;
 /**
  *The Ui class is one of the class in command package which used to deal the interaction with users
@@ -22,49 +23,37 @@ public class Ui {
     /**
      * This method print out the welcome words
      */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public String showWelcome() {
         String greet = "Hello! I'm Duke\n" +
-                "What can I do for you?";
-
-        System.out.println(greet);
+                "What can I do for you?\n";
+        return greet + this.showLine();
     }
     Scanner sc = new Scanner(System.in);
 
     /**
      * this method is to read the command line by line and pass them to Parser
      */
-    public void readCommand() {
-        while(sc.hasNextLine()) {
-            String fullCommand = sc.nextLine();
-            String[] splitCommand = fullCommand.split(" ", 2);
+    public String readCommand(String userInput) {
+            String[] splitCommand = userInput.split(" ", 2);
             try {
                 Parser parser = new Parser(splitCommand);
-                parser.parse(storage);
-                if(isExit) {
-                    break;
-                }
-                this.showLine();
+                return parser.parse(storage) + this.showLine();
+
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             } catch (IllegalDukeFormatException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             } catch (IllegalDukeArgumentException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
-        }
+
     }
 
     /**
      * a method to print splitting lines
      */
-    public void showLine() {
-        System.out.println("_________________________________________________________");
+    public String showLine() {
+        return "_______________________________________________________________";
     }
 
     /**

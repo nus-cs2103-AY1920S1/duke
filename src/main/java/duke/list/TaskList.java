@@ -42,4 +42,14 @@ public class TaskList extends LinkedList<Task> {
 
 
     }
+
+    public static String listString() {
+        String listString = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            Task t = taskList.get(i);
+            listString += index + "." + t + "\n";
+        }
+        return listString;
+    }
 }

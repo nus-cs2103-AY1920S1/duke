@@ -1,3 +1,5 @@
+import javax.swing.text.View;
+
 /**
  * Makes sense of user input into a Duke Object.
  */
@@ -24,6 +26,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "help":
+            return new HelpCommand();
         case "done":
             try {
                 int taskNumber = Integer.parseInt(splitCommand[1]) - 1;
@@ -81,6 +85,65 @@ public class Parser {
                 throw new InvalidTaskDescriptionDukeException("OOF!!! "
                         + "The description/timing of an event cannot be empty!!");
             }
+        case "archive":
+            if (splitCommand.length == 1) {
+                throw new InvalidCommandDukeException("OOF!!! No archive instruction entered!!");
+            }
+
+            if (splitCommand[1].equals("create")) {
+                String newArchiveName = joinStringArrayFromIndex(splitCommand, 2);
+                return new CreateArchiveCommand(newArchiveName);
+            }
+
+            if (splitCommand[1].equals("add")) {
+                try {
+                    int taskNumber = Integer.parseInt(splitCommand[2]) - 1;
+                    String archiveName = joinStringArrayFromIndex(splitCommand, 3);
+                    return new AddArchiveTaskCommand(taskNumber, archiveName);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandDukeException("OOF!!! Please enter a task number!!");
+                }
+
+            }
+
+            if (splitCommand[1].equals("view")) {
+                String archiveName = joinStringArrayFromIndex(splitCommand, 2);
+                return new ViewArchiveCommand(archiveName);
+            }
+
+            if (splitCommand[1].equals("viewall") && splitCommand.length == 2) {
+                return new ViewAllArchiveCommand();
+            }
+
+            if (splitCommand[1].equals("list") && splitCommand.length == 2) {
+                return new ListArchiveCommand();
+            }
+
+            if (splitCommand[1].equals("delete")) {
+                try {
+                    int taskNumber = Integer.parseInt(splitCommand[2]) - 1;
+                    String archiveName = joinStringArrayFromIndex(splitCommand, 3);
+                    return new DeleteArchiveTaskCommand(taskNumber, archiveName);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandDukeException("OOF!!! Please enter a task number!!");
+                }
+            }
+
+            if (splitCommand[1].equals("deleteall")) {
+                String archiveName = joinStringArrayFromIndex(splitCommand, 2);
+                return new DeleteAllArchiveCommand(archiveName);
+            }
+
+            if (splitCommand[1].equals("revert")) {
+                try {
+                    int taskNumber = Integer.parseInt(splitCommand[2]) - 1;
+                    String archiveName = joinStringArrayFromIndex(splitCommand, 3);
+                    return new RevertArchiveTaskCommand(taskNumber, archiveName);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidCommandDukeException("OOF!!! Please enter a task number!!");
+                }
+            }
+
         default:
             throw new InvalidCommandDukeException("OOF!!! I'm sorry, but I don't know what that means :-(");
         }

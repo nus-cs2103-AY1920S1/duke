@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.util.HashMap;
+
 /**
  * A program that manages and keeps track of a list of tasks.
  * Features include adding and deleting tasks, as well as displaying list of current tasks.
@@ -20,7 +22,9 @@ import javafx.util.Duration;
  */
 public class Duke extends Application {
 
-    private Storage storage;
+    private TaskStorage taskStorage;
+    private ArchiveStorage archiveStorage;
+    private HashMap<String, TaskList> archives;
     private TaskList tasks;
     private Ui ui;
 
@@ -41,10 +45,12 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/tasks.txt");
+        taskStorage = new TaskStorage("data/tasks.txt");
+        archiveStorage = new ArchiveStorage("data/archives.txt");
         tasks = new TaskList();
         try {
-            storage.getTasksFromFile(tasks);
+            taskStorage.getTasksFromFile(tasks);
+            archives = archiveStorage.getArchivedTasksFromFile();
         } catch (Exception e) {
             ui.showExceptionError(e);
         }
@@ -60,7 +66,7 @@ public class Duke extends Application {
         try {
             Command c = Parser.parse(input);
             assert c != null: "Command should not be null"; //Precondition for execute method
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, ui, taskStorage, archiveStorage, archives);
         } catch (Exception e) {
             return ui.showExceptionError(e);
         }
@@ -193,7 +199,7 @@ public class Duke extends Application {
                 "D    D   U     U    K  K     E    \n" +
                 "DDD    UUUU  K      K   EEEEEE \n";
 
-        Label greetingText = new Label("Hello from\n" + logo2);
+        Label greetingText = new Label("Hello I'm\n" + logo2 + "\n" + ui.showWelcomeMessage());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, new ImageView(duke)));
     }
 

@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Represents the command of finding tasks with a specified keyword in a Duke object's tasks.
  */
@@ -19,11 +21,14 @@ public class FindCommand extends Command {
      *
      * @param tasks TaskList object to search in.
      * @param ui Duke object's Ui object to display any results from the search.
-     * @param storage Duke object's Storage object to access file for loading/saving tasks.
+     * @param taskStorage Duke object's Storage object to access file for loading/saving tasks.
+     * @param archiveStorage Duke object's ArchiveStorage object to access archives file for loading/saving archives.
+     * @param archives HashMap of all TaskList archives, with their archive name as keys.
      * @return String list of tasks found.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+    public String execute(TaskList tasks, Ui ui, TaskStorage taskStorage, ArchiveStorage archiveStorage,
+                          HashMap<String, TaskList> archives) {
         TaskList tasksWithKeyword = tasks.findTasks(this.keyWord);
         assert tasksWithKeyword != null: "List of tasks returned from search should never be null"; // Postcondition for findTasks method.
         return ui.showFindTasksMessage(tasksWithKeyword);

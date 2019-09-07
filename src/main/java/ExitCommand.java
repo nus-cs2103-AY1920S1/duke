@@ -1,3 +1,4 @@
+import java.util.HashMap;
 
 /**
  * Represents the command of exiting a Duke object run.
@@ -12,12 +13,16 @@ public class ExitCommand extends Command {
      *
      * @param tasks TaskList object of the Duke object.
      * @param ui Duke object's Ui object to display the tasks.
-     * @param storage Duke object's Storage object to access file for loading/saving tasks.
+     * @param taskStorage Duke object's Storage object to access file for loading/saving tasks.
+     * @param archiveStorage Duke object's ArchiveStorage object to access archives file for loading/saving archives.
+     * @param archives HashMap of all TaskList archives, with their archive name as keys.
      * @return String exit message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        storage.loadTasksToFile(tasks);
+    public String execute(TaskList tasks, Ui ui, TaskStorage taskStorage, ArchiveStorage archiveStorage,
+                          HashMap<String, TaskList> archives) {
+        taskStorage.loadTasksToFile(tasks);
+        archiveStorage.loadArchivedTasksToFile(archives);
         return ui.showByeMessage();
     }
 

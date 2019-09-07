@@ -50,6 +50,7 @@ public class DateTime {
      */
     private static String wordMonth(String month) throws DateException {
         int monthNum = Integer.parseInt(month);
+        assert monthNum < 13 : "Month invalid!";
         switch (monthNum) {
         case 1:
             return "January";
@@ -89,6 +90,7 @@ public class DateTime {
     public static String getTime(String time) throws DateException {
         String timeString = "";
         String hours = time.substring(0, 2);
+        assert hours.length() == 4 : "Time invalid!";
         timeString += getHours(hours);
         String minutes = time.substring(2,4);
         timeString += getMinutes(minutes);

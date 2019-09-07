@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     private Ui ui;
     private DateTime dateTime = new DateTime();
     private String[] allDetails;
-    private String deadlineErrorMsg = "Please write the deadline such as 29/2/2019 1800 and resubmit the command!";
+    private String deadlineErrorMsg = "Please write the deadline such as 29/2/2019 1800 and resubmit the command";
     private String eventErrorMsg = "Please write the event timing such as 29/2/2019 1800-2000 and resubmit the command";
 
     /**
@@ -56,6 +56,7 @@ public class AddCommand extends Command {
         for (int i = 1; i < allDetails.length; i++) {
             processed += allDetails[i] + " ";
         }
+        assert !processed.isEmpty() : "No description of task provided";
         String commandWord = allDetails[0];
         if (allDetails.length == 1) {
             throw new DukeException("Oops! The description of your Task cannot be empty.");
@@ -109,7 +110,7 @@ public class AddCommand extends Command {
                     this.storage.save(tasks);
                     return printAddedTask(newDeadline);
                 } catch (DateException e) {
-                    throw new DukeException(e.getMessage() + deadlineErrorMsg );
+                    throw new DukeException(e.getMessage() + " " + deadlineErrorMsg );
                 }
             }
         }
@@ -145,7 +146,7 @@ public class AddCommand extends Command {
                         return printAddedTask(newEvent);
                     }
                 } catch (DateException e) {
-                    throw new DukeException(e.getMessage() + eventErrorMsg);
+                    throw new DukeException(e.getMessage() + " " + eventErrorMsg);
                 }
             }
         }

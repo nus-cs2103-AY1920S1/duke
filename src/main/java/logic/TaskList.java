@@ -76,6 +76,5 @@ public class TaskList {
         return taskList.stream()
                 .filter(task -> task.getDescription().contains(taskDescription))
                 .collect(Collectors.toList());
-
     }
 }

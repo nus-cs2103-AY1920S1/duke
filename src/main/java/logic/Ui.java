@@ -8,13 +8,7 @@ import java.util.List;
  * Deals with interactions with the user and output on CLI.
  */
 public class Ui {
-    /**
-     * Wraps strings for style and formatting.
-     *
-     * @param input String parameter to be wrapped and printed
-     */
-
-    public static String HORIZONTAL_LINE = "____________________________________________________________\n";
+    public static String HORIZONTAL_LINE = "__________________________________________________\n";
     public static String printString = "";
 
     /**

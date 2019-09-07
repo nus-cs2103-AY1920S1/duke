@@ -56,4 +56,9 @@ public class Duke {
 
     }
 
+    String startMessage() {
+        ui.greet();
+        return Ui.getLoadedStr();
+    }
+
 }

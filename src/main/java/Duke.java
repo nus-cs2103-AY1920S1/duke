@@ -69,8 +69,8 @@ public class Duke {
     }
 
     /**
-     * Returns response to be shown to user
-     * @param input
+     * Returns response to be shown to user.
+     * @param input input from user
      * @return response to be shown to user
      */
     public String getResponse(String input) {

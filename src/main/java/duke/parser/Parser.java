@@ -86,7 +86,7 @@ public class Parser {
      * @return task
      * @throws ParseException Parsing Error
      */
-    //TODO: task initialised hard coded
+    //TODO: task initialised hard coded!
     public static Task parseTask(String fullTask) throws ParseException {
         Task t;
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");

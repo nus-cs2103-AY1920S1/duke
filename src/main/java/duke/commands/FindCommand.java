@@ -12,9 +12,9 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds task
-     * @param tasks
-     * @param ui       ui
+     * Finds task.
+     * @param tasks list of tasks
+     * @param ui ui
      * @param storage  storage
      * @return Found task
      */

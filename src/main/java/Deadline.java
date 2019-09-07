@@ -67,60 +67,8 @@ public class Deadline extends Task {
         return format.format(this.byDate);
     }
 
-    public Date getByDate() {
-        return byDate;
-    }
-
-    public void setByDate(Date byDate) {
-        this.byDate = byDate;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getHour() {
-        return hour;
-    }
-
-    public void setHour(String hour) {
-        this.hour = hour;
-    }
-
-    public String getMinute() {
-        return minute;
-    }
-
-    public void setMinute(String minute) {
-        this.minute = minute;
-    }
-
     public String getBy() {
         return by;
-    }
-
-    public void setBy(String by) {
-        this.by = by;
     }
 
     @Override

@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.awt.*;
+
 /**
  * A program that manages and keeps track of a list of tasks.
  * Features include adding and deleting tasks, as well as displaying list of current tasks.
@@ -56,6 +58,7 @@ public class Duke extends Application {
     public String run(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null: "Command should not be null"; //Precondition for execute method
             return c.execute(tasks, ui, storage);
         } catch (Exception e) {
             return ui.showExceptionError(e);
@@ -97,7 +100,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);;
 
         userInput.setPrefWidth(525.0);
 
@@ -162,11 +165,7 @@ public class Duke extends Application {
                 "D    D   U     U    K  K     E    \n" +
                 "D     D  U     U    K K      EEEE  \n" +
                 "D    D   U     U    K  K     E    \n" +
-                "DDD    UUUU  K      K   EEEEEE \n" +
-                "                     \n" +
-                "                     ";
-
-
+                "DDD    UUUU  K      K   EEEEEE \n";
 
         Label greetingText = new Label("Hello from\n" + logo2);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, new ImageView(duke)));

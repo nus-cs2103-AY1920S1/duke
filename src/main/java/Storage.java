@@ -19,14 +19,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
     /**
      * Accesses the file and extracts tasks from it, saving the tasks into a TaskList object.
      *

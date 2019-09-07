@@ -35,14 +35,4 @@ public class DoneCommand extends Command {
         }
 
     }
-
-    /**
-     * Indicates the exit condition of the running Duke object.
-     *
-     * @return DoneCommand is not the ExitCommand so it returns false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -36,14 +36,4 @@ public class DeleteCommand extends Command {
         }
 
     }
-
-    /**
-     * Indicates the exit condition of the running Duke object.
-     *
-     * @return DeleteCommand is not the ExitCommand so it returns false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

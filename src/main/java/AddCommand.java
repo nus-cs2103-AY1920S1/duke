@@ -25,16 +25,8 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
+        assert tasks.taskListSize() > 0: "List of Tasks should be at least 1 after adding new task"; // // Precondition for showAddTaskMessage
         return ui.showAddTaskMessage(this.task, tasks.taskListSize());
     }
 
-    /**
-     * Indicates the exit condition of the running Duke object.
-     *
-     * @return AddCommand is not the ExitCommand so it returns false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

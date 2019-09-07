@@ -27,27 +27,30 @@ public class TaskList {
      * @return A task string for the UI and Storage to either echo or save.
      */
     public String addTask(String s) {
-        String[] task = s.split(" ");
+        String[] task = s.split(" "); // task array with many individual strings
         String statement = "";
-        String[] modifiedTask = Parser.processTask(task);
+        String[] modifiedTask = Parser.processTask(task); // modified task array {[command], [description], [date]}
         assert modifiedTask.length == 3 : "Parser failed to process command correctly";
-        switch (modifiedTask[0]) {
+        final String COMMAND = modifiedTask[0];
+        final String DESCRIPTION = modifiedTask[1];
+        final String DATE = modifiedTask[2];
+        switch (COMMAND) {
         case "todo":
-            ToDo todo = new ToDo(modifiedTask[1]);
+            ToDo todo = new ToDo(DESCRIPTION);
             tasklist.add(todo);
             statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "deadline":
-            Deadline deadline = new Deadline(modifiedTask[1], modifiedTask[2]);
+            Deadline deadline = new Deadline(DESCRIPTION, DATE);
             tasklist.add(deadline);
             statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
             storage.save(tasklist);
             break;
         case "event":
-            Event event = new Event(modifiedTask[1], modifiedTask[2]);
+            Event event = new Event(DESCRIPTION, DATE);
             tasklist.add(event);
             statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
@@ -57,21 +60,21 @@ public class TaskList {
             statement = checkList();
             break;
         case "done":
-            statement = complete(Integer.parseInt(modifiedTask[1]));
+            statement = complete(Integer.parseInt(DESCRIPTION));
             storage.save(tasklist);
             break;
         case "delete":
-            statement = delete(Integer.parseInt(modifiedTask[1]));
+            statement = delete(Integer.parseInt(DESCRIPTION));
             storage.save(tasklist);
         break;
         case "find":
-            statement = findList(modifiedTask[1]);
+            statement = findList(DESCRIPTION);
             break;
         case "bye":
             statement = "bye";
             break;
         default:
-            statement = modifiedTask[0];
+            statement = COMMAND;
             break;
         }
         return statement;
@@ -79,7 +82,7 @@ public class TaskList {
 
     protected String checkList() {
         if (this.tasklist.isEmpty()) {
-            return "\u2639 OOPS!!! I'm sorry, but there are no tasks in your list.";
+            return "\u2639 OOPS!!! I'm sorry, but there are no tasks in your list :-(";
         }
         String s = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasklist.size(); i++) {
@@ -91,7 +94,7 @@ public class TaskList {
 
     protected String findList(String keyword) {
         if (this.tasklist.isEmpty()) {
-            return "\u2639 OOPS!!! I'm sorry, but there are no tasks in your list.";
+            return "\u2639 OOPS!!! I'm sorry, but there are no tasks in your list :-(";
         }
         String s = "Here are the matching tasks in your list:\n";
         int idx = 1;
@@ -101,12 +104,12 @@ public class TaskList {
                 idx++;
             }
         }
-        return s.substring(0, s.length() - 1);
+        return s.substring(0, s.length() - 1); // removing the extra "\n"
     }
 
     protected String complete(int i) {
         if (i >= tasklist.size()) {
-            return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list.";
+            return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list :-(";
         }
         Task t = this.tasklist.get(i - 1);
         t.setDone();
@@ -116,7 +119,7 @@ public class TaskList {
 
     protected String delete(int i) {
         if (i >= tasklist.size()) {
-            return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list.";
+            return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list :-(";
         }
         Task t = this.tasklist.remove(i - 1);
         Task.decCurrTotal();
@@ -124,5 +127,4 @@ public class TaskList {
                             + " tasks in the list.";
         return statement;
     }
-
 }

@@ -1,4 +1,4 @@
-package duke;
+package duke.io;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -10,25 +10,28 @@ import java.util.Scanner;
  * This class provides all the input/output functionality needed to interact with the user.
  * It is a thin wrapper over an {@link InputStream} and a {@link PrintStream}.
  */
-public class Ui {
+public class ConsoleUi implements UiInput, UiOutput {
+    public static final String HORIZONTAL_LINE = "____________________________________________________________";
+    public static final String OOPS_PREFIX = "\u2639 OOPS!!! "; // ☹
+
     private InputStream in;
     private PrintStream out;
     private Scanner scanner;
 
     /**
-     * Constructs a Ui using the default {@link System#in} and {@link System#out}.
+     * Constructs a ConsoleUi using the default {@link System#in} and {@link System#out}.
      */
-    public Ui() {
+    public ConsoleUi() {
         this(System.in, System.out);
     }
 
     /**
-     * Constructs a Ui using the specified streams.
+     * Constructs a ConsoleUi using the specified streams.
      *
      * @param inputStream  the stream to receive user input from
      * @param printStream  the stream to print user output to
      */
-    public Ui(InputStream inputStream, PrintStream printStream) {
+    public ConsoleUi(InputStream inputStream, PrintStream printStream) {
         this.in = inputStream;
 
         try {
@@ -57,9 +60,9 @@ public class Ui {
      * @param text  the String to be printed
      */
     public void say(String text) {
-        out.println(" ____________________________________________________________");
+        out.println(HORIZONTAL_LINE);
         out.println(text);
-        out.println(" ____________________________________________________________");
+        out.println(HORIZONTAL_LINE);
         out.println("");
     }
 
@@ -70,7 +73,7 @@ public class Ui {
      * @param text  the String to be printed
      */
     public void oops(String text) {
-        say("\u2639 OOPS!!! " + text); // ☹
+        say(OOPS_PREFIX + text);
     }
 
     /**

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.io.UiOutput;
 import duke.task.TaskList;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -39,9 +39,9 @@ public class FindCommand extends Command {
                     sb.append("\n");
                 }
             }
-            ui.say("Here are the matching tasks in your list:\n" + sb.toString());
+            uiOutput.say("Here are the matching tasks in your list:\n" + sb.toString());
         } else {
-            ui.say("There are no matching tasks in your list.");
+            uiOutput.say("There are no matching tasks in your list.");
         }
     }
 }

@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.io.UiOutput;
 import duke.task.TaskList;
 
 public class ByeCommand extends Command {
@@ -15,7 +15,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.say("Bye. Hope to see you again soon!");
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) {
+        uiOutput.say("Bye. Hope to see you again soon!");
     }
 }

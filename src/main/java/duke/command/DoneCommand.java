@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.io.UiOutput;
 import duke.task.TaskList;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -37,6 +37,6 @@ public class DoneCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
-        ui.say("Nice! I've marked this task as done:\n" + tasks.get(oneIndex));
+        uiOutput.say("Nice! I've marked this task as done:\n" + tasks.get(oneIndex));
     }
 }

@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.io.UiOutput;
 import duke.task.Deadline;
 import duke.util.ArgumentParser;
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 import java.util.Map;
@@ -22,7 +22,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -37,6 +37,6 @@ public class DeadlineCommand extends Command {
 
         Deadline d = new Deadline(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(byArgs));
         tasks.add(d);
-        ui.say("added: " + d);
+        uiOutput.say("added: " + d);
     }
 }

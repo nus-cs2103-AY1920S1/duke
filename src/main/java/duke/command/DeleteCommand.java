@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.io.UiOutput;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
-        ui.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
+        uiOutput.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
                 task.toString(), tasks.size(), tasks.size() == 1 ? "" : "s"));
     }
 }

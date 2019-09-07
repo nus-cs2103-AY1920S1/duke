@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.io.UiOutput;
 import duke.task.Event;
 import duke.util.ArgumentParser;
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 import java.util.Map;
@@ -23,7 +23,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -38,6 +38,6 @@ public class EventCommand extends Command {
 
         Event e = new Event(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(atArgs));
         tasks.add(e);
-        ui.say("added: " + e);
+        uiOutput.say("added: " + e);
     }
 }

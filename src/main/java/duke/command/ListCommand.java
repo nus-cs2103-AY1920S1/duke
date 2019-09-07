@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.io.UiOutput;
 import duke.task.TaskList;
 
 public class ListCommand extends Command {
@@ -15,11 +15,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) {
         if (tasks.size() > 0) {
-            ui.say(tasks.toString());
+            uiOutput.say(tasks.toString());
         } else {
-            ui.say("No tasks yet.");
+            uiOutput.say("No tasks yet.");
         }
     }
 }

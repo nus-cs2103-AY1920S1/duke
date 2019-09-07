@@ -1,10 +1,13 @@
 package commands;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+
+import exceptions.DukeException;
+
 import tasks.Task;
 
 /**
@@ -36,14 +39,23 @@ public class DeleteCommand extends Command {
      * @param storage the Storage object that reads from and writes to the file.
      * @return String output reply from Duke.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        int delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
+        if (commandArr.length <= 1) {
+            throw new DukeException("     \u2639 A task number has to be specified.\n");
+        }
+        int delTaskIndex;
+        delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
         assert delTaskIndex >= 0 : "delTaskIndex must be non-negative";
-        Task deletedTask = taskLst.remove(delTaskIndex);
-        return String.format("     Noted. I've removed this task:\n"
-                        + "       %s\n     Now you have %d tasks in the list.\n",
-                deletedTask, taskLst.size());
+        if (Command.checkValidTaskNumber(delTaskIndex, taskLst)) {
+            Task deletedTask = taskLst.remove(delTaskIndex);
+            return String.format("     Noted. I've removed this task:\n"
+                            + "       %s\n     Now you have %d tasks in the list.\n", deletedTask, taskLst.size());
+        } else {
+            String msg = String.format("     \u2639 You have entered an invalid task number!" +
+                    " Please enter a number from between 1 to %d\n", taskLst.size());
+            throw new DukeException(msg);
+        }
     }
 
 }

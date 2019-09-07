@@ -4,6 +4,10 @@ import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
 
+import tasks.Task;
+
+import java.util.ArrayList;
+
 import exceptions.DukeException;
 
 /**
@@ -16,9 +20,22 @@ import exceptions.DukeException;
 public abstract class Command {
 
     /** Boolean representing whether this command should trigger termination of the program. */
-    protected boolean isExit;
+    boolean isExit;
     /** String array containing the split text retrieved from user input. */
-    protected String[] commandArr;
+    String[] commandArr;
+
+    /**
+     * Returns true if the taskIndex the user provided corresponds
+     * to an existing task in the taskLst, and false otherwise.
+     * (taskIndex can assume values from 0 to size of taskLst - 1)
+     *
+     * @param taskIndex the index of task user wants to perform operations on.
+     * @param taskLst ArrayList storing all the Tasks.
+     * @return boolean true if task number is valid, false otherwise.
+     */
+    static boolean checkValidTaskNumber(int taskIndex, ArrayList<Task> taskLst) {
+        return taskIndex >= 0 && taskIndex < taskLst.size();
+    }
 
     /**
      * Returns boolean determining whether program should be terminated
@@ -28,15 +45,6 @@ public abstract class Command {
      */
     public boolean isExit() {
         return isExit;
-    }
-
-    /**
-     * Returns String[] containing the split text retrieved from user input.
-     *
-     * @return String[] commandArr.
-     */
-    public String[] getCommandArr() {
-        return commandArr;
     }
 
     /**

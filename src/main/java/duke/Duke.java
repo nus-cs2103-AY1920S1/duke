@@ -74,12 +74,11 @@ public class Duke extends Application {
      * @param fullCommand String that user typed as text
      * @return String output reply from Duke
      */
-    public String run(String fullCommand) {
-        String reply = "";
+    private String run(String fullCommand) {
+        String reply;
         boolean isExit = false;
         try {
             Command c = Parser.parse(fullCommand);
-            assert c == null : "Command object cannot be null";
             reply = c.execute(tasks, ui, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
@@ -156,13 +155,9 @@ public class Duke extends Application {
         userInput.clear();
 
         //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
     }
 
     /**

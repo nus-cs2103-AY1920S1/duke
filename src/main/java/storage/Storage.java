@@ -62,9 +62,7 @@ public class Storage {
                         // Cannot parse with current TaskFormatter. Suppress error and move to next.
                     }
                 }
-                if (task == null) {
-                    throw new StorageException("Unreadable data in tasks file.");
-                }
+                assert task != null;
                 tasks.add(task);
             }
         } catch (FileNotFoundException e) {
@@ -102,9 +100,7 @@ public class Storage {
                         // Cannot format with current TaskFormatter. Suppress error and move to next.
                     }
                 }
-                if (line == null) {
-                    throw new StorageException("Unsupported task in tasks list.");
-                }
+                assert line != null;
                 fileWriter.write(line + "\n");
             }
         } catch (IOException e) {

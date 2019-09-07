@@ -35,7 +35,7 @@ public class Date {
             return;
         }
         String[] dateSplit = unprocessedDate.split("/");
-        boolean isWrongFormat = dateSplit.length > 3;
+        boolean isWrongFormat = dateSplit.length > 3 || dateSplit.length < 3;
         if (isWrongFormat) {
             throw new InvalidDateException("☹ OOPS!!! Please specify the date"
                     + " in the format date/month/year e.g. 2/12/2019.");

@@ -10,7 +10,7 @@ group 'duke'
 version '0.1.0'
 
 application {
-    mainClassName = "duke.Launcher"
+    mainClassName = "duke.core.DukeApplication"
 }
 
 checkstyle {

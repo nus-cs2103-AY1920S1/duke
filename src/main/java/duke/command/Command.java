@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.core.DukeResponder;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 public abstract class Command {
 
-    public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, DukeResponder responder, Storage storage);
 
 }

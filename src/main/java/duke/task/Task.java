@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Date;
+
 public abstract class Task {
 
     final String description;
@@ -10,8 +12,9 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    private String getStatusIcon() {
-        return (isDone ? "✓" : "✘");
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
@@ -22,11 +25,15 @@ public abstract class Task {
         return this.description;
     }
 
-    public abstract String toSaveString();
+    public abstract String toEncodedString();
 
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    private String getStatusIcon() {
+        return (isDone ? "✓" : "✘");
     }
 
 }

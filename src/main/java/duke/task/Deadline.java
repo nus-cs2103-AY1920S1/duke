@@ -12,8 +12,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, Date by, boolean isDone) {
+        super(description, isDone);
+        this.by = by;
+    }
+
     @Override
-    public String toSaveString() {
+    public String toEncodedString() {
         String isDone = this.isDone ? "1" : "0";
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         return "D | " +  isDone + " | " + this.description + " | " + dateFormat.format(this.by);
@@ -24,4 +29,5 @@ public class Deadline extends Task {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         return "[D]" + super.toString() + " (by: " + dateFormat.format(this.by) + ")";
     }
+
 }

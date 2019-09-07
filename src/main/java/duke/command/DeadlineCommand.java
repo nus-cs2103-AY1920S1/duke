@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.core.DukeResponder;
+import duke.exception.CannotSaveTasksException;
+import duke.util.Storage;
+import duke.util.TaskList;
 import duke.task.Deadline;
 import duke.task.Task;
 
-import java.io.IOException;
 import java.util.Date;
 
 public class DeadlineCommand extends Command {
@@ -20,16 +20,15 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Deadline(this.description, this.by);
-        tasks.add(task);
-        ui.showTaskAdded(task, tasks);
+    public String execute(TaskList tasks, DukeResponder responder, Storage storage) {
         try {
+            Task task = new Deadline(this.description, this.by);
+            tasks.add(task);
             storage.saveTasks(tasks);
-        } catch (IOException e) {
-            ui.showSaveError();
+            return responder.getTaskAddedMessage(task, tasks);
+        } catch (CannotSaveTasksException e) {
+            return responder.getErrorMessage(e);
         }
-        return false;
     }
 
 }

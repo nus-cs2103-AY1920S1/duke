@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.core.DukeResponder;
+import duke.exception.CannotSaveTasksException;
+import duke.util.Storage;
+import duke.util.TaskList;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.io.IOException;
 import java.util.Date;
 
 public class EventCommand extends Command {
@@ -20,16 +20,15 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Event(this.description, this.at);
-        tasks.add(task);
-        ui.showTaskAdded(task, tasks);
+    public String execute(TaskList tasks, DukeResponder responder, Storage storage) {
         try {
+            Task task = new Event(this.description, this.at);
+            tasks.add(task);
             storage.saveTasks(tasks);
-        } catch (IOException e) {
-            ui.showSaveError();
+            return responder.getTaskAddedMessage(task, tasks);
+        } catch (CannotSaveTasksException e) {
+            return responder.getErrorMessage(e);
         }
-        return false;
     }
 
 }

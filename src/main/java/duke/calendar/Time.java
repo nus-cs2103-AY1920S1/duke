@@ -153,6 +153,12 @@ public class Time implements Comparable<Time> {
         }
     }
 
+    /**
+     * Compares this <code>Time</code> with another.
+     * @param otherTime The other time to be compared with.
+     * @return A negative integer, zero, or a positive integer as this time is less than,
+     *     equal to, or greater than the specified time.
+     */
     public int compareTo(Time otherTime) {
         if (this.equals(otherTime)) {
             return 0;

@@ -8,6 +8,13 @@ import java.util.Comparator;
 
 public class DeadlineComparator implements Comparator<Deadline> {
 
+    /**
+     * Compares deadline tasks according to chronological order.
+     * @param deadlineOne First deadline task to be compared.
+     * @param deadlineTwo Second deadline task to be compared.
+     * @return Returns a negative integer, zero, or a positive integer as the first deadline is less than,
+     *     equal to, or greater than the second.
+     */
     public int compare(Deadline deadlineOne, Deadline deadlineTwo) {
         if (deadlineOne.equals(deadlineTwo)) {
             return 0;

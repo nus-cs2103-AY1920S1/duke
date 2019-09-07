@@ -7,7 +7,14 @@ import java.util.Comparator;
 
 public class EventComparator extends TaskComparator {
 
-    public int compare (Event eventOne, Event eventTwo) {
+    /**
+     * Compares events according to chronological order.
+     * @param eventOne First event to be compared.
+     * @param eventTwo Second event to be compared.
+     * @return Returns a negative integer, zero, or a positive integer as the first event is less than,
+     *     equal to, or greater than the second.
+     */
+    public int compare(Event eventOne, Event eventTwo) {
         if (eventOne.equals(eventTwo)) {
             return 0;
         } else {

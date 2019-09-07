@@ -206,11 +206,10 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Compares this <code>Date</code> with another. Returns a negative integer, zero, or a positive integer as
-     * this object is less than, equal to, or greater than the specified object.
+     * Compares this <code>Date</code> with another.
      * @param otherDate The other date to be compared with.
-     * @return A negative integer, zero, or a positive integer as this object is less than,
-     * equal to, or greater than the specified object.
+     * @return A negative integer, zero, or a positive integer as this date is less than,
+     *     equal to, or greater than the specified date.
      */
     public int compareTo(Date otherDate) {
         if (this.equals(otherDate)) {

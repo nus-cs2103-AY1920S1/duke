@@ -6,6 +6,13 @@ import java.util.Comparator;
 
 public class TaskComparator implements Comparator<Task> {
 
+    /**
+     * Compares tasks according to chronological order.
+     * @param taskOne First task to be compared.
+     * @param taskTwo Second task to be compared.
+     * @return Returns a negative integer, zero, or a positive integer as the first task is less than,
+     *     equal to, or greater than the second.
+     */
     public int compare(Task taskOne, Task taskTwo) {
         if (taskOne.equals(taskTwo)) {
             return 0;

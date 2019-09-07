@@ -87,6 +87,7 @@ public class Parser {
      * @return The response.
      */
     private String find(String keyword) throws DukeException {
+        assert keyword != null;
         if (keyword.isEmpty()) {
             throw new EmptyFindArgException();
         }
@@ -111,6 +112,7 @@ public class Parser {
      *         within the {@code TaskList} bound.
      */
     private String done(String s) throws DukeException {
+        assert s != null;
         try {
             if (s.isEmpty()) {
                 throw new TaskNotSpecifiedException();
@@ -139,6 +141,7 @@ public class Parser {
      *         within the {@code TaskList} bound.
      */
     private String delete(String s) throws DukeException {
+        assert s != null;
         try {
             if (s.isEmpty()) {
                 throw new TaskNotSpecifiedException();
@@ -180,6 +183,7 @@ public class Parser {
      * @throws DukeException If {@code desc} is empty.
      */
     private String addTodo(String desc) throws DukeException {
+        assert desc != null;
         if (desc.isEmpty()) {
             throw new EmptyTodoDescException();
         }
@@ -196,6 +200,7 @@ public class Parser {
      *         the regex "/by"
      */
     private String addDeadline(String desc) throws DukeException {
+        assert desc != null;
         try {
             if (desc.isEmpty()) {
                 throw new EmptyDeadlineDescException();
@@ -217,6 +222,7 @@ public class Parser {
      *         the regex "/at"
      */
     private String addEvent(String desc) throws DukeException {
+        assert desc != null;
         try {
             if (desc.isEmpty()) {
                 throw new EmptyEventDescException();
@@ -231,6 +237,7 @@ public class Parser {
     }
 
     private String getAddedMsg(Task task) {
+        assert task != null;
         String taskString = "  " + task + "\n";
         return "Got it. I've added this task:\n"
                 + taskString

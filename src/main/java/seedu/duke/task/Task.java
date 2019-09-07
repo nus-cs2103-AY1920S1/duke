@@ -43,6 +43,7 @@ public abstract class Task {
         default:
             throw new IllegalArgumentException("Initial does not match any known initials");
         }
+        assert task != null;
         if (isDone) {
             task.markAsDone();
         }

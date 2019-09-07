@@ -155,6 +155,7 @@ public class Event extends Task {
         boolean isStartEndSameDay = startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate());
         boolean isStartEndSame = startDateTime.isEqual(endDateTime);
         DateTimeFormatter dtfDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+        DateTimeFormatter dtfTime = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
         DateTimeFormatter dtfDateTime = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 
         if (isAllDay && isStartEndSameDay) {
@@ -170,7 +171,7 @@ public class Event extends Task {
         } else if (isStartEndSameDay) {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
                     startDateTime.format(dtfDateTime),
-                    endDateTime.format(dtfDate));
+                    endDateTime.format(dtfTime));
         } else {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
                     startDateTime.format(dtfDateTime),

@@ -6,6 +6,10 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
 group 'seedu.duke'
 version '0.1.0'
 
@@ -22,6 +26,8 @@ application {
 }
 
 task runGui(type:JavaExec) {
+    group = "application"
+    description = "Runs gui version of duke"
     main = "core.Launcher"
     classpath = sourceSets.main.runtimeClasspath
 }
@@ -60,4 +66,8 @@ task shadowJarCli(type: Jar, dependsOn: shadowJar) {
 javafx {
     version = "11.0.2"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+test {
+    useJUnitPlatform()
 }

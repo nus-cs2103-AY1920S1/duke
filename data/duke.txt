@@ -1,11 +1,7 @@
-T 1 read guys
-T 1 five guys
-E 1 take5 /at 1st of February 18, 7pm-8pm
-E 0 doneee /at 5th of September 29, 9am-2pm
-T 0 read book
-D 0 return book /by 6th of June 18, 12pm
-E 0 project meeting /at 6th of July 18, 2pm-4pm
-T 0 join sports club
+D 0 changet kitchen /by 2nd of November 15, 5am
+E 0 project meeting /at 2nd of April 15, 923am-1023am
+T 0 change clubbbb
 T 0 borrow book
 D 0 return book /by 2nd of March 18, 8pm
 E 0 project meeting /at 2nd of March 15, 8am-912am
+T 0 read book

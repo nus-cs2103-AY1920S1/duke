@@ -127,6 +127,47 @@ public class GuiTaskList {
         return result;
     }
 
+    /**
+     * method to edit both desc and time for Task.
+     * @param index position of task instance
+     * @param input new desc
+     * @param newDateAndTime new date and time
+     * @return confirmation that task has being updated
+     */
+    public String editTask(int index, String input, String newDateAndTime) {
+        try {
+            int actualIndex = index - 1;
+            Task taskToEdit = store.get(actualIndex);
+            taskToEdit.editTaskDesc(input);
+            taskToEdit.editDateAndTime(newDateAndTime);
+            storage.saveTaskToFile(store);
+            return "Okay, i have edited this task:\n" + taskToEdit.toString()
+                    + "\n" + this.listTask();
+        } catch (IndexOutOfBoundsException e) {
+            return "number of task specified in list is incorrect";
+        }
+    }
+
+    /**
+     * overloaded method to switch between editing only desc and only time.
+     * @param index position of task instance
+     * @param input new desc
+     * @param isTime new time
+     * @return confirmation that task has been modified
+     */
+    public String editTask(int index, String input, boolean isTime) {
+        int actualIndex = index - 1;
+        Task taskToEdit = store.get(actualIndex);
+        if (isTime) {
+            taskToEdit.editDateAndTime(input);
+        } else {
+            taskToEdit.editTaskDesc(input);
+        }
+        storage.saveTaskToFile(store);
+        return "Okay, i have edited this task:\n" + taskToEdit.toString()
+                + "\n" + this.listTask();
+    }
+
     private void addGenericTask(Task task) {
         this.store.add(task);
     }

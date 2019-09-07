@@ -60,11 +60,25 @@ public class GuiUi {
                 +
                 "[todo <task name>]: create a todo Task \n"
                 +
-                "[deadline <task name> /by dd/mm/yy hhmm]: create task with a specified deadline \n"
+                "[deadline <task name> /by dd/mm/yy hhmm]: \n create task with a specified deadline \n"
                 +
-                "[event <task name> /at dd/mm/yy hhmm-hhmm]: create task with specified event \n"
+                "[event <task name> /at dd/mm/yy hhmm-hhmm]: \n create task with specified event \n"
                 +
-                "[find <query>] searches ur list of tasks and return a result"
+                "[find <query>] searches ur list of tasks and return a result \n"
+                +
+                "[edit]: edit has three modes:\n"
+                +
+                "first, edit both date and time:\n"
+                +
+                " [edit <item num> <desc> :t <dd/mm/yy hhmm-hhmm>] \n"
+                +
+                " ****second 'hhmm' can be omitted for Deadline task\n"
+                +
+                " ****for todo Task, end input with :t\n"
+                +
+                "edit desc/time only:\n"
+                +
+                " [edit <item num> <desc/time>]\n"
                 +
                 "[bye]: closes applications";
     }

@@ -31,4 +31,9 @@ public class Event extends Task {
         temp += this.eventDuration;
         return temp;
     }
+
+    @Override
+    public void editDateAndTime(String newEventDuration) {
+        this.eventDuration = newEventDuration;
+    }
 }

@@ -1,6 +1,6 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -52,4 +52,11 @@ public class Task {
         temp += this.description;
         return temp;
     }
+
+    public void editTaskDesc(String desc) {
+        this.description = desc;
+    }
+
+    public abstract void editDateAndTime(String newDateAndTime);
+
 }

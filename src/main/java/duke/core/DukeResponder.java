@@ -17,12 +17,6 @@ public class DukeResponder {
         });
     }
 
-    public String getByeMessage() {
-        return buildMultilineString(new String[] {
-                "Bye. Hope to see you again soon!"
-        });
-    }
-
     /**
      * Show all tasks.
      * This method would format the list of tasks
@@ -89,6 +83,8 @@ public class DukeResponder {
     }
 
     private String buildMultilineString(String[] strings) {
+        assert strings.length > 0 : "strings should not be empty";
+
         StringBuilder builder = new StringBuilder();
         builder.append(strings[0]);
 

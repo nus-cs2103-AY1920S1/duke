@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 import duke.exception.MissingDescriptionException;
@@ -36,15 +37,28 @@ public class Parser {
             return deadline(userInput);
         } else if (userInput.startsWith("event")) {
             return event(userInput);
-        } else if (userInput.contains("done")) {
+        } else if (userInput.startsWith("done")) {
             return done(userInput);
-        } else if (userInput.contains("delete")) {
+        } else if (userInput.startsWith("delete")) {
             return delete(userInput);
-        } else if (userInput.contains("find")) {
+        } else if (userInput.startsWith("find")) {
             return find(userInput);
+        } else if (userInput.startsWith("tag")) {
+            return tag(userInput);
         } else {
             throw new InvalidInputException();
         }
+    }
+
+    private static Command tag(String userInput) throws MissingDescriptionException {
+        String details = userInput.replaceFirst("tag", "").trim();
+        if (details.charAt(0) == '#') {
+            throw new MissingDescriptionException("tag");
+        }
+        int index = Integer.parseInt("" + details.charAt(0)) - 1;
+        String hashTags = details.substring(1).trim();
+        String[] tags = hashTags.split("#");
+        return new TagCommand(index, tags);
     }
 
     private static Command find(String userInput) {

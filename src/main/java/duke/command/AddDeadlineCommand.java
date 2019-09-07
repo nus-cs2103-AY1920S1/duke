@@ -44,7 +44,17 @@ public class AddDeadlineCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws MissingDescriptionException, InsufficientDetailsException {
-        String[] detailsSplit = details.split("/by");
+        String[] detailsSplitFromTags = details.split("#");
+        boolean hasSpecifiedTags = detailsSplitFromTags.length != 1;
+        String tags = "";
+        if (hasSpecifiedTags) {
+            tags = detailsSplitFromTags[1].trim();
+            boolean hasNoTag = tags.length() == 0;
+            if (hasNoTag) {
+                throw new MissingDescriptionException("tag");
+            }
+        }
+        String[] detailsSplit = detailsSplitFromTags[0].trim().split("/by");
         boolean descriptionIsEmpty = detailsSplit.length == 0 || getAction(detailsSplit).length() == 0;
         boolean hasInsufficientDetails = detailsSplit.length < 2 || getDeadline(detailsSplit).length() == 0;
         if (descriptionIsEmpty) {
@@ -54,13 +64,14 @@ public class AddDeadlineCommand extends Command {
             throw new InsufficientDetailsException("☹ OOPS!!! The description of a deadline"
                     + " requires a task and/or a due date");
         }
-        addDeadline(tasks, ui, storage, detailsSplit);
+        addDeadline(tasks, ui, storage, detailsSplit, tags);
     }
 
-    private void addDeadline(TaskList tasks, Ui ui, Storage storage, String[] detailsSplit) {
+    private void addDeadline(TaskList tasks, Ui ui, Storage storage, String[] detailsSplit, String tags) {
         try {
             Task taskDeadline = createDeadline(detailsSplit);
             tasks.addTask(taskDeadline);
+            super.addTags(taskDeadline, tags);
             int numberOfTasks = tasks.getListSize();
             ui.printAddedMessage(taskDeadline, numberOfTasks);
             storage.writeToHardDisk(tasks);

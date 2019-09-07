@@ -104,6 +104,11 @@ public class Ui {
         printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
+    public void printTagMessage(Task task, String[] tags) {
+        printMessage("\t Got it. I have tagged this task: ");
+        printMessage("\t\t " + task);
+    }
+
     /**
      * Prints the error when the information in storage could not be loaded.
      */

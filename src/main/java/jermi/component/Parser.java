@@ -17,6 +17,25 @@ import jermi.type.TaskType;
  * A class that deals with making sense of the user input.
  */
 public class Parser {
+    /** Command to list tasks. */
+    private static final String LIST = "list";
+    /** Command to exit Jermi. */
+    private static final String EXIT = "bye";
+    /** Command to clear list. */
+    private static final String CLEAR = "clear";
+    /** Command to add todo task. */
+    private static final String TODO = "todo";
+    /** Command to add deadline task. */
+    private static final String DEADLINE = "deadline";
+    /** Command to add event task. */
+    private static final String EVENT = "event";
+    /** Command to mark task as done. */
+    private static final String DONE = "done";
+    /** Command to delete a task. */
+    private static final String DELETE = "delete";
+    /** Command to find tasks. */
+    private static final String FIND = "find";
+
     /**
      * Parses and returns the {@link Command} associated with the user input.
      *
@@ -28,46 +47,46 @@ public class Parser {
     public Command parse(String inputCommand, String inputDetails) throws JermiException {
         Command command = null;
         switch (inputCommand) {
-        case "list":
+        case LIST:
             command = new ListCommand();
             break;
-        case "bye":
+        case EXIT:
             command = new ExitCommand();
             break;
-        case "clear":
+        case CLEAR:
             command = new ClearCommand();
             break;
-        case "todo":
+        case TODO:
             //Fallthrough
-        case "deadline":
+        case DEADLINE:
             //Fallthrough
-        case "event":
+        case EVENT:
             //Fallthrough
-        case "done":
+        case DONE:
             //Fallthrough
-        case "delete":
+        case DELETE:
             //Fallthrough
-        case "find":
+        case FIND:
             if (inputDetails.isEmpty()) {
                 throw new EmptyDescriptionException(inputCommand);
             }
             switch (inputCommand) {
-            case "todo":
+            case TODO:
                 command = new AddCommand(TaskType.TO_DO, inputDetails);
                 break;
-            case "deadline":
+            case DEADLINE:
                 command = new AddCommand(TaskType.DEADLINE, inputDetails);
                 break;
-            case "event":
+            case EVENT:
                 command = new AddCommand(TaskType.EVENT, inputDetails);
                 break;
-            case "done":
+            case DONE:
                 command = new DoneCommand(inputDetails);
                 break;
-            case "delete":
+            case DELETE:
                 command = new DeleteCommand(inputDetails);
                 break;
-            case "find":
+            case FIND:
                 command = new FindCommand(inputDetails);
                 break;
             default:

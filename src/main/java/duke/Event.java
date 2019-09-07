@@ -26,7 +26,8 @@ public class Event extends Task implements Serializable {
             this.description = splitDescription[0];
             this.at = LocalDateTime.parse(splitDescription[1], dateFormatter);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter a deadline using \"/at\".");
+            throw new DukeException("Please enter the event date using \"/at\","
+                    + " followed by the deadline in \"dd/MM/yyyy HHmm\".");
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a date with the format "
                     + "dd/MM/yyyy HHmm.\n" + e.getMessage());

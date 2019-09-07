@@ -28,10 +28,11 @@ public class Deadline extends Task implements Serializable {
             this.description = splitDescription[0];
             this.by = LocalDateTime.parse(splitDescription[1], dateFormatter);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter a deadline using \"/by\".");
+            throw new DukeException("Please enter a deadline using \"/by\","
+                    + " followed by the deadline in \"dd/MM/yyyy HHmm\".");
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a date with the format "
-                    + "dd/MM/yyyy HHmm.\n" + e.getMessage());
+                    + "\"dd/MM/yyyy HHmm\".\n" + e.getMessage());
         }
     }
 

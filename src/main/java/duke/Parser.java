@@ -8,7 +8,7 @@ public class Parser {
     private TaskList taskList;
     private static final int DONE_SUFFIX_LENGTH = 5;
     private static final int FIND_SUFFIX_LENGTH = 5;
-    private static final int DELETE_SUFFIX_LENGTH = 5;
+    private static final int DELETE_SUFFIX_LENGTH = 7;
     private static final int TODO_SUFFIX_LENGTH = 5;
     private static final int DEADLINE_SUFFIX_LENGTH = 9;
     private static final int EVENT_SUFFIX_LENGTH = 6;
@@ -54,7 +54,7 @@ public class Parser {
                 throw new DukeException("The description of a find"
                         + " cannot be empty");
             }
-        } else if (input.startsWith("delete ")) {
+        } else if (input.startsWith("delete ") || input.startsWith("remove ")) {
             if (input.length() > DELETE_SUFFIX_LENGTH) {
                 try {
                     int taskIndex = Integer.parseInt(
@@ -73,12 +73,12 @@ public class Parser {
                                 + "deletion is not valid.");
                     }
                 } catch (NumberFormatException e) {
-                    throw new DukeException("The description of a delete "
-                            + "must be an integer.");
+                    throw new DukeException("The description of a delete"
+                            + "/remove must be an integer.");
                 }
             } else {
-                throw new DukeException("The description of a delete "
-                        + "cannot be empty.");
+                throw new DukeException("The description of a delete"
+                        + "/remove cannot be empty.");
             }
         } else if (input.startsWith("todo")) {
             return addToList(input, TaskType.Todo);

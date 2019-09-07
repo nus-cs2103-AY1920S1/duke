@@ -1,3 +1,8 @@
+# Preview of Duke
+
+**Level-10 Implementation on 7/9/19**
+<img src="https://raw.githubusercontent.com/Q-gabe/duke/master/preview/DukePreview.png" alt = "Duke Preview as of Level-10" width="500" /> 
+
 # Setting up
 
 **Prerequisites**

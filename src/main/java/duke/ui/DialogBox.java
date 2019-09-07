@@ -51,6 +51,7 @@ public class DialogBox extends HBox {
 
     /**
      * Get the User Dialog.
+     *
      * @param text Text to be shown.
      * @param img Image to be shown.
      * @return The Dialog object.
@@ -61,6 +62,7 @@ public class DialogBox extends HBox {
 
     /**
      * Get the Duke Dialog.
+     *
      * @param text Text to be shown.
      * @param img Image to be shown.
      * @return The Dialog object.

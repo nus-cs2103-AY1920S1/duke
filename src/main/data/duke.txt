@@ -1,5 +1,4 @@
 T 1 ip project
 T 1 homework
-T 0 watch youtube
-T 1 lecture
-T 1 work
+E 0 work | 12th of Dec 1231, 12.32pm
+D 0 work | 12th of Dec 1212, 12.31pm

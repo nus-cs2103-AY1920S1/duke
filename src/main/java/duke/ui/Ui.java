@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.task.Task;
+
 import duke.exception.DukeException;
 
 import java.util.List;
@@ -42,7 +43,6 @@ public class Ui {
      * @param tasks The existing task list in the database.
      */
     public String showWelcome(List<Task> tasks) {
-        //showLine();
         sb = new StringBuilder();
         sb.append("Hello! I'm Duke\n" + "What can I do for you?\n");
 
@@ -74,15 +74,15 @@ public class Ui {
      * @throws DukeException If the current task list is empty.
      */
     public String printTasks(List<Task> tasks) throws DukeException {
-        sb = new StringBuilder();
         if (tasks.isEmpty()) {
             throw new DukeException("OOPS!!! The list is empty.");
         }
+        sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
-        int count = 0;
+        int taskCounter = 0;
         for (Task task: tasks) {
-            count++;
-            sb.append("  " + count + "." + task + "\n");
+            taskCounter++;
+            sb.append("  " + taskCounter + "." + task + "\n");
         }
         return sb.toString();
     }
@@ -96,7 +96,6 @@ public class Ui {
      * @throws DukeException If there are no tasks in the list or no search results.
      */
     public String printMatchingTasks(List<Task> tasks, String keyword) throws DukeException {
-        sb = new StringBuilder();
         try {
             keyword = keyword.substring(4).trim();
             if (keyword.isEmpty()) {
@@ -108,6 +107,8 @@ public class Ui {
         if (tasks.isEmpty()) {
             throw new DukeException("OOPS!!! The list is empty.");
         }
+
+        sb = new StringBuilder();
         sb.append("Here are the matching tasks:\n");
         int count = 0;
         int matchingCount = 0;

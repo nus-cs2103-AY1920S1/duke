@@ -54,9 +54,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 Task task = parseTask(line);
-                if (task == null) {
-                    throw new StorageException("Unreadable data in tasks file.");
-                }
+                assert task != null;
                 tasks.add(task);
             }
         } catch (FileNotFoundException e) {
@@ -99,9 +97,7 @@ public class Storage {
             fileWriter = new FileWriter(filePath, false);
             for (Task task : tasks) {
                 String line = formatTask(task);
-                if (line == null) {
-                    throw new StorageException("Unsupported task in tasks list.");
-                }
+                assert line != null;
                 fileWriter.write(line + "\n");
             }
         } catch (IOException e) {

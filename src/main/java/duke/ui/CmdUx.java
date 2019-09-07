@@ -12,8 +12,10 @@ public class CmdUx {
     public static void setGuiWindow(GuiWindow currGuiWindow) {
         guiWindow = currGuiWindow;
     }
+
     /**
      * Prints a message wrapped by horizontal bars.
+     *
      * @param str The message
      */
     public static void printHBars(String str) {

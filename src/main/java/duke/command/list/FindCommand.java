@@ -10,11 +10,14 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
-    /** Search keyword. */
+    /**
+     * Search keyword.
+     */
     private String keyword;
 
     /**
      * Constructs the FindCommand object.
+     *
      * @param keyword Search keyword
      */
     public FindCommand(String keyword) {

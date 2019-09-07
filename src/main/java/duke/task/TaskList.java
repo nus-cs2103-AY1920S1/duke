@@ -3,11 +3,14 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    /** ArrayList of Tasks. */
+    /**
+     * ArrayList of Tasks.
+     */
     private ArrayList<Task> tasks;
 
     /**
      * Constructs the TaskList object from existing list of Task objects.
+     *
      * @param tasks Existing list of Task objects
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -23,6 +26,7 @@ public class TaskList {
 
     /**
      * Returns list of Task objects.
+     *
      * @return List of the Task objects
      */
     public ArrayList<Task> getTasks() {
@@ -31,6 +35,7 @@ public class TaskList {
 
     /**
      * Returns the Task at the specified index.
+     *
      * @param chosenTaskNo Specified index
      * @return Chosen Task object
      */
@@ -40,6 +45,7 @@ public class TaskList {
 
     /**
      * Adds the Task object to the list.
+     *
      * @param task Task object
      */
     public void add(Task task) {
@@ -48,6 +54,7 @@ public class TaskList {
 
     /**
      * Sets the Task object at the specified index as done.
+     *
      * @param chosenTaskNo Specified index
      * @return Chosen Task object
      */
@@ -59,6 +66,7 @@ public class TaskList {
 
     /**
      * Deletes the Task object at the specified index.
+     *
      * @param chosenTaskNo Specified index
      * @return Deleted Task object
      */

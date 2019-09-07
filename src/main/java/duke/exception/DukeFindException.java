@@ -6,6 +6,7 @@ public class DukeFindException extends DukeException {
 
     /**
      * Constructs the DukeFindException object with a custom error message.
+     *
      * @param message Custom error message
      */
     public DukeFindException(String message) {

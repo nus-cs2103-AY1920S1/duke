@@ -24,8 +24,10 @@ public class Duke {
     private Storage storage;
 
     private boolean isGoodbye = false;
+
     /**
      * Constructs the duke.Duke Object.
+     *
      * @param filePath Path to the data text file
      */
     public Duke(String filePath) {
@@ -67,6 +69,7 @@ public class Duke {
 
     /**
      * Starts the duke.Duke instance.
+     *
      * @param args Command line arguments
      */
     public static void main(String[] args) {
@@ -84,7 +87,7 @@ public class Duke {
             Command c = Parser.parse(fullInput);
             c.execute(tasks, ui, storage);
             if (c.isExit()) {
-               this.isGoodbye = true;
+                this.isGoodbye = true;
             }
         } catch (DukeException de) {
             ui.exposeError(de.getMessage());

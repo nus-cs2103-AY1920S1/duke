@@ -9,6 +9,7 @@ public class DukeEventException extends DukeException {
 
     /**
      * Constructs the DukeEventException object with a custom error message.
+     *
      * @param message Custom error message
      */
     public DukeEventException(String message) {

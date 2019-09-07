@@ -20,11 +20,14 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    /** Path to text file. */
+    /**
+     * Path to text file.
+     */
     String filePath;
 
     /**
      * Constructs the Storage object with the specified path.
+     *
      * @param filePath Specified path
      */
     public Storage(String filePath) {
@@ -33,6 +36,7 @@ public class Storage {
 
     /**
      * Saves TaskList list of Task objects to a text file.
+     *
      * @param taskList TaskList list of Task objects
      * @throws IOException If there is problem writing to the file
      */
@@ -50,8 +54,9 @@ public class Storage {
 
     /**
      * Loads list of tasks from a text file.
+     *
      * @return List of tasks
-     * @throws IOException If there is a problem reading the file
+     * @throws IOException    If there is a problem reading the file
      * @throws ParseException If there is a problem with the datetime format
      */
     public ArrayList<Task> load() throws IOException, ParseException {
@@ -63,25 +68,25 @@ public class Storage {
         while ((line = br.readLine()) != null) {
             String[] lineSplit = line.split(" \\| ");
             switch (lineSplit[0]) {
-            case "T":
-                Todo newTodo = new Todo(lineSplit[2]);
-                newTodo.setDone(lineSplit[1].equals("T"));
-                tasks.add(newTodo);
-                break;
-            case "D":
-                Deadline newDeadline = new Deadline(lineSplit[2],
-                        Command.DATE_FORMAT.parse(lineSplit[3]));
-                newDeadline.setDone(lineSplit[1].equals("T"));
-                tasks.add(newDeadline);
-                break;
-            case "E":
-                Event newEvent = new Event(lineSplit[2],
-                        Command.DATE_FORMAT.parse(lineSplit[3]), Command.DATE_FORMAT.parse(lineSplit[4]));
-                newEvent.setDone(lineSplit[1].equals("T"));
-                tasks.add(newEvent);
-                break;
-            default:
-                break;
+                case "T":
+                    Todo newTodo = new Todo(lineSplit[2]);
+                    newTodo.setDone(lineSplit[1].equals("T"));
+                    tasks.add(newTodo);
+                    break;
+                case "D":
+                    Deadline newDeadline = new Deadline(lineSplit[2],
+                            Command.DATE_FORMAT.parse(lineSplit[3]));
+                    newDeadline.setDone(lineSplit[1].equals("T"));
+                    tasks.add(newDeadline);
+                    break;
+                case "E":
+                    Event newEvent = new Event(lineSplit[2],
+                            Command.DATE_FORMAT.parse(lineSplit[3]), Command.DATE_FORMAT.parse(lineSplit[4]));
+                    newEvent.setDone(lineSplit[1].equals("T"));
+                    tasks.add(newEvent);
+                    break;
+                default:
+                    break;
             }
         }
 

@@ -8,11 +8,14 @@ import duke.ui.Ui;
 
 public class MakeDoneCommand extends Command {
 
-    /** Chosen Task . */
+    /**
+     * Chosen Task .
+     */
     int chosenTaskNo;
 
     /**
      * Constructs the MakeDoneCommand object.
+     *
      * @param chosenTaskNo Chosen Task index
      */
     public MakeDoneCommand(int chosenTaskNo) {

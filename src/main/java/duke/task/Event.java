@@ -12,9 +12,10 @@ public class Event extends Task {
 
     /**
      * Constructs the Event object.
-     * @param eventName Name of event
+     *
+     * @param eventName     Name of event
      * @param eventTimeFrom Starting Date and Time of event
-     * @param eventTimeTo Ending Date and Time of event
+     * @param eventTimeTo   Ending Date and Time of event
      */
     public Event(String eventName, Date eventTimeFrom, Date eventTimeTo) {
         super(eventName);

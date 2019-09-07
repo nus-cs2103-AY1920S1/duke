@@ -7,13 +7,18 @@ import duke.ui.Checkbox;
  * One Task object per task.
  */
 public class Task {
-    /** Name of the Task. */
+    /**
+     * Name of the Task.
+     */
     private String taskName;
-    /** Done State of the Task.*/
+    /**
+     * Done State of the Task.
+     */
     private boolean isDone;
 
     /**
      * Constructs the Task object.
+     *
      * @param taskName Name of the Task
      */
     public Task(String taskName) {
@@ -23,6 +28,7 @@ public class Task {
 
     /**
      * Returns the Task name.
+     *
      * @return Task name
      */
     public String getTaskName() {
@@ -31,6 +37,7 @@ public class Task {
 
     /**
      * Returns whether the Task is done.
+     *
      * @return Done state of the Task
      */
     public boolean isDone() {
@@ -39,6 +46,7 @@ public class Task {
 
     /**
      * Sets the Done state of the Task.
+     *
      * @param isDone Intended Done state
      */
     public void setDone(boolean isDone) {
@@ -47,6 +55,7 @@ public class Task {
 
     /**
      * Returns the Representing Letter to distinguish the Task types.
+     *
      * @return Representing Letter
      */
     public char getRepLetter() {
@@ -55,6 +64,7 @@ public class Task {
 
     /**
      * Returns a bar delimited string for storage-related purposes.
+     *
      * @return Bar delimited string
      */
     public String toDelimitedString() {

@@ -41,6 +41,7 @@ public class Ui {
 
     /**
      * Reads input from the console.
+     *
      * @return input from the console
      */
     public static String readInput() {
@@ -49,6 +50,7 @@ public class Ui {
 
     /**
      * Lists the Task objects in a given list of Task objects.
+     *
      * @param taskList An ArrayList of tasks
      */
     public static void listTasks(ArrayList<Task> taskList) {
@@ -63,7 +65,8 @@ public class Ui {
 
     /**
      * Lists search results.
-     * @param tasks Full list of tasks
+     *
+     * @param tasks         Full list of tasks
      * @param searchResults Index of tasks in search result
      */
     public static void listSearchResults(ArrayList<Task> tasks, ArrayList<Integer> searchResults) {
@@ -77,8 +80,9 @@ public class Ui {
 
     /**
      * Prints the message upon successfully adding a task to a given list of Task objects.
+     *
      * @param tasks Given ArrayList of Task objects, for counting purposes only
-     * @param task The Task that was added
+     * @param task  The Task that was added
      */
     public static void printAddSuccess(ArrayList<Task> tasks, Task task) {
         CmdUx.printHBars("Got it. I've added this task: \n"
@@ -88,6 +92,7 @@ public class Ui {
 
     /**
      * Prints the message upon successfully marking a Task as done.
+     *
      * @param chosenTask The Task that was made done
      */
     public static void printDoneSuccess(Task chosenTask) {
@@ -97,7 +102,8 @@ public class Ui {
 
     /**
      * Prints the message upon successfully deleting a Task from a given list of Task objects.
-     * @param tasks Given ArrayList of Task objects, for counting purposes only
+     *
+     * @param tasks       Given ArrayList of Task objects, for counting purposes only
      * @param deletedTask The Task that was deleted
      */
     public static void printDeleteSuccess(ArrayList<Task> tasks, Task deletedTask) {
@@ -108,6 +114,7 @@ public class Ui {
 
     /**
      * Prints a given error message.
+     *
      * @param errorMessage Given error message
      */
     public static void exposeError(String errorMessage) {

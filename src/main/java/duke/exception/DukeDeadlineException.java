@@ -9,6 +9,7 @@ public class DukeDeadlineException extends DukeException {
 
     /**
      * Constructs the DukeDeadlineException object with a custom error message.
+     *
      * @param message Custom error message
      */
     public DukeDeadlineException(String message) {

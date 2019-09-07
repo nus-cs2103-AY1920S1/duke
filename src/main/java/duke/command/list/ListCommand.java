@@ -9,8 +9,9 @@ public class ListCommand extends Command {
 
     /**
      * Lists the Task objects.
-     * @param tasks The current TaskList object
-     * @param ui The current Ui object
+     *
+     * @param tasks   The current TaskList object
+     * @param ui      The current Ui object
      * @param storage The current Storage object
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {

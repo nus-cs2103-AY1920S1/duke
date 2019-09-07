@@ -48,6 +48,7 @@ public class GuiWindow extends AnchorPane {
 
     /**
      * Adds the specified String into the dialog container as a Label.
+     *
      * @param input String to add to the dialog container as a Label.
      */
     @FXML

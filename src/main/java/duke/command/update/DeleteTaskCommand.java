@@ -8,11 +8,14 @@ import duke.ui.Ui;
 
 public class DeleteTaskCommand extends Command {
 
-    /** Chosen Task index. */
+    /**
+     * Chosen Task index.
+     */
     int chosenTaskNo;
 
     /**
      * Constructs the DeleteTaskCommand object.
+     *
      * @param chosenTaskNo Chosen Task index
      */
     public DeleteTaskCommand(int chosenTaskNo) {
@@ -21,8 +24,9 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Deletes Task.
-     * @param tasks The current TaskList object
-     * @param ui The current Ui object
+     *
+     * @param tasks   The current TaskList object
+     * @param ui      The current Ui object
      * @param storage The current Storage object
      */
     @Override
@@ -33,6 +37,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Returns whether this is an exiting command.
+     *
      * @return Whether this command exits the application
      */
     @Override

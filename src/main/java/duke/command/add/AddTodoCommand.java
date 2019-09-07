@@ -8,11 +8,14 @@ import duke.ui.Ui;
 
 public class AddTodoCommand extends Command {
 
-    /** Details of the Todo. */
+    /**
+     * Details of the Todo.
+     */
     private String detail;
 
     /**
      * Constructs the AddTodoCommand object.
+     *
      * @param detail Details of the Task
      */
     public AddTodoCommand(String detail) {

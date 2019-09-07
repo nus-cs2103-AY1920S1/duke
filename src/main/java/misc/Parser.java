@@ -120,7 +120,7 @@ public class Parser {
 
             if (!eventTime.contains("-")) {
                 String errorMessage = "You seem to be missing the Start/End time of your event!\n"
-                        + Ui.spaces(5) + "Please follow this format for an task.Event: 'dd/mm/yy hhmm-hhmm'";
+                        + "Please follow this format for an task.Event: 'dd/mm/yy hhmm-hhmm'";
                 throw new IncorrectDukeCommand(errorMessage);
             }
 
@@ -157,10 +157,8 @@ public class Parser {
      * @throws IOException if local save file cannot be updated to reflect changes.
      * @throws DukeException if an exception is thrown but not caught by any of the other exceptions.
      */
-    public void parseInstruction(String instruction, TaskList taskList) throws VoidDukeCommand,
+    public String parseInstruction(String instruction, TaskList taskList) throws VoidDukeCommand,
             IncorrectDukeCommand, InvalidDukeCommand, IOException, DukeException {
-        System.out.println(Ui.HORIZONTAL_LINE);
-
         Scanner userInput = new Scanner(instruction);
         String command;
 
@@ -175,20 +173,22 @@ public class Parser {
 
         switch (command) {
         case "list":
+            taskList.temporarySearchList = null;
+
             if (userInput.hasNext()) {
                 errorMessage = "The command \"list\" should not have anything after!\n"
-                        + Ui.spaces(5) + "Please remove any additional words!";
+                        + "Please remove any additional words!";
             } else {
-                taskList.listAllTasks("list");
+                return taskList.listAllTasks("list");
             }
             break;
         case "bye":
             if (userInput.hasNext()) {
                 errorMessage = "The command \"bye\" should not have anything after!\n"
-                        + Ui.spaces(5) + "Do you really intend to quit?";
+                        + "Do you really intend to quit?";
             } else {
                 userInput.close();
-                return;
+                return Ui.exit();
             }
             break;
         case "done":
@@ -198,10 +198,9 @@ public class Parser {
                 taskNumberDone = userInput.nextInt();
 
                 if (taskList.temporarySearchList != null) {
-                    taskList.markTaskAsDone(taskNumberDone, true);
-                    taskList.temporarySearchList = null;
+                    return taskList.markTaskAsDone(taskNumberDone, true);
                 } else {
-                    taskList.markTaskAsDone(taskNumberDone, false);
+                    return taskList.markTaskAsDone(taskNumberDone, false);
                 }
             }
             break;
@@ -212,10 +211,9 @@ public class Parser {
                 taskNumberDelete = userInput.nextInt();
 
                 if (taskList.temporarySearchList != null) {
-                    taskList.delete(taskNumberDelete, true);
-                    taskList.temporarySearchList = null;
+                    return taskList.delete(taskNumberDelete, true);
                 } else {
-                    taskList.delete(taskNumberDelete, false);
+                    return taskList.delete(taskNumberDelete, false);
                 }
 
             }
@@ -223,20 +221,24 @@ public class Parser {
         case "find":
             if (userInput.hasNext()) {
                 String keyword = userInput.nextLine().strip();
-                taskList.find(keyword);
+                return taskList.find(keyword);
             } else {
                 errorMessage = "I need a keyword to look for matching tasks!";
             }
             break;
         case "todo":
+            taskList.temporarySearchList = null;
+
             if (userInput.hasNext()) {
                 String details = userInput.nextLine().strip();
-                taskList.makeNewTask(details, null, "todo");
+                return taskList.makeNewTask(details, null, "todo");
             } else {
                 errorMessage = "The description of a todo cannot be empty!";
             }
             break;
         case "deadline":
+            taskList.temporarySearchList = null;
+
             if (userInput.hasNext()) {
                 if (instruction.contains(" by ")) {
                     String[] contentDateTime = userInput.nextLine().strip().split(" by ");
@@ -251,7 +253,7 @@ public class Parser {
                         String taskDescription = contentDateTime[0].strip();
                         String dateTime = contentDateTime[1].strip();
 
-                        taskList.makeNewTask(taskDescription, dateTime, "deadline");
+                        return taskList.makeNewTask(taskDescription, dateTime, "deadline");
                     }
                 } else {
                     errorMessage = "Sorry but I can't seem to detect the due date of the deadline!";
@@ -261,6 +263,8 @@ public class Parser {
             }
             break;
         case "event":
+            taskList.temporarySearchList = null;
+
             if (userInput.hasNext()) {
                 if (instruction.contains(" at ")) {
                     String[] contentDateTime = userInput.nextLine().strip().split(" at ");
@@ -275,7 +279,7 @@ public class Parser {
                         String taskDescription = contentDateTime[0].strip();
                         String dateTime = contentDateTime[1].strip();
 
-                        taskList.makeNewTask(taskDescription, dateTime, "event");
+                        return taskList.makeNewTask(taskDescription, dateTime, "event");
                     }
                 } else {
                     errorMessage = "Sorry but I can't seem to detect the Date & Time of the event!";
@@ -295,6 +299,6 @@ public class Parser {
         }
 
         userInput.close();
-        System.out.println(Ui.HORIZONTAL_LINE);
+        return null;
     }
 }

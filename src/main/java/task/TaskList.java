@@ -54,7 +54,7 @@ public class TaskList {
      * @throws DukeException if the task has already been marked done.
      * @throws IOException if the completion status of the task cannot be updated in a local save file.
      */
-    public void markTaskAsDone(int taskNumber, boolean useTempSearchList) throws DukeException, IOException {
+    public String markTaskAsDone(int taskNumber, boolean useTempSearchList) throws DukeException, IOException {
         ArrayList<Task> taskListToUse;
         String errorMessage = null;
 
@@ -73,19 +73,19 @@ public class TaskList {
         }
 
         if (errorMessage != null) {
-            throw new DukeException(Ui.spaces(5) + errorMessage);
+            throw new DukeException(errorMessage);
         }
 
         if (taskListToUse.get(taskNumber - 1).isDone) {
-            errorMessage = Ui.spaces(5) + "Task has already been marked done!";
+            errorMessage = "Task has already been marked done!";
             throw new DukeException(errorMessage);
         }
 
         taskListToUse.get(taskNumber - 1).isDone = true;
         storage.overwriteLocalSave(tasks);
+        temporarySearchList = null;
 
-        System.out.println(Ui.spaces(5) + "Nice! I've marked this task as done:\n"
-                + Ui.spaces(7) + taskListToUse.get(taskNumber - 1));
+        return ("Nice! I've marked this task as done:\n" + taskListToUse.get(taskNumber - 1));
     }
 
     /**
@@ -93,27 +93,30 @@ public class TaskList {
      * @param type A boolean that determines if tasks are listed from the original or search result list.
      * @throws DukeException if there are no task to list.
      */
-    public void listAllTasks(String type) throws DukeException {
+    public String listAllTasks(String type) throws DukeException {
         if (tasks.size() == 0) {
-            String errorMessage = Ui.spaces(5) + "There are no task(s) to list!";
+            String errorMessage = "There are no task(s) to list!";
             throw new DukeException(errorMessage);
         }
 
         ArrayList<Task> taskListToUse;
+        StringBuilder output = new StringBuilder();
 
         if (type.equals("list")) {
             taskListToUse = tasks;
-            System.out.println(Ui.spaces(5) + "Here are the tasks in your list:");
+            output.append("Here are the tasks in your list:\n\n");
         } else if (type.equals("find")) {
             taskListToUse = temporarySearchList;
-            System.out.println(Ui.spaces(5) + "Here are the matching tasks in your list:");
+            output.append("Here are the matching tasks in your list:\n\n");
         } else {
-            return;
+            return null;
         }
 
         for (int i = 0; i < taskListToUse.size(); i++) {
-            System.out.printf("%s%d. %s\n", Ui.spaces(7), i + 1, taskListToUse.get(i));
+            output.append(String.format("%d. %s\n", i + 1, taskListToUse.get(i)));
         }
+
+        return output.toString();
     }
 
     /**
@@ -123,7 +126,7 @@ public class TaskList {
      * @param taskType The type of the task (e.g. Todo, Event etc)
      * @throws IOException if task created cannot be saved to a local save file.
      */
-    public void makeNewTask(String description, String dateTime, String taskType) throws IOException {
+    public String makeNewTask(String description, String dateTime, String taskType) throws IOException {
         Task task;
 
         switch (taskType) {
@@ -144,9 +147,13 @@ public class TaskList {
         tasks.add(task);
         storage.addToLocalSave(task);
 
-        System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", Ui.spaces(5));
-        System.out.printf("%s%s\n\n", Ui.spaces(7), task);
-        System.out.printf("%sNow you have %d task(s) in your list.\n", Ui.spaces(5), tasks.size());
+        StringBuilder output = new StringBuilder();
+
+        output.append("Got it! I've added this task for you \uD83D\uDE09\n");
+        output.append(String.format("%s\n\n", task));
+        output.append(String.format("Now you have %d task(s) in your list.\n", tasks.size()));
+
+        return output.toString();
     }
 
     /**
@@ -156,7 +163,7 @@ public class TaskList {
      * @throws IOException if a local save file cannot be overwritten to reflect changes in user tasks.
      * @throws IncorrectDukeCommand if the task number given does not fall within the correct range.
      */
-    public void delete(int taskNumber, boolean useTempSearchList) throws IOException, IncorrectDukeCommand {
+    public String delete(int taskNumber, boolean useTempSearchList) throws IOException, IncorrectDukeCommand {
         String errorMessage;
         ArrayList<Task> taskListToUse;
 
@@ -187,10 +194,11 @@ public class TaskList {
         }
         
         storage.overwriteLocalSave(tasks);
+        temporarySearchList = null;
 
-        System.out.println(Ui.spaces(5) + "Noted. I've removed this task:\n"
-                + Ui.spaces(7) + removedTask + "\n\n"
-                + Ui.spaces(5) + String.format("Now you have %d task(s) in your list.", tasks.size()));
+        return ("Noted. I've removed this task:\n"
+                + removedTask + "\n\n"
+                + String.format("Now you have %d task(s) in your list.", tasks.size()));
     }
 
     /**
@@ -198,9 +206,9 @@ public class TaskList {
      * @param keyword The keyword to search for in all tasks.
      * @throws DukeException if the original task list is empty or there are no search results.
      */
-    public void find(String keyword) throws DukeException {
+    public String find(String keyword) throws DukeException {
         if (tasks.isEmpty()) {
-            throw new DukeException(Ui.spaces(5) + "There is nothing to search from!");
+            throw new DukeException("There is nothing to search from!");
         }
         
         ArrayList<Task> tempList = new ArrayList<>();
@@ -212,10 +220,10 @@ public class TaskList {
         }
 
         if (tempList.isEmpty()) {
-            throw new DukeException(Ui.spaces(5) + "There isn't a task that can be found with that keyword!");
+            throw new DukeException("There isn't a task that can be found with that keyword!");
         } else {
             temporarySearchList = tempList;
-            listAllTasks("find");
+            return listAllTasks("find");
         }
     }
 }

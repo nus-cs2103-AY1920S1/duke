@@ -27,6 +27,8 @@ public class Ui {
      * print out the input.
      */
     public static void printOutput(Object output) {
+        assert output != null : "should have output message to be printed out";
+
         System.out.println(frontSpace + output);
     }
 

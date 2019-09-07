@@ -33,6 +33,8 @@ public class Storage {
      * @param str The string of the task detail.
      */
     private void putToList(String str) {
+        assert str != null : "task detail should bot be empty";
+
         String[] oneLine = str.split(" \\| ");
         String firstWord = oneLine[0].trim();
         try {
@@ -60,6 +62,7 @@ public class Storage {
      * @return The list of task of tasks from the storage
      */
     public List<Task> load() throws DukeException {
+
         try {
             parentFile = new File(TXTFILELOCATION);
             Scanner sc = new Scanner(parentFile);

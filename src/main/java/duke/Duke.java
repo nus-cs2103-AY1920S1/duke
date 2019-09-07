@@ -15,10 +15,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+<<<<<<< HEAD
 <<<<<<< .merge_file_lAIw3Y
 import javafx.scene.image.ImageView;
 =======
 >>>>>>> .merge_file_pg9cZu
+=======
+>>>>>>> 3dcbdd2... Rebuilding the Scene using FXML, Using Controllers, Using FXML in our application
 
 /**
  * Duke class is the driver class.
@@ -157,6 +160,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+<<<<<<< HEAD
 <<<<<<< .merge_file_lAIw3Y
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
@@ -170,6 +174,13 @@ public class Duke extends Application {
             DialogBox.getUserDialog(userText, user),
             DialogBox.getDukeDialog(dukeText, duke)
 >>>>>>> .merge_file_pg9cZu
+=======
+        String userText = new String(userInput.getText());
+        String dukeText = new String(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+            DialogBox.getUserDialog(userText, user),
+            DialogBox.getDukeDialog(dukeText, duke)
+>>>>>>> 3dcbdd2... Rebuilding the Scene using FXML, Using Controllers, Using FXML in our application
         );
         userInput.clear();
     }
@@ -178,11 +189,15 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
+<<<<<<< HEAD
 <<<<<<< .merge_file_lAIw3Y
     private String getResponse(String input) {
 =======
     String getResponse(String input) {
 >>>>>>> .merge_file_pg9cZu
+=======
+    String getResponse(String input) {
+>>>>>>> 3dcbdd2... Rebuilding the Scene using FXML, Using Controllers, Using FXML in our application
         return "Duke heard: " + input;
     }
 

@@ -51,7 +51,7 @@ public class Duke extends Application{
     }*/
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws DukeExceptions{
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -102,11 +102,23 @@ public class Duke extends Application{
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try{
+                handleUserInput();
+            }
+            catch(DukeExceptions d) {
+                new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            }
+            catch(DukeExceptions d) {
+                new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -132,7 +144,7 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeExceptions{
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -146,7 +158,7 @@ public class Duke extends Application{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeExceptions{
         Ui ui = new Ui(array, num);
         if(input.equals("bye")) {
             System.exit(0);

@@ -2,9 +2,7 @@
  * This is the Ui class. It makes sense of what the input is.
  */
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
 public class Ui {
 
     static ArrayList<TaskList> array;
@@ -24,7 +22,7 @@ public class Ui {
      * @param num start with 1 for first task
      */
   
-    public String run(String input, ArrayList<TaskList> array, int num) {
+    public String run(String input, ArrayList<TaskList> array, int num) throws DukeExceptions{
         Parser p = new Parser(array, num);
         String output = "";
         if  (!input.equals("bye") && !input.equals("list") && !
@@ -33,10 +31,12 @@ public class Ui {
                 !input.contains("delete") && !(input.contains("find"))) {
             //System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             output = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            throw new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (input.equals("todo") || input.equals("event") ||
                 input.equals("deadline") || input.equals("find")) {
             //System.out.println("☹ OOPS!!! The description of a t//odo cannot be empty.");
             output = "☹ OOPS!!! The description of a " + input + " cannot be empty.";
+            throw new DukeExceptions("☹ OOPS!!! The description of a " + input + " cannot be empty.");
         } else if (input.equals("bye")) {
             return p.goodBye();
         } else if (input.equals("list")) {

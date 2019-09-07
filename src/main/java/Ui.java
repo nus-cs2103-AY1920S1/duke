@@ -20,6 +20,7 @@ public class Ui {
      * @param input command
      * @param array the list of task
      * @param num start with 1 for first task
+     * @return response from Duke
      */
   
     public String run(String input, ArrayList<TaskList> array, int num) throws DukeExceptions{

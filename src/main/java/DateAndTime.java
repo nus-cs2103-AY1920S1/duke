@@ -18,7 +18,7 @@ public class DateAndTime {
      * <p>
      *     convertDate is used to convert the input date to day month year format.
      * </p>
-     * @return
+     * @return formatted date
      */
 
     public String convertDate() {
@@ -59,7 +59,7 @@ public class DateAndTime {
      * <p>
      *     convertTime is used to convert the input time to a.m. or p.m. format.
      * </p>
-     * @return
+     * @return formatted time
      */
 
     public String convertTime() {

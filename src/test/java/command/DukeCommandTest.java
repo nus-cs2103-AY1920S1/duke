@@ -1,17 +1,11 @@
 package command;
 
-import duke.command.DukeCommandAdd;
-import duke.command.DukeCommandUpdate;
 import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
 import duke.util.ui.DukeUiMessages;
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeCommandTest {
 
@@ -35,6 +29,7 @@ public class DukeCommandTest {
         storage = new DukeStorage(DUKE_TASK_FILE_PATH);
     }
 
+    /*
     @Test
     public void testAddTodo() {
         //Test adding valid DukeTaskTodo
@@ -136,4 +131,5 @@ public class DukeCommandTest {
         output = systemOutRule.getLogWithNormalizedLineSeparator();
         assertEquals(output, errorMessage);
     }
+     */
 }

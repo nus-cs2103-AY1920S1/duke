@@ -36,19 +36,21 @@ public class Parser {
 
         isCommandValid(command);
 
-        if (command.split(" ")[0].equals("done")) {
+        String firstWord = command.split(" ")[0];
 
-            int num = Integer.parseInt(command.split(" ")[1]);
+        if (firstWord.equals("done")) {
+            String secondWord = command.split(" ")[1];
+            int num = Integer.parseInt(secondWord);
 
             return new DoneCommand(num);
 
-        } else if (command.split(" ")[0].equals("todo")) {
+        } else if (firstWord.equals("todo")) {
             int spaceIndex = command.indexOf(" ");
             ToDo todo = getToDo(command.substring(spaceIndex + 1));
 
             return new AddCommand(todo);
 
-        } else if (command.split(" ")[0].equals("deadline")) {
+        } else if (firstWord.equals("deadline")) {
 
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/");
@@ -63,7 +65,7 @@ public class Parser {
 
             return new AddCommand(deadline);
 
-        } else if (command.split(" ")[0].equals("event")) {
+        } else if (firstWord.equals("event")) {
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/");
             String datetime = command.substring(slashIndex + 4);
@@ -75,11 +77,11 @@ public class Parser {
 
             return new AddCommand(e);
 
-        } else if (command.split(" ")[0].equals("delete")) {
+        } else if (firstWord.equals("delete")) {
+            String num = command.split(" ")[1];
+            return new DeleteCommand(Integer.parseInt(num));
 
-            return new DeleteCommand(Integer.parseInt(command.split(" ")[1]));
-
-        } else if (command.split(" ")[0].equals("find")) {
+        } else if (firstWord.equals("find")) {
             int spaceIndex = command.indexOf(" ");
 
             return new FindCommand(command.substring(spaceIndex + 1));
@@ -172,40 +174,40 @@ public class Parser {
     }
 
     private static boolean isCommandValid(String str) throws DukeException {
-
-        if (! (str.split(" ")[0].equals("list")
-            || str.split(" ")[0].equals("todo")
-            || str.split(" ")[0].equals("deadline")
-            || str.split(" ")[0].equals("event")
-            || str.split(" ")[0].equals("delete")
-            || str.split(" ")[0].equals("find")
-            || str.split(" ")[0].equals("done") )){
+        String firstWord = str.split(" ")[0];
+        if (! (firstWord.equals("list")
+            || firstWord.equals("todo")
+            || firstWord.equals("deadline")
+            || firstWord.equals("event")
+            || firstWord.equals("delete")
+            || firstWord.equals("find")
+            || firstWord.equals("done") )){
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
-        } else if (! str.split(" ")[0].equals("list") && str.split(" ").length == 1) {
+        } else if (! firstWord.equals("list") && str.split(" ").length == 1) {
             throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.",
                     str.split(" ")[0]));
 
-        } else if (str.split(" ")[0].equals("deadline") && ! str.contains("/by")) {
+        } else if (firstWord.equals("deadline") && ! str.contains("/by")) {
             throw new DukeException("OOPS!!! The description of a deadline has to be followed by '/by'.");
 
-        } else if (str.split(" ")[0].equals("event") && ! str.contains("/at")) {
+        } else if (firstWord.equals("event") && ! str.contains("/at")) {
             throw new DukeException("OOPS!!! The description of an event has to be followed by '/at'.");
 
-        } else if (str.split(" ")[0].equals("deadline") && str.split(" ")[1].equals("/by")) {
+        } else if (firstWord.equals("deadline") && str.split(" ")[1].equals("/by")) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
 
-        } else if (str.split(" ")[0].equals("event") && str.split(" ")[1].equals("/at")) {
+        } else if (firstWord.equals("event") && str.split(" ")[1].equals("/at")) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
 
-        } else if (str.split(" ")[0].equals("delete") && ! isNumeric(str.split(" ")[1])) {
+        } else if (firstWord.equals("delete") && ! isNumeric(str.split(" ")[1])) {
             throw new DukeException("OOPS!!! The index of the array has to be specified.");
 
-        } else if (str.split(" ")[0].equals("delete") && isNumeric(str.split(" ")[1])
+        } else if (firstWord.equals("delete") && isNumeric(str.split(" ")[1])
                 && (Integer.parseInt(str.split(" ")[1]) <= 0)) {
             throw new DukeException("OOPS!!! Index out of bounds. It is larger or smaller than size of list.");
 
-        } else if (str.split(" ")[0].equals("delete") && str.split(" ").length > 2) {
+        } else if (firstWord.equals("delete") && str.split(" ").length > 2) {
             throw new DukeException("OOPS!!! Please key in 'delete x', where x is the index that you want to delete!");
         }
 

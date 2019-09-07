@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    final String TYPE_EVENT = "E";
     private LocalDateTime dateTime;
 
     public Event(String taskName, LocalDateTime dateTime) {
@@ -17,7 +18,7 @@ public class Event extends Task {
 
     @Override
     public String getType() {
-        return "E";
+        return TYPE_EVENT;
     }
 
     public String getDateTime() {

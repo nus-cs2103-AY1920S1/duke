@@ -1,9 +1,9 @@
-public class DateTime {
+public class DateAndTime {
     private String dateTime;
     private String date;
     private String time;
 
-    public DateTime(String s) {
+    public DateAndTime(String s) {
         dateTime = s;
         String[] arr = s.split(" ");
         date = arr[1];

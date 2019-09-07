@@ -1,6 +1,5 @@
-import java.util.Date;
 public class Event extends TaskList {
-    private DateTime at;
+    private DateAndTime at;
 
     /**
      * <p>
@@ -9,7 +8,7 @@ public class Event extends TaskList {
      */
   
     public Event(int taskNumber, String taskCheck, 
-                 String taskName, String type, DateTime t) {
+                 String taskName, String type, DateAndTime t) {
         super(taskNumber, taskCheck, taskName, type);
         at = t;
     }
@@ -21,7 +20,7 @@ public class Event extends TaskList {
      * @return event date
      */
 
-    public DateTime getAB() {
+    public DateAndTime getAB() {
         return at;
     }
 

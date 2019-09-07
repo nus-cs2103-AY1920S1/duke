@@ -3,6 +3,9 @@ package duke.command;
 import duke.exception.DukeEmptyDescriptionException;
 import duke.exception.DukeMissingDescriptionException;
 
+import duke.exception.DukeWrongTimeFormatException;
+import duke.time.TimeConverter;
+
 import duke.ui.DukeUi;
 
 import duke.tasklist.TaskList;
@@ -25,7 +28,8 @@ public class DeadlineCommand extends Command{
      * @throws DukeEmptyDescriptionException when details is an empty string.
      * @throws DukeMissingDescriptionException when details contains missing information or is in a wrong format.
      */
-    public DeadlineCommand(String details) throws DukeEmptyDescriptionException, DukeMissingDescriptionException {
+    public DeadlineCommand(String details) throws DukeEmptyDescriptionException, DukeMissingDescriptionException,
+            DukeWrongTimeFormatException {
         super(details);
         if(details.isEmpty()) {
             throw new DukeEmptyDescriptionException("deadline");
@@ -35,17 +39,7 @@ public class DeadlineCommand extends Command{
                 throw new DukeMissingDescriptionException("deadline");
             } else {
                 this.description = info[0].trim();
-                assert !this.description.isEmpty() : "Description of Deadline is empty";
-                if(info[1].split("/").length == 3) {
-                      String[] date = info[1].trim().split(" ");
-                      assert date.length == 2 : "Date is not split into Day, Month, Year and Time";
-                      String dateWord = Command.dateToWords(date[0]);
-                      String time = Command.timeConverter(date[1]);
-                      this.byWhen = dateWord + ", " + time;
-                } else {
-                    this.byWhen = info[1].trim();
-                    assert !this.byWhen.isEmpty() : "No time to indicate when deadline is due";
-                }
+                this.byWhen = TimeConverter.convert(info[1].trim());
             }
         }
     }
@@ -58,12 +52,13 @@ public class DeadlineCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
+    @Override
     public String execute(TaskList tasks, DukeUi ui, StorageData storage) {
         String details = this.getDetails();
         Deadline current = new Deadline(this.description, this.byWhen);
         assert current != null : "Deadline object not created";
         tasks.add(current);
-        storage.addDeadlineData(this.description, this.byWhen);
-        return ui.printAddDeadlineMessage(current, tasks.size());
+        storage.addData(current);
+        return ui.getAddDeadlineMessage(current, tasks.size());
     }
 }

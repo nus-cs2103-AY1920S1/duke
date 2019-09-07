@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeWrongTimeFormatException;
+import duke.time.TimeConverter;
 import duke.ui.DukeUi;
 
 import duke.tasklist.TaskList;
@@ -23,7 +25,8 @@ public class EventCommand extends Command{
      * @throws DukeEmptyDescriptionException when details is an empty string.
      * @throws DukeMissingDescriptionException when details contains missing information or is in a wrong format.
      */
-    public EventCommand(String details) throws DukeMissingDescriptionException, DukeEmptyDescriptionException {
+    public EventCommand(String details) throws DukeMissingDescriptionException, DukeEmptyDescriptionException,
+            DukeWrongTimeFormatException {
         super(details);
         if(details.isEmpty()) {
             throw new DukeEmptyDescriptionException("event");
@@ -33,17 +36,7 @@ public class EventCommand extends Command{
                 throw new DukeMissingDescriptionException("event");
             } else {
                 this.description = info[0].trim();
-                assert !this.description.isEmpty() : "Event description is empty";
-                if(info[1].split("/").length == 3) {
-                    String[] date = info[1].trim().split(" ");
-                    assert date.length == 2 : "Date is not split into Day, Month, Year and Time";
-                    String dateWord = Command.dateToWords(date[0]);
-                    String time = Command.timeConverter(date[1]);
-                    this.duringWhen = dateWord + ", " + time;
-                } else {
-                    this.duringWhen = info[1].trim();
-                    assert !this.duringWhen.isEmpty() : "Description of Event is empty";
-                }
+                this.duringWhen = TimeConverter.convert(info[1].trim());
             }
         }
     }
@@ -56,11 +49,12 @@ public class EventCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
+    @Override
     public String execute(TaskList tasks, DukeUi ui, StorageData storage) {
         Event current = new Event(this.description, this.duringWhen);
         assert current != null : "Event object is not created";
         tasks.add(current);
-        storage.addEventData(this.description, this.duringWhen);
-        return ui.printAddEventMessage(current, tasks.size());
+        storage.addData(current);
+        return ui.getAddEventMessage(current, tasks.size());
     }
 }

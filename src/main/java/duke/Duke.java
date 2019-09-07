@@ -3,13 +3,10 @@ package duke;
 import duke.command.Command;
 import duke.control.DialogBox;
 import duke.io.BufferedStringOutput;
-import duke.io.ConsoleUi;
 import duke.task.TaskList;
 import duke.util.PreParser;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -29,19 +26,24 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
     public final String DEFAULT_FILEPATH = "./data/tasks.txt";
+    public final String LOADING_ERROR_MESSAGE = "Couldn't load tasks from disk."
+            + "\nYour changes this session may not be saved!";
+    public final String WELCOME_MESSAGE = "Hello! I'm Duke."
+            + "\nWhat can I do for you?";
 
     private PreParser preParser;
     private TaskList tasks;
     private Storage storage;
     private BufferedStringOutput bufferedStringOutput;
+    private boolean wasLoadingError = false;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructs a Duke object with the data file residing in the default path.
@@ -53,7 +55,7 @@ public class Duke extends Application {
         try {
             tasks = storage.load();
         } catch (IOException | ClassNotFoundException e) {
-            showLoadingError();
+            wasLoadingError = true;
             tasks = new TaskList();
         }
     }
@@ -120,6 +122,11 @@ public class Duke extends Application {
 
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
+
+        showWelcome();
+        if (wasLoadingError) {
+            showLoadingError();
+        }
     }
 
     /**
@@ -142,12 +149,9 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        postUserDialog(userInput.getText());
+        String dukeResponse = getResponse(userInput.getText());
+        postDukeDialog(dukeResponse);
         userInput.clear();
     }
 
@@ -161,14 +165,35 @@ public class Duke extends Application {
         } catch (DukeException e) {
             bufferedStringOutput.oops(e.getMessage());
         }
+
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+
+        }
+
         return bufferedStringOutput.nextResponse();
     }
 
-    private void showLoadingError() {
+    private void postUserDialog(String text) {
+        Label label = new Label(text);
+        ImageView imageView = new ImageView(userImage);
+        dialogContainer.getChildren()
+                .add(DialogBox.getDialog(label, imageView));
+    }
 
+    private void postDukeDialog(String text) {
+        Label label = new Label(text);
+        ImageView imageView = new ImageView(dukeImage);
+        dialogContainer.getChildren()
+                .add(DialogBox.getFlippedDialog(label, imageView));
+    }
+
+    private void showLoadingError() {
+        postDukeDialog(LOADING_ERROR_MESSAGE);
     }
 
     private void showWelcome() {
-
+        postDukeDialog(WELCOME_MESSAGE);
     }
 }

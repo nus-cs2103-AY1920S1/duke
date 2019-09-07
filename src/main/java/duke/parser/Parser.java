@@ -20,6 +20,9 @@ public class Parser {
      * @throws DukeException If the input cannot be recognised.
      */
     public static Command parse(String command) throws DukeException {
+        assert command != null :
+                "Command string cannot be null";
+
         if (command.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         } else if (command.equalsIgnoreCase("list")) {

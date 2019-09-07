@@ -29,6 +29,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null || ui != null || storage != null :
+                "TaskList, Ui and Storage objects cannot be null";
+
         String response = "";
         try {
             response = taskList.deleteTask(command, ui);

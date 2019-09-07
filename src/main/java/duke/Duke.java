@@ -44,13 +44,20 @@ public class Duke {
 
     /**
      * You should have your own function to generate a response to user input.
+     *
      * @param input User's input.
      */
     public String getResponse(String input) {
         String response = "";
         try {
             Command c = Parser.parse(input);
+            assert c != null :
+                    "Parser.parse(input) should not return null.";
+
             response = c.execute(taskList, ui, storage);
+            assert response != "" :
+                    "Command's execute() should not return an empty string";
+
             storage.updateData(taskList.getTasks());
         } catch (DukeException e) {
             response = e.getMessage();

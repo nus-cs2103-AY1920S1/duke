@@ -17,6 +17,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert ui != null :
+                "Ui object cannot be null";
+
         return ui.printTasks(taskList.getTasks());
     }
 

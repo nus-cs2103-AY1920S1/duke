@@ -40,7 +40,6 @@ public class Storage {
      * @return Returns a list of tasks.
      */
     public List<Task> load() {
-
         File file = new File(filePath);
         List<Task> list = new LinkedList<>();
 
@@ -81,7 +80,6 @@ public class Storage {
      * @param list The most updated list of tasks.
      */
     public void updateData(List<Task> list) {
-
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task: list) {

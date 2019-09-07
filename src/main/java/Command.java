@@ -33,7 +33,9 @@ public class Command {
         String output = "";
         if (input.length() <= 3) {
             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else {
+        }
+        else {
+            assert(input.length() > 3) : "input length incorrect";
             if (input.equals("list")) {
                 output = ui.printList(t, s);
             } else if (input.substring(0, 4).equals("done")) {
@@ -47,6 +49,7 @@ public class Command {
                 } else if (input.length() <= 5) {
                     throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } else if (input.substring(0, 5).equals("event")) {
+                    assert(input.length() > 5) : "input length incorrect";
                     output = Parser.parseEvent(input, t, ui, s);
                 } else if (input.substring(0, 6).equals("delete")) {
                     output = Parser.parseDelete(input, t, ui, s);

@@ -43,7 +43,7 @@ public class Event extends Task {
 
     /**
      * Shows task as its saving format.
-     * @return Task as its saving format.
+     * @return TaskList.Task as its saving format.
      */
     public String toSave() {
     	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");

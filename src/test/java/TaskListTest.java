@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  */
 class TaskListTest {
 	/**
-	 * Task List Test.
+	 * TaskList.Task List Test.
 	 */
 	@Test
 	void test() {

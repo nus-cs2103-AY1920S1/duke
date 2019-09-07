@@ -32,7 +32,7 @@ public class Task {
 
     /**
      * Shows task.
-     * @return Task in string format.
+     * @return TaskList.Task in string format.
      */
     public String showTask() {
     	return "[" + getStatusIcon() + "] " + description;
@@ -47,7 +47,7 @@ public class Task {
 
     /**
      * Shows task as its saving format.
-     * @return Task in string format for saving purposes.
+     * @return TaskList.Task in string format for saving purposes.
      */
     public String toSave() {
 		return null;

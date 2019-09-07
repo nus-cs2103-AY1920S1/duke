@@ -30,7 +30,7 @@ public class Storage {
 
 	/**
 	 * Saves memory to file.
-	 * @param tasks Task list.
+	 * @param tasks TaskList.Task list.
 	 * @throws DukeException Exceptions.
 	 */
 	public void saveMemory(final TaskList tasks) throws DukeException {

@@ -1,5 +1,7 @@
 # Setting up
 
+[![Build Status](https://travis-ci.org/lightz96/duke.svg?branch=master)](https://travis-ci.org/lightz96/duke)
+
 **Prerequisites**
 
 * JDK 11

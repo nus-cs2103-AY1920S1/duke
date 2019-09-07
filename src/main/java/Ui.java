@@ -119,28 +119,4 @@ public class Ui {
         list = list + line;
         return list;
     }
-
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
-    public String getWelcomeMessage() {
-        return welcomeMessage;
-    }
-
-    public void setWelcomeMessage(String welcomeMessage) {
-        this.welcomeMessage = welcomeMessage;
-    }
-
-    public String getByeMessage() {
-        return byeMessage;
-    }
-
-    public void setByeMessage(String byeMessage) {
-        this.byeMessage = byeMessage;
-    }
 }

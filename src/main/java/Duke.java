@@ -164,9 +164,7 @@ public class Duke extends Application {
                 "D    D   U     U    K  K     E    \n" +
                 "D     D  U     U    K K      EEEE  \n" +
                 "D    D   U     U    K  K     E    \n" +
-                "DDD    UUUU  K      K   EEEEEE \n" +
-                "                     \n" +
-                "                     ";
+                "DDD    UUUU  K      K   EEEEEE \n";
 
 
 

@@ -65,60 +65,8 @@ public class Event extends Task {
         return format.format(this.atDate);
     }
 
-    public Date getAtDate() {
-        return atDate;
-    }
-
-    public void setAtDate(Date atDate) {
-        this.atDate = atDate;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getHour() {
-        return hour;
-    }
-
-    public void setHour(String hour) {
-        this.hour = hour;
-    }
-
-    public String getMinute() {
-        return minute;
-    }
-
-    public void setMinute(String minute) {
-        this.minute = minute;
-    }
-
     public String getAt() {
         return at;
-    }
-
-    public void setAt(String at) {
-        this.at = at;
     }
 
     @Override

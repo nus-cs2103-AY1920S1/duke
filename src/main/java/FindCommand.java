@@ -26,14 +26,4 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         return ui.showFindTasksMessage(tasks.findTasks(this.keyWord));
     }
-
-    /**
-     * Indicates the exit condition of the running Duke object.
-     *
-     * @return FindCommand is not the ExitCommand so it returns false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

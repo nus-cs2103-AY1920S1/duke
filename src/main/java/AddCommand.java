@@ -28,13 +28,4 @@ public class AddCommand extends Command {
         return ui.showAddTaskMessage(this.task, tasks.taskListSize());
     }
 
-    /**
-     * Indicates the exit condition of the running Duke object.
-     *
-     * @return AddCommand is not the ExitCommand so it returns false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

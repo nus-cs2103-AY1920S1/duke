@@ -71,15 +71,14 @@ public abstract class Ui {
     public abstract void println();
 
     /**
-     * Prints the content argument with indentation.
+     * Prints the content argument.
      *
      * @param content Text to display to the user.
      */
     public abstract void println(String content);
 
     /**
-     * Prints a horizontal line, the argument and another horizontal line
-     * while taking care of indentation to create a block user interface element.
+     * Prints a block user interface element containing the content argument.
      *
      * @param content Text to display to the user.
      */

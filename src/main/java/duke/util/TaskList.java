@@ -125,10 +125,10 @@ public class TaskList {
             String[] parts = s.split("\\/" + "by");
             if (parts.length < 2) {
                 String message = "Date required!\n";
-                message += "Format: deadline YOUR_TASK_NAME /by YOUR_DEADLINE";
+                message += "Format: deadline {task_name} /by {date}";
                 throw new DukeException(message);
             } else if (parts.length != 2) {
-                String message = "Format: deadline YOUR_TASK_NAME /by YOUR_DEADLINE";
+                String message = "Format: deadline {task_name} /by {date}";
                 throw new DukeException(message);
             }
             taskList.add(new Deadline(
@@ -139,10 +139,10 @@ public class TaskList {
             String[] parts = s.split("\\/" + "at");
             if (parts.length < 2) {
                 String message = "Date required!\n";
-                message += "Format: event YOUR_TASK_NAME /at YOUR_EVENT_DATE";
+                message += "Format: event {task_name} /at {date}";
                 throw new DukeException(message);
             } else if (parts.length != 2) {
-                String message = "Format: event YOUR_TASK_NAME /at YOUR_EVENT_DATE";
+                String message = "Format: event {task_name} /at {date}";
                 throw new DukeException(message);
             }
             taskList.add(new Event(
@@ -150,13 +150,14 @@ public class TaskList {
                     createDateAndTime(parts[1].substring(1))
             ));
         }
+        assert type.equals("todo") || type.equals("deadline") || type.equals("event") : "Invalid Task";
         count += 1;
         return taskList.get(count - 1);
     }
 
     /**
      * Creates fixed date/time format from given string
-     * @param s string to be interpreted as date/time formate
+     * @param s string to be interpreted as date/time format
      * @return string in the fixed format
      */
     static String createDateAndTime(String s) {
@@ -196,6 +197,7 @@ public class TaskList {
         hour = (hour > 12)
                 ? (hour - 12)
                 : ((hour == 0) ? 12 : hour);
+        assert (hour >= 0 && hour <= 12) : "Invalid Time";
         return hour + ":" + min + timeOfDay;
     }
     /**

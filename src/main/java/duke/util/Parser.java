@@ -21,6 +21,10 @@ public class Parser {
         case "commands":
             return new Command(inputParts, -1);
         }
+        String taskType = inputParts[0];
+        assert taskType.equals("todo") ||
+                taskType.equals("deadline") ||
+                taskType.equals("event") : "Invalid Task";
         return new Command(inputParts, 5);
     }
 }

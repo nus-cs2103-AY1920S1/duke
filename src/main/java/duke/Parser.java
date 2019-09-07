@@ -1,6 +1,8 @@
 package duke;
 
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import commands.Command;
 import commands.AddCommand;
@@ -53,6 +55,88 @@ public class Parser {
             throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
                     + "but I don't know what that means :-(");
         }
+    }
+
+    public static LocalDateTime parseDateTime(String dateTime) {
+        LocalDateTime localDateTime;
+
+        // Try parsing for different date time formats
+        // to give the user greater freedom to type dateTimes in
+        // a variety of formats
+
+        // Parse for format of type: 07/10/1997 0839
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 07101997 0839
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 07 10 1997 0839
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd MM yyyy HHmm"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 7 October 1997 0839
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d LLLL yyyy HHmm"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 07/10/1997 8:39AM
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy h:mma"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 07101997 8:39AM
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("ddMMyyyy h:mma"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 07 10 1997 8:39PM
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd MM yyyy h:mma"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        // Parse for format of type: 7 October 1997 8:39PM
+        try {
+            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d LLLL yyyy h:mma"));
+            return localDateTime;
+        } catch (DateTimeParseException ignored) {
+            // Ignore the exception because date time keyed in by user
+            // could be considered valid by subsequent parses
+        }
+
+        return null;
     }
 
 }

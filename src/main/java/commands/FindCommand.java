@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      * @param keywords String[] containing the keywords to be matched
      * @return boolean value detailing whether a match was found
      */
-    public static boolean containsKeyWords(String description, String[] keywords) {
+    private static boolean containsKeyWords(String description, String[] keywords) {
         ArrayList<String> al = new ArrayList<>(Arrays.asList(keywords));
         ArrayList<String> desc = new ArrayList<>(Arrays.asList(description.split(" ")));
         return desc.containsAll(al);
@@ -53,14 +53,14 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] keywords = commandArr[1].split(" ");
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        String store = "     Here are the matching tasks in your list:\n";
+        StringBuilder store = new StringBuilder("     Here are the matching tasks in your list:\n");
         for (int i = 0; i < taskLst.size(); i++) {
             if (containsKeyWords(taskLst.get(i).getDescription(), keywords)) {
-                store += String.format("     %d.%s\n",
-                        i + 1, taskLst.get(i));
+                store.append(String.format("     %d.%s\n",
+                        i + 1, taskLst.get(i)));
             }
         }
-        return store;
+        return store.toString();
     }
 
 }

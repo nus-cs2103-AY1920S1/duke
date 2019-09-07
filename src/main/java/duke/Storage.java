@@ -28,7 +28,7 @@ public class Storage {
      *
      * @param filePath The path of the file to be read from and written to.
      */
-    public Storage(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -40,35 +40,33 @@ public class Storage {
      * @throws DukeException  if there is invalid input.
      * @throws IOException  if there is an error reading from the file.
      */
-    public ArrayList<Task> load() throws DukeException, IOException {
+    ArrayList<Task> load() throws DukeException, IOException {
 
         File f = new File(filePath);
         // Create a new txt file if it currently does not exist
         f.createNewFile();
         Scanner sc = new Scanner(f);
-        ArrayList<Task> taskLst = new ArrayList<Task>();
+        ArrayList<Task> taskLst = new ArrayList<>();
 
         while (sc.hasNext()) {
             String s = sc.nextLine();
             String line = s.substring(8);
             if (s.charAt(0) == 'T') {
-                taskLst.add(new ToDo(line, s.charAt(4) == '1' ? true : false));
-            } else if (s.charAt(0) == 'D') {
+                taskLst.add(new ToDo(line, s.charAt(4) == '1'));
+            } else if (s.charAt(0) == 'D' || s.charAt(0) == 'E') {
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '|') {
-                        taskLst.add(new Deadline(line.substring(0, i - 1),
-                            LocalDateTime.parse(line.substring(i + 2),
-                                DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")),
-                                    s.charAt(4) == '1' ? true : false));
-                    }
-                }
-            } else if (s.charAt(0) == 'E') {
-                for (int i = 0; i < line.length(); i++) {
-                    if (line.charAt(i) == '|') {
-                        taskLst.add(new Event(line.substring(0, i - 1),
-                            LocalDateTime.parse(line.substring(i + 2),
-                                DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")),
-                                    s.charAt(4) == '1' ? true : false));
+                        if (s.charAt(0) == 'D') {
+                            taskLst.add(new Deadline(line.substring(0, i - 1),
+                                    LocalDateTime.parse(line.substring(i + 2),
+                                            DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")),
+                                    s.charAt(4) == '1'));
+                        } else { // if s.charAt(0) == 'E'
+                            taskLst.add(new Event(line.substring(0, i - 1),
+                                    LocalDateTime.parse(line.substring(i + 2),
+                                            DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")),
+                                    s.charAt(4) == '1'));
+                        }
                     }
                 }
             } else {
@@ -87,11 +85,11 @@ public class Storage {
      */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        String textToAdd = "";
+        StringBuilder textToAdd = new StringBuilder();
         for (Task task : tasks.getTaskLst()) {
-            textToAdd += task.fileString() + "\n";
+            textToAdd.append(task.fileString()).append("\n");
         }
-        fw.write(textToAdd);
+        fw.write(textToAdd.toString());
         fw.close();
     }
 }

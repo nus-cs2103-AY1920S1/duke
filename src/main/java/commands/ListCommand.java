@@ -36,12 +36,12 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        String store= "     Here are the tasks in your list:\n";
+        StringBuilder store= new StringBuilder("     Here are the tasks in your list:\n");
         for (int i = 0; i < taskLst.size(); i++) {
-            store += String.format("     %d.%s\n",
-                    i + 1, taskLst.get(i));
+            store.append(String.format("     %d.%s\n",
+                    i + 1, taskLst.get(i)));
         }
-        return store;
+        return store.toString();
     }
 
 }

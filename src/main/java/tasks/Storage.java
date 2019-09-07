@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Constructor for Storage object.
+     *
      * @param filePath path of the file.
      */
     public Storage(String filePath) {
@@ -35,6 +36,7 @@ public class Storage {
 
     /**
      * Create a task list by reading the text file.
+     *
      * @param file Text file.
      * @return taskArrayList. Array list of tasks.
      * @throws DukeException if there is an error reading the file.
@@ -74,6 +76,7 @@ public class Storage {
 
     /**
      * Sets the tasks to done accordingly
+     *
      * @param task Task.
      * @param flag Flag to check if task is done.
      */
@@ -85,6 +88,7 @@ public class Storage {
 
     /**
      * Giving permissions to edit the file.
+     *
      * @param planner Planner.
      */
     private void setPlannerPermissions(File planner) {
@@ -95,6 +99,7 @@ public class Storage {
 
     /**
      * Update the file with tasks from task list.
+     *
      * @param taskList task list.
      * @throws DukeException if there is an error with writing on the file.
      */
@@ -110,6 +115,7 @@ public class Storage {
 
     /**
      * Updates the file with individual strings.
+     *
      * @param text String to update the file with.
      * @throws DukeException if there is an error with writing on the file.
      */

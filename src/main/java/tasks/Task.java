@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor for task object
+     *
      * @param name Task name.
      */
     public Task(String name) {
@@ -28,6 +29,7 @@ public class Task {
 
     /**
      * Returns name of task.
+     *
      * @return name of task.
      */
     public String getName() {

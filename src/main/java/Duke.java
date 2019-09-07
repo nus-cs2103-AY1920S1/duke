@@ -36,10 +36,11 @@ public class Duke extends Application {
 
     /**
      * Constructor for the Duke object.
+     *
      * @throws DukeException
      */
 
-    public Duke() throws DukeException{
+    public Duke() throws DukeException {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         storage = new Storage("storage.txt");
         this.ui = new Ui();
@@ -48,6 +49,7 @@ public class Duke extends Application {
 
     /**
      * Main running program for the JavaFX
+     *
      * @param stage Stage
      * @throws Exception
      */
@@ -91,7 +93,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -118,9 +120,11 @@ public class Duke extends Application {
 
 
     }
+
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -150,6 +154,7 @@ public class Duke extends Application {
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     *
      * @param input The user's input.
      * @return Returns the expected Duke output.
      */

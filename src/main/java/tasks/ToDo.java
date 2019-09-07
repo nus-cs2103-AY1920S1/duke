@@ -9,6 +9,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor for todo object.
+     *
      * @param name Name of object.
      */
     public ToDo(String name) {

@@ -1,5 +1,7 @@
 package jermi.task;
 
+import jermi.type.TaskType;
+
 /**
  * A representation of the deadline task.
  */
@@ -34,7 +36,7 @@ public class Deadline extends TaskWithDateTime {
      */
     @Override
     String getTypeCode() {
-        return "D";
+        return TaskType.DEADLINE.getTypeCode();
     }
 
     /**

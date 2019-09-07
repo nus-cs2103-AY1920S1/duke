@@ -1,5 +1,7 @@
 package jermi.task;
 
+import jermi.type.TaskType;
+
 /**
  * A representation of the event task.
  */
@@ -34,7 +36,7 @@ public class Event extends TaskWithDateTime {
      */
     @Override
     String getTypeCode() {
-        return "E";
+        return TaskType.EVENT.getTypeCode();
     }
 
     /**

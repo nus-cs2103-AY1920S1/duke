@@ -1,5 +1,7 @@
 package jermi.task;
 
+import jermi.type.TaskType;
+
 /**
  * A representation of the todo task.
  */
@@ -32,6 +34,6 @@ public class ToDo extends Task {
      */
     @Override
     String getTypeCode() {
-        return "T";
+        return TaskType.TO_DO.getTypeCode();
     }
 }

@@ -1,5 +1,6 @@
 package jermi.component;
 
+import jermi.exception.CorruptedSaveFormatException;
 import jermi.exception.JermiException;
 import jermi.exception.LoadingException;
 import jermi.exception.SavingException;
@@ -7,6 +8,8 @@ import jermi.task.Deadline;
 import jermi.task.Event;
 import jermi.task.Task;
 import jermi.task.ToDo;
+import jermi.type.TaskType;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,29 +39,36 @@ public class Storage {
     }
 
     /**
-     * Converts saved data in file to {@link Task} objects.
+     * Converts a single line of saved data in the file to a {@link Task} object.
      *
-     * @param fileFormat Saved data.
+     * @param saveFormat A string containing information regarding the task.
      * @return Task.
      */
-    private Task fileFormatToTask(String fileFormat) {
-        Task task = null;
-        String[] components = fileFormat.split("\\|");
+    private Task saveFormatToTask(String saveFormat) throws JermiException {
+        try {
+            Task task = null;
+            String[] components = saveFormat.split("\\|");
+            String typeCode = components[0];
+            String isDone = components[1];
+            String description = components[2];
 
-        switch (components[0]) {
-        case "T":
-            task = new ToDo(components[2], components[1]);
-            break;
-        case "D":
-            task = new Deadline(components[2], components[3], components[1]);
-            break;
-        case "E":
-            task = new Event(components[2], components[3], components[1]);
-            break;
-        default:
+            if (typeCode.equals(TaskType.TO_DO.getTypeCode())) {
+                task = new ToDo(description, isDone);
+            } else {
+                String dateTime = components[3];
+                if (typeCode.equals(TaskType.DEADLINE.getTypeCode())) {
+                    task = new Deadline(description, dateTime, isDone);
+                } else if (typeCode.equals(TaskType.EVENT.getTypeCode())) {
+                    task = new Event(description, dateTime, isDone);
+                } else {
+                    throw new CorruptedSaveFormatException(saveFormat);
+                }
+            }
             assert task != null : "task cannot be null";
+            return task;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new CorruptedSaveFormatException(saveFormat);
         }
-        return task;
     }
 
     /**
@@ -69,7 +79,9 @@ public class Storage {
     private void fileToTaskList() throws JermiException {
         try {
             List<String> lines = Files.readAllLines(this.file.toPath());
-            lines.forEach(line -> this.taskList.add(this.fileFormatToTask(line)));
+            for (String line : lines) {
+                this.taskList.add(this.saveFormatToTask(line));
+            }
         } catch (IOException e) {
             throw new LoadingException(e.getMessage());
         }

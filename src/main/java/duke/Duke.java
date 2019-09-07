@@ -64,10 +64,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates the response by Duke in response to the user's input.
+     * @param input Input by user.
+     * @return Duke's response.
+     */
     public String getResponse(String input) {
         ByteArrayOutputStream message = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(message);
-        PrintStream old = System.out;
+        final PrintStream old = System.out;
         System.setOut(ps);
         generateResponse(input);
         System.out.flush();

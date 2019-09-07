@@ -42,7 +42,8 @@ public class AddDeadlineCommand extends Command {
      * @throws MissingDescriptionException If description is missing.
      * @throws duke.exception.InsufficientDetailsException If insufficient details are given.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException, InsufficientDetailsException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws MissingDescriptionException, InsufficientDetailsException {
         String[] detailsSplit = details.split("/by");
         boolean descriptionIsEmpty = detailsSplit.length == 0 || getAction(detailsSplit).length() == 0;
         boolean hasInsufficientDetails = detailsSplit.length < 2 || getDeadline(detailsSplit).length() == 0;
@@ -50,7 +51,8 @@ public class AddDeadlineCommand extends Command {
             throw new MissingDescriptionException("deadline");
         }
         if (hasInsufficientDetails) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of a deadline requires a task and/or a due date");
+            throw new InsufficientDetailsException("☹ OOPS!!! The description of a deadline"
+                    + " requires a task and/or a due date");
         }
         addDeadline(tasks, ui, storage, detailsSplit);
     }

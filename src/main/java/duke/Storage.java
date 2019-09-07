@@ -53,7 +53,7 @@ public class Storage {
                     loadDeadline(tasks, information, isDone, description);
                 } else if (type.equals("T")) {
                     loadTodo(tasks, isDone, description);
-                } else if (type.equals("E")){
+                } else if (type.equals("E")) {
                     loadEvent(tasks, information, isDone, description);
                 } else {
                     throw new StorageException("☹ OOPS!!! Something must have gone wrong during storage.");
@@ -77,7 +77,8 @@ public class Storage {
         return information[2];
     }
 
-    private void loadEvent(ArrayList<Task> tasks, String[] information, boolean isDone, String description) throws InvalidDateException, InvalidTimeException {
+    private void loadEvent(ArrayList<Task> tasks, String[] information,
+                           boolean isDone, String description) throws InvalidDateException, InvalidTimeException {
         String startDate = information[3];
         String startTime = information.length > 4 ? information[4] : "";
         String endDate = information.length > 5 ? information[5] : "";
@@ -98,7 +99,8 @@ public class Storage {
         tasks.add(todo);
     }
 
-    private void loadDeadline(ArrayList<Task> tasks, String[] information, boolean isDone, String description) throws InvalidDateException, InvalidTimeException {
+    private void loadDeadline(ArrayList<Task> tasks, String[] information,
+                              boolean isDone, String description) throws InvalidDateException, InvalidTimeException {
         String date = information[3];
         String time = "";
         boolean hasTimeDetails = information.length == 5;
@@ -131,7 +133,7 @@ public class Storage {
                     writeDeadline((Deadline) task, type, isDone, description, taskInformation);
                 } else if (type.equals("T")) {
                     writeTodo(type, isDone, description, taskInformation);
-                } else if (type.equals("E")){
+                } else if (type.equals("E")) {
                     writeEvent((Event) task, type, isDone, description, taskInformation);
                 }
                 fileWriter.write(taskInformation.toString() + "\n");
@@ -156,7 +158,8 @@ public class Storage {
         taskInformation.append(type + " | " + isDone + " | " + description);
     }
 
-    private void writeDeadline(Deadline task, String type, int isDone, String description, StringBuilder taskInformation) {
+    private void writeDeadline(Deadline task, String type, int isDone,
+                               String description, StringBuilder taskInformation) {
         Deadline deadline = task;
         String date = deadline.getUnprocessedDate();
         String time = deadline.getUnprocessedTime();

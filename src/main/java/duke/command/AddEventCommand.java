@@ -44,7 +44,8 @@ public class AddEventCommand extends Command {
      * @throws MissingDescriptionException If description is missing.
      * @throws InsufficientDetailsException If insufficient details are given.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException, InsufficientDetailsException {
+    public void execute(TaskList tasks, Ui ui, Storage storage)
+            throws MissingDescriptionException, InsufficientDetailsException {
         String[] detailsSplit = details.split("/at");
         boolean descriptionIsEmpty = detailsSplit.length == 0 || getEvent(detailsSplit).length() == 0;
         boolean scheduleTimeIsEmpty = detailsSplit.length < 2 || getTimings(detailsSplit).length() == 0;

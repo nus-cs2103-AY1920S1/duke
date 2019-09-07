@@ -25,9 +25,9 @@ public class Duke extends Application {
     /**
      * Class constructor.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("/Users/stephenchua/duke/src/main/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -53,7 +53,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/stephenchua/duke/src/main/data/duke.txt").run();
+        new Duke().run();
     }
 
     @Override

@@ -12,55 +12,59 @@ public class Ui {
     /**
      * Prints welcome when Duke is run.
      */
-    public void showWelcome() {
+    public String showWelcome() {
+        String result = "";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        this.printLine();
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        this.printLine();
+        result += "Hello from\n" + logo + "\n";
+        result += printLine();
+        result += "Hello! I'm Duke\nWhat can I do for you?\n";
+        result += printLine();
+        return result;
     }
 
     /**
      * Prints goodbye when 'bye' command executed.
      */
-    public void showGoodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodBye() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
      * Prints exception's message.
      * @param e exception that needs to be printed.
      */
-    public void showException(Exception e) {
-        System.err.println(e.getMessage());
+    public String showException(Exception e) {
+        return e.getMessage() + "\n";
     }
 
     /**
      * Prints particular type of error message when non-number input is provided where number is required.
      * @param type type of command for which the error message needs to be generated.
      */
-    public void showNumberFormatError(String type) {
+    public String showNumberFormatError(String type) {
+        String result = "";
         switch (type) {
-        case "done" : System.err.println(" :( OOPS!!! Invalid format."
-                + " Please enter the number of the task to be marked as done.");
+        case "done" : result += " :( OOPS!!! Invalid format."
+                + " Please enter the number of the task to be marked as done.\n";
             break;
-        case "delete" : System.err.println(" :( OOPS!!! Invalid format."
-                + " Please enter the number of the task to be deleted.");
+        case "delete" : result += " :( OOPS!!! Invalid format."
+                + " Please enter the number of the task to be deleted.\n";
             break;
-        default : System.err.println(" :( OOPS!!! Invalid format."
-            + " Please enter a number.");
+        default : result += " :( OOPS!!! Invalid format."
+            + " Please enter a number.\n";
         }
+        return result;
     }
 
     /**
      * Prints a long horizontal line for segmentation of commands that user provides and output that user sees.
      */
-    public void printLine() {
-        System.out.println(hr);
+    public static String printLine() {
+        return hr + "\n";
     }
 
     /**
@@ -68,19 +72,23 @@ public class Ui {
      * @param task the task that is created.
      * @param noOfTasks number of tasks at the time, usually from TaskList.
      */
-    public void showTaskCreated(Task task, int noOfTasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task);
-        System.out.println("Now you have " + noOfTasks + " tasks in the list.");
+    public String showTaskCreated(Task task, int noOfTasks) {
+        String result = "";
+        result += "Got it. I've added this task:\n";
+        result += " " + task + "\n";
+        result += "Now you have " + noOfTasks + " tasks in the list.\n";
+        return result;
     }
 
     /**
      * Prints a message providing details about the task just marked as done.
      * @param task task that is marked as done.
      */
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task);
+    public String showTaskDone(Task task) {
+        String result = "";
+        result += "Nice! I've marked this task as done:\n";
+        result += "  " + task + "\n";
+        return result;
     }
 
     /**
@@ -88,31 +96,35 @@ public class Ui {
      * @param task task that is just deleted.
      * @param noOfTasks number of tasks in TaskList
      */
-    public void showTaskDeleted(Task task, int noOfTasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(" " + task);
-        System.out.println("Now you have " + noOfTasks + " tasks in the list.");
+    public String showTaskDeleted(Task task, int noOfTasks) {
+        String result = "";
+        result += "Noted. I've removed this task:\n";
+        result += " " + task + "\n";
+        result += "Now you have " + noOfTasks + " tasks in the list.\n";
+        return result;
     }
 
     /**
      * Prints output for the 'list' command.
      * @param taskList the taskList that needs its Tasks' details printed.
      */
-    public void showTasks(TaskList taskList) {
+    public String showTasks(TaskList taskList) {
+        String result = "";
         ArrayList<Task> arr = taskList.getArr();
         for (int i = 0; i < arr.size(); i++) {
             Task temp = arr.get(i);
-            System.out.println((i + 1) + ". " + temp);
+            result += (i + 1) + ". " + temp + "\n";
         }
         if (taskList.isEmpty()) {
-            System.out.println("There are no Tasks to show.");
+            result += "There are no Tasks to show.\n";
         }
+        return result;
     }
 
     /**
      * Prints error message if loading history file encounters problem.
      */
-    public void showLoadingError() {
-        System.err.println(" :( OOPS!!! Error occurred while loading the history file.");
+    public String showLoadingError() {
+        return " :( OOPS!!! Error occurred while loading the history file.\n";
     }
 }

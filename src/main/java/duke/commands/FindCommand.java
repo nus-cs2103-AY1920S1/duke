@@ -23,6 +23,7 @@ public class FindCommand extends Command {
 
     /**
      * Processes the keyword that has been input into Duke chat bot.
+     *
      * @param keyword that the user has input to search all his tasks for
      */
     public FindCommand(String keyword) {
@@ -31,6 +32,7 @@ public class FindCommand extends Command {
 
     /**
      * Searches for tasks with that specific keyword and returns all matching tasks to the user.
+     *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

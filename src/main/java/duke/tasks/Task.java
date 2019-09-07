@@ -17,6 +17,7 @@ public class Task {
 
     /**
      * Returns the corresponding icon to determine if a task is done or not.
+     *
      * @return String that represents whether the task has been marked as done
      */
     public String getStatusIcon() {

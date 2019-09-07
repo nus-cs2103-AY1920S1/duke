@@ -23,6 +23,7 @@ public class Parser {
     /**
      * Generates and returns the corresponding command according to the entire String that has been taken
      * in.
+     *
      * @param c a String containing the unprocessed input command to Duke
      * @exception DukeException is thrown when there is an error with the input
      */

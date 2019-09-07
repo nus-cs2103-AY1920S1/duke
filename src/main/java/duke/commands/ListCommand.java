@@ -19,6 +19,7 @@ public class ListCommand extends Command {
 
     /**
      * Prints all the tasks that is stored in Duke at that point in time.
+     *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

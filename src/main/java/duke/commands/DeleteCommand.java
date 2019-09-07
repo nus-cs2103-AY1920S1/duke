@@ -23,6 +23,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Removes the target task from the list and prompts the user the number of remaining tasks saved.
+     *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

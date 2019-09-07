@@ -30,6 +30,7 @@ public class Storage {
 
     /**
      * Loads previously saved information on the hard disk when Duke starts.
+     *
      * @exception DukeException is thrown when there is an error with the location where the information was stored
      */
     public ArrayList<Task> load() throws DukeException {
@@ -48,6 +49,7 @@ public class Storage {
 
     /**
      * Converts the Task in the form it was saved into the hard drive to a Task object.
+     *
      * @param taskString a String read from the hard disk to be processed into a task
      */
     private static Task loadStringToTask(String taskString) {
@@ -65,6 +67,7 @@ public class Storage {
 
     /**
      * Generates the TD task that was loaded from the hard drive.
+     *
      * @param info a String[] containing information to remake the task
      */
     private static ToDo remakeTodo(String[] info) {
@@ -77,6 +80,7 @@ public class Storage {
 
     /**
      * Generates the Deadline task that was loaded from the hard drive.
+     *
      * @param info a String[] containing information to remake the task
      */
     private static Deadline remakeDeadline(String[] info) {
@@ -89,6 +93,7 @@ public class Storage {
 
     /**
      * Generates the Event task that was loaded from the hard drive.
+     *
      * @param info a String[] containing information to remake the task
      */
     private static Event remakeEvent(String[] info) {
@@ -102,6 +107,7 @@ public class Storage {
     /**
      * Saves the updated list into the hard drive. If there is nothing in the memory, an empty string is added into
      * the hard disk.
+     *
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
     public static void save(TaskList allTasks) throws IOException {
@@ -124,45 +130,12 @@ public class Storage {
         } else {
             writeToFile(filePath, "");
         }
-
-            /*
-            Task firstTask = memory.get(0);
-            if (firstTask instanceof ToDo) {
-                ToDo first = (ToDo) firstTask;
-                text = first.format();
-            } else if (firstTask instanceof Deadline) {
-                Deadline first = (Deadline) firstTask;
-                text = first.format();
-            } else {
-                Event first = (Event) firstTask;
-                text = first.format();
-            }
-
-            int numTasks = memory.size();
-            for (int i = 0; i < numTasks; i++) {
-                Task specTask = memory.get(i);
-                if (specTask instanceof ToDo) {
-                    ToDo spec = (ToDo) specTask;
-                    text = spec.format();
-                } else if (specTask instanceof Deadline) {
-                    Deadline spec = (Deadline) specTask;
-                    text = spec.format();
-                } else {
-                    Event spec = (Event) specTask;
-                    text = spec.format();
-                }
-                text += System.lineSeparator();
-            }
-            writeToFile(filePath, text.trim());
-        } else {
-            writeToFile(filePath, "");
-        }
-             */
     }
 
     /**
      * Overwrites the information from Duke to the hard disk. This is done to automatically update all
      * tasks in the hard disk.
+     *
      * @param filePath a String containing the location of the saved file
      * @param textToAdd a String containing all information processed from the memory stored in Duke
      * @exception IOException is thrown when there is an error saving the data in the hard disk

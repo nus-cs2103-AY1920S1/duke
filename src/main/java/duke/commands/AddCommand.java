@@ -25,10 +25,13 @@ public class AddCommand extends Command {
     private Ui ui;
     private DateTime dateTime = new DateTime();
     private String[] allDetails;
+    private String deadlineErrorMsg = "Please write the deadline such as 29/2/2019 1800 and resubmit the command!";
+    private String eventErrorMsg = "Please write the event timing such as 29/2/2019 1800-2000 and resubmit the command";
 
     /**
      * Loads the entire input command into the object for further processing of its details, such as
      * type of task added and other details (e.g. description and time).
+     *
      * @param allDetails a String array containing all the details to create the appropriate task
      */
     public AddCommand(String[] allDetails) {
@@ -38,6 +41,7 @@ public class AddCommand extends Command {
     /**
      * Checks for the type of task that has been added and passes along processed String of information
      * containing details about the task for the task to be created.
+     *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file
@@ -70,6 +74,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates a TD object and adds it into memory.
+     *
      * @param a a String of information containing details for the To Do task
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
@@ -83,6 +88,7 @@ public class AddCommand extends Command {
     /**
      * Creates a deadlineTask and adds it into memory.
      * If command does not include a deadline, then user is prompted to enter the command again.
+     *
      * @param b a String of information containing details for the Deadline task
      * @exception DukeException is thrown when there is an error with the input
      * @exception IOException is thrown when there is an error saving the data in the hard disk
@@ -94,7 +100,7 @@ public class AddCommand extends Command {
         } else {
             String[] time = details[1].trim().split(" ");
             if (time.length < 2) {
-                throw new DukeException("Oops! Please write the deadline such as 29/2/2019 1800");
+                throw new DukeException(deadlineErrorMsg);
             } else {
                 try {
                     String formattedTime = dateTime.getDate(time[0]) + dateTime.getTime(time[1]);
@@ -103,8 +109,7 @@ public class AddCommand extends Command {
                     this.storage.save(tasks);
                     return printAddedTask(newDeadline);
                 } catch (DateException e) {
-                    throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as "
-                            + "29/2/2019 1800");
+                    throw new DukeException(e.getMessage() + deadlineErrorMsg );
                 }
             }
         }
@@ -113,6 +118,7 @@ public class AddCommand extends Command {
     /**
      * Creates an Event object and adds it into memory.
      * If command does not include a timing, then user is prompted to enter the command again.
+     *
      * @param c a String of information containing details for the Event task
      * @exception DukeException is thrown when there is an error with the input
      * @exception IOException is thrown when there is an error saving the data in the hard disk
@@ -124,12 +130,12 @@ public class AddCommand extends Command {
         } else {
             String[] eventTime = details[1].trim().split(" ");
             if (eventTime.length < 2) {
-                throw new DukeException("Oops! Please write the event timing such as 29/2/2019 1800-2000");
+                throw new DukeException(eventErrorMsg);
             } else {
                 try {
                     String[] hoursMin = eventTime[1].split("-");
                     if (hoursMin.length < 2) {
-                        throw new DukeException("Oops! Please write the event timing such as 29/2/2019 1800-2000");
+                        throw new DukeException(eventErrorMsg);
                     } else {
                         String formattedTime = dateTime.getDate(eventTime[0]) + dateTime.getTime(hoursMin[0]) + "-"
                                 + dateTime.getTime(hoursMin[1]);
@@ -139,8 +145,7 @@ public class AddCommand extends Command {
                         return printAddedTask(newEvent);
                     }
                 } catch (DateException e) {
-                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as "
-                            + "29/2/2019 1800-2000");
+                    throw new DukeException(e.getMessage() + eventErrorMsg);
                 }
             }
         }
@@ -148,6 +153,7 @@ public class AddCommand extends Command {
 
     /**
      * Prints the task that was just added to the list.
+     *
      * @param task the Task to be printed after it has been added
     */
     private String printAddedTask(Task task) {

@@ -19,6 +19,7 @@ public class DateTime {
 
     /**
      * Returns the date in the desired convention.
+     *
      * @param date a String containing the date that was in the command to Duke
      * @exception DateException if the month number is invalid
      */
@@ -32,6 +33,7 @@ public class DateTime {
 
     /**
      * Adds the suffix for the day in the date String. It is used in the getDate method.
+     *
      * @param day a String containing the day number
      */
     private static String addDaySuffix(String day) {
@@ -42,6 +44,7 @@ public class DateTime {
 
     /**
      * Changes the month number to its name in the date String. It is used in the getDate method.
+     *
      * @param month a String containing the month number
      * @exception DateException if the month number is invalid
      */
@@ -79,6 +82,7 @@ public class DateTime {
 
     /**
      * Returns the time in the desired convention.
+     *
      * @param time a String containing the time in military format
      * @exception DateException if the month number is invalid
      */
@@ -98,6 +102,7 @@ public class DateTime {
 
     /**
      * Returns the hour component of time. It is used in the getTime method.
+     *
      * @param hours a String containing the hour number
      * @exception DateException if the month number is invalid
      */
@@ -119,6 +124,7 @@ public class DateTime {
 
     /**
      * Returns the minute component of time. It is used in the getTime method.
+     *
      * @param minutes a String containing the minute number
      * @exception DateException if the month number is invalid
      */

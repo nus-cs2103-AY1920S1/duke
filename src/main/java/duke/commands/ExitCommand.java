@@ -15,6 +15,7 @@ public class ExitCommand extends Command {
 
     /**
      * Prints the exit line from Duke and closes the chatbot.
+     *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file

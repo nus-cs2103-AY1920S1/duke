@@ -47,6 +47,7 @@ public class Ui {
 
     /**
      * This method prints the message for the user to read.
+     *
      * @param string containing the response to the user's input
      */
     public String printLine(String string) {

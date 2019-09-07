@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
         import javafx.scene.control.Button;
         import javafx.scene.control.ScrollPane;
@@ -34,7 +35,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. If the chose to exit the application, closes window. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -44,6 +45,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
+//        checks if user chose to close app.
+        if (Parser.parse(input.split("\\s+")).isExit()) {
+            Platform.exit();
+        }
+
         userInput.clear();
     }
 

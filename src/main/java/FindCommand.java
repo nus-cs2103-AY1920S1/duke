@@ -3,7 +3,7 @@ import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
     private String description;
-    private final String heading = "Here are the matching tasks in your list: \n";
+    private final static String HEADING = "Here are the matching tasks in your list: \n";
 
     FindCommand(String description) {
         this.description = description;
@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     @Override
     public String run(TodoList tasks, Storage storage) {
         List<Task> matches = tasks.find(this.description);
-        return heading + matches.stream().map(task -> "\t" + task.toString())
+        return HEADING + matches.stream().map(task -> "\t" + task.toString())
                                 .collect(Collectors.joining("\n"));
     }
 

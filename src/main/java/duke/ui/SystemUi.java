@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 public class SystemUi extends Ui {
 

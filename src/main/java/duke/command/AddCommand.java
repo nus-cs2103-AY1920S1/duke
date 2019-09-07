@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.task.Task;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public abstract class AddCommand extends Command {
     protected final String description;

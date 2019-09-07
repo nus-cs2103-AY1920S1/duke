@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 

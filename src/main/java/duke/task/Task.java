@@ -7,13 +7,10 @@ import duke.ui.Checkbox;
  * One Task object per task.
  */
 public class Task {
-    /**
-     * Name of the Task.
-     */
+
+    /** Name of the Task. */
     private String taskName;
-    /**
-     * Done State of the Task.
-     */
+    /** Done State of the Task. */
     private boolean isDone;
 
     /**

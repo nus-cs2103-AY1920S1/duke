@@ -8,9 +8,7 @@ import duke.ui.Ui;
 
 public class MakeDoneCommand extends Command {
 
-    /**
-     * Chosen Task .
-     */
+    /** Chosen Task. */
     int chosenTaskNo;
 
     /**

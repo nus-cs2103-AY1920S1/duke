@@ -12,17 +12,11 @@ import java.util.Date;
 
 public class AddEventCommand extends Command {
 
-    /**
-     * Details of the event.
-     */
+    /** Details of the event. */
     private String detail;
-    /**
-     * Date-Time starting from.
-     */
+    /** Date-Time starting from. */
     private String datetimeFrom;
-    /**
-     * Date-Time ending with.
-     */
+    /** Date-Time ending with. */
     private String datetimeTo;
 
     /**

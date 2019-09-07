@@ -8,9 +8,7 @@ import duke.ui.Ui;
 
 public class DeleteTaskCommand extends Command {
 
-    /**
-     * Chosen Task index.
-     */
+    /** Chosen Task index. */
     int chosenTaskNo;
 
     /**

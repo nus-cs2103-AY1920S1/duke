@@ -19,14 +19,18 @@ import java.text.ParseException;
  */
 public class Duke {
 
+    /** Instance of TaskList. */
     private TaskList tasks;
+    /** Instance of Ui. */
     private Ui ui;
+    /** Instance of Storage. */
     private Storage storage;
 
+    /** States if the application is ready to exit. */
     private boolean isGoodbye = false;
 
     /**
-     * Constructs the duke.Duke Object.
+     * Constructs the Duke Object.
      *
      * @param filePath Path to the data text file
      */
@@ -47,7 +51,8 @@ public class Duke {
     }
 
     /**
-     * Runs the logic of duke.Duke.
+     * Runs the logic of Duke.
+     * Deprecated due to GUI, kept around for contingencies
      */
     public void run() {
 
@@ -68,7 +73,7 @@ public class Duke {
     }
 
     /**
-     * Starts the duke.Duke instance.
+     * Starts the Duke instance.
      *
      * @param args Command line arguments
      */

@@ -6,16 +6,14 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
-    /**
-     * Deadline Time(with date).
-     */
+    /** Deadline Time(with date). */
     private Date deadlineTime;
 
     /**
      * Constructs the Deadline object.
      *
-     * @param deadlineName  Name of deadline
-     * @param deadlineTime  Deadline Time (with date)
+     * @param deadlineName Name of deadline
+     * @param deadlineTime Deadline Time (with date)
      */
     public Deadline(String deadlineName, Date deadlineTime) {
         super(deadlineName);

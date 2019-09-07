@@ -6,13 +6,9 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    /**
-     * Starting Time(with date) of event.
-     */
+    /** Starting Time(with date) of event. */
     private Date eventTimeFrom;
-    /**
-     * Starting Time(with date) of event.
-     */
+    /** Starting Time(with date) of event. */
     private Date eventTimeTo;
 
 

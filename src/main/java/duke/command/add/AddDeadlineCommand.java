@@ -12,14 +12,10 @@ import java.util.Date;
 
 public class AddDeadlineCommand extends Command {
 
-    /**
-     * Details of the event.
-     */
+    /** Details of the event. */
     private String detail;
 
-    /**
-     * Date-Time of the Deadline.
-     */
+    /** Date-Time of the Deadline. */
     private String datetime;
 
     /**

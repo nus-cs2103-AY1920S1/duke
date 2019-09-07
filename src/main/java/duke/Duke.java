@@ -1,11 +1,14 @@
 package duke;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
+
 import java.io.FileNotFoundException;
 
 /**
@@ -65,8 +68,15 @@ public class Duke {
 
     String getResponse(String input) {
         //duke.TaskList taskList = new duke.TaskList(storage.load());;
-        Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
-        return Parser.parse(input).execute(duke.tasks, duke.ui, duke.storage);
+        if(input.equals("bye")) {
+            System.exit(0);
+            return null;
+        } else {
+            Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
+            return Parser.parse(input).execute(duke.tasks, duke.ui, duke.storage);
+
+        }
+
     }
 }
 

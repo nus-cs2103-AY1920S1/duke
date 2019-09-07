@@ -25,12 +25,8 @@ public class ExitCommand extends Command {
         // Thread.sleep() and Timeout.SECONDS.sleep() don't work as System shuts down without printing exit message.
         // Use ScheduledExecutorService to make System exit after a delay, after exit message is printed.
         ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
-        Runnable command = new Runnable() {
-            @Override
-            public void run() {
-                System.exit(0);
-            }
-        };
+        Runnable command = () -> System.exit(0);
+
         // schedule() takes Runnable, delay, unit
         exe.schedule(command, 2, TimeUnit.SECONDS);
         exe.shutdown();

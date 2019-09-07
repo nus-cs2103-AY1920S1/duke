@@ -49,7 +49,7 @@ public class Duke {
     public String getResponse(String input) {
         String response = "";
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(input.trim());
             assert c != null :
                     "Parser.parse(input) should not return null.";
 

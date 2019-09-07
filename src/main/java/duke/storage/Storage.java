@@ -45,7 +45,6 @@ public class Storage {
 
         try {
             Scanner sc = new Scanner(file);
-            // read existing tasks into the list.
             while (sc.hasNext()) {
                 Task task;
                 String line = sc.nextLine();
@@ -68,7 +67,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("Data file does not exist.");
         }
-
         return list;
     }
 

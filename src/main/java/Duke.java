@@ -24,6 +24,7 @@ public class Duke {
      * @param filePath File Path
      */
     public Duke(String filePath) {
+        assert !filePath.isEmpty() : "File Path should not be empty!";
         ui = new UI();
         storage = new Storage(filePath);
         try {

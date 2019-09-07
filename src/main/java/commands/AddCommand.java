@@ -2,15 +2,18 @@ package commands;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+
 import tasks.Task;
 import tasks.Event;
 import tasks.Deadline;
 import tasks.ToDo;
+
 import exceptions.DukeException;
 
 /**
@@ -60,7 +63,8 @@ public class AddCommand extends Command {
             taskLst.add(new Deadline(description,
                     LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
                     false));
-        } else if (commandArr[0].equals("event")) { // assume that task is an event
+        } else if (commandArr[0].equals("event")) {
+            // Add an Event task
             String[] fullCommand = commandArr[1].split(" /at ");
             String description = fullCommand[0];
             String at = fullCommand[1];
@@ -68,6 +72,7 @@ public class AddCommand extends Command {
                     LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
                     false));
         } else {
+            // Invalid command being supplied by the user
             throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
                     + "but I don't know what that means :-(");
         }

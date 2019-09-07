@@ -79,6 +79,7 @@ public class Duke extends Application {
         boolean isExit = false;
         try {
             Command c = Parser.parse(fullCommand);
+            assert c == null : "Command object cannot be null";
             reply = c.execute(tasks, ui, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
@@ -92,6 +93,7 @@ public class Duke extends Application {
                 ui.showSavingError(e.getMessage());
             }
         }
+        assert !reply.isEmpty() : "Reply should not be empty";
         return ui.showOpeningLine() + reply + ui.showClosingLine();
     }
 

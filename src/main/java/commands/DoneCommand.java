@@ -39,6 +39,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         int taskDoneIndex = Integer.parseInt(commandArr[1]) - 1;
+        assert taskDoneIndex >= 0 : "taskDoneIndex must be non-negative";
         taskLst.get(taskDoneIndex).setDone();
         return String.format("     Nice! I've marked this task as done:\n       %s\n",
                 taskLst.get(taskDoneIndex));

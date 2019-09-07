@@ -39,6 +39,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         int delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
+        assert delTaskIndex >= 0 : "delTaskIndex must be non-negative";
         Task deletedTask = taskLst.remove(delTaskIndex);
         return String.format("     Noted. I've removed this task:\n"
                         + "       %s\n     Now you have %d tasks in the list.\n",

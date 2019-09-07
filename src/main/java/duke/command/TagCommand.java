@@ -12,6 +12,11 @@ public class TagCommand extends Command {
     int index;
     String[] tags;
 
+    /**
+     * Constructor for <code>TagCommand</code>.
+     * @param index Index of task to be tagged.
+     * @param tags Input tags by the user.
+     */
     public TagCommand(int index, String[] tags) {
         super();
         this.index = index;

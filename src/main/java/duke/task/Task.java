@@ -61,7 +61,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the tags in the hashtag form (with a preceding #)
+     * Returns the tags in the hashtag form (with a preceding #).
      * @return All tags.
      */
     public String getTagsAsStrings() {

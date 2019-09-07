@@ -53,15 +53,7 @@ public class Storage {
             scanner = new Scanner(new File(this.filePath));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                Task task = null;
-                for (TaskFormatter taskFormatter : this.taskFormatters) {
-                    try {
-                        task = taskFormatter.parse(line);
-                        break;
-                    } catch (TaskParseException e) {
-                        // Cannot parse with current TaskFormatter. Suppress error and move to next.
-                    }
-                }
+                Task task = parseTask(line);
                 if (task == null) {
                     throw new StorageException("Unreadable data in tasks file.");
                 }
@@ -76,6 +68,19 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    private Task parseTask(String text) {
+        Task task = null;
+        for (TaskFormatter taskFormatter : this.taskFormatters) {
+            try {
+                task = taskFormatter.parse(text);
+                break;
+            } catch (TaskParseException e) {
+                // Cannot parse with current TaskFormatter. Suppress error and move to next.
+            }
+        }
+        return task;
     }
 
     /**
@@ -93,15 +98,7 @@ public class Storage {
             file.createNewFile();
             fileWriter = new FileWriter(filePath, false);
             for (Task task : tasks) {
-                String line = null;
-                for (TaskFormatter taskFormatter : this.taskFormatters) {
-                    try {
-                        line = taskFormatter.format(task);
-                        break;
-                    } catch (TaskFormatException e) {
-                        // Cannot format with current TaskFormatter. Suppress error and move to next.
-                    }
-                }
+                String line = formatTask(task);
                 if (line == null) {
                     throw new StorageException("Unsupported task in tasks list.");
                 }
@@ -118,5 +115,18 @@ public class Storage {
                 }
             }
         }
+    }
+
+    private String formatTask(Task task) {
+        String line = null;
+        for (TaskFormatter taskFormatter : this.taskFormatters) {
+            try {
+                line = taskFormatter.format(task);
+                break;
+            } catch (TaskFormatException e) {
+                // Cannot format with current TaskFormatter. Suppress error and move to next.
+            }
+        }
+        return line;
     }
 }

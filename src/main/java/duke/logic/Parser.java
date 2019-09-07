@@ -95,36 +95,24 @@ public class Parser {
             return false;
         }
         String[] stringArr = datetime.split(" ");
-        if (stringArr.length != 4) {
-            return false;
-        }
-        if (Integer.parseInt(stringArr[0]) > 31) {
-            return false;
-        }
-
-        if (! isValidMonth(stringArr[1])) {
-            return false;
-        }
-
-        if (! isNumeric(stringArr[2])) {
-            return false;
-        }
-
-        if (stringArr[2].length() != 4) {
-            return false;
-        }
-
-        if (stringArr[3].length() != 4) {
+        if ((stringArr.length != 4)
+            || (Integer.parseInt(stringArr[0]) > 31)
+            || (! isValidMonth(stringArr[1]))
+            || (! isNumeric(stringArr[2]))
+            || (stringArr[2].length() != 4)
+            ||(stringArr[3].length() != 4)) {
             return false;
         }
 
         return true;
-
     }
 
     private static boolean isValidMonth(String month) {
         String[] months = {
-                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                "Jan", "Feb", "Mar",
+                "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec"
         };
         for (String str: months) {
             if (str.equals(month)) {

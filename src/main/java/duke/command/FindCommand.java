@@ -29,9 +29,4 @@ public class FindCommand extends Command {
         }
         ui.printSearchList(temp);
     }
-
-    @Override
-    public boolean isExit() {
-        return super.isExit();
-    }
 }

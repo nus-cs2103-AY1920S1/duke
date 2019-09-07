@@ -84,6 +84,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, "duke");
         db.flip();
+        assert db.getAlignment() == Pos.TOP_LEFT : "Wrong alignment for Duke Dialog box";
         return db;
     }
 }

@@ -1,29 +1,23 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.helper.Parser;
 import duke.helper.Storage;
 import duke.helper.Ui;
 import duke.task.TaskList;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Duke extends Application {
 
@@ -126,18 +120,7 @@ public class Duke extends Application {
         }
         if (isExit) {
             ui.printExitMessage();
-            // Thread.sleep() and Timeout.SECONDS.sleep() don't work as System shuts down without printing exit message.
-            // Use ScheduledExecutorService to make System exit after a delay, after exit message is printed.
-            ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
-            Runnable command = new Runnable() {
-                @Override
-                public void run() {
-                    System.exit(0);
-                }
-            };
-            // schedule() takes Runnable, delay, unit
-            exe.schedule(command, 3, TimeUnit.SECONDS);
-            exe.shutdown();
+            ExitCommand.exit();
         }
     }
 }

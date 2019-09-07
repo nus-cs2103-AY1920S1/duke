@@ -53,7 +53,8 @@ public class Storage {
                 tasks.add(new Event(remainingSplit[0], isDone, remainingSplit[1]));
                 break;
             default:
-                break;
+                throw new AssertionError("Invalid item in external save file");
+                // assert false : "Invalid item in external save file";
             }
         }
         return tasks;

@@ -91,7 +91,8 @@ public class AddCommand extends Command {
             ui.printAddNotification(event.toString(), tasks.getSize());
             break;
         default:
-            break;
+            assert false : "Invalid item in external save file";
+            // throw new AssertionError("Invalid item in external save file");
         }
     }
 }

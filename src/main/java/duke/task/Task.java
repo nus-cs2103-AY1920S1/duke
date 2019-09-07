@@ -2,7 +2,7 @@ package duke.task;
 
 import duke.exception.DukeException;
 
-public class Task {
+public abstract class Task {
     String description;
     boolean isDone;
 
@@ -149,6 +149,13 @@ public class Task {
             throw new DukeException("Wrong input format");
         }
     }
+
+    /**
+     * Abstract method to get string with type and description for duplication check.
+     *
+     * @return String to check for duplicates.
+     */
+    public abstract String getDuplicateCheckString();
 
     /**
      * The proper representation of the task, with Task type, icon and description.

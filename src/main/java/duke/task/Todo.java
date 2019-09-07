@@ -12,6 +12,15 @@ public class Todo extends Task {
     }
 
     /**
+     * To get string with type and description for duplication check.
+     *
+     * @return String to check for duplicates.
+     */
+    public String getDuplicateCheckString() {
+        return String.format("T %s", description);
+    }
+
+    /**
      * The proper representation of the task, with [T], icon and description.
      *
      * @return The output representation of the Todo task.

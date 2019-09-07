@@ -56,6 +56,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * To get string with type and description for duplication check.
+     *
+     * @return String to check for duplicates.
+     */
+    public String getDuplicateCheckString() {
+        return String.format("D %s", description);
+    }
+
+    /**
      * Gets the description of the Deadline task.
      *
      * @return The description of the Deadline task.

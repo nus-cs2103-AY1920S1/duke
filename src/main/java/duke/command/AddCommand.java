@@ -52,13 +52,13 @@ public class AddCommand extends Command {
                 if (command.substring(5).trim().isEmpty()) {
                     throw new IllegalArgumentException("OOPS!!! Description cannot be empty\n");
                 }
-                return new Todo(command.substring(5));
+                return new Todo(command.substring(5).trim());
             } else {
                 int index = command.indexOf('/');
                 if (type.equalsIgnoreCase("deadline")) {
-                    return new Deadline(command.substring(9, index - 1), command.substring(index + 4));
+                    return new Deadline(command.substring(9, index - 1).trim(), command.substring(index + 4).trim());
                 } else if (type.equalsIgnoreCase("event")) {
-                    return new Event(command.substring(6, index - 1), command.substring(index + 4));
+                    return new Event(command.substring(6, index - 1).trim(), command.substring(index + 4).trim());
                 } else {
                     throw new IllegalArgumentException("OOPS!!! No such task type.\n");
                 }

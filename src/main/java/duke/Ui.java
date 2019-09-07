@@ -2,13 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
- *
+ * Class to handle system output.
  */
 public class Ui {
-    private Scanner sc;
 
     public Ui() {
     }
@@ -18,7 +16,7 @@ public class Ui {
      *
      * @return String Welcome message
      */
-    public String getWelcome() {
+    String getWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -42,44 +40,26 @@ public class Ui {
      *
      * @return String Loading error message
      */
-    public String getLoadingError() {
+    String getLoadingError() {
         return "Failed to load save file. Please ignore this" +
                 "message if this is your first time running this program!\n";
     }
 
-//    /**
-//     * Returns the standard line output for visual differentiation between user input and system output.
-//     *
-//     * @return String Line
-//     */
-//    private String getLine() {
-//        return "    ____________________________________________________________\n";
-//    }
-
     /**
-     * Reads a line of user input via a Scanner variable whenever the "enter" key is pressed.
+     * Returns the error message of the DukeException being thrown in the standard format.
      *
-     * @return
+     * @param s Error message of DukeException
+     * @return String Error message of DukeException in the standard format
      */
-//    public String readCommand() {
-//        return sc.nextLine();
-//    }
-
-    /**
-     * Returns the error message of the DukeException being thrown.
-     *
-     * @param s
-     * @return String Error message of DukeException
-     */
-    public String getError(String s) {
+    String getError(String s) {
         return getStandard(s);
     }
 
     /**
-     * Returns all matching tasks to the keyword.
+     * Returns all matching tasks to the keyword in the standard format.
      *
-     * @param matches
-     * @return String Matching tasks
+     * @param matches List of matching tasks
+     * @return String Matching tasks in the standard format.
      */
     public String getMatches(ArrayList<String> matches) {
         String toReturn = getStandard("Here are the matching tasks in your list:\n");
@@ -90,11 +70,11 @@ public class Ui {
     }
 
     /**
-     * Returns the most recent task that was added.
+     * Returns the most recent task that was added in the standard format.
      *
-     * @param task
-     * @param lstSize
-     * @return String Most recent added task
+     * @param task    Most recent added task
+     * @param lstSize Size of task list
+     * @return String Most recent added task in the standard format
      */
     public String getAddedTask(String task, int lstSize) {
         String add = getStandard("Got it. I've added this task:\n");
@@ -102,11 +82,11 @@ public class Ui {
     }
 
     /**
-     * Returns the most recent task that was deleted.
+     * Returns the most recent task that was deleted in the standard format.
      *
-     * @param task
-     * @param lstSize
-     * @return String Most recent deleted task
+     * @param task    Most recent deleted task
+     * @param lstSize Size of task list
+     * @return String Most recent deleted task in the standard format
      */
     public String getDeletedTask(String task, int lstSize) {
         String del = getStandard("Noted. I've removed this task:\n");
@@ -114,10 +94,10 @@ public class Ui {
     }
 
     /**
-     * Returns the most recent task that was marked as done.
+     * Returns the most recent task that was marked as done in the standard format.
      *
-     * @param task
-     * @return String Most recent done task
+     * @param task Most recent task that was marked as done
+     * @return String Most recent done task in the standard format
      */
     public String getDoneTask(String task) {
         String done = getStandard("Nice! I've marked this task as done:\n");
@@ -125,20 +105,20 @@ public class Ui {
     }
 
     /**
-     * Returns the task list size for both add & delete.
+     * Returns the task list size for both add & delete in the standard format.
      *
-     * @param size
-     * @return String Size of task list
+     * @param size Size of task list
+     * @return String Size of task list in the standard format
      */
     private String getTaskSize(int size) {
         return getStandard(String.format("Now you have %d tasks in the list.\n", size));
     }
 
     /**
-     * Returns all the tasks in the TaskList and numbers them.
+     * Returns all the tasks in the TaskList and numbers them in the standard format.
      *
-     * @param taskLst
-     * @return String Numbered tasks in task list
+     * @param taskLst Tasks in the task list
+     * @return String Numbered tasks in task list in the standard format
      */
     public String getAllTasks(LinkedList<String> taskLst) {
         String toReturn = getStandard("Here are the tasks in your list:\n");
@@ -151,8 +131,8 @@ public class Ui {
     /**
      * Converts and returns any given String into the correct output format.
      *
-     * @param string
-     * @return String correct output format
+     * @param string Input String
+     * @return String Correct output format
      */
     private String getStandard(String string) {
         return "     " + string + "\n";

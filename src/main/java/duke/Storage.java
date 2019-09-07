@@ -1,14 +1,12 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- *
+ * Class to handle opening and saving of files.
  */
 public class Storage {
     private File file;

@@ -3,7 +3,7 @@ package duke;
 import duke.command.*;
 
 /**
- *
+ * Class to handle user input.
  */
 public class Parser {
 

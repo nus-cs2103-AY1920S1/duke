@@ -25,17 +25,33 @@ public class Ui {
     public String run(String input, ArrayList<TaskList> array, int num) throws DukeExceptions{
         Parser p = new Parser(array, num);
         String output = "";
-        if  (!input.equals("bye") && !input.equals("list") && !
-                input.contains("done") && !input.contains("todo") &&
+        if  (!input.equals("bye") && !input.equals("list") &&
+                !input.contains("done") && !input.contains("todo") &&
                 !input.contains("event") && !input.contains("deadline") &&
                 !input.contains("delete") && !(input.contains("find"))) {
-            //System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+            assert !input.equals("bye") : "I do not know what this means.";
+            assert !input.equals("list") : "I do not know what this means.";
+            assert !input.contains("done") : "I do not know what this means";
+            assert !input.contains("todo") : "I do not know what this means";
+            assert !input.contains("event") : "I do not know what this means";
+            assert !input.contains("deadline") : "I do not know what this means";
+            assert !input.contains("delete") : "I do not know what this means";
+            assert !input.contains("find") : "I do not know what this means";
+
             output = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+
             throw new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (input.equals("todo") || input.equals("event") ||
                 input.equals("deadline") || input.equals("find")) {
-            //System.out.println("☹ OOPS!!! The description of a t//odo cannot be empty.");
+
+            assert input.equals("todo") : "Needs more information";
+            assert input.equals("event") : "Needs more information";
+            assert input.equals("deadline") : "Needs more information";
+            assert input.equals("find") : "Needs more information";
+
             output = "☹ OOPS!!! The description of a " + input + " cannot be empty.";
+
             throw new DukeExceptions("☹ OOPS!!! The description of a " + input + " cannot be empty.");
         } else if (input.equals("bye")) {
             return p.goodBye();

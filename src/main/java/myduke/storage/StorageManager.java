@@ -75,19 +75,19 @@ public class StorageManager {
                 String description = in.next();
 
                 switch (taskType) {
-                case "T": //Todo Task
+                case ToDo.DATABASE_UNIQUE_IDENTIFIER: //Todo Task
                     newTask = new ToDo(description);
                     break;
 
-                case "D": //Deadline Task
+                case Deadline.DATABASE_UNIQUE_IDENTIFIER: //Deadline Task
                     newTask = new Deadline(description, in.next());
                     break;
 
-                case "E": //Event Task
+                case Event.DATABASE_UNIQUE_IDENTIFIER: //Event Task
                     newTask = new Event(description, in.next());
                     break;
 
-                case "A": //DoAfter Task
+                case DoAfter.DATABASE_UNIQUE_IDENTIFIER: //DoAfter Task
                     newTask = new DoAfter(description, in.next());
                     break;
 

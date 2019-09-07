@@ -10,8 +10,20 @@ import myduke.task.parameters.DukeDateTime;
  * A Task representing an Event.
  */
 public class Event extends Task {
+    //Constants
+    public static final String DATABASE_UNIQUE_IDENTIFIER = "E";
+
+    //Class variables
     protected final DukeDateTime at;
 
+    /**
+     * Constructor for DeadLine Task.
+     *
+     * @param description description of task.
+     * @param at          date of task.
+     *
+     * @throws DukeEmptyDescriptionException if description or date of task is empty.
+     */
     public Event(String description, String at) throws DukeEmptyDescriptionException {
         super(description);
 
@@ -50,14 +62,18 @@ public class Event extends Task {
         return new Event(description, at);
     }
 
-    @Override
-    public char getDataBaseDescriptor() {
-        return 'E';
+    /**
+     *  Gets the data base descriptor character.
+     *
+     * @return A unique character to identify the task.
+     */
+    public static String getDataBaseDescriptor() {
+        return DATABASE_UNIQUE_IDENTIFIER;
     }
 
     @Override
     public String getDataBaseFormat() {
-        return String.format("%c | %d | %s | %s |\r\n",
+        return String.format("%s | %d | %s | %s |\r\n",
                 getDataBaseDescriptor(),
                 (isDone ? 1 : 0),
                 description,
@@ -66,7 +82,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c]%s (at: %s)",
+        return String.format("[%s]%s (at: %s)",
                 getDataBaseDescriptor(),
                 super.toString(),
                 at);

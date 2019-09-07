@@ -10,14 +10,26 @@ import myduke.task.parameters.DukeDateTime;
  * A Task representing an Event.
  */
 public class DoAfter extends Task {
+    //Constants
+    public static final String DATABASE_UNIQUE_IDENTIFIER = "A";
+
+    //Class variables
     protected final DukeDateTime after;
 
+    /**
+     * Constructor for DeadLine Task.
+     *
+     * @param description description of task.
+     * @param after       start date of task.
+     *
+     * @throws DukeEmptyDescriptionException if description or start date of task is empty.
+     */
     public DoAfter(String description, String after) throws DukeEmptyDescriptionException {
         super(description);
         if (description.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The description of a 'do after' task cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of task cannot be empty.");
         } else if (after.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The duration of a 'do after' task cannot be empty.");
+            throw new DukeEmptyDescriptionException("The start date of task cannot be empty.");
         }
         this.after = new DukeDateTime(after);
     }
@@ -36,27 +48,31 @@ public class DoAfter extends Task {
         String delimiter = "/after";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The description of a 'do after' task cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of task cannot be empty.");
         }
         String description = in.next().trim();
 
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The start date of a 'do after' task cannot be empty.");
+            throw new DukeEmptyDescriptionException("The start date of task cannot be empty.");
         }
         String after = in.next().substring(delimiter.length()).trim();
 
         return new DoAfter(description, after);
     }
 
-    @Override
-    public char getDataBaseDescriptor() {
-        return 'A';
+    /**
+     *  Gets the data base descriptor character.
+     *
+     * @return A unique identifier to identify the task.
+     */
+    public static String getDataBaseDescriptor() {
+        return DATABASE_UNIQUE_IDENTIFIER;
     }
 
     @Override
     public String getDataBaseFormat() {
-        return String.format("%c | %d | %s | %s |\r\n",
+        return String.format("%s | %d | %s | %s |\r\n",
                 getDataBaseDescriptor(),
                 (isDone ? 1 : 0),
                 description,
@@ -65,7 +81,7 @@ public class DoAfter extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c]%s (after: %s)",
+        return String.format("[%s]%s (after: %s)",
                 getDataBaseDescriptor(),
                 super.toString(),
                 after);

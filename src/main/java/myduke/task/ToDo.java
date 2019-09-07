@@ -9,6 +9,16 @@ import myduke.exception.DukeEmptyDescriptionException;
  * A Task representing a ToDo Task.
  */
 public class ToDo extends Task {
+    //Constants
+    public static final String DATABASE_UNIQUE_IDENTIFIER = "T";
+
+    /**
+     * Constructor for ToDo Task.
+     *
+     * @param description description of task.
+     *
+     * @throws DukeEmptyDescriptionException if description of task is empty.
+     */
     public ToDo(String description) throws DukeEmptyDescriptionException {
         super(description);
         if (description.isEmpty()) {
@@ -35,14 +45,18 @@ public class ToDo extends Task {
         return new ToDo(description);
     }
 
-    @Override
-    public char getDataBaseDescriptor() {
-        return 'T';
+    /**
+     *  Gets the data base descriptor character.
+     *
+     * @return A unique identifier to identify the task.
+     */
+    public static String getDataBaseDescriptor() {
+        return DATABASE_UNIQUE_IDENTIFIER;
     }
 
     @Override
     public String getDataBaseFormat() {
-        return String.format("%c | %d | %s |\r\n",
+        return String.format("%s | %d | %s |\r\n",
                 getDataBaseDescriptor(),
                 (isDone ? 1 : 0),
                 description);
@@ -50,7 +64,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c]%s",
+        return String.format("[%s]%s",
                 getDataBaseDescriptor(),
                 super.toString());
     }

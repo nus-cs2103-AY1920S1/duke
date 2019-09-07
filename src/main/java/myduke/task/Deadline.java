@@ -10,14 +10,26 @@ import myduke.task.parameters.DukeDateTime;
  * A Task representing a Deadline.
  */
 public class Deadline extends Task {
+    //Constants
+    public static final String DATABASE_UNIQUE_IDENTIFIER = "D";
+
+    //Class variables
     protected final DukeDateTime byDate;
 
+    /**
+     * Constructor for DeadLine Task.
+     *
+     * @param description description of task.
+     * @param by          due-date of task.
+     *
+     * @throws DukeEmptyDescriptionException if description or due date of task is empty.
+     */
     public Deadline(String description, String by) throws DukeEmptyDescriptionException {
         super(description);
         if (description.isEmpty()) {
             throw new DukeEmptyDescriptionException("The description of a deadline cannot be empty.");
         } else if (by.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The duration of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The due date of a deadline cannot be empty.");
         }
         this.byDate = new DukeDateTime(by);
     }
@@ -42,21 +54,25 @@ public class Deadline extends Task {
 
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The end date of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The due date of a deadline cannot be empty.");
         }
         String by = in.next().substring(delimiter.length()).trim();
 
         return new Deadline(description, by);
     }
 
-    @Override
-    public char getDataBaseDescriptor() {
-        return 'D';
+    /**
+     *  Gets the data base descriptor character.
+     *
+     * @return A unique identifier to identify the task.
+     */
+    public static String getDataBaseDescriptor() {
+        return DATABASE_UNIQUE_IDENTIFIER;
     }
 
     @Override
     public String getDataBaseFormat() {
-        return String.format("%c | %d | %s | %s |\r\n",
+        return String.format("%s | %d | %s | %s |\r\n",
                 getDataBaseDescriptor(),
                 (isDone ? 1 : 0),
                 description,
@@ -65,7 +81,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c]%s (by: %s)",
+        return String.format("[%s]%s (by: %s)",
                 getDataBaseDescriptor(),
                 super.toString(),
                 byDate);

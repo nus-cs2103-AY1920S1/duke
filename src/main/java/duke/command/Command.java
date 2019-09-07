@@ -14,8 +14,8 @@ public abstract class Command {
     /**
      * Sets up class attributes common across subclasses of Command.
      *
-     * @param inputSplit String array of user input split by spaces.
      * @param filePath Path of save file on hard disk to be written to.
+     * @param inputSplit String array of user input split by spaces.
      */
     public Command(String filePath, String[] inputSplit) {
         this.filePath = filePath;

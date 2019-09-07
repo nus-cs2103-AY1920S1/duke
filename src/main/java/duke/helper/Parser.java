@@ -48,7 +48,6 @@ public class Parser {
             .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy"))
             .appendOptional(DateTimeFormatter.ofPattern("dd MMM yyyy"))
             .appendOptional(DateTimeFormatter.ofPattern("dd MMMM yyyy"))
-            .parseStrict()
             .toFormatter();
 
     public static DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");

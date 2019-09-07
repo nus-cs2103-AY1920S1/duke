@@ -122,6 +122,7 @@ public class DukeGui extends Application {
         );
         getResponse(userInput);
         userTextField.clear();
+        System.out.println(userTextField.getText());
     }
 
     /**

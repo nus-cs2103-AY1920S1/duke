@@ -13,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.awt.*;
-
 /**
  * A program that manages and keeps track of a list of tasks.
  * Features include adding and deleting tasks, as well as displaying list of current tasks.
@@ -27,10 +25,13 @@ public class Duke extends Application {
     private Ui ui;
 
     private ScrollPane scrollPane;
+    private AnchorPane mainLayout;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private final int STAGE_HEIGHT = 800;
+    private final int STAGE_WIDTH = 600;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/drakeNO.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/drakeYES.jpg"));
@@ -68,51 +69,10 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
+        setUpStageComponents(stage);
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(800.0);
-        stage.setMinWidth(600.0);
-
-        mainLayout.setPrefSize(600.0, 800.0);
-
-        scrollPane.setPrefSize(585, 735);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);;
-
-        userInput.setPrefWidth(525.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        formatComponents(stage, "Duke", STAGE_WIDTH, STAGE_HEIGHT);
 
         displayLogo();
 
@@ -127,6 +87,72 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Initialises the different components of the Duke GUI.
+     *
+     * @param stage Stage of the GUI.
+     */
+    private void setUpStageComponents(Stage stage) {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        //The container for the content of the chat to scroll.
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Formats the components in the Duke GUI to specified heights and widths.
+     *
+     * @param stage Stage of the GUI.
+     * @param title Title of the window Duke runs on.
+     * @param stageWidth Width of the stage.
+     * @param stageHeight Height of the stage.
+     */
+    private void formatComponents(Stage stage, String title, int stageWidth, int stageHeight) {
+        final int SCROLLPANE_WIDTH = STAGE_WIDTH - 15;
+        final int SCROLLPANE_HEIGHT = STAGE_HEIGHT - 65;
+        final int USERINPUT_WIDTH = STAGE_WIDTH - 75;
+        final int SENDBUTTON_WIDTH = 55;
+
+        stage.setTitle(title);
+        stage.setResizable(false);
+        stage.setMinHeight(stageHeight);
+        stage.setMinWidth(stageWidth);
+
+        mainLayout.setPrefSize(stageWidth, stageHeight);
+
+        scrollPane.setPrefSize(SCROLLPANE_WIDTH, SCROLLPANE_HEIGHT);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);;
+
+        userInput.setPrefWidth(USERINPUT_WIDTH);
+
+        sendButton.setPrefWidth(SENDBUTTON_WIDTH);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
     /**

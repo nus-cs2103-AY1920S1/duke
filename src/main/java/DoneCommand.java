@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
             tasks.markAsDone(taskNumber);
             return ui.showMarkTaskAsDoneMessage(tasks.getTask(taskNumber));
         } else {
-            throw new InvalidCommandDukeException("☹ OOF!! There is no task labelled that number!!");
+            throw new InvalidCommandDukeException("OOF!! There is no task labelled that number!!");
         }
 
     }

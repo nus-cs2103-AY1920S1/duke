@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
             tasks.deleteTask(taskNumber);
             return ui.showDeleteTaskMessage(removedTask, tasks.taskListSize());
         } else {
-            throw new InvalidCommandDukeException("☹ OOF!!! There is no task labelled that number!!");
+            throw new InvalidCommandDukeException("OOF!!! There is no task labelled that number!!");
         }
 
     }

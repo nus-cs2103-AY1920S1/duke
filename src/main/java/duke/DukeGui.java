@@ -11,11 +11,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -30,24 +28,24 @@ public class DukeGui extends Application {
      * Start Application.
      * @param primaryStage Primary Stage
      */
-
     private ScrollPane scrollPane;
-    private Gui dialogContainer;
+    private Gui gui;
     private TextField userTextField;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("../images/avatar_placeholder.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("../images/avatar_placeholder.png"));
+    private Image user;
     private TaskList taskList;
-    private Storage storage = new Storage(new File("data/tasks.txt"));
-
+    private Storage storage;
 
     @Override
     public void start(Stage primaryStage) {
+
         /** Setup **/
+        user = new Image(this.getClass().getResourceAsStream("../images/avatar_placeholder.png"));
+        storage = new Storage(new File("data/tasks.txt"));
         scrollPane = new ScrollPane();
-        dialogContainer = new Gui();
-        scrollPane.setContent(dialogContainer);
+        gui = new Gui();
+        scrollPane.setContent(gui);
         userTextField = new TextField();
         sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
@@ -67,7 +65,7 @@ public class DukeGui extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        gui.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userTextField.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -80,13 +78,13 @@ public class DukeGui extends Application {
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(userTextField.getText());
         });
-
         userTextField.setOnAction((event) -> {
             handleUserInput(userTextField.getText());
         });
+        gui.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+        /** Display **/
+        primaryStage.show();
         initialiseDuke();
     }
 
@@ -99,16 +97,16 @@ public class DukeGui extends Application {
         /** Try to load data */
         try {
             taskList.loadData(storage.getTaskList());
-            dialogContainer.greet(true);
+            gui.greet(true);
         } catch (FileNotFoundException e) {
-            dialogContainer.greet(false);
+            gui.greet(false);
             try {
                 storage.createFile();
             } catch (IOException e2) {
-                dialogContainer.sendDukeMessage(e2.getMessage());
+                gui.sendDukeMessage(e2.getMessage());
             }
         } catch (DukeException e) {
-            dialogContainer.sendDukeMessage(e.getMessage());
+            gui.sendDukeMessage(e.getMessage());
         }
     }
 
@@ -117,12 +115,11 @@ public class DukeGui extends Application {
      * @param userInput User input
      */
     public void handleUserInput(String userInput) {
-        dialogContainer.getChildren().addAll(
+        gui.getChildren().addAll(
                 DialogBox.getUserDialog(userInput, user)
         );
         getResponse(userInput);
         userTextField.clear();
-        System.out.println(userTextField.getText());
     }
 
     /**
@@ -133,16 +130,16 @@ public class DukeGui extends Application {
         try {
             String inputCommand = input; // Initial Input
             Command c = Parser.parseCommand(inputCommand);
-            c.execute(storage, taskList, dialogContainer);
+            c.execute(storage, taskList, gui);
             if (c.isExit) {
                 Platform.exit();
             }
         } catch (IndexOutOfBoundsException e) {
-            dialogContainer.echoException(new DukeException("Index Out of Bounds Exception Caught"));
+            gui.echoException(new DukeException("Index Out of Bounds Exception Caught"));
         } catch (DukeException e) {
-            dialogContainer.echoException(e);
+            gui.echoException(e);
         } catch (Exception e) {
-            dialogContainer.echoException((new DukeException(e.getMessage())));
+            gui.echoException((new DukeException(e.getMessage())));
         }
     }
 }

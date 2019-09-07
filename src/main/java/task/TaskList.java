@@ -22,4 +22,19 @@ public class TaskList extends ArrayList<Task> {
     public TaskList(Collection<? extends Task> tasks) {
         super(tasks);
     }
+
+    /**
+     * Checks whether the TaskList contains a Task with a given title.
+     *
+     * @param title Title to check for.
+     * @return True if TaskList contains Task with the given title.
+     */
+    public boolean containsTitle(String title) {
+        for (Task task : this) {
+            if (task.getTitle().toUpperCase().equals(title.toUpperCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

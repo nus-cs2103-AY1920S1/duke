@@ -30,6 +30,10 @@ public class AddTodoTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, UserOutputInterface uoi, Storage storage)
             throws CommandExecuteException, StorageException {
+        if (tasks.containsTitle(this.title)) {
+            throw new CommandExecuteException("A task with the same title already exists.");
+        }
+
         TodoTask task = new TodoTask();
         task.setTitle(this.title);
         tasks.add(task);

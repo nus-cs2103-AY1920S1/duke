@@ -40,6 +40,10 @@ public class AddDeadlineTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, UserOutputInterface uoi, Storage storage)
             throws CommandExecuteException, StorageException {
+        if (tasks.containsTitle(this.title)) {
+            throw new CommandExecuteException("A task with the same title already exists.");
+        }
+
         DeadlineTask task = new DeadlineTask();
         task.setTitle(this.title);
         task.setBy(this.by);

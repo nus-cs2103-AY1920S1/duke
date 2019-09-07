@@ -31,8 +31,8 @@ public class Ui {
      */
     public void greetUser() {
         printLine();
-        System.out.println("\t Hello! I'm Duke");
-        System.out.println("\t What can I do for you?");
+        printMessage("Hello! I'm Duke");
+        printMessage("What can I do for you?");
         printLine();
     }
 
@@ -48,14 +48,14 @@ public class Ui {
      * Prints a line.
      */
     public void printLine() {
-        System.out.println("\t ---------------------------------------------------------");
+        printMessage("---------------------------------------------------------");
     }
 
     /**
      * Prints a message when the program exitss.
      */
     public void printExitMessage() {
-        System.out.println("\t Bye. Hope to see you again soon!");
+        printMessage("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -64,10 +64,9 @@ public class Ui {
      * @param size Current size of the <code>TaskList</code>.
      */
     public void printDeleteMessage(Task deletedTask, int size) {
-        System.out.println("\t Noted. I've removed this task:");
-        System.out.print("\t \t");
-        System.out.println(deletedTask);
-        System.out.println("\t Now you have " + size + (size == 1 ? " task " : " tasks ")
+        printMessage("Noted. I've removed this task:");
+        printMessage("\t " + deletedTask);
+        printMessage("Now you have " + size + (size == 1 ? " task " : " tasks ")
                 + "in the " + "list.");
     }
 
@@ -76,9 +75,8 @@ public class Ui {
      * @param doneTask The <code>Task</code> that has been completed.
      */
     public void printDoneMessage(Task doneTask) {
-        System.out.println("\t Nice! I've marked this task as done:");
-        System.out.print("\t \t");
-        System.out.println(doneTask);
+        printMessage("Nice! I've marked this task as done:");
+        printMessage("\t" + doneTask);
     }
 
     /**
@@ -87,10 +85,21 @@ public class Ui {
      * @param size Current size of the <code>TaskList</code>.
      */
     public void printAddTaskMessage(Task addedTask, int size) {
-        System.out.println("\t Got it. I've added this task:");
-        System.out.println("\t \t " + addedTask);
-        System.out.println("\t Now you have " + size + (size == 1 ? " task " : " tasks ")
+        printMessage("Got it. I've added this task:");
+        printMessage("\t " + addedTask);
+        printMessage("Now you have " + size + (size == 1 ? " task " : " tasks ")
                 + "in the " + "list.");
+    }
+
+    /**
+     * Prints the list of tasks.
+     * @param tasks The current tasks in the list.
+     */
+    public void printListMessage(TaskList tasks) {
+        printMessage("Here are the tasks in your list:");
+        for (int i = 1; i <= tasks.getSize(); i++) {
+            printMessage(i + ". " + tasks.getTask(i - 1));
+        }
     }
 
     /**
@@ -98,10 +107,10 @@ public class Ui {
      * @param matchingTasks Tasks that contain the provided key word.
      */
     public void printFindMessage(ArrayList<Task> matchingTasks) {
-        System.out.println("\t Here are the matching tasks in your list:");
+        printMessage("Here are the matching tasks in your list:");
         int i = 1;
         for (Task matchingTask : matchingTasks) {
-            System.out.println("\t " + i + ". " + matchingTask);
+            printMessage(i + ". " + matchingTask);
             i++;
         }
     }
@@ -111,7 +120,7 @@ public class Ui {
      * @param exception The <code>Exception</code> that has occurred.
      */
     public void printExceptionMessage(DukeException exception) {
-        System.out.println("\t " + exception.getMessage());
+        printMessage(exception.getMessage());
     }
 
     /**
@@ -129,7 +138,7 @@ public class Ui {
      * @param message Message that is to be printed.
      */
     public void printMessage(String message) {
-        System.out.println(message);
+        System.out.println("\t " + message);
     }
 
     /**

@@ -1,6 +1,6 @@
 package duke.calendar;
 
-import duke.exception.DukeException;
+import duke.exception.InvalidDateException;
 
 import java.time.Month;
 
@@ -17,9 +17,9 @@ public class Date {
     /**
      * Constructor for <code>Date</code>.
      * @param rawDate Unprocessed date.
-     * @throws DukeException If provided date is invalid.
+     * @throws InvalidDateException If provided date is invalid.
      */
-    public Date(String rawDate) throws DukeException {
+    public Date(String rawDate) throws InvalidDateException {
         this.rawDate = rawDate;
         if (rawDate != null) {
             isNull = false;
@@ -29,51 +29,59 @@ public class Date {
 
     /**
      * Extracts information about the day, month and year from the raw date.
-     * @throws DukeException If date is in the wrong format or invalid.
+     * @throws InvalidDateException If date is in the wrong format or invalid.
      */
-    protected void processDate() throws DukeException {
+    protected void processDate() throws InvalidDateException {
+        assert isNull == false : "A null raw date should not be processed.";
         String[] dateComponents = rawDate.split("/");
         if (dateComponents.length < 3) {
-            throw new DukeException("☹ OOPS!!! Please specify a date in the form day/month/year. E.g. 2/12/2019");
-        } else {
-            int inputDay = Integer.parseInt(dateComponents[0]);
-            int inputYear = Integer.parseInt(dateComponents[2]);
-            int inputMonthNum = Integer.parseInt(dateComponents[1]);
-            year = inputYear;
-            if (isValidMonth(inputMonthNum)) {
-                month = Month.of(inputMonthNum);
-            } else {
-                throw new DukeException("☹ OOPS!!! Please specify a valid month.");
-            }
-            if (isValidDay(inputDay, inputMonthNum, inputYear)) {
-                day = inputDay;
-            } else {
-                throw new DukeException("☹ OOPS!!! Please specify a valid day.");
-            }
+            throw new InvalidDateException("☹ OOPS!!! Please specify a date in the form day/month/year. E.g. 2/12/2019");
         }
+        assignYear(dateComponents[2]);
+        assignMonth(dateComponents[1]);
+        assignDay(dateComponents[0], dateComponents[1], dateComponents[2]);
+    }
+
+    private void assignYear(String rawYear) {
+        int inputYear = Integer.parseInt(rawYear);
+        year = inputYear;
+    }
+
+    private void assignMonth(String rawMonth) throws InvalidDateException {
+        int inputMonthNum = Integer.parseInt(rawMonth);
+        if (isInvalidMonth(inputMonthNum)) {
+            throw new InvalidDateException("☹ OOPS!!! Please specify a valid month.");
+        }
+        this.month = Month.of(inputMonthNum);
+    }
+
+    private void assignDay(String rawDay, String rawMonth, String rawYear) throws InvalidDateException {
+        int inputDay = Integer.parseInt(rawDay);
+        int inputMonthNum = Integer.parseInt(rawMonth);
+        int inputYear = Integer.parseInt(rawYear);
+        if (isInvalidDay(inputDay, inputMonthNum, inputYear)) {
+            throw new InvalidDateException("☹ OOPS!!! Please specify a valid day.");
+        }
+        day = inputDay;
     }
 
     /**
-     * Checks if provided month is valid.
+     * Checks if provided month is invalid.
      * @param inputMonthNum Number corresponding to specific month. E.g. 1 for January, 2 for February, etc.
-     * @return True if 1 <= inputMonthNum <= 12
+     * @return False if 1 <= inputMonthNum <= 12
      */
-    protected boolean isValidMonth(int inputMonthNum) {
-        if (inputMonthNum < 1 || inputMonthNum > 12) {
-            return false;
-        } else {
-            return true;
-        }
+    protected boolean isInvalidMonth(int inputMonthNum) {
+        return inputMonthNum < 1 || inputMonthNum > 12;
     }
 
     /**
-     * Checks if provided day is valid.
+     * Checks if provided day is invalid.
      * @param inputDay Number corresponding to specific day
      * @param inputMonthNum Number corresponding to specific month. E.g. 1 for January, 2 for February, etc.
      * @param inputYear Number corresponding to year.
-     * @return True if day is valid for the given month and year.
+     * @return True if day is invalid for the given month and year.
      */
-    protected boolean isValidDay(int inputDay, int inputMonthNum, int inputYear) {
+    protected boolean isInvalidDay(int inputDay, int inputMonthNum, int inputYear) {
         switch (inputMonthNum) {
         case 1:
         case 3:
@@ -82,20 +90,20 @@ public class Date {
         case 8:
         case 10:
         case 12:
-            return inputDay >= 1 && inputDay <= 31;
+            return !(inputDay >= 1 && inputDay <= 31);
         case 2:
             if (isLeapYear(inputYear)) {
-                return inputDay >= 1 && inputDay <= 29;
+                return !(inputDay >= 1 && inputDay <= 29);
             } else {
-                return inputDay >= 1 && inputDay <= 28;
+                return !(inputDay >= 1 && inputDay <= 28);
             }
         case 4:
         case 6:
         case 9:
         case 11:
-            return inputDay >= 1 && inputDay <= 30;
+            return !(inputDay >= 1 && inputDay <= 30);
         default:
-            return false;
+            return true;
         }
     }
 

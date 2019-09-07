@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.InvalidDetailException;
 import duke.task.Task;
 
 /**
@@ -28,15 +29,19 @@ public class DeleteCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> that stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> that handles user input and output.
      * @param storage Instance of <code>Storage</code> that handles writing and loading of information to hard disk.
-     * @throws DukeException If provided index is missing or invalid.
+     * @throws InvalidDetailException If provided index is invalid.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDetailException {
         if (index > tasks.getSize()) {
-            throw new DukeException("☹ OOPS!!! There is no such task in the list to delete.");
+            throw new InvalidDetailException("☹ OOPS!!! There is no such task in the list to delete.");
         }
         Task deletedTask = tasks.getTask(index - 1);
         tasks.deleteTask(index - 1);
         ui.printDeleteMessage(deletedTask, tasks.getSize());
+        updateStorage(tasks, ui, storage);
+    }
+
+    private void updateStorage(TaskList tasks, Ui ui, Storage storage) {
         try {
             storage.writeToFile(tasks);
         } catch (DukeException exception) {

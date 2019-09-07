@@ -30,7 +30,7 @@ class Ui {
         System.out.println(encase(e.getMessage()));
     }
 
-    private String encase(String message) {
+    String encase(String message) {
         return String.join("\n", new String[]{line, message, line});
     }
 }

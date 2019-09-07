@@ -39,7 +39,7 @@ public class Duke {
 
     String getResponse(String input) {
         Command c = Parser.parse(input.trim().split("\\s+"));
-        return c.run(tasks, storage);
+        return ui.encase(c.run(tasks, storage));
     }
 
     String welcome() {

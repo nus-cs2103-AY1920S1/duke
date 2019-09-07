@@ -64,6 +64,15 @@ public class Ui {
     }
 
     /**
+     * Shows the task which the user has edited.
+     * @param task The added task.
+     */
+    public void showEditedTask(Task task) {
+        append("Got it. I've edited this task: ");
+        append(task.toString());
+    }
+
+    /**
      * Sends a simple greeting to the user.
      */
     public void sendGreeting() {

@@ -1,23 +1,28 @@
 package duke.parser;
 
 import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.EndCommand;
+import duke.command.ListTaskCommand;
 import duke.command.AddDeadlineTaskCommand;
 import duke.command.AddEventTaskCommand;
 import duke.command.AddToDoTaskCommand;
-import duke.command.CompleteTaskCommand;
 import duke.command.DeleteTaskCommand;
-import duke.command.EndCommand;
-import duke.command.ListTaskCommand;
+import duke.command.EditTaskDateCommand;
+import duke.command.EditTaskNameCommand;
 import duke.command.FindTaskCommand;
-
-import java.util.Scanner;
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
+import duke.exception.InvalidKeywordException;
 import duke.exception.InvalidTaskIndexException;
+import duke.exception.InvalidToDoException;
+import duke.exception.InvalidEditTaskException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
-import duke.exception.InvalidToDoException;
-import duke.exception.InvalidKeywordException;
+
+import java.util.Scanner;
+
+;
 
 /**
  * Represents a Data Parser to parse in all user input provided.
@@ -82,6 +87,10 @@ public class DataParser {
             return new AddEventTaskCommand();
         } else if (shouldFindTask()) {
             return new FindTaskCommand();
+        } else if (shouldEditTaskName()) {
+            return new EditTaskNameCommand();
+        } else if (shouldEditTaskDate()) {
+            return new EditTaskDateCommand();
         } else {
             throw new UnknownCommandException();
         }
@@ -109,6 +118,43 @@ public class DataParser {
      * @return Returns false if the data provided gives a name for the task.
      */
     public boolean isEmptyTask(String data) {
+        return data.equals("");
+    }
+
+    /**
+     * Checks if the data given does not provide the name to edit the task.
+     * @param data the data provided by the user input.
+     * @return false if the data provided does not give a name to edit the task.
+     */
+    public boolean isNewNameMissing(String data) {
+        return data.split(" ").length == 1;
+    }
+
+    /**
+     * Checks if the data given does not provide the date to edit the task.
+     * @param data the data provided by the user input.
+     * @return false if the data provided does not give a date to edit the task.
+     */
+    public boolean isNewDateMissing(String data) {
+        return data.split(" ").length <= 1;
+    }
+
+    /**
+     * Checks if the data given does not provide the time to edit the task.
+     * @param data the data provided by the user input.
+     * @return false if the data provided does not give a time to edit the task.
+     */
+    public boolean isNewTimeMissing(String data) {
+        return data.split(" ").length <= 2;
+    }
+
+
+    /**
+     * Checks if the data given represents an empty input or not.
+     * @param data The data provided by the user input.
+     * @return Returns false if the data provided gives a name for the task.
+     */
+    public boolean isEmptyInput(String data) {
         return data.equals("");
     }
 
@@ -142,6 +188,54 @@ public class DataParser {
         }
 
         return data.trim();
+    }
+
+    /**
+     * Parses the edited task data based its name and given index.
+     * @return an array containing the index and the new name of the task.
+     * @throws InvalidEditTaskException if no name or index or invalid index is given.
+     */
+    public String[] parseEditTaskNameData() throws InvalidEditTaskException {
+        String data = this.input.substring(9).trim();
+        if (isEmptyInput(data) || isInvalidIndex(data)) {
+            throw new InvalidEditTaskException("Please key in a valid index!");
+        } else if (isNewNameMissing(data)) {
+            throw new InvalidEditTaskException("Please key in a name!");
+        }
+
+        return data.split(" ");
+    }
+
+    /**
+     * Parses the edited task data based its date and given index.
+     * @return an array containing the index and the new name of the task.
+     * @throws InvalidEditTaskException if no name or index or invalid index is given.
+     */
+    public String[] parseEditTaskDateData() throws InvalidEditTaskException {
+        String data = this.input.substring(9).trim();
+        if (isEmptyInput(data) || isInvalidIndex(data)) {
+            throw new InvalidEditTaskException("Please key in a valid index!");
+        } else if (isNewDateMissing(data)) {
+            throw new InvalidEditTaskException("Please key in a date!");
+        } else if (isNewTimeMissing(data)) {
+            throw new InvalidEditTaskException("Please key in a time!");
+        }
+
+        return data.split(" ");
+    }
+
+    /**
+     * Checks if the data given is a valid index or not.
+     * @return true if the index is invalid
+     */
+    private boolean isInvalidIndex(String data) {
+        try {
+            Integer.parseInt(data.split(" ")[0]);
+        } catch (Exception e) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -251,8 +345,27 @@ public class DataParser {
         return input.startsWith("event");
     }
 
+    /**
+     * Checks if the user wishes to find the tasks or not.
+     * @return true if the input starts with "find".
+     */
     public boolean shouldFindTask() {
         return input.startsWith("find");
     }
 
+    /**
+     * Checks if the user wishes to edit a task name or not.
+     * @return true if the input starts with "edit name".
+     */
+    public boolean shouldEditTaskName() {
+        return input.startsWith("edit name");
+    }
+
+    /**
+     * Checks if the user wishes to edit a task date or not.
+     * @return true if the input starts with "edit date".
+     */
+    public boolean shouldEditTaskDate() {
+        return input.startsWith("edit date");
+    }
 }

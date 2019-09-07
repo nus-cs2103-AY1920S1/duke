@@ -18,6 +18,7 @@ public class Parser {
      */
     public static String parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         String deadlineDetails = input.substring(9);
+        assert(input.length() >= 8) : "deadline input too short";
         StringBuilder sb = new StringBuilder();
         try {
             int index = deadlineDetails.indexOf("/");
@@ -79,6 +80,7 @@ public class Parser {
         if (input.length() == 4) {
             throw new TodoEmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
         }
+        assert input.length() > 4 : "input length too short";
         ToDo todo = new ToDo(input.substring(5));
         t.addTask(todo);
         sb.append(ui.showAdded() + "\n");

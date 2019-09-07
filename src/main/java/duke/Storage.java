@@ -3,6 +3,7 @@ package duke;
 import duke.calendar.Date;
 import duke.calendar.Time;
 import duke.exception.DukeException;
+import duke.exception.StorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,110 +36,159 @@ public class Storage {
      * Loads the tasks from the file given by the file path.
      * Stores and returns the tasks within an <code>ArrayList</code>.
      * @return An <code>ArrayList</code> containing every <code>Task</code> written in the file.
-     * @throws DukeException If the file path is invalid.
+     * @throws DukeException If the file path is invalid or there are problems with the data in the file.
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            ArrayList<Task> tasks = new ArrayList<Task>();
             Scanner scanner = new Scanner(new File(filePath));
-            while (scanner.hasNextLine()) {
-                String taskLine = scanner.nextLine();
-                String[] taskDetails = taskLine.split(" \\| ");
-                String taskType = taskDetails[0].trim();
-                String taskDoneStatus = taskDetails[1].trim();
-                String taskDescription = taskDetails[2].trim();
-                Task task;
-                if (taskType.equals("T")) {
-                    task = new Todo(taskDescription);
-                } else if (taskType.equals("D")) {
-                    String taskDate = taskDetails[3].trim();
-                    String taskTime = null;
-                    if (taskDetails.length > 4) {
-                        taskTime = taskDetails[4].trim();
-                    }
-                    task = new Deadline(taskDescription, new Date(taskDate), new Time(taskTime));
-                } else {
-                    String taskStartDate = taskDetails[3].trim();
-                    String taskStartTime = null;
-                    String taskEndDate = null;
-                    String taskEndTime = null;
-                    if (taskDetails.length > 4) {
-                        taskStartTime = taskDetails[4].trim();
-                        if (taskDetails.length > 5) {
-                            taskEndDate = taskDetails[5].trim();
-                            if (taskDetails.length > 6) {
-                                taskEndTime = taskDetails[6].trim();
-                            }
-                        }
-                    }
-                    task = new Event(taskDescription, new Date(taskStartDate), new Time(taskStartTime),
-                            new Date(taskEndDate), new Time(taskEndTime));
-                    assert (task != null) : "Data in file should be stored in the correct format "
-                            + "and should not cause exceptions.";
-                }
-                if (taskDoneStatus.equals("1")) {
-                    task.markAsDone();
-                }
-                tasks.add(task);
-            }
-            return tasks;
+            return getTasks(scanner);
         } catch (FileNotFoundException exception) {
-            throw new DukeException("☹ OOPS!!! Please specify a valid file path.");
+            throw new StorageException("☹ OOPS!!! Please specify a valid file path.");
         }
+    }
+
+    private ArrayList<Task> getTasks(Scanner scanner) throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        while (scanner.hasNextLine()) {
+            String taskLine = scanner.nextLine();
+
+            String[] taskDetails = taskLine.split(" \\| ");
+            String taskType = getTaskDetail(taskDetails, 0);
+            String taskDoneStatus = getTaskDetail(taskDetails, 1);
+            String taskDescription = getTaskDetail(taskDetails, 2);
+
+            Task task = getTask(taskDetails, taskType, taskDescription);
+            assert (task != null) : "Data in file should be stored in the correct format "
+                            + "and should not cause exceptions.";
+            setTaskDoneStatus(taskDoneStatus, task);
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
+    private String getTaskDetail(String[] taskDetails, int i) {
+        if (taskDetails.length <= i) {
+            return null;
+        }
+        return taskDetails[i].trim();
+    }
+
+    private Task getTask(String[] taskDetails, String taskType, String taskDescription) throws DukeException {
+        if (taskType.equals("T")) {
+            return getTodoTask(taskDescription);
+        } else if (taskType.equals("D")) {
+            return getDeadlineTask(taskDetails, taskDescription);
+        } else {
+            return getEventTask(taskDetails, taskDescription);
+        }
+    }
+
+    private Task getEventTask(String[] taskDetails, String taskDescription) throws DukeException {
+        String taskStartDate = getTaskDetail(taskDetails, 3);
+        String taskStartTime = getTaskDetail(taskDetails, 4);
+        String taskEndDate = getTaskDetail(taskDetails, 5);
+        String taskEndTime = getTaskDetail(taskDetails, 6);
+        return new Event(taskDescription, new Date(taskStartDate), new Time(taskStartTime),
+                new Date(taskEndDate), new Time(taskEndTime));
+    }
+
+    private Todo getTodoTask(String taskDescription) {
+        return new Todo(taskDescription);
+    }
+
+    private Task getDeadlineTask(String[] taskDetails, String taskDescription) throws DukeException {
+        String taskDate = getTaskDetail(taskDetails, 3);
+        String taskTime = getTaskDetail(taskDetails, 4);
+        return new Deadline(taskDescription, new Date(taskDate), new Time(taskTime));
     }
 
     /**
      * Writes the tasks in the <code>TaskList</code> to the file given by the file path.
      * @param taskList <code>TaskList</code> containing all the tasks.
-     * @throws DukeException If the file cannot be written to.
+     * @throws StorageException If the file cannot be written to.
      */
-    public void writeToFile(TaskList taskList) throws DukeException {
+    public void writeToFile(TaskList taskList) throws StorageException {
         try {
             FileWriter writer = new FileWriter(filePath);
             ArrayList<Task> tasks = taskList.getList();
             for (Task task : tasks) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(task.getType() + " | ");
-                if (task.isDone()) {
-                    builder.append("1 | ");
-                } else {
-                    builder.append("0 | ");
-                }
-                builder.append(task.getDescription());
-                if (task.getType().equals("D")) {
-                    Deadline deadline = (Deadline) task;
-                    String rawDate = deadline.getDate().getRawDate();
-                    String rawTime = deadline.getTime().getRawTime();
-                    builder.append(" | " + rawDate);
-                    if (rawTime != null) {
-                        builder.append(" | " + rawTime);
-                    }
-                } else if (task.getType().equals("E")) {
-                    Event event = (Event) task;
-                    String rawStartDate = event.getStartDate().getRawDate();
-                    String rawStartTime = event.getStartTime().getRawTime();
-                    builder.append(" | " + rawStartDate);
-                    if (rawStartTime != null) {
-                        builder.append(" | " + rawStartTime);
-                    }
-                    builder.append(" | ");
-                    String rawEndDate = event.getEndDate().getRawDate();
-                    String rawEndTime = event.getEndTime().getRawTime();
-                    if (rawEndDate != null) {
-                        builder.append(rawEndDate);
-                    }
-                    if (rawEndTime != null) {
-                        if (rawEndDate != null) {
-                            builder.append(" | ");
-                        }
-                        builder.append(" " + rawEndTime);
-                    }
-                }
-                writer.write(builder.toString() + "\n");
+                writeTask(writer, task);
             }
             writer.close();
         } catch (IOException exception) {
-            throw new DukeException("☹ OOPS!!! Something went wrong: " + exception.getMessage());
+            throw new StorageException("☹ OOPS!!! Something went wrong: " + exception.getMessage());
+        }
+    }
+
+    private void writeTask(FileWriter writer, Task task) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        appendTaskType(task, builder);
+        appendTaskStatus(task, builder);
+        appendTaskDescription(task, builder);
+        appendTaskDetails(task, builder);
+        writer.write(builder.toString() + "\n");
+    }
+
+    private void appendTaskType(Task task, StringBuilder builder) {
+        builder.append(task.getType() + " | ");
+    }
+
+    private void appendTaskStatus(Task task, StringBuilder builder) {
+        if (task.isDone()) {
+            builder.append("1 | ");
+        } else {
+            builder.append("0 | ");
+        }
+    }
+
+    private void appendTaskDescription(Task task, StringBuilder builder) {
+        builder.append(task.getDescription());
+    }
+
+    private void appendTaskDetails(Task task, StringBuilder builder) {
+        if (task.getType().equals("D")) {
+            appendDeadlineDetails((Deadline) task, builder);
+        } else if (task.getType().equals("E")) {
+            appendEventDetails((Event) task, builder);
+        }
+    }
+
+    private void appendDeadlineDetails(Deadline deadline, StringBuilder builder) {
+        String rawDate = deadline.getDate().getRawDate();
+        builder.append(" | " + rawDate);
+        String rawTime = deadline.getTime().getRawTime();
+        if (rawTime != null) {
+            builder.append(" | " + rawTime);
+        }
+    }
+
+    private void appendEventDetails(Event event, StringBuilder builder) {
+        String rawStartDate = event.getStartDate().getRawDate();
+        builder.append(" | " + rawStartDate);
+
+        String rawStartTime = event.getStartTime().getRawTime();
+        if (rawStartTime != null) {
+            builder.append(" | " + rawStartTime);
+        }
+        builder.append(" | ");
+
+        String rawEndDate = event.getEndDate().getRawDate();
+        if (rawEndDate != null) {
+            builder.append(rawEndDate);
+        }
+
+        String rawEndTime = event.getEndTime().getRawTime();
+        if (rawEndTime != null) {
+            if (rawEndDate != null) {
+                builder.append(" | ");
+            }
+            builder.append(" " + rawEndTime);
+        }
+    }
+
+    private void setTaskDoneStatus(String taskDoneStatus, Task task) {
+        if (taskDoneStatus.equals("1")) {
+            task.markAsDone();
         }
     }
 }

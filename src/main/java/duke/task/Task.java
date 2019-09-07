@@ -8,13 +8,14 @@ public abstract class Task {
     Task(String icon, String description) {
         this.icon = icon.trim();
         this.description = description.trim();
+        assert this.description.length() != 0;
     }
 
     public void markAsDone() {
         isDone = true;
     }
 
-    String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -22,7 +23,7 @@ public abstract class Task {
         return this.description;
     }
 
-    String getIcon() {
+    private String getIcon() {
         return this.icon;
     }
 

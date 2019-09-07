@@ -15,7 +15,7 @@ public class TodoCommand extends AddCommand {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Todo todoTask = Todo.of(getDesc());
         taskList.addTask(todoTask);
-        // storage.store(todoTask);
+
         return ui.getAddedTask(todoTask.toString(), taskList.getNumTasks());
     }
 }

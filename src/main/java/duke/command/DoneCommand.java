@@ -24,6 +24,7 @@ public class DoneCommand extends InputCommand {
                 throw new IndexOutOfBoundsException();
             }
 
+            assert done - 1 <= taskList.getNumTasks();
             return ui.getDoneTask(taskList.doneTask(done - 1));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The index is not within the task list size.");

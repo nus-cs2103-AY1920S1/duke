@@ -102,6 +102,8 @@ public class TaskList {
      * @return String String representation of the deleted task
      */
     public String deleteTask(int index) {
+        assert lst.size() != 0;
+
         return lst.remove(index).toString();
     }
 
@@ -112,6 +114,8 @@ public class TaskList {
      * @return String String representation of the marked task
      */
     public String doneTask(int index) {
+        assert lst.size() != 0;
+
         Task task = lst.get(index);
         task.markAsDone();
         return task.toString();

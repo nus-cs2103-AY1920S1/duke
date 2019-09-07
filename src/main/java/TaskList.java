@@ -132,7 +132,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     addList adds the new task into the list
+     *     addList adds the new task into the list and saves the list into a text file
      * </p>
      * @param t the newly created TaskList object
      * @param a the list of task
@@ -144,6 +144,10 @@ abstract class TaskList {
         a.add(t);
         out = out + "\n" + t + "\n" + "Now you have " + Integer.toString(n) +
                 " tasks in the list.";
+
+        Save save = new Save();
+        save.saveFile(save, a);
+
         return out;
     }
 

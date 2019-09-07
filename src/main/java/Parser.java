@@ -105,7 +105,7 @@ public class Parser {
 
     /**
      * <p>
-     *     callDelete is used to handle delete tasks request
+     *     callDelete is used to handle delete tasks request and updates text file
      * </p>
      * @param word get command
      * @param array the list of task
@@ -141,6 +141,10 @@ public class Parser {
                 }
             }
         }
+
+        Save save = new Save();
+        save.saveFile(save, array);
+
         return out;
     }
 

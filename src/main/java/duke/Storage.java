@@ -57,14 +57,17 @@ public class Storage {
                     if (isDone) {
                         deadline.setDone();
                     }
+                    assert deadline != null : "deadline should have been successfully loaded from hard disk"
                     tasks.add(deadline);
                 } else if (type.equals("T")) {
                     Todo todo = new Todo(description);
                     if (isDone) {
                         todo.setDone();
                     }
+                    assert todo != null : "todo should have been successfully loaded from hard disk"
                     tasks.add(todo);
                 } else {
+                    assert type.equals("E") : "task is not an event";
                     String startDate = information[3];
                     String startTime = information.length > 4 ? information[4] : "";
                     String endDate = information.length > 5 ? information[5] : "";
@@ -74,6 +77,7 @@ public class Storage {
                     if (isDone) {
                         event.setDone();
                     }
+                    assert event != null : "event should have been successfully loaded from hard disk"
                     tasks.add(event);
                 }
             }
@@ -106,6 +110,7 @@ public class Storage {
                 } else if (type.equals("T")) {
                     taskInformation.append(type + " | " + isDone + " | " + description);
                 } else {
+                    assert type.equals("E") : "task is not an event";
                     Event event = (Event) task;
                     String startDate = event.getUnprocessedStartDate();
                     String startTime = event.getUnprocessedStartTime();

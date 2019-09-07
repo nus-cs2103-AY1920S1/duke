@@ -24,13 +24,16 @@ class Parser {
         if (!keywords.contains(args[0])) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
+        assert keywords.contains(args[0]);
+
         switch (args[0]) {
         case "delete":
             return new DeleteCommand(Integer.parseInt(args[1]));
         case "bye":
             return new ExitCommand();
         case "find":
-            return new FindCommand(getArguments(args));
+            return new FindCommand(joinArguments(args));
         case "list":
             return new ListCommand();
         case "done":
@@ -40,12 +43,18 @@ class Parser {
         }
     }
 
-    private static String getArguments(String[] args) {
-        return String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+    private static String[] sliceArguments(String[] args) {
+        assert args.length > 1;
+        return Arrays.copyOfRange(args, 1, args.length);
+    }
+
+    private static String joinArguments(String[] args) {
+        assert args.length > 1;
+        return String.join(" ", sliceArguments(args));
     }
 
     private static Task parseTask(String[] args) {
-        String[] description = Arrays.copyOfRange(args, 1, args.length);
+        String[] description = sliceArguments(args);
         try {
             switch (args[0]) {
             case "todo":

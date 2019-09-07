@@ -3,7 +3,7 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.UserInterface;
 
 /**
  * The <code>AddCommand</code> is the parent class of {@link AddTodoCommand}, {@link AddDeadlineCommand},
@@ -34,12 +34,12 @@ public class AddCommand implements Command {
      * Executes the command. This will add the specified task into the list of tasks. The task can be a todo, deadline
      * or event item.
      * @param tasks the list of tasks
-     * @param ui the user interface
+     * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         tasks.add(task);
-        ui.showAddInformation(task.toString(), tasks.size());
+        commandLineUserInterface.showAddInformation(task.toString(), tasks.size());
     }
 
     /**

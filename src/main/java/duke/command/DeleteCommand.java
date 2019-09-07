@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.InvalidParameterException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.UserInterface;
 
 /**
  *  The <code>DeleteCommand</code> is created when the user enters <code>"delete"</code>. The delete command will delete
@@ -33,14 +33,14 @@ public class DeleteCommand implements Command {
     /**
      * Executes the command. This will delete the specified task entered by the user from the list of tasks
      * @param tasks the list of tasks
-     * @param ui the user interface
+     * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      * @throws duke.exception.InvalidParameterException if the index is out of range
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         try {
             String task = tasks.delete(index);
-            ui.showDeletedMessage(task, tasks.size());
+            commandLineUserInterface.showDeletedMessage(task, tasks.size());
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
         }

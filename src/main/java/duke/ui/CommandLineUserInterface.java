@@ -6,7 +6,7 @@ import java.util.Scanner;
  * This is the user interface of the Duke program. The Duke program will print information here. The user interface can
  * display the change information, error messages, exit message, list of task, welcome message to the user.
  */
-public class Ui {
+public class CommandLineUserInterface implements UserInterface {
 
     /**
      * This is the Scanner object used to read user input.
@@ -16,7 +16,7 @@ public class Ui {
     /**
      * Constructs a new user interface to display information.
      */
-    public Ui() {
+    public CommandLineUserInterface() {
         this.sc = new Scanner(System.in);
     }
 

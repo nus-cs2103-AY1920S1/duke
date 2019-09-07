@@ -1,0 +1,9 @@
+.button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-font-family: 'Delius Unicase';
+}
+
+#dialogContainer {
+    -fx-background-image: url("/images/background.jpg");
+}

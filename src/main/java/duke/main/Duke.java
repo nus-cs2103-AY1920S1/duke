@@ -7,19 +7,9 @@ import duke.exception.InvalidDateTimeException;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import duke.ui.CommandLineUserInterface;
+import duke.ui.UserInterface;
+
 import java.io.IOException;
 
 /**
@@ -40,10 +30,10 @@ public class Duke {
     /** UI
      * This is the user interface for Duke.
      */
-    private final Ui ui;
+    private final UserInterface userInterface;
 
     public Duke() {
-        ui = new Ui();
+        userInterface = new CommandLineUserInterface();
         storage = new Storage("data/duke.txt");
         tasks = new TaskList();
 
@@ -55,12 +45,12 @@ public class Duke {
      *                 Program.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        userInterface = new CommandLineUserInterface();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException ie) {
-            ui.showLoadingError();
+            userInterface.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -70,20 +60,20 @@ public class Duke {
      * execution of individual {@link duke.command.Command} in Duke happens here.
      */
     public void run() {
-        ui.showWelcome();
+        userInterface.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = userInterface.readCommand();
                 Command c = CommandParser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, userInterface, storage);
                 isExit = c.isExit();
             } catch (InvalidCommandException ice) {
-                ui.showError("Invalid command: " + ice.getInvalidCommand());
+                userInterface.showError("Invalid command: " + ice.getInvalidCommand());
             } catch (InvalidParameterException ipe) {
-                ui.showError("Invalid parameters: " + ipe.getInvalidParameter());
+                userInterface.showError("Invalid parameters: " + ipe.getInvalidParameter());
             } catch (InvalidDateTimeException idte) {
-                ui.showError("Invalid date and time: " + idte.getInvalidDateTime());
+                userInterface.showError("Invalid date and time: " + idte.getInvalidDateTime());
             }
         }
 

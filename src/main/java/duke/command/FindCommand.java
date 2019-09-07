@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.UserInterface;
 
 /**
  *  The <code>FindCommand</code> is created when the user enters <code>"find"</code>. The find command will look through
@@ -27,11 +27,11 @@ public class FindCommand implements Command {
      * Executes the command. This will look through all the tasks in the list of tasks in {@link TaskList} and show
      * results found in the user interface
      * @param tasks the list of tasks
-     * @param ui the user interface
+     * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showResultsFound(tasks.find(keyword));
+    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
+        commandLineUserInterface.showResultsFound(tasks.find(keyword));
     }
 
     /**

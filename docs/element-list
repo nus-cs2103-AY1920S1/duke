@@ -5,4 +5,4 @@ duke.main
 duke.parser
 duke.storage
 duke.task
-duke.ui
+duke.commandLineUserInterface

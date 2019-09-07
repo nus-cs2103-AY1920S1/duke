@@ -3,7 +3,7 @@ package duke.task;
 import duke.exception.LineInFileParseException;
 import duke.parser.FileLineParser;
 import duke.parser.TaskParser;
-import duke.ui.Ui;
+import duke.ui.CommandLineUserInterface;
 import java.lang.StringBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class TaskList {
             try {
                 taskList.add(FileLineParser.parse(line));
             } catch (LineInFileParseException lifpe) {
-                new Ui().showLineError(lifpe.getLineCount(), line);
+                new CommandLineUserInterface().showLineError(lifpe.getLineCount(), line);
             }
         });
     }

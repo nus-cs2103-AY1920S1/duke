@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.UserInterface;
 
 import java.io.IOException;
 
@@ -18,16 +18,16 @@ public class ExitCommand implements Command {
      * Executes the command. This will save the list of tasks in {@link TaskList} into the storage. The storage is the
      * file path specified by {@link duke.main.Duke} and {@link Storage}.
      * @param tasks the list of tasks
-     * @param ui the user interface
+     * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         try {
             storage.save(tasks.save());
         } catch (IOException io) {
-            ui.showError("I/O Error occurred");
+            commandLineUserInterface.showError("I/O Error occurred");
         } finally {
-            ui.showExitMessage();
+            commandLineUserInterface.showExitMessage();
         }
     }
 

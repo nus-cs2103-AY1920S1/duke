@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.InvalidParameterException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.UserInterface;
 
 /**
  *  The <code>DoneCommand</code> is created when the user enters <code>"done"</code>. The done command will mark a
@@ -34,14 +34,14 @@ public class DoneCommand implements Command {
      * Executes the command. This will mark the task specified by the user as done and display the updated information
      * on the user interface.
      * @param tasks the list of tasks
-     * @param ui the user interface
+     * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      * @throws duke.exception.InvalidParameterException if the index is out of range
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         try {
             String task = tasks.done(index);
-            ui.showMarkedAsDone(task);
+            commandLineUserInterface.showMarkedAsDone(task);
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
         }

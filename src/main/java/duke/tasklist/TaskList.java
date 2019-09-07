@@ -59,18 +59,8 @@ public class TaskList {
         tasks.add(current);
     }
 
-    /**
-     * Deletes a Task from the ArrayList stored in the TaskList object.
-     *
-     * @param taskNumber is the number of the Task that we want to delete from the TaskList.
-     * @param ui is the DukeUi stored in the Duke object that also stores this TaskList
-     * @return the String that represents the deleted task.
-     * @throws IndexOutOfBoundsException when a taskNumber greater than the TaskList size or a negative number is given.
-     */
-    public String delete(int taskNumber, DukeUi ui) throws IndexOutOfBoundsException{
-        Task current = tasks.get(taskNumber - 1);
+    public void delete(int taskNumber) throws IndexOutOfBoundsException{
         tasks.remove(taskNumber - 1);
-        return ui.printTaskDeletedMessage(current, tasks.size());
     }
 
     /**

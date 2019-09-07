@@ -3,3 +3,8 @@
 [T]|false|borrow li
 [T]|false|borrow book
 [T]|false|sleep
+[T]|false|sleep
+[T]|false|borrow book
+[T]|false|sleep
+[T]|false|borrow book
+[T]|false|sleep

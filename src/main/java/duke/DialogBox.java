@@ -11,9 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Collections;
+
 
 /**
  * An example of a custom control using FXML.
@@ -37,8 +39,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Circle myCircle = new Circle(45, 45, 40);
         dialog.setText(text);
+        Text t = new Text(text);
+        dialog.setMinHeight(t.getLayoutBounds().getHeight()); // +20 is for paddings
+        Circle myCircle = new Circle(45, 45, 40);
         displayPicture.setImage(img);
         displayPicture.setClip(myCircle);
     }
@@ -62,4 +66,5 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
 }

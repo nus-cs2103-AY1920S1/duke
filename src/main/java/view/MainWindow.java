@@ -92,8 +92,4 @@ public class MainWindow extends VBox implements UserOutputInterface {
         addDukeDialog("Error: " + text);
     }
 
-    public void showNumTasks(int num) {
-        addDukeDialog(String.format("Now you have %d %s in the list.", num, num == 1 ? "task" : "tasks"));
-    }
-
 }

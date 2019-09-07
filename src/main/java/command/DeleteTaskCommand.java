@@ -33,9 +33,12 @@ public class DeleteTaskCommand extends Command {
         if (tasks.size() >= this.index) {
             Task task = tasks.remove(this.index - 1);
             storage.save(tasks);
-            uoi.showLine("Noted. I've removed this task:");
-            uoi.showLine("  " + task.toString());
-            uoi.showNumTasks(tasks.size());
+        
+            String text = "Noted. I've removed this task:\n";
+            text += "  " + task.toString() + "\n";
+            text += String.format("Now you have %d %s in the list.", 
+                    tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+            uoi.showLine(text);
         } else {
             throw new CommandExecuteException("Task does not exist at index.");
         }

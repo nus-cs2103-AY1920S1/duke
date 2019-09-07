@@ -32,6 +32,7 @@ public class Date {
      * @throws DukeException If date is in the wrong format or invalid.
      */
     protected void processDate() throws DukeException {
+        assert (isNull == false) : "A null raw date should not be processed.";
         String[] dateComponents = rawDate.split("/");
         if (dateComponents.length < 3) {
             throw new DukeException("☹ OOPS!!! Please specify a date in the form day/month/year. E.g. 2/12/2019");

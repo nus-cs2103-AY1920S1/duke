@@ -37,6 +37,8 @@ public class DoneCommand extends Command {
         }
         Task doneTask = tasks.getTask(index - 1);
         doneTask.markAsDone();
+        assert doneTask.isDone() == true : "Supposed to return true as markAsDone() function should have "
+                + "marked the task as done.";
         ui.printDoneMessage(doneTask);
         try {
             storage.writeToFile(tasks);

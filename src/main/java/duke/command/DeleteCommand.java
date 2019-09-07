@@ -35,7 +35,9 @@ public class DeleteCommand extends Command {
             throw new DukeException("☹ OOPS!!! There is no such task in the list to delete.");
         }
         Task deletedTask = tasks.getTask(index - 1);
+        int originalTaskSize = tasks.getSize();
         tasks.deleteTask(index - 1);
+        assert tasks.getSize() == originalTaskSize - 1 : "Supposed to return true as a task should have been deleted.";
         ui.printDeleteMessage(deletedTask, tasks.getSize());
         try {
             storage.writeToFile(tasks);

@@ -73,6 +73,8 @@ public class Storage {
                     }
                     task = new Event(taskDescription, new Date(taskStartDate), new Time(taskStartTime),
                             new Date(taskEndDate), new Time(taskEndTime));
+                    assert (task != null) : "Data in file should be stored in the correct format "
+                            + "and should not cause exceptions.";
                 }
                 if (taskDoneStatus.equals("1")) {
                     task.markAsDone();

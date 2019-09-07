@@ -25,7 +25,7 @@ import javafx.scene.image.ImageView;
  * A Duke object can add <code>Task</code>s, delete them, mark them as Done, and maintain a history of Tasks entered
  * during earlier execution.
  */
-public class Duke extends Application {
+public class Duke {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
@@ -39,7 +39,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
-
+        this("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt");
     }
 
     /**
@@ -65,10 +65,8 @@ public class Duke extends Application {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        System.out.print(ui.showWelcome()); //changed in javafx
         while (true) {
             String command = sc.nextLine();
-            System.out.print(ui.printLine()); //changed in javafx
             try {
                 Parser commandAnalyzer = new Parser(command);
                 System.out.print(Executor.execute(commandAnalyzer, ui, tasks, storage));
@@ -82,73 +80,73 @@ public class Duke extends Application {
         new Duke("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt").run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-    }
+//    @Override
+//    public void start(Stage stage) {
+//        //Step 1. Setting up required components
+//
+//        //The container for the content of the chat to scroll.
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox();
+//        scrollPane.setContent(dialogContainer);
+//
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+//
+//        stage.setScene(scene);
+//        stage.show();
+//        //Step 2. Formatting the window to look as expected
+//        stage.setTitle("Duke");
+//        stage.setResizable(false);
+//        stage.setMinHeight(600.0);
+//        stage.setMinWidth(400.0);
+//
+//        mainLayout.setPrefSize(400.0, 600.0);
+//
+//        scrollPane.setPrefSize(385, 535);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//
+//        scrollPane.setVvalue(1.0);
+//        scrollPane.setFitToWidth(true);
+//
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(325.0);
+//
+//        sendButton.setPrefWidth(55.0);
+//
+//        AnchorPane.setTopAnchor(scrollPane, 1.0);
+//
+//        AnchorPane.setBottomAnchor(sendButton, 1.0);
+//        AnchorPane.setRightAnchor(sendButton, 1.0);
+//
+//        AnchorPane.setLeftAnchor(userInput , 1.0);
+//        AnchorPane.setBottomAnchor(userInput, 1.0);
+//
+//        sendButton.setOnMouseClicked((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+//        //Part 3. Add functionality to handle user input.
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
+//    }
 
     /**
      * Iteration 1:
@@ -169,21 +167,30 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
+//    private void handleUserInput() {
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, new ImageView(user)),
+//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+//        );
+//        userInput.clear();
+//    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Parser commandAnalyzer = new Parser(input);
+            return Executor.execute(commandAnalyzer, ui, tasks, storage); //returns Duke's response to command
+        } catch (DukeException de) {
+            return ui.showException(de);
+        }
+    }
+
+    String getWelcome() {
+        return ui.showWelcome();
     }
 }

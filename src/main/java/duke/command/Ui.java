@@ -14,15 +14,15 @@ public class Ui {
      */
     public String showWelcome() {
         String result = "";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        result += "Hello from\n" + logo + "\n";
-        result += printLine();
-        result += "Hello! I'm Duke\nWhat can I do for you?\n";
-        result += printLine();
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        result += "Hello from\n" + logo + "\n";
+//        result += printLine();
+        result += "Hello! I'm Duke\nWhat can I do for you?";
+//        result += printLine();
         return result;
     }
 
@@ -30,7 +30,7 @@ public class Ui {
      * Prints goodbye when 'bye' command executed.
      */
     public String showGoodBye() {
-        return "Bye. Hope to see you again soon!\n";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -38,7 +38,7 @@ public class Ui {
      * @param e exception that needs to be printed.
      */
     public String showException(Exception e) {
-        return e.getMessage() + "\n";
+        return e.getMessage();
     }
 
     /**
@@ -49,13 +49,13 @@ public class Ui {
         String result = "";
         switch (type) {
         case "done" : result += " :( OOPS!!! Invalid format."
-                + " Please enter the number of the task to be marked as done.\n";
+                + " Please enter the number of the task to be marked as done.";
             break;
         case "delete" : result += " :( OOPS!!! Invalid format."
-                + " Please enter the number of the task to be deleted.\n";
+                + " Please enter the number of the task to be deleted.";
             break;
         default : result += " :( OOPS!!! Invalid format."
-            + " Please enter a number.\n";
+            + " Please enter a number.";
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class Ui {
         String result = "";
         result += "Got it. I've added this task:\n";
         result += " " + task + "\n";
-        result += "Now you have " + noOfTasks + " tasks in the list.\n";
+        result += "Now you have " + noOfTasks + " tasks in the list.";
         return result;
     }
 
@@ -87,7 +87,7 @@ public class Ui {
     public String showTaskDone(Task task) {
         String result = "";
         result += "Nice! I've marked this task as done:\n";
-        result += "  " + task + "\n";
+        result += "  " + task;
         return result;
     }
 
@@ -100,7 +100,7 @@ public class Ui {
         String result = "";
         result += "Noted. I've removed this task:\n";
         result += " " + task + "\n";
-        result += "Now you have " + noOfTasks + " tasks in the list.\n";
+        result += "Now you have " + noOfTasks + " tasks in the list.";
         return result;
     }
 
@@ -125,6 +125,6 @@ public class Ui {
      * Prints error message if loading history file encounters problem.
      */
     public String showLoadingError() {
-        return " :( OOPS!!! Error occurred while loading the history file.\n";
+        return " :( OOPS!!! Error occurred while loading the history file.";
     }
 }

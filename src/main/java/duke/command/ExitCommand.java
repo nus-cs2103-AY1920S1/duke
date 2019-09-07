@@ -25,19 +25,10 @@ public class ExitCommand implements Command {
         try {
             storage.save(tasks.save());
         } catch (IOException io) {
-            commandLineUserInterface.showError("I/O Error occurred");
+            return commandLineUserInterface.showError("I/O Error occurred");
         } finally {
-            commandLineUserInterface.showExitMessage();
+            return commandLineUserInterface.showExitMessage();
         }
-        return null;
-    }
-
-    /**
-     * Returns <code>true</code> if the command is an exit command and <code>false</code> otherwise.
-     * @return <code>true</code>
-     */
-    public boolean isExit() {
-        return true;
     }
 
 }

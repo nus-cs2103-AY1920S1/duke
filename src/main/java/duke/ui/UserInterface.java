@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 /**
  * This is the user interface of the Duke program. The Duke program will print information here. The user interface can
  * display the change information, error messages, exit message, list of task, welcome message to the user.

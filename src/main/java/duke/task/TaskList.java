@@ -1,8 +1,8 @@
 package duke.task;
 
 import duke.exception.LineInFileParseException;
-import duke.parser.FileLineParser;
-import duke.parser.TaskParser;
+import duke.parser.FileToTaskParser;
+import duke.parser.TaskToFileParser;
 import duke.ui.Ui;
 import java.lang.StringBuffer;
 import java.util.ArrayList;
@@ -29,14 +29,14 @@ public class TaskList {
 
     /**
      * Constructs a new list of tasks from a stream of line. This stream of lines will be parsed by
-     * {@link FileLineParser} to each individual tasks that will be added individually to form a list of tasks.
+     * {@link FileToTaskParser} to each individual tasks that will be added individually to form a list of tasks.
      * @param lines the stream of lines to be parsed.
      */
     public TaskList(Stream<String> lines) {
         this.taskList = new ArrayList<>();
         lines.forEach(line -> {
             try {
-                taskList.add(FileLineParser.parse(line));
+                taskList.add(FileToTaskParser.parse(line));
             } catch (LineInFileParseException lifpe) {
                 new Ui().showLineError(lifpe.getLineCount(), line);
             }
@@ -102,18 +102,18 @@ public class TaskList {
      */
     public String find(String keyword) {
         return new TaskList(taskList.stream()
-                .filter(taskDescrptn -> taskDescrptn.contains(keyword))
-                .map(task -> task.encode())).list();
+                            .filter(taskDescrptn -> taskDescrptn.contains(keyword))
+                            .map(task -> task.encode())).list();
 
 
     }
 
     /** Returns a stream of string to be saved into the {@link duke.storage.Storage}. Each task is parsed using a task
-     * parser. See {@link TaskParser} for more information.
+     * parser. See {@link TaskToFileParser} for more information.
      * @return a stream of string to be saved into storage
      */
     public Stream<String> save() {
-        return taskList.stream().map(x -> TaskParser.parse(x));
+        return taskList.stream().map(x -> TaskToFileParser.parse(x));
     }
 
 }

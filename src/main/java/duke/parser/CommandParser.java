@@ -8,7 +8,6 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.LaunchCommand;
 import duke.command.ListCommand;
 import duke.exception.InvalidCommandException;
 import java.util.Arrays;
@@ -46,8 +45,6 @@ public class CommandParser {
                 return new DeleteCommand(parameter);
             case "find":
                 return new FindCommand(parameter);
-            case "launch":
-                return new LaunchCommand(parameter.split(" "));
             case "bye":
                 return new ExitCommand();
             default:

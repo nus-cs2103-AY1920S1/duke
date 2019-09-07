@@ -23,11 +23,11 @@ public class Main extends Application {
             scene.getStylesheets().add("/style/stylesheet.css");
             stage.setMinWidth(630.0);
             stage.setMinHeight(703.0);
-//            stage.setMaxWidth(1362.0);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

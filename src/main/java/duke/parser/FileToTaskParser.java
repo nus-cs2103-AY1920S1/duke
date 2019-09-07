@@ -11,7 +11,7 @@ import duke.task.Todo;
  * This is a parser used to parse each line in the file to a <code>Task</code>. The <code>Task</code> can be added into
  * a list of tasks in <code>TaskList</code>.
  */
-public class FileLineParser {
+public class FileToTaskParser {
 
     /**
      * This is the number of lines already parsed by the Parser.
@@ -22,7 +22,7 @@ public class FileLineParser {
      * Parses the string into a {@link Task} that can be added into a list of tasks in {@link duke.task.TaskList}.
      * @param line the line to be parsed
      * @return a task that can be added into a list of tasks
-     * @throws LineInFileParseException if the line cannot be parsed by the <code>FileLineParser</code>
+     * @throws LineInFileParseException if the line cannot be parsed by the <code>FileToTaskParser</code>
      */
     public static Task parse(String line) {
         lineCount++;

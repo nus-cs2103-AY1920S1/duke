@@ -1,5 +1,5 @@
 package duke.view;
-import duke.main.Duke;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,49 +9,38 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends BorderPane {
     @FXML
     private HBox logoBox;
     @FXML
-    private HBox dialogBox;
+    private ImageView logoPicture;
     @FXML
-    private HBox inputBox;
+    private HBox dialogBox;
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private VBox dialogContainer;
+    private VBox scrollBox;
+    @FXML
+    private HBox inputBox;
     @FXML
     private TextField userInput;
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-    @FXML
-    private ImageView logoPicture;
     private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        scrollPane.setContent(dialogContainer);
-//        Image image = new Image(this.getClass().getResourceAsStream("/images/background.jpg"));
-//        BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, null);
-//        Background background = new Background(backgroundImage);
-//        dialogContainer.setBackground(background);
-        dialogContainer.setId("dialogContainer");
-        logoBox.setStyle("-fx-background-color: #2196F3");
+        scrollPane.vvalueProperty().bind(scrollBox.heightProperty());
+        scrollPane.setContent(scrollBox);
+        scrollBox.setId("scrollBox");
+        logoBox.setId("logoBox");
         logoPicture.setImage(logoImage);
-
     }
 
     /**
@@ -61,15 +50,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(input, dukeImage)
-        );
+        scrollBox.getChildren().addAll(
+            DialogBox.getUserDialog(input),
+            DialogBox.getDukeDialog(input)
+            );
         userInput.clear();
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished( event -> {Platform.exit(); System.exit(0 );});
             delay.play();
         }
     }
+
 }

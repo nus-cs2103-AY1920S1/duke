@@ -22,5 +22,8 @@ public interface Command {
      * Returns <code>true</code> if the command is an exit command and <code>false</code> otherwise.
      * @return <code>true</code> if the command is an exit command and <code>false</code> otherwise.
      */
-    boolean isExit();
+    default boolean isExit() {
+        return this instanceof ExitCommand;
+    }
+
 }

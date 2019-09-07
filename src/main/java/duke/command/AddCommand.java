@@ -42,12 +42,4 @@ public class AddCommand implements Command {
         return commandLineUserInterface.showAddInformation(task.toString(), tasks.size());
     }
 
-    /**
-     * Returns <code>true</code> if the command is an exit command and <code>false</code> otherwise.
-     * @return <code>false</code>
-     */
-    public boolean isExit() {
-        return false;
-    }
-
 }

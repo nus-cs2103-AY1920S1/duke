@@ -19,8 +19,9 @@
         <children>
             <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" fitToHeight="true" minHeight="520.0" minWidth="418.0" prefHeight="520.0" prefWidth="418.0" vvalue="1.0" HBox.hgrow="ALWAYS">
                <content>
-                  <VBox fx:id="dialogContainer"  prefHeight="520.0" HBox.hgrow="ALWAYS" fillWidth="true"/>
-               </content></ScrollPane>
+                  <VBox fx:id="scrollBox"  prefHeight="520.0" HBox.hgrow="ALWAYS" fillWidth="true"/>
+               </content>
+           </ScrollPane>
         </children>
      </HBox>
    </center>

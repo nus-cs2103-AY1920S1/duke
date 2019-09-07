@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,6 +11,14 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.task.Task;
+import duke.ui.Ui;
+import duke.dukeexception.DukeException;
+import duke.command.Command;
+import duke.parser.Parser;
+
 public class Duke {
 
     private Storage storage;
@@ -16,9 +26,9 @@ public class Duke {
     private Ui ui;
 
     private static final String INDENT_SPACING = "    ";
-    private static final String ROOT_DIRECTORY = "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java";
-    private static final String SAVE_DIRECTORY = "/data";
-    private static final String SAVE_FILE_NAME = "duke.txt";
+    private static final String ROOT_DIRECTORY = "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java/duke/";
+    //private static final String SAVE_DIRECTORY = "/data";
+    //private static final String SAVE_FILE_NAME = "tasks.txt";
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -50,7 +60,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.text").run();
+        new Duke(ROOT_DIRECTORY + "data/tasks.text").run();
     }
 
 

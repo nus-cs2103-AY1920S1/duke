@@ -45,8 +45,19 @@ public class Parser {
             Class<? extends Command> commandClass = TOKEN_TO_COMMAND.get(commandWord);
             if (commandClass != null) {
                 try {
+                    // create a new instance of the Command-implementing class and pass the command arguments to it
                     return commandClass.getConstructor(String.class).newInstance(m.group("args"));
                 } catch (ReflectiveOperationException exc) {
+                    /*
+                    If an exception is thrown within the Command-implementing class constructor, Java will wrap it in a
+                    InvocationTargetException exception because reflection is being used to invoke the constructor.
+
+                    We expect DukeException subclasses to be thrown within Command constructors so we'll check for it
+                    and transparently unwrap the ReflectiveOperationException exception to throw it instead.
+
+                    If it's some other ReflectiveOperationException exception, we'll wrap it inside
+                    an UnknownCommandException instead.
+                     */
                     if (exc.getCause() instanceof DukeException) {
                         throw (DukeException) exc.getCause();
                     } else {

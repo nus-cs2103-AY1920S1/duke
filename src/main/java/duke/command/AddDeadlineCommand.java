@@ -6,6 +6,10 @@ import duke.Ui;
 import duke.calendar.Date;
 import duke.calendar.Time;
 import duke.exception.DukeException;
+import duke.exception.InsufficientDetailsException;
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidTimeException;
+import duke.exception.MissingDescriptionException;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -35,37 +39,73 @@ public class AddDeadlineCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> which handles user input and outputs.
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
-     * @throws DukeException If insufficient or incorrect details are provided.
+     * @throws MissingDescriptionException If description is missing.
+     * @throws duke.exception.InsufficientDetailsException If insufficient details are given.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException, InsufficientDetailsException {
         String[] detailsSplit = details.split("/by");
-        if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        boolean descriptionIsEmpty = detailsSplit.length == 0 || getAction(detailsSplit).length() == 0;
+        boolean hasInsufficientDetails = detailsSplit.length < 2 || getDeadline(detailsSplit).length() == 0;
+        if (descriptionIsEmpty) {
+            throw new MissingDescriptionException("deadline");
         }
-        if (detailsSplit.length < 2 || detailsSplit[1].trim().length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline requires a task and/or a due date");
+        if (hasInsufficientDetails) {
+            throw new InsufficientDetailsException("☹ OOPS!!! The description of a deadline requires a task and/or a due date");
         }
-        String action = detailsSplit[0].trim();
-        String deadline = detailsSplit[1].trim();
-        String[] dateAndTimeSplit = deadline.split(" ");
+        addDeadline(tasks, ui, storage, detailsSplit);
+    }
+
+    private void addDeadline(TaskList tasks, Ui ui, Storage storage, String[] detailsSplit) {
         try {
-            String date = dateAndTimeSplit[0];
-            Date deadlineDate = new Date(date);
-            Time deadlineTime;
-            if (dateAndTimeSplit.length == 1) {
-                deadlineTime = new Time("");
-            } else if (dateAndTimeSplit.length == 2) {
-                deadlineTime = new Time(dateAndTimeSplit[1]);
-            } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            Task taskDeadline = new Deadline(action, deadlineDate, deadlineTime);
+            Task taskDeadline = createDeadline(detailsSplit);
             tasks.addTask(taskDeadline);
             int numberOfTasks = tasks.getListSize();
             ui.printAddedMessage(taskDeadline, numberOfTasks);
             storage.writeToHardDisk(tasks);
         } catch (DukeException exception) {
             ui.printException(exception);
+        }
+    }
+
+    private Task createDeadline(String[] detailsSplit) throws DukeException {
+        String action = getAction(detailsSplit);
+        String deadline = getDeadline(detailsSplit);
+        String[] dateAndTimeSplit = deadline.split(" ");
+        Date deadlineDate = createDate(dateAndTimeSplit);
+        Time deadlineTime = createTime(dateAndTimeSplit);
+        return new Deadline(action, deadlineDate, deadlineTime);
+    }
+
+    private String getAction(String[] detailsSplit) {
+        return detailsSplit[0].trim();
+    }
+
+    private String getDeadline(String[] detailsSplit) {
+        return detailsSplit[1].trim();
+    }
+
+    private String getDate(String[] dateAndTimeSplit) {
+        return dateAndTimeSplit[0];
+    }
+
+    private String getTime(String[] dateAndTimeSplit) {
+        return dateAndTimeSplit[1];
+    }
+
+    private Date createDate(String[] dateAndTimeSplit) throws DukeException {
+        String date = getDate(dateAndTimeSplit);
+        return new Date(date);
+    }
+
+    private Time createTime(String[] dateAndTimeSplit) throws InvalidInputException, InvalidTimeException {
+        boolean hasNoSpecifiedTime = dateAndTimeSplit.length == 1;
+        boolean hasSpecifiedTime = dateAndTimeSplit.length == 2;
+        if (hasNoSpecifiedTime) {
+            return new Time("");
+        } else if (hasSpecifiedTime) {
+            return new Time(getTime(dateAndTimeSplit));
+        } else {
+            throw new InvalidInputException();
         }
     }
 

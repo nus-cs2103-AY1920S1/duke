@@ -46,4 +46,12 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    @FXML
+    void showDukeIntro() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getIntro(), dukeImage)
+        );
+        userInput.clear();
+    }
 }

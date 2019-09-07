@@ -3,7 +3,7 @@
  * @version 0.1
  */
 public class Ui {
-	static String breakLine = "____________________________________________________________\n";
+	static String breakLine = "_____________________________________________________\n";
 	/**
 	 * Pointer to tasklist object.
 	 */
@@ -32,15 +32,15 @@ public class Ui {
 	 * Shows logo and intro.
 	 */
 	public String logoAndIntro() {
-		String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+		String logo = "  _____            _        \n"
+                + " |   __  \\ _     _|  |  _    __ \n"
+                + " |  |   |  |  |   |  |  |/ /  / _ \\\n"
+                + " |  |__|  |  |__|  |      V   __/\n"
+                + " |_____/ \\___,_|__|\\__\\___|\n";
         return "Hello from\n"
 				+ logo
 				+ breakLine
-				+ " Hello! I'm Duke\n What can I do for you?"
+				+ " Hello! I'm Duke\n What can I do for you?\n"
 				+ breakLine;
 	}
 

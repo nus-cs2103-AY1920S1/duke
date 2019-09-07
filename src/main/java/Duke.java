@@ -99,7 +99,7 @@ public class Duke {
 	    return run(input);
 	}
 
-	public String getIntro() {
+	String getIntro() {
 		return ui.logoAndIntro();
 	}
 }

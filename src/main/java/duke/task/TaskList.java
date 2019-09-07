@@ -1,6 +1,9 @@
 package duke.task;
 
+import duke.exception.InvalidDateInputException;
+import duke.exception.InvalidEditTaskException;
 import duke.exception.InvalidTaskIndexException;
+import duke.parser.DateParser;
 
 import java.util.ArrayList;
 
@@ -141,6 +144,34 @@ public class TaskList {
             Task task = tasks.get(index);
             task.editTaskName(newName);
             return task;
+        }
+    }
+
+    /**
+     * Edits the specific task based on the name and index given.
+     * @param newTaskData An array which consists the index and new name.
+     * @return the edited task.
+     * @throws InvalidTaskIndexException if the index given is out of bounds.
+     */
+    public Task editSpecificTaskDate(String[] newTaskData) throws
+            InvalidTaskIndexException, InvalidDateInputException, InvalidEditTaskException {
+        int index = Integer.parseInt(newTaskData[0]) - 1;
+        DateParser parser = new DateParser();
+        parser.readInput(newTaskData[1] + " " + newTaskData[2]);
+        String newDate = parser.convertDateToString();
+        if (index < 0 || index > tasks.size()) {
+            throw new InvalidTaskIndexException();
+        } else {
+            Task task = tasks.get(index);
+            if (task instanceof ToDoTask) {
+                throw new InvalidEditTaskException("You cannot change the date of a todo task!");
+            } else if (task instanceof EventTask) {
+                ((EventTask) task).editTaskDate(newDate);
+                return task;
+            } else {
+                ((DeadlineTask) task).editTaskDate(newDate);
+                return task;
+            }
         }
     }
 

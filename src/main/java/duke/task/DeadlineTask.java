@@ -29,6 +29,14 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * Changes the task name to the new task date given.
+     * @param newTaskDate the new task date given.
+     */
+    public void editTaskDate(String newTaskDate) {
+        this.deadline =  newTaskDate;
+    }
+
+    /**
      * Returns a string representation of the Task.
      * @return A string representation of the Task.
      */

@@ -1,8 +1,4 @@
-import duke.command.Parser;
-import duke.command.DukeException;
-import duke.command.Storage;
-import duke.command.TaskList;
-import duke.command.Ui;
+import duke.command.*;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
@@ -11,15 +7,35 @@ import duke.task.Event;
 import java.util.Scanner;
 import java.io.IOException;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+
 /**
  * Represents an application that manages <code>ToDo</code>s, <code>duke.task.Event</code>s, and <code>Deadline</code>s.
  * A Duke object can add <code>Task</code>s, delete them, mark them as Done, and maintain a history of Tasks entered
  * during earlier execution.
  */
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
+
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    public Duke() {
+
+    }
 
     /**
      * Constructs a Duke object that saves Tasks in the provided filePath.
@@ -44,96 +60,69 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        ui.showWelcome();
+        System.out.print(ui.showWelcome()); //changed in javafx
         while (true) {
             String command = sc.nextLine();
-            ui.printLine();
+            System.out.print(ui.printLine()); //changed in javafx
             try {
                 Parser commandAnalyzer = new Parser(command);
-                if (commandAnalyzer.isValid()) {
-                    if (commandAnalyzer.getType().equals("done")) {
-                        int index = Integer.parseInt(commandAnalyzer.getList().get(0)) - 1;
-                        try {
-                            if (index >= tasks.size() || index < 0) {
-                                throw new DukeException(" :( OOPS!!! Requested task number is not available");
-                            }
-                            Task temp = tasks.get(index);
-                            temp.markAsDone();
-                            ui.showTaskDone(temp);
-                            storage.update(tasks);
-                        } catch (DukeException | IOException de) {
-                            ui.showException(de);
-                        } catch (NumberFormatException nfe) {
-                            ui.showNumberFormatError("done");
-                        }
-                    } else if (command.equals("bye")) {
-                        ui.showGoodBye();
-                        break;
-                    } else if (command.equals("list")) {
-                        ui.showTasks(tasks);
-                    } else if (commandAnalyzer.getType().equals("find")) {
-                        ui.showTasks(tasks.find(commandAnalyzer.getList().get(0)));
-                    } else {
-                        if (commandAnalyzer.getType().equals("todo")) {
-                            try {
-                                Task temp = new ToDo(commandAnalyzer);
-                                tasks.add(temp);
-                                ui.showTaskCreated(temp, tasks.size()); //change arr to TaskList
-                                storage.update(tasks);
-                            } catch (IOException de) {
-                                ui.showException(de);
-                            }
-                        } else if (commandAnalyzer.getType().equals("deadline")) {
-                            try {
-                                Task temp = new Deadline(commandAnalyzer);
-                                tasks.add(temp);
-                                ui.showTaskCreated(temp, tasks.size());
-                                storage.update(tasks);
-                            } catch (IOException de) {
-                                ui.showException(de);
-                            }
-                        } else if (commandAnalyzer.getType().equals("event")) {
-                            try {
-                                Task temp = new Event(commandAnalyzer);
-                                tasks.add(temp);
-                                ui.showTaskCreated(temp, tasks.size());
-                                storage.update(tasks);
-                            } catch (IOException de) {
-                                ui.showException(de);
-                            }
-                        } else if (commandAnalyzer.getType().equals("delete")) {
-                            try {
-                                int index = Integer.parseInt(commandAnalyzer.getList().get(0)) - 1;
-                                if (index >= tasks.size() || index < 0) {
-                                    throw new DukeException(" :( OOPS!!! Task to be deleted is not available");
-                                } else {
-                                    Task temp = tasks.remove(index);
-                                    ui.showTaskDeleted(temp, tasks.size());
-                                }
-                                storage.update(tasks);
-                            } catch (DukeException | IOException de) {
-                                ui.showException(de);
-                            } catch (NumberFormatException nfe) {
-                                ui.showNumberFormatError("delete");
-                            }
-                        }
-                    }
-                } else {
-                    try {
-                        throw new DukeException(" :( OOPS!!! I'm sorry but I don't know what that means :-(");
-                    } catch (DukeException de) {
-                        ui.showException(de);
-                    }
-                }
+                System.out.print(Executor.execute(commandAnalyzer, ui, tasks, storage));
             } catch (DukeException de) {
-                ui.showException(de);
-            } finally {
-                ui.printLine();
+                System.err.println(de.getMessage());
             }
         }
     }
 
     public static void main(String[] args) {
         new Duke("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 }

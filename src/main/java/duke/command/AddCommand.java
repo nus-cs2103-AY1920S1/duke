@@ -1,9 +1,8 @@
-package duke.task;
-import duke.command.Command;
+package duke.command;
+
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
@@ -11,17 +10,21 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Adds a new task.
+ */
 public class AddCommand extends Command {
     private String[] oneLine;
-    private Task task;
-    public String[] timeDate;
 
     public AddCommand(String[] oneLine) {
         this.oneLine = oneLine;
     }
 
     /**
-     * boolean isValidTime.
+     * check if it is a valid time format.
+     *
+     * @param str The input should be checked.
+     * @return true if str can be converted to a valid time format, otherwise returns false.
      */
     public static boolean isValidTime(String str) {
         try {
@@ -40,22 +43,23 @@ public class AddCommand extends Command {
         String timeDate;
         String firstWord = oneLine[0];
 
+        String[] timeDate1;
         if (firstWord.equals("todo")) {
             tasks.getTaskList().add(new Todo(oneLine[1].trim()));
         } else if (firstWord.equals("deadline")) {
-            this.timeDate = oneLine[1].trim().split(" /by ");
-            if (this.timeDate.length == 2 && isValidTime(this.timeDate[1].trim())) {
-                description = this.timeDate[0].trim();
-                timeDate = this.timeDate[1].trim();
+            timeDate1 = oneLine[1].trim().split(" /by ");
+            if (timeDate1.length == 2 && isValidTime(timeDate1[1].trim())) {
+                description = timeDate1[0].trim();
+                timeDate = timeDate1[1].trim();
                 tasks.getTaskList().add(new Deadline(description, timeDate));
             } else {
                 throw new duke.exception.NoTimeAndDateException("specific date/time for deadline is wrong");
             }
         } else {
-            this.timeDate = oneLine[1].trim().split(" /at ");
-            if (this.timeDate.length == 2 && isValidTime(this.timeDate[1].trim())) {
-                description = this.timeDate[0].trim();
-                timeDate = this.timeDate[1].trim();
+            timeDate1 = oneLine[1].trim().split(" /at ");
+            if (timeDate1.length == 2 && isValidTime(timeDate1[1].trim())) {
+                description = timeDate1[0].trim();
+                timeDate = timeDate1[1].trim();
                 tasks.getTaskList().add(new Event(description, timeDate));
             } else {
                 throw new duke.exception.NoTimeAndDateException("specific date/time for event is wrong");

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
@@ -21,17 +22,17 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (duke.exception.DukeException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-//        run();
     }
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Used to generate a response to user input.
+     *
+     * @param input The input command from user.
+     * @return The String of response message for the given message.
      */
     public String getResponse(String input) {
         String output;
@@ -43,5 +44,4 @@ public class Duke {
         }
         return output;
     }
-
 }

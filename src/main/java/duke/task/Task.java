@@ -1,5 +1,5 @@
 package duke.task;
-import java.text.ParseException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
-    protected LocalDateTime pattern;
-    public DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    protected final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    String description;
+    boolean isDone;
+    LocalDateTime pattern;
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
 
     public Task(String description) {
@@ -20,9 +20,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    /**
-     * Task(String description, String done).
-     */
+
     public Task(String description, String done) {
         this.description = perfectDescription(description);
         if (done.trim().equals("1")) {
@@ -30,37 +28,67 @@ public abstract class Task {
         }
     }
 
-    public String getDescription(){
+    /**
+     * Gets the description of the task as a string.
+     *
+     * @return description of the task as a string.
+     */
+    public String getDescription() {
         return this.description;
     }
+
     /**
      * perfectDescription.
+     *
+     * @param description The input is a string.
+     * @return perfectDescription format
      */
-    public String perfectDescription(String description) {
+    private String perfectDescription(String description) {
         String[] temp = description.split(" ");
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (String str : temp) {
             if (!str.equals("")) {
-                result += " " + str.trim();
+                result.append(" ").append(str.trim());
             }
         }
-        return result.trim();
+        return result.toString().trim();
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
-    public String getStatusIcon() {
+    /**
+     * Returns the status icon.
+     *
+     * @return the tick icon if task is done, otherwise returns a cross symbol.
+     */
+    private String getStatusIcon() {
         return (isDone ? "V" : "X"); //return tick or X symbols
     }
 
+    /**
+     * get the String format to save in file.
+     *
+     * @return the format to save in file.
+     */
     public abstract String getFormatToFile();
 
-    public String getTime() {
+    /**
+     * get the String time.
+     *
+     * @return the String format of time and date.
+     */
+    String getTime() {
         return pattern.format(formatter2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

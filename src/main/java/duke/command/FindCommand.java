@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.exception.DukeException;
 import duke.exception.TaskNotExistException;
 import duke.task.Task;
@@ -9,6 +10,9 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The command used to find tasks with a keyword.
+ */
 public class FindCommand extends Command {
     private String[] oneLine;
     private List<Task> myList = new ArrayList<>();
@@ -17,6 +21,9 @@ public class FindCommand extends Command {
         this.oneLine = oneLine;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String partTaskName = oneLine[1].trim();
@@ -28,14 +35,13 @@ public class FindCommand extends Command {
         int i = 0;
         if (myList.size() != 0) {
             Ui.printOutput(" Here are the matching tasks in your list: ");
-            String temp = "";
+            StringBuilder temp = new StringBuilder();
             for (Task tk : myList) {
                 i++;
-                temp += Ui.frontSpace + " " + i + ". " + tk + "\n";
+                temp.append(Ui.frontSpace).append(" ").append(i).append(". ").append(tk).append("\n");
             }
             i = 0;
-            return String.format(
-                    Ui.frontSpace + " Here are the matching tasks in your list: \n" + temp);
+            return Ui.frontSpace + " Here are the matching tasks in your list: \n" + temp;
         } else {
             throw new TaskNotExistException("task does not exist");
         }

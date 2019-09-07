@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.exception.DukeException;
 import duke.ui.Storage;
 import duke.ui.TaskList;
@@ -8,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ListCommand extends Command.
+ * The command used to list all the tasks.
  */
 public class ListCommand extends Command {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         List<String> sList = new ArrayList<>();
@@ -30,13 +34,13 @@ public class ListCommand extends Command {
                 }
                 sList.add(temp);
             }
-            String result = "";
-            for(String str: sList){
-                result += str;
+            StringBuilder result = new StringBuilder();
+            for (String str : sList) {
+                result.append(str);
             }
             return String.format(
                     Ui.frontSpace + " Here are the tasks in your list:\n" + "%s\n",
-                    result);
+                    result.toString());
         }
     }
 }

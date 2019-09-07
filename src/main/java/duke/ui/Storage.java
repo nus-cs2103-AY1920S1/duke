@@ -1,4 +1,5 @@
 package duke.ui;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidNumberException;
@@ -15,21 +16,23 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Storage class.
+ * The Storage class for Duke.
  */
 public class Storage {
-    public static List<Task> myList = new ArrayList<>();
-    public static String txtFileLocation;
+    private static List<Task> myList = new ArrayList<>();
+    private static String TXTFILELOCATION;
     private File parentFile;
 
     public Storage(String filePath) {
-        this.txtFileLocation = filePath;
+        TXTFILELOCATION = filePath;
     }
 
     /**
-     * putToList().
+     * Stores a task into the myList.
+     *
+     * @param str The string of the task detail.
      */
-    public void putToList(String str) {
+    private void putToList(String str) {
         String[] oneLine = str.split(" \\| ");
         String firstWord = oneLine[0].trim();
         try {
@@ -52,17 +55,18 @@ public class Storage {
     }
 
     /**
-     * load().
+     * Loads and returns a list of tasks from the storage.
+     *
+     * @return The list of task of tasks from the storage
      */
     public List<Task> load() throws DukeException {
         try {
-            parentFile = new File(txtFileLocation);
+            parentFile = new File(TXTFILELOCATION);
             Scanner sc = new Scanner(parentFile);
 
             while (sc.hasNextLine()) {
                 putToList(sc.nextLine());
             }
-
         } catch (Exception e) {
             Ui.printOutput("[duke.txt]: duke.txt not found");
         }
@@ -70,17 +74,19 @@ public class Storage {
     }
 
     /**
-     * save(TaskList tasks).
+     * save a list of tasks to text file.
+     *
+     * @param tasks The list of tasks
      */
     public void save(TaskList tasks) throws Exception {
         try {
-            parentFile = new File(txtFileLocation).getParentFile();
+            parentFile = new File(TXTFILELOCATION).getParentFile();
 
             if (!parentFile.exists()) {
                 parentFile.mkdir();
             }
 
-            PrintWriter pr = new PrintWriter(txtFileLocation);
+            PrintWriter pr = new PrintWriter(TXTFILELOCATION);
             for (Task obj : myList) {
                 pr.write(obj.getFormatToFile());
             }

@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Shows a welcome message from Duke.
      */
-    public void showWelcome() {
+    void showWelcome() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage)
         );

@@ -1,8 +1,10 @@
 package duke;
 
 import duke.task.Task;
+import duke.task.TaskComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a list that stores every <code>Task</code> object.
@@ -41,6 +43,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        Collections.sort(tasks, new TaskComparator());
     }
 
     /**

@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.task.TaskComparator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

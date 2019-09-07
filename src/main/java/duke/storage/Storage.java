@@ -45,7 +45,6 @@ public class Storage {
 
         try {
             Scanner sc = new Scanner(file);
-            // read existing tasks into the list.
             while (sc.hasNext()) {
                 Task task;
                 String line = sc.nextLine();
@@ -55,9 +54,9 @@ public class Storage {
                 } else {
                     String[] temp = description.split(" \\| ");
                     if (line.substring(0, 1).equals("D")) {
-                        task = new Deadline(temp[0], temp[1]);
+                        task = Deadline.storedDeadline(temp[0], temp[1]);
                     } else {
-                        task = new Event(temp[0], temp[1]);
+                        task = Event.storedEvent(temp[0], temp[1]);
                     }
                 }
                 if (line.substring(2, 3).equals("1")) {
@@ -66,11 +65,8 @@ public class Storage {
                 list.add(task);
             }
         } catch (FileNotFoundException e) {
-            ui.showError("Data file does not exist.");
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            throw new DukeException("Data file does not exist.");
         }
-
         return list;
     }
 

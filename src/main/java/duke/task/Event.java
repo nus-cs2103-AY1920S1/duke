@@ -22,19 +22,36 @@ public class Event extends Task {
         this.at = at;
 
         try {
-            date = Integer.valueOf(at.substring(0, 2));
-            month = Integer.valueOf(at.substring(3, 5));
-            year = Integer.valueOf(at.substring(6, 10));
-            String[] temp = at.split(" ");
-            time = Integer.valueOf(temp[1]);
+            int[] dateTimeArray = getDateTimeArray(at);
+            date = dateTimeArray[0];
+            month = dateTimeArray[1];
+            year = dateTimeArray[2];
+            time = dateTimeArray[3];
             this.at = formatDateAndTime(year, month, date, time);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Wrong input format.\n"
-                    + "\"Event <description> /at <DD/MM/YYYY> <XX:XX>\"\n");
-        } catch (NumberFormatException e) {
+        } catch (DukeException e) {
             throw new DukeException("OOPS!!! Wrong input format.\n"
                     + "\"Event <description> /at <DD/MM/YYYY> <XX:XX>\"\n");
         }
+    }
+
+    /**
+     * Empty constructor.
+     */
+    public Event() {
+    }
+
+    /**
+     * Helper method for the string in storage format.
+     *
+     * @param description Description of the Event.
+     * @param at Date and time of event.
+     * @return Event object.
+     */
+    public static Event storedEvent(String description, String at) {
+        Event event = new Event();
+        event.description = description;
+        event.at = at;
+        return event;
     }
 
     /**

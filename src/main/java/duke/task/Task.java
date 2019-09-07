@@ -7,6 +7,12 @@ public class Task {
     boolean isDone;
 
     /**
+     * Default constructor.
+     */
+    public Task() {
+    }
+
+    /**
      * Constructor to create a Task object.
      *
      * @param description The task description.
@@ -52,37 +58,30 @@ public class Task {
 
     /**
      * Format the date and time.
+     *
      * @param year Year.
      * @param month Month.
      * @param date Date.
      * @param time Time.
-     * @return The correct date and time format.
+     * @return The date and time in the correct format.
      */
     public String formatDateAndTime(int year, int month, int date, int time) throws DukeException {
         if (date > 31 || month > 12 || time > 2400) {
             throw new DukeException("OOPS!!! Incorrect date or time.\n");
         }
+        String formattedDate = formatDate(year, month, date);
+        String formattedTime = formatTime(time);
+        return formattedDate + formattedTime;
+    }
+
+    /**
+     * Helper method to format the time.
+     *
+     * @param time Time.
+     * @return The time in the correct format.
+     */
+    private String formatTime(int time) {
         StringBuilder sb = new StringBuilder();
-        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-        sb.append(date);
-
-        switch (date) {
-        case 1:
-            sb.append("st");
-            break;
-        case 2:
-            sb.append("nd");
-            break;
-        case 3:
-            sb.append("rd");
-            break;
-        default:
-            sb.append("th");
-            break;
-        }
-        sb.append(" of " + months[month - 1] + " " + year + ", ");
-
         if (time >= 1200) {
             if ((time / 100) == 12) {
                 sb.append("12." + (time % 100) + "pm");
@@ -97,6 +96,58 @@ public class Task {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Helper method to format the date.
+     *
+     * @param year Year.
+     * @param month Month.
+     * @param date Date.
+     * @return The date in the correct format.
+     */
+    private String formatDate(int year, int month, int date) {
+        StringBuilder sb = new StringBuilder();
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        sb.append(date);
+
+        switch (date) {
+        case 1: case 21: case 31:
+            sb.append("st");
+            break;
+        case 2: case 22:
+            sb.append("nd");
+            break;
+        case 3: case 23:
+            sb.append("rd");
+            break;
+        default:
+            sb.append("th");
+            break;
+        }
+        sb.append(" of " + months[month - 1] + " " + year + ", ");
+        return sb.toString();
+    }
+
+    /**
+     * Helper method to separate date and time from the string provided.
+     *
+     * @param dateTime Date and time in input format.
+     * @return int Array with date, month, year and time.
+     */
+    public int[] getDateTimeArray(String dateTime) throws DukeException {
+        try {
+            int[] dateTimeArray = new int[4];
+            dateTimeArray[0] = Integer.parseInt(dateTime.substring(0, 2));
+            dateTimeArray[1] = Integer.parseInt(dateTime.substring(3, 5));
+            dateTimeArray[2] = Integer.parseInt(dateTime.substring(6, 10));
+            String[] temp = dateTime.split(" ");
+            dateTimeArray[3] = Integer.parseInt(temp[1]);
+            return dateTimeArray;
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Wrong input format");
+        }
     }
 
     /**

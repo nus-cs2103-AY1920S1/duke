@@ -23,21 +23,36 @@ public class Deadline extends Task {
         this.by = by;
 
         try {
-            date = Integer.valueOf(by.substring(0, 2));
-            month = Integer.valueOf(by.substring(3, 5));
-            year = Integer.valueOf(by.substring(6, 10));
-            String[] temp = by.split(" ");
-            time = Integer.valueOf(temp[1]);
+            int[] dateTimeArray = getDateTimeArray(by);
+            date = dateTimeArray[0];
+            month = dateTimeArray[1];
+            year = dateTimeArray[2];
+            time = dateTimeArray[3];
             this.by = formatDateAndTime(year, month, date, time);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Wrong input format. \n"
-                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"\n");
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Wrong input format. \n"
-                    + "\"Deadline <description> /by <DD/MM/YYYY> <XX:XX>\"\n");
         } catch (DukeException e) {
-            throw e;
+            throw new DukeException("OOPS!!! Wrong input format.\n"
+                    + "\"Deadline <description> /at <DD/MM/YYYY> <XX:XX>\"\n");
         }
+    }
+
+    /**
+     * Empty constructor.
+     */
+    public Deadline() {
+    }
+
+    /**
+     * Helper method for the string in storage format.
+     *
+     * @param description Description of the Deadline.
+     * @param by Date and time of deadline.
+     * @return Deadline object.
+     */
+    public static Deadline storedDeadline(String description, String by) {
+        Deadline deadline = new Deadline();
+        deadline.description = description;
+        deadline.by = by;
+        return deadline;
     }
 
     /**

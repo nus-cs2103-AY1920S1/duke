@@ -1,13 +1,17 @@
 package duke.ui;
 
 import java.io.IOException;
+
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.geometry.Pos;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -51,6 +55,7 @@ public class DialogBox extends HBox {
 
     /**
      * Get the User Dialog.
+     *
      * @param text Text to be shown.
      * @param img Image to be shown.
      * @return The Dialog object.
@@ -61,6 +66,7 @@ public class DialogBox extends HBox {
 
     /**
      * Get the Duke Dialog.
+     *
      * @param text Text to be shown.
      * @param img Image to be shown.
      * @return The Dialog object.

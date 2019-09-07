@@ -5,8 +5,8 @@ class UI {
 
     // scanner to take user input
     private Scanner sc;
-    private static final String welcomeStr = "Hello! I'm Duke :)\n     What can I do for you?";
-    private static final String endStr = "Bye. Hope to see you again soon!";
+    private static final String WELCOME_STR = "Hello! I'm Duke :)\n     What can I do for you?";
+    private static final String END_STR = "Bye. Hope to see you again soon!";
 
     /**
      * Constructor for the object.
@@ -20,7 +20,7 @@ class UI {
      * @return formatted string.
      */
     public String printWelcome() {
-        return prettyPrint(welcomeStr);
+        return prettyPrint(WELCOME_STR);
     }
 
     /**
@@ -28,7 +28,7 @@ class UI {
      * @return formatted string.
      */
     public String printExit() {
-        return prettyPrint(endStr);
+        return prettyPrint(END_STR);
     }
 
     /**

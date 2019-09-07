@@ -14,14 +14,7 @@ class Deadline extends Task {
     public Deadline(String name, Date date) {
         super(name);
         this.date = date;
-    }
-
-    /**
-     * Get the task type of the task.
-     * @return DEADLINE value of the enum TaskType.
-     */
-    public TaskType getType() {
-        return TaskType.DEADLINE;
+        this.type = TaskType.DEADLINE;
     }
 
     /**

@@ -4,7 +4,7 @@ class DukeException extends Exception {
      * Constructor for the exception.
      * @param message Message of the exception.
      */
-    DukeException(String message) {
+    public DukeException(String message) {
         super(message);
     }
 }

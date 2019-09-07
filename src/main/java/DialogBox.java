@@ -24,9 +24,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    // circle to cut the dialog box image
-    private final Circle DIALOG_BOX_CIRCLE = new Circle(50.0, 50.0, 50.0);
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -38,7 +35,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setClip(DIALOG_BOX_CIRCLE);
+        displayPicture.setClip(new Circle(50.0, 50.0, 50.0));
         displayPicture.setImage(img);
     }
 

@@ -39,68 +39,67 @@ public class Duke {
         parser = new Parser();
     }
 
-    /**
+	/**
      * Main run method.
      */
-    public void run() {
+    public String run(String rawInput) {
     	try {
 			storage.load();
 		} catch (DukeException e) {
 			ui.showException(e);
 		}
-    	ui.logoAndIntro();
-    	Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			String rawInput = sc.nextLine();
-			String command = parser.getCommand(rawInput);
-			try {
-				if (command.equals("bye")) {
-					ui.printBye();
-					break;
-				} else if (command.equals("list")) {
-					ui.printList();
-				} else if (command.equals("find")) {
-					ui.printFind(parser.processFind(rawInput));
-				} else if (command.equals("done")) {
-					int index = parser.processDone(rawInput);
-					tasks.doneTask(index);
-					ui.printDone(index);
-				} else if (command.equals("delete")) {
-					ui.printDeleted(tasks.deleteTask(parser.processDelete(rawInput)));
-	    		} else if (command.equals("todo")) {
-					tasks.addTodo(parser.todoDesc(rawInput));
-					ui.printAdded();
-				} else if (command.equals("deadline")) {
-					tasks.addDeadline(parser.deadlineDesc(rawInput), parser.deadlineTime(rawInput));
-					ui.printAdded();
-				} else if (command.equals("event")) {
-					tasks.addEvent(parser.eventDesc(rawInput), parser.eventTime(rawInput));
-					ui.printAdded();
-				} else {
-					ui.showLoadingError();
-				}
+
+		String command = parser.getCommand(rawInput);
+		try {
+			if (command.equals("bye")) {
+				return ui.printBye();
+			} else if (command.equals("list")) {
+				return ui.printList();
+			} else if (command.equals("find")) {
+				return ui.printFind(parser.processFind(rawInput));
+			} else if (command.equals("done")) {
+				int index = parser.processDone(rawInput);
+				tasks.doneTask(index);
 				storage.saveMemory(tasks);
-	    	} catch (DukeException e) {
-	    		ui.showException(e);
-	    	}
+				return ui.printDone(index);
+			} else if (command.equals("delete")) {
+				Task deletedTask = tasks.deleteTask(parser.processDelete(rawInput));
+				storage.saveMemory(tasks);
+				return ui.printDeleted(deletedTask);
+			} else if (command.equals("todo")) {
+				tasks.addTodo(parser.todoDesc(rawInput));
+				storage.saveMemory(tasks);
+				return ui.printAdded();
+			} else if (command.equals("deadline")) {
+				tasks.addDeadline(parser.deadlineDesc(rawInput), parser.deadlineTime(rawInput));
+				storage.saveMemory(tasks);
+				return ui.printAdded();
+			} else if (command.equals("event")) {
+				tasks.addEvent(parser.eventDesc(rawInput), parser.eventTime(rawInput));
+				storage.saveMemory(tasks);
+				return ui.printAdded();
+			} else {
+				return ui.showLoadingError();
+			}
+		} catch (DukeException e) {
+			return ui.showException(e);
 		}
-		sc.close();
     }
 
-	/**
-	 * Main method.
-	 * @param args Args.
-	 */
-	public static void main(String[] args) {
-		String dir = System.getProperty("user.dir") + "/savedData.txt";
-		new Duke(dir).run();
-	}
+//	public static void main(String[] args) {
+//		String dir = System.getProperty("user.dir") + "/savedData.txt";
+//		new Duke(dir).run();
+//	}
 
 	/**
 	 * You should have your own function to generate a response to user input.
 	 * Replace this stub with your completed method.
 	 */
 	String getResponse(String input) {
-	    return "Duke heard: " + input;
+	    return run(input);
+	}
+
+	public String getIntro() {
+		return ui.logoAndIntro();
 	}
 }

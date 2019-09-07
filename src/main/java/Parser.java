@@ -42,7 +42,7 @@ public class Parser {
 	 */
 	public int processDone(final String rawInput) throws DukeException {
 		try {
-			return Integer.parseInt(rawInput.split(" ")[1]) - 1;
+			return Integer.parseInt(rawInput.split(" ")[1].trim()) - 1;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException("Please indicate which task is done.");
 		}
@@ -56,7 +56,7 @@ public class Parser {
 	 */
 	public int processDelete(final String rawInput) throws DukeException {
 		try {
-			return Integer.parseInt(rawInput.split(" ")[1]) - 1;
+			return Integer.parseInt(rawInput.split(" ")[1].trim()) - 1;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException("Please indicate which task to delete.");
 		}
@@ -132,7 +132,7 @@ public class Parser {
 	 */
 	public String todoDesc(final String rawInput) throws DukeException {
 		try {
-			return rawInput.substring(5);
+			return rawInput.substring(5).trim();
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new DukeException("The description of a todo cannot be empty.");
 		}
@@ -146,7 +146,7 @@ public class Parser {
 	 */
 	public String processFind(final String rawInput) throws DukeException {
 		try {
-			return rawInput.substring(5);
+			return rawInput.substring(5).trim();
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new DukeException("The keyword for find cannot be empty.");
 		}

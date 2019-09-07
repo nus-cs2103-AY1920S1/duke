@@ -3,7 +3,7 @@
  * @version 0.1
  */
 public class Ui {
-	static String line = "____________________________________________________________";
+	static String breakLine = "____________________________________________________________\n";
 	/**
 	 * Pointer to tasklist object.
 	 */
@@ -12,54 +12,55 @@ public class Ui {
 	/**
 	 * Error from unidentified command.
 	 */
-	public void showLoadingError() {
-		System.out.println(line);
-		System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-		System.out.println(line + "\n");
+	public String showLoadingError() {
+		return breakLine
+				+ " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+				+ breakLine;
 	}
 
 	/**
 	 * Shows thrown exception.
 	 * @param e Exception
 	 */
-	public void showException(final Exception e) {
-		System.out.println(line);
-		System.out.println(" ☹ OOPS!!! " + e.toString());
-		System.out.println(line + "\n");
+	public String showException(final Exception e) {
+		return breakLine
+				+ " ☹ OOPS!!! " + e.toString() + "\n"
+				+ breakLine;
 	}
 
 	/**
 	 * Shows logo and intro.
 	 */
-	public void logoAndIntro() {
+	public String logoAndIntro() {
 		String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(line);
-		System.out.println(" Hello! I'm Duke\n What can I do for you?");
-		System.out.println(line + "\n");
+        return "Hello from\n"
+				+ logo
+				+ breakLine
+				+ " Hello! I'm Duke\n What can I do for you?"
+				+ breakLine;
 	}
 
 	/**
-	 * Shows bye message.
+	 * @return String for saying goodbye.
 	 */
-	public void printBye() {
-		System.out.println(line);
-		System.out.println(" " + "Bye. Hope to see you again soon!");
-		System.out.println(line + "\n");
+	public String printBye() {
+		return breakLine
+				+ " Bye. Hope to see you again soon!\n"
+				+ breakLine;
 	}
 
 	/**
 	 * Shows list of tasks.
 	 */
-	public void printList() {
-		System.out.println(line);
-		System.out.println(" " + "Here are the tasks in your list:");
-		tasks.list();
-		System.out.println(line + "\n");
+	public String printList() {
+		return breakLine
+				+ " Here are the tasks in your list:\n"
+				+ tasks.list()
+				+ breakLine;
 	}
 
 	/**
@@ -74,56 +75,53 @@ public class Ui {
 	 * Shows done task.
 	 * @param index Index of done task.
 	 */
-	public void printDone(final int index) {
-		System.out.println(line);
-		System.out.println(" " + "Nice! I've marked this task as done:");
-		System.out.println("   " + tasks.getMemory().get(index).showTask());
-		System.out.println(line + "\n");
+	public String printDone(final int index) {
+		return breakLine + " Nice! I've marked this task as done:\n   "
+				+ tasks.getMemory().get(index).showTask() + "\n"
+				+ breakLine + "\n";
 	}
 
 	/**
 	 * Shows deleted task.
 	 * @param t Deleted task.
 	 */
-	public void printDeleted(final Task t) {
-		System.out.println(line);
-		System.out.println(" " + "Noted. I've removed this task:");
-		System.out.println("   " + t.showTask());
+	public String printDeleted(final Task t) {
+		String tasksLeft;
 		if (tasks.getMemory().size() == 1) {
-			System.out.println(" " + "Now you have 1 task in your list");
+			tasksLeft = " Now you have 1 task in your list";
 		} else {
-			System.out.print(" " + "Now you have ");
-			System.out.print(tasks.getMemory().size());
-			System.out.println(" tasks in your list.");
+			tasksLeft = " Now you have " + tasks.getMemory().size() + " tasks in your list.";
 		}
-		System.out.println(line + "\n");
+		return breakLine
+				+ " Noted. I've removed this task:\n   "
+				+ t.showTask() + "\n"
+				+ breakLine;
 	}
 
 	/**
 	 * Shows added task.
 	 */
-	public void printAdded() {
-		System.out.println(line);
-		System.out.println(" " + "Got it. I've added this task:");
-		System.out.println("   " + tasks.listLatest());
+	public String printAdded() {
+		String tasksLeft;
 		if (tasks.getMemory().size() == 1) {
-			System.out.println(" " + "Now you have 1 task in your list");
+			tasksLeft = " Now you have 1 task in your list";
 		} else {
-			System.out.print(" " + "Now you have ");
-			System.out.print(tasks.getMemory().size());
-			System.out.println(" tasks in your list.");
+			tasksLeft = " Now you have " + tasks.getMemory().size() + " tasks in your list.";
 		}
-		System.out.println(line + "\n");
+		return breakLine
+				+ " Got it. I've added this task:\n   "
+				+ tasks.listLatest() + "\n"
+				+ breakLine;
 	}
 	
 	/**
 	 * Displays list of tasks containing keyword.
 	 * @param keyword Keyword.
 	 */
-	public void printFind(final String keyword) {
-		System.out.println(line);
-		System.out.println(" " + "Here are the matching tasks in your list:");
-		tasks.keywordList(keyword);
-		System.out.println(line + "\n");
+	public String printFind(final String keyword) {
+		return breakLine
+				+ " Here are the matching tasks in your list:\n"
+				+ tasks.keywordList(keyword) + "\n"
+				+ breakLine;
 	}
 }

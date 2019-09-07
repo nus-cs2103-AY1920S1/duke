@@ -28,26 +28,32 @@ public class TaskList {
 	/**
 	 * Lists out tasks in memory.
 	 */
-	public void list() {
+	public String list() {
+		String result = "";
 		int counter = 1;
 		for (Task t : memory) {
-			System.out.println(" " + counter + "." + t.showTask());
+			result += " " + counter + "." + t.showTask() + "\n";
 			counter++;
 		}
+
+		return result;
 	}
 	
 	/**
 	 * Lists tasks with keyword in them.
 	 * @param keyword Keyword.
 	 */
-	public void keywordList(final String keyword) {
+	public String keywordList(final String keyword) {
+		String result = "";
 		int counter = 1;
 		for (Task t : memory) {
 			if (t.getDesc().contains(keyword)) {
-				System.out.println(" " + counter + "." + t.showTask());
+				result += " " + counter + "." + t.showTask() + "\n";
 				counter++;
 			}
 		}
+
+		return result;
 	}
 
 	/**

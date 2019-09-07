@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * The <code>AddCommand</code> is the parent class of {@link AddTodoCommand}, {@link AddDeadlineCommand},
  * {@link AddEventCommand}.
  */
-public abstract class AddCommand implements Command {
+public class AddCommand implements Command {
 
     /**
      * This is the task to be added by the add command.

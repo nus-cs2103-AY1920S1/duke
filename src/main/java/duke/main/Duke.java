@@ -4,11 +4,23 @@ import duke.command.Command;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
 import duke.exception.InvalidDateTimeException;
-import java.io.IOException;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 /**
  * The Duke Program is a command line interface for a simple task manager. Users can add a todo item with just its
@@ -29,6 +41,13 @@ public class Duke {
      * This is the user interface for Duke.
      */
     private final Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/duke.txt");
+        tasks = new TaskList();
+
+    }
 
     /**
      * Constructs a new Duke Object with the specified file path as its database / storage.
@@ -77,5 +96,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("/Users/bj/java/Duke/data/duke.txt").run();
     }
-
 }

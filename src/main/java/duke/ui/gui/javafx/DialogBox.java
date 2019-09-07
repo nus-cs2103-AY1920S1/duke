@@ -42,13 +42,13 @@ public class DialogBox extends HBox {
         displayPicture.setClip(displayPictureClip);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    protected static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: #fff");
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    protected static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: #f1f1f1");
         db.flip();

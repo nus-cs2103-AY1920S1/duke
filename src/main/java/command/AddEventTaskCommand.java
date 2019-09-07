@@ -36,6 +36,10 @@ public class AddEventTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, UserOutputInterface uoi, Storage storage)
             throws CommandExecuteException, StorageException {
+        if (tasks.containsTitle(this.title)) {
+            throw new CommandExecuteException("A task with the same title already exists.");
+        }
+
         EventTask task = new EventTask();
         task.setTitle(this.title);
         task.setAt(this.at);

@@ -18,10 +18,10 @@ public class ListCommand extends Command {
      * Boolean isExit is set to false because
      * program should not terminate after command is executed.
      *
-     * @param fullCommand the line of user input.
+     * @param commandArr String array containing the split text retrieved from user input.
      */
-    public ListCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public ListCommand(String[] commandArr) {
+        this.commandArr = commandArr;
         isExit = false;
     }
 

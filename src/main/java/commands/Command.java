@@ -17,8 +17,8 @@ public abstract class Command {
 
     /** Boolean representing whether this command should trigger termination of the program. */
     protected boolean isExit;
-    /** String containing the full line of text retrieved from user input. */
-    protected String fullCommand;
+    /** String array containing the split text retrieved from user input. */
+    protected String[] commandArr;
 
     /**
      * Returns boolean determining whether program should be terminated
@@ -31,12 +31,12 @@ public abstract class Command {
     }
 
     /**
-     * Returns String the full command given via user input.
+     * Returns String[] containing the split text retrieved from user input.
      *
-     * @return String fullCommand.
+     * @return String[] commandArr.
      */
-    public String getFullCommand() {
-        return fullCommand;
+    public String[] getCommandArr() {
+        return commandArr;
     }
 
     /**

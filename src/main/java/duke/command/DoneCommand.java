@@ -22,6 +22,10 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         int i = Integer.parseInt(oneLine[1].trim());
         int tasksSize = tasks.size();
 

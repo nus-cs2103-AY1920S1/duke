@@ -9,13 +9,16 @@ import duke.exception.InvalidNumberException;
 /**
  * Parser class.
  */
-public class Parser {
-    public static String[] oneLine;
+class Parser {
+    private static String[] oneLine;
 
     /**
-     * isNumeric.
+     * check str is a number.
+     *
+     * @param str The str to be checked.
+     * @return Ture if str is a number, otherwise False.
      */
-    public static boolean isNumeric(String str) {
+    private boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -25,22 +28,26 @@ public class Parser {
     }
 
     /**
-     * findFeature().
+     * feature of find command.
+     *
+     * @return FindCommand object.
      */
-    public static FindCommand findFeature() throws DukeException {
+    private FindCommand findFeature() throws DukeException {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length == 2 && !oneLine[1].isBlank()) {
             return new FindCommand(oneLine);
         } else {
-            throw new InvalidNumberException("the description should be a number");
+            throw new DukeException("error occur in findFeature in Parser");
         }
     }
 
     /**
-     * doneFeature().
+     * feature of done command.
+     *
+     * @return DoneCommand object.
      */
-    public static DoneCommand doneFeature() throws DukeException {
+    private DoneCommand doneFeature() throws DukeException {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length == 2 && !oneLine[1].isBlank()
@@ -54,9 +61,11 @@ public class Parser {
     }
 
     /**
-     * deleteFeature().
+     * feature of delete command.
+     *
+     * @return DeleteCommand object.
      */
-    public static DeleteCommand deleteFeature() throws DukeException {
+    private DeleteCommand deleteFeature() throws DukeException {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length != 1 && !oneLine[1].isBlank()
@@ -70,9 +79,11 @@ public class Parser {
     }
 
     /**
-     * childFeature().
+     * feature of add command.
+     *
+     * @return AddCommand object.
      */
-    public static AddCommand childFeature() throws DukeException {
+    private AddCommand childFeature() throws DukeException {
         String firstWord = oneLine[0];
         if (oneLine.length == 2 && !oneLine[1].isBlank()) {
             return new AddCommand(oneLine);
@@ -82,9 +93,14 @@ public class Parser {
     }
 
     /**
-     * Parser.
+     * parse the given input to be a command obj.
+     *
+     * @param input The input for parse.
+     * @return The Command obj by the parse function.
      */
-    public static Command parse(String input) throws DukeException {
+    Command parse(String input) throws DukeException {
+        assert input != null : "input should be empty";
+
         Command outCommand = null;
         String cmd = input;
         oneLine = cmd.trim().split(" ", 2);
@@ -117,6 +133,7 @@ public class Parser {
         } else {
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
+        assert outCommand != null : "outCommand from parse should be empty";
         return outCommand;
     }
 }

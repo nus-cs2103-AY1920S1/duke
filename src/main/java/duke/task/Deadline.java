@@ -13,7 +13,6 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
         this.pattern = LocalDateTime.parse(by.trim(), dateTimeFormatter);
-
     }
 
     public Deadline(String description, String by, String isDone) {

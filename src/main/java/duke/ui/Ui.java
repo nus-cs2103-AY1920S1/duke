@@ -18,6 +18,7 @@ public class Ui {
      *
      * @return The string of the welcome message.
      */
+
     static String getWelcomeMessage() {
         return "    Hello! I'm Duke.\n"
                 + "    What can I do for you?";
@@ -27,9 +28,11 @@ public class Ui {
      * print out the input.
      */
     public static void printOutput(Object output) {
+        assert output != null : "should have output message to be printed out";
+
         System.out.println(frontSpace + output);
     }
-
+    
     /**
      * showLoadingError message print out.
      */

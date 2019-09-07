@@ -22,6 +22,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         int tasksSize = tasks.size();
         String deleteMessage1 = " Noted. I've removed this task: \n";
         String deleteMessage2 = " Now you have " + (tasksSize - 1) + " tasks in the list.\n";

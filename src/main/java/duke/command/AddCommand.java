@@ -17,6 +17,7 @@ public class AddCommand extends Command {
     private String[] oneLine;
 
     public AddCommand(String[] oneLine) {
+        assert oneLine != null;
         this.oneLine = oneLine;
     }
 
@@ -27,6 +28,8 @@ public class AddCommand extends Command {
      * @return true if str can be converted to a valid time format, otherwise returns false.
      */
     public static boolean isValidTime(String str) {
+        assert str != null;
+
         try {
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime localDate1 = LocalDateTime.parse(str, formatter1);
@@ -38,6 +41,9 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
 
         String description;
         String timeDate;

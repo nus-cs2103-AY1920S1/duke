@@ -35,9 +35,12 @@ public class Duke {
      * @return The String of response message for the given message.
      */
     public String getResponse(String input) {
+        assert input != null : "should have input, so getResponse";
+
         String output;
         try {
-            Command c = Parser.parse(input);
+            Parser pr = new Parser();
+            Command c = pr.parse(input);
             output = c.execute(this.tasks, ui, this.storage);
         } catch (Exception e) {
             output = Ui.frontSpace + e.getMessage();

@@ -51,7 +51,11 @@ public abstract class Task {
                 result.append(" ").append(str.trim());
             }
         }
-        return result.toString().trim();
+        String res = result.toString().trim();
+
+        assert res != null : "perfect format should be empty";
+
+        return res;
     }
 
     /**

@@ -26,6 +26,10 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         String partTaskName = oneLine[1].trim();
         for (Task t : tasks.getTaskList()) {
             if (t.getDescription().contains(partTaskName)) {

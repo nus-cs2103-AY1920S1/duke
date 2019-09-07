@@ -19,7 +19,8 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
+        assert tasks != null : "Tasklist instance is null!";
+        assert ui != null : "Ui instance is null!";
         if (!tasks.isDuplicate(this.task)) {
             tasks.addTask(this.task);
             return ui.showAddedTask(this.task, tasks.getListSize());

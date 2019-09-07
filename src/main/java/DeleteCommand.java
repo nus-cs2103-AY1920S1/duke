@@ -20,6 +20,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null : "Tasklist instance is null!";
+        assert ui != null : "Ui instance is null!";
         Task t = tasks.getTask(id);
         tasks.deleteTask(this.id);
         return ui.showDelete(t, tasks.getListSize());

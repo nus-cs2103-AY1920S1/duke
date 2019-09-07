@@ -54,6 +54,7 @@ public class Storage {
      * @throws DukeException if file is not found.
      */
     public void deleteLine(String toDelete) throws DukeException {
+        assert !toDelete.isEmpty() : "String to be deleted should not be empty.";
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             List<String> newlines = new ArrayList<>();
@@ -79,8 +80,8 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             List<String> newlines = new ArrayList<>();
-            System.out.println(before);
-            System.out.println(after);
+            assert !before.isEmpty() : "String to be overwritten should not be empty.";
+            assert !after.isEmpty() : "String to write should not be empty.";
             for (String line : lines) {
                 if (line.equals(before) || line.contains(before)) {
                     newlines.add(after);

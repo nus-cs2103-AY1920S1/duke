@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     /**
      * Constructor for the AddCommand.
      * @param typeOfTask "todo", "deadline" or "event".
-     * @param name The name of the specfied task.
+     * @param name The name of the specified task.
      * @param datetime The datetime, if the task is a deadline or an event.
      */
     public AddCommand(String typeOfTask, String name, String datetime) {

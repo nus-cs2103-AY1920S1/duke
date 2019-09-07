@@ -14,10 +14,11 @@ import duke.exception.DukeException;
  * Represents a parser that parses a line, returning a Command instance.
  */
 public class Parser {
-    private static final String UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    private static final String UNKNOWN_TODO = "☹ OOPS!!! The description of a todo cannot be empty.";
-    private static final String UNKNOWN_DEADLINE = "☹ OOPS!!! The description of a deadline cannot be empty.";
-    private static final String UNKNOWN_EVENT = "☹ OOPS!!! The description of an event cannot be empty.";
+    private static final String UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String UNKNOWN_TASK = "OOPS!!! The description of a task cannot be empty.";
+    private static final String UNKNOWN_DEADLINE = "OOPS!!! The description of a deadline cannot be empty.";
+    private static final String UNKNOWN_EVENT = "OOPS!!! The description of an event cannot be empty.";
+    private static final String BAD_COMMAND = "Your command needs to have more parameters";
 
     /**
      * Returns a Command instance of the specified line.
@@ -37,6 +38,9 @@ public class Parser {
             int index;
             switch (command) {
             case "todo":
+                if (strArr.length < 2) {
+                    throw new DukeException(UNKNOWN_TASK);
+                }
                 return new AddCommand("todo", line.substring(5));
             case "deadline":
                 String[] deadline = deadlineEventString(strArr, true);
@@ -45,12 +49,21 @@ public class Parser {
                 String[] event = deadlineEventString(strArr, false);
                 return new AddCommand("event", event[0], event[1]);
             case "done":
+                if (strArr.length < 2) {
+                    throw new DukeException(BAD_COMMAND);
+                }
                 index = Integer.parseInt(strArr[1]);
                 return new DoneCommand(index);
             case "delete":
+                if (strArr.length < 2) {
+                    throw new DukeException(BAD_COMMAND);
+                }
                 index = Integer.parseInt(strArr[1]);
                 return new DeleteCommand(index);
             case "find":
+                if (strArr.length < 2) {
+                    throw new DukeException(BAD_COMMAND);
+                }
                 return new FindCommand(line.substring(5));
             default:
                 throw new DukeException(UNKNOWN_COMMAND);

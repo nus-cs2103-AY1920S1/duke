@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents a TaskList of Tasks that Duke currently holds.
@@ -27,10 +25,6 @@ public class TaskList {
      */
     public TaskList() {
         this(new ArrayList<>());
-    }
-
-    public FilteredList<Task> getTasks() {
-        return new FilteredList<>((ObservableList<Task>) this.list);
     }
 
     /**
@@ -58,6 +52,7 @@ public class TaskList {
      * @return Task that is removed.
      */
     public Task remove(int index) {
+        assert (index - 1) < this.list.size() : "Item to be removed should have index smaller than size of list.";
         return this.list.remove(index - 1);
     }
 
@@ -77,6 +72,7 @@ public class TaskList {
      * @return Task at index
      */
     public Task get(int index) {
+        assert (index - 1) < this.list.size() : "Item to be removed should have index smaller than size of list.";
         return this.list.get(index - 1);
     }
 
@@ -84,14 +80,15 @@ public class TaskList {
      * Returns a new TaskList that contains all tasks with name that contains the
      * given string.
      *
-     * @param tofind - string to be queried.
+     * @param toFind - string to be queried.
      * @return TaskList that contains corresponding tasks.
      */
 
-    public TaskList find(String tofind) {
+    public TaskList find(String toFind) {
+        assert !toFind.isEmpty() : "String to query should not be empty";
         List<Task> newList = new ArrayList<>();
         for (Task t : this.list) {
-            if (t.getName().contains(tofind)) {
+            if (t.getName().contains(toFind)) {
                 newList.add(t);
             }
         }
@@ -108,7 +105,7 @@ public class TaskList {
             StringBuilder res = new StringBuilder();
             int count = 1;
             for (Task task : list) {
-                res.append("").append(count).append(".").append(task).append("\n");
+                res.append(count).append(".").append(task).append("\n");
                 count++;
             }
             return res.toString().trim();

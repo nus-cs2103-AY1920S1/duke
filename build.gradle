@@ -43,4 +43,5 @@ application {
 // take user input in ./gradlew run
 run {
     standardInput = System.in
+    enableAssertions = true
 }

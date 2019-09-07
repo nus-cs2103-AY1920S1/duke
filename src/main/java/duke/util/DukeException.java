@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 /**
  * A custom Duke exception to handle errors specific to Duke.

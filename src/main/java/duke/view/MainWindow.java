@@ -1,7 +1,7 @@
 package duke.view;
 
 import duke.Duke;
-import duke.Ui;
+import duke.util.Ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,7 +25,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
@@ -48,7 +47,6 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
-        this.ui = duke.getUi();
     }
 
     /**

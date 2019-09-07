@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
-
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * A Command to mark as task as done.

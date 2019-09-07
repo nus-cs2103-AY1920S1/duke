@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Parser;
-import duke.Storage;
-import duke.DukeException;
-
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * A Command to add a task to the task list.

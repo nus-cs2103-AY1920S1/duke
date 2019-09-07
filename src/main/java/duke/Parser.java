@@ -24,6 +24,8 @@ public class Parser {
      * @throws DukeException if command can't be parsed.
      */
     public static Command parse(String str) throws DukeException {
+        assert str != null;
+
         str = str.trim();
         int lastIndex = str.indexOf(' ');
         if (lastIndex < 0) {

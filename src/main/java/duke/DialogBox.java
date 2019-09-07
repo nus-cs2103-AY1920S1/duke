@@ -24,6 +24,9 @@ public class DialogBox extends HBox {
      * @param iv Profile Image for DialogBox
      */
     public DialogBox(Label l, ImageView iv) {
+        assert l != null;
+        assert iv != null;
+
         this.setStyle("-fx-background-color: #222");
         this.setMinHeight(Region.USE_PREF_SIZE);
         l.setWrapText(true);
@@ -62,7 +65,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns UserDialog Box formatted with ObservableList as [Label, ImageView].
+     * Returns UserDialog Box with children formatted as ObservableList as [Label, ImageView].
      *
      * @param l  String textContent
      * @param iv Profile Image for DialogBox
@@ -73,7 +76,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns UserDialog Box formatted with ObservableList as [ImageView, Label].
+     * Returns UserDialog Box with children formatted as ObservableList as [ImageView, Label].
      *
      * @param l  String textContent
      * @param iv Profile Image for DialogBox

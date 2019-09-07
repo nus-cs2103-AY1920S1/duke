@@ -14,10 +14,12 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> ls) {
+        assert ls != null;
         this.ls = ls;
     }
 
     public void add(Task t) {
+        assert t != null;
         ls.add(t);
     }
 

@@ -15,6 +15,7 @@ public class AddCommand extends Command {
      * @param task duke.task.Task to be added
      */
     public AddCommand(Task task) {
+        assert task != null;
         this.task = task;
     }
 

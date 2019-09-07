@@ -79,7 +79,7 @@ public class DukeUi extends Application {
      * Initializes all the UI elements and sets their sizes. A Scene object will be initialized and have every element
      * added to it at the end.
      */
-    private void initUIElements() {
+    private void initUiElements() {
         /* The container for the content of the chat to scroll.
            |------AnchorPane------|
            ||-----ScrollPane-----||
@@ -118,7 +118,7 @@ public class DukeUi extends Application {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         scene = new Scene(mainLayout);
@@ -147,7 +147,7 @@ public class DukeUi extends Application {
      */
     @Override
     public void start(Stage stage) {
-        initUIElements();
+        initUiElements();
         prepareStage(stage);
         initLogicElements();
         initEventHandling();

@@ -35,6 +35,9 @@ public class DukeUiMessages {
     private Scanner scanner;
     private DukeUi ui;
 
+    /**
+     * Constructor to initialize the necessary Classes.
+     */
     public DukeUiMessages() {
         sb = new StringBuilder();
         scanner = new Scanner(System.in);
@@ -91,7 +94,7 @@ public class DukeUiMessages {
     }
 
     /**
-     * Prints supplied input in the supplied raw format
+     * Prints supplied input in the supplied raw format.
      *
      * @param input String to be displayed to the user without the separator formatting.
      */

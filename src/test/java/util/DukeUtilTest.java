@@ -1,7 +1,7 @@
 package util;
 
 import duke.util.DukeParser;
-import duke.util.DukeUi;
+import duke.util.ui.DukeUiMessages;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class DukeUtilTest {
 
-    private static DukeUi ui;
+    private static DukeUiMessages ui;
 
     @BeforeAll
     public static void beforeAll() {
-        ui = new DukeUi();
+        ui = new DukeUiMessages();
     }
 
     @Test

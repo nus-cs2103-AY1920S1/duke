@@ -10,6 +10,8 @@ import duke.util.ui.DukeUiMessages;
  */
 public class DukeCommandClear extends DukeCommand {
     /**
+     * Dummy method which does not do anything.
+     *
      * @param tasks Instance of {@link DukeTaskList} which contains an existing list of {@link duke.task.DukeTask}.
      * @param ui Instance of {@link DukeUiMessages} which will show output to the user.
      * @param storage Instance of {@link DukeStorage} which will save the {@link DukeTaskList} to the hard disk.

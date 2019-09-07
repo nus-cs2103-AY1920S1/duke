@@ -186,8 +186,10 @@ public class DukeTaskList {
                     LocalDateTime deadlineDateTime = LocalDateTime.parse(deadline.getTaskDeadline(), dateTimeFormat);
                     Period difference = Period.between(currentDateTime.toLocalDate(), deadlineDateTime.toLocalDate());
 
-                    if (difference.getDays() <= DUKE_DAYS_LEFT_TO_REMIND && difference.getDays() > 0 &&
-                        difference.getMonths() == 0 && difference.getYears() == 0) {
+                    if (difference.getDays() <= DUKE_DAYS_LEFT_TO_REMIND
+                            && difference.getDays() > 0
+                            && difference.getMonths() == 0
+                            && difference.getYears() == 0) {
                         userDeadlines.add(deadline);
                     }
                 } catch (DateTimeParseException ex) {

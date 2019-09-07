@@ -4,7 +4,7 @@ import duke.command.DukeCommandAdd;
 import duke.command.DukeCommandUpdate;
 import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
-import duke.util.DukeUi;
+import duke.util.ui.DukeUiMessages;
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,20 +17,21 @@ public class DukeCommandTest {
 
     private static final String DUKE_TASK_FILE_PATH = ".\\data\\duke.txt";
     private static DukeTaskList tasks;
-    private static DukeUi ui;
+    private static DukeUiMessages ui;
     private static DukeStorage storage;
 
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     /**
-     * Initializes the required {@link DukeTaskList}, {@link DukeUi} and {@link DukeStorage} instances for the tests to
-     * be ran. Assumes that {@link #DUKE_TASK_FILE_PATH} is a proper, readable and writable text file location.
+     * Initializes the required {@link DukeTaskList}, {@link DukeUiMessages} and {@link DukeStorage} instances for
+     * the tests to be ran. Assumes that {@link #DUKE_TASK_FILE_PATH} is a proper, readable and writable text file
+     * location.
      */
     @BeforeAll
     public static void beforeAll() {
         tasks = new DukeTaskList();
-        ui = new DukeUi();
+        ui = new DukeUiMessages();
         storage = new DukeStorage(DUKE_TASK_FILE_PATH);
     }
 

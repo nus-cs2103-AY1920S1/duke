@@ -3,7 +3,6 @@
  * @author Hua Lun
  */
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
@@ -81,7 +80,7 @@ public class Parser {
     public String callEvent(String word, int num,
                           ArrayList<TaskList> array) {
         String arr2[] = word.split("/at");
-        DateTime dT1 = new DateTime(arr2[1]);
+        DateAndTime dT1 = new DateAndTime(arr2[1]);
         TaskList eventT = new Event(num, "[✗]", arr2[0], "event", dT1);
         return eventT.addList(eventT, array, num);
     }
@@ -98,7 +97,7 @@ public class Parser {
                              ArrayList<TaskList> array) {
         String arr3[] = word.split("/by");
         String list[] = arr3[1].split(" ");
-        DateTime dT2 = new DateTime(arr3[1]);
+        DateAndTime dT2 = new DateAndTime(arr3[1]);
         TaskList deadlineT = new Deadline(num, "[✗]", 
                                           arr3[0], "deadline", dT2);
         return deadlineT.addList(deadlineT, array, num);

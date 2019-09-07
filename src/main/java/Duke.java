@@ -32,7 +32,7 @@ public class Duke extends Application{
     static ArrayList<TaskList> array = new ArrayList<>();
     static int num = 1;
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -46,9 +46,9 @@ public class Duke extends Application{
         Ui ui = new Ui();
         int num = 1;
 
-        ui.run(sc, array, num);*/
+        ui.run(sc, array, num);
 
-    }
+    }*/
 
     @Override
     public void start(Stage stage) {

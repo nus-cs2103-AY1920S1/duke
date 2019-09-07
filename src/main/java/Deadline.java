@@ -2,9 +2,9 @@
  * This is the Deadline class. It contains TaskList objects that are assigned deadline.
  * @author Hua Lun
  */
-import java.util.Date;
+
 public class Deadline extends TaskList {
-    private DateTime by;
+    private DateAndTime by;
 
     /**
      * <p>
@@ -17,7 +17,7 @@ public class Deadline extends TaskList {
      * @param b due date for task
      */
     public Deadline(int taskNumber, String taskCheck, 
-                    String taskName, String type, DateTime b) {
+                    String taskName, String type, DateAndTime b) {
         super(taskNumber, taskCheck, taskName, type);
         by = b;
     }
@@ -29,7 +29,7 @@ public class Deadline extends TaskList {
      * </p>
      * @return due date
      */
-    public DateTime getAB() {
+    public DateAndTime getAB() {
         return by;
     }
 

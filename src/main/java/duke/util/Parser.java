@@ -108,7 +108,7 @@ public class Parser {
             return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException(
-                    "DateTime \"" + dateTime + "\" format incorrect\n\n" + Ui.getDatetimeFormatMessage()
+                    "DateTime \"" + dateTime + "\" format incorrect.\n\n" + Ui.getDatetimeFormatMessage()
             );
         }
     }

@@ -1,4 +1,5 @@
 package duke.ui;
+
 import java.util.Scanner;
 
 /**
@@ -6,53 +7,36 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
-    private static String oneLine = "    ____________________________________________________________\n";
     public static String frontSpace = "    ";
 
-    /**
-     * Ui.
-     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
     /**
-     * used to readComand.
+     * print out the welcome message once open the duke.
+     *
+     * @return The string of the welcome message.
      */
-    public String readCommand() {
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        }
-        return null;
-    }
 
-    public String showLine() {
-        return oneLine;
-    }
-
-    /**
-     * showError(String message).
-     */
-    public void showError(String message) {
-        printOutput(frontSpace + message);
-    }
-
-
-    public static String getWelcomeMessage() {
+    static String getWelcomeMessage() {
         return "    Hello! I'm Duke.\n"
                 + "    What can I do for you?";
     }
 
+    /**
+     * print out the input.
+     */
     public static void printOutput(Object output) {
+        assert output != null : "should have output message to be printed out";
+
         System.out.println(frontSpace + output);
     }
-
+    
     /**
-     * showLoadingError().
+     * showLoadingError message print out.
      */
     public void showLoadingError() {
-        showLine();
         Ui.printOutput(" duke.txt file has problem!");
-        showLine();
     }
 }

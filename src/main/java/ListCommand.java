@@ -11,9 +11,11 @@ public class ListCommand extends Command {
      * @param storage Storage object for saving purposes
      * @param tasks   Contains the list of tasks
      * @param ui      Holds Ui printing methods and user input field
+     * @param input   User input
+     * @return TaskList Message
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        tasks.showTaskList();
+    public String execute(Storage storage, TaskList tasks, Ui ui, String input) {
+        return tasks.showTaskList();
     }
 }

@@ -12,14 +12,19 @@ public class DeleteCommand extends Command {
      * @param storage Storage object for saving purposes
      * @param tasks   Contains the list of tasks
      * @param ui      Holds Ui printing methods and user input field
-     * @throws DukeException If deletion < 0 or > size of list
+     * @param input   User input
+     * @return Delete Task Message
+     * @throws DukeException If deletion < 0 or > size of list or input is empty
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
-        int deletion = ui.readIndex();
-        if (deletion < 0 || deletion > tasks.getTaskList().size()) {
-            throw new DukeException("Task not found");
+    public String execute(Storage storage, TaskList tasks, Ui ui, String input) throws DukeException {
+        if (input.isEmpty()) {
+            throw new DukeException("Please specify a task number.");
         }
-        tasks.deleteTask(deletion);
+        int deletion = Integer.parseInt(input);
+        if (deletion < 0 || deletion > tasks.getTaskList().size()) {
+            throw new DukeException("Task not found.");
+        }
+        return tasks.deleteTask(deletion);
     }
 }

@@ -20,9 +20,10 @@ public abstract class Command {
      * @param storage Storage object for saving purposes
      * @param tasks   Contains the list of tasks
      * @param ui      Holds Ui printing methods and user input field
+     * @param input   User input
      * @throws DukeException If there is an error
      */
-    abstract void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException;
+    abstract String execute(Storage storage, TaskList tasks, Ui ui, String input) throws DukeException;
 
     /**
      * Returns boolean variable hasExit for checking exit status.

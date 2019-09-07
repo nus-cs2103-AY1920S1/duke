@@ -23,9 +23,11 @@ public class Parser {
         case "exit":
             return new ExitCommand();
         case "todo":
+            return new AddToDoCommand();
         case "event":
+            return new AddEventCommand();
         case "deadline":
-            return new AddCommand(userCmd);
+            return new AddDeadlineCommand();
         default:
             throw new DukeException("Invalid Command");
         }

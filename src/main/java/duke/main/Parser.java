@@ -75,11 +75,7 @@ class Parser {
         }
 
         String[] yearAndTime = splitInput[2].split(" ");
-        if (yearAndTime.length != 2 || isNotNumeric(yearAndTime[0]) || isNotNumeric(yearAndTime[1])) {
-            return false;
-        }
-
-        return true;
+        return yearAndTime.length == 2 && !isNotNumeric(yearAndTime[0]) && !isNotNumeric(yearAndTime[1]);
     }
 
     private static int validateDoneIndex(String doneInput) throws DukeException {
@@ -148,11 +144,11 @@ class Parser {
     }
 
     private static boolean isExitCommand(String input) {
-        return input.equals("bye");
+        return "bye".equals(input);
     }
 
     private static boolean isListCommand(String input) {
-        return input.equals("list");
+        return "list".equals(input);
     }
 
     private static boolean isDoneCommand(String input) {

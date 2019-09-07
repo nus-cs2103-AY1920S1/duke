@@ -52,24 +52,23 @@ public class Storage {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String line = sc.nextLine();
-
             String[] stringArr = line.split("\\|");
 
-
             if (stringArr[0].trim().equals("T")) {
-
                 arr.add(Parser.getToDo(stringArr[2].trim()));
+
             } else if (stringArr[0].trim().equals("D")) {
                 arr.add(Parser.getDeadline(stringArr[2].trim(), stringArr[3].trim()));
+
             } else if (stringArr[0].trim().equals("E")) {
                 arr.add(Parser.getEvent(stringArr[2].trim(), stringArr[3].trim()));
+
             }
 
             //Mark the last task as done.
             if (stringArr[1].trim().equals("1")) {
                 arr.get(arr.size() - 1).markAsDone();
             }
-
         }
 
         return arr;

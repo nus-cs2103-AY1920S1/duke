@@ -24,6 +24,7 @@ public class TaskList {
     }
 
     public void delete(int num) {
+        assert num < arr.size() && num >= 0;
         arr.remove(num);
     }
 
@@ -54,6 +55,7 @@ public class TaskList {
      */
     public ArrayList<Task> getMatchingWordsList(String findText) {
 
+        assert findText != null : "findText is null";
         ArrayList<Task> matchingWordsList = new ArrayList<>();
         String[] stringArr = findText.split(" ");
         for (Task t : arr) {

@@ -1,6 +1,3 @@
-import duke.command.Command;
-import duke.logic.DukeException;
-import duke.logic.Parser;
 import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
@@ -33,39 +30,13 @@ public class Duke {
     }
 
     /**
-     * Run the whole program for main class.
-     * @throws IOException when file cannot be found.ls
-     */
-
-    public void run() throws IOException {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
      *  Creates new Duke object and runs it.
      * @param args Main method.
      * @throws IOException when resources/duke.txt cannot be found.
      */
 
     public static void main(String[] args) throws IOException {
-
-
         Application.launch(Gui.class, args);
-
     }
 
     public Ui getUi() {

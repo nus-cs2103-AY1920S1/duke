@@ -52,15 +52,26 @@ public class Parser {
 
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/");
+            String datetime = command.substring(slashIndex + 4);
+
+            if (! isDateTimeValid(datetime)) {
+                throw new DukeException("Invalid datetime format");
+            }
+
             Deadline deadline = getDeadline(command.substring(spaceIndex + 1, slashIndex - 1),
-                    command.substring(slashIndex + 4));
+                    datetime);
 
             return new AddCommand(deadline);
 
         } else if (command.split(" ")[0].equals("event")) {
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/");
-            Event e = getEvent(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+            String datetime = command.substring(slashIndex + 4);
+
+            if (! isDateTimeValid(datetime)) {
+                throw new DukeException("Invalid datetime format");
+            }
+            Event e = getEvent(command.substring(spaceIndex + 1, slashIndex - 1), datetime);
 
             return new AddCommand(e);
 
@@ -75,6 +86,51 @@ public class Parser {
         }
 
         return new ListCommand();
+    }
+
+    private static boolean isDateTimeValid(String datetime) {
+        if (! datetime.contains(" ")) {
+            return false;
+        }
+        String[] stringArr = datetime.split(" ");
+        if (stringArr.length != 4) {
+            return false;
+        }
+        if (Integer.parseInt(stringArr[0]) > 31) {
+            return false;
+        }
+
+        if (! isValidMonth(stringArr[1])) {
+            return false;
+        }
+
+        if (! isNumeric(stringArr[2])) {
+            return false;
+        }
+
+        if (stringArr[2].length() != 4) {
+            return false;
+        }
+
+        if (stringArr[3].length() != 4) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private static boolean isValidMonth(String month) {
+        String[] months = {
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        };
+        for (String str: months) {
+            if (str.equals(month)) {
+                return true;
+
+            }
+        }
+        return false;
     }
 
 

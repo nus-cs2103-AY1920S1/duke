@@ -170,4 +170,14 @@ public class Ui {
     }
 
 
+    public String showPriorityChange(Task task) {
+        sb = new StringBuilder();
+        sb.append("Nice! I've changed the priority of this task!");
+        sb.append(System.lineSeparator());
+
+        sb.append(String.format("    %s", task));
+        sb.append(System.lineSeparator());
+
+        return sb.toString();
+    }
 }

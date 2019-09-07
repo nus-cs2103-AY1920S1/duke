@@ -72,4 +72,7 @@ public class TaskList {
     }
 
 
+    public void setPriority(int index, int taskPriority) {
+        this.arr.get(index).setPriority(taskPriority);
+    }
 }

@@ -7,6 +7,7 @@ import duke.command.FindCommand;
 import duke.command.Command;
 import duke.command.ListCommand;
 import duke.command.ByeCommand;
+import duke.command.PriorityCommand;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -85,6 +86,11 @@ public class Parser {
             int spaceIndex = command.indexOf(" ");
 
             return new FindCommand(command.substring(spaceIndex + 1));
+        } else if (firstWord.equals("priority")) {
+            int taskNum = Integer.parseInt(command.split(" ")[1]);
+            int priorityNumber = Integer.parseInt(command.split(" ")[2]);
+
+            return new PriorityCommand(taskNum, priorityNumber);
         }
 
         return new ListCommand();
@@ -169,7 +175,8 @@ public class Parser {
             || firstWord.equals("event")
             || firstWord.equals("delete")
             || firstWord.equals("find")
-            || firstWord.equals("done") )){
+            || firstWord.equals("done")
+            || firstWord.equals("priority") )) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         } else if (! firstWord.equals("list") && str.split(" ").length == 1) {

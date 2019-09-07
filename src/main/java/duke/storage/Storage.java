@@ -57,19 +57,35 @@ public class Storage {
             String[] stringArr = line.split("\\|");
 
             if (stringArr[0].trim().equals("T")) {
-                arr.add(Parser.getToDo(stringArr[2].trim()));
+                arr.add(Parser.getToDo(stringArr[3].trim()));
 
             } else if (stringArr[0].trim().equals("D")) {
-                arr.add(Parser.getDeadline(stringArr[2].trim(), stringArr[3].trim()));
+                arr.add(Parser.getDeadline(stringArr[3].trim(), stringArr[4].trim()));
 
             } else if (stringArr[0].trim().equals("E")) {
-                arr.add(Parser.getEvent(stringArr[2].trim(), stringArr[3].trim()));
+                arr.add(Parser.getEvent(stringArr[3].trim(), stringArr[4].trim()));
 
             }
 
+            Task lastTask = arr.get(arr.size() - 1);
             //Mark the last task as done.
             if (stringArr[1].trim().equals("1")) {
-                arr.get(arr.size() - 1).markAsDone();
+                lastTask.markAsDone();
+            }
+
+            switch (stringArr[2].trim()) {
+            case "1":
+                lastTask.setPriority(1);
+                break;
+            case "2":
+                lastTask.setPriority(2);
+                break;
+            case "3":
+                lastTask.setPriority(3);
+                break;
+            case "4":
+                lastTask.setPriority(4);
+                break;
             }
         }
 
@@ -89,14 +105,14 @@ public class Storage {
         for (Task entry : arr) {
 
             if (entry instanceof Deadline) {
-                sb.append(String.format("D | %s | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName(), ((Deadline) entry).getDateTime()));
+                sb.append(String.format("D | %s | %d | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getPriorityValue() , entry.getTaskName(), ((Deadline) entry).getDateTime()));
             } else if (entry instanceof Event) {
-                sb.append(String.format("E | %s | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName(), ((Event) entry).getDateTime()));
+                sb.append(String.format("E | %s | %d | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getPriorityValue(), entry.getTaskName(), ((Event) entry).getDateTime()));
             } else if (entry instanceof ToDo) {
-                sb.append(String.format("T | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName()));
+                sb.append(String.format("T | %s | %d | %s", entry.isDone() ? "1" : "0",
+                        entry.getPriorityValue(), entry.getTaskName()));
             }
 
             sb.append(System.lineSeparator());

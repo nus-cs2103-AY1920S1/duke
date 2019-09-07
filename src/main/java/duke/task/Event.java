@@ -29,8 +29,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)",
-                this.getType(), isDone ? "\u2713" : "\u2718",
+        return String.format("[%s][%s][%d] %s (at: %s)",
+                this.getType(), isDone ? "\u2713" : "\u2718", getPriorityValue(),
                 this.taskName, this.getDateTime());
     }
 }

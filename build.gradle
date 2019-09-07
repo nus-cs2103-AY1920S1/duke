@@ -18,7 +18,12 @@ run {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "core.Duke"
+}
+
+task runGui(type:JavaExec) {
+    main = "core.Launcher"
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 checkstyle {

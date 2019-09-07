@@ -140,10 +140,10 @@ public class Parser {
                     task = new Event(description, ((LocalDate) parsedStart).atStartOfDay(), true);
                 }
             }
-                assert task != null : "Task is null";
 
-                return new AddTaskCommand(command, task);
+            assert task != null : "Task is null";
 
+            return new AddTaskCommand(command, task);
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme an event with the right format: \n\t\t"
                     + "'event [description] /at [start datetime] - [end datetime]'\n\t"
@@ -184,7 +184,6 @@ public class Parser {
             assert task != null : "Task is null";
 
             return new AddTaskCommand(command, task);
-
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme a deadline with the right format: "
                     + "'deadline [description] /by [datetime]'\n\t"

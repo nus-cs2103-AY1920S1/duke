@@ -39,7 +39,7 @@ public class Event extends Task {
 
             this.atDate = format.parse(day + "/" + month + "/" + year + " " + hour + ":" + minute);
         } catch (Exception e) {
-            throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of event timing is invalid.");
+            throw new InvalidTaskArgumentDukeException("OOPS!!! The format of event timing is invalid.");
         }
 
     }

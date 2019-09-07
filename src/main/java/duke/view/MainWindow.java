@@ -39,6 +39,7 @@ public class MainWindow extends BorderPane {
         scrollPane.vvalueProperty().bind(scrollBox.heightProperty());
         scrollPane.setContent(scrollBox);
         scrollBox.setId("scrollBox");
+        scrollBox.getChildren().add(DialogBox.showWelcome());
         logoBox.setId("logoBox");
         logoPicture.setImage(logoImage);
     }

@@ -26,12 +26,7 @@ public class Ui implements UserInterface {
      */
     public String showWelcome() {
         StringBuilder outputBuilder = new StringBuilder();
-        String logo = " ____        _        \n"
-                      + "|  _ \\ _   _| | _____ \n"
-                      + "| | | | | | | |/ / _ \\\n"
-                      + "| |_| | |_| |   <  __/\n"
-                      + "|____/ \\__,_|_|\\_\\___|\n";
-        outputBuilder.append("Hello from\n" + logo);
+        outputBuilder.append("    ------------------------------------------------------------\n");
         outputBuilder.append("    Hello! I'm Duke\n");
         outputBuilder.append("    What can I do for you?\n");
         outputBuilder.append("    ------------------------------------------------------------\n");

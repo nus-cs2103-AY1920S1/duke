@@ -3,6 +3,8 @@ package duke.view;
 import duke.main.Duke;
 import java.io.IOException;
 import java.util.Collections;
+
+import duke.ui.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -81,6 +83,10 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String inputMessage) {
         String outputMessage = DUKE.runWithUserInput(inputMessage);
         return DukeDialogBox(outputMessage);
+    }
+
+    public static DialogBox showWelcome() {
+        return DukeDialogBox(new Ui().showWelcome());
     }
 
 }

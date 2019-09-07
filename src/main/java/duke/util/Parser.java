@@ -82,22 +82,27 @@ public class Parser {
 
         switch (commandName) {
         case "list":
+        case "ls":
             return new ListCommand();
         case "done":
             int doneIndex = Integer.parseInt(fullCommand.split(" ", 2)[1]);
             return new DoneCommand(doneIndex);
         case "delete":
+        case "rm":
             int deleteIndex = Integer.parseInt(fullCommand.split(" ", 2)[1]);
             return new DeleteCommand(deleteIndex);
         case "todo":
+        case "t":
             String todoDescription = fullCommand.split(" ", 2)[1];
             return new TodoCommand(todoDescription);
         case "event":
+        case "e":
             String eventDescription = fullCommand.split(" ", 2)[1];
             Date at = parseDate(eventDescription.split(" /at ", 2)[1]);
             eventDescription = eventDescription.split(" /at ", 2)[0];
             return new EventCommand(eventDescription, at);
         case "deadline":
+        case "d":
             String deadlineDescription = fullCommand.split(" ", 2)[1];
             Date by = parseDate(deadlineDescription.split(" /by ", 2)[1]);
             deadlineDescription = deadlineDescription.split(" /by ", 2)[0];

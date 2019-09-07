@@ -1,6 +1,7 @@
-package duke;
+package duke.utilities;
 
 import duke.command.*;
+import duke.exception.InvalidCommandException;
 
 
 /**
@@ -13,7 +14,7 @@ public class Parser {
      *
      * @param fullCommand A <code>String</code> representing the full input command
      */
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws InvalidCommandException {
 
         String[] parts = fullCommand.split(" ");
         String command = parts[0];
@@ -37,7 +38,7 @@ public class Parser {
         case "find":
             return new FindTaskCommand(commandInformation);
         default:
-            return new InvalidCommand();
+            throw new InvalidCommandException("I'm sorry, but I don't know what that means");
         }
     }
 }

@@ -1,6 +1,6 @@
-import duke.Storage;
-import duke.TaskList;
-import duke.UI;
+import duke.ui.MessageHandler;
+import duke.utilities.Storage;
+import duke.task.TaskList;
 import duke.command.CreateEventCommand;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.AfterEach;
@@ -24,14 +24,11 @@ public class CreateEventCommandTest {
 
     private static String filePath = "C:\\Users\\jxken\\Desktop\\Github\\duke\\src\\test\\java\\dukeTest.txt";
     private static Storage storage = new Storage(filePath);
-    private static TaskList tasks = new TaskList(storage);
-    private static UI ui = new UI(tasks, storage);
+    private static TaskList tasks = new TaskList();
+    private static MessageHandler messageHandler = new MessageHandler(tasks, storage);
 
     @BeforeEach
-    public void setUpStreamsAndEmptyFile() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-
+    public void emptyFile() {
         try {
             PrintWriter pw = new PrintWriter(filePath);
             pw.close();
@@ -40,11 +37,6 @@ public class CreateEventCommandTest {
         }
     }
 
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
 
     @Test
     public void executeCreateEventCommand() {
@@ -52,16 +44,16 @@ public class CreateEventCommandTest {
         String expectedSubString2 = "[Event][N] Project Meeting (at: 28/08/19 1600 - 28/08/19 1800)";
         String expectedSubString3 = "Now you have 1 task in the list";
 
+        String actual = "";
 
         CreateEventCommand command = new CreateEventCommand("Project Meeting /at 28/08/19 1600 - 28/08/19 1800");
         try {
-            command.execute(tasks, ui, storage);
+            actual = command.execute(tasks, messageHandler, storage);
         } catch (DukeException e) {
             System.out.println("execute create event command test should pass, but it didn't because " + e.getMessage());
             fail();
         }
 
-        String actual = outContent.toString();
         assertTrue(actual.contains(expectedSubString1));
         assertTrue(actual.contains(expectedSubString2));
         assertTrue(actual.contains(expectedSubString3));

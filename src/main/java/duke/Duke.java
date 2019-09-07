@@ -2,9 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.util.Scanner;
-
+import duke.task.TaskList;
+import duke.ui.MessageHandler;
+import duke.utilities.Parser;
+import duke.utilities.Storage;
 
 /**
  * Driver class for Duke operations.
@@ -13,35 +14,33 @@ import java.util.Scanner;
  */
 public class Duke {
     public static final String filePath = "C:/Users/jxken/Desktop/Github/duke/data/duke.txt";
+    private Storage storage = new Storage(filePath);
+    private TaskList tasks = new TaskList();
+    private MessageHandler messageHandler = new MessageHandler(tasks, storage);
+    private boolean isExit = false;
 
     /**
-     * Starting point for duke commands and actions.
-     *
-     * @param args command line arguments
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage(filePath);
-        TaskList tasks = new TaskList(storage);
-        UI ui = new UI(tasks, storage);
-
-        ui.sayHi();
-
-        boolean isExit = false;
-
-        while (!isExit && sc.hasNext()) {
-            String fullCommand = sc.nextLine();
-            try {
-                UI.printLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-
-            } catch (DukeException e) {
-                System.out.println("\t ☹ OOPS!!! " + e.getMessage());
-            } finally {
-                UI.printLine();
-            }
+    public String getResponse(String fullCommand) {
+        String response;
+        try {
+        Command c = Parser.parse(fullCommand);
+            response = c.execute(tasks, messageHandler, storage);
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            response = "\u2639 OOPS!!! " + e.getMessage();
         }
+        return response;
+    }
+
+    public boolean applicationShouldExit() {
+        return isExit;
+    }
+
+    public String hiMessage() {
+        return messageHandler.hiMessage();
     }
 }
+

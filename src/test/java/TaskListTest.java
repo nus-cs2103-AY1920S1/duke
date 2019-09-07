@@ -1,5 +1,5 @@
-import duke.Storage;
-import duke.TaskList;
+import duke.utilities.Storage;
+import duke.task.TaskList;
 import duke.exception.TaskDoesNotExistException;
 import duke.task.Event;
 import duke.task.Task;
@@ -18,10 +18,10 @@ public class TaskListTest {
 
     @BeforeEach
     public void setUpTaskListObject() {
-        tasks = new TaskList(storage);
+        tasks = new TaskList();
         try {
-            tasks.addTask(new Todo("borrow books"), false);
-            tasks.addTask(new Event("project meeting", "28/08/2019 1800 - 28/08/2019 2030"), false);
+            tasks.addTask(new Todo("borrow books"));
+            tasks.addTask(new Event("project meeting", "28/08/2019 1800 - 28/08/2019 2030"));
         } catch (Exception e) {
             System.out.println("Adding tasks, setup step should be successful. " + e.getMessage());
             fail();
@@ -34,7 +34,7 @@ public class TaskListTest {
         assertEquals(2, taskList.size());
 
         try {
-            tasks.deleteTask(1, false);
+            tasks.deleteTask(1);
         } catch (TaskDoesNotExistException e) {
             System.out.println("Task exists, this exception should not be thrown " + e.getMessage());
             fail();
@@ -50,7 +50,7 @@ public class TaskListTest {
         assertEquals(2, taskList.size());
 
         try {
-            tasks.deleteTask(10, false);
+            tasks.deleteTask(10);
             fail();
         } catch (TaskDoesNotExistException e) {
             assertEquals("Task not found", e.getMessage());

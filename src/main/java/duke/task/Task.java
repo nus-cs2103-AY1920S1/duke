@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     /**
-     * Converts task to String that will be scanned into preset task.text file
+     * Converts task to String that will be scanned into preset task.txt file
      *
      * @return A String representing the task in the specified format
      */
@@ -70,6 +70,10 @@ public abstract class Task {
      */
     public String getDetails() {
         return details;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     /**

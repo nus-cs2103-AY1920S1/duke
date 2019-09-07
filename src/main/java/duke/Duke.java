@@ -6,9 +6,15 @@ import exception.IncorrectDukeCommand;
 import exception.InvalidDukeCommand;
 import exception.VoidDukeCommand;
 
+import java.awt.*;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import misc.Parser;
 import misc.Storage;
@@ -16,12 +22,12 @@ import misc.Ui;
 
 import task.TaskList;
 
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private ExceptionHandler exceptionHandler;
     private Storage storage;
 
-    private Duke() {
+    public Duke() {
         this.ui = new Ui();
         this.exceptionHandler = new ExceptionHandler();
         this.storage = new Storage("data");
@@ -82,6 +88,15 @@ public class Duke {
 
         sc.close();
         ui.exit();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {

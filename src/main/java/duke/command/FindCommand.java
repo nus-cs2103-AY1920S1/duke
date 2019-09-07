@@ -1,3 +1,11 @@
+package duke.command;
+import duke.exception.DukeException;
+import duke.exception.TaskNotExistException;
+import duke.task.Task;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +21,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String partTaskName = oneLine[1].trim();
         for (Task t : tasks.getTaskList()) {
-            if (t.description.contains(partTaskName)) {
+            if (t.getDescription().contains(partTaskName)) {
                 myList.add(t);
             }
         }

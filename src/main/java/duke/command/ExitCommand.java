@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+
 /**
  * ExitCommand extends Command.
  */

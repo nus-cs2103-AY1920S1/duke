@@ -1,3 +1,4 @@
+package duke.task;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +30,9 @@ public abstract class Task {
         }
     }
 
+    public String getDescription(){
+        return this.description;
+    }
     /**
      * perfectDescription.
      */

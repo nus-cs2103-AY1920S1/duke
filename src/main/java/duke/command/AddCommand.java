@@ -1,6 +1,12 @@
-/**
- * AddCommand extends Command.
- */
+package duke.task;
+import duke.command.Command;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +49,7 @@ public class AddCommand extends Command {
                 timeDate = this.timeDate[1].trim();
                 tasks.getTaskList().add(new Deadline(description, timeDate));
             } else {
-                throw new NoTimeAndDateException("specific date/time for deadline is wrong");
+                throw new duke.exception.NoTimeAndDateException("specific date/time for deadline is wrong");
             }
         } else {
             this.timeDate = oneLine[1].trim().split(" /at ");
@@ -52,7 +58,7 @@ public class AddCommand extends Command {
                 timeDate = this.timeDate[1].trim();
                 tasks.getTaskList().add(new Event(description, timeDate));
             } else {
-                throw new NoTimeAndDateException("specific date/time for event is wrong");
+                throw new duke.exception.NoTimeAndDateException("specific date/time for event is wrong");
             }
         }
         try {

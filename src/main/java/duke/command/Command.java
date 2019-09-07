@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+
 /**
  * abstract class Command.
  */

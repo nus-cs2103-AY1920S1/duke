@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.ExtraDescriptionException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidNumberException;
+import duke.task.AddCommand;
+
 /**
  * Parser class.
  */

@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+
 /**
  * Duke class.
  */
@@ -14,7 +21,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (duke.exception.DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

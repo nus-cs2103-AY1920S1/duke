@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.TaskNotExistException;
+import duke.task.Task;
+import duke.ui.Storage;
+import duke.ui.TaskList;
+import duke.ui.Ui;
+
 /**
  * DoneCommand extends Command.
  */

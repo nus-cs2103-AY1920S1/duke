@@ -33,7 +33,6 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         assert list != null : "Cannot mark done from an empty list";
-        assert list.getSize() >= index : "Index is invalid";
         String output = list.getTask(index).markAsDone();
         storage.writeToFile(list);
         return output;

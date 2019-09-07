@@ -44,12 +44,14 @@ public class ParserTest {
         String str = "deadline";  // missing description
         try {
             Ui ui = new Ui();
-            Parser.parse(str, ui);
+            TaskList tasks = new TaskList();
+            Parser.parse(str, ui, tasks);
             fail();
         } catch (InvalidInputException e) {
             fail();
         } catch (EmptyDescriptionException e) {
-            assertEquals("☹ OOPS!!! The description of a " + "deadline" + " cannot be empty.\n", e.getMessage());
+            assertEquals("☹ OOPS!!! The description of a " + "deadline"
+                    + " command cannot be empty.\n", e.getMessage());
         } catch (DukeException e) {
             fail();
         }
@@ -60,7 +62,8 @@ public class ParserTest {
         String str = "blahh";  // invalid input
         try {
             Ui ui = new Ui();
-            Parser.parse(str, ui);
+            TaskList tasks = new TaskList();
+            Parser.parse(str, ui, tasks);
             fail();
         } catch (InvalidInputException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n", e.getMessage());

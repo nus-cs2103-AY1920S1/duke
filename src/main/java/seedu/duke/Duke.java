@@ -47,7 +47,7 @@ public class Duke {
     public String run(String input) {
         assert !input.equals("") : "Input cannot be empty";
         try {
-            Command c = Parser.parse(input, ui);
+            Command c = Parser.parse(input, ui, tasks);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.printErrMsg(e.getMessage());

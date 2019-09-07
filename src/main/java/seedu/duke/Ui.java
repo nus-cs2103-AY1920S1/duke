@@ -82,8 +82,6 @@ public class Ui {
      * @param list the list of tasks
      */
     public static String printLatest(TaskList list) {
-        //assert false : "list is now not null";
-        // assert list != null : "TaskList cannot be null";
         return list.getTask(list.getSize() - 1) + "\n";
     }
 
@@ -113,8 +111,8 @@ public class Ui {
      * @param s the type of task
      * @return the empty description error message
      */
-    public static String emptyDescriptionMsg(String s) {
-        return ("☹ OOPS!!! The description of a " + s + " cannot be empty.\n");
+    public static String getEmptyDescriptionMsg(String s) {
+        return ("☹ OOPS!!! The description of a " + s + " command cannot be empty.\n");
     }
 
     /**
@@ -122,7 +120,7 @@ public class Ui {
      *
      * @return the invalid input error message
      */
-    public static String invalidInputMsg() {
+    public static String getInvalidInputMsg() {
         return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
     }
 
@@ -133,6 +131,25 @@ public class Ui {
      */
     public String printErrMsg(String s) {
         return s + "\n";
+    }
+
+    /**
+     * Returns the invalid find input error message.
+     *
+     * @return the invalid find input error message
+     */
+    public static String getInvalidFindMsg() {
+        return ("☹ OOPS!!! The keyword to find must only be one word. :-(\n");
+    }
+
+    /**
+     * Returns the invalid index error message.
+     *
+     * @return the invalid index error message
+     */
+    public static String getInvalidIndexMsg(String str) {
+        return ("☹ OOPS!!! The index of " + str + " command must be an integer "
+                + "and be within the size of the list :-(\n");
     }
 
 }

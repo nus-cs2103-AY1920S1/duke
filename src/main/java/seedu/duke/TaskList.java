@@ -69,7 +69,6 @@ public class TaskList {
      * @return an arraylist tasks containing the keywords
      */
     public ArrayList<Task> findMatching(String keyword) {
-        assert keyword.length() == 1 : "Only one word is allowed";
         ArrayList<Task> matchingList = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String[] arr = taskList.get(i).getDescription().split(" ");

@@ -13,6 +13,8 @@ public class Parser {
 
     private static int indexOfByAt = 0;
     private static Date dateTime;
+    private static TaskList tasks = null;
+    private static Ui ui = null;
 
     /**
      * Constructor of the Parser class.
@@ -43,15 +45,18 @@ public class Parser {
      * @throws DukeException exception thrown when the timestamp or description is missing, or when input is invalid
      * @throws ParseException exception thrown when the timestamp is of incorrect format
      */
-    public static Command parse(String command, Ui ui) throws DukeException, ParseException {
+    public static Command parse(String command, Ui ui, TaskList tasks) throws DukeException, ParseException {
+        Parser.tasks = tasks;
+        Parser.ui = ui;
         assert !command.equals("") : "The description of the command cannot be an empty string";
         if (command.equals("bye")) {
             return new ExitCommand();
         }
         String[] detailsArray = command.split(" ");
         if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline")
-                || detailsArray[0].equals("event"))) {
-            throw new EmptyDescriptionException(ui.emptyDescriptionMsg(detailsArray[0]));
+                || detailsArray[0].equals("event") || detailsArray[0].equals("done") || detailsArray[0].equals("delete")
+                || detailsArray[0].equals("find"))) {
+            throw new EmptyDescriptionException(ui.getEmptyDescriptionMsg(detailsArray[0]));
         } else {
             switch (detailsArray[0]) {
             case "todo":
@@ -66,17 +71,47 @@ public class Parser {
                 return new EventCommand(String.join(" ",
                         Arrays.copyOfRange(detailsArray, 1, indexOfByAt)), dateTime);
             case "delete":
+                checkValidDescription(detailsArray);
                 return new DeleteCommand(Integer.parseInt(detailsArray[1]) - 1);
             case "done":
+                checkValidDescription(detailsArray);
                 return new DoneCommand(Integer.parseInt(detailsArray[1]) - 1);
             case "list":
                 return new ListCommand();
             case "find":
+                checkValidDescription(detailsArray);
                 return new FindCommand(String.join(" ",
                         Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
             default:
-                throw new InvalidInputException(ui.invalidInputMsg());
+                throw new InvalidInputException(ui.getInvalidInputMsg());
             }
+        }
+    }
+
+    /**
+     * Check if all the inputs are valid. Else, throw appropriate errors.
+     *
+     * @param arr the array containing the command
+     * @throws InvalidFindDescription if the description of find is longer than one
+     * @throws InvalidIndexException if the index is invalid
+     * @throws InvalidInputException if the input is invalid
+     */
+    private static void checkValidDescription(String[] arr) throws InvalidFindDescription,
+            InvalidIndexException, InvalidInputException {
+        switch (arr[0]) {
+        case "find":
+            if (arr.length > 2) {
+                throw new InvalidFindDescription(ui.getInvalidFindMsg());
+            }
+            break;
+        case "done":
+        case "delete":
+            if (!(Integer.parseInt(arr[1]) <= tasks.getSize()) || !(Integer.parseInt(arr[1]) > 0)) {
+                throw new InvalidIndexException(ui.getInvalidIndexMsg(arr[0]));
+            }
+            break;
+        default:
+            throw new InvalidInputException(ui.getInvalidInputMsg());
         }
     }
 
@@ -88,7 +123,7 @@ public class Parser {
      * @throws ParseException if the timestamp is of incorrect format
      * @throws MissingTimeStampException if the timestamp is missing, or "/by" or "/at" is missing
      */
-    public static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
+    static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
         if (detailsArray[0].equals("deadline")) {
             for (int i = 0; i < detailsArray.length; i++) {
                 if (detailsArray[i].equals("/by")) {
@@ -117,7 +152,7 @@ public class Parser {
      *
      * @return the dateTime variable of the command
      */
-    public Date getDateTime() {
+    Date getDateTime() {
         return this.dateTime;
     }
 
@@ -126,7 +161,7 @@ public class Parser {
      *
      * @return the indexOfByAt variable of the command
      */
-    public int getIndexOfByAt() {
+    int getIndexOfByAt() {
         return this.indexOfByAt;
     }
 

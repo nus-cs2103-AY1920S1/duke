@@ -18,7 +18,7 @@ public class AddEventTaskCommand extends AddCommand {
         }
 
         final String eventDateTimeText = eventArgs[1].stripLeading();
-        final LocalDateTime eventDateTime = LocalDateTime.parse(eventDateTimeText, dateTimeFormatter);
+        final LocalDateTime eventDateTime = LocalDateTime.parse(eventDateTimeText, DATE_TIME_FORMATTER);
 
         return new Event(eventDescription, eventDateTime);
     }

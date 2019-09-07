@@ -18,7 +18,7 @@ public class AddDeadlineTaskCommand extends AddCommand {
         }
 
         final String deadlineDueText = deadlineArgs[1].stripLeading();
-        final LocalDateTime deadlineDue = LocalDateTime.parse(deadlineDueText, dateTimeFormatter);
+        final LocalDateTime deadlineDue = LocalDateTime.parse(deadlineDueText, DATE_TIME_FORMATTER);
 
         return new Deadline(deadlineDescription, deadlineDue);
     }

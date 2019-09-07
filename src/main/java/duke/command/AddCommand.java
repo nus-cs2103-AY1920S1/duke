@@ -9,7 +9,7 @@ import java.util.List;
 
 abstract class AddCommand implements Command {
     protected final String command;
-    protected final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected final Task task;
 
     public AddCommand(String command) {

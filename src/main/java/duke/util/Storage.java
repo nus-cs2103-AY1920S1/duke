@@ -9,7 +9,6 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,7 +33,7 @@ public class Storage {
      * @throws IOException if there are errors reading the file
      */
     public ArrayList<Task> retrieveHistory() throws IOException {
-        Path filePath = Paths.get("./saved/taskList_history.txt");
+        Path filePath = Paths.get(path);
         ArrayList<String> lines = new ArrayList<>(Files.readAllLines(filePath));
         ArrayList<Task> taskList = textToTaskList(lines);
         return taskList;
@@ -92,7 +91,8 @@ public class Storage {
                 result += currentTask;
             }
         }
-        Path filePath = Paths.get("./saved/taskList_history.txt");
+        Path filePath = Paths.get(path);
+        Files.deleteIfExists(filePath);
         Files.write(filePath, result.getBytes(), StandardOpenOption.CREATE);
     }
 
@@ -101,7 +101,7 @@ public class Storage {
      * @return true if tasklist history exists, false otherwise
      */
     public boolean historyExists() {
-        Path filePath = Paths.get("./saved/taskList_history.txt");
+        Path filePath = Paths.get(path);
         return Files.exists(filePath);
     }
 
@@ -110,7 +110,7 @@ public class Storage {
      * @throws IOException if there are errors creating the file
      */
     public void createFile() throws IOException {
-        Path filePath = Paths.get("./saved/taskList_history.txt");
+        Path filePath = Paths.get(path);
         Path folderPath = Paths.get("./saved/");
         Files.createDirectory(folderPath);
         Files.createFile(filePath);

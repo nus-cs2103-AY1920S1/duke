@@ -46,14 +46,6 @@ public class Task {
     public String getName() {
         return this.name;
     }
-  
-    /**
-     * Returns the index of the task relative to the tasklist
-     * @return index of task
-     */
-    public int getIndex() {
-        return this.index;
-    }
 
     /**
      * Completes the task
@@ -64,5 +56,13 @@ public class Task {
         }
         this.completed = true;
         return true;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int i) {
+        index = i;
     }
 }

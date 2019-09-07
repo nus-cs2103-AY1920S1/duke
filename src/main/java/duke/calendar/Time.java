@@ -30,6 +30,7 @@ public class Time {
      * @throws DukeException If time is in the wrong format or invalid.
      */
     protected void processTime() throws DukeException {
+        assert (isNull == false) : "A null raw time should not be processed.";
         if (isValidTime(rawTime)) {
             hour = Integer.parseInt(rawTime.substring(0, 2));
             if (hour > 11) {

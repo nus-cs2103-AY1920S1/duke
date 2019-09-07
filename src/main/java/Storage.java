@@ -9,6 +9,10 @@ import java.util.stream.Collectors;
 
 public class Storage {
     private String filePath;
+    private String TODO = "[T]";
+    private String DEADLINE = "[D]";
+    private String EVENT = "[E]";
+    private String COMPLETE = "[✓]";
 
     /**
      * Constructor
@@ -30,32 +34,27 @@ public class Storage {
         LinkedList<Task> result = new LinkedList<>();
         if (!file.exists()) {
             throw new DukeException("File not found!");
-        } else {
-            try {
-                List<String> temp = Files.lines(file.toPath())
-                        .collect(Collectors.toList());
-                for (String s : temp) {
-                    Task curr = null;
-                    if (s.contains("[T]")) {
-                        curr = new Todo(s.substring(7));
-                    } else if (s.contains("[D]")) {
-                        curr = new Deadline(s.substring(7));
-                    } else if (s.contains("[E]")) {
-                        curr = new Event(s.substring(7));
-                    }
-
-                    if (s.contains("[✓]")) {
-                        curr.setDone();
-                    }
-
-                    result.add(curr);
-                }
-
-            } catch (IOException e) {
-                throw new DukeException("File not found!");
-            }
         }
-
+        try {
+            List<String> temp = Files.lines(file.toPath())
+                    .collect(Collectors.toList());
+            for (String s : temp) {
+                Task curr = null;
+                if (s.contains(TODO)) {
+                    curr = new Todo(s.substring(7));
+                } else if (s.contains(DEADLINE)) {
+                    curr = new Deadline(s.substring(7));
+                } else if (s.contains(EVENT)) {
+                    curr = new Event(s.substring(7));
+                }
+                if (s.contains(COMPLETE)) {
+                    curr.setDone();
+                }
+                result.add(curr);
+            }
+        } catch (IOException e) {
+            throw new DukeException("File not found!");
+        }
         return result;
     }
 
@@ -75,8 +74,6 @@ public class Storage {
                 fw.write(i + ". " + t + "\n");
                 i++;
             }
-
-
 
             fw.close();
         } catch (IOException e) {

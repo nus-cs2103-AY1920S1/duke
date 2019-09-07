@@ -25,8 +25,12 @@ public class TaskList {
      * @param id index in linkedlist
      * @return task
      */
-    public Task getTask(int id) {
-        return this.tasks.get(id - 1);
+    public Task getTask(int id) throws DukeException {
+        try {
+            return this.tasks.get(id - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! No such task exist!");
+        }
     }
 
     /**

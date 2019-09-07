@@ -236,7 +236,7 @@ public class Storage {
     }
 
     /**
-     * Serializes the subtype of a Task instance to its textual representation (e.g. an duke.Event instance returns "E").
+     * Serializes the subtype of a Task instance to its textual representation (e.g. an Event instance returns "E").
      *
      * @param t Task to serialize its subtype.
      * @return The textual representation of a Task's subtype.

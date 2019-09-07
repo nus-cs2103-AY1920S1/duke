@@ -6,7 +6,13 @@ import java.util.Date;
 
 public class Event extends Task {
 
+    /**
+     * Starting Time(with date) of event.
+     */
     private Date eventTimeFrom;
+    /**
+     * Starting Time(with date) of event.
+     */
     private Date eventTimeTo;
 
 
@@ -23,6 +29,11 @@ public class Event extends Task {
         this.eventTimeTo = eventTimeTo;
     }
 
+    /**
+     * Returns the Event name.
+     *
+     * @return Event name
+     */
     @Override
     public String getTaskName() {
         return super.getTaskName()
@@ -30,11 +41,21 @@ public class Event extends Task {
                 + Command.DATE_FORMAT.format(eventTimeTo) + ")";
     }
 
+    /**
+     * Returns the Representing Letter to distinguish the Task types.
+     *
+     * @return Representing Letter
+     */
     @Override
     public char getRepLetter() {
         return 'E';
     }
 
+    /**
+     * Returns a bar delimited string for storage-related purposes.
+     *
+     * @return Bar delimited string
+     */
     @Override
     public String toDelimitedString() {
         return String.format("%c | %c | %s | %s | %s",

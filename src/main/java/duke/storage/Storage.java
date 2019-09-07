@@ -68,25 +68,25 @@ public class Storage {
         while ((line = br.readLine()) != null) {
             String[] lineSplit = line.split(" \\| ");
             switch (lineSplit[0]) {
-                case "T":
-                    Todo newTodo = new Todo(lineSplit[2]);
-                    newTodo.setDone(lineSplit[1].equals("T"));
-                    tasks.add(newTodo);
-                    break;
-                case "D":
-                    Deadline newDeadline = new Deadline(lineSplit[2],
-                            Command.DATE_FORMAT.parse(lineSplit[3]));
-                    newDeadline.setDone(lineSplit[1].equals("T"));
-                    tasks.add(newDeadline);
-                    break;
-                case "E":
-                    Event newEvent = new Event(lineSplit[2],
-                            Command.DATE_FORMAT.parse(lineSplit[3]), Command.DATE_FORMAT.parse(lineSplit[4]));
-                    newEvent.setDone(lineSplit[1].equals("T"));
-                    tasks.add(newEvent);
-                    break;
-                default:
-                    break;
+            case "T":
+                Todo newTodo = new Todo(lineSplit[2]);
+                newTodo.setDone(lineSplit[1].equals("T"));
+                tasks.add(newTodo);
+                break;
+            case "D":
+                Deadline newDeadline = new Deadline(lineSplit[2],
+                        Command.DATE_FORMAT.parse(lineSplit[3]));
+                newDeadline.setDone(lineSplit[1].equals("T"));
+                tasks.add(newDeadline);
+                break;
+            case "E":
+                Event newEvent = new Event(lineSplit[2],
+                        Command.DATE_FORMAT.parse(lineSplit[3]), Command.DATE_FORMAT.parse(lineSplit[4]));
+                newEvent.setDone(lineSplit[1].equals("T"));
+                tasks.add(newEvent);
+                break;
+            default:
+                break;
             }
         }
 

@@ -78,7 +78,11 @@ public class Duke {
         //dukeInstance.run();
     }
 
-
+    /**
+     * Gets response to input from JavaFX Gui.
+     *
+     * @param fullInput Full input string from JavaFx GuiWindow
+     */
     public void getResponse(String fullInput) {
         if (this.isGoodbye) {
             System.exit(0);

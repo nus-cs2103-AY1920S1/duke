@@ -27,6 +27,16 @@ public class Event extends Task {
     }
 
     /**
+     * Updates the period of the Event.
+     *
+     * @param period the new period to be updated.
+     */
+    public String updatePeriod(String period) {
+        this.period = period;
+        return this.toString();
+    }
+
+    /**
      * Creates a string to be stored in a File so that loading from the file will return a correct Event object.
      * Format is a Letter E for event, its description, and by when it occurs at
      *

@@ -55,6 +55,9 @@ public class Parser {
         case "find":
             return Command.addFindCommand(detailsOfCommand);
 
+        case "update":
+            return Command.addUpdateCommand(detailsOfCommand);
+
         default:
             throw new DukeWrongInputException();
         }

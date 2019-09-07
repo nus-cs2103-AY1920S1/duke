@@ -26,6 +26,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Updates the time of the Deadline.
+     *
+     * @param time the new time to be updated.
+     */
+    public String updateTime(String time) {
+        this.time = time;
+        return this.toString();
+    }
+
+    /**
      * Creates a string to be stored in a File so that loading from the file will return a correct Deadline object.
      * Format is a Letter D for deadline, its description, and by when it has to be done
      *

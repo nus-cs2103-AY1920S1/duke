@@ -58,6 +58,16 @@ public class Task {
     }
 
     /**
+     * Updates the description of the Task object.
+     *
+     * @param newDescription
+     */
+    public String updateDescription(String newDescription) {
+        this.description = newDescription;
+        return this.toString();
+    }
+
+    /**
      * Returns a string of a general Task object with a status icon that shows if its done or not.
      *
      * @return a string representing a general Task object.

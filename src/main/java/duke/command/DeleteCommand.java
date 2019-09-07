@@ -10,7 +10,7 @@ import duke.storagedata.StorageData;
 /**
  * Represents a DeleteCommand Object which contains the task number to be deleted.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int taskNumber;
 
     /**

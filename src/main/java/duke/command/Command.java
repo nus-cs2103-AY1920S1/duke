@@ -114,6 +114,19 @@ public abstract class Command {
     }
 
     /**
+     * Creates a UpdateCommand object to be executed.
+     *
+     * @param details is the details for the update, including task number and what to update
+     * @return a UpdateCommand object with the specified detials.
+     * @throws DukeEmptyDescriptionException if the update input is not followed by anything else.
+     * @throws DukeMissingDescriptionException if the update input is followed by incomplete information.
+     */
+    public static Command addUpdateCommand(String details) throws DukeEmptyDescriptionException,
+            DukeMissingDescriptionException  {
+        return new UpdateCommand(details);
+    }
+
+    /**
      * Instantiates a Command Object
      *
      * @param details is the details to be stored in the Command Object.

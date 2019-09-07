@@ -1,21 +1,24 @@
 package duke.storagedata;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.BufferedReader;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeMissingDescriptionException;
+import duke.exception.DukeUpdateTodoTimeException;
+import duke.exception.DukeWrongTimeFormatException;
 import duke.exception.DukeTaskDoneException;
+
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
+
 import duke.tasklist.TaskList;
 
 /**
@@ -124,6 +127,7 @@ public class StorageData {
      * @param taskNumber contains the number of the Task is the Duke App.
      */
     public void markTaskDoneInData(int taskNumber, TaskList tasks) throws DukeTaskDoneException {
+        tasks.done(taskNumber);
         try {
             new File("data/tasks.txt").delete();
             new File("data/tasks.txt").createNewFile();
@@ -131,7 +135,6 @@ public class StorageData {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        tasks.done(taskNumber);
         for(int i = 0; i < tasks.size(); i++) {
             this.addData(tasks.get(i));
         }
@@ -143,6 +146,8 @@ public class StorageData {
      * @return the Task object that is being deleted.
      */
     public Task deleteTaskInData(int taskNumber, TaskList tasks) {
+        Task deletedTask = tasks.get(taskNumber - 1);
+        tasks.delete(taskNumber);
         try {
             new File("data/tasks.txt").delete();
             new File("data/tasks.txt").createNewFile();
@@ -150,12 +155,33 @@ public class StorageData {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        Task deletedTask = tasks.get(taskNumber - 1);
-        tasks.delete(taskNumber);
         for(int i = 0; i < tasks.size(); i++) {
             this.addData(tasks.get(i));
         }
         return deletedTask;
+    }
+
+    /**
+     * Updates the tasks in TaskList first by calling the method, and then rewriting the save data.
+     * @param tasks is the TaskList of the Duke that is running.
+     * @param details is the details of the Tasks to be updated and what information to replace.
+     * @throws DukeMissingDescriptionException if there is incomplete user input after update command.
+     * @throws DukeEmptyDescriptionException if there is missing user input after update command.
+     */
+    public String updateTasksInData(TaskList tasks, String details) throws DukeMissingDescriptionException,
+            DukeEmptyDescriptionException, DukeUpdateTodoTimeException, DukeWrongTimeFormatException {
+        String updatedTask = tasks.update(details);
+        try {
+            new File("data/tasks.txt").delete();
+            new File("data/tasks.txt").createNewFile();
+            File newData = new File("data/tasks.txt");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        for(int i = 0; i < tasks.size(); i++) {
+            this.addData(tasks.get(i));
+        }
+        return updatedTask;
     }
 
     /**

@@ -21,7 +21,7 @@ public class DukeUi {
      *
      * @return a String containing a welcome message
      */
-  public String getWelcomeMessage() 
+  public String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

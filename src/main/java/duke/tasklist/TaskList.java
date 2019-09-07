@@ -1,12 +1,19 @@
 package duke.tasklist;
 
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeMissingDescriptionException;
+import duke.exception.DukeTaskDoneException;
+import duke.exception.DukeUpdateTodoTimeException;
+import duke.exception.DukeWrongTimeFormatException;
+
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 
-import duke.ui.DukeUi;
-
-import duke.exception.DukeTaskDoneException;
+import duke.time.TimeConverter;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Represents a class that wraps around an ArrayList that stores the Tasks of the Duke App.
@@ -71,13 +78,84 @@ public class TaskList {
      * @throws IndexOutOfBoundsException when a taskNumber greater than the TaskList size or a negative number is given.
      * @throws DukeTaskDoneException when a taskNumber that corresponds to a task that is already done is given.
      */
-    public void done (int taskNumber) throws DukeTaskDoneException, IndexOutOfBoundsException{
+    public void done(int taskNumber) throws DukeTaskDoneException, IndexOutOfBoundsException{
         Task current = tasks.get(taskNumber - 1);
         if(current.getStatus()) {
             throw new DukeTaskDoneException();
         } else {
             current.markAsDone();
             assert current.getStatus() == true : "Task not marked as done when method indicates so.";
+        }
+    }
+
+    /**
+     * First method called to check if the update command is followed by a tasknumber to be updated.
+     * If command is correct, an overloaded update method will be called instead that checks what is to be modified.
+     * @param details the details of the Task to be changed and what to update it with.
+     * @throws DukeEmptyDescriptionException if the update command is followed by no user input.
+     * @throws DukeMissingDescriptionException if the update command is followed by incomplete user input.
+     */
+    public String update(String details) throws DukeEmptyDescriptionException, DukeMissingDescriptionException,
+            DukeWrongTimeFormatException, DukeUpdateTodoTimeException {
+        Scanner infoReader = new Scanner(details);
+        if(details.isEmpty()) {
+            throw new DukeEmptyDescriptionException("update");
+        } else if (infoReader.hasNextInt()) {
+            int taskNumber = infoReader.nextInt() - 1;
+            if(infoReader.hasNextLine()) {
+                return this.update(taskNumber, infoReader.nextLine().trim());
+            } else {
+                throw new DukeMissingDescriptionException("update");
+            }
+        } else {
+            throw new DukeMissingDescriptionException("update");
+        }
+    }
+
+    /**
+     * Checks what part of the Task object is to be modified. If an invalid field is given, an exception is thrown.
+     * If the description is to be modified, the update is done immediately.
+     * If the time is to be modified, another method is called to verify if the Task is an Event or Deadline first.
+     * @param taskNumber is the taskNumber of the TaskList to be updated.
+     * @param details is the details of the update itself.
+     * @throws DukeMissingDescriptionException  if the update command has missing information afterward.
+     */
+    private String update(int taskNumber, String details) throws DukeMissingDescriptionException,
+            DukeWrongTimeFormatException, DukeUpdateTodoTimeException, IndexOutOfBoundsException {
+        Scanner infoReader = new Scanner(details);
+        String whatToUpdate = infoReader.next();
+        if(whatToUpdate.equals("description")) {
+            Task current = this.get(taskNumber);
+            if(infoReader.hasNextLine()) {
+                return current.updateDescription(infoReader.nextLine().trim());
+            } else {
+                throw new DukeMissingDescriptionException("update");
+            }
+        } else if (whatToUpdate.equals("time")) {
+            if(infoReader.hasNextLine()) {
+                return this.updateTime(taskNumber, infoReader.nextLine().trim());
+            } else {
+                throw new DukeMissingDescriptionException("update");
+            }
+        } else {
+            throw new DukeMissingDescriptionException("update");
+        }
+    }
+
+    private String updateTime(int taskNumber, String details) throws DukeWrongTimeFormatException,
+            DukeUpdateTodoTimeException, DukeMissingDescriptionException {
+        if(details.isEmpty()) {
+            throw new DukeMissingDescriptionException("update");
+        }
+        Task current = this.get(taskNumber);
+        if(current instanceof Event) {
+            String updatedTime = TimeConverter.convert(details);
+            return ((Event)current).updatePeriod(updatedTime);
+        } else if (current instanceof Deadline) {
+            String updatedTime = TimeConverter.convert(details);
+            return ((Deadline)current).updateTime(updatedTime);
+        } else {
+            throw new DukeUpdateTodoTimeException();
         }
     }
 }

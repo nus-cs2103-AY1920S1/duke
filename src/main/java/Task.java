@@ -38,10 +38,12 @@ abstract class Task {
     }
 
     /**
-     * Abstract method to represent the task type.
+     * Method to represent the task type.
      * @return TaskType of the task.
      */
-    public abstract TaskType getType();
+    public TaskType getType() {
+        return this.type;
+    }
 
     /**
      * Abstract method representing the task date.

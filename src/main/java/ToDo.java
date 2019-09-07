@@ -9,14 +9,7 @@ class ToDo extends Task {
      */
     public ToDo(String name) {
         super(name);
-    }
-
-    /**
-     * Get the task type of the task.
-     * @return TO-DO value of the enum TaskType.
-     */
-    public TaskType getType() {
-        return TaskType.TODO;
+        this.type = TaskType.TODO;
     }
 
     /**

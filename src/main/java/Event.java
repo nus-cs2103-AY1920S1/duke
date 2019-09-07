@@ -14,14 +14,7 @@ class Event extends Task {
     public Event(String name, Date date) {
         super(name);
         this.date = date;
-    }
-
-    /**
-     * Get the task type of the task.
-     * @return EVENT value of the enum TaskType.
-     */
-    public TaskType getType() {
-        return TaskType.EVENT;
+        this.type = TaskType.EVENT;
     }
 
     /**

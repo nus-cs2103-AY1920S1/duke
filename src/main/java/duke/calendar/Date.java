@@ -1,6 +1,6 @@
 package duke.calendar;
 
-import duke.exception.DukeException;
+import duke.exception.InvalidDateException;
 
 import java.time.Month;
 
@@ -17,9 +17,9 @@ public class Date {
     /**
      * Constructor for <code>Date</code>.
      * @param unprocessedDate User unprocessed date input.
-     * @throws DukeException If cannot process date.
+     * @throws duke.exception.InvalidDateException If cannot process date.
      */
-    public Date(String unprocessedDate) throws DukeException {
+    public Date(String unprocessedDate) throws InvalidDateException {
         this.unprocessedDate = unprocessedDate;
         processDate();
     }
@@ -27,30 +27,45 @@ public class Date {
     /**
      * Processes the user input date.
      * If unprocessed date is empty, the date will not be processed.
-     * @throws DukeException If date is in the wrong format or invalid.
+     * @throws InvalidDateException If date is in the wrong format or invalid.
      */
-    public void processDate() throws DukeException {
-        if (unprocessedDate.equals("")) {
+    public void processDate() throws InvalidDateException {
+        boolean isEmptyDate = unprocessedDate.equals("");
+        if (isEmptyDate) {
             return;
         }
         String[] dateSplit = unprocessedDate.split("/");
-        if (dateSplit.length < 3) {
-            throw new DukeException("☹ OOPS!!! Please specify the date"
+        boolean isWrongFormat = dateSplit.length > 3;
+        if (isWrongFormat) {
+            throw new InvalidDateException( "☹ OOPS!!! Please specify the date"
                     + " in the format date/month/year e.g. 2/12/2019.");
         }
+        processMonth(dateSplit);
+        processYear(dateSplit);
+        processDay(dateSplit);
+    }
+
+    private void processMonth(String[] dateSplit) throws InvalidDateException {
         int monthNumber = Integer.parseInt(dateSplit[1]);
-        if (isValidMonth(monthNumber)) {
-            this.month = Month.of(monthNumber);
-        } else {
-            throw new DukeException("☹ OOPS!!! Please input a valid month.");
+        if (isInvalidMonth(monthNumber)) {
+            throw new InvalidDateException("☹ OOPS!!! Please input a valid month.");
         }
+        this.month = Month.of(monthNumber);
+    }
+
+    private void processYear(String[] dateSplit) {
         this.year = Integer.parseInt(dateSplit[2]);
+    }
+
+    private void processDay(String[] dateSplit) throws InvalidDateException {
         int inputDay = Integer.parseInt(dateSplit[0]);
-        if (isValidDay(inputDay, monthNumber, year)) {
-            this.day = inputDay;
-        } else {
-            throw new DukeException("☹ OOPS!!! Please input a valid day.");
+        int monthNumber = Integer.parseInt(dateSplit[1]);
+        int year = Integer.parseInt(dateSplit[2]);
+        if (isInvalidDay(inputDay, monthNumber, year)) {
+            throw new InvalidDateException("☹ OOPS!!! Please input a valid day.");
         }
+        this.day = inputDay;
+
     }
 
     /**
@@ -58,11 +73,11 @@ public class Date {
      * @param monthNumber Month number input by user.
      * @return Whether the input month is valid.
      */
-    public boolean isValidMonth(int monthNumber) {
+    public boolean isInvalidMonth(int monthNumber) {
         if (monthNumber >= 1 && monthNumber <= 12) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 
@@ -73,7 +88,7 @@ public class Date {
      * @param year Year number input by user.
      * @return Whether the input day is valid.
      */
-    public boolean isValidDay(int day, int monthNumber, int year) {
+    public boolean isInvalidDay(int day, int monthNumber, int year) {
         switch (monthNumber) {
         case 1:
         case 3:
@@ -83,29 +98,29 @@ public class Date {
         case 10:
         case 12:
             if (day >= 1 && day <= 31) {
-                return true;
-            } else {
                 return false;
+            } else {
+                return true;
             }
         case 4:
         case 6:
         case 9:
         case 11:
             if (day >= 1 && day <= 30) {
-                return true;
-            } else {
                 return false;
+            } else {
+                return true;
             }
         case 2:
             if (isLeapYear(year) && day >= 1 && day <= 29) {
-                return true;
-            } else if (day >= 1 && day <= 28) {
-                return true;
-            } else {
                 return false;
+            } else if (day >= 1 && day <= 28) {
+                return false;
+            } else {
+                return true;
             }
         default:
-            return false;
+            return true;
         }
     }
 
@@ -160,12 +175,15 @@ public class Date {
 
     @Override
     public String toString() {
-        if (month == null) {
+        boolean isEmptyDate = month == null;
+        if (isEmptyDate) {
             return "";
         }
-        if (day % 10 == 1 && day != 11) {
+        boolean dateEndsWithFirst = day % 10 == 1 && day != 11;
+        boolean dateEndsWithSecond = day % 10 == 2 && day != 12;
+        if (dateEndsWithFirst) {
             return day + "st of " + month + " " + year;
-        } else if (day % 10 == 2 && day != 12) {
+        } else if (dateEndsWithSecond) {
             return day + "nd of " + month + " " + year;
         } else {
             return day + "th of " + month + " " + year;

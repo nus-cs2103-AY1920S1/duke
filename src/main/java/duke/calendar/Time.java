@@ -1,6 +1,6 @@
 package duke.calendar;
 
-import duke.exception.DukeException;
+import duke.exception.InvalidTimeException;
 
 /**
  * Represents a time. A <code>Time</code> object corresponds to a specified hour and minutes.
@@ -13,9 +13,9 @@ public class Time {
     /**
      * Constructor for <code>Time</code>.
      * @param unprocessedTime User unprocessed time input.
-     * @throws DukeException If cannot process time.
+     * @throws InvalidTimeException If cannot process time.
      */
-    public Time(String unprocessedTime) throws DukeException {
+    public Time(String unprocessedTime) throws InvalidTimeException {
         this.unprocessedTime = unprocessedTime;
         processTime();
     }
@@ -23,41 +23,49 @@ public class Time {
     /**
      * Processes the user input time.
      * If unprocessed time is empty, the time will not be processed.
-     * @throws DukeException If time is in the wrong format or invalid.
+     * @throws InvalidTimeException If time is in the wrong format or invalid.
      */
-    public void processTime() throws DukeException {
-        if (unprocessedTime.equals("")) {
+    public void processTime() throws InvalidTimeException {
+        boolean isEmptyTime = unprocessedTime.equals("");
+        if (isEmptyTime) {
             return;
         }
-        if (unprocessedTime.length() == 4) {
-            int time = Integer.parseInt(unprocessedTime);
-            int hour = time / 100;
-            int minute = time % 100;
-            if (hour > 23 || minute > 59) {
-                throw new DukeException("☹ OOPS!!! Please input a valid time.");
-            }
-            if (hour > 11) {
-                hour = hour % 12;
-                isAfternoon = true;
-            }
-            if (hour == 0) {
-                hour = 12;
-            }
-            StringBuilder timing = new StringBuilder();
-            timing.append(hour);
-            if (minute != 0) {
-                if (minute < 10) {
-                    timing.append(":" + "0" + minute);
-                    assert processedTime.length() == 4;
-                } else {
-                    assert minute >= 10 && minute <= 59 : "minute should be between 10 and 59";
-                    timing.append(":" + minute);
-                }
-            }
-            processedTime = timing.toString();
-        } else {
-            throw new DukeException("☹ OOPS!!! Please input a valid time e.g. 1800.");
+        boolean isIncorrectFormat = unprocessedTime.length() != 4;
+        if (isIncorrectFormat) {
+            throw new InvalidTimeException("☹ OOPS!!! Please input a valid time e.g. 1800.");
         }
+        int time = Integer.parseInt(unprocessedTime);
+        int hour = time / 100;
+        int minute = time % 100;
+        boolean isInvalidTime = hour > 23 || minute > 59;
+        if (isInvalidTime) {
+            throw new InvalidTimeException("☹ OOPS!!! Please input a valid time.");
+        }
+        boolean isPastNoon = hour > 11;
+        if (isPastNoon) {
+            hour = hour % 12;
+            isAfternoon = true;
+        }
+        boolean isMidnight = hour == 0;
+        if (isMidnight) {
+            hour = 12;
+        }
+        this.processedTime = formatTime(hour, minute);
+    }
+
+    private String formatTime(int hour, int minute) {
+        StringBuilder timing = new StringBuilder();
+        timing.append(hour);
+        boolean isNotExactHour = minute != 0;
+        boolean isLessThanTenMinutes = minute < 10;
+        if (isNotExactHour) {
+            if (isLessThanTenMinutes) {
+                timing.append(":" + "0" + minute);
+            } else {
+                timing.append(":" + minute);
+            }
+        }
+        return timing.toString();
     }
 
     /**
@@ -70,7 +78,8 @@ public class Time {
 
     @Override
     public String toString() {
-        if (processedTime == null) {
+        boolean isEmptyTime = processedTime == null;
+        if (isEmptyTime) {
             return "";
         }
         if (isAfternoon) {

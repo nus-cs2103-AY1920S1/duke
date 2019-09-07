@@ -10,6 +10,8 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
+import duke.exception.InvalidInputException;
+import duke.exception.MissingDescriptionException;
 
 /**
  * Represents a parser to make sense of inputs.
@@ -25,39 +27,73 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String userInput = fullCommand.replaceAll("\\s+", " ");
         if (userInput.equals("bye")) {
-            return new ExitCommand();
+            return exit();
         } else if (userInput.equals("list")) {
-            return new ListCommand();
+            return list();
         } else if (userInput.startsWith("todo")) {
-            String details = userInput.replaceFirst("todo", "");
-            return new AddTodoCommand(details.trim());
+            return todo(userInput);
         } else if (userInput.startsWith("deadline")) {
-            String details = userInput.replaceFirst("deadline", "");
-            return new AddDeadlineCommand(details.trim());
+            return deadline(userInput);
         } else if (userInput.startsWith("event")) {
-            String details = userInput.replaceFirst("event", "");
-            return new AddEventCommand(details.trim());
+            return event(userInput);
         } else if (userInput.contains("done")) {
-            String[] doneDetails = userInput.split(" ");
-            if (doneDetails.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of done cannot be empty.");
-            }
-            String listActionIndex = doneDetails[1].trim();
-            int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
-            return new DoneCommand(arrayActionIndex);
+            return done(userInput);
         } else if (userInput.contains("delete")) {
-            String[] deleteDetails = userInput.split(" ");
-            if (deleteDetails.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of delete cannot be empty.");
-            }
-            String listActionIndex = deleteDetails[1].trim();
-            int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
-            return new DeleteCommand(arrayActionIndex);
+            return delete(userInput);
         } else if (userInput.contains("find")) {
-            String details = userInput.replaceFirst("find", "");
-            return new FindCommand(details.trim());
+            return find(userInput);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInputException();
         }
+    }
+
+    private static Command find(String userInput) {
+        String details = userInput.replaceFirst("find", "");
+        return new FindCommand(details.trim());
+    }
+
+    private static Command delete(String userInput) throws MissingDescriptionException {
+        String[] deleteDetails = userInput.split(" ");
+        boolean descriptionIsEmpty = deleteDetails.length < 2;
+        if (descriptionIsEmpty) {
+            throw new MissingDescriptionException("delete");
+        }
+        String listActionIndex = deleteDetails[1].trim();
+        int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
+        return new DeleteCommand(arrayActionIndex);
+    }
+
+    private static Command done(String userInput) throws MissingDescriptionException {
+        String[] doneDetails = userInput.split(" ");
+        boolean descriptionIsEmpty = doneDetails.length < 2;
+        if (descriptionIsEmpty) {
+            throw new MissingDescriptionException("done");
+        }
+        String listActionIndex = doneDetails[1].trim();
+        int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
+        return new DoneCommand(arrayActionIndex);
+    }
+
+    private static Command event(String userInput) {
+        String details = userInput.replaceFirst("event", "");
+        return new AddEventCommand(details.trim());
+    }
+
+    private static Command deadline(String userInput) {
+        String details = userInput.replaceFirst("deadline", "");
+        return new AddDeadlineCommand(details.trim());
+    }
+
+    private static Command todo(String userInput) {
+        String details = userInput.replaceFirst("todo", "");
+        return new AddTodoCommand(details.trim());
+    }
+
+    private static Command list() {
+        return new ListCommand();
+    }
+
+    private static Command exit() {
+        return new ExitCommand();
     }
 }

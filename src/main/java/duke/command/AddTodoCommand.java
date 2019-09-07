@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -32,18 +33,23 @@ public class AddTodoCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> which handles user input and outputs.
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
-     * @throws DukeException If insufficient or incorrect details are provided.
+     * @throws MissingDescriptionException If description is empty.
      */
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (details.trim().length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException {
+        boolean descriptionIsEmpty = details.trim().length() == 0;
+        if (descriptionIsEmpty) {
+            throw new MissingDescriptionException("todo");
         }
-        Task todo = new Todo(details.trim());
-        tasks.addTask(todo);
-        int numberOfTasks = tasks.getListSize();
-        ui.printAddedMessage(todo, numberOfTasks);
+        addTodo(tasks, ui, storage);
+    }
+
+    private void addTodo(TaskList tasks, Ui ui, Storage storage) {
         try {
+            Task todo = new Todo(details.trim());
+            tasks.addTask(todo);
+            int numberOfTasks = tasks.getListSize();
+            ui.printAddedMessage(todo, numberOfTasks);
             storage.writeToHardDisk(tasks);
         } catch (DukeException exception) {
             ui.printException(exception);

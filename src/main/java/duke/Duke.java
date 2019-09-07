@@ -2,12 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 import java.io.ByteArrayOutputStream;
@@ -71,6 +69,13 @@ public class Duke {
         PrintStream ps = new PrintStream(message);
         PrintStream old = System.out;
         System.setOut(ps);
+        generateResponse(input);
+        System.out.flush();
+        System.setOut(old);
+        return message.toString();
+    }
+
+    private void generateResponse(String input) {
         try {
             ui.drawLine();
             Command c = Parser.parse(input);
@@ -80,9 +85,6 @@ public class Duke {
         } finally {
             ui.drawLine();
         }
-        System.out.flush();
-        System.setOut(old);
-        return message.toString();
     }
 
     public static void main(String[] args) {

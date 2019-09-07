@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
 /**
@@ -31,16 +32,21 @@ public class DoneCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> which handles user input and outputs.
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
-     * @throws DukeException If non-existent index is provided.
+     * @throws InvalidIndexException If non-existent index is provided.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (index + 1 > tasks.getListSize()) {
-            throw new DukeException("☹ OOPS!!! This item does not exist.");
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+        boolean isOutOfBounds = index >= tasks.getListSize();
+        if (isOutOfBounds) {
+            throw new InvalidIndexException();
         }
-        Task action = tasks.getTask(index);
-        action.setDone();
-        ui.printDoneMessage(action);
+        markAsDone(tasks, ui, storage);
+    }
+
+    private void markAsDone(TaskList tasks, Ui ui, Storage storage) {
         try {
+            Task action = tasks.getTask(index);
+            action.setDone();
+            ui.printDoneMessage(action);
             storage.writeToHardDisk(tasks);
         } catch (DukeException exception) {
             ui.printException(exception);

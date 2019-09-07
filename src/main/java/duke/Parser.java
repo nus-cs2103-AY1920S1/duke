@@ -133,6 +133,7 @@ class Parser {
         } else {
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
+        assert outCommand != null : "outCommand from parse should be empty";
         return outCommand;
     }
 }

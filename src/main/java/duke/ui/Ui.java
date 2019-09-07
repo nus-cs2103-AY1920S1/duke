@@ -163,7 +163,7 @@ public abstract class Ui {
      * @param task  The task that was marked as done.
      */
     public void displaySuccessfullyDoneTask(String title, Task task) {
-        StringJoiner successMessage = Ui.createStringJoiner(title);
+        StringJoiner successMessage = createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         printBlock(successMessage.toString());
     }
@@ -176,7 +176,7 @@ public abstract class Ui {
      * @param tasksLeft The number of tasks the user still has left.
      */
     public void displaySuccessfullyRemovedTask(String title, Task task, int tasksLeft) {
-        StringJoiner successMessage = Ui.createStringJoiner(title);
+        StringJoiner successMessage = createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         successMessage.add(String.format("Now you have %d tasks in the list.", tasksLeft));
         printBlock(successMessage.toString());
@@ -190,7 +190,7 @@ public abstract class Ui {
      * @param tasksLeft The number of tasks the user still has left.
      */
     public void displaySuccessfullyAddedTask(String title, Task task, int tasksLeft) {
-        StringJoiner successMessage = Ui.createStringJoiner(title);
+        StringJoiner successMessage = createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         successMessage.add(String.format("Now you have %d tasks in the list.", tasksLeft));
         printBlock(successMessage.toString());

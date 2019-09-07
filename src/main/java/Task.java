@@ -57,7 +57,7 @@ public class Task {
     }
 
     /**
-     * Returns the Task's description
+     * Returns the Task's description.
      * @return description of Task
      */
     public String getDescription() {

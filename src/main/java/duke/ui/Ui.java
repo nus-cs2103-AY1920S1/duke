@@ -82,7 +82,7 @@ public class Ui extends AnchorPane {
         try {
             String exit = this.duke.execute(this.readCommand());
             this.printLine(exit);
-            if (exit.equals("Bye. Hope to see you again soon!")) {
+            if ("Bye. Hope to see you again soon!".equals(exit)) {
                 Platform.exit();
             }
         } catch (DukeException e) {

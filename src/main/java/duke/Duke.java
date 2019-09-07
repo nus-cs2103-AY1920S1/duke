@@ -13,7 +13,6 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private boolean isExit = false;
 
     /**
      * Constructor for the Duke class.

@@ -28,9 +28,9 @@ public class Parser {
      * @throws DukeException when line does not meet expected parameters.
      */
     public static Command parse(String line) throws DukeException {
-        if (line.equals("bye")) {
+        if ("bye".equals(line)) {
             return new ByeCommand();
-        } else if (line.equals("list")) {
+        } else if ("list".equals(line)) {
             return new ListCommand();
         } else {
             String[] strArr = line.split(" ");

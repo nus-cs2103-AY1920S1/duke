@@ -10,6 +10,7 @@ public class AddDeadlineTaskCommand extends AddCommand {
         super(command);
     }
 
+    @Override
     protected Task instantiateTask() {
         final String[] deadlineArgs = command.split("(?:\\A| )/by\\b ?");
         final String deadlineDescription = deadlineArgs[0].stripTrailing();

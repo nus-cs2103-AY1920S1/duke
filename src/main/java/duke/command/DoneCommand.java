@@ -13,6 +13,7 @@ public class DoneCommand implements Command {
         taskIndex = Integer.parseInt(command);
     }
 
+    @Override
     public void execute(List<Task> tasks, Ui ui, Storage storage) {
         Task t = tasks.get(taskIndex - 1);
         t.markAsDone();

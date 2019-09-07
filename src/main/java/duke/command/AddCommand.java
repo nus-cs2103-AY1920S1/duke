@@ -20,6 +20,7 @@ abstract class AddCommand implements Command {
 
     protected abstract Task instantiateTask();
 
+    @Override
     public void execute(List<Task> tasks, Ui ui, Storage storage) {
         tasks.add(task);
 

@@ -8,6 +8,7 @@ public class AddTodoTaskCommand extends AddCommand {
         super(command);
     }
 
+    @Override
     protected Task instantiateTask() {
         String todoDescription = command;
         if (todoDescription.isEmpty()) {

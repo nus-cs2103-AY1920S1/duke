@@ -10,6 +10,7 @@ public class AddEventTaskCommand extends AddCommand {
         super(command);
     }
 
+    @Override
     protected Task instantiateTask() {
         final String[] eventArgs = command.split("(?:\\A| )/at\\b ?");
         final String eventDescription = eventArgs[0].stripTrailing();

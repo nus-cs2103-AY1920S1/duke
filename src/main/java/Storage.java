@@ -4,9 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -50,11 +48,10 @@ public class Storage {
                     String ss = str.substring(indexOfBracket);
                     String[] ssArr = ss.split(" ");
 
-                    SimpleDateFormat parser = new SimpleDateFormat("dd-MMM-yyyy");
-                    Date date = parser.parse(ssArr[1]);
-
-                    String strTime = ssArr[2].substring(0, 7);
-                    LocalTime time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mma"));
+                    DateTimeHandler dateTimeHandler = new DateTimeHandler(ssArr);
+                    dateTimeHandler.parseDateTimeFromStorage();
+                    Date date = dateTimeHandler.getDate();
+                    LocalTime time = dateTimeHandler.getTime();
 
                     t = new Deadline(str.substring(7, indexOfBracket - 4), date, time);
                     if (str.charAt(4) == '\u2713') { //mark task as done
@@ -66,11 +63,11 @@ public class Storage {
                     String ss = str.substring(index);
                     String[] ssArr = ss.split(" ");
 
-                    SimpleDateFormat parser = new SimpleDateFormat("dd-MMM-yyyy");
-                    Date date = parser.parse(ssArr[1]);
+                    DateTimeHandler dateTimeHandler = new DateTimeHandler(ssArr);
+                    dateTimeHandler.parseDateTimeFromStorage();
+                    Date date = dateTimeHandler.getDate();
+                    LocalTime time = dateTimeHandler.getTime();
 
-                    String strTime = ssArr[2].substring(0, 7);
-                    LocalTime time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mma"));
 
                     t = new Event(str.substring(7, index - 4), date, time);
                     if (str.charAt(4) == '\u2713') { //mark task as done

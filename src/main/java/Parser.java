@@ -1,4 +1,3 @@
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +33,7 @@ public class Parser {
         Task t = tasks.get(index);
         t.markAsDone();
 
-        tasks.setOutput(ui.showTaskDone(t));
+        tasks.setOutput(ui.taskDoneMessage(t));
 
         return tasks;
     }
@@ -55,7 +54,7 @@ public class Parser {
         Task t = new Todo(str.substring(5));
         tasks.add(t);
 
-        tasks.setOutput(ui.showAddTask(t, tasks));
+        tasks.setOutput(ui.addTaskMessage(t, tasks));
 
         return tasks;
     }
@@ -89,18 +88,15 @@ public class Parser {
             throw new DukeException("OOPS!!! The date/time of deadline cannot be empty.");
         }
 
-        SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = parser.parse(ss2Arr[1]);
-
-        int intTime = Integer.parseInt(ss2Arr[2]);
-        int hour = intTime / 100;
-        int minute = intTime % 100;
-        LocalTime time = LocalTime.of(hour, minute);
+        DateTimeHandler dateTimeHandler = new DateTimeHandler(ss2Arr);
+        dateTimeHandler.parseDateTimeFromUserInput();
+        Date date = dateTimeHandler.getDate();
+        LocalTime time = dateTimeHandler.getTime();
 
         Task t = new Deadline(str.substring(9, indexOfSlash - 1), date, time);
         tasks.add(t);
 
-        tasks.setOutput(ui.showAddTask(t, tasks));
+        tasks.setOutput(ui.addTaskMessage(t, tasks));
 
         return tasks;
     }
@@ -134,18 +130,15 @@ public class Parser {
             throw new DukeException("OOPS!!! The date/time of event cannot be empty.");
         }
 
-        SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = parser.parse(ss2Arr[1]);
-
-        int intTime = Integer.parseInt(ss2Arr[2]);
-        int hour = intTime / 100;
-        int minute = intTime % 100;
-        LocalTime time = LocalTime.of(hour, minute);
+        DateTimeHandler dateTimeHandler = new DateTimeHandler(ss2Arr);
+        dateTimeHandler.parseDateTimeFromUserInput();
+        Date date = dateTimeHandler.getDate();
+        LocalTime time = dateTimeHandler.getTime();
 
         Task t = new Event(str.substring(6, indexOfSlash - 1), date, time);
         tasks.add(t);
 
-        tasks.setOutput(ui.showAddTask(t, tasks));
+        tasks.setOutput(ui.addTaskMessage(t, tasks));
 
         return tasks;
     }
@@ -174,7 +167,7 @@ public class Parser {
 
         Task t = tasks.delete(index);
 
-        tasks.setOutput(ui.showDeleteTask(t, tasks));
+        tasks.setOutput(ui.deleteTaskMessage(t, tasks));
 
         return tasks;
 

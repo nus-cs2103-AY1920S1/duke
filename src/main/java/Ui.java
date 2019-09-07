@@ -4,13 +4,13 @@
 public class Ui {
     private TaskList tasks;
 
+    public Ui() {}
+
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
 
-    public Ui() {}
-
-    public TaskList getTasksList() {
+    public TaskList getTaskList() {
         return tasks;
     }
 
@@ -18,7 +18,7 @@ public class Ui {
      * Returns welcome message.
      * @return Welcome message.
      */
-    public String showWelcome() {
+    public String welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,16 +29,17 @@ public class Ui {
 
     /**
      * Returns goodbye message.
-     * @return
+     * @return Goodbye message.
      */
-    public String showGoodbye() {
+    public String goodbyeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Print out the TaskList in order.
+     * Returns the TaskList in order.
+     * @return The message of list of tasks.
      */
-    public String showTaskList() {
+    public String taskListMessage() {
         String s = "Here are the tasks in your list:\n";
 
         int i = 1;
@@ -52,7 +53,7 @@ public class Ui {
 
     /**
      * Takes in Command, parse it and returns the changed list.
-     * @param str   The String of command.
+     * @param str The String of command.
      * @return The list of task.
      * @throws Exception If command is missing input.
      */
@@ -61,7 +62,7 @@ public class Ui {
         Parser parser = new Parser();
 
         if (strArr[0].equals("list")) {
-            tasks.setOutput(showTaskList());
+            tasks.setOutput(taskListMessage());
         } else if (strArr[0].equals("done")) {
             tasks = parser.parseDone(str, tasks);
         } else if (strArr[0].equals("todo")) {
@@ -73,9 +74,9 @@ public class Ui {
         } else if (strArr[0].equals("delete")) {
             tasks = parser.parseDelete(str, tasks);
         } else if (strArr[0].equals("find")) {
-            tasks.setOutput(showMatchingTask(parser.parseFind(str, tasks)));
+            tasks.setOutput(matchingTaskMessage(parser.parseFind(str, tasks)));
         } else if (strArr[0].equals("bye")) {
-            tasks.setOutput(showGoodbye());
+            tasks.setOutput(goodbyeMessage());
         } else {
             throw new DukeException("OOPS!!! I,m sorry, but I don't know what that means :-(");
         }
@@ -85,11 +86,11 @@ public class Ui {
 
     /**
      * Returns the message of task added.
-     * @param t     The Task that is added into TaskList.
+     * @param t The Task that is added into TaskList.
      * @param tasks The TaskList of user.
      * @return The string of added task.
      */
-    public String showAddTask(Task t, TaskList tasks) {
+    public String addTaskMessage(Task t, TaskList tasks) {
         return "Got it. I've added this task:\n" + "  " + t + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
@@ -98,17 +99,17 @@ public class Ui {
      * @param t The Task that is marked as done.
      * @return The string of task mark as done.
      */
-    public String showTaskDone(Task t) {
+    public String taskDoneMessage(Task t) {
         return "Nice! I've marked this task as done:\n\t" + t;
     }
 
     /**
      * Returns the message of task that is deleted.
-     * @param t     The Task deleted.
+     * @param t The Task deleted.
      * @param tasks The TaskList of user.
      * @return The string of task deleted.
      */
-    public String showDeleteTask(Task t, TaskList tasks) {
+    public String deleteTaskMessage(Task t, TaskList tasks) {
         return "Noted! I've removed this task:\n" + t + "\nNow you have " + tasks.size() + " tasks in the list.\n";
     }
 
@@ -117,7 +118,7 @@ public class Ui {
      * @param tasks The TaskList of matched Task.
      * @return The string of all task that match the keyword.
      */
-    public String showMatchingTask(TaskList tasks) {
+    public String matchingTaskMessage(TaskList tasks) {
         String s = "Here are the matching tasks in your list:\n";
 
         int i = 1;

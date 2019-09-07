@@ -1,8 +1,7 @@
-[T][✘] individual project
-[E][✘] lunch (at: 26-Aug-2019 12:00PM)
-[T][✘] JUnit testing
-[D][✘] lab (by: 08-Feb-2021 12:00PM)
-[T][✘] read book
-[T][✘] return book
-[T][✘] testing
-[T][✘] assignment
+[T][?] ] individual project
+[E][?] ] lunch (at: 26-Aug-2019 12:00PM)
+[T][?] ] JUnit testing
+[D][?] ] lab (by: 08-Feb-2021 12:00PM)
+[T][?] ] read book
+[T][?] ] return book
+[T][?] ] testing

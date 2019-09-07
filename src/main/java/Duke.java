@@ -10,7 +10,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             ui.input(input);
-            storage.save(ui.getTasksList().getList());
+            storage.save(ui.getTaskList().getList());
             return tasks.getOutput();
         } catch (Exception e) {
             return e.getMessage();
@@ -19,7 +19,6 @@ public class Duke {
 
     /**
      * Creates a Duke with given filePath to load Tasks in the file.
-     *
      * @param filePath The file that saves the Tasks.
      */
     public Duke(String filePath) {
@@ -29,6 +28,6 @@ public class Duke {
     }
 
     public String getWelcomeAndTasks() {
-        return ui.showWelcome() + ui.showTaskList();
+        return ui.welcomeMessage() + ui.taskListMessage();
     }
 }

@@ -55,6 +55,15 @@ public class Event extends Task {
     }
 
     /**
+     * To get string with type and description for duplication check.
+     *
+     * @return String to check for duplicates.
+     */
+    public String getDuplicateCheckString() {
+        return String.format("E %s", description);
+    }
+
+    /**
      * Gets the description of the Event task.
      *
      * @return The description of the Event task.

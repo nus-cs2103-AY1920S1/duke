@@ -43,9 +43,26 @@ public class TaskList {
      * @param ui The Ui object we are currently using.
      * @throws DukeException If the input format is incorrect.
      */
-    public String addTask(Task task, Ui ui) {
+    public String addTask(Task task, Ui ui) throws DukeException {
+        int duplicate = checkDuplicate(task);
+        if (duplicate != 0) {
+            throw new DukeException("OOPS!!! Similar task in the list!\n"
+                + "Task " + duplicate + ": " + tasks.get(duplicate - 1));
+        }
         tasks.add(task);
         return ui.addedTask(task, tasks.size());
+    }
+
+    private int checkDuplicate(Task task) {
+        String taskString = task.getDuplicateCheckString();
+        int count = 0;
+        for (Task t: tasks) {
+            count++;
+            if (taskString.equalsIgnoreCase(t.getDuplicateCheckString())) {
+                return count;
+            }
+        }
+        return 0;
     }
 
     /**

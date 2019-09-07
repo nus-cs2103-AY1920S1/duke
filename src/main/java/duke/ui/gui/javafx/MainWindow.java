@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends VBox {
+    private static Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/duke/images/DaUser.png"));
+    private static Image DUKE_IMAGE = new Image(MainWindow.class.getResourceAsStream("/duke/images/DaDuke.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -21,11 +23,7 @@ public class MainWindow extends VBox {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
-
-    private static Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/duke/images/DaUser.png"));
-    private static Image DUKE_IMAGE = new Image(MainWindow.class.getResourceAsStream("/duke/images/DaDuke.png"));
 
     @FXML
     public void initialize() {

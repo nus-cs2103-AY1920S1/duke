@@ -20,6 +20,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null : "Tasklist instance is null!";
+        assert ui != null : "Ui instance is null!";
         tasks.completeTask(this.id);
         return ui.showComplete(tasks.getTask(this.id));
     }

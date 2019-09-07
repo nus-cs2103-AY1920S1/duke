@@ -6,17 +6,12 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
 /**
- * Represents a Done Command.
+ * Represents an Undo Command.
  */
-public class DoneCommand extends Command {
-    private int index;
-
-    public DoneCommand(int index) {
-        this.index = index;
-    }
+public class UndoCommand extends Command {
 
     /**
-     * Executes the Command: Sets task in taskList done, and updates the storage file.
+     * Executes the Command: sets current tasklist and storage to previous iteration.
      *
      * @param tasks   current TaskList instance
      * @param storage current Storage instance
@@ -25,12 +20,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage, History history) throws DukeException {
-        history.addHistoryState();
-        String current = tasks.get(index).storageString();
-        String doneString = tasks.get(index).setDone();
-        String res = tasks.get(index).storageString();
-        storage.replaceLine(current, res);
-        return doneString;
+        history.undo();
+        return "Previous command has been undone!";
     }
 
     /**
@@ -43,10 +34,8 @@ public class DoneCommand extends Command {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof DoneCommand) {
-            DoneCommand other = (DoneCommand) obj;
-            return other.index == this.index;
+        } else {
+            return obj instanceof UndoCommand;
         }
-        return false;
     }
 }

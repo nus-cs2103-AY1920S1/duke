@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.history.History;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -13,13 +14,14 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private History history;
 
     /**
      * Constructor for the Duke class.
      *
      * @param filePath Local filePath to the data storage file.
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         ui.setDuke(this);
         storage = new Storage(filePath);
@@ -29,6 +31,7 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+        history = new History(storage, tasks);
     }
 
     public Duke() {
@@ -37,7 +40,7 @@ public class Duke extends Application {
 
     public String execute(String command) throws DukeException {
         Command c = Parser.parse(command);
-        return c.execute(tasks, storage);
+        return c.execute(tasks, storage, history);
     }
 
     @Override

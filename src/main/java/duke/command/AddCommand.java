@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.history.History;
 import duke.storage.Storage;
 import duke.task.Deadlines;
 import duke.task.Event;
@@ -16,9 +17,10 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for the AddCommand.
+     *
      * @param typeOfTask "todo", "deadline" or "event".
-     * @param name The name of the specified task.
-     * @param datetime The datetime, if the task is a deadline or an event.
+     * @param name       The name of the specified task.
+     * @param datetime   The datetime, if the task is a deadline or an event.
      */
     public AddCommand(String typeOfTask, String name, String datetime) {
         switch (typeOfTask) {
@@ -38,20 +40,12 @@ public class AddCommand extends Command {
 
     /**
      * Overloaded constructor for AddCommand, if datetime is not given as a parameter.
+     *
      * @param typeOfEvent "todo".
-     * @param name The name of the specified event.
+     * @param name        The name of the specified event.
      */
     public AddCommand(String typeOfEvent, String name) {
         this(typeOfEvent, name, null);
-    }
-
-    /**
-     * Method that returns true only if this is an instance of an ExitCommand.
-     *
-     * @return false
-     */
-    public boolean isExit() {
-        return false;
     }
 
     /**
@@ -59,12 +53,15 @@ public class AddCommand extends Command {
      *
      * @param tasks   current TaskList instance
      * @param storage current Storage instance
+     * @param history current History instance
      * @throws DukeException DukeException
      */
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, History history) throws DukeException {
+        history.addHistoryState();
         tasks.add(task);
         storage.addTask(task);
-        return "Got it. I've added this task: \n + task\n + Now you have " + tasks.size() + " tasks in the list.";
+        return "Got it. I've added this task: \n + " + task
+                + "\n + Now you have " + tasks.size() + " tasks in the list.";
     }
 
     /**

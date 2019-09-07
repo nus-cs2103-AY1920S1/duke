@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.history.History;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -10,24 +11,15 @@ import duke.tasklist.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Method that returns true only if this is an instance of an ExitCommand.
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the Command: Prints out tasks in TaskList.
      *
      * @param tasks   current TaskList instance
      * @param storage current Storage instance
+     * @param history current History instance
      * @throws DukeException DukeException
      */
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
-        return (tasks.printAllTasks());
+    public String execute(TaskList tasks, Storage storage, History history) throws DukeException {
+        return tasks.printAllTasks();
     }
 
     /**
@@ -39,9 +31,8 @@ public class ListCommand extends Command {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof ListCommand) {
-            return true;
+        } else {
+            return obj instanceof ListCommand;
         }
-        return false;
     }
 }

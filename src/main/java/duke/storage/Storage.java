@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,33 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * Reads the storage file and returns a string for implementation of history.
+     * @return String.
+     * @throws IOException thrown when IO error occurs.
+     */
+    public String readFile() throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        List<String> lines = Files.readAllLines(Paths.get(filePath));
+        for (String line : lines) {
+            if (!line.isEmpty()) {
+                stringBuilder.append(line).append("\n");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Saves the string into the storage file for implementation of history.
+     * @param storageString String
+     * @throws IOException thrown when IO error occurs.
+     */
+    public void save(String storageString) throws IOException {
+        String[] lines = storageString.split("\n");
+        List<String> newlines = new ArrayList<>(Arrays.asList(lines));
+        Files.write(Paths.get(filePath), newlines);
     }
 
     /**

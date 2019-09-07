@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
+import duke.command.UndoCommand;
 
 import duke.exception.DukeException;
 
@@ -65,6 +66,8 @@ public class Parser {
                     throw new DukeException(BAD_COMMAND);
                 }
                 return new FindCommand(line.substring(5));
+            case "undo":
+                return new UndoCommand();
             default:
                 throw new DukeException(UNKNOWN_COMMAND);
             }

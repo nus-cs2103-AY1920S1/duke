@@ -113,4 +113,12 @@ public class TaskList {
             return "There are no tasks on your list!";
         }
     }
+
+    /**
+     * Set current list to given list.
+     * @param list List to overwrite current list.
+     */
+    public void setList(List<Task> list) {
+        this.list = list;
+    }
 }

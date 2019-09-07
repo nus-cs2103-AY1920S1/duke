@@ -13,18 +13,18 @@ import java.time.format.FormatStyle;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime byDateTime;
     protected boolean isAllDay;
 
     /**
      * Deadline Constructor.
      *
      * @param description Description of Deadline task.
-     * @param by Deadline datetime.
+     * @param byDateTime Deadline datetime.
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime byDateTime) {
         super(description, TaskType.DEADLINE);
-        this.by = by;
+        this.byDateTime = byDateTime;
         this.isAllDay = false;
     }
 
@@ -32,12 +32,12 @@ public class Deadline extends Task {
      * Deadline Constructor.
      *
      * @param description Description of Deadline task.
-     * @param by Deadline datetime.
+     * @param byDateTime Deadline datetime.
      * @param isAllDay Whether task is all day.
      */
-    public Deadline(String description, LocalDateTime by, boolean isAllDay) {
+    public Deadline(String description, LocalDateTime byDateTime, boolean isAllDay) {
         super(description, TaskType.DEADLINE);
-        this.by = by;
+        this.byDateTime = byDateTime;
         this.isAllDay = isAllDay;
     }
 
@@ -46,17 +46,17 @@ public class Deadline extends Task {
      *
      * @return LocalDateTime representing by.
      */
-    public LocalDateTime getBy() {
-        return by;
+    public LocalDateTime getByDateTime() {
+        return byDateTime;
     }
 
     /**
      * Setter for by.
      *
-     * @param by LocalDateTime representing by.
+     * @param byDateTime LocalDateTime representing by.
      */
-    public void setBy(LocalDateTime by) {
-        this.by = by;
+    public void setByDateTime(LocalDateTime byDateTime) {
+        this.byDateTime = byDateTime;
     }
 
     /**
@@ -81,10 +81,10 @@ public class Deadline extends Task {
     public String toString() {
         if (isAllDay) {
             return String.format("[%s]%s (by: %s)", TaskType.DEADLINE.getTag(), super.toString(),
-                    by.toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+                    byDateTime.toLocalDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
         } else {
             return String.format("[%s]%s (by: %s)", TaskType.DEADLINE.getTag(), super.toString(),
-                    by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+                    byDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
         }
     }
 }

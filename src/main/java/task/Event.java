@@ -152,24 +152,29 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (isAllDay && startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
+        boolean isStartEndSameDay = startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate());
+        boolean isStartEndSame = startDateTime.isEqual(endDateTime);
+        DateTimeFormatter dtfDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+        DateTimeFormatter dtfDateTime = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+
+        if (isAllDay && isStartEndSameDay) {
             return String.format("[%s]%s (at: %s)", TaskType.EVENT.getTag(), super.toString(),
-                    startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+                    startDateTime.format(dtfDate));
         } else if (isAllDay) {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
-                    startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-                    endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        } else if (startDateTime.isEqual(endDateTime)) {
+                    startDateTime.format(dtfDate),
+                    endDateTime.format(dtfDate));
+        } else if (isStartEndSame) {
             return String.format("[%s]%s (at: %s)", TaskType.EVENT.getTag(), super.toString(),
-                    startDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
-        } else if (startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
+                    startDateTime.format(dtfDateTime));
+        } else if (isStartEndSameDay) {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
-                    startDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
-                    endDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)));
+                    startDateTime.format(dtfDateTime),
+                    endDateTime.format(dtfDate));
         } else {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
-                    startDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
-                    endDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+                    startDateTime.format(dtfDateTime),
+                    endDateTime.format(dtfDateTime));
         }
     }
 }

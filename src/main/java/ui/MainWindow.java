@@ -61,29 +61,38 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Run exit sequence
+     * Run exit sequence.
      */
     private void exit() {
-        // disable textfield and button
         sendButton.setDisable(true);
         userInput.setDisable(true);
+        runExitTimer();
+    }
 
-        // run shutdown timer
+    /**
+     * Make Duke count down to exit.
+     */
+    private void runExitTimer() {
         AtomicInteger i = new AtomicInteger(3);
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.seconds(1),
-                ae -> {
-                    if (i.get() == 0) {
-                        Platform.exit();
-                    } else {
-                        addDukeResponse("Shutting down in..." + i);
-                        i.getAndDecrement();
-                    }
-                }));
+            Duration.seconds(1),
+            ae -> {
+                if (i.get() <= 0) {
+                    Platform.exit();
+                } else {
+                    addDukeResponse("Shutting down in..." + i);
+                    i.getAndDecrement();
+                }
+            }));
         timeline.setCycleCount(4);
         timeline.play();
     }
 
+    /**
+     * Make Duke respond in chat with given String.
+     *
+     * @param response String which Duke will respond with.
+     */
     public void addDukeResponse(String response) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
     }

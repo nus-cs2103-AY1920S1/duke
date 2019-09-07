@@ -8,9 +8,9 @@ import java.util.Scanner;
  * @author Marcus Ong
  */
 public class Cli extends Ui {
-    private final String LINE_PREPEND = "\t";
-    private final String LINE_APPEND = "\n";
-    private final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String LINE_PREPEND = "\t";
+    private static final String LINE_APPEND = "\n";
+    private static final String HORIZONTAL_LINE = "____________________________________________________________";
     protected StringBuilder messageBuilder = new StringBuilder(LINE_PREPEND + HORIZONTAL_LINE + LINE_APPEND);
 
     public Cli() {

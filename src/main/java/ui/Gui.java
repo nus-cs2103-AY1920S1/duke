@@ -7,7 +7,7 @@ package ui;
  */
 public class Gui extends Ui {
     private final MainWindow mainWindowController;
-    private final String LINE_APPEND = "\n";
+    private static final String LINE_APPEND = "\n";
 
     public Gui(MainWindow mainWindowController) {
         this.mainWindowController = mainWindowController;
@@ -19,7 +19,7 @@ public class Gui extends Ui {
     @Override
     public void show() {
         String output = messageBuilder.toString();
-        messageBuilder = new StringBuilder(); // clear messageBuilder
+        messageBuilder = new StringBuilder();
         mainWindowController.addDukeResponse(output);
     }
 

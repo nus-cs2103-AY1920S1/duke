@@ -78,7 +78,7 @@ public class AddEventCommand extends Command {
         return taskSpecifics;
     }
 
-    private String[] getRawStarts (String[] taskSpecifics) {
+    private String[] getRawStarts(String[] taskSpecifics) {
         return taskSpecifics[0].trim().split(" ");
     }
 

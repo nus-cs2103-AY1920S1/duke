@@ -19,6 +19,7 @@ public class Parser {
         } else if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("done")) {
             try {
                 int taskNumber = Integer.parseInt(fullCommand.substring(5)) - 1;
+                assert taskNumber > 0: "Task number entered can only be positive"; // Precondition for DoneCommand
                 return new DoneCommand(taskNumber);
             } catch (NumberFormatException e) {
                 throw new InvalidCommandDukeException("☹ OOF!!! Please enter a task number!!");
@@ -27,6 +28,7 @@ public class Parser {
         } else if (fullCommand.length() >= 8 && fullCommand.substring(0, 6).equals("delete")) {
             try {
                 int taskNumber = Integer.parseInt(fullCommand.substring(7)) - 1;
+                assert taskNumber > 0: "Task number entered can only be positive"; // Precondition for DeleteCommand
                 return new DeleteCommand(taskNumber);
             } catch (NumberFormatException e) {
                 throw new InvalidCommandDukeException("☹ OOF!!! Please enter a task number!!");
@@ -45,7 +47,7 @@ public class Parser {
             throw new InvalidCommandDukeException("☹ OOF!!! I'm sorry, but I don't know what that means :-(");
         } else {
             String[] splitCommand = fullCommand.split(" ");
-            Task currentTask = null;
+            Task currentTask;
             String description = "";
 
             if (splitCommand[0].equals("todo")) {

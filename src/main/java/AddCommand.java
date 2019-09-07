@@ -25,6 +25,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
+        assert tasks.taskListSize() > 0: "List of Tasks should be at least 1 after adding new task"; // // Precondition for showAddTaskMessage
         return ui.showAddTaskMessage(this.task, tasks.taskListSize());
     }
 

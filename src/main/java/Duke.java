@@ -58,6 +58,7 @@ public class Duke extends Application {
     public String run(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null: "Command should not be null"; //Precondition for execute method
             return c.execute(tasks, ui, storage);
         } catch (Exception e) {
             return ui.showExceptionError(e);
@@ -165,8 +166,6 @@ public class Duke extends Application {
                 "D     D  U     U    K K      EEEE  \n" +
                 "D    D   U     U    K  K     E    \n" +
                 "DDD    UUUU  K      K   EEEEEE \n";
-
-
 
         Label greetingText = new Label("Hello from\n" + logo2);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, new ImageView(duke)));

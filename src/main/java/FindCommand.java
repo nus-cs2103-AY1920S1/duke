@@ -24,6 +24,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        return ui.showFindTasksMessage(tasks.findTasks(this.keyWord));
+        TaskList tasksWithKeyword = tasks.findTasks(this.keyWord);
+        assert tasksWithKeyword != null: "List of tasks returned from search should never be null"; // Postcondition for findTasks method.
+        return ui.showFindTasksMessage(tasksWithKeyword);
     }
 }

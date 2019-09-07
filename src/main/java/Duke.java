@@ -30,8 +30,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png "));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png "));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {}
 
@@ -161,8 +161,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -175,6 +175,8 @@ public class Duke extends Application {
         return "Duke heard: " + input;
     }
 
+
+
     /**
      * Runs the main method to load the duke.txt file into the program and then calls the run method
      * @param args
@@ -184,4 +186,5 @@ public class Duke extends Application {
     public static void main(String[] args) throws DukeException, ParseException{
         new Duke("/Users/lawnce/Desktop/duke/data/duke.txt").run();
     }
+
 }

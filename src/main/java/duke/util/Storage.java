@@ -9,6 +9,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,16 +36,27 @@ public class Storage {
     public ArrayList<Task> retrieveHistory() throws IOException {
         Path filePath = Paths.get("./saved/taskList_history.txt");
         ArrayList<String> lines = new ArrayList<>(Files.readAllLines(filePath));
+        ArrayList<Task> taskList = textToTaskList(lines);
+        return taskList;
+    }
+
+    private ArrayList<Task> textToTaskList(ArrayList<String> lines) {
         ArrayList<Task> taskList = new ArrayList<>();
         for (String line : lines) {
             String[] parts = line.split("\\|");
-            if (parts[0].equals("T")) {
+            String part = parts[0];
+            switch(part) {
+            case "T":
                 taskList.add(new Todo(parts[2], parts[1].equals("1")));
-            } else if (parts[0].equals("D")) {
+                break;
+            case "D":
                 taskList.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
-            } else if (parts[0].equals("E")) {
+                break;
+            case "E":
                 taskList.add(new Event(parts[2], parts[3], parts[1].equals("1")));
+                break;
             }
+            assert false : "Corrupted history";
         }
         return taskList;
     }

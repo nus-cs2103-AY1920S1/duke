@@ -41,8 +41,16 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        customiseText(isDuke, text);
+        formatDisplayPicture(img);
+    }
+
+    private void customiseText(boolean isDuke, String text) {
         name.setText(isDuke ? "Perry" : "You");
         dialog.setText(text);
+    }
+
+    private void formatDisplayPicture(Image img) {
         Circle clip = new Circle(30, 30, 30);
         displayPicture.setClip(clip);
         displayPicture.setFitWidth(60.0);

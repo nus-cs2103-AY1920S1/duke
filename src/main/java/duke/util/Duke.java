@@ -19,6 +19,10 @@ public class Duke {
     public Duke() {
         storage = new Storage(path);
         ui = new Ui();
+        loadHistory();
+    }
+
+    private void loadHistory() {
         try {
             if (!storage.historyExists()) {
                 storage.createFile();
@@ -44,8 +48,12 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DukeException e) {
-            return e.getMessage() + "\nType 'commands' to view a list of commands you can use";
+            return invalidCommandMessage(e.getMessage());
         }
         return "";
+    }
+
+    public String invalidCommandMessage(String errorMessage) {
+        return errorMessage + "\nType 'commands' to view a list of commands you can use";
     }
 }

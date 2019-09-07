@@ -35,10 +35,22 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        setScrollPaneHeight();
+        addWelcomeMessage();
+        customiseTextInputBar();
+    }
+
+    private void setScrollPaneHeight() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    private void addWelcomeMessage() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage)
         );
+    }
+
+    private void customiseTextInputBar() {
         userInput.setStyle("-fx-text-inner-color: white; -fx-background-color:  #355951;");
     }
 

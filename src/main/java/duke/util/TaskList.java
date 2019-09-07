@@ -56,9 +56,15 @@ public class TaskList {
             throw new DukeException("Invalid task number!");
         }
         Task t = taskList.get(index - 1);
-        t.complete();
-        String result = "Nice! I've marked this task as done:\n";
-        result += t;
+        boolean canComplete = t.complete();
+        String result = "";
+        if (canComplete) {
+            result = "Nice! I've marked this task as done:\n";
+            result += t;
+        } else {
+            result = "Oops! This task is already completed!\n";
+            result += t;
+        }
         return result;
     }
 
@@ -209,18 +215,18 @@ public class TaskList {
         String[] parts = date.split("/");
         String[] month = {
             "",
-            "January",
-            "February",
-            "March",
-            "April",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
             "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
         };
         boolean validDate = true;
         if (parts.length == 3) {

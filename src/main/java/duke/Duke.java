@@ -2,7 +2,11 @@ package duke;
 
 import duke.command.Command;
 
-import duke.view.MainWindow;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
 import javafx.application.Platform;
 
 import java.util.Timer;
@@ -53,7 +57,7 @@ public class Duke {
     }
 
     /**
-     * Waits 3 seconds, then exits the app.
+     * Waits 2 seconds, then exits the app.
      */
     private void exitDuke() {
         new Timer().schedule(new TimerTask() {
@@ -71,13 +75,5 @@ public class Duke {
      */
     public boolean getIsExiting() {
         return isExiting;
-    }
-
-    /**
-     * Gets the UI object being used.
-     * @return Ui object.
-     */
-    public Ui getUi() {
-        return ui;
     }
 }

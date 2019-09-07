@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * A Command to help the user learn what the app can do.

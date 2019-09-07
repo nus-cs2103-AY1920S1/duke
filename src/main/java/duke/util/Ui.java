@@ -1,6 +1,7 @@
-package duke;
+package duke.util;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Deals with interactions with the user.

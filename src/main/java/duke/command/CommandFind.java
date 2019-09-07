@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * A Command to search the TaskList with a specific query.
@@ -39,7 +40,7 @@ public class CommandFind extends Command {
                     results.add(task);
                 }
             }
-        } catch (Exception e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Search of task list failed.");
         }
 

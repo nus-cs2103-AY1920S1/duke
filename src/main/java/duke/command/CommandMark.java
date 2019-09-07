@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
-
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * A Command to mark as task as done.
@@ -35,7 +34,7 @@ public class CommandMark extends Command {
         try {
             taskToMark = tasks.get(taskNumber);
             taskToMark.markDone();
-        } catch (Exception e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number.");
         }
 

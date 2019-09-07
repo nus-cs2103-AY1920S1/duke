@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
-
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * A Command to delete a task from the task list.
@@ -33,7 +32,7 @@ public class CommandDelete extends Command {
         Task taskToDelete;
         try {
             taskToDelete = tasks.remove(taskNumber);
-        } catch (Exception e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number.");
         }
 

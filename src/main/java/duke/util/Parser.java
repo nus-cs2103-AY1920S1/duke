@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import duke.command.Command;
 import duke.command.CommandFind;
@@ -29,13 +29,13 @@ public class Parser {
         case "done":
             try {
                 return new CommandMark(Integer.parseInt(commandWords[1]));
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 throw new DukeException("Invalid task number.");
             }
         case "delete":
             try {
                 return new CommandDelete(Integer.parseInt(commandWords[1]));
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 throw new DukeException("Invalid task number.");
             }
         case "todo":
@@ -45,7 +45,7 @@ public class Parser {
                 String taskType = fullCommand.split(" ")[0];
                 String taskDescription = fullCommand.split(" ", 2)[1];
                 return new CommandAdd(taskType, taskDescription);
-            } catch (Exception e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("To add tasks, please use the format: type description\n"
                         + "e.g. todo read book"
                 );
@@ -54,7 +54,7 @@ public class Parser {
             try {
                 String query = fullCommand.split(" ", 2)[1];
                 return new CommandFind(query);
-            } catch (Exception e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Invalid search term.");
             }
         case "help":
@@ -106,8 +106,10 @@ public class Parser {
             }
 
             return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-        } catch (Exception e) {
-            throw new DukeException("DateTime \"" + dateTime + "\" format incorrect");
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(
+                    "DateTime \"" + dateTime + "\" format incorrect.\n\n" + Ui.getDatetimeFormatMessage()
+            );
         }
     }
 }

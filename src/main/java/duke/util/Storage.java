@@ -1,6 +1,7 @@
-package duke;
+package duke.util;
 
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -54,60 +55,11 @@ public class Storage {
 
             String line = reader.readLine();
             while (line != null) {
-                Task taskToRead = null;
-
-                // get task type and description
-                String[] lineArray = line.split(" ~ ");
-                String taskType = lineArray[0];
-                String taskDescription;
-
-                switch (taskType) {
-                case "T":
-                    taskDescription = lineArray[2];
-                    taskToRead = new ToDo(taskDescription);
-                    break;
-                case "D":
-                    // get description
-                    taskDescription = lineArray[2].split("by: ")[0];
-                    // remove space and closing bracket
-                    taskDescription = taskDescription.substring(0, taskDescription.length() - 2);
-
-                    // get deadline
-                    String deadline = lineArray[2].split("by: ")[1];
-                    // remove closing bracket
-                    deadline = deadline.substring(0, deadline.length() - 1);
-
-                    // read task with deadline
-                    taskToRead = new Deadline(taskDescription, Parser.parseDateTimeString(deadline));
-                    break;
-                case "E":
-                    // get description
-                    taskDescription = lineArray[2].split("at: ")[0];
-                    // remove space and closing bracket
-                    taskDescription = taskDescription.substring(0, taskDescription.length() - 2);
-
-                    // get time
-                    String time = lineArray[2].split("at: ")[1];
-                    // remove closing bracket
-                    time = time.substring(0, time.length() - 1);
-
-                    // read task with deadline
-                    taskToRead = new Event(taskDescription, Parser.parseDateTimeString(time));
-                    break;
-                default:
-                    throw new DukeException("Unknown task type detected.");
-                }
-
-                // check if the task is marked as done
-                if (lineArray[1].equals("1")) {
-                    taskToRead.markDone();
-                }
-
+                Task taskToRead = parseTaskFromLine(line);
                 tasks.add(taskToRead);
-
                 line = reader.readLine();
             }
-        } catch (Exception e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(e.getMessage());
         } finally {
             // close reader
@@ -121,6 +73,66 @@ public class Storage {
         }
 
         return tasks;
+    }
+
+    /**
+     * Parses a String representing a task into a Task object.
+     * @param line The String to be parsed into a Task.
+     * @return A Task object.
+     * @throws DukeException If parsing fails.
+     */
+    private Task parseTaskFromLine(String line) throws DukeException {
+        Task taskToRead = null;
+        String[] lineParts = line.split(" ~ ");
+        String taskType = lineParts[0];
+
+        switch (taskType) {
+        case "T":
+            String taskDescription = lineParts[2];
+            taskToRead = new ToDo(taskDescription);
+            break;
+        case "D":
+            String[] descriptionAndDeadline = parseDescriptionAndTime(lineParts[2], "by: ");
+            taskToRead = new Deadline(
+                    descriptionAndDeadline[0],
+                    Parser.parseDateTimeString(descriptionAndDeadline[1])
+            );
+            break;
+        case "E":
+            String[] descriptionAndTime = parseDescriptionAndTime(lineParts[2], "at: ");
+            taskToRead = new Event(
+                    descriptionAndTime[0],
+                    Parser.parseDateTimeString(descriptionAndTime[1])
+            );
+            break;
+        default:
+            throw new DukeException("Unknown task type detected.");
+        }
+
+        // check if the task is marked as done
+        if (lineParts[1].equals("1")) {
+            taskToRead.markDone();
+        }
+
+        return taskToRead;
+    }
+
+    /**
+     * Parses a String describing a task's description and time.
+     * @param line The String containing the task's description and time.
+     * @param splitRegex The String regex by which to separate the description and time.
+     * @return A String array containing: (1) task description (2) task time.
+     */
+    private String[] parseDescriptionAndTime(String line, String splitRegex) {
+        String description =  line.split(splitRegex)[0];
+        // remove space and closing bracket
+        description = description.substring(0, description.length() - 2);
+
+        String time = line.split(splitRegex)[1];
+        // remove closing bracket
+        time = time.substring(0, time.length() - 1);
+
+        return new String[] {description, time};
     }
 
     /**
@@ -150,7 +162,7 @@ public class Storage {
                 writer.write(String.format("%s ~ %s ~ %s", type, done, description));
                 writer.newLine();
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException e) {
             System.err.println(e.getMessage());
             throw new DukeException("Failed to save task list to file.");
         } finally {

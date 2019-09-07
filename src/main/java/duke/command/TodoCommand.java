@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.core.DukeResponder;
+import duke.exception.CannotSaveTasksException;
+import duke.util.Storage;
+import duke.util.TaskList;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.IOException;
 
 public class TodoCommand extends Command {
 
@@ -17,16 +16,15 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Todo(this.description);
-        tasks.add(task);
-        ui.showTaskAdded(task, tasks);
+    public String execute(TaskList tasks, DukeResponder responder, Storage storage) {
         try {
+            Task task = new Todo(this.description);
+            tasks.add(task);
             storage.saveTasks(tasks);
-        } catch (IOException e) {
-            ui.showSaveError();
+            return responder.getTaskAddedMessage(task, tasks);
+        } catch (CannotSaveTasksException e) {
+            return responder.getErrorMessage(e);
         }
-        return false;
     }
 
 }

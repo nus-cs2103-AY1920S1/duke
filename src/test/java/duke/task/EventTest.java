@@ -16,7 +16,7 @@ public class EventTest {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         Date at = dateFormat.parse("21/9/2019 0930");
         Event event = new Event(description, at);
-        assertEquals("E | 0 | hackathon | 21/9/2019 0930",event.toSaveString());
+        assertEquals("E | 0 | hackathon | 21/9/2019 0930",event.toEncodedString());
     }
 
     @Test

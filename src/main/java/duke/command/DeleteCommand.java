@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.core.DukeResponder;
+import duke.exception.CannotSaveTasksException;
+import duke.util.Storage;
+import duke.util.TaskList;
 import duke.task.Task;
-
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
 
@@ -16,15 +15,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = tasks.remove(this.index - 1);
-        ui.showDelete(task, tasks);
+    public String execute(TaskList tasks, DukeResponder responder, Storage storage) {
         try {
+            Task task = tasks.remove(this.index - 1);
             storage.saveTasks(tasks);
-        } catch (IOException e) {
-            ui.showSaveError();
+            return responder.getTaskDeletedMessage(task, tasks);
+        } catch (CannotSaveTasksException e) {
+            return responder.getErrorMessage(e);
         }
-        return false;
     }
 
 }

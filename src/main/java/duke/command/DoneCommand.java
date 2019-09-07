@@ -1,10 +1,9 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-
-import java.io.IOException;
+import duke.core.DukeResponder;
+import duke.exception.CannotSaveTasksException;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 public class DoneCommand extends Command {
 
@@ -15,15 +14,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.get(this.index - 1).markAsDone();
-        ui.showDone(tasks.get(this.index - 1));
+    public String execute(TaskList tasks, DukeResponder responder, Storage storage) {
         try {
+            tasks.get(this.index - 1).markAsDone();
             storage.saveTasks(tasks);
-        } catch (IOException e) {
-            ui.showSaveError();
+            return responder.getTaskDoneMessage(tasks.get(this.index - 1));
+        } catch (CannotSaveTasksException e) {
+            return responder.getErrorMessage(e);
         }
-        return false;
     }
 
 }

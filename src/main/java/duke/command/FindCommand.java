@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.core.DukeResponder;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 public class FindCommand extends Command {
 
@@ -13,10 +13,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Here are the matching tasks in your list:");
-        ui.showTasks(tasks.filter(this.keyword));
-        return false;
+    public String execute(TaskList tasks, DukeResponder responder, Storage storage) {
+        return responder.getTasksMessage(tasks.filter(this.keyword));
     }
 
 }

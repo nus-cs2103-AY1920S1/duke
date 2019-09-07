@@ -6,8 +6,12 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     @Override
-    public String toSaveString() {
+    public String toEncodedString() {
         String isDone = this.isDone ? "1" : "0";
         return "T | " +  isDone + " | " + this.description;
     }
@@ -16,4 +20,5 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
 }

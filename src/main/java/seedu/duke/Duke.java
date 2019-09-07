@@ -32,18 +32,8 @@ public class Duke {
      * @param input User input.
      */
     public String run(String input) {
-        //ui.showIntro();
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
         try {
-            tasks = new TaskList(storage.load());
-        } catch (Exception e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-        try {
-            String fullCommand = input;
-            Command c = Parser.parse(fullCommand, ui);
+            Command c = Parser.parse(input, ui);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.toString();
@@ -53,6 +43,20 @@ public class Duke {
             return ui.showParseError();
         } catch (Exception e) {
             return ui.showExceptionMsg(e);
+        }
+    }
+
+    /**
+     * Loads data file into task list in Duke.
+     */
+    public void load() {
+        ui = new Ui();
+        storage = new Storage("data/duke.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 }

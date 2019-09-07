@@ -80,6 +80,7 @@ public class Ui {
         for (int i = 1; i < size + 1; i++) {
             if (t.getCommandList().get(i - 1).getName().contains(keyword)) {
                 //returns tasks even if they partially match keyword
+                //doesn't have to be the whole word/task
                 sb.append(counter + ".");
                 sb.append(t.getCommandList().get(i - 1) + "\n");
                 counter++;

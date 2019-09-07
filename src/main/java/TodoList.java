@@ -1,8 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TodoList implements Serializable {
     private ArrayList<Task> list;
@@ -31,20 +31,9 @@ public class TodoList implements Serializable {
 
     @Override
     public String toString() {
-        if (this.list.size() == 0) {
-            return "";
-        }
-
-        StringBuilder sb = new StringBuilder();
-        ListIterator<Task> listIterator = this.list.listIterator();
-        while (listIterator.hasNext()) {
-            sb.append(listIterator.nextIndex() + 1);
-            sb.append(".");
-            sb.append(listIterator.next());
-            sb.append("\n");
-        }
-        sb.delete(sb.length() - 1, sb.length());
-        return sb.toString();
+        return IntStream.rangeClosed(1, list.size())
+                        .mapToObj(index -> String.format("%d. %s", index, list.get(index - 1)))
+                        .collect(Collectors.joining("\n"));
     }
 
     List<Task> find(String description) {

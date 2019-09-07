@@ -47,6 +47,7 @@ public class Ui {
 
     /**
      * Prints out the list of tasks.
+     *
      * @param t taskList.
      * @param s Storage where the data has been stored.
      */
@@ -63,6 +64,7 @@ public class Ui {
 
     /**
      * Prints out the error message.
+     *
      * @param e Error.
      */
     public String showError(String e) {
@@ -75,9 +77,9 @@ public class Ui {
         int size = t.getCommandList().size();
         int counter = 1;
         for (int i = 1; i < size + 1; i++) {
-            if (t.getCommandList().get(i-1).getName().contains(keyword)) {
+            if (t.getCommandList().get(i - 1).getName().contains(keyword)) {
                 sb.append(counter + ".");
-                sb.append(t.getCommandList().get(i - 1) +"\n");
+                sb.append(t.getCommandList().get(i - 1) + "\n");
                 counter++;
             }
         }

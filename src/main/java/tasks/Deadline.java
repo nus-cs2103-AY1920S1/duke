@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline object.
+     *
      * @param name Name of the task.
      */
     public Deadline(String name) {
@@ -20,12 +21,14 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline object.
+     *
      * @param name Name of the task.
-     * @param dT Details of the deadline.
+     * @param dT   Details of the deadline.
      * @throws DukeException
      */
     public Deadline(String name, String dT) throws DukeException {
         super(name);
+        assert (!(dT.equals(""))) : "date time empty";
         this.deadlineTime = dT;
         this.dateTime = formatDateTime(dT.trim());
     }
@@ -37,6 +40,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the string given by user to date time.
+     *
      * @param details details of the task.
      * @return the formatted date time.
      * @throws DukeException

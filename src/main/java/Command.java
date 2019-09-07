@@ -13,6 +13,7 @@ public class Command {
 
     /**
      * Constructor for command object.
+     *
      * @param input The input given by the user.
      */
     public Command(String input) {
@@ -21,9 +22,10 @@ public class Command {
 
     /**
      * Executes the command that Duke receieves.
+     *
      * @param ui Ui object.
-     * @param t TaskList object storing list of tasks.
-     * @param s Storage object storing data input by the user.
+     * @param t  TaskList object storing list of tasks.
+     * @param s  Storage object storing data input by the user.
      * @throws DukeException if there is an error with the user input.
      */
     public String execute(Ui ui, TaskList t, Storage s) throws DukeException {

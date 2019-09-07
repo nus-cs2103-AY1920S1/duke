@@ -31,6 +31,7 @@ public class TaskList {
      * @param zeroBasedIndex The given index to be returned.
      */
     public Task get(int zeroBasedIndex) {
+        assert zeroBasedIndex >= 0 && zeroBasedIndex < tasks.size();
         return tasks.get(zeroBasedIndex);
     }
 
@@ -40,6 +41,7 @@ public class TaskList {
      * @param zeroBasedIndex The given index to be deleted.
      */
     public void markTaskAsDone(int zeroBasedIndex) {
+        assert zeroBasedIndex >= 0 && zeroBasedIndex < tasks.size();
         tasks.get(zeroBasedIndex).markAsDone();
     }
 
@@ -49,6 +51,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void add(Task task) {
+        assert task != null;
         tasks.add(task);
     }
 
@@ -82,6 +85,8 @@ public class TaskList {
      * @return An ArrayList containing all tasks containing thg given String in their description.
      */
     public ArrayList<Task> find(String toFind) {
+        assert !toFind.isBlank();
+
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task t : tasks) {
             if (t.getDescription().contains(toFind)) {

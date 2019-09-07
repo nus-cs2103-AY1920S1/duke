@@ -8,7 +8,7 @@ import java.util.List;
  * Deals with interactions with the user and output on CLI.
  */
 public class Ui {
-    public static String HORIZONTAL_LINE = "__________________________________________________\n";
+    public static String HORIZONTAL_LINE = "________________________________________________\n";
     public static String printString = "";
 
     /**

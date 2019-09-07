@@ -7,7 +7,7 @@ import java.time.Month;
 /**
  * Represents a date. A <code>Date</code> object corresponds to a time represented by a day, month and year.
  */
-public class Date {
+public class Date implements Comparable<Date> {
     protected String rawDate;
     protected int day;
     protected int year;
@@ -141,6 +141,30 @@ public class Date {
         return rawDate;
     }
 
+    /**
+     * Returns the processed day.
+     * @return The processed day.
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * Returns the processed month.
+     * @return The processed month.
+     */
+    public Month getMonth() {
+        return month;
+    }
+
+    /**
+     * Returns the processed year.
+     * @return The processed year.
+     */
+    public int getYear() {
+        return year;
+    }
+
     @Override
     public String toString() {
         if ((day % 10) == 1 && day != 11) {
@@ -151,6 +175,56 @@ public class Date {
             return day + "rd of " + month.toString() + " " + year;
         } else {
             return day + "th of " + month.toString() + " " + year;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (!(o instanceof Date)) {
+            return false;
+        } else {
+            Date otherDate = (Date) o;
+            boolean sameDay = (day == otherDate.getDay());
+            boolean sameMonth = (month.equals(otherDate.getMonth()));
+            boolean sameYear = (year == otherDate.getYear());
+            return sameDay && sameMonth && sameYear;
+        }
+    }
+
+    private int compareDays(int otherDay) {
+        return day - otherDay;
+    }
+
+    private int compareMonths(Month otherMonth) {
+        return month.compareTo(otherMonth);
+    }
+
+    private int compareYears(int otherYear) {
+        return year - otherYear;
+    }
+
+    /**
+     * Compares this <code>Date</code> with another. Returns a negative integer, zero, or a positive integer as
+     * this object is less than, equal to, or greater than the specified object.
+     * @param otherDate The other date to be compared with.
+     * @return A negative integer, zero, or a positive integer as this object is less than,
+     * equal to, or greater than the specified object.
+     */
+    public int compareTo(Date otherDate) {
+        if (this.equals(otherDate)) {
+            return 0;
+        } else if (otherDate == null) {
+            return -1;
+        } else if (compareYears(otherDate.getYear()) == 0) {
+            if (compareMonths(otherDate.getMonth()) == 0) {
+                return compareDays(otherDate.getDay());
+            } else {
+                return compareMonths(otherDate.getMonth());
+            }
+        } else {
+            return compareYears(otherDate.getYear());
         }
     }
 }

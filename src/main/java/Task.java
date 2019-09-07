@@ -35,6 +35,9 @@ public abstract class Task implements Serializable {
      * otherwise
      */
     protected boolean descriptionContainsTerm(String searchTerm) {
+        assert description != null : "description not set";
+        assert searchTerm != null : "searchTerm is null";
+        
         return description.contains(searchTerm);
     }
 }

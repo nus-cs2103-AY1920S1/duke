@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        assert dukeImage != null : "dukeImage cannot be null";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I'm Duke\n"
                 + "What can I do for you?", dukeImage));

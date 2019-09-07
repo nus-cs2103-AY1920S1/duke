@@ -1,16 +1,11 @@
 package seedu.duke;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
+import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
+
+import static seedu.duke.Task.DATE_FORMAT;
 
 /**
  * Represents the storage that handles the loading of tasks from the file and saving of tasks in the file.
@@ -45,20 +40,19 @@ public class Storage {
      */
     private static ArrayList<Task> readFile(FileReader fr) throws IOException, ParseException {
         ArrayList<Task> taskList = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
         BufferedReader br = new BufferedReader(fr);
         String line = null;
+
         while ((line = br.readLine()) != null) {
             Task t = null;
             String[] splitArr = line.split(" [|] ");
             if (splitArr[0].equals("T")) {
                 t = new Todo(splitArr[2]);
             } else if (splitArr[0].equals("E")) {
-                Date dateTime = dateFormat.parse(splitArr[3]);
+                Date dateTime = DATE_FORMAT.parse(splitArr[3]);
                 t = new Event(splitArr[2], dateTime);
             } else if (splitArr[0].equals("D")) {
-                Date dateTime = dateFormat.parse(splitArr[3]);
+                Date dateTime = DATE_FORMAT.parse(splitArr[3]);
                 t = new Deadline(splitArr[2], dateTime);
             }
             if (splitArr[1].equals("1")) {

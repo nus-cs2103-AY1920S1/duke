@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
      *
      * @param index the index of the task to be deleted
      */
-    public DeleteCommand(int index) {
+    DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -32,10 +32,12 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        String output = ui.printRemoveMsg() + ui.printLatest(list);
+    assert list != null : "Cannot delete from an empty list";
+    assert list.getSize() >= index : "Index is invalid";
+        String output = Ui.printRemoveMsg() + list.getTask(index) + "\n";
         list.deleteTask(index);
         storage.writeToFile(list);
-        output += ui.printNumTask(list);
+        output += Ui.printNumTask(list);
         return output;
     }
 }

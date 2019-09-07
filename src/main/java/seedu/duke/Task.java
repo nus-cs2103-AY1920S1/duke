@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 /**
  * Represents a task.
  * A <code>Task</code> object corresponds to a task with a command that starts
@@ -7,6 +10,9 @@ package seedu.duke;
  *
  */
 public class Task {
+
+    static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    static final DateFormat PRINT_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH.mm aa");
     private String description;
     boolean isDone;
     int doneIcon;

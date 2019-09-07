@@ -8,7 +8,7 @@ import java.io.IOException;
  * "event", "done", "find" or "bye".
  */
 public abstract class Command {
-    protected boolean exit = false;
+    boolean exit = false;
 
     /**
      * Constructor of the Command class.
@@ -26,14 +26,5 @@ public abstract class Command {
      * @throws IOException on input error
      */
     public abstract String execute(TaskList list, Ui ui, Storage storage) throws IOException;
-
-    /**
-     * Returns whether the program should exit.
-     *
-     * @return the exit variable
-     */
-    public boolean isExit() {
-        return exit;
-    }
 
 }

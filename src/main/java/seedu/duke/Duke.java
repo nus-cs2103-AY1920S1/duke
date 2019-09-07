@@ -45,6 +45,7 @@ public class Duke {
      * Updates the list of tasks in the datafile according to the commands.
      */
     public String run(String input) {
+        assert !input.equals("") : "Input cannot be empty";
         try {
             Command c = Parser.parse(input, ui);
             return c.execute(tasks, ui, storage);

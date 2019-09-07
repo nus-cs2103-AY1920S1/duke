@@ -1,9 +1,10 @@
 package seedu.duke;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+
+import static seedu.duke.Task.DATE_FORMAT;
 
 /**
  * Parser is a class that deals with making sense of the user's commands.
@@ -11,7 +12,6 @@ import java.util.Date;
 public class Parser {
 
     private static int indexOfByAt = 0;
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
     private static Date dateTime;
 
     /**
@@ -30,7 +30,8 @@ public class Parser {
      * @throws ParseException exception thrown when the string is of a wrong format
      */
     public static Date dateParse(String str) throws ParseException {
-        return dateFormat.parse(str);
+        assert !str.equals("") : "The date cannot be an empty string";
+        return DATE_FORMAT.parse(str);
     }
 
     /**
@@ -43,6 +44,7 @@ public class Parser {
      * @throws ParseException exception thrown when the timestamp is of incorrect format
      */
     public static Command parse(String command, Ui ui) throws DukeException, ParseException {
+        assert !command.equals("") : "The description of the command cannot be an empty string";
         if (command.equals("bye")) {
             return new ExitCommand();
         }

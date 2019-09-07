@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -11,9 +9,7 @@ import java.util.Date;
  */
 public class Event extends Task {
 
-    protected SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    protected DateFormat printFormat = new SimpleDateFormat("dd/MM/yyyy HH.mm aa");
-    protected Date dateTime;
+    private Date dateTime;
 
     /**
      * Constructor for Event class.
@@ -33,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + printFormat.format(dateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + PRINT_FORMAT.format(dateTime) + ")";
     }
 
     /**
@@ -44,7 +40,7 @@ public class Event extends Task {
      */
     @Override
     public String writeToFile() {
-        return ("E " + super.writeToFile() + " | " + dateFormat.format(dateTime));
+        return ("E " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime));
     }
 
 }

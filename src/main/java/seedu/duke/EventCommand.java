@@ -10,8 +10,8 @@ import java.util.Date;
  */
 public class EventCommand extends Command {
 
-    String command;
-    Date dateTime;
+    private String command;
+    private Date dateTime;
 
     /**
      * Constructor of the EventCommand.

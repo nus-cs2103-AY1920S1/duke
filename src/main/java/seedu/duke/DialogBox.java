@@ -6,10 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,7 +22,7 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
     @FXML
-    private TextArea dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -43,6 +44,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(35, 45, 40));
     }
 
     /**
@@ -63,6 +65,7 @@ public class DialogBox extends HBox {
      * @return the DialogBox for User
      */
     public static DialogBox getUserDialog(String text, Image img) {
+        assert !text.equals("") : "Text of user cannot be empty";
         return new DialogBox(text, img);
     }
 
@@ -74,6 +77,7 @@ public class DialogBox extends HBox {
      * @return the DialogBox for Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {
+        assert !text.equals("") : "Text of duke cannot be empty";
         var db = new DialogBox(text, img);
         db.flip();
         return db;

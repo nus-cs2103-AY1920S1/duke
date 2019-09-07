@@ -45,6 +45,7 @@ public class Ui {
      * @param list the list of tasks
      */
     public static String printList(TaskList list) {
+        assert list != null : "TaskList cannot be null";
         String tasksMsg = "Here are the tasks in your list:\n";
         for (int j = 0; (j < list.getSize()) && list.getTask(j) != null; j++) {
             tasksMsg += j + 1 + "." + list.getTask(j) + "\n";
@@ -81,6 +82,8 @@ public class Ui {
      * @param list the list of tasks
      */
     public static String printLatest(TaskList list) {
+        //assert false : "list is now not null";
+        // assert list != null : "TaskList cannot be null";
         return list.getTask(list.getSize() - 1) + "\n";
     }
 

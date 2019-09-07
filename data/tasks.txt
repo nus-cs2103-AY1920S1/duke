@@ -2,8 +2,7 @@ E | 1 | music fest | 12/04/4121 1731
 D | 1 | quest | 31/08/3241 1435
 E | 1 | art | 05/05/1312 0331
 D | 0 | eve | 01/03/1312 1832
-T | 1 | art painting
 E | 1 | open house | 05/06/2413 0524
 E | 1 | new year eve | 05/06/2411 1712
-D | 0 | assignment | 04/06/2313 0633
-T | 0 | exercise
+D | 1 | assignment | 04/06/2313 0633
+T | 0 | art painting

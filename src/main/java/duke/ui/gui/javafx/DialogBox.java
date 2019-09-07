@@ -20,7 +20,7 @@ import java.util.Collections;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
+class DialogBox extends HBox {
     private final Circle displayPictureClip = new Circle(50, 50, 50);
     @FXML
     private Label dialog;

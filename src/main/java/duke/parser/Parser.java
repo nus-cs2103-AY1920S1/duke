@@ -46,11 +46,11 @@ public class Parser {
             command = new ByeCommand();
             break;
         case "todo":
-            if (arr.length == 2) {
-                command = new ToDoCommand(new ToDo(arr[1]));
-            } else {
+            if (arr.length != 2) {
                 throw new IllegalArgumentException(emptyToDoErrorMessage);
             }
+
+            command = new ToDoCommand(new ToDo(arr[1]));
             break;
         case "deadline":
             task = arr[1].split("/by")[0].trim();

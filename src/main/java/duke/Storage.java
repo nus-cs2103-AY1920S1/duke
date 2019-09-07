@@ -31,6 +31,8 @@ public class Storage {
         if (!directory.exists()) {
             directory.mkdir();
         }
+
+        assert directory.exists();
     }
 
     /**

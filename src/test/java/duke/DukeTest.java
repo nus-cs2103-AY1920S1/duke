@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
     @Test
     public void testOne() {
-        Duke duke = new Duke(Duke.DATA_FILE_TASKS);
+        Duke duke = new Duke();
         assertEquals(true, true, "the truth");
     }
 }

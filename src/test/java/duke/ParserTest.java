@@ -7,11 +7,18 @@ public class ParserTest {
 
     public Command cmd;
 
+    /**
+     * Asserts that a Duke Exception is thrown when the parser is given a certain input.
+     * @param parseInput Input given to the parser
+     * @param message Message displayed if no Duke Exception is thrown
+     */
     public void assertError(String parseInput, String message) {
         try {
             cmd = Parser.parse(parseInput);
             throw new Error(message);
-        } catch (DukeException ignored) {}
+        } catch (DukeException ignored) {
+            // Ignore the Duke Exception because it's the expected behaviour
+        }
     }
 
     @Test

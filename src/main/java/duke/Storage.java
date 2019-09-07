@@ -58,6 +58,8 @@ public class Storage {
             String taskDescription = getTaskDetail(taskDetails, 2);
 
             Task task = getTask(taskDetails, taskType, taskDescription);
+            assert (task != null) : "Data in file should be stored in the correct format "
+                            + "and should not cause exceptions.";
             setTaskDoneStatus(taskDoneStatus, task);
             tasks.add(task);
         }

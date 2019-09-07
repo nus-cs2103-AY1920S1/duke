@@ -30,6 +30,7 @@ public class Time {
      * @throws InvalidTimeException If time is in the wrong format or invalid.
      */
     protected void processTime() throws InvalidTimeException {
+        assert (isNull == false) : "A null raw time should not be processed.";
         if (isInvalidTime(rawTime)) {
             throw new InvalidTimeException(
                 "☹ OOPS!!! Please specify a valid time. "

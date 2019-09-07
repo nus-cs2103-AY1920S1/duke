@@ -87,17 +87,13 @@ public class DateTime {
      * @exception DateException if the month number is invalid
      */
     public static String getTime(String time) throws DateException {
-        String timeString = "";
-        String hours = time.substring(0, 2);
-        timeString += getHours(hours);
-        String minutes = time.substring(2,4);
-        timeString += getMinutes(minutes);
+        String hours = time.substring(0,2);
+        String timeString = getHours(hours) + getMinutes(time.substring(2,4));
         if (Integer.parseInt(hours) < 12) {
-            timeString += "am";
+            return timeString + "am";
         } else {
-            timeString += "pm";
+            return timeString + "pm";
         }
-        return timeString;
     }
 
     /**
@@ -114,11 +110,10 @@ public class DateTime {
         } else {
             hourNum = hourNum % 12;
             if (hourNum == 0) {
-                numHour = "12";
+                return "12";
             } else {
-                numHour = hourNum + "";
+                return hourNum + "";
             }
-            return numHour;
         }
     }
 

@@ -12,5 +12,6 @@ public class DeleteTaskCommand extends Command {
      */
     DeleteTaskCommand(String taskNumber) {
         super(Type.COMMAND_DELETE_TASK, taskNumber);
+        assert taskNumber != null;
     }
 }

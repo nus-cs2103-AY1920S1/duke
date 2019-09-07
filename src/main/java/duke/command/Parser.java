@@ -25,6 +25,7 @@ public class Parser {
      * @throws DukeException when the input cannot be formatted.
      */
     public static String parseDateTime(String dateTimeString) throws DukeException {
+        assert dateTimeString != null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime dateAndTime = LocalDateTime.parse(dateTimeString, formatter);
@@ -65,6 +66,7 @@ public class Parser {
      * Helper method to format a positive integer into it's ordinal form.
      */
     private static String getIntegerOrdinal(int integer) {
+        assert (integer <= 31 && integer > 0);
         int remainderHundred = integer % 100;
         if (remainderHundred > 9 && remainderHundred < 21) {
             return integer + "th";

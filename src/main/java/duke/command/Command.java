@@ -19,6 +19,8 @@ public abstract class Command {
      * @param arguments The arguments for the Command, if any
      */
     Command(Type type, String... arguments) {
+        assert type != null;
+        assert arguments != null;
         this.type = type;
         this.arguments = arguments;
     }
@@ -30,6 +32,7 @@ public abstract class Command {
      * @return The enumerated Type of the command.
      */
     public static Type getTypeOf(Command command) {
+        assert command != null;
         return command.type;
     }
 
@@ -40,6 +43,7 @@ public abstract class Command {
      * @return The arguments provided along with the Command, in a String[].
      */
     public static String[] getArgumentsUsed(Command command) {
+        assert command != null;
         return command.arguments;
     }
 }

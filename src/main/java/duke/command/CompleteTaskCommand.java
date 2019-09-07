@@ -12,5 +12,6 @@ public class CompleteTaskCommand extends Command {
      */
     CompleteTaskCommand(String taskNumber) {
         super(Type.COMMAND_COMPLETE_TASK, taskNumber);
+        assert taskNumber != null;
     }
 }

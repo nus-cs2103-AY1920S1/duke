@@ -16,5 +16,6 @@ public class DukeCorruptFileException extends DukeException {
      */
     public DukeCorruptFileException(String filePath) {
         super("The file at ", filePath, " is formatted incorrectly.");
+        assert filePath != null;
     }
 }

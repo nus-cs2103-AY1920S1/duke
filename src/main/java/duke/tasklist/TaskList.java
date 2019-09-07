@@ -44,6 +44,7 @@ public class TaskList {
      * @throws DukeException when an error occurs when trying to delete a Task from the TaskList
      */
     public Task delete(int id) throws DukeException {
+        assert id > 0;
         try {
             return taskList.remove(id - 1);
         } catch (IndexOutOfBoundsException ex) {
@@ -60,6 +61,7 @@ public class TaskList {
      * @throws DukeException when an error occurs when trying to delete the Task from the list
      */
     public Task delete(String id) throws DukeException {
+        assert id != null;
         try {
             return delete(Integer.parseInt(id));
         } catch (NumberFormatException ex) {
@@ -74,6 +76,7 @@ public class TaskList {
      * @return The Task which was added to the TaskList
      */
     public Task add(Task task) {
+        assert task != null;
         taskList.add(task);
         return task;
     }
@@ -87,6 +90,7 @@ public class TaskList {
      * @throws DukeException when an error occurs when trying to mark the task as completed
      */
     public Task complete(int id) throws DukeException {
+        assert id > 0;
         try {
             return taskList.get(id - 1).complete();
         } catch (IndexOutOfBoundsException ex) {
@@ -102,6 +106,7 @@ public class TaskList {
      * @throws DukeException when an error occurs when trying to mark the Task as completed
      */
     public Task complete(String id) throws DukeException {
+        assert id != null;
         try {
             return complete(Integer.parseInt(id));
         } catch (NumberFormatException ex) {
@@ -116,6 +121,7 @@ public class TaskList {
      * @return An ArrayList containing the Tasks which contain the keyword
      */
     public ArrayList<Task> search(String keyword) {
+        assert keyword != null;
         //searches the string representation of the class
         ArrayList<Task> results = new ArrayList<>();
         for (Task t : this.taskList) {

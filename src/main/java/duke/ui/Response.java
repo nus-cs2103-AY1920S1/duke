@@ -14,6 +14,7 @@ public class Response {
     private boolean isActive;
 
     private Response(String message, DukeException dukeException, boolean isActive) {
+        assert message != null : "Response message cannot be null";
         this.message = message;
         this.dukeException = Optional.ofNullable(dukeException);
         this.isActive = isActive;
@@ -29,6 +30,7 @@ public class Response {
      * @return The Response from successfully executing a Command
      */
     public static Response fromString(String message, boolean isActive) {
+        assert message != null;
         return new Response(message, null, isActive);
     }
 
@@ -44,6 +46,7 @@ public class Response {
      * @return The Response due to the error that occurred in Duke.
      */
     public static Response fromError(DukeException e, boolean isActive) {
+        assert e != null : "DukeException cannot be null for error Response";
         return new Response(e.getMessage(), e, isActive);
     }
 
@@ -57,9 +60,9 @@ public class Response {
     }
 
     /**
-     * Returns true is Duke can take further user input, false otherwise.
+     * Returns true if Response indicated Duke can take further user input, false otherwise.
      *
-     * @return True is Duke can take further user input, False otherwise.
+     * @return True if Response indicates Duke can take further user input, False otherwise.
      */
     public boolean isActive() {
         return isActive;

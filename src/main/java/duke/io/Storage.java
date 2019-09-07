@@ -28,11 +28,14 @@ public class Storage {
      * @param path The path to the file from the src/ directory
      */
     public Storage(String path) {
+        assert path != null;
         filePath = "src/".concat(path);
     }
 
 
     private static void writeFromDeadline(Deadline task, FileWriter file) throws IOException {
+        assert task != null;
+        assert file != null;
         file.append("D");
         file.append(System.lineSeparator());
         file.append(task.isComplete() ? "1" : "0");
@@ -44,6 +47,8 @@ public class Storage {
     }
 
     private static void writeFromEvent(Event task, FileWriter file) throws IOException {
+        assert task != null;
+        assert file != null;
         file.append("E");
         file.append(System.lineSeparator());
         file.append(task.isComplete() ? "1" : "0");
@@ -55,6 +60,8 @@ public class Storage {
     }
 
     private static void writeFromToDo(ToDo task, FileWriter file) throws IOException {
+        assert task != null;
+        assert file != null;
         file.append("T");
         file.append(System.lineSeparator());
         file.append(task.isComplete() ? "1" : "0");
@@ -105,18 +112,21 @@ public class Storage {
     }
 
     private Deadline readAsDeadline(BufferedReader file) throws IOException {
+        assert file != null;
         boolean isComplete = !file.readLine().equals("0");
 
         return new Deadline(isComplete, file.readLine(), file.readLine());
     }
 
     private ToDo readAsToDo(BufferedReader file) throws IOException {
+        assert file != null;
         boolean isComplete = !file.readLine().equals("0");
 
         return new ToDo(isComplete, file.readLine());
     }
 
     private Event readAsEvent(BufferedReader file) throws IOException {
+        assert file != null;
         boolean isComplete = !file.readLine().equals("0");
 
         return new Event(isComplete, file.readLine(), file.readLine());
@@ -129,6 +139,7 @@ public class Storage {
      * @throws DukeException when error occurs while trying to save the TaskList
      */
     public void save(TaskList taskList) throws DukeException {
+        assert taskList != null;
         FileWriter file;
         try {
             file = new FileWriter(filePath);
@@ -164,15 +175,3 @@ public class Storage {
     }
 
 }
-//saved file format
-/*
-    total_#_of_tasks
-    task_type
-    task_completion_status
-    task_description
-    task_time(depends on type if needed);
-    task_type...
-    ...
-    ...
-    ...
- */

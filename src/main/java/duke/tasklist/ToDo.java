@@ -12,6 +12,7 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+        assert description != null;
     }
 
     /**
@@ -22,6 +23,7 @@ public class ToDo extends Task {
      */
     public ToDo(boolean isComplete, String description) {
         super(description);
+        assert description != null;
         taskCompletionStatus = isComplete;
     }
 

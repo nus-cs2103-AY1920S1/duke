@@ -18,6 +18,8 @@ public class Event extends Task {
      */
     public Event(String description, String time) {
         super(description);
+        assert time != null : "Event time cannot be null";
+        assert description != null;
         try {
             this.time = Parser.parseDateTime(time);
         } catch (DukeException e) {
@@ -34,6 +36,10 @@ public class Event extends Task {
      */
     public Event(boolean isComplete, String description, String time) {
         super(description);
+
+        assert time != null : "Event time cannot be null";
+        assert description != null;
+
         try {
             this.time = Parser.parseDateTime(time);
         } catch (DukeException e) {

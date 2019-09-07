@@ -44,6 +44,7 @@ public enum Type {
      * @return The number of parameters expected for a Command of the Type.
      */
     public static int getNumberOfParametersExpectedFor(Type type) {
+        assert type != null;
         return type.parametersExpected;
     }
 
@@ -54,6 +55,7 @@ public enum Type {
      * @return An ArrayList of the parameter names
      */
     public static ArrayList<String> getParametersFor(Type type) {
+        assert type != null;
         return new ArrayList<String>(type.parameters);
     }
 
@@ -65,6 +67,7 @@ public enum Type {
      * @return An ArrayList of the delimiters
      */
     public static ArrayList<String> getDelimitersFor(Type type) {
+        assert type != null;
         return new ArrayList<String>(type.delimiters);
     }
 }

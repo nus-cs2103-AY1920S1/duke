@@ -52,7 +52,7 @@ public class Storage {
                 if (type.equals("D")) {
                     loadDeadline(tasks, information, isDone, description);
                 } else if (type.equals("T")) {
-                    loadTodo(tasks, isDone, description);
+                    loadTodo(tasks, information, isDone, description);
                 } else if (type.equals("E")) {
                     loadEvent(tasks, information, isDone, description);
                 } else {
@@ -63,6 +63,19 @@ public class Storage {
         } catch (FileNotFoundException | InvalidDateException | InvalidTimeException exception) {
             throw new StorageException("☹ OOPS!!! Something must have gone wrong during storage.");
         }
+    }
+
+    private ArrayList<String> getTags(String tagsAsStrings) {
+        boolean hasNoTags = tagsAsStrings.length() == 0;
+        if (hasNoTags) {
+            return new ArrayList<String>();
+        }
+        String[] individualTags = tagsAsStrings.split("#");
+        ArrayList<String> tags = new ArrayList<>();
+        for (int i = 1; i < individualTags.length; i++) {
+            tags.add(individualTags[i].trim());
+        }
+        return tags;
     }
 
     private String getType(String[] information) {
@@ -83,24 +96,31 @@ public class Storage {
         String startTime = information.length > 4 ? information[4] : "";
         String endDate = information.length > 5 ? information[5] : "";
         String endTime = information.length > 6 ? information[6] : "";
+        String tagsAsStrings = information.length > 7 ? information[7].trim() : "";
+        ArrayList<String> tags = getTags(tagsAsStrings);
         Event event = new Event(description, new Date(startDate), new Time(startTime), new Date(endDate),
                 new Time(endTime));
+        addTags(event, tags);
         if (isDone) {
             event.setDone();
         }
         tasks.add(event);
     }
 
-    private void loadTodo(ArrayList<Task> tasks, boolean isDone, String description) {
+    private void loadTodo(ArrayList<Task> tasks, String[] information, boolean isDone, String description) {
         Todo todo = new Todo(description);
         if (isDone) {
             todo.setDone();
         }
+        String tagsAsStrings = information.length > 3 ? information[3].trim() : "";
+        ArrayList<String> tags = getTags(tagsAsStrings);
+        addTags(todo, tags);
         tasks.add(todo);
     }
 
     private void loadDeadline(ArrayList<Task> tasks, String[] information,
-                              boolean isDone, String description) throws InvalidDateException, InvalidTimeException {
+                              boolean isDone, String description)
+            throws InvalidDateException, InvalidTimeException {
         String date = information[3];
         String time = "";
         boolean hasTimeDetails = information.length == 5;
@@ -111,7 +131,16 @@ public class Storage {
         if (isDone) {
             deadline.setDone();
         }
+        String tagsAsStrings = information.length > 5 ? information[5].trim() : "";
+        ArrayList<String> tags = getTags(tagsAsStrings);
+        addTags(deadline, tags);
         tasks.add(deadline);
+    }
+
+    private void addTags(Task task, ArrayList<String> tags) {
+        for (int i = 0; i < tags.size(); i++) {
+            task.addTag(tags.get(i));
+        }
     }
 
     /**
@@ -128,13 +157,14 @@ public class Storage {
                 String type = task.getType();
                 int isDone = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
+                String tags = task.getTagsAsStrings();
                 StringBuilder taskInformation = new StringBuilder();
                 if (type.equals("D")) {
-                    writeDeadline((Deadline) task, type, isDone, description, taskInformation);
+                    writeDeadline((Deadline) task, type, isDone, description, taskInformation, tags);
                 } else if (type.equals("T")) {
-                    writeTodo(type, isDone, description, taskInformation);
+                    writeTodo(type, isDone, description, taskInformation, tags);
                 } else if (type.equals("E")) {
-                    writeEvent((Event) task, type, isDone, description, taskInformation);
+                    writeEvent((Event) task, type, isDone, description, taskInformation, tags);
                 }
                 fileWriter.write(taskInformation.toString() + "\n");
             }
@@ -144,25 +174,27 @@ public class Storage {
         }
     }
 
-    private void writeEvent(Event task, String type, int isDone, String description, StringBuilder taskInformation) {
+    private void writeEvent(Event task, String type, int isDone, String description, StringBuilder taskInformation,
+                            String tags) {
         Event event = task;
         String startDate = event.getUnprocessedStartDate();
         String startTime = event.getUnprocessedStartTime();
         String endDate = event.getUnprocessedEndDate();
         String endTime = event.getUnprocessedEndTime();
         taskInformation.append(type + " | " + isDone + " | " + description + " | ");
-        taskInformation.append(startDate + " | " + startTime + " | " + endDate + " | " + endTime);
+        taskInformation.append(startDate + " | " + startTime + " | " + endDate + " | " + endTime + " | " + tags);
     }
 
-    private void writeTodo(String type, int isDone, String description, StringBuilder taskInformation) {
-        taskInformation.append(type + " | " + isDone + " | " + description);
+    private void writeTodo(String type, int isDone, String description, StringBuilder taskInformation, String tags) {
+        taskInformation.append(type + " | " + isDone + " | " + description + " | " + tags);
     }
 
     private void writeDeadline(Deadline task, String type, int isDone,
-                               String description, StringBuilder taskInformation) {
+                               String description, StringBuilder taskInformation, String tags) {
         Deadline deadline = task;
         String date = deadline.getUnprocessedDate();
         String time = deadline.getUnprocessedTime();
-        taskInformation.append(type + " | " + isDone + " | " + description + " | " + date + " | " + time);
+        taskInformation.append(type + " | " + isDone + " | " + description + " | " + date + " | " + time + " | "
+                + tags);
     }
 }

@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.MissingDescriptionException;
+import duke.task.Task;
 
 /**
  * Represents a command.
@@ -26,5 +28,20 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    protected void addTags(Task task, String tags) throws MissingDescriptionException {
+        boolean hasNoTag = tags.length() == 0;
+        if (hasNoTag) {
+            throw new MissingDescriptionException("tag");
+        }
+        String[] individualTags = tags.split("#");
+        for (int i = 0; i < individualTags.length; i++) {
+            boolean isEmptyTag = individualTags[i].trim().length() == 0;
+            if (isEmptyTag) {
+                continue;
+            }
+            task.addTag(individualTags[i].trim());
+        }
     }
 }

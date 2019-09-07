@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Task.
  * Parent class of all other types of tasks.
@@ -8,6 +10,7 @@ package duke.task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> tags = new ArrayList<>();
 
     /**
      * Constructor for <code>Task</code>.
@@ -50,6 +53,26 @@ public abstract class Task {
     }
 
     /**
+     * Adds tags to the task.
+     * @param tag Input tag.
+     */
+    public void addTag(String tag) {
+        tags.add(tag);
+    }
+
+    /**
+     * Returns the tags in the hashtag form (with a preceding #)
+     * @return All tags.
+     */
+    public String getTagsAsStrings() {
+        StringBuilder hashTags = new StringBuilder();
+        for (int i = 0; i < tags.size(); i++) {
+            hashTags.append("#" + tags.get(i) + " ");
+        }
+        return hashTags.toString().trim();
+    }
+
+    /**
      * Checks the type of the task.
      * @return Type of the task.
      */
@@ -57,6 +80,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description + " " + getTagsAsStrings();
     }
 }

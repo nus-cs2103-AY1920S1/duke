@@ -46,7 +46,17 @@ public class AddEventCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws MissingDescriptionException, InsufficientDetailsException {
-        String[] detailsSplit = details.split("/at");
+        String[] detailsSplitFromTags = details.split("#");
+        boolean hasSpecifiedTags = detailsSplitFromTags.length != 1;
+        String tags = "";
+        if (hasSpecifiedTags) {
+            tags = detailsSplitFromTags[1].trim();
+            boolean hasNoTag = tags.length() == 0;
+            if (hasNoTag) {
+                throw new MissingDescriptionException("tag");
+            }
+        }
+        String[] detailsSplit = detailsSplitFromTags[0].trim().split("/at");
         boolean descriptionIsEmpty = detailsSplit.length == 0 || getEvent(detailsSplit).length() == 0;
         boolean scheduleTimeIsEmpty = detailsSplit.length < 2 || getTimings(detailsSplit).length() == 0;
         if (descriptionIsEmpty) {
@@ -56,13 +66,14 @@ public class AddEventCommand extends Command {
             throw new InsufficientDetailsException("☹ OOPS!!! The description of an event requires a task and/or"
                     + "a scheduled time");
         }
-        addEvent(tasks, ui, storage, detailsSplit);
+        addEvent(tasks, ui, storage, detailsSplit, tags);
     }
 
-    private void addEvent(TaskList tasks, Ui ui, Storage storage, String[] detailsSplit) {
+    private void addEvent(TaskList tasks, Ui ui, Storage storage, String[] detailsSplit, String tags) {
         try {
             Task taskEvent = createEvent(detailsSplit);
             tasks.addTask(taskEvent);
+            super.addTags(taskEvent, tags);
             int numberOfTasks = tasks.getListSize();
             ui.printAddedMessage(taskEvent, numberOfTasks);
             storage.writeToHardDisk(tasks);
@@ -106,6 +117,7 @@ public class AddEventCommand extends Command {
         }
         return new Time(startTime);
     }
+
 
     private Date createEndDate(String endDetails) throws InvalidDateException {
         String[] endDateAndTimeSplit = endDetails.split(" ");

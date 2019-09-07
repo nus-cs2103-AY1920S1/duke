@@ -37,17 +37,24 @@ public class AddTodoCommand extends Command {
      */
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException {
-        boolean descriptionIsEmpty = details.trim().length() == 0;
+        String[] detailsSplitFromTags = details.split("#");
+        boolean hasSpecifiedTags = detailsSplitFromTags.length != 1;
+        String tags = "";
+        if (hasSpecifiedTags) {
+            tags = detailsSplitFromTags[1].trim();
+        }
+        boolean descriptionIsEmpty = detailsSplitFromTags[0].trim().length() == 0;
         if (descriptionIsEmpty) {
             throw new MissingDescriptionException("todo");
         }
-        addTodo(tasks, ui, storage);
+        addTodo(tasks, ui, storage, detailsSplitFromTags[0], tags);
     }
 
-    private void addTodo(TaskList tasks, Ui ui, Storage storage) {
+    private void addTodo(TaskList tasks, Ui ui, Storage storage, String description, String tags) {
         try {
-            Task todo = new Todo(details.trim());
+            Task todo = new Todo(description.trim());
             tasks.addTask(todo);
+            super.addTags(todo, tags);
             int numberOfTasks = tasks.getListSize();
             ui.printAddedMessage(todo, numberOfTasks);
             storage.writeToHardDisk(tasks);

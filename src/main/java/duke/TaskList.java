@@ -67,4 +67,8 @@ public class TaskList {
     public Task getTask(int index) {
         return tasks.get(index);
     }
+
+    public void addTag(int index, String tag) {
+        tasks.get(index).addTag(tag);
+    }
 }

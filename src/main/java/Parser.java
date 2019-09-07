@@ -65,6 +65,7 @@ class Parser {
                 if (details.length == 1) {
                     throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
                 }
+
                 String[] dates = details[1].trim().split("-");
                 Date startPeriod = formatter.parse(dates[0].trim());
                 Date endPeriod = formatter.parse(dates[1].trim());

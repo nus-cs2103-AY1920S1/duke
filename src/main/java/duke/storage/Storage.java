@@ -31,6 +31,8 @@ public class Storage {
     public Storage(String filePath) throws IOException {
 
         file = new File(filePath);
+
+        assert file != null;
         if (! file.exists()) {
             file.getParentFile().mkdir();
             file.createNewFile();

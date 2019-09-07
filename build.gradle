@@ -31,11 +31,31 @@ checkstyle {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.0"
+    mergeServiceFiles()
+}
+
+task shadowJarGui(type: Jar, dependsOn: shadowJar) {
+    group = "shadow"
+    description = "Builds a jar of the gui version of duke"
+    archiveBaseName = "dukeGui"
+    archiveVersion = "0.2.0"
     archiveClassifier = null
     archiveAppendix = null
+    manifest.attributes 'Main-Class': 'core.Launcher'
+    from zipTree(shadowJar.archivePath)
 }
+
+task shadowJarCli(type: Jar, dependsOn: shadowJar) {
+    group = "shadow"
+    description = "Builds a jar of the cli version of duke"
+    archiveBaseName = "dukeCli"
+    archiveVersion = "0.2.0"
+    archiveClassifier = null
+    archiveAppendix = null
+    manifest.attributes 'Main-Class': 'core.Duke'
+    from zipTree(shadowJar.archivePath)
+}
+
 
 javafx {
     version = "11.0.2"

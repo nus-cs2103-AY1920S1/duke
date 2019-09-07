@@ -28,7 +28,7 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printMessage("\t Here are the tasks in your list: ");
         for (int i = 0; i < tasks.getListSize(); i++) {
-            System.out.println("\t " + (i + 1) + ". " + tasks.getTask(i));
+            ui.printMessage("\t " + (i + 1) + ". " + tasks.getTask(i));
         }
     }
 

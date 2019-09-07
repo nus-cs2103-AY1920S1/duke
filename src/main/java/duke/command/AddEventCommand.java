@@ -6,6 +6,11 @@ import duke.Ui;
 import duke.calendar.Date;
 import duke.calendar.Time;
 import duke.exception.DukeException;
+import duke.exception.InsufficientDetailsException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidTimeException;
+import duke.exception.MissingDescriptionException;
 import duke.task.Event;
 import duke.task.Task;
 
@@ -36,57 +41,118 @@ public class AddEventCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> which handles user input and outputs.
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
-     * @throws DukeException If insufficient or incorrect details are provided.
+     * @throws MissingDescriptionException If description is missing.
+     * @throws InsufficientDetailsException If insufficient details are given.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MissingDescriptionException, InsufficientDetailsException {
         String[] detailsSplit = details.split("/at");
-        if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        boolean descriptionIsEmpty = detailsSplit.length == 0 || getEvent(detailsSplit).length() == 0;
+        boolean scheduleTimeIsEmpty = detailsSplit.length < 2 || getTimings(detailsSplit).length() == 0;
+        if (descriptionIsEmpty) {
+            throw new MissingDescriptionException("event");
         }
-        if (detailsSplit.length < 2 || detailsSplit[1].trim().length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of an event requires a task and/or"
+        if (scheduleTimeIsEmpty) {
+            throw new InsufficientDetailsException("☹ OOPS!!! The description of an event requires a task and/or"
                     + "a scheduled time");
         }
-        String event = detailsSplit[0].trim();
-        String timings = detailsSplit[1].trim();
+        addEvent(tasks, ui, storage, detailsSplit);
+    }
+
+    private void addEvent(TaskList tasks, Ui ui, Storage storage, String[] detailsSplit) {
         try {
-            String[] startAndEndSplit = timings.split("/to");
-            if (startAndEndSplit[0].trim().length() == 0) {
-                throw new DukeException("☹ OOPS!!! Please input a start time.");
-            }
-            String startDetails = startAndEndSplit[0].trim();
-            String[] startDateAndTimeSplit = startDetails.split(" ");
-            String startDate = startDateAndTimeSplit[0];
-            String startTime = "";
-            if (startDateAndTimeSplit.length == 2) {
-                startTime = startDateAndTimeSplit[1];
-            } else if (startDateAndTimeSplit.length > 2) {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            String endDetails = "";
-            String endDate = "";
-            String endTime = "";
-            if (startAndEndSplit.length == 2) {
-                endDetails = startAndEndSplit[1].trim();
-                String[] endDateAndTimeSplit = endDetails.split(" ");
-                endDate = endDateAndTimeSplit[0];
-                if (endDateAndTimeSplit.length == 2) {
-                    endTime = endDateAndTimeSplit[1];
-                } else if (endDateAndTimeSplit.length > 2) {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            }
-            Date eventStartDate = new Date(startDate);
-            Time eventStartTime = new Time(startTime);
-            Date eventEndDate = new Date(endDate);
-            Time eventEndTime = new Time(endTime);
-            Task taskEvent = new Event(event, eventStartDate, eventStartTime, eventEndDate, eventEndTime);
+            Task taskEvent = createEvent(detailsSplit);
             tasks.addTask(taskEvent);
             int numberOfTasks = tasks.getListSize();
             ui.printAddedMessage(taskEvent, numberOfTasks);
             storage.writeToHardDisk(tasks);
         } catch (DukeException exception) {
             ui.printException(exception);
+        }
+    }
+
+    private Task createEvent(String[] detailsSplit) throws InsufficientDetailsException, InvalidInputException,
+            InvalidTimeException, InvalidDateException {
+        String event = getEvent(detailsSplit);
+        String timings = getTimings(detailsSplit);
+        String startDetails = getStartDetails(timings);
+        boolean noStartDetails = startDetails.length() == 0;
+        if (noStartDetails) {
+            throw new InsufficientDetailsException("☹ OOPS!!! Please input a start date/time.");
+        }
+        String endDetails = getEndDetails(timings);
+        Date eventStartDate = createStartDate(startDetails);
+        Time eventStartTime = createStartTime(startDetails);
+        Date eventEndDate = createEndDate(endDetails);
+        Time eventEndTime = createEndTime(endDetails);
+        return new Event(event, eventStartDate, eventStartTime, eventEndDate, eventEndTime);
+    }
+
+    private Date createStartDate(String startDetails) throws InvalidDateException {
+        String[] startDateAndTimeSplit = startDetails.split(" ");
+        String startDate = getDate(startDateAndTimeSplit);
+        return new Date(startDate);
+    }
+
+    private Time createStartTime(String startDetails) throws InvalidInputException, InvalidTimeException {
+        String[] startDateAndTimeSplit = startDetails.split(" ");
+        String startTime = "";
+        boolean hasStartTime = startDateAndTimeSplit.length == 2;
+        boolean hasWrongFormat = startDateAndTimeSplit.length > 2;
+        if (hasStartTime) {
+            startTime = getTime(startDateAndTimeSplit);
+        } else if (hasWrongFormat) {
+            throw new InvalidInputException();
+        }
+        return new Time(startTime);
+    }
+
+    private Date createEndDate(String endDetails) throws InvalidDateException {
+        String[] endDateAndTimeSplit = endDetails.split(" ");
+        String endDate = getDate(endDateAndTimeSplit);
+        return new Date(endDate);
+    }
+
+    private Time createEndTime(String endDetails) throws InvalidInputException, InvalidTimeException {
+        String[] endDateAndTimeSplit = endDetails.split(" ");
+        String endTime = "";
+        boolean hasEndTime = endDateAndTimeSplit.length == 2;
+        boolean hasWrongFormat = endDateAndTimeSplit.length > 2;
+        if (hasEndTime) {
+            endTime = getTime(endDateAndTimeSplit);
+        } else if (hasWrongFormat) {
+            throw new InvalidInputException();
+        }
+        return new Time(endTime);
+    }
+
+    private String getEvent(String[] detailsSplit) {
+        return detailsSplit[0].trim();
+    }
+
+    private String getTimings(String[] detailsSplit) {
+        return detailsSplit[1].trim();
+    }
+
+    private String getStartDetails(String timings) {
+        String[] startAndEndSplit = timings.split("/to");
+        return startAndEndSplit[0].trim();
+    }
+
+    private String getDate(String[] dateAndTimeSplit) {
+        return dateAndTimeSplit[0].trim();
+    }
+
+    private String getTime(String[] dateAndTimeSplit) {
+        return dateAndTimeSplit[1].trim();
+    }
+
+    private String getEndDetails(String timings) {
+        String[] startAndEndSplit = timings.split("/to");
+        boolean hasEndDetails = startAndEndSplit.length == 2;
+        if (hasEndDetails) {
+            return startAndEndSplit[1].trim();
+        } else {
+            return "";
         }
     }
 

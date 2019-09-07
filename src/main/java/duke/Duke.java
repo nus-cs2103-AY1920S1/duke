@@ -59,7 +59,7 @@ public class Duke {
     }
 
     /**
-     * Returns whether the program should exit
+     * Returns whether the program should exit.
      * @param input Input string
      * @return Boolean indicating of program should exit
      */

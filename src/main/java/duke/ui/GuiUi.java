@@ -21,5 +21,6 @@ public class GuiUi extends Ui {
     }
 
     @Override
-    public void showLine() { }
+    public void showLine() {
+    }
 }

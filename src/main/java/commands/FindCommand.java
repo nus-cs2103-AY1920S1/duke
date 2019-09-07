@@ -29,7 +29,10 @@ public class FindCommand extends Command {
 
     /**
      * Returns a boolean value detailing whether the String description
-     * contains keyword as a word.
+     * contains the keywords as words.
+     * The order of the keywords is not important to this search. A description
+     * is considered a match as long as it contains all the keywords specified,
+     * regardless of order.
      *
      * @param description the description (of the task)
      * @param keywords String[] containing the keywords to be matched

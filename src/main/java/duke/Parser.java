@@ -47,14 +47,12 @@ public class Parser {
             if (commandClass != null) {
                 try {
                     return commandClass.getConstructor(String.class).newInstance(m.group("args"));
-                } catch (InvocationTargetException exc) {
+                } catch (ReflectiveOperationException exc) {
                     if (exc.getCause() instanceof DukeException) {
                         throw (DukeException) exc.getCause();
                     } else {
                         throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(", exc);
                     }
-                } catch (ReflectiveOperationException exc) {
-                    throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(", exc);
                 }
             }
         }

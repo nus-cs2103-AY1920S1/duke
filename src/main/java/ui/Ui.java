@@ -3,6 +3,8 @@ package ui;
 import task.Task;
 import task.TaskList;
 
+import java.util.stream.IntStream;
+
 public abstract class Ui {
     protected StringBuilder messageBuilder = new StringBuilder();
 
@@ -63,9 +65,10 @@ public abstract class Ui {
     public void listTasks(TaskList tasks) {
         if (tasks.size() > 0) {
             addLineToMessage("Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                addLineToMessage((i + 1) + ". " + tasks.get(i));
-            }
+            IntStream.range(0, tasks.size())
+                .forEach(i -> {
+                    addLineToMessage((i + 1) + ". " + tasks.get(i));
+                });
         } else {
             addLineToMessage("Can't see any tasks in the list, start adding tasks mate!");
         }

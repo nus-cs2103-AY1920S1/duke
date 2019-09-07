@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class Storage {
 
@@ -44,12 +45,12 @@ public class Storage {
             ArrayList<Task> tasks = taskList.toList();
 
             // write tasks into file
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-
-                StringBuilder taskSb = encodeTaskToDataString(task);
-                sb.append(taskSb);
-            }
+            IntStream.range(0, tasks.size())
+                .forEach(i -> {
+                    Task task = tasks.get(i);
+                    StringBuilder taskSb = encodeTaskToDataString(task);
+                    sb.append(taskSb);
+                });
             writer.write(sb.toString());
 
             writer.close();

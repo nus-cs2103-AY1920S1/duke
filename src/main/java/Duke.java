@@ -51,6 +51,7 @@ public class Duke extends Application{
     }*/
 
     @Override
+
     public void start(Stage stage) throws DukeExceptions{
         //Step 1. Setting up required components
 
@@ -104,8 +105,7 @@ public class Duke extends Application{
         sendButton.setOnMouseClicked((event) -> {
             try{
                 handleUserInput();
-            }
-            catch(DukeExceptions d) {
+            } catch(DukeExceptions d) {
                 new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
@@ -114,8 +114,7 @@ public class Duke extends Application{
         userInput.setOnAction((event) -> {
             try {
                 handleUserInput();
-            }
-            catch(DukeExceptions d) {
+            } catch(DukeExceptions d) {
                 new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 

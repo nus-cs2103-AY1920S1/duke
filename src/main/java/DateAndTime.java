@@ -1,3 +1,7 @@
+/**
+ * This is the DateAndTime class. It is used to convert input date and time to the
+ * correct format.
+ */
 public class DateAndTime {
     private String dateTime;
     private String date;
@@ -9,6 +13,13 @@ public class DateAndTime {
         date = arr[1];
         time = arr[2];
     }
+
+    /**
+     * <p>
+     *     convertDate is used to convert the input date to day month year format.
+     * </p>
+     * @return
+     */
 
     public String convertDate() {
         String[] arr = date.split("/");
@@ -43,6 +54,13 @@ public class DateAndTime {
         date = day + " " + month + " " + year;
         return date;
     }
+
+    /**
+     * <p>
+     *     convertTime is used to convert the input time to a.m. or p.m. format.
+     * </p>
+     * @return
+     */
 
     public String convertTime() {
        String[] arr = time.split("");

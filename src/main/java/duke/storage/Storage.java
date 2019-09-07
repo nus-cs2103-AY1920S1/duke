@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.exception.LineInFileWriteException;
-import duke.ui.CommandLineUserInterface;
+import duke.ui.Ui;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -51,7 +51,7 @@ public class Storage {
             try {
                 writer.write(line);
             } catch (IOException io) {
-                new CommandLineUserInterface().showLineError(new LineInFileWriteException(line).getLineCount(), line);
+                new Ui().showLineError(new LineInFileWriteException(line).getLineCount(), line);
             }
         });
         writer.close();

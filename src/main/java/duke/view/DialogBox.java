@@ -1,8 +1,10 @@
 package duke.view;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.main.Duke;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,9 +12,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -20,8 +26,9 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static Duke DUKE = new Duke();
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -34,11 +41,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setId("dialogText");
     }
-
+//    @FXML
+//    public void initialize() {
+//        dialog.wrappingWidthProperty().bind(this.widthProperty());
+//    }
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -47,6 +57,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -54,7 +65,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+//        System.out.println("input is " +text);
+        String outputMessage = DUKE.runWithUserInput(text);
+//        System.out.println("output is " + outputMessage);
+        var db = new DialogBox(outputMessage, img);
         db.flip();
         return db;
     }

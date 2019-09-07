@@ -16,7 +16,7 @@ public interface Command {
      * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage);
+    String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage);
 
     /**
      * Returns <code>true</code> if the command is an exit command and <code>false</code> otherwise.

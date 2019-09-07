@@ -1,5 +1,7 @@
 package duke.view;
 import duke.main.Duke;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,15 +61,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(input, dukeImage)
         );
         userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        if(input.equals("bye")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished( event -> {Platform.exit(); System.exit(0 );});
+            delay.play();
+        }
     }
 }

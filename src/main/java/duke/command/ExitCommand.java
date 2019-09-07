@@ -21,7 +21,7 @@ public class ExitCommand implements Command {
      * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
+    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         try {
             storage.save(tasks.save());
         } catch (IOException io) {
@@ -29,6 +29,7 @@ public class ExitCommand implements Command {
         } finally {
             commandLineUserInterface.showExitMessage();
         }
+        return null;
     }
 
     /**

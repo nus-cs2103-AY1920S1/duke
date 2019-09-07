@@ -14,8 +14,9 @@ public class LaunchCommand implements Command {
         this.args = args;
     }
 
-    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
+    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         Application.launch(Main.class, args);
+        return null;
     }
 
     public boolean isExit() {

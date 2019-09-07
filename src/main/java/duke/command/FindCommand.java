@@ -30,8 +30,8 @@ public class FindCommand implements Command {
      * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
-        commandLineUserInterface.showResultsFound(tasks.find(keyword));
+    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
+        return commandLineUserInterface.showResultsFound(tasks.find(keyword));
     }
 
     /**

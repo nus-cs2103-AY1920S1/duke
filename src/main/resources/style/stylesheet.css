@@ -1,9 +1,14 @@
 .button {
     -fx-background-color: #2196F3;
     -fx-text-fill: white;
-    -fx-font-family: 'Delius Unicase';
+    -fx-font-family: "Delius Unicase"
 }
 
 #dialogContainer {
     -fx-background-image: url("/images/background.jpg");
+}
+
+#dialogText {
+    -fx-fill: #616161;
+    -fx-font-family: "Delius Unicase"
 }

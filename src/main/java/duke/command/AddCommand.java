@@ -37,9 +37,9 @@ public class AddCommand implements Command {
      * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
+    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
         tasks.add(task);
-        commandLineUserInterface.showAddInformation(task.toString(), tasks.size());
+        return commandLineUserInterface.showAddInformation(task.toString(), tasks.size());
     }
 
     /**

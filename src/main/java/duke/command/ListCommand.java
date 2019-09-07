@@ -16,8 +16,8 @@ public class ListCommand implements Command {
      * @param commandLineUserInterface the user interface
      * @param storage the storage for the tasks
      */
-    public void execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
-        commandLineUserInterface.showTable(tasks.list());
+    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
+        return commandLineUserInterface.showTable(tasks.list());
     }
 
     /**

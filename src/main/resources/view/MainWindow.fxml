@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.view.MainWindow">
+<BorderPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.view.MainWindow">
     <top>
-        <HBox fx:id="logoBox" alignment="TOP_CENTER" prefHeight="120.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+        <HBox fx:id="logoBox" alignment="TOP_CENTER" prefHeight="120.0" BorderPane.alignment="CENTER">
             <ImageView fx:id="logoPicture" fitHeight="112.5" fitWidth="262.5" />
         </HBox>
     </top>
     <center>
      <HBox fx:id="dialogBox" BorderPane.alignment="CENTER">
         <children>
-            <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" minHeight="520.0" minWidth="418.0" prefHeight="520.0" prefWidth="418.0" vvalue="1.0" HBox.hgrow="ALWAYS">
+            <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" fitToHeight="true" minHeight="520.0" minWidth="418.0" prefHeight="520.0" prefWidth="418.0" vvalue="1.0" HBox.hgrow="ALWAYS">
                <content>
-                  <VBox fx:id="dialogContainer"  prefHeight="520.0" prefWidth="418.0" fillWidth="true"/>
+                  <VBox fx:id="dialogContainer"  prefHeight="520.0" HBox.hgrow="ALWAYS" fillWidth="true"/>
                </content></ScrollPane>
         </children>
      </HBox>

@@ -8,26 +8,28 @@ import java.util.Scanner;
  */
 public interface UserInterface {
 
-    public void showWelcome();
+    public String showWelcome();
 
-    public void showError(String message);
+    public String showError(String message);
 
-    public void showLoadingError();
+    public String showLoadingError();
 
-    public void showLineError(int lineCount, String line);
+    public String showLineError(int lineCount, String line);
 
     public String readCommand();
 
-    public void showTable(String list);
+    public String readCommand(String userInput);
 
-    public void showResultsFound(String list);
+    public String showTable(String list);
 
-    public void showAddInformation(String task, int size);
+    public String showResultsFound(String list);
 
-    public void showMarkedAsDone(String task);
+    public String showAddInformation(String task, int size);
 
-    public void showDeletedMessage(String task, int size);
+    public String showMarkedAsDone(String task);
 
-    public void showExitMessage();
+    public String showDeletedMessage(String task, int size);
+
+    public String showExitMessage();
 
 }

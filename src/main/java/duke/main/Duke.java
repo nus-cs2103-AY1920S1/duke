@@ -7,8 +7,9 @@ import duke.exception.InvalidDateTimeException;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.CommandLineUserInterface;
+import duke.ui.Ui;
 import duke.ui.UserInterface;
+import javafx.application.Platform;
 
 import java.io.IOException;
 
@@ -33,25 +34,29 @@ public class Duke {
     private final UserInterface userInterface;
 
     public Duke() {
-        userInterface = new CommandLineUserInterface();
+        userInterface = new Ui();
         storage = new Storage("data/duke.txt");
-        tasks = new TaskList();
-
-    }
-
-    /**
-     * Constructs a new Duke Object with the specified file path as its database / storage.
-     * @param filePath This is the file path used to store the tasks. It also acts as the database / storage of the Duke
-     *                 Program.
-     */
-    public Duke(String filePath) {
-        userInterface = new CommandLineUserInterface();
-        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException ie) {
             userInterface.showLoadingError();
             tasks = new TaskList();
+        }
+
+    }
+
+    public String runWithUserInput(String userInput) {
+        boolean isExit = false;
+        try {
+            String fullCommand = userInterface.readCommand(userInput);
+            Command c = CommandParser.parse(fullCommand);
+            return c.execute(tasks, userInterface, storage);
+        } catch (InvalidCommandException ice) {
+            return userInterface.showError("Invalid command: " + ice.getInvalidCommand());
+        } catch (InvalidParameterException ipe) {
+            return userInterface.showError("Invalid parameters: " + ipe.getInvalidParameter());
+        } catch (InvalidDateTimeException idte) {
+            return userInterface.showError("Invalid date and time: " + idte.getInvalidDateTime());
         }
     }
 
@@ -84,6 +89,6 @@ public class Duke {
      * @param args the arguments to be passed into the Duke program before the program is run.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }

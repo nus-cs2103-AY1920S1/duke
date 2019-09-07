@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    final String TYPE_DEADLINE = "D";
     private LocalDateTime dateTime;
 
     public Deadline(String taskName, LocalDateTime dateTime) {
@@ -17,7 +18,7 @@ public class Deadline extends Task {
 
     @Override
     public String getType() {
-        return "D";
+        return TYPE_DEADLINE;
     }
 
     public String getDateTime() {

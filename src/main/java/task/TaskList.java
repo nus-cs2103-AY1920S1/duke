@@ -19,6 +19,7 @@ public class TaskList {
      * Adds task into the current list of tasks.
      * 
      * @param t Task to be added.
+     * @return The string format of added task.
      */
     public static String addTask(Task t) {
         task.add(t);
@@ -29,6 +30,7 @@ public class TaskList {
      * Deletes task into the current list of tasks.
      * 
      * @param index Index of task to be deleted.
+     * @return The string format of deleted task.
      */
     public static String deleteTask(int index) {
         Task deletedTask = task.remove(index);
@@ -36,9 +38,10 @@ public class TaskList {
     }
 
     /**
-     * Mark the task that is in the list as done.
+     * Marks the task that is in the list as done.
      * 
      * @param index Index of task to be marked as done.
+     * @return The string format of task marked as done.
      */
     public static String doneTask(int index) {
         Task markAsDoneTask = task.get(index);
@@ -46,6 +49,12 @@ public class TaskList {
         return Ui.printDoneTask(markAsDoneTask);
     }
 
+    /**
+     * Finds tasks with keyWord in the description.
+     * 
+     * @param keyWord Keyword to be found.
+     * @return The string format of found tasks.
+     */
     public static String findTask(String keyWord) {
         List<Task> foundTasks = new ArrayList<>();
         for (Task t : TaskList.task) {

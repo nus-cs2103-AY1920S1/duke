@@ -34,8 +34,10 @@ public class AddTodoTaskCommand extends Command {
         task.setTitle(this.title);
         tasks.add(task);
         storage.save(tasks);
-        uoi.showLine("Got it. I've added this task:");
-        uoi.showLine("  " + task.toString());
-        uoi.showNumTasks(tasks.size());
+        
+        String text = "Got it. I've added this task:\n";
+        text += "  " + task.toString() + "\n";
+        text += String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+        uoi.showLine(text);
     }
 }

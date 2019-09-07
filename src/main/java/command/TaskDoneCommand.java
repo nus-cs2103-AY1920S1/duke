@@ -37,8 +37,10 @@ public class TaskDoneCommand extends Command {
             Task task = tasks.get(this.index - 1);
             task.setIsDone(true);
             storage.save(tasks);
-            uoi.showLine("Nice! I've marked this task as done:");
-            uoi.showLine(task.toString());
+
+            String text = "Nice! I've marked this task as done:\n";
+            text += task.toString();
+            uoi.showLine(text);
         } else {
             throw new CommandExecuteException("Task does not exist at index.");
         }

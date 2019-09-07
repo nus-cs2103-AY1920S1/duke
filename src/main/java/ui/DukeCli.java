@@ -7,15 +7,15 @@ import com.leeyiyuan.ui.UserOutputInterface;
 /**
  * Represents a console based user interface for interacting with the user.
  */
-public class Ui implements UserOutputInterface {
+public class DukeCli implements UserOutputInterface {
 
     /** Scanner object used to communicate with console. */
     protected Scanner scanner;
 
     /**
-     * Constructs a Ui.
+     * Constructs a DukeCli.
      */
-    public Ui() {
+    public DukeCli() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -49,16 +49,6 @@ public class Ui implements UserOutputInterface {
      */
     public void showError(String text) {
         System.out.println("Error: " + text);
-    }
-
-    /**
-     * Shows the number of tasks.
-     *
-     * @param num Number of tasks.
-     */
-    public void showNumTasks(int num) {
-        System.out.println(
-                String.format("Now you have %d %s in the list.", num, num == 1 ? "task" : "tasks"));
     }
 
     /**

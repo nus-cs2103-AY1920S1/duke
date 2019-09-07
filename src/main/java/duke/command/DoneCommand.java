@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.InvalidDetailException;
 import duke.task.Task;
 
 /**
@@ -29,17 +30,21 @@ public class DoneCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> that stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> that handles user input and output.
      * @param storage Instance of <code>Storage</code> that handles writing and loading of information to hard disk.
-     * @throws DukeException If provided index is missing or invalid.
+     * @throws InvalidDetailException If provided index is invalid.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDetailException {
         if (index > tasks.getSize()) {
-            throw new DukeException("☹ OOPS!!! There is no such task in the list to mark as done.");
+            throw new InvalidDetailException("☹ OOPS!!! There is no such task in the list to mark as done.");
         }
         Task doneTask = tasks.getTask(index - 1);
         doneTask.markAsDone();
         assert doneTask.isDone() == true : "Supposed to return true as markAsDone() function should have "
                 + "marked the task as done.";
         ui.printDoneMessage(doneTask);
+        updateStorage(tasks, ui, storage);
+    }
+
+    private void updateStorage(TaskList tasks, Ui ui, Storage storage) {
         try {
             storage.writeToFile(tasks);
         } catch (DukeException exception) {

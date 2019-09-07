@@ -1,13 +1,13 @@
 package duke.calendar;
 
-import duke.exception.DukeException;
+import duke.exception.InvalidTimeException;
 
 /**
  * Represents a time. A <code>Time</code> object corresponds to a specific hour and minute.
  */
 public class Time {
     protected String rawTime;
-    protected boolean isPastNoon;
+    protected boolean isPastNoon = false;
     protected int hour;
     protected int minutes;
     protected boolean isNull = true;
@@ -15,9 +15,9 @@ public class Time {
     /**
      * Constructor for <code>Time</code>.
      * @param rawTime Unprocessed time
-     * @throws DukeException If provided time is invalid.
+     * @throws InvalidTimeException If provided time is invalid.
      */
-    public Time(String rawTime) throws DukeException {
+    public Time(String rawTime) throws InvalidTimeException {
         this.rawTime = rawTime;
         if (rawTime != null) {
             isNull = false;
@@ -27,46 +27,47 @@ public class Time {
 
     /**
      * Extracts information about the hour and minute from the raw time.
-     * @throws DukeException If time is in the wrong format or invalid.
+     * @throws InvalidTimeException If time is in the wrong format or invalid.
      */
-    protected void processTime() throws DukeException {
+    protected void processTime() throws InvalidTimeException {
         assert (isNull == false) : "A null raw time should not be processed.";
-        if (isValidTime(rawTime)) {
-            hour = Integer.parseInt(rawTime.substring(0, 2));
-            if (hour > 11) {
-                isPastNoon = true;
-                hour = hour % 12;
-            } else {
-                isPastNoon = false;
-            }
-            if (hour == 0) {
-                hour = 12;
-            }
-            minutes = Integer.parseInt(rawTime.substring(2));
-        } else {
-            throw new DukeException(
-                    "☹ OOPS!!! Please specify a valid time. "
-                            + "Also ensure that you have specified the time in 24-hour clock convention E.g. 1800 ");
+        if (isInvalidTime(rawTime)) {
+            throw new InvalidTimeException(
+                "☹ OOPS!!! Please specify a valid time. "
+                    + "Also ensure that you have specified the time in 24-hour clock convention E.g. 1800 ");
+        }
+        assignHour();
+        assignMinutes();
+    }
+
+    private void assignHour() {
+        hour = Integer.parseInt(rawTime.substring(0, 2));
+        if (hour > 11) {
+            isPastNoon = true;
+            hour = hour % 12;
+        }
+        if (hour == 0) {
+            hour = 12;
         }
     }
 
+    private void assignMinutes() {
+        minutes = Integer.parseInt(rawTime.substring(2));
+    }
+
     /**
-     * Checks if provided time is valid.
-     * Both the hour and minute component of the time must be valid.
+     * Checks if provided time is invalid.
+     * Both the hour and minute component of the time must be valid for the time to be valid.
      * @param rawTime Unprocessed time with 4 digits, 2 to represent the hour and the other 2 to represent the minute.
-     * @return True if the provided time is in the correct format and 0 <= hour <= 23 and 0 <= minute <= 59.
+     * @return False if the provided time is in the correct format and 0 <= hour <= 23 and 0 <= minute <= 59.
      */
-    protected boolean isValidTime(String rawTime) {
+    protected boolean isInvalidTime(String rawTime) {
         if (rawTime.length() < 4) {
-            return false;
+            return true;
         } else {
             int inputHour  = Integer.parseInt(rawTime.substring(0, 2));
             int inputMinutes = Integer.parseInt(rawTime.substring(2));
-            if (inputHour > 23 || inputMinutes > 59) {
-                return false;
-            } else {
-                return true;
-            }
+            return inputHour > 23 || inputMinutes > 59;
         }
     }
 

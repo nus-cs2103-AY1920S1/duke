@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.InsufficientDetailsException;
 import duke.task.Todo;
 
 /**
@@ -28,20 +29,23 @@ public class AddTodoCommand extends Command {
      * @param tasks Instance of <code>TaskList</code> that stores <code>Task</code> objects.
      * @param ui Instance of <code>Ui</code> that handles user input and output.
      * @param storage Instance of <code>Storage</code> that handles writing and loading of information to hard disk.
-     * @throws DukeException If provided details are insufficient or invalid.
+     * @throws InsufficientDetailsException If provided details are insufficient.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientDetailsException {
         if (details.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        } else {
-            Todo todo = new Todo(details);
-            tasks.addTask(todo);
-            ui.printAddTaskMessage(todo, tasks.getSize());
-            try {
-                storage.writeToFile(tasks);
-            } catch (DukeException exception) {
-                ui.printExceptionMessage(exception);
-            }
+            throw new InsufficientDetailsException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        Todo todo = new Todo(details);
+        tasks.addTask(todo);
+        ui.printAddTaskMessage(todo, tasks.getSize());
+        updateStorage(tasks, ui, storage);
+    }
+
+    private void updateStorage(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            storage.writeToFile(tasks);
+        } catch (DukeException exception) {
+            ui.printExceptionMessage(exception);
         }
     }
 

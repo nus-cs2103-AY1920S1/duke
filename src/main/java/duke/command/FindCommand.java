@@ -28,6 +28,11 @@ public class FindCommand extends Command {
      * @param storage Instance of <code>Storage</code> that handles writing and loading of information to hard disk.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ArrayList<Task> matchingTasks = getMatchingTasks(tasks);
+        ui.printFindMessage(matchingTasks);
+    }
+
+    private ArrayList<Task> getMatchingTasks(TaskList tasks) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (int i = 0; i < tasks.getSize(); i++) {
             Task currentTask = tasks.getTask(i);
@@ -36,7 +41,7 @@ public class FindCommand extends Command {
                 matchingTasks.add(currentTask);
             }
         }
-        ui.printFindMessage(matchingTasks);
+        return matchingTasks;
     }
 
     /**

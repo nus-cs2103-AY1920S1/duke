@@ -66,10 +66,15 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(outputStream);
         PrintStream old = System.out;
-        System.setOut(ps);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        changeSystemOut(outputStream);
+        generateResponse(input);
+        resetSystemOut(old);
+        return outputStream.toString();
+    }
+
+    private void generateResponse(String input) {
         try {
             ui.printLine();
             Command c = Parser.parse(input);
@@ -79,8 +84,15 @@ public class Duke {
         } finally {
             ui.printLine();
         }
+    }
+
+    private void changeSystemOut(ByteArrayOutputStream outputStream) {
+        PrintStream ps = new PrintStream(outputStream);
+        System.setOut(ps);
+    }
+
+    private void resetSystemOut(PrintStream old) {
         System.out.flush();
         System.setOut(old);
-        return outputStream.toString();
     }
 }

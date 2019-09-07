@@ -75,14 +75,22 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:");
         int size = t.getCommandList().size();
+        int noMatching = 0;
         int counter = 1;
         for (int i = 1; i < size + 1; i++) {
             if (t.getCommandList().get(i - 1).getName().contains(keyword)) {
+                //returns tasks even if they partially match keyword
+                //doesn't have to be the whole word/task
                 sb.append(counter + ".");
                 sb.append(t.getCommandList().get(i - 1) + "\n");
                 counter++;
+                noMatching++;
             }
         }
-        return sb.toString();
+        if (noMatching == 0) {
+            return "There are no matching tasks in your tasklist";
+        } else {
+            return sb.toString();
+        }
     }
 }

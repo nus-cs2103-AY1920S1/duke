@@ -45,6 +45,7 @@ public class Parser {
      * </p>
      * @param word get command
      * @param array the list of task
+     * @return task is marked as complete
      */
 
     public String callDone(String word, ArrayList<TaskList> array) {
@@ -61,7 +62,9 @@ public class Parser {
      * @param num task number
      * @param word get command
      * @param array the list of task
+     * @return task is added into list
      */
+
     public String callTodo(int num, String word,
                          ArrayList<TaskList> array) {
         TaskList todoT = new Todo(num, "[✗]", word, "todo");
@@ -75,6 +78,7 @@ public class Parser {
      * @param word get command
      * @param num task number
      * @param array the list of task
+     * @return task is added into list
      */
 
     public String callEvent(String word, int num,
@@ -92,7 +96,9 @@ public class Parser {
      * @param word get command
      * @param num task number
      * @param array the list of task
+     * @return task is added into list
      */
+
     public String callDeadline(String word, int num,
                              ArrayList<TaskList> array) {
         String arr3[] = word.split("/by");
@@ -109,6 +115,7 @@ public class Parser {
      * </p>
      * @param word get command
      * @param array the list of task
+     * @return task is removed from list
      */
 
     public String callDelete(String word, ArrayList<TaskList> array) {
@@ -147,6 +154,13 @@ public class Parser {
 
         return out;
     }
+
+    /**
+     * callFind is used to handle find requests. Matches input to the list of related tasks
+     * @param word input from user
+     * @param array list of tasks
+     * @return a list of task that contains word inputted
+     */
 
     public String callFind(String word, ArrayList<TaskList> array) {
         ArrayList<TaskList> arr = new ArrayList<TaskList>();

@@ -20,9 +20,9 @@ public class Todo extends TaskList {
 
     /**
      * <p>
-     *     getAB is a filler.
+     *     getAB is not used in Todo.
      * </p>
-     * @return nil
+     * @return null
      */
 
     public DateAndTime getAB() {

@@ -27,22 +27,26 @@ public class TaskList {
      * Adds a Task object into the list.
      *
      * @param task A Task object
+     * @return confirmation message of task being added
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         list.add(task);
-        System.out.println("Got it. I've added this task:\n" + task
-                + "\nNow you have " + list.size() + " tasks in the list.");
+        String message = "Got it. I've added this task:\n" + task
+                + "\nNow you have " + list.size() + " tasks in the list.";
+        return message;
     }
 
     /**
      * Deletes a Task from the list.
      *
      * @param deleteIndex Index of selected Task Object, 1-based index
+     * @return confirmation message of task being deleted
      */
-    public void deleteTask(int deleteIndex) {
+    public String deleteTask(int deleteIndex) {
         Task temp = list.remove(deleteIndex - 1);
-        System.out.println("Noted. I've removed this task:\n" + temp
-                + "\nNow you have " + list.size() + " tasks in the list.");
+        String message = "Noted. I've removed this task:\n" + temp
+                + "\nNow you have " + list.size() + " tasks in the list.";
+        return message;
     }
 
     /**
@@ -57,39 +61,46 @@ public class TaskList {
 
     /**
      * Prints out the list of tasks that Duke holds.
+     *
+     * @return list of tasks
      */
-    public void showTaskList() {
-        System.out.println("Here are the tasks in your list:");
+    public String showTaskList() {
+        String message = "Here are the tasks in your list:";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + "." + list.get(i));
+            message += "\n" + (i + 1) + "." + list.get(i);
         }
+        return message;
     }
 
     /**
      * Prints out the Tasks whose description matches the search term.
      *
      * @param searchTerm Keyword by user for search
+     * @return list of tasks with matching search term
      */
-    public void searchTaskList(String searchTerm) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String searchTaskList(String searchTerm) {
+        String message = "Here are the matching tasks in your list:";
         int noOfSearches = 1;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getDescription().contains(searchTerm)) {
-                System.out.println((noOfSearches) + "." + list.get(i));
+                message += "\n" + noOfSearches + "." + list.get(i);
                 noOfSearches += 1;
             }
         }
+        return message;
     }
 
     /**
      * Sets boolean variable isDone of selected Task object to true.
      *
      * @param doneIndex Index of selected Task object, 1-based index
+     * @return confirmation message of task being done
      */
-    public void setDoneTask(int doneIndex) {
+    public String setDoneTask(int doneIndex) {
         list.get(doneIndex - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n"
-                + list.get(doneIndex - 1));
+        String message = "Nice! I've marked this task as done:\n"
+                + list.get(doneIndex - 1);
+        return message;
     }
 
     /**

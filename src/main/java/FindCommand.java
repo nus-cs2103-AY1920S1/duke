@@ -13,14 +13,15 @@ public class FindCommand extends Command {
      * @param storage Storage object for saving purposes
      * @param tasks   Contains the list of tasks
      * @param ui      Holds Ui printing method and user input field
+     * @param input   User input of search term
+     * @return Search Task Message
      * @throws DukeException If searchTerm is empty
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) throws DukeException {
-        String searchTerm = ui.readDesc().trim();
-        if (searchTerm.isEmpty()) {
+    public String execute(Storage storage, TaskList tasks, Ui ui, String input) throws DukeException {
+        if (input.isEmpty()) {
             throw new DukeException("Search term cannot be blank.");
         }
-        tasks.searchTaskList(searchTerm);
+        return tasks.searchTaskList(input);
     }
 }

@@ -15,6 +15,7 @@ public class Storage {
     /**
      * Constructor to specify the file path of the text file used
      * for saving and loading of Tasks for the list.
+     *
      * @param filePath directory of text file
      */
     public Storage(String filePath) {
@@ -24,6 +25,7 @@ public class Storage {
     /**
      * Returns a ArrayList of Task type for Duke to use as an initial list.
      * Data is obtained from a text file with a specific format.
+     *
      * @return List of Tasks to be used
      * @throws DukeException When format is wrong and filePath is invalid
      */
@@ -69,6 +71,7 @@ public class Storage {
      * It will throw an exception if the file path was not specified in storage upon initialisation.
      * However, an IOException is thrown instead of DukeException to be able
      * to exit the program despite not saving.
+     *
      * @param list List of Tasks used in Duke
      */
     public void saveData(ArrayList<Task> list) {

@@ -27,7 +27,7 @@ public class DoneCommandTest {
         ui = new Ui();
         try {
             DoneCommand dc = new DoneCommand();
-            dc.execute(storage, taskList, ui);
+            dc.execute(storage, taskList, ui, input);
             assertTrue(taskList.getTask(1).getIsDone());
         } catch (DukeException e) {
             fail("failed to change item in list to done");

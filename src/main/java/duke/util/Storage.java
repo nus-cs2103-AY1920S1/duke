@@ -108,7 +108,7 @@ public class Storage {
 
                 line = reader.readLine();
             }
-        } catch (Exception e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(e.getMessage());
         } finally {
             // close reader
@@ -151,7 +151,7 @@ public class Storage {
                 writer.write(String.format("%s ~ %s ~ %s", type, done, description));
                 writer.newLine();
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException | IOException e) {
             System.err.println(e.getMessage());
             throw new DukeException("Failed to save task list to file.");
         } finally {

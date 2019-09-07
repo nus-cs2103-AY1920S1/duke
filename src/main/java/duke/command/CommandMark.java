@@ -34,7 +34,7 @@ public class CommandMark extends Command {
         try {
             taskToMark = tasks.get(taskNumber);
             taskToMark.markDone();
-        } catch (Exception e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number.");
         }
 

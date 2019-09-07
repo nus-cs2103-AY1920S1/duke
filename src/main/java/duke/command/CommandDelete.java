@@ -32,7 +32,7 @@ public class CommandDelete extends Command {
         Task taskToDelete;
         try {
             taskToDelete = tasks.remove(taskNumber);
-        } catch (Exception e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number.");
         }
 

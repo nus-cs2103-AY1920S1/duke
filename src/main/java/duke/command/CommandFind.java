@@ -6,6 +6,8 @@ import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * A Command to search the TaskList with a specific query.
  */
@@ -38,7 +40,7 @@ public class CommandFind extends Command {
                     results.add(task);
                 }
             }
-        } catch (Exception e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Search of task list failed.");
         }
 

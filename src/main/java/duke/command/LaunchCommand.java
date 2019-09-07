@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.main.Launcher;
+import duke.main.Main;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -15,7 +15,7 @@ public class LaunchCommand implements Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Application.launch(Launcher.class, args);
+        Application.launch(Main.class, args);
     }
 
     public boolean isExit() {

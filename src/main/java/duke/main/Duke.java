@@ -94,6 +94,6 @@ public class Duke {
      * @param args the arguments to be passed into the Duke program before the program is run.
      */
     public static void main(String[] args) {
-        new Duke("/Users/bj/java/Duke/data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

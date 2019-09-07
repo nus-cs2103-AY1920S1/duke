@@ -20,5 +20,9 @@
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
 
+**Screenshot**
+
+![Screenshot of Duke](screenshot.png)
+
 * If you have feedback or bug reports, please post in [se-edu/dukeModel issue tracker](https://github.com/se-edu/dukeModel/issues).
 * We welcome pull requests too.

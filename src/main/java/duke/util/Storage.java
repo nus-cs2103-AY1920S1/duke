@@ -51,7 +51,9 @@ public class Storage {
 
     }
 
-    private TaskList loadTasksFromFile(File file) throws FileNotFoundException, InvalidDateException, InvalidCommandException {
+    private TaskList loadTasksFromFile(File file)
+            throws FileNotFoundException, InvalidDateException, InvalidCommandException {
+
         Scanner scanner = new Scanner(file);
         TaskList tasks = new TaskList();
 

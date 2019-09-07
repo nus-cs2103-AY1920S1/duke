@@ -7,22 +7,24 @@ import duke.util.TaskList;
 public class DukeResponder {
 
     /**
-     * Show welcome message.
-     * Often used in the beginning of the program.
+     * Generates welcome message.
+     * This method returns the welcome message.
+     *
+     * @return welcome message
      */
     public String getWelcomeMessage() {
         return buildMultilineString(new String[] {
-                "Hello! I'm Duke",
-                "What can I do for you?"
+            "Hello! I'm Duke",
+            "What can I do for you?"
         });
     }
 
     /**
-     * Show all tasks.
-     * This method would format the list of tasks
-     * and display them neatly.
+     * Generates tasks message.
+     * This method returns a neatly formatted tasks listing.
      *
-     * @param tasks the list of tasks to be shown
+     * @param tasks list of tasks to be shown.
+     * @return tasks message
      */
     public String getTasksMessage(TaskList tasks) {
         return buildMultilineString(tasks.stream()
@@ -31,54 +33,61 @@ public class DukeResponder {
     }
 
     /**
-     * Show notification of successful completion.
-     * This method would notify the user that the task
-     * is being marked as done.
+     * Generates task done message.
+     * This method returns a message to indicate that a task is marked as done.
      *
-     * @param task the task that is completed
+     * @param task completed task
+     * @return task done message
      */
     public String getTaskDoneMessage(Task task) {
         return buildMultilineString(new String[] {
-                "Nice! I've marked this task as done:",
-                task.toString()
+            "Nice! I've marked this task as done:",
+            task.toString()
         });
     }
 
     /**
-     * Show notification of successful deletion.
-     * This method would notify the user that the task
-     * is successfully deleted.
+     * Generates task deleted message.
+     * This method returns a message to indicate that a task is successfully deleted.
      *
-     * @param task the task that is deleted
-     * @param tasks the list of tasks left after deletion
+     * @param task deleted task
+     * @param tasks list of tasks after deletion
+     * @return task deleted message
      */
     public String getTaskDeletedMessage(Task task, TaskList tasks) {
         return buildMultilineString(new String[] {
-                "Noted. I've removed this task:",
-                task.toString(),
-                "Now you have " + tasks.size() + " tasks in the list."
+            "Noted. I've removed this task:",
+            task.toString(),
+            "Now you have " + tasks.size() + " tasks in the list."
         });
     }
 
     /**
-     * Show notification of successful addition.
-     * This method would notify the user that the task
-     * is successfully added.
+     * Generates task added message.
+     * This method returns a message to indicate that a task is successfully added.
      *
-     * @param task the task that is added
-     * @param tasks the list of tasks left after addition
+     * @param task added task
+     * @param tasks list of tasks after addition
+     * @return task added message
      */
     public String getTaskAddedMessage(Task task, TaskList tasks) {
         return buildMultilineString(new String[] {
-                "Got it. I've added this task:",
-                task.toString(),
-                "Now you have " + tasks.size() + " tasks in the list."
+            "Got it. I've added this task:",
+            task.toString(),
+            "Now you have " + tasks.size() + " tasks in the list."
         });
     }
 
+    /**
+     * Generates error message.
+     * This method returns a message reporting the error occurred.
+     *
+     * @param e instance of {@link DukeException}
+     * @return error message
+     */
     public String getErrorMessage(DukeException e) {
         return buildMultilineString(new String[] {
-                e.getResponseMessage()
+            e.getResponseMessage()
         });
     }
 

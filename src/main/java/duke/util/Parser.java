@@ -24,14 +24,15 @@ public class Parser {
 
     /**
      * Converts a task from its saved format to a task object.
-     * The savedText argument must be in the correct format. An
-     * example of a correctly formatted task is
+     * The savedText argument must be in the correct format. An example of a correctly formatted task is
      * "E | 0 | dancing session | 12/1/2010 1212"
      *
-     * @param encodedString the task in saved text format
-     * @return the task object converted from the saved text
+     * @param encodedString task in encoded string format
+     * @return task object converted from the encoded text
      */
-    public static Task convertEncodedStringToTask(String encodedString) throws InvalidDateException, InvalidCommandException {
+    public static Task convertEncodedStringToTask(String encodedString)
+            throws InvalidDateException, InvalidCommandException {
+
         String[] tokens = encodedString.split("\\s\\|\\s");
 
         String type = tokens[0];
@@ -55,8 +56,8 @@ public class Parser {
      * Converts list of tasks to saved text format.
      * The returned value can be written into a file.
      *
-     * @param tasks the list of tasks
-     * @return the saved text format of the list of tasks
+     * @param tasks list of tasks
+     * @return encoded string format of the list of tasks
      */
     public static String convertTasksToEncodedString(ArrayList<Task> tasks) {
         StringBuilder text = new StringBuilder();
@@ -71,13 +72,12 @@ public class Parser {
 
     /**
      * Parses a command string.
-     * This method always return a {@link Command} object
-     * corresponding to the command written by user.
+     * This method always return a {@link Command} object corresponding to the command written by user.
      *
-     * @param fullCommand the raw string command
-     * @return the executable command object
+     * @param fullCommand command string from raw user input
+     * @return executable {@link Command} object
      */
-    public static Command parseCommand(String fullCommand) throws InvalidCommandException, InvalidDateException {
+    public static Command parseCommand(String fullCommand) throws InvalidDateException, InvalidCommandException {
         String commandName = fullCommand.split(" ", 2)[0];
 
         switch (commandName) {

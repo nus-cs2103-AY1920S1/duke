@@ -29,6 +29,16 @@ public class DukeController {
     private DukeModel model;
     private Scene scene;
 
+    /**
+     * Creates new instance of DukeController.
+     * Use this method instead of the constructor to create
+     * a new instance of {@link DukeController}. This method
+     * would help to initialize a new root node, and return
+     * a controller that is attached to this node.
+     *
+     * @param model instance of {@link DukeModel}
+     * @return controller attached to the root node
+     */
     public static DukeController createInstance(DukeModel model) throws IOException {
         URL mainViewUrl = DukeController.class.getResource(DukeController.URL_MAIN_VIEW);
         FXMLLoader fxmlLoader = new FXMLLoader(mainViewUrl);

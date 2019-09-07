@@ -24,6 +24,7 @@ public class TaskList {
     }
 
     public void delete(int num) {
+        assert num < arr.size() && num >= 0;
         arr.remove(num);
     }
 

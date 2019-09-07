@@ -21,82 +21,81 @@ import java.util.List;
  */
 public class Storage {
 
-  private File file;
+    private File file;
 
-  /**
-   * Class constructor.
-   *
-   * @param filePath location of file to load and store data.
-   */
-  public Storage(String filePath) {
-    file = new File(filePath);
-  }
+    /**
+     * Class constructor.
+     *
+     * @param filePath location of file to load and store data.
+     */
+    public Storage(String filePath) {
+        file = new File(filePath);
+    }
 
-  /**
-   * Loads a list of tasks from a file. If no file is present,
-   * a new file is created and an empty list is returned.
-   *
-   * @return List list of tasks.
-   * @throws DukeException If there has been IOException while performing an operation on the file.
-   */
-  public List<Task> load() throws DukeException {
+    /**
+     * Loads a list of tasks from a file. If no file is present, a new file is created and an empty list is returned.
+     *
+     * @return List list of tasks.
+     * @throws DukeException If there has been IOException while performing an operation on the file.
+     */
+    public List<Task> load() throws DukeException {
 
-    List<Task> tasks = new ArrayList<>(100);
-    try {
-      if (!file.createNewFile()) {
+        List<Task> tasks = new ArrayList<>(100);
+        try {
+            if (!file.createNewFile()) {
 
-        //read file contents into List
-        FileReader fr = new FileReader(file);
-        BufferedReader br = new BufferedReader(fr);
-        String line;
+                //read file contents into List
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                String line;
 
-        while ((line = br.readLine()) != null) {
-          String[] lines = line.split(" \\| ");
-          boolean isDone;
-          if (lines[1].equals("1")) {
-            isDone = true;
-          } else {
-            isDone = false;
-          }
-          if (lines[0].equals("T")) {
-            tasks.add(new Todo(lines[2], isDone));
-          } else if (lines[0].equals("D")) {
-            tasks.add(new Deadline(lines[2], lines[3], isDone));
-          } else if (lines[0].equals("E")) {
-            tasks.add(new Event(lines[2], lines[3], isDone));
-          } else {
-            System.out.println("Corrupted data.");
-          }
+                while ((line = br.readLine()) != null) {
+                    String[] lines = line.split(" \\| ");
+                    boolean isDone;
+                    if (lines[1].equals("1")) {
+                        isDone = true;
+                    } else {
+                        isDone = false;
+                    }
+                    if (lines[0].equals("T")) {
+                        tasks.add(new Todo(lines[2], isDone));
+                    } else if (lines[0].equals("D")) {
+                        tasks.add(new Deadline(lines[2], lines[3], isDone));
+                    } else if (lines[0].equals("E")) {
+                        tasks.add(new Event(lines[2], lines[3], isDone));
+                    } else {
+                        System.out.println("Corrupted data.");
+                    }
+                }
+
+                br.close();
+                fr.close();
+            }
+        } catch (IOException e) {
+            throw new DukeException("There has been an IOException while creating the data file.");
         }
-
-        br.close();
-        fr.close();
-      }
-    } catch (IOException e) {
-      throw new DukeException("There has been an IOException while creating the data file.");
+        return tasks;
     }
-    return tasks;
-  }
 
-  /**
-   * Saves a list of tasks to a file.
-   *
-   * @param tasks a list of tasks.
-   * @throws DukeException If there has been IOException while performing an operation on the file.
-   */
-  public void saveDataToFile(List<Task> tasks) throws DukeException {
-    //write to a completely new file
-    try {
-      FileWriter fw = new FileWriter(file, false);
-      for (Task task : tasks) {
-        String s = task.toDataFormat();
-        fw.write(s + "\n");
-      }
+    /**
+     * Saves a list of tasks to a file.
+     *
+     * @param tasks a list of tasks.
+     * @throws DukeException If there has been IOException while performing an operation on the file.
+     */
+    public void saveDataToFile(List<Task> tasks) throws DukeException {
+        //write to a completely new file
+        try {
+            FileWriter fw = new FileWriter(file, false);
+            for (Task task : tasks) {
+                String s = task.toDataFormat();
+                fw.write(s + "\n");
+            }
 
-      fw.close();
-    } catch (IOException e) {
-      throw new DukeException("Unable to write to datafile.");
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Unable to write to datafile.");
+        }
     }
-  }
 
 }

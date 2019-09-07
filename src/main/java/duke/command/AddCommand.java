@@ -13,29 +13,29 @@ import duke.task.TaskList;
  */
 public class AddCommand extends Command {
 
-  private Task task;
+    private Task task;
 
-  /**
-   * Class Constructor.
-   *
-   * @param task task to add.
-   */
-  public AddCommand(Task task) {
-    this.task = task;
-  }
-
-  @Override
-  public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-    tasks.addTask(task);
-
-    System.out.println("Got it. I've added this task:");
-    System.out.println(task);
-    if (tasks.getSize() == 1) {
-      System.out.println("Now you have 1 task in the list.");
-    } else {
-      System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+    /**
+     * Class Constructor.
+     *
+     * @param task task to add.
+     */
+    public AddCommand(Task task) {
+        this.task = task;
     }
 
-    persistState(tasks, storage);
-  }
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addTask(task);
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        if (tasks.getSize() == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+        }
+
+        persistState(tasks, storage);
+    }
 }

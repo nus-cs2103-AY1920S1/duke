@@ -1,3 +1,4 @@
 T | 1 | read book
 T | 1 | new book
-T | 0 | play dota
+T | 1 | play dota
+T | 0 | run

@@ -56,4 +56,19 @@ public abstract class Task {
     public String toSaveFormat() {
         return String.format("%s|%d|%s", this.getTypeCode(), this.isDone ? 1 : 0, this.description);
     }
+
+    /**
+     * Checks if the task contains one or more of the keywords.
+     *
+     * @param keywords Keywords.
+     * @return {@code true} if task contains one or more of the keywords, else {@code false}.
+     */
+    public boolean contains(String... keywords) {
+        for (String keyword : keywords) {
+            if (this.toString().contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

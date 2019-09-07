@@ -14,16 +14,16 @@ import java.util.stream.IntStream;
  */
 public class FindCommand extends Command {
     /** Keyword used for finding. */
-    private String keyword;
+    private String[] keywords;
 
     /**
      * Public constructor for class.
      *
-     * @param keyword Keyword used for finding.
+     * @param keywords Keywords used for finding.
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String keywords) {
         super();
-        this.keyword = keyword;
+        this.keywords = keywords.split(" ");
     }
 
     /**
@@ -37,7 +37,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        List<String> tasksInString = taskList.find(this.keyword);
+        List<String> tasksInString = taskList.find(this.keywords);
         List<String> formattedTasksInString = IntStream.rangeClosed(1, tasksInString.size())
                 .mapToObj(index -> String.format("%d.%s", index, tasksInString.get(index - 1)))
                 .collect(Collectors.toList());

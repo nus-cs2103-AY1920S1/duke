@@ -74,16 +74,16 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of task descriptions containing the keyword.
+     * Returns a list of task descriptions containing one or more of the keywords.
      *
-     * @param keyword Keyword used for finding.
-     * @return A list of task descriptions containing the keyword.
+     * @param keywords Keywords used for finding.
+     * @return A list of task descriptions containing one or more of the keywords.
      */
-    public List<String> find(String keyword) {
+    public List<String> find(String... keywords) {
         return this.list
                 .stream()
+                .filter(task -> task.contains(keywords))
                 .map(Task::toString)
-                .filter(task -> task.contains(keyword))
                 .collect(Collectors.toList());
     }
 }

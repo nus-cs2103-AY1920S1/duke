@@ -94,6 +94,7 @@ public class TaskList {
         for (Task task : tasks) {
             dump.add(task.toSaveString());
         }
+        assert dump.size() == tasks.size();
         return dump;
     }
 }

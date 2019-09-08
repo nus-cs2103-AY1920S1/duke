@@ -29,18 +29,15 @@ public class InputParser {
 
     protected void determineAction(String input) throws IOException {
 
-        int taskNumber;
         String by;
         String desc;
+        int taskNumber;
         String at;
         String firstWord;
         Ui ui = new Ui();
         String guidedUserInterfaceMsg;
-        final String ERROR_TODO = "OOPS!!! The description of a todo cannot be empty.\n";
-        final String ERROR_DEADLINE = "OOPS!!! Incorrect description for event; remember to use the /by keyword.\n";
-        final String ERROR_EVENT = "OOPS!!! Incorrect description for event; remember to use the /at keyword.\n";
+        InputSplitter inputSplitter = new InputSplitter(input);
         final String MSG_LIST = "Here are the tasks in your list:\n";
-        final String ERROR_INVALID_NUM = "OOPS!!! Please enter a valid number\n";
         final String MSG_FIND = "Here are the matching tasks in your list:\n";
         final String ERROR_FIND = "OOPS!!! Incorrect format for the 'find' command.\n";
         final String MSG_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means\n";
@@ -52,40 +49,22 @@ public class InputParser {
             break;
 
         case "todo":
-            try {
-                desc = input.split(" ", 2)[1];
-            } catch (IndexOutOfBoundsException err) {
-                System.out.println(ERROR_TODO);
-                ui.setGuidedUserInterfaceMsg(ERROR_TODO);
-                break;
-            }
+            desc = inputSplitter.splitInput("todo")[0];
             ToDo toDo = new ToDo(desc);
             modifyTaskList.addToTaskList(taskList, toDo, Duke.Action.ADD);
             break;
 
 
         case "deadline":
-            try {
-                by = input.split(" /by ")[1];
-                desc = input.split(" /by ")[0].split(" ", 2)[1];
-            } catch (IndexOutOfBoundsException err) {
-                System.out.println(ERROR_DEADLINE);
-                ui.setGuidedUserInterfaceMsg(ERROR_DEADLINE);
-                break;
-            }
+            desc = inputSplitter.splitInput("deadline")[0];
+            by = inputSplitter.splitInput("deadline")[1];
             Deadline d = new Deadline(desc, by);
             modifyTaskList.addToTaskList(taskList, d, Duke.Action.ADD);
             break;
 
         case "event":
-            try {
-                at = input.split(" /at ")[1];
-                desc = input.split(" /at ")[0].split(" ", 2)[1];
-            } catch (IndexOutOfBoundsException err) {
-                System.out.println(ERROR_EVENT);
-                ui.setGuidedUserInterfaceMsg(ERROR_EVENT);
-                break;
-            }
+            desc = inputSplitter.splitInput("event")[0];
+            at = inputSplitter.splitInput("event")[1];
             Event e = new Event(desc, at);
             modifyTaskList.addToTaskList(taskList, e, Duke.Action.ADD);
             break;
@@ -103,24 +82,12 @@ public class InputParser {
             break;
 
         case "done":
-            try {
-                taskNumber = Integer.parseInt(input.split(" ")[1]);
-            } catch (NumberFormatException err) {
-                ui.setGuidedUserInterfaceMsg(ERROR_INVALID_NUM);
-                System.out.println(ERROR_INVALID_NUM);
-                break;
-            }
+            taskNumber = Integer.parseInt(inputSplitter.splitInput("done")[0]);
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.DONE);
             break;
 
         case "delete":
-            try {
-                taskNumber = Integer.parseInt(input.split(" ")[1]);
-            } catch (NumberFormatException err) {
-                System.out.println(ERROR_INVALID_NUM);
-                ui.setGuidedUserInterfaceMsg(ERROR_INVALID_NUM);
-                break;
-            }
+            taskNumber = Integer.parseInt(inputSplitter.splitInput("delete")[0]);
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.REMOVE);
             break;
 
@@ -146,8 +113,7 @@ public class InputParser {
             }
 
         default:
-            System.out.println(MSG_UNKNOWN);
-            ui.setGuidedUserInterfaceMsg(MSG_UNKNOWN);
+            ui.printToConsoleAndGui(MSG_UNKNOWN);
             break;
         }
     }

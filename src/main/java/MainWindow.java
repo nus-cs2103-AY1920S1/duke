@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,11 +26,15 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Ui ui = new Ui();
 
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.welcomeMsg, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -41,7 +46,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws IOException, InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -50,9 +55,10 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-       /* if (response.equals(ui.goodByeMsg)){
+        Ui ui = new Ui();
+        if (response.equals(ui.goodByeMsg)){
             TimeUnit.SECONDS.sleep(2);
             System.exit(0);
-        }*/
+        }
     }
 }

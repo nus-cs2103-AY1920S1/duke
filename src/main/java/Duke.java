@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,31 +12,14 @@ public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>(100);
     private static InputParser inputParser = new InputParser(taskList);
 
-    Duke (){
-        try {
-            FileReading.checkFileExists(taskList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    String getResponse(String input) throws IOException {
-        if (!input.equals("bye")) {
-            inputParser.determineAction(input);
-            String response= ui.getGuidedUserInterfaceMsg();
-            ui.setGuidedUserInterfaceMsg("");
-            return response;
-        }
-
-        return ui.goodByeMsg;
-    }
-
     public enum Action {
         ADD,
         REMOVE,
         DONE
+    }
+
+    Duke() {
+        loadFile();
     }
 
     public static void main(String[] args) throws IOException {
@@ -45,18 +27,33 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         String input = "";
 
-        try {
-            FileReading.checkFileExists(taskList);
-        }  catch (IOException e) {
-            System.out.println("Oops. something went wrong with the duke.txt file");
-        }
-
+        loadFile();
         ui.sayGreeting();
 
         while (!input.equals("bye")) {
             input = scan.nextLine();
             inputParser.determineAction(input);
         }
+
         ui.sayGoodbye();
+    }
+
+    String getResponse(String input) throws IOException {
+        if (!input.equals("bye")) {
+            inputParser.determineAction(input);
+            String response = ui.getGuidedUserInterfaceMsg();
+            ui.setGuidedUserInterfaceMsg("");
+            return response;
+        }
+
+        return ui.goodByeMsg;
+    }
+
+    private static void loadFile(){
+        try {
+            FileReading.checkFileExists(taskList);
+        }  catch (IOException e) {
+            System.out.println("Oops. something went wrong with the duke.txt file");
+        }
     }
 }

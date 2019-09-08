@@ -8,6 +8,12 @@ class Ui {
 
     String goodByeMsg = "Bye. Hope to see you again soon!";
     private static String guidedUserInterfaceMsg = "";
+    private final String logo = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    String welcomeMsg= logo + "\nHello! I'm Duke \nWhat can I do for you?";
 
     /**
      * A basic welcome message. Prints the duke logo and greeting.
@@ -15,13 +21,7 @@ class Ui {
 
 
     void sayGreeting(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+        System.out.println(welcomeMsg);
     }
 
 
@@ -39,11 +39,8 @@ class Ui {
      */
 
     void addTask(ArrayList<Task> taskList){
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskList.get(taskList.size() - 1).toString());
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.\n");
-        guidedUserInterfaceMsg = "Got it. I've added this task:\n" + taskList.get(taskList.size() - 1).toString() +
-                "\n" + "Now you have " + taskList.size() + " tasks in the list.";
+        printToConsoleAndGui("Got it. I've added this task:\n" + taskList.get(taskList.size() - 1).toString() +
+                "\n" + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
@@ -54,10 +51,8 @@ class Ui {
 
         assert (taskNumber <= taskList.size()) : "Somehow a task number larger than the task list size was entered";
 
-        System.out.println("Noted. I've removed this task:\n" + taskList.get(taskNumber).toString());
-        System.out.println("Now you have " + (taskList.size()-1) + " tasks in the list.\n");
-        guidedUserInterfaceMsg = "Noted. I've removed this task:\n" + taskList.get(taskNumber).toString() +
-                "\nNow you have " + (taskList.size()-1) + " tasks in the list.";
+        printToConsoleAndGui("Noted. I've removed this task:\n" + taskList.get(taskNumber).toString() +
+                "\nNow you have " + (taskList.size()-1) + " tasks in the list.");
     }
 
     /**
@@ -68,9 +63,7 @@ class Ui {
 
         assert (taskNumber <= taskList.size()) : "Somehow a task number larger than the task list size was entered";
 
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskList.get(taskNumber).toString() + "\n");
-        guidedUserInterfaceMsg = "Nice! I've marked this task as done:\n" + taskList.get(taskNumber).toString();
+        printToConsoleAndGui("Nice! I've marked this task as done:\n" + taskList.get(taskNumber).toString());
     }
 
     String getGuidedUserInterfaceMsg() {
@@ -79,5 +72,10 @@ class Ui {
 
     void setGuidedUserInterfaceMsg(String guidedUserInterfaceMsg) {
         Ui.guidedUserInterfaceMsg = guidedUserInterfaceMsg;
+    }
+
+    void printToConsoleAndGui (String message){
+        System.out.println(message);
+        setGuidedUserInterfaceMsg(message);
     }
 }

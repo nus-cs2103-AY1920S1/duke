@@ -3,17 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke{
 
-    private static ArrayList<ListItem> todoList = new ArrayList<>() {
-        @Override
-        public String toString() {
-            String toReturn = "";
-            for (int i = 0; i < this.size(); i++) {
-                toReturn = toReturn.concat((i + 1) + "." + this.get(i).toString() + "\n     ");
-            }
-
-            return toReturn.substring(0, toReturn.length() - 6);
-        }
-    };
+    private static TaskList todoList = new TaskList();
 
     /**
      * Main driver class for Duke.
@@ -32,7 +22,7 @@ public class Duke{
                     dukePrint(todoList);
                     break;
                 case "done":
-                    ListItem target = todoList.get(Integer.parseInt(userInput.split(" ", 2)[1]) - 1);
+                    ListItem target = todoList.lst.get(Integer.parseInt(userInput.split(" ", 2)[1]) - 1);
                     target.done();
                     dukePrint("Nice! I've marked this task as done:", "  " + target);
                     break;
@@ -89,15 +79,15 @@ public class Duke{
 
 
     private static void addToTodo(String description, String command) {
-        todoList.add(new ListItem(description, command));
-        dukePrint("Got it. I've added this task:" + "\n      " + todoList.get(todoList.size() - 1),
-                "Now you have " + todoList.size() + " tasks in the list.");
+        todoList.lst.add(new ListItem(description, command));
+        dukePrint("Got it. I've added this task:" + "\n      " + todoList.lst.get(todoList.lst.size() - 1),
+                "Now you have " + todoList.lst.size() + " tasks in the list.");
     }
     private static void removeFromTodo(String description) {
-        ListItem target = todoList.get(Integer.parseInt(description) - 1);
-        todoList.remove(target);
+        ListItem target = todoList.lst.get(Integer.parseInt(description) - 1);
+        todoList.lst.remove(target);
         dukePrint("Noted. I've removed this task:" + "\n      " + target,
-                "Now you have " + todoList.size() + " tasks in the list.");
+                "Now you have " + todoList.lst.size() + " tasks in the list.");
     }
 
 }

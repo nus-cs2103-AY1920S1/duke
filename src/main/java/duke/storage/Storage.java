@@ -66,7 +66,7 @@ public class Storage {
     }
 
     /**
-     * Reads task info and generate new <code>Task</code> instance.
+     * Reads task info and generates new <code>Task</code> instance.
      *
      * @param str String containing information about a task.
      */

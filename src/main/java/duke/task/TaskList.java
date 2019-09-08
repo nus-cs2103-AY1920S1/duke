@@ -192,6 +192,12 @@ public class TaskList {
         return matchingIndexes;
     }
 
+    /**
+     * Adds a tag to the task at the specified index.
+     * @param index the index of the task.
+     * @param tag the tag of the task.
+     * @return the tagged task.
+     */
     public Task addTag(int index, Tag tag) {
         Task task = this.tasks.get(index);
         task.pushTag(tag);

@@ -1,7 +1,26 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.AddDeadlineTaskCommand;
+import duke.command.AddEventTaskCommand;
+import duke.command.AddTagCommand;
+import duke.command.AddToDoTaskCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.EditTaskDateCommand;
+import duke.command.EditTaskNameCommand;
+import duke.command.EndCommand;
+import duke.command.FindTaskCommand;
+import duke.command.ListTaskCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEditTaskException;
+import duke.exception.InvalidEventException;
+import duke.exception.InvalidKeywordException;
+import duke.exception.InvalidTagException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.InvalidToDoException;
+import duke.exception.UnknownCommandException;
 
 import java.util.Scanner;
 
@@ -183,7 +202,7 @@ public class DataParser {
     }
 
     /**
-     * Prases the input and returns the index and tag as an array of Strings
+     * Prases the input and returns the index and tag as an array of Strings.
      * @return an array of Strings providing the index and the tag in this order.
      * @throws InvalidTagException if no data is provided.
      */
@@ -358,18 +377,12 @@ public class DataParser {
      * @return True if the input starts with "event".
      */
     public boolean shouldAddEventTask() {
-
         return input.split(" ")[0].equals("evemt");
     }
 
     /**
-<<<<<<< HEAD
      * Checks if the user wishes to find a task based on a keyword.
      * @return True if the input starts with "find".
-=======
-     * Checks if the user wishes to find the tasks or not.
-     * @return true if the input starts with "find".
->>>>>>> 220957e9bd2251ba66f6f01767de0c44ea9a8916
      */
     public boolean shouldFindTask() {
         return input.split(" ")[0].equals("find");
@@ -382,13 +395,14 @@ public class DataParser {
     public boolean shouldTagTask() {
         return input.split(" ")[0].equals("tag");
     }
+
     /**
-     * Checks if the user wishes to edit a task name or not.
+     * Checks if the user wishes to edit the task name.
      * @return true if the input starts with "edit name".
      */
     public boolean shouldEditTaskName() {
-        return input.split(" ")[0].equals("edit") &&
-                input.split(" ")[1].equals("name");
+        return input.split(" ")[0].equals("edit")
+                && input.split(" ")[1].equals("name");
     }
 
     /**
@@ -396,6 +410,7 @@ public class DataParser {
      * @return true if the input starts with "edit date".
      */
     public boolean shouldEditTaskDate() {
-        return input.startsWith("edit date");
+        return input.split(" ")[0].equals("edit")
+                && input.split(" ")[1].equals("date");
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -28,7 +29,7 @@ public class DoneCommand extends Command {
      * @param storage Storage object to save changes to
      * @return String that shows what task marked as done
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String message = "";
         Task taskCompleted = tasks.getTask(taskNumber);
         taskCompleted.markAsDone();

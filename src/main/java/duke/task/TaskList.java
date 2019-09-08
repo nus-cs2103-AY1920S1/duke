@@ -3,6 +3,9 @@ package duke.task;
 /**
  * TaskLists represent the task list, and is in charge of addition and deletion of tasks.
  */
+import duke.exception.DukeException;
+import duke.exception.TaskDoesNotExistException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,11 +21,17 @@ public class TaskList {
     }
 
     public Integer getNumberOfTasks() {
-        return taskList.size();
+            return taskList.size();
     }
 
-    public Task getTask(Integer index) {
-        return taskList.get(index);
+    public Task getTask(Integer index) throws DukeException {
+        try {
+            return taskList.get(index);
+        } catch (IndexOutOfBoundsException ex) {
+            String errorMessage = String.format("There are only %d tasks but task %d was requested",
+                    taskList.size(), (index + 1));
+            throw new TaskDoesNotExistException(errorMessage);
+        }
     }
 
     /**
@@ -56,8 +65,5 @@ public class TaskList {
      */
     public void delete(Integer taskNumber) {
         taskList.remove(taskNumber.intValue());
-        for (Task task : taskList) {
-            System.out.println(task);
-        }
     }
 }

@@ -1,9 +1,12 @@
-import command.Command;
-import util.*;
+package duke;
+
+import duke.command.Command;
+import duke.util.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 
 public class Duke {
 

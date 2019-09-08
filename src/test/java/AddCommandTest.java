@@ -1,7 +1,7 @@
-import command.AddCommand;
+import duke.command.AddCommand;
 import org.junit.jupiter.api.Test;
-import util.DukeException;
-import util.TaskList;
+import duke.util.DukeException;
+import duke.util.TaskList;
 
 import java.io.IOException;
 

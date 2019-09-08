@@ -1,4 +1,4 @@
-package util;
+package duke.util;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class Ui {
     }
 
     public static void showLoading(int size) {
-        System.out.println("Loaded " + size + (size == 1 ? " task" : " tasks") + System.lineSeparator());
+        System.out.println("Loaded " + size + (size == 1 ? "task" : " tasks") + System.lineSeparator());
     }
 
     public static void showLoadingError(String message) {
@@ -33,6 +33,8 @@ public class Ui {
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        if (sc.hasNext())
+            return sc.nextLine();
+        return "bye";
     }
 }

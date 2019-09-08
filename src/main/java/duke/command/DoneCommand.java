@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import util.Storage;
-import util.TaskList;
-import util.Ui;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 import static java.lang.Integer.parseInt;
 

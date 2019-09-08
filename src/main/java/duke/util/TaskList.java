@@ -1,6 +1,6 @@
-package util;
+package duke.util;
 
-import task.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -40,14 +40,14 @@ public class TaskList {
         System.out.println("Noted. I've removed this task: ");
         System.out.println("  " + tasks.get(index));
         tasks.remove(index);
-        System.out.println("You now have " + getSize() + (getSize() == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.");
     }
 
     public void add(Task t) {
         tasks.add(t);
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + t);
-        System.out.println("You now have " + getSize() + (getSize() == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.");
     }
 
 }

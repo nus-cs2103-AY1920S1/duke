@@ -1,6 +1,6 @@
-package util;
+package duke.util;
 
-import command.*;
+import duke.command.*;
 
 public class Parser {
 

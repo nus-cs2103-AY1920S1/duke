@@ -1,7 +1,9 @@
 package duke.task;
 
 import duke.task.tasks.Task;
+import storage.Storage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
  * </p>
  */
 public class TasksController {
+    private Storage storage;
     private List<Task> tasks;
     private TasksView view;
 
@@ -18,11 +21,21 @@ public class TasksController {
      * <p>
      * TaskListController constructor.
      * </p>
-     * @param tasks list of tasks.
+     * @param view list of tasks.
      */
-    public TasksController(List<Task> tasks, TasksView view) {
-        this.tasks = tasks;
+    private TasksController(Storage storage, TasksView view) {
+        this.storage = storage;
         this.view = view;
+
+        if (tasks != null) {
+            this.tasks = storage.getTasks();
+        } else {
+            tasks = new ArrayList<>();
+        }
+    }
+
+    public static TasksController fromStorage(Storage storage, TasksView view) {
+        return new TasksController(storage, view);
     }
 
     /***

@@ -4,13 +4,17 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandFactory;
 import duke.command.GreetCommand;
+import duke.task.TasksView;
 import error.ConfigurationException;
 import fx.FxMain;
 import javafx.application.Application;
 import duke.task.tasks.Task;
 import duke.task.TasksController;
+import storage.Storage;
 import ui.UiActivity;
 import ui.UiController;
+import ui.input.InputHandler;
+import ui.output.OutputHandler;
 import util.DukeInput;
 import util.OutputBuilder;
 import util.DukeOutput;
@@ -27,18 +31,16 @@ import java.util.Optional;
 
 public class Duke implements UiActivity {
     private boolean isConfigured;
+    private boolean isExit;
 
     private UiController ui;
     private TasksController tasks;
 
 
     public static void main(String[] args) {
-        try {
-            Duke duke = new Duke();
-            duke.run();
-        } catch (ConfigurationException e) {
-            System.out.println("FATAL: " + e.getMessage());
-        }
+        Duke duke = new Duke();
+        duke.configure(OptionsFactory.select(false, false));
+        duke.run();
     }
 
     @Override
@@ -47,22 +49,30 @@ public class Duke implements UiActivity {
     }
 
     public void configure(Options options) {
-        ui = options.getUi();
-        tasks = options.getTasks();
+        InputHandler input = options.getInput();
+        OutputHandler output = options.getOutput();
+
+        ui = new UiController(input, output, this);
+
+        Storage storage = options.getStorage();
+        TasksView view = new TasksView(ui);
+
+        tasks = TasksController.fromStorage(storage, view);
 
         isConfigured = true;
     }
 
-    public void run() throws ConfigurationException {
+    public void run() {
         if (!isConfigured) {
-            throw new ConfigurationException("Unable to configure application");
+            System.out.print("Fatal error: Unable to configure program!");
         } else {
             startApplication();
         }
     }
 
     public void startApplication() {
-
+        System.out.println("Program starting...");
+        ui.start();
     }
 
 
@@ -121,8 +131,6 @@ public class Duke implements UiActivity {
 //    public TasksController getTasksController() {
 //        return tasksController;
 //    }
-
-
 
 
 }

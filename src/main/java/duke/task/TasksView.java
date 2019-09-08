@@ -12,7 +12,7 @@ import java.util.List;
  * View in charge of printing all duke.task related information and output.
  * </p>
  */
-class TasksView {
+public class TasksView {
     private UiController ui;
 
     public TasksView(UiController ui) {

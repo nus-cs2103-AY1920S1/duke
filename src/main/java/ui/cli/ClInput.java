@@ -2,6 +2,7 @@ package ui.cli;
 
 import ui.input.InputHandler;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClInput extends InputHandler {
@@ -11,6 +12,7 @@ public class ClInput extends InputHandler {
     private static ClInput singleton;
 
     private ClInput() {
+        super(new ArrayList<>());
         isActive = true;
         scanner = new Scanner(System.in);
     }
@@ -27,6 +29,7 @@ public class ClInput extends InputHandler {
     public void start() {
         while (isActive) {
             String input = scanner.nextLine();
+            updateAllListeners(input);
         }
     }
 

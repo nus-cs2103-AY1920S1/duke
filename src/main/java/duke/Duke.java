@@ -1,14 +1,5 @@
 package duke;
 
-import javafx.animation.PauseTransition;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-import javafx.util.Duration;
-
 import java.io.FileNotFoundException;
 
 /**
@@ -25,14 +16,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    //private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
 
     public Duke() {
 
@@ -50,24 +33,14 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
-    /*
-    public void run() {
-        ArrayList<Task> list = tasks.getList();
-        //ui.showWelcome();
-        boolean isExit = false;
-    }
-    */
 
     public static void main(String[] args) {
-        //new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt").run();
     }
 
     String getResponse(String input) {
-        //duke.TaskList taskList = new duke.TaskList(storage.load());;
         if(input.equals("bye")) {
             System.exit(0);
             return null;

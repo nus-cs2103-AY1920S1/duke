@@ -1,6 +1,4 @@
-T / 1 / read book
-D / 1 / return book / June 6th
-E / 1 / project meeting / Aug 6th 2-4pm
-T / 0 / read book
-T / 1 / aaaa
-T / 1 / readbk
+T // 0 // reabk #harry potter #chapter #page555 #maybeasdasodnadn asdnas
+T // 0 // aaaa
+E // 0 // party // 09/09/2019 1100 2200
+D // 0 // submit hw // 12/12/2019 1800

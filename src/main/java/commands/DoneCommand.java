@@ -14,12 +14,14 @@ public class DoneCommand extends Command {
     /**
      * This method is used to mark a task in the list as completed.
      *
-     * @return duke's response after marking the task
+     * @return duke's response after marking the task as done
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert Math.abs(taskNumToMark) >= 0;
         try {
             if (!tasks.getTask(taskNumToMark).isDone()) {
                 tasks.doneTask(taskNumToMark);
+                assert tasks.getList()!= null;
                 storage.updateList(tasks.getList());
                 return ui.print("Nice! I've marked this task as done: " + "\n" + tasks.getList().get(taskNumToMark - 1));
             }

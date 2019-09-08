@@ -13,6 +13,7 @@ public class ExitCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         //tasks.addTask(taskToAdd);
+        assert tasks.getList()!= null;
         storage.updateList(tasks.getList());
         return ui.print("Bye. Hope to see you again soon!");
     }

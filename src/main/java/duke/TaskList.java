@@ -32,6 +32,7 @@ public class TaskList {
      * @param taskToAdd the task to add
      */
     public void addTask(Task taskToAdd) {
+        assert taskToAdd != null;
         list.add(taskToAdd);
     }
 

@@ -1,16 +1,12 @@
 package commands;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
+public class HelpCommand extends Command {
 
-public class ErrorCommand extends Command {
-    private String msg;
-
-    public ErrorCommand(String msg) {
-        assert msg != null;
-        this.msg = msg;
+    public HelpCommand() {
     }
 
     /**
@@ -19,7 +15,7 @@ public class ErrorCommand extends Command {
      * @return duke's response after error
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        assert msg != null;
-        return msg;
+        return new Storage("C:\\duke\\src\\main\\java\\data\\help.txt").accessHelp();
     }
+
 }

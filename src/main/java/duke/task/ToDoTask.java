@@ -14,6 +14,22 @@ public class ToDoTask extends Task {
     }
 
     /**
+     * Constructs the name of the todo task.
+     * @param todo the array containing the data for the task name.
+     * @return the task name as a String.
+     */
+    public static String getName(String[] todo) {
+        String taskName = "";
+        for (int i = 1; i < todo.length; i++) {
+            if (i > 1) {
+                taskName += " ";
+            }
+            taskName += todo[i];
+        }
+        return taskName;
+    }
+
+    /**
      * Constructs a ToDo Task based on the name and the isComplated value given.
      * @param todo The name of the task.
      * @param isCompleted Whether the task is Completed or not.

@@ -1,11 +1,14 @@
 package duke.task;
 
+import duke.tag.Tag;
+
 /**
  * A Class that represents a Task in which the user wishes to complete.
  */
 public class Task {
     public String todo;
     public boolean isCompleted;
+    private Tag tag;
 
     /**
      * Constructs a Task which sets the default of isCompleted value to false.
@@ -14,6 +17,7 @@ public class Task {
     public Task(String todo) {
         this.todo = todo;
         this.isCompleted = false;
+        this.tag = null;
     }
 
     /**
@@ -24,6 +28,22 @@ public class Task {
     public Task(String todo, boolean isCompleted) {
         this.todo = todo;
         this.isCompleted = isCompleted;
+    }
+
+    /**
+     * Pushes a new tag to the Task.
+     * @param tag the tag for the task.
+     */
+    public void pushTag(Tag tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * Retrieves the tag.
+     * @return the tag.
+     */
+    public Tag getTag() {
+        return this.tag;
     }
 
     /**

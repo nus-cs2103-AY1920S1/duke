@@ -64,6 +64,16 @@ public class Ui {
     }
 
     /**
+     * Shows the task which the user has tagged.
+     * @param task The tagged task.
+     */
+    public void showTaggedTask(Task task) {
+        append("Got it, I've tagged this task: ");
+        append(task.toString());
+        append("Now, it has the tag: " + task.getTag().toString() + ".");
+    }
+
+    /**
      * Sends a simple greeting to the user.
      */
     public void sendGreeting() {
@@ -83,6 +93,10 @@ public class Ui {
      * @param taskIndexes Represents the list of matching tasks indexes.
      */
     public void showMatchingTasks(ArrayList<Integer> taskIndexes) {
+        if (taskIndexes.size() == 0) {
+            append("You have no matching tasks in your list!");
+            return;
+        }
         append("Here are the matching tasks in your list:");
         for (int i = 0; i < taskIndexes.size(); i++) {
             Task task = TaskList.getTask(taskIndexes.get(i));

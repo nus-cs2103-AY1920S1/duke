@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exception.InvalidTaskIndexException;
+import duke.exception.InvalidToDoException;
+import duke.tag.Tag;
 
 import java.util.ArrayList;
 
@@ -43,8 +45,8 @@ public class TaskList {
      * @param toDoData The name of the ToDo Task.
      * @return The index of the new task.
      */
-    public int addTodoTask(String toDoData) {
-        ToDoTask newTask = new ToDoTask(toDoData);
+    public int addTodoTask(String[] toDoData) {
+        ToDoTask newTask = new ToDoTask(ToDoTask.getName(toDoData));
         tasks.add(newTask);
 
         int index = tasks.size() - 1;
@@ -124,6 +126,12 @@ public class TaskList {
         }
 
         return matchingIndexes;
+    }
+
+    public Task addTag(int index, Tag tag) {
+        Task task = this.tasks.get(index);
+        task.pushTag(tag);
+        return task;
     }
 
     /**

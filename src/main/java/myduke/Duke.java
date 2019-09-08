@@ -52,7 +52,7 @@ public class Duke {
             cmd.execute(tasks, ui, storage);
             shouldContinueChat = !cmd.shouldExit();
         } catch (Exception ex) {
-            ui.logError(ex.getMessage());
+            ui.logError(ex.toString());
         }
         ui.displayMessage();
 

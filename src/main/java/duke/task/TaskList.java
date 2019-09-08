@@ -37,10 +37,10 @@ public class TaskList {
     public void load(Storage storage) {
         ArrayList<Task> tasks = storage.parseFile();
         list.clear();
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             list.add(task);
             Task.addToTotalTasks();
-        }
+        });
     }
 
     /**
@@ -119,11 +119,11 @@ public class TaskList {
      */
     public TaskList filterByString(String substring) {
         TaskList tasklist = new TaskList();
-        for (Task task : list) {
+        list.forEach(task -> {
             if (task.getDescription().contains(substring)) {
                 tasklist.addTask(task);
             }
-        }
+        });
         return tasklist;
     }
 

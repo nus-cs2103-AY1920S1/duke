@@ -30,6 +30,7 @@ public class Duke{
                 case "event":
                 case "deadline":
                     try {
+                        System.out.println(userInput.split(" ", 2)[1]);
                         addToTodo(userInput.split(" ", 2)[1], userCommand);
                     }
                     //try to catch more exceptions

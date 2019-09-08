@@ -3,7 +3,7 @@ public class ListItem {
     private String description;
     private String status;
     private boolean isDone = false;
-    private String date = "";
+    private Date date;
 
 
     public ListItem(String description, String command) {
@@ -16,12 +16,12 @@ public class ListItem {
                 case "event":
                     this.status = "[E]";
                     this.description = description.split("/")[0];
-                    this.date = "(at: " + description.split("/")[1] + ")";
+                    this.date = new Date(description.split("/",2)[1] + ")");
                     break;
                 case "deadline":
                     this.status = "[D]";
                     this.description = description.split("/")[0];
-                    this.date = "(by: " + description.split("/")[1] + ")";
+                    this.date = new Date(description.split("/",2)[1] + ")");
                     break;
             }
         }
@@ -33,6 +33,7 @@ public class ListItem {
     void done() {
         this.isDone = true;
     }
+
 
     @Override
     public String toString() {

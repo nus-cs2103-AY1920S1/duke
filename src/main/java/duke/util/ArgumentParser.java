@@ -105,6 +105,7 @@ public class ArgumentParser {
      * @return           the concatenated String
      */
     public static String concatenate(String[] strings, int fromIndex, int toIndex) {
+        assert fromIndex <= toIndex : "fromIndex cannot be greater than toIndex";
         StringBuilder sb = new StringBuilder();
         for (int i = fromIndex; i < toIndex; i++) {
             sb.append(strings[i]);

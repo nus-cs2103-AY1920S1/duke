@@ -24,6 +24,7 @@ public class TodoCommand extends Command {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
+        assert comArgs != null : "comArgs cannot be null";
         if (comArgs.length == 0) {
             throw new DukeException("The description of a todo cannot be empty.");
         }

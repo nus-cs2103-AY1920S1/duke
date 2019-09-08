@@ -11,10 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -45,7 +42,8 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt");
+        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia" +
+                "/CS2103/Individual_project/Duke/local/Tasks.txt");
         tasks = new TaskList(storage.load());
         ui.welcome();
     }
@@ -68,80 +66,7 @@ public class Duke extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        scrollPane = new ScrollPane();
-//        dialogContainer = new VBox();
-//        scrollPane.setContent(dialogContainer);
-//
-//        userInput = new TextField();
-//        sendButton = new Button("Send");
-//
-//        AnchorPane mainLayout = new AnchorPane();
-//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-//
-//        scene = new Scene(mainLayout);
-//        stage.setTitle("Duke");
-//        stage.setResizable(false);
-//        stage.setMinHeight(600.0);
-//        stage.setMinWidth(400.0);
-//
-//        mainLayout.setPrefSize(400.0, 600.0);
-//
-//        scrollPane.setPrefSize(385, 535);
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//
-//        scrollPane.setVvalue(1.0);
-//        scrollPane.setFitToWidth(true);
-//
-//        // You will need to import `javafx.scene.layout.Region` for this.
-//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-//
-//        userInput.setPrefWidth(325.0);
-//
-//        sendButton.setPrefWidth(55.0);
-//
-//        AnchorPane.setTopAnchor(scrollPane, 1.0);
-//
-//        AnchorPane.setBottomAnchor(sendButton, 1.0);
-//        AnchorPane.setRightAnchor(sendButton, 1.0);
-//
-//        AnchorPane.setLeftAnchor(userInput , 1.0);
-//        AnchorPane.setBottomAnchor(userInput, 1.0);
-//
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
-//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-//        stage.setScene(scene);
-//        stage.show();
     }
-
-//    /**
-//     * Iteration 2:
-//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-//     * the dialog container. Clears the user input after processing.
-//     */
-//    private void handleUserInput() {
-//        String userText = new String(userInput.getText());
-//        String dukeText = new String(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new Image(user)),
-//                DialogBox.getDukeDialog(dukeText, new Image(duke))
-//        );
-//        userInput.clear();
-//    }
-
-//    /**
-//     * You should have your own function to generate a response to user input.
-//     * Replace this stub with your completed method.
-//     */
-//    protected String getResponse(String input) {
-//        return "Duke heard: " + input;
-//    }
 
     /**
      * Iteration 1:
@@ -162,67 +87,24 @@ public class Duke extends Application {
 
         Scanner sc = new Scanner(System.in);
         String input;
+        input = sc.nextLine();
         String check = "dummy";
         int taskCount;
-
         while (check.equals("bye") == false) {
-            try {
-                input = sc.nextLine();
-                check = input.toLowerCase();
-                if (check.equals("list")) {
-                    System.out.println(ui.showListOfTask(tasks));
-                    continue;
-                }
-
-                Parser parser = new Parser(input);
-                String userCommand = parser.getUserCommand();
-                String due = parser.getDue();
-                String taskDescription = parser.getTaskDescription();
-
-                if (userCommand.equals("done")) {
-                    int target = Integer.valueOf(taskDescription);
-                    Task taskDone;
-                    if (tasks.size() >= target && target > 0) {
-                        taskDone = tasks.get(target - 1);
-                    } else {
-                        throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
-                    }
-                    taskDone.markAsDone();
-                    storage.updateLocalFile(tasks.get());
-                    System.out.println(ui.doneAnnouncement(taskDone));
-                } else if (userCommand.equals("find")) {
-                    System.out.println(tasks.keywordSearch(taskDescription));
-                } else if (userCommand.equals("delete")) {
-                    int target = Integer.valueOf(taskDescription);
-                    Task taskDelete;
-                    if (tasks.size() >= target && target > 0) {
-                        taskDelete = tasks.get((target - 1));
-                        tasks.removeTask((target - 1));
-                    } else {
-                        throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
-                    }
-                    Task.reduceTaskCount();
-                    storage.updateLocalFile(tasks.get());
-                    taskCount = Task.getTaskCount();
-                    System.out.println(ui.deleteAnnouncement(taskDelete, taskCount));
-                } else if (!check.equals("bye")) {
-                    System.out.print(createTask(userCommand, due, taskDescription, storage, ui, tasks));
-                }
-            } catch (DukeException ex) {
-                System.out.println("OOPS!!! " + ex.getMessage() + "\n");
-            }
+            System.out.println(execution(input));
         }
-
-        System.out.println(ui.sayYourGoodBye());
     }
 
     /**
      * Contains most of the operations of the Task Manager bot.
      */
     protected String getResponse(String input) {
+        return execution(input);
+    }
+
+    private String execution(String input) {
         String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt";
 
-        Scanner sc = new Scanner(System.in);
         String check = "dummy";
         int taskCount;
 
@@ -259,9 +141,8 @@ public class Duke extends Application {
                 } else {
                     throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
                 }
-                Task.reduceTaskCount();
                 storage.updateLocalFile(tasks.get());
-                taskCount = Task.getTaskCount();
+                taskCount = tasks.size();
                 return ui.deleteAnnouncement(taskDelete, taskCount);
             } else if (!check.equals("bye")) {
                 return createTask(userCommand, due, taskDescription, storage, ui, tasks);
@@ -271,33 +152,7 @@ public class Duke extends Application {
         } catch (DukeException ex) {
             System.out.println("OOPS!!! " + ex.getMessage() + "\n");
         }
-
-        return "Are you speaking in botlang? I don't understand what you are saying!";
-    }
-
-    /**
-     * Converts user input in the form of String to the format of Date.
-     * The Task Manager has the ability to read dates instead of taking dates as String.
-     *
-     * @param input The date/ time input in the form of String. It should follow either dd/MM/yyyy HHmm or HHmm format.
-     * @return Date format of the input String.
-     */
-    private static Date convertStringToDate(String input) {
-        Date date = new Date();
-        try {
-            if (input.length() <= 5) {
-                SimpleDateFormat formatTimeOnly = new SimpleDateFormat("HHmm");
-                date = formatTimeOnly.parse(input.trim());
-                return date;
-            } else {
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm", Locale.ENGLISH);
-                date = format.parse(input);
-                return date;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
+        return "Sorry I don't understand what you are trying to tell me.";
     }
 
     /**
@@ -328,7 +183,7 @@ public class Duke extends Application {
             tasks.add(t);
             storage.writeToFile(typeOfTask, "0", taskDescription, t);
         } else if (userCommand.equals("deadline")) {
-            Date dateDue = convertStringToDate(due);
+            Date dateDue = storage.convertStringToDate(due);
             if (taskDescription.equals("dummy")) {
                 throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
             }
@@ -338,8 +193,8 @@ public class Duke extends Application {
             storage.writeToFile(typeOfTask, "0", taskDescription, t);
         } else if (userCommand.equals("event")) {
             String[] eventStartEnd = due.split("-", 2);
-            Date start = convertStringToDate(eventStartEnd[0]);
-            Date end = convertStringToDate(eventStartEnd[1]);
+            Date start = storage.convertStringToDate(eventStartEnd[0]);
+            Date end = storage.convertStringToDate(eventStartEnd[1]);
 
             if (taskDescription.equals("dummy")) {
                 throw new EmptyDescriptionException("The description of a event cannot be empty.");
@@ -352,7 +207,8 @@ public class Duke extends Application {
             throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }
 
-        int taskCount = Task.getTaskCount();
+        assert tasks.size() > 0 : "List of tasks should not be empty.";
+        int taskCount = tasks.size();
         return ui.newTaskAdded(t, taskCount);
     }
 }

@@ -1,5 +1,6 @@
+package duke.frontend;
+
 import duke.exception.DukeException;
-import duke.frontend.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 

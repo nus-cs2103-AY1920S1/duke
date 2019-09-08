@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Represents a list of tasks.
  */
 public class TaskList {
-    /** ArrayList to store Tasks. */
+    /** ArrayList of tasks including ToDos, Deadlines, Events. */
     private ArrayList<Task> list;
 
     /**
@@ -30,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Loads the tasks from storage.
+     * Loads the tasks from storage file into TaskList object.
      *
      * @param storage Storage instance to load files.
      */

@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.commands.Command;
+import seedu.duke.exceptions.DukeException;
+
 /**
  * Main class of Duke application.
  */
@@ -22,6 +25,11 @@ public class Duke {
      * @param input The input from the user.
      */
     public String getResponse(String input) {
-        return parser.process(input);
+        try {
+            Command command = parser.parse(input);
+            return command.execute();
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 }

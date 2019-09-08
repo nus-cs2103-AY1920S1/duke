@@ -58,4 +58,16 @@ public class TaskList extends ArrayList<Task> {
         }
         return sb.toString();
     }
+
+    public String getListSizeMsg() {
+        return "Now you have " + size() + " tasks in the list.\n";
+    }
+
+    public String getAddedMsg(Task task) {
+        assert task != null;
+        String taskString = "  " + task + "\n";
+        return "Got it. I've added this task:\n"
+                + taskString
+                + getListSizeMsg();
+    }
 }

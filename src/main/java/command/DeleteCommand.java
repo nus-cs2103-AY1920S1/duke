@@ -1,7 +1,14 @@
-public class DeleteCommand extends Command {
+package command;
+
+import task.Task;
+import util.Storage;
+import util.TodoList;
+import util.exception.DukeException;
+
+public class DeleteCommand extends command.Command {
     private int index;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 

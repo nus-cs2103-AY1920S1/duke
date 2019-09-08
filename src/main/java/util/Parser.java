@@ -1,10 +1,19 @@
+package util;
+
+import command.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import util.exception.DukeException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 
-class Parser {
+public class Parser {
     private static HashSet<String> keywords;
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
@@ -20,7 +29,7 @@ class Parser {
         keywords.add("find");
     }
 
-    static Command parse(String[] args) throws DukeException {
+    public static Command parse(String[] args) throws DukeException {
         if (!keywords.contains(args[0])) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

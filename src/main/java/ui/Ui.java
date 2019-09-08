@@ -1,6 +1,12 @@
+package ui;
+
+import command.Command;
+import util.Parser;
+import util.exception.DukeException;
+
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
     private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -9,28 +15,28 @@ class Ui {
     private final String LINE = "______________________________";
     private Scanner scanner;
 
-    Ui() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
-    String welcome() {
+    public String welcome() {
         return ("Hello from\n" + LOGO + "\nWhat can I do for you ?");
     }
 
-    Command getUserInput() throws DukeException {
+    public Command getUserInput() throws DukeException {
         String[] input = this.scanner.nextLine().trim().split("\\s+");
         return Parser.parse(input);
     }
 
-    void printResponse(String response) {
+    public void printResponse(String response) {
         System.out.println(encase(response));
     }
 
-    void printErrorMessage(DukeException e) {
+    public void printErrorMessage(DukeException e) {
         System.out.println(encase(e.getMessage()));
     }
 
-    String encase(String message) {
+    public String encase(String message) {
         return String.join("\n", new String[]{ LINE, message, LINE });
     }
 }

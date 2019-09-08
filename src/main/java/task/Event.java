@@ -1,10 +1,12 @@
+package task;
+
 import java.util.Date;
 
 public class Event extends Task {
     private Date startPeriod;
     private Date endPeriod;
 
-    Event(String description, Date startPeriod, Date endPeriod) {
+    public Event(String description, Date startPeriod, Date endPeriod) {
         super(description);
         this.startPeriod = startPeriod;
         this.endPeriod = endPeriod;

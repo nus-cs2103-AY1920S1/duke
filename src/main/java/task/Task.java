@@ -1,3 +1,5 @@
+package task;
+
 import java.io.Serializable;
 
 public class Task implements Serializable {
@@ -9,7 +11,7 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 

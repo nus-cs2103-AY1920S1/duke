@@ -1,7 +1,14 @@
+package command;
+
+import task.Task;
+import util.Storage;
+import util.TodoList;
+import util.exception.DukeException;
+
 public class DoneCommand extends Command {
     private int index;
 
-    DoneCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 

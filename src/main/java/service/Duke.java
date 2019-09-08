@@ -1,8 +1,17 @@
+package service;
+
+import command.Command;
+import ui.Ui;
+import util.Storage;
+import util.TodoList;
+import util.exception.DukeException;
+import util.Parser;
+
 public class Duke {
     private TodoList tasks;
     private Storage storage;
     private Ui ui;
-    private static final String filePath = "/home/dingyuchen/cs2103/duke/src/main/data/duke.ser";
+    private static final String FILE_PATH = "/home/dingyuchen/cs2103/duke/src/main/data/duke.ser";
 
 
     private Duke(String s) {
@@ -11,8 +20,8 @@ public class Duke {
         tasks = storage.load();
     }
 
-    Duke() {
-        this(filePath);
+    public Duke() {
+        this(FILE_PATH);
     }
 
     private void run() {
@@ -33,16 +42,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke(filePath);
+        Duke duke = new Duke(FILE_PATH);
         duke.run();
     }
 
-    String getResponse(String input) {
+    public String getResponse(String input) {
         Command c = Parser.parse(input.trim().split("\\s+"));
         return ui.encase(c.run(tasks, storage));
     }
 
-    String welcome() {
+    public String welcome() {
         return this.ui.welcome();
     }
 }

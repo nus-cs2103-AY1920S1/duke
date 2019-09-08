@@ -9,7 +9,6 @@ import utils.Storage;
 import utils.Ui;
 
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Duke {
@@ -37,6 +36,7 @@ public class Duke {
         storage = new Storage(ROOT + STORAGE_PATH);
         ui = new Ui();
         commandCentre = new CommandCentre();
+        commandCentre.setUi(ui);
         parser = new Parser();
         parser.setCommandCentre(commandCentre);
         isExiting = false;
@@ -82,102 +82,103 @@ public class Duke {
      * them to command centre.
      */
     private void initializeCommands() {
-        commandCentre.register("bye", new Command() {
-            @Override
-            public void execute() {
-                ui.printByeMessage();
-                isExiting = true;
+        commandCentre.register("bye", () -> {
+            ui.printByeMessage();
+            isExiting = true;
+        });
+
+        commandCentre.register("help", () -> ui.printHelpMessage());
+
+        commandCentre.register("list", () -> {
+            if (taskList.isEmpty()) {
+                ui.printEmptyTaskListMessage();
+            } else {
+                ui.printTaskList(taskList.getTasks(), Ui.LIST_ACTION_TITLE);
             }
         });
 
-        commandCentre.register("help", new Command() {
-            @Override
-            public void execute() {
-                ui.printHelpMessage();
-            }
-        });
+        commandCentre.register("done", () -> {
+            Integer idx = parser.parseTaskIdx();
+            if (idx != null) {
+                taskList.markAsDone(idx);
+                storage.updateData();
+                ui.printMarkedAsDoneMessage(taskList.get(idx));
 
-        commandCentre.register("list", new Command() {
-            @Override
-            public void execute() {
-                if (taskList.isEmpty()) {
-                    ui.printEmptyTaskListMessage();
-                } else {
-                    ui.printTaskList(taskList.getTasks(), Ui.LIST_ACTION_TITLE);
-                }
-            }
-        });
-
-        commandCentre.register("done", new Command() {
-            @Override
-            public void execute() {
-                Integer idx = parser.parseTaskIdx();
-                if (idx != null) {
-                    taskList.markAsDone(idx);
+                commandCentre.addToHistory(() -> {
+                    taskList.markAsNotDone(idx);
                     storage.updateData();
-                    ui.printMarkedAsDoneMessage(taskList.get(idx));
-                }
+                    ui.printUndoMessage();
+                    ui.printMarkedAsNotDoneMessage(taskList.get(idx));
+                });
             }
         });
 
-        commandCentre.register("delete", new Command() {
-            @Override
-            public void execute() {
-                Integer idx = parser.parseTaskIdx();
-                if (idx != null) {
-                    Task task = taskList.deleteTask(idx);
+        commandCentre.register("delete", () -> {
+            Integer idx = parser.parseTaskIdx();
+            if (idx != null) {
+                Task task = taskList.deleteTask(idx);
+                storage.updateData();
+                ui.printTaskDeletedMessage(task, taskList.size());
+
+                commandCentre.addToHistory(() -> {
+                    taskList.insertTask(task, idx);
                     storage.updateData();
-                    ui.printTaskDeletedMessage(task, taskList.size());
-                }
+                    ui.printUndoMessage();
+                    ui.printTaskAddedMessage(task, taskList.size());
+                });
             }
         });
 
-        commandCentre.register("todo", new Command() {
-            @Override
-            public void execute() {
-                String taskName = parser.parseTodoDetail();
-                if (taskName != null) {
-                    Task newTask = taskList.addNewTodoTask(taskName, false);
-                    storage.updateData();
-                    ui.printTaskAddedMessage(newTask, taskList.size());
-                }
+        commandCentre.register("todo", () -> {
+            String taskName = parser.parseTodoDetail();
+            if (taskName != null) {
+                Task task = taskList.addNewTodoTask(taskName, false);
+                storage.updateData();
+                ui.printTaskAddedMessage(task, taskList.size());
+                commandCentre.addToHistory(generateDeleteTaskCommand(taskList.size()-1, true));
             }
         });
 
-        commandCentre.register("deadline", new Command() {
-            @Override
-            public void execute() {
-                String[] taskInfo = parser.parseDeadlineDetail();
-                if (taskInfo != null) {
-                    Task newTask = taskList.addNewDeadlineTask(taskInfo[0], taskInfo[1], false);
-                    storage.updateData();
-                    ui.printTaskAddedMessage(newTask, taskList.size());
-                }
+        commandCentre.register("deadline", () -> {
+            String[] taskInfo = parser.parseDeadlineDetail();
+            if (taskInfo != null) {
+                Task newTask = taskList.addNewDeadlineTask(taskInfo[0], taskInfo[1], false);
+                storage.updateData();
+                ui.printTaskAddedMessage(newTask, taskList.size());
+                commandCentre.addToHistory(generateDeleteTaskCommand(taskList.size()-1, true));
             }
         });
 
-        commandCentre.register("event", new Command() {
-            @Override
-            public void execute() {
-                String[] taskInfo = parser.parseEventDetail();
-                if (taskInfo != null) {
-                    Task newTask = taskList.addNewEventTask(taskInfo[0], taskInfo[1], false);
-                    storage.updateData();
-                    ui.printTaskAddedMessage(newTask, taskList.size());
-                }
+        commandCentre.register("event", () -> {
+            String[] taskInfo = parser.parseEventDetail();
+            if (taskInfo != null) {
+                Task newTask = taskList.addNewEventTask(taskInfo[0], taskInfo[1], false);
+                storage.updateData();
+                ui.printTaskAddedMessage(newTask, taskList.size());
+                commandCentre.addToHistory(generateDeleteTaskCommand(taskList.size()-1, true));
             }
         });
 
-        commandCentre.register("find", new Command() {
-            @Override
-            public void execute() {
-                String keyword = parser.parseFindKeyword();
-                if (keyword != null) {
-                    List<Task> findResult = taskList.generateListByKeyword(keyword);
-                    ui.printTaskList(findResult, Ui.FIND_ACTION_TITLE);
-                }
+        commandCentre.register("find", () -> {
+            String keyword = parser.parseFindKeyword();
+            if (keyword != null) {
+                List<Task> findResult = taskList.generateListByKeyword(keyword);
+                ui.printTaskList(findResult, Ui.FIND_ACTION_TITLE);
             }
         });
+
+        commandCentre.register("undo", () -> {
+            commandCentre.undo();
+        });
+    }
+
+    private Command generateDeleteTaskCommand(int idx, boolean isUndo) {
+        return () -> {
+            Task task = taskList.deleteTask(idx);
+            storage.updateData();
+            if (isUndo) ui.printUndoMessage();
+            ui.printTaskDeletedMessage(task, taskList.size());
+        };
     }
 
 }

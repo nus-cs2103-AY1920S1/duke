@@ -117,6 +117,31 @@ public class Ui {
     }
 
     /**
+     * Prints a message that the given task is marked as not done.
+     *
+     * @param task The task that is marked as not done.
+     */
+    public void printMarkedAsNotDoneMessage(Task task) {
+        assert task != null : "Task not found and cannot be printed.";
+        outputBuilder.append("I've marked this task as not done:\n");
+        outputBuilder.append(String.format("%s\n", task));
+    }
+
+    /**
+     * Prints a message to acknowledging the undo-ing of previous action.
+     */
+    public void printUndoMessage() {
+        outputBuilder.append("Undo-ing previous action.\n");
+    }
+
+    /**
+     * Prints a message to explain why undo is not allowed.
+     */
+    public void printUndoNotAllowedMessage() {
+        outputBuilder.append("Undo not allowed as there is no earlier action.\n");
+    }
+
+    /**
      * Prints a message that the given task has been deleted and then
      * prints the total number of tasks remaining.
      *
@@ -196,6 +221,4 @@ public class Ui {
         resetOutputBuilder();
         return output;
     }
-
-
 }

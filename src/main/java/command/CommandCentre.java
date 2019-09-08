@@ -6,6 +6,7 @@ import utils.Ui;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 public class CommandCentre {
 
@@ -14,12 +15,23 @@ public class CommandCentre {
      * respective Command.
      */
     private HashMap<String, Command> commands;
+    /**
+     * A stack to store all the opposite commands of previously executed commands. The opposite of
+     * the most recently executed command will be at the top of the stack.
+     */
+    private Stack<Command> commandHistory;
+    private Ui ui;
 
     /**
      * Manages all commands in the app.
      */
     public CommandCentre() {
         commands = new HashMap<>();
+        commandHistory = new Stack<>();
+    }
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     /**
@@ -54,10 +66,26 @@ public class CommandCentre {
         return commands.containsKey(commandName);
     }
 
+    public void addToHistory(Command command) {
+        commandHistory.push(command);
+    }
+
     /**
-     * Initialize dummy commands for test.
+     * Undoes the latest command that has been executed.
+     * If there are no more latest commands, ui responds with a warning message.
      */
-    public void initializeCommands() {
+    public void undo() {
+        if (!commandHistory.isEmpty()) {
+            commandHistory.pop().execute();
+        } else {
+            ui.printUndoNotAllowedMessage();
+        }
+    }
+
+    /**
+     * Initialize dummy commands for Junit test.
+     */
+    public void initializeDummyCommands() {
         register("bye", new Command() {
             @Override
             public void execute() {

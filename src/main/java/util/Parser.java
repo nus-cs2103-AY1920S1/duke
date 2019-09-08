@@ -1,3 +1,7 @@
+package util;
+
+import command.*;
+
 public class Parser {
 
     public static Command parse(String fullCommand) {

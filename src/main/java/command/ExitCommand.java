@@ -1,3 +1,10 @@
+package command;
+
+import util.DukeException;
+import util.Storage;
+import util.TaskList;
+import util.Ui;
+
 import java.io.IOException;
 
 public class ExitCommand extends Command {

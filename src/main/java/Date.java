@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 public class Date {
     boolean exists = false;
     String precursor = "";
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy hhss");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HHss");
     java.util.Date data;
     public Date(String dateString) {
         precursor = dateString.split(" ", 2)[0];

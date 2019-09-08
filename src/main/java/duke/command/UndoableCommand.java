@@ -14,8 +14,11 @@ public abstract class UndoableCommand extends Command {
 
     protected abstract void undo(Tasklist tasklist);
 
-    @Override
-    public String commandOutput() {
-        return "This command was undone: " + super.commandOutput();
+    /**
+     * Tells user that the command was undone.
+     * @return a string message.
+     */
+    protected String undoneMessage() {
+        return "This command was undone: ";
     }
 }

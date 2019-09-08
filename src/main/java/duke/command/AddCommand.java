@@ -50,6 +50,10 @@ public class AddCommand extends UndoableCommand {
         }
     }
 
+    /**
+     * Undoes add command.
+     * @param tasklist List containing user's tasks.
+     */
     @Override
     protected void undo(Tasklist tasklist) {
         tasklist.remove(tasklist.size() - 1);

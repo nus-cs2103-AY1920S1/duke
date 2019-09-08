@@ -30,4 +30,13 @@ public abstract class Command {
     public String commandOutput() {
         return commandOutput;
     }
+
+    /**
+     * Returns the class name.
+     * @return the class name.
+     */
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }

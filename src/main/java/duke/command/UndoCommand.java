@@ -12,10 +12,18 @@ import duke.ui.Ui;
  */
 public class UndoCommand extends Command {
 
+    /**
+     * Executes an undo command.
+     * @param list List of tasks.
+     * @param ui The user interface the user sees.
+     * @param storage Stores the user's list of tasks.
+     * @param history
+     * @throws DukeException when an error occurs during execution.
+     */
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage, History history) throws DukeException {
         UndoableCommand c = history.getExecutedCommand();
         c.undo(list);
-        super.commandOutput = c.commandOutput();
+        super.commandOutput = c.undoneMessage() + c.toString();
     }
 }

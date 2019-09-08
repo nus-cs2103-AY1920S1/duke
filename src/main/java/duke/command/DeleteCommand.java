@@ -10,8 +10,9 @@ import duke.ui.Ui;
 /**
  * Represents a delete command.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoableCommand {
     private String index;
+    private Task removedTask;
 
     public DeleteCommand(String index) {
         this.index = index;
@@ -27,6 +28,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage, History history) throws DukeException {
+        history.addExecutedCommand(this);
+
         try {
             String inputEntry = index.trim();
             int entry = Integer.parseInt(inputEntry) - 1;
@@ -36,11 +39,21 @@ public class DeleteCommand extends Command {
             }
 
             Task removedTask = list.remove(entry);
+            this.removedTask = removedTask;
 
             super.commandOutput = ui.showDeleted(removedTask.toString(), list.size());
 
         } catch (IllegalArgumentException e) {
             throw new DukeException("You need to specify the task you want to delete!");
         }
+    }
+
+    /**
+     * Undoes delete command.
+     * @param tasklist List containing user's tasks.
+     */
+    @Override
+    protected void undo(Tasklist tasklist) {
+        tasklist.add(removedTask);
     }
 }

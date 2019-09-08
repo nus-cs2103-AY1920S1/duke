@@ -1,15 +1,12 @@
 package duke;
 
-import java.util.List;
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.parser.Comd;
 import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
-import duke.task.Task;
 
 /**
  * Main class for Duke.
@@ -59,12 +56,20 @@ public class Duke {
             }
         } while (!input.contains("bye"));
     }
-    /*
+
     public String getResponse(String input) {
-
-    }*/
-
+        Command command = new Command(parser.getCommand(input), input);
+        Command result = new Command();
+        try {
+            result = taskList.doCommand(command);
+            storage.writeDuke(result.getTaskList());
+        } catch (DukeException | IOException ex) {
+            ui.printError(ex);
+        }
+        return result.getOutput();
+    }
+    /*
     public static void main(String[] args) {
         new Duke("resources/data/duke.txt").run();
-    }
+    }*/
 }

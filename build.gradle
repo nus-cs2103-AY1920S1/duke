@@ -12,8 +12,8 @@ repositories {
 }
 
 application {
-    //mainClassName = 'duke.Launcher'
-    mainClassName = 'duke.Duke'
+    mainClassName = 'duke.Launcher'
+    //mainClassName = 'duke.Duke'
 }
 
 dependencies {

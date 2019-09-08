@@ -21,9 +21,9 @@ public class DukeGui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("resources/images/goodmorning.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("resources/images/goodnight.png"));
-    private String filePath = "resources/data/duke.txt";
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/goodmorning.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/goodnight.png"));
+    private String filePath = "data/duke.txt";
     private Duke duke;
 
     @Override
@@ -80,13 +80,11 @@ public class DukeGui extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
+            handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -112,14 +110,13 @@ public class DukeGui extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    /*
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(duke.getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(userImage)),
-                new DialogBox(dukeText, new ImageView(dukeImage))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
-    }*/
+    }
 }

@@ -1,9 +1,8 @@
 event type | isDone | description | extra description
 T | 0 | b
-T | 0 | c
+T | 1 | c
 T | 0 | d
 T | 0 | e
 T | 0 | f
 E | 0 | sleep | sdad
 D | 1 |  | 12th of September 2019, 12.01pm
-E | 0 | Sleep | wjekwe

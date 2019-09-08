@@ -93,7 +93,14 @@ public class Verify {
                 message = "oh dear, your date is invalid! please check if you entered it right!";
                 throw new DukeException(message);
             }
-        } else if (command.equals("bye") || command.equals("list")) {
+        } 
+        else if (command.startsWith("find")){
+            if(command.length() <= 5){
+                message = "darn it! you forgot to enter a search term!";
+                throw new DukeException(message);
+            }
+        } 
+        else if (command.equals("bye") || command.equals("list")) {
         } else {
             message = "blast! i don't understand that!";
             throw new DukeException(message);

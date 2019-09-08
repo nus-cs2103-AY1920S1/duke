@@ -1,11 +1,8 @@
 language: java
 
-gradle assemble
-gradle check
-
 matrix:
   include:
-    - jdk: oraclejdk11
+    - jdk: openjdk11
 
 script: >-
   ./config/travis/run-checks.sh &&

@@ -14,4 +14,4 @@ src/main/resources/docs/
 bin/
 
 # Duke data files
-/data/
+duke.txt

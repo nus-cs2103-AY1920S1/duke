@@ -13,42 +13,46 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void save(ArrayList<Task> repeatList) throws IOException {
+    public void save(ArrayList<Task> tasks) throws IOException, DukeException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task t : repeatList) {
-            fw.write(t.printSave() + System.lineSeparator());
+        try {
+            for (Task t : tasks) {
+                fw.write(t.printSave() + System.lineSeparator());
+            }
+        } catch (IOException ex) {
+            throw new DukeException("Error [Storage] 0x0000003: Save Failed.");
         }
         fw.close();
     }
 
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         File dataFile = new File(filePath);
         Scanner sc = new Scanner(dataFile);
         while (sc.hasNext()) {
             String line = sc.nextLine();
-            String[] lineSplit = line.split(" | ");
+            String[] lineSplit = line.split(" \\| ");
             try {
                 switch (line.charAt(0)) {
                     case 'T':
-                        taskList.add(new Todo(lineSplit[4]));
+                        tasks.add(new Todo(lineSplit[1]));
                         break;
                     case 'D':
-                        taskList.add(new Deadline(lineSplit[4], lineSplit[6]));
+                        tasks.add(new Deadline(lineSplit[2], lineSplit[3]));
                         break;
                     case 'E':
-                        taskList.add(new Event(lineSplit[4], lineSplit[6]));
+                        tasks.add(new Event(lineSplit[2], lineSplit[3]));
                         break;
                     default:
-                        throw new DukeException("☹ OOPS!!! Invalid data loaded.");
+                        throw new DukeException("Error [Storage] 0x0000001: Invalid or Malformed Data.");
                 }
-                if (lineSplit[2].equals("1")) {
-                    taskList.get(taskList.size() - 1).done();
+                if (lineSplit[1].equals("1")) {
+                    tasks.get(tasks.size() - 1).done();
                 }
             } catch (IndexOutOfBoundsException ex) {
-                throw new DukeException("☹ OOPS!!! Invalid data loaded.");
+                throw new DukeException("Error [Storage] 0x0000002: Invalid or Malformed Data.");
             }
         }
-        return taskList;
+        return tasks;
     }
 }

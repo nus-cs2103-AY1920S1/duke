@@ -9,7 +9,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         return list();
     }
 

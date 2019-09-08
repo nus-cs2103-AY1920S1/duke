@@ -7,7 +7,7 @@ public class ByeCommand extends Command {
         super(null, null);
     }
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         return "Bye...";
     }
 

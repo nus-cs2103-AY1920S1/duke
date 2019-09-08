@@ -10,6 +10,15 @@ public class SortCommand extends Command {
 
     @Override
     public String execute() throws DukeException {
+        return sort(arg);
+    }
+
+    /**
+     * Sorts the {@code taskList}.
+     * @param arg The flags.
+     * @return The response.
+     */
+    private String sort(String arg) {
         return null;
     }
 }

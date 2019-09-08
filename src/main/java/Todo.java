@@ -22,6 +22,6 @@ public class Todo extends Task {
         }
 
         Todo other = (Todo) obj;
-        return this.description == other.description;
+        return this.description.equals(other.description);
     }
 }

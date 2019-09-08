@@ -53,11 +53,13 @@ public class Parser {
         }
 
         Task t = new Todo(str.substring(5));
-        tasks.add(t);
-
-        tasks.setOutput(ui.addTaskMessage(t, tasks));
-
-        return tasks;
+        if (isDuplicate(tasks, t)) {
+            throw new DukeException("OOPS!!! This task is a duplicate and has already been added.");
+        } else {
+            tasks.add(t);
+            tasks.setOutput(ui.addTaskMessage(t, tasks));
+            return tasks;
+        }
     }
 
     /**
@@ -95,11 +97,13 @@ public class Parser {
         LocalTime time = dateTimeHandler.getTime();
 
         Task t = new Deadline(str.substring(9, indexOfSlash - 1), date, time);
-        tasks.add(t);
-
-        tasks.setOutput(ui.addTaskMessage(t, tasks));
-
-        return tasks;
+        if (isDuplicate(tasks, t)) {
+            throw new DukeException("OOPS!!! This task is a duplicate and has already been added.");
+        } else {
+            tasks.add(t);
+            tasks.setOutput(ui.addTaskMessage(t, tasks));
+            return tasks;
+        }
     }
 
     /**
@@ -137,11 +141,13 @@ public class Parser {
         LocalTime time = dateTimeHandler.getTime();
 
         Task t = new Event(str.substring(6, indexOfSlash - 1), date, time);
-        tasks.add(t);
-
-        tasks.setOutput(ui.addTaskMessage(t, tasks));
-
-        return tasks;
+        if (isDuplicate(tasks, t)) {
+            throw new DukeException("OOPS!!! This task is a duplicate and has already been added.");
+        } else {
+            tasks.add(t);
+            tasks.setOutput(ui.addTaskMessage(t, tasks));
+            return tasks;
+        }
     }
 
     /**
@@ -178,7 +184,7 @@ public class Parser {
     /**
      * Making sense of Find command.
      * @param str The String of command.
-     * @param tasks THe lis of Task in TaskList.
+     * @param tasks The list of Task in TaskList.
      * @return The TaskList that contains the keyword.
      * @throws Exception If user does not input keyword.
      */
@@ -199,5 +205,15 @@ public class Parser {
         }
 
         return new TaskList(listOfTaskContainsKeyword);
+    }
+
+    public boolean isDuplicate(TaskList tasks, Task t) {
+        ArrayList<Task> list = tasks.getList();
+        for (Task task : list) {
+            if (task.equals(t)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

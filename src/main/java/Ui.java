@@ -128,7 +128,7 @@ public class Ui {
      */
     public String taskDoneMessage(Task t) {
         assert t == null : "The task done should not be null";
-        return "Nice! I've marked this task as done:\n\t" + t;
+        return "Nice! I've marked this task as done:\n" + t;
     }
 
     /**

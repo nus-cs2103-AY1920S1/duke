@@ -49,6 +49,8 @@ public class Event extends Task {
         }
 
         Event other = (Event) obj;
-        return this.description == other.description;
+        return this.description.equals(other.description)
+                && this.date.equals(other.date)
+                && this.time.equals(other.time);
     }
 }

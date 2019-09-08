@@ -47,7 +47,10 @@ public class Deadline extends Task {
         if (!(obj instanceof Deadline)) {
             return false;
         }
+
         Deadline other = (Deadline) obj;
-        return this.description == other.description;
+        return this.description.equals(other.description)
+                && this.date.equals(other.date)
+                && this.time.equals(other.time);
     }
 }

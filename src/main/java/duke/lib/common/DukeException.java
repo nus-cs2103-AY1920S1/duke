@@ -6,5 +6,6 @@ package duke.lib.common;
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
+        assert !message.isEmpty() : "exception should not be empty";
     }
 }

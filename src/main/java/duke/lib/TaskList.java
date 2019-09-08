@@ -24,6 +24,7 @@ public class TaskList {
      * @param task the task to be stored.
      */
     public void store(Task task) {
+        assert task != null;
         textStorage.add(task);
     }
 
@@ -83,6 +84,7 @@ public class TaskList {
      * @return the list to be returned.
      */
     public ArrayList<Task> getList() {
+        assert textStorage != null;
         return textStorage;
     }
 }

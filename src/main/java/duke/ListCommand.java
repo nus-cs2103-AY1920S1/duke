@@ -22,7 +22,7 @@ public class ListCommand extends Command {
         int counter = 0;
         for (Task t : tasks.taskList) {
             counter++;
-            sb.append(counter + ". " + t + "\n");
+            sb.append(counter).append(". ").append(t).append("\n");
         }
         return sb.toString();
     }

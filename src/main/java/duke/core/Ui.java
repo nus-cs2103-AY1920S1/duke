@@ -33,12 +33,7 @@ public class Ui {
     }
 
     public String showWelcomeGui() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo
+        return "Hello from DUKE\n"
                     + "\nHello! I'm Duke\nWhat can I do for you?";
     }
 
@@ -51,6 +46,10 @@ public class Ui {
 
     public String showLoadingErrorGui() {
         return "Failed to Load past tasks :-(";
+    }
+
+    public String showLoadingSuccessGui() {
+        return "Past tasks loaded successsfully :-)";
     }
 
     /**

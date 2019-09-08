@@ -7,7 +7,7 @@ public class Date {
     java.util.Date data;
     public Date(String dateString) {
         precursor = dateString.split(" ", 2)[0];
-        if (!dateString.equals(" ")) {
+        if (!dateString.equals("  ")) {
             try {
                 this.data = formatter.parse(dateString.split(" ", 2)[1]);
                 this.exists = true;
@@ -18,13 +18,22 @@ public class Date {
         }
     }
 
+    public String format() {
+        if (exists) {
+            return precursor + " " + formatter.format(data);
+        }
+        else {
+            return "NIL";
+        }
+    }
+
     @Override
     public String toString() {
         if (exists) {
             return "(" + precursor + " " + formatter.format(data) + ")";
         }
         else {
-            return " ";
+            return "  ";
         }
     }
 }

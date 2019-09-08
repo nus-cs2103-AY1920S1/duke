@@ -46,7 +46,7 @@ public class UserInterface {
                     break;
                 case "delete":
                     try {
-                        todoList.removeFromTodo(userInput.split(" ", 2)[1]);
+                        dukePrint(todoList.removeFromTodo(userInput.split(" ", 2)[1]));
                     }
                     catch (Exception e) {
                         dukePrint("Nothing to delete");

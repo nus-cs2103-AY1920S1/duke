@@ -1,4 +1,3 @@
-import java.awt.desktop.SystemEventListener;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.util.Scanner;
@@ -32,7 +31,7 @@ public class TaskList {
                 String[] commandArray = commandIn.split("@");
                 tempArray.add(new ListItem(commandArray[2], commandArray[1], commandArray[3]));
                 if (commandArray[0].equals("true")) {
-                    tempArray.get((lst.size() - 1)).done();
+                    tempArray.get((tempArray.size() - 1)).done();
                 }
             }
             lst = tempArray;

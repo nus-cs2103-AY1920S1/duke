@@ -13,19 +13,19 @@ public class ListItem {
                 case "[T]":
                     this.status = "[T]";
                     this.description = description;
-                    this.date = new Date(" ");
+                    this.date = new Date("  ");
                     break;
                 case "event":
                 case "[E]":
                     this.status = "[E]";
                     this.description = description.split("/")[0];
-                    this.date = new Date(description.split("/",2)[1] + ")");
+                    this.date = new Date(date);
                     break;
                 case "deadline":
                 case "[D]":
                     this.status = "[D]";
                     this.description = description.split("/")[0];
-                    this.date = new Date(description.split("/",2)[1] + ")");
+                    this.date = new Date(date);
                     break;
             }
         }
@@ -40,7 +40,7 @@ public class ListItem {
     }
 
     String format() {
-        return isDone + "@" + this.status + "@" + this.description + "@" + this.date + "\n";
+        return isDone + "@" + this.status + "@" + this.description + "@" + this.date.format() + "\n";
     }
 
     @Override

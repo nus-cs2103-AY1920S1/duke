@@ -1,4 +1,4 @@
-package duke;
+package exception;
 
 // Custom exception class for Duke
 public class DukeException extends Exception {

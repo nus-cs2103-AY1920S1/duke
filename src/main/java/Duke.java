@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.io.File;
 
 import commands.Command;
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
+import exception.DukeException;
+import parser.Parser;
+import storage.Storage;
+import ui.Ui;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -103,7 +103,16 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Duke heard: " + input + "\n" + "\n");
+
+        try {
+            Command c = Parser.parse(input);
+            sb.append(c.execute(tasks, ui, storage) + "\n");
+        } catch (DukeException err) {
+            sb.append(err.getMessage());
+        }
+        return sb.toString();
     }
 
     Storage getStorage() {
@@ -158,10 +167,9 @@ public class Duke extends Application {
         while (!isExit) {
             try {
                 String input = ui.readCommand();
-//                ui.separator();
 
                 Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException err) {
                 System.out.println(err.getMessage());

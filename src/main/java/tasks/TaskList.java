@@ -1,7 +1,7 @@
 package tasks;
 
-import duke.Parser;
-import duke.Ui;
+import parser.Parser;
+import ui.Ui;
 
 import java.util.ArrayList;
 

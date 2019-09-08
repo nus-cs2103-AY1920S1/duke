@@ -1,8 +1,8 @@
 package commands;
 
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
+import parser.Parser;
+import storage.Storage;
+import ui.Ui;
 import tasks.TaskList;
 
 public class AddCommand extends Command {
@@ -18,12 +18,12 @@ public class AddCommand extends Command {
         this.description = description;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            System.out.println(ui.addTask());
-            System.out.println(tasks.addTask(this.input, this.action, this.description));
+            return (ui.addTask() + "\n" + (tasks.addTask(this.input, this.action, this.description)));
         } catch (Exception err) {
-            System.out.println(err.getMessage());
+            return (err.getMessage());
         }
     }
 

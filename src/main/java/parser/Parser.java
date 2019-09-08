@@ -1,4 +1,4 @@
-package duke;
+package parser;
 
 import commands.Command;
 import commands.AddCommand;
@@ -7,7 +7,8 @@ import commands.DoneCommand;
 import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
-import tasks.TaskList;
+import exception.DukeException;
+import ui.Ui;
 
 import java.util.Scanner;
 public class Parser {

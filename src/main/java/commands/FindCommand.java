@@ -1,7 +1,7 @@
 package commands;
 
-import duke.Storage;
-import duke.Ui;
+import storage.Storage;
+import ui.Ui;
 import tasks.TaskList;
 
 public class FindCommand extends Command {
@@ -13,9 +13,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(ui.matchingList());
-        System.out.println(tasks.findListEntry(keyword));
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return (ui.matchingList() + "\n" + (tasks.findListEntry(keyword)));
     }
 
     @Override

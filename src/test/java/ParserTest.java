@@ -1,5 +1,5 @@
-import duke.DukeException;
-import duke.Parser;
+import exception.DukeException;
+import parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

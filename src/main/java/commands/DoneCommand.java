@@ -1,7 +1,7 @@
 package commands;
 
-import duke.Storage;
-import duke.Ui;
+import storage.Storage;
+import ui.Ui;
 import tasks.TaskList;
 
 public class DoneCommand extends Command {
@@ -13,12 +13,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //Mark task as done
-            System.out.println(tasks.setDone(this.input));
+            return (tasks.setDone(this.input));
         } catch (NullPointerException err) {
-            System.out.println(ui.invalidEntry());
+            return (ui.invalidEntry());
         }
     }
 

@@ -32,9 +32,9 @@ public class ExitCommand implements Command {
      * @throws DukeException  If there is mistake in operation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> list = tasks.getList();
-        ui.showLeaving();
         storage.saveFile(list);
+        return ui.showLeaving();
     }
 }

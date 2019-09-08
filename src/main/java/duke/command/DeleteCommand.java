@@ -42,10 +42,10 @@ public class DeleteCommand implements Command {
      * @throws DukeException  If there is mistake in operation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task removedTask = tasks.deleteTask(deleteIndex);
         ArrayList<Task> list = tasks.getList();
-        ui.showDelete(removedTask, list.size());
         storage.saveFile(list);
+        return ui.showDelete(removedTask, list.size());
     }
 }

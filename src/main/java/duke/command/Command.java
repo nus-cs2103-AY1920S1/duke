@@ -24,5 +24,5 @@ public interface Command {
      * @param storage The storage area.
      * @throws DukeException  If there is mistake in operation.
      */
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

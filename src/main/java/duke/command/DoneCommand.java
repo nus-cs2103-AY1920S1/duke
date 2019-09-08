@@ -40,9 +40,9 @@ public class DoneCommand implements Command {
      * @throws DukeException  If there is mistake in operation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task doneTask = tasks.doneTask(doneIndex);
-        ui.showDone(doneTask);
         storage.saveFile(tasks.getList());
+        return ui.showDone(doneTask);
     }
 }

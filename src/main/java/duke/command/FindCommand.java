@@ -41,7 +41,7 @@ public class FindCommand implements Command {
      * @param storage The storage area.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<String> tasklist = new ArrayList<String>();
         ArrayList<Task> list = tasks.getList();
         for (int i = 0; i < list.size(); i++) {
@@ -51,6 +51,6 @@ public class FindCommand implements Command {
             }
         }
 
-        ui.showFind(tasklist);
+        return ui.showFind(tasklist);
     }
 }

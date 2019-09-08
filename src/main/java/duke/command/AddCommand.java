@@ -42,10 +42,10 @@ public class AddCommand implements Command {
      * @throws DukeException  If there is mistake in operation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         ArrayList<Task> list = tasks.getList();
-        ui.showAdd(task, list.size());
         storage.saveFile(list);
+        return ui.showAdd(task, list.size());
     }
 }

@@ -41,8 +41,8 @@ public class Ui {
     /**
      * Prints loading error message.
      */
-    public void showLoadingError() {
-        System.out.println("There is some error in the file");
+    public String showLoadingError() {
+        return "There is some error in the file";
     }
 
     /**
@@ -50,15 +50,15 @@ public class Ui {
      *
      * @param errorMessage Error message.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
      * Prints exit message.
      */
-    public void showLeaving() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showLeaving() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -66,12 +66,24 @@ public class Ui {
      *
      * @param tasks Tasks to be printed.
      */
-    public void listTasks(TaskList tasks) {
+    public String listTasks(TaskList tasks) {
+        StringBuilder str = new StringBuilder();
         ArrayList<Task> list = tasks.getList();
+
+        if (list.size() == 0) {
+            return "There are no task in the list now.";
+        }
+
         for (int i = 0; i < list.size(); i++) {
             String todo = String.format("%d. %s", i + 1, list.get(i).toString());
-            System.out.println(todo);
+            str.append(todo);
+            if (i != list.size() - 1) {
+                str.append(System.lineSeparator());
+            }
+            //System.out.println(todo);
         }
+
+        return str.toString();
     }
 
     /**
@@ -79,10 +91,12 @@ public class Ui {
      *
      * @param task The task that is done.
      */
-    public void showDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.print("  ");
-        System.out.println(task.toString());
+    public String showDone(Task task) {
+        StringBuilder str = new StringBuilder();
+        str.append("Nice! I've marked this task as done:  ");
+        str.append(System.lineSeparator());
+        str.append(task.toString());
+        return str.toString();
     }
 
     /**
@@ -91,10 +105,14 @@ public class Ui {
      * @param task The task be deleted.
      * @param listSize The size of the tasklist.
      */
-    public void showDelete(Task task, int listSize) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(String.format("  %s", task.toString()));
-        System.out.println(String.format("Now you have %d tasks in the list.", listSize));
+    public String showDelete(Task task, int listSize) {
+        StringBuilder str = new StringBuilder();
+        str.append("Noted. I've removed this task:");
+        str.append(System.lineSeparator());
+        str.append(String.format("  %s", task.toString()));
+        str.append(System.lineSeparator());
+        str.append(String.format("Now you have %d tasks in the list.", listSize));
+        return str.toString();
     }
 
     /**
@@ -103,10 +121,15 @@ public class Ui {
      * @param task The task to be added.
      * @param listSize The size of the tasklist.
      */
-    public void showAdd(Task task, int listSize) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(String.format("  %s", task.toString()));
-        System.out.println(String.format("Now you have %d tasks in the list.", listSize));
+    public String showAdd(Task task, int listSize) {
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've added this task:");
+        str.append(System.lineSeparator());
+        str.append(String.format("  %s", task.toString()));
+        str.append(System.lineSeparator());
+        str.append(String.format("Now you have %d tasks in the list.", listSize));
+
+        return str.toString();
     }
 
     /**
@@ -114,10 +137,16 @@ public class Ui {
      *
      * @param tasklist The tasks contains keyword.
      */
-    public void showFind(ArrayList<String> tasklist) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showFind(ArrayList<String> tasklist) {
+        StringBuilder str = new StringBuilder();
+        str.append("Here are the matching tasks in your list:");
+        str.append(System.lineSeparator());
         for (int i = 0; i < tasklist.size(); i++) {
-            System.out.println(tasklist.get(i));
+            str.append(tasklist.get(i));
+            if (i != tasklist.size() - 1) {
+                str.append(System.lineSeparator());
+            }
         }
+        return str.toString();
     }
 }

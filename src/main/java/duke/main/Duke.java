@@ -193,6 +193,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String reply;
+        try {
+            Command c = Parser.parse(input);
+            reply = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            reply = ui.showError(e.getMessage());
+        }
+        return reply;
     }
 }

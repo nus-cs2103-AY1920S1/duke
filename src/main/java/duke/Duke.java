@@ -156,8 +156,6 @@ public class Duke extends Application {
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
-        } finally {
-            return ui.showLine();
         }
     }
 
@@ -170,14 +168,14 @@ public class Duke extends Application {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                System.out.println(ui.showLine()); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
-                ui.showLine();
+                System.out.println(ui.showLine());
             }
 
         }

@@ -29,6 +29,14 @@ public class EventTask extends Task {
     }
 
     /**
+     * Changes the task name to the new task time given.
+     * @param newTaskDate the new task time given.
+     */
+    public void editTaskDate(String newTaskDate) {
+        this.time =  newTaskDate;
+    }
+
+    /**
      * Returns a string representation of the Task.
      * @return A string representation of the Task.
      */

@@ -64,6 +64,7 @@ public class Ui {
     }
 
     /**
+<<<<<<< HEAD
      * Shows the task which the user has tagged.
      * @param task The tagged task.
      */
@@ -71,6 +72,15 @@ public class Ui {
         append("Got it, I've tagged this task: ");
         append(task.toString());
         append("Now, it has the tag: " + task.getTag().toString() + ".");
+    }
+
+    /**
+     * Shows the task which the user has edited.
+     * @param task The added task.
+     */
+    public void showEditedTask(Task task) {
+        append("Got it. I've edited this task: ");
+        append(task.toString());
     }
 
     /**

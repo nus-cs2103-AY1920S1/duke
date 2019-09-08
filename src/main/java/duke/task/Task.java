@@ -57,4 +57,12 @@ public class Task {
             return "[N] " + this.todo;
         }
     }
+
+    /**
+     * Changes the task name to the new task name given.
+     * @param newTaskName the new task name given.
+     */
+    public void editTaskName(String newTaskName) {
+        this.todo =  newTaskName;
+    }
 }

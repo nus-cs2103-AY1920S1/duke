@@ -1,28 +1,27 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.task.Task;
 import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
- * Represents a Command to delete one single task.
+ * Represents a Command that edits the task date.
  */
-public class DeleteTaskCommand extends Command {
-
+public class EditTaskDateCommand extends Command {
     /**
      * Constructs a new Command where it does not terminate the Duke Application.
      */
-    public DeleteTaskCommand() {
+    public EditTaskDateCommand() {
         super(false);
     }
 
     /**
      * Executes the specific command based on the type of the command.
-     * In this case, it deletes a task by retrieving its index and removing it from TaskList.
+     * In this case, it edits the task date.
      * @param taskList The List of tasks involved.
      * @param ui The Interface which deals with user input and interaction.
      * @param storage The storage to load and save task data into the output file.
@@ -32,9 +31,9 @@ public class DeleteTaskCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        int taskIndex = dataParser.getTaskIndex();
-        Task deletedTask = taskList.deleteTask(taskIndex);
-        ui.showDeletedTask(deletedTask);
+        String[] newTaskData = dataParser.parseEditTaskNameData();
+        Task task = taskList.editSpecificTaskDate(newTaskData);
+        ui.showEditedTask(task);
         storage.save();
     }
 }

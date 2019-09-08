@@ -67,21 +67,24 @@ public class DataStorage {
             Task temp;
 
             switch (type) {
-            case "T":
+            case "T": {
                 temp = new ToDo(spl[1]);
                 break;
-            case "E":
+            }
+            case "E": {
                 String[] nameAndDesc = spl[1].split(" \\(at: ");
                 String time = nameAndDesc[1].substring(0, nameAndDesc[1].length() - 1);
                 Time t = new Time(time);
                 temp = new Event(nameAndDesc[0], t);
                 break;
-            case "D":
-                String[] nameAndDescr = spl[1].split(" \\(by: ");
-                String desc = nameAndDescr[1].substring(0, nameAndDescr[1].length() - 1);
-                Time t2 = new Time(desc);
-                temp = new Deadline(nameAndDescr[0], t2);
+            }
+            case "D": {
+                String[] nameAndDesc = spl[1].split(" \\(by: ");
+                String desc = nameAndDesc[1].substring(0, nameAndDesc[1].length() - 1);
+                Time t = new Time(desc);
+                temp = new Deadline(nameAndDesc[0], t);
                 break;
+            }
             default:
                 temp = null;
                 throw new DukeException("Something went wrong with the save file.");

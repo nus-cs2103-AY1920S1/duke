@@ -267,8 +267,8 @@ public class Ui {
                 + "'find [keyword]'\n" + longLine;
         helpList += "To exit and close Duke:\n" + "'bye'\n" + longLine;
         helpList += "Archives Instructions:\n\n"
-                + "Create a new empty archive: archive create [archive name]\n\n"
-                + "Add task from task list to an existing archive: 'archive add [task list index] [archive name]\n\n"
+                + "Create a new empty archive: 'archive create [archive name]'\n\n"
+                + "Add task from task list to an existing archive: 'archive add [task list index] [archive name]'\n\n"
                 + "Display list of existing archive names: 'archive list'\n\n"
                 + "Display list of tasks in an existing archive: 'archive view [archive name]'\n\n"
                 + "Display lists of tasks of all existing archives: 'archive viewall'\n\n"

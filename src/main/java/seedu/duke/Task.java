@@ -93,9 +93,9 @@ public class Task implements Comparable<Task> {
      */
     @Override
     public int compareTo(Task o) {
-        if (o instanceof Todo) {
-            return (int) (Double.MAX_VALUE);
-        } else if(this.getDateTime() == null ||o.getDateTime() == null) {
+        if(this.getDateTime() == null && o.getDateTime() == null) { // both are instance of Todo
+            return this.getDescription().compareTo(o.getDescription());
+        } else if(this.getDateTime() == null || o.getDateTime() == null) {
             return 0;
         } else if (o instanceof Deadline || o instanceof Event) {
             return this.getDateTime().compareTo(o.getDateTime());

@@ -12,3 +12,4 @@ T | 0 | watering
 T | 0 | exercise #fun
 T | 0 | movie #fun
 D | 0 | meeting | 06/11/1313 1913
+T | 0 | running

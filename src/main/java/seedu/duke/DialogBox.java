@@ -152,11 +152,34 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+
+        // Sets a padding of 25 above and below the User DialogBox
+        db.setPadding(new Insets(25,0,25,0));
+
+        // Adds background colour to DialogBox.
+        String style_background = "-fx-background-color: #f7fac5;"
+                + "-fx-padding: 15;"
+                + "fx-spacing: 10;";
+
+        db.setStyle(style_background);
+
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
+
         var db = new DialogBox(text, img);
+        
+        // Adds background colour to DialogBox.
+        String style_background = "-fx-background-color: #abffcd;"
+                + "-fx-padding: 15;"
+                + "fx-spacing: 10;";
+        db.setStyle(style_background);
+
+        // Sets a padding of 25 above and below the Duke DialogBox
+        db.setPadding(new Insets(25,0,25,0));
+
         db.flip();
         return db;
     }

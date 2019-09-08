@@ -91,7 +91,7 @@ public class DateParser {
      * attempts to parse the input as a {@link LocalDate}. If that fails, it tries to parse it as a
      * {@link LocalDateTime}. Upon successful parsing, it prettily formats the resulting object as a String.
      * <p></p>
-     * LocalDates are formatted as <code>"d of MMMM yyyy"</code>
+     * LocalDates are formatted as <code>"d of MMMM yyyy"</code>.
      *
      * <p>LocalDateTimes are formatted as <code>"d of MMMM yyyy, h:mma"</code>.
      *
@@ -100,7 +100,7 @@ public class DateParser {
      * @return                String containing the prettily formatted date or datetime
      * @throws DukeException  if the input cannot be parsed as either a LocalDate or LocalDateTime
      */
-    public static String parseDateOrDateTimeToString(String input) throws DukeException {
+    public static String prettifyDateOrDateTimeString(String input) throws DukeException {
         String parsedString = null;
         try {
             parsedString = parseDate(input).format(DateTimeFormatter.ofPattern("d 'of' MMMM yyyy"));

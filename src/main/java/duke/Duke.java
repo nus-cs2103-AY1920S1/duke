@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.io.BufferedStringOutput;
 import duke.task.TaskList;
 import duke.util.PreParser;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 

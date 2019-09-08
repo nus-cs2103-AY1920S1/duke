@@ -51,6 +51,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the dialog box belonging to Duke, which is flipped in direction from that of the user.
+     *
+     * @param text response from Duke
+     * @param img representing Duke on the chat bot
+     * @return DialogBox belonging to Duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

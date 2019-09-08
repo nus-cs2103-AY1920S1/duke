@@ -9,14 +9,14 @@ import duke.exceptions.DateException;
 public class DateTime {
 
     private static String[] daySuffix = {
-            "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
-            "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
-            "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"
+        "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+        "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"
     };
     private static String[] monthName = {
-            "January", "February", "March", "April",
-            "May", "June", "July", "August", "September",
-            "October", "November", "December"
+        "January", "February", "March", "April",
+        "May", "June", "July", "August", "September",
+        "October", "November", "December"
     };
 
     public DateTime() {
@@ -58,7 +58,7 @@ public class DateTime {
         if (monthNum > 12) {
             throw new DateException("Invalid month entered!");
         } else {
-            return monthName[monthNum-1];
+            return monthName[monthNum - 1];
         }
     }
 

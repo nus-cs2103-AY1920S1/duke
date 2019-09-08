@@ -41,8 +41,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks for the type of task that has been added and passes along processed String of information
-     * containing details about the task for the task to be created.
+     * Executes the command to generate the correct task to be added into memory.
      *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
@@ -60,6 +59,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Checks for the type of task that has been added and passes along processed String of information
+     * containing details about the task for the task to be created.
+     *
+     * @return String containing the task that has been added
+     * @throws DukeException is thrown when there is an error with the input
+     * @throws IOException is thrown when there is an error saving the data in the hard disk
+     */
     private String generateAddedTask()  throws DukeException, IOException {
         String commandWord = allDetails[0];
         if (commandWord.equals("todo")) {
@@ -113,6 +120,13 @@ public class AddCommand extends Command {
         return printAddedTask(newDeadline);
     }
 
+    /**
+     * Produces a formatted String that is used in creation of a Deadline Task.
+     *
+     * @param deadlineTime containing the information about the date for the Deadline Task
+     * @return String containing some details needed to create a Deadline task
+     * @throws DukeException is thrown when there is an error with the input
+     */
     private String processDeadlineTime(String[] deadlineTime) throws DukeException {
         if (deadlineTime.length < 2) {
             throw new DukeException(deadlineErrorMsg);
@@ -141,6 +155,13 @@ public class AddCommand extends Command {
         return printAddedTask(newEvent);
     }
 
+    /**
+     * Produces a formatted String that is used in creation of an Event task.
+     *
+     * @param eventTime containing the information about the date for the Event task
+     * @return String containing some details needed to create a Event task
+     * @throws DukeException is thrown when there is an error with the input
+     */
     private String processEventTime(String[] eventTime) throws DukeException {
         if (eventTime.length < 2) {
             throw new DukeException(eventErrorMsg);

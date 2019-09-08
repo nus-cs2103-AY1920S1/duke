@@ -125,7 +125,8 @@ public class Storage {
                     text = spec.format();
                 }
                 text += System.lineSeparator();
-            } writeToFile(filePath, text.trim());
+            }
+            writeToFile(filePath, text.trim());
         } else {
             writeToFile(filePath, "");
         }

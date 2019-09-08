@@ -26,7 +26,9 @@ public class Duke {
         }
     }
 
-    public Duke() {}
+    public Duke() {
+
+    }
 
     /**
      * Runs Duke object to start the chat bot. This method will call on other methods to load previously saved

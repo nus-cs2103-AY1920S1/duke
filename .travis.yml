@@ -4,3 +4,7 @@ language: java
 branches:
   only:
     - master
+    - branch-A-Travis
+
+before_install:
+  - chmod +x gradlew

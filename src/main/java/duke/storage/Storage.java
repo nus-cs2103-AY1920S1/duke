@@ -2,7 +2,12 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.TaskFactory;
+import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,8 +19,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static duke.task.TaskType.*;
-import static java.nio.file.StandardOpenOption.*;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.EVENT;
+import static duke.task.TaskType.DEADLINE;
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
 
 /**
  * Stores and retrieves persisting task information from the hard disk.
@@ -23,6 +32,11 @@ import static java.nio.file.StandardOpenOption.*;
 public class Storage {
     private Path path;
 
+    /**
+     * Loads the Path based on given uri.
+     *
+     * @param uri the uri to create the Path object with.
+     */
     public Storage(String uri) {
         this.path = Paths.get(uri);
     }

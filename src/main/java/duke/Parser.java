@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeIndexOutOfBoundsException;
 import duke.exception.DukeMissingDescriptionException;
@@ -8,7 +14,9 @@ import duke.exception.DukeUnknownInputException;
 
 import java.util.Arrays;
 
-import static duke.task.TaskType.*;
+import static duke.task.TaskType.DEADLINE;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.EVENT;
 
 /**
  * Deals with making sense of commands.
@@ -27,7 +35,7 @@ public class Parser {
         String[] commands = command.split("[ ]+");
         String[] args = Arrays.copyOfRange(commands, 1, commands.length);
 
-        assert args.length == commands.length - 1: "Incorrect array copy";
+        assert args.length == commands.length - 1 : "Incorrect array copy";
 
         switch (commands[0]) {
         case "todo":

@@ -16,7 +16,7 @@ public class Task {
     }
 
     /**
-     * Sets the task to be done.
+     * Sets the task as done.
      */
     public void setAsDone() {
         this.isDone = true;
@@ -32,7 +32,7 @@ public class Task {
 
     /**
      * Returns a StatusIcon, based on whether the task is completed or not.
-     * 
+     *
      * @return StatusIcon
      */
     public String getStatusIcon() {

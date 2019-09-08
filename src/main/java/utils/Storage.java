@@ -34,16 +34,15 @@ public class Storage {
     }
 
     public Storage(String filePath) {
-        File file = new File(filePath);
-        this.file = file;
+        this.file = new File(filePath);
     }
 
     /**
      * A method to create a list of tasks, from an input file.
-     * 
+     *
      * @return List of tasks
      */
-    public ArrayList<Task> load() throws FileNotFoundException, IOException {
+    public ArrayList<Task> load() throws IOException {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -85,8 +84,8 @@ public class Storage {
     }
 
     /**
-     * Adds the task specified into the text file.
-     * 
+     * Adds the task specified into the end of text file.
+     *
      * @param textToAdd Text to be added into file.
      */
     public void saveTask(String textToAdd) throws IOException {
@@ -95,52 +94,51 @@ public class Storage {
 
     /**
      * Deletes the task specified at index in the text file.
-     * 
+     *
      * @param index the specific index of task to be deleted.
      */
-    public void deleteTask(int index) throws FileNotFoundException, IOException {
+    public void deleteTask(int index) throws IOException {
         int count = 0;
-        String finalText = "";
+        StringBuilder finalText = new StringBuilder();
 
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (count == index) {
                 count++;
-                continue;
             } else {
-                finalText += line + "\n";
+                finalText.append(line).append("\n");
                 count++;
             }
         }
 
         sc.close();
-        writeToFile(file.getAbsolutePath(), finalText);
+        writeToFile(file.getAbsolutePath(), finalText.toString());
     }
 
     /**
      * Updates the task specified at index as done in the text file.
-     * 
+     *
      * @param index the specific index for task which is to be set as done.
      */
-    public void updateAsDone(int index) throws FileNotFoundException, IOException {
+    public void updateAsDone(int index) throws IOException {
         int count = 0;
-        String finalText = "";
+        StringBuilder finalText = new StringBuilder();
 
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (count == index) {
                 String newLine = line.replace("| 0 |", "| 1 |");
-                finalText += newLine + "\n";
+                finalText.append(newLine).append("\n");
                 count++;
             } else {
-                finalText += line + "\n";
+                finalText.append(line).append("\n");
                 count++;
             }
         }
 
         sc.close();
-        writeToFile(file.getAbsolutePath(), finalText);
+        writeToFile(file.getAbsolutePath(), finalText.toString());
     }
 }

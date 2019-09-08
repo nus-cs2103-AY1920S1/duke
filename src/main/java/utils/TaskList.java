@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+
 import tasks.Task;
 
 public class TaskList {
@@ -25,7 +26,7 @@ public class TaskList {
 
     /**
      * Returns a list of tasks, based on description provided.
-     * 
+     *
      * @param description a description of item to be found
      * @return
      */

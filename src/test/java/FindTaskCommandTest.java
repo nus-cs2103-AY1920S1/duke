@@ -116,4 +116,65 @@ class FindTaskCommandTest extends CommandTest {
         assertExit(false);
     }
 
+    @Test
+    void execute_isDoneYes_doneTasksDisplayed() {
+        List<Task> actualTasks = List.of(
+                new Todo("not done todo", false),
+                new Todo("done todo", true),
+                new Deadline("not done deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Deadline("done deadline", true, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Deadline("short date format deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Deadline("long date format deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Event("not done event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                new Event("done event", true, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                new Event("short date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                new Event("long date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0))
+        );
+        final String expectedDisplay = "\t____________________________________________________________\n"
+                + "\tHere are the matching tasks in your list:\n"
+                + "\t1.[T][✓] done todo\n"
+                + "\t2.[D][✓] done deadline (by: 6/6/2019 0000)\n"
+                + "\t3.[E][✓] done event (at: 6/8/2019 1400)\n"
+                + "\t____________________________________________________________\n";
+
+        command = new FindTaskCommand("/isdone yes");
+        command.execute(actualTasks, ui, store);
+
+        assertFileContents(null);
+        assertStdOutContents(expectedDisplay);
+        assertExit(false);
+    }
+
+    @Test
+    void execute_isDoneNo_notDoneTasksDisplayed() {
+        List<Task> actualTasks = List.of(
+                new Todo("not done todo", false),
+                new Todo("done todo", true),
+                new Deadline("not done deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Deadline("done deadline", true, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Deadline("short date format deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Deadline("long date format deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                new Event("not done event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                new Event("done event", true, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                new Event("short date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                new Event("long date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0))
+        );
+        final String expectedDisplay = "\t____________________________________________________________\n"
+                + "\tHere are the matching tasks in your list:\n"
+                + "\t1.[T][✘] not done todo\n"
+                + "\t2.[D][✘] not done deadline (by: 6/6/2019 0000)\n"
+                + "\t3.[D][✘] short date format deadline (by: 6/6/2019 0000)\n"
+                + "\t4.[D][✘] long date format deadline (by: 6/6/2019 0000)\n"
+                + "\t5.[E][✘] not done event (at: 6/8/2019 1400)\n"
+                + "\t6.[E][✘] short date format event (at: 6/8/2019 1400)\n"
+                + "\t7.[E][✘] long date format event (at: 6/8/2019 1400)\n"
+                + "\t____________________________________________________________\n";
+        command = new FindTaskCommand("/isdone no");
+        command.execute(actualTasks, ui, store);
+
+        assertFileContents(null);
+        assertStdOutContents(expectedDisplay);
+        assertExit(false);
+    }
+
 }

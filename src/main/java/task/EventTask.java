@@ -1,5 +1,6 @@
 package task;
 
+import duke.Duke;
 import exception.DukeException;
 import exception.DukeInvalidTaskDateFormatException;
 import java.text.SimpleDateFormat;
@@ -24,8 +25,13 @@ public class EventTask extends Task {
         try {
             this.time = format.parse(time);
         } catch (ParseException e) {
-            throw new DukeInvalidTaskDateFormatException(time);
+            throw new DukeInvalidTaskDateFormatException(time, format.toPattern());
         }
+    }
+
+    public EventTask(String description, Date time) {
+        super(description);
+        this.time = time;
     }
 
     public String toFileString() {
@@ -34,6 +40,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +  time  + ")";
+        return "[E]" + super.toString() + " (at: " +  format.format(this.time)  + ")";
     }
 }

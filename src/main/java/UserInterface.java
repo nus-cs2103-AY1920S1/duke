@@ -2,12 +2,13 @@ import java.util.Scanner;
 
 public class UserInterface {
     static TaskList todoList;
-    UserInterface(TaskList todoList) {
+    static Storage data;
+    UserInterface(TaskList todoList, Storage store) {
         this.todoList = todoList;
-        todoList.read();
+        this.data = store;
     }
 
-    static void read () {
+    static void listen () {
         Scanner consoleScanner = new Scanner(System.in);
         String userCommand = "";
         String description = "";
@@ -55,7 +56,7 @@ public class UserInterface {
                 default:
                     dukePrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            todoList.save();
+            data.save(todoList.lst);
 
         }
     }

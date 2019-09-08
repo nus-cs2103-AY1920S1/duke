@@ -1,15 +1,30 @@
 public class Duke{
 
-    private static TaskList todoList = new TaskList();
-    private static UserInterface UI = new UserInterface(todoList);
+    private Storage storage;
+    private TaskList tasks;
+    private UserInterface ui;
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            tasks = new TaskList(filePath);
+        }
+        ui = new UserInterface(tasks, storage);
+    }
+
+    void run() {
+        dukePrint("Hello! I'm Duke", "What can I do for you?");
+        this.ui.listen();
+        dukePrint("Bye. Hope to see you again soon!");
+    }
     /**
      * Main driver class for Duke.
      *
      */
     public static void main(String[] args) {
-        dukePrint("Hello! I'm Duke", "What can I do for you?");
-        UI.read();
-        dukePrint("Bye. Hope to see you again soon!");
+        new Duke("data/tasks.txt").run();
     }
 
     /**

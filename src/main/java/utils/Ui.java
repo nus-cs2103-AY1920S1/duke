@@ -104,6 +104,7 @@ public class Ui {
      * @param title    The preamble to be printed before listing the tasks.
      */
     public void printTaskList(List<Task> taskList, String title) {
+        assert taskList != null : "Task list not found and cannot be printed.";
         outputBuilder.append(title);
         for (int i = 0; i < taskList.size(); i++) {
             outputBuilder.append(String.format("%d.", i + 1));
@@ -117,6 +118,7 @@ public class Ui {
      * @param task The task that is marked as done.
      */
     public void printMarkedAsDoneMessage(Task task) {
+        assert task != null : "Done task not found and cannot be printed.";
         outputBuilder.append("Nice! I've marked this task as done:\n");
         outputBuilder.append(String.format("%s\n", task));
     }
@@ -129,6 +131,7 @@ public class Ui {
      * @param taskListSize The total number of tasks remaining in the task list
      */
     public void printTaskDeletedMessage(Task task, int taskListSize) {
+        assert task != null : "Deleted task not found and cannot be printed.";
         outputBuilder.append("Noted. I've removed this task:\n");
         outputBuilder.append(String.format("%s\n", task));
         outputBuilder.append(String.format("Now you have %d tasks in the list.\n", taskListSize));
@@ -142,6 +145,7 @@ public class Ui {
      * @param taskListSize The total number of tasks currently in the task list.
      */
     public void printTaskAddedMessage(Task task, int taskListSize) {
+        assert task != null : "Added task not found and cannot be printed.";
         outputBuilder.append("Got it. I've added this task:\n");
         outputBuilder.append(String.format("%s\n", task));
         outputBuilder.append(String.format("Now you have %d tasks in the list.\n", taskListSize));

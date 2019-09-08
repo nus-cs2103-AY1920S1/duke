@@ -35,7 +35,6 @@ public class Storage {
         } else {
             try {
                 file.createNewFile();
-                file = new File(file.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,6 +54,7 @@ public class Storage {
      */
     void loadData() {
         Scanner sc;
+        assert file.exists() : "Storage file does not exist.";
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {

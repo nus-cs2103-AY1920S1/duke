@@ -106,9 +106,8 @@ public class TaskList {
      * @return ArrayList of all tasks in the task list.
      */
     public ArrayList<Task> getAllTasks() {
-        ArrayList<Task> newList = new ArrayList<>();
-        list.forEach(x -> newList.add(x));
-        return newList;
+        return new ArrayList<>(list);
+
     }
 
     /**
@@ -120,11 +119,11 @@ public class TaskList {
      */
     public TaskList filterByString(String substring) {
         TaskList tasklist = new TaskList();
-        list.forEach(task -> {
+        for (Task task : list) {
             if (task.getDescription().contains(substring)) {
                 tasklist.addTask(task);
             }
-        });
+        }
         return tasklist;
     }
 

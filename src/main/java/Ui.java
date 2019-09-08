@@ -10,21 +10,17 @@ public class Ui {
 
     }
 
-    public String welcome() {
-        String logo = ("Hello I am\n") +
-                " ____        _        \n"
+    public void welcome() {
+        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"
-        + ("What can I do for you?");
-        return logo;
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello I am\n" + logo);
+        System.out.println("What can I do for you?");
     }
 
     public String showListOfTask(TaskList tasks) {
-        if (tasks.size() == 0) {
-            return "Theres is currently no task in your list.";
-        }
         String string = "Here are the tasks in your list:";
         for (int i = 1; i <= tasks.size(); i++) {
             Task evaluatingTask = tasks.get(i - 1);
@@ -76,9 +72,5 @@ public class Ui {
             return header + ("\n" + i + "." + evaluatingTask.toString());
         }
         return new String();
-    }
-
-    public String announceNoneMatchingTask() {
-        return "Sorry, there are no matching tasks found.";
     }
 }

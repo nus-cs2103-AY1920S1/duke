@@ -83,9 +83,6 @@ public class TaskList {
         }
 
         Ui ui = new Ui();
-        if (result.size() > 0) {
-            return ui.announceMatchingTask(result);
-        }
-        return ui.announceNoneMatchingTask();
+        return ui.announceMatchingTask(result);
     }
 }

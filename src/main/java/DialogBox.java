@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -51,8 +50,6 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.dialog.setFont(new Font("Consolas", 10));
-        db.setMinHeight(db.dialog.getMinHeight());
         return db;
     }
 }

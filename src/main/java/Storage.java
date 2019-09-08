@@ -51,6 +51,7 @@ public class Storage {
                 }
 
                 Task task = new Task("dummy");
+                Task.reduceTaskCount();
                 if (type.equals("T")) {
                     task = new Todo(description);
                 } else if (type.equals("D")) {
@@ -86,7 +87,7 @@ public class Storage {
      * @param input The date/ time input in the form of String. It should follow either dd/MM/yyyy HHmm or HHmm format.
      * @return Date format of the input String.
      */
-    public static Date convertStringToDate(String input) {
+    private static Date convertStringToDate(String input) {
         Date date = new Date();
         try {
             if (input.length() <= 5) {
@@ -96,8 +97,6 @@ public class Storage {
             } else {
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm", Locale.ENGLISH);
                 date = format.parse(input);
-                assert date.compareTo(new Date(0)) < 0 : "The deadline cannot be of the past. Please update " +
-                        "to a future time.";
                 return date;
             }
         } catch (ParseException e) {

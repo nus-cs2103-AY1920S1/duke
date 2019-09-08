@@ -174,7 +174,7 @@ public class AddCommand extends Command {
                     return DateTime.getDate(eventTime[0]) + DateTime.getTime(hoursMin[0]) + "-"
                             + DateTime.getTime(hoursMin[1]);
                 } catch (DateException e) {
-                    throw new DukeException(e.getMessage() + eventErrorMsg);
+                    throw new DukeException(e.getMessage() + " " + eventErrorMsg);
                 }
             }
         }

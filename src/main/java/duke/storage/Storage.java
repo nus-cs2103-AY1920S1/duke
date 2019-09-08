@@ -47,7 +47,7 @@ public class Storage {
     }
 
     /**
-     * creates file if file is not found
+     * creates file if file is not found.
      * @throws IOException thrown when file cannot be created
      */
     private void createNewFile() throws IOException {

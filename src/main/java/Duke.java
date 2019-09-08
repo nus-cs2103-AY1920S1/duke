@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Returns the response from Duke based on user's input.
+     * Returns the response from Duke based on user's input from GUI.
      *
      * @param input Input from user.
      * @return Output string from Duke.

@@ -12,7 +12,7 @@ public class Ui {
     private Scanner sc;
     /** Horizontal line to be printed before and after each output message. */
     private static final String horizontalLine =
-            "    ____________________________________________________________";
+            "____________________________________________________________";
 
     /**
      * Constructor for Ui that instantiates the Scanner.
@@ -37,7 +37,7 @@ public class Ui {
      */
     public void printErrorMsg(DukeException e) {
         System.out.println(horizontalLine);
-        System.out.println("     :( OOPS!!! " + e.getMessage());
+        System.out.println(getErrorMsg(e));
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -52,8 +52,7 @@ public class Ui {
     public void printGreetingMsg() {
         // Greet
         System.out.println(horizontalLine);
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
+        System.out.println(getGreetingMsg());
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -68,7 +67,7 @@ public class Ui {
     public void printExitMsg() {
         // Exit
         System.out.println(horizontalLine);
-        System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println(getExitMsg());
         System.out.println(horizontalLine);
     }
 
@@ -84,14 +83,7 @@ public class Ui {
      */
     public void printTasksListing(TaskList tasks) {
         System.out.println(horizontalLine);
-        System.out.println("     Here are the tasks in your list:");
-
-        int id = 1;
-        for (Task task : tasks) {
-            System.out.println("     " + id + ". " + task);
-            id++;
-        }
-
+        System.out.println(getTasksListing(tasks));
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -105,7 +97,7 @@ public class Ui {
             id++;
         }
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     /**
@@ -114,11 +106,8 @@ public class Ui {
      * @param task Task which was marked as done.
      */
     public void printMarkTaskAsDoneMsg(Task task) {
-        assert task != null : "Task should not be null.";
-
         System.out.println(horizontalLine);
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + task);
+        System.out.println(getMarkTaskAsDoneMsg(task));
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -135,11 +124,8 @@ public class Ui {
      * @param task Task which was deleted.
      */
     public void printDeleteTaskMsg(Task task) {
-        assert task != null : "Task should not be null.";
-
         System.out.println(horizontalLine);
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + task);
+        System.out.println(getDeleteTaskMsg(task));
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -157,13 +143,8 @@ public class Ui {
      * @param numOfTasks Number of tasks in the TaskList after task was added.
      */
     public void printAddTaskMsg(Task task, int numOfTasks) {
-        assert task != null : "Task should not be null.";
-        assert numOfTasks > 0 : "There should be at least 1 task in the TaskList after a task is added.";
-
         System.out.println(horizontalLine);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
+        System.out.println(getAddTaskMsg(task, numOfTasks));
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -183,18 +164,7 @@ public class Ui {
      */
     public void printFoundTasksMsg(TaskList tasksWithKeyword) {
         System.out.println(horizontalLine);
-        if (tasksWithKeyword.size() > 0) {
-            System.out.println("     Here are the matching tasks in your list:");
-
-            int id = 1;
-            for (Task task : tasksWithKeyword) {
-                System.out.println("     " + id + ". " + task);
-                id++;
-            }
-
-        } else {
-            System.out.println("     Sorry, there are no matching tasks in your list!");
-        }
+        System.out.println(getFoundTasksMsg(tasksWithKeyword));
         System.out.println(horizontalLine);
         System.out.println();
     }
@@ -209,7 +179,7 @@ public class Ui {
                 id++;
             }
 
-            return sb.toString();
+            return sb.toString().trim();
         } else {
             return "Sorry, there are no matching tasks in your list!";
         }

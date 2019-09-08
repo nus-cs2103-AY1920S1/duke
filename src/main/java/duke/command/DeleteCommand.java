@@ -4,8 +4,10 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
+
+import static duke.ui.ErrorMsg.INVALID_INDEX;
 
 public class DeleteCommand extends IndexBasedCommand {
 
@@ -22,7 +24,7 @@ public class DeleteCommand extends IndexBasedCommand {
             ui.println("Now you have " + taskList.size() + " tasks in the list.");
             storage.saveTaskListToFile(taskList);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The index is invalid.");
+            throw new DukeException(INVALID_INDEX);
         }
     }
 }

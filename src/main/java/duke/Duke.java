@@ -1,11 +1,9 @@
 package duke;
 
 import duke.command.Command;
+import duke.ui.Ui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.InvalidPropertiesFormatException;
 
 public class Duke {
     static final String WORKING_DIRECTORY = System.getProperty("user.dir");
@@ -39,12 +37,6 @@ public class Duke {
         storage = new Storage(saveFilePath);
         try {
             taskList = storage.loadTaskListFromSaveFile(ui);
-        } catch (FileNotFoundException e) {
-            ui.storageFileNotFoundError();
-        } catch (InvalidPropertiesFormatException e) {
-            ui.storageInvalidLineError();
-        } catch (IOException e) {
-            ui.storageIoExceptionError();
         } catch (DukeException e) {
             ui.printError(e);
         } finally {
@@ -56,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * Run the Duke instance.
+     * Run the Duke instance (CLI version).
      */
     public void run() {
         ui.setEnabled(true);
@@ -95,7 +87,7 @@ public class Duke {
     }
 
     /**
-     * Function to generate response to user input.
+     * Function to generate response to user input (meant for GUI, but also used by JUnit).
      */
     public String getResponse(String input) {
         try {

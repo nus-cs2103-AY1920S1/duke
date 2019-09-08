@@ -4,11 +4,13 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Event;
 import duke.task.TaskWithDate;
 
 import java.text.ParseException;
+
+import static duke.ui.ErrorMsgWithParams.BAD_DATE_FORMAT_WITH_PARAMS;
 
 public class AddEventCommand extends TextBasedCommand {
     public static final String COMMAND = "event";
@@ -32,7 +34,7 @@ public class AddEventCommand extends TextBasedCommand {
             }
             storage.saveTaskListToFile(taskList);
         } catch (ParseException | IndexOutOfBoundsException e) {
-            throw new DukeException("Event is ill formatted. Example: event dancing /at 2/12/2019 1800");
+            throw new DukeException(BAD_DATE_FORMAT_WITH_PARAMS, "Event", "event");
         }
     }
 }

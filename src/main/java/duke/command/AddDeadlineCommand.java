@@ -5,12 +5,13 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.TaskWithDate;
 
 import java.text.ParseException;
+
+import static duke.ui.ErrorMsgWithParams.BAD_DATE_FORMAT_WITH_PARAMS;
 
 public class AddDeadlineCommand extends TextBasedCommand {
     public static final String COMMAND = "deadline";
@@ -34,7 +35,7 @@ public class AddDeadlineCommand extends TextBasedCommand {
             }
             storage.saveTaskListToFile(taskList);
         } catch (ParseException | IndexOutOfBoundsException e) {
-            throw new DukeException("Deadline is ill formatted. Example: deadline return book /by 2/12/2019 1800");
+            throw new DukeException(BAD_DATE_FORMAT_WITH_PARAMS, "Deadline", "deadline");
         }
     }
 }

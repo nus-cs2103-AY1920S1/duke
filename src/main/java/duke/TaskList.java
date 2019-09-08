@@ -6,9 +6,13 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskWithDate;
 import duke.task.Todo;
+import duke.ui.ErrorMsg;
+import duke.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+
+import static duke.ui.ErrorMsg.INVALID_DATE_FORMAT;
 
 public class TaskList extends ArrayList<Task> {
 
@@ -28,9 +32,10 @@ public class TaskList extends ArrayList<Task> {
             if (line.equals("todo") || line.equals("event") || line.equals("deadline")) {
                 data = "";
             } else {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(ErrorMsg.UNKNOWN_COMMAND);
             }
         }
+
         String[] splitData;
         try {
             switch (taskName) {
@@ -52,11 +57,11 @@ public class TaskList extends ArrayList<Task> {
                 }
                 break;
             default:
-                throw new DukeException("Invalid command.");
+                //throw new DukeException("Invalid command.");
+                throw new DukeException(ErrorMsg.UNKNOWN_COMMAND);
             }
         } catch (ParseException e) {
-            throw new DukeException("Failed to add task because date is not in the right format "
-                    + "(should be in dd/MM/yyyy HHmm)");
+            throw new DukeException(INVALID_DATE_FORMAT);
         }
     }
 

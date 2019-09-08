@@ -4,7 +4,7 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Todo;
 
 public class AddTodoCommand extends TextBasedCommand {

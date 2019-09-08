@@ -1,5 +1,6 @@
 package duke;
 
+import duke.ui.Unicode;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -143,7 +144,7 @@ class DukeTest {
     void addSampleTodosToTasklist(Duke duke) {
         String response;
         response = duke.getResponse("todo");
-        assertEquals(response, Unicode.SAD_FACE + "OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+        assertEquals(response, Unicode.SAD_FACE + "OOPS!!! todo cannot have an empty description\n");
         response = duke.getResponse("todo /at");
         assertEquals(response, "Got it. I've added this task: \n"
                 + "  [T][" + Unicode.CROSS + "] /at\n"

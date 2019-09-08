@@ -4,9 +4,7 @@ import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.ui.Ui;
 
 public class FindCommand extends TextBasedCommand {
     public static final String COMMAND = "find";

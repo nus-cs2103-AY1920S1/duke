@@ -6,6 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static duke.ui.ErrorMsgWithParams.EMPTY_DESCRIPT;
+import static duke.ui.ErrorMsgWithParams.EMPTY_DESCRIPT_AND_OR_DATE;
+
 public abstract class TaskWithDate extends Task {
     static final SimpleDateFormat TASK_WITH_DATE_FORMATTER = new SimpleDateFormat("dd 'of' MMMM yyyy, K:mma");
     static final SimpleDateFormat TASK_WITH_DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -39,9 +42,9 @@ public abstract class TaskWithDate extends Task {
      */
     public static boolean validateData(String[] data, String taskName) throws DukeException {
         if (data[0].length() <= 0) {
-            throw new DukeException("The description of a " + taskName + " cannot be empty.");
+            throw new DukeException(EMPTY_DESCRIPT, taskName);
         } else if (data.length <= 1 || data[1].length() <= 0) {
-            throw new DukeException("The description and date of a " + taskName + " cannot be empty.");
+            throw new DukeException(EMPTY_DESCRIPT_AND_OR_DATE, taskName);
         }
         return true;
     }

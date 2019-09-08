@@ -1,7 +1,8 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.Unicode;
+import duke.ui.ErrorMsgWithParams;
+import duke.ui.Unicode;
 
 public abstract class Task {
     protected String description;
@@ -49,7 +50,7 @@ public abstract class Task {
      */
     public static boolean validateData(String description, String taskName) throws DukeException {
         if (description.length() <= 0) {
-            throw new DukeException("The description of a " + taskName + " cannot be empty.");
+            throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, taskName);
         }
         return true;
     }

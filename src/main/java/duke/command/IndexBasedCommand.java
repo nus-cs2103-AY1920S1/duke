@@ -3,6 +3,8 @@ package duke.command;
 import duke.DukeException;
 import duke.command.Command;
 
+import static duke.ui.ErrorMsg.INVALID_NUMBER_ARGS__FOR_INDEX_CMD;
+
 public abstract class IndexBasedCommand extends Command {
     protected int index;
 
@@ -16,7 +18,7 @@ public abstract class IndexBasedCommand extends Command {
     public IndexBasedCommand(String line) throws IndexOutOfBoundsException, NumberFormatException, DukeException {
         String[] data = line.split(" ");
         if (data.length != 2) {
-            throw new DukeException("Invalid number of arguments in an index based command");
+            throw new DukeException(INVALID_NUMBER_ARGS__FOR_INDEX_CMD);
         }
         index = Integer.parseInt(data[1].trim()) - 1;
     }

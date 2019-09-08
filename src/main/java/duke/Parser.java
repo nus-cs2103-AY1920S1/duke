@@ -12,6 +12,8 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 
+import static duke.ui.ErrorMsg.UNKNOWN_COMMAND;
+
 public class Parser {
     /**
      * Parses the line from a scanner, returns a Command based on the line.
@@ -31,21 +33,21 @@ public class Parser {
         case "list"://list
             return new ListCommand();
         default:
-            if (line.indexOf("done ") == 0) {
+            if (line.equals("done") || line.indexOf("done ") == 0) {
                 //Set task to done
                 return new DoneCommand(line);
-            } else if (line.indexOf("delete ") == 0) {
+            } else if (line.equals("delete") || line.indexOf("delete ") == 0) {
                 return new DeleteCommand(line);
-            } else if (line.indexOf("todo ") == 0) {
+            } else if (line.equals("todo") || line.indexOf("todo ") == 0) {
                 return new AddTodoCommand(line);
-            } else if (line.indexOf("event ") == 0) {
+            } else if (line.equals("event") || line.indexOf("event ") == 0) {
                 return new AddEventCommand(line);
-            } else if (line.indexOf("deadline ") == 0) {
+            } else if (line.equals("deadline") || line.indexOf("deadline ") == 0) {
                 return new AddDeadlineCommand(line);
-            } else if (line.indexOf("find ") == 0) {
+            } else if (line.equals("find") || line.indexOf("find ") == 0) {
                 return new FindCommand(line);
             } else {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(UNKNOWN_COMMAND);
             }
         }
     }

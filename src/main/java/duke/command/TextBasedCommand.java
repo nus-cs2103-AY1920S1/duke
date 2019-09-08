@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.ui.ErrorMsgWithParams;
 
 public abstract class TextBasedCommand extends Command {
     protected String line;
@@ -14,9 +15,12 @@ public abstract class TextBasedCommand extends Command {
      */
     public TextBasedCommand(String line, String command) throws DukeException {
         this.line = line;
+        if (!line.contains(" ")) {
+            throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command);
+        }
         remainingLine = line.replaceFirst(command + " ","");
         if (remainingLine.length() <= 0) {
-            throw new DukeException(command + " cannot have an empty description");
+            throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command);
         }
     }
 }

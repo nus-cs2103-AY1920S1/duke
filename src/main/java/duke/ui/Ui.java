@@ -1,4 +1,6 @@
-package duke;
+package duke.ui;
+
+import duke.DukeException;
 
 import java.util.Scanner;
 
@@ -75,10 +77,6 @@ public class Ui {
      */
     public void storageInvalidLineError() {
         println("Error: Save file is corrupted.");
-    }
-
-    public void storageSaveFileError() {
-        println("Error: Failed to save file");
     }
 
     /**

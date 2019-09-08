@@ -37,6 +37,7 @@ public class Duke {
      * @return String the appropriate response to the user's input.hello
      */
     public String getResponse(String input) {
+        assert(input != null);
         if (input.equals("bye")) {
             try {
                 storage.overwriteTasks();

@@ -34,12 +34,23 @@ public class EventCommand extends Command {
             Event newEvent = new Event(commandLine[0], commandLine[1]);
             storage.appendToFile(System.getProperty("user.dir") + "/data/tasks.txt", newEvent.stringForAppend());
             tasks.addEvent(newEvent);
-            String output = "Got it. I've added this task: \n";
-            output += newEvent + "\n";
-            output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
-            return output;
+            return getOutput(tasks, newEvent);
         } catch (IndexOutOfBoundsException err) {
             throw new EmptyDescDukeException("event");
         }
+    }
+
+    /**
+     * Forms the output string.
+     *
+     * @param tasks TaskList containing the tasks
+     * @param newEvent new event to be added
+     * @return output string
+     */
+    private String getOutput(TaskList tasks, Event newEvent) {
+        String output = "Got it. I've added this task: \n";
+        output += newEvent + "\n";
+        output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
+        return output;
     }
 }

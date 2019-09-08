@@ -29,19 +29,17 @@ public class DoneCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
+        if (commandDesc.substring(5).split(" ")[0].equals("")) {
+            throw new InvalidTaskNumberDukeException("empty");
+        }
         try {
             //Error if user inputs spaces
-            if (commandDesc.substring(5).split(" ")[0].equals("")) {
-                throw new InvalidTaskNumberDukeException("empty");
-            }
             int taskNumber = Integer.parseInt(commandDesc.substring(5).split(" ")[0]);
             //Check if task number is valid
             if (taskNumber > 0 && taskNumber <= tasks.taskList.size()) {
                 storage.editsFile(System.getProperty("user.dir"), tasks.taskList.get(taskNumber - 1).stringForAppend());
                 tasks.taskList.get(taskNumber - 1).markAsDone();
-                String output = "Nice! I've marked this task as done: \n";
-                output += tasks.taskList.get(taskNumber - 1) + "\n";
-                return output;
+                return getOutput(tasks, taskNumber);
             } else {
                 throw new InvalidTaskNumberDukeException("invalid");
             }
@@ -52,5 +50,18 @@ public class DoneCommand extends Command {
         } catch (NumberFormatException err) {
             throw new InvalidTaskNumberDukeException("invalid");
         }
+    }
+
+    /**
+     * Forms the output string.
+     *
+     * @param tasks TaskList containing the tasks
+     * @param taskNumber task number of task to be marked as done
+     * @return output string
+     */
+    private String getOutput(TaskList tasks, int taskNumber) {
+        String output = "Nice! I've marked this task as done: \n";
+        output += tasks.taskList.get(taskNumber - 1) + "\n";
+        return output;
     }
 }

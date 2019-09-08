@@ -29,20 +29,18 @@ public class DeleteCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
+        //Error if user inputs spaces
+        if (commandDesc.substring(7).split(" ")[0].equals("")) {
+            throw new InvalidTaskNumberDukeException("empty");
+        }
         try {
-            //Error if user inputs spaces
-            if (commandDesc.substring(7).split(" ")[0].equals("")) {
-                throw new InvalidTaskNumberDukeException("empty");
-            }
             int taskNumber = Integer.parseInt(commandDesc.substring(7).split(" ")[0]);
             //Check if task number is valid
             if (taskNumber > 0 && taskNumber <= tasks.taskList.size()) {
                 storage.deleteFromFile(System.getProperty("user.dir"),
                         tasks.taskList.get(taskNumber - 1).stringForAppend());
-                String output = "Noted. I've removed this task: \n";
-                output += tasks.taskList.get(taskNumber - 1) + "\n";
+                String output = getOutput(tasks, taskNumber);
                 tasks.deleteTask(taskNumber);
-                output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
                 return output;
             } else {
                 throw new InvalidTaskNumberDukeException("invalid");
@@ -54,5 +52,19 @@ public class DeleteCommand extends Command {
             //If non-numeric input given for task number
             throw new InvalidTaskNumberDukeException("invalid");
         }
+    }
+
+    /**
+     * Forms the output string.
+     *
+     * @param tasks TaskList containing the tasks
+     * @param taskNumber task number of task to be deleted
+     * @return output string
+     */
+    private String getOutput(TaskList tasks, int taskNumber) {
+        String output = "Noted. I've removed this task: \n";
+        output += tasks.taskList.get(taskNumber - 1) + "\n";
+        output += "Now you have " + (tasks.taskList.size() - 1) + " tasks in the list.\n";
+        return output;
     }
 }

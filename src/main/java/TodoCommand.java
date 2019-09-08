@@ -35,15 +35,26 @@ public class TodoCommand extends Command {
                 Todo newTodo = new Todo(commandDesc.substring(5));
                 storage.appendToFile(System.getProperty("user.dir") + "/data/tasks.txt", newTodo.stringForAppend());
                 tasks.addToDo(newTodo);
-                String output = "Got it. I've added this task: \n";
-                output += (newTodo + "\n");
-                output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
-                return output;
+                return getOutput(tasks, newTodo);
             } else {
                 throw new EmptyDescDukeException("todo");
             }
         } catch (IndexOutOfBoundsException err) {
             throw new EmptyDescDukeException("todo");
         }
+    }
+
+    /**
+     * Forms the output string.
+     *
+     * @param tasks TaskList containing the tasks
+     * @param newTodo new Todo to be added
+     * @return output string
+     */
+    private String getOutput(TaskList tasks, Todo newTodo) {
+        String output = "Got it. I've added this task: \n";
+        output += (newTodo + "\n");
+        output += "Now you have " + tasks.taskList.size() + " tasks in the list.\n";
+        return output;
     }
 }

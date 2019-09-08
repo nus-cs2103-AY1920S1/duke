@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    Date at;
-    String atString;
+    Date atInDateFormat;
+    String atInStringFormat;
 
     /**
      * Constructor for Event.
@@ -22,10 +22,10 @@ public class Event extends Task {
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            this.at = dateFormat.parse(eventDate);
-            this.atString = eventDate;
+            this.atInDateFormat = dateFormat.parse(eventDate);
+            this.atInStringFormat = eventDate;
         } catch (Exception e) {
-            this.atString = eventDate;
+            this.atInStringFormat = eventDate;
         }
     }
 
@@ -36,7 +36,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atString + ")";
+        return "[E]" + super.toString() + " (at: " + atInStringFormat + ")";
     }
 
     /**
@@ -46,6 +46,6 @@ public class Event extends Task {
      */
     @Override
     public String stringForAppend() {
-        return "E | " + super.getStatusIcon() + " | " + description + " | " + atString;
+        return "E | " + super.getStatusIcon() + " | " + description + " | " + atInStringFormat;
     }
 }

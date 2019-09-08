@@ -9,23 +9,24 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
-    Date by;
-    String deadLine;
+    Date deadlineInDateFormat;
+    String deadlineInStringFormat;
 
     /**
      * Constructor for Deadline.
      *
      * @param description Deadline description.
-     * @param deadLine Date that task is due.
+     * @param deadlineInStringFormat Date that task is due.
+     * @throws WrongDateFormatDukeException when date supplied is not in dd/MM/yyyy HHmm format.
      */
-    public Deadline(String description, String deadLine) {
+    public Deadline(String description, String deadlineInStringFormat) throws WrongDateFormatDukeException {
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            this.by = dateFormat.parse(deadLine);
-            this.deadLine = deadLine;
+            this.deadlineInDateFormat = dateFormat.parse(deadlineInStringFormat);
+            this.deadlineInStringFormat = deadlineInStringFormat;
         } catch (Exception e) {
-            this.deadLine = deadLine;
+            throw new WrongDateFormatDukeException();
         }
     }
 
@@ -36,7 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadLine + ")";
+        return "[D]" + super.toString() + " (by: " + deadlineInStringFormat + ")";
     }
 
     /**
@@ -46,6 +47,6 @@ public class Deadline extends Task {
      */
     @Override
     public String stringForAppend() {
-        return "D | " + super.getStatusIcon() + " | " + description + " | " + deadLine;
+        return "D | " + super.getStatusIcon() + " | " + description + " | " + deadlineInStringFormat;
     }
 }

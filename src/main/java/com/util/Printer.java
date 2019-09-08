@@ -125,7 +125,7 @@ public class Printer {
      * @param c      character to be repeated
      * @return resulting repeated character string
      */
-    private static String repeatChar(int length, char c) {
+    public static String repeatChar(int length, char c) {
         return String.valueOf(c).repeat(Math.max(0, length));
     }
 

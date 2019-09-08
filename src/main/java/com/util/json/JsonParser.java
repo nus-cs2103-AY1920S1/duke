@@ -46,8 +46,7 @@ public class JsonParser {
                             } catch (JsonFormatException e6) {
                                 if (e3.getErrorCode() == 2 && e4.getErrorCode() == 2
                                         && e5.getErrorCode() == 2 && e6.getErrorCode() == 2) {
-                                    throw new JsonFormatException(
-                                            "input at " + i + " is of unknown format");
+                                    throw new JsonFormatException(input, i, "Is of unknown format");
                                 } else if (e4.getErrorCode() == 2 && e5.getErrorCode() == 2
                                         && e6.getErrorCode() == 2) {
                                     throw e3;
@@ -80,13 +79,13 @@ public class JsonParser {
         JsonArray arr = new JsonArray();
         i = skipWhiteSpace(input, i);
         if (input[i] != '[') {
-            throw new JsonFormatException("Expecting [ at " + i, 2);
+            throw new JsonFormatException(input, i, "Expecting [", 2);
         }
         // find '['
 
         i = skipWhiteSpace(input, i + 1);
         if (i >= input.length) {
-            throw new JsonFormatException("Empty array did not close");
+            throw new JsonFormatException(input, i, "Empty array did not close");
         }
         // search first value
 
@@ -94,15 +93,24 @@ public class JsonParser {
         while (input[i] != ']') {
             if (!isFirst) {
                 i = skipWhiteSpace(input, i);
+                if (i >= input.length) {
+                    break;
+                }
                 if (input[i] != ',') {
-                    throw new JsonFormatException("Value pairs must be comma separated");
+                    throw new JsonFormatException(input, i, "Value pairs must be comma separated");
                 }
                 i = skipWhiteSpace(input, i + 1);
+                if (i >= input.length) {
+                    break;
+                }
             }
             // advance ',' between value pairs
 
             Pair<Integer,JsonValue> valuePair = processDynamicValue(input, i);
             i = skipWhiteSpace(input, valuePair.fst);
+            if (i >= input.length) {
+                break;
+            }
             arr.add(valuePair.snd);
             // parse value
 
@@ -112,7 +120,7 @@ public class JsonParser {
 
         i = skipWhiteSpace(input, i);
         if (i >= input.length || input[i] != ']') {
-            throw new JsonFormatException("Array did not close");
+            throw new JsonFormatException(input, i, "Array did not close");
         }
         // find ']'
         return new Pair<>(i + 1, arr);
@@ -131,13 +139,13 @@ public class JsonParser {
         JsonObject obj = new JsonObject();
         i = skipWhiteSpace(input, i);
         if (input[i] != '{') {
-            throw new JsonFormatException("Expecting { at " + i, 2);
+            throw new JsonFormatException(input, i, "Expecting {", 2);
         }
         // find '{'
 
         i = skipWhiteSpace(input, i + 1);
         if (i >= input.length) {
-            throw new JsonFormatException("Empty object did not close");
+            throw new JsonFormatException(input, i, "Empty object did not close");
         }
         // search first key
 
@@ -145,10 +153,16 @@ public class JsonParser {
         while (input[i] != '}') {
             if (!isFirst) {
                 i = skipWhiteSpace(input, i);
+                if (i >= input.length) {
+                    break;
+                }
                 if (input[i] != ',') {
-                    throw new JsonFormatException("Key value pairs must be comma separated");
+                    throw new JsonFormatException(input, i, "Key value pairs must be comma separated");
                 }
                 i = skipWhiteSpace(input, i + 1);
+                if (i >= input.length) {
+                    break;
+                }
             }
             // advance ',' between key value pairs
 
@@ -158,19 +172,28 @@ public class JsonParser {
                 i = keyPair.fst;
                 key = keyPair.snd;
             } catch (JsonFormatException ignored) {
-                throw new JsonFormatException("Object keys must be strings at " + i);
+                throw new JsonFormatException(input, i, "Object keys must be strings at " + i);
             }
             // parse key
 
             skipWhiteSpace(input, i);
+            if (i >= input.length) {
+                break;
+            }
             if (input[i] != ':') {
-                throw new JsonFormatException("Expected : after key name at " + i);
+                throw new JsonFormatException(input, i, "Expected : after key name");
             }
             i = skipWhiteSpace(input, i + 1);
+            if (i >= input.length) {
+                break;
+            }
             // find ':'
 
             Pair<Integer,JsonValue> valuePair = processDynamicValue(input, i);
             i = skipWhiteSpace(input, valuePair.fst);
+            if (i >= input.length) {
+                break;
+            }
             obj.put(key, valuePair.snd);
             // parse value
 
@@ -179,7 +202,7 @@ public class JsonParser {
 
         i = skipWhiteSpace(input, i);
         if (i >= input.length || input[i] != '}') {
-            throw new JsonFormatException("Object did not close");
+            throw new JsonFormatException(input, i, "Object did not close");
         }
         // find '}'
         return new Pair<>(i + 1, obj);
@@ -204,11 +227,10 @@ public class JsonParser {
             try {
                 return new Pair<>(i, Integer.parseInt(value.toString()));
             } catch (NumberFormatException ignored) {
-                throw new JsonFormatException("String ending at " + i + " is not an Integer");
+                throw new JsonFormatException(input, i, "Text is not an Integer");
             }
         }
-        throw new JsonFormatException(
-                "Expected Integer but encountered something else at " + i);
+        throw new JsonFormatException(input, i, "Expected Integer but encountered something");
     }
 
     /**
@@ -231,10 +253,10 @@ public class JsonParser {
             try {
                 return new Pair<>(i, Double.parseDouble(value.toString()));
             } catch (NumberFormatException ignored) {
-                throw new JsonFormatException("String ending at " + i + " is not a Double");
+                throw new JsonFormatException(input, i, "Text is not a Double");
             }
         }
-        throw new JsonFormatException("Expected Double but encountered something else at " + i);
+        throw new JsonFormatException(input, i, "Expected Double but encountered something else");
     }
 
     /**
@@ -249,8 +271,7 @@ public class JsonParser {
             throws JsonFormatException {
         boolean value;
         if (input[i] != 't' && input[i] != 'f') {
-            throw new JsonFormatException(
-                    "Expected Boolean but encountered something else at " + i, 2);
+            throw new JsonFormatException(input, i, "Expected Boolean but encountered something else", 2);
         }
         if (i + 3 < input.length && input[i] == 't' && input[i + 1] == 'r'
                 && input[i + 2] == 'u' && input[i + 3] == 'e') {
@@ -261,13 +282,11 @@ public class JsonParser {
             value = false;
             i += 5;
         } else {
-            throw new JsonFormatException(
-                    "Expected Boolean but encountered something else at " + i);
+            throw new JsonFormatException(input, i, "Expected Boolean but encountered something else");
         }
 
         if (!checkIfLegalAfterValue(input[i])) {
-            throw new JsonFormatException(
-                    "Expected Boolean but encountered something else at " + i);
+            throw new JsonFormatException(input, i, "Expected Boolean but encountered something else");
         }
 
         return new Pair<>(i, value);
@@ -288,9 +307,7 @@ public class JsonParser {
         boolean escape = false;
         i = skipWhiteSpace(input, i);
         if (input[i] != '"') {
-            throw new JsonFormatException(
-                    "Expected starting double quotes for string but encountered something else at "
-                            + i, 2);
+            throw new JsonFormatException(input, i, "Expected starting double quotes for string but encountered something else", 2);
         }
         i++;
         while (i < input.length) {
@@ -315,11 +332,11 @@ public class JsonParser {
             i++;
         }
         if (i >= input.length) {
-            throw new JsonFormatException("String did not terminate with double quotes");
+            throw new JsonFormatException(input, i, "String did not terminate with double quotes");
         }
         if (!checkIfLegalAfterValue(input[i])) {
             throw new JsonFormatException(
-                    "Expected string but encountered something else at " + i);
+                    input, i, "Expected string but encountered something else");
         }
         return new Pair<>(i, value.toString());
     }

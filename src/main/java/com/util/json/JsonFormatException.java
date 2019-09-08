@@ -1,5 +1,7 @@
 package com.util.json;
 
+import com.util.Printer;
+
 public class JsonFormatException extends Exception {
 
     /**
@@ -33,6 +35,38 @@ public class JsonFormatException extends Exception {
     public JsonFormatException(String msg) {
         super(msg);
         errorCode = 1;
+    }
+
+    public JsonFormatException(char[] input, Integer index, String msg, Integer err) {
+        super(msg + "\n" + getPointToErrorString(input, index));
+        errorCode = err;
+    }
+
+    public JsonFormatException(char[] input, Integer index, String msg) {
+        super(msg + "\n" + getPointToErrorString(input, index));
+        errorCode = 1;
+    }
+
+    private static String getPointToErrorString(char[] input, Integer index) {
+        int line = 1;
+        int col = 0;
+        StringBuilder lineBuf = new StringBuilder();
+        for (int i = 0; i <= index && i < input.length; i++) {
+            lineBuf.append(input[i]);
+            col++;
+            if (input[i] == '\n') {
+                line++;
+                col = 0;
+                lineBuf = new StringBuilder();
+            }
+        }
+        for (int i = index + 1; i < input.length; i++) {
+            if (input[i] == '\n') {
+                break;
+            }
+            lineBuf.append(input[i]);
+        }
+        return lineBuf.toString() + "\n" + Printer.indentString("^", Printer.repeatChar(col - 1, ' ')) + "(" + line + ":" + col + ")\n";
     }
 
     /**

@@ -88,6 +88,7 @@ public class Duke extends Application {
                 ui.showDukeException(ex);
             }
         }
+        System.exit(0);
     }
 
     /**

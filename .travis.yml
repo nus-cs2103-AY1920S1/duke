@@ -11,3 +11,6 @@ cache:
 
 jdk:
   - openjdk11
+
+# Custom Integrated Test
+script: ./src/main/java/TestScript.sh

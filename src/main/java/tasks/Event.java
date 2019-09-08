@@ -17,6 +17,7 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
+        assert at != null;
         this.at = at;
         super.symbol = "E";
     }
@@ -30,10 +31,10 @@ public class Event extends Task {
         String[] dateArray = at.split(" ");
         //DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        date1 = date1.parse(dateArray[0],formatter);
-        date2 = date1.parse(dateArray[0],formatter);
+        date1 = LocalDateTime.parse(dateArray[0],formatter);
+        date2 = LocalDateTime.parse(dateArray[0],formatter);
         date1 = date1.withHour(Integer.parseInt(dateArray[1]) / 100).withMinute(Integer.parseInt(dateArray[1]) % 100);
-        date2.withHour(Integer.parseInt(dateArray[2]) / 100).withMinute(Integer.parseInt(dateArray[2]) % 100);
+        date2 = date2.withHour(Integer.parseInt(dateArray[2]) / 100).withMinute(Integer.parseInt(dateArray[2]) % 100);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      * @return duke lists the tasks
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        //tasks.addTask(taskToAdd);
+        assert tasks.getList()!= null;
         storage.updateList(tasks.getList());
         return ui.printList(tasks.getList());
     }

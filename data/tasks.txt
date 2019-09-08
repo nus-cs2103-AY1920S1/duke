@@ -1,2 +1,2 @@
 event type | isDone | description | extra description
-T | 0 | A
+T | 1 | Sleep

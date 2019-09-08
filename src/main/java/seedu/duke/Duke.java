@@ -146,7 +146,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String fullCommand = in.nextLine().trim();
 
-        while (isBye == false) {
+        while (!isBye) {
             try {
                 isBye = executeTasksCli(fullCommand);
             } catch (DukeException e) {
@@ -175,34 +175,35 @@ public class Duke {
      */
     public Boolean executeTasksCli(String fullCommand) throws DukeException, IOException {
         String taskType = Parser.parseCommand(fullCommand);
-        if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
-            // LIST command.
+
+        switch(taskType){
+        case ("list"):
             System.out.println(listRoutine(cli, tasks));
-        } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
-            // DONE command.
+            break;
+        case ("done"):
             System.out.println(doneRoutine(cli, tasks, fullCommand));
-        } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
-            // TODO command
+            break;
+        case("todo"):
             System.out.println(todoRoutine(cli, tasks, fullCommand));
-        } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
-            // DEADLINE command.
+            break;
+        case("deadline"):
             System.out.println(deadlineRoutine(cli, tasks, fullCommand));
-        } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
-            // EVENT command.
+            break;
+        case("event"):
             System.out.println(eventRoutine(cli, tasks, fullCommand));
-        } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
-            // DELETE command.
+            break;
+        case("delete"):
             System.out.println(deleteRoutine(cli, tasks, fullCommand));
-        } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
-            // FIND command
+            break;
+        case("find"):
             System.out.println(findRoutine(cli, tasks, fullCommand));
-        } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
-            // BYE command
+            break;
+        case("bye"):
             System.out.println(byeRoutineCli(cli, tasks, storage));
             return true;
-        } else {
-            // An unrecognizable command is detected.
+        default:
             unknownCommandRoutine();
+            return false;
         }
         return false;
     }
@@ -217,37 +218,28 @@ public class Duke {
      */
     public String executeTasksGui(String fullCommand) throws DukeException, IOException {
         String taskType = Parser.parseCommand(fullCommand);
-        if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
-            // LIST command.
+
+        switch(taskType){
+        case ("list"):
             return listRoutine(gui, tasks);
-        } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
-            // DONE command.
+        case ("done"):
             return doneRoutine(gui, tasks, fullCommand);
-        } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
-            // TODO command
+        case("todo"):
             return todoRoutine(gui, tasks, fullCommand);
-        } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
-            // DEADLINE command.
+        case("deadline"):
             return deadlineRoutine(gui, tasks, fullCommand);
-        } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
-            // EVENT command.
+        case("event"):
             return eventRoutine(gui, tasks, fullCommand);
-        } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
-            // DELETE command.
+        case("delete"):
             return deleteRoutine(gui, tasks, fullCommand);
-        } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
-            // FIND command
+        case("find"):
             return findRoutine(gui, tasks, fullCommand);
-        } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
-            // BYE command
+        case("bye"):
             return byeRoutineGui(gui, tasks);
-            // Exits while loop once "bye" is entered.
-        } else {
-            // An unrecognizable command is detected.
+        default:
             unknownCommandRoutine();
             return null;
         }
-
     }
 
     /**
@@ -256,7 +248,7 @@ public class Duke {
      * @throws DukeException Error class.
      */
     public void unknownCommandRoutine() throws DukeException {
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException(":-( OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
@@ -267,7 +259,6 @@ public class Duke {
      * @return String that needs to be printed to the user after LIST command.
      */
     public String listRoutine(Ui ui, TaskList tasks) {
-
         return ui.getListSequence(tasks);
     }
 
@@ -364,7 +355,7 @@ public class Duke {
         } else if ((fullCommand.lastIndexOf('/') < 1)
                 || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
             // fullCommand does not contain '/' char or there are no chars after "/at".
-            throw new DukeException("☹ OOPS!!! The location of an event cannot be empty.");
+            throw new DukeException(":-( OOPS!!! The location of an event cannot be empty.");
         }
         String description = Parser.getEventDescription(fullCommand);
         String extraDescription = Parser.getEventLocation(fullCommand);

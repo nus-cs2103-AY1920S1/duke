@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.setDone(index);
-        storage.rewrite(tasks.getSerialized());
+        storage.rewrite(tasks);
         ui.show("Nice! I've marked this task as done:\n" + t);
     }
 }

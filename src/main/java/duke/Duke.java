@@ -18,12 +18,13 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (DukeException e) {
             ui.show(e.getMessage());
             tasks = new TaskList();
         }
     }
+
 
     public Duke usingMainUi() {
         this.ui = new MainUi();
@@ -31,7 +32,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/duke.ser").run();
     }
 
     /**

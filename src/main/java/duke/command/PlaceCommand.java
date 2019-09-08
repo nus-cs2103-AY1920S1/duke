@@ -24,7 +24,18 @@ public class PlaceCommand extends Command {
         this.longitude = longitude;
     }
 
+    /**
+     * Adds place if does not exists.
+     * Then updates storage.
+     *
+     * @param tasks   duke.TaskList
+     * @param ui      duke.Ui
+     * @param storage duke.Storage
+     * @throws DukeException when problems with duke.Storage writing
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.show("Noted. I have recorded " + alias + Place.addIfAbsent(alias, latitude, longitude).toString());
+        Place p = Place.addIfAbsent(alias, latitude, longitude);
+        storage.rewrite(tasks);
+        ui.show("Noted. I have recorded " + alias + p.toString());
     }
 }

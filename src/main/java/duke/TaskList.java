@@ -3,10 +3,13 @@ package duke;
 import duke.exception.IndexOutOfBoundsDukeException;
 import duke.task.Task;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TaskList {
+public class TaskList implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private ArrayList<Task> ls;
 
     public TaskList() {
@@ -21,24 +24,6 @@ public class TaskList {
     public void add(Task t) {
         assert t != null;
         ls.add(t);
-    }
-
-    /**
-     * Returns a serialised duke.TaskList.
-     *
-     * @return Serialised duke.TaskList as String
-     */
-    public String getSerialized() {
-        StringBuilder sb = new StringBuilder();
-        Iterator<Task> it = ls.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next().toFileString())
-                .append((char) 30);
-        }
-        if (sb.length() > 0) {
-            sb.setLength(sb.length() - 1);
-        }
-        return sb.toString();
     }
 
     /**

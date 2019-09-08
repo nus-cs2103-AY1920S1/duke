@@ -16,9 +16,4 @@ public class Todo extends Task {
     public String childClass() {
         return "todo";
     }
-
-    @Override
-    public String toFileString() {
-        return "T" + super.toFileString();
-    }
 }

@@ -1,9 +1,11 @@
 package place;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.TreeSet;
 
-public class Place {
+public class Place implements Serializable {
+    private static final long serialVersionUID = 1L;
     private static HashMap<String, Place> refLatLong = new HashMap<>();
     private static HashMap<String, Place> refAlias = new HashMap<>();
     private TreeSet<String> aliases = new TreeSet<>();
@@ -23,8 +25,8 @@ public class Place {
      * Then add relevant missing references for future lookup.
      * And finally returns newly initialised or existing place.
      *
-     * @param alias String alias for the place
-     * @param latitude Latitude as double
+     * @param alias     String alias for the place
+     * @param latitude  Latitude as double
      * @param longitude Longitude as double
      * @return Existing place Object if found, otherwise add a new Place
      */
@@ -69,5 +71,21 @@ public class Place {
         }
         sb.setLength(sb.length() - 1);
         return sb.toString();
+    }
+
+    public static void setRefLatLong(HashMap<String, Place> m) {
+        refLatLong = m;
+    }
+
+    public static void setRefAlias(HashMap<String, Place> m) {
+        refAlias = m;
+    }
+
+    public static HashMap getRefLatLong() {
+        return refLatLong;
+    }
+
+    public static HashMap getRefAlias() {
+        return refAlias;
     }
 }

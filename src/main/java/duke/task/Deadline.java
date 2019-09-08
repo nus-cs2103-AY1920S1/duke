@@ -34,8 +34,4 @@ public class Deadline extends Task {
     public String childClass() {
         return "deadline";
     }
-
-    public String toFileString() {
-        return "D" + super.toFileString() + (char) 31 + this.by.format(super.fileDTF);
-    }
 }

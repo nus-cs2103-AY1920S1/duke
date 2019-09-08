@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/tasks.txt").usingMainUi();
+    private Duke duke = new Duke("data/duke.ser").usingMainUi();
 
     /**
      * MainWindow loaded from MainWindow.

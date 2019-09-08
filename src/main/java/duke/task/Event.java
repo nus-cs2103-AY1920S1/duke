@@ -34,9 +34,4 @@ public class Event extends Task {
     public String childClass() {
         return "event";
     }
-
-    @Override
-    public String toFileString() {
-        return "E" + super.toFileString() + (char) 31 + this.at.format(super.fileDTF);
-    }
 }

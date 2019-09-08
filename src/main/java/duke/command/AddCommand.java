@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws WriteFileFailDukeException {
         tasks.add(task);
-        storage.rewrite(tasks.getSerialized());
+        storage.rewrite(tasks);
         ui.show("Got it. I've added this task:\n  " + task + "Now you have " + tasks.size() + " tasks in the list.");
     }
 }

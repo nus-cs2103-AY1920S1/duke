@@ -1,15 +1,16 @@
 package duke.task;
 
-import duke.exception.CorruptedFileDukeException;
-import duke.exception.DukeException;
 import duke.exception.EmptyFieldDukeException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
-public abstract class Task {
+public abstract class Task implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private String description;
     private boolean isDone;
 
@@ -17,12 +18,6 @@ public abstract class Task {
      * DateTimeFormatter meant for duke.Ui output.
      */
     protected static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");
-
-
-    /**
-     * DateTimeFormatter meant for File output.
-     */
-    protected static DateTimeFormatter fileDTF = DateTimeFormatter.ofPattern("d/M/y'T'HHmm");
 
 
     /**
@@ -52,41 +47,7 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    public String toFileString() {
-        return (char) 31 + (this.isDone ? "1" : "0") + (char) 31 + this.description;
-    }
-
     protected abstract String childClass();
-
-
-    /**
-     * Parses FileString representing Serialised duke.task.Task into duke.task.Task.
-     *
-     * @param str Serialised task to be parsed
-     * @return duke.task.Task as parsed
-     * @throws DukeException On parsing problem
-     */
-    public static Task parseFileTask(String str) throws DukeException {
-        String[] prop = str.split("\\x1f");
-        Task t;
-        switch (prop[0]) {
-        case "D":
-            t = new Deadline(prop[2], prop[3]);
-            break;
-        case "E":
-            t = new Event(prop[2], prop[3]);
-            break;
-        case "T":
-            t = new Todo(prop[2]);
-            break;
-        default:
-            throw new CorruptedFileDukeException();
-        }
-        if (prop[1].equals("1")) {
-            t.setDone();
-        }
-        return t;
-    }
 
     protected static DateTimeFormatter inDateTimeFormat() {
         LocalDateTime dt = LocalDateTime.now();

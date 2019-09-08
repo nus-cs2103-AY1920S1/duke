@@ -1,4 +1,5 @@
 import duke.Storage;
+import duke.TaskList;
 
 public class TestStorage extends Storage {
     public TestStorage() {
@@ -6,6 +7,6 @@ public class TestStorage extends Storage {
     }
 
     @Override
-    public void rewrite(String content) {
+    public void rewrite(TaskList ls) {
     }
 }

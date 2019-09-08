@@ -2,12 +2,14 @@ package duke;
 
 import duke.exception.LoadFileFailDukeException;
 import duke.exception.WriteFileFailDukeException;
-import duke.task.Task;
+import place.Place;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Storage {
     private String filePath;
@@ -21,20 +23,19 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
     /**
-     * Try to load raw data from filePath and parse into ArrayList of Tasks.
+     * Try to load raw data from filePath and deserialize everything.
      *
-     * @return ArrayList of Tasks
      * @throws LoadFileFailDukeException if file or raw data can't be loaded
      */
-    public ArrayList<Task> load() throws LoadFileFailDukeException {
+    @SuppressWarnings("unchecked")
+    public TaskList load() throws LoadFileFailDukeException {
         try {
-            ArrayList<Task> tasks = new ArrayList<>();
-            for (String record : new BufferedReader(new FileReader(filePath)).readLine()
-                .split("\\x1e")) {
-                tasks.add(Task.parseFileTask(record));
-            }
-            return tasks;
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath));
+            Place.setRefLatLong((HashMap) ois.readObject());
+            Place.setRefAlias((HashMap) ois.readObject());
+            return (TaskList) ois.readObject();
         } catch (Exception e) {
             throw new LoadFileFailDukeException(filePath);
         }
@@ -43,14 +44,15 @@ public class Storage {
     /**
      * Try to rewrite entire file defined by filePath.
      *
-     * @param content data to be written over into file at filePath
+     * @param tasks TaskList to be written over into file at filePath
      * @throws WriteFileFailDukeException if directory does not exists or unable to write to file
      */
-    public void rewrite(String content) throws WriteFileFailDukeException {
+    public void rewrite(TaskList tasks) throws WriteFileFailDukeException {
         try {
-            FileWriter fw = new FileWriter(filePath, false);
-            fw.write(content);
-            fw.close();
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
+            oos.writeObject(Place.getRefLatLong());
+            oos.writeObject(Place.getRefAlias());
+            oos.writeObject(tasks);
         } catch (Exception e) {
             throw new WriteFileFailDukeException();
         }

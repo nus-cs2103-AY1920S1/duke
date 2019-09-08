@@ -16,7 +16,7 @@ public class Ui {
     private final String underscore = "    ____________________________________________________________" + "\n";
 
     /**
-     * Default constructor, takes in now arguments.
+     * Default constructor, takes in no arguments.
      */
     public Ui(){
 
@@ -67,17 +67,13 @@ public class Ui {
      */
     public void printList(TaskList tasks) {
         String output = underscore + "     Here are the tasks in your list:\n";
-
         output += getTasksInList(tasks);
-
         System.out.println(output);
     }
 
     public String getPrintList(TaskList tasks){
-        String output = underscore + "     Here are the tasks in your list:\n";
-
+        String output = "Here are the tasks in your list:\n";
         output += getTasksInList(tasks);
-
         return (output);
     }
 
@@ -95,9 +91,9 @@ public class Ui {
     }
 
     public String getDoneSequence(TaskList tasks, int taskNum){
-        String output = underscore + "     Nice! I've marked this task as done:\n"
-                + "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
-                + "\n" + underscore;
+        String output = "Nice! I've marked this task as done:\n"
+                + "[" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
+                + "\n";
         return (output);
     }
 
@@ -114,7 +110,7 @@ public class Ui {
     }
 
     public String getTodoSequence(TaskList tasks, Todo newTodo){
-        String output = underscore + "     Got it. I've added this task:\n       "
+        String output = "Got it. I've added this task:\n"
                 + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
         return (output);
     }
@@ -132,7 +128,7 @@ public class Ui {
     }
 
     public String getDeadlineSequence(TaskList tasks, Deadline newDeadline){
-        String output = underscore + "     Got it. I've added this task:\n       "
+        String output = "Got it. I've added this task:\n"
                 + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
         return (output);
     }
@@ -150,7 +146,7 @@ public class Ui {
     }
 
     public String getEventSequence(TaskList tasks, Event newEvent) {
-        String output = underscore + "     Got it. I've added this task:\n       "
+        String output = "Got it. I've added this task:\n"
                 + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
         return (output);
     }
@@ -168,7 +164,7 @@ public class Ui {
     }
 
     public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
-        String output = underscore + "     Noted. I've removed this task.\n       "
+        String output = "Noted. I've removed this task.\n"
                 + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
         return (output);
     }
@@ -182,7 +178,7 @@ public class Ui {
     }
 
     public String getByeSequence() {
-        String output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
+        String output = "\n" + "Bye. Hope to see you again soon!" + "\n";
         return (output);
     }
 
@@ -227,20 +223,13 @@ public class Ui {
      */
     public void printFoundTasks(TaskList tasks) {
         String output = underscore + "     Here are the matching tasks in your list:\n";
-
         output += getTasksInList(tasks);
-
         System.out.println(output);
     }
 
     public String getFoundTasks(TaskList tasks) {
-        String output = underscore + "     Here are the matching tasks in your list:\n";
-
+        String output = "Here are the matching tasks in your list:\n";
         output += getTasksInList(tasks);
-
         return (output);
     }
-
-
-
 }

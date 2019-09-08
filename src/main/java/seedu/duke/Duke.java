@@ -43,6 +43,26 @@ public class Duke {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
 
     /**
+     * Default constructor to support seedu.duke.Launcher of javaFX.
+     */
+    public Duke(){
+        String filePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
+
+    /**
+     * Instantiates a Duke object.
+     *
+     * @param filePath absolute filepath of the where the text file is stored.
+     *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
+     */
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
+
+    /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
@@ -73,30 +93,35 @@ public class Duke {
         userInput.clear();
     }
 
-
-    /**
-     * Instantiates a Duke object.
-     *
-     * @param filePath absolute filepath of the where the text file is stored.
-     *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-    }
-
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-
         // return "Duke heard: " + input;
-
         String command = Parser.parseCommand(input);
 
-        return command;
+        try {
+            // Loads the data from txt file to the TaskList object, tasks.
+            tasks = new TaskList(this.storage.load());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        String output = "";
+        try {
+            output = executeTasksGUI(input);
+            this.storage.clearFileBeforeSaving();
+            for (int i = 0; i < this.tasks.getSize(); i++) {
+                this.storage.writeToFile(this.tasks.getTask(i).toSaveString());
+            }
+            return output;
+        } catch (DukeException e){
+            return e.getMessage();
+        } catch (IOException e){
+            return e.getMessage();
+        }
+
 
     }
 
@@ -104,103 +129,102 @@ public class Duke {
      * Executes the Duke Command Line Interface.
      */
     public void run() {
-        // Variable initialization. description will hold the description of all tasks.
-        // extraDescription will hold either the
-        // dateTime attribute of Deadline class or location attribute of Event class.
-        String output = "";
-        String taskType = "";
-        String description = "";
-        String extraDescription = "";
-        int taskNum = -1;
-
         ui.showWelcome();
-
+        Boolean isBye = false;
         try {
-
             // Loads the data from txt file to the TaskList object, tasks.
             tasks = new TaskList(this.storage.load());
-
         } catch (FileNotFoundException e) {
-
             System.out.println(e.getMessage());
-
         }
-
         // Creates scanner object to handle input.
         Scanner in = new Scanner(System.in);
         String fullCommand = in.nextLine().trim();
 
-        while (true) {
-
-            taskType = Parser.parseCommand(fullCommand);
-
+        while (isBye == false) {
             try {
-
-                if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
-                    // LIST command.
-                    listRoutineCLI(ui, tasks);
-
-                } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
-                    // DONE command.
-
-                    doneRoutineCLI(ui, tasks, fullCommand);
-
-                } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
-                    // TODO command
-
-                    todoRoutineCLI(ui, tasks, fullCommand);;
-
-                } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
-                    // DEADLINE command.
-
-                    deadlineRoutineCLI(ui, tasks, fullCommand);
-
-                } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
-                    // EVENT command.
-
-                    eventRoutineCLI(ui, tasks, fullCommand);
-
-                } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
-                    // DELETE command.
-
-                    deleteRoutineCLI(ui, tasks, fullCommand);
-
-                } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
-                    // FIND command
-                    findRoutineCLI(ui, tasks, fullCommand);
-
-                } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
-                    // BYE command
-
-                    byeRoutineCLI(ui, tasks, storage);
-                    break;
-                    // Exits while loop once "bye" is entered.
-
-                } else {
-                    // An unrecognizable command is detected.
-                    unknownCommandRoutine();
-
-                }
+                isBye = executeTasksCLI(fullCommand);
             } catch (DukeException e) {
-
                 ui.showLoadingError(e);
-
             } catch (StringIndexOutOfBoundsException e) {
-
                 System.out.println(e.getMessage());
-
             } catch (NumberFormatException e) {
-
                 System.out.println(e.getMessage());
-
             } catch (IOException e) {
-
                 System.out.println(e.getCause());
-
             }
-
+            if (isBye){
+                break;
+            }
             fullCommand = in.nextLine().trim();
-            output = "";
+        }
+    }
+
+    public Boolean executeTasksCLI(String fullCommand) throws DukeException, IOException{
+        String taskType = Parser.parseCommand(fullCommand);
+        if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
+            // LIST command.
+            listRoutineCLI(ui, tasks);
+        } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
+            // DONE command.
+            doneRoutineCLI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
+            // TODO command
+            todoRoutineCLI(ui, tasks, fullCommand);;
+        } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
+            // DEADLINE command.
+            deadlineRoutineCLI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
+            // EVENT command.
+            eventRoutineCLI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
+            // DELETE command.
+            deleteRoutineCLI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
+            // FIND command
+            findRoutineCLI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
+            // BYE command
+            byeRoutineCLI(ui, tasks, storage);
+            return true;
+        } else {
+            // An unrecognizable command is detected.
+            unknownCommandRoutine();
+        }
+        return false;
+    }
+
+    public String executeTasksGUI(String fullCommand) throws DukeException, IOException{
+        String taskType = Parser.parseCommand(fullCommand);
+        if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
+            // LIST command.
+            return listRoutineGUI(ui, tasks);
+        } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
+            // DONE command.
+            return doneRoutineGUI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
+            // TODO command
+            return todoRoutineGUI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
+            // DEADLINE command.
+            return deadlineRoutineGUI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
+            // EVENT command.
+            return eventRoutineGUI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
+            // DELETE command.
+            return deleteRoutineGUI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
+            // FIND command
+            return findRoutineGUI(ui, tasks, fullCommand);
+        } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
+            // BYE command
+            return byeRoutineGUI(ui, tasks, storage);
+            // Exits while loop once "bye" is entered.
+        } else {
+            // An unrecognizable command is detected.
+            unknownCommandRoutine();
+            return null;
         }
 
     }
@@ -214,7 +238,6 @@ public class Duke {
     }
 
     public String listRoutineGUI(Ui ui, TaskList tasks){
-        listRoutineCLI(ui, tasks);
         return ui.getPrintList(tasks);
     }
 
@@ -231,7 +254,7 @@ public class Duke {
     }
 
     public String byeRoutineGUI(Ui ui, TaskList tasks, Storage storage) throws IOException{
-        byeRoutineCLI(ui,tasks,storage);
+        // For GUI, txt file is always saved after each change
         return (ui.getByeSequence());
     }
 
@@ -243,8 +266,8 @@ public class Duke {
     }
 
     public String findRoutineGUI(Ui ui, TaskList tasks, String fullCommand){
-        findRoutineCLI(ui, tasks,fullCommand);
-        return (ui.getFoundTasks(tasks));
+        TaskList similarTasks = tasks.findSimilarTasks(Parser.getFindTask(fullCommand));
+        return (ui.getFoundTasks(similarTasks));
     }
 
     public void deleteRoutineCLI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
@@ -272,8 +295,7 @@ public class Duke {
         }
         Task taskToDelete = tasks.getTask(taskNum);
         tasks.deleteTask(taskNum);
-        taskToDelete = null;
-        return (ui.getDeleteSequence(tasks,taskToDelete ));
+        return (ui.getDeleteSequence(tasks,taskToDelete));
     }
 
     public void eventRoutineCLI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
@@ -302,7 +324,13 @@ public class Duke {
     }
 
     public String eventRoutineGUI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
-        eventRoutineCLI(ui, tasks, fullCommand);
+        if ((fullCommand.length() < 6)) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        } else if ((fullCommand.lastIndexOf('/') < 1)
+                || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
+            throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
+        }
+
         String description = Parser.getEventDescription(fullCommand);
         String extraDescription = Parser.getEventLocation(fullCommand);
         Event newEvent = new Event(description, extraDescription);
@@ -433,14 +461,6 @@ public class Duke {
         DEADLINE,
         FIND
     }
-
-    /**
-     * Default constructor to support seedu.duke.Launcher of javaFX.
-     */
-    public Duke(){
-
-    }
-
 }
 
 

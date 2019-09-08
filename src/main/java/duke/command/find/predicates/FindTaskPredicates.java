@@ -9,7 +9,10 @@ import java.util.function.Predicate;
 public class FindTaskPredicates {
     private final List<FindTaskPredicateFactory> predicateFactories = new ArrayList<>(List.of(
             new TaskDoneStatePredicateFactory(),
-            new TaskDescriptionContainsPredicateFactory(this::cleanCommand)
+            new TaskDescriptionContainsPredicateFactory(this::cleanCommand),
+            new TaskBeforeDatePredicateFactory(),
+            new TaskOnDatePredicateFactory(),
+            new TaskAfterDatePredicateFactory()
     ));
 
     public FindTaskPredicates() {

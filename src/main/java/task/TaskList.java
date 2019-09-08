@@ -109,6 +109,16 @@ public class TaskList {
     }
 
     /**
+     * Deletes a task from task list by index.
+     *
+     * @param idx The index of the task in task list.
+     * @return The deleted task.
+     */
+    public void insertTask(Task task, int idx) {
+        tasks.add(idx, task);
+    }
+
+    /**
      * Marks a task from task list as done.
      *
      * @param idx The index of the task in task list.
@@ -122,7 +132,7 @@ public class TaskList {
      *
      * @param idx The index of the task in task list.
      */
-    void markAsNotDone(int idx) {
+    public void markAsNotDone(int idx) {
         tasks.get(idx).setNotDone();
     }
 

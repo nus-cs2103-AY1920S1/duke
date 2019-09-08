@@ -12,7 +12,7 @@ public class ParserTest {
     ParserTest() {
         parser = new Parser();
         CommandCentre commandCentre = new CommandCentre();
-        commandCentre.initializeCommands();
+        commandCentre.initializeDummyCommands();
         parser.setCommandCentre(commandCentre);
     }
 

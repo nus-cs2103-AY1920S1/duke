@@ -21,11 +21,10 @@ public class ModifyTaskList {
      */
 
     void addToTaskList(ArrayList<Task> taskList, Task t, Duke.Action action) throws IOException {
-        if (action == Duke.Action.ADD) {
-            taskList.add(t);
-            ui.addTask(taskList);
-            FileWriting.writeToFile(taskList);
-        }
+        assert action == Duke.Action.ADD;
+        taskList.add(t);
+        ui.addTask(taskList);
+        FileWriting.writeToFile(taskList);
     }
 
     /**
@@ -50,14 +49,15 @@ public class ModifyTaskList {
                 ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() + " tasks, please choose a number " +
                         "from that\n");
             }
-        }
+        } else {
 
-        if (action == Duke.Action.DONE){
+            assert action == Duke.Action.DONE;
+
             try {
                 taskList.get(taskNumber).setDone();
                 ui.setTaskDone(taskList, taskNumber);
                 FileWriting.writeToFile(taskList);
-            } catch (IndexOutOfBoundsException | IOException err){
+            } catch (IndexOutOfBoundsException | IOException err) {
                 System.out.println("You only have " + taskList.size() + " tasks, please choose a number from that\n");
                 ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() + " tasks, please choose a number " +
                         "from that\n");

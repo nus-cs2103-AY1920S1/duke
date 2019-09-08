@@ -39,7 +39,7 @@ public class FileReading {
      * @throws FileNotFoundException For cases where the method is called without a file present.
      */
 
-    static void loadFileContents(ArrayList<Task> taskList, File f) throws FileNotFoundException {
+    private static void loadFileContents(ArrayList<Task> taskList, File f) throws FileNotFoundException {
         String fullLine;
         String type;
         String done;

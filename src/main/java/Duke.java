@@ -30,6 +30,7 @@ public class Duke {
             ui.setGuidedUserInterfaceMsg("");
             return response;
         }
+
         return ui.goodByeMsg;
     }
 

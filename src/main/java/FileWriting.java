@@ -48,7 +48,9 @@ class FileWriting {
         }
         fw.close();
 
-        Files.copy(Paths.get("data/temp.txt"), Paths.get("data/duke.txt"), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(Paths.get("data/temp.txt"),
+                Paths.get("data/duke.txt"), StandardCopyOption.REPLACE_EXISTING);
+
         Files.delete(Paths.get("data/temp.txt"));
     }
 }

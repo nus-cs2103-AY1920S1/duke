@@ -51,6 +51,9 @@ class Ui {
      */
 
     void removeTask(ArrayList<Task> taskList, int taskNumber){
+
+        assert (taskNumber <= taskList.size()) : "Somehow a task number larger than the task list size was entered";
+
         System.out.println("Noted. I've removed this task:\n" + taskList.get(taskNumber).toString());
         System.out.println("Now you have " + (taskList.size()-1) + " tasks in the list.\n");
         guidedUserInterfaceMsg = "Noted. I've removed this task:\n" + taskList.get(taskNumber).toString() +
@@ -62,6 +65,9 @@ class Ui {
      */
 
     void setTaskDone(ArrayList<Task> taskList, int taskNumber){
+
+        assert (taskNumber <= taskList.size()) : "Somehow a task number larger than the task list size was entered";
+
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(taskList.get(taskNumber).toString() + "\n");
         guidedUserInterfaceMsg = "Nice! I've marked this task as done:\n" + taskList.get(taskNumber).toString();

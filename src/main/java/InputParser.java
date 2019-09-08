@@ -35,7 +35,15 @@ public class InputParser {
         String at;
         String firstWord;
         Ui ui = new Ui();
-        String guidedUserInterfaceMsg ="";
+        String guidedUserInterfaceMsg;
+        final String ERROR_TODO = "OOPS!!! The description of a todo cannot be empty.\n";
+        final String ERROR_DEADLINE = "OOPS!!! Incorrect description for event; remember to use the /by keyword.\n";
+        final String ERROR_EVENT = "OOPS!!! Incorrect description for event; remember to use the /at keyword.\n";
+        final String MSG_LIST = "Here are the tasks in your list:\n";
+        final String ERROR_INVALID_NUM = "OOPS!!! Please enter a valid number\n";
+        final String MSG_FIND = "Here are the matching tasks in your list:\n";
+        final String ERROR_FIND = "OOPS!!! Incorrect format for the 'find' command.\n";
+        final String MSG_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means\n";
 
         firstWord = input.split(" ")[0];
         switch (firstWord) {
@@ -47,8 +55,8 @@ public class InputParser {
             try {
                 desc = input.split(" ", 2)[1];
             } catch (IndexOutOfBoundsException err) {
-                System.out.println("OOPS!!! The description of a todo cannot be empty.\n");
-                ui.setGuidedUserInterfaceMsg("OOPS!!! The description of a todo cannot be empty.\n");
+                System.out.println(ERROR_TODO);
+                ui.setGuidedUserInterfaceMsg(ERROR_TODO);
                 break;
             }
             ToDo toDo = new ToDo(desc);
@@ -61,9 +69,8 @@ public class InputParser {
                 by = input.split(" /by ")[1];
                 desc = input.split(" /by ")[0].split(" ", 2)[1];
             } catch (IndexOutOfBoundsException err) {
-                System.out.println("OOPS!!! Incorrect description for event; remember to use the /by keyword.\n");
-                ui.setGuidedUserInterfaceMsg("OOPS!!! Incorrect description for event; " +
-                        "remember to use the /by keyword.\n");
+                System.out.println(ERROR_DEADLINE);
+                ui.setGuidedUserInterfaceMsg(ERROR_DEADLINE);
                 break;
             }
             Deadline d = new Deadline(desc, by);
@@ -75,9 +82,8 @@ public class InputParser {
                 at = input.split(" /at ")[1];
                 desc = input.split(" /at ")[0].split(" ", 2)[1];
             } catch (IndexOutOfBoundsException err) {
-                System.out.println("OOPS!!! Incorrect description for event; remember to use the /at keyword.\n");
-                ui.setGuidedUserInterfaceMsg("OOPS!!! Incorrect description for event; " +
-                        "remember to use the /at keyword.\n");
+                System.out.println(ERROR_EVENT);
+                ui.setGuidedUserInterfaceMsg(ERROR_EVENT);
                 break;
             }
             Event e = new Event(desc, at);
@@ -85,8 +91,8 @@ public class InputParser {
             break;
 
         case "list":
-            System.out.println("Here are the tasks in your list:\n");
-            guidedUserInterfaceMsg = "Here are the tasks in your list:\n";
+            System.out.println(MSG_LIST);
+            guidedUserInterfaceMsg = MSG_LIST;
 
             for (int a = 0; a < taskList.size(); a++) {
                 System.out.println((a + 1) + ". " + taskList.get(a).toString());
@@ -100,8 +106,8 @@ public class InputParser {
             try {
                 taskNumber = Integer.parseInt(input.split(" ")[1]);
             } catch (NumberFormatException err) {
-                ui.setGuidedUserInterfaceMsg("OOPS!!! Please enter a valid number\n");
-                System.out.println("OOPS!!! Please enter a valid number\n");
+                ui.setGuidedUserInterfaceMsg(ERROR_INVALID_NUM);
+                System.out.println(ERROR_INVALID_NUM);
                 break;
             }
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.DONE);
@@ -111,8 +117,8 @@ public class InputParser {
             try {
                 taskNumber = Integer.parseInt(input.split(" ")[1]);
             } catch (NumberFormatException err) {
-                System.out.println("OOPS!!! Please enter a valid number\n");
-                ui.setGuidedUserInterfaceMsg("OOPS!!! Please enter a valid number\n");
+                System.out.println(ERROR_INVALID_NUM);
+                ui.setGuidedUserInterfaceMsg(ERROR_INVALID_NUM);
                 break;
             }
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.REMOVE);
@@ -122,8 +128,8 @@ public class InputParser {
             try {
                 desc = input.split(" ")[1];
                 int findCounter = 0;
-                System.out.println("Here are the matching tasks in your list:\n");
-                guidedUserInterfaceMsg ="Here are the matching tasks in your list:\n";
+                System.out.println(MSG_FIND);
+                guidedUserInterfaceMsg = MSG_FIND;
                 for (int a = 0; a < taskList.size(); a++) {
                     if (taskList.get(a).description.contains(desc)) {
                         findCounter++;
@@ -134,14 +140,14 @@ public class InputParser {
                 ui.setGuidedUserInterfaceMsg(guidedUserInterfaceMsg);
                 break;
             } catch (IndexOutOfBoundsException err) {
-                System.out.println("OOPS!!! Incorrect format for the 'find' command.\n");
-                ui.setGuidedUserInterfaceMsg("OOPS!!! Incorrect format for the 'find' command.\n");
+                System.out.println(ERROR_FIND);
+                ui.setGuidedUserInterfaceMsg(ERROR_FIND);
                 break;
             }
 
         default:
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means\n");
-            ui.setGuidedUserInterfaceMsg("OOPS!!! I'm sorry, but I don't know what that means\n");
+            System.out.println(MSG_UNKNOWN);
+            ui.setGuidedUserInterfaceMsg(MSG_UNKNOWN);
             break;
         }
     }

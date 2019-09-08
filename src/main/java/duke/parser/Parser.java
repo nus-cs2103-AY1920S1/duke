@@ -24,42 +24,41 @@ public class Parser {
      */
     public static Command parse(String string) throws DukeException {
         if (string == null) {
-            throw new DukeException();
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        switch (string) {
+        String[] tokens = string.split("\\s+");
+        switch (tokens[0]) {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new ListCommand();
-        default:
-            String[] tokens = string.split("\\s+");
-            if (tokens.length > 0 && tokens[0] != null) {
-                switch (tokens[0]) {
-                case "done":
-                    try {
-                        Command c = new DoCommand(Integer.parseInt(tokens[1]));
-                        return c;
-                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Invalid done command.");
-                    }
-                case "delete":
-                    try {
-                        Command c = new DeleteCommand(Integer.parseInt(tokens[1]));
-                        return c;
-                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Invalid delete command.");
-                    }
-                case "find":
-                    try {
-                        Command c = new FindCommand(tokens[1]);
-                        return c;
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Invalid find command.");
-                    }
-                default:
-                    return new AddCommand(string);
-                }
+            try {
+                Command c = new ListCommand(tokens[1]);
+                return c;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new ListCommand();
             }
+        case "done":
+            try {
+                Command c = new DoCommand(Integer.parseInt(tokens[1]));
+                return c;
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Invalid done command.");
+            }
+        case "delete":
+            try {
+                Command c = new DeleteCommand(Integer.parseInt(tokens[1]));
+                return c;
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Invalid delete command.");
+            }
+        case "find":
+            try {
+                Command c = new FindCommand(tokens[1]);
+                return c;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Invalid find command.");
+            }
+        default:
             return new AddCommand(string);
         }
     }

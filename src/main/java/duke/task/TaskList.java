@@ -3,21 +3,45 @@ package duke.task;
 import duke.storage.Storage;
 
 import java.util.ArrayList;
-import java.util.function.IntFunction;
+import java.util.Collections;
+import java.util.Comparator;
+import java.time.LocalDateTime;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 /**
  * Represents a list of tasks.
  */
 public class TaskList {
-    /** ArrayList to store Tasks. */
+    /** ArrayList of tasks including ToDos, Deadlines, Events. */
     private ArrayList<Task> list;
 
     /**
      * Creates an instance of an empty TaskList.
      */
     public TaskList() {
-        list = new ArrayList<>();
+        list = new ArrayList<>() {
+            private Comparator<Task> comparator = (t1, t2) -> {
+                LocalDateTime d1 = t1.getDate();
+                LocalDateTime d2 = t2.getDate();
+                if (d1 == null && d2 == null) {
+                    return 0;
+                } else if (d1 == null) {
+                    return -1;
+                } else if (d2 == null) {
+                    return 1;
+                } else {
+                    return d1.compareTo(d2);
+                }
+            };
+
+            @Override
+            public boolean add(Task task) {
+                boolean result = super.add(task);
+                Collections.sort(this, comparator);
+                return result;
+            }
+        };
     }
 
     /**
@@ -32,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Loads the tasks from storage.
+     * Loads the tasks from storage file into TaskList object.
      *
      * @param storage Storage instance to load files.
      */
@@ -74,6 +98,7 @@ public class TaskList {
     public Task doTask(int index) {
         Task task = getTask(index);
         task.markAsDone();
+        assert task.isDone() : "task marked for done is not done.";
         return task;
     }
 
@@ -103,12 +128,22 @@ public class TaskList {
     }
 
     /**
-     * Gets an ArrayList of all tasks in the task list.
+     * Gets a copy of ArrayList of all tasks in the task list.
      *
      * @return ArrayList of all tasks in the task list.
      */
     public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(list);
+        ArrayList<Task> newList = new ArrayList<>(list);
+        assert newList.size() == list.size() : "immutable copy has error.";
+        return newList;
+    }
+
+    private TaskList filterByCondition(Function<Task, Boolean> f) {
+        TaskList taskList = new TaskList();
+        list.stream()
+                .filter(task -> f.apply(task))
+                .forEach(taskList::addTask);
+        return taskList;
     }
 
     /**
@@ -119,11 +154,29 @@ public class TaskList {
      * @return Returns a new TaskList with tasks' descriptions contains the substring.
      */
     public TaskList filterByString(String substring) {
-        TaskList tasklist = new TaskList();
-        list.stream()
-                .filter(task -> task.getDescription().contains(substring))
-                .forEach(tasklist::addTask);
-        return tasklist;
+        return filterByCondition(task -> task.getDescription().contains(substring));
+//        TaskList taskList = new TaskList();
+//        list.stream()
+//                .filter(task -> task.getDescription().contains(substring))
+//                .forEach(taskList::addTask);
+//        return taskList;
+    }
+
+    public TaskList filterByToDos() {
+        return filterByCondition(task -> task instanceof ToDo);
+//        TaskList taskList = new TaskList();
+//        list.stream()
+//                .filter(task -> task instanceof Deadline)
+//                .forEach(taskList::addTask);
+//        return taskList;
+    }
+
+    public TaskList filterByDeadlines() {
+        return filterByCondition(task -> task instanceof Deadline);
+    }
+
+    public TaskList filterByEvents() {
+        return filterByCondition(task -> task instanceof Event);
     }
 
     /**

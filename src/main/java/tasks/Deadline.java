@@ -1,6 +1,7 @@
 package tasks;
 
 import java.text.ParseException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     String by;
-    LocalDate date1;
+    LocalDateTime date1;
 
     /**
      * This is a constructor for Deadline.
@@ -21,6 +22,7 @@ public class Deadline extends Task {
         assert by != null;
         this.by = by;
         super.symbol = "D";
+        getDate();
     }
 
     /**
@@ -29,14 +31,20 @@ public class Deadline extends Task {
      * @return date
      */
 
-    public LocalDate getDate() {
+    public void getDate() {
+        String[] dateArray = by.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        date1 = LocalDate.parse(by, formatter);
-        return date1;
+        LocalDate d1 = LocalDate.parse(dateArray[0],formatter);
+        date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);
+    }
+    @Override
+    public void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone) {
+        date1 = date1.plus(Duration.ofDays(daysToPostpone)).
+                plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDate() + ")";
+        return "[D]" + super.toString() + " (by: " +  date1 + ")" + super.getNotes();
     }
 }

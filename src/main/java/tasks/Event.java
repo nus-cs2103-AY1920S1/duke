@@ -1,5 +1,7 @@
 package tasks;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +22,7 @@ public class Event extends Task {
         assert at != null;
         this.at = at;
         super.symbol = "E";
+        getDate();
     }
 
     /**
@@ -29,16 +32,27 @@ public class Event extends Task {
      */
     public void getDate() {
         String[] dateArray = at.split(" ");
-        //DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        date1 = LocalDateTime.parse(dateArray[0],formatter);
-        date2 = LocalDateTime.parse(dateArray[0],formatter);
-        date1 = date1.withHour(Integer.parseInt(dateArray[1]) / 100).withMinute(Integer.parseInt(dateArray[1]) % 100);
-        date2 = date2.withHour(Integer.parseInt(dateArray[2]) / 100).withMinute(Integer.parseInt(dateArray[2]) % 100);
+        LocalDate d1 = LocalDate.parse(dateArray[0],formatter);
+        LocalDate d2 = LocalDate.parse(dateArray[0],formatter);
+        date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);
+        date2 = d2.atTime(Integer.parseInt(dateArray[2]) / 100, Integer.parseInt(dateArray[2]) % 100);
+    }
+    @Override
+    public void postpone(int daysToPostpone,
+                         int hoursToPostpone, int minutesToPostpone) {
+
+        date1 = date1.plus(Duration.ofDays(daysToPostpone)).
+                plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
+        date2 = date2.plus(Duration.ofDays(daysToPostpone)).
+                plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
+
+        assert date1 != null;
+        assert date2 != null;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (from: " + date1 + " to "+ date2 + ")" + super.getNotes();
     }
 }

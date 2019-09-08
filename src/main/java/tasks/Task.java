@@ -1,11 +1,17 @@
 package tasks;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected String symbol;
+    private String description;
+    private boolean isDone;
+    String symbol;
+    private boolean hasNotes = false;
+    ArrayList<String> noteList;
 
     public Task(String description) {
+        noteList = new ArrayList<>();
         assert description != null;
         this.description = description;
         this.isDone = false;
@@ -55,18 +61,36 @@ public class Task {
             return t.by;
         }
     }
-
     /**
      * This method is used to mark a task as done.
      */
     public void markAsDone() {
-        assert isDone == false;
+        assert !isDone;
         isDone = true;
     }
+
+    public void addNotes(String notes) {
+        noteList.add(notes);
+        hasNotes = true;
+    }
+
+
+    public void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone) {};
 
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String getNotes() {
+        if (!hasNotes) {
+            return "";
+        }
+        String output = "";
+        for (String note: noteList) {
+            output += (" #" + note);
+        }
+        return output;
     }
 }
 

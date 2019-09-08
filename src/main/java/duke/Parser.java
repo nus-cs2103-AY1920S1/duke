@@ -15,9 +15,11 @@ public class Parser {
      * @return commands.Command command which can be executed by application.
      */
     public static Command parse(String fullCommand) {
-        String[] input = fullCommand.split(" ", 2);
-        assert input.length < 3;
+            String[] input = fullCommand.split(" ", 2);
+
         try {
+
+            //assert input.length < 3;
             if (input[0].equals("bye")) {
                 return new ExitCommand();
             } else if (input[0].equals("list")) {
@@ -30,11 +32,17 @@ public class Parser {
                 return new DeleteCommand(num);
             } else if (input[0].equals("find")) {
                 return new FindCommand(input[1].trim());
+            } else if (input[0].equals("help")) {
+                return new HelpCommand();
+            } else if (input[0].equals("postpone")) {
+                String[] arr = input[1].trim().split(" ");
+                return new PostponeCommand(arr[0], arr[1], arr[2], arr[3]);
+            } else if (input[0].equals("note")) {
+                String[] arr = input[1].trim().split(" ", 2);
+                return new NoteCommand(Integer.parseInt(arr[0]), arr[1]);
             } else if (input[0].length() < 4) {
                 throw new DukeException("Input length too short");
-                //return new ErrorCommand("Me no understand");
             } else {
-                assert input[0].length() >= 4;
                 Task t;
                 switch (input[0]) {
                     case "todo":
@@ -60,6 +68,8 @@ public class Parser {
             }
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return new ErrorCommand("Wrong input format!");
         } catch (Exception e) {
             return new ErrorCommand("Me no understand!");
         }

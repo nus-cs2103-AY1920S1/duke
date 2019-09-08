@@ -29,6 +29,14 @@ class Ui {
         return String.format("Here are the matching tasks in your list:%n%s", tasks);
     }
 
+    String showSaveFileChange(String filePath) {
+        return String.format("Done! I have loaded tasks from the save file located at:%n%s", filePath);
+    }
+
+    String showNewSaveFile(String filePath) {
+        return String.format("No existing save file found at %s.%nI have created a new one!", filePath);
+    }
+
     String showTaskDeletion(Task deletedTask) {
         return String.format("Done! I have deleted the following task:%n%s", deletedTask.toString());
     }

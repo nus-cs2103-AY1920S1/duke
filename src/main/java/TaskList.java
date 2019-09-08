@@ -21,6 +21,7 @@ public class TaskList {
         File newFile = new File(parent, "/tasks.txt");
         if (parent.mkdirs()) {
             boolean isCreated = newFile.createNewFile();
+            assert isCreated : "tasks.txt file should be created";
         }
     }
 

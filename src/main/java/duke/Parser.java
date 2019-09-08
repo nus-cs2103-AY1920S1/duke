@@ -26,6 +26,8 @@ public class Parser {
         String[] commands = command.split("[ ]+");
         String[] args = Arrays.copyOfRange(commands, 1, commands.length);
 
+        assert args.length == commands.length - 1: "Incorrect array copy";
+
         switch (commands[0]) {
         case "todo":
             if (args.length == 0) {

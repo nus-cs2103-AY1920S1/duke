@@ -3,6 +3,7 @@ package duke.task;
 import duke.storage.Storage;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Represents a list of tasks.
@@ -35,12 +36,12 @@ public class TaskList {
      * @param storage Storage instance to load files.
      */
     public void load(Storage storage) {
-        ArrayList<Task> tasks = storage.parseFile();
         list.clear();
-        tasks.forEach(task -> {
-            list.add(task);
-            Task.addToTotalTasks();
-        });
+        storage.parseFile()
+                .forEach(task -> {
+                    list.add(task);
+                    Task.addToTotalTasks();
+                });
     }
 
     /**
@@ -121,11 +122,9 @@ public class TaskList {
      */
     public TaskList filterByString(String substring) {
         TaskList tasklist = new TaskList();
-        list.forEach(task -> {
-            if (task.getDescription().contains(substring)) {
-                tasklist.addTask(task);
-            }
-        });
+        list.stream()
+                .filter(task -> task.getDescription().contains(substring))
+                .forEach(tasklist::addTask);
         return tasklist;
     }
 
@@ -138,12 +137,13 @@ public class TaskList {
     public String toString() {
         String indent = String.format("%5s", "");
         StringBuilder strb = new StringBuilder(indent + "Here are the tasks in your list:\n");
-        for (int i = 0; i < list.size(); ++i) {
-            strb.append(indent).append(i + 1).append(".").append(list.get(i));
-            if (i < list.size() - 1) {
-                strb.append("\n");
-            }
-        }
+        IntStream.range(0, list.size())
+                .mapToObj(index -> {
+                    return index < list.size() - 1
+                            ? String.format("%s%d.%s\n", indent, index + 1, list.get(index))
+                            : String.format("%s%d.%s", indent, index + 1, list.get(index));
+                })
+                .forEach(strb::append);
         return strb.toString();
     }
 }

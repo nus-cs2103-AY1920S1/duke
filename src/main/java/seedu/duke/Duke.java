@@ -174,25 +174,25 @@ public class Duke {
         String taskType = Parser.parseCommand(fullCommand);
         if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
             // LIST command.
-            System.out.println(listRoutineCLI(cli, tasks));
+            System.out.println(listRoutine(cli, tasks));
         } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
             // DONE command.
-            System.out.println(doneRoutineCLI(cli, tasks, fullCommand));
+            System.out.println(doneRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
             // TODO command
-            System.out.println(todoRoutineCLI(cli, tasks, fullCommand));
+            System.out.println(todoRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
             // DEADLINE command.
-            System.out.println(deadlineRoutineCLI(cli, tasks, fullCommand));
+            System.out.println(deadlineRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
             // EVENT command.
-            System.out.println(eventRoutineCLI(cli, tasks, fullCommand));
+            System.out.println(eventRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
             // DELETE command.
-            System.out.println(deleteRoutineCLI(cli, tasks, fullCommand));
+            System.out.println(deleteRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
             // FIND command
-            System.out.println(findRoutineCLI(cli, tasks, fullCommand));
+            System.out.println(findRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
             // BYE command
             System.out.println(byeRoutineCLI(cli, tasks, storage));
@@ -216,25 +216,25 @@ public class Duke {
         String taskType = Parser.parseCommand(fullCommand);
         if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
             // LIST command.
-            return listRoutineGUI(gui, tasks);
+            return listRoutine(gui, tasks);
         } else if (taskType.equals(PossibleTasks.DONE.toString().toLowerCase())) {
             // DONE command.
-            return doneRoutineGUI(gui, tasks, fullCommand);
+            return doneRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.TODO.toString().toLowerCase())) {
             // TODO command
-            return todoRoutineGUI(gui, tasks, fullCommand);
+            return todoRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.DEADLINE.toString().toLowerCase())) {
             // DEADLINE command.
-            return deadlineRoutineGUI(gui, tasks, fullCommand);
+            return deadlineRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.EVENT.toString().toLowerCase())) {
             // EVENT command.
-            return eventRoutineGUI(gui, tasks, fullCommand);
+            return eventRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.DELETE.toString().toLowerCase())) {
             // DELETE command.
-            return deleteRoutineGUI(gui, tasks, fullCommand);
+            return deleteRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.FIND.toString().toLowerCase())) {
             // FIND command
-            return findRoutineGUI(gui, tasks, fullCommand);
+            return findRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
             // BYE command
             return byeRoutineGUI(gui, tasks, storage);
@@ -251,11 +251,7 @@ public class Duke {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public String listRoutineCLI(Ui ui, TaskList tasks){
-        return ui.getListSequence(tasks);
-    }
-
-    public String listRoutineGUI(Ui ui, TaskList tasks){
+    public String listRoutine(Ui ui, TaskList tasks){
         return ui.getListSequence(tasks);
     }
 
@@ -275,19 +271,14 @@ public class Duke {
         return (ui.getByeSequence());
     }
 
-    public String findRoutineCLI(Ui ui, TaskList tasks, String fullCommand){
+    public String findRoutine(Ui ui, TaskList tasks, String fullCommand){
         // Parser will parse the command and obtain the searchString.
         // findSimilarTasks will return a TaskList containing only matching tasks.
         TaskList similarTasks = tasks.findSimilarTasks(Parser.getFindTask(fullCommand));
         return ui.getFoundTasks(similarTasks);
     }
 
-    public String findRoutineGUI(Ui ui, TaskList tasks, String fullCommand){
-        TaskList similarTasks = tasks.findSimilarTasks(Parser.getFindTask(fullCommand));
-        return (ui.getFoundTasks(similarTasks));
-    }
-
-    public String deleteRoutineCLI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    public String deleteRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
         int taskNum = Parser.getDeletedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1.
@@ -303,18 +294,7 @@ public class Duke {
         return ui.getDeleteSequence(tasks, taskToDelete);
     }
 
-    public String deleteRoutineGUI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
-        int taskNum = Parser.getDeletedTaskNum(fullCommand);
-        taskNum--;
-        if (taskNum >= tasks.getSize()) {
-            throw new DukeException("Task no. " + (taskNum + 1) + " does not exist");
-        }
-        Task taskToDelete = tasks.getTask(taskNum);
-        tasks.deleteTask(taskNum);
-        return (ui.getDeleteSequence(tasks,taskToDelete));
-    }
-
-    public String eventRoutineCLI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    public String eventRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
         if ((fullCommand.length() < 6)) {
             // Input is only "event".
 
@@ -336,22 +316,7 @@ public class Duke {
         return ui.getEventSequence(tasks, newEvent);
     }
 
-    public String eventRoutineGUI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
-        if ((fullCommand.length() < 6)) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-        } else if ((fullCommand.lastIndexOf('/') < 1)
-                || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
-            throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
-        }
-
-        String description = Parser.getEventDescription(fullCommand);
-        String extraDescription = Parser.getEventLocation(fullCommand);
-        Event newEvent = new Event(description, extraDescription);
-        tasks.addTask(newEvent);
-        return (ui.getEventSequence(tasks, newEvent));
-    }
-
-    public String deadlineRoutineCLI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    public String deadlineRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
         if ((fullCommand.length() < 9)) {
 
             // fullCommand contains only the string "deadline".
@@ -375,31 +340,7 @@ public class Duke {
         return ui.getDeadlineSequence(tasks, newDeadline);
     }
 
-    public String deadlineRoutineGUI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
-        if ((fullCommand.length() < 9)) {
-
-            // fullCommand contains only the string "deadline".
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-
-        } else if ((fullCommand.lastIndexOf('/') < 1)
-                || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
-
-            // fullCommand does not contain '/' chars or there are no char after "/by".
-            throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
-
-        }
-
-        String description = Parser.getDeadlineDescription(fullCommand);
-        String extraDescription = Parser.getDeadlineDateTime(fullCommand);
-
-        Deadline newDeadline = new Deadline(description, extraDescription);
-
-        tasks.addTask(newDeadline);
-
-        return (ui.getDeadlineSequence(tasks, newDeadline));
-    }
-
-    public String todoRoutineCLI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    public String todoRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
         if (fullCommand.length() < 5) {
             // fullCommand contains only the string "todo".
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -414,22 +355,7 @@ public class Duke {
         return ui.getTodoSequence(tasks, newTodo);
     }
 
-    public String todoRoutineGUI(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
-        if (fullCommand.length() < 5) {
-            // fullCommand contains only the string "todo".
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        }
-
-        String description = Parser.getTodoDescription(fullCommand);
-
-        Todo newTodo = new Todo(description);
-
-        tasks.addTask(newTodo);
-
-        return (ui.getTodoSequence(tasks, newTodo));
-    }
-
-    public String doneRoutineCLI(Ui ui, TaskList tasks, String fullCommand){
+    public String doneRoutine(Ui ui, TaskList tasks, String fullCommand){
         int taskNum = Parser.getFinishedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1,
@@ -438,17 +364,6 @@ public class Duke {
         tasks.getTask(taskNum).setDone();
 
         return ui.getDoneSequence(tasks, taskNum);
-    }
-
-    public String doneRoutineGUI(Ui ui, TaskList tasks, String fullCommand){
-        int taskNum = Parser.getFinishedTaskNum(fullCommand);
-
-        // taskList index (starts from 0) differs from taskNum (starts from 1) by 1,
-        taskNum--;
-
-        tasks.getTask(taskNum).setDone();
-
-        return (ui.getDoneSequence(tasks, taskNum));
     }
 
     /**

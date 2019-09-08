@@ -23,41 +23,44 @@ public class GraphicalUi extends Ui {
     }
 
     public String getDoneSequence(TaskList tasks, int taskNum){
-        String icon = "";
-        if (tasks.getTask(taskNum).isDone()){
-            icon = "V";
-        } else if (!tasks.getTask(taskNum).isDone()){
-            icon = "X";
-        }
-
         String output = "Nice! I've marked this task as done:\n"
-                + "[" + icon + "] " + tasks.getTask(taskNum).getTaskName()
+                + "[" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
                 + "\n" ;
+        output = output.replace("✓", "V");
+        output = output.replace("✘", "X");
         return output;
     }
 
     public String getTodoSequence(TaskList tasks, Todo newTodo){
         String output = "Got it. I've added this task:\n"
                 + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
+        output = output.replace("✓", "V");
+        output = output.replace("✘", "X");
         return output;
     }
 
     public String getDeadlineSequence(TaskList tasks, Deadline newDeadline){
         String output = "Got it. I've added this task:\n"
                 + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
+        output = output.replace("✓", "V");
+        output = output.replace("✘", "X");
         return output;
     }
 
     public String getEventSequence(TaskList tasks, Event newEvent) {
         String output = "Got it. I've added this task:\n"
                 + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
-        return (output);
+        output = output.replace("✓", "V");
+        output = output.replace("✘", "X");
+        return output;
     }
 
     public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
         String output = "Noted. I've removed this task.\n"
                 + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
-        return (output);
+        output = output.replace("✓", "V");
+        output = output.replace("✘", "X");
+        return output;
     }
 
     public String getByeSequence() {
@@ -76,15 +79,11 @@ public class GraphicalUi extends Ui {
      */
     public String getListSequence(TaskList tasks) {
         String output = "";
-        String icon = "";
         for (int i = 0; i < tasks.getSize(); i++) {
-            if (tasks.getTask(i).isDone()){
-                icon = "V";
-            } else if (!tasks.getTask(i).isDone()){
-                icon = "X";
-            }
-            output += (i + 1) + ".[" + icon + "]" + tasks.getTask(i).getTaskName() + "\n";
+            output += (i + 1) + "." + tasks.getTask(i).toString() + "\n";
         }
+        output = output.replace("✓", "V");
+        output = output.replace("✘", "X");
         return output;
     }
 
@@ -99,8 +98,4 @@ public class GraphicalUi extends Ui {
                 + numOfTaskRemaining + " tasks in the list.\n";
         return output;
     }
-
-
-
-
 }

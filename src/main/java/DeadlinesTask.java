@@ -1,10 +1,11 @@
+import java.time.LocalDateTime;
 /**
  * Represents a specific type of task - Tasks with deadlines.
  *
  */
 class DeadlinesTask extends Task{
     
-    DateTime endingDateTime;
+    LocalDateTime endingDateTime;
 
     /**
      * Constructor for DeadlinesTask class.
@@ -13,7 +14,7 @@ class DeadlinesTask extends Task{
      * @param message indicates what to do for the task
      * @param endingDateTime deadline of the task
      */
-    public DeadlinesTask (Boolean status, String message, DateTime endingDateTime){
+    public DeadlinesTask (Boolean status, String message, LocalDateTime endingDateTime){
         super(status, message, "[D]");
         this.endingDateTime = endingDateTime;
     }
@@ -31,7 +32,13 @@ class DeadlinesTask extends Task{
         }else{
             doneString = "[X]";
         }
-        return  super.type + doneString + " " + super.message + " (by: " +endingDateTime + ")";
+        String formattedEndingDateTime = String.valueOf(endingDateTime.getDayOfMonth()) + " " +
+        String.valueOf(endingDateTime.getMonth()) + " " +
+        String.valueOf(endingDateTime.getHour()) + 
+        String.valueOf(endingDateTime.getMinute()) +
+        " hours" ;
+
+        return  super.type + doneString + " " + super.message + " (by: " +formattedEndingDateTime + ")";
     }
 
     /**
@@ -46,6 +53,6 @@ class DeadlinesTask extends Task{
         }else{
             doneString = "0";
         }
-        return "D|" +doneString + "|"+ super.message+ "|" + endingDateTime.toFileString() + "\n";
+        return "D|" +doneString + "|"+ super.message+ "|" + endingDateTime.toString() + "\n";
     }
 }

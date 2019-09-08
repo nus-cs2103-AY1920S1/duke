@@ -47,7 +47,7 @@ public class Parser{
                         return new Response(doneResponse).toString();
 
                     case "todo" :
-                        Command toDoCommand = new ToDoCommand(line, taskList);
+                        Command toDoCommand = new ToDoCommand(line, taskName, taskList);
                         String processedtoDoCommand = toDoCommand.processCommand();
                         String toDoResponse = toDoCommand.execute(processedtoDoCommand);
                         storage.save();
@@ -58,7 +58,7 @@ public class Parser{
                         if(deadlineArray.length < 2){
                             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty."); 
                         }
-                        Command deadLineCommand = new DeadLineCommand(line, taskList);
+                        Command deadLineCommand = new DeadLineCommand(line, taskName, deadlineArray, taskList);
                         String processeddeadLineCommand = deadLineCommand.processCommand();
                         String deadlineResponse = deadLineCommand.execute(processeddeadLineCommand);
                         storage.save();
@@ -69,7 +69,7 @@ public class Parser{
                         if(deadlineArray1.length < 2){
                             throw new DukeException("☹ OOPS!!! The date of an event cannot be empty."); 
                         }
-                        Command eventCommand = new EventCommand(line, taskList);
+                        Command eventCommand = new EventCommand(line, taskName, deadlineArray1, taskList);
                         String processedeventCommand = eventCommand.processCommand();
                         String eventResponse = eventCommand.execute(processedeventCommand);
                         storage.save();
@@ -86,7 +86,7 @@ public class Parser{
                         if(offset > taskList.size() - 1){
                             throw new DukeException("☹ OOPS!!! There aren't so many tasks!"); 
                         }else{
-                            Command deleteCommand = new DeleteCommand(taskName, taskList);
+                            Command deleteCommand = new DeleteCommand(line, offset, taskList);
                             String processedDeleteCommand = deleteCommand.processCommand();
                             String deleteResponse = deleteCommand.execute(processedDeleteCommand);
                             storage.save();

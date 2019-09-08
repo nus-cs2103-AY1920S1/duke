@@ -2,7 +2,7 @@ import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-
+import java.time.LocalDateTime;
 /**
  * Storage class deals with the storing of the tasks in memory.
  */
@@ -29,69 +29,35 @@ public class Storage {
             while ((line = br.readLine()) != null) {
                 
                String[] currentTaskArray = line.split("\\|");
-
                String taskCategory = currentTaskArray[0].replace(" ","");
                String currentStatus = currentTaskArray[1];
+               Boolean currentstatusBoolean;
+               if(currentStatus.equals("0")){
+                   currentstatusBoolean = false;
+               }else{
+                   currentstatusBoolean = true;
+               }
+
                String taskName = currentTaskArray[2];
                
                if(taskCategory.equals("T")){
-    
-                ToDoTask newTask = new ToDoTask (false, taskName);
-                taskList.fileAdd(newTask);
+
+                    ToDoTask newTask = new ToDoTask (currentstatusBoolean, taskName);
+                    taskList.fileAdd(newTask);
                }else if(taskCategory.equals("D")){
+
                    String deadline = currentTaskArray[3];
-                
-                   String [] deadlineArray = deadline.split(" ");
-                   int deadlineArraySize = deadlineArray.length;
-                   DateTime endingDateTime;
-
-                   int date = Integer.parseInt(deadlineArray[0]);
-                   String month = deadlineArray[1];
-
-                    int year = Integer.parseInt(deadlineArray[2]);
-                    int hour = Integer.parseInt(deadlineArray[3]);
-                    int min = Integer.parseInt(deadlineArray[4]);
-                    
-                    endingDateTime = new DateTime(hour, 
-                    min, 
-                    date,
-                    month,
-                    year);
-                
-                   DeadlinesTask newTask = new DeadlinesTask (false, taskName, endingDateTime);
+                   LocalDateTime endingDateTime = LocalDateTime.parse(deadline);
+                   DeadlinesTask newTask = new DeadlinesTask (currentstatusBoolean, taskName, endingDateTime);
                    taskList.fileAdd(newTask);
                }else {
-                    String deadline = currentTaskArray[3];
-                    String [] deadlineArray = deadline.split(" ");
-                    int deadlineArraySize = deadlineArray.length;
-                    DateTime startingDateTime;
-                    DateTime endingDateTime;
+                    String startingDateTimesString = currentTaskArray[3];
+                    String endingDateTimesString = currentTaskArray[4];
+                                        
+                    LocalDateTime startingDateTime = LocalDateTime.parse(startingDateTimesString);
+                    LocalDateTime endingDateTime = LocalDateTime.parse(endingDateTimesString);
                     
-                    int date = Integer.parseInt(deadlineArray[0]);
-                    String month = deadlineArray[1];
-                    int year = Integer.parseInt(deadlineArray[2]);
-
-                    
-                    int startingHour = Integer.parseInt(deadlineArray[3]);
-                    int startingMin = Integer.parseInt(deadlineArray[4]);
-
-                    int endingHour = Integer.parseInt(deadlineArray[5]);
-                    int endingMin = Integer.parseInt(deadlineArray[6]);
-                    
-                    startingDateTime = new DateTime(startingHour, 
-                    startingMin, 
-                    date,
-                    month,
-                    year);
-
-                    endingDateTime = new DateTime(endingHour, 
-                    endingMin, 
-                    date,
-                    month,
-                    year);
-                    
-                    
-                    EventsTask newTask = new EventsTask (false, taskName, startingDateTime, endingDateTime);
+                    EventsTask newTask = new EventsTask (currentstatusBoolean, taskName, startingDateTime, endingDateTime);
                     taskList.fileAdd(newTask);
                }
             }

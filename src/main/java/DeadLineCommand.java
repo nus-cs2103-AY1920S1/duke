@@ -1,7 +1,11 @@
+import java.time.LocalDateTime;
 /**
  * Deadline command is used to create DeadLine tasks.
  */
 public class DeadLineCommand extends Command {
+
+    private String taskName; 
+    private String[] deadlineArray;
 
     /**
      * Constructor for DeadLineCommand class.
@@ -9,8 +13,10 @@ public class DeadLineCommand extends Command {
      * @param command takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public DeadLineCommand(String command, TaskList taskList ){
+    public DeadLineCommand(String command, String taskName, String[] deadlineArray, TaskList taskList ){
         super(command, taskList);
+        this.taskName = taskName;
+        this.deadlineArray = deadlineArray;
     }
 
     /**
@@ -21,20 +27,13 @@ public class DeadLineCommand extends Command {
      */
     @Override
     public String processCommand(){
-        String line = super.command;
-        String taskName = line.split(" ", 2) [1];
-        String [] deadlineArray = line.split("/");
-
-        int date =  Integer.parseInt(deadlineArray[1].replace("by ", ""));
-        String month = deadlineArray[2];
-        int year = Integer.parseInt(deadlineArray[3]);
-        int hour = Integer.parseInt(deadlineArray[4]);
-        int min = Integer.parseInt(deadlineArray[5]);
-
-        DateTime deadlineDateTime = new DateTime(hour, min, date, month, year);
+        String deadLineTime = deadlineArray[deadlineArray.length - 1];
+        LocalDateTime deadlineDateTime = LocalDateTime.parse(deadLineTime);
+        
         String newTaskName = taskName.split("/")[0];        
         DeadlinesTask newTask1 = new DeadlinesTask (false, newTaskName, deadlineDateTime);
         String toPrint1 = taskList.add(newTask1);
+        
         return toPrint1;
     }
 

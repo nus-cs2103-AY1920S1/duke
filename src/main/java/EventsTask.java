@@ -1,11 +1,12 @@
+import java.time.LocalDateTime;
 /**
  * Represents a specific type of task - Tasks that are events
  *
  */
 class EventsTask extends Task{
 
-    DateTime startingDateTime ; 
-    DateTime endingDateTime;
+    LocalDateTime startingDateTime ; 
+    LocalDateTime endingDateTime;
 
     /**
      * Constructor for EventsTask class
@@ -16,7 +17,7 @@ class EventsTask extends Task{
      * @param endingDateTime ending date of the task
      */
     public EventsTask (Boolean status, String message, 
-    DateTime startingDateTime, DateTime endingDateTime){
+    LocalDateTime startingDateTime, LocalDateTime endingDateTime){
         super(status, message, "[E]");
 
         this.startingDateTime = startingDateTime;
@@ -36,7 +37,22 @@ class EventsTask extends Task{
         }else{
             doneString = "[X]";
         }
-        return super.type + doneString + " " + super.message +" (at: " + startingDateTime  + " to " +endingDateTime + ")";
+
+        String formattedStartingDateTime = String.valueOf(startingDateTime.getDayOfMonth()) + " " +
+        String.valueOf(startingDateTime.getMonth()) + " " +
+        String.valueOf(startingDateTime.getHour()) + 
+        String.valueOf(startingDateTime.getMinute()) +
+        " hours" ;
+
+        
+        String formattedEndingDateTime = String.valueOf(endingDateTime.getDayOfMonth()) + " " +
+        String.valueOf(endingDateTime.getMonth()) + " " +
+        String.valueOf(endingDateTime.getHour()) + 
+        String.valueOf(endingDateTime.getMinute()) +
+        " hours" ;
+
+
+        return super.type + doneString + " " + super.message +" (at: " + formattedStartingDateTime.toString()  + " to " +formattedEndingDateTime.toString() + ")";
     }
 
     /**
@@ -51,6 +67,6 @@ class EventsTask extends Task{
         }else{
             doneString = "0";
         }
-        return "E|" +doneString + "|"+ super.message+ "|" + startingDateTime.toFileString() +" "+ endingDateTime.getHour() + " " + endingDateTime.getMin() + "\n";
+        return "E|" +doneString + "|"+ super.message+ "|" + startingDateTime.toString() +"|"+ endingDateTime.toString() + "\n";
     }
 }

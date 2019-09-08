@@ -2,6 +2,7 @@
  * ToDo command is used to create ToDo tasks.
  */
 public class ToDoCommand extends Command {
+    private String taskName;
 
     /**
      * Constructor for ToDoCommand class.
@@ -9,8 +10,9 @@ public class ToDoCommand extends Command {
      * @param command takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public ToDoCommand(String command, TaskList taskList ){
+    public ToDoCommand(String command, String taskName, TaskList taskList ){
         super(command, taskList);
+        this.taskName = taskName;
     }
 
     /**
@@ -20,7 +22,6 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String processCommand(){
-        String taskName = super.command.split(" ", 2) [1];
         return taskName;
     }
 

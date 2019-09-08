@@ -2,6 +2,7 @@
  * Delete command is used to create Delete tasks.
  */
 public class DeleteCommand extends Command {
+    private Integer offset;
     
     /**
      * Constructor for DeleteCommand class.
@@ -9,8 +10,9 @@ public class DeleteCommand extends Command {
      * @param command takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public DeleteCommand(String command, TaskList taskList ){
+    public DeleteCommand(String command, Integer offset, TaskList taskList ){
         super(command, taskList);
+        this.offset = offset;
     }
 
     /**
@@ -20,8 +22,6 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String processCommand(){
-        String taskName = super.command.split(" ", 2) [1];
-        int offset = Integer.parseInt(taskName) - 1;
         return Integer.toString(offset);
 
     }
@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(String processedCommand){
+        System.out.println(processedCommand);
         return taskList.deleteTask(Integer.parseInt(processedCommand));
     }
 } 

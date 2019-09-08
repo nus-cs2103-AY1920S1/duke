@@ -1,20 +1,22 @@
+package duke.task;
+
 /**
- * Represents a task of the type ToDo.
+ * Represents a task of the type Todo.
  */
-public class ToDo extends Task {
+public class Todo extends Task {
 
     /**
-     * Creates a new instance of ToDo labeled "T".
+     * Creates a new instance of <code>Todo</code> labeled "T".
      *
      * @param s description of the task
      */
-    public ToDo(String s) {
+    public Todo(String s) {
         super(s);
         this.label = "T";
     }
 
     /**
-     * Returns a line with details of the ToDo task.
+     * Returns a line with details of the <code>Todo</code> task.
      *
      * @return String representing the task.
      */

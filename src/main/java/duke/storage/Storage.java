@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -50,33 +58,44 @@ public class Storage {
         File f = new File(filePath);
         // Create a Scanner using the File as the source
         Scanner s = new Scanner(f);
-        if (!s.hasNext()) throw new DukeException(
-                "Your task list is currently empty.");
+        if (!s.hasNext()) throw new DukeException("Your task list is currently empty.");
         while (s.hasNext()) {
-            String str = s.nextLine();
-            String[] arr = str.split(" \\| ");
-            String taskType = arr[0];
-            int taskStatus = Integer.valueOf(arr[1]);
-            String taskDes = arr[2];
-            String taskTime = "";
-            Task task;
-            if (taskType.equals("T")) {
-                task = new ToDo(taskDes);
-                tasks.add(task);
-                if (taskStatus == 1) task.mark();
-            } else if (taskType.equals("D")) {
-                taskTime = arr[3];
-                task = new Deadline(taskDes, taskTime);
-                tasks.add(task);
-                if (taskStatus == 1) task.mark();
-            } else if (taskType.equals("E")) {
-                taskTime = arr[3];
-                task = new Event(taskDes, taskTime);
-                tasks.add(task);
-                if (taskStatus == 1) task.mark();
-            }
+            readTasks(s.nextLine());
         }
         return tasks;
+    }
+
+    /**
+     * Reads task info and generate new <code>Task</code> instance.
+     *
+     * @param str String containing information about a task.
+     */
+    private void readTasks(String str) {
+        String[] arr = str.split(" \\| ");
+        String taskType = arr[0];
+        int taskStatus = Integer.parseInt(arr[1]);
+        String taskDes = arr[2];
+        String taskTime;
+        Task task;
+        switch (taskType) {
+        case "T":
+            task = new Todo(taskDes);
+            tasks.add(task);
+            if (taskStatus == 1) task.mark();
+            break;
+        case "D":
+            taskTime = arr[3];
+            task = new Deadline(taskDes, taskTime);
+            tasks.add(task);
+            if (taskStatus == 1) task.mark();
+            break;
+        case "E":
+            taskTime = arr[3];
+            task = new Event(taskDes, taskTime);
+            tasks.add(task);
+            if (taskStatus == 1) task.mark();
+            break;
+        }
     }
 
 }

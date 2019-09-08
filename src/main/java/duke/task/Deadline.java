@@ -1,10 +1,12 @@
+package duke.task;
+
 /**
  * Represents a task of the type DeadLine.
  */
 public class Deadline extends Task {
 
     /**
-     * Creates a new instance of DeadLine labeled "D".
+     * Creates a new instance of <code>Deadline</code> labeled "D".
      *
      * @param s description of the task.
      * @param t time of the task.
@@ -15,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a line with details of the DeadLine task.
+     * Returns a line with details of the <code>Deadline</code> task.
      *
      * @return String representing the task.
      */

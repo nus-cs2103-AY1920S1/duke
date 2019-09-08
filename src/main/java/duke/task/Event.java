@@ -1,10 +1,12 @@
+package duke.task;
+
 /**
  * Represents a task of the type Event.
  */
 public class Event extends Task {
 
     /**
-     * Creates a new instance of Event labeled "E".
+     * Creates a new instance of <code>Event</code> labeled "E".
      *
      * @param s description of the task.
      * @param t time of the task.
@@ -15,7 +17,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a line with details of the Event task.
+     * Returns a line with details of the <code>Event</code> task.
      *
      * @return String representing the task.
      */

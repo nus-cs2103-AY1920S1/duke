@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,17 +64,59 @@ public class TaskList {
         switch (n % 10) {
         case 1:
             return n + "st of";
-            // Fallthrough
+        // Fallthrough
         case 2:
             return n + "nd of";
-            // Fallthrough
+        // Fallthrough
         case 3:
             return n + "rd of";
-            // Fallthrough
+        // Fallthrough
         default:
             return n + "th of";
-            // Fallthrough
+        // Fallthrough
         }
+    }
+
+    /**
+     * Validates that the task information entered by the user is in proper format.
+     *
+     * @param taskType type of task.
+     * @param taskDes description of task.
+     * @param taskTime date and time of task
+     * @throws DukeException self-defined exceptions caused by illegal input.
+     */
+    private void validateInput(String taskType, String taskDes, String taskTime) throws DukeException {
+        if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        if (taskDes.equals("")) throw new DukeException(
+                "\u2639 OOPS!!! The description of a " + taskType + " cannot be empty.");
+        if ((taskType.equals("deadline") || taskType.equals("event")) && taskTime.equals(""))
+            throw new DukeException(
+                    "\u2639 OOPS!!! The time of a " + taskType + " cannot be empty.");
+    }
+
+    /**
+     * Converts the format of date and time.
+     *
+     * @param taskTime date and time of task.
+     * @return Reformatted date and time.
+     * @throws ParseException self-defined exceptions caused by illegal input.
+     */
+    private String convertDate(String taskTime) throws ParseException {
+        Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+        taskTime = formatter.format(date);
+        String[] array = taskTime.split(" ");
+        array[0] = getOrdinal(Integer.parseInt(array[0]));
+        array[array.length - 1] = array[array.length - 1].toLowerCase();
+        StringBuilder taskTimeBuilder = new StringBuilder();
+        for (String s : array) {
+            taskTimeBuilder.append(" ").append(s);
+        }
+        taskTime = taskTimeBuilder.toString();
+        taskTime = taskTime.trim();
+        return taskTime;
     }
 
     /**
@@ -83,66 +129,50 @@ public class TaskList {
     public Task add(String s) throws DukeException {
         String[] arr = s.split(" ");
         String taskType = arr[0];
-        String taskDes = "";
-        String taskTime = "";
+        StringBuilder taskDes = new StringBuilder();
+        StringBuilder taskTime = new StringBuilder();
 
         // Get task description
         for (int i = 1; i < arr.length; i++) {
             if (arr[i].length() >= 1 && arr[i].charAt(0) == '/') {
                 // Get task time
                 for (int j = i + 1; j < arr.length; j++) {
-                    taskTime += " " + arr[j];
+                    taskTime.append(" ").append(arr[j]);
                 }
                 break;
             } else {
-                taskDes += " " + arr[i];
+                taskDes.append(" ").append(arr[i]);
             }
         }
-        taskDes = taskDes.trim();
-        taskTime = taskTime.trim();
+        taskDes = new StringBuilder(taskDes.toString().trim());
+        taskTime = new StringBuilder(taskTime.toString().trim());
 
         // Handle exceptions
-        if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-        if (taskDes.equals("")) throw new DukeException(
-                "\u2639 OOPS!!! The description of a " + taskType + " cannot be empty.");
-        if ((taskType.equals("deadline") || taskType.equals("event")) && taskTime.equals(""))
-            throw new DukeException(
-                    "\u2639 OOPS!!! The time of a " + taskType + " cannot be empty.");
+        validateInput(taskType, taskDes.toString(), taskTime.toString());
 
-        // Converts date format.
+        // Converts date format
         try {
-            Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime);
-            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
-            taskTime = formatter.format(date);
-            String[] array = taskTime.split(" ");
-            array[0] = getOrdinal(Integer.valueOf(array[0]));
-            array[array.length - 1] = array[array.length - 1].toLowerCase();
-            taskTime = "";
-            for (int i = 0; i < array.length; i++) {
-                taskTime += " " + array[i];
-            }
-            taskTime = taskTime.trim();
+            taskTime = new StringBuilder(convertDate(taskTime.toString()));
         } catch (ParseException e) {
-
+            // Do nothing if the date is not properly formatted
         }
 
-        // Creates new task.
+        // Creates new task
         Task task;
-        if (taskType.equals("todo")) {
-            task = new ToDo(taskDes);
+        switch (taskType) {
+        case "todo":
+            task = new Todo(taskDes.toString());
             tasks.add(task);
             return task;
-        } else if (taskType.equals("deadline")) {
-            task = new Deadline(taskDes, taskTime);
+        case "deadline":
+            task = new Deadline(taskDes.toString(), taskTime.toString());
             tasks.add(task);
             return task;
-        } else if (taskType.equals("event")) {
-            task = new Event(taskDes, taskTime);
+        case "event":
+            task = new Event(taskDes.toString(), taskTime.toString());
             tasks.add(task);
             return task;
-        } else {
+        default:
             return null;
         }
     }
@@ -181,7 +211,7 @@ public class TaskList {
      */
     public String generateInfo() {
         // Convert Task into a String which can be stored in the data file
-        String taskFile = "";
+        StringBuilder taskFile = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String current;
@@ -192,11 +222,11 @@ public class TaskList {
                         + " | " + task.getTime();
             }
             if (i != tasks.size() - 1) {
-                taskFile += current + System.lineSeparator();
+                taskFile.append(current).append(System.lineSeparator());
             } else {
-                taskFile += current;
+                taskFile.append(current);
             }
         }
-        return taskFile;
+        return taskFile.toString();
     }
 }

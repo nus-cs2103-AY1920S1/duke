@@ -32,7 +32,7 @@ public class Duke {
      * Runs Duke object to start the chat bot. This method will call on other methods to load previously saved
      * information.
      */
-    public void run() {
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         } else {
             Task deleted = tasks.delTask(taskToBeDeleted);
             maxNum = tasks.totalNumTasks();
-            storage.save(tasks);
+            Storage.save(tasks);
             return ui.printLine("Noted. I've removed this task:" + "\n" + deleted.toString() + "\n"
                             + "Now you have " + maxNum + " tasks in the list.");
         }

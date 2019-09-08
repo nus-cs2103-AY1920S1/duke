@@ -4,13 +4,9 @@
 
 package duke.commands;
 
-import duke.exceptions.DukeException;
-
 import duke.managers.TaskList;
 import duke.managers.Ui;
 import duke.managers.Storage;
-
-import java.io.IOException;
 
 public class ListCommand extends Command {
 
@@ -23,8 +19,6 @@ public class ListCommand extends Command {
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file
-     * @exception DukeException is thrown when there is an error with the input
-     * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String printedLines  = "Here are the tasks in your list:" + "\n";

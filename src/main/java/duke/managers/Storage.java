@@ -25,7 +25,7 @@ public class Storage {
     private static ArrayList<Task> memory = new ArrayList<>();
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        Storage.filePath = filePath;
     }
 
     /**
@@ -40,10 +40,9 @@ public class Storage {
                 Task newTask = loadStringToTask(s.nextLine());
                 memory.add(newTask);
             }
+            return memory;
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found. A new TaskList will be loaded.");
-        } finally {
-            return memory;
         }
     }
 

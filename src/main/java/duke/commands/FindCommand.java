@@ -4,20 +4,17 @@
 
 package duke.commands;
 
-import duke.exceptions.DukeException;
-
 import duke.managers.Storage;
 import duke.managers.TaskList;
 import duke.managers.Ui;
 
 import duke.tasks.Task;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
     private Ui ui;
+    private TaskList tasks;
     private String keyword;
     private ArrayList<Task> matchedTasks = new ArrayList<>();
 
@@ -31,16 +28,23 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Searches for tasks with that specific keyword and returns all matching tasks to the user.
+     * Executes command to search for tasks with that specific keyword and return all matching tasks to the user.
      *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
      * @param storage contains methods to load and save information in the file
-     * @exception DukeException is thrown when there is an error with the input
-     * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         this.ui = ui;
+        this.tasks = tasks;
+        findAllMatches();
+        return printAllMatches();
+    }
+
+    /**
+     * Searches for tasks with that specific keyword.
+     */
+    public void findAllMatches() {
         ArrayList<Task> allTasks = tasks.getAllTasks();
         for (Task task : allTasks) {
             String taskDescription = task.getDescription();
@@ -52,7 +56,6 @@ public class FindCommand extends Command {
                 }
             }
         }
-        return printAllMatches();
     }
 
     /**

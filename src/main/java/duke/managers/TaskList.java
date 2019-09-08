@@ -18,7 +18,7 @@ public class TaskList {
      * Loads previously stored information in the hard disk.
      *
      * @param loadedTasks a data structure containing the tasks stored
-     * @throws DukeException is thrown when there are no tasks to be laoded
+     * @throws DukeException is thrown when there are no tasks to be loaded
      */
     public TaskList(ArrayList<Task> loadedTasks) throws DukeException {
         if (loadedTasks.size() == 0) {

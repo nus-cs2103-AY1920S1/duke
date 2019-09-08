@@ -25,6 +25,7 @@ public class Deadline extends Task {
      * @return get the string representation of the endDate
      */
     public String getEndDate() {
+        assert this.endDate != null: "End date not entered";
         return this.endDate;
     }
 
@@ -42,6 +43,7 @@ public class Deadline extends Task {
         if (date == null) {
             return "[D]" + "[" + doneSymbol + "] " + getTaskName() + " (by: " + endDate + ")";
         } else {
+            assert date != null: "No date entered";
             return "[D]" + "[" + doneSymbol + "] " + getTaskName() + " (by: " + date + ")";
         }
     }

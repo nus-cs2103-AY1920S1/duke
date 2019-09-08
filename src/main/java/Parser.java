@@ -9,6 +9,7 @@ public class Parser {
      * @throws DukeException this error will be raised if the user does not enter a valid input
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert !fullCommand.equals(""): "Cannot enter empty input";
         if (fullCommand.equals("bye")){
             return new ByeTaskCommand();
         } else if (fullCommand.contains("delete")){
@@ -35,6 +36,7 @@ public class Parser {
      * @return command
      */
     static Command parseDeleteCommand(String string) {
+        assert !string.equals(""): "Cannot enter empty input";
         int index = Integer.parseInt(string.split("delete ")[1]);
         return new DeleteTaskCommand(index);
     }
@@ -45,7 +47,7 @@ public class Parser {
      */
 
     static Command parseDoneCommand(String string) {
-
+        assert !string.equals(""): "Cannot enter empty input";
         int index = Integer.parseInt(string.split("done ")[1]);
         return new DoneTaskCommand(index);
     }

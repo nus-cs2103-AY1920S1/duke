@@ -25,6 +25,7 @@ public class Task {
      * @return yhe string representation of the task
      */
     public String getTaskName() {
+        assert taskName != null: "task name is empty";
         return taskName;
     }
 

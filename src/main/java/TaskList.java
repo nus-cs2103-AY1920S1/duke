@@ -28,7 +28,7 @@ public class TaskList {
     /**
      * Constructor which loads list of tasks from hard disk.
      *
-     * @param  taskList list of tasks
+     * @param taskList list of tasks
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -61,7 +61,7 @@ public class TaskList {
     /**
      * Adds a Deadline task to tasklist.
      *
-     * @param  newDeadline Dateline task to be added.
+     * @param newDeadline Dateline task to be added.
      */
     void addDeadline(Deadline newDeadline) {
         taskList.add(newDeadline);
@@ -70,7 +70,7 @@ public class TaskList {
     /**
      * Adds a Event task to tasklist.
      *
-     * @param  newEvent Event task to be added.
+     * @param newEvent Event task to be added.
      */
     void addEvent(Event newEvent) {
         taskList.add(newEvent);
@@ -79,7 +79,7 @@ public class TaskList {
     /**
      * Deletes a task from tasklist.
      *
-     * @param  taskNumber Number of task to be deleted.
+     * @param taskNumber Number of task to be deleted.
      */
     void deleteTask(int taskNumber) {
         taskList.remove(taskNumber - 1);
@@ -88,8 +88,8 @@ public class TaskList {
     /**
      * Finds a task from tasklist.
      *
-     * @param  taskName task to be found.
-     * @return  String to be output.
+     * @param taskName task to be found.
+     * @return String to be output.
      */
     String findTasks(String taskName) {
         String output = "Here are the matching tasks in your list\n";
@@ -101,5 +101,95 @@ public class TaskList {
             }
         }
         return output;
+    }
+
+    /**
+     * Returns number of Deadline tasks (both done or not) in Tasklist.
+     *
+     * @return number of Deadline tasks
+     */
+    int getNumDeadline () {
+        int numDeadline = 0;
+        for (Task i: taskList) {
+            if (i instanceof Deadline) {
+                numDeadline++;
+            }
+        }
+        return numDeadline;
+    }
+
+    /**
+     * Returns number of Event tasks (both done or not) in Tasklist.
+     *
+     * @return number of Event tasks
+     */
+    int getNumEvent () {
+        int numEvent = 0;
+        for (Task i: taskList) {
+            if (i instanceof Event) {
+                numEvent++;
+            }
+        }
+        return numEvent;
+    }
+
+    /**
+     * Returns number of Todo tasks (both done or not) in Tasklist.
+     *
+     * @return number of Todo tasks
+     */
+    int getNumTodo () {
+        int numTodo = 0;
+        for (Task i: taskList) {
+            if (i instanceof Todo) {
+                numTodo++;
+            }
+        }
+        return numTodo;
+    }
+
+    /**
+     * Returns number of done Deadline tasks in Tasklist.
+     *
+     * @return number of done Deadline tasks
+     */
+    int getNumDoneDeadline () {
+        int numDoneDeadline = 0;
+        for (Task i: taskList) {
+            if (i instanceof Deadline && i.isDone) {
+                numDoneDeadline++;
+            }
+        }
+        return numDoneDeadline;
+    }
+
+    /**
+     * Returns number of done Event tasks in Tasklist.
+     *
+     * @return number of done Event tasks
+     */
+    int getNumDoneEvent () {
+        int numDoneEvent = 0;
+        for (Task i: taskList) {
+            if (i instanceof Event && i.isDone) {
+                numDoneEvent++;
+            }
+        }
+        return numDoneEvent;
+    }
+
+    /**
+     * Returns number of done Todo tasks in Tasklist.
+     *
+     * @return number of done Todo tasks
+     */
+    int getNumDoneTodo () {
+        int numDoneTodo = 0;
+        for (Task i: taskList) {
+            if (i instanceof Todo && i.isDone) {
+                numDoneTodo++;
+            }
+        }
+        return numDoneTodo;
     }
 }

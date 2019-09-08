@@ -34,6 +34,8 @@ public class Parser {
             return new DeleteCommand(command);
         } else if (command.length() >= 4 && command.substring(0, 4).equals("find")) {
             return new FindCommand(command);
+        } else if (command.length() >= 5 && command.substring(0, 5).equals("stats")) {
+                return new StatsCommand(command);
         } else {
             throw new InvalidCommandDukeException();
         }

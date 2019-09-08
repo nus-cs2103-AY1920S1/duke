@@ -27,9 +27,11 @@ class TaskList {
      */
     public String listTasks() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append(String.format("     %d. %s\n", i + 1, this.tasks.get(i).toString()));
-        }
+        int[] counter = new int[]{1};
+        tasks.forEach(task -> {
+            sb.append(String.format("     %d. %s\n", counter[0], task.toString()));
+            counter[0] += 1;
+        });
         return sb.toString();
     }
 

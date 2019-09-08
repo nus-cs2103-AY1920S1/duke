@@ -79,6 +79,6 @@ class Parser {
         if (indexStr.isEmpty()) {
             throw new DukeException("Please provide an index.");
         }
-        return Integer.parseInt(indexStr);
+        return Integer.parseInt(indexStr.split(" ")[1]);
     }
 }

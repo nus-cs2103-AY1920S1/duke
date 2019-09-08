@@ -47,6 +47,19 @@ public class Ui {
         System.out.println(logo + intro);
     }
 
+    public String getWelcome(){
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String intro = underscore
+                + "      Hello! I'm Duke " + "\n"
+                + "      What can I do for you?" + "\n"
+                + underscore;
+        return (logo + intro);
+    }
+
     /**
      * Prints the list of Task objects from the TaskList object.
      *
@@ -60,17 +73,32 @@ public class Ui {
         System.out.println(output);
     }
 
+    public String getPrintList(TaskList tasks){
+        String output = underscore + "     Here are the tasks in your list:\n";
+
+        output += getTasksInList(tasks);
+
+        return (output);
+    }
+
     /**
      * Prints the Done Sequence, when the user command "done" is entered.
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param taskNum Integer index of the task which has been selected as "done".
      */
-    public void printDoneSequence(TaskList tasks, int taskNum) {
+    public void printDoneSequence(TaskList tasks, int taskNum){
         String output = underscore + "     Nice! I've marked this task as done:\n"
                 + "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
                 + "\n" + underscore;
         System.out.println(output);
+    }
+
+    public String getDoneSequence(TaskList tasks, int taskNum){
+        String output = underscore + "     Nice! I've marked this task as done:\n"
+                + "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
+                + "\n" + underscore;
+        return (output);
     }
 
     /**
@@ -85,6 +113,12 @@ public class Ui {
         System.out.println(output);
     }
 
+    public String getTodoSequence(TaskList tasks, Todo newTodo){
+        String output = underscore + "     Got it. I've added this task:\n       "
+                + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
+        return (output);
+    }
+
     /**
      * Prints the Deadline sequence, when the user command "deadline" is entered.
      *
@@ -95,6 +129,12 @@ public class Ui {
         String output = underscore + "     Got it. I've added this task:\n       "
                 + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
         System.out.println(output);
+    }
+
+    public String getDeadlineSequence(TaskList tasks, Deadline newDeadline){
+        String output = underscore + "     Got it. I've added this task:\n       "
+                + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
+        return (output);
     }
 
     /**
@@ -109,6 +149,12 @@ public class Ui {
         System.out.println(output);
     }
 
+    public String getEventSequence(TaskList tasks, Event newEvent) {
+        String output = underscore + "     Got it. I've added this task:\n       "
+                + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
+        return (output);
+    }
+
     /**
      * Prints the Delete sequence, when the user command "delete" is entered.
      *
@@ -121,12 +167,23 @@ public class Ui {
         System.out.println(output);
     }
 
+    public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
+        String output = underscore + "     Noted. I've removed this task.\n       "
+                + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
+        return (output);
+    }
+
     /**
      * Prints the Bye sequence, when the user command "bye" is entered.
      */
     public void printByeSequence() {
         String output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
         System.out.print(output);
+    }
+
+    public String getByeSequence() {
+        String output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
+        return (output);
     }
 
     /**
@@ -140,6 +197,8 @@ public class Ui {
                 + numOfTaskRemaining + " tasks in the list.\n" + underscore;
         return output;
     }
+
+
 
     /**
      * Returns the string containing tasks in a pre-formatted form.
@@ -159,6 +218,8 @@ public class Ui {
         return (output);
     }
 
+
+
     /**
      * Prints the tasks which are similar for the "find" command.
      *
@@ -170,6 +231,14 @@ public class Ui {
         output += getTasksInList(tasks);
 
         System.out.println(output);
+    }
+
+    public String getFoundTasks(TaskList tasks) {
+        String output = underscore + "     Here are the matching tasks in your list:\n";
+
+        output += getTasksInList(tasks);
+
+        return (output);
     }
 
 

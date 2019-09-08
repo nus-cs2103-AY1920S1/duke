@@ -170,7 +170,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
 
         var db = new DialogBox(text, img);
-        
+
         // Adds background colour to DialogBox.
         String style_background = "-fx-background-color: #abffcd;"
                 + "-fx-padding: 15;"

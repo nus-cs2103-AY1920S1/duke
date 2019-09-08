@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Ui {
     public static final String PREFIX = "    ";
-    public static final String DIVIDER = "------------------------------------------------------";
+    public static final String DIVIDER = "******************************************";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
     private static final String ADD_MESSAGE = "Got it. I've added this task:";
     private static final String SEARCH_MESSAGE = "Here are the matching tasks in your list:";
@@ -25,8 +25,8 @@ public class Ui {
      * @param input the text to format.
      * @return the formatted text string.
      */
-    public static String addPrefixNewline(String input) {
-        return PREFIX + input + '\n';
+    static String addNewLine(String input) {
+        return input + '\n';
     }
 
     /**
@@ -36,13 +36,13 @@ public class Ui {
      * @return the formatted text string.
      */
     public static String addDividers(String input) {
-        return addPrefixNewline(DIVIDER) + input + addPrefixNewline(DIVIDER);
+        return addNewLine(DIVIDER) + input + addNewLine(DIVIDER);
     }
 
     /**
      * Prints out a welcome message.
      */
-    public String showWelcomeMessage() {
+    String showWelcomeMessage() {
         return showToUser(WELCOME_MESSAGE);
     }
 
@@ -133,7 +133,7 @@ public class Ui {
     private String showToUser(String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String line: messages) {
-            sb.append(PREFIX).append(line).append('\n');
+            sb.append(line).append('\n');
         }
         return sb.toString();
     }

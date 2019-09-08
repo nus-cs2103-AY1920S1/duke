@@ -41,6 +41,9 @@ public class DateTime {
                 .stream(dateTimeArgs[0].split("/"))
                 .mapToInt(Integer::parseInt)
                 .toArray();
+
+        assert dayMonthYear.length == 3: "Incorrect dayMonthYear array size, should be 3";
+
         int time = Integer.parseInt(dateTimeArgs[1]);
         return new DateTime(dayMonthYear[2], Month.of(dayMonthYear[1]), dayMonthYear[0], time / 100, time % 100, 0);
     }

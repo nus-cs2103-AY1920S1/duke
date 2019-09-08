@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         // Greet the user
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(Ui.addDividers(new Ui().showWelcomeMessage()), dukeImage)
+                DialogBox.getDukeDialog(new Ui().showWelcomeMessage(), dukeImage)
         );
     }
 
@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
         try {
             response = duke.getResponse(input);
         } catch (DukeException e) {
-            response = new CommandResponse(Ui.addPrefixNewline(e.getMessage()), false);
+            response = new CommandResponse(Ui.addNewLine(e.getMessage()), false);
         }
 
         // Exit application programmatically if necessary
@@ -75,10 +75,10 @@ public class MainWindow extends AnchorPane {
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(
-                            Ui.addDividers(Ui.addPrefixNewline(input)),
+                            Ui.addNewLine(input),
                             userImage),
                     DialogBox.getDukeDialog(
-                            Ui.addDividers(response.getResponse()),
+                            response.getResponse(),
                             dukeImage)
             );
             // We can do this since we (1) Defined userInput in MainWindow.fxml (2) gave userInput the @FXML tag

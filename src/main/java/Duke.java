@@ -59,7 +59,8 @@ public class Duke {
                 String command = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(command);
-                c.execute(taskList, ui, storage);
+                String response = c.execute(taskList, ui, storage);
+                System.out.println(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

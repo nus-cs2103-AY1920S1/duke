@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.TaskList;
-import seedu.duke.exceptions.DukeException;
 
 public class ListCommand extends Command {
     public ListCommand(TaskList taskList) {

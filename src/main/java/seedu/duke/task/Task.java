@@ -65,7 +65,7 @@ public abstract class Task {
      * Returns a date associated to the task.
      * @return The associated date if applicable, null otherwise.
      */
-    Date getDate() {
+    public Date getDate() {
         return null;
     }
 
@@ -75,6 +75,10 @@ public abstract class Task {
      */
     String getDatePrefix() {
         return null;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

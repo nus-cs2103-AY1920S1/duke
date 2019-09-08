@@ -35,7 +35,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    Date getDate() {
+    public Date getDate() {
         return by;
     }
 

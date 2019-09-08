@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Represents a list of tasks. Every time the data is changed, the new data will be saved.
@@ -40,6 +41,13 @@ public class TaskList extends ArrayList<Task> {
     @Override
     public Task get(int index) {
         return super.get(index - 1);
+    }
+
+
+    @Override
+    public void sort(Comparator<? super Task> c) {
+        super.sort(c);
+        storage.save(this);
     }
 
     /**

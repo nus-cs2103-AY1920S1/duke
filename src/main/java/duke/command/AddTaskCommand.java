@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.Task;
+
 public abstract class AddTaskCommand implements Command {
     String restOfCommand;
 

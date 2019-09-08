@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 //import com.google.gson.Gson;
@@ -28,9 +30,6 @@ public class TaskList {
     // temporary until I figure out how to abstract out task creation from adding to list
     public void addToList(TaskType taskType, String description, String deadline)
             throws IllegalArgumentException {
-        // debug
-        System.out.println("at addToList method");
-        
         Task newTask = null; // task to be added
 
         // based on task type, create corresponding subclass object

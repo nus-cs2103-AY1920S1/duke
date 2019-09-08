@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 import java.util.NoSuchElementException;
 
 public class AddTodoCommand extends AddTaskCommand {
@@ -24,8 +30,6 @@ public class AddTodoCommand extends AddTaskCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            // debug
-            System.out.println("at execute of add todo");
             tasks.addToList(TaskList.TaskType.TODO, getDescription(), getDeadline());
         } catch (NoSuchElementException e) {
             // user imput after task type is blank

@@ -1,12 +1,18 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class AddDeadlineCommand extends AddTaskCommand {
+public class AddEventCommand extends AddTaskCommand {
     Scanner s = new Scanner(restOfCommand);
 
-    public AddDeadlineCommand(String restOfCommand) {
+    public AddEventCommand(String restOfCommand) {
         super(restOfCommand);
-        s.useDelimiter("/by");
+        s.useDelimiter("/at");
     }
 
     @Override
@@ -27,9 +33,9 @@ public class AddDeadlineCommand extends AddTaskCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addToList(TaskList.TaskType.DEADLINE, getDescription(), getDeadline());
+            tasks.addToList(TaskList.TaskType.EVENT, getDescription(), getDeadline());
         } catch (NoSuchElementException e) {
-            // user input after task type is blank
+            // user imput after task type is blank
             System.out.println("Oops! You did not enter a description or deadline!");
         }
     }

@@ -84,10 +84,9 @@ public class TaskList {
      * Marks Task in TaskList (in given position) as done.
      * @param position Position of Task to mark as done.
      */
-    public void markAsDone(int position) {
+    public Task markAsDone(int position) {
         Task task = this.get(position);
         task.done();
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println(String.format("     %s", task));
+        return task;
     }
 }

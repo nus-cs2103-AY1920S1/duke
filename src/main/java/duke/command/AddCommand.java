@@ -31,11 +31,13 @@ public class AddCommand extends Command {
      * @param ui Performs actions on Ui if required.
      * @param storage Saves to Storage or loads from Storage if required.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + this.task);
-        System.out.println(String.format("     Now you have %d tasks in the list.", tasks.size()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n");
+        sb.append(String.format("  %s\n", this.task));
+        sb.append(String.format("Now you have %d tasks in the list.", tasks.size()));
+        return sb.toString();
     }
 
     /**

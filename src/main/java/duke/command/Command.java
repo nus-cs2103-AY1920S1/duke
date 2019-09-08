@@ -21,7 +21,7 @@ public abstract class Command {
      * @param ui Performs actions on Ui if required.
      * @param storage Saves to Storage or loads from Storage if required.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Checks if Duke should carry on running after command

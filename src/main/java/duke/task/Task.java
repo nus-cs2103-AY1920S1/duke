@@ -63,9 +63,9 @@ public abstract class Task {
     public String toString() {
         StringBuilder toPrint = new StringBuilder();
         if (isDone) {
-            toPrint.append("[✓] ");
+            toPrint.append("[+] ");
         } else {
-            toPrint.append("[✗] ");
+            toPrint.append("[ ] ");
         }
         toPrint.append(name);
         return toPrint.toString();

@@ -22,11 +22,13 @@ public class PrintListCommand extends Command {
      * @param storage Saves to Storage or loads from Storage if required.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("     Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 1; i < tasks.size() + 1; i++) {
-            System.out.println(String.format("     %d. %s", i, tasks.get(i)));
+            sb.append(String.format("  %d. %s\n", i, tasks.get(i)));
         }
+        return sb.toString();
     }
 
     /**

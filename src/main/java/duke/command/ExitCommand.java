@@ -20,9 +20,9 @@ public class ExitCommand extends Command {
      * @param ui Performs actions on Ui if required.
      * @param storage Saves Tasks from TaskList to Storage.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveList(tasks);
-        ui.sayGoodbye();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

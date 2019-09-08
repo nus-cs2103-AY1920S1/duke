@@ -30,11 +30,12 @@ public class DeleteCommand extends Command {
      * @param ui Performs actions on Ui if required.
      * @param storage Saves to Storage or loads from Storage if required.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task deleted = tasks.remove(position);
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("       " + deleted);
-        System.out.println(String.format("     Now you have %d tasks in the list.", tasks.size()));
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Noted. I've removed this task: %s\n", deleted));
+        sb.append(String.format("Now you have %d tasks in the list.", tasks.size()));
+        return sb.toString();
     }
 
     /**

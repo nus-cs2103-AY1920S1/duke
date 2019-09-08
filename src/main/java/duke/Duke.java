@@ -25,56 +25,14 @@ public class Duke{
 
     /**
      * Constructor of Duke. Sets up user interface, storage and task list.
-     * @param filePath String of filePath to create Storage.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.loadList());
-        } catch (LoadingErrorDukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
     public Duke() {
         ui = new Ui();
         storage = new Storage("src/data/list.txt");
         try {
             tasks = new TaskList(storage.loadList());
         } catch (LoadingErrorDukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    /**
-     * Initialises resources for Duke on startup and starts running Duke.
-     * @param args Sets up resourcs.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Starts Duke, prompting user for input.
-     */
-    public void run() {
-        boolean running = true;
-        ui.showWelcome();
-        while (running) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                running = command.isRunning();
-            } catch (Exception e) {
-                ui.showError(e);
-            } finally {
-                ui.showLine();
-            }
         }
     }
 
@@ -83,6 +41,11 @@ public class Duke{
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(tasks, ui, storage);
+        } catch (Exception e) {
+            return ui.showError(e);
+        }
     }
 }

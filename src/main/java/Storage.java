@@ -38,8 +38,15 @@ public class Storage {
         try (FileWriter fileWriter = new FileWriter(filePath, false)) {
             StringBuilder content = new StringBuilder();
             for (Task t : tasks) {
-                String type = t instanceof Deadline ? "D"
-                        : t instanceof Event ? "E" : "T";
+                String type;
+                if (t instanceof Deadline) {
+                    type = "D";
+                } else if (t instanceof Event) {
+                    type = "E";
+                } else {
+                    assert t instanceof Todo : "unknown type of task";
+                    type = "T";
+                }
                 String isDone = t.isDone ? "1" : "0";
                 String taskData = type + "@" + isDone + "@" + t.description;
                 content.append(taskData).append("\n");
@@ -75,6 +82,7 @@ public class Storage {
                     break;
                 default:
                     newTask = new Task("");
+                    assert false : "unknown type of tasks";
                 }
                 list.add(newTask);
             }

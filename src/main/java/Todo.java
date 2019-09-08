@@ -25,6 +25,7 @@ public class Todo extends Task {
      * @return string representation of a task
      */
     public String repr() {
+        assert getStatusIcon().equals("\u2713") || getStatusIcon().equals("\u2718");
         return "[T][" + super.getStatusIcon() + "] " + description;
     }
 

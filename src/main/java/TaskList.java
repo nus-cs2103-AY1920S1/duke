@@ -32,6 +32,7 @@ public class TaskList {
         if (num > tasks.size() || num < 1) {
             throw new DukeException("Task number out of range.");
         }
+        assert 0 < num && num <= tasks.size() : "invalid task number";
         tasks.get(num - 1).isDone = true;
     }
 
@@ -44,6 +45,7 @@ public class TaskList {
         if (num > tasks.size() || num < 1) {
             throw new DukeException("Task number out of range.");
         }
+        assert 0 < num && num <= tasks.size() : "invalid task number";
         tasks.remove(num - 1);
     }
 

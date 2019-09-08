@@ -2,6 +2,7 @@ package duke.app;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.history.History;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.Tasklist;
@@ -17,6 +18,7 @@ public class Duke {
     // Instance variables.
     private Ui ui;
     private Tasklist tasks;
+    private History history;
     private Storage storage;
 
     /**
@@ -27,6 +29,7 @@ public class Duke {
         // Hard coded filepath for now.
         String filePath = "./data/tasks.txt";
         ui = new Ui();
+        history =  new History();
         storage = new Storage(filePath);
 
         try {
@@ -45,7 +48,7 @@ public class Duke {
         try {
             String[] fullCommand = input.split(" ", 2); // Split into command & details
             Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage, history);
             return c.commandOutput(); // commandOutput is the text passed to UI.
 
         } catch (NoSuchElementException | DukeException e) {

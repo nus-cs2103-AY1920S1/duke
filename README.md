@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.com/andyylam/duke.svg?branch=master)](https://travis-ci.com/andyylam/duke)
-[![Coverage Status](https://coveralls.io/repos/github/andyylam/duke/badge.svg?branch=master)](https://coveralls.io/github/andyylam/duke?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bf0320fbc373431cb72e9381cc531e0d)](https://www.codacy.com/app/andyylam/duke?utm_source=github.com&utm_medium=referral&utm_content=andyylam/duke&utm_campaign=Badge_Grade)
 
 # Setting up

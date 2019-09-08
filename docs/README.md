@@ -1,20 +1,80 @@
 # User Guide
 
-## Features 
+Table of Contents
 
-### Feature 1 
-Description of feature.
+-   [1. Introduction](#1-introduction)
+-   [2. Quick Start](#2-quick-start)
+-   [3. Features](#3-features)
+    -   [3.1 Viewing help: `help`](#31-viewing-help)
+    -   [3.2 Adding a task: `add`](#32-adding-a-task)
+    -   [3.3 List all tasks: `list`](#33-list-all-tasks)
+    -   [3.4 Set a task as done: `done`](#34-set-as-done)
+    -   [3.5 Delete a task: `delete`](#35-delete-a-task)
+    -   [3.6 Find a task: `find`](#36-find-a-task)
+    -   [3.7 Undo previous command: `undo`](#37-undo-previous-command)
 
-## Usage
+## 1. Introduction
 
-### `Keyword` - Describe action
+Duke is a Personal Assistant Chatbot that helps a those who prefer to use a desktop app for managing tasks. More important, Duke is optimised for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Duke can get your task management done faster than traditional GUI apps.
 
-Describe action and its outcome.
+## 2. Quick Start
 
-Example of usage: 
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest Duke.jar here.
+3. Copy the file to the folder you want to use as the home folder for your Duke.
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-`keyword (optional arguments)`
+## 3. Features
 
-Expected outcome:
+### 3.1 Viewing help
 
-`outcome`
+Format: `help`
+
+### 3.2 Adding a task
+
+Adds a task to list of tasks in Duke
+
+There are 3 different types of tasks:
+
+1. ToDos: tasks without any date/time attached to it e.g., visit new theme park
+    - Format: `todo [NAME]`
+2. Deadlines: tasks that need to be done before a specific date/time e.g., submit report by 11/10/2019 5pm
+    - Format: `deadline [NAME] /by [DATE]`
+    - Date is formatted as such: DD/MM/YY HHMM
+3. Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
+    - Format: `event [NAME] /on [DATE]`
+    - Date is formatted as such: DD/MM/YY HHMM
+
+### 3.3 List all tasks
+
+Shows a list of all tasks in Duke.
+
+Format: `list`
+
+### 3.4 Set as done
+
+Sets a task as done.
+
+Format: `done [INDEX]`
+
+INDEX is the number of the task in the list of tasks when `list` is called.
+
+### 3.5 Delete a task
+
+Deletes a task.
+
+Format: `delete [INDEX]`
+
+INDEX is the number of the task in the list of tasks when `list` is called.
+
+### 3.6 Find a task
+
+Finds a task that corresponds to the given keyword, even if the keyword matches the item only partially.
+
+Format: `find [KEYWORD]`
+
+### 3.7 Undo previous command
+
+Undos the previous command.
+
+Format: `undo`

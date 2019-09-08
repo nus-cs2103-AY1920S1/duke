@@ -23,10 +23,10 @@ public class FxMain extends Application {
             stage.setScene(scene);
 
             Duke duke = new Duke();
-            duke.initialize();
+//            duke.initialize();
 
             DukeMainWindowController controller = fxmlLoader.getController();
-            controller.configureMainWindowController(duke.getTasksController());
+//            controller.configureMainWindowController(duke.getTasksController());
             DukeOutput.setUpDukeOutput(controller);
 
             stage.show();

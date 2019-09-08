@@ -34,7 +34,7 @@ public class Parser {
     }
 
     /**
-     * Parse the command given which will then be executed.
+     * Parses the command given which will then be executed.
      *
      * @param fullCommand the command input given by the user
      * @throws DukeException multiple cases of wrong input
@@ -42,99 +42,119 @@ public class Parser {
     public String parse(String fullCommand) throws DukeException {
         try {
             updateStorage();
-            assert !fullCommand.isEmpty(): "input cannot be empty";
-            String[] words = fullCommand.split(" ", 2);
+            assert !fullCommand.isEmpty() : "input cannot be empty";
+            String[] wordsInInput = fullCommand.split(" ", 2);
             String command;
             boolean moreThanOne;
 
             if (fullCommand.contains(" ")) {
-                command = words[0];
+                command = wordsInInput[0];
                 moreThanOne = true;
             } else {
                 command = fullCommand;
                 moreThanOne = false;
             }
 
-            Task temp;
-
-            switch (command) {
-            case "find":
-                if (!moreThanOne) {
-                    throw new DukeException("Sorry, you need to input something to find what you're looking for.");
-                }
-                return ui.format("Here are all the matching tasks with that name",
-                        true, (String[]) findAllTaskWithName(words[1]).toArray());
-            case "bye":
-                isExit = true;
-                return ui.format("Bye. Hope to see you again soon!", false);
-            case "list":
-                ArrayList<Task> list = taskList.getList();
-                if (list.isEmpty()) {
-                    throw new DukeException("Oh looks like there's nothing in your list so far.");
-                }
-                return ui.convertTaskListToString("Here are the tasks in your list:", list);
-            case "done":
-                if (moreThanOne) {
-                    String secondWord = words[1];
-                    int index = Integer.parseInt(secondWord);
-                    return ui.format("Nice! I've marked this task as done:",
-                            false, taskList.markAsDone(index).toString());
-                } else {
-                    throw new DukeException("I'm sorry, you didn't specify which index of the list you've done.");
-                }
-            case "delete":
-                if (!moreThanOne) {
-                    throw new DukeException("I'm sorry, "
-                            + "you didn't specify which index of the list you want to delete.");
-                }
-                String secondWord = words[1];
-                int index = Integer.parseInt(secondWord);
-                return ui.format("Noted. I've removed this task:", false,
-                        taskList.delete(index).toString(),
-                         "Now you have " + taskList.getSize() + " tasks in the list.");
-            case "todo":
-                if (!moreThanOne) {
-                    throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
-                }
-                temp = new ToDo(words[1]);
-                taskList.store(temp);
-                return ui.format("Got it. I've added this task:", false, temp.toString(),
-                        "Now you have " + taskList.getSize() + " tasks in the list.");
-            case "deadline":
-                if (moreThanOne) {
-                    String[] spl = words[1].split(" /by ", 2);
-                    if (spl.length <= 1) {
-                        throw new DukeException("I'm sorry, you forgot to put a time for your deadline.");
-                    }
-                    String time = spl[1];
-                    Time t = new Time(time);
-                    temp = new Deadline(spl[0], t);
-                    taskList.store(temp);
-                    return ui.format("Got it. I've added this task:", false, temp.toString(),
-                            "Now you have " + taskList.getSize() + " tasks in the list.");
-                } else {
-                    throw new DukeException("I'm sorry, the description of your DeadLine cannot be empty.");
-                }
-            case "event":
-                if (moreThanOne) {
-                    String[] split = words[1].split(" /at ", 2);
-                    if (split.length <= 1) {
-                        throw new DukeException("I'm sorry, you forgot to put a time for your event.");
-                    }
-                    String time = split[1];
-                    Time t = new Time(time);
-                    temp = new Event(split[0], t);
-                    taskList.store(temp);
-                    return ui.format("Got it. I've added this task:", false, temp.toString(),
-                            "Now you have " + taskList.getSize() + " tasks in the list.");
-                } else {
-                    throw new DukeException("I'm sorry, the description of your Event cannot be empty.");
-                }
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :(");
-            }
+            return execute(command, wordsInInput, moreThanOne);
         } catch (NumberFormatException e) {
             throw new DukeException("I'm sorry please give a number instead.");
+        }
+    }
+
+    private String execute(String command, String[] words, boolean moreThanOne) throws DukeException {
+        Task temp;
+
+        switch (command) {
+        case "find": {
+            if (!moreThanOne) {
+                throw new DukeException("Sorry, you need to input something to find what you're looking for.");
+            }
+
+            return ui.format("Here are all the matching tasks with that name",
+                    true, (String[]) findAllTaskWithName(words[1]).toArray());
+        }
+        case "bye": {
+            isExit = true;
+            return ui.format("Bye. Hope to see you again soon!", false);
+        }
+        case "list": {
+            ArrayList<Task> list = taskList.getList();
+            if (list.isEmpty()) {
+                throw new DukeException("Oh looks like there's nothing in your list so far.");
+            }
+
+            return ui.convertTaskListToString("Here are the tasks in your list:", list);
+        }
+        case "done": {
+            if (!moreThanOne) {
+                throw new DukeException("I'm sorry, you didn't specify which index of the list you've done.");
+            }
+
+            String secondWord = words[1];
+            int index = Integer.parseInt(secondWord);
+            return ui.format("Nice! I've marked this task as done:",
+                    false, taskList.markAsDone(index).toString());
+        }
+        case "delete": {
+            if (!moreThanOne) {
+                throw new DukeException("I'm sorry, "
+                        + "you didn't specify which index of the list you want to delete.");
+            }
+
+            String secondWord = words[1];
+            int index = Integer.parseInt(secondWord);
+            return ui.format("Noted. I've removed this task:", false,
+                    taskList.delete(index).toString(),
+                    "Now you have " + taskList.getSize() + " tasks in the list.");
+        }
+        case "todo": {
+            if (!moreThanOne) {
+                throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
+            }
+
+            temp = new ToDo(words[1]);
+            taskList.store(temp);
+            return ui.format("Got it. I've added this task:", false, temp.toString(),
+                    "Now you have " + taskList.getSize() + " tasks in the list.");
+        }
+        case "deadline": {
+            if (!moreThanOne) {
+                throw new DukeException("I'm sorry, the description of your DeadLine cannot be empty.");
+            }
+
+            String[] spl = words[1].split(" /by ", 2);
+
+            if (spl.length <= 1) {
+                throw new DukeException("I'm sorry, you forgot to put a time for your deadline.");
+            }
+
+            String time = spl[1];
+            Time t = new Time(time);
+            temp = new Deadline(spl[0], t);
+            taskList.store(temp);
+            return ui.format("Got it. I've added this task:", false, temp.toString(),
+                    "Now you have " + taskList.getSize() + " tasks in the list.");
+        }
+        case "event": {
+            if (!moreThanOne) {
+                throw new DukeException("I'm sorry, the description of your Event cannot be empty.");
+            }
+
+            String[] split = words[1].split(" /at ", 2);
+
+            if (split.length <= 1) {
+                throw new DukeException("I'm sorry, you forgot to put a time for your event.");
+            }
+
+            String time = split[1];
+            Time t = new Time(time);
+            temp = new Event(split[0], t);
+            taskList.store(temp);
+            return ui.format("Got it. I've added this task:", false, temp.toString(),
+                    "Now you have " + taskList.getSize() + " tasks in the list.");
+        }
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :(");
         }
     }
 

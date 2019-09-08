@@ -45,8 +45,7 @@ public class Time {
      * @return the proper string format of this time object.
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         assert !format.isEmpty();
         return format;
     }

@@ -12,8 +12,10 @@ public class Duke {
     private Parser parser;
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Handles the response from the input of the user.
+     *
+     * @param input the input of the user.
+     * @return the response.
      */
     public String getResponse(String input) {
         try {
@@ -41,6 +43,11 @@ public class Duke {
         parser = new Parser(tasks, storage);
     }
 
+    /**
+     * Checks if the application has been flagged to exit.
+     *
+     * @return the exit flag.
+     */
     public boolean isExit() {
         return parser.isExit();
     }

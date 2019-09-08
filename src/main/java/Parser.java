@@ -40,9 +40,7 @@ public class Parser {
                 return ui.list(tasks);
             } else if (command.length() > 5 && command.substring(0, 4).equals("done")) {
                 if (command.charAt(4) != ' ') {
-                    Task task = tasks.add(command);
-                    return ui.add(task, tasks);
-
+                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } else {
                     Task task = tasks.done(Integer.parseInt(command.substring(5)));
                     String response = ui.done(task);
@@ -51,8 +49,7 @@ public class Parser {
                 }
             } else if (command.length() > 7 && command.substring(0, 6).equals("delete")) {
                 if (command.charAt(6) != ' ') {
-                    Task task = tasks.add(command);
-                    return ui.add(task, tasks);
+                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } else {
                     Task task = tasks.delete(Integer.parseInt(command.substring(7)));
                     String response = ui.delete(task, tasks);
@@ -61,8 +58,7 @@ public class Parser {
                 }
             } else if (command.length() > 5 && command.substring(0, 4).equals("find")) {
                 if (command.charAt(4) != ' ') {
-                    Task task = tasks.add(command);
-                    return ui.add(task, tasks);
+                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } else {
                     String response = ui.find(tasks, command.substring(5));
                     storage.writeToFile(tasks.generateInfo());

@@ -13,6 +13,6 @@ jdk:
   - openjdk11
 
 
-script:
-  - ./gradlew check
-  - ./src/main/java/TestScript.sh # Custom integrated test
+#script:
+#  - ./gradlew check
+#  - ./src/main/java/TestScript.sh # Custom integrated test

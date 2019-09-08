@@ -1,10 +1,12 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents Tasks.
  * Tasks could be ToDos, Deadlines, Events.
  */
-public class Task {
+abstract public class Task {
     /** Total tasks created. */
     private static int totalTasks = 0;
     /** Whether task is done. */
@@ -20,6 +22,8 @@ public class Task {
     public Task(String description) {
         this.description = description;
     }
+
+    abstract LocalDateTime getDate();
 
     /**
      * Gets the description of the task.

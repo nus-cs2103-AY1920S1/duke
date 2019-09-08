@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a ToDo Task.
  */
@@ -11,6 +13,11 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+    }
+
+    @Override
+    public LocalDateTime getDate() {
+        return null;
     }
 
     /**

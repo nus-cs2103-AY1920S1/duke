@@ -1,7 +1,7 @@
 package util;
 
 import error.ConfigurationException;
-import task.tasks.Task;
+import duke.task.tasks.Task;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,7 +71,7 @@ public class DukeStorage {
             InputStream configFileInputStream;
 
             if (new File(configFilePath).exists()) {
-                DukeMessage configFileFoundMessage = new DukeMessage("Config file found...");
+                OutputBuilder configFileFoundMessage = new OutputBuilder("Config file found...");
                 DukeOutput.printMessage(configFileFoundMessage);
 
                 configFileInputStream = new FileInputStream(configFilePath);
@@ -79,7 +79,7 @@ public class DukeStorage {
                 configFileProperties.load(configFileInputStream);
                 storageFilePath = configFileProperties.getProperty("storage_path");
             } else {
-                DukeMessage configFileNotFoundMessage = new DukeMessage("Config file not found")
+                OutputBuilder configFileNotFoundMessage = new OutputBuilder("Config file not found")
                         .newLine()
                         .append("Using default storage path at ")
                         .append(getDefaultStoragePath());
@@ -99,7 +99,7 @@ public class DukeStorage {
     @SuppressWarnings("unchecked")
     private void loadTaskData() throws ConfigurationException {
         if (!new File(storageFilePath).exists()) {
-            DukeMessage storageFileNotFoundMessage = new DukeMessage("Storage file not found at ")
+            OutputBuilder storageFileNotFoundMessage = new OutputBuilder("Storage file not found at ")
                     .append(storageFilePath)
                     .newLine()
                     .append("Creating file...");
@@ -112,14 +112,14 @@ public class DukeStorage {
             FileInputStream taskDataInputStream = new FileInputStream(storageFilePath);
             ObjectInputStream taskListInputStream = new ObjectInputStream(taskDataInputStream);
 
-            DukeMessage readingTaskDataMessage = new DukeMessage("Storage file found")
+            OutputBuilder readingTaskDataMessage = new OutputBuilder("Storage file found")
                     .newLine()
-                    .append("Reading task data...");
+                    .append("Reading duke.task data...");
             DukeOutput.printMessage(readingTaskDataMessage);
 
             tasks = (List) taskListInputStream.readObject();
 
-            DukeMessage taskDataReadSuccessMessage = new DukeMessage("Successfully read task data");
+            OutputBuilder taskDataReadSuccessMessage = new OutputBuilder("Successfully read duke.task data");
             DukeOutput.printMessage(taskDataReadSuccessMessage);
 
             taskListInputStream.close();

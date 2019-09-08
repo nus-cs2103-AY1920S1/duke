@@ -25,15 +25,15 @@ public class DukeOutput {
      * </p>
      * @param message message to be printed.
      */
-    public static void printMessage(DukeMessage message) {
+    public static void printMessage(OutputBuilder message) {
         String output = HORIZONTAL_DIVIDER
-                + message.getMessage().replaceAll("(?m)^", "     ") + "\n"
+                + message.build().replaceAll("(?m)^", "     ") + "\n"
                 + HORIZONTAL_DIVIDER;
 
         if (implementation == null) {
             System.out.println(output);
         } else {
-            implementation.printDukeOutput(message.getMessage());
+            implementation.printDukeOutput(message.build());
         }
     }
 }

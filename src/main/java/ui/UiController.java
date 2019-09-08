@@ -1,5 +1,9 @@
 package ui;
 
+import ui.input.InputHandler;
+import ui.input.InputListener;
+import ui.output.OutputHandler;
+
 public class UiController implements InputListener {
     private InputHandler input;
     private OutputHandler output;

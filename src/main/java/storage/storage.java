@@ -1,6 +1,6 @@
 package storage;
 
-import task.tasks.Task;
+import duke.task.tasks.Task;
 
 import java.util.List;
 

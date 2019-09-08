@@ -1,16 +1,16 @@
 package duke;
 
-import command.ByeCommand;
-import command.Command;
-import command.CommandFactory;
-import command.GreetCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandFactory;
+import duke.command.GreetCommand;
 import error.ConfigurationException;
 import fx.FxMain;
 import javafx.application.Application;
-import task.tasks.Task;
-import task.TaskListController;
+import duke.task.tasks.Task;
+import duke.task.TasksController;
 import util.DukeInput;
-import util.DukeMessage;
+import util.OutputBuilder;
 import util.DukeOutput;
 import util.DukeStorage;
 
@@ -26,12 +26,12 @@ import java.util.Optional;
 public class Duke {
     private static final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
 
-    private TaskListController taskListController;
+    private TasksController tasksController;
     private CommandFactory commandFactory;
     private boolean isConsoleModeEnabled = false;
 
-    private static final DukeMessage GENERIC_ERROR_MESSAGE =
-            new DukeMessage("☹ OOPS!!! Something unexpected happened!!!");
+    private static final OutputBuilder GENERIC_ERROR_MESSAGE =
+            new OutputBuilder("☹ OOPS!!! Something unexpected happened!!!");
 
     public void run() {
         if (isConsoleModeEnabled) {
@@ -58,26 +58,26 @@ public class Duke {
     }
 
     public void initialize() {
-        DukeMessage initializeMessage = new DukeMessage("Initializing duke.Duke...");
+        OutputBuilder initializeMessage = new OutputBuilder("Initializing duke.Duke...");
         DukeOutput.printMessage(initializeMessage);
 
 
         try {
             DukeStorage.initializeDukeStorage(CUSTOM_CONFIG_FILE_PATH);
             List<Task> taskData = DukeStorage.getInstance().getTaskData();
-            taskListController = new TaskListController(taskData);
-            commandFactory = new CommandFactory(taskListController);
+            tasksController = new TasksController(taskData);
+            commandFactory = new CommandFactory(tasksController);
 
 
         } catch (ConfigurationException e) {
-            DukeMessage configErrorMessage = new DukeMessage(e.getMessage());
+            OutputBuilder configErrorMessage = new OutputBuilder(e.getMessage());
             DukeOutput.printMessage(configErrorMessage);
             return;
         }
     }
 
-    public TaskListController getTaskListController() {
-        return taskListController;
+    public TasksController getTasksController() {
+        return tasksController;
     }
 
     public static void main(String[] args) {

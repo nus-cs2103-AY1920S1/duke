@@ -1,6 +1,6 @@
 package fx;
 
-import command.GreetCommand;
+import duke.command.GreetCommand;
 import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +26,7 @@ public class FxMain extends Application {
             duke.initialize();
 
             DukeMainWindowController controller = fxmlLoader.getController();
-            controller.configureMainWindowController(duke.getTaskListController());
+            controller.configureMainWindowController(duke.getTasksController());
             DukeOutput.setUpDukeOutput(controller);
 
             stage.show();

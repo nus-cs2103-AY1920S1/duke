@@ -17,9 +17,9 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 * **Plugins** extend the functionality of Gradle. For example, the `java` plugin adds support for `Java` projects.
 
-* **Tasks** are reusable blocks of logic.  For example, the task `clean` simply deletes the project build directory. Tasks can be composed of other task.tasks or be dependent on another task. 
+* **Tasks** are reusable blocks of logic.  For example, the duke.task `clean` simply deletes the project build directory. Tasks can be composed of other duke.task.tasks or be dependent on another duke.task. 
 
-* **Properties** change the behavior of task.tasks. For instance, `mainClassName` of the `application` plugin is a compulsory property which tells Gradle which class is the entrypoint to your application.
+* **Properties** change the behavior of duke.task.tasks. For instance, `mainClassName` of the `application` plugin is a compulsory property which tells Gradle which class is the entrypoint to your application.
   As Gradle favors [_convention over configuration_](https://en.wikipedia.org/wiki/Convention_over_configuration), there is not much to you need to configure if you follow the recommended directory structure.
 
 ## Adding Gradle Support to Your Project 
@@ -36,13 +36,13 @@ As a developer, you write a _build file_ that describes the project. A build fil
        mainClassName = "seedu.duke.duke.Duke"
    }
    ```
-1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `gradlew run`. This should result in Gradle running the main method of your project.
+1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the duke.command `gradlew run`. This should result in Gradle running the main method of your project.
 
-:bulb: Simply run the command `gradlew {taskName}` in the terminal and Gradle will run the task! Here are some example commands:
-* `gradlew task.tasks` (or `gradlew task.tasks --all`): shows a list of task.tasks available
+:bulb: Simply run the duke.command `gradlew {taskName}` in the terminal and Gradle will run the duke.task! Here are some example commands:
+* `gradlew duke.task.tasks` (or `gradlew duke.task.tasks --all`): shows a list of duke.task.tasks available
 * `gradlew run`: runs the main class of your project
 
-:bulb: Some plugins may add more helpful task.tasks so be sure to check their documentation!
+:bulb: Some plugins may add more helpful duke.task.tasks so be sure to check their documentation!
 
 #### Using Gradle from within Intellij
 
@@ -53,15 +53,15 @@ As a developer, you write a _build file_ that describes the project. A build fil
 
 1. If the above didn't work either, close Intellij, delete the Intellij project files (i.e., `.idea` folder and `*.iml` files), and set up the project again, but instead of choosing `Create project from existing sources`, choose `Import project from external model` -> `Gradle`.
 
-After this, IntelliJ IDEA will identify your project as a Gradle project and you will gain access to the `Gradle Toolbar`. Through the toolbar, you run Gradle task.tasks and view your project's dependencies.
+After this, IntelliJ IDEA will identify your project as a Gradle project and you will gain access to the `Gradle Toolbar`. Through the toolbar, you run Gradle duke.task.tasks and view your project's dependencies.
 
-You can click on the Gradle icon in the Gradle toolbar and create a new run configuration for running Gradle task.tasks without needing to type a `gradlew` command.
+You can click on the Gradle icon in the Gradle toolbar and create a new run configuration for running Gradle duke.task.tasks without needing to type a `gradlew` duke.command.
 
 ![Gradle icon](assets/GradleIcon.png)
 
 ## Adding Plugins
 
-Gradle plugins are reusable units of build logic. Most common build task.tasks are provided as core plugins by Gradle. Given below are instructions on how to use some useful plugins:
+Gradle plugins are reusable units of build logic. Most common build duke.task.tasks are provided as core plugins by Gradle. Given below are instructions on how to use some useful plugins:
 
 ### CheckStyle
 
@@ -85,7 +85,7 @@ checkstyle {
 Checkstyle expects configuration files for checkstyle to be in `./config/checkstyle/` by convention.
 A sample checkstyle rule configuration is provided in the branch.
 
-The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
+The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the duke.command will check your main code and test code against the style rules).
 
 **Resources**:
 * [Gradle documentation for CheckStyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
@@ -113,7 +113,7 @@ shadowJar {
 }
 ```
 
-Now you can run the command `gradlew shadowJar`.It publishes an executable jar to `./build/libs/`. You should be able to able to execute the created jar file by double-clicking it or using the command `java -jar {jarName}`?
+Now you can run the duke.command `gradlew shadowJar`.It publishes an executable jar to `./build/libs/`. You should be able to able to execute the created jar file by double-clicking it or using the duke.command `java -jar {jarName}`?
 
 **Resources**:
 * [Gradle documentation for Shadow plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
@@ -161,7 +161,7 @@ You can now write a test (e.g., `test/java/seedu/duke/DukeTest.java`) and run it
 
 ## Further Reading
 
-Now that you have a general idea of how to accomplish basic task.tasks with Gradle, here's a list of material you can read to further your understanding.
+Now that you have a general idea of how to accomplish basic duke.task.tasks with Gradle, here's a list of material you can read to further your understanding.
  
 * [Official Gradle Documentation](https://docs.gradle.org/current/userguide/userguide.html)
 

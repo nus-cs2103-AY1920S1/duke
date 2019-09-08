@@ -1,8 +1,8 @@
 package fx;
 
-import command.ByeCommand;
-import command.Command;
-import command.CommandFactory;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandFactory;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.ScrollPane;
@@ -11,8 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyEvent;
-import task.TaskListController;
-import util.DukeMessage;
+import duke.task.TasksController;
+import util.OutputBuilder;
 import util.DukeOutput;
 import util.DukeOutputImplementation;
 
@@ -53,8 +53,8 @@ public class DukeMainWindowController implements DukeOutputImplementation {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void configureMainWindowController(TaskListController taskListController) {
-        commandFactory = new CommandFactory(taskListController);
+    public void configureMainWindowController(TasksController tasksController) {
+        commandFactory = new CommandFactory(tasksController);
     }
 
     /**
@@ -76,7 +76,7 @@ public class DukeMainWindowController implements DukeOutputImplementation {
 
             if (next.isPresent() && next.get() instanceof ByeCommand) {
                 isExited = true;
-                DukeOutput.printMessage(new DukeMessage("Input will be disabled!"));
+                DukeOutput.printMessage(new OutputBuilder("Input will be disabled!"));
             }
 
             userInput.clear();

@@ -92,6 +92,8 @@ public class QueryCommand extends Command {
     }
 
     private void appendListRepresentation(TaskList list, StringBuilder builder) {
+        assert list != null : "List given cannot be null!";
+
         ListIterator<Task> iterator = list.listIterator();
         int size = list.size();
 

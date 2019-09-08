@@ -39,6 +39,7 @@ public class DukeDatabase {
      */
     private DukeDatabase initialise() {
         // Generates the directory for the database
+        // add assert here?
         String projectRoot = new File(System.getProperty("user.dir"))
                 .getParentFile()
                 .getPath();
@@ -74,8 +75,8 @@ public class DukeDatabase {
                     // Create the corresponding task object from the data in the database
                     // and add into the taskList.
                     tasksList.addTask(createTask(sc.nextLine()));
-                } catch (DukeException | NullPointerException | NumberFormatException e) {
-                    System.out.println("Database has corrupted data!");
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
@@ -106,7 +107,7 @@ public class DukeDatabase {
         } else if ("E".equals(type)) {
             task = new Event(arr[2].trim(), arr[3].trim());
         } else {
-            throw new DukeException();
+            throw new DukeException("Database has corrupted data!");
         }
 
         // Check and update the status of the task accordingly.
@@ -114,7 +115,7 @@ public class DukeDatabase {
         if (status == 1) {
             task.markAsDone();
         } else if (status != 0) {
-            throw new DukeException();
+            throw new DukeException("Database has corrupted data!");
         }
 
         return task;
@@ -126,6 +127,8 @@ public class DukeDatabase {
      * @param tasks a list of tasks as updated at the point when the program ends.
      */
     public void update(TaskList tasks) {
+        assert tasks != null : "Tasks list given cannot be null!";
+
         // Extract all the data summaries of the tasks and append them into a single string.
         StringBuilder bldr = new StringBuilder(150);
         tasks.forEach(t -> {

@@ -18,8 +18,7 @@ public class Storage {
     private String filePath;
 
     public Storage(String filePath) {
-        String currentDirectory = System.getProperty("user.dir");
-        this.filePath = currentDirectory + filePath;
+        this.filePath = System.getProperty("user.dir") + filePath;
     }
 
     /**

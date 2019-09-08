@@ -28,11 +28,9 @@ public class FindCommand extends Command {
      * @return string to be displayed
      */
     @Override
-    String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
+    String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            /*Check if description is empty (does not check when user input
-              multiple spaces as the description.
-            */
+            //Check if description is empty
             if (!commandDesc.substring(5).equals((""))) {
                 String output = tasks.findTasks(commandDesc.substring(5));
                 return output;

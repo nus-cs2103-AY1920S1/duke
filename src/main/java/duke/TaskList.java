@@ -103,15 +103,15 @@ public class TaskList {
     public Task delete(int taskNo) {
         assert taskNo != 0 : "TaskNo cannot be empty";
         try {
-            if (tasks.size() > 0) {
-                Task task = tasks
-                    .remove(taskNo - 1);  //Minus 1 because the displayed list starts at 1
-                return task;
-            } else {
+            if (tasks.size() <= 0) {
                 throw new DukeException("There are no items in the list.");
             }
+
+            Task task = tasks
+                .remove(taskNo - 1);  //Minus 1 because the displayed list starts at 1
+            return task;
         } catch (DukeException de) {
-            ;
+            // Exception is thrown in the try block
         } catch (NumberFormatException nfe) {
             new DukeException("Only numbers are allowed.");
         } catch (IndexOutOfBoundsException ioobe) {
@@ -126,18 +126,18 @@ public class TaskList {
      * @param taskNo Task number as specified on the list.
      * @return Task that was marked completed.
      */
-    public Task done(int taskNo) {
+    public Task setDone(int taskNo) {
         assert taskNo != 0 : "TaskNo cannot be empty";
         try {
             Task task = tasks.get(taskNo - 1); //Minus 1 because the displayed list starts at 1
             if (task.getIsDone()) {
                 throw new DukeException("This item has already been checked.");
-            } else {
-                task.markAsDone();
-                return task;
             }
+
+            task.markAsDone();
+            return task;
         } catch (DukeException de) {
-            ;
+            // Exception is thrown in the try block
         } catch (NumberFormatException nfe) {
             new DukeException("Only numbers are allowed.");
         } catch (IndexOutOfBoundsException ioobe) {

@@ -51,7 +51,7 @@ public class DialogBox extends HBox {
      * Returns the dialog box after setting user text and image.
      *
      * @param text Text to be displayed.
-     * @param img Image to be shown.
+     * @param img  Image to be shown.
      * @return DialogBox object.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -62,7 +62,7 @@ public class DialogBox extends HBox {
      * Returns the dialog box after setting duke text and image.
      *
      * @param text Text to be displayed.
-     * @param img Image to be shown.
+     * @param img  Image to be shown.
      * @return DialogBox object.
      */
     public static DialogBox getDukeDialog(String text, Image img) {

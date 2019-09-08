@@ -66,14 +66,11 @@ public class TaskList extends ArrayList<Task> {
      * @param taskToInsert task to insert
      * @throws DukeException generic exception with error message
      */
-    public void insertNewTask(Ui ui, Task taskToInsert) throws DukeException {
-        if (taskToInsert != null) {
-            this.add(taskToInsert);
-            ui.println("Got it. I've added this task: ");
-            ui.println("  " + taskToInsert.toString());
-            ui.println("Now you have " + this.size() + " tasks in the list.");
-        } else {
-            throw new DukeException("Task to insert is undefined");
-        }
+    public void insertNewTask(Ui ui, Task taskToInsert) {
+        assert taskToInsert != null;
+        this.add(taskToInsert);
+        ui.println("Got it. I've added this task: ");
+        ui.println("  " + taskToInsert.toString());
+        ui.println("Now you have " + this.size() + " tasks in the list.");
     }
 }

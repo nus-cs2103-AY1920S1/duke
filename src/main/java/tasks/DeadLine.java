@@ -14,15 +14,6 @@ public class DeadLine extends Task {
         this.by = by;
     }
 
-    /**
-     * Returns the deadline in which the task is due by.
-     * 
-     * @return deadline
-     */
-    public String getDeadLine() {
-        return this.by;
-    }
-
     @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + by + ")";

@@ -33,14 +33,4 @@ public class Ui {
 
     return output;
   }
-
-  public String getLoadingError() {
-    String output = "";
-    output += getTopBorder();
-    output += "\n\tSorry! There was an error loading the files from the system.";
-    output += getBottomBorder();
-
-    return output;
-  }
-
 }

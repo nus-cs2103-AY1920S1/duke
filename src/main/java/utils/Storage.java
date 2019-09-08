@@ -35,6 +35,7 @@ public class Storage {
 
     public Storage(String filePath) {
         File file = new File(filePath);
+        assert(file.exists()) : "File doesn't exist.";
         this.file = file;
     }
 

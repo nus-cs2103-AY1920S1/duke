@@ -67,6 +67,7 @@ public class Parser {
      * @return Command
      */
     public static Command parse(String fullCommand) {
+        assert (false) :"Assert is working fine";
         String[] arr = fullCommand.split(" ", 2);
         String keyCommand = arr[0].trim();
 

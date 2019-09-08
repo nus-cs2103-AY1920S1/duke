@@ -155,20 +155,10 @@ public class TaskList {
      */
     public TaskList filterByString(String substring) {
         return filterByCondition(task -> task.getDescription().contains(substring));
-//        TaskList taskList = new TaskList();
-//        list.stream()
-//                .filter(task -> task.getDescription().contains(substring))
-//                .forEach(taskList::addTask);
-//        return taskList;
     }
 
     public TaskList filterByToDos() {
         return filterByCondition(task -> task instanceof ToDo);
-//        TaskList taskList = new TaskList();
-//        list.stream()
-//                .filter(task -> task instanceof Deadline)
-//                .forEach(taskList::addTask);
-//        return taskList;
     }
 
     public TaskList filterByDeadlines() {

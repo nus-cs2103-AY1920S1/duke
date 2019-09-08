@@ -26,10 +26,11 @@ public class TaskList {
 
     /**
      * Adds new task into the current task list.
-     * @param t t is the new task.
+     * @param newTask is the new task to be added.
      */
-    public void add(Task t) {
-        this.taskList.add(t);
+    public void add(Task newTask) {
+        assert newTask != null : "A new task to be added cannot be a null object";
+        this.taskList.add(newTask);
     }
 
     /**

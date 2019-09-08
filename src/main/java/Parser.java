@@ -1,37 +1,34 @@
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Parser {
 
     public static Command parse(String fullCommand) throws InputMismatchException {
-        // debug
-        System.out.println("at parse method");
         Scanner commandReader  = new Scanner(fullCommand);
         String command = commandReader.next();
 
-        // debug
-        System.out.println("command = " + command);
-
-        if (command == "bye") {
+        if (command.equals("bye")) {
             return new ExitCommand();
-        } else if (command == "list") {
+        } else if (command.equals("list")) {
             return new ListCommand();
-        } else if (command == "done") {
+        } else if (command.equals("done")) {
             int taskId = commandReader.nextInt(); // extract the task ID entered by user
             return new DoneCommand(taskId);
-        } else if (command == "delete") {
+        } else if (command.equals("delete")) {
             int taskId = commandReader.nextInt();
             return new DeleteCommand(taskId);
-        } else if (command == "todo") {
+        } else if (command.equals("todo")) {
             String restOfCommand = commandReader.nextLine();
             return new AddTodoCommand(restOfCommand);
-        } else if (command == "event") {
+        } else if (command.equals("event")) {
             String restOfCommand = commandReader.nextLine();
             return new AddEventCommand(restOfCommand);
-        } else if (command == "deadline") {
+        } else if (command.equals("deadline")) {
             String restofCommand = commandReader.nextLine();
             return new AddDeadlineCommand(restofCommand);
+        } else if (command.equals("find")) {
+            String keyword = commandReader.nextLine();
+            return new FindCommand(keyword);
         } else {
             throw new InputMismatchException();
         }

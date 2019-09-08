@@ -36,6 +36,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    // probably would want to abstract these messages out into Ui class
+//    public void showTasks() {
+//        System.out.println()
+//    }
+
     public void showGoodbye() {
         System.out.println(goodbyeMessage);
     }

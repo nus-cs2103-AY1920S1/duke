@@ -25,7 +25,8 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {
-                ui.showError("exception caught in run()");
+                // temporary haxx
+                System.out.println(e);
             } finally {
                 ui.showLine();
             }

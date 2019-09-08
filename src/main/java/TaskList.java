@@ -1,8 +1,5 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 //import com.google.gson.Gson;
 
 public class TaskList {
@@ -23,6 +20,12 @@ public class TaskList {
         TODO
     }
 
+    // ideal implementation of addToList
+    public void add(Task task) {
+        this.tasks.add(task);
+    }
+
+    // temporary until I figure out how to abstract out task creation from adding to list
     public void addToList(TaskType taskType, String description, String deadline)
             throws IllegalArgumentException {
         // debug
@@ -31,6 +34,8 @@ public class TaskList {
         Task newTask = null; // task to be added
 
         // based on task type, create corresponding subclass object
+        // todo: how to call subclass constructor from parent class?
+        // want to move this to the Task class
         switch (taskType) {
         case DEADLINE:
             newTask = new Deadline(description, deadline);
@@ -48,7 +53,7 @@ public class TaskList {
         }
 
         // add newTask to taskList
-        tasks.add(newTask);
+        this.tasks.add(newTask);
         System.out.println("Okay! I've added: " + description
                 + ". Use list to see all your tasks!");
     }
@@ -61,7 +66,7 @@ public class TaskList {
         }
     }
 
-//    public String printToFile() {
+//    public String writeToFile() {
 //        Task task;
 //        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); task = iterator.next()) {
 //            String s = iterator.next().printToFile();
@@ -77,9 +82,22 @@ public class TaskList {
         String taskDescription = taskToDelete.toString();
         tasks.remove(taskToDelete);
         System.out.println("Noted. I've removed this task: " + taskDescription);
-        System.out.println("Now you have " + tasks.size() + "items in this list.");
+        System.out.println("Now you have " + tasks.size() + " items in this list.");
     }
 
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
+
+    public TaskList findTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : this.tasks) {
+            if (task.toString().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 //    public void saveToDisk() {
 ////        // create gson to serialise taskList
 ////        Gson gson = new Gson();
@@ -97,87 +115,4 @@ public class TaskList {
 ////        Type taskListType = new TypeToken<ArrayList<Task>>(){}.getType();
 ////        this.tasks = Gson.fromJson(json, taskListType);
 ////    }
-
-    /**
-     * Processes the given input string.
-     *
-     * @param input input string given by user.
-     */
-    public void processInput(String input) throws InputMismatchException {
-        Scanner inputReader  = new Scanner(input);
-        String command = inputReader.next();
-        String description;
-        String deadline;
-
-        switch (command) {
-        case "list":
-            // if "list", print list
-            this.printList();
-            break;
-        case "done":
-            try {
-                int taskId = inputReader.nextInt(); // extract the task ID entered by user
-                this.getTask(taskId).markAsDone(); // mark task as done
-            } catch (InputMismatchException e) {
-                // user input after "done" is not an int
-                System.out.println("Oops! You entered an invalid task ID!");
-            } catch (NoSuchElementException e) {
-                // user input after "done" is blank
-                System.out.println("Oops! You did not enter a task ID!");
-            } catch (IndexOutOfBoundsException e) {
-                // user input after "done" is an invalid task ID
-                System.out.println("Oops! You entered an invalid task ID!");
-            }
-            break;
-        case "delete":
-            try {
-                int taskId = inputReader.nextInt(); // extract the task ID entered by user
-                this.deleteTask(getTask(taskId)); // mark task as done
-            } catch (InputMismatchException e) {
-                // user input after "done" is not an int
-                System.out.println("Oops! You entered an invalid task ID!");
-            } catch (NoSuchElementException e) {
-                // user input after "done" is blank
-                System.out.println("Oops! You did not enter a task ID!");
-            } catch (IndexOutOfBoundsException e) {
-                // user input after "done" is an invalid task ID
-                System.out.println("Oops! You entered an invalid task ID!");
-            }
-            break;
-        case "todo":
-            try {
-                description = inputReader.nextLine().strip();
-                deadline = "no deadline";
-                this.addToList(TaskList.TaskType.TODO, description, deadline);
-            } catch (NoSuchElementException e) {
-                // user imput after task type is blank
-                System.out.println("Oops! You did not enter a description!");
-            }
-            break;
-        case "event":
-            inputReader.useDelimiter("/at");
-            try {
-                description = inputReader.next().strip();
-                deadline = inputReader.next().strip();
-                this.addToList(TaskList.TaskType.EVENT, description, deadline);
-            } catch (NoSuchElementException e) {
-                // user imput after task type is blank
-                System.out.println("Oops! You did not enter a description or deadline!");
-            }
-            break;
-        case "deadline":
-            inputReader.useDelimiter("/by");
-            try {
-                description = inputReader.next().strip();
-                deadline = inputReader.next().strip();
-                this.addToList(TaskList.TaskType.DEADLINE, description, deadline);
-            } catch (NoSuchElementException e) {
-                // user imput after task type is blank
-                System.out.println("Oops! You did not enter a description or deadline!");
-            }
-            break;
-        default:
-            throw new InputMismatchException();
-        }
-    }
 }

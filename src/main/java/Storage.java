@@ -26,8 +26,10 @@ public class Storage {
                 tasks.add(loadTask(line));
             }
         } catch (FileNotFoundException e) {
+            // temporary haxx
             e.printStackTrace();
         } catch (IOException e) {
+            // temporary haxx
             e.printStackTrace();
         }
         return tasks;
@@ -51,6 +53,7 @@ public class Storage {
             // print done
             System.out.println(doneMessage + filePath);
         } catch (IOException e) {
+            // temporary haxx
             e.printStackTrace();
         }
     }

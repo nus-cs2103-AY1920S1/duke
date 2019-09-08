@@ -7,5 +7,7 @@ public abstract class AddTaskCommand implements Command {
 
     abstract String getDescription();
     abstract String getDeadline();
+
+    // to abstract out creating the task vs adding it to list
     abstract Task createTask();
 }

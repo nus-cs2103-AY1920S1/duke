@@ -29,7 +29,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
         try {
             tasks.addToList(TaskList.TaskType.DEADLINE, getDescription(), getDeadline());
         } catch (NoSuchElementException e) {
-            // user imput after task type is blank
+            // user input after task type is blank
             System.out.println("Oops! You did not enter a description or deadline!");
         }
     }

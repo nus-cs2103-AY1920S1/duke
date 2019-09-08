@@ -52,7 +52,7 @@ public class Duke {
     }
 
     /**
-     * Instantiates a Duke object.
+     * Instantiates a Duke object with filePath.
      *
      * @param filePath absolute filepath of the where the text file is stored.
      *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
@@ -121,8 +121,6 @@ public class Duke {
         } catch (IOException e){
             return e.getMessage();
         }
-
-
     }
 
     /**
@@ -160,6 +158,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the CLI for duke.
+     *
+     * @param fullCommand User input string.
+     * @return Boolean isBye.
+     * @throws DukeException To catch some invalid commands.
+     * @throws IOException To catch file error when interacting with Storage class.
+     */
     public Boolean executeTasksCLI(String fullCommand) throws DukeException, IOException{
         String taskType = Parser.parseCommand(fullCommand);
         if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
@@ -194,6 +200,14 @@ public class Duke {
         return false;
     }
 
+    /**
+     * Executes the Graphical User Interface logic for Duke
+     *
+     * @param fullCommand Input string obtained from GUI.
+     * @return Output string from Ui class.
+     * @throws DukeException 
+     * @throws IOException
+     */
     public String executeTasksGUI(String fullCommand) throws DukeException, IOException{
         String taskType = Parser.parseCommand(fullCommand);
         if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {

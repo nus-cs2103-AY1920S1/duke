@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Show the DialogBox containing Duke's greeting at the start of the application.
+     */
     public void showGreeting() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getUi().getGreetingMsg(), dukeImage)

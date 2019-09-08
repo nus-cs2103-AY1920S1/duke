@@ -12,14 +12,14 @@ import duke.util.Ui;
  */
 public abstract class Command {
     /** Inputted arguments behind the command keyword. */
-    protected String args;
+    String args;
     /** Task associated with the command's execution. */
     protected Task task;
 
     /**
      * Constructor for commands with no arguments in the input.
      */
-    public Command() {
+    Command() {
     }
 
     /**
@@ -27,7 +27,7 @@ public abstract class Command {
      *
      * @param args Inputted arguments behind the command keyword.
      */
-    public Command(String args) {
+    Command(String args) {
         this.args = args;
     }
 
@@ -36,7 +36,7 @@ public abstract class Command {
      *
      * @param task Task associated with the command's execution.
      */
-    public Command(Task task) {
+    Command(Task task) {
         this.task = task;
     }
 

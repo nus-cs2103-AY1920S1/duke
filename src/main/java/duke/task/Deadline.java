@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Deadline extends Task {
     /** Date whereby the task need to be done by. */
-    protected Date deadlineDate;
+    private Date deadlineDate;
 
     /**
      * Constructor for deadline task.

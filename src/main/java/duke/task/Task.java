@@ -5,9 +5,9 @@ package duke.task;
  */
 public abstract class Task {
     /** Description of task. */
-    protected String description;
+    String description;
     /** Whether the task is done or not. */
-    protected boolean isDone;
+    boolean isDone;
 
     /**
      * Constructor for task.
@@ -26,7 +26,7 @@ public abstract class Task {
      *
      * @return Tick symbol if task is done, otherwise return cross symbol.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return isDone ? "O" : "X";
     }
 

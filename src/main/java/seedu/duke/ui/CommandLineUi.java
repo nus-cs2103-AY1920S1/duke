@@ -6,14 +6,24 @@ import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.tasklist.TaskList;
 
+/**
+ * CommandLine Ui class, that handles returning formatted and parsed strings for DUKE CLI's implementation.
+ */
 public class CommandLineUi extends Ui {
     private static final String underscore = "    ____________________________________________________________" + "\n";
 
+    /**
+     * Default constructor.
+     */
     public CommandLineUi(){
     }
 
-
-    public static String getWelcomeString(){
+    /**
+     * Returns welcome string.
+     *
+     * @return String.
+     */
+    public static String getWelcomeString() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,13 +36,15 @@ public class CommandLineUi extends Ui {
         return (logo + intro);
     }
 
+
     /**
      * Prints the Done Sequence, when the user command "done" is entered.
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param taskNum Integer index of the task which has been selected as "done".
+     * @return
      */
-    public String getDoneSequence(TaskList tasks, int taskNum){
+    public String getDoneSequence(TaskList tasks, int taskNum) {
         String output = underscore + "     Nice! I've marked this task as done:\n"
                 + "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
                 + "\n" + underscore;
@@ -44,6 +56,7 @@ public class CommandLineUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newTodo Todo class, which has been newly created.
+     * @return
      */
     public String getTodoSequence(TaskList tasks, Todo newTodo) {
         String output = underscore + "     Got it. I've added this task:\n       "
@@ -51,11 +64,13 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+
     /**
      * Returns the Deadline sequence, when the user command "deadline" is entered.
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newDeadline Deadline class, which has been newly created.
+     * @return String
      */
     public String getDeadlineSequence(TaskList tasks, Deadline newDeadline) {
         String output = underscore + "     Got it. I've added this task:\n       "
@@ -68,6 +83,7 @@ public class CommandLineUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newEvent Event class, which has been newly created.
+     * @return String.
      */
     public String getEventSequence(TaskList tasks, Event newEvent) {
         String output = underscore + "     Got it. I've added this task:\n       "
@@ -76,19 +92,23 @@ public class CommandLineUi extends Ui {
     }
 
     /**
-     * Returns the Delete sequence, when the user command "delete" is entered.
+     * Returns the Delete sequence, when "delete" command is entered.
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param taskToDelete Task class, which will be deleted from the list.
+     * @return String
      */
     public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
         String output = underscore + "     Noted. I've removed this task.\n       "
-                + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
+                        + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
        return output;
     }
 
+
     /**
      * Returns the Bye sequence, when the user command "bye" is entered.
+     *
+     * @return String.
      */
     public String getByeSequence() {
         String output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
@@ -116,7 +136,8 @@ public class CommandLineUi extends Ui {
     /**
      * Returns the tasks which are similar for the "find" command.
      *
-     * @param tasks TaskList object
+     * @param tasks TaskList object.
+     * @return String.
      */
     public String getFoundTasks(TaskList tasks) {
         String output = underscore + "     Here are the matching tasks in your list:\n";
@@ -124,6 +145,12 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns the tasks remaining in the list.
+     *
+     * @param numOfTaskRemaining TaskList object.
+     * @return String
+     */
     public String getTasksRemainingSequence(int numOfTaskRemaining) {
         String output = "\n     Now you have "
                 + numOfTaskRemaining + " tasks in the list.\n" + underscore;

@@ -8,6 +8,7 @@ import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.CommandLineUi;
+import seedu.duke.ui.DialogBox;
 import seedu.duke.ui.GraphicalUi;
 import seedu.duke.ui.Ui;
 
@@ -48,7 +49,7 @@ public class Duke {
     /**
      * Default constructor to support seedu.duke.Launcher of javaFX.
      */
-    public Duke(){
+    public Duke() {
         String filePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
         gui = new GraphicalUi();
         cli = new CommandLineUi();
@@ -98,11 +99,13 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response for the user input.
+     * Represents the GUI of Duke.
+     *
+     * @param input Command input string.
+     * @return Duke's response.
      */
     public String getResponse(String input) {
-        // return "Duke heard: " + input;
         String command = Parser.parseCommand(input);
 
         try {
@@ -114,15 +117,15 @@ public class Duke {
 
         String output = "";
         try {
-            output = executeTasksGUI(input);
+            output = executeTasksGui(input);
             this.storage.clearFileBeforeSaving();
             for (int i = 0; i < this.tasks.getSize(); i++) {
                 this.storage.writeToFile(this.tasks.getTask(i).toSaveString());
             }
             return output;
-        } catch (DukeException e){
+        } catch (DukeException e) {
             return e.getMessage();
-        } catch (IOException e){
+        } catch (IOException e) {
             return e.getMessage();
         }
     }
@@ -145,7 +148,7 @@ public class Duke {
 
         while (isBye == false) {
             try {
-                isBye = executeTasksCLI(fullCommand);
+                isBye = executeTasksCli(fullCommand);
             } catch (DukeException e) {
                 System.out.println(cli.getLoadingError(e));
             } catch (StringIndexOutOfBoundsException e) {
@@ -155,7 +158,7 @@ public class Duke {
             } catch (IOException e) {
                 System.out.println(e.getCause());
             }
-            if (isBye){
+            if (isBye) {
                 break;
             }
             fullCommand = in.nextLine().trim();
@@ -163,14 +166,14 @@ public class Duke {
     }
 
     /**
-     * Executes the CLI for duke.
+     * Executes the Command Line Interface for duke.
      *
      * @param fullCommand User input string.
-     * @return Boolean isBye.
+     * @return Boolean isBye. If command is "bye", will return true and exit the while loop.
      * @throws DukeException To catch some invalid commands.
      * @throws IOException To catch file error when interacting with Storage class.
      */
-    public Boolean executeTasksCLI(String fullCommand) throws DukeException, IOException{
+    public Boolean executeTasksCli(String fullCommand) throws DukeException, IOException {
         String taskType = Parser.parseCommand(fullCommand);
         if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
             // LIST command.
@@ -195,7 +198,7 @@ public class Duke {
             System.out.println(findRoutine(cli, tasks, fullCommand));
         } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
             // BYE command
-            System.out.println(byeRoutineCLI(cli, tasks, storage));
+            System.out.println(byeRoutineCli(cli, tasks, storage));
             return true;
         } else {
             // An unrecognizable command is detected.
@@ -205,14 +208,14 @@ public class Duke {
     }
 
     /**
-     * Executes the Graphical User Interface logic for Duke
+     * Executes the Graphical User Interface logic for Duke.
      *
      * @param fullCommand Input string obtained from GUI.
      * @return Output string from Ui class.
-     * @throws DukeException
-     * @throws IOException
+     * @throws DukeException Handles case when command is recognized eg"list" but following description is unrecognized.
+     * @throws IOException Storage class txt file handling.
      */
-    public String executeTasksGUI(String fullCommand) throws DukeException, IOException{
+    public String executeTasksGui(String fullCommand) throws DukeException, IOException {
         String taskType = Parser.parseCommand(fullCommand);
         if (taskType.equals(PossibleTasks.LIST.toString().toLowerCase())) {
             // LIST command.
@@ -237,7 +240,7 @@ public class Duke {
             return findRoutine(gui, tasks, fullCommand);
         } else if (taskType.equals(PossibleTasks.BYE.toString().toLowerCase())) {
             // BYE command
-            return byeRoutineGUI(gui, tasks, storage);
+            return byeRoutineGui(gui, tasks);
             // Exits while loop once "bye" is entered.
         } else {
             // An unrecognizable command is detected.
@@ -247,15 +250,38 @@ public class Duke {
 
     }
 
-    public void unknownCommandRoutine() throws DukeException{
+    /**
+     * Handles the case when the user command is unrecognized.
+     *
+     * @throws DukeException Error class.
+     */
+    public void unknownCommandRoutine() throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public String listRoutine(Ui ui, TaskList tasks){
+    /**
+     * Executes and returns the String for the LIST command.
+     *
+     * @param ui Ui object.
+     * @param tasks Tasklist object.
+     * @return String that needs to be printed to the user after LIST command.
+     */
+    public String listRoutine(Ui ui, TaskList tasks) {
+
         return ui.getListSequence(tasks);
     }
 
-    public String byeRoutineCLI(Ui ui, TaskList tasks, Storage storage) throws IOException{
+    /**
+     * Executes and returns the String for BYE command for CLI.
+     * For CLI, txt file is saved during BYE command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param storage Storage object of the txt file.
+     * @return Bye string sequence.
+     * @throws IOException Exception threw when reading the file.
+     */
+    public String byeRoutineCli(Ui ui, TaskList tasks, Storage storage) throws IOException {
         storage.clearFileBeforeSaving();
         // Clear the txt file and adds headers.
 
@@ -266,19 +292,44 @@ public class Duke {
         return ui.getByeSequence();
     }
 
-    public String byeRoutineGUI(Ui ui, TaskList tasks, Storage storage) throws IOException{
+    /**
+     * Executes and returns the String for BYE command for GUI.
+     * For GUI, txt file is saved after every command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @return Bye string sequence
+     */
+    public String byeRoutineGui(Ui ui, TaskList tasks) {
         // For GUI, txt file is always saved after each change
         return (ui.getByeSequence());
     }
 
-    public String findRoutine(Ui ui, TaskList tasks, String fullCommand){
+    /**
+     * Executes and returns the String for FIND command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param fullCommand User command String.
+     * @return Find string sequence.
+     */
+    public String findRoutine(Ui ui, TaskList tasks, String fullCommand) {
         // Parser will parse the command and obtain the searchString.
         // findSimilarTasks will return a TaskList containing only matching tasks.
         TaskList similarTasks = tasks.findSimilarTasks(Parser.getFindTask(fullCommand));
         return ui.getFoundTasks(similarTasks);
     }
 
-    public String deleteRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    /**
+     * Executes and returns the String for DELETE command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param fullCommand User command String.
+     * @return Delete string sequence.
+     * @throws DukeException Duke exception to handle invalid task index.
+     */
+    public String deleteRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
         int taskNum = Parser.getDeletedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1.
@@ -294,7 +345,16 @@ public class Duke {
         return ui.getDeleteSequence(tasks, taskToDelete);
     }
 
-    public String eventRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    /**
+     * Executes and returns the String EVENT command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param fullCommand User command string.
+     * @return Event String sequence.
+     * @throws DukeException Handles the error case when there is no description or location.
+     */
+    public String eventRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
         if ((fullCommand.length() < 6)) {
             // Input is only "event".
 
@@ -304,7 +364,7 @@ public class Duke {
         } else if ((fullCommand.lastIndexOf('/') < 1)
                 || (4 + fullCommand.lastIndexOf('/') > fullCommand.length()))  {
             // fullCommand does not contain '/' char or there are no chars after "/at".
-            throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The location of an event cannot be empty.");
         }
         String description = Parser.getEventDescription(fullCommand);
         String extraDescription = Parser.getEventLocation(fullCommand);
@@ -316,7 +376,16 @@ public class Duke {
         return ui.getEventSequence(tasks, newEvent);
     }
 
-    public String deadlineRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    /**
+     * Executes and returns the String DEADLINE command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param fullCommand User command string.
+     * @return Deadline string sequence
+     * @throws DukeException To handle the case when description or time period is empty.
+     */
+    public String deadlineRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
         if ((fullCommand.length() < 9)) {
 
             // fullCommand contains only the string "deadline".
@@ -340,7 +409,16 @@ public class Duke {
         return ui.getDeadlineSequence(tasks, newDeadline);
     }
 
-    public String todoRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException{
+    /**
+     * Executes and returns the String TODO command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param fullCommand User command string.
+     * @return Todo string sequence.
+     * @throws DukeException Handles the case when description is empty.
+     */
+    public String todoRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
         if (fullCommand.length() < 5) {
             // fullCommand contains only the string "todo".
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -355,7 +433,15 @@ public class Duke {
         return ui.getTodoSequence(tasks, newTodo);
     }
 
-    public String doneRoutine(Ui ui, TaskList tasks, String fullCommand){
+    /**
+     * Executes and returns the String for DONE command.
+     *
+     * @param ui Ui object.
+     * @param tasks TaskList object.
+     * @param fullCommand User command string.
+     * @return Done string sequence.
+     */
+    public String doneRoutine(Ui ui, TaskList tasks, String fullCommand) {
         int taskNum = Parser.getFinishedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1,
@@ -371,7 +457,7 @@ public class Duke {
      *
      * @param args Main entry point.
      */
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
     }
 

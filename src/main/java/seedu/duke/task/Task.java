@@ -142,7 +142,8 @@ public class Task {
      *
      * @return isDone attribute.
      */
-    public Boolean isDone(){
+    public Boolean isDone() {
+
         return this.isDone;
     }
 }

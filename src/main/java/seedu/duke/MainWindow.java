@@ -1,17 +1,14 @@
 package seedu.duke;
 
-import com.sun.javafx.scene.ImageViewHelper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import seedu.duke.DialogBox;
-import seedu.duke.Duke;
+import seedu.duke.ui.DialogBox;
 
 /**
  * Controller for seedu.duke.MainWindow. Provides the layout for the other controls.
@@ -31,11 +28,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/117.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initialize duke.
+     *
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

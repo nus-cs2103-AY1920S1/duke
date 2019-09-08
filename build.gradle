@@ -38,6 +38,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     useJUnitPlatform()
 

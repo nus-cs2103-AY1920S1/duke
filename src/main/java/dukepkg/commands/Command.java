@@ -6,6 +6,7 @@ import dukepkg.exceptions.FormatException;
  * The range of commands to interact with the bot.
  */
 public abstract class Command {
+    protected boolean isExit = false;
 
     /**
      * Parses the input line as a command to modify existing tasks.
@@ -63,7 +64,7 @@ public abstract class Command {
      * @param ui       the Ui object for raising prompts after executing tasks.
      * @throws FormatException when the user input is incompatible with existing command formats.
      */
-    public abstract void execute(TaskList tasklist, Ui ui) throws FormatException;
+    public abstract String execute(TaskList tasklist, Ui ui) throws FormatException;
 
     /**
      * Flag of whether the program should terminate.
@@ -71,6 +72,6 @@ public abstract class Command {
      * @return the boolean.
      */
     public boolean isExit() {
-        return false;
+        return isExit;
     }
 }

@@ -9,7 +9,7 @@ import dukepkg.Ui;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList tasklist, Ui ui) {
-        ui.showTaskList(TaskList.tasks);
+    public String execute(TaskList tasklist, Ui ui) {
+        return ui.showTaskList(TaskList.tasks);
     }
 }

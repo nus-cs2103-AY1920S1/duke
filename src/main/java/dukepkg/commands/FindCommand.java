@@ -24,7 +24,7 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
     @Override
-    public void execute(TaskList tasklist, Ui ui) {
+    public String execute(TaskList tasklist, Ui ui) {
         ArrayList<Task> copy = TaskList.tasks;
         ArrayList<Task> selected = new ArrayList<>();
         for(String s : keywords) {
@@ -37,6 +37,10 @@ public class FindCommand extends Command {
                 copy.remove(t);
             }
         }
-        ui.showMatchingTask(selected);
+        if(selected.size() == 0) {
+            return ui.showNoMatchingTask();
+        } else {
+            return ui.showMatchingTask(selected);
+        }
     }
 }

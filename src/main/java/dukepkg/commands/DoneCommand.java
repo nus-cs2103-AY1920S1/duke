@@ -21,14 +21,16 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui) throws FormatException {
+    public String execute(TaskList tasklist, Ui ui) throws FormatException {
         Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
         TaskList.tasks.get(index).markDone();
-        ui.showTaskDonePrompt(TaskList.tasks.get(index));
+
+        String str = ui.showTaskDonePrompt(TaskList.tasks.get(index));
         try {
             Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
-            ui.showSavingError(e);
+            str += ui.showSavingError(e);
         }
+        return str;
     }
 }

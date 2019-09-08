@@ -21,15 +21,16 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui) throws FormatException {
+    public String execute(TaskList tasklist, Ui ui) throws FormatException {
         Parser.checkDuplicate(TaskList.tasks, t);
         tasklist.addTask(t);
 
-        ui.showAddedTaskPrompt(TaskList.tasks, t);
+        String str = ui.showAddedTaskPrompt(TaskList.tasks, t);
         try {
             Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
-            ui.showSavingError(e);
+            str += ui.showSavingError(e);
         }
+        return str;
     }
 }

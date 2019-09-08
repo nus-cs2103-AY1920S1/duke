@@ -3,15 +3,20 @@ package dukepkg;
 import dukepkg.commands.Command;
 import dukepkg.exceptions.DukeException;
 
+
+import java.lang.*;
+
 /**
  * Duke, the task bot class.
  */
 public class Duke {
+
     private static Ui ui;
     private static TaskList tasklist;
     private static Parser parser;
+    private boolean isExit;
 
-    private Duke() {
+    public Duke() {
         Storage storage = new Storage("data/tasks.txt");
         ui = new Ui();
         tasklist = new TaskList(storage, ui);
@@ -42,4 +47,20 @@ public class Duke {
     public static void main(String[] args) {
         new Duke().run();
     }
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.constructCommand(input);
+            isExit = c.isExit();
+            return c.execute(tasklist, ui);
+
+        } catch (DukeException e) {
+            return ui.showDukeError(e);
+        }
+    }
+
+    public boolean isExit() {
+      return this.isExit;
+    }
+
 }

@@ -9,13 +9,9 @@ import dukepkg.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasklist, Ui ui) {
-        ui.showExitMsg();
-        System.exit(0);
+    public String execute(TaskList tasklist, Ui ui) {
+        isExit = true;
+        return ui.showExitMsg();
     }
 
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

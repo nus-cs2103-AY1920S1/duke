@@ -21,15 +21,17 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui) throws FormatException {
+    public String execute(TaskList tasklist, Ui ui) throws FormatException {
         Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
         tasklist.deleteTask(index);
         Task t = TaskList.tasks.get(index);
-        ui.showTaskDeletedPrompt(t, TaskList.tasks.size());
+
+        String str = ui.showTaskDeletedPrompt(t, TaskList.tasks.size());
         try {
             Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
-            ui.showSavingError(e);
+            str += ui.showSavingError(e);
         }
+        return str;
     }
 }

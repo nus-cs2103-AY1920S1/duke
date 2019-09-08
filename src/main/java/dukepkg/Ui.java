@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner input;
 
+
     /**
      * Instantiates a new Ui.
      */
@@ -25,8 +26,8 @@ public class Ui {
      *
      * @param e the error message.
      */
-    public static void showLoadingError(FileNotFoundException e) {
-        System.out.println("Did you created the file for task storage? " + e.getMessage());
+    public static String showLoadingError(FileNotFoundException e) {
+        return "Did you created the file for task storage? " + e.getMessage() + "\n";
     }
 
     /**
@@ -34,20 +35,21 @@ public class Ui {
      *
      * @param tasks the tasks to be displayed.
      */
-    public void showTaskList(ArrayList<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
+    public String showTaskList(ArrayList<Task> tasks) {
+        String str = "Here are the tasks in your list:\n";
         int counter = 0;
         for (Task t : tasks) {
             counter++;
-            System.out.println(counter + ". " + t.toString());
+            str += counter + ". " + t.toString() + "\n";
         }
+        return str;
     }
 
     /**
      * Shows exit msg.
      */
-    public void showExitMsg() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showExitMsg() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -55,10 +57,10 @@ public class Ui {
      *
      * @param t the task that has been marked as finished.
      */
-    public void showTaskDonePrompt(Task t) {
+    public String showTaskDonePrompt(Task t) {
         String prompt = "Nice! I've marked this task as done:\n" +
-                "    " + t.toString();
-        System.out.println(prompt);
+                "    " + t.toString() + "\n";
+        return prompt;
     }
 
     /**
@@ -67,11 +69,11 @@ public class Ui {
      * @param t    the task that has been deleted.
      * @param size the number of the remaining tasks in the list
      */
-    public void showTaskDeletedPrompt(Task t, int size) {
+    public String showTaskDeletedPrompt(Task t, int size) {
         String prompt = "Noted. I've removed this task:\n" +
                 "    " + t.toString() + "\n" +
-                "Now you have " + size + (size == 1 ? " task" : " tasks") + " in the list.";
-        System.out.println(prompt);
+                "Now you have " + size + (size == 1 ? " task" : " tasks") + " in the list.\n";
+        return prompt;
     }
 
     /**
@@ -80,11 +82,11 @@ public class Ui {
      * @param tasks the tasks list
      * @param t     the task to be added
      */
-    public void showAddedTaskPrompt(ArrayList<Task> tasks, Task t) {
+    public String showAddedTaskPrompt(ArrayList<Task> tasks, Task t) {
         String output = "Got it. I've added this task:\n" +
                 "    " + t.toString() + "\n" +
-                "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.";
-        System.out.println(output);
+                "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list. \n";
+        return output;
     }
 
     /**
@@ -92,17 +94,17 @@ public class Ui {
      *
      * @param e the error message.
      */
-    public void showSavingError(IOException e) {
-        System.out.println("Task not saved: " + e.getMessage());
+    public String showSavingError(IOException e) {
+        return ("Task not saved: " + e.getMessage() + "\n");
     }
 
     /**
      * Shows greeting to user.
      */
-    public void showGreeting() {
+    public String showGreeting() {
         String greeting = "Hello! I'm Duke\n" +
-                "What can I do for you?";
-        System.out.println(greeting);
+                "What can I do for you?\n";
+        return greeting;
     }
 
     /**
@@ -110,8 +112,8 @@ public class Ui {
      *
      * @param e the error message.
      */
-    public void showDukeError(DukeException e) {
-        System.out.println(e.getMessage());
+    public String showDukeError(DukeException e) {
+        return e.getMessage() + "\n";
     }
 
     /**
@@ -125,8 +127,6 @@ public class Ui {
             return input.nextLine();
         } else {
             throw new UnrecognizedException("☹ OOPS!!! no input.");
-            //System.exit(0);
-            //return "";
         }
     }
 
@@ -135,12 +135,17 @@ public class Ui {
      *
      * @param selected the selected tasks
      */
-    public void showMatchingTask(ArrayList<Task> selected) {
-        System.out.println("Here are the matching tasks in your list: ");
+    public String showMatchingTask(ArrayList<Task> selected) {
+        String str = "Here are the matching tasks in your list: \n";
         int counter = 0;
         for(Task s : selected) {
             counter ++;
-            System.out.println(counter + "." + s.toString());
+            str += counter + "." + s.toString() + "\n";
         }
+        return str;
+    }
+
+    public String showNoMatchingTask() {
+        return "Oops, no matching task.";
     }
 }

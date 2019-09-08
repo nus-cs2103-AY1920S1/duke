@@ -82,6 +82,13 @@ public class Ui {
     }
 
     /**
+     * Returns the done message in the form of a string.
+     */
+    public static String printDoneMsg() {
+        return ("Nice! I've marked this task as done:\n");
+    }
+
+    /**
      * Returns the latest task in the list.
      *
      * @param list the list of tasks

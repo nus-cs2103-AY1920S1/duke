@@ -41,11 +41,9 @@ public class Task {
      * Sets the isDone variable to true and the doneIcon to 1.
      * Prints the done message.
      */
-    public String markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
         this.doneIcon = 1;
-        return ("Nice! I've marked this task as done:\n"
-                + this) + "\n";
     }
 
     /**

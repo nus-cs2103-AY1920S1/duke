@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents a Delete Command.
@@ -9,15 +10,15 @@ import java.io.IOException;
  */
 public class DeleteCommand extends Command {
 
-    private int index;
+    private ArrayList<Object> indexList;
 
     /**
      * Constructor of the DeleteCommand class.
      *
-     * @param index the index of the task to be deleted
+     * @param indexList the list of index of the tasks to be deleted
      */
-    DeleteCommand(int index) {
-        this.index = index;
+    DeleteCommand(ArrayList<Object> indexList) {
+        this.indexList = indexList;
     }
 
     /**
@@ -32,12 +33,22 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
-    assert list != null : "Cannot delete from an empty list";
-    assert list.getSize() >= index : "Index is invalid";
-        String output = Ui.printRemoveMsg() + list.getTask(index) + "\n";
-        list.deleteTask(index);
-        storage.writeToFile(list);
+        assert list != null : "Cannot delete from an empty list";
+        String output = Ui.printRemoveMsg();
+        for (Task t : convertToTask(list)) {   // list here is the original list to delete from
+            output += t + "\n";
+            list.deleteTask(t);
+            storage.writeToFile(list);
+        }
         output += Ui.printNumTask(list);
         return output;
+    }
+
+    private ArrayList<Task> convertToTask(TaskList list) {
+        ArrayList<Task> tasksToDelete = new ArrayList<>();
+        for(Object index : indexList) {
+            tasksToDelete.add(list.getTask((int) index));
+        }
+        return tasksToDelete;
     }
 }

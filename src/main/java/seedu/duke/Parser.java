@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -71,17 +72,16 @@ public class Parser {
                 return new EventCommand(String.join(" ",
                         Arrays.copyOfRange(detailsArray, 1, indexOfByAt)), dateTime);
             case "delete":
-                checkValidDescription(detailsArray);
-                return new DeleteCommand(Integer.parseInt(detailsArray[1]) - 1);
+                getAllIndex(command);
+                return new DeleteCommand(getAllIndex(command));
             case "done":
-                checkValidDescription(detailsArray);
-                return new DoneCommand(Integer.parseInt(detailsArray[1]) - 1);
+                getAllIndex(command);
+                return new DoneCommand(getAllIndex(command));
             case "list":
                 return new ListCommand();
             case "find":
-                checkValidDescription(detailsArray);
-                return new FindCommand(String.join(" ",
-                        Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
+                getAllIndex(command);
+                return new FindCommand(getAllIndex(command));
             default:
                 throw new InvalidInputException(ui.getInvalidInputMsg());
             }
@@ -89,27 +89,44 @@ public class Parser {
     }
 
     /**
+     * Obtain all valid index for the command and return them.
      * Check if all the inputs are valid. Else, throw appropriate errors.
      *
-     * @param arr the array containing the command
+     * @param command the input command
      * @throws InvalidFindDescription if the description of find is longer than one
      * @throws InvalidIndexException if the index is invalid
      * @throws InvalidInputException if the input is invalid
      */
-    private static void checkValidDescription(String[] arr) throws InvalidFindDescription,
+    private static ArrayList<Object> getAllIndex(String command) throws InvalidFindDescription,
             InvalidIndexException, InvalidInputException {
-        switch (arr[0]) {
+        ArrayList<Object> indexList = new ArrayList<>();
+        String[] arr1 = command.split(" ", 2);    // to split the command and the index
+        String[] arr2 = arr1[1].split("[,] ");
+        System.out.println(arr1);
+        System.out.println(arr2);
+
+        switch (arr1[0]) {
         case "find":
-            if (arr.length > 2) {
-                throw new InvalidFindDescription(ui.getInvalidFindMsg());
+            for(int i = 0; i < arr2.length; i++) {
+                // split the individual keyword to check if it contains multiple words
+                if (arr2[i].split(" ").length > 2) {
+                    System.out.println(arr2[i]);
+                    throw new InvalidFindDescription(ui.getInvalidFindMsg());
+                } else {
+                    indexList.add(arr2[i]);
+                }
             }
-            break;
+            return indexList;
         case "done":
         case "delete":
-            if (!(Integer.parseInt(arr[1]) <= tasks.getSize()) || !(Integer.parseInt(arr[1]) > 0)) {
-                throw new InvalidIndexException(ui.getInvalidIndexMsg(arr[0]));
+            for(int i = 0; i < arr2.length; i++) {
+                if (!(Integer.parseInt(arr2[i]) <= tasks.getSize()) || !(Integer.parseInt(arr2[1]) > 0)) {
+                    throw new InvalidIndexException(ui.getInvalidIndexMsg(arr2[0]));
+                } else {
+                    indexList.add(Integer.parseInt(arr2[i]) - 1);
+                }
             }
-            break;
+            return indexList;
         default:
             throw new InvalidInputException(ui.getInvalidInputMsg());
         }

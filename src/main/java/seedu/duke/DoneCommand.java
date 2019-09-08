@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents a Done Command.
@@ -9,15 +10,15 @@ import java.io.IOException;
  */
 public class DoneCommand extends Command {
 
-    private int index;
+    private ArrayList<Object> indexList;
 
     /**
      * Constructor of the DoneCommand class.
      *
-     * @param index the index of the task to be marked as done
+     * @param indexList the list of index of the tasks to be marked as done
      */
-    public DoneCommand(int index) {
-        this.index = index;
+    public DoneCommand(ArrayList<Object> indexList) {
+        this.indexList = indexList;
     }
 
     /**
@@ -33,8 +34,14 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         assert list != null : "Cannot mark done from an empty list";
-        String output = list.getTask(index).markAsDone();
-        storage.writeToFile(list);
+        String output = "";
+        output += ui.printDoneMsg();
+
+        for(Object index : indexList) {
+            list.getTask((int) index).markAsDone();
+            output += list.getTask((int) index) + "\n";
+            storage.writeToFile(list);
+        }
         return output;
     }
 

@@ -10,15 +10,15 @@ import java.util.ArrayList;
  */
 public class FindCommand extends Command {
 
-    private String keyword;
+    private ArrayList<Object> findList;
 
     /**
      * Constructor of FindCommand.
      *
-     * @param keyword the keyword to find
+     * @param findList the list of keywords to find
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(ArrayList<Object> findList) {
+        this.findList = findList;
     }
 
     /**
@@ -32,8 +32,11 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        ArrayList<Task> matchingList = list.findMatching(keyword);
-        String output = ui.printMatchingMsg() + ui.printMatchingList(matchingList);
+        String output = ui.printMatchingMsg();
+        for(Object keyword: findList) {
+            ArrayList<Task> matchingList = list.findMatching((String) keyword);
+            output += ui.printMatchingList(matchingList);
+        }
         return output;
     }
 

@@ -37,10 +37,10 @@ public class TaskList {
     public void load(Storage storage) {
         ArrayList<Task> tasks = storage.parseFile();
         list.clear();
-        tasks.forEach(task -> {
+        for (Task task : tasks) {
             list.add(task);
             Task.addToTotalTasks();
-        });
+        }
     }
 
     /**

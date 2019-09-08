@@ -13,6 +13,8 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
 
+        assert fullCommand != "" : " Empty String";
+
         Command returnCommand = new DummyCommand();
 
         if(isBye(fullCommand)) {

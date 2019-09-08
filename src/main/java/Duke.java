@@ -40,9 +40,9 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
-    public Duke() {
-    }
+//
+//    public Duke() {
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -106,6 +106,14 @@ public class Duke extends Application {
         return "Duke heard: " + input;
     }
 
+    Storage getStorage() {
+        return this.storage;
+    }
+
+    TaskList getTaskList() {
+        return this.tasks;
+    }
+
     /**
      * Instantiates a new Duke object.
      * Load an existing .txt file for the list of tasks stored.
@@ -139,19 +147,18 @@ public class Duke extends Application {
      */
     public void run() {
 
-        ui.welcomeStatement();
+        System.out.println(ui.welcomeStatement());
         boolean isExit = false;
         Storage storage = this.storage;
         TaskList tasks = this.tasks;
-        Ui ui = new Ui();
 
         // Initial opening introduction and prompt for user input
-        ui.openingStatement();
+        System.out.println(ui.openingStatement());
 
         while (!isExit) {
             try {
                 String input = ui.readCommand();
-                ui.separator();
+//                ui.separator();
 
                 Command c = Parser.parse(input);
                 c.execute(tasks, ui, storage);

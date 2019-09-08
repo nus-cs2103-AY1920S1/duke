@@ -16,9 +16,9 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //Mark task as done
-            tasks.setDone(this.input);
+            System.out.println(tasks.setDone(this.input));
         } catch (NullPointerException err) {
-            ui.invalidEntry();
+            System.out.println(ui.invalidEntry());
         }
     }
 

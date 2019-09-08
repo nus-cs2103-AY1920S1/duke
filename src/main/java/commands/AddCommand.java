@@ -20,8 +20,8 @@ public class AddCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            ui.addTask();
-            tasks.addTask(this.input, this.action, this.description);
+            System.out.println(ui.addTask());
+            System.out.println(tasks.addTask(this.input, this.action, this.description));
         } catch (Exception err) {
             System.out.println(err.getMessage());
         }

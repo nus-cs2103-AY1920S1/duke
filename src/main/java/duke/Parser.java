@@ -7,6 +7,7 @@ import commands.DoneCommand;
 import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
+import tasks.TaskList;
 
 import java.util.Scanner;
 public class Parser {
@@ -50,78 +51,6 @@ public class Parser {
         }
     }
 
-//    }
-//    public void parseDuke(Storage storage, TaskList tasks, String input) {
-//        Parser parser = new Parser();
-//        while (!input.equals("bye")) {
-//
-//            // Get entire line of input from command-line
-//            input = scanner.nextLine().trim(); //Remove blank space
-//
-//            // Store whatever text entered, except "bye", exit loop
-//            if (input.equals("bye")) {
-//                break;
-//            }
-//            ui.separator();
-//
-//            if (input.equals("list")) {
-//                ui.showList();
-//                tasks.printList();
-//            } else if (input.contains("done")) {
-//
-//                try {
-//                    //Mark task as done
-//                    tasks.setDone(input);
-//                } catch (NullPointerException err) {
-//                    ui.invalidEntry();
-//                    continue;
-//                }
-//
-//            } else if (input.contains("delete")) {
-//
-//                try {
-//                    //Mark task as done
-//                    tasks.deleteTask(input);
-//                } catch (NullPointerException err) {
-//                    ui.invalidEntry();
-//                    continue;
-//                }
-//            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
-//
-//                try {
-//                    String action = parser.parseAction(input);
-//                    ui.addTask();
-//                    tasks.addTask(action, input);
-//                } catch (DukeException err) {
-//                    System.out.println(err.getMessage());
-//                }
-//
-//            } else if (input.contains("find")) {
-//                String keyword = parser.parseDescription("find", input);
-//                ui.matchingList();
-//                tasks.getList(keyword);
-//            } else {
-//                // Do not fit any commands
-//                try {
-//                    throw new DukeException(ui.invalidCommand());
-//                } catch (DukeException err) {
-//                    System.out.println(err.getMessage());
-//                    ui.separator();
-//                    System.out.println("");
-//                    continue;
-//                }
-//            }
-//
-//            ui.separator();
-//            System.out.println();
-//
-//            try {
-//                storage.saveFile(tasks, storage.getFilePath());
-//            } catch (DukeException e) {
-//                ui.saveError();
-//            }
-//        }
-//    }
     /**
      * Parse the input to return the user action as a String.
      * Ensure that the input has a valid action.

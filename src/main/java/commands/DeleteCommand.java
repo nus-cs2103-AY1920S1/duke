@@ -16,9 +16,9 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             //Mark task as done
-            tasks.deleteTask(input);
+            System.out.println(tasks.deleteTask(input));
         } catch (NullPointerException err) {
-            ui.invalidEntry();
+            System.out.println(ui.invalidEntry());
         }
     }
 

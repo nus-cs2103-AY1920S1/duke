@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final String EMPTY_LIST_MSG = "Oops! The list is empty.";
 
     /**
      * Removes the task corresponding to the task ID from the list.
@@ -22,14 +23,17 @@ public class TaskList {
     public String removeTaskFromList(int id) throws InvalidDeleteDukeException {
         try {
             Task t = tasks.remove(id - 1);
-            return "Nice! I've removed this task from the list:\n"
-                    + "  " + t.toString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.";
+            return getRemoveTaskMessage(t);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidDeleteDukeException("Invalid \"delete\" command. Please enter a valid task ID.");
         }
     }
 
+    private String getRemoveTaskMessage(Task t) {
+        return "Nice! I've removed this task from the list:\n"
+                + "  " + t.toString() + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
+    }
     /**
      * Gets text confirmation after a task has been marked as done.
      * @param listOfTaskIds IDs of tasks to be marked done.
@@ -37,17 +41,27 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If ID/IDs are invalid.
      */
     public String getDoneUpdates(ArrayList<Integer> listOfTaskIds) throws IndexOutOfBoundsException {
+        StringBuilder finalOutput = initializeFinalOutput(listOfTaskIds);
+        developFinalOutput(finalOutput, listOfTaskIds);
+        return finalOutput.toString();
+    }
+
+    private StringBuilder initializeFinalOutput(ArrayList<Integer> listOfTaskIds) {
         StringBuilder finalOutput = listOfTaskIds.size() == 1
                 ? new StringBuilder("Nice! I've marked this task as done:\n")
                 : new StringBuilder("Nice! I've marked these tasks as done:\n");
+        return finalOutput;
+    }
+
+    private void developFinalOutput(StringBuilder finalOutput, ArrayList<Integer> listOfTaskIds) {
         for (int i = 0; i < listOfTaskIds.size(); i++) {
-            tasks.get(listOfTaskIds.get(i) - 1).setDone(true);
-            finalOutput.append("  " + tasks.get(listOfTaskIds.get(i) - 1).toString());
+            Task t = tasks.get(listOfTaskIds.get(i) - 1);
+            t.setDone(true);
+            finalOutput.append("  " + t.toString());
             if (i != listOfTaskIds.size() - 1) {
                 finalOutput.append("\n");
             }
         }
-        return finalOutput.toString();
     }
 
     /**
@@ -56,19 +70,30 @@ public class TaskList {
      * @return A confirmation along with the new task's description.
      * @throws InvalidTaskDukeException If the task is invalid.
      */
-    public String addTask(Task task) throws InvalidTaskDukeException {
+    public String addTask(Task task) {
         tasks.add(task);
+        return getAddTaskMessage();
+    }
+
+    private String getAddTaskMessage() {
         return "Nice! I've added this task to the list:\n"
                 + "  " + tasks.get(tasks.size() - 1).toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
     }
-
 
     /**
      * Returns a list of the tasks, ordered by ID
      * @return String representing ordered list.
      */
     public String getListOfTasks() {
+        String finalOutput = getFinalListOfTasks();
+        if (finalOutput.isBlank()) {
+            return EMPTY_LIST_MSG;
+        }
+        return finalOutput;
+    }
+
+    private String getFinalListOfTasks() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             output.append((i + 1) + ". " + tasks.get(i));
@@ -77,9 +102,7 @@ public class TaskList {
             }
         }
         String finalOutput = output.toString();
-        return finalOutput.isBlank()
-                ? "Oops! The list is empty."
-                : finalOutput;
+        return finalOutput;
     }
 
     /**
@@ -88,6 +111,11 @@ public class TaskList {
      * @return String representing found tasks.
      */
     public String findTasks(String descriptionToMatch) {
+        String findResults = getFindResult(descriptionToMatch);
+        return findResults;
+    }
+
+    private String getFindResult(String descriptionToMatch) {
         StringBuilder result = new StringBuilder();
         boolean taskExists = false;
         for (int i = 0; i < tasks.size(); i++) {

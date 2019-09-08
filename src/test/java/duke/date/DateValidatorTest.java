@@ -40,11 +40,11 @@ public class DateValidatorTest {
     public void validateDate_validDatesEvent_trueReturned() {
         try {
             DateValidator v = new DateValidator();
-            assertEquals(true, v.validateDate("11/01/2000 1800-2000", false));
-            assertEquals(true, v.validateDate("15/03/2019 0815-0830", false));
-            assertEquals(true, v.validateDate("12/12/2024 2300-0000", false));
-            assertEquals(true, v.validateDate("11/11/2005 2000-2115", false));
-            assertEquals(true, v.validateDate("11/10/1982 0000-0615", false));
+            assertEquals(true, v.validateDate("11/01/2000 1800-2000", true));
+            assertEquals(true, v.validateDate("15/03/2019 0815-0830", true));
+            assertEquals(true, v.validateDate("12/12/2024 2300-2359", true));
+            assertEquals(true, v.validateDate("11/11/2005 2000-2115", true));
+            assertEquals(true, v.validateDate("11/10/1982 0000-0615", true));
         } catch (InvalidDateDukeException e) {
             fail();
         }

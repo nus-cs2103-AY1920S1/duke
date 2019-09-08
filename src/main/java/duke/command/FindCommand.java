@@ -28,19 +28,28 @@ public class FindCommand extends Command {
      * @throws InvalidFindDukeException If the find command is invalid.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFindDukeException {
-        if (cleanedInput.equalsIgnoreCase("find")
-                || cleanedInput.split("\\s+").length == 1) {
+        if (isInvalidFindCommand(cleanedInput)) {
             throw new InvalidFindDukeException("Invalid find command! Please enter a description after \"find\"");
         } else {
-            String descriptionToMatch = cleanedInput.substring(cleanedInput.indexOf("find") + 4)
-                    .toLowerCase().strip();
-            String matchedDescriptions = tasks.findTasks(descriptionToMatch);
+            String matchedDescriptions = getMatchingDescriptions(cleanedInput, tasks);
             if (matchedDescriptions.isBlank()) {
                 return "No matching tasks found!";
             } else {
                 return matchedDescriptions;
             }
         }
+    }
+
+    private String getMatchingDescriptions(String cleanedInput, TaskList tasks) {
+        String descriptionToMatch = cleanedInput.substring(cleanedInput.indexOf("find") + 4)
+                .toLowerCase().strip();
+        String matchedDescriptions = tasks.findTasks(descriptionToMatch);
+        return matchedDescriptions;
+    }
+
+    private boolean isInvalidFindCommand(String input) {
+        return cleanedInput.equalsIgnoreCase("find")
+                || cleanedInput.split("\\s+").length == 1;
     }
 
     /**

@@ -32,6 +32,11 @@ public class Storage {
      */
     public ArrayList<String> loadTasks() throws FileNotFoundException {
         File f = new File(filepath);
+        ArrayList<String> tasks = loadFromFile(f);
+        return tasks;
+    }
+
+    private ArrayList<String> loadFromFile(File f) throws FileNotFoundException {
         Scanner sc = new Scanner(f);
         ArrayList<String> tasks = new ArrayList<>();
         while (sc.hasNext()) {
@@ -53,11 +58,15 @@ public class Storage {
             if (!f.exists()) {
                 f.createNewFile();
             }
-            for (String s : tasks) {
-                writer.write(s + "\n");
-            }
+            writeToFile(writer, tasks);
         } finally {
             writer.close();
+        }
+    }
+
+    private void writeToFile(FileWriter writer, ArrayList<String> tasks) throws IOException {
+        for (String s : tasks) {
+            writer.write(s + "\n");
         }
     }
 

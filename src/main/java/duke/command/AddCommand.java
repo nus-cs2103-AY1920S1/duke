@@ -13,6 +13,11 @@ public class AddCommand extends Command {
 
     private String input;
 
+    /** Add-Command start phrases */
+    private static final String TODO_COMMAND_START = "todo";
+    private static final String DEADLINE_COMMAND_START = "deadline";
+    private static final String EVENT_COMMAND_START = "event";
+
     /**
      * Constructor for the add command.
      * @param input Command description.
@@ -32,7 +37,7 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidTaskDukeException, InvalidDateDukeException {
-        String cleanedInput = input.strip().toLowerCase();
+        String cleanedInput = cleanInput(input);
         Task t = makeTask(cleanedInput);
         String output = tasks.addTask(t);
         return output;
@@ -46,17 +51,20 @@ public class AddCommand extends Command {
      * @throws InvalidDateDukeException If the date format is invalid.
      */
     public Task makeTask(String cleanedInput) throws InvalidTaskDukeException, InvalidDateDukeException {
-        if (cleanedInput.startsWith("todo")) {
+        if (cleanedInput.startsWith(TODO_COMMAND_START)) {
             return makeTodo(cleanedInput);
-        } else if (cleanedInput.startsWith("deadline")) {
+        } else if (cleanedInput.startsWith(DEADLINE_COMMAND_START)) {
             return makeDeadline(cleanedInput);
-        } else {
+        } else if (cleanedInput.startsWith(EVENT_COMMAND_START)) {
             return makeEvent(cleanedInput);
+        } else {
+            throw new InvalidTaskDukeException("Invalid add command!");
         }
     }
 
     private Todo makeTodo(String task) throws InvalidTodoDukeException {
         try {
+            assert task.startsWith(TODO_COMMAND_START) : "This is not a to-do command";
             String[] tokens = task.split("\\s+");
             StringBuilder description = new StringBuilder();
             for (int i = 1; i < tokens.length; i++) {
@@ -71,7 +79,7 @@ public class AddCommand extends Command {
 
     private Event makeEvent(String task) throws InvalidEventDukeException, InvalidDateDukeException {
         try {
-            task = task.strip();
+            assert task.startsWith(EVENT_COMMAND_START) : "This is not an event command";
             int indexOfEvent = task.indexOf("event");
             int indexOfAt = task.indexOf("/at");
             String description = task.substring(indexOfEvent + 5, indexOfAt).strip();
@@ -85,7 +93,7 @@ public class AddCommand extends Command {
 
     private Deadline makeDeadline(String task) throws InvalidDeadlineDukeException, InvalidDateDukeException {
         try {
-            task = task.strip();
+            assert task.startsWith(DEADLINE_COMMAND_START) : "This is not a deadline command";
             int indexOfDeadline = task.indexOf("deadline");
             int indexOfBy = task.indexOf("/by");
             String description = task.substring(indexOfDeadline + 8, indexOfBy).strip();

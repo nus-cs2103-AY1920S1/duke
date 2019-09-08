@@ -1,5 +1,9 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * A task list that supports several basic features:
@@ -8,7 +12,7 @@ import java.time.LocalDateTime;
  * 3) Ability to search for expressions in given tasks.
  * 4) Ability to print current list of tasks.
  */
-public class Duke {
+public class Duke extends Application {
     /**
      * The TaskList object which abstracts out a list of tasks.
      */
@@ -25,11 +29,22 @@ public class Duke {
     private Ui ui;
     
     /**
-     * Initializes the Ui, Storage, and TaskList objects.
-     *
-     * @param filePath The file path to write data to.
+     * Initializes a Duke object.
+     * The Duke constructor has no parameters due to a quirk in javafx.application.Application, which does not work
+     * with a constructor with parameters. This was the best workaround I could find after 4 days of trying.
      */
-    public Duke(String filePath) {
+    public Duke() {
+    
+    }
+    
+    /**
+     * Initializes the Ui, Storage, and TaskList objects.
+     * This method serves as a proxy for the Duke constructor method, which is left empty due to a quirk in
+     * javafx.application.Application, which does not work with a constructor with parameters.
+     *
+     * @param filePath The file path of the hard drive location to read and write from, as a String.
+     */
+    private void setPath(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -101,7 +116,18 @@ public class Duke {
         }
     }
     
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+    
     public static void main(String[] args) {
-        new Duke("CurrentTaskList.txt").run();
+        Duke duke = new Duke();
+        duke.setPath("CurrentTaskList.txt");
+        duke.run();
     }
 }

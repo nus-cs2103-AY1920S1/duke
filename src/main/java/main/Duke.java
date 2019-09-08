@@ -87,7 +87,7 @@ public class Duke {
             isExiting = true;
         });
 
-        commandCentre.register("help", () -> ui.printHelpMessage());
+        commandCentre.register("help", ui::printHelpMessage);
 
         commandCentre.register("list", () -> {
             if (taskList.isEmpty()) {
@@ -160,15 +160,28 @@ public class Duke {
         });
 
         commandCentre.register("find", () -> {
-            String keyword = parser.parseFindKeyword();
+            String keyword = parser.parseKeyword();
             if (keyword != null) {
                 List<Task> findResult = taskList.generateListByKeyword(keyword);
                 ui.printTaskList(findResult, Ui.FIND_ACTION_TITLE);
             }
         });
 
-        commandCentre.register("undo", () -> {
-            commandCentre.undo();
+        commandCentre.register("undo", commandCentre::undo);
+
+        commandCentre.register("sort", new Command() {
+            @Override
+            public void execute() {
+                String[] sortInfo = parser.parseSortInfo();
+                String keyword = sortInfo[0];
+                int sortCategory = parser.parseKeywordAsSortCategory(keyword);
+                boolean isReversed = sortInfo[1].equals("r");
+                boolean isSuccessful = taskList.sort(sortCategory, isReversed);
+                if (isSuccessful) {
+                    ui.printListSortedMessage();
+                    ui.printTaskList(taskList.getTasks(), Ui.LIST_ACTION_TITLE);
+                }
+            }
         });
     }
 

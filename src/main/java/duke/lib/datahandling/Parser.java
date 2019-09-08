@@ -42,6 +42,7 @@ public class Parser {
     public String parse(String fullCommand) throws DukeException {
         try {
             updateStorage();
+            assert !fullCommand.isEmpty(): "input cannot be empty";
             String[] words = fullCommand.split(" ", 2);
             String command;
             boolean moreThanOne;

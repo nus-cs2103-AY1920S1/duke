@@ -19,6 +19,7 @@ public class Time {
      * @throws DukeException will be thrown when string is not in correct format.
      */
     public Time(String dateString) throws DukeException {
+        assert !dateString.isEmpty() : "date should not be empty";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         try {
             date = LocalDateTime.parse(dateString, formatter);
@@ -44,7 +45,9 @@ public class Time {
      * @return the proper string format of this time object.
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
+        assert !format.isEmpty();
         return format;
     }
 }

@@ -70,6 +70,7 @@ public class DateTime {
      */
     public static String getTime(String time) throws DateException {
         String hours = time.substring(0,2);
+        assert hours.length() == 4 : "Time invalid";
         String timeString = getHours(hours) + getMinutes(time.substring(2,4));
         if (Integer.parseInt(hours) < 12) {
             return timeString + "am";

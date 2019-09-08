@@ -48,7 +48,6 @@ public class AddCommand extends Command {
         } catch (TaskException e) {
             message = indent + e.getMessage();
         } finally {
-//            System.out.println(message);
             storage.write(taskList);
             return message;
         }

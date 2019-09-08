@@ -32,7 +32,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filteredTaskList = taskList.filterByString(substring);
-//        System.out.println(filteredTaskList);
         return filteredTaskList.toString();
     }
 }

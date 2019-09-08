@@ -1,7 +1,10 @@
 package duke.task;
 
-import duke.datetime.DateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.InvalidDateTimeException;
+import duke.parser.DateHandler;
 
 /**
  * Represents Deadline Tasks.
@@ -10,8 +13,8 @@ import duke.exception.InvalidDateTimeException;
 public class Deadline extends Task {
     /** Deadline date for the deadline. */
     private String by;
-    /** DateTime of deadline. */
-    private DateTime datetime;
+    /** LocalDate of deadline. */
+    private LocalDateTime datetime;
 
     /**
      * Creates an instance of Deadline.
@@ -23,7 +26,11 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws InvalidDateTimeException {
         super(description);
         this.by = by;
-        datetime = new DateTime(by);
+        try {
+            datetime = DateHandler.getInstance().parse(by);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("Deadline date not valid.");
+        }
     }
 
     /**
@@ -50,6 +57,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), datetime);
+        return String.format("[D]%s (by: %s)",
+                super.toString(),
+                DateHandler.getInstance().format(datetime));
     }
 }

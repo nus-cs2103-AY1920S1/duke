@@ -30,7 +30,6 @@ public class ExitCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String indent = ui.getIndent();
         String message = indent + "Bye. Hope to see you again soon!";
-//        System.out.println(message);
         return message;
     }
 }

@@ -1,7 +1,10 @@
 package duke.task;
 
-import duke.datetime.DateTime;
 import duke.exception.InvalidDateTimeException;
+import duke.parser.DateHandler;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents Event Tasks.
@@ -10,8 +13,8 @@ import duke.exception.InvalidDateTimeException;
 public class Event extends Task {
     /** Time of event. */
     private String at;
-    /** DateTime of the event. */
-    private DateTime datetime;
+    /** LocalDateTime of the event. */
+    private LocalDateTime datetime;
 
     /**
      * Creates an instance of Event.
@@ -23,7 +26,11 @@ public class Event extends Task {
     public Event(String description, String at) throws InvalidDateTimeException {
         super(description);
         this.at = at;
-        datetime = new DateTime(at);
+        try {
+            datetime = DateHandler.getInstance().parse(at);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("Event date not valid.");
+        }
     }
 
     /**
@@ -50,6 +57,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), datetime);
+        return String.format("[E]%s (at: %s)",
+                super.toString(),
+                DateHandler.getInstance().format(datetime));
     }
 }

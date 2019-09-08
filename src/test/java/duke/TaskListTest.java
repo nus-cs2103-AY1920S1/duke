@@ -65,6 +65,6 @@ class TaskListTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("hi", false));
         assertThrows(DuplicateTaskDukeException.class,
-                () -> tasks.addTask(new Todo("hi", false)));
+            () -> tasks.addTask(new Todo("hi", false)));
     }
 }

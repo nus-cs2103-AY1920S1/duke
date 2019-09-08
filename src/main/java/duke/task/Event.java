@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Class for events.
@@ -10,6 +11,7 @@ public class Event extends Task {
      * Variable for date and time.
      */
     private LocalDateTime dateTime;
+    private DateTimeFormatter formatter;
 
     /**
      * Constructor for event.
@@ -19,24 +21,8 @@ public class Event extends Task {
      */
     public Event(String description, String date) {
         super(description);
-        String[] dateSplit = date.split("\\s");
-        String[] d = dateSplit[0].split("/");
-        int day = Integer.parseInt(d[0]);
-        int month = Integer.parseInt(d[1]);
-        int year = Integer.parseInt(d[2]);
-        int hour = Integer.parseInt(dateSplit[1].substring(0, 2));
-        int min = Integer.parseInt(dateSplit[1].substring(2));
-        dateTime = LocalDateTime.of(year, month, day, hour, min);
-    }
-
-    /**
-     * Returns date and time as a String.
-     *
-     * @return String of date and time
-     */
-    private String getDate() {
-        return dateTime.getDayOfMonth() + "/" + dateTime.getMonthValue() + "/" + dateTime.getYear() +
-                " " + String.format("%02d", dateTime.getHour()) + String.format("%02d", dateTime.getMinute());
+        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        dateTime = LocalDateTime.parse(date, formatter);
     }
 
     /**
@@ -45,7 +31,7 @@ public class Event extends Task {
      * @return a String to write on text file
      */
     public String toFile() {
-        return "E|" + getStatusIcon() + "|" + description + "|" + getDate();
+        return "E|" + getStatusIcon() + "|" + description + "|" + dateTime.format(formatter);
     }
 
     /**
@@ -55,6 +41,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + "(at: " + getDate() + ")";
+        return "[E][" + getStatusIcon() + "] " + description + "(at: " + dateTime.format(formatter) + ")";
     }
 }

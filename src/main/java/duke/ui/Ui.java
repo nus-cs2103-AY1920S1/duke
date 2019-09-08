@@ -1,5 +1,7 @@
 package duke.ui;
 
+import duke.DukeException;
+
 import java.util.Scanner;
 
 /**
@@ -57,5 +59,25 @@ public class Ui {
         System.out.print(line);
         System.out.println(indent + "!!! FAILED TO LOAD LIST !!!");
         System.out.println(line);
+    }
+
+    /**
+     * Prints output.
+     *
+     * @param output output to be printed
+     */
+    public void printOutput(String output) {
+        if (output != null) {
+            System.out.println(output);
+        }
+    }
+
+    /**
+     * Prints error message from exception.
+     *
+     * @param ex DukeException
+     */
+    public void printError(Exception ex) {
+        System.out.println("Error: " + ex.getMessage());
     }
 }

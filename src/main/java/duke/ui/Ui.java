@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Ui {
-    private static final String LINE = "    ____________________________________________________________";
     private static final String TABS = "     ";
 
     public Ui() {
@@ -22,24 +21,22 @@ public class Ui {
      * Prints a welcome message.
      */
     public void showWelcome() {
-        System.out.println(LINE);
-        System.out.println(TABS + "Hello! I'm Duke\n" + TABS + "What can I do for you?");
-        System.out.println(LINE);
+        System.out.println(TABS + "Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     public String showDoneMessage() {
-        return TABS + "Nice! I've marked this task as done: \n";
+        return "Nice! I've marked this task as done: \n";
     }
 
     public String showDeleteMessage() {
-        return TABS + "Noted. I've removed this task: \n";
+        return "Noted. I've removed this task: \n";
     }
 
     /**
      * Prints the addition message when a task is added.
      */
     public String showAddMessage() {
-        return TABS + "Got it. I've added this task: \n";
+        return "Got it. I've added this task: \n";
     }
 
     /**
@@ -99,6 +96,6 @@ public class Ui {
      * @param message exception message to be displayed
      */
     public String showError(String message) {
-        return TABS + "\u2639 OOPS!!! " + message + "\n";
+        return "\u2639 OOPS!!! " + message + "\n"; //displays a sad face
     }
 }

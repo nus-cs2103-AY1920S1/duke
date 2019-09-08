@@ -14,15 +14,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
 
     @FXML
     private ImageView displayPicture;
@@ -73,8 +73,8 @@ public class DialogBox extends HBox {
      * @return DialogBox to contain Duke messages
      */
     public static DialogBox getDukeDialog(String text, Image image) {
-        var db = new DialogBox(text, image);
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(text, image);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

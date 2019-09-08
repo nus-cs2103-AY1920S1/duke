@@ -106,6 +106,12 @@ public class Ui {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(notification, duke));
     }
 
+    public void printUpdateNotification(String updatingTask, String updateType, String originalValue) {
+        String notification = "I've updated this task's " + updateType + ":\n    " + updatingTask
+                + "\n\n Original " + updateType + ": \n" + originalValue;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(notification, duke));
+    }
+
     public void printExitMessage() {
         String exit = "Bye. Hope to see you again soon!\n";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(exit, duke));

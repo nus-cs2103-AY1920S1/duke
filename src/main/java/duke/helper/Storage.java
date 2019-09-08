@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javafx.scene.layout.VBox;
@@ -31,7 +32,7 @@ public class Storage {
      * @return ArrayList of Tasks from file.
      * @throws IOException If enclosing file directory or file itself does not exist.
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, NoSuchElementException {
         ArrayList<Task> tasks = new ArrayList<>();
         File listFile = new File(filePath);
         listFile.createNewFile(); // Directory data needs to exist already
@@ -40,7 +41,7 @@ public class Storage {
         while (fileScanner.hasNext()) {
             String type = fileScanner.next();
             int isDone = Integer.parseInt(fileScanner.next());
-            String remaining = fileScanner.nextLine().trim();
+            String remaining = fileScanner.nextLine().trim();   // throws NoSuchElementException if no description
             String[] remainingSplit = remaining.split(" \\| ");
             switch (type) {
             case "T":

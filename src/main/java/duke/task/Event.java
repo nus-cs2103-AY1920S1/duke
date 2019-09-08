@@ -20,6 +20,10 @@ public class Event extends Task {
         return eventPeriod;
     }
 
+    public void setEventPeriod(String eventPeriod) {
+        this.eventPeriod = eventPeriod;
+    }
+
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + eventPeriod + ")";

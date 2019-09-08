@@ -4,10 +4,7 @@ import duke.DukeException;
 import duke.helper.Parser;
 import duke.helper.Storage;
 import duke.helper.Ui;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 import java.time.LocalDateTime;
 
@@ -89,6 +86,42 @@ public class AddCommand extends Command {
                     + "\n";
             storage.writeToFile(filePath, writeStringE, true);
             ui.printAddNotification(event.toString(), tasks.getSize());
+            break;
+        case "clone":
+            try {
+                if (inputSplit.length != 2) {
+                    // Exception if there is no task number or multiple words after "clone"
+                    throw new DukeException(":( OOPS!!! Please specify number of a single task to clone.\n");
+                }
+                int specifiedClone = Integer.parseInt(inputSplit[1]) ; // throws NumberFormatException if not int
+                if (specifiedClone < 1 || specifiedClone > tasks.getSize()) {
+                    // Exception if task number is beyond current number of tasks
+                    throw new DukeException(":( OOPS!!! Please specify valid task number.\n");
+                }
+                Task originalTask = tasks.getElement(specifiedClone - 1);
+                Task clonedTask;
+                String writeStringCBack;
+                if (originalTask instanceof Deadline) {
+                    clonedTask = new Deadline(originalTask.getDescription(), 0,
+                            ((Deadline) originalTask).getEndTime());
+                    writeStringCBack =  " | " + ((Deadline) clonedTask).getEndTime() + "\n";
+                } else if (originalTask instanceof Event) {
+                    clonedTask = new Event(originalTask.getDescription(), 0,
+                            ((Event) originalTask).getEventPeriod());
+                    writeStringCBack = " | " + ((Event) clonedTask).getEventPeriod() + "\n";
+                } else {
+                    assert originalTask instanceof Todo;
+                    clonedTask = new Todo(originalTask.getDescription(), 0);
+                    writeStringCBack = "\n";
+                }
+                String writeStringC = clonedTask.getType() + " 0" + " " + clonedTask.getDescription()
+                        + writeStringCBack;
+                tasks.addToList(clonedTask);
+                storage.writeToFile(filePath, writeStringC, true);
+                ui.printAddNotification(clonedTask.toString(), tasks.getSize());
+            } catch (NumberFormatException ne) {
+                ui.printError(":( OOPS!!! Please specify task number as one integer only.\n");
+            }
             break;
         default:
             assert false : "Invalid item in external save file";

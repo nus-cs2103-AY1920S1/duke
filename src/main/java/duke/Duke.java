@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Duke extends Application {
 
@@ -41,7 +40,7 @@ public class Duke extends Application {
         Parser.setFilePath(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (Exception e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

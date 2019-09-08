@@ -8,6 +8,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -75,10 +76,14 @@ public class Parser {
             return new AddCommand("deadline", userInput, inputSplit, filePath);
         case "event":
             return new AddCommand("event", userInput, inputSplit, filePath);
+        case "clone":
+            return new AddCommand("clone", userInput, inputSplit, filePath);
         case "delete":
             return new DeleteCommand(filePath, inputSplit);
         case "find":
             return new FindCommand(filePath, null, userInput.replaceFirst("find ", ""));
+        case "update":
+            return new UpdateCommand(filePath, userInput, inputSplit);
         default:
             // Exception if invalid instruction
             throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");

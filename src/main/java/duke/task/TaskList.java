@@ -1,8 +1,15 @@
 package duke.task;
 
+import duke.Parser;
 import duke.exception.DukeIndexOutOfBoundsException;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+import static duke.task.TaskType.*;
 
 /**
  * Represents a list of tasks in Duke.
@@ -70,6 +77,51 @@ public class TaskList {
             }
         }
         return newList;
+    }
+
+    /**
+     * Gets an ordered task list filtered to specific task type.
+     *
+     * @param type the task type to filter by.
+     * @return the filtered, ordered tasklist.
+     */
+    public TaskList filter(TaskType type) {
+        TaskList newList = new TaskList();
+        for (Task task: this.getTaskList()) {
+            if (task == null
+                || type == DEADLINE && !(task instanceof Deadline)
+                || type == EVENT && !(task instanceof Event)
+                || type == TODO && !(task instanceof Todo)) {
+                continue;
+            }
+            newList.add(task);
+        }
+        // have the null value stay at 0-index to maintain 1-indexing
+        sortByType(newList.getTaskList(), type);
+        return newList;
+    }
+
+    private void sortByType(ArrayList<? extends Task> list, TaskType type) {
+        switch (type) {
+        case TODO:
+        case EVENT:
+            return;
+        case DEADLINE:
+            list.sort((o1, o2) -> {
+                if (o1 == null && o2 == null) {
+                    return 0;
+                }
+                if (o1 == null) {
+                    return -1;
+                }
+                if (o2 == null) {
+                    return 1;
+                }
+                ZonedDateTime d1 = Parser.parseDateTime(((Deadline) o1).getDeadline(), DEADLINE);
+                ZonedDateTime d2 = Parser.parseDateTime(((Deadline) o2).getDeadline(), DEADLINE);
+                return d1.compareTo(d2);
+            });
+        }
     }
 
     /**

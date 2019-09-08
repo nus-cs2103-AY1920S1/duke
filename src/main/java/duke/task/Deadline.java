@@ -33,6 +33,11 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    public LocalDateTime getDate() {
+        return datetime;
+    }
+
     /**
      * Returns the string representation for data file.
      *

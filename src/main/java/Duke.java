@@ -1,5 +1,4 @@
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Node;
@@ -56,41 +55,6 @@ public class Duke extends Application {
         this("tasks.txt");
     }
 
-    private String done(Integer... nums) {
-        try {
-            tasks.done(nums);
-            storage.write(tasks);
-            return ui.done(tasks, nums);
-        } catch (DukeException ex) {
-            return ui.showDukeException(ex);
-        } catch (ParseException e) {
-            return ui.showParseError();
-        }
-    }
-
-    private String delete(Integer... nums) {
-        try {
-            String response =  ui.delete(tasks, nums);
-            tasks.delete(nums);
-            storage.write(tasks);
-            return response;
-        } catch (DukeException ex) {
-            return ui.showDukeException(ex);
-        } catch (ParseException e) {
-            return ui.showParseError();
-        }
-    }
-
-    private String add(String type, String description) {
-        try {
-            tasks.add(type, description);
-            storage.write(tasks);
-            return ui.add(tasks);
-        } catch (DukeException ex) {
-            return ui.showDukeException(ex);
-        }
-    }
-
     private void run() {
         Scanner sc = new Scanner(System.in);
         ui.greet();
@@ -99,23 +63,24 @@ public class Duke extends Application {
             try {
                 Command command = Parser.parse(input);
                 if (command instanceof Bye) {
-                    ui.bye();
+                    Bye bye = (Bye) command;
+                    bye.exec(storage, tasks, ui);
                     break;
                 } else if (command instanceof PrintList) {
-                    ui.printList(tasks);
+                    PrintList pl = (PrintList) command;
+                    pl.exec(storage, tasks, ui);
                 } else if (command instanceof Done) {
                     Done done = (Done) command;
-                    done(done.numbers);
+                    done.exec(storage, tasks, ui);
                 } else if (command instanceof Delete) {
                     Delete delete = (Delete) command;
-                    delete(delete.numbers);
+                    delete.exec(storage, tasks, ui);
                 } else if (command instanceof Add) {
                     Add add = (Add) command;
-                    add(add.type, add.description);
+                    add.exec(storage, tasks, ui);
                 } else if (command instanceof  Find) {
                     Find find = (Find) command;
-                    TaskList targets = tasks.find(find.target);
-                    ui.printFind(targets);
+                    find.exec(storage, tasks, ui);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -133,22 +98,23 @@ public class Duke extends Application {
         try {
             Command command = Parser.parse(input);
             if (command instanceof Bye) {
-                return ui.bye();
+                Bye bye = (Bye) command;
+                return bye.exec(storage, tasks, ui);
             } else if (command instanceof PrintList) {
-                return ui.printList(tasks);
+                PrintList pl = (PrintList) command;
+                return pl.exec(storage, tasks, ui);
             } else if (command instanceof Done) {
                 Done done = (Done) command;
-                return done(done.numbers);
+                return done.exec(storage, tasks, ui);
             } else if (command instanceof Delete) {
                 Delete delete = (Delete) command;
-                return delete(delete.numbers);
+                return delete.exec(storage, tasks, ui);
             } else if (command instanceof Add) {
                 Add add = (Add) command;
-                return add(add.type, add.description);
+                return add.exec(storage, tasks, ui);
             } else if (command instanceof  Find) {
                 Find find = (Find) command;
-                TaskList targets = tasks.find(find.target);
-                return ui.printFind(targets);
+                return find.exec(storage, tasks, ui);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

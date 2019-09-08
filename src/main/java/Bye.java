@@ -3,4 +3,8 @@
  */
 public class Bye extends Command {
 
+    @Override
+    public String exec(Storage storage, TaskList tasks, Ui ui) {
+        return ui.bye();
+    }
 }

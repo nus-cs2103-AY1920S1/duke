@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 /**
  * Represents a task completion command.
  */
@@ -14,4 +16,16 @@ public class Done extends Command {
         this.numbers = numbers;
     }
 
+    @Override
+    public String exec(Storage storage, TaskList tasks, Ui ui) {
+        try {
+            tasks.done(numbers);
+            storage.write(tasks);
+            return ui.done(tasks, numbers);
+        } catch (DukeException ex) {
+            return ui.showDukeException(ex);
+        } catch (ParseException e) {
+            return ui.showParseError();
+        }
+    }
 }

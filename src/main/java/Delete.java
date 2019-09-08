@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 /**
  * Represents a deletion command.
  */
@@ -14,5 +16,18 @@ public class Delete extends Command {
         this.numbers = numbers;
     }
 
+    @Override
+    public String exec(Storage storage, TaskList tasks, Ui ui) {
+        try {
+            String response =  ui.delete(tasks, numbers);
+            tasks.delete(numbers);
+            storage.write(tasks);
+            return response;
+        } catch (DukeException ex) {
+            return ui.showDukeException(ex);
+        } catch (ParseException e) {
+            return ui.showParseError();
+        }
+    }
 }
 

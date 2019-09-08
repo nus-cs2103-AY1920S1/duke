@@ -3,4 +3,12 @@
  */
 public class PrintList extends Command {
 
+    @Override
+    public String exec(Storage storage, TaskList tasks, Ui ui) {
+        try {
+            return ui.printList(tasks);
+        } catch (DukeException ex) {
+            return ui.showDukeException(ex);
+        }
+    }
 }

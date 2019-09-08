@@ -15,4 +15,15 @@ public class Add extends Command {
         this.type = type;
         this.description = description;
     }
+
+    @Override
+    public String exec(Storage storage, TaskList tasks, Ui ui) {
+        try {
+            tasks.add(type, description);
+            storage.write(tasks);
+            return ui.add(tasks);
+        } catch (DukeException ex) {
+            return ui.showDukeException(ex);
+        }
+    }
 }

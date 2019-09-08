@@ -91,22 +91,32 @@ public class Ui {
      * @throws ParseException if description of task connot be parsed
      */
     public String done(TaskList list, Integer... nums) throws ParseException {
-        ArrayList<Task> tasks = list.tasks;
-        ArrayList<String> listToPrint = new ArrayList<>();
-        StringBuilder response = new StringBuilder();
-        response.append("Nice! I've marked these tasks as done: \n");
-        listToPrint.add("Nice! I've marked these tasks as done: ");
-        for (int i = 0; i < nums.length; i++) {
-            String description = tasks.get(nums[i] - 1).repr();
-            response.append(description);
-            listToPrint.add("  " + description);
-            if (i == nums.length - 1) {
+        ArrayList<String> sentences = getSentences(list, nums, "Nice! I've marked these tasks as done: ");
+        formatPrint(sentences.toArray(new String[0]));
+        return getResponse(sentences);
+    }
+
+    private String getResponse(ArrayList<String> sentences) {
+        String response = "";
+        for (int i = 0; i < sentences.size(); i++) {
+            response += sentences.get(i);
+            if (i == sentences.size() - 1) {
                 break;
             }
-            response.append("\n");
+            response += "\n";
         }
-        formatPrint(listToPrint.toArray(new String[listToPrint.size()]));
-        return response.toString();
+        return response;
+    }
+
+    private ArrayList<String> getSentences(TaskList list, Integer[] nums, String start) throws ParseException {
+        ArrayList<Task> tasks = list.tasks;
+        ArrayList<String> sentences = new ArrayList<>();
+        sentences.add(start);
+        for (int i = 0; i < nums.length; i++) {
+            String description = tasks.get(nums[i] - 1).repr();
+            sentences.add("  " + description);
+        }
+        return sentences;
     }
 
     /**
@@ -121,41 +131,21 @@ public class Ui {
                 throw new DukeException("Task number out of range");
             }
         }
-        StringBuilder response = new StringBuilder("Noted. I've removed these tasks: \n");
-        ArrayList<String> descriptions = new ArrayList<>();
-        ArrayList<Task> tasks = list.tasks;
-        for (int i = 0; i < nums.length; i++) {
-            Task t = tasks.get(nums[i] - 1);
-            String description = t.repr();
-            descriptions.add(description);
-            response.append(description);
-            if (i == nums.length - 1) {
-                break;
-            }
-            response.append("\n");
-        }
-        System.out.println(line);
-        System.out.println(format("Noted. I've removed these tasks: "));
-        for (String description : descriptions) {
-            System.out.println("  " + format(description));
-        }
-        switch (tasks.size() - nums.length) {
+        ArrayList<String> sentences = getSentences(list, nums, "Noted. I've removed these tasks:");
+        int count = list.tasks.size() - nums.length;
+        switch (count) {
         case 0:
-            response.append("Now you have no task in the list.");
-            System.out.println(format("Now you have no task in the list."));
+            sentences.add("Now you have no task in the list.");
             break;
         case 1:
-            response.append("Now you have 1 task in the list.");
-            System.out.println(format("Now you have 1 task in the list."));
+            sentences.add("Now you have 1 task in the list.");
             break;
         default:
-            int count = tasks.size() - 1;
-            response.append("Now you have ").append(count).append(" tasks in the list.");
-            System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
+            sentences.add("Now you have " + count + " tasks in the list.");
             break;
         }
-        System.out.println(line);
-        return response.toString();
+        formatPrint(sentences.toArray(new String[0]));
+        return getResponse(sentences);
     }
 
     /**

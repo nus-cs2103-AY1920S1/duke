@@ -18,25 +18,15 @@ public class Parser {
             return new PrintList();
         } else if (input.split(" ")[0].equals("done")) {
             try {
-                String[] words = input.split(" ");
-                ArrayList<Integer> nums = new ArrayList<>();
-                for (int i = 1; i < words.length; i++) {
-                    int num = Integer.parseInt(words[i]);
-                    nums.add(num);
-                }
-                return new Done(nums.toArray(new Integer[nums.size()]));
+                ArrayList<Integer> nums = parseNumbers(input);
+                return new Done(nums.toArray(new Integer[0]));
             } catch (NumberFormatException ex) {
                 throw new DukeException("Task number should be integer.");
             }
         } else if (input.split(" ")[0].equals("delete")) { // delete a specific task
             try {
-                String[] words = input.split(" ");
-                ArrayList<Integer> nums = new ArrayList<>();
-                for (int i = 1; i < words.length; i++) {
-                    int num = Integer.parseInt(words[i]);
-                    nums.add(num);
-                }
-                return new Delete(nums.toArray(new Integer[nums.size()]));
+                ArrayList<Integer> nums = parseNumbers(input);
+                return new Delete(nums.toArray(new Integer[0]));
             } catch (NumberFormatException ex) {
                 throw new DukeException("Task number should be integer.");
             }
@@ -72,5 +62,15 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
+    }
+
+    private static ArrayList<Integer> parseNumbers(String input) {
+        String[] words = input.split(" ");
+        ArrayList<Integer> nums = new ArrayList<>();
+        for (int i = 1; i < words.length; i++) {
+            int num = Integer.parseInt(words[i]);
+            nums.add(num);
+        }
+        return nums;
     }
 }

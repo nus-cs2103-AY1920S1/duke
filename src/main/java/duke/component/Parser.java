@@ -46,6 +46,8 @@ public class Parser {
      * @return array of string containing name as first element and time as second element
      */
     public static String[] breakDownIntoNameAndTime(String[] inputs) {
+
+        assert inputs.length > 0 : "The length of the input array of strings must be greater than 0";
         String[] result = {"", ""};
 
         int index = 1;
@@ -72,6 +74,7 @@ public class Parser {
      * @return array of sub-strings separated by separator
      */
     public static String[] breakDownString(String input, String separator) {
+        assert separator != null : "A separator which is going to be used cannot be a null object";
         return input.split(separator);
     }
 

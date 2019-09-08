@@ -1,43 +1,40 @@
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.text.Font;
-
-public class Duke extends Application {
+public class Duke {
 
 	private static UI ui;
+	private GuiUI gui;
 	private Storage storage;
 	private Tasklist tasklist;
-
-    public static void main(String[] args) throws IOException {
-		new Duke();
-    }
+	private GuiParser parse;
 
 	/**
 	 * Constructor for Duke
 	 * Creates new Storage instance and Parser
 	 */
 
-    public Duke() throws IOException {
-    	UI.start();
-		//ArrayList<Task> tasks = new ArrayList<Task>();
-		storage = new Storage("src/main/java/data/duke.txt");
+    public Duke() {
+		this.gui = new GuiUI();
+		this.storage = new Storage("src/main/java/data/duke.txt");
+		this.parse = new GuiParser(storage.getTasks(), gui, storage);
 
-		Parser parse = new Parser(storage.getTasks(), ui, storage);
-		parse.parserRead();
 	}
 
+	/**
+	 * You should have your own function to generate a response to user input.
+	 * Replace this stub with your completed method.
+	 */
+	public String getResponse(String input) {
+		String out = "";
+		try {
+			out = parse.guiParserRead(input);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
 
-	@Override
-	public void start(Stage stage) {
-    	Label helloWorld = new Label("i <3 u");
-    	helloWorld.setFont(new Font("Arial", 50));
-    	Scene scene = new Scene(helloWorld);
-
-    	stage.setScene(scene);
-    	stage.show();
+	public String startList() {
+		return storage.getTasks().printlist();
 	}
 }

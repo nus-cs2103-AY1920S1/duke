@@ -1,11 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.ui.UI;
-import seedu.duke.task.TaskList;
-import seedu.duke.storage.Storage;
-
+import seedu.duke.commands.Command;
+import seedu.duke.commons.Messages;
 import seedu.duke.exception.DukeException;
 import seedu.duke.parser.Parser;
+import seedu.duke.storage.Storage;
+import seedu.duke.task.TaskList;
+import seedu.duke.ui.UI;
 
 public class Duke {
     private Storage storage;
@@ -33,13 +34,24 @@ public class Duke {
     /** Executes the Duke program. */
     public void run() {
         ui.showWelcome();
-        String command = ui.readCommand();
-        new Parser().parse(command, ui, tasks, storage.path);
+        boolean isExit = false;
+        while(!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = new Parser().parse(fullCommand);
+               // if (c != null) {
+                    c.execute(tasks, ui, storage.path);
+                    isExit = c.isExit();
+              //  }
+            } catch (DukeException e) {
+                ui.printReply(Messages.MESSAGE_UNKNOWN_COMMAND);
+            }
+        }
         ui.showGoodByeMessage();
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\duke\\src\\data\\tasklist.txt").run();
+        new Duke("C:/duke/src/data/tasklist.txt").run();
     }
 
     /**

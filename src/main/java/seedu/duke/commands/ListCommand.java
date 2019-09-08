@@ -1,13 +1,20 @@
 package seedu.duke.commands;
 
+import seedu.duke.task.TaskList;
+import seedu.duke.ui.UI;
+
+/** Prints out all the tasks in the Task list.
+ * @param taskList The list that contains/may not contain tasks.
+ * @param ui User input that handles the printing.
+ */
 public class ListCommand extends Command {
 
     @Override
-    protected void execute() {
+    public void execute(TaskList tasks, UI ui, String fw) {
         String reply = "Here are the tasks in your list:\n\t ";
-        for (int i = 0; i < taskList.size(); i++) {
-            reply += (i + 1) + "." + taskList.get(i);
-            if (i != taskList.size() - 1) {
+        for (int i = 0; i < tasks.size(); i++) {
+            reply += (i + 1) + "." + tasks.get(i);
+            if (i != tasks.size() - 1) {
                 reply += "\n\t ";
             }
         }

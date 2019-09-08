@@ -75,6 +75,11 @@ public abstract class Ui {
         showTask(task);
     }
 
+    public void showTaskEdited(Task task) {
+        showMessage("Got it. I've edited this task:");
+        showTask(task);
+    }
+
     public void showNumTasks(int num) {
         showMessage("Now you have " + num + " task" + (num == 1 ? "" : "s") + " in the list.");
     }
@@ -84,15 +89,18 @@ public abstract class Ui {
      * @param tasks A list of tasks
      */
     public void showAllTasks(List<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
-            showMessage("There are no tasks in your list.");
+            sb.append("There are no tasks in your list.");
         } else {
-            showMessage("Here are the tasks in your list:");
+            sb.append("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                showMessage((i + 1) + "." + task);
+                sb.append("\n");
+                sb.append((i + 1) + "." + task);
             }
         }
+        showMessage(sb.toString());
     }
 
     /**
@@ -101,12 +109,15 @@ public abstract class Ui {
      * @param filter Filter string
      */
     public void showFilteredTasks(List<Task> tasks, String filter) {
-        showMessage("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.toString().contains(filter)) {
-                showMessage((i + 1) + "." + task);
+                sb.append("\n");
+                sb.append((i + 1) + "." + task);
             }
         }
+        showMessage(sb.toString());
     }
 }

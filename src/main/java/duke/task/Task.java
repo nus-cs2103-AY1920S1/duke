@@ -9,6 +9,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public void updateDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

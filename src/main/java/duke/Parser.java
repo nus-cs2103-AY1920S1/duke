@@ -5,6 +5,7 @@ import duke.command.AddEventCommand;
 import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.FinishCommand;
@@ -81,6 +82,12 @@ public class Parser {
         }
     }
 
+    private static void validateHasTwoElements(String[] arr, String message) throws DukeException {
+        if (arr == null || arr.length != 2) {
+            throw new DukeException(message);
+        }
+    }
+
     /**
      * Parses a duke.command into its keyword and its arguments both before and after the slash, given an input string.
      * Does not ensure that the resulting duke.command is legal.
@@ -101,6 +108,15 @@ public class Parser {
         case "delete":
             validateIsPositiveInteger(parsedCommand.args, "The argument for delete should be a positive whole number.");
             return new DeleteCommand(Integer.parseInt(parsedCommand.args) - 1);
+        case "edit":
+            String message = "The edit command should take both a position and an updated description.";
+            validateNotNull(parsedCommand.args, message);
+            String[] arr = parsedCommand.args.split("\\s+", 2);
+            validateHasTwoElements(arr, message);
+            String stringPosition = arr[0];
+            String newDescription = arr[1];
+            validateIsPositiveInteger(stringPosition, "The first argument for edit should be a positive whole number.");
+            return new EditCommand(Integer.parseInt(stringPosition) - 1, newDescription);
         case "find":
             validateNotNull(parsedCommand.args, "The search keyword should not be empty.");
             return new FindCommand(parsedCommand.args);

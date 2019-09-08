@@ -9,7 +9,6 @@ plugins {
 run {
     enableAssertions = true
     standardInput = System.in
-    enableAssertions = true
 }
 
 dependencies {

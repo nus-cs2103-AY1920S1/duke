@@ -1,7 +1,9 @@
 package duke.history;
 
 import duke.command.UndoableCommand;
+import duke.exception.DukeException;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -27,7 +29,11 @@ public class History {
      * Gets an executed command from the history stack.
      * @return an executed command.
      */
-    public UndoableCommand getExecutedCommand() {
-        return commands.pop();
+    public UndoableCommand getExecutedCommand() throws DukeException {
+        try {
+            return commands.pop();
+        } catch (EmptyStackException e) {
+            throw new DukeException("No more commands to be undone.");
+        }
     }
 }

@@ -2,6 +2,9 @@
 # -e: exit as soon as command returns non-zero exit code
 set -e
 
+echo "Changing to correct directory..."
+cd ./src/main/java/
+
 echo "Removing saved data..."
 if [ -f "../data/duke.txt" ]; then
   rm ../data/duke.txt

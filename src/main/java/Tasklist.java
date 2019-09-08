@@ -55,6 +55,19 @@ public class Tasklist {
         }
     }
 
+    public String printlistfind(ArrayList<Task> found) {
+        String out = "";
+        if (found.size() == 0) {
+            return out;
+        } else {
+            for (int i = 0; i < found.size(); i ++) {
+                int num = i + 1;
+                out = out + "\n" + num + ". " + found.get(i);
+            }
+        }
+        return out;
+    }
+
     public ArrayList<Task> find(String word) {
         ArrayList<Task> temp = new ArrayList<Task>();
         for (int i = 0; i < tasks.size(); i ++) {
@@ -79,5 +92,14 @@ public class Tasklist {
             }
         }
         return a;
+    }
+
+    public String printlist() {
+        String temp = "";
+        for (int i = 0; i < tasks.size(); i ++) {
+            int num = i + 1;
+            temp = temp + (num + ". " + tasks.get(i) + "\n");
+        }
+        return temp;
     }
 }

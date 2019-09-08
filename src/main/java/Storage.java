@@ -19,18 +19,21 @@ public class Storage {
      * @param fileloc takes in the fileloc to know where to store
      * @throws IOException  If file is wrong
      */
-    public Storage(String fileloc) throws IOException {
+    public Storage(String fileloc) {
         //ArrayList<Task> tasks = new ArrayList<Task>();
         Tasklist tasklist = new Tasklist();
         this.tasklist = tasklist;
         //this.tasks = tasks;
         this.fileloc = fileloc;
         this.tempFile = new File(fileloc);
-
-        if (hasFile()) {
-            readFile();
-        } else {
-            createFile();
+        try {
+            if (hasFile()) {
+                readFile();
+            } else {
+                createFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -100,7 +103,7 @@ public class Storage {
         Scanner s = new Scanner(tempFile);
         while (s.hasNext()) {
             String t = s.nextLine();
-            System.out.println(t);
+            //System.out.println(t);
             filetasks.add(t);
         }
         createTasks(filetasks);

@@ -9,6 +9,7 @@ import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class DoneCommandTest {
     private TaskList taskList1;
     private Storage storage;
     private PastOperationList pastOperationList;
+    private static final String DATETIME_PATTERN = "dd/MM/yyyy HHmm";
+
 
 
     @Test
@@ -28,9 +31,13 @@ public class DoneCommandTest {
 
     @Test
     public void testExecute() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
+        LocalDateTime dateTime = LocalDateTime.parse("08/09/2019 1130", formatter);
+
+
         List<Task> taskList = new ArrayList<>();
-        Task task1 = new Deadline("submit", LocalDateTime.now(), false);
-        Task task2 = new Deadline("submit another", LocalDateTime.now());
+        Task task1 = new Deadline("submit", dateTime, false);
+        Task task2 = new Deadline("submit another", dateTime);
         taskList.add(task1);
         taskList.add(task2);
         taskList1 = new TaskList(taskList);
@@ -39,9 +46,8 @@ public class DoneCommandTest {
 
         assertEquals(Messages.INVALID_SIZE_EXCEPTION, new DoneCommand(10)
                 .execute(taskList1, storage, pastOperationList));
-        task2.completeTask();
         assertEquals(String.join("\n", Messages.DONE_MESSAGE, Messages.COMMAND_INDENTATION
-                + Messages.COMPLETION_INDENTATION + task2.toString()),
-                new DoneCommand(2).execute(taskList1, storage, pastOperationList));
+                + Messages.COMPLETION_INDENTATION + "[D][O] submit (by: 08 September 2019, 11:30 AM)"),
+                new DoneCommand(1).execute(taskList1, storage, pastOperationList));
     }
 }

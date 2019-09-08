@@ -27,6 +27,9 @@ public class DoneCommand extends Command {
 
         try {
             Task completedTask = taskList.getTask(itemNum - 1);
+            if (completedTask.getStatus()) {
+                return Messages.DONE__ALREADY_COMPLETED_MESSAGE;
+            }
             completedTask.completeTask();
             pastOperationList.keepTrackOfLastOperation(completedTask, new UndoInfo("undone"));
 

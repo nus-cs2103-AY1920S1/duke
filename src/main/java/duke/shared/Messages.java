@@ -36,4 +36,6 @@ public class Messages {
 
     public static final String NO_COMMAND_TO_UNDO = COMMAND_INDENTATION + "No more commands to undo";
     public static final String UNDO_FAILED_MESSAGE = COMMAND_INDENTATION + "Undo fails to run";
+    public static final String DONE__ALREADY_COMPLETED_MESSAGE = COMMAND_INDENTATION
+            + "Task is already marked as complete";
 }

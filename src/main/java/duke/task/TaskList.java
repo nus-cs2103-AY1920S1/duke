@@ -93,7 +93,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException index less than 0 or bigger than the size of the tasklist.
      */
     public Task getTask(int index) throws IndexOutOfBoundsException {
-        assert index > 0;
+        assert index >= 0;
         return taskList.get(index);
     }
 

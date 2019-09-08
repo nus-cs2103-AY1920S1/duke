@@ -14,10 +14,8 @@ public class Duke {
      */
     public static void main(String[] args) {
         Printer.printString("Hello! I'm Duke\nWhat can I do for you?");
-        // greet
 
         Scanner scanner = new Scanner(System.in);
-
         State state = new State(SaveFile.loadTasks());
         try {
             while (!state.toExit) {

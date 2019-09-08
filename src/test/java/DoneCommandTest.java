@@ -1,3 +1,6 @@
+import duke.command.DoneCommand;
+import duke.model.Task;
+import duke.model.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

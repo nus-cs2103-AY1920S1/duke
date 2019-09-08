@@ -1,3 +1,8 @@
+import duke.command.FindTaskCommand;
+import duke.model.Deadline;
+import duke.model.Event;
+import duke.model.Task;
+import duke.model.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

@@ -1,3 +1,7 @@
+import duke.command.AddEventTaskCommand;
+import duke.command.EmptyTaskDescriptionException;
+import duke.model.Event;
+import duke.model.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

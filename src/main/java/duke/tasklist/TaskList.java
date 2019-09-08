@@ -57,33 +57,11 @@ public class TaskList {
     /**
      * Appends task to To Do List. (one based numbering)
      *
-     * @param td ToDo
+     * @param t task
      * @return message to print
      */
-    public String addToDo(ToDo td) {
-        tasks.add(td);
-        return tasks.get(tasks.size() - 1).toString();
-    }
-
-    /**
-     * Appends and returns deadline to To Do List. (one based numbering).
-     *
-     * @param dl deadline
-     * @return message to print
-     */
-    public String addDeadline(Deadline dl) {
-        tasks.add(dl);
-        return tasks.get(tasks.size() - 1).toString();
-    }
-
-    /**
-     * Appends and returns event to To Do List. (one based numbering)
-     *
-     * @param e Event
-     * @return message to print
-     */
-    public String addEvent(Event e) {
-        tasks.add(e);
+    public String addTask(Task t) {
+        tasks.add(t);
         return tasks.get(tasks.size() - 1).toString();
     }
 

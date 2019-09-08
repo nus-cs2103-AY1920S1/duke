@@ -17,7 +17,7 @@ public class TaskListTest {
     @Test
     public void add_todo_correctly() {
         ToDo td = new ToDo("mock task");
-        String result = taskList.addToDo(td);
+        String result = taskList.addTask(td);
         assertEquals(td.toString(), result);
     }
 }

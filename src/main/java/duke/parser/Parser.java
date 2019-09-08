@@ -10,11 +10,13 @@ import duke.commands.ToDoCommand;
 import duke.commands.DeadlineCommand;
 import duke.commands.EventCommand;
 import duke.commands.ListCommand;
+import duke.commands.NoteCommand;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+import duke.tasks.Note;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +29,9 @@ import java.util.Date;
 public class Parser {
     private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "☹ OOPS!!! The description of a todo cannot be empty.\n"
+            + "____________________________________________________________";
+    private static final String emptyNoteErrorMessage = "____________________________________________________________\n"
+            + "☹ OOPS!!! The description of a Note cannot be empty.\n"
             + "____________________________________________________________";
 
     /**
@@ -71,6 +76,13 @@ public class Parser {
             task = arr[1].split("/at")[0].trim();
             date = readFormat.parse(arr[1].split("/at")[1].trim());
             command = new EventCommand(new Event(task, date));
+            break;
+        case "note":
+            if (arr.length != 2) {
+                throw new IllegalArgumentException(emptyNoteErrorMessage);
+            }
+
+            command = new NoteCommand(new Note(arr[1]));
             break;
         case "done":
             i = Integer.parseInt(arr[1]);
@@ -121,6 +133,10 @@ public class Parser {
             dateString = fullTask.split(" ", 2)[1].split("\\(at:")[1].trim().replace(")", "");
             date = sdf.parse(dateString); // remove trailing bracket
             t = new Event(task, date);
+            break;
+        case 'N':
+            task = fullTask.split(" ", 2)[1];
+            t = new Note(task);
             break;
         default:
             t = new Task("");

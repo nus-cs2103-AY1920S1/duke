@@ -32,7 +32,7 @@ public class ToDoCommand extends Command {
      */
     public String execute(TaskList tasks, UI ui, Storage storage) {
         try {
-            String taskMessage = tasks.addToDo(td);
+            String taskMessage = tasks.addTask(td);
             storage.save(tasks.getTasks());
             return ui.getAddedMessage(taskMessage, tasks.getTasksSize());
         } catch (IOException e) {

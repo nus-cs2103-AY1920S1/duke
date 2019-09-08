@@ -1,7 +1,9 @@
 package weijie.duke.controllers;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,7 +14,9 @@ import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.exceptions.DukeException;
 import weijie.duke.responses.TaskResponse;
 import weijie.duke.utils.StringUtils;
-import weijie.duke.views.Ui;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainWindowController extends AnchorPane {
@@ -55,12 +59,18 @@ public class MainWindowController extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         userInput.clear();
-        dialogContainer.getChildren()
-                .add(new UserDialogController(input, userImage));
+
+        ObservableList<Node> dialogList = dialogContainer.getChildren();
+        dialogList.add(new UserDialogController(input, userImage));
 
         if (input.equals("bye")) {
-            Platform.exit();
-            System.exit(0);
+            dialogList.add(
+                    new DukeDialogController(StringUtils.indent("Bye. Hope to see you again soon!"), dukeImage));
+            doAfter(1000, () -> {
+                Platform.exit();
+                System.exit(0);
+            });
+            return;
         }
 
         String[] args = input.split(" ");
@@ -69,17 +79,26 @@ public class MainWindowController extends AnchorPane {
             ITaskCommand command = factory.tryMakeCommand(args[0]);
             TaskResponse response = command.execute(args);
 
-            if (response.isInvalidInput()) {
-                dialogContainer.getChildren()
-                        .add(new DukeDialogController(response.getErrorMessage(), dukeImage));
-            } else {
-                dialogContainer.getChildren()
-                        .add(new DukeDialogController(response.getFormattedResponse(), dukeImage));
-            }
+            doAfter(300, () -> {
+                if (response.isInvalidInput()) {
+                    dialogList.add(new DukeDialogController(response.getErrorMessage(), dukeImage));
+                } else {
+                    dialogList.add(new DukeDialogController(response.getFormattedResponse(), dukeImage));
+                }
+            });
 
         } catch (DukeException e) {
             e.printStackTrace();
         }
+    }
+
+    private void doAfter(long milliseconds, Runnable task) {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(task);
+            }
+        }, milliseconds);
     }
 }
 

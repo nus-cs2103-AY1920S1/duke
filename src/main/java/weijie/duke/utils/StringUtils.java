@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class StringUtils {
 
-    static String indent(String input) {
+    public static String indent(String input) {
         String indentation = "    ";
         return Arrays.stream(input.split("\n"))
                 .map(line -> indentation + line)

@@ -72,7 +72,7 @@ public class TaskList {
     public Task doTask(int index) {
         Task task = getTask(index);
         task.markAsDone();
-        assert task.isDone();
+        assert task.isDone() : "task marked for done is not done.";
         return task;
     }
 
@@ -108,7 +108,7 @@ public class TaskList {
      */
     public ArrayList<Task> getAllTasks() {
         ArrayList<Task> newList = new ArrayList<>(list);
-        assert newList.size() == list.size();
+        assert newList.size() == list.size() : "immutable copy has error.";
         return newList;
     }
 

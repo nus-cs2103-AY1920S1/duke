@@ -24,8 +24,15 @@ public class Deadline extends Task {
     }
 
     @Override
-    protected String displayAdditionalInfo() {
+    protected String getAdditionalInfoForDisplay() {
         return String.format("(by: %s)", additionalInfo);
     }
 
+    @Override
+    public String getStorageStringFormat() {
+        return "D" + " | "
+                + getStatus() + " | "
+                + getName() + " | "
+                + getAdditionalInfo();
+    }
 }

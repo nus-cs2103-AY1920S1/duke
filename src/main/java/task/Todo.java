@@ -20,7 +20,14 @@ public class Todo extends Task {
     }
 
     @Override
-    protected String displayAdditionalInfo() {
+    protected String getAdditionalInfoForDisplay() {
         return "";
+    }
+
+    @Override
+    public String getStorageStringFormat() {
+        return "T" + " | "
+                + getStatus() + " | "
+                + getName();
     }
 }

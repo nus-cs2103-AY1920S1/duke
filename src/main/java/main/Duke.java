@@ -35,33 +35,34 @@ public class Duke {
     public Duke() {
         taskList = TaskList.newInstance();
         storage = new Storage(ROOT + STORAGE_PATH);
-        ui = Ui.getInstance();
-        parser = new Parser();
+        ui = new Ui();
         commandCentre = new CommandCentre();
+        parser = new Parser();
+        parser.setCommandCentre(commandCentre);
         isExiting = false;
         initializeCommands();
         if (RESET_TASK_LIST) {
             taskList.clear();
-            storage.clearData();
+            storage.deleteData();
         }
     }
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Commands Duke to respond based on the given user input.
+     *
+     * @param input The user input in this particular communication.
      */
     public String getResponse(String input) {
-        parser.setScanner(new Scanner(input));
-        String action = parser.getNextAction();
-        ui.printDivider();
-        commandCentre.execute(action);
-        ui.printDivider();
+        parser.setUi(ui);
+        String action = parser.getNextAction(input + "\n");
+        if (action != null) {
+            commandCentre.execute(action);
+        }
         if (isExiting) {
             return EXIT_MESSAGE;
         }
-        String output = ui.getOutput();
-        ui.resetOutputBuilder();
+        String output = ui.getOutputAndClearBuilder();
         return output;
     }
 
@@ -72,8 +73,7 @@ public class Duke {
      */
     public String getWelcomeMessage() {
         ui.printWelcomeMessage();
-        String output = ui.getOutput();
-        ui.resetOutputBuilder();
+        String output = ui.getOutputAndClearBuilder();
         return output;
     }
 
@@ -92,7 +92,7 @@ public class Duke {
 
         commandCentre.register("help", new Command() {
             @Override
-            protected void execute() {
+            public void execute() {
                 ui.printHelpMessage();
             }
         });
@@ -111,7 +111,7 @@ public class Duke {
         commandCentre.register("done", new Command() {
             @Override
             public void execute() {
-                Integer idx = parser.getTaskIdx();
+                Integer idx = parser.parseTaskIdx();
                 if (idx != null) {
                     taskList.markAsDone(idx);
                     storage.updateData();
@@ -123,7 +123,7 @@ public class Duke {
         commandCentre.register("delete", new Command() {
             @Override
             public void execute() {
-                Integer idx = parser.getTaskIdx();
+                Integer idx = parser.parseTaskIdx();
                 if (idx != null) {
                     Task task = taskList.deleteTask(idx);
                     storage.updateData();

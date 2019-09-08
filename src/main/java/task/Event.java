@@ -29,7 +29,15 @@ public class Event extends Task {
     }
 
     @Override
-    protected String displayAdditionalInfo() {
+    protected String getAdditionalInfoForDisplay() {
         return String.format("(at: %s)", additionalInfo);
+    }
+
+    @Override
+    public String getStorageStringFormat() {
+        return "E" + " | "
+                + getStatus() + " | "
+                + getName() + " | "
+                + getAdditionalInfo();
     }
 }

@@ -1,9 +1,6 @@
 package utils;
 
 import task.Task;
-import task.Deadline;
-import task.Event;
-import task.Todo;
 import task.TaskList;
 
 import java.io.File;
@@ -18,8 +15,9 @@ import java.util.Scanner;
  */
 public class Storage {
     private static final String SEPARATOR = " | ";
-
     private static File file;
+
+    private TaskList taskList;
 
     /**
      * Loads data into the TaskList if the storage file already exists. Else
@@ -30,6 +28,7 @@ public class Storage {
      */
     public Storage(String absolutePathName) {
         file = new File(absolutePathName);
+        taskList = TaskList.newInstance();
         if (file.exists()) {
             loadData();
         } else {
@@ -44,7 +43,7 @@ public class Storage {
     /**
      * Deletes the storage file from its directory.
      */
-    public void clearData() {
+    public void deleteData() {
         file.delete();
     }
 
@@ -52,7 +51,7 @@ public class Storage {
      * Parse the storage file and stores all the tasks listed within it
      * into TaskList.
      */
-    void loadData() {
+    private void loadData() {
         Scanner sc;
         assert file.exists() : "Storage file does not exist.";
         try {
@@ -62,30 +61,11 @@ public class Storage {
             return;
         }
 
-        TaskList taskList = TaskList.newInstance();
         while (sc.hasNext()) {
+            // Separates a line "E | 0 | EventName | 20/08/2019 2100" to
+            // {"E", "0", "EventName", "20/08/2019 2100"}
             String[] taskInfo = sc.nextLine().split("\\s*\\|\\s*");
-            switch (taskInfo[0]) {
-            case "T":
-                taskList.addNewTodoTask(taskInfo[2],
-                        taskInfo[1].equals("1"));
-                break;
-
-            case "D":
-                taskList.addNewDeadlineTask(taskInfo[2],
-                        taskInfo[3],
-                        taskInfo[1].equals("1"));
-                break;
-
-            case "E":
-                taskList.addNewEventTask(taskInfo[2],
-                        taskInfo[3],
-                        taskInfo[1].equals("1"));
-                break;
-
-            default:
-                break;
-            }
+            addNewTaskToTaskList(taskInfo);
         }
     }
 
@@ -100,39 +80,38 @@ public class Storage {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < taskList.size(); i++) {
                 Task task = taskList.get(i);
-                if (task instanceof Todo) {
-                    sb.append("T");
-                    sb.append(SEPARATOR);
-                    sb.append(task.getStatus());
-                    sb.append(SEPARATOR);
-                    sb.append(task.getName());
-                } else if (task instanceof Deadline) {
-                    sb.append("D");
-                    sb.append(SEPARATOR);
-                    sb.append(task.getStatus());
-                    sb.append(SEPARATOR);
-                    sb.append(task.getName());
-                    sb.append(SEPARATOR);
-                    sb.append(task.getAdditionalInfo());
-                } else if (task instanceof Event) {
-                    sb.append("E");
-                    sb.append(SEPARATOR);
-                    sb.append(task.getStatus());
-                    sb.append(SEPARATOR);
-                    sb.append(task.getName());
-                    sb.append(SEPARATOR);
-                    sb.append(task.getAdditionalInfo());
-                }
-
-                if (i < taskList.size()) {
-                    sb.append(System.lineSeparator());
-                }
+                sb.append(task.getStorageStringFormat());
+                sb.append("\n");
             }
             fw.write(sb.toString());
             fw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addNewTaskToTaskList(String[] taskInfo) {
+        switch (taskInfo[0]) {
+        case "T":
+            taskList.addNewTodoTask(taskInfo[2],
+                    taskInfo[1].equals(Task.DONE));
+            break;
+
+        case "D":
+            taskList.addNewDeadlineTask(taskInfo[2],
+                    taskInfo[3],
+                    taskInfo[1].equals(Task.DONE));
+            break;
+
+        case "E":
+            taskList.addNewEventTask(taskInfo[2],
+                    taskInfo[3],
+                    taskInfo[1].equals(Task.DONE));
+            break;
+
+        default:
+            break;
         }
     }
 

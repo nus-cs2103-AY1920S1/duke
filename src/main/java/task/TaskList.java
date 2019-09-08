@@ -56,11 +56,7 @@ public class TaskList {
      */
     public Task addNewTodoTask(String taskName, boolean isDone) {
         Task newTask = new Todo(taskName);
-        if (isDone) {
-            newTask.setDone();
-        } else {
-            newTask.setNotDone();
-        }
+        setDoneStatus(newTask, isDone);
         tasks.add(newTask);
         return newTask;
     }
@@ -77,14 +73,11 @@ public class TaskList {
     public Task addNewEventTask(String taskName, String additionalInfo, boolean isDone) {
         assert !additionalInfo.isEmpty() : "Additional info of Event task cannot be empty.";
         Task newTask = new Event(taskName, additionalInfo);
-        if (isDone) {
-            newTask.setDone();
-        } else {
-            newTask.setNotDone();
-        }
+        setDoneStatus(newTask, isDone);
         tasks.add(newTask);
         return newTask;
     }
+
 
     /**
      * Adds a new Deadline Task to TaskList with the given task name, additional
@@ -99,11 +92,7 @@ public class TaskList {
     public Task addNewDeadlineTask(String taskName, String additionalInfo, boolean isDone) {
         assert !additionalInfo.isEmpty() : "Additional info of Deadline task cannot be empty.";
         Task newTask = new Deadline(taskName, additionalInfo);
-        if (isDone) {
-            newTask.setDone();
-        } else {
-            newTask.setNotDone();
-        }
+        setDoneStatus(newTask, isDone);
         tasks.add(newTask);
         return newTask;
     }
@@ -146,14 +135,28 @@ public class TaskList {
     public List<Task> generateListByKeyword(String keyword) {
         assert !keyword.isEmpty() : "Find keyword cannot be empty";
         List<Task> findResult = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getName().contains(keyword)
-                    || tasks.get(i).getAdditionalInfo().contains(keyword)) {
-                findResult.add(tasks.get(i));
+        for (Task task : tasks) {
+            if (task.isAssociated(keyword)) {
+                findResult.add(task);
             }
         }
         return findResult;
     }
+
+    /**
+     * Marks the status of a given task as done or not depending on the isDone argument.
+     *
+     * @param newTask The task whose status needs to be fixed.
+     * @param isDone Whether the task is already done or not.
+     */
+    private void setDoneStatus(Task newTask, boolean isDone) {
+        if (isDone) {
+            newTask.setDone();
+        } else {
+            newTask.setNotDone();
+        }
+    }
+
 
     @Override
     public boolean equals(Object obj) {

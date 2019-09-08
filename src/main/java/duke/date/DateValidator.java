@@ -12,6 +12,11 @@ import java.util.regex.Pattern;
  */
 public class DateValidator {
 
+    private static final String INVALID_DATE_MSG = "Invalid date format! "
+            + "Please ensure your date sticks to this format:\n"
+            + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
+            + "    Events : \"DD/MM/YYYY HHMM-HHMM\"";
+
     /**
      * Validates the date-time string entered by the user.
      * @param date Date-time input by the user.
@@ -20,75 +25,122 @@ public class DateValidator {
      * @throws InvalidDateDukeException If the date format is invalid.
      */
     public boolean validateDate(String date, boolean hasEndTime) throws InvalidDateDukeException {
+        ArrayList<String> dateParams = getDateParameters(date);
+        if (isInvalidFormat(dateParams, hasEndTime)) {
+            return false;
+        }
+        try {
+            Month month = getMonth(dateParams);
+            return hasValidSemantics(dateParams, hasEndTime, month);
+        } catch (DateTimeException e) {
+            throw new InvalidDateDukeException(INVALID_DATE_MSG);
+        }
+    }
+
+    private Month getMonth(ArrayList<String> dateParams) throws DateTimeException {
+        return Month.of(Integer.parseInt(dateParams.get(1)));
+    }
+
+    private boolean isInvalidFormat(ArrayList<String> dateParams, boolean hasEndTime) {
+        return isInvalidDeadlineFormat(dateParams, hasEndTime)
+                || isInvalidEventFormat(dateParams, hasEndTime);
+    }
+
+    private boolean isInvalidEventFormat(ArrayList<String> dateParams, boolean hasEndTime) {
+        return hasEndTime && dateParams.size() != 5;
+    }
+
+    private boolean isInvalidDeadlineFormat(ArrayList<String> dateParams, boolean hasEndTime) {
+        return !hasEndTime && dateParams.size() != 4;
+    }
+
+    private ArrayList<String> getDateParameters(String date) {
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(date);
         ArrayList<String> dateParams = new ArrayList<>();
         while (m.find()) {
             dateParams.add(m.group());
         }
-        if (hasEndTime) {
-            if (dateParams.size() != 5) {
-                return false;
-            }
-        } else {
-            if (dateParams.size() != 4) {
-                return false;
-            }
-        }
-        try {
-            Month month = Month.of(Integer.parseInt(dateParams.get(1)));
-            return checkValidity(dateParams, hasEndTime, month);
-        } catch (DateTimeException e) {
-            throw new InvalidDateDukeException("Invalid date format! Please ensure your date sticks to this format:\n"
-                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
-                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"");
-        }
+        return dateParams;
     }
 
-    private boolean checkValidity(ArrayList<String> dateParams, boolean hasEndTime, Month month)
+    private boolean hasValidSemantics(ArrayList<String> dateParams, boolean hasEndTime, Month month)
             throws InvalidDateDukeException {
         try {
-            int day = Integer.parseInt(dateParams.get(0));
-            int year = Integer.parseInt(dateParams.get(2));
-            String start = dateParams.get(3);
-            int startHours = Integer.parseInt(start.substring(0, 2));
-            int startMinutes = Integer.parseInt(start.substring(2));
+            ArrayList<Integer> integerDateParams = getIntegerDateParams(dateParams);
             if (hasEndTime) {
-                String end = dateParams.get(4);
-                int endHours = Integer.parseInt(end.substring(0, 2));
-                int endMinutes = Integer.parseInt(end.substring(2));
-                return checkStartEnd(day, month, year, startHours, startMinutes, endHours, endMinutes);
+                ArrayList<Integer> integerEndTimeParams = getEndTimeParams(dateParams);
+                return hasValidEventDateSemantics(integerDateParams, month, integerEndTimeParams);
             } else {
-                return checkStart(day, month, year, startHours, startMinutes);
+                return hasValidDeadlineDateSemantics(integerDateParams, month);
             }
         } catch (NumberFormatException e) {
-            throw new InvalidDateDukeException("Invalid date format! Please ensure your date sticks to this format:\n"
-                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
-                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"");
+            throw new InvalidDateDukeException(INVALID_DATE_MSG);
         }
     }
 
-    private boolean checkStart(int day, Month month, int year, int startHours, int startMinutes) {
+    private ArrayList<Integer> getEndTimeParams(ArrayList<String> dateParams) {
+        String end = dateParams.get(4);
+        assert end.length() == 4 : "End time invalid for event!";
+        int endHours = Integer.parseInt(end.substring(0, 2));
+        int endMinutes = Integer.parseInt(end.substring(2));
+        ArrayList<Integer> endParams = new ArrayList<>();
+        endParams.add(endHours);
+        endParams.add(endMinutes);
+        return endParams;
+    }
+
+    private ArrayList<Integer> getIntegerDateParams(ArrayList<String> dateParams) throws InvalidDateDukeException {
+        int day = Integer.parseInt(dateParams.get(0));
+        int year = Integer.parseInt(dateParams.get(2));
+        String start = dateParams.get(3);
+        int startHours = Integer.parseInt(start.substring(0, 2));
+        int startMinutes = Integer.parseInt(start.substring(2));
+        return makeArrayList(day, year, startHours, startMinutes);
+    }
+
+    private ArrayList<Integer> makeArrayList(int ... args) throws InvalidDateDukeException {
+        ArrayList<Integer> dateParams = new ArrayList<>();
+        int argCount = 0;
+        for (int arg : args) {
+            argCount++;
+            dateParams.add(arg);
+        }
+        boolean invalidArgCount = argCount != 4;
+        if (invalidArgCount) {
+            throw new InvalidDateDukeException(INVALID_DATE_MSG);
+        }
+        return dateParams;
+    }
+
+    private boolean hasValidDeadlineDateSemantics(ArrayList<Integer> intParams, Month month) {
         try {
-            LocalDateTime dateTime = LocalDateTime.of(year, month, day, startHours, startMinutes);
+            LocalDateTime dateTime = LocalDateTime.of(intParams.get(1),
+                    month, intParams.get(0), intParams.get(2), intParams.get(3));
             return true;
         } catch (DateTimeException e) {
             return false;
         }
     }
 
-    private boolean checkStartEnd(int day, Month month, int year, int startHours, int startMinutes,
-                                  int endHours, int endMinutes) {
+    private boolean hasValidEventDateSemantics(ArrayList<Integer> intParams, Month month, ArrayList<Integer> endParams) {
         try {
-            LocalDateTime dateTimeStart = LocalDateTime.of(year, month, day, startHours, startMinutes);
-            LocalDateTime dateTimeEnd = LocalDateTime.of(year, month, day, endHours, endMinutes);
-            if (dateTimeEnd.isAfter(dateTimeStart)) {
-                return true;
-            } else {
+            int year = intParams.get(1);
+            int day = intParams.get(0);
+            LocalDateTime dateTimeStart = LocalDateTime.of(year, month, day,
+                    intParams.get(2), intParams.get(3));
+            LocalDateTime dateTimeEnd = LocalDateTime.of(year, month, day,
+                    endParams.get(0), endParams.get(1));
+            if (areInvalidStartEndTimes(dateTimeStart, dateTimeEnd)) {
                 return false;
             }
+            return true;
         } catch (DateTimeException e) {
             return false;
         }
+    }
+
+    private boolean areInvalidStartEndTimes(LocalDateTime start, LocalDateTime end) {
+        return start.isAfter(end) || start.isEqual(end);
     }
 }

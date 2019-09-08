@@ -13,6 +13,10 @@ public class Ui {
             + "| |_| | | | | |/ / _ \\\n"
             + "|  _ _/ |_| |   <  __/\n"
             + "|_|   \\__,_|_|\\_\\___|\n";
+    private static final String LOADING_ERROR_MSG = "WARNING! UNABLE TO LOAD "
+            + "AND/OR DESERIALIZE TASKS FROM DATA DIRECTORY. "
+            + "PLEASE CHECK THE FILEPATH.\n"
+            + "YOU MAY CONTINUE TO WORK WITHOUT ANY OF YOUR PREVIOUS TASKS.";
     private Scanner sc;
 
     /**
@@ -46,9 +50,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        displayOutput("WARNING! UNABLE TO LOAD AND/OR DESERIALIZE TASKS FROM DATA DIRECTORY. "
-                + "PLEASE CHECK THE FILEPATH.\n"
-                + "YOU MAY CONTINUE TO WORK WITHOUT ANY OF YOUR PREVIOUS TASKS.");
+        displayOutput(LOADING_ERROR_MSG);
     }
 
     public String getResponse(String input) {

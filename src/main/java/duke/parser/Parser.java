@@ -15,16 +15,24 @@ public class Parser {
      * @throws DukeException If the command is invalid.
      */
     public Command parseInput(String input) throws DukeException {
-        String cleanedInput = input.strip().toLowerCase();
+        String cleanedInput = cleanInput(input);
         if (isNullaryCommand(cleanedInput)) {
             return makeNullaryCommand(cleanedInput);
         } else if (isUnaryCommand(cleanedInput)) {
             return makeUnaryCommand(cleanedInput);
-        } else if (cleanedInput.startsWith("done")) {
+        } else if (isDoneCommand(cleanedInput)) {
             return new DoneCommand(cleanedInput);
         } else {
             throw new InvalidCommandDukeException("Unrecognized Command!");
         }
+    }
+
+    private boolean isDoneCommand(String input) {
+        return input.startsWith("done");
+    }
+
+    private String cleanInput(String input) {
+        return input.strip().toLowerCase();
     }
 
     private boolean isNullaryCommand(String cleanedInput) {
@@ -40,7 +48,7 @@ public class Parser {
     }
 
     private boolean isUnaryCommand(String cleanedInput) {
-        return cleanedInput.startsWith("delete") || checkValidAdd(cleanedInput) || cleanedInput.startsWith("find");
+        return cleanedInput.startsWith("delete") || isValidAddCommand(cleanedInput) || cleanedInput.startsWith("find");
     }
 
     private Command makeUnaryCommand(String cleanedInput) {
@@ -53,7 +61,7 @@ public class Parser {
         }
     }
 
-    private boolean checkValidAdd(String cleanedInput) {
+    private boolean isValidAddCommand(String cleanedInput) {
         return cleanedInput.startsWith("todo ") || cleanedInput.startsWith("deadline ")
                 || cleanedInput.startsWith("event ");
     }

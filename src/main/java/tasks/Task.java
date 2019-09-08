@@ -6,6 +6,7 @@ public class Task {
     protected String symbol;
 
     public Task(String description) {
+        assert description != null;
         this.description = description;
         this.isDone = false;
     }
@@ -49,6 +50,7 @@ public class Task {
             Event t = (Event) this;
             return t.at;
         } else {
+            assert symbol.equals("D");
             Deadline t = (Deadline) this;
             return t.by;
         }
@@ -56,10 +58,9 @@ public class Task {
 
     /**
      * This method is used to mark a task as done.
-     *
-     * @return Nothing
      */
     public void markAsDone() {
+        assert isDone == false;
         isDone = true;
     }
 

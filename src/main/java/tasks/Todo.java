@@ -9,6 +9,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
+        assert super.toString() != null;
         return "[T]" + super.toString();
     }
 }

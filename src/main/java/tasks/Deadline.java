@@ -1,22 +1,24 @@
 package tasks;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected String by;
-    LocalDateTime date1;
+    String by;
+    LocalDate date1;
 
     /**
-     * This is a constructor for tasks.Deadline.
+     * This is a constructor for Deadline.
      *
      * @param description description of task
      * @param by          due date of deadline
      */
     public Deadline(String description, String by) {
         super(description);
+        assert by != null;
         this.by = by;
         super.symbol = "D";
     }
@@ -27,14 +29,14 @@ public class Deadline extends Task {
      * @return date
      */
 
-    public LocalDateTime getDate() throws ParseException {
+    public LocalDate getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        date1 = date1.parse(by, formatter);
+        date1 = LocalDate.parse(by, formatter);
         return date1;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + getDate() + ")";
     }
 }

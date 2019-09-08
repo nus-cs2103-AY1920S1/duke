@@ -16,6 +16,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
         String[] input = fullCommand.split(" ", 2);
+        assert input.length < 3;
         try {
             if (input[0].equals("bye")) {
                 return new ExitCommand();
@@ -30,31 +31,38 @@ public class Parser {
             } else if (input[0].equals("find")) {
                 return new FindCommand(input[1].trim());
             } else if (input[0].length() < 4) {
-                return new ErrorCommand("Me no understand");
+                throw new DukeException("Input length too short");
+                //return new ErrorCommand("Me no understand");
             } else {
+                assert input[0].length() >= 4;
                 Task t;
                 switch (input[0]) {
                     case "todo":
                         t = new Todo(input[1].trim());
                         break;
                     case "deadline": {
-                        String[] str = input[1].trim().split("/");
-                        t = new Deadline(str[0], str[1].substring(3));
+                        String[] str = input[1].trim().split("/", 2);
+                        t = new Deadline(str[0], str[1].substring(3).trim());
                         break;
                     }
                     case "event": {
                         String[] str = input[1].trim().split("/", 2);
-                        t = new Event(str[0], str[1].substring(3));
+                        t = new Event(str[0], str[1].substring(3).trim());
                         break;
                     }
                     default:
-                        return new ErrorCommand("Me no understand");
+                        throw new DukeException("Unable to add unknown task: " + input[0]);
 
                 }
+                assert !t.isDone();
+                assert t.getDescription() != null;
                 return new AddCommand(t);
             }
-        } catch(IndexOutOfBoundsException e) {
-            return new ErrorCommand("Invalid task number :(");
+        } catch (DukeException e) {
+            return new ErrorCommand(e.getMessage());
+        } catch (Exception e) {
+            return new ErrorCommand("Me no understand!");
         }
+
     }
 }

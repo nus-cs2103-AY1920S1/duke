@@ -19,8 +19,10 @@ public class DeleteCommand extends Command {
      * @return duke response after deletion
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert Math.abs(taskNumToDelete) >= 0;
         try {
             Task t = tasks.deleteTask(taskNumToDelete);
+            assert tasks.getList()!= null;
             storage.updateList(tasks.getList());
             return ("Noted. I've removed this task: \n" + t + "\nNow you have "
                     + tasks.getList().size() + " tasks in the list.");

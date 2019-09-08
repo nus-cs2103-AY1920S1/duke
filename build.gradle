@@ -13,6 +13,10 @@ checkstyle {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
+run {
+    enableAssertions = true
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1.3"
@@ -33,7 +37,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "duke.Launcher"
 }
 
 javafx {

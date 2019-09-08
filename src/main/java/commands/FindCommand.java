@@ -20,16 +20,21 @@ public class FindCommand extends Command {
      * @return duke response after finding
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert foundAny = false;
+        assert keyword != null;
         String output = ui.print("Here are the matching tasks in your list:");
+        assert tasks.getList()!= null;
         for (Task t : tasks.getList()) {
             if (t.toString().contains(keyword)) {
                 output += ("\n" + ui.print(t.toString()));
                 foundAny = true;
             }
+            assert !t.toString().contains(keyword);
         }
         if (!foundAny) {
             return "Sorry, keyword not found!";
         }
+        assert foundAny; //foundAny must be true
 
         return output;
     }

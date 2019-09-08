@@ -5,6 +5,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.shared.Messages;
 import duke.storage.Storage;
+import duke.task.PastOperationList;
 import duke.task.TaskList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class DukeWindow extends AnchorPane {
     private Stage stage;
     private Storage storage;
     private TaskList tasks;
+    private PastOperationList pastOperationList;
 
 
     @FXML
@@ -55,11 +57,13 @@ public class DukeWindow extends AnchorPane {
      * @param stage primary stage.
      * @param storage storage object for this Ui.
      * @param tasks a list of tasks for this Ui.
+     * @param pastOperationList a list of past performed task for this Ui.
      */
-    public DukeWindow(Stage stage, Storage storage, TaskList tasks) {
+    public DukeWindow(Stage stage, Storage storage, TaskList tasks, PastOperationList pastOperationList) {
         this.stage = stage;
         this.storage = storage;
         this.tasks = tasks;
+        this.pastOperationList = pastOperationList;
     }
 
     @FXML
@@ -93,7 +97,7 @@ public class DukeWindow extends AnchorPane {
         boolean isExit = false;
         try {
             Command c = Parser.parse(fullCommand);
-            String outputString = c.execute(tasks, storage);
+            String outputString = c.execute(tasks, storage, pastOperationList);
             if (c.isExit()) {
                 System.exit(0);
             }

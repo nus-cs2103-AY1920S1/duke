@@ -45,10 +45,23 @@ public class TaskList {
      * Adds task to tasklist.
      *
      * @param task task to be added to tasklist.
+     * @return true if task has been added successfully, else false.
      */
-    public void addToTaskList(Task task) {
+    public boolean addToTaskList(Task task) {
         assert task != null;
-        taskList.add(task);
+        return taskList.add(task);
+    }
+
+    /**
+     * Adds task to tasklist based on index.
+     *
+     * @param task task to be added to tasklist.
+     * @param index position to place the task into.
+     * @throws IndexOutOfBoundsException when it is trying to add to an invalid index.
+     */
+    public void addToTaskList(Task task, int index)  throws IndexOutOfBoundsException {
+        assert task != null;
+        taskList.add(index, task);
     }
 
     /**
@@ -67,7 +80,7 @@ public class TaskList {
      * @return removed task.
      * @throws IndexOutOfBoundsException index less than 0 or bigger than the size of taskList.
      */
-    public Task deleteFromTaskList(int index) throws IndexOutOfBoundsException {
+    public Task deleteFromTaskListByIndex(int index) throws IndexOutOfBoundsException {
         assert index > 0;
         return taskList.remove(index);
     }
@@ -110,5 +123,16 @@ public class TaskList {
             }
         }
         return matchedTaskList;
+    }
+
+    /**
+     * Deletes task using Task object.
+     *
+     * @param task is the task to be deleted from the taskList.
+     * @return true if successfully deleted, else false.
+     */
+    public boolean deleteFromTaskListByTask(Task task) {
+        assert task != null;
+        return taskList.remove(task);
     }
 }

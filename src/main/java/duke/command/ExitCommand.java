@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.shared.Messages;
 import duke.storage.Storage;
+import duke.task.PastOperationList;
 import duke.task.TaskList;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, PastOperationList pastOperationList) {
         assert taskList != null : "tasklist cannot be null";
         assert storage != null : "storage cannot be null";
 

@@ -3,6 +3,7 @@ package duke.command;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DoneCommandTest {
     private TaskList taskList1;
     private Storage storage;
+    private PastOperationList pastOperationList;
 
 
     @Test
@@ -33,11 +35,13 @@ public class DoneCommandTest {
         taskList.add(task2);
         taskList1 = new TaskList(taskList);
         storage = new Storage("data/dukeTest.txt");
+        pastOperationList = new PastOperationList();
 
-        assertEquals(Messages.INVALID_SIZE_EXCEPTION, new DoneCommand(10).execute(taskList1, storage));
+        assertEquals(Messages.INVALID_SIZE_EXCEPTION, new DoneCommand(10)
+                .execute(taskList1, storage, pastOperationList));
         task2.completeTask();
         assertEquals(String.join("\n", Messages.DONE_MESSAGE, Messages.COMMAND_INDENTATION
                 + Messages.COMPLETION_INDENTATION + task2.toString()),
-                new DoneCommand(2).execute(taskList1, storage));
+                new DoneCommand(2).execute(taskList1, storage, pastOperationList));
     }
 }

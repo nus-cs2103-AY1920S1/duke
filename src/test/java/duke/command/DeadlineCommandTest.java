@@ -3,6 +3,7 @@ package duke.command;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
@@ -28,10 +29,11 @@ public class DeadlineCommandTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         TaskList taskList = new TaskList();
         Storage storage = new Storage("data/dukeTest.txt");
+        PastOperationList pastOperationList = new PastOperationList();
 
         assertEquals(Messages.DATETIME_PARSE_EXCEPTION, new DeadlineCommand("deadline test /by 20/12/2019"
                 .split("\\s+"))
-                .execute(new TaskList(), storage));
+                .execute(new TaskList(), storage, pastOperationList));
 
 
 
@@ -41,7 +43,7 @@ public class DeadlineCommandTest {
                 Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
                 String.format(Messages.LIST_SIZE_FORMAT, 1)),
                 new DeadlineCommand("deadline test /by 20/12/2019 1800".split("\\s+"))
-                .execute(new TaskList(), storage));
+                .execute(new TaskList(), storage, pastOperationList));
 
 
 

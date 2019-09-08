@@ -5,8 +5,10 @@ import duke.shared.GetArgumentsUtil;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.UndoInfo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +32,7 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, PastOperationList pastOperationList) {
         assert taskList != null : "tasklist cannot be null";
         assert storage != null : "storage cannot be null";
 
@@ -41,6 +43,8 @@ public class DeadlineCommand extends AddCommand {
             LocalDateTime dateTime = LocalDateTime.parse(args[1], formatter);
             Task deadlineTask = new Deadline(args[0], dateTime);
             taskList.addToTaskList(deadlineTask);
+            pastOperationList.keepTrackOfLastOperation(deadlineTask, new UndoInfo("delete"));
+
             String message = String.join("\n", Messages.ADDED_TASK_MESSAGE,
                     Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));

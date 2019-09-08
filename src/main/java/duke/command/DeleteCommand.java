@@ -2,8 +2,10 @@ package duke.command;
 
 import duke.shared.Messages;
 import duke.storage.Storage;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.UndoInfo;
 
 public class DeleteCommand extends Command {
 
@@ -20,12 +22,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage, PastOperationList pastOperationList) {
         assert taskList != null : "tasklist cannot be null";
         assert storage != null : "storage cannot be null";
 
         try {
-            Task removedTask = taskList.deleteFromTaskList(itemNum - 1);
+            Task removedTask = taskList.deleteFromTaskListByIndex(itemNum - 1);
+            pastOperationList.keepTrackOfLastOperation(removedTask, new UndoInfo("add", itemNum - 1));
+
             return String.join("\n", Messages.DELETE_TASK_MESSAGE,
                     Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + removedTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
@@ -33,4 +37,6 @@ public class DeleteCommand extends Command {
             return Messages.INVALID_SIZE_EXCEPTION;
         }
     }
+
+
 }

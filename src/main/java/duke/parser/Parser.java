@@ -1,16 +1,18 @@
 package duke.parser;
 
-import duke.command.DeleteCommand;
-import duke.command.DeadlineCommand;
 import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
-import duke.command.FindCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.shared.Messages;
+
 import java.util.Arrays;
 
 /**
@@ -100,6 +102,12 @@ public class Parser {
                 return new FindCommand(Arrays.copyOfRange(commands, 1, commands.length));
             } else if (commands.length == 1) {
                 throw new DukeException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "find"));
+            } else {
+                throw new DukeException(Messages.UNKNOWN_COMMAND_EXCEPTION);
+            }
+        } else if (commands[0].equals("undo")) {
+            if (commands.length == 1) {
+                return new UndoCommand();
             } else {
                 throw new DukeException(Messages.UNKNOWN_COMMAND_EXCEPTION);
             }

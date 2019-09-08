@@ -3,6 +3,7 @@ package duke.command;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ExitCommandTest {
     private TaskList taskList1;
     private Storage storage;
-
+    private PastOperationList pastOperationList;
 
     @Test
     public void testIsExit() {
@@ -32,7 +33,8 @@ public class ExitCommandTest {
         taskList.add(task2);
         taskList1 = new TaskList(taskList);
         storage = new Storage("data/dukeTest.txt");
+        pastOperationList = new PastOperationList();
 
-        assertEquals(Messages.BYE_MESSAGE, new ExitCommand().execute(taskList1, storage));
+        assertEquals(Messages.BYE_MESSAGE, new ExitCommand().execute(taskList1, storage, pastOperationList));
     }
 }

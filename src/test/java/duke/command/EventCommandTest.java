@@ -4,6 +4,7 @@ import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EventCommandTest {
     private TaskList taskList1;
     private Storage storage;
+    private PastOperationList pastOperationList;
 
 
     @Test
@@ -35,10 +37,11 @@ public class EventCommandTest {
         taskList.add(task2);
         taskList1 = new TaskList(taskList);
         storage = new Storage("data/dukeTest.txt");
+        pastOperationList = new PastOperationList();
 
         assertEquals(String.join("\n", Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
                 + Messages.COMPLETION_INDENTATION + new Event("a", "SG", false),
                 String.format(Messages.LIST_SIZE_FORMAT, 3)),
-                new EventCommand("event a /at SG".split("\\s+")).execute(taskList1, storage));
+                new EventCommand("event a /at SG".split("\\s+")).execute(taskList1, storage, pastOperationList));
     }
 }

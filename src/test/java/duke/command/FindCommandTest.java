@@ -3,6 +3,7 @@ package duke.command;
 import duke.shared.Messages;
 import duke.storage.Storage;
 import duke.task.Deadline;
+import duke.task.PastOperationList;
 import duke.task.Task;
 import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FindCommandTest {
     private TaskList taskList1;
     private Storage storage;
+    private PastOperationList pastOperationList;
 
 
     @Test
@@ -35,10 +37,11 @@ public class FindCommandTest {
         taskList1 = new TaskList(taskList);
         storage = new Storage("data/dukeTest.txt");
         String[] arr1 = "find another".split("\\s+");
+        pastOperationList = new PastOperationList();
 
 
         assertEquals(String.join("\n", Messages.FIND_TASK_MESSAGE, Messages.COMMAND_INDENTATION
                 + "1." + task2), new FindCommand(Arrays.copyOfRange(arr1, 1, arr1.length))
-                .execute(taskList1, storage));
+                .execute(taskList1, storage, pastOperationList));
     }
 }

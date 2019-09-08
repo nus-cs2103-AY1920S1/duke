@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.PastOperationList;
 import duke.task.TaskList;
 import duke.ui.DukeWindow;
 import javafx.application.Application;
@@ -17,12 +18,14 @@ public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
+    private PastOperationList pastOperationList;
     private static final String FILE_PATH = "data/duke.txt";
     private DukeWindow mainUi;
 
     @Override
     public void init() throws Exception {
         storage = new Storage(FILE_PATH);
+        pastOperationList = new PastOperationList();
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException | DukeException e) {
@@ -33,7 +36,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        mainUi = new DukeWindow(primaryStage, storage, tasks);
+        mainUi = new DukeWindow(primaryStage, storage, tasks, pastOperationList);
         mainUi.show();
     }
 }

@@ -50,10 +50,15 @@ public abstract class Task {
         return isDone ? "O" : "X";
     }
 
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     public abstract char getShortForm();
 
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getName();
     }
+
 }

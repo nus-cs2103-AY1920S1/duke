@@ -17,13 +17,14 @@ public class ParserTest {
     @Test
     public void parseIntegerTest() throws DukeException {
         Parser parser = new Parser();
-        assertEquals(parser.parseInteger("1"), 1);
+        assertEquals(parser.parseInteger("done 1"), 1);
+        assertEquals(parser.parseInteger("delete 2"), 2);
     }
 
     @Test
     public void parseEventTest() throws DukeException {
         Parser parser = new Parser();
-        String taskStr = "concert /at 2019-08-31 21:00";
-        assertEquals("[E][✗] concert (at: 2019-08-31 21:00)", parser.parseEvent(taskStr).toString());
+        String input = "event concert /at 2019-08-31 21:00";
+        assertEquals("[E][✗] concert (at: 2019-08-31 21:00)", parser.parseEvent(input).toString());
     }
 }

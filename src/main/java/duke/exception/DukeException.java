@@ -6,20 +6,36 @@ package duke.exception;
  */
 public class DukeException extends Exception {
     /**
-     * The prefix of the error message of all DukeException objects.
+     * A prefix used when displaying the error message of DukeException objects.
      */
-    public static final String PREFIX =  "\u2639  OOPS!!!"; // The unicode is a sad face symbol.
+    private static final String PREFIX =  "\u2639  OOPS!!!"; // The unicode is a sad face symbol.
 
-    public DukeException() {
-        super(String.format("%s DukeException occurs!", PREFIX));
+    /**
+     * Constructs a DukeException object with the message given.
+     *
+     * @param message the error message.
+     */
+    public DukeException(String message) {
+        super(message);
     }
 
     /**
-     * Constructs a DukeException object.
+     * Constructs a DukeException object with the message and cause given.
      *
-     * @param message the corresponding error message.
+     * @param message the error message.
+     * @param cause the cause of this DukeException.
      */
-    public DukeException(String message) {
-        super(String.format("%s %s", PREFIX, message));
+    public DukeException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     * Returns the detail message string of this DukeException.
+     *
+     * @return the detail message of this DukeException instance.
+     */
+    @Override
+    public String getMessage() {
+        return String.format("%s %s", PREFIX, super.getMessage());
     }
 }

@@ -38,23 +38,33 @@ public class DukeDatabase {
      * @return the database object itself.
      */
     private DukeDatabase initialise() {
-        // Generates the directory for the database
-        // add assert here?
+        setDatabaseDirectory();
+        createDataFile();
+
+        return this;
+    }
+
+    /**
+     * Set the directory of the data text file used to record the tasks of the user.
+     */
+    private void setDatabaseDirectory() {
         String projectRoot = new File(System.getProperty("user.dir"))
                 .getParentFile()
                 .getPath();
         databaseDirectory = String.format("%s/data/duke.txt", projectRoot);
+    }
 
-        // Creates the database file and the corresponding directories if they have not existed yet.
+    /**
+     * Creates a data text file to store the tasks of the user if it has not existed.
+     */
+    private void createDataFile() {
         try {
             tasksFile = new File(databaseDirectory);
             tasksFile.getParentFile().mkdirs();
             tasksFile.createNewFile();
         } catch (IOException e) {
-            System.out.printf("Fatal Database Error during initialization! Please restart the bot!");
+            e.printStackTrace();
         }
-
-        return this;
     }
 
     /**
@@ -76,11 +86,11 @@ public class DukeDatabase {
                     // and add into the taskList.
                     tasksList.addTask(createTask(sc.nextLine()));
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Cannot find database file!");
+            e.printStackTrace();
         }
 
         return tasksList;
@@ -141,7 +151,7 @@ public class DukeDatabase {
             fw.write(bldr.toString());
             fw.close();
         } catch (IOException e) {
-            System.out.println("Database error occurs when updating data!");
+            e.printStackTrace();
         }
     }
 }

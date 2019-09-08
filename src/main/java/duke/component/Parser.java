@@ -1,17 +1,14 @@
 package duke.component;
 
-import duke.command.AddCommand;
 import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.QueryCommand;
-import duke.command.UpdateCommand;
+import duke.command.CommandGenerator;
 import duke.exception.DukeException;
 
 /**
  * Encapsulates a parser which parses the input from the console.
  */
 public class Parser {
+    private CommandGenerator commandGenerator = new CommandGenerator();
 
     /**
      * Analyses the input from the console and returns the appropriate action to it.
@@ -25,21 +22,21 @@ public class Parser {
         assert input != null : "Input cannot be null!";
 
         if (input.startsWith("todo")) {
-            return new AddCommand(AddCommand.AddType.TODO, input);
+            return commandGenerator.getAddCommandForToDo(input);
         } else if (input.startsWith("deadline")) {
-            return new AddCommand(AddCommand.AddType.DEADLINE, input);
+            return commandGenerator.getAddCommandForDeadline(input);
         } else if (input.startsWith("event")) {
-            return new AddCommand(AddCommand.AddType.EVENT, input);
+            return commandGenerator.getAddCommandForEvent(input);
         } else if ("list".equals(input)) {
-            return new QueryCommand(QueryCommand.QueryType.LIST_ALL, "");
+            return commandGenerator.getListCommand();
         } else if (input.startsWith("find")) {
-            return new QueryCommand(QueryCommand.QueryType.FIND_BY_KEYWORD, input);
+            return commandGenerator.getFindCommand(input);
         } else if (input.startsWith("done")) {
-            return new UpdateCommand(UpdateCommand.UpdateType.DONE, input);
+            return commandGenerator.getDoneCommand(input);
         } else if (input.startsWith("delete")) {
-            return new DeleteCommand(DeleteCommand.DeleteType.INDEX, input);
+            return commandGenerator.getDeleteCommand(input);
         } else if ("bye".equals(input)) {
-            return new ExitCommand();
+            return commandGenerator.getExitCommand();
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

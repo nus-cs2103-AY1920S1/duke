@@ -13,17 +13,16 @@ import duke.exception.DukeException;
 public class Duke {
     private Parser parser;
     private DukeDatabase database;
-    private TaskList taskList;
+    private TaskList tasksList;
 
     /**
-     * Starts Duke (the chat bot) by initializing the essential components of it so that it is ready
-     * to be used.
+     * Creates a Duke chat bot.
      */
-    public void start() {
-        // initialise the essential components of duke bot.
+    public Duke() {
+        // Initialise the essential components of duke bot.
         parser = new Parser();
         database = DukeDatabase.getDukeDatabaseInstance();
-        taskList = database.getAllTasks();
+        tasksList = database.getAllTasks();
     }
 
     /**
@@ -36,7 +35,7 @@ public class Duke {
 
         try {
             Command command = parser.parse(input);
-            response = command.execute(database, taskList);
+            response = command.execute(database, tasksList);
         } catch (DukeException e) {
             response = e.getMessage();
         }

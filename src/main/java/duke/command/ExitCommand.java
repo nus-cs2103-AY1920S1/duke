@@ -10,13 +10,6 @@ import javafx.application.Platform;
  */
 public class ExitCommand extends Command {
     /**
-     * Construct an ExitCommand object.
-     */
-    public ExitCommand() {
-        super("");
-    }
-
-    /**
      * Executes the exit command accordingly.
      *
      * @param tasksList the tasks list of duke.Duke.
@@ -24,9 +17,8 @@ public class ExitCommand extends Command {
      * @throws DukeException if the user's input is incorrect.
      */
     public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {
-        initialise(database, tasksList);
         Platform.exit();
-        database.update(taskList); // Update the database before program completely terminates
+        database.update(tasksList); // Update the database before program completely terminates
 
         return "";
     }

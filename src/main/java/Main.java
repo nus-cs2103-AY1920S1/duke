@@ -24,7 +24,6 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke); // To attach duke to the MainWindow
             stage.show();
-            duke.start();
         } catch (IOException e) {
             e.printStackTrace();
         }

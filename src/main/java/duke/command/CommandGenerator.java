@@ -1,0 +1,193 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.support.InputChecker;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * A generator which can generate Command objects based on the given user's input.
+ */
+public class CommandGenerator {
+    private InputChecker inputChecker = new InputChecker();
+
+    /**
+     * Returns an AddCommand which adds a To Do object to Duke's tasksList.
+     *
+     * @param input user's input which is used to generate a To Do object which is then given to the AddCommand.
+     * @return an AddCommand which adds a To Do object to Duke's tasksList.
+     * @throws DukeException if the user's input is invalid (e.g. does not follow the syntax required to create a
+     *     To Do object).
+     */
+    public AddCommand getAddCommandForToDo(String input) throws DukeException {
+        String topic = input.substring(4).trim();
+
+        if (!inputChecker.isValidToDo(topic)) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+
+        ToDo toDo = new ToDo(topic);
+        return new AddCommand(toDo);
+    }
+
+    /**
+     * Returns an AddCommand which adds a Deadline object to Duke's tasksList.
+     *
+     * @param input user's input which is used to generate a Deadline object which is then given to the AddCommand.
+     * @return an AddCommand which adds a Deadline object to Duke's tasksList.
+     * @throws DukeException if the user's input is invalid (e.g. does not follow the syntax required to create a
+     *     Deadline object).
+     */
+    public AddCommand getAddCommandForDeadline(String input) throws DukeException {
+        String[] details = input.substring(8).trim().split("/by");
+
+        if (!inputChecker.isValidDeadline(details)) {
+            throw new DukeException("The description and deadline of a deadline cannot be empty.");
+        }
+
+        Deadline deadline = getDeadline(details);
+        return new AddCommand(deadline);
+    }
+
+    /**
+     * Returns an AddCommand which adds an Event object to Duke's tasksList.
+     *
+     * @param input user's input which is used to generate an Event object which is then given to the AddCommand.
+     * @return an AddCommand which adds an Event object to Duke's tasksList.
+     * @throws DukeException if the user's input is invalid (e.g. does not follow the syntax required to create an
+     *     Event object).
+     */
+    public AddCommand getAddCommandForEvent(String input) throws DukeException {
+        String[] details = input.substring(5).trim().split("/at");
+
+        if (!inputChecker.isValidEvent(details)) {
+            throw new DukeException("The description and date of an event cannot be empty.");
+        }
+
+        Event event = getEvent(details);
+        return new AddCommand(event);
+    }
+
+    /**
+     * Returns a ListCommand which lists all the tasks in the tasks list.
+     *
+     * @return a ListCommand which lists all the tasks in the tasks list.
+     */
+    public ListCommand getListCommand() {
+        return new ListCommand();
+    }
+
+    /**
+     * Returns a FindCommand which finds a task based on keyword.
+     *
+     * @param input user's input from the UI which consists of the keyword used to find tasks that contains the keyword.
+     * @return a FindCommand which finds a task based on keyword.
+     */
+    public FindCommand getFindCommand(String input) {
+        String keyword = input.substring(4).trim();
+
+        return new FindCommand(keyword);
+    }
+
+    /**
+     * Returns a DoneCommand which marks a task in the tasks list as done.
+     *
+     * @param input user's input from the UI which consists of the index used to find the task to be marked as done.
+     * @return a DoneCommand which marks a task in the tasks list as done.
+     * @throws DukeException if the index given by user is invalid(e.g. out of bound).
+     */
+    public DoneCommand getDoneCommand(String input) throws DukeException {
+        try {
+            int index = Integer.parseInt(input.substring(4).trim());
+            return new DoneCommand(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException("There can only be an integer after the word \"done\"!", e);
+        }
+    }
+
+    /**
+     * Returns a DeleteCommand which deletes a task from the tasks list.
+     *
+     * @param input user's input from the UI which contains the index of the task to be deleted.
+     * @return a DeleteCommand which deletes a task from Duke's tasks list.
+     * @throws DukeException if the index given by user is invalid(e.g. out of bound).
+     */
+    public DeleteCommand getDeleteCommand(String input) throws DukeException {
+        try {
+            int index = Integer.parseInt(input.substring(6).trim());
+            return new DeleteCommand(index);
+        } catch (NumberFormatException e) {
+            throw new DukeException("There can only be an integer after the word \"delete\"!");
+        }
+    }
+
+    /**
+     * Returns an ExitCommand which terminates the program.
+     *
+     * @return an ExitCommand which terminates the program.
+     */
+    public ExitCommand getExitCommand() {
+        return new ExitCommand();
+    }
+
+    /**
+     * Returns a Deadline object created based on the given details.
+     *
+     * @param details details of the Deadline task.
+     * @return a Deadline object created based on the given details.
+     * @throws DukeException if the details is invalid (e.g. the format of date and time does not follow the
+     *     required format).
+     */
+    private Deadline getDeadline(String[] details) throws DukeException {
+        try {
+            String topic = details[0].stripTrailing();
+            String deadlineUnformatted = details[1].stripLeading(); // Unformatted deadline from user's input
+            String deadline = formatDateAndTime(deadlineUnformatted);
+
+            return new Deadline(topic, deadline);
+        } catch (ParseException e) {
+            throw new DukeException("The format of date and time is wrong!", e);
+        }
+    }
+
+    /**
+     * Returns an Event object created based on the given details.
+     *
+     * @param details details of the Event task.
+     * @return an Event object created based on the given details.
+     * @throws DukeException if the details is invalid (e.g. the format of date and time does not follow the
+     *     required format).
+     */
+    private Event getEvent(String[] details) throws DukeException {
+        try {
+            String topic = details[0].stripTrailing();
+            String dateUnformatted = details[1].stripLeading(); // Unformatted date from user's input
+            String date = formatDateAndTime(dateUnformatted);
+
+            return new Event(topic, date);
+        } catch (ParseException e) {
+            throw new DukeException("The format of date and time is wrong!", e);
+        }
+    }
+
+    /**
+     * Formats the date time given by the user.
+     *
+     * @param dateTime date and time given by user in format: dd/MM/yyyy HHmm (24 Hours format).
+     * @return formatted date and time in format: d Month yyyy, h:mm (12 Hours format).
+     * @throws ParseException if the format of date and time given by user is incorrect.
+     */
+    private String formatDateAndTime(String dateTime) throws ParseException {
+        DateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        DateFormat outputFormatter = new SimpleDateFormat("d MMMM yyyy, h:mm a");
+        Date date = inputFormatter.parse(dateTime);
+
+        return outputFormatter.format(date);
+    }
+}

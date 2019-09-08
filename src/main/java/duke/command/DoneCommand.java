@@ -30,17 +30,26 @@ public class DoneCommand extends Command {
         int tasksSize = tasks.size();
 
         if (i <= tasksSize && i > 0) {
-            Task current = tasks.getTaskList().get(i - 1);
-            current.markAsDone();
-            try {
-                storage.save(tasks);
-            } catch (Exception e) {
-                Ui.printOutput(" duke.txt has problem");
-            }
-            return Ui.frontSpace + "Nice! I've marked this task as done: \n" +
-                    Ui.frontSpace + "   " + current.toString();
+            return mark_save(tasks, storage, i);
         } else {
             throw new TaskNotExistException("task does not exist");
         }
+    }
+
+    /**
+     * print out the message when done command is called and save in txt file.
+     *
+     * @param tasks   The TaskList that store the task.
+     * @param storage The Storage that the command should act on.
+     * @param i       The task number need to make as done.
+     * @return The output of the done command.
+     */
+    private String mark_save(TaskList tasks, Storage storage, int i) {
+        Task current = tasks.getTaskList().get(i - 1);
+        current.markAsDone();
+        update(tasks, storage);
+        return Ui.frontSpace + "Nice! I've marked this task as done: \n"
+                + Ui.frontSpace + "   "
+                + current.toString();
     }
 }

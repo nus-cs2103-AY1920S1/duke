@@ -1,4 +1,5 @@
 package duke.exception;
+
 /**
  * ExtraDescriptionException.
  */

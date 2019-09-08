@@ -31,11 +31,16 @@ public class FindCommand extends Command {
         assert storage != null;
 
         String partTaskName = oneLine[1].trim();
-        for (Task t : tasks.getTaskList()) {
-            if (t.getDescription().contains(partTaskName)) {
-                myList.add(t);
-            }
-        }
+        update_fList(tasks, partTaskName);
+        return getTasks();
+    }
+
+    /**
+     * print out all the matched task.
+     *
+     * @return all the matched task in String format.
+     */
+    private String getTasks() throws TaskNotExistException {
         int i = 0;
         if (myList.size() != 0) {
             Ui.printOutput(" Here are the matching tasks in your list: ");
@@ -44,10 +49,24 @@ public class FindCommand extends Command {
                 i++;
                 temp.append(Ui.frontSpace).append(" ").append(i).append(". ").append(tk).append("\n");
             }
-            i = 0;
             return Ui.frontSpace + " Here are the matching tasks in your list: \n" + temp;
         } else {
             throw new TaskNotExistException("task does not exist");
+        }
+    }
+
+    /**
+     * print out the list when list command is called.
+     *
+     * @param tasks        The list of tasks need to print out.
+     * @param partTaskName The part need to match for task name.
+     * @return The output of the matched tasks in String format.
+     */
+    private void update_fList(TaskList tasks, String partTaskName) {
+        for (Task t : tasks.getTaskList()) {
+            if (t.getDescription().contains(partTaskName)) {
+                myList.add(t);
+            }
         }
     }
 }

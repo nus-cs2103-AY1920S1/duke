@@ -3,7 +3,8 @@
  */
 public class DukeReply {
     public final boolean shouldExitLoop;
-    public final boolean shouldSave;
+    public final boolean shouldSaveTaskList;
+    public final boolean shouldSaveNoteList;
     public final String dukeReplyString;
 
     /**
@@ -13,9 +14,13 @@ public class DukeReply {
      * @param shouldSave Whether or not Duke should attempt to save the state of serializable properties
      * @param dukeReplyString Duke's message to the user
      */
-    public DukeReply(boolean shouldExitLoop, boolean shouldSave, String dukeReplyString) {
+    public DukeReply(boolean shouldExitLoop, 
+                     boolean shouldSaveTaskList, 
+                     boolean shouldSaveNoteList,
+                     String dukeReplyString) {
         this.shouldExitLoop = shouldExitLoop;
-        this.shouldSave = shouldSave;
+        this.shouldSaveTaskList = shouldSaveTaskList;
+        this.shouldSaveNoteList = shouldSaveNoteList;
         this.dukeReplyString = dukeReplyString;
     }
 }

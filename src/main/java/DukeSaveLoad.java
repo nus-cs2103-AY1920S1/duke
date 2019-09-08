@@ -14,8 +14,11 @@ import java.io.StreamCorruptedException;
  * A class that handles saving and loading of Duke's data to and from the disk.
  */
 public class DukeSaveLoad {
-    private final String SAVE_FILE_NAME = "DukeSaveFile.dsf";
-    private final File saveFile;
+    private final String TASKLIST_FILE_NAME = "TaskList.tl";
+    private final String NOTELIST_FILE_NAME = "NoteList.nl";
+    
+    private final File taskListSaveFile;
+    private final File noteListSaveFile;
 
     /**
      * Creates a new <code>DukeSaveLoad</code> with a reference to a saveFile in the same directory.
@@ -24,10 +27,15 @@ public class DukeSaveLoad {
      * @throws IOException If an IOException occured
      */
     public DukeSaveLoad () throws NullPointerException, IOException {
-        this.saveFile = new File(System.getProperty("user.dir") + "/" + SAVE_FILE_NAME);
+        this.taskListSaveFile = new File(System.getProperty("user.dir") + "/" + TASKLIST_FILE_NAME);
+        this.noteListSaveFile = new File(System.getProperty("user.dir") + "/" + NOTELIST_FILE_NAME);
 
-        if(!saveFile.exists()) {
-            saveFile.createNewFile();
+        if(!taskListSaveFile.exists()) {
+            taskListSaveFile.createNewFile();
+        }
+
+        if(!noteListSaveFile.exists()) {
+            noteListSaveFile.createNewFile();
         }
     }
 
@@ -40,8 +48,8 @@ public class DukeSaveLoad {
      * @throws SecurityException If a security manager exists and its <code>checkWrite</code> method denies 
      *                           write access to the file.
      */
-    public void attemptSave(TaskList tasks) throws FileNotFoundException, IOException, SecurityException {
-        FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
+    public void attemptSaveTaskList(TaskList tasks) throws FileNotFoundException, IOException, SecurityException {
+        FileOutputStream fileOutputStream = new FileOutputStream(taskListSaveFile);
         ObjectOutputStream objOutputStream = new ObjectOutputStream(fileOutputStream);
 
         objOutputStream.writeObject(tasks);
@@ -58,9 +66,9 @@ public class DukeSaveLoad {
      * @throws IOException When I/O error occurs when reading Stream header
      * @throws ClassNotFoundException When <code>TaskList</code> class cannot be found
      */
-    public TaskList attemptLoad() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public TaskList attemptLoadTaskList() throws FileNotFoundException, IOException, ClassNotFoundException {
         try{
-            FileInputStream fileInputStream = new FileInputStream(saveFile);
+            FileInputStream fileInputStream = new FileInputStream(taskListSaveFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
             TaskList tasks = (TaskList) objectInputStream.readObject();
@@ -80,6 +88,40 @@ public class DukeSaveLoad {
         } catch (InvalidClassException e) {
             //Should only happen during debugging, due to changes in TaskList capability
             return new TaskList();
+        }
+    }
+    public void attemptSaveNoteList(NoteList notes) throws FileNotFoundException, IOException, SecurityException {
+        FileOutputStream fileOutputStream = new FileOutputStream(noteListSaveFile);
+        ObjectOutputStream objOutputStream = new ObjectOutputStream(fileOutputStream);
+
+        objOutputStream.writeObject(notes);
+
+        objOutputStream.close();
+        fileOutputStream.close();
+    }
+
+    public NoteList attemptLoadNoteList() throws FileNotFoundException, IOException, ClassNotFoundException {
+        try{
+            FileInputStream fileInputStream = new FileInputStream(noteListSaveFile);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+            NoteList notes = (NoteList) objectInputStream.readObject();
+
+            objectInputStream.close();
+            fileInputStream.close();
+
+            return notes;
+        } catch (StreamCorruptedException e) {
+            //Save file was corrupted
+            NoteList notes = new NoteList();
+            notes.add("Forgive Me >__<");
+            return notes; //moe~<3
+        } catch (EOFException e) {
+            //Initialising save data
+            return new NoteList();
+        } catch (InvalidClassException e) {
+            //Should only happen during debugging, due to changes in NoteList capability
+            return new NoteList();
         }
     }
 }

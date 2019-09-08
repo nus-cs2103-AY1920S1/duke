@@ -9,7 +9,7 @@ public class DukeUi {
     public final static String GREET_BYE
         = "Alright, see you again!\nGood luck, and do your best!";
     
-    //User Feedback Messages  
+    //User Feedback - Task Messages  
     public final static String FEEDBACK_EMPTY_LIST
         = "You've got no tasks on your list!";
 
@@ -30,6 +30,19 @@ public class DukeUi {
 
     public final static String FEEDBACK_FIND_NOTHING
         = "It's absolutely nothing!";
+
+    //User Feedback - Note Messages
+    public final static String FEEDBACK_NOTE_ADDED
+        = "Gotcha! I've added a new note:\n %s\nYou've got %d notes in your list.";
+
+    public final static String FEEDBACK_EMPTY_NOTE_LIST
+        = "You've got no notes on your list!";
+
+    public final static String FEEDBACK_NOTE_DELETED
+        = "No problem! I've deleted the note:\n %s\nYou've got %d notes in your list.";
+
+    public final static String FEEDBACK_NUKE_NOTE
+        = "Boom! I've deleted all your notes!";
     
     //Error Messages
     public final static String ERROR_UNDECIPHERABLE_MESSAGE

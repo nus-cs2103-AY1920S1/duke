@@ -110,12 +110,12 @@ public class TaskList implements Serializable {
 
     private void checkIndexExists(int realIndex) throws DukeException {
         if(realIndex < 0) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_LIST_INDEX_SMALL));
+            throw new DukeException(DukeUi.ERROR_LIST_INDEX_SMALL);
         }
 
         if(realIndex >= tasks.size()) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(
-                String.format(DukeUi.ERROR_LIST_INDEX_BIG, realIndex + 1)));
+            throw new DukeException(
+                String.format(DukeUi.ERROR_LIST_INDEX_BIG, realIndex + 1));
         }
     }
 }

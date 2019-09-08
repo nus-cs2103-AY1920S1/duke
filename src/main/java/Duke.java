@@ -1,7 +1,3 @@
-//import java.util.Scanner;
-//import java.io.PrintStream;
-//import java.nio.charset.StandardCharsets;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -12,6 +8,7 @@ public class Duke {
     // Class logic components
     private DukeSaveLoad dukeSaveLoad;
     private TaskList tasks;
+    private NoteList notes;
     private boolean systemShouldShutdown = false;
 
     /**
@@ -24,15 +21,20 @@ public class Duke {
      */
     public Duke() throws NullPointerException, IOException, FileNotFoundException, ClassNotFoundException {
         dukeSaveLoad = new DukeSaveLoad();
-        tasks = dukeSaveLoad.attemptLoad();
+        tasks = dukeSaveLoad.attemptLoadTaskList();
+        notes = dukeSaveLoad.attemptLoadNoteList();
     }
 
     public String getResponse(String inputString) throws FileNotFoundException, IOException, SecurityException {
         try {
-            DukeReply dukeReply = UserInputProcessor.processUserInput(inputString, tasks);
+            DukeReply dukeReply = UserInputProcessor.processUserInput(inputString, tasks, notes);
 
-            if(dukeReply.shouldSave) {
-                dukeSaveLoad.attemptSave(tasks);
+            if(dukeReply.shouldSaveTaskList) {
+                dukeSaveLoad.attemptSaveTaskList(tasks);
+            }
+
+            if(dukeReply.shouldSaveNoteList) {
+                dukeSaveLoad.attemptSaveNoteList(notes);
             }
 
             systemShouldShutdown = dukeReply.shouldExitLoop;
@@ -44,7 +46,7 @@ public class Duke {
     }
 
     public String sayHi() {
-        return DukeTextFormatter.makeFormattedText(DukeUi.GREET_HELLO);
+        return DukeUi.GREET_HELLO;
     }
 
     public boolean systemShouldShutdown() {

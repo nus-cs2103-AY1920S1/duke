@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeReplyTest {
     @Test
     public void testBooleanMatching() {
-        DukeReply dukeReply = new DukeReply(true, false, "test");
+        DukeReply dukeReply = new DukeReply(true, false, false, "test");
         assertEquals(true, dukeReply.shouldExitLoop);
-        assertEquals(false, dukeReply.shouldSave);
+        assertEquals(false, dukeReply.shouldSaveTaskList);
     }
 }

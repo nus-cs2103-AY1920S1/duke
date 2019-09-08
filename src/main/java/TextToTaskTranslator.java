@@ -58,8 +58,8 @@ public class TextToTaskTranslator {
 
             return new DeadlineTask(description, new DukeDateTime(deadlineDate, deadlineTime));
         } else {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(
-                String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "deadline")));
+            throw new DukeException(
+                String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "deadline"));
         }
     }
 
@@ -107,8 +107,8 @@ public class TextToTaskTranslator {
             DukeDuration eventDuration = new DukeDuration(startDateTime, endDateTime);
             return new EventTask(description, eventDuration);
         } else {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(
-                String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "event")));
+            throw new DukeException(
+                String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "event"));
         }
     }
     
@@ -159,20 +159,20 @@ public class TextToTaskTranslator {
     //Throws an exception if the input date cannot exist
     private static void checkDateCorrect (int day, int month) throws DukeException {
         if(day == 0) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_DAY_ZERO));
+            throw new DukeException(DukeUi.ERROR_DAY_ZERO);
         }
 
         if(month == 0) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_MONTH_ZERO));
+            throw new DukeException(DukeUi.ERROR_MONTH_ZERO);
         }
 
         if(month > 12) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_MONTH_BIG));
+            throw new DukeException(DukeUi.ERROR_MONTH_BIG);
         }
 
         if(DAYS_EACH_MONTH[month - 1] < day) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(
-                String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[month - 1])));
+            throw new DukeException(
+                String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[month - 1]));
         }
     }
 
@@ -180,26 +180,26 @@ public class TextToTaskTranslator {
     private static void checkTimeCorrect (int hour, int minute) throws DukeException {
         //Checks for the hour
         if(hour < 0 || hour > 23) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_HOURS_OOB));
+            throw new DukeException(DukeUi.ERROR_HOURS_OOB);
         }
         
         //Checks for the minutes
         if(minute < 0 || minute > 59) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_MINUTES_OOB));
+            throw new DukeException(DukeUi.ERROR_MINUTES_OOB);
         }
     }
 
     //Throws an Exception if the would-be Task doesn't have a description
     private static void checkDescriptionExists(String description) throws DukeException {
         if(description.equals("")) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_NO_DESCRIPTION));
+            throw new DukeException(DukeUi.ERROR_NO_DESCRIPTION);
         }
     }
     
     //Throws an Exception if the would-be Task doesn't have a description
     private static void checkDescriptionExists (String [] splitString) throws DukeException {
         if(splitString.length == 0){
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_NO_DESCRIPTION));
+            throw new DukeException(DukeUi.ERROR_NO_DESCRIPTION);
         }
     }
 }

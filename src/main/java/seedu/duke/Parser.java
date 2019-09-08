@@ -60,33 +60,33 @@ public class Parser {
             tasks.sortTask();
             return new ListCommand();
         } else if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline")
-                    || detailsArray[0].equals("event") || detailsArray[0].equals("done") || detailsArray[0].equals("delete")
-                    || detailsArray[0].equals("find"))) {
-                throw new EmptyDescriptionException(ui.getEmptyDescriptionMsg(detailsArray[0]));
+                    || detailsArray[0].equals("event") || detailsArray[0].equals("done")
+                || detailsArray[0].equals("delete") || detailsArray[0].equals("find"))) {
+            throw new EmptyDescriptionException(ui.getEmptyDescriptionMsg(detailsArray[0]));
         } else {
-                switch (detailsArray[0]) {
-                    case "todo":
-                        return new TodoCommand(String.join(" ",
-                                Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
-                    case "deadline":
-                        getDate(detailsArray);
-                        return new DeadlineCommand(String.join(" ",
-                                Arrays.copyOfRange(detailsArray, 1, indexOfByAt)), dateTime);
-                    case "event":
-                        getDate(detailsArray);
-                        return new EventCommand(String.join(" ",
-                                Arrays.copyOfRange(detailsArray, 1, indexOfByAt)), dateTime);
-                    case "delete":
-                        return new DeleteCommand(getAllIndex(command));
-                    case "done":
-                        return new DoneCommand(getAllIndex(command));
-                    case "list":
-                        return new ListCommand();
-                    case "find":
-                        return new FindCommand(getAllIndex(command));
-                    default:
-                        throw new InvalidInputException(ui.getInvalidInputMsg());
-                }
+            switch (detailsArray[0]) {
+            case "todo":
+                return new TodoCommand(String.join(" ",
+                        Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
+            case "deadline":
+                getDate(detailsArray);
+                return new DeadlineCommand(String.join(" ",
+                        Arrays.copyOfRange(detailsArray, 1, indexOfByAt)), dateTime);
+            case "event":
+                getDate(detailsArray);
+                return new EventCommand(String.join(" ",
+                        Arrays.copyOfRange(detailsArray, 1, indexOfByAt)), dateTime);
+            case "delete":
+                return new DeleteCommand(getAllIndex(command));
+            case "done":
+                return new DoneCommand(getAllIndex(command));
+            case "list":
+                return new ListCommand();
+            case "find":
+                return new FindCommand(getAllIndex(command));
+            default:
+                throw new InvalidInputException(ui.getInvalidInputMsg());
+            }
         }
     }
 
@@ -109,7 +109,7 @@ public class Parser {
 
         switch (arr1[0]) {
         case "find":
-            for(int i = 0; i < arr2.length; i++) {
+            for (int i = 0; i < arr2.length; i++) {
                 // split the individual keyword to check if it contains multiple words
                 if (arr2[i].split(" ").length > 2) {
                     System.out.println(arr2[i]);
@@ -121,7 +121,7 @@ public class Parser {
             return indexList;
         case "done":
         case "delete":
-            for(int i = 0; i < arr2.length; i++) {
+            for (int i = 0; i < arr2.length; i++) {
                 if (!(Integer.parseInt(arr2[i]) <= tasks.getSize()) || !(Integer.parseInt(arr2[i]) > 0)) {
                     throw new InvalidIndexException(ui.getInvalidIndexMsg(arr1[0]));
                 } else {

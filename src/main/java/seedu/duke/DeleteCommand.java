@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
 
     private ArrayList<Task> convertToTask(TaskList list) {
         ArrayList<Task> tasksToDelete = new ArrayList<>();
-        for(Object index : indexList) {
+        for (Object index : indexList) {
             tasksToDelete.add(list.getTask((int) index));
         }
         return tasksToDelete;

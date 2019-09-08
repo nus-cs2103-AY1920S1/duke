@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
         String output = "";
         output += ui.printDoneMsg();
 
-        for(Object index : indexList) {
+        for (Object index : indexList) {
             list.getTask((int) index).markAsDone();
             output += list.getTask((int) index) + "\n";
             storage.writeToFile(list);

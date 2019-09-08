@@ -33,7 +33,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         String output = ui.printMatchingMsg();
-        for(Object keyword: findList) {
+        for (Object keyword: findList) {
             ArrayList<Task> matchingList = list.findMatching((String) keyword);
             output += ui.printMatchingList(matchingList);
         }

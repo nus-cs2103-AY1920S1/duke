@@ -1,1 +1,2 @@
-T | 0 | something
+E | 0 | something | 23rd of March 2019, 6pm-7pm
+

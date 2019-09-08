@@ -20,11 +20,10 @@ import duke.tasks.Event;
 import java.io.IOException;
 
 public class AddCommand extends Command {
-    private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private DateTime dateTime = new DateTime();
     private String[] allDetails;
+    private String processedDetails = "";
     private String deadlineErrorMsg = "Please write the deadline such as 29/2/2019 1800 and resubmit the command";
     private String eventErrorMsg = "Please write the event timing such as 29/2/2019 1800-2000 and resubmit the command";
 
@@ -36,11 +35,13 @@ public class AddCommand extends Command {
      */
     public AddCommand(String[] allDetails) {
         this.allDetails = allDetails;
+        for (int i = 1; i < allDetails.length; i++) {
+            processedDetails += allDetails[i] + " ";
+        }
     }
 
     /**
-     * Checks for the type of task that has been added and passes along processed String of information
-     * containing details about the task for the task to be created.
+     * Executes the command to generate the correct task to be added into memory.
      *
      * @param tasks contains the data structure of Tasks stored in Duke
      * @param ui contains methods dealing with interaction with the user
@@ -51,21 +52,39 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         this.tasks = tasks;
         this.ui = ui;
-        this.storage = storage;
-        String processed = "";
-        for (int i = 1; i < allDetails.length; i++) {
-            processed += allDetails[i] + " ";
-        }
-        assert !processed.isEmpty() : "No description of task provided";
-        String commandWord = allDetails[0];
         if (allDetails.length == 1) {
             throw new DukeException("Oops! The description of your Task cannot be empty.");
-        } else if (commandWord.equals("todo")) {
-            return toDoTask(processed);
-        } else if (commandWord.equals("deadline")) {
-            return deadlineTask(processed);
         } else {
-            return eventTask(processed);
+            return generateAddedTask();
+        }
+    }
+
+    /**
+     * Checks for the type of task that has been added and passes along processed String of information
+     * containing details about the task for the task to be created.
+     *
+     * @return String containing the task that has been added
+     * @throws DukeException is thrown when there is an error with the input
+     * @throws IOException is thrown when there is an error saving the data in the hard disk
+     */
+    private String generateAddedTask()  throws DukeException, IOException {
+        String commandWord = allDetails[0];
+        if (commandWord.equals("todo")) {
+            return toDoTask();
+        } else if (commandWord.equals("deadline")) {
+            String[] details = processedDetails.split("/by");
+            if (details.length < 2) {
+                throw new DukeException(deadlineErrorMsg);
+            } else {
+                return deadlineTask(details);
+            }
+        } else {
+            String[] details = processedDetails.split("/at");
+            if (details.length < 2) {
+                throw new DukeException(eventErrorMsg);
+            } else {
+                return eventTask(details);
+            }
         }
     }
 
@@ -76,13 +95,12 @@ public class AddCommand extends Command {
     /**
      * Creates a TD object and adds it into memory.
      *
-     * @param a a String of information containing details for the To Do task
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    private String toDoTask(String a) throws IOException {
-        ToDo newTodo = new ToDo(a);
+    private String toDoTask() throws IOException {
+        ToDo newTodo = new ToDo(processedDetails);
         this.tasks.addTask(newTodo);
-        this.storage.save(tasks);
+        Storage.save(tasks);
         return printAddedTask(newTodo);
     }
 
@@ -90,28 +108,33 @@ public class AddCommand extends Command {
      * Creates a deadlineTask and adds it into memory.
      * If command does not include a deadline, then user is prompted to enter the command again.
      *
-     * @param b a String of information containing details for the Deadline task
      * @exception DukeException is thrown when there is an error with the input
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    private String deadlineTask(String b) throws DukeException, IOException {
-        String[] details = b.split("/by");
-        if (details.length < 2) {
-            throw new DukeException("Oops! Please include the deadline and resubmit that command.");
+    private String deadlineTask(String[] details) throws DukeException, IOException {
+        String[] time = details[1].trim().split(" ");
+        String formattedTime = processDeadlineTime(time);
+        Deadline newDeadline = new Deadline(details[0].trim(), formattedTime);
+        this.tasks.addTask(newDeadline);
+        Storage.save(tasks);
+        return printAddedTask(newDeadline);
+    }
+
+    /**
+     * Produces a formatted String that is used in creation of a Deadline Task.
+     *
+     * @param deadlineTime containing the information about the date for the Deadline Task
+     * @return String containing some details needed to create a Deadline task
+     * @throws DukeException is thrown when there is an error with the input
+     */
+    private String processDeadlineTime(String[] deadlineTime) throws DukeException {
+        if (deadlineTime.length < 2) {
+            throw new DukeException(deadlineErrorMsg);
         } else {
-            String[] time = details[1].trim().split(" ");
-            if (time.length < 2) {
-                throw new DukeException(deadlineErrorMsg);
-            } else {
-                try {
-                    String formattedTime = dateTime.getDate(time[0]) + dateTime.getTime(time[1]);
-                    Deadline newDeadline = new Deadline(details[0].trim(), formattedTime);
-                    this.tasks.addTask(newDeadline);
-                    this.storage.save(tasks);
-                    return printAddedTask(newDeadline);
-                } catch (DateException e) {
-                    throw new DukeException(e.getMessage() + " " + deadlineErrorMsg );
-                }
+            try {
+                return DateTime.getDate(deadlineTime[0]) + DateTime.getTime(deadlineTime[1]);
+            } catch (DateException e) {
+                throw new DukeException(e.getMessage() + deadlineErrorMsg);
             }
         }
     }
@@ -120,31 +143,36 @@ public class AddCommand extends Command {
      * Creates an Event object and adds it into memory.
      * If command does not include a timing, then user is prompted to enter the command again.
      *
-     * @param c a String of information containing details for the Event task
      * @exception DukeException is thrown when there is an error with the input
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    private String eventTask(String c) throws DukeException, IOException {
-        String[] details = c.split("/at");
-        if (details.length < 2) {
-            throw new DukeException("Oops! Please include the event timing and resubmit that command.");
+    private String eventTask(String[] details) throws DukeException, IOException {
+        String[] eventTime = details[1].trim().split(" ");
+        String formattedTime = processEventTime(eventTime);
+        Event newEvent = new Event(details[0].trim(), formattedTime);
+        this.tasks.addTask(newEvent);
+        Storage.save(tasks);
+        return printAddedTask(newEvent);
+    }
+
+    /**
+     * Produces a formatted String that is used in creation of an Event task.
+     *
+     * @param eventTime containing the information about the date for the Event task
+     * @return String containing some details needed to create a Event task
+     * @throws DukeException is thrown when there is an error with the input
+     */
+    private String processEventTime(String[] eventTime) throws DukeException {
+        if (eventTime.length < 2) {
+            throw new DukeException(eventErrorMsg);
         } else {
-            String[] eventTime = details[1].trim().split(" ");
-            if (eventTime.length < 2) {
+            String[] hoursMin = eventTime[1].split("-");
+            if (hoursMin.length < 2) {
                 throw new DukeException(eventErrorMsg);
             } else {
                 try {
-                    String[] hoursMin = eventTime[1].split("-");
-                    if (hoursMin.length < 2) {
-                        throw new DukeException(eventErrorMsg);
-                    } else {
-                        String formattedTime = dateTime.getDate(eventTime[0]) + dateTime.getTime(hoursMin[0]) + "-"
-                                + dateTime.getTime(hoursMin[1]);
-                        Event newEvent = new Event(details[0].trim(), formattedTime);
-                        this.tasks.addTask(newEvent);
-                        this.storage.save(tasks);
-                        return printAddedTask(newEvent);
-                    }
+                    return DateTime.getDate(eventTime[0]) + DateTime.getTime(hoursMin[0]) + "-"
+                            + DateTime.getTime(hoursMin[1]);
                 } catch (DateException e) {
                     throw new DukeException(e.getMessage() + " " + eventErrorMsg);
                 }

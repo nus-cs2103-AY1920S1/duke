@@ -9,9 +9,15 @@ import duke.exceptions.DateException;
 public class DateTime {
 
     private static String[] daySuffix = {
-            "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
-            "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
-            "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"};
+        "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+        "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "st"
+    };
+    private static String[] monthName = {
+        "January", "February", "March", "April",
+        "May", "June", "July", "August", "September",
+        "October", "November", "December"
+    };
 
     public DateTime() {
 
@@ -23,7 +29,7 @@ public class DateTime {
      * @param date a String containing the date that was in the command to Duke
      * @exception DateException if the month number is invalid
      */
-    public String getDate(String date) throws DateException {
+    public static String getDate(String date) throws DateException {
         String[] splitDate = date.split("/");
         String dd = addDaySuffix(splitDate[0]) + " of ";
         String mm = wordMonth(splitDate[1]) + " ";
@@ -38,8 +44,7 @@ public class DateTime {
      */
     private static String addDaySuffix(String day) {
         int dayNum = Integer.parseInt(day);
-        String dayWithSuffix = day + daySuffix[dayNum - 1];
-        return dayWithSuffix;
+        return day + daySuffix[dayNum - 1];
     }
 
     /**
@@ -50,34 +55,10 @@ public class DateTime {
      */
     private static String wordMonth(String month) throws DateException {
         int monthNum = Integer.parseInt(month);
-        assert monthNum < 13 : "Month invalid!";
-        switch (monthNum) {
-        case 1:
-            return "January";
-        case 2:
-            return "February";
-        case 3:
-            return "March";
-        case 4:
-            return "April";
-        case 5:
-            return "May";
-        case 6:
-            return "June";
-        case 7:
-            return "July";
-        case 8:
-            return "August";
-        case 9:
-            return "September";
-        case 10:
-            return "October";
-        case 11:
-            return "November";
-        case 12:
-            return "December";
-        default:
+        if (monthNum > 12) {
             throw new DateException("Invalid month entered!");
+        } else {
+            return monthName[monthNum - 1];
         }
     }
 
@@ -88,18 +69,13 @@ public class DateTime {
      * @exception DateException if the month number is invalid
      */
     public static String getTime(String time) throws DateException {
-        String timeString = "";
-        String hours = time.substring(0, 2);
-        assert hours.length() == 4 : "Time invalid!";
-        timeString += getHours(hours);
-        String minutes = time.substring(2,4);
-        timeString += getMinutes(minutes);
+        String hours = time.substring(0,2);
+        String timeString = getHours(hours) + getMinutes(time.substring(2,4));
         if (Integer.parseInt(hours) < 12) {
-            timeString += "am";
+            return timeString + "am";
         } else {
-            timeString += "pm";
+            return timeString + "pm";
         }
-        return timeString;
     }
 
     /**
@@ -110,17 +86,15 @@ public class DateTime {
      */
     private static String getHours(String hours) throws DateException {
         int hourNum = Integer.parseInt(hours);
-        String numHour;
         if (hourNum > 24) {
             throw new DateException("Invalid time entered!");
         } else {
             hourNum = hourNum % 12;
             if (hourNum == 0) {
-                numHour = "12";
+                return "12";
             } else {
-                numHour = hourNum + "";
+                return hourNum + "";
             }
-            return numHour;
         }
     }
 

@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -50,5 +53,15 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
+
+        if (input.equals("bye")) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Main.exit();
+                }
+            }, 1500);
+        }
     }
 }

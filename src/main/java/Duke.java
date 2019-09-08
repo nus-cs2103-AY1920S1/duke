@@ -43,7 +43,7 @@ public class Duke {
      * Main method.
      */
     public static void main(String[] args) {
-        new Duke("/Users/larrylaw/Learn/Uni/Y2S1/CS2103/duke/src/main/data/duke.txt").run();
+        new Duke("../data/duke.txt").run();
     }
 
     /**

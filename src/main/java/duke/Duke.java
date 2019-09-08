@@ -27,6 +27,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command command = Parser.parse(input); // Parse and perform logic
+        assert command != null : "Command cannot be null";
         return command.execute(ui, storage, taskList);
     }
 

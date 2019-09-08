@@ -30,14 +30,17 @@ public class Parser {
                 // Check description is not empty
                 if (input.indexOf(" ") == -1 || (input.indexOf(" ") + 1) == -1) {
                     throw new DukeException("The description of a todo cannot be empty.");
-                } else {
-                    command = input.substring(0, input.indexOf(" "));
-                    remaining = input.substring(input.indexOf(" ") + 1);
+                }
 
-                    // Check description is not empty
-                    if (remaining.replace(" ", "").length() <= 0) {
-                        throw new DukeException("The description of a todo cannot be empty.");
-                    }
+                command = input.substring(0, input.indexOf(" "));
+                remaining = input.substring(input.indexOf(" ") + 1);
+
+                assert command.length() > 0 : "Command cannot be empty";
+                assert remaining.length() > 0 : "Remaining cannot be empty";
+
+                // Check description is not empty
+                if (remaining.replace(" ", "").length() <= 0) {
+                    throw new DukeException("The description of a todo cannot be empty.");
                 }
 
                 switch (command) {
@@ -51,6 +54,9 @@ public class Parser {
                         item = remaining.substring(0, remaining.indexOf("/by") - 1);
                         date = remaining
                             .substring(remaining.indexOf("/by") + 4, remaining.length());
+
+                        assert item.length() > 0 : "Item cannot be empty";
+                        assert date.length() > 0 : "Date cannot be empty";
                     }
 
                     return new AddCommand(item, date, TaskEnum.DEADLINE);
@@ -58,11 +64,14 @@ public class Parser {
                     //Check input is valid
                     if (remaining.indexOf("/at") == -1 || (input.indexOf("/at") + 4) == -1) {
                         throw new DukeException("Please ensure that /at and the date is included");
-                    } else {
-                        item = remaining.substring(0, remaining.indexOf("/at") - 1);
-                        date = remaining
-                            .substring(remaining.indexOf("/at") + 4, remaining.length());
                     }
+
+                    item = remaining.substring(0, remaining.indexOf("/at") - 1);
+                    date = remaining
+                        .substring(remaining.indexOf("/at") + 4, remaining.length());
+
+                    assert item.length() > 0 : "Item cannot be empty";
+                    assert date.length() > 0 : "Date cannot be empty";
 
                     return new AddCommand(item, date, TaskEnum.EVENT);
                 default:
@@ -81,14 +90,17 @@ public class Parser {
                 String remaining = "";
                 if (input.indexOf(" ") == -1 || (input.indexOf(" ") + 1) == -1) {
                     throw new DukeException("The description of a find cannot be empty.");
-                } else {
-                    command = input.substring(0, input.indexOf(" "));
-                    remaining = input.substring(input.indexOf(" ") + 1);
+                }
 
-                    // Check description is not empty
-                    if (remaining.replace(" ", "").length() <= 0) {
-                        throw new DukeException("The description of a find cannot be empty.");
-                    }
+                command = input.substring(0, input.indexOf(" "));
+                remaining = input.substring(input.indexOf(" ") + 1);
+
+                assert command.length() > 0 : "Command cannot be empty";
+                assert remaining.length() > 0 : "Remaining cannot be empty";
+
+                // Check description is not empty
+                if (remaining.replace(" ", "").length() <= 0) {
+                    throw new DukeException("The description of a find cannot be empty.");
                 }
 
                 return new FindCommand(remaining);
@@ -102,11 +114,15 @@ public class Parser {
                 input.replace("done", "")
                     .replace(" ", "")); // Removing 'done' and empty spaces
 
+            assert taskNo != 0 : "Task number cannot be empty";
+
             return new DoneCommand(taskNo);
         } else if (input.contains("delete")) { // Delete item
             int taskNo = Integer.parseInt(
                 input.replace("delete", "")
                     .replace(" ", "")); // Removing 'delete' and empty spaces
+
+            assert taskNo != 0 : "Task number cannot be empty";
 
             return new DeleteCommand(taskNo);
         } else if (input.equals("list")) { // List items

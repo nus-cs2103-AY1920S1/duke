@@ -40,7 +40,8 @@ public class TaskList {
      * @return Task that was added to the list.
      */
     public Task add(String description, TaskEnum type) {
-        // duke.task.Event and duke.task.Deadline default date is based on the system clock
+        assert description.length() > 0 : "Description cannot be empty";
+        // Event and Deadline default date is based on the system clock
         String date = LocalDateTime.now()
             .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
         switch (type) {
@@ -71,16 +72,19 @@ public class TaskList {
      * @return Task that was added to the list.
      */
     public Task add(String description, String date, TaskEnum type) {
+        assert description.length() > 0 : "Description cannot be empty";
         switch (type) {
         case TODO:
             Todo todo = new Todo(description);
             tasks.add(todo);
             return todo;
         case DEADLINE:
+            assert date.length() > 0 : "Date cannot be empty";
             Deadline deadline = new Deadline(description, date);
             tasks.add(deadline);
             return deadline;
         case EVENT:
+            assert date.length() > 0 : "Date cannot be empty";
             Event event = new Event(description, date);
             tasks.add(event);
             return event;
@@ -97,6 +101,7 @@ public class TaskList {
      * @return Task that was deleted.
      */
     public Task delete(int taskNo) {
+        assert taskNo != 0 : "TaskNo cannot be empty";
         try {
             if (tasks.size() > 0) {
                 Task task = tasks
@@ -122,6 +127,7 @@ public class TaskList {
      * @return Task that was marked completed.
      */
     public Task done(int taskNo) {
+        assert taskNo != 0 : "TaskNo cannot be empty";
         try {
             Task task = tasks.get(taskNo - 1); //Minus 1 because the displayed list starts at 1
             if (task.getIsDone()) {

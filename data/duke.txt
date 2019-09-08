@@ -5,3 +5,5 @@ T|false|buy pears
 D|true|buy toys|14/10/2019 1400
 T|true|buy eggs
 T|true|buy speakers
+T|false|buy pencils
+D|false|buy pens|21/09/2019 1200

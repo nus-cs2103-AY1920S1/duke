@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class TodoTest {
 
     @Test
-    void toString1() {
-        Todo todo = new Todo("clean house", false);
-        assertEquals("[T][X] clean house", todo.toString());
+    void todoToStringManualInputCorrectFormat() {
+        TodoStub todo = new TodoStub("Test", false);
+        assertEquals("[T][X] Test", todo.toString());
     }
 }

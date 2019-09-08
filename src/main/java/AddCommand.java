@@ -37,6 +37,8 @@ public class AddCommand extends Command {
                 String[] arr = command.split("/at");
                 this.task = new Event(arr[0].trim(), arr[1].trim());
                 this.type = "E";
+            } else {
+                throw new AssertionError("ERROR: Invalid Task Type!");
             }
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());

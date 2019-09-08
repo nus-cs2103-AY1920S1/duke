@@ -42,35 +42,35 @@ public class Ui {
     /**
      * Printing various messages
      */
-    public void printExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printExitMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void printRemovedMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done\n" + task);
+    public String printRemovedMessage(Task task) {
+        return "Nice! I've marked this task as done\n" + task;
     }
 
-    public void printDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done\n" + task);
+    public String printDoneMessage(Task task) {
+        return "Nice! I've marked this task as done\n" + task;
     }
 
-    public void printDeleteMessage(TaskList tasks, Task task) {
-        System.out.println("Noted. I've removed this task:\n\t" + task);
+    public String printDeleteMessage(TaskList tasks, Task task) {
         tasks.delete(task);
-        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+        return ("Noted. I've removed this task:\n\t" + task + "\n" +
+        "Now you have " + tasks.getSize() + " tasks in the list.");
     }
 
-    public void printAddMessage(TaskList tasks, Task task) {
-        System.out.println("Got it. I've added this task: \n\t"
+    public String printAddMessage(TaskList tasks, Task task) {
+        return ("Got it. I've added this task: \n\t"
                 + task + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.");
     }
-    public void printListMessage(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:\n");
-        tasks.showList(); // this prints the list of tasks
+    public String printListMessage(TaskList tasks) {
+        return ("Here are the tasks in your list:\n" +
+        tasks.showList()); // this prints the list of tasks
     }
 
-    public void showLine() {
-        System.out.println("___________________________________________________");
+    public String showLine() {
+        return ("___________________________________________________");
     }
 
     /**
@@ -81,10 +81,10 @@ public class Ui {
         this.sc.close();
     }
 
-    public void showLoadingError() {
-        System.out.println("Error while loading");
+    public String showLoadingError() {
+        return ("Error while loading");
     }
-    public void showError(String s) {
-        System.out.println(s);
+    public String showError(String s) {
+        return (s);
     }
 }

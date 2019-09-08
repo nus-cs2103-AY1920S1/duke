@@ -19,7 +19,7 @@ public class DoneCommand extends Command{
      * @param storage to store tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTask(this.index);
         task.markAsDone();
         try {
@@ -27,7 +27,7 @@ public class DoneCommand extends Command{
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        ui.printDoneMessage(task);
+        return ui.printDoneMessage(task);
     }
 
     @Override

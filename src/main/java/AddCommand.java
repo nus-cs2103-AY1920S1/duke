@@ -17,14 +17,14 @@ public class AddCommand extends Command {
      * @param storage to store tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.task);
-        ui.printAddMessage(tasks, this.task);
         try {
             storage.writeToHardDisk(tasks);
         } catch (DukeException e) {
             e.printStackTrace();
         }
+        return ui.printAddMessage(tasks, this.task);
     }
 
     @Override

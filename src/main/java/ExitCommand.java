@@ -11,9 +11,9 @@ public class ExitCommand extends Command {
      * @param storage to store tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printExitMessage();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.closeScanner();
+        return ui.printExitMessage();
     }
 
     @Override

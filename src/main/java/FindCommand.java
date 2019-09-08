@@ -1,3 +1,5 @@
+import java.lang.StringBuilder;
+
 public class FindCommand extends Command{
     private String word;
 
@@ -6,14 +8,16 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int count = 1;
+        StringBuilder searchResult = new StringBuilder();
         for (Task task : tasks.getWholeList()) {
             if (task.getTask().contains(this.word)) {
-                System.out.println(count + "." + task);
+                searchResult.append(count + "." + task + "\n");
                 count++;
             }
         }
+        return searchResult.toString();
     }
 
     @Override

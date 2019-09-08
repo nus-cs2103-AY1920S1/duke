@@ -80,14 +80,14 @@ public class Duke extends Application {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                System.out.println(ui.showLine()); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
-                ui.showLine();
+                System.out.println(ui.showLine());
             }
         }
     }
@@ -111,7 +111,7 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-    //Step 2. Formatting the window to look as expected
+       //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -184,8 +184,13 @@ public class Duke extends Application {
     }
 
     // Duke's response, customisable
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 
 }

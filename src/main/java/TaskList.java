@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -50,11 +51,13 @@ public class TaskList {
     /**
      * Prints a list of the tasklist
      */
-    public void showList() {
+    public String showList() {
         // prints a list of all tasks stored in this tasklist
+        StringBuilder wholeList = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + ". " + tasks.get(i));
+            wholeList.append(i + 1 + ". " + tasks.get(i) + "\n");
         }
+        return wholeList.toString();
     }
 
     /**

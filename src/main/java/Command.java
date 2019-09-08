@@ -7,7 +7,7 @@ public abstract class Command {
      * @param storage to store tasks
      * @throws DukeException
      */
-    public abstract void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute (TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * If bye is keyed in,

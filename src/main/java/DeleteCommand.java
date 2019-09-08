@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      * @param storage to store tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTask(this.index);
         tasks.delete(task);
         try {
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        ui.printDeleteMessage(tasks, task);
+        return ui.printDeleteMessage(tasks, task);
     }
 
     @Override

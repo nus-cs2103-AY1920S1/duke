@@ -12,5 +12,7 @@ cache:
 jdk:
   - openjdk11
 
-# Custom Integrated Test
-script: ./src/main/java/TestScript.sh
+
+script:
+  - ./gradlew check
+  - ./src/main/java/TestScript.sh # Custom integrated test

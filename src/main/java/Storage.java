@@ -103,7 +103,9 @@ public class Storage {
         writer.close();
         reader.close();
         boolean isDeleted = inputFile.delete();
+        assert isDeleted : "tempFile should be deleted";
         boolean isRenamed = tempFile.renameTo(inputFile);
+        assert isRenamed : "file should be renamed";
     }
 
     /**
@@ -145,6 +147,8 @@ public class Storage {
         writer.close();
         reader.close();
         boolean isDeleted = inputFile.delete();
+        assert isDeleted : "tempFile should be deleted";
         boolean isRenamed = tempFile.renameTo(inputFile);
+        assert isRenamed : "file should be renamed";
     }
 }

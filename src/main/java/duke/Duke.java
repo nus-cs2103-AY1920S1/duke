@@ -1,26 +1,16 @@
 package duke;
 
-import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CommandFactory;
 import duke.command.GreetCommand;
 import duke.task.TasksView;
-import error.ConfigurationException;
-import fx.FxMain;
-import javafx.application.Application;
-import duke.task.tasks.Task;
 import duke.task.TasksController;
 import storage.Storage;
 import ui.UiActivity;
 import ui.UiController;
 import ui.input.InputHandler;
 import ui.output.OutputHandler;
-import util.DukeInput;
-import util.OutputBuilder;
-import util.DukeOutput;
-import util.DukeStorage;
 
-import java.util.List;
 import java.util.Optional;
 
 /***
@@ -31,34 +21,34 @@ import java.util.Optional;
 
 public class Duke implements UiActivity {
     private boolean isConfigured;
-    private boolean isExit;
 
     private UiController ui;
-    private TasksController tasks;
+    private CommandFactory factory;
 
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.configure(OptionsFactory.select(false, false));
+        Options options = OptionsFactory.select(false, false);
+
+        duke.configure(options);
         duke.run();
     }
 
-    @Override
-    public void onInputReceived(String input) {
-        ui.displayOutput(input);
-    }
-
     public void configure(Options options) {
+        // Initialize UI component
         InputHandler input = options.getInput();
         OutputHandler output = options.getOutput();
-
         ui = new UiController(input, output, this);
 
+        // Initialize tasks and storage
         Storage storage = options.getStorage();
         TasksView view = new TasksView(ui);
+        TasksController tasks = TasksController.fromStorage(storage, view);
 
-        tasks = TasksController.fromStorage(storage, view);
+        // Initialize command factory
+        factory = new CommandFactory(tasks);
 
+        // Set flag
         isConfigured = true;
     }
 
@@ -70,9 +60,37 @@ public class Duke implements UiActivity {
         }
     }
 
-    public void startApplication() {
+    private void startApplication() {
         System.out.println("Program starting...");
+
+        printGreeting();
         ui.start();
+        exit();
+    }
+
+    private void printGreeting() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        String greeting = logo + "\n" + "\n"
+                        + "Hello! I'm duke.Duke\n"
+                        + "What can I do for you?";
+
+        ui.displayOutput(greeting);
+
+    }
+
+    private void exit() {
+
+    }
+
+    @Override
+    public void onInputReceived(String input) {
+        Optional<Command> command = factory.parse(input);
+        command.ifPresent(Command::execute);
     }
 
 

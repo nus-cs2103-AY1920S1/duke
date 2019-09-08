@@ -70,6 +70,11 @@ public class Duke {
         ui.close();
     }
 
+    /**
+     * Gets the appropriate string response from an input.
+     * @param input String input from GUI.
+     * @return String response from input.
+     */
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

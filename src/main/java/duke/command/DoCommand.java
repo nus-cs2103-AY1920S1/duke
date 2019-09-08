@@ -38,7 +38,6 @@ public class DoCommand extends Command {
         taskList.doTask(index);
         String indent = ui.getIndent();
         String message = indent + "Nice! I've marked this task as done:\n" + indent + "  " + taskList.getTask(index);
-//        System.out.println(message);
         storage.write(taskList);
         return message;
     }

@@ -2,17 +2,16 @@
 # -e: exit as soon as command returns non-zero exit code
 set -e
 
-echo "Changing to correct directory..."
-cd /Users/larrylaw/Learn/Uni/Y2S1/CS2103/duke/src/main/java;
-
 echo "Removing saved data..."
-rm ../data/duke.txt
+if [ -f "../data/duke.txt" ]; then
+  rm ../data/duke.txt
+fi
 
 echo "Compiling all java files in this directory..."
 if ! javac $(find duke/. -name "*.java") && javac Duke.java;
 then
     echo "Compilation Failed"
-    exit 0;
+    exit 0
 else
     echo "Compiled java files successfully"
 fi

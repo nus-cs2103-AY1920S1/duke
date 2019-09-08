@@ -93,15 +93,35 @@ public class Task implements Comparable<Task> {
      */
     @Override
     public int compareTo(Task o) {
-        if (this.getDateTime() == null && o.getDateTime() == null) { // both are instance of Todo
+        if (o instanceof Todo && this instanceof Todo) {
             return this.getDescription().compareTo(o.getDescription());
-        } else if (this.getDateTime() == null || o.getDateTime() == null) {
-            return 0;
-        } else if (o instanceof Deadline || o instanceof Event) {
+        } else if (!(o instanceof Todo) && !(this instanceof Todo)) {
             return this.getDateTime().compareTo(o.getDateTime());
+        } else if (this instanceof Todo && !(o instanceof Todo)) {
+            return 10;
+        }  else if (!(this instanceof Todo) && (o instanceof Todo)) {
+            return -10;
         } else {
             return this.getDescription().compareTo(o.getDescription());
         }
     }
 
+
+
+
+/*
+
+        if (this.getDateTime() == null && o.getDateTime() == null) { // both are instance of Todo
+            return this.getDescription().compareTo(o.getDescription());
+        } else if (!(o instanceof Todo) && !(this instanceof Todo)) {
+            return this.getDateTime().compareTo(o.getDateTime());
+        } else if (o.getDateTime() == null) {
+            return (int) Double.MIN_VALUE;
+        } else if (this.getDateTime() == null) {
+            return (int) Double.MAX_VALUE;
+        } else {
+            return this.getDescription().compareTo(o.getDescription());
+        }
+    }
+*/
 }

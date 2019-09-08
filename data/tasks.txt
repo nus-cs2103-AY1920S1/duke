@@ -1,15 +1,18 @@
-E | 1 | music fest | 12/04/4121 1731
-D | 1 | quest | 31/08/3241 1435
-E | 1 | art | 05/05/1312 0331
-D | 0 | eve | 01/03/1312 1832
-E | 1 | open house | 05/06/2413 0524
-E | 1 | new year eve | 05/06/2411 1712
-D | 1 | assignment | 04/06/2313 0633
-E | 1 | music exhibition | 05/07/2313 0813
-E | 1 | movie screening | 05/01/4214 1942
-D | 0 | art project | 04/01/4231 2313
-T | 0 | watering
-T | 0 | exercise #fun
-T | 0 | movie #fun
-D | 0 | meeting | 06/11/1313 1913
+E | 1 | music fest | 12/04/1998 1731
+D | 0 | quest | 01/05/1998 1435
 T | 0 | running
+E | 1 | art | 05/05/2022 0331
+T | 0 | exercise #fun
+D | 0 | eve | 01/03/1921 1832
+E | 1 | open house | 05/06/2022 0524
+E | 0 | new year eve | 05/06/1998 1712
+D | 1 | assignment | 04/06/1201 0633
+T | 0 | movie & film
+E | 1 | music exhibition | 05/07/1997 0813
+E | 1 | movie screening | 05/01/2039 1942
+D | 0 | art project | 04/01/2022 2313
+T | 0 | watering
+T | 0 | movie #fun
+D | 0 | meeting | 06/11/2313 1913
+T | 0 | zzz
+T | 0 | artt

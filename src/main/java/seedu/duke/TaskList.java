@@ -9,6 +9,7 @@ import java.util.Collections;
 public class TaskList {
 
     private static ArrayList<Task> taskList;
+    private static int numTaskDone = 0;
 
     /**
      * Constructor of the Tasklist class.

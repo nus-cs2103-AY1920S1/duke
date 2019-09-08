@@ -27,6 +27,10 @@ public class ShowCommand extends Command {
         StringBuilder printStr = new StringBuilder();
         printStr.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.getTaskCount(); i++) {
+            if (i == tasks.getTaskCount() - 1) {
+                printStr.append((i + 1) + ". " + tasks.getTask(i));
+                break;
+            }
             printStr.append((i + 1) + ". " + tasks.getTask(i) + "\n");
         }
 

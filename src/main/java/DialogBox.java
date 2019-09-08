@@ -57,7 +57,6 @@ public class DialogBox extends HBox {
         //add background color
         this.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY, Insets.EMPTY)));
         //Show overflow
-        dialog.setWrapText(true);
         dialog.setMinSize(Label.USE_COMPUTED_SIZE, Label.USE_PREF_SIZE);
     }
 

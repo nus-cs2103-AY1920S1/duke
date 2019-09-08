@@ -33,20 +33,14 @@ public class DoneCommand extends Command {
      * @throws DukeException If the done command is invalid.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String cleanedInput = input.strip().toLowerCase();
+        String cleanedInput = cleanInput(input);
         String output = markAsDone(cleanedInput, tasks);
         return output;
     }
 
     private String markAsDone(String input, TaskList tasks) throws DukeException {
         try {
-            Pattern p = Pattern.compile("\\d+");
-            Matcher m = p.matcher(input);
-            ArrayList<Integer> listOfTaskIds = new ArrayList<>();
-            while (m.find()) {
-                int taskId = Integer.parseInt(m.group());
-                listOfTaskIds.add(taskId);
-            }
+            ArrayList<Integer> listOfTaskIds = getListOfTaskIds(input);
             if (listOfTaskIds.isEmpty()) {
                 throw new DukeException("Invalid \"done\" command!"
                         + " Please enter one or more integer IDs after \"done\".");
@@ -55,6 +49,17 @@ public class DoneCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskDukeException("Task not found! Please enter a valid task ID.");
         }
+    }
+
+    private ArrayList<Integer> getListOfTaskIds(String input) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(input);
+        ArrayList<Integer> listOfTaskIds = new ArrayList<>();
+        while (m.find()) {
+            int taskId = Integer.parseInt(m.group());
+            listOfTaskIds.add(taskId);
+        }
+        return listOfTaskIds;
     }
 
     /**

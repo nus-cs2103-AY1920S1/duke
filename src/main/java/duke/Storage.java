@@ -66,24 +66,20 @@ public class Storage {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(path, "UTF-8");
-            for (Task task : taskList) {
+            taskList.stream().map((task) -> {
                 StringBuilder sb = new StringBuilder();
                 String taskCommand = task.getTaskName().toLowerCase();
                 sb.append(taskCommand)
                         .append("|").append(taskCommand)
                         .append(" ").append(task.getDescription());
                 if (task instanceof Event) {
-                    sb.append(" /at ")
-                            .append(((TaskWithDate) task).getParseableDateToString());
+                    sb.append(" /at ").append(((TaskWithDate) task).getParseableDateToString());
                 } else if (task instanceof Deadline) {
-                    sb.append(" /by ")
-                            .append(((TaskWithDate) task).getParseableDateToString());
+                    sb.append(" /by ").append(((TaskWithDate) task).getParseableDateToString());
                 }
-                sb.append("|")
-                        .append(task.isDone());
-
-                writer.println(sb);
-            }
+                sb.append("|").append(task.isDone());
+                return sb;
+            }).forEach((writer::println));
         } catch (IOException e) {
             throw new DukeException("An exception occurred when saving to file.");
         } finally {

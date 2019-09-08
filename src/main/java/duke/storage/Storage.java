@@ -71,7 +71,7 @@ public class Storage {
                 boolean isDone = tokens[1].equals("1");
                 String desc = tokens[2];
                 Task t = null;
-                assert type != null;
+                assert type != null : "First String token is null.";
                 switch (type) {
                 case "T":
                     t = new ToDo(desc);

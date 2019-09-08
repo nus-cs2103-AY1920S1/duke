@@ -17,13 +17,11 @@ public class Duke {
      */
     private Duke(String filePath) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
 
         try {
-            this.tasks = storage.load();
+            this.loadData(filePath);
         } catch (DukeException e) {
-            this.ui.showException(e);
-            this.tasks = new TaskList();
+            e.printStackTrace();
         }
     }
 
@@ -100,6 +98,18 @@ public class Duke {
                 break;
             }
 
+            case "savefile": {
+                String filePath = Parser.extractQuery(input);
+                try {
+                    this.loadData(filePath);
+                    output.append(this.ui.showSaveFileChange(filePath));
+                } catch (DukeException e) {
+                    output.append(this.ui.showNewSaveFile(filePath));
+                }
+
+                break;
+            }
+
             case "todo":
                 // fallthrough
             case "deadline":
@@ -122,6 +132,23 @@ public class Duke {
         }
 
         return output.toString();
+    }
+
+    /**
+     * Attempts to load data from a save file. If the save file is not found, a new task list is created.
+     *
+     * @param filePath Save file location.
+     * @throws DukeException If loading data from the save file fails due to I/O or data errors.
+     */
+    private void loadData(String filePath) throws DukeException {
+        this.storage = new Storage(filePath);
+
+        try {
+            this.tasks = storage.load();
+        } catch (DukeException e) {
+            this.tasks = new TaskList();
+            throw e;
+        }
     }
 
     /**

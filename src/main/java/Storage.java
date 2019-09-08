@@ -197,6 +197,7 @@ public class Storage {
     public static String serialize(Iterable<Task> tasks) {
         final StringJoiner output = new StringJoiner("\n");
         for (Task t : tasks) {
+            assert t != null;
             output.add(serializeTask(t));
         }
         return output.toString();

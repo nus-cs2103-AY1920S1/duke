@@ -114,6 +114,8 @@ public class Ui {
      * @param task Task which was marked as done.
      */
     public void printMarkTaskAsDoneMsg(Task task) {
+        assert task != null : "Task should not be null.";
+
         System.out.println(horizontalLine);
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       " + task);
@@ -122,6 +124,8 @@ public class Ui {
     }
 
     public String getMarkTaskAsDoneMsg(Task task) {
+        assert task != null : "Task should not be null.";
+
         return "Nice! I've marked this task as done:\n  " + task;
     }
 
@@ -131,6 +135,8 @@ public class Ui {
      * @param task Task which was deleted.
      */
     public void printDeleteTaskMsg(Task task) {
+        assert task != null : "Task should not be null.";
+
         System.out.println(horizontalLine);
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + task);
@@ -139,6 +145,8 @@ public class Ui {
     }
 
     public String getDeleteTaskMsg(Task task) {
+        assert task != null : "Task should not be null.";
+
         return "Noted. I've removed this task:\n  " + task;
     }
 
@@ -149,6 +157,9 @@ public class Ui {
      * @param numOfTasks Number of tasks in the TaskList after task was added.
      */
     public void printAddTaskMsg(Task task, int numOfTasks) {
+        assert task != null : "Task should not be null.";
+        assert numOfTasks > 0 : "There should be at least 1 task in the TaskList after a task is added.";
+
         System.out.println(horizontalLine);
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + task);
@@ -158,6 +169,9 @@ public class Ui {
     }
 
     public String getAddTaskMsg(Task task, int numOfTasks) {
+        assert task != null : "Task should not be null.";
+        assert numOfTasks > 0 : "There should be at least 1 task in the TaskList after a task is added.";
+
         return "Got it. I've added this task:\n  " + task
                 + "\nNow you have " + numOfTasks + " tasks in the list.";
     }

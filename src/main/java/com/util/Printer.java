@@ -32,6 +32,8 @@ public class Printer {
             + repeatChar(HORIZONTAL_LINE_LENGTH - PADDING_LENGTH, '_')
             + "\n";
 
+    private static String buffer = "";
+
     /**
      * Displays duke logo.
      */
@@ -51,6 +53,7 @@ public class Printer {
      */
     public static void printError(String str) {
         System.out.print(formatString("☹ OOPS!!! " + str));
+        buffer += str + "\n";
     }
 
     /**
@@ -60,6 +63,7 @@ public class Printer {
      */
     public static void printString(String str) {
         System.out.print(formatString(str));
+        buffer += str + "\n";
     }
 
     /**
@@ -123,5 +127,11 @@ public class Printer {
      */
     private static String repeatChar(int length, char c) {
         return String.valueOf(c).repeat(Math.max(0, length));
+    }
+
+    public static String flush() {
+        String buf = buffer + "";
+        buffer = "";
+        return buf;
     }
 }

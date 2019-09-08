@@ -1,6 +1,8 @@
 package utils;
 
+import command.CommandCentre;
 import exception.EmptyDescriptionException;
+import exception.InvalidCommandException;
 import task.TaskList;
 
 import java.text.ParseException;
@@ -13,31 +15,28 @@ import java.util.Scanner;
  */
 public class Parser {
 
+    public static final String DATE_FORMATTER_PATTERN = "dd/MM/yyyy HHmm";
+    private static final String EVENT_KEYWORD = "/at";
+    private static final String DEADLINE_KEYWORD = "/by";
     private Scanner sc;
     private Ui ui;
+    private CommandCentre commandCentre;
+    private String arguments;
 
     public Parser() {
-        ui = Ui.getInstance();
+        ui = new Ui();
     }
 
     public void setScanner(Scanner sc) {
         this.sc = sc;
     }
 
-    /**
-     * Clears the current line the scanner is on.
-     */
-    public void nextLine() {
-        sc.nextLine();
+    public void setCommandCentre(CommandCentre commandCentre) {
+        this.commandCentre = commandCentre;
     }
 
-    /**
-     * Checks whether there is more content for the scanner to read.
-     *
-     * @return Whether there is next or not.
-     */
-    public boolean hasNext() {
-        return sc.hasNext();
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     /**
@@ -45,8 +44,20 @@ public class Parser {
      *
      * @return The next action string.
      */
-    public String getNextAction() {
-        return sc.next();
+    public String getNextAction(String input) {
+        String[] inputArray = parseRawInput(input);
+        String action = inputArray[0].trim();
+        arguments = inputArray[1].trim();
+        try {
+            if (!commandCentre.contains(action)) {
+                throw new InvalidCommandException(ui.buildInvalidCommandMessage());
+            }
+
+        } catch (InvalidCommandException e) {
+            ui.appendMessage(e.getMessage());
+            return null;
+        }
+        return action;
     }
 
     /**
@@ -55,39 +66,18 @@ public class Parser {
      * user.
      *
      * @return If successful, an array of String of length 2 consisting of the
-     *     Event Task's name and deadline, a String in the format "DD/MM/YYYY
-     *     HHmm". Else, a null object.
+     * Event Task's name and deadline, a String in the format "DD/MM/YYYY
+     * HHmm". Else, a null object.
      */
     public String[] parseEventDetail() {
-        try {
-            String taskName = sc.nextLine().trim();
-            String[] taskInfo = taskName.split("\\s*/at\\s*");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            sdf.setLenient(false);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(sdf.parse(taskInfo[1]));
-
-            if (taskName.isEmpty() || taskInfo[0].trim().isEmpty() || taskInfo[1].equals("")) {
-                throw new EmptyDescriptionException();
-            }
+        String taskName = arguments;
+        // Separates a line "taskName /at 20/08/2019 2100" to
+        // {"taskName", "20/08/2019 2100"}
+        String[] taskInfo = taskName.split("\\s*" + EVENT_KEYWORD + "\\s*");
+        boolean isValid = validateTaskInfo(taskInfo);
+        if (isValid) {
             return taskInfo;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.addWarningMessage(String.format("%s OOPS!!! There must be exactly one argument before and "
-                    + "one argument after the keyword %s.\n",
-                    Ui.SAD_EMOTICON,
-                    "/at"));
-            return null;
-
-        } catch (ParseException e) {
-            ui.addWarningMessage(Ui.SAD_EMOTICON
-                    + " OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\""
-                    + " and must be valid.\n");
-            return null;
-
-        } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(String.format("%s OOPS!!! The description of a %s cannot be empty.\n",
-                    Ui.SAD_EMOTICON,
-                    "event"));
+        } else {
             return null;
         }
     }
@@ -97,40 +87,18 @@ public class Parser {
      * Invalid input argument types or format will be highlighted to the user.
      *
      * @return If successful, an array of String of length 2 consisting of the
-     *     Deadline Task's name and deadline, a String in the format "DD/MM/YYYY
-     *     HHmm". Else, a null object.
+     * Deadline Task's name and deadline, a String in the format "DD/MM/YYYY
+     * HHmm". Else, a null object.
      */
     public String[] parseDeadlineDetail() {
-        try {
-            String taskName = sc.nextLine().trim();
-            String[] taskInfo = taskName.split("\\s*/by\\s*");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            sdf.setLenient(false);
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(sdf.parse(taskInfo[1]));
-
-            if (taskName.isEmpty() || taskInfo[0].trim().isEmpty()) {
-                throw new EmptyDescriptionException();
-            }
+        String taskName = arguments;
+        // Separates a line "taskName /by 20/08/2019 2100" to
+        // {"taskName", "20/08/2019 2100"}
+        String[] taskInfo = taskName.split("\\s*" + DEADLINE_KEYWORD + "\\s*");
+        boolean isValid = validateTaskInfo(taskInfo);
+        if (isValid) {
             return taskInfo;
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.addWarningMessage(String.format("%s OOPS!!! There must be exactly one argument before and "
-                    + "one argument after the keyword %s.\n",
-                    Ui.SAD_EMOTICON,
-                    "/by"));
-            return null;
-
-        } catch (ParseException e) {
-            ui.addWarningMessage(Ui.SAD_EMOTICON
-                    + " OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\" "
-                    + "and must be valid.\n");
-            return null;
-
-        } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(String.format("%s OOPS!!! The description of a %s cannot be empty.\n",
-                    Ui.SAD_EMOTICON,
-                    "deadline"));
+        } else {
             return null;
         }
     }
@@ -141,19 +109,14 @@ public class Parser {
      * user.
      *
      * @return If successful, a String representing the Task's name.
-     *     Else, a null object.
+     * Else, a null object.
      */
     public String parseTodoDetail() {
-        try {
-            String taskName = sc.nextLine().trim();
-            if (taskName.isEmpty()) {
-                throw new EmptyDescriptionException();
-            }
+        String taskName = arguments;
+        boolean isValid = validateDescription(taskName);
+        if (isValid) {
             return taskName;
-        } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(String.format("%s OOPS!!! The description of a %s cannot be empty.\n",
-                    Ui.SAD_EMOTICON,
-                    "todo"));
+        } else {
             return null;
         }
     }
@@ -164,36 +127,29 @@ public class Parser {
      *
      * @return If successful, an Integer representing the task index. Else, a null object.
      */
-    public Integer getTaskIdx() {
-
+    public Integer parseTaskIdx() {
+        String infoString = arguments;
         TaskList taskList = TaskList.newInstance();
+        int idx;
         try {
-            String infoString = sc.nextLine().trim();
-            int idx = Integer.parseInt(infoString) - 1;
-            taskList.get(idx);
-            return idx;
-
-        } catch (IndexOutOfBoundsException e) {
-            if (taskList.isEmpty()) {
-                ui.addWarningMessage(String.format("%s OOPS!!! You have no task at the moment.\n",
-                        Ui.SAD_EMOTICON,
-                        1,
-                        taskList.size()));
-            } else {
-                ui.addWarningMessage(String.format("%s OOPS!!! Task index number must be a number from %d to %d.\n",
-                        Ui.SAD_EMOTICON,
-                        1,
-                        taskList.size()));
-            }
-            return null;
-
+            idx = Integer.parseInt(infoString) - 1;
         } catch (NumberFormatException e) {
-            ui.addWarningMessage(String.format("%s OOPS!!! Task index number must be a number from %d to %d.\n",
-                    Ui.SAD_EMOTICON,
-                    1,
-                    taskList.size()));
+            ui.appendMessage(ui.buildInvalidTaskListIndexMessage(taskList.size()));
             return null;
         }
+
+        try {
+            taskList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            if (taskList.isEmpty()) {
+                ui.appendMessage(ui.buildEmptyTaskListMessage());
+            } else {
+                ui.appendMessage(ui.buildInvalidTaskListIndexMessage(taskList.size()));
+            }
+            return null;
+        }
+
+        return idx;
     }
 
     /**
@@ -203,15 +159,85 @@ public class Parser {
      * @return If successful, the keyword in String. Else, a null object.
      */
     public String parseFindKeyword() {
-        try {
-            String keyword = sc.nextLine().trim();
-            if (keyword.isEmpty()) {
-                throw new EmptyDescriptionException();
-            }
+        String keyword = arguments.trim();
+        boolean isValid = validateDescription(keyword);
+        if (isValid) {
             return keyword;
-        } catch (EmptyDescriptionException e) {
-            ui.addWarningMessage(Ui.SAD_EMOTICON + " OOPS!!! The keyword for \"find\" cannot be empty.\n");
+        } else {
             return null;
         }
     }
+
+    private boolean validateDescription(String keyword) {
+        try {
+            if (keyword.isEmpty()) {
+                throw new EmptyDescriptionException(ui.buildEmptyDescriptionMessage());
+            }
+            return true;
+        } catch (EmptyDescriptionException e) {
+            ui.appendMessage(e.getMessage());
+            return false;
+        }
+    }
+
+    private boolean validateTaskInfo(String[] taskInfo) {
+        try {
+            if (isArgumentBlank(taskInfo)) {
+                throw new EmptyDescriptionException(ui.buildEmptyDescriptionMessage());
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ui.appendMessage(ui.buildIncorrectArgumentsMessage());
+            return false;
+
+        } catch (EmptyDescriptionException e) {
+            ui.appendMessage(e.getMessage());
+            return false;
+        }
+
+        String dateString = taskInfo[1];
+        try {
+            validateDateFormat(dateString);
+        } catch (ParseException e) {
+            ui.appendMessage(ui.buildIncorrectDateFormatMessage());
+            return false;
+
+        }
+        return true;
+    }
+
+    private void validateDateFormat(String dateString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMATTER_PATTERN);
+        sdf.setLenient(false);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sdf.parse(dateString));
+    }
+
+    private boolean isArgumentBlank(String[] taskInfo) {
+        return taskInfo.length == 0 || taskInfo[0].isBlank() || taskInfo[1].isBlank();
+    }
+
+    /**
+     * Splits the raw user input String into the action keyword and its arguments.
+     *
+     * @param input The raw user input sent to the Duke chat bot via the javafx GUI.
+     * @return An array of size two which contains the "action" as the first element and
+     * "arguments" as the second element. If there are no additional arguments to the
+     * action, the second element will simply be an empty string.
+     */
+    private String[] parseRawInput(String input) {
+        StringBuilder first = new StringBuilder();
+        StringBuilder second = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            Character c = input.charAt(i);
+            if (c != ' ') {
+                first.append(c);
+            } else {
+                second.append(input.substring(i));
+                break;
+            }
+        }
+        return new String[]{first.toString(), second.toString()};
+    }
+
+
 }

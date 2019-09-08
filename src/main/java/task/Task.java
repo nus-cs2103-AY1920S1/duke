@@ -42,7 +42,9 @@ public abstract class Task {
      *
      * @return The additional information of the task in formatted style.
      */
-    protected abstract String displayAdditionalInfo();
+    protected abstract String getAdditionalInfoForDisplay();
+
+    public abstract String getStorageStringFormat();
 
     protected void setDone() {
         this.status = DONE;
@@ -68,11 +70,18 @@ public abstract class Task {
         }
     }
 
+    public boolean isAssociated(String keyword) {
+        return name.contains(keyword)
+                || getAdditionalInfo().contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("%s%s %s %s", getTypeSymbol(),
                 getStatusSymbol(),
                 name,
-                displayAdditionalInfo());
+                getAdditionalInfoForDisplay());
     }
+
+
 }

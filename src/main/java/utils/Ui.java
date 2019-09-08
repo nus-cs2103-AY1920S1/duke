@@ -4,6 +4,7 @@ import task.Task;
 
 import java.util.List;
 
+
 /**
  * A Ui class to manage all of Duke's output. It functions with a singleton
  * model so that at any point in time, only one copy of the output String is
@@ -14,32 +15,48 @@ public class Ui {
             "Here are the tasks in your list:\n";
     public static final String FIND_ACTION_TITLE =
             "Here are the matching tasks in your list:\n";
-    public static final String SAD_EMOTICON = "\u2639"; // "☹"
+    private static final String SAD_EMOTICON = "\u2639"; // "☹"
+    private static final String EMPTY_DESCRIPTION_EXCEPTION_MESSAGE = "Description cannot be empty";
+    private static final String INVALID_COMMAND_EXCEPTION_MESSAGE = "Command is invalid";
     private static final String LOGO =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String HELP_MESSAGE =
+            "List of commands:\n\n"
+                    + "bye:\nExits from the program\n\n"
 
-    private static final String DIVIDER = "____________________________________________________\n";
+                    + "list:\nList all existing tasks\n\n"
 
-    private static StringBuilder outputBuilder;
+                    + "help:\nPrints the list of commands\n\n"
+
+                    + "done n:\nMarks the n-th task on the list as done\n\n"
+
+                    + "delete n:\nDeletes the n-th task on the list\n\n"
+
+                    + "todo taskName :\n"
+                    + "Adds a new Todo task with the given \"taskName\".\n\n"
+
+                    + "event taskName /at DD/MM/YYYY HHmm :\n"
+                    + "Adds a new Event task with the deadline in the given format.\n\n"
+
+                    + "deadline taskName /by DD/MM/YYYY HHmm :\n"
+                    + "Adds a new Deadline task with the deadline in the given format.\n\n"
+
+                    + "find keyword :\n"
+                    + "Returns a list of task with names containing the \"keyword\".\n";
+
+
+    private StringBuilder outputBuilder;
+
 
     /**
-     * Generates an instance object of the singleton class Ui to build
-     * the outputBuilder.
-     *
-     * @return An instance of Ui object.
+     * Initializes StringBuilder on construction.
      */
-    public static Ui getInstance() {
-        return new Ui();
-    }
-
-    private Ui() {
-        if (outputBuilder == null) {
-            outputBuilder = new StringBuilder();
-        }
+    public Ui() {
+        outputBuilder = new StringBuilder();
     }
 
     /**
@@ -47,33 +64,15 @@ public class Ui {
      */
     public void printWelcomeMessage() {
         outputBuilder.append("Hello from\n" + LOGO);
-        outputBuilder.append(DIVIDER);
         outputBuilder.append("Hello! I'm Duke\n");
         outputBuilder.append("What can I do for you?\n");
-        outputBuilder.append(DIVIDER);
     }
 
     /**
      * Prints a list of actions that can be used.
      */
     public void printHelpMessage() {
-        outputBuilder.append("List of commands:\n");
-        outputBuilder.append("bye:\nExits from the program\n");
-        outputBuilder.append("list:\nList all existing tasks\n");
-        outputBuilder.append("help:\nPrints the list of commands\n");
-        outputBuilder.append("done n:\nMarks the n-th task on the list as done\n");
-        outputBuilder.append("delete n:\nDeletes the n-th task on the list\n");
-        outputBuilder.append("todo taskName :\n"
-                + "Adds a new Todo task with the given name.\n");
-        outputBuilder.append("event taskName /at DD/MM/YYYY HHmm :\n"
-                + "Adds a new Event task with the deadline in the\n"
-                + "given format.\n");
-        outputBuilder.append("deadline taskName /by DD/MM/YYYY HHmm :\n"
-                + "Adds a new Deadline task with the deadline in the\n"
-                + "given format.\n");
-        outputBuilder.append("search keyword :\n"
-                + "Returns a list of task with names containing the\n"
-                + "keyword.\n");
+        outputBuilder.append(HELP_MESSAGE);
     }
 
     /**
@@ -83,12 +82,6 @@ public class Ui {
         outputBuilder.append("Bye. Hope to see you again soon!\n");
     }
 
-    /**
-     * Prints a divider line for pretty printing.
-     */
-    public void printDivider() {
-        outputBuilder.append(DIVIDER);
-    }
 
     /**
      * Prints a message to indicate that is no existing task.
@@ -131,6 +124,10 @@ public class Ui {
     public void printTaskDeletedMessage(Task task, int taskListSize) {
         outputBuilder.append("Noted. I've removed this task:\n");
         outputBuilder.append(String.format("%s\n", task));
+        appendListSummary(taskListSize);
+    }
+
+    private void appendListSummary(int taskListSize) {
         outputBuilder.append(String.format("Now you have %d tasks in the list.\n", taskListSize));
     }
 
@@ -144,10 +141,45 @@ public class Ui {
     public void printTaskAddedMessage(Task task, int taskListSize) {
         outputBuilder.append("Got it. I've added this task:\n");
         outputBuilder.append(String.format("%s\n", task));
-        outputBuilder.append(String.format("Now you have %d tasks in the list.\n", taskListSize));
+        appendListSummary(taskListSize);
     }
 
-    public void addWarningMessage(String message) {
+    public String buildIncorrectArgumentsMessage() {
+        return String.format("%s OOPS!!! Incorrect number of arguments. Use the \"help\" command for guide.\n",
+                Ui.SAD_EMOTICON);
+    }
+
+    public String buildEmptyDescriptionMessage() {
+        return String.format("%s OOPS!!! Description cannot be empty. Use the \"help\" command for guide.\n",
+                Ui.SAD_EMOTICON);
+    }
+
+    public String buildIncorrectDateFormatMessage() {
+        return String.format("%s OOPS!!! Date must be valid and be in the format \"%s\"\n",
+                Ui.SAD_EMOTICON,
+                Parser.DATE_FORMATTER_PATTERN);
+    }
+
+    public String buildInvalidCommandMessage() {
+        return String.format("%s OOPS!!! I'm sorry, but I don't know what that means :-(\n",
+                SAD_EMOTICON);
+    }
+
+    public String buildEmptyTaskListMessage() {
+        return String.format("%s OOPS!!! You have no task at the moment.\n",
+                Ui.SAD_EMOTICON);
+    }
+
+    public String buildInvalidTaskListIndexMessage(int size) {
+        return String.format("%s OOPS!!! Task index number must be a number from %d to %d.\n",
+                Ui.SAD_EMOTICON,
+                1,
+                size);
+    }
+
+
+
+    public void appendMessage(String message) {
         outputBuilder.append(message);
     }
 
@@ -155,8 +187,11 @@ public class Ui {
         outputBuilder = new StringBuilder();
     }
 
-    public String getOutput() {
-        return outputBuilder.toString();
+    public String getOutputAndClearBuilder() {
+        String output = outputBuilder.toString();
+        resetOutputBuilder();
+        return output;
     }
+
 
 }

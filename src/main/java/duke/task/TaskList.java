@@ -72,6 +72,7 @@ public class TaskList {
     public Task doTask(int index) {
         Task task = getTask(index);
         task.markAsDone();
+        assert task.isDone();
         return task;
     }
 
@@ -101,13 +102,14 @@ public class TaskList {
     }
 
     /**
-     * Gets an ArrayList of all tasks in the task list.
+     * Gets a copy of ArrayList of all tasks in the task list.
      *
      * @return ArrayList of all tasks in the task list.
      */
     public ArrayList<Task> getAllTasks() {
-        return new ArrayList<>(list);
-
+        ArrayList<Task> newList = new ArrayList<>(list);
+        assert newList.size() == list.size();
+        return newList;
     }
 
     /**

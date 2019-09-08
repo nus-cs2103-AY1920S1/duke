@@ -18,7 +18,6 @@ public class DukeReadFile {
 		this.filePath = filePath;
 	}
 
-
 	/**
 	 * Creates a file object to read the data saved in a text
 	 * document and loading the tasks to be included in the task
@@ -32,7 +31,6 @@ public class DukeReadFile {
 		while (scanner.hasNext()) {
 			currentTask += scanner.nextLine() + "\n";
 		}
-
 
 		String[] addTask = currentTask.split("\n");
 

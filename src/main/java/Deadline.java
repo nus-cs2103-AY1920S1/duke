@@ -15,11 +15,24 @@ public class Deadline extends Task {
 	 * @return Formatted time.
 	 */
 	public String getDeadline() {
-
 		return by;
 	}
 
+	public static Deadline createDeadLine(String input) throws DukeException {
+		if (input.length() < 9) {
+			throw new DukeException(Ui.EMPTY_INPUT);
+		}
 
+		String[] deadLineDate = input.substring(9).split(" /by ");
+		if (deadLineDate.length != 2) {
+			throw new DukeInvalidArgumentException(Ui.DEADLINE_FORMAT,
+			                                       input);
+		}
+		String taskD = deadLineDate[0];
+		String dateD = deadLineDate[1];
+		Deadline newDeadLine = new Deadline(taskD, dateD);
+		return newDeadLine;
+	}
 
 	/**
 	 * Returns a string with a deadline symbol [D] as well as the description and deadline of the
@@ -29,7 +42,6 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String toString() {
-
 		return "[D]" + super.toString() + " (by: " + DateAndTime.checkTime(by) + ")";
 	}
 }

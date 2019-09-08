@@ -1,17 +1,15 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Deals with making sense of the user command and formats
  * the input by the user to a specified format.
  */
 public class Parser {
-	Ui ui;
-	TaskList tasks;
-	DukeReadFile rf;
-	DukeWriteFile wf;
-	boolean isEndLoop;
-
+	private Ui ui;
+	private TaskList tasks;
+	private DukeReadFile rf;
+	private DukeWriteFile wf;
+	private boolean isEndLoop;
 
 	public Parser(Ui ui, TaskList tasks, DukeReadFile rf, DukeWriteFile wf) {
 		this.ui = ui;
@@ -21,145 +19,114 @@ public class Parser {
 		isEndLoop = false;
 	}
 
-
 	/**
 	 * Main bullk of the program where evaluation of the input
 	 * by the user takes place.
 	 *
 	 * @param input Input of the tasks of the user.
 	 */
-	public void evaluate(String input) throws DukeException, DukeInvalidArgumentException {
+	public String evaluate(String input) throws DukeException {
+		StringBuilder storedText = new StringBuilder();
 		int counter = 0;
 		if (input.equals("bye")) {
-			System.out.println(ui.OUTRO);
 			isEndLoop = true;
+			storedText.append(Ui.OUTRO);
 		} else if (input.startsWith("find")) {
 
-				if (input.length() < 5) {
-					throw new DukeException(ui.EMPTY_INPUT);
+			if (input.length() < 5) {
+				throw new DukeException(Ui.EMPTY_INPUT);
+			}
+			String findTask = input.substring(5);
+			storedText.append(Ui.BORDER + "\nHere are the matching tasks in your list:\n");
+			int taskNumber = 1;
+			for (int i = 0; i < tasks.getTaskList().size(); i++) {
+				if (tasks.getTask(i).toString().contains(findTask)) {
+					storedText.append(taskNumber + "." + tasks.getTask(i).toString() + "\n");
+					taskNumber++;
 				}
-				String findTask = input.substring(5);
-				System.out.println(ui.BORDER + "\nHere are the matching tasks in your list:");
-				int taskNumber = 1;
-				for (int i = 0; i < tasks.getTaskList().size(); i++) {
-					if (tasks.getTask(i).toString().contains(findTask)) {
-						System.out.println(taskNumber + "." + tasks.getTask(i).toString());
-						taskNumber++;
-					}
-				}
-				System.out.println(ui.BORDER);
+			}
+			storedText.append(Ui.BORDER);
 
 		} else if (input.equals("list")) {
 			int itemNumber = 1;
 			counter = tasks.getCounter();
 			if (counter == 0) {
-				System.out.println(ui.NO_TASK);
+				storedText.append(Ui.NO_TASK);
 			} else {
-				System.out.println(ui.OUTPUT_TASK_LIST);
+				storedText.append(Ui.OUTPUT_TASK_LIST);
 				for (int i = 0; i < counter; i++) {
-					System.out.println(itemNumber + "." + tasks.getTask(i).toString());
+					storedText.append(itemNumber + "." + tasks.getTask(i).toString() + "\n");
 					itemNumber++;
 				}
-				System.out.println(ui.BORDER);
+				storedText.append(Ui.BORDER);
 			}
 
 		} else if (input.startsWith("done")) {
 			try {
 				String[] taskDone = input.split(" ");
 				if (taskDone.length == 1) {
-					throw new DukeException(ui.WRONG_OP);
+					throw new DukeException(Ui.WRONG_OP);
 				}
 				if (taskDone.length > 2) {
-					throw new DukeInvalidArgumentException(ui.DONE_FORMAT, input);
+					throw new DukeInvalidArgumentException(Ui.DONE_FORMAT, input);
 				}
-
 				int taskIndex = Integer.parseInt(taskDone[1]);
 				tasks.getTask(taskIndex - 1).markAsDone();
-				System.out.println(ui.MARK_DONE);
-				System.out.println(tasks.getTask(taskIndex - 1).toString() + "\n" + ui.BORDER);
+				storedText.append(Ui.MARK_DONE);
+				storedText.append(tasks.getTask(taskIndex - 1).toString() + "\n" + Ui.BORDER);
 				wf.writeToFile(DukeWriteFile.writeFile(tasks.getTaskList()));
 
-			}  catch (IndexOutOfBoundsException e) {
+			} catch (IndexOutOfBoundsException e) {
+				storedText.append(Ui.BORDER + "\nTask number not found! Try again!\n" + Ui.BORDER);
 
-				System.out.println(ui.BORDER + "\nTask number not found! Try again!\n" + ui.BORDER);
 			} catch (NumberFormatException e) {
+				storedText.append(Ui.BORDER + "\nOOPS!! Please input a task number!\n" + Ui.BORDER);
 
-				System.out.println(ui.BORDER + "\nOOPS!! Please input a task number!\n" + ui.BORDER);
 			} catch (IOException e) {
+				storedText.append(Ui.BORDER + "\n" + e + "\n" + Ui.BORDER);
 
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 			}
 		} else if (input.startsWith("deadline")) {
 			try {
-				if (input.length() < 9) {
-					throw new DukeException(ui.EMPTY_INPUT);
-				}
-
-				String[] deadLineDate = input.substring(9).split(" /by ");
-				if (deadLineDate.length != 2) {
-					throw new DukeInvalidArgumentException(ui.DEADLINE_FORMAT,
-							input);
-				}
-				String taskD = deadLineDate[0];
-				String dateD = deadLineDate[1];
-				Deadline newDeadLine = new Deadline(taskD, dateD);
-				tasks.addTask(newDeadLine);
-				counter = tasks.getCounter();
-				System.out.println(ui.BORDER + "\nGot it. I've added this task:");
-				System.out.println(newDeadLine.toString());
-				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.appendToFile("D~" + newDeadLine.getStatus() + "~" +
-						newDeadLine.getDescription() + "~" + newDeadLine.getDeadline() + "\n");
+				Deadline deadLineTask = Deadline.createDeadLine(input);
+				tasks.addTask(deadLineTask);
+				storedText.append(Ui.BORDER + "\nGot it. I've added this task:\n");
+				storedText.append(deadLineTask.toString() + "\n");
+				storedText.append("Now you have " + tasks.getCounter() + " tasks in the list.\n" + Ui.BORDER);
+				wf.appendToFile("D~" + deadLineTask.getStatus() + "~" +
+						                deadLineTask.getDescription() + "~" + deadLineTask.getDeadline() + "\n");
 
 			} catch (IOException e) {
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
+				storedText.append(Ui.BORDER + "\n" + e + "\n" + Ui.BORDER);
 			}
 
 		} else if (input.startsWith("event")) {
-
 			try {
-				if (input.length() < 6) {
-					throw new DukeException(ui.EMPTY_INPUT);
-				}
-
-				String[] eventDate = input.substring(6).split(" /at ");
-				if (eventDate.length != 2) {
-					throw new DukeInvalidArgumentException("OOPS!! Wrong format! Format: event [Task] /at [time]",
-							input);
-				}
-				String taskE = eventDate[0];
-				String dateE = eventDate[1];
-				Event newEvent = new Event(taskE, dateE);
-				tasks.addTask(newEvent);
+				Event eventTask = Event.createEvent(input);
+				tasks.addTask(eventTask);
 				counter = tasks.getCounter();
-				System.out.println(ui.BORDER + "\nGot it. I've added this task:");
-				System.out.println(newEvent.toString());
-				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.appendToFile("E~" + newEvent.getStatus() + "~" +
-						newEvent.getDescription() + "~" + newEvent.getVenue() + "\n");
+				storedText.append(Ui.BORDER + "\nGot it. I've added this task:\n");
+				storedText.append(eventTask.toString() + "\n");
+				storedText.append("Now you have " + counter + " tasks in the list.\n" + Ui.BORDER);
+				wf.appendToFile("E~" + eventTask.getStatus() + "~" +
+						                eventTask.getDescription() + "~" + eventTask.getVenue() + "\n");
 
 			} catch (IOException e) {
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
+				storedText.append(Ui.BORDER + "\n" + e + "\n" + Ui.BORDER);
 			}
 
 		} else if (input.startsWith("todo")) {
 			try {
-				if (input.length() < 5) {
-					throw new DukeException(ui.EMPTY_INPUT);
-				}
-
-				String taskToDo = input.substring(5);
-				Todo newToDo = new Todo(taskToDo);
-				tasks.addTask(newToDo);
+				Todo toDoTask = Todo.createToDo(input);
 				counter = tasks.getCounter();
-				System.out.println(ui.BORDER + "\nGot it. I've added this task:");
-				System.out.println(newToDo.toString());
-				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
-				wf.appendToFile("T~" + newToDo.getStatus() + "~" +
-						newToDo.getDescription() + "\n");
+				storedText.append(Ui.BORDER + "\nGot it. I've added this task:\n");
+				storedText.append(toDoTask.toString() + "\n");
+				storedText.append("Now you have " + counter + " tasks in the list.\n" + Ui.BORDER);
+				wf.appendToFile("T~" + toDoTask.getStatus() + "~" +
+						                toDoTask.getDescription() + "\n");
 
 			} catch (IOException e) {
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
+				storedText.append(Ui.BORDER + "\n" + e + "\n" + Ui.BORDER);
 			}
 
 		} else if (input.startsWith("delete")) {
@@ -176,39 +143,27 @@ public class Parser {
 				int taskIndex = Integer.parseInt(taskDelete[1]);
 				String removedTask = tasks.getTask(taskIndex - 1).toString();
 				tasks.deleteTask(taskIndex - 1);
-				System.out.println(ui.BORDER + "\nNoted. I've removed this task:");
-				System.out.println(removedTask);
-
+				storedText.append(ui.BORDER + "\nNoted. I've removed this task:\n");
+				storedText.append(removedTask + "\n");
 				counter = tasks.getCounter();
-				System.out.println("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
+				storedText.append("Now you have " + counter + " tasks in the list.\n" + ui.BORDER);
 				wf.writeToFile(DukeWriteFile.writeFile(tasks.getTaskList()));
 
 			} catch (NumberFormatException e) {
-
-				System.out.println(ui.BORDER + "\nOOPS!! Please input a task number!\n" + ui.BORDER);
+				storedText.append(ui.BORDER + "\nOOPS!! Please input a task number!\n" + ui.BORDER);
 
 			} catch (IndexOutOfBoundsException e) {
-
-				System.out.println(ui.BORDER + "\nTask number not found! Try again!\n" + ui.BORDER);
+				storedText.append(ui.BORDER + "\nTask number not found! Try again!\n" + ui.BORDER);
 
 			} catch (IOException e) {
-
-				System.out.println(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
+				storedText.append(ui.BORDER + "\n" + e + "\n" + ui.BORDER);
 
 			}
 		} else {
-				throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 		}
+
+		return storedText.toString();
 	}
 
-	/**
-	 * Returns a boolean true when the user has entered
-	 * an input 'bye'.
-	 *
-	 * @return Boolean
-	 */
-	public boolean isExit() {
-
-		return isEndLoop;
-	}
 }

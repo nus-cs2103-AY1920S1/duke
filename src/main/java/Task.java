@@ -6,6 +6,7 @@ public class Task {
 	/**
 	 * Creates a task with a description which is to be added
 	 * to the task list.
+	 *
 	 * @param description Description of task.
 	 */
 	public Task(String description) {
@@ -30,12 +31,6 @@ public class Task {
 	public void markAsDone() {
 		this.isDone = true;
 	}
-
-
-	public void markNotDone() {
-		this.isDone = false;
-	}
-
 
 	/**
 	 * Returns the description of the task.

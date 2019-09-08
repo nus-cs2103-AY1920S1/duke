@@ -1,4 +1,6 @@
-E~1~birthday~my house tomrrow 5/4/2011 1930
-T~1~my proj
-D~0~gui~today 2359 4/9/2019
-E~0~graduation~xuehong school 0800 7/9/2019
+D~1~proj~today 1230 2/3/2011
+D~0~homework~tomrrow noon 1540 26/5/2019
+D~1~proj~1230 5/3/2011
+T~0~homework
+T~0~
+T~0~

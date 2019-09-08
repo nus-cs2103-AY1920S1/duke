@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -22,7 +21,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) {
         return ui.getTasksListing(tasks);
     }
 }

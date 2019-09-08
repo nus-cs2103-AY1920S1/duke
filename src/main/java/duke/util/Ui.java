@@ -42,6 +42,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns the DukeException's formatted error message.
+     *
+     * @param e The DukeException where the error message is from.
+     * @return String containing the formatted error message of the DukeException.
+     */
     public String getErrorMsg(DukeException e) {
         return ":( OOPS!!! " + e.getMessage();
     }
@@ -57,12 +63,17 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns the greeting message shown at the start of the Duke program.
+     *
+     * @return String containing the greeting message.
+     */
     public String getGreetingMsg() {
         return "Hello I'm Duke!\nWhat can I do for you?";
     }
 
     /**
-     * Prints out the goodbye message when the user leaves the Duke program.
+     * Prints out the exit message when the user ends the Duke program.
      */
     public void printExitMsg() {
         // Exit
@@ -71,6 +82,11 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
+    /**
+     * Returns the exit message shown when the user ends the Duke program.
+     *
+     * @return String containing the exit message.
+     */
     public String getExitMsg() {
         return "Your tasks have been saved.\nBye. Hope to see you again soon!";
     }
@@ -88,6 +104,13 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns a String containing each Task separated by a new line.
+     * Each Task is prepended with their ID, which is its index + 1.
+     *
+     * @param tasks List of tasks being tracked by Duke.
+     * @return String containing all the tasks in the TaskList.
+     */
     public String getTasksListing(TaskList tasks) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
 
@@ -112,6 +135,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns a String indicating the task was marked as done.
+     *
+     * @param task Task which was marked as done.
+     * @return String indicating the task was marked as done.
+     */
     public String getMarkTaskAsDoneMsg(Task task) {
         assert task != null : "Task should not be null.";
 
@@ -130,6 +159,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns a String indicating the task was deleted.
+     *
+     * @param task Task which was deleted.
+     * @return String indicating the task was deleted.
+     */
     public String getDeleteTaskMsg(Task task) {
         assert task != null : "Task should not be null.";
 
@@ -149,6 +184,13 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns a String indicating the task was added.
+     *
+     * @param task Task which was added.
+     * @param numOfTasks Number of tasks in the TaskList after task was added.
+     * @return String indicating the task was added and the number of tasks in the list.
+     */
     public String getAddTaskMsg(Task task, int numOfTasks) {
         assert task != null : "Task should not be null.";
         assert numOfTasks > 0 : "There should be at least 1 task in the TaskList after a task is added.";
@@ -160,7 +202,7 @@ public class Ui {
     /**
      * Prints out searched tasks.
      *
-     * @param tasksWithKeyword List of tasks with description containing the user search keyword.
+     * @param tasksWithKeyword List of tasks with description containing the user's searched keyword.
      */
     public void printFoundTasksMsg(TaskList tasksWithKeyword) {
         System.out.println(horizontalLine);
@@ -169,6 +211,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Returns a String containing each found Task separated by a new line.
+     *
+     * @param tasksWithKeyword List of tasks with description containing the user's searched keyword.
+     * @return String containing all the found tasks in the TaskList.
+     */
     public String getFoundTasksMsg(TaskList tasksWithKeyword) {
         if (tasksWithKeyword.size() > 0) {
             StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");

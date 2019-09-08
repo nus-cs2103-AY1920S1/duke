@@ -95,6 +95,8 @@ public class Storage {
             tasks.add(task);
             if (taskStatus == 1) task.mark();
             break;
+        default:
+            throw new AssertionError(taskType);
         }
     }
 

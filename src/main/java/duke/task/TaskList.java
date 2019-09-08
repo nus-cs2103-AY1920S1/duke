@@ -58,19 +58,20 @@ public class TaskList {
      * @return String representing ordinal number nth.
      */
     private static String getOrdinal(int n) {
+        assert n > 0 : n;
         if (n >= 11 && n <= 13) {
             return n + "th";
         }
         switch (n % 10) {
         case 1:
             return n + "st of";
-        // Fallthrough
+            // Fallthrough
         case 2:
             return n + "nd of";
-        // Fallthrough
+            // Fallthrough
         case 3:
             return n + "rd of";
-        // Fallthrough
+            // Fallthrough
         default:
             return n + "th of";
         // Fallthrough
@@ -216,8 +217,10 @@ public class TaskList {
             Task task = tasks.get(i);
             String current;
             if (task.getTime().equals("")) {
+                assert task.getLabel().equals("T") : task;
                 current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription();
             } else {
+                assert (task.getLabel().equals("D") || task.getLabel().equals("E")) : task;
                 current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription()
                         + " | " + task.getTime();
             }

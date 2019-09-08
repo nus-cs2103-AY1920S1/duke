@@ -19,6 +19,7 @@ public class ExitCommand extends Command {
      * @param tasks Retrieves Tasks from TaskList.
      * @param ui Performs actions on Ui if required.
      * @param storage Saves Tasks from TaskList to Storage.
+     * @return String representation of executed command.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveList(tasks);

@@ -15,6 +15,10 @@ public class Main extends Application {
 
 	private Duke duke = new Duke();
 
+	/**
+	 * Overridden method in Application that launches application.
+	 * @param stage JavaFX stage to show after setting up.
+	 */
 	@Override
 	public void start(Stage stage) {
 		try {

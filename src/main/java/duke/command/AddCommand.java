@@ -30,6 +30,7 @@ public class AddCommand extends Command {
      * @param tasks Adds task to tasks.
      * @param ui Performs actions on Ui if required.
      * @param storage Saves to Storage or loads from Storage if required.
+     * @return String representation of executed command.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);

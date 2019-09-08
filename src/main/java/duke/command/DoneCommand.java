@@ -29,6 +29,7 @@ public class DoneCommand extends Command {
      * @param tasks Sets Task in TaskList to done.
      * @param ui Performs actions on Ui if required.
      * @param storage Saves to Storage or loads from Storage if required.
+     * @return String representation of executed command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

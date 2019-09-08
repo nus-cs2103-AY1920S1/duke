@@ -29,6 +29,7 @@ public class DeleteCommand extends Command {
      * @param tasks Removes Task from TaskList.
      * @param ui Performs actions on Ui if required.
      * @param storage Saves to Storage or loads from Storage if required.
+     * @return String representation of executed command.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task deleted = tasks.remove(position);

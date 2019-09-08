@@ -34,11 +34,12 @@ public class DeleteCommand extends Command {
         try {
             if (inputsplit.length <= 1) {
                 throw new DukeException("OOPS!!! The description of delete must have a value.");
-            } else if (Integer.parseInt(inputsplit[1]) > tasks.getSize() || Integer.parseInt(inputsplit[1]) <= 0) {
+            }
+            int taskNumber = Integer.parseInt(inputsplit[1]);
+            if (taskNumber > tasks.getSize() || taskNumber <= 0) {
                 throw new DukeException("OOPS!!! Invalid value for task delete!");
             } else {
-                int num = Integer.parseInt(inputsplit[1]);
-                Task t = tasks.removeTask(num);
+                Task t = tasks.removeTask(taskNumber);
                 storage.writeToFile(tasks.getTaskList());
                 return ui.printDelete(t, tasks.getSize());
             }

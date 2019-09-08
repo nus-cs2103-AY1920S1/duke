@@ -34,10 +34,11 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String[] inputsplit = this.inputCommand.split(" ", 2);
-            int taskNumber = Integer.parseInt(inputsplit[1]);
             if (inputsplit.length <= 1) {
                 throw new DukeException("OOPS!!! The description of done must have a value.");
-            } else if ( taskNumber > tasks.getSize() || taskNumber <= 0) {
+            }
+            int taskNumber = Integer.parseInt(inputsplit[1]);
+            if ( taskNumber > tasks.getSize() || taskNumber <= 0) {
                 throw new DukeException("OOPS!!! Invalid value for task done!");
             } else if (tasks.getTask(taskNumber).getIsDone() == true) {
                 throw new DukeException("OOPS!!! Task is already done!");

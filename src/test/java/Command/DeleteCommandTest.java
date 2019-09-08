@@ -1,6 +1,7 @@
 package duke.test.command;
 
 import duke.command.AddCommand;
+import duke.command.DeleteCommand;
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.task.Task;
@@ -14,33 +15,38 @@ import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class AddCommandTest {
+public class DeleteCommandTest {
 
     public ByteArrayOutputStream modifiedOut = new ByteArrayOutputStream();
 
-    public AddCommandTest(){
+    public DeleteCommandTest(){
         System.setOut(new PrintStream(modifiedOut));
     }
 
     @Test
-    public void executeToDo() throws DukeException {
-        String printedAssert = "Got it. I've added this task: \n" + "  [T]"
-                              + " borrow book\nNow you have 1 tasks in the list.";
+    public void deleteToDo() throws DukeException {
         Command a = new AddCommand("todo borrow book");
+        Command d = new DeleteCommand("delete 1");
+        Ui u = new Ui();
+        Storage s = new Storage();
         TaskList tl = new TaskList(new ArrayList<Task>());
-        a.execute(tl ,new Ui() , new Storage());
-        assertEquals(printedAssert,modifiedOut.toString().trim());
+        a.execute(tl, u, s);
+        d.execute(tl, u , s);
+        assertEquals(0, tl.getSize());
     }
 
-    @Test
-    public void executeToDo_exceptionThrown() throws DukeException {
+    public void deleteToDo_exceptionThrown() throws DukeException {
         try {
-            Command a = new AddCommand("todo");
+            Command a = new AddCommand("todo borrow book");
+            Command d = new DeleteCommand("delete");
+            Ui u = new Ui();
+            Storage s = new Storage();
             TaskList tl = new TaskList(new ArrayList<Task>());
-            a.execute(tl, new Ui(), new Storage());
-            fail("Exception was not thrown for Add Command Test");
+            a.execute(tl, u, s);
+            d.execute(tl, u, s);
+            fail("Exception was not thrown for Delete Command Test");
         } catch (DukeException e) {
-            String printedAssert = "\u2639 " +  "OOPS!!! The description of a todo cannot be empty.";
+            String printedAssert = "\u2639 " +  "OOPS!!! The description of delete must have a value.";
             assertEquals(printedAssert, e.getMessage());
         }
     }

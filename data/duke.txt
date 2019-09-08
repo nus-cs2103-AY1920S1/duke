@@ -1,2 +1,1 @@
-[T]|true|borrow book
-[T]|false|sing song
+[T]|false|borrow book

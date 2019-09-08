@@ -4,15 +4,10 @@ import duke.parser.GuiParser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.GuiTaskList;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public class Duke  {
-
-    
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Storage storage;
     private GuiParser parser;

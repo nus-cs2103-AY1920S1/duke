@@ -35,9 +35,25 @@ public class Storage {
             //Stream<String> stream = Files.lines(Paths.get(tempFile.getAbsolutePath()));
             //stream.forEach(storingStrings::add);
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            //nested try catch to prevent propagation up the hierarchy
+            try {
+                createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    /**
+     * creates file if file is not found
+     * @throws IOException thrown when file cannot be created
+     */
+    private void createNewFile() throws IOException {
+        if (!this.tempFile.exists()) {
+            this.tempFile.getParentFile().mkdir();
+            this.tempFile.createNewFile();
         }
     }
 

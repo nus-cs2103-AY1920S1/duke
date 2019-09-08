@@ -68,7 +68,7 @@ public class Storage {
             while (line != null) {
                 String[] tokens = line.split(" - ");
                 String type = tokens[0];
-                boolean isDone = tokens[1].equals("1") ? true : false;
+                boolean isDone = tokens[1].equals("1");
                 String desc = tokens[2];
                 Task t = null;
                 assert type != null;

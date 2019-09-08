@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
 
         //Add initial dialog from duke
-        String initGreeting = duke.init();
+        String initGreeting = duke.initAndGreet();
         addDialog(DialogType.DUKE, initGreeting);
     }
 

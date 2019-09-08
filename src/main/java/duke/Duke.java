@@ -76,7 +76,7 @@ public class Duke {
      * Initialize duke and return initial greeting (for GUI implementation).
      * @return greeting
      */
-    public String init() {
+    public String initAndGreet() {
         ui.setEnabled(true);
         ui.printGreeting();
         return ui.flushBuffer();

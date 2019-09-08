@@ -22,15 +22,15 @@ public class FindCommand extends TextBasedCommand {
 
     @Override
     public void execute(Duke duke, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.println("____________________________________________________________\n"
+        ui.println("_________________________________________\n"
                 + "Here are the matching tasks in your list:\n");
         //I'm assuming index matches the index in the list
         for (int i = 0; i < taskList.size(); i++) {
             String taskDetails = taskList.get(i).toString();
             if (taskDetails.contains(remainingLine)) {
-                ui.println((i + 1) + "." + taskDetails);
+                ui.println((i + 1) + ". " + taskDetails);
             }
         }
-        ui.println("____________________________________________________________");
+        ui.println("_________________________________________");
     }
 }

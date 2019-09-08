@@ -98,8 +98,7 @@ public class Ui {
      */
     public void printError(DukeException e) {
         if (errorLogsEnabled) {
-            //System.out.println("☹ OOPS!!! " + e.getMessage());
-            outputBuffer.append("\u2639")
+            outputBuffer.append(Unicode.SAD_FACE)
                     .append("OOPS!!! ")
                     .append(e.getMessage())
                     .append('\n');

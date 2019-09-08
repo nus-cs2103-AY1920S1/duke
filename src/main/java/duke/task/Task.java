@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.Unicode;
 
 public abstract class Task {
     protected String description;
@@ -17,7 +18,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? Unicode.TICK : Unicode.CROSS); //return tick or X symbols
     }
 
     public String getDescription() {

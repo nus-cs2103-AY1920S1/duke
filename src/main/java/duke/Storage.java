@@ -70,10 +70,8 @@ public class Storage {
                 StringBuilder sb = new StringBuilder();
                 String taskCommand = task.getTaskName().toLowerCase();
                 sb.append(taskCommand)
-                        .append("|")
-                        .append(taskCommand)
-                        .append(" ")
-                        .append(task.getDescription());
+                        .append("|").append(taskCommand)
+                        .append(" ").append(task.getDescription());
                 if (task instanceof Event) {
                     sb.append(" /at ")
                             .append(((TaskWithDate) task).getParseableDateToString());

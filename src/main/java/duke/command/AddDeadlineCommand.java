@@ -6,6 +6,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskWithDate;
 
@@ -29,7 +30,7 @@ public class AddDeadlineCommand extends TextBasedCommand {
         try {
             String[] splitData = TaskWithDate.extractDataFromLine(remainingLine, " /by ");
             if (TaskWithDate.validateData(splitData, DISPLAY_COMMAND)) {
-                taskList.insertNewTask(ui, new Event(splitData[0], splitData[1]));
+                taskList.insertNewTask(ui, new Deadline(splitData[0], splitData[1]));
             }
             storage.saveTaskListToFile(taskList);
         } catch (ParseException | IndexOutOfBoundsException e) {

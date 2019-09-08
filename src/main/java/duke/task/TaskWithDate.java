@@ -41,7 +41,7 @@ public abstract class TaskWithDate extends Task {
         if (data[0].length() <= 0) {
             throw new DukeException("The description of a " + taskName + " cannot be empty.");
         } else if (data.length <= 1 || data[1].length() <= 0) {
-            throw new DukeException("The date of a " + taskName + " cannot be empty.");
+            throw new DukeException("The description and date of a " + taskName + " cannot be empty.");
         }
         return true;
     }

@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      * @param taskList TaskList object.
      */
     public String execute(Ui ui, Storage storage, TaskList taskList) {
-        Task task = taskList.done(taskNo);
+        Task task = taskList.setDone(taskNo);
 
         if (task != null) {
             storage.save(taskList.getTaskList());

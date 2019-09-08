@@ -47,7 +47,7 @@ public class Storage {
                         + ((Deadline) task).getDate();
                 } else if (task instanceof Event) {
                     text +=
-                        "D|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Event) task)
+                        "E|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Event) task)
                             .getDate();
                 }
 
@@ -77,34 +77,7 @@ public class Storage {
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
             while (s.hasNext()) {
                 String[] input = s.nextLine().split("[|]");
-
-                switch (input[0]) {
-                case "T":
-                    Todo todo = new Todo(input[2]);
-                    if (input[1].equals("true")) {
-                        todo.markAsDone();
-                    }
-                    storage.add(todo);
-                    break;
-                case "D":
-                    Deadline deadline = new Deadline(input[2], input[3]);
-                    if (input[1].equals("true")) {
-                        deadline.markAsDone();
-                    }
-                    storage.add(deadline);
-                    break;
-                case "E":
-                    Event event = new Event(input[2], input[3]);
-                    if (input[1].equals("true")) {
-                        event.markAsDone();
-                    }
-                    storage.add(event);
-                    break;
-                default:
-                    ;
-                    break;
-                }
-
+                processInput(input, storage);
             }
         } catch (FileNotFoundException fnfe) {
             new DukeException("Unable to load file. Your saved data will not be loaded.");
@@ -112,6 +85,37 @@ public class Storage {
             new DukeException("File corrupted. Your saved data will not be loaded.");
         }
 
+        return storage;
+    }
+
+    // Processes the input string provided from the text file
+    private ArrayList<Task> processInput(String[] input, ArrayList<Task> storage){
+        switch (input[0]) {
+        case "T":
+            Todo todo = new Todo(input[2]);
+            if (input[1].equals("true")) {
+                todo.markAsDone();
+            }
+            storage.add(todo);
+            break;
+        case "D":
+            Deadline deadline = new Deadline(input[2], input[3]);
+            if (input[1].equals("true")) {
+                deadline.markAsDone();
+            }
+            storage.add(deadline);
+            break;
+        case "E":
+            Event event = new Event(input[2], input[3]);
+            if (input[1].equals("true")) {
+                event.markAsDone();
+            }
+            storage.add(event);
+            break;
+        default:
+            ;
+            break;
+        }
         return storage;
     }
 

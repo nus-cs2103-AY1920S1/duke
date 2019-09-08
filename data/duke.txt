@@ -7,3 +7,9 @@ T|true|buy eggs
 T|true|buy speakers
 T|false|buy pencils
 D|false|buy pens|21/09/2019 1200
+T|true|buy paper
+E|true|go to school|12/09/2019 1100
+T|true|Make awesome sandwich
+T|false|make an even more awesome sandwich
+D|true|Make super sandwich|15/09/2019 1200
+E|false|Eat sandwich|22/09/2019 1800

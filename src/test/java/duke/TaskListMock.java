@@ -28,7 +28,7 @@ public class TaskListMock extends TaskList {
     }
 
     @Override
-    public Task done(int taskNo) {
+    public Task setDone(int taskNo) {
         return new TaskMock("");
     }
 

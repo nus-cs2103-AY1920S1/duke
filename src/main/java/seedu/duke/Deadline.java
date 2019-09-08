@@ -43,5 +43,14 @@ public class Deadline extends Task {
         return ("D " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime));
     }
 
+    /**
+     * Return dateTime variable of the task.
+     *
+     * @return dateTime of the task
+     */
+    public Date getDateTime() {
+        return dateTime;
+    }
+
 }
 

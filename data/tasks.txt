@@ -8,5 +8,7 @@ D | 1 | assignment | 04/06/2313 0633
 E | 1 | music exhibition | 05/07/2313 0813
 E | 1 | movie screening | 05/01/4214 1942
 D | 0 | art project | 04/01/4231 2313
-T | 1 | exercise
-T | 1 | watering
+T | 0 | watering
+T | 0 | exercise #fun
+T | 0 | movie #fun
+D | 0 | meeting | 06/11/1313 1913

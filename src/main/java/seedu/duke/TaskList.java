@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * TaskList is a class that represents the list of tasks and contains operations to manipulate the list.
@@ -90,6 +91,13 @@ public class TaskList {
             }
         }
         return matchingList;
+    }
+
+    /**
+     * Sort the tasks according to the dateTime and the type of tasks.
+     */
+    public void sortTask() {
+        Collections.sort(this.taskList);
     }
 
 }

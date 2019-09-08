@@ -1,11 +1,15 @@
 package seedu.duke;
 
+import java.util.Date;
+
 /**
  * Represents a Todo task.
  * A <code>Todo</code> object corresponds to a task with a command that starts with "todo" and contains
  * a description e.g., <code>todo read book</code>
  */
 public class Todo extends Task {
+
+    private Date dateTime = null;
 
     /**
      * Constructor of a Todo class.
@@ -36,4 +40,12 @@ public class Todo extends Task {
         return ("T " + super.writeToFile());
     }
 
+    /**
+     * Return dateTime variable of the task.
+     *
+     * @return dateTime of the task
+     */
+    public Date getDateTime() {
+        return dateTime;
+    }
 }

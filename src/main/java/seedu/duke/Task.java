@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Represents a task.
@@ -9,13 +10,14 @@ import java.text.SimpleDateFormat;
  * with "todo", "event" or "deadline", followed by description.
  *
  */
-public class Task {
+public class Task implements Comparable<Task> {
 
     static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
     static final DateFormat PRINT_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH.mm aa");
     private String description;
     boolean isDone;
     int doneIcon;
+    private Date dateTime;
 
     /**
      * Constructor of the Task class.
@@ -72,6 +74,34 @@ public class Task {
      */
     public String writeToFile() {
         return ("| " + doneIcon + " | " + this.description);
+    }
+
+    /**
+     * Return dateTime variable of the task.
+     *
+     * @return dateTime of the task
+     */
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    /**
+     * Compare the deadline and event tasks by dateTime. Else, compare using the description of the task
+     *
+     * @param o the task to compare with
+     * @return an integer
+     */
+    @Override
+    public int compareTo(Task o) {
+        if (o instanceof Todo) {
+            return (int) (Double.MAX_VALUE);
+        } else if(this.getDateTime() == null ||o.getDateTime() == null) {
+            return 0;
+        } else if (o instanceof Deadline || o instanceof Event) {
+            return this.getDateTime().compareTo(o.getDateTime());
+        } else {
+            return this.getDescription().compareTo(o.getDescription());
+        }
     }
 
 }

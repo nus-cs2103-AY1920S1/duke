@@ -159,6 +159,18 @@ public class TaskList {
         }
 
         // Creates new task
+        return generateTask(taskType, taskDes, taskTime);
+    }
+
+    /**
+     * Creates a new task instance and add it to the task list.
+     *
+     * @param taskType type of task.
+     * @param taskDes description of task.
+     * @param taskTime time and/or date of task.
+     * @return
+     */
+    private Task generateTask(String taskType, StringBuilder taskDes, StringBuilder taskTime) {
         Task task;
         switch (taskType) {
         case "todo":
@@ -174,7 +186,7 @@ public class TaskList {
             tasks.add(task);
             return task;
         default:
-            return null;
+            throw new AssertionError(taskType);
         }
     }
 

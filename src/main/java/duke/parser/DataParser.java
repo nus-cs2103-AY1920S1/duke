@@ -1,28 +1,9 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.CompleteTaskCommand;
-import duke.command.EndCommand;
-import duke.command.ListTaskCommand;
-import duke.command.AddDeadlineTaskCommand;
-import duke.command.AddEventTaskCommand;
-import duke.command.AddToDoTaskCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.EditTaskDateCommand;
-import duke.command.EditTaskNameCommand;
-import duke.command.FindTaskCommand;
-import duke.exception.DukeException;
-import duke.exception.UnknownCommandException;
-import duke.exception.InvalidKeywordException;
-import duke.exception.InvalidTaskIndexException;
-import duke.exception.InvalidToDoException;
-import duke.exception.InvalidEditTaskException;
-import duke.exception.InvalidDeadlineException;
-import duke.exception.InvalidEventException;
+import duke.command.*;
+import duke.exception.*;
 
 import java.util.Scanner;
-
-;
 
 /**
  * Represents a Data Parser to parse in all user input provided.
@@ -87,6 +68,8 @@ public class DataParser {
             return new AddEventTaskCommand();
         } else if (shouldFindTask()) {
             return new FindTaskCommand();
+        } else if (shouldTagTask()) {
+            return new AddTagCommand();
         } else if (shouldEditTaskName()) {
             return new EditTaskNameCommand();
         } else if (shouldEditTaskDate()) {
@@ -117,7 +100,7 @@ public class DataParser {
      * @param data The data provided by the user input.
      * @return Returns false if the data provided gives a name for the task.
      */
-    public boolean isEmptyTask(String data) {
+    public boolean isEmptyData(String data) {
         return data.equals("");
     }
 
@@ -177,17 +160,39 @@ public class DataParser {
     }
 
     /**
+     * Checks if a name is given for the to do task.
+     * @param data the to do data given.
+     * @return if there is a name given.
+     */
+    private boolean isTodoNameProvided(String[] data) {
+        return data.length >= 2;
+    }
+
+    /**
      * Parses the user input to return the name of the ToDo Task.
      * @return the name of the ToDo Task.
      * @throws InvalidToDoException If the name of the task is not provided.
      */
-    public String parseToDoData() throws InvalidToDoException {
-        String data = this.input.substring(4);
-        if (isEmptyTask(data)) {
+    public String[] parseToDoData() throws InvalidToDoException, UnknownCommandException {
+        String[] data = this.input.split(" ");
+        if (!isTodoNameProvided(data)) {
             throw new InvalidToDoException();
         }
 
-        return data.trim();
+        return data;
+    }
+
+    /**
+     * Prases the input and returns the index and tag as an array of Strings
+     * @return an array of Strings providing the index and the tag in this order.
+     * @throws InvalidTagException if no data is provided.
+     */
+    public String[] parseTagData() throws InvalidTagException {
+        String tagData = input.substring(4).trim();
+        if (isEmptyData(tagData)) {
+            throw new InvalidTagException("Please provide an index and a tag!");
+        }
+        return tagData.split(" ");
     }
 
     /**
@@ -245,7 +250,7 @@ public class DataParser {
      */
     public String[] parseDeadlineData() throws InvalidDeadlineException {
         String data = this.input.substring(8).trim();
-        if (isEmptyTask(data)) {
+        if (isEmptyData(data)) {
             throw new InvalidDeadlineException("The description of a deadline cannot be empty.");
         } else if (!isDeadlineTaskValid(data)) {
             throw new InvalidDeadlineException("Please include the time of a deadline.");
@@ -266,7 +271,7 @@ public class DataParser {
      */
     public String[] parseEventDate() throws InvalidEventException {
         String data = this.input.substring(5).trim();
-        if (isEmptyTask(data)) {
+        if (isEmptyData(data)) {
             throw new InvalidEventException("The description of an event cannot be empty.");
         } else if (!isEventTaskValid(data)) {
             throw new InvalidEventException("Please include the time of an event.");
@@ -281,16 +286,27 @@ public class DataParser {
     }
 
     /**
+     * Checks if the user has given a keyword to find matching tasks.
+     * @param data the keyword data given.
+     * @return true if there is a keyword given.
+     */
+    private boolean hasKeyWord(String[] data) {
+        return data.length > 1;
+    }
+
+    /**
      * Checks if the user input indicates that the data parser should end the parsing of user input.
      * @return Returns true if input is "bye".
      */
     public String findKeyWord() throws InvalidKeywordException {
-        String data = this.input.substring(5).trim();
-        if (data.equals("")) {
+        String[] data = this.input.split(" ");
+        if (!hasKeyWord(data)) {
             throw new InvalidKeywordException();
-        } else {
-            return data;
         }
+        if (isEmptyData(data[1])) {
+            throw new InvalidKeywordException();
+        }
+        return data[1];
     }
 
     public boolean shouldEndParsing() {
@@ -310,7 +326,7 @@ public class DataParser {
      * @return Returns true if the input starts with "done".
      */
     public boolean shouldCompleteTask() {
-        return input.startsWith("done");
+        return input.split(" ")[0].equals("done");
     }
 
     /**
@@ -318,7 +334,7 @@ public class DataParser {
      * @return True if the input starts with "delete".
      */
     public boolean shouldDeleteTask() {
-        return input.startsWith("delete");
+        return input.split(" ")[0].equals("delete");
     }
 
     /**
@@ -326,7 +342,7 @@ public class DataParser {
      * @return True if the input starts with "todo".
      */
     public boolean shouldAddToDoTask() {
-        return input.startsWith("todo");
+        return input.split(" ")[0].equals("todo");
     }
 
     /**
@@ -334,7 +350,7 @@ public class DataParser {
      * @return True if the input starts with "deadline".
      */
     public boolean shouldAddDeadlineTask() {
-        return input.startsWith("deadline");
+        return input.split(" ")[0].equals("deadline");
     }
 
     /**
@@ -342,23 +358,37 @@ public class DataParser {
      * @return True if the input starts with "event".
      */
     public boolean shouldAddEventTask() {
-        return input.startsWith("event");
+
+        return input.split(" ")[0].equals("evemt");
     }
 
     /**
+<<<<<<< HEAD
+     * Checks if the user wishes to find a task based on a keyword.
+     * @return True if the input starts with "find".
+=======
      * Checks if the user wishes to find the tasks or not.
      * @return true if the input starts with "find".
+>>>>>>> 220957e9bd2251ba66f6f01767de0c44ea9a8916
      */
     public boolean shouldFindTask() {
-        return input.startsWith("find");
+        return input.split(" ")[0].equals("find");
     }
 
+    /**
+     * Checks if the user wishes to tag a task.
+     * @return true if the input starts with "tag".
+     */
+    public boolean shouldTagTask() {
+        return input.split(" ")[0].equals("tag");
+    }
     /**
      * Checks if the user wishes to edit a task name or not.
      * @return true if the input starts with "edit name".
      */
     public boolean shouldEditTaskName() {
-        return input.startsWith("edit name");
+        return input.split(" ")[0].equals("edit") &&
+                input.split(" ")[1].equals("name");
     }
 
     /**

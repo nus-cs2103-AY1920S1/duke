@@ -3,25 +3,27 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
+import duke.parser.TagParser;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a Command to add a ToDo Task to the list of tasks.
+ * Represents a Command to add a tag to a specific task.
  */
-public class AddToDoTaskCommand extends Command {
+public class AddTagCommand extends Command {
 
     /**
      * Constructs a new Command where it does not terminate the Duke Application.
      */
-    public AddToDoTaskCommand() {
+    public AddTagCommand() {
         super(false);
     }
 
     /**
      * Executes the specific command based on the type of the command.
-     * In this case, it adds a new ToDo Task to the TaskList, if there are less than 101 tasks.
+     * In this case, it adds a tag to a Task.
      * @param taskList The List of tasks involved.
      * @param ui The Interface which deals with user input and interaction.
      * @param storage The storage to load and save task data into the output file.
@@ -31,10 +33,11 @@ public class AddToDoTaskCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        assert (!TaskList.hasHitTaskLimit()) : "OOPS!!! You can only have up to 100 tasks!";
-        String[] toDoData = dataParser.parseToDoData();
-        int taskIndex = taskList.addTodoTask(toDoData);
-        ui.showAddedTask(TaskList.getTask(taskIndex));
+        String[] tagData = dataParser.parseTagData();
+        TagParser tagParser = new TagParser();
+        tagParser.createTag(tagData);
+        Task task = taskList.addTag(tagParser.getIndex(), tagParser.getTag());
+        ui.showTaggedTask(task);
         storage.save();
     }
 

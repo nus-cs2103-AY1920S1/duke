@@ -5,12 +5,12 @@ Table of Contents
 -   [1. Introduction](#1-introduction)
 -   [2. Quick Start](#2-quick-start)
 -   [3. Features](#3-features)
-    -   [3.1 Adding a task: `add`](#32-adding-a-task)
-    -   [3.2 List all tasks: `list`](#33-list-all-tasks)
-    -   [3.3 Set a task as done: `done`](#34-set-as-done)
-    -   [3.4 Delete a task: `delete`](#35-delete-a-task)
-    -   [3.5 Find a task: `find`](#36-find-a-task)
-    -   [3.6 Undo previous command: `undo`](#37-undo-previous-command)
+    -   [3.1 Adding a task: `add`](#31-adding-a-task)
+    -   [3.2 List all tasks: `list`](#32-list-all-tasks)
+    -   [3.3 Set a task as done: `done`](#33-set-as-done)
+    -   [3.4 Delete a task: `delete`](#34-delete-a-task)
+    -   [3.5 Find a task: `find`](#35-find-a-task)
+    -   [3.6 Undo previous command: `undo`](#36-undo-previous-command)
 
 ## 1. Introduction
 

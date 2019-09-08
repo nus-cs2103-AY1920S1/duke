@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Represents a class for understanding the input.
  */
@@ -16,15 +18,25 @@ public class Parser {
             return new PrintList();
         } else if (input.split(" ")[0].equals("done")) {
             try {
-                int num = Integer.parseInt(input.split(" ")[1]);
-                return new Done(num);
+                String[] words = input.split(" ");
+                ArrayList<Integer> nums = new ArrayList<>();
+                for (int i = 1; i < words.length; i++) {
+                    int num = Integer.parseInt(words[i]);
+                    nums.add(num);
+                }
+                return new Done(nums.toArray(new Integer[nums.size()]));
             } catch (NumberFormatException ex) {
                 throw new DukeException("Task number should be integer.");
             }
         } else if (input.split(" ")[0].equals("delete")) { // delete a specific task
             try {
-                int num = Integer.parseInt(input.split(" ")[1]);
-                return new Delete(num);
+                String[] words = input.split(" ");
+                ArrayList<Integer> nums = new ArrayList<>();
+                for (int i = 1; i < words.length; i++) {
+                    int num = Integer.parseInt(words[i]);
+                    nums.add(num);
+                }
+                return new Delete(nums.toArray(new Integer[nums.size()]));
             } catch (NumberFormatException ex) {
                 throw new DukeException("Task number should be integer.");
             }
@@ -33,7 +45,7 @@ public class Parser {
                 throw new DukeException("Item to be find should not be empty.");
             }
             return new Find(input.substring(input.indexOf(" ") + 1));
-        } else { // add new task
+        } else {
             if (input.split(" ").length == 1) {
                 String type = input.split(" ")[0];
                 switch (type) {

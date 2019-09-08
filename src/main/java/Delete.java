@@ -3,14 +3,16 @@
  */
 public class Delete extends Command {
 
-    public int number;
+    public Integer[] numbers;
+    public String type;
 
     /**
      * Initiates a Deletion object.
-     * @param number the number of task to be deleted
+     * @param numbers the numbers of task to be deleted
      */
-    public Delete(int number) {
-        this.number = number;
+    public Delete(Integer... numbers) {
+        this.numbers = numbers;
     }
+
 }
 

@@ -1,5 +1,7 @@
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Represents a list of tasks.
@@ -24,29 +26,34 @@ public class TaskList {
     }
 
     /**
-     * Marks one task as done.
-     * @param num the number of task to be marked as done
+     * Marks smoe tasks as done.
+     * @param nums the numbers of tasks to be marked as done
      * @throws DukeException if num is out of range
      */
-    public void done(int num) throws DukeException {
-        if (num > tasks.size() || num < 1) {
-            throw new DukeException("Task number out of range.");
+    public void done(Integer... nums) throws DukeException {
+        for (int num : nums) {
+            if (num > tasks.size() || num < 1) {
+                throw new DukeException("Task number out of range.");
+            }
+            assert 0 < num && num <= tasks.size() : "invalid task number";
+            tasks.get(num - 1).isDone = true;
         }
-        assert 0 < num && num <= tasks.size() : "invalid task number";
-        tasks.get(num - 1).isDone = true;
     }
 
     /**
-     * Deletes a task.
-     * @param num the number of task to be deleted
+     * Deletes some tasks.
+     * @param nums the numbers of tasks to be deleted
      * @throws DukeException if num is out of range
      */
-    public void delete(int num) throws DukeException {
-        if (num > tasks.size() || num < 1) {
-            throw new DukeException("Task number out of range.");
+    public void delete(Integer... nums) throws DukeException {
+        Arrays.sort(nums, Collections.reverseOrder());
+        for (int num : nums) {
+            if (num > tasks.size() || num < 1) {
+                throw new DukeException("Task number out of range.");
+            }
+            assert 0 < num && num <= tasks.size() : "invalid task number";
+            tasks.remove(num - 1);
         }
-        assert 0 < num && num <= tasks.size() : "invalid task number";
-        tasks.remove(num - 1);
     }
 
     /**

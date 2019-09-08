@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Node;
@@ -55,11 +56,11 @@ public class Duke extends Application {
         this("tasks.txt");
     }
 
-    private String done(int num) {
+    private String done(Integer... nums) {
         try {
-            tasks.done(num);
+            tasks.done(nums);
             storage.write(tasks);
-            return ui.done(tasks, num);
+            return ui.done(tasks, nums);
         } catch (DukeException ex) {
             return ui.showDukeException(ex);
         } catch (ParseException e) {
@@ -67,10 +68,10 @@ public class Duke extends Application {
         }
     }
 
-    private String delete(int num) {
+    private String delete(Integer... nums) {
         try {
-            String response =  ui.delete(tasks, num);
-            tasks.delete(num);
+            String response =  ui.delete(tasks, nums);
+            tasks.delete(nums);
             storage.write(tasks);
             return response;
         } catch (DukeException ex) {
@@ -104,10 +105,10 @@ public class Duke extends Application {
                     ui.printList(tasks);
                 } else if (command instanceof Done) {
                     Done done = (Done) command;
-                    done(done.number);
+                    done(done.numbers);
                 } else if (command instanceof Delete) {
                     Delete delete = (Delete) command;
-                    delete(delete.number);
+                    delete(delete.numbers);
                 } else if (command instanceof Add) {
                     Add add = (Add) command;
                     add(add.type, add.description);
@@ -137,10 +138,10 @@ public class Duke extends Application {
                 return ui.printList(tasks);
             } else if (command instanceof Done) {
                 Done done = (Done) command;
-                return done(done.number);
+                return done(done.numbers);
             } else if (command instanceof Delete) {
                 Delete delete = (Delete) command;
-                return delete(delete.number);
+                return delete(delete.numbers);
             } else if (command instanceof Add) {
                 Add add = (Add) command;
                 return add(add.type, add.description);

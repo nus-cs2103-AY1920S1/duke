@@ -3,13 +3,15 @@
  */
 public class Done extends Command {
 
-    public int number;
+    public Integer[] numbers;
+    public String type;
 
     /**
      * Initiates a Done object.
-     * @param number the number of task to be marked as done
+     * @param numbers the number of task to be marked as done
      */
-    public Done(int number) {
-        this.number = number;
+    public Done(Integer... numbers) {
+        this.numbers = numbers;
     }
+
 }

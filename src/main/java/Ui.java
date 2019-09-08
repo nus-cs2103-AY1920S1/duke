@@ -85,49 +85,77 @@ public class Ui {
     }
 
     /**
-     * Tells user a task has been marked as done.
+     * Tells user some tasks have been marked as done.
      * @param list a TaskList object that contains a list of tasks
-     * @param num number of task to be marked as done
+     * @param nums numbers of tasks to be marked as done
      * @throws ParseException if description of task connot be parsed
      */
-    public String done(TaskList list, int num) throws ParseException {
+    public String done(TaskList list, Integer... nums) throws ParseException {
         ArrayList<Task> tasks = list.tasks;
-        String[] listToPrint = {"Nice! I've marked this task as done: ", "  " + tasks.get(num - 1).repr()};
-        formatPrint(listToPrint);
-        return listToPrint[0] + "\n" + listToPrint[1];
+        ArrayList<String> listToPrint = new ArrayList<>();
+        StringBuilder response = new StringBuilder();
+        response.append("Nice! I've marked these tasks as done: \n");
+        listToPrint.add("Nice! I've marked these tasks as done: ");
+        for (int i = 0; i < nums.length; i++) {
+            String description = tasks.get(nums[i] - 1).repr();
+            response.append(description);
+            listToPrint.add("  " + description);
+            if (i == nums.length - 1) {
+                break;
+            }
+            response.append("\n");
+        }
+        formatPrint(listToPrint.toArray(new String[listToPrint.size()]));
+        return response.toString();
     }
 
     /**
-     * Tells user a task has been deleted.
+     * Tells user some tasks have been deleted.
      * @param list a TaskList object that contains a list of tasks
-     * @param num number of task to be deleted
+     * @param nums numbers of tasks to be deleted
      * @throws ParseException if description of task connot be parsed
      */
-    public String delete(TaskList list, int num) throws ParseException {
-        String response = "";
+    public String delete(TaskList list, Integer... nums) throws ParseException, DukeException {
+        for (int i : nums) {
+            if (i <= 0 || i > list.tasks.size()) {
+                throw new DukeException("Task number out of range");
+            }
+        }
+        StringBuilder response = new StringBuilder("Noted. I've removed these tasks: \n");
+        ArrayList<String> descriptions = new ArrayList<>();
         ArrayList<Task> tasks = list.tasks;
-        Task t = tasks.get(num - 1);
+        for (int i = 0; i < nums.length; i++) {
+            Task t = tasks.get(nums[i] - 1);
+            String description = t.repr();
+            descriptions.add(description);
+            response.append(description);
+            if (i == nums.length - 1) {
+                break;
+            }
+            response.append("\n");
+        }
         System.out.println(line);
-        System.out.println(format("Noted. I've removed this task: "));
-        response += "Noted. I've removed this task: \n  " + t.repr() + "\n";
-        System.out.println("  " + format(t.repr()));
-        switch (tasks.size()) {
-        case 1:
-            response += "Now you have no task in the list.";
+        System.out.println(format("Noted. I've removed these tasks: "));
+        for (String description : descriptions) {
+            System.out.println("  " + format(description));
+        }
+        switch (tasks.size() - nums.length) {
+        case 0:
+            response.append("Now you have no task in the list.");
             System.out.println(format("Now you have no task in the list."));
             break;
-        case 2:
-            response += "Now you have 1 task in the list.";
+        case 1:
+            response.append("Now you have 1 task in the list.");
             System.out.println(format("Now you have 1 task in the list."));
             break;
         default:
             int count = tasks.size() - 1;
-            response += "Now you have " + count + " tasks in the list.";
+            response.append("Now you have ").append(count).append(" tasks in the list.");
             System.out.println(format("Now you have " + tasks.size() + " tasks in the list."));
             break;
         }
         System.out.println(line);
-        return response;
+        return response.toString();
     }
 
     /**

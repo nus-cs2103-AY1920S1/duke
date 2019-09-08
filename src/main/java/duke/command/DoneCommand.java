@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 
@@ -29,12 +28,11 @@ public class DoneCommand extends Command {
 	 * Executes done command. Sets Task from TaskList at given position to done.
 	 *
 	 * @param tasks   Sets Task in TaskList to done.
-	 * @param ui      Performs actions on Ui if required.
 	 * @param storage Saves to Storage or loads from Storage if required.
 	 * @return String representation of executed command.
 	 */
 	@Override
-	public String execute(TaskList tasks, Ui ui, Storage storage) {
+	public String execute(TaskList tasks, Storage storage) {
 		Task task = tasks.markAsDone(this.position);
 		StringBuilder sb = new StringBuilder();
 		sb.append("Nice! I've marked this task as done:\n");

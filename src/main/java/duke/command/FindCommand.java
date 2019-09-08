@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.Task;
@@ -31,12 +30,11 @@ public class FindCommand extends Command {
 	 * Executes FindCommand. Searches string occurrence in TaskList and returns results.
 	 *
 	 * @param tasks   Performs actions on TaskList if required.
-	 * @param ui      Performs actions on Ui if required.
 	 * @param storage Saves to Storage or loads from Storage if required.
 	 * @return String representation of executed command.
 	 */
 	@Override
-	public String execute(TaskList tasks, Ui ui, Storage storage) {
+	public String execute(TaskList tasks, Storage storage) {
 		List<Task> matchingTasks = new ArrayList<>();
 		List<Task> searchingList = tasks.getList();
 		for (Task task : searchingList) {

@@ -71,7 +71,7 @@ public class CommandHandler {
             break;
         case "find":
             assert input.split(" ")[0].equals("find") : "First word in input should be `find`.";
-            TaskList newTl = tl.findTasks(input);
+            TaskList newTl = tl.findTasks(input.split(" ", 2)[1]);
             returnString = this.ui.showTaskList(newTl);
             break;
         default:

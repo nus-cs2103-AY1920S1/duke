@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /** Class to represent a list of tasks. */
 class TaskList {
@@ -41,12 +42,9 @@ class TaskList {
      * @return TaskList where only the filtered tasks are included.
      */
     public TaskList findTasks(String findStr) {
-        ArrayList<Task> newTasks = new ArrayList<Task>();
-        for (Task task : this.tasks) {
-            if (task.getName().contains(findStr)) {
-                newTasks.add(task);
-            }
-        }
+        ArrayList<Task> newTasks = this.tasks.stream()
+            .filter(task -> task.getName().contains(findStr))
+            .collect(Collectors.toCollection(ArrayList::new));
         return new TaskList(newTasks);
     }
 

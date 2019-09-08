@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return user dialog (GUI) object
+     * Return user dialog (GUI) object.
      * @param text text to display
      * @param img user image to display
      * @return DialogBox user dialog
@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return duke dialog (GUI) object but flipped
+     * Return duke dialog (GUI) object but flipped.
      * @param text text to display
      * @param img duke image to display
      * @return DialogBox duke dialog

@@ -31,6 +31,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Creates a mainwindow GUI object which will be added into a stage in Main.class.
+     * @param duke duke object to be linked together with this GUI object
+     */
     public MainWindow(Duke duke) {
         this();
         this.duke = duke;

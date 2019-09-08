@@ -11,7 +11,7 @@ public class InputChecker {
      * @return true if the topic is not empty.
      */
     public boolean isValidToDo(String topic) {
-        return "".equals(topic);
+        return !"".equals(topic);
     }
 
     /**

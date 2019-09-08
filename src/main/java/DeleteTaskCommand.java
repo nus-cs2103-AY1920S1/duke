@@ -7,6 +7,7 @@ public class DeleteTaskCommand extends Command {
      */
     DeleteTaskCommand(int index) {
         super(1);
+        assert index > 0: "Index should be more than 1";
         this.index = index-1;
     }
 

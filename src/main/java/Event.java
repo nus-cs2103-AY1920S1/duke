@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Event extends Task {
     String eventDate;
 
@@ -21,6 +18,7 @@ public class Event extends Task {
      * @return the event date in string format
      */
     public String getEventDate() {
+        assert this.eventDate != null: "Event date cannot be empty";
         return this.eventDate;
     }
 

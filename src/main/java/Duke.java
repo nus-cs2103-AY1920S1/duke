@@ -39,6 +39,7 @@ public class Duke extends Application {
         boolean isExit = false;
         while (!isExit) {
             try {
+                assert isExit: "duke should have been terminated";
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);

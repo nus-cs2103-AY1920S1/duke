@@ -9,6 +9,7 @@ public class DoneTaskCommand extends Command {
 
     DoneTaskCommand(int index) {
         super(4);
+        assert index > 0: "Index should be more than 1";
         this.index = index - 1;
     }
 

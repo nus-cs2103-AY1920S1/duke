@@ -72,6 +72,7 @@ public class TaskList {
     public Task doTask(int index) {
         Task task = getTask(index);
         task.markAsDone();
+        assert task.isDone();
         return task;
     }
 
@@ -101,13 +102,13 @@ public class TaskList {
     }
 
     /**
-     * Gets an ArrayList of all tasks in the task list.
+     * Gets a copy of ArrayList of all tasks in the task list.
      *
      * @return ArrayList of all tasks in the task list.
      */
     public ArrayList<Task> getAllTasks() {
-        ArrayList<Task> newList = new ArrayList<>();
-        list.forEach(x -> newList.add(x));
+        ArrayList<Task> newList = new ArrayList<>(list);
+        assert newList.size() == list.size();
         return newList;
     }
 
@@ -120,11 +121,11 @@ public class TaskList {
      */
     public TaskList filterByString(String substring) {
         TaskList tasklist = new TaskList();
-        list.forEach(task -> {
+        for (Task task : list) {
             if (task.getDescription().contains(substring)) {
                 tasklist.addTask(task);
             }
-        });
+        }
         return tasklist;
     }
 

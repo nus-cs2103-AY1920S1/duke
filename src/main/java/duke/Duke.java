@@ -45,7 +45,7 @@ public class Duke {
 	public String getResponse(String input) {
 		try {
 			Command command = Parser.parse(input);
-			return command.execute(tasks, ui, storage);
+			return command.execute(tasks, storage);
 		} catch (Exception e) {
 			return ui.showError(e);
 		}

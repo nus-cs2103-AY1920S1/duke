@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 import duke.Storage;
 
 /**
@@ -19,12 +18,11 @@ public class PrintListCommand extends Command {
 	 * Execute print list command. Prints all Tasks in the TaskList.
 	 *
 	 * @param tasks   Print the Tasks in TaskList.
-	 * @param ui      Performs actions on Ui if required.
 	 * @param storage Saves to Storage or loads from Storage if required.
 	 * @return String representation of executed command.
 	 */
 	@Override
-	public String execute(TaskList tasks, Ui ui, Storage storage) {
+	public String execute(TaskList tasks, Storage storage) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Here are the tasks in your list:\n");
 		for (int i = 1; i < tasks.size() + 1; i++) {

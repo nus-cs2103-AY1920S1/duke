@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.Task;
@@ -30,11 +29,10 @@ public class AddCommand extends Command {
 	 * Executes add command. Adds task to TaskList and prints out action.
 	 *
 	 * @param tasks   Adds task to tasks.
-	 * @param ui      Performs actions on Ui if required.
 	 * @param storage Saves to Storage or loads from Storage if required.
 	 * @return String representation of executed command.
 	 */
-	public String execute(TaskList tasks, Ui ui, Storage storage) {
+	public String execute(TaskList tasks, Storage storage) {
 		tasks.add(this.task);
 		StringBuilder sb = new StringBuilder();
 		sb.append("Got it. I've added this task:\n");

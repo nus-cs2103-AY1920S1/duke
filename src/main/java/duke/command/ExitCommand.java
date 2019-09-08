@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.Ui;
 import duke.Storage;
 
 /**
@@ -18,11 +17,10 @@ public class ExitCommand extends Command {
 	 * Executes ExitCommand. Saves current tasks to disk and says goodbye.
 	 *
 	 * @param tasks   Retrieves Tasks from TaskList.
-	 * @param ui      Performs actions on Ui if required.
 	 * @param storage Saves Tasks from TaskList to Storage.
 	 * @return String representation of executed command.
 	 */
-	public String execute(TaskList tasks, Ui ui, Storage storage) {
+	public String execute(TaskList tasks, Storage storage) {
 		storage.saveList(tasks);
 		return "Bye. Hope to see you again soon!";
 	}

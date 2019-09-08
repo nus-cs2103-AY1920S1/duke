@@ -34,6 +34,13 @@ public class Ui {
     }
 
     /**
+     * Return the statistics of the data.
+     */
+    public static String showStatsMsg() {
+        return "Statistics: \n";
+    }
+
+    /**
      * Returns the error message in the form of a string if the storage cannot load.
      */
     public static String showLoadingError() {

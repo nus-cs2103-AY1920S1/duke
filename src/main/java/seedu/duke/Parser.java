@@ -59,6 +59,8 @@ public class Parser {
         if (detailsArray.length == 1 && detailsArray[0].equalsIgnoreCase("sort")) {
             tasks.sortTask();
             return new ListCommand();
+        } else if (command.trim().equalsIgnoreCase("show stats")) {
+            return new StatisticsCommand();
         } else if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline")
                     || detailsArray[0].equals("event") || detailsArray[0].equals("done")
                 || detailsArray[0].equals("delete") || detailsArray[0].equals("find"))) {

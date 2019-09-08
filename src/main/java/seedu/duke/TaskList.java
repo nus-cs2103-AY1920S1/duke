@@ -10,6 +10,7 @@ public class TaskList {
 
     private static ArrayList<Task> taskList;
     private static int numTaskDone = 0;
+    private static int numTaskNotDone = 0;
 
     /**
      * Constructor of the Tasklist class.
@@ -99,6 +100,36 @@ public class TaskList {
      */
     public void sortTask() {
         Collections.sort(this.taskList);
+    }
+
+    /**
+     * Calculate the statistics including the number of tasks done and those yet to be done.
+     */
+    public void calculateStats() {
+        for (Task t: this.taskList) {
+            if (t.isDone) {
+                this.numTaskDone++;
+            }
+        }
+        numTaskNotDone = this.getSize() - numTaskDone;
+    }
+
+    /**
+     * Return number of tasks done.
+     *
+     * @return the number of tasks done
+     */
+    public int getNumTaskDone() {
+        return numTaskDone;
+    }
+
+    /**
+     * Return number of tasks not done.
+     *
+     * @return the number of tasks not done
+     */
+    public int getNumTaskNotDone() {
+        return numTaskNotDone;
     }
 
 }

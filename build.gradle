@@ -15,6 +15,10 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '8.23'
 }

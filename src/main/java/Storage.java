@@ -25,9 +25,6 @@ public class Storage {
             throws FileNotFoundException, DukeException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        if (f.length() == 0) {
-            throw new DukeException("No listings found!");
-        }
         while (s.hasNextLine()) {
             String currentLine = s.nextLine();
             String[] splitCurrentLine = currentLine.split("-");

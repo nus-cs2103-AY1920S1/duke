@@ -21,7 +21,7 @@ public class Ui {
     /**
      * Displays a welcome message to the user.
      */
-    public String welcome() {
+    public static String welcome() {
         String welcomeMessage = "Hello! I'm Duke!\nWhat can I do for you?";
 
         return welcomeMessage;
@@ -31,7 +31,7 @@ public class Ui {
      * Displays a welcomeBack message to the user.
      * This occurs if there are existing tasks in a local save file from last session.
      */
-    public String welcomeBack() {
+    public static String welcomeBack() {
         String welcomeMessage = "Hello! Welcome back!\n"
                 + "Carrying off from where you left behind the last time...";
 
@@ -41,7 +41,7 @@ public class Ui {
     /**
      * Displays a goodbye message to the user.
      */
-    public static String exit() {
-        return "Bye! Hope to see you again soon! ☺\n";
+    static String exit() {
+        return "Bye! Hope to see you again soon! ;)";
     }
 }

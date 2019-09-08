@@ -1,7 +1,5 @@
 package exception;
 
-import misc.Ui;
-
 /**
  * Represents an Exception Handler that can display to user the respective error messages when required.
  * Used by Duke to handle exceptions thrown in the Main program.
@@ -35,7 +33,7 @@ public class ExceptionHandler {
      * Displays an error that indicates to the user that an invalid DukeCommand has been given.
      */
     public String showUnknownDukeCommandError() {
-        String errorMessage = "I'm sorry, but I don't know what that means... ☹";
+        String errorMessage = "I'm sorry, but I don't know what that means...";
 
         return errorMessage;
     }
@@ -44,7 +42,7 @@ public class ExceptionHandler {
      * Displays an error that indicates to the user that no input was given when prompted for one.
      */
     public String showVoidDukeCommandError() {
-        String errorMessage =  "I can't do anything if you don't tell me what to do... \ud83d\ude2d";
+        String errorMessage =  "I can't do anything if you don't tell me what to do...";
 
         return errorMessage;
     }

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.AliasCommand;
 import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
@@ -7,9 +8,11 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ExitCommand;
+import duke.command.PlaceCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyFieldDukeException;
 import duke.exception.InvalidCommandDukeException;
+import duke.exception.PlaceParseDukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -64,7 +67,20 @@ public class Parser {
             }
             return new AddCommand(new Event(temp[0], temp[1]));
         case "todo":
-            return new AddCommand(new Todo(str.substring(4)));
+            return new AddCommand(new Todo(str.substring(lastIndex)));
+        case "place":
+            temp = str.substring(lastIndex).trim().split("\\s+");
+            try {
+                double latitude = Double.parseDouble(temp[1]);
+                double longitude = Double.parseDouble(temp[2]);
+                return new PlaceCommand(temp[0], latitude, longitude);
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                throw new EmptyFieldDukeException("latitude & longitude", "place");
+            } catch (NumberFormatException e) {
+                throw new PlaceParseDukeException();
+            }
+        case "alias":
+            return new AliasCommand(str.substring(lastIndex));
         default:
             throw new InvalidCommandDukeException();
         }

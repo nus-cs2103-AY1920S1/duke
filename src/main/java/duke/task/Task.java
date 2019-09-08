@@ -1,3 +1,8 @@
+package duke.task;
+
+/**
+ * Represents a task.
+ */
 public class Task {
 
     private boolean isDone;
@@ -6,7 +11,7 @@ public class Task {
     protected String label;
 
     /**
-     * Creates a new instance of Task.
+     * Creates a new instance of <code>Task</code>.
      *
      * @param s description of the task.
      */
@@ -16,7 +21,7 @@ public class Task {
     }
 
     /**
-     * Creates a new instance of Task.
+     * Creates a new instance of <code>Task</code>.
      *
      * @param s description of the task.
      * @param t time of the task.
@@ -30,7 +35,7 @@ public class Task {
     /**
      * Returns a label which is a representation of the task type.
      *
-     * @return the label of the Task.
+     * @return the label of the task.
      */
     public String getLabel() {
         return label;
@@ -83,7 +88,7 @@ public class Task {
      *
      * @return string representation of tick or X symbols.
      */
-    protected String getStatusIcon() {
+    public String getStatusIcon() {
         // Return tick or X symbols
         return (isDone ? "[\u2713] " : "[\u2718] ");
     }

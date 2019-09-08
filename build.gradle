@@ -13,7 +13,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "duke.ui.Launcher"
 }
 
 dependencies {

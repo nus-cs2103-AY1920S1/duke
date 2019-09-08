@@ -3,7 +3,7 @@ public class ListItem {
     private String description;
     private String status;
     private boolean isDone = false;
-    private String date = " ";
+    private Date date;
 
 
     ListItem(String description, String command, String date) {
@@ -13,19 +13,19 @@ public class ListItem {
                 case "[T]":
                     this.status = "[T]";
                     this.description = description;
-                    this.date = " ";
+                    this.date = new Date(" ");
                     break;
                 case "event":
                 case "[E]":
                     this.status = "[E]";
-                    this.description = description;
-                    this.date = "(at: " + date + ")";
+                    this.description = description.split("/")[0];
+                    this.date = new Date(description.split("/",2)[1] + ")");
                     break;
                 case "deadline":
                 case "[D]":
                     this.status = "[D]";
-                    this.description = description;
-                    this.date = "(by: " + date + ")";
+                    this.description = description.split("/")[0];
+                    this.date = new Date(description.split("/",2)[1] + ")");
                     break;
             }
         }

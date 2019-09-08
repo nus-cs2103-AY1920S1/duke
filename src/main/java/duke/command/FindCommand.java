@@ -1,8 +1,6 @@
-package command;
+package duke.command;
 
-import task.TaskListController;
-
-import java.util.Optional;
+import duke.task.TasksController;
 
 /***
  * <p>
@@ -10,29 +8,29 @@ import java.util.Optional;
  * </p>
  */
 public class FindCommand implements Command {
-    private TaskListController taskListController;
+    private TasksController tasksController;
     private String searchParameter;
 
     /***
      * <p>
      * Finds tasks that contains a particular substring.
      * </p>
-     * @param taskListController controller for task list to be searched.
+     * @param tasksController controller for duke.task list to be searched.
      * @param arguments substring to search for.
      */
-    FindCommand(TaskListController taskListController, String arguments) {
-        this.taskListController = taskListController;
+    FindCommand(TasksController tasksController, String arguments) {
+        this.tasksController = tasksController;
         searchParameter = arguments;
     }
 
     /***
      * <p>
-     * Search for task.
+     * Search for duke.task.
      * </p>
      * @return new ListenCommand.
      */
     @Override
     public void execute() {
-        taskListController.findTasks(searchParameter);
+        tasksController.findTasks(searchParameter);
     }
 }

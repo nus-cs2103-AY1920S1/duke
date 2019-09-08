@@ -1,6 +1,4 @@
-package command;
-
-import java.util.Optional;
+package duke.command;
 
 /***
  * <p>
@@ -12,7 +10,7 @@ public interface Command {
      * <p>
      * Runs execution code for a specific action.
      * </p>
-     * @return following command if available.
+     * @return following duke.command if available.
      */
     public void execute();
 }

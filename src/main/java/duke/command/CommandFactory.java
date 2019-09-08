@@ -1,9 +1,8 @@
-package command;
+package duke.command;
 
 import error.UnknownCommandException;
-import task.TaskListController;
-import util.DukeInput;
-import util.DukeMessage;
+import duke.task.TasksController;
+import util.OutputBuilder;
 import util.DukeOutput;
 
 import java.util.Optional;
@@ -14,16 +13,16 @@ import java.util.Optional;
  * </p>
  */
 public class CommandFactory {
-    private TaskListController taskListController;
+    private TasksController tasksController;
 
     /***
      * <p>
      * ListenCommand constructor.
      * </p>
-     * @param taskListController controller for task list on which commands are executed.
+     * @param tasksController controller for duke.task list on which commands are executed.
      */
-    public CommandFactory(TaskListController taskListController) {
-        this.taskListController = taskListController;
+    public CommandFactory(TasksController tasksController) {
+        this.tasksController = tasksController;
     }
 
     /***
@@ -38,20 +37,20 @@ public class CommandFactory {
 
         switch (command) {
         case "bye":
-            return Optional.of(new ByeCommand(taskListController));
+            return Optional.of(new ByeCommand(tasksController));
         case "list":
-            return Optional.of(new ListCommand(taskListController));
+            return Optional.of(new ListCommand(tasksController));
         case "done":
-            return Optional.of(new DoneCommand(taskListController, arguments));
+            return Optional.of(new DoneCommand(tasksController, arguments));
         case "delete":
-            return Optional.of(new DeleteCommand(taskListController, arguments));
+            return Optional.of(new DeleteCommand(tasksController, arguments));
         case "find":
-            return Optional.of(new FindCommand(taskListController, arguments));
+            return Optional.of(new FindCommand(tasksController, arguments));
         default:
             try {
-                return Optional.of(new AddCommand(command, arguments, taskListController));
+                return Optional.of(new AddCommand(command, arguments, tasksController));
             } catch (UnknownCommandException e) {
-                DukeOutput.printMessage(new DukeMessage(e.getMessage()));
+                DukeOutput.printMessage(new OutputBuilder(e.getMessage()));
                 return Optional.empty();
             }
         }

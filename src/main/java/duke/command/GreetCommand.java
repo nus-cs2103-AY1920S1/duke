@@ -1,8 +1,6 @@
-package command;
+package duke.command;
 
-import java.util.Optional;
-
-import util.DukeMessage;
+import util.OutputBuilder;
 import util.DukeOutput;
 
 
@@ -32,7 +30,7 @@ public class GreetCommand implements Command {
      */
     @Override
     public void execute() {
-        DukeMessage greetingMessage = new DukeMessage(GREETING);
+        OutputBuilder greetingMessage = new OutputBuilder(GREETING);
         DukeOutput.printMessage(greetingMessage);
     }
 }

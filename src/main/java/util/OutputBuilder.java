@@ -1,12 +1,16 @@
 package util;
 
+import duke.task.tasks.Task;
+
+import java.util.List;
+
 /***
  * <p>
  * Utility class that encapsulates message strings to be printed by the program.
  * DukeOutput uses DukeMessage to auto-format output messages.
  * </p>
  */
-public class DukeMessage {
+public class OutputBuilder {
     private StringBuilder message;
 
     /***
@@ -14,7 +18,7 @@ public class DukeMessage {
      * DukeMessage default constructor.
      * </p>
      */
-    public DukeMessage() {
+    public OutputBuilder() {
         message = new StringBuilder();
     }
 
@@ -24,7 +28,7 @@ public class DukeMessage {
      * </p>
      * @param message string to be encapsulated.
      */
-    public DukeMessage(String message) {
+    public OutputBuilder(String message) {
         this.message = new StringBuilder(message);
     }
 
@@ -35,7 +39,7 @@ public class DukeMessage {
      * @param text string to be added.
      * @return modified DukeMessage.
      */
-    public DukeMessage append(String text) {
+    public OutputBuilder append(String text) {
         message.append(text);
         return this;
     }
@@ -47,7 +51,7 @@ public class DukeMessage {
      * @param i int to be added.
      * @return modified DukeMessage.
      */
-    public DukeMessage append(int i) {
+    public OutputBuilder append(int i) {
         message.append(String.valueOf(i));
         return this;
     }
@@ -56,11 +60,11 @@ public class DukeMessage {
      * <p>
      * Adds DukeMessage to end of current message.
      * </p>
-     * @param dukeMessage DukeMessage to be added.
+     * @param outputBuilder DukeMessage to be added.
      * @return modified DukeMessage.
      */
-    public DukeMessage append(DukeMessage dukeMessage) {
-        message.append(dukeMessage.getMessage());
+    public OutputBuilder append(OutputBuilder outputBuilder) {
+        message.append(outputBuilder.build());
         return this;
     }
 
@@ -70,7 +74,7 @@ public class DukeMessage {
      * </p>
      * @return modified DukeMessage.
      */
-    public DukeMessage newLine() {
+    public OutputBuilder newLine() {
         message.append("\n");
         return this;
     }
@@ -81,7 +85,7 @@ public class DukeMessage {
      * </p>
      * @return modified DukeMessage.
      */
-    public DukeMessage indent() {
+    public OutputBuilder indent() {
         message.append(" ");
         return this;
     }
@@ -92,7 +96,24 @@ public class DukeMessage {
      * </p>
      * @return message.
      */
-    String getMessage() {
+    public String build() {
         return message.toString();
+    }
+
+
+    public OutputBuilder appendTasks(List<Task> tasks) {
+        if (!tasks.isEmpty()) {
+            message.append("1.")
+                    .append(tasks.get(0).getDisplayMessage());
+        }
+
+        for (int i = 1; i < tasks.size(); i++) {
+            message.append("\n")
+                    .append(i + 1)
+                    .append(".")
+                    .append(tasks.get(i).getDisplayMessage());
+        }
+
+        return this;
     }
 }

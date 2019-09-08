@@ -1,11 +1,11 @@
-package task.tasks;
+package duke.task.tasks;
 
 import java.io.Serializable;
 import java.util.Optional;
 
 /***
  * <p>
- * Task interface to create new task types.
+ * Task interface to create new duke.task types.
  * Serializable to be written to storage.
  * </p>
  */
@@ -20,7 +20,7 @@ public abstract class Task implements Serializable {
      * Task default constructor.
      * </p>
      * @param description each tasks has a description.
-     * @param keyword each task has a keyword to be input by the user in order to perform related operations.
+     * @param keyword each duke.task has a keyword to be input by the user in order to perform related operations.
      */
     public Task(String description, TaskKeyword keyword) {
         this.description = description;
@@ -30,17 +30,17 @@ public abstract class Task implements Serializable {
 
     /***
      * <p>
-     * Returns string code to represent a task type e.g. Event -> E
+     * Returns string code to represent a duke.task type e.g. Event -> E
      * </p>
-     * @return task string code.
+     * @return duke.task string code.
      */
     protected abstract String getTaskStringCode();
 
     /***
      * <p>
-     * Returns any extra details to be appended to the task message.
+     * Returns any extra details to be appended to the duke.task message.
      * </p>
-     * @return task description message.
+     * @return duke.task description message.
      */
     protected abstract Optional<String> getTaskExtraDetails();
 
@@ -50,9 +50,9 @@ public abstract class Task implements Serializable {
 
     /***
      * <p>
-     * Sets task to done.
+     * Sets duke.task to done.
      * </p>
-     * @param done task done state.
+     * @param done duke.task done state.
      */
     public void setDone(boolean done) {
         this.done = done;
@@ -64,11 +64,11 @@ public abstract class Task implements Serializable {
 
     /***
      * <p>
-     * Returns task message.
+     * Returns duke.task message.
      * </p>
-     * @return task message that describes the tasks state and details.
+     * @return duke.task message that describes the tasks state and details.
      */
-    public final String getTaskMessage() {
+    public final String getDisplayMessage() {
         String message = String.format("[%s][%s] %s",
                 getTaskStringCode(),
                 getStatusIcon(),

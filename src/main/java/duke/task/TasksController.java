@@ -1,18 +1,18 @@
-package task;
+package duke.task;
 
-import task.tasks.Task;
+import duke.task.tasks.Task;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 /***
  * <p>
- * Controller class that operates on user's task data.
+ * Controller class that operates on user's duke.task data.
  * </p>
  */
-public class TaskListController {
+public class TasksController {
     private List<Task> tasks;
-    private TaskConsoleView view;
+    private TasksView view;
 
     /***
      * <p>
@@ -20,9 +20,9 @@ public class TaskListController {
      * </p>
      * @param tasks list of tasks.
      */
-    public TaskListController(List<Task> tasks) {
+    public TasksController(List<Task> tasks, TasksView view) {
         this.tasks = tasks;
-        view = new TaskConsoleView();
+        this.view = view;
     }
 
     /***
@@ -39,7 +39,7 @@ public class TaskListController {
      * <p>
      * Adds tasks and prints corresponding feedback.
      * </p>
-     * @param task task to be added.
+     * @param task duke.task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -48,9 +48,9 @@ public class TaskListController {
 
     /***
      * <p>
-     * Sets a task to done and prints corresponding feedback.
+     * Sets a duke.task to done and prints corresponding feedback.
      * </p>
-     * @param index index of task to be set to done.
+     * @param index index of duke.task to be set to done.
      */
     public void setTaskToDone(int index) {
         tasks.get(index).setDone(true);
@@ -72,9 +72,9 @@ public class TaskListController {
 
     /***
      * <p>
-     * Deletes a task and prints corresponding feedback.
+     * Deletes a duke.task and prints corresponding feedback.
      * </p>
-     * @param index index of task to be deleted.
+     * @param index index of duke.task to be deleted.
      */
     public void deleteTask(int index) {
         Task deletedTask = tasks.get(index);
@@ -93,6 +93,6 @@ public class TaskListController {
         List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getDescription().contains(parameter))
                 .collect(Collectors.toList());
-        view.displayMatchingTasks(matchingTasks);
+        view.displaySearchResults(matchingTasks);
     }
 }

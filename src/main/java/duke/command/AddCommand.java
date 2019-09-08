@@ -1,14 +1,13 @@
-package command;
+package duke.command;
 
 import error.task.TaskCreationException;
 import error.UnknownCommandException;
-import task.tasks.Task;
-import task.TaskListController;
-import task.tasks.TaskKeyword;
-import util.DukeMessage;
+import duke.task.tasks.Task;
+import duke.task.TasksController;
+import duke.task.tasks.TaskKeyword;
+import util.OutputBuilder;
 import util.DukeOutput;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 /***
@@ -17,7 +16,7 @@ import java.util.stream.Stream;
  * </p>
  */
 public class AddCommand implements Command {
-    private TaskListController taskListController;
+    private TasksController tasksController;
     private TaskKeyword taskKeyword;
     private String arguments;
 
@@ -25,30 +24,30 @@ public class AddCommand implements Command {
      * <p>
      * AddCommand constructor.
      * </p>
-     * @param keyword identifier for task types.
-     * @param arguments corresponding arguments for task type.
-     * @param taskListController controller for task list to be added to.
-     * @throws UnknownCommandException if keyword does not correspond to existing task.
+     * @param keyword identifier for duke.task types.
+     * @param arguments corresponding arguments for duke.task type.
+     * @param tasksController controller for duke.task list to be added to.
+     * @throws UnknownCommandException if keyword does not correspond to existing duke.task.
      */
-    AddCommand(String keyword, String arguments, TaskListController taskListController) throws UnknownCommandException {
-        this.taskListController = taskListController;
+    AddCommand(String keyword, String arguments, TasksController tasksController) throws UnknownCommandException {
+        this.tasksController = tasksController;
         this.taskKeyword = parseKeyword(keyword);
         this.arguments = arguments;
     }
 
     /***
      * <p>
-     * Adds task to memory.
+     * Adds duke.task to memory.
      * </p>
-     * @return listen command.
+     * @return listen duke.command.
      */
     @Override
     public void execute() {
         try {
             Task task = taskKeyword.taskProducer.getTask(arguments);
-            taskListController.addTask(task);
+            tasksController.addTask(task);
         } catch (TaskCreationException e) {
-            DukeOutput.printMessage(new DukeMessage(e.getTaskErrorMessage()));
+            DukeOutput.printMessage(new OutputBuilder(e.getTaskErrorMessage()));
         }
     }
 

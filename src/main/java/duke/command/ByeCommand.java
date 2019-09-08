@@ -1,14 +1,11 @@
-package command;
+package duke.command;
 
 import error.ConfigurationException;
-import error.UnknownCommandException;
-import task.TaskListController;
+import duke.task.TasksController;
 import util.DukeInput;
-import util.DukeMessage;
+import util.OutputBuilder;
 import util.DukeOutput;
 import util.DukeStorage;
-
-import java.util.Optional;
 
 /***
  * <p>
@@ -16,16 +13,16 @@ import java.util.Optional;
  * </p>
  */
 public class ByeCommand implements Command {
-    private TaskListController taskListController;
+    private TasksController tasksController;
 
     /***
      * <p>
      * ByeCommand constructor.
      * </p>
-     * @param taskListController controller for task list to which new tasks will be saved to.
+     * @param tasksController controller for duke.task list to which new tasks will be saved to.
      */
-    ByeCommand(TaskListController taskListController) {
-        this.taskListController = taskListController;
+    ByeCommand(TasksController tasksController) {
+        this.tasksController = tasksController;
     }
 
     /***
@@ -36,10 +33,10 @@ public class ByeCommand implements Command {
     @Override
     public void execute() {
         try {
-            DukeStorage.getInstance().writeTaskData(taskListController.getTasks());
+            DukeStorage.getInstance().writeTaskData(tasksController.getTasks());
         } catch (ConfigurationException e) {
-            DukeMessage fileWriteErrorMessage =
-                    new DukeMessage("☹ OOPS!!! Unable to save task data. Close duke.Duke anyway? (Y/N)");
+            OutputBuilder fileWriteErrorMessage =
+                    new OutputBuilder("☹ OOPS!!! Unable to save duke.task data. Close duke.Duke anyway? (Y/N)");
             DukeOutput.printMessage(fileWriteErrorMessage);
 
             boolean forceClosedSelectionMade = false;
@@ -54,7 +51,7 @@ public class ByeCommand implements Command {
                 case "N":
                     forceClosedSelectionMade = true;
                 default:
-                    DukeMessage invalidSelectionMessage = new DukeMessage("☹ OOPS!!! Please select Y/N");
+                    OutputBuilder invalidSelectionMessage = new OutputBuilder("☹ OOPS!!! Please select Y/N");
                     DukeOutput.printMessage(invalidSelectionMessage);
                 }
             }
@@ -65,7 +62,7 @@ public class ByeCommand implements Command {
     }
 
     private void sayGoodbye() {
-        DukeMessage goodbyeMessage = new DukeMessage("Bye. Hope to see you again soon!");
+        OutputBuilder goodbyeMessage = new OutputBuilder("Bye. Hope to see you again soon!");
         DukeOutput.printMessage(goodbyeMessage);
     }
 }

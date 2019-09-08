@@ -1,4 +1,4 @@
-package task.tasks;
+package duke.task.tasks;
 
 import error.task.InvalidArgumentsException;
 import error.task.UnknownDateTimeException;

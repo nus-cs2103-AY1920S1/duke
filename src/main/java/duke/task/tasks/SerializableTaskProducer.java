@@ -1,13 +1,12 @@
-package task.tasks;
+package duke.task.tasks;
 
-import error.UnknownCommandException;
 import error.task.TaskCreationException;
 
 import java.io.Serializable;
 
 /***
  * <p>
- * Functional interface that returns a task.
+ * Functional interface that returns a duke.task.
  * Serializable to be written to storage.
  * </p>
  */

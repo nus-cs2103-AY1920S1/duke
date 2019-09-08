@@ -1,5 +1,5 @@
 /**
- * Simulates a help command of the Duke System.
+ * Simulates a help command of the Duke System. C-Help
  * @author Fabian Chia Hup Peng
  */
 

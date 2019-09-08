@@ -23,6 +23,8 @@ public class FindCommand extends Command {
      * @param storage To read and write tasks.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert !keyword.isEmpty() : "Keyword should not empty";
+
         List<Task> matchingTasks = tasks.findTasksByKeyword(keyword);
 
         if (matchingTasks.size() == 0) {

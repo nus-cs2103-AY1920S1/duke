@@ -20,6 +20,8 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.getTask(taskId);
 
+        assert task != null : "Task should not be null";
+
         if (task.getIsDone()) {
             throw new DukeException("This task is already marked as done.");
         }

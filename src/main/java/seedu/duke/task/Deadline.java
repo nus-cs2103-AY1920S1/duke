@@ -22,7 +22,7 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
-        return "D | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strBy + "\n";
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + strBy + "\n";
     }
 
     @Override

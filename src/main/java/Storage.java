@@ -63,17 +63,33 @@ public class Storage {
             if (taskType.equals("T")) {
                 task = new ToDo(taskDes);
                 tasks.add(task);
-                if (taskStatus == 1) task.mark();
+                if (taskStatus == 1) {
+                    task.mark();
+                } else {
+                    assert taskStatus == 0 : str;
+                }
             } else if (taskType.equals("D")) {
+                assert arr[3] != null : str;
                 taskTime = arr[3];
                 task = new Deadline(taskDes, taskTime);
                 tasks.add(task);
-                if (taskStatus == 1) task.mark();
+                if (taskStatus == 1) {
+                    task.mark();
+                } else {
+                    assert taskStatus == 0 : str;
+                }
             } else if (taskType.equals("E")) {
+                assert arr[3] != null : str;
                 taskTime = arr[3];
                 task = new Event(taskDes, taskTime);
                 tasks.add(task);
-                if (taskStatus == 1) task.mark();
+                if (taskStatus == 1) {
+                    task.mark();
+                } else {
+                    assert taskStatus == 0 : str;
+                }
+            } else {
+                throw new AssertionError(taskType);
             }
         }
         return tasks;

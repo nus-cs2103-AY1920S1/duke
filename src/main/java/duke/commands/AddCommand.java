@@ -18,6 +18,7 @@ import duke.tasks.ToDo;
 import duke.tasks.Event;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AddCommand extends Command {
     private TaskList tasks;
@@ -26,6 +27,7 @@ public class AddCommand extends Command {
     private String processedDetails = "";
     private String deadlineErrorMsg = "Please write the deadline such as 29/2/2019 1800 and resubmit the command";
     private String eventErrorMsg = "Please write the event timing such as 29/2/2019 1800-2000 and resubmit the command";
+    private int clashingEvent;
 
     /**
      * Loads the entire input command into the object for further processing of its details, such as
@@ -149,6 +151,7 @@ public class AddCommand extends Command {
     private String eventTask(String[] details) throws DukeException, IOException {
         String[] eventTime = details[1].trim().split(" ");
         String formattedTime = processEventTime(eventTime);
+        detectAnomalies(formattedTime);
         Event newEvent = new Event(details[0].trim(), formattedTime);
         this.tasks.addTask(newEvent);
         Storage.save(tasks);
@@ -166,7 +169,7 @@ public class AddCommand extends Command {
         if (eventTime.length < 2) {
             throw new DukeException(eventErrorMsg);
         } else {
-            String[] hoursMin = eventTime[1].split("-");
+            String[] hoursMin = eventTime[1].split("[-]");
             if (hoursMin.length < 2) {
                 throw new DukeException(eventErrorMsg);
             } else {
@@ -177,6 +180,97 @@ public class AddCommand extends Command {
                     throw new DukeException(e.getMessage() + " " + eventErrorMsg);
                 }
             }
+        }
+    }
+
+    /**
+     * Checks if the event clashes with another previously saved event and advises the user as such.
+     *
+     * @param formattedTime String containing information about the time of the event the user has just input
+     * @throws DukeException is thrown if there is a clashing event in memory
+     */
+    private void detectAnomalies(String formattedTime) throws DukeException {
+        String[] dateAndTime = formattedTime.split("[,]");
+        String date = dateAndTime[0].trim();
+        String timeToTime = dateAndTime[1].trim();
+        boolean isNotClashing = noDateClashes(date, timeToTime);
+        if (!isNotClashing) {
+            throw new DukeException("This event clashes with another in your list: " + "\n"
+                    + tasks.getTask(clashingEvent + 1).toString());
+        }
+    }
+
+    /**
+     * Checks first if the event the user entered has the same date as a previously saved event. If yes, another
+     * method will be called to check if there is an overlap in the timings.
+     *
+     * @param date String containing the day of the new event
+     * @param timeToTime String containing the time of the new event (in this format: 6.30pm-7pm)
+     * @return boolean that determines whether there are existing clashes
+     */
+    private boolean noDateClashes(String date, String timeToTime) {
+        ArrayList<Task> allTasks = this.tasks.getAllTasks();
+        int index = 0;
+        boolean isNotClashing = true;
+        for (Task task : allTasks) {
+            if (task instanceof Event) {
+                String eventTime = ((Event) task).getEventTime();
+                String[] eventTimeArr = eventTime.split("[,]");
+                if (eventTimeArr[0].trim().equals(date)) {
+                    isNotClashing = noTimeClashes(timeToTime, index);
+                    if (!isNotClashing) {
+                        break;
+                    }
+                }
+                index++;
+            }
+        }
+        return isNotClashing;
+    }
+
+    /**
+     * Checks if there is clash in the timings of the newly added event and existing events in memory.
+     *
+     * @param timeToTime String containing the time of the newly added event
+     * @param index of first Event in the list that shares the same day as the newly added event
+     * @return boolean that determines whether there are existing clashes
+     */
+    private boolean noTimeClashes(String timeToTime, int index) {
+        String[] newEventTime = timeToTime.split("-");
+        double newEventTime1 = processTime(newEventTime[0]);
+        double newEventTime2 = processTime(newEventTime[1]);
+        Event targetEvent = (Event) this.tasks.getAllTasks().get(index);
+        String[] targetEventTime = targetEvent.getEventTime().split(",")[1].split("-");
+        double targetTime1 = processTime(targetEventTime[0]);
+        double targetTime2 = processTime(targetEventTime[1]);
+        if (newEventTime1 <= targetTime1 && newEventTime2 > targetTime1) {
+            clashingEvent = index;
+            return false;
+        } else if (newEventTime1 >= targetTime1 && newEventTime1 <= targetTime2) {
+            clashingEvent = index;
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Converts time descriptions saved in Duke (e.g. "23rd of March 2019, 6pm-7pm") into numbers for comparison to
+     * check for clash in timings.
+     *
+     * @param time String containing the time saved in Duke
+     * @return double containing the same time in military format
+     */
+    private double processTime(String time) {
+        int length = time.length();
+        String suffix = time.substring(length - 2, length);
+        double timeNum = Double.parseDouble(time.substring(0, length - 2));
+        if (suffix.equals("am") && timeNum == 12) {
+            return 0;
+        } else if (suffix.equals("pm")) {
+            return timeNum + 12;
+        } else {
+            return timeNum;
         }
     }
 

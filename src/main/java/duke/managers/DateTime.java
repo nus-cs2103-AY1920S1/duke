@@ -69,8 +69,8 @@ public class DateTime {
      * @exception DateException if the month number is invalid
      */
     public static String getTime(String time) throws DateException {
+        assert time.length() == 4 : "Time invalid";
         String hours = time.substring(0,2);
-        assert hours.length() == 4 : "Time invalid";
         String timeString = getHours(hours) + getMinutes(time.substring(2,4));
         if (Integer.parseInt(hours) < 12) {
             return timeString + "am";

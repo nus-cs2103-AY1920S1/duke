@@ -28,4 +28,8 @@ public class Event extends Task {
         formatted += binary + " | " + super.description + " | " + this.eventTime;
         return formatted;
     }
+
+    public String getEventTime() {
+        return this.eventTime;
+    }
 }

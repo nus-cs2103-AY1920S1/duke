@@ -6,9 +6,9 @@ package duke;
  */
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected String type;
+    String description;
+    String type;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -21,14 +21,14 @@ public class Task {
      *
      * @return String tick or X symbol.
      */
-    public String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
      * Sets done status to true.
      */
-    public void markDone() {
+    void markDone() {
         this.isDone = true;
     }
 

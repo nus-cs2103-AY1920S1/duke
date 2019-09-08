@@ -1,9 +1,9 @@
 package duke;
 
 public class FindCommand extends Command {
-    String word;
+    private String word;
 
-    public FindCommand(String word) {
+    FindCommand(String word) {
         this.word = word;
     }
 
@@ -15,7 +15,7 @@ public class FindCommand extends Command {
         for (Task t: tasks.taskList) {
             if (t.description.contains(word)) {
                 counter++;
-                sb.append(counter + ". " + t + "\n");
+                sb.append(counter).append(". ").append(t).append("\n");
             }
         }
         return sb.toString();

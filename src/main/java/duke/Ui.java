@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents a User interface object. A <code>User interface</code> object corresponds to
  * an interface that deals with interactions with the user.
  */
-public class Ui {
+class Ui {
     private Scanner scanner = new Scanner(System.in);
 
     Ui() {
@@ -75,9 +75,8 @@ public class Ui {
      * Prints delete command message.
      */
     String printDeleteMessage(Task task, TaskList tasks) {
-        String deleteMessage = "Noted. I've removed this task:\n" + task +
+        return "Noted. I've removed this task:\n" + task +
                 "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
-        return deleteMessage;
     }
 
     /**
@@ -92,9 +91,8 @@ public class Ui {
      * Prints add command message.
      */
     String printAddMessage(Task task, TaskList tasks) {
-        String addMessage = "Got it. I've added this task:" + task +
+        return "Got it. I've added this task:" + task +
                 "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
-        return addMessage;
     }
 
     /**

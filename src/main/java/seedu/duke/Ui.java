@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Ui is a class that deals with interactions with the user. It contains operations that
@@ -47,9 +49,12 @@ public class Ui {
     public static String printList(TaskList list) {
         assert list != null : "TaskList cannot be null";
         String tasksMsg = "Here are the tasks in your list:\n";
-        for (int j = 0; (j < list.getSize()) && list.getTask(j) != null; j++) {
-            tasksMsg += j + 1 + "." + list.getTask(j) + "\n";
-        }
+
+        tasksMsg += IntStream.range(0, list.getSize())
+                .filter((index) -> list.getTask(index) != null)
+                .mapToObj((index) -> String.format("%d.%s\n", index + 1, list.getTask(index)))
+                .collect(Collectors.joining());
+
         return tasksMsg;
     }
 
@@ -98,11 +103,12 @@ public class Ui {
      * @param list the list of matching tasks
      */
     public static String printMatchingList(ArrayList<Task> list) {
-        String string = "";
-        for (int j = 0; (j < list.size()) && list.get(j) != null; j++) {
-            string += j + 1 + "." + list.get(j) + "\n";
-        }
-        return string;
+        String joinedString = IntStream.range(0, list.size())
+                .filter((index) -> list.get(index) != null)
+                .mapToObj((index) -> String.format("%d.%s\n", index + 1, list.get(index)))
+                .collect(Collectors.joining());
+
+        return joinedString;
     }
 
     /**
@@ -132,6 +138,7 @@ public class Ui {
     public String printErrMsg(String s) {
         return s + "\n";
     }
+
 
     /**
      * Returns the invalid find input error message.

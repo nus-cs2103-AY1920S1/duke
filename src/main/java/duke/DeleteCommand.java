@@ -26,8 +26,11 @@ public class DeleteCommand extends Command {
         if (index > tasks.getListSize()) {
             throw new DukeException("OOPS!!! duke.Task not found.");
         }
+        int oldListSize = tasks.getListSize();
         Task task = tasks.getTask(index);
         tasks.deleteTask(task);
+        int newListSize = tasks.getListSize();
+        assert newListSize == oldListSize - 1 : "Task should have been deleted";
         try {
             storage.writeToHardDisk(tasks);
         } catch (DukeException ex) {

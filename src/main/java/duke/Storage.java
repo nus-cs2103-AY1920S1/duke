@@ -39,18 +39,21 @@ class Storage {
                         todo.markDone();
                     }
                     alist.add(todo);
+                    assert todo != null : "Todo should have been loaded from hard disk";
                 } else if (line.charAt(1) == 'D') {
                     Deadline deadline = new Deadline(description);
                     if (line.charAt(4) == tick) {
                         deadline.markDone();
                     }
                     alist.add(deadline);
+                    assert deadline != null : "Deadline should have been loaded from hard disk";
                 } else {
                     Event event = new Event(description);
                     if (line.charAt(4) == tick) {
                         event.markDone();
                     }
                     alist.add(event);
+                    assert event != null : "Event should have been loaded from hard disk";
                 }
             }
             br.close();

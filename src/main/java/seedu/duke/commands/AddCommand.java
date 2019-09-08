@@ -8,11 +8,8 @@ import seedu.duke.ui.UI;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/** Adds a task to the Task list.
- * @param task Task to be added to the list. Prints out a reply when task is added.
- * @param taskList Task list for the task to be added to.
- * @param fw File to record the tasks in Task list.
- * @param ui Handles the printing of reply.
+/**
+ * Evaluates the task type and adds it to the Task list
  */
 public class AddCommand extends Command{
     private Task taskToAdd;

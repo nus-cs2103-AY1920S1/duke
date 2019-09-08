@@ -4,10 +4,8 @@ import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.UI;
 
-/** Prints out all the tasks in the Task list containing the keyword input by user.
- * @param taskList Task list containing the tasks.
- * @param keyword A word parsed by user to search for the tasks containing this word.
- * @param ui Handles the printing of the tasks.
+/**
+ * This class represents the "find" command by user and prints out all the tasks in the Task list containing the keyword input by user.
  */
 public class FindCommand extends Command {
     private String keyword;

@@ -3,15 +3,16 @@ package seedu.duke.parser;
 import seedu.duke.commands.*;
 import seedu.duke.exception.DukeException;
 
-/** Represents a command checker to verify if a command is valid. If valid, the command will be
- * executed accordingly.
+/**
+ * Represents a command checker to verify if a command is valid. If valid, the corresponding Command will be
+ * returned.
  */
 public class Parser {
 
     /** Checks if a command is valid and execute command. If command is incomplete, throws
      * ArrayOutOfBoundException. If command is invalid, throws DukeException.
      * @param command Represents the command to be executedd.
-     * @return
+     * @return Command Represents the command corresponding to user input.
      */
     public Command parse(String command) throws DukeException{
         String[] parts = command.split(" ", 2);

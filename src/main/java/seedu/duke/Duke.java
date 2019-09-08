@@ -16,7 +16,8 @@ public class Duke {
     public Duke() {
     }
 
-    /** Constructs a Duke object. Reads and loads the latest record of the Task List
+    /**
+     * Constructs a Duke object. Reads and loads the latest record of the Task List
      * from the file that stores the list.
      * @param filePath Represents the file address of the file to be read.
      */

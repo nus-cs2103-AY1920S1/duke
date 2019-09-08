@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.history.History;
 import duke.storage.Storage;
 import duke.tasklist.Tasklist;
 import duke.ui.Ui;
@@ -13,9 +14,10 @@ public class ListTasksCommand extends Command {
      * @param tasks List of tasks.
      * @param ui The user interface the user sees.
      * @param storage Stores the user's list of tasks.
+     * @param history
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, Storage storage) {
+    public void execute(Tasklist tasks, Ui ui, Storage storage, History history) {
         super.commandOutput = ui.showList(tasks);
     } // End method.
 }

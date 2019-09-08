@@ -11,6 +11,7 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 
 
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -54,6 +55,8 @@ public class Parser {
                 return new FindCommand(details);
             case DELETE:
                 return new DeleteCommand(details);
+            case UNDO:
+                return new UndoCommand();
             default:
                 throw new DukeException("D:  OOPS!!! I'm sorry, but I don't know what that means. "
                                 + "I sure need more sleep...");

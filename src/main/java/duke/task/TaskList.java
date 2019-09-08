@@ -109,7 +109,6 @@ public class TaskList {
      */
     public ArrayList<Task> getAllTasks() {
         return new ArrayList<>(list);
-
     }
 
     /**

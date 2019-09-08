@@ -8,6 +8,7 @@ import duke.command.ErrorCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 
 public class Parser {
@@ -35,6 +36,8 @@ public class Parser {
             return new TodoCommand(fullCommand);
         case FindCommand.name:
             return new FindCommand(fullCommand);
+        case SortCommand.name:
+            return new SortCommand(fullCommand);
         default:
             return new ErrorCommand(fullCommand);
         }

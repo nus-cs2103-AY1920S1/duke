@@ -21,6 +21,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadlineDateString) throws DukeException {
         super(description);
+
+        assert !deadlineDateString.equals("") : "Description of Task should not be empty.";
+
         this.deadlineDate = DateManager.stringToDate(deadlineDateString);
     }
 

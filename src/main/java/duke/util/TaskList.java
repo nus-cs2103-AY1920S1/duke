@@ -44,6 +44,8 @@ public class TaskList implements Iterable<Task> {
      * @param task Task to be added into TaskList.
      */
     public void add(Task task) {
+        assert task != null : "Task should not be null.";
+
         tasks.add(task);
     }
 

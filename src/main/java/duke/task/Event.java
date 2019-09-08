@@ -21,6 +21,9 @@ public class Event extends Task {
      */
     public Event(String description, String eventDateString) throws DukeException {
         super(description);
+
+        assert !eventDateString.equals("") : "Description of Task should not be empty.";
+
         this.eventDate = DateManager.stringToDate(eventDateString);
     }
 

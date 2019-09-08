@@ -40,6 +40,8 @@ public class DeleteCommand extends Command {
         Task deletedTask = taskList.deleteAt(index);
         storage.save(taskList);
 
+        assert deletedTask != null : "A task which has been deleted cannot be a null object.";
+
         return GuiResponse.getRemovedAcknowledgement(deletedTask, taskList.getSize());
     }
 }

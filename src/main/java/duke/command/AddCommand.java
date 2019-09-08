@@ -36,6 +36,8 @@ public class AddCommand extends Command {
     public String executeCommand(TaskList taskList, Storage storage, Ui ui)
             throws IOException {
 
+        assert newTask != null : "A new task being added should not be a null object.";
+
         taskList.add(newTask);
         storage.save(taskList);
 

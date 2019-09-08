@@ -32,6 +32,8 @@ public class FindCommand extends Command {
     public String executeCommand(TaskList taskList, Storage storage, Ui ui) {
         TaskList tempTaskList = new TaskList();
 
+        assert (!keyword.equals("")) : "Search keyword should not be an empty string.";
+
         for (int i = 0; i < taskList.getSize(); i++) {
             Task t = taskList.getAtIndex(i);
             if (t.getDescription().contains(keyword)) {

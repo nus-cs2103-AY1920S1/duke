@@ -26,9 +26,13 @@ public class Storage {
 
     /**
      * Constructor for storage object.
+     *
      * @param currentWorkingDirectoryPath path to the current working directory of the program
      */
     public Storage(String currentWorkingDirectoryPath) {
+        assert currentWorkingDirectoryPath != null
+                : "The path to the current working directory cannot be a null object.";
+
         this.directoryPath = currentWorkingDirectoryPath + "\\data";
         this.filePath = currentWorkingDirectoryPath + "\\data\\Duke.txt";
         this.directory = new File(directoryPath);
@@ -40,7 +44,7 @@ public class Storage {
      *
      * @return list of tasks loaded with task from hard disk.
      * @throws FileNotFoundException when input file cannot be found.
-     * @throws IOException when fails to create new file
+     * @throws IOException           when fails to create new file
      */
     public List<Task> load() throws FileNotFoundException, IOException {
         List<Task> taskList = new ArrayList<>();
@@ -95,8 +99,9 @@ public class Storage {
 
     /**
      * Saves tasks from the program into hard disk.
+     *
      * @param taskList list of tasks to be stored into hard disk.
-     * @throws FileNotFoundException when input file cannot be found.
+     * @throws FileNotFoundException        when input file cannot be found.
      * @throws UnsupportedEncodingException when encoding error occurs.
      */
     public void save(TaskList taskList) throws FileNotFoundException, UnsupportedEncodingException {

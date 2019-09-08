@@ -20,6 +20,8 @@ public class ViewListCommand extends Command {
     @Override
     public String executeCommand(TaskList taskList, Storage storage, Ui ui) {
 
+        assert taskList != null : "A Task List which is going to be displayed should not be a null object.";
+
         return GuiResponse.getTaskListInString(taskList);
     }
 }

@@ -2,7 +2,9 @@ package utils;
 
 import command.CommandCentre;
 import exception.EmptyDescriptionException;
+import exception.InvalidArgumentException;
 import exception.InvalidCommandException;
+import task.Task;
 import task.TaskList;
 
 import java.text.ParseException;
@@ -113,7 +115,7 @@ public class Parser {
      */
     public String parseTodoDetail() {
         String taskName = arguments;
-        boolean isValid = validateDescription(taskName);
+        boolean isValid = validateDescriptionNotEmpty(taskName);
         if (isValid) {
             return taskName;
         } else {
@@ -156,11 +158,11 @@ public class Parser {
      * Reads the remaining String from Scanner as the keyword for 'Find' action.
      * Invalid input argument types or format will be highlighted to the user.
      *
-     * @return If successful, the keyword in String. Else, a null object.
+     * @return If successful, the String representation of the keyword. Else, a null object.
      */
-    public String parseFindKeyword() {
+    public String parseKeyword() {
         String keyword = arguments.trim();
-        boolean isValid = validateDescription(keyword);
+        boolean isValid = validateDescriptionNotEmpty(keyword);
         if (isValid) {
             return keyword;
         } else {
@@ -168,7 +170,40 @@ public class Parser {
         }
     }
 
-    private boolean validateDescription(String keyword) {
+    public String[] parseSortInfo() {
+        String keyword = arguments.trim();
+        String[] sortInfo = parseRawInput(keyword);
+        System.out.println(sortInfo[0]);
+        System.out.println(sortInfo[1]);
+        return sortInfo;
+    }
+
+
+    public int parseKeywordAsSortCategory(String keyword) {
+        switch (keyword) {
+        case "name":
+            return Task.NAME_CATEGORY;
+
+        case "deadline":
+            return Task.DEADLINE_CATEGORY;
+
+        case "type":
+            return Task.TYPE_CATEGORY;
+
+        case "status":
+            return Task.STATUS_CATEGORY;
+
+        default:
+            try {
+                throw new InvalidArgumentException(ui.buildInvalidSortCategoryMessage());
+            } catch (InvalidArgumentException e) {
+                ui.appendMessage(e.getMessage());
+                return -1;
+            }
+        }
+    }
+
+    private boolean validateDescriptionNotEmpty(String keyword) {
         try {
             if (keyword.isEmpty()) {
                 throw new EmptyDescriptionException(ui.buildEmptyDescriptionMessage());
@@ -181,10 +216,12 @@ public class Parser {
     }
 
     private boolean validateTaskInfo(String[] taskInfo) {
+        String dateString;
         try {
-            if (isArgumentBlank(taskInfo)) {
+            if (validateArgumentsNotBlank(taskInfo)) {
                 throw new EmptyDescriptionException(ui.buildEmptyDescriptionMessage());
             }
+            dateString = taskInfo[1];
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.appendMessage(ui.buildIncorrectArgumentsMessage());
             return false;
@@ -194,7 +231,6 @@ public class Parser {
             return false;
         }
 
-        String dateString = taskInfo[1];
         try {
             validateDateFormat(dateString);
         } catch (ParseException e) {
@@ -212,12 +248,12 @@ public class Parser {
         cal.setTime(sdf.parse(dateString));
     }
 
-    private boolean isArgumentBlank(String[] taskInfo) {
+    private boolean validateArgumentsNotBlank(String[] taskInfo) {
         return taskInfo.length == 0 || taskInfo[0].isBlank() || taskInfo[1].isBlank();
     }
 
     /**
-     * Splits the raw user input String into the action keyword and its arguments.
+     * Splits the raw user input String into the first action keyword and its arguments.
      *
      * @param input The raw user input sent to the Duke chat bot via the javafx GUI.
      * @return An array of size two which contains the "action" as the first element and
@@ -236,7 +272,7 @@ public class Parser {
                 break;
             }
         }
-        return new String[]{first.toString(), second.toString()};
+        return new String[]{first.toString(), second.toString().trim()};
     }
 
 

@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -151,6 +152,32 @@ public class TaskList {
             }
         }
         return findResult;
+    }
+
+    public boolean sort(int sortCategory, boolean isReversed) {
+        Comparator<Task> comparator;
+        switch (sortCategory) {
+        case Task.NAME_CATEGORY:
+            comparator = TaskComparatorFactory.getNameComparator(isReversed);
+            break;
+
+        case Task.DEADLINE_CATEGORY:
+            comparator = TaskComparatorFactory.getDeadlineComparator(isReversed);
+            break;
+
+        case Task.TYPE_CATEGORY:
+            comparator = TaskComparatorFactory.getTypeComparator(isReversed);
+            break;
+
+        case Task.STATUS_CATEGORY:
+            comparator = TaskComparatorFactory.getStatusComparator(isReversed);
+            break;
+
+        default:
+            return false;
+        }
+        tasks.sort(comparator);
+        return true;
     }
 
     /**

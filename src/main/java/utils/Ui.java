@@ -16,8 +16,6 @@ public class Ui {
     public static final String FIND_ACTION_TITLE =
             "Here are the matching tasks in your list:\n";
     private static final String SAD_EMOTICON = "\u2639"; // "☹"
-    private static final String EMPTY_DESCRIPTION_EXCEPTION_MESSAGE = "Description cannot be empty";
-    private static final String INVALID_COMMAND_EXCEPTION_MESSAGE = "Command is invalid";
     private static final String LOGO =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -45,8 +43,16 @@ public class Ui {
                     + "deadline taskName /by DD/MM/YYYY HHmm :\n"
                     + "Adds a new Deadline task with the deadline in the given format.\n\n"
 
+                    + "undo:\n"
+                    + "Undoes the most recent action.\n\n"
+
                     + "find keyword :\n"
-                    + "Returns a list of task with names containing the \"keyword\".\n";
+                    + "Returns a list of task with names containing the \"keyword\".\n\n"
+
+                    + "sort category r:\n"
+                    + "Sorts and returns the list of tasks. Category can be one of \"name\", "
+                    + "\"deadline\", \"type\", \"status\"."
+                    + "\nOptional argument \"r\" sorts list in reverse order.\n\n";
 
 
     private StringBuilder outputBuilder;
@@ -152,10 +158,10 @@ public class Ui {
         assert task != null : "Deleted task not found and cannot be printed.";
         outputBuilder.append("Noted. I've removed this task:\n");
         outputBuilder.append(String.format("%s\n", task));
-        appendListSummary(taskListSize);
+        printListSummary(taskListSize);
     }
 
-    private void appendListSummary(int taskListSize) {
+    private void printListSummary(int taskListSize) {
         outputBuilder.append(String.format("Now you have %d tasks in the list.\n", taskListSize));
     }
 
@@ -170,7 +176,11 @@ public class Ui {
         assert task != null : "Added task not found and cannot be printed.";
         outputBuilder.append("Got it. I've added this task:\n");
         outputBuilder.append(String.format("%s\n", task));
-        appendListSummary(taskListSize);
+        printListSummary(taskListSize);
+    }
+
+    public void printListSortedMessage() {
+        outputBuilder.append("Your list has been sorted.\n");
     }
 
     public String buildIncorrectArgumentsMessage() {
@@ -205,6 +215,17 @@ public class Ui {
                 1,
                 size);
     }
+
+    public String buildInvalidSortCategoryMessage() {
+        return String.format("%s OOPS!!! Category must be one of the following: \"%s\", \"%s\", \"%s\", \"%s\"."
+                + "\nEnter \"help\" for illustration.\n",
+                Ui.SAD_EMOTICON,
+                "name",
+                "deadline",
+                "type",
+                "status");
+    }
+
 
 
 

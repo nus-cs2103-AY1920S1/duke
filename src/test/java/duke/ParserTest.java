@@ -29,12 +29,12 @@ class ParserTest {
     @Test
     void parseDeadlineCorrectInputCorrectOutput() {
         String[] fullCommandArr = {
-            "deadline live /by 3/12/2019 1800",
-            "deadline die /by 4/12/2019 1800",
+            "deadline live /by 031219 1800",
+            "deadline die /by 041219 1800",
         };
         String[][] outArr = {
-            {"live", "/by", "3/12/2019", "1800"},  // live each day like it's your last
-            {"die", "/by", "4/12/2019", "1800"}
+            {"live", "/by", "031219", "1800"},  // live each day like it's your last
+            {"die", "/by", "041219", "1800"}
         };
 
         for (int i = 0; i < fullCommandArr.length; i++) {

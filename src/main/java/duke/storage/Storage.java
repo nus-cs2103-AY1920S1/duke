@@ -16,9 +16,12 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static duke.Parser.DEADLINE_PARSE_PATTERN;
+import static duke.Parser.LOCALE;
 import static duke.task.TaskType.TODO;
 import static duke.task.TaskType.EVENT;
 import static duke.task.TaskType.DEADLINE;

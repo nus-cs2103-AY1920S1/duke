@@ -8,13 +8,13 @@ class DeadlineTest {
 
     @Test
     void deadlineGetDeadlineCorrectInputCorrectOutput() {
-        DeadlineStub deadline = new DeadlineStub("Test", "3/12/2019 1800", false);
-        assertEquals("3/12/2019 1800", deadline.getDeadline());
+        DeadlineStub deadline = new DeadlineStub("Test", "031219 1800", false);
+        assertEquals("031219 1800", deadline.getDeadline());
     }
 
     @Test
     void deadlineToStringManualInputCorrectFormat() {
-        DeadlineStub deadline = new DeadlineStub("Test", "3/12/2019 1800", false);
-        assertEquals("[D][X] Test (by: Tue, 3 Dec 2019 18:00:00 GMT)", deadline.toString());
+        DeadlineStub deadline = new DeadlineStub("Test", "031219 1800", false);
+        assertEquals("[D][X] Test (by: 03 December 2019, 06:00PM, GMT+8)", deadline.toString());
     }
 }

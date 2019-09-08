@@ -2,6 +2,8 @@ package duke.parser;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
+
 import duke.datetime.DateTime;
 import duke.task.Task;
 import duke.task.Deadline;
@@ -13,6 +15,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
+import duke.command.FindCommand;
 import duke.dukeexception.DukeException;
 import duke.dukeexception.DukeIllegalArgumentException;
 import duke.dukeexception.DukeToDoIllegalArgumentException;
@@ -20,6 +23,7 @@ import duke.dukeexception.DukeEventIllegalArgumentException;
 import duke.dukeexception.DukeDeadlineIllegalArgumentException;
 import duke.dukeexception.DukeDeleteIllegalArgumentException;
 import duke.dukeexception.DukeSaveFileCorruptedError;
+import duke.dukeexception.DukeFindIllegalArgumentException;
 
 public class Parser {
     public Parser() {
@@ -50,6 +54,9 @@ public class Parser {
         case "todo":
             Task newToDo = parseAddToDoCommand(newTaskSplit);
             return new AddCommand(newToDo);
+        case "find":
+            String keyword = parseFindCommand(newTaskSplit);
+            return new FindCommand(keyword);
         default:
             throw new DukeIllegalArgumentException();
         }
@@ -156,6 +163,36 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeEventIllegalArgumentException("description");
         }
+    }
+
+    private static String parseFindCommand(String[] newTaskSplit) throws DukeFindIllegalArgumentException {
+        int newTaskLen = newTaskSplit.length;
+        if (newTaskLen == 2) {
+            String keyword = newTaskSplit[1];
+            return keyword;
+        } else if (newTaskLen > 2) {
+            throw new DukeFindIllegalArgumentException("too many");
+        } else {
+            throw new DukeFindIllegalArgumentException("too few");
+        }
+    }
+
+    public static ArrayList<Task> findTasksByKeyword(String keyword, ArrayList<Task> taskArrayList) {
+        ArrayList<Task> searchResultArrayList = new ArrayList<Task>();
+        for (Task task : taskArrayList) {
+            String[] descriptionSplit = task.getDescription().split(" ");
+            boolean keyWordFound = false;
+            for (String word : descriptionSplit) {
+                if (word.equals(keyword)) {
+                    keyWordFound = true;
+                    break;
+                }
+            }
+            if (keyWordFound) {
+                searchResultArrayList.add(task);
+            }
+        }
+        return searchResultArrayList;
     }
 
     public static DateTime convertDateTime(String dateTimeString) {

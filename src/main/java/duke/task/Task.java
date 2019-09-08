@@ -19,6 +19,10 @@ public abstract class Task {
 
     public abstract String toSaveFormat();
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         String output;

@@ -46,6 +46,20 @@ public class Ui {
         }
     }
 
+    public void showSearchResult(String[] taskDescriptionArray) {
+        int taskLen = taskDescriptionArray.length;
+        if (taskLen == 0) {
+            System.out.println("There are no matching tasks in your list");
+        } else {
+            String output = "Here are the matching tasks in your list: ";
+            for (int i = 0; i < taskLen; i ++) {
+                String taskDescription = taskDescriptionArray[i];
+                output += "\n" + (i + 1) + "." + taskDescription;
+            }
+            System.out.println(output);
+        }
+    }
+
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

@@ -22,6 +22,8 @@ public class Parser {
      *     is not supported by duke.Duke bot.
      */
     public Command parse(String input) throws DukeException {
+        assert input != null : "Input cannot be null!";
+
         if (input.startsWith("todo")) {
             return new AddCommand(AddCommand.AddType.TODO, input);
         } else if (input.startsWith("deadline")) {

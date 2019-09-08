@@ -44,6 +44,8 @@ public class DeleteCommand extends Command {
             task = deleteTask();
         }
 
+        assert task != null : "Task cannot be null!";
+
         String response = "";
         if (task != null) {
             response = String.format("Noted. I've removed this task:\n%s\nNow you have %s in the list.\n",

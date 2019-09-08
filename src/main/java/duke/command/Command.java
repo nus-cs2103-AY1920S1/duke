@@ -28,6 +28,9 @@ public abstract class Command {
      * @param d the database of duke.Duke.
      */
     protected void initialise(DukeDatabase d, TaskList t) {
+        assert d != null : "database cannot be null!";
+        assert t != null : "tasks list cannot be null!";
+
         database = d;
         taskList = t;
     }

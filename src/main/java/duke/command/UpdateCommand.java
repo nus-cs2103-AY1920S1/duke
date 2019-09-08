@@ -43,6 +43,8 @@ public class UpdateCommand extends Command {
             task = markTaskAsDone();
         }
 
+        assert task != null : "Task cannot be null!";
+
         String response = "";
         if (task != null) {
             response = String.format("Nice! I've marked this task as done:\n%s\n", task.toString());

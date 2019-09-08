@@ -17,6 +17,7 @@ public class Main extends Application {
 
 	/**
 	 * Overridden method in Application that launches application.
+	 *
 	 * @param stage JavaFX stage to show after setting up.
 	 */
 	@Override

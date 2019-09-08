@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -33,6 +34,11 @@ public class MainWindow extends AnchorPane {
 				DialogBox.getDukeDialog("Hello! I'm Duke\nWhat can I do for you?", dukeImage));
 	}
 
+	/**
+	 * Sets Duke controller for MainWindow.
+	 *
+	 * @param d Sets Duke to input.
+	 */
 	public void setDuke(Duke d) {
 		duke = d;
 	}

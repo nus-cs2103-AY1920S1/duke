@@ -5,11 +5,11 @@ package duke.exception;
  */
 
 public class DukeException extends Exception {
-    public DukeException () {
-        super();
-    }
+	public DukeException() {
+		super();
+	}
 
-    public DukeException(String message) {
-        super(message);
-    }
+	public DukeException(String message) {
+		super(message);
+	}
 }

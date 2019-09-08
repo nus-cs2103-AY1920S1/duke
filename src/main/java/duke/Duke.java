@@ -52,6 +52,11 @@ public class Duke {
         }
     }
 
+    /**
+     * @author      Jason
+     * @version     1.6                 (current version number of program)
+     * @since       1.2          (the version of the package this class was first added to)
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("." + File.separator + "duke.txt").run();
     }

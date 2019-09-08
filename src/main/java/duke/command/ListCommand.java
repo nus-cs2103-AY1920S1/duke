@@ -9,12 +9,24 @@ import duke.storage.Storage;
  * Each instance prints out the task list.
  */
 public class ListCommand extends Command {
+    /** The type of tasks to be listed. */
+    private String type;
 
     /**
      * Creates an instance of List Command.
      * Sets isExit to false as it is not an exit command.
      */
     public ListCommand() {
+        type = "all";
+        isExit = false;
+    }
+
+    /**
+     * Creates an instance of List Command.
+     * Sets isExit to false as it is not an exit command.
+     */
+    public ListCommand(String type) {
+        this.type = type;
         isExit = false;
     }
 
@@ -28,6 +40,17 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return taskList.toString();
+        switch (type) {
+        case "todo":
+            return taskList.filterByToDos().toString();
+        case "deadline":
+            return taskList.filterByDeadlines().toString();
+        case "event":
+            return taskList.filterByEvents().toString();
+        case "all":
+            return taskList.toString();
+        default:
+            return taskList.toString();
+        }
     }
 }

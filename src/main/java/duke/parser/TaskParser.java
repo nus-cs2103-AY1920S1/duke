@@ -53,13 +53,14 @@ public class TaskParser {
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "
-                        + "Deadline should be: deadline [description] /by [d/M/yyyy HHmm]");
+                        + "Deadline should be: deadline [description] /by [dd/MM/yyyy HHmm]");
             }
 
             try {
                 date = DATE_FORMAT.parse(matcher.group(2));
             } catch (ParseException e) {
-                throw new InvalidInputDukeException("Syntax error. Date should be: d/M/yyyy HHmm");
+                throw new InvalidInputDukeException("Syntax error. "
+                        + "Deadline should be: deadline [description] /by [dd/MM/yyyy HHmm]");
             }
 
             return new Deadline(matcher.group(1), date, false);
@@ -74,7 +75,8 @@ public class TaskParser {
             try {
                 date = DATE_FORMAT.parse(matcher.group(2));
             } catch (ParseException e) {
-                throw new InvalidInputDukeException("Syntax error. Date should be: d/M/yyyy HHmm");
+                throw new InvalidInputDukeException("Syntax error. "
+                        + "Event should be: event [description] /by [dd/MM/yyyy HHmm]");
             }
 
             return new Event(matcher.group(1), date, false);

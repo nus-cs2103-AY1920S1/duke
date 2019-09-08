@@ -2,11 +2,8 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.exception.IoDukeException;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -18,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +23,6 @@ import java.util.List;
  */
 public class Storage {
     private String filePath;
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -48,28 +43,8 @@ public class Storage {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split("\\|");
-                if (tokens.length < 3) {
-                    throw new IoDukeException("The task file is corrupted");
-                }
 
-                Task task;
-                boolean done = Boolean.parseBoolean(tokens[1]);
-                String description = tokens[2];
-
-                switch (tokens[0]) {
-                case "T":
-                    task = new Todo(description, done);
-                    break;
-                case "D":
-                    task = new Deadline(description, DATE_FORMAT.parse(tokens[3]), done);
-                    break;
-                case "E":
-                    task = new Event(description, DATE_FORMAT.parse(tokens[3]), done);
-                    break;
-                default:
-                    throw new IoDukeException("Invalid task type found");
-                }
-
+                Task task = StorageSerializer.deserialize(tokens);
                 tasks.add(task);
             }
 
@@ -102,16 +77,7 @@ public class Storage {
 
             writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
             for (Task task : tasks.getTaskList()) {
-                String output = String.format("%s|%b|%s",
-                        task.getType(), task.getIsDone(), task.getDescription());
-                if (task instanceof Deadline) {
-                    output += "|" + DATE_FORMAT.format(((Deadline)task).getBy());
-                } else if (task instanceof Event) {
-                    output += "|" + DATE_FORMAT.format(((Event)task).getAt());
-                }
-
-                output += "\n";
-
+                String output = StorageSerializer.serialize(task);
                 writer.write(output);
             }
         } catch (IOException e) {

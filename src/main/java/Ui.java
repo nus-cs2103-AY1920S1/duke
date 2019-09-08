@@ -2,7 +2,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.io.IOException;
 
 /**
  * Represents an Ui class which handles all the display and I/O
@@ -21,16 +20,31 @@ public class Ui {
      *
      * @return a String format welcome message to display
      */
-    public String initiate() {
+    public String initiate(String status) {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(buffer));
-        Parser.printLine();
-        System.out.println("Hello! I'm Duke\nWhat can i do for you?");
-        Parser.printLine();
-        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-        String outputContent = buffer.toString();
-        buffer.reset();
-        return outputContent;
+        if (status.equals("loaded")) {
+            System.setOut(new PrintStream(buffer));
+            Parser.printLine();
+            System.out.println("Hello! I'm Duke\nWhat can i do for you?");
+            Parser.printLine();
+            System.out.println("Previous Existing - File Loaded");
+            Parser.printLine();
+            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+            String outputContent = buffer.toString();
+            buffer.reset();
+            return outputContent;
+        } else {
+            System.setOut(new PrintStream(buffer));
+            Parser.printLine();
+            System.out.println("Hello! I'm Duke\nWhat can i do for you?");
+            Parser.printLine();
+            System.out.println("No Previous Existing File Found");
+            Parser.printLine();
+            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+            String outputContent = buffer.toString();
+            buffer.reset();
+            return outputContent;
+        }
     }
 
     /**

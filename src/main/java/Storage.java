@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -40,5 +39,19 @@ public class Storage {
             fileWriter.write(inputTaskList.get(i) + System.getProperty("line.separator"));
         }
         fileWriter.close();
+    }
+
+    public ArrayList<Task> loadFromTextFile() throws DukeException, IOException, ParseException {
+        ArrayList<Task> taskList = new ArrayList<>();
+        System.out.println("Loaded");
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line = reader.readLine();
+        while (line != null) {
+            System.out.println(line);
+            taskList.add(Parser.parseFileInput(line));
+            line = reader.readLine();
+        }
+        reader.close();
+        return taskList;
     }
 }

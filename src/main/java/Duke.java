@@ -3,6 +3,7 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.ParseException;
 
 /**
  * Represents a Duke class which is used to run a taskList computer program
@@ -24,7 +25,12 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage("duke.txt");
-        tasks = new TaskList();
+        try {
+            tasks = new TaskList(storage.loadFromTextFile());
+        } catch (IOException| ParseException | DukeException e) {
+            ui.printException(e);
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -34,9 +40,9 @@ public class Duke {
      *  @return a string format output for Duke to reply
      *  @throws IOException throws exception if user input invalid
      */
-    public String getResponse(String inputInstruction) throws IOException {
-        String outputContent;
-        outputContent = Command.executeInstructions(inputInstruction, storage, tasks, ui);
+    public String getResponse(String inputInstruction) throws DukeException {
+        Command currentCommand = Parser.getCommand(inputInstruction);
+        String outputContent = currentCommand.execute(tasks, ui, storage);
         return outputContent;
     }
 
@@ -60,6 +66,10 @@ public class Duke {
     }
 
     public String getStartMessage() {
-        return ui.initiate();
+        if(tasks.isEmpty()) {
+            return ui.initiate("new");
+        } else {
+            return ui.initiate("loaded");
+        }
     }
 }

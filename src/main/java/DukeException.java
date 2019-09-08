@@ -30,6 +30,8 @@ public class DukeException extends Exception {
             return "No such keyword in the list!";
         } else if (exceptionType.equals("index")) {
             return "Unable to do so, the list does have contain such an index";
+        } else if (exceptionType.equals("file")) {
+            return "Unable to do so, File issue!";
         } else {
             return "Invalid Format! Please Follow the Standard Command lines in the Guide.";
         }

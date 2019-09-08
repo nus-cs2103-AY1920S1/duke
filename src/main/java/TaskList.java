@@ -15,6 +15,11 @@ public class TaskList {
         listOfTask = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> listOfTask) {
+        assert listOfTask != null;
+        this.listOfTask = listOfTask;
+    }
+
     /**
      * Displays all the task that is currently in the TaskList.
      */
@@ -46,6 +51,10 @@ public class TaskList {
 
     public void removeTask(int index) {
         listOfTask.remove(index);
+    }
+
+    public boolean isEmpty() {
+        return listOfTask.isEmpty();
     }
 
     /**

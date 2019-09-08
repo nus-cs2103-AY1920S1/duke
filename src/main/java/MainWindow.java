@@ -52,13 +52,18 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws DukeException, InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(duke.reformatInput(input), userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
+        if (response.contains("Bye. Hope to see you again soon!!")) {
+            System.exit(0);
+        }
+
         userInput.clear();
     }
 }

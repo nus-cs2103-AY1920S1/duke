@@ -42,7 +42,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right/
+     * Flips the dialog box on the vertical axis.
      *
      * @return the current DialogBox instance.
      */

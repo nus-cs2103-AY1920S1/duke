@@ -15,6 +15,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Loads duke with task data.
+     *
+     * @param filePath the file path of the data file from project root.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -26,7 +31,9 @@ public class Duke {
         }
     }
 
-    // JavaFX GUI won't run without this.
+    /**
+     * Default constructor. JavaFX GUI can't run without declaring this.
+     */
     public Duke() {
         this("data/duke.txt");
     }

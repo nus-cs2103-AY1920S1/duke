@@ -64,7 +64,7 @@ public class TaskList {
         TaskList newList = new TaskList();
         for (Task task: this.getTaskList()) {
             if (task != null) {
-                if(task.getDescription().contains(keyword)) {
+                if (task.getDescription().contains(keyword)) {
                     newList.add(task);
                 }
             }

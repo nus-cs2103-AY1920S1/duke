@@ -14,6 +14,13 @@ public class AddCommand extends Command {
     private TaskType type;
     private String[] args;
 
+    /**
+     * Creates the command to add a task.
+     *
+     * @param type the type of task: deadline, event or to-do.
+     * @param args the arguments for creation of the task.
+     * @param isExit whether to exit the application after execution.
+     */
     public AddCommand(TaskType type, String[] args, boolean isExit) {
         super(isExit);
         this.type = type;

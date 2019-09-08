@@ -22,10 +22,10 @@ fi
 # For each input, generate its output, and chk its diff
 echo "Checking Output.txt against Expected.txt..."
 java Duke < Test/Input.txt > Test/Output.txt
-colordiff Test/Output.txt Test/Expected.txt
+diff Test/Output.txt Test/Expected.txt
 
 echo "Checking data saved..."
-colordiff ../data/duke.txt ../data/Expected.txt
+diff ../data/duke.txt ../data/Expected.txt
 
 echo "Removing saved data..."
 rm ../data/duke.txt

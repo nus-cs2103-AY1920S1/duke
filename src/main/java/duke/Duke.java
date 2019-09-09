@@ -62,6 +62,7 @@ public class Duke implements UiActivity {
 
         // Initialize tasks and storage
         Storage storage = options.getStorage();
+        assert storage != null;
         TasksController tasks = TasksController.fromStorage(storage, ui);
 
         // Initialize command factory

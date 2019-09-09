@@ -29,11 +29,8 @@ public class UiController implements InputListener {
     }
 
     public void displayOutput(String message) throws UiException {
-        if (isStarted) {
-            output.display(message); // output only allowed to print after it is initialized with the input
-        } else {
-            throw new UiException("Ui not initialized.");
-        }
+        assert isStarted;
+        output.display(message); // output only allowed to print after it is initialized with the input
     }
 
     @Override

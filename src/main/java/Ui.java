@@ -18,21 +18,18 @@ public class Ui {
     /**
      * Display a welcome message for the User.
      */
-    protected void showWelcome() {
+    protected String showWelcome() {
         String logo = "  ____        _        \n"
                 + " |  _ \\ _   _| | _____ \n"
                 + " | | | | | | | |/ / _ \\\n"
                 + " | |_| | |_| |   <  __/\n"
                 + " |____/ \\__,_|_|\\_\\___|\n";
 
-        String welcome = "____________________________________________________________\n"
-                + logo
+        String welcome = logo
                 + "\n Hello! I'm Duke\n"
-                + " What can I do for you?\n"
-                + "____________________________________________________________";
+                + " What can I do for you?\n";
 
-
-        System.out.println(welcome);
+        return welcome;
     }
 
     /**
@@ -47,31 +44,38 @@ public class Ui {
      * Display the list of tasks to the User.
      * @param taskList The tasks list.
      */
-    protected void showList(ArrayList<Task> taskList) {
-        System.out.println("____________________________________________________________");
+    protected String showList(ArrayList<Task> taskList) {
+        /*System.out.println("____________________________________________________________");
         for (int x = 0; x < taskList.size(); x++) {
             System.out.println(x + 1 + ". " + taskList.get(x));
         }
-        System.out.println("____________________________________________________________");
+        System.out.println("____________________________________________________________");*/
+
+        String showList = "";
+        for (int x = 0; x < taskList.size(); x++) {
+            showList = showList + (x + 1) + ". " + taskList.get(x) + "\n";
+        }
+        return showList;
     }
 
     /**
      * Display the error when there is an empty .txt file.
      * @param e
      */
-    protected void showLoadingError(DukeException e) {
-        System.err.println(e);
+    protected String showLoadingError(DukeException e) {
+        return e.toString();
     }
 
     /**
      * Display message when a task is added.
      * @param taskList The tasks list.
      */
-    protected void getAddedMessage(ArrayList<Task> taskList) {
-        System.out.println("____________________________________________________________\n"
-                + " Got it. I've added this task:\n" + "   " + taskList.get(taskList.size()-1)
-                + "\n Now you have " + taskList.size() + " tasks in the list."
-                + "\n____________________________________________________________");
+    protected String getAddedMessage(ArrayList<Task> taskList) {
+        String addedMessage = " Got it. I've added this task:\n"
+                + "   " + taskList.get(taskList.size()-1)
+                + "\n Now you have " + taskList.size() + " tasks in the list.";
+
+        return addedMessage;
     }
 
     /**
@@ -79,48 +83,41 @@ public class Ui {
      * @param taskList The tasks list.
      * @param deleted The task deleted.
      */
-    protected void getDeletedMessage(ArrayList<Task> taskList, String deleted) {
-        System.out.println("____________________________________________________________\n"
-                + "Noted. I've removed this task: \n"
-                + "  " + deleted + "Now you have " + taskList.size()
-                + " tasks in the list "
-                + "\n____________________________________________________________");
+    protected String getDeletedMessage(ArrayList<Task> taskList, String deleted) {
+        String deletedMessage = " Got it. I've added this task:\n"
+                + "   " + deleted
+                + "\n Now you have " + taskList.size() + " tasks in the list.";
+
+        return deletedMessage;
+
     }
 
     /**
      * Display message and also the change in status icon to show the task is done.
      * @param taskDoneStr String of the task done.
      */
-    protected void getDoneMessage(String taskDoneStr) {
-        System.out.println("____________________________________________________________\n"
-                + " Nice! I've marked this tasked as done:\n"
-                + taskDoneStr
-                + "\n____________________________________________________________");
-    }
+    protected String getDoneMessage(String taskDoneStr) {
+        String doneMessage = " Nice! I've marked this tasked as done:\n"
+                + taskDoneStr;
 
-    /**
-     * Display a goodbye message when User exits the Duke application.
-     */
-    protected void getByeMessage() {
-        System.out.println("____________________________________________________________\n"
-                + " Bye. Hope to see you again soon!\n\n"
-                + "____________________________________________________________");
+        return doneMessage;
     }
 
     /**
      * Display the error message to User when User inputs an invalid command.
      * @param errorMsg
      */
-    protected void getIllegalCommandError(IllegalCommandException errorMsg) {
-        System.err.println(errorMsg);
+    protected String getIllegalCommandError(IllegalCommandException errorMsg) {
+        return errorMsg.toString();
     }
 
-    protected void showFoundMessage(ArrayList<Task> foundTasklist) {
-        System.out.println("____________________________________________________________");
+    protected String showFoundMessage(ArrayList<Task> foundTasklist) {
+        String foundMessage = "";
         for (int x = 0; x < foundTasklist.size(); x++) {
-            System.out.println(x + 1 + ". " + foundTasklist.get(x));
+            foundMessage = foundMessage + 1 + ". " + foundTasklist.get(x) + "\n";
         }
-        System.out.println("____________________________________________________________");
+
+        return foundMessage;
     }
 
 }

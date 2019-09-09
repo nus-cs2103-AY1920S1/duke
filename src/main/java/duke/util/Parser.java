@@ -36,8 +36,12 @@ public class Parser {
 
         switch (action) {
         case "list":
-            c = new ListCommand();
-            break;
+            if (strArr.length == 1) {
+                c = new ListCommand();
+                break;
+            } else {
+                throw new DukeException("Wof?");
+            }
 
         case "done":
             if (s.length() < 6) {
@@ -46,11 +50,11 @@ public class Parser {
             assert(s.length() >= 6);
             try {
                 n = Integer.parseInt(strArr[1]) - 1;
+                c = new DoneCommand(n);
+                break;
             } catch (NumberFormatException e) {
-                throw new DukeException("X has to be a number in the list");
+                throw new DukeException("X should be a number in the list");
             }
-            c = new DoneCommand(n);
-            break;
 
         case "delete":
             if (s.length() < 7) {
@@ -59,20 +63,24 @@ public class Parser {
             assert(s.length() >= 7);
             try {
                 n = Integer.parseInt(strArr[1]) - 1;
+                c = new DeleteCommand(n);
+                break;
             } catch (NumberFormatException e) {
-                throw new DukeException("X has to be a number in the list");
+                throw new DukeException("X should be a number in the list");
             }
-            c = new DeleteCommand(n);
-            break;
 
         case "find":
             if (s.length() < 6) {
                 throw new DukeException("Please write in this format: find X\nWhere X is the string to find");
             }
             assert(s.length() >= 6);
-            keyword = s.substring(5).toLowerCase();
-            c = new FindCommand(keyword);
-            break;
+            try {
+                keyword = s.substring(5).toLowerCase();
+                c = new FindCommand(keyword);
+                break;
+            } catch (NumberFormatException e) {
+                throw new DukeException("X should be a number in the list");
+            }
 
         case "todo":
             if (s.length() < 6) {
@@ -97,11 +105,11 @@ public class Parser {
             String by = temp[1].trim();
             try {
                 task = new Deadline(description, by);
+                c = new AddCommand(task);
+                break;
             } catch (Exception e) {
                 throw new DukeException("Please input a date in this format : dd/MM/yy HH:mm");
             }
-            c = new AddCommand(task);
-            break;
 
         case "event":
             if (s.length() < 7) {
@@ -116,11 +124,11 @@ public class Parser {
             String at = temp[1].trim();
             try {
                 task = new Event(description, at);
+                c = new AddCommand(task);
+                break;
             } catch (Exception e) {
                 throw new DukeException("Please input a date in this format : dd/MM/yy HH:mm");
             }
-            c = new AddCommand(task);
-            break;
 
         case "bye":
             c = new ExitCommand();

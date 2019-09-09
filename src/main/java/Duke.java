@@ -1,3 +1,4 @@
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -41,9 +42,10 @@ public class Duke {
      * @return Message in a string.
      */
     String getResponse(String input) {
-        String doggoResponse = "";
+        String doggoResponse;
         try {
-            doggoResponse = Parser.parse(input).execute(tasks, ui, storage);
+            Command command = Parser.parse(input);
+            doggoResponse = command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             doggoResponse = e.getMessage();
         }

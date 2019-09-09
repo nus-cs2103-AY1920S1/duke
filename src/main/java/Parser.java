@@ -7,18 +7,18 @@ public class Parser {
         }
         String[] taskInfo = fullCommand.split(" ", 2);
         switch(taskInfo[0]){
-            case "todo":
-            case "event":
-            case "deadline":
-                return new Command(taskInfo, true, false, false);
-            case "delete":
-                return new Command(taskInfo, false, true, false);
-            case "done":
-                return new Command(taskInfo, false, false, true);
-            case "list":
-            case "bye":
-                return new Command(taskInfo, false, false, false);
-            default:
+        case "todo":
+        case "event":
+        case "deadline":
+            return new Command(taskInfo, true, false, false);
+        case "delete":
+            return new Command(taskInfo, false, true, false);
+        case "done":
+            return new Command(taskInfo, false, false, true);
+        case "list":
+        case "bye":
+            return new Command(taskInfo, false, false, false);
+        default:
             throw new DukeException("Command not recognized");
         }
     }

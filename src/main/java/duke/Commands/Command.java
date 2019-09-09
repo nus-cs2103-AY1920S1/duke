@@ -13,6 +13,7 @@ public abstract class Command {
      * @param ui class that handles all I/O managements
      * @param storage class that handles all file storage and loading
      * @return a String output for the specific Commands
+     * @throws DukeException for invalid inputs
      */
     public abstract String execute(TaskList currentTaskList, Ui ui, Storage storage) throws DukeException;
 

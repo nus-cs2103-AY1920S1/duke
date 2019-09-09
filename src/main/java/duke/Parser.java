@@ -56,6 +56,8 @@ public class Parser {
      * and create the respective Task objects accordingly and store them.
      * @param stringInput a string of the Task input from the text file
      * @return a Task object that corresponds to the stringInput from the text file.
+     * @throws DukeException for invalid input
+     * @throws ParseException for invalid inputs
      */
     public static Task parseFileInput(String stringInput) throws ParseException, DukeException {
         String[] stringCommand = stringInput.split(" ");
@@ -83,6 +85,7 @@ public class Parser {
      * returns a Command Object according to the user instruction.
      * @param inputInstruction a string input by the user do different commands/task
      * @return a Command Object according to the user input
+     * @throws DukeException for invalid input
      */
     public static Command getCommand(String inputInstruction) throws DukeException {
         String inputCommand = inputInstruction.split(" ")[0];

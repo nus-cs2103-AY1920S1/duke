@@ -42,7 +42,7 @@ public class Duke {
      *
      *  @param inputInstruction user input Instructions in String format
      *  @return a string format output for Duke to reply
-     *  @throws IOException throws exception if user input invalid
+     * @throws DukeException for invalid inputs
      */
     public String getResponse(String inputInstruction) throws DukeException {
         assert inputInstruction != null;

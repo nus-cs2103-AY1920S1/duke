@@ -23,6 +23,7 @@ public class Ui {
     /**
      * Runs the start of the Ui, by introducing Duke.
      *
+     * @param status takes in a String information about Ui, Status(new or loaded)
      * @return a String format welcome message to display
      */
     public String initiate(String status) {

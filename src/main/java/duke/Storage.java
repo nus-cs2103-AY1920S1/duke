@@ -52,6 +52,9 @@ public class Storage {
     /**
      * Reads an existing textFile line by line, and process them to create Task Objects to store.
      * @return a ArrayList consisting of Task objects that corresponds to the textFile commands
+     * @throws DukeException for invalid input
+     * @throws IOException for invalid I/O
+     * @throws ParseException for invalid Input
      */
     public ArrayList<Task> loadFromTextFile() throws DukeException, IOException, ParseException {
         ArrayList<Task> taskList = new ArrayList<>();

@@ -158,4 +158,11 @@ public class TaskList {
         return findList;
     }
 
+    public void clearTask() {
+        int listSize = taskList.size();
+        for (int i = 0; i < listSize; i++) {
+            taskList.remove(0);
+        }
+    }
+
 }

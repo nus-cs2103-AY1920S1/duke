@@ -1,7 +1,9 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Manages information by store and reading them.
@@ -82,6 +84,8 @@ public class Storage {
         try {
             pr = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
 
+            sortTask();
+
             for (int j = 0; j < taskList.getSize(); j++) {
 
                 int statusHolder = 0;
@@ -109,6 +113,41 @@ public class Storage {
                 pr.close();
             }
         }
+    }
+
+    private TaskList sortTask() {
+        List<Task> taskListTodo = new ArrayList<>();
+        List<Task> taskListDeadline = new ArrayList<>();
+        List<Task> taskListEvent = new ArrayList<>();
+        for (int i = 0; i < taskList.getSize(); i++) {
+            System.out.println("I loop");
+            if (taskList.getTask(i) instanceof Deadline) {
+                taskListDeadline.add(taskList.getTask(i));
+            } else if (taskList.getTask(i) instanceof Event) {
+                taskListEvent.add(taskList.getTask(i));
+            } else {
+                taskListTodo.add(taskList.getTask(i));
+            }
+        }
+
+        taskList.clearTask();
+
+        for (int j = 0; j < taskListTodo.size(); j++) {
+            System.out.println("I loop2");
+            taskList.addTask(taskListTodo.get(j));
+        }
+
+        for (int j = 0; j < taskListDeadline.size(); j++) {
+            System.out.println("I loop2");
+            taskList.addTask(taskListDeadline.get(j));
+        }
+
+        for (int j = 0; j < taskListEvent.size(); j++) {
+            System.out.println("I loop2");
+            taskList.addTask(taskListEvent.get(j));
+        }
+
+        return taskList;
     }
 
 

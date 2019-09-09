@@ -96,10 +96,10 @@ public class Storage {
             for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.getTask(i) instanceof Deadline) {
                     writeToFile(taskListFilePath, "D | " + tasks.getTask(i).isDone() + " | "
-                            + tasks.getTask(i).getTask() + " | " + ((Deadline) tasks.getTask(i)).getDueDate());
+                            + tasks.getTask(i).getTask() + " | " + ((Deadline) tasks.getTask(i)).getDateToStorage());
                 } else if (tasks.getTask(i) instanceof Event) {
                     writeToFile(taskListFilePath, "E | " + tasks.getTask(i).isDone() + " | "
-                            + tasks.getTask(i).getTask() + " | " + ((Event) tasks.getTask(i)).getDueDate());
+                            + tasks.getTask(i).getTask() + " | " + ((Event) tasks.getTask(i)).getDateToStorage());
                 } else {
                     writeToFile(taskListFilePath, "T | " + tasks.getTask(i).isDone() + " | "
                             + tasks.getTask(i).getTask());

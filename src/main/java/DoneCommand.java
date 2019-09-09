@@ -8,7 +8,7 @@ public class DoneCommand extends Command{
      */
     public DoneCommand(int index) {
         super();
-        this.index = index;
+        this.index = index - 1;
     }
 
     /**

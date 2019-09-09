@@ -12,6 +12,6 @@ public class TotalNoOfTasks {
      */
     public static String totalNoOfTasks(ArrayList<Task> taskList) {
         int noOfTasks = taskList.size();
-        return "\t Now you have " + (noOfTasks) + (noOfTasks == 1 ? " task" : " tasks") + " in the list.\n";
+        return "Now you have " + (noOfTasks) + (noOfTasks == 1 ? " task" : " tasks") + " in the list.\n";
     }
 }

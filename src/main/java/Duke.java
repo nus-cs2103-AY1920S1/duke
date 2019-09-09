@@ -77,6 +77,10 @@ public class Duke {
                 ui.printToUser(taskList.findEvent(params));
                 break;
 
+            case "help":
+                ui.printToUser(taskList.help());
+                break;
+
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means.");
             }

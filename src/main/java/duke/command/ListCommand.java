@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.component.Storage;
 import duke.component.TaskList;
+import duke.component.Statistics;
 import duke.component.Ui;
 
 import java.util.stream.IntStream;
@@ -23,13 +24,15 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
 
-        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder result = new StringBuilder();
 
+        result.append(Statistics.toStatisticsString());
+
+        result.append("Here are the tasks in your list:\n");
         IntStream.rangeClosed(1, taskList.size())
                 .mapToObj(index -> String.format("\n %d . %s",
                         index, taskList.getTask(index)))
                 .forEach(result::append);
-
 
         return result.toString();
 

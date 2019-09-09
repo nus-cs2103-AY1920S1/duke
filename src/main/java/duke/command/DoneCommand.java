@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.component.Statistics;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -38,14 +39,32 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
+        //Getting the original status icon of task
+        //To check if task is already done before 'done' command is entered
+        String originalStatusIcon = taskList.getTask(taskNum).getStatusIcon();
+        boolean isAlreadyCompleted = originalStatusIcon.equals("v");
+
+        if (isAlreadyCompleted) {
+            Task updatedTask = taskList.getTask(taskNum);
+
+            return ("Nice! I've marked this task as done: \n" + updatedTask);
+
+        }
+
         taskList.markTaskDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
 
         //Assert post condition
         assert updatedTask.getStatusIcon().equals("v") : "Task is not marked as done";
 
+
         storage.updateText(taskNum);
-        storage.updateText(taskNum);
+
+
+        Statistics.decrementUncompleted();
+        Statistics.incrementCompleted();
+        storage.updateStatistics();
+
         return ("Nice! I've marked this task as done: \n" + updatedTask);
 
 

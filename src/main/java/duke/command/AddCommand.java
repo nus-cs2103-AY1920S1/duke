@@ -3,6 +3,7 @@ package duke.command;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
+import duke.component.Statistics;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -96,12 +97,14 @@ public class AddCommand extends Command {
         }
 
         int oldSize = taskList.size();
-
         taskList.addTask(newTask);
         int numTask = taskList.size();
 
         //Assert that size of taskList increased by 1
         assert numTask == oldSize + 1 : "Task is not added to task list";
+
+        Statistics.incrementUncompleted();
+        storage.updateStatistics();
 
         return ("Got it. I've added this task: \n" + "  "
                 + newTask + "Now you have "

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.component.Storage;
 import duke.component.TaskList;
+import duke.component.Statistics;
 import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -40,6 +41,18 @@ public class DeleteCommand extends Command {
         storage.deleteText(taskNum);
 
         Task removedTask = taskList.deleteTask(taskNum);
+
+        boolean isCompleted = removedTask.getStatusIcon().equals("v");
+
+        if(isCompleted) {
+            Statistics.decrementCompleted();
+        } else if(!isCompleted){
+            Statistics.decrementUncompleted();
+        } else {
+            throw new DukeException("Deleted task is not properly marked as completed or not");
+        }
+        storage.updateStatistics();
+
 
         return ("Noted. I've removed this task:\n" + removedTask
                 + "Now you have " + taskList.size()

@@ -43,7 +43,7 @@ public class Storage {
     private static final int DESCRIPTION_IND = 2;
     private static final int TIME_IND = 1;
 
-    private static final int STATUS_DONE = 1;
+    private static final int STATUS_DONE = 0;
     private static final int STATUS_NOT_DONE = 1;
 
     /**
@@ -54,6 +54,19 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         this.textFile = new File(filePath);
+
+        //if file is empty or does not exist
+        //initialise statisitics in first line of file
+
+        boolean isEmpty = !textFile.exists() || textFile.length() == 0;
+        if (isEmpty) {
+            try {
+                this.writeToFile(Statistics.toStatisticsString());
+            } catch (DukeException ex) {
+                System.out.println("File does not exist");
+            }
+        }
+
 
     }
 
@@ -69,6 +82,9 @@ public class Storage {
             Path path = this.textFile.toPath();
 
             List<String> lines = Files.readAllLines(path);
+
+            initialiseStatistics(lines.get(0), lines.get(1));
+
             ArrayList<Task> tasks = new ArrayList<>();
 
             initialiseTasks(tasks, lines);
@@ -80,9 +96,21 @@ public class Storage {
         }
     }
 
+    public Statistics initialiseStatistics(String completedStatistics, String uncompletedStatistics) {
+
+        String numCompletedString = completedStatistics.substring(27);
+        String numUncompletedString = uncompletedStatistics.substring(31);
+
+
+        int numCompleted = Integer.parseInt(numCompletedString);
+        int numUncompleted = Integer.parseInt(numUncompletedString);
+
+        return new Statistics(numCompleted, numUncompleted);
+    }
+
     private void initialiseTasks(ArrayList<Task> tasks, List<String> lines) {
-        for (String line : lines) {
-            tasks.add(this.lineToTask(line));
+        for (int i = 2; i < lines.size(); i++) {
+            tasks.add(this.lineToTask(lines.get(i)));
 
 
         }
@@ -149,7 +177,7 @@ public class Storage {
         if (date == null) {
             writeToFile(type + " | " + STATUS_NOT_DONE + " | " + desc + "\n");
         } else {
-            writeToFile(type + " | " + STATUS_DONE + " | " + desc + " | " + date + "\n");
+            writeToFile(type + " | " + STATUS_NOT_DONE + " | " + desc + " | " + date + "\n");
         }
     }
 
@@ -162,14 +190,36 @@ public class Storage {
      */
     public void updateText(int taskNum) throws DukeException {
         try {
-            int lineNumber = taskNum - 1;
+            //adding offset of 2 lines as first two lines contain statistics
+            final int STATISTICS_OFFSET = 2;
+            //adding index offset from taskNum, as line 0 is also a line
+            final int INDEX_OFFSET = -1;
+            int lineNumber = taskNum + INDEX_OFFSET + STATISTICS_OFFSET;
             Path path = Paths.get(filePath);
 
             //read all the line in the files
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             String oldText = lines.get(lineNumber);
 
-            lines.set(lineNumber, oldText.substring(0, 3) + " " + STATUS_DONE + " " + oldText.substring(6, oldText.length()));
+            lines.set(lineNumber, oldText.substring(0, 3) + " " + STATUS_DONE + " " + oldText.substring(6));
+
+            Files.write(path, lines, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new DukeException();
+        }
+    }
+
+    public void updateStatistics() throws DukeException {
+        try {
+             final int FIRST_LINE_INDEX = 0;
+             final int SECOND_LINE_INDEX= 1;
+            Path path = Paths.get(filePath);
+
+            //read all the line in the files
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+            lines.set(FIRST_LINE_INDEX,"Number of tasks completed: " + Statistics.getNumCompleted() );
+            lines.set(SECOND_LINE_INDEX,"Number of tasks not completed: " + Statistics.getNumUncompleted() );
 
             Files.write(path, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -185,7 +235,11 @@ public class Storage {
      */
     public void deleteText(int taskNum) throws DukeException {
         try {
-            int lineNumber = taskNum - 1;
+            //adding offset of 2 lines as first two lines contain statistics
+            final int STATISTICS_OFFSET = 2;
+            //adding index offset from taskNum, as line 0 is also a line
+            final int INDEX_OFFSET = -1;
+            int lineNumber = taskNum + STATISTICS_OFFSET + INDEX_OFFSET;
             Path path = Paths.get(filePath);
 
             //read all the line in the files

@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.storage.Storage;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.UI;
@@ -16,7 +17,7 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, String fw) throws DukeException {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (taskIndex > tasks.size()) {
             throw new DukeException("");
         }

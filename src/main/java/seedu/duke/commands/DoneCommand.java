@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.UI;
 
@@ -14,7 +15,7 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, String filePath) {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.printReply(tasks.get(taskIndex - 1).markAsDone());
     }
 }

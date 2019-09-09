@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.storage.Storage;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.UI;
@@ -15,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, String fw) {
+    public void execute(TaskList tasks, UI ui, Storage storagae) {
         TaskList matchingTasks = new TaskList();
         String reply = "Here are the matching tasks in your list:\n\t ";
         for (Task task: tasks) {

@@ -40,7 +40,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = new Parser().parse(fullCommand);
-                c.execute(tasks, ui, storage.path);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printReply(Messages.MESSAGE_UNKNOWN_COMMAND);

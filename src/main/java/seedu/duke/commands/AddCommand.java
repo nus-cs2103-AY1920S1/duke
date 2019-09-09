@@ -2,11 +2,9 @@ package seedu.duke.commands;
 
 import seedu.duke.commons.Messages;
 import seedu.duke.exception.DukeException;
+import seedu.duke.storage.Storage;
 import seedu.duke.task.*;
 import seedu.duke.ui.UI;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Evaluates the task type and adds it to the Task list
@@ -48,19 +46,11 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, String filePath) throws DukeException, ArrayIndexOutOfBoundsException {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException, ArrayIndexOutOfBoundsException {
         this.evaluateTaskType();
         tasks.add(taskToAdd);
         String reply = "Got it. I've added this task:\n\t  " + taskToAdd + "\n\tNow you have " + tasks.size()
                 + ((tasks.size() == 1) ? " task" : " tasks") + " in the list.";
         ui.printReply(reply);
-        try {
-            String replyToFile = taskToAdd.writeToFile();
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write(replyToFile);
-            fw.close();
-        } catch (IOException e) {
-            ui.printReply(Messages.MESSAGE_CANT_WRITE_TO_FILE);
-        }
     }
 }

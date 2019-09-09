@@ -51,26 +51,42 @@ class DialogBox extends AnchorPane {
         displayPicture.setImage(image);
 
         if (shouldFlip) {
-            AnchorPane.setLeftAnchor(displayPicture, WINDOW_IMAGE_SPACE);
-            AnchorPane.setRightAnchor(displayPicture, null);
-
-            dialog.setStyle(dialog.getStyle()
-                    + "-fx-border-width: 0 0 0 2; -fx-border-color:#ddd6c7;");
-            AnchorPane.setLeftAnchor(dialog,
-                    displayPicture.getBoundsInParent().getMaxX() + DIALOG_IMAGE_SPACE);
-            dialog.setAlignment(Pos.CENTER_LEFT);
-            dialog.setTextAlignment(TextAlignment.LEFT);
-            AnchorPane.setRightAnchor(dialog, WINDOW_IMAGE_SPACE);
-
-            this.setStyle(this.getStyle() + "-fx-border-color:#f2eada; -fx-background-color:#82c9c7;");
+            setFlippedDialogStyle();
         } else {
-            dialog.setStyle(dialog.getStyle()
-                    + "-fx-border-width: 0 2 0 0; -fx-border-color:#393654;");
-            AnchorPane.setRightAnchor(dialog,
-                    displayPicture.getBoundsInLocal().getMaxX() + DIALOG_IMAGE_SPACE);
-
-            this.setStyle(this.getStyle() + "-fx-border-color:#aaaaaa; -fx-background-color:#4e8c91;");
+            setNormalDialogStyle();
         }
+    }
+
+    /**
+     * Private method to set styles for a normal dialog box.
+     */
+    private void setNormalDialogStyle() {
+        dialog.setStyle(dialog.getStyle()
+                + "-fx-border-width: 0 2 0 0; -fx-border-color:#393654;");
+        AnchorPane.setRightAnchor(dialog,
+                displayPicture.getBoundsInLocal().getMaxX() + DIALOG_IMAGE_SPACE);
+
+        this.setStyle(this.getStyle()
+                + "-fx-border-color:#aaaaaa; -fx-background-color:#4e8c91;");
+    }
+
+    /**
+     * Private method to set styles for a flipped dialog box.
+     */
+    private void setFlippedDialogStyle() {
+        AnchorPane.setLeftAnchor(displayPicture, WINDOW_IMAGE_SPACE);
+        AnchorPane.setRightAnchor(displayPicture, null);
+
+        dialog.setStyle(dialog.getStyle()
+                + "-fx-border-width: 0 0 0 2; -fx-border-color:#ddd6c7;");
+        AnchorPane.setLeftAnchor(dialog,
+                displayPicture.getBoundsInParent().getMaxX() + DIALOG_IMAGE_SPACE);
+        AnchorPane.setRightAnchor(dialog, WINDOW_IMAGE_SPACE);
+        dialog.setAlignment(Pos.CENTER_LEFT);
+        dialog.setTextAlignment(TextAlignment.LEFT);
+
+        this.setStyle(this.getStyle()
+                + "-fx-border-color:#f2eada; -fx-background-color:#82c9c7;");
     }
 
     /**

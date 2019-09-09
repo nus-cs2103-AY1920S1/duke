@@ -17,6 +17,10 @@ public class DukeApplication extends Application {
 
     /** Duke instance of this javafx duke application. */
     private Duke duke;
+    /** Minimum window width to be used for the stage. */
+    private static final int MIN_WINDOW_WIDTH = 900;
+    /** Minimum window height to be used for the stage. */
+    private static final int MIN_WINDOW_HEIGHT = 300;
 
     /**
      * JavaFX entry method of this duke application.
@@ -32,6 +36,8 @@ public class DukeApplication extends Application {
                     Duke.class.getResource("/views/MainWindow.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
+            stage.setMinWidth(MIN_WINDOW_WIDTH);
+            stage.setMinHeight(MIN_WINDOW_HEIGHT);
 
             MainWindow dukeMainWindow = fxmlLoader.<MainWindow>getController();
             duke = new Duke(dukeMainWindow);

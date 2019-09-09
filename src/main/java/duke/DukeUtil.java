@@ -4,6 +4,9 @@ package duke;
  * A class providing several common utility functions.
  */
 public abstract class DukeUtil {
+    /** Invalid index to be returned from methods returning int indicating method failure. */
+    public static final int FAIL_INDEX = -1;
+
     /**
      * Concatenates an array of strings with a specified delimiter.
      *
@@ -42,6 +45,6 @@ public abstract class DukeUtil {
             }
         }
 
-        return -1;
+        return FAIL_INDEX;
     }
 }

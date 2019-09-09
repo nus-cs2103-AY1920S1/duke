@@ -144,23 +144,4 @@ class StorageTest {
         }
     }
 
-    static void cleanUpTestDirectory() {
-        System.setProperty("user.dir", originalWorkingDirectory);
-        try {
-            Files.walk(Paths.get(originalWorkingDirectory, TEST_DIR_NAME))
-                    .sorted(Comparator.reverseOrder())
-                    .forEach(
-                            pathToDelete -> {
-                                try {
-                                    Files.delete(pathToDelete);
-                                } catch (IOException ex) {
-                                    fail("Failed to clean test directory for StorageTest."
-                                            + ex.getMessage());
-                                }
-                            });
-        } catch (IOException ex) {
-            fail("Failed to clean test directory for StorageTest.\n"
-                    + ex.getMessage());
-        }
-    }
 }

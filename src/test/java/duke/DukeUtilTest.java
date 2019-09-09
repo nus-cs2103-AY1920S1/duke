@@ -4,33 +4,40 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DukeUtilTest {
     @Test
-    void concatEmptyArray() {
+    void concatArray_emptyArray_emptyString() {
         assertEquals(
                 "",
                 DukeUtil.concatStrings(new String[0], " | "));
     }
 
     @Test
-    void concatArray() {
+    void concatArray_testStringArrays_success() {
         String[] testStringArray = new String[] { " a b c d | e f\\ g", " 1xf 0 9", "{[]}1|" };
-        assertEquals(
-                " a b c d | e f\\ g\\|*  1xf 0 9\\|* {[]}1|",
-                DukeUtil.concatStrings(testStringArray, "\\|* "));
+        String[] testStringArray2 = new String[] { "a" };
+
+        assertAll("Test string arrays concat",
+                () -> assertEquals(
+                        " a b c d | e f\\ g\\|*  1xf 0 9\\|* {[]}1|",
+                        DukeUtil.concatStrings(testStringArray, "\\|* ")),
+                () -> assertEquals(
+                        "a",
+                        DukeUtil.concatStrings(testStringArray2, " ")));
     }
 
     @Test
-    void getIndexOfPatternInEmptyArray() {
+    void getIndexOfPattern_inEmptyArray_failure() {
         assertEquals(
-                -1,
+                DukeUtil.FAIL_INDEX,
                 DukeUtil.getIndexOfPattern(new String[0], "abc"));
     }
 
     @Test
-    void getIndexOfPattern() {
+    void getIndexOfPattern_primeStream_success() {
         String[] testPrimeStringStream = IntStream
                 .range(2, 30)
                 .filter(x -> IntStream

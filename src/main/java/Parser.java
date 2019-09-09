@@ -46,16 +46,15 @@ public class Parser {
                 }
                 if (next.equals("todo")) {
                     t = new Todos(description.trim());
-                } else if (next.equals("deadline")) {
-                    int index = description.indexOf("/");
-                    String byWhen = description.substring(index + 4);
-                    String desc = description.substring(1, index - 1);
-                    t = new Deadline(desc, byWhen);
                 } else {
                     int index = description.indexOf("/");
-                    String at = description.substring(index + 4);
+                    String date = description.substring(index + 4);
                     String desc = description.substring(1, index - 1);
-                    t = new Event(desc, at);
+                    if (next.equals("deadline")) {
+                        t = new Deadline(desc, date);
+                    } else {
+                        t = new Event(desc, date);
+                    }
                 }
                 c = new AddCommand(t);
             }

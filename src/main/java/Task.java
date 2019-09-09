@@ -8,7 +8,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    String typeOfTask = "";
+    String typeOfTask;
 
     /**
      * Constructs a Task object with a specific description of a task that has to be completed.

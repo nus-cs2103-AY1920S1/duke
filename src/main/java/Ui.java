@@ -3,7 +3,6 @@ import java.util.ArrayList;
 /**
  * Encapsulates the User Interface operations. It is responsible of all interaction with the user.
  */
-
 public class Ui {
 
     public Ui() {
@@ -23,7 +22,7 @@ public class Ui {
 
     public String showListOfTask(TaskList tasks) {
         if (tasks.size() == 0) {
-            return "Theres is currently no task in your list.";
+            return "There's currently no task in your list.";
         }
         String string = "Here are the tasks in your list:";
         for (int i = 1; i <= tasks.size(); i++) {
@@ -36,11 +35,11 @@ public class Ui {
     public String newTaskAdded(Task task, int taskCount) {
         if (taskCount > 1) {
             return ("Got it. I've added this task:\n" + "    "
-                    + task + "\n" + "Now you have " + taskCount
+                    + task + "\nNow you have " + taskCount
                     + " tasks in the list.\n");
         } else {
             return ("Got it. I've added this task:\n" + "    "
-                    + task + "\n" + "Now you have " + taskCount
+                    + task + "\nNow you have " + taskCount
                     + " task in the list.\n");
         }
     }
@@ -50,7 +49,7 @@ public class Ui {
     }
 
     public String doneAnnouncement(Task task) {
-        return ("Nice! I've marked this task as done: " + "\n"
+        return ("Nice! I've marked this task as done:\n"
                 + "    " + task + "\n");
     }
 

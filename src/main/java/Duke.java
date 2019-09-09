@@ -1,13 +1,8 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,21 +19,12 @@ import java.util.Scanner;
  * @author TuanDingWei
  */
 public class Duke extends Application {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Construct a Duke object, the Task manager bot.
-     *
-     *
      */
     public Duke() {
         ui = new Ui();
@@ -71,6 +57,7 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -83,13 +70,13 @@ public class Duke extends Application {
     }
 
     private void run() {
-        String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt";
+        String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia"
+                + "/CS2103/Individual_project/Duke/local/Tasks.txt";
 
         Scanner sc = new Scanner(System.in);
         String input;
         input = sc.nextLine();
         String check = "dummy";
-        int taskCount;
         while (check.equals("bye") == false) {
             System.out.println(execution(input));
         }
@@ -102,24 +89,26 @@ public class Duke extends Application {
         return execution(input);
     }
 
+    /**
+     * Contains the bulk of the execution in responds to the user's input.
+     * @param input contains the user's input
+     * @return Replies from the Duke bot.
+     */
     private String execution(String input) {
-        String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt";
-
-        String check = "dummy";
+        String check;
         int taskCount;
 
         try {
             check = input.toLowerCase();
-            if (check.equals("list")) {
-                return ui.showListOfTask(tasks);
-            }
+
 
             Parser parser = new Parser(input);
             String userCommand = parser.getUserCommand();
             String due = parser.getDue();
             String taskDescription = parser.getTaskDescription();
-
-            if (userCommand.equals("done")) {
+            if (check.equals("list")) {
+                return ui.showListOfTask(tasks);
+            } else if (userCommand.equals("done")) {
                 int target = Integer.valueOf(taskDescription);
                 Task taskDone;
                 if (tasks.size() >= target && target > 0) {

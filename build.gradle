@@ -21,4 +21,9 @@ run {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
 }

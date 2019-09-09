@@ -68,7 +68,7 @@ public class Ui {
      *
      * @param tasks The task list.
      */
-    public void printTaskList(ArrayList<Task> tasks) {
+    public void printTaskList(ArrayList<? extends Task> tasks) {
         assert (tasks != null && tasks.size() != 0) : "You have no tasks to show: add a todo/deadline/event now !";
         int counter = 0;
         append("Here are the tasks in your list:");

@@ -1,12 +1,13 @@
 package duke.parser;
 
 import duke.command.AddCommand;
-import duke.command.FindTaskCommand;
 import duke.command.Command;
-import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
@@ -114,6 +115,23 @@ public class Parser {
     }
 
     /**
+     * This method checks to ensure that the user provides
+     * a keyword to search for from the task list.
+     *
+     * @param tasks The user's input split into an array of strings.
+     * @throws DukeException If there is no keyword to search for.
+     */
+    private static void sortCheck(String[] tasks) throws DukeException {
+        if (tasks.length <= 1) {
+            throw new DukeException(
+                    "OOPS!!! Please tell me what if you want to sort deadlines or events!");
+        } else if (tasks.length > 2) {
+            throw new DukeException(
+                    "OOPS!!! Please choose to 'sort deadline' or 'sort event");
+        }
+    }
+
+    /**
      * This method when called reformats the date input by the user to a Date object.
      *
      * @param date The date string to be reformatted.
@@ -193,6 +211,14 @@ public class Parser {
                     try {
                         findCheck(task);
                         return new FindTaskCommand(command.substring(5).trim());
+                    } catch (DukeException e) {
+                        throw new DukeException(e.getMessage());
+                    }
+                }
+                case "sort": {
+                    try {
+                        sortCheck(task);
+                        return new SortCommand(task[1]);
                     } catch (DukeException e) {
                         throw new DukeException(e.getMessage());
                     }

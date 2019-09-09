@@ -6,14 +6,18 @@ import duke.Ui;
 import duke.Storage;
 
 /**
- * subclass of command.
- * operation to print all list information
- * */
+ * Executes operation to print all contents in TaskList.
+ */
 public class ListCommand extends Command {
 
     /**
-     * list all the tasks found in the list.
-     * */
+     * Executes operation to list all the tasks found in the TaskList.
+     *
+     * @param tasks TaskList to perform changes from
+     * @param ui Ui to generate message outputs
+     * @param storage Object to save tasks
+     * @return String generate message as output from successful operation
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         return ui.showLine() + ui.showList(tasks) + ui.showLine();
     }

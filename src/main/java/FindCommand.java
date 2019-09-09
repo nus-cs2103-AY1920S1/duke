@@ -8,8 +8,8 @@ import duke.TaskList;
 import java.util.ArrayList;
 
 /**
- * provide commands to find certain task by keywords.
- * */
+ * Deals with operation to find tasks that matches with user's input.
+ */
 public class FindCommand extends Command {
     protected String command;
 
@@ -18,10 +18,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * main method to perform operation.
-     * find there is matching results
-     * if successful, print out list of matches
-     * */
+     * Executes operation to find matching tasks with given input.
+     *
+     * @param tasks TaskList to perform changes from
+     * @param ui Ui to generate message outputs
+     * @param storage Object to save tasks
+     * @return String generate message as output from successful operation
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             ArrayList<Task> results = tasks.searchTasks(command);

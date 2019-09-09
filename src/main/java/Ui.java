@@ -6,75 +6,94 @@ import java.lang.StringBuilder;
 import duke.task.Task;
 
 /**
- * deals with interactions with user.
- * */
+ * Deals with interactions with user.
+ */
 public class Ui {
-
     public static String liner = "    ____________________________________________________________";
 
     /**
-     * greet user.
-     * */
+     * Greets user with welcome dialog.
+     *
+     * @return String of welcome message
+     */
     public String showWelcome() {
         String greeting = "\tHello! I'm Duke\n\tWhat can I do for you?";
         return liner + "\n" + greeting + "\n" + liner;
     }
 
     /**
-     * print goodbye to user.
-     * */
+     * Says goodbye to user when exit program.
+     *
+     * @return String of goodbye message
+     */
     public String showBye() {
         return liner + "\n\tBye. Hope to see you again soon!\n" + liner;
     }
 
     /**
-     * print divider line.
-     * */
+     * Generates divider line.
+     *
+     * @return String of divider line for dialogs
+     */
     public String showLine() {
         return liner + "\n";
     }
 
     /**
-     * show error message.
-     * */
+     * Generates error message.
+     */
     public String showError(String message) {
         return liner + "\n" + message + "\n" + liner;
     }
 
     /**
-     * print loading file error.
-     * */
+     * Generates loading file error.
+     */
     public String showLoadingError() {
         return "New task list generated: no existing file found!";
     }
 
     /**
-     * print add task message.
-     * */
+     * Generates add task message once AddCommand is successful.
+     *
+     * @param newTask Task to be added in Storage
+     * @param totalTasks Total Number of existing Tasks
+     * @return String of successful add task message
+     */
     public String printAddTask(Task newTask, int totalTasks) {
         return liner + "\n\tGot it. I've added this task:\n\t" + newTask.toString()
                 + "\n\t" + "Now you have " + totalTasks + " tasks in the list.\n" + liner;
     }
 
     /**
-     * print done task message.
-     * */
+     * Generates done task message once successful.
+     *
+     * @param currTask Most recent Task executed
+     * @return String of successful done task message
+     */
     public String printDoneTask(Task currTask) {
         return liner + "\n\tNice! I've marked this task as done: \n\t"
                 + currTask.toString() + "\n" + liner;
     }
 
     /**
-     * print deleted task message.
-     * */
+     * Generates deleted task message once delete is successful.
+     *
+     * @param currTask most recent Task that was deleted
+     * @param totalTasks total number of tasks after deleton of task
+     * @return String of deleted task message
+     */
     public String printDeletedTask(Task currTask, int totalTasks) {
         return liner + "\n\tNoted. I've removed this task:\n\t" + currTask.toString()
                 + "\n\t" + "Now you have " + totalTasks + " tasks in the list.\n" + liner;
     }
 
     /**
-     * print all contents in task list.
-     * */
+     * Generates all contents found in taskList.
+     *
+     * @param tasks TaskList
+     * @return String message of TaskList
+     */
     public String showList(TaskList tasks) {
         StringBuilder sb = new StringBuilder("\tHere are the tasks in your list:\n");
         ArrayList<Task> list = tasks.getList();
@@ -87,8 +106,11 @@ public class Ui {
     }
 
     /**
-     * print matching tasks from search result.
-     * */
+     * Generates matching tasks from search result.
+     *
+     * @param tasks TaskList
+     * @return String message of TaskList of matching results
+     */
     public String printMatches(ArrayList<Task> results) {
         StringBuilder sb = new StringBuilder("\tHere are the matching tasks in your list:\n");
         for (int i = 0; i < results.size(); i++) {
@@ -100,8 +122,8 @@ public class Ui {
     }
 
     /**
-     * get user input.
-     * */
+     * Calls for user's input
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

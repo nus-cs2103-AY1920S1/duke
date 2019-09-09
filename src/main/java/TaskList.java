@@ -4,7 +4,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * contains operations for commands to list.
+ * Contains operations for commands to list.
  * */
 public class TaskList {
     protected ArrayList<Task> tasks;
@@ -22,9 +22,9 @@ public class TaskList {
     }
 
     /**
-     * update task in list of given position.
+     * Updates task in list of given position under the Text File.
      *
-     * @param num Position of task in tasklist
+     * @param num Position of task in tasklist/ text file
      * @return updated task of given position
      */
     public Task updateTask(int num) {
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * delete task in list of given position.
+     * Deletes task in list of given position.
      *
      * @param num Position of task in tasklist
      * @return deleted task of given position
@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * search tasks in tasklist containing given string.
+     * Searches for tasks in TaskList containing given string.
      *
      * @param command String to search for relevant task
      * @return list of task containing the given command

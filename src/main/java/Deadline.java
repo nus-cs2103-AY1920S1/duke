@@ -1,9 +1,8 @@
 package duke.task;
 
 /**
- * subclass of task.
- * handles deadline type task of a specific time
- * */
+ * Handles Deadline type Task with a specified time.
+ */
 public class Deadline extends Task {
     protected String by;
 

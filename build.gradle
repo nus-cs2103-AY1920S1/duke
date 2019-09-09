@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.7'
-    id "com.github.spotbugs" version "2.0.0"
+    id 'com.github.spotbugs' version "2.0.0"
 }
 
 group 'seedu.duke'
@@ -16,7 +16,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Launcher"
+    mainClassName = 'duke.Launcher'
 }
 
 dependencies {
@@ -36,26 +36,28 @@ test {
 }
 
 task runCli(type: JavaExec, dependsOn: classes) {
-    main = "duke.Launcher"
+    main = 'duke.Launcher'
+    description = 'Run Duke CLI'
     standardInput = System.in
     classpath = sourceSets.main.runtimeClasspath
-    args = ["cli"]
+    args = ['cli']
 }
 
 task runGui(type: JavaExec, dependsOn: classes) {
-    main = "duke.Launcher"
+    main = 'duke.Launcher'
+    description = 'Run Duke GUI'
     classpath = sourceSets.main.runtimeClasspath
-    args = ["gui"]
+    args = ['gui']
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1"
+    archiveBaseName = 'duke'
+    archiveVersion = '0.1'
     archiveClassifier = null
     archiveAppendix = null
 }
 javafx {
-    version = "11.0.2"
+    version = '11.0.2'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 

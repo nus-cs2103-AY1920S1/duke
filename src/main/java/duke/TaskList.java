@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * Represents a TaskList Class which represented the entire
+ * Represents a TaskList Class which contains the entire
  * list of task that the user have entered into the program.
  * The TaskList class handles all the manipulating of the List.
  */

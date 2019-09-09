@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Represents a Storage Class which is used to handle all
- * file handling task - writing, deleting, updating.
+ * file handling task - writing, deleting, updating of a text file.
  */
 
 public class Storage {

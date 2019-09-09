@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.IndexOutOfBoundsException;
 import java.text.ParseException;
 
+import duke.error.DukeException;
 import duke.TaskList;
 import duke.task.Task;
 import duke.task.Event;
@@ -107,6 +108,8 @@ public class Storage {
             } catch (ParseException e) {
                 System.out.println(e);
                 System.out.println("Error decoding the date from the file");
+            } catch (DukeException e) {
+                System.out.println(e);
             }            
         } 
         return result;

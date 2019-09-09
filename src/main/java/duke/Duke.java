@@ -1,11 +1,16 @@
-package duke.main;
+package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
 
-import java.io.IOException;
+import duke.main.Parser;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 
-/*import javafx.application.Application;
+import java.io.IOException;
+/*
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -38,7 +43,7 @@ public class Duke {
      */
     private Ui ui;
     
-    static boolean isExitRunLoop;
+    public static boolean isExitRunLoop;
     
     /*private ScrollPane scrollPane;
     
@@ -94,7 +99,6 @@ public class Duke {
             }
         }
     }
-    
     /*
     @Override
     public void start(Stage stage) {
@@ -148,7 +152,6 @@ public class Duke {
         // more code to be added here later
     }
     */
-    
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.setPath("CurrentTaskList.txt");

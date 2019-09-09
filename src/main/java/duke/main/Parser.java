@@ -1,5 +1,6 @@
 package duke.main;
 
+import duke.Duke;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 /**
  * Parses Strings to identify different sub-commands in a given input command.
  */
-class Parser {
+public class Parser {
     /**
      * Parses the instruction given in an input String.
      *
@@ -142,7 +143,7 @@ class Parser {
                 Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
     }
     
-    static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws DukeException {
         Command command;
         String instruction = Parser.parseInstruction(input);
         switch (instruction) {

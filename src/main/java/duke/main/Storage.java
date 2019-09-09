@@ -39,7 +39,7 @@ public class Storage {
      * @return Returns the list of Tasks stored in the specified file path location.
      * @throws IOException An Exception thrown to indicate an invalid file path.
      */
-    ArrayList<Task> loadSavedList() throws IOException {
+    public ArrayList<Task> loadSavedList() throws IOException {
         ArrayList<Task> returnTaskList = new ArrayList<>(100);
         File file = new File(filePath);
         file.createNewFile();

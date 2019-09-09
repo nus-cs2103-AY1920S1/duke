@@ -20,7 +20,7 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
     
-    void print(String string) {
+    public void print(String string) {
         System.out.println(string);
     }
     
@@ -29,7 +29,7 @@ public class Ui {
      *
      * @return Returns the entire input line as a String.
      */
-    String getNextLine() {
+    public String getNextLine() {
         return scanner.nextLine();
     }
     
@@ -39,7 +39,7 @@ public class Ui {
      * @param exception The Exception to display the error message of.
      * @return Returns the error message as a String.
      */
-    String showError(Exception exception) {
+    public String showError(Exception exception) {
         return exception.getMessage();
     }
     
@@ -48,7 +48,7 @@ public class Ui {
      *
      * @return Returns the message String.
      */
-    String showHello() {
+    public String showHello() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
     

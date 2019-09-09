@@ -75,9 +75,14 @@ public class TaskList {
      * @param deletedEvent determines the task to be deleted
      */
     public void removeTask(String deletedEvent) {
-        int taskTodDelete = Integer.parseInt(deletedEvent);
-        ui.printRemovedTask(taskList.get(taskTodDelete - 1).getOverallStatus(),taskList.size());
-        taskList.remove(taskTodDelete - 1);
+        if (deletedEvent.contains("all")){
+            taskList.clear();
+            ui.printRemovedTask("All tasks",taskList.size()+1);
+        }else {
+            int taskTodDelete = Integer.parseInt(deletedEvent);
+            ui.printRemovedTask(taskList.get(taskTodDelete - 1).getOverallStatus(), taskList.size());
+            taskList.remove(taskTodDelete - 1);
+        }
     }
 
     public LinkedList<Task> getTaskList() {

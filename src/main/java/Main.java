@@ -18,6 +18,7 @@ public class Main extends Application {
     public Main() throws IOException {
     }
 
+
     @Override
     public void start(Stage stage) {
         try {

@@ -7,16 +7,20 @@ import duke.exception.DukeStorageException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class MainWindow extends AnchorPane {
+import java.util.ArrayList;
+
+public class MainWindow extends AnchorPane implements Ui {
+    private final Storage storage = new Storage("duke.txt");
+    private final TaskList tasks = new TaskList();
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,11 +30,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final Storage storage = new Storage("duke.txt");
-    private final TaskList tasks = new TaskList();
-    private final Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private final Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
-
     /**
      * Initialises the MainWindow.
      */
@@ -39,10 +38,11 @@ public class MainWindow extends AnchorPane {
         try {
             storage.loadTasks(tasks);
         } catch (DukeStorageException e) {
-            addDukeDialog(e.getMessage());
+            showMessage(e.getMessage());
         }
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcome();
     }
 
     @FXML
@@ -54,29 +54,29 @@ public class MainWindow extends AnchorPane {
         addUserDialog(input);
         userInput.clear();
 
-        String response = null;
-        String warning = null;
-        String error = null;
+        ArrayList<String> responses = new ArrayList<>();
+        ArrayList<String> warnings = new ArrayList<>();
+        ArrayList<String> errors = new ArrayList<>();
         try {
             Command command = Parser.parse(input);
             CommandResult result = command.execute(tasks, storage);
             if (result.isExit()) {
                 Platform.exit();
             }
-            response = result.hasMessages() ? String.join("\n", result.getMessages()).stripTrailing() : null;
-            warning = result.hasWarnings() ? String.join("\n", result.getWarnings()).stripTrailing() : null;
+            responses.addAll(result.getMessages());
+            warnings.addAll(result.getWarnings());
         } catch (DukeException e) {
-            error = e.getMessage();
+            errors.add((e.getMessage()));
         }
 
-        if (response != null) {
-            addDukeDialog(response);
+        for (String response : responses) {
+            showMessage(response);
         }
-        if (warning != null) {
-            addDukeWarning(warning);
+        for (String warning : warnings) {
+            showWarning(warning);
         }
-        if (error != null) {
-            addDukeError(error);
+        for (String error : errors) {
+            showError(error);
         }
     }
 
@@ -85,18 +85,26 @@ public class MainWindow extends AnchorPane {
     }
 
     private void addUserDialog(String dialog) {
-        addDialogBox(DialogBox.getUserDialog(dialog, userAvatar));
+        addDialogBox(DialogBox.getUserDialog(dialog));
     }
 
-    private void addDukeDialog(String dialog) {
-        addDialogBox(DialogBox.getDukeDialog(dialog, dukeAvatar));
+    @Override
+    public void showMessage(String message) {
+        addDialogBox(DialogBox.getDukeDialog(message));
     }
 
-    private void addDukeWarning(String dialog) {
-        addDialogBox(DialogBox.getDukeWarning(dialog, dukeAvatar));
+    @Override
+    public void showWarning(String warning) {
+        addDialogBox(DialogBox.getDukeWarning(warning));
     }
 
-    private void addDukeError(String dialog) {
-        addDialogBox(DialogBox.getDukeError(dialog, dukeAvatar));
+    @Override
+    public void showError(String error) {
+        addDialogBox(DialogBox.getDukeError(error));
+    }
+
+    @Override
+    public void showWelcome() {
+        addDialogBox(DialogBox.getDukeDialog("Hello from Duke! What can I do for you?"));
     }
 }

@@ -7,15 +7,17 @@ import duke.exception.DukeStorageException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Cli;
 
+/**
+ * The Duke CLI application.
+ */
 public final class DukeCli {
     private final Storage storage;
     private final TaskList tasks;
     private final Cli ui;
 
     /**
-     * The Duke CLI application.
+     * Constructs a Duke CLI application.
      */
     public DukeCli() {
         storage = new Storage("duke.txt");

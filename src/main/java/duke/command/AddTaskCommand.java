@@ -32,10 +32,10 @@ public abstract class AddTaskCommand extends Command {
         CommandResult result = new CommandResult();
         if (tasks.addTask(task)) {
             result.addMessages(
-                TASK_ADD_SUCCESS,
-                task.toString(),
-                String.format(TASKS_COUNT, tasks.size())
-            );
+                String.format("%s%n%s%n%s",
+                    TASK_ADD_SUCCESS,
+                    task.toString(),
+                    String.format(TASKS_COUNT, tasks.size())));
             try {
                 storage.writeTasks(tasks);
             } catch (DukeStorageException e) {

@@ -23,7 +23,7 @@ public class DoneCommand extends SingleTaskCommand {
             result.addWarnings(TASK_ALREADY_DONE);
         } else {
             task.markAsDone();
-            result.addMessages(TASK_MARKED_AS_DONE, task.toString());
+            result.addMessages(String.format("%s%n%s", TASK_MARKED_AS_DONE, task.toString()));
             try {
                 storage.writeTasks(tasks);
             } catch (DukeStorageException e) {

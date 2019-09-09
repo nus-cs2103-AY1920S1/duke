@@ -14,6 +14,8 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 
 public class DialogBox extends HBox {
+    private static final Image USER_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/User.png"));
+    private static final Image DUKE_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/Duke.png"));
     @FXML
     private Label dialog;
     @FXML
@@ -39,34 +41,32 @@ public class DialogBox extends HBox {
      * Creates a right-justified dialog with the given avatar.
      *
      * @param dialog the content of the dialog
-     * @param avatar the avatar to display with the dialog
      * @return a right-justified dialog with the given avatar
      */
-    public static DialogBox getUserDialog(String dialog, Image avatar) {
-        return new DialogBox(dialog, avatar, "user-dialog");
+    public static DialogBox getUserDialog(String dialog) {
+        return new DialogBox(dialog, DialogBox.USER_AVATAR, "user-dialog");
     }
 
     /**
      * Creates a left-justified dialog with the given avatar.
      *
      * @param dialog the content of the dialog
-     * @param avatar the avatar to display with the dialog
      * @return a left-justified dialog with the given avatar
      */
-    public static DialogBox getDukeDialog(String dialog, Image avatar) {
-        return DialogBox.makeDukeDialog(dialog, avatar, "duke-message-dialog");
+    public static DialogBox getDukeDialog(String dialog) {
+        return DialogBox.makeDukeDialog(dialog, "duke-message-dialog");
     }
 
-    public static DialogBox getDukeWarning(String dialog, Image avatar) {
-        return DialogBox.makeDukeDialog(dialog, avatar, "duke-warning-dialog");
+    public static DialogBox getDukeWarning(String dialog) {
+        return DialogBox.makeDukeDialog(dialog, "duke-warning-dialog");
     }
 
-    public static DialogBox getDukeError(String dialog, Image avatar) {
-        return DialogBox.makeDukeDialog(dialog, avatar, "duke-error-dialog");
+    public static DialogBox getDukeError(String dialog) {
+        return DialogBox.makeDukeDialog(dialog, "duke-error-dialog");
     }
 
-    private static DialogBox makeDukeDialog(String dialog, Image avatar, String type) {
-        DialogBox box = new DialogBox(dialog, avatar, type);
+    private static DialogBox makeDukeDialog(String dialog, String type) {
+        DialogBox box = new DialogBox(dialog, DialogBox.DUKE_AVATAR, type);
         box.flip();
         return box;
     }

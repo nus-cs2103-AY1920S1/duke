@@ -43,8 +43,7 @@ public class FindCommand extends Command {
         if (matches.size() == 0) {
             result.addMessages(FIND_NO_TASKS);
         } else {
-            result.addMessages(FIND_TASKS);
-            result.addMessages(matches.toString().split("\\n"));
+            result.addMessages(String.format("%s%n%s", FIND_TASKS, matches.toString()));
         }
         return result;
     }

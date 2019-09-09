@@ -20,9 +20,10 @@ public class DeleteCommand extends SingleTaskCommand {
         CommandResult result = new CommandResult();
         Task task = tasks.deleteTask(this.taskNumber);
         result.addMessages(
-            TASK_DELETED,
-            task.toString(),
-            String.format(TASKS_COUNT, tasks.size()));
+            String.format("%s%n%s%n%s",
+                TASK_DELETED,
+                task.toString(),
+                String.format(TASKS_COUNT, tasks.size())));
         try {
             storage.writeTasks(tasks);
         } catch (DukeStorageException e) {

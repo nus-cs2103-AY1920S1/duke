@@ -1,11 +1,16 @@
-package duke.ui;
+package duke.cli;
+
+import duke.ui.Ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class Cli {
+/**
+ * Command line interface of the Duke app.
+ */
+public class Cli implements Ui {
     private static final String LOGO =
         " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -33,34 +38,31 @@ public class Cli {
     /**
      * Shows each message on a new line.
      *
-     * @param messages the messages to show
+     * @param message the message to show
      */
-    public void showMessage(final String... messages) {
-        for (final String message : messages) {
-            show(message);
-        }
+    @Override
+    public void showMessage(final String message) {
+        show(message);
     }
 
     /**
      * Shows each warning on a new line.
      *
-     * @param warnings the warnings to show
+     * @param warning the warning to show
      */
-    public void showWarning(final String... warnings) {
-        for (final String warning : warnings) {
-            show("Warning: " + warning);
-        }
+    @Override
+    public void showWarning(final String warning) {
+        show("Warning: " + warning);
     }
 
     /**
      * Shows each error on a new line.
      *
-     * @param errors the errors to show
+     * @param error the error to show
      */
-    public void showError(final String... errors) {
-        for (final String error : errors) {
-            show("Error: " + error);
-        }
+    @Override
+    public void showError(final String error) {
+        show("Error: " + error);
     }
 
     /**
@@ -77,6 +79,7 @@ public class Cli {
     /**
      * Shows a welcome message.
      */
+    @Override
     public void showWelcome() {
         showSeparator();
         showMessage("Hello from");

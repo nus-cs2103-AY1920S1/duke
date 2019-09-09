@@ -12,7 +12,7 @@ public class TaskListTest {
         test.add(testTask);
         assertEquals(test.size(), 1);
         assertEquals(test.get(1), testTask);
-        test.delete(1, new DukeUi());
+        test.delete(1);
         assertEquals(test.size(), 0);
     }
 }

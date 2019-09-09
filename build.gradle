@@ -39,9 +39,18 @@ javafx {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 run {
     standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

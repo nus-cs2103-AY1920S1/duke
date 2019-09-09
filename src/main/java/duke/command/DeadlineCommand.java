@@ -13,6 +13,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
+        assert parts[0].equals("deadline") : "parts[0] should be deadline";
         String secondPart = parts[1];
         String name = Parser.splitIntoNameAndTime(secondPart, " /by ")[0];
         String dateTime = Parser.splitIntoNameAndTime(secondPart, " /by ")[1];

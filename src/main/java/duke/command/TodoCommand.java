@@ -11,6 +11,7 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
+        assert parts[0].equals("todo") : "parts[0] should be todo";
         try {
             String taskName = parts[1];
             // Add new task to list

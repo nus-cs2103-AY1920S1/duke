@@ -10,6 +10,10 @@
     -fx-margin-bottom: 0;
 }
 
+.dialog {
+    -fx-margin: 0 8px;
+}
+
 .dialogDp {
     -fx-width: 100%;
     -fx-margin: 0 4px;

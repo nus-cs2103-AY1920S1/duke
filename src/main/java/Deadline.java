@@ -10,7 +10,8 @@ public class Deadline extends Task {
      * @param by when to finish the task by
      * @throws DukeException exception
      */
-    public Deadline(String description, String by) throws DukeException {
+    // TODO: don't throw exception
+    public Deadline(String description, String by) {
         super(description, by);
         // If deadline /by is of correct format
         if (isValidDateTimeFormat(by)) {

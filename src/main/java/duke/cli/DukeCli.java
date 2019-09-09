@@ -10,9 +10,9 @@ import duke.task.TaskList;
 import duke.ui.Cli;
 
 public class DukeCli {
-    private static Storage storage;
-    private static TaskList tasks;
-    private static Cli ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Cli ui;
 
     /**
      * The Duke CLI application.

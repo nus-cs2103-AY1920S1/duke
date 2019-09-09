@@ -4,6 +4,7 @@ plugins {
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id "com.github.spotbugs" version "2.0.0"
 }
 
 group 'seedu.duke'
@@ -26,21 +27,25 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+spotbugs {
+    excludeFilter = file("$projectDir/config/spotbugs/excludeFilter.xml")
+}
+
 test {
     useJUnitPlatform()
 }
 
-task runCli (type: JavaExec, dependsOn: classes) {
+task runCli(type: JavaExec, dependsOn: classes) {
     main = "duke.Launcher"
     standardInput = System.in
     classpath = sourceSets.main.runtimeClasspath
-    args = [ "cli" ]
+    args = ["cli"]
 }
 
-task runGui (type: JavaExec, dependsOn: classes) {
+task runGui(type: JavaExec, dependsOn: classes) {
     main = "duke.Launcher"
     classpath = sourceSets.main.runtimeClasspath
-    args = [ "gui" ]
+    args = ["gui"]
 }
 
 shadowJar {

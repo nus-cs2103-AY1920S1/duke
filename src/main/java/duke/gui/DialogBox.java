@@ -33,10 +33,22 @@ public class DialogBox extends HBox {
         this.avatar.setImage(avatar);
     }
 
+    /**
+     * Creates a right-justified dialog with the given avatar.
+     * @param dialog the content of the dialog
+     * @param avatar the avatar to display with the dialog
+     * @return a right-justified dialog with the given avatar
+     */
     public static DialogBox getUserDialog(String dialog, Image avatar) {
         return new DialogBox(dialog, avatar);
     }
 
+    /**
+     * Creates a left-justified dialog with the given avatar.
+     * @param dialog the content of the dialog
+     * @param avatar the avatar to display with the dialog
+     * @return a left-justified dialog with the given avatar
+     */
     public static DialogBox getDukeDialog(String dialog, Image avatar) {
         DialogBox box = new DialogBox(dialog, avatar);
         box.flip();

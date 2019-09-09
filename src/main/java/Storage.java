@@ -34,6 +34,7 @@ public class Storage {
                 String[] savedTaskSplit = savedTask.split("\\|");
                 if (savedTaskSplit[0].equals("T")) {
                     String description = savedTaskSplit[2];
+                    assert description.length() > 0 : "An empty string should not be a valid task description";
                     Task todoTask = new Todo(description);
                     if (savedTaskSplit[1].equals("1")) {
                         todoTask.markAsDone();
@@ -41,6 +42,7 @@ public class Storage {
                     outputList.add(todoTask);
                 } else if (savedTaskSplit[0].equals("E")) {
                     String description = savedTaskSplit[2];
+                    assert description.length() > 0 : "An empty string should not be a valid task description";
                     String at = savedTaskSplit[3];
                     Task eventTask = new Event(description, at);
                     if (savedTaskSplit[1].equals("1")) {
@@ -49,6 +51,7 @@ public class Storage {
                     outputList.add(eventTask);
                 } else {
                     String description = savedTaskSplit[2];
+                    assert description.length() > 0 : "An empty string should not be a valid task description";
                     String by = savedTaskSplit[3];
                     Task deadlineTask = new Deadline(description, by);
                     if (savedTaskSplit[1].equals("1")) {

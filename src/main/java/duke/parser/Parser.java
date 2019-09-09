@@ -53,6 +53,8 @@ public class Parser {
                 if (sep == -1) {
                     throw new IllegalDescriptionException("The format of deadline task is wrong.");
                 }
+                assert sep <= description.length() && sep + 3 <= description.length() :
+                        "String length: " + description.length() + " seperator index: " + sep;
                 cmd = new DeadlineCommand(description.substring(0, sep).strip(),
                                 parseDate(description.substring(sep + 3).strip()));
             } else if (type.equals(EventCommand.COMMAND_WORD)) {
@@ -60,6 +62,9 @@ public class Parser {
                 if (sep == -1) {
                     throw new IllegalDescriptionException("The format of event task is wrong.");
                 }
+                assert sep <= description.length() && sep + 3 <= description.length() :
+                        "String length: " + description.length() + " seperator index: " + sep;
+
                 cmd = new EventCommand(description.substring(0, sep).strip(),
                                 parseDate(description.substring(sep + 3).strip()));
             } else if (type.equals(FindCommand.COMMAND_WORD)) {

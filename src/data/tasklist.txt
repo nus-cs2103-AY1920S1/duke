@@ -7,3 +7,4 @@ T | 0 | go for tutorial
 T | 0 | yes
 T | 0 | null
 T | 0 | jumppp
+T | 0 | eat egg

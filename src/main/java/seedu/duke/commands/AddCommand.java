@@ -16,46 +16,46 @@ public class AddCommand extends Command{
     private String taskType;
     private String partialCommand;
 
-    public AddCommand(String taskType, String commandPart) throws DukeException {
+    public AddCommand(String taskType, String partialCommand) {
         this.taskType = taskType;
-        this.partialCommand = commandPart;
-        this.evaluateTaskType();
+        this.partialCommand = partialCommand;
     }
 
     private void evaluateTaskType() throws DukeException {
         String taskDescription;
-        String date;
+        String taskDate;
         String[] subparts;
         switch(taskType) {
-            case "todo" :
-                taskDescription = partialCommand;
-                taskToAdd = new Todo(taskDescription);
-                break;
-            case "deadline" :
-                subparts = partialCommand.split(" /by ");
-                taskDescription = subparts[0];
-                date = subparts[1];
-                taskToAdd = new Deadline(taskDescription, date);
-                break;
-            case "event" :
-                subparts = partialCommand.split(" /at ");
-                taskDescription = subparts[0];
-                date = subparts[1];
-                taskToAdd = new Event(taskDescription, date);
-                break;
-            default:
-                throw new DukeException(Messages.MESSAGE_UNKNOWN_COMMAND);
+        case "todo" :
+            taskDescription = partialCommand;
+            taskToAdd = new Todo(taskDescription);
+            break;
+        case "deadline" :
+            subparts = partialCommand.split(" /by ");
+            taskDescription = subparts[0];
+            taskDate = subparts[1];
+            taskToAdd = new Deadline(taskDescription, taskDate);
+            break;
+        case "event" :
+            subparts = partialCommand.split(" /at ");
+            taskDescription = subparts[0];
+            taskDate = subparts[1];
+            taskToAdd = new Event(taskDescription, taskDate);
+            break;
+        default:
+            throw new DukeException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, String filePath) {
+    public void execute(TaskList tasks, UI ui, String filePath) throws DukeException {
+        this.evaluateTaskType();
         tasks.add(taskToAdd);
         String reply = "Got it. I've added this task:\n\t  " + taskToAdd + "\n\tNow you have " + tasks.size()
                 + ((tasks.size() == 1) ? " task" : " tasks") + " in the list.";
         ui.printReply(reply);
-        String replyToFile = taskToAdd.writeToFile();
         try {
+            String replyToFile = taskToAdd.writeToFile();
             FileWriter fw = new FileWriter(filePath, true);
             fw.write(replyToFile);
             fw.close();

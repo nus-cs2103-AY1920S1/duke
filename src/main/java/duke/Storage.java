@@ -1,4 +1,11 @@
-import java.io.*;
+package duke;
+import duke.Tasks.Task;
+import duke.Exceptions.DukeException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -41,6 +48,10 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Reads an existing textFile line by line, and process them to create Task Objects to store.
+     * @return a ArrayList consisting of Task objects that corresponds to the textFile commands
+     */
     public ArrayList<Task> loadFromTextFile() throws DukeException, IOException, ParseException {
         ArrayList<Task> taskList = new ArrayList<>();
         System.out.println("Loaded");

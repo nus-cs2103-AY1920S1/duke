@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Tasks.Task;
+import duke.Exceptions.DukeException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;

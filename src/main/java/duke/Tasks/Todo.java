@@ -1,3 +1,4 @@
+package duke.Tasks;
 
 /**
  * Represents a TodoTask which extends the Task Class

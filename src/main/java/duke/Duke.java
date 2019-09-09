@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Commands.Command;
+import duke.Exceptions.DukeException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -27,7 +31,7 @@ public class Duke {
         storage = new Storage("duke.txt");
         try {
             tasks = new TaskList(storage.loadFromTextFile());
-        } catch (IOException| ParseException | DukeException e) {
+        } catch (IOException | ParseException | DukeException e) {
             ui.printException(e);
             tasks = new TaskList();
         }
@@ -41,6 +45,7 @@ public class Duke {
      *  @throws IOException throws exception if user input invalid
      */
     public String getResponse(String inputInstruction) throws DukeException {
+        assert inputInstruction != null;
         Command currentCommand = Parser.getCommand(inputInstruction);
         String outputContent = currentCommand.execute(tasks, ui, storage);
         return outputContent;
@@ -54,6 +59,7 @@ public class Duke {
      * @return String format, reformatted version
      */
     public String reformatInput(String input) {
+        assert input != null;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         System.setOut(new PrintStream(buffer));
         Parser.printLine();
@@ -65,8 +71,13 @@ public class Duke {
         return outputContent;
     }
 
+    /**
+     * returns a ui initiate message according to the current status of the program
+     * if it has an existing file present (status : "loaded") else (status : "new").
+     * @return a String output initiate message according to the program status type
+     */
     public String getStartMessage() {
-        if(tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             return ui.initiate("new");
         } else {
             return ui.initiate("loaded");

@@ -1,3 +1,12 @@
+package duke.Commands;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.Exceptions.DukeException;
+import duke.Tasks.Deadline;
+import duke.Tasks.Task;
+
 public class DeadlineCommand extends Command {
 
     private String inputInstruction;
@@ -6,6 +15,13 @@ public class DeadlineCommand extends Command {
         inputInstruction = inputString;
     }
 
+    /**
+     * Overrides execute method to achieve DeadlineCommand.
+     * @param currentTaskList taskList containing all the current Task
+     * @param ui class that handles all I/O managements
+     * @param storage class that handles all file storage and loading
+     * @return a String output for the specific Commands
+     */
     public String execute(TaskList currentTaskList, Ui ui, Storage storage) {
         try {
             if (!inputInstruction.contains("/by") || inputInstruction.length() == 8

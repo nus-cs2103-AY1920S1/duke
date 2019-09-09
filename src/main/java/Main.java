@@ -1,3 +1,4 @@
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        assert stage != null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

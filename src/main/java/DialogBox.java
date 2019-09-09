@@ -26,6 +26,14 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+        initialiseFxmlLoader();
+
+        intialiseLabelAndImage(text, img);
+
+        setBoxHeight(text);
+    }
+
+    private void initialiseFxmlLoader() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             //Set the controller and root node to the DialogBox
@@ -35,21 +43,26 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    private void intialiseLabelAndImage(String text, Image img) {
         dialog.setText(text);
         displayPicture.setImage(img);
+    }
 
-
+    private void setBoxHeight(String text) {
         int numLines = countLines(text);
 
         if (numLines <= 4) {
             this.dialog.setPrefHeight(USE_COMPUTED_SIZE);
             this.setPrefHeight(USE_COMPUTED_SIZE);
 
-        } else {
+        } else if (numLines > 4) {
             this.dialog.setPrefHeight(numLines * 20);
             this.setPrefHeight(numLines * 20);
 
+        } else {
+            assert false : "Error in initialising variable numLines";
         }
     }
 
@@ -80,7 +93,7 @@ public class DialogBox extends HBox {
 
     //for creating dialog box to show welcome message
     public static DialogBox createDialog(String text, Image img) {
-      return new DialogBox(text, img);
+        return new DialogBox(text, img);
 
 
     }

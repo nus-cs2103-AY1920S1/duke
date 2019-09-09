@@ -16,6 +16,9 @@ public abstract class Task {
      */
     protected boolean isDone;
 
+    static final int NOT_DONE = 1;
+    static final int DONE = 0;
+
 
     /**
      * Initialises a new instance od a task.
@@ -39,9 +42,9 @@ public abstract class Task {
     public Task(String isDone, String description) {
         int a = Integer.parseInt(isDone.trim());
         //Assert that a is either 1 or 0
-        assert a == 1 || a == 0 : "Integer value of whether task is done is not parsed out properly";
+        assert (a == NOT_DONE) || (a == DONE) : "Integer value of whether task is done is not parsed out properly";
 
-        this.isDone = a == 0 ? true : false;
+        this.isDone = a == DONE;
         this.description = description;
     }
 

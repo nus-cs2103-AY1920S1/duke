@@ -105,12 +105,12 @@ public class TaskList {
     public List<String> findTask(String keyword) {
 
         List<String> result = this.todoList
-                                  .stream()
-                                  .map(x -> x.toString())
-                                  .filter(y -> y.contains(keyword))
-                                  .collect(Collectors.toList());
+                .stream()
+                .map(x -> x.toString())
+                .filter(y -> y.contains(keyword))
+                .collect(Collectors.toList());
 
-         //Assert that all tasks in the result contains keyword
+        //Assert that all tasks in the result contains keyword
         assert result.stream().allMatch(x -> x.contains(keyword)) : "Some results of 'find' does not contain keyword";
 
         return result;

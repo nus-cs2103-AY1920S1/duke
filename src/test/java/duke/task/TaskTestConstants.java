@@ -1,7 +1,7 @@
 package duke.task;
 
 //Interface housing public static final constants for testing
-interface TaskTestConstants {
+public interface TaskTestConstants {
     String VALID_DATE_1 = "01/01/1997 0000";
     String VALID_DATE_2 = " 01/01/1997 0003   ";
     String VALID_DATE_3 = "2/12/2019 1900";

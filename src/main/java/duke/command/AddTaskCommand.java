@@ -31,6 +31,7 @@ abstract class AddTaskCommand extends WritableCommand {
      */
     @Override
     void run(TaskList tasks, MainWindow ui, Storage storage) {
+        assert taskToAdd != null : "Tried to add null task to task list";
         tasks.addTask(taskToAdd);
 
         ui.showMessage("Got it. I've added this task:\n"

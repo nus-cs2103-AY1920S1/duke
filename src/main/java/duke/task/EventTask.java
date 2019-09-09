@@ -96,5 +96,6 @@ public class EventTask extends Task {
                     "Invalid date format inputted by user",
                     " =X  OOPS!!! The second timing is not after the first one!");
         }
+        assert startDate != null && endDate != null : "Event task constructed with no date.";
     }
 }

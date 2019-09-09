@@ -66,5 +66,6 @@ public class DeadlineTask extends Task {
         }
 
         this.deadlineDate = TaskUtil.getDateFromString(deadlineDate);
+        assert deadlineDate != null : "Deadline task constructed with no date.";
     }
 }

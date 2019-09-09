@@ -55,10 +55,10 @@ class Ui implements TaskObserver, UiObservable {
         StringBuilder sbOut = new StringBuilder();
         sbOut = Ui.printBanner(sbOut);
         String greeting1 = "hewwo! i'm OwO\n"
-            + "Mistew Stawk's augmented weawity gwocewy wist\n"
-            + "OwO stands fow \"Owways With Owws\"\n"
-            + "its a wowk in pwogwess, wike me\n"
-            //+ "Mistew Stawk wuvd his acwonyms.\n"
+          //  + "Mistew Stawk's augmented weawity gwocewy wist\n"
+           // + "OwO stands fow \"Owways With Owws\"\n"
+           // + "its a wowk in pwogwess, wike me\n"
+           // //+ "Mistew Stawk wuvd his acwonyms.\n"
             + "what can OwO do fow you today?";
         //Display.printSection(printxs);
         sbOut.append(greeting1);
@@ -69,10 +69,10 @@ class Ui implements TaskObserver, UiObservable {
         StringBuilder sbOut = new StringBuilder();
         sbOut = Ui.printBanner(sbOut);
         String greeting1 = "hewwo! i'm OwO\n"
-            + "Mistew Stawk's augmented weawity gwocewy wist\n"
-            + "OwO stands fow \"Owways With Owws\"\n"
-            + "its a wowk in pwogwess, wike me\n"
-            //+ "Mistew Stawk wuvd his acwonyms.\n"
+          //  + "Mistew Stawk's augmented weawity gwocewy wist\n"
+          //  + "OwO stands fow \"Owways With Owws\"\n"
+          //  + "its a wowk in pwogwess, wike me\n"
+          //  //+ "Mistew Stawk wuvd his acwonyms.\n"
             + "what can OwO do fow you today?";
         //Display.printSection(printxs);
         sbOut.append(greeting1);

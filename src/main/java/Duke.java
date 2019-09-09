@@ -9,8 +9,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Scanner;
+
 import javafx.scene.control.Label;
 
 /**
@@ -33,11 +38,17 @@ public class Duke extends Application {
     /**
      * Creates a duke object which stores data in the specified path .
      */
-    public Duke() {
+    public Duke() throws FileNotFoundException, ParseException {
         list = new TaskList();
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("../Duke/data/Duke.txt");
+        File file = new File("../Duke/data/Duke.txt");
+        Scanner loadData = new Scanner(file);
+        while (loadData.hasNextLine()) {
+            String tasks = loadData.nextLine();
+            parser.readTask(tasks,list);
+        }
     }
 
     @Override
@@ -128,14 +139,15 @@ public class Duke extends Application {
         String dukeText = getResponse(userInput.getText());
         String response = parser.readUserCommand(dukeText,ui,list,storage);
         Label dukeResponse = new Label(response);
+        Label welcomeText = new Label(ui.greet());
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeResponse, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeResponse, new ImageView(duke))
         );
         userInput.clear();
     }
 
-    private String getResponse(String input) {
+    String getResponse(String input) {
         return input;
     }
 

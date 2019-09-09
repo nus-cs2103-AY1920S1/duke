@@ -161,7 +161,7 @@ public class TaskList {
         } else {
             Task t1 = new ToDo(s, false);
             this.add(t1);
-            this.addMessage();
+           output = this.addMessage();
         }
         return output;
     }

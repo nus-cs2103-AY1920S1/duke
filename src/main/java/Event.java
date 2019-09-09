@@ -15,7 +15,7 @@ public class Event extends Task {
             Date dateTime = parser.parse(dateString);
             this.date = dateTime;
         } catch (ParseException pE) {
-            System.out.println(pE);
+            System.err.println(pE);
         }
 
         this.isDone = false;

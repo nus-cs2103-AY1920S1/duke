@@ -1,4 +1,4 @@
-public class TaskException extends Exception{
+public class TaskException extends DukeException {
     public TaskException() {};
 
     @Override

@@ -1,4 +1,4 @@
-public class DeleteException extends Exception{
+public class DeleteException extends DukeException {
     public DeleteException() {};
 
     @Override

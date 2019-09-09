@@ -10,6 +10,7 @@ import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
 import duke.command.Command;
 import duke.dukeexception.DukeException;
+import static duke.dukeexception.DukeException.*;
 
 /**
  * Class to handle parsing of user input.
@@ -25,21 +26,21 @@ public class Parser {
      *     or in the wrong format.
      */
     public static Command parse(String toParse) throws DukeException {
-        String[] tokens = toParse.split(" ");
-        String commandKeyword = tokens[0];
+        String[] userInputTokens = toParse.split(" ");
+        String commandKeyword = parseAndGetCommandKeyword(userInputTokens);
         Command commandToReturn;
         switch (commandKeyword) {
         case "list":
             commandToReturn = parseAndGetListCommand();
             break;
         case "done":
-            commandToReturn = parseAndGetDoneCommand(tokens);
+            commandToReturn = parseAndGetDoneCommand(userInputTokens);
             break;
         case "delete":
-            commandToReturn = parseAndGetDeleteCommand(tokens);
+            commandToReturn = parseAndGetDeleteCommand(userInputTokens);
             break;
         case "todo":
-            commandToReturn = parseAndGetTodoCommand(tokens);
+            commandToReturn = parseAndGetTodoCommand(userInputTokens);
             break;
         case "deadline":
             commandToReturn = parseAndGetDeadlineCommand(toParse);
@@ -55,14 +56,18 @@ public class Parser {
             break;
         default:
             //unrecognized command
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(UNRECOGNIZED_COMMAND_ERROR);
         }
         return commandToReturn;
     }
 
+    private static String parseAndGetCommandKeyword(String[] tokens) {
+        return tokens[0];
+    }
+
     private static DoneCommand parseAndGetDoneCommand(String[] tokens) throws DukeException {
         if (tokens.length < 2) {
-            throw new DukeException("☹ OOPS!!! Please specify task to complete");
+            throw new DukeException(DONE_ERROR);
         }
         int toComplete = Integer.parseInt(tokens[1]) - 1;
         return new DoneCommand(toComplete);
@@ -70,7 +75,7 @@ public class Parser {
 
     private static DeleteCommand parseAndGetDeleteCommand(String[] tokens) throws DukeException {
         if (tokens.length < 2) {
-            throw new DukeException("☹ OOPS!!! Please specify task to delete");
+            throw new DukeException(DELETE_ERROR);
         }
         int toDelete = Integer.parseInt(tokens[1]) - 1;
         return new DeleteCommand(toDelete);
@@ -79,7 +84,7 @@ public class Parser {
     private static TodoCommand parseAndGetTodoCommand(String[] tokens) throws DukeException {
         String toAdd = "";
         if (tokens.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(EMPTY_TODO_ERROR);
         }
         for (int j = 1; j < tokens.length; j++) {
             toAdd = toAdd + tokens[j] + " ";
@@ -95,14 +100,13 @@ public class Parser {
         String timeString = "";
 
         if (tokens.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException(EMPTY_DEADLINE_ERROR);
         }
 
         assert toParse.split("/by").length > 1: "Deadline command did not use /by delimiter";
 
         if (toParse.split("/by")[1].trim().split(" ").length != 2) {
-            throw new DukeException("☹ OOPS!!! Date and "
-                    + "Timing not specified correctly!");
+            throw new DukeException(DATETIME_ERROR);
         }
 
         for (int m = 1; m < tokens.length; m++) {
@@ -131,15 +135,14 @@ public class Parser {
         boolean timeFlag = false;
 
         if (tokens.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException(EMPTY_EVENT_ERROR);
         }
 
         assert toParse.split("/at").length > 1: "Event command did not use /at delimiter";
 
         //Check if both date and time are specified
         if (toParse.split("/at")[1].trim().split(" ").length != 2) {
-            throw new DukeException("☹ OOPS!!! Date and"
-                    + " Timing not specified correctly!");
+            throw new DukeException(DATETIME_ERROR);
         }
         for (int z = 1; z < tokens.length; z++) {
             if (tokens[z].equals("/at")) {
@@ -165,8 +168,9 @@ public class Parser {
 
     private static FindCommand parseAndGetFindCommand(String toParse) throws DukeException {
         if (toParse.split(" ").length < 2) {
-            throw new DukeException("Cannot perform search with no keyword!");
+            throw new DukeException(FIND_KEYWORD_ERROR);
         }
+
         String keyword = toParse.split("find")[1].strip();
         return new FindCommand(keyword);
     }

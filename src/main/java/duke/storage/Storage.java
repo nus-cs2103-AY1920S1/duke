@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import static duke.dukeexception.DukeException.*;
+
 /**
  * Represents the internal storage of the computer that the User is loading from
  * and writing into.
@@ -53,44 +55,35 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            ArrayList<Task> toReturn = new ArrayList<>();
-            BufferedReader fileinput = new BufferedReader(new FileReader(filePath));
-            String fileData = fileinput.readLine();
+            ArrayList<Task> tasksLoadedFromFilePath = new ArrayList<>();
+            BufferedReader fileInputStream = new BufferedReader(new FileReader(filePath));
+            String fileData = fileInputStream.readLine();
 
             while (fileData != null) {
-                String[] fileTokens = fileData.split("\\|");
-                String taskType = fileTokens[0];
-                int doneFlag = Integer.parseInt(fileTokens[1]);
-                String taskDesc = fileTokens[2];
-                String taskDate;
-                String taskTime;
-                String[] dateTimeTokens;
+                String taskType = getTaskType(fileData);
 
                 switch (taskType) {
                 case "T":
-                    toReturn.add(new Todo(taskDesc, doneFlag));
+                    Todo newTodo = readAndGetTodo(fileData);
+                    tasksLoadedFromFilePath.add(newTodo);
                     break;
                 case "D":
-                    dateTimeTokens = fileTokens[3].split(" ");
-                    taskDate = dateTimeTokens[0];
-                    taskTime = dateTimeTokens[1];
-                    toReturn.add(new Deadline(taskDesc, taskDate, taskTime, doneFlag));
+                    Deadline newDeadline = readAndGetDeadline(fileData);
+                    tasksLoadedFromFilePath.add(newDeadline);
                     break;
                 case "E":
-                    dateTimeTokens = fileTokens[3].split(" ");
-                    taskDate = dateTimeTokens[0];
-                    taskTime = dateTimeTokens[1];
-                    toReturn.add(new Event(taskDesc, taskDate, taskTime, doneFlag));
+                    Event newEvent = readAndGetEvent(fileData);
+                    tasksLoadedFromFilePath.add(newEvent);
                     break;
                 default:
                     break;
                 }
-                fileData = fileinput.readLine();
+                fileData = fileInputStream.readLine();
             }
-            fileinput.close();
-            return toReturn;
+            fileInputStream.close();
+            return tasksLoadedFromFilePath;
         } catch (Exception e) {
-            throw new DukeException("Error loading from specified file path");
+            throw new DukeException(LOADING_ERROR);
         }
     }
 
@@ -101,24 +94,27 @@ public class Storage {
      * @throws DukeException If writing process fails
      */
     public void writeToDisk(TaskList tasklist) throws DukeException {
+
         try {
             assert this.isUpdated() : "Writing to file when Storage was not updated";
+            final int IS_DONE = 1;
+            final int NOT_DONE = 0;
 
             FileWriter fw = new FileWriter(filePath);
             String lineToWrite;
             for (int k = 0; k < tasklist.size(); k++) {
-                Task curr = tasklist.get(k);
-                int doneFlag = curr.getDoneStatus() ? 1 : 0;
-                if (curr instanceof Todo) {
-                    lineToWrite = "T" + "|" + doneFlag + "|" + curr.getDescription();
-                } else if (curr instanceof Deadline) {
-                    Deadline currDeadline = (Deadline) curr;
-                    lineToWrite = "D" + "|" + doneFlag + "|" + currDeadline.getDescription() + "|"
+                Task currTask = tasklist.get(k);
+                int doneStatus = currTask.getDoneStatus() ? IS_DONE : NOT_DONE;
+                if (currTask instanceof Todo) {
+                    lineToWrite = "T" + "|" + doneStatus + "|" + currTask.getDescription();
+                } else if (currTask instanceof Deadline) {
+                    Deadline currDeadline = (Deadline) currTask;
+                    lineToWrite = "D" + "|" + doneStatus + "|" + currDeadline.getDescription() + "|"
                             + currDeadline.getDate().getDateString() + " "
                             + currDeadline.getTiming().getTimeString();
                 } else {
-                    Event currEvent = (Event) curr;
-                    lineToWrite = "E" + "|" + doneFlag + "|" + currEvent.getDescription() + "|"
+                    Event currEvent = (Event) currTask;
+                    lineToWrite = "E" + "|" + doneStatus + "|" + currEvent.getDescription() + "|"
                             + currEvent.getDate().getDateString() + " "
                             + currEvent.getTiming().getTimeString();
                 }
@@ -126,7 +122,40 @@ public class Storage {
             }
             fw.close();
         } catch (Exception e) {
-            throw new DukeException("Error writing to specified file path");
+            throw new DukeException(WRITING_ERROR);
         }
+    }
+
+    private Deadline readAndGetDeadline(String fileData) {
+        String[] fileTokens = fileData.split("\\|");
+        String[] dateTimeTokens = fileTokens[3].split(" ");
+        String taskDate = dateTimeTokens[0];
+        String taskTime = dateTimeTokens[1];
+        String taskDesc = fileTokens[2];
+        int doneFlag = Integer.parseInt(fileTokens[1]);
+        return new Deadline(taskDesc, taskDate, taskTime, doneFlag);
+    }
+
+    private Todo readAndGetTodo(String fileData) {
+        String[] fileTokens = fileData.split("\\|");
+        int doneFlag = Integer.parseInt(fileTokens[1]);
+        String taskDesc = fileTokens[2];
+        return new Todo(taskDesc, doneFlag);
+
+    }
+
+    private Event readAndGetEvent(String fileData) {
+        String[] fileTokens = fileData.split("\\|");
+        String[] dateTimeTokens = fileTokens[3].split(" ");
+        String taskDate = dateTimeTokens[0];
+        String taskTime = dateTimeTokens[1];
+        String taskDesc = fileTokens[2];
+        int doneFlag = Integer.parseInt(fileTokens[1]);
+        return new Event(taskDesc, taskDate, taskTime, doneFlag);
+    }
+
+    private String getTaskType(String fileData) {
+        String[] fileTokens = fileData.split("\\|");
+        return fileTokens[0];
     }
 }

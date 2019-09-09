@@ -82,7 +82,7 @@ public class Storage {
                     task = new Deadline(arr[2], arr[3]);
                     break;
                 default:
-                    throw new IOException("Something is Wrong!");
+                    throw new AssertionError("LOAD FILE FAILURE: invalid task type " + arr[0]);
                 }
 
                 if (Integer.parseInt(arr[1]) == 1) {

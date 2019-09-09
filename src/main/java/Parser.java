@@ -75,6 +75,8 @@ public class Parser {
             } else if (arr.length < 2 || arr[1].trim().isEmpty()) {
                 throw new DukeException("       OOPS!!! The event must have a specified date/time.");
             }
+        } else {
+            throw new AssertionError("invalid task type: " + type);
         }
     }
 

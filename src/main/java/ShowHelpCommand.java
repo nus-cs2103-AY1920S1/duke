@@ -9,12 +9,12 @@ public class ShowHelpCommand extends Command {
      * @throws DukeException exception specific to Duke application
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showHelp();
     }
 
     @Override
-    String executeForGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return "Let me help you out!";
+    String executeForGui(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showHelpForGui();
     }
 }

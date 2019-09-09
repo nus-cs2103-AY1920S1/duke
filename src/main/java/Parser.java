@@ -13,39 +13,38 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * deal with making sense of the user command.
+ * Deals with making sense of the user command.
  * */
 public class Parser {
-    protected String command;
 
     /**
-     * constructor: checks and push command to subclass.
-     * */
-    public Command parse(String fullcommand) throws DukeException {
+     * Parses given user's input and instantiate to Command object.
+     *
+     * @param fullcommand String input from user
+     * @return Command object
+     */
+    public static Command parse(String fullcommand) throws DukeException {
         try {
-            if (fullcommand.equals("list")) { //LIST
+            String subcommand = fullcommand.split(" ")[0];
+            String command = fullcommand.replaceFirst(subcommand, "").trim();
+            switch (subcommand) {
+            case "list":
                 return new ListCommand();
-            } else if (fullcommand.startsWith("done")) { //DONE
-                command = fullcommand.replaceFirst("done", "").trim();
+            case "done":
                 return new UpdateCommand(command);
-            } else if (fullcommand.startsWith("delete")) { //DELETE
-                command = fullcommand.replaceFirst("delete", "").trim();
+            case "delete":
                 return new DeleteCommand(command);
-            } else if (fullcommand.startsWith("find")) { //FIND
-                command = fullcommand.replaceFirst("find", "").trim();
+            case "find":
                 return new FindCommand(command);
-            } else if (fullcommand.startsWith("todo")) { //ADD: TODO
-                command = fullcommand.replaceFirst("todo", "").trim();
+            case "todo":
                 return new AddCommand("T", command);
-            } else if (fullcommand.startsWith("deadline")) { //ADD: DEADLINE
-                command = fullcommand.replaceFirst("deadline", "").trim();
+            case "deadline":
                 return new AddCommand("D", command);
-            } else if (fullcommand.startsWith("event")) { //ADD: EVENT
-                command = fullcommand.replaceFirst("event", "").trim();
+            case "event":
                 return new AddCommand("E", command);
-            } else if (fullcommand.equals("bye")) {
+            case "exit":
                 return new ExitCommand();
-            } else {
+            default:
                 throw new DukeException("       OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException e) {
@@ -54,9 +53,12 @@ public class Parser {
     }
 
     /**
-     * check if task command is valid.
-     * */
-    public void checkTask(String type, String command) throws DukeException {
+     * Checks if user input for task command is valid.
+     *
+     * @param type Char of task type
+     * @param command String User input
+     */
+    public static void checkTask(String type, String command) throws DukeException {
         if (type.equals("T")) {
             if (command.isEmpty()) {
                 throw new DukeException("       OOPS!!! The description of a todo cannot be empty.");
@@ -79,11 +81,13 @@ public class Parser {
     }
 
     /**
-     * check if command is valid number.
+     * Checks if command is a valid number.
      *
-     * @throws DukeException if command is not a number or outOfBound in TaskList
-     * */
-    public boolean validNumber(String command, int listSize) throws DukeException {
+     * @param command String User input
+     * @param listSize int size of TaskList
+     * @throws DukeException if command is not a number or ArrayIndexOutOfBound in TaskList
+     */
+    public static boolean isValidNumber(String command, int listSize) throws DukeException {
         try {
             if (command.isEmpty()) {
                 throw new DukeException("       OOPS!!! Command cannot be empty! Please try again!");
@@ -105,11 +109,13 @@ public class Parser {
     }
 
     /**
-     * format date and time.
+     * Formats date and time from String.
      *
-     * @throws DukeException if datetime format != "dd/mm/yyyy HHmm"
-     * */
-    public String datetimeformat(String input) throws DukeException {
+     * @param input Converts snippet of user input to DateTime format
+     * @return String of formatted DateTime
+     * @throws DukeException if DateTime format != "dd/mm/yyyy HHmm"
+     */
+    public static String datetimeformat(String input) throws DukeException {
         try {
             System.out.println(input);
             //convert to ISO_LOCAL_DATE_TIME
@@ -122,9 +128,12 @@ public class Parser {
     }
 
     /**
-     * get day suffix for date formatter.
-     * */
-    public String getSuffix(int day) {
+     * Gets day suffix for date formatter.
+     *
+     * @param day numeric value of the day
+     * @return String day suffix
+     */
+    public static String getSuffix(int day) {
         switch (day) {
         case 1:
         case 21:

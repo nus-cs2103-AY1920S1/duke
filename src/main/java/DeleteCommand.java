@@ -8,26 +8,27 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * subclass of command.
- * execute delete tasks operations
- * */
+ * Deals with operation to delete tasks: delete commands
+ */
 public class DeleteCommand extends Command {
     protected String command;
     protected int pos;
-    protected Parser parser = new Parser();
 
     public DeleteCommand(String command) {
         this.command = command;
     }
 
     /**
-     * main method to perform operation.
-     * delete task in TaskList and update text file (in storage)
-     * if successful, print out deleted task to user
-     * */
+     * Executes operation to update existing task
+     *
+     * @param tasks TaskList to perform changes from
+     * @param ui Ui to generate message outputs
+     * @param storage Object to save tasks
+     * @return String generate message as output from successful operation
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (parser.validNumber(command, tasks.getList().size())) {
+            if (Parser.isValidNumber(command, tasks.getList().size())) {
                 pos = Integer.parseInt(command);
                 Task currTask = tasks.deleteTask(pos);
                 storage.updateTasks(currTask, "delete", pos - 1);

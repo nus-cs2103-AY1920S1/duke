@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * handles task types.
+ * Handles task types.
  * */
 public class Task {
     protected String description;

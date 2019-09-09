@@ -14,7 +14,7 @@ import java.io.BufferedWriter;
 import java.util.ArrayList;
 
 /**
- * deals with loading tasks from the file and saving tasks in the file.
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     public File file;
@@ -22,10 +22,10 @@ public class Storage {
     public String filepath;
 
     /**
-     * constructor for Storage class.
+     * Creates a instance of Storage object
      *
      * @param filepath String of the file location
-     * */
+     */
     public Storage(String filepath) {
         String[] arr = filepath.split("/");
         dir = new File(arr[0]);
@@ -37,11 +37,11 @@ public class Storage {
     }
 
     /**
-     * transform data in text file to array of tasks.
+     * Transforms data in text file to TaskLists containing list of Tasks.
      *
-     * @returns arraylist of task
+     * @returns TaskList containing list of Tasks
      * @throws Exception if file does not exist or loading task error
-     * */
+     */
     public ArrayList<Task> load() throws Exception {
         try {
             if (file.exists()) {
@@ -55,7 +55,7 @@ public class Storage {
     }
 
     /**
-     * helper Function to load() method.
+     * Helper Function to load() method.
      *
      * @return list of tasks from text file
      * @throws IOException if task type != "T" || "D" || "E"
@@ -97,10 +97,10 @@ public class Storage {
     }
 
     /**
-     * add new tasks information in text file.
+     * Adds new tasks information in text file.
      *
      * @param task Task to save in file
-     * @param type Type of task - 1 char long
+     * @param type Type of task of one Char length
      * */
     public void saveTasks(Task task, String type) {
         try {
@@ -122,7 +122,7 @@ public class Storage {
     }
 
     /**
-     * edit existing tasks in file: delete and done commands.
+     * Edits existing tasks in file through delete or update
      *
      * @param task Task to save in file
      * @param command String command from user input

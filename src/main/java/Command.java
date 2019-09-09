@@ -7,7 +7,7 @@ import duke.Ui;
 import java.util.ArrayList;
 
 /**
- * abstract class for command.
+ * A Abstract class for Command.
  * */
 public abstract class Command {
     protected String command;

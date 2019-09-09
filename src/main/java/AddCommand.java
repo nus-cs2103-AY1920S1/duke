@@ -11,27 +11,30 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * subclass of command.
- * execute adding tasks operations: todo, event, deadline
- * */
+ * Deals with operation to add new tasks.
+ */
 public class AddCommand extends Command {
     protected String command;
     protected Task task;
     protected String type;
-    protected Parser parser = new Parser();
 
     /**
-     * constructor - check if command is valid before assignment object.
-     * */
+     * Initializes AddCommand object.
+     * Checks if command is valid before assignment object.
+     *
+     * @param type Type of task
+     * @param command String user input of the task details
+     * @throws DukeException if command is invalid
+     */
     public AddCommand(String type, String command) throws DukeException {
         try {
-            parser.checkTask(type, command);
+            Parser.checkTask(type, command);
             if (type.equals("T")) {
                 this.task = new Todo(command);
                 this.type = "T";
             } else if (type.equals("D")) {
                 String[] arr = command.split("/by");
-                this.task = new Deadline(arr[0].trim(), parser.datetimeformat(arr[1].trim()));
+                this.task = new Deadline(arr[0].trim(), Parser.datetimeformat(arr[1].trim()));
                 this.type = "D";
             } else if (type.equals("E")) {
                 String[] arr = command.split("/at");
@@ -44,10 +47,13 @@ public class AddCommand extends Command {
     }
 
     /**
-     * main method to perform operation.
-     * add task in TaskList and text file (in storage)
-     * if successful, print out task added
-     * */
+     * Executes operation to add new task
+     *
+     * @param tasks TaskList to perform changes from
+     * @param ui Ui to generate message outputs
+     * @param storage Object to save tasks
+     * @return String generate message as output from successful operation
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.getList().add(task);
         storage.saveTasks(task, type);

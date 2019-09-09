@@ -1,9 +1,8 @@
 package duke.task;
 
 /**
- * subclass of task.
- * handles event type tasks with a specific time period
- * */
+ * Handles Event type Task with specific time period.
+ */
 public class Event extends Task {
     protected String time;
 

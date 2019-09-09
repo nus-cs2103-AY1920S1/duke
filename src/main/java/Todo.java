@@ -1,9 +1,8 @@
 package duke.task;
 
 /**
- * subclass of task.
- * handles todo task
- * */
+ * Handles Todo Task with description.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

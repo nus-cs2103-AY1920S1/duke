@@ -14,15 +14,7 @@ public class Ui {
      */
     public String showWelcome() {
         String result = "";
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        result += "Hello from\n" + logo + "\n";
-//        result += printLine();
-        result += "Hello! I'm Duke\nWhat can I do for you?";
-//        result += printLine();
+        result += "Hello there! I'm Duke Skywalker.\nWhat can I do for you?";
         return result;
     }
 
@@ -30,7 +22,7 @@ public class Ui {
      * Prints goodbye when 'bye' command executed.
      */
     public String showGoodBye() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!\nMay The Force Be With You!";
     }
 
     /**

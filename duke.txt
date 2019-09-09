@@ -1,4 +1,0 @@
-[T][O] homework
-[E][O] dota  (at: 02/12/2019 1900)
-[T][X] homework
-[T][X] homework

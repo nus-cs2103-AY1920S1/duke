@@ -25,6 +25,8 @@ public class DeleteCommand extends Command {
 			throw new DukeException("no number provided");
 		}
 		Integer taskToDeleteIndex = Integer.parseInt(inFullCommandScanner.next());
+		assert (taskToDeleteIndex != null);
+		assert (taskToDeleteIndex != 0);
 		Task taskToBeDeleted;
 		try {
 			taskToBeDeleted = tasks.removeTask(taskToDeleteIndex - 1);

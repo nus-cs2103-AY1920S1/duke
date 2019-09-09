@@ -7,10 +7,7 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.tasklist.TaskList;
-import seedu.duke.ui.CommandLineUi;
-import seedu.duke.ui.DialogBox;
-import seedu.duke.ui.GraphicalUi;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -124,7 +121,8 @@ public class Duke {
             }
             return output;
         } catch (DukeException e) {
-            return e.getMessage();
+            DukeErrorInterface dei = (e1) -> e1.getMessage();
+            return dei.getLoadingError(e);
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -150,7 +148,8 @@ public class Duke {
             try {
                 isBye = executeTasksCli(fullCommand);
             } catch (DukeException e) {
-                System.out.println(cli.getLoadingError(e));
+                DukeErrorInterface dei = (e1) -> e1.getMessage();
+                System.out.println(dei.getLoadingError(e));
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {

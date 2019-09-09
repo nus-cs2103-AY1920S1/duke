@@ -1,2 +1,4 @@
 event type | isDone | description | extra description
 T | 1 | Sleep
+T | 0 | A
+T | 0 | B

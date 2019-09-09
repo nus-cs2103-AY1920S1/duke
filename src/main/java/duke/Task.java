@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Task object. A <code>Task</code> object corresponds to
  * an agenda to be done.
@@ -9,6 +11,7 @@ public class Task {
     String description;
     String type;
     private boolean isDone;
+    ArrayList<String> tags = new ArrayList<>();
 
     public Task(String description) {
         this.description = description;
@@ -32,4 +35,15 @@ public class Task {
         this.isDone = true;
     }
 
+    void addTag(String tag) {
+        tags.add(tag);
+    }
+
+    String getTags() {
+        StringBuilder sb = new StringBuilder();
+        for (String tag: tags) {
+            sb.append("#" + tag);
+        }
+        return sb.toString();
+    }
 }

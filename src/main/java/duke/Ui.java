@@ -95,6 +95,11 @@ class Ui {
                 "\n" + "Now you have " + tasks.getListSize() + " tasks in the list.";
     }
 
+    String printTagMessage(String tag, Task task, TaskList tasks) {
+        return "Noted. I've tagged this task:" + task +
+                "\n" + " as #" + tag;
+    }
+
     /**
      * Prints exception message.
      */

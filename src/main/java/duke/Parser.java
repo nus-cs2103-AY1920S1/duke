@@ -20,6 +20,18 @@ public class Parser {
         String[] arr = fullCommand.split(" ", 2);
         String firstWord = arr[0];
         switch (firstWord) {
+        case "tag":
+            String tagDescription = arr[1];
+            if (tagDescription.isEmpty()) {
+                throw new DukeException("OOPS!!! The description of a tag cannot be empty.");
+            }
+            String[] indexTag = tagDescription.split(" ");
+            int indexOfTag = Integer.parseInt(indexTag[0]);
+            String wordOfTag = indexTag[1];
+            if (wordOfTag.isEmpty()) {
+                throw new DukeException("OOPS!!! The tag word cannot be empty.");
+            }
+            return new TagCommand(indexOfTag, wordOfTag);
         case "bye":
             return new ExitCommand();
         case "list":

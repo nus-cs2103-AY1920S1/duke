@@ -33,10 +33,19 @@ class Storage {
             char tick = '\u2713';
             while ((line = br.readLine()) != null) {
                 String description = line.substring(7);
+                String tags = "";
+                if (description.contains("#")) {
+                    String[] array = description.split("#", 2);
+                    description = array[0];
+                    tags = array[1];
+                }
                 char eventType = line.charAt(1);
                 char symbol = line.charAt(4);
                 if (eventType == 'T') {
                     Todo todo = new Todo(description);
+                    if (!tags.isEmpty()) {
+                        loadTags(tags, todo);
+                    }
                     if (symbol == tick) {
                         todo.markDone();
                     }
@@ -44,6 +53,9 @@ class Storage {
                     assert todo != null : "Todo should have been loaded from hard disk";
                 } else if (eventType == 'D') {
                     Deadline deadline = new Deadline(description);
+                    if (!tags.isEmpty()) {
+                        loadTags(tags, deadline);
+                    }
                     if (symbol == tick) {
                         deadline.markDone();
                     }
@@ -52,6 +64,9 @@ class Storage {
                 } else {
                     assert eventType == 'E' : "Event loaded from hard disk should be event type";
                     Event event = new Event(description);
+                    if (!tags.isEmpty()) {
+                        loadTags(tags, event);
+                    }
                     if (symbol == tick) {
                         event.markDone();
                     }
@@ -66,6 +81,13 @@ class Storage {
         return alist;
     }
 
+    private void loadTags(String tags, Task task) {
+        String[] tagArray = tags.split("#");
+        for (String t: tagArray) {
+            task.addTag(t);
+        }
+    }
+
     /**
      * Saves all tasks to the file.
      * If there is input output exception, Duke Exception is thrown.
@@ -78,7 +100,7 @@ class Storage {
         try {
             FileWriter fileWriter = new FileWriter(filepath);
             for (Task t: tasks.taskList) {
-                fileWriter.write(t.toString() + "\n");
+                fileWriter.write(t + "\n");
             }
             fileWriter.flush();
             fileWriter.close();

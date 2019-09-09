@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + this.date;
+        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + this.date + getTags();
     }
 
     /**

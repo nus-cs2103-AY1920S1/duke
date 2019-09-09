@@ -137,7 +137,6 @@ public class Duke extends Application {
 
     private String getResponse(String input) {
         return input;
-
     }
 
 

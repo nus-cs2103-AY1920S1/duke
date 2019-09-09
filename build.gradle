@@ -4,6 +4,7 @@ plugins {
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'com.github.spotbugs' version "2.0.0"
 }
 
 group 'seedu.duke'
@@ -15,7 +16,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Launcher"
+    mainClassName = 'duke.Launcher'
 }
 
 dependencies {
@@ -26,35 +27,41 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+spotbugs {
+    excludeFilter = file("$projectDir/config/spotbugs/excludeFilter.xml")
+}
+
 test {
     useJUnitPlatform()
 }
 
-task runCli (type: JavaExec, dependsOn: classes) {
-    main = "duke.Launcher"
+task runCli(type: JavaExec, dependsOn: classes) {
+    main = 'duke.Launcher'
+    description = 'Run Duke CLI'
     standardInput = System.in
     classpath = sourceSets.main.runtimeClasspath
-    args = [ "cli" ]
+    args = ['cli']
 }
 
-task runGui (type: JavaExec, dependsOn: classes) {
-    main = "duke.Launcher"
+task runGui(type: JavaExec, dependsOn: classes) {
+    main = 'duke.Launcher'
+    description = 'Run Duke GUI'
     classpath = sourceSets.main.runtimeClasspath
-    args = [ "gui" ]
+    args = ['gui']
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1"
+    archiveBaseName = 'duke'
+    archiveVersion = '0.1'
     archiveClassifier = null
     archiveAppendix = null
 }
 javafx {
-    version = "11.0.2"
+    version = '11.0.2'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
-task textUiText(type: Exec) {
+task textUiTest(type: Exec) {
     description = 'Runs text UI tests'
     group = 'verification'
     shouldRunAfter test
@@ -63,4 +70,4 @@ task textUiText(type: Exec) {
     commandLine 'bash', '-c', './runtest.sh'
 }
 
-check.dependsOn textUiText
+test.dependsOn textUiTest

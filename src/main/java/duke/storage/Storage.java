@@ -8,9 +8,9 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -46,8 +46,8 @@ public class Storage {
         TaskList tasks = new TaskList();
         Scanner scanner;
         try {
-            scanner = new Scanner(this.file);
-        } catch (FileNotFoundException e) {
+            scanner = new Scanner(this.file, StandardCharsets.UTF_8);
+        } catch (IOException e) {
             return tasks;
         }
         assert this.file.exists(); // file should exist if Scanner can be created
@@ -96,11 +96,9 @@ public class Storage {
      */
     public void writeTasks(final TaskList tasks) throws DukeStorageException {
         assert this.file.getParentFile().exists(); // parent directory should have been created in the constructor
-        try {
-            FileWriter writer = new FileWriter(this.file, false);
+        try (FileWriter writer = new FileWriter(this.file, StandardCharsets.UTF_8, false)) {
             assert this.file.exists(); // file should be created when FileWriter is created
             writer.write(tasks.toStorageString());
-            writer.close();
         } catch (IOException e) {
             throw new DukeStorageException(WRITE_TASK_FAILED + e.getMessage());
         }

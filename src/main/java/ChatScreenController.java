@@ -1,5 +1,6 @@
 import java.io.File;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -18,6 +19,8 @@ public class ChatScreenController extends AnchorPane {
     public VBox chats;
     @FXML
     public ScrollPane scrollPane;
+    @FXML
+    public Button close;
     
     Storage s = new Storage();
     TaskList list = new TaskList();
@@ -41,7 +44,13 @@ public class ChatScreenController extends AnchorPane {
         chats.setVisible(true);
         chats.getChildren().addAll(DialogLineController.getDukeDialog(Ui.welcome(), dukeIm));
         scrollPane.setContent(chats);
+        scrollPane.vvalueProperty().bind(chats.heightProperty());
         s.readFile(list);
+    }
+
+    @FXML
+    public void handleClose() {
+        Platform.exit();
     }
 
     @FXML
@@ -50,7 +59,10 @@ public class ChatScreenController extends AnchorPane {
         String inputString = input.getText();
         if(inputString.equals("bye")){
             input.setDisable(true);
+            send.setDisable(true);
             s.writeFile(list);
+            close.setVisible(true);
+            close.setDisable(false);
         }
         String reply = duke.ask(inputString, list);
         chats.getChildren().addAll(DialogLineController.getUserDialog(inputString, userIm),

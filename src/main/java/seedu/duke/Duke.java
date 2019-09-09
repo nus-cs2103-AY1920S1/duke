@@ -7,7 +7,10 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.tasklist.TaskList;
-import seedu.duke.ui.*;
+import seedu.duke.ui.CommandLineUi;
+import seedu.duke.ui.DialogBox;
+import seedu.duke.ui.GraphicalUi;
+import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -126,7 +129,6 @@ public class Duke {
         } catch (IOException e) {
             return e.getMessage();
         }
-
     }
 
     /**
@@ -166,7 +168,7 @@ public class Duke {
     }
 
     /**
-     * Executes the Command Line Interface for duke.
+     * Executes the Command Line Interface for Duke.
      *
      * @param fullCommand User input string.
      * @return Boolean isBye. If command is "bye", will return true and exit the while loop.

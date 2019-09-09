@@ -47,6 +47,7 @@ public class Parser {
             if (s.length() < 6) {
                 throw new DukeException("Please write in this format: done X\nWhere X is a number in the list");
             }
+            assert(s.length() >= 6);
             try {
                 n = Integer.parseInt(strArr[1]) - 1;
                 c = new DoneCommand(n);
@@ -59,6 +60,7 @@ public class Parser {
             if (s.length() < 7) {
                 throw new DukeException("Please write in this format: delete X\nWhere X is a number in the list");
             }
+            assert(s.length() >= 7);
             try {
                 n = Integer.parseInt(strArr[1]) - 1;
                 c = new DeleteCommand(n);
@@ -71,6 +73,7 @@ public class Parser {
             if (s.length() < 6) {
                 throw new DukeException("Please write in this format: find X\nWhere X is the string to find");
             }
+            assert(s.length() >= 6);
             try {
                 keyword = s.substring(5).toLowerCase();
                 c = new FindCommand(keyword);
@@ -83,6 +86,7 @@ public class Parser {
             if (s.length() < 6) {
                 throw new DukeException("Wof! The description of a todo cannot be empty.");
             }
+            assert(s.length() >= 6);
             description = s.substring(5);
             task = new ToDo(description);
             c = new AddCommand(task);
@@ -92,6 +96,7 @@ public class Parser {
             if (s.length() < 10) {
                 throw new DukeException("Wof! The description of a deadline cannot be empty.");
             }
+            assert(s.length() >= 10);
             temp = s.split("/by");
             if (temp.length < 2) {
                 throw new DukeException("Please specify the deadline time using /by.");
@@ -110,6 +115,7 @@ public class Parser {
             if (s.length() < 7) {
                 throw new DukeException("Wof! The description of a event cannot be empty.");
             }
+            assert(s.length() >= 7);
             temp = s.split("/at");
             if (temp.length < 2) {
                 throw new DukeException("Please specify the event time using /at.");
@@ -129,7 +135,7 @@ public class Parser {
             break;
 
         default:
-            throw new DukeException("Wof?");
+            throw new DukeException("Wof? Me no understand");
         }
         return c;
     }

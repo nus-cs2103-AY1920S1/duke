@@ -7,7 +7,7 @@ import java.util.Date;
  * Class for creating Deadline objects.
  */
 public class Deadline extends Task {
-    /** Date representing the deadline details (date and time)*/
+    /** Date representing the deadline details (date and time). */
     protected Date by;
 
     /** Constructor. */

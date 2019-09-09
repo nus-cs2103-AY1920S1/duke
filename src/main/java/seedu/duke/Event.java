@@ -7,7 +7,7 @@ import java.util.Date;
  * Class for creating Event objects.
  */
 public class Event extends Task {
-    /** Date representing the Event details (date and time)*/
+    /** Date representing the Event details (date and time). */
     protected Date at;
 
     /** Constructor.*/

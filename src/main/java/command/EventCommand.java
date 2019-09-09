@@ -1,26 +1,27 @@
 package command;
 
 import converter.StringDateConverter;
-import parser.Storage;
+import storage.Storage;
 import task.Event;
 import task.TaskList;
 import ui.Ui;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
  * Represent an event to be added.
  */
 public class EventCommand extends Command {
-    private String[] arguments;
+    private String[] details;
 
     /**
      * Initializes EventCommand with event description and date of event.
      *
-     * @param arguments contains event description and date of event
+     * @param details contains event description and date of event
      */
-    public EventCommand(String[] arguments) {
-        this.arguments = arguments;
+    public EventCommand(String[] details) {
+        this.details = details;
     }
 
     /**
@@ -36,11 +37,12 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringDateConverter converter = new StringDateConverter();
-            Date at = converter.convertStringToDate(arguments[1]);
-            tasks.getTasks().add(new Event(arguments[0], at));
+            Date at = converter.convertStringToDate(details[1].trim());
+            tasks.getTasks().add(new Event(details[0].trim(), at));
             ui.showEventCommand(tasks);
-        } catch (Exception e) {
-            ui.showLoadingError(e.getMessage());
+        } catch (ParseException e) {
+            ui.showLoadingError("Please enter a valid date according to dd/MM/yyyy HHmm pattern."
+                    + " Time is in 24-hour format. E.g 11:30pm is 2330.");
         }
     }
 }

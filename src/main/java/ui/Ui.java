@@ -58,7 +58,6 @@ public class Ui {
     public void showLoadingError(String message) {
         displayMsg = new StringJoiner(System.lineSeparator());
         displayMsg.add(message);
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -68,7 +67,6 @@ public class Ui {
     public void showWelcome() {
         displayMsg = new StringJoiner(System.lineSeparator());
         displayMsg.add("Hello! I'm Duke\nWhat can I do for you?");
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -91,7 +89,6 @@ public class Ui {
         displayMsg.add("Got it. I've added this task:");
         displayMsg.add(tasks.getTasks().get(tasks.getTasks().size() - 1).toString());
         displayMsg.add("Now you have " + tasks.getTasks().size() + " tasks in the list.");
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -106,7 +103,6 @@ public class Ui {
         displayMsg.add("Noted. I've removed this task:");
         displayMsg.add(tasks.getTasks().get(index).toString());
         displayMsg.add("Now you have " + (tasks.getTasks().size() - 1) + " tasks in the list.");
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -122,7 +118,6 @@ public class Ui {
             int number = i + 1;
             displayMsg.add(number + "." + tasks.getTasks().get(i));
         }
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -137,7 +132,6 @@ public class Ui {
         displayMsg.add("Nice! I've marked this task as done:");
         displayMsg.add("[" + tasks.getTasks().get(index).getDoneIcon()
                 + "]" + tasks.getTasks().get(index).getDescription());
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -151,7 +145,6 @@ public class Ui {
         displayMsg.add("Got it. I've added this task:");
         displayMsg.add(tasks.getTasks().get(tasks.getTasks().size() - 1).toString());
         displayMsg.add("Now you have " + tasks.getTasks().size()  + " tasks in the list.");
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -160,7 +153,6 @@ public class Ui {
     public void showExitCommand() {
         displayMsg = new StringJoiner(System.lineSeparator());
         displayMsg.add("Bye. Hope to see you again soon!");
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -179,17 +171,6 @@ public class Ui {
                 displayMsg.add(counter + "." + task);
             }
         }
-        printNonGuiDisplayMsg();
-    }
-
-    /**
-     * Sets displayMsg to message produced by IncorrectCommand.
-     * Prints command is invalid message if using CLI.
-     */
-    public void showIncorrectCommand() {
-        displayMsg = new StringJoiner(System.lineSeparator());
-        displayMsg.add("You have entered an invalid command");
-        printNonGuiDisplayMsg();
     }
 
     /**
@@ -203,6 +184,5 @@ public class Ui {
         displayMsg.add("Got it. I've added this task:");
         displayMsg.add(tasks.getTasks().get(tasks.getTasks().size() - 1).toString());
         displayMsg.add("Now you have " + tasks.getTasks().size() + " tasks in the list.");
-        printNonGuiDisplayMsg();
     }
 }

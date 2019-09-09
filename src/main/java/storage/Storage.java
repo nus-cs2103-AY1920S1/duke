@@ -1,4 +1,4 @@
-package parser;
+package storage;
 
 import converter.StringDateConverter;
 import task.Deadline;
@@ -11,9 +11,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 /**
  * Represents the file used to store task list.
@@ -54,8 +56,8 @@ public class Storage {
                 try {
                     StringDateConverter converter = new StringDateConverter();
                     date = converter.convertLongStringToDate(outputs[3]);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                } catch (ParseException e) {
+                    System.out.println("Please enter a valid date.");
                 }
             }
             switch (outputs[0].trim()) {
@@ -81,34 +83,12 @@ public class Storage {
      */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
+        StringJoiner textToAdd = new StringJoiner(System.lineSeparator());
         for (Task task : tasks.getTasks()) {
-            String description;
-            String textToAdd;
-            Date date = null;
-            textToAdd = "";
-            description = task.getDescription();
-            if (task instanceof Deadline) {
-                textToAdd += "D";
-                Deadline deadline = (Deadline) task;
-                date = deadline.getBy();
-            } else if (task instanceof Event) {
-                textToAdd += "E";
-                Event event = (Event) task;
-                date = event.getAt();
-            } else {
-                textToAdd += "T";
-            }
-            if (task.getDoneIcon().equals("\u2713")) {
-                textToAdd += " | Done";
-            } else {
-                textToAdd += " | Not done";
-            }
-            textToAdd += " | " + description.trim();
-            if (date != null) {
-                textToAdd += " | " + date;
-            }
-            fw.write(textToAdd + "\r\n");
+            textToAdd.add(task.toSaveFormat());
         }
+        fw.write(textToAdd.toString());
+        fw.write(System.lineSeparator());
 
         fw.close();
     }

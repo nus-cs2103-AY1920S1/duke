@@ -3,7 +3,7 @@ package main;
 import command.Command;
 import exception.DukeException;
 import parser.Parser;
-import parser.Storage;
+import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
@@ -28,6 +28,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         ui.showWelcome();
+        ui.printNonGuiDisplayMsg();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -66,6 +67,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 Command command = new Parser().parse(fullCommand);
                 command.execute(tasks, ui, storage);
+                ui.printNonGuiDisplayMsg();
                 canEnd = command.canEnd();
             } catch (DukeException e) {
                 ui.showLoadingError(e.getMessage());

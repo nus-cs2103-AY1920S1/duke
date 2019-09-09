@@ -3,7 +3,7 @@ package task;
 /**
  * Represents a task.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -44,4 +44,10 @@ public class Task {
     public String toString() {
         return "[" + getDoneIcon() + "] " + description;
     }
+
+    /**
+     * Converts task object to format use in file save.
+     * @return String that is in file save format
+     */
+    public abstract String toSaveFormat();
 }

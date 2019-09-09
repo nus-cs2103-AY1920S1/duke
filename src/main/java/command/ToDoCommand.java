@@ -1,6 +1,6 @@
 package command;
 
-import parser.Storage;
+import storage.Storage;
 import task.TaskList;
 import task.ToDo;
 import ui.Ui;

@@ -1,6 +1,6 @@
 package command;
 
-import parser.Storage;
+import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
@@ -29,14 +29,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if (this.index < 0 || this.index >= tasks.getTasks().size()) {
-            Command incorrectCommand = new IncorrectCommand();
-            incorrectCommand.execute(tasks, ui, storage);
-        } else {
+        try {
             ui.showDeleteCommand(tasks, this.index);
-            int sizeBeforeRemove = tasks.getTasks().size();
+            int sizeBeforeRemove = tasks.getTasks().size(); // for Java assert
             tasks.getTasks().remove(this.index);
             assert tasks.getTasks().size() + 1 == sizeBeforeRemove : "incorrect delete";
+        } catch (IndexOutOfBoundsException e) {
+            ui.showLoadingError("Please enter a valid task number.");
         }
     }
 }

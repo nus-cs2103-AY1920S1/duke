@@ -28,4 +28,15 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Converts task object to format use in file save.
+     * @return String that is in file save format
+     */
+    @Override
+    public String toSaveFormat() {
+        return String.format("T | %s | %s",
+                this.isDone ? "Done" : "Not Done",
+                this.getDescription());
+    }
 }

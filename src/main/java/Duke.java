@@ -15,7 +15,6 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    private List<TaskList> historicalTaskLists;
 
     /**
      * Constructor for Duke Object.
@@ -28,7 +27,6 @@ public class Duke {
             storage = new Storage(System.getProperty("user.dir"));
             ui.showWelcomeScreen();
             taskList = new TaskList(storage.load());
-            historicalTaskLists = new ArrayList<>(4);
         } catch (Exception e) {
             Ui.printErrorMessage(e);
             return;
@@ -46,7 +44,7 @@ public class Duke {
         while (sc.hasNext()) {
             try {
                 Command newCommand = Parser.retrieveCommandFromString(sc.nextLine());
-                newCommand.executeCommand(taskList, storage, ui, historicalTaskLists);
+                newCommand.executeCommand(taskList, storage, ui);
                 if (newCommand instanceof ExitCommand) {
                     return;
                 }
@@ -64,7 +62,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.retrieveCommandFromString(input);
-            return command.executeCommand(taskList, storage, ui, historicalTaskLists);
+            return command.executeCommand(taskList, storage, ui);
         } catch (Exception e) {
             return e.toString();
         }

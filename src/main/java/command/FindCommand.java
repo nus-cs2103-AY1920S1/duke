@@ -1,6 +1,7 @@
 package command;
 
 
+import main.HistoryManager;
 import main.Storage;
 import task.TaskList;
 import main.Ui;
@@ -36,7 +37,7 @@ public class FindCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         ArrayList<String> tasksThatMatch = tasks.findAllMatches(this.stringArgument);
         String matched = concatenateStrings(tasksThatMatch);
         String result = "    ____________________________________________________________\n" +
@@ -44,6 +45,7 @@ public class FindCommand implements Command {
                 matched +
                 "    ____________________________________________________________";
         ui.nextLine(result);
+        return tasks;
     }
 
     /**

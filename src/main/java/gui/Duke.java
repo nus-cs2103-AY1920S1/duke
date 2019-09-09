@@ -29,6 +29,7 @@ public class Duke extends Application{
     private Ui ui = new Ui();
     private Storage storage = new Storage("./src/main/java/DukeData.txt");
     private TaskList taskList;
+    private HistoryManager historyManager = new HistoryManager(storage);
     private final double APP_HEIGHT = 595.0;
     private final double APP_WIDTH = 500.0;
 
@@ -62,7 +63,7 @@ public class Duke extends Application{
     private String getResponse(String input, Stage stage) {
         try {
             Command c = Parser.parse(input);
-            c.execute(taskList, ui, storage);
+            taskList = c.execute(taskList, ui, storage, historyManager);
             this.isOpen = !c.isExit();
             this.duke = new Image(this.getClass().getResourceAsStream("/images/Rowlet.jpg"));
             return ui.showLine();

@@ -60,17 +60,20 @@ public class AdminCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         if (commandType.equals("list")) {
             handleListCall(tasks, ui);
         } else if (commandType.equals("done")) {
             if (commandArg <=  0) {
                 throw new InsufficientTaskArgumentException("Done requires a positive integer argument!");
             }
+            if (commandArg > tasks.length()) {
+                throw new InsufficientTaskArgumentException("Error! Task not found");
+            }
             handleDoneCall(tasks, ui, storage);
-        } else {
-            return ;
+            historyManager.updateRecords();
         }
+        return tasks;
     }
 
     /**

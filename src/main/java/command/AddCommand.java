@@ -45,7 +45,7 @@ public class AddCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         Task task = getTask();
         tasks.addTask(task);
         String result = "    ____________________________________________________________\n" +
@@ -55,6 +55,8 @@ public class AddCommand implements Command {
                 "    ____________________________________________________________";
         ui.nextLine(result);
         storage.updateTasks(tasks);
+        historyManager.updateRecords();
+        return tasks;
     }
 
     /**

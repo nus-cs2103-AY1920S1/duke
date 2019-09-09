@@ -40,12 +40,14 @@ public class DeleteCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         if (tasks.size() < taskNumber) {
             throw new InsufficientTaskArgumentException("Error! Task cannot be found~!");
         }
 
         handleDeleteCall(tasks, ui, storage);
+        historyManager.updateRecords();
+        return tasks;
     }
 
     /**

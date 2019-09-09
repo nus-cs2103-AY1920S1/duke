@@ -41,7 +41,7 @@ public class Ui {
         case List:
             return showTasks(result.getTasks());
         case Done:
-            return showDoneTask(result.getTasks()[0]);
+            return showDoneTask(result.getTasks());
         default:
             assert false : "unknown result type";
         }
@@ -73,12 +73,17 @@ public class Ui {
     }
 
     /**
-     * Returns a string representation of a message that the task has been marked as done.
-     * @param task the task that has been marked as done.
-     * @return a string representation of a message that the task has been marked as done.
+     * Returns a string representation of a message that tasks have been marked as done.
+     * @param tasks tasks that have been marked as done.
+     * @return a string representation of a message that tasks have been marked as done.
      */
-    public String showDoneTask(Task task) {
-        return composeBlock("Nice! I've marked this task as done:", "  " + task);
+    public String showDoneTask(Task[] tasks) {
+        String[] text = new String[tasks.length + 1];
+        text[0] = "Nice! I've marked the following tasks as done:";
+        for (int i = 0; i < tasks.length; i++) {
+            text[i + 1] = (i + 1) + "." + tasks[i];
+        }
+        return composeBlock(text);
     }
 
     /**

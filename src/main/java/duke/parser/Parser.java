@@ -57,10 +57,7 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case DoneCommand.COMMAND_WORD:
-            if (description.isEmpty()) {
-                throw new IllegalIndexOfTaskException("Please provide a valid index.");
-            }
-            return new DoneCommand(Integer.parseInt(description));
+            return parseDoneCommand(description);
         case DeleteCommand.COMMAND_WORD:
             return parseDeleteCommand(description);
         case ToDoCommand.COMMAND_WORD:
@@ -139,7 +136,7 @@ public class Parser {
         return LocalDateTime.of(date, time);
     }
 
-    private DeleteCommand parseDeleteCommand(String description) throws IllegalDescriptionException {
+    private ArrayList<Integer> parseIndices(String description) {
         ArrayList<Integer> indices = new ArrayList<>();
         while(!description.isEmpty()) {
             try {
@@ -149,9 +146,22 @@ public class Parser {
             }
             description = removeFirstWord(description);
         }
+        return indices;
+    }
+
+    private DeleteCommand parseDeleteCommand(String description) throws IllegalDescriptionException {
+        ArrayList<Integer> indices = parseIndices(description);
         if (indices.isEmpty()) {
             throw new IllegalDescriptionException("Please provide at least 1 valid index");
         }
         return new DeleteCommand(indices);
+    }
+
+    private DoneCommand parseDoneCommand(String description) throws IllegalDescriptionException {
+        ArrayList<Integer> indices = parseIndices(description);
+        if (indices.isEmpty()) {
+            throw new IllegalDescriptionException("Please provide at least 1 valid index");
+        }
+        return new DoneCommand(indices);
     }
 }

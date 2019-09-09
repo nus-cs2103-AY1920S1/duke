@@ -83,6 +83,10 @@ public class Storage {
     private TaskList decodeData(List<String> data) {
         TaskList result = new TaskList();
         for (String line: data) {
+            // Assert that the file has not been tampered with
+            assert line.split("|").length < 5;
+            assert line.split("|").length > 2;
+
             try {
                 // Need special character here or the split will mess up
                 String[] lineArr = line.split(" \\| ");

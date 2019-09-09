@@ -4,6 +4,8 @@ import parser.Storage;
 import task.TaskList;
 import ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Tells user that the program is terminating.
  */
@@ -20,6 +22,7 @@ public class ExitCommand extends Command {
 
     /**
      * Prints exit message.
+     * Saves task list to hard disk.
      *
      * @param tasks contains task list
      * @param ui deals with interaction with users
@@ -27,6 +30,11 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Bye. Hope to see you again soon!");
+        ui.showExitCommand();
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            ui.showLoadingError(e.getMessage());
+        }
     }
 }

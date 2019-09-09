@@ -6,45 +6,45 @@ class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String intro = "Hello! I'm Duke What can I do for you?";
 
-    String printLogo() {
+    static String printLogo() {
         return "Hello from\n" + logo;
     }
 
-    String printHello() {
+    static String printHello() {
         return intro;
     }
 
-    String printBye() {
+    static String printBye() {
         return "Bye. Hope to see you again soon!";
     }
 
-    String printList(TaskList tasks) {
+    static String printList(TaskList tasks) {
         return "Here are the tasks in your list:\n" +
                 tasks.printFormat();
     }
 
-    String printDone(Task task) {
+    static String printDone(Task task) {
         return "Nice! I've marked this task as done: \n" +
                 "  " + task.getStatus();
     }
 
-    String printCount(TaskList tasks){
+    static String printCount(TaskList tasks){
         return "Now you have " + tasks.size() + " tasks in the list.";
     }
 
-    String printCreated(Task t, TaskList tasks) {
+    static String printCreated(Task t, TaskList tasks) {
         return "Got it. I've added this task:\n" +
                 "  " + t.getStatus() +
                 printCount(tasks);
     }
 
-    String printRemoved(Task removedTask, TaskList tasks) {
+    static String printRemoved(Task removedTask, TaskList tasks) {
         return "Noted. I've removed this task: \n" +
                 "  " + removedTask.getStatus() + "\n" +
                 printCount(tasks);
     }
 
-    String listCommands() {
+    static String listCommands() {
         return "Here are the following commands you can try: \n" +
                 "\tlist\n" +
                 "\ttodo <description>\n" +
@@ -55,7 +55,7 @@ class Ui {
                 "\tbye";
     }
 
-    String printFormatHelp() {
+    static String printFormatHelp() {
         return "Here are the valid formats of the inputs:\n" +
                 "todo<space>description\n" +
                 "\teg. todo sweep the floor\n" +
@@ -72,7 +72,7 @@ class Ui {
                 "\teg. delete 3 (deletes Task number 3)";
     }
 
-    String printFind(String input, TaskList tasks) {
+    static String printFind(String input, TaskList tasks) {
         return "Here are the matching tasks in your list:\n" +
                 tasks.find(input);
     }

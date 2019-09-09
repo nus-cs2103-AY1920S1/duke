@@ -86,7 +86,7 @@ class Parser {
         }
     }
 
-    boolean parse(String input, TaskList tasks, Ui ui, Storage storage, MainWindow mw) {
+    boolean parse(String input, TaskList tasks, Storage storage, MainWindow mw) {
         String[] inputSplit = input.split(" ");
         String command = inputSplit[0];
 
@@ -97,18 +97,18 @@ class Parser {
 
             case "bye":
                 storage.save(tasks.saveFormat());
-                mw.dukeSays(ui.printBye());
+                mw.dukeSays(Ui.printBye());
                 return false;
 
             case "list":
-                mw.dukeSays(ui.printList(tasks));
+                mw.dukeSays(Ui.printList(tasks));
                 return true;
 
             case "done":
                 checkValidTaskIndex(inputSplit);
                 Task theTask = tasks.get(Integer.parseInt(inputSplit[1]) - 1);
                 theTask.isDone = true;
-                mw.dukeSays(ui.printDone(theTask));
+                mw.dukeSays(Ui.printDone(theTask));
                 storage.save(tasks.saveFormat());
                 return true;
 
@@ -118,7 +118,7 @@ class Parser {
                 Task task = construct(inputSplit);
                 if (task != null) {
                     tasks.add(task);
-                    mw.dukeSays(ui.printCreated(task, tasks));
+                    mw.dukeSays(Ui.printCreated(task, tasks));
                     storage.save(tasks.saveFormat());
                 }
                 return true;
@@ -126,12 +126,12 @@ class Parser {
             case "delete":
                 checkValidTaskIndex(inputSplit);
                 Task removedTask = tasks.remove(Integer.parseInt(inputSplit[1]) - 1);
-                mw.dukeSays(ui.printRemoved(removedTask, tasks));
+                mw.dukeSays(Ui.printRemoved(removedTask, tasks));
                 storage.save(tasks.saveFormat());
                 return true;
 
             case "formats":
-                mw.dukeSays(ui.printFormatHelp());
+                mw.dukeSays(Ui.printFormatHelp());
                 return true;
 
             case "find":
@@ -140,7 +140,7 @@ class Parser {
                 for (String s : inputSplit) {
                     sb.append(s).append(" ");
                 }
-                mw.dukeSays(ui.printFind(sb.substring(5).trim(), tasks));
+                mw.dukeSays(Ui.printFind(sb.substring(5).trim(), tasks));
                 return true;
 
             default:

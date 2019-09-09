@@ -2,7 +2,6 @@ public class Duke {
     private static final String saveLoadFilePath = "listSaveData.txt";
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private Parser parser;
     private MainWindow mw;
 
@@ -13,7 +12,7 @@ public class Duke {
      * @param input
      */
     void getResponse(String input) {
-        if (!parser.parse(input, tasks, ui, storage, mw)) {
+        if (!parser.parse(input, tasks, storage, mw)) {
             mw.closeSequence();
         }
     }
@@ -34,9 +33,9 @@ public class Duke {
             mw.dukeSays(e.getMessage());
             tasks = new TaskList();
         }
-        mw.dukeSays(ui.printLogo());
-        mw.dukeSays(ui.printHello());
-        mw.dukeSays(ui.listCommands());
+        mw.dukeSays(Ui.printLogo());
+        mw.dukeSays(Ui.printHello());
+        mw.dukeSays(Ui.listCommands());
     }
 
     public Duke() {
@@ -44,7 +43,6 @@ public class Duke {
     }
 
     public Duke(String filepath) {
-        ui = new Ui();
         parser = new Parser();
         storage = new Storage(filepath);
     }

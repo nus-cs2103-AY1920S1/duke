@@ -24,8 +24,6 @@ public class ViewListCommand extends Command {
 
         assert taskList != null : "A Task List which is going to be displayed should not be a null object.";
 
-        assert taskList != null : "A Task List which is going to be displayed should not be a null object.";
-
         return GuiResponse.getTaskListInString(taskList);
     }
 }

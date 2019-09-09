@@ -8,7 +8,7 @@ public class InvalidArgumentsException extends TaskCreationException {
     }
 
     @Override
-    public String getTaskErrorMessage() {
+    public String getDetails() {
         return "☹ OOPS!!! I'm sorry! Did you mean " + invalidArguments + " :-(";
     }
 }

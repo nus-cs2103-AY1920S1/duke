@@ -1,20 +1,15 @@
 package duke;
 
-import command.ByeCommand;
-import command.Command;
-import command.CommandFactory;
-import command.GreetCommand;
-import error.ConfigurationException;
-import fx.FxMain;
-import javafx.application.Application;
-import task.tasks.Task;
-import task.TaskListController;
-import util.DukeInput;
-import util.DukeMessage;
-import util.DukeOutput;
-import util.DukeStorage;
+import duke.command.Command;
+import duke.command.factory.CommandFactory;
+import duke.task.TasksController;
+import error.ui.UiException;
+import storage.Storage;
+import ui.UiActivity;
+import ui.UiController;
+import ui.input.InputHandler;
+import ui.output.OutputHandler;
 
-import java.util.List;
 import java.util.Optional;
 
 /***
@@ -23,66 +18,73 @@ import java.util.Optional;
  * </p>
  */
 
-public class Duke {
-    private static final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
+public class Duke implements UiActivity {
+    private UiController ui;
+    private CommandFactory factory;
+    private boolean guiEnabled;
 
-    private TaskListController taskListController;
-    private CommandFactory commandFactory;
-    private boolean isConsoleModeEnabled = false;
-
-    private static final DukeMessage GENERIC_ERROR_MESSAGE =
-            new DukeMessage("☹ OOPS!!! Something unexpected happened!!!");
-
-    public void run() {
-        if (isConsoleModeEnabled) {
-
-            new GreetCommand().execute();
-
-            while (true) {
-                String command = DukeInput.readUserInput();
-                Optional<Command> next = commandFactory.parse(command);
-
-                try {
-                    next.ifPresent(Command::execute);
-                } catch (Exception e) {
-                    DukeOutput.printMessage(GENERIC_ERROR_MESSAGE);
-                }
-
-                if (next.isPresent() && next.get() instanceof ByeCommand) {
-                    break;
-                }
-            }
-        } else {
-            Application.launch(FxMain.class);
-        }
-    }
-
-    public void initialize() {
-        DukeMessage initializeMessage = new DukeMessage("Initializing duke.Duke...");
-        DukeOutput.printMessage(initializeMessage);
-
-
-        try {
-            DukeStorage.initializeDukeStorage(CUSTOM_CONFIG_FILE_PATH);
-            List<Task> taskData = DukeStorage.getInstance().getTaskData();
-            taskListController = new TaskListController(taskData);
-            commandFactory = new CommandFactory(taskListController);
-
-
-        } catch (ConfigurationException e) {
-            DukeMessage configErrorMessage = new DukeMessage(e.getMessage());
-            DukeOutput.printMessage(configErrorMessage);
-            return;
-        }
-    }
-
-    public TaskListController getTaskListController() {
-        return taskListController;
-    }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.initialize();
+
+        boolean guiEnabled = true;
+
+        if (args.length > 0) {
+            if (args[0].equals("console")) {
+                guiEnabled = false;
+            } else {
+                System.out.println("Invalid arguments.");
+                System.exit(0);
+            }
+        }
+
+        try {
+            Options options = OptionsFactory.select(guiEnabled, true);
+            duke.configure(options);
+        } catch (Exception e) {
+            System.out.println("FATAL: Unable to configure application.");
+        }
+
         duke.run();
+    }
+
+    public void run() {
+        System.out.println("Program starting...");
+
+        ui.initializeUi();
+    }
+
+    public void configure(Options options) {
+        // Initialize UI component
+        InputHandler input = options.getInput();
+        OutputHandler output = options.getOutput();
+        ui = new UiController(input, output, this);
+
+        // Initialize tasks and storage
+        Storage storage = options.getStorage();
+        TasksController tasks = TasksController.fromStorage(storage, ui);
+
+        // Initialize command factory
+        factory = new CommandFactory(tasks, ui);
+    }
+
+    @Override
+    public void onInputReceived(String input) {
+        try {
+            Optional<? extends Command> command = factory.parse(input);
+
+            if (command.isPresent()) {
+                command.get().execute();
+            }
+
+        } catch (UiException e) {
+            System.out.println("FATAL: Ui stopped working.");
+            stopActivity();
+        }
+    }
+
+    @Override
+    public void stopActivity() {
+        System.exit(0);
     }
 }

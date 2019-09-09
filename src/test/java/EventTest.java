@@ -1,19 +1,18 @@
-import error.UnknownCommandException;
 import error.task.InvalidArgumentsException;
 import error.task.UnknownDateTimeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import task.tasks.Event;
+import duke.task.tasks.Event;
 
 public class EventTest {
     @Test
     void taskMessageTest() {
         try {
             Event tester = new Event("test12345 /at 12/12/2020 0010");
-            String taskMessage = tester.getTaskMessage();
+            String taskMessage = tester.getDisplayMessage();
 
             Assertions.assertEquals("[E][\u2718] test12345 (at: Dec 12 2020, Sat, 00:10AM)", taskMessage,
-                    "Incorrect event task message!");
+                    "Incorrect event duke.task message!");
         } catch (UnknownDateTimeException e) {
             Assertions.fail("UnknownDateTimeException caught!");
         } catch (InvalidArgumentsException e) {
@@ -26,7 +25,7 @@ public class EventTest {
         try {
             Event tester = new Event("test12345 /at 12/12/2020 0010");
             tester.setDone(true);
-            String taskMessage = tester.getTaskMessage();
+            String taskMessage = tester.getDisplayMessage();
 
             Assertions.assertEquals("[E][\u2713] test12345 (at: Dec 12 2020, Sat, 00:10AM)", taskMessage,
                     "Event not set to done!");

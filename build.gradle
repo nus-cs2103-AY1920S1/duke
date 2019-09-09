@@ -42,6 +42,13 @@ test {
     useJUnitPlatform()
 }
 
-run{
+run {
     standardInput = System.in
+}
+
+task runconsole(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = "duke.Duke"
+    standardInput = System.in
+    args("console")
 }

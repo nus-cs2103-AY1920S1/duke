@@ -1,17 +1,16 @@
 import error.task.EmptyTodoException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-import task.tasks.ToDo;
+import duke.task.tasks.ToDo;
 
 public class ToDoTest {
     @Test
     void taskMessageTest() {
         try {
             ToDo tester = new ToDo("test12345");
-            String taskMessage = tester.getTaskMessage();
+            String taskMessage = tester.getDisplayMessage();
 
-            Assertions.assertEquals("[T][\u2718] test12345", taskMessage, "Incorrect todo task message!");
+            Assertions.assertEquals("[T][\u2718] test12345", taskMessage, "Incorrect todo duke.task message!");
         } catch (EmptyTodoException e) {
             Assertions.fail("EmptyTodoException caught!");
         }
@@ -22,7 +21,7 @@ public class ToDoTest {
         try {
             ToDo tester = new ToDo("test12345");
             tester.setDone(true);
-            String taskMessage = tester.getTaskMessage();
+            String taskMessage = tester.getDisplayMessage();
 
             Assertions.assertEquals("[T][\u2713] test12345", taskMessage, "ToDo not set to done!");
         } catch (EmptyTodoException e) {

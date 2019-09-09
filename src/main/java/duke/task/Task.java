@@ -58,7 +58,11 @@ public class Task {
     /**
      * Completes the task
      */
-    public void complete() {
+    public boolean complete() {
+        if (this.completed) {
+            return false;
+        }
         this.completed = true;
+        return true;
     }
 }

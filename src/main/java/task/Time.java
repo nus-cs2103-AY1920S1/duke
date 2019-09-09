@@ -9,6 +9,8 @@ public class Time {
      */
     public Time(int time) {
         this.time = time;
+        assert time >= 0 : "Time cannot be negative";
+        assert time < 2400 : "Time cannot be greater or equal to 2400hrs";
     }
 
     /**

@@ -26,6 +26,7 @@ public class Date {
     public Date(String date) {
         String[] dateComponents = date.split("/");
         this.day = Integer.parseInt(dateComponents[0]);
+        assert day > 0 && day <= 31 : "Day must be within 0 - 31";
         this.month = new Month(Integer.parseInt(dateComponents[1]));
         this.year = Integer.parseInt(dateComponents[2]);
         this.origin = date;

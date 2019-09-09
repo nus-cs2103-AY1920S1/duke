@@ -83,8 +83,8 @@ public class Duke extends Application{
     private void setStageStyle(Stage stage) {
         stage.setTitle("gui.Duke");
         stage.setResizable(false);
-        stage.setMinHeight(595.0);
-        stage.setMinWidth(500.0);
+        stage.setMinHeight(APP_HEIGHT);
+        stage.setMinWidth(APP_WIDTH);
     }
 
     private void setScrollPaneStyle() {
@@ -144,7 +144,7 @@ public class Duke extends Application{
         scene.getStylesheets().add(getClass().getResource("/data/DukeCSS.css").toExternalForm());
         //Step 2. Formatting the window to look as expected
         setStageStyle(stage);
-        mainLayout.setPrefSize(500.0, 595.0);
+        mainLayout.setPrefSize(APP_WIDTH, APP_HEIGHT);
         setScrollPaneStyle();
         setDialogContainerStyle();
         setUserInputStyle(stage);

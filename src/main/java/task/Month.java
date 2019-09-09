@@ -9,6 +9,8 @@ public class Month {
      */
     public Month(int monthNumber) {
         this.monthNumber = monthNumber;
+        assert monthNumber > 0 : "Month must be positive.";
+        assert monthNumber <= 12 : "Month number cannot be more than 12";
     }
 
     /**

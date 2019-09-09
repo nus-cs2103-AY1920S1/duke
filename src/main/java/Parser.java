@@ -109,6 +109,7 @@ class Parser {
                 Task theTask = tasks.get(Integer.parseInt(inputSplit[1]) - 1);
                 theTask.isDone = true;
                 mw.dukeSays(ui.printDone(theTask));
+                storage.save(tasks.saveFormat());
                 return true;
 
             case "todo":
@@ -118,6 +119,7 @@ class Parser {
                 if (task != null) {
                     tasks.add(task);
                     mw.dukeSays(ui.printCreated(task, tasks));
+                    storage.save(tasks.saveFormat());
                 }
                 return true;
 
@@ -125,6 +127,7 @@ class Parser {
                 checkValidTaskIndex(inputSplit);
                 Task removedTask = tasks.remove(Integer.parseInt(inputSplit[1]) - 1);
                 mw.dukeSays(ui.printRemoved(removedTask, tasks));
+                storage.save(tasks.saveFormat());
                 return true;
 
             case "formats":

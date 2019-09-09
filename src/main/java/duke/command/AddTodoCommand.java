@@ -30,7 +30,8 @@ public class AddTodoCommand extends AddTaskCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addToList(TaskList.TaskType.TODO, getDescription(), getDeadline());
+            Task newTask = tasks.newTask(TaskList.TaskType.TODO, getDescription(), getDeadline());
+            tasks.add(newTask);
         } catch (NoSuchElementException e) {
             // user imput after task type is blank
             System.out.println("Oops! You did not enter a description!");

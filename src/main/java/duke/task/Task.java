@@ -3,7 +3,7 @@ package duke.task;
 public class Task {
     private String description;
     private Boolean isDone;
-    protected String type;
+    String type;
 
     public Task(String description) {
         // todo: modify constructor to create new task from String
@@ -18,7 +18,11 @@ public class Task {
         return type + status + this.description;
     }
 
-    public String getStatusIcon() {
+    String getDescription() {
+        return this.description;
+    }
+
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 

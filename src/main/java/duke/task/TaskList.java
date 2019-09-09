@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-//import com.google.gson.Gson;
 
 public class TaskList {
 
@@ -12,7 +11,7 @@ public class TaskList {
     }
 
     public TaskList() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
     public enum TaskType {
@@ -24,16 +23,15 @@ public class TaskList {
     // ideal implementation of addToList
     public void add(Task task) {
         tasks.add(task);
+
+        System.out.println("Okay! I've added: " + task.getDescription()
+            + ". Use list to see all your tasks!");
     }
 
-    // temporary until I figure out how to abstract out task creation from adding to list
-    public void addToList(TaskType taskType, String description, String deadline)
+    public Task newTask(TaskType taskType, String description, String deadline)
             throws IllegalArgumentException {
         Task newTask = null; // task to be added
 
-        // based on task type, create corresponding subclass object
-        // todo: how to call subclass constructor from parent class?
-        // want to move this to the Task class
         switch (taskType) {
         case DEADLINE:
             newTask = new Deadline(description, deadline);
@@ -50,10 +48,7 @@ public class TaskList {
             break;
         }
 
-        // add newTask to taskList
-        tasks.add(newTask);
-        System.out.println("Okay! I've added: " + description
-                + ". Use list to see all your tasks!");
+        return newTask;
     }
 
     public void printList() {

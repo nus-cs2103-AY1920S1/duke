@@ -33,7 +33,8 @@ public class AddDeadlineCommand extends AddTaskCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            tasks.addToList(TaskList.TaskType.DEADLINE, getDescription(), getDeadline());
+            Task newTask = tasks.newTask(TaskList.TaskType.DEADLINE, getDescription(), getDeadline());
+            tasks.add(newTask);
         } catch (NoSuchElementException e) {
             // user input after task type is blank
             System.out.println("Oops! You did not enter a description or deadline!");

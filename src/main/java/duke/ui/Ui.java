@@ -35,7 +35,7 @@ public class Ui {
         case Add:
             return showAddedTask(result.getTasks()[0], result.getTaskListSize());
         case Delete:
-            return showRemovedTask(result.getTasks()[0], result.getTaskListSize());
+            return showRemovedTask(result.getTasks(), result.getTaskListSize());
         case Find:
             return showMatchingTasks(result.getTasks());
         case List:
@@ -82,15 +82,18 @@ public class Ui {
     }
 
     /**
-     * Returns a string representation of a message that the task has been removed from the list.
-     * @param task the task that has been removed.
+     * Returns a string representation of a message that tasks has been removed from the list.
+     * @param tasks tasks that has been removed.
      * @param taskListSize the number of tasks in the task list.
      * @return a string representation of a message that the task has been removed from the list.
      */
-    public String showRemovedTask(Task task, int taskListSize) {
-        return composeBlock("Noted. I've removed this task:", "  " + task,
-                String.format("Now you have %d task%s in the list.",
-                        taskListSize, taskListSize > 1 ? "s" : ""));
+    public String showRemovedTask(Task[] tasks, int taskListSize) {
+        String[] text = new String[tasks.length + 1];
+        text[0] = "Noted. I've removed the following tasks:";
+        for (int i = 0; i < tasks.length; i++) {
+            text[i + 1] = (i + 1) + "." + tasks[i];
+        }
+        return composeBlock(text);
     }
 
     /**

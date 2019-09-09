@@ -16,6 +16,7 @@ import duke.exception.IllegalIndexOfTaskException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  * A class representing a parser.
@@ -61,10 +62,7 @@ public class Parser {
             }
             return new DoneCommand(Integer.parseInt(description));
         case DeleteCommand.COMMAND_WORD:
-            if (description.isEmpty()) {
-                throw new IllegalIndexOfTaskException("Please provide a valid index.");
-            }
-            return new DeleteCommand(Integer.parseInt(description));
+            return parseDeleteCommand(description);
         case ToDoCommand.COMMAND_WORD:
             return new ToDoCommand(description);
         case FindCommand.COMMAND_WORD:
@@ -85,7 +83,7 @@ public class Parser {
             throw new IllegalDescriptionException("The format of deadline description is wrong.");
         }
         assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
-                        "String length: " + description.length() + " seperator index: " + indexOfTime;
+                        "String length: " + description.length() + " separator index: " + indexOfTime;
         String taskDescription = description.substring(0, indexOfTime).strip();
         String dateTime = description.substring(indexOfTime + 3).strip();
 
@@ -98,7 +96,7 @@ public class Parser {
             throw new IllegalDescriptionException("The format of deadline description is wrong.");
         }
         assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
-                        "String length: " + description.length() + " seperator index: " + indexOfTime;
+                        "String length: " + description.length() + " separator index: " + indexOfTime;
         String taskDescription = description.substring(0, indexOfTime).strip();
         String dateTime = description.substring(indexOfTime + 3).strip();
 
@@ -139,5 +137,21 @@ public class Parser {
         LocalDate date = parseDate(dateString);
         LocalTime time = parseTime(timeString);
         return LocalDateTime.of(date, time);
+    }
+
+    private DeleteCommand parseDeleteCommand(String description) throws IllegalDescriptionException {
+        ArrayList<Integer> indices = new ArrayList<>();
+        while(!description.isEmpty()) {
+            try {
+                indices.add(Integer.parseInt(getFirstWord(description)));
+            } catch (NumberFormatException e) {
+                //Ignore words that is not an integer
+            }
+            description = removeFirstWord(description);
+        }
+        if (indices.isEmpty()) {
+            throw new IllegalDescriptionException("Please provide at least 1 valid index");
+        }
+        return new DeleteCommand(indices);
     }
 }

@@ -18,19 +18,19 @@ public class Task {
      */
     public String markAsDone() {
         isDone = true;
-        String reply = "Nice! I've marked this task as done:\n\t" +  " [\u2713] " + this.description;
+        String reply = "Nice! I've marked this task as done:\n\t" +  " [\u2713] " + description;
         return reply;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
-    public String toFile() {
+    public String writeToFile() {
         return "";
     }
 
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + description;
     }
 }

@@ -16,11 +16,11 @@ public class Event extends Task {
     public Event(String description, String strAt) {
         super(description);
         this.strAt = strAt;
-        this.at = new DateParser().parseDate(strAt);
+        this.at = new DateParser().understandDate(strAt);
     }
 
     @Override
-    public String toFile() {
+    public String writeToFile() {
         return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strAt + "\n";
     }
 

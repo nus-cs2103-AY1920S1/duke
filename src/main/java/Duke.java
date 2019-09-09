@@ -1,3 +1,7 @@
+import command.*;
+import main.*;
+import task.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,13 +18,12 @@ public class Duke {
             ArrayList<Task> list = storage.readFromFile();
             this.taskList = new TaskList(list);
 
-            Parser parser = new Parser();
         }   catch (FileNotFoundException fE) {
             System.err.println(fE);
         }
     }
 
-    private void run() throws FileNotFoundException, IOException {
+    private void run() throws IOException {
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
 

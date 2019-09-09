@@ -37,12 +37,12 @@ public class TaskList extends ArrayList<Task> {
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
                     break;
                 case "E":
-                    assert parts[2].equals("") == false: "Error in file record.";
+                    assert parts[2].equals("") == false: "Error in file recording.";
                     add(new Event(parts[2], parts[3]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
                     break;
                 case "D":
-                    assert parts[2].equals("") == false: "Error in file record.";
+                    assert parts[2].equals("") == false: "Error in file recording.";
                     add(new Deadline(parts[2], parts[3]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
                     break;

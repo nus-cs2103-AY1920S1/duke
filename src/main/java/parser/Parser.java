@@ -40,18 +40,18 @@ public class Parser {
         case "todo":
             String description = userInput.trim().substring(separatedInputs[0].length()).trim();
             if (description.isEmpty()) {
-                throw new DukeException(DukeException.Error_Type.EMPTY_TODO);
+                throw new DukeException(DukeException.ErrorType.EMPTY_TODO);
             }
             return new ToDoCommand(description);
         case "deadline":
             if (!userInput.contains("/by")) {
-                throw new DukeException(DukeException.Error_Type.EMPTY_DEADLINE_DATE);
+                throw new DukeException(DukeException.ErrorType.EMPTY_DEADLINE_DATE);
             }
             String[] DeadlineDetails = getDetails(userInput, "/by", separatedInputs[0].length());
             return new DeadlineCommand(DeadlineDetails);
         case "event":
             if (!userInput.contains("/at")) {
-                throw new DukeException(DukeException.Error_Type.EMPTY_EVENT_DATE);
+                throw new DukeException(DukeException.ErrorType.EMPTY_EVENT_DATE);
             }
             String[] EventDetails = getDetails(userInput, "/at", separatedInputs[0].length());
             return new EventCommand(EventDetails);
@@ -59,7 +59,7 @@ public class Parser {
             String keyword = userInput.trim().substring(separatedInputs[0].length()).trim();
             return new FindCommand(keyword);
         default:
-            throw new DukeException(DukeException.Error_Type.GIBBERISH);
+            throw new DukeException(DukeException.ErrorType.GIBBERISH);
         }
     }
 
@@ -72,11 +72,11 @@ public class Parser {
      */
     private int checkInput(String[] separatedInputs) throws DukeException {
         if (separatedInputs.length != 2) {
-            throw new DukeException(DukeException.Error_Type.INVALID_NUMBER);
+            throw new DukeException(DukeException.ErrorType.INVALID_NUMBER);
         }
         Scanner s = new Scanner(separatedInputs[1]);
         if (!s.hasNextInt()) {
-            throw new DukeException(DukeException.Error_Type.INVALID_NUMBER);
+            throw new DukeException(DukeException.ErrorType.INVALID_NUMBER);
         }
         return s.nextInt() - 1;
     }

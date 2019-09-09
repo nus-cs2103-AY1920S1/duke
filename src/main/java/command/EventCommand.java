@@ -40,7 +40,7 @@ public class EventCommand extends Command {
             Date at = converter.convertStringToDate(details[1].trim());
             tasks.getTasks().add(new Event(details[0].trim(), at));
             ui.showEventCommand(tasks);
-        } catch (ParseException e) {
+        } catch (ParseException | IndexOutOfBoundsException e) {
             ui.showLoadingError("Please enter a valid date according to dd/MM/yyyy HHmm pattern."
                     + " Time is in 24-hour format. E.g 11:30pm is 2330.");
         }

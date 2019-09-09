@@ -35,6 +35,7 @@ public class TaskList {
      * Adds an item top the list.
      *
      * @param task Task
+     * @throws InvalidTimeException if the time given is already used
      */
     public void add(Task task) throws DukeException {
         Optional<Date> taskTime = task.getTime();

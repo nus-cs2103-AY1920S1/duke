@@ -107,4 +107,8 @@ public class TasksView {
         String output = builder.build();
         ui.displayOutput(output);
     }
+
+    public void displayError(Exception e) {
+        ui.displayOutput(e.getMessage());
+    }
 }

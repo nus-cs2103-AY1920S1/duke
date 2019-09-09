@@ -1,9 +1,9 @@
 package duke.task;
 
 import duke.task.tasks.Task;
+import error.StorageException;
 import storage.Storage;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
  */
 public class TasksController {
     private Storage storage;
-    private List<Task> tasks;
     private TasksView view;
 
     /***
@@ -26,12 +25,6 @@ public class TasksController {
     private TasksController(Storage storage, TasksView view) {
         this.storage = storage;
         this.view = view;
-
-        if (tasks != null) {
-            this.tasks = storage.getTasks();
-        } else {
-            tasks = new ArrayList<>();
-        }
     }
 
     public static TasksController fromStorage(Storage storage, TasksView view) {
@@ -44,8 +37,13 @@ public class TasksController {
      * </p>
      * @return list of tasks.
      */
-    public List<Task> getTasks() {
-        return tasks;
+    public List<Task> getTasks() throws StorageException {
+        try {
+            return storage.getTasks();
+        } catch (StorageException e) {
+            view.displayError(e);
+            throw e;
+        }
     }
 
     /***
@@ -55,8 +53,13 @@ public class TasksController {
      * @param task duke.task to be added.
      */
     public void addTask(Task task) {
-        tasks.add(task);
-        view.displayNewTask(task, tasks.size());
+        try {
+            List<Task> tasks = storage.getTasks();
+            tasks.add(task);
+            storage.writeTasks(tasks);
+        } catch (StorageException e) {
+            view.displayError(e);
+        }
     }
 
     /***
@@ -66,8 +69,17 @@ public class TasksController {
      * @param index index of duke.task to be set to done.
      */
     public void setTaskToDone(int index) {
-        tasks.get(index).setDone(true);
-        view.displayTaskDone(tasks.get(index));
+        try {
+            List<Task> tasks = storage.getTasks();
+            tasks.get(index).setDone(true);
+
+            view.displayTaskDone(tasks.get(index));
+
+            // write changes to storage file
+            storage.writeTasks(tasks);
+        } catch (StorageException e) {
+            view.displayError(e);
+        }
     }
 
     /***
@@ -77,9 +89,11 @@ public class TasksController {
      */
     public void displayAllTasks() {
         try {
+            List<Task> tasks = storage.getTasks();
             view.displayAllTasks(tasks);
-        } catch(Exception e) {
-            e.printStackTrace();
+
+        } catch (StorageException e) {
+            view.displayError(e);
         }
     }
 
@@ -90,10 +104,17 @@ public class TasksController {
      * @param index index of duke.task to be deleted.
      */
     public void deleteTask(int index) {
-        Task deletedTask = tasks.get(index);
-        tasks.remove(index);
-        view.displayTaskDeleted(deletedTask, tasks.size());
+        try {
+            List<Task> tasks = storage.getTasks();
 
+            Task deleted = tasks.get(index);
+            tasks.remove(index);
+            view.displayTaskDeleted(deleted, tasks.size());
+
+            storage.writeTasks(tasks);
+        } catch (StorageException | IndexOutOfBoundsException e) {
+            view.displayError(e);
+        }
     }
 
     /***
@@ -103,9 +124,17 @@ public class TasksController {
      * @param parameter substring to be searched.
      */
     public void findTasks(String parameter) {
-        List<Task> matchingTasks = tasks.stream()
-                .filter(task -> task.getDescription().contains(parameter))
-                .collect(Collectors.toList());
-        view.displaySearchResults(matchingTasks);
+        try {
+            List<Task> tasks = storage.getTasks();
+
+            List<Task> matchingTasks = tasks.stream()
+                    .filter(task -> task.getDescription().contains(parameter))
+                    .collect(Collectors.toList());
+
+            view.displaySearchResults(matchingTasks);
+
+        } catch (StorageException e) {
+            view.displayError(e);
+        }
     }
 }

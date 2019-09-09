@@ -32,33 +32,33 @@ public class ByeCommand implements Command {
      */
     @Override
     public void execute() {
-        try {
-            DukeStorage.getInstance().writeTaskData(tasksController.getTasks());
-        } catch (ConfigurationException e) {
-            OutputBuilder fileWriteErrorMessage =
-                    new OutputBuilder("☹ OOPS!!! Unable to save duke.task data. Close duke.Duke anyway? (Y/N)");
-            DukeOutput.printMessage(fileWriteErrorMessage);
-
-            boolean forceClosedSelectionMade = false;
-
-            while (!forceClosedSelectionMade) {
-                String forceCloseSelection = DukeInput.readUserInput();
-
-                switch (forceCloseSelection) {
-                case "Y":
-                    sayGoodbye();
-                    forceClosedSelectionMade = true;
-                case "N":
-                    forceClosedSelectionMade = true;
-                default:
-                    OutputBuilder invalidSelectionMessage = new OutputBuilder("☹ OOPS!!! Please select Y/N");
-                    DukeOutput.printMessage(invalidSelectionMessage);
-                }
-            }
-        }
-
-        sayGoodbye();
-        DukeInput.close();
+//        try {
+//            DukeStorage.getInstance().writeTaskData(tasksController.getTasks());
+//        } catch (ConfigurationException e) {
+//            OutputBuilder fileWriteErrorMessage =
+//                    new OutputBuilder("☹ OOPS!!! Unable to save duke.task data. Close duke.Duke anyway? (Y/N)");
+//            DukeOutput.printMessage(fileWriteErrorMessage);
+//
+//            boolean forceClosedSelectionMade = false;
+//
+//            while (!forceClosedSelectionMade) {
+//                String forceCloseSelection = DukeInput.readUserInput();
+//
+//                switch (forceCloseSelection) {
+//                case "Y":
+//                    sayGoodbye();
+//                    forceClosedSelectionMade = true;
+//                case "N":
+//                    forceClosedSelectionMade = true;
+//                default:
+//                    OutputBuilder invalidSelectionMessage = new OutputBuilder("☹ OOPS!!! Please select Y/N");
+//                    DukeOutput.printMessage(invalidSelectionMessage);
+//                }
+//            }
+//        }
+//
+//        sayGoodbye();
+//        DukeInput.close();
     }
 
     private void sayGoodbye() {

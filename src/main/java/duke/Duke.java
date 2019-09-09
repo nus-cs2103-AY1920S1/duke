@@ -28,10 +28,26 @@ public class Duke implements UiActivity {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        Options options = OptionsFactory.select(false, false);
+        Options options = OptionsFactory.select(false, true);
 
         duke.configure(options);
         duke.run();
+    }
+
+    public void run() {
+        if (!isConfigured) {
+            System.out.print("Fatal error: Unable to configure program!");
+        } else {
+            startApplication();
+        }
+    }
+
+    private void startApplication() {
+        System.out.println("Program starting...");
+
+        printGreeting();
+        ui.start();
+        exit();
     }
 
     public void configure(Options options) {
@@ -52,22 +68,6 @@ public class Duke implements UiActivity {
         isConfigured = true;
     }
 
-    public void run() {
-        if (!isConfigured) {
-            System.out.print("Fatal error: Unable to configure program!");
-        } else {
-            startApplication();
-        }
-    }
-
-    private void startApplication() {
-        System.out.println("Program starting...");
-
-        printGreeting();
-        ui.start();
-        exit();
-    }
-
     private void printGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -80,7 +80,6 @@ public class Duke implements UiActivity {
                         + "What can I do for you?";
 
         ui.displayOutput(greeting);
-
     }
 
     private void exit() {

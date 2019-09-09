@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 //import com.google.gson.Gson;
 
 public class TaskList {
@@ -13,7 +12,7 @@ public class TaskList {
     }
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        tasks = new ArrayList<Task>();
     }
 
     public enum TaskType {
@@ -24,7 +23,7 @@ public class TaskList {
 
     // ideal implementation of addToList
     public void add(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     // temporary until I figure out how to abstract out task creation from adding to list
@@ -52,23 +51,23 @@ public class TaskList {
         }
 
         // add newTask to taskList
-        this.tasks.add(newTask);
+        tasks.add(newTask);
         System.out.println("Okay! I've added: " + description
                 + ". Use list to see all your tasks!");
     }
 
     public void printList() {
         int i = 1;
-        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); i++) {
-            String s = iterator.next().toString();
+        for (Task task : tasks) {
+            String s = task.toString();
             System.out.println(i + ". " + s);
         }
     }
 
 //    public String writeToFile() {
 //        Task task;
-//        for (Iterator<Task> iterator = this.tasks.iterator(); iterator.hasNext(); task = iterator.next()) {
-//            String s = iterator.next().printToFile();
+//        for (Task task : tasks) {
+//            String s = task.printToFile();
 //            return s;
 //        }
 //    }
@@ -85,12 +84,12 @@ public class TaskList {
     }
 
     public boolean isEmpty() {
-        return this.tasks.isEmpty();
+        return tasks.isEmpty();
     }
 
     public TaskList findTasks(String keyword) {
         TaskList matchingTasks = new TaskList();
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
                 matchingTasks.add(task);
             }

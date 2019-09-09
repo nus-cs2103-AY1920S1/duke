@@ -28,15 +28,20 @@ public class Storage {
      * @throws DukeException If file cannot be found.
      */
     public ArrayList<Task> load() throws DukeException {
-        assert this.getFilePath() != "": "File path should not be empty!";
+        assert this.getFilePath() != "" : "File path should not be empty!";
 
         LoadFile lf = new LoadFile(this.getFilePath());
         ArrayList<Task> taskArr = lf.loadTaskFromFile();
         return taskArr;
     }
 
-    public void save(TaskList tasks) throws DukeException {
-        assert this.getFilePath() != "": "File path should not be empty!";
+    /**
+     * Saves the tasks into a text file format in the file path allocated.
+     *
+     * @param tasks List of tasks.
+     */
+    public void save(TaskList tasks) {
+        assert this.getFilePath() != "" : "File path should not be empty!";
 
         WriteFile wf = new WriteFile(this.getFilePath());
         wf.writeTaskToFile(tasks.getTaskArr());

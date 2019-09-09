@@ -24,11 +24,11 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.getTaskCount(); i++) {
             Task task = tasks.getTask(i);
             String desc = task.getDescription();
-            if (desc.contains(word)) {
-                this.tasks.addTask(tasks.getTask(i));
-            } else {
+            if (!desc.contains(word)) {
                 continue;
             }
+
+            this.tasks.addTask(tasks.getTask(i));
         }
     }
 

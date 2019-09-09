@@ -3,6 +3,7 @@ import java.util.ArrayList;
 /**
  * Manages users' task.
  */
+
 public class TaskList {
 
     private ArrayList<Task> taskArr;
@@ -34,11 +35,10 @@ public class TaskList {
      */
     public void markTaskDone(int index) throws DukeException {
         Task task = this.getTaskArr().get(index);
-        if (!task.isDone()) {
-            this.getTaskArr().get(index).markAsDone();
-        } else {
+        if (task.isDone()) {
             throw new DukeException("☹ The task is already marked done.");
         }
+        this.getTaskArr().get(index).markAsDone();
     }
 
     public Task getTask(int index) {

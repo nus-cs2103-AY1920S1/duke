@@ -31,12 +31,11 @@ public class LoadFile {
      * @throws DukeException If file cannot be found.
      */
     public ArrayList<Task> loadTaskFromFile() throws DukeException {
-        ArrayList<Task> taskArr = new ArrayList<>();
         try {
             File savedFile = new File(this.getFilePath());
             Scanner sc = new Scanner(new FileReader(savedFile));
 
-            taskArr = changeTextToTask(taskArr, sc);
+            ArrayList<Task> taskArr = changeTextToTask(new ArrayList<Task>(), sc);
             return taskArr;
         } catch (IOException err) {
             throw new DukeException("Unable to load file.");

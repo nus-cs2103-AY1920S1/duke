@@ -30,14 +30,13 @@ public class DoneCommand extends Command {
      * @throws DukeException If index is not within the list.
      */
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        //check if the index is out of bound
-        if (this.getIndex() < tasks.getTaskCount()) {
-            Task doneTask = tasks.getTask(this.getIndex());
-            tasks.markTaskDone(this.getIndex());
-            this.doneTask = doneTask;
-        } else {
+        if (this.getIndex() >= tasks.getTaskCount()) {
             throw new DukeException("☹ Index is not within the list. Please enter a index within the list.");
         }
+
+        Task doneTask = tasks.getTask(this.getIndex());
+        tasks.markTaskDone(this.getIndex());
+        this.doneTask = doneTask;
     }
 
     public boolean isExit() {

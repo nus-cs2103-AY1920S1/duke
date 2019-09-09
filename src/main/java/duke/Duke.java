@@ -17,6 +17,11 @@ public class Duke {
     public Duke() {
     }
 
+    /**
+     * Duke with file path to start.
+     *
+     * @param filePath The txt file location.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

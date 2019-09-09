@@ -9,12 +9,25 @@ public class Deadline extends Task {
 
     private String by;
 
+    /**
+     * A task which has a deadline.
+     *
+     * @param description The description.
+     * @param by          The time and date.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
         this.pattern = LocalDateTime.parse(by.trim(), dateTimeFormatter);
     }
 
+    /**
+     * A task which has a deadline.
+     *
+     * @param description The description.
+     * @param by          The time and date.
+     * @param isDone      The status of task.
+     */
     public Deadline(String description, String by, String isDone) {
         super(description, isDone);
         this.by = by;

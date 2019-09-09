@@ -20,7 +20,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
-
+    /**
+     * A task.
+     *
+     * @param description The description.
+     * @param done        The status of the task.
+     */
     public Task(String description, String done) {
         this.description = perfectDescription(description);
         if (done.trim().equals("1")) {

@@ -1,4 +1,5 @@
 package duke.ui;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -47,6 +48,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(Ui.getWelcomeMessage(), dukeImage)
         );
     }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

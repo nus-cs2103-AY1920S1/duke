@@ -4,20 +4,20 @@ package exception;
  * Represents all exception unique to Duke.
  */
 public class DukeException extends Exception {
-    protected Error_Type type;
+    protected ErrorType type;
 
     /**
      * Initializes DukeException with error type.
      * @param input the error type
      */
-    public DukeException(Error_Type input) {
+    public DukeException(ErrorType input) {
         this.type = input;
     }
 
     /**
      * Documents user input error type.
      */
-    public enum Error_Type {
+    public enum ErrorType {
         INVALID_NUMBER, EMPTY_TODO, EMPTY_DEADLINE_DATE, EMPTY_EVENT_DATE, GIBBERISH
     }
 

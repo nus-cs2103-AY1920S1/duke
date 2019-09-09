@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -54,8 +55,8 @@ public class Storage {
                 try {
                     StringDateConverter converter = new StringDateConverter();
                     date = converter.convertLongStringToDate(outputs[3]);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                } catch (ParseException e) {
+                    System.out.println("Please enter a valid date.");
                 }
             }
             switch (outputs[0].trim()) {

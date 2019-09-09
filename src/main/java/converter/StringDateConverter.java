@@ -1,5 +1,6 @@
 package converter;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,9 +13,9 @@ public class StringDateConverter {
      *
      * @param strDate in the format "dd/MM/yyy HHmm"
      * @return date object
-     * @throws Exception if the date is unparesable
+     * @throws ParseException if the date is unparesable
      */
-    public Date convertStringToDate(String strDate) throws Exception {
+    public Date convertStringToDate(String strDate) throws ParseException {
         SimpleDateFormat dateWithTime = new SimpleDateFormat("dd/MM/yyy HHmm");
         Date date = dateWithTime.parse(strDate);
         return date;
@@ -25,9 +26,9 @@ public class StringDateConverter {
      *
      * @param strDate in the format "EEE MMM dd HH:mm:ss zzz yyyy"
      * @return date object
-     * @throws Exception if the date is unparesable
+     * @throws ParseException if the date is unparesable
      */
-    public Date convertLongStringToDate(String strDate) throws Exception {
+    public Date convertLongStringToDate(String strDate) throws ParseException {
         SimpleDateFormat dateWithTime = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date date = dateWithTime.parse(strDate);
         return date;

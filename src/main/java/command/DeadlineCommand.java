@@ -6,6 +6,7 @@ import task.Deadline;
 import task.TaskList;
 import ui.Ui;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -39,8 +40,8 @@ public class DeadlineCommand extends Command {
             Date by = converter.convertStringToDate(arguments[1].trim());
             tasks.getTasks().add(new Deadline(arguments[0], by));
             ui.showDeadlineCommand(tasks);
-        } catch (Exception e) {
-            ui.showLoadingError(e.getMessage());
+        } catch (ParseException e) {
+            ui.showLoadingError("Please enter a valid date.");
         }
     }
 }

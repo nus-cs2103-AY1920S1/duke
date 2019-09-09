@@ -3,13 +3,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 /**
  * Represents the class used to read data from the file and process it.
  */
 public class Parser {
-    Scanner scan = new Scanner(System.in);
+
     public Parser() {
 
     }
@@ -56,48 +55,47 @@ public class Parser {
     /**
      * Method to read and process user input.
      *
-     * @param ui the user interface interacting with the user
-     * @param list the list where tasks are stored
-     * @param storage the object responsible for writing data to file
-     * @throws IOException if file not found or other input output exceptions
-     * @throws ParseException if data in event class not according to format
+     * @param ui      the UI of the Duke object that interacts with the user
+     * @param list    the task list of the Duke object which stores the tasks
+     * @param storage the object responsible for reading file data and saving data to file when user exits
+     * @throws IOException    if File not found or other input output exceptions
+     * @throws ParseException if thee data for event type of tasks not in the specified format
      */
-    public void readUserCommand(Ui ui, TaskList list, Storage storage) throws IOException, ParseException {
-        while(ui.shouldContinue()){
-            String command = scan.next();
-            if (command.equals("bye")) {
-                ui.Exit();
-                String s = "";
-                for (Task t : list.taskList) {
-                    s = s + t.toString() + "\n";
-                }
-                storage.writeFile(s);
-            } else if (command.equals("list")) {
-                list.getList();
-            } else if (command.equals("done")) {
-                int num = scan.nextInt();
-                list.markAsDone(num - 1);
-            } else if (command.equals("event")) {
-                String b = scan.nextLine();
-                list.readEvent(b);
-            } else if (command.equals("deadline")) {
-                String det = scan.nextLine();
-                list.readDeadline(det);
-            } else if (command.equals("todo")) {
-                String todoDetails = scan.nextLine();
-                list.readTodo(todoDetails);
-            } else if (command.equals("delete")) {
-                int number = scan.nextInt();
-                String empty = scan.nextLine();
-                list.deleteTask(number);
-            } else if (command.equals("find")) {
-                String required = scan.next();
-                String empty = scan.nextLine();
-                list.find(required);
-            } else {
-                System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
-                String empty = scan.nextLine();
+    public String readUserCommand(String command, Ui ui, TaskList list, Storage storage) throws IOException, ParseException {
+        String output = "";
+        if (command.equals("bye")) {
+            String writeDataToFile = "";
+            for (Task t : list.taskList) {
+                writeDataToFile = writeDataToFile + t.toString() + "\n";
             }
+            storage.writeFile(writeDataToFile);
+            output = ui.exit();
+        } else if (command.equals("list")) {
+            output = list.getList();
+        } else if (command.startsWith("done")) {
+            int numberToBeMarked = Integer.parseInt(command.substring(5));
+            output = list.markAsDone(numberToBeMarked - 1);
+        } else if (command.startsWith("event")) {
+            String eventGiven = command.substring(6);
+            output = list.readEvent(eventGiven);
+        } else if (command.startsWith("deadline")) {
+            String deadlineGiven = command.substring(9);
+            output = list.readDeadline(deadlineGiven);
+        } else if (command.startsWith("todo")) {
+            String todoDetails = command.substring(5);
+            output = list.readTodo(todoDetails);
+        } else if (command.startsWith("delete")) {
+            int numberToBeDeleted = Integer.parseInt(command.substring(7));
+            output = list.deleteTask(numberToBeDeleted);
+        } else if (command.startsWith("find")) {
+            String requiredWord = command.substring(5);
+            output = list.find(requiredWord);
+        } else {
+            output = (" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        return output;
     }
 }
+
+
+

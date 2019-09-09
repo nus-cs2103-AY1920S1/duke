@@ -43,6 +43,7 @@ public class Storage {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
             String currLine;
             while ((currLine = bufferedReader.readLine()) != null) {
+                assert (currLine.contains("|")) : "No | detected in line";
                 String[] formattedText = currLine.split("\\|");
                 Task t;
                 switch (formattedText[0]) {

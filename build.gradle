@@ -59,7 +59,7 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
-task textUiText(type: Exec) {
+task textUiTest(type: Exec) {
     description = 'Runs text UI tests'
     group = 'verification'
     shouldRunAfter test
@@ -68,4 +68,4 @@ task textUiText(type: Exec) {
     commandLine 'bash', '-c', './runtest.sh'
 }
 
-check.dependsOn textUiText
+test.dependsOn textUiTest

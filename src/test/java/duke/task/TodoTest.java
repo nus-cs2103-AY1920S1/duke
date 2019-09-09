@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TodoTest {
     @Test
     public void testStringConversion() {
-        assertEquals("[T][✘] write code", new Todo("write code").toString());
+        assertEquals("[T][X] write code", new Todo("write code").toString());
     }
 
     @Test

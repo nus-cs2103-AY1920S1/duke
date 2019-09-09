@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class Parser {
 
-    protected static boolean hasTerminated;
+    private static boolean hasTerminated;
 
     /**
      * Parses user input based on different type of command.
@@ -14,129 +14,38 @@ public class Parser {
      *
      * @param taskList TaskList of the current file.
      * @param ui Ui of the project.
-     * @param storage Storage of the project.
      * @param userInput The user input to be parsed.
      * @throws DukeException If user input is not in the format
      */
-    public static void parse(
-        TaskList taskList, Ui ui, Storage storage, String userInput) throws DukeException {
+    public static void parse(TaskList taskList, Ui ui, String userInput) throws DukeException {
         String inputType = userInput.split(" ")[0].trim();
-        if (inputType.equals("todo")) {
-            try {
-                String description = userInput.substring(4).trim();
-                if (description.isBlank()) {
-                    throw new IllegalArgumentException();
-                }
-                Task newTodo = new Todo(description, false);
-                taskList.addTask(newTodo);
-                ui.printAddTask(taskList, newTodo);
-            } catch (IllegalArgumentException e) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: todo [task description]");
-            }
-        } else if (inputType.equals("list")) {
-            try {
-                userInput = userInput.substring(4);
-                if (!userInput.isBlank()) {
-                    throw new Exception();
-                }
-                ui.printTaskList(taskList);
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: list");
-            }
-        } else if (inputType.equals("deadline")) {
-            try {
-                userInput = userInput.substring(8).trim();
-                String[] statement = userInput.split("/by");
-                String taskDescription = statement[0].trim();
-                String taskBy = statement[1].trim();
 
-                if (taskDescription.isBlank() || taskBy.isBlank()) {
-                    throw new IllegalArgumentException();
-                }
-
-                Task newDeadline = new Deadline(taskDescription, false, dateTimeConverter(taskBy));
-                taskList.addTask(newDeadline);
-                ui.printAddTask(taskList, newDeadline);
-
-            } catch (IllegalArgumentException e) {
-                throw new DukeException("OOPS!!! Task description/Task by can not be empty");
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Format is wrong. "
-                    + "Use: deadline [task description] /by [dd/mm/yyyy HHmm]");
-            }
-        } else if (inputType.equals("event")) {
-            try {
-                userInput = userInput.substring(5).trim();
-                String[] statement = userInput.split("/at");
-                String taskDescription = statement[0].trim();
-                String taskAt = statement[1].trim();
-
-                if (taskDescription.isBlank() || taskAt.isBlank()) {
-                    throw new IllegalArgumentException();
-                }
-
-
-                Task newEvent = new Event(taskDescription, false, dateTimeConverter(taskAt));
-                taskList.addTask(newEvent);
-                ui.printAddTask(taskList, newEvent);
-
-            } catch (IllegalArgumentException e) {
-                throw new DukeException("OOPS!!! Task description/Task at can not be empty");
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Format is wrong. Use:event [task description] /at [dd/mm/yyyy HHmm]");
-            }
-        } else if (inputType.equals("done")) {
-            try {
-                userInput = userInput.substring(4).trim();
-                int taskNumber = Integer.parseInt(userInput.trim()) - 1;
-                taskList.getListOfTasks().get(taskNumber).markAsDone();
-                ui.printDoneTask(taskList, taskNumber);
-            } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The task number you specified is not in the list.");
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: done [task number]");
-            }
-        } else if (inputType.equals("delete")) {
-            try {
-                userInput = userInput.substring(6).trim();
-                int taskNumber = Integer.parseInt(userInput.trim()) - 1;
-                Task deletedTask = taskList.getListOfTasks().get(taskNumber);
-                taskList.getListOfTasks().remove(taskNumber);
-                ui.printDeleteTask(taskList, deletedTask);
-            } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("OOPS!!! The task number you specified is not in the list.");
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: delete [task number]");
-            }
-        } else if (inputType.equals("find")) {
-            try {
-                userInput = userInput.substring(4).trim();
-                String keyword = userInput.trim();
-                ArrayList<Task> filterTasks = new ArrayList<>();
-                for (Task task : taskList.getListOfTasks()) {
-                    if (task.getTaskDescription().contains(keyword)) {
-                        filterTasks.add(task);
-                    }
-                }
-                ui.printFindTasks(filterTasks);
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: find [task description]");
-            }
-        } else if (inputType.equals("bye")) {
-            try {
-                userInput = userInput.substring(3);
-                if (!userInput.isBlank()) {
-                    throw new Exception();
-                }
-                ui.printBye();
-                hasTerminated = true;
-                assert hasTerminated == true : "Programme should have been terminated";
-            } catch (Exception e) {
-                throw new DukeException("OOPS!!! Your input format is wrong. Use: bye");
-            }
-        }  else {
+        switch (inputType) {
+        case "todo":
+            handleTodoInput(taskList, ui, userInput);
+            break;
+        case "list":
+            handleListInput(taskList, ui, userInput);
+            break;
+        case "deadline":
+            handleDeadlineInput(taskList, ui, userInput);
+            break;
+        case "event":
+            handleEventInput(taskList, ui, userInput);
+            break;
+        case "done":
+            handleDoneInput(taskList, ui, userInput);
+            break;
+        case "delete":
+            handleDeleteInput(taskList, ui, userInput);
+            break;
+        case "find":
+            handleFindInput(taskList, ui, userInput);
+            break;
+        case "bye":
+            handleByeInput(ui, userInput);
+            break;
+        default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
@@ -160,5 +69,206 @@ public class Parser {
                 Integer.parseInt(date[1]), Integer.parseInt(date[0]),
                         Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
 
+    }
+
+    /**
+     * Parses "todo" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleTodoInput(
+            TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            String description = userInput.substring(4).trim();
+            if (description.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+            Task newTodo = new Todo(description, false);
+            taskList.addTask(newTodo);
+            ui.printAddTask(taskList, newTodo);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: todo [task description]");
+        }
+    }
+
+    /**
+     * Parses "deadline" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleDeadlineInput(
+            TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(8).trim();
+            String[] statement = userInput.split("/by");
+            String taskDescription = statement[0].trim();
+            String taskBy = statement[1].trim();
+
+            if (taskDescription.isBlank() || taskBy.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+            Task newDeadline = new Deadline(taskDescription, false, dateTimeConverter(taskBy));
+            taskList.addTask(newDeadline);
+            ui.printAddTask(taskList, newDeadline);
+
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! Task description/Task by can not be empty");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Format is wrong. "
+                + "Use: deadline [task description] /by [dd/mm/yyyy HHmm]");
+        }
+    }
+
+    /**
+     * Parses "event" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    public static void handleEventInput(
+            TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(5).trim();
+            String[] statement = userInput.split("/at");
+            String taskDescription = statement[0].trim();
+            String taskAt = statement[1].trim();
+
+            if (taskDescription.isBlank() || taskAt.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+
+            Task newEvent = new Event(taskDescription, false, dateTimeConverter(taskAt));
+            taskList.addTask(newEvent);
+            ui.printAddTask(taskList, newEvent);
+
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! Task description/Task at can not be empty");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Format is wrong. Use:event [task description] /at [dd/mm/yyyy HHmm]");
+        }
+    }
+
+    /**
+     * Parses "list" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleListInput(
+            TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(4);
+            if (!userInput.isBlank()) {
+                throw new Exception();
+            }
+            ui.printTaskList(taskList);
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: list");
+        }
+    }
+
+    /**
+     * Parses "done" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleDoneInput(
+        TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(4).trim();
+            int taskNumber = Integer.parseInt(userInput.trim()) - 1;
+            taskList.getListOfTasks().get(taskNumber).markAsDone();
+            ui.printDoneTask(taskList, taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The task number you specified is not in the list.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: done [task number]");
+        }
+    }
+
+    /**
+     * Parses "delete" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleDeleteInput(
+        TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(6).trim();
+            int taskNumber = Integer.parseInt(userInput.trim()) - 1;
+            Task deletedTask = taskList.getListOfTasks().get(taskNumber);
+            taskList.getListOfTasks().remove(taskNumber);
+            ui.printDeleteTask(taskList, deletedTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The task number you specified is not in the list.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: delete [task number]");
+        }
+    }
+
+    /**
+     * Parses "find" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleFindInput(
+        TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(4).trim();
+            String keyword = userInput.trim();
+            ArrayList<Task> filterTasks = new ArrayList<>();
+            for (Task task : taskList.getListOfTasks()) {
+                if (task.getTaskDescription().contains(keyword)) {
+                    filterTasks.add(task);
+                }
+            }
+            ui.printFindTasks(filterTasks);
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: find [task description]");
+        }
+    }
+
+    /**
+     * Parses "bye" user input type.
+     *
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleByeInput(Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(3);
+            if (!userInput.isBlank()) {
+                throw new Exception();
+            }
+            ui.printBye();
+            hasTerminated = true;
+            assert hasTerminated == true : "Programme should have been terminated";
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: bye");
+        }
     }
 }

@@ -7,14 +7,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDateTime at;
+    private LocalDateTime at;
 
     public Event(String description, boolean isDone, LocalDateTime at) {
         super(description, isDone);
         this.at = at;
     }
 
-    public String getAt() {
+    public String getTaskAt() {
         return this.at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

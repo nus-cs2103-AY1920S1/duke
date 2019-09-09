@@ -3,6 +3,8 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Represents the list of completed and uncompleted tasks.
@@ -86,14 +88,22 @@ public class TaskList {
         int numberOfTask = this.tasks.size();
         for (int i = 0; i < numberOfTask; i++) {
             Task task = this.tasks.get(i);
-            if (task.getDescription().contains(word)) {
+            if (isContain(task.getDescription(), word)) {
                 tasksWithWord.add(task);
             }
         }
         if (tasksWithWord.size() == 0) {
-            throw new DukeException("No events with '" + word + "' found in your tasklist!");
+            throw new DukeException("No events with '"
+                    + word + "' found in your tasklist! Make sure you key in the EXACT word!");
         } else {
             return tasksWithWord;
         }
+    }
+
+    private static boolean isContain(String source, String subItem) {
+        String pattern = "\\b" + subItem + "\\b";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(source);
+        return m.find();
     }
 }

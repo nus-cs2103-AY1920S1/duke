@@ -8,6 +8,9 @@ import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEventException;
+import duke.exception.InvalidTodoDescription;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -34,11 +37,11 @@ public class Parser {
      * includes the task to be added into the task list.
      *
      * @param tasks The user's input string in separated into an array.
-     * @throws DukeException If there is no description of the tasks.
+     * @throws InvalidTodoDescription If there is no description of the tasks.
      */
-    private static void todoCheck(String[] tasks) throws DukeException {
+    private static void todoCheck(String[] tasks) throws InvalidTodoDescription {
         if (tasks.length <= 1) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new InvalidTodoDescription();
         }
     }
 
@@ -50,16 +53,22 @@ public class Parser {
      *
      * @param tasks The user's input string in separated into an array.
      * @param userInput The user's input string.
-     * @throws DukeException If there is no specified date or task.
+     * @throws InvalidDeadlineException If there is no specified date or task.
      */
-    private static void deadlineCheck(String[] tasks, String userInput) throws DukeException {
+    private static void deadlineCheck(String[] tasks, String userInput) throws InvalidDeadlineException {
         if (tasks.length <= 1) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new InvalidDeadlineException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (!userInput.contains("/by")) {
-            throw new DukeException("OOPS!!! Deadline must include /by (date to complete task).");
-        } else if (userInput.substring(userInput.indexOf("/by") + 3).equals("")
-                || userInput.substring(userInput.indexOf("/by") + 4).equals("")) {
-            throw new DukeException("OOPS!!! Please include the date to complete task after /by command.");
+            throw new InvalidDeadlineException("OOPS!!! Deadline must include /by (date to complete task).");
+        }
+        /*
+        If contains date and time, userInput should split to more than one part
+        when splitting the userInput at "/by".
+         */
+        String[] data = userInput.split(" /by ");
+        if (data.length == 1) {
+            throw new InvalidDeadlineException(
+                    "OOPS!!! You must include the date and the time of the event after '/by'!");
         }
     }
 
@@ -73,14 +82,21 @@ public class Parser {
      * @param userInput The user's input string.
      * @throws DukeException If there is no specified date or task.
      */
-    private static void eventCheck(String[] tasks, String userInput) throws DukeException {
+    private static void eventCheck(String[] tasks, String userInput) throws InvalidEventException {
         if (tasks.length <= 1) {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+            throw new InvalidEventException("OOPS!!! The description of a event cannot be empty.");
         } else if (!userInput.contains("/at")) {
-            throw new DukeException("OOPS!!! Event must include /at (time of event).");
-        } else if (userInput.substring(userInput.indexOf("/at") + 3).equals("")
-                || userInput.substring(userInput.indexOf("/at") + 4).equals("")) {
-            throw new DukeException("OOPS!!! Please include the time of event after /at.");
+            throw new InvalidEventException(
+                    "OOPS!!! Event must include /at (time of event).");
+        }
+        /*
+        If contains date and time, userInput should split to more than one part
+        when splitting the userInput at "/at".
+         */
+        String[] data = userInput.split(" /at ");
+        if (data.length == 1) {
+            throw new InvalidEventException(
+                    "OOPS!!! You must include the date and the time of the event after '/at'!");
         }
     }
 

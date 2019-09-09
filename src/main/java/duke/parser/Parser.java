@@ -61,6 +61,15 @@ public class Parser {
         return commandToReturn;
     }
 
+    public static String parseAndGetLastOpenedFile(String toParse) throws DukeException {
+        try {
+            String lastOpenedFilePath = toParse.split("\\|")[1];
+            return lastOpenedFilePath;
+        } catch (Exception e) {
+            throw new DukeException(METADATA_ERROR);
+        }
+    }
+
     private static String parseAndGetCommandKeyword(String[] tokens) {
         return tokens[0];
     }

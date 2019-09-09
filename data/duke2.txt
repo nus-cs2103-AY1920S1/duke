@@ -1,0 +1,6 @@
+D|1|Send Email|9/9/2019 2300
+T|0|Dry Hair
+T|0|Cook Noodles
+E|1|SOC Career Fair|11/9/2019 1400
+E|1|Friday Band Rehearsal|13/9/2019 1900
+T|1|POOP

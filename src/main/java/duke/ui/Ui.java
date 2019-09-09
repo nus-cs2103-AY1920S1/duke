@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.dukeexception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import java.io.BufferedReader;
@@ -21,6 +20,11 @@ public class Ui {
     private static final String TASKS = "Here are your tasks in your list:";
     private static final String MATCHING = "Here are your matching tasks in your list";
     private static final String NO_MATCHING = "There are no matching tasks!";
+    private static final String LAST_OPENED = "Last opened file path is: ";
+    private static final String PLEASE_SPECIFY_NEW_PATH = "Please specify path to open data from: ";
+    private static final String LOAD_SUCCESSFUL = "Successfully loaded from path: ";
+    private static final String METADATA_CORRUPTED =
+            "Metadata corrupted, could not find last opened file!";
     /** Object to scan user input. */
     private BufferedReader userInput;
 
@@ -49,6 +53,22 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         return logo + "\n" + GREET;
+    }
+
+    public String printLastOpenedFilePath(String lastOpenedFilePath) {
+        return LAST_OPENED + lastOpenedFilePath;
+    }
+
+    public String printRequestForFilePath() {
+        return PLEASE_SPECIFY_NEW_PATH;
+    }
+
+    public String printMetaDataCorrupted() {
+        return METADATA_CORRUPTED;
+    }
+
+    public Response getFilePathOpenedSuccessfullyResponse(String openedFilePath) {
+        return new Response(LOAD_SUCCESSFUL + openedFilePath);
     }
 
     /**
@@ -159,7 +179,8 @@ public class Ui {
      * @return Response to be sent to the GUI.
      */
     public Response getLoadingErrorResponse() {
-        return new Response("Error loading from specified file path");
+        return new Response("Error loading from specified file path,"
+                + " initializing empty list of tasks...");
     }
 
     /**

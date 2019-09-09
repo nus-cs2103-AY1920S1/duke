@@ -24,16 +24,21 @@ public class FindCommand extends Command {
         matchList = new TaskList();
     }
 
+
     /**
-     * Executes the command after checking for exceptions.
-     * Prints the information and number of tasks that match keyword from all tasks.
+     * Executes the command by checking exceptions,
+     * and printing out what has been done
      *
-     * @param tasks TaskList currently.
-     * @param ui Ui initialized in <code>Duke</code> to interact with user.
-     * @param storage Storage to append to data file after updating tasks.
-     * @throws DukeException Exception for incorrect user input.
+     * @param tasks  TaskList of all tasks currently.
+     * @param expenses ExpenseList of all expenses currently.
+     * @param ui Ui that interacts with user by checking for exceptions and printing out
+     *           executed tasks.
+     * @param taskStorage Storage that load/write or append to data file after updating tasks.
+     * @param expenseStorage Storage that load/write or append to data file after updating expenses.
+     * @throws DukeException  If there is incorrect user input format.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui,
+                          Storage taskStorage, Storage expenseStorage) throws DukeException {
         Parser.checkErrorForFindCommand(command, ui);
         String keyword = Parser.getKeyword(command);
         for (int i = 0; i < tasks.size(); i++) {

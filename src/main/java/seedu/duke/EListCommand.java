@@ -1,20 +1,17 @@
 package seedu.duke;
 
-/**
- * Represents the command when user inputs 'list'. A <code>ListCommand</code> object
- * can <code>execute</code> the command by listing tasks.
- */
-public class ListCommand extends Command {
+public class EListCommand extends Command {
     private String command;
 
     /**
      * Class constructor.
      *
-     * @param command String command of 'list'.
+     * @param command String command.
      */
-    public ListCommand(String command) {
+    public EListCommand(String command) {
         this.command = command;
     }
+
 
     /**
      * Executes the command by checking exceptions,
@@ -28,7 +25,7 @@ public class ListCommand extends Command {
      * @param expenseStorage Storage that load/write or append to data file after updating expenses.
      */
     public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) {
-        return ui.printAllTasks(tasks);
+        return ui.printAllExpenses(expenses);
     }
 
     /**
@@ -39,4 +36,5 @@ public class ListCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }

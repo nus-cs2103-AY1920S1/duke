@@ -1,20 +1,16 @@
 package seedu.duke;
 
-/**
- * Represents the command when user inputs 'todo'. A <code>TodoCommand</code> object
- * can <code>execute</code> the command with checks for exception by adding todo to tasks.
- */
-public class TodoCommand extends Command {
+public class DeleteExpenseCommand extends Command {
     private String command;
+
     /**
      * Class constructor.
      *
-     * @param command String command of 'todo'.
+     * @param command String command of 'delete e'.
      */
-    public TodoCommand(String command) {
+    public DeleteExpenseCommand(String command) {
         this.command = command;
     }
-
 
     /**
      * Executes the command by checking exceptions,
@@ -32,16 +28,14 @@ public class TodoCommand extends Command {
      */
     public String execute(TaskList tasks, ExpenseList expenses, Ui ui,
                           Storage taskStorage, Storage expenseStorage) throws Exception {
-        Parser.checkErrorForTodoCommand(command, tasks, ui);
-        tasks.add(Parser.createTodo(command));
-        assert tasks.size() > 0 : "tasks size invalid";
-        if (tasks.size() > 1) {
-            taskStorage.appendFile(tasks);
-        } else {
-            taskStorage.writeFile(tasks);
-        }
-        return ui.printAddedTask(tasks.get(tasks.size() - 1)) + "\n" +
-            ui.printNoOfTaskInList(tasks);
+        Parser.checkErrorForDeleteExpenseCommand(command, expenses, ui);
+        int curr = Parser.expenseToDelete(command);
+        assert curr > 0 : "Task num is not valid";
+        Expense deletedExpense = expenses.get(curr - 1);
+        expenses.remove(curr - 1);
+        expenseStorage.writeExpenseFile(expenses);
+        return ui.printDeletedExpenseMsg(deletedExpense) + "\n" +
+                ui.printNoOfExpenseInList(expenses);
     }
 
     /**
@@ -53,14 +47,4 @@ public class TodoCommand extends Command {
         return false;
     }
 
-    /**
-     * Returns type of command.
-     *
-     * @return String of command type.
-     */
-    @Override
-    public String toString() {
-        //for testing purposes
-        return "TodoCommand";
-    }
 }

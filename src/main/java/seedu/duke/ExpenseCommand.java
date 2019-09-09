@@ -1,17 +1,14 @@
 package seedu.duke;
 
-/**
- * Represents the command when user inputs 'todo'. A <code>TodoCommand</code> object
- * can <code>execute</code> the command with checks for exception by adding todo to tasks.
- */
-public class TodoCommand extends Command {
-    private String command;
+public class ExpenseCommand extends Command{
+    protected String command;
+
     /**
      * Class constructor.
      *
-     * @param command String command of 'todo'.
+     * @param command String command.
      */
-    public TodoCommand(String command) {
+    public ExpenseCommand(String command) {
         this.command = command;
     }
 
@@ -32,16 +29,16 @@ public class TodoCommand extends Command {
      */
     public String execute(TaskList tasks, ExpenseList expenses, Ui ui,
                           Storage taskStorage, Storage expenseStorage) throws Exception {
-        Parser.checkErrorForTodoCommand(command, tasks, ui);
-        tasks.add(Parser.createTodo(command));
-        assert tasks.size() > 0 : "tasks size invalid";
-        if (tasks.size() > 1) {
-            taskStorage.appendFile(tasks);
+        Parser.checkErrorForExpenseCommand(command, ui, expenseStorage);
+        expenses.add(Parser.createExpense(command));
+        assert expenses.size() > 0 : "tasks size invalid";
+        if (expenses.size() > 1) {
+            expenseStorage.appendExpenseFile(expenses);
         } else {
-            taskStorage.writeFile(tasks);
+            expenseStorage.writeExpenseFile(expenses);
         }
-        return ui.printAddedTask(tasks.get(tasks.size() - 1)) + "\n" +
-            ui.printNoOfTaskInList(tasks);
+        return ui.printAddedExpense(expenses.get(expenses.size() - 1)) +"\n" +
+                ui.printNoOfExpenseInList(expenses);
     }
 
     /**
@@ -51,16 +48,5 @@ public class TodoCommand extends Command {
      */
     public boolean isExit() {
         return false;
-    }
-
-    /**
-     * Returns type of command.
-     *
-     * @return String of command type.
-     */
-    @Override
-    public String toString() {
-        //for testing purposes
-        return "TodoCommand";
     }
 }

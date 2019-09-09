@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CommandResult {
-    // FIXME: should have only one string instead of a list
     private final ArrayList<String> messages = new ArrayList<>();
     private final ArrayList<String> warnings = new ArrayList<>();
     private boolean exit = false;

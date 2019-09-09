@@ -31,6 +31,7 @@ public class TaskList {
      * @param taskList List of tasks to initialize TaskList.
      */
     public TaskList(List<Task> taskList) {
+        assert taskList != null : "TaskList.java (line 34) : taskList should not be null";
         this.taskList = taskList;
     }
 
@@ -81,6 +82,7 @@ public class TaskList {
      * @param task {@link Task} to be added.
      */
     public void addTask(Task task) {
+        assert task != null : "TaskList.java (line 85) : task should not be null";
         this.taskList.add(task);
     }
 

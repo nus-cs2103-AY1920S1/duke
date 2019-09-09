@@ -59,9 +59,10 @@ public class Storage {
      * @throws DukeIOException When an error occurs while writing to the saved file.
      */
     public void saveTasks(TaskList taskList) throws DukeIOException {
-        StringBuilder lines = new StringBuilder();
+        assert taskList != null : "Storage.java (line 62) : taskList should not be null";
 
         // Each task's information delimited by " | "
+        StringBuilder lines = new StringBuilder();
         Iterator<Task> it = taskList.iterator();
         while (it.hasNext()) {
             Task task = it.next();

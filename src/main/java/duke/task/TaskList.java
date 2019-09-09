@@ -21,9 +21,15 @@ public class TaskList {
     }
 
     public Integer getNumberOfTasks() {
-            return taskList.size();
+        return taskList.size();
     }
 
+    /**
+     * Retrieves a task from the TaskList.
+     * @param index index of task to retrieve
+     * @return a Task object
+     * @throws DukeException when the requested task does not exist
+     */
     public Task getTask(Integer index) throws DukeException {
         try {
             return taskList.get(index);

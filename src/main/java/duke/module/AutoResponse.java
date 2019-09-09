@@ -13,7 +13,7 @@ public class AutoResponse {
     public static final String DUKE_LINE = "    _________________________________________________________________";
     public static final String DUKE_TAB4 = "    ";
     public static final String DUKE_ADD_TASK = "Got it. I've added this task:";
-    public static final String DUKE_NUMBER_OF_TASKS = "Now you have %d tasks in the list.";
+    public static final String DUKE_NUMBER_OF_TASKS = "Now you have %d task(s) in the list.";
     public static final String DUKE_DELETE_TASK = "Noted. I've removed this task:";
     public static final String DUKE_DELETE_ALL_TASKS = "Noted. I've removed all tasks.";
     public static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:";
@@ -22,6 +22,13 @@ public class AutoResponse {
     public static final String DUKE_NO_FOUND_TASKS = "There were no matching tasks for the keyword: ";
     public static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
     public static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
+    public static final String DUKE_UNDO_ADD_TASK = "Noted. I've removed this task:";
+    public static final String DUKE_UNDO_DELETE_NO_TASK = "No tasks were deleted before.";
+    public static final String DUKE_UNDO_DELETE_TASK = "Got it. I've added the following task(s):";
+    public static final String DUKE_UNDO_DONE_NO_TASK = "No tasks were marked as done before.";
+    public static final String DUKE_UNDO_DONE_TASK = "Noted. I've marked the following task as undone:";
+    public static final String DUKE_UNDO_DONE_ALL_TASKS = "Noted. I've marked all tasks as undone.";
+    public static final String DUKE_UNDO_STUB = "The %s command is not undoable.";
 
     public static final String ERROR_MISSING_TASK_DESCRIPTION = "☹ OOPS!!! The description of a task "
             + "cannot be empty.";
@@ -45,5 +52,6 @@ public class AutoResponse {
     public static final String ERROR_ILLEGAL_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String ERROR_NONPOSITIVE_INDEX = "☹ OOPS!!! Index has to be greater than zero.";
     public static final String ERROR_EXCEED_INDEX = "☹ OOPS!!! Currently there are only %d tasks.";
+    public static final String ERROR_EMPTY_UNDO_STACK = "☹ OOPS!!! There are no commands to be undone.";
     
 }

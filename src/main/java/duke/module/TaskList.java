@@ -1,5 +1,6 @@
 package duke.module;
 
+import duke.Duke;
 import duke.task.Task;
 import duke.exception.DukeIllegalIndexException;
 import duke.module.AutoResponse;
@@ -50,6 +51,29 @@ public class TaskList {
             message = String.format(AutoResponse.ERROR_EXCEED_INDEX, this.taskList.size());
         }
         return message;
+    }
+
+    /**
+     * Marks the {@link Task} at given index as unfinished.
+     * <p>
+     * <b>Prerequisite: </b>index starts from 1.
+     *
+     * @param index Index of the Task to mark as unfinished.
+     * @throws DukeIllegalIndexException When the given index is out of bounds.
+     */
+    public void markAsUnfinishedTaskAt(int index) throws DukeIllegalIndexException {
+        try {
+            this.taskList.get(index - 1).markAsUnfinished();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeIllegalIndexException(this.generateIndexExceptionMessage(index));
+        }
+    }
+
+    /**
+     * Marks all tasks as unfinished.
+     */
+    public void markAsUnfinishedAllTasks() {
+        this.taskList.forEach(Task::markAsUnfinished);
     }
 
     /**
@@ -108,6 +132,10 @@ public class TaskList {
 
     public boolean isEmpty() {
         return this.taskList.size() == 0;
+    }
+
+    public boolean delete(Task task) {
+        return this.taskList.remove(task);
     }
 
     /**
@@ -172,6 +200,15 @@ public class TaskList {
                     this.taskList.get(i).getStatus()));
         }
         return lines.toArray(new String[0]);
+    }
+
+    /**
+     * Returns this TaskList as an array of Tasks.
+     *
+     * @return This TaskList as an array of Tasks.
+     */
+    public Task[] toArray() {
+        return this.taskList.toArray(new Task[0]);
     }
 
 }

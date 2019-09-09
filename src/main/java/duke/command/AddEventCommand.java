@@ -11,6 +11,7 @@ import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
+import duke.module.UndoStack;
 
 import duke.task.EventTask;
 import duke.task.Task;
@@ -18,13 +19,12 @@ import duke.task.Task;
 /**
  * Represents the "event" command supported by Duke.
  */
-public class AddEventCommand extends Command {
+public class AddEventCommand extends Command implements Undoable {
 
-    /** "{@value DELIMITER_EVENT_DATE}" : To be used when splitting {@link #description}. */
     private static final String DELIMITER_EVENT_DATE = "/at";
 
-    /** Should contain the description and event date of this <code>EventTask</code>. */
     private String description;
+    private Task eventTask;
 
     public AddEventCommand(String description) {
         this.description = description;
@@ -34,6 +34,7 @@ public class AddEventCommand extends Command {
      * Adds a {@link EventTask} to the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
+     * @param undoStack Stack of {@code Undoable} commands.
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
@@ -41,7 +42,7 @@ public class AddEventCommand extends Command {
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
         String[] arg = this.description.split(DELIMITER_EVENT_DATE);
 
@@ -53,15 +54,18 @@ public class AddEventCommand extends Command {
         DukeDate dukeDate = Parser.parseToDate(date);
 
         // Add task to the TaskList
-        Task task = new EventTask(arg[0].trim(), dukeDate);
-        taskList.addTask(task);
+        eventTask = new EventTask(arg[0].trim(), dukeDate);
+        taskList.addTask(eventTask);
+
+        // Add this command to the undoStack
+        undoStack.addUndoable(this);
 
         // Save new task to the storage file
         storage.saveTasks(taskList);
 
         // Display the result to the user
         ui.printToUser(AutoResponse.DUKE_ADD_TASK,
-                       "  " + task.getStatus(),
+                       "  " + eventTask.getStatus(),
                        String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
     }
 
@@ -103,6 +107,19 @@ public class AddEventCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public void undo(TaskList taskList, Ui ui, Storage storage) throws DukeIOException {
+        // TODO : javadocs and update line numbers
+        assert this.eventTask != null : "AddEventCommand.java (line 115) : deadlineTask should not be empty";
+        assert taskList.delete(this.eventTask) : "AddEventCommand.java (line 116) : Undo error.";
+
+        // Save the modified taskList
+        storage.saveTasks(taskList);
+
+        // Display the result to the user
+        ui.printToUser(AutoResponse.DUKE_UNDO_ADD_TASK, "  " + this.eventTask.getStatus());
     }
 
 }

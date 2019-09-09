@@ -61,6 +61,13 @@ public abstract class Task {
     }
 
     /**
+     * Set isDone field to false.
+     */
+    public void markAsUnfinished() {
+        this.isDone = false;
+    }
+
+    /**
      * Set isDone field to true.
      */
     public void markAsDone() {

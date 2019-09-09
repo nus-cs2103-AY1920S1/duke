@@ -11,6 +11,7 @@ import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
+import duke.module.UndoStack;
 
 import duke.task.DeadlineTask;
 import duke.task.Task;
@@ -18,13 +19,12 @@ import duke.task.Task;
 /**
  * Represents the "deadline" command supported by Duke.
  */
-public class AddDeadlineCommand extends Command {
+public class AddDeadlineCommand extends Command implements Undoable {
 
-    /** "{@value DELIMITER_DEADLINE_DATE}" : To be used when splitting {@link #description}. */
     private static final String DELIMITER_DEADLINE_DATE = "/by";
 
-    /** Should contain the description and due date of a <code>DeadlineTask</code>. */
     private String description;
+    private Task deadlineTask;
 
     public AddDeadlineCommand(String description) {
         this.description = description;
@@ -34,6 +34,7 @@ public class AddDeadlineCommand extends Command {
      * Adds a {@link DeadlineTask} to the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
+     * @param undoStack Stack of {@code Undoable} commands.
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
@@ -41,7 +42,7 @@ public class AddDeadlineCommand extends Command {
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage)
+    public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
         String[] arg = this.description.split(DELIMITER_DEADLINE_DATE);
 
@@ -53,15 +54,18 @@ public class AddDeadlineCommand extends Command {
         DukeDate dukeDate = Parser.parseToDate(date);
 
         // Add task to the TaskList
-        Task task = new DeadlineTask(arg[0].trim(), dukeDate);
-        taskList.addTask(task);
+        deadlineTask = new DeadlineTask(arg[0].trim(), dukeDate);
+        taskList.addTask(deadlineTask);
+
+        // Add this command to the UndoStack
+        undoStack.addUndoable(this);
 
         // Save new task to the storage file
         storage.saveTasks(taskList);
 
         // Display the result to the user
         ui.printToUser(AutoResponse.DUKE_ADD_TASK,
-                "  " + task.getStatus(),
+                "  " + deadlineTask.getStatus(),
                 String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
     }
 
@@ -104,6 +108,19 @@ public class AddDeadlineCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public void undo(TaskList taskList, Ui ui, Storage storage) throws DukeIOException {
+        // TODO : javadocs and update assert line numbers
+        assert this.deadlineTask != null : "AddDeadlineCommand.java (line 115) : deadlineTask should not be empty";
+        assert taskList.delete(this.deadlineTask) : "AddDeadlineCommand.java (line 116) : Undo error.";
+
+        // Save the modified taskList
+        storage.saveTasks(taskList);
+
+        // Display the result to the user.
+        ui.printToUser(AutoResponse.DUKE_UNDO_ADD_TASK, "  " + this.deadlineTask.getStatus());
     }
 
 }

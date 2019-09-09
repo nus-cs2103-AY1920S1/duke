@@ -1,11 +1,15 @@
 package duke.command;
 
+import duke.UndoableStub;
+
 import duke.exception.DukeIllegalArgumentException;
 
 import duke.module.AutoResponse;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
+import duke.module.UndoStack;
+
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -27,16 +31,21 @@ public class FindCommand extends Command {
      * Finds a <code>Task</code> in the <code>TaskList</code> with a description that contains {@link #keyword}.
      *
      * @param taskList List of tasks to manage.
+     * @param undoStack Stack of {@code Undoable} commands.
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes if necessary.
      * @throws DukeIllegalArgumentException When the keyword is missing.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeIllegalArgumentException {
+    public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage)
+            throws DukeIllegalArgumentException {
         if (keyword.isEmpty()) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_KEYWORD);
         }
         List<Task> foundTasks = taskList.findAllTasksContaining(this.keyword);
+        // Add UndoableStub to the undoStack
+        undoStack.addUndoable(new UndoableStub("find"));
+        // Display the result to the user
         ui.printToUser(this.listTasks(foundTasks));
     }
 

@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 
 import duke.date.DukeDate;
 
@@ -37,6 +38,7 @@ public class Parser {
         EVENT,
         DEADLINE,
         DELETE,
+        UNDO,
         BYE;
     }
 
@@ -148,6 +150,8 @@ public class Parser {
                 return new AddDeadlineCommand(description);
             case DELETE:
                 return new DeleteCommand(description);
+            case UNDO:
+                return new UndoCommand();
             case BYE:
                 return new ExitCommand();
             default:

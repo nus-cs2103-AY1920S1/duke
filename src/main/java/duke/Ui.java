@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Tasks.Task;
-import duke.Exceptions.DukeException;
+import duke.tasks.Task;
+import duke.exceptions.DukeException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;

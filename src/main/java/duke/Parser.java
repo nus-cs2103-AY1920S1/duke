@@ -1,19 +1,20 @@
 package duke;
-import duke.Commands.Command;
-import duke.Commands.DeadlineCommand;
-import duke.Commands.DeleteCommand;
-import duke.Commands.DoneCommand;
-import duke.Commands.EventCommand;
-import duke.Commands.FindCommand;
-import duke.Commands.InvalidCommand;
-import duke.Commands.ListCommand;
-import duke.Commands.TodoCommand;
-import duke.Commands.ByeCommand;
-import duke.Exceptions.DukeException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.Todo;
+
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.FindCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
+import duke.commands.ByeCommand;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.text.ParseException;
 

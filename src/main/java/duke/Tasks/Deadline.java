@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;

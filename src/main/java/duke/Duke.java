@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Commands.Command;
-import duke.Exceptions.DukeException;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;

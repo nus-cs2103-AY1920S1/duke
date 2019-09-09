@@ -1,5 +1,5 @@
 public abstract class Command {
-    int actionType; // -1=>null 0=>add 1=>delete 2=>list 3=>exit 4=>done 5=>find
+    int actionType; // -1=>null 0=>add 1=>delete 2=>list 3=>exit 4=>done 5=>find 6=>help
     Task task;
     Command(int actionType) {
         this.actionType = actionType;

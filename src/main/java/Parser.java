@@ -14,7 +14,9 @@ public class Parser {
             return new ByeTaskCommand();
         } else if (fullCommand.contains("delete")){
             return parseDeleteCommand(fullCommand);
-        } else if (fullCommand.contains("todo") ||
+        } else if (fullCommand.equals("duke --help")){
+            return new HelpCommand();
+        }else if (fullCommand.contains("todo") ||
                 fullCommand.contains("event") ||
                 fullCommand.contains("deadline")) {
             return new AddTaskCommand(fullCommand);

@@ -57,6 +57,7 @@ public class Storage {
         } else if (typeOfTask.equals("[E]")) {
             convertedTask = new Event(taskDescription, taskInformation[3]);
         } else {
+            assert typeOfTask == "[D]" : "typeOfTask cannot be " + typeOfTask;
             convertedTask = new Deadline(taskDescription, taskInformation[3]);
         }
 

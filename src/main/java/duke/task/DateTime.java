@@ -50,6 +50,7 @@ public class DateTime {
      */
 
     public String appendOrdinal(Integer day) {
+        assert (day > 0 && day < 32) : "Days are from 0-31";
         if (day >= 11 && day <= 13) {
             return day.toString() + "th";
         } else if (day % 10 == 1) {
@@ -70,6 +71,8 @@ public class DateTime {
      * @return a String representing 12H timing
      */
     public String to12HourTime(Integer hours, Integer minutes) {
+        assert (hours > 0 && hours < 24) : "In 24 hours timing, hours should be between 0 - 23";
+        assert (minutes >= 0 && minutes < 60) : "Minutes should be between 0-59";
         String hoursString;
         String minutesString;
         String noonString;

@@ -1,6 +1,6 @@
 package duke.ui;
 
-public class Messages {
+public final class Messages {
     // Add task
     public static final String TASK_ADD_SUCCESS = "Got it. I've added this task:";
     public static final String TASK_ADD_FAILURE = "Fatal: Unable to add task";

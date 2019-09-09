@@ -26,10 +26,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Storage storage = new Storage("duke.txt");
-    private TaskList tasks = new TaskList();
-    private Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    private final Storage storage = new Storage("duke.txt");
+    private final TaskList tasks = new TaskList();
+    private final Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     /**
      * Initialises the MainWindow.
@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         try {
-            tasks = storage.loadTasks();
+            storage.loadTasks(tasks);
         } catch (DukeStorageException e) {
             addDukeDialog(e.getMessage());
         }

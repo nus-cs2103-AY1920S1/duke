@@ -9,10 +9,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Cli;
 
-public class DukeCli {
-    private Storage storage;
-    private TaskList tasks;
-    private Cli ui;
+public final class DukeCli {
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Cli ui;
 
     /**
      * The Duke CLI application.
@@ -30,7 +30,7 @@ public class DukeCli {
         ui.showWelcome();
 
         try {
-            tasks = storage.loadTasks();
+            storage.loadTasks(tasks);
         } catch (DukeStorageException e) {
             ui.showWarning(e.getMessage());
         }

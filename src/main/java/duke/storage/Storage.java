@@ -21,7 +21,7 @@ import static duke.ui.Messages.LOAD_TASK_FILE_CORRUPTED;
 import static duke.ui.Messages.WRITE_TASK_FAILED;
 
 public class Storage {
-    private File file;
+    private final File file;
 
     /**
      * Constructs a Storage object to save tasks to a data file.
@@ -39,16 +39,15 @@ public class Storage {
     /**
      * Loads tasks from the data file.
      *
-     * @return tasks loaded from the date file
+     * @param tasks the TaskList to load tasks into
      * @throws DukeStorageException if an parsing error occurs
      */
-    public TaskList loadTasks() throws DukeStorageException {
-        TaskList tasks = new TaskList();
+    public void loadTasks(TaskList tasks) throws DukeStorageException {
         Scanner scanner;
         try {
             scanner = new Scanner(this.file, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            return tasks;
+            return;
         }
         assert this.file.exists(); // file should exist if Scanner can be created
 
@@ -85,7 +84,6 @@ public class Storage {
             throw fileCorruptedException;
         }
         scanner.close();
-        return tasks;
     }
 
     /**

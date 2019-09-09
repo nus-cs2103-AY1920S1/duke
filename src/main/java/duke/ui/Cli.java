@@ -14,8 +14,8 @@ public class Cli {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String SEPARATOR = "-".repeat(60);
     private static final String INDENTATION = "  ";
-    private Scanner input;
-    private PrintStream output;
+    private final Scanner input;
+    private final PrintStream output;
 
     public Cli(final InputStream input, final PrintStream output) {
         this.input = new Scanner(input, StandardCharsets.UTF_8);

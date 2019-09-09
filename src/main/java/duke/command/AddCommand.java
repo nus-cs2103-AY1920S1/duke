@@ -12,7 +12,7 @@ import static duke.ui.Messages.TASK_ADD_SUCCESS;
 import static duke.ui.Messages.TASK_MISSING_DESCRIPTION;
 
 public abstract class AddCommand extends Command {
-    protected String description;
+    protected final String description;
 
     public AddCommand(final String description) {
         this.description = description;

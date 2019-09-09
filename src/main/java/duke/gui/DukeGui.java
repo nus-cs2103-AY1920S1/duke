@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DukeGui extends Application {
+public final class DukeGui extends Application {
     @Override
     public void start(Stage stage) {
         try {

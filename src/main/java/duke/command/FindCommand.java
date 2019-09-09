@@ -11,7 +11,7 @@ import static duke.ui.Messages.FIND_NO_TASKS;
 import static duke.ui.Messages.FIND_TASKS;
 
 public class FindCommand extends Command {
-    private String[] queries;
+    private final String[] queries;
 
     public FindCommand(final String... queries) {
         this.queries = queries;

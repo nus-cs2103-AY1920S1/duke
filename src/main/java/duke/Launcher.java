@@ -6,8 +6,12 @@ import javafx.application.Application;
 
 import java.util.Set;
 
-public class Launcher {
+public final class Launcher {
     private static final Set<String> VALID_ARGS = Set.of("cli", "gui");
+
+    // For static use only
+    private Launcher() {
+    }
 
     /**
      * Launches the Duke application.

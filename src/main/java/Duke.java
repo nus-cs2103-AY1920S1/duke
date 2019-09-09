@@ -1,3 +1,4 @@
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -28,24 +29,6 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome(tasks.tasks);
-        /*
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-        */
     }
 
     public static void main(String[] args) {
@@ -59,9 +42,10 @@ public class Duke {
      * @return Message in a string.
      */
     String getResponse(String input) {
-        String doggoResponse = "";
+        String doggoResponse;
         try {
-            doggoResponse = Parser.parse(input).execute(tasks, ui, storage);
+            Command command = Parser.parse(input);
+            doggoResponse = command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             doggoResponse = e.getMessage();
         }

@@ -40,6 +40,7 @@ public class AddDeadlineCommand extends Command {
         try {
             Date datetimeDate = super.DATE_FORMAT.parse(datetime);
             Deadline newDeadline = new Deadline(detail, datetimeDate);
+            assert newDeadline != null;
             tasks.add(newDeadline);
             ui.printAddSuccess(tasks.getTasks(), newDeadline);
         } catch (ParseException e) {

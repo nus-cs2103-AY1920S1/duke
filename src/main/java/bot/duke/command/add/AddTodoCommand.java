@@ -29,6 +29,7 @@ public class AddTodoCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Todo newTodo = new Todo(this.detail);
+        assert newTodo != null;
         tasks.add(newTodo);
         ui.printAddSuccess(tasks.getTasks(), newTodo);
     }

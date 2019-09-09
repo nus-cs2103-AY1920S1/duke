@@ -44,6 +44,7 @@ public class AddEventCommand extends Command {
             Date datetimeFromDate = super.DATE_FORMAT.parse(datetimeFrom);
             Date datetimeToDate = super.DATE_FORMAT.parse(datetimeTo);
             Event newEvent = new Event(detail, datetimeFromDate, datetimeToDate);
+            assert newEvent != null;
             tasks.add(newEvent);
             Ui.printAddSuccess(tasks.getTasks(), newEvent);
         } catch (ParseException dfe) {

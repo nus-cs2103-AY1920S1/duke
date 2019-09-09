@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Duke{
+public class Duke {
     final static String FILE_LOCATION = System.getProperty("user.dir") + "/data/duke.txt";
     final static List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline", "delete", "find");
 

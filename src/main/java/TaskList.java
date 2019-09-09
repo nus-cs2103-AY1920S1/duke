@@ -30,6 +30,7 @@ public class TaskList {
 
     /**
      * Add task into the list if information is given as a Task.
+     *
      * @param task A task object
      */
     public void addTask(Task task) {
@@ -38,10 +39,11 @@ public class TaskList {
 
     /**
      * Add task into the list if information is given as a string of commands.
+     *
      * @param command Information to be used
      * @throws DukeException throws duke exception
      */
-    public String addTask(String command) throws DukeException{
+    public String addTask(String command) throws DukeException {
         ui.horizontalLine();
         List<String> commandList = new ArrayList<>(Arrays.asList(command.split(" ")));
         String stringHolder = (commandList.remove(0));
@@ -123,6 +125,7 @@ public class TaskList {
 
     /**
      * Changes the status of the task from undone to done
+     *
      * @param index Index of the task
      */
     public String doneTask(int index) {
@@ -134,6 +137,7 @@ public class TaskList {
 
     /**
      * Deletes the task from the list
+     *
      * @param index Index of the task
      */
     public String deleteTask(int index) {
@@ -145,7 +149,7 @@ public class TaskList {
 
     public List findTask(TaskList taskList, String findString) {
         List<Task> findList = new ArrayList<>();
-        for (int i = 0; i < taskList.getSize(); i ++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             if (taskList.getTask(i).getDescription().contains(findString)) {
                 findList.add(taskList.getTask(i));
             }

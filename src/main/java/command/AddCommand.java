@@ -37,33 +37,28 @@ public class AddCommand extends Command {
 
         DateTime date;
         String message;
-        boolean added = false;
 
         try {
             switch (temp[0]) {
             case "deadline":
                 task.addDeadline(input, false);
-                added = true;
                 storage.arrayToFile(task.getList());
+                ui.printAdd(task.getList());
                 break;
             case "event":
                 task.addEvent(input, false);
-                added = true;
                 storage.arrayToFile(task.getList());
+                ui.printAdd(task.getList());
                 break;
             case "todo":
                 if (temp.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 task.addToDo(input, false);
-                added = true;
                 storage.arrayToFile(task.getList());
-                break;
-            }
-
-            if (added) {
                 ui.printAdd(task.getList());
-            } else {
+                break;
+            default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 

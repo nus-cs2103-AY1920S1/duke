@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
             storage.arrayToFile(task.getList());
         } catch (NullPointerException e) {
             ui.printError("Please input a valid task number.");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             ui.printError("Please input a valid task number.");
         }
 

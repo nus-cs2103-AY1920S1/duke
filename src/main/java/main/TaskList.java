@@ -51,7 +51,7 @@ public class TaskList {
     public void addEvent(String whatToAdd, boolean isDone) throws DukeException {
         String message;
         DateTime date;
-        date = new DateTime(whatToAdd.substring(whatToAdd.indexOf("/") + 4));
+        date = new DateTime(whatToAdd.substring(whatToAdd.indexOf("/at") + 4));
         message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1, whatToAdd.indexOf("/") - 1);
         arr.add(new Events(message, date, isDone));
     }
@@ -66,7 +66,7 @@ public class TaskList {
     public void addDeadline(String whatToAdd, boolean isDone) throws DukeException {
         String message;
         DateTime date;
-        date = new DateTime(whatToAdd.substring(whatToAdd.indexOf("/") + 4));
+        date = new DateTime(whatToAdd.substring(whatToAdd.indexOf("/by") + 4));
         message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1, whatToAdd.indexOf("/") - 1);
         arr.add(new Deadlines(message, date, isDone));
     }

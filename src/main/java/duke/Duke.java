@@ -8,7 +8,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
-    private static final String TABS = "     ";
     private Ui ui;
     private TaskList tasks;
     private Storage storage;

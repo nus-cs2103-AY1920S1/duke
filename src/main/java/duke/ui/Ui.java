@@ -21,7 +21,7 @@ public class Ui {
      * Prints a welcome message.
      */
     public void showWelcome() {
-        System.out.println(TABS + "Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("\t Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     public String showDoneMessage() {
@@ -69,7 +69,7 @@ public class Ui {
         message += "Here are the tasks in your list:\n";
         Integer index = 1;
         for (Task taskToShow : taskList) {
-            message += TABS + index.toString() + "." + taskToShow.toString() + "\n";
+            message += "\t" + index.toString() + "." + taskToShow.toString() + "\n";
             index++;
         }
         return message;
@@ -86,7 +86,7 @@ public class Ui {
 
         for (Integer index : taskList.keySet()) {
             Task currentTask = taskList.get(index);
-            message += TABS + index.toString() + "." + currentTask.toString() + "\n";
+            message += "\t" + index.toString() + "." + currentTask.toString() + "\n";
         }
         return message;
     }

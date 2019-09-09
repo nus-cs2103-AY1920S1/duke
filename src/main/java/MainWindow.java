@@ -39,7 +39,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InterruptedException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -47,7 +47,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (response.substring(9, 37).equals("Saving your current tasks : ")) {
+        checkForExit(response);
+    }
+
+    private void checkForExit(String response) {
+        if (response.length() >= 36 && response.substring(9, 37).equals("Saving your current tasks : ")) {
             quitJavaFX();
         }
     }

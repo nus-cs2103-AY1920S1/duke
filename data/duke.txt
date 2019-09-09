@@ -2,3 +2,4 @@ T | 0 | book courts
 T | 0 | control test
 D | 0 | live | /by | 080919 2359
 D | 0 | die | /by | 090919 2359
+E | 0 | revive | /at | The Church of God

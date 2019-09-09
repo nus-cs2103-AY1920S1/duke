@@ -14,9 +14,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Locale;
 
-import static duke.task.TaskType.DEADLINE;
-import static duke.task.TaskType.TODO;
-import static duke.task.TaskType.EVENT;
+import static duke.task.TaskType.*;
 
 /**
  * Deals with making sense of commands.
@@ -134,8 +132,13 @@ public class Parser {
         TaskType type;
         if (args[0].equals("deadline")) {
             type = DEADLINE;
+        } else if (args[0].equals("event")) {
+            type = EVENT;
+        } else if (args[0].equals("all")) {
+            type = ALL;
         } else {
-            throw new DukeUnknownInputException(String.format("Unknown argument, should be %s", DEADLINE));
+            throw new DukeUnknownInputException(
+                    String.format("Unknown argument, should be %s or %s", DEADLINE, EVENT));
         }
 
         return new RemindCommand(type, false);
@@ -158,11 +161,12 @@ public class Parser {
      * @throws DukeUnknownInputException if the input string is of invalid format, or an invalid task type is passed.
      */
     public static ZonedDateTime parseDateTime(String in, TaskType type) throws DukeUnknownInputException {
+        // switch allows us to parse dateTimes differently by task type. see parseDeadline for exampe.
         switch (type) {
         case DEADLINE:
             return parseDeadline(in);
         default:
-            throw new DukeUnknownInputException("Invalid task specified, please pass Events or Deadlines");
+            throw new DukeUnknownInputException("Invalid task specified, please pass Deadlines");
         }
     }
 

@@ -1,16 +1,13 @@
 package seedu.duke;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+
 
 /**
  * A GUI for Duke using FXML.
@@ -19,6 +16,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Main entry point for GUI.
+     *
+     * @param stage JavaFX stage.
+     */
     @Override
     public void start(Stage stage) {
         try {

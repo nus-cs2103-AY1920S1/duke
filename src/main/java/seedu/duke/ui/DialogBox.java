@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.ui;
 
 
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
+import seedu.duke.MainWindow;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -127,6 +127,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a dialogbox with the specified arguments.
+     *
+     * @param text String text which will be the label.
+     * @param img Image that will be beside the label.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -151,6 +157,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates the User Dialog box.
+     *
+     * @param text String.
+     * @param img Image.
+     * @return DialogBox of the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
 
@@ -158,24 +171,31 @@ public class DialogBox extends HBox {
         db.setPadding(new Insets(25,0,25,0));
 
         // Adds background colour to DialogBox.
-        String style_background = "-fx-background-color: #f7fac5;"
+        String styleBackground = "-fx-background-color: #f7fac5;"
                 + "-fx-padding: 15;"
                 + "fx-spacing: 10;";
 
-        db.setStyle(style_background);
+        db.setStyle(styleBackground);
 
         return db;
     }
 
+    /**
+     * Creates the Duke Dialog box.
+     *
+     * @param text String.
+     * @param img Image.
+     * @return Duke dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
 
         var db = new DialogBox(text, img);
 
         // Adds background colour to DialogBox.
-        String style_background = "-fx-background-color: #abffcd;"
+        String styleBackground = "-fx-background-color: #abffcd;"
                 + "-fx-padding: 15;"
                 + "fx-spacing: 10;";
-        db.setStyle(style_background);
+        db.setStyle(styleBackground);
 
         // Sets a padding of 25 above and below the Duke DialogBox
         db.setPadding(new Insets(25,0,25,0));

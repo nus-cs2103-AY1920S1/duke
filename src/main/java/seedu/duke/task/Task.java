@@ -129,8 +129,6 @@ public class Task {
      */
     public Boolean isDeadline() {
         return this.taskType.equals(PossibleTaskTypes.DEADLINE);
-
-
     }
 
     /**
@@ -138,6 +136,16 @@ public class Task {
      */
     enum PossibleTaskTypes {
         DEFAULT, DEADLINE, EVENT, TODO
+    }
+
+    /**
+     * Getter function to obtain Boolean status of task.
+     *
+     * @return isDone attribute.
+     */
+    public Boolean isDone() {
+
+        return this.isDone;
     }
 }
 

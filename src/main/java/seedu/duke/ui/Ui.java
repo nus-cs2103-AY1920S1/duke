@@ -12,224 +12,79 @@ import seedu.duke.tasklist.TaskList;
 /**
  * Ui class is responsible of printing UI related Strings, such as the Welcome String.
  */
-public class Ui {
-    private final String underscore = "    ____________________________________________________________" + "\n";
-
+public abstract class Ui {
     /**
-     * Default constructor, takes in no arguments.
+     * Default constructor but the abstract class will never be instantiated.
      */
     public Ui(){
-
     }
 
     /**
-     * Prints the error prompt, along with the associated error message.
+     * Returns list sequence for LIST command.
      *
-     * @param e DukeException object, which is a subclass of the Exception class.
+     * @param tasks TaskList object.
+     * @return String.
      */
-    public void showLoadingError(DukeException e) {
-        System.out.println(e.getMessage());
-    }
+    public abstract String getListSequence(TaskList tasks);
 
     /**
-     * Prints the Welcome Sequence.
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro = underscore
-                + "      Hello! I'm Duke " + "\n"
-                + "      What can I do for you?" + "\n"
-                + underscore;
-        System.out.println(logo + intro);
-    }
-
-    public String getWelcome(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro = underscore
-                + "      Hello! I'm Duke " + "\n"
-                + "      What can I do for you?" + "\n"
-                + underscore;
-        return (logo + intro);
-    }
-
-    /**
-     * Prints the list of Task objects from the TaskList object.
+     * Returns bye sequence for BYE command.
      *
-     * @param tasks TaskList class, which contains a list of Task objects.
+     * @return String.
      */
-    public void printList(TaskList tasks) {
-        String output = underscore + "     Here are the tasks in your list:\n";
-        output += getTasksInList(tasks);
-        System.out.println(output);
-    }
-
-    public String getPrintList(TaskList tasks){
-        String output = "Here are the tasks in your list:\n";
-        output += getTasksInList(tasks);
-        return (output);
-    }
+    public abstract String getByeSequence();
 
     /**
-     * Prints the Done Sequence, when the user command "done" is entered.
+     * Returns find sequence for FIND command.
      *
-     * @param tasks TaskList class, which contains a list of Task objects.
-     * @param taskNum Integer index of the task which has been selected as "done".
+     * @param tasks TaskList object.
+     * @return String.
      */
-    public void printDoneSequence(TaskList tasks, int taskNum){
-        String output = underscore + "     Nice! I've marked this task as done:\n"
-                + "       [" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
-                + "\n" + underscore;
-        System.out.println(output);
-    }
-
-    public String getDoneSequence(TaskList tasks, int taskNum){
-        String output = "Nice! I've marked this task as done:\n"
-                + "[" + tasks.getTask(taskNum).getStatusIcon() + "] " + tasks.getTask(taskNum).getTaskName()
-                + "\n";
-        return (output);
-    }
+    public abstract String getFoundTasks(TaskList tasks);
 
     /**
-     * Prints the Todo Sequence, when the user command "Todo" is entered.
+     * Returns delete sequence for DELETE command.
      *
-     * @param tasks TaskList class, which contains a list of Task objects.
-     * @param newTodo Todo class, which has been newly created.
+     * @param tasks TaskList object.
+     * @param taskToDelete Task object.
+     * @return String.
      */
-    public void printTodoSequence(TaskList tasks, Todo newTodo) {
-        String output = underscore + "     Got it. I've added this task:\n       "
-                + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
-        System.out.println(output);
-    }
-
-    public String getTodoSequence(TaskList tasks, Todo newTodo){
-        String output = "Got it. I've added this task:\n"
-                + newTodo.toString() + getTasksRemainingSequence(tasks.getSize());
-        return (output);
-    }
+    public abstract String getDeleteSequence(TaskList tasks, Task taskToDelete);
 
     /**
-     * Prints the Deadline sequence, when the user command "deadline" is entered.
+     * Returns event sequence for EVENT command.
      *
-     * @param tasks TaskList class, which contains a list of Task objects.
-     * @param newDeadline Deadline class, which has been newly created.
+     * @param tasks TaskList object.
+     * @param newEvent Event object.
+     * @return String.
      */
-    public void printDeadlineSequence(TaskList tasks, Deadline newDeadline) {
-        String output = underscore + "     Got it. I've added this task:\n       "
-                + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
-        System.out.println(output);
-    }
-
-    public String getDeadlineSequence(TaskList tasks, Deadline newDeadline){
-        String output = "Got it. I've added this task:\n"
-                + newDeadline.toString() + getTasksRemainingSequence(tasks.getSize());
-        return (output);
-    }
+    public abstract String getEventSequence(TaskList tasks, Event newEvent);
 
     /**
-     * Prints the Event sequence, when the user command "event" is entered.
+     * Returns todo sequence for TODO command.
      *
-     * @param tasks TaskList class, which contains a list of Task objects.
-     * @param newEvent Event class, which has been newly created.
+     * @param tasks TaskList object.
+     * @param newTodo Todo object.
+     * @return String.
      */
-    public void printEventSequence(TaskList tasks, Event newEvent) {
-        String output = underscore + "     Got it. I've added this task:\n       "
-                + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
-        System.out.println(output);
-    }
-
-    public String getEventSequence(TaskList tasks, Event newEvent) {
-        String output = "Got it. I've added this task:\n"
-                + newEvent.toString() + getTasksRemainingSequence(tasks.getSize());
-        return (output);
-    }
+    public abstract String getTodoSequence(TaskList tasks, Todo newTodo);
 
     /**
-     * Prints the Delete sequence, when the user command "delete" is entered.
+     * Returns deadline sequence for DEADLINE command.
      *
-     * @param tasks TaskList class, which contains a list of Task objects.
-     * @param taskToDelete Task class, which will be deleted from the list.
+     * @param tasks TaskList object.
+     * @param newDeadline deadline object.
+     * @return String.
      */
-    public void printDeleteSequence(TaskList tasks, Task taskToDelete) {
-        String output = underscore + "     Noted. I've removed this task.\n       "
-                + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
-        System.out.println(output);
-    }
-
-    public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
-        String output = "Noted. I've removed this task.\n"
-                + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
-        return (output);
-    }
+    public abstract String getDeadlineSequence(TaskList tasks, Deadline newDeadline);
 
     /**
-     * Prints the Bye sequence, when the user command "bye" is entered.
-     */
-    public void printByeSequence() {
-        String output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
-        System.out.print(output);
-    }
-
-    public String getByeSequence() {
-        String output = "\n" + "Bye. Hope to see you again soon!" + "\n";
-        return (output);
-    }
-
-    /**
-     * Prints the Task Remaining Sequence. Is used by previous methods such as printDeleteSequence.
+     * Returns done sequence for DONE command.
      *
-     * @param numOfTaskRemaining Integer number of the number of Task objects in the TaskList class.
-     * @return String (parsed) of the number of tasks left.
+     * @param tasks TaskList object.
+     * @param taskNum int Index of the specified task.
+     * @return String.
      */
-    public String getTasksRemainingSequence(int numOfTaskRemaining) {
-        String output = "\n     Now you have "
-                + numOfTaskRemaining + " tasks in the list.\n" + underscore;
-        return output;
-    }
+    public abstract String getDoneSequence(TaskList tasks, int taskNum);
 
-
-
-    /**
-     * Returns the string containing tasks in a pre-formatted form.
-     * Eg. "1.[E][✘] Run (at: ERC)
-     *      2.[D][✓] IPPT (by: 21st of December 2004, 8.15am)
-     *      3.[E][✓] Lecture (at: LT7A)".
-     *
-     * @param tasks TaskList object
-     * @return String of tasks
-     */
-    public String getTasksInList(TaskList tasks) {
-        String output = "";
-        for (int i = 0; i < tasks.getSize(); i++) {
-            output += "     " + (i + 1) + "." + tasks.getTask(i).toString() + "\n";
-        }
-        output += underscore;
-        return (output);
-    }
-
-
-
-    /**
-     * Prints the tasks which are similar for the "find" command.
-     *
-     * @param tasks TaskList object
-     */
-    public void printFoundTasks(TaskList tasks) {
-        String output = underscore + "     Here are the matching tasks in your list:\n";
-        output += getTasksInList(tasks);
-        System.out.println(output);
-    }
-
-    public String getFoundTasks(TaskList tasks) {
-        String output = "Here are the matching tasks in your list:\n";
-        output += getTasksInList(tasks);
-        return (output);
-    }
 }

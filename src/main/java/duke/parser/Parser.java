@@ -17,6 +17,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A class representing a parser.
@@ -136,6 +138,13 @@ public class Parser {
         return LocalDateTime.of(date, time);
     }
 
+    private ArrayList<Integer> removeDuplicates(ArrayList<Integer> indices) {
+        Stream<Integer> uniqueIndicesStream = indices.stream().sorted().distinct();
+        ArrayList<Integer> uniqueIndices = uniqueIndicesStream
+                .collect(Collectors.toCollection(ArrayList::new));
+        return uniqueIndices;
+    }
+
     private ArrayList<Integer> parseIndices(String description) {
         ArrayList<Integer> indices = new ArrayList<>();
         while(!description.isEmpty()) {
@@ -154,7 +163,7 @@ public class Parser {
         if (indices.isEmpty()) {
             throw new IllegalDescriptionException("Please provide at least 1 valid index");
         }
-        return new DeleteCommand(indices);
+        return new DeleteCommand(removeDuplicates(indices));
     }
 
     private DoneCommand parseDoneCommand(String description) throws IllegalDescriptionException {
@@ -162,6 +171,6 @@ public class Parser {
         if (indices.isEmpty()) {
             throw new IllegalDescriptionException("Please provide at least 1 valid index");
         }
-        return new DoneCommand(indices);
+        return new DoneCommand(removeDuplicates(indices));
     }
 }

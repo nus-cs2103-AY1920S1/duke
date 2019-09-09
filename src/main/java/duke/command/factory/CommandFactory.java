@@ -42,7 +42,7 @@ public class CommandFactory {
 
         switch (command) {
         case "bye":
-            return Optional.of(new ByeCommand(tasksController));
+            return Optional.of(new ByeCommand(tasksController, ui));
         case "list":
             return Optional.of(new ListCommand(tasksController));
         case "done":

@@ -4,6 +4,7 @@ import duke.task.tasks.Task;
 import error.storage.StorageException;
 import error.ui.UiException;
 import storage.Storage;
+import ui.UiController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +18,21 @@ import java.util.stream.Collectors;
 public class TasksController {
     private Storage storage;
     private TasksView view;
+    private UiController ui;
 
     /***
      * <p>
      * TaskListController constructor.
      * </p>
-     * @param view list of tasks.
      */
-    private TasksController(Storage storage, TasksView view) {
+    private TasksController(Storage storage, UiController ui) {
         this.storage = storage;
-        this.view = view;
+        this.ui = ui;
+        this.view = new TasksView();
     }
 
-    public static TasksController fromStorage(Storage storage, TasksView view) {
-        return new TasksController(storage, view);
+    public static TasksController fromStorage(Storage storage, UiController ui) {
+        return new TasksController(storage, ui);
     }
 
     /***
@@ -43,7 +45,7 @@ public class TasksController {
         try {
             return storage.getTasks();
         } catch (StorageException e) {
-            view.printStorageException(e);
+            ui.displayOutput(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -59,9 +61,9 @@ public class TasksController {
             List<Task> tasks = storage.getTasks();
             tasks.add(task);
             storage.writeTasks(tasks);
-            view.displayNewTask(task, tasks.size());
+            view.displayNewTask(task, tasks.size(), ui);
         } catch (StorageException e) {
-            view.printStorageException(e);
+            ui.displayOutput(e.getMessage());
         }
     }
 
@@ -76,13 +78,13 @@ public class TasksController {
             List<Task> tasks = storage.getTasks();
             tasks.get(index).setDone(true);
 
-            view.displayTaskDone(tasks.get(index));
+            view.displayTaskDone(tasks.get(index), ui);
 
             // write changes to storage file
             storage.writeTasks(tasks);
 
         } catch (StorageException e) {
-            view.printStorageException(e);
+            ui.displayOutput(e.getMessage());
         }
     }
 
@@ -94,9 +96,9 @@ public class TasksController {
     public void displayAllTasks() throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
-            view.displayAllTasks(tasks);
+            view.displayAllTasks(tasks, ui);
         } catch (StorageException e) {
-            view.printStorageException(e);
+            ui.displayOutput(e.getMessage());
         }
     }
 
@@ -112,11 +114,15 @@ public class TasksController {
 
             Task deleted = tasks.get(index);
             tasks.remove(index);
-            view.displayTaskDeleted(deleted, tasks.size());
+            view.displayTaskDeleted(deleted, tasks.size(), ui);
 
             storage.writeTasks(tasks);
         } catch (StorageException e) {
-            view.printStorageException(e);
+            ui.displayOutput(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            String message = " ☹ OOPS!!! You have entered an invalid index :-(";
+
+            ui.displayOutput(message);
         }
     }
 
@@ -134,9 +140,9 @@ public class TasksController {
                     .filter(task -> task.getDescription().contains(parameter))
                     .collect(Collectors.toList());
 
-            view.displaySearchResults(matchingTasks);
+            view.displaySearchResults(matchingTasks, ui);
         } catch (StorageException e) {
-            view.printStorageException(e);
+            ui.displayOutput(e.getMessage());
         }
     }
 }

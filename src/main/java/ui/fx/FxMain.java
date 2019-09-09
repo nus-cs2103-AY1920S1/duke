@@ -44,7 +44,7 @@ public class FxMain extends Application implements InputHandler, OutputHandler {
 
             stage.show();
 
-            controller.printUserMessage(GREETING);
+            controller.printDukeMessage(GREETING);
 
         } catch (IOException e) {
             e.printStackTrace();

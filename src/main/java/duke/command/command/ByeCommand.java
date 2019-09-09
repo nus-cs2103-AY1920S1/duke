@@ -2,6 +2,8 @@ package duke.command.command;
 
 import duke.command.Command;
 import duke.task.TasksController;
+import error.ui.UiException;
+import ui.UiController;
 
 /***
  * <p>
@@ -10,6 +12,7 @@ import duke.task.TasksController;
  */
 public class ByeCommand implements Command {
     private TasksController tasksController;
+    private UiController ui;
 
     /***
      * <p>
@@ -17,8 +20,9 @@ public class ByeCommand implements Command {
      * </p>
      * @param tasksController controller for duke.task list to which new tasks will be saved to.
      */
-    public ByeCommand(TasksController tasksController) {
+    public ByeCommand(TasksController tasksController, UiController ui) {
         this.tasksController = tasksController;
+        this.ui = ui;
     }
 
     /***
@@ -27,33 +31,7 @@ public class ByeCommand implements Command {
      * </p>
      */
     @Override
-    public void execute() {
-//        try {
-//            DukeStorage.getInstance().writeTaskData(tasksController.getTasks());
-//        } catch (ConfigurationException e) {
-//            OutputBuilder fileWriteErrorMessage =
-//                    new OutputBuilder("☹ OOPS!!! Unable to save duke.task data. Close duke.Duke anyway? (Y/N)");
-//            DukeOutput.printMessage(fileWriteErrorMessage);
-//
-//            boolean forceClosedSelectionMade = false;
-//
-//            while (!forceClosedSelectionMade) {
-//                String forceCloseSelection = DukeInput.readUserInput();
-//
-//                switch (forceCloseSelection) {
-//                case "Y":
-//                    sayGoodbye();
-//                    forceClosedSelectionMade = true;
-//                case "N":
-//                    forceClosedSelectionMade = true;
-//                default:
-//                    OutputBuilder invalidSelectionMessage = new OutputBuilder("☹ OOPS!!! Please select Y/N");
-//                    DukeOutput.printMessage(invalidSelectionMessage);
-//                }
-//            }
-//        }
-//
-//        sayGoodbye();
-//        DukeInput.close();}
+    public void execute() throws UiException {
+        ui.exit();
     }
 }

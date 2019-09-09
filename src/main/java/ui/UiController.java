@@ -41,4 +41,10 @@ public class UiController implements InputListener {
         // sends input back to activity utilizing the ui
         activity.onInputReceived(input);
     }
+
+    public void exit() {
+        output.display("Bye! Hope to see you again soon.");
+        input.stopHandler();
+        activity.stopActivity();
+    }
 }

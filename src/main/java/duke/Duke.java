@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.command.factory.CommandFactory;
-import duke.task.TasksView;
 import duke.task.TasksController;
 import error.ui.UiException;
 import storage.Storage;
@@ -22,13 +21,25 @@ import java.util.Optional;
 public class Duke implements UiActivity {
     private UiController ui;
     private CommandFactory factory;
+    private boolean guiEnabled;
 
 
     public static void main(String[] args) {
         Duke duke = new Duke();
 
+        boolean guiEnabled = true;
+
+        if (args.length > 0) {
+            if (args[0].equals("console")) {
+                guiEnabled = false;
+            } else {
+                System.out.println("Invalid arguments.");
+                System.exit(0);
+            }
+        }
+
         try {
-            Options options = OptionsFactory.select(true, true);
+            Options options = OptionsFactory.select(guiEnabled, true);
             duke.configure(options);
         } catch (Exception e) {
             System.out.println("FATAL: Unable to configure application.");
@@ -41,7 +52,6 @@ public class Duke implements UiActivity {
         System.out.println("Program starting...");
 
         ui.initializeUi();
-        exit();
     }
 
     public void configure(Options options) {
@@ -52,15 +62,10 @@ public class Duke implements UiActivity {
 
         // Initialize tasks and storage
         Storage storage = options.getStorage();
-        TasksView view = new TasksView(ui);
-        TasksController tasks = TasksController.fromStorage(storage, view);
+        TasksController tasks = TasksController.fromStorage(storage, ui);
 
         // Initialize command factory
         factory = new CommandFactory(tasks, ui);
-    }
-
-    private void exit() {
-        System.exit(1);
     }
 
     @Override
@@ -74,7 +79,12 @@ public class Duke implements UiActivity {
 
         } catch (UiException e) {
             System.out.println("FATAL: Ui stopped working.");
-            exit();
+            stopActivity();
         }
+    }
+
+    @Override
+    public void stopActivity() {
+        System.exit(0);
     }
 }

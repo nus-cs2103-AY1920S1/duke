@@ -1,0 +1,15 @@
+.user-dialog {
+    -fx-background-color: #80e5ff;
+}
+
+.duke-message-dialog {
+    -fx-background-color: #649665;
+}
+
+.duke-warning-dialog {
+    -fx-background-color: #ffc74e;
+}
+
+.duke-error-dialog {
+    -fx-background-color: #ff5b5d;
+}

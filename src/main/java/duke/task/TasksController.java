@@ -60,6 +60,9 @@ public class TasksController {
         try {
             List<Task> tasks = storage.getTasks();
             tasks.add(task);
+
+            assert tasks.contains(task);
+
             storage.writeTasks(tasks);
             view.displayNewTask(task, tasks.size(), ui);
         } catch (StorageException e) {
@@ -79,6 +82,8 @@ public class TasksController {
             tasks.get(index).setDone(true);
 
             view.displayTaskDone(tasks.get(index), ui);
+
+            assert tasks.get(index).isDone();
 
             // write changes to storage file
             storage.writeTasks(tasks);
@@ -115,6 +120,8 @@ public class TasksController {
             Task deleted = tasks.get(index);
             tasks.remove(index);
             view.displayTaskDeleted(deleted, tasks.size(), ui);
+
+            assert !tasks.contains(deleted);
 
             storage.writeTasks(tasks);
         } catch (StorageException e) {

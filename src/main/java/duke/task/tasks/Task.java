@@ -56,6 +56,10 @@ public abstract class Task implements Serializable {
         this.done = done;
     }
 
+    public boolean isDone() {
+        return this.done;
+    }
+
     public String getDescription() {
         return description;
     }

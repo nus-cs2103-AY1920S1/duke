@@ -9,7 +9,7 @@ import duke.task.TaskList;
 import static duke.ui.Messages.TASKS_COUNT;
 import static duke.ui.Messages.TASK_DELETED;
 
-public class DeleteCommand extends CommandWithNumber {
+public class DeleteCommand extends SingleTaskCommand {
     public DeleteCommand(final Integer taskNumber) {
         super(taskNumber);
     }

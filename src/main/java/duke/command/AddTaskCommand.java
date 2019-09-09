@@ -11,10 +11,13 @@ import static duke.ui.Messages.TASK_ADD_FAILURE;
 import static duke.ui.Messages.TASK_ADD_SUCCESS;
 import static duke.ui.Messages.TASK_MISSING_DESCRIPTION;
 
-public abstract class AddCommand extends Command {
+/**
+ * Commands that add a new Task.
+ */
+public abstract class AddTaskCommand extends Command {
     protected final String description;
 
-    public AddCommand(final String description) {
+    public AddTaskCommand(final String description) {
         this.description = description;
     }
 

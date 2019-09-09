@@ -9,7 +9,7 @@ import duke.task.TaskList;
 import static duke.ui.Messages.TASK_ALREADY_DONE;
 import static duke.ui.Messages.TASK_MARKED_AS_DONE;
 
-public class DoneCommand extends CommandWithNumber {
+public class DoneCommand extends SingleTaskCommand {
     public DoneCommand(final Integer taskNumber) {
         super(taskNumber);
     }

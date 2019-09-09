@@ -31,6 +31,7 @@ public class AddCommand extends Command {
 		} else {
 			if (commandType.equals("todo")) {
 				String taskDescription = inFullCommandScanner.nextLine().trim();
+				assert !taskDescription.isEmpty();
 				Task addedTodo = tasks.addTask(new ToDo(taskDescription));
 				ui.alertLatestTaskAdded(addedTodo, tasks);
 			} else if (commandType.equals("deadline")) {
@@ -57,6 +58,8 @@ public class AddCommand extends Command {
 				if (deadLineTaskDateTime.length() == 0) {
 					throw new DukeException("no date provided");
 				}
+				assert !(deadLineTaskName == null);
+				assert !(deadLineTaskDateTime == null);
 				DeadLine deadline = new DeadLine(deadLineTaskName.toString().trim(),
 					LocalDateTime.parse(formatDateTimeString(deadLineTaskDateTime.toString().trim()),
 						dateTimeFormatter));
@@ -86,6 +89,8 @@ public class AddCommand extends Command {
 				if (eventDateTime.length() == 0) {
 					throw new DukeException("no date provided");
 				}
+				assert !(eventName == null);
+				assert !(eventDateTime == null);
 				Event event = new Event(eventName.toString().trim(),
 					LocalDateTime.parse(formatDateTimeString(eventDateTime.toString().trim()), dateTimeFormatter));
 				Task eventAdded = tasks.addTask(event);

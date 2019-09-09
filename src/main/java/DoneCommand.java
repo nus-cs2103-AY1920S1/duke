@@ -21,6 +21,8 @@ public class DoneCommand extends Command {
 	public void execute(TaskList tasks, Ui ui, Storage storage) {
 		//read which task to complete and set as complete
 		Integer taskNumber = Integer.parseInt(inFullCommandScanner.nextLine().trim()) - 1;
+		assert(taskNumber != null);
+		assert(taskNumber != 0);
 		Task task = tasks.markCompleted(taskNumber);
 		StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
 		sb.append("    ");

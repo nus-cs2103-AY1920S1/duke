@@ -25,7 +25,7 @@ public class Deadline extends Task {
         if (!dateTime.contains("of")) {
             // Checks if the String has already been formatted.
             // If "of" is present, this indicated that dateTime has already been formatted.
-            // Main purpose if for creating Deadline objects when reading from saved data.
+            // Main purpose is for creating Deadline objects when reading from saved data.
             this.dateTime = parseBy(dateTime);
         }
     }
@@ -46,7 +46,7 @@ public class Deadline extends Task {
         if (!dateTime.contains("of")) {
             // Checks if the String has already been formatted.
             // If "of" is present, this indicated that dateTime has already been formatted.
-            // Main purpose if for creating Deadline objects when reading from saved data.
+            // Main purpose is for creating Deadline objects when reading from saved data.
             this.dateTime = parseBy(dateTime);
 
         }
@@ -93,6 +93,9 @@ public class Deadline extends Task {
         String[] years = dateTime.split(" ");
 
         int day = Integer.parseInt(words[0]);
+
+        assert day > 0 : "Day should be strictly positive";
+        assert day < 32 : "Day should be less than 32";
 
         String hour = years[1];
 

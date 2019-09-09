@@ -2,6 +2,9 @@ package seedu.duke.tasklist;
 
 import seedu.duke.task.Task;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TaskList class contains the list of Tasks (stored as an ArrayList) and methods to add, delete Tasks.
@@ -34,6 +37,7 @@ public class TaskList {
      * @return Task object which is located at index i.
      */
     public Task getTask(int i) {
+        assert i >= 0 : "Task index should be >= 0";
         return getArrayList().get(i);
     }
 
@@ -52,6 +56,7 @@ public class TaskList {
      * @param i Integer index of where the Task object (to be deleted) is in.
      */
     public void deleteTask(int i) {
+        assert i >= 0 : "Task index should be >= 0";
         getArrayList().remove(i);
     }
 
@@ -74,21 +79,16 @@ public class TaskList {
     public TaskList findSimilarTasks(String searchTerm) {
 
         ArrayList<Task> listOfTasks = this.getArrayList();
+        List<Task> T = listOfTasks.stream()
+                .filter(o -> o.getTaskName().contains(searchTerm))
+                .collect(Collectors.toList());
+
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
-        Task task = null;
-        String taskDescription = "";
 
-        for (int i = 0; i < listOfTasks.size(); i++) {
-
-            task = listOfTasks.get(i);
-            taskDescription = task.getTaskName();
-
-            if (taskDescription.contains(searchTerm)) {
-                matchingTasks.add(task);
-            }
+        Iterator iter = T.iterator();
+        while(iter.hasNext()) {
+            matchingTasks.add((Task) iter.next());
         }
-
-        // Create a TaskList object to encapsulate the ArrayList<Task>.
         return new TaskList(matchingTasks);
     }
 

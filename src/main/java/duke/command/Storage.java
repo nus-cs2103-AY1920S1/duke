@@ -1,3 +1,5 @@
+package duke.command;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -13,7 +15,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * Storage class. Handles the reading/writing of data to disk.
+ * duke.command.Storage class. Handles the reading/writing of data to disk.
  */
 public class Storage {
 
@@ -23,7 +25,7 @@ public class Storage {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
-     * Creates a new Storage object.
+     * Creates a new duke.command.Storage object.
      * @param fileName The location of the file to be read/written to.
      */
     public Storage(String fileName) {

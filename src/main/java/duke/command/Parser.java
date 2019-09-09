@@ -1,3 +1,5 @@
+package duke.command;
+
 import java.util.Arrays;
 
 /**
@@ -51,6 +53,20 @@ public class Parser {
         String taskDesc = joinStrings(Arrays.copyOfRange(params, 0, split));
         String taskDue = joinStrings(Arrays.copyOfRange(params, split + 1, params.length));
         return new String[]{taskDesc, taskDue};
+    }
+
+    /** Checks if a valid index has been specified.
+     * Used for mark as done or delete operations.
+     * @param params The parameters input by the user.
+     * @return The index, if the user has specified it correctly.
+     * @throws DukeException If no index was specified.
+     */
+    public static int checkForValidIndex(String[] params) throws DukeException {
+        try {
+            return Integer.valueOf(params[0]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("You need to specify a task ID to delete.");
+        }
     }
 
 }

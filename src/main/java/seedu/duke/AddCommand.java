@@ -31,6 +31,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList t, Ui u, Storage s) {
+        int size = t.list.size();
         Task task = new Task("null");
         if (title.equals("todo")) {
             task = new ToDo(details);
@@ -45,6 +46,7 @@ public class AddCommand extends Command {
         }
 
         t.list.add(task);
+        assert t.list.size() == size + 1: "Current list size should be one more";
 
         try {
             String text = task.getType() + " . 0 . " + task.getFullDescription() + "\n";

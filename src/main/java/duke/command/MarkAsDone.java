@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MarkAsDone {
 
     /** Done message. */
-    private static String done_message = "\t Nice! I've marked this task as done:\n";
+    private static String done_message = "Nice! I've marked this task as done:\n";
 
     static String markAsDone(ArrayList<Task> taskList, int index, Storage storage) throws DukeException {
         Task current;
@@ -20,7 +20,7 @@ public class MarkAsDone {
         if (!status) {
             throw new DukeException("Action already marked as done!");
         }
-        String s = done_message + "\t   " + current;
+        String s = done_message + current;
         boolean isSaved = Save.save(storage, taskList);
         assert isSaved == true : "Error: Not saved to disk.";
         return s;

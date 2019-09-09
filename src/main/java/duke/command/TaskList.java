@@ -93,4 +93,12 @@ public class TaskList {
         return FindEvent.findEvent(taskList, params);
     }
 
+    /**
+     * Allows to user to check what commands are available.
+     * @return A string representing the manual for Duke.
+     */
+    public String help() {
+        return Help.help();
+    }
+
 }

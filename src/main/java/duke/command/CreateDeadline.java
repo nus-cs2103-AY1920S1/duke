@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CreateDeadline {
 
     /** Task added successfully message. */
-    private static String task_added_message = "\t Got it. I've added this task:\n";
+    private static String task_added_message = "Got it. I've added this task:\n";
 
     /** Stores the DateTimeFormatter object used to specify the format of date/time objects when printed. */
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -24,7 +24,7 @@ public class CreateDeadline {
         if (details[0].isEmpty() && details[1].isEmpty()) {
             throw new DukeException("You need to specify a due date, denoted by /by");
         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeException("The description or date of a deadline cannot be empty.");
         }
         Task current;
         try {
@@ -33,7 +33,7 @@ public class CreateDeadline {
             throw new DukeException("You need to specify a due date in the format dd/MM/yyyy HHmm");
         }
         taskList.add(current);
-        String s = task_added_message + "\t   " + current + TotalNoOfTasks.totalNoOfTasks(taskList);
+        String s = task_added_message + current + TotalNoOfTasks.totalNoOfTasks(taskList);
         boolean isSaved = Save.save(storage, taskList);
         assert isSaved == true : "Error: Not saved to disk.";
         return s;

@@ -5,11 +5,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Storage {
-    private File saveFile;
-
-    Storage(String saveLoadFilePath) {
-        saveFile = new File(saveLoadFilePath);
-    }
+    private static final String saveLoadFilePath = "listSaveData.txt";
+    private static File saveFile = new File(saveLoadFilePath);
 
     private static int getPrepositionPos(String[] inputSplit) {
         for (int i = 0; i < inputSplit.length; i++) {
@@ -79,16 +76,10 @@ class Storage {
      * @param saveText Text to be written on the file
      * @throws IOException If the file cannot be written
      */
-    void save(String saveText) throws IOException {
-        //        how do you work around this? it always still exists
-        //        if (f.exists()) {
-        //            System.out.println(f.delete() ? "Previous File deleted" : "Previous File still exists");
-        //        }
-        //        System.out.println(f.createNewFile() ? "New file created" : "New file not created");
+    static void save(String saveText) throws IOException {
         FileWriter fw = new FileWriter(saveFile, false);
         fw.write(saveText);
         fw.close();
-        //        System.out.println("Finished Saving");
     }
 
     /**
@@ -97,15 +88,17 @@ class Storage {
      * @throws FileNotFoundException If the File is not found
      * @throws InvalidInputFormatException If the File is corrupted / not parsed correctly
      */
-    TaskList load() throws FileNotFoundException, InvalidInputFormatException {
-        Scanner s = new Scanner(saveFile);
+    static TaskList load() throws FileNotFoundException, InvalidInputFormatException {
+        Scanner s;
+        s = new Scanner(saveFile);
+
         TaskList tasks = new TaskList();
         while (s.hasNextLine()) {
             String[] task = s.nextLine().split(" ");
             boolean completed = task[0].charAt(1) == '1';
             switch (task[0].charAt(0)) {
             case 'T':
-                // construct todo
+                // construct todos
                 task[0] = "todo";
                 break;
             case 'D':

@@ -86,7 +86,7 @@ class Parser {
         }
     }
 
-    boolean parse(String input, TaskList tasks, Storage storage, MainWindow mw) {
+    boolean parse(String input, TaskList tasks, MainWindow mw) {
         String[] inputSplit = input.split(" ");
         String command = inputSplit[0];
 
@@ -96,7 +96,7 @@ class Parser {
                 return false;
 
             case "bye":
-                storage.save(tasks.saveFormat());
+                Storage.save(tasks.saveFormat());
                 mw.dukeSays(Ui.printBye());
                 return false;
 
@@ -109,7 +109,7 @@ class Parser {
                 Task theTask = tasks.get(Integer.parseInt(inputSplit[1]) - 1);
                 theTask.isDone = true;
                 mw.dukeSays(Ui.printDone(theTask));
-                storage.save(tasks.saveFormat());
+                Storage.save(tasks.saveFormat());
                 return true;
 
             case "todo":
@@ -119,7 +119,7 @@ class Parser {
                 if (task != null) {
                     tasks.add(task);
                     mw.dukeSays(Ui.printCreated(task, tasks));
-                    storage.save(tasks.saveFormat());
+                    Storage.save(tasks.saveFormat());
                 }
                 return true;
 
@@ -127,7 +127,7 @@ class Parser {
                 checkValidTaskIndex(inputSplit);
                 Task removedTask = tasks.remove(Integer.parseInt(inputSplit[1]) - 1);
                 mw.dukeSays(Ui.printRemoved(removedTask, tasks));
-                storage.save(tasks.saveFormat());
+                Storage.save(tasks.saveFormat());
                 return true;
 
             case "formats":

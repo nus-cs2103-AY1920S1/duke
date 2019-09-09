@@ -1,6 +1,4 @@
 public class Duke {
-    private static final String saveLoadFilePath = "listSaveData.txt";
-    private Storage storage;
     private TaskList tasks;
     private Parser parser;
     private MainWindow mw;
@@ -12,7 +10,7 @@ public class Duke {
      * @param input
      */
     void getResponse(String input) {
-        if (!parser.parse(input, tasks, storage, mw)) {
+        if (!parser.parse(input, tasks, mw)) {
             mw.closeSequence();
         }
     }
@@ -25,10 +23,8 @@ public class Duke {
      */
     void initialize(MainWindow mw) {
         this.mw = mw;
-//        mw.dukeSays("initializing");
-//        mw.dukeSays("loading storage");
         try {
-            tasks = storage.load();
+            tasks = Storage.load();
         } catch (Exception e) {
             mw.dukeSays(e.getMessage());
             tasks = new TaskList();
@@ -39,11 +35,6 @@ public class Duke {
     }
 
     public Duke() {
-        this(saveLoadFilePath);
-    }
-
-    public Duke(String filepath) {
         parser = new Parser();
-        storage = new Storage(filepath);
     }
 }

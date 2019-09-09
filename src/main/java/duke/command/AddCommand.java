@@ -30,12 +30,11 @@ public class AddCommand extends Command {
             description.add(commandArr[i]);
         }
 
-        if (index == -1) {
-            throw new DukeException(
-                    "    ____________________________________________________________\n"
-                            +  "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
-                            + "    ____________________________________________________________\n");
-        } else if (description.toString().equals("")) {
+        assert index >= 0: "    ____________________________________________________________\n"
+                +  "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
+                + "    ____________________________________________________________\n";
+
+        if (description.toString().equals("")) {
             throw new DukeException(
                     "    ____________________________________________________________\n"
                             + "     ☹ OOPS!!! The description of a " + commandArr[0] + " cannot be empty.\n"
@@ -64,7 +63,12 @@ public class AddCommand extends Command {
             timing.add(commandArr[i]);
         }
 
-        if (index == -1 || timing.toString().equals("")) {
+        //Check whether there is /at or /by in the command
+        assert index >= 0: "    ____________________________________________________________\n"
+                + "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
+                + "    ____________________________________________________________\n";
+
+        if (timing.toString().equals("")) {
             throw new DukeException(
                     "    ____________________________________________________________\n"
                             + "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"

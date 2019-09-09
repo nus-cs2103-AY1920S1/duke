@@ -213,6 +213,7 @@ public class Parser {
             case "done":
                 duke.command.Command c = new DoneCommand();
                 int indexDone = Integer.parseInt(commandArr[1]) - 1;
+                assert indexDone >= 0: "Index of the list cannot be less than 0";
                 Task currTask = taskList.get(indexDone);
                 currTask.markAsDone();
                 result = ((DoneCommand) c).taskComplete(currTask);
@@ -222,6 +223,7 @@ public class Parser {
             case "delete":
                 c = new DeleteCommand();
                 int index = Integer.parseInt(commandArr[1]) - 1;
+                assert index >= 0: "Index of the list cannot be less than 0";
                 result = ((DeleteCommand) c).deleteComplete(taskList.size(),
                         taskList.get(index));
                 taskList.remove(index);

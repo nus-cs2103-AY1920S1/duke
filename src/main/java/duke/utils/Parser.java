@@ -1,4 +1,4 @@
-package duke.command;
+package duke.utils;
 
 import java.util.LinkedList;
 

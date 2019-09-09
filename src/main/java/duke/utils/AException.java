@@ -1,4 +1,4 @@
-package duke.command;
+package duke.utils;
 
 /**
  * Represents every exception that Duke may encounter

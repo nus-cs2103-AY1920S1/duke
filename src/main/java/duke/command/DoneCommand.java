@@ -30,6 +30,7 @@ public class DoneCommand extends Command {
         storage.deleteTaskFromFile(tasks.allTasks.get(index));
         tasks.allTasks.get(index).markAsDone();
         storage.appendTaskToFile(tasks.allTasks.get(index));
+        assert (tasks.allTasks.get(index).getStatus() == true) : "Not marked as done";
         return ("Nice! I've marked this task as done:\n" + tasks.allTasks.get(index));
     }
 

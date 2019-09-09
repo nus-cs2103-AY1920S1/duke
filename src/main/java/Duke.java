@@ -70,4 +70,8 @@ public class Duke extends Application {
              return e.getMessage();
          }
     }
+
+    public String welcomeMessage() {
+         return "Hello! I'm Duke\nWhat can I do for you?";
+    }
 }

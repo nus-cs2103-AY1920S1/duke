@@ -31,6 +31,7 @@ public class Ui {
     }
 
     public void out(String output) {
+        assert output != null : "Empty Output";
         dukeOut.append(output).append("\n");
     }
 

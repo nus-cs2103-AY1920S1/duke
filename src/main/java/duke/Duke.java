@@ -22,6 +22,7 @@ public class Duke {
      * @param filePath Path for duke data file.
      */
     public Duke(String filePath) {
+        assert filePath != null : "Empty file path";
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.loadTasks(ui);

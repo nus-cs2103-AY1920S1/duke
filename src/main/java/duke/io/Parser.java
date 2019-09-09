@@ -32,7 +32,7 @@ public class Parser {
     public static Command parse(String input) throws UnsupportedOperationException, ArrayIndexOutOfBoundsException {
         String command = input.split(" ")[0];
         input = input.replace(command, "").trim();
-        switch (command) {
+        switch (command.toLowerCase()) {
         case "bye":
             return new ExitCommand();
         case "done":

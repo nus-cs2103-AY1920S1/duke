@@ -54,7 +54,7 @@ public class Duke extends Application {
      * Empty constructor.
      */
     public Duke() {
-
+        this("C:\\repos\\duke\\out\\data\\TaskList.txt");
     }
 
     /**

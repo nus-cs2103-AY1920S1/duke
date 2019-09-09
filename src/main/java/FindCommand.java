@@ -13,7 +13,7 @@ public class FindCommand extends Command{
         StringBuilder searchResult = new StringBuilder();
         for (Task task : tasks.getWholeList()) {
             if (task.getTask().contains(this.word)) {
-                searchResult.append(count + "." + task + "\n");
+                searchResult.append(count).append(".").append(task).append("\n");
                 count++;
             }
         }

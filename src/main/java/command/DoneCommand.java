@@ -29,13 +29,12 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if (this.index < 0 || this.index >= tasks.getTasks().size()) {
-            Command incorrectCommand = new IncorrectCommand();
-            incorrectCommand.execute(tasks, ui, storage);
-        } else {
+        try {
             tasks.getTasks().get(this.index).setDone(true);
             ui.showDoneCommand(tasks, this.index);
             assert tasks.getTasks().get(this.index).getDoneIcon().equals("\u2713") : "Incorrect done command";
+        } catch (IndexOutOfBoundsException e) {
+            ui.showLoadingError("Please enter a valid task number.");
         }
     }
 }

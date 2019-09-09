@@ -1,5 +1,6 @@
 package ui.fx;
 
+import com.sun.javafx.fxml.builder.JavaFXImageBuilder;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.ScrollPane;
@@ -11,9 +12,13 @@ import javafx.scene.input.KeyEvent;
 import ui.input.InputHandler;
 
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class DukeMainWindowController {
     @FXML
@@ -29,15 +34,8 @@ public class DukeMainWindowController {
     private InputHandler inputHandler;
 
     public DukeMainWindowController() {
-        File userFile = new File("src/main/assets/DaUser.png");
-        File dukeFile = new File("src/main/assets/DaDuke.png");
-
-        try {
-            userImage = new Image(new FileInputStream(userFile));
-            dukeImage = new Image(new FileInputStream(dukeFile));
-        } catch (FileNotFoundException e) {
-            System.out.println("Image files not found");
-        }
+        userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
+        dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
     }
 
     @FXML

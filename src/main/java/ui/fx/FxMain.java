@@ -33,8 +33,7 @@ public class FxMain extends Application implements InputHandler, OutputHandler {
         try {
             isStarted = true;
 
-            File fxmlFile = new File("src/main/resources/view/MainWindow.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader(fxmlFile.toURI().toURL());
+            FXMLLoader fxmlLoader = new FXMLLoader(FxMain.class.getResource("/view/MainWindow.fxml"));
             VBox vb = fxmlLoader.load();
             Scene scene = new Scene(vb);
             stage.setScene(scene);

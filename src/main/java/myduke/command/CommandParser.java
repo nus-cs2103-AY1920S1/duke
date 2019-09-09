@@ -29,29 +29,40 @@ public class CommandParser {
 
         //Try to parse User's query
         switch (parts[0]) {
+        case "t":
         case "todo":
             return new AddTaskCommand(TaskType.TASK_TODO, arguments);
 
+        case "d":
+        case "due":
         case "deadline":
             return new AddTaskCommand(TaskType.TASK_DEADLINE, arguments);
 
+        case "e":
         case "event":
             return new AddTaskCommand(TaskType.TASK_EVENT, arguments);
 
+        case "a":
+        case "after":
         case "doafter":
             return new AddTaskCommand(TaskType.TASK_DO_AFTER, arguments);
 
+        case "m":
+        case "mark":
         case "done":
             return new MarkCompletedTaskCommand(arguments);
 
+        case "r":
         case "rm":
         case "del":
         case "delete":
             return new DeleteCommand(arguments);
 
+        case "f":
         case "find":
             return new FilterTasksCommand(arguments);
 
+        case "l":
         case "ls":
         case "list":
             if (parts.length != 1) {
@@ -66,6 +77,7 @@ public class CommandParser {
             }
             return new TerminateSessionCommand();
 
+        case "init":
         case "reload":
         case "reinitialise":
             if (parts.length != 1) {

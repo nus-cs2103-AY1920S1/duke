@@ -61,6 +61,7 @@ public class Duke {
         String filePath = "C:\\Users\\Khairul\\Desktop\\Computing Resources\\CS2103T\\duke\\data\\duke.txt";
         ui = new Ui();
         storage = new Storage(filePath);
+        assert storage !=null : "storage should hold an actual Storage object.";
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
@@ -98,6 +99,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null : "c should hold an actual command object.";
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.toString();

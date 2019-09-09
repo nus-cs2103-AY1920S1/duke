@@ -44,6 +44,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert toFind != null : "toFind should contain an actual String";
         TaskList matchingTasks = tasks.search(toFind);
         return "Here are the tasks in your list:\n"
                 + matchingTasks;

@@ -64,6 +64,7 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert deadline != null : "deadline should hold an actual Deadline object.";
         tasks.addTask(deadline);
         try {
             storage.writeToFile(deadline.toFile());

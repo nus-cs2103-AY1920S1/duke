@@ -39,6 +39,7 @@ public class AddToDoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
+        assert task != null : "task should hold an actual Task object.";
         try {
             storage.writeToFile(task.toFile());
         } catch (IOException e) {

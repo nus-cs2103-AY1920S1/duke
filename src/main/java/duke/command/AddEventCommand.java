@@ -65,6 +65,7 @@ public class AddEventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(event);
+        assert event != null : "event should hold an actual Event object.";
         try {
             storage.writeToFile(event.toFile());
         } catch (IOException e) {

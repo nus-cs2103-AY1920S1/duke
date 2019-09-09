@@ -26,6 +26,7 @@ public class DukeException extends Exception {
     
     @Override
     public String toString() {
+        assert exceptionString != null : "exceptionString should contain an actual String";
         return exceptionString;
     }
 

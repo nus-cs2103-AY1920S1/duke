@@ -1,24 +1,22 @@
 package command;
 
 import core.Storage;
-import ui.Ui;
+import exception.DukeIllegalArgumentException;
 import exception.DukeIoException;
 import task.Task;
 import task.TaskList;
+import ui.Ui;
 
 /**
- * AddTaskCommand class.
+ * AddTodoCommand class.
  *
- * <p>Abstract Command for adding a Task.
+ * <p>Command to add a Todo.
  *
  * @author Marcus Ong
  */
-public abstract class AddTaskCommand extends Command {
-    protected Task task;
-
-    public AddTaskCommand(CommandType type, String commandString, Task task) {
-        super(type, commandString);
-        this.task = task;
+public class AddTodoCommand extends AddTaskCommand {
+    public AddTodoCommand(String commandString, Task task) {
+        super(CommandType.ADD_TODO, commandString, task);
     }
 
     @Override

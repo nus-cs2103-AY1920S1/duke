@@ -1,6 +1,7 @@
 package command;
 
 import core.Storage;
+import exception.DukeIllegalArgumentException;
 import ui.Ui;
 import exception.DukeIoException;
 import task.Task;
@@ -17,7 +18,7 @@ public class FindTaskCommand extends Command {
     private String searchString;
 
     public FindTaskCommand(String commandString, String searchString) {
-        super(commandString);
+        super(CommandType.FIND_TASK, commandString);
         this.searchString = searchString;
     }
 

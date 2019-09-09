@@ -1,6 +1,7 @@
 package command;
 
 import core.Storage;
+import exception.DukeIllegalArgumentException;
 import ui.Ui;
 import task.TaskList;
 
@@ -13,7 +14,7 @@ import task.TaskList;
  */
 public class ExitCommand extends Command {
     public ExitCommand(String commandString) {
-        super(commandString);
+        super(CommandType.EXIT, commandString);
     }
 
     @Override

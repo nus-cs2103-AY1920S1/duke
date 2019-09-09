@@ -1,8 +1,11 @@
 package ui;
 
+import command.Command;
+import command.CommandType;
 import task.Task;
 import task.TaskList;
 
+import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 public abstract class Ui {
@@ -134,4 +137,42 @@ public abstract class Ui {
         show();
     }
 
+    /**
+     * Print out list of aliases.
+     */
+    public void listAliases() {
+        addLineToMessage("Here are the aliases for all commands:");
+        addLineToMessage("ID: Aliases");
+        addLineToMessage("-----------");
+        for (CommandType type : CommandType.values()) {
+            ArrayList<String> aliases = Command.getAliases(type);
+            String aliasesString = String.join(",", aliases);
+            addLineToMessage(type.getId() + ": " + aliasesString);
+        }
+        show();
+    }
+
+    /**
+     * Print out add alias message.
+     *
+     * @param type Type of Command.
+     * @param aliasesAdded Strings of aliases added.
+     */
+    public void showAddAlias(CommandType type, String...aliasesAdded) {
+        addLineToMessage("I've added the following aliases for " + type.getId() + ":");
+        addLineToMessage(String.join(",", aliasesAdded));
+        show();
+    }
+
+    /**
+     * Print out remove alias message.
+     *
+     * @param type Type of Command.
+     * @param aliasesDeleted Strings of aliases deleted.
+     */
+    public void showDeleteAlias(CommandType type, String...aliasesDeleted) {
+        addLineToMessage("I've deleted the following aliases for " + type.getId() + ":");
+        addLineToMessage(String.join(",", aliasesDeleted));
+        show();
+    }
 }

@@ -1,11 +1,17 @@
 package core;
 
-import command.AddTaskCommand;
+import command.AddAliasCommand;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddTodoCommand;
 import command.Command;
+import command.CommandType;
+import command.DeleteAliasCommand;
 import command.DeleteTaskCommand;
 import command.DoneTaskCommand;
 import command.ExitCommand;
 import command.FindTaskCommand;
+import command.ListAliasesCommand;
 import command.ListTasksCommand;
 import exception.DukeIllegalArgumentException;
 import exception.EmptyFieldException;
@@ -23,6 +29,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
 
 public class Parser {
     /**
@@ -38,25 +45,109 @@ public class Parser {
      */
     public static Command parse(String command) throws EmptyFieldException, DukeIllegalArgumentException,
             InvalidCommandFormatException, UnknownCommandException, InvalidIndexException {
-        if (command.equalsIgnoreCase("list")) {
+        CommandType type = parseCommandTypeFromAlias(command);
+
+        if (type == CommandType.LIST_TASKS) {
             return parseListTasksCommand(command);
-        } else if (command.toLowerCase().startsWith("done")) {
+        } else if (type == CommandType.DONE_TASK) {
             return parseDoneTaskCommand(command);
-        } else if (command.toLowerCase().startsWith("todo")) {
+        } else if (type == CommandType.ADD_TODO) {
             return parseAddTodoCommand(command);
-        } else if (command.toLowerCase().startsWith("deadline")) {
+        } else if (type == CommandType.ADD_DEADLINE) {
             return parseAddDeadlineCommand(command);
-        } else if (command.toLowerCase().startsWith("event")) {
+        } else if (type == CommandType.ADD_EVENT) {
             return parseAddEventCommand(command);
-        } else if (command.toLowerCase().startsWith("delete")) {
+        } else if (type == CommandType.DELETE_TASK) {
             return parseDeleteCommand(command);
-        } else if (command.toLowerCase().startsWith("find")) {
+        } else if (type == CommandType.FIND_TASK) {
             return parseFindTaskCommand(command);
-        } else if (command.equalsIgnoreCase("bye")) {
+        } else if (type == CommandType.ADD_ALIAS) {
+            return parseAddAliasCommand(command);
+        } else if (type == CommandType.DELETE_ALIAS) {
+            return parseDeleteAliasCommand(command);
+        } else if (type == CommandType.LIST_ALIASES) {
+            return parseListAliasesCommand(command);
+        } else if (type == CommandType.EXIT) {
             return parseExitCommand(command);
         } else {
             throw new UnknownCommandException("OOPS!!! Sorry mate, I don't geddit.");
         }
+    }
+
+    private static CommandType parseCommandTypeFromAlias(String stringToParse) throws UnknownCommandException {
+        for (CommandType type : CommandType.values()) {
+            ArrayList<String> aliases = Command.getAliases(type);
+            for (String alias : aliases) {
+                boolean isEqualsIgnoreCase = stringToParse.equalsIgnoreCase(alias);
+                boolean isFirstWordMatching = stringToParse.toLowerCase().startsWith(alias + " ");
+                if (isEqualsIgnoreCase || isFirstWordMatching) {
+                    return type;
+                }
+            }
+        }
+        throw new UnknownCommandException("OOPS!!! Sorry mate, I don't geddit.");
+    }
+
+    private static Command parseDeleteAliasCommand(String command) throws EmptyFieldException,
+            InvalidCommandFormatException {
+        try {
+            int firstSpaceIndex = command.indexOf(' ');
+            int typeLength = "/type".length();
+            int typeIndex = command.indexOf("/type");
+
+            String remainingCommand = command.substring(firstSpaceIndex).trim();
+            if (remainingCommand.isEmpty()) {
+                throw new EmptyFieldException("OOPS!!! Can't delete nothing.");
+            }
+            String aliasesString = command.substring(firstSpaceIndex, typeIndex).trim();
+            String[] aliasesToDelete = aliasesString.split(" ");
+
+            String typeString = command.substring(typeIndex + typeLength).trim();
+            CommandType type = parseCommandTypeFromTypeId(typeString);
+
+            return new DeleteAliasCommand(command, type, aliasesToDelete);
+        } catch  (DukeIllegalArgumentException | StringIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("OOPS!!! Please gimme the right format for adding aliases: \n\t"
+                    + "'delete-alias [aliases, separated by spaces] /type [command ID]'");
+        }
+    }
+
+    private static Command parseAddAliasCommand(String command) throws EmptyFieldException,
+            InvalidCommandFormatException {
+        try {
+            int firstSpaceIndex = command.indexOf(' ');
+            int typeLength = "/type".length();
+            int typeIndex = command.indexOf("/type");
+
+            String remainingCommand = command.substring(firstSpaceIndex).trim();
+            if (remainingCommand.isEmpty()) {
+                throw new EmptyFieldException("OOPS!!! Can't add nothing.");
+            }
+            String aliasesString = command.substring(firstSpaceIndex, typeIndex).trim();
+            String[] aliasesToAdd = aliasesString.split(" ");
+
+            String typeString = command.substring(typeIndex + typeLength).trim();
+            CommandType type = parseCommandTypeFromTypeId(typeString);
+
+            return new AddAliasCommand(command, type, aliasesToAdd);
+        } catch (DukeIllegalArgumentException | StringIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException("OOPS!!! Please gimme the right format for adding aliases: \n\t"
+                    + "'alias [aliases, separated by spaces] /type [command ID]'");
+        }
+    }
+
+    private static CommandType parseCommandTypeFromTypeId(String stringToParse) throws DukeIllegalArgumentException {
+        for (CommandType type : CommandType.values()) {
+            boolean isEqualsIgnoreCase = stringToParse.equalsIgnoreCase(type.getId());
+            if (isEqualsIgnoreCase) {
+                return type;
+            }
+        }
+        throw new DukeIllegalArgumentException("OOPS!!! No such ID for command type.");
+    }
+
+    private static Command parseListAliasesCommand(String command) {
+        return new ListAliasesCommand(command);
     }
 
     private static Command parseExitCommand(String command) {
@@ -67,8 +158,8 @@ public class Parser {
             InvalidCommandFormatException {
         try {
             //parse searchString from command string
-            int commandLength = "find".length();
-            String searchString = command.substring(commandLength).trim();
+            int firstSpaceIndex = command.indexOf(' ');
+            String searchString = command.substring(firstSpaceIndex).trim();
             if (searchString.isEmpty()) {
                 throw new EmptyFieldException("OOPS!!! Can't search for somethin' with nothin' mate.");
             }
@@ -93,11 +184,11 @@ public class Parser {
             DukeIllegalArgumentException, InvalidCommandFormatException {
         try {
             int atLength = "/at".length();
-            int commandLength = "event".length();
+            int firstSpaceIndex = command.indexOf(' ');
             int atIndex = command.indexOf("/at"); // look for '/at' keyword from command
 
             // parse description from command
-            String description = command.substring(commandLength, atIndex).trim();
+            String description = command.substring(firstSpaceIndex, atIndex).trim();
             if (description.isEmpty()) {
                 throw new EmptyFieldException("OOPS!!! The description of an event cannot be empty mate.");
             }
@@ -143,7 +234,7 @@ public class Parser {
 
             assert task != null : "Task is null";
 
-            return new AddTaskCommand(command, task);
+            return new AddEventCommand(command, task);
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme an event with the right format: \n\t\t"
                     + "'event [description] /at [start datetime] - [end datetime]'\n\t"
@@ -155,11 +246,11 @@ public class Parser {
             InvalidCommandFormatException {
         try {
             int byLength = "/by".length();
-            int commandLength = "deadline".length();
+            int firstSpaceIndex = command.indexOf(' ');
             int byIndex = command.indexOf("/by"); // look for '/by' keyword from command
 
             // parse description from command
-            String description = command.substring(commandLength, byIndex).trim();
+            String description = command.substring(firstSpaceIndex, byIndex).trim();
             if (description.isEmpty()) {
                 throw new EmptyFieldException("OOPS!!! The description of a deadline cannot be empty mate.");
             }
@@ -183,7 +274,7 @@ public class Parser {
           
             assert task != null : "Task is null";
 
-            return new AddTaskCommand(command, task);
+            return new AddDeadlineCommand(command, task);
         } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme a deadline with the right format: "
                     + "'deadline [description] /by [datetime]'\n\t"
@@ -195,15 +286,15 @@ public class Parser {
             InvalidCommandFormatException {
         try {
             //parse description from command string
-            int commandLength = "todo".length();
-            String description = command.substring(commandLength).trim();
+            int firstSpaceIndex = command.indexOf(' ');
+            String description = command.substring(firstSpaceIndex).trim();
             if (description.isEmpty()) {
                 throw new EmptyFieldException("OOPS!!! The description of a task cannot be empty mate.");
             }
 
             Task task = new Todo(description);
 
-            return new AddTaskCommand(command, task);
+            return new AddTodoCommand(command, task);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme a todo with the right format: "
                     + "'todo [description]'");

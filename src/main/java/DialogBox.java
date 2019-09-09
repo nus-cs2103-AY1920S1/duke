@@ -45,6 +45,12 @@ public class DialogBox extends HBox {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Gets Duke responses to the user.
+     * @param l Label used in Duke GUI
+     * @param iv ImageView used to display profile pictures in Duke GUI
+     * @return DialogBox of Duke's responses
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

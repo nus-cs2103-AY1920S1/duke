@@ -102,7 +102,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new Button("send! woof!");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -131,7 +131,7 @@ public class Duke extends Application {
 
         userInput.setPrefWidth(325.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(95.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

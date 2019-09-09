@@ -54,6 +54,8 @@ public class Parser {
             c = new ExitCommand();
         } else if (commandComponents[0].equals("find")) {
             c = new FindCommand(commandComponents[1]);
+        } else if (commandComponents[0].equals("undo")) {
+            c = new UndoCommand();
         } else {
             throw new DukeException("    ____________________________________________________________\n" +
                     "    Sorry! I don't know what this command does:\n" +  "    " + fullCommand + "\n" +

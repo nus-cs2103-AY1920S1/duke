@@ -1,4 +1,5 @@
 package command;
+import main.HistoryManager;
 import main.Storage;
 import main.Ui;
 import task.TaskList;
@@ -29,9 +30,9 @@ public class ExitCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         ui.nextLine("See you later! 8)");
-        return ;
+        return tasks;
     }
 
     /**

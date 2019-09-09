@@ -19,6 +19,21 @@ public class Storage {
         this.data = new File(filepath);
     }
 
+    private Task getData(String[] data){
+        Task t = null;
+        if (data[0].equals("T")) {
+            t = new ToDo(data[2]);
+        } else if (data[0].equals("E")) {
+            t = new Event(data[2], data[3], data[4]);
+        } else if (data[0].equals("D")) {
+            t = new Deadline(data[2], data[3]);
+        }
+
+        if (data[1].equals("+")) {
+            Task.markAsDone(t);
+        }
+        return t;
+    }
     /**
      * Reads tasks from a previous saved file (if present) and store it in a list of tasks.
      * @return ArrayList<Task> a list that contains the tasks from the previous save point
@@ -34,19 +49,8 @@ public class Storage {
                 BufferedReader bufferedReader = new BufferedReader(fr);
                 while (bufferedReader.ready()) {
                     String dataRead = bufferedReader.readLine();
-                    Task t = null;
                     String[] dataReads = dataRead.split(" \\| ");
-                    if (dataReads[0].equals("T")) {
-                        t = new ToDo(dataReads[2]);
-                    } else if (dataReads[0].equals("E")) {
-                        t = new Event(dataReads[2], dataReads[3], dataReads[4]);
-                    } else if (dataReads[0].equals("D")) {
-                        t = new Deadline(dataReads[2], dataReads[3]);
-                    }
-
-                    if (dataReads[1].equals("+")) {
-                        Task.markAsDone(t);
-                    }
+                    Task t = getData(dataReads);
                     tasks.add(t);
                 }
                 System.out.println("    Previous file is found! Command \"list\" to checkout previous tasks!");

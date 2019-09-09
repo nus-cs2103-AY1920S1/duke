@@ -1,6 +1,7 @@
 package command;
 
 
+import main.HistoryManager;
 import main.Storage;
 import task.TaskList;
 import main.Ui;
@@ -20,6 +21,14 @@ public class FindCommand implements Command {
         this.stringArgument = stringArgument;
     }
 
+    private String concatenateStrings(ArrayList<String> strings) {
+        String result = "";
+        for (String s : strings) {
+            result = result + "s" + "\n";
+        }
+        result = result.equals("") ? "\n" : result;
+        return result;
+    }
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
@@ -28,22 +37,20 @@ public class FindCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         ArrayList<String> tasksThatMatch = tasks.findAllMatches(this.stringArgument);
-        String matched = "";
-        for (String s : tasksThatMatch) {
-            matched = matched + s + "\n";
-        }
+        String matched = concatenateStrings(tasksThatMatch);
         String result = "    ____________________________________________________________\n" +
                 "    Here are the matching tasks in your list:\n" +
                 matched +
                 "    ____________________________________________________________";
         ui.nextLine(result);
+        return tasks;
     }
 
     /**
      * isExit checks if the command is an exit command.
-     * @return boolean whether if the command is an exit command.
+     * @return boolean whether if the command is an exithi command.
      */
     @Override
     public boolean isExit() {

@@ -23,6 +23,15 @@ public class DeleteCommand implements Command {
         return false;
     }
 
+    private void handleDeleteCall(TaskList tasks, Ui ui, Storage storage) {
+        Task removed = tasks.removeTask(taskNumber - 1);
+        storage.updateTasks(tasks);
+        ui.nextLine("    ____________________________________________________________\n" +
+                "     Noted. I've removed this task: \n" +
+                "       " + removed.toString() + "\n" +
+                "     Now you have " + tasks.size() + " tasks in the list.\n" +
+                "    ____________________________________________________________");
+    }
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
@@ -31,18 +40,14 @@ public class DeleteCommand implements Command {
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
         if (tasks.size() < taskNumber) {
-            System.out.print("Error! Task cannot be found~!");
-        } else {
-            Task removed = tasks.removeTask(taskNumber - 1);
-            storage.updateTasks(tasks);
-            ui.nextLine("    ____________________________________________________________\n" +
-                    "     Noted. I've removed this task: \n" +
-                            "       " + removed.toString() + "\n" +
-                            "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                            "    ____________________________________________________________");
+            throw new InsufficientTaskArgumentException("Error! Task cannot be found~!");
         }
+
+        handleDeleteCall(tasks, ui, storage);
+        historyManager.updateRecords();
+        return tasks;
     }
 
     /**

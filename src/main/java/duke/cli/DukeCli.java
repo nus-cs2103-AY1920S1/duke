@@ -35,8 +35,7 @@ public class DukeCli {
             ui.showWarning(e.getMessage());
         }
 
-        boolean isExit = false;
-        while (!isExit) {
+        while (true) {
             try {
                 String input = ui.readCommand();
                 if (input == null) {
@@ -45,12 +44,14 @@ public class DukeCli {
                 ui.showSeparator();
                 Command command = Parser.parse(input);
                 CommandResult result = command.execute(tasks, storage);
-                isExit = result.isExit();
                 for (String message : result.getMessages()) {
                     ui.showMessage(message);
                 }
                 for (String warning : result.getWarnings()) {
                     ui.showWarning(warning);
+                }
+                if (result.isExit()) {
+                    break;
                 }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

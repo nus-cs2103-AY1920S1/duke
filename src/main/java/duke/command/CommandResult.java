@@ -36,7 +36,7 @@ public class CommandResult {
         this.exit = exit;
     }
 
-    public boolean hasMesages() {
+    public boolean hasMessages() {
         return this.messages.size() != 0;
     }
 

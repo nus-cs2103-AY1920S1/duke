@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
             if (result.isExit()) {
                 Platform.exit();
             }
-            response = result.hasMesages() ? String.join("\n", result.getMessages()).stripTrailing() : null;
+            response = result.hasMessages() ? String.join("\n", result.getMessages()).stripTrailing() : null;
             warning = result.hasWarnings() ? String.join("\n", result.getWarnings()).stripTrailing() : null;
         } catch (DukeException e) {
             error = e.getMessage();

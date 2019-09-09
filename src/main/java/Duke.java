@@ -28,8 +28,8 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia"
-                + "/CS2103/Individual_project/Duke/local/Tasks.txt");
+        storage = new Storage("/Users/TuanDingWei/Desktop/NUS_Academia" +
+                "/CS2103/Individual_project/Duke/local/Tasks.txt");
         tasks = new TaskList(storage.load());
         ui.welcome();
     }

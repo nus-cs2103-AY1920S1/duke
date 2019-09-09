@@ -42,10 +42,7 @@ public class StringDateConverter {
         String dd = ddMMyyyy[0];
         String mm = ddMMyyyy[1];
         String yyyy = ddMMyyyy[2];
-        if (dd.length() != 2 || mm.length() != 2 || yyyy.length() != 4) {
-            return false;
-        }
-        return true;
+        return (dd.length() == 2 && mm.length() == 2 && yyyy.length() == 4);
     }
 
     /**

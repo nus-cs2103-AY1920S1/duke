@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Storage {
 
     private static File file;
+    private static ArrayList<Task> listOfTasks;
 
     public Storage(String filePath) {
         file = new File(filePath);
@@ -24,36 +25,18 @@ public class Storage {
      * @return the list of tasks
      */
     public static ArrayList<Task> load() {
-
-        ArrayList<Task> listOfTasks = new ArrayList<>();
-
+        listOfTasks = new ArrayList<>();
         try {
             checkFileExist();
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String[] task = sc.nextLine().split("\\|");
-                String taskType = task[0].trim();
-
-                if (taskType.equals("D")) {
-                    boolean isTaskDone = task[1].trim().equals("1") ? true : false;
-                    String taskDescription = task[2].trim();
-                    String taskBy = task[3].trim();
-                    listOfTasks.add(new Deadline(taskDescription, isTaskDone, Parser.dateTimeConverter(taskBy)));
-                } else if (taskType.equals("E")) {
-                    boolean isTaskDone = task[1].trim().equals("1") ? true : false;
-                    String taskDescription = task[2].trim();
-                    String taskAt = task[3].trim();
-                    listOfTasks.add(new Event(taskDescription, isTaskDone, Parser.dateTimeConverter(taskAt)));
-                } else {
-                    boolean isTaskDone = task[1].trim().equals("1") ? true : false;
-                    String taskDescription = task[2].trim();
-                    listOfTasks.add(new Todo(taskDescription, isTaskDone));
-                }
+                String[] userInput = sc.nextLine().split("\\|");
+                String taskType = userInput[0].trim();
+                handleLoadTask(userInput, taskType);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-
         return listOfTasks;
     }
 
@@ -66,19 +49,18 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : listOfTasks) {
+                String taskToAdd;
                 if (task instanceof Deadline) {
-                    String taskToAdd = String.format("D | %s | %s | %s\n", task.isTaskDone() ? "1" : "0",
-                        task.getTaskDescription(), ((Deadline) task).getBy());
-                    fw.write(taskToAdd);
+                    taskToAdd = String.format("D | %s | %s | %s\n", task.isTaskDone() ? "1" : "0",
+                        task.getTaskDescription(), ((Deadline) task).getTaskBy());
                 } else if (task instanceof Event) {
-                    String taskToAdd = String.format("E | %s | %s | %s\n", task.isTaskDone() ? "1" : "0",
-                        task.getTaskDescription(), ((Event) task).getAt());
-                    fw.write(taskToAdd);
+                    taskToAdd = String.format("E | %s | %s | %s\n", task.isTaskDone() ? "1" : "0",
+                        task.getTaskDescription(), ((Event) task).getTaskAt());
                 } else {
-                    String taskToAdd = String.format("T | %s | %s\n", task.isTaskDone() ? "1" : "0",
+                    taskToAdd = String.format("T | %s | %s\n", task.isTaskDone() ? "1" : "0",
                         task.getTaskDescription());
-                    fw.write(taskToAdd);
                 }
+                fw.write(taskToAdd);
             }
             fw.close();
         } catch (IOException e) {
@@ -103,6 +85,34 @@ public class Storage {
                 assert file.exists() : "File should exist now";
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Handles reading a task from the file into the list of tasks.
+     *
+     * @param userInput User input that has been parsed into a string array
+     * @param taskType Type of the task that will be read.
+     */
+    private static void handleLoadTask(String[] userInput, String taskType) {
+        try {
+            boolean isTaskDone = userInput[1].trim().equals("1") ? true : false;
+            String taskDescription = userInput[2].trim();
+            if (taskType.equals("T")) {
+                listOfTasks.add(new Todo(taskDescription, isTaskDone));
+            } else if (taskType.equals("E")) {
+                String taskAt = userInput[3].trim();
+                listOfTasks.add(new Event(taskDescription, isTaskDone, Parser.dateTimeConverter(taskAt)));
+            } else if (taskType.equals("D")) {
+                String taskBy = userInput[3].trim();
+                listOfTasks.add(new Deadline(taskDescription, isTaskDone, Parser.dateTimeConverter(taskBy)));
+            } else {
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -7,14 +7,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    private LocalDateTime by;
 
     public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
         this.by = by;
     }
 
-    public String getBy() {
+    public String getTaskBy() {
         return this.by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

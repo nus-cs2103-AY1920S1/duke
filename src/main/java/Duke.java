@@ -27,11 +27,11 @@ public class Duke {
             return ui.print();
         }
         try {
-            Parser.parse(tasks, ui, storage, input);
+            Parser.parse(tasks, ui, input);
             storage.save(tasks.getListOfTasks());
             return ui.print();
         } catch (DukeException e) {
-            ui.sendErrorMessage(e.getMessage());
+            ui.setErrorMessage(e.getMessage());
             return ui.print();
         }
     }

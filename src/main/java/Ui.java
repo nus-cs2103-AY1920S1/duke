@@ -6,12 +6,7 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    private Scanner sc;
     private String printStatement;
-
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
 
     public String print() {
         return this.printStatement;
@@ -21,7 +16,7 @@ public class Ui {
         this.printStatement = str;
     }
 
-    public void sendErrorMessage(String errorMsg) {
+    public void setErrorMessage(String errorMsg) {
         this.printStatement = errorMsg;
     }
 

@@ -17,7 +17,6 @@ public class TaskList {
     }
 
     public void deleteTask(int taskNumber) {
-        Task deletedTask = listOfTasks.get(taskNumber);
         listOfTasks.remove(taskNumber);
     }
 

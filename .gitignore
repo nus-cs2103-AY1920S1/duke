@@ -13,5 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# duke.Duke data
+# Duke data
 /data/

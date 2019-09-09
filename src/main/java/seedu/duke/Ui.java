@@ -20,13 +20,9 @@ public class Ui {
     /**
      * Prints the intro when starting the application.
      */
-    public static void intro() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(format(logo + "\n Hello! I'm Duke\n What can I do for you?"));
+    public static String intro() {
+        String logo = "Hello! I'm Duke\nWhat can I do for you?";
+        return logo;
     }
 
     /**
@@ -85,8 +81,8 @@ public class Ui {
      * @return
      */
     public static String deleteLine(String str, int size) {
-        String result = "Noted. I've removed this task: \n   " + str + "\n Now you have " +
-        size + " tasks in the list.";
+        String result = "Noted. I've removed this task: \n   "
+                + str + "\n Now you have " + size + " tasks in the list.";
         return result;
     }
 
@@ -97,8 +93,8 @@ public class Ui {
      * @return
      */
     public static String addLine(String str, int size) {
-        String message = "Got it. I've added this task:\n " + str +
-                "\nNow you have " + size + " tasks in the list.";
+        String message = "Got it. I've added this task:\n " + str
+                + "\nNow you have " + size + " tasks in the list.";
         return message;
     }
 
@@ -114,7 +110,7 @@ public class Ui {
     /**
      * Prints the list of all Tasks in the TaskList.
      * @param tl Current TaskList.
-     * @return
+     * @return String containing list message.
      */
     public static String list(TaskList tl) {
         String message = "";
@@ -129,6 +125,11 @@ public class Ui {
         return message;
     }
 
+    /**
+     * Produces the matching list message.
+     * @param tl taskList
+     * @return String containing matching list message.
+     */
     public static String listMatching(ArrayList<Task> tl) {
         String result = "";
         if (tl.size() != 0) {

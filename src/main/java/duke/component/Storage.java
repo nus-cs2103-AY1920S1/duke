@@ -40,7 +40,7 @@ public class Storage {
 
     private static final int COMMAND_IND = 0;
     private static final int DONE_STATUS_IND = 1;
-    private static final int DESCRIPTION_IND = 1;
+    private static final int DESCRIPTION_IND = 2;
     private static final int TIME_IND = 1;
 
     private static final int STATUS_DONE = 1;

@@ -38,10 +38,11 @@ public class DeadlineCommand extends Command {
         try {
             StringDateConverter converter = new StringDateConverter();
             Date by = converter.convertStringToDate(details[1].trim());
-            tasks.getTasks().add(new Deadline(details[0], by));
+            tasks.getTasks().add(new Deadline(details[0].trim(), by));
             ui.showDeadlineCommand(tasks);
         } catch (ParseException e) {
-            ui.showLoadingError("Please enter a valid date.");
+            ui.showLoadingError("Please enter a valid date according to dd/MM/yyyy HHmm pattern."
+                    + " Time is in 24-hour format. E.g 11:30pm is 2330.");
         }
     }
 }

@@ -119,7 +119,7 @@ public class Duke {
     public static void doTask(String str) throws NumberFormatException, IllegalArgumentException, IndexOutOfBoundsException {
         int pos = Integer.parseInt(str)-1;
         Task task = lst.get(pos);
-        boolean isDoneBefore = task.doTask();
+        boolean isDoneBefore = task.setDone();
         if (isDoneBefore) {
             throw new IllegalArgumentException("Task has already been done");
         }

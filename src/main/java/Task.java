@@ -25,7 +25,7 @@ public abstract class Task {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
     }
 
-    public boolean doTask() {
+    public boolean setDone() {
         if (!isDone) {
             this.isDone = true;
             return false;

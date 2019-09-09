@@ -28,17 +28,21 @@ public class TaskList extends ArrayList<Task> {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
-                String[] parts = line.split(" /| ");
+                String[] parts = line.split(" \\| ");
+                assert (parts[0].equals("")) == false: "Error in file recording.";
+                assert (parts[1].equals('0') || parts[1].equals('1')) == false: "Error in file recording.";
                 switch (parts[0]) {
                 case "T":
                     add(new Todo(parts[2]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
                     break;
                 case "E":
+                    assert parts[2].equals("") == false: "Error in file record.";
                     add(new Event(parts[2], parts[3]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
                     break;
                 case "D":
+                    assert parts[2].equals("") == false: "Error in file record.";
                     add(new Deadline(parts[2], parts[3]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
                     break;

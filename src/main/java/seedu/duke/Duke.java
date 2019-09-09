@@ -44,6 +44,8 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printReply(Messages.MESSAGE_UNKNOWN_COMMAND);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                ui.printReply("The description cannot be empty :-(");
             }
         }
         ui.showGoodByeMessage();

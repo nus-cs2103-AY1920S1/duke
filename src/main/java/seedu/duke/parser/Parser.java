@@ -31,9 +31,7 @@ public class Parser {
             return new DeleteCommand(taskNum);
         case "todo":
             return new AddCommand(parts[0], parts[1]);
-        case "deadline":
-            return new AddCommand(parts[0], parts[1]);
-        case "event":
+        case "deadline": case "event":
             return new AddCommand(parts[0], parts[1]);
         default:
             throw new DukeException("");

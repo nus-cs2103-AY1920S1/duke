@@ -25,30 +25,30 @@ public class AddCommand extends Command{
         String taskDescription;
         String taskDate;
         String[] subparts;
-        switch(taskType) {
-        case "todo" :
-            taskDescription = partialCommand;
-            taskToAdd = new Todo(taskDescription);
-            break;
-        case "deadline" :
-            subparts = partialCommand.split(" /by ");
-            taskDescription = subparts[0];
-            taskDate = subparts[1];
-            taskToAdd = new Deadline(taskDescription, taskDate);
-            break;
-        case "event" :
-            subparts = partialCommand.split(" /at ");
-            taskDescription = subparts[0];
-            taskDate = subparts[1];
-            taskToAdd = new Event(taskDescription, taskDate);
-            break;
-        default:
-            throw new DukeException(Messages.MESSAGE_UNKNOWN_COMMAND);
-        }
+            switch (taskType) {
+                case "todo":
+                    taskDescription = partialCommand;
+                    taskToAdd = new Todo(taskDescription);
+                    break;
+                case "deadline":
+                    subparts = partialCommand.split(" /by ");
+                    taskDescription = subparts[0];
+                    taskDate = subparts[1];
+                    taskToAdd = new Deadline(taskDescription, taskDate);
+                    break;
+                case "event":
+                    subparts = partialCommand.split(" /at ");
+                    taskDescription = subparts[0];
+                    taskDate = subparts[1];
+                    taskToAdd = new Event(taskDescription, taskDate);
+                    break;
+                default:
+                    throw new DukeException(Messages.MESSAGE_UNKNOWN_COMMAND);
+            }
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, String filePath) throws DukeException {
+    public void execute(TaskList tasks, UI ui, String filePath) throws DukeException, ArrayIndexOutOfBoundsException {
         this.evaluateTaskType();
         tasks.add(taskToAdd);
         String reply = "Got it. I've added this task:\n\t  " + taskToAdd + "\n\tNow you have " + tasks.size()

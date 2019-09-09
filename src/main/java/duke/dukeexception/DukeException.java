@@ -16,6 +16,7 @@ public class DukeException extends Exception {
             "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String WRITING_ERROR = "Error writing to specified file path";
     public static final String LOADING_ERROR = "Error loading from specified file path";
+    public static final String METADATA_ERROR = "Metadata file is corrupted";
     /**
      * Class constructor that specifies the exception message associated with
      * this instance.

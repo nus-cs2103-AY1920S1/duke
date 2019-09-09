@@ -1,6 +1,7 @@
 package duke.javafx;
 
 import duke.Duke;
+import duke.dukeexception.DukeException;
 import duke.ui.Response;
 import duke.ui.Ui;
 import javafx.application.Platform;
@@ -36,8 +37,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         ui = new Ui();
+        duke = new Duke();
+        String firstGreeting;
+
+        if(duke.getLastOpenedFile() == null) {
+            firstGreeting = ui.printLogoAndGreet()
+                    + "\n" + ui.printMetaDataCorrupted()
+                    + "\n" + ui.printRequestForFilePath();
+        } else {
+            firstGreeting = ui.printLogoAndGreet()
+                    + "\n" + ui.printLastOpenedFilePath(duke.getLastOpenedFile())
+                    + "\n" + ui.printRequestForFilePath();
+        }
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.printLogoAndGreet(), dukeImage)
+                DialogBox.getDukeDialog(firstGreeting, dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }

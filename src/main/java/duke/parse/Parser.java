@@ -59,8 +59,8 @@ public class Parser {
             userTask = new Event(taskInformation[0], taskInformation[1]);
             return new AddCommand(userTask);
         } catch (IndexOutOfBoundsException ex) {
-            throw new WrongEventFormatException("To create a task, you should follow this format: " +
-                    "event <description> /at DD/MM/YYYY HHMM");
+            throw new WrongEventFormatException("To create a task, you should follow this format: "
+                    + "event <description> /at DD/MM/YYYY HHMM");
         }
     }
 
@@ -72,8 +72,8 @@ public class Parser {
             userTask = new Deadline(taskInformation[0], taskInformation[1]);
             return new AddCommand(userTask);
         } catch (IndexOutOfBoundsException ex) {
-            throw new WrongEventFormatException("To create a Deadline, you should follow this format:" +
-                    "deadline <description> /by DD/MM/YYYY HHMM");
+            throw new WrongEventFormatException("To create a Deadline, you should follow this format:"
+                    + "deadline <description> /by DD/MM/YYYY HHMM");
         }
 
     }

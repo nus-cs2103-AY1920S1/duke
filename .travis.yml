@@ -1,1 +1,11 @@
 language: java
+
+jdk:
+  - oraclejdk11
+
+os:
+  - windows
+
+branches:
+  only:
+    - master

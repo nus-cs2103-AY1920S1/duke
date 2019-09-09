@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     private static DateTimeFormatter dukeDateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private ArrayList<Task> dukeTaskList = null;
+    private ArrayList<Task> dukeTaskList;
 
     /**
      * Constructor.
@@ -33,14 +33,6 @@ public class TaskList {
      */
     public void addTask(Task toAdd) {
         dukeTaskList.add(toAdd);
-    }
-
-    /**
-     * Deletes a particular task from dukeTaskList
-     * @param toDelete task to be deleted
-     */
-    public void deleteTask(Task toDelete) {
-        dukeTaskList.remove(toDelete);
     }
 
     /**

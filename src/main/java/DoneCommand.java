@@ -3,9 +3,9 @@
  */
 public class DoneCommand extends Command {
 
-    int indexToMarkDone = -1;
+    private int indexToMarkDone = -1;
 
-    public void setIndexToMarkDone(int indexToMarkDone) {
+    public DoneCommand(int indexToMarkDone) {
         this.indexToMarkDone = indexToMarkDone;
     }
 

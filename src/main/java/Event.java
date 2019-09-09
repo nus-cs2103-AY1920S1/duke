@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  */
 public class Event extends Task {
 
-    protected String at;
-    protected LocalDateTime dateTimeAt = null;
+    private String at;
+    private LocalDateTime dateTimeAt = null;
 
     /**
      * Constructor.

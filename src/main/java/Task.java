@@ -53,7 +53,7 @@ public class Task {
      */
     public String toTextFileString() {
         String status = "";
-        if (this.isDone == true) {
+        if (this.isDone) {
             status = "1|";
         } else {
             status = "0|";

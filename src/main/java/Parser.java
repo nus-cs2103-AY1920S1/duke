@@ -1,5 +1,3 @@
-import javafx.application.Platform;
-
 /**
  * Encapsulates a parser that parses input.
  */
@@ -21,15 +19,13 @@ public class Parser {
             int inputIndex = Integer.parseInt(inputSplit[1]);
             int actualIndex = inputIndex - 1;
             assert actualIndex >= 0 : "Array index cannot be less than zero";
-            DeleteCommand delete = new DeleteCommand();
-            delete.setIndexToRemove(actualIndex);
+            DeleteCommand delete = new DeleteCommand(actualIndex);
             return delete;
         } else if (inputSplit[0].equals("done")) {
             int inputIndex = Integer.parseInt(inputSplit[1]);
             int actualIndex = inputIndex - 1;
             assert actualIndex >= 0 : "Array index cannot be less than zero";
-            DoneCommand done = new DoneCommand();
-            done.setIndexToMarkDone(actualIndex);
+            DoneCommand done = new DoneCommand(actualIndex);
             return done;
         } else if (inputSplit[0].equals("todo")) {
             AddTodoCommand addTodo = new AddTodoCommand();

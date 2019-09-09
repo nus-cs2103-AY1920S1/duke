@@ -18,14 +18,14 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (inputEvent.trim().length() == 5) {
+        if (inputEvent.trim().length() == 5) { // length of the string "event" is 5
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         } else {
             int slashLocation = slashLocator(inputEvent);
-            int firstIndex = slashLocation - 1;
-            int secondIndex = slashLocation + 4;
-            String eventDescription = inputEvent.substring(6, firstIndex);
-            String eventAt = inputEvent.substring(secondIndex);
+            int indexOfWhiteSpace = slashLocation - 1; // index of whitespace just before the slash
+            int indexOfFirstChar = slashLocation + 4; // index of first character of eventAt date time
+            String eventDescription = inputEvent.substring(6, indexOfWhiteSpace);
+            String eventAt = inputEvent.substring(indexOfFirstChar);
             Event e = new Event(eventDescription, eventAt);
             tasks.addTaskAfterValidation(eventAt, e);
             storage.updateChanges(tasks.getDukeTaskList());
@@ -34,14 +34,14 @@ public class AddEventCommand extends Command {
 
     @Override
     public String executeForGui (TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (inputEvent.trim().length() == 5) {
+        if (inputEvent.trim().length() == 5) { // length of the string "event" is 5
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         } else {
             int slashLocation = slashLocator(inputEvent);
-            int firstIndex = slashLocation - 1;
-            int secondIndex = slashLocation + 4;
-            String eventDescription = inputEvent.substring(6, firstIndex);
-            String eventAt = inputEvent.substring(secondIndex);
+            int indexOfWhiteSpace = slashLocation - 1; // index of whitespace just before the slash
+            int indexOfFirstChar = slashLocation + 4; // index of first character of eventAt date time string
+            String eventDescription = inputEvent.substring(6, indexOfWhiteSpace);
+            String eventAt = inputEvent.substring(indexOfFirstChar);
             Event e = new Event(eventDescription, eventAt);
             String output = tasks.addTaskAfterValidationForGui(eventAt, e);
             storage.updateChanges(tasks.getDukeTaskList());

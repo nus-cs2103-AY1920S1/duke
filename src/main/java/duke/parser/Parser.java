@@ -16,7 +16,7 @@ public class Parser {
      *
      * @param fullCommand User input.
      * @return Command object depending on given input.
-     * @throws DukeException If invalid input.
+     * @throws DukeException If input is not in the right format.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] line = fullCommand.split(" ", 2);

@@ -55,13 +55,17 @@ public class AddCommand extends Command {
         Task task;
         switch (type) {
         case "event": {
+            // Check if description has both description and time
             if (!description.matches(".+\\s/at\\s.+$")) {
+                // Check if description and time is missing
                 if (description.length() == 0 || description.matches("^\\s?/at\\s?$")) {
                     throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_TIME);
                 }
+                // Check if description is missing
                 if (description.matches("^\\s?/at.*")) {
                     throw new DukeException(ERROR_MISSING_DESCRIPTION);
                 }
+                // Check if time is missing
                 if (!description.contains("/at") || description.matches(".*/at\\s?")) {
                     throw new DukeException(ERROR_MISSING_EVENT_TIME);
                 }
@@ -77,13 +81,17 @@ public class AddCommand extends Command {
             break;
         }
         case "deadline": {
+            // Check if description has both description and time
             if (!description.matches(".+\\s/by\\s.+$")) {
+                // Check if description and time is missing
                 if (description.length() == 0 || description.matches("^\\s?/by\\s?$")) {
                     throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_TIME);
                 }
+                // Check if description is missing
                 if (description.matches("^\\s?/by.*")) {
                     throw new DukeException(ERROR_MISSING_DESCRIPTION);
                 }
+                // Check if time is missing
                 if (!description.contains("/by") || description.matches(".*/by\\s?")) {
                     throw new DukeException(ERROR_MISSING_DEADLINE);
                 }
@@ -103,7 +111,7 @@ public class AddCommand extends Command {
         }
         assert task != null : "A new task must exist to be added to the TaskList.";
         tasks.add(task);
-        ui.append(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
-                tasks.size() != 1 ? "tasks" : "task"));
+        String pluralizeTasks = tasks.size() != 1 ? "tasks" : "task";
+        ui.append(String.format(MESSAGE_ADD,  task.toString(), tasks.size(), pluralizeTasks));
     }
 }

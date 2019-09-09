@@ -15,13 +15,4 @@ public abstract class Command {
      * @throws DukeException If invalid input.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns true if it is an ExitCommand.
-     *
-     * @return true if ExitCommand.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

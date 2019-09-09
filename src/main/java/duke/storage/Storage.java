@@ -1,29 +1,24 @@
 package duke.storage;
 
 import duke.DukeException;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.Scanner;
 
 public class Storage {
     private File file;
 
-    private static final String ERROR_FAILED_TO_READ     = "Failed to read save data. Creating new task list.";
+    private static final String ERROR_FAILED_TO_FIND     = "Failed to find save data. Creating new task list.";
     private static final String ERROR_FAILED_SAVE        = "Failed to save file.";
+    private static final String ERROR_INCORRECT_FORMAT   = "Failed to read save data. Save data was in wrong format. " +
+            "Creating new task list.";
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("EEE, d MMM uuuu, hh.mma");
@@ -70,13 +65,14 @@ public class Storage {
                             input[1].equals("1"));
                     break;
                 default:
-                    throw new DukeException(ERROR_FAILED_TO_READ);
+                    throw new DukeException(ERROR_INCORRECT_FORMAT);
                 }
                 tasks.add(task);
             }
-        } catch (FileNotFoundException | DukeException | ArrayIndexOutOfBoundsException
-                | DateTimeParseException ex) {
-            throw new DukeException(ERROR_FAILED_TO_READ);
+        } catch (FileNotFoundException ex) {
+            throw new DukeException(ERROR_FAILED_TO_FIND);
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
+            throw new DukeException(ERROR_INCORRECT_FORMAT);
         }
         return tasks;
     }

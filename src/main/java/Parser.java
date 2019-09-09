@@ -29,12 +29,14 @@ public class Parser {
             String holder = ui.printList(taskList);
             return holder;
         } else if (command.startsWith("done")) {
+            assert command != null : "Task should not be null";
             String[] words = command.split("\\s");
             int index = Integer.parseInt(words[1]);
             String holder = taskList.doneTask(index);
             storage.saveTask();
             return holder;
         } else if (command.startsWith("delete")) {
+            assert command != null : "Task should not be null";
             String[] words = command.split("\\s");
             int index = Integer.parseInt(words[1]);
             String holder = taskList.deleteTask(index);
@@ -47,6 +49,7 @@ public class Parser {
             findList = taskList.findTask(taskList, findString);
             return ui.printTaskList(findList);
         } else {
+            assert command != null : "Task should not be null";
             String holder = taskList.addTask(command);
             storage.saveTask();
             return holder;

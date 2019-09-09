@@ -1,14 +1,5 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What can I do for you?
-
 		Got it. I've added this task: 
-		[E][?] project meeting  (at: Sun Apr 30 14:00:00 SGT 1995)
+		[E][?] project meeting  (at: Tue Apr 30 12:30:00 SGT 2019)
 
 		You have 1 items in the list now.
 		Got it. I've added this task: 
@@ -16,62 +7,22 @@ What can I do for you?
 
 		You have 2 items in the list now.
 		Got it. I've added this task: 
-		[D][?] clear thrash  (by: Sun Apr 30 14:00:00 SGT 1995)
+		[D][?] clear thrash  (by: Tue Apr 30 12:30:00 SGT 2019)
 
 		You have 3 items in the list now.
 		Got it. I've added this task: 
-		[D][?] submit 2103 assignment  (by: Sun Apr 30 14:00:00 SGT 1995)
+		[D][?] submit 2103 assignment  (by: Tue Apr 30 12:30:00 SGT 2019)
 
 		You have 4 items in the list now.
-		[E][?] project meeting  (at: Sun Apr 30 14:00:00 SGT 1995)
-
-		[T][?] buy fish
-
-		[D][?] clear thrash  (by: Sun Apr 30 14:00:00 SGT 1995)
-
-		[D][?] submit 2103 assignment  (by: Sun Apr 30 14:00:00 SGT 1995)
-
-		Nice, I've marked this item as done
-		[?] project meeting 
-
 		Got it. I've added this task: 
-		[E][?] attend national day parade  (at: Sun Apr 30 14:00:00 SGT 1995)
+		[E][?] attend national day parade  (at: Tue Apr 30 12:30:00 SGT 2019)
 
 		You have 5 items in the list now.
-		[E][?] project meeting  (at: Sun Apr 30 14:00:00 SGT 1995)
-
-		[T][?] buy fish
-
-		[D][?] clear thrash  (by: Sun Apr 30 14:00:00 SGT 1995)
-
-		[D][?] submit 2103 assignment  (by: Sun Apr 30 14:00:00 SGT 1995)
-
-		[E][?] attend national day parade  (at: Sun Apr 30 14:00:00 SGT 1995)
-
 		Got it. I've added this task: 
-		[T][?] charge laptop
+		[T][?] Charge Laptop
 
 		You have 6 items in the list now.
 		Got it. I've added this task: 
-		[E][?] Attend wedding  (at: Sun Apr 30 14:00:00 SGT 1995)
+		[E][?] Attend wedding  (at: Tue Apr 30 12:30:00 SGT 2019)
 
 		You have 7 items in the list now.
-		Nice, I've marked this item as done
-		[?] buy fish
-
-		[E][?] project meeting  (at: Sun Apr 30 14:00:00 SGT 1995)
-
-		[T][?] buy fish
-
-		[D][?] clear thrash  (by: Sun Apr 30 14:00:00 SGT 1995)
-
-		[D][?] submit 2103 assignment  (by: Sun Apr 30 14:00:00 SGT 1995)
-
-		[E][?] attend national day parade  (at: Sun Apr 30 14:00:00 SGT 1995)
-
-		[T][?] charge laptop
-
-		[E][?] Attend wedding  (at: Sun Apr 30 14:00:00 SGT 1995)
-
-		Bye. Hope to see you again soon!
-

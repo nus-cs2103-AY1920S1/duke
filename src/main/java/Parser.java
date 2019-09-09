@@ -44,6 +44,8 @@ public class Parser {
             FindCommand find = new FindCommand();
             find.setKeyword(keyword);
             return find;
+        } else if (input.equals("help")) {
+            return new ShowHelpCommand();
         } else {
             return new UnrecognisedInputCommand();
         }

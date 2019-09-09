@@ -32,4 +32,8 @@ public class Ui {
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
+
+    public void showHelp() {
+        System.out.println("Let me help you out!");
+    }
 }

@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Storage {
     /**
-     * Enumerate task type options
+     * Enumerate task type options.
      */
     private static final String ADD_TYPE_TODO = "todo";
     private static final String ADD_TYPE_DEADLINE = "deadline";
@@ -60,7 +60,6 @@ public class Storage {
                 String deadline = inputArr[2].split("\\(")[1].split(" ", 2)[1];
                 assert deadline.split("/")[0].length() == 2 : "Day is incorrect";
                 assert deadline.split("/")[1].length() == 2 : "Month is incorrect";
-                assert deadline.split("/")[2].split(" ")[0].length() == 2 : "Year is incorrect";
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm)");
                 LocalDateTime deadlineByDateTime = LocalDateTime.parse(deadline, formatter);
                 tasklist.add(new Task(deadlineDetails, ADD_TYPE_DEADLINE, deadlineByDateTime, isTaskComplete));

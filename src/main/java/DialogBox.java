@@ -14,6 +14,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates JavaFX Duke GUI design.
+     * @param l Label used in Duke GUI
+     * @param iv ImageView used to display profile pictures in Duke GUI
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

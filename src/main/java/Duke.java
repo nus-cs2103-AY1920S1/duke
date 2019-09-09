@@ -50,7 +50,7 @@ public class Duke extends Application {
     private Ui ui;
 
     /**
-     * Main class which initializes Duke bot
+     * Main class which initializes Duke bot.
      */
     public Duke() {
         ui = new Ui(INDENT);
@@ -115,7 +115,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.

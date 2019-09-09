@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
                     + indent + "   " + tasks.getList().get(listPointer - 1));
             storage.updateTodoFile(tasks.getListString());
             return response;
-        } catch(NumberFormatException err) {
+        } catch (NumberFormatException err) {
             throw new DukeException("Please input integer index of task.");
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Item " + listPointer + " does not exist. Please try again.");

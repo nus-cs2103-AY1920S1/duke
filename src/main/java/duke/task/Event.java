@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Event extends Task {
     protected DateAndTime at;
 
@@ -8,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String toSave() {
-        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + at;
+        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + at.toSave();
     }
 
     @Override

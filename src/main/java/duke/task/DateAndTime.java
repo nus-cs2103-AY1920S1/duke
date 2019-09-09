@@ -1,4 +1,9 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class DateAndTime {
+    protected String dateAndTime;
     protected int date;
     protected int month;
     protected int year;
@@ -9,6 +14,7 @@ public class DateAndTime {
                                                     "July", "August", "September", "October", "November", "December"};
 
     public DateAndTime(String dateAndTime) throws DukeException {
+        this.dateAndTime = dateAndTime;
         try {
             String[] split = dateAndTime.split(" ");
             String date[] = split[0].split("/");
@@ -28,6 +34,10 @@ public class DateAndTime {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Date and time not in correct format.");
         }
+    }
+
+    public String toSave() {
+        return dateAndTime;
     }
 
     @Override

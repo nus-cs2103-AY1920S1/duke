@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.LinkedList;
 
 public class TaskList {
@@ -18,7 +22,7 @@ public class TaskList {
 
     public Task markDone(int taskNum) throws DukeException {
         if (taskNum + 1 > taskList.size() || taskNum + 1 < 0) {
-            throw new DukeException("\u2639 OOPS!!! This task does not exist.");
+            throw new DukeException("\u2639 OOPS!!! This duke.task does not exist.");
         }
         Task t = taskList.remove(taskNum);
         t.markAsDone();
@@ -28,7 +32,7 @@ public class TaskList {
 
     public Task deleteTask(int taskNum) throws DukeException {
         if (taskNum + 1 > taskList.size() || taskNum + 1 < 0) {
-            throw new DukeException("\u2639 OOPS!!! This task does not exist.");
+            throw new DukeException("\u2639 OOPS!!! This duke.task does not exist.");
         }
         Task t = taskList.remove(taskNum);
         return t;

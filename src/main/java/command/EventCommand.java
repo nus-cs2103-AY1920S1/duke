@@ -6,6 +6,7 @@ import task.Event;
 import task.TaskList;
 import ui.Ui;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -39,8 +40,8 @@ public class EventCommand extends Command {
             Date at = converter.convertStringToDate(arguments[1]);
             tasks.getTasks().add(new Event(arguments[0], at));
             ui.showEventCommand(tasks);
-        } catch (Exception e) {
-            ui.showLoadingError(e.getMessage());
+        } catch (ParseException e) {
+            ui.showLoadingError("Please enter a valid date.");
         }
     }
 }

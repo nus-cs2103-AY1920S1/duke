@@ -1,6 +1,9 @@
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Represents Deadline object, subclass of Task
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline; //   DD/MM/YYYY
 
@@ -9,6 +12,11 @@ public class Deadline extends Task {
         this.setDateTime(deadline);
     }
 
+    /**
+     * Sets local datetime specified by user input
+     * @param deadline user input
+     * @throws DukeException thrown if user input does not follow format
+     */
     private void setDateTime(String deadline) throws DukeException{
         String datetimeInput[] = deadline.split(" ");
         String dateInput[] = datetimeInput[0].split("/");
@@ -35,6 +43,10 @@ public class Deadline extends Task {
         return fileString.toString();
     }
 
+    /**
+     * Helper function to return local datetime in a specific format
+     * @return local datetime
+     */
     private String datetimeToString(){
         StringBuilder datetimeString = new StringBuilder();
         datetimeString.append(deadline.getDayOfMonth() + "/" + deadline.getMonthValue() + "/" + deadline.getYear());

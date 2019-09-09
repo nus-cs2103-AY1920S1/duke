@@ -1,6 +1,9 @@
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Represents an Event object, subclass of Task
+ */
 public class Event extends Task {
     private LocalDateTime startDateTime;   // DD/MM/YYYY
     private LocalDateTime endDateTime;
@@ -10,6 +13,11 @@ public class Event extends Task {
         this.setDateTime(timePeriod);
     }
 
+    /**
+     * Sets local datetime specified by user input
+     * @param timePeriod user input
+     * @throws DukeException thrown if user input does not follow format
+     */
     private void setDateTime(String timePeriod) throws DukeException{
         String datetimeInput[] = timePeriod.split(" ");
         String dateInput[] = datetimeInput[0].split("/");
@@ -36,6 +44,11 @@ public class Event extends Task {
         fileString.append(datetimeToString() + "\n");
         return fileString.toString();
     }
+
+    /**
+     * Helper function to return local datetime in a specific format
+     * @return local datetime
+     */
 
     private String datetimeToString(){
         StringBuilder datetimeString = new StringBuilder();

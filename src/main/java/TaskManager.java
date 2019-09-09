@@ -1,11 +1,27 @@
 import java.util.ArrayList;
+
+/**
+ * TaskManager class of Duke.
+ * In charge of storing and updating existing list of Tasks.
+ */
 public class TaskManager {
     private ArrayList<Task> todoList;
 
+    /**
+     * Constructor for TaskManager.
+     * Initiates TaskManager object with empty ArrayList
+     */
     public TaskManager(){
         this.todoList=new ArrayList<>();
     }
 
+    /**
+     * Adds new Task to ArrayList
+     * Task type added depends on input
+     * @param taskInfo information regarding new task given by user input
+     * @return returns the task added to the list for easy I/O processing and file write
+     * @throws DukeException thrown when user input does not adhere to default format
+     */
     protected Task addNewTask(String[] taskInfo) throws DukeException{
         if(taskInfo[0].equals("todo")){
             return this.addTodo(taskInfo[1]);
@@ -17,6 +33,11 @@ public class TaskManager {
         throw new DukeException("Something wrong lol");
     }
 
+    /**
+     * Adds Todo task to the list
+     * @param task task information
+     * @return Todo object
+     */
     private Todo addTodo(String task) {
         task = task.trim();
         Todo todo = new Todo(task);
@@ -24,6 +45,12 @@ public class TaskManager {
         return todo;
     }
 
+    /**
+     * Adds Event task to the list
+     * @param task task information
+     * @return Event object
+     * @throws DukeException
+     */
     private Event addEvent(String task) throws DukeException {
         int split = task.indexOf(" /at");
         if (split == -1) {
@@ -43,6 +70,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds Deadline task to the list
+     * @param task task information
+     * @return Deadline object
+     * @throws DukeException
+     */
     private Deadline addDeadline(String task) throws DukeException {
         int split = task.indexOf(" /by");
         if (split == -1) {
@@ -62,14 +95,28 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Helper function for FileManager {@link FileManager#saveToFile(Task)}
+     * @param task task to add to list
+     */
     protected void load(Task task){
         this.todoList.add(task);
     }
 
+    /**
+     * Helper function for FileManager {@link FileManager#saveToFile(Task)}
+     * @param index index of done task
+     */
     protected void savedDone(int index){
         this.todoList.get(index).setDone();
     }
 
+    /**
+     * Sets task as done
+     * @param doneIndex index of done task
+     * @return task that was set as done
+     * @throws DukeException
+     */
     protected Task done(String doneIndex) throws DukeException{
         try {
             int doneInt = Integer.parseInt(doneIndex);
@@ -82,6 +129,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Delete task specified by index
+     * @param deleteIndex Index of task to be deleted
+     * @return Deleted task
+     * @throws DukeException
+     */
     protected Task delete(String deleteIndex) throws DukeException{  //exception same as done method
         try {
             int deleteInt = Integer.parseInt(deleteIndex);
@@ -95,6 +148,10 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Returns a string containing all the tasks currently in the list
+     * @return string of tasks
+     */
     protected String generateList() {
         StringBuilder outputMessage = new StringBuilder();
         int i = todoList.size();
@@ -104,6 +161,10 @@ public class TaskManager {
         return outputMessage.toString();
     }
 
+    /**
+     * Returns number of tasks currently
+     * @return number of tasks
+     */
     protected int getSize(){
         return this.todoList.size();
     }

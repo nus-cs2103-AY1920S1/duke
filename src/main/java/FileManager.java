@@ -6,6 +6,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * FileManager class of Duke.
+ * Handles reading and writing to .txt save file in the local system.
+ */
 public class FileManager {
     private File saveList;
     private FileWriter editor;
@@ -15,6 +19,13 @@ public class FileManager {
     public FileManager(){
     }
 
+    /**
+     * Links FileManager with the save file from local system. And loads existing tasks if it exists
+     * @param pathname file path of local save file
+     * @param tasks to match TaskManager with existing tasks from the save file
+     * @return boolean value to inform user if there is an existing save file
+     * @throws DukeException if save file is corrupted/cannot be found
+     */
     protected boolean initialize(String pathname, TaskManager tasks) throws DukeException{
         saveList=new File(pathname);
         boolean isNew;
@@ -37,6 +48,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Transfers tasks in the save file with the todoList in the TaskManager instance
+     * @param taskList TaskManager instance of the current Duke process
+     * @throws DukeException
+     */
     private void transferSavedFile(TaskManager taskList) throws DukeException{
         if(!this.isActive){
             return;
@@ -63,6 +79,11 @@ public class FileManager {
         sc.close();
     }
 
+    /**
+     * Saves new task to save file
+     * @param task New task created
+     * @throws DukeException
+     */
     protected void saveToFile(Task task) throws DukeException{
         if(!isActive){
             return;
@@ -75,6 +96,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Saves task status to done in the save file
+     * @param doneIndex Index of task to change
+     * @throws DukeException
+     */
     protected void fileSetDone(int doneIndex) throws DukeException{
         if(!isActive){
             return;
@@ -96,6 +122,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * Deletes a task in the save file
+     * @param deleteIndex Index of task to delete
+     * @throws DukeException
+     */
     protected void fileDelete(int deleteIndex) throws DukeException{
         if(!isActive){
             return;

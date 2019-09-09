@@ -1,4 +1,14 @@
+/**
+ * Parser class of Duke.
+ * Translates user input into a function.
+ */
 public class Parser {
+    /**
+     * Returns Command object that does what user input requires when executed
+     * @param fullCommand full user input
+     * @return Command object
+     * @throws DukeException when user input is not formatted correctly/not recognized
+     */
     public static Command parse(String fullCommand) throws DukeException{
         fullCommand = fullCommand.trim();
         int spacePosition = fullCommand.indexOf(" ");
@@ -23,6 +33,11 @@ public class Parser {
         }
     }
 
+    /**
+     * helper function to raise specific error when only 1 word is given as user input
+     * @param badInput the erroneous user input
+     * @throws DukeException thrown with a specific reason included in message
+     */
     private static void raiseSingleBadInput(String badInput) throws DukeException {
         if (badInput.equals("todo") || badInput.equals("event") || badInput.equals("deadline")) {
             throw new DukeException("No description for task.");

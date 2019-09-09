@@ -1,3 +1,7 @@
+/**
+ * Command class of Duke.
+ * Represents a command that the program executes depending on user input.
+ */
 public class Command {
     String[] info;
     boolean add;
@@ -5,6 +9,13 @@ public class Command {
     boolean done;
     boolean isExit = false;
 
+    /**
+     * Constructor that contains information from the user input
+     * @param info information given by user
+     * @param add if this is an add command
+     * @param delete if this is a delete command
+     * @param done if this is a done command
+     */
     public Command(String[] info, boolean add, boolean delete, boolean done){
         this.info = info;
         this.add = add;
@@ -12,6 +23,13 @@ public class Command {
         this.done = done;
     }
 
+    /**
+     * Carries out the command by editing TaskManager, FileManager and using UserInterface objects
+     * @param tasks TaskManager of the Duke instance
+     * @param ui UserInterface object
+     * @param fileManager FileManager of the Duke instance
+     * @throws DukeException
+     */
     protected void execute(TaskManager tasks, UserInterface ui, FileManager fileManager) throws DukeException{
         if(add){
             Task task = tasks.addNewTask(info);

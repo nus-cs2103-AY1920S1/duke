@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class CommandResult {
-    // FIXME: should have only one string instead of a list
-    private ArrayList<String> messages = new ArrayList<>();
-    private ArrayList<String> warnings = new ArrayList<>();
+    private final ArrayList<String> messages = new ArrayList<>();
+    private final ArrayList<String> warnings = new ArrayList<>();
     private boolean exit = false;
 
     public CommandResult(String... messages) {
@@ -36,7 +35,7 @@ public class CommandResult {
         this.exit = exit;
     }
 
-    public boolean hasMesages() {
+    public boolean hasMessages() {
         return this.messages.size() != 0;
     }
 

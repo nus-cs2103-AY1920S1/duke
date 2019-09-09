@@ -9,7 +9,7 @@ import duke.task.TaskList;
 import static duke.ui.Messages.TASK_ALREADY_DONE;
 import static duke.ui.Messages.TASK_MARKED_AS_DONE;
 
-public class DoneCommand extends CommandWithNumber {
+public class DoneCommand extends SingleTaskCommand {
     public DoneCommand(final Integer taskNumber) {
         super(taskNumber);
     }
@@ -23,7 +23,7 @@ public class DoneCommand extends CommandWithNumber {
             result.addWarnings(TASK_ALREADY_DONE);
         } else {
             task.markAsDone();
-            result.addMessages(TASK_MARKED_AS_DONE, task.toString());
+            result.addMessages(String.format("%s%n%s", TASK_MARKED_AS_DONE, task.toString()));
             try {
                 storage.writeTasks(tasks);
             } catch (DukeStorageException e) {

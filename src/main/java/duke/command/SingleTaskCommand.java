@@ -6,10 +6,13 @@ import duke.task.TaskList;
 import static duke.ui.Messages.MISSING_TASK_NUMBER;
 import static duke.ui.Messages.TASK_DOES_NOT_EXIST;
 
-public abstract class CommandWithNumber extends Command {
-    protected Integer taskNumber;
+/**
+ * Commands that manipulate a single Task.
+ */
+public abstract class SingleTaskCommand extends Command {
+    protected final Integer taskNumber;
 
-    public CommandWithNumber(final Integer taskNumber) {
+    public SingleTaskCommand(final Integer taskNumber) {
         this.taskNumber = taskNumber;
     }
 
@@ -18,7 +21,7 @@ public abstract class CommandWithNumber extends Command {
         if (this.taskNumber == null) {
             throw new DukeInvalidCommandException(MISSING_TASK_NUMBER);
         }
-        if (this.taskNumber < 1 || this.taskNumber >= tasks.size()) {
+        if (this.taskNumber < 0 || this.taskNumber >= tasks.size()) {
             throw new DukeInvalidCommandException(TASK_DOES_NOT_EXIST);
         }
     }

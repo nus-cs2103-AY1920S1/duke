@@ -35,4 +35,7 @@ find CS
 find assignment exam
 find
 find fluffy mod
+delete 1
+delete 1
+delete 1
 bye

@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-public class TodoCommand extends AddCommand {
+public class TodoCommand extends AddTaskCommand {
     public TodoCommand(final String description) {
         super(description);
     }

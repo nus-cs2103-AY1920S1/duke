@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 import static duke.ui.Messages.EVENT_MISSING_TIME;
 
-public class EventCommand extends AddCommandWithTime {
+public class EventCommand extends AddTaskWithTimeCommand {
     public EventCommand(final String description, final LocalDateTime time) {
         super(description, time);
     }

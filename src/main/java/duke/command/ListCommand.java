@@ -18,8 +18,7 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             result.addMessages(LIST_NO_TASKS);
         } else {
-            result.addMessages(LIST_TASKS);
-            result.addMessages(tasks.toString().split("\\n"));
+            result.addMessages(String.format("%s%n%s", LIST_TASKS, tasks.toString()));
         }
         return result;
     }

@@ -11,10 +11,13 @@ import static duke.ui.Messages.TASK_ADD_FAILURE;
 import static duke.ui.Messages.TASK_ADD_SUCCESS;
 import static duke.ui.Messages.TASK_MISSING_DESCRIPTION;
 
-public abstract class AddCommand extends Command {
-    protected String description;
+/**
+ * Commands that add a new Task.
+ */
+public abstract class AddTaskCommand extends Command {
+    protected final String description;
 
-    public AddCommand(final String description) {
+    public AddTaskCommand(final String description) {
         this.description = description;
     }
 
@@ -29,10 +32,10 @@ public abstract class AddCommand extends Command {
         CommandResult result = new CommandResult();
         if (tasks.addTask(task)) {
             result.addMessages(
-                TASK_ADD_SUCCESS,
-                task.toString(),
-                String.format(TASKS_COUNT, tasks.size())
-            );
+                String.format("%s%n%s%n%s",
+                    TASK_ADD_SUCCESS,
+                    task.toString(),
+                    String.format(TASKS_COUNT, tasks.size())));
             try {
                 storage.writeTasks(tasks);
             } catch (DukeStorageException e) {

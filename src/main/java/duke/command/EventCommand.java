@@ -13,12 +13,9 @@ public class EventCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
-        // event
-        // Remaining words
-        String remainingWords = parts[1];
-        String name = Parser.splitIntoNameAndTime(remainingWords, " /at ")[0];
-        String dateTime = Parser.splitIntoNameAndTime(remainingWords, " /at ")[1];
-
+        String secondPart = parts[1];
+        String name = Parser.splitIntoNameAndTime(secondPart, " /at ")[0];
+        String dateTime = Parser.splitIntoNameAndTime(secondPart, " /at ")[1];
         LocalDateTime localDateTime = Parser.changeToDateTimeFormat(dateTime);
 
         // Add new task to list

@@ -10,7 +10,6 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
-        // Done
         int itemId = Integer.parseInt(parts[1]);
         Task currentTask = tasks.get(itemId - 1);
         currentTask.setDone(true);

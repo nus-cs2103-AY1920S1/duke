@@ -11,13 +11,11 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        // to do
-        // Remaining words
         try {
-            String name = parts[1];
+            String taskName = parts[1];
             // Add new task to list
-            Todo newTodo = new Todo(name, false);
-            tasks.add(newTodo);
+            Todo newTodoTask = new Todo(taskName, false);
+            tasks.add(newTodoTask);
 
             String response = "Got it. I've added this task:\n"
                     + tasks.get(tasks.size() - 1) + "\n"

@@ -10,7 +10,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) {
-        // Delete
         int itemId = Integer.parseInt(parts[1]);
         Task currentTask = tasks.get(itemId - 1);
         tasks.remove(currentTask);

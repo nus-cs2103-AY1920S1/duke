@@ -15,10 +15,10 @@ public class ListCommand extends Command {
         }
 
         String response = "Here are the tasks in your list:\n";
-        // Output current items in list
         for (int i = 0; i < tasks.size(); i++) {
             int currentItemNumber = i + 1;
             Task currentTask = tasks.get(i);
+
             response += currentItemNumber + "." + currentTask + "\n";
         }
         return response;

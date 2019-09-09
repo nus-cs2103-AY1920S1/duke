@@ -1,4 +1,2 @@
 T . 0 . abcd
 T . 1 . whatever
-T . 0 . whatever
-T . 1 . thing

@@ -33,6 +33,7 @@ public class AddCommand extends Command {
     public String execute(TaskList t, Ui u, Storage s) {
         Task task = createNewTask();
         t.list.add(task);
+        assert t.list.size() == size + 1: "Current list size should be one more";
 
         try {
             String text = task.getType() + " . 0 . " + task.getFullDescription() + "\n";

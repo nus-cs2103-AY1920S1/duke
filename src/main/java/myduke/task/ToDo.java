@@ -55,6 +55,17 @@ public class ToDo extends Task {
     }
 
     @Override
+    public boolean equals(Object task) {
+        if (task == this) {
+            return true;
+        } else if (task instanceof ToDo) {
+            return this.toString().compareToIgnoreCase(task.toString()) == 0;
+        }
+
+        return false;
+    }
+
+    @Override
     public String getDataBaseFormat() {
         return String.format("%s | %d | %s |\r\n",
                 getDataBaseDescriptor(),

@@ -3,12 +3,26 @@ package myduke.task;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import myduke.exception.DukeDuplicateException;
+import myduke.exception.DukeException;
 import myduke.exception.DukeInvalidCommandException;
 
 /**
  * Manages a list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
+
+    public void addTask(Task task) throws DukeException {
+        if (task == null) {
+            throw new DukeInvalidCommandException("task should not be a null pointer");
+        }
+
+        if (this.contains(task)) {
+            throw new DukeDuplicateException("duplicated task detected");
+        }
+
+        this.add(task);
+    }
 
     /**
      * Deletes the specified task from the list and returns it.

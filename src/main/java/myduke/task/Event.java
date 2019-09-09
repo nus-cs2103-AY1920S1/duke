@@ -72,6 +72,17 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object task) {
+        if (task == this) {
+            return true;
+        } else if (task instanceof Event) {
+            return this.toString().compareToIgnoreCase(task.toString()) == 0;
+        }
+
+        return false;
+    }
+
+    @Override
     public String getDataBaseFormat() {
         return String.format("%s | %d | %s | %s |\r\n",
                 getDataBaseDescriptor(),

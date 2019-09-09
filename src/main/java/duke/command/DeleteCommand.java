@@ -31,18 +31,23 @@ public class DeleteCommand extends Command {
      * @param taskList list of tasks.
      * @param storage storage to store inside hard disk.
      * @param ui ui for user interaction.
+     * @param historicalTaskLists storage for previous version of Task List for undo.
      * @return boolean indication of successful or unsuccessful running of command.
      * @throws DukeException when index is invalid.
      * @throws IOException when error occurs while writing to hard disk.
      */
     @Override
-    public String executeCommand(TaskList taskList, Storage storage, Ui ui)
+    public String executeCommand(TaskList taskList, Storage storage, Ui ui, List<TaskList> historicalTaskLists)
             throws DukeException, IOException {
 
         if (index >= taskList.getSize() || index < 0) {
             throw new InvalidIndexException("Invalid task number!");
         }
 
+        TaskList record = new TaskList();
+        record.replaceAll(taskList);
+
+        historicalTaskLists.add(record);
         Task deletedTask = taskList.deleteAt(index);
         storage.save(taskList);
 

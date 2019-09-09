@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package duke.exceptions;
 /**
  * Represents a DukeException class which handles all the possible
  * custom exceptions that might be needed in the program.

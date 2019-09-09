@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 /**
  * Represents a Task class which basically represents a task

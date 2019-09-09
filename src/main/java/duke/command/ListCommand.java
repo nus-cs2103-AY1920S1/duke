@@ -4,6 +4,8 @@ import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
 
+import java.util.stream.IntStream;
+
 /**
  * Represents user's list commmand to chatbot.
  * The 'ListCommand' class supports operators (i) executing the command
@@ -21,15 +23,15 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
 
-        String result = "Here are the tasks in your list:\n";
-        int index = 1;
-        for (int i = 1; i <= taskList.size(); i++) {
-            result += "\n" + index + ". " + taskList.getTask(i);
-            index++;
-        }
+        StringBuilder result = new StringBuilder("Here are the tasks in your list:\n");
+
+        IntStream.rangeClosed(1, taskList.size())
+                .mapToObj(index -> String.format("\n %d . %s",
+                        index, taskList.getTask(index)))
+                .forEach(result::append);
 
 
-        return (result);
+        return result.toString();
 
 
     }

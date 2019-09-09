@@ -6,6 +6,7 @@ import duke.component.Ui;
 import duke.exception.DukeException;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Represents user's 'find' commmand to chatbot.
@@ -42,16 +43,14 @@ public class FindCommand extends Command {
 
         List<String> foundTasks = taskList.findTask(this.keyword);
 
-        String result = "Here are the matching tasks in your list:\n";
+        StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
 
-        int index = 1;
-        for (int i = 0; i < foundTasks.size(); i++) {
-            result += "\n" + index + ". " + foundTasks.get(i);
-            index++;
-        }
+        IntStream.rangeClosed(1, foundTasks.size())
+                .mapToObj(index -> String.format("\n %d . %s",
+                                           index, foundTasks.get(index - 1)))
+                .forEach(result::append);
 
-
-        return (result);
+        return result.toString();
 
 
     }

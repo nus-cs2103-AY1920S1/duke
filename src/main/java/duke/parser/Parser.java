@@ -63,7 +63,6 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             if (description.isEmpty()) {
                 throw new IllegalIndexOfTaskException("Please provide a valid index.");
-            }
             return new DeleteCommand(Integer.parseInt(description));
         case ToDoCommand.COMMAND_WORD:
             return new ToDoCommand(description);
@@ -82,6 +81,8 @@ public class Parser {
         if (indexOfTime == -1) {
             throw new IllegalDescriptionException("The format of deadline description is wrong.");
         }
+        assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
+                        "String length: " + description.length() + " seperator index: " + sep;
         String taskDescription = description.substring(indexOfTime).strip();
         String dateTime = description.substring(indexOfTime + 3).strip();
 
@@ -93,6 +94,8 @@ public class Parser {
         if (indexOfTime == -1) {
             throw new IllegalDescriptionException("The format of deadline description is wrong.");
         }
+        assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
+                        "String length: " + description.length() + " seperator index: " + sep;
         String taskDescription = description.substring(indexOfTime).strip();
         String dateTime = description.substring(indexOfTime + 3).strip();
 

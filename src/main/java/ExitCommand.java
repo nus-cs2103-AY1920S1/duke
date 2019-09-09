@@ -16,6 +16,10 @@ public class ExitCommand extends Command {
         return ui.printExitMessage();
     }
 
+    /**
+     * Boolean to exit from program
+     * @return true or false depending if we want to stop the program
+     */
     @Override
     public boolean isExit() {
         return true;

@@ -15,24 +15,24 @@ public class Parser {
         String next = arr[0];
         Command c;
         switch (next) {
-        case "find":
-            c = new FindCommand(arr[1]);
-            break;
-        case "bye":
-            c = new ExitCommand();
-            break;
-        case "list":
-            c = new ListCommand();
-            break;
-        case "done":
-            c = new DoneCommand(Integer.parseInt(arr[1]) - 1);
-            break;
-        case "delete":
-            c = new DeleteCommand(Integer.parseInt(arr[1]) - 1);
-            break;
-        default:
-            String description = "";
-            Task t;
+            case "find":
+                c = new FindCommand(arr[1]);
+                break;
+            case "bye":
+                c = new ExitCommand();
+                break;
+            case "list":
+                c = new ListCommand();
+                break;
+            case "done":
+                c = new DoneCommand(Integer.parseInt(arr[1]) - 1);
+                break;
+            case "delete":
+                c = new DeleteCommand(Integer.parseInt(arr[1]) - 1);
+                break;
+            default:
+                String description = "";
+                Task t;
                 if (next.equals("todo") || next.equals("deadline") || next.equals("event")) {
                     if (arr.length == 1) {
                         throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
@@ -46,16 +46,17 @@ public class Parser {
                 }
                 if (next.equals("todo")) {
                     t = new Todos(description.trim());
-                } else if (next.equals("deadline")) {
-                    int index = description.indexOf("/");
-                    String byWhen = description.substring(index + 4);
-                    String desc = description.substring(1, index - 1);
-                    t = new Deadline(desc, byWhen);
+
                 } else {
                     int index = description.indexOf("/");
-                    String at = description.substring(index + 4);
+                    String date = description.substring(index + 4);
                     String desc = description.substring(1, index - 1);
-                    t = new Event(desc, at);
+                    if (next.equals("deadline")) {
+                        t = new Deadline(desc, date);
+                    } else {
+
+                        t = new Event(desc, date);
+                    }
                 }
                 c = new AddCommand(t);
             }

@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.text.ParseException;
 
@@ -37,25 +36,6 @@ public class Duke extends Application {
         storage = new Storage(file);
         list = new TaskList(storage.load());
     }
-
-//    public Duke(){}
-
-//    public void run() {
-//        ui.showWelcome();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            String fullCommand = ui.readCommand();
-//            Command c = Parser.parse(fullCommand);
-//            c.execute(list, ui, storage);
-//            isExit = c instanceof ExitCommand;
-//        }
-//    }
-//
-//
-//    public static void main(String[] args) {
-//        Duke duke = new Duke("Duke_List.txt");
-//        duke.run();
-//    }
 
     @Override
     public void start(Stage stage) {

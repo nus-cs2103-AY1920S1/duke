@@ -33,7 +33,9 @@ public class FindCommand extends Command {
         ArrayList<Task> taskList = tasks.getTasks();
         ArrayList<Integer> searchResult = new ArrayList<Integer>();
         for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).toString().toLowerCase().contains(keyword.toLowerCase())) {
+            Task currTask = taskList.get(i);
+            assert currTask != null;
+            if (currTask.toString().toLowerCase().contains(keyword.toLowerCase())) {
                 searchResult.add(i);
             }
         }

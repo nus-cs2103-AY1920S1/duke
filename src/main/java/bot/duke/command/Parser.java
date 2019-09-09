@@ -25,6 +25,7 @@ public class Parser {
      * @throws DukeException If the inputs are incorrect in any way
      */
     public static Command parse(String input) throws DukeException {
+        assert !input.equals("");
         if (input.equals("list")) {
             return new ListCommand();
         } else if (input.matches("find.*")) {

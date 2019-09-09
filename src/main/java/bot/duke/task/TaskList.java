@@ -60,6 +60,7 @@ public class TaskList {
      */
     public Task doDoneTask(int chosenTaskNo) {
         Task doneTask = this.tasks.get(chosenTaskNo - 1);
+        assert doneTask != null;
         doneTask.setDone(true);
         return doneTask;
     }
@@ -72,6 +73,7 @@ public class TaskList {
      */
     public Task doDeleteTask(int chosenTaskNo) {
         Task deletedTask = this.tasks.get(chosenTaskNo - 1);
+        assert deletedTask != null;
         this.tasks.remove(chosenTaskNo - 1);
         return deletedTask;
     }

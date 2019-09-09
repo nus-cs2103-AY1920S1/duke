@@ -7,7 +7,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         super();
-        this.index = index;
+        this.index = index - 1;
     }
 
     /**
@@ -20,15 +20,23 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTask(this.index);
+        int taskListSize = tasks.getSize();
         tasks.delete(task);
         try {
             storage.writeToHardDisk(tasks);
         } catch (DukeException e) {
             e.printStackTrace();
         }
+        int taskListSizeAfterDeletingTask = tasks.getSize();
+        assert taskListSize - 1 == taskListSizeAfterDeletingTask
+                : "task list did not shrink by 1 after deletion";
         return ui.printDeleteMessage(tasks, task);
     }
 
+    /**
+     * Boolean to exit from program
+     * @return true or false depending if we want to stop the program
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -6,6 +6,11 @@ public class Deadline extends Task {
     private Date date;
     private String dateToStorage;
 
+    /**
+     * Constructor for deadline
+     * Calls parent class Task
+     * @param desc
+     */
     public Deadline(String desc) {
         super(desc);
     }

@@ -18,15 +18,22 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        int taskListSize = tasks.getSize();
         tasks.addTask(this.task);
         try {
             storage.writeToHardDisk(tasks);
         } catch (DukeException e) {
             e.printStackTrace();
         }
+        int taskListSizeAfterAddingTask = tasks.getSize();
+        assert taskListSize + 1 == taskListSizeAfterAddingTask : "size of tasklist did not grow";
         return ui.printAddMessage(tasks, this.task);
     }
 
+    /**
+     * Boolean to exit from program
+     * @return true or false depending if we want to stop the program
+     */
     @Override
     public boolean isExit() {
         return false;

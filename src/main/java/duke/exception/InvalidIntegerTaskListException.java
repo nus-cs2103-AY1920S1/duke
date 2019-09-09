@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Thrown if the user attempts to refer to a task item integer not in the list.
  */

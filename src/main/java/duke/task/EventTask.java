@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 /**
@@ -7,7 +9,7 @@ public class EventTask extends Task {
     /**
      * The time of the EventTask, as inputted by the user.
      */
-    protected LocalDateTime time;
+    private LocalDateTime time;
     
     /**
      * Creates an EventTask.

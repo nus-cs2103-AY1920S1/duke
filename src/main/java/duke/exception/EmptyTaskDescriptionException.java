@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Thrown if the user attempts to add a Task with an empty description.
  */

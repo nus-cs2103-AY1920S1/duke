@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Thrown if the user enters an unsupported command name.
  */

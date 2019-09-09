@@ -1,6 +1,11 @@
+package duke.main;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
-import javafx.application.Application;
+
+/*import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.stage.Stage;*/
 
 /**
  * A task list that supports several basic features:
@@ -17,7 +22,7 @@ import javafx.stage.Stage;
  * 3) Ability to search for expressions in given tasks.
  * 4) Ability to print current list of tasks.
  */
-public class Duke extends Application {
+public class Duke {
     /**
      * The TaskList object which abstracts out a list of tasks.
      */
@@ -35,7 +40,7 @@ public class Duke extends Application {
     
     static boolean isExitRunLoop;
     
-    private ScrollPane scrollPane;
+    /*private ScrollPane scrollPane;
     
     private VBox dialogContainer;
     
@@ -43,7 +48,7 @@ public class Duke extends Application {
     
     private Button sendButton;
     
-    private Scene scene;
+    private Scene scene;*/
     
     /**
      * Initializes a Duke object.
@@ -76,7 +81,7 @@ public class Duke extends Application {
      * Scans and parses commands given by the user.
      * Modifies the Tasks in the TaskList object based on the commands received by the user.
      */
-    public void run() {
+    private void run() {
         ui.print(ui.showHello());
         isExitRunLoop = false;
         while (!isExitRunLoop) {
@@ -90,6 +95,7 @@ public class Duke extends Application {
         }
     }
     
+    /*
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -141,6 +147,7 @@ public class Duke extends Application {
     
         // more code to be added here later
     }
+    */
     
     public static void main(String[] args) {
         Duke duke = new Duke();

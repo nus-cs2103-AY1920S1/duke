@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a Task to do that contains only a description.
  */

@@ -1,17 +1,27 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyTaskDescriptionException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.DeadlineTask;
+import duke.task.Task;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class EventCommand extends Command {
+public class DeadlineCommand extends Command {
     private String taskDescription;
     private LocalDateTime taskTime;
     
-    public EventCommand(String taskDescription, LocalDateTime taskTime) {
+    public DeadlineCommand(String taskDescription, LocalDateTime taskTime) {
         this.taskDescription = taskDescription;
         this.taskTime = taskTime;
     }
     
     /**
-     * Creates a EventTask and adds it to this TaskList.
+     * Creates a DeadlineTask and adds it to this TaskList.
      *
      * @param taskList The TaskList object passed from Duke.
      * @param ui       The Ui object passed from Duke.
@@ -24,7 +34,7 @@ public class EventCommand extends Command {
         if (taskDescription.matches("\\s*")) {
             throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
-        Task currentTask = new EventTask(taskDescription, taskTime);
+        Task currentTask = new DeadlineTask(taskDescription, taskTime);
         taskList.addTask(currentTask);
         storage.writeSavedList(taskList.getList());
         return ui.printAfterAddingTask(currentTask, taskList.getSize());

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 /**
@@ -7,7 +9,7 @@ public class DeadlineTask extends Task {
     /**
      * The time of the DeadlineTask, as inputted by the user.
      */
-    protected LocalDateTime time;
+    private LocalDateTime time;
     
     /**
      * Creates a DeadlineTask.

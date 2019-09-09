@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Thrown if the user enters a DeadlineTask or EventTask with an incorrect time format.
  */

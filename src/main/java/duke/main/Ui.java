@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -53,16 +57,16 @@ public class Ui {
      *
      * @return Returns the message String.
      */
-    String showBye() {
+    public String showBye() {
         return "Bye. Hope to see you again soon!";
     }
 
-    String printAfterAddingTask(Task currentTask, int currentSize) {
+    public String printAfterAddingTask(Task currentTask, int currentSize) {
         return "Got it. I've added this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }
     
-    String printAfterDeletingTask(Task currentTask, int currentSize) {
+    public String printAfterDeletingTask(Task currentTask, int currentSize) {
         return "Got it. I've removed this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }

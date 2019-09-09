@@ -1,3 +1,10 @@
+package duke.main;
+
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -69,7 +76,7 @@ public class Storage {
      * @param workingTaskList The inputted list of Tasks to be written to the hard drive.
      * @throws IOException An Exception thrown to indicate an invalid file path.
      */
-    void writeSavedList(ArrayList<Task> workingTaskList) throws IOException {
+    public void writeSavedList(ArrayList<Task> workingTaskList) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
         for (Task task : workingTaskList) {
             fileWriter.write(task.formattedString());

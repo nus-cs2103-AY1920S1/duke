@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * DukeException is the super class of all custom exceptions in Duke.
  */

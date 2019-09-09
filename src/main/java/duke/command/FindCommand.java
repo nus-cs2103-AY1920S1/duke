@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class FindCommand extends Command {

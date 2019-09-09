@@ -1,17 +1,31 @@
-import java.io.IOException;
+package duke.main;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidInstructionException;
+import duke.task.Task;
+
 import java.time.LocalDateTime;
 
 /**
  * Parses Strings to identify different sub-commands in a given input command.
  */
-public class Parser {
+class Parser {
     /**
      * Parses the instruction given in an input String.
      *
      * @param input The inputted String given by the user.
      * @return Returns the instruction in the given String.
      */
-    static String parseInstruction(String input) {
+    private static String parseInstruction(String input) {
         return input.split(" ", 2)[0];
     }
     
@@ -21,7 +35,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the index integer value in the given String.
      */
-    static int parseIndex(String input) {
+    private static int parseIndex(String input) {
         return Integer.parseInt(input.split(" ", 2)[1]);
     }
     
@@ -31,7 +45,7 @@ public class Parser {
      * @param input The inputted String that the user searches for.
      * @return Returns the expression searched for by the user, as a String.
      */
-    static String parseSearchPhrase(String input) {
+    private static String parseSearchPhrase(String input) {
         return input.split(" ", 2)[1];
     }
     
@@ -41,7 +55,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the description in the given String.
      */
-    static String parseToDoDescription(String input) {
+    private static String parseToDoDescription(String input) {
         return input.split(" ", 2)[1];
     }
     
@@ -51,7 +65,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the description in the given String.
      */
-    static String parseNonToDoContent(String input) {
+    private static String parseNonToDoContent(String input) {
         return input.split("deadline|event", 2)[1];
     }
     
@@ -61,7 +75,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the content in the description of a given String.
      */
-    static String parseNonToDoDescription(String input) {
+    private static String parseNonToDoDescription(String input) {
         return input.split("/by|/at", 2)[0].strip();
     }
     
@@ -72,7 +86,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns a LocalDateTime object representing the time of the Task.
      */
-    static LocalDateTime parseNonToDoTime(String input) {
+    private static LocalDateTime parseNonToDoTime(String input) {
         String taskTimeBeforeParse = input.split("/by|/at", 2)[1].strip();
         String[] taskTimeParsed = taskTimeBeforeParse.split("[ /]");
         return LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]),

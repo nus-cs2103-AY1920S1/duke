@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * The super-class of all Task objects.
  */
@@ -5,11 +7,11 @@ public class Task {
     /**
      * The description of the Task, as inputted by the user.
      */
-    protected String description;
+    private String description;
     /**
      * The completion status of the Task.
      */
-    protected boolean isDone;
+    private boolean isDone;
     
     /**
      * Creates a Task object.

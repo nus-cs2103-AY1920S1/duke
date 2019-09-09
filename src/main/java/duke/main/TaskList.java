@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -32,11 +36,11 @@ public class TaskList {
      *
      * @return Returns this list of Tasks.
      */
-    ArrayList<Task> getList() {
+    public ArrayList<Task> getList() {
         return this.taskList;
     }
     
-    Task getTask(int index) {
+    public Task getTask(int index) {
         return this.taskList.get(index);
     }
     
@@ -45,7 +49,7 @@ public class TaskList {
      *
      * @return Returns the number of Tasks in this list.
      */
-    int getSize() {
+    public int getSize() {
         return this.taskList.size();
     }
    
@@ -54,11 +58,11 @@ public class TaskList {
      *
      * @param currentTask The Task object to be added.
      */
-    void addTask(Task currentTask) {
+    public void addTask(Task currentTask) {
         taskList.add(currentTask);
     }
     
-    Task deleteTask(int index) {
+    public Task deleteTask(int index) {
         return this.taskList.remove(index);
     }
 }

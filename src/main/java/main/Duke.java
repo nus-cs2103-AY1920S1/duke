@@ -75,6 +75,8 @@ public class Duke {
         }
 
         try {
+            assert !input.equals("bye") : "input = bye, error in code.";
+            
             Command c = Parser.parse(input);
             output = c.execute(task, ui, storage);
         } catch (IOException e) {

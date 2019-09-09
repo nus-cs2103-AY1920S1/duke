@@ -16,6 +16,7 @@ public class Verify {
      * @return returns if the string is a number
      */
     public static boolean isNum(String str) {
+        assert str != null;
         try {
             int i = Integer.parseInt(str);
         } catch (NumberFormatException | NullPointerException nfe) {
@@ -33,6 +34,7 @@ public class Verify {
      */
     public static String checkCommandValidity(String command, TaskList list, DateTimeFormatter formatter) {
         String message;
+        assert command != null;
         if (command.startsWith("done")) {
             if (command.split(" ").length < 2) {
                 message = "whoops! please enter a number after done";

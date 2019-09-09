@@ -54,7 +54,6 @@ public class Parser {
                     if (next.equals("deadline")) {
                         t = new Deadline(desc, date);
                     } else {
-
                         t = new Event(desc, date);
                     }
                 }

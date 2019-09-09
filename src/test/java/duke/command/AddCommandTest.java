@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddCommandTest {
@@ -56,5 +57,10 @@ public class AddCommandTest {
                     + "\"event description /at period\"\n";
             assertEquals(correctExpected, de.getMessage());
         }
+    }
+
+    @Test
+    public void testIsExitValue() {
+        assertFalse(new AddCommand("todo", null, null, "").isExit());
     }
 }

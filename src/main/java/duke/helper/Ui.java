@@ -106,6 +106,13 @@ public class Ui {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(notification, duke));
     }
 
+    /**
+     * Prints notification when item is updated with new details. Prints old details as well for comparison.
+     *
+     * @param updatingTask Task to be updated.
+     * @param updateType Type of detail to be updated: "desc" for all Tasks or "time for Event and Deadline.
+     * @param originalValue Original value of detail that was updated.
+     */
     public void printUpdateNotification(String updatingTask, String updateType, String originalValue) {
         String notification = "I've updated this task's " + updateType + ":\n    " + updatingTask
                 + "\n\n Original " + updateType + ": \n" + originalValue;

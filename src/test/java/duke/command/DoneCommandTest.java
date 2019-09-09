@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DoneCommandTest {
@@ -39,5 +40,10 @@ public class DoneCommandTest {
             String correctExpected = ":( OOPS!!! Please specify valid task number.\n";
             assertEquals(correctExpected, de.getMessage());
         }
+    }
+
+    @Test
+    public void testIsExitValue() {
+        assertFalse(new DoneCommand("", null).isExit());
     }
 }

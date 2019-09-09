@@ -12,6 +12,9 @@ import duke.task.Todo;
 
 import java.time.LocalDateTime;
 
+/**
+ * Updates an item in the list with new details.
+ */
 public class UpdateCommand extends Command {
     String userInput;
 
@@ -20,14 +23,22 @@ public class UpdateCommand extends Command {
         this.userInput = userInput;
     }
 
+    /**
+     * Updates item in the list with new details.
+     *
+     * @param tasks List of Tasks from which item is to be updated.
+     * @param ui Ui class that handles printing to user interface.
+     * @param storage Storage class that handles writing to save file on hard disk.
+     * @throws DukeException If command has invalid format for update.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (!userInput.contains(" | ") || !userInput.contains(":")) {
                 throw new DukeException("");
             }
-            int taskNo = Integer.parseInt(inputSplit[1]) - 1;   // throws NumberFormatException if not int
-            Task updatingTask = tasks.getElement(taskNo);   // throws IndexOutOfBoundsException if out of list range
+            int taskNo = Integer.parseInt(inputSplit[1]);   // throws NumberFormatException if not int
+            Task updatingTask = tasks.getElement(taskNo - 1);   // throws IndexOutOfBoundsException if out of list range
             String[] inputSplitUpdate = userInput.split(" \\| ");
             String[] inputSplitUpdateValue = inputSplitUpdate[1].split(":", 2); // Splits at 1st ":" occurrence
             switch (inputSplitUpdateValue[0]) {

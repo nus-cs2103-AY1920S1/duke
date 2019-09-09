@@ -4,12 +4,16 @@ import duke.DukeException;
 import duke.helper.Parser;
 import duke.helper.Storage;
 import duke.helper.Ui;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.time.LocalDateTime;
 
 /**
- * Adds a Task of type Todo, Deadline or Event to the list.
+ * Adds a Task of type Todo, Deadline, Event or clone of existing item to the list.
  */
 public class AddCommand extends Command {
     private String addType;
@@ -30,7 +34,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds Task of type Todo, Deadline or Event to the list.
+     * Adds new Task of type Todo, Deadline, Event or clone of existing item to the list.
      *
      * @param tasks List of Tasks to be added to.
      * @param ui Ui class that handles printing to user interface.
@@ -93,7 +97,7 @@ public class AddCommand extends Command {
                     // Exception if there is no task number or multiple words after "clone"
                     throw new DukeException(":( OOPS!!! Please specify number of a single task to clone.\n");
                 }
-                int specifiedClone = Integer.parseInt(inputSplit[1]) ; // throws NumberFormatException if not int
+                int specifiedClone = Integer.parseInt(inputSplit[1]); // throws NumberFormatException if not int
                 if (specifiedClone < 1 || specifiedClone > tasks.getSize()) {
                     // Exception if task number is beyond current number of tasks
                     throw new DukeException(":( OOPS!!! Please specify valid task number.\n");

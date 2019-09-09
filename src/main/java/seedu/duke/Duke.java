@@ -166,7 +166,7 @@ public class Duke {
     }
 
     /**
-     * Executes the Command Line Interface for duke.
+     * Executes the Command Line Interface for Duke.
      *
      * @param fullCommand User input string.
      * @return Boolean isBye. If command is "bye", will return true and exit the while loop.

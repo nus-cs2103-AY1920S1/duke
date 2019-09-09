@@ -100,6 +100,7 @@ public class Storage {
                 if (!file.exists()) {
                     file.createNewFile();
                 }
+                assert file.exists() : "File should exist now";
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

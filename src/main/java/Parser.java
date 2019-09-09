@@ -132,12 +132,11 @@ public class Parser {
                 }
                 ui.printBye();
                 hasTerminated = true;
+                assert hasTerminated == true : "Programme should have been terminated";
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! Your input format is wrong. Use: bye");
             }
-        } else if (inputType.equals("hello")) {
-            ui.printHello();
-        } else {
+        }  else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

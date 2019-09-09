@@ -13,14 +13,6 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public String getNextLine() {
-        return sc.nextLine();
-    }
-
-    public String getNext() {
-        return sc.next();
-    }
-
     public String print() {
         return this.printStatement;
     }
@@ -36,9 +28,9 @@ public class Ui {
     /**
      * Prints welcome statements for the user.
      */
-    public void printHello() {
+    public static String printHello() {
         String str = "     Hello! I'm Duke\n     What can I do for you?";
-        setPrintStatement(str);
+        return str;
     }
 
     /**

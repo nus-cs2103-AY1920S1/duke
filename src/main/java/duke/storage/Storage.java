@@ -50,6 +50,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             return tasks;
         }
+        assert this.file.exists(); // file should exist if Scanner can be created
 
         DukeStorageException fileCorruptedException = new DukeStorageException(LOAD_TASK_FILE_CORRUPTED);
         try {
@@ -94,8 +95,10 @@ public class Storage {
      * @throws DukeStorageException if the data file cannot be written
      */
     public void writeTasks(final TaskList tasks) throws DukeStorageException {
+        assert this.file.getParentFile().exists(); // parent directory should have been created in the constructor
         try {
             FileWriter writer = new FileWriter(this.file, false);
+            assert this.file.exists(); // file should be created when FileWriter is created
             writer.write(tasks.toStorageString());
             writer.close();
         } catch (IOException e) {

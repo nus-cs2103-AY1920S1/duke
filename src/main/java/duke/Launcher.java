@@ -19,8 +19,11 @@ public class Launcher {
             printUsageAndExit();
         } else if (args[0].equals("cli")) {
             launchCli();
-        } else {
+        } else if (args[0].equals("gui")) {
             launchGui();
+        } else {
+            // Should not reach here
+            assert false;
         }
     }
 

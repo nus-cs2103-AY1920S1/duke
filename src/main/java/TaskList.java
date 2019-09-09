@@ -1,4 +1,3 @@
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -37,6 +36,10 @@ public class TaskList {
         return this.taskList;
     }
     
+    Task getTask(int index) {
+        return this.taskList.get(index);
+    }
+    
     /**
      * Gets the number of Tasks in this TaskList object.
      *
@@ -44,62 +47,6 @@ public class TaskList {
      */
     int getSize() {
         return this.taskList.size();
-    }
-    
-    /**
-     * Prints the items in this TaskList.
-     *
-     * @throws EmptyTaskListException A DukeException indicating an empty TaskList.
-     */
-    void printList() throws EmptyTaskListException {
-        if (taskList.size() == 0) {
-            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-        }
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i));
-        }
-    }
-    
-    /**
-     * Marks a Task in this TaskList as done.
-     *
-     * @param index The index of the Task to be marked as done.
-     * @throws DukeException An Exception thrown to indicate an incorrect index input.
-     */
-    void markTask(int index) throws DukeException {
-        if (taskList.size() == 0) {
-            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-        }
-        try {
-            taskList.get(index - 1).markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
-        } catch (NumberFormatException e) {
-            throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
-        }
-    }
-    
-    /**
-     * Deletes a Task from this TaskList.
-     *
-     * @param index The index of the Task to be deleted.
-     * @throws DukeException An Exception thrown to indicate an incorrect index input.
-     */
-    void deleteTask(int index) throws DukeException {
-        if (taskList.size() == 0) {
-            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-        }
-        try {
-            Task currentTask = taskList.remove(index - 1);
-            System.out.println("Noted. I've removed this task:\n  " + currentTask);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-        } catch (NumberFormatException e) {
-            throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
-        }
     }
    
     /**
@@ -109,55 +56,9 @@ public class TaskList {
      */
     void addTask(Task currentTask) {
         taskList.add(currentTask);
-        System.out.println("Got it. I've added this task:\n  " + currentTask);
     }
     
-    /**
-     * Creates a ToDoTask and adds it to this TaskList.
-     *
-     * @param taskContent The description content of the Task to be added.
-     */
-    void createToDo(String taskContent) {
-        Task currentTask = new ToDoTask((taskContent));
-        this.addTask(currentTask);
-    }
-    
-    /**
-     * Creates a DeadlineTask and adds it to this TaskList.
-     *
-     * @param taskContent The description content of the Task to be added.
-     * @param taskTime The time of the Task to be added, as a LocalDateTime object.
-     */
-    void createDeadline(String taskContent, LocalDateTime taskTime) {
-        Task currentTask = new DeadlineTask(taskContent, taskTime);
-        this.addTask(currentTask);
-    }
-    
-    /**
-     * Creates an EventTask and adds it to this TaskList.
-     *
-     * @param taskContent The description content of the Task to be added.
-     * @param taskTime The time of the Task to be added, as a LocalDateTime object.
-     */
-    void createEvent(String taskContent, LocalDateTime taskTime) {
-        Task currentTask = new EventTask(taskContent, taskTime);
-        this.addTask(currentTask);
-    }
-    
-    /**
-     * Searches through the list of tasks for Task objects whose descriptions contain the input search phrase.
-     *
-     * @param searchPhrase The inputted search phrase.
-     * @return Returns a list of tasks containing all the Task objects with descriptions containing the input search
-     * phrase.
-     */
-    ArrayList<Task> findTasks(String searchPhrase) {
-        ArrayList<Task> listOfFoundTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getDescription().contains(searchPhrase)) {
-                listOfFoundTasks.add(task);
-            }
-        }
-        return listOfFoundTasks;
+    Task deleteTask(int index) {
+        return this.taskList.remove(index);
     }
 }

@@ -23,6 +23,7 @@ public abstract class Command {
      */
     Command(String[] commandArgs) {
         this.commandArgs = commandArgs;
+        assert this.commandArgs != null : "Command with null arguments constructed";
     }
 
     /**

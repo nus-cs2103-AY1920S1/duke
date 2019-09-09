@@ -28,6 +28,7 @@ public abstract class CommandParser {
             throw new DukeInvalidCommandException(
                     " =X  OOPS!!! I'm sorry, but I don't know what that means =(");
         }
+        assert inputs != null : "Attempted command construction with null arguments.";
 
         switch (commandType) {
         case BYE:

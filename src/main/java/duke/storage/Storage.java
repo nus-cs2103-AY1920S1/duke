@@ -113,6 +113,8 @@ public class Storage {
                             " =X  Oops! I am not trained to handle this type of Tasks...\n");
                 }
 
+                assert taskToAdd != null : "Tried to load invalid task to task list when parsing storage.";
+                
                 taskToAdd.setDone(isTaskDone);
                 taskList.addTask(taskToAdd);
             } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {

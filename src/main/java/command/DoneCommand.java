@@ -35,6 +35,7 @@ public class DoneCommand extends Command {
         } else {
             tasks.getTasks().get(this.index).setDone(true);
             ui.showDoneCommand(tasks, this.index);
+            assert tasks.getTasks().get(this.index).getDoneIcon().equals("\u2713") : "Incorrect done command";
         }
     }
 }

@@ -34,7 +34,9 @@ public class DeleteCommand extends Command {
             incorrectCommand.execute(tasks, ui, storage);
         } else {
             ui.showDeleteCommand(tasks, this.index);
+            int sizeBeforeRemove = tasks.getTasks().size();
             tasks.getTasks().remove(this.index);
+            assert tasks.getTasks().size() + 1 == sizeBeforeRemove : "incorrect delete";
         }
     }
 }

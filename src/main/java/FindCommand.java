@@ -1,3 +1,7 @@
+/**
+ * Represents a command that searches for a task with a given keyword.
+ */
+
 import java.util.ArrayList;
 
 public class FindCommand extends Command {

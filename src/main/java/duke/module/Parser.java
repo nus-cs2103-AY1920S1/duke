@@ -51,6 +51,7 @@ public class Parser {
      */
     public static DukeDate parseToDate(String date) throws DukeDateFormatException {
         // Date format : MM/DD/YYYY HHMM
+        assert date != null : "Parser.java (line 54) : date should not be null";
         String[] dateAndTime = date.split(" ");
         String[] dateFormat = dateAndTime[0].split("/");
         try {
@@ -72,6 +73,7 @@ public class Parser {
      * @throws DukeIOException When the lines in the save file is formatted incorrectly.
      */
     static Task parseToTask(String line) throws DukeIOException {
+        assert line != null : "Parser.java (line 76) : line should not be null";
         try {
             String[] taskComponents = line.split("-");
             switch (taskComponents[0]) {
@@ -103,6 +105,7 @@ public class Parser {
      */
     private static DukeDate parseToDukeDate(String date) throws DukeIOException {
         // dd MM, yyyy, hh:mm a
+        assert date != null : "Parser.java (line 108) : date should not be null";
         try {
             String[] parsed = date.split(" |, |:");
             int hour = parsed[5].equals("AM")
@@ -127,6 +130,8 @@ public class Parser {
      * @throws DukeIllegalCommandException When the string inputted is not a valid {@link CommandType}.
      */
     public static Command parseToCommand(String command, String description) throws DukeIllegalCommandException {
+        assert command != null : "Parser.java (line 133) : command should not be null";
+        assert description != null : "Parser.java (line 134) : description should not be null";
         try {
             switch (CommandType.valueOf(command.toUpperCase())) {
             case LIST:

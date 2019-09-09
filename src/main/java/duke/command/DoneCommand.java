@@ -37,8 +37,9 @@ public class DoneCommand extends Command {
             ui.printToUser(AutoResponse.DUKE_MARK_AS_DONE, "  " + taskList.getTaskAt(index).getStatus());
         } catch (NumberFormatException e) {
             if (this.detail.isEmpty()) {
-                  throw new DukeIllegalIndexException(AutoResponse.ERROR_MISSING_INDEX);
+                throw new DukeIllegalIndexException(AutoResponse.ERROR_MISSING_INDEX);
             }
+
             if (taskList.isEmpty()) {
                 ui.printToUser(AutoResponse.DUKE_NO_TASKS);
             } else if (this.detail.equals("all")) {

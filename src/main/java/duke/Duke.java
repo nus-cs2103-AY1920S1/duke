@@ -31,7 +31,7 @@ public class Duke {
      * Initializes the necessary modules to run the Duke application.
      *
      * @throws DukeIOException When an error occurs during the input-output process or
-     * during the parsing of the save file
+     *     during the parsing of the save file
      */
     public Duke() throws DukeIOException {
         this.ui = new Ui();

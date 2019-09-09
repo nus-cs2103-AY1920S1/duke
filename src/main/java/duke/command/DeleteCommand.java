@@ -44,8 +44,8 @@ public class DeleteCommand extends Command {
             if (taskList.isEmpty()) {
                 ui.printToUser(AutoResponse.DUKE_NO_TASKS);
             } else if (this.detail.equals("all")) {
-                    taskList.deleteAllTasks();
-                    ui.printToUser(AutoResponse.DUKE_DELETE_ALL_TASKS);
+                taskList.deleteAllTasks();
+                ui.printToUser(AutoResponse.DUKE_DELETE_ALL_TASKS);
             } else {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_ILLEGAL_INDEX);
             }

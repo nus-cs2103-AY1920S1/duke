@@ -27,6 +27,12 @@ public class Duke {
     /** Indicates whether this program should keep running or quit. */
     private boolean isExit;
 
+    /**
+     * Initializes the necessary modules to run the Duke application.
+     *
+     * @throws DukeIOException When an error occurs during the input-output process or
+     *     during the parsing of the save file
+     */
     public Duke() throws DukeIOException {
         this.storage = new Storage();
         this.taskList = new TaskList(storage.load());
@@ -38,7 +44,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        String[] command = input.split( " ", 2);
+        String[] command = input.split(" ", 2);
         try {
             Command c = Parser.parseToCommand(command[0], command[1]);
             this.isExit = c.isExit();

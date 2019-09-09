@@ -15,6 +15,7 @@ public class Ui {
      * @return a string to be printed.
      */
     private static String composeBlock(String... text) {
+        assert text.length > 0 : "empty dialog box";
         StringBuilder strb = new StringBuilder();
         for (String line: text) {
             strb.append(line + "\n");
@@ -42,8 +43,9 @@ public class Ui {
         case Done:
             return showDoneTask(result.getTasks()[0]);
         default:
-            return "";
+            assert false: "unknown result type";
         }
+        return "";
     }
 
     /**

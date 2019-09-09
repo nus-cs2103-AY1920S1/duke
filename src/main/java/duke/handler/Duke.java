@@ -15,7 +15,6 @@ import java.io.IOException;
  * A class manages duke operation.
  */
 public class Duke {
-    private static final String FILEPATH = "/Users/jiangyuxin/Documents/sem1/cs2103/duke/data/duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
@@ -36,7 +35,7 @@ public class Duke {
      * Loads tasks from the disk.
      * @throws FileNotFoundException If the file from which to load task is not found.
      */
-    public void loadTask() throws FileNotFoundException {
+    public void loadTasks() throws FileNotFoundException {
         tasks = new TaskList(storage.load());
     }
 
@@ -50,25 +49,23 @@ public class Duke {
 
     /**
      * Parses the command.
-     * @param command command to be parsed.
+     * @param commandString command to be parsed.
      * @return a string representation of the response to the command.
      */
-    public String parse(String command) {
-        while (true) {
-            try {
-                Command cmd = parser.parseCommand(command);
-                CommandResult result = cmd.execute(tasks);
-                if (result.getCommandType() == CommandType.Exit) {
-                    try {
-                        storeTasks();
-                    } catch (IOException e) {
-                        return ui.showStoringError(e);
-                    }
+    public String parse(String commandString) {
+        try {
+            Command command = parser.parseCommand(commandString);
+            CommandResult result = command.execute(tasks);
+            if (result.getCommandType() == CommandType.Exit) {
+                try {
+                    storeTasks();
+                } catch (IOException e) {
+                    return ui.showStoringError(e);
                 }
-                return ui.composeResult(result);
-            } catch (Exception e) {
-                return ui.showParsingError(e);
             }
+            return ui.composeResult(result);
+        } catch (Exception e) {
+            return ui.showParsingError(e);
         }
     }
 }

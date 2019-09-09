@@ -34,15 +34,15 @@ public class DeleteCommand extends Command {
      * @throws IOException          If file is not found.
      * @throws NullPointerException If an invalid task number is received.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws NullPointerException, IOException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws NullPointerException, IOException {
         try {
             Task toRemove = task.getList().remove(Integer.parseInt(temp[1]) - 1);
-            ui.printRemove(task.getList(), toRemove);
             storage.arrayToFile(task.getList());
+            return ui.printRemove(task.getList(), toRemove);
         } catch (NullPointerException e) {
-            ui.printError("Please input a valid task number to delete.");
+            return ui.printError("Please input a valid task number to delete.");
         } catch (IndexOutOfBoundsException e) {
-            ui.printError("Please input a valid task number to delete.");
+            return ui.printError("Please input a valid task number to delete.");
         }
     }
 }

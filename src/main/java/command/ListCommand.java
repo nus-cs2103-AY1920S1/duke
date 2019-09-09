@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param ui      The working Ui object.
      * @param storage The working storage object.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.printList(task.getList());
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.printList(task.getList());
     }
 }

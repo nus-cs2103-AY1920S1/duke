@@ -37,9 +37,9 @@ public class FindCommand extends Command {
      * @param ui      The working Ui object.
      * @param storage The working storage object.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList task, Ui ui, Storage storage) {
         if (keywords.equals("")) {
-            ui.printMessage("Please input a valid keyword");
+            return ui.printMessage("Please input a valid keyword");
         } else {
             for (Task curr : task.getList()) {
                 if (curr.getDescription().contains(keywords)) {
@@ -47,9 +47,9 @@ public class FindCommand extends Command {
                 }
             }
             if (!foundList.isEmpty()) {
-                ui.printFound(foundList);
+                return ui.printFound(foundList);
             } else {
-                ui.printMessage("No matching task found");
+                return ui.printMessage("No matching task found");
             }
         }
     }

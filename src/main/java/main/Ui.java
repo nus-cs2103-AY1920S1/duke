@@ -5,63 +5,53 @@ import task.Task;
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String BORDER = "    ____________________________________________________________";
 
-    public void printList(ArrayList<Task> arr) {
-        System.out.println(BORDER);
-        System.out.println("     Here are the tasks in your list:");
+    public String printList(ArrayList<Task> arr) {
+        String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + arr.get(i));
+            output = output + (i + 1) + "." + arr.get(i) + "\n";
         }
-        System.out.println(BORDER);
+        return output;
     }
 
-    public void printAdd(ArrayList<Task> arr) {
-        System.out.println(BORDER);
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + arr.get(arr.size() - 1));
-        System.out.printf("     Now you have %s tasks in the list.\n", arr.size());
-        System.out.println(BORDER);
+    public String printAdd(ArrayList<Task> arr) {
+        String output = "Got it. I've added this task: \n";
+        output += arr.get(arr.size() - 1) + "\n";
+        output += "Now you have " + arr.size() + " tasks in the list.\n";
+        return output;
     }
 
-    public void printDone(ArrayList<Task> arr, int index) {
+    public String printDone(ArrayList<Task> arr, int index) {
         arr.get(index).markAsDone();
-        System.out.println(BORDER);
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + arr.get(index));
-        System.out.println(BORDER);
+
+        String output = "Nice! I've marked this task as done: \n" + arr.get(index);
+        return output;
     }
 
-    public void printRemove(ArrayList<Task> arr, Task task) {
-        System.out.println(BORDER);
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + task);
-        System.out.printf("     Now you have %s tasks in the list.\n", arr.size());
-        System.out.println(BORDER);
+    public String printRemove(ArrayList<Task> arr, Task task) {
+
+        String output = "Noted. I've removed this task: \n" + task + "\n";
+        output = output + "Now you have " + arr.size() + " tasks in the list.\n";
+        return output;
     }
 
-    public void printBye() {
-        System.out.println(BORDER + "\n" + "     Bye. Hope to see you again soon!" + "\n" + BORDER);
+    public String printBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void printError(String errorMessage) {
-        System.out.println(BORDER);
-        System.out.println("     " + errorMessage);
-        System.out.println(BORDER);
+    public String printError(String errorMessage) {
+        return errorMessage;
     }
 
-    public void printMessage(String message) {
-        System.out.println(BORDER);
-        System.out.println("     " + message);
-        System.out.println(BORDER);
+    public String printMessage(String message) {
+        return message;
     }
 
-    public void printFound(ArrayList<Task> arr) {
-        System.out.println(BORDER);
-        System.out.println("     Here are the matching tasks in your list:");
+    public String printFound(ArrayList<Task> arr) {
+        String output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println("     " + (i + 1) + "." + arr.get(i));
+            output = output + (i + 1) + "." + arr.get(i) + "\n";
         }
-        System.out.println(BORDER);
+        return output;
     }
 }

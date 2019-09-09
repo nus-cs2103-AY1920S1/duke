@@ -17,8 +17,8 @@ public class ExitCommand extends Command {
      * @param storage The working storage object.
      */
 
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.printBye();
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.printBye();
     }
 }
 

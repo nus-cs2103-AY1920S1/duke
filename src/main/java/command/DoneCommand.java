@@ -29,15 +29,15 @@ public class DoneCommand extends Command {
      * @param storage The working storage object.
      * @throws IOException If file is not found.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws IOException {
         try {
             int index = Integer.parseInt(temp[1]) - 1;
-            ui.printDone(task.getList(), index);
             storage.arrayToFile(task.getList());
+            return ui.printDone(task.getList(), index);
         } catch (NullPointerException e) {
-            ui.printError("Please input a valid task number.");
+            return ui.printError("Please input a valid task number.");
         } catch (IndexOutOfBoundsException e) {
-            ui.printError("Please input a valid task number.");
+            return ui.printError("Please input a valid task number.");
         }
 
     }

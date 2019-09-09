@@ -1,22 +1,10 @@
 package ui.input;
 
-import java.util.List;
+import ui.output.OutputHandler;
 
-public abstract class InputHandler {
-    private List<InputListener> listeners;
-
-    protected InputHandler(List<InputListener> listeners) {
-        this.listeners = listeners;
-    }
-
-    protected void updateAllListeners(String input) {
-        listeners.forEach(listener -> listener.update(input));
-    }
-
-    public void addListener(InputListener listener) {
-        listeners.add(listener);
-    }
-
-    public abstract void start();
-    public abstract void stop();
+public interface InputHandler {
+    public void updateAllListeners(String input);
+    public void addListener(InputListener listener);
+    public void startHandler(OutputHandler output);
+    public void stopHandler();
 }

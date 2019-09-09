@@ -2,7 +2,7 @@ package ui.cli;
 
 import ui.output.OutputHandler;
 
-public class ClOutput extends OutputHandler {
+public class ClOutput implements OutputHandler {
     private static String HORIZONTAL_DIVIDER = "    ____________________________________________________________\n";
     private static ClOutput singleton;
 

@@ -1,19 +1,14 @@
 package duke;
 
-import duke.task.TasksController;
-import duke.task.tasks.Task;
-import error.ConfigurationException;
 import error.StorageException;
 import storage.FileSystemStorage;
 import storage.Storage;
-import ui.UiController;
+
 import ui.cli.ClInput;
 import ui.cli.ClOutput;
+import ui.fx.FxMain;
 import ui.input.InputHandler;
 import ui.output.OutputHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OptionsFactory {
 
@@ -22,8 +17,17 @@ public class OptionsFactory {
     }
 
     public static Options select(boolean guiEnabled, boolean persistentDataEnabled) {
-        InputHandler input = ClInput.getInstance();
-        OutputHandler output = ClOutput.getInstance();
+        InputHandler input = null;
+        OutputHandler output = null;
+
+        if (guiEnabled) {
+            FxMain gui = FxMain.getInstance();
+            input = gui;
+            output = gui;
+        } else {
+            input = ClInput.getInstance();
+            output = ClOutput.getInstance();
+        }
 
         Storage storage = null;
 

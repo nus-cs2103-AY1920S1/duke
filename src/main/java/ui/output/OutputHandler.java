@@ -1,5 +1,5 @@
 package ui.output;
 
-public abstract class OutputHandler {
-    public abstract void display(String message);
+public interface OutputHandler {
+    public void display(String message);
 }

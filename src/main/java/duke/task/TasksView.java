@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.task.tasks.Task;
+import error.UiException;
 import ui.UiController;
 import util.OutputBuilder;
 import util.DukeOutput;
@@ -32,7 +33,7 @@ public class TasksView {
                 .appendTasks(tasks);
 
         String output = builder.build();
-        ui.displayOutput(output);
+        displayMessage(output);
     }
 
     /***
@@ -47,7 +48,7 @@ public class TasksView {
                 .appendTasks(tasks);
 
         String output = builder.build();
-        ui.displayOutput(output);
+        displayMessage(output);
     }
 
 
@@ -68,7 +69,7 @@ public class TasksView {
                 .append(String.format("Now you have %d tasks in the list", tasksLength));
 
         String output = builder.build();
-        ui.displayOutput(output);
+        displayMessage(output);
     }
 
     /***
@@ -85,7 +86,7 @@ public class TasksView {
                 .append(task.getDisplayMessage());
 
         String output = builder.build();
-        ui.displayOutput(output);
+        displayMessage(output);
     }
 
     /***
@@ -105,10 +106,19 @@ public class TasksView {
                 .append(String.format("Now you have %d tasks in the list", tasksLength));
 
         String output = builder.build();
-        ui.displayOutput(output);
+        displayMessage(output);
     }
 
     public void displayError(Exception e) {
-        ui.displayOutput(e.getMessage());
+        displayMessage(e.getMessage());
+    }
+
+    private void displayMessage(String message) {
+        try {
+            ui.displayOutput(message);
+        } catch (UiException e) {
+            System.out.println("FATAL: " + e.getMessage());
+            System.exit(1);
+        }
     }
 }

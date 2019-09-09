@@ -1,8 +1,5 @@
-package fx;
+package ui.fx;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.CommandFactory;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.ScrollPane;
@@ -11,18 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyEvent;
-import duke.task.TasksController;
-import util.OutputBuilder;
-import util.DukeOutput;
-import util.DukeOutputImplementation;
+import ui.input.InputHandler;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Optional;
 
-public class DukeMainWindowController implements DukeOutputImplementation {
+public class DukeMainWindowController {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -33,8 +26,7 @@ public class DukeMainWindowController implements DukeOutputImplementation {
     private Image userImage;
     private Image dukeImage;
 
-    private CommandFactory commandFactory;
-    private boolean isExited = false;
+    private InputHandler inputHandler;
 
     public DukeMainWindowController() {
         File userFile = new File("src/main/assets/DaUser.png");
@@ -53,8 +45,8 @@ public class DukeMainWindowController implements DukeOutputImplementation {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void configureMainWindowController(TasksController tasksController) {
-        commandFactory = new CommandFactory(tasksController);
+    public void configureController(InputHandler input) {
+        this.inputHandler = input;
     }
 
     /**
@@ -65,19 +57,10 @@ public class DukeMainWindowController implements DukeOutputImplementation {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if (!input.equals("") && !isExited) {
-            dialogContainer.getChildren().addAll(
-                    FxDialogBox.getUserDialog(input, userImage)
-            );
+        if (!input.equals("")) {
+            printUserMessage(input);
 
-            Optional<Command> next = commandFactory.parse(input);
-
-            next.ifPresent(Command::execute);
-
-            if (next.isPresent() && next.get() instanceof ByeCommand) {
-                isExited = true;
-                DukeOutput.printMessage(new OutputBuilder("Input will be disabled!"));
-            }
+            inputHandler.updateAllListeners(input);
 
             userInput.clear();
         }
@@ -90,9 +73,14 @@ public class DukeMainWindowController implements DukeOutputImplementation {
         }
     }
 
-    @Override
-    public void printDukeOutput(String message) {
+    public void printDukeMessage(String message) {
         dialogContainer.getChildren().addAll(FxDialogBox.getDukeDialog(message, dukeImage));
+    }
+
+    public void printUserMessage(String message) {
+        dialogContainer.getChildren().addAll(
+                FxDialogBox.getUserDialog(message, userImage)
+        );
     }
 }
 

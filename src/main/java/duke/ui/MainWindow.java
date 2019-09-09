@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
     public void init(Duke duke) {
         this.duke = duke;
         try {
-            duke.loadTask();
+            duke.loadTasks();
         } catch (FileNotFoundException e) {
             addDukeDialogBox(Ui.showLoadingError(e));
         } finally {

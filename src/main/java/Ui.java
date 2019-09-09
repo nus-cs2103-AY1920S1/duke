@@ -44,6 +44,17 @@ class Ui {
                 printCount(tasks);
     }
 
+    String listCommands() {
+        return "Here are the following commands you can try: \n" +
+                "\tlist\n" +
+                "\ttodo <description>\n" +
+                "\tdeadline <description> /by <memo>\n" +
+                "\tevent <description> /at <memo>\n" +
+                "\tdelete <task number>\n" +
+                "\tdone <task number>\n" +
+                "\tbye";
+    }
+
     String printFormatHelp() {
         return "Here are the valid formats of the inputs:\n" +
                 "todo<space>description\n" +

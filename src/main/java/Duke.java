@@ -26,8 +26,8 @@ public class Duke {
      */
     void initialize(MainWindow mw) {
         this.mw = mw;
-        mw.dukeSays("initializing");
-        mw.dukeSays("loading storage");
+//        mw.dukeSays("initializing");
+//        mw.dukeSays("loading storage");
         try {
             tasks = storage.load();
         } catch (Exception e) {
@@ -36,6 +36,7 @@ public class Duke {
         }
         mw.dukeSays(ui.printLogo());
         mw.dukeSays(ui.printHello());
+        mw.dukeSays(ui.listCommands());
     }
 
     public Duke() {

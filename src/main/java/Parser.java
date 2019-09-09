@@ -34,11 +34,19 @@ public class Parser {
                 String errorMessage = "☹ Incorrect format. Eg. deadline Do Project /by 29/8/2019 1800";
                 String desc = getDesc(inputArr[1], " /by ", errorMessage);
                 String dateTime = getDateTime(inputArr[1], " /by ", errorMessage);
+
+                assert desc != "" : "Description of deadline should not be empty!";
+                assert dateTime != "" : "dateTime variable for deadline should not be empty!";
+
                 nextCommand = new AddCommand(cmd, desc, dateTime);
             } else if (cmd.equals("event")) {
                 String errorMessage = "☹ Incorrect format. Eg. event Talk Show /at 29/8/2019 1800";
                 String desc = getDesc(inputArr[1], " /at ", errorMessage);
                 String dateTime = getDateTime(inputArr[1], " /at ", errorMessage);
+
+                assert desc != "" : "Description of event should not be empty!";
+                assert dateTime != "" : "dateTime variable for event should not be empty!";
+
                 nextCommand = new AddCommand(cmd, desc, dateTime);
             } else if (cmd.equals("done")) {
                 int index = getIndex(inputArr[1]);

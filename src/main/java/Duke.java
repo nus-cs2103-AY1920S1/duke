@@ -157,6 +157,9 @@ public class Duke extends Application {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
+
+        assert userText != "": "User input should not be empty!";
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeText, duke)
@@ -173,6 +176,8 @@ public class Duke extends Application {
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
+
+            assert c.toString() != "": "Response from Duke cannot be empty!";
             return c.toString();
         } catch (DukeException e) {
             reply = e.getMessage();

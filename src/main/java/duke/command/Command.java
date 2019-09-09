@@ -42,7 +42,7 @@ public abstract class Command {
      * @param tasks    TaskList to read and manipulate
      * @param uiOutput       the user interface to input and output from and to
      * @param storage  the persistent storage to save and load to and from
-     * @throws DukeException
+     * @throws DukeException  if an error occurs during execution
      */
     public abstract void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException;
 }

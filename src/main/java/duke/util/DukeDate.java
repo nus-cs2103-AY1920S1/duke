@@ -78,7 +78,9 @@ public class DukeDate {
      * Returns a string representation of this DukeDate.
      * <p></p>
      * Dates are formatted as <code>"d of MMMM yyyy"</code>.
+     *
      * <p>Datetimes are formatted as <code>"d of MMMM yyyy, h:mma"</code>.
+     *
      * <p>Unparsable dates are formatted as they were given.
      *
      * @return  a string representation of this DukeDate

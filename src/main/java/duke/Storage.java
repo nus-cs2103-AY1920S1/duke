@@ -59,7 +59,7 @@ public class Storage {
      *                      file cannot be accessed.
      */
     public void save(TaskList taskList) throws IOException {
-        if(path.getParent() != null) {
+        if (path.getParent() != null) {
             Files.createDirectories(path.getParent());
         }
         FileOutputStream fos = new FileOutputStream(path.toString());

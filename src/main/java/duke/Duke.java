@@ -11,10 +11,13 @@ import java.io.IOException;
  * Main logic class.
  */
 public class Duke {
-    public final String DEFAULT_FILEPATH = "./data/tasks.txt";
-    public final String LOADING_ERROR_MESSAGE = "Couldn't load tasks from disk."
+    private static final String DEFAULT_FILEPATH = "./data/tasks.txt";
+
+    private static final String LOADING_ERROR_MESSAGE = "Couldn't load tasks from disk."
             + "\nYour changes this session may not be saved!";
-    public final String WELCOME_MESSAGE = "Hello! I'm Duke."
+    private static final String COMMAND_ERROR_MESSAGE = "I couldn't understand my list of commands! "
+            + "\nI won't be very helpful this session :(";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke."
             + "\nWhat can I do for you?";
 
     private PreParser preParser;
@@ -27,19 +30,19 @@ public class Duke {
      * Constructs a Duke object with the data file residing in the default path.
      */
     public Duke() {
+        startupMessages.say(WELCOME_MESSAGE);
         try {
             preParser = new PreParser();
         } catch (DukeException e) {
             e.printStackTrace();
-            startupMessages.oops("I couldn't understand my list of commands! "
-                    + "I won't be very helpful this session :(");
+            startupMessages.oops(COMMAND_ERROR_MESSAGE);
         }
         storage = new Storage(DEFAULT_FILEPATH);
         try {
             tasks = storage.load();
         } catch (IOException | ClassNotFoundException e) {
             tasks = new TaskList();
-            startupMessages.oops("Couldn't load tasks from disk!");
+            startupMessages.oops(LOADING_ERROR_MESSAGE);
         }
     }
 
@@ -61,5 +64,9 @@ public class Duke {
         }
 
         return bufferedUiOutput.nextResponse();
+    }
+
+    public String getStartupMessages() {
+        return startupMessages.nextResponse();
     }
 }

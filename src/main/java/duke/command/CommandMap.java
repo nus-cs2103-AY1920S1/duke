@@ -27,7 +27,7 @@ public class CommandMap {
      * @throws DukeException  if a Command cannot be {@link #register(Class)}ed.
      */
     public CommandMap(List<Class<? extends Command>> commandList) throws DukeException {
-        for(Class<? extends Command> cls : commandList) {
+        for (Class<? extends Command> cls : commandList) {
             this.register(cls);
         }
     }

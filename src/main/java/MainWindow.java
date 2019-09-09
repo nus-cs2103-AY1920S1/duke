@@ -1,5 +1,7 @@
 import duke.component.Duke;
+import duke.component.Ui;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -23,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/husky.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/penguin.jpg"));
 
     @FXML
     public void initialize() {
@@ -43,14 +45,35 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
+        dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+
+        double height = 0.0;
+
+        //Change the total height of the VBox according to the individual height of elements
+        for (Node node : dialogContainer.getChildren()) {
+            DialogBox dialogBox = (DialogBox) node;
+            if (dialogBox.getPrefHeight() != -1.0) {
+                height += dialogBox.getPrefHeight();
+            } else {
+                height += 100;
+            }
+        }
+
+        dialogContainer.setPrefHeight(height);
         userInput.clear();
 
         if (response.contains("Bye")) {
             System.exit(0);
         }
+    }
+
+
+    public void setFirstDialog(Duke duke){
+        this.setDuke(duke);
+        Ui ui = new Ui();
+        DialogBox welcomeDialog = DialogBox.createDialog(ui.showWelcome(), dukeImage);
+        dialogContainer.getChildren().addAll(welcomeDialog);
     }
 }

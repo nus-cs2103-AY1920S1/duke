@@ -38,6 +38,24 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+
+        int numLines = countLines(text);
+
+        if (numLines <= 4) {
+            this.dialog.setPrefHeight(USE_COMPUTED_SIZE);
+            this.setPrefHeight(USE_COMPUTED_SIZE);
+
+        } else {
+            this.dialog.setPrefHeight(numLines * 20);
+            this.setPrefHeight(numLines * 20);
+
+        }
+    }
+
+    private int countLines(String text) {
+        String[] lineArray = text.split("\n", -1);
+        return lineArray.length;
     }
 
     /**
@@ -58,5 +76,12 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    //for creating dialog box to show welcome message
+    public static DialogBox createDialog(String text, Image img) {
+      return new DialogBox(text, img);
+
+
     }
 }

@@ -42,18 +42,24 @@ public class Ui {
     /**
      * Prints welcome message.
      */
-    public void showWelcome() {
-        this.showLine();
-        this.printText("Hello! I'm Duke\n"
-                + "What can I do for you?");
-        this.showLine();
+    public String showWelcome() {
+
+        String result = "Hello from\n";
+
+        result += " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+       return result;
     }
 
     /**
      * Prints border line.
      */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public String showLine() {
+        return ("____________________________________________________________");
     }
 
 
@@ -72,17 +78,6 @@ public class Ui {
         this.scanner.close();
     }
 
-
-    /**
-     * Prints text in console.
-     *
-     * @param text Text to print.
-     */
-    public void printText(String text) {
-
-        System.out.println(text);
-
-    }
 
 
     /**

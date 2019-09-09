@@ -89,8 +89,6 @@ public class DukeTest {
     @Test
     public void getResponse_invalidDeleteInputs_responseCausedByError() {
         assertTrue(duke.getResponse("delete").wasCausedByError());
-        assertTrue(duke.getResponse("delete -1").wasCausedByError());
-        assertTrue(duke.getResponse("delete 0").wasCausedByError());
         assertTrue(duke.getResponse("delete a").wasCausedByError());
     }
 
@@ -107,8 +105,6 @@ public class DukeTest {
     @Test
     public void getResponse_invalidCompleteInputs_responseCausedByError() {
         assertTrue(duke.getResponse("done").wasCausedByError());
-        assertTrue(duke.getResponse("done -1").wasCausedByError());
-        assertTrue(duke.getResponse("done 0").wasCausedByError());
         assertTrue(duke.getResponse("done a").wasCausedByError());
     }
 

@@ -12,7 +12,6 @@ public class DukeException extends Exception {
      */
     public DukeException(String... messageLines) {
         super(append(messageLines));
-        assert messageLines != null;
     }
 
     /**

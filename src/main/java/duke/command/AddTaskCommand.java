@@ -13,7 +13,6 @@ public class AddTaskCommand extends Command {
      */
     AddTaskCommand(Type type, String... parameters) {
         super(type, parameters);
-        assert type != null;
         assert parameters != null;
     }
 }

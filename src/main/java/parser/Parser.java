@@ -35,11 +35,11 @@ public class Parser {
             //fallthrough
         case "delete":
             if (separatedInputs.length <= 1) {
-                throw new DukeException("invalid number");
+                throw new DukeException(DukeException.Error_Type.INVALID_NUMBER);
             }
             Scanner s = new Scanner(separatedInputs[1]);
             if (separatedInputs.length > 2 || !s.hasNextInt()) {
-                throw new DukeException("invalid number");
+                throw new DukeException(DukeException.Error_Type.INVALID_NUMBER);
             }
             if (separatedInputs[0].toLowerCase().equals("done")) {
                 return new DoneCommand(s.nextInt() - 1);
@@ -49,12 +49,12 @@ public class Parser {
         case "todo":
             String description = userInput.trim().substring(separatedInputs[0].length()).trim();
             if (description.equals("")) {
-                throw new DukeException("empty todo");
+                throw new DukeException(DukeException.Error_Type.EMPTY_TODO);
             }
             return new ToDoCommand(description);
         case "deadline":
             if (userInput.indexOf("/by") == -1) {
-                throw new DukeException("empty deadline date");
+                throw new DukeException(DukeException.Error_Type.EMPTY_DEADLINE_DATE);
             } else {
                 String[] arguments =
                         userInput.trim().substring(separatedInputs[0].length()).trim().split("/by");
@@ -62,7 +62,7 @@ public class Parser {
             }
         case "event":
             if (userInput.indexOf("/at") == -1) {
-                throw new DukeException("empty event date");
+                throw new DukeException(DukeException.Error_Type.EMPTY_EVENT_DATE);
             } else {
                 String[] arguments =
                         userInput.trim().substring(separatedInputs[0].length()).trim().split("/at");
@@ -72,7 +72,7 @@ public class Parser {
             String keyword = userInput.trim().substring(separatedInputs[0].length()).trim();
             return new FindCommand(keyword);
         default:
-            throw new DukeException("invalid input");
+            throw new DukeException(DukeException.Error_Type.GIBBERISH);
         }
     }
 }

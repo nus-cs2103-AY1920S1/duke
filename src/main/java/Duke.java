@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -14,7 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import command.Command;
-import main.*;
+import main.DialogBox;
+import main.DukeException;
+import main.Parser;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
 
 
 /**

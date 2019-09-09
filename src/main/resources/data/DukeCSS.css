@@ -1,0 +1,21 @@
+.duke-text {
+    -fx-background-color: black;
+    -fx-label-padding: 10;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-translate-x: -10;
+    -fx-translate-y: 10;
+}
+
+.user-text {
+    -fx-background-color: white;
+    -fx-label-padding: 10;
+    -fx-text-fill: black;
+    -fx-background-radius: 4;
+    -fx-translate-x: 10;
+    -fx-translate-y: 10;
+}
+
+.display-picture {
+
+}

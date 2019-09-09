@@ -29,6 +29,29 @@ public class AdminCommand implements Command {
         return false;
     }
 
+    private void handleListCall(TaskList tasks, Ui ui) {
+        String result = "";
+        for (int i = 0; i < tasks.size(); i = i + 1) {
+            result = result + "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+        }
+        result = result.equals("") ? "\n" : result;
+        String finalResult = "    ____________________________________________________________\n" +
+                "    Here are the tasks in your list:\n" +
+                result +
+                "    ____________________________________________________________";
+        ui.nextLine(finalResult);
+    }
+
+    private void handleDoneCall(TaskList tasks, Ui ui, Storage storage) {
+        Task targetedTask = tasks.get(commandArg - 1);
+        Task.markAsDone(targetedTask);
+        String result = "    ____________________________________________________________\n" +
+                "     Nice! I've marked this task as done: \n" +
+                "       " + targetedTask.toString() + "\n" +
+                "    ____________________________________________________________";
+        ui.nextLine(result);
+        storage.updateTasks(tasks);
+    }
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
@@ -39,27 +62,12 @@ public class AdminCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
         if (commandType.equals("list")) {
-            String result = "";
-            for (int i = 0; i < tasks.size(); i = i + 1) {
-                result = result + "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
-            }
-            result = result.equals("") ? "\n" : result;
-            String finalResult = "    ____________________________________________________________\n" +
-                    "    Here are the tasks in your list:\n" +
-                    result +
-                    "    ____________________________________________________________";
-            ui.nextLine(finalResult);
+            handleListCall(tasks, ui);
         } else if (commandType.equals("done")) {
             if (commandArg <=  0) {
                 throw new InsufficientTaskArgumentException("Done requires a positive integer argument!");
             }
-            Task targetedTask = tasks.get(commandArg - 1);
-            Task.markAsDone(targetedTask);
-            String result = "    ____________________________________________________________\n" +
-                    "     Nice! I've marked this task as done: \n" +
-                    "       " + targetedTask.toString() + "\n" +
-                    "    ____________________________________________________________";
-            ui.nextLine(result);
+            handleDoneCall(tasks, ui, storage);
         } else {
             return ;
         }

@@ -20,6 +20,14 @@ public class FindCommand implements Command {
         this.stringArgument = stringArgument;
     }
 
+    private String concatenateStrings(ArrayList<String> strings) {
+        String result = "";
+        for (String s : strings) {
+            result = result + "s" + "\n";
+        }
+        result = result.equals("") ? "\n" : result;
+        return result;
+    }
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
@@ -30,10 +38,7 @@ public class FindCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
         ArrayList<String> tasksThatMatch = tasks.findAllMatches(this.stringArgument);
-        String matched = "";
-        for (String s : tasksThatMatch) {
-            matched = matched + s + "\n";
-        }
+        String matched = concatenateStrings(tasksThatMatch);
         String result = "    ____________________________________________________________\n" +
                 "    Here are the matching tasks in your list:\n" +
                 matched +
@@ -43,7 +48,7 @@ public class FindCommand implements Command {
 
     /**
      * isExit checks if the command is an exit command.
-     * @return boolean whether if the command is an exit command.
+     * @return boolean whether if the command is an exithi command.
      */
     @Override
     public boolean isExit() {

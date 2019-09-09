@@ -1,6 +1,5 @@
 package gui;
 
-import javafx.scene.paint.Color;
 import main.*;
 import task.*;
 import command.*;
@@ -18,9 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
-import static javafx.scene.paint.Color.GREY;
-import static javafx.scene.paint.Color.WHITE;
-
 public class Duke extends Application{
     private boolean isOpen = true;
     private ScrollPane scrollPane;
@@ -33,6 +29,8 @@ public class Duke extends Application{
     private Ui ui = new Ui();
     private Storage storage = new Storage("./src/main/java/DukeData.txt");
     private TaskList taskList;
+    private final double APP_HEIGHT = 595.0;
+    private final double APP_WIDTH = 500.0;
 
     public Duke() {
 
@@ -66,7 +64,7 @@ public class Duke extends Application{
             Command c = Parser.parse(input);
             c.execute(taskList, ui, storage);
             this.isOpen = !c.isExit();
-            this.duke = new Image(this.getClass().getResourceAsStream("/images/RowletSuccess.jpg"));
+            this.duke = new Image(this.getClass().getResourceAsStream("/images/Rowlet.jpg"));
             return ui.showLine();
         } catch (InsufficientTaskArgumentException e) {
             this.duke = new Image(this.getClass().getResourceAsStream("/images/RowletException.jpg"));
@@ -79,6 +77,50 @@ public class Duke extends Application{
                 stage.close();
             }
         }
+    }
+
+    private void setStageStyle(Stage stage) {
+        stage.setTitle("gui.Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(595.0);
+        stage.setMinWidth(500.0);
+    }
+
+    private void setScrollPaneStyle() {
+        scrollPane.setPrefSize(495, 538);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setStyle("-fx-background: grey;");
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
+
+    private void setDialogContainerStyle() {
+        ImageView dukeImg = new ImageView(duke);
+        dukeImg.setClip(new Circle(60,60,60));
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(ui.showWelcome()), dukeImg));
+        dialogContainer.setStyle("-fx-background-color: grey;");
+    }
+
+    private void setButtonStyle(Stage stage) {
+        sendButton.setPrefWidth(70.0);
+        sendButton.setPrefHeight(50.0);
+        // Giving onClick listener to send button.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput(stage);
+        });
+    }
+
+    private void setUserInputStyle(Stage stage) {
+        userInput.setPrefWidth(415.0);
+        userInput.setPrefHeight(50.0);
+        // Giving "Enter" functionality to input.
+        userInput.setOnAction((event) -> {
+            handleUserInput(stage);
+        });
     }
 
     @Override
@@ -98,49 +140,18 @@ public class Duke extends Application{
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        scene.getStylesheets().add(getClass().getResource("/data/DukeCSS.css").toExternalForm());
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("gui.Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(595.0);
-        stage.setMinWidth(500.0);
-
+        setStageStyle(stage);
         mainLayout.setPrefSize(500.0, 595.0);
-
-        scrollPane.setPrefSize(495, 538);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setStyle("-fx-background: grey;");
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        ImageView dukeImg = new ImageView(duke);
-        dukeImg.setClip(new Circle(60,60,60));
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(ui.showWelcome()), dukeImg));
-        dialogContainer.setStyle("-fx-background-color: grey;");
-
-        userInput.setPrefWidth(415.0);
-        userInput.setPrefHeight(50.0);
-        // Giving "Enter" functionality to input.
-        userInput.setOnAction((event) -> {
-            handleUserInput(stage);
-        });
-
-        sendButton.setPrefWidth(70.0);
-        sendButton.setPrefHeight(50.0);
-        // Giving onClick listener to send button.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(stage);
-        });
+        setScrollPaneStyle();
+        setDialogContainerStyle();
+        setUserInputStyle(stage);
+        setButtonStyle(stage);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 

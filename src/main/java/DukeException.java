@@ -9,7 +9,7 @@ public class DukeException extends Exception {
     /**
      * An DukeException object will be instantiated and will be thrown to
      * Duke main class.
-     * @param errormessage a String to display the error.
+     * @param errorMessage a String to display the error.
      */
     protected DukeException(String errorMessage) {
         this.errorMessage = errorMessage;

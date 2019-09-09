@@ -22,27 +22,27 @@ public class Parser {
      * command.
      * @param command Inputs of the User.
      */
-    protected void parse(String command) {
+    protected String parse(String command) {
         try {
             if (command.contains("todo") || command.contains("deadline") || command.contains("event")) {
                 this.tasksList.addTask(command);
-                ui.getAddedMessage(this.tasksList.getTaskList());
+                return ui.getAddedMessage(this.tasksList.getTaskList());
             } else if (command.contains("delete")) {
                 String deletedTask = this.tasksList.deleteTask(command); // retrieve the deleted task.
-                ui.getDeletedMessage(this.tasksList.getTaskList(), deletedTask);
+                 return ui.getDeletedMessage(this.tasksList.getTaskList(), deletedTask);
             } else if (command.contains("done")) {
                 String taskDoneStr = this.tasksList.doneTask(command);  // retrieve the task that is done.
-                ui.getDoneMessage(taskDoneStr);
+                return ui.getDoneMessage(taskDoneStr);
             } else if (command.contains("list")) {
-                ui.showList(this.tasksList.getTaskList());
+                return ui.showList(this.tasksList.getTaskList());
             } else if (command.contains("find")) {
                 ArrayList<Task> foundTask = this.tasksList.findTasks(command);
-                ui.showFoundMessage(foundTask);
+                return ui.showFoundMessage(foundTask);
             } else {
-                throw new IllegalCommandException("I'm sorry, but I don't know what that means :-(");
+                return "I'm sorry, but I don't know what that means :-(";
             }
         } catch (IllegalCommandException errorMsg) {
-            ui.getIllegalCommandError(errorMsg);
+            return errorMsg.toString();
         }
     }
 

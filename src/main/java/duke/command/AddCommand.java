@@ -63,7 +63,7 @@ public class AddCommand extends Command {
             timing.add(commandArr[i]);
         }
 
-        //Check whether there is /at or /by command
+        //Check whether there is /at or /by in the command
         assert index >= 0: "    ____________________________________________________________\n"
                 + "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
                 + "    ____________________________________________________________\n";

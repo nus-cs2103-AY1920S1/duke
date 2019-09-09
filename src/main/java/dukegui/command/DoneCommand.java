@@ -34,12 +34,9 @@ public class DoneCommand extends Command {
         try {
             int index = Integer.parseInt(this.detail);
             taskList.markAsDoneTaskAt(index);
-            response = new StringBuilder(AutoResponse.DUKE_MARK_AS_DONE)
-                    .append("\n")
-                    .append("  ")
-                    .append("\n")
-                    .append(taskList.getTaskAt(index).getStatus())
-                    .toString();
+            response = String.join("\n",
+                                   AutoResponse.DUKE_MARK_AS_DONE,
+                                   "  " + taskList.getTaskAt(index).getStatus());
         } catch (NumberFormatException e) {
             if (this.detail.isEmpty()) {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_MISSING_INDEX);
@@ -48,13 +45,7 @@ public class DoneCommand extends Command {
                 response = AutoResponse.DUKE_NO_TASKS;
             } else if (this.detail.equals("all")) {
                 taskList.markAsDoneAllTasks();
-                String[] lines = taskList.listAll();
-                StringBuilder sb = new StringBuilder(AutoResponse.DUKE_MARK_AS_DONE);
-                for (int i = 1; i < lines.length; i++) {
-                    sb.append(lines[i]);
-                    sb.append("\n");
-                }
-                response = sb.toString();
+                response = String.join("\n", taskList.listAll());
             } else {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_ILLEGAL_INDEX);
             }

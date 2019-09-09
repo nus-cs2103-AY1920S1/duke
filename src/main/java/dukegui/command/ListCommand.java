@@ -17,13 +17,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String getResponse(TaskList taskList, Storage storage) {
-        String[] lines = taskList.listAll();
-        StringBuilder sb = new StringBuilder();
-        for (String line : lines) {
-            sb.append(line);
-            sb.append("\n");
-        }
-        return sb.toString();
+        return String.join("\n", taskList.listAll());
     }
 
     /**

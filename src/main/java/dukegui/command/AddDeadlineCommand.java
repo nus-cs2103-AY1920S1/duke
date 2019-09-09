@@ -58,13 +58,10 @@ public class AddDeadlineCommand extends Command {
         // Save new task to the storage file
         storage.saveTasks(taskList);
 
-        return (new StringBuilder(AutoResponse.DUKE_ADD_TASK))
-                .append("\n")
-                .append("  ")
-                .append(task.getStatus())
-                .append("\n")
-                .append(String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()))
-                .toString();
+        return String.join("\n",
+                           AutoResponse.DUKE_ADD_TASK,
+                           "  " + task.getStatus(),
+                           String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
     }
 
     private void throwIfInvalid(String[] arg)

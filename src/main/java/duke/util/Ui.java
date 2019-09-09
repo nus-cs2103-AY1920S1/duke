@@ -24,6 +24,7 @@ public class Ui {
      * Prints the UI for ending the programme.
      *
      * @param tasks TaskList object.
+     * @return Exit message.
      */
     public String showExitMessage(ArrayList<Task> tasks) {
         String message = "Saving your current tasks : \n";
@@ -38,6 +39,7 @@ public class Ui {
      * Prints a welcome message for users.
      *
      * @param tasks TaskList object.
+     * @return Welcome message.
      */
     public String showWelcome(ArrayList<Task> tasks) {
         String message = LINES;
@@ -56,6 +58,7 @@ public class Ui {
      *
      * @param t Task that is added.
      * @param n Number of tasks in the TaskList.
+     * @return Task added message.
      */
     public String showAddedTask(Task t, int n) {
         return "Got it. I've added this task:\n  "
@@ -68,6 +71,7 @@ public class Ui {
      *
      * @param t Task that is deleted.
      * @param n The index of the task that is deleted in TaskList.
+     * @return Delete message.
      */
     public String showDeletedTask(Task t, int n) {
         return "Noted. I've removed this task:\n  "
@@ -79,6 +83,7 @@ public class Ui {
      * Prints the UI for completing a task.
      *
      * @param t Task that is completed.
+     * @return Done message.
      */
     public String showDoneTask(Task t) {
         return "Nice! I've marked this task as done:\n" + t;
@@ -101,6 +106,7 @@ public class Ui {
      * Prints the tasks that contains the given keyword.
      *
      * @param foundTaskList TaskList with filtered keyword.
+     * @return Found tasks.
      */
     public String showFoundTask(ArrayList<Task> foundTaskList) {
         String message = "Here are the matching tasks in your list:";
@@ -110,16 +116,21 @@ public class Ui {
         return message;
     }
 
+    /**
+     * Returns a list of command the user can use.
+     *
+     * @return Help message.
+     */
     public String showHelp() {
-        return "Wof wof! Doggo heard meowing!\n" +
-                "Meow : Doggo sends help\n" +
-                "List : Doggo tells you your task\n" +
-                "Todo : Tell Doggo your trouble\n" +
-                "Deadline : Tell Doggo your worries\n" +
-                "Event : Tell Doggo your schedule\n" +
-                "Find : Doggo fetches your tasks\n" +
-                "Done : Doggo notes your completed worries\n" +
-                "Delete : Doggo clears your trouble\n" +
-                "Bye : Doggo needs his afternoon nap\n";
+        return "Wof wof! Doggo heard meowing!\n"
+                + "Meow : Doggo sends help\n"
+                + "List : Doggo tells you your task\n"
+                + "Todo : Tell Doggo your trouble\n"
+                + "Deadline : Tell Doggo your worries\n"
+                + "Event : Tell Doggo your schedule\n"
+                + "Find : Doggo fetches your tasks\n"
+                + "Done : Doggo notes your completed worries\n"
+                + "Delete : Doggo clears your trouble\n"
+                + "Bye : Doggo needs his afternoon nap\n";
     }
 }

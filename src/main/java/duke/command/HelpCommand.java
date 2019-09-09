@@ -9,10 +9,10 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Lists down commands that the user can type
+     * Lists down commands that the user can type.
      *
-     * @param t TaskList to be appended.
-     * @param ui UI to interact with user.
+     * @param t       TaskList to be appended.
+     * @param ui      UI to interact with user.
      * @param storage Storage to read and write files.
      */
     public String execute(TaskList t, Ui ui, Storage storage) {

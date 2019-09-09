@@ -17,29 +17,6 @@ public class Duke {
     }
 
     /**
-     * Runs the duke application.
-     */
-    public void run() {
-        ui.printHello();
-        String userInput = ui.getNextLine();
-        String inputType = userInput.split(" ")[0];
-
-        while (!inputType.equals("bye")) {
-            try {
-                Parser.parse(tasks, ui, storage, userInput);
-                userInput = ui.getNextLine();
-                inputType = userInput.split(" ")[0];
-            } catch (DukeException e) {
-                System.out.println("     " + e.getMessage());
-                System.out.println("    _____________________________________\n");
-            }
-        }
-
-        storage.save(tasks.getListOfTasks());
-        ui.printBye();
-    }
-
-    /**
      * Gets response every time user send inputs.
      *
      * @param input User's input to the duke application.
@@ -51,6 +28,7 @@ public class Duke {
         }
         try {
             Parser.parse(tasks, ui, storage, input);
+            storage.save(tasks.getListOfTasks());
             return ui.print();
         } catch (DukeException e) {
             ui.sendErrorMessage(e.getMessage());

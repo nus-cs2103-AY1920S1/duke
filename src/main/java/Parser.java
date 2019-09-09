@@ -130,11 +130,13 @@ public class Parser {
                 if (!userInput.isBlank()) {
                     throw new Exception();
                 }
-                ui.printProgrammeTerminated();
+                ui.printBye();
                 hasTerminated = true;
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! Your input format is wrong. Use: bye");
             }
+        } else if (inputType.equals("hello")) {
+            ui.printHello();
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

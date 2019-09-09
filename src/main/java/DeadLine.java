@@ -21,6 +21,10 @@ public class DeadLine extends Task {
 		this.deadlineDate = deadlineDate;
 	}
 
+	public LocalDateTime getDateTime() {
+		return this.deadlineDate;
+	}
+
 	/**
 	 * Formats the deadline object in a more readable form for informing the user about the task
 	 * @return a string representation of the deadline object

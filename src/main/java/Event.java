@@ -36,4 +36,9 @@ public class Event extends Task {
 		return ("E" + " | " + super.getDoneStatusAsInt() + " | "  + super.getTaskName()
 				+ " | " + eventDate.format(dateTimeFormatter));
 	}
+
+	@Override
+	public LocalDateTime getDateTime() {
+		return this.eventDate;
+	}
 }

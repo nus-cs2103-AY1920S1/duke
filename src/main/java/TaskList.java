@@ -1,4 +1,6 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Represents the collection of tasks in memory
@@ -91,5 +93,47 @@ public class TaskList {
 			}
 		}
 		return new TaskList(output);
+	}
+
+	static class dateComparator implements Comparator<Task> {
+		public int compare(Task task1, Task task2) {
+			LocalDateTime task1DateTime = task1.getDateTime();
+			LocalDateTime task2DateTime = task2.getDateTime();
+			if (task1DateTime == null && task2DateTime != null) {
+				return 1;
+			} else if (task2DateTime == null && task1DateTime != null) {
+				return -1;
+			} else if (task1DateTime == null && task2DateTime == null) {
+				return 0;
+			} else {
+				return task1DateTime.compareTo(task2DateTime);
+			}
+		}
+	}
+
+	static class nameComparator implements Comparator<Task> {
+		public int compare(Task task1, Task task2) {
+			String task1Name = task1.getTaskName();
+			String task2Name = task2.getTaskName();
+			if (task1Name.isEmpty() && !task2Name.isEmpty()) {
+				return 1;
+			} else if (task2Name.isEmpty() && !task1Name.isEmpty()) {
+				return -1;
+			} else if (task1Name.isEmpty() && task2Name.isEmpty()) {
+				return 0;
+			} else {
+				return task1Name.compareTo(task2Name);
+			}
+		}
+	}
+
+	public TaskList sortByDate() {
+		this.taskArrayList.sort(new dateComparator());
+		return this;
+	}
+
+	public TaskList sortByName() {
+		this.taskArrayList.sort(new nameComparator());
+		return this;
 	}
 }

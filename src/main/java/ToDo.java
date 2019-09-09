@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * Represents the ToDo task which is one of the 3 types of tasks.
  */
@@ -25,5 +27,10 @@ public class ToDo extends Task {
 	 */
 	public String getArchivalText() {
 		return ("T" + " | " + super.getDoneStatusAsInt() + " | "  + super.getTaskName());
+	}
+
+	@Override
+	public LocalDateTime getDateTime() {
+		return null;
 	}
 }

@@ -29,6 +29,8 @@ public class Parser {
 			return new DoneCommand(inFullCommandScanner);
 		} else if (command.equals("find")) {
 			return new FindCommand(inFullCommandScanner);
+		} else if (command.equals("sort")) {
+			return new SortCommand(inFullCommandScanner);
 		} else {
 			throw new DukeException("command not found");
 		}

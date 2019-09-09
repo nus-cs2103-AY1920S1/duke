@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * Represents a single task in the program. Specifically has 3 types of tasks that inherit from this class:
  * 		todo, deadline and event
@@ -70,4 +72,6 @@ public abstract class Task {
 			return "0";
 		}
 	}
+
+	public abstract LocalDateTime getDateTime();
 }

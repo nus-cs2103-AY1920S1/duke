@@ -23,6 +23,7 @@ public class Todo extends Task {
      * @param isDone isDone status of the task.
      */
     public Todo(String description, Boolean isDone) {
+
         super(description, isDone);
     }
 
@@ -35,6 +36,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
+        assert this.description.isEmpty() : "Empty description should be handled by Duke Exception during input";
         return "[T]" + super.toString();
     }
 

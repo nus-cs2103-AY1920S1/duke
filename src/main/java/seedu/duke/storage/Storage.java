@@ -41,6 +41,7 @@ public class Storage {
      * @throws IOException An IOException may occur when trying to write the file.
      */
     public void createFile(String filepath) throws IOException {
+        assert filepath != null : "Filepath should not be null";
         File f = new File(filepath);
         String data = "";
 
@@ -61,6 +62,7 @@ public class Storage {
      * @throws IOException An IOException may occur when trying to write the file.
      */
     public void writeToFile(String text) throws IOException {
+        assert text.isEmpty() : "Text to be written should at least have | |";
         FileWriter fw = new FileWriter(this.getFilePath(), true);
         fw.write(text + System.lineSeparator());
         fw.close();

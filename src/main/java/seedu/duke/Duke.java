@@ -126,6 +126,7 @@ public class Duke {
         } catch (IOException e) {
             return e.getMessage();
         }
+
     }
 
     /**
@@ -391,6 +392,9 @@ public class Duke {
 
         String description = Parser.getDeadlineDescription(fullCommand);
         String extraDescription = Parser.getDeadlineDateTime(fullCommand);
+
+        assert description != null : "Description should not be null";
+        assert extraDescription != null : "Extra Description should not be null";
 
         Deadline newDeadline = new Deadline(description, extraDescription);
 

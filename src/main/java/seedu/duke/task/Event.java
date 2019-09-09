@@ -43,6 +43,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert this.location.isEmpty() : "Empty location should be handled by Duke Exception during input";
         return "[E]" + super.toString() + " (at: " + location + ")";
     }
 
@@ -55,6 +56,7 @@ public class Event extends Task {
      */
     @Override
     public String toSaveString() {
+        assert this.location.isEmpty() : "Empty location should be handled by Duke Exception during input";
         return ("E" + super.toSaveString() + " | " + this.location);
     }
 

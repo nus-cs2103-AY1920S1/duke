@@ -19,6 +19,7 @@ public abstract class Task {
 
     /**
      * Returns a tick or cross based on have the task been done
+     *
      * @return tick or cross
      */
     public String getStatusIcon() {

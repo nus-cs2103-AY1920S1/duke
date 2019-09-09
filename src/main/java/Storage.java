@@ -19,9 +19,10 @@ public class Storage {
 
     /**
      * Reads information from a text file into the list.
+     *
      * @throws DukeException throws IO related duke exception
      */
-    public void readTask() throws DukeException{
+    public void readTask() throws DukeException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = null;
 
@@ -73,9 +74,10 @@ public class Storage {
 
     /**
      * Saves all the current tasks in the list into a local text file.
+     *
      * @throws DukeException throws IO related duke exception
      */
-    public void saveTask() throws DukeException{
+    public void saveTask() throws DukeException {
         PrintWriter pr = null;
         try {
             pr = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));

@@ -30,6 +30,7 @@ public class Ui {
 
     /**
      * Prints all the tasks that are inside the list, according to the format given.
+     *
      * @param taskList The list that stores all the task
      */
     public String printList(TaskList taskList) {
@@ -46,7 +47,7 @@ public class Ui {
         String holder = horizontalLine() + "\nHere are the matching tasks in your list:\n";
         String holder2 = "";
         for (int i = 0; i < findList.size(); i++) {
-            holder2 += i+1 + ".[" + findList.get(i).getType() + "]"+ "[" + findList.get(i).getStatusIcon() + "] " + findList.get(i).getDescription() + findList.get(i).getDate() + "\n";
+            holder2 += i + 1 + ".[" + findList.get(i).getType() + "]" + "[" + findList.get(i).getStatusIcon() + "] " + findList.get(i).getDescription() + findList.get(i).getDate() + "\n";
         }
         holder = holder + holder2 + horizontalLine();
         return holder;

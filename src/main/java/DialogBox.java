@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -66,7 +67,7 @@ public class DialogBox extends HBox {
      * Gets the Duke dialog.
      *
      * @param text Text for Duke
-     * @param img Image of Duke
+     * @param img  Image of Duke
      * @return Instance of a dialog box for Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {

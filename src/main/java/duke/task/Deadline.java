@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Date;
+
 /**
  * Represents a task of the type DeadLine.
  */
@@ -11,7 +13,7 @@ public class Deadline extends Task {
      * @param s description of the task.
      * @param t time of the task.
      */
-    public Deadline(String s, String t) {
+    public Deadline(String s, Date t) {
         super(s, t);
         this.label = "D";
     }
@@ -23,6 +25,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (by: " + this.time + ")";
+        return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (by: " + this.getTimeAsString() + ")";
     }
 }

@@ -30,6 +30,9 @@ public class Parser {
         } else if (input.length() > 5 && input.substring(0, 4).equals("find")) {
             validateInput(input, 4);
             return new FindCommand(input.substring(5));
+        } else if (input.length() > 5 && input.substring(0, 4).equals("sort")) {
+            validateInput(input, 4);
+            return new SortCommand(input.substring(5));
         } else {
             return new AddCommand(input);
         }
@@ -37,7 +40,7 @@ public class Parser {
 
     /**
      * Validates the format of user input.
-     * 
+     *
      * @param input string from user input.
      * @param min minimum length of user input.
      * @throws DukeException self-defined exceptions caused by illegal input.

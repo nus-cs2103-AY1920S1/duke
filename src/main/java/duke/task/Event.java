@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Date;
+
 /**
  * Represents a task of the type Event.
  */
@@ -11,7 +13,7 @@ public class Event extends Task {
      * @param s description of the task.
      * @param t time of the task.
      */
-    public Event(String s, String t) {
+    public Event(String s, Date t) {
         super(s, t);
         this.label = "E";
     }
@@ -23,7 +25,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (at: " + this.time + ")";
+        return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (at: " + this.getTimeAsString() + ")";
     }
 
 }

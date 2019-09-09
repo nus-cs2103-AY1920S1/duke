@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -70,33 +72,34 @@ public class Storage {
      *
      * @param str String containing information about a task.
      */
-    private void readTasks(String str) {
-        String[] arr = str.split(" \\| ");
-        String taskType = arr[0];
-        int taskStatus = Integer.parseInt(arr[1]);
-        String taskDes = arr[2];
-        String taskTime;
-        Task task;
-        switch (taskType) {
-        case "T":
-            task = new Todo(taskDes);
-            tasks.add(task);
-            if (taskStatus == 1) task.mark();
-            break;
-        case "D":
-            taskTime = arr[3];
-            task = new Deadline(taskDes, taskTime);
-            tasks.add(task);
-            if (taskStatus == 1) task.mark();
-            break;
-        case "E":
-            taskTime = arr[3];
-            task = new Event(taskDes, taskTime);
-            tasks.add(task);
-            if (taskStatus == 1) task.mark();
-            break;
-        default:
-            throw new AssertionError(taskType);
+    private void readTasks(String str) throws DukeException {
+        try {
+            String[] arr = str.split(" \\| ");
+            String taskType = arr[0];
+            int taskStatus = Integer.parseInt(arr[1]);
+            String taskDes = arr[2];
+            Task task;
+            switch (taskType) {
+            case "T":
+                task = new Todo(taskDes);
+                tasks.add(task);
+                if (taskStatus == 1) task.mark();
+                break;
+            case "D":
+                task = new Deadline(taskDes, new SimpleDateFormat("d/MM/yyyy HHmm").parse(arr[3]));
+                tasks.add(task);
+                if (taskStatus == 1) task.mark();
+                break;
+            case "E":
+                task = new Event(taskDes, new SimpleDateFormat("d/MM/yyyy HHmm").parse(arr[3]));
+                tasks.add(task);
+                if (taskStatus == 1) task.mark();
+                break;
+            default:
+                throw new AssertionError(taskType);
+            }
+        } catch (ParseException e) {
+            throw new DukeException("Error when reading data from file");
         }
     }
 

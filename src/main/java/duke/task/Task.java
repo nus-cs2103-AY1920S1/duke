@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Represents a task.
  */
@@ -7,7 +11,7 @@ public class Task {
 
     private boolean isDone;
     protected String description;
-    protected String time;
+    protected Date time;
     protected String label;
 
     /**
@@ -26,7 +30,7 @@ public class Task {
      * @param s description of the task.
      * @param t time of the task.
      */
-    public Task(String s, String t) {
+    public Task(String s, Date t) {
         this.isDone = false;
         this.description = s;
         this.time = t;
@@ -46,9 +50,22 @@ public class Task {
      *
      * @return time of the task.
      */
-    public String getTime() {
+    public Date getTime() {
         if (this.time != null) {
             return time;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns the time of the task as string.
+     *
+     * @return string representation of the time of the task.
+     */
+    public String getTimeAsString() {
+        if (this.time != null) {
+            return convertDateToString(time);
         } else {
             return "";
         }
@@ -91,6 +108,55 @@ public class Task {
     public String getStatusIcon() {
         // Return tick or X symbols
         return (isDone ? "[\u2713] " : "[\u2718] ");
+    }
+
+    /**
+     * Converts the format of date and time.
+     *
+     * @param date date and time of task.
+     * @return Reformatted date and time.
+     * @throws ParseException self-defined exceptions caused by illegal input.
+     */
+    private String convertDateToString(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+        String taskTime = formatter.format(date);
+        String[] array = taskTime.split(" ");
+        array[0] = getOrdinal(Integer.parseInt(array[0]));
+        array[array.length - 1] = array[array.length - 1].toLowerCase();
+        StringBuilder taskTimeBuilder = new StringBuilder();
+        for (String s : array) {
+            taskTimeBuilder.append(" ").append(s);
+        }
+        taskTime = taskTimeBuilder.toString();
+        taskTime = taskTime.trim();
+        return taskTime;
+    }
+
+    /**
+     * Converts numbers to ordinal numbers.
+     *
+     * @param n number as integers.
+     * @return String representing ordinal number nth.
+     */
+    private static String getOrdinal(int n) {
+        assert n > 0 : n;
+        if (n >= 11 && n <= 13) {
+            return n + "th";
+        }
+        switch (n % 10) {
+        case 1:
+            return n + "st of";
+        // Fallthrough
+        case 2:
+            return n + "nd of";
+        // Fallthrough
+        case 3:
+            return n + "rd of";
+        // Fallthrough
+        default:
+            return n + "th of";
+        // Fallthrough
+        }
     }
 
 }

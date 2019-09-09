@@ -4,9 +4,7 @@ import duke.exception.DukeException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Contains the task list.
@@ -52,29 +50,38 @@ public class TaskList {
     }
 
     /**
-     * Converts numbers to ordinal numbers.
+     * Sorts tasks based on a category.
      *
-     * @param n number as integers.
-     * @return String representing ordinal number nth.
+     * @param category category that the sorting should be based on.
      */
-    private static String getOrdinal(int n) {
-        assert n > 0 : n;
-        if (n >= 11 && n <= 13) {
-            return n + "th";
-        }
-        switch (n % 10) {
-        case 1:
-            return n + "st of";
-            // Fallthrough
-        case 2:
-            return n + "nd of";
-            // Fallthrough
-        case 3:
-            return n + "rd of";
-            // Fallthrough
+    public void sortTasks(String category) {
+        switch (category) {
+        case "time":
+            tasks.sort((t1, t2) -> {
+                if (t1.getTime() == null || t2.getTime() == null)
+                    return 0;
+                return t1.getTime().compareTo(t2.getTime());
+            });
+            break;
+        case "description":
+            tasks.sort((t1, t2) -> {
+                if (t1.getDescription().equals(t2.getDescription()))
+                    return 0;
+                return t1.getDescription().compareTo(t2.getDescription());
+            });
+            break;
+        case "type":
+            tasks.sort((t1, t2) -> {
+                if (t1.getLabel().equals(t2.getLabel()))
+                    return 0;
+                return t1.getLabel().compareTo(t2.getLabel());
+            });
+            break;
+        case "status":
+            tasks.sort(Comparator.comparingInt(Task::getStatus));
+            break;
         default:
-            return n + "th of";
-        // Fallthrough
+            throw new AssertionError(category);
         }
     }
 
@@ -95,29 +102,6 @@ public class TaskList {
         if ((taskType.equals("deadline") || taskType.equals("event")) && taskTime.equals(""))
             throw new DukeException(
                     "\u2639 OOPS!!! The time of a " + taskType + " cannot be empty.");
-    }
-
-    /**
-     * Converts the format of date and time.
-     *
-     * @param taskTime date and time of task.
-     * @return Reformatted date and time.
-     * @throws ParseException self-defined exceptions caused by illegal input.
-     */
-    private String convertDate(String taskTime) throws ParseException {
-        Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
-        taskTime = formatter.format(date);
-        String[] array = taskTime.split(" ");
-        array[0] = getOrdinal(Integer.parseInt(array[0]));
-        array[array.length - 1] = array[array.length - 1].toLowerCase();
-        StringBuilder taskTimeBuilder = new StringBuilder();
-        for (String s : array) {
-            taskTimeBuilder.append(" ").append(s);
-        }
-        taskTime = taskTimeBuilder.toString();
-        taskTime = taskTime.trim();
-        return taskTime;
     }
 
     /**
@@ -153,43 +137,16 @@ public class TaskList {
 
         // Converts date format
         try {
-            taskTime = new StringBuilder(convertDate(taskTime.toString()));
+            Date taskDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime.toString());
+            // Creates new task
+            return generateTask(taskType, taskDes, taskDate);
         } catch (ParseException e) {
             // Do nothing if the date is not properly formatted
+            throw new DukeException("\u2639 The time of the task is not in proper format. \n " +
+                    "example of a valid time: 01/01/2000 0800");
         }
 
-        // Creates new task
-        return generateTask(taskType, taskDes, taskTime);
     }
-
-    /**
-     * Creates a new task instance and add it to the task list.
-     *
-     * @param taskType type of task.
-     * @param taskDes description of task.
-     * @param taskTime time and/or date of task.
-     * @return
-     */
-    private Task generateTask(String taskType, StringBuilder taskDes, StringBuilder taskTime) {
-        Task task;
-        switch (taskType) {
-        case "todo":
-            task = new Todo(taskDes.toString());
-            tasks.add(task);
-            return task;
-        case "deadline":
-            task = new Deadline(taskDes.toString(), taskTime.toString());
-            tasks.add(task);
-            return task;
-        case "event":
-            task = new Event(taskDes.toString(), taskTime.toString());
-            tasks.add(task);
-            return task;
-        default:
-            throw new AssertionError(taskType);
-        }
-    }
-
 
     /**
      * Marks the nth task in the task list as done.
@@ -228,13 +185,13 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String current;
-            if (task.getTime().equals("")) {
+            if (task.getTimeAsString().equals("")) {
                 assert task.getLabel().equals("T") : task;
                 current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription();
             } else {
                 assert (task.getLabel().equals("D") || task.getLabel().equals("E")) : task;
                 current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription()
-                        + " | " + task.getTime();
+                        + " | " + convertDateFormat(task.getTime());
             }
             if (i != tasks.size() - 1) {
                 taskFile.append(current).append(System.lineSeparator());
@@ -243,5 +200,44 @@ public class TaskList {
             }
         }
         return taskFile.toString();
+    }
+
+    /**
+     * Creates a new task instance and add it to the task list.
+     *
+     * @param taskType type of task.
+     * @param taskDes description of task.
+     * @param taskTime time and/or date of task.
+     * @return Task added to the task list.
+     */
+    private Task generateTask(String taskType, StringBuilder taskDes, Date taskTime) {
+        Task task;
+        switch (taskType) {
+        case "todo":
+            task = new Todo(taskDes.toString());
+            tasks.add(task);
+            return task;
+        case "deadline":
+            task = new Deadline(taskDes.toString(), taskTime);
+            tasks.add(task);
+            return task;
+        case "event":
+            task = new Event(taskDes.toString(), taskTime);
+            tasks.add(task);
+            return task;
+        default:
+            throw new AssertionError(taskType);
+        }
+    }
+
+    /**
+     * Converts date of a task into string to be stored in file.
+     *
+     * @param date the date and time of a task;
+     * @return string representation of date and time;
+     */
+    private String convertDateFormat(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("d/MM/yyyy HHmm");
+        return formatter.format(date);
     }
 }

@@ -20,14 +20,14 @@ public class Parser {
         } else if (inputSplit[0].equals("delete")) {
             int inputIndex = Integer.parseInt(inputSplit[1]);
             int actualIndex = inputIndex - 1;
-            assert actualIndex > 0 : "Array index cannot be less than zero";
+            assert actualIndex >= 0 : "Array index cannot be less than zero";
             DeleteCommand delete = new DeleteCommand();
             delete.setIndexToRemove(actualIndex);
             return delete;
         } else if (inputSplit[0].equals("done")) {
             int inputIndex = Integer.parseInt(inputSplit[1]);
             int actualIndex = inputIndex - 1;
-            assert actualIndex > 0 : "Array index cannot be less than zero";
+            assert actualIndex >= 0 : "Array index cannot be less than zero";
             DoneCommand done = new DoneCommand();
             done.setIndexToMarkDone(actualIndex);
             return done;

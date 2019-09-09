@@ -6,7 +6,8 @@ import duke.command.TaskList;
 import duke.command.DukeException;
 
 /**
- * Duke class. Creates a new Ui, duke.command.TaskList and duke.command.Storage object, then runs the main method of the program.
+ * Duke class. Creates a new Ui, duke.command.TaskList and duke.command.Storage object,
+ * then runs the main method of the program.
  */
 public class Duke {
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class FindEvent {
 
-    /** Found successfully message */
+    /** Found successfully message. */
     private static String matching_message = "\tHere are the matching tasks in your list:\n";
 
     static String findEvent(ArrayList<Task> taskList, String[] params) throws DukeException {

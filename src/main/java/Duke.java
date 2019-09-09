@@ -38,6 +38,25 @@ public class Duke extends Application {
         list = new TaskList(storage.load());
     }
 
+//    public Duke(){}
+
+//    public void run() {
+//        ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            String fullCommand = ui.readCommand();
+//            Command c = Parser.parse(fullCommand);
+//            c.execute(list, ui, storage);
+//            isExit = c instanceof ExitCommand;
+//        }
+//    }
+//
+//
+//    public static void main(String[] args) {
+//        Duke duke = new Duke("Duke_List.txt");
+//        duke.run();
+//    }
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components

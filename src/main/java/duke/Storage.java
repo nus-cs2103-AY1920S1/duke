@@ -51,6 +51,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("No such file to get data from.");
+            assert tasks.size() == 0 : "No files loaded, tasks list should be empty";
         }
         return tasks;
     }

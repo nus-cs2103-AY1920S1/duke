@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Creates a Deadline object which extends from the Task class.
  * A <code>description</code> is passed into this class to
@@ -123,26 +128,18 @@ public class Deadline extends Task {
      * eg.(11.00pm).
      * @return Time in 12Hr HH:MM format.
      */
-    private String getTime() {
-        String time = this.datetime[1];
-        String timeStr;
-        int timeInt = Integer.parseInt(time);
-        int hours = timeInt/100;
-        int minutes = timeInt % 100;
-        if (hours >= 12) {
-            timeStr = Integer.toString(hours - 12) + "."
-                    + String.format("%02d", minutes) + "pm";
-        } else if (hours == 0) {
-            timeStr = "12."
-                    + String.format("%02d", minutes) + "am";
+    private String getTime() throws ParseException {
+        DateFormat df = new SimpleDateFormat("HHmm");
+        DateFormat outputFormat = new SimpleDateFormat("h:mm a");
+        try {
+            Date strToTime = df.parse(this.datetime[1]);
+            String timeFormat = outputFormat.format(strToTime);
+            return timeFormat;
+        } catch (ParseException parseError) {
+            return parseError.toString();
         }
-        else {
-            timeStr = Integer.toString(hours) + "."
-                    + String.format("%02d", minutes) + "am";
-        }
-
-        return timeStr;
     }
+
 
     @Override
     public String formatString() {
@@ -151,7 +148,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                "(by: " + this.getDate() + ", " + this.getTime() + ")";
+        try {
+            return "[D]" + super.toString() +
+                    "(by: " + this.getDate() + ", " + this.getTime() + ")";
+        } catch (ParseException parseError) {
+            return parseError.toString();
+        }
+
     }
 }

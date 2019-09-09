@@ -15,8 +15,6 @@ public class IllegalCommandException extends Exception {
 
     @Override
     public String toString() {
-        return "____________________________________________________________\n"
-                + " OOPS!!! " + this.errorMessage
-                + "\n____________________________________________________________";
+        return  " OOPS!!! " + this.errorMessage;
     }
 }

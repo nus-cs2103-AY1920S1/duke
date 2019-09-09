@@ -14,6 +14,7 @@ public class DeleteCommand extends Command {
     private String[] oneLine;
 
     public DeleteCommand(String[] oneLine) {
+        assert oneLine != null : "oneLine[] should not be empty";
         this.oneLine = oneLine;
     }
 

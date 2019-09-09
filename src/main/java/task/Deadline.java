@@ -40,4 +40,16 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    /**
+     * Converts task object to format use in file save.
+     * @return String that is in file save format
+     */
+    @Override
+    public String toSaveFormat() {
+        return String.format("D | %s | %s | %s",
+                this.isDone ? "Done" : "Not Done",
+                this.getDescription(),
+                this.getBy());
+    }
 }

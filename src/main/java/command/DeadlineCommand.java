@@ -1,7 +1,7 @@
 package command;
 
 import converter.StringDateConverter;
-import parser.Storage;
+import storage.Storage;
 import task.Deadline;
 import task.TaskList;
 import ui.Ui;

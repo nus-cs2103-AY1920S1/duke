@@ -40,4 +40,16 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    /**
+     * Converts task object to format use in file save.
+     * @return String that is in file save format
+     */
+    @Override
+    public String toSaveFormat() {
+        return String.format("E | %s | %s | %s",
+                this.isDone ? "Done" : "Not Done",
+                this.getDescription(),
+                this.getAt());
+    }
 }

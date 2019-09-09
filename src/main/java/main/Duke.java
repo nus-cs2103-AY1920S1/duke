@@ -3,7 +3,7 @@ package main;
 import command.Command;
 import exception.DukeException;
 import parser.Parser;
-import parser.Storage;
+import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
